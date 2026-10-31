@@ -1,6 +1,7 @@
-//! Strict project and workspace manifests; machine-local runner configuration is separate.
+//! Strict project/workspace manifests and shared machine-local configuration.
 
 pub(crate) mod composition;
+pub mod global;
 mod manifest;
 mod paths;
 mod project;

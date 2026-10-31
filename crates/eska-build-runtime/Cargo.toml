@@ -16,7 +16,6 @@ workspace = true
 
 [dependencies]
 eska-project-core = { workspace = true }
-directories = "6.0.0"
 gix-path = "0.14.1"
 roxmltree = { version = "0.21.2", default-features = false, features = ["std", "positions"] }
 serde = { version = "1.0.229", features = ["derive"] }

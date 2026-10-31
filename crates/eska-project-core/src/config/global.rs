@@ -325,7 +325,9 @@ mod tests {
 
     /// Create an isolated config path for one transactional test.
     fn test_path(name: &str) -> PathBuf {
-        let root = std::env::temp_dir().join(format!(
+        let base =
+            std::env::var_os("ESKA_TEST_ROOT").map_or_else(std::env::temp_dir, PathBuf::from);
+        let root = base.join(format!(
             "eska-global-config-{name}-{}-{}",
             std::process::id(),
             SystemTime::now()
