@@ -924,6 +924,10 @@ fn make_owned_tree_writable(path: &Path) -> io::Result<()> {
     #[cfg(windows)]
     if metadata.permissions().readonly() {
         let mut permissions = metadata.permissions();
+        #[expect(
+            clippy::permissions_set_readonly_false,
+            reason = "This Windows-only branch clears a file attribute; Unix modes are handled separately"
+        )]
         permissions.set_readonly(false);
         fs::set_permissions(path, permissions)?;
     }

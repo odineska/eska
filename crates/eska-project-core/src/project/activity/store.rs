@@ -136,12 +136,14 @@ fn checked_directory(path: &Path, create: bool) -> Result<bool, Error> {
         Err(error) if error.kind() == std::io::ErrorKind::NotFound && !create => Ok(false),
         Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
             fs::create_dir_all(path.parent().ok_or(Error::UnsafePath)?)?;
-            let mut builder = fs::DirBuilder::new();
+            let builder = fs::DirBuilder::new();
             #[cfg(unix)]
-            {
+            let builder = {
                 use std::os::unix::fs::DirBuilderExt;
+                let mut builder = builder;
                 builder.mode(0o700);
-            }
+                builder
+            };
             match builder.create(path) {
                 Ok(()) => {}
                 Err(error) if error.kind() == std::io::ErrorKind::AlreadyExists => {}
