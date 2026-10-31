@@ -24,6 +24,7 @@ pub(super) fn is_method(method: &str) -> bool {
             | "analyzer/migrationApply"
             | "analyzer/acquire"
             | "analyzer/release"
+            | "analyzer/activityUpdate"
     )
 }
 
@@ -36,6 +37,34 @@ struct Input {
     timeout_seconds: Option<u64>,
     switch_context: Option<bool>,
     preview_token: Option<String>,
+    lease_id: Option<String>,
+}
+
+impl Input {
+    fn process<'a>(
+        &self,
+        cancelled: &'a AtomicBool,
+        connection_closed: &'a AtomicBool,
+    ) -> Result<Analyzer<'a>, Value> {
+        let binary = self
+            .analyzer
+            .as_ref()
+            .ok_or_else(|| error(-32602))?
+            .native()?;
+        if !binary.is_absolute() {
+            return Err(error(-32602));
+        }
+        let timeout = self.timeout_seconds.unwrap_or(60);
+        if !(1..=600).contains(&timeout) {
+            return Err(error(-32602));
+        }
+        Ok(Analyzer {
+            binary,
+            timeout: Duration::from_secs(timeout),
+            cancelled,
+            connection_closed: Some(connection_closed),
+        })
+    }
 }
 
 impl Server {
@@ -50,7 +79,7 @@ impl Server {
         if self
             .analyzer_lease
             .as_ref()
-            .is_none_or(|(id, _)| *id != input.lease_id)
+            .is_none_or(|(id, _, _)| *id != input.lease_id)
         {
             return Err(domain(
                 "unknown_analyzer_lease",
@@ -59,6 +88,72 @@ impl Server {
         }
         self.analyzer_lease = None;
         Ok(Value::Null)
+    }
+
+    fn acquire_analyzer(
+        &mut self,
+        start: &std::path::Path,
+        application: Option<&str>,
+        activity: Option<&eska_project_core::project::activity::State>,
+        events: &mut Vec<Value>,
+    ) -> Result<Value, Value> {
+        if self.analyzer_lease.is_some() {
+            return Err(domain("analyzer_already_leased", json!({})));
+        }
+        let (plan, lease) = match activity {
+            Some(activity) => configuration::inspect_leased_active(start, application, activity)
+                .map_err(|failure| failure_value(&failure, events))?
+                .ok_or_else(|| domain("workspace_inactive", json!({})))?,
+            None => configuration::inspect_leased(start, application)
+                .map_err(|failure| failure_value(&failure, events))?,
+        };
+        let mut document = crate::analyzer_config::document(&plan, false);
+        document["leaseId"] = json!(plan.token);
+        self.analyzer_lease = Some((plan.token.clone(), lease, plan));
+        Ok(document)
+    }
+    fn update_analyzer(
+        &mut self,
+        plan: &configuration::Plan,
+        analyzer: &Analyzer<'_>,
+        lease_id: Option<&str>,
+        events: &mut Vec<Value>,
+    ) -> Result<Value, Value> {
+        if self.client_minor < 35 {
+            return Err(error(-32601));
+        }
+        let id = lease_id.ok_or_else(|| error(-32602))?;
+        if self
+            .analyzer_lease
+            .as_ref()
+            .is_none_or(|(owned, _, previous)| {
+                owned != id || previous.context.root() != plan.context.root()
+            })
+        {
+            return Err(domain("unknown_analyzer_lease", json!({"leaseId":id})));
+        }
+        let (_, lease, previous) = self.analyzer_lease.take().ok_or_else(|| error(-32603))?;
+        drop(lease);
+        let updated = configuration::prepare(plan, analyzer, false)
+            .and_then(|prepared| configuration::lease(&prepared).map(|lease| (prepared, lease)));
+        match updated {
+            Ok((prepared, lease)) => {
+                let mut document = crate::analyzer_config::document(
+                    &prepared,
+                    plan.status != configuration::Status::Current,
+                );
+                document["leaseId"] = json!(prepared.token);
+                document["analysisContext"] = crate::context::document(&prepared.context);
+                self.analyzer_lease = Some((prepared.token.clone(), lease, prepared));
+                Ok(document)
+            }
+            Err(failure) => {
+                if let Ok(lease) = configuration::lease(&previous) {
+                    self.analyzer_lease = Some((previous.token.clone(), lease, previous));
+                }
+                Err(failure_value(&failure, events))
+            }
+        }
     }
 
     /// Explicit requests may write derived files; ordinary metadata initialization never runs an analyzer.
@@ -81,6 +176,7 @@ impl Server {
                 "timeoutSeconds",
                 "switchContext",
                 "previewToken",
+                "leaseId",
             ],
         )?;
         let input: Input = params::decode(args)?;
@@ -88,47 +184,43 @@ impl Server {
         if !start.is_absolute() || input.application.as_ref().is_some_and(String::is_empty) {
             return Err(error(-32602));
         }
+        let activity = self
+            .session
+            .as_ref()
+            .and_then(|session| session.activity.as_ref())
+            .map(|activity| activity.snapshot.state.clone());
         if method == "analyzer/context" {
-            return application::resolve(&start, input.application.as_deref())
-                .map(|context| crate::context::document(&context))
-                .map_err(|failure| {
-                    failure_value(&eska_analyzer::Error::Context(Box::new(failure)), events)
-                });
+            return resolve_context(
+                &start,
+                input.application.as_deref(),
+                activity.as_ref(),
+                events,
+            );
         }
         if method == "analyzer/acquire" {
-            if self.analyzer_lease.is_some() {
-                return Err(domain("analyzer_already_leased", json!({})));
-            }
-            let (plan, lease) = configuration::inspect_leased(&start, input.application.as_deref())
-                .map_err(|failure| failure_value(&failure, events))?;
-            let mut document = crate::analyzer_config::document(&plan, false);
-            document["leaseId"] = json!(plan.token);
-            self.analyzer_lease = Some((plan.token, lease));
-            return Ok(document);
+            return self.acquire_analyzer(
+                &start,
+                input.application.as_deref(),
+                activity.as_ref(),
+                events,
+            );
         }
-        let plan = configuration::inspect(&start, input.application.as_deref())
-            .map_err(|failure| failure_value(&failure, events))?;
+        let plan = match &activity {
+            Some(activity) => {
+                configuration::inspect_active(&start, input.application.as_deref(), activity)
+                    .map_err(|failure| failure_value(&failure, events))?
+                    .ok_or_else(|| domain("workspace_inactive", json!({})))?
+            }
+            None => configuration::inspect(&start, input.application.as_deref())
+                .map_err(|failure| failure_value(&failure, events))?,
+        };
         if method == "analyzer/configStatus" {
             return Ok(crate::analyzer_config::document(&plan, false));
         }
-        let binary = input
-            .analyzer
-            .as_ref()
-            .ok_or_else(|| error(-32602))?
-            .native()?;
-        if !binary.is_absolute() {
-            return Err(error(-32602));
+        let analyzer = input.process(cancelled, connection_closed)?;
+        if method == "analyzer/activityUpdate" {
+            return self.update_analyzer(&plan, &analyzer, input.lease_id.as_deref(), events);
         }
-        let timeout = input.timeout_seconds.unwrap_or(60);
-        if !(1..=600).contains(&timeout) {
-            return Err(error(-32602));
-        }
-        let analyzer = Analyzer {
-            binary,
-            timeout: Duration::from_secs(timeout),
-            cancelled,
-            connection_closed: Some(connection_closed),
-        };
         match method {
             "analyzer/configPrepare" => {
                 configuration::prepare(&plan, &analyzer, input.switch_context.unwrap_or(false))
@@ -166,6 +258,24 @@ impl Server {
             _ => Err(error(-32601)),
         }
     }
+}
+
+fn resolve_context(
+    start: &std::path::Path,
+    application: Option<&str>,
+    activity: Option<&eska_project_core::project::activity::State>,
+    events: &mut Vec<Value>,
+) -> Result<Value, Value> {
+    let context = activity
+        .map_or_else(
+            || application::resolve(start, application).map(Some),
+            |activity| application::resolve_active(start, application, activity),
+        )
+        .map_err(|failure| {
+            failure_value(&eska_analyzer::Error::Context(Box::new(failure)), events)
+        })?
+        .ok_or_else(|| domain("workspace_inactive", json!({})))?;
+    Ok(crate::context::document(&context))
 }
 
 /// RPC errors use the same stable category/data pair as the standalone CLI.

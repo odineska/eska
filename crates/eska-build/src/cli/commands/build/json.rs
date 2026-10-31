@@ -7,7 +7,7 @@ use crate::{
     cli::{encoding::json_path, localization::Localizer},
     project::{
         ProjectName,
-        build::{self, BuildPlan, Ibcmd},
+        build::{self, BaseConfiguration, BuildPlan, Ibcmd},
     },
 };
 
@@ -33,12 +33,44 @@ pub(super) struct BuildPlanDocument {
 }
 
 #[derive(Serialize)]
+#[serde(untagged)]
+enum BuildBaseDocument {
+    Cf(BuildPlanPathDocument),
+    Xml {
+        kind: &'static str,
+        source: BuildPlanPathDocument,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        library: Option<String>,
+        #[serde(skip_serializing_if = "Option::is_none")]
+        configuration: Option<BuildPlanPathDocument>,
+        steps: [&'static str; 2],
+    },
+}
+
+impl BuildBaseDocument {
+    fn new(input: &BaseConfiguration) -> Self {
+        match input {
+            BaseConfiguration::Cf(path) => Self::Cf(BuildPlanPathDocument::new(path)),
+            BaseConfiguration::DesignerXml { source, library } => Self::Xml {
+                kind: "designer-xml",
+                source: BuildPlanPathDocument::new(source),
+                library: library.as_ref().map(|entry| entry.name.clone()),
+                configuration: library
+                    .as_ref()
+                    .map(|entry| BuildPlanPathDocument::new(&entry.config)),
+                steps: ["prepare-base-configuration", "load-base-cf"],
+            },
+        }
+    }
+}
+
+#[derive(Serialize)]
 struct BuildPlanEntryDocument {
     name: Option<String>,
     root: BuildPlanPathDocument,
     source: BuildPlanPathDocument,
     #[serde(skip_serializing_if = "Option::is_none")]
-    base_configuration: Option<BuildPlanPathDocument>,
+    base_configuration: Option<BuildBaseDocument>,
     #[serde(skip_serializing_if = "Option::is_none")]
     infobase: Option<BuildPlanInfobaseDocument>,
     artifact: BuildPlanArtifactDocument,
@@ -101,6 +133,8 @@ struct BuildErrorDetailDocument {
     stage: Option<&'static str>,
     #[serde(skip_serializing_if = "Option::is_none")]
     project: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    data: Option<serde_json::Value>,
 }
 
 #[derive(Serialize)]
@@ -169,7 +203,7 @@ impl BuildPlanEntryDocument {
             base_configuration: prepared
                 .plan
                 .base_configuration()
-                .map(BuildPlanPathDocument::new),
+                .map(BuildBaseDocument::new),
             infobase: prepared
                 .plan
                 .recreates_infobase()
@@ -271,6 +305,7 @@ pub(super) fn write_build_error(
     code: &'static str,
     stage: Option<&'static str>,
     project: Option<&str>,
+    data: Option<serde_json::Value>,
     localizer: &Localizer,
 ) {
     let document = BuildErrorDocument {
@@ -280,6 +315,7 @@ pub(super) fn write_build_error(
             code,
             stage,
             project: project.map(str::to_owned),
+            data,
         },
     };
     match serde_json::to_string_pretty(&document) {

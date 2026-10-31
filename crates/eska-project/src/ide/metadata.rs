@@ -91,6 +91,9 @@ impl Server {
             .iter_mut()
             .find(|state| state.id == input.project_id)
             .ok_or_else(|| domain("unknown_project", json!({"projectId":input.project_id})))?;
+        if state.inactive.is_some() {
+            return Err(domain("project_inactive", json!({"projectId":state.id})));
+        }
         let project = session
             .workspace
             .project_mut(&state.scope)

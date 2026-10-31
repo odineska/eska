@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "task": "T147",
+  "date": "2026-10-31",
+  "status": "passed",
+  "environment": {
+    "os": "Linux",
+    "architecture": "aarch64",
+    "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "platform_version": "8.3.27.2342",
+    "runner": "distrobox",
+    "container": "onec-alt10"
+  },
+  "rust_checks": {
+    "fmt": "passed",
+    "check": "passed",
+    "clippy_all_targets_all_features_deny_warnings": "passed",
+    "test": {
+      "passed": 1362,
+      "failed": 0,
+      "ignored": 18
+    }
+  },
+  "native": {
+    "complete": true,
+    "platform_version": "8.3.27.2342",
+    "runner": "onec-alt10",
+    "cases": [
+      {
+        "type": "processing",
+        "artifact_bytes": 5120,
+        "negative_without_library": "native_import_failed",
+        "shell_build": "passed",
+        "direct_repeat": "reused_cf_and_infobase",
+        "native_export_type": "CatalogRef.Товары",
+        "manifest": "passed",
+        "explicit_cf_matches": true,
+        "recreate": "passed",
+        "source_unchanged": true
+      },
+      {
+        "type": "report",
+        "artifact_bytes": 5118,
+        "negative_without_library": "native_import_failed",
+        "shell_build": "passed",
+        "direct_repeat": "reused_cf_and_infobase",
+        "native_export_type": "CatalogRef.Товары",
+        "manifest": "passed",
+        "explicit_cf_matches": true,
+        "recreate": "passed",
+        "source_unchanged": true
+      }
+    ],
+    "cancel_base": "passed",
+    "source_refresh": "passed",
+    "clean": "passed",
+    "workspace": {
+      "aggregate": "passed",
+      "member": "passed",
+      "selector": "passed",
+      "independent_bases": true
+    },
+    "original_library_unchanged": true
+  },
+  "evidence": {
+    "script": "tests/native_libraries.py",
+    "playground_directory": "t147-native-ym3y9ucz",
+    "raw_logs": "<playground_directory>/*.stdout and *.stderr",
+    "result": "<playground_directory>/result.json"
+  },
+  "portable_process_checks": [
+    "raw Designer XML without a library manifest, direct and named references",
+    "independent workspace owners, shared-owner ambiguity, unselected writable overlap",
+    "dry-run JSON equality in ru/en and no build writes",
+    "unknown library, unavailable/invalid XML, and explicit CF precedence",
+    "same-size same-mtime BSL edits, selected source path, platform version, corrupted/missing CF",
+    "shared consumer lease and clean exclusion, read-only source permissions, source/output overlap",
+    "failed preparation preserves the previous artifact and verified CF",
+    "missing platform version retains plan code/stage and reports manifest/field"
+  ],
+  "limits": [
+    "Windows, macOS, and native host runner were not run for T147.",
+    "Changing the native platform version is covered by process tests; only 8.3.27.2342 was installed for this native matrix.",
+    "The native library is a copy of the user-authorized demo export, not BSP installed by the future add command.",
+    "Prepared CF belongs to one consumer in T147; reuse between consumers is T148."
+  ]
+}

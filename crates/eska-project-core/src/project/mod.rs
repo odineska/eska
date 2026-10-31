@@ -1,5 +1,6 @@
 //! Project settings and Designer XML operations without Git, platform or CLI runtimes.
 
+pub mod activity;
 pub mod build;
 pub mod configurator;
 pub mod create;

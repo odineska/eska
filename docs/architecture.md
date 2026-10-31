@@ -16,6 +16,7 @@ crates/eska-project-core/
     ├── provenance.rs               # typed portable VCS data without repository execution
     ├── application/                # explicit composition, dependency graph and read-only resolver
     ├── config/                     # strict manifest schemas, serialization and validation
+    │   └── global.rs               # shared machine-local config and transactional editing
     ├── workflow.rs                 # presets and portable settings
     ├── workflow/policy.rs          # pure policy validation and task plans
     └── project/
@@ -80,8 +81,7 @@ crates/eska-build-runtime/
 └── src/
     ├── build/                      # runner, plans, managed infobases and artifact snapshots
     ├── artifact/                   # unpack and reversible source publication
-    ├── patch/                      # native validation from prepared XML, without Git
-    └── config/global.rs            # machine-local runner config and transactional editing
+    └── patch/                      # native validation from prepared XML, without Git
 src/
 ├── main.rs                         # optional shell entry point
 ├── lib.rs                          # localized parsing and component delegation
@@ -146,8 +146,9 @@ src/
 - `main.rs` только передаёт управление CLI. Общие аргументы находятся в `args.rs`;
   список команд и их диспетчеризация — в `commands/mod.rs`.
 - Чистые аргументы и локализация help разделяются через presentation, диалог и
-  представление специфичных ошибок принадлежат CLI владельца. Общие ошибки проекта, global
-  config и платформы находятся в `diagnostics.rs`; общие machine-local options —
+  представление специфичных ошибок принадлежат CLI владельца. Общие ошибки проекта и
+  глобального конфига представлены в `eska-presentation::diagnostics`; ошибки платформы —
+  в `eska-build::cli::diagnostics`. Общие machine-local options —
   в `platform.rs`, представление путей и semantic identities — в `changes.rs`,
   обратимые JSON-пути и Git byte strings — в `encoding.rs`.
 - Обработчики команд не используют внутренние функции соседних команд. Общий

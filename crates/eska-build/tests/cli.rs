@@ -12,6 +12,11 @@ use eska_project_core::{
 };
 use serde_json::Value;
 
+#[path = "build_reference/mod.rs"]
+mod build_reference;
+#[path = "runtime_base/mod.rs"]
+mod runtime_base;
+
 #[path = "../../../tests/support/ibcmd.rs"]
 mod ibcmd_fixture;
 #[path = "../../../tests/support/mod.rs"]

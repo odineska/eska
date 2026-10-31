@@ -1051,3 +1051,50 @@ fmt-state-planned = Запланировано
 fmt-state-applied = Применено
 fmt-state-failed = Ошибка
 fmt-state-not_applied = Не применено
+
+analysis-library-empty = Укажите непустое имя configuration.library.
+analysis-library-config-error = Не удалось подключить библиотеку { $name }: { $detail }
+analysis-library-source-error = Источник { $path } библиотеки { $name } из { $config } недоступен или не подходит выбранному контексту.
+config-library-unknown = Библиотека { $name } не зарегистрирована в { $path }.
+config-library-source-empty = Укажите непустой source библиотеки { $name } в { $path }.
+
+build-stage-prepare-base-configuration = подготовка базовой конфигурации
+
+build-preview-library = · Библиотека: { $value }
+
+build-preview-base-xml = · Designer XML основы (подготовка и загрузка CF): { $value }
+
+build-base-xml-invalid = Основа должна быть абсолютным путём к Designer XML основной конфигурации: { $path }
+
+build-base-configuration-changed = Подготовленная базовая конфигурация изменилась во время операции. Повторите сборку: { $path }
+build-base-output-overlap = Результат или служебный каталог сборки { $output } попадает в исходники основы { $source }, доступные только для чтения. Выберите другой выходной каталог.
+
+build-configuration-error = Ошибка настройки { $field } в { $path }: { $reason }
+build-reference-ambiguous = Внешний объект принадлежит нескольким приложениям. Укажите одно из них в analysis.default_application рабочего пространства.
+build-reference-invalid = Проверьте ссылку configuration: нужна доступная выгрузка Designer XML основной конфигурации вне рабочих проектов.
+
+library-add-about = Подключить БСП к внешнему отчёту или обработке
+library-add-usage = eska add <БИБЛИОТЕКА> [-p <ПРОЕКТ>] [--format human|json]
+library-add-name-help = Известная библиотека: ssl_3_1 или ssl_3_2; отсутствующая устанавливается из master в ~/.eska/lib
+library-add-name-value = БИБЛИОТЕКА
+library-add-attached = Библиотека { $name } подключена: { $path }
+library-add-unchanged = Библиотека { $name } уже подключена: { $path }
+library-add-downloading = Загрузка { $name } из master…
+library-add-unknown = Неизвестная библиотека { $name }. Поддерживаются ssl_3_1 и ssl_3_2.
+library-add-type = Команда add подключает библиотеку к внешнему отчёту или обработке.
+library-add-selection = Выберите один внешний проект: запустите add в его каталоге или укажите -p с его именем.
+library-add-owner = Для общего внешнего проекта укажите его приложение в analysis.default_application рабочего пространства.
+library-add-home = Не удалось определить домашний каталог пользователя для .eska/lib.
+library-add-conflict = Настройка { $field } в { $path } уже содержит другую основу; исходная ссылка сохранена.
+library-add-changed = Файл или назначение изменились во время add; пользовательские изменения сохранены. Повторите команду: { $path }
+library-add-locked = Другой процесс использует библиотеку или конфигурацию: { $path }
+library-add-path = Путь нельзя сохранить в TOML как UTF-8: { $path }
+library-add-install-invalid = Каталог занят или установка библиотеки повреждена; файлы сохранены: { $path }
+library-add-io = Ошибка записи или чтения { $path }: { $reason }
+library-add-manifest = Некорректный manifest библиотеки: { $path }
+library-add-config = Проверьте manifest: библиотека должна быть конфигурацией Designer XML с source = "src/cf".
+library-add-download = Не удалось получить полный снимок master. Установка и исходная ссылка проекта сохранены.
+library-add-rollback = Не удалось полностью восстановить конфигурацию { $path }. Исправная установка сохранена для восстановления: { $reason }
+
+build-library-producer-unsupported = Общий результат библиотеки можно создавать только для основной конфигурации.
+build-library-cache-unowned = Каталог подготовки библиотеки не распознан как принадлежащий ESKA; проверьте его содержимое: { $path }

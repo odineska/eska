@@ -8,6 +8,7 @@ pub mod formatting;
 pub mod application;
 pub mod artifact;
 pub mod config;
+pub mod libraries;
 pub mod patch;
 pub mod project;
 pub mod provenance;

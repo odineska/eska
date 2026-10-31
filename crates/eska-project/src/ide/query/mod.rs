@@ -5,6 +5,7 @@ mod constructors;
 mod documents;
 mod dto;
 mod formatting;
+mod language;
 mod params;
 mod projections;
 mod recovery;
@@ -24,6 +25,7 @@ use super::{
     errors,
     server::Server,
 };
+pub(super) use language::{capability as language_capability, is_method as is_language_method};
 use params::Key;
 pub(super) use recovery::State as RecoveryState;
 
@@ -377,6 +379,18 @@ impl Server {
                     project.project().source().to_path_buf(),
                 ]
             }));
+            forbidden.extend(
+                session
+                    .projects
+                    .iter()
+                    .filter_map(|state| state.inactive.as_ref())
+                    .flat_map(|project| {
+                        [
+                            project.project().root().to_path_buf(),
+                            project.project().source().to_path_buf(),
+                        ]
+                    }),
+            );
         }
         forbidden
     }
@@ -429,10 +443,13 @@ impl Server {
         if state.refresh && !receipt {
             return Err(domain("resync_required", json!({"reason":"file_events"})));
         }
-        let project = session
-            .workspace
-            .project_mut(&state.scope)
-            .map_err(|failure| errors::workspace(&failure))?;
+        let mut transient = None;
+        let project = activity_project(
+            &mut session.workspace,
+            state,
+            &mut transient,
+            receipt || method == "source/protection",
+        )?;
         if !receipt {
             project
                 .check_generation(super::params::counter(&key.generation)?)
@@ -478,6 +495,29 @@ impl Server {
             });
             result
         })
+    }
+}
+
+fn activity_project<'a>(
+    workspace: &'a mut eska_project_core::project::metadata_workspace::MetadataWorkspace,
+    state: &crate::ide::server::ProjectState,
+    transient: &'a mut Option<eska_project_core::project::metadata_workspace::ProjectSession>,
+    explicit: bool,
+) -> Result<&'a mut eska_project_core::project::metadata_workspace::ProjectSession, Value> {
+    if let Some(inactive) = &state.inactive {
+        if !explicit {
+            return Err(domain("project_inactive", json!({"projectId":state.id})));
+        }
+        *transient = Some(
+            inactive
+                .protection_session()
+                .map_err(|failure| errors::workspace(&failure))?,
+        );
+        transient.as_mut().ok_or_else(|| error(-32603))
+    } else {
+        workspace
+            .project_mut(&state.scope)
+            .map_err(|failure| errors::workspace(&failure))
     }
 }
 

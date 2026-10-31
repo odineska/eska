@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "task": "T148",
+  "part": "shared-build-and-live-add",
+  "date": "2026-10-31",
+  "status": "passed",
+  "task_complete": true,
+  "environment": {
+    "os": "Linux",
+    "architecture": "aarch64",
+    "runner": "ALT Distrobox onec-alt10",
+    "platform": "8.3.27.2342",
+    "build_profile": "debug"
+  },
+  "installed_sources": "~/.eska/lib/<name> (unchanged by build)",
+  "architecture": {
+    "shared_key": [
+      "canonical source path",
+      "actual platform version",
+      "runner",
+      "executable path",
+      "container"
+    ],
+    "cf": "source bytes and copied CF checksum verified",
+    "template": "one closed database per namespace; copied bytes verified before native use; atomically replaced on invalidation",
+    "consumers": "separate mutable databases; global lease released before external-object import",
+    "clean": "removes only the selected consumer database; leaves shared derivations and sources"
+  },
+  "rust_checks": {
+    "fmt": "passed",
+    "check": "passed",
+    "clippy_all_targets_all_features_deny_warnings": "passed",
+    "tests": {
+      "passed": 1389,
+      "failed": 0,
+      "ignored": 18,
+      "test_threads": 2
+    },
+    "retry_note": "An initial fully parallel run returned Busy in the existing prepared-output quota test during concurrent native acceptance. That test passed in isolation; the complete run with two test threads passed."
+  },
+  "process_scenarios": [
+    "ordinary library CF producer without --manifest",
+    "independent EPF/ERF consumers",
+    "same-size and same-mtime source edits",
+    "corrupt or absent CF/template repair",
+    "unowned cache refusal with locale-independent JSON",
+    "parallel native-fixture processes prepare once",
+    "cancel while waiting for shared lease preserves artifacts and private data",
+    "read-only source permissions retained",
+    "root source layout and canonical path aliases",
+    "dry-run creates no cache; overlapping cache/output rejected before writes",
+    "consumer clean/recreate and shared cache deletion recovery"
+  ],
+  "native": {
+    "complete": true,
+    "platform_version": "8.3.27.2342",
+    "runner": "onec-alt10",
+    "cases": [
+      {
+        "type": "processing",
+        "artifact_bytes": 5215,
+        "negative_without_library": "native_import_failed",
+        "shell_build": "passed",
+        "direct_repeat": "reused_cf_and_infobase",
+        "native_export_type": "CatalogRef.Пользователи",
+        "manifest": "passed",
+        "explicit_cf_matches": true,
+        "recreate": "passed",
+        "source_unchanged": true
+      },
+      {
+        "type": "report",
+        "artifact_bytes": 5137,
+        "negative_without_library": "native_import_failed",
+        "shell_build": "passed",
+        "direct_repeat": "reused_cf_and_infobase",
+        "native_export_type": "CatalogRef.Пользователи",
+        "manifest": "passed",
+        "explicit_cf_matches": true,
+        "recreate": "passed",
+        "source_unchanged": true
+      }
+    ],
+    "cancel_base": "passed",
+    "source_refresh": "passed",
+    "clean": "passed",
+    "workspace": {
+      "aggregate": "passed",
+      "member": "passed",
+      "selector": "passed",
+      "independent_bases": true
+    },
+    "original_library_unchanged": true,
+    "shared_cf_without_manifest": true,
+    "shared_template_immutable": true,
+    "timings_seconds": {
+      "library-ordinary-build": 20.802241623001464,
+      "processing-no-library": 1.6772304180012725,
+      "processing-preview-ru": 0.191741506998369,
+      "processing-preview-en": 0.17596537499775877,
+      "processing-shell-build": 17.831353049998143,
+      "processing-direct-repeat": 5.433148898999207,
+      "processing-manifest": 6.285898535999877,
+      "processing-native-export": 1.240025434999552,
+      "processing-explicit-build": 2.210774320999917,
+      "processing-explicit-export": 1.1669680080012768,
+      "processing-recreate": 9.657587794998108,
+      "report-no-library": 1.5427841230011836,
+      "report-preview-ru": 0.23396095800126204,
+      "report-preview-en": 0.18220040300002438,
+      "report-shell-build": 9.586772030001157,
+      "report-direct-repeat": 5.40829753500293,
+      "report-manifest": 6.282147711001016,
+      "report-native-export": 1.1519107479980448,
+      "report-explicit-build": 2.2673431170005642,
+      "report-explicit-export": 1.251662202001171,
+      "report-recreate": 9.596901840999635,
+      "refresh-after-cancel": 32.507701087000896,
+      "workspace-aggregate": 44.074707054998726,
+      "workspace-preview": 0.34611159400083125,
+      "workspace-current-member": 5.419722344002366,
+      "workspace-selector": 5.605823280002369,
+      "workspace-clean": 0.05041426699972362,
+      "processing-clean": 0.0205545400021947,
+      "report-clean": 0.051050056998064974
+    }
+  },
+  "parallel_native": {
+    "status": "passed",
+    "consumers": 2,
+    "separate_databases": true,
+    "shared_cache_unchanged": true,
+    "elapsed_seconds": 19.105574953999167
+  },
+  "baseline_without_shared_preparation": {
+    "library": "ssl_3_1",
+    "platform": "8.3.27.2342",
+    "runner": "onec-alt10",
+    "external_type": "CatalogRef.Пользователи",
+    "sample_interval_seconds": 0.02,
+    "cf_ready": 17.655743507999432,
+    "consumer_ready": 23.23634513399884,
+    "exit": 0,
+    "total_seconds": 24.621883217001596,
+    "artifact_bytes": 5125
+  },
+  "explorer": {
+    "commit": "94e71b2",
+    "unit_and_integration": {
+      "runtime": "Bun 1.4.4",
+      "passed": 408,
+      "skipped": 10,
+      "failed": 0
+    },
+    "native_host": [
+      {
+        "passed": true,
+        "suite": "language-reference",
+        "vscode": "1.144.0",
+        "external_definition": true,
+        "policy_regenerated": true,
+        "line_length_preserved": true,
+        "locale": "en"
+      },
+      {
+        "passed": true,
+        "suite": "language-add",
+        "vscode": "1.144.0",
+        "add_live": true,
+        "added_definition": true,
+        "dirty_preserved": true,
+        "offline_repeat": true,
+        "library_not_workspace_member": true,
+        "locale": "en"
+      }
+    ]
+  },
+  "limits": [
+    "ssl_3_2 installation and offline binding passed; native build is unverified because its CompatibilityMode requires 8.5.1.",
+    "Windows, macOS and native host runner were not executed.",
+    "Timing includes full byte verification and debug code; it is a local measurement, not an SLA."
+  ],
+  "evidence": {
+    "playground_directory": "t148-native-9x_qe8rd",
+    "files": [
+      "owner.json",
+      "result.json",
+      "parallel-result.json",
+      "*.stdout",
+      "*.stderr"
+    ],
+    "native_script": "tests/native_libraries.py"
+  }
+}

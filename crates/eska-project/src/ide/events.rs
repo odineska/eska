@@ -49,6 +49,9 @@ impl Server {
         {
             for state in &mut session.projects {
                 state.reopen = true;
+                if state.inactive.is_some() {
+                    continue;
+                }
                 let project = session
                     .workspace
                     .project(&state.scope)
@@ -58,6 +61,9 @@ impl Server {
             return Ok(());
         }
         let state = &mut session.projects[index];
+        if state.inactive.is_some() {
+            return Ok(());
+        }
         let project = session
             .workspace
             .project_mut(&state.scope)

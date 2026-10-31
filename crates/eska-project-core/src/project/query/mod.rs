@@ -9,7 +9,7 @@ pub mod recovery;
 pub mod virtual_tables;
 mod xml;
 
-pub use bsl::read_bsl;
+pub use bsl::{MAX_MULTILINE_CONTINUATIONS, MultilineString, multiline_strings, read_bsl};
 pub use editing::{CommentPlacement, LineEnding, plan};
 pub use formatting::format_plan;
 pub use mapping::{Affinity, Mapping, Position, SourceMap, byte_position, position_byte};

@@ -770,7 +770,6 @@ name = "eska-build-runtime"
 version = "0.22.0"
 dependencies = [
  "ctrlc",
- "directories",
  "eska-project-core",
  "eska-tool-runtime",
  "gix-path",
@@ -816,6 +815,7 @@ dependencies = [
  "eska-project-core",
  "eska-tool-runtime",
  "fluent",
+ "serde_json",
  "sys-locale",
 ]
 
@@ -841,6 +841,7 @@ version = "0.22.0"
 dependencies = [
  "base64 0.23.1",
  "bstr",
+ "directories",
  "gix-path",
  "gix-validate",
  "quick-xml",

@@ -12,6 +12,7 @@ use eska_project_core::{
 use gix::bstr::ByteSlice;
 use serde_json::{Value, json};
 use std::{
+    ffi::OsString,
     fs,
     io::{self, Write},
     path::{Path, PathBuf},
@@ -26,6 +27,11 @@ pub struct BridgeArgs {
 
 #[derive(Debug, Subcommand)]
 enum Operation {
+    LibraryCheckout {
+        repository: OsString,
+        #[arg(long)]
+        destination: PathBuf,
+    },
     Doctor {
         #[arg(long)]
         project: Option<PathBuf>,
@@ -109,6 +115,13 @@ impl BridgeArgs {
     #[must_use]
     pub fn run(&self, root: &Path) -> ExitCode {
         let (operation, result): (&str, Result<Value, Value>) = match &self.operation {
+            Operation::LibraryCheckout {
+                repository,
+                destination,
+            } => (
+                "library_checkout",
+                library_checkout(root, repository, destination),
+            ),
             Operation::Doctor {
                 project,
                 attribute_roots,
@@ -167,6 +180,25 @@ impl BridgeArgs {
         }
         code
     }
+}
+
+fn library_checkout(
+    root: &Path,
+    repository: &std::ffi::OsStr,
+    destination: &Path,
+) -> Result<Value, Value> {
+    use crate::project::clone::{self, CloneError};
+    clone::inspect(root, repository, Some(destination), "origin")
+        .and_then(clone::execute_master)
+        .map(|revision| json!({"revision":revision.to_string(),"reference":"refs/heads/master"}))
+        .map_err(|error| json!({"reason":match error {
+            CloneError::AlreadyExists { .. } => "destination_exists",
+            CloneError::RepositoryUrl(_) | CloneError::LocalRepository { .. } => "repository_url",
+            CloneError::Network(_) => "network",
+            CloneError::IncompleteCheckout { .. } => "checkout",
+            CloneError::Rollback { .. } => "rollback",
+            _ => "destination",
+        }}))
 }
 
 /// Refuse collisions before invoking the initializer; rollback remains the caller's responsibility.

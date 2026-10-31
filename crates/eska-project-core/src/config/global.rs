@@ -1,6 +1,7 @@
 //! Machine-local configuration stored outside project repositories.
 
 use std::{
+    collections::BTreeMap,
     fs::{self, File, OpenOptions},
     io::{self, Write},
     path::{Path, PathBuf},
@@ -31,9 +32,42 @@ pub struct GlobalBuildConfig {
 #[derive(Clone, Debug, Default, Eq, PartialEq)]
 pub struct GlobalConfig {
     pub build: GlobalBuildConfig,
+    pub libraries: BTreeMap<String, GlobalLibrary>,
+}
+
+/// One local Designer XML source, independently selected by a project manifest.
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct GlobalLibrary {
+    pub source: PathBuf,
 }
 
 impl GlobalConfig {
+    /// Resolve only the selected catalog entry against its owning configuration file.
+    ///
+    /// # Errors
+    /// Rejects unknown names, empty sources and unavailable absolute config locations.
+    pub fn library_path(&self, config: &Path, name: &str) -> Result<PathBuf, GlobalConfigError> {
+        let entry = self
+            .libraries
+            .get(name)
+            .ok_or_else(|| GlobalConfigError::UnknownLibrary {
+                path: config.to_owned(),
+                name: name.to_owned(),
+            })?;
+        if entry.source.as_os_str().is_empty() {
+            return Err(GlobalConfigError::EmptyLibrarySource {
+                path: config.to_owned(),
+                name: name.to_owned(),
+            });
+        }
+        let config = std::path::absolute(config).map_err(|source| io_error(config, source))?;
+        let parent = config
+            .parent()
+            .ok_or(GlobalConfigError::LocationUnavailable)?;
+        Ok(parent.join(&entry.source))
+    }
+
     /// Load the machine config, or return portable defaults when it does not exist.
     ///
     /// # Errors
@@ -48,7 +82,7 @@ impl GlobalConfig {
     }
 
     /// Parse and validate the strict machine-local TOML schema.
-    fn parse(path: &Path, input: &str) -> Result<Self, GlobalConfigError> {
+    pub(crate) fn parse(path: &Path, input: &str) -> Result<Self, GlobalConfigError> {
         let raw: RawGlobalConfig =
             toml::from_str(input).map_err(|source| GlobalConfigError::Invalid {
                 path: path.to_owned(),
@@ -70,6 +104,7 @@ impl GlobalConfig {
             });
         }
         Ok(Self {
+            libraries: raw.libraries,
             build: GlobalBuildConfig {
                 runner,
                 container: raw.build.container,
@@ -92,6 +127,8 @@ pub fn load() -> Result<(PathBuf, GlobalConfig), GlobalConfigError> {
 #[derive(Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
 struct RawGlobalConfig {
+    #[serde(default)]
+    libraries: BTreeMap<String, GlobalLibrary>,
     #[serde(default)]
     build: RawGlobalBuildConfig,
 }
@@ -128,6 +165,14 @@ pub enum EditOutcome {
 
 #[derive(Debug)]
 pub enum GlobalConfigError {
+    UnknownLibrary {
+        path: PathBuf,
+        name: String,
+    },
+    EmptyLibrarySource {
+        path: PathBuf,
+        name: String,
+    },
     LocationUnavailable,
     Io {
         path: PathBuf,
@@ -153,6 +198,40 @@ pub enum GlobalConfigError {
     },
 }
 
+impl GlobalConfigError {
+    /// Return the owning config path when the failure has a filesystem location.
+    #[must_use]
+    pub fn path(&self) -> Option<&Path> {
+        match self {
+            Self::UnknownLibrary { path, .. }
+            | Self::EmptyLibrarySource { path, .. }
+            | Self::Io { path, .. }
+            | Self::Invalid { path, .. }
+            | Self::DistroboxContainerMissing { path }
+            | Self::HostContainerUnexpected { path }
+            | Self::Replace { path, .. } => Some(path),
+            Self::LocationUnavailable | Self::Editor { .. } | Self::EditorFailed => None,
+        }
+    }
+
+    /// Stable machine categories do not depend on the locale of an I/O diagnostic.
+    #[must_use]
+    pub const fn code(&self) -> &'static str {
+        match self {
+            Self::UnknownLibrary { .. } => "unknown_library",
+            Self::EmptyLibrarySource { .. } => "empty_library_source",
+            Self::LocationUnavailable => "location_unavailable",
+            Self::Io { .. } => "io",
+            Self::Invalid { .. } => "invalid_toml",
+            Self::DistroboxContainerMissing { .. } => "distrobox_container_missing",
+            Self::HostContainerUnexpected { .. } => "host_container_unexpected",
+            Self::Editor { .. } => "editor",
+            Self::EditorFailed => "editor_failed",
+            Self::Replace { .. } => "replace",
+        }
+    }
+}
+
 /// Resolve the standard per-user config location on the current operating system.
 ///
 /// # Errors
@@ -164,6 +243,51 @@ pub fn config_path() -> Result<PathBuf, GlobalConfigError> {
     BaseDirs::new()
         .map(|directories| directories.config_dir().join("eska").join("config.toml"))
         .ok_or(GlobalConfigError::LocationUnavailable)
+}
+
+/// Keep derived library builds in the OS cache, or beside an explicitly separate catalog.
+///
+/// # Errors
+/// Rejects a catalog without an absolute parent; resolving this path never creates files.
+pub fn library_cache_root(config: &Path) -> Result<PathBuf, GlobalConfigError> {
+    let config = std::path::absolute(config).map_err(|source| io_error(config, source))?;
+    if let Some(directories) = BaseDirs::new()
+        && config == directories.config_dir().join("eska/config.toml")
+    {
+        return Ok(directories.cache_dir().join("eska/libraries"));
+    }
+    config
+        .parent()
+        .map(|parent| parent.join("cache/libraries"))
+        .ok_or(GlobalConfigError::LocationUnavailable)
+}
+
+/// Identify a registered configuration project without opening unrelated XML exports.
+///
+/// # Errors
+/// Rejects an invalid catalog; absent and unusable unselected paths do not become errors.
+pub fn registered_library(
+    source: &Path,
+) -> Result<Option<crate::application::LibrarySelection>, GlobalConfigError> {
+    let (config, catalog) = load()?;
+    let config = std::path::absolute(&config).map_err(|source| io_error(&config, source))?;
+    let source = fs::canonicalize(source).map_err(|error| io_error(source, error))?;
+    for name in catalog
+        .libraries
+        .keys()
+        .filter(|name| !name.trim().is_empty())
+    {
+        if let Ok(path) = catalog.library_path(&config, name)
+            && fs::canonicalize(&path).ok().as_deref() == Some(source.as_path())
+        {
+            return Ok(Some(crate::application::LibrarySelection {
+                name: name.clone(),
+                config,
+                source,
+            }));
+        }
+    }
+    Ok(None)
 }
 
 /// Create the default config without overwriting an existing file.
@@ -323,9 +447,70 @@ fn io_error(path: &Path, source: io::Error) -> GlobalConfigError {
 mod tests {
     use super::*;
 
+    #[test]
+    fn catalog_paths_are_relative_to_the_global_file_and_keep_build_settings() {
+        let path = test_path("catalog");
+        let config = GlobalConfig::parse(&path, "[build]\nrunner='host'\n[libraries.ssl_3_1]\nsource='БСП с пробелами/src/cf'\n[libraries.other]\nsource=''\n").expect("catalog");
+        assert_eq!(config.build.runner, RunnerKind::Host);
+        assert_eq!(
+            config.library_path(&path, "ssl_3_1").expect("source"),
+            path.parent()
+                .expect("config directory")
+                .join("БСП с пробелами/src/cf"),
+        );
+        assert!(matches!(
+            config.library_path(&path, "other"),
+            Err(GlobalConfigError::EmptyLibrarySource { name, .. }) if name == "other"
+        ));
+        assert!(matches!(
+            config.library_path(&path, "unknown"),
+            Err(GlobalConfigError::UnknownLibrary { name, .. }) if name == "unknown"
+        ));
+        assert!(!path.exists());
+    }
+
+    #[test]
+    fn missing_config_preserves_defaults_without_creating_a_catalog() {
+        let path = test_path("missing-catalog");
+        let config = GlobalConfig::load(&path).expect("defaults");
+        assert_eq!(config.build, GlobalBuildConfig::default());
+        assert!(config.libraries.is_empty());
+        assert!(matches!(
+            config.library_path(&path, "ssl_3_1"),
+            Err(GlobalConfigError::UnknownLibrary { .. })
+        ));
+        assert!(!path.parent().expect("config directory").exists());
+    }
+
+    #[test]
+    fn transactional_edit_accepts_libraries_and_retains_the_original() {
+        let path = test_path("catalog-edit");
+        init_at(&path).expect("init");
+        let original = "[build]\nrunner='distrobox'\ncontainer='onec'\n";
+        fs::write(&path, original).expect("build config");
+        let result = edit_at(&path, |temporary| {
+            fs::write(
+                temporary,
+                format!("{original}[libraries.ssl_3_1]\nsource='src/cf'\n"),
+            )
+            .map_err(|source| io_error(temporary, source))
+        })
+        .expect("edit catalog");
+        let EditOutcome::Changed { backup, .. } = result else {
+            panic!("changed")
+        };
+        assert_eq!(fs::read_to_string(backup).expect("backup"), original);
+        let config = GlobalConfig::load(&path).expect("catalog");
+        assert_eq!(config.build.container.as_deref(), Some("onec"));
+        assert_eq!(config.libraries["ssl_3_1"].source, Path::new("src/cf"));
+        fs::remove_dir_all(path.parent().expect("config directory")).expect("cleanup");
+    }
+
     /// Create an isolated config path for one transactional test.
     fn test_path(name: &str) -> PathBuf {
-        let root = std::env::temp_dir().join(format!(
+        let base =
+            std::env::var_os("ESKA_TEST_ROOT").map_or_else(std::env::temp_dir, PathBuf::from);
+        let root = base.join(format!(
             "eska-global-config-{name}-{}-{}",
             std::process::id(),
             SystemTime::now()

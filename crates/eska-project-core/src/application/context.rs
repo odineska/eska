@@ -5,6 +5,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use crate::config::global::{self, GlobalConfigError};
 use crate::project::{
     Project, ProjectConfiguration, ProjectName, ProjectType, SourceFormat, Workspace,
     WorkspaceMember,
@@ -14,9 +15,17 @@ use crate::project::{
 };
 
 use super::{
-    AnalysisSettings, AnalyzerPolicy, Application, CheckPolicy, ExtensionScope, SettingsError,
-    TargetPlatformVersion, graph,
+    AnalysisSettings, AnalyzerPolicy, Application, CheckPolicy, ConfigurationReference,
+    ExtensionScope, SettingsError, TargetPlatformVersion, graph,
 };
+
+/// The selected global entry is retained for freshness checks and editor observation.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct LibrarySelection {
+    pub name: String,
+    pub config: PathBuf,
+    pub source: PathBuf,
+}
 
 /// The explicit role of one selected source directory.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -42,6 +51,7 @@ impl SourceRole {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct ContextSource {
     reference: bool,
+    library: Option<LibrarySelection>,
     member: Option<ProjectName>,
     role: SourceRole,
     project: Project,
@@ -53,6 +63,12 @@ pub struct ContextSource {
 }
 
 impl ContextSource {
+    /// Identify the selected catalog entry without including unrelated global settings.
+    #[must_use]
+    pub const fn library(&self) -> Option<&LibrarySelection> {
+        self.library.as_ref()
+    }
+
     /// Extensions carry their effective deployment scope; other source roles have none.
     #[must_use]
     pub const fn extension_scope(&self) -> Option<ExtensionScope> {
@@ -118,9 +134,16 @@ pub struct AnalysisContext {
     target_platform_version: Option<TargetPlatformVersion>,
     analyzer_policy: AnalyzerPolicy,
     check_policy: CheckPolicy,
+    excluded_sources: Vec<PathBuf>,
 }
 
 impl AnalysisContext {
+    /// Explicit IDE omissions prevent the analyzer from rediscovering inactive or foreign members.
+    #[must_use]
+    pub fn excluded_sources(&self) -> &[PathBuf] {
+        &self.excluded_sources
+    }
+
     /// Return CI limits from the same owning manifest as the analyzer policy and source set.
     #[must_use]
     pub const fn check_policy(&self) -> &CheckPolicy {
@@ -174,6 +197,16 @@ impl AnalysisContext {
 /// Context failures retain selections and source errors without claiming successful analysis.
 #[derive(Debug)]
 pub enum ContextError {
+    LibraryConfiguration {
+        name: String,
+        source: Box<GlobalConfigError>,
+    },
+    LibrarySource {
+        name: String,
+        config: PathBuf,
+        path: PathBuf,
+        source: Box<Self>,
+    },
     Discovery(Box<ContextDiscoveryError>),
     Source(Box<SourceError>),
     Settings(Box<SettingsError>),
@@ -192,6 +225,26 @@ pub enum ContextError {
 /// # Errors
 /// Rejects invalid manifests, ambiguous selection, mismatched members and invalid root XML.
 pub fn resolve(start: &Path, requested: Option<&str>) -> Result<AnalysisContext, ContextError> {
+    resolve_with_activity(start, requested, None)?.ok_or(ContextError::EmptyWorkspace)
+}
+
+/// Resolve the IDE source projection; no active consumer returns no analysis context.
+///
+/// # Errors
+/// Preserves normal discovery, application, dependency and selected-source validation errors.
+pub fn resolve_active(
+    start: &Path,
+    requested: Option<&str>,
+    activity: &crate::project::activity::State,
+) -> Result<Option<AnalysisContext>, ContextError> {
+    resolve_with_activity(start, requested, Some(activity))
+}
+
+fn resolve_with_activity(
+    start: &Path,
+    requested: Option<&str>,
+    activity: Option<&crate::project::activity::State>,
+) -> Result<Option<AnalysisContext>, ContextError> {
     match discovery::discover_context(start)
         .map_err(|error| ContextError::Discovery(Box::new(error)))?
     {
@@ -202,8 +255,13 @@ pub fn resolve(start: &Path, requested: Option<&str>) -> Result<AnalysisContext,
                     available: Vec::new(),
                 });
             }
-            let settings = project.configuration().analysis_settings();
-            single(project.root(), None, &project, settings)
+            single(
+                project.root(),
+                None,
+                &project,
+                project.configuration().analysis_settings(),
+            )
+            .map(Some)
         }
         DiscoveryContext::Workspace { workspace, .. } => {
             let settings = workspace.analysis_settings();
@@ -211,7 +269,27 @@ pub fn resolve(start: &Path, requested: Option<&str>) -> Result<AnalysisContext,
                 return Err(ContextError::EmptyWorkspace);
             }
             let (name, application) = choose_application(settings, requested)?;
-            application_context(&workspace, name, application)
+            let Some(activity) = activity else {
+                return application_context(&workspace, name, application).map(Some);
+            };
+            let projection = super::ActivityProjection::for_workspace(&workspace, activity)
+                .map_err(|error| ContextError::Settings(Box::new(error)))?;
+            let Some(members) = projection
+                .applications
+                .get(name)
+                .filter(|members| !members.is_empty())
+            else {
+                return Ok(None);
+            };
+            let mut context =
+                application_context(&workspace, name, &application.with_members(members))?;
+            context.excluded_sources = workspace
+                .members()
+                .iter()
+                .filter(|member| !members.contains(member.name()))
+                .map(|member| member.project().source().to_path_buf())
+                .collect();
+            Ok(Some(context))
         }
     }
 }
@@ -244,11 +322,12 @@ fn single(
                 SettingsError::ConfigurationReferenceScope,
             )));
         }
-        let base = read_reference(root, &reference.source)?;
-        validate_reference(&base, &sources)?;
+        let base = read_configuration_reference(root, reference)?;
+        validate_selected_reference(&base, &sources)?;
         sources.insert(0, base);
     }
     Ok(AnalysisContext {
+        excluded_sources: Vec::new(),
         root: root.into(),
         name: member.cloned(),
         sources,
@@ -324,18 +403,19 @@ fn application_context(
             SourceRole::ExternalObject,
         )?);
     }
-    if let Some(path) = application.configuration_source() {
-        let reference = read_reference(workspace.root(), path)?;
-        validate_reference(&reference, &sources)?;
+    if let Some(declaration) = application.configuration_reference() {
+        let reference = read_configuration_reference(workspace.root(), declaration)?;
+        validate_selected_reference(&reference, &sources)?;
         // Reference roots must also stay distinct from unselected, writable workspace members.
         if workspace
             .members()
             .iter()
             .any(|member| overlaps(reference.project().source(), member.root()))
         {
-            return Err(ContextError::Settings(Box::new(
-                SettingsError::ConfigurationReferenceScope,
-            )));
+            return Err(library_source_error(
+                &reference,
+                ContextError::Settings(Box::new(SettingsError::ConfigurationReferenceScope)),
+            ));
         }
         sources.insert(0, reference);
     }
@@ -347,6 +427,7 @@ fn application_context(
         |member| member.project().configuration().build_settings(),
     );
     Ok(AnalysisContext {
+        excluded_sources: Vec::new(),
         root: workspace.root().into(),
         name: Some(name.clone()),
         sources,
@@ -413,6 +494,7 @@ fn read_source(
     Ok(ContextSource {
         extension_scope: None,
         reference: false,
+        library: None,
         member: name.cloned(),
         role,
         project: project.clone(),
@@ -423,7 +505,67 @@ fn read_source(
     })
 }
 
-/// Resolve only the explicitly supplied XML directory; no neighboring manifest or Git is consulted.
+/// Resolve one explicitly declared reference; other catalog entries never become inputs.
+pub(super) fn read_configuration_reference(
+    root: &Path,
+    reference: &ConfigurationReference,
+) -> Result<ContextSource, ContextError> {
+    let name = match reference {
+        ConfigurationReference::Source(path) => return read_reference(root, path),
+        ConfigurationReference::Library(name) => name,
+    };
+    let config_error = |source| ContextError::LibraryConfiguration {
+        name: name.clone(),
+        source: Box::new(source),
+    };
+    let config = global::config_path().map_err(config_error)?;
+    let config = std::path::absolute(&config).map_err(|source| {
+        config_error(GlobalConfigError::Io {
+            path: config.clone(),
+            source,
+        })
+    })?;
+    let catalog = global::GlobalConfig::load(&config).map_err(config_error)?;
+    let path = catalog.library_path(&config, name).map_err(config_error)?;
+    let mut source = read_reference(root, &path).map_err(|source| ContextError::LibrarySource {
+        name: name.clone(),
+        config: config.clone(),
+        path: path.clone(),
+        source: Box::new(source),
+    })?;
+    source.library = Some(LibrarySelection {
+        name: name.clone(),
+        config,
+        source: path,
+    });
+    Ok(source)
+}
+
+/// Add catalog coordinates to rejected aliases without weakening reference ownership rules.
+pub(super) fn library_source_error(
+    reference: &ContextSource,
+    source: ContextError,
+) -> ContextError {
+    if let Some(library) = reference.library() {
+        ContextError::LibrarySource {
+            name: library.name.clone(),
+            config: library.config.clone(),
+            path: library.source.clone(),
+            source: Box::new(source),
+        }
+    } else {
+        source
+    }
+}
+
+fn validate_selected_reference(
+    reference: &ContextSource,
+    sources: &[ContextSource],
+) -> Result<(), ContextError> {
+    validate_reference(reference, sources).map_err(|source| library_source_error(reference, source))
+}
+
+/// Resolve only the supplied XML directory; no neighboring manifest or Git is consulted.
 fn read_reference(root: &Path, path: &Path) -> Result<ContextSource, ContextError> {
     let path = root.join(path);
     let source = std::fs::canonicalize(&path).map_err(|source| {
@@ -467,6 +609,6 @@ fn validate_reference(
 }
 
 /// Compare component boundaries after canonical resolution, including identical roots.
-fn overlaps(first: &Path, second: &Path) -> bool {
+pub(super) fn overlaps(first: &Path, second: &Path) -> bool {
     first.starts_with(second) || second.starts_with(first)
 }

@@ -37,6 +37,8 @@ struct Cli {
 #[derive(Debug, Subcommand)]
 enum Commands {
     #[command(disable_help_flag = true)]
+    Add(crate::add::AddArgs),
+    #[command(disable_help_flag = true)]
     Doctor(crate::doctor::DoctorArgs),
     #[command(name = "__shell-new", hide = true, disable_help_flag = true)]
     ShellNew(crate::onboarding::new::NewArgs),
@@ -165,6 +167,7 @@ pub fn run() -> ExitCode {
         return code;
     }
     match cli.command.as_ref() {
+        Some(Commands::Add(args)) => crate::add::run(args, &cli.project_dir, &localizer),
         Some(Commands::Doctor(args)) => crate::doctor::run(args, &cli.project_dir, &localizer),
         Some(Commands::ShellNew(args)) => {
             crate::onboarding::new::run(args, &cli.project_dir, &localizer)
@@ -204,6 +207,7 @@ fn localized(localizer: &Localizer) -> clap::Command {
         .mut_arg("help", |arg| arg.help(localizer.text("cli-help")))
         .mut_arg("version", |arg| arg.help(localizer.text("cli-version")))
         .mut_subcommands(|command| match command.get_name() {
+            "add" => standalone_help(crate::add::localize(command, localizer)),
             "analyzer-config"=>crate::analyzer_config::localize(command,localizer),
             "doctor" => standalone_help(crate::doctor::localize(command, localizer)),
             "metadata" => standalone_help(crate::metadata::localize(command, localizer)),

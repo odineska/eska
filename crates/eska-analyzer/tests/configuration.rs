@@ -672,3 +672,99 @@ fn published_analyzer_accepts_all_project_kinds_and_rejects_unknown_policy() {
         assert_eq!(fs::read(plan.path()).unwrap(), previous);
     }
 }
+
+/// IDE activity owns a separate projection; exclusions survive validation and shared leases.
+#[cfg(unix)]
+#[test]
+fn activity_configuration_excludes_unused_members_and_keeps_cli_composition() {
+    use eska_project_core::project::{
+        activity::{RootSummary, State, path_key},
+        discovery::{DiscoveryContext, discover_context},
+    };
+    let fixture = TestDir::new();
+    let root = fixture.0.join("workspace");
+    fs::create_dir(&root).unwrap();
+    for name in ["one", "two"] {
+        project(&root.join(name), ProjectType::Processing);
+        fs::write(
+            root.join(name).join("eska.toml"),
+            format!("[project]\nname='{name}'\ntype='processing'\n"),
+        )
+        .unwrap();
+    }
+    fs::write(root.join("eska.toml"), "[workspace]\n[workspace.members.app]\nexternal_objects=['one','two']\n[tools.bsl-analyzer.source]\nexclude=['**/Generated/**']\n").unwrap();
+    let DiscoveryContext::Workspace { workspace, .. } = discover_context(&root).unwrap() else {
+        panic!("workspace")
+    };
+    let member = workspace
+        .members()
+        .iter()
+        .find(|member| member.name().as_str() == "one")
+        .unwrap();
+    let mut state = State::default();
+    state.disabled.insert(
+        path_key(member.root()),
+        RootSummary {
+            id: serde_json::from_str("\"data-processor:Пример\"").unwrap(),
+            name: "Пример".into(),
+        },
+    );
+    let full = configuration::inspect(&root, None).unwrap();
+    let plan = configuration::inspect_active(&root, None, &state)
+        .unwrap()
+        .unwrap();
+    assert_eq!(full.context.sources().len(), 2);
+    assert_eq!(plan.context.sources().len(), 1);
+    let generated: toml::Table =
+        toml::from_str(std::str::from_utf8(&plan.contents).unwrap()).unwrap();
+    assert_eq!(
+        generated["source"]["exclude"].as_array().unwrap(),
+        &[
+            toml::Value::String("**/Generated/**".into()),
+            toml::Value::String("one/src".into())
+        ]
+    );
+    let binary = fake_analyzer(&root);
+    let cancelled = AtomicBool::new(false);
+    let analyzer = Analyzer {
+        binary,
+        timeout: Duration::from_secs(5),
+        cancelled: &cancelled,
+        connection_closed: None,
+    };
+    let prepared = configuration::prepare(&plan, &analyzer, false).unwrap();
+    assert_eq!(prepared.status, Status::Current);
+    let (leased, lease) = configuration::inspect_leased_active(&root, None, &state)
+        .unwrap()
+        .unwrap();
+    assert_eq!(leased.context.sources().len(), 1);
+    drop(lease);
+    assert_eq!(
+        configuration::inspect(&root, None)
+            .unwrap()
+            .context
+            .sources()
+            .len(),
+        2
+    );
+    state.hide_disabled = true;
+    assert_eq!(
+        configuration::inspect_active(&root, None, &state)
+            .unwrap()
+            .unwrap()
+            .token,
+        prepared.token
+    );
+    let other = workspace
+        .members()
+        .iter()
+        .find(|member| member.name().as_str() == "two")
+        .unwrap();
+    let summary = state.disabled.values().next().unwrap().clone();
+    state.disabled.insert(path_key(other.root()), summary);
+    assert!(
+        configuration::inspect_active(&root, None, &state)
+            .unwrap()
+            .is_none()
+    );
+}

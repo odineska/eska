@@ -1,0 +1,260 @@
+{
+  "date": "2026-10-31",
+  "input_commits": {
+    "eska": "43cfadf4950d1916b2f87d221c465a85b6a502c3",
+    "explorer": "b44736d3b25d9bcd7f2f798c84784bb5d7bbd67e"
+  },
+  "environment": {
+    "os": "Windows 11 x64 build 26100",
+    "rust": "1.99.1",
+    "msvc": "14.44",
+    "platform": "8.3.27.2342",
+    "memory_gib": 8
+  },
+  "checks": {
+    "fmt": true,
+    "check": true,
+    "clippy_all_targets_all_features_deny_warnings": true,
+    "cargo_test": {
+      "passed": 1293,
+      "failed": 0,
+      "ignored": 18
+    },
+    "python_components": {
+      "tests": 52,
+      "skipped": 19,
+      "passed": true
+    },
+    "native_runner_timeout_tree_cleanup": true,
+    "test_cleanup_preserves_original_panic": true
+  },
+  "native_build": {
+    "complete": true,
+    "entry": "eska",
+    "platform_version": "8.3.27.2342",
+    "runner": "host",
+    "cases": [
+      {
+        "project_type": "configuration",
+        "build": "passed",
+        "repeat": "reused_infobase",
+        "unpack": "passed",
+        "clean": "passed",
+        "artifact_sha256": "a00613042d06c47118d16a5d5eee5ffd36bbf058810a4e02bf7d2239dcb7636b",
+        "artifact_bytes": 76091,
+        "identity": {
+          "name": "Конфигурация",
+          "project_type": "configuration",
+          "uuid": "d9eabb07-65bc-425a-86b0-6322690a2b1d"
+        },
+        "source_unchanged": true,
+        "export_identity_matches_source": true,
+        "git_status": "absent",
+        "direct_wrapper_json_equal_except_duration": true,
+        "direct_wrapper_manifest_metadata_equal": true,
+        "first_artifact_sha256": "91cf370986f6d5eabdffb1da9dd16884187ce80f00a58b96f4b5bef528208e1a",
+        "repeated_artifact_bytes_equal": false
+      },
+      {
+        "project_type": "extension",
+        "build": "passed",
+        "repeat": "reused_infobase",
+        "unpack": "passed",
+        "clean": "passed",
+        "artifact_sha256": "1899f496251d5d40cf94382f42361886809cf678354d701a44b353b8617320af",
+        "artifact_bytes": 4624,
+        "identity": {
+          "name": "EskaTestExtension",
+          "project_type": "extension",
+          "uuid": "758d4db8-4724-469a-bb45-1824374ac68e"
+        },
+        "source_unchanged": true,
+        "export_identity_matches_source": true,
+        "git_status": "absent",
+        "direct_wrapper_json_equal_except_duration": true,
+        "direct_wrapper_manifest_metadata_equal": true,
+        "first_artifact_sha256": "736371d137ae651f40b14439af1142dba99649b439e8f79f8329e9d0ee5db2c3",
+        "repeated_artifact_bytes_equal": false
+      },
+      {
+        "project_type": "processing",
+        "build": "passed",
+        "repeat": "reused_infobase",
+        "unpack": "passed",
+        "clean": "passed",
+        "artifact_sha256": "62446f442b2a0b9c81f5ccd61cb6d409c8f7e1e363abcbd96e061ec7fb10fde4",
+        "artifact_bytes": 4394,
+        "identity": {
+          "name": "EskaTestprocessing",
+          "project_type": "processing",
+          "uuid": "66ec4b10-7521-40f2-8b74-893395774102"
+        },
+        "source_unchanged": true,
+        "export_identity_matches_source": true,
+        "git_status": "absent",
+        "direct_wrapper_json_equal_except_duration": true,
+        "direct_wrapper_manifest_metadata_equal": true,
+        "first_artifact_sha256": "7769deb4d8e7272b5df6bb207f16ad501ad0d78b127c15250597f8a9716b938a",
+        "repeated_artifact_bytes_equal": false
+      },
+      {
+        "project_type": "report",
+        "build": "passed",
+        "repeat": "reused_infobase",
+        "unpack": "passed",
+        "clean": "passed",
+        "artifact_sha256": "cd07eb2e48f140418c662fff953f1bbaa15cbc28cb4f9585265ca06b989664cb",
+        "artifact_bytes": 4394,
+        "identity": {
+          "name": "EskaTestreport",
+          "project_type": "report",
+          "uuid": "80e0bb50-0da3-43d2-a265-ae1cf099fb13"
+        },
+        "source_unchanged": true,
+        "export_identity_matches_source": true,
+        "git_status": "absent",
+        "direct_wrapper_json_equal_except_duration": true,
+        "direct_wrapper_manifest_metadata_equal": true,
+        "first_artifact_sha256": "2c77246dcfa589de5ed9b970ae82e8414544618ad0b8e926ac4d98c8efc640b1",
+        "repeated_artifact_bytes_equal": false
+      }
+    ],
+    "cancellation": {
+      "unpack": {
+        "status": "passed",
+        "exit": 130,
+        "native_pid_absent": true,
+        "staging_absent": true,
+        "input_unchanged": true
+      },
+      "build": {
+        "status": "passed",
+        "exit": 1,
+        "stage": "import-sources",
+        "native_pid_absent": true,
+        "previous_result_unchanged": true,
+        "source_unchanged": true,
+        "managed_infobase_preserved": true,
+        "staging_absent": true
+      }
+    }
+  },
+  "native_library_matrix": {
+    "complete": true,
+    "platform_version": "8.3.27.2342",
+    "runner": "host",
+    "cases": [
+      {
+        "type": "processing",
+        "artifact_bytes": 5232,
+        "negative_without_library": "native_import_failed",
+        "shell_build": "passed",
+        "direct_repeat": "reused_cf_and_infobase",
+        "native_export_type": "CatalogRef.Products",
+        "manifest": "passed",
+        "explicit_cf_matches": true,
+        "recreate": "passed",
+        "source_unchanged": true
+      },
+      {
+        "type": "report",
+        "artifact_bytes": 5135,
+        "negative_without_library": "native_import_failed",
+        "shell_build": "passed",
+        "direct_repeat": "reused_cf_and_infobase",
+        "native_export_type": "CatalogRef.Products",
+        "manifest": "passed",
+        "explicit_cf_matches": true,
+        "recreate": "passed",
+        "source_unchanged": true
+      }
+    ],
+    "cancel_base": "passed",
+    "source_refresh": "passed",
+    "clean": "passed",
+    "workspace": {
+      "aggregate": "passed",
+      "member": "passed",
+      "selector": "passed",
+      "independent_bases": true
+    },
+    "original_library_unchanged": true,
+    "shared_cf_without_manifest": true,
+    "shared_template_immutable": true,
+    "parallel_builds": {
+      "status": "passed",
+      "consumers": 2,
+      "separate_databases": true,
+      "shared_cache_unchanged": true,
+      "elapsed_seconds": 70.51839350000955
+    },
+    "timings_seconds": {
+      "library-ordinary-build": 17.219971800019266,
+      "processing-no-library": 14.215000299998792,
+      "processing-preview-ru": 0.561271000013221,
+      "processing-preview-en": 0.4747122999979183,
+      "processing-shell-build": 87.72418590000598,
+      "processing-direct-repeat": 7.641985599999316,
+      "processing-manifest": 9.203837699984433,
+      "processing-native-export": 6.7939869000110775,
+      "processing-explicit-build": 9.800275000015972,
+      "processing-explicit-export": 9.508491800021147,
+      "processing-recreate": 42.49551049998263,
+      "report-no-library": 14.744749899982708,
+      "report-preview-ru": 1.083335300005274,
+      "report-preview-en": 0.952530399983516,
+      "report-shell-build": 43.559202600008575,
+      "report-direct-repeat": 10.403988000005484,
+      "report-manifest": 18.022859799995786,
+      "report-native-export": 9.149812899995595,
+      "report-explicit-build": 9.81916449998971,
+      "report-explicit-export": 6.742197600018699,
+      "report-recreate": 36.27784269998665,
+      "refresh-after-cancel": 104.49076939999941,
+      "workspace-aggregate": 210.01948970000376,
+      "workspace-preview": 1.7106175000080839,
+      "workspace-current-member": 6.72905590001028,
+      "workspace-selector": 5.4628152000077534,
+      "workspace-clean": 1.8837452000007033,
+      "processing-clean": 1.5851211000117473,
+      "report-clean": 1.879275300016161
+    }
+  },
+  "real_library_installation": {
+    "results": [
+      {
+        "library": "ssl_3_1",
+        "revision": "da8aa1fcef273f6e61bbb7ec9ea3107cac32cabc",
+        "files": 9630,
+        "installed": true,
+        "offline_ru_en_same_json": true,
+        "sources_unchanged": true
+      },
+      {
+        "library": "ssl_3_2",
+        "revision": "c821e2a3f606225554d97577b7c3e61cec244628",
+        "files": 9670,
+        "installed": true,
+        "offline_ru_en_same_json": true,
+        "sources_unchanged": true
+      }
+    ],
+    "complete": true
+  },
+  "real_bsp31_cf": {
+    "passed": true,
+    "bytes": 85701675,
+    "sha256": "8e36b96236940b3b214ce5d2453e5727da5791060ea630d6ab1d95cd41c720f8",
+    "source_snapshot": "sha256:fedb343e3dfb2df60ba5b6fa20b75c20e2a53b797bf4777a8f650d96c21256cc",
+    "cold_seconds": 926.8
+  },
+  "evidence": "../eska-playground/windows-review-20261031-195814",
+  "commits": [
+    "1513ea7a",
+    "ac15d191",
+    "5edef1e9"
+  ],
+  "limits": [
+    "Windows x64 and 1C 8.3.27.2342 only; no extension of the existing Native patch version matrix."
+  ]
+}

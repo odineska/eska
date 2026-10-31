@@ -1,0 +1,110 @@
+{
+  "task": "T145",
+  "date": "2026-10-31",
+  "status": "done",
+  "commits": {
+    "eska": [
+      "c245910",
+      "6759985",
+      "dd416b0"
+    ],
+    "explorer": [
+      "9c5cce2"
+    ]
+  },
+  "rust": {
+    "fmt": "passed",
+    "check": "passed",
+    "clippy_all_targets_all_features": "passed",
+    "tests": {
+      "passed": 1349,
+      "failed": 0,
+      "ignored": 18
+    }
+  },
+  "explorer": {
+    "typecheck": "passed",
+    "compile": "passed",
+    "tests": {
+      "passed": 405,
+      "failed": 0,
+      "skipped": 11
+    }
+  },
+  "native": {
+    "platform": "linux",
+    "architecture": "aarch64",
+    "editor": "VS Code 1.144.0",
+    "analyzer": "bsl-analyzer 0.4.2",
+    "analyzer_source": "https://github.com/itrous/bsl-analyzer/releases/tag/v0.4.2",
+    "analyzer_build": {
+      "kind": "local ARM64 from tag",
+      "lto": false,
+      "numkong_sme_dispatch": false
+    },
+    "test": "eska-vscode-explorer/test/language-library-host.cjs",
+    "cases": {
+      "final": {
+        "passed": true,
+        "path_changed": true,
+        "recovery": true,
+        "dirty_preserved": true,
+        "external_definition": true,
+        "line_length_preserved": true
+      },
+      "missing": {
+        "passed": true,
+        "path_changed": true,
+        "recovery": true,
+        "dirty_preserved": true,
+        "external_definition": true,
+        "line_length_preserved": true
+      },
+      "directory": {
+        "passed": true,
+        "path_changed": true,
+        "recovery": true,
+        "dirty_preserved": true,
+        "external_definition": true,
+        "line_length_preserved": true
+      }
+    }
+  },
+  "protocol": {
+    "two_live_servers_keep_config_until_both_leases_released": true,
+    "lease_test_validator": "tests/fixtures/analyzer-config.py",
+    "catalog_resolved_on_each_request": true,
+    "locale_independent_json": true
+  },
+  "manual": {
+    "fmt_only_consumer_files": true,
+    "vcs_only_consumer_repository": true,
+    "vcs_ru_en_json_equal": true,
+    "build_dry_run_projects": 1,
+    "build_runner": "distrobox onec-alt10",
+    "platform_detected": "8.3.27.2342",
+    "library_bytes_unchanged": true
+  },
+  "experimental_rust_api_changes": [
+    "GlobalConfig moved to eska_project_core::config::global",
+    "ConfigurationReference is now Source(PathBuf) | Library(String)",
+    "Application::configuration_source replaced by configuration_reference"
+  ],
+  "limitations": [
+    {
+      "id": "windows_native",
+      "status": "not_run",
+      "windows_drive_and_unc_paths": "unit tested"
+    },
+    {
+      "id": "manifest_watcher",
+      "status": "preexisting",
+      "scenario": "language-reference-host.cjs/policy-regeneration",
+      "external_definition": "passed",
+      "whole_scenario": "failed",
+      "reproduced_with_explorer": "b4a1512",
+      "backend": "dd416b0",
+      "follow_up": "T148: observe the manifest update performed by eska add"
+    }
+  ]
+}

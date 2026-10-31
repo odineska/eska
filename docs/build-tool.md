@@ -49,6 +49,62 @@ available/absent/unavailable. Ошибка процесса/протокола �
 сохраняет прежний результат и managed infobase, удаляет свой staging.
 [Контракты и OS-матрица сборки](build-validation.md).
 
+## XML-основа для EPF/ERF (T147, T148)
+
+Экспериментальный Rust API `BuildPlan::with_base_configuration` принимает
+`Option<BaseConfiguration>`: готовый `Cf(PathBuf)` либо
+`DesignerXml { source, library }`. Это заменяет прежний `Option<PathBuf>`;
+CLI-параметр `--base-configuration` по-прежнему означает готовый CF.
+Обычный `eska-build build` получает XML-основу из `[analysis.configuration]`
+(`library` или `source`), а для member — из приложения workspace.
+`eska build` использует тот же контракт. Явный CF имеет приоритет;
+без ссылки сохраняется прежний build с пустой ИБ.
+[Настройка и выбор приложения](user-guide.md#build).
+
+Runtime копирует исходники XML-основы в собственный staging и подготавливает CF
+через `ibcmd`. Исходной выгрузке не нужен `eska.toml`. При прямой ссылке `source`
+подготовленные `base.cf` и `base.json` находятся в управляемом каталоге ИБ
+конкретного потребителя; одна блокировка защищает весь build. При именованной
+ссылке общий результат хранится отдельно: системный пользовательский cache
+`eska/libraries`, а для нестандартного глобального `config.toml` — соседний
+`cache/libraries`. Исходники установленной БСП остаются в `~/.eska/lib`.
+
+Namespace определяется путём библиотеки, фактической версией платформы, runner,
+путём исполняемого файла и контейнером. Общая блокировка сериализует подготовку
+и проверку CF, а затем копирование закрытой подготовленной ИБ. Каждый потребитель
+открывает только свою изменяемую ИБ; перед импортом EPF/ERF общая блокировка
+освобождается. CF и скопированная ИБ проверяются по содержимому. Отсутствующие
+или повреждённые производные файлы восстанавливаются; неизвестные каталоги
+без маркера ownership не перезаписываются.
+
+Обычный build проекта конфигурации, source которого зарегистрирован в каталоге,
+создаёт CF через этот же механизм. Приватные сведения о входных данных сохраняются
+автоматически, без `--manifest`. Экспериментальный Rust API добавляет
+`BuildPlan::with_library_build(LibrarySelection)` для такого CF-производителя.
+Повторный запуск сверяет байты всех исходников и checksum CF; одинаковые размер
+и время изменения файла не скрывают изменение. Пересоздание ИБ сохраняет
+проверенный общий результат. `clean` удаляет только каталог ИБ потребителя;
+при прямой ссылке вместе с ним удаляется его частный CF. Источники основы
+остаются только для чтения: размещать выходной файл или staging внутри них нельзя.
+
+Для XML-основы паспорт schema 1 дополнительно содержит
+`source.base_context = { kind: "designer-xml", library?, snapshot_id }`.
+`source.base_configuration` сохраняет checksum фактически использованного CF.
+Машинные пути в паспорт не добавляются. Старые паспорта сборки без XML-основы
+и JSON-представление готового CF сохраняют прежнюю форму.
+
+В dry-run XML-основа представлена как `base_configuration` с полями
+`kind: "designer-xml"`, `source: {path,path_encoding}`, необязательными
+`library` и `configuration: {path,path_encoding}` (глобальный файл),
+`steps: ["prepare-base-configuration", "load-base-cf"]`.
+Ошибка разрешения имеет `code: "base-reference"`, `stage: "configuration"`
+и `data: {file,field,application,cause}`. `file` использует `{value,encoding}`,
+`cause` сохраняет структурированные координаты библиотеки. Отсутствующая версия
+платформы сохраняет `platform-version-missing`/`plan` и добавляет `data` с файлом,
+`field: "build.platform_version"` и `reason: "missing"`. JSON не зависит от locale.
+Ошибки общей основы `base-configuration-cache`, `library-cache-unowned`
+и `library-configuration` имеют stage `prepare-base-configuration`.
+
 ## Patch-extension
 
 `eska-build patch` сохраняет аргументы, ограничения и JSON schema 1 общего

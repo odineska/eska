@@ -4,7 +4,6 @@ pub mod doctor;
 
 pub mod artifact;
 pub mod build;
-pub mod config;
 pub mod patch;
 mod platform_path;
 

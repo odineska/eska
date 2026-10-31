@@ -1,5 +1,6 @@
 //! Versioned Metadata API presentation, separate from CLI JSON and the project core.
 
+mod activity;
 mod analyzer;
 pub(crate) mod dto;
 pub(crate) mod editing;
@@ -17,7 +18,7 @@ pub(crate) mod renaming;
 mod runtime;
 mod server;
 
-pub(crate) const API_MINOR: u32 = 33;
+pub(crate) const API_MINOR: u32 = 35;
 
 /// Run a persistent framed protocol session without human output on stdout.
 #[must_use]

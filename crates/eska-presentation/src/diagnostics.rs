@@ -3,6 +3,7 @@
 use std::{io, path::Path};
 
 pub mod application;
+pub mod global;
 
 use crate::{
     localization::{LocalizationValue, Localizer},

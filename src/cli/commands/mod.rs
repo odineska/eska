@@ -7,6 +7,7 @@ use clap::Subcommand;
 
 use super::localization::Localizer;
 
+mod add;
 mod build;
 mod check;
 mod clean;
@@ -34,6 +35,8 @@ mod version;
 
 #[derive(Debug, Subcommand)]
 pub(super) enum Commands {
+    #[command(disable_help_flag = true)]
+    Add(add::AddArgs),
     #[command(disable_help_flag = true)]
     Update(update::UpdateArgs),
     #[command(disable_help_flag = true)]
@@ -102,7 +105,9 @@ pub(super) fn run(
         Some(Commands::Fmt(_)) => {
             component::run(Component::Fmt, process_args, Invocation::Fmt, localizer)
         }
-        Some(Commands::Metadata(_) | Commands::Version(_) | Commands::Doctor(_)) => component::run(
+        Some(
+            Commands::Add(_) | Commands::Metadata(_) | Commands::Version(_) | Commands::Doctor(_),
+        ) => component::run(
             Component::Project,
             process_args,
             Invocation::Direct,
@@ -170,6 +175,7 @@ pub(super) fn run(
 
 pub(super) fn localize(command: clap::Command, localizer: &Localizer) -> clap::Command {
     command
+        .mut_subcommand("add", |command| add::localize(command, localizer))
         .mut_subcommand("metadata", |command| metadata::localize(command, localizer))
         .mut_subcommand("update", |command| update::localize(command, localizer))
         .mut_subcommand("ide", |command| ide::localize(command, localizer))

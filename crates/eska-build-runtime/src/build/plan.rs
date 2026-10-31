@@ -4,6 +4,17 @@ use std::{
 };
 
 use super::PlatformVersion;
+use eska_project_core::application::LibrarySelection;
+
+/// Exactly one native base is selected for an external artifact.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum BaseConfiguration {
+    Cf(PathBuf),
+    DesignerXml {
+        source: PathBuf,
+        library: Option<LibrarySelection>,
+    },
+}
 use eska_project_core::project::{Project, ProjectType};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -55,7 +66,8 @@ pub struct BuildPlan {
     artifact_type: ArtifactType,
     platform_version: PlatformVersion,
     source: PathBuf,
-    base_configuration: Option<PathBuf>,
+    base_configuration: Option<BaseConfiguration>,
+    library_build: Option<LibrarySelection>,
     artifacts_directory: PathBuf,
     infobase_root: PathBuf,
     output: PathBuf,
@@ -112,6 +124,7 @@ impl BuildPlan {
                 .ok_or(PlanError::PlatformVersionMissing)?,
             source: project.source().to_owned(),
             base_configuration: None,
+            library_build: None,
             infobase_root: infobase_root(&artifacts_directory, &artifact_name),
             artifacts_directory,
             output,
@@ -162,6 +175,7 @@ impl BuildPlan {
                 .ok_or(PlanError::PlatformVersionMissing)?,
             source: project.source().to_owned(),
             base_configuration: None,
+            library_build: None,
             infobase_root: infobase_root(&artifacts_directory, &artifact_name),
             artifacts_directory,
             output,
@@ -196,8 +210,25 @@ impl BuildPlan {
     }
 
     #[must_use]
-    pub fn base_configuration(&self) -> Option<&Path> {
-        self.base_configuration.as_deref()
+    pub const fn base_configuration(&self) -> Option<&BaseConfiguration> {
+        self.base_configuration.as_ref()
+    }
+
+    #[must_use]
+    pub const fn library_build(&self) -> Option<&LibrarySelection> {
+        self.library_build.as_ref()
+    }
+
+    /// Bind a registered configuration producer to the same prepared result as its consumers.
+    ///
+    /// # Errors
+    /// Rejects a library producer on artifact kinds other than a main configuration.
+    pub fn with_library_build(mut self, library: LibrarySelection) -> Result<Self, PlanError> {
+        if self.artifact_type != ArtifactType::Configuration {
+            return Err(PlanError::LibraryBuildUnsupported);
+        }
+        self.library_build = Some(library);
+        Ok(self)
     }
 
     #[must_use]
@@ -231,7 +262,7 @@ impl BuildPlan {
     /// Returns a structured error when this input is used for an unsupported artifact type.
     pub fn with_base_configuration(
         mut self,
-        base_configuration: Option<PathBuf>,
+        base_configuration: Option<BaseConfiguration>,
     ) -> Result<Self, PlanError> {
         if base_configuration.is_some()
             && !matches!(
@@ -307,6 +338,7 @@ pub enum PlanError {
         path: PathBuf,
     },
     BaseConfigurationUnsupported,
+    LibraryBuildUnsupported,
 }
 
 /// Reject a group in which multiple plans would publish the same artifact.

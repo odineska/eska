@@ -22,10 +22,12 @@ pub(super) struct ProjectState {
     pub refresh: bool,
     pub reopen: bool,
     pub last_progress: Option<(Value, Instant)>,
+    pub inactive: Option<Box<eska_project_core::project::metadata_workspace::SuspendedProject>>,
 }
 pub(super) struct Session {
     pub id: String,
     pub workspace: MetadataWorkspace,
+    pub activity: Option<super::activity::WorkspaceActivity>,
     pub projects: Vec<ProjectState>,
 }
 /// A compatibility entry and a standalone component expose different executable identities.
@@ -47,7 +49,11 @@ impl Identity {
 
 pub(super) struct Server {
     identity: Identity,
-    pub analyzer_lease: Option<(String, eska_analyzer::configuration::Lease)>,
+    pub analyzer_lease: Option<(
+        String,
+        eska_analyzer::configuration::Lease,
+        eska_analyzer::configuration::Plan,
+    )>,
     pub initialized: bool,
     pub closing: bool,
     pub session: Option<Session>,
@@ -133,6 +139,9 @@ impl Server {
         match method {
             "initialize" => self.initialize(args),
             "workspace/open" => self.open(args),
+            method if super::activity::is_method(method) && self.client_minor >= 35 => {
+                self.activity(method, args, events)
+            }
             "project/info" => {
                 self.check_session(args)?;
                 self.info()
@@ -154,6 +163,9 @@ impl Server {
             }
             method if super::formatting::is_method(method) && self.client_minor >= 33 => {
                 self.formatting(method, args, cancelled, connection_closed)
+            }
+            method if super::query::is_language_method(method) && self.client_minor >= 34 => {
+                self.language(method, args, cancelled, connection_closed)
             }
             method if super::metadata::is_method(method) => self.metadata(method, args, events),
             method if super::query::is_recovery_method(method) => {
@@ -265,6 +277,13 @@ impl Server {
         if self.client_minor >= 33 {
             result["capabilities"]["formatting"] = super::formatting::capability();
         }
+        if self.client_minor >= 35 {
+            result["capabilities"]["workspaceActivity"] =
+                json!({"schemaVersion":1,"localPersistence":true});
+        }
+        if self.client_minor >= 34 {
+            result["capabilities"]["bslMultilineStrings"] = super::query::language_capability();
+        }
         if self.client_minor >= 21 {
             result["capabilities"]["queryConstructor"] =
                 super::query::constructor_capability(self.client_minor);
@@ -312,34 +331,58 @@ impl Server {
                 (names, false)
             }
         };
-        let workspace = if input.disk_cache.unwrap_or(true) {
-            MetadataWorkspace::open_cached(&start, &names, all)
+        let (workspace, selections, activity) = if self.client_minor >= 35 {
+            let (opened, activity) =
+                super::activity::open(&start, &names, all, input.disk_cache.unwrap_or(true))?;
+            (opened.workspace, opened.projects, activity)
         } else {
-            MetadataWorkspace::open(&start, &names, all)
-        }
-        .map_err(|failure| errors::opening(&failure))?;
+            let workspace = if input.disk_cache.unwrap_or(true) {
+                MetadataWorkspace::open_cached(&start, &names, all)
+            } else {
+                MetadataWorkspace::open(&start, &names, all)
+            }
+            .map_err(|failure| errors::opening(&failure))?;
+            let selections = workspace
+                .projects()
+                .iter()
+                .map(|project| {
+                    eska_project_core::project::metadata_workspace::ActivityProject::Active(
+                        project.scope().clone(),
+                    )
+                })
+                .collect();
+            (workspace, selections, None)
+        };
         self.serial = self
             .serial
             .checked_add(1)
             .ok_or_else(|| domain("generation_exhausted", json!({})))?;
-        let projects = workspace
-            .projects()
-            .iter()
+        let projects = selections
+            .into_iter()
             .enumerate()
-            .map(|(index, project)| ProjectState {
-                id: format!("p{index}"),
-                scope: project.scope().clone(),
-                event: 0,
-                file: 0,
-                refresh: false,
-                reopen: false,
-                last_progress: None,
+            .map(|(index, project)| {
+                use eska_project_core::project::metadata_workspace::ActivityProject;
+                let (scope, inactive) = match project {
+                    ActivityProject::Active(scope) => (scope, None),
+                    ActivityProject::Inactive(project) => (project.scope().clone(), Some(project)),
+                };
+                ProjectState {
+                    id: format!("p{index}"),
+                    scope,
+                    inactive,
+                    event: 0,
+                    file: 0,
+                    refresh: false,
+                    reopen: false,
+                    last_progress: None,
+                }
             })
             .collect();
         self.session = Some(Session {
             id: format!("s{}", self.serial),
             workspace,
             projects,
+            activity,
         });
         self.info()
     }
@@ -361,14 +404,28 @@ impl Server {
     }
 
     /// Report fresh counters and validated project paths without reading source files.
-    fn info(&self) -> Result<Value, Value> {
+    pub(super) fn info(&self) -> Result<Value, Value> {
         let session = self.session.as_ref().ok_or_else(|| error(-32603))?;
-        let projects = session.projects.iter().map(|state| {
-            let project = session.workspace.project(&state.scope).map_err(|failure| errors::workspace(&failure))?;
-            let scope = match &state.scope { ProjectScope::Standalone => json!({"kind":"standalone"}), ProjectScope::Member(name) => json!({"kind":"member","name":name.as_str()}) };
-            Ok(json!({"projectId":state.id,"scope":scope,"type":project.project().configuration().project_type().as_str(),"rootPath":dto::path(project.project().root()),"sourcePath":dto::path(project.project().source()),"root":dto::node_id(project.root()),"generation":project.generation().to_string(),"eventSequence":state.event.to_string(),"requiresRefresh":state.refresh,"requiresReopen":state.reopen}))
-        }).collect::<Result<Vec<_>, Value>>()?;
-        Ok(json!({"sessionId":session.id,"projects":projects}))
+        let projection = super::activity::projection(session.activity.as_ref())?;
+        let projects = session
+            .projects
+            .iter()
+            .map(|state| {
+                let mut info = super::activity::project_info(session, state, projection.as_ref())?;
+                if self.client_minor < 35
+                    && let Some(object) = info.as_object_mut()
+                {
+                    object.remove("activity");
+                    object.remove("displayName");
+                }
+                Ok(info)
+            })
+            .collect::<Result<Vec<_>, Value>>()?;
+        let mut result = json!({"sessionId":session.id,"projects":projects});
+        if let Some(activity) = &session.activity {
+            result["activity"] = json!({"schemaVersion":1,"revision":activity.snapshot.revision,"hideDisabled":activity.snapshot.state.hide_disabled});
+        }
+        Ok(result)
     }
 
     /// Index at most one descriptor and rotate projects so no member monopolizes idle time.

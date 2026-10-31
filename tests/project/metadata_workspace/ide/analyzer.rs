@@ -10,7 +10,7 @@ fn initialize(client: &mut Client, locale: &str) {
 }
 
 /// Encode absolute native paths with the established DTO rather than implicit cwd resolution.
-fn start(root: &std::path::Path) -> Value {
+pub(super) fn start(root: &std::path::Path) -> Value {
     json!({"start":{"value":root,"encoding":"utf-8"}})
 }
 
@@ -49,7 +49,7 @@ fn context_and_freshness_are_read_only_and_negotiate_api_12() {
 
 /// Only orchestration is mocked here; upstream validation has a separate explicit real-binary test.
 #[cfg(unix)]
-fn fake(root: &std::path::Path) -> std::path::PathBuf {
+pub(super) fn fake(root: &std::path::Path) -> std::path::PathBuf {
     let path = root.join("analyzer fixture");
     // Keep the executable inode immutable while parallel tests spawn child processes.
     let fixture =

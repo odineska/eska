@@ -19,8 +19,10 @@ use super::{
     ContextError, SettingsError, SourceRole, TargetPlatformVersion, resolve, resolve_snapshot,
 };
 
+mod activity;
 mod composition;
 mod extension_scope;
+mod reference;
 
 /// Plain editor context does not depend on a derived config or unrelated module contents.
 #[test]

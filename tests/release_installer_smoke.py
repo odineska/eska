@@ -9,6 +9,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import threading
 
@@ -33,7 +34,7 @@ def verify_assets(artifacts):
 
 
 def main():
-    """Install twice with isolated binaries, receipt and cache, then probe every installed command."""
+    """Verify clean/repeat installs and the transition from Explorer components to one full version."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("artifacts", type=Path)
     args = parser.parse_args()
@@ -52,10 +53,13 @@ def main():
         server = ThreadingHTTPServer(("127.0.0.1", 0), partial(SimpleHTTPRequestHandler, directory=str(artifacts)))
         worker = threading.Thread(target=server.serve_forever, daemon=True)
         worker.start()
+        temporary_files = stand / "tmp"
+        temporary_files.mkdir()
         environment = {key: value for key, value in os.environ.items() if not key.startswith(("ESKA_", "INSTALLER_", "CARGO_DIST_"))}
         environment.update({"ESKA_INSTALL_DIR": str(prefix), "ESKA_NO_MODIFY_PATH": "1",
                             "ESKA_DOWNLOAD_URL": f"http://127.0.0.1:{server.server_port}",
-                            "XDG_CONFIG_HOME": str(stand / "config"), "XDG_CACHE_HOME": str(stand / "cache")})
+                            "XDG_CONFIG_HOME": str(stand / "config"), "XDG_CACHE_HOME": str(stand / "cache"),
+                            "TMPDIR": str(temporary_files), "TMP": str(temporary_files), "TEMP": str(temporary_files)})
         try:
             for _ in range(2):
                 result = subprocess.run(command, cwd=stand, env=environment,
@@ -75,23 +79,60 @@ def main():
                                    check=True, capture_output=True, timeout=15)
             for locale in ("ru-RU", "en-US"):
                 metadata_session(prefix / ("eska-project" + suffix), locale, stand, environment, [])
-            components = prefix.parent / "components"
-            components.mkdir()
-            for tool in ("eska-project", "eska-fmt"):
-                component_receipt = components / f"{tool}.json"
-                component_receipt.write_text('{"managed": "component fixture"}', encoding="utf-8")
-                before = {path.relative_to(stand): path.read_bytes() for path in stand.rglob("*") if path.is_file()}
+            project = prefix / ("eska-project" + suffix)
+            target = json.loads(subprocess.check_output([project, "__tool-contract"], timeout=15))["target"]
+            index = artifacts / f"release-{target}.json"
+            for selected in (("eska-project",), ("eska-fmt",), ("eska-project", "eska-fmt")):
+                component_stand = stand / "-".join(selected)
+                component_stand.mkdir()
+                component_root = component_stand / "installation with spaces"
+                component_prefix = component_root / "bin"
+                component_environment = {
+                    **environment, "ESKA_INSTALL_DIR": str(component_prefix),
+                    "XDG_CONFIG_HOME": str(component_stand / "config"),
+                    "XDG_CACHE_HOME": str(component_stand / "cache"),
+                }
+                for tool in selected:
+                    subprocess.run([sys.executable, "-B", artifacts / "components.py", "install", "--manifest", index,
+                                    "--component", tool, "--root", component_root],
+                                   cwd=component_stand, env=component_environment, check=True,
+                                   capture_output=True, text=True, timeout=120)
+                for name in ("analyzer/bin/bsl-analyzer-app", "analyzer/components/bsl-analyzer-app.json",
+                             "components/unrelated.json", "user.txt"):
+                    path = component_root / name
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_bytes(b"independent installation")
+                preserved = {path: path.read_bytes() for path in component_root.rglob("*")
+                             if path.is_file() and ("share" in path.parts or path.name in ("unrelated.json", "user.txt",
+                                                                                        "bsl-analyzer-app", "bsl-analyzer-app.json"))}
                 for locale in ("ru_RU.UTF-8", "en_US.UTF-8"):
-                    rejected = subprocess.run(command, cwd=stand,
-                                              env={**environment, "LC_ALL": locale}, capture_output=True, text=True, timeout=120)
-                    # cargo-dist's PowerShell catch writes diagnostics to the information/stdout stream.
-                    assert rejected.returncode != 0, rejected
-                    assert "component-installation-conflict" in rejected.stdout + rejected.stderr, rejected
-                    assert tool in rejected.stdout + rejected.stderr, rejected
-                    assert {path.relative_to(stand): path.read_bytes() for path in stand.rglob("*") if path.is_file()} == before
-                component_receipt.unlink()
+                    result = subprocess.run(command, cwd=component_stand,
+                                            env={**component_environment, "LC_ALL": locale},
+                                            capture_output=True, text=True, timeout=120)
+                    assert result.returncode == 0, result
+                    assert "no checksums to verify" not in result.stdout + result.stderr
+                    full_receipt = json.loads((component_stand / "config/eska/eska-receipt.json").read_bytes())
+                    assert full_receipt["version"] == version, full_receipt
+                    assert set(full_receipt["binaries"]) == {tool + suffix for tool in tools}, full_receipt
+                    assert Path(full_receipt["install_prefix"]) == component_prefix, full_receipt
+                    for tool in tools:
+                        binary = component_prefix / (tool + suffix)
+                        current = json.loads(subprocess.check_output([binary, "__tool-contract"],
+                                                                    cwd=component_stand, env=component_environment, timeout=15))
+                        assert current["tool"] == tool and current["version"] == version, current
+                        assert not (component_root / f"components/{tool}.json").exists()
+                    assert all(path.read_bytes() == data for path, data in preserved.items())
+                    assert not (component_root / ".eska-components.claim").exists()
+                    assert not list(component_root.glob(".eska-full-install.*"))
+                for locale in ("ru-RU", "en-US"):
+                    metadata_session(component_prefix / ("eska-project" + suffix), locale, component_stand,
+                                     component_environment, [])
+                    subprocess.run([component_prefix / ("eska" + suffix), "--lang", locale, "fmt", "--help"],
+                                   cwd=component_stand, env=component_environment, check=True,
+                                   capture_output=True, timeout=15)
             print(json.dumps({"passed": True, "version": version, "components": sorted(tools),
-                              "receipt_isolated": True, "component_ownership_preserved": True,
+                              "receipt_isolated": True, "component_ownership_transferred": True,
+                              "component_transition_scenarios": 3, "uniform_versions": True,
                               "verified_assets": verified_assets}))
         finally:
             server.shutdown()

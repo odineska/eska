@@ -674,6 +674,14 @@ Capability `analyzerConfiguration:true` доступна при запросе m
 | `analyzer/acquire` | — | Подготовленный актуальный конфиг и `leaseId` |
 | `analyzer/release` | Только `leaseId`, без `start` | null |
 
+При именованной `configuration.library` выбранный источник JSON контекста
+дополнительно содержит `library: { name: string, configuration: Path }`:
+путь к глобальному каталогу приходит от ESKA. У прямого `source` и собственных
+проектов это поле отсутствует. Имя и путь участвуют в fingerprint; другие записи
+глобального каталога не входят в выбранный контекст.
+Ошибки содержат `reason: library_configuration|library_source`, `library`,
+`configuration: Path|null` и машинный `cause`; ошибка источника также содержит `path: Path`.
+
 `analyzer` — абсолютный path DTO выбранного executable, без поиска полной ESKA.
 `timeoutSeconds` — целое 1–600, default 60 на subprocess. Все методы —
 request-only. Они не требуют metadata generation и могут выполняться до
@@ -1972,6 +1980,42 @@ FOR UPDATE разрешён для отдельного корневого SELEC
 Ошибка оставляет текущий текст и ревизию неизменными. Успех публикует одну
 ревизию; запрет поддержки и проверка владельца общие со всеми действиями.
 
+### API 1.34: геометрия многострочных BSL-литералов
+
+Capability `bslMultilineStrings` доступна при handshake 1.34. Она описывает
+чтение синтаксиса переданного native-снимка; workspace, анализатор и путь файла
+не требуются. Сервер не читает и не записывает исходники и не приобретает
+владение ими. Семантическую связь литерала с аргументом определяет LSP-подсказка.
+
+```json
+{"schemaVersion":1,"offsetEncoding":"utf-8","writesOwner":false,"maxTextBytes":4194304,"maxInlineBytes":131072,"maxContinuations":8192}
+```
+
+Request-only `language/multilineStrings` принимает
+`{version:string,text?:string,bufferId?:string}`. Версия — положительный u64 counter;
+ровно один `text`/`bufferId` обязателен. Для большого текста используются
+`language/bufferBegin`, `language/bufferAppend`, `language/bufferClose` с теми же
+полями bytes/snapshot, bufferId/offset/text и bufferId, что у query-upload.
+Предел одного снимка — 4 MiB, inline/chunk — 128 KiB. Общая квота connection
+32 MiB сохраняется; чужие query/format handles не принимаются. Workspace close
+и shutdown освобождают upload; notification не может резервировать память.
+
+Результат:
+
+```json
+{"schemaVersion":1,"version":"7","sourceSha256":"<64 lowercase hex>","strings":[{"range":{"start":12,"end":48},"continuations":[31]}]}
+```
+
+Все offsets — UTF-8 bytes в точном переданном тексте, включая BOM и CRLF.
+`range` включает обе кавычки; каждое continuation указывает на `|` перед
+очередной частью. Комментарии, даты, однострочные строки, экранированные кавычки
+и допустимые пропуски строк обрабатывает существующий BSL-сканер core.
+Неполный/некорректный литерал возвращает `language_syntax_failed` с
+`details.reason = "invalid_literal"`; превышение размера/числа отступов —
+`"text_too_large"`. Другие нарушения upload используют прежние ошибки квоты
+и unknown-buffer. Отмена даёт `-32800`; локаль не меняет данные ответа.
+Адаптер проверяет version, checksum и актуальность LSP перед показом отступов.
+
 ### API 1.33: независимое форматирование документа и query-черновика
 
 Capability `formatting` доступна при handshake 1.33:
@@ -2046,3 +2090,56 @@ query-сессии сохраняют существующий domain `query_fai
 `writable` по-прежнему определяет core. Пустые `.eska/source-locks/*.lock` —
 постоянные inode для OS leases: закрытие последнего handle/процесса снимает
 владение, сами имена не удаляются. Числовой ID другой сессии права не предоставляет.
+
+### API 1.35: локальная активность проектов workspace
+
+Handshake 1.35 объявляет `workspaceActivity: {schemaVersion:1,localPersistence:true}`.
+При `workspace/open` и `project/info` workspace получает
+`activity: {schemaVersion:1,revision:<sha256>,hideDisabled:<bool>}`. Каждый проект
+дополнительно содержит `displayName` и
+`activity: {enabled:<bool>,requiredBy:[{application:<name>,project:<name>}]}`.
+`requiredBy` перечисляет активных потребителей отключённой зависимости во всех
+объявленных приложениях; это не включает второй контекст LSP автоматически.
+Standalone-проект не отключается. Клиенты API до 1.35 сохраняют прежний охват.
+
+Request-only `workspace/activitySet` принимает `sessionId`, `revision`,
+`projectId`, `enabled`; `workspace/activityFilter` — `sessionId`, `revision`,
+`hideDisabled`. Ответ и notification `workspace/activityChanged` содержат полный
+актуальный `project/info`. Изменения проверяются по точной ревизии; ошибка
+`workspace_activity_failed` содержит машинный `reason` (`conflict`, `busy`,
+`invalid_state`, `resource_limit`, `unsafe_path`, `io`, `workspace_required`,
+`storage_unavailable`, `context_changed`). Повреждённое состояние не заменяется
+пустым. Сохранение происходит атомарно под отдельной блокировкой.
+
+Состояние хранится в `state/workspaces/<sha256 canonical workspace root>/activity.json`
+рядом с пользовательским `config.toml` (в том числе при `ESKA_CONFIG_DIR`).
+Ключ проекта вычисляется из физического корня, независимо от имени, группы и
+позиции. Новые проекты включены; фильтр по умолчанию выключен. Чтение отсутствующего
+состояния ничего не создаёт. Manifest, исходники и состав CLI/CI не меняются.
+
+Отключение повышает поколение и освобождает metadata session и search index;
+повторное включение открывает свежую session с новым поколением. Минимальная
+отключённая строка использует сохранённое имя и ID без чтения XML или дискового
+кеша. Manifest discovery продолжает проверять структуру workspace и пути.
+Metadata-запросы к отключённому проекту получают `project_inactive`. Ранее
+открытые query-сессии, их checkpoint и явные ограничения исходников сохраняются;
+очистка, чтение private draft и подтверждение уже начатого применения допустимы.
+Явное `source/protection` использует временную checked session без запуска индекса.
+Открытие файла и поиск не включают проект автоматически.
+
+`analyzer/context`, `configStatus`, `configPrepare`, `acquire` подключения API 1.35
+используют активную проекцию выбранного приложения: базу и транзитивные зависимости
+активных расширений; для внешних объектов — полный необходимый runtime-контекст
+базы и расширений. Ненужные members исключаются через upstream `source.exclude`.
+При отсутствии активных потребителей возвращается `workspace_inactive`, а собственная
+аренда освобождается. Самостоятельные CLI-команды используют полный объявленный состав.
+
+Request-only `analyzer/activityUpdate` принимает обычные `start`, `application?`,
+`analyzer`, `timeoutSeconds?` и собственный `leaseId`. Он валидирует новую проекцию,
+обновляет производный config и возвращает configuration с новым `leaseId` и
+`analysisContext` (документ `project-context` из того же проверенного снимка).
+На время публикации освобождается только аренда этого подключения; чужая аренда
+оставляет `busy`, а прежняя собственная аренда восстанавливается при неизменных
+входах. Клиент может применить поддерживаемое обновление конфигурации upstream
+без смены PID. Документы отключённых проектов закрываются только в LSP; буферы
+редактора сохраняются. Последний потребитель прекращает процесс и наблюдение.

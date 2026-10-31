@@ -5,10 +5,11 @@ use crate::{
         localization::{LocalizationValue, Localizer},
         path_output,
     },
-    config::GlobalConfigError,
     project::build::{ManagedInfobaseError, ToolError, ToolSource},
 };
-use eska_presentation::diagnostics::path_message;
+pub use eska_presentation::diagnostics::global::{
+    present_global_config_error, present_global_config_error_with_links,
+};
 pub use eska_presentation::diagnostics::{
     present_context_error, present_context_error_with_links, present_project_error,
     present_project_error_with_links, present_selection_error, present_workspace_enrollment_error,
@@ -16,63 +17,8 @@ pub use eska_presentation::diagnostics::{
 };
 
 /// Keep existing consumers plain while new/import explicitly opt into terminal path links.
-pub fn present_global_config_error(error: &GlobalConfigError, localizer: &Localizer) -> String {
-    present_global_config_error_with_links(error, localizer, false)
-}
-
-/// Keep existing consumers plain while new/import explicitly opt into terminal path links.
 pub fn present_tool_error(error: &ToolError, localizer: &Localizer) -> String {
     present_tool_error_with_links(error, localizer, false)
-}
-
-/// Present machine-local config failures shared by config, build, platform and patch commands.
-pub fn present_global_config_error_with_links(
-    error: &GlobalConfigError,
-    localizer: &Localizer,
-    hyperlinks: bool,
-) -> String {
-    match error {
-        GlobalConfigError::LocationUnavailable => localizer.text("config-location-error"),
-        GlobalConfigError::Io { path, source } | GlobalConfigError::Replace { path, source } => {
-            localizer.format(
-                "config-io-error",
-                &[
-                    (
-                        "path",
-                        LocalizationValue::Text(&path_output::render(path, hyperlinks)),
-                    ),
-                    ("reason", LocalizationValue::Text(&source.to_string())),
-                ],
-            )
-        }
-        GlobalConfigError::Invalid { path, source } => localizer.format(
-            "config-invalid",
-            &[
-                (
-                    "path",
-                    LocalizationValue::Text(&path_output::render(path, hyperlinks)),
-                ),
-                ("reason", LocalizationValue::Text(&source.to_string())),
-            ],
-        ),
-        GlobalConfigError::DistroboxContainerMissing { path } => path_message(
-            localizer,
-            "config-distrobox-container-missing",
-            path,
-            hyperlinks,
-        ),
-        GlobalConfigError::HostContainerUnexpected { path } => path_message(
-            localizer,
-            "config-host-container-unexpected",
-            path,
-            hyperlinks,
-        ),
-        GlobalConfigError::Editor { source } => localizer.format(
-            "config-editor-error",
-            &[("reason", LocalizationValue::Text(&source.to_string()))],
-        ),
-        GlobalConfigError::EditorFailed => localizer.text("config-editor-failed"),
-    }
 }
 
 /// Present platform discovery and exact-version failures shared by platform consumers.

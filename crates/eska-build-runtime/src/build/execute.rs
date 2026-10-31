@@ -8,7 +8,9 @@ use std::{
 
 use super::{
     ArtifactType, BuildPlan, Ibcmd, ManagedInfobaseError, ManifestError, ProcessStream, RunError,
-    infobase::ManagedInfobase, manifest,
+    base_configuration::{self, PreparedBase},
+    infobase::{LockedInfobase, ManagedInfobase},
+    manifest,
 };
 use crate::platform_path::native_path;
 use eska_project_core::project::{Project, ProjectType, designer_xml};
@@ -17,6 +19,7 @@ static WORKSPACE_SEQUENCE: AtomicU64 = AtomicU64::new(0);
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum BuildStage {
+    PrepareBaseConfiguration,
     CreateInfobase,
     ImportSources,
 }
@@ -71,8 +74,15 @@ pub enum BuildError {
     DescriptorsMultiple(PathBuf),
     BaseConfigurationRead { path: PathBuf, source: io::Error },
     BaseConfigurationInvalid(PathBuf),
+    BaseConfigurationXmlInvalid(PathBuf),
+    BaseConfigurationChanged(PathBuf),
+    BaseConfigurationOutputOverlap { source: PathBuf, output: PathBuf },
     ManagedInfobase(ManagedInfobaseError),
     Manifest(ManifestError),
+    SourceSnapshot(super::SourceSnapshotError),
+    BaseConfigurationCache { path: PathBuf, source: io::Error },
+    LibraryCacheUnowned(PathBuf),
+    LibraryConfiguration(Box<eska_project_core::config::global::GlobalConfigError>),
 }
 
 /// Build a native 1C artifact through a reusable managed file infobase.
@@ -162,10 +172,6 @@ where
         ensure_configured_output_is_inside_project(plan, parent)?;
     }
     let workspace = Workspace::create(parent)?;
-    let pid_file = workspace.path.join("ibcmd.pid");
-    let artifact = workspace
-        .path
-        .join(format!("artifact.{}", plan.artifact_type().extension()));
     let snapshot = manifest_project
         .map(|project| manifest::capture_source(project, plan, &workspace.path))
         .transpose()
@@ -174,71 +180,174 @@ where
         || plan.clone(),
         |snapshot| plan.with_snapshot_source(snapshot.source().to_owned()),
     );
-    let import_source = import_source(&effective_plan)?;
-    let effective_base_configuration = prepare_base_configuration(
-        plan.base_configuration(),
-        manifest_project.is_some(),
+    let lease = LockedInfobase::acquire(plan).map_err(BuildError::ManagedInfobase)?;
+    let artifact = prepare_artifact(
+        plan,
+        &effective_plan,
+        ibcmd,
+        lease,
         &workspace.path,
+        on_output,
     )?;
-    let infobase = ManagedInfobase::prepare(plan, effective_base_configuration.as_deref())
-        .map_err(BuildError::ManagedInfobase)?;
-    let create_output = if infobase.needs_creation() {
-        let output = create_infobase(
+    let manifest_path = publish_result(
+        plan,
+        ibcmd,
+        &workspace.path,
+        &artifact.path,
+        manifest_seed,
+        snapshot.as_ref(),
+        artifact.base.as_ref(),
+    )?;
+    created_directories.keep();
+    Ok(BuildResult {
+        output: plan.output().to_owned(),
+        manifest: manifest_path,
+        duration: started.elapsed(),
+        tool_output: artifact.tool_output,
+    })
+}
+
+struct PreparedArtifact {
+    path: PathBuf,
+    base: Option<PreparedBase>,
+    tool_output: Vec<u8>,
+}
+
+fn prepare_artifact<F>(
+    plan: &BuildPlan,
+    effective_plan: &BuildPlan,
+    ibcmd: &Ibcmd,
+    lease: LockedInfobase<'_>,
+    workspace: &Path,
+    on_output: &mut F,
+) -> Result<PreparedArtifact, BuildError>
+where
+    F: FnMut(BuildStage, ProcessStream, &[u8]),
+{
+    let import_source = import_source(effective_plan)?;
+    if let Some(library) = plan.library_build() {
+        let prepared = super::shared_library::prepare(
+            library,
+            effective_plan.source(),
             ibcmd,
-            infobase.data(),
-            effective_base_configuration.as_deref(),
-            &pid_file,
+            workspace,
             on_output,
         )?;
+        return Ok(PreparedArtifact {
+            path: prepared.path,
+            base: None,
+            tool_output: prepared.tool_output,
+        });
+    }
+    let mut effective_base_configuration = base_configuration::prepare(
+        plan,
+        ibcmd,
+        lease.root(),
+        workspace,
+        effective_plan.source() != plan.source(),
+        on_output,
+    )?;
+    let pid_file = workspace.join("ibcmd.pid");
+    let artifact = workspace.join(format!("artifact.{}", plan.artifact_type().extension()));
+    let (infobase, create_output) = prepare_infobase(
+        lease,
+        effective_base_configuration.as_mut(),
+        ibcmd,
+        &pid_file,
+        on_output,
+    )?;
+    let import_output = import_artifact(
+        ibcmd,
+        &import_source,
+        infobase.data(),
+        &artifact,
+        &pid_file,
+        on_output,
+    )?;
+    let tool_output = collect_tool_output(
+        effective_base_configuration
+            .as_ref()
+            .map_or(&[], |base| base.tool_output.as_slice()),
+        create_output.as_ref(),
+        &import_output,
+    );
+    Ok(PreparedArtifact {
+        path: artifact,
+        base: effective_base_configuration,
+        tool_output,
+    })
+}
+
+fn prepare_infobase<F>(
+    lease: LockedInfobase<'_>,
+    mut base: Option<&mut PreparedBase>,
+    ibcmd: &Ibcmd,
+    pid: &Path,
+    on_output: &mut F,
+) -> Result<(ManagedInfobase, Option<std::process::Output>), BuildError>
+where
+    F: FnMut(BuildStage, ProcessStream, &[u8]),
+{
+    let infobase = lease
+        .prepare(base.as_ref().map(|base| base.path.as_path()))
+        .map_err(BuildError::ManagedInfobase)?;
+    let mut created = None;
+    if infobase.needs_creation() {
+        if let Some(shared) = base.as_mut().and_then(|base| base.shared.as_mut()) {
+            shared.materialize(ibcmd, infobase.data(), on_output)?;
+        } else {
+            created = Some(create_infobase(
+                ibcmd,
+                infobase.data(),
+                base.as_ref().map(|base| base.path.as_path()),
+                pid,
+                BuildStage::CreateInfobase,
+                on_output,
+            )?);
+        }
         infobase.mark_ready().map_err(BuildError::ManagedInfobase)?;
-        Some(output)
-    } else {
-        None
-    };
-    let import_output = run(
+    }
+    if let Some(base) = base
+        && let Some(shared) = base.shared.take()
+    {
+        base.tool_output = shared.tool_output;
+    }
+    Ok((infobase, created))
+}
+
+/// Import only into the leased database and validate the staged artifact before publication.
+fn import_artifact<F>(
+    ibcmd: &Ibcmd,
+    source: &Path,
+    data: &Path,
+    artifact: &Path,
+    pid: &Path,
+    on_output: &mut F,
+) -> Result<std::process::Output, BuildError>
+where
+    F: FnMut(BuildStage, ProcessStream, &[u8]),
+{
+    let output = run(
         ibcmd,
         BuildStage::ImportSources,
         [
             OsString::from("infobase"),
             OsString::from("config"),
             OsString::from("import"),
-            option("--data", infobase.data()),
-            option("--out", &artifact),
-            native_path(&import_source).as_os_str().to_owned(),
+            option("--data", data),
+            option("--out", artifact),
+            native_path(source).as_os_str().to_owned(),
         ],
-        &pid_file,
+        pid,
         on_output,
     )?;
-    reject_interrupted_import(ibcmd)?;
-
-    validate_artifact(&artifact)?;
-    let manifest_path = publish_result(
-        plan,
-        ibcmd,
-        &workspace.path,
-        &artifact,
-        manifest_seed,
-        snapshot.as_ref(),
-        effective_base_configuration.as_deref(),
-    )?;
-    created_directories.keep();
-    let mut tool_output = Vec::new();
-    if let Some(output) = create_output {
-        append_process_output(&mut tool_output, &output.stdout);
-        append_process_output(&mut tool_output, &output.stderr);
-    }
-    append_process_output(&mut tool_output, &import_output.stdout);
-    append_process_output(&mut tool_output, &import_output.stderr);
-    Ok(BuildResult {
-        output: plan.output().to_owned(),
-        manifest: manifest_path,
-        duration: started.elapsed(),
-        tool_output,
-    })
+    reject_interrupted_import(ibcmd, BuildStage::ImportSources)?;
+    validate_artifact(artifact)?;
+    Ok(output)
 }
 
 /// Require an ibcmd result to be a non-empty regular file before publication.
-fn validate_artifact(artifact: &Path) -> Result<(), BuildError> {
+pub(super) fn validate_artifact(artifact: &Path) -> Result<(), BuildError> {
     let metadata =
         fs::metadata(artifact).map_err(|_| BuildError::ArtifactMissing(artifact.to_owned()))?;
     if !metadata.is_file() {
@@ -251,10 +360,13 @@ fn validate_artifact(artifact: &Path) -> Result<(), BuildError> {
 }
 
 /// Convert an interrupt observed after import into the stage-specific build error.
-fn reject_interrupted_import(ibcmd: &Ibcmd) -> Result<(), BuildError> {
+pub(super) fn reject_interrupted_import(
+    ibcmd: &Ibcmd,
+    stage: BuildStage,
+) -> Result<(), BuildError> {
     if ibcmd.was_interrupted() {
         Err(BuildError::Run {
-            stage: BuildStage::ImportSources,
+            stage,
             source: RunError::Interrupted,
         })
     } else {
@@ -262,35 +374,13 @@ fn reject_interrupted_import(ibcmd: &Ibcmd) -> Result<(), BuildError> {
     }
 }
 
-/// Copy the base CF into a manifested build snapshot and otherwise retain its verified path.
-fn prepare_base_configuration(
-    source: Option<&Path>,
-    manifested: bool,
-    workspace: &Path,
-) -> Result<Option<PathBuf>, BuildError> {
-    if !manifested {
-        return Ok(source.map(Path::to_path_buf));
-    }
-    source
-        .map(|source| {
-            let target = workspace.join("base.cf");
-            match fs::copy(source, &target) {
-                Ok(_) => Ok(target),
-                Err(source) => Err(BuildError::Manifest(ManifestError::SnapshotIo {
-                    path: target,
-                    source,
-                })),
-            }
-        })
-        .transpose()
-}
-
 /// Create the isolated infobase and optionally load the external artifact context.
-fn create_infobase<F>(
+pub(super) fn create_infobase<F>(
     ibcmd: &Ibcmd,
     data: &Path,
     base_configuration: Option<&Path>,
     pid_file: &Path,
+    stage: BuildStage,
     on_output: &mut F,
 ) -> Result<std::process::Output, BuildError>
 where
@@ -304,13 +394,7 @@ where
     if let Some(base_configuration) = base_configuration {
         arguments.push(option("--load", base_configuration));
     }
-    run(
-        ibcmd,
-        BuildStage::CreateInfobase,
-        arguments,
-        pid_file,
-        on_output,
-    )
+    run(ibcmd, stage, arguments, pid_file, on_output)
 }
 
 /// Publish either one ordinary artifact or one checksummed artifact/manifest pair.
@@ -321,7 +405,7 @@ fn publish_result(
     artifact: &Path,
     manifest_seed: Option<manifest::ManifestSeed>,
     snapshot: Option<&manifest::SourceSnapshot>,
-    base_configuration: Option<&Path>,
+    base_configuration: Option<&PreparedBase>,
 ) -> Result<Option<PathBuf>, BuildError> {
     let Some((seed, snapshot)) = manifest_seed.zip(snapshot) else {
         publish(artifact, plan.output())?;
@@ -362,19 +446,7 @@ pub fn preflight(plan: &BuildPlan) -> Result<(), BuildError> {
         .parent()
         .ok_or_else(|| BuildError::OutputParentMissing(plan.infobase_root().to_owned()))?;
     ensure_existing_output_ancestor_is_inside_project(plan, infobase_parent)?;
-    if let Some(path) = plan.base_configuration() {
-        let metadata = fs::metadata(path).map_err(|source| BuildError::BaseConfigurationRead {
-            path: path.to_owned(),
-            source,
-        })?;
-        let has_cf_extension = path
-            .extension()
-            .and_then(OsStr::to_str)
-            .is_some_and(|extension| extension.eq_ignore_ascii_case("cf"));
-        if !metadata.is_file() || !has_cf_extension {
-            return Err(BuildError::BaseConfigurationInvalid(path.to_owned()));
-        }
-    }
+    base_configuration::preflight(plan)?;
     import_source(plan).map(|_| ())
 }
 
@@ -445,7 +517,7 @@ fn import_source(plan: &BuildPlan) -> Result<PathBuf, BuildError> {
 }
 
 /// Run one ibcmd stage and retain only its stable stage plus diagnostic stderr.
-fn run<I, S, F>(
+pub(super) fn run<I, S, F>(
     ibcmd: &Ibcmd,
     stage: BuildStage,
     arguments: I,
@@ -470,6 +542,23 @@ where
             stderr: String::from_utf8_lossy(&output.stderr).trim().to_owned(),
         })
     }
+}
+
+/// Retain process diagnostics in stage order for callers without a streaming renderer.
+pub(super) fn collect_tool_output(
+    prefix: &[u8],
+    created: Option<&std::process::Output>,
+    imported: &std::process::Output,
+) -> Vec<u8> {
+    let mut output = Vec::new();
+    append_process_output(&mut output, prefix);
+    if let Some(created) = created {
+        append_process_output(&mut output, &created.stdout);
+        append_process_output(&mut output, &created.stderr);
+    }
+    append_process_output(&mut output, &imported.stdout);
+    append_process_output(&mut output, &imported.stderr);
+    output
 }
 
 /// Append non-empty process output with a stable newline boundary between streams.
@@ -515,7 +604,7 @@ fn ensure_existing_output_ancestor_is_inside_project(
 }
 
 /// Create `--name=path` without requiring the path to be UTF-8.
-fn option(name: &str, path: &Path) -> OsString {
+pub(super) fn option(name: &str, path: &Path) -> OsString {
     let mut argument = OsString::from(name);
     argument.push(OsStr::new("="));
     argument.push(native_path(path).as_os_str());
@@ -548,7 +637,7 @@ fn ensure_configured_output_is_inside_project(
 }
 
 /// Refuse links and special files as replacement targets.
-fn validate_existing_output(output: &Path) -> Result<(), BuildError> {
+pub(super) fn validate_existing_output(output: &Path) -> Result<(), BuildError> {
     match fs::symlink_metadata(output) {
         Ok(metadata) if metadata.file_type().is_file() => Ok(()),
         Ok(_) => Err(BuildError::InvalidExistingOutput(output.to_owned())),
@@ -598,7 +687,7 @@ fn publish(artifact: &Path, output: &Path) -> Result<(), BuildError> {
 }
 
 /// Publish an artifact and manifest together, restoring the previous pair on failure.
-fn publish_pair(
+pub(super) fn publish_pair(
     artifact: &Path,
     output: &Path,
     staged_manifest: &Path,
@@ -785,13 +874,13 @@ impl Drop for CreatedDirectories {
     }
 }
 
-struct Workspace {
-    path: PathBuf,
+pub(super) struct Workspace {
+    pub path: PathBuf,
 }
 
 impl Workspace {
     /// Create one private workspace next to the destination for same-filesystem publication.
-    fn create(parent: &Path) -> Result<Self, BuildError> {
+    pub(super) fn create(parent: &Path) -> Result<Self, BuildError> {
         for _ in 0..32 {
             let path = unique_sibling(&parent.join("build"), "work");
             match fs::create_dir(&path) {
@@ -811,8 +900,43 @@ impl Workspace {
 impl Drop for Workspace {
     /// Remove snapshots and unpublished artifacts while retaining the managed infobase.
     fn drop(&mut self) {
-        let _ = fs::remove_dir_all(&self.path);
+        if fs::remove_dir_all(&self.path).is_err() {
+            let _ = make_owned_tree_writable(&self.path);
+            let _ = fs::remove_dir_all(&self.path);
+        }
     }
+}
+
+/// Only operation-owned temporary copies are eligible; links are never followed.
+fn make_owned_tree_writable(path: &Path) -> io::Result<()> {
+    let metadata = fs::symlink_metadata(path)?;
+    if metadata.file_type().is_symlink() {
+        return Ok(());
+    }
+    #[cfg(unix)]
+    if metadata.is_dir() {
+        use std::os::unix::fs::PermissionsExt;
+        fs::set_permissions(
+            path,
+            fs::Permissions::from_mode(metadata.permissions().mode() | 0o200),
+        )?;
+    }
+    #[cfg(windows)]
+    if metadata.permissions().readonly() {
+        let mut permissions = metadata.permissions();
+        #[expect(
+            clippy::permissions_set_readonly_false,
+            reason = "This Windows-only branch clears a file attribute; Unix modes are handled separately"
+        )]
+        permissions.set_readonly(false);
+        fs::set_permissions(path, permissions)?;
+    }
+    if metadata.is_dir() {
+        for entry in fs::read_dir(path)? {
+            make_owned_tree_writable(&entry?.path())?;
+        }
+    }
+    Ok(())
 }
 
 #[cfg(test)]

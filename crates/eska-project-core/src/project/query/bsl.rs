@@ -28,6 +28,51 @@ struct Literal {
     pieces: Vec<Piece>,
 }
 
+/// Bound visual attachments independently of the parser's text and token budgets.
+pub const MAX_MULTILINE_CONTINUATIONS: usize = 8192;
+
+/// Exact UTF-8 source boundaries; a consumer associates the opening quote with a semantic hint.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct MultilineString {
+    pub source: Range<usize>,
+    pub continuations: Vec<usize>,
+}
+
+/// Locate complete multiline strings with the same scanner used by query source views.
+///
+/// # Errors
+/// Rejects oversized or incomplete snapshots instead of guessing boundaries in edited text.
+pub fn multiline_strings(input: &str) -> Result<Vec<MultilineString>, QueryError> {
+    super::check_size(input)?;
+    let mut output = Vec::new();
+    let mut total = 0;
+    for token in tokens(input)? {
+        if token.kind != Kind::String || !input[token.range.clone()].contains(['\r', '\n']) {
+            continue;
+        }
+        let literal = literal(input, token.range.start)?;
+        let continuations: Vec<_> = literal
+            .pieces
+            .into_iter()
+            .filter_map(|piece| match piece {
+                Piece::Text(range) if range.start > literal.range.start + 1 => {
+                    Some(range.start - 1)
+                }
+                _ => None,
+            })
+            .collect();
+        total += continuations.len();
+        if total > MAX_MULTILINE_CONTINUATIONS {
+            return Err(QueryError::TooLarge);
+        }
+        output.push(MultilineString {
+            source: literal.range,
+            continuations,
+        });
+    }
+    Ok(output)
+}
+
 /// Decode the whole literal under a source cursor; constructed expressions remain unavailable.
 ///
 /// # Errors

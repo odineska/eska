@@ -134,6 +134,11 @@ path DTO, `ownership`, `preview_token`, `limited_context`. Ownership включ�
 версию генератора, версию анализатора, выбранный контекст, input fingerprint
 и SHA-256 тела. Fingerprint учитывает root/member manifests, выбранные root XML
 и результат генерации; BSL тексты в него не входят.
+Для `configuration.library` учитываются имя, расположение глобального конфига
+и выбранный `source`. Изменения других корректных записей каталога и настроек
+глобального runner не меняют fingerprint. Разрешённый XML библиотеки записывается
+в существующий `source.root`; отдельный контракт библиотек в bsl-analyzer не нужен.
+[Настройка каталога](application-context.md#библиотека-по-имени-из-глобального-каталога).
 Статусы: `current`, `missing`, `stale`, `migration_required`, `managed_conflict`,
 `context_conflict`. Переводы и upstream human logs не входят в JSON.
 

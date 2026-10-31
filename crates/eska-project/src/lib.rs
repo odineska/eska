@@ -6,6 +6,7 @@ pub mod metadata;
 pub mod onboarding;
 pub mod version;
 
+mod add;
 mod analyzer_config;
 mod cli;
 mod context;

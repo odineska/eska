@@ -1,7 +1,7 @@
 //! Validated application declarations; membership and paths come from project discovery.
 
 use std::collections::{BTreeMap, BTreeSet};
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
 
@@ -126,16 +126,29 @@ impl ExtensionScope {
 
 /// A read-only analysis dependency; its directory does not become a workspace member.
 #[derive(Clone, Debug, Deserialize, Eq, Hash, PartialEq, Serialize)]
-#[serde(deny_unknown_fields)]
-pub struct ConfigurationReference {
-    pub source: PathBuf,
+#[serde(rename_all = "snake_case")]
+pub enum ConfigurationReference {
+    Source(PathBuf),
+    Library(String),
 }
 
 impl ConfigurationReference {
-    /// Reject an empty path before resolving it against the owning manifest.
+    /// Reject empty selectors before consulting the filesystem or global catalog.
     pub(crate) fn validate(&self) -> Result<(), SettingsError> {
-        if self.source.as_os_str().is_empty() {
-            return Err(SettingsError::EmptyConfigurationSource);
+        match self {
+            Self::Source(source) if source.as_os_str().is_empty() => {
+                return Err(SettingsError::EmptyConfigurationSource);
+            }
+            Self::Library(name) if name.trim().is_empty() => {
+                return Err(SettingsError::EmptyConfigurationLibrary);
+            }
+            Self::Library(name) if name.contains('\0') => {
+                return Err(SettingsError::InvalidName {
+                    field: "analysis.configuration.library",
+                    value: name.clone(),
+                });
+            }
+            _ => {}
         }
         Ok(())
     }
@@ -167,6 +180,26 @@ pub struct Application {
 }
 
 impl Application {
+    /// Project IDE activity without changing the declared manifest composition.
+    pub(super) fn with_members(&self, members: &std::collections::BTreeSet<ProjectName>) -> Self {
+        let mut selected = self.clone();
+        if matches!(&selected.configuration, Some(Configuration::Member(name)) if !members.contains(name))
+        {
+            selected.configuration = None;
+        }
+        selected.extensions.retain(|name| members.contains(name));
+        selected
+            .external_objects
+            .retain(|name| members.contains(name));
+        selected
+            .extension_dependencies
+            .retain(|name, _| members.contains(name));
+        selected
+            .extension_scopes
+            .retain(|name, _| members.contains(name));
+        selected
+    }
+
     /// Return the main configuration's workspace member name.
     #[must_use]
     pub const fn configuration(&self) -> Option<&ProjectName> {
@@ -178,9 +211,9 @@ impl Application {
 
     /// Return the analysis-only base without enrolling it in build or VCS operations.
     #[must_use]
-    pub fn configuration_source(&self) -> Option<&Path> {
+    pub const fn configuration_reference(&self) -> Option<&ConfigurationReference> {
         match &self.configuration {
-            Some(Configuration::Reference(reference)) => Some(&reference.source),
+            Some(Configuration::Reference(reference)) => Some(reference),
             _ => None,
         }
     }
@@ -471,6 +504,7 @@ pub struct RawApplication {
 pub enum SettingsError {
     ExtensionScopeLocation,
     EmptyConfigurationSource,
+    EmptyConfigurationLibrary,
     ConfigurationReferenceScope,
     ManagedAnalyzerField {
         field: String,
