@@ -11,6 +11,7 @@ use std::{
     time::{Duration, Instant},
 };
 
+mod activity;
 mod analyzer;
 mod editing;
 mod numbering;
@@ -30,7 +31,14 @@ struct Client {
 impl Client {
     /// Read protocol stdout on another thread so each assertion has a finite timeout.
     fn new(locale: &str) -> Self {
-        let mut child = Command::new(env!("CARGO_BIN_EXE_eska"))
+        Self::with_config(locale, None)
+    }
+    fn with_config(locale: &str, config: Option<&std::path::Path>) -> Self {
+        let mut command = Command::new(env!("CARGO_BIN_EXE_eska"));
+        if let Some(config) = config {
+            command.env("ESKA_CONFIG_DIR", config);
+        }
+        let mut child = command
             .args(["--lang", locale, "ide", "--stdio"])
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
@@ -171,7 +179,7 @@ fn targeted_support_protocol_is_bounded_and_locale_independent() {
         let mut client = Client::new(locale);
         let initialize = client.initialize(locale);
         assert_eq!(initialize["capabilities"]["supportFiles"], true);
-        assert_eq!(initialize["apiVersion"]["minor"], 34);
+        assert_eq!(initialize["apiVersion"]["minor"], 35);
         let open = client.open(&directory.0);
         let result = client.ok(
             "metadata/supportFiles",

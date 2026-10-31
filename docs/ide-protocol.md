@@ -2090,3 +2090,55 @@ query-сессии сохраняют существующий domain `query_fai
 `writable` по-прежнему определяет core. Пустые `.eska/source-locks/*.lock` —
 постоянные inode для OS leases: закрытие последнего handle/процесса снимает
 владение, сами имена не удаляются. Числовой ID другой сессии права не предоставляет.
+
+### API 1.35: локальная активность проектов workspace
+
+Handshake 1.35 объявляет `workspaceActivity: {schemaVersion:1,localPersistence:true}`.
+При `workspace/open` и `project/info` workspace получает
+`activity: {schemaVersion:1,revision:<sha256>,hideDisabled:<bool>}`. Каждый проект
+дополнительно содержит `displayName` и
+`activity: {enabled:<bool>,requiredBy:[{application:<name>,project:<name>}]}`.
+`requiredBy` перечисляет активных потребителей отключённой зависимости во всех
+объявленных приложениях; это не включает второй контекст LSP автоматически.
+Standalone-проект не отключается. Клиенты API до 1.35 сохраняют прежний охват.
+
+Request-only `workspace/activitySet` принимает `sessionId`, `revision`,
+`projectId`, `enabled`; `workspace/activityFilter` — `sessionId`, `revision`,
+`hideDisabled`. Ответ и notification `workspace/activityChanged` содержат полный
+актуальный `project/info`. Изменения проверяются по точной ревизии; ошибка
+`workspace_activity_failed` содержит машинный `reason` (`conflict`, `busy`,
+`invalid_state`, `resource_limit`, `unsafe_path`, `io`, `workspace_required`,
+`storage_unavailable`, `context_changed`). Повреждённое состояние не заменяется
+пустым. Сохранение происходит атомарно под отдельной блокировкой.
+
+Состояние хранится в `state/workspaces/<sha256 canonical workspace root>/activity.json`
+рядом с пользовательским `config.toml` (в том числе при `ESKA_CONFIG_DIR`).
+Ключ проекта вычисляется из физического корня, независимо от имени, группы и
+позиции. Новые проекты включены; фильтр по умолчанию выключен. Чтение отсутствующего
+состояния ничего не создаёт. Manifest, исходники и состав CLI/CI не меняются.
+
+Отключение повышает поколение и освобождает metadata session и search index;
+повторное включение открывает свежую session с новым поколением. Минимальная
+отключённая строка использует сохранённое имя и ID без чтения XML или дискового
+кеша. Manifest discovery продолжает проверять структуру workspace и пути.
+Metadata-запросы к отключённому проекту получают `project_inactive`. Ранее
+открытые query-сессии, их checkpoint и явные ограничения исходников сохраняются;
+очистка, чтение private draft и подтверждение уже начатого применения допустимы.
+Явное `source/protection` использует временную checked session без запуска индекса.
+Открытие файла и поиск не включают проект автоматически.
+
+`analyzer/context`, `configStatus`, `configPrepare`, `acquire` подключения API 1.35
+используют активную проекцию выбранного приложения: базу и транзитивные зависимости
+активных расширений; для внешних объектов — полный необходимый runtime-контекст
+базы и расширений. Ненужные members исключаются через upstream `source.exclude`.
+При отсутствии активных потребителей возвращается `workspace_inactive`, а собственная
+аренда освобождается. Самостоятельные CLI-команды используют полный объявленный состав.
+
+Request-only `analyzer/activityUpdate` принимает обычные `start`, `application?`,
+`analyzer`, `timeoutSeconds?` и собственный `leaseId`. Он валидирует новую проекцию,
+обновляет производный config и возвращает обычную configuration с новым `leaseId`.
+На время публикации освобождается только аренда этого подключения; чужая аренда
+оставляет `busy`, а прежняя собственная аренда восстанавливается при неизменных
+входах. Клиент может применить поддерживаемое обновление конфигурации upstream
+без смены PID. Документы отключённых проектов закрываются только в LSP; буферы
+редактора сохраняются. Последний потребитель прекращает процесс и наблюдение.

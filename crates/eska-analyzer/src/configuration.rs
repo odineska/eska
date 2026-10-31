@@ -60,6 +60,7 @@ pub struct Plan {
     pub status: Status,
     pub token: String,
     pub(crate) manifest: Vec<u8>,
+    activity: Option<eska_project_core::project::activity::State>,
 }
 
 impl Plan {
@@ -84,6 +85,38 @@ pub fn inspect(start: &Path, application: Option<&str>) -> Result<Plan, Error> {
         .map_err(|error| Error::Context(Box::new(error)))?;
     let manifest = read(context.root(), &context.root().join("eska.toml"))?;
     build(context, manifest, None)
+}
+
+/// Inspect the IDE's effective sources; an entirely inactive application has no analyzer context.
+///
+/// # Errors
+/// Preserves normal context, policy and filesystem validation errors.
+pub fn inspect_active(
+    start: &Path,
+    application: Option<&str>,
+    activity: &eska_project_core::project::activity::State,
+) -> Result<Option<Plan>, Error> {
+    application::resolve_active(start, application, activity)
+        .map_err(|error| Error::Context(Box::new(error)))?
+        .map(|context| {
+            let manifest = read(context.root(), &context.root().join("eska.toml"))?;
+            let mut plan = build(context, manifest, None)?;
+            plan.activity = Some(activity.clone());
+            Ok(plan)
+        })
+        .transpose()
+}
+
+fn reinspect(plan: &Plan) -> Result<Plan, Error> {
+    match &plan.activity {
+        Some(activity) => inspect_active(
+            plan.context.root(),
+            plan.ownership.context.as_deref(),
+            activity,
+        )?
+        .ok_or(Error::StalePreview),
+        None => inspect(plan.context.root(), plan.ownership.context.as_deref()),
+    }
 }
 
 /// Rebuild a proposed policy while all source, topology and platform inputs stay unchanged.
@@ -162,6 +195,7 @@ pub(crate) fn build(
         status,
         token,
         manifest,
+        activity: None,
     })
 }
 
@@ -181,7 +215,7 @@ pub fn prepare(plan: &Plan, analyzer: &Analyzer<'_>, switch_context: bool) -> Re
         analyzer.validate(plan.context.root())?;
         analyzer.check_config(plan.context.root(), &plan.path())?;
         ensure_snapshot(plan)?;
-        return inspect(plan.context.root(), plan.ownership.context.as_deref());
+        return reinspect(plan);
     }
     let _lock = ConfigLock::exclusive(plan.context.root())?;
     ensure_snapshot(plan)?;
@@ -190,7 +224,7 @@ pub fn prepare(plan: &Plan, analyzer: &Analyzer<'_>, switch_context: bool) -> Re
     analyzer.check_config(plan.context.root(), candidate.path())?;
     ensure_snapshot(plan)?;
     candidate.publish(&plan.path())?;
-    inspect(plan.context.root(), plan.ownership.context.as_deref())
+    reinspect(plan)
 }
 
 /// Acquire a shared lease only for exactly the config which was prepared for this context.
@@ -232,9 +266,25 @@ pub fn inspect_leased(start: &Path, application: Option<&str>) -> Result<(Plan, 
     Ok((plan, Lease { _lock: lock }))
 }
 
+/// Inspect and lease only the current IDE activity projection.
+///
+/// # Errors
+/// A changed/noncurrent configuration is rejected before the language client starts.
+pub fn inspect_leased_active(
+    start: &Path,
+    application: Option<&str>,
+    activity: &eska_project_core::project::activity::State,
+) -> Result<Option<(Plan, Lease)>, Error> {
+    let Some(plan) = inspect_active(start, application, activity)? else {
+        return Ok(None);
+    };
+    let lease = lease(&plan)?;
+    Ok(Some((plan, lease)))
+}
+
 /// Detect manifest/root edits even if the generated file itself has not changed.
 pub(crate) fn ensure_snapshot(plan: &Plan) -> Result<(), Error> {
-    let current = inspect(plan.context.root(), plan.ownership.context.as_deref())?;
+    let current = reinspect(plan)?;
     if current.token != plan.token {
         return Err(Error::StalePreview);
     }
@@ -318,6 +368,24 @@ pub(crate) fn generate(
                 externals.push(toml::Value::Table(external));
             }
         }
+    }
+    if !context.excluded_sources().is_empty() {
+        let mut excluded = match source.remove("exclude") {
+            None => Vec::new(),
+            Some(toml::Value::Array(values)) if values.iter().all(toml::Value::is_str) => values,
+            _ => {
+                return Err(Error::InvalidPolicy {
+                    field: "source.exclude".into(),
+                });
+            }
+        };
+        for path in context.excluded_sources() {
+            let path = toml::Value::String(portable(relative(context.root(), path)?)?);
+            if !excluded.contains(&path) {
+                excluded.push(path);
+            }
+        }
+        source.insert("exclude".into(), toml::Value::Array(excluded));
     }
     source.insert("extensions".into(), toml::Value::Array(extensions));
     source.insert("externals".into(), toml::Value::Array(externals));
