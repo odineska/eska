@@ -1,0 +1,78 @@
+{
+  "task": "T150",
+  "date": "2026-10-31",
+  "status": "done",
+  "commits": {
+    "explorer": [
+      "8c4064d",
+      "bbcca4b"
+    ]
+  },
+  "architecture": {
+    "grouping": "Virtual adapter groups use backend project types, separately for each visible member type; configurations and standalone roots stay at the original level.",
+    "identity": "Project identities are unchanged. Group keys include the workspace and type; group objects and expansion survive reconnects of the same workspace.",
+    "navigation": "getParent supplies virtual ancestors, group-only roots count as published, and manifest reconnects restore surviving metadata selections through backend-supplied identities.",
+    "directory_feedback": "A support query caches directory classification until source/policy invalidation. Directory decoration requests cannot cause an infinite publication/root-refresh loop; conversion into a file performs a fresh protection check."
+  },
+  "explorer": {
+    "typecheck": "passed",
+    "compile": "passed",
+    "tests": {
+      "passed": 422,
+      "failed": 0,
+      "skipped": 10
+    }
+  },
+  "native": {
+    "platform": "Linux ARM64",
+    "editor": "VS Code 1.144.0",
+    "display": "XWayland",
+    "suite": "eska-vscode-explorer/test/project-groups-host.cjs",
+    "pristine_extension_host_sha256": "2074cc8d484643df2d255135fa8a85a11acfdba4e537991e1e9df7da86f7d678",
+    "cases": [
+      {
+        "locale": "en",
+        "artifacts": "eska-playground/t150-native-en-3fqwih6g",
+        "passed": true,
+        "cases": [
+          "independent_threshold_extension",
+          "independent_threshold_report",
+          "independent_threshold_processing",
+          "native_search_reveal_file_refresh_selection_and_expansion",
+          "two_to_one_extension",
+          "two_to_one_report",
+          "two_to_one_processing",
+          "all_project_roots_grouped_cold_reveal"
+        ],
+        "recorded_backends_exited": true
+      },
+      {
+        "locale": "ru",
+        "artifacts": "eska-playground/t150-native-ru-234sdee0",
+        "passed": true,
+        "cases": [
+          "independent_threshold_extension",
+          "independent_threshold_report",
+          "independent_threshold_processing",
+          "native_search_reveal_file_refresh_selection_and_expansion",
+          "two_to_one_extension",
+          "two_to_one_report",
+          "two_to_one_processing",
+          "all_project_roots_grouped_cold_reveal"
+        ],
+        "recorded_backends_exited": true
+      }
+    ]
+  },
+  "regression": {
+    "symptom": "After workspace membership changes, repeated native directory decorations caused root notifications that prevented TreeView.reveal from completing.",
+    "diagnosis": "A disposable acceptance window measured 126 publications from SupportController.queryFiles during the failing sequence; catalogs are absent from the file policy map and were re-enqueued after every publication.",
+    "test": "test/support-directories.test.mjs isolates the real controller in a Node child with a mocked native boundary; directory feedback stays bounded and a later file receives its current readonly protection.",
+    "temporary_editor_instrumentation": "The owned temporary VS Code was instrumented for diagnosis, then restored byte-for-byte before both final native acceptances."
+  },
+  "limits": [
+    "Native Windows, macOS and VSCodium acceptance has not been performed.",
+    "The hidden-disabled filter integration belongs to T151 and is checked when that task is implemented."
+  ],
+  "source_changes": "No product operation rewrites manifests or sources. Native tests edit only their own workspace manifest to change membership."
+}
