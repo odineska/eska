@@ -1,0 +1,147 @@
+{
+  "task": "T151",
+  "date": "2026-10-31",
+  "status": "done",
+  "commits": {
+    "eska": [
+      "02357c7",
+      "8b0319d",
+      "7aad46b"
+    ],
+    "explorer": [
+      "b44736d"
+    ]
+  },
+  "architecture": {
+    "activity": "Private schema-1 state beside user config, canonical-root hashed workspace/project identities, exact-byte CAS and OS lock; defaults and new members active; filter independent.",
+    "metadata": "Inactive sessions retain only root identity, presentation and explicit edit ownership/history. Index/source/cache ownership is dropped. Checked generation increases on both transitions; stale reads cannot revive nodes.",
+    "dependencies": "Manifest-only per-application projection retains the base/transitive extension dependencies or the external-object runtime composition. Disabled requiredBy lists active consumers across declared applications.",
+    "analyzer": "The selected application retains one live process while needed. Scoped plans merge hard source.exclude, preserve CLI scope and bind returned analysisContext to the leased snapshot. Only the owned lease is released for validation; foreign lease contention is preserved.",
+    "editor": "Per-member request cancellation and observers; disabled native wire documents close without touching buffers or Undo. Reenable uses the latest unsaved body. Last consumer releases source/catalog observers and process.",
+    "tree": "Minimal inactive rows without metadata requests; explicit enable/disable and persistent hide/show actions available in title/palette even when all member rows are hidden. Type-group thresholds use visible members."
+  },
+  "rust": {
+    "fmt_check": "passed",
+    "check": "passed",
+    "clippy_all_targets_all_features_deny_warnings": "passed",
+    "tests": {
+      "passed": 1410,
+      "failed": 0,
+      "ignored": 18
+    },
+    "test_root": "canonical sibling eska-playground",
+    "test_threads": 2
+  },
+  "explorer": {
+    "compile_and_typecheck": "passed",
+    "tests": {
+      "passed": 430,
+      "failed": 0,
+      "skipped": 10
+    },
+    "final_tree_and_wire_document_tests": {
+      "passed": 10,
+      "failed": 0,
+      "skipped": 1
+    },
+    "locale_keys": "matched",
+    "native_fixture_python_and_javascript_syntax": "passed"
+  },
+  "native": {
+    "en": {
+      "vscode": "1.144.0",
+      "analyzer": "0.4.2",
+      "platform": "Linux ARM64 / XWayland",
+      "passed": true,
+      "cases": [
+        "native_disable_cancels_pending_preparation_and_reaps_validator",
+        "shared_base_and_extension_definitions",
+        "disable_during_index_drops_nodes_watchers_and_vfs_without_restarting_shared_lsp",
+        "disabled_file_does_not_analyse_or_activate",
+        "dirty_buffer_and_other_project_identity_preserved",
+        "persistent_filter_recalculates_t150_threshold_without_lsp_restart",
+        "enable_reopens_latest_native_buffer_and_preserves_undo_redo",
+        "disabled_dependencies_show_consumers_across_applications_and_preserve_shared_definitions",
+        "last_consumer_releases_lsp_metadata_and_project_watchers",
+        "backend_restart_restores_hidden_inactive_workspace_and_dirty_buffer",
+        "all_hidden_keeps_show_action_and_open_does_not_start_lsp",
+        "explicit_enable_restores_dependency_context_without_rewriting_sources_or_manifests",
+        "IDE_restart_restores_activity_and_filter",
+        "IDE_restart_open_disabled_does_not_activate_or_write_sources",
+        "IDE_restart_enable_reuses_shared_lsp"
+      ],
+      "case_count": 15,
+      "shared_lsp_pid": 803331,
+      "all_recorded_processes_exited": true,
+      "recorded_pids": [
+        803265,
+        803306,
+        803331,
+        803879,
+        803892,
+        804218,
+        804250
+      ],
+      "artifacts": "../eska-playground/t151-native-en-ygkc02k7",
+      "eviction_counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    "ru": {
+      "vscode": "1.144.0",
+      "analyzer": "0.4.2",
+      "platform": "Linux ARM64 / XWayland",
+      "passed": true,
+      "cases": [
+        "native_disable_cancels_pending_preparation_and_reaps_validator",
+        "shared_base_and_extension_definitions",
+        "disable_during_index_drops_nodes_watchers_and_vfs_without_restarting_shared_lsp",
+        "disabled_file_does_not_analyse_or_activate",
+        "dirty_buffer_and_other_project_identity_preserved",
+        "persistent_filter_recalculates_t150_threshold_without_lsp_restart",
+        "enable_reopens_latest_native_buffer_and_preserves_undo_redo",
+        "disabled_dependencies_show_consumers_across_applications_and_preserve_shared_definitions",
+        "last_consumer_releases_lsp_metadata_and_project_watchers",
+        "backend_restart_restores_hidden_inactive_workspace_and_dirty_buffer",
+        "all_hidden_keeps_show_action_and_open_does_not_start_lsp",
+        "explicit_enable_restores_dependency_context_without_rewriting_sources_or_manifests",
+        "IDE_restart_restores_activity_and_filter",
+        "IDE_restart_open_disabled_does_not_activate_or_write_sources",
+        "IDE_restart_enable_reuses_shared_lsp"
+      ],
+      "case_count": 15,
+      "shared_lsp_pid": 801480,
+      "all_recorded_processes_exited": true,
+      "recorded_pids": [
+        801417,
+        801460,
+        801480,
+        802034,
+        802046,
+        802377,
+        802484
+      ],
+      "artifacts": "../eska-playground/t151-native-ru-b8b7_gzv",
+      "eviction_counts": [
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "unchanged": {
+    "manifests_and_sources": "byte-checked in each native run",
+    "CLI_CI_scope": "full declared composition, checked by CLI and core/configuration tests",
+    "dirty_documents": "preserved across activity transitions and backend restart",
+    "user_profiles": "only unique fixture profiles/config directories used"
+  },
+  "limitations": [
+    "Native checks cover Linux ARM64 / VS Code 1.144.0 / bsl-analyzer 0.4.2; Windows, macOS, VSCodium and other analyzer versions were not natively accepted for T151.",
+    "One selected application owns the language process (multiContext remains false); requiredBy covers declarations across applications and does not start another context.",
+    "Manifest discovery still validates workspace layout and source directories; inactive root XML and disk metadata caches are not read.",
+    "Two IDE launches prove activity/filter persistence. Extension-test hosts deliberately skip native hot-exit backups; dirty buffers were verified through activity and backend reconnect instead.",
+    "Preference writes use CAS; an independently changed state requires reconnect rather than overwriting the other writer."
+  ]
+}
