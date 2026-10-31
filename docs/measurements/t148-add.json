@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "task": "T148",
+  "part": "add",
+  "date": "2026-10-31",
+  "part_status": "passed",
+  "task_complete": false,
+  "environment": {
+    "os": "Linux",
+    "architecture": "aarch64",
+    "rust": "rustc 1.99.1 (58cf8f9c3 2026-10-13)"
+  },
+  "rust_checks": {
+    "fmt": "passed",
+    "check": "passed",
+    "clippy_all_targets_all_features_deny_warnings": "passed",
+    "tests": {
+      "passed": 1379,
+      "failed": 0,
+      "ignored": 18
+    }
+  },
+  "installed_libraries": {
+    "ssl_3_1": {
+      "path": "~/.eska/lib/ssl_3_1",
+      "source": "src/cf",
+      "revision": "da8aa1fcef273f6e61bbb7ec9ea3107cac32cabc",
+      "receipt_matches_head": true,
+      "source_matches_git": true,
+      "library_manifest_created": true,
+      "Version": "3.1.12.335",
+      "CompatibilityMode": "Version8_3_24"
+    },
+    "ssl_3_2": {
+      "path": "~/.eska/lib/ssl_3_2",
+      "source": "src/cf",
+      "revision": "c821e2a3f606225554d97577b7c3e61cec244628",
+      "receipt_matches_head": true,
+      "source_matches_git": true,
+      "library_manifest_created": true,
+      "Version": "3.2.1.541",
+      "CompatibilityMode": "Version8_5_1"
+    }
+  },
+  "manual_checks": {
+    "first_ssl31": {
+      "exit": 0,
+      "elapsed_seconds": 24.503291178998552
+    },
+    "first_ssl32_seconds_rounded": 18.32,
+    "offline_repeat": "passed with PATH empty and absent ESKA_VCS_BINARY",
+    "offline_second_consumer": "passed",
+    "source_context_after_add": {
+      "report": "ssl_3_1",
+      "processing": "ssl_3_1",
+      "report-ssl32": "ssl_3_2"
+    },
+    "manifest_idempotent": true,
+    "root_wrapper_and_project_owner": "passed"
+  },
+  "core_checks": [
+    "unknown names and non-external types rejected before fetch",
+    "different library or direct source conflicts preserve the original setting",
+    "occupied unowned installation remains intact",
+    "invalid XML, failed fetch and cancellation leave no partial registration or binding",
+    "cancel after registration restores an absent original catalog and removes only the new installation",
+    "project write failure restores existing catalog bytes and user policy",
+    "workspace root and member edits during download are retained and abort publication",
+    "an installation lease prevents a competing fetch",
+    "existing vendor manifest bytes and uncommitted library files are retained"
+  ],
+  "native_baseline": {
+    "library": "ssl_3_1",
+    "platform": "8.3.27.2342",
+    "runner": "onec-alt10",
+    "external_type": "CatalogRef.Пользователи",
+    "sample_interval_seconds": 0.02,
+    "cf_ready": 17.655743507999432,
+    "consumer_ready": 23.23634513399884,
+    "exit": 0,
+    "total_seconds": 24.621883217001596,
+    "artifact_bytes": 5125
+  },
+  "remaining": [
+    "shared CF and prepared-base reuse between consumers",
+    "Explorer manifest observation on the first add",
+    "final native reuse and concurrency acceptance"
+  ],
+  "limits": [
+    "Native build of ssl_3_2 is not verified: its CompatibilityMode is Version8_5_1, while this host has 8.3.27.2342.",
+    "Windows, macOS and native host runner were not executed in this series.",
+    "The acceptance catalog is isolated in the playground; user default config was not replaced."
+  ],
+  "evidence": {
+    "playground_directory": "t148-add-qmcvidw2",
+    "files": [
+      "first-add.stdout",
+      "first-add.stderr",
+      "add-results.json",
+      "*-context.stdout",
+      "native-build.stdout",
+      "native-build.stderr",
+      "native-baseline.json"
+    ]
+  }
+}

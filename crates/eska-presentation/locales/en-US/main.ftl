@@ -1072,3 +1072,26 @@ build-base-output-overlap = Build output or staging { $output } would write into
 build-configuration-error = Invalid setting { $field } in { $path }: { $reason }
 build-reference-ambiguous = The external object belongs to multiple applications. Set one of its owners as the workspace analysis.default_application.
 build-reference-invalid = Check the configuration reference: it must select accessible Designer XML of a main configuration outside writable projects.
+
+library-add-about = Attach BSP to an external report or data processor
+library-add-usage = eska add <LIBRARY> [-p <PROJECT>] [--format human|json]
+library-add-name-help = Known library: ssl_3_1 or ssl_3_2; an absent library is installed from master into ~/.eska/lib
+library-add-name-value = LIBRARY
+library-add-attached = Library { $name } attached: { $path }
+library-add-unchanged = Library { $name } is already attached: { $path }
+library-add-downloading = Downloading { $name } from master…
+library-add-unknown = Unknown library { $name }. Supported libraries: ssl_3_1 and ssl_3_2.
+library-add-type = The add command attaches a library to an external report or data processor.
+library-add-selection = Select one external project: run add in its directory or use -p with its name.
+library-add-owner = Set one of the shared external project's owners as the workspace analysis.default_application.
+library-add-home = Could not determine the user home directory for .eska/lib.
+library-add-conflict = Setting { $field } in { $path } already selects another base; the original reference was preserved.
+library-add-changed = A file or destination changed during add; user changes were preserved. Retry the command: { $path }
+library-add-locked = Another process is using the library or configuration: { $path }
+library-add-path = The path cannot be stored in TOML as UTF-8: { $path }
+library-add-install-invalid = The directory is occupied or the library installation is invalid; files were preserved: { $path }
+library-add-io = Could not read or write { $path }: { $reason }
+library-add-manifest = Invalid library manifest: { $path }
+library-add-config = Check the manifest: the library must be a Designer XML configuration with source = "src/cf".
+library-add-download = Could not retrieve a complete master snapshot. The installation and original project reference were preserved.
+library-add-rollback = Could not fully restore configuration { $path }. The valid installation was retained for recovery: { $reason }

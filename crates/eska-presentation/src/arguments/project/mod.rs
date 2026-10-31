@@ -1,5 +1,6 @@
 //! Project argument metadata shared with the optional shell, without a project server dependency.
 
+pub mod add;
 pub mod artifact;
 pub mod doctor;
 pub mod init;

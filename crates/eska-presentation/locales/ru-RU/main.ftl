@@ -1072,3 +1072,26 @@ build-base-output-overlap = Результат или служебный кат�
 build-configuration-error = Ошибка настройки { $field } в { $path }: { $reason }
 build-reference-ambiguous = Внешний объект принадлежит нескольким приложениям. Укажите одно из них в analysis.default_application рабочего пространства.
 build-reference-invalid = Проверьте ссылку configuration: нужна доступная выгрузка Designer XML основной конфигурации вне рабочих проектов.
+
+library-add-about = Подключить БСП к внешнему отчёту или обработке
+library-add-usage = eska add <БИБЛИОТЕКА> [-p <ПРОЕКТ>] [--format human|json]
+library-add-name-help = Известная библиотека: ssl_3_1 или ssl_3_2; отсутствующая устанавливается из master в ~/.eska/lib
+library-add-name-value = БИБЛИОТЕКА
+library-add-attached = Библиотека { $name } подключена: { $path }
+library-add-unchanged = Библиотека { $name } уже подключена: { $path }
+library-add-downloading = Загрузка { $name } из master…
+library-add-unknown = Неизвестная библиотека { $name }. Поддерживаются ssl_3_1 и ssl_3_2.
+library-add-type = Команда add подключает библиотеку к внешнему отчёту или обработке.
+library-add-selection = Выберите один внешний проект: запустите add в его каталоге или укажите -p с его именем.
+library-add-owner = Для общего внешнего проекта укажите его приложение в analysis.default_application рабочего пространства.
+library-add-home = Не удалось определить домашний каталог пользователя для .eska/lib.
+library-add-conflict = Настройка { $field } в { $path } уже содержит другую основу; исходная ссылка сохранена.
+library-add-changed = Файл или назначение изменились во время add; пользовательские изменения сохранены. Повторите команду: { $path }
+library-add-locked = Другой процесс использует библиотеку или конфигурацию: { $path }
+library-add-path = Путь нельзя сохранить в TOML как UTF-8: { $path }
+library-add-install-invalid = Каталог занят или установка библиотеки повреждена; файлы сохранены: { $path }
+library-add-io = Ошибка записи или чтения { $path }: { $reason }
+library-add-manifest = Некорректный manifest библиотеки: { $path }
+library-add-config = Проверьте manifest: библиотека должна быть конфигурацией Designer XML с source = "src/cf".
+library-add-download = Не удалось получить полный снимок master. Установка и исходная ссылка проекта сохранены.
+library-add-rollback = Не удалось полностью восстановить конфигурацию { $path }. Исправная установка сохранена для восстановления: { $reason }

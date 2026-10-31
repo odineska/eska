@@ -12,6 +12,7 @@ pub use context::{
 };
 pub(crate) use policy::RawTools;
 pub use policy::{AnalyzerPolicy, CheckPolicy, ToolSettings};
+pub(crate) use reference::owner;
 pub use reference::{ReferenceError, resolve_project_reference};
 pub use settings::{
     AnalysisOptions, AnalysisSettings, Application, ConfigurationReference, ExtensionScope,

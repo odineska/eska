@@ -12,6 +12,8 @@ use serde_json::Value;
 mod support;
 use support::TestDir;
 
+#[path = "cli/add.rs"]
+mod add;
 #[path = "cli/libraries.rs"]
 mod libraries;
 

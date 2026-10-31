@@ -78,7 +78,7 @@ pub fn resolve_project_reference(
 }
 
 /// A shared member needs a default that actually owns it, not an unrelated global choice.
-fn owner<'a>(
+pub fn owner<'a>(
     project: &Project,
     workspace: &'a Workspace,
 ) -> Result<Option<(&'a ProjectName, &'a Application)>, ContextError> {

@@ -71,6 +71,7 @@ Save сохраняет черновик; «Применить» меняет м
 | Сохранение commit | `eska save -m "Сообщение"` | `eska-vcs save -m "Сообщение"` |
 | Метаданные | `eska metadata …` | `eska-project metadata …` |
 | Версия проекта | `eska version` | `eska-project version` |
+| Подключение БСП | `eska add ssl_3_1` | `eska-project add ssl_3_1` |
 
 Это альтернативные входы для одного проекта и одного `eska.toml`.
 Полный комплект содержит оболочку и пять компонентов, включая `eska-fmt`: `eska` запускает
@@ -347,6 +348,12 @@ eska-build build --manifest
 `eska-build build`. Для `eska build --manifest` нужен `eska-vcs`, который
 предоставляет Git-сведения. Прямой build с паспортом работает без VCS
 и отмечает Git как `unavailable`.
+
+Для подключения БСП к существующему отчёту или обработке выполните
+`eska add ssl_3_1` (либо `eska-project add ssl_3_1`). Отсутствующая БСП загружается
+из текущей `master` в пользовательский `~/.eska/lib/ssl_3_1`, регистрируется
+и подключается одной ссылкой. Поддерживается также `ssl_3_2`.
+Повторный `add` использует установленную копию без загрузки обновлений.
 
 Для EPF/ERF ссылка `[analysis.configuration] library = "ssl_3_1"` или
 `source = "../base/src"` используется и при сборке: обычный `build` сам готовит

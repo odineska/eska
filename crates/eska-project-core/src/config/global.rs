@@ -82,7 +82,7 @@ impl GlobalConfig {
     }
 
     /// Parse and validate the strict machine-local TOML schema.
-    fn parse(path: &Path, input: &str) -> Result<Self, GlobalConfigError> {
+    pub(crate) fn parse(path: &Path, input: &str) -> Result<Self, GlobalConfigError> {
         let raw: RawGlobalConfig =
             toml::from_str(input).map_err(|source| GlobalConfigError::Invalid {
                 path: path.to_owned(),
