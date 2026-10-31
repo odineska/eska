@@ -55,6 +55,9 @@ pub(super) fn present_plan_error(error: &PlanError, localizer: &Localizer) -> St
             );
         }
         PlanError::OutputCollision { path } => ("build-output-collision", path),
+        PlanError::LibraryBuildUnsupported => {
+            return localizer.text("build-library-producer-unsupported");
+        }
         PlanError::BaseConfigurationUnsupported => {
             return localizer.text("build-base-configuration-unsupported");
         }
@@ -84,6 +87,9 @@ pub(super) fn present_platform_version_error(
 /// Render build execution failures and identify the failing stage.
 fn present_build_error(error: &BuildError, localizer: &Localizer) -> String {
     match error {
+        BuildError::LibraryConfiguration(source) => {
+            diagnostics::present_global_config_error(source, localizer)
+        }
         BuildError::BaseConfigurationOutputOverlap { source, output } => localizer.format(
             "build-base-output-overlap",
             &[
@@ -91,14 +97,28 @@ fn present_build_error(error: &BuildError, localizer: &Localizer) -> String {
                 ("output", LocalizationValue::Text(&output.to_string_lossy())),
             ],
         ),
-        BuildError::OutputParentMissing(path)
+        BuildError::LibraryCacheUnowned(path)
+        | BuildError::OutputParentMissing(path)
         | BuildError::InvalidExistingOutput(path)
         | BuildError::ArtifactMissing(path)
-        | BuildError::ArtifactEmpty(path) => localizer.format(
+        | BuildError::ArtifactEmpty(path)
+        | BuildError::DescriptorInvalid { path }
+        | BuildError::DescriptorMissing(path)
+        | BuildError::DescriptorsMultiple(path)
+        | BuildError::BaseConfigurationXmlInvalid(path)
+        | BuildError::BaseConfigurationChanged(path)
+        | BuildError::BaseConfigurationInvalid(path) => localizer.format(
             match error {
+                BuildError::LibraryCacheUnowned(_) => "build-library-cache-unowned",
                 BuildError::InvalidExistingOutput(_) => "build-output-existing-invalid",
                 BuildError::ArtifactMissing(_) => "build-artifact-missing",
                 BuildError::ArtifactEmpty(_) => "build-artifact-empty",
+                BuildError::DescriptorInvalid { .. } => "build-descriptor-invalid",
+                BuildError::DescriptorMissing(_) => "build-descriptor-missing",
+                BuildError::DescriptorsMultiple(_) => "build-descriptors-multiple",
+                BuildError::BaseConfigurationXmlInvalid(_) => "build-base-xml-invalid",
+                BuildError::BaseConfigurationChanged(_) => "build-base-configuration-changed",
+                BuildError::BaseConfigurationInvalid(_) => "build-base-configuration-invalid",
                 _ => "build-output-invalid",
             },
             &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
@@ -142,30 +162,6 @@ fn present_build_error(error: &BuildError, localizer: &Localizer) -> String {
                 ),
                 ("reason", LocalizationValue::Text(stderr)),
             ],
-        ),
-        BuildError::DescriptorInvalid { path } => localizer.format(
-            "build-descriptor-invalid",
-            &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
-        ),
-        BuildError::DescriptorMissing(path) => localizer.format(
-            "build-descriptor-missing",
-            &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
-        ),
-        BuildError::DescriptorsMultiple(path) => localizer.format(
-            "build-descriptors-multiple",
-            &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
-        ),
-        BuildError::BaseConfigurationXmlInvalid(path) => localizer.format(
-            "build-base-xml-invalid",
-            &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
-        ),
-        BuildError::BaseConfigurationChanged(path) => localizer.format(
-            "build-base-configuration-changed",
-            &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
-        ),
-        BuildError::BaseConfigurationInvalid(path) => localizer.format(
-            "build-base-configuration-invalid",
-            &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
         ),
         BuildError::BaseConfigurationRead { path, source } => {
             present_io_error("build-base-configuration-read", path, source, localizer)
@@ -263,6 +259,7 @@ pub(super) const fn plan_error_code(error: &PlanError) -> &'static str {
         PlanError::UnexpectedExtension { .. } => "output-extension-invalid",
         PlanError::OutputCollision { .. } => "output-collision",
         PlanError::BaseConfigurationUnsupported => "base-configuration-unsupported",
+        PlanError::LibraryBuildUnsupported => "library-build-unsupported",
     }
 }
 
@@ -331,6 +328,8 @@ pub(super) const fn execution_error_code(error: &BuildExecutionError) -> &'stati
             "snapshot-entry-unsupported"
         }
         BuildError::BaseConfigurationCache { .. } => "base-configuration-cache",
+        BuildError::LibraryCacheUnowned(_) => "library-cache-unowned",
+        BuildError::LibraryConfiguration(_) => "library-configuration",
         BuildError::Manifest(ManifestError::SnapshotProject(_)) => "snapshot-invalid",
         BuildError::Manifest(ManifestError::ArtifactRead { .. }) => "artifact-checksum",
         BuildError::Manifest(ManifestError::Write { .. }) => "manifest-write",
@@ -356,9 +355,11 @@ pub(super) const fn execution_error_stage(error: &BuildExecutionError) -> Option
         BuildExecutionError::Build(BuildError::Manifest(_) | BuildError::SourceSnapshot(_)) => {
             Some("snapshot")
         }
-        BuildExecutionError::Build(BuildError::BaseConfigurationCache { .. }) => {
-            Some("prepare-base-configuration")
-        }
+        BuildExecutionError::Build(
+            BuildError::BaseConfigurationCache { .. }
+            | BuildError::LibraryCacheUnowned(_)
+            | BuildError::LibraryConfiguration(_),
+        ) => Some("prepare-base-configuration"),
         BuildExecutionError::Build(_) | BuildExecutionError::Output(_) => None,
         BuildExecutionError::Vcs(_) => Some("provenance"),
     }

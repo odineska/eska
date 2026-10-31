@@ -1095,3 +1095,6 @@ library-add-manifest = Некорректный manifest библиотеки: {
 library-add-config = Проверьте manifest: библиотека должна быть конфигурацией Designer XML с source = "src/cf".
 library-add-download = Не удалось получить полный снимок master. Установка и исходная ссылка проекта сохранены.
 library-add-rollback = Не удалось полностью восстановить конфигурацию { $path }. Исправная установка сохранена для восстановления: { $reason }
+
+build-library-producer-unsupported = Общий результат библиотеки можно создавать только для основной конфигурации.
+build-library-cache-unowned = Каталог подготовки библиотеки не распознан как принадлежащий ESKA; проверьте его содержимое: { $path }

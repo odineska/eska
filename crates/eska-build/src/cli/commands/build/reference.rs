@@ -15,6 +15,25 @@ use super::{
 };
 
 impl BuildHandler<'_> {
+    pub(super) fn library_producer(
+        &self,
+        project: &eska_project_core::project::Project,
+        localizer: &Localizer,
+    ) -> Result<Option<eska_project_core::application::LibrarySelection>, ExitCode> {
+        if project.configuration().project_type() != ProjectType::Configuration {
+            return Ok(None);
+        }
+        eska_project_core::config::global::registered_library(project.source()).map_err(|error| {
+            self.fail(
+                "machine-config",
+                Some("configuration"),
+                None,
+                &crate::cli::diagnostics::present_global_config_error(&error, localizer),
+                localizer,
+                ExitCode::FAILURE,
+            )
+        })
+    }
     /// Resolve every declaration before machine-tool discovery so catalog errors retain ownership.
     pub(super) fn base_configurations(
         &self,

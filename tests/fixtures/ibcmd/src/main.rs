@@ -137,6 +137,12 @@ fn create_infobase(arguments: &[OsString]) {
         eprintln!("fake infobase creation failed: {error}");
         process::exit(9);
     }
+    if let Some(cf) = option_path(arguments, "--load=")
+        && let Err(error) = fs::copy(cf, data.join("loaded.cf"))
+    {
+        eprintln!("fake infobase loading failed: {error}");
+        process::exit(9);
+    }
 }
 
 /// Produce a deterministic artifact or an explicitly requested failure.

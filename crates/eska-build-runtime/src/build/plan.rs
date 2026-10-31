@@ -67,6 +67,7 @@ pub struct BuildPlan {
     platform_version: PlatformVersion,
     source: PathBuf,
     base_configuration: Option<BaseConfiguration>,
+    library_build: Option<LibrarySelection>,
     artifacts_directory: PathBuf,
     infobase_root: PathBuf,
     output: PathBuf,
@@ -123,6 +124,7 @@ impl BuildPlan {
                 .ok_or(PlanError::PlatformVersionMissing)?,
             source: project.source().to_owned(),
             base_configuration: None,
+            library_build: None,
             infobase_root: infobase_root(&artifacts_directory, &artifact_name),
             artifacts_directory,
             output,
@@ -173,6 +175,7 @@ impl BuildPlan {
                 .ok_or(PlanError::PlatformVersionMissing)?,
             source: project.source().to_owned(),
             base_configuration: None,
+            library_build: None,
             infobase_root: infobase_root(&artifacts_directory, &artifact_name),
             artifacts_directory,
             output,
@@ -209,6 +212,23 @@ impl BuildPlan {
     #[must_use]
     pub const fn base_configuration(&self) -> Option<&BaseConfiguration> {
         self.base_configuration.as_ref()
+    }
+
+    #[must_use]
+    pub const fn library_build(&self) -> Option<&LibrarySelection> {
+        self.library_build.as_ref()
+    }
+
+    /// Bind a registered configuration producer to the same prepared result as its consumers.
+    ///
+    /// # Errors
+    /// Rejects a library producer on artifact kinds other than a main configuration.
+    pub fn with_library_build(mut self, library: LibrarySelection) -> Result<Self, PlanError> {
+        if self.artifact_type != ArtifactType::Configuration {
+            return Err(PlanError::LibraryBuildUnsupported);
+        }
+        self.library_build = Some(library);
+        Ok(self)
     }
 
     #[must_use]
@@ -318,6 +338,7 @@ pub enum PlanError {
         path: PathBuf,
     },
     BaseConfigurationUnsupported,
+    LibraryBuildUnsupported,
 }
 
 /// Reject a group in which multiple plans would publish the same artifact.

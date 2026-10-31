@@ -4,7 +4,7 @@
   "part": "add",
   "date": "2026-10-31",
   "part_status": "passed",
-  "task_complete": false,
+  "task_complete": true,
   "environment": {
     "os": "Linux",
     "architecture": "aarch64",
@@ -81,11 +81,7 @@
     "total_seconds": 24.621883217001596,
     "artifact_bytes": 5125
   },
-  "remaining": [
-    "shared CF and prepared-base reuse between consumers",
-    "Explorer manifest observation on the first add",
-    "final native reuse and concurrency acceptance"
-  ],
+  "remaining": [],
   "limits": [
     "Native build of ssl_3_2 is not verified: its CompatibilityMode is Version8_5_1, while this host has 8.3.27.2342.",
     "Windows, macOS and native host runner were not executed in this series.",
@@ -102,5 +98,6 @@
       "native-build.stderr",
       "native-baseline.json"
     ]
-  }
+  },
+  "completion_evidence": "t148-build-libraries.json"
 }

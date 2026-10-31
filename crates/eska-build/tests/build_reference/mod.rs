@@ -4,6 +4,8 @@ use super::*;
 use eska_build_runtime::build::BuildPlan;
 use std::fmt::Write as _;
 
+mod shared;
+
 fn catalog(root: &Path, entries: &[(&str, &Path)]) -> PathBuf {
     fs::create_dir_all(root).unwrap();
     let mut text = "[build]\nrunner='host'\n".to_owned();
@@ -192,15 +194,21 @@ fn configured_base_refreshes_on_content_path_and_platform_and_preserves_results_
     document(&run(&[], "8.3.28.1000", false), true);
     assert!(!marker.exists());
     let previous = fs::read(plan.output()).unwrap();
-    let cache = fs::read(plan.infobase_root().join("base.cf")).unwrap();
+    let cache_path = shared::namespaces(&catalog)
+        .into_iter()
+        .find(|root| {
+            let state: Value =
+                serde_json::from_slice(&fs::read(root.join("base.json")).unwrap()).unwrap();
+            state["platform_version"] == "8.3.28.1000"
+        })
+        .unwrap()
+        .join("base.cf");
+    let cache = fs::read(&cache_path).unwrap();
     fs::write(other.source().join("Payload.bsl"), "bad").unwrap();
     let failed = document(&run(&[], "8.3.28.1000", true), false);
     assert_eq!(failed["error"]["stage"], "prepare-base-configuration");
     assert_eq!(fs::read(plan.output()).unwrap(), previous);
-    assert_eq!(
-        fs::read(plan.infobase_root().join("base.cf")).unwrap(),
-        cache
-    );
+    assert_eq!(fs::read(&cache_path).unwrap(), cache);
 }
 
 #[test]

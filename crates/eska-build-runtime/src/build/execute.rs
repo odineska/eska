@@ -9,7 +9,7 @@ use std::{
 use super::{
     ArtifactType, BuildPlan, Ibcmd, ManagedInfobaseError, ManifestError, ProcessStream, RunError,
     base_configuration::{self, PreparedBase},
-    infobase::LockedInfobase,
+    infobase::{LockedInfobase, ManagedInfobase},
     manifest,
 };
 use crate::platform_path::native_path;
@@ -81,6 +81,8 @@ pub enum BuildError {
     Manifest(ManifestError),
     SourceSnapshot(super::SourceSnapshotError),
     BaseConfigurationCache { path: PathBuf, source: io::Error },
+    LibraryCacheUnowned(PathBuf),
+    LibraryConfiguration(Box<eska_project_core::config::global::GlobalConfigError>),
 }
 
 /// Build a native 1C artifact through a reusable managed file infobase.
@@ -170,10 +172,6 @@ where
         ensure_configured_output_is_inside_project(plan, parent)?;
     }
     let workspace = Workspace::create(parent)?;
-    let pid_file = workspace.path.join("ibcmd.pid");
-    let artifact = workspace
-        .path
-        .join(format!("artifact.{}", plan.artifact_type().extension()));
     let snapshot = manifest_project
         .map(|project| manifest::capture_source(project, plan, &workspace.path))
         .transpose()
@@ -182,36 +180,82 @@ where
         || plan.clone(),
         |snapshot| plan.with_snapshot_source(snapshot.source().to_owned()),
     );
-    let import_source = import_source(&effective_plan)?;
     let lease = LockedInfobase::acquire(plan).map_err(BuildError::ManagedInfobase)?;
-    let effective_base_configuration = base_configuration::prepare(
+    let artifact = prepare_artifact(
+        plan,
+        &effective_plan,
+        ibcmd,
+        lease,
+        &workspace.path,
+        on_output,
+    )?;
+    let manifest_path = publish_result(
+        plan,
+        ibcmd,
+        &workspace.path,
+        &artifact.path,
+        manifest_seed,
+        snapshot.as_ref(),
+        artifact.base.as_ref(),
+    )?;
+    created_directories.keep();
+    Ok(BuildResult {
+        output: plan.output().to_owned(),
+        manifest: manifest_path,
+        duration: started.elapsed(),
+        tool_output: artifact.tool_output,
+    })
+}
+
+struct PreparedArtifact {
+    path: PathBuf,
+    base: Option<PreparedBase>,
+    tool_output: Vec<u8>,
+}
+
+fn prepare_artifact<F>(
+    plan: &BuildPlan,
+    effective_plan: &BuildPlan,
+    ibcmd: &Ibcmd,
+    lease: LockedInfobase<'_>,
+    workspace: &Path,
+    on_output: &mut F,
+) -> Result<PreparedArtifact, BuildError>
+where
+    F: FnMut(BuildStage, ProcessStream, &[u8]),
+{
+    let import_source = import_source(effective_plan)?;
+    if let Some(library) = plan.library_build() {
+        let prepared = super::shared_library::prepare(
+            library,
+            effective_plan.source(),
+            ibcmd,
+            workspace,
+            on_output,
+        )?;
+        return Ok(PreparedArtifact {
+            path: prepared.path,
+            base: None,
+            tool_output: prepared.tool_output,
+        });
+    }
+    let mut effective_base_configuration = base_configuration::prepare(
         plan,
         ibcmd,
         lease.root(),
-        &workspace.path,
-        manifest_project.is_some(),
+        workspace,
+        effective_plan.source() != plan.source(),
         on_output,
     )?;
-    let base_cf = effective_base_configuration
-        .as_ref()
-        .map(|base| base.path.as_path());
-    let infobase = lease
-        .prepare(base_cf)
-        .map_err(BuildError::ManagedInfobase)?;
-    let create_output = if infobase.needs_creation() {
-        let output = create_infobase(
-            ibcmd,
-            infobase.data(),
-            base_cf,
-            &pid_file,
-            BuildStage::CreateInfobase,
-            on_output,
-        )?;
-        infobase.mark_ready().map_err(BuildError::ManagedInfobase)?;
-        Some(output)
-    } else {
-        None
-    };
+    let pid_file = workspace.join("ibcmd.pid");
+    let artifact = workspace.join(format!("artifact.{}", plan.artifact_type().extension()));
+    let (infobase, create_output) = prepare_infobase(
+        lease,
+        effective_base_configuration.as_mut(),
+        ibcmd,
+        &pid_file,
+        on_output,
+    )?;
     let import_output = import_artifact(
         ibcmd,
         &import_source,
@@ -220,16 +264,6 @@ where
         &pid_file,
         on_output,
     )?;
-    let manifest_path = publish_result(
-        plan,
-        ibcmd,
-        &workspace.path,
-        &artifact,
-        manifest_seed,
-        snapshot.as_ref(),
-        effective_base_configuration.as_ref(),
-    )?;
-    created_directories.keep();
     let tool_output = collect_tool_output(
         effective_base_configuration
             .as_ref()
@@ -237,12 +271,48 @@ where
         create_output.as_ref(),
         &import_output,
     );
-    Ok(BuildResult {
-        output: plan.output().to_owned(),
-        manifest: manifest_path,
-        duration: started.elapsed(),
+    Ok(PreparedArtifact {
+        path: artifact,
+        base: effective_base_configuration,
         tool_output,
     })
+}
+
+fn prepare_infobase<F>(
+    lease: LockedInfobase<'_>,
+    mut base: Option<&mut PreparedBase>,
+    ibcmd: &Ibcmd,
+    pid: &Path,
+    on_output: &mut F,
+) -> Result<(ManagedInfobase, Option<std::process::Output>), BuildError>
+where
+    F: FnMut(BuildStage, ProcessStream, &[u8]),
+{
+    let infobase = lease
+        .prepare(base.as_ref().map(|base| base.path.as_path()))
+        .map_err(BuildError::ManagedInfobase)?;
+    let mut created = None;
+    if infobase.needs_creation() {
+        if let Some(shared) = base.as_mut().and_then(|base| base.shared.as_mut()) {
+            shared.materialize(ibcmd, infobase.data(), on_output)?;
+        } else {
+            created = Some(create_infobase(
+                ibcmd,
+                infobase.data(),
+                base.as_ref().map(|base| base.path.as_path()),
+                pid,
+                BuildStage::CreateInfobase,
+                on_output,
+            )?);
+        }
+        infobase.mark_ready().map_err(BuildError::ManagedInfobase)?;
+    }
+    if let Some(base) = base
+        && let Some(shared) = base.shared.take()
+    {
+        base.tool_output = shared.tool_output;
+    }
+    Ok((infobase, created))
 }
 
 /// Import only into the leased database and validate the staged artifact before publication.
@@ -804,13 +874,13 @@ impl Drop for CreatedDirectories {
     }
 }
 
-struct Workspace {
-    path: PathBuf,
+pub(super) struct Workspace {
+    pub path: PathBuf,
 }
 
 impl Workspace {
     /// Create one private workspace next to the destination for same-filesystem publication.
-    fn create(parent: &Path) -> Result<Self, BuildError> {
+    pub(super) fn create(parent: &Path) -> Result<Self, BuildError> {
         for _ in 0..32 {
             let path = unique_sibling(&parent.join("build"), "work");
             match fs::create_dir(&path) {

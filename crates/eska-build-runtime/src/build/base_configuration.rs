@@ -26,6 +26,7 @@ pub(super) struct PreparedBase {
     pub path: PathBuf,
     pub context: Option<BaseContext>,
     pub tool_output: Vec<u8>,
+    pub shared: Option<super::shared_library::PreparedLibrary>,
 }
 
 #[derive(Serialize)]
@@ -48,6 +49,17 @@ struct State {
 
 /// Validate the selected input before creating any build state or invoking the platform.
 pub(super) fn preflight(plan: &BuildPlan) -> Result<(), BuildError> {
+    if let Some(library) = plan.library_build() {
+        super::shared_library::preflight(library)?;
+        // The configured artifact directory is excluded from root-layout XML snapshots.
+        // An arbitrary explicit result inside that XML would become input on the next build.
+        if plan.has_explicit_output() && !plan.output().starts_with(plan.artifacts_directory()) {
+            super::shared_library::ensure_outside(
+                &library.source,
+                plan.output().parent().unwrap_or_else(|| plan.output()),
+            )?;
+        }
+    }
     let Some(input) = plan.base_configuration() else {
         return Ok(());
     };
@@ -66,7 +78,7 @@ pub(super) fn preflight(plan: &BuildPlan) -> Result<(), BuildError> {
                 return Err(BuildError::BaseConfigurationInvalid(path.clone()));
             }
         }
-        BaseConfiguration::DesignerXml { source, .. } => {
+        BaseConfiguration::DesignerXml { source, library } => {
             if !source.is_absolute() {
                 return Err(BuildError::BaseConfigurationXmlInvalid(source.clone()));
             }
@@ -80,6 +92,9 @@ pub(super) fn preflight(plan: &BuildPlan) -> Result<(), BuildError> {
                 return Err(BuildError::BaseConfigurationXmlInvalid(path));
             }
             validate_readonly_source(plan, source)?;
+            if let Some(library) = library {
+                super::shared_library::preflight(library)?;
+            }
         }
     }
     Ok(())
@@ -142,9 +157,18 @@ where
                 path,
                 context: None,
                 tool_output: Vec::new(),
+                shared: None,
             }))
         }
         Some(BaseConfiguration::DesignerXml { source, library }) => {
+            if let Some(library) = library {
+                let shared =
+                    super::shared_library::prepare(library, source, ibcmd, workspace, on_output)?;
+                let mut result =
+                    prepared(shared.path.clone(), Some(library), shared.snapshot.clone());
+                result.shared = Some(shared);
+                return Ok(Some(result));
+            }
             prepare_xml(source, library.as_ref(), ibcmd, root, workspace, on_output).map(Some)
         }
     }
@@ -190,33 +214,7 @@ where
     let snapshot = snapshot_id(
         &source_snapshot::capture(source, &copied, &[]).map_err(BuildError::SourceSnapshot)?,
     );
-    let data = workspace.join("base-data");
-    let pid = workspace.join("base.pid");
-    let created = execute::create_infobase(
-        ibcmd,
-        &data,
-        None,
-        &pid,
-        BuildStage::PrepareBaseConfiguration,
-        on_output,
-    )?;
-    let artifact = workspace.join("base-built.cf");
-    let imported = execute::run(
-        ibcmd,
-        BuildStage::PrepareBaseConfiguration,
-        [
-            "infobase".into(),
-            "config".into(),
-            "import".into(),
-            execute::option("--data", &data),
-            execute::option("--out", &artifact),
-            native_path(&copied).as_os_str().to_owned(),
-        ],
-        &pid,
-        on_output,
-    )?;
-    execute::reject_interrupted_import(ibcmd, BuildStage::PrepareBaseConfiguration)?;
-    execute::validate_artifact(&artifact)?;
+    let (artifact, output) = compile_xml(&copied, ibcmd, workspace, on_output)?;
     let state = State {
         schema_version: 1,
         input,
@@ -237,8 +235,50 @@ where
         return Err(BuildError::BaseConfigurationChanged(cf));
     }
     let mut result = prepared(used, library, snapshot);
-    result.tool_output = execute::collect_tool_output(&[], Some(&created), &imported);
+    result.tool_output = output;
     Ok(result)
+}
+
+pub(super) fn compile_xml<F>(
+    source: &Path,
+    ibcmd: &Ibcmd,
+    workspace: &Path,
+    on_output: &mut F,
+) -> Result<(PathBuf, Vec<u8>), BuildError>
+where
+    F: FnMut(BuildStage, ProcessStream, &[u8]),
+{
+    let data = workspace.join("base-data");
+    let pid = workspace.join("base.pid");
+    let created = execute::create_infobase(
+        ibcmd,
+        &data,
+        None,
+        &pid,
+        BuildStage::PrepareBaseConfiguration,
+        on_output,
+    )?;
+    let artifact = workspace.join("base-built.cf");
+    let imported = execute::run(
+        ibcmd,
+        BuildStage::PrepareBaseConfiguration,
+        [
+            "infobase".into(),
+            "config".into(),
+            "import".into(),
+            execute::option("--data", &data),
+            execute::option("--out", &artifact),
+            native_path(source).as_os_str().to_owned(),
+        ],
+        &pid,
+        on_output,
+    )?;
+    execute::reject_interrupted_import(ibcmd, BuildStage::PrepareBaseConfiguration)?;
+    execute::validate_artifact(&artifact)?;
+    Ok((
+        artifact,
+        execute::collect_tool_output(&[], Some(&created), &imported),
+    ))
 }
 
 fn prepared(
@@ -249,6 +289,7 @@ fn prepared(
     PreparedBase {
         path,
         tool_output: Vec::new(),
+        shared: None,
         context: Some(BaseContext {
             kind: "designer-xml",
             library: library.map(|entry| entry.name.clone()),

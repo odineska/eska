@@ -245,6 +245,51 @@ pub fn config_path() -> Result<PathBuf, GlobalConfigError> {
         .ok_or(GlobalConfigError::LocationUnavailable)
 }
 
+/// Keep derived library builds in the OS cache, or beside an explicitly separate catalog.
+///
+/// # Errors
+/// Rejects a catalog without an absolute parent; resolving this path never creates files.
+pub fn library_cache_root(config: &Path) -> Result<PathBuf, GlobalConfigError> {
+    let config = std::path::absolute(config).map_err(|source| io_error(config, source))?;
+    if let Some(directories) = BaseDirs::new()
+        && config == directories.config_dir().join("eska/config.toml")
+    {
+        return Ok(directories.cache_dir().join("eska/libraries"));
+    }
+    config
+        .parent()
+        .map(|parent| parent.join("cache/libraries"))
+        .ok_or(GlobalConfigError::LocationUnavailable)
+}
+
+/// Identify a registered configuration project without opening unrelated XML exports.
+///
+/// # Errors
+/// Rejects an invalid catalog; absent and unusable unselected paths do not become errors.
+pub fn registered_library(
+    source: &Path,
+) -> Result<Option<crate::application::LibrarySelection>, GlobalConfigError> {
+    let (config, catalog) = load()?;
+    let config = std::path::absolute(&config).map_err(|source| io_error(&config, source))?;
+    let source = fs::canonicalize(source).map_err(|error| io_error(source, error))?;
+    for name in catalog
+        .libraries
+        .keys()
+        .filter(|name| !name.trim().is_empty())
+    {
+        if let Ok(path) = catalog.library_path(&config, name)
+            && fs::canonicalize(&path).ok().as_deref() == Some(source.as_path())
+        {
+            return Ok(Some(crate::application::LibrarySelection {
+                name: name.clone(),
+                config,
+                source,
+            }));
+        }
+    }
+    Ok(None)
+}
+
 /// Create the default config without overwriting an existing file.
 ///
 /// # Errors

@@ -192,7 +192,7 @@ impl BuildHandler<'_> {
         let workspace_root = workspace_root(context);
         let mut prepared = Vec::with_capacity(selected_projects.len());
         for (selected, base_configuration) in selected_projects.iter().zip(bases) {
-            let plan = match build_plan(
+            let mut plan = match build_plan(
                 *selected,
                 workspace_root,
                 self.options.output.as_deref(),
@@ -214,6 +214,17 @@ impl BuildHandler<'_> {
                     ));
                 }
             };
+            if let Some(library) = self.library_producer(selected.project(), localizer)? {
+                plan = plan.with_library_build(library).map_err(|error| {
+                    self.fail_project(
+                        plan_error_code(&error),
+                        Some("plan"),
+                        selected.name(),
+                        &present_plan_error(&error, localizer),
+                        localizer,
+                    )
+                })?;
+            }
             prepared.push(PreparedBuild {
                 name: selected.name(),
                 project: selected.project(),

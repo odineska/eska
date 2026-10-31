@@ -1095,3 +1095,6 @@ library-add-manifest = Invalid library manifest: { $path }
 library-add-config = Check the manifest: the library must be a Designer XML configuration with source = "src/cf".
 library-add-download = Could not retrieve a complete master snapshot. The installation and original project reference were preserved.
 library-add-rollback = Could not fully restore configuration { $path }. The valid installation was retained for recovery: { $reason }
+
+build-library-producer-unsupported = A shared library result can only be produced for a main configuration.
+build-library-cache-unowned = The library build directory is not recognized as ESKA-owned; check its contents: { $path }

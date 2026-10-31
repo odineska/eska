@@ -5,7 +5,6 @@ use eska_build_runtime::build::{
     self, BaseConfiguration, BuildError, BuildPlan, BuildStage, Ibcmd, RunnerPreference,
     ToolOptions,
 };
-use eska_project_core::application::LibrarySelection;
 
 fn platform() -> Ibcmd {
     Ibcmd::discover(
@@ -16,16 +15,12 @@ fn platform() -> Ibcmd {
     .unwrap()
 }
 
-fn plan(consumer: &Project, source: &Path, catalog: &Path) -> BuildPlan {
+fn plan(consumer: &Project, source: &Path) -> BuildPlan {
     BuildPlan::new(consumer, None)
         .unwrap()
         .with_base_configuration(Some(BaseConfiguration::DesignerXml {
             source: source.to_owned(),
-            library: Some(LibrarySelection {
-                name: "ssl_3_1".into(),
-                config: catalog.to_owned(),
-                source: source.to_owned(),
-            }),
+            library: None,
         }))
         .unwrap()
 }
@@ -58,7 +53,7 @@ fn xml_base_reuses_verified_cf_and_detects_same_size_same_mtime_changes() {
     let platform = platform();
     for kind in [ProjectType::Processing, ProjectType::Report] {
         let consumer = project(&fixture.0.join(kind.as_str()), kind);
-        let plan = plan(&consumer, library.source(), &fixture.0.join("config.toml"));
+        let plan = plan(&consumer, library.source());
         assert!(run(&plan, &platform) > 0);
         let original = state(&plan);
         let marker = plan.infobase_root().join("data/retained");
@@ -104,7 +99,7 @@ fn xml_base_reuses_verified_cf_and_detects_same_size_same_mtime_changes() {
             serde_json::from_slice(&fs::read(build::manifest_path(plan.output())).unwrap())
                 .unwrap();
         assert_eq!(manifest["source"]["base_context"]["kind"], "designer-xml");
-        assert_eq!(manifest["source"]["base_context"]["library"], "ssl_3_1");
+        assert!(manifest["source"]["base_context"].get("library").is_none());
         assert_eq!(
             manifest["source"]["base_context"]["snapshot_id"],
             state(&plan)["source_snapshot"]
@@ -123,7 +118,7 @@ fn cache_lease_cleanup_and_bad_input_keep_the_previous_artifact() {
     let fixture = support::TestDir::new();
     let library = project(&fixture.0.join("library"), ProjectType::Configuration);
     let consumer = project(&fixture.0.join("consumer"), ProjectType::Report);
-    let plan = plan(&consumer, library.source(), &fixture.0.join("config.toml"));
+    let plan = plan(&consumer, library.source());
     let platform = platform();
     run(&plan, &platform);
     let before = fs::read(plan.output()).unwrap();
@@ -170,7 +165,7 @@ fn readonly_library_permissions_survive_and_temporary_copies_are_removed() {
     let fixture = support::TestDir::new();
     let library = project(&fixture.0.join("library"), ProjectType::Configuration);
     let consumer = project(&fixture.0.join("consumer"), ProjectType::Processing);
-    let plan = plan(&consumer, library.source(), &fixture.0.join("config.toml"));
+    let plan = plan(&consumer, library.source());
     let path = library.source().join("Configuration.xml");
     let original = fs::read(&path).unwrap();
     let permissions = fs::metadata(&path).unwrap().permissions();
