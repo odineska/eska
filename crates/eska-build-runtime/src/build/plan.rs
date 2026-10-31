@@ -4,6 +4,17 @@ use std::{
 };
 
 use super::PlatformVersion;
+use eska_project_core::application::LibrarySelection;
+
+/// Exactly one native base is selected for an external artifact.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub enum BaseConfiguration {
+    Cf(PathBuf),
+    DesignerXml {
+        source: PathBuf,
+        library: Option<LibrarySelection>,
+    },
+}
 use eska_project_core::project::{Project, ProjectType};
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -55,7 +66,7 @@ pub struct BuildPlan {
     artifact_type: ArtifactType,
     platform_version: PlatformVersion,
     source: PathBuf,
-    base_configuration: Option<PathBuf>,
+    base_configuration: Option<BaseConfiguration>,
     artifacts_directory: PathBuf,
     infobase_root: PathBuf,
     output: PathBuf,
@@ -196,8 +207,8 @@ impl BuildPlan {
     }
 
     #[must_use]
-    pub fn base_configuration(&self) -> Option<&Path> {
-        self.base_configuration.as_deref()
+    pub const fn base_configuration(&self) -> Option<&BaseConfiguration> {
+        self.base_configuration.as_ref()
     }
 
     #[must_use]
@@ -231,7 +242,7 @@ impl BuildPlan {
     /// Returns a structured error when this input is used for an unsupported artifact type.
     pub fn with_base_configuration(
         mut self,
-        base_configuration: Option<PathBuf>,
+        base_configuration: Option<BaseConfiguration>,
     ) -> Result<Self, PlanError> {
         if base_configuration.is_some()
             && !matches!(

@@ -39,35 +39,51 @@ pub(super) struct ManagedInfobase {
     _lock: File,
 }
 
-impl ManagedInfobase {
-    /// Lock and prepare the reusable infobase selected by the build plan.
-    ///
-    /// # Errors
-    /// Returns a structured error for inaccessible, busy, or non-owned cache paths.
-    pub(super) fn prepare(
-        plan: &BuildPlan,
-        base_configuration: Option<&Path>,
-    ) -> Result<Self, ManagedInfobaseError> {
+/// One lease spans base preparation, infobase replacement and final publication.
+pub(super) struct LockedInfobase<'a> {
+    plan: &'a BuildPlan,
+    root: PathBuf,
+    lock: File,
+}
+
+impl<'a> LockedInfobase<'a> {
+    pub(super) fn acquire(plan: &'a BuildPlan) -> Result<Self, ManagedInfobaseError> {
         let root = plan.infobase_root().to_owned();
         validate_scope(&root, plan.output_scope_root())?;
-        let state = StateDocument::capture(plan, base_configuration)?;
         let lock = acquire_lock(&root)?;
-        let reusable = validate_owned_root(&root)?
-            && read_state(&root).is_some_and(|saved| saved == state)
-            && root.join("data").is_dir();
-        let needs_creation = plan.recreates_infobase() || !reusable;
-        if needs_creation {
-            reset_owned_root(&root)?;
+        if !validate_owned_root(&root)? {
+            create_owned_root(&root)?;
         }
-        Ok(Self {
-            data: root.join("data"),
-            root,
-            state,
-            needs_creation,
-            _lock: lock,
-        })
+        Ok(Self { plan, root, lock })
     }
 
+    pub(super) fn root(&self) -> &Path {
+        &self.root
+    }
+
+    pub(super) fn prepare(
+        self,
+        base_configuration: Option<&Path>,
+    ) -> Result<ManagedInfobase, ManagedInfobaseError> {
+        let state = StateDocument::capture(self.plan, base_configuration)?;
+        let reusable = read_state(&self.root).is_some_and(|saved| saved == state)
+            && fs::symlink_metadata(self.root.join("data"))
+                .is_ok_and(|metadata| metadata.file_type().is_dir());
+        let needs_creation = self.plan.recreates_infobase() || !reusable;
+        if needs_creation {
+            reset_infobase_data(&self.root)?;
+        }
+        Ok(ManagedInfobase {
+            data: self.root.join("data"),
+            root: self.root,
+            state,
+            needs_creation,
+            _lock: self.lock,
+        })
+    }
+}
+
+impl ManagedInfobase {
     #[must_use]
     pub(super) fn data(&self) -> &Path {
         &self.data
@@ -214,14 +230,8 @@ fn validate_owned_root(root: &Path) -> Result<bool, ManagedInfobaseError> {
     }
 }
 
-/// Replace only a verified owned root and immediately mark the new directory.
-fn reset_owned_root(root: &Path) -> Result<(), ManagedInfobaseError> {
-    if validate_owned_root(root)? {
-        fs::remove_dir_all(root).map_err(|source| ManagedInfobaseError::Io {
-            path: root.to_owned(),
-            source,
-        })?;
-    }
+/// Initialize only a missing root after its sibling lock and ownership check.
+fn create_owned_root(root: &Path) -> Result<(), ManagedInfobaseError> {
     fs::create_dir(root).map_err(|source| ManagedInfobaseError::Io {
         path: root.to_owned(),
         source,
@@ -231,6 +241,29 @@ fn reset_owned_root(root: &Path) -> Result<(), ManagedInfobaseError> {
         path: owner,
         source,
     })
+}
+
+/// Base CF and its snapshot survive replacement of the mutable consumer database.
+fn reset_infobase_data(root: &Path) -> Result<(), ManagedInfobaseError> {
+    let data = root.join("data");
+    match fs::symlink_metadata(&data) {
+        Ok(metadata) => {
+            let result = if metadata.file_type().is_dir() {
+                fs::remove_dir_all(&data)
+            } else {
+                fs::remove_file(&data)
+            };
+            result.map_err(|source| ManagedInfobaseError::Io { path: data, source })?;
+        }
+        Err(error) if error.kind() == io::ErrorKind::NotFound => {}
+        Err(source) => return Err(ManagedInfobaseError::Io { path: data, source }),
+    }
+    let path = root.join(STATE_FILE);
+    match fs::remove_file(&path) {
+        Ok(()) => Ok(()),
+        Err(error) if error.kind() == io::ErrorKind::NotFound => Ok(()),
+        Err(source) => Err(ManagedInfobaseError::Io { path, source }),
+    }
 }
 
 fn read_state(root: &Path) -> Option<StateDocument> {

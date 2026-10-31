@@ -10,7 +10,7 @@ use std::{
 use sha2::{Digest, Sha256};
 
 #[derive(Debug)]
-pub(super) enum Error {
+pub enum Error {
     Io { path: PathBuf, source: io::Error },
     UnsupportedEntry(PathBuf),
 }
@@ -21,22 +21,31 @@ pub(super) enum Error {
 /// Rejects failed I/O and non-regular entries instead of following links outside the source.
 pub(super) fn capture(source: &Path, target: &Path, excluded: &[&Path]) -> Result<Vec<u8>, Error> {
     let mut hash = Sha256::new();
-    copy_directory(source, target, source, excluded, &mut hash)?;
+    visit_directory(source, Some(target), source, excluded, &mut hash)?;
+    Ok(hash.finalize().to_vec())
+}
+
+/// Identify all current bytes without creating a copy or relying on metadata timestamps.
+pub(super) fn digest(source: &Path, excluded: &[&Path]) -> Result<Vec<u8>, Error> {
+    let mut hash = Sha256::new();
+    visit_directory(source, None, source, excluded, &mut hash)?;
     Ok(hash.finalize().to_vec())
 }
 
 /// Copy one directory without following links and hash its exact relative structure and bytes.
-fn copy_directory(
+fn visit_directory(
     source: &Path,
-    target: &Path,
+    target: Option<&Path>,
     root: &Path,
     excluded: &[&Path],
     hash: &mut Sha256,
 ) -> Result<(), Error> {
-    fs::create_dir(target).map_err(|source| Error::Io {
-        path: target.to_owned(),
-        source,
-    })?;
+    if let Some(target) = target {
+        fs::create_dir(target).map_err(|source| Error::Io {
+            path: target.to_owned(),
+            source,
+        })?;
+    }
     let mut entries = fs::read_dir(source)
         .map_err(|source_error| Error::Io {
             path: source.to_owned(),
@@ -60,35 +69,41 @@ fn copy_directory(
         let relative = path
             .strip_prefix(root)
             .expect("directory entries remain below the source root");
-        let destination = target.join(entry.file_name());
+        let destination = target.map(|target| target.join(entry.file_name()));
         let file_type = entry.file_type().map_err(|source| Error::Io {
             path: path.clone(),
             source,
         })?;
         if file_type.is_dir() {
             hash_entry(hash, b'd', relative, &[]);
-            copy_directory(&path, &destination, root, excluded, hash)?;
-            copy_permissions(&path, &destination)?;
+            visit_directory(&path, destination.as_deref(), root, excluded, hash)?;
         } else if file_type.is_file() {
-            let digest = copy_file(&path, &destination)?;
+            let digest = file_digest(&path, destination.as_deref())?;
             hash_entry(hash, b'f', relative, &digest);
         } else {
             return Err(Error::UnsupportedEntry(path));
         }
     }
-    copy_permissions(source, target)
+    if let Some(target) = target {
+        copy_permissions(source, target)?;
+    }
+    Ok(())
 }
 
 /// Stream one file once so copied bytes and their checksum cannot diverge.
-fn copy_file(source: &Path, target: &Path) -> Result<Vec<u8>, Error> {
+pub(super) fn file_digest(source: &Path, target: Option<&Path>) -> Result<Vec<u8>, Error> {
     let mut input = File::open(source).map_err(|error| Error::Io {
         path: source.to_owned(),
         source: error,
     })?;
-    let mut output = File::create(target).map_err(|error| Error::Io {
-        path: target.to_owned(),
-        source: error,
-    })?;
+    let mut output = target
+        .map(|path| {
+            File::create(path).map_err(|source| Error::Io {
+                path: path.to_owned(),
+                source,
+            })
+        })
+        .transpose()?;
     let mut hash = Sha256::new();
     let mut buffer = vec![0_u8; 64 * 1024].into_boxed_slice();
     loop {
@@ -99,15 +114,19 @@ fn copy_file(source: &Path, target: &Path) -> Result<Vec<u8>, Error> {
         if read == 0 {
             break;
         }
-        output
-            .write_all(&buffer[..read])
-            .map_err(|error| Error::Io {
-                path: target.to_owned(),
-                source: error,
-            })?;
+        if let Some((output, path)) = output.as_mut().zip(target) {
+            output
+                .write_all(&buffer[..read])
+                .map_err(|source| Error::Io {
+                    path: path.to_owned(),
+                    source,
+                })?;
+        }
         hash.update(&buffer[..read]);
     }
-    copy_permissions(source, target)?;
+    if let Some(target) = target {
+        copy_permissions(source, target)?;
+    }
     Ok(hash.finalize().to_vec())
 }
 

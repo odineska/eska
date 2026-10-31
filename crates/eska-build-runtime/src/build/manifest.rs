@@ -8,7 +8,11 @@ use std::{
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 
-use super::{ArtifactType, BuildPlan, source_snapshot};
+use super::{
+    ArtifactType, BuildPlan,
+    base_configuration::{BaseContext, PreparedBase},
+    source_snapshot,
+};
 use eska_project_core::project::{Project, ProjectPathError, version};
 
 #[derive(Debug)]
@@ -120,7 +124,7 @@ pub(super) fn write(
     platform_version: &str,
     seed: ManifestSeed,
     snapshot: &SourceSnapshot,
-    base_configuration: Option<&Path>,
+    base_configuration: Option<&PreparedBase>,
 ) -> Result<(), ManifestError> {
     let document = ArtifactManifestDocument {
         schema_version: 1,
@@ -139,8 +143,9 @@ pub(super) fn write(
         source: SourceDocument {
             snapshot_id: snapshot.id.clone(),
             git: seed.git,
+            base_context: base_configuration.and_then(|base| base.context.as_ref()),
             base_configuration: base_configuration
-                .map(file_checksum)
+                .map(|base| file_checksum(&base.path))
                 .transpose()?
                 .map(ChecksumDocument::sha256),
         },
@@ -212,13 +217,13 @@ impl VersionDocument {
 }
 
 #[derive(Serialize)]
-struct ArtifactManifestDocument {
+struct ArtifactManifestDocument<'a> {
     schema_version: u8,
     kind: &'static str,
     project: ProjectDocument,
     artifact: ArtifactDocument,
     platform: PlatformDocument,
-    source: SourceDocument,
+    source: SourceDocument<'a>,
 }
 
 #[derive(Serialize)]
@@ -254,11 +259,13 @@ struct PlatformDocument {
 }
 
 #[derive(Serialize)]
-struct SourceDocument {
+struct SourceDocument<'a> {
     snapshot_id: String,
     git: GitProvenance,
     #[serde(skip_serializing_if = "Option::is_none")]
     base_configuration: Option<ChecksumDocument>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    base_context: Option<&'a BaseContext>,
 }
 
 pub use eska_project_core::provenance::GitProvenance;

@@ -634,7 +634,7 @@ fn build_plan(
         ),
         _ => BuildPlan::with_platform_version(selected.project(), output, platform_version),
     }?;
-    plan.with_base_configuration(base_configuration)
+    plan.with_base_configuration(base_configuration.map(build::BaseConfiguration::Cf))
         .map(|plan| plan.with_recreate_infobase(recreate_infobase))
 }
 

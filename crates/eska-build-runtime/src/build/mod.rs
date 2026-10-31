@@ -1,10 +1,12 @@
 //! Build settings, artifact planning and execution for Designer XML projects.
 
+mod base_configuration;
 mod execute;
 mod infobase;
 mod manifest;
 mod plan;
 mod source_snapshot;
+pub use source_snapshot::Error as SourceSnapshotError;
 mod tool;
 
 pub use eska_project_core::project::build::{
@@ -19,7 +21,8 @@ pub use infobase::{
 };
 pub use manifest::{GitProvenance, ManifestError, path_for_artifact as manifest_path};
 pub use plan::{
-    ArtifactType, BuildPlan, PlanError, managed_infobase_root, validate_unique_outputs,
+    ArtifactType, BaseConfiguration, BuildPlan, PlanError, managed_infobase_root,
+    validate_unique_outputs,
 };
 pub use tool::{
     Ibcmd, InstalledPlatform, ProcessStream, RunError, RunnerPreference, ToolError, ToolOptions,

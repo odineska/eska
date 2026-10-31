@@ -1,6 +1,6 @@
 //! Localized build errors and stable machine-facing error classifications.
 
-use std::io;
+use std::{io, path::Path};
 
 use crate::{
     cli::{
@@ -10,7 +10,7 @@ use crate::{
     project::{
         build::{
             BuildError, BuildSettingsError, BuildStage, ManagedInfobaseError, ManifestError,
-            PlanError, RunError, ToolError,
+            PlanError, RunError, SourceSnapshotError, ToolError,
         },
         selection::SelectionError,
     },
@@ -84,6 +84,13 @@ pub(super) fn present_platform_version_error(
 /// Render build execution failures and identify the failing stage.
 fn present_build_error(error: &BuildError, localizer: &Localizer) -> String {
     match error {
+        BuildError::BaseConfigurationOutputOverlap { source, output } => localizer.format(
+            "build-base-output-overlap",
+            &[
+                ("source", LocalizationValue::Text(&source.to_string_lossy())),
+                ("output", LocalizationValue::Text(&output.to_string_lossy())),
+            ],
+        ),
         BuildError::OutputParentMissing(path)
         | BuildError::InvalidExistingOutput(path)
         | BuildError::ArtifactMissing(path)
@@ -108,13 +115,11 @@ fn present_build_error(error: &BuildError, localizer: &Localizer) -> String {
         | BuildError::Publish { path, source }
         | BuildError::Restore { path, source }
         | BuildError::DescriptorDirectory { path, source }
-        | BuildError::DescriptorRead { path, source } => localizer.format(
-            "build-filesystem-error",
-            &[
-                ("path", LocalizationValue::Text(&path.to_string_lossy())),
-                ("reason", LocalizationValue::Text(&source.to_string())),
-            ],
-        ),
+        | BuildError::DescriptorRead { path, source }
+        | BuildError::SourceSnapshot(SourceSnapshotError::Io { path, source })
+        | BuildError::BaseConfigurationCache { path, source } => {
+            present_io_error("build-filesystem-error", path, source, localizer)
+        }
         BuildError::Run { stage, source } => localizer.format(
             match source {
                 RunError::Interrupted => "build-interrupted",
@@ -150,34 +155,50 @@ fn present_build_error(error: &BuildError, localizer: &Localizer) -> String {
             "build-descriptors-multiple",
             &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
         ),
+        BuildError::BaseConfigurationXmlInvalid(path) => localizer.format(
+            "build-base-xml-invalid",
+            &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
+        ),
+        BuildError::BaseConfigurationChanged(path) => localizer.format(
+            "build-base-configuration-changed",
+            &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
+        ),
         BuildError::BaseConfigurationInvalid(path) => localizer.format(
             "build-base-configuration-invalid",
             &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
         ),
-        BuildError::BaseConfigurationRead { path, source } => localizer.format(
-            "build-base-configuration-read",
-            &[
-                ("path", LocalizationValue::Text(&path.to_string_lossy())),
-                ("reason", LocalizationValue::Text(&source.to_string())),
-            ],
-        ),
+        BuildError::BaseConfigurationRead { path, source } => {
+            present_io_error("build-base-configuration-read", path, source, localizer)
+        }
         BuildError::ManagedInfobase(error) => {
             diagnostics::present_managed_infobase_error(error, localizer)
         }
+        BuildError::SourceSnapshot(SourceSnapshotError::UnsupportedEntry(path)) => localizer
+            .format(
+                "build-manifest-entry-unsupported",
+                &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
+            ),
         BuildError::Manifest(error) => present_manifest_error(error, localizer),
     }
+}
+
+/// The same I/O fields retain their domain label and localized operating-system reason.
+fn present_io_error(key: &str, path: &Path, source: &io::Error, localizer: &Localizer) -> String {
+    localizer.format(
+        key,
+        &[
+            ("path", LocalizationValue::Text(&path.to_string_lossy())),
+            ("reason", LocalizationValue::Text(&source.to_string())),
+        ],
+    )
 }
 
 /// Render source-snapshot and manifest failures without adding localized text to core.
 fn present_manifest_error(error: &ManifestError, localizer: &Localizer) -> String {
     match error {
-        ManifestError::SnapshotIo { path, source } => localizer.format(
-            "build-manifest-filesystem-error",
-            &[
-                ("path", LocalizationValue::Text(&path.to_string_lossy())),
-                ("reason", LocalizationValue::Text(&source.to_string())),
-            ],
-        ),
+        ManifestError::SnapshotIo { path, source } => {
+            present_io_error("build-manifest-filesystem-error", path, source, localizer)
+        }
         ManifestError::SnapshotEntryUnsupported(path) => localizer.format(
             "build-manifest-entry-unsupported",
             &[("path", LocalizationValue::Text(&path.to_string_lossy()))],
@@ -214,6 +235,7 @@ fn present_streamed_build_error(error: &BuildError, localizer: &Localizer) -> St
 /// Localize the fixed pipeline stage while retaining enum-based control flow.
 fn stage_name(stage: BuildStage, localizer: &Localizer) -> String {
     localizer.text(match stage {
+        BuildStage::PrepareBaseConfiguration => "build-stage-prepare-base-configuration",
         BuildStage::CreateInfobase => "build-stage-create-infobase",
         BuildStage::ImportSources => "build-stage-import-sources",
     })
@@ -292,6 +314,9 @@ pub(super) const fn execution_error_code(error: &BuildExecutionError) -> &'stati
         BuildError::DescriptorsMultiple(_) => "descriptors-multiple",
         BuildError::BaseConfigurationRead { .. } => "base-configuration-read",
         BuildError::BaseConfigurationInvalid(_) => "base-configuration-invalid",
+        BuildError::BaseConfigurationXmlInvalid(_) => "base-xml-invalid",
+        BuildError::BaseConfigurationChanged(_) => "base-configuration-changed",
+        BuildError::BaseConfigurationOutputOverlap { .. } => "base-configuration-output-overlap",
         BuildError::ManagedInfobase(ManagedInfobaseError::Io { .. }) => "infobase-io",
         BuildError::ManagedInfobase(ManagedInfobaseError::Locked { .. }) => "infobase-locked",
         BuildError::ManagedInfobase(ManagedInfobaseError::Unowned { .. }) => "infobase-unowned",
@@ -299,10 +324,13 @@ pub(super) const fn execution_error_code(error: &BuildExecutionError) -> &'stati
             "infobase-outside-scope"
         }
         BuildError::ManagedInfobase(ManagedInfobaseError::StateSerialize(_)) => "infobase-state",
-        BuildError::Manifest(ManifestError::SnapshotIo { .. }) => "snapshot-io",
-        BuildError::Manifest(ManifestError::SnapshotEntryUnsupported(_)) => {
+        BuildError::SourceSnapshot(SourceSnapshotError::Io { .. })
+        | BuildError::Manifest(ManifestError::SnapshotIo { .. }) => "snapshot-io",
+        BuildError::SourceSnapshot(SourceSnapshotError::UnsupportedEntry(_))
+        | BuildError::Manifest(ManifestError::SnapshotEntryUnsupported(_)) => {
             "snapshot-entry-unsupported"
         }
+        BuildError::BaseConfigurationCache { .. } => "base-configuration-cache",
         BuildError::Manifest(ManifestError::SnapshotProject(_)) => "snapshot-invalid",
         BuildError::Manifest(ManifestError::ArtifactRead { .. }) => "artifact-checksum",
         BuildError::Manifest(ManifestError::Write { .. }) => "manifest-write",
@@ -316,6 +344,7 @@ pub(super) const fn execution_error_stage(error: &BuildExecutionError) -> Option
         BuildExecutionError::Build(
             BuildError::Run { stage, .. } | BuildError::CommandFailed { stage, .. },
         ) => Some(match stage {
+            BuildStage::PrepareBaseConfiguration => "prepare-base-configuration",
             BuildStage::CreateInfobase => "create-infobase",
             BuildStage::ImportSources => "import-sources",
         }),
@@ -324,7 +353,12 @@ pub(super) const fn execution_error_stage(error: &BuildExecutionError) -> Option
             | ManifestError::Write { .. }
             | ManifestError::Serialize(_),
         )) => Some("manifest"),
-        BuildExecutionError::Build(BuildError::Manifest(_)) => Some("snapshot"),
+        BuildExecutionError::Build(BuildError::Manifest(_) | BuildError::SourceSnapshot(_)) => {
+            Some("snapshot")
+        }
+        BuildExecutionError::Build(BuildError::BaseConfigurationCache { .. }) => {
+            Some("prepare-base-configuration")
+        }
         BuildExecutionError::Build(_) | BuildExecutionError::Output(_) => None,
         BuildExecutionError::Vcs(_) => Some("provenance"),
     }

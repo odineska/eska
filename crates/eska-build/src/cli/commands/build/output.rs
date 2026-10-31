@@ -116,12 +116,19 @@ fn write_project_build_preview(
         &display_path(item.plan.source()),
         localizer,
     );
-    if let Some(path) = item.plan.base_configuration() {
-        write_build_preview_field(
-            "build-preview-base-configuration",
-            &display_path(path),
-            localizer,
-        );
+    if let Some(input) = item.plan.base_configuration() {
+        let (key, path) = match input {
+            eska_build_runtime::build::BaseConfiguration::Cf(path) => {
+                ("build-preview-base-configuration", path)
+            }
+            eska_build_runtime::build::BaseConfiguration::DesignerXml { source, library } => {
+                if let Some(entry) = library {
+                    write_build_preview_field("build-preview-library", &entry.name, localizer);
+                }
+                ("build-preview-base-xml", source)
+            }
+        };
+        write_build_preview_field(key, &display_path(path), localizer);
     }
     write_build_preview_field(
         "build-preview-infobase",

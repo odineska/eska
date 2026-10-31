@@ -1057,3 +1057,14 @@ analysis-library-config-error = Не удалось подключить биб�
 analysis-library-source-error = Источник { $path } библиотеки { $name } из { $config } недоступен или не подходит выбранному контексту.
 config-library-unknown = Библиотека { $name } не зарегистрирована в { $path }.
 config-library-source-empty = Укажите непустой source библиотеки { $name } в { $path }.
+
+build-stage-prepare-base-configuration = подготовка базовой конфигурации
+
+build-preview-library = · Библиотека: { $value }
+
+build-preview-base-xml = · Designer XML основы (подготовка и загрузка CF): { $value }
+
+build-base-xml-invalid = Основа должна быть абсолютным путём к Designer XML основной конфигурации: { $path }
+
+build-base-configuration-changed = Подготовленная базовая конфигурация изменилась во время операции. Повторите сборку: { $path }
+build-base-output-overlap = Результат или служебный каталог сборки { $output } попадает в исходники основы { $source }, доступные только для чтения. Выберите другой выходной каталог.

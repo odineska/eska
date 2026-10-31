@@ -1057,3 +1057,14 @@ analysis-library-config-error = Could not attach library { $name }: { $detail }
 analysis-library-source-error = Library { $name } from { $config } has an unavailable source { $path } or cannot be used in this context.
 config-library-unknown = Library { $name } is not registered in { $path }.
 config-library-source-empty = Set a nonempty source for library { $name } in { $path }.
+
+build-stage-prepare-base-configuration = native base configuration preparation
+
+build-preview-library = · Library: { $value }
+
+build-preview-base-xml = · Base Designer XML (prepare CF and load): { $value }
+
+build-base-xml-invalid = The base must be an absolute Designer XML directory of a main configuration: { $path }
+
+build-base-configuration-changed = The prepared base configuration changed during the operation. Retry the build: { $path }
+build-base-output-overlap = Build output or staging { $output } would write into the read-only base source { $source }. Choose a different output directory.
