@@ -19,13 +19,16 @@ eska update --check --format json
 
 - **Cargo:** каталог `<root>/bin`, запись ESKA из crates.io в `.crates2.json`
   и `cargo install --list --root <root>` должны соответствовать запущенной версии.
-  Затем выполняется `cargo install eska-project eska-check eska-build eska-vcs eska
+  Затем выполняется `cargo install eska-project eska-check eska-build eska-vcs eska-fmt eska
   --locked --registry crates-io --version …`
   с прежними root, target, profile и features. Доступные версии берутся из
   официального sparse index crates.io; отозванные, предварительные выпуски
   и неизвестные версии схемы индекса исключаются. Web API crates.io не требуется.
 - **Официальный установщик:** проверяются receipt cargo-dist, источник
-  `1c-tooling/eska` и принадлежность записи запущенному файлу. Axoupdater получает
+  и принадлежность записи запущенному файлу. В текущем коде допустим только
+  прежний источник `1c-tooling/eska`; receipt нового владельца `odineska`
+  пока не распознаётся. В таком случае повторите официальный установщик
+  с [публичного сайта](https://odineska.github.io/eska/). Axoupdater получает
   стабильный релиз GitHub и запускает его установщик для прежнего каталога.
 - **Неизвестная установка:** возвращается `unsupported-installation` без записи.
   Это относится в том числе к обычному `target/debug/eska`, ручной копии без
@@ -41,7 +44,7 @@ root и повторно проверяется версия файла. Сам 
 установки проверяется фактический вывод `eska --version`.
 
 Старые версии без команды `update` нужно один раз обновить прежним способом:
-установить пять пакетов командой из README (с прежними опциями при нестандартной
+установить шесть пакетов (включая `eska-fmt`, с прежними опциями при нестандартной
 установке) либо повторить официальный shell/PowerShell installer. Это также нужно
 при первом переходе с монолитной Cargo-версии. Затем достаточно
 `eska update`. Обновление CLI не обновляет расширение VS Code.
