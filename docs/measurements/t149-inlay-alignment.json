@@ -1,0 +1,347 @@
+{
+  "task": "T149",
+  "date": "2026-10-31",
+  "status": "done",
+  "commits": {
+    "eska": [
+      "6694148"
+    ],
+    "explorer": [
+      "4ec6e66"
+    ]
+  },
+  "architecture": {
+    "syntax": "Existing core BSL scanner; request-only language/multilineStrings API 1.34, exact version and SHA-256, bounded upload; no client parser",
+    "rendering": "Shared editor-font parameter labels and transparent continuation prefixes; full advance includes preceding and nested parameter hints and configured padding",
+    "lifecycle": "Version/document/model/context checks; shared per-version geometry; canceled readers cannot cancel another split; owned styles and uploads disposed"
+  },
+  "rust": {
+    "fmt": "passed",
+    "check": "passed",
+    "clippy_all_targets_all_features": "passed",
+    "tests": {
+      "passed": 1396,
+      "failed": 0,
+      "ignored": 18,
+      "threads": 2
+    }
+  },
+  "explorer": {
+    "typecheck": "passed",
+    "compile": "passed",
+    "tests": {
+      "passed": 417,
+      "failed": 0,
+      "skipped": 10
+    }
+  },
+  "native": {
+    "platform": "Linux ARM64",
+    "editor": "VS Code 1.144.0",
+    "display": "XWayland, --ozone-platform=x11",
+    "analyzer": "bsl-analyzer 0.4.2 local ARM64 build from release tag",
+    "suite": "eska-vscode-explorer/test/inlay-alignment-host.cjs",
+    "fixture": "BOM, CRLF, Cyrillic, tabs, escaped quotes, emoji, builtin/local/nested calls and two consecutive multiline arguments",
+    "copy": "A real editor copy event writes only to its test DataTransfer; the system clipboard is untouched",
+    "cases": [
+      {
+        "locale": "en",
+        "artifacts": "eska-playground/t149-native-en-rv3aeydi",
+        "passed": true,
+        "samples": [
+          {
+            "theme": "Default Dark Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": false,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": false,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": true,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": true,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": false,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": false,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": true,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": true,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": false,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": false,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": true,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": true,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": false,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": false,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": true,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": true,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          }
+        ],
+        "lifecycle": {
+          "source_and_disk_unchanged": true,
+          "split": true,
+          "undo_redo": true,
+          "copy": true,
+          "scroll": true,
+          "reopen": true,
+          "restart": true
+        }
+      },
+      {
+        "locale": "ru",
+        "artifacts": "eska-playground/t149-native-ru-a7xyotp8",
+        "passed": true,
+        "samples": [
+          {
+            "theme": "Default Dark Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": false,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": false,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": true,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": true,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": false,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": false,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": true,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Dark Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": true,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": false,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": false,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": true,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "DejaVu Sans",
+            "size": 12,
+            "padding": true,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": false,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": false,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": true,
+            "zoom": 0,
+            "maximum_alignment_error_css_px": 0.015625
+          },
+          {
+            "theme": "Default Light Modern",
+            "font": "monospace",
+            "size": 18,
+            "padding": true,
+            "zoom": 1,
+            "maximum_alignment_error_css_px": 1.52587890625e-05
+          }
+        ],
+        "lifecycle": {
+          "source_and_disk_unchanged": true,
+          "split": true,
+          "undo_redo": true,
+          "copy": true,
+          "scroll": true,
+          "reopen": true,
+          "restart": true
+        }
+      }
+    ]
+  },
+  "limits": [
+    "Alignment is enabled only for ordinary plain parameter hints with editor.inlayHints.enabled=on; related labels use the editor font, and independent single-line calls keep native styling.",
+    "Conditional Ctrl+Alt visibility, explicit accessibilitySupport=on, actionable/rich/resolvable hints stay native without alignment.",
+    "Soft wrapping and arbitrary multiline expressions are outside the string-literal scope.",
+    "Native Windows, macOS and VSCodium acceptance has not been performed."
+  ],
+  "test_environment_notes": [
+    "Wayland displayed the window but did not deliver native typing/Undo even after DOM focus. XWayland restored the native focus and completed both full matrices.",
+    "Closing a source tab can retain its TextDocument in VS Code; acceptance verifies no visible editor and no owned styles, then opens the source again. Close/reopen identity races are covered by unit tests."
+  ]
+}
