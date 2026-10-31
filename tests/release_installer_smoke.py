@@ -63,7 +63,7 @@ def main():
         try:
             for _ in range(2):
                 result = subprocess.run(command, cwd=stand, env=environment,
-                                        capture_output=True, text=True, timeout=120)
+                                        capture_output=True, text=True, encoding="utf-8", timeout=120)
                 assert result.returncode == 0, result
                 assert "no checksums to verify" not in result.stdout + result.stderr
             receipt = json.loads((stand / "config/eska/eska-receipt.json").read_bytes())
@@ -96,7 +96,7 @@ def main():
                     subprocess.run([sys.executable, "-B", artifacts / "components.py", "install", "--manifest", index,
                                     "--component", tool, "--root", component_root],
                                    cwd=component_stand, env=component_environment, check=True,
-                                   capture_output=True, text=True, timeout=120)
+                                   capture_output=True, text=True, encoding="utf-8", timeout=120)
                 for name in ("analyzer/bin/bsl-analyzer-app", "analyzer/components/bsl-analyzer-app.json",
                              "components/unrelated.json", "user.txt"):
                     path = component_root / name
@@ -108,7 +108,7 @@ def main():
                 for locale in ("ru_RU.UTF-8", "en_US.UTF-8"):
                     result = subprocess.run(command, cwd=component_stand,
                                             env={**component_environment, "LC_ALL": locale},
-                                            capture_output=True, text=True, timeout=120)
+                                            capture_output=True, text=True, encoding="utf-8", timeout=120)
                     assert result.returncode == 0, result
                     assert "no checksums to verify" not in result.stdout + result.stderr
                     full_receipt = json.loads((component_stand / "config/eska/eska-receipt.json").read_bytes())
