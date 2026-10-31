@@ -4,6 +4,7 @@ mod execute;
 mod infobase;
 mod manifest;
 mod plan;
+mod source_snapshot;
 mod tool;
 
 pub use eska_project_core::project::build::{
