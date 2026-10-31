@@ -1068,3 +1068,7 @@ build-base-xml-invalid = Основа должна быть абсолютным
 
 build-base-configuration-changed = Подготовленная базовая конфигурация изменилась во время операции. Повторите сборку: { $path }
 build-base-output-overlap = Результат или служебный каталог сборки { $output } попадает в исходники основы { $source }, доступные только для чтения. Выберите другой выходной каталог.
+
+build-configuration-error = Ошибка настройки { $field } в { $path }: { $reason }
+build-reference-ambiguous = Внешний объект принадлежит нескольким приложениям. Укажите одно из них в analysis.default_application рабочего пространства.
+build-reference-invalid = Проверьте ссылку configuration: нужна доступная выгрузка Designer XML основной конфигурации вне рабочих проектов.

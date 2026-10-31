@@ -49,13 +49,17 @@ available/absent/unavailable. Ошибка процесса/протокола �
 сохраняет прежний результат и managed infobase, удаляет свой staging.
 [Контракты и OS-матрица сборки](build-validation.md).
 
-## XML-основа в runtime (T147)
+## XML-основа для EPF/ERF (T147)
 
 Экспериментальный Rust API `BuildPlan::with_base_configuration` принимает
 `Option<BaseConfiguration>`: готовый `Cf(PathBuf)` либо
 `DesignerXml { source, library }`. Это заменяет прежний `Option<PathBuf>`;
 CLI-параметр `--base-configuration` по-прежнему означает готовый CF.
-Автоматическое получение XML-основы из manifest находится в работе.
+Обычный `eska-build build` получает XML-основу из `[analysis.configuration]`
+(`library` или `source`), а для member — из приложения workspace.
+`eska build` использует тот же контракт. Явный CF имеет приоритет;
+без ссылки сохраняется прежний build с пустой ИБ.
+[Настройка и выбор приложения](user-guide.md#build).
 
 Runtime копирует исходники XML-основы в собственный staging и подготавливает CF
 через `ibcmd`. Исходной выгрузке не нужен `eska.toml`. Подготовленный `base.cf`
@@ -72,6 +76,16 @@ Runtime копирует исходники XML-основы в собствен
 `source.base_configuration` сохраняет checksum фактически использованного CF.
 Машинные пути в паспорт не добавляются. Старые паспорта сборки без XML-основы
 и JSON-представление готового CF сохраняют прежнюю форму.
+
+В dry-run XML-основа представлена как `base_configuration` с полями
+`kind: "designer-xml"`, `source: {path,path_encoding}`, необязательными
+`library` и `configuration: {path,path_encoding}` (глобальный файл),
+`steps: ["prepare-base-configuration", "load-base-cf"]`.
+Ошибка разрешения имеет `code: "base-reference"`, `stage: "configuration"`
+и `data: {file,field,application,cause}`. `file` использует `{value,encoding}`,
+`cause` сохраняет структурированные координаты библиотеки. Отсутствующая версия
+платформы сохраняет `platform-version-missing`/`plan` и добавляет `data` с файлом,
+`field: "build.platform_version"` и `reason: "missing"`. JSON не зависит от locale.
 
 ## Patch-extension
 

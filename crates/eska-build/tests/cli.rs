@@ -12,6 +12,8 @@ use eska_project_core::{
 };
 use serde_json::Value;
 
+#[path = "build_reference/mod.rs"]
+mod build_reference;
 #[path = "runtime_base/mod.rs"]
 mod runtime_base;
 

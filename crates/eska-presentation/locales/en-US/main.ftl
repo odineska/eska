@@ -1068,3 +1068,7 @@ build-base-xml-invalid = The base must be an absolute Designer XML directory of 
 
 build-base-configuration-changed = The prepared base configuration changed during the operation. Retry the build: { $path }
 build-base-output-overlap = Build output or staging { $output } would write into the read-only base source { $source }. Choose a different output directory.
+
+build-configuration-error = Invalid setting { $field } in { $path }: { $reason }
+build-reference-ambiguous = The external object belongs to multiple applications. Set one of its owners as the workspace analysis.default_application.
+build-reference-invalid = Check the configuration reference: it must select accessible Designer XML of a main configuration outside writable projects.

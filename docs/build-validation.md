@@ -90,3 +90,30 @@ T94 проверяет самостоятельный [eska-build](build-tool.md
 и точной версией; все проекты и базы создаются в уникальном соседнем playground.
 Этот запуск не закрывает оставшуюся OS-матрицу T55 и не считается проверкой
 настоящего host runner или функциональной работой клиента 1С.
+
+## Автоматическая основа EPF/ERF (T147)
+
+Новые process-сценарии находятся в `crates/eska-build/tests/build_reference`
+и `runtime_base`. Они проверяют manifest-ссылки по имени/пути, отдельные приложения,
+изменения содержимого/пути/платформы, checksum CF, ошибки и сохранность результатов.
+Core отдельно проверяет ownership member и пересечение с рабочими исходниками.
+
+Нативная серия: Linux ARM64, ALT/Distrobox, 1С 8.3.27.2342.
+[Матрица и ограничения](measurements/t147-build-libraries.json).
+EPF/ERF с типом из библиотеки собираются обычным `eska build`, имеют тот же
+native XML-экспорт, что вариант с явным CF; без основы импорт отклоняется.
+Проверены два приложения workspace, member/selectors, повтор, паспорт, очистка
+и отмена подготовки CF. Скрипт работает только в новом соседнем playground,
+исходную библиотеку копирует и проверяет её сохранность:
+
+```sh
+ESKA_TEST_ROOT="$(realpath ../eska-playground)" python3 -B tests/native_libraries.py \
+  --library-source "$ESKA_LIBRARY_SOURCE" --catalog "$ESKA_LIBRARY_CATALOG" \
+  --platform-version "$PLATFORM_VERSION" --distrobox "$ESKA_DISTROBOX" \
+  --platform-arch "$ESKA_PLATFORM_ARCH" --ibcmd "$ESKA_IBCMD"
+```
+
+Перед запуском собрать `eska`, `eska-build`, `eska-vcs`; значения переменных
+относятся к выбранной установленной платформе. `--ibcmd` используется для
+контрольного native-экспорта, build ищет стандартный путь по machine config.
+Другие ОС и host runner этим результатом не подтверждены.

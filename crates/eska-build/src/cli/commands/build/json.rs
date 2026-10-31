@@ -133,6 +133,8 @@ struct BuildErrorDetailDocument {
     stage: Option<&'static str>,
     #[serde(skip_serializing_if = "Option::is_none")]
     project: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    data: Option<serde_json::Value>,
 }
 
 #[derive(Serialize)]
@@ -303,6 +305,7 @@ pub(super) fn write_build_error(
     code: &'static str,
     stage: Option<&'static str>,
     project: Option<&str>,
+    data: Option<serde_json::Value>,
     localizer: &Localizer,
 ) {
     let document = BuildErrorDocument {
@@ -312,6 +315,7 @@ pub(super) fn write_build_error(
             code,
             stage,
             project: project.map(str::to_owned),
+            data,
         },
     };
     match serde_json::to_string_pretty(&document) {

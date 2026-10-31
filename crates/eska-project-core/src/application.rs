@@ -3,6 +3,7 @@
 mod context;
 mod graph;
 mod policy;
+mod reference;
 mod settings;
 mod snapshot;
 
@@ -11,6 +12,7 @@ pub use context::{
 };
 pub(crate) use policy::RawTools;
 pub use policy::{AnalyzerPolicy, CheckPolicy, ToolSettings};
+pub use reference::{ReferenceError, resolve_project_reference};
 pub use settings::{
     AnalysisOptions, AnalysisSettings, Application, ConfigurationReference, ExtensionScope,
     SettingsError, TargetPlatformVersion,

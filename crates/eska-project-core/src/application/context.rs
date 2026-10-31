@@ -452,7 +452,7 @@ fn read_source(
 }
 
 /// Resolve one explicitly declared reference; other catalog entries never become inputs.
-fn read_configuration_reference(
+pub(super) fn read_configuration_reference(
     root: &Path,
     reference: &ConfigurationReference,
 ) -> Result<ContextSource, ContextError> {
@@ -488,7 +488,10 @@ fn read_configuration_reference(
 }
 
 /// Add catalog coordinates to rejected aliases without weakening reference ownership rules.
-fn library_source_error(reference: &ContextSource, source: ContextError) -> ContextError {
+pub(super) fn library_source_error(
+    reference: &ContextSource,
+    source: ContextError,
+) -> ContextError {
     if let Some(library) = reference.library() {
         ContextError::LibrarySource {
             name: library.name.clone(),
@@ -552,6 +555,6 @@ fn validate_reference(
 }
 
 /// Compare component boundaries after canonical resolution, including identical roots.
-fn overlaps(first: &Path, second: &Path) -> bool {
+pub(super) fn overlaps(first: &Path, second: &Path) -> bool {
     first.starts_with(second) || second.starts_with(first)
 }

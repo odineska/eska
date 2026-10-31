@@ -348,6 +348,11 @@ eska-build build --manifest
 предоставляет Git-сведения. Прямой build с паспортом работает без VCS
 и отмечает Git как `unavailable`.
 
+Для EPF/ERF ссылка `[analysis.configuration] library = "ssl_3_1"` или
+`source = "../base/src"` используется и при сборке: обычный `build` сам готовит
+базовый CF из Designer XML. В workspace основа выбирается для каждого объекта
+по его приложению. Явный `--base-configuration FILE.cf` остаётся разовой заменой.
+
 Укажите точную установленную версию в `[build].platform_version`.
 Нужен `ibcmd` той же версии; для patch также нужен `1cv8`.
 Distrobox нужен только при размещении платформы в Linux-контейнере.

@@ -21,6 +21,7 @@ use super::{
 
 mod composition;
 mod extension_scope;
+mod reference;
 
 /// Plain editor context does not depend on a derived config or unrelated module contents.
 #[test]

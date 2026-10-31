@@ -27,6 +27,7 @@ use crate::{
 mod errors;
 mod json;
 mod output;
+mod reference;
 
 use crate::cli::process_output::{diagnostic_styling_enabled, progress::ProgressLine};
 
@@ -120,6 +121,10 @@ impl BuildHandler<'_> {
         if let Err(code) = self.validate_output_scope(selection.projects().len(), localizer) {
             return code;
         }
+        let bases = match self.base_configurations(&context, selection.projects(), localizer) {
+            Ok(bases) => bases,
+            Err(code) => return code,
+        };
         let options = match self.tool_options(localizer, cancellation) {
             Ok(options) => options,
             Err(code) => return code,
@@ -128,35 +133,16 @@ impl BuildHandler<'_> {
             Ok(platform_override) => platform_override,
             Err(code) => return code,
         };
-        let workspace_root = workspace_root(&context);
-        let base_configuration = self.resolved_base_configuration(&context);
-        let mut prepared = Vec::with_capacity(selection.projects().len());
-        for selected in selection.projects() {
-            let plan = match build_plan(
-                *selected,
-                workspace_root,
-                self.options.output.as_deref(),
-                platform_override.clone(),
-                base_configuration.clone(),
-                self.options.recreate_infobase,
-            ) {
-                Ok(plan) => plan,
-                Err(error) => {
-                    return self.fail_project(
-                        plan_error_code(&error),
-                        Some("plan"),
-                        selected.name(),
-                        &present_plan_error(&error, localizer),
-                        localizer,
-                    );
-                }
-            };
-            prepared.push(PreparedBuild {
-                name: selected.name(),
-                project: selected.project(),
-                plan,
-            });
-        }
+        let prepared = match self.prepare_builds(
+            &context,
+            selection.projects(),
+            bases,
+            platform_override.as_ref(),
+            localizer,
+        ) {
+            Ok(prepared) => prepared,
+            Err(code) => return code,
+        };
         if let Err(code) = preflight_group(
             self.options.format,
             &prepared,
@@ -192,6 +178,49 @@ impl BuildHandler<'_> {
                 ExitCode::FAILURE,
             )
         }
+    }
+
+    /// Keep per-member references and inherited settings together through plan validation.
+    fn prepare_builds<'a>(
+        &self,
+        context: &DiscoveryContext,
+        selected_projects: &[SelectedProject<'a>],
+        bases: Vec<Option<build::BaseConfiguration>>,
+        platform_override: Option<&PlatformVersion>,
+        localizer: &Localizer,
+    ) -> Result<Vec<PreparedBuild<'a>>, ExitCode> {
+        let workspace_root = workspace_root(context);
+        let mut prepared = Vec::with_capacity(selected_projects.len());
+        for (selected, base_configuration) in selected_projects.iter().zip(bases) {
+            let plan = match build_plan(
+                *selected,
+                workspace_root,
+                self.options.output.as_deref(),
+                platform_override.cloned(),
+                base_configuration,
+                self.options.recreate_infobase,
+            ) {
+                Ok(plan) => plan,
+                Err(PlanError::PlatformVersionMissing) => {
+                    return Err(self.fail_missing_platform(*selected, workspace_root, localizer));
+                }
+                Err(error) => {
+                    return Err(self.fail_project(
+                        plan_error_code(&error),
+                        Some("plan"),
+                        selected.name(),
+                        &present_plan_error(&error, localizer),
+                        localizer,
+                    ));
+                }
+            };
+            prepared.push(PreparedBuild {
+                name: selected.name(),
+                project: selected.project(),
+                plan,
+            });
+        }
+        Ok(prepared)
     }
 
     /// Reject a shared output before planning multiple selected projects.
@@ -621,7 +650,7 @@ fn build_plan(
     workspace_root: Option<&Path>,
     output: Option<&Path>,
     platform_version: Option<PlatformVersion>,
-    base_configuration: Option<PathBuf>,
+    base_configuration: Option<build::BaseConfiguration>,
     recreate_infobase: bool,
 ) -> Result<BuildPlan, PlanError> {
     let plan = match (selected.name(), workspace_root) {
@@ -634,7 +663,7 @@ fn build_plan(
         ),
         _ => BuildPlan::with_platform_version(selected.project(), output, platform_version),
     }?;
-    plan.with_base_configuration(base_configuration.map(build::BaseConfiguration::Cf))
+    plan.with_base_configuration(base_configuration)
         .map(|plan| plan.with_recreate_infobase(recreate_infobase))
 }
 
@@ -746,7 +775,7 @@ fn write_failure(
     localizer: &Localizer,
 ) {
     if matches!(format, OutputFormat::Json) {
-        write_build_error(code, stage, project, localizer);
+        write_build_error(code, stage, project, None, localizer);
     }
     eprintln!("{detail}");
 }
