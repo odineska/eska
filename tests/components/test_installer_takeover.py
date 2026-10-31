@@ -112,7 +112,7 @@ try {
     def run_installer(self, fixture, **environment):
         stand, _, _, env, command = fixture
         return subprocess.run(command, cwd=stand, env={**env, **environment}, capture_output=True,
-                              text=True, timeout=30)
+                              text=True, encoding="utf-8", timeout=30)
 
     @staticmethod
     def snapshot(stand):
