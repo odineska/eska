@@ -122,12 +122,14 @@ pub enum CloneError {
     RemoteName(gix::Error),
     Fetch(Box<gix::Error>),
     Checkout(Box<gix::Error>),
+    MissingHead,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct CloneOutcome {
     pub collisions: usize,
     pub errors: usize,
+    pub commit: Option<gix::ObjectId>,
 }
 
 /// Clone, fetch and check out one repository through the shared gix network boundary.
@@ -139,20 +141,54 @@ pub fn clone_checkout(
     destination: &Path,
     remote_name: &str,
 ) -> Result<CloneOutcome, CloneError> {
-    let mut prepare = gix::prepare_clone(repository, destination)
+    let prepare = prepare_clone(repository, destination, remote_name)?;
+    finish_checkout(prepare)
+}
+
+/// Retrieve the current master branch without downloading unrelated history or tags.
+///
+/// # Errors
+/// Returns the same typed transport and checkout failures; a missing branch is never replaced by HEAD.
+pub fn clone_master(repository: gix::Url, destination: &Path) -> Result<CloneOutcome, CloneError> {
+    let prepare = prepare_clone(repository, destination, "origin")?
+        .with_ref_name(Some("refs/heads/master"))
+        .map_err(|source| CloneError::Prepare(Box::new(source)))?
+        .with_shallow(gix::remote::fetch::Shallow::DepthAtRemote(
+            std::num::NonZeroU32::MIN,
+        ))
+        .configure_remote(|mut remote| {
+            remote.replace_refspecs(
+                ["+refs/heads/master:refs/remotes/origin/master"],
+                gix::remote::Direction::Fetch,
+            )?;
+            Ok(remote.with_fetch_tags(gix::remote::fetch::Tags::None))
+        });
+    finish_checkout(prepare)
+}
+
+fn prepare_clone(
+    repository: gix::Url,
+    destination: &Path,
+    remote_name: &str,
+) -> Result<gix::clone::PrepareFetch, CloneError> {
+    gix::prepare_clone(repository, destination)
         .map_err(|source| CloneError::Prepare(Box::new(source)))?
         .with_remote_name(remote_name.as_bytes())
-        .map_err(CloneError::RemoteName)?;
+        .map_err(CloneError::RemoteName)
+}
+
+fn finish_checkout(mut prepare: gix::clone::PrepareFetch) -> Result<CloneOutcome, CloneError> {
     let interrupt = AtomicBool::new(false);
     let (mut checkout, _) = prepare
         .fetch_then_checkout(gix::progress::Discard, &interrupt)
         .map_err(|source| CloneError::Fetch(Box::new(source)))?;
-    let (_repository, outcome) = checkout
+    let (repository, outcome) = checkout
         .main_worktree(gix::progress::Discard, &interrupt)
         .map_err(|source| CloneError::Checkout(Box::new(source)))?;
     Ok(CloneOutcome {
         collisions: outcome.collisions.len(),
         errors: outcome.errors.len(),
+        commit: repository.head_id().ok().map(gix::Id::detach),
     })
 }
 

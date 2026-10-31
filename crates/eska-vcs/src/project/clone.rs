@@ -86,14 +86,36 @@ pub fn execute(plan: ClonePlan) -> Result<Project, CloneError> {
     claim_destination(&plan.destination)?;
     match clone_and_validate(&plan) {
         Ok(project) => Ok(project),
-        Err(original) => match fs::remove_dir_all(&plan.destination) {
-            Ok(()) => Err(original),
-            Err(source) if source.kind() == io::ErrorKind::NotFound => Err(original),
-            Err(source) => Err(CloneError::Rollback {
-                path: plan.destination,
-                original: Box::new(original),
-                source,
-            }),
+        Err(original) => Err(rollback(plan.destination, original)),
+    }
+}
+
+/// Check out the exact master snapshot as raw sources for the managed library installer.
+///
+/// # Errors
+/// Rejects collisions, an unavailable branch/revision and incomplete checkout.
+/// Only the exclusively created destination is eligible for cleanup.
+pub fn execute_master(plan: ClonePlan) -> Result<gix::ObjectId, CloneError> {
+    claim_destination(&plan.destination)?;
+    let result = network::clone_master(plan.repository, &plan.destination)
+        .map_err(CloneError::Network)
+        .and_then(|outcome| {
+            validate_checkout(&outcome)?;
+            outcome
+                .commit
+                .ok_or(CloneError::Network(network::CloneError::MissingHead))
+        });
+    result.map_err(|original| rollback(plan.destination, original))
+}
+
+fn rollback(destination: PathBuf, original: CloneError) -> CloneError {
+    match fs::remove_dir_all(&destination) {
+        Ok(()) => original,
+        Err(source) if source.kind() == io::ErrorKind::NotFound => original,
+        Err(source) => CloneError::Rollback {
+            path: destination,
+            original: Box::new(original),
+            source,
         },
     }
 }
@@ -106,14 +128,20 @@ fn clone_and_validate(plan: &ClonePlan) -> Result<Project, CloneError> {
         &plan.remote_name,
     )
     .map_err(CloneError::Network)?;
-    if outcome.collisions != 0 || outcome.errors != 0 {
-        return Err(CloneError::IncompleteCheckout {
-            collisions: outcome.collisions,
-            errors: outcome.errors,
-        });
-    }
+    validate_checkout(&outcome)?;
     discovery::discover(&plan.destination)
         .map_err(|source| CloneError::Validation(Box::new(source)))
+}
+
+const fn validate_checkout(outcome: &network::CloneOutcome) -> Result<(), CloneError> {
+    if outcome.collisions == 0 && outcome.errors == 0 {
+        Ok(())
+    } else {
+        Err(CloneError::IncompleteCheckout {
+            collisions: outcome.collisions,
+            errors: outcome.errors,
+        })
+    }
 }
 
 /// Derive the conventional destination name from a parsed repository address.

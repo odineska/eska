@@ -12,6 +12,9 @@ use std::{
 mod support;
 use support::TestDir;
 
+#[path = "library_checkout/mod.rs"]
+mod library_checkout;
+
 /// Execute fixture Git with deterministic identity and no developer configuration or redirects.
 fn git(root: &Path, args: &[&str]) -> Vec<u8> {
     let mut command = Command::new("git");
