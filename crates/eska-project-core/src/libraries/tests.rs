@@ -37,6 +37,44 @@ fn no_fetch(_: KnownLibrary, _: &Path) -> Result<Revision, Error> {
 }
 
 #[test]
+fn catalog_replacement_remains_readable_during_publication() {
+    use std::sync::atomic::{AtomicBool, Ordering};
+
+    let fixture = TestDir::new();
+    let path = fixture.0.join("config.toml");
+    let before: &[u8] = b"# machine policy\n[libraries.demo]\nsource='first'\n";
+    let after: &[u8] = b"# machine policy\n[libraries.demo]\nsource='second'\n";
+    fs::write(&path, before).unwrap();
+    let stopped = AtomicBool::new(false);
+    std::thread::scope(|scope| {
+        let reader = scope.spawn(|| {
+            let mut reads = 0;
+            while !stopped.load(Ordering::Relaxed) {
+                let bytes = fs::read(&path)?;
+                if bytes != before && bytes != after {
+                    return Err(std::io::Error::from(std::io::ErrorKind::InvalidData));
+                }
+                reads += 1;
+            }
+            Ok(reads)
+        });
+        let writing = (|| {
+            for index in 0..400 {
+                let mut edit = write::Edit::read(&path)?;
+                edit.set(if index % 2 == 0 { after } else { before }.to_vec());
+                edit.publish()?;
+            }
+            Ok::<_, Error>(())
+        })();
+        stopped.store(true, Ordering::Relaxed);
+        writing.unwrap();
+        assert!(reader.join().unwrap().unwrap() > 0);
+    });
+    assert_eq!(fs::read(&path).unwrap(), before);
+    assert_eq!(fs::read_dir(&fixture.0).unwrap().count(), 1);
+}
+
+#[test]
 fn installs_known_libraries_once_and_reuses_local_sources_without_rewriting_project() {
     for library in [KnownLibrary::Ssl31, KnownLibrary::Ssl32] {
         let fixture = TestDir::new();

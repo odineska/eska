@@ -133,32 +133,8 @@ fn publish(path: &Path, expected: Option<&[u8]>, bytes: &[u8]) -> Result<(), Err
     if expected.is_none() {
         fs::hard_link(&guard.0, path).map_err(|source| io_error(path, source))?;
     } else {
-        replace(&guard.0, path)?;
+        fs::rename(&guard.0, path).map_err(|source| io_error(path, source))?;
     }
-    Ok(())
-}
-
-#[cfg(not(windows))]
-fn replace(temporary: &Path, path: &Path) -> Result<(), Error> {
-    fs::rename(temporary, path).map_err(|source| io_error(path, source))
-}
-
-#[cfg(windows)]
-fn replace(temporary: &Path, path: &Path) -> Result<(), Error> {
-    let (backup, reservation) = self::temporary(path)?;
-    drop(reservation);
-    fs::remove_file(&backup).map_err(|source| io_error(&backup, source))?;
-    fs::rename(path, &backup).map_err(|source| io_error(path, source))?;
-    if let Err(source) = fs::rename(temporary, path) {
-        if let Err(restore) = fs::rename(&backup, path) {
-            return Err(Error::Rollback {
-                path: backup,
-                source: Box::new(io_error(path, restore)),
-            });
-        }
-        return Err(io_error(path, source));
-    }
-    let _ = fs::remove_file(&backup);
     Ok(())
 }
 
