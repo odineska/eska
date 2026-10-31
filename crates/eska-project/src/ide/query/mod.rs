@@ -5,6 +5,7 @@ mod constructors;
 mod documents;
 mod dto;
 mod formatting;
+mod language;
 mod params;
 mod projections;
 mod recovery;
@@ -24,6 +25,7 @@ use super::{
     errors,
     server::Server,
 };
+pub(super) use language::{capability as language_capability, is_method as is_language_method};
 use params::Key;
 pub(super) use recovery::State as RecoveryState;
 

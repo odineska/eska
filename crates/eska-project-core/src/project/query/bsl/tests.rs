@@ -1,6 +1,61 @@
 use super::*;
 use crate::project::query::Affinity;
 
+#[test]
+fn multiline_geometry_reuses_literal_rules_and_returns_only_continuation_bars() {
+    let input = "\u{feff}// \"fake\n// |fake\"\nДата = '20260101';\r\nOuter(Inner(\"одна\"), \"😀 \"\"цитата\"\"\r\n\t// source comment\r\n\r\n\t|два\r\n  |\"), \"три\n |четыре\");";
+    let strings = multiline_strings(input).unwrap();
+    assert_eq!(strings.len(), 2);
+    assert_eq!(
+        &input[strings[0].source.clone()],
+        "\"😀 \"\"цитата\"\"\r\n\t// source comment\r\n\r\n\t|два\r\n  |\""
+    );
+    assert_eq!(
+        strings[0].continuations,
+        vec![input.find("|два").unwrap(), input.find("|\"").unwrap()]
+    );
+    assert_eq!(
+        strings[1].continuations,
+        vec![input.find("|четыре").unwrap()]
+    );
+    for string in strings {
+        assert_eq!(input.as_bytes()[string.source.start], b'"');
+        assert_eq!(input.as_bytes()[string.source.end - 1], b'"');
+        for offset in string.continuations {
+            assert_eq!(input.as_bytes()[offset], b'|');
+        }
+    }
+}
+
+#[test]
+fn multiline_geometry_never_guesses_incomplete_strings_or_decorates_single_lines() {
+    assert_eq!(
+        multiline_strings("X = \"one\"; // \"two\"\nY = '20260101';").unwrap(),
+        []
+    );
+    for input in [
+        "f(\"one\n no bar\");",
+        "f(\"one\n |unfinished",
+        "f(\"valid\n |two\"); g(\"unfinished",
+    ] {
+        assert_eq!(multiline_strings(input), Err(QueryError::InvalidLiteral));
+    }
+}
+
+#[test]
+fn multiline_geometry_bounds_total_visual_attachments() {
+    let input = format!(
+        "f(\"one{}\");",
+        "\n|two".repeat(MAX_MULTILINE_CONTINUATIONS)
+    );
+    assert_eq!(
+        multiline_strings(&input).unwrap()[0].continuations.len(),
+        MAX_MULTILINE_CONTINUATIONS
+    );
+    let oversized = input.replace("one", "one\n|extra");
+    assert_eq!(multiline_strings(&oversized), Err(QueryError::TooLarge));
+}
+
 /// Tests select a literal exactly as the editor cursor would, without supplying arbitrary ranges.
 fn query(input: &str) -> Query {
     read_bsl(input, input.find('"').expect("quote") + 1).expect("query")

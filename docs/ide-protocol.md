@@ -1980,6 +1980,42 @@ FOR UPDATE разрешён для отдельного корневого SELEC
 Ошибка оставляет текущий текст и ревизию неизменными. Успех публикует одну
 ревизию; запрет поддержки и проверка владельца общие со всеми действиями.
 
+### API 1.34: геометрия многострочных BSL-литералов
+
+Capability `bslMultilineStrings` доступна при handshake 1.34. Она описывает
+чтение синтаксиса переданного native-снимка; workspace, анализатор и путь файла
+не требуются. Сервер не читает и не записывает исходники и не приобретает
+владение ими. Семантическую связь литерала с аргументом определяет LSP-подсказка.
+
+```json
+{"schemaVersion":1,"offsetEncoding":"utf-8","writesOwner":false,"maxTextBytes":4194304,"maxInlineBytes":131072,"maxContinuations":8192}
+```
+
+Request-only `language/multilineStrings` принимает
+`{version:string,text?:string,bufferId?:string}`. Версия — положительный u64 counter;
+ровно один `text`/`bufferId` обязателен. Для большого текста используются
+`language/bufferBegin`, `language/bufferAppend`, `language/bufferClose` с теми же
+полями bytes/snapshot, bufferId/offset/text и bufferId, что у query-upload.
+Предел одного снимка — 4 MiB, inline/chunk — 128 KiB. Общая квота connection
+32 MiB сохраняется; чужие query/format handles не принимаются. Workspace close
+и shutdown освобождают upload; notification не может резервировать память.
+
+Результат:
+
+```json
+{"schemaVersion":1,"version":"7","sourceSha256":"<64 lowercase hex>","strings":[{"range":{"start":12,"end":48},"continuations":[31]}]}
+```
+
+Все offsets — UTF-8 bytes в точном переданном тексте, включая BOM и CRLF.
+`range` включает обе кавычки; каждое continuation указывает на `|` перед
+очередной частью. Комментарии, даты, однострочные строки, экранированные кавычки
+и допустимые пропуски строк обрабатывает существующий BSL-сканер core.
+Неполный/некорректный литерал возвращает `language_syntax_failed` с
+`details.reason = "invalid_literal"`; превышение размера/числа отступов —
+`"text_too_large"`. Другие нарушения upload используют прежние ошибки квоты
+и unknown-buffer. Отмена даёт `-32800`; локаль не меняет данные ответа.
+Адаптер проверяет version, checksum и актуальность LSP перед показом отступов.
+
 ### API 1.33: независимое форматирование документа и query-черновика
 
 Capability `formatting` доступна при handshake 1.33:

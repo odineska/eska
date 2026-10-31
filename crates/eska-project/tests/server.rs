@@ -29,6 +29,9 @@ mod support_objects;
 #[path = "server/libraries.rs"]
 mod libraries;
 
+#[path = "server/language.rs"]
+mod language;
+
 struct Client {
     child: Child,
     input: ChildStdin,

@@ -10,7 +10,7 @@
 **T145 → T147 → T148 → T149 → T150 → T151**.
 Цель — завершить все шесть задач в этом порядке с логическими commits,
 документацией и проверками каждого этапа. T145, T147 и T148 завершены (`DONE`);
-остальные задачи пула — `PLANNED`
+T149 выполняется (`IN-PROGRESS`); T150 и T151 — `PLANNED`
 до начала соответствующей реализации.
 
 | Порядок | Задача | Результат |
@@ -599,7 +599,7 @@ BSL LSP и визуальный редактор форм в это направ
 | T146 | DEFERRED | Несколько библиотек анализа; отложено до практической необходимости | [26-analysis-libraries.md](26-analysis-libraries.md#t146--несколько-библиотек-в-одном-контексте) |
 | T147 | DONE | Сборка EPF/ERF командой eska build по настройкам проекта и библиотеки; после T145 | [26-analysis-libraries.md](26-analysis-libraries.md#t147--сборка-epferf-с-библиотекой-из-eskatoml) |
 | T148 | DONE | eska add ssl_3_1: установка БСП из master в ~/.eska/lib при отсутствии, иначе подключение установленной; общий результат сборки; после T147 | [26-analysis-libraries.md](26-analysis-libraries.md#t148--подключение-бсп-командой-eska-add) |
-| T149 | PLANNED | Визуальное выравнивание многострочных строковых аргументов при подсказках параметров в Explorer | [27-inlay-hint-alignment.md](27-inlay-hint-alignment.md) |
+| T149 | IN-PROGRESS | Визуальное выравнивание многострочных строковых аргументов при подсказках параметров в Explorer | [27-inlay-hint-alignment.md](27-inlay-hint-alignment.md) |
 | T150 | PLANNED | Группы расширений, отчётов и обработок в workspace только при двух и более подпроектах одного типа | [28-workspace-project-grouping.md](28-workspace-project-grouping.md) |
 | T151 | PLANNED | Отключение подпроектов с освобождением фоновых ресурсов и фильтр скрытия отключённых | [29-workspace-project-activation.md](29-workspace-project-activation.md) |
 

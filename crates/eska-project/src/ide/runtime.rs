@@ -380,6 +380,7 @@ fn process_one(
                     && (super::metadata::is_method(method)
                         || super::analyzer::is_method(method)
                         || super::formatting::is_method(method)
+                        || super::query::is_language_method(method)
                         || super::query::is_method(method)
                         || matches!(
                             method,

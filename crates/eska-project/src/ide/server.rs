@@ -155,6 +155,9 @@ impl Server {
             method if super::formatting::is_method(method) && self.client_minor >= 33 => {
                 self.formatting(method, args, cancelled, connection_closed)
             }
+            method if super::query::is_language_method(method) && self.client_minor >= 34 => {
+                self.language(method, args, cancelled, connection_closed)
+            }
             method if super::metadata::is_method(method) => self.metadata(method, args, events),
             method if super::query::is_recovery_method(method) => {
                 if self.client_minor < 14
@@ -264,6 +267,9 @@ impl Server {
         }
         if self.client_minor >= 33 {
             result["capabilities"]["formatting"] = super::formatting::capability();
+        }
+        if self.client_minor >= 34 {
+            result["capabilities"]["bslMultilineStrings"] = super::query::language_capability();
         }
         if self.client_minor >= 21 {
             result["capabilities"]["queryConstructor"] =
