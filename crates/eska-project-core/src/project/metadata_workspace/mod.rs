@@ -1,5 +1,6 @@
 //! Manifest-backed metadata sessions with checked edits; no CLI, platform or watcher.
 
+mod activity;
 mod cache;
 mod editing;
 mod editing_choice_fields;
@@ -20,6 +21,9 @@ mod source_view;
 mod support;
 pub use super::metadata_disk_cache::DiskCacheStats;
 pub use super::metadata_rename::transaction::RecoveryStatus as RenameRecovery;
+pub use activity::{
+    ActivityProject, ActivityWorkspace, PreparedResume, ResumeFailure, SuspendedProject,
+};
 pub use cache::{CacheLimits, CacheStats};
 pub use editing::{EditingSnapshot, PropertyEditError, PropertyTypeChoice};
 pub use editing_history::{HistoryOperation, PropertyReplay};

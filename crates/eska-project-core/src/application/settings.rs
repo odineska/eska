@@ -180,6 +180,26 @@ pub struct Application {
 }
 
 impl Application {
+    /// Project IDE activity without changing the declared manifest composition.
+    pub(super) fn with_members(&self, members: &std::collections::BTreeSet<ProjectName>) -> Self {
+        let mut selected = self.clone();
+        if matches!(&selected.configuration, Some(Configuration::Member(name)) if !members.contains(name))
+        {
+            selected.configuration = None;
+        }
+        selected.extensions.retain(|name| members.contains(name));
+        selected
+            .external_objects
+            .retain(|name| members.contains(name));
+        selected
+            .extension_dependencies
+            .retain(|name, _| members.contains(name));
+        selected
+            .extension_scopes
+            .retain(|name, _| members.contains(name));
+        selected
+    }
+
     /// Return the main configuration's workspace member name.
     #[must_use]
     pub const fn configuration(&self) -> Option<&ProjectName> {

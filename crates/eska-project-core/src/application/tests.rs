@@ -19,6 +19,7 @@ use super::{
     ContextError, SettingsError, SourceRole, TargetPlatformVersion, resolve, resolve_snapshot,
 };
 
+mod activity;
 mod composition;
 mod extension_scope;
 mod reference;

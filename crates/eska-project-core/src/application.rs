@@ -1,5 +1,6 @@
 //! Explicit application composition and read-only analysis contexts for Designer XML.
 
+mod activity;
 mod context;
 mod graph;
 mod policy;
@@ -7,8 +8,10 @@ mod reference;
 mod settings;
 mod snapshot;
 
+pub use activity::{ActivityProjection, Consumer, ProjectActivity};
 pub use context::{
     AnalysisContext, ContextError, ContextSource, LibrarySelection, SourceRole, resolve,
+    resolve_active,
 };
 pub(crate) use policy::RawTools;
 pub use policy::{AnalyzerPolicy, CheckPolicy, ToolSettings};

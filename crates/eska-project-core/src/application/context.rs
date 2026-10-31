@@ -134,9 +134,16 @@ pub struct AnalysisContext {
     target_platform_version: Option<TargetPlatformVersion>,
     analyzer_policy: AnalyzerPolicy,
     check_policy: CheckPolicy,
+    excluded_sources: Vec<PathBuf>,
 }
 
 impl AnalysisContext {
+    /// Explicit IDE omissions prevent the analyzer from rediscovering inactive or foreign members.
+    #[must_use]
+    pub fn excluded_sources(&self) -> &[PathBuf] {
+        &self.excluded_sources
+    }
+
     /// Return CI limits from the same owning manifest as the analyzer policy and source set.
     #[must_use]
     pub const fn check_policy(&self) -> &CheckPolicy {
@@ -218,6 +225,26 @@ pub enum ContextError {
 /// # Errors
 /// Rejects invalid manifests, ambiguous selection, mismatched members and invalid root XML.
 pub fn resolve(start: &Path, requested: Option<&str>) -> Result<AnalysisContext, ContextError> {
+    resolve_with_activity(start, requested, None)?.ok_or(ContextError::EmptyWorkspace)
+}
+
+/// Resolve the IDE source projection; no active consumer returns no analysis context.
+///
+/// # Errors
+/// Preserves normal discovery, application, dependency and selected-source validation errors.
+pub fn resolve_active(
+    start: &Path,
+    requested: Option<&str>,
+    activity: &crate::project::activity::State,
+) -> Result<Option<AnalysisContext>, ContextError> {
+    resolve_with_activity(start, requested, Some(activity))
+}
+
+fn resolve_with_activity(
+    start: &Path,
+    requested: Option<&str>,
+    activity: Option<&crate::project::activity::State>,
+) -> Result<Option<AnalysisContext>, ContextError> {
     match discovery::discover_context(start)
         .map_err(|error| ContextError::Discovery(Box::new(error)))?
     {
@@ -228,8 +255,13 @@ pub fn resolve(start: &Path, requested: Option<&str>) -> Result<AnalysisContext,
                     available: Vec::new(),
                 });
             }
-            let settings = project.configuration().analysis_settings();
-            single(project.root(), None, &project, settings)
+            single(
+                project.root(),
+                None,
+                &project,
+                project.configuration().analysis_settings(),
+            )
+            .map(Some)
         }
         DiscoveryContext::Workspace { workspace, .. } => {
             let settings = workspace.analysis_settings();
@@ -237,7 +269,27 @@ pub fn resolve(start: &Path, requested: Option<&str>) -> Result<AnalysisContext,
                 return Err(ContextError::EmptyWorkspace);
             }
             let (name, application) = choose_application(settings, requested)?;
-            application_context(&workspace, name, application)
+            let Some(activity) = activity else {
+                return application_context(&workspace, name, application).map(Some);
+            };
+            let projection = super::ActivityProjection::for_workspace(&workspace, activity)
+                .map_err(|error| ContextError::Settings(Box::new(error)))?;
+            let Some(members) = projection
+                .applications
+                .get(name)
+                .filter(|members| !members.is_empty())
+            else {
+                return Ok(None);
+            };
+            let mut context =
+                application_context(&workspace, name, &application.with_members(members))?;
+            context.excluded_sources = workspace
+                .members()
+                .iter()
+                .filter(|member| !members.contains(member.name()))
+                .map(|member| member.project().source().to_path_buf())
+                .collect();
+            Ok(Some(context))
         }
     }
 }
@@ -275,6 +327,7 @@ fn single(
         sources.insert(0, base);
     }
     Ok(AnalysisContext {
+        excluded_sources: Vec::new(),
         root: root.into(),
         name: member.cloned(),
         sources,
@@ -374,6 +427,7 @@ fn application_context(
         |member| member.project().configuration().build_settings(),
     );
     Ok(AnalysisContext {
+        excluded_sources: Vec::new(),
         root: workspace.root().into(),
         name: Some(name.clone()),
         sources,
