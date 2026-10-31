@@ -154,26 +154,40 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaises(Failure):
             release_bundle.collect(self.root, self.root / "output")
 
+    def installer_templates(self):
+        """Minimal dist entry points preserve the same preflight/completion contract as real installers."""
+        scripts = {
+            "sh": ('    # Identical to the sh version, just with a .fish file extension\n'
+                   'download_binary_and_run_installer "$@" || exit 1\n'),
+            "ps1": ('  # The replace call here ensures proper escaping is inlined into the receipt\n'
+                    '# The default interactive handler\n  Install-Binary "$Args"\n'),
+        }
+        for extension, content in scripts.items():
+            (self.assets / ("eska-installer." + extension)).write_text(content, encoding="utf-8")
+
+    def test_changed_completion_anchor_preserves_both_installers(self):
+        """A changed upstream entry point cannot produce a partly patched release."""
+        self.installer_templates()
+        script = self.assets / "eska-installer.ps1"
+        script.write_text(script.read_text().replace('  Install-Binary "$Args"', '  Different-Installer "$Args"'))
+        before = {path.name: path.read_bytes() for path in self.assets.iterdir()}
+        with self.assertRaises(Failure):
+            release_bundle.guard_installers(self.assets)
+        self.assertEqual({path.name: path.read_bytes() for path in self.assets.iterdir()}, before)
+
+    def test_finalized_installer_cannot_be_patched_twice(self):
+        """Finalization retries must not nest takeover handlers around an existing transaction."""
+        self.installer_templates()
+        release_bundle.guard_installers(self.assets)
+        before = {path.name: path.read_bytes() for path in self.assets.iterdir()}
+        with self.assertRaises(Failure):
+            release_bundle.guard_installers(self.assets)
+        self.assertEqual({path.name: path.read_bytes() for path in self.assets.iterdir()}, before)
+
     def test_release_workflow_packages_every_component(self):
         """A component added to the bundle must also be selected in the native build jobs."""
         workflow = (ROOT / ".github/workflows/release.yml").read_text(encoding="utf-8")
         self.assertEqual(set(re.findall(r"--component ([a-z-]+)", workflow)), set(release_bundle.TOOLS))
-
-    @unittest.skipIf(os.name == "nt", "Shell guard runs on Unix; native Windows installer has its own release gate")
-    def test_full_installer_preserves_independently_installed_formatter(self):
-        """A formatter receipt alone must reject a full install before destination writes."""
-        prefix = self.root / "installation"
-        (prefix / "bin").mkdir(parents=True)
-        (prefix / "components").mkdir()
-        receipt = prefix / "components/eska-fmt.json"
-        receipt.write_text('{"managed": "independent formatter"}', encoding="utf-8")
-        guard = (ROOT / "tools/release-install-guard.sh").read_text(encoding="utf-8")
-        script = 'err() { printf "%s\\n" "$*" >&2; exit 9; }\ninstall() {\nlocal _install_dir="$1"\n' + guard + '\n}\ninstall "$1"\n'
-        result = subprocess.run(["sh", "-c", script, "guard", str(prefix / "bin")], text=True, capture_output=True)
-        self.assertEqual(result.returncode, 9, result)
-        self.assertIn("component-installation-conflict", result.stderr)
-        self.assertIn("eska-fmt", result.stderr)
-        self.assertEqual(receipt.read_text(), '{"managed": "independent formatter"}')
 
     def matrix_parts(self):
         """Model Linux and Windows artifact layouts with distinct bytes and common bootstrap files."""
@@ -213,8 +227,13 @@ class ReleaseTests(unittest.TestCase):
         with patch.object(release_bundle, "targets", return_value=targets):
             release_bundle.collect(parts, output)
             self.assertTrue(all((output / (target + "-dist-manifest.json")).is_file() for target in targets))
-            (output / "eska-installer.sh").write_text("    # Identical to the sh version, just with a .fish file extension\n", encoding="utf-8")
-            (output / "eska-installer.ps1").write_text("  # The replace call here ensures proper escaping is inlined into the receipt\n", encoding="utf-8")
+            (output / "eska-installer.sh").write_text(
+                '    # Identical to the sh version, just with a .fish file extension\n'
+                'download_binary_and_run_installer "$@" || exit 1\n',
+                encoding="utf-8")
+            (output / "eska-installer.ps1").write_text(
+                '  # The replace call here ensures proper escaping is inlined into the receipt\n'
+                '# The default interactive handler\n  Install-Binary "$Args"\n', encoding="utf-8")
             (output / "dist-manifest.json").write_text(json.dumps({"artifacts": artifacts}), encoding="utf-8")
             release_bundle.finalize(output, self.root / "notes.md")
         manifest = json.loads((output / "dist-manifest.json").read_bytes())

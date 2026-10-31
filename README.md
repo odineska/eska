@@ -136,6 +136,9 @@ powershell -ExecutionPolicy Bypass -c "irm https://odineska.github.io/eska/insta
 ```
 
 После первой установки откройте новый терминал и выполните `eska --version`.
+Повторный запуск полного установщика заменяет все шесть утилит версиями
+выбранного релиза. Компоненты, ранее установленные Explorer, переходят под
+управление полного комплекта; внешний BSL Analyzer обновляется отдельно.
 Release pipeline настроен на полный комплект и
 [выборочные компонентные ZIP](docs/component-installation.md); перед установкой
 проверьте Assets выбранного [релиза](https://github.com/odineska/eska/releases).

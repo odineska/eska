@@ -203,17 +203,38 @@ Explorer устанавливает `eska-project` и внешний bsl-analyze
 
 
 def guard_installers(output):
-    """Insert ownership preflights at pinned dist 0.32 anchors, before destination writes."""
-    anchors = {
-        "sh": "    # Identical to the sh version, just with a .fish file extension",
-        "ps1": "  # The replace call here ensures proper escaping is inlined into the receipt",
-    }
-    for extension, anchor in anchors.items():
+    """Transfer component ownership at pinned dist 0.32 preflight and completion points."""
+    scripts = {}
+    for extension in ("sh", "ps1"):
         path = output / ("eska-installer." + extension)
         content = path.read_text(encoding="utf-8")
-        require(content.count(anchor) == 1 and "component-installation-conflict" not in content, "installer-template", path)
         guard = (ROOT / f"tools/release-install-guard.{extension}").read_text(encoding="utf-8")
-        path.write_text(content.replace(anchor, guard + "\n" + anchor), encoding="utf-8", newline="\n")
+        if extension == "sh":
+            anchor = "    # Identical to the sh version, just with a .fish file extension"
+            entry = 'download_binary_and_run_installer "$@" || exit 1'
+            replacements = {
+                anchor: '    eska_prepare_full_install "$_install_dir" "$2"\n\n' + anchor,
+                entry: guard + "\n" + entry + "\neska_commit_full_install",
+            }
+        else:
+            anchor = "  # The replace call here ensures proper escaping is inlined into the receipt"
+            entry = "# The default interactive handler"
+            replacements = {
+                anchor: '  Start-EskaFullInstall $dest_dir $artifacts["bin_paths"]\n\n' + anchor,
+                entry: guard + "\n" + entry,
+                '  Install-Binary "$Args"': (
+                    '  try {\n    Install-Binary "$Args"\n    Complete-EskaFullInstall\n'
+                    '  } finally { Stop-EskaFullInstall }'
+                ),
+            }
+        require("component-installation-conflict" not in content
+                and "component-installation-receipt-required" not in content, "installer-template", path)
+        for anchor, replacement in replacements.items():
+            require(content.count(anchor) == 1, "installer-template", path)
+            content = content.replace(anchor, replacement)
+        scripts[path] = content
+    for path, content in scripts.items():
+        path.write_text(content, encoding="utf-8", newline="\n")
 
 
 def finalize(output, notes_path):
