@@ -143,6 +143,7 @@ impl Server {
                     plan.status != configuration::Status::Current,
                 );
                 document["leaseId"] = json!(prepared.token);
+                document["analysisContext"] = crate::context::document(&prepared.context);
                 self.analyzer_lease = Some((prepared.token.clone(), lease, prepared));
                 Ok(document)
             }

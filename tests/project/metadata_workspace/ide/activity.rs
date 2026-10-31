@@ -146,6 +146,13 @@ fn workspace_activity_updates_analyzer_lease_and_preserves_other_consumers() {
     let off = activity(&mut first, &initial, 0, false);
     parameters["leaseId"] = lease["leaseId"].clone();
     let updated = first.ok("analyzer/activityUpdate", parameters.clone());
+    assert_eq!(
+        updated["analysisContext"]["context"]["sources"]
+            .as_array()
+            .unwrap()
+            .len(),
+        1
+    );
     assert_ne!(updated["leaseId"], lease["leaseId"]);
     let effective = first.ok("analyzer/context", analyzer::start(&root));
     assert_eq!(effective["context"]["sources"].as_array().unwrap().len(), 1);
