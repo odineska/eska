@@ -7,6 +7,7 @@
 
 | Возможность | Статус | Когда возвращаться |
 |---|---|---|
+| Несколько библиотек в одном контексте | DEFERRED | [T146](26-analysis-libraries.md#t146--несколько-библиотек-в-одном-контексте); по решению 2026-10-31 отложена до практической необходимости |
 | Custom/company templates | DEFERRED | После стабильных T04–T06 |
 | Remote template registry | DEFERRED | После реального use case |
 | Direct-trunk workflow | DEFERRED | После T09 и пользовательской проверки |
