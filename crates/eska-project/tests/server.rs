@@ -26,6 +26,9 @@ mod source_navigation;
 #[path = "server/support_objects.rs"]
 mod support_objects;
 
+#[path = "server/libraries.rs"]
+mod libraries;
+
 struct Client {
     child: Child,
     input: ChildStdin,
@@ -36,7 +39,16 @@ struct Client {
 impl Client {
     /// Run only the project binary; the reader thread gives every response a finite deadline.
     fn new(root: &Path, locale: &str) -> Self {
-        let mut child = Command::new(env!("CARGO_BIN_EXE_eska-project"))
+        Self::with_config(root, locale, None)
+    }
+
+    /// Each server owns its environment; catalog tests never change the test runner's globals.
+    fn with_config(root: &Path, locale: &str, config: Option<&Path>) -> Self {
+        let mut command = Command::new(env!("CARGO_BIN_EXE_eska-project"));
+        if let Some(config) = config {
+            command.env("ESKA_CONFIG_DIR", config);
+        }
+        let mut child = command
             .args(["--lang", locale, "serve", "--stdio"])
             .current_dir(root)
             .env("PATH", "")
