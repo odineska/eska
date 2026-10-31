@@ -20,6 +20,21 @@ pub fn present_global_config_error_with_links(
     hyperlinks: bool,
 ) -> String {
     match error {
+        GlobalConfigError::UnknownLibrary { path, name }
+        | GlobalConfigError::EmptyLibrarySource { path, name } => localizer.format(
+            if matches!(error, GlobalConfigError::UnknownLibrary { .. }) {
+                "config-library-unknown"
+            } else {
+                "config-library-source-empty"
+            },
+            &[
+                ("name", LocalizationValue::Text(name)),
+                (
+                    "path",
+                    LocalizationValue::Text(&path_output::render(path, hyperlinks)),
+                ),
+            ],
+        ),
         GlobalConfigError::LocationUnavailable => localizer.text("config-location-error"),
         GlobalConfigError::Io { path, source } | GlobalConfigError::Replace { path, source } => {
             localizer.format(

@@ -2,6 +2,41 @@
 
 use super::*;
 
+#[test]
+fn reference_schema_is_exclusive_and_round_trips_the_selected_library() {
+    for reference in [
+        "{}",
+        "{source='x',library='ssl_3_1'}",
+        "{library=''}",
+        "{library='  '}",
+    ] {
+        let input = format!(
+            "[project]\nname='report'\ntype='report'\nsource='src'\n[analysis]\nconfiguration={reference}\n"
+        );
+        assert!(ProjectConfig::from_toml(&input).is_err(), "{reference}");
+    }
+    let input = "[project]\nname='report'\ntype='report'\nsource='src'\n[analysis.configuration]\nlibrary='ssl_3_1'\n";
+    let config = ProjectConfig::from_toml(input).expect("named library");
+    let output = config.to_toml().expect("serialize");
+    let reloaded = ProjectConfig::from_toml(&output).expect("reload");
+    assert_eq!(
+        reloaded
+            .configuration()
+            .analysis_settings()
+            .options()
+            .configuration(),
+        config
+            .configuration()
+            .analysis_settings()
+            .options()
+            .configuration(),
+    );
+    assert!(matches!(
+        config.configuration().analysis_settings().options().configuration(),
+        Some(crate::application::ConfigurationReference::Library(name)) if name == "ssl_3_1"
+    ));
+}
+
 /// Paths, member identities and XML names remain independent; composition is declared once.
 #[test]
 fn role_paths_supply_members_and_context_without_a_second_table() {

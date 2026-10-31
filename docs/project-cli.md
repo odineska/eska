@@ -58,7 +58,11 @@ Workflow не выбирается.
 принимает `--application` и читает только корневые дескрипторы выбранных
 источников. Standalone-расширение, EPF и ERF без подключённой базы отмечаются
 `limited_context: true`. Явная `[analysis.configuration] source = "…"` подключает
-XML внешней базы к анализу. Команда не создаёт `bsl-analyzer.toml`, кеш или индекс.
+XML внешней базы к анализу. Вместо `source` можно указать `library = "ssl_3_1"`:
+имя разрешается через `[libraries.ssl_3_1]` пользовательского `config.toml`.
+Источник остаётся только для чтения; ошибки каталога сохраняют имя и расположение
+настройки. Для такого источника JSON добавляет `library: {name, configuration: Path}`.
+Команда не создаёт `bsl-analyzer.toml`, кеш или индекс.
 
 `analyzer-config` готовит [производный конфиг и миграцию](analyzer-configuration.md).
 `metadata` и `version` перенесены без изменения операций, accepted-base checks,

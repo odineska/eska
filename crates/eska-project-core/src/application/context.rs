@@ -5,6 +5,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use crate::config::global::{self, GlobalConfigError};
 use crate::project::{
     Project, ProjectConfiguration, ProjectName, ProjectType, SourceFormat, Workspace,
     WorkspaceMember,
@@ -14,9 +15,17 @@ use crate::project::{
 };
 
 use super::{
-    AnalysisSettings, AnalyzerPolicy, Application, CheckPolicy, ExtensionScope, SettingsError,
-    TargetPlatformVersion, graph,
+    AnalysisSettings, AnalyzerPolicy, Application, CheckPolicy, ConfigurationReference,
+    ExtensionScope, SettingsError, TargetPlatformVersion, graph,
 };
+
+/// The selected global entry is retained for freshness checks and editor observation.
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct LibrarySelection {
+    pub name: String,
+    pub config: PathBuf,
+    pub source: PathBuf,
+}
 
 /// The explicit role of one selected source directory.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -42,6 +51,7 @@ impl SourceRole {
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct ContextSource {
     reference: bool,
+    library: Option<LibrarySelection>,
     member: Option<ProjectName>,
     role: SourceRole,
     project: Project,
@@ -53,6 +63,12 @@ pub struct ContextSource {
 }
 
 impl ContextSource {
+    /// Identify the selected catalog entry without including unrelated global settings.
+    #[must_use]
+    pub const fn library(&self) -> Option<&LibrarySelection> {
+        self.library.as_ref()
+    }
+
     /// Extensions carry their effective deployment scope; other source roles have none.
     #[must_use]
     pub const fn extension_scope(&self) -> Option<ExtensionScope> {
@@ -174,6 +190,16 @@ impl AnalysisContext {
 /// Context failures retain selections and source errors without claiming successful analysis.
 #[derive(Debug)]
 pub enum ContextError {
+    LibraryConfiguration {
+        name: String,
+        source: Box<GlobalConfigError>,
+    },
+    LibrarySource {
+        name: String,
+        config: PathBuf,
+        path: PathBuf,
+        source: Box<Self>,
+    },
     Discovery(Box<ContextDiscoveryError>),
     Source(Box<SourceError>),
     Settings(Box<SettingsError>),
@@ -244,8 +270,8 @@ fn single(
                 SettingsError::ConfigurationReferenceScope,
             )));
         }
-        let base = read_reference(root, &reference.source)?;
-        validate_reference(&base, &sources)?;
+        let base = read_configuration_reference(root, reference)?;
+        validate_selected_reference(&base, &sources)?;
         sources.insert(0, base);
     }
     Ok(AnalysisContext {
@@ -324,18 +350,19 @@ fn application_context(
             SourceRole::ExternalObject,
         )?);
     }
-    if let Some(path) = application.configuration_source() {
-        let reference = read_reference(workspace.root(), path)?;
-        validate_reference(&reference, &sources)?;
+    if let Some(declaration) = application.configuration_reference() {
+        let reference = read_configuration_reference(workspace.root(), declaration)?;
+        validate_selected_reference(&reference, &sources)?;
         // Reference roots must also stay distinct from unselected, writable workspace members.
         if workspace
             .members()
             .iter()
             .any(|member| overlaps(reference.project().source(), member.root()))
         {
-            return Err(ContextError::Settings(Box::new(
-                SettingsError::ConfigurationReferenceScope,
-            )));
+            return Err(library_source_error(
+                &reference,
+                ContextError::Settings(Box::new(SettingsError::ConfigurationReferenceScope)),
+            ));
         }
         sources.insert(0, reference);
     }
@@ -413,6 +440,7 @@ fn read_source(
     Ok(ContextSource {
         extension_scope: None,
         reference: false,
+        library: None,
         member: name.cloned(),
         role,
         project: project.clone(),
@@ -423,7 +451,64 @@ fn read_source(
     })
 }
 
-/// Resolve only the explicitly supplied XML directory; no neighboring manifest or Git is consulted.
+/// Resolve one explicitly declared reference; other catalog entries never become inputs.
+fn read_configuration_reference(
+    root: &Path,
+    reference: &ConfigurationReference,
+) -> Result<ContextSource, ContextError> {
+    let name = match reference {
+        ConfigurationReference::Source(path) => return read_reference(root, path),
+        ConfigurationReference::Library(name) => name,
+    };
+    let config_error = |source| ContextError::LibraryConfiguration {
+        name: name.clone(),
+        source: Box::new(source),
+    };
+    let config = global::config_path().map_err(config_error)?;
+    let config = std::path::absolute(&config).map_err(|source| {
+        config_error(GlobalConfigError::Io {
+            path: config.clone(),
+            source,
+        })
+    })?;
+    let catalog = global::GlobalConfig::load(&config).map_err(config_error)?;
+    let path = catalog.library_path(&config, name).map_err(config_error)?;
+    let mut source = read_reference(root, &path).map_err(|source| ContextError::LibrarySource {
+        name: name.clone(),
+        config: config.clone(),
+        path: path.clone(),
+        source: Box::new(source),
+    })?;
+    source.library = Some(LibrarySelection {
+        name: name.clone(),
+        config,
+        source: path,
+    });
+    Ok(source)
+}
+
+/// Add catalog coordinates to rejected aliases without weakening reference ownership rules.
+fn library_source_error(reference: &ContextSource, source: ContextError) -> ContextError {
+    if let Some(library) = reference.library() {
+        ContextError::LibrarySource {
+            name: library.name.clone(),
+            config: library.config.clone(),
+            path: library.source.clone(),
+            source: Box::new(source),
+        }
+    } else {
+        source
+    }
+}
+
+fn validate_selected_reference(
+    reference: &ContextSource,
+    sources: &[ContextSource],
+) -> Result<(), ContextError> {
+    validate_reference(reference, sources).map_err(|source| library_source_error(reference, source))
+}
+
+/// Resolve only the supplied XML directory; no neighboring manifest or Git is consulted.
 fn read_reference(root: &Path, path: &Path) -> Result<ContextSource, ContextError> {
     let path = root.join(path);
     let source = std::fs::canonicalize(&path).map_err(|source| {

@@ -1051,3 +1051,9 @@ fmt-state-planned = Planned
 fmt-state-applied = Applied
 fmt-state-failed = Failed
 fmt-state-not_applied = Not applied
+
+analysis-library-empty = Set a nonempty configuration.library name.
+analysis-library-config-error = Could not attach library { $name }: { $detail }
+analysis-library-source-error = Library { $name } from { $config } has an unavailable source { $path } or cannot be used in this context.
+config-library-unknown = Library { $name } is not registered in { $path }.
+config-library-source-empty = Set a nonempty source for library { $name } in { $path }.

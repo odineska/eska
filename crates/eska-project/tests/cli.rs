@@ -12,6 +12,9 @@ use serde_json::Value;
 mod support;
 use support::TestDir;
 
+#[path = "cli/libraries.rs"]
+mod libraries;
+
 /// New/init share role-aware enrollment and reject ambiguous changes before creating files.
 #[test]
 fn workspace_application_selection_preserves_other_members_and_ignores_generated_files() {

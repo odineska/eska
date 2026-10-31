@@ -47,7 +47,8 @@ pub fn run(start: &Path, args: &ContextArgs, localizer: &Localizer) -> ExitCode 
 
 /// Keep paths reversible and machine keys independent of the selected presentation language.
 pub fn document(context: &AnalysisContext) -> Value {
-    let sources: Vec<_> = context.sources().iter().map(|source| json!({
+    let sources: Vec<_> = context.sources().iter().map(|source| {
+        let mut value = json!({
         "member":source.member(),
         "role":match source.role() {SourceRole::Configuration=>"configuration", SourceRole::Extension=>"extension", SourceRole::ExternalObject=>"external_object"},
         "project_type":source.project().configuration().project_type().as_str(),
@@ -57,7 +58,14 @@ pub fn document(context: &AnalysisContext) -> Value {
         "metadata_name":source.metadata_name(),
         "uuid":source.uuid(),
         "compatibility_mode":source.compatibility_mode()
-    })).collect();
+        });
+        if let Some(library) = source.library() {
+            value["library"] = json!({
+                "name":library.name,"configuration":response::path(&library.config)
+            });
+        }
+        value
+    }).collect();
     json!({"schema_version":1,"kind":"project-context","status":"ready","context":{
         "name":context.name(),"root":response::path(context.root()),"limited_context":context.limited_context(),
         "target_platform_version":context.target_platform_version(),"sources":sources,
@@ -68,6 +76,18 @@ pub fn document(context: &AnalysisContext) -> Value {
 /// Preserve ambiguity and invalid context as failures, including valid standalone limited contexts.
 pub fn failure(error: &ContextError, start: &Path, localizer: &Localizer) -> Failure {
     match error {
+        ContextError::LibraryConfiguration { .. } | ContextError::LibrarySource { .. } => {
+            Failure::new(
+                if matches!(error, ContextError::LibraryConfiguration { .. }) {
+                    "library_configuration"
+                } else {
+                    "library_source"
+                },
+                diagnostics::application::context_data(error),
+                diagnostics::application::library_message(error, localizer)
+                    .unwrap_or_else(|| localizer.text("check-error-context")),
+            )
+        }
         ContextError::Discovery(error) => response::discovery(error, localizer),
         ContextError::Source(error) => response::source(error, start, localizer),
         ContextError::Settings(error) => Failure::new(

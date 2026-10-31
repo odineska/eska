@@ -6,7 +6,9 @@ mod policy;
 mod settings;
 mod snapshot;
 
-pub use context::{AnalysisContext, ContextError, ContextSource, SourceRole, resolve};
+pub use context::{
+    AnalysisContext, ContextError, ContextSource, LibrarySelection, SourceRole, resolve,
+};
 pub(crate) use policy::RawTools;
 pub use policy::{AnalyzerPolicy, CheckPolicy, ToolSettings};
 pub use settings::{

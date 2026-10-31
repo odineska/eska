@@ -674,6 +674,14 @@ Capability `analyzerConfiguration:true` доступна при запросе m
 | `analyzer/acquire` | — | Подготовленный актуальный конфиг и `leaseId` |
 | `analyzer/release` | Только `leaseId`, без `start` | null |
 
+При именованной `configuration.library` выбранный источник JSON контекста
+дополнительно содержит `library: { name: string, configuration: Path }`:
+путь к глобальному каталогу приходит от ESKA. У прямого `source` и собственных
+проектов это поле отсутствует. Имя и путь участвуют в fingerprint; другие записи
+глобального каталога не входят в выбранный контекст.
+Ошибки содержат `reason: library_configuration|library_source`, `library`,
+`configuration: Path|null` и машинный `cause`; ошибка источника также содержит `path: Path`.
+
 `analyzer` — абсолютный path DTO выбранного executable, без поиска полной ESKA.
 `timeoutSeconds` — целое 1–600, default 60 на subprocess. Все методы —
 request-only. Они не требуют metadata generation и могут выполняться до

@@ -103,6 +103,17 @@ pub(crate) fn build(
     hash.update(CONFIGURATION_BASE_VERSION.as_bytes());
     digest_input(&mut hash, Path::new("eska.toml"), &manifest)?;
     for source in context.sources() {
+        if let Some(library) = source.library() {
+            hash.update(b"global-library\0");
+            for value in [
+                library.name.as_bytes(),
+                library.config.as_os_str().as_encoded_bytes(),
+                library.source.as_os_str().as_encoded_bytes(),
+            ] {
+                hash.update(value.len().to_le_bytes());
+                hash.update(value);
+            }
+        }
         let member_manifest = source.project().root().join("eska.toml");
         if !source.is_reference() && member_manifest != root.join("eska.toml") {
             digest_input(

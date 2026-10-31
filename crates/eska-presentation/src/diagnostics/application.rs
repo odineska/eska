@@ -6,7 +6,77 @@ use crate::{
     localization::{LocalizationValue, Localizer},
     path_output,
 };
-use eska_project_core::application::SettingsError;
+use eska_project_core::application::{ContextError, SettingsError};
+use serde_json::{Value, json};
+
+/// Preserve actionable library coordinates in locale-independent CLI and RPC error details.
+#[must_use]
+pub fn context_data(error: &ContextError) -> Value {
+    let path = |value: &Path| {
+        let (value, encoding) = crate::encoding::json_path(value.as_os_str());
+        json!({"value":value,"encoding":encoding})
+    };
+    match error {
+        ContextError::LibraryConfiguration { name, source } => json!({
+            "reason":"library_configuration","library":name,
+            "configuration":source.path().map(path),"cause":source.code()
+        }),
+        ContextError::LibrarySource {
+            name,
+            config,
+            path: source_path,
+            source,
+        } => json!({
+            "reason":"library_source","library":name,"configuration":path(config),
+            "path":path(source_path),"cause":context_data(source)
+        }),
+        ContextError::UnknownApplication {
+            requested,
+            available,
+        } => json!({"reason":"unknown_application","requested":requested,"available":available}),
+        ContextError::AmbiguousApplication { available } => {
+            json!({"reason":"ambiguous_application","available":available})
+        }
+        ContextError::EmptyWorkspace => json!({"reason":"empty_workspace"}),
+        ContextError::Discovery(_) => json!({"reason":"project_discovery"}),
+        ContextError::Source(_) => json!({"reason":"source"}),
+        ContextError::Settings(_) => json!({"reason":"application_settings"}),
+    }
+}
+
+/// Explain catalog failures without exposing Rust debug output or translated JSON fields.
+#[must_use]
+pub fn library_message(error: &ContextError, localizer: &Localizer) -> Option<String> {
+    match error {
+        ContextError::LibraryConfiguration { name, source } => {
+            let detail = super::global::present_global_config_error(source, localizer);
+            Some(localizer.format(
+                "analysis-library-config-error",
+                &[
+                    ("name", LocalizationValue::Text(name)),
+                    ("detail", LocalizationValue::Text(&detail)),
+                ],
+            ))
+        }
+        ContextError::LibrarySource {
+            name, config, path, ..
+        } => Some(localizer.format(
+            "analysis-library-source-error",
+            &[
+                ("name", LocalizationValue::Text(name)),
+                (
+                    "config",
+                    LocalizationValue::Text(&path_output::display_path(config)),
+                ),
+                (
+                    "path",
+                    LocalizationValue::Text(&path_output::display_path(path)),
+                ),
+            ],
+        )),
+        _ => None,
+    }
+}
 
 /// Preserve the manifest location while rendering a specific configuration failure.
 pub fn present(
@@ -35,6 +105,7 @@ fn reason(localizer: &Localizer, error: &SettingsError) -> String {
             localizer.text("analysis-extension-scope-location")
         }
         SettingsError::EmptyConfigurationSource => localizer.text("analysis-reference-empty"),
+        SettingsError::EmptyConfigurationLibrary => localizer.text("analysis-library-empty"),
         SettingsError::ConfigurationReferenceScope => localizer.text("analysis-reference-scope"),
         SettingsError::ManagedAnalyzerField { field } => localizer.format(
             "analysis-managed-field",

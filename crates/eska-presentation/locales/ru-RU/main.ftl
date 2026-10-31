@@ -1051,3 +1051,9 @@ fmt-state-planned = Запланировано
 fmt-state-applied = Применено
 fmt-state-failed = Ошибка
 fmt-state-not_applied = Не применено
+
+analysis-library-empty = Укажите непустое имя configuration.library.
+analysis-library-config-error = Не удалось подключить библиотеку { $name }: { $detail }
+analysis-library-source-error = Источник { $path } библиотеки { $name } из { $config } недоступен или не подходит выбранному контексту.
+config-library-unknown = Библиотека { $name } не зарегистрирована в { $path }.
+config-library-source-empty = Укажите непустой source библиотеки { $name } в { $path }.

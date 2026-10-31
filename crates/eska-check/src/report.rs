@@ -143,20 +143,7 @@ fn configuration(error: &eska_analyzer::Error) -> Value {
 
 /// Keep application selection errors actionable without exposing Rust debug representations.
 fn context(error: &eska_project_core::application::ContextError) -> Value {
-    use eska_project_core::application::ContextError;
-    match error {
-        ContextError::UnknownApplication {
-            requested,
-            available,
-        } => json!({"reason":"unknown_application","requested":requested,"available":available}),
-        ContextError::AmbiguousApplication { available } => {
-            json!({"reason":"ambiguous_application","available":available})
-        }
-        ContextError::EmptyWorkspace => json!({"reason":"empty_workspace"}),
-        ContextError::Discovery(_) => json!({"reason":"project_discovery"}),
-        ContextError::Source(_) => json!({"reason":"source"}),
-        ContextError::Settings(_) => json!({"reason":"application_settings"}),
-    }
+    eska_presentation::diagnostics::application::context_data(error)
 }
 
 /// Structural failures retain object identity or descriptor location when it is available.
@@ -241,6 +228,13 @@ pub fn human(writer: &mut impl Write, report: &Report, localizer: &Localizer) ->
 /// Localized explanations and upstream process logs stay on stderr, outside stable JSON fields.
 pub fn human_error(error: &Failure, localizer: &Localizer) {
     if let Failure::Configuration(error) = error {
+        if let eska_analyzer::Error::Context(context) = error
+            && let Some(message) =
+                eska_presentation::diagnostics::application::library_message(context, localizer)
+        {
+            eprintln!("{message}");
+            return;
+        }
         if matches!(error.code(), "context" | "cancelled" | "timeout") {
             eprintln!(
                 "{}",

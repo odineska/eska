@@ -233,19 +233,7 @@ pub fn error_document(error: &Error) -> Value {
             json!({"actual":actual})
         }
         Error::CheckConfig { exit_code, .. } => json!({"exit_code":exit_code}),
-        Error::Context(error) => match error.as_ref() {
-            eska_project_core::application::ContextError::UnknownApplication {
-                requested,
-                available,
-            } => {
-                json!({"reason":"unknown_application","requested":requested,"available":available})
-            }
-            eska_project_core::application::ContextError::AmbiguousApplication { available } => {
-                json!({"reason":"ambiguous_application","available":available})
-            }
-
-            _ => json!({}),
-        },
+        Error::Context(error) => eska_presentation::diagnostics::application::context_data(error),
         Error::Rollback { paths, original } => {
             json!({"paths":paths.iter().map(|path|response::path(path)).collect::<Vec<_>>(),"original":error_document(original)})
         }
