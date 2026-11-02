@@ -1,7 +1,7 @@
 //! Bounded, per-descriptor Designer parsing into owned summaries and optional properties.
 
 mod predefined;
-mod values;
+pub(crate) mod values;
 pub(crate) use predefined::parse as parse_predefined;
 
 use std::{collections::HashSet, ops::Range, path::PathBuf};
