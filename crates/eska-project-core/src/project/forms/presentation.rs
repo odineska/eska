@@ -61,11 +61,22 @@ pub enum FormGrouping {
     HorizontalIfPossible,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+pub enum FieldTitleLocation {
+    Left,
+    Right,
+    Top,
+    Bottom,
+    None,
+}
+
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ElementPresentation {
     pub identity: ElementIdentity,
     pub grouping: FormGrouping,
+    pub displayed: bool,
+    pub title_location: FieldTitleLocation,
     pub caption: PresentationText,
     pub tooltip: Option<PresentationText>,
     pub value_type: FieldType,
@@ -108,6 +119,26 @@ fn visit(
     output: &mut Vec<ElementPresentation>,
 ) {
     let (binding_caption, value_type, binding) = bind(element, form, resources);
+    let needs_binding = element.kind.is_some_and(|kind| {
+        matches!(
+            kind.family(),
+            super::ElementFamily::Field | super::ElementFamily::Table
+        )
+    });
+    if needs_binding
+        && binding.is_none()
+        && let Some(path) = property(element, "DataPath").filter(|property| {
+            appearance::text(&property.property.value).is_some_and(|path| !path.is_empty())
+        })
+    {
+        appearance.diagnostics.push(AppearanceDiagnostic {
+            code: "binding_missing",
+            origin: path.origin.clone(),
+            target: None,
+        });
+    }
+    let displayed = (!needs_binding || binding.is_some())
+        && scalar(&element.properties, "Visible") != Some("false");
     let command =
         property(element, "CommandName").and_then(|value| appearance::text(&value.property.value));
     let caption = property(element, "Title")
@@ -160,6 +191,30 @@ fn visit(
         .map(|value| choices(&value.property.value, resources))
         .filter(|values| !values.is_empty())
         .unwrap_or_else(|| enum_choices(&value_type, resources));
+    output.push(ElementPresentation {
+        identity: element.identity.clone(),
+        grouping: grouping(element),
+        displayed,
+        title_location: title_location(element),
+        caption,
+        tooltip: property(element, "ToolTip").and_then(|value| literal(&value.property.value)),
+        value_type,
+        binding,
+        choices,
+        font,
+        title_font,
+        foreground,
+        background,
+        border,
+        title_color,
+        auto_commands: auto_commands(element, form),
+    });
+    for child in element.children.iter().chain(&element.auxiliary) {
+        visit(child, form, resources, appearance, output);
+    }
+}
+
+fn auto_commands(element: &EffectiveElement, form: &ComposedForm) -> Vec<String> {
     let mut auto_commands = Vec::new();
     if element.kind == Some(ElementKind::Form)
         && form
@@ -186,24 +241,38 @@ fn visit(
             auto_commands.push("Post".into());
         }
     }
-    output.push(ElementPresentation {
-        identity: element.identity.clone(),
-        grouping: grouping(element),
-        caption,
-        tooltip: property(element, "ToolTip").and_then(|value| literal(&value.property.value)),
-        value_type,
-        binding,
-        choices,
-        font,
-        title_font,
-        foreground,
-        background,
-        border,
-        title_color,
-        auto_commands,
-    });
-    for child in element.children.iter().chain(&element.auxiliary) {
-        visit(child, form, resources, appearance, output);
+    auto_commands
+}
+
+fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
+    match scalar(&element.properties, "TitleLocation") {
+        Some("Left") => FieldTitleLocation::Left,
+        Some("Right") => FieldTitleLocation::Right,
+        Some("Top") => FieldTitleLocation::Top,
+        Some("Bottom") => FieldTitleLocation::Bottom,
+        Some("None") => FieldTitleLocation::None,
+        _ if matches!(
+            element.kind,
+            Some(
+                ElementKind::CalendarField
+                    | ElementKind::ChartField
+                    | ElementKind::DendrogramField
+                    | ElementKind::FormattedDocumentField
+                    | ElementKind::GanttChartField
+                    | ElementKind::GeographicalSchemaField
+                    | ElementKind::GraphicalSchemaField
+                    | ElementKind::HtmlDocumentField
+                    | ElementKind::PdfDocumentField
+                    | ElementKind::PictureField
+                    | ElementKind::PlannerField
+                    | ElementKind::SpreadsheetDocumentField
+                    | ElementKind::TextDocumentField
+            )
+        ) =>
+        {
+            FieldTitleLocation::Top
+        }
+        _ => FieldTitleLocation::Left,
     }
 }
 

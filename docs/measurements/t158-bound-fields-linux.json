@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux",
+  "importExitCode": 0,
+  "exportExitCode": 0,
+  "visualParityVerified": false,
+  "fields": [
+    {
+      "kind": "CalendarField",
+      "nativeExportSha256": "9dda3729c944b3922bd147fb881b22dc1c9538f819aa91a25556eeaf66841db4",
+      "fixtureSha256": "a61e752e7eba5572a906da553a65ccdab0492a2041ef4aff6f2eb9b685a4ca63"
+    },
+    {
+      "kind": "ChartField",
+      "nativeExportSha256": "9ebdb12d0dac65ad16ff3e2868c3c99fc097cd56a47a25c8697e4a1ef6fa01ad",
+      "fixtureSha256": "68625c017481f293e15b1d6fc650709008cf1feeff987f6d12995f569277fc32"
+    },
+    {
+      "kind": "PlannerField",
+      "nativeExportSha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3",
+      "fixtureSha256": "26ec7d61e2bdd34f1a4ff08342a7b33b479e8b04128b11988f68fbe79dab3976"
+    },
+    {
+      "kind": "FormattedDocumentField",
+      "nativeExportSha256": "fbdbfdc2f4d51f36d1326462d980ec4cfefd38ddc362492321ff0bf0505a78ed",
+      "fixtureSha256": "8bad063cac5f19304d82fac61f3f9492be34759229061ce4fa97d92ad11535af"
+    },
+    {
+      "kind": "SpreadSheetDocumentField",
+      "nativeExportSha256": "c4a3d86f966d363ef7feafd8fd50ccdc50c31334642f410314a9d2a8474bb742",
+      "fixtureSha256": "d82e3f44a0d0d8c76982ed5cc5eca0a199b32b16fb2097c80f85c6b8e1dec54f"
+    },
+    {
+      "kind": "InputField",
+      "nativeExportSha256": "0a42fb2a49b80105f279455026f15d444757ad07085c851cd5c147358c8502e5",
+      "fixtureSha256": "50e5d96edc886ec32a98f1ad72f6ea29c92b37ab9b186b844577e60d26e18fa1"
+    },
+    {
+      "kind": "HTMLDocumentField",
+      "nativeExportSha256": "dfcfdc3bc47d5764df465a9872827b507962791a89820f85949a11097fd5d916",
+      "fixtureSha256": "a3918137b76ca50ad97d4f85aa8c6f8111369191c9e781d86a69b43202014d7f"
+    },
+    {
+      "kind": "CheckBoxField",
+      "nativeExportSha256": "411a98af09bc0b8a515edf12a950344a720f3845cfe15f6ce470f8a4e5d6453c",
+      "fixtureSha256": "68bc20e1c512d4f81572cb741e3d89d66f124039ff12fd9762686a682a4cc812"
+    },
+    {
+      "kind": "ProgressBarField",
+      "nativeExportSha256": "4cad545c89c4be4b1ca9b24d24ced28b8ffca3abdbcc5a106512fed38260627c",
+      "fixtureSha256": "3f7fa317494c3caa3d77e212546eb990fd3369728be33be36e40bd66e4f9047f"
+    },
+    {
+      "kind": "TrackBarField",
+      "nativeExportSha256": "16df21113dd3ba18347f40e2f67a342044b7e8a5cb4055c2d6fe2ca42a1a2b02",
+      "fixtureSha256": "970f4796bb51cf5eeb44e0acc8ab3d173fb72462aa0e3bb446151c98342ce4c0"
+    },
+    {
+      "kind": "LabelField",
+      "nativeExportSha256": "90702786c229f6922c5d9d3a8e0a063657e9d08bf9bf9001bcb6461fa27d5f18",
+      "fixtureSha256": "14feca35c71786f5aee753d7bea5a4454862b7ed0e7356d88f0968c654ba5e54"
+    },
+    {
+      "kind": "PictureField",
+      "nativeExportSha256": "819ff17ee5e13db2f20709ce7b18f21e067a1d366ea7fa8907f68c41ae491662",
+      "fixtureSha256": "b38502cc8e6ab42604404ad5de49a3c5efa8e07538d6caf5d254ba0fa3f7fd79"
+    },
+    {
+      "kind": "RadioButtonField",
+      "nativeExportSha256": "2e50016ce35e0da17b5ea651ebfa3f1eda9e4d3bd9a373dfcef8adbc973d8932",
+      "fixtureSha256": "bb209cf88403d2f93233291d32ff7cec620aa97464bf171da27d356cc14aa08f"
+    }
+  ],
+  "observations": {
+    "unboundInputAndCalendar": "not displayed; retained in tree",
+    "inputDefaultPixels": [
+      161,
+      23
+    ],
+    "checkBoxDefaultTitleLocation": "Left with colon",
+    "largeDefaultTitleLocation": "Top",
+    "calendarDefaultPixels": [
+      338,
+      300
+    ],
+    "chartHtmlAndFormattedDefaultPixels": [
+      500,
+      243
+    ],
+    "formattedDefaultToolbar": false,
+    "chartSampleValues": "randomized on each open; excluded only these values from pixel comparison by user decision 2026-11-02",
+    "chartPalette": [
+      "#4cc8ff",
+      "#ff8779",
+      "#ffc000",
+      "#5fc26e"
+    ],
+    "calendarRegion": "en-US from native LANG=C.UTF-8; separate from 1C UI ru"
+  },
+  "installedVsixGallery": {
+    "locale": "en",
+    "passed": true,
+    "referenceFontVersion": "Liberation 2.1.5 (bundled unmodified OFL assets)",
+    "results": [
+      {
+        "kind": "InputField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 261.25,
+          "height": 73
+        },
+        "control": {
+          "x": 107.25,
+          "y": 315,
+          "width": 161,
+          "height": 23
+        },
+        "title": "Left",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "CheckBoxField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 145.34375,
+          "height": 72
+        },
+        "control": {
+          "x": 138.34375,
+          "y": 319.484375,
+          "width": 14,
+          "height": 14
+        },
+        "title": "Left",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "CalendarField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 372,
+          "height": 371
+        },
+        "control": {
+          "x": 41,
+          "y": 336,
+          "width": 338,
+          "height": 300
+        },
+        "title": "Top",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "ChartField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 534,
+          "height": 314
+        },
+        "control": {
+          "x": 41,
+          "y": 336,
+          "width": 500,
+          "height": 243
+        },
+        "title": "Top",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "FormattedDocumentField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 534,
+          "height": 314
+        },
+        "control": {
+          "x": 41,
+          "y": 336,
+          "width": 500,
+          "height": 243
+        },
+        "title": "Top",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "HTMLDocumentField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 534,
+          "height": 314
+        },
+        "control": {
+          "x": 41,
+          "y": 336,
+          "width": 500,
+          "height": 243
+        },
+        "title": "Top",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "LabelField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 264.203125,
+          "height": 72
+        },
+        "control": {
+          "x": 110.203125,
+          "y": 316,
+          "width": 161,
+          "height": 16
+        },
+        "title": "Left",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      }
+    ],
+    "pixelParityVerified": false
+  }
+}
