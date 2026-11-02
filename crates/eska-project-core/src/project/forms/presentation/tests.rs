@@ -229,3 +229,55 @@ fn incomplete_marks_follow_field_overrides_and_ignore_foreign_namespace_properti
         assert!(view.elements[1].displayed);
     }
 }
+
+#[test]
+fn native_table_fixtures_bind_value_table_columns_and_retain_auxiliary_controls() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-tables");
+    let mut count = 0;
+    for path in std::fs::read_dir(root).unwrap() {
+        let path = path.unwrap().path();
+        let document = parse("native-table", std::fs::read_to_string(&path).unwrap()).unwrap();
+        let form = compose(&document, &[]);
+        let view = present(&form, &[document], &[]);
+        assert!(view.diagnostics.is_empty(), "{path:?}");
+        let table = &view.elements[1];
+        assert!(table.displayed && table.binding.is_some(), "{path:?}");
+        assert_eq!(table.value_type.kind, FieldValueKind::Table, "{path:?}");
+        let fields: Vec<_> = view
+            .elements
+            .iter()
+            .filter(|element| matches!(element.identity.key, super::super::ElementKey::Xml(3..=5)))
+            .collect();
+        assert_eq!(fields.len(), 3, "{path:?}");
+        assert!(
+            fields.iter().all(|field| field.binding.is_some()),
+            "{path:?}"
+        );
+        assert_eq!(fields[0].value_type.kind, FieldValueKind::String);
+        assert_eq!(fields[0].value_type.length, Some(20));
+        assert_eq!(fields[1].value_type.kind, FieldValueKind::Number);
+        assert_eq!(fields[1].value_type.digits, Some(9));
+        assert_eq!(fields[1].value_type.fraction, Some(2));
+        assert_eq!(fields[2].value_type.kind, FieldValueKind::Boolean);
+        assert_eq!(
+            form.root.children[0]
+                .auxiliary
+                .iter()
+                .filter(|element| {
+                    matches!(
+                        element.kind,
+                        Some(
+                            ElementKind::SearchStringAddition
+                                | ElementKind::SearchControlAddition
+                                | ElementKind::ViewStatusAddition
+                        )
+                    )
+                })
+                .count(),
+            3
+        );
+        count += 1;
+    }
+    assert_eq!(count, 9);
+}
