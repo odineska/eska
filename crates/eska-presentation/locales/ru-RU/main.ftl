@@ -219,7 +219,7 @@ config-distrobox-container-missing = Для runner = "distrobox" задайте 
 config-host-container-unexpected = Для runner = "host" параметр container в { $path } недопустим.
 config-editor-error = Не удалось открыть редактор: { $reason }
 config-editor-failed = Редактор завершился с ошибкой; глобальный конфиг не изменён.
-config-edit-conflict = Другое изменение мешает сохранить { $path }. Ваша отредактированная копия сохранена в { $draft }.
+config-edit-conflict = Не удалось сохранить { $path }. Проверьте параллельные изменения и права на запись. Ваша отредактированная копия сохранена в { $draft }.
 clone-about = Клонировать и проверить существующий проект eska
 clone-usage = eska clone [ПАРАМЕТРЫ] <РЕПОЗИТОРИЙ> [КАТАЛОГ]
 clone-repository-help = URL или локальный путь репозитория

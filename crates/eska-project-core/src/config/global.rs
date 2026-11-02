@@ -355,14 +355,13 @@ where
         Err(source) => return Err(io_error(&lock_path, source)),
     };
     let permissions = match fs::metadata(path) {
-        Ok(metadata) if metadata.is_file() => metadata.permissions(),
+        Ok(metadata) if metadata.is_file() && !metadata.permissions().readonly() => {
+            metadata.permissions()
+        }
         Ok(_) => return Err(draft.conflict(path)),
         Err(error) if error.kind() == io::ErrorKind::NotFound => return Err(draft.conflict(path)),
         Err(source) => return Err(io_error(path, source)),
     };
-    if permissions.readonly() {
-        return Err(io_error(path, io::ErrorKind::PermissionDenied.into()));
-    }
     let timestamp = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap_or_default()
@@ -576,6 +575,28 @@ mod tests {
         };
         assert_eq!(fs::read_to_string(path).unwrap(), DEFAULT_CONFIG);
         assert_eq!(fs::read(draft).unwrap(), b"# edited\n");
+    }
+
+    #[test]
+    fn losing_write_access_during_an_edit_preserves_the_draft() {
+        let directory = crate::test_support::TestDir::new();
+        let path = directory.0.join("config.toml");
+        init_at(&path).unwrap();
+        let permissions = fs::metadata(&path).unwrap().permissions();
+        let result = edit_at(&path, |draft| {
+            fs::write(draft, "# editor draft\n").unwrap();
+            fs::write(&path, "# protected policy\n").unwrap();
+            let mut readonly = permissions.clone();
+            readonly.set_readonly(true);
+            fs::set_permissions(&path, readonly).unwrap();
+            Ok(())
+        });
+        fs::set_permissions(&path, permissions).unwrap();
+        let Err(GlobalConfigError::EditConflict { draft, .. }) = result else {
+            panic!("expected a recoverable draft, got {result:?}");
+        };
+        assert_eq!(fs::read(path).unwrap(), b"# protected policy\n");
+        assert_eq!(fs::read(draft).unwrap(), b"# editor draft\n");
     }
 
     #[test]
