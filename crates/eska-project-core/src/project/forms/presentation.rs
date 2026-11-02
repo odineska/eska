@@ -54,10 +54,18 @@ impl Default for FieldType {
         }
     }
 }
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+pub enum FormGrouping {
+    Vertical,
+    Horizontal,
+    HorizontalIfPossible,
+}
+
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ElementPresentation {
     pub identity: ElementIdentity,
+    pub grouping: FormGrouping,
     pub caption: PresentationText,
     pub tooltip: Option<PresentationText>,
     pub value_type: FieldType,
@@ -123,7 +131,14 @@ fn visit(
             "NormalTextFont"
         },
     );
-    let foreground = appearance.color(property(element, "TextColor"), "TextColor");
+    let foreground = appearance.color(
+        property(element, "TextColor"),
+        match element.kind {
+            Some(ElementKind::Button) => "ButtonTextColor",
+            Some(ElementKind::LabelDecoration | ElementKind::PictureDecoration) => "TextColor",
+            _ => "FormTextColor",
+        },
+    );
     let background = appearance.color(
         property(element, "BackColor"),
         if element.kind == Some(ElementKind::Button) {
@@ -138,7 +153,7 @@ fn visit(
         if group {
             "GroupTitleTextColor"
         } else {
-            "TextColor"
+            "FormTextColor"
         },
     );
     let choices = property(element, "ChoiceList")
@@ -173,6 +188,7 @@ fn visit(
     }
     output.push(ElementPresentation {
         identity: element.identity.clone(),
+        grouping: grouping(element),
         caption,
         tooltip: property(element, "ToolTip").and_then(|value| literal(&value.property.value)),
         value_type,
@@ -188,6 +204,28 @@ fn visit(
     });
     for child in element.children.iter().chain(&element.auxiliary) {
         visit(child, form, resources, appearance, output);
+    }
+}
+
+fn grouping(element: &EffectiveElement) -> FormGrouping {
+    match property(element, "Group").and_then(|property| appearance::text(&property.property.value))
+    {
+        Some("Horizontal") => FormGrouping::Horizontal,
+        Some("HorizontalIfPossible") => FormGrouping::HorizontalIfPossible,
+        Some("Vertical") => FormGrouping::Vertical,
+        _ if matches!(
+            element.kind,
+            Some(
+                ElementKind::UsualGroup
+                    | ElementKind::ButtonGroup
+                    | ElementKind::CommandBar
+                    | ElementKind::Popup
+            )
+        ) =>
+        {
+            FormGrouping::Horizontal
+        }
+        _ => FormGrouping::Vertical,
     }
 }
 
@@ -377,9 +415,9 @@ fn metadata_binding(
             }) {
                 owner = child;
             } else if index + 1 == remaining.len() && standard_attribute(part) {
-                let field_type = standard_type(part, owner);
+                let field_type = standard_type(part, owner, resources);
                 return Some((
-                    Some(standard_caption(part, owner)),
+                    Some(standard_caption(part, owner, resources)),
                     field_type,
                     Some(PropertySource {
                         source: resource.source.clone(),
@@ -472,12 +510,32 @@ fn standard_attribute(name: &str) -> bool {
             | "PredefinedDataName"
     )
 }
-fn standard_caption(name: &str, owner: &ParsedObject) -> PresentationText {
-    if let Some(standard) = owner.properties.as_ref().and_then(|properties| {
-        properties
-            .iter()
-            .find(|property| property.property.key.name == "StandardAttributes")
-    }) && let MetadataValue::Record(fields) = &standard.property.value
+fn metadata_property<'a>(
+    owner: &ParsedObject,
+    name: &str,
+    resources: &'a [FormResource],
+) -> Option<&'a MetadataProperty> {
+    resources
+        .iter()
+        .rev()
+        .flat_map(|resource| &resource.descriptor.objects)
+        .filter(|object| object.metadata.id() == owner.metadata.id())
+        .find_map(|object| {
+            object
+                .properties
+                .as_ref()?
+                .iter()
+                .find(|value| value.property.key.name == name)
+                .map(|value| &value.property)
+        })
+}
+fn standard_caption(
+    name: &str,
+    owner: &ParsedObject,
+    resources: &[FormResource],
+) -> PresentationText {
+    if let Some(standard) = metadata_property(owner, "StandardAttributes", resources)
+        && let MetadataValue::Record(fields) = &standard.value
         && let Some(attribute) = fields
             .iter()
             .find(|field| appearance::qualifier(field, "name") == Some(name))
@@ -487,22 +545,26 @@ fn standard_caption(name: &str, owner: &ParsedObject) -> PresentationText {
         return caption;
     }
     let folder_parent = name == "Parent"
-        && owner.properties.as_ref().is_some_and(|values| {
-            values.iter().any(|value| {
-                value.property.key.name == "HierarchyType"
-                    && appearance::text(&value.property.value) == Some("HierarchyFoldersAndItems")
-            })
-        });
+        && metadata_property(owner, "HierarchyType", resources)
+            .and_then(|value| appearance::text(&value.value))
+            == Some("HierarchyFoldersAndItems");
     PresentationText::Standard {
         key: format!("attribute.{}", if folder_parent { "Folder" } else { name }),
     }
 }
-fn standard_type(name: &str, owner: &ParsedObject) -> FieldType {
+fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -> FieldType {
     let kind = match name {
         "IsFolder" | "DeletionMark" | "Posted" | "Active" | "Predefined" => FieldValueKind::Boolean,
         "Date" | "Period" => FieldValueKind::Date,
         "LineNumber" => FieldValueKind::Number,
         "Parent" | "Ref" | "Owner" | "Recorder" => FieldValueKind::Reference,
+        "Code"
+            if metadata_property(owner, "CodeType", resources)
+                .and_then(|value| appearance::text(&value.value))
+                == Some("Number") =>
+        {
+            FieldValueKind::Number
+        }
         _ => FieldValueKind::String,
     };
     let length_key = match name {
@@ -511,15 +573,8 @@ fn standard_type(name: &str, owner: &ParsedObject) -> FieldType {
         "Number" => "NumberLength",
         _ => "",
     };
-    let length = owner
-        .properties
-        .as_ref()
-        .and_then(|values| {
-            values
-                .iter()
-                .find(|value| value.property.key.name == length_key)
-        })
-        .and_then(|value| appearance::text(&value.property.value))
+    let length = metadata_property(owner, length_key, resources)
+        .and_then(|value| appearance::text(&value.value))
         .and_then(|value| value.parse().ok());
     FieldType {
         kind,
@@ -681,3 +736,6 @@ fn column_binding(
 
     None
 }
+
+#[cfg(test)]
+mod tests;

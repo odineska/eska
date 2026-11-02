@@ -20,7 +20,8 @@ pub use context::{
 };
 pub use parsing::parse;
 pub use presentation::{
-    ElementPresentation, FieldType, FieldValueKind, FormPresentation, PresentationText, present,
+    ElementPresentation, FieldType, FieldValueKind, FormGrouping, FormPresentation,
+    PresentationText, present,
 };
 pub use references::{FormReference, ReferenceSlot};
 pub use resources::FormResource;
