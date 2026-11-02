@@ -2,6 +2,7 @@
 
 mod appearance;
 mod catalog;
+mod commands;
 mod composition;
 mod context;
 mod parsing;
@@ -12,6 +13,7 @@ mod resources;
 
 pub use appearance::{AppearanceDiagnostic, ResolvedColor, ResolvedFont};
 pub use catalog::{ElementFamily, ElementKind};
+pub use commands::AutoCommandItem;
 pub use composition::{
     ComposedForm, CompositionIssue, EffectiveDefinition, EffectiveElement,
     FormCompositionDiagnostic, PropertySource, SourcedProperty, compose,

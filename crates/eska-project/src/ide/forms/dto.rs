@@ -41,7 +41,7 @@ fn element(
     let presentation = presentations.get(&value.identity).map(|presentation| {
         json!({"grouping":presentation.grouping,"displayed":presentation.displayed,"titleLocation":presentation.title_location,"picture":presentation.picture,"caption":presentation.caption,"tooltip":presentation.tooltip,"valueType":presentation.value_type,"binding":presentation.binding,"choices":presentation.choices,
             "font":presentation.font,"titleFont":presentation.title_font,"foreground":presentation.foreground,"background":presentation.background,"border":presentation.border,
-            "titleColor":presentation.title_color,"autoCommands":presentation.auto_commands})
+            "titleColor":presentation.title_color,"autoCommands":presentation.auto_commands,"autoCommandItems":presentation.auto_command_items})
     });
     json!({"identity":identity(&value.identity),"origin":origin(&value.origin),"kind":value.kind.map(eska_project_core::project::forms::ElementKind::xml_name),"name":value.name,"xmlName":value.xml_name,
         "properties":value.properties.iter().map(|value| property(labels,value)).collect::<Vec<_>>(),"presentation":presentation,

@@ -90,6 +90,7 @@ pub struct ElementPresentation {
     pub border: ResolvedColor,
     pub title_color: ResolvedColor,
     pub auto_commands: Vec<String>,
+    pub auto_command_items: Vec<super::AutoCommandItem>,
 }
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -120,26 +121,6 @@ fn visit(
     output: &mut Vec<ElementPresentation>,
 ) {
     let (binding_caption, value_type, binding) = bind(element, form, resources);
-    let needs_binding = element.kind.is_some_and(|kind| {
-        matches!(
-            kind.family(),
-            super::ElementFamily::Field | super::ElementFamily::Table
-        )
-    });
-    if needs_binding
-        && binding.is_none()
-        && let Some(path) = property(element, "DataPath").filter(|property| {
-            appearance::text(&property.property.value).is_some_and(|path| !path.is_empty())
-        })
-    {
-        appearance.diagnostics.push(AppearanceDiagnostic {
-            code: "binding_missing",
-            origin: path.origin.clone(),
-            target: None,
-        });
-    }
-    let displayed = (!needs_binding || binding.is_some())
-        && scalar(&element.properties, "Visible") != Some("false");
     let command =
         property(element, "CommandName").and_then(|value| appearance::text(&value.property.value));
     let caption = property(element, "Title")
@@ -192,10 +173,23 @@ fn visit(
         .map(|value| choices(&value.property.value, resources))
         .filter(|values| !values.is_empty())
         .unwrap_or_else(|| enum_choices(&value_type, resources));
+    let auto_command_items = if element.kind == Some(ElementKind::Form) {
+        super::commands::automatic(form, resources)
+    } else {
+        Vec::new()
+    };
+    let auto_commands = auto_command_items
+        .iter()
+        .filter_map(|item| {
+            item.key
+                .strip_prefix("Form.StandardCommand.")
+                .map(str::to_owned)
+        })
+        .collect();
     output.push(ElementPresentation {
         identity: element.identity.clone(),
         grouping: grouping(element),
-        displayed,
+        displayed: is_displayed(element, binding.as_ref(), command, appearance),
         title_location: title_location(element),
         picture: super::pictures::resolve(element, resources, &mut appearance.diagnostics),
         caption,
@@ -209,41 +203,42 @@ fn visit(
         background,
         border,
         title_color,
-        auto_commands: auto_commands(element, form),
+        auto_commands,
+        auto_command_items,
     });
     for child in element.children.iter().chain(&element.auxiliary) {
         visit(child, form, resources, appearance, output);
     }
 }
 
-fn auto_commands(element: &EffectiveElement, form: &ComposedForm) -> Vec<String> {
-    let mut auto_commands = Vec::new();
-    if element.kind == Some(ElementKind::Form)
-        && form
-            .attributes
-            .iter()
-            .any(|attribute| scalar(&attribute.properties, "MainAttribute") == Some("true"))
+fn is_displayed(
+    element: &EffectiveElement,
+    binding: Option<&PropertySource>,
+    command: Option<&str>,
+    appearance: &mut Appearance<'_>,
+) -> bool {
+    let needs_binding = element.kind.is_some_and(|kind| {
+        matches!(
+            kind.family(),
+            super::ElementFamily::Field | super::ElementFamily::Table
+        )
+    });
+    if needs_binding
+        && binding.is_none()
+        && let Some(path) = property(element, "DataPath").filter(|property| {
+            appearance::text(&property.property.value).is_some_and(|path| !path.is_empty())
+        })
     {
-        let main = form
-            .attributes
-            .iter()
-            .find(|attribute| scalar(&attribute.properties, "MainAttribute") == Some("true"));
-        let types = main.map(definition_type).unwrap_or_default();
-        if types.types.iter().any(|kind| {
-            kind.name.starts_with("CatalogObject.") || kind.name.starts_with("DocumentObject.")
-        }) {
-            auto_commands.extend(["WriteAndClose".into(), "Write".into()]);
-        }
-        if types
-            .types
-            .iter()
-            .any(|kind| kind.name.starts_with("DocumentObject."))
-        {
-            auto_commands[0] = "PostAndClose".into();
-            auto_commands.push("Post".into());
-        }
+        appearance.diagnostics.push(AppearanceDiagnostic {
+            code: "binding_missing",
+            origin: path.origin.clone(),
+            target: None,
+        });
     }
-    auto_commands
+    (!needs_binding || binding.is_some())
+        && property(element, "Visible").and_then(|value| appearance::text(&value.property.value))
+            != Some("false")
+        && super::commands::visible(command)
 }
 
 fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
@@ -324,7 +319,7 @@ fn record<'a>(value: &'a MetadataValue, name: &str) -> Option<&'a MetadataProper
 }
 
 /// Localized records are namespace-aware; a foreign `item` cannot supply a platform caption.
-fn literal(value: &MetadataValue) -> Option<PresentationText> {
+pub(super) fn literal(value: &MetadataValue) -> Option<PresentationText> {
     let items = match value {
         MetadataValue::Localized(items) => items.clone(),
         MetadataValue::Text(text) if !text.is_empty() => {
@@ -351,15 +346,18 @@ fn literal(value: &MetadataValue) -> Option<PresentationText> {
     };
     (!items.is_empty()).then_some(PresentationText::Literal { items })
 }
-fn definition_type(definition: &EffectiveDefinition) -> FieldType {
+pub(super) fn definition_type(definition: &EffectiveDefinition) -> FieldType {
     definition
         .properties
         .iter()
-        .find(|value| value.property.key.name == "Type")
+        .find(|value| {
+            value.property.key.name == "Type"
+                && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
+        })
         .map(|value| field_type(&value.property.value))
         .unwrap_or_default()
 }
-fn field_type(value: &MetadataValue) -> FieldType {
+pub(super) fn field_type(value: &MetadataValue) -> FieldType {
     let mut result = FieldType::default();
     if let MetadataValue::Record(fields) = value {
         for field in fields {
@@ -581,7 +579,7 @@ fn standard_attribute(name: &str) -> bool {
             | "PredefinedDataName"
     )
 }
-fn metadata_property<'a>(
+pub(super) fn metadata_property<'a>(
     owner: &ParsedObject,
     name: &str,
     resources: &'a [FormResource],
@@ -596,7 +594,11 @@ fn metadata_property<'a>(
                 .properties
                 .as_ref()?
                 .iter()
-                .find(|value| value.property.key.name == name)
+                .find(|value| {
+                    value.property.key.name == name
+                        && value.property.key.namespace.as_deref()
+                            == Some("http://v8.1c.ru/8.3/MDClasses")
+                })
                 .map(|value| &value.property)
         })
 }
