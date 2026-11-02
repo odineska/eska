@@ -72,6 +72,8 @@ fn form_context_uses_application_order_dirty_layers_and_per_input_identity_witho
         preview
             .dependencies
             .iter()
+            .filter(|dependency| dependency.role
+                == crate::backend::project::forms::FormDependencyRole::Form)
             .map(|dependency| dependency.member.as_deref().unwrap())
             .collect::<Vec<_>>(),
         ["base", "one", "two"]
@@ -143,4 +145,45 @@ fn standalone_borrowed_form_is_explicitly_incomplete() {
         preview.form.diagnostics[0].issue,
         crate::backend::project::forms::CompositionIssue::MissingBase
     );
+}
+
+#[test]
+fn form_presentation_tracks_dirty_metadata_captions_without_changing_element_identity() {
+    use crate::backend::project::forms::PresentationText;
+    let directory = TestDir::new();
+    fixture(&directory.0, "configuration");
+    let text = form(
+        "<ChildItems><InputField name=\"Поле\" id=\"1\"><DataPath>Объект.ИНН</DataPath></InputField></ChildItems><Attributes><Attribute name=\"Объект\" id=\"1\"><Type xmlns:v8=\"http://v8.1c.ru/8.1/data/core\" xmlns:cfg=\"http://v8.1c.ru/8.1/data/enterprise/current-config\"><v8:Type>cfg:CatalogObject.Контрагенты</v8:Type></Type></Attribute></Attributes>",
+        None,
+    );
+    fs::write(directory.0.join("src").join(PATH), text).unwrap();
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let preview = project.form_preview(&node, None, &[]).unwrap();
+    let caption = &preview.presentation.elements[1].caption;
+    assert!(
+        matches!(caption, PresentationText::Literal { items } if items[0].content == "ИНН для теста")
+    );
+    let dependency = preview
+        .dependencies
+        .iter()
+        .find(|dependency| dependency.path == Path::new("Catalogs/Контрагенты.xml"))
+        .unwrap();
+    let original = fs::read_to_string(dependency.root.join(&dependency.path)).unwrap();
+    let overlay = FormOverlay {
+        source: dependency.id.clone(),
+        text: original.replace("ИНН для теста", "Несохранённая подпись"),
+        version: "9".into(),
+    };
+    let before = bytes(&directory.0);
+    let changed = project.form_preview(&node, None, &[overlay]).unwrap();
+    assert!(
+        matches!(&changed.presentation.elements[1].caption, PresentationText::Literal { items } if items[0].content == "Несохранённая подпись")
+    );
+    assert_eq!(
+        changed.form.root.children[0].identity,
+        preview.form.root.children[0].identity
+    );
+    assert_eq!(bytes(&directory.0), before);
 }

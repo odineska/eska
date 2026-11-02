@@ -34,6 +34,14 @@ pub struct FormDependency {
     pub snapshot: String,
     pub version: Option<String>,
     pub member: Option<String>,
+    pub role: FormDependencyRole,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum FormDependencyRole {
+    Form,
+    Metadata,
 }
 
 #[derive(Debug)]
@@ -43,7 +51,9 @@ pub struct FormPreview {
     pub limited_context: bool,
     pub dependencies: Vec<FormDependency>,
     pub documents: Vec<FormDocument>,
+    pub resources: Vec<super::FormResource>,
     pub form: ComposedForm,
+    pub presentation: super::FormPresentation,
 }
 
 #[derive(Debug)]
@@ -56,6 +66,11 @@ pub enum FormContextError {
     MemberMismatch,
     MissingForm,
     InvalidOverlay,
+    TooManyResources,
+    InputTooLarge,
+    InvalidMetadata {
+        source: String,
+    },
 }
 
 /// Load only this form from the already selected application, in dependency order.
@@ -125,12 +140,21 @@ pub fn load(
             snapshot: document.revision.clone(),
             version: overlay.map(|overlay| overlay.version.clone()),
             member: input.member().map(|member| member.as_str().into()),
+            role: FormDependencyRole::Form,
         });
         documents.push(document);
     }
     if !selected_found {
         return Err(FormContextError::MissingForm);
     }
+    let resources = super::resources::load(
+        context,
+        owner,
+        selected,
+        &documents,
+        &mut dependencies,
+        overlays,
+    )?;
     for (index, overlay) in overlays.iter().enumerate() {
         if !dependencies
             .iter()
@@ -146,17 +170,20 @@ pub fn load(
         .split_first()
         .ok_or(FormContextError::MissingForm)?;
     let form = compose(base, &extensions.iter().collect::<Vec<_>>());
+    let presentation = super::present(&form, &documents, &resources);
     Ok(FormPreview {
         context_fingerprint: context.fingerprint.clone(),
         application: context.context.name().map(|name| name.as_str().into()),
         limited_context: context.context.limited_context(),
         dependencies,
         documents,
+        resources,
         form,
+        presentation,
     })
 }
 
-fn source_identity(context: &ContextSnapshot, root: &Path, path: &Path) -> String {
+pub(super) fn source_identity(context: &ContextSnapshot, root: &Path, path: &Path) -> String {
     let mut digest = Sha256::new();
     for field in [
         context.context.root().as_os_str().as_encoded_bytes(),

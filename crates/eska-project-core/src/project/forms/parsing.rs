@@ -78,6 +78,7 @@ pub fn parse(source: &str, input: String) -> Result<FormDocument, FormParseError
         parameters: parser.parameters,
         diagnostics: parser.diagnostics,
         base,
+        references: super::references::collect(node),
         input,
     })
 }

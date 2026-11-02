@@ -1,17 +1,29 @@
 //! Read-only managed-form documents with source-qualified identities and lossless source ranges.
 
+mod appearance;
 mod catalog;
 mod composition;
 mod context;
 mod parsing;
+mod presentation;
+mod references;
+mod resources;
 
+pub use appearance::{AppearanceDiagnostic, ResolvedColor, ResolvedFont};
 pub use catalog::{ElementFamily, ElementKind};
 pub use composition::{
     ComposedForm, CompositionIssue, EffectiveDefinition, EffectiveElement,
     FormCompositionDiagnostic, PropertySource, SourcedProperty, compose,
 };
-pub use context::{FormContextError, FormDependency, FormOverlay, FormPreview, load};
+pub use context::{
+    FormContextError, FormDependency, FormDependencyRole, FormOverlay, FormPreview, load,
+};
 pub use parsing::parse;
+pub use presentation::{
+    ElementPresentation, FieldType, FieldValueKind, FormPresentation, PresentationText, present,
+};
+pub use references::{FormReference, ReferenceSlot};
+pub use resources::FormResource;
 
 use std::ops::Range;
 
@@ -137,6 +149,7 @@ pub struct FormDocument {
     pub parameters: Vec<FormDefinition>,
     pub diagnostics: Vec<FormDiagnostic>,
     pub base: Option<FormSnapshot>,
+    pub references: Vec<FormReference>,
     /// Keep exact bytes for source navigation and future checked edits; never send them with the model.
     #[serde(skip)]
     input: String,
