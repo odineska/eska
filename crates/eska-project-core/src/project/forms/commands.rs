@@ -35,7 +35,7 @@ pub(super) fn automatic(form: &ComposedForm, resources: &[FormResource]) -> Vec<
         .find(|node| node.kind == Some(ElementKind::AutoCommandBar));
     if bar.is_some_and(|bar| {
         bar.properties.iter().any(|value| {
-            value.property.key.name == "AutoFill"
+            value.property.key.name == "Autofill"
                 && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
                 && super::appearance::text(&value.property.value) == Some("false")
         })
@@ -225,7 +225,12 @@ mod tests {
             matches!(&result[2].caption,PresentationText::Literal {items} if items[0].content=="Переопределено")
         );
         assert_eq!(result[2].origin.as_ref().unwrap().source, "extension");
-        assert!(automatic(&form("<AutoFill>false</AutoFill>"), &resources).is_empty());
+        assert!(automatic(&form("<Autofill>false</Autofill>"), &resources).is_empty());
+        assert_eq!(
+            automatic(&form("<AutoFill>false</AutoFill>"), &resources).len(),
+            3,
+            "the platform ignores this non-Designer spelling"
+        );
     }
     #[test]
     fn unavailable_server_commands_keep_tree_identity_but_not_desktop_pixels() {
