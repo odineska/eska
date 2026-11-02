@@ -95,21 +95,11 @@ pub(super) fn lock(path: &Path) -> Result<File, Error> {
         .parent()
         .ok_or_else(|| Error::Changed(path.to_owned()))?;
     fs::create_dir_all(parent).map_err(|source| io_error(parent, source))?;
-    if fs::symlink_metadata(path).is_ok_and(|metadata| !metadata.file_type().is_file()) {
-        return Err(Error::Changed(path.to_owned()));
-    }
-    let file = OpenOptions::new()
-        .read(true)
-        .write(true)
-        .create(true)
-        .truncate(false)
-        .open(path)
-        .map_err(|source| io_error(path, source))?;
-    file.try_lock().map_err(|source| match source {
-        fs::TryLockError::WouldBlock => Error::Locked(path.to_owned()),
-        fs::TryLockError::Error(source) => io_error(path, source),
-    })?;
-    Ok(file)
+    crate::config::lock::acquire(path).map_err(|source| match source.kind() {
+        io::ErrorKind::InvalidInput => Error::Changed(path.to_owned()),
+        io::ErrorKind::WouldBlock => Error::Locked(path.to_owned()),
+        _ => io_error(path, source),
+    })
 }
 
 fn publish(path: &Path, expected: Option<&[u8]>, bytes: &[u8]) -> Result<(), Error> {

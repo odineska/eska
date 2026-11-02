@@ -266,7 +266,7 @@ impl AddPlan {
             .as_ref()
             .map_or(self.source.as_path(), install::Prepared::source);
         validate_source(input, &self.roots)?;
-        let _catalog_lock = write::lock(&self.catalog.path.with_extension("toml.eska-add.lock"))?;
+        let _catalog_lock = write::lock(&crate::config::lock::catalog_path(&self.catalog.path))?;
         let parent = self
             .binding
             .path

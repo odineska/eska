@@ -219,6 +219,7 @@ config-distrobox-container-missing = Set container in { $path } when runner = "d
 config-host-container-unexpected = The container setting is not allowed with runner = "host" in { $path }.
 config-editor-error = Could not open the editor: { $reason }
 config-editor-failed = The editor exited with an error; global config was not changed.
+config-edit-conflict = Another change prevents saving { $path }. Your edited copy is available at { $draft }.
 clone-about = Clone and validate an existing eska project
 clone-usage = eska clone [OPTIONS] <REPOSITORY> [DIRECTORY]
 clone-repository-help = Repository URL or local path
