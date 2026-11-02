@@ -30,6 +30,8 @@ fn borrowed_standard_attribute_uses_base_properties_omitted_by_extension() {
         )
     };
     let resource = |source: &str, properties: &str| FormResource {
+        picture: None,
+        retained_bytes: 0,
         source: source.into(),
         references: Vec::new(),
         descriptor: metadata_parser::parse(&xml(properties), None, PropertiesMode::All).unwrap(),

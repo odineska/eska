@@ -280,3 +280,115 @@ fn form_context_excludes_disabled_extensions_but_retains_required_dependencies()
     );
     assert_ne!(preview.context_fingerprint, base_fingerprint);
 }
+
+fn picture_description(name: &str) -> String {
+    format!(
+        "<ExtPicture xmlns=\"http://v8.1c.ru/8.3/xcf/extrnprops\" xmlns:xr=\"http://v8.1c.ru/8.3/xcf/readable\"><Picture><xr:Abs>{name}</xr:Abs></Picture></ExtPicture>"
+    )
+}
+
+fn write_common_picture(directory: &Path) {
+    let root = directory.join("src");
+    let pictures = root.join("CommonPictures/Icon/Ext/Picture");
+    fs::create_dir_all(&pictures).unwrap();
+    fs::write(root.join("CommonPictures/Icon.xml"), "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><CommonPicture uuid=\"11111111-1111-1111-1111-111111111111\"><Properties><Name>Icon</Name></Properties></CommonPicture></MetaDataObject>").unwrap();
+    fs::write(
+        root.join("CommonPictures/Icon/Ext/Picture.xml"),
+        picture_description("One.svg"),
+    )
+    .unwrap();
+    let image = |color| {
+        format!(
+            "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"16\" height=\"16\" fill=\"{color}\"/></svg>"
+        )
+    };
+    fs::write(pictures.join("One.svg"), image("red")).unwrap();
+    fs::write(pictures.join("Two.svg"), image("blue")).unwrap();
+}
+
+#[test]
+fn form_common_picture_tracks_payload_dirty_descriptor_and_rejects_binary_overlays() {
+    use crate::backend::project::{
+        designer_source::PicturePreview,
+        forms::{FormDependencyRole, FormPicture},
+    };
+    let directory = TestDir::new();
+    fixture(&directory.0, "configuration");
+    write_common_picture(&directory.0);
+    fs::write(directory.0.join("src").join(PATH), form("<ChildItems><PictureDecoration name=\"Logo\" id=\"1\"><Picture xmlns:xr=\"http://v8.1c.ru/8.3/xcf/readable\"><xr:Ref>CommonPicture.Icon</xr:Ref><xr:LoadTransparent>false</xr:LoadTransparent></Picture></PictureDecoration></ChildItems>", None)).unwrap();
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let before = bytes(&directory.0);
+    let preview = project.form_preview(&node, None, &[], None).unwrap();
+    assert!(preview.presentation.diagnostics.is_empty());
+    assert!(
+        matches!(&preview.presentation.elements[1].picture, Some(FormPicture::Common { source }) if preview.resources.iter().any(|resource| &resource.source == source))
+    );
+    let binary = preview
+        .dependencies
+        .iter()
+        .find(|dependency| dependency.role == FormDependencyRole::Picture)
+        .unwrap();
+    assert!(binary.path.ends_with("One.svg"));
+    let descriptor = preview
+        .dependencies
+        .iter()
+        .find(|dependency| dependency.path == Path::new("CommonPictures/Icon/Ext/Picture.xml"))
+        .unwrap();
+    let changed = project
+        .form_preview(
+            &node,
+            None,
+            &[FormOverlay {
+                source: descriptor.id.clone(),
+                version: "7".into(),
+                text: picture_description("Two.svg"),
+            }],
+            None,
+        )
+        .unwrap();
+    let image = changed
+        .resources
+        .iter()
+        .find_map(|resource| match &resource.picture {
+            Some(PicturePreview::Ready(picture)) => Some(picture),
+            _ => None,
+        })
+        .unwrap();
+    assert_eq!(image.file_name, "Two.svg");
+    assert!(String::from_utf8_lossy(&image.bytes).contains("blue"));
+    assert_eq!(
+        changed.form.root.children[0].identity,
+        preview.form.root.children[0].identity
+    );
+    assert!(matches!(
+        project.form_preview(
+            &node,
+            None,
+            &[FormOverlay {
+                source: binary.id.clone(),
+                version: "8".into(),
+                text: "invalid binary overlay".into()
+            }],
+            None
+        ),
+        Err(FormPreviewError::Form(FormContextError::InvalidOverlay))
+    ));
+    assert!(matches!(
+        project.form_preview(
+            &node,
+            None,
+            &[FormOverlay {
+                source: descriptor.id.clone(),
+                version: "8".into(),
+                text: "<".into()
+            }],
+            None
+        ),
+        Err(FormPreviewError::Form(
+            FormContextError::InvalidMetadata { .. }
+        ))
+    ));
+    assert_eq!(bytes(&directory.0), before);
+}

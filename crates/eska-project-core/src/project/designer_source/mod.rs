@@ -22,7 +22,7 @@ pub(crate) use opening::open_analysis_project;
 pub(crate) use opening::open_project;
 pub use opening::open_projects;
 pub(crate) use opening::open_projects_cached;
-pub use picture::{Picture, PictureError, PicturePreview};
+pub use picture::{Picture, PictureError, PictureInput, PicturePreview};
 
 /// One manifest-backed project and its checked root descriptor, without a full object index.
 #[derive(Debug)]

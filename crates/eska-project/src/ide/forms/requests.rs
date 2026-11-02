@@ -10,6 +10,7 @@ use serde_json::Value;
 pub(super) struct Context<'a> {
     pub labels: &'a Labels,
     pub project: &'a ProjectSession,
+    pub pictures: bool,
     pub activity: Option<&'a eska_project_core::project::activity::State>,
 }
 
@@ -47,6 +48,7 @@ impl State {
             key: key.clone(),
             node,
             application: input.application,
+            pictures: context.pictures,
             revision: 1,
             preview,
             model,
@@ -79,12 +81,11 @@ impl State {
             .overlays
             .into_iter()
             .map(|input| {
-                if !entry
-                    .preview
-                    .dependencies
-                    .iter()
-                    .any(|dependency| dependency.id == input.source)
-                    || input.version.is_empty()
+                if !entry.preview.dependencies.iter().any(|dependency| {
+                    dependency.id == input.source
+                        && dependency.role
+                            != eska_project_core::project::forms::FormDependencyRole::Picture
+                }) || input.version.is_empty()
                 {
                     return Err(failure("foreign_form_input"));
                 }

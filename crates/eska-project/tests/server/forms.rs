@@ -188,3 +188,40 @@ fn form_methods_are_not_exposed_to_older_clients() {
     );
     client.finish();
 }
+
+#[test]
+fn common_picture_payloads_are_bounded_images_and_binary_dependencies_require_api_37() {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    fs::create_dir_all(root.join("CommonPictures/Icon/Ext/Picture")).unwrap();
+    fs::write(root.join("CommonPictures/Icon.xml"), "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><CommonPicture uuid=\"picture\"><Properties><Name>Icon</Name></Properties></CommonPicture></MetaDataObject>").unwrap();
+    fs::write(root.join("CommonPictures/Icon/Ext/Picture.xml"),"<ExtPicture xmlns=\"http://v8.1c.ru/8.3/xcf/extrnprops\" xmlns:xr=\"http://v8.1c.ru/8.3/xcf/readable\"><Picture><xr:Abs>Icon.svg</xr:Abs></Picture></ExtPicture>").unwrap();
+    let bytes = b"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"/>";
+    fs::write(root.join("CommonPictures/Icon/Ext/Picture/Icon.svg"), bytes).unwrap();
+    fs::write(root.join(PATH),"<Form xmlns=\"http://v8.1c.ru/8.3/xcf/logform\"><ChildItems><PictureDecoration name=\"Logo\" id=\"1\"><Picture xmlns:xr=\"http://v8.1c.ru/8.3/xcf/readable\"><xr:Ref>CommonPicture.Icon</xr:Ref></Picture></PictureDecoration></ChildItems></Form>").unwrap();
+    for minor in [36, 37] {
+        let mut client = Client::new(&directory.0, "ru-RU");
+        let (context, node) = connect(&mut client, &directory.0, "ru-RU", minor);
+        let view = client.request("form/open", &params(&context, json!({"node":node})));
+        assert_eq!(view["modelComplete"], true);
+        assert_eq!(
+            view["model"]["assets"][0]["picture"]["mimeType"],
+            "image/svg+xml"
+        );
+        let binaries = view["dependencies"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .filter(|input| input["role"] == "picture")
+            .collect::<Vec<_>>();
+        assert_eq!(binaries.len(), usize::from(minor >= 37));
+        if minor >= 37 {
+            let rejected=client.response("form/update",&params(&context,json!({"formSessionId":view["formSessionId"],"revision":view["revision"],"overlays":[{"source":binaries[0]["id"],"version":"1","text":"not binary"}]})));
+            assert_eq!(
+                rejected["error"]["data"]["details"]["reason"],
+                "foreign_form_input"
+            );
+        }
+        client.finish();
+    }
+}

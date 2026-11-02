@@ -34,6 +34,7 @@ struct Entry {
     key: query::Key,
     node: NodeId,
     application: Option<String>,
+    pictures: bool,
     revision: u64,
     preview: FormPreview,
     model: Value,
@@ -66,8 +67,8 @@ struct Overlay {
     buffer_id: Option<String>,
 }
 
-pub(super) fn capability() -> Value {
-    json!({"schemaVersion":1,"profile":"taxi-8.3.27","readOnly":true,"executesBsl":false,"maxSessions":MAX_SESSIONS,"maxRetainedBytes":MAX_RETAINED_BYTES,
+pub(super) fn capability(pictures: bool) -> Value {
+    json!({"pictures":pictures,"schemaVersion":1,"profile":"taxi-8.3.27","readOnly":true,"executesBsl":false,"maxSessions":MAX_SESSIONS,"maxRetainedBytes":MAX_RETAINED_BYTES,
         "maxFormBytes":eska_project_core::project::forms::MAX_FORM_BYTES,"maxOverlayBytes":8*1024*1024,"maxInlineBytes":128*1024,"uploads":"queryBuffers"})
 }
 pub(super) fn is_method(method: &str) -> bool {
@@ -134,6 +135,7 @@ impl Server {
         let context = requests::Context {
             labels: &self.labels,
             project,
+            pictures: self.client_minor >= 37,
             activity: session
                 .activity
                 .as_ref()
@@ -185,7 +187,7 @@ impl Server {
 fn header(id: &str, entry: &Entry) -> Value {
     json!({"formSessionId":id,"revision":entry.revision.to_string(),"contextFingerprint":entry.preview.context_fingerprint,"application":entry.preview.application,
         "limitedContext":entry.preview.limited_context,"status":if entry.last_error.is_some(){"stale"}else{"ready"},"lastError":entry.last_error,"modelComplete":entry.preview.form.diagnostics.is_empty() && entry.preview.presentation.diagnostics.is_empty(),
-        "profile":"taxi-8.3.27","dependencies":entry.preview.dependencies.iter().map(dto::dependency).collect::<Vec<_>>(),"model":entry.model})
+        "profile":"taxi-8.3.27","dependencies":entry.preview.dependencies.iter().filter(|dependency| entry.pictures || dependency.role != eska_project_core::project::forms::FormDependencyRole::Picture).map(dto::dependency).collect::<Vec<_>>(),"model":entry.model})
 }
 fn limit() -> Value {
     domain(

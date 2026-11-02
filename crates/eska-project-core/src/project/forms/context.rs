@@ -42,6 +42,7 @@ pub struct FormDependency {
 pub enum FormDependencyRole {
     Form,
     Metadata,
+    Picture,
 }
 
 #[derive(Debug)]
@@ -148,6 +149,9 @@ pub fn load(
             role: FormDependencyRole::Form,
         });
         documents.push(document);
+        if dependencies.len() > super::MAX_FORM_DEPENDENCIES {
+            return Err(FormContextError::TooManyResources);
+        }
     }
     if !selected_found {
         return Err(FormContextError::MissingForm);
@@ -155,7 +159,7 @@ pub fn load(
     let resources = super::resources::load(
         context,
         owner,
-        selected,
+        selected_source,
         &documents,
         &mut dependencies,
         overlays,
@@ -207,12 +211,11 @@ fn validate_overlays(
     dependencies: &[FormDependency],
 ) -> Result<(), FormContextError> {
     for (index, overlay) in overlays.iter().enumerate() {
-        if !dependencies
+        if !dependencies.iter().any(|dependency| {
+            dependency.id == overlay.source && dependency.role != FormDependencyRole::Picture
+        }) || overlays[..index]
             .iter()
-            .any(|dependency| dependency.id == overlay.source)
-            || overlays[..index]
-                .iter()
-                .any(|before| before.source == overlay.source)
+            .any(|before| before.source == overlay.source)
         {
             return Err(FormContextError::InvalidOverlay);
         }

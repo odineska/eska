@@ -750,3 +750,13 @@ ru дополнительно проверил смену темы IDE без и
 исправлены в `dafa2d9`. Эти результаты относятся к checkpoint, а не к полной
 приёмке T165. На хосте ARM64 упаковка выполнена Node CLI `vsce`: Bun runtime
 зависал при ZIP-потоке. Publication pipeline не менялся.
+
+Дополнение T155: API 1.37 передаёт используемые общие картинки как ограниченные
+inert image assets. Несохранённый `Ext/Picture.xml` может сменить payload;
+сохранённое изменение SVG/ZIP отслеживается отдельной бинарной зависимостью.
+Старый клиент 1.36 не получает новый role `picture`. Оценка retained budget
+учитывает XML метаданных и изображений. Core context, stdio и установленный
+VSIX проверяют чтение, dirty description, внешний payload и запрет бинарного
+XML overlay. [Результаты и оставшиеся случаи](../measurements/t155-form-pictures.json).
+Полная калибровка стандартных картинок, вариантов/DPI, LoadTransparent и embedded
+pictures ещё не завершена; T155 остаётся в работе.

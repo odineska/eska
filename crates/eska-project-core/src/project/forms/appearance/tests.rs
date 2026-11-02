@@ -11,6 +11,8 @@ fn resource(name: &str, value: &str) -> FormResource {
     );
     let document = roxmltree::Document::parse(&text).unwrap();
     FormResource {
+        picture: None,
+        retained_bytes: 0,
         source: name.into(),
         descriptor: metadata_parser::parse(&text, None, PropertiesMode::All).unwrap(),
         references: references::collect(document.root_element()),
@@ -92,6 +94,8 @@ fn descriptor(kind: &str, name: &str, properties: &str) -> FormResource {
         "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><{kind} uuid=\"11111111-1111-1111-1111-111111111111\"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"
     );
     FormResource {
+        picture: None,
+        retained_bytes: 0,
         source: name.into(),
         descriptor: metadata_parser::parse(&xml, None, PropertiesMode::All).unwrap(),
         references: Vec::new(),

@@ -402,7 +402,7 @@ fn properties(
         .picture_preview(&id)
         .map_err(|failure| errors::workspace(&failure))?
     {
-        result["picture"] = dto::picture(picture);
+        result["picture"] = dto::picture(&picture);
     }
     Ok(result)
 }

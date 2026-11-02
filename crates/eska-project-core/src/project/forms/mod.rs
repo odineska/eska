@@ -5,6 +5,7 @@ mod catalog;
 mod composition;
 mod context;
 mod parsing;
+mod pictures;
 mod presentation;
 mod references;
 mod resources;
@@ -19,6 +20,7 @@ pub use context::{
     FormContextError, FormDependency, FormDependencyRole, FormOverlay, FormPreview, load,
 };
 pub use parsing::parse;
+pub use pictures::FormPicture;
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,
     FormPresentation, PresentationText, present,
@@ -39,6 +41,7 @@ pub const FORM_NAMESPACE: &str = "http://v8.1c.ru/8.3/xcf/logform";
 pub const MAX_FORM_BYTES: usize = 16 * 1024 * 1024;
 pub const MAX_FORM_ELEMENTS: usize = 16_384;
 pub const MAX_FORM_CONTEXT_BYTES: usize = 32 * 1024 * 1024;
+pub const MAX_FORM_DEPENDENCIES: usize = 1024;
 
 /// Root identity cannot collide with any user-provided XML id, including negative helper ids.
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Serialize)]

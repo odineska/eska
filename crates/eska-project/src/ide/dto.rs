@@ -243,13 +243,13 @@ pub fn hit(value: &SearchHit) -> Value {
 }
 
 /// Encode image bytes only at the wire boundary; status keys remain locale-independent.
-pub fn picture(preview: eska_project_core::project::designer_source::PicturePreview) -> Value {
+pub fn picture(preview: &eska_project_core::project::designer_source::PicturePreview) -> Value {
     use base64::{Engine as _, engine::general_purpose::STANDARD};
     use eska_project_core::project::designer_source::{PictureError, PicturePreview};
     let status = match preview {
         PicturePreview::Ready(picture) => {
             return json!({"status":"ready", "mimeType":picture.mime_type,
-            "data":STANDARD.encode(picture.bytes), "fileName":picture.file_name});
+            "data":STANDARD.encode(&picture.bytes), "fileName":picture.file_name});
         }
         PicturePreview::Failed(PictureError::Missing) => "missing",
         PicturePreview::Failed(PictureError::Unsupported) => "unsupported",

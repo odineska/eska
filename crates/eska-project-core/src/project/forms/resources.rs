@@ -7,7 +7,7 @@ use super::{
     context::{FormDependency, FormOverlay, source_identity},
 };
 use crate::{
-    application::{ContextSnapshot, SourceRole},
+    application::{ContextSnapshot, ContextSource, SourceRole},
     project::{
         designer_source::{self, DesignerSource},
         metadata_edit::snapshot,
@@ -21,40 +21,28 @@ pub struct FormResource {
     pub source: String,
     pub descriptor: ParsedDescriptor,
     pub references: Vec<FormReference>,
+    pub picture: Option<designer_source::PicturePreview>,
+    pub retained_bytes: usize,
 }
 
 pub(super) fn load(
     context: &ContextSnapshot,
     owner: &ObjectId,
-    selected: &std::path::Path,
+    selected: &ContextSource,
     documents: &[super::FormDocument],
     dependencies: &mut Vec<FormDependency>,
     overlays: &[FormOverlay],
 ) -> Result<Vec<FormResource>, FormContextError> {
-    let external = context.context.sources().iter().any(|source| {
-        source.project().source() == selected && source.role() == SourceRole::ExternalObject
-    });
-    let mut owners = vec![owner.clone()];
-    let mut ancestor = owner.parent();
-    while let Some(id) = ancestor {
-        ancestor = id.parent();
-        owners.push(id);
-    }
-    let mut requests = Vec::new();
-    for document in documents {
-        let parsed = Document::parse(document.input()).map_err(|_| FormContextError::Parse {
-            source: document.source.clone(),
-            error: super::FormParseError::InvalidXml,
-        })?;
-        discover(parsed.root_element(), &mut requests, true);
-    }
+    let external = selected.role() == SourceRole::ExternalObject;
+    let (owners, requests) = requests(owner, documents)?;
     let mut output = Vec::new();
     let mut input_bytes: usize = documents
         .iter()
         .map(|document| document.input().len())
         .sum();
     for input in context.context.sources().iter().filter(|input| {
-        input.role() != SourceRole::ExternalObject || input.project().source() == selected
+        input.role() != SourceRole::ExternalObject
+            || input.project().source() == selected.project().source()
     }) {
         let scope = input.member().map_or(ProjectScope::Standalone, |member| {
             ProjectScope::Member(member.clone())
@@ -72,15 +60,7 @@ pub(super) fn load(
         while cursor < pending.len() {
             let id = pending[cursor].clone();
             cursor += 1;
-            // External artifacts have no configuration collections. Their declared application
-            // supplies referenced catalogs, enums and styles from separate checked sources.
-            if input.role() == SourceRole::ExternalObject
-                && id != *source.root().id()
-                && !id
-                    .as_str()
-                    .strip_prefix(source.root().id().as_str())
-                    .is_some_and(|tail| tail.starts_with('/'))
-            {
+            if !resource_belongs_to_source(&source, &id, input.role()) {
                 continue;
             }
             let Some(location) = source
@@ -121,15 +101,128 @@ pub(super) fn load(
                 })?;
             discover(xml.root_element(), &mut pending, false);
             let references = super::references::collect(xml.root_element());
+            let (picture, picture_bytes) = load_picture(
+                context,
+                &source,
+                &descriptor,
+                &location.path,
+                input
+                    .member()
+                    .map(super::super::workspace::ProjectName::as_str),
+                overlays,
+                dependencies,
+            )?;
+            input_bytes = input_bytes.saturating_add(picture_bytes);
+            if input_bytes > super::MAX_FORM_CONTEXT_BYTES {
+                return Err(FormContextError::InputTooLarge);
+            }
             output.push(FormResource {
                 source: dependency.id.clone(),
                 descriptor,
                 references,
+                picture,
+                retained_bytes: text.len().saturating_add(picture_bytes),
             });
             dependencies.push(dependency);
+            if dependencies.len() > super::MAX_FORM_DEPENDENCIES {
+                return Err(FormContextError::TooManyResources);
+            }
         }
     }
     Ok(output)
+}
+
+/// External artifacts get configuration collections from the other application sources.
+fn resource_belongs_to_source(source: &DesignerSource, id: &ObjectId, role: SourceRole) -> bool {
+    role != SourceRole::ExternalObject
+        || id == source.root().id()
+        || id
+            .as_str()
+            .strip_prefix(source.root().id().as_str())
+            .is_some_and(|tail| tail.starts_with('/'))
+}
+
+fn requests(
+    owner: &ObjectId,
+    documents: &[super::FormDocument],
+) -> Result<(Vec<ObjectId>, Vec<ObjectId>), FormContextError> {
+    let mut owners = vec![owner.clone()];
+    let mut ancestor = owner.parent();
+    while let Some(id) = ancestor {
+        ancestor = id.parent();
+        owners.push(id);
+    }
+    let mut requests = Vec::new();
+    for document in documents {
+        let parsed = Document::parse(document.input()).map_err(|_| FormContextError::Parse {
+            source: document.source.clone(),
+            error: super::FormParseError::InvalidXml,
+        })?;
+        discover(parsed.root_element(), &mut requests, true);
+    }
+    Ok((owners, requests))
+}
+
+fn load_picture(
+    context: &ContextSnapshot,
+    source: &DesignerSource,
+    metadata: &ParsedDescriptor,
+    descriptor: &std::path::Path,
+    member: Option<&str>,
+    overlays: &[FormOverlay],
+    dependencies: &mut Vec<FormDependency>,
+) -> Result<(Option<designer_source::PicturePreview>, usize), FormContextError> {
+    let Some(object) = metadata
+        .objects
+        .iter()
+        .find(|object| object.metadata.kind() == MetadataKind::CommonPicture)
+    else {
+        return Ok((None, 0));
+    };
+    let id = object.metadata.id();
+    let path = descriptor.with_extension("").join("Ext/Picture.xml");
+    let Some((dependency, text)) = read_input(
+        context,
+        source,
+        &path,
+        overlays,
+        member,
+        super::FormDependencyRole::Metadata,
+    )?
+    else {
+        // Borrowed picture descriptors without a payload keep the preceding application's image.
+        return Ok((None, 0));
+    };
+    if text.len() > 64 * 1024 {
+        return Err(FormContextError::InputTooLarge);
+    }
+    Document::parse(&text).map_err(|_| FormContextError::InvalidMetadata {
+        source: dependency.id.clone(),
+    })?;
+    dependencies.push(dependency);
+    let preview = source.picture_preview_xml(id, &text);
+    if let designer_source::PicturePreview::Ready(picture) = &preview {
+        for input in &picture.inputs {
+            let id = source_identity(context, source.project().source(), &input.path);
+            if dependencies.iter().any(|dependency| dependency.id == id) {
+                continue;
+            }
+            dependencies.push(FormDependency {
+                id,
+                root: source.project().source().into(),
+                path: input.path.clone(),
+                snapshot: input.snapshot.clone(),
+                version: None,
+                member: member.map(str::to_owned),
+                role: super::FormDependencyRole::Picture,
+            });
+        }
+    }
+    let bytes = text.len().saturating_add(match &preview {
+        designer_source::PicturePreview::Ready(picture) => picture.bytes.len(),
+        designer_source::PicturePreview::Failed(_) => 0,
+    });
+    Ok((Some(preview), bytes))
 }
 
 pub(super) fn read_input(
@@ -202,6 +295,12 @@ fn discover(root: Node<'_, '_>, output: &mut Vec<ObjectId>, include_types: bool)
         }
         if name == "CommandName" && kind == "CommonCommand" {
             request(MetadataKind::CommonCommand, value, output);
+        }
+        if name == "Ref"
+            && node.tag_name().namespace() == Some("http://v8.1c.ru/8.3/xcf/readable")
+            && kind == "CommonPicture"
+        {
+            request(MetadataKind::CommonPicture, value, output);
         }
         if include_types
             && matches!(name, "Type" | "MainTable" | "Value")
