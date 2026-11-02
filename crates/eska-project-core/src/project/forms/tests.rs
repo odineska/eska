@@ -31,6 +31,40 @@ fn catalog_matches_installed_platform_inventory() {
 }
 
 #[test]
+fn native_exported_field_fixtures_keep_platform_generated_helpers() {
+    let folder = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-fields");
+    let mut fields = 0;
+    let mut pdf_status = false;
+    for path in std::fs::read_dir(folder).unwrap() {
+        let path = path.unwrap().path();
+        if path.extension().is_none_or(|value| value != "xml") {
+            continue;
+        }
+        let name = path.file_stem().unwrap().to_str().unwrap();
+        let input = std::fs::read_to_string(&path).unwrap();
+        let model = parse(name, input.clone()).unwrap();
+        assert!(!model.has_issues(), "{name}: {:?}", model.diagnostics);
+        assert_eq!(model.input(), input);
+        assert_eq!(model.root.children.len(), 1);
+        let field = &model.root.children[0];
+        assert_eq!(field.kind.unwrap().xml_name(), name);
+        if name == "PDFDocumentField" {
+            pdf_status = field
+                .auxiliary
+                .iter()
+                .any(|item| item.kind == Some(ElementKind::ViewStatusAddition));
+        }
+        fields += 1;
+    }
+    assert_eq!(fields, 20);
+    assert!(
+        pdf_status,
+        "the platform adds a view-status helper to an empty PDF field"
+    );
+}
+
+#[test]
 fn source_ranges_preserve_bom_comments_unicode_and_crlf() {
     let input = format!(
         "\u{feff}<?xml version=\"1.0\"?>\r\n<Form xmlns=\"{FORM_NAMESPACE}\">\r\n<!-- private source comment 😀 -->\r\n<ChildItems><InputField name=\"Имя😀\" id=\"1\"><Title><![CDATA[Текст & 😀]]></Title></InputField></ChildItems></Form>"
