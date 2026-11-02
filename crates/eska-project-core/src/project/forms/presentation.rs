@@ -83,6 +83,7 @@ pub struct ElementPresentation {
     pub picture: Option<super::FormPicture>,
     pub caption: PresentationText,
     pub tooltip: Option<PresentationText>,
+    pub footer_text: Option<PresentationText>,
     pub value_type: FieldType,
     pub binding: Option<PropertySource>,
     pub choices: Vec<PresentationText>,
@@ -110,7 +111,14 @@ pub fn present(
 ) -> FormPresentation {
     let mut appearance = Appearance::new(documents, resources);
     let mut elements = Vec::new();
-    visit(&form.root, form, resources, &mut appearance, &mut elements);
+    visit(
+        &form.root,
+        false,
+        form,
+        resources,
+        &mut appearance,
+        &mut elements,
+    );
     FormPresentation {
         elements,
         diagnostics: appearance.diagnostics,
@@ -118,12 +126,14 @@ pub fn present(
 }
 fn visit(
     element: &EffectiveElement,
+    in_table: bool,
     form: &ComposedForm,
     resources: &[FormResource],
     appearance: &mut Appearance<'_>,
     output: &mut Vec<ElementPresentation>,
 ) {
     let (binding_caption, value_type, binding) = bind(element, form, resources);
+    let binding_caption = binding_caption.map(|caption| column_caption(caption, in_table));
     let command =
         property(element, "CommandName").and_then(|value| appearance::text(&value.property.value));
     let caption = property(element, "Title")
@@ -176,19 +186,12 @@ fn visit(
         .map(|value| choices(&value.property.value, resources))
         .filter(|values| !values.is_empty())
         .unwrap_or_else(|| enum_choices(&value_type, resources));
-    let auto_command_items = if element.kind == Some(ElementKind::Form) {
-        super::commands::automatic(form, resources)
-    } else {
-        Vec::new()
+    let auto_command_items = match element.kind {
+        Some(ElementKind::Form) => super::commands::automatic(form, resources),
+        Some(ElementKind::Table) => super::commands::table(element),
+        _ => Vec::new(),
     };
-    let auto_commands = auto_command_items
-        .iter()
-        .filter_map(|item| {
-            item.key
-                .strip_prefix("Form.StandardCommand.")
-                .map(str::to_owned)
-        })
-        .collect();
+    let auto_commands = standard_form_commands(&auto_command_items);
     let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
     output.push(ElementPresentation {
         identity: element.identity.clone(),
@@ -199,6 +202,8 @@ fn visit(
         picture: super::pictures::resolve(element, resources, &mut appearance.diagnostics),
         caption,
         tooltip: property(element, "ToolTip").and_then(|value| literal(&value.property.value)),
+        footer_text: property(element, "FooterText")
+            .and_then(|value| literal(&value.property.value)),
         value_type,
         binding,
         choices,
@@ -212,8 +217,38 @@ fn visit(
         auto_command_items,
     });
     for child in element.children.iter().chain(&element.auxiliary) {
-        visit(child, form, resources, appearance, output);
+        visit(
+            child,
+            in_table || element.kind == Some(ElementKind::Table),
+            form,
+            resources,
+            appearance,
+            output,
+        );
     }
+}
+
+fn column_caption(caption: PresentationText, in_table: bool) -> PresentationText {
+    // The same standard attribute has a shorter design-time column heading.
+    match caption {
+        PresentationText::Standard { key } if in_table && key == "attribute.LineNumber" => {
+            PresentationText::Standard {
+                key: "table.LineNumber".into(),
+            }
+        }
+        caption => caption,
+    }
+}
+
+fn standard_form_commands(items: &[super::AutoCommandItem]) -> Vec<String> {
+    items
+        .iter()
+        .filter_map(|item| {
+            item.key
+                .strip_prefix("Form.StandardCommand.")
+                .map(str::to_owned)
+        })
+        .collect()
 }
 
 fn is_displayed(
@@ -518,9 +553,16 @@ fn metadata_binding(
         .unwrap_or_else(|| PresentationText::Name {
             text: owner.metadata.name().into(),
         });
-    let value_type = metadata_property(owner, "Type", resources)
-        .map(|value| field_type(&value.value))
-        .unwrap_or_default();
+    let value_type = if owner.metadata.kind() == MetadataKind::TabularSection {
+        FieldType {
+            kind: FieldValueKind::Table,
+            ..FieldType::default()
+        }
+    } else {
+        metadata_property(owner, "Type", resources)
+            .map(|value| field_type(&value.value))
+            .unwrap_or_default()
+    };
     Some((
         Some(caption),
         value_type,

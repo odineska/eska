@@ -10,7 +10,10 @@ pub(super) fn mark(
     binding: Option<&PropertySource>,
     resources: &[FormResource],
 ) -> bool {
-    if element.kind != Some(ElementKind::InputField) {
+    if !matches!(
+        element.kind,
+        Some(ElementKind::InputField | ElementKind::Table)
+    ) {
         return false;
     }
     let scalar =
@@ -29,13 +32,16 @@ pub(super) fn mark(
     else {
         return false;
     };
-    let checking =
-        if owner.metadata.kind() == crate::project::metadata_model::MetadataKind::Attribute {
-            metadata_property(owner, "FillChecking", resources)
-        } else {
-            scalar("DataPath")
-                .and_then(|path| path.rsplit('.').next())
-                .and_then(|name| standard_property(owner, name, "FillChecking", resources))
-        };
+    let checking = if matches!(
+        owner.metadata.kind(),
+        crate::project::metadata_model::MetadataKind::Attribute
+            | crate::project::metadata_model::MetadataKind::TabularSection
+    ) {
+        metadata_property(owner, "FillChecking", resources)
+    } else {
+        scalar("DataPath")
+            .and_then(|path| path.rsplit('.').next())
+            .and_then(|name| standard_property(owner, name, "FillChecking", resources))
+    };
     checking.and_then(|value| appearance::text(&value.value)) == Some("ShowError")
 }

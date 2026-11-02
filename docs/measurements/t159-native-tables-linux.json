@@ -103,7 +103,7 @@
     "viewStatus": "Not visible for these ValueTable fixtures; provided object tabular section shows totals. Rule still needs calibration."
   },
   "remaining": [
-    "Implement these layouts and states in Solid and compare installed VSIX.",
+    "Full text/pixel calibration; nine ValueTable geometry/state scenarios pass installed VSIX ru/en.",
     "Native dynamic-list and metadata tabular-section fixtures.",
     "Full property, nested-group and style matrix.",
     "Windows acceptance is deferred by user."
@@ -111,6 +111,320 @@
   "checks": {
     "coreNativeTableFixtureTestPassed": true,
     "cargoFmtCheck": true,
-    "coreClippyAllTargetsAllFeatures": true
-  }
+    "coreClippyAllTargetsAllFeatures": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeatures": true,
+    "cargoTest": {
+      "passed": 1463,
+      "ignored": 19,
+      "suites": 42
+    },
+    "extensionTypecheck": true,
+    "extensionCompile": true,
+    "extensionNodeTests": {
+      "passed": 450,
+      "skipped": 11
+    },
+    "installedTableGalleryRuEn": true,
+    "providedDtApplicationReadOnly": true
+  },
+  "installedVsix": {
+    "codeVersion": "1.109.0 ARM64",
+    "locales": {
+      "ru": {
+        "passed": true,
+        "forms": [
+          {
+            "kind": "Default",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 30,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "GridFooter",
+            "control": [
+              400,
+              145
+            ],
+            "headerHeight": 30,
+            "frame": [
+              434,
+              225
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": false,
+            "mark": false
+          },
+          {
+            "kind": "Horizontal",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 30,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "HorizontalTitled",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 60,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "Vertical",
+            "control": [
+              415,
+              228
+            ],
+            "headerHeight": 90,
+            "frame": [
+              449,
+              343
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "InCell",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 60,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "Marked",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 30,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": true
+          },
+          {
+            "kind": "ReadOnly",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 30,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "NoAutoFill",
+            "control": [
+              400,
+              227
+            ],
+            "headerHeight": 30,
+            "frame": [
+              434,
+              307
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": false,
+            "mark": false
+          }
+        ]
+      },
+      "en": {
+        "passed": true,
+        "forms": [
+          {
+            "kind": "Default",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 30,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "GridFooter",
+            "control": [
+              400,
+              145
+            ],
+            "headerHeight": 30,
+            "frame": [
+              434,
+              225
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": false,
+            "mark": false
+          },
+          {
+            "kind": "Horizontal",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 30,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "HorizontalTitled",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 60,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "Vertical",
+            "control": [
+              415,
+              228
+            ],
+            "headerHeight": 90,
+            "frame": [
+              449,
+              343
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "InCell",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 60,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "Marked",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 30,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": true
+          },
+          {
+            "kind": "ReadOnly",
+            "control": [
+              415,
+              227
+            ],
+            "headerHeight": 30,
+            "frame": [
+              449,
+              342
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": true,
+            "mark": false
+          },
+          {
+            "kind": "NoAutoFill",
+            "control": [
+              400,
+              227
+            ],
+            "headerHeight": 30,
+            "frame": [
+              434,
+              307
+            ],
+            "headerColor": "rgb(242, 242, 242)",
+            "bar": false,
+            "mark": false
+          }
+        ]
+      }
+    },
+    "sourceWritesDuringViewing": false,
+    "searchWidthInWideTable": 260
+  },
+  "defaultTablePixelComparison": {
+    "region": "415x227 table control including text and arrows; excludes outer form shell and toolbar",
+    "exactPixels": 93372,
+    "totalPixels": 94205,
+    "exactFraction": 0.9911575818693276,
+    "acceptedAsFullParity": false,
+    "remaining": "Text raster/advance and small border/arrow differences need native calibration; no comparison mask was applied."
+  },
+  "testRunNotes": [
+    "First full cargo test hit ETXTBSY in the existing CLI updater test. Its focused rerun and the subsequent full cargo test passed.",
+    "CSS search-width assertion measured 171.9375px for a 172px raster width; the host assertion compares physical pixel rounding."
+  ]
 }

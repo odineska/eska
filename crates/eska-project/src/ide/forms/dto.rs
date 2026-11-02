@@ -39,7 +39,7 @@ fn element(
     presentations: &HashMap<&ElementIdentity, &ElementPresentation>,
 ) -> Value {
     let presentation = presentations.get(&value.identity).map(|presentation| {
-        json!({"grouping":presentation.grouping,"displayed":presentation.displayed,"markIncomplete":presentation.mark_incomplete,"titleLocation":presentation.title_location,"picture":presentation.picture,"caption":presentation.caption,"tooltip":presentation.tooltip,"valueType":presentation.value_type,"binding":presentation.binding,"choices":presentation.choices,
+        json!({"grouping":presentation.grouping,"displayed":presentation.displayed,"markIncomplete":presentation.mark_incomplete,"titleLocation":presentation.title_location,"picture":presentation.picture,"caption":presentation.caption,"tooltip":presentation.tooltip,"footerText":presentation.footer_text,"valueType":presentation.value_type,"binding":presentation.binding,"choices":presentation.choices,
             "font":presentation.font,"titleFont":presentation.title_font,"foreground":presentation.foreground,"background":presentation.background,"border":presentation.border,
             "titleColor":presentation.title_color,"autoCommands":presentation.auto_commands,"autoCommandItems":presentation.auto_command_items})
     });

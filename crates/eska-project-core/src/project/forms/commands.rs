@@ -1,7 +1,9 @@
 //! Static desktop Configurator commands; preview buttons never execute application actions.
 
 use super::presentation::{definition_type, field_type, literal, metadata_property};
-use super::{ComposedForm, ElementKind, FormResource, PresentationText, PropertySource};
+use super::{
+    ComposedForm, EffectiveElement, ElementKind, FormResource, PresentationText, PropertySource,
+};
 use crate::project::metadata_model::{MetadataKind, PropertyKey};
 use serde::Serialize;
 use std::collections::HashSet;
@@ -28,18 +30,7 @@ pub(super) fn visible(command: Option<&str>) -> bool {
 }
 
 pub(super) fn automatic(form: &ComposedForm, resources: &[FormResource]) -> Vec<AutoCommandItem> {
-    let bar = form
-        .root
-        .auxiliary
-        .iter()
-        .find(|node| node.kind == Some(ElementKind::AutoCommandBar));
-    if bar.is_some_and(|bar| {
-        bar.properties.iter().any(|value| {
-            value.property.key.name == "Autofill"
-                && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
-                && super::appearance::text(&value.property.value) == Some("false")
-        })
-    }) {
+    if !autofill(&form.root) {
         return Vec::new();
     }
     let Some(attribute) = form.attributes.iter().find(|attribute| {
@@ -70,6 +61,34 @@ pub(super) fn automatic(form: &ComposedForm, resources: &[FormResource]) -> Vec<
     }
     metadata_commands(owner_type, resources, &mut result);
     result
+}
+
+fn autofill(element: &EffectiveElement) -> bool {
+    element
+        .auxiliary
+        .iter()
+        .find(|node| node.kind == Some(ElementKind::AutoCommandBar))
+        .and_then(|bar| super::presentation::property(bar, "Autofill"))
+        .and_then(|value| super::appearance::text(&value.property.value))
+        != Some("false")
+}
+
+pub(super) fn table(element: &EffectiveElement) -> Vec<AutoCommandItem> {
+    if !autofill(element) {
+        return Vec::new();
+    }
+    // ReadOnly does not remove these design-time buttons; no preview command executes.
+    ["Add", "MoveUp", "MoveDown"]
+        .into_iter()
+        .map(|name| AutoCommandItem {
+            key: format!("Table.StandardCommand.{name}"),
+            caption: PresentationText::Standard {
+                key: format!("command.{name}"),
+            },
+            primary: false,
+            origin: None,
+        })
+        .collect()
 }
 
 fn standard(name: &str, primary: bool) -> AutoCommandItem {

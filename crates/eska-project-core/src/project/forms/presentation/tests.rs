@@ -244,6 +244,15 @@ fn native_table_fixtures_bind_value_table_columns_and_retain_auxiliary_controls(
         let table = &view.elements[1];
         assert!(table.displayed && table.binding.is_some(), "{path:?}");
         assert_eq!(table.value_type.kind, FieldValueKind::Table, "{path:?}");
+        assert_eq!(table.mark_incomplete, path.file_stem().unwrap() == "Marked");
+        assert_eq!(
+            table.auto_command_items.len(),
+            if path.file_stem().unwrap() == "NoAutoFill" {
+                0
+            } else {
+                3
+            }
+        );
         let fields: Vec<_> = view
             .elements
             .iter()
@@ -259,6 +268,11 @@ fn native_table_fixtures_bind_value_table_columns_and_retain_auxiliary_controls(
         assert_eq!(fields[1].value_type.kind, FieldValueKind::Number);
         assert_eq!(fields[1].value_type.digits, Some(9));
         assert_eq!(fields[1].value_type.fraction, Some(2));
+        if path.file_stem().unwrap() == "GridFooter" {
+            assert!(
+                matches!(&fields[1].footer_text, Some(PresentationText::Literal { items }) if items[0].content == "Total")
+            );
+        }
         assert_eq!(fields[2].value_type.kind, FieldValueKind::Boolean);
         assert_eq!(
             form.root.children[0]
@@ -280,4 +294,40 @@ fn native_table_fixtures_bind_value_table_columns_and_retain_auxiliary_controls(
         count += 1;
     }
     assert_eq!(count, 9);
+}
+
+#[test]
+fn a_required_metadata_tabular_section_is_a_table_with_typed_columns() {
+    let resources = [binding_resource(
+        "base",
+        "",
+        "<TabularSection uuid=\"lines\"><Properties><Name>Lines</Name><FillChecking>ShowError</FillChecking></Properties><ChildObjects><Attribute uuid=\"amount\"><Properties><Name>Amount</Name><Type><v8:Type>xs:decimal</v8:Type></Type></Properties></Attribute></ChildObjects></TabularSection>",
+    )];
+    let view = binding_view(
+        &resources,
+        "<Table name=\"Lines\" id=\"1\"><DataPath>Object.Lines</DataPath><ChildItems><InputField name=\"Amount\" id=\"2\"><DataPath>Object.Lines.Amount</DataPath></InputField></ChildItems></Table>",
+    );
+    assert_eq!(view.elements[1].value_type.kind, FieldValueKind::Table);
+    assert!(view.elements[1].mark_incomplete);
+    assert_eq!(view.elements[1].auto_command_items.len(), 3);
+    assert_eq!(view.elements[2].value_type.kind, FieldValueKind::Number);
+}
+
+#[test]
+fn standard_line_number_uses_a_column_caption_but_preserves_an_explicit_title() {
+    let resources = [binding_resource(
+        "base",
+        "",
+        "<TabularSection uuid=\"lines\"><Properties><Name>Lines</Name></Properties></TabularSection>",
+    )];
+    let view = binding_view(
+        &resources,
+        "<Table name=\"Lines\" id=\"1\"><DataPath>Object.Lines</DataPath><ChildItems><ColumnGroup name=\"Group\" id=\"2\"><ChildItems><InputField name=\"Line\" id=\"3\"><DataPath>Object.Lines.LineNumber</DataPath></InputField><InputField name=\"Custom\" id=\"4\"><DataPath>Object.Lines.LineNumber</DataPath><Title>Custom</Title></InputField></ChildItems></ColumnGroup></ChildItems></Table>",
+    );
+    assert!(
+        matches!(&view.elements[3].caption, PresentationText::Standard { key } if key == "table.LineNumber")
+    );
+    assert!(
+        matches!(&view.elements[4].caption, PresentationText::Name { text } if text == "Custom")
+    );
 }
