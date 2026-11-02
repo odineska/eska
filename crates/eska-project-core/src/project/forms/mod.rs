@@ -115,6 +115,8 @@ pub struct FormDocument {
     pub revision: String,
     pub root: FormElement,
     pub attributes: Vec<FormDefinition>,
+    /// The native format can carry conditional appearance alongside attribute definitions.
+    pub attribute_properties: Vec<LocatedProperty>,
     pub commands: Vec<FormDefinition>,
     pub parameters: Vec<FormDefinition>,
     pub diagnostics: Vec<FormDiagnostic>,

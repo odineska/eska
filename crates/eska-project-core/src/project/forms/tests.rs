@@ -144,6 +144,48 @@ fn definition_ids_do_not_collide_with_element_ids() {
 }
 
 #[test]
+fn native_attribute_appearance_and_anonymous_auto_bar_are_preserved() {
+    let input = form(
+        r#"<AutoCommandBar name="" id="-1"/><Attributes>
+        <Attribute name="Rows" id="1"/>
+        <ConditionalAppearance><Item><Appearance><Color>web:Red</Color></Appearance></Item></ConditionalAppearance>
+        </Attributes>"#,
+    );
+    let model = parse("form", input.clone()).unwrap();
+    assert!(!model.has_issues(), "{:?}", model.diagnostics);
+    assert_eq!(model.root.auxiliary[0].name.as_deref(), Some(""));
+    assert_eq!(model.attributes.len(), 1);
+    assert_eq!(model.attribute_properties.len(), 1);
+    let appearance = &model.attribute_properties[0];
+    assert_eq!(appearance.property.key.name, "ConditionalAppearance");
+    assert!(input[appearance.range.clone()].starts_with("<ConditionalAppearance>"));
+    assert!(matches!(
+        appearance.property.value,
+        MetadataValue::Record(_)
+    ));
+}
+
+#[test]
+fn foreign_attribute_section_properties_are_not_platform_appearance() {
+    let model = parse(
+        "form",
+        form(
+            r#"<Attributes>
+        <x:ConditionalAppearance xmlns:x="urn:foreign"/>
+        </Attributes>"#,
+        ),
+    )
+    .unwrap();
+    assert_eq!(model.attribute_properties, [] as [LocatedProperty; 0]);
+    assert!(
+        model
+            .diagnostics
+            .iter()
+            .any(|row| row.issue == FormIssue::UnknownDefinition)
+    );
+}
+
+#[test]
 fn identities_are_source_qualified_and_root_is_not_an_xml_id() {
     let input = form(r#"<ChildItems><InputField name="Field" id="0"/></ChildItems>"#);
     let base = parse("application/base/form", input.clone()).unwrap();

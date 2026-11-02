@@ -612,7 +612,7 @@ BSL LSP и визуальный редактор форм в это направ
 | T150 | DONE | Группы расширений, отчётов и обработок в workspace только при двух и более подпроектах одного типа | [28-workspace-project-grouping.md](28-workspace-project-grouping.md) |
 | T151 | DONE | Отключение подпроектов с освобождением фоновых ресурсов и фильтр скрытия отключённых | [29-workspace-project-activation.md](29-workspace-project-activation.md) |
 | T152 | IN-PROGRESS | Каталог из 38 элементов проверен по Linux 8.3.27.2342 и 909 формам; native-эталоны в работе | [30-managed-form-preview.md](30-managed-form-preview.md#t152--каталог-платформы-и-эталоны-предпросмотра) |
-| T153 | DONE | Модель формы, identity и диапазоны XML; 10 unit-тестов и 909 форм без структурных диагностик | [30-managed-form-preview.md](30-managed-form-preview.md#t153--модель-формы-и-связь-с-исходным-xml) |
+| T153 | DONE | Модель формы, identity и диапазоны XML; 13 unit-тестов, 909 форм БСП, 74 формы демобазы и 4 формы расширений без структурных диагностик | [30-managed-form-preview.md](30-managed-form-preview.md#t153--модель-формы-и-связь-с-исходным-xml) |
 | T154 | PLANNED | Контекст формы, заимствование и объединение расширений | [30-managed-form-preview.md](30-managed-form-preview.md#t154--контекст-формы-и-объединение-расширений) |
 | T155 | PLANNED | Итоговые свойства, стили, переопределения и ресурсы | [30-managed-form-preview.md](30-managed-form-preview.md#t155--итоговые-свойства-стили-и-ресурсы) |
 | T156 | PLANNED | Профиль Такси и общая основа рендерера SolidJS | [30-managed-form-preview.md](30-managed-form-preview.md#t156--профиль-такси-и-основа-рендерера-solidjs) |

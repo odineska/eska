@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "corpora": [
+    {
+      "name": "ssl_3_1",
+      "forms": 909
+    },
+    {
+      "name": "provided demonstration dump",
+      "forms": 74
+    },
+    {
+      "name": "provided demonstration extensions",
+      "forms": 4
+    }
+  ],
+  "structuralDiagnostics": 0,
+  "unitTestsPassed": 13,
+  "nativeFieldFixtures": 20,
+  "visualParityVerified": false,
+  "fixedNativeCases": [
+    "ConditionalAppearance in Attributes",
+    "anonymous AutoCommandBar"
+  ],
+  "sourceWrites": false
+}

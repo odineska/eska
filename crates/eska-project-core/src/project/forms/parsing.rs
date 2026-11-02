@@ -49,6 +49,7 @@ pub fn parse(source: &str, input: String) -> Result<FormDocument, FormParseError
         elements: 0,
         diagnostics: Vec::new(),
         attributes: Vec::new(),
+        attribute_properties: Vec::new(),
         commands: Vec::new(),
         parameters: Vec::new(),
     };
@@ -65,6 +66,7 @@ pub fn parse(source: &str, input: String) -> Result<FormDocument, FormParseError
         ),
         root,
         attributes: parser.attributes,
+        attribute_properties: parser.attribute_properties,
         commands: parser.commands,
         parameters: parser.parameters,
         diagnostics: parser.diagnostics,
@@ -78,6 +80,7 @@ struct Parser<'a> {
     elements: usize,
     diagnostics: Vec<FormDiagnostic>,
     attributes: Vec<FormDefinition>,
+    attribute_properties: Vec<LocatedProperty>,
     commands: Vec<FormDefinition>,
     parameters: Vec<FormDefinition>,
 }
@@ -114,7 +117,10 @@ impl Parser<'_> {
             None
         };
         let name = node.attribute("name").map(str::to_owned);
-        if !root && name.as_ref().is_none_or(String::is_empty) {
+        if !root
+            && kind != Some(ElementKind::AutoCommandBar)
+            && name.as_ref().is_none_or(String::is_empty)
+        {
             self.issue(node, FormIssue::MissingName);
         }
         let mut element = FormElement {
@@ -201,6 +207,13 @@ impl Parser<'_> {
             _ => return,
         };
         for node in section.children().filter(Node::is_element) {
+            if expected == "Attribute"
+                && node.has_tag_name((FORM_NAMESPACE, "ConditionalAppearance"))
+            {
+                let property = self.property(node);
+                self.attribute_properties.push(property);
+                continue;
+            }
             if !node.has_tag_name((FORM_NAMESPACE, expected)) {
                 self.issue(node, FormIssue::UnknownDefinition);
             }
