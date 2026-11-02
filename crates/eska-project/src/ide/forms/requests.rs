@@ -7,6 +7,12 @@ use crate::ide::{dto::Labels, params, query};
 use eska_project_core::project::{forms::FormOverlay, metadata_workspace::ProjectSession};
 use serde_json::Value;
 
+pub(super) struct Context<'a> {
+    pub labels: &'a Labels,
+    pub project: &'a ProjectSession,
+    pub activity: Option<&'a eska_project_core::project::activity::State>,
+}
+
 impl State {
     pub(super) fn entry(&self, key: &query::Key, id: &str) -> Result<&Entry, Value> {
         self.entries
@@ -16,8 +22,7 @@ impl State {
     }
     pub(super) fn open(
         &mut self,
-        labels: &Labels,
-        project: &ProjectSession,
+        context: &Context<'_>,
         key: &query::Key,
         args: &Value,
     ) -> Result<Value, Value> {
@@ -30,10 +35,11 @@ impl State {
             return Err(limit());
         }
         let node = params::node(&input.node)?;
-        let preview = project
-            .form_preview(&node, input.application.as_deref(), &[])
+        let preview = context
+            .project
+            .form_preview(&node, input.application.as_deref(), &[], context.activity)
             .map_err(preview_error)?;
-        let (model, bytes) = dto::model(labels, &preview)?;
+        let (model, bytes) = dto::model(context.labels, &preview)?;
         self.admit(0, bytes)?;
         self.serial = self.serial.checked_add(1).ok_or_else(limit)?;
         let id = format!("f{}", self.serial);
@@ -53,8 +59,7 @@ impl State {
     }
     pub(super) fn update(
         &mut self,
-        labels: &Labels,
-        project: &ProjectSession,
+        context: &Context<'_>,
         queries: &query::State,
         key: &query::Key,
         id: &str,
@@ -93,11 +98,17 @@ impl State {
                 })
             })
             .collect::<Result<Vec<_>, Value>>()?;
-        let refreshed = project
-            .form_preview(&entry.node, entry.application.as_deref(), &overlays)
+        let refreshed = context
+            .project
+            .form_preview(
+                &entry.node,
+                entry.application.as_deref(),
+                &overlays,
+                context.activity,
+            )
             .map_err(preview_error)
             .and_then(|preview| {
-                let (model, bytes) = dto::model(labels, &preview)?;
+                let (model, bytes) = dto::model(context.labels, &preview)?;
                 self.admit(entry.bytes, bytes)?;
                 Ok((preview, model, bytes))
             });

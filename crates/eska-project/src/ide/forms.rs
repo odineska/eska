@@ -131,16 +131,23 @@ impl Server {
                 json!({"generation":project.generation().to_string()}),
             ));
         }
+        let context = requests::Context {
+            labels: &self.labels,
+            project,
+            activity: session
+                .activity
+                .as_ref()
+                .map(|activity| &activity.snapshot.state),
+        };
         let value = if method == "form/open" {
-            self.forms.open(&self.labels, project, &key, args)?
+            self.forms.open(&context, &key, args)?
         } else {
             let input: Id = params::decode(args)?;
             let entry = self.forms.entry(&key, &input.form_session_id)?;
             match method {
                 "form/get" => header(&input.form_session_id, entry),
                 "form/update" => self.forms.update(
-                    &self.labels,
-                    project,
+                    &context,
                     &self.queries,
                     &key,
                     &input.form_session_id,

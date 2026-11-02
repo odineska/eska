@@ -34,12 +34,13 @@ pub(super) fn load(
     let external = context.context.sources().iter().any(|source| {
         source.project().source() == selected && source.role() == SourceRole::ExternalObject
     });
-    let mut requests = vec![owner.clone()];
+    let mut owners = vec![owner.clone()];
     let mut ancestor = owner.parent();
     while let Some(id) = ancestor {
         ancestor = id.parent();
-        requests.push(id);
+        owners.push(id);
     }
+    let mut requests = Vec::new();
     for document in documents {
         let parsed = Document::parse(document.input()).map_err(|_| FormContextError::Parse {
             source: document.source.clone(),
@@ -53,11 +54,7 @@ pub(super) fn load(
         .map(|document| document.input().len())
         .sum();
     for input in context.context.sources().iter().filter(|input| {
-        if external {
-            input.project().source() == selected
-        } else {
-            input.role() != SourceRole::ExternalObject
-        }
+        input.role() != SourceRole::ExternalObject || input.project().source() == selected
     }) {
         let scope = input.member().map_or(ProjectScope::Standalone, |member| {
             ProjectScope::Member(member.clone())
@@ -66,15 +63,26 @@ pub(super) fn load(
             .map_err(FormContextError::Source)?;
         // DefaultStyle is a configuration-level dependency even when no element overrides appearance.
         let mut pending = vec![source.root().id().clone()];
+        if !external || input.role() == SourceRole::ExternalObject {
+            pending.extend(owners.iter().cloned());
+        }
         pending.extend(requests.iter().cloned());
         let mut read = std::collections::HashSet::new();
         let mut cursor = 0;
         while cursor < pending.len() {
-            if read.len() >= 256 {
-                return Err(FormContextError::TooManyResources);
-            }
             let id = pending[cursor].clone();
             cursor += 1;
+            // External artifacts have no configuration collections. Their declared application
+            // supplies referenced catalogs, enums and styles from separate checked sources.
+            if input.role() == SourceRole::ExternalObject
+                && id != *source.root().id()
+                && !id
+                    .as_str()
+                    .strip_prefix(source.root().id().as_str())
+                    .is_some_and(|tail| tail.starts_with('/'))
+            {
+                continue;
+            }
             let Some(location) = source
                 .object_descriptor(&id)
                 .map_err(FormContextError::Source)?
@@ -83,6 +91,9 @@ pub(super) fn load(
             };
             if !read.insert(location.path.clone()) {
                 continue;
+            }
+            if read.len() > 256 {
+                return Err(FormContextError::TooManyResources);
             }
             let Some((dependency, text)) = read_input(
                 context,
@@ -194,6 +205,7 @@ fn discover(root: Node<'_, '_>, output: &mut Vec<ObjectId>, include_types: bool)
         }
         if include_types
             && matches!(name, "Type" | "MainTable" | "Value")
+            && !kind.starts_with("External")
             && let Some(kind) = type_kind(kind)
         {
             request(kind, value, output);
@@ -216,8 +228,10 @@ pub(super) fn type_kind(name: &str) -> Option<MetadataKind> {
         "Catalog" | "CatalogObject" | "CatalogRef" => Some(MetadataKind::Catalog),
         "Document" | "DocumentObject" | "DocumentRef" => Some(MetadataKind::Document),
         "Enum" | "EnumRef" => Some(MetadataKind::Enum),
-        "DataProcessor" | "DataProcessorObject" => Some(MetadataKind::DataProcessor),
-        "Report" | "ReportObject" => Some(MetadataKind::Report),
+        "DataProcessor" | "DataProcessorObject" | "ExternalDataProcessorObject" => {
+            Some(MetadataKind::DataProcessor)
+        }
+        "Report" | "ReportObject" | "ExternalReportObject" => Some(MetadataKind::Report),
         "InformationRegister" | "InformationRegisterRecordSet" => {
             Some(MetadataKind::InformationRegister)
         }

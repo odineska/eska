@@ -67,7 +67,7 @@ fn form_context_uses_application_order_dirty_layers_and_per_input_identity_witho
         .unwrap();
     let node = node(project);
     let before = bytes(&directory.0);
-    let preview = project.form_preview(&node, Some("app"), &[]).unwrap();
+    let preview = project.form_preview(&node, Some("app"), &[], None).unwrap();
     assert_eq!(
         preview
             .dependencies
@@ -90,7 +90,9 @@ fn form_context_uses_application_order_dirty_layers_and_per_input_identity_witho
         text: form(&BODY.replace("Исходный", "Буфер"), Some(BODY)),
         version: "7".into(),
     };
-    let changed = project.form_preview(&node, Some("app"), &[dirty]).unwrap();
+    let changed = project
+        .form_preview(&node, Some("app"), &[dirty], None)
+        .unwrap();
     assert_eq!(changed.dependencies[2].version.as_deref(), Some("7"));
     assert_eq!(
         changed.form.root.children[0].properties[0].origin.source,
@@ -113,7 +115,7 @@ fn form_context_rejects_foreign_uploads_and_application_members() {
         .unwrap();
     let node = node(project);
     assert!(matches!(
-        project.form_preview(&node, Some("other"), &[]),
+        project.form_preview(&node, Some("other"), &[], None),
         Err(FormPreviewError::Form(FormContextError::MemberMismatch))
     ));
     let overlay = FormOverlay {
@@ -122,11 +124,11 @@ fn form_context_rejects_foreign_uploads_and_application_members() {
         version: "1".into(),
     };
     assert!(matches!(
-        project.form_preview(&node, Some("app"), &[overlay]),
+        project.form_preview(&node, Some("app"), &[overlay], None),
         Err(FormPreviewError::Form(FormContextError::InvalidOverlay))
     ));
     assert!(matches!(
-        project.form_preview(project.root(), Some("app"), &[]),
+        project.form_preview(project.root(), Some("app"), &[], None),
         Err(FormPreviewError::NotManagedForm)
     ));
 }
@@ -140,7 +142,7 @@ fn standalone_borrowed_form_is_explicitly_incomplete() {
     let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
     let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
     let node = node(project);
-    let preview = project.form_preview(&node, None, &[]).unwrap();
+    let preview = project.form_preview(&node, None, &[], None).unwrap();
     assert_eq!(
         preview.form.diagnostics[0].issue,
         crate::backend::project::forms::CompositionIssue::MissingBase
@@ -160,7 +162,7 @@ fn form_presentation_tracks_dirty_metadata_captions_without_changing_element_ide
     let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
     let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
     let node = node(project);
-    let preview = project.form_preview(&node, None, &[]).unwrap();
+    let preview = project.form_preview(&node, None, &[], None).unwrap();
     let caption = &preview.presentation.elements[1].caption;
     assert!(
         matches!(caption, PresentationText::Literal { items } if items[0].content == "ИНН для теста")
@@ -177,7 +179,7 @@ fn form_presentation_tracks_dirty_metadata_captions_without_changing_element_ide
         version: "9".into(),
     };
     let before = bytes(&directory.0);
-    let changed = project.form_preview(&node, None, &[overlay]).unwrap();
+    let changed = project.form_preview(&node, None, &[overlay], None).unwrap();
     assert!(
         matches!(&changed.presentation.elements[1].caption, PresentationText::Literal { items } if items[0].content == "Несохранённая подпись")
     );
@@ -186,4 +188,95 @@ fn form_presentation_tracks_dirty_metadata_captions_without_changing_element_ide
         preview.form.root.children[0].identity
     );
     assert_eq!(bytes(&directory.0), before);
+}
+
+#[test]
+fn external_form_resolves_configuration_types_without_composing_an_unrelated_form() {
+    use crate::backend::project::forms::{FormDependencyRole, PresentationText};
+    let directory = TestDir::new();
+    fixture(&directory.0.join("base"), "configuration");
+    fixture(&directory.0.join("external"), "processing");
+    fs::write(
+        directory.0.join("base/eska.toml"),
+        "[project]\nname='base'\ntype='configuration'\n",
+    )
+    .unwrap();
+    fs::write(
+        directory.0.join("external/eska.toml"),
+        "[project]\nname='external'\ntype='processing'\n",
+    )
+    .unwrap();
+    let path = directory
+        .0
+        .join("external/src/Выгрузка/Forms/Основная/Ext/Form.xml");
+    fs::create_dir_all(path.parent().unwrap()).unwrap();
+    fs::write(&path, form(
+        "<ChildItems><InputField name=\"ИНН\" id=\"1\"><DataPath>Контрагент.ИНН</DataPath></InputField></ChildItems><Attributes><Attribute name=\"Контрагент\" id=\"1\"><Type xmlns:v8=\"http://v8.1c.ru/8.1/data/core\" xmlns:cfg=\"http://v8.1c.ru/8.1/data/enterprise/current-config\"><v8:Type>cfg:CatalogObject.Контрагенты</v8:Type></Type></Attribute></Attributes>", None)).unwrap();
+    fs::write(directory.0.join("eska.toml"), "[workspace]\n[workspace.members.app]\nconfiguration='base'\nexternal_objects=['external']\n").unwrap();
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], true).unwrap();
+    let project = workspace
+        .project_mut(&ProjectScope::Member(
+            crate::backend::project::ProjectName::parse("external".into()).unwrap(),
+        ))
+        .unwrap();
+    let root = project.root().clone();
+    project.children(&root, TreeOptions::default()).unwrap();
+    let NodeId::Object(root_id) = root else {
+        panic!("expected root object")
+    };
+    let form_node = NodeId::Object(object(MetadataKind::Form, "Основная", Some(root_id)));
+    let before = bytes(&directory.0);
+    let preview = project
+        .form_preview(&form_node, Some("app"), &[], None)
+        .unwrap();
+    assert_eq!(preview.documents.len(), 1);
+    assert!(
+        preview
+            .dependencies
+            .iter()
+            .any(|dependency| dependency.role == FormDependencyRole::Metadata
+                && dependency.member.as_deref() == Some("base")
+                && dependency.path == Path::new("Catalogs/Контрагенты.xml"))
+    );
+    assert!(
+        matches!(&preview.presentation.elements[1].caption, PresentationText::Literal { items } if items[0].content == "ИНН для теста")
+    );
+    assert_eq!(bytes(&directory.0), before);
+}
+
+#[test]
+fn form_context_excludes_disabled_extensions_but_retains_required_dependencies() {
+    use crate::backend::project::activity::{State, path_key};
+    let (directory, mut workspace) = setup();
+    let mut state = State::default();
+    for name in ["one", "two"] {
+        let scope =
+            ProjectScope::Member(crate::backend::project::ProjectName::parse(name.into()).unwrap());
+        let project = workspace.project(&scope).unwrap();
+        state.disabled.insert(
+            path_key(project.project().root()),
+            project.activity_summary(),
+        );
+    }
+    let project = workspace
+        .project_mut(&ProjectScope::Member(
+            crate::backend::project::ProjectName::parse("base".into()).unwrap(),
+        ))
+        .unwrap();
+    let node = node(project);
+    let preview = project
+        .form_preview(&node, Some("app"), &[], Some(&state))
+        .unwrap();
+    assert_eq!(preview.documents.len(), 1);
+    let base_fingerprint = preview.context_fingerprint;
+    state.disabled.remove(&path_key(&directory.0.join("two")));
+    let preview = project
+        .form_preview(&node, Some("app"), &[], Some(&state))
+        .unwrap();
+    assert_eq!(
+        preview.documents.len(),
+        3,
+        "the active second extension requires the first"
+    );
+    assert_ne!(preview.context_fingerprint, base_fingerprint);
 }

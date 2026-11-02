@@ -27,6 +27,7 @@ impl ProjectSession {
         node: &NodeId,
         application: Option<&str>,
         overlays: &[FormOverlay],
+        activity: Option<&crate::project::activity::State>,
     ) -> Result<FormPreview, FormPreviewError> {
         self.node(node)
             .map_err(|error| FormPreviewError::Workspace(Box::new(error)))?;
@@ -39,7 +40,18 @@ impl ProjectSession {
         if !matches!(object.kind, MetadataKind::Form | MetadataKind::CommonForm) {
             return Err(FormPreviewError::NotManagedForm);
         }
-        let context = application::resolve_snapshot(self.project().root(), application)
+        let context = activity
+            .map_or_else(
+                || application::resolve_snapshot(self.project().root(), application),
+                |activity| {
+                    application::resolve_active_snapshot(
+                        self.project().root(),
+                        application,
+                        activity,
+                    )
+                    .and_then(|snapshot| snapshot.ok_or(application::ContextError::EmptyWorkspace))
+                },
+            )
             .map_err(|error| FormPreviewError::Context(Box::new(error)))?;
         forms::load(&context, self.project().source(), owner, overlays)
             .map_err(FormPreviewError::Form)
