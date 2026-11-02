@@ -264,6 +264,7 @@ fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
                     | ElementKind::PlannerField
                     | ElementKind::SpreadsheetDocumentField
                     | ElementKind::TextDocumentField
+                    | ElementKind::TrackBarField
             )
         ) =>
         {

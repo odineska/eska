@@ -104,12 +104,7 @@ fn native_bound_field_fixtures_resolve_their_attributes_and_title_defaults() {
         assert!(field.displayed, "{path:?}");
         let expected = if matches!(
             path.file_stem().unwrap().to_str().unwrap(),
-            "InputField"
-                | "CheckBoxField"
-                | "LabelField"
-                | "RadioButtonField"
-                | "ProgressBarField"
-                | "TrackBarField"
+            "InputField" | "CheckBoxField" | "LabelField" | "RadioButtonField" | "ProgressBarField"
         ) {
             FieldTitleLocation::Left
         } else {

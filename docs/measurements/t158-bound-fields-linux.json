@@ -96,10 +96,36 @@
       "#ffc000",
       "#5fc26e"
     ],
-    "calendarRegion": "en-US from native LANG=C.UTF-8; separate from 1C UI ru"
+    "calendarRegion": "en-US from native LANG=C.UTF-8; separate from 1C UI ru",
+    "checkBoxDefaultPixels": [
+      15,
+      15
+    ],
+    "progressDefaultPixels": [
+      320,
+      21
+    ],
+    "progressSamplePercent": 50,
+    "trackDefaultPixels": [
+      320,
+      28
+    ],
+    "trackDefaultTitleLocation": "Top",
+    "pictureDefaultPixels": [
+      122,
+      120
+    ],
+    "spreadsheetDefaultGrid": false,
+    "spreadsheetDefaultHeaders": false,
+    "spreadsheetSelectedCellPixels": [
+      64,
+      16
+    ],
+    "plannerDefaultDays": 1,
+    "plannerHourPixels": 16,
+    "plannerSampleMeeting": "01:00–04:00; localized caption; current day and time from environment"
   },
   "installedVsixGallery": {
-    "locale": "en",
     "passed": true,
     "referenceFontVersion": "Liberation 2.1.5 (bundled unmodified OFL assets)",
     "results": [
@@ -109,11 +135,11 @@
           "x": 28,
           "y": 277,
           "width": 261.25,
-          "height": 73
+          "height": 75
         },
         "control": {
           "x": 107.25,
-          "y": 315,
+          "y": 316,
           "width": 161,
           "height": 23
         },
@@ -125,14 +151,14 @@
         "frame": {
           "x": 28,
           "y": 277,
-          "width": 145.34375,
-          "height": 72
+          "width": 148.34375,
+          "height": 69
         },
         "control": {
-          "x": 138.34375,
-          "y": 319.484375,
-          "width": 14,
-          "height": 14
+          "x": 140.34375,
+          "y": 317.484375,
+          "width": 15,
+          "height": 15
         },
         "title": "Left",
         "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
@@ -210,19 +236,186 @@
         "frame": {
           "x": 28,
           "y": 277,
-          "width": 264.203125,
-          "height": 72
+          "width": 253.203125,
+          "height": 69
         },
         "control": {
           "x": 110.203125,
-          "y": 316,
-          "width": 161,
+          "y": 316.5,
+          "width": 150,
           "height": 16
         },
         "title": "Left",
         "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "ProgressBarField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 464.671875,
+          "height": 73
+        },
+        "control": {
+          "x": 151.671875,
+          "y": 316,
+          "width": 320,
+          "height": 21
+        },
+        "title": "Left",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "TrackBarField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 354,
+          "height": 99
+        },
+        "control": {
+          "x": 41,
+          "y": 336,
+          "width": 320,
+          "height": 28
+        },
+        "title": "Top",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "RadioButtonField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 484.34375,
+          "height": 69
+        },
+        "control": {
+          "x": 150.953125,
+          "y": 315,
+          "width": 340.390625,
+          "height": 19
+        },
+        "title": "Left",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "PictureField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 156,
+          "height": 191
+        },
+        "control": {
+          "x": 41,
+          "y": 336,
+          "width": 122,
+          "height": 120
+        },
+        "title": "Top",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "SpreadSheetDocumentField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 534,
+          "height": 314
+        },
+        "control": {
+          "x": 41,
+          "y": 336,
+          "width": 500,
+          "height": 243
+        },
+        "title": "Top",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+      },
+      {
+        "kind": "PlannerField",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 534,
+          "height": 314
+        },
+        "control": {
+          "x": 41,
+          "y": 336,
+          "width": 500,
+          "height": 243
+        },
+        "title": "Top",
+        "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
       }
     ],
-    "pixelParityVerified": false
+    "pixelParityVerified": false,
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "nativeEnglishSampleCaptionsVerified": true,
+    "nativeFrames": {
+      "InputField": [
+        261,
+        75
+      ],
+      "CheckBoxField": [
+        148,
+        69
+      ],
+      "LabelField": [
+        252,
+        69
+      ],
+      "ProgressBarField": [
+        463,
+        73
+      ],
+      "TrackBarField": [
+        354,
+        99
+      ],
+      "RadioButtonField": {
+        "ru": [
+          480,
+          69
+        ],
+        "en": [
+          406,
+          69
+        ]
+      },
+      "PictureField": [
+        156,
+        191
+      ],
+      "SpreadSheetDocumentField": [
+        534,
+        314
+      ],
+      "PlannerField": [
+        534,
+        314
+      ]
+    },
+    "knownDifferences": [
+      "Caption advance widths still differ: Russian radio frame +4.34375px, label +1.203125px, progress +1.671875px; text metrics require further calibration.",
+      "Native design-time samples were checked only at default properties; all property combinations are not accepted."
+    ]
+  },
+  "checks": {
+    "cargoFmtCheck": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeatures": true,
+    "cargoTestsPassed": 1457,
+    "cargoTestsIgnored": 19,
+    "nodeTestsPassed": 448,
+    "nodeTestsSkipped": 11,
+    "installedVsixLifecycleEn": true,
+    "sourceWritesDuringViewing": false,
+    "installedVsixLifecycleRu": true
   }
 }
