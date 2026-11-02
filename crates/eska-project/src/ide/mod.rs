@@ -8,6 +8,7 @@ mod envelope;
 pub(crate) mod errors;
 mod events;
 mod formatting;
+mod forms;
 mod framing;
 mod metadata;
 mod params;
@@ -18,7 +19,7 @@ pub(crate) mod renaming;
 mod runtime;
 mod server;
 
-pub(crate) const API_MINOR: u32 = 35;
+pub(crate) const API_MINOR: u32 = 36;
 
 /// Run a persistent framed protocol session without human output on stdout.
 #[must_use]

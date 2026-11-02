@@ -170,6 +170,9 @@ impl Server {
         {
             self.analyzer_lease = None;
         }
+        if let Some(session) = self.session.as_ref() {
+            self.forms.retain_projects(&session.projects);
+        }
         let info = self.info()?;
         events.push(json!({"jsonrpc":"2.0","method":"workspace/activityChanged","params":info}));
         Ok(info)

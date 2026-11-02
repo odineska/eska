@@ -93,6 +93,7 @@ pub fn load(
     let mut dependencies = Vec::new();
     let mut documents = Vec::new();
     let mut selected_found = false;
+    let mut input_bytes = 0usize;
     for input in context.context.sources().iter().filter(|source| {
         if external {
             source.project().source() == selected
@@ -128,6 +129,10 @@ pub fn load(
                 .map_err(FormContextError::Source)?
                 .ok_or(FormContextError::MissingForm)?,
         };
+        input_bytes = input_bytes.saturating_add(text.len());
+        if input_bytes > super::MAX_FORM_CONTEXT_BYTES {
+            return Err(FormContextError::InputTooLarge);
+        }
         let document = parse(&id, text).map_err(|error| FormContextError::Parse {
             source: id.clone(),
             error,
@@ -155,17 +160,7 @@ pub fn load(
         &mut dependencies,
         overlays,
     )?;
-    for (index, overlay) in overlays.iter().enumerate() {
-        if !dependencies
-            .iter()
-            .any(|dependency| dependency.id == overlay.source)
-            || overlays[..index]
-                .iter()
-                .any(|before| before.source == overlay.source)
-        {
-            return Err(FormContextError::InvalidOverlay);
-        }
-    }
+    validate_overlays(overlays, &dependencies)?;
     let (base, extensions) = documents
         .split_first()
         .ok_or(FormContextError::MissingForm)?;
@@ -205,4 +200,23 @@ pub(super) fn source_identity(context: &ContextSnapshot, root: &Path, path: &Pat
             let _ = write!(value, "{byte:02x}");
             value
         })
+}
+
+fn validate_overlays(
+    overlays: &[FormOverlay],
+    dependencies: &[FormDependency],
+) -> Result<(), FormContextError> {
+    for (index, overlay) in overlays.iter().enumerate() {
+        if !dependencies
+            .iter()
+            .any(|dependency| dependency.id == overlay.source)
+            || overlays[..index]
+                .iter()
+                .any(|before| before.source == overlay.source)
+        {
+            return Err(FormContextError::InvalidOverlay);
+        }
+    }
+
+    Ok(())
 }

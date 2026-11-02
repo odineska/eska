@@ -48,6 +48,10 @@ pub(super) fn load(
         discover(parsed.root_element(), &mut requests, true);
     }
     let mut output = Vec::new();
+    let mut input_bytes: usize = documents
+        .iter()
+        .map(|document| document.input().len())
+        .sum();
     for input in context.context.sources().iter().filter(|input| {
         if external {
             input.project().source() == selected
@@ -93,6 +97,10 @@ pub(super) fn load(
             else {
                 continue;
             };
+            input_bytes = input_bytes.saturating_add(text.len());
+            if input_bytes > super::MAX_FORM_CONTEXT_BYTES {
+                return Err(FormContextError::InputTooLarge);
+            }
             let xml = Document::parse(&text).map_err(|_| FormContextError::InvalidMetadata {
                 source: dependency.id.clone(),
             })?;

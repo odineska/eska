@@ -26,7 +26,7 @@ use super::{
     server::Server,
 };
 pub(super) use language::{capability as language_capability, is_method as is_language_method};
-use params::Key;
+pub(super) use params::Key;
 pub(super) use recovery::State as RecoveryState;
 
 const INLINE_BYTES: usize = 128 * 1024;

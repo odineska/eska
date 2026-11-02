@@ -7,7 +7,7 @@ use serde_json::Value;
 use crate::ide::{envelope::error, params};
 
 #[derive(Clone, Debug, Eq, PartialEq)]
-pub(super) struct Key {
+pub(in crate::ide) struct Key {
     pub session: String,
     pub project: String,
     pub generation: String,

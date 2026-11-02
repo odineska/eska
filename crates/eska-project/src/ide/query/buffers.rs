@@ -91,7 +91,7 @@ impl State {
     }
 
     /// Inline and uploaded variants share one exclusive source value, never an unverified concatenation.
-    pub(super) fn input_text<'a>(
+    pub(in crate::ide) fn input_text<'a>(
         &'a self,
         key: &Key,
         text: Option<&'a str>,
