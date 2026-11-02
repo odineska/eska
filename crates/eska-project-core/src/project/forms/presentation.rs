@@ -188,7 +188,7 @@ fn visit(
         .unwrap_or_else(|| enum_choices(&value_type, resources));
     let auto_command_items = match element.kind {
         Some(ElementKind::Form) => super::commands::automatic(form, resources),
-        Some(ElementKind::Table) => super::commands::table(element),
+        Some(ElementKind::Table) => super::commands::table(element, &value_type),
         _ => Vec::new(),
     };
     let auto_commands = standard_form_commands(&auto_command_items);
@@ -300,6 +300,7 @@ fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
                     | ElementKind::GraphicalSchemaField
                     | ElementKind::HtmlDocumentField
                     | ElementKind::PdfDocumentField
+                    | ElementKind::PeriodField
                     | ElementKind::PictureField
                     | ElementKind::PlannerField
                     | ElementKind::SpreadsheetDocumentField
@@ -441,16 +442,16 @@ pub(super) fn field_type(value: &MetadataValue) -> FieldType {
                 _ => FieldValueKind::Unknown,
             }
         }
-        [kind] if kind.namespace.as_deref() == Some(super::references::CONFIG) => {
-            FieldValueKind::Reference
-        }
         [kind]
-            if matches!(
-                kind.name.as_str(),
-                "ValueTable" | "ValueTree" | "DynamicList" | "ValueList"
-            ) =>
+            if kind.namespace.as_deref() == Some("http://v8.1c.ru/8.1/data/core")
+                && matches!(kind.name.as_str(), "ValueTable" | "ValueTree" | "ValueList")
+                || kind.namespace.as_deref() == Some(super::references::CONFIG)
+                    && kind.name == "DynamicList" =>
         {
             FieldValueKind::Table
+        }
+        [kind] if kind.namespace.as_deref() == Some(super::references::CONFIG) => {
+            FieldValueKind::Reference
         }
         [_] => FieldValueKind::Document,
         _ => FieldValueKind::Composite,
@@ -722,9 +723,16 @@ fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -
     let length = metadata_property(owner, length_key, resources)
         .and_then(|value| appearance::text(&value.value))
         .and_then(|value| value.parse().ok());
+    let digits = (name == "LineNumber").then(|| {
+        metadata_property(owner, "LineNumberLength", resources)
+            .and_then(|value| appearance::text(&value.value))
+            .and_then(|value| value.parse().ok())
+            .unwrap_or(9)
+    });
     FieldType {
         kind,
         length,
+        digits,
         ..FieldType::default()
     }
 }

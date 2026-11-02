@@ -73,13 +73,24 @@ fn autofill(element: &EffectiveElement) -> bool {
         != Some("false")
 }
 
-pub(super) fn table(element: &EffectiveElement) -> Vec<AutoCommandItem> {
+pub(super) fn table(
+    element: &EffectiveElement,
+    value_type: &super::FieldType,
+) -> Vec<AutoCommandItem> {
     if !autofill(element) {
         return Vec::new();
     }
     // ReadOnly does not remove these design-time buttons; no preview command executes.
-    ["Add", "MoveUp", "MoveDown"]
-        .into_iter()
+    let dynamic = value_type.types.iter().any(|kind| {
+        kind.namespace.as_deref() == Some(super::references::CONFIG) && kind.name == "DynamicList"
+    });
+    let commands: &[&str] = if dynamic {
+        &["Create", "Copy"]
+    } else {
+        &["Add", "MoveUp", "MoveDown"]
+    };
+    commands
+        .iter()
         .map(|name| AutoCommandItem {
             key: format!("Table.StandardCommand.{name}"),
             caption: PresentationText::Standard {

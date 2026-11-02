@@ -113,7 +113,7 @@ fn native_bound_field_fixtures_resolve_their_attributes_and_title_defaults() {
         assert_eq!(field.title_location, expected, "{path:?}");
         count += 1;
     }
-    assert_eq!(count, 13);
+    assert_eq!(count, 20);
 }
 
 fn binding_resource(source: &str, properties: &str, children: &str) -> FormResource {
@@ -330,4 +330,62 @@ fn standard_line_number_uses_a_column_caption_but_preserves_an_explicit_title() 
     assert!(
         matches!(&view.elements[4].caption, PresentationText::Name { text } if text == "Custom")
     );
+}
+
+#[test]
+fn native_context_tables_resolve_metadata_columns_and_dynamic_list_commands() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-context-tables");
+    let resource = FormResource {
+        source: "metadata".into(),
+        picture: None,
+        retained_bytes: 0,
+        references: Vec::new(),
+        descriptor: metadata_parser::parse(
+            &std::fs::read_to_string(root.join("Catalog.xml")).unwrap(),
+            None,
+            PropertiesMode::All,
+        )
+        .unwrap(),
+    };
+    for (name, count, marked) in [("MetadataTable", 3, true), ("DynamicList", 2, false)] {
+        let document = parse(
+            "native",
+            std::fs::read_to_string(root.join(format!("{name}.xml"))).unwrap(),
+        )
+        .unwrap();
+        let view = present(
+            &compose(&document, &[]),
+            &[document],
+            std::slice::from_ref(&resource),
+        );
+        assert!(view.diagnostics.is_empty(), "{name}");
+        let table = &view.elements[1];
+        assert_eq!(table.value_type.kind, FieldValueKind::Table);
+        assert_eq!(table.auto_command_items.len(), count);
+        assert_eq!(table.mark_incomplete, marked);
+        assert!(
+            view.elements
+                .iter()
+                .filter(|element| matches!(
+                    element.identity.key,
+                    super::super::ElementKey::Xml(3..=4)
+                ))
+                .all(|element| element.binding.is_some())
+        );
+        if name == "MetadataTable" {
+            assert_eq!(view.elements[2].value_type.digits, Some(9));
+            assert!(
+                matches!(&view.elements[2].caption, PresentationText::Standard { key } if key == "table.LineNumber")
+            );
+        } else {
+            assert_eq!(view.elements[2].value_type.length, Some(9));
+            let description = view
+                .elements
+                .iter()
+                .find(|element| element.identity.key == super::super::ElementKey::Xml(4))
+                .unwrap();
+            assert_eq!(description.value_type.length, Some(25));
+        }
+    }
 }
