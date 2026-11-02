@@ -33,6 +33,30 @@ impl TestDir {
 
 impl Drop for TestDir {
     fn drop(&mut self) {
-        fs::remove_dir_all(&self.0).expect("remove owned test directory");
+        let result = fs::remove_dir_all(&self.0);
+        #[cfg(windows)]
+        let result = {
+            let mut result = result;
+            // Windows can briefly retain Git or scanner handles after the operation completes.
+            for _ in 0..20 {
+                if !result
+                    .as_ref()
+                    .is_err_and(|error| matches!(error.raw_os_error(), Some(5 | 32 | 33 | 145)))
+                {
+                    break;
+                }
+                std::thread::sleep(std::time::Duration::from_millis(250));
+                result = fs::remove_dir_all(&self.0);
+            }
+            result
+        };
+        if let Err(error) = result {
+            if std::thread::panicking() {
+                // Preserve the original test failure instead of aborting the entire test executable.
+                eprintln!("remove owned test directory {}: {error}", self.0.display());
+            } else {
+                panic!("remove owned test directory: {error}");
+            }
+        }
     }
 }

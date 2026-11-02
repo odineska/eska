@@ -55,11 +55,12 @@ def external_descriptor(header, name, tag, class_id):
 
 def run_matrix(args, repo, stand):
     """Keep all native databases, exports, logs and reports under the owned stand."""
-    binary = Path(args.binary).resolve() if args.binary else repo / "target/debug/eska-build"
+    suffix = ".exe" if os.name == "nt" else ""
+    binary = Path(args.binary).resolve() if args.binary else repo / f"target/debug/eska-build{suffix}"
     if not binary.is_file():
         raise ValueError("build eska-build first or select --binary")
     shell = Path(args.shell_binary).resolve() if args.shell_binary else None
-    vcs = Path(args.vcs_binary).resolve() if args.vcs_binary else repo / "target/debug/eska-vcs"
+    vcs = Path(args.vcs_binary).resolve() if args.vcs_binary else repo / f"target/debug/eska-vcs{suffix}"
     if shell and (not shell.is_file() or not vcs.is_file()):
         raise ValueError("build the selected shell and VCS binaries first")
     builder = shell or binary
@@ -171,6 +172,8 @@ def run_matrix(args, repo, stand):
 
 def interrupt_native(command, pid_root, pattern, stand, args, env, label):
     """Interrupt only a PID published by this owned run and save its actual process result."""
+    if os.name == "nt":
+        return interrupt_windows(command, pid_root, pattern, stand, env, label)
     child = subprocess.Popen(command, cwd=stand, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     native_pid = None
     try:
@@ -202,6 +205,91 @@ def interrupt_native(command, pid_root, pattern, stand, args, env, label):
                     'if [ -r /proc/"$1"/cmdline ] && grep -Fq -- "$2" /proc/"$1"/cmdline; then kill -KILL "$1"; fi',
                     "sh", native_pid, str(stand)], cwd=stand, capture_output=True, timeout=30)
             child.kill()
+            child.communicate(timeout=30)
+
+
+def interrupt_windows(command, pid_root, pattern, stand, env, label):
+    """Send Ctrl+Break to an isolated hidden console, never to the user's terminal."""
+    import ctypes
+    from ctypes import wintypes
+
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+    kernel.OpenProcess.restype = wintypes.HANDLE
+    kernel.WaitForSingleObject.argtypes = [wintypes.HANDLE, wintypes.DWORD]
+    kernel.WaitForSingleObject.restype = wintypes.DWORD
+    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel.AttachConsole.argtypes = [wintypes.DWORD]
+    kernel.AttachConsole.restype = wintypes.BOOL
+    handler_type = ctypes.WINFUNCTYPE(wintypes.BOOL, wintypes.DWORD)
+    handler = handler_type(lambda _event: True)
+    startup = subprocess.STARTUPINFO()
+    startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    startup.wShowWindow = 0
+    child = subprocess.Popen(command, cwd=stand, env=env, stdin=subprocess.DEVNULL,
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        creationflags=subprocess.CREATE_NEW_CONSOLE, startupinfo=startup)
+    attached = False
+    try:
+        deadline = time.monotonic() + 30
+        native_pid = None
+        while time.monotonic() < deadline and child.poll() is None:
+            for path in pid_root.glob(pattern):
+                value = path.read_text(encoding="utf-8").strip()
+                if value.isdecimal():
+                    native_pid = int(value)
+                    break
+            # Host runners own the native child directly instead of publishing Distrobox PID files.
+            if not native_pid:
+                query = (
+                    "[Console]::OutputEncoding = [Text.UTF8Encoding]::new();"
+                    f"$all=Get-CimInstance Win32_Process;$owned=@({child.pid});"
+                    "do {$next=@($all|Where-Object {$_.ParentProcessId -in $owned -and $_.ProcessId -notin $owned});"
+                    "$owned+=@($next.ProcessId)} while($next.Count);"
+                    "$all|Where-Object {$_.ProcessId -in $owned -and $_.Name -eq 'ibcmd.exe'}|"
+                    "Select-Object ProcessId,CommandLine|ConvertTo-Json -Compress"
+                )
+                probe = subprocess.run(["powershell.exe", "-NoProfile", "-Command", query],
+                    stdin=subprocess.DEVNULL, capture_output=True, encoding="utf-8", timeout=15)
+                if probe.stdout.strip():
+                    candidates = json.loads(probe.stdout)
+                    for candidate in candidates if isinstance(candidates, list) else [candidates]:
+                        if str(stand).casefold() in candidate["CommandLine"].casefold():
+                            native_pid = candidate["ProcessId"]
+                            break
+            if native_pid:
+                break
+            time.sleep(0.01)
+        if not native_pid:
+            stdout, stderr = child.communicate(timeout=30)
+            (stand / f"{label}.stdout").write_bytes(stdout)
+            (stand / f"{label}.stderr").write_bytes(stderr)
+            raise RuntimeError("owned native PID was not published before the process ended")
+        kernel.FreeConsole()
+        if not kernel.AttachConsole(child.pid):
+            raise ctypes.WinError(ctypes.get_last_error())
+        attached = True
+        if not kernel.SetConsoleCtrlHandler(handler, True) or not kernel.GenerateConsoleCtrlEvent(1, 0):
+            raise ctypes.WinError(ctypes.get_last_error())
+        stdout, stderr = child.communicate(timeout=30)
+        (stand / f"{label}.stdout").write_bytes(stdout)
+        (stand / f"{label}.stderr").write_bytes(stderr)
+        handle = kernel.OpenProcess(0x00101000, False, native_pid)
+        if handle:
+            try:
+                if kernel.WaitForSingleObject(handle, 0) != 0:
+                    raise AssertionError("an owned native process survived cancellation")
+            finally:
+                kernel.CloseHandle(handle)
+        elif ctypes.get_last_error() != 87:
+            raise ctypes.WinError(ctypes.get_last_error())
+        return child.returncode, stdout
+    finally:
+        if attached:
+            kernel.FreeConsole()
+        if child.poll() is None:
+            subprocess.run(["taskkill.exe", "/PID", str(child.pid), "/T", "/F"],
+                           capture_output=True, timeout=30)
             child.communicate(timeout=30)
 
 
@@ -256,8 +344,8 @@ def main():
     parser.add_argument("--platform-version", required=True)
     parser.add_argument("--distrobox")
     args = parser.parse_args()
-    if os.name != "posix" or not args.distrobox:
-        parser.error("the complete native matrix currently requires a POSIX Distrobox runner")
+    if not (os.name == "nt" and not args.distrobox) and not (os.name == "posix" and args.distrobox):
+        parser.error("select a Windows host or a POSIX Distrobox runner")
     repo = Path(__file__).resolve().parent.parent
     playground = (repo.parent / "eska-playground").resolve()
     if Path(os.environ.get("ESKA_TEST_ROOT", playground)).resolve() != playground:

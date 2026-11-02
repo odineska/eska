@@ -6,12 +6,20 @@ import json
 import os
 from pathlib import Path
 import shutil
+import signal
 import subprocess
 import tempfile
 import time
 import uuid
 
 from native_build import digest, external_descriptor, interrupt_native, snapshot
+
+
+def platform_path(value):
+    """1C accepts ordinary Windows paths; Rust's machine protocol may use verbatim paths."""
+    if os.name == "nt":
+        value = "\\\\" + value[8:] if value.startswith("\\\\?\\UNC\\") else value.removeprefix("\\\\?\\")
+    return Path(value)
 
 
 def verify_explicit(call, native, binary, root, artifact, managed, cf_file, expected):
@@ -31,25 +39,25 @@ def verify_workspace(call, binary, shell, stand, source, config, version):
     shutil.copytree(source, other)
     with (other / "Configuration.xml").open("ab") as stream:
         stream.write(b"\n<!-- second application snapshot -->\n")
-    with (config / "config.toml").open("a") as stream:
+    with (config / "config.toml").open("a", encoding="utf-8") as stream:
         stream.write(f"[libraries.second]\nsource={json.dumps(str(other), ensure_ascii=False)}\n")
     root = stand / "workspace"
     root.mkdir()
     for kind in ["processing", "report"]:
         member = root / kind
         shutil.copytree(stand / kind / "src", member / "src")
-        (member / "eska.toml").write_text(f"[project]\nname='{kind}'\ntype='{kind}'\n")
+        (member / "eska.toml").write_text(f"[project]\nname='{kind}'\ntype='{kind}'\n", encoding="utf-8")
     (root / "eska.toml").write_text(
         f"[workspace]\n[build]\nplatform_version='{version}'\n[analysis]\ndefault_application='first'\n"
         "[workspace.members.first]\nconfiguration={library='demo'}\nexternal_objects=['processing']\n"
-        "[workspace.members.second]\nconfiguration={library='second'}\nexternal_objects=['report']\n"
+        "[workspace.members.second]\nconfiguration={library='second'}\nexternal_objects=['report']\n", encoding="utf-8"
     )
     call("workspace-aggregate", [shell, "build", "--workspace", "--manifest", "--format", "json"], root)
     preview = json.loads(call("workspace-preview", [binary, "build", "--workspace", "--dry-run", "--format", "json"], root).stdout)
     snapshots = []
     for project in preview["projects"]:
         artifact = Path(project["artifact"]["path"])
-        passport = json.loads(Path(str(artifact) + ".manifest.json").read_text())
+        passport = json.loads(Path(str(artifact) + ".manifest.json").read_text(encoding="utf-8"))
         context = passport["source"]["base_context"]
         if context["library"] != project["base_configuration"]["library"]:
             raise AssertionError("a workspace member used another application's library")
@@ -100,39 +108,58 @@ def verify_parallel(binary, stand, env):
 
 
 def run(args, repo, stand):
-    binary = Path(args.binary or repo / "target/debug/eska-build").resolve()
-    shell = Path(args.shell_binary or repo / "target/debug/eska").resolve()
+    suffix = ".exe" if os.name == "nt" else ""
+    binary = Path(args.binary or repo / f"target/debug/eska-build{suffix}").resolve()
+    shell = Path(args.shell_binary or repo / f"target/debug/eska{suffix}").resolve()
     original = Path(args.library_source).resolve()
     original_bytes = snapshot(original)
     library = stand / "library"
     source = library / "src/cf"
     shutil.copytree(original, source)
     (library / "eska.toml").write_text(
-        f"[project]\ntype='configuration'\nsource='src/cf'\n[build]\nplatform_version='{args.platform_version}'\n"
+        f"[project]\ntype='configuration'\nsource='src/cf'\n[build]\nplatform_version='{args.platform_version}'\n", encoding="utf-8"
     )
     header = (source / "Configuration.xml").read_text(encoding="utf-8-sig").splitlines()[1]
     config = stand / "machine"
     config.mkdir()
+    runner = "distrobox" if args.distrobox else "host"
+    container = f"container={json.dumps(args.distrobox)}\n" if args.distrobox else ""
     (config / "config.toml").write_text(
-        f"[build]\nrunner='distrobox'\ncontainer={json.dumps(args.distrobox)}\n"
-        f"platform_arch={json.dumps(args.platform_arch)}\n[libraries.demo]\nsource={json.dumps(str(source), ensure_ascii=False)}\n"
+        f"[build]\nrunner='{runner}'\n{container}"
+        f"platform_arch={json.dumps(args.platform_arch)}\n[libraries.demo]\nsource={json.dumps(str(source), ensure_ascii=False)}\n", encoding="utf-8"
     )
     env = os.environ.copy()
     for key in ["ESKA_IBCMD", "ESKA_DISTROBOX", "ESKA_PLATFORM_ARCH", "ESKA_LANG"]:
         env.pop(key, None)
     env.update(ESKA_CONFIG_DIR=str(config),
-               ESKA_BUILD_BINARY=str(binary), ESKA_VCS_BINARY=str(repo / "target/debug/eska-vcs"))
-    native = ["distrobox", "enter", "--name", args.distrobox, "--", args.ibcmd]
+               ESKA_BUILD_BINARY=str(binary), ESKA_VCS_BINARY=str(binary.with_name(f"eska-vcs{suffix}")))
+    if not args.distrobox:
+        env["ESKA_IBCMD"] = args.ibcmd
+    native = (["distrobox", "enter", "--name", args.distrobox, "--"] if args.distrobox else []) + [args.ibcmd]
 
     timings = {}
 
     def call(label, command, cwd=stand, success=True):
         started = time.monotonic()
-        result = subprocess.run([str(value) for value in command], cwd=cwd, env=env,
-                                capture_output=True, timeout=240)
-        timings[label] = time.monotonic() - started
-        (stand / f"{label}.stdout").write_bytes(result.stdout)
-        (stand / f"{label}.stderr").write_bytes(result.stderr)
+        command = [str(value) for value in command]
+        stdout = stand / f"{label}.stdout"
+        stderr = stand / f"{label}.stderr"
+        with stdout.open("wb") as out, stderr.open("wb") as err:
+            child = subprocess.Popen(command, cwd=cwd, env=env, stdout=out, stderr=err,
+                                     start_new_session=os.name == "posix")
+            try:
+                child.wait(timeout=args.timeout_seconds)
+            except subprocess.TimeoutExpired:
+                if os.name == "nt":
+                    subprocess.run(["taskkill.exe", "/PID", str(child.pid), "/T", "/F"],
+                                   capture_output=True, timeout=30)
+                else:
+                    os.killpg(child.pid, signal.SIGKILL)
+                child.wait(timeout=30)
+                raise
+            finally:
+                timings[label] = time.monotonic() - started
+        result = subprocess.CompletedProcess(command, child.returncode, stdout.read_bytes(), stderr.read_bytes())
         if (result.returncode == 0) != success:
             raise AssertionError(f"{label}: unexpected exit {result.returncode}; see saved logs")
         return result
@@ -170,25 +197,25 @@ def run(args, repo, stand):
         module = xml / name / "Ext"
         module.mkdir(parents=True)
         (module / "ObjectModule.bsl").write_text(
-            f"Функция LibraryProduct() Экспорт\nВозврат Справочники.{args.catalog}.ПустаяСсылка();\nКонецФункции\n"
+            f"Функция LibraryProduct() Экспорт\nВозврат Справочники.{args.catalog}.ПустаяСсылка();\nКонецФункции\n", encoding="utf-8"
         )
         manifest = root / "eska.toml"
-        manifest.write_text(f"[project]\nname='{kind}'\ntype='{kind}'\n[build]\nplatform_version='{args.platform_version}'\n")
+        manifest.write_text(f"[project]\nname='{kind}'\ntype='{kind}'\n[build]\nplatform_version='{args.platform_version}'\n", encoding="utf-8")
         before = snapshot(xml)
         negative = call(f"{kind}-no-library", [binary, "build", "--format", "json"], root, False)
         if json.loads(negative.stdout)["error"]["stage"] != "import-sources":
             raise AssertionError("negative control did not reach native metadata import")
-        manifest.write_text(manifest.read_text() + "[analysis.configuration]\nlibrary='demo'\n")
+        manifest.write_text(manifest.read_text(encoding="utf-8") + "[analysis.configuration]\nlibrary='demo'\n", encoding="utf-8")
         previews = [json.loads(call(f"{kind}-preview-{locale}",
             [shell, "--lang", locale, "build", "--dry-run", "--format", "json"], root).stdout)
             for locale in ["ru", "en"]]
         if previews[0] != previews[1]:
             raise AssertionError("dry-run JSON depends on locale")
         plan = previews[0]["projects"][0]
-        artifact = Path(plan["artifact"]["path"])
+        artifact = platform_path(plan["artifact"]["path"])
         managed = artifact.parent / ".eska/infobases" / artifact.name
         call(f"{kind}-shell-build", [shell, "build"], root)
-        state = json.loads(state_path.read_text())
+        state = json.loads(state_path.read_text(encoding="utf-8"))
         cf = digest(cf_file)
         if cf != cf_checksum or (managed / "base.cf").exists():
             raise AssertionError("consumer did not reuse the shared CF")
@@ -197,13 +224,13 @@ def run(args, repo, stand):
             raise AssertionError("consumer did not create one immutable database template")
         template_before = snapshot(templates[0].parent)
         marker = managed / "data/retained"
-        marker.write_text("test-owned reuse marker")
+        marker.write_text("test-owned reuse marker", encoding="utf-8")
         call(f"{kind}-direct-repeat", [binary, "--lang", "en", "build"], root)
         if not marker.is_file() or digest(cf_file) != cf:
             raise AssertionError("repeat did not retain the prepared base and consumer infobase")
         call(f"{kind}-manifest", [shell, "build", "--manifest", "--format", "json"], root)
         passport = Path(str(artifact) + ".manifest.json")
-        document = json.loads(passport.read_text())
+        document = json.loads(passport.read_text(encoding="utf-8"))
         if document["source"]["base_context"]["snapshot_id"] != state["source_snapshot"]:
             raise AssertionError("passport does not describe the used source snapshot")
         if document["source"]["base_configuration"]["value"] != cf:
@@ -243,7 +270,7 @@ def run(args, repo, stand):
     if old != (digest(artifact), digest(passport)) or previous != state_path.read_bytes():
         raise AssertionError("cancelled base preparation changed the published result or cache")
     call("refresh-after-cancel", [binary, "build"], root)
-    if json.loads(state_path.read_text())["source_snapshot"] == json.loads(previous)["source_snapshot"]:
+    if json.loads(state_path.read_text(encoding="utf-8"))["source_snapshot"] == json.loads(previous)["source_snapshot"]:
         raise AssertionError("source bytes changed without refreshing the prepared CF")
     parallel = verify_parallel(binary, stand, env)
     workspace = verify_workspace(call, binary, shell, stand, source, config, args.platform_version)
@@ -258,7 +285,7 @@ def run(args, repo, stand):
             raise AssertionError("native operation left staging behind")
     if snapshot(original) != original_bytes:
         raise AssertionError("the original user-provided library was modified")
-    return {"complete": True, "platform_version": args.platform_version, "runner": args.distrobox,
+    return {"complete": True, "platform_version": args.platform_version, "runner": runner,
             "cases": cases, "cancel_base": "passed", "source_refresh": "passed", "clean": "passed",
             "workspace": workspace, "original_library_unchanged": True,
             "shared_cf_without_manifest": True, "shared_template_immutable": True,
@@ -270,25 +297,30 @@ def main():
     parser.add_argument("--library-source", required=True)
     parser.add_argument("--catalog", required=True)
     parser.add_argument("--platform-version", required=True)
-    parser.add_argument("--distrobox", required=True)
+    parser.add_argument("--distrobox")
     parser.add_argument("--platform-arch", required=True)
     parser.add_argument("--ibcmd", required=True)
     parser.add_argument("--binary")
     parser.add_argument("--shell-binary")
+    parser.add_argument("--timeout-seconds", type=int, default=240)
     args = parser.parse_args()
+    if args.timeout_seconds <= 0:
+        parser.error("--timeout-seconds must be positive")
+    if not (os.name == "nt" and not args.distrobox) and not (os.name == "posix" and args.distrobox):
+        parser.error("select a Windows host or a POSIX Distrobox runner")
     repo = Path(__file__).resolve().parent.parent
     playground = (repo.parent / "eska-playground").resolve()
     if Path(os.environ.get("ESKA_TEST_ROOT", playground)).resolve() != playground:
         parser.error("ESKA_TEST_ROOT must identify the sibling eska-playground")
     stand = Path(tempfile.mkdtemp(prefix="t148-native-", dir=playground))
     print(stand, flush=True)
-    (stand / "owner.json").write_text(json.dumps({"kind": "eska-library-build-acceptance", "repository": str(repo)}))
+    (stand / "owner.json").write_text(json.dumps({"kind": "eska-library-build-acceptance", "repository": str(repo)}), encoding="utf-8")
     try:
         result = run(args, repo, stand)
     except Exception as error:
-        (stand / "result.json").write_text(json.dumps({"complete": False, "error": str(error)}, indent=2))
+        (stand / "result.json").write_text(json.dumps({"complete": False, "error": str(error)}, indent=2), encoding="utf-8")
         raise
-    (stand / "result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2))
+    (stand / "result.json").write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 if __name__ == "__main__":
