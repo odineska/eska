@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "profile": "taxi-8.3.27",
+  "platform": "8.3.27.2342",
+  "os": "Linux",
+  "apiVersion": "1.37",
+  "visualParityVerified": false,
+  "nativeImportExitCode": 0,
+  "nativeExportExitCode": 0,
+  "fixtures": [
+    {
+      "file": "InputMarked.xml",
+      "autoMarkIncomplete": true,
+      "nativeMarkVisible": true,
+      "nativeExportSha256": "da2cb188f6a8c7db95acf2f4d5f26bc974c993cd59f141af12757f73a1eae822",
+      "fixtureSha256": "37b430dccf25dfd74a932568a053d185f2d79fd41d54270baa46d538d19078a4"
+    },
+    {
+      "file": "InputUnmarked.xml",
+      "autoMarkIncomplete": false,
+      "nativeMarkVisible": false,
+      "nativeExportSha256": "2ba9fbcaf36960d16585d9fbbd83e32266a85d2d9654fd2a8dd0c3e3dd4f987b",
+      "fixtureSha256": "a11554b51723836f7eb1ffe16e6ae9a687d52194e3cd516c26f4d58c4df95694"
+    }
+  ],
+  "nativeMark": {
+    "color": "#ff0000",
+    "lineHeightPixels": 1,
+    "leftOuterInsetPixels": 4,
+    "rightOuterInsetPixels": 4,
+    "bottomOuterInsetPixels": 3,
+    "markedInputWidthPixels": 161,
+    "markedRedPixels": 77,
+    "unmarkedRedPixels": 0
+  },
+  "checks": {
+    "cargoFmtCheck": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeatures": true,
+    "cargoTestsPassed": 1460,
+    "cargoTestsIgnored": 19,
+    "nodeTestsPassed": 448,
+    "nodeTestsSkipped": 11,
+    "installedVsixDirtyXmlLocales": [
+      "ru",
+      "en"
+    ],
+    "viewingSourceWrites": false
+  },
+  "semantics": [
+    "Ordinary bound attribute type, synonym and fill checking inherit independently across metadata layers.",
+    "Standard-attribute records inherit individual properties, including attributes omitted by a later partial block.",
+    "Input auto marks follow AutoMarkIncomplete true/false/Auto and effective metadata FillChecking; BSL is not executed.",
+    "Foreign XML namespace properties cannot override these form defaults."
+  ],
+  "remaining": [
+    "Full native extension override matrix",
+    "Other field states and conditional appearance",
+    "Text metric differences documented in t158-bound-fields-linux.json"
+  ],
+  "hostRunAnomalies": [
+    {
+      "suite": "form-preview-host.cjs",
+      "locale": "ru",
+      "failure": "One repeat exited with code 1 during floating-window startup and produced no result file.",
+      "diagnosticReplayPassed": true,
+      "cause": "not reproduced",
+      "testChange": "The suite now writes caught exception details before rethrowing."
+    }
+  ]
+}

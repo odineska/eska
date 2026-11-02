@@ -12,6 +12,8 @@ use crate::project::{
 };
 use serde::Serialize;
 
+mod incomplete;
+
 #[derive(Clone, Debug, Serialize)]
 #[serde(tag = "kind", rename_all = "camelCase")]
 pub enum PresentationText {
@@ -76,6 +78,7 @@ pub struct ElementPresentation {
     pub identity: ElementIdentity,
     pub grouping: FormGrouping,
     pub displayed: bool,
+    pub mark_incomplete: bool,
     pub title_location: FieldTitleLocation,
     pub picture: Option<super::FormPicture>,
     pub caption: PresentationText,
@@ -186,10 +189,12 @@ fn visit(
                 .map(str::to_owned)
         })
         .collect();
+    let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
     output.push(ElementPresentation {
         identity: element.identity.clone(),
         grouping: grouping(element),
         displayed: is_displayed(element, binding.as_ref(), command, appearance),
+        mark_incomplete,
         title_location: title_location(element),
         picture: super::pictures::resolve(element, resources, &mut appearance.diagnostics),
         caption,
@@ -308,7 +313,10 @@ pub(super) fn property<'a>(
 fn scalar<'a>(values: &'a [SourcedProperty], name: &str) -> Option<&'a str> {
     values
         .iter()
-        .find(|value| value.property.key.name == name)
+        .find(|value| {
+            value.property.key.name == name
+                && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
+        })
         .and_then(|value| appearance::text(&value.property.value))
 }
 fn record<'a>(value: &'a MetadataValue, name: &str) -> Option<&'a MetadataProperty> {
@@ -447,6 +455,7 @@ fn bind(
     let target = kind
         .types
         .iter()
+        .filter(|kind| kind.namespace.as_deref() == Some(super::references::CONFIG))
         .find_map(|kind| {
             let (kind, name) = kind.name.split_once('.')?;
             super::resources::type_kind(kind).map(|kind| (kind, name))
@@ -469,70 +478,66 @@ fn metadata_binding(
     remaining: &[&str],
     resources: &[FormResource],
 ) -> Option<(Option<PresentationText>, FieldType, Option<PropertySource>)> {
-    'layers: for resource in resources.iter().rev() {
-        let Some(mut owner) = resource
+    let (mut resource, mut owner) = resources.iter().rev().find_map(|resource| {
+        resource
             .descriptor
             .objects
             .iter()
             .find(|object| object.metadata.kind() == kind && object.metadata.name() == name)
-        else {
-            continue;
-        };
-        for (index, part) in remaining.iter().enumerate() {
-            if let Some(child) = resource.descriptor.objects.iter().find(|object| {
-                object.metadata.parent() == Some(owner.metadata.id())
-                    && object.metadata.name() == *part
-            }) {
-                owner = child;
-            } else if index + 1 == remaining.len() && standard_attribute(part) {
-                let field_type = standard_type(part, owner, resources);
-                return Some((
-                    Some(standard_caption(part, owner, resources)),
-                    field_type,
-                    Some(PropertySource {
-                        source: resource.source.clone(),
-                        range: owner.range.clone(),
-                    }),
-                ));
-            } else {
-                continue 'layers;
-            }
-        }
-        let caption = if owner.synonyms.is_empty() {
-            PresentationText::Name {
-                text: owner.metadata.name().into(),
-            }
+            .map(|owner| (resource, owner))
+    })?;
+    for (index, part) in remaining.iter().enumerate() {
+        if let Some((layer, child)) = resources.iter().rev().find_map(|layer| {
+            layer
+                .descriptor
+                .objects
+                .iter()
+                .find(|object| {
+                    object.metadata.parent() == Some(owner.metadata.id())
+                        && object.metadata.name() == *part
+                })
+                .map(|child| (layer, child))
+        }) {
+            resource = layer;
+            owner = child;
+        } else if index + 1 == remaining.len() && standard_attribute(part) {
+            return Some((
+                Some(standard_caption(part, owner, resources)),
+                standard_type(part, owner, resources),
+                Some(PropertySource {
+                    source: resource.source.clone(),
+                    range: owner.range.clone(),
+                }),
+            ));
         } else {
-            PresentationText::Literal {
-                items: owner.synonyms.clone(),
-            }
-        };
-        let value_type = owner
-            .properties
-            .as_ref()
-            .and_then(|properties| {
-                properties
-                    .iter()
-                    .find(|value| value.property.key.name == "Type")
-            })
-            .map(|value| field_type(&value.property.value))
-            .unwrap_or_default();
-        return Some((
-            Some(caption),
-            value_type,
-            Some(PropertySource {
-                source: resource.source.clone(),
-                range: owner.range.clone(),
-            }),
-        ));
+            return None;
+        }
     }
-    None
+    let caption = metadata_property(owner, "Synonym", resources)
+        .and_then(|value| literal(&value.value))
+        .unwrap_or_else(|| PresentationText::Name {
+            text: owner.metadata.name().into(),
+        });
+    let value_type = metadata_property(owner, "Type", resources)
+        .map(|value| field_type(&value.value))
+        .unwrap_or_default();
+    Some((
+        Some(caption),
+        value_type,
+        Some(PropertySource {
+            source: resource.source.clone(),
+            range: owner.range.clone(),
+        }),
+    ))
 }
 fn definition_caption(value: &EffectiveDefinition) -> Option<PresentationText> {
     value
         .properties
         .iter()
-        .find(|value| value.property.key.name == "Title")
+        .find(|value| {
+            value.property.key.name == "Title"
+                && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
+        })
         .and_then(|value| literal(&value.property.value))
         .or_else(|| {
             value
@@ -590,17 +595,47 @@ pub(super) fn metadata_property<'a>(
         .rev()
         .flat_map(|resource| &resource.descriptor.objects)
         .filter(|object| object.metadata.id() == owner.metadata.id())
+        .find_map(|object| own_metadata_property(object, name))
+}
+fn own_metadata_property<'a>(owner: &'a ParsedObject, name: &str) -> Option<&'a MetadataProperty> {
+    owner
+        .properties
+        .as_ref()?
+        .iter()
+        .find(|value| {
+            value.property.key.name == name
+                && value.property.key.namespace.as_deref() == Some("http://v8.1c.ru/8.3/MDClasses")
+        })
+        .map(|value| &value.property)
+}
+fn standard_property<'a>(
+    owner: &ParsedObject,
+    name: &str,
+    property: &str,
+    resources: &'a [FormResource],
+) -> Option<&'a MetadataProperty> {
+    const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
+    resources
+        .iter()
+        .rev()
+        .flat_map(|resource| &resource.descriptor.objects)
+        .filter(|object| object.metadata.id() == owner.metadata.id())
         .find_map(|object| {
-            object
-                .properties
-                .as_ref()?
-                .iter()
-                .find(|value| {
-                    value.property.key.name == name
-                        && value.property.key.namespace.as_deref()
-                            == Some("http://v8.1c.ru/8.3/MDClasses")
-                })
-                .map(|value| &value.property)
+            let MetadataValue::Record(attributes) =
+                &own_metadata_property(object, "StandardAttributes")?.value
+            else {
+                return None;
+            };
+            let attribute = attributes.iter().find(|field| {
+                field.key.namespace.as_deref() == Some(READABLE)
+                    && appearance::qualifier(field, "name") == Some(name)
+            })?;
+            let MetadataValue::Record(properties) = &attribute.value else {
+                return None;
+            };
+            properties.iter().find(|field| {
+                field.key.namespace.as_deref() == Some(READABLE) && field.key.name == property
+            })
         })
 }
 fn standard_caption(
@@ -608,13 +643,8 @@ fn standard_caption(
     owner: &ParsedObject,
     resources: &[FormResource],
 ) -> PresentationText {
-    if let Some(standard) = metadata_property(owner, "StandardAttributes", resources)
-        && let MetadataValue::Record(fields) = &standard.value
-        && let Some(attribute) = fields
-            .iter()
-            .find(|field| appearance::qualifier(field, "name") == Some(name))
-        && let Some(caption) =
-            record(&attribute.value, "Synonym").and_then(|value| literal(&value.value))
+    if let Some(caption) =
+        standard_property(owner, name, "Synonym", resources).and_then(|value| literal(&value.value))
     {
         return caption;
     }
