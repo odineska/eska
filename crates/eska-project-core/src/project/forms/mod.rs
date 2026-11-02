@@ -1,9 +1,16 @@
 //! Read-only managed-form documents with source-qualified identities and lossless source ranges.
 
 mod catalog;
+mod composition;
+mod context;
 mod parsing;
 
 pub use catalog::{ElementFamily, ElementKind};
+pub use composition::{
+    ComposedForm, CompositionIssue, EffectiveDefinition, EffectiveElement,
+    FormCompositionDiagnostic, PropertySource, SourcedProperty, compose,
+};
+pub use context::{FormContextError, FormDependency, FormOverlay, FormPreview, load};
 pub use parsing::parse;
 
 use std::ops::Range;
@@ -32,7 +39,16 @@ pub enum ElementKey {
 #[serde(rename_all = "camelCase")]
 pub struct ElementIdentity {
     pub source: String,
+    pub part: FormPart,
     pub key: ElementKey,
+}
+
+/// A stored borrowing baseline is distinct from the editable/current XML tree in the same file.
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum FormPart {
+    Current,
+    StoredBase,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
@@ -120,9 +136,22 @@ pub struct FormDocument {
     pub commands: Vec<FormDefinition>,
     pub parameters: Vec<FormDefinition>,
     pub diagnostics: Vec<FormDiagnostic>,
+    pub base: Option<FormSnapshot>,
     /// Keep exact bytes for source navigation and future checked edits; never send them with the model.
     #[serde(skip)]
     input: String,
+}
+
+/// The native extension format embeds the original borrowed form inside `BaseForm`.
+#[derive(Clone, Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FormSnapshot {
+    pub root: FormElement,
+    pub attributes: Vec<FormDefinition>,
+    pub attribute_properties: Vec<LocatedProperty>,
+    pub commands: Vec<FormDefinition>,
+    pub parameters: Vec<FormDefinition>,
+    pub diagnostics: Vec<FormDiagnostic>,
 }
 
 impl FormDocument {

@@ -8,6 +8,7 @@ mod editing_history;
 mod editing_linked;
 mod editing_references;
 mod editing_values;
+mod forms;
 mod property_reference;
 mod query;
 mod query_catalog;
@@ -30,6 +31,7 @@ pub use editing_history::{HistoryOperation, PropertyReplay};
 pub use editing_linked::PropertyEditPlan;
 pub use editing_references::PropertyReferenceChoice;
 pub use editing_values::PropertyValueChoice;
+pub use forms::FormPreviewError;
 pub use query::{
     QueryApplyPlan, QueryDocument, QueryDocumentError, QueryDocumentKind, QueryEditorState,
     QueryOwnerFormat, QueryOwnerRestrictions, QueryProjection, QueryProjectionTarget,

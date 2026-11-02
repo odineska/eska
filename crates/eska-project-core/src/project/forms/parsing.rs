@@ -7,8 +7,8 @@ use sha2::{Digest, Sha256};
 
 use super::{
     ElementFamily, ElementIdentity, ElementKey, ElementKind, FORM_NAMESPACE, FormDefinition,
-    FormDiagnostic, FormDocument, FormElement, FormIssue, FormParseError, MAX_FORM_BYTES,
-    MAX_FORM_ELEMENTS,
+    FormDiagnostic, FormDocument, FormElement, FormIssue, FormParseError, FormPart, FormSnapshot,
+    MAX_FORM_BYTES, MAX_FORM_ELEMENTS,
 };
 use crate::project::{
     metadata_model::PropertyKey,
@@ -43,17 +43,24 @@ pub fn parse(source: &str, input: String) -> Result<FormDocument, FormParseError
     if !node.has_tag_name((FORM_NAMESPACE, "Form")) {
         return Err(FormParseError::UnsupportedRoot);
     }
-    let mut parser = Parser {
-        source,
-        identities: HashSet::new(),
-        elements: 0,
-        diagnostics: Vec::new(),
-        attributes: Vec::new(),
-        attribute_properties: Vec::new(),
-        commands: Vec::new(),
-        parameters: Vec::new(),
-    };
+    let mut parser = Parser::new(source, FormPart::Current);
     let root = parser.element(node, true)?;
+    let base = node
+        .children()
+        .find(|child| child.has_tag_name((FORM_NAMESPACE, "BaseForm")))
+        .map(|node| {
+            let mut parser = Parser::new(source, FormPart::StoredBase);
+            let root = parser.element(node, true)?;
+            Ok(FormSnapshot {
+                root,
+                attributes: parser.attributes,
+                attribute_properties: parser.attribute_properties,
+                commands: parser.commands,
+                parameters: parser.parameters,
+                diagnostics: parser.diagnostics,
+            })
+        })
+        .transpose()?;
     Ok(FormDocument {
         source: source.to_owned(),
         version: node.attribute("version").map(str::to_owned),
@@ -70,12 +77,14 @@ pub fn parse(source: &str, input: String) -> Result<FormDocument, FormParseError
         commands: parser.commands,
         parameters: parser.parameters,
         diagnostics: parser.diagnostics,
+        base,
         input,
     })
 }
 
 struct Parser<'a> {
     source: &'a str,
+    part: FormPart,
     identities: HashSet<i64>,
     elements: usize,
     diagnostics: Vec<FormDiagnostic>,
@@ -85,7 +94,20 @@ struct Parser<'a> {
     parameters: Vec<FormDefinition>,
 }
 
-impl Parser<'_> {
+impl<'a> Parser<'a> {
+    fn new(source: &'a str, part: FormPart) -> Self {
+        Self {
+            source,
+            part,
+            identities: HashSet::new(),
+            elements: 0,
+            diagnostics: Vec::new(),
+            attributes: Vec::new(),
+            attribute_properties: Vec::new(),
+            commands: Vec::new(),
+            parameters: Vec::new(),
+        }
+    }
     fn issue(&mut self, node: Node<'_, '_>, issue: FormIssue) {
         self.diagnostics.push(FormDiagnostic {
             issue,
@@ -99,9 +121,13 @@ impl Parser<'_> {
         if self.elements > MAX_FORM_ELEMENTS {
             return Err(FormParseError::TooLarge);
         }
-        let kind = (node.tag_name().namespace() == Some(FORM_NAMESPACE))
-            .then(|| ElementKind::from_xml_name(node.tag_name().name()))
-            .flatten();
+        let kind = if root {
+            Some(ElementKind::Form)
+        } else {
+            (node.tag_name().namespace() == Some(FORM_NAMESPACE))
+                .then(|| ElementKind::from_xml_name(node.tag_name().name()))
+                .flatten()
+        };
         if kind.is_none() || (!root && kind == Some(ElementKind::Form)) {
             self.issue(node, FormIssue::UnknownElement);
         }
@@ -126,6 +152,7 @@ impl Parser<'_> {
         let mut element = FormElement {
             identity: local.map(|key| ElementIdentity {
                 source: self.source.to_owned(),
+                part: self.part,
                 key,
             }),
             kind,
@@ -142,7 +169,11 @@ impl Parser<'_> {
         for child in node.children().filter(Node::is_element) {
             let tag = child.tag_name();
             let own = tag.namespace() == Some(FORM_NAMESPACE);
-            if own && tag.name() == "ChildItems" {
+            if own && root && tag.name() == "BaseForm" {
+                if self.part == FormPart::StoredBase || !sections.insert("BaseForm") {
+                    self.issue(child, FormIssue::UnsupportedStructure);
+                }
+            } else if own && tag.name() == "ChildItems" {
                 self.check_structural_text(child);
                 if !sections.insert("ChildItems") {
                     self.issue(child, FormIssue::RepeatedSection);
