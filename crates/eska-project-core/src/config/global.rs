@@ -2,7 +2,7 @@
 
 use std::{
     collections::BTreeMap,
-    fs::{self, File, OpenOptions},
+    fs::{self, OpenOptions},
     io::{self, Write},
     path::{Path, PathBuf},
     time::{SystemTime, UNIX_EPOCH},
@@ -192,6 +192,10 @@ pub enum GlobalConfigError {
         source: io::Error,
     },
     EditorFailed,
+    EditConflict {
+        path: PathBuf,
+        draft: PathBuf,
+    },
     Replace {
         path: PathBuf,
         source: io::Error,
@@ -209,6 +213,7 @@ impl GlobalConfigError {
             | Self::Invalid { path, .. }
             | Self::DistroboxContainerMissing { path }
             | Self::HostContainerUnexpected { path }
+            | Self::EditConflict { path, .. }
             | Self::Replace { path, .. } => Some(path),
             Self::LocationUnavailable | Self::Editor { .. } | Self::EditorFailed => None,
         }
@@ -227,6 +232,7 @@ impl GlobalConfigError {
             Self::HostContainerUnexpected { .. } => "host_container_unexpected",
             Self::Editor { .. } => "editor",
             Self::EditorFailed => "editor_failed",
+            Self::EditConflict { .. } => "edit_conflict",
             Self::Replace { .. } => "replace",
         }
     }
@@ -321,119 +327,121 @@ pub fn init_at(path: &Path) -> Result<InitOutcome, GlobalConfigError> {
 /// Edit a temporary copy, validate it and atomically retain the previous config as backup.
 ///
 /// # Errors
-/// Preserves the previous config on editor failures, invalid settings or failed publication.
+/// Preserves the previous config on failures and retains the edited draft on a write conflict.
 pub fn edit_at<F>(path: &Path, edit: F) -> Result<EditOutcome, GlobalConfigError>
 where
     F: FnOnce(&Path) -> Result<(), GlobalConfigError>,
 {
     init_at(path)?;
     let original = fs::read(path).map_err(|source| io_error(path, source))?;
-    let (temporary, mut temporary_file) = create_unique_sibling(path, "edit")?;
-    if let Err(source) = temporary_file
-        .write_all(&original)
-        .and_then(|()| temporary_file.sync_all())
-    {
-        drop(temporary_file);
-        let _ = fs::remove_file(&temporary);
-        return Err(io_error(&temporary, source));
-    }
-    drop(temporary_file);
-    if let Ok(metadata) = fs::metadata(path) {
-        fs::set_permissions(&temporary, metadata.permissions())
-            .map_err(|source| io_error(&temporary, source))?;
-    }
-    if let Err(error) = edit(&temporary) {
-        let _ = fs::remove_file(&temporary);
-        return Err(error);
-    }
-    let edited = match fs::read(&temporary) {
-        Ok(edited) => edited,
-        Err(source) => {
-            let _ = fs::remove_file(&temporary);
-            return Err(io_error(&temporary, source));
-        }
-    };
+    let draft = ConfigCopy::create(path, "edit", &original)?;
+    edit(&draft.path)?;
+    let edited = fs::read(&draft.path).map_err(|source| io_error(&draft.path, source))?;
     if edited == original {
-        fs::remove_file(&temporary).map_err(|source| io_error(&temporary, source))?;
         return Ok(EditOutcome::Unchanged(path.to_owned()));
     }
-    let text = match std::str::from_utf8(&edited) {
-        Ok(text) => text,
-        Err(source) => {
-            let _ = fs::remove_file(&temporary);
-            return Err(GlobalConfigError::Io {
-                path: temporary,
-                source: io::Error::new(io::ErrorKind::InvalidData, source),
-            });
-        }
+    let text = std::str::from_utf8(&edited).map_err(|source| {
+        io_error(
+            &draft.path,
+            io::Error::new(io::ErrorKind::InvalidData, source),
+        )
+    })?;
+    GlobalConfig::parse(path, text)?;
+
+    let lock_path = super::lock::catalog_path(path);
+    let _lock = match super::lock::acquire(&lock_path) {
+        Ok(lock) => lock,
+        Err(error) if error.kind() == io::ErrorKind::WouldBlock => return Err(draft.conflict(path)),
+        Err(source) => return Err(io_error(&lock_path, source)),
     };
-    if let Err(error) = GlobalConfig::parse(path, text) {
-        let _ = fs::remove_file(&temporary);
-        return Err(error);
-    }
-    let backup = unique_backup(path)?;
-    fs::rename(path, &backup).map_err(|source| io_error(path, source))?;
-    if let Err(source) = fs::rename(&temporary, path) {
-        let _ = fs::rename(&backup, path);
-        let _ = fs::remove_file(&temporary);
-        return Err(GlobalConfigError::Replace {
-            path: path.to_owned(),
-            source,
-        });
-    }
-    Ok(EditOutcome::Changed {
-        path: path.to_owned(),
-        backup,
-    })
-}
-
-/// Create a unique sibling file and keep the reservation open for its caller.
-fn create_unique_sibling(path: &Path, purpose: &str) -> Result<(PathBuf, File), GlobalConfigError> {
-    for sequence in 0..1000_u16 {
-        let candidate = path.with_extension(format!("toml.{purpose}-{sequence}"));
-        match OpenOptions::new()
-            .write(true)
-            .create_new(true)
-            .open(&candidate)
-        {
-            Ok(file) => return Ok((candidate, file)),
-            Err(source) if source.kind() == io::ErrorKind::AlreadyExists => {}
-            Err(source) => return Err(io_error(&candidate, source)),
+    let permissions = match fs::metadata(path) {
+        Ok(metadata) if metadata.is_file() && !metadata.permissions().readonly() => {
+            metadata.permissions()
         }
-    }
-    Err(io_error(
-        path,
-        io::Error::new(
-            io::ErrorKind::AlreadyExists,
-            "no unique config path available",
-        ),
-    ))
-}
-
-/// Choose a timestamped backup path while preserving every earlier backup.
-fn unique_backup(path: &Path) -> Result<PathBuf, GlobalConfigError> {
+        Ok(_) => return Err(draft.conflict(path)),
+        Err(error) if error.kind() == io::ErrorKind::NotFound => return Err(draft.conflict(path)),
+        Err(source) => return Err(io_error(path, source)),
+    };
     let timestamp = SystemTime::now()
         .duration_since(UNIX_EPOCH)
         .unwrap_or_default()
         .as_secs();
-    for sequence in 0..1000_u16 {
-        let suffix = if sequence == 0 {
-            format!("backup-{timestamp}")
-        } else {
-            format!("backup-{timestamp}-{sequence}")
-        };
-        let candidate = path.with_extension(format!("toml.{suffix}"));
-        if !candidate.exists() {
-            return Ok(candidate);
+    let backup = ConfigCopy::create(path, &format!("backup-{timestamp}"), &original)?;
+    let staged = ConfigCopy::create(path, "save", &edited)?;
+    for copy in [&backup, &staged] {
+        fs::set_permissions(&copy.path, permissions.clone())
+            .map_err(|source| io_error(&copy.path, source))?;
+    }
+    match fs::read(path) {
+        Ok(current) if current == original => {}
+        Ok(_) => return Err(draft.conflict(path)),
+        Err(error) if error.kind() == io::ErrorKind::NotFound => return Err(draft.conflict(path)),
+        Err(source) => return Err(io_error(path, source)),
+    }
+    fs::rename(&staged.path, path).map_err(|source| GlobalConfigError::Replace {
+        path: path.to_owned(),
+        source,
+    })?;
+    staged.keep();
+    Ok(EditOutcome::Changed {
+        path: path.to_owned(),
+        backup: backup.keep(),
+    })
+}
+
+struct ConfigCopy {
+    path: PathBuf,
+    remove_on_drop: bool,
+}
+
+impl ConfigCopy {
+    /// Reserve the name before copying any bytes, including for permanent backups.
+    fn create(path: &Path, purpose: &str, bytes: &[u8]) -> Result<Self, GlobalConfigError> {
+        let mut options = OpenOptions::new();
+        options.write(true).create_new(true);
+        #[cfg(unix)]
+        {
+            use std::os::unix::fs::OpenOptionsExt;
+            options.mode(0o600);
+        }
+        for sequence in 0..1000_u16 {
+            let candidate = path.with_extension(format!("toml.{purpose}-{sequence}"));
+            let mut file = match options.open(&candidate) {
+                Ok(file) => file,
+                Err(error) if error.kind() == io::ErrorKind::AlreadyExists => continue,
+                Err(source) => return Err(io_error(&candidate, source)),
+            };
+            let copy = Self {
+                path: candidate,
+                remove_on_drop: true,
+            };
+            let written = file.write_all(bytes).and_then(|()| file.sync_all());
+            drop(file);
+            written.map_err(|source| io_error(&copy.path, source))?;
+            return Ok(copy);
+        }
+        Err(io_error(path, io::ErrorKind::AlreadyExists.into()))
+    }
+
+    fn keep(mut self) -> PathBuf {
+        self.remove_on_drop = false;
+        std::mem::take(&mut self.path)
+    }
+
+    fn conflict(self, config: &Path) -> GlobalConfigError {
+        GlobalConfigError::EditConflict {
+            path: config.into(),
+            draft: self.keep(),
         }
     }
-    Err(io_error(
-        path,
-        io::Error::new(
-            io::ErrorKind::AlreadyExists,
-            "no unique backup path available",
-        ),
-    ))
+}
+
+impl Drop for ConfigCopy {
+    fn drop(&mut self) {
+        if self.remove_on_drop {
+            let _ = fs::remove_file(&self.path);
+        }
+    }
 }
 
 fn io_error(path: &Path, source: io::Error) -> GlobalConfigError {
@@ -550,6 +558,45 @@ mod tests {
             matches!(GlobalConfig::load(&path), Ok(config) if config.build.runner == RunnerKind::Host)
         );
         fs::remove_dir_all(path.parent().expect("parent")).expect("cleanup");
+    }
+
+    #[test]
+    fn an_active_catalog_writer_retains_the_editors_draft() {
+        let directory = crate::test_support::TestDir::new();
+        let path = directory.0.join("config.toml");
+        init_at(&path).unwrap();
+        let _writer =
+            crate::config::lock::acquire(&crate::config::lock::catalog_path(&path)).unwrap();
+        let result = edit_at(&path, |draft| {
+            fs::write(draft, "# edited\n").map_err(|source| io_error(draft, source))
+        });
+        let Err(GlobalConfigError::EditConflict { draft, .. }) = result else {
+            panic!("expected an edit conflict, got {result:?}");
+        };
+        assert_eq!(fs::read_to_string(path).unwrap(), DEFAULT_CONFIG);
+        assert_eq!(fs::read(draft).unwrap(), b"# edited\n");
+    }
+
+    #[test]
+    fn losing_write_access_during_an_edit_preserves_the_draft() {
+        let directory = crate::test_support::TestDir::new();
+        let path = directory.0.join("config.toml");
+        init_at(&path).unwrap();
+        let permissions = fs::metadata(&path).unwrap().permissions();
+        let result = edit_at(&path, |draft| {
+            fs::write(draft, "# editor draft\n").unwrap();
+            fs::write(&path, "# protected policy\n").unwrap();
+            let mut readonly = permissions.clone();
+            readonly.set_readonly(true);
+            fs::set_permissions(&path, readonly).unwrap();
+            Ok(())
+        });
+        fs::set_permissions(&path, permissions).unwrap();
+        let Err(GlobalConfigError::EditConflict { draft, .. }) = result else {
+            panic!("expected a recoverable draft, got {result:?}");
+        };
+        assert_eq!(fs::read(path).unwrap(), b"# protected policy\n");
+        assert_eq!(fs::read(draft).unwrap(), b"# editor draft\n");
     }
 
     #[test]

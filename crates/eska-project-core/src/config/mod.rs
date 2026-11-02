@@ -2,6 +2,7 @@
 
 pub(crate) mod composition;
 pub mod global;
+pub(crate) mod lock;
 mod manifest;
 mod paths;
 mod project;

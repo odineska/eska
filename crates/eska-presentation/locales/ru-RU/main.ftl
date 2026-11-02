@@ -219,6 +219,7 @@ config-distrobox-container-missing = Для runner = "distrobox" задайте 
 config-host-container-unexpected = Для runner = "host" параметр container в { $path } недопустим.
 config-editor-error = Не удалось открыть редактор: { $reason }
 config-editor-failed = Редактор завершился с ошибкой; глобальный конфиг не изменён.
+config-edit-conflict = Не удалось сохранить { $path }. Проверьте параллельные изменения и права на запись. Ваша отредактированная копия сохранена в { $draft }.
 clone-about = Клонировать и проверить существующий проект eska
 clone-usage = eska clone [ПАРАМЕТРЫ] <РЕПОЗИТОРИЙ> [КАТАЛОГ]
 clone-repository-help = URL или локальный путь репозитория
@@ -280,7 +281,6 @@ new-destination-invalid = Укажите новый каталог проект�
 new-destination-exists = Путь уже существует и не будет изменён: { $path }.
 new-io-error = Не удалось создать проект или записать файлы по пути { $path }. Проверьте родительский каталог и права доступа.
 new-template-error = Не удалось сформировать шаблон проекта.
-new-git-error = Не удалось инициализировать Git. Можно повторить с --no-vcs.
 new-rollback-error = { $reason } Откат не завершён; проверьте оставшиеся файлы в { $path }.
 init-about = Подключить существующую Designer XML выгрузку
 init-usage = eska init [ПАРАМЕТРЫ] [КАТАЛОГ]

@@ -266,7 +266,7 @@ impl AddPlan {
             .as_ref()
             .map_or(self.source.as_path(), install::Prepared::source);
         validate_source(input, &self.roots)?;
-        let _catalog_lock = write::lock(&self.catalog.path.with_extension("toml.eska-add.lock"))?;
+        let _catalog_lock = write::lock(&crate::config::lock::catalog_path(&self.catalog.path))?;
         let parent = self
             .binding
             .path
@@ -280,32 +280,18 @@ impl AddPlan {
         if let Some(installation) = &mut installation {
             installation.publish()?;
         }
-        let result = self.publish_configuration(&mut cancelled);
-        if let Err(error) = result {
-            if matches!(error, Error::Rollback { .. }) {
-                if let Some(installation) = &mut installation {
-                    installation.keep();
-                }
-                return Err(error);
-            }
-            if let Err(source) = self.catalog.restore() {
-                if let Some(installation) = &mut installation {
-                    installation.keep();
-                }
-                return Err(Error::Rollback {
-                    path: self.catalog.path.clone(),
-                    source: Box::new(source),
-                });
-            }
-            return Err(error);
+        let configuration = self.publish_configuration(&mut cancelled);
+        // A concurrent catalog edit or an incomplete rollback may already reference the checkout.
+        if let Some(installation) = &mut installation
+            && (configuration.is_ok() || self.catalog.validate().is_err())
+        {
+            installation.keep();
         }
+        configuration?;
         let installed = installation.as_ref().is_some_and(install::Prepared::is_new);
         let revision = installation
             .as_ref()
             .map(|installation| installation.revision().as_str().to_owned());
-        if let Some(installation) = &mut installation {
-            installation.keep();
-        }
         Ok(AddResult {
             library: self.library,
             source: self.source.clone(),
@@ -318,9 +304,16 @@ impl AddPlan {
 
     fn publish_configuration(&self, cancelled: &mut impl FnMut() -> bool) -> Result<(), Error> {
         self.catalog.publish()?;
-        check_cancel(cancelled)?;
-        self.validate_inputs()?;
-        self.binding.publish()
+        let binding = check_cancel(cancelled)
+            .and_then(|()| self.validate_inputs())
+            .and_then(|()| self.binding.publish());
+        if binding.is_err() {
+            self.catalog.restore().map_err(|source| Error::Rollback {
+                path: self.catalog.path.clone(),
+                source: Box::new(source),
+            })?;
+        }
+        binding
     }
 
     fn validate_inputs(&self) -> Result<(), Error> {

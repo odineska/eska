@@ -75,5 +75,18 @@ pub fn present_global_config_error_with_links(
             &[("reason", LocalizationValue::Text(&source.to_string()))],
         ),
         GlobalConfigError::EditorFailed => localizer.text("config-editor-failed"),
+        GlobalConfigError::EditConflict { path, draft } => localizer.format(
+            "config-edit-conflict",
+            &[
+                (
+                    "path",
+                    LocalizationValue::Text(&path_output::render(path, hyperlinks)),
+                ),
+                (
+                    "draft",
+                    LocalizationValue::Text(&path_output::render(draft, hyperlinks)),
+                ),
+            ],
+        ),
     }
 }

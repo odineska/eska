@@ -261,6 +261,66 @@ fn concurrent_manifest_edits_are_preserved_before_installation_publication() {
 }
 
 #[test]
+fn a_competing_catalog_writer_keeps_its_entry_and_can_retry_offline() {
+    let fixture = TestDir::new();
+    let consumer = project(&fixture.0.join("consumer"), ProjectType::Report);
+    let manifest = consumer.root().join("eska.toml");
+    let original = fs::read(&manifest).unwrap();
+    let plan = inspect(&fixture, &consumer, KnownLibrary::Ssl31);
+    let catalog = &plan.catalog.path;
+    let entry = plan.catalog.text().unwrap();
+    let project_lock = consumer.root().join(".eska/library-add.lock");
+
+    let result = plan.execute(fetch, || {
+        // An independent editor publishes the same bytes between preflight and registration.
+        if project_lock.is_file() && !catalog.exists() {
+            fs::write(catalog, entry).unwrap();
+        }
+        false
+    });
+    assert!(matches!(result, Err(Error::Changed(path)) if path == *catalog));
+    assert_eq!(fs::read(catalog).unwrap(), entry.as_bytes());
+    assert_eq!(fs::read(manifest).unwrap(), original);
+
+    let retry = inspect(&fixture, &consumer, KnownLibrary::Ssl31)
+        .execute(no_fetch, || false)
+        .unwrap();
+    assert!(!retry.installed && !retry.catalog_changed && retry.project_changed);
+    assert_eq!(
+        fs::read(retry.source.join("Configuration.xml")).unwrap(),
+        XML.as_bytes()
+    );
+}
+
+#[test]
+fn rollback_preserves_catalog_edits_made_after_registration() {
+    let fixture = TestDir::new();
+    let consumer = project(&fixture.0.join("consumer"), ProjectType::Report);
+    let manifest = consumer.root().join("eska.toml");
+    let original = fs::read(&manifest).unwrap();
+    let plan = inspect(&fixture, &consumer, KnownLibrary::Ssl31);
+    let catalog = &plan.catalog.path;
+    let edited = format!(
+        "{}\n# concurrent policy change\n",
+        plan.catalog.text().unwrap()
+    );
+    let result = plan.execute(fetch, || {
+        if catalog.is_file() {
+            fs::write(catalog, &edited).unwrap();
+            return true;
+        }
+        false
+    });
+    assert!(matches!(result, Err(Error::Rollback { path, .. }) if path == *catalog));
+    assert_eq!(fs::read(catalog).unwrap(), edited.as_bytes());
+    assert_eq!(fs::read(manifest).unwrap(), original);
+    assert_eq!(
+        fs::read(plan.source.join("Configuration.xml")).unwrap(),
+        XML.as_bytes()
+    );
+}
+
+#[test]
 fn cancellation_after_registration_rolls_back_both_new_catalog_and_installation() {
     let fixture = TestDir::new();
     let consumer = project(&fixture.0.join("consumer"), ProjectType::Report);
