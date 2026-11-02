@@ -281,7 +281,6 @@ new-destination-invalid = Specify a new project directory without "..": { $path 
 new-destination-exists = The path already exists and will not be changed: { $path }.
 new-io-error = Could not create the project or write files at { $path }. Check the parent directory and access permissions.
 new-template-error = Could not render the project template.
-new-git-error = Could not initialize Git. You can retry with --no-vcs.
 new-rollback-error = { $reason } Rollback did not finish; inspect remaining files at { $path }.
 init-about = Attach an existing Designer XML export
 init-usage = eska init [OPTIONS] [DIRECTORY]

@@ -695,17 +695,6 @@ impl QuerySession {
         Ok(())
     }
 
-    /// A source connection replacement invalidates authority while keeping both dirty snapshots intact.
-    pub fn pause(&mut self) {
-        self.phase = match &self.phase {
-            Phase::Applying(pending) | Phase::Recovering(pending) => {
-                Phase::Recovering(pending.clone())
-            }
-            Phase::Closed => Phase::Closed,
-            _ => Phase::Paused,
-        };
-    }
-
     /// Only the owned query restriction is released; the user's independent restriction remains unchanged.
     pub fn close(&mut self) -> Option<u64> {
         if matches!(self.phase, Phase::Closed) {
