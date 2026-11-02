@@ -86,3 +86,52 @@ fn rebound_prefix_is_resolved_at_its_original_scope() {
     assert!((result.elements[1].font.points - 14.0).abs() < f64::EPSILON);
     assert_eq!(result.elements[1].font.weight, 400);
 }
+
+fn descriptor(kind: &str, name: &str, properties: &str) -> FormResource {
+    let xml = format!(
+        "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><{kind} uuid=\"11111111-1111-1111-1111-111111111111\"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"
+    );
+    FormResource {
+        source: name.into(),
+        descriptor: metadata_parser::parse(&xml, None, PropertiesMode::All).unwrap(),
+        references: Vec::new(),
+    }
+}
+
+#[test]
+fn default_style_selects_named_style_instead_of_last_loaded_resource() {
+    let mut resources = vec![
+        descriptor(
+            "Configuration",
+            "Config",
+            "<DefaultStyle>Style.Selected</DefaultStyle>",
+        ),
+        descriptor(
+            "Style",
+            "Selected",
+            "<FormTextColor>#112233</FormTextColor><NormalTextFont height=\"13\"/>",
+        ),
+        descriptor(
+            "Style",
+            "Unrelated",
+            "<FormTextColor>#445566</FormTextColor><NormalTextFont height=\"21\"/>",
+        ),
+    ];
+    let result = view("", &resources);
+    assert_eq!(
+        result.elements[1].foreground,
+        ResolvedColor::Rgb("#112233".into())
+    );
+    assert!((result.elements[1].font.points - 13.0).abs() < f64::EPSILON);
+    resources.push(descriptor(
+        "Configuration",
+        "Extension",
+        "<DefaultStyle>Style.Unrelated</DefaultStyle>",
+    ));
+    let result = view("", &resources);
+    assert_eq!(
+        result.elements[1].foreground,
+        ResolvedColor::Rgb("#445566".into())
+    );
+    assert!((result.elements[1].font.points - 21.0).abs() < f64::EPSILON);
+}

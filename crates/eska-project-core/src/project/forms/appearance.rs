@@ -53,13 +53,35 @@ pub struct AppearanceDiagnostic {
 pub(super) struct Appearance<'a> {
     documents: &'a [FormDocument],
     resources: &'a [FormResource],
+    active_style: Option<String>,
     pub diagnostics: Vec<AppearanceDiagnostic>,
 }
 impl<'a> Appearance<'a> {
-    pub const fn new(documents: &'a [FormDocument], resources: &'a [FormResource]) -> Self {
+    pub fn new(documents: &'a [FormDocument], resources: &'a [FormResource]) -> Self {
+        let active_style = resources
+            .iter()
+            .rev()
+            .find_map(|resource| {
+                resource
+                    .descriptor
+                    .objects
+                    .iter()
+                    .filter(|object| object.metadata.kind() == MetadataKind::Configuration)
+                    .find_map(|object| {
+                        object
+                            .properties
+                            .as_ref()?
+                            .iter()
+                            .find(|value| value.property.key.name == "DefaultStyle")
+                    })
+            })
+            .and_then(|value| text(&value.property.value))
+            .and_then(|value| value.strip_prefix("Style."))
+            .map(str::to_owned);
         Self {
             documents,
             resources,
+            active_style,
             diagnostics: Vec::new(),
         }
     }
@@ -122,7 +144,10 @@ impl<'a> Appearance<'a> {
                 .descriptor
                 .objects
                 .iter()
-                .filter(|object| object.metadata.kind() == MetadataKind::Style)
+                .filter(|object| {
+                    object.metadata.kind() == MetadataKind::Style
+                        && Some(object.metadata.name()) == self.active_style.as_deref()
+                })
                 .find_map(|object| {
                     object
                         .properties
