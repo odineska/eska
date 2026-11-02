@@ -12,12 +12,10 @@ use std::{
 #[derive(Clone, Copy)]
 pub enum Invocation {
     Direct,
-    Check,
-    Fmt,
+    OmitSubcommand,
+    Rename(&'static str),
     LegacyIde,
     LegacyValidate,
-    LegacyNew,
-    LegacyInit,
     Build { provenance: bool },
 }
 
@@ -70,13 +68,9 @@ fn forward_args(args: &[OsString], invocation: Invocation) -> Vec<OsString> {
     let mut args = args.to_vec();
     match invocation {
         Invocation::Direct | Invocation::Build { .. } => {}
-        Invocation::LegacyNew | Invocation::LegacyInit => {
+        Invocation::Rename(name) => {
             if let Some(position) = command_position(&args) {
-                args[position] = OsString::from(if matches!(invocation, Invocation::LegacyNew) {
-                    "__shell-new"
-                } else {
-                    "__shell-init"
-                });
+                args[position] = OsString::from(name);
             }
         }
         Invocation::LegacyIde => {
@@ -85,7 +79,7 @@ fn forward_args(args: &[OsString], invocation: Invocation) -> Vec<OsString> {
                 args.insert(position + 1, OsString::from("--legacy-identity"));
             }
         }
-        Invocation::Check | Invocation::Fmt => {
+        Invocation::OmitSubcommand => {
             if let Some(position) = command_position(&args) {
                 args.remove(position);
             }

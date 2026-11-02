@@ -1,37 +1,20 @@
-//! Command registration and dispatch. Each handler owns its arguments and help.
+//! Register shared command arguments and route each invocation to its component.
 
 use crate::component::{self, Component, Invocation};
 use std::{ffi::OsString, process::ExitCode};
 
 use clap::Subcommand;
+use eska_presentation::arguments::{
+    build::{self, clean, config, import, patch, platform},
+    check, formatting,
+    project::{add, doctor, init, metadata, new, version},
+    vcs::{clone, diff, finish, history, save, shelves, start, status, switch},
+};
 
 use super::localization::Localizer;
 
-mod add;
-mod build;
-mod check;
-mod clean;
-mod clone;
-mod config;
-mod diff;
-mod doctor;
-mod finish;
-mod formatting;
-mod history;
 mod ide;
-mod import;
-mod init;
-mod metadata;
-mod new;
-mod patch;
-mod platform;
-mod save;
-mod shelves;
-mod start;
-mod status;
-mod switch;
 mod update;
-mod version;
 
 #[derive(Debug, Subcommand)]
 pub(super) enum Commands {
@@ -97,28 +80,14 @@ pub(super) fn run(
     localizer: &Localizer,
     process_args: &[OsString],
 ) -> ExitCode {
-    match command {
-        Some(Commands::Update(args)) => args.run(localizer),
-        Some(Commands::Check(_)) => {
-            component::run(Component::Check, process_args, Invocation::Check, localizer)
-        }
-        Some(Commands::Fmt(_)) => {
-            component::run(Component::Fmt, process_args, Invocation::Fmt, localizer)
-        }
+    let (component, invocation) = match command {
+        Some(Commands::Update(args)) => return args.run(localizer),
+        Some(Commands::Check(_)) => (Component::Check, Invocation::OmitSubcommand),
+        Some(Commands::Fmt(_)) => (Component::Fmt, Invocation::OmitSubcommand),
         Some(
             Commands::Add(_) | Commands::Metadata(_) | Commands::Version(_) | Commands::Doctor(_),
-        ) => component::run(
-            Component::Project,
-            process_args,
-            Invocation::Direct,
-            localizer,
-        ),
-        Some(Commands::Ide(_)) => component::run(
-            Component::Project,
-            process_args,
-            Invocation::LegacyIde,
-            localizer,
-        ),
+        ) => (Component::Project, Invocation::Direct),
+        Some(Commands::Ide(_)) => (Component::Project, Invocation::LegacyIde),
         Some(
             Commands::Shelve(_)
             | Commands::Unshelve(_)
@@ -131,46 +100,25 @@ pub(super) fn run(
             | Commands::Start(_)
             | Commands::Status(_)
             | Commands::Switch(_),
-        ) => component::run(Component::Vcs, process_args, Invocation::Direct, localizer),
+        ) => (Component::Vcs, Invocation::Direct),
         Some(
             Commands::Clean(_)
             | Commands::Config(_)
             | Commands::Platform(_)
             | Commands::Import(_)
             | Commands::Patch(_),
-        ) => component::run(
+        ) => (Component::Build, Invocation::Direct),
+        Some(Commands::Build(args)) => (
             Component::Build,
-            process_args,
-            Invocation::Direct,
-            localizer,
-        ),
-        Some(Commands::Build(args)) => component::run(
-            Component::Build,
-            process_args,
             Invocation::Build {
                 provenance: args.needs_provenance(),
             },
-            localizer,
         ),
-        Some(Commands::New(_)) => component::run(
-            Component::Project,
-            process_args,
-            Invocation::LegacyNew,
-            localizer,
-        ),
-        Some(Commands::Init(_)) => component::run(
-            Component::Project,
-            process_args,
-            Invocation::LegacyInit,
-            localizer,
-        ),
-        None => component::run(
-            Component::Project,
-            process_args,
-            Invocation::LegacyValidate,
-            localizer,
-        ),
-    }
+        Some(Commands::New(_)) => (Component::Project, Invocation::Rename("__shell-new")),
+        Some(Commands::Init(_)) => (Component::Project, Invocation::Rename("__shell-init")),
+        None => (Component::Project, Invocation::LegacyValidate),
+    };
+    component::run(component, process_args, invocation, localizer)
 }
 
 pub(super) fn localize(command: clap::Command, localizer: &Localizer) -> clap::Command {
