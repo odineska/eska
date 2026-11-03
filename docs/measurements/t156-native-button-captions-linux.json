@@ -1,0 +1,923 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 reference container)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "clientCommit": "9c1a67b0fa269aff3e5b443adb890452a3b8a184",
+  "referenceCommit": "d09696437282a66edbb65c6598ac5eacf806cfca",
+  "reference": "tests/fixtures/forms/native-button-metrics/caption-interiors.json",
+  "implementation": {
+    "engine": "FreeType 2.13.2 / interpreter 40 / DEFAULT LCD filter, bundled WASM",
+    "toolchain": "Emscripten 6.0.13",
+    "curvePath": "Existing native DDA path explicitly selected for WASM",
+    "font": "Bundled Liberation Sans 2.1.5, regular/bold",
+    "glyphCoverage": "Saturating addition of LCD red channels clipped to logical advance intersect union ink bounds; one integer RGB tint pass",
+    "hostNativeLibraryRequired": false,
+    "fontAndWasmResources": "Installed VSIX local resources only",
+    "ownedResources": "One lazy module and at most two faces per webview; abort on unload; explicit FreeType/font disposal",
+    "fallback": "Accessible browser caption and localized incomplete-matching notice for unsupported shaping/font/resource",
+    "borderRasterizationChanged": false
+  },
+  "proof": {
+    "independentNativeGlyphsComparedByteForByte": 224,
+    "glyphDifferences": 0,
+    "sourceRebuiltTwiceByteIdentically": true,
+    "wasmBytes": 269722,
+    "wasmSha256": "1de1fe684e73bc8109b0601d67d4b2e8c62f3b025b00137da7d5115a50d48019",
+    "unitNativeInteriorPixelsCompared": 275213,
+    "installedVsixInteriorPixelsComparedBothLocales": 550426,
+    "installedVsixDifferingInteriorPixels": 0,
+    "all48ButtonGeometriesStillExactBothLocales": true,
+    "dirtyFont16To20To16Passed": true,
+    "dirtyDefaultButtonAndFallbackRestorePassed": true,
+    "sourceWritesDuringViewing": false
+  },
+  "comparison": "All pixels of 48 rectangular button interiors inset by 3px, no text or antialiasing masks; full form plus 4px shadow additionally compared separately with no masks. Native origin (261,240), browser webview offset (348,70).",
+  "regressions": [
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.78
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.68
+    },
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.1
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.54
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.74
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.68
+    },
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.31
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.02
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 9.9
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.98
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.3
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 5.75
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.74
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.57
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.37
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.76
+    }
+  ],
+  "nodeTests": {
+    "passed": 472,
+    "skipped": 11,
+    "failed": 0
+  },
+  "checks": {
+    "typecheck": "passed",
+    "compile": "passed",
+    "vsix": "passed",
+    "packagedRuntimeAndNotices": "59 out files byte-identical, WASM included, FreeType/Emscripten/musl/compiler-rt notices included"
+  },
+  "remaining": [
+    "Whole-form strict RGB parity remains false: title, border/corner/shadow differences are retained in full comparison",
+    "Other button representations, explicit backgrounds, other font families/styles and complex shaping require native validation",
+    "Only Linux ARM64 reference at 96 DPI, 100% and device scale 1 validated; Windows needs its own reference",
+    "Field labels use native LCD color coverage and are not covered by the grayscale button renderer"
+  ],
+  "results": [
+    {
+      "locale": "en",
+      "name": "10Normal",
+      "screenshotSha256": "d043a60850ab39b8dcad5b624f3ed21468b9f08aec20bb1dba7f6b8a01d31aa3",
+      "interiors": [
+        {
+          "pixelsCompared": 920,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 880,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 2180,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 22659,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.975065
+      }
+    },
+    {
+      "locale": "en",
+      "name": "10Bold",
+      "screenshotSha256": "a4ba74b6989da4116454eb681987f3042cd8971766805eb6f39ce649ddbb6842",
+      "interiors": [
+        {
+          "pixelsCompared": 920,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 880,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 2320,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 23240,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.975688
+      }
+    },
+    {
+      "locale": "en",
+      "name": "12Normal",
+      "screenshotSha256": "563022f3f8caef2a817b97359e21bb5e771cd8b2491efca7581fe2ae179c40d5",
+      "interiors": [
+        {
+          "pixelsCompared": 1334,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 1242,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 3059,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 27434,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.979405
+      }
+    },
+    {
+      "locale": "en",
+      "name": "12Bold",
+      "screenshotSha256": "b5e382535cd98b03050fbceab09d421f34ecb956d2a4161e7288bfa22b908bb7",
+      "interiors": [
+        {
+          "pixelsCompared": 1334,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 1242,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 3266,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 28208,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.97997
+      }
+    },
+    {
+      "locale": "en",
+      "name": "14Normal",
+      "screenshotSha256": "2b77a7e67860a20bd6359b610f140bdb2c697ea625f7b3fcfc61db4bb5120359",
+      "interiors": [
+        {
+          "pixelsCompared": 1890,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 1782,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 4374,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 33480,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.983124
+      }
+    },
+    {
+      "locale": "en",
+      "name": "14Bold",
+      "screenshotSha256": "8918119cb605fa489ea0e10301239f5dcf8a818cdd2742ffd45426104ea08336",
+      "interiors": [
+        {
+          "pixelsCompared": 1890,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 1782,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 4644,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 34380,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.983566
+      }
+    },
+    {
+      "locale": "en",
+      "name": "16Normal",
+      "screenshotSha256": "620005401b82a8bc8257dafedae9fd469d709bb665838a50d6a8c1ec22d1e0db",
+      "interiors": [
+        {
+          "pixelsCompared": 2418,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 2294,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 5611,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 38258,
+        "differingPixels": 898,
+        "exactRgbRatio": 0.976528
+      }
+    },
+    {
+      "locale": "en",
+      "name": "16Bold",
+      "screenshotSha256": "401e6a802a942aa0339e9be63a5b8a3bd5ceddea465e21f85187c732d0573873",
+      "interiors": [
+        {
+          "pixelsCompared": 2418,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 2294,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 5921,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 39198,
+        "differingPixels": 908,
+        "exactRgbRatio": 0.976836
+      }
+    },
+    {
+      "locale": "en",
+      "name": "18Normal",
+      "screenshotSha256": "390becfd8f03c5ab3fb50f62cbfffbd9fa20337d22d8563b37c5e274ae7f27d5",
+      "interiors": [
+        {
+          "pixelsCompared": 3240,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 3024,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 7272,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 44550,
+        "differingPixels": 941,
+        "exactRgbRatio": 0.978878
+      }
+    },
+    {
+      "locale": "en",
+      "name": "20Normal",
+      "screenshotSha256": "62ce725bb4d7dccabff8621bf3e402610cfc6ad8f006a5dc81e45596ce518e3b",
+      "interiors": [
+        {
+          "pixelsCompared": 3900,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 3666,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 8970,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 50796,
+        "differingPixels": 989,
+        "exactRgbRatio": 0.98053
+      }
+    },
+    {
+      "locale": "en",
+      "name": "20Bold",
+      "screenshotSha256": "10e7523527f5c4032d2921905eba232461514a7f0db76c5fafeb9fd6b8142420",
+      "interiors": [
+        {
+          "pixelsCompared": 3900,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 3666,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 9633,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 52530,
+        "differingPixels": 1006,
+        "exactRgbRatio": 0.980849
+      }
+    },
+    {
+      "locale": "en",
+      "name": "24Normal",
+      "screenshotSha256": "db7b5fc217b65218252e7870a775b2f4dcd3aac139bc4f2d66ce48836bec4051",
+      "interiors": [
+        {
+          "pixelsCompared": 5520,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 5244,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 12604,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 63438,
+        "differingPixels": 1073,
+        "exactRgbRatio": 0.983086
+      }
+    },
+    {
+      "locale": "en",
+      "name": "24Bold",
+      "screenshotSha256": "509070731af964f20380a97b60fc15fe757220975df83b78f64524d5f2ca1fb5",
+      "interiors": [
+        {
+          "pixelsCompared": 5520,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 5244,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 13386,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 65291,
+        "differingPixels": 1090,
+        "exactRgbRatio": 0.983306
+      }
+    },
+    {
+      "locale": "en",
+      "name": "28Normal",
+      "screenshotSha256": "78db3fc9e1462c31f283b23ce80573cab06f4246cca8a1db377bbfc7e0644f68",
+      "interiors": [
+        {
+          "pixelsCompared": 7840,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 7392,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 17752,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 78897,
+        "differingPixels": 1154,
+        "exactRgbRatio": 0.985373
+      }
+    },
+    {
+      "locale": "en",
+      "name": "32Normal",
+      "screenshotSha256": "25ae80d5b565bf6ba313e13d851afc85682491b26295079f806c1552f9f39672",
+      "interiors": [
+        {
+          "pixelsCompared": 10660,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 10010,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 23920,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 97280,
+        "differingPixels": 1251,
+        "exactRgbRatio": 0.98714
+      }
+    },
+    {
+      "locale": "en",
+      "name": "32Bold",
+      "screenshotSha256": "1ea98e3865d5c9e494cc94b22c747e66806f1c1a42608e22fc701b7961da628a",
+      "interiors": [
+        {
+          "pixelsCompared": 10660,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 10010,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 25285,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 99968,
+        "differingPixels": 1272,
+        "exactRgbRatio": 0.987276
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "10Normal",
+      "screenshotSha256": "7c0e6be1aeaaa643253184ab2076581099aaf985232417ceecb0337f6b3dc8cc",
+      "interiors": [
+        {
+          "pixelsCompared": 920,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 880,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 2180,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 22659,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.975065
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "10Bold",
+      "screenshotSha256": "116afa0585a8fa1210dbfc03e69f76e0eedcb28ab3c8847bb07fb8801627d5f1",
+      "interiors": [
+        {
+          "pixelsCompared": 920,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 880,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 2320,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 23240,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.975688
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "12Normal",
+      "screenshotSha256": "2e37b7a0bb99ba2588837caaa9d083802fc3a7b359f72bf886935fc544744c8a",
+      "interiors": [
+        {
+          "pixelsCompared": 1334,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 1242,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 3059,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 27434,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.979405
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "12Bold",
+      "screenshotSha256": "e8a70a714633359fc38acc52136fa5a8c90fa47daa7efd5f61fc59ed3ba8d223",
+      "interiors": [
+        {
+          "pixelsCompared": 1334,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 1242,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 3266,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 28208,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.97997
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "14Normal",
+      "screenshotSha256": "218b538705703b752ef6a14b68b8597b35546f6f230b129aa951daffbb0d1bd4",
+      "interiors": [
+        {
+          "pixelsCompared": 1890,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 1782,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 4374,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 33480,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.983124
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "14Bold",
+      "screenshotSha256": "8d112ed670f402f4086f8984ffc8dcc2710a145eee1afcce86c02624e87f3fa5",
+      "interiors": [
+        {
+          "pixelsCompared": 1890,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 1782,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 4644,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 34380,
+        "differingPixels": 565,
+        "exactRgbRatio": 0.983566
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "16Normal",
+      "screenshotSha256": "6f05bd10ad9d8c9c7d286817be0905ef278b8f1e36e39fbaa0afae540f71c1db",
+      "interiors": [
+        {
+          "pixelsCompared": 2418,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 2294,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 5611,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 38258,
+        "differingPixels": 898,
+        "exactRgbRatio": 0.976528
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "16Bold",
+      "screenshotSha256": "75aae34b67c369696421d84800ce7cb06a5df248bc4dfbe49aedbccc0214ca70",
+      "interiors": [
+        {
+          "pixelsCompared": 2418,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 2294,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 5921,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 39198,
+        "differingPixels": 908,
+        "exactRgbRatio": 0.976836
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "18Normal",
+      "screenshotSha256": "544647b233033d20f5aae8c88a7a97e221528ba2c7f5bdcee0e787f4b2c0718e",
+      "interiors": [
+        {
+          "pixelsCompared": 3240,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 3024,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 7272,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 44550,
+        "differingPixels": 941,
+        "exactRgbRatio": 0.978878
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "20Normal",
+      "screenshotSha256": "9d53f06c46126312eaaa4f9dee8a42084a85f36310a2ddd6e1a0c0e886b11891",
+      "interiors": [
+        {
+          "pixelsCompared": 3900,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 3666,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 8970,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 50796,
+        "differingPixels": 989,
+        "exactRgbRatio": 0.98053
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "20Bold",
+      "screenshotSha256": "7afb2021651e3d8bd230ae4c309ba12ad444946f1d39dcd542cd363ce6aaf9bf",
+      "interiors": [
+        {
+          "pixelsCompared": 3900,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 3666,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 9633,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 52530,
+        "differingPixels": 1006,
+        "exactRgbRatio": 0.980849
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "24Normal",
+      "screenshotSha256": "dd23f88583484c06d5c0fb9c0e5bf59b3f5c1e0467c01fd3cde598d66fc837cb",
+      "interiors": [
+        {
+          "pixelsCompared": 5520,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 5244,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 12604,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 63438,
+        "differingPixels": 1073,
+        "exactRgbRatio": 0.983086
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "24Bold",
+      "screenshotSha256": "ee2e0dce1f493c0485a40816139a73e710ca983af2f4045c5fdd4eb184d23c2b",
+      "interiors": [
+        {
+          "pixelsCompared": 5520,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 5244,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 13386,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 65291,
+        "differingPixels": 1090,
+        "exactRgbRatio": 0.983306
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "28Normal",
+      "screenshotSha256": "6ee9908d082039fd80100d94020584c73105f8371d3159530da0e641d01f4667",
+      "interiors": [
+        {
+          "pixelsCompared": 7840,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 7392,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 17752,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 78897,
+        "differingPixels": 1154,
+        "exactRgbRatio": 0.985373
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "32Normal",
+      "screenshotSha256": "3c8655b639d7a4c3bea381341920a99d29e48d7edd6ee94f048b8b7bbb9f80c1",
+      "interiors": [
+        {
+          "pixelsCompared": 10660,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 10010,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 23920,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 97280,
+        "differingPixels": 1251,
+        "exactRgbRatio": 0.98714
+      }
+    },
+    {
+      "locale": "ru",
+      "name": "32Bold",
+      "screenshotSha256": "086c884bbdd60edeb8904d719d26c323cf0e13f8e44eb3174eaaabf45a75e9e9",
+      "interiors": [
+        {
+          "pixelsCompared": 10660,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 10010,
+          "differingPixels": 0
+        },
+        {
+          "pixelsCompared": 25285,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "pixelsCompared": 99968,
+        "differingPixels": 1272,
+        "exactRgbRatio": 0.987276
+      }
+    }
+  ]
+}
