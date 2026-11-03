@@ -1,0 +1,94 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64",
+  "dpi": 96,
+  "scalePercent": 100,
+  "nativeOrigin": [
+    261,
+    240
+  ],
+  "background": [
+    255,
+    255,
+    255
+  ],
+  "separator": [
+    160,
+    160,
+    160
+  ],
+  "iconSize": [
+    9,
+    11
+  ],
+  "rows": [
+    {
+      "name": "PagesAuto",
+      "sourceXml": "tests/fixtures/forms/native-groups/PagesAuto.xml",
+      "sourceXmlSha256": "e92790ab23e1cbe1412925f713bc27da6661bbc4154340da9dcd301643aaf289",
+      "screenshot": "native-pages-auto-en-full.png",
+      "screenshotSha256": "73f2772d440c605cc86b7e1fa9908190ba59f425e6f81fcdd6f298bbe8d82ad7",
+      "region": [
+        178,
+        107,
+        20,
+        21
+      ],
+      "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7",
+      "iconRgbSha256": "8437128419811ca2eea49f59356db7e4f87c194823705a561140f8cb4d5fb1e5"
+    },
+    {
+      "name": "InputNumber",
+      "sourceXml": "tests/fixtures/forms/native-state-variants/InputNumber.xml",
+      "sourceXmlSha256": "7659692174e2d2467065399ad464cbc94138c6ad37a8dca8e731aef0597851bc",
+      "screenshot": "native-input-number-full.png",
+      "screenshotSha256": "c8bae47ca7930b77a27e13e431226529248186517a153a914798369af6aa00db",
+      "region": [
+        179,
+        39,
+        20,
+        21
+      ],
+      "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7",
+      "iconRgbSha256": "8437128419811ca2eea49f59356db7e4f87c194823705a561140f8cb4d5fb1e5"
+    },
+    {
+      "name": "Font14Number",
+      "sourceXml": "tests/fixtures/forms/native-state-variants/Font14Number.xml",
+      "sourceXmlSha256": "abc59528e75ad60d8a7fec7408a9bb72f4430d72d05ef6feabb4673da8b6bf9a",
+      "screenshot": "native-font-14-number-full.png",
+      "screenshotSha256": "03d77972d8b263c078758d879fdb11c0e36c9d7494ccf9705d65b5890e281094",
+      "region": [
+        224,
+        39,
+        20,
+        33
+      ],
+      "rgbSha256": "99861be58054f964c810c886f2051f0a376009a84229353d1bfb290001829780",
+      "iconRgbSha256": "8437128419811ca2eea49f59356db7e4f87c194823705a561140f8cb4d5fb1e5"
+    }
+  ],
+  "explicitColorEvidence": {
+    "sourceXml": "tests/fixtures/forms/native-state-variants/InputColors.xml",
+    "screenshot": "native-input-colors-full.png",
+    "screenshotSha256": "2a321306e1e41b46c9102a03594507ca07bca028c3b654cbf879830de52c1ca2",
+    "iconRegion": [
+      185,
+      43,
+      9,
+      11
+    ],
+    "iconRgbSha256": "8437128419811ca2eea49f59356db7e4f87c194823705a561140f8cb4d5fb1e5",
+    "separator": [
+      0,
+      100,
+      0
+    ],
+    "buttonBackground": [
+      255,
+      255,
+      255
+    ],
+    "remaining": "Two native right-edge background pixels #fffffc over LightYellow require separate corner acceptance; no whole-form parity claimed."
+  }
+}
