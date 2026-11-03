@@ -253,3 +253,12 @@
   выбранные стили и изменение фона. Не переносить Linux LCD-алгоритм на Windows
   без native-данных. Сверять полную форму при одинаковом выделении: сравнение
   native выбранной страницы с VSIX выбранной формой даёт другие рамки.
+
+Дополнение выбранного стиля: [native-входы](../../tests/fixtures/forms/native-style-values/README.md)
+и [Linux-результаты](t155-native-style-values-linux.json). Значения StyleItem
+находятся в `Styles/<Name>/Ext/Style.xml`, а не в дескрипторе. Повторить
+`form-style-host.cjs` в ru/en: 18 pt bold italic / #9800FF, частичный TitleFont10,
+dirty 20 pt / Green, неправильный XML, восстановление и отдельное окно.
+Проверить native-оформление Windows отдельно. Linux-проверки не закрывают
+пять цветов Такси и матрицу стилей/расширений. Экспериментальный Rust
+`FormResource` получил поле `style`; wire-схема не менялась.

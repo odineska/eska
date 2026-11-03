@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "namedStyleOverridesVerified": true,
+  "backendCommit": "b027c9440567e509ecf9210fcbc63479979451b2",
+  "clientCommit": "3e201205f7fbe5b099c23c84a448f262a93f5115",
+  "reference": "tests/fixtures/forms/native-style-values/manifest.json",
+  "nativeFindings": [
+    "Values are in extrnprops Styles/<Name>/Ext/Style.xml, not in the metadata descriptor",
+    "DefaultStyle is Style.ProbeStyleValues; custom payload keys are StyleItem.ProbeColor/StyleItem.ProbeFont",
+    "Named color #9800FF and font 18pt bold are applied; consumer italic and partial TitleFont height=10 survive",
+    "Empty native style may omit the payload",
+    "Legacy system roles in this payload do not replace automatic Taxi appearance; modern five-color matrix remains open"
+  ],
+  "implementation": [
+    "Shared backend discovers payload references and records source/range/dependency identity and byte limits",
+    "Named selected-style values precede StyleItem definition defaults; missing item definitions and cycles remain diagnosed",
+    "Existing metadata overlays handle dirty payloads; invalid XML retains last valid model; no new wire fields"
+  ],
+  "checks": {
+    "rust": {
+      "fmt": "passed",
+      "check": "passed",
+      "clippyAllTargetsAllFeatures": "passed",
+      "test": {
+        "passed": 1487,
+        "ignored": 19,
+        "failed": 0,
+        "suites": 42
+      },
+      "explicitProjectCliBuild": "passed"
+    },
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "node": {
+        "passed": 475,
+        "skipped": 11,
+        "failed": 0
+      },
+      "vsixByteCheck": {
+        "out": 59,
+        "docs": 38
+      }
+    }
+  },
+  "nativeStyleEn": {
+    "passed": true,
+    "locale": "en",
+    "nativeStyleBody": true,
+    "dirtyStyleFontAndColor": true,
+    "partialTitleFont": true,
+    "invalidStyleLastValid": true,
+    "detachedStyleUpdates": true,
+    "sourceWritesDuringViewing": false
+  },
+  "nativeRegressions": [
+    {
+      "name": "style",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.7
+    },
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.69
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 18.25
+    },
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.28
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.81
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.08
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.79
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.11
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.9
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.13
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.91
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.95
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.42
+    },
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.59
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.27
+    },
+    {
+      "name": "button-captions",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.35
+    },
+    {
+      "name": "button-captions",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.23
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.18
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.0
+    }
+  ],
+  "nativeScreenshots": [
+    {
+      "file": "native-style-role-consumer-en-full.png",
+      "sha256": "0924aa9fa8f824926263503573e5ae7233b2a4e5282fadfbb609bd69dd51a4a7"
+    },
+    {
+      "file": "native-style-role-ProbeStyleRoleField-en-full.png",
+      "sha256": "8ab1db5bef05f2065a80f2e8e3d9689b447f31189aaa7f78ca23272e4abb7db3"
+    },
+    {
+      "file": "native-style-role-ProbeStyleRoleForm-en-full.png",
+      "sha256": "f671cc5561d59bea9d497da477a5fd9800471a034ac12ba671215b5e14fa6adf"
+    },
+    {
+      "file": "style-body-baseline-en.png",
+      "sha256": "5811fa533029c8d11b3ca76e0506bb05394e2a8d1522da20975af2adfd4f42b5"
+    },
+    {
+      "file": "style-body-baseline-ru.png",
+      "sha256": "811e02f29308bd416308b9f4b500d6ce43ec38caf67e7436022695d01b0ac135"
+    }
+  ],
+  "internalRustApi": "Experimental FormResource adds style: Option<FormStyleData>; JSON protocol unchanged.",
+  "remaining": [
+    "Five-color Taxi palette and all role/context combinations",
+    "Native ordered extension overrides/activation/conflict/style matrix",
+    "Whole-form pixel parity, remaining element/property matrices, performance and Windows acceptance"
+  ],
+  "masks": 0
+}

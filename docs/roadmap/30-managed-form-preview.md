@@ -1135,3 +1135,10 @@ Dirty-смена цвета не заменяет DOM/не записывает 
 выделении остаётся несовпадающей: вкладки, рамки, значения и иконки требуют
 дальнейшей работы. Полная матрица подписей и Windows не приняты.
 [LCD-подписи Linux](../measurements/t156-native-lcd-labels-linux.json).
+
+Дополнение T155: загрузка native `Ext/Style.xml` принята в installed VSIX
+Linux ru/en, включая dirty-цвет/шрифт и отдельное окно, неправильный XML
+и отсутствие записи исходников. [Отчёт](../measurements/t155-native-style-values-linux.json):
+Rust fmt/check/clippy/test — 1487 passed, 19 ignored; Node — 475 passed,
+11 skipped; 20 native-прогонов завершились без ошибок. Полная матрица
+палитры и расширений остаётся открытой.
