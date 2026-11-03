@@ -38,7 +38,13 @@ impl State {
         let node = params::node(&input.node)?;
         let preview = context
             .project
-            .form_preview(&node, input.application.as_deref(), &[], context.activity)
+            .form_preview(
+                &node,
+                input.application.as_deref(),
+                &[],
+                &[],
+                context.activity,
+            )
             .map_err(preview_error)?;
         let (model, bytes) = dto::model(context.labels, &preview)?;
         self.admit(0, bytes)?;
@@ -77,6 +83,8 @@ impl State {
                 params::optional_fields(value, &["text", "bufferId"])?;
             }
         }
+        let mut sources = std::collections::BTreeSet::new();
+        let mut input_bytes = 0usize;
         let overlays = update
             .overlays
             .into_iter()
@@ -86,12 +94,18 @@ impl State {
                         && dependency.role
                             != eska_project_core::project::forms::FormDependencyRole::Picture
                 }) || input.version.is_empty()
+                    || !sources.insert(input.source.clone())
                 {
                     return Err(failure("foreign_form_input"));
                 }
                 let text = queries
                     .input_text(key, input.text.as_deref(), input.buffer_id.as_deref())?
                     .ok_or_else(|| error(-32602))?;
+                // Count even retired metadata, before copying shared upload buffers.
+                input_bytes = input_bytes.saturating_add(text.len());
+                if input_bytes > eska_project_core::project::forms::MAX_FORM_CONTEXT_BYTES {
+                    return Err(limit());
+                }
                 Ok(FormOverlay {
                     source: input.source,
                     version: input.version,
@@ -105,6 +119,7 @@ impl State {
                 &entry.node,
                 entry.application.as_deref(),
                 &overlays,
+                &entry.preview.dependencies,
                 context.activity,
             )
             .map_err(preview_error)

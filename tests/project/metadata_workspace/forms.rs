@@ -67,7 +67,9 @@ fn form_context_uses_application_order_dirty_layers_and_per_input_identity_witho
         .unwrap();
     let node = node(project);
     let before = bytes(&directory.0);
-    let preview = project.form_preview(&node, Some("app"), &[], None).unwrap();
+    let preview = project
+        .form_preview(&node, Some("app"), &[], &[], None)
+        .unwrap();
     assert_eq!(
         preview
             .dependencies
@@ -91,7 +93,7 @@ fn form_context_uses_application_order_dirty_layers_and_per_input_identity_witho
         version: "7".into(),
     };
     let changed = project
-        .form_preview(&node, Some("app"), &[dirty], None)
+        .form_preview(&node, Some("app"), &[dirty], &preview.dependencies, None)
         .unwrap();
     assert_eq!(changed.dependencies[2].version.as_deref(), Some("7"));
     assert_eq!(
@@ -115,7 +117,7 @@ fn form_context_rejects_foreign_uploads_and_application_members() {
         .unwrap();
     let node = node(project);
     assert!(matches!(
-        project.form_preview(&node, Some("other"), &[], None),
+        project.form_preview(&node, Some("other"), &[], &[], None),
         Err(FormPreviewError::Form(FormContextError::MemberMismatch))
     ));
     let overlay = FormOverlay {
@@ -124,11 +126,11 @@ fn form_context_rejects_foreign_uploads_and_application_members() {
         version: "1".into(),
     };
     assert!(matches!(
-        project.form_preview(&node, Some("app"), &[overlay], None),
+        project.form_preview(&node, Some("app"), &[overlay], &[], None),
         Err(FormPreviewError::Form(FormContextError::InvalidOverlay))
     ));
     assert!(matches!(
-        project.form_preview(project.root(), Some("app"), &[], None),
+        project.form_preview(project.root(), Some("app"), &[], &[], None),
         Err(FormPreviewError::NotManagedForm)
     ));
 }
@@ -142,7 +144,7 @@ fn standalone_borrowed_form_is_explicitly_incomplete() {
     let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
     let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
     let node = node(project);
-    let preview = project.form_preview(&node, None, &[], None).unwrap();
+    let preview = project.form_preview(&node, None, &[], &[], None).unwrap();
     assert_eq!(
         preview.form.diagnostics[0].issue,
         crate::backend::project::forms::CompositionIssue::MissingBase
@@ -162,7 +164,7 @@ fn form_presentation_tracks_dirty_metadata_captions_without_changing_element_ide
     let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
     let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
     let node = node(project);
-    let preview = project.form_preview(&node, None, &[], None).unwrap();
+    let preview = project.form_preview(&node, None, &[], &[], None).unwrap();
     let caption = &preview.presentation.elements[1].caption;
     assert!(
         matches!(caption, PresentationText::Literal { items } if items[0].content == "ИНН для теста")
@@ -179,7 +181,9 @@ fn form_presentation_tracks_dirty_metadata_captions_without_changing_element_ide
         version: "9".into(),
     };
     let before = bytes(&directory.0);
-    let changed = project.form_preview(&node, None, &[overlay], None).unwrap();
+    let changed = project
+        .form_preview(&node, None, &[overlay], &preview.dependencies, None)
+        .unwrap();
     assert!(
         matches!(&changed.presentation.elements[1].caption, PresentationText::Literal { items } if items[0].content == "Несохранённая подпись")
     );
@@ -227,7 +231,7 @@ fn external_form_resolves_configuration_types_without_composing_an_unrelated_for
     let form_node = NodeId::Object(object(MetadataKind::Form, "Основная", Some(root_id)));
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&form_node, Some("app"), &[], None)
+        .form_preview(&form_node, Some("app"), &[], &[], None)
         .unwrap();
     assert_eq!(preview.documents.len(), 1);
     assert!(
@@ -265,13 +269,13 @@ fn form_context_excludes_disabled_extensions_but_retains_required_dependencies()
         .unwrap();
     let node = node(project);
     let preview = project
-        .form_preview(&node, Some("app"), &[], Some(&state))
+        .form_preview(&node, Some("app"), &[], &[], Some(&state))
         .unwrap();
     assert_eq!(preview.documents.len(), 1);
     let base_fingerprint = preview.context_fingerprint;
     state.disabled.remove(&path_key(&directory.0.join("two")));
     let preview = project
-        .form_preview(&node, Some("app"), &[], Some(&state))
+        .form_preview(&node, Some("app"), &[], &[], Some(&state))
         .unwrap();
     assert_eq!(
         preview.documents.len(),
@@ -320,7 +324,7 @@ fn form_common_picture_tracks_payload_dirty_descriptor_and_rejects_binary_overla
     let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
     let node = node(project);
     let before = bytes(&directory.0);
-    let preview = project.form_preview(&node, None, &[], None).unwrap();
+    let preview = project.form_preview(&node, None, &[], &[], None).unwrap();
     assert!(preview.presentation.diagnostics.is_empty());
     assert!(
         matches!(&preview.presentation.elements[1].picture, Some(FormPicture::Common { source }) if preview.resources.iter().any(|resource| &resource.source == source))
@@ -345,6 +349,7 @@ fn form_common_picture_tracks_payload_dirty_descriptor_and_rejects_binary_overla
                 version: "7".into(),
                 text: picture_description("Two.svg"),
             }],
+            &preview.dependencies,
             None,
         )
         .unwrap();
@@ -371,6 +376,7 @@ fn form_common_picture_tracks_payload_dirty_descriptor_and_rejects_binary_overla
                 version: "8".into(),
                 text: "invalid binary overlay".into()
             }],
+            &preview.dependencies,
             None
         ),
         Err(FormPreviewError::Form(FormContextError::InvalidOverlay))
@@ -384,6 +390,7 @@ fn form_common_picture_tracks_payload_dirty_descriptor_and_rejects_binary_overla
                 version: "8".into(),
                 text: "<".into()
             }],
+            &preview.dependencies,
             None
         ),
         Err(FormPreviewError::Form(

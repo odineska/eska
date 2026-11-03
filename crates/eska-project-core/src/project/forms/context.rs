@@ -76,6 +76,9 @@ pub enum FormContextError {
 
 /// Load only this form from the already selected application, in dependency order.
 ///
+/// Previously resolved metadata overlays may retire when an edited reference changes.
+/// They are ignored only if unused; form overlays and unknown inputs remain strict.
+///
 /// # Errors
 /// Rejects unknown members, missing managed forms, foreign/duplicate overlays and invalid XML.
 pub fn load(
@@ -83,6 +86,7 @@ pub fn load(
     selected: &Path,
     owner: &ObjectId,
     overlays: &[FormOverlay],
+    previous: &[FormDependency],
 ) -> Result<FormPreview, FormContextError> {
     let selected_source = context
         .context
@@ -164,7 +168,7 @@ pub fn load(
         &mut dependencies,
         overlays,
     )?;
-    validate_overlays(overlays, &dependencies)?;
+    validate_overlays(overlays, &dependencies, previous)?;
     let (base, extensions) = documents
         .split_first()
         .ok_or(FormContextError::MissingForm)?;
@@ -209,17 +213,65 @@ pub(super) fn source_identity(context: &ContextSnapshot, root: &Path, path: &Pat
 fn validate_overlays(
     overlays: &[FormOverlay],
     dependencies: &[FormDependency],
+    previous: &[FormDependency],
 ) -> Result<(), FormContextError> {
     for (index, overlay) in overlays.iter().enumerate() {
-        if !dependencies.iter().any(|dependency| {
+        let referenced = dependencies.iter().any(|dependency| {
             dependency.id == overlay.source && dependency.role != FormDependencyRole::Picture
-        }) || overlays[..index]
-            .iter()
-            .any(|before| before.source == overlay.source)
+        });
+        let retired_metadata = previous.iter().any(|dependency| {
+            dependency.id == overlay.source && dependency.role == FormDependencyRole::Metadata
+        });
+        if (!referenced && !retired_metadata)
+            || overlays[..index]
+                .iter()
+                .any(|before| before.source == overlay.source)
         {
             return Err(FormContextError::InvalidOverlay);
         }
     }
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn only_unique_previous_metadata_overlays_may_retire() {
+        let overlay = FormOverlay {
+            source: "known".into(),
+            text: "<unsaved/>".into(),
+            version: "1".into(),
+        };
+        let dependency = |role| FormDependency {
+            id: "known".into(),
+            root: PathBuf::new(),
+            path: PathBuf::new(),
+            snapshot: String::new(),
+            version: None,
+            member: None,
+            role,
+        };
+        for role in [
+            FormDependencyRole::Form,
+            FormDependencyRole::Metadata,
+            FormDependencyRole::Picture,
+        ] {
+            assert_eq!(
+                validate_overlays(std::slice::from_ref(&overlay), &[], &[dependency(role)]).is_ok(),
+                role == FormDependencyRole::Metadata
+            );
+        }
+        assert!(validate_overlays(std::slice::from_ref(&overlay), &[], &[]).is_err());
+        assert!(
+            validate_overlays(
+                &[overlay.clone(), overlay],
+                &[],
+                &[dependency(FormDependencyRole::Metadata)]
+            )
+            .is_err()
+        );
+    }
 }

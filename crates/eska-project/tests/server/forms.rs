@@ -128,6 +128,132 @@ fn form_view_protocol_is_read_only_versioned_locale_independent_and_keeps_last_v
     assert_eq!(models[0], models[1]);
 }
 
+fn dependency_style(name: &str) -> String {
+    format!(
+        "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:v8ui=\"http://v8.1c.ru/8.1/data/ui\" xmlns:sys=\"http://v8.1c.ru/8.1/data/ui/fonts/system\"><StyleItem uuid=\"{name}\"><Properties><Name>{name}</Name><Type>Font</Type><Value xsi:type=\"v8ui:Font\" ref=\"sys:DefaultGUIFont\" height=\"12\" kind=\"WindowsFont\"/></Properties></StyleItem></MetaDataObject>"
+    )
+}
+
+fn dependency_fixture() -> (support::TestDir, &'static str) {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    let path = root.join(PATH);
+    let form = "<Form xmlns=\"http://v8.1c.ru/8.3/xcf/logform\" xmlns:style=\"http://v8.1c.ru/8.1/data/ui/style\"><ChildItems><LabelDecoration name=\"Caption\" id=\"1\"><Title>Caption</Title><Font ref=\"style:FontA\" kind=\"StyleItem\"/></LabelDecoration></ChildItems></Form>";
+    fs::write(&path, form).unwrap();
+    let configuration = root.join("Configuration.xml");
+    fs::write(
+        &configuration,
+        fs::read_to_string(&configuration).unwrap().replace(
+            "<ChildObjects>",
+            "<ChildObjects><StyleItem>FontA</StyleItem><StyleItem>FontB</StyleItem>",
+        ),
+    )
+    .unwrap();
+    fs::create_dir(root.join("StyleItems")).unwrap();
+    for name in ["FontA", "FontB"] {
+        fs::write(
+            root.join(format!("StyleItems/{name}.xml")),
+            dependency_style(name),
+        )
+        .unwrap();
+    }
+    (directory, form)
+}
+
+#[test]
+fn form_update_retires_dirty_metadata_but_rejects_unknown_and_replayed_inputs() {
+    let (directory, form) = dependency_fixture();
+    let root = directory.0.join("src");
+    let style = dependency_style;
+    let dependency = |view: &Value, name: &str| {
+        view["dependencies"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|input| input["path"]["value"].as_str().unwrap().ends_with(name))
+            .unwrap()["id"]
+            .clone()
+    };
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 37);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let id = &opened["formSessionId"];
+        let source = dependency(&opened, "Form.xml");
+        let a = dependency(&opened, "FontA.xml");
+        let dirty_a = json!({"source":a,"version":"11","text":style("FontA").replace("height=\"12\"","height=\"14\"")});
+        let duplicate = client.response(
+            "form/update",
+            &params(
+                &context,
+                json!({"formSessionId":id,"revision":"1","overlays":[dirty_a,dirty_a]}),
+            ),
+        );
+        assert_eq!(
+            duplicate["error"]["data"]["details"]["reason"],
+            "foreign_form_input"
+        );
+        let changed_form = json!({"source":source,"version":"12","text":form.replace("style:FontA","style:FontB")});
+        let changed = client.request(
+            "form/update",
+            &params(
+                &context,
+                json!({"formSessionId":id,"revision":"1","overlays":[changed_form,dirty_a]}),
+            ),
+        );
+        assert_eq!(changed["revision"], "2");
+        assert_eq!(
+            changed["model"]["root"]["children"][0]["presentation"]["font"]["points"],
+            12.0
+        );
+        assert!(
+            changed["dependencies"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .all(|input| input["id"] != a)
+        );
+        let replayed = client.response(
+            "form/update",
+            &params(
+                &context,
+                json!({"formSessionId":id,"revision":"2","overlays":[dirty_a]}),
+            ),
+        );
+        assert_eq!(
+            replayed["error"]["data"]["details"]["reason"],
+            "foreign_form_input"
+        );
+        let b = dependency(&changed, "FontB.xml");
+        let dirty_b = json!({"source":b,"version":"13","text":style("FontB").replace("height=\"12\"","height=\"18\"")});
+        let updated = client.request(
+            "form/update",
+            &params(
+                &context,
+                json!({"formSessionId":id,"revision":"2","overlays":[changed_form,dirty_b]}),
+            ),
+        );
+        assert_eq!(updated["revision"], "3");
+        assert_eq!(
+            updated["model"]["root"]["children"][0]["presentation"]["font"]["points"],
+            18.0
+        );
+        let unknown = client.response("form/update", &params(&context,json!({"formSessionId":id,"revision":"3","overlays":[{"source":"unrelated","version":"14","text":style("FontB")}]})));
+        assert_eq!(
+            unknown["error"]["data"]["details"]["reason"],
+            "foreign_form_input"
+        );
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(root.join(PATH)).unwrap(), form);
+    for name in ["FontA", "FontB"] {
+        assert_eq!(
+            fs::read_to_string(root.join(format!("StyleItems/{name}.xml"))).unwrap(),
+            style(name)
+        );
+    }
+}
+
 #[test]
 fn form_overlay_accepts_existing_chunk_upload_and_external_saved_changes() {
     let directory = fixture();

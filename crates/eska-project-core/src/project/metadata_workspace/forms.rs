@@ -4,7 +4,7 @@ use super::{ProjectSession, WorkspaceError};
 use crate::{
     application,
     project::{
-        forms::{self, FormOverlay, FormPreview},
+        forms::{self, FormDependency, FormOverlay, FormPreview},
         metadata_model::{MetadataKind, NodeId},
     },
 };
@@ -27,6 +27,7 @@ impl ProjectSession {
         node: &NodeId,
         application: Option<&str>,
         overlays: &[FormOverlay],
+        previous: &[FormDependency],
         activity: Option<&crate::project::activity::State>,
     ) -> Result<FormPreview, FormPreviewError> {
         self.node(node)
@@ -53,7 +54,7 @@ impl ProjectSession {
                 },
             )
             .map_err(|error| FormPreviewError::Context(Box::new(error)))?;
-        forms::load(&context, self.project().source(), owner, overlays)
+        forms::load(&context, self.project().source(), owner, overlays, previous)
             .map_err(FormPreviewError::Form)
     }
 }
