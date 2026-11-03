@@ -113,8 +113,7 @@ pub fn present(
     let mut elements = Vec::new();
     visit(
         &form.root,
-        false,
-        false,
+        VisitScope::default(),
         form,
         resources,
         &mut appearance,
@@ -125,17 +124,44 @@ pub fn present(
         diagnostics: appearance.diagnostics,
     }
 }
+#[derive(Clone, Copy, Default)]
+struct VisitScope<'a> {
+    parent: Option<&'a EffectiveElement>,
+    in_table: bool,
+}
+
+impl<'a> VisitScope<'a> {
+    fn pages_parent(self, element: &EffectiveElement) -> Option<&'a EffectiveElement> {
+        self.parent.filter(|parent| {
+            element.kind == Some(ElementKind::Page) && parent.kind == Some(ElementKind::Pages)
+        })
+    }
+
+    fn title_property<'b>(
+        self,
+        element: &'b EffectiveElement,
+        name: &str,
+    ) -> Option<&'b SourcedProperty>
+    where
+        'a: 'b,
+    {
+        property(element, name).or_else(|| {
+            self.pages_parent(element)
+                .and_then(|parent| property(parent, name))
+        })
+    }
+}
+
 fn visit(
     element: &EffectiveElement,
-    in_table: bool,
-    in_command_bar: bool,
+    scope: VisitScope<'_>,
     form: &ComposedForm,
     resources: &[FormResource],
     appearance: &mut Appearance<'_>,
     output: &mut Vec<ElementPresentation>,
 ) {
     let (binding_caption, value_type, binding) = bind(element, form, resources);
-    let binding_caption = binding_caption.map(|caption| column_caption(caption, in_table));
+    let binding_caption = binding_caption.map(|caption| column_caption(caption, scope.in_table));
     let command =
         property(element, "CommandName").and_then(|value| appearance::text(&value.property.value));
     let caption = property(element, "Title")
@@ -145,18 +171,12 @@ fn visit(
         .unwrap_or_else(|| PresentationText::Name {
             text: element.name.clone().unwrap_or_default(),
         });
-    let group = matches!(
-        element.kind,
-        Some(ElementKind::UsualGroup | ElementKind::Page)
-    );
+    let group = element.kind == Some(ElementKind::UsualGroup);
+    let tab = element.kind == Some(ElementKind::Pages) || scope.pages_parent(element).is_some();
     let font = appearance.font(property(element, "Font"), "NormalTextFont");
     let title_font = appearance.font(
-        property(element, "TitleFont"),
-        if group && scalar(&element.properties, "Representation") != Some("None") {
-            "LargeTextFont"
-        } else {
-            "NormalTextFont"
-        },
+        scope.title_property(element, "TitleFont"),
+        title_font_role(element),
     );
     let foreground = appearance.color(
         property(element, "TextColor"),
@@ -177,8 +197,10 @@ fn visit(
     );
     let border = appearance.color(property(element, "BorderColor"), "BorderColor");
     let title_color = appearance.color(
-        property(element, "TitleTextColor"),
-        if group {
+        scope.title_property(element, "TitleTextColor"),
+        if tab {
+            "FieldTextColor"
+        } else if group {
             "GroupTitleTextColor"
         } else {
             "FormTextColor"
@@ -199,7 +221,7 @@ fn visit(
         identity: element.identity.clone(),
         grouping: grouping(element),
         displayed: is_displayed(element, binding.as_ref(), command, appearance)
-            && (in_command_bar
+            && (scope.parent.is_some_and(is_command_area)
                 || !matches!(
                     element.kind,
                     Some(ElementKind::ButtonGroup | ElementKind::Popup)
@@ -226,13 +248,25 @@ fn visit(
     for child in element.children.iter().chain(&element.auxiliary) {
         visit(
             child,
-            in_table || element.kind == Some(ElementKind::Table),
-            is_command_area(element),
+            VisitScope {
+                parent: Some(element),
+                in_table: scope.in_table || element.kind == Some(ElementKind::Table),
+            },
             form,
             resources,
             appearance,
             output,
         );
+    }
+}
+
+fn title_font_role(element: &EffectiveElement) -> &'static str {
+    if element.kind == Some(ElementKind::UsualGroup)
+        && scalar(&element.properties, "Representation") != Some("None")
+    {
+        "LargeTextFont"
+    } else {
+        "NormalTextFont"
     }
 }
 

@@ -587,3 +587,56 @@ fn native_state_fixtures_preserve_visibility_font_and_value_qualifiers() {
     }
     assert_eq!(count, 18);
 }
+
+#[test]
+fn native_tab_titles_inherit_pages_appearance_without_changing_page_contents() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-tab-appearance");
+    let metrics: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(root.join("metrics.json")).unwrap()).unwrap();
+    for row in metrics["rows"].as_array().unwrap() {
+        let source = std::fs::read_to_string(root.join(row["file"].as_str().unwrap())).unwrap();
+        let document = parse("native-tabs", source.clone()).unwrap();
+        let form = compose(&document, &[]);
+        let view = present(&form, &[document], &[]);
+        assert!(view.diagnostics.is_empty(), "{}", row["name"]);
+        let pages: Vec<_> = view
+            .elements
+            .iter()
+            .filter(|element| {
+                form.root.children[0]
+                    .children
+                    .iter()
+                    .any(|page| page.identity == element.identity)
+            })
+            .collect();
+        assert_eq!(pages.len(), 2);
+        for (element, expected) in pages.iter().zip(row["captions"].as_array().unwrap()) {
+            assert_eq!(
+                element.title_font.points,
+                expected["font"]["points"].as_f64().unwrap()
+            );
+            assert_eq!(
+                u64::from(element.title_font.weight),
+                expected["font"]["weight"].as_u64().unwrap()
+            );
+            let color = match &element.title_color {
+                ResolvedColor::Role(role) if role == "FieldTextColor" => [51, 51, 51],
+                ResolvedColor::Web(name) if name == "Red" => [255, 0, 0],
+                ResolvedColor::Web(name) if name == "Blue" => [0, 0, 255],
+                other => panic!("unexpected tab color: {other:?}"),
+            };
+            assert_eq!(serde_json::json!(color), expected["foreground"]);
+            for origin in &element.title_font.origins {
+                assert_eq!(origin.source, "native-tabs");
+                assert!(source[origin.range.clone()].starts_with("<TitleFont"));
+            }
+        }
+        for element in &view.elements {
+            if element.binding.is_some() {
+                assert_eq!(element.font.points, 10.0);
+                assert_eq!(element.title_font.points, 10.0);
+            }
+        }
+    }
+}
