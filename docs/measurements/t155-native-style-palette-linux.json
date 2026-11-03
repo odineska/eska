@@ -1,0 +1,330 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "backendCommit": "27d14f83c6c0a6bebca96da3e3419fdce5998abb",
+  "clientCommit": "06001854e925b67fafd1a8988e9782e4944137ab",
+  "references": [
+    "tests/fixtures/forms/native-style-palette/manifest.json",
+    "tests/fixtures/forms/native-style-palette/caption-interiors.json"
+  ],
+  "defaultColors": {
+    "ImportantColor": [
+      255,
+      225,
+      0
+    ],
+    "AccentColor": [
+      0,
+      150,
+      70
+    ],
+    "ActivityColor": [
+      250,
+      204,
+      31
+    ],
+    "NavigationColor": [
+      251,
+      237,
+      158
+    ],
+    "AuxiliaryNavigationColor": [
+      255,
+      255,
+      217
+    ]
+  },
+  "selectedColors": {
+    "ImportantColor": [
+      255,
+      0,
+      0
+    ],
+    "AccentColor": [
+      152,
+      0,
+      255
+    ],
+    "ActivityColor": [
+      0,
+      0,
+      128
+    ],
+    "NavigationColor": [
+      0,
+      100,
+      0
+    ],
+    "AuxiliaryNavigationColor": [
+      173,
+      216,
+      230
+    ]
+  },
+  "nativeFindings": [
+    "All five explicit modern style colors use selected values without StyleItem definitions",
+    "Automatic UsualGroup title uses selected AccentColor; own explicit values win",
+    "Explicit Group and Pages AccentColor references use selected values",
+    "Legacy FormTextColor, FieldTextColor and NormalTextFont do not replace automatic Taxi roles",
+    "Primary red uses black ink; primary navy uses #b2b2b2; contrast rule and gradient acceptance remain open"
+  ],
+  "implementation": [
+    "Existing resolved color fields and metadata dependency/overlay protocol; no wire schema change",
+    "Linux profile defaults measured against exact native text and background pixels",
+    "Dirty DefaultStyle deselection and reselection rediscovers unsaved payload in detached window",
+    "No source writes; stable element identity and DOM"
+  ],
+  "checks": {
+    "rust": {
+      "fmt": "passed",
+      "check": "passed",
+      "clippyAllTargetsAllFeatures": "passed",
+      "test": {
+        "passed": 1492,
+        "ignored": 19,
+        "failed": 0,
+        "suites": 42
+      },
+      "explicitProjectCliBuild": "passed"
+    },
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 481,
+        "skipped": 11,
+        "failed": 0
+      }
+    }
+  },
+  "nativeVsix": {
+    "suitesPassed": 26,
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "runs": [
+      {
+        "suite": "style-palette",
+        "locale": "en",
+        "exit": 0,
+        "passed": true
+      },
+      {
+        "suite": "style-palette",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 10.05,
+        "passed": true
+      },
+      {
+        "suite": "states",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.83,
+        "passed": true
+      },
+      {
+        "suite": "states",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.75,
+        "passed": true
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 10.95,
+        "passed": true
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 13.57,
+        "passed": true
+      },
+      {
+        "suite": "window-titles",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 5.71,
+        "passed": true
+      },
+      {
+        "suite": "window-titles",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 7.79,
+        "passed": true
+      },
+      {
+        "suite": "tab-titles",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.96,
+        "passed": true
+      },
+      {
+        "suite": "tab-titles",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.86,
+        "passed": true
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 10.31,
+        "passed": true
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 12.8,
+        "passed": true
+      },
+      {
+        "suite": "palette",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 3.26,
+        "passed": true
+      },
+      {
+        "suite": "palette",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 5.97,
+        "passed": true
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 7.07,
+        "passed": true
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.72,
+        "passed": true
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 3.82,
+        "passed": true
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 6.68,
+        "passed": true
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 7.72,
+        "passed": true
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 12.48,
+        "passed": true
+      },
+      {
+        "suite": "button-captions",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 4.67,
+        "passed": true
+      },
+      {
+        "suite": "button-captions",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 7.29,
+        "passed": true
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.28,
+        "passed": true
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.08,
+        "passed": true
+      },
+      {
+        "suite": "style",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 3.97,
+        "passed": true
+      },
+      {
+        "suite": "style",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 6.69,
+        "passed": true
+      }
+    ],
+    "paletteCasesPerLocale": 16,
+    "dirtyStyleAndSelection": true,
+    "detachedPaletteRediscovery": true,
+    "sourceWritesDuringViewing": false
+  },
+  "exactCaptionComparison": {
+    "regions": 20,
+    "pixelsCompared": 18400,
+    "differentRgbPixels": 0,
+    "maskedPixels": 0,
+    "exclusions": [],
+    "includes": [
+      "background",
+      "text",
+      "antialiasing"
+    ]
+  },
+  "wholePagesAutoComparison": {
+    "ru": {
+      "pixelsCompared": 42900,
+      "differentRgbPixels": 104,
+      "accepted": false
+    },
+    "en": {
+      "pixelsCompared": 42900,
+      "differentRgbPixels": 104,
+      "accepted": false
+    }
+  },
+  "remaining": [
+    "All primary button colors, gradients, automatic ink and borders",
+    "Other automatic consumers of the five colors",
+    "Full style and ordered extension appearance matrix",
+    "Whole-form pixels and remaining T152-T165 matrices",
+    "Native Windows, physical monitor and DPI acceptance"
+  ]
+}
