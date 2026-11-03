@@ -118,3 +118,9 @@
 - При проверке взаимодействия использовать реальные клики webview: они
   должны доходить до extension host без `DataCloneError`. Unit-тест
   `form-controller.test.mjs` отдельно проверяет structured-clone границу.
+- `test/form-activity-host.cjs` клиента создаёт собственный workspace
+  base/extension и отдельный `ESKA_CONFIG_DIR`. Проверить dirty XML при
+  отключении/включении расширения и владельца формы, включая отдельное
+  окно. Документ должен остаться dirty, DOM — сохраниться, XML и manifest —
+  не измениться. Фильтр списка проектов должен сохранять `formSessionId`.
+  Этот сценарий проходит на Linux в ru/en и не требует установленной 1С.
