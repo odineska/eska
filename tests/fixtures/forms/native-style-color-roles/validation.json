@@ -1,0 +1,237 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "slot": "Button.TextColor",
+  "namespace": "http://v8.1c.ru/8.1/data/ui/style",
+  "context": "No StyleItems bearing any candidate name; ProbeColor/ProbeFont definitions only. Each case imported separately, original configuration restored.",
+  "predefined": [
+    {
+      "name": "TextColor",
+      "accepted": false
+    },
+    {
+      "name": "BackColor",
+      "accepted": false
+    },
+    {
+      "name": "BorderColor",
+      "accepted": true,
+      "canonical": "style:BorderColor"
+    },
+    {
+      "name": "ButtonTextColor",
+      "accepted": true,
+      "canonical": "style:ButtonTextColor"
+    },
+    {
+      "name": "ButtonBackColor",
+      "accepted": true,
+      "canonical": "style:ButtonBackColor"
+    },
+    {
+      "name": "ButtonBorderColor",
+      "accepted": true,
+      "canonical": "style:ButtonBorderColor"
+    },
+    {
+      "name": "FieldTextColor",
+      "accepted": true,
+      "canonical": "style:FieldTextColor"
+    },
+    {
+      "name": "FieldBackColor",
+      "accepted": true,
+      "canonical": "style:FieldBackColor"
+    },
+    {
+      "name": "FieldBorderColor",
+      "accepted": false
+    },
+    {
+      "name": "HyperlinkTextColor",
+      "accepted": false
+    },
+    {
+      "name": "ImportantTextColor",
+      "accepted": false
+    },
+    {
+      "name": "SpecialTextColor",
+      "accepted": true,
+      "canonical": "style:SpecialTextColor"
+    },
+    {
+      "name": "FormBackColor",
+      "accepted": true,
+      "canonical": "style:FormBackColor"
+    },
+    {
+      "name": "GroupTitleTextColor",
+      "accepted": false
+    },
+    {
+      "name": "SelectionBackColor",
+      "accepted": false
+    },
+    {
+      "name": "SelectionTextColor",
+      "accepted": false
+    },
+    {
+      "name": "ToolTipBackColor",
+      "accepted": true,
+      "canonical": "style:ToolTipBackColor"
+    },
+    {
+      "name": "FieldSelectionBackColor",
+      "accepted": true,
+      "canonical": "style:FieldSelectionBackColor"
+    },
+    {
+      "name": "FormTextColor",
+      "accepted": true,
+      "canonical": "style:FormTextColor"
+    },
+    {
+      "name": "TableFooterBackColor",
+      "accepted": true,
+      "canonical": "style:TableFooterBackColor"
+    },
+    {
+      "name": "TooltipBackColor",
+      "accepted": true,
+      "canonical": "style:ToolTipBackColor"
+    },
+    {
+      "name": "TooltipTextColor",
+      "accepted": true,
+      "canonical": "style:ToolTipTextColor"
+    },
+    {
+      "name": "LinesColor",
+      "accepted": false
+    },
+    {
+      "name": "HeaderBackColor",
+      "accepted": false
+    },
+    {
+      "name": "HeaderTextColor",
+      "accepted": false
+    },
+    {
+      "name": "ImportantColor",
+      "accepted": true,
+      "canonical": "style:ImportantColor"
+    },
+    {
+      "name": "AccentColor",
+      "accepted": true,
+      "canonical": "style:AccentColor"
+    },
+    {
+      "name": "ActivityColor",
+      "accepted": true,
+      "canonical": "style:ActivityColor"
+    },
+    {
+      "name": "NavigationColor",
+      "accepted": true,
+      "canonical": "style:NavigationColor"
+    },
+    {
+      "name": "AuxiliaryNavigationColor",
+      "accepted": true,
+      "canonical": "style:AuxiliaryNavigationColor"
+    }
+  ],
+  "autoCases": [
+    {
+      "name": "Omitted",
+      "input": "",
+      "accepted": true
+    },
+    {
+      "name": "Empty",
+      "input": "<TextColor/>",
+      "accepted": false
+    },
+    {
+      "name": "Unqualified",
+      "input": "<TextColor>Auto</TextColor>",
+      "accepted": false
+    },
+    {
+      "name": "StyleAuto",
+      "input": "<TextColor>style:Auto</TextColor>",
+      "accepted": false
+    },
+    {
+      "name": "StyleAutoColor",
+      "input": "<TextColor>style:AutoColor</TextColor>",
+      "accepted": false
+    },
+    {
+      "name": "StyleDefaultColor",
+      "input": "<TextColor>style:DefaultColor</TextColor>",
+      "accepted": false
+    },
+    {
+      "name": "UiAuto",
+      "input": "<TextColor>v8ui:Auto</TextColor>",
+      "accepted": false
+    },
+    {
+      "name": "UiAutoColor",
+      "input": "<TextColor>v8ui:AutoColor</TextColor>",
+      "accepted": false
+    },
+    {
+      "name": "Nil",
+      "input": "<TextColor xsi:nil=\"true\"/>",
+      "accepted": false
+    },
+    {
+      "name": "StyleText",
+      "input": "<TextColor>style:TextColor</TextColor>",
+      "accepted": false
+    }
+  ],
+  "positiveControls": [
+    {
+      "name": "HexControl",
+      "input": "<TextColor>#0000FF</TextColor>",
+      "accepted": true
+    },
+    {
+      "name": "WebControl",
+      "input": "<TextColor>web:Blue</TextColor>",
+      "accepted": true
+    },
+    {
+      "name": "FieldControl",
+      "input": "<TextColor>style:FieldTextColor</TextColor>",
+      "accepted": true
+    },
+    {
+      "name": "ImportantControl",
+      "input": "<TextColor>style:ImportantColor</TextColor>",
+      "accepted": true
+    },
+    {
+      "name": "MissingControl",
+      "input": "",
+      "accepted": true
+    }
+  ],
+  "aliasWithDefinition": {
+    "name": "TextColor",
+    "selectedRgb": "#123456",
+    "defaultValue": "web:DarkOrange",
+    "nativeOrigin": [
+      261,
+      239
+    ],
+    "differingGlyphChannels": 0
+  }
+}
