@@ -124,3 +124,9 @@
   окно. Документ должен остаться dirty, DOM — сохраниться, XML и manifest —
   не измениться. Фильтр списка проектов должен сохранять `formSessionId`.
   Этот сценарий проходит на Linux в ru/en и не требует установленной 1С.
+- Дополнительный `ESKA_FORM_TABLE_COMMAND_FIXTURES=<eska>/tests/fixtures/forms/native-table-commands`
+  расширяет табличную галерею с 14 до 16 случаев. Проверить `Popup` и
+  `ButtonGroup` в панели таблицы, отсутствие «Ещё» при `Autofill=false`,
+  скрытый поиск `SearchStringLocation=None`, выбор XML ID 220 и dirty-подпись
+  в открытом меню без замены DOM. [Linux-измерения](t159-native-table-commands-linux.json)
+  сохраняют строгие RGB-доли; полное совпадение и Windows-метрики не приняты.

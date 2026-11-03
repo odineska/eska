@@ -371,6 +371,40 @@ fn native_table_fixtures_bind_value_table_columns_and_retain_auxiliary_controls(
 }
 
 #[test]
+fn native_table_command_groups_keep_bound_buttons_and_disable_automatic_commands() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-table-commands");
+    for name in ["TablePopup", "TableButtonGroup"] {
+        let document = parse(
+            "native-table-commands",
+            std::fs::read_to_string(root.join(format!("{name}.xml"))).unwrap(),
+        )
+        .unwrap();
+        let form = compose(&document, &[]);
+        let view = present(&form, &[document], &[]);
+        assert!(
+            view.diagnostics.is_empty(),
+            "{name}: {:?}",
+            view.diagnostics
+        );
+        assert!(view.elements[1].auto_command_items.is_empty());
+        for id in [201, 210, 220] {
+            let element = view
+                .elements
+                .iter()
+                .find(|item| item.identity.key == super::super::ElementKey::Xml(id))
+                .unwrap();
+            assert!(element.displayed, "{name}: {id}");
+            if id != 201 {
+                assert!(
+                    matches!(&element.caption, PresentationText::Literal { items } if items.iter().all(|item| item.content.ends_with("command")))
+                );
+            }
+        }
+    }
+}
+
+#[test]
 fn a_required_metadata_tabular_section_is_a_table_with_typed_columns() {
     let resources = [binding_resource(
         "base",

@@ -1,0 +1,386 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 container)",
+  "reference": "Configurator design-time form preview; own forms without BSL",
+  "nativeImportExitCode": 0,
+  "nativeExportExitCode": 0,
+  "visualParityVerified": false,
+  "fixtures": [
+    {
+      "file": "tests/fixtures/forms/native-table-commands/TablePopup.xml",
+      "sha256": "e54283fc6acc03a4c3c0a7e132cdac6f088598b13140d1c3af5aa2639dbe96c9",
+      "nativeExportSha256": "95ea8999038e8ac0d9c57a640a8d3e29b9cf2716d96a2841a2fa5c55ef742892",
+      "normalization": "UTF-8 without BOM, LF"
+    },
+    {
+      "file": "tests/fixtures/forms/native-table-commands/TableButtonGroup.xml",
+      "sha256": "90924f67e5995d22b16addd5c51ac15b900fee3dea806cfa46c4c071a6db8d5a",
+      "nativeExportSha256": "d5c09582f387267919e7f48a2e87999094f7e2acc72c713c6664116a1b81dc21",
+      "normalization": "UTF-8 without BOM, LF"
+    }
+  ],
+  "observations": {
+    "Autofill=false": "Explicit Popup and ButtonGroup are visible; no automatic More menu.",
+    "ButtonGroup": "Two bound command buttons; no group caption.",
+    "SearchStringLocation=None": "No search control; table minimum width is 400 px.",
+    "emptyTablePixels": [
+      400,
+      227
+    ],
+    "menu": "Two static command items; selecting an item does not execute BSL."
+  },
+  "nativeLocaleRepeat": [
+    {
+      "state": "table-popup",
+      "cropPixels": [
+        434,
+        314
+      ],
+      "equalRgbPixels": 136276,
+      "comparedPixels": 136276,
+      "equalRgbRatio": 1.0
+    },
+    {
+      "state": "table-popup-open",
+      "cropPixels": [
+        434,
+        314
+      ],
+      "equalRgbPixels": 136276,
+      "comparedPixels": 136276,
+      "equalRgbRatio": 1.0
+    },
+    {
+      "state": "table-button-group",
+      "cropPixels": [
+        434,
+        314
+      ],
+      "equalRgbPixels": 136276,
+      "comparedPixels": 136276,
+      "equalRgbRatio": 1.0
+    }
+  ],
+  "installedVsix": {
+    "codeVersion": "1.109.0 ARM64",
+    "locales": {
+      "ru": {
+        "passed": true,
+        "galleryCases": 16,
+        "forms": [
+          {
+            "kind": "TablePopup",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 312
+            },
+            "control": {
+              "x": 41,
+              "y": 350,
+              "width": 400,
+              "height": 227
+            },
+            "header": {
+              "x": 42,
+              "y": 351,
+              "width": 384,
+              "height": 30
+            },
+            "headerColor": "rgb(242, 242, 242)",
+            "columns": [
+              {
+                "label": "Text",
+                "x": 42,
+                "y": 351,
+                "width": 201,
+                "height": 30
+              },
+              {
+                "label": "Amount",
+                "x": 243,
+                "y": 351,
+                "width": 129,
+                "height": 30
+              },
+              {
+                "label": "Active",
+                "x": 372,
+                "y": 351,
+                "width": 54,
+                "height": 30
+              }
+            ],
+            "bar": true,
+            "buttons": [
+              {
+                "label": "Actions▾",
+                "x": 41,
+                "y": 315,
+                "width": 76,
+                "height": 26
+              }
+            ],
+            "mark": false,
+            "gutter": true,
+            "paging": 0,
+            "fabricatedRows": 0,
+            "controlRgbComparison": {
+              "comparedPixels": 90800,
+              "equalRgbPixels": 89967,
+              "equalRgbRatio": 0.990826,
+              "masks": []
+            }
+          },
+          {
+            "kind": "TableButtonGroup",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 312
+            },
+            "control": {
+              "x": 41,
+              "y": 350,
+              "width": 400,
+              "height": 227
+            },
+            "header": {
+              "x": 42,
+              "y": 351,
+              "width": 384,
+              "height": 30
+            },
+            "headerColor": "rgb(242, 242, 242)",
+            "columns": [
+              {
+                "label": "Text",
+                "x": 42,
+                "y": 351,
+                "width": 201,
+                "height": 30
+              },
+              {
+                "label": "Amount",
+                "x": 243,
+                "y": 351,
+                "width": 129,
+                "height": 30
+              },
+              {
+                "label": "Active",
+                "x": 372,
+                "y": 351,
+                "width": 54,
+                "height": 30
+              }
+            ],
+            "bar": true,
+            "buttons": [
+              {
+                "label": "First command",
+                "x": 41,
+                "y": 315,
+                "width": 115,
+                "height": 26
+              },
+              {
+                "label": "Second command",
+                "x": 165,
+                "y": 315,
+                "width": 133,
+                "height": 26
+              }
+            ],
+            "mark": false,
+            "gutter": true,
+            "paging": 0,
+            "fabricatedRows": 0,
+            "controlRgbComparison": {
+              "comparedPixels": 90800,
+              "equalRgbPixels": 89967,
+              "equalRgbRatio": 0.990826,
+              "masks": []
+            }
+          }
+        ]
+      },
+      "en": {
+        "passed": true,
+        "galleryCases": 16,
+        "forms": [
+          {
+            "kind": "TablePopup",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 312
+            },
+            "control": {
+              "x": 41,
+              "y": 350,
+              "width": 400,
+              "height": 227
+            },
+            "header": {
+              "x": 42,
+              "y": 351,
+              "width": 384,
+              "height": 30
+            },
+            "headerColor": "rgb(242, 242, 242)",
+            "columns": [
+              {
+                "label": "Text",
+                "x": 42,
+                "y": 351,
+                "width": 201,
+                "height": 30
+              },
+              {
+                "label": "Amount",
+                "x": 243,
+                "y": 351,
+                "width": 129,
+                "height": 30
+              },
+              {
+                "label": "Active",
+                "x": 372,
+                "y": 351,
+                "width": 54,
+                "height": 30
+              }
+            ],
+            "bar": true,
+            "buttons": [
+              {
+                "label": "Actions▾",
+                "x": 41,
+                "y": 315,
+                "width": 76,
+                "height": 26
+              }
+            ],
+            "mark": false,
+            "gutter": true,
+            "paging": 0,
+            "fabricatedRows": 0,
+            "controlRgbComparison": {
+              "comparedPixels": 90800,
+              "equalRgbPixels": 89967,
+              "equalRgbRatio": 0.990826,
+              "masks": []
+            }
+          },
+          {
+            "kind": "TableButtonGroup",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 312
+            },
+            "control": {
+              "x": 41,
+              "y": 350,
+              "width": 400,
+              "height": 227
+            },
+            "header": {
+              "x": 42,
+              "y": 351,
+              "width": 384,
+              "height": 30
+            },
+            "headerColor": "rgb(242, 242, 242)",
+            "columns": [
+              {
+                "label": "Text",
+                "x": 42,
+                "y": 351,
+                "width": 201,
+                "height": 30
+              },
+              {
+                "label": "Amount",
+                "x": 243,
+                "y": 351,
+                "width": 129,
+                "height": 30
+              },
+              {
+                "label": "Active",
+                "x": 372,
+                "y": 351,
+                "width": 54,
+                "height": 30
+              }
+            ],
+            "bar": true,
+            "buttons": [
+              {
+                "label": "First command",
+                "x": 41,
+                "y": 315,
+                "width": 115,
+                "height": 26
+              },
+              {
+                "label": "Second command",
+                "x": 165,
+                "y": 315,
+                "width": 133,
+                "height": 26
+              }
+            ],
+            "mark": false,
+            "gutter": true,
+            "paging": 0,
+            "fabricatedRows": 0,
+            "controlRgbComparison": {
+              "comparedPixels": 90800,
+              "equalRgbPixels": 89967,
+              "equalRgbRatio": 0.990826,
+              "masks": []
+            }
+          }
+        ]
+      }
+    },
+    "interactionChecks": [
+      "Popup open/click/ArrowDown/Escape and source-qualified selection of XML ID 220",
+      "ButtonGroup selection of XML ID 220",
+      "Dirty XML changes a command caption in the open menu and retains menu DOM",
+      "Source XML remains byte-identical on disk"
+    ]
+  },
+  "checks": {
+    "cargoFmtCheck": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeaturesDenyWarnings": true,
+    "cargoTest": {
+      "passed": 1467,
+      "ignored": 19,
+      "failed": 0,
+      "suites": 42
+    },
+    "nodeTest": {
+      "passed": 456,
+      "skipped": 11,
+      "failed": 0
+    },
+    "typecheck": true,
+    "compile": true,
+    "vsixPackage": true
+  },
+  "remaining": [
+    "Full pixel acceptance, including text, outer frame, button and menu borders",
+    "Nested table menus, command sources, style and size combinations",
+    "Independent Windows native references and acceptance"
+  ]
+}
