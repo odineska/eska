@@ -788,6 +788,76 @@ fn taxi_palette_tracks_dirty_style_values_and_configuration_selection() {
 }
 
 #[test]
+fn style_item_named_like_internal_profile_color_loads_and_tracks_dirty_selected_values() {
+    use crate::backend::project::forms::{ElementKey, ResolvedColor};
+    let directory = TestDir::new();
+    fixture(&directory.0, "configuration");
+    write_native_style(&directory.0);
+    let fixtures =
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/forms/native-style-color-roles");
+    let root = directory.0.join("src");
+    fs::copy(
+        fixtures.join("TextColor.xml"),
+        root.join("StyleItems/TextColor.xml"),
+    )
+    .unwrap();
+    fs::copy(fixtures.join("Alias.xml"), root.join(PATH)).unwrap();
+    let body = fs::read_to_string(fixtures.join("Style.xml")).unwrap();
+    fs::write(root.join("Styles/ProbeStyleValues/Ext/Style.xml"), &body).unwrap();
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let before = bytes(&directory.0);
+    let preview = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    assert!(
+        preview
+            .dependencies
+            .iter()
+            .any(|value| value.path == Path::new("StyleItems/TextColor.xml"))
+    );
+    let index = preview
+        .presentation
+        .elements
+        .iter()
+        .position(|value| value.identity.key == ElementKey::Xml(10))
+        .unwrap();
+    assert_eq!(
+        preview.presentation.elements[index].foreground,
+        ResolvedColor::Rgb("#123456".into())
+    );
+    let source = preview
+        .dependencies
+        .iter()
+        .find(|value| value.path == Path::new("Styles/ProbeStyleValues/Ext/Style.xml"))
+        .unwrap();
+    let changed = project
+        .form_preview(
+            &node,
+            None,
+            &[FormOverlay {
+                source: source.id.clone(),
+                version: "93".into(),
+                text: body.replace("#123456", "#654321"),
+            }],
+            &preview.dependencies,
+            Vec::new(),
+            None,
+        )
+        .unwrap();
+    assert_eq!(
+        changed.presentation.elements[index].identity,
+        preview.presentation.elements[index].identity
+    );
+    assert_eq!(
+        changed.presentation.elements[index].foreground,
+        ResolvedColor::Rgb("#654321".into())
+    );
+    assert_eq!(bytes(&directory.0), before);
+}
+
+#[test]
 fn style_payload_discovers_its_own_references_and_missing_payload_keeps_defaults() {
     use crate::backend::project::forms::ResolvedColor;
     let directory = TestDir::new();

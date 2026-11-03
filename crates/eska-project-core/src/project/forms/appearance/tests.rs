@@ -369,3 +369,61 @@ fn native_palette_cycles_preserve_the_style_payload_source() {
         );
     }
 }
+
+#[test]
+fn predefined_color_names_match_native_import_without_confusing_profile_roles() {
+    let data: serde_json::Value = serde_json::from_str(include_str!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../../tests/fixtures/forms/native-style-color-roles/validation.json"
+    )))
+    .unwrap();
+    let rows = data["predefined"].as_array().unwrap();
+    assert_eq!(rows.len(), 30);
+    for row in rows {
+        let name = row["name"].as_str().unwrap();
+        assert_eq!(
+            predefined_color_role(name),
+            row["accepted"].as_bool().unwrap(),
+            "{name}"
+        );
+    }
+}
+
+#[test]
+fn native_style_item_named_like_internal_text_color_uses_its_definition_and_selected_value() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-style-color-roles");
+    let text = std::fs::read_to_string(root.join("TextColor.xml")).unwrap();
+    let document = roxmltree::Document::parse(&text).unwrap();
+    let definition = FormResource {
+        style: None,
+        picture: None,
+        retained_bytes: 0,
+        source: "alias-definition".into(),
+        descriptor: metadata_parser::parse(&text, None, PropertiesMode::All).unwrap(),
+        references: references::collect(document.root_element()),
+    };
+    let value = "<TextColor>s:TextColor</TextColor>";
+    let default = view(value, std::slice::from_ref(&definition));
+    assert!(default.diagnostics.is_empty());
+    assert_eq!(
+        default.elements[1].foreground,
+        ResolvedColor::Web("DarkOrange".into())
+    );
+    let mut resources =
+        palette_resources(&std::fs::read_to_string(root.join("Style.xml")).unwrap());
+    resources.push(definition);
+    let selected = view(value, &resources);
+    assert!(selected.diagnostics.is_empty());
+    assert_eq!(
+        selected.elements[1].foreground,
+        ResolvedColor::Rgb("#123456".into())
+    );
+    let missing = view(value, &[]);
+    assert!(
+        missing
+            .diagnostics
+            .iter()
+            .any(|diagnostic| diagnostic.code == "style_missing")
+    );
+}

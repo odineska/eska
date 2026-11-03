@@ -318,7 +318,7 @@ impl<'a> Appearance<'a> {
             }
             visited.push(target.clone());
             let result = match target.namespace.as_deref() {
-                Some(references::STYLE) if color_role(&target.name) => {
+                Some(references::STYLE) if predefined_color_role(&target.name) => {
                     if modern_color_role(&target.name) {
                         self.default_color(&target.name, visited)
                     } else {
@@ -394,35 +394,24 @@ fn font_role(name: &str) -> bool {
             | "GroupFont"
     )
 }
-fn color_role(name: &str) -> bool {
+fn predefined_color_role(name: &str) -> bool {
     modern_color_role(name)
         || matches!(
             name,
-            "TextColor"
-                | "BackColor"
-                | "BorderColor"
+            "BorderColor"
                 | "ButtonTextColor"
                 | "ButtonBackColor"
                 | "ButtonBorderColor"
                 | "FieldTextColor"
                 | "FieldBackColor"
-                | "FieldBorderColor"
-                | "HyperlinkTextColor"
-                | "ImportantTextColor"
                 | "SpecialTextColor"
                 | "FormBackColor"
-                | "GroupTitleTextColor"
-                | "SelectionBackColor"
-                | "SelectionTextColor"
                 | "ToolTipBackColor"
                 | "FieldSelectionBackColor"
                 | "FormTextColor"
                 | "TableFooterBackColor"
                 | "TooltipBackColor"
                 | "TooltipTextColor"
-                | "LinesColor"
-                | "HeaderBackColor"
-                | "HeaderTextColor"
         )
 }
 
