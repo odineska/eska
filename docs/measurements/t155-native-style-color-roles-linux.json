@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "styleColorResolutionVerified": true,
+  "backendCommit": "1850b740c540d14d56f1861a8b49380c70a18422",
+  "clientCommit": "35eb5f2968a8d8f4af389fcc4388a9d436d0ca21",
+  "clientRuntimeUnchangedSince": "8957104",
+  "references": [
+    "tests/fixtures/forms/native-style-color-roles/manifest.json",
+    "tests/fixtures/forms/native-style-color-roles/validation.json"
+  ],
+  "nativeFindings": {
+    "predefinedCandidates": 30,
+    "acceptedPredefinedNames": 19,
+    "rejectedWithoutDefinition": 11,
+    "internalRoleCanBeUserStyleItem": "TextColor",
+    "defaultDefinition": "web:DarkOrange",
+    "selectedValue": "#123456",
+    "glyphPixelsCompared": 360,
+    "differingGlyphChannels": 0,
+    "autoInput": "Omit the color property; tested empty/nil/Auto lexical values are rejected",
+    "positiveControlsAfterRejectedInputs": 5
+  },
+  "implementation": [
+    "Only native predefined Color names bypass StyleItem resolution; profile roles remain independent",
+    "Named TextColor resolves definition and selected StyleItem.TextColor payload",
+    "Existing metadata dependencies and overlays cover payload and definition; no wire schema change"
+  ],
+  "checks": {
+    "rust": {
+      "fmt": "passed",
+      "check": "passed",
+      "clippyAllTargetsAllFeatures": "passed",
+      "test": {
+        "passed": 1495,
+        "ignored": 19,
+        "failed": 0,
+        "suites": 42
+      },
+      "explicitProjectCliBuild": "passed"
+    },
+    "client": {
+      "typecheck": "passed",
+      "node": {
+        "passed": 483,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeVsix": {
+      "suitesPassed": 30,
+      "runs": [
+        {
+          "suite": "style-color-roles",
+          "locale": "en",
+          "exit": 0,
+          "passed": true
+        },
+        {
+          "suite": "style-color-roles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 7.1,
+          "passed": true
+        },
+        {
+          "suite": "states",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.69,
+          "passed": true
+        },
+        {
+          "suite": "states",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.6,
+          "passed": true
+        },
+        {
+          "suite": "groups",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.76,
+          "passed": true
+        },
+        {
+          "suite": "groups",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.68,
+          "passed": true
+        },
+        {
+          "suite": "window-titles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 4.87,
+          "passed": true
+        },
+        {
+          "suite": "window-titles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 7.93,
+          "passed": true
+        },
+        {
+          "suite": "tab-titles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 7.22,
+          "passed": true
+        },
+        {
+          "suite": "tab-titles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 10.03,
+          "passed": true
+        },
+        {
+          "suite": "renderer",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.24,
+          "passed": true
+        },
+        {
+          "suite": "renderer",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 12.77,
+          "passed": true
+        },
+        {
+          "suite": "palette",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 3.28,
+          "passed": true
+        },
+        {
+          "suite": "palette",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 5.9,
+          "passed": true
+        },
+        {
+          "suite": "tables",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 7.13,
+          "passed": true
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.92,
+          "passed": true
+        },
+        {
+          "suite": "application",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 4.02,
+          "passed": true
+        },
+        {
+          "suite": "application",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 6.62,
+          "passed": true
+        },
+        {
+          "suite": "button-metrics",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 7.6,
+          "passed": true
+        },
+        {
+          "suite": "button-metrics",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 10.58,
+          "passed": true
+        },
+        {
+          "suite": "button-captions",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 4.52,
+          "passed": true
+        },
+        {
+          "suite": "button-captions",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 7.49,
+          "passed": true
+        },
+        {
+          "suite": "preview",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.47,
+          "passed": true
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.96,
+          "passed": true
+        },
+        {
+          "suite": "style",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 3.96,
+          "passed": true
+        },
+        {
+          "suite": "style",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 6.68,
+          "passed": true
+        },
+        {
+          "suite": "style-palette",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 7.8,
+          "passed": true
+        },
+        {
+          "suite": "style-palette",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 10.06,
+          "passed": true
+        },
+        {
+          "suite": "button-colors",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.98,
+          "passed": true
+        },
+        {
+          "suite": "button-colors",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.31,
+          "passed": true
+        }
+      ],
+      "aliasScenarios": {
+        "en": {
+          "passed": true,
+          "locale": "en",
+          "namedColorMatchesProfileAlias": true,
+          "dirtySelectedColor": true,
+          "definitionFallback": true,
+          "dirtyDefinition": true,
+          "detachedStyleUpdates": true,
+          "sourceWritesDuringViewing": false,
+          "visualParityVerified": false
+        },
+        "ru": {
+          "passed": true,
+          "locale": "ru",
+          "namedColorMatchesProfileAlias": true,
+          "dirtySelectedColor": true,
+          "definitionFallback": true,
+          "dirtyDefinition": true,
+          "detachedStyleUpdates": true,
+          "sourceWritesDuringViewing": false,
+          "visualParityVerified": false
+        }
+      }
+    }
+  },
+  "remaining": [
+    "Primary palette and automatic primary ink",
+    "Explicit background suppression of default-button appearance",
+    "Font namespace/name matrix and remaining style combinations",
+    "Full native extension appearance and whole-form matrices",
+    "Windows and physical monitor/DPI acceptance"
+  ]
+}
