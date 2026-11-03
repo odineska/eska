@@ -45,12 +45,16 @@
       "screenshotSha256": "c8bae47ca7930b77a27e13e431226529248186517a153a914798369af6aa00db",
       "region": [
         179,
-        39,
+        40,
         20,
         21
       ],
       "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7",
-      "iconRgbSha256": "8437128419811ca2eea49f59356db7e4f87c194823705a561140f8cb4d5fb1e5"
+      "iconRgbSha256": "8437128419811ca2eea49f59356db7e4f87c194823705a561140f8cb4d5fb1e5",
+      "nativeOrigin": [
+        261,
+        239
+      ]
     },
     {
       "name": "Font14Number",
@@ -60,12 +64,16 @@
       "screenshotSha256": "03d77972d8b263c078758d879fdb11c0e36c9d7494ccf9705d65b5890e281094",
       "region": [
         224,
-        39,
+        40,
         20,
         33
       ],
       "rgbSha256": "99861be58054f964c810c886f2051f0a376009a84229353d1bfb290001829780",
-      "iconRgbSha256": "8437128419811ca2eea49f59356db7e4f87c194823705a561140f8cb4d5fb1e5"
+      "iconRgbSha256": "8437128419811ca2eea49f59356db7e4f87c194823705a561140f8cb4d5fb1e5",
+      "nativeOrigin": [
+        261,
+        239
+      ]
     }
   ],
   "explicitColorEvidence": {
@@ -74,7 +82,7 @@
     "screenshotSha256": "2a321306e1e41b46c9102a03594507ca07bca028c3b654cbf879830de52c1ca2",
     "iconRegion": [
       185,
-      43,
+      44,
       9,
       11
     ],
@@ -89,6 +97,10 @@
       255,
       255
     ],
-    "remaining": "Two native right-edge background pixels #fffffc over LightYellow require separate corner acceptance; no whole-form parity claimed."
+    "remaining": "Two native right-edge background pixels #fffffc over LightYellow require separate corner acceptance; no whole-form parity claimed.",
+    "nativeOrigin": [
+      261,
+      239
+    ]
   }
 }
