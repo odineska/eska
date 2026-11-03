@@ -1,0 +1,408 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendCommit": "3020073",
+  "clientCommit": "f5127bfcb2c6c9fa3a0eff321037c4ce081873f7",
+  "referenceCommit": "ab092104ccecb177abd7920103cc8fe0ff2ecda2",
+  "reference": "tests/fixtures/forms/native-form-titles/metrics.json",
+  "visualParityVerified": false,
+  "windowTitlePixelsVerified": true,
+  "conditions": {
+    "dpi": 96,
+    "scalePercent": 100,
+    "devicePixelRatio": 1,
+    "font": "Liberation Sans 2.1.5 Bold / 11 pixels",
+    "foreground": "#ffffff",
+    "background": "#f6f5f4",
+    "state": "Root design selection, first page active"
+  },
+  "implementation": [
+    "Existing FreeType 2.13.2 WASM unchanged; shared NativeLabel gains formTitle placement",
+    "Form title uses baseline16 and left2 within title bounds, accessible heading name, unchanged text allocation/overflow clipping",
+    "Native measured title layout rounds raw design advance plus next kerning pair jointly; button/field/tab layout retains the previously accepted mode",
+    "Existing font metrics supply design advances; raster accepts a validated dense integer array with existing width limits; no new dependency or WASM ABI",
+    "Shared measured gallery factory serves four installed-VSIX suites"
+  ],
+  "proof": {
+    "formsPerLocale": 8,
+    "titlePixelsPerLocale": 48760,
+    "titlePixelsBothLocales": 97520,
+    "differingTitlePixels": 0,
+    "scripts": [
+      "Latin",
+      "Cyrillic"
+    ],
+    "cases": [
+      "AV/To/Ve/VA/Wa/Ya",
+      "Cyrillic pairs",
+      "Ё, №, dash",
+      "Long clipped title, no wrapping or ellipsis"
+    ],
+    "dirtyTitle": "Latin to Cyrillic to Latin matches alternate native fixture, same DOM, both locales",
+    "previousTabCaptionPixelsReverified": 193084,
+    "previousButtonInteriorPixelsReverified": 789872,
+    "sourceWritesDuringViewing": false,
+    "masks": 0,
+    "tolerance": 0
+  },
+  "checks": {
+    "rust": "Backend unchanged from t157-native-tab-titles-linux.json: full fmt/check/clippy/test passed, 1488 passed, 19 ignored",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "node": {
+        "passed": 478,
+        "skipped": 11,
+        "failed": 0
+      },
+      "vsixByteCheck": {
+        "out": 59,
+        "docs": 38
+      }
+    }
+  },
+  "nativeRegressions": [
+    {
+      "name": "window-titles",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.91
+    },
+    {
+      "name": "tab-titles",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.09
+    },
+    {
+      "name": "tab-titles",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.85
+    },
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.57
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 13.7
+    },
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.78
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.13
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.0
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.93
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.13
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 5.92
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.7
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.5
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.81
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.71
+    },
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.89
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.25
+    },
+    {
+      "name": "button-captions",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.54
+    },
+    {
+      "name": "button-captions",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.3
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.13
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.99
+    },
+    {
+      "name": "style",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.84
+    },
+    {
+      "name": "style",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.71
+    }
+  ],
+  "results": [
+    {
+      "locale": "en",
+      "suitePassed": true,
+      "wholeFormComparisons": [
+        {
+          "name": "Default",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "ASCII",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "Cyrillic",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "Diacritics",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "Long",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "KernLatin1",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "KernLatin2",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "KernCyrillic",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        }
+      ],
+      "screenshotHashes": [
+        {
+          "case": "Default",
+          "sha256": "11505e5e67e1f2956764cfd3b36951198445ac7904b6b3f3d0314efe8803baa1"
+        },
+        {
+          "case": "ASCII",
+          "sha256": "2e2114cc7bc4946e0545519ad0961b5957ac10ff54b0bf527ccfd9422815f21e"
+        },
+        {
+          "case": "Cyrillic",
+          "sha256": "80d9b04fa799572e27b4809ed3c49a8974ee8ff09b5faa47a14f81f8a4603769"
+        },
+        {
+          "case": "Diacritics",
+          "sha256": "d88b90da9e6267a55fa1100271a9db2e62b98ed8de1566591a64f878fcde9744"
+        },
+        {
+          "case": "Long",
+          "sha256": "f8ba475837e0961491c2e0cb34bf1f595a0f136576a0b543b558a166d944f4af"
+        },
+        {
+          "case": "KernLatin1",
+          "sha256": "6c61f1ca0a268ca7bd467e474fe64d0358816d569cbf5b2cb82c16531cb5e926"
+        },
+        {
+          "case": "KernLatin2",
+          "sha256": "13549dd5e709e774c1969d9196323171686a477ca7787612ceef26efb8e7cea4"
+        },
+        {
+          "case": "KernCyrillic",
+          "sha256": "5d5eb1e5229aa6e23b294de07b66837050f10103bbc8e6af098b3bc0598d9a33"
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "suitePassed": true,
+      "wholeFormComparisons": [
+        {
+          "name": "Default",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "ASCII",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "Cyrillic",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "Diacritics",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "Long",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "KernLatin1",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "KernLatin2",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        },
+        {
+          "name": "KernCyrillic",
+          "titlePixels": 6095,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 397,
+          "exactRatio": 0.990746
+        }
+      ],
+      "screenshotHashes": [
+        {
+          "case": "Default",
+          "sha256": "69456ae47035d389412745f08bf8969f4bc6a8e7f72fa627ad359075fee0fd6d"
+        },
+        {
+          "case": "ASCII",
+          "sha256": "5dfe90f974d182cf7e1b236e111a66b3f32cc0e8181cd4dbe6c88ebd8c1f32c4"
+        },
+        {
+          "case": "Cyrillic",
+          "sha256": "a0c3e5e3a1452d7677c0dce74446ccff6fc705c1b2a82909bac7d4d0eab5da95"
+        },
+        {
+          "case": "Diacritics",
+          "sha256": "4d32c7937c098bc16fd2ef2538094fd0000ac9170ade90856c4002cad0a58341"
+        },
+        {
+          "case": "Long",
+          "sha256": "8559252cb3094cbff5e8bb9f13bec2aeb6772b83af64136b72fd97f029df42d9"
+        },
+        {
+          "case": "KernLatin1",
+          "sha256": "e058835326e911c17222a174cfc9ea56d2c289410fd0cdda05e4bc4a18b14de7"
+        },
+        {
+          "case": "KernLatin2",
+          "sha256": "de511a5151b2e1fd7795f3b1a97ae5af2d1e7668d3e81b999b606d2ce0ed002c"
+        },
+        {
+          "case": "KernCyrillic",
+          "sha256": "ba392913ad5509b830689e5b616ba13d2775d5e3e5931de8c709c192aa3f6284"
+        }
+      ]
+    }
+  ],
+  "internalJsApi": "font-raster.raster adds optional advances array; existing callers unchanged. Test factories consolidated as createMeasuredFormGallery. JSON protocol unchanged.",
+  "remaining": [
+    "Whole form still differs: Default has 397 differing pixels of42900 with4px shadow",
+    "Input value/icon/separator/corners and page/frame/shadow pixels remain in strict comparison",
+    "Other fonts/states/DPI and complete style/extension/element/performance matrices remain open",
+    "Windows requires native acceptance and separate text/geometry measurements"
+  ]
+}
