@@ -567,3 +567,158 @@ fn form_common_picture_tracks_payload_dirty_descriptor_and_rejects_binary_overla
     ));
     assert_eq!(bytes(&directory.0), before);
 }
+
+fn write_native_style(directory: &Path) -> String {
+    let fixture =
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/forms/native-style-values");
+    let root = directory.join("src");
+    for folder in ["Styles", "StyleItems"] {
+        copy(&fixture.join(folder), &root.join(folder));
+    }
+    let config = root.join("Configuration.xml");
+    let text = fs::read_to_string(&config).unwrap().replacen(
+        "</Properties>",
+        "<DefaultStyle>Style.ProbeStyleValues</DefaultStyle></Properties>",
+        1,
+    );
+    fs::write(config, text).unwrap();
+    fs::write(root.join(PATH), form("<ChildItems xmlns:s=\"http://v8.1c.ru/8.1/data/ui/style\"><InputField name=\"Styled\" id=\"1\"><Font ref=\"s:ProbeFont\" italic=\"true\"/><TextColor>s:ProbeColor</TextColor></InputField></ChildItems>", None)).unwrap();
+    fs::read_to_string(root.join("Styles/ProbeStyleValues/Ext/Style.xml")).unwrap()
+}
+
+#[test]
+fn native_style_payload_is_a_dirty_tracked_dependency_without_source_writes() {
+    use crate::backend::project::forms::{FormDependencyRole, ResolvedColor};
+    let directory = TestDir::new();
+    fixture(&directory.0, "configuration");
+    let style_text = write_native_style(&directory.0);
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let before = bytes(&directory.0);
+    let preview = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    let dependency = preview
+        .dependencies
+        .iter()
+        .find(|dependency| dependency.path == Path::new("Styles/ProbeStyleValues/Ext/Style.xml"))
+        .unwrap();
+    assert_eq!(dependency.role, FormDependencyRole::Metadata);
+    assert_eq!(
+        preview.presentation.elements[1].foreground,
+        ResolvedColor::Rgb("#9800ff".into())
+    );
+    assert!((preview.presentation.elements[1].font.points - 18.0).abs() < f64::EPSILON);
+    assert!(preview.presentation.elements[1].font.italic);
+    assert_eq!(preview.presentation.elements[1].font.weight, 700);
+    assert_eq!(
+        preview.presentation.elements[1].font.origins[0].source,
+        dependency.id
+    );
+    let changed = project
+        .form_preview(
+            &node,
+            None,
+            &[FormOverlay {
+                source: dependency.id.clone(),
+                version: "88".into(),
+                text: style_text
+                    .replace("#9800FF", "#008000")
+                    .replace("height=\"18\"", "height=\"20\""),
+            }],
+            &preview.dependencies,
+            Vec::new(),
+            None,
+        )
+        .unwrap();
+    assert_eq!(
+        changed.presentation.elements[1].foreground,
+        ResolvedColor::Rgb("#008000".into())
+    );
+    assert!((changed.presentation.elements[1].font.points - 20.0).abs() < f64::EPSILON);
+    let next = changed
+        .dependencies
+        .iter()
+        .find(|next| next.id == dependency.id)
+        .unwrap();
+    assert_eq!(next.version.as_deref(), Some("88"));
+    assert_ne!(next.snapshot, dependency.snapshot);
+    assert_eq!(
+        changed.form.root.children[0].identity,
+        preview.form.root.children[0].identity
+    );
+    assert!(matches!(project.form_preview(&node, None, &[FormOverlay {
+        source: dependency.id.clone(), version: "89".into(), text: "<Style>".into(),
+    }], &preview.dependencies, Vec::new(), None), Err(FormPreviewError::Form(
+        FormContextError::InvalidMetadata { source })
+    ) if source == dependency.id));
+    assert!(matches!(
+        project.form_preview(
+            &node,
+            None,
+            &[FormOverlay {
+                source: format!("foreign:{}", dependency.id),
+                version: "89".into(),
+                text: style_text,
+            }],
+            &preview.dependencies,
+            Vec::new(),
+            None
+        ),
+        Err(FormPreviewError::Form(FormContextError::InvalidOverlay))
+    ));
+    assert_eq!(bytes(&directory.0), before);
+}
+
+#[test]
+fn style_payload_discovers_its_own_references_and_missing_payload_keeps_defaults() {
+    use crate::backend::project::forms::ResolvedColor;
+    let directory = TestDir::new();
+    fixture(&directory.0, "configuration");
+    let body = write_native_style(&directory.0);
+    let root = directory.0.join("src");
+    let extra = fs::read_to_string(root.join("StyleItems/ProbeColor.xml"))
+        .unwrap()
+        .replace("<Name>ProbeColor</Name>", "<Name>FromStyleOnly</Name>")
+        .replace(
+            "9b0b36c8-cfee-4969-899e-22349996c7f8",
+            "11111111-2222-3333-4444-555555555555",
+        )
+        .replace("web:DarkOrange", "#223344");
+    fs::write(root.join("StyleItems/FromStyleOnly.xml"), extra).unwrap();
+    let path = root.join("Styles/ProbeStyleValues/Ext/Style.xml");
+    fs::write(&path, body.replace("#9800FF", "style:FromStyleOnly")).unwrap();
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let before = bytes(&directory.0);
+    let preview = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    assert_eq!(
+        preview.presentation.elements[1].foreground,
+        ResolvedColor::Rgb("#223344".into())
+    );
+    assert!(
+        preview
+            .dependencies
+            .iter()
+            .any(|dependency| dependency.path == Path::new("StyleItems/FromStyleOnly.xml"))
+    );
+    assert!(preview.presentation.diagnostics.is_empty());
+    assert_eq!(bytes(&directory.0), before);
+    fs::remove_file(&path).unwrap();
+    let before = bytes(&directory.0);
+    let fallback = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    assert!(!fallback.dependencies.iter().any(|dependency| dependency.path == Path::new("Styles/ProbeStyleValues/Ext/Style.xml")));
+    assert_eq!(
+        fallback.presentation.elements[1].foreground,
+        ResolvedColor::Web("DarkOrange".into())
+    );
+    assert!((fallback.presentation.elements[1].font.points - 12.0).abs() < f64::EPSILON);
+    assert!(fallback.presentation.diagnostics.is_empty());
+    assert_eq!(bytes(&directory.0), before);
+}

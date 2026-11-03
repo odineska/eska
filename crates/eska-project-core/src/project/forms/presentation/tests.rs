@@ -58,6 +58,7 @@ fn native_groups_keep_title_styles_and_command_area_visibility() {
             std::fs::read_to_string(root.join("StyleItems").join(format!("{name}.xml"))).unwrap();
         let xml = roxmltree::Document::parse(&source).unwrap();
         FormResource {
+            style: None,
             source: name.into(),
             descriptor: metadata_parser::parse(&source, None, PropertiesMode::All).unwrap(),
             references: super::super::references::collect(xml.root_element()),
@@ -130,6 +131,7 @@ fn borrowed_standard_attribute_uses_base_properties_omitted_by_extension() {
         )
     };
     let resource = |source: &str, properties: &str| FormResource {
+        style: None,
         picture: None,
         retained_bytes: 0,
         source: source.into(),
@@ -221,6 +223,7 @@ fn binding_resource(source: &str, properties: &str, children: &str) -> FormResou
         "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\" xmlns:xr=\"http://v8.1c.ru/8.3/xcf/readable\" xmlns:v8=\"http://v8.1c.ru/8.1/data/core\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><Catalog uuid=\"{source}\"><Properties><Name>Goods</Name>{properties}</Properties><ChildObjects>{children}</ChildObjects></Catalog></MetaDataObject>"
     );
     FormResource {
+        style: None,
         source: source.into(),
         descriptor: metadata_parser::parse(&xml, None, PropertiesMode::All).unwrap(),
         references: Vec::new(),
@@ -471,6 +474,7 @@ fn native_context_tables_resolve_metadata_columns_and_dynamic_list_commands() {
     let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("../../tests/fixtures/forms/native-context-tables");
     let resource = FormResource {
+        style: None,
         source: "metadata".into(),
         picture: None,
         retained_bytes: 0,
@@ -528,6 +532,7 @@ fn native_context_tables_resolve_metadata_columns_and_dynamic_list_commands() {
 fn native_state_fixtures_preserve_visibility_font_and_value_qualifiers() {
     let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/forms");
     let resource = FormResource {
+        style: None,
         source: "metadata".into(),
         picture: None,
         retained_bytes: 0,

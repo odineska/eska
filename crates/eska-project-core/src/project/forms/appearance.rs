@@ -89,9 +89,6 @@ impl<'a> Appearance<'a> {
     pub fn font(&mut self, property: Option<&SourcedProperty>, role: &str) -> ResolvedFont {
         let mut visited = Vec::new();
         let mut result = Self::font_role(role);
-        if let Some(value) = self.style_property(role) {
-            result = self.resolve_font(&value, result, &mut visited);
-        }
         if let Some(property) = property {
             result = self.resolve_font(property, result, &mut visited);
         }
@@ -99,13 +96,10 @@ impl<'a> Appearance<'a> {
     }
     pub fn color(&mut self, property: Option<&SourcedProperty>, role: &str) -> ResolvedColor {
         let mut visited = Vec::new();
-        if let Some(property) = property {
-            self.resolve_color(property, role, &mut visited)
-        } else if let Some(value) = self.style_property(role) {
-            self.resolve_color(&value, role, &mut visited)
-        } else {
-            ResolvedColor::Role(role.into())
-        }
+        property.map_or_else(
+            || ResolvedColor::Role(role.into()),
+            |property| self.resolve_color(property, role, &mut visited),
+        )
     }
     fn font_role(role: &str) -> ResolvedFont {
         let points = match role {
@@ -130,6 +124,13 @@ impl<'a> Appearance<'a> {
                     .find(|resource| resource.source == source)
                     .map(|resource| resource.references.as_slice())
             })
+            .or_else(|| {
+                self.resources
+                    .iter()
+                    .filter_map(|resource| resource.style.as_ref())
+                    .find(|style| style.source == source)
+                    .map(|style| style.references.as_slice())
+            })
             .unwrap_or_default()
     }
     fn target(&self, property: &SourcedProperty, slot: ReferenceSlot) -> Option<PropertyKey> {
@@ -140,28 +141,19 @@ impl<'a> Appearance<'a> {
     }
     fn style_property(&self, name: &str) -> Option<SourcedProperty> {
         self.resources.iter().rev().find_map(|resource| {
+            if !resource.descriptor.objects.iter().any(|object| {
+                object.metadata.kind() == MetadataKind::Style
+                    && Some(object.metadata.name()) == self.active_style.as_deref()
+            }) {
+                return None;
+            }
             resource
-                .descriptor
-                .objects
+                .style
+                .as_ref()?
+                .items
                 .iter()
-                .filter(|object| {
-                    object.metadata.kind() == MetadataKind::Style
-                        && Some(object.metadata.name()) == self.active_style.as_deref()
-                })
-                .find_map(|object| {
-                    object
-                        .properties
-                        .as_ref()?
-                        .iter()
-                        .find(|property| property.property.key.name == name)
-                        .map(|value| SourcedProperty {
-                            origin: PropertySource {
-                                source: resource.source.clone(),
-                                range: value.range.clone(),
-                            },
-                            property: value.property.clone(),
-                        })
-                })
+                .find(|item| item.name == name)
+                .map(|item| item.value.clone())
         })
     }
     fn item(&self, target: &PropertyKey) -> Option<SourcedProperty> {
@@ -169,6 +161,16 @@ impl<'a> Appearance<'a> {
             .name
             .strip_prefix("StyleItem.")
             .unwrap_or(&target.name);
+        if !self.resources.iter().any(|resource| {
+            resource.descriptor.objects.iter().any(|object| {
+                object.metadata.kind() == MetadataKind::StyleItem && object.metadata.name() == name
+            })
+        }) {
+            return None;
+        }
+        if let Some(value) = self.style_property(&format!("StyleItem.{name}")) {
+            return Some(value);
+        }
         self.resources.iter().rev().find_map(|resource| {
             resource
                 .descriptor
@@ -222,9 +224,6 @@ impl<'a> Appearance<'a> {
             match target.namespace.as_deref() {
                 Some(references::STYLE) if font_role(&target.name) => {
                     result = Self::font_role(&target.name);
-                    if let Some(value) = self.style_property(&target.name) {
-                        result = self.resolve_font(&value, result, visited);
-                    }
                 }
                 Some(references::CONFIG | references::STYLE) => {
                     if let Some(value) = self.item(&target) {
@@ -304,10 +303,7 @@ impl<'a> Appearance<'a> {
             visited.push(target.clone());
             let result = match target.namespace.as_deref() {
                 Some(references::STYLE) if color_role(&target.name) => {
-                    self.style_property(&target.name).map_or_else(
-                        || ResolvedColor::Role(target.name.clone()),
-                        |value| self.resolve_color(&value, &target.name, visited),
-                    )
+                    ResolvedColor::Role(target.name.clone())
                 }
                 Some(references::CONFIG | references::STYLE) => {
                     if let Some(value) = self.item(&target) {

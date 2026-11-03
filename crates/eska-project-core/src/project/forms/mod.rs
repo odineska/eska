@@ -12,6 +12,7 @@ mod preparation;
 mod presentation;
 mod references;
 mod resources;
+mod style_data;
 
 pub use appearance::{AppearanceDiagnostic, ResolvedColor, ResolvedFont};
 pub use catalog::{ElementFamily, ElementKind};
@@ -36,6 +37,7 @@ pub use presentation::{
 };
 pub use references::{FormReference, ReferenceSlot};
 pub use resources::FormResource;
+pub use style_data::{FormStyleData, StyleValue};
 
 use std::ops::Range;
 

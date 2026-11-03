@@ -198,6 +198,7 @@ mod tests {
             super::super::references::CONFIG
         );
         FormResource {
+            style: None,
             source: source.into(),
             descriptor: metadata_parser::parse(&xml, None, PropertiesMode::All).unwrap(),
             references: Vec::new(),

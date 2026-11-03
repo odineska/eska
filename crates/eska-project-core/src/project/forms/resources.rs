@@ -22,6 +22,7 @@ pub struct FormResource {
     pub descriptor: ParsedDescriptor,
     pub references: Vec<FormReference>,
     pub picture: Option<designer_source::PicturePreview>,
+    pub style: Option<super::FormStyleData>,
     pub retained_bytes: usize,
 }
 
@@ -92,16 +93,8 @@ pub(super) fn load(
             if input_bytes > super::MAX_FORM_CONTEXT_BYTES {
                 return Err(FormContextError::InputTooLarge);
             }
-            let xml = Document::parse(&text).map_err(|_| FormContextError::InvalidMetadata {
-                source: dependency.id.clone(),
-            })?;
-            let descriptor = metadata_parser::parse(&text, id.parent(), PropertiesMode::All)
-                .map_err(|_| FormContextError::InvalidMetadata {
-                    source: dependency.id.clone(),
-                })?;
-            discover(xml.root_element(), &mut pending, false);
-            let references = super::references::collect(xml.root_element());
-            let (picture, picture_bytes) = load_picture(
+            let (descriptor, references) = parse_metadata(&text, &id, &dependency, &mut pending)?;
+            let payload = load_payload(
                 context,
                 &source,
                 &descriptor,
@@ -112,7 +105,8 @@ pub(super) fn load(
                 overlays,
                 dependencies,
             )?;
-            input_bytes = input_bytes.saturating_add(picture_bytes);
+            pending.extend(payload.requests);
+            input_bytes = input_bytes.saturating_add(payload.bytes);
             if input_bytes > super::MAX_FORM_CONTEXT_BYTES {
                 return Err(FormContextError::InputTooLarge);
             }
@@ -120,8 +114,9 @@ pub(super) fn load(
                 source: dependency.id.clone(),
                 descriptor,
                 references,
-                picture,
-                retained_bytes: text.len().saturating_add(picture_bytes),
+                picture: payload.picture,
+                style: payload.style,
+                retained_bytes: text.len().saturating_add(payload.bytes),
             });
             dependencies.push(dependency);
             if dependencies.len() > super::MAX_FORM_DEPENDENCIES {
@@ -130,6 +125,22 @@ pub(super) fn load(
         }
     }
     Ok(output)
+}
+
+fn parse_metadata(
+    text: &str,
+    id: &ObjectId,
+    dependency: &FormDependency,
+    pending: &mut Vec<ObjectId>,
+) -> Result<(ParsedDescriptor, Vec<FormReference>), FormContextError> {
+    let invalid = || FormContextError::InvalidMetadata {
+        source: dependency.id.clone(),
+    };
+    let xml = Document::parse(text).map_err(|_| invalid())?;
+    let descriptor =
+        metadata_parser::parse(text, id.parent(), PropertiesMode::All).map_err(|_| invalid())?;
+    discover(xml.root_element(), pending, false);
+    Ok((descriptor, super::references::collect(xml.root_element())))
 }
 
 /// External artifacts get configuration collections from the other application sources.
@@ -161,6 +172,88 @@ fn requests(
         discover(parsed.root_element(), &mut requests, true);
     }
     Ok((owners, requests))
+}
+
+struct ResourcePayload {
+    picture: Option<designer_source::PicturePreview>,
+    style: Option<super::FormStyleData>,
+    requests: Vec<ObjectId>,
+    bytes: usize,
+}
+
+fn load_payload(
+    context: &ContextSnapshot,
+    source: &DesignerSource,
+    metadata: &ParsedDescriptor,
+    descriptor: &std::path::Path,
+    member: Option<&str>,
+    overlays: &[FormOverlay],
+    dependencies: &mut Vec<FormDependency>,
+) -> Result<ResourcePayload, FormContextError> {
+    let (style, style_bytes, requests) = load_style(
+        context,
+        source,
+        metadata,
+        descriptor,
+        member,
+        overlays,
+        dependencies,
+    )?;
+    let (picture, picture_bytes) = load_picture(
+        context,
+        source,
+        metadata,
+        descriptor,
+        member,
+        overlays,
+        dependencies,
+    )?;
+    Ok(ResourcePayload {
+        picture,
+        style,
+        requests,
+        bytes: style_bytes.saturating_add(picture_bytes),
+    })
+}
+
+fn load_style(
+    context: &ContextSnapshot,
+    source: &DesignerSource,
+    metadata: &ParsedDescriptor,
+    descriptor: &std::path::Path,
+    member: Option<&str>,
+    overlays: &[FormOverlay],
+    dependencies: &mut Vec<FormDependency>,
+) -> Result<(Option<super::FormStyleData>, usize, Vec<ObjectId>), FormContextError> {
+    if !metadata
+        .objects
+        .iter()
+        .any(|object| object.metadata.kind() == MetadataKind::Style)
+    {
+        return Ok((None, 0, Vec::new()));
+    }
+    let path = descriptor.with_extension("").join("Ext/Style.xml");
+    let Some((dependency, text)) = read_input(
+        context,
+        source,
+        &path,
+        overlays,
+        member,
+        super::FormDependencyRole::Metadata,
+    )?
+    else {
+        // Native export omits the payload when a style has no overrides.
+        return Ok((None, 0, Vec::new()));
+    };
+    let invalid = || FormContextError::InvalidMetadata {
+        source: dependency.id.clone(),
+    };
+    let document = Document::parse(&text).map_err(|_| invalid())?;
+    let style = super::style_data::parse(&dependency.id, &document).ok_or_else(invalid)?;
+    let mut requests = Vec::new();
+    discover(document.root_element(), &mut requests, false);
+    dependencies.push(dependency);
+    Ok((Some(style), text.len(), requests))
 }
 
 fn load_picture(

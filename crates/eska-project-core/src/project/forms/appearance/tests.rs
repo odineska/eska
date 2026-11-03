@@ -11,6 +11,7 @@ fn resource(name: &str, value: &str) -> FormResource {
     );
     let document = roxmltree::Document::parse(&text).unwrap();
     FormResource {
+        style: None,
         picture: None,
         retained_bytes: 0,
         source: name.into(),
@@ -94,6 +95,7 @@ fn descriptor(kind: &str, name: &str, properties: &str) -> FormResource {
         "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><{kind} uuid=\"11111111-1111-1111-1111-111111111111\"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"
     );
     FormResource {
+        style: None,
         picture: None,
         retained_bytes: 0,
         source: name.into(),
@@ -102,48 +104,149 @@ fn descriptor(kind: &str, name: &str, properties: &str) -> FormResource {
     }
 }
 
+fn styled_resource(name: &str, source: &str, body: &str) -> FormResource {
+    let mut result = descriptor("Style", name, "");
+    let document = roxmltree::Document::parse(body).unwrap();
+    result.style = Some(super::super::style_data::parse(source, &document).unwrap());
+    result
+}
+const NATIVE_STYLE: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../tests/fixtures/forms/native-style-values/Styles/ProbeStyleValues/Ext/Style.xml"
+));
+
 #[test]
-fn default_style_selects_named_style_instead_of_last_loaded_resource() {
+fn selected_native_style_overrides_named_items_and_retains_font_provenance() {
     let mut resources = vec![
         descriptor(
             "Configuration",
             "Config",
-            "<DefaultStyle>Style.Selected</DefaultStyle>",
+            "<DefaultStyle>Style.ProbeStyleValues</DefaultStyle>",
         ),
+        resource("ProbeColor", "<Value xsi:type=\"u:Color\">#ff8c00</Value>"),
+        resource(
+            "ProbeFont",
+            "<Value xsi:type=\"u:Font\" height=\"12\" bold=\"true\"/>",
+        ),
+        styled_resource("ProbeStyleValues", "selected-style-data", NATIVE_STYLE),
+        styled_resource(
+            "Other",
+            "other-style-data",
+            &NATIVE_STYLE
+                .replace("#9800FF", "#224466")
+                .replace("height=\"18\"", "height=\"21\""),
+        ),
+    ];
+    let body = "<Font ref=\"s:ProbeFont\" italic=\"true\"/><TitleFont ref=\"s:ProbeFont\" height=\"10\"/><TextColor>s:ProbeColor</TextColor>";
+    let result = view(body, &resources);
+    assert!(result.diagnostics.is_empty());
+    assert_eq!(
+        result.elements[1].foreground,
+        ResolvedColor::Rgb("#9800ff".into())
+    );
+    let font = &result.elements[1].font;
+    assert!((font.points - 18.0).abs() < f64::EPSILON);
+    assert!(font.italic);
+    assert_eq!(font.weight, 700);
+    assert_eq!(
+        font.origins
+            .iter()
+            .map(|value| value.source.as_str())
+            .collect::<Vec<_>>(),
+        ["selected-style-data", "form"]
+    );
+    assert!((result.elements[1].title_font.points - 10.0).abs() < f64::EPSILON);
+    resources.push(descriptor(
+        "Configuration",
+        "Extension",
+        "<DefaultStyle>Style.Other</DefaultStyle>",
+    ));
+    let result = view(body, &resources);
+    assert_eq!(
+        result.elements[1].foreground,
+        ResolvedColor::Rgb("#224466".into())
+    );
+    assert!((result.elements[1].font.points - 21.0).abs() < f64::EPSILON);
+}
+
+#[test]
+fn borrowed_style_payload_falls_back_per_named_item_and_cycles_are_bounded() {
+    let mut resources = vec![
         descriptor(
-            "Style",
-            "Selected",
-            "<FormTextColor>#112233</FormTextColor><FieldTextColor>#223344</FieldTextColor><NormalTextFont height=\"13\"/>",
+            "Configuration",
+            "Config",
+            "<DefaultStyle>Style.ProbeStyleValues</DefaultStyle>",
         ),
+        resource("ProbeColor", "<Value xsi:type=\"u:Color\">#ff8c00</Value>"),
+        resource(
+            "ProbeFont",
+            "<Value xsi:type=\"u:Font\" height=\"12\" bold=\"true\"/>",
+        ),
+        styled_resource("ProbeStyleValues", "base-style-data", NATIVE_STYLE),
+        descriptor("Style", "ProbeStyleValues", ""),
+    ];
+    assert_eq!(
+        view("<TextColor>s:ProbeColor</TextColor>", &resources).elements[1].foreground,
+        ResolvedColor::Rgb("#9800ff".into())
+    );
+    let partial = "<Style xmlns=\"http://v8.1c.ru/8.3/xcf/extrnprops\"><Item name=\"StyleItem.ProbeColor\"><Color>#008000</Color></Item></Style>";
+    resources.push(styled_resource(
+        "ProbeStyleValues",
+        "extension-style-data",
+        partial,
+    ));
+    let result = view(
+        "<TextColor>s:ProbeColor</TextColor><Font ref=\"s:ProbeFont\"/>",
+        &resources,
+    );
+    assert_eq!(
+        result.elements[1].foreground,
+        ResolvedColor::Rgb("#008000".into())
+    );
+    assert!((result.elements[1].font.points - 18.0).abs() < f64::EPSILON);
+    let cycle = partial.replace("#008000", "s:ProbeColor").replace(
+        "<Style xmlns=",
+        "<Style xmlns:s=\"http://v8.1c.ru/8.1/data/ui/style\" xmlns=",
+    );
+    resources.push(styled_resource(
+        "ProbeStyleValues",
+        "cycle-style-data",
+        &cycle,
+    ));
+    let result = view("<TextColor>s:ProbeColor</TextColor>", &resources);
+    assert!(
+        result
+            .diagnostics
+            .iter()
+            .any(|value| value.code == "style_cycle" && value.origin.source == "cycle-style-data")
+    );
+}
+
+#[test]
+fn native_taxi_style_keeps_automatic_role_defaults_and_requires_item_definitions() {
+    let resources = [
         descriptor(
-            "Style",
-            "Unrelated",
-            "<FormTextColor>#445566</FormTextColor><FieldTextColor>#556677</FieldTextColor><NormalTextFont height=\"21\"/>",
+            "Configuration",
+            "Config",
+            "<DefaultStyle>Style.ProbeStyleValues</DefaultStyle>",
         ),
+        styled_resource("ProbeStyleValues", "selected-style-data", NATIVE_STYLE),
     ];
     let result = view("", &resources);
     assert_eq!(
         result.elements[1].foreground,
-        ResolvedColor::Rgb("#223344".into())
+        ResolvedColor::Role("FieldTextColor".into())
     );
     assert_eq!(
         result.elements[1].title_color,
-        ResolvedColor::Rgb("#112233".into())
+        ResolvedColor::Role("FormTextColor".into())
     );
-    assert!((result.elements[1].font.points - 13.0).abs() < f64::EPSILON);
-    resources.push(descriptor(
-        "Configuration",
-        "Extension",
-        "<DefaultStyle>Style.Unrelated</DefaultStyle>",
-    ));
-    let result = view("", &resources);
-    assert_eq!(
-        result.elements[1].foreground,
-        ResolvedColor::Rgb("#556677".into())
+    assert!((result.elements[1].font.points - 10.0).abs() < f64::EPSILON);
+    let result = view("<TextColor>s:ProbeColor</TextColor>", &resources);
+    assert!(
+        result
+            .diagnostics
+            .iter()
+            .any(|value| value.code == "style_missing")
     );
-    assert_eq!(
-        result.elements[1].title_color,
-        ResolvedColor::Rgb("#445566".into())
-    );
-    assert!((result.elements[1].font.points - 21.0).abs() < f64::EPSILON);
 }
