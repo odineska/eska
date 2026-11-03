@@ -547,6 +547,9 @@ fn native_state_fixtures_preserve_visibility_font_and_value_qualifiers() {
     let mut count = 0;
     for path in std::fs::read_dir(root.join("native-state-variants")).unwrap() {
         let path = path.unwrap().path();
+        if path.extension().and_then(|value| value.to_str()) != Some("xml") {
+            continue;
+        }
         let name = path.file_stem().unwrap().to_str().unwrap();
         let document = parse("state", std::fs::read_to_string(&path).unwrap()).unwrap();
         let view = present(
