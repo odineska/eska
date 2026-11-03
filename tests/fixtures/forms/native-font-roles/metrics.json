@@ -1,0 +1,599 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "foreground": "#4d4d4d",
+  "background": "#ffffff",
+  "exclusions": [],
+  "targetInteriorPixels": 39117,
+  "rows": [
+    {
+      "name": "NormalTextFont",
+      "file": "NormalTextFont.xml",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "022ba578e80991ef47d4fac78d0b4da96b779f4e66c71d6a5c07865646bbdb6b",
+      "buttons": [
+        {
+          "caption": "WW",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "cca654adca7067adbbad64afb77a5d0b3918ad80ed4a55d9076fd5878d48743c",
+          "glyph": {
+            "x": 27,
+            "y": 44,
+            "width": 24,
+            "height": 15
+          },
+          "glyphRgbSha256": "1a06e6bc114169ba4e42b780c45e47a5eaef4cedfa3d61e16f6cf1412e70f87d"
+        },
+        {
+          "caption": "MM",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+          "glyph": {
+            "x": 88,
+            "y": 44,
+            "width": 22,
+            "height": 15
+          },
+          "glyphRgbSha256": "4be983a47cbf846c7103ba01dbd90efe87e2957196e166d4a34e9a4e44bc024e"
+        },
+        {
+          "caption": "First command",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0",
+          "glyph": {
+            "x": 147,
+            "y": 44,
+            "width": 87,
+            "height": 15
+          },
+          "glyphRgbSha256": "8085025331c648ed557364610d5bad8a8949485ce9ded7210bd60cda205336f9"
+        }
+      ]
+    },
+    {
+      "name": "SmallTextFont",
+      "file": "SmallTextFont.xml",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        261,
+        79
+      ],
+      "nativeScreenshotSha256": "b2c564b0c8a7c21c3c6df8cb7edbc510c16bea42e3c3dc97cadb4528ccad47f9",
+      "buttons": [
+        {
+          "caption": "WW",
+          "x": 13,
+          "y": 39,
+          "width": 44,
+          "height": 26,
+          "points": 8,
+          "weight": "regular",
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 38,
+            "height": 20
+          },
+          "interiorRgbSha256": "f1e918a7e98b5765895fe331b5a6ae48d77eaf2caa994cf6b5164796777ac8e1",
+          "glyph": {
+            "x": 25,
+            "y": 45,
+            "width": 20,
+            "height": 13
+          },
+          "glyphRgbSha256": "00dec60ed309bba30622a8340c4e6580e1e06ee30ff2e314a6021efa25fc338b"
+        },
+        {
+          "caption": "MM",
+          "x": 66,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 69,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+          "glyph": {
+            "x": 80,
+            "y": 44,
+            "width": 22,
+            "height": 15
+          },
+          "glyphRgbSha256": "4be983a47cbf846c7103ba01dbd90efe87e2957196e166d4a34e9a4e44bc024e"
+        },
+        {
+          "caption": "First command",
+          "x": 125,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 128,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0",
+          "glyph": {
+            "x": 139,
+            "y": 44,
+            "width": 87,
+            "height": 15
+          },
+          "glyphRgbSha256": "8085025331c648ed557364610d5bad8a8949485ce9ded7210bd60cda205336f9"
+        }
+      ]
+    },
+    {
+      "name": "LargeTextFont",
+      "file": "LargeTextFont.xml",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        293,
+        86
+      ],
+      "nativeScreenshotSha256": "0926f3683a28604a697a99470f2a0804bffb227ca882ef2a6242f2e99629f723",
+      "buttons": [
+        {
+          "caption": "WW",
+          "x": 13,
+          "y": 39,
+          "width": 76,
+          "height": 33,
+          "points": 14,
+          "weight": "regular",
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 70,
+            "height": 27
+          },
+          "interiorRgbSha256": "33bcad63f8940aae0601141cd80e55af21688c3899ab114735e4908a7b0f20b4",
+          "glyph": {
+            "x": 33,
+            "y": 44,
+            "width": 36,
+            "height": 23
+          },
+          "glyphRgbSha256": "0febf60c2c4d67dec82775db96066deef58f595abffcea07eff9ea69f5f588eb"
+        },
+        {
+          "caption": "MM",
+          "x": 98,
+          "y": 39,
+          "width": 50,
+          "height": 33,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 101,
+            "y": 42,
+            "width": 44,
+            "height": 27
+          },
+          "interiorRgbSha256": "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085",
+          "glyph": {
+            "x": 112,
+            "y": 48,
+            "width": 22,
+            "height": 15
+          },
+          "glyphRgbSha256": "a520f83c76132190f6cce7975b56775141b0563a16e9740d4a8d9dedebde6ecc"
+        },
+        {
+          "caption": "First command",
+          "x": 157,
+          "y": 39,
+          "width": 115,
+          "height": 33,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 160,
+            "y": 42,
+            "width": 109,
+            "height": 27
+          },
+          "interiorRgbSha256": "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c",
+          "glyph": {
+            "x": 171,
+            "y": 48,
+            "width": 87,
+            "height": 15
+          },
+          "glyphRgbSha256": "7c11805cc94f2c6990812e87dad274316df54817d2ff7de86898ec9c4376e1da"
+        }
+      ]
+    },
+    {
+      "name": "ExtraLargeTextFont",
+      "file": "ExtraLargeTextFont.xml",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        313,
+        95
+      ],
+      "nativeScreenshotSha256": "fac96a7ddc979eb2052127d0e110c4f18ba361521b8b5d67722ecc27caca2330",
+      "buttons": [
+        {
+          "caption": "WW",
+          "x": 13,
+          "y": 39,
+          "width": 96,
+          "height": 42,
+          "points": 18,
+          "weight": "regular",
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 90,
+            "height": 36
+          },
+          "interiorRgbSha256": "426ccb127824bc3746f478233f80b27cc188eaa4c6b55a816f4bca74b1e90e2e",
+          "glyph": {
+            "x": 38,
+            "y": 46,
+            "width": 46,
+            "height": 28
+          },
+          "glyphRgbSha256": "e91700cde835e15a9fe88d818f4a2da5db080f5da9b6cf1b2ed14900253a0fe5"
+        },
+        {
+          "caption": "MM",
+          "x": 118,
+          "y": 39,
+          "width": 50,
+          "height": 42,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 121,
+            "y": 42,
+            "width": 44,
+            "height": 36
+          },
+          "interiorRgbSha256": "7525a8a647c5a8bbd8851f6deeec9e5e6ce0a28a836607b680e16b3190de8b35",
+          "glyph": {
+            "x": 132,
+            "y": 52,
+            "width": 22,
+            "height": 15
+          },
+          "glyphRgbSha256": "bbdf2b3f622f133942198a8554c5a47c6e94673a7c6ecaa25e80357f48972d01"
+        },
+        {
+          "caption": "First command",
+          "x": 177,
+          "y": 39,
+          "width": 115,
+          "height": 42,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 180,
+            "y": 42,
+            "width": 109,
+            "height": 36
+          },
+          "interiorRgbSha256": "84b6bf2fa010837252da5244b6ded5759cbd8bb628284adde5aed3467b342df1",
+          "glyph": {
+            "x": 191,
+            "y": 52,
+            "width": 87,
+            "height": 15
+          },
+          "glyphRgbSha256": "3a495e6238c0ac6ef50ccbf0bd3ebfeed5cab2e74443b53db00c03e49cf0abed"
+        }
+      ]
+    },
+    {
+      "name": "TextFont",
+      "file": "TextFont.xml",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        261,
+        79
+      ],
+      "nativeScreenshotSha256": "e97c32faf87c584fca193c50764faad9b0409c4f766b4ae4a65dec6ff005d4f2",
+      "buttons": [
+        {
+          "caption": "WW",
+          "x": 13,
+          "y": 39,
+          "width": 44,
+          "height": 26,
+          "points": 8,
+          "weight": "regular",
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 38,
+            "height": 20
+          },
+          "interiorRgbSha256": "f1e918a7e98b5765895fe331b5a6ae48d77eaf2caa994cf6b5164796777ac8e1",
+          "glyph": {
+            "x": 25,
+            "y": 45,
+            "width": 20,
+            "height": 13
+          },
+          "glyphRgbSha256": "00dec60ed309bba30622a8340c4e6580e1e06ee30ff2e314a6021efa25fc338b"
+        },
+        {
+          "caption": "MM",
+          "x": 66,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 69,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+          "glyph": {
+            "x": 80,
+            "y": 44,
+            "width": 22,
+            "height": 15
+          },
+          "glyphRgbSha256": "4be983a47cbf846c7103ba01dbd90efe87e2957196e166d4a34e9a4e44bc024e"
+        },
+        {
+          "caption": "First command",
+          "x": 125,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 128,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0",
+          "glyph": {
+            "x": 139,
+            "y": 44,
+            "width": 87,
+            "height": 15
+          },
+          "glyphRgbSha256": "8085025331c648ed557364610d5bad8a8949485ce9ded7210bd60cda205336f9"
+        }
+      ]
+    },
+    {
+      "name": "AliasTitle",
+      "file": "AliasTitle.xml",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        313,
+        95
+      ],
+      "nativeScreenshotSha256": "fe37dcd6e255759863ed4025667af3616f5369bdc1cb8bcfc7994776c962a791",
+      "buttons": [
+        {
+          "caption": "WW",
+          "x": 13,
+          "y": 39,
+          "width": 96,
+          "height": 42,
+          "points": 18,
+          "weight": "bold",
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 90,
+            "height": 36
+          },
+          "interiorRgbSha256": "d2ed18e57a076262ee3400ea724e2c4cfa562951d245697b3cd579b172aeb652",
+          "glyph": {
+            "x": 38,
+            "y": 46,
+            "width": 46,
+            "height": 28
+          },
+          "glyphRgbSha256": "ea9b61eb122e75828e3f2160b54d7b00291fcd48bdf2488a27095f0ac14c789f"
+        },
+        {
+          "caption": "MM",
+          "x": 118,
+          "y": 39,
+          "width": 50,
+          "height": 42,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 121,
+            "y": 42,
+            "width": 44,
+            "height": 36
+          },
+          "interiorRgbSha256": "7525a8a647c5a8bbd8851f6deeec9e5e6ce0a28a836607b680e16b3190de8b35",
+          "glyph": {
+            "x": 132,
+            "y": 52,
+            "width": 22,
+            "height": 15
+          },
+          "glyphRgbSha256": "bbdf2b3f622f133942198a8554c5a47c6e94673a7c6ecaa25e80357f48972d01"
+        },
+        {
+          "caption": "First command",
+          "x": 177,
+          "y": 39,
+          "width": 115,
+          "height": 42,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 180,
+            "y": 42,
+            "width": 109,
+            "height": 36
+          },
+          "interiorRgbSha256": "84b6bf2fa010837252da5244b6ded5759cbd8bb628284adde5aed3467b342df1",
+          "glyph": {
+            "x": 191,
+            "y": 52,
+            "width": 87,
+            "height": 15
+          },
+          "glyphRgbSha256": "3a495e6238c0ac6ef50ccbf0bd3ebfeed5cab2e74443b53db00c03e49cf0abed"
+        }
+      ]
+    },
+    {
+      "name": "AliasTitlePartial",
+      "file": "AliasTitlePartial.xml",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "1331aa75e7fb1d754505623d5ec17a350bb40892ec7b703101235de9b596f592",
+      "buttons": [
+        {
+          "caption": "WW",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "points": 10,
+          "weight": "bold",
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "f48dd3e5260714785e29e161e0bec980524f288634e57135c8e061afcc543f29",
+          "glyph": {
+            "x": 27,
+            "y": 44,
+            "width": 24,
+            "height": 15
+          },
+          "glyphRgbSha256": "ba29619ce252960c33cefd412ae40fe791769e3aedfb3a821e8324eb77daf1b2"
+        },
+        {
+          "caption": "MM",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+          "glyph": {
+            "x": 88,
+            "y": 44,
+            "width": 22,
+            "height": 15
+          },
+          "glyphRgbSha256": "4be983a47cbf846c7103ba01dbd90efe87e2957196e166d4a34e9a4e44bc024e"
+        },
+        {
+          "caption": "First command",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "points": 10,
+          "weight": "regular",
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0",
+          "glyph": {
+            "x": 147,
+            "y": 44,
+            "width": 87,
+            "height": 15
+          },
+          "glyphRgbSha256": "8085025331c648ed557364610d5bad8a8949485ce9ded7210bd60cda205336f9"
+        }
+      ]
+    }
+  ]
+}

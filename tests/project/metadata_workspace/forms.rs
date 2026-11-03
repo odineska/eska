@@ -858,6 +858,109 @@ fn style_item_named_like_internal_profile_color_loads_and_tracks_dirty_selected_
 }
 
 #[test]
+fn named_title_font_tracks_dirty_style_and_definition_without_changing_element_identity() {
+    use crate::backend::project::forms::ElementKey;
+    let directory = TestDir::new();
+    fixture(&directory.0, "configuration");
+    write_native_style(&directory.0);
+    let fixtures =
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/forms/native-font-roles");
+    let root = directory.0.join("src");
+    let definition = fs::read_to_string(fixtures.join("TitleFont.xml")).unwrap();
+    fs::write(root.join("StyleItems/TitleFont.xml"), &definition).unwrap();
+    fs::copy(fixtures.join("AliasTitle.xml"), root.join(PATH)).unwrap();
+    let body = fs::read_to_string(fixtures.join("Style.xml")).unwrap();
+    fs::write(root.join("Styles/ProbeStyleValues/Ext/Style.xml"), &body).unwrap();
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let before = bytes(&directory.0);
+    let preview = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    let index = preview
+        .presentation
+        .elements
+        .iter()
+        .position(|value| value.identity.key == ElementKey::Xml(10))
+        .unwrap();
+    assert_eq!(preview.presentation.elements[index].font.points, 18.0);
+    assert_eq!(preview.presentation.elements[index].font.weight, 700);
+    let dependency = |path: &str| {
+        preview
+            .dependencies
+            .iter()
+            .find(|value| value.path == Path::new(path))
+            .unwrap()
+            .id
+            .clone()
+    };
+    let style_source = dependency("Styles/ProbeStyleValues/Ext/Style.xml");
+    let definition_source = dependency("StyleItems/TitleFont.xml");
+    let start = body.find("<Item name=\"StyleItem.TitleFont\">").unwrap();
+    let end = start + body[start..].find("</Item>").unwrap() + "</Item>".len();
+    let fallback = format!("{}{}", &body[..start], &body[end..]);
+    for (version, style_text, definition_text, points) in [
+        (
+            "94",
+            body.replace("height=\"18\"", "height=\"16\""),
+            definition.clone(),
+            16.0,
+        ),
+        ("95", fallback.clone(), definition.clone(), 12.0),
+        (
+            "96",
+            fallback,
+            definition.replace("height=\"12\"", "height=\"14\""),
+            14.0,
+        ),
+        ("97", body.clone(), definition.clone(), 18.0),
+    ] {
+        let changed = project
+            .form_preview(
+                &node,
+                None,
+                &[
+                    FormOverlay {
+                        source: style_source.clone(),
+                        version: version.into(),
+                        text: style_text,
+                    },
+                    FormOverlay {
+                        source: definition_source.clone(),
+                        version: version.into(),
+                        text: definition_text,
+                    },
+                ],
+                &preview.dependencies,
+                Vec::new(),
+                None,
+            )
+            .unwrap();
+        let element = &changed.presentation.elements[index];
+        assert_eq!(
+            element.identity,
+            preview.presentation.elements[index].identity
+        );
+        assert_eq!(element.font.points, points);
+        assert_eq!(element.font.weight, 700);
+        let expected_source = if version == "95" || version == "96" {
+            &definition_source
+        } else {
+            &style_source
+        };
+        assert!(
+            element
+                .font
+                .origins
+                .iter()
+                .any(|origin| &origin.source == expected_source)
+        );
+    }
+    assert_eq!(bytes(&directory.0), before);
+}
+
+#[test]
 fn style_payload_discovers_its_own_references_and_missing_payload_keeps_defaults() {
     use crate::backend::project::forms::ResolvedColor;
     let directory = TestDir::new();

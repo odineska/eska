@@ -427,3 +427,123 @@ fn native_style_item_named_like_internal_text_color_uses_its_definition_and_sele
             .any(|diagnostic| diagnostic.code == "style_missing")
     );
 }
+
+#[test]
+fn predefined_font_names_match_single_property_native_exports() {
+    let validation: serde_json::Value = serde_json::from_str(include_str!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../../tests/fixtures/forms/native-font-roles/validation.json"
+    )))
+    .unwrap();
+    let rows = validation["rows"].as_array().unwrap();
+    assert_eq!(rows.len(), 18);
+    let mut styles = 0;
+    for row in rows {
+        if let Some(name) = row["styleName"].as_str() {
+            styles += 1;
+            assert_eq!(
+                predefined_font(name).is_some(),
+                row["predefined"].as_bool().unwrap(),
+                "{name}"
+            );
+        }
+    }
+    assert_eq!(styles, 12);
+}
+
+#[test]
+fn explicit_native_fonts_keep_their_metrics_without_changing_automatic_taxi_fonts() {
+    let overrides = include_str!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../../tests/fixtures/forms/native-font-roles/StyleOverrides.xml"
+    ));
+    for resources in [Vec::new(), palette_resources(overrides)] {
+        let automatic = view("", &resources);
+        assert_eq!(automatic.elements[1].font.points, 10.0);
+        assert_eq!(automatic.elements[1].font.weight, 400);
+        for (name, points, weight) in [
+            ("NormalTextFont", 10.0, 400),
+            ("SmallTextFont", 8.0, 400),
+            ("LargeTextFont", 14.0, 400),
+            ("ExtraLargeTextFont", 18.0, 400),
+            ("TextFont", 8.0, 400),
+        ] {
+            let resolved = view(&format!("<Font ref=\"s:{name}\"/>"), &resources);
+            assert!(resolved.diagnostics.is_empty(), "{name}");
+            let font = &resolved.elements[1].font;
+            assert_eq!(font.points, points, "{name}");
+            assert_eq!(font.weight, weight, "{name}");
+            assert_eq!(font.origins.len(), 1);
+            assert_eq!(font.origins[0].source, "form");
+        }
+        let partial = view(
+            "<Font ref=\"s:LargeTextFont\" height=\"10\" bold=\"true\" italic=\"true\"/>",
+            &resources,
+        );
+        assert!(partial.diagnostics.is_empty());
+        assert_eq!(partial.elements[1].font.points, 10.0);
+        assert_eq!(partial.elements[1].font.weight, 700);
+        assert!(partial.elements[1].font.italic);
+    }
+}
+
+#[test]
+fn native_named_title_font_uses_selected_value_definition_and_partial_overrides() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-font-roles");
+    let text = std::fs::read_to_string(root.join("TitleFont.xml")).unwrap();
+    let document = roxmltree::Document::parse(&text).unwrap();
+    let definition = FormResource {
+        style: None,
+        picture: None,
+        retained_bytes: 0,
+        source: "title-font-definition".into(),
+        descriptor: metadata_parser::parse(&text, None, PropertiesMode::All).unwrap(),
+        references: references::collect(document.root_element()),
+    };
+    let default = view(
+        "<Font ref=\"s:TitleFont\"/>",
+        std::slice::from_ref(&definition),
+    );
+    assert!(default.diagnostics.is_empty());
+    assert_eq!(default.elements[1].font.points, 12.0);
+    assert_eq!(default.elements[1].font.weight, 700);
+    let mut resources =
+        palette_resources(&std::fs::read_to_string(root.join("Style.xml")).unwrap());
+    resources.push(definition);
+    for (body, points) in [
+        ("<Font ref=\"s:TitleFont\"/>", 18.0),
+        ("<Font ref=\"s:TitleFont\" height=\"10\"/>", 10.0),
+    ] {
+        let selected = view(body, &resources);
+        assert!(selected.diagnostics.is_empty());
+        let font = &selected.elements[1].font;
+        assert_eq!(font.points, points);
+        assert_eq!(font.weight, 700);
+        assert_eq!(
+            font.origins
+                .iter()
+                .map(|origin| origin.source.as_str())
+                .collect::<Vec<_>>(),
+            ["palette-data", "form"]
+        );
+    }
+    for name in [
+        "TitleFont",
+        "FormTitleFont",
+        "TooltipFont",
+        "ButtonFont",
+        "FieldFont",
+        "LabelFont",
+        "GroupFont",
+    ] {
+        let missing = view(&format!("<Font ref=\"s:{name}\"/>"), &[]);
+        assert!(
+            missing
+                .diagnostics
+                .iter()
+                .any(|diagnostic| diagnostic.code == "style_missing"),
+            "{name}"
+        );
+    }
+}

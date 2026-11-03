@@ -1,0 +1,196 @@
+{
+  "platform": "8.3.27.2342",
+  "rows": [
+    {
+      "name": "SingleFontStyleNormalTextFont",
+      "input": "<Font ref=\"style:NormalTextFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "style:NormalTextFont",
+        "kind": "StyleItem"
+      },
+      "styleName": "NormalTextFont",
+      "predefined": true
+    },
+    {
+      "name": "SingleFontStyleSmallTextFont",
+      "input": "<Font ref=\"style:SmallTextFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "style:SmallTextFont",
+        "kind": "StyleItem"
+      },
+      "styleName": "SmallTextFont",
+      "predefined": true
+    },
+    {
+      "name": "SingleFontStyleLargeTextFont",
+      "input": "<Font ref=\"style:LargeTextFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "style:LargeTextFont",
+        "kind": "StyleItem"
+      },
+      "styleName": "LargeTextFont",
+      "predefined": true
+    },
+    {
+      "name": "SingleFontStyleExtraLargeTextFont",
+      "input": "<Font ref=\"style:ExtraLargeTextFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "style:ExtraLargeTextFont",
+        "kind": "StyleItem"
+      },
+      "styleName": "ExtraLargeTextFont",
+      "predefined": true
+    },
+    {
+      "name": "SingleFontStyleTitleFont",
+      "input": "<Font ref=\"style:TitleFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "0",
+        "kind": "StyleItem"
+      },
+      "styleName": "TitleFont",
+      "predefined": false
+    },
+    {
+      "name": "SingleFontStyleFormTitleFont",
+      "input": "<Font ref=\"style:FormTitleFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "0",
+        "kind": "StyleItem"
+      },
+      "styleName": "FormTitleFont",
+      "predefined": false
+    },
+    {
+      "name": "SingleFontStyleTooltipFont",
+      "input": "<Font ref=\"style:TooltipFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "0",
+        "kind": "StyleItem"
+      },
+      "styleName": "TooltipFont",
+      "predefined": false
+    },
+    {
+      "name": "SingleFontStyleTextFont",
+      "input": "<Font ref=\"style:TextFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "style:TextFont",
+        "kind": "StyleItem"
+      },
+      "styleName": "TextFont",
+      "predefined": true
+    },
+    {
+      "name": "SingleFontStyleButtonFont",
+      "input": "<Font ref=\"style:ButtonFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "0",
+        "kind": "StyleItem"
+      },
+      "styleName": "ButtonFont",
+      "predefined": false
+    },
+    {
+      "name": "SingleFontStyleFieldFont",
+      "input": "<Font ref=\"style:FieldFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "0",
+        "kind": "StyleItem"
+      },
+      "styleName": "FieldFont",
+      "predefined": false
+    },
+    {
+      "name": "SingleFontStyleLabelFont",
+      "input": "<Font ref=\"style:LabelFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "0",
+        "kind": "StyleItem"
+      },
+      "styleName": "LabelFont",
+      "predefined": false
+    },
+    {
+      "name": "SingleFontStyleGroupFont",
+      "input": "<Font ref=\"style:GroupFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "0",
+        "kind": "StyleItem"
+      },
+      "styleName": "GroupFont",
+      "predefined": false
+    },
+    {
+      "name": "SingleFontSysDefaultGUIFont",
+      "input": "<Font ref=\"sys:DefaultGUIFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "sys:DefaultGUIFont",
+        "kind": "WindowsFont"
+      }
+    },
+    {
+      "name": "SingleFontSysDefaultFont",
+      "input": "<Font ref=\"sys:DefaultFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "sys:DefaultGUIFont",
+        "kind": "WindowsFont"
+      }
+    },
+    {
+      "name": "SingleFontSysCaptionFont",
+      "input": "<Font ref=\"sys:CaptionFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "sys:DefaultGUIFont",
+        "kind": "WindowsFont"
+      }
+    },
+    {
+      "name": "SingleFontSysTooltipFont",
+      "input": "<Font ref=\"sys:TooltipFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "sys:DefaultGUIFont",
+        "kind": "WindowsFont"
+      }
+    },
+    {
+      "name": "SingleFontSysUnknownFont",
+      "input": "<Font ref=\"sys:UnknownFont\"/>",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "sys:DefaultGUIFont",
+        "kind": "WindowsFont"
+      }
+    },
+    {
+      "name": "SingleFontOmitted",
+      "input": "",
+      "importExitCode": 0,
+      "canonicalFont": {
+        "ref": "sys:DefaultGUIFont",
+        "height": "10",
+        "bold": "false",
+        "italic": "false",
+        "underline": "false",
+        "strikeout": "false",
+        "kind": "WindowsFont"
+      }
+    }
+  ]
+}

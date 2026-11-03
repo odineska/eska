@@ -88,7 +88,7 @@ impl<'a> Appearance<'a> {
 
     pub fn font(&mut self, property: Option<&SourcedProperty>, role: &str) -> ResolvedFont {
         let mut visited = Vec::new();
-        let mut result = Self::font_role(role);
+        let mut result = Self::automatic_font(role);
         if let Some(property) = property {
             result = self.resolve_font(property, result, &mut visited);
         }
@@ -117,7 +117,7 @@ impl<'a> Appearance<'a> {
         }
         ResolvedColor::Role(role.into())
     }
-    fn font_role(role: &str) -> ResolvedFont {
+    fn automatic_font(role: &str) -> ResolvedFont {
         let points = match role {
             "SmallTextFont" => 8.0,
             "LargeTextFont" | "TitleFont" | "FormTitleFont" => 12.0,
@@ -238,11 +238,12 @@ impl<'a> Appearance<'a> {
             }
             visited.push(target.clone());
             match target.namespace.as_deref() {
-                Some(references::STYLE) if font_role(&target.name) => {
-                    result = Self::font_role(&target.name);
-                }
-                Some(references::CONFIG | references::STYLE) => {
-                    if let Some(value) = self.item(&target) {
+                Some(namespace @ (references::CONFIG | references::STYLE)) => {
+                    if namespace == references::STYLE
+                        && let Some(font) = predefined_font(&target.name)
+                    {
+                        result = font;
+                    } else if let Some(value) = self.item(&target) {
                         result = self.resolve_font(&value, result, visited);
                     } else {
                         self.problem("style_missing", property, Some(target));
@@ -377,22 +378,20 @@ pub(super) fn qualifier<'a>(property: &'a MetadataProperty, name: &str) -> Optio
         .find(|(key, _)| key.namespace.is_none() && key.name == name)
         .map(|(_, value)| value.as_str())
 }
-fn font_role(name: &str) -> bool {
-    matches!(
-        name,
-        "NormalTextFont"
-            | "SmallTextFont"
-            | "LargeTextFont"
-            | "ExtraLargeTextFont"
-            | "TitleFont"
-            | "FormTitleFont"
-            | "TooltipFont"
-            | "TextFont"
-            | "ButtonFont"
-            | "FieldFont"
-            | "LabelFont"
-            | "GroupFont"
-    )
+fn predefined_font(name: &str) -> Option<ResolvedFont> {
+    // Explicit style references have different metrics from automatic Taxi fonts.
+    let (points, weight) = match name {
+        "NormalTextFont" => (10.0, 400),
+        "SmallTextFont" | "TextFont" => (8.0, 400),
+        "LargeTextFont" => (14.0, 400),
+        "ExtraLargeTextFont" => (18.0, 400),
+        _ => return None,
+    };
+    Some(ResolvedFont {
+        points,
+        weight,
+        ..ResolvedFont::default()
+    })
 }
 fn predefined_color_role(name: &str) -> bool {
     modern_color_role(name)
