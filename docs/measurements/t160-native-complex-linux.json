@@ -97,7 +97,8 @@
     "metadataTable": "520x227; LineNumberLength9, unlimited string/number types, four columns; empty mark from metadata.",
     "dynamicList": "418x452; Create/Copy, search/dropdown, filter chips, no vertical gutter in empty body, paging strip.",
     "providedTotalsCorrection": "The totals strip of the provided invoice is a separate UsualGroup/LabelFields; it is not ViewStatusAddition.",
-    "additionIsolation": "ViewStatusLocation None removes table chips. SearchControlLocation None leaves them. Visible false on the PDF ViewStatusAddition removes its chips. The earlier assumption that table chips were SearchControlAddition was incorrect."
+    "additionIsolation": "ViewStatusLocation None removes table chips. SearchControlLocation None leaves them. Visible false on the PDF ViewStatusAddition removes its chips. The earlier assumption that table chips were SearchControlAddition was incorrect.",
+    "complexChartSamplesRepeat": "Dendrogram and Gantt surfaces were pixel-identical on a second open without XML/BSL changes. Their sample values are not treated as random."
   },
   "remaining": [
     "Implement and accept Solid design-time samples against these native fixtures.",
@@ -107,6 +108,166 @@
     "corePresentationTests": 11,
     "coreClippyAllTargetsAllFeatures": true,
     "cargoFmtCheck": true,
-    "projectBuild": true
+    "projectBuild": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeatures": true,
+    "cargoTest": {
+      "passed": 1464,
+      "ignored": 19,
+      "suites": 42
+    },
+    "extensionTypecheck": true,
+    "extensionCompile": true,
+    "extensionNodeTests": {
+      "passed": 451,
+      "skipped": 11
+    }
+  },
+  "installedTableGallery": {
+    "version": "VS Code1.109.0 ARM64",
+    "runs": {
+      "ru": {
+        "passed": true,
+        "cases": 13,
+        "contextCases": [
+          {
+            "kind": "MetadataTable",
+            "control": [
+              520,
+              227
+            ],
+            "columnWidths": [
+              97,
+              177,
+              176,
+              54
+            ],
+            "chips": true,
+            "mark": true,
+            "gutter": true,
+            "paging": 0
+          },
+          {
+            "kind": "DynamicList",
+            "control": [
+              418,
+              452
+            ],
+            "columnWidths": [
+              108,
+              308
+            ],
+            "chips": true,
+            "mark": false,
+            "gutter": false,
+            "paging": 4
+          },
+          {
+            "kind": "NoViewStatus",
+            "control": [
+              415,
+              227
+            ],
+            "columnWidths": [
+              216,
+              129,
+              54
+            ],
+            "chips": false,
+            "mark": false,
+            "gutter": true,
+            "paging": 0
+          },
+          {
+            "kind": "NoSearchControl",
+            "control": [
+              415,
+              227
+            ],
+            "columnWidths": [
+              216,
+              129,
+              54
+            ],
+            "chips": true,
+            "mark": false,
+            "gutter": true,
+            "paging": 0
+          }
+        ]
+      },
+      "en": {
+        "passed": true,
+        "cases": 13,
+        "contextCases": [
+          {
+            "kind": "MetadataTable",
+            "control": [
+              520,
+              227
+            ],
+            "columnWidths": [
+              97,
+              177,
+              176,
+              54
+            ],
+            "chips": true,
+            "mark": true,
+            "gutter": true,
+            "paging": 0
+          },
+          {
+            "kind": "DynamicList",
+            "control": [
+              418,
+              452
+            ],
+            "columnWidths": [
+              108,
+              308
+            ],
+            "chips": true,
+            "mark": false,
+            "gutter": false,
+            "paging": 4
+          },
+          {
+            "kind": "NoViewStatus",
+            "control": [
+              415,
+              227
+            ],
+            "columnWidths": [
+              216,
+              129,
+              54
+            ],
+            "chips": false,
+            "mark": false,
+            "gutter": true,
+            "paging": 0
+          },
+          {
+            "kind": "NoSearchControl",
+            "control": [
+              415,
+              227
+            ],
+            "columnWidths": [
+              216,
+              129,
+              54
+            ],
+            "chips": true,
+            "mark": false,
+            "gutter": true,
+            "paging": 0
+          }
+        ]
+      }
+    },
+    "sourceWritesDuringViewing": false,
+    "fullPixelParityVerified": false
   }
 }
