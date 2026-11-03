@@ -1,0 +1,474 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 container)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.38",
+  "reference": "Configurator design-time form preview; own fixtures use the same English captions for ru/en",
+  "visualParityVerified": false,
+  "nativeImportExitCode": 0,
+  "nativeExportExitCode": 0,
+  "enumeration": {
+    "type": "FormPagesRepresentation",
+    "values": [
+      "Auto",
+      "TabsOnTop",
+      "TabsOnLeftHorizontal",
+      "TabsOnBottom",
+      "TabsOnRightHorizontal",
+      "None",
+      "Swipe"
+    ],
+    "helpArchiveSha256": "f8e853952e63c447e17e53c39a57f9690769a67198a888185bd7f0230f96e14b",
+    "helpMember": "objects/catalog2/catalog277/FormPagesRepresentation.html",
+    "autoOmittedOnExport": true,
+    "swipeDesignPreview": "Tabs on top"
+  },
+  "fixtures": [
+    {
+      "file": "tests/fixtures/forms/native-groups/PagesAuto.xml",
+      "nativeExportSha256": "dc7ca85ea259955c161f4e13557223d0563ed751d1c8d320afb358fef1eb111b",
+      "normalizedSha256": "e92790ab23e1cbe1412925f713bc27da6661bbc4154340da9dcd301643aaf289"
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/PagesLeft.xml",
+      "nativeExportSha256": "9112522918843ae7ca6787bcf9de91ba123a0ac7a8367363234976c6a18cdbda",
+      "normalizedSha256": "ac56bf5b5de3183ac60a73db83009dc98b91c2042ae52be45ef2b4d08bcc50b6"
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/PagesRight.xml",
+      "nativeExportSha256": "f499d7fffa0e81c77f0d4cd81077302e4d3bdb643a70e0a38ce29a63403b71b5",
+      "normalizedSha256": "3b44450ee494e28baa1050d222e806d0a8b2a058c86415b67d10bbb3f2b60cf9"
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/PagesSwipe.xml",
+      "nativeExportSha256": "1b8f4e163df529b6b77d7aa770b2ffa65ea7e87083d0fc675c646608d08823b6",
+      "normalizedSha256": "a172dd1658b37a8d9cfd36ccef7d4c614c3d8d5dc67f19fd38ceee52bb6c3bcb"
+    }
+  ],
+  "nativeRepeat": {
+    "auto": {
+      "nativeFormPixels": [
+        271,
+        152
+      ],
+      "repeatPixelsCompared": 42900,
+      "repeatEqualRgb": 42900,
+      "firstRuEnEqualRgb": 42900,
+      "firstRuEnPixelsCompared": 42900,
+      "secondRuEnEqualRgb": 42900,
+      "secondRuEnPixelsCompared": 42900
+    },
+    "left": {
+      "nativeFormPixels": [
+        362,
+        127
+      ],
+      "repeatPixelsCompared": 47946,
+      "repeatEqualRgb": 47946,
+      "firstRuEnEqualRgb": 47946,
+      "firstRuEnPixelsCompared": 47946,
+      "secondRuEnEqualRgb": 47946,
+      "secondRuEnPixelsCompared": 47946
+    },
+    "right": {
+      "nativeFormPixels": [
+        362,
+        127
+      ],
+      "repeatPixelsCompared": 47946,
+      "repeatEqualRgb": 47946,
+      "firstRuEnEqualRgb": 47946,
+      "firstRuEnPixelsCompared": 47946,
+      "secondRuEnEqualRgb": 47946,
+      "secondRuEnPixelsCompared": 47946
+    },
+    "swipe": {
+      "nativeFormPixels": [
+        271,
+        152
+      ],
+      "repeatPixelsCompared": 42900,
+      "repeatEqualRgb": 42900,
+      "firstRuEnEqualRgb": 42900,
+      "firstRuEnPixelsCompared": 42900,
+      "secondRuEnEqualRgb": 42900,
+      "secondRuEnPixelsCompared": 42900
+    }
+  },
+  "implementation": {
+    "validSideXmlNames": true,
+    "captionsDoNotWrap": true,
+    "allocationIncludesAllVisiblePages": true,
+    "inactivePanels": "Retained for layout, invisible and inert; visibility inherits through nested pages",
+    "selection": "Ancestor pages are opened by identity in both consumers; unrelated page groups keep their state",
+    "percentMinWidth": "Percentage minima do not become literal pixel constraints during caption measurement",
+    "styleScope": "Representation rules affect the owning tab bar and panel stack; nested groups keep their own representation"
+  },
+  "nativeVsix": {
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "passed": true,
+    "caseCount": 22,
+    "pagesKeepAllocation": true,
+    "pageTreeSelectionDetached": true,
+    "dirtySelectedPageVisibility": true,
+    "sourceWritesDuringViewing": false,
+    "geometryToleranceCssPixels": 1,
+    "nestedPageIsolation": true
+  },
+  "regressions": {
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "previewDetachUndoRedoExternal": true,
+    "providedDtForms": 4,
+    "reloadAndNormalRestart": true
+  },
+  "wholeFormPixelMethod": {
+    "region": "Union of native and ceil(browser) form bounds, plus four pixels for the right and bottom shadow",
+    "nativeOrigin": [
+      261,
+      240
+    ],
+    "browserWebviewOffset": [
+      348,
+      70
+    ],
+    "maskedPixels": 0,
+    "states": [
+      "selected first page",
+      "selected second page"
+    ],
+    "wholeFormAcceptance": false
+  },
+  "wholeFormComparisons": {
+    "ru": {
+      "PagesAuto-first": {
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          270.640625,
+          152
+        ],
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 29905,
+        "equalRgbRatio": 0.697086,
+        "maskedPixels": 0
+      },
+      "PagesAuto-second": {
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          270.640625,
+          152
+        ],
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 30381,
+        "equalRgbRatio": 0.708182,
+        "maskedPixels": 0
+      },
+      "PagesLeft-first": {
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          362.640625,
+          127
+        ],
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 32165,
+        "equalRgbRatio": 0.669031,
+        "maskedPixels": 0
+      },
+      "PagesLeft-second": {
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          362.640625,
+          127
+        ],
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 32790,
+        "equalRgbRatio": 0.682031,
+        "maskedPixels": 0
+      },
+      "PagesRight-first": {
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          362.640625,
+          127
+        ],
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 32126,
+        "equalRgbRatio": 0.66822,
+        "maskedPixels": 0
+      },
+      "PagesRight-second": {
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          362.640625,
+          127
+        ],
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 32756,
+        "equalRgbRatio": 0.681324,
+        "maskedPixels": 0
+      },
+      "PagesSwipe-first": {
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          270.640625,
+          152
+        ],
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 29905,
+        "equalRgbRatio": 0.697086,
+        "maskedPixels": 0
+      },
+      "PagesSwipe-second": {
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          270.640625,
+          152
+        ],
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 30381,
+        "equalRgbRatio": 0.708182,
+        "maskedPixels": 0
+      }
+    },
+    "en": {
+      "PagesAuto-first": {
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          270.640625,
+          152
+        ],
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 29905,
+        "equalRgbRatio": 0.697086,
+        "maskedPixels": 0
+      },
+      "PagesAuto-second": {
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          270.640625,
+          152
+        ],
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 30381,
+        "equalRgbRatio": 0.708182,
+        "maskedPixels": 0
+      },
+      "PagesLeft-first": {
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          362.640625,
+          127
+        ],
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 32165,
+        "equalRgbRatio": 0.669031,
+        "maskedPixels": 0
+      },
+      "PagesLeft-second": {
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          362.640625,
+          127
+        ],
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 32790,
+        "equalRgbRatio": 0.682031,
+        "maskedPixels": 0
+      },
+      "PagesRight-first": {
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          362.640625,
+          127
+        ],
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 32126,
+        "equalRgbRatio": 0.66822,
+        "maskedPixels": 0
+      },
+      "PagesRight-second": {
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          362.640625,
+          127
+        ],
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 32756,
+        "equalRgbRatio": 0.681324,
+        "maskedPixels": 0
+      },
+      "PagesSwipe-first": {
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          270.640625,
+          152
+        ],
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 29905,
+        "equalRgbRatio": 0.697086,
+        "maskedPixels": 0
+      },
+      "PagesSwipe-second": {
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          270.640625,
+          152
+        ],
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 30381,
+        "equalRgbRatio": 0.708182,
+        "maskedPixels": 0
+      }
+    }
+  },
+  "checks": {
+    "cargoFmtCheck": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeaturesDenyWarnings": true,
+    "cargoTest": {
+      "passed": 1474,
+      "failed": 0,
+      "ignored": 19,
+      "suites": 42
+    },
+    "nodeTest": {
+      "passed": 463,
+      "failed": 0,
+      "skipped": 11
+    },
+    "typecheck": true,
+    "compile": true,
+    "package": true
+  },
+  "testUpdates": [
+    "Count visible inputs rather than retained inactive-page nodes",
+    "Restoration checks the active tab panel",
+    "Application reports distinguish visible and retained elements",
+    "Nested-page visibility is checked after the actual shared selection acknowledgement"
+  ],
+  "remaining": [
+    "Full native equality of frame, title, text and selection; whole-form RGB ratios remain below one",
+    "Further nested-page, sizing, font and style combinations",
+    "Windows and physical monitor DPI acceptance",
+    "Other open T152–T165 work",
+    "Measure retained inactive-page DOM and layout costs in T164"
+  ]
+}
