@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "frameCornerPixelsVerified": true,
+  "backendFixtureCommit": "b25128202947643baedccc36e7bf11c699b0f8f0",
+  "backendRuntimeUnchangedSince": "498fad3",
+  "clientCommit": "4eb4d9d5ac8513a73097ad299748172a89acfec2",
+  "references": [
+    "tests/fixtures/forms/native-design-frame/README.md",
+    "tests/fixtures/forms/native-design-frame/corners.json"
+  ],
+  "implementation": [
+    "One measured top-left border cap and three fixed shadow end regions are anchored to the shared Linux form frame",
+    "Native corner values stay identical across twenty-four forms at 8–32pt; frame dimensions and content geometry are unchanged",
+    "Native test captures the full VS Code window, decodes its PNG in the isolated browser context and compares RGB pixels",
+    "The real selection component identifies frame origin without hardcoded workbench offsets; no additional dependencies or public wire changes"
+  ],
+  "comparison": {
+    "scope": "Twenty-six pixels in four frame/shadow regions per form across twenty-four forms and two locales",
+    "regions": 192,
+    "pixelsCompared": 1248,
+    "differentRgbPixels": 0,
+    "maskedPixels": 0,
+    "exclusions": []
+  },
+  "checks": {
+    "backendUnchanged": true,
+    "rustReference": "t155-native-font-roles-linux.json",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 484,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeVsix": {
+      "relevantSuitesPassed": 10,
+      "runs": [
+        {
+          "suite": "frame-corners",
+          "locale": "en",
+          "exit": 0,
+          "passed": true
+        },
+        {
+          "suite": "frame-corners",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 12.86,
+          "passed": true
+        },
+        {
+          "suite": "groups",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.75,
+          "passed": true
+        },
+        {
+          "suite": "groups",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.37,
+          "passed": true
+        },
+        {
+          "suite": "window-titles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 5.14,
+          "passed": true
+        },
+        {
+          "suite": "window-titles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 7.67,
+          "passed": true
+        },
+        {
+          "suite": "font-roles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.2,
+          "passed": true
+        },
+        {
+          "suite": "font-roles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.82,
+          "passed": true
+        },
+        {
+          "suite": "preview",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.13,
+          "passed": true
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.94,
+          "passed": true
+        }
+      ],
+      "cornerScenarios": {
+        "en": {
+          "passed": true,
+          "locale": "en",
+          "frameCornerPixels": true,
+          "compared": 624,
+          "differentRgbPixels": 0,
+          "maskedPixels": 0,
+          "sourceWritesDuringViewing": false,
+          "wholeFormVisualParity": false
+        },
+        "ru": {
+          "passed": true,
+          "locale": "ru",
+          "frameCornerPixels": true,
+          "compared": 624,
+          "differentRgbPixels": 0,
+          "maskedPixels": 0,
+          "sourceWritesDuringViewing": false,
+          "wholeFormVisualParity": false
+        }
+      },
+      "previousFull34Reference": "t155-native-font-roles-linux.json",
+      "sourceWritesDuringViewing": false
+    }
+  },
+  "wholeFormControl": {
+    "sourceFixture": "tests/fixtures/forms/native-groups/PagesAuto.xml",
+    "scope": "Whole form including four pixels of right and bottom shadow",
+    "differentRgbPixelsBeforePerLocale": 104,
+    "resultsAfter": [
+      {
+        "locale": "en",
+        "pixelsCompared": 42900,
+        "differentRgbPixels": 89,
+        "maskedPixels": 0
+      },
+      {
+        "locale": "ru",
+        "pixelsCompared": 42900,
+        "differentRgbPixels": 89,
+        "maskedPixels": 0
+      }
+    ],
+    "accepted": false
+  },
+  "remaining": [
+    "Input and tab corner rasterization in the full PagesAuto control",
+    "Other form contents, resources, complex surfaces, states and extension appearance matrices",
+    "Windows and physical DPI acceptance",
+    "Other open T152–T165 work"
+  ]
+}
