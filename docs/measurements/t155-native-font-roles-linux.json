@@ -1,0 +1,535 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "fontReferencesVerified": true,
+  "mixedFontButtonRowsVerified": true,
+  "backendCommit": "498fad3b29f055ca63b1d7ec3f58efe4eba56f6c",
+  "clientCommit": "4cd9007898738017d0519cd3f9b427b98d436cba",
+  "references": [
+    "tests/fixtures/forms/native-font-roles/manifest.json",
+    "tests/fixtures/forms/native-font-roles/validation.json",
+    "tests/fixtures/forms/native-font-roles/metrics.json"
+  ],
+  "nativeFindings": {
+    "independentSingleFontInputs": 18,
+    "predefinedStyleNames": 5,
+    "notPredefinedWithoutDefinition": 7,
+    "ordinaryFonts": {
+      "NormalTextFont": {
+        "points": 10,
+        "weight": 400
+      },
+      "SmallTextFont": {
+        "points": 8,
+        "weight": 400
+      },
+      "LargeTextFont": {
+        "points": 14,
+        "weight": 400
+      },
+      "ExtraLargeTextFont": {
+        "points": 18,
+        "weight": 400
+      },
+      "TextFont": {
+        "points": 8,
+        "weight": 400
+      }
+    },
+    "predefinedFontsIgnoreLegacyStyleOverrides": true,
+    "ordinaryAutomaticFontWithoutProperty": {
+      "points": 10,
+      "weight": 400
+    },
+    "namedTitleFont": {
+      "definitionPoints": 12,
+      "selectedPoints": 18,
+      "partialPoints": 10,
+      "weight": 700
+    },
+    "systemFontCandidatesNormalizedToDefaultGUIFont": 5,
+    "defaultButtonNormalTextFontShowsBold": "Separate default-button rule; not accepted by this ordinary-button gallery"
+  },
+  "implementation": [
+    "Automatic Taxi font defaults and explicit predefined style references are resolved separately",
+    "Only five native predefined Font names bypass StyleItem resolution; TitleFont and other aliases use metadata definitions and selected values",
+    "Partial font attributes, dependency identities and provenance remain in the existing Core model; no API or WASM change",
+    "Linux command buttons in one row share its tallest height; fill and caption observe actual control height and release observers on disposal",
+    "The ordinary Linux ButtonBackColor role uses native #ffffff; other OS profiles are unchanged"
+  ],
+  "comparison": {
+    "scope": "Seven forms and twenty-one ordinary button interiors per locale, including mixed 8–18pt rows",
+    "regions": 42,
+    "rows": [
+      {
+        "locale": "en",
+        "name": "NormalTextFont",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 3980,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "en",
+        "name": "SmallTextFont",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 3820,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "en",
+        "name": "LargeTextFont",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 6021,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "en",
+        "name": "ExtraLargeTextFont",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 8748,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "en",
+        "name": "TextFont",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 3820,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "en",
+        "name": "AliasTitle",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 8748,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "en",
+        "name": "AliasTitlePartial",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 3980,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "ru",
+        "name": "NormalTextFont",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 3980,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "ru",
+        "name": "SmallTextFont",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 3820,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "ru",
+        "name": "LargeTextFont",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 6021,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "ru",
+        "name": "ExtraLargeTextFont",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 8748,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "ru",
+        "name": "TextFont",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 3820,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "ru",
+        "name": "AliasTitle",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 8748,
+        "differentRgbPixels": 0
+      },
+      {
+        "locale": "ru",
+        "name": "AliasTitlePartial",
+        "origin": [
+          376,
+          347
+        ],
+        "compared": 3980,
+        "differentRgbPixels": 0
+      }
+    ],
+    "pixelsCompared": 78234,
+    "differentRgbPixels": 0,
+    "maskedPixels": 0,
+    "exclusions": []
+  },
+  "checks": {
+    "rust": {
+      "fmt": "passed",
+      "check": "passed",
+      "clippyAllTargetsAllFeatures": "passed",
+      "test": {
+        "passed": 1499,
+        "ignored": 19,
+        "failed": 0,
+        "suites": 42
+      },
+      "explicitProjectCliBuild": "passed"
+    },
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 484,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeVsix": {
+      "suitesPassed": 34,
+      "runs": [
+        {
+          "suite": "font-roles",
+          "locale": "en",
+          "exit": 0,
+          "passed": true
+        },
+        {
+          "suite": "font-roles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.89,
+          "passed": true
+        },
+        {
+          "suite": "states",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.6,
+          "passed": true
+        },
+        {
+          "suite": "states",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.44,
+          "passed": true
+        },
+        {
+          "suite": "groups",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.39,
+          "passed": true
+        },
+        {
+          "suite": "groups",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.74,
+          "passed": true
+        },
+        {
+          "suite": "window-titles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 5.28,
+          "passed": true
+        },
+        {
+          "suite": "window-titles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.07,
+          "passed": true
+        },
+        {
+          "suite": "tab-titles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.84,
+          "passed": true
+        },
+        {
+          "suite": "tab-titles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 15.4,
+          "passed": true
+        },
+        {
+          "suite": "renderer",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 9.8,
+          "passed": true
+        },
+        {
+          "suite": "renderer",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 12.66,
+          "passed": true
+        },
+        {
+          "suite": "palette",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 3.21,
+          "passed": true
+        },
+        {
+          "suite": "palette",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 5.95,
+          "passed": true
+        },
+        {
+          "suite": "tables",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.83,
+          "passed": true
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.47,
+          "passed": true
+        },
+        {
+          "suite": "application",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 3.74,
+          "passed": true
+        },
+        {
+          "suite": "application",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 6.47,
+          "passed": true
+        },
+        {
+          "suite": "button-metrics",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 7.8,
+          "passed": true
+        },
+        {
+          "suite": "button-metrics",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 10.45,
+          "passed": true
+        },
+        {
+          "suite": "button-captions",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 4.49,
+          "passed": true
+        },
+        {
+          "suite": "button-captions",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 7.19,
+          "passed": true
+        },
+        {
+          "suite": "preview",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.12,
+          "passed": true
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.99,
+          "passed": true
+        },
+        {
+          "suite": "style",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 3.83,
+          "passed": true
+        },
+        {
+          "suite": "style",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 6.56,
+          "passed": true
+        },
+        {
+          "suite": "style-palette",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 7.49,
+          "passed": true
+        },
+        {
+          "suite": "style-palette",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 10.14,
+          "passed": true
+        },
+        {
+          "suite": "button-colors",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.51,
+          "passed": true
+        },
+        {
+          "suite": "button-colors",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.46,
+          "passed": true
+        },
+        {
+          "suite": "style-color-roles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 4.1,
+          "passed": true
+        },
+        {
+          "suite": "style-color-roles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 6.81,
+          "passed": true
+        },
+        {
+          "suite": "primary-appearance",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 4.21,
+          "passed": true
+        },
+        {
+          "suite": "primary-appearance",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 6.96,
+          "passed": true
+        }
+      ],
+      "fontScenarios": {
+        "en": {
+          "passed": true,
+          "locale": "en",
+          "predefinedFonts": true,
+          "namedTitleFont": true,
+          "partialFontOverride": true,
+          "mixedFontRow": true,
+          "dirtySelectedFont": true,
+          "dirtyDefinition": true,
+          "detachedFontUpdates": true,
+          "sourceWritesDuringViewing": false,
+          "wholeFormVisualParity": false
+        },
+        "ru": {
+          "passed": true,
+          "locale": "ru",
+          "predefinedFonts": true,
+          "namedTitleFont": true,
+          "partialFontOverride": true,
+          "mixedFontRow": true,
+          "dirtySelectedFont": true,
+          "dirtyDefinition": true,
+          "detachedFontUpdates": true,
+          "sourceWritesDuringViewing": false,
+          "wholeFormVisualParity": false
+        }
+      },
+      "sourceWritesDuringViewing": false
+    }
+  },
+  "wholeFormControl": {
+    "sourceFixture": "tests/fixtures/forms/native-groups/PagesAuto.xml",
+    "comparisonScope": "Whole form including four pixels of right and bottom shadow",
+    "results": [
+      {
+        "locale": "en",
+        "pixelsCompared": 42900,
+        "differentRgbPixels": 104,
+        "maskedPixels": 0
+      },
+      {
+        "locale": "ru",
+        "pixelsCompared": 42900,
+        "differentRgbPixels": 104,
+        "maskedPixels": 0
+      }
+    ],
+    "accepted": false
+  },
+  "remaining": [
+    "Automatic primary palette, automatic ink and default-button font rules",
+    "Other fonts, shaping, styles, button borders, states and style consumers",
+    "Whole-form, complex-surface and native ordered extension matrices",
+    "Windows native font metrics and rendering; Core font values still require Windows confirmation",
+    "Physical monitor/DPI, remote-host and remaining T152–T165 acceptance"
+  ]
+}
