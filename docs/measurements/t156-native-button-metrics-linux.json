@@ -1,0 +1,353 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 reference container)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "clientCommit": "3e2c172d20d9407b9b21e19ecdb5bccb3e38fbf1",
+  "nativeLocale": "en",
+  "nativeImportExitCode": 0,
+  "nativeExportExitCode": 0,
+  "font": "Liberation Sans 2.1.5",
+  "dpi": 96,
+  "screenScale": 1,
+  "previewScale": 1,
+  "fixtures": "tests/fixtures/forms/native-button-metrics/metrics.json",
+  "fixtureForms": 16,
+  "captionStrings": [
+    "WW",
+    "MM",
+    "First command"
+  ],
+  "visualParityVerified": false,
+  "implementation": {
+    "pixelFont": "round(points * 4 / 3)",
+    "horizontalPadding": "pixelFont",
+    "verticalPadding": "round(pixelFont * 3 / 13)",
+    "lineHeight": "ceil(pixelFont * 1854 / 2048) + ceil(pixelFont * 434 / 2048)",
+    "minimumButtonHeight": 26,
+    "captionAdvances": "FreeType grid-fitted integer advances of bundled unmodified fonts",
+    "metricsFreeType": "2.13.2",
+    "metricsInterpreterVersion": 40,
+    "metricsLoadFlags": 0,
+    "metricsPixelRange": [
+      1,
+      128
+    ],
+    "metricsFontFiles": 12,
+    "metricsSha256": "f2359664019c75c1037f53c9b565bf3dca795f460b621c8ec6dea6c83abeb8f2",
+    "metricsGeneratorRepeatByteIdentical": true,
+    "runtimeFreeTypeDependency": false,
+    "rasterizationChanged": false
+  },
+  "nativeVsix": {
+    "ru": {
+      "passed": true,
+      "nativeFixtureForms": 16,
+      "nativeFixtureButtons": 48,
+      "geometryExactlyEqual": true,
+      "dirtyFontPoints": [
+        16,
+        20,
+        16
+      ],
+      "dirtyDomReused": true,
+      "sourceWritesDuringViewing": false
+    },
+    "en": {
+      "passed": true,
+      "nativeFixtureForms": 16,
+      "nativeFixtureButtons": 48,
+      "geometryExactlyEqual": true,
+      "dirtyFontPoints": [
+        16,
+        20,
+        16
+      ],
+      "dirtyDomReused": true,
+      "sourceWritesDuringViewing": false
+    }
+  },
+  "regressions": [
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 8.0
+    },
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.44
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.06
+    },
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.29
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.14
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 5.4
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.93
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.24
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.69
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 13.05
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.7
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.93
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.9
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.03
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.42
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.95
+    }
+  ],
+  "strictWholeFormRgbEn": {
+    "10Normal": {
+      "comparisonPixels": [
+        273,
+        83
+      ],
+      "equalRgbPixels": 20526,
+      "pixelsCompared": 22659,
+      "equalRgbRatio": 0.905865,
+      "maskedPixels": 0
+    },
+    "10Bold": {
+      "comparisonPixels": [
+        280,
+        83
+      ],
+      "equalRgbPixels": 20928,
+      "pixelsCompared": 23240,
+      "equalRgbRatio": 0.900516,
+      "maskedPixels": 0
+    },
+    "12Normal": {
+      "comparisonPixels": [
+        319,
+        86
+      ],
+      "equalRgbPixels": 24989,
+      "pixelsCompared": 27434,
+      "equalRgbRatio": 0.910877,
+      "maskedPixels": 0
+    },
+    "12Bold": {
+      "comparisonPixels": [
+        328,
+        86
+      ],
+      "equalRgbPixels": 25711,
+      "pixelsCompared": 28208,
+      "equalRgbRatio": 0.911479,
+      "maskedPixels": 0
+    },
+    "14Normal": {
+      "comparisonPixels": [
+        372,
+        90
+      ],
+      "equalRgbPixels": 30439,
+      "pixelsCompared": 33480,
+      "equalRgbRatio": 0.90917,
+      "maskedPixels": 0
+    },
+    "14Bold": {
+      "comparisonPixels": [
+        382,
+        90
+      ],
+      "equalRgbPixels": 31246,
+      "pixelsCompared": 34380,
+      "equalRgbRatio": 0.908842,
+      "maskedPixels": 0
+    },
+    "16Normal": {
+      "comparisonPixels": [
+        407,
+        94
+      ],
+      "equalRgbPixels": 34064,
+      "pixelsCompared": 38258,
+      "equalRgbRatio": 0.890376,
+      "maskedPixels": 0
+    },
+    "16Bold": {
+      "comparisonPixels": [
+        417,
+        94
+      ],
+      "equalRgbPixels": 35000,
+      "pixelsCompared": 39198,
+      "equalRgbRatio": 0.892903,
+      "maskedPixels": 0
+    },
+    "18Normal": {
+      "comparisonPixels": [
+        450,
+        99
+      ],
+      "equalRgbPixels": 38153,
+      "pixelsCompared": 44550,
+      "equalRgbRatio": 0.856409,
+      "maskedPixels": 0
+    },
+    "20Normal": {
+      "comparisonPixels": [
+        498,
+        102
+      ],
+      "equalRgbPixels": 45176,
+      "pixelsCompared": 50796,
+      "equalRgbRatio": 0.889361,
+      "maskedPixels": 0
+    },
+    "20Bold": {
+      "comparisonPixels": [
+        515,
+        102
+      ],
+      "equalRgbPixels": 46927,
+      "pixelsCompared": 52530,
+      "equalRgbRatio": 0.893337,
+      "maskedPixels": 0
+    },
+    "24Normal": {
+      "comparisonPixels": [
+        582,
+        109
+      ],
+      "equalRgbPixels": 57003,
+      "pixelsCompared": 63438,
+      "equalRgbRatio": 0.898562,
+      "maskedPixels": 0
+    },
+    "24Bold": {
+      "comparisonPixels": [
+        599,
+        109
+      ],
+      "equalRgbPixels": 59065,
+      "pixelsCompared": 65291,
+      "equalRgbRatio": 0.904642,
+      "maskedPixels": 0
+    },
+    "28Normal": {
+      "comparisonPixels": [
+        663,
+        119
+      ],
+      "equalRgbPixels": 71227,
+      "pixelsCompared": 78897,
+      "equalRgbRatio": 0.902785,
+      "maskedPixels": 0
+    },
+    "32Normal": {
+      "comparisonPixels": [
+        760,
+        128
+      ],
+      "equalRgbPixels": 86090,
+      "pixelsCompared": 97280,
+      "equalRgbRatio": 0.884971,
+      "maskedPixels": 0
+    },
+    "32Bold": {
+      "comparisonPixels": [
+        781,
+        128
+      ],
+      "equalRgbPixels": 89275,
+      "pixelsCompared": 99968,
+      "equalRgbRatio": 0.893036,
+      "maskedPixels": 0
+    }
+  },
+  "pixelComparison": "Complete form plus 4px shadow; no text, glyph-edge or background masks. Native origin (261,240), browser webview offset (348,70).",
+  "checks": {
+    "typecheck": "passed",
+    "compile": "passed",
+    "package": "passed",
+    "packagedOutFilesMatch": 58,
+    "packagedDocsMatch": true,
+    "node": {
+      "passed": 467,
+      "skipped": 11,
+      "failed": 0
+    },
+    "fixtureExportHashes": "passed; only BOM/EOL normalization",
+    "rust": "No Rust application changes in this part; preceding mandatory complete set passed: 1481 tests, 19 ignored, RUST_TEST_THREADS=1."
+  },
+  "remaining": [
+    "Full RGB parity including text and gradients",
+    "Other button representations, menus, dropdowns and explicit dimensions",
+    "Other font families and italic native geometry acceptance",
+    "Fallback measurements outside bundled metric coverage",
+    "Windows acceptance"
+  ]
+}
