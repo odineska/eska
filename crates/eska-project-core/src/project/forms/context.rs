@@ -8,9 +8,9 @@ use std::{
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 
-use super::{ComposedForm, FormDocument, FormParseError, compose, parse};
+use super::{ComposedForm, FormDocument, FormInput, FormParseError, compose, parse};
 use crate::{
-    application::{ContextSnapshot, SourceRole},
+    application::{ContextSnapshot, ContextSource, SourceRole},
     project::{
         designer_source::{self, SourceError},
         metadata_model::{ObjectId, ProjectScope},
@@ -87,13 +87,19 @@ pub fn load(
     owner: &ObjectId,
     overlays: &[FormOverlay],
     previous: &[FormDependency],
+    inputs: Vec<FormInput>,
 ) -> Result<FormPreview, FormContextError> {
-    let selected_source = context
-        .context
-        .sources()
-        .iter()
-        .find(|source| source.project().source() == selected)
-        .ok_or(FormContextError::MemberMismatch)?;
+    if !overlays.is_empty() && !inputs.is_empty() {
+        return Err(FormContextError::InvalidOverlay);
+    }
+    let (prepared, metadata) =
+        super::preparation::resolve_inputs(context, selected, owner, inputs)?;
+    let overlays = if prepared.is_empty() {
+        overlays
+    } else {
+        &prepared
+    };
+    let selected_source = context_source(context, selected)?;
     let external = selected_source.role() == SourceRole::ExternalObject;
     let mut dependencies = Vec::new();
     let mut documents = Vec::new();
@@ -168,7 +174,16 @@ pub fn load(
         &mut dependencies,
         overlays,
     )?;
-    validate_overlays(overlays, &dependencies, previous)?;
+    validate_overlays(overlays, &dependencies, previous, &metadata)?;
+    build_preview(context, dependencies, documents, resources)
+}
+
+fn build_preview(
+    context: &ContextSnapshot,
+    dependencies: Vec<FormDependency>,
+    documents: Vec<FormDocument>,
+    resources: Vec<super::FormResource>,
+) -> Result<FormPreview, FormContextError> {
     let (base, extensions) = documents
         .split_first()
         .ok_or(FormContextError::MissingForm)?;
@@ -186,8 +201,22 @@ pub fn load(
     })
 }
 
+pub(super) fn context_source<'a>(
+    context: &'a ContextSnapshot,
+    selected: &Path,
+) -> Result<&'a ContextSource, FormContextError> {
+    context
+        .context
+        .sources()
+        .iter()
+        .find(|source| source.project().source() == selected)
+        .ok_or(FormContextError::MemberMismatch)
+}
+
 pub(super) fn source_identity(context: &ContextSnapshot, root: &Path, path: &Path) -> String {
     let mut digest = Sha256::new();
+    // Native path separators can differ between a resolver and a supplied XML path.
+    let path: PathBuf = path.components().collect();
     for field in [
         context.context.root().as_os_str().as_encoded_bytes(),
         context
@@ -214,6 +243,7 @@ fn validate_overlays(
     overlays: &[FormOverlay],
     dependencies: &[FormDependency],
     previous: &[FormDependency],
+    prepared_metadata: &std::collections::HashSet<String>,
 ) -> Result<(), FormContextError> {
     for (index, overlay) in overlays.iter().enumerate() {
         let referenced = dependencies.iter().any(|dependency| {
@@ -222,7 +252,7 @@ fn validate_overlays(
         let retired_metadata = previous.iter().any(|dependency| {
             dependency.id == overlay.source && dependency.role == FormDependencyRole::Metadata
         });
-        if (!referenced && !retired_metadata)
+        if (!referenced && !retired_metadata && !prepared_metadata.contains(&overlay.source))
             || overlays[..index]
                 .iter()
                 .any(|before| before.source == overlay.source)
@@ -260,16 +290,31 @@ mod tests {
             FormDependencyRole::Picture,
         ] {
             assert_eq!(
-                validate_overlays(std::slice::from_ref(&overlay), &[], &[dependency(role)]).is_ok(),
+                validate_overlays(
+                    std::slice::from_ref(&overlay),
+                    &[],
+                    &[dependency(role)],
+                    &std::collections::HashSet::new()
+                )
+                .is_ok(),
                 role == FormDependencyRole::Metadata
             );
         }
-        assert!(validate_overlays(std::slice::from_ref(&overlay), &[], &[]).is_err());
+        assert!(
+            validate_overlays(
+                std::slice::from_ref(&overlay),
+                &[],
+                &[],
+                &std::collections::HashSet::new()
+            )
+            .is_err()
+        );
         assert!(
             validate_overlays(
                 &[overlay.clone(), overlay],
                 &[],
-                &[dependency(FormDependencyRole::Metadata)]
+                &[dependency(FormDependencyRole::Metadata)],
+                &std::collections::HashSet::new()
             )
             .is_err()
         );

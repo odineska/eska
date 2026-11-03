@@ -23,6 +23,12 @@ fn connect(client: &mut Client, root: &Path, locale: &str, minor: u32) -> (Value
         hello["capabilities"]["formPreview"].is_object(),
         minor >= 36
     );
+    if minor >= 36 {
+        assert_eq!(
+            hello["capabilities"]["formPreview"]["inputPreparation"],
+            minor >= 38
+        );
+    }
     let opened = client.request("workspace/open", &json!({"start":{"value":root,"encoding":"utf-8"},"selection":{"kind":"current"},"diskCache":false}));
     let project = &opened["projects"][0];
     let context = json!({"sessionId":opened["sessionId"],"projectId":project["projectId"],"generation":project["generation"]});
@@ -45,6 +51,31 @@ fn params(context: &Value, values: Value) -> Value {
     };
     value.as_object_mut().unwrap().extend(values);
     value
+}
+
+#[test]
+fn form_preparation_is_versioned_and_does_not_parse_payloads() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    fs::write(&path, "<broken").unwrap();
+    for minor in [37, 38] {
+        let mut client = Client::new(&directory.0, "ru-RU");
+        let (context, node) = connect(&mut client, &directory.0, "ru-RU", minor);
+        let prepared = client.response("form/prepare", &params(&context, json!({"node":node})));
+        if minor < 38 {
+            assert_eq!(prepared["error"]["code"], -32601);
+        } else {
+            let prepared = &prepared["result"];
+            assert_eq!(prepared["roots"].as_array().unwrap().len(), 1);
+            assert_eq!(prepared["forms"].as_array().unwrap().len(), 1);
+            assert_eq!(prepared["forms"][0]["path"]["value"], PATH);
+            assert_eq!(prepared["forms"][0]["id"].as_str().unwrap().len(), 64);
+            let opened = client.response("form/open", &params(&context, json!({"node":node})));
+            assert_eq!(opened["error"]["data"]["details"]["reason"], "invalid_xml");
+        }
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(path).unwrap(), "<broken");
 }
 
 #[test]
@@ -158,6 +189,115 @@ fn dependency_fixture() -> (support::TestDir, &'static str) {
         .unwrap();
     }
     (directory, form)
+}
+
+fn prepared_input(prepared: &Value, path: &str, text: &str, version: &str) -> Value {
+    json!({"root":prepared["roots"][0],"path":{"value":path,"encoding":"utf-8"},"version":version,"text":text})
+}
+
+#[test]
+fn prepared_inputs_recover_invalid_disk_form_and_metadata_without_writes() {
+    let (directory, form) = dependency_fixture();
+    let root = directory.0.join("src");
+    fs::write(root.join(PATH), "<broken").unwrap();
+    fs::write(root.join("StyleItems/FontB.xml"), "<broken").unwrap();
+    fs::create_dir_all(root.join("CommonForms/Other/Ext")).unwrap();
+    fs::write(root.join("CommonForms/Other/Ext/Form.xml"), form).unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 38);
+        let prepared = client.request("form/prepare", &params(&context, json!({"node":node})));
+        let form_input = prepared_input(
+            &prepared,
+            PATH,
+            &form.replace("style:FontA", "style:FontB"),
+            "11",
+        );
+        let style_input = prepared_input(
+            &prepared,
+            "StyleItems/FontB.xml",
+            &dependency_style("FontB").replace("height=\"12\"", "height=\"16\""),
+            "12",
+        );
+        let unused = prepared_input(&prepared, "StyleItems/FontA.xml", "<broken", "13");
+        let opened = client.request(
+            "form/open",
+            &params(
+                &context,
+                json!({"node":node,"inputs":[form_input,style_input,unused]}),
+            ),
+        );
+        assert_eq!(opened["status"], "ready");
+        assert_eq!(
+            opened["model"]["root"]["children"][0]["presentation"]["font"]["points"],
+            16.0
+        );
+        assert_eq!(opened["dependencies"][0]["id"], prepared["forms"][0]["id"]);
+        assert!(
+            opened["dependencies"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .all(|input| !input["path"]["value"]
+                    .as_str()
+                    .unwrap()
+                    .ends_with("FontA.xml"))
+        );
+        for inputs in [
+            json!([form_input, form_input]),
+            json!([prepared_input(
+                &prepared,
+                "CommonForms/Other/Ext/Form.xml",
+                form,
+                "14"
+            )]),
+            json!([prepared_input(&prepared, "Module.bsl", "text", "14")]),
+        ] {
+            let rejected = client.response("form/update", &params(&context,json!({"formSessionId":opened["formSessionId"],"revision":"1","overlays":[],"inputs":inputs})));
+            assert_eq!(
+                rejected["error"]["data"]["details"]["reason"],
+                "foreign_form_input"
+            );
+        }
+        let restored = client.request("form/update", &params(&context,json!({"formSessionId":opened["formSessionId"],"revision":"1","overlays":[],"inputs":[form_input,style_input,unused]})));
+        assert_eq!(restored["status"], "ready");
+        assert_eq!(restored["revision"], "2");
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(root.join(PATH)).unwrap(), "<broken");
+    assert_eq!(
+        fs::read_to_string(root.join("StyleItems/FontB.xml")).unwrap(),
+        "<broken"
+    );
+    assert_eq!(
+        fs::read_to_string(root.join("StyleItems/FontA.xml")).unwrap(),
+        dependency_style("FontA")
+    );
+}
+
+#[test]
+fn prepared_input_paths_reject_foreign_roots_and_traversal() {
+    let directory = fixture();
+    let outside = directory.0.join("escape.xml");
+    fs::write(&outside, "private").unwrap();
+    let mut client = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut client, &directory.0, "en-US", 38);
+    let prepared = client.request("form/prepare", &params(&context, json!({"node":node})));
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let mut foreign = prepared_input(&prepared, PATH, INPUT, "1");
+    foreign["root"] = json!({"value":directory.0,"encoding":"utf-8"});
+    for (input, reason) in [
+        (foreign, "foreign_form_input"),
+        (
+            prepared_input(&prepared, "../escape.xml", "<MetaDataObject/>", "1"),
+            "source_unavailable",
+        ),
+    ] {
+        let rejected = client.response("form/update", &params(&context,json!({"formSessionId":opened["formSessionId"],"revision":"1","overlays":[],"inputs":[input]})));
+        assert_eq!(rejected["error"]["data"]["details"]["reason"], reason);
+    }
+    client.finish();
+    assert_eq!(fs::read_to_string(outside).unwrap(), "private");
 }
 
 #[test]

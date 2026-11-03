@@ -46,6 +46,8 @@ struct Entry {
 struct Open {
     node: Value,
     application: Option<String>,
+    #[serde(default)]
+    inputs: Vec<PathOverlay>,
 }
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -57,6 +59,17 @@ struct Id {
 struct Update {
     revision: String,
     overlays: Vec<Overlay>,
+    #[serde(default)]
+    inputs: Vec<PathOverlay>,
+}
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct PathOverlay {
+    root: params::Path,
+    path: params::Path,
+    version: String,
+    text: Option<String>,
+    buffer_id: Option<String>,
 }
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -67,14 +80,14 @@ struct Overlay {
     buffer_id: Option<String>,
 }
 
-pub(super) fn capability(pictures: bool) -> Value {
-    json!({"pictures":pictures,"schemaVersion":1,"profile":"taxi-8.3.27","readOnly":true,"executesBsl":false,"maxSessions":MAX_SESSIONS,"maxRetainedBytes":MAX_RETAINED_BYTES,
+pub(super) fn capability(pictures: bool, input_preparation: bool) -> Value {
+    json!({"pictures":pictures,"inputPreparation":input_preparation,"schemaVersion":1,"profile":"taxi-8.3.27","readOnly":true,"executesBsl":false,"maxSessions":MAX_SESSIONS,"maxRetainedBytes":MAX_RETAINED_BYTES,
         "maxFormBytes":eska_project_core::project::forms::MAX_FORM_BYTES,"maxOverlayBytes":8*1024*1024,"maxInlineBytes":128*1024,"uploads":"queryBuffers"})
 }
 pub(super) fn is_method(method: &str) -> bool {
     matches!(
         method,
-        "form/open" | "form/get" | "form/update" | "form/close" | "form/locate"
+        "form/prepare" | "form/open" | "form/get" | "form/update" | "form/close" | "form/locate"
     )
 }
 impl State {
@@ -136,13 +149,19 @@ impl Server {
             labels: &self.labels,
             project,
             pictures: self.client_minor >= 37,
+            input_preparation: self.client_minor >= 38,
             activity: session
                 .activity
                 .as_ref()
                 .map(|activity| &activity.snapshot.state),
         };
-        let value = if method == "form/open" {
-            self.forms.open(&context, &key, args)?
+        let value = if method == "form/prepare" {
+            if self.client_minor < 38 {
+                return Err(error(-32601));
+            }
+            requests::prepare(&context, args)?
+        } else if method == "form/open" {
+            self.forms.open(&context, &self.queries, &key, args)?
         } else {
             let input: Id = params::decode(args)?;
             let entry = self.forms.entry(&key, &input.form_session_id)?;

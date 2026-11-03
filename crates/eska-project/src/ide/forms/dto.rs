@@ -4,7 +4,8 @@ use crate::ide::dto::{self, Labels};
 use eska_project_core::project::{
     forms::{
         EffectiveDefinition, EffectiveElement, ElementIdentity, ElementKey, ElementPresentation,
-        FormDependency, FormDependencyRole, FormPart, FormPreview, PropertySource, SourcedProperty,
+        FormDependency, FormDependencyRole, FormPart, FormPreparation, FormPreview, PropertySource,
+        SourcedProperty,
     },
     metadata_model::MetadataKind,
     metadata_parser::LocatedProperty,
@@ -20,6 +21,11 @@ pub(super) fn origin(value: &PropertySource) -> Value {
 }
 pub(super) fn dependency(value: &FormDependency) -> Value {
     json!({"id":value.id,"root":dto::path(&value.root),"path":dto::path(&value.path),"snapshot":value.snapshot,"version":value.version,"member":value.member,"role":match value.role { FormDependencyRole::Form=>"form",FormDependencyRole::Metadata=>"metadata", FormDependencyRole::Picture=>"picture" }})
+}
+pub(super) fn preparation(value: &FormPreparation) -> Value {
+    json!({"contextFingerprint":value.context_fingerprint,"application":value.application,"limitedContext":value.limited_context,
+        "roots":value.roots.iter().map(|root|dto::path(root)).collect::<Vec<_>>(),
+        "forms":value.forms.iter().map(|input|json!({"id":input.id,"root":dto::path(&input.root),"path":dto::path(&input.path)})).collect::<Vec<_>>()})
 }
 fn property(labels: &Labels, value: &SourcedProperty) -> Value {
     let mut result = dto::property(

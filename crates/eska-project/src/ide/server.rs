@@ -284,7 +284,7 @@ impl Server {
         }
         if self.client_minor >= 36 {
             result["capabilities"]["formPreview"] =
-                super::forms::capability(self.client_minor >= 37);
+                super::forms::capability(self.client_minor >= 37, self.client_minor >= 38);
         }
         if self.client_minor >= 34 {
             result["capabilities"]["bslMultilineStrings"] = super::query::language_capability();

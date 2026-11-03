@@ -7,6 +7,7 @@ mod composition;
 mod context;
 mod parsing;
 mod pictures;
+mod preparation;
 mod presentation;
 mod references;
 mod resources;
@@ -23,6 +24,7 @@ pub use context::{
 };
 pub use parsing::parse;
 pub use pictures::FormPicture;
+pub use preparation::{FormInput, FormInputSource, FormPreparation, prepare};
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,
     FormPresentation, PresentationText, present,

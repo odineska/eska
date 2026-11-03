@@ -19,7 +19,7 @@ pub(crate) mod renaming;
 mod runtime;
 mod server;
 
-pub(crate) const API_MINOR: u32 = 37;
+pub(crate) const API_MINOR: u32 = 38;
 
 /// Run a persistent framed protocol session without human output on stdout.
 #[must_use]
