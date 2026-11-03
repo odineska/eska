@@ -153,3 +153,15 @@
   подписки наблюдения должны быть освобождены, а `form/get` выделенной сессии
   должен вернуть `unknown_form_session`. XML не меняется. Этот сценарий
   [проходит на Linux ru/en](t163-pending-close-linux.json); повторить на Windows.
+- `test/form-reconnect-host.cjs` проверяет disconnect/connect и restart backend
+  с удержанным ответом старого обновления. PID процесса должен измениться,
+  прежний процесс — завершиться; короткий `formSessionId` может повторяться
+  в другом процессе и сам по себе не доказывает замену. Dirty XML, выделение
+  и DOM отдельного окна сохраняются; поздняя старая модель не публикуется.
+- `ESKA_HOST_RESTART=1` и `test/form-restore-host.cjs` запускают установленный
+  startup probe в обычном VS Code. Сначала выполняется настоящий reload окна,
+  затем полное завершение и запуск с тем же профилем. Проверить hot exit dirty
+  XML, две панели и native floating window, выделение/страницу, разные масштабы,
+  высоту областей и последующие живые обновления. Для завершения probe использует
+  `workbench.action.quit`: `closeWindow` закрывает активное отдельное окно.
+  [Linux ru/en](t163-restart-linux.json) не заменяет Windows и DPI-приёмку.
