@@ -115,6 +115,84 @@ fn form_context_uses_application_order_dirty_layers_and_per_input_identity_witho
 }
 
 #[test]
+fn handler_modules_follow_effective_property_provenance_and_recheck_context() {
+    let (directory, mut workspace) = setup();
+    let base = BODY.replace(
+        "</InputField>",
+        "<Events><Event name=\"OnChange\">Changed</Event></Events></InputField>",
+    );
+    for member in ["base", "one", "two"] {
+        let body = if member == "one" {
+            base.replace("Changed</Event>", "ExtensionChanged</Event>")
+        } else {
+            base.clone()
+        };
+        fs::write(
+            directory.0.join(member).join("src").join(PATH),
+            form(&body, (member != "base").then_some(base.as_str())),
+        )
+        .unwrap();
+        let module = directory
+            .0
+            .join(member)
+            .join("src/Catalogs/Контрагенты/Forms/ФормаЭлемента/Ext/Form/Module.bsl");
+        fs::create_dir_all(module.parent().unwrap()).unwrap();
+        fs::write(module, "// existing module").unwrap();
+    }
+    let project = workspace
+        .project_mut(&ProjectScope::Member(
+            crate::backend::project::ProjectName::parse("one".into()).unwrap(),
+        ))
+        .unwrap();
+    let node = node(project);
+    let before = bytes(&directory.0);
+    let preview = project
+        .form_preview(&node, Some("app"), &[], &[], Vec::new(), None)
+        .unwrap();
+    let source = project
+        .form_handler_source(&node, Some("app"), &preview, 0, None)
+        .unwrap()
+        .unwrap();
+    assert_eq!(source.name, "ExtensionChanged");
+    assert_eq!(source.root, directory.0.join("one/src"));
+    assert_eq!(
+        source.path,
+        std::path::Path::new("Catalogs/Контрагенты/Forms/ФормаЭлемента/Ext/Form/Module.bsl")
+    );
+    assert!(
+        project
+            .form_handler_source(&node, Some("app"), &preview, 99, None)
+            .unwrap()
+            .is_none()
+    );
+    assert!(matches!(
+        project.form_handler_source(&node, Some("other"), &preview, 0, None),
+        Err(FormPreviewError::Form(FormContextError::MemberMismatch))
+    ));
+    assert_eq!(bytes(&directory.0), before);
+    fs::remove_file(source.root.join(&source.path)).unwrap();
+    assert!(
+        project
+            .form_handler_source(&node, Some("app"), &preview, 0, None)
+            .unwrap()
+            .is_none()
+    );
+    #[cfg(unix)]
+    {
+        std::os::unix::fs::symlink(
+            directory.0.join("base/src").join(&source.path),
+            source.root.join(&source.path),
+        )
+        .unwrap();
+        assert!(
+            project
+                .form_handler_source(&node, Some("app"), &preview, 0, None)
+                .is_err()
+        );
+    }
+}
+
+#[test]
 fn form_preparation_keeps_checked_input_locations_when_payloads_are_invalid() {
     let (directory, mut workspace) = setup();
     let project = workspace

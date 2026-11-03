@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "platform": "Linux ARM64",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "clientCommit": "7eeb5bf595f00a51103e399baa939e7404cb3363",
+  "readOnly": true,
+  "executesBsl": false,
+  "requiresAnalyzer": false,
+  "visualParityVerified": false,
+  "backend": {
+    "catalogue": "Effective form/element Events and command Action, including repeats and XML property provenance",
+    "moduleResolution": "Current application and checked Designer sources of the same form owner",
+    "input": "Current complete editor text; UTF-8 range selects the unique complete procedure/function name",
+    "maxBslBytes": 8388608,
+    "scanner": "Existing bounded ESKA BSL literal scanner",
+    "scope": "Local identifiers; qualified calls, preprocessor branch selection and BSL override chains remain unresolved"
+  },
+  "coreAndRpc": {
+    "namespaceAndLiteralDecoys": true,
+    "russianAndEnglishKeywords": true,
+    "cyrillicBomCrLfRanges": true,
+    "duplicateDeclarationsRejected": true,
+    "dirtyModuleSnapshot": true,
+    "foreignModuleInputRejected": true,
+    "staleRevisionRejected": true,
+    "navigationFailureKeepsReadyModel": true,
+    "protocol38ViewStillAvailable": true,
+    "protocol38RejectsHandlerMethods": true,
+    "extensionPropertyChoosesItsModule": true,
+    "contextChangeRejected": true,
+    "missingModuleDoesNotFallBackToAnotherLayer": true,
+    "escapingModuleSymlinkRejectedOnUnix": true
+  },
+  "nativeVsix": {
+    "ru": {
+      "passed": true,
+      "formHandlers": true,
+      "locale": "ru",
+      "rootEvent": true,
+      "repeatedElementEvents": true,
+      "commandAction": true,
+      "dirtyXmlAndBsl": true,
+      "chunkedModuleUpload": true,
+      "uploadReleased": true,
+      "closeDuringUpload": true,
+      "cyrillicBomCrLf": true,
+      "literalAndCommentDecoys": true,
+      "lateNavigationDiscarded": true,
+      "missingHandlerKeepsReadyModel": true,
+      "sourceWritesDuringViewing": false
+    },
+    "en": {
+      "passed": true,
+      "formHandlers": true,
+      "locale": "en",
+      "rootEvent": true,
+      "repeatedElementEvents": true,
+      "commandAction": true,
+      "dirtyXmlAndBsl": true,
+      "chunkedModuleUpload": true,
+      "uploadReleased": true,
+      "closeDuringUpload": true,
+      "cyrillicBomCrLf": true,
+      "literalAndCommentDecoys": true,
+      "lateNavigationDiscarded": true,
+      "missingHandlerKeepsReadyModel": true,
+      "sourceWritesDuringViewing": false
+    }
+  },
+  "regressions": {
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "inspectors": true,
+    "livePreviewDetachUndoRedoExternal": true,
+    "providedDtForms": 4
+  },
+  "checks": {
+    "cargoFmtCheck": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeaturesDenyWarnings": true,
+    "cargoTest": {
+      "passed": 1480,
+      "failed": 0,
+      "ignored": 19,
+      "suites": 42,
+      "environment": {
+        "RUST_TEST_THREADS": "1"
+      },
+      "allTestsRetained": true
+    },
+    "nodeTest": {
+      "passed": 464,
+      "failed": 0,
+      "skipped": 11
+    },
+    "typecheck": true,
+    "compile": true,
+    "package": true
+  },
+  "earlierCheckFailures": [
+    {
+      "test": "libraries::tests::installs_known_libraries_once_and_reuses_local_sources_without_rewriting_project",
+      "error": "Locked during a parallel full run; isolated repeat passed",
+      "featureCodeUnchangedToResolveFailure": true
+    },
+    {
+      "test": "cli::update::unix::failed_cargo_query_uses_actual_root_without_installer_fallback",
+      "error": "ExecutableFileBusy during another parallel full run",
+      "featureCodeUnchangedToResolveFailure": true
+    }
+  ],
+  "remaining": [
+    "Windows adapter acceptance, including protected source URIs",
+    "Native acceptance of handler ownership for the full extension/BSL override matrix",
+    "Full property/event vocabulary and other open T161 items",
+    "All other open T152-T165 visual and performance acceptance"
+  ]
+}

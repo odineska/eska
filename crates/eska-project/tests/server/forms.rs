@@ -79,6 +79,104 @@ fn form_preparation_is_versioned_and_does_not_parse_payloads() {
 }
 
 #[test]
+fn handler_navigation_uses_checked_modules_and_the_current_editor_snapshot() {
+    let directory = fixture();
+    let xml = INPUT.replace(
+        "</InputField>",
+        "<Events><Event name=\"OnChange\">Обработка</Event></Events></InputField>",
+    );
+    fs::write(directory.0.join("src").join(PATH), &xml).unwrap();
+    let module = directory
+        .0
+        .join("src/CommonForms/Preview/Ext/Form/Module.bsl");
+    fs::create_dir_all(module.parent().unwrap()).unwrap();
+    let disk = "// Existing module without the unsaved declaration\r\n";
+    fs::write(&module, disk).unwrap();
+    let text = "\u{feff}// 😀 Процедура Обработка() КонецПроцедуры\r\n&НаКлиенте\r\nПроцедура ОБРАБОТКА(Элемент)\r\nКонецПроцедуры\r\n";
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 39);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let id = &opened["formSessionId"];
+        assert_eq!(opened["model"]["handlers"][0]["name"], "Обработка");
+        assert_eq!(
+            opened["model"]["handlers"][0]["owner"]["identity"]["key"]["value"],
+            "9223372036854775807"
+        );
+        let target = json!({"formSessionId":id,"revision":"1","index":0});
+        let source = client.request("form/handlerSource", &params(&context, target.clone()));
+        assert_eq!(
+            source["path"]["value"],
+            "CommonForms/Preview/Ext/Form/Module.bsl"
+        );
+        let input = json!({"source":source["source"],"version":"7","text":text});
+        let mut locate = target.clone();
+        locate["input"] = input.clone();
+        let found = client.request("form/handlerLocate", &params(&context, locate.clone()));
+        let start = usize::try_from(found["range"]["start"].as_u64().unwrap()).unwrap();
+        let end = usize::try_from(found["range"]["end"].as_u64().unwrap()).unwrap();
+        assert_eq!(&text[start..end], "ОБРАБОТКА");
+        assert_eq!(found["snapshot"], snapshot(text));
+        let mut foreign = locate.clone();
+        foreign["input"]["source"] = json!("a".repeat(64));
+        assert_eq!(
+            client.response("form/handlerLocate", &params(&context, foreign))["error"]["data"]["details"]
+                ["reason"],
+            "foreign_handler_input"
+        );
+        for (value, reason) in [
+            ("Procedure A() EndProcedure", "handler_not_found"),
+            ("Procedure A()", "handler_module_invalid"),
+            (
+                "Procedure Обработка() EndProcedure\nProcedure Обработка() EndProcedure",
+                "handler_ambiguous",
+            ),
+        ] {
+            let mut args = locate.clone();
+            args["input"]["text"] = json!(value);
+            assert_eq!(
+                client.response("form/handlerLocate", &params(&context, args))["error"]["data"]["details"]
+                    ["reason"],
+                reason
+            );
+        }
+        let mut stale = locate.clone();
+        stale["revision"] = json!("2");
+        assert_eq!(
+            client.response("form/handlerLocate", &params(&context, stale))["error"]["data"]["details"]
+                ["reason"],
+            "stale_form_revision"
+        );
+        let retained = client.request("form/get", &params(&context, json!({"formSessionId":id})));
+        assert_eq!(retained["status"], "ready");
+        assert_eq!(retained["model"], opened["model"]);
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(module).unwrap(), disk);
+}
+
+#[test]
+fn handler_navigation_is_not_available_to_an_older_protocol_client() {
+    let directory = fixture();
+    let mut client = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut client, &directory.0, "en-US", 38);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    for method in ["form/handlerSource", "form/handlerLocate"] {
+        assert_eq!(
+            client.response(
+                method,
+                &params(
+                    &context,
+                    json!({"formSessionId":opened["formSessionId"],"revision":"1","index":0})
+                )
+            )["error"]["code"],
+            -32601
+        );
+    }
+    client.finish();
+}
+
+#[test]
 fn form_view_protocol_is_read_only_versioned_locale_independent_and_keeps_last_valid_model() {
     let directory = fixture();
     let path = directory.0.join("src").join(PATH);

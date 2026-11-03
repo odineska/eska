@@ -57,6 +57,22 @@ impl ProjectSession {
         forms::prepare(&context, self.project().source(), owner).map_err(FormPreviewError::Form)
     }
 
+    /// Resolve the handler's existing module in the same active application as the displayed model.
+    ///
+    /// # Errors
+    /// Returns changed ownership/context or checked source failures.
+    pub fn form_handler_source(
+        &self,
+        node: &NodeId,
+        application: Option<&str>,
+        preview: &FormPreview,
+        index: usize,
+        activity: Option<&crate::project::activity::State>,
+    ) -> Result<Option<forms::FormHandlerSource>, FormPreviewError> {
+        let (owner, context) = self.form_context(node, application, activity)?;
+        forms::handler_source(&context, owner, preview, index).map_err(FormPreviewError::Form)
+    }
+
     fn form_context<'a>(
         &self,
         node: &'a NodeId,

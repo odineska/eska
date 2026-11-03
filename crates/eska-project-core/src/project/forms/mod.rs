@@ -5,6 +5,7 @@ mod catalog;
 mod commands;
 mod composition;
 mod context;
+mod handlers;
 mod parsing;
 mod pictures;
 mod preparation;
@@ -21,6 +22,10 @@ pub use composition::{
 };
 pub use context::{
     FormContextError, FormDependency, FormDependencyRole, FormOverlay, FormPreview, load,
+};
+pub use handlers::{
+    FormHandler, FormHandlerOwner, FormHandlerSource, HandlerLookupError, handler_range,
+    handler_source, handlers,
 };
 pub use parsing::parse;
 pub use pictures::FormPicture;

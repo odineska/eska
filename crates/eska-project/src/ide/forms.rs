@@ -1,6 +1,7 @@
 //! Read-only view sessions share source ownership and uploads with the existing IDE protocol.
 
 mod dto;
+mod handlers;
 mod navigation;
 mod requests;
 
@@ -80,14 +81,25 @@ struct Overlay {
     buffer_id: Option<String>,
 }
 
-pub(super) fn capability(pictures: bool, input_preparation: bool) -> Value {
-    json!({"pictures":pictures,"inputPreparation":input_preparation,"schemaVersion":1,"profile":"taxi-8.3.27","readOnly":true,"executesBsl":false,"maxSessions":MAX_SESSIONS,"maxRetainedBytes":MAX_RETAINED_BYTES,
+pub(super) fn capability(
+    pictures: bool,
+    input_preparation: bool,
+    handler_navigation: bool,
+) -> Value {
+    json!({"pictures":pictures,"inputPreparation":input_preparation,"handlerNavigation":handler_navigation,"schemaVersion":1,"profile":"taxi-8.3.27","readOnly":true,"executesBsl":false,"maxSessions":MAX_SESSIONS,"maxRetainedBytes":MAX_RETAINED_BYTES,
         "maxFormBytes":eska_project_core::project::forms::MAX_FORM_BYTES,"maxOverlayBytes":8*1024*1024,"maxInlineBytes":128*1024,"uploads":"queryBuffers"})
 }
 pub(super) fn is_method(method: &str) -> bool {
     matches!(
         method,
-        "form/prepare" | "form/open" | "form/get" | "form/update" | "form/close" | "form/locate"
+        "form/prepare"
+            | "form/open"
+            | "form/get"
+            | "form/update"
+            | "form/close"
+            | "form/locate"
+            | "form/handlerSource"
+            | "form/handlerLocate"
     )
 }
 impl State {
@@ -175,6 +187,18 @@ impl Server {
                     args,
                 )?,
                 "form/locate" => navigation::locate(entry, args)?,
+                "form/handlerSource" | "form/handlerLocate" => {
+                    if self.client_minor < 39 {
+                        return Err(error(-32601));
+                    }
+                    handlers::navigate(
+                        &context,
+                        entry,
+                        &self.queries,
+                        method == "form/handlerLocate",
+                        args,
+                    )?
+                }
                 _ => return Err(error(-32601)),
             }
         };
