@@ -22,6 +22,80 @@ fn native_basic_fixture_uses_horizontal_group_and_vertical_form_defaults() {
         ResolvedColor::Role("FormTextColor".into())
     );
 }
+
+#[test]
+fn native_groups_keep_title_styles_and_command_area_visibility() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-groups");
+    let resources = ["ProbeColor", "ProbeFont"].map(|name| {
+        let source =
+            std::fs::read_to_string(root.join("StyleItems").join(format!("{name}.xml"))).unwrap();
+        let xml = roxmltree::Document::parse(&source).unwrap();
+        FormResource {
+            source: name.into(),
+            descriptor: metadata_parser::parse(&source, None, PropertiesMode::All).unwrap(),
+            references: super::super::references::collect(xml.root_element()),
+            picture: None,
+            retained_bytes: 0,
+        }
+    });
+    let mut count = 0;
+    for entry in std::fs::read_dir(&root).unwrap() {
+        let path = entry.unwrap().path();
+        if path.extension().and_then(|value| value.to_str()) != Some("xml") {
+            continue;
+        }
+        let name = path.file_stem().unwrap().to_str().unwrap();
+        let document = parse("own", std::fs::read_to_string(&path).unwrap()).unwrap();
+        let view = present(&compose(&document, &[]), &[document], &resources);
+        assert!(
+            view.diagnostics.is_empty(),
+            "{name}: {:?}",
+            view.diagnostics
+        );
+        let control = &view.elements[1];
+        match name {
+            "GroupTitleFont" => {
+                assert_eq!(control.title_font.points, 14.0);
+                assert_eq!(control.title_font.weight, 700);
+                assert_eq!(view.elements[2].font.points, 10.0);
+            }
+            "GroupNone" => assert_eq!(control.title_font.points, 10.0),
+            "GroupDefault" | "GroupWeak" | "GroupStrong" => {
+                assert_eq!(control.title_font.points, 12.0);
+            }
+            "GroupBackColor" => {
+                assert_eq!(control.background, ResolvedColor::Web("LightYellow".into()));
+                assert_eq!(control.title_color, ResolvedColor::Web("Blue".into()));
+            }
+            "GroupHidden" | "ButtonGroup" | "Popup" => assert!(!control.displayed),
+            "BarWithButtonGroup" | "BarWithPopup" => {
+                assert!(view.elements.iter().any(|item| {
+                    item.identity.key == super::super::ElementKey::Xml(1) && item.displayed
+                }));
+                assert!(view.elements.iter().any(|item| {
+                    item.identity.key == super::super::ElementKey::Xml(10) && item.displayed
+                }));
+            }
+            "StyleReferences" => {
+                assert_eq!(control.font.points, 12.0);
+                assert_eq!(control.font.weight, 700);
+                assert!(control.font.italic);
+                assert_eq!(control.foreground, ResolvedColor::Web("DarkOrange".into()));
+                let amount = view
+                    .elements
+                    .iter()
+                    .find(|item| item.identity.key == super::super::ElementKey::Xml(20))
+                    .unwrap();
+                assert_eq!(amount.title_font.points, 10.0);
+                assert_eq!(amount.title_font.weight, 700);
+            }
+            _ => {}
+        }
+        count += 1;
+    }
+    assert_eq!(count, 18);
+}
 #[test]
 fn borrowed_standard_attribute_uses_base_properties_omitted_by_extension() {
     let xml = |properties: &str| {

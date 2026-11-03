@@ -1,0 +1,833 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 container)",
+  "nativeUiLocale": "en",
+  "reference": "Configurator design-time form preview; own normalized Designer XML fixtures",
+  "nativeImportExitCode": 0,
+  "nativeExportExitCode": 0,
+  "visualParityVerified": false,
+  "fixtures": [
+    {
+      "file": "tests/fixtures/forms/native-groups/GroupDefault.xml",
+      "sha256": "cc320a3806fc6c42498e5697512a18b6269d985477f340f5ade1240a02436fc0",
+      "nativeFramePixels": [
+        249,
+        130
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/GroupNone.xml",
+      "sha256": "218b1e56fe59b8d609ccdaaef95fc85d2f3cc2baeaab02f1be59503d0b4df231",
+      "nativeFramePixels": [
+        249,
+        126
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/GroupStrong.xml",
+      "sha256": "17dc3322246536b77fc96b146998fb7a6c50d0ee5282dc4ff9e8c1c147a71d70",
+      "nativeFramePixels": [
+        259,
+        130
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/GroupWeak.xml",
+      "sha256": "ae87e1560cfb08803808f6e94ec77f23ebd87214a355b1b23a7aaa123cf2d3ae",
+      "nativeFramePixels": [
+        249,
+        130
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/GroupBackColor.xml",
+      "sha256": "8b5d00d326cd2175f4baeeb83b74cf5aadc88a16471164e72d240470ce7a0bd3",
+      "nativeFramePixels": [
+        259,
+        140
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/GroupHidden.xml",
+      "sha256": "bfbe2e2adb34b4523b2fb67ee9cb17588cf5cc20ea622f6a6b6f8768c6dc8898",
+      "nativeFramePixels": [
+        34,
+        52
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/GroupCollapsible.xml",
+      "sha256": "085bb5f93f4d634fed21b0574527fe5e9f0886626cd595e38285e0f991c051af",
+      "nativeFramePixels": [
+        259,
+        132
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/PagesTop.xml",
+      "sha256": "b4c3f3b70a18d233686dfedf5c8d19c434cd382cf1891882420f7da442cad391",
+      "nativeFramePixels": [
+        271,
+        152
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/PagesBottom.xml",
+      "sha256": "c1a3b8d3f48f4620e94dbfe883a4b9d7139048e120ad90f983807cd7b7a5aa8b",
+      "nativeFramePixels": [
+        271,
+        152
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/PagesNone.xml",
+      "sha256": "f4513631281a8d8b57b5a258fe8283bdd7c973a8a87d0fe222be48593e574596",
+      "nativeFramePixels": [
+        249,
+        107
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/CommandBar.xml",
+      "sha256": "f0dc68da816509cc5e6873dbc3b6bd406ca762e6ea48a2293c35b74da7e9e1c9",
+      "nativeFramePixels": [
+        291,
+        79
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/ButtonGroup.xml",
+      "sha256": "3222d55b5fce6d35e7ccce28a6394b8e38958e1a8dbc6092179f2ff24c54cb84",
+      "nativeFramePixels": [
+        34,
+        52
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/Popup.xml",
+      "sha256": "5ff156aee2ea9be095db4159fb42805778830d2b7d6c2c0c90a7ef4f9fc4ca20",
+      "nativeFramePixels": [
+        34,
+        52
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/StyleReferences.xml",
+      "sha256": "a238193a7ba4c5da2397d7144d2725c17d82ce91bdc0e15a7002e3984fd207eb",
+      "nativeFramePixels": [
+        291,
+        113
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/Decorations.xml",
+      "sha256": "b92a8119149c4ab9871215ef63772d382ae0f29ea25ce90b2c99317dbbabfe5b",
+      "nativeFramePixels": [
+        94,
+        118
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/GroupTitleFont.xml",
+      "sha256": "c24a9db85ce4de5950c9bf175d3ac480808bc2d2a660c64d806d70a0c932f757",
+      "nativeFramePixels": [
+        249,
+        134
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/BarWithButtonGroup.xml",
+      "sha256": "bb227bcf8fbdcddc4e724fe6e7d1f6c57baa373e97f87fb8ffbddecb6f18c4af",
+      "nativeFramePixels": [
+        291,
+        79
+      ]
+    },
+    {
+      "file": "tests/fixtures/forms/native-groups/BarWithPopup.xml",
+      "sha256": "27d07e1809af9131969d84085b4fb8a403d55cd7d3b8454715bacda3908d2685",
+      "nativeFramePixels": [
+        142,
+        79
+      ]
+    }
+  ],
+  "observations": [
+    "UsualGroup TitleFont is supported; Font and TextColor are discarded by native normalization. Title font is not inherited by the nested inputs.",
+    "Representation=None keeps ShowTitle=true and uses a 10pt heading; the default/WeakSeparation heading is 12pt.",
+    "StrongSeparation uses a 2px left line in the title color and a 10px content indent, without a horizontal top rule.",
+    "Explicit BackColor adds 5px group padding; input backgrounds remain independently white.",
+    "Designer shows Collapsed=true contents expanded. The title is underlined and the nested items indented by 10px.",
+    "ButtonGroup and Popup directly under the form render no pixels; the same elements inside a CommandBar are visible.",
+    "The Popup opens two 30px menu items in a 210px menu; the active fill is #facc1f. Menu activation selects design-time elements without executing a command.",
+    "StyleItem font 12pt bold plus inline italic retains all three settings; TitleFont height=10 overrides size while retaining the referenced bold setting."
+  ],
+  "remaining": [
+    "Other group/page representations, orientation, nesting, stretch and styling combinations.",
+    "Nested command menus, separators, automatically supplied command sources, and per-item styles.",
+    "Full native pixel comparison including fonts, shell selection borders, icons and every supported OS.",
+    "Measured default fonts do not close other faces/sizes, all caption positions, button states, tab skins, or table command-source combinations."
+  ],
+  "installedVsix": {
+    "ru": {
+      "passed": true,
+      "cases": 18,
+      "sourceWritesDuringViewing": false,
+      "frames": {
+        "GroupDefault": [
+          248.640625,
+          130
+        ],
+        "GroupNone": [
+          248.640625,
+          126
+        ],
+        "GroupStrong": [
+          258.640625,
+          130
+        ],
+        "GroupWeak": [
+          248.640625,
+          130
+        ],
+        "GroupBackColor": [
+          258.640625,
+          140
+        ],
+        "GroupTitleFont": [
+          248.640625,
+          134
+        ],
+        "GroupHidden": [
+          34,
+          52
+        ],
+        "GroupCollapsible": [
+          258.640625,
+          132
+        ],
+        "PagesTop": [
+          270.640625,
+          152
+        ],
+        "PagesBottom": [
+          270.640625,
+          152
+        ],
+        "PagesNone": [
+          248.640625,
+          107
+        ],
+        "CommandBar": [
+          291,
+          79
+        ],
+        "ButtonGroup": [
+          34,
+          52
+        ],
+        "Popup": [
+          34,
+          52
+        ],
+        "BarWithButtonGroup": [
+          291,
+          79
+        ],
+        "BarWithPopup": [
+          142,
+          79
+        ],
+        "StyleReferences": [
+          291.796875,
+          113
+        ],
+        "Decorations": [
+          94,
+          118
+        ]
+      },
+      "shellGeometryTolerancePixels": 1,
+      "inputSizesExact": true,
+      "menuInput": [
+        "click",
+        "ArrowDown",
+        "Escape",
+        "outside pointer",
+        "item selection"
+      ],
+      "dirtyCaptionAndZoomChecks": true
+    },
+    "en": {
+      "passed": true,
+      "cases": 18,
+      "sourceWritesDuringViewing": false,
+      "frames": {
+        "GroupDefault": [
+          248.640625,
+          130
+        ],
+        "GroupNone": [
+          248.640625,
+          126
+        ],
+        "GroupStrong": [
+          258.640625,
+          130
+        ],
+        "GroupWeak": [
+          248.640625,
+          130
+        ],
+        "GroupBackColor": [
+          258.640625,
+          140
+        ],
+        "GroupTitleFont": [
+          248.640625,
+          134
+        ],
+        "GroupHidden": [
+          34,
+          52
+        ],
+        "GroupCollapsible": [
+          258.640625,
+          132
+        ],
+        "PagesTop": [
+          270.640625,
+          152
+        ],
+        "PagesBottom": [
+          270.640625,
+          152
+        ],
+        "PagesNone": [
+          248.640625,
+          107
+        ],
+        "CommandBar": [
+          291,
+          79
+        ],
+        "ButtonGroup": [
+          34,
+          52
+        ],
+        "Popup": [
+          34,
+          52
+        ],
+        "BarWithButtonGroup": [
+          291,
+          79
+        ],
+        "BarWithPopup": [
+          142,
+          79
+        ],
+        "StyleReferences": [
+          291.796875,
+          113
+        ],
+        "Decorations": [
+          94,
+          118
+        ]
+      },
+      "shellGeometryTolerancePixels": 1,
+      "inputSizesExact": true,
+      "menuInput": [
+        "click",
+        "ArrowDown",
+        "Escape",
+        "outside pointer",
+        "item selection"
+      ],
+      "dirtyCaptionAndZoomChecks": true
+    }
+  },
+  "checks": {
+    "cargoFmtCheck": "passed",
+    "cargoCheck": "passed",
+    "cargoClippyAllTargetsAllFeaturesDenyWarnings": "passed",
+    "cargoTest": {
+      "passed": 1466,
+      "ignored": 19,
+      "failed": 0,
+      "suites": 42
+    },
+    "frontendNode": {
+      "passed": 455,
+      "skipped": 11,
+      "failed": 0
+    },
+    "frontendCheck": "passed",
+    "frontendCompile": "passed",
+    "vsixPackage": "passed"
+  },
+  "testRunNotes": [
+    "A click exposed DataCloneError when a Solid store proxy was sent to VS Code. The client now unwraps outgoing messages; a browser-bundled controller regression test exercises structuredClone.",
+    "Host checks wait for caption font allocation before reading button geometry. At 200% Chromium returns local CSS units; the zoom check verifies the unchanged CSS width and applied zoom, not a doubled getBoundingClientRect width.",
+    "Applying the earlier 12px table padding to integral caption advances exposed a 3px search regression. Native side borders confirmed 13px ordinary padding, and automatic More has a different gap from explicit Popup. Fixed-width buttons cannot flex-shrink. Both locale tables retain their native 172px search."
+  ],
+  "nativeLocaleRepeat": {
+    "referenceLocale": "en",
+    "repeatLocale": "ru",
+    "fixedLiteralCaptionsInBothLanguages": true,
+    "results": {
+      "BarWithButtonGroup": {
+        "comparedPixels": 22989,
+        "equalRgbPixels": 22989,
+        "equalRgbRatio": 1.0
+      },
+      "GroupDefault": {
+        "comparedPixels": 32370,
+        "equalRgbPixels": 32370,
+        "equalRgbRatio": 1.0
+      },
+      "GroupBackColor": {
+        "comparedPixels": 36260,
+        "equalRgbPixels": 36260,
+        "equalRgbRatio": 1.0
+      },
+      "GroupFont": {
+        "comparedPixels": 33366,
+        "equalRgbPixels": 33366,
+        "equalRgbRatio": 1.0
+      },
+      "GroupCollapsible": {
+        "comparedPixels": 34188,
+        "equalRgbPixels": 34188,
+        "equalRgbRatio": 1.0
+      },
+      "PagesTop": {
+        "comparedPixels": 41192,
+        "equalRgbPixels": 41192,
+        "equalRgbRatio": 1.0
+      },
+      "PagesBottom": {
+        "comparedPixels": 41192,
+        "equalRgbPixels": 41192,
+        "equalRgbRatio": 1.0
+      },
+      "StyleReferences": {
+        "comparedPixels": 32883,
+        "equalRgbPixels": 32883,
+        "equalRgbRatio": 1.0
+      }
+    }
+  },
+  "interiorPixelComparison": {
+    "reference": "native en; identical literal fixture captions",
+    "region": "Inside the native form bounds, trim left/right/bottom 3px and top 27px; shell/title excluded. No mask or antialias exemption.",
+    "visualParityVerified": false,
+    "results": {
+      "ru": {
+        "GroupDefault": {
+          "comparedPixels": 24300,
+          "equalRgbPixels": 22689,
+          "equalRgbRatio": 0.933704,
+          "nativeInteriorPixels": [
+            243,
+            100
+          ]
+        },
+        "GroupNone": {
+          "comparedPixels": 23328,
+          "equalRgbPixels": 21907,
+          "equalRgbRatio": 0.939086,
+          "nativeInteriorPixels": [
+            243,
+            96
+          ]
+        },
+        "GroupStrong": {
+          "comparedPixels": 25300,
+          "equalRgbPixels": 23689,
+          "equalRgbRatio": 0.936324,
+          "nativeInteriorPixels": [
+            253,
+            100
+          ]
+        },
+        "GroupWeak": {
+          "comparedPixels": 24300,
+          "equalRgbPixels": 22689,
+          "equalRgbRatio": 0.933704,
+          "nativeInteriorPixels": [
+            243,
+            100
+          ]
+        },
+        "GroupBackColor": {
+          "comparedPixels": 27830,
+          "equalRgbPixels": 25775,
+          "equalRgbRatio": 0.926159,
+          "nativeInteriorPixels": [
+            253,
+            110
+          ]
+        },
+        "GroupTitleFont": {
+          "comparedPixels": 25272,
+          "equalRgbPixels": 23363,
+          "equalRgbRatio": 0.924462,
+          "nativeInteriorPixels": [
+            243,
+            104
+          ]
+        },
+        "GroupHidden": {
+          "comparedPixels": 616,
+          "equalRgbPixels": 616,
+          "equalRgbRatio": 1.0,
+          "nativeInteriorPixels": [
+            28,
+            22
+          ]
+        },
+        "GroupCollapsible": {
+          "comparedPixels": 25806,
+          "equalRgbPixels": 24046,
+          "equalRgbRatio": 0.931799,
+          "nativeInteriorPixels": [
+            253,
+            102
+          ]
+        },
+        "PagesTop": {
+          "comparedPixels": 32330,
+          "equalRgbPixels": 29319,
+          "equalRgbRatio": 0.906867,
+          "nativeInteriorPixels": [
+            265,
+            122
+          ]
+        },
+        "PagesBottom": {
+          "comparedPixels": 32330,
+          "equalRgbPixels": 29320,
+          "equalRgbRatio": 0.906898,
+          "nativeInteriorPixels": [
+            265,
+            122
+          ]
+        },
+        "PagesNone": {
+          "comparedPixels": 18711,
+          "equalRgbPixels": 17779,
+          "equalRgbRatio": 0.95019,
+          "nativeInteriorPixels": [
+            243,
+            77
+          ]
+        },
+        "CommandBar": {
+          "comparedPixels": 13965,
+          "equalRgbPixels": 12023,
+          "equalRgbRatio": 0.860938,
+          "nativeInteriorPixels": [
+            285,
+            49
+          ]
+        },
+        "ButtonGroup": {
+          "comparedPixels": 616,
+          "equalRgbPixels": 616,
+          "equalRgbRatio": 1.0,
+          "nativeInteriorPixels": [
+            28,
+            22
+          ]
+        },
+        "Popup": {
+          "comparedPixels": 616,
+          "equalRgbPixels": 616,
+          "equalRgbRatio": 1.0,
+          "nativeInteriorPixels": [
+            28,
+            22
+          ]
+        },
+        "BarWithButtonGroup": {
+          "comparedPixels": 13965,
+          "equalRgbPixels": 12023,
+          "equalRgbRatio": 0.860938,
+          "nativeInteriorPixels": [
+            285,
+            49
+          ]
+        },
+        "BarWithPopup": {
+          "comparedPixels": 6664,
+          "equalRgbPixels": 6079,
+          "equalRgbRatio": 0.912215,
+          "nativeInteriorPixels": [
+            136,
+            49
+          ]
+        },
+        "StyleReferences": {
+          "comparedPixels": 23655,
+          "equalRgbPixels": 22620,
+          "equalRgbRatio": 0.956246,
+          "nativeInteriorPixels": [
+            285,
+            83
+          ]
+        },
+        "Decorations": {
+          "comparedPixels": 7744,
+          "equalRgbPixels": 6594,
+          "equalRgbRatio": 0.851498,
+          "nativeInteriorPixels": [
+            88,
+            88
+          ]
+        }
+      },
+      "en": {
+        "GroupDefault": {
+          "comparedPixels": 24300,
+          "equalRgbPixels": 22689,
+          "equalRgbRatio": 0.933704,
+          "nativeInteriorPixels": [
+            243,
+            100
+          ]
+        },
+        "GroupNone": {
+          "comparedPixels": 23328,
+          "equalRgbPixels": 21907,
+          "equalRgbRatio": 0.939086,
+          "nativeInteriorPixels": [
+            243,
+            96
+          ]
+        },
+        "GroupStrong": {
+          "comparedPixels": 25300,
+          "equalRgbPixels": 23689,
+          "equalRgbRatio": 0.936324,
+          "nativeInteriorPixels": [
+            253,
+            100
+          ]
+        },
+        "GroupWeak": {
+          "comparedPixels": 24300,
+          "equalRgbPixels": 22689,
+          "equalRgbRatio": 0.933704,
+          "nativeInteriorPixels": [
+            243,
+            100
+          ]
+        },
+        "GroupBackColor": {
+          "comparedPixels": 27830,
+          "equalRgbPixels": 25775,
+          "equalRgbRatio": 0.926159,
+          "nativeInteriorPixels": [
+            253,
+            110
+          ]
+        },
+        "GroupTitleFont": {
+          "comparedPixels": 25272,
+          "equalRgbPixels": 23363,
+          "equalRgbRatio": 0.924462,
+          "nativeInteriorPixels": [
+            243,
+            104
+          ]
+        },
+        "GroupHidden": {
+          "comparedPixels": 616,
+          "equalRgbPixels": 616,
+          "equalRgbRatio": 1.0,
+          "nativeInteriorPixels": [
+            28,
+            22
+          ]
+        },
+        "GroupCollapsible": {
+          "comparedPixels": 25806,
+          "equalRgbPixels": 24046,
+          "equalRgbRatio": 0.931799,
+          "nativeInteriorPixels": [
+            253,
+            102
+          ]
+        },
+        "PagesTop": {
+          "comparedPixels": 32330,
+          "equalRgbPixels": 29319,
+          "equalRgbRatio": 0.906867,
+          "nativeInteriorPixels": [
+            265,
+            122
+          ]
+        },
+        "PagesBottom": {
+          "comparedPixels": 32330,
+          "equalRgbPixels": 29320,
+          "equalRgbRatio": 0.906898,
+          "nativeInteriorPixels": [
+            265,
+            122
+          ]
+        },
+        "PagesNone": {
+          "comparedPixels": 18711,
+          "equalRgbPixels": 17779,
+          "equalRgbRatio": 0.95019,
+          "nativeInteriorPixels": [
+            243,
+            77
+          ]
+        },
+        "CommandBar": {
+          "comparedPixels": 13965,
+          "equalRgbPixels": 12023,
+          "equalRgbRatio": 0.860938,
+          "nativeInteriorPixels": [
+            285,
+            49
+          ]
+        },
+        "ButtonGroup": {
+          "comparedPixels": 616,
+          "equalRgbPixels": 616,
+          "equalRgbRatio": 1.0,
+          "nativeInteriorPixels": [
+            28,
+            22
+          ]
+        },
+        "Popup": {
+          "comparedPixels": 616,
+          "equalRgbPixels": 616,
+          "equalRgbRatio": 1.0,
+          "nativeInteriorPixels": [
+            28,
+            22
+          ]
+        },
+        "BarWithButtonGroup": {
+          "comparedPixels": 13965,
+          "equalRgbPixels": 12023,
+          "equalRgbRatio": 0.860938,
+          "nativeInteriorPixels": [
+            285,
+            49
+          ]
+        },
+        "BarWithPopup": {
+          "comparedPixels": 6664,
+          "equalRgbPixels": 6079,
+          "equalRgbRatio": 0.912215,
+          "nativeInteriorPixels": [
+            136,
+            49
+          ]
+        },
+        "StyleReferences": {
+          "comparedPixels": 23655,
+          "equalRgbPixels": 22620,
+          "equalRgbRatio": 0.956246,
+          "nativeInteriorPixels": [
+            285,
+            83
+          ]
+        },
+        "Decorations": {
+          "comparedPixels": 7744,
+          "equalRgbPixels": 6594,
+          "equalRgbRatio": 0.851498,
+          "nativeInteriorPixels": [
+            88,
+            88
+          ]
+        }
+      }
+    }
+  },
+  "regressions": {
+    "renderer": {
+      "ru": {
+        "passed": true,
+        "cases": 20
+      },
+      "en": {
+        "passed": true,
+        "cases": 20
+      }
+    },
+    "states": {
+      "ru": {
+        "passed": true,
+        "cases": 15
+      },
+      "en": {
+        "passed": true,
+        "cases": 15
+      }
+    },
+    "tables": {
+      "ru": {
+        "passed": true,
+        "cases": 14
+      },
+      "en": {
+        "passed": true,
+        "cases": 14
+      }
+    },
+    "application": {
+      "ru": {
+        "passed": true,
+        "cases": 4
+      },
+      "en": {
+        "passed": true,
+        "cases": 4
+      }
+    },
+    "previewLifecycle": {
+      "ru": {
+        "passed": true,
+        "realClickSelection": true,
+        "detached": true,
+        "dirty": true,
+        "external": true,
+        "undo": true,
+        "ownerClosedBeforeDock": true
+      },
+      "en": {
+        "passed": true,
+        "realClickSelection": true,
+        "detached": true,
+        "dirty": true,
+        "external": true,
+        "undo": true,
+        "ownerClosedBeforeDock": true
+      }
+    }
+  },
+  "nativeAutomaticTableButtons": {
+    "ru": {
+      "addWidth": 85,
+      "moreWidth": 60,
+      "searchWidth": 172
+    },
+    "en": {
+      "addWidth": 51,
+      "moreWidth": 108,
+      "searchWidth": 172
+    },
+    "joinedMovementWidth": 60
+  }
+}

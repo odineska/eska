@@ -114,6 +114,7 @@ pub fn present(
     visit(
         &form.root,
         false,
+        false,
         form,
         resources,
         &mut appearance,
@@ -127,6 +128,7 @@ pub fn present(
 fn visit(
     element: &EffectiveElement,
     in_table: bool,
+    in_command_bar: bool,
     form: &ComposedForm,
     resources: &[FormResource],
     appearance: &mut Appearance<'_>,
@@ -149,9 +151,8 @@ fn visit(
     );
     let font = appearance.font(property(element, "Font"), "NormalTextFont");
     let title_font = appearance.font(
-        property(element, "TitleFont")
-            .or_else(|| group.then(|| property(element, "Font")).flatten()),
-        if group {
+        property(element, "TitleFont"),
+        if group && scalar(&element.properties, "Representation") != Some("None") {
             "LargeTextFont"
         } else {
             "NormalTextFont"
@@ -196,7 +197,12 @@ fn visit(
     output.push(ElementPresentation {
         identity: element.identity.clone(),
         grouping: grouping(element),
-        displayed: is_displayed(element, binding.as_ref(), command, appearance),
+        displayed: is_displayed(element, binding.as_ref(), command, appearance)
+            && (in_command_bar
+                || !matches!(
+                    element.kind,
+                    Some(ElementKind::ButtonGroup | ElementKind::Popup)
+                )),
         mark_incomplete,
         title_location: title_location(element),
         picture: super::pictures::resolve(element, resources, &mut appearance.diagnostics),
@@ -220,12 +226,25 @@ fn visit(
         visit(
             child,
             in_table || element.kind == Some(ElementKind::Table),
+            is_command_area(element),
             form,
             resources,
             appearance,
             output,
         );
     }
+}
+
+const fn is_command_area(element: &EffectiveElement) -> bool {
+    matches!(
+        element.kind,
+        Some(
+            ElementKind::CommandBar
+                | ElementKind::AutoCommandBar
+                | ElementKind::ButtonGroup
+                | ElementKind::Popup
+        )
+    )
 }
 
 fn column_caption(caption: PresentationText, in_table: bool) -> PresentationText {
