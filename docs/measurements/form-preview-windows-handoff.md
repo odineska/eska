@@ -262,3 +262,13 @@ dirty 20 pt / Green, неправильный XML, восстановление 
 Проверить native-оформление Windows отдельно. Linux-проверки не закрывают
 пять цветов Такси и матрицу стилей/расширений. Экспериментальный Rust
 `FormResource` получил поле `style`; wire-схема не менялась.
+
+Дополнение заголовков страниц: [15 native-форм](../../tests/fixtures/forms/native-tab-appearance/README.md),
+[Linux-отчёт](t157-native-tab-titles-linux.json), `form-tab-titles-host.cjs` и
+`ESKA_FORM_FIXTURES=…/native-tab-appearance`. Проверить наследование TitleFont/
+TitleTextColor от Pages и отдельные переопределения Page, не меняющие поля внутри.
+На Linux приняты геометрия 15 форм/30 вкладок и 193 084 пикселя подписей в ru/en.
+Таблица размеров заголовков в `tab-metrics.mjs` относится к Linux/Sans/96DPI;
+не переносить её на Windows. Нижние/боковые вкладки и все состояния требуют
+самостоятельных эталонов. Полная форма всё ещё не принята: например,
+Default имеет 734 различающихся пикселя из 42 900 вместе с 4px тенью.
