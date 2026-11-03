@@ -24,6 +24,7 @@ impl Localizer {
             "http://v8.1c.ru/8.1/data/ui" => "ui",
             "http://v8.1c.ru/8.2/managed-application/core" => "app",
             "http://v8.1c.ru/8.3/xcf/predef" => "predef",
+            "http://v8.1c.ru/8.3/xcf/logform" => "form",
             _ => return None,
         };
         if let Some(owner) = owner {

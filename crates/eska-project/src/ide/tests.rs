@@ -150,6 +150,42 @@ fn property_dtos_include_contextual_and_nested_captions() {
     assert!(result.get("caption").is_none());
 }
 
+/// Form captions and boolean hints are namespace-scoped; literal text stays literal.
+#[test]
+fn form_property_captions_preserve_raw_values_and_boolean_context() {
+    let labels = dto::Labels::new().unwrap();
+    let mut value = LocatedProperty {
+        property: MetadataProperty {
+            key: PropertyKey {
+                namespace: Some("http://v8.1c.ru/8.3/xcf/logform".into()),
+                name: "Visible".into(),
+            },
+            qualifiers: vec![],
+            value: MetadataValue::Text("false".into()),
+        },
+        range: 4..35,
+    };
+    let result = dto::property(&labels, MetadataKind::Form, &value);
+    assert_eq!(
+        result["caption"],
+        json!({"ru-RU":"Видимость","en-US":"Visibility"})
+    );
+    assert_eq!(result["value"]["scalarType"], "boolean");
+    assert_eq!(result["value"]["text"], "false");
+    assert_eq!(result["range"], json!({"start":4,"end":35}));
+    value.property.key.name = "Title".into();
+    assert!(
+        dto::property(&labels, MetadataKind::Form, &value)["value"]
+            .get("scalarType")
+            .is_none()
+    );
+    value.property.key.name = "Visible".into();
+    value.property.key.namespace = Some("urn:vendor".into());
+    let result = dto::property(&labels, MetadataKind::Form, &value);
+    assert!(result.get("caption").is_none());
+    assert!(result["value"].get("scalarType").is_none());
+}
+
 /// Captions are additive for enums, standard identities and namespace-resolved type names.
 #[test]
 fn property_value_captions_preserve_source_and_wire_shape() {

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "os": "Linux ARM64",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.38",
+  "native1cRequired": false,
+  "scope": "Read-only form properties and definition types; this is not native visual parity acceptance",
+  "implementation": {
+    "formPropertyCaptions": 49,
+    "formBooleanHints": 16,
+    "locales": ["ru-RU", "en-US"],
+    "rawKeysAndValuesPreserved": true,
+    "namespaceScoped": true,
+    "records": "Nested records render when expanded; repeats and XML qualifiers remain inspectable",
+    "reconciliation": "Separate scalar UI keys preserve property components; original QName objects remain navigation targets",
+    "navigation": "Enter/F12 on a property row; hash original bytes before mapping normalized native line endings"
+  },
+  "nativeVsix": {
+    "test": "eska-vscode-explorer/test/form-inspectors-host.cjs",
+    "locales": ["ru", "en"],
+    "passed": true,
+    "captions": true,
+    "typedBooleans": true,
+    "literalAndForeignValuesPreserved": true,
+    "nestedRecordsAndQualifiers": true,
+    "propertyKeyboardNavigation": true,
+    "dirtyProperties": true,
+    "recordDomRetained": true,
+    "sourceWritesDuringViewing": false
+  },
+  "regressions": {
+    "locales": ["ru", "en"],
+    "previewDetachUndoRedoExternal": true,
+    "dirtyDependencyClosure": true,
+    "rendererFieldKinds": 20,
+    "groupVariants": 18,
+    "tableVariants": 16,
+    "providedDtForms": 4,
+    "reloadAndNormalRestart": true
+  },
+  "checks": {
+    "cargoFmtCheck": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeaturesDenyWarnings": true,
+    "cargoTest": {"passed": 1474, "failed": 0, "ignored": 19, "suites": 42},
+    "nodeTest": {"passed": 462, "failed": 0, "skipped": 11},
+    "typecheck": true,
+    "compile": true,
+    "package": true
+  },
+  "testCorrection": "An unchanged font value did not prove delivery of the latest state; strict dependency checks now drain the actual published sequence before resetting their observer",
+  "remaining": [
+    "Full form property and element-kind vocabulary",
+    "Navigation to existing BSL handlers and remaining T161 interactions",
+    "Windows and different monitor DPI acceptance",
+    "Other open T152–T165 work, including full native visual parity"
+  ]
+}
