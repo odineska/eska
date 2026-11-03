@@ -389,3 +389,62 @@ fn native_context_tables_resolve_metadata_columns_and_dynamic_list_commands() {
         }
     }
 }
+
+#[test]
+fn native_state_fixtures_preserve_visibility_font_and_value_qualifiers() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/forms");
+    let resource = FormResource {
+        source: "metadata".into(),
+        picture: None,
+        retained_bytes: 0,
+        references: Vec::new(),
+        descriptor: metadata_parser::parse(
+            &std::fs::read_to_string(root.join("native-context-tables/Catalog.xml")).unwrap(),
+            None,
+            PropertiesMode::All,
+        )
+        .unwrap(),
+    };
+    let mut count = 0;
+    for path in std::fs::read_dir(root.join("native-state-variants")).unwrap() {
+        let path = path.unwrap().path();
+        let name = path.file_stem().unwrap().to_str().unwrap();
+        let document = parse("state", std::fs::read_to_string(&path).unwrap()).unwrap();
+        let view = present(
+            &compose(&document, &[]),
+            &[document],
+            std::slice::from_ref(&resource),
+        );
+        assert!(view.diagnostics.is_empty(), "{name}");
+        let control = &view.elements[1];
+        assert_eq!(
+            control.displayed,
+            !matches!(name, "InputHidden" | "TableHidden"),
+            "{name}"
+        );
+        if name == "ColumnHidden" {
+            assert!(
+                !view
+                    .elements
+                    .iter()
+                    .find(|element| element.identity.key == super::super::ElementKey::Xml(3))
+                    .unwrap()
+                    .displayed
+            );
+        }
+        if matches!(name, "InputNumber" | "InputColors" | "Font14Number") {
+            assert_eq!(control.value_type.kind, FieldValueKind::Number);
+            assert_eq!(control.value_type.digits, Some(9));
+            assert_eq!(control.value_type.fraction, Some(2));
+        }
+        if name == "InputFont" {
+            assert_eq!(control.font.points, 14.0);
+            assert_eq!(control.font.weight, 700);
+        }
+        if name == "InputColors" {
+            assert_eq!(control.foreground, ResolvedColor::Web("Blue".into()));
+        }
+        count += 1;
+    }
+    assert_eq!(count, 18);
+}
