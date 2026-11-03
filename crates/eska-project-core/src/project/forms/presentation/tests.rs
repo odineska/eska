@@ -24,6 +24,32 @@ fn native_basic_fixture_uses_horizontal_group_and_vertical_form_defaults() {
 }
 
 #[test]
+fn input_value_and_title_use_distinct_style_roles_without_losing_overrides() {
+    let document=parse("colors",format!("<Form xmlns=\"{}\"><ChildItems><InputField name=\"Default\" id=\"1\"/><InputField name=\"Explicit\" id=\"2\"><TextColor>#0000ff</TextColor><TitleTextColor>#ff0000</TitleTextColor></InputField><Button name=\"Action\" id=\"3\"/></ChildItems></Form>",super::super::FORM_NAMESPACE)).unwrap();
+    let view = present(&compose(&document, &[]), &[document], &[]);
+    assert_eq!(
+        view.elements[1].foreground,
+        ResolvedColor::Role("FieldTextColor".into())
+    );
+    assert_eq!(
+        view.elements[1].title_color,
+        ResolvedColor::Role("FormTextColor".into())
+    );
+    assert_eq!(
+        view.elements[2].foreground,
+        ResolvedColor::Rgb("#0000ff".into())
+    );
+    assert_eq!(
+        view.elements[2].title_color,
+        ResolvedColor::Rgb("#ff0000".into())
+    );
+    assert_eq!(
+        view.elements[3].foreground,
+        ResolvedColor::Role("ButtonTextColor".into())
+    );
+}
+
+#[test]
 fn native_groups_keep_title_styles_and_command_area_visibility() {
     let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("../../tests/fixtures/forms/native-groups");

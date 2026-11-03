@@ -113,17 +113,21 @@ fn default_style_selects_named_style_instead_of_last_loaded_resource() {
         descriptor(
             "Style",
             "Selected",
-            "<FormTextColor>#112233</FormTextColor><NormalTextFont height=\"13\"/>",
+            "<FormTextColor>#112233</FormTextColor><FieldTextColor>#223344</FieldTextColor><NormalTextFont height=\"13\"/>",
         ),
         descriptor(
             "Style",
             "Unrelated",
-            "<FormTextColor>#445566</FormTextColor><NormalTextFont height=\"21\"/>",
+            "<FormTextColor>#445566</FormTextColor><FieldTextColor>#556677</FieldTextColor><NormalTextFont height=\"21\"/>",
         ),
     ];
     let result = view("", &resources);
     assert_eq!(
         result.elements[1].foreground,
+        ResolvedColor::Rgb("#223344".into())
+    );
+    assert_eq!(
+        result.elements[1].title_color,
         ResolvedColor::Rgb("#112233".into())
     );
     assert!((result.elements[1].font.points - 13.0).abs() < f64::EPSILON);
@@ -135,6 +139,10 @@ fn default_style_selects_named_style_instead_of_last_loaded_resource() {
     let result = view("", &resources);
     assert_eq!(
         result.elements[1].foreground,
+        ResolvedColor::Rgb("#556677".into())
+    );
+    assert_eq!(
+        result.elements[1].title_color,
         ResolvedColor::Rgb("#445566".into())
     );
     assert!((result.elements[1].font.points - 21.0).abs() < f64::EPSILON);

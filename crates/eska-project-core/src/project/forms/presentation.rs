@@ -162,6 +162,7 @@ fn visit(
         property(element, "TextColor"),
         match element.kind {
             Some(ElementKind::Button) => "ButtonTextColor",
+            Some(ElementKind::InputField) => "FieldTextColor",
             Some(ElementKind::LabelDecoration | ElementKind::PictureDecoration) => "TextColor",
             _ => "FormTextColor",
         },

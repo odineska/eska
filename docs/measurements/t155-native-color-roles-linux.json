@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 reference container)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "nativeImportExitCode": 0,
+  "nativeExportExitCode": 0,
+  "clientCommit": "dfa77c41948507cf1eab83e3039e55ab0da6893e",
+  "fixtures": [
+    {
+      "file": "tests/fixtures/forms/native-palette/Field.xml",
+      "nativeExportSha256": "fa16b606e9ef900c3b551dec4f1e9c60776616aa5271c2c006c98941f0acb519",
+      "normalizedSha256": "dcae1b7291359a404bac1b99815c03ace4eab4991022f68ca3ad52f15119c1b2"
+    },
+    {
+      "file": "tests/fixtures/forms/native-palette/Button.xml",
+      "nativeExportSha256": "ddb5a7172df98c71d0015c8fa6a1afa6bd54a0ed1d6c810ad76c4c68647c83b6",
+      "normalizedSha256": "2318e7a9c9d252f7d3d405a6f2a7b0b56e0ba8a7a8b600357062d6c9e026ecd6"
+    }
+  ],
+  "reference": "32pt bold WW and 0 expose opaque text interiors independently of glyph-edge antialiasing",
+  "native": {
+    "field": {
+      "nativeFramePixels": [
+        475,
+        127
+      ],
+      "crop": [
+        261,
+        240,
+        740,
+        371
+      ],
+      "repeatRgbEqual": true,
+      "ruEnRgbEqual": true
+    },
+    "button": {
+      "nativeFramePixels": [
+        373,
+        124
+      ],
+      "crop": [
+        261,
+        240,
+        638,
+        368
+      ],
+      "repeatRgbEqual": true,
+      "ruEnRgbEqual": true
+    },
+    "titleInk": {
+      "region": [
+        273,
+        300,
+        370,
+        335
+      ],
+      "opaqueRgb": [
+        77,
+        77,
+        77
+      ],
+      "opaquePixelCount": 760
+    },
+    "valueInk": {
+      "region": [
+        666,
+        300,
+        691,
+        335
+      ],
+      "opaqueRgb": [
+        51,
+        51,
+        51
+      ],
+      "opaquePixelCount": 214
+    },
+    "buttonInk": {
+      "region": [
+        315,
+        295,
+        400,
+        335
+      ],
+      "opaqueRgb": [
+        77,
+        77,
+        77
+      ],
+      "opaquePixelCount": 850
+    }
+  },
+  "roles": {
+    "inputTitle": {
+      "role": "FormTextColor",
+      "linuxDefault": "#4d4d4d"
+    },
+    "inputValue": {
+      "role": "FieldTextColor",
+      "linuxDefault": "#333333"
+    },
+    "buttonText": {
+      "role": "ButtonTextColor",
+      "linuxDefault": "#4d4d4d"
+    }
+  },
+  "implementation": {
+    "inputValueRoleWas": "FormTextColor",
+    "inputValueRoleNow": "FieldTextColor",
+    "styleRolesResolveIndependently": true,
+    "explicitTextColorAndTitleTextColorPreserved": true,
+    "linuxProfileDefaultsUpdated": true,
+    "windowsColorDefaultsChanged": false
+  },
+  "nativeVsix": {
+    "ru": {
+      "passed": true,
+      "colorRolesOnly": true,
+      "visualParityVerified": false,
+      "locale": "ru",
+      "sourceWritesDuringViewing": false,
+      "results": [
+        {
+          "kind": "Field",
+          "title": "rgb(77, 77, 77)",
+          "value": "rgb(51, 51, 51)",
+          "button": null,
+          "frame": {
+            "width": 478,
+            "height": 126
+          }
+        },
+        {
+          "kind": "Button",
+          "title": null,
+          "value": null,
+          "button": "rgb(77, 77, 77)",
+          "frame": {
+            "width": 253,
+            "height": 112.203125
+          }
+        }
+      ]
+    },
+    "en": {
+      "passed": true,
+      "colorRolesOnly": true,
+      "visualParityVerified": false,
+      "locale": "en",
+      "sourceWritesDuringViewing": false,
+      "results": [
+        {
+          "kind": "Field",
+          "title": "rgb(77, 77, 77)",
+          "value": "rgb(51, 51, 51)",
+          "button": null,
+          "frame": {
+            "width": 478,
+            "height": 126
+          }
+        },
+        {
+          "kind": "Button",
+          "title": null,
+          "value": null,
+          "button": "rgb(77, 77, 77)",
+          "frame": {
+            "width": 253,
+            "height": 112.203125
+          }
+        }
+      ]
+    }
+  },
+  "regressions": {
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "fieldStates": 15,
+    "groups": 22,
+    "rendererKinds": 20,
+    "tableCases": 16,
+    "providedDtForms": 4
+  },
+  "checks": {
+    "cargoFmtCheck": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeaturesDenyWarnings": true,
+    "cargoTest": {
+      "passed": 1481,
+      "failed": 0,
+      "ignored": 19,
+      "suites": 42,
+      "environment": {
+        "RUST_TEST_THREADS": "1"
+      }
+    },
+    "nodeTest": {
+      "passed": 464,
+      "failed": 0,
+      "skipped": 11
+    },
+    "typecheck": true,
+    "compile": true,
+    "package": true
+  },
+  "remaining": [
+    "32pt probe geometry is not accepted: native field frame 475x127 vs browser 478x126; native buttons 373x124 vs browser 253x112.203125",
+    "Other control color roles, combinations and style inheritance still need native verification",
+    "Text rasterization differs; whole-form equality is not established by passing color checks",
+    "Windows and physical monitor DPI acceptance",
+    "Other open T152-T165 items"
+  ]
+}
