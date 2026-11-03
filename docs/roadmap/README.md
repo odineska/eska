@@ -614,16 +614,16 @@ BSL LSP и визуальный редактор форм в это направ
 | T151 | DONE | Отключение подпроектов с освобождением фоновых ресурсов и фильтр скрытия отключённых | [29-workspace-project-activation.md](29-workspace-project-activation.md) |
 | T152 | IN-PROGRESS | Каталог из 38 элементов проверен по Linux 8.3.27.2342 и 909 формам; native-эталоны в работе | [30-managed-form-preview.md](30-managed-form-preview.md#t152--каталог-платформы-и-эталоны-предпросмотра) |
 | T153 | DONE | Модель формы, identity и диапазоны XML; 13 unit-тестов, 909 форм БСП, 74 формы демобазы и 4 формы расширений без структурных диагностик | [30-managed-form-preview.md](30-managed-form-preview.md#t153--модель-формы-и-связь-с-исходным-xml) |
-| T154 | PLANNED | Контекст формы, заимствование и объединение расширений | [30-managed-form-preview.md](30-managed-form-preview.md#t154--контекст-формы-и-объединение-расширений) |
-| T155 | PLANNED | Итоговые свойства, стили, переопределения и ресурсы | [30-managed-form-preview.md](30-managed-form-preview.md#t155--итоговые-свойства-стили-и-ресурсы) |
-| T156 | PLANNED | Профиль Такси и общая основа рендерера SolidJS | [30-managed-form-preview.md](30-managed-form-preview.md#t156--профиль-такси-и-основа-рендерера-solidjs) |
-| T157 | PLANNED | Компоновка контейнеров, групп и страниц формы | [30-managed-form-preview.md](30-managed-form-preview.md#t157--компоновка-контейнеров-и-страниц) |
-| T158 | PLANNED | Поля, кнопки, командные панели и декорации | [30-managed-form-preview.md](30-managed-form-preview.md#t158--поля-кнопки-команды-и-декорации) |
-| T159 | PLANNED | Таблицы формы, колонки и табличные части | [30-managed-form-preview.md](30-managed-form-preview.md#t159--таблицы-формы-и-табличные-части) |
-| T160 | PLANNED | Полный набор специальных полей предпросмотра 8.3.27 | [30-managed-form-preview.md](30-managed-form-preview.md#t160--полный-набор-специальных-полей) |
-| T161 | PLANNED | Оболочка по образцу Конфигуратора и связанная навигация | [30-managed-form-preview.md](30-managed-form-preview.md#t161--оболочка-просмотра-и-связанная-навигация) |
-| T162 | PLANNED | Сессии просмотра и живое обновление несохранённых исходников | [30-managed-form-preview.md](30-managed-form-preview.md#t162--сессии-просмотра-и-обновление-несохранённых-исходников) |
-| T163 | PLANNED | Открепляемое окно предпросмотра с общей сессией | [30-managed-form-preview.md](30-managed-form-preview.md#t163--открепляемый-предпросмотр) |
+| T154 | IN-PROGRESS | Контекст формы, заимствование и объединение расширений | [30-managed-form-preview.md](30-managed-form-preview.md#t154--контекст-формы-и-объединение-расширений) |
+| T155 | IN-PROGRESS | Итоговые свойства, стили, переопределения и ресурсы | [30-managed-form-preview.md](30-managed-form-preview.md#t155--итоговые-свойства-стили-и-ресурсы) |
+| T156 | IN-PROGRESS | Профиль Такси и общая основа рендерера SolidJS | [30-managed-form-preview.md](30-managed-form-preview.md#t156--профиль-такси-и-основа-рендерера-solidjs) |
+| T157 | IN-PROGRESS | Компоновка контейнеров, групп и страниц формы | [30-managed-form-preview.md](30-managed-form-preview.md#t157--компоновка-контейнеров-и-страниц) |
+| T158 | IN-PROGRESS | Поля, кнопки, командные панели и декорации | [30-managed-form-preview.md](30-managed-form-preview.md#t158--поля-кнопки-команды-и-декорации) |
+| T159 | IN-PROGRESS | Таблицы формы, колонки и табличные части | [30-managed-form-preview.md](30-managed-form-preview.md#t159--таблицы-формы-и-табличные-части) |
+| T160 | IN-PROGRESS | Полный набор специальных полей предпросмотра 8.3.27 | [30-managed-form-preview.md](30-managed-form-preview.md#t160--полный-набор-специальных-полей) |
+| T161 | IN-PROGRESS | Оболочка по образцу Конфигуратора и связанная навигация | [30-managed-form-preview.md](30-managed-form-preview.md#t161--оболочка-просмотра-и-связанная-навигация) |
+| T162 | IN-PROGRESS | Сессии просмотра и живое обновление несохранённых исходников | [30-managed-form-preview.md](30-managed-form-preview.md#t162--сессии-просмотра-и-обновление-несохранённых-исходников) |
+| T163 | IN-PROGRESS | Открепляемое окно предпросмотра с общей сессией | [30-managed-form-preview.md](30-managed-form-preview.md#t163--открепляемый-предпросмотр) |
 | T164 | PLANNED | Производительность полного просмотрщика и освобождение ресурсов | [30-managed-form-preview.md](30-managed-form-preview.md#t164--производительность-полного-просмотрщика) |
 | T165 | PLANNED | Полная приёмка просмотра на Windows/Linux и документация | [30-managed-form-preview.md](30-managed-form-preview.md#t165--итоговая-приёмка-и-документация-просмотра) |
 
