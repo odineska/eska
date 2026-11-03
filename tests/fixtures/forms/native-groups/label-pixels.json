@@ -1,0 +1,44 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64",
+  "sourceXml": "tests/fixtures/forms/native-groups/PagesAuto.xml",
+  "nativeScreenshotSha256": "15284e4947275a1e8b3c2c47e0ec472cad1cd2e216d8035e5b7b08a859f8f94b",
+  "nativeOrigin": [
+    261,
+    240
+  ],
+  "rows": [
+    {
+      "caption": "Name:",
+      "region": [
+        24,
+        77,
+        51,
+        17
+      ],
+      "points": 10,
+      "weight": "normal",
+      "foreground": "#4d4d4d",
+      "background": "#ffffff",
+      "baseline": 13,
+      "textOriginX": 0,
+      "rgbSha256": "96df3d50bfce5fddac29da11c52d348248fbac9e5121c39970ecfae87b1b4ecd"
+    },
+    {
+      "caption": "Amount:",
+      "region": [
+        24,
+        109,
+        51,
+        17
+      ],
+      "points": 10,
+      "weight": "normal",
+      "foreground": "#4d4d4d",
+      "background": "#ffffff",
+      "baseline": 13,
+      "textOriginX": 0,
+      "rgbSha256": "38c84acc8690110e6312a2614e77db4b93ae60f4ebec9d74ee8f63eb8083e845"
+    }
+  ]
+}
