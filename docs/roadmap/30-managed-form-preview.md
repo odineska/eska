@@ -602,6 +602,13 @@ Native-пример `PreviewBasic` импортирован/выгружен п�
 [Эталоны](../../tests/fixtures/forms/native-button-colors/README.md) ·
 [Результаты Linux](../measurements/t158-native-button-colors-linux.json).
 
+Для DefaultButton=true явный BackColor в Linux сохраняет обычное оформление;
+собственный TextColor имеет приоритет. Исходный флаг не меняется. Приняты пять
+кнопок в трёх формах, ссылки на стиль и dirty-флаг в отдельном окне: 14 000
+пикселей ru/en. [Native-входы](../../tests/fixtures/forms/native-primary-appearance/README.md) ·
+[Результаты](../measurements/t158-native-primary-overrides-linux.json).
+Автоматическая заливка основной кнопки и её текст остаются открытыми.
+
 ### T159 — Таблицы формы и табличные части
 
 **Статус:** `IN-PROGRESS`. **Зависимости:** T157, T158. **Владелец:** ESKA и Explorer.

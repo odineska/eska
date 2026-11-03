@@ -342,3 +342,13 @@ native-хешу bitmap в основном и отдельном окнах, б�
 Пустой тег, nil и проверенные Auto/AutoColor не принимаются; при дальнейшем
 редактировании автоматический цвет задавать отсутствием свойства. Положительные
 контроли HEX/web/FieldTextColor/ImportantColor выполнены после отрицательных.
+
+Дополнение DefaultButton с явным фоном: [native-входы](../../tests/fixtures/forms/native-primary-appearance/README.md),
+[Linux-результат](t158-native-primary-overrides-linux.json),
+`form-primary-appearance-host.cjs` с `ESKA_FORM_FIXTURES=…/native-primary-appearance`.
+В Linux явный BackColor отключает цветовое оформление основной кнопки;
+автоматический текст обычный #4D4D4D, собственный TextColor сохраняется.
+Исходный флаг в модели не сбрасывается. Приняты пять внутренних областей
+в ru/en (14 000 px), dirty DefaultButton и отдельное окно. На Windows правило
+пока не включено; проверить по своему Конфигуратору. Автоматические основные
+кнопки, рамки и состояния требуют отдельной приёмки.
