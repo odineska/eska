@@ -96,10 +96,26 @@ impl<'a> Appearance<'a> {
     }
     pub fn color(&mut self, property: Option<&SourcedProperty>, role: &str) -> ResolvedColor {
         let mut visited = Vec::new();
-        property.map_or_else(
-            || ResolvedColor::Role(role.into()),
-            |property| self.resolve_color(property, role, &mut visited),
-        )
+        if let Some(property) = property {
+            return self.resolve_color(property, role, &mut visited);
+        }
+        self.default_color(role, &mut visited)
+    }
+    fn default_color(&mut self, role: &str, visited: &mut Vec<PropertyKey>) -> ResolvedColor {
+        let selected = match role {
+            "GroupTitleTextColor" => "AccentColor",
+            role if modern_color_role(role) => role,
+            _ => return ResolvedColor::Role(role.into()),
+        };
+        if let Some(property) = self.style_property(selected) {
+            if text(&property.property.value)
+                .is_none_or(|value| value.is_empty() || value == "Auto")
+            {
+                return ResolvedColor::Role(role.into());
+            }
+            return self.resolve_color(&property, role, visited);
+        }
+        ResolvedColor::Role(role.into())
     }
     fn font_role(role: &str) -> ResolvedFont {
         let points = match role {
@@ -303,7 +319,11 @@ impl<'a> Appearance<'a> {
             visited.push(target.clone());
             let result = match target.namespace.as_deref() {
                 Some(references::STYLE) if color_role(&target.name) => {
-                    ResolvedColor::Role(target.name.clone())
+                    if modern_color_role(&target.name) {
+                        self.default_color(&target.name, visited)
+                    } else {
+                        ResolvedColor::Role(target.name.clone())
+                    }
                 }
                 Some(references::CONFIG | references::STYLE) => {
                     if let Some(value) = self.item(&target) {
@@ -334,7 +354,7 @@ impl<'a> Appearance<'a> {
         {
             ResolvedColor::Rgb(text.to_ascii_lowercase())
         } else if text.is_empty() || text == "Auto" {
-            ResolvedColor::Role(role.into())
+            self.default_color(role, visited)
         } else {
             self.problem("color_invalid", property, None);
             ResolvedColor::Role(role.into())
@@ -375,34 +395,45 @@ fn font_role(name: &str) -> bool {
     )
 }
 fn color_role(name: &str) -> bool {
+    modern_color_role(name)
+        || matches!(
+            name,
+            "TextColor"
+                | "BackColor"
+                | "BorderColor"
+                | "ButtonTextColor"
+                | "ButtonBackColor"
+                | "ButtonBorderColor"
+                | "FieldTextColor"
+                | "FieldBackColor"
+                | "FieldBorderColor"
+                | "HyperlinkTextColor"
+                | "ImportantTextColor"
+                | "SpecialTextColor"
+                | "FormBackColor"
+                | "GroupTitleTextColor"
+                | "SelectionBackColor"
+                | "SelectionTextColor"
+                | "ToolTipBackColor"
+                | "FieldSelectionBackColor"
+                | "FormTextColor"
+                | "TableFooterBackColor"
+                | "TooltipBackColor"
+                | "TooltipTextColor"
+                | "LinesColor"
+                | "HeaderBackColor"
+                | "HeaderTextColor"
+        )
+}
+
+fn modern_color_role(name: &str) -> bool {
     matches!(
         name,
-        "TextColor"
-            | "BackColor"
-            | "BorderColor"
-            | "ButtonTextColor"
-            | "ButtonBackColor"
-            | "ButtonBorderColor"
-            | "FieldTextColor"
-            | "FieldBackColor"
-            | "FieldBorderColor"
-            | "HyperlinkTextColor"
+        "ImportantColor"
             | "AccentColor"
-            | "ImportantTextColor"
-            | "SpecialTextColor"
-            | "FormBackColor"
-            | "GroupTitleTextColor"
-            | "SelectionBackColor"
-            | "SelectionTextColor"
-            | "ToolTipBackColor"
-            | "FieldSelectionBackColor"
-            | "FormTextColor"
-            | "TableFooterBackColor"
-            | "TooltipBackColor"
-            | "TooltipTextColor"
-            | "LinesColor"
-            | "HeaderBackColor"
-            | "HeaderTextColor"
+            | "ActivityColor"
+            | "NavigationColor"
+            | "AuxiliaryNavigationColor"
     )
 }
 

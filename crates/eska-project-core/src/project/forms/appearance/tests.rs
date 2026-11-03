@@ -250,3 +250,122 @@ fn native_taxi_style_keeps_automatic_role_defaults_and_requires_item_definitions
             .any(|value| value.code == "style_missing")
     );
 }
+
+const NATIVE_PALETTE: &str = include_str!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/../../tests/fixtures/forms/native-style-palette/Style.xml"
+));
+
+fn palette_resources(body: &str) -> Vec<FormResource> {
+    vec![
+        descriptor(
+            "Configuration",
+            "Config",
+            "<DefaultStyle>Style.ProbeStyleValues</DefaultStyle>",
+        ),
+        styled_resource("ProbeStyleValues", "palette-data", body),
+    ]
+}
+
+#[test]
+fn native_taxi_five_colors_resolve_selected_values_and_keep_predefined_fallbacks() {
+    let resources = palette_resources(NATIVE_PALETTE);
+    for (role, rgb) in [
+        ("ImportantColor", "#ff0000"),
+        ("AccentColor", "#9800ff"),
+        ("ActivityColor", "#000080"),
+        ("NavigationColor", "#006400"),
+        ("AuxiliaryNavigationColor", "#add8e6"),
+    ] {
+        let body = format!("<TextColor>s:{role}</TextColor>");
+        let result = view(&body, &resources);
+        assert!(
+            result.diagnostics.is_empty(),
+            "{role}: {:?}",
+            result.diagnostics
+        );
+        assert_eq!(
+            result.elements[1].foreground,
+            ResolvedColor::Rgb(rgb.into())
+        );
+        let default = view(&body, &[]);
+        assert!(default.diagnostics.is_empty());
+        assert_eq!(
+            default.elements[1].foreground,
+            ResolvedColor::Role(role.into())
+        );
+    }
+    let normal = view("", &resources);
+    assert_eq!(
+        normal.elements[1].foreground,
+        ResolvedColor::Role("FieldTextColor".into())
+    );
+    assert_eq!(normal.elements[1].font.points, 10.0);
+}
+
+#[test]
+fn native_group_automatic_title_uses_accent_without_replacing_explicit_values() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-style-palette");
+    let resources = palette_resources(NATIVE_PALETTE);
+    for file in ["Group.xml", "GroupAccent.xml"] {
+        let source = std::fs::read_to_string(root.join(file)).unwrap();
+        for (title, color) in [
+            ("", "#9800ff"),
+            ("<TitleTextColor>Auto</TitleTextColor>", "#9800ff"),
+            ("<TitleTextColor>#224466</TitleTextColor>", "#224466"),
+        ] {
+            let source = if file == "Group.xml" {
+                source.replace(
+                    "<UsualGroup name=\"Group\" id=\"1\">",
+                    &format!("<UsualGroup name=\"Group\" id=\"1\">{title}"),
+                )
+            } else {
+                source.clone()
+            };
+            let document = parse("palette-form", source).unwrap();
+            let result = present(&compose(&document, &[]), &[document], &resources);
+            assert!(result.diagnostics.is_empty());
+            assert_eq!(
+                result.elements[1].title_color,
+                ResolvedColor::Rgb(
+                    if file == "Group.xml" {
+                        color
+                    } else {
+                        "#9800ff"
+                    }
+                    .into()
+                )
+            );
+        }
+    }
+}
+
+#[test]
+fn native_palette_cycles_preserve_the_style_payload_source() {
+    let body = NATIVE_PALETTE.replace("<Color>#9800FF</Color>", "<Color>style:AccentColor</Color>");
+    let result = view(
+        "<TextColor>s:AccentColor</TextColor>",
+        &palette_resources(&body),
+    );
+    assert!(
+        result
+            .diagnostics
+            .iter()
+            .any(|diagnostic| diagnostic.code == "style_cycle"
+                && diagnostic.origin.source == "palette-data")
+    );
+    for value in ["Auto", ""] {
+        let body =
+            NATIVE_PALETTE.replace("<Color>#9800FF</Color>", &format!("<Color>{value}</Color>"));
+        let result = view(
+            "<TextColor>s:AccentColor</TextColor>",
+            &palette_resources(&body),
+        );
+        assert!(result.diagnostics.is_empty());
+        assert_eq!(
+            result.elements[1].foreground,
+            ResolvedColor::Role("AccentColor".into())
+        );
+    }
+}

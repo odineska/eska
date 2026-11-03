@@ -671,6 +671,122 @@ fn native_style_payload_is_a_dirty_tracked_dependency_without_source_writes() {
     assert_eq!(bytes(&directory.0), before);
 }
 
+fn write_native_palette(directory: &Path) -> String {
+    write_native_style(directory);
+    let fixtures =
+        Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/forms/native-style-palette");
+    let root = directory.join("src");
+    let style_text = fs::read_to_string(fixtures.join("Style.xml")).unwrap();
+    fs::write(
+        root.join("Styles/ProbeStyleValues/Ext/Style.xml"),
+        &style_text,
+    )
+    .unwrap();
+    fs::copy(fixtures.join("Group.xml"), root.join(PATH)).unwrap();
+    style_text
+}
+
+#[test]
+fn taxi_palette_tracks_dirty_style_values_and_configuration_selection() {
+    use crate::backend::project::forms::ResolvedColor;
+    let directory = TestDir::new();
+    fixture(&directory.0, "configuration");
+    let style_text = write_native_palette(&directory.0);
+    let root = directory.0.join("src");
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let before = bytes(&directory.0);
+    let preview = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    let style = preview
+        .dependencies
+        .iter()
+        .find(|dependency| dependency.path == Path::new("Styles/ProbeStyleValues/Ext/Style.xml"))
+        .unwrap();
+    let config = preview
+        .dependencies
+        .iter()
+        .find(|dependency| dependency.path == Path::new("Configuration.xml"))
+        .unwrap();
+    let config_text = fs::read_to_string(root.join("Configuration.xml")).unwrap();
+    assert_eq!(
+        preview.presentation.elements[1].title_color,
+        ResolvedColor::Rgb("#9800ff".into())
+    );
+    let style_overlay = FormOverlay {
+        source: style.id.clone(),
+        version: "90".into(),
+        text: style_text.replace("#9800FF", "#008000"),
+    };
+    let changed = project
+        .form_preview(
+            &node,
+            None,
+            std::slice::from_ref(&style_overlay),
+            &preview.dependencies,
+            Vec::new(),
+            None,
+        )
+        .unwrap();
+    assert_eq!(
+        changed.presentation.elements[1].title_color,
+        ResolvedColor::Rgb("#008000".into())
+    );
+    let disabled = FormOverlay {
+        source: config.id.clone(),
+        version: "91".into(),
+        text: config_text.replace("<DefaultStyle>Style.ProbeStyleValues</DefaultStyle>", ""),
+    };
+    let fallback = project
+        .form_preview(
+            &node,
+            None,
+            &[disabled],
+            &preview.dependencies,
+            Vec::new(),
+            None,
+        )
+        .unwrap();
+    assert_eq!(
+        fallback.presentation.elements[1].title_color,
+        ResolvedColor::Role("GroupTitleTextColor".into())
+    );
+    assert!(
+        !fallback
+            .dependencies
+            .iter()
+            .any(|dependency| dependency.id == style.id)
+    );
+    let restored = project
+        .form_preview(
+            &node,
+            None,
+            &[
+                style_overlay,
+                FormOverlay {
+                    source: config.id.clone(),
+                    version: "92".into(),
+                    text: config_text,
+                },
+            ],
+            &preview.dependencies,
+            Vec::new(),
+            None,
+        )
+        .unwrap();
+    assert_eq!(
+        restored.presentation.elements[1].title_color,
+        ResolvedColor::Rgb("#008000".into())
+    );
+    assert_eq!(
+        restored.form.root.children[0].identity,
+        preview.form.root.children[0].identity
+    );
+    assert_eq!(bytes(&directory.0), before);
+}
+
 #[test]
 fn style_payload_discovers_its_own_references_and_missing_payload_keeps_defaults() {
     use crate::backend::project::forms::ResolvedColor;
