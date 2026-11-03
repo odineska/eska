@@ -1169,3 +1169,11 @@ Node — 478 passed, 11 skipped; 24 native-прогона прошли. Backend 
 они не исключены из сравнения. [Отчёт](../measurements/t158-native-number-choice-linux.json):
 Node — 479 passed, 11 skipped; 24 native-прогона прошли. Default-форма
 остаётся непринятой: 223 разных пикселя из 42 900 с тенью.
+
+Дополнение T158: числовое значение Linux использует общий LCD runtime,
+сохраняющий исходный input/value/доступное имя. В ru/en совпали1316 пикселей
+четырёх native-bitmap, включая 14pt и Blue на LightYellow. Dirty-смена цвета
+сохраняет DOM и исходники. [Отчёт](../measurements/t158-native-number-values-linux.json):
+Node —480 passed,11 skipped;24 native-прогона прошли. Начала координат
+старых снимков уточнены отдельно; горизонтальное размещение этих форм ещё
+проверяется. Default остаётся непринятой:144 разных пикселя из42900.

@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendCommit": "3020073",
+  "clientCommit": "02b3d36b2f0e3c3b17e76e7d426e0c36f6653113",
+  "referenceCommit": "4e1ce50",
+  "reference": "tests/fixtures/forms/native-state-variants/number-value-pixels.json",
+  "visualParityVerified": false,
+  "numericValueBitmapPixelsVerified": true,
+  "conditions": {
+    "dpi": 96,
+    "scalePercent": 100,
+    "devicePixelRatio": 1,
+    "font": "Liberation Sans 2.1.5 regular,13/19 pixels",
+    "value": "0",
+    "colors": "#333 on white; Blue on LightYellow",
+    "scope": "Enabled single-line number input aligned right; model ReadOnly false"
+  },
+  "implementation": [
+    "Existing LCD NativeLabel uses the original input as its target; no source/value mutation",
+    "Right inset3, baseline from inner input height; input/label layout preserved",
+    "Only ready canvas hides browser ink with webkit-text-fill-color; computed color/value/accessibility remain available",
+    "Placeholder excluded from flex layout; unsupported alignment/font/model ReadOnly retains browser rendering",
+    "Runtime appearance/resize observers and generation cleanup reused; no new engine/dependency/JSON schema"
+  ],
+  "proof": {
+    "nativeBitmaps": 4,
+    "pixelsPerLocale": 658,
+    "pixelsBothLocales": 1316,
+    "differingBitmapPixels": 0,
+    "dirty": "Blue to Red to Blue updates ink, preserves input DOM and source bytes, ru/en",
+    "wholeFormPlacement": "Legacy isolated input forms retain1px horizontal field-placement difference; not accepted as whole forms",
+    "defaultWholeFormWith4pxShadow": {
+      "pixelsCompared": 42900,
+      "differingPixels": 144,
+      "exactRatio": 0.996643,
+      "masks": 0,
+      "tolerance": 0
+    },
+    "coordinateCorrection": "Legacy isolated input reference origin261/239 differs from PagesAuto261/240. Per-row origins corrected in e7f97e7; hashes unchanged."
+  },
+  "checks": {
+    "rust": "Unchanged backend; full fmt/check/clippy/test passed at3020073,1488 passed,19 ignored",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "node": {
+        "passed": 480,
+        "skipped": 11,
+        "failed": 0
+      },
+      "vsixByteCheck": {
+        "out": 59,
+        "docs": 38
+      }
+    }
+  },
+  "nativeRegressions": [
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.48
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.23
+    },
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.86
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 13.52
+    },
+    {
+      "name": "window-titles",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 5.22
+    },
+    {
+      "name": "window-titles",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.78
+    },
+    {
+      "name": "tab-titles",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.99
+    },
+    {
+      "name": "tab-titles",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.64
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.03
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.86
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.96
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.05
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.08
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.69
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.95
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.72
+    },
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 8.34
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.33
+    },
+    {
+      "name": "button-captions",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.83
+    },
+    {
+      "name": "button-captions",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.2
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.29
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.05
+    },
+    {
+      "name": "style",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.07
+    },
+    {
+      "name": "style",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.72
+    }
+  ],
+  "componentScreenshotResults": [
+    {
+      "name": "PagesAuto",
+      "locale": "en",
+      "pixels": 135,
+      "differingBitmapPixels": 0,
+      "wholeFormHorizontalPlacementOffset": 0
+    },
+    {
+      "name": "InputNumber",
+      "locale": "en",
+      "pixels": 135,
+      "differingBitmapPixels": 0,
+      "wholeFormHorizontalPlacementOffset": 1
+    },
+    {
+      "name": "Font14Number",
+      "locale": "en",
+      "pixels": 253,
+      "differingBitmapPixels": 0,
+      "wholeFormHorizontalPlacementOffset": 1
+    },
+    {
+      "name": "InputColors",
+      "locale": "en",
+      "pixels": 135,
+      "differingBitmapPixels": 0,
+      "wholeFormHorizontalPlacementOffset": 1
+    },
+    {
+      "name": "PagesAuto",
+      "locale": "ru",
+      "pixels": 135,
+      "differingBitmapPixels": 0,
+      "wholeFormHorizontalPlacementOffset": 0
+    },
+    {
+      "name": "InputNumber",
+      "locale": "ru",
+      "pixels": 135,
+      "differingBitmapPixels": 0,
+      "wholeFormHorizontalPlacementOffset": 1
+    },
+    {
+      "name": "Font14Number",
+      "locale": "ru",
+      "pixels": 253,
+      "differingBitmapPixels": 0,
+      "wholeFormHorizontalPlacementOffset": 1
+    },
+    {
+      "name": "InputColors",
+      "locale": "ru",
+      "pixels": 135,
+      "differingBitmapPixels": 0,
+      "wholeFormHorizontalPlacementOffset": 1
+    }
+  ],
+  "remaining": [
+    "Default whole-form144 pixels: input/page/frame/shadow corners/lines remain included",
+    "Legacy isolated field horizontal placement, other alignments/fonts/states/DPI",
+    "Full element/style/extension/performance matrix and Windows native acceptance"
+  ],
+  "screenshots": [
+    {
+      "file": "group-design-root-en.png",
+      "sha256": "48a32dba6905690986cb842866378e6a7d34608e02187ee23ff25949e9ff9f8d"
+    },
+    {
+      "file": "state-InputNumber-en.png",
+      "sha256": "fd95ed71d7a8e3a490f73b4dfcbf490fac5d69a4069f5fcf5ba12b6a2e0ac741"
+    },
+    {
+      "file": "state-Font14Number-en.png",
+      "sha256": "81c1f1461c1505163f593f768327d17ea6d8fd60d89f24e9fdfdec2ce21ad54a"
+    },
+    {
+      "file": "state-InputColors-en.png",
+      "sha256": "0c68e429e13a016443fe8e99a8b523a3f51676a7737d4398871b901d5f78601a"
+    },
+    {
+      "file": "group-design-root-ru.png",
+      "sha256": "314ef4f6edb971c4f7c2eea07c83472f8d7b38431228c60fa7e61ecb59114bb4"
+    },
+    {
+      "file": "state-InputNumber-ru.png",
+      "sha256": "842c31ff864c24b55c2fa261e959c5e7fe799f109f3d58b530ba68c6120c91a9"
+    },
+    {
+      "file": "state-Font14Number-ru.png",
+      "sha256": "11eb08cc2c90547a5f0c822413b73b22042d3b4fd68521322002f2e05bfd6f9f"
+    },
+    {
+      "file": "state-InputColors-ru.png",
+      "sha256": "e72d263f17eee641046a44dded9c7c04c91597c20730a03de8bab1290e816e79"
+    }
+  ]
+}
