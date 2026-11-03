@@ -100,7 +100,8 @@
       "InCell": "Child captions joined with comma in one cell below parent header."
     },
     "emptyMark": "Red dotted line after the first empty row.",
-    "viewStatus": "The two demo filter chips belong to ViewStatusAddition. Native isolation fixtures confirm ViewStatusLocation None removes them; SearchControlLocation None leaves them. The provided invoice totals are separate UsualGroup/LabelFields."
+    "viewStatus": "The two demo filter chips belong to ViewStatusAddition. Native isolation fixtures confirm ViewStatusLocation None removes them; SearchControlLocation None leaves them. The provided invoice totals are separate UsualGroup/LabelFields.",
+    "englishToolbar": "More actions; default table429px and dynamic list454px. ru defaults415/418px."
   },
   "remaining": [
     "Full text/pixel calibration; nine ValueTable geometry/state scenarios pass installed VSIX ru/en.",
@@ -122,7 +123,7 @@
     "extensionTypecheck": true,
     "extensionCompile": true,
     "extensionNodeTests": {
-      "passed": 450,
+      "passed": 454,
       "skipped": 11
     },
     "installedTableGalleryRuEn": true,
@@ -426,5 +427,131 @@
   "testRunNotes": [
     "First full cargo test hit ETXTBSY in the existing CLI updater test. Its focused rerun and the subsequent full cargo test passed.",
     "CSS search-width assertion measured 171.9375px for a 172px raster width; the host assertion compares physical pixel rounding."
-  ]
+  ],
+  "latestInstalledTableGallery": {
+    "ru": {
+      "passed": true,
+      "cases": 14,
+      "controlPixels": {
+        "Default": [
+          415,
+          227
+        ],
+        "GridFooter": [
+          400,
+          145
+        ],
+        "Horizontal": [
+          415,
+          227
+        ],
+        "HorizontalTitled": [
+          415,
+          227
+        ],
+        "Vertical": [
+          415,
+          228
+        ],
+        "InCell": [
+          415,
+          227
+        ],
+        "Marked": [
+          415,
+          227
+        ],
+        "ReadOnly": [
+          415,
+          227
+        ],
+        "NoAutoFill": [
+          400,
+          227
+        ],
+        "MetadataTable": [
+          520,
+          227
+        ],
+        "DynamicList": [
+          418,
+          452
+        ],
+        "NoViewStatus": [
+          415,
+          227
+        ],
+        "NoSearchControl": [
+          415,
+          227
+        ],
+        "ColumnHidden": [
+          415,
+          227
+        ]
+      }
+    },
+    "en": {
+      "passed": true,
+      "cases": 14,
+      "controlPixels": {
+        "Default": [
+          429,
+          227
+        ],
+        "GridFooter": [
+          400,
+          145
+        ],
+        "Horizontal": [
+          429,
+          227
+        ],
+        "HorizontalTitled": [
+          429,
+          227
+        ],
+        "Vertical": [
+          429,
+          228
+        ],
+        "InCell": [
+          429,
+          227
+        ],
+        "Marked": [
+          429,
+          227
+        ],
+        "ReadOnly": [
+          429,
+          227
+        ],
+        "NoAutoFill": [
+          400,
+          227
+        ],
+        "MetadataTable": [
+          520,
+          227
+        ],
+        "DynamicList": [
+          454,
+          452
+        ],
+        "NoViewStatus": [
+          429,
+          227
+        ],
+        "NoSearchControl": [
+          429,
+          227
+        ],
+        "ColumnHidden": [
+          429,
+          227
+        ]
+      }
+    }
+  }
 }
