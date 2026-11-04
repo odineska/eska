@@ -1,0 +1,1517 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "scope": "T154/T155 Linux common-picture inheritance, replacement and explicit empty values in base/extension-own forms; semantic/behavior acceptance, not full Configurator pixel parity.",
+  "fullProfileAccepted": false,
+  "platformBuild": "8.3.27.2342",
+  "noBslModulesOrHandlers": true,
+  "nativeCases": 13,
+  "nativeInputs": {
+    "path": "tests/fixtures/forms/native-picture-composition/metrics.json",
+    "sha256": "22891e6440bf2cbf7de183a4b8e2a9f3ec27e4690ddf3acd738993309a0a9241",
+    "rawXmlFiles": 20,
+    "allFiles": 25,
+    "files": [
+      {
+        "path": "base/CommonForms/ProbePicture/Ext/Form.xml",
+        "sha256": "f82134277c8fd97059196e3e36291437b5ea0a7f810b7024199260991567230e",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "base/CommonForms/ProbePicture.xml",
+        "sha256": "1e780774d6fbceab6eb30c9db62a8440ae3e283422f03bbf79e8385538c53b2f",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "base/CommonPictures/ProbeIcon/Ext/Picture/Picture.svg",
+        "sha256": "1ab85192fab3115b99459e7ab0d1edfe6b5726561583ade9404336a372ccee62",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "base/CommonPictures/ProbeIcon/Ext/Picture.xml",
+        "sha256": "ce1c74d7499ec536457922a70e5b2061d17e2330879e1ce2de67e1288e988dea",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "base/CommonPictures/ProbeIcon.xml",
+        "sha256": "d44431ddbf269b6b1f78b7e74d930cd8c582ce35a432c08482b7b70b473c59ea",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "base/Configuration.xml",
+        "sha256": "4f592575553ebb4be95a6c155667e6cb34bd35112acbf2a2fc027ad5f66c2482",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "base/Languages/Русский.xml",
+        "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "first/CommonForms/F_PictureOwn/Ext/Form.xml",
+        "sha256": "0cebf455120955992b1dd55b67bca3ad64d564a34cdb74fe5e83d511ad13e32e",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "first/CommonForms/F_PictureOwn.xml",
+        "sha256": "9cd8eba541a974b030a092349653fff658ec8c75cd9e65346f0137721f7ec3ff",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "first/CommonPictures/F_OwnIcon/Ext/Picture/Picture.svg",
+        "sha256": "d3c459de77c1ece06c4eec5716b54786667b29f2e1f5f3a57fbb4113b6fdea09",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "first/CommonPictures/F_OwnIcon/Ext/Picture.xml",
+        "sha256": "ce1c74d7499ec536457922a70e5b2061d17e2330879e1ce2de67e1288e988dea",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "first/CommonPictures/F_OwnIcon.xml",
+        "sha256": "be1de1eeb2ef3db24e8489c134bfbb9a9848d5bd48d72baeb10f9acf4242abf9",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "first/CommonPictures/ProbeIcon/Ext/Picture/Picture.svg",
+        "sha256": "87f9cccf22d7379e954ac9278d104f039af6c6b836bc88d7ec42e230ed2987ef",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "first/CommonPictures/ProbeIcon/Ext/Picture.xml",
+        "sha256": "ce1c74d7499ec536457922a70e5b2061d17e2330879e1ce2de67e1288e988dea",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "first/CommonPictures/ProbeIcon.xml",
+        "sha256": "e026b390d2a652fa88c7d95403e13f3691f3923a38baa89f651b4a19f060c7f4",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "first/Configuration.xml",
+        "sha256": "6fc68d9e1dcaa4416810fdca497e2c78b34d27c149f4f6cf2508a063c199750f",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "second/CommonForms/S_PictureOwn/Ext/Form.xml",
+        "sha256": "f82134277c8fd97059196e3e36291437b5ea0a7f810b7024199260991567230e",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "second/CommonForms/S_PictureOwn.xml",
+        "sha256": "1e7894e96ecb02b0040f7079f098859b7cad954945fd00086dd9a21077c5b851",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "second/CommonPictures/ProbeIcon/Ext/Picture/Picture.svg",
+        "sha256": "6d46c4e15aeb4f0b4c3e484c3db523c865000b49e5e8fe457b9191ae4ae25345",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "second/CommonPictures/ProbeIcon/Ext/Picture.xml",
+        "sha256": "ce1c74d7499ec536457922a70e5b2061d17e2330879e1ce2de67e1288e988dea",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "second/CommonPictures/ProbeIcon.xml",
+        "sha256": "a0aa4ec90d08711f71682af13a038e0df506a845830ceff443712d614976b3b6",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "second/Configuration.xml",
+        "sha256": "e2c5bbd16b0e35a4908259336d43edf08a8e323cefb2ab717a4cd9a37be747e0",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "variants/EmptyPicture.zip",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "variants/SecondBorrowedPicture.xml",
+        "sha256": "1b65d53b8678135f4b5f18551636fb9a12100045b9058d86dc463e85cd270b87",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "variants/SecondEmptyPicture.xml",
+        "sha256": "6e14e5440f26d37553d68a02e8872b80e6453340a7b04a2f2dbf5081a91c0010",
+        "nativeRoundTrip": true
+      }
+    ],
+    "zeroBytePayloadIsIntentional": true
+  },
+  "nativeRules": [
+    "Common picture payload override is global to base and own extension forms.",
+    "Borrowed metadata without Picture Extended and without payload inherits the preceding picture.",
+    "Picture Extended without external payload explicitly clears the image.",
+    "An empty Picture imported by 1C exports a zero-byte Picture.zip, which is also an explicit empty image.",
+    "An unrelated own common picture remains unchanged.",
+    "An initially empty base or own-extension common picture has no Ext payload and is valid empty, not a missing-image diagnostic."
+  ],
+  "nativeObservations": [
+    {
+      "id": "pictures-base-only",
+      "activeExtensions": [],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "base",
+          "color": "#E02020"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-base-only.png",
+        "sha256": "b40c5c6c8806b55e09d278a7ca0a78e77bba536a70f25d01fdb4566212f02c34",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-first-only",
+      "activeExtensions": [
+        "first"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "first",
+          "color": "#00AA00"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-first-only.png",
+        "sha256": "587718066a45ebd833f90047485bc07da0188ebc402081475fe30a7202b1a21a",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-second-only",
+      "activeExtensions": [
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "second",
+          "color": "#2050EE"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-second-only.png",
+        "sha256": "7f797e00450d44487a8129b62559cda72526a054a1e9b2d6a63c341d9e013102",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-base-both",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "second",
+          "color": "#2050EE"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-base-both.png",
+        "sha256": "1fa80efec7bc19fd4adab79d59c5e2cde7e5163c75fdd2da54d9e5b741fda408",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-first-own-both",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_PictureOwn/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "second",
+          "color": "#2050EE"
+        },
+        "OwnLogo": {
+          "member": "first",
+          "color": "#FFCC00"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-first-own-both.png",
+        "sha256": "2a5bc2208127d120946fb289d07b75db1a9f5a71374f0e7dca6a2b903e6d2a11",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-second-own-both",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "second",
+      "payload": "CommonForms/S_PictureOwn/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "second",
+          "color": "#2050EE"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-second-own-both.png",
+        "sha256": "ce0e19540c1a08fe55dfe33edd411869bc96db67ae0a0f362170c436c6e33594",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-borrow-only",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [
+        "second/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [
+        {
+          "input": "variants/SecondBorrowedPicture.xml",
+          "output": "second/CommonPictures/ProbeIcon.xml"
+        }
+      ],
+      "expected": {
+        "Logo": {
+          "member": "first",
+          "color": "#00AA00"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-borrow-only.png",
+        "sha256": "e37e4342b73d5ed8418ba32e18a1d26f53a0c1d15419cfc00407212a85d0d6d0",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-clear-no-file",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [
+        "second/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [],
+      "expected": {
+        "Logo": null
+      },
+      "screenshot": {
+        "file": "pictures-v2-clear-no-file.png",
+        "sha256": "f741a24bbe7b2d2813187af706ad929384f117815fd9f71e7a7cbf3f4e31c660",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-clear-empty-file",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [
+        "second/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [
+        {
+          "input": "variants/SecondEmptyPicture.xml",
+          "output": "second/CommonPictures/ProbeIcon/Ext/Picture.xml"
+        },
+        {
+          "input": "variants/EmptyPicture.zip",
+          "output": "second/CommonPictures/ProbeIcon/Ext/Picture/Picture.zip"
+        }
+      ],
+      "expected": {
+        "Logo": null
+      },
+      "screenshot": {
+        "file": "pictures-v2-clear-empty-file.png",
+        "sha256": "f741a24bbe7b2d2813187af706ad929384f117815fd9f71e7a7cbf3f4e31c660",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-first-own-clear",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_PictureOwn/Ext/Form.xml",
+      "remove": [
+        "second/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [],
+      "expected": {
+        "Logo": null,
+        "OwnLogo": {
+          "member": "first",
+          "color": "#FFCC00"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-first-own-clear.png",
+        "sha256": "4ea8408ca33aba8fc15571544aac779a08b8d634c45d69bc7a7f1d574bb272ae",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-second-own-clear",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "second",
+      "payload": "CommonForms/S_PictureOwn/Ext/Form.xml",
+      "remove": [
+        "second/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [],
+      "expected": {
+        "Logo": null
+      },
+      "screenshot": {
+        "file": "pictures-v2-second-own-clear.png",
+        "sha256": "5804045f2e23dc9deb83a3647ca00bf8f314c3c858a0586ac3c77d525458e51a",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-base-empty-definition",
+      "activeExtensions": [],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [
+        "base/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [],
+      "expected": {
+        "Logo": null
+      },
+      "screenshot": {
+        "file": "pictures-v2-base-empty-definition.png",
+        "sha256": "7d3ccdb6f103c96d2ad62b1188fd56dd5f3eebcc47c027696777af2812366e7e",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-first-empty-definition",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_PictureOwn/Ext/Form.xml",
+      "remove": [
+        "first/CommonPictures/F_OwnIcon/Ext"
+      ],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "second",
+          "color": "#2050EE"
+        },
+        "OwnLogo": null
+      },
+      "screenshot": {
+        "file": "pictures-v2-first-empty-definition.png",
+        "sha256": "58d0f0e36ce24b5fa363a4e33997b339a9d549fb2cdca30271040de9f2b37b47",
+        "width": 1918,
+        "height": 770
+      }
+    }
+  ],
+  "applicabilityChecks": [
+    {
+      "variant": "clear",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    },
+    {
+      "variant": "both",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    }
+  ],
+  "implementation": {
+    "emptyIsDistinctFromInheritanceAndReadFailure": true,
+    "zeroBytePayloadIsWatched": true,
+    "missingReferencedFileStillDiagnosed": true,
+    "foreignNamespaceStateDoesNotClear": true,
+    "sourceContainmentAndPayloadLimitsPreserved": true,
+    "noNewDependencies": true,
+    "clientRuntimeChanged": false,
+    "experimentalRustApiChange": "PicturePreview adds Empty { inputs }; exhaustive Rust consumers must handle it. Documented IDE schemas are unchanged: metadata properties use existing missing status; forms emit picture:null without an asset or unavailable diagnostic."
+  },
+  "regressions": {
+    "beforeFix": {
+      "tests": 4,
+      "passed": 0,
+      "failed": 4,
+      "log": "regression-before-valid.log",
+      "sha256": "d3d15cddcf450160a281a5e29e08b8f46d37cbfaafd065a041ebcc5b2218dab9",
+      "source": "Replay of the already-built pre-fix integration executable after correcting fixture primary IDs."
+    },
+    "additionalOwnEmptyBeforeFix": {
+      "failed": 1,
+      "log": "own-empty-before.log",
+      "sha256": "dd21d58ecaa5be8169af722ebea29cf2443e96c27d1801a4c2cbcf98d4981d5a"
+    },
+    "afterFix": {
+      "formContextTestsPassed": 28,
+      "newPictureTestsPassed": 4,
+      "nativeCases": 13,
+      "sharedPictureReadTestPassed": true
+    }
+  },
+  "checks": {
+    "rustStatic": {
+      "exitCode": 0,
+      "commands": [
+        "cargo fmt --check",
+        "cargo check",
+        "cargo clippy --all-targets --all-features -- -D warnings"
+      ]
+    },
+    "cargoTest": {
+      "exitCode": 0,
+      "passed": 1518,
+      "failed": 0,
+      "ignored": 19,
+      "suites": 42,
+      "log": "test-final.log",
+      "sha256": "52a8970ea9ba1d49ffdb5a70fc56b9fb75b23b858bbbf57c1d9e5d14e970e6fb",
+      "environment": {
+        "ESKA_TEST_ROOT": "<eska-root>/../eska-playground (absolute)",
+        "RUST_TEST_THREADS": "1"
+      }
+    },
+    "backendBuild": {
+      "exitCode": 0,
+      "command": "cargo build -p eska-project --bin eska-project",
+      "log": "backend-build-final.log",
+      "sha256": "7223908dc0efcc1641a68c6127613791b0b46d9868b7e074f8f490cde6460c41"
+    },
+    "node": {
+      "exitCode": 0,
+      "passed": 512,
+      "failed": 0,
+      "skipped": 11,
+      "total": 523,
+      "log": "node-tests.log",
+      "sha256": "9214ff26d0d1c652a2fd3d9c44c5e31c3aa4f84685ac3a48c62519759b451b78"
+    },
+    "installedClient": {
+      "checkExitCode": 0,
+      "compileExitCode": 0,
+      "packageExitCode": 0
+    }
+  },
+  "acceptance": {
+    "batchDirectory": "form-batch-C777Vi",
+    "passed": true,
+    "pairsPassed": 22,
+    "pairsFailed": 0,
+    "publishedCases": 240,
+    "pictureGuiCasesTotal": 38,
+    "allPairsFirstAttempt": true,
+    "guiConcurrency": 1,
+    "builds": 1,
+    "packages": 1,
+    "seconds": 203.56,
+    "backendSha256": "3d05a3c994b245b94444e14c56fdd3549b26dfa61ff499c4a08e96c4b5abc339",
+    "vsixSha256": "77ed1f5e8d57373e74fb5be236bccbffe8fdae98c472073a7f53db80767c4282",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "c079d1e1ffa61305d870596447b33b836aa71f2e6f61e40032cc5c9e76fb1690",
+    "runtimeAssetsSameAsPreviousStyleLayerAcceptance": true,
+    "batchSha256": "5db7fadbbcd27b951ff3772190ae757c7cdd938d974f33e51913a21d3f2d2569",
+    "inputsSha256": "373857940d981454f2e788bf64c51bf5bc5c749accb7a659a8ea08a746e72143",
+    "runs": [
+      {
+        "suite": "picture-composition",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 7.931999380000001,
+        "caseIds": [
+          "picture-composition/initial-borrowed-image",
+          "picture-composition/dirty-extended-clear",
+          "picture-composition/foreign-property-state-keeps-inheritance",
+          "picture-composition/dirty-extended-restored",
+          "picture-composition/invalid-metadata",
+          "picture-composition/dirty-metadata-recovers",
+          "picture-composition/detached-dirty-clear",
+          "picture-composition/external-image-shadowed-by-clear",
+          "picture-composition/detached-inherited-external-image",
+          "picture-composition/external-image-restored",
+          "picture-composition/native-zero-byte-payload",
+          "picture-composition/dirty-empty-picture-property",
+          "picture-composition/dirty-payload-image-selected",
+          "picture-composition/reattached-image",
+          "picture-composition/own-form-global-picture-and-own-resource",
+          "picture-composition/own-form-cleared-global-picture",
+          "picture-composition/own-form-global-picture-recovered",
+          "picture-composition/external-own-empty-definition",
+          "picture-composition/external-own-image-restored"
+        ]
+      },
+      {
+        "suite": "picture-composition",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 9.956996617,
+        "caseIds": [
+          "picture-composition/initial-borrowed-image",
+          "picture-composition/dirty-extended-clear",
+          "picture-composition/foreign-property-state-keeps-inheritance",
+          "picture-composition/dirty-extended-restored",
+          "picture-composition/invalid-metadata",
+          "picture-composition/dirty-metadata-recovers",
+          "picture-composition/detached-dirty-clear",
+          "picture-composition/external-image-shadowed-by-clear",
+          "picture-composition/detached-inherited-external-image",
+          "picture-composition/external-image-restored",
+          "picture-composition/native-zero-byte-payload",
+          "picture-composition/dirty-empty-picture-property",
+          "picture-composition/dirty-payload-image-selected",
+          "picture-composition/reattached-image",
+          "picture-composition/own-form-global-picture-and-own-resource",
+          "picture-composition/own-form-cleared-global-picture",
+          "picture-composition/own-form-global-picture-recovered",
+          "picture-composition/external-own-empty-definition",
+          "picture-composition/external-own-image-restored"
+        ]
+      },
+      {
+        "suite": "pictures",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 3.6287623029999994,
+        "caseIds": [
+          "pictures/suite"
+        ]
+      },
+      {
+        "suite": "pictures",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 6.4277086940000006,
+        "caseIds": [
+          "pictures/suite"
+        ]
+      },
+      {
+        "suite": "style-composition",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 5.843794439000001,
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ]
+      },
+      {
+        "suite": "style-composition",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 8.146462021,
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ]
+      },
+      {
+        "suite": "composition",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 5.702364898,
+        "caseIds": [
+          "composition/initial-addon",
+          "composition/dirty-customization",
+          "composition/external-patch-with-dirty-second",
+          "composition/external-addon-with-dirty-second",
+          "composition/invalid-purpose",
+          "composition/external-configuration-restored",
+          "composition/detached-dirty-addon",
+          "composition/detached-dirty-default-purpose",
+          "composition/reattached-default-purpose"
+        ]
+      },
+      {
+        "suite": "composition",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 8.235866335999999,
+        "caseIds": [
+          "composition/initial-addon",
+          "composition/dirty-customization",
+          "composition/external-patch-with-dirty-second",
+          "composition/external-addon-with-dirty-second",
+          "composition/invalid-purpose",
+          "composition/external-configuration-restored",
+          "composition/detached-dirty-addon",
+          "composition/detached-dirty-default-purpose",
+          "composition/reattached-default-purpose"
+        ]
+      },
+      {
+        "suite": "owners",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 4.980710887000001,
+        "caseIds": [
+          "owners/object-both",
+          "owners/extension-own-form",
+          "owners/extension-own-object",
+          "owners/dirty-invalid-owner",
+          "owners/foreign-owner-property",
+          "owners/dirty-own-form",
+          "owners/detached-dirty-own-form",
+          "owners/detached-invalid-owner-recovery",
+          "owners/reattached-own-form"
+        ]
+      },
+      {
+        "suite": "owners",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 7.690130004999999,
+        "caseIds": [
+          "owners/object-both",
+          "owners/extension-own-form",
+          "owners/extension-own-object",
+          "owners/dirty-invalid-owner",
+          "owners/foreign-owner-property",
+          "owners/dirty-own-form",
+          "owners/detached-dirty-own-form",
+          "owners/detached-invalid-owner-recovery",
+          "owners/reattached-own-form"
+        ]
+      },
+      {
+        "suite": "dependencies",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 5.836166664000004,
+        "caseIds": [
+          "dependencies/suite"
+        ]
+      },
+      {
+        "suite": "dependencies",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 8.356576337999998,
+        "caseIds": [
+          "dependencies/suite"
+        ]
+      },
+      {
+        "suite": "activity",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 4.211288851000004,
+        "caseIds": [
+          "activity/suite"
+        ]
+      },
+      {
+        "suite": "activity",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 6.632626770000003,
+        "caseIds": [
+          "activity/suite"
+        ]
+      },
+      {
+        "suite": "button-borders",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 27.051653338999998,
+        "caseIds": [
+          "button-borders/FontAuto",
+          "button-borders/dirty-FontAuto",
+          "button-borders/floating-FontAuto",
+          "button-borders/floating-dirty-FontAuto",
+          "button-borders/reattached-FontAuto",
+          "button-borders/FontRegular",
+          "button-borders/FontBold",
+          "button-borders/FontPartial14",
+          "button-borders/FontStyleNormal",
+          "button-borders/FontForm14",
+          "button-borders/FontBar14",
+          "button-borders/FontFormBold",
+          "button-borders/FontExplicitAuto",
+          "button-borders/CheckAutoBack",
+          "button-borders/CheckAutoText",
+          "button-borders/CheckNormalFalse",
+          "button-borders/CheckNormal14",
+          "button-borders/CheckSmall",
+          "button-borders/CheckLarge",
+          "button-borders/CheckExtra",
+          "button-borders/CheckText",
+          "button-borders/CheckSysAuto",
+          "button-borders/CheckSys14",
+          "button-borders/CheckBoldOnly",
+          "button-borders/CheckAutoDisabled",
+          "button-borders/Color000000",
+          "button-borders/Color000040",
+          "button-borders/Color000080",
+          "button-borders/dirty-Color000080",
+          "button-borders/default-Color000080",
+          "button-borders/floating-Color000080",
+          "button-borders/floating-dirty-Color000080",
+          "button-borders/reattached-Color000080",
+          "button-borders/Color0000FF",
+          "button-borders/Color008000",
+          "button-borders/Color00FF00",
+          "button-borders/Color00FFFF",
+          "button-borders/Color0A73B7",
+          "button-borders/Color202020",
+          "button-borders/Color20DD20",
+          "button-borders/Color336699",
+          "button-borders/Color345678",
+          "button-borders/Color404040",
+          "button-borders/Color5511FF",
+          "button-borders/Color555555",
+          "button-borders/Color606060",
+          "button-borders/Color747474",
+          "button-borders/Color757575",
+          "button-borders/Color777777",
+          "button-borders/Color800000",
+          "button-borders/Color804020",
+          "button-borders/Color808080",
+          "button-borders/Color9800FF",
+          "button-borders/Color99FFFF",
+          "button-borders/ColorC08080",
+          "button-borders/ColorFF0000",
+          "button-borders/ColorFF00FF",
+          "button-borders/ColorFFE100",
+          "button-borders/ColorFFFF00",
+          "button-borders/ColorFFFFFF"
+        ]
+      },
+      {
+        "suite": "button-borders",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 36.46089867100002,
+        "caseIds": [
+          "button-borders/FontAuto",
+          "button-borders/dirty-FontAuto",
+          "button-borders/floating-FontAuto",
+          "button-borders/floating-dirty-FontAuto",
+          "button-borders/reattached-FontAuto",
+          "button-borders/FontRegular",
+          "button-borders/FontBold",
+          "button-borders/FontPartial14",
+          "button-borders/FontStyleNormal",
+          "button-borders/FontForm14",
+          "button-borders/FontBar14",
+          "button-borders/FontFormBold",
+          "button-borders/FontExplicitAuto",
+          "button-borders/CheckAutoBack",
+          "button-borders/CheckAutoText",
+          "button-borders/CheckNormalFalse",
+          "button-borders/CheckNormal14",
+          "button-borders/CheckSmall",
+          "button-borders/CheckLarge",
+          "button-borders/CheckExtra",
+          "button-borders/CheckText",
+          "button-borders/CheckSysAuto",
+          "button-borders/CheckSys14",
+          "button-borders/CheckBoldOnly",
+          "button-borders/CheckAutoDisabled",
+          "button-borders/Color000000",
+          "button-borders/Color000040",
+          "button-borders/Color000080",
+          "button-borders/dirty-Color000080",
+          "button-borders/default-Color000080",
+          "button-borders/floating-Color000080",
+          "button-borders/floating-dirty-Color000080",
+          "button-borders/reattached-Color000080",
+          "button-borders/Color0000FF",
+          "button-borders/Color008000",
+          "button-borders/Color00FF00",
+          "button-borders/Color00FFFF",
+          "button-borders/Color0A73B7",
+          "button-borders/Color202020",
+          "button-borders/Color20DD20",
+          "button-borders/Color336699",
+          "button-borders/Color345678",
+          "button-borders/Color404040",
+          "button-borders/Color5511FF",
+          "button-borders/Color555555",
+          "button-borders/Color606060",
+          "button-borders/Color747474",
+          "button-borders/Color757575",
+          "button-borders/Color777777",
+          "button-borders/Color800000",
+          "button-borders/Color804020",
+          "button-borders/Color808080",
+          "button-borders/Color9800FF",
+          "button-borders/Color99FFFF",
+          "button-borders/ColorC08080",
+          "button-borders/ColorFF0000",
+          "button-borders/ColorFF00FF",
+          "button-borders/ColorFFE100",
+          "button-borders/ColorFFFF00",
+          "button-borders/ColorFFFFFF"
+        ]
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 4.751324985999992,
+        "caseIds": [
+          "multiple-windows/suite"
+        ]
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 7.138755808999995,
+        "caseIds": [
+          "multiple-windows/suite"
+        ]
+      },
+      {
+        "suite": "restore",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 8.99328356499999,
+        "caseIds": [
+          "restore/suite",
+          "restore/suite"
+        ]
+      },
+      {
+        "suite": "restore",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 9.971013296999997,
+        "caseIds": [
+          "restore/suite",
+          "restore/suite"
+        ]
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 4.311913060000021,
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ]
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 6.768210240000015,
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ]
+      }
+    ],
+    "pictureGui": [
+      {
+        "passed": true,
+        "pictureComposition": true,
+        "locale": "en",
+        "results": [
+          {
+            "label": "initial-borrowed-image",
+            "colors": [
+              "#00AA00"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "dirty-extended-clear",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "foreign-property-state-keeps-inheritance",
+            "colors": [
+              "#00AA00"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "dirty-extended-restored",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "invalid-metadata",
+            "lastGoodModelRetained": true
+          },
+          {
+            "label": "dirty-metadata-recovers",
+            "colors": [
+              "#00AA00"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "detached-dirty-clear",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "external-image-shadowed-by-clear",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "detached-inherited-external-image",
+            "colors": [
+              "#8844CC"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "external-image-restored",
+            "colors": [
+              "#00AA00"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "native-zero-byte-payload",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "dirty-empty-picture-property",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "dirty-payload-image-selected",
+            "colors": [
+              "#2050EE"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "reattached-image",
+            "colors": [
+              "#2050EE"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "own-form-global-picture-and-own-resource",
+            "colors": [
+              "#2050EE",
+              "#FFCC00"
+            ],
+            "assets": 2
+          },
+          {
+            "label": "own-form-cleared-global-picture",
+            "colors": [
+              null,
+              "#FFCC00"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "own-form-global-picture-recovered",
+            "colors": [
+              "#2050EE",
+              "#FFCC00"
+            ],
+            "assets": 2
+          },
+          {
+            "label": "external-own-empty-definition",
+            "colors": [
+              "#2050EE",
+              null
+            ],
+            "assets": 1
+          },
+          {
+            "label": "external-own-image-restored",
+            "colors": [
+              "#2050EE",
+              "#FFCC00"
+            ],
+            "assets": 2
+          }
+        ],
+        "sourceWritesDuringViewing": false,
+        "controlledExternalChangesRestored": true,
+        "stableIdentity": true,
+        "stableDom": true,
+        "detachedUpdates": true,
+        "nativeEmptyPayload": true,
+        "hostDriver": {
+          "suiteBodyMs": 4812.985109
+        }
+      },
+      {
+        "passed": true,
+        "pictureComposition": true,
+        "locale": "ru",
+        "results": [
+          {
+            "label": "initial-borrowed-image",
+            "colors": [
+              "#00AA00"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "dirty-extended-clear",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "foreign-property-state-keeps-inheritance",
+            "colors": [
+              "#00AA00"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "dirty-extended-restored",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "invalid-metadata",
+            "lastGoodModelRetained": true
+          },
+          {
+            "label": "dirty-metadata-recovers",
+            "colors": [
+              "#00AA00"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "detached-dirty-clear",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "external-image-shadowed-by-clear",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "detached-inherited-external-image",
+            "colors": [
+              "#8844CC"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "external-image-restored",
+            "colors": [
+              "#00AA00"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "native-zero-byte-payload",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "dirty-empty-picture-property",
+            "colors": [
+              null
+            ],
+            "assets": 0
+          },
+          {
+            "label": "dirty-payload-image-selected",
+            "colors": [
+              "#2050EE"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "reattached-image",
+            "colors": [
+              "#2050EE"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "own-form-global-picture-and-own-resource",
+            "colors": [
+              "#2050EE",
+              "#FFCC00"
+            ],
+            "assets": 2
+          },
+          {
+            "label": "own-form-cleared-global-picture",
+            "colors": [
+              null,
+              "#FFCC00"
+            ],
+            "assets": 1
+          },
+          {
+            "label": "own-form-global-picture-recovered",
+            "colors": [
+              "#2050EE",
+              "#FFCC00"
+            ],
+            "assets": 2
+          },
+          {
+            "label": "external-own-empty-definition",
+            "colors": [
+              "#2050EE",
+              null
+            ],
+            "assets": 1
+          },
+          {
+            "label": "external-own-image-restored",
+            "colors": [
+              "#2050EE",
+              "#FFCC00"
+            ],
+            "assets": 2
+          }
+        ],
+        "sourceWritesDuringViewing": false,
+        "controlledExternalChangesRestored": true,
+        "stableIdentity": true,
+        "stableDom": true,
+        "detachedUpdates": true,
+        "nativeEmptyPayload": true,
+        "hostDriver": {
+          "suiteBodyMs": 4651.295109
+        }
+      }
+    ],
+    "buttonPixelRegression": [
+      {
+        "locale": "en",
+        "samples": 60,
+        "pixelsCompared": 365164,
+        "differentRgbPixels": 0,
+        "wholeFormAccepted": false
+      },
+      {
+        "locale": "ru",
+        "samples": 60,
+        "pixelsCompared": 365164,
+        "differentRgbPixels": 0,
+        "wholeFormAccepted": false
+      }
+    ],
+    "application": [
+      {
+        "passed": true,
+        "formApplication": true,
+        "locale": "en",
+        "sourceWritesDuringViewing": false,
+        "results": [
+          {
+            "sample": 0,
+            "openThroughFirstPaintMs": 306,
+            "elements": 13,
+            "retainedElements": 22,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 1,
+            "commandButtons": 5,
+            "scrollWidth": 635,
+            "scrollHeight": 686,
+            "dependencies": 13,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 1,
+            "openThroughFirstPaintMs": 165,
+            "elements": 7,
+            "retainedElements": 7,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 0,
+            "commandButtons": 0,
+            "scrollWidth": 679,
+            "scrollHeight": 490,
+            "dependencies": 12,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 2,
+            "openThroughFirstPaintMs": 200,
+            "elements": 21,
+            "retainedElements": 22,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 6,
+            "commandButtons": 7,
+            "scrollWidth": 1104,
+            "scrollHeight": 640,
+            "dependencies": 9,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 3,
+            "openThroughFirstPaintMs": 118,
+            "elements": 3,
+            "retainedElements": 3,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 0,
+            "commandButtons": 4,
+            "scrollWidth": 565,
+            "scrollHeight": 322,
+            "dependencies": 6,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "formApplication": true,
+        "locale": "ru",
+        "sourceWritesDuringViewing": false,
+        "results": [
+          {
+            "sample": 0,
+            "openThroughFirstPaintMs": 274,
+            "elements": 13,
+            "retainedElements": 22,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 1,
+            "commandButtons": 5,
+            "scrollWidth": 635,
+            "scrollHeight": 686,
+            "dependencies": 13,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 1,
+            "openThroughFirstPaintMs": 156,
+            "elements": 7,
+            "retainedElements": 7,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 0,
+            "commandButtons": 0,
+            "scrollWidth": 679,
+            "scrollHeight": 490,
+            "dependencies": 12,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 2,
+            "openThroughFirstPaintMs": 190,
+            "elements": 21,
+            "retainedElements": 22,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 6,
+            "commandButtons": 7,
+            "scrollWidth": 1104,
+            "scrollHeight": 640,
+            "dependencies": 9,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 3,
+            "openThroughFirstPaintMs": 133,
+            "elements": 3,
+            "retainedElements": 3,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 0,
+            "commandButtons": 4,
+            "scrollWidth": 535,
+            "scrollHeight": 322,
+            "dependencies": 6,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          }
+        ]
+      }
+    ]
+  },
+  "preparationNotes": [
+    "The initial hand-authored Logo id 10 and OwnLogo id 11 collided with auxiliary IDs. All three forms were re-imported with unique primary IDs 100/101 and all 11 observations plus two applicability checks repeated. Only the v2 native exports and screenshots are accepted. Initial snapshots and logs remain in the playground.",
+    "Initial clippy rejected two identical match arms; they were merged without suppressing the lint, then the full required checks passed.",
+    "Two combined elevated check commands timed out in automatic permission review before execution. Static checks ran in the normal workspace and the narrower cargo-test command was approved; no check remains blocked."
+  ],
+  "artifactLocations": {
+    "nativePlayground": "native-picture-composition-528ty1m3",
+    "installedBatch": "form-batch-C777Vi",
+    "frozenBackend": "artifacts/eska-project",
+    "frozenVsix": "artifacts/viewer.vsix",
+    "relativeTo": "<eska-root>/../eska-playground"
+  },
+  "remaining": [
+    "Full standard-icon/image format, alpha/transparency, size/alignment, DPI and consumer matrix.",
+    "Full Configurator layout and form pixels, property inventory, other extension applicability/owner families.",
+    "Windows and platform 8.5 acceptance."
+  ]
+}

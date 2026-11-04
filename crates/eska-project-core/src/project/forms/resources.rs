@@ -13,7 +13,7 @@ use crate::{
     project::{
         designer_source::{self, DesignerSource},
         metadata_edit::snapshot,
-        metadata_model::{MetadataKind, ObjectId, ProjectScope},
+        metadata_model::{MetadataKind, MetadataValue, ObjectId, ProjectScope},
         metadata_parser::{self, ParsedDescriptor, PropertiesMode},
     },
 };
@@ -157,16 +157,20 @@ impl Loader<'_> {
             return Err(FormContextError::InputTooLarge);
         }
         let mut requests = Vec::new();
-        let (descriptor, references) = parse_metadata(&text, id, &dependency, &mut requests)?;
-        let payload = load_payload(
+        let metadata = parse_metadata(&text, id, &dependency, &mut requests)?;
+        let mut payload = load_payload(
             self.context,
             &reader.source,
-            &descriptor,
+            &metadata.descriptor,
             &location.path,
             reader.member,
             self.overlays,
             self.dependencies,
         )?;
+        // A borrowed picture may explicitly clear its value without an Ext payload.
+        if payload.picture.is_none() && metadata.picture_extended {
+            payload.picture = Some(designer_source::PicturePreview::Empty { inputs: Vec::new() });
+        }
         requests.extend(payload.requests);
         self.input_bytes = self.input_bytes.saturating_add(payload.bytes);
         if self.input_bytes > super::MAX_FORM_CONTEXT_BYTES {
@@ -175,8 +179,8 @@ impl Loader<'_> {
         self.output.push(FormResource {
             source: dependency.id.clone(),
             layer_source: reader.layer_source.clone(),
-            descriptor,
-            references,
+            descriptor: metadata.descriptor,
+            references: metadata.references,
             picture: payload.picture,
             style: payload.style,
             retained_bytes: text.len().saturating_add(payload.bytes),
@@ -192,12 +196,18 @@ impl Loader<'_> {
     }
 }
 
+struct ResourceMetadata {
+    descriptor: ParsedDescriptor,
+    references: Vec<FormReference>,
+    picture_extended: bool,
+}
+
 fn parse_metadata(
     text: &str,
     id: &ObjectId,
     dependency: &FormDependency,
     pending: &mut Vec<ObjectId>,
-) -> Result<(ParsedDescriptor, Vec<FormReference>), FormContextError> {
+) -> Result<ResourceMetadata, FormContextError> {
     let invalid = || FormContextError::InvalidMetadata {
         source: dependency.id.clone(),
     };
@@ -205,7 +215,32 @@ fn parse_metadata(
     let descriptor =
         metadata_parser::parse(text, id.parent(), PropertiesMode::All).map_err(|_| invalid())?;
     discover(xml.root_element(), pending, false);
-    Ok((descriptor, super::references::collect(xml.root_element())))
+    Ok(ResourceMetadata {
+        descriptor,
+        references: super::references::collect(xml.root_element()),
+        picture_extended: picture_extended(xml.root_element()),
+    })
+}
+
+fn picture_extended(root: Node<'_, '_>) -> bool {
+    const METADATA: &str = "http://v8.1c.ru/8.3/MDClasses";
+    const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
+    root.children()
+        .filter(|node| node.has_tag_name((METADATA, "CommonPicture")))
+        .flat_map(|node| node.children())
+        .filter(|node| node.has_tag_name((METADATA, "InternalInfo")))
+        .flat_map(|node| node.children())
+        .filter(|node| node.has_tag_name((READABLE, "PropertyState")))
+        .any(|state| {
+            [("Property", "Picture"), ("State", "Extended")]
+                .iter()
+                .all(|(key, value)| {
+                    state.children().any(|node| {
+                        node.has_tag_name((READABLE, *key))
+                            && node.text().map(str::trim) == Some(*value)
+                    })
+                })
+        })
 }
 
 /// External artifacts get configuration collections from the other application sources.
@@ -348,8 +383,19 @@ fn load_picture(
         super::FormDependencyRole::Metadata,
     )?
     else {
-        // Borrowed picture descriptors without a payload keep the preceding application's image.
-        return Ok((None, 0));
+        let borrowed = object.properties.as_ref().is_some_and(|properties| {
+            properties.iter().any(|property| {
+                property.property.key.namespace.as_deref() == Some(metadata_parser::MD_NAMESPACE)
+                    && property.property.key.name == "ObjectBelonging"
+                    && matches!(&property.property.value, MetadataValue::Text(value) if value == "Adopted")
+            })
+        });
+        // Own empty pictures are valid. Only borrowed absence can inherit a preceding value;
+        // the caller separately handles Extended without a payload as an explicit clear.
+        return Ok((
+            (!borrowed).then_some(designer_source::PicturePreview::Empty { inputs: Vec::new() }),
+            0,
+        ));
     };
     if text.len() > 64 * 1024 {
         return Err(FormContextError::InputTooLarge);
@@ -359,26 +405,30 @@ fn load_picture(
     })?;
     dependencies.push(dependency);
     let preview = source.picture_preview_xml(id, &text);
-    if let designer_source::PicturePreview::Ready(picture) = &preview {
-        for input in &picture.inputs {
-            let id = source_identity(context, source.project().source(), &input.path);
-            if dependencies.iter().any(|dependency| dependency.id == id) {
-                continue;
-            }
-            dependencies.push(FormDependency {
-                id,
-                root: source.project().source().into(),
-                path: input.path.clone(),
-                snapshot: input.snapshot.clone(),
-                version: None,
-                member: member.map(str::to_owned),
-                role: super::FormDependencyRole::Picture,
-            });
+    let inputs = match &preview {
+        designer_source::PicturePreview::Ready(picture) => picture.inputs.as_slice(),
+        designer_source::PicturePreview::Empty { inputs } => inputs.as_slice(),
+        designer_source::PicturePreview::Failed(_) => &[],
+    };
+    for input in inputs {
+        let id = source_identity(context, source.project().source(), &input.path);
+        if dependencies.iter().any(|dependency| dependency.id == id) {
+            continue;
         }
+        dependencies.push(FormDependency {
+            id,
+            root: source.project().source().into(),
+            path: input.path.clone(),
+            snapshot: input.snapshot.clone(),
+            version: None,
+            member: member.map(str::to_owned),
+            role: super::FormDependencyRole::Picture,
+        });
     }
     let bytes = text.len().saturating_add(match &preview {
         designer_source::PicturePreview::Ready(picture) => picture.bytes.len(),
-        designer_source::PicturePreview::Failed(_) => 0,
+        designer_source::PicturePreview::Empty { .. }
+        | designer_source::PicturePreview::Failed(_) => 0,
     });
     Ok((Some(preview), bytes))
 }

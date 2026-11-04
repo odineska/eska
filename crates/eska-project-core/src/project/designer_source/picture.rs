@@ -38,6 +38,10 @@ pub struct PictureInput {
 #[derive(Debug)]
 pub enum PicturePreview {
     Ready(Picture),
+    /// A valid empty picture, including the native export's zero-byte payload.
+    Empty {
+        inputs: Vec<PictureInput>,
+    },
     Failed(PictureError),
 }
 
@@ -61,7 +65,7 @@ pub(super) fn read_with_xml(
     descriptor: &Path,
     xml: Option<&str>,
 ) -> PicturePreview {
-    resolve(source, descriptor, xml).map_or_else(PicturePreview::Failed, PicturePreview::Ready)
+    resolve(source, descriptor, xml).unwrap_or_else(PicturePreview::Failed)
 }
 
 /// Resolve all workspace paths through the existing source-containment boundary.
@@ -69,7 +73,7 @@ fn resolve(
     source: &DesignerSource,
     descriptor: &Path,
     overlay: Option<&str>,
-) -> Result<Picture, PictureError> {
+) -> Result<PicturePreview, PictureError> {
     let ext = descriptor.with_extension("").join("Ext");
     let mut inputs = Vec::new();
     let xml_path = ext.join("Picture.xml");
@@ -96,13 +100,18 @@ fn resolve(
     if !root.has_tag_name((EXTERNAL, "ExtPicture")) {
         return Err(PictureError::Invalid);
     }
-    let name = root
+    let value = root
         .children()
         .find(|node| node.has_tag_name((EXTERNAL, "Picture")))
-        .and_then(|node| {
-            node.children()
-                .find(|node| node.has_tag_name((READABLE, "Abs")))
-        })
+        .ok_or(PictureError::Missing)?;
+    if !value.children().any(|node| node.is_element())
+        && value.text().is_none_or(|text| text.trim().is_empty())
+    {
+        return Ok(PicturePreview::Empty { inputs });
+    }
+    let name = value
+        .children()
+        .find(|node| node.has_tag_name((READABLE, "Abs")))
         .and_then(|node| node.text())
         .ok_or(PictureError::Missing)?
         .trim();
@@ -115,13 +124,16 @@ fn resolve(
         MAX_ARCHIVE,
         &mut inputs,
     )?;
+    if bytes.is_empty() {
+        return Ok(PicturePreview::Empty { inputs });
+    }
     let mut picture = if bytes.starts_with(b"PK\x03\x04") || bytes.starts_with(b"PK\x05\x06") {
         archive::picture(&bytes)
     } else {
         image(bytes, name.to_owned())
     }?;
     picture.inputs = inputs;
-    Ok(picture)
+    Ok(PicturePreview::Ready(picture))
 }
 
 /// External picture references and manifest variants are local filenames, never paths.

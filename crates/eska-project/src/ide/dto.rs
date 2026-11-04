@@ -251,7 +251,8 @@ pub fn picture(preview: &eska_project_core::project::designer_source::PicturePre
             return json!({"status":"ready", "mimeType":picture.mime_type,
             "data":STANDARD.encode(&picture.bytes), "fileName":picture.file_name});
         }
-        PicturePreview::Failed(PictureError::Missing) => "missing",
+        // Metadata properties use the existing no-image status; forms retain empty semantics.
+        PicturePreview::Empty { .. } | PicturePreview::Failed(PictureError::Missing) => "missing",
         PicturePreview::Failed(PictureError::Unsupported) => "unsupported",
         PicturePreview::Failed(PictureError::Invalid) => "invalid",
         PicturePreview::Failed(PictureError::TooLarge) => "too_large",

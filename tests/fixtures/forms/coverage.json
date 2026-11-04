@@ -801,7 +801,8 @@
         "profile.windows",
         "context.native-static-composition",
         "context.native-owner-forms",
-        "styles.native-layer-values"
+        "styles.native-layer-values",
+        "resources.native-picture-layers"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1367,7 +1368,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "resources.native-picture-layers"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -2074,12 +2076,13 @@
       "profile": "designer-xml",
       "level": "semantics",
       "status": "in_progress",
-      "scope": "Stored BaseForm deltas/provenance, native purpose/order, limited catalog/extension-own forms and common-style item-layer cases are verified; complete applicability and all resource families remain open.",
+      "scope": "Stored BaseForm deltas/provenance, native purpose/order, limited catalog/extension-own forms, common-style item layers and common-picture inheritance/empty values are verified; complete applicability and all resource families remain open.",
       "fixtures": [
         "tests/fixtures/forms/native-basic.xml",
         "tests/fixtures/forms/native-extension-composition",
         "tests/fixtures/forms/native-owner-composition",
-        "tests/fixtures/forms/native-style-composition"
+        "tests/fixtures/forms/native-style-composition",
+        "tests/fixtures/forms/native-picture-composition"
       ],
       "driver": null,
       "evidence": [
@@ -3572,8 +3575,94 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t155-form-pictures.json",
-      "remaining": "Exact standard icons and all resource kinds, alpha, scale/alignment, missing resources and extension/style overrides.",
-      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+      "remaining": "Exact standard icons, all formats/consumers, alpha/transparency, scale/alignment and full resource pixel matrix. Common-picture layer/empty semantics are accepted separately in resources.native-picture-layers.",
+      "nextAction": "Measure a complete native image sizing/transparency matrix and its full widgets; preserve accepted layer semantics."
+    },
+    {
+      "id": "resources.native-picture-layers",
+      "milestone": "T155",
+      "kinds": [
+        "Form",
+        "PictureDecoration"
+      ],
+      "axes": [
+        "context.layers",
+        "appearance.pictures",
+        "resources.origin",
+        "source.identity",
+        "behavior.session",
+        "behavior.window"
+      ],
+      "profile": "designer-xml",
+      "level": "semantics",
+      "status": "accepted_scope",
+      "scope": "Linux 8.3.27.2342: thirteen native common-picture observations across base and two extensions; inherited/replaced/explicit/initial empty pictures, foreign-namespace protection, dirty/external updates and real detached GUI. Semantic/behavior acceptance only.",
+      "fixtures": [
+        "tests/fixtures/forms/native-picture-composition"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "picture-composition",
+        "path": "test/form-picture-composition-host.cjs",
+        "caseIds": [
+          "initial-borrowed-image",
+          "dirty-extended-clear",
+          "foreign-property-state-keeps-inheritance",
+          "dirty-extended-restored",
+          "invalid-metadata",
+          "dirty-metadata-recovers",
+          "detached-dirty-clear",
+          "external-image-shadowed-by-clear",
+          "detached-inherited-external-image",
+          "external-image-restored",
+          "native-zero-byte-payload",
+          "dirty-empty-picture-property",
+          "dirty-payload-image-selected",
+          "reattached-image",
+          "own-form-global-picture-and-own-resource",
+          "own-form-cleared-global-picture",
+          "own-form-global-picture-recovered",
+          "external-own-empty-definition",
+          "external-own-image-restored"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t155-native-picture-layers-linux.json",
+          "sha256": "c2433edb1f17b0f31dd78d51f839881229b5678e70c74f37a0c61d1b01420238",
+          "assertions": [
+            {
+              "pointer": "/nativeCases",
+              "equals": 13
+            },
+            {
+              "pointer": "/noBslModulesOrHandlers",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/cargoTest/failed",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 22
+            },
+            {
+              "pointer": "/acceptance/pictureGuiCasesTotal",
+              "equals": 38
+            },
+            {
+              "pointer": "/acceptance/allPairsFirstAttempt",
+              "equals": true
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t155-native-picture-layers-linux.json",
+      "remaining": "Other picture formats/consumers, standard icons, transparency, sizing, full Configurator pixels, Windows and 8.5.",
+      "nextAction": "Extend native image/layout coverage without conflating empty, inherited and broken resources."
     },
     {
       "id": "commands.complete-matrix",
@@ -4360,7 +4449,8 @@
     "docs/measurements/t163-restart-linux.json",
     "docs/measurements/t154-native-composition-linux.json",
     "docs/measurements/t154-native-owner-linux.json",
-    "docs/measurements/t155-native-style-layers-linux.json"
+    "docs/measurements/t155-native-style-layers-linux.json",
+    "docs/measurements/t155-native-picture-layers-linux.json"
   ],
   "supersessions": [
     {

@@ -46,12 +46,16 @@ pub(super) fn resolve(
                         && object.metadata.name() == name
                 })
         });
-        if let Some(resource) = resource
-            && matches!(&resource.picture, Some(PicturePreview::Ready(_)))
-        {
-            return Some(FormPicture::Common {
-                source: resource.source.clone(),
-            });
+        if let Some(resource) = resource {
+            match &resource.picture {
+                Some(PicturePreview::Ready(_)) => {
+                    return Some(FormPicture::Common {
+                        source: resource.source.clone(),
+                    });
+                }
+                Some(PicturePreview::Empty { .. }) => return None,
+                _ => {}
+            }
         }
     }
     diagnostics.push(AppearanceDiagnostic {

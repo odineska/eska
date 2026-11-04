@@ -6,6 +6,7 @@ use crate::backend::project::forms::{
 use serde_json::{Value, json};
 
 mod owners;
+mod pictures;
 mod styles;
 
 fn inputs() -> PathBuf {
