@@ -1,0 +1,4912 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "scope": "Standard table More actions captions and dropdown glyphs in Linux ru/en. Complete toolbar comparisons remain rejected and are retained below. Existing full grid/pagination, ordinary/primary button, layout and style regressions remain strict.",
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "nativeForms": 4,
+  "nativeImages": 8,
+  "newIndependentXmlCorpus": false,
+  "nativeInputs": {
+    "schemaVersion": 1,
+    "platformBuild": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "zoom": 100,
+    "scope": "Complete standard table toolbar strip, including the shadow row. Reuses eight previously captured native images of four XML-only forms. Grid/chips/form shell outside this strip.",
+    "noNewIndependentXmlCorpus": true,
+    "nativeImages": 8,
+    "forms": 4,
+    "comparisonMasks": [],
+    "pixelTolerance": 0,
+    "rows": [
+      {
+        "name": "Default",
+        "source": "tests/fixtures/forms/native-tables/Default.xml",
+        "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+        "locales": {
+          "en": {
+            "name": "toolbar",
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Default.png",
+            "screenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5",
+            "nativeRegion": [
+              274,
+              549,
+              429,
+              27
+            ],
+            "offset": [
+              0,
+              -65
+            ],
+            "width": 429,
+            "height": 27,
+            "rgbSha256": "743f31b402737d199db30ae51bb85334071172d5476504ff1b9c4a7e5b7d6f65",
+            "pixels": 11583
+          },
+          "ru": {
+            "name": "toolbar",
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Default.png",
+            "screenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38",
+            "nativeRegion": [
+              274,
+              549,
+              415,
+              27
+            ],
+            "offset": [
+              0,
+              -65
+            ],
+            "width": 415,
+            "height": 27,
+            "rgbSha256": "d07044a609696b206e16dcec8c52a84194d30dd12ea0cb522f332f1db7edbabc",
+            "pixels": 11205
+          }
+        }
+      },
+      {
+        "name": "ReadOnly",
+        "source": "tests/fixtures/forms/native-tables/ReadOnly.xml",
+        "sourceSha256": "efa9ef102cb1e3c1f37543f692bbf4c58980dc2f0cb56bc29decbbb62e3ba0d3",
+        "locales": {
+          "en": {
+            "name": "toolbar",
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/en-ReadOnly.png",
+            "screenshotSha256": "6a385741e1a2817fb9a016e79c321f16e3e0ddde9f4b21a5239d5d599ef396cf",
+            "nativeRegion": [
+              274,
+              549,
+              429,
+              27
+            ],
+            "offset": [
+              0,
+              -65
+            ],
+            "width": 429,
+            "height": 27,
+            "rgbSha256": "060c3d3c46f92a1e62cf1fcff27f8a8bc105e2d335dd55042f7a83929289c6a2",
+            "pixels": 11583
+          },
+          "ru": {
+            "name": "toolbar",
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-ReadOnly.png",
+            "screenshotSha256": "82030ccf6dffce9be8776721c0756858de1ad2817bf6e3db077e241c843327e4",
+            "nativeRegion": [
+              274,
+              549,
+              415,
+              27
+            ],
+            "offset": [
+              0,
+              -65
+            ],
+            "width": 415,
+            "height": 27,
+            "rgbSha256": "970c7da41b64d291547b2e93b3435991dfb644e8a6f8faa9895e828b04932d36",
+            "pixels": 11205
+          }
+        }
+      },
+      {
+        "name": "MetadataTable",
+        "source": "tests/fixtures/forms/native-context-tables/MetadataTable.xml",
+        "sourceSha256": "e892ddbe46307d58fc4fe5baf7569f8d5b33f3ff36a35eb8d76b1587341685a0",
+        "locales": {
+          "en": {
+            "name": "toolbar",
+            "nativeScreenshot": "native-context-pixels-g93fkhea/en-MetadataTable-complete.png",
+            "screenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825",
+            "nativeRegion": [
+              274,
+              549,
+              520,
+              27
+            ],
+            "offset": [
+              0,
+              -65
+            ],
+            "width": 520,
+            "height": 27,
+            "rgbSha256": "37d77a4e2d7c3cd74d1e74107201ff24d31ffe2faf046bf1c312491aafad57b2",
+            "pixels": 14040
+          },
+          "ru": {
+            "name": "toolbar",
+            "nativeScreenshot": "native-context-pixels-g93fkhea/ru-MetadataTable-complete.png",
+            "screenshotSha256": "48713ccf40610e945129abeee70c0f90df5ef80d6dcd44d02ca9b258de90f3bf",
+            "nativeRegion": [
+              274,
+              549,
+              520,
+              27
+            ],
+            "offset": [
+              0,
+              -65
+            ],
+            "width": 520,
+            "height": 27,
+            "rgbSha256": "f67d58cdc41b52d19edcbe06c31da954ee908162b59918f20fa3e08f4d7a7304",
+            "pixels": 14040
+          }
+        }
+      },
+      {
+        "name": "DynamicList",
+        "source": "tests/fixtures/forms/native-context-tables/DynamicList.xml",
+        "sourceSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+        "locales": {
+          "en": {
+            "name": "toolbar",
+            "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+            "screenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f",
+            "nativeRegion": [
+              274,
+              397,
+              454,
+              27
+            ],
+            "offset": [
+              0,
+              -65
+            ],
+            "width": 454,
+            "height": 27,
+            "rgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "pixels": 12258
+          },
+          "ru": {
+            "name": "toolbar",
+            "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+            "screenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723",
+            "nativeRegion": [
+              274,
+              397,
+              418,
+              27
+            ],
+            "offset": [
+              0,
+              -65
+            ],
+            "width": 418,
+            "height": 27,
+            "rgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "pixels": 11286
+          }
+        }
+      }
+    ],
+    "menuCaptions": {
+      "rows": [
+        {
+          "form": "Default",
+          "locale": "en",
+          "text": "More actions",
+          "region": [
+            335,
+            5,
+            75,
+            15
+          ],
+          "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+          "pixels": 1125,
+          "arrowRegion": [
+            416,
+            13,
+            6,
+            3
+          ],
+          "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+        },
+        {
+          "form": "Default",
+          "locale": "ru",
+          "text": "Еще",
+          "region": [
+            369,
+            5,
+            27,
+            15
+          ],
+          "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+          "pixels": 405,
+          "arrowRegion": [
+            402,
+            13,
+            6,
+            3
+          ],
+          "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+        },
+        {
+          "form": "ReadOnly",
+          "locale": "en",
+          "text": "More actions",
+          "region": [
+            335,
+            5,
+            75,
+            15
+          ],
+          "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+          "pixels": 1125,
+          "arrowRegion": [
+            416,
+            13,
+            6,
+            3
+          ],
+          "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+        },
+        {
+          "form": "ReadOnly",
+          "locale": "ru",
+          "text": "Еще",
+          "region": [
+            369,
+            5,
+            27,
+            15
+          ],
+          "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+          "pixels": 405,
+          "arrowRegion": [
+            402,
+            13,
+            6,
+            3
+          ],
+          "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+        },
+        {
+          "form": "MetadataTable",
+          "locale": "en",
+          "text": "More actions",
+          "region": [
+            426,
+            5,
+            75,
+            15
+          ],
+          "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+          "pixels": 1125,
+          "arrowRegion": [
+            507,
+            13,
+            6,
+            3
+          ],
+          "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+        },
+        {
+          "form": "MetadataTable",
+          "locale": "ru",
+          "text": "Еще",
+          "region": [
+            474,
+            5,
+            27,
+            15
+          ],
+          "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+          "pixels": 405,
+          "arrowRegion": [
+            507,
+            13,
+            6,
+            3
+          ],
+          "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+        },
+        {
+          "form": "DynamicList",
+          "locale": "en",
+          "text": "More actions",
+          "region": [
+            360,
+            5,
+            75,
+            15
+          ],
+          "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+          "pixels": 1125,
+          "arrowRegion": [
+            441,
+            13,
+            6,
+            3
+          ],
+          "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+        },
+        {
+          "form": "DynamicList",
+          "locale": "ru",
+          "text": "Еще",
+          "region": [
+            372,
+            5,
+            27,
+            15
+          ],
+          "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+          "pixels": 405,
+          "arrowRegion": [
+            405,
+            13,
+            6,
+            3
+          ],
+          "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+        }
+      ],
+      "captionPixels": 6120,
+      "arrowPixels": 144,
+      "foreground": "#4d4d4d",
+      "background": "#ffffff",
+      "fontPixels": 13,
+      "ascent": 12,
+      "descent": 3,
+      "buttonHeight": 26,
+      "trailingWidth": 4
+    }
+  },
+  "nativeMetricsSha256": "fcbd0d4196f88513d2c6a9df17297aabd363fe825fd0aa9ca1da832a66754a78",
+  "menuCaptionPixelParity": true,
+  "menuArrowPixelParity": true,
+  "wholeToolbarPixelParity": false,
+  "wholeFormVisualParity": false,
+  "fullProfileAccepted": false,
+  "noBslModulesOrHandlers": true,
+  "implementation": [
+    "Table More actions uses the existing regular button fill, FreeType caption composition and border component; other dropdown consumers retain their previous path.",
+    "The caption uses a measured 4 px trailing allocation, moving its bitmap 2 px left. Default NativeCaption trailing allocation remains zero.",
+    "NativeButtonArrow composes a 6x3 asymmetric alpha stencil over the shared discrete button gradient, resolving both standard/style CSS colors through getComputedStyle.",
+    "The arrow is calibrated only for 26 px buttons; unsupported height/color keeps the browser arrow and records the existing localized text-approximation notice.",
+    "Both actual detached windows and complete dirty replacements retain the same table DOM and selected identity; viewing saves no XML."
+  ],
+  "checks": {
+    "node": {
+      "passed": 517,
+      "failed": 0,
+      "skipped": 11,
+      "total": 528,
+      "log": "table-bars-after-n_qmz5lt/menu-node-tests.log",
+      "logSha256": "29f941e8a6751560ab08649cd1eb39ef28a089e89a567dc7edcc5f5d5c899881"
+    },
+    "nativeMenuUnit": {
+      "passed": true,
+      "captionPixelsCompared": 6120,
+      "arrowPixelsCompared": 144,
+      "differentRgbPixels": 0,
+      "logSha256": "b405b32d758e289d52cf515edc8d7b990aaf40a7af4733449094a36c2fb7bd77"
+    },
+    "backend": {
+      "codeChangedInThisSlice": false,
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "completeChecksReuse": "docs/measurements/t158-native-button-types-linux.json",
+      "cargoPassed": 1520,
+      "cargoFailed": 0,
+      "cargoIgnored": 19,
+      "sourceHashesVerifiedAgainstBatch": true,
+      "rustSourcesAndCargoFilesUnchangedSince": "ad8020e"
+    }
+  },
+  "beforeFix": {
+    "directory": "table-bars-before-7270fvf7",
+    "wholeToolbarPixelParity": false,
+    "scenarios": {
+      "en": {
+        "passed": false,
+        "expectedFailure": true,
+        "receiptSha256": "4873b6d85d7ef7e3bdd625bee43f40e4be5dfba0f30941bbbf04bb45fd63d92e",
+        "vsixSha256": "f471907f528d20797866ff2021c40548026e48e8b6ca7f3b5dbaff85b9cee44c",
+        "measurements": [
+          {
+            "form": "Default",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 11583,
+            "differentRgbPixels": 2262,
+            "measurement": {
+              "label": "Default",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 463,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 429,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                429,
+                227
+              ],
+              "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+              "pixels": 97383,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    429,
+                    27
+                  ],
+                  "rgbSha256": "58b7fc008c7e12e700f2b9d0c43fc3eeda9b78a07253bdc5399c7bd1e9b39ada",
+                  "pixels": 11583,
+                  "expectedRgbSha256": "743f31b402737d199db30ae51bb85334071172d5476504ff1b9c4a7e5b7d6f65",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "ReadOnly",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 11583,
+            "differentRgbPixels": 2561,
+            "measurement": {
+              "label": "ReadOnly",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 463,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 429,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                429,
+                227
+              ],
+              "rgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+              "pixels": 97383,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    429,
+                    27
+                  ],
+                  "rgbSha256": "58b7fc008c7e12e700f2b9d0c43fc3eeda9b78a07253bdc5399c7bd1e9b39ada",
+                  "pixels": 11583,
+                  "expectedRgbSha256": "060c3d3c46f92a1e62cf1fcff27f8a8bc105e2d335dd55042f7a83929289c6a2",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "MetadataTable",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 14040,
+            "differentRgbPixels": 2265,
+            "measurement": {
+              "label": "MetadataTable",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 554,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 520,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "#",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                520,
+                227
+              ],
+              "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+              "pixels": 118040,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    520,
+                    27
+                  ],
+                  "rgbSha256": "dd3f957469d46398a548fe301c4199933aff8bc76b864370e1b1313365f634f3",
+                  "pixels": 14040,
+                  "expectedRgbSha256": "37d77a4e2d7c3cd74d1e74107201ff24d31ffe2faf046bf1c312491aafad57b2",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "DynamicList",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 12258,
+            "differentRgbPixels": 2200,
+            "measurement": {
+              "label": "DynamicList",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 488,
+                "height": 588
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 454,
+                "height": 452
+              },
+              "headers": [
+                {
+                  "text": "Code",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Description",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                454,
+                473
+              ],
+              "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+              "pixels": 214742,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    454,
+                    27
+                  ],
+                  "rgbSha256": "1fc338e77f9a2a67a56c1a2dcc69183be6833a9164727e9df0e3e3a7fdf57477",
+                  "pixels": 12258,
+                  "expectedRgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 21
+            }
+          }
+        ]
+      },
+      "ru": {
+        "passed": false,
+        "expectedFailure": true,
+        "receiptSha256": "879801bbe2b77df5a7f43f1f5dafe4e24199905d4aaa3858f53d926a2bbb48a1",
+        "vsixSha256": "f471907f528d20797866ff2021c40548026e48e8b6ca7f3b5dbaff85b9cee44c",
+        "measurements": [
+          {
+            "form": "Default",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 11205,
+            "differentRgbPixels": 1735,
+            "measurement": {
+              "label": "Default",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 449,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 415,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                415,
+                227
+              ],
+              "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+              "pixels": 94205,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    415,
+                    27
+                  ],
+                  "rgbSha256": "10f914782a4b1ff8789f3fbfe5e94fe0952404b64449afe528f3c6777f3ce717",
+                  "pixels": 11205,
+                  "expectedRgbSha256": "d07044a609696b206e16dcec8c52a84194d30dd12ea0cb522f332f1db7edbabc",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "ReadOnly",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 11205,
+            "differentRgbPixels": 2068,
+            "measurement": {
+              "label": "ReadOnly",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 449,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 415,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                415,
+                227
+              ],
+              "rgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+              "pixels": 94205,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    415,
+                    27
+                  ],
+                  "rgbSha256": "10f914782a4b1ff8789f3fbfe5e94fe0952404b64449afe528f3c6777f3ce717",
+                  "pixels": 11205,
+                  "expectedRgbSha256": "970c7da41b64d291547b2e93b3435991dfb644e8a6f8faa9895e828b04932d36",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "MetadataTable",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 14040,
+            "differentRgbPixels": 2242,
+            "measurement": {
+              "label": "MetadataTable",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 554,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 520,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "N",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                520,
+                227
+              ],
+              "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+              "pixels": 118040,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    520,
+                    27
+                  ],
+                  "rgbSha256": "406cc983a31ed54795ffa993c3ccf18d6a0931780383aebf4ddf4990fbaeff02",
+                  "pixels": 14040,
+                  "expectedRgbSha256": "f67d58cdc41b52d19edcbe06c31da954ee908162b59918f20fa3e08f4d7a7304",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "DynamicList",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 11286,
+            "differentRgbPixels": 1677,
+            "measurement": {
+              "label": "DynamicList",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 452,
+                "height": 588
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 418,
+                "height": 452
+              },
+              "headers": [
+                {
+                  "text": "Код",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Наименование",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                418,
+                473
+              ],
+              "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+              "pixels": 197714,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    418,
+                    27
+                  ],
+                  "rgbSha256": "4ed66ecddf5fbfb8a892ece66c9b0d9f743ba6032c6bc6b81f0aba5a0a9f4cae",
+                  "pixels": 11286,
+                  "expectedRgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 21
+            }
+          }
+        ]
+      }
+    }
+  },
+  "afterFixCompleteToolbarDiagnostic": {
+    "directory": "table-bars-after-n_qmz5lt",
+    "wholeToolbarPixelParity": false,
+    "scenarios": {
+      "en": {
+        "passed": false,
+        "expectedFailure": true,
+        "receiptSha256": "c3c31804ae2ef92b9bbfe7902f83ec2c97be172d2cb0a9e954261621e2da67e7",
+        "vsixSha256": "426d3c8f3ec10b37430da096bb5f7c90e1444453f38f99aaa133e5bdb14659d9",
+        "measurements": [
+          {
+            "form": "Default",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 11583,
+            "differentRgbPixels": 1397,
+            "measurement": {
+              "label": "Default",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 463,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 429,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                429,
+                227
+              ],
+              "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+              "pixels": 97383,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    429,
+                    27
+                  ],
+                  "rgbSha256": "b7f5eab331ffb08080e94e5b970e17b90df4eb09f9b375bae034385301b5b2fb",
+                  "pixels": 11583,
+                  "expectedRgbSha256": "743f31b402737d199db30ae51bb85334071172d5476504ff1b9c4a7e5b7d6f65",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "ReadOnly",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 11583,
+            "differentRgbPixels": 1696,
+            "measurement": {
+              "label": "ReadOnly",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 463,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 429,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                429,
+                227
+              ],
+              "rgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+              "pixels": 97383,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    429,
+                    27
+                  ],
+                  "rgbSha256": "b7f5eab331ffb08080e94e5b970e17b90df4eb09f9b375bae034385301b5b2fb",
+                  "pixels": 11583,
+                  "expectedRgbSha256": "060c3d3c46f92a1e62cf1fcff27f8a8bc105e2d335dd55042f7a83929289c6a2",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "MetadataTable",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 14040,
+            "differentRgbPixels": 1397,
+            "measurement": {
+              "label": "MetadataTable",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 554,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 520,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "#",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                520,
+                227
+              ],
+              "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+              "pixels": 118040,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    520,
+                    27
+                  ],
+                  "rgbSha256": "30c6a68fff01c99b1f06ae1a818ecf42bfa88024bf5d44a5315f8b150ee15e3e",
+                  "pixels": 14040,
+                  "expectedRgbSha256": "37d77a4e2d7c3cd74d1e74107201ff24d31ffe2faf046bf1c312491aafad57b2",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "DynamicList",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 12258,
+            "differentRgbPixels": 1323,
+            "measurement": {
+              "label": "DynamicList",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 488,
+                "height": 588
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 454,
+                "height": 452
+              },
+              "headers": [
+                {
+                  "text": "Code",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Description",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                454,
+                473
+              ],
+              "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+              "pixels": 214742,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    454,
+                    27
+                  ],
+                  "rgbSha256": "143b0719bd38538816d7fd6285bf3675b14756af1147997c670bf4b112891800",
+                  "pixels": 12258,
+                  "expectedRgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 21
+            }
+          }
+        ]
+      },
+      "ru": {
+        "passed": false,
+        "expectedFailure": true,
+        "receiptSha256": "388f89efa92c3fad016f37b42d7f61da98dd4a544e353176ef5b74454eb2af6d",
+        "vsixSha256": "426d3c8f3ec10b37430da096bb5f7c90e1444453f38f99aaa133e5bdb14659d9",
+        "measurements": [
+          {
+            "form": "Default",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 11205,
+            "differentRgbPixels": 1314,
+            "measurement": {
+              "label": "Default",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 449,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 415,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                415,
+                227
+              ],
+              "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+              "pixels": 94205,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    415,
+                    27
+                  ],
+                  "rgbSha256": "694808931f253e8467135ae1d7aa8918a8bb448dcae4da8190387b60ee4ccb14",
+                  "pixels": 11205,
+                  "expectedRgbSha256": "d07044a609696b206e16dcec8c52a84194d30dd12ea0cb522f332f1db7edbabc",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "ReadOnly",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 11205,
+            "differentRgbPixels": 1647,
+            "measurement": {
+              "label": "ReadOnly",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 449,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 415,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                415,
+                227
+              ],
+              "rgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+              "pixels": 94205,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    415,
+                    27
+                  ],
+                  "rgbSha256": "694808931f253e8467135ae1d7aa8918a8bb448dcae4da8190387b60ee4ccb14",
+                  "pixels": 11205,
+                  "expectedRgbSha256": "970c7da41b64d291547b2e93b3435991dfb644e8a6f8faa9895e828b04932d36",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "MetadataTable",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 14040,
+            "differentRgbPixels": 1823,
+            "measurement": {
+              "label": "MetadataTable",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 554,
+                "height": 342
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 520,
+                "height": 227
+              },
+              "headers": [
+                {
+                  "text": "N",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Text",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Amount",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Active",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                520,
+                227
+              ],
+              "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+              "pixels": 118040,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    520,
+                    27
+                  ],
+                  "rgbSha256": "d5d943cc1056b113320e25233cc6f454b537daa012149608d67aae57edd7269c",
+                  "pixels": 14040,
+                  "expectedRgbSha256": "f67d58cdc41b52d19edcbe06c31da954ee908162b59918f20fa3e08f4d7a7304",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 0
+            }
+          },
+          {
+            "form": "DynamicList",
+            "geometryMatches": true,
+            "gridPixelsExact": true,
+            "toolbarPixels": 11286,
+            "differentRgbPixels": 1249,
+            "measurement": {
+              "label": "DynamicList",
+              "passed": false,
+              "geometryMatches": true,
+              "frame": {
+                "x": 28,
+                "y": 277,
+                "width": 452,
+                "height": 588
+              },
+              "control": {
+                "x": 41,
+                "y": 380,
+                "width": 418,
+                "height": 452
+              },
+              "headers": [
+                {
+                  "text": "Код",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                },
+                {
+                  "text": "Наименование",
+                  "height": 30,
+                  "color": "rgb(77, 77, 77)",
+                  "font": "13.3333px",
+                  "status": "ready"
+                }
+              ],
+              "origin": {
+                "x": 376,
+                "y": 347
+              },
+              "region": [
+                389,
+                450,
+                418,
+                473
+              ],
+              "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+              "pixels": 197714,
+              "additionalRegions": [
+                {
+                  "name": "toolbar",
+                  "region": [
+                    389,
+                    385,
+                    418,
+                    27
+                  ],
+                  "rgbSha256": "f6e85bc7706cbc38bc854ae1b63de7a2c4dfca071a486e5ea144cb18e87ae2e2",
+                  "pixels": 11286,
+                  "expectedRgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+                  "passed": false
+                }
+              ],
+              "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+              "captureAttempts": 1,
+              "wholeGridControlCompared": true,
+              "extraBottom": 21
+            }
+          }
+        ]
+      }
+    }
+  },
+  "intermediateCandidates": [
+    {
+      "directory": "form-batch-BghLLX",
+      "passed": false,
+      "batchSha256": "229e1027217eb1a3e0e206e89d582111135ac65e04b54a8b128b5f7d99b60cdd",
+      "vsixSha256": "0b60f37eeb29b871c6ca6662c12f299a3ed4485d51793247c56ec9bb16283177",
+      "note": "Native button fill/caption was enabled first; caption placement and browser dropdown glyph still differed."
+    },
+    {
+      "directory": "form-batch-eayuJc",
+      "passed": false,
+      "batchSha256": "013c6d19b4e994ed7040d44c9c663b9e5d0062896a0779fbf8daee5017ce247b",
+      "vsixSha256": "2f8365befc2bc0b6c02657f25b1dca3254a3b66f5013aa255d8be863517548e3",
+      "note": "Caption placement was corrected; arrow initially fell back because a CSS variable string was parsed before CSS resolution. Fixed by reading the computed canvas color."
+    }
+  ],
+  "nativeReadonlySearchRepeat": {
+    "locale": "en",
+    "observations": [
+      {
+        "screenshot": "native-table-pixels-kbagfn6p/bars-en-ReadOnly.png",
+        "sha256": "85796e0030c023b64fd962d5795efd277cf253fdd403479a97b3f4847d112537",
+        "differentToolbarPixels": 0,
+        "tableSelectionOverlay": false
+      },
+      {
+        "screenshot": "native-table-pixels-kbagfn6p/bars-en-ReadOnly-root.png",
+        "sha256": "d86b42f1624a094d5fdc2f9d1647927f1d9a9471eb3e325a721bb101db81aea7",
+        "differentToolbarPixels": 0,
+        "tableSelectionOverlay": false
+      },
+      {
+        "screenshot": "native-table-pixels-kbagfn6p/bars-en-ReadOnly-search.png",
+        "sha256": "85796e0030c023b64fd962d5795efd277cf253fdd403479a97b3f4847d112537",
+        "differentToolbarPixels": 0,
+        "tableSelectionOverlay": false
+      },
+      {
+        "screenshot": "native-table-pixels-kbagfn6p/bars-en-ReadOnly-reset.png",
+        "sha256": "92791d44a4c3c5bfca461a4fcec80f3a653598824efce4022128f7b0fc86e9d8",
+        "differentToolbarPixels": 0,
+        "tableSelectionOverlay": false
+      },
+      {
+        "screenshot": "native-table-pixels-kbagfn6p/bars-en-ReadOnly-body.png",
+        "sha256": "5f15d1a30806e562132b31d111ccb7b75102025a08a61ea92a9e66f3598a56ac",
+        "differentToolbarPixels": 892,
+        "tableSelectionOverlay": true,
+        "note": "Selecting the table adds a blue outline across the first two strip rows; the screenshot also preserves changed lower button-border pixels. Its 892 differing pixels are recorded, not waived."
+      }
+    ],
+    "statement": "The yellow search outline survives root selection, search/body clicks and Escape on this recorded ReadOnly form. Default remains gray under the same actions. No general color rule or metadata applicability is inferred from these observations.",
+    "nativeSessionClosed": true
+  },
+  "acceptance": {
+    "passed": true,
+    "batchDirectory": "form-batch-flCTHC",
+    "pairsPassed": 16,
+    "pairsFailed": 0,
+    "publishedCases": 380,
+    "allFinalPairsFirstAttempt": true,
+    "builds": 1,
+    "packages": 1,
+    "guiConcurrency": 1,
+    "seconds": 201.660970832,
+    "vsixSha256": "426d3c8f3ec10b37430da096bb5f7c90e1444453f38f99aaa133e5bdb14659d9",
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "39b3af3a78487adf8b04554743ac021f1f7d858b104ecc9e66ed63db024f276e",
+    "batchSha256": "cf452b0bd226805e1489152cd5fab4aaed5227f55dbb78920af53ff967c21ccd",
+    "inputsSha256": "a218c5e93568fff1663bc99610ec34fd279326ad376afe59dd9b5044be8752e9",
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "samples": 14,
+        "captionPixelsCompared": 15750,
+        "arrowPixelsCompared": 252,
+        "differentRgbPixels": 0,
+        "sourceWritesDuringViewing": false,
+        "detachedUpdates": true,
+        "selectedIdentityPreserved": true,
+        "stableTableDom": true,
+        "receiptSha256": "395995fcbddf7ad5c55e60221ff83888820cbcf2b11fcf307c1cd34ab94da404",
+        "results": [
+          {
+            "label": "Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  724,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  805,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  724,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  805,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  376,
+                  155,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  457,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  376,
+                  155,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  457,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  724,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  805,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  724,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  805,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "MetadataTable",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "#",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  815,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  896,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "DynamicList",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  749,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  830,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "#",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  815,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  896,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  749,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  830,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  401,
+                  155,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  482,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "#",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              520,
+              227
+            ],
+            "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  467,
+                  155,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  548,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  401,
+                  155,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  482,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  749,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  830,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          }
+        ]
+      },
+      "ru": {
+        "passed": true,
+        "samples": 14,
+        "captionPixelsCompared": 5670,
+        "arrowPixelsCompared": 252,
+        "differentRgbPixels": 0,
+        "sourceWritesDuringViewing": false,
+        "detachedUpdates": true,
+        "selectedIdentityPreserved": true,
+        "stableTableDom": true,
+        "receiptSha256": "539e186feae8ea11e7a18d9875dd0d7dda457f5e51d5ed1bd4530742dbf0e8ca",
+        "results": [
+          {
+            "label": "Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  758,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  791,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  758,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  791,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  410,
+                  155,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  443,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  410,
+                  155,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  443,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  758,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  791,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  758,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  791,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "MetadataTable",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "N",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  863,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  896,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "DynamicList",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  761,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  794,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "N",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  863,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  896,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  761,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  794,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  413,
+                  155,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  446,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "N",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              520,
+              227
+            ],
+            "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  515,
+                  155,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  548,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  413,
+                  155,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  446,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  761,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  794,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          }
+        ]
+      }
+    },
+    "runs": [
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.439631366000002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-en/driver.log",
+        "receipt": "table-pixels-en/receipt.json",
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill",
+          "table-pixels/MetadataTable",
+          "table-pixels/DynamicList",
+          "table-pixels/dynamic-dirty-footer",
+          "table-pixels/dynamic-restored-default",
+          "table-pixels/dynamic-floating-default",
+          "table-pixels/dynamic-floating-dirty-footer",
+          "table-pixels/dynamic-floating-restored",
+          "table-pixels/dynamic-reattached-default"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 838.793222,
+          "runtimeVerificationMs": 326.96431699999994,
+          "preHostMs": 1174.607436,
+          "cleanupMs": 32.656301999999414,
+          "totalMs": 11289.361700000001
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 14.463496865000002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-ru/driver.log",
+        "receipt": "table-pixels-ru/receipt.json",
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill",
+          "table-pixels/MetadataTable",
+          "table-pixels/DynamicList",
+          "table-pixels/dynamic-dirty-footer",
+          "table-pixels/dynamic-restored-default",
+          "table-pixels/dynamic-floating-default",
+          "table-pixels/dynamic-floating-dirty-footer",
+          "table-pixels/dynamic-floating-restored",
+          "table-pixels/dynamic-reattached-default"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 811.569074,
+          "runtimeVerificationMs": 378.326827,
+          "preHostMs": 1210.345023,
+          "cleanupMs": 37.41237600000022,
+          "totalMs": 14331.573575
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.459162282000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-en/driver.log",
+        "receipt": "tables-en/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 834.1746909999999,
+          "runtimeVerificationMs": 332.107888,
+          "preHostMs": 1176.9358049999998,
+          "cleanupMs": 42.77461399999993,
+          "totalMs": 7308.366034
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.243958727999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-ru/driver.log",
+        "receipt": "tables-ru/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 812.948697,
+          "runtimeVerificationMs": 340.7559520000001,
+          "preHostMs": 1178.344511,
+          "cleanupMs": 38.90928900000108,
+          "totalMs": 10108.243571
+        }
+      },
+      {
+        "suite": "button-borders",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 22.646139625000004,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "button-borders-en/driver.log",
+        "receipt": "button-borders-en/receipt.json",
+        "caseIds": [
+          "button-borders/FontAuto",
+          "button-borders/dirty-FontAuto",
+          "button-borders/floating-FontAuto",
+          "button-borders/floating-dirty-FontAuto",
+          "button-borders/reattached-FontAuto",
+          "button-borders/FontRegular",
+          "button-borders/FontBold",
+          "button-borders/FontPartial14",
+          "button-borders/FontStyleNormal",
+          "button-borders/FontForm14",
+          "button-borders/FontBar14",
+          "button-borders/FontFormBold",
+          "button-borders/FontExplicitAuto",
+          "button-borders/CheckAutoBack",
+          "button-borders/CheckAutoText",
+          "button-borders/CheckNormalFalse",
+          "button-borders/CheckNormal14",
+          "button-borders/CheckSmall",
+          "button-borders/CheckLarge",
+          "button-borders/CheckExtra",
+          "button-borders/CheckText",
+          "button-borders/CheckSysAuto",
+          "button-borders/CheckSys14",
+          "button-borders/CheckBoldOnly",
+          "button-borders/CheckAutoDisabled",
+          "button-borders/Color000000",
+          "button-borders/Color000040",
+          "button-borders/Color000080",
+          "button-borders/dirty-Color000080",
+          "button-borders/default-Color000080",
+          "button-borders/floating-Color000080",
+          "button-borders/floating-dirty-Color000080",
+          "button-borders/reattached-Color000080",
+          "button-borders/Color0000FF",
+          "button-borders/Color008000",
+          "button-borders/Color00FF00",
+          "button-borders/Color00FFFF",
+          "button-borders/Color0A73B7",
+          "button-borders/Color202020",
+          "button-borders/Color20DD20",
+          "button-borders/Color336699",
+          "button-borders/Color345678",
+          "button-borders/Color404040",
+          "button-borders/Color5511FF",
+          "button-borders/Color555555",
+          "button-borders/Color606060",
+          "button-borders/Color747474",
+          "button-borders/Color757575",
+          "button-borders/Color777777",
+          "button-borders/Color800000",
+          "button-borders/Color804020",
+          "button-borders/Color808080",
+          "button-borders/Color9800FF",
+          "button-borders/Color99FFFF",
+          "button-borders/ColorC08080",
+          "button-borders/ColorFF0000",
+          "button-borders/ColorFF00FF",
+          "button-borders/ColorFFE100",
+          "button-borders/ColorFFFF00",
+          "button-borders/ColorFFFFFF"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 847.507244,
+          "runtimeVerificationMs": 311.486226,
+          "preHostMs": 1191.113191,
+          "cleanupMs": 38.46820600000137,
+          "totalMs": 22486.135522
+        }
+      },
+      {
+        "suite": "button-borders",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 25.73056107299999,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "button-borders-ru/driver.log",
+        "receipt": "button-borders-ru/receipt.json",
+        "caseIds": [
+          "button-borders/FontAuto",
+          "button-borders/dirty-FontAuto",
+          "button-borders/floating-FontAuto",
+          "button-borders/floating-dirty-FontAuto",
+          "button-borders/reattached-FontAuto",
+          "button-borders/FontRegular",
+          "button-borders/FontBold",
+          "button-borders/FontPartial14",
+          "button-borders/FontStyleNormal",
+          "button-borders/FontForm14",
+          "button-borders/FontBar14",
+          "button-borders/FontFormBold",
+          "button-borders/FontExplicitAuto",
+          "button-borders/CheckAutoBack",
+          "button-borders/CheckAutoText",
+          "button-borders/CheckNormalFalse",
+          "button-borders/CheckNormal14",
+          "button-borders/CheckSmall",
+          "button-borders/CheckLarge",
+          "button-borders/CheckExtra",
+          "button-borders/CheckText",
+          "button-borders/CheckSysAuto",
+          "button-borders/CheckSys14",
+          "button-borders/CheckBoldOnly",
+          "button-borders/CheckAutoDisabled",
+          "button-borders/Color000000",
+          "button-borders/Color000040",
+          "button-borders/Color000080",
+          "button-borders/dirty-Color000080",
+          "button-borders/default-Color000080",
+          "button-borders/floating-Color000080",
+          "button-borders/floating-dirty-Color000080",
+          "button-borders/reattached-Color000080",
+          "button-borders/Color0000FF",
+          "button-borders/Color008000",
+          "button-borders/Color00FF00",
+          "button-borders/Color00FFFF",
+          "button-borders/Color0A73B7",
+          "button-borders/Color202020",
+          "button-borders/Color20DD20",
+          "button-borders/Color336699",
+          "button-borders/Color345678",
+          "button-borders/Color404040",
+          "button-borders/Color5511FF",
+          "button-borders/Color555555",
+          "button-borders/Color606060",
+          "button-borders/Color747474",
+          "button-borders/Color757575",
+          "button-borders/Color777777",
+          "button-borders/Color800000",
+          "button-borders/Color804020",
+          "button-borders/Color808080",
+          "button-borders/Color9800FF",
+          "button-borders/Color99FFFF",
+          "button-borders/ColorC08080",
+          "button-borders/ColorFF0000",
+          "button-borders/ColorFF00FF",
+          "button-borders/ColorFFE100",
+          "button-borders/ColorFFFF00",
+          "button-borders/ColorFFFFFF"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 815.384566,
+          "runtimeVerificationMs": 344.23665200000005,
+          "preHostMs": 1200.963835,
+          "cleanupMs": 42.00894800000242,
+          "totalMs": 25565.441648
+        }
+      },
+      {
+        "suite": "button-captions",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 5.07680069399999,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "button-captions-en/driver.log",
+        "receipt": "button-captions-en/receipt.json",
+        "caseIds": [
+          "button-captions/10Normal",
+          "button-captions/10Bold",
+          "button-captions/20Normal",
+          "button-captions/20Bold",
+          "button-captions/10NormalColor",
+          "button-captions/20BoldColor"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 847.1427450000001,
+          "runtimeVerificationMs": 351.7026780000001,
+          "preHostMs": 1205.298868,
+          "cleanupMs": 36.3358360000002,
+          "totalMs": 4939.733706
+        }
+      },
+      {
+        "suite": "button-captions",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.622210294999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "button-captions-ru/driver.log",
+        "receipt": "button-captions-ru/receipt.json",
+        "caseIds": [
+          "button-captions/10Normal",
+          "button-captions/10Bold",
+          "button-captions/20Normal",
+          "button-captions/20Bold",
+          "button-captions/10NormalColor",
+          "button-captions/20BoldColor"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 814.149861,
+          "runtimeVerificationMs": 307.193485,
+          "preHostMs": 1141.4297589999999,
+          "cleanupMs": 38.20587400000022,
+          "totalMs": 7490.6471710000005
+        }
+      },
+      {
+        "suite": "button-rows",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.300596414999992,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "button-rows-en/driver.log",
+        "receipt": "button-rows-en/receipt.json",
+        "caseIds": [
+          "button-rows/ProbeButtons",
+          "button-rows/ProbeRows",
+          "button-rows/dirty-explicit-width",
+          "button-rows/restored-explicit-width",
+          "button-rows/floating-native",
+          "button-rows/floating-dirty-width",
+          "button-rows/floating-restored",
+          "button-rows/reattached-native"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 839.6198039999999,
+          "runtimeVerificationMs": 327.1853990000001,
+          "preHostMs": 1176.352307,
+          "cleanupMs": 32.35547000000042,
+          "totalMs": 8161.100350000001
+        }
+      },
+      {
+        "suite": "button-rows",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.862444230000008,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "button-rows-ru/driver.log",
+        "receipt": "button-rows-ru/receipt.json",
+        "caseIds": [
+          "button-rows/ProbeButtons",
+          "button-rows/ProbeRows",
+          "button-rows/dirty-explicit-width",
+          "button-rows/restored-explicit-width",
+          "button-rows/floating-native",
+          "button-rows/floating-dirty-width",
+          "button-rows/floating-restored",
+          "button-rows/reattached-native"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 727.989551,
+          "runtimeVerificationMs": 326.67414999999994,
+          "preHostMs": 1077.831191,
+          "cleanupMs": 39.14353799999844,
+          "totalMs": 10731.671104000001
+        }
+      },
+      {
+        "suite": "primary-buttons",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 22.920114933999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "primary-buttons-en/driver.log",
+        "receipt": "primary-buttons-en/receipt.json",
+        "caseIds": [
+          "primary-buttons/FontAuto",
+          "primary-buttons/dirty-FontAuto",
+          "primary-buttons/floating-FontAuto",
+          "primary-buttons/floating-dirty-FontAuto",
+          "primary-buttons/reattached-FontAuto",
+          "primary-buttons/FontRegular",
+          "primary-buttons/FontBold",
+          "primary-buttons/FontPartial14",
+          "primary-buttons/FontStyleNormal",
+          "primary-buttons/FontForm14",
+          "primary-buttons/FontBar14",
+          "primary-buttons/FontFormBold",
+          "primary-buttons/FontExplicitAuto",
+          "primary-buttons/CheckAutoBack",
+          "primary-buttons/CheckAutoText",
+          "primary-buttons/CheckNormalFalse",
+          "primary-buttons/CheckNormal14",
+          "primary-buttons/CheckSmall",
+          "primary-buttons/CheckLarge",
+          "primary-buttons/CheckExtra",
+          "primary-buttons/CheckText",
+          "primary-buttons/CheckSysAuto",
+          "primary-buttons/CheckSys14",
+          "primary-buttons/CheckBoldOnly",
+          "primary-buttons/CheckAutoDisabled",
+          "primary-buttons/Color000000",
+          "primary-buttons/Color000040",
+          "primary-buttons/Color000080",
+          "primary-buttons/dirty-Color000080",
+          "primary-buttons/default-Color000080",
+          "primary-buttons/floating-Color000080",
+          "primary-buttons/floating-dirty-Color000080",
+          "primary-buttons/reattached-Color000080",
+          "primary-buttons/Color0000FF",
+          "primary-buttons/Color008000",
+          "primary-buttons/Color00FF00",
+          "primary-buttons/Color00FFFF",
+          "primary-buttons/Color0A73B7",
+          "primary-buttons/Color202020",
+          "primary-buttons/Color20DD20",
+          "primary-buttons/Color336699",
+          "primary-buttons/Color345678",
+          "primary-buttons/Color404040",
+          "primary-buttons/Color5511FF",
+          "primary-buttons/Color555555",
+          "primary-buttons/Color606060",
+          "primary-buttons/Color747474",
+          "primary-buttons/Color757575",
+          "primary-buttons/Color777777",
+          "primary-buttons/Color800000",
+          "primary-buttons/Color804020",
+          "primary-buttons/Color808080",
+          "primary-buttons/Color9800FF",
+          "primary-buttons/Color99FFFF",
+          "primary-buttons/ColorC08080",
+          "primary-buttons/ColorFF0000",
+          "primary-buttons/ColorFF00FF",
+          "primary-buttons/ColorFFE100",
+          "primary-buttons/ColorFFFF00",
+          "primary-buttons/ColorFFFFFF"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 956.646586,
+          "runtimeVerificationMs": 329.18139500000007,
+          "preHostMs": 1315.2781240000002,
+          "cleanupMs": 39.28324600000269,
+          "totalMs": 22785.017984000002
+        }
+      },
+      {
+        "suite": "primary-buttons",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 25.273784045000006,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "primary-buttons-ru/driver.log",
+        "receipt": "primary-buttons-ru/receipt.json",
+        "caseIds": [
+          "primary-buttons/FontAuto",
+          "primary-buttons/dirty-FontAuto",
+          "primary-buttons/floating-FontAuto",
+          "primary-buttons/floating-dirty-FontAuto",
+          "primary-buttons/reattached-FontAuto",
+          "primary-buttons/FontRegular",
+          "primary-buttons/FontBold",
+          "primary-buttons/FontPartial14",
+          "primary-buttons/FontStyleNormal",
+          "primary-buttons/FontForm14",
+          "primary-buttons/FontBar14",
+          "primary-buttons/FontFormBold",
+          "primary-buttons/FontExplicitAuto",
+          "primary-buttons/CheckAutoBack",
+          "primary-buttons/CheckAutoText",
+          "primary-buttons/CheckNormalFalse",
+          "primary-buttons/CheckNormal14",
+          "primary-buttons/CheckSmall",
+          "primary-buttons/CheckLarge",
+          "primary-buttons/CheckExtra",
+          "primary-buttons/CheckText",
+          "primary-buttons/CheckSysAuto",
+          "primary-buttons/CheckSys14",
+          "primary-buttons/CheckBoldOnly",
+          "primary-buttons/CheckAutoDisabled",
+          "primary-buttons/Color000000",
+          "primary-buttons/Color000040",
+          "primary-buttons/Color000080",
+          "primary-buttons/dirty-Color000080",
+          "primary-buttons/default-Color000080",
+          "primary-buttons/floating-Color000080",
+          "primary-buttons/floating-dirty-Color000080",
+          "primary-buttons/reattached-Color000080",
+          "primary-buttons/Color0000FF",
+          "primary-buttons/Color008000",
+          "primary-buttons/Color00FF00",
+          "primary-buttons/Color00FFFF",
+          "primary-buttons/Color0A73B7",
+          "primary-buttons/Color202020",
+          "primary-buttons/Color20DD20",
+          "primary-buttons/Color336699",
+          "primary-buttons/Color345678",
+          "primary-buttons/Color404040",
+          "primary-buttons/Color5511FF",
+          "primary-buttons/Color555555",
+          "primary-buttons/Color606060",
+          "primary-buttons/Color747474",
+          "primary-buttons/Color757575",
+          "primary-buttons/Color777777",
+          "primary-buttons/Color800000",
+          "primary-buttons/Color804020",
+          "primary-buttons/Color808080",
+          "primary-buttons/Color9800FF",
+          "primary-buttons/Color99FFFF",
+          "primary-buttons/ColorC08080",
+          "primary-buttons/ColorFF0000",
+          "primary-buttons/ColorFF00FF",
+          "primary-buttons/ColorFFE100",
+          "primary-buttons/ColorFFFF00",
+          "primary-buttons/ColorFFFFFF"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 931.33835,
+          "runtimeVerificationMs": 340.12574599999994,
+          "preHostMs": 1310.3038430000001,
+          "cleanupMs": 40.024202000000514,
+          "totalMs": 25111.55353
+        }
+      },
+      {
+        "suite": "style-composition",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 5.6599816500000015,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "style-composition-en/driver.log",
+        "receipt": "style-composition-en/receipt.json",
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 832.957319,
+          "runtimeVerificationMs": 306.23786200000006,
+          "preHostMs": 1156.170726,
+          "cleanupMs": 31.960179000000608,
+          "totalMs": 5527.659608999999
+        }
+      },
+      {
+        "suite": "style-composition",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.45313674300001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "style-composition-ru/driver.log",
+        "receipt": "style-composition-ru/receipt.json",
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 838.359098,
+          "runtimeVerificationMs": 312.2647660000001,
+          "preHostMs": 1178.852509,
+          "cleanupMs": 39.20662100000118,
+          "totalMs": 8325.555943000001
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 4.349317307999998,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-en/driver.log",
+        "receipt": "application-en/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 887.4131150000001,
+          "runtimeVerificationMs": 327.9429809999999,
+          "preHostMs": 1218.987086,
+          "cleanupMs": 31.67505500000061,
+          "totalMs": 4227.495327
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.881630522000021,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-ru/driver.log",
+        "receipt": "application-ru/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 840.740802,
+          "runtimeVerificationMs": 320.88195500000006,
+          "preHostMs": 1177.539012,
+          "cleanupMs": 37.816373999999996,
+          "totalMs": 6758.578128
+        }
+      }
+    ]
+  },
+  "remaining": [
+    "Complete toolbar strips still differ: search placeholder/clear button and outline states, standard icons, grouped button fill/borders, and the known lower-border paint differences. No toolbar pixels are masked or waived.",
+    "Other menu consumers/states, fonts/sizes, customized palettes and complete table forms remain open.",
+    "Windows, other DPI and native property inventory remain unaccepted."
+  ]
+}

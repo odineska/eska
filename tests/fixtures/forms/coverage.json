@@ -1796,7 +1796,9 @@
         "acceptance.full-profile",
         "profile.windows",
         "tables.recorded-grids",
-        "tables.recorded-context-grids"
+        "tables.recorded-context-grids",
+        "tables.menu-glyphs",
+        "tables.toolbar-complete"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -4966,6 +4968,155 @@
       "lastConfirmation": "docs/measurements/t159-native-context-grids-linux.json",
       "remaining": "Other data sources, hierarchy/selection/column states, all widths/fonts/styles/alignments, toolbar/additions/full forms, DPI and Windows.",
       "nextAction": "Expand native table property/style/state matrices and surrounding controls without weakening the accepted complete grid comparisons."
+    },
+    {
+      "id": "tables.menu-glyphs",
+      "milestone": "T159",
+      "kinds": [
+        "Table"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "text.locale",
+        "layout.geometry",
+        "behavior.session",
+        "behavior.window"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Only complete caption/arrow bitmaps of standard table More actions, four recorded XML-only sources in native/IDE ru/en. Actual detached windows and dirty source replacements preserve DOM/selection. Complete dropdown buttons and toolbar strips are not accepted.",
+      "fixtures": [
+        "tests/fixtures/forms/native-table-bars"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "table-pixels",
+        "path": "test/form-table-pixels-host.cjs",
+        "caseIds": [
+          "Default",
+          "restored-default",
+          "floating-default",
+          "floating-restored",
+          "reattached-default",
+          "ReadOnly",
+          "MetadataTable",
+          "DynamicList",
+          "dynamic-dirty-footer",
+          "dynamic-restored-default",
+          "dynamic-floating-default",
+          "dynamic-floating-dirty-footer",
+          "dynamic-floating-restored",
+          "dynamic-reattached-default"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t159-native-table-menus-linux.json",
+          "sha256": "5473d82f52e26d21a7a39081f58997f42e00b1b67a206db2ca87ae11f490e422",
+          "assertions": [
+            {
+              "pointer": "/menuCaptionPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/menuArrowPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/captionPixelsCompared",
+              "equals": 15750
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/captionPixelsCompared",
+              "equals": 5670
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/arrowPixelsCompared",
+              "equals": 252
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/arrowPixelsCompared",
+              "equals": 252
+            },
+            {
+              "pointer": "/wholeToolbarPixelParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t159-native-table-menus-linux.json",
+      "remaining": "Complete dropdown borders/poses, all palettes/fonts/sizes and other menus, full toolbars/forms, DPI and Windows.",
+      "nextAction": "Preserve accepted glyphs while completing search/icon/grouped-button and border comparisons."
+    },
+    {
+      "id": "tables.toolbar-complete",
+      "milestone": "T159",
+      "kinds": [
+        "Table"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "text.locale"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "reproduced_mismatch",
+      "scope": "All pixels of eight complete standard table toolbar strips, including the shadow row. Current renderer differs on all four source forms in ru/en; grid comparisons remain exact. This records a failure, not accepted similarity.",
+      "fixtures": [
+        "tests/fixtures/forms/native-table-bars"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "table-pixels",
+        "path": "test/form-table-pixels-host.cjs",
+        "caseIds": [
+          "Default",
+          "ReadOnly",
+          "MetadataTable",
+          "DynamicList"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t159-native-table-menus-linux.json",
+          "sha256": "5473d82f52e26d21a7a39081f58997f42e00b1b67a206db2ca87ae11f490e422",
+          "assertions": [
+            {
+              "pointer": "/wholeToolbarPixelParity",
+              "equals": false
+            },
+            {
+              "pointer": "/afterFixCompleteToolbarDiagnostic/scenarios/en/expectedFailure",
+              "equals": true
+            },
+            {
+              "pointer": "/afterFixCompleteToolbarDiagnostic/scenarios/ru/expectedFailure",
+              "equals": true
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t159-native-table-menus-linux.json",
+      "remaining": "Search text/clear/outline states, standard icons, grouped-button fill/borders and lower native border paint remain visibly/pixel different.",
+      "nextAction": "Measure native search placeholder and outline rules, then icons and joined buttons; reject remaining complete-strip mismatches."
     }
   ],
   "historicalReports": [
@@ -5030,7 +5181,8 @@
     "docs/measurements/t158-native-link-captions-linux.json",
     "docs/measurements/t157-native-button-rows-linux.json",
     "docs/measurements/t159-native-table-grids-linux.json",
-    "docs/measurements/t159-native-context-grids-linux.json"
+    "docs/measurements/t159-native-context-grids-linux.json",
+    "docs/measurements/t159-native-table-menus-linux.json"
   ],
   "supersessions": [
     {
@@ -5164,7 +5316,8 @@
         "T159"
       ],
       "entries": [
-        "tables.full-pixels"
+        "tables.full-pixels",
+        "tables.toolbar-complete"
       ]
     },
     {
