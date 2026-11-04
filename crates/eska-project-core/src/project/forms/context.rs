@@ -176,6 +176,7 @@ pub fn load(
     )?;
     validate_overlays(overlays, &dependencies, previous, &metadata)?;
     super::layer_order::apply(context, &dependencies, &mut documents, &mut resources)?;
+    super::borrowing::validate(context, &dependencies, &resources)?;
     build_preview(context, dependencies, documents, resources)
 }
 

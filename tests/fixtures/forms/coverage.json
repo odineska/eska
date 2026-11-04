@@ -799,7 +799,8 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "context.native-static-composition"
+        "context.native-static-composition",
+        "context.native-owner-forms"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1105,7 +1106,8 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "context.native-static-composition"
+        "context.native-static-composition",
+        "context.native-owner-forms"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1880,7 +1882,8 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "context.native-static-composition"
+        "context.native-static-composition",
+        "context.native-owner-forms"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -2068,10 +2071,11 @@
       "profile": "designer-xml",
       "level": "semantics",
       "status": "in_progress",
-      "scope": "Stored BaseForm deltas/provenance and the limited native common-form purpose/order matrix are verified; complete context/applicability/style equivalence remains open.",
+      "scope": "Stored BaseForm deltas/provenance, native common-form purpose/order and limited catalog/extension-own-form cases are verified; complete applicability/style equivalence remains open.",
       "fixtures": [
         "tests/fixtures/forms/native-basic.xml",
-        "tests/fixtures/forms/native-extension-composition"
+        "tests/fixtures/forms/native-extension-composition",
+        "tests/fixtures/forms/native-owner-composition"
       ],
       "driver": null,
       "evidence": [
@@ -2097,11 +2101,42 @@
             }
           ],
           "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t154-native-owner-linux.json",
+          "sha256": "e1ba68bca1abac826d10686455839dee33e5fa533267d34b4ed80e5e1d66d746",
+          "assertions": [
+            {
+              "pointer": "/nativeCases",
+              "equals": 5
+            },
+            {
+              "pointer": "/nativeRejectedCases",
+              "equals": 2
+            },
+            {
+              "pointer": "/noBslModulesOrHandlers",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/cargoTest/failed",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/installedPairs",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/ownerGuiCasesTotal",
+              "equals": 18
+            }
+          ],
+          "clientCommit": null
         }
       ],
-      "lastConfirmation": "docs/measurements/t154-native-composition-linux.json",
-      "remaining": "Object-owned and own extension forms, other element families, native style-resource conflicts, arbitrary applicability and deployment selection, Configurator pixels, Windows and 8.5.",
-      "nextAction": "Extend the native semantic oracle to object-owned/own extension forms and conflicting metadata/style resources; retain the limited scope of this common-form matrix."
+      "lastConfirmation": "docs/measurements/t154-native-owner-linux.json",
+      "remaining": "Other owner kinds/families, unrelated metadata and controlled properties, style/resource conflicts, Configurator pixels, Windows and 8.5.",
+      "nextAction": "Extend the native semantic oracle to style and metadata conflicts; keep validation limited to known loaded inputs."
     },
     {
       "id": "context.native-static-composition",
@@ -2161,6 +2196,73 @@
       "lastConfirmation": "docs/measurements/t154-native-composition-linux.json",
       "remaining": "Object-owned and own extension forms, other element families, native style-resource conflicts, arbitrary applicability and deployment selection, Configurator pixels, Windows and 8.5.",
       "nextAction": "Extend the native semantic oracle to object-owned/own extension forms and conflicting metadata/style resources; retain the limited scope of this common-form matrix."
+    },
+    {
+      "id": "context.native-owner-forms",
+      "milestone": "T154",
+      "kinds": [
+        "Form",
+        "LabelDecoration",
+        "UsualGroup"
+      ],
+      "axes": [
+        "context.layers",
+        "values.defaults",
+        "source.identity"
+      ],
+      "profile": "designer-xml",
+      "level": "semantics",
+      "status": "accepted_scope",
+      "scope": "Linux 8.3.27.2342: five static catalog-form/extension-own-form observations, two native rejected cross-extension borrowings; loaded metadata validation, dirty recovery and detached GUI ru/en. No pixels or whole-extension applicability claim.",
+      "fixtures": [
+        "tests/fixtures/forms/native-owner-composition"
+      ],
+      "driver": {
+        "repository": "eska",
+        "path": "tests/project/metadata_workspace/forms/native/owners.rs",
+        "caseIds": [
+          "native_owner_forms_match_five_static_client_observations_without_writes",
+          "native_owner_borrowing_other_extensions_metadata_cannot_look_like_valid_composition",
+          "native_owner_dirty_borrowing_is_validated_and_recovers_without_replacing_identity"
+        ],
+        "selection": "whole native owner matrix and loaded metadata regression"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t154-native-owner-linux.json",
+          "sha256": "e1ba68bca1abac826d10686455839dee33e5fa533267d34b4ed80e5e1d66d746",
+          "assertions": [
+            {
+              "pointer": "/nativeCases",
+              "equals": 5
+            },
+            {
+              "pointer": "/nativeRejectedCases",
+              "equals": 2
+            },
+            {
+              "pointer": "/noBslModulesOrHandlers",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/cargoTest/failed",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/installedPairs",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/ownerGuiCasesTotal",
+              "equals": 18
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t154-native-owner-linux.json",
+      "remaining": "Other owner kinds/families, unrelated metadata and controlled properties, style/resource conflicts, Configurator pixels, Windows and 8.5.",
+      "nextAction": "Extend the native semantic oracle to style and metadata conflicts; keep validation limited to known loaded inputs."
     },
     {
       "id": "styles.named-values",
@@ -4159,7 +4261,8 @@
     "docs/measurements/t163-preview-navigation-linux.json",
     "docs/measurements/t163-repeat-preview-focus-linux.json",
     "docs/measurements/t163-restart-linux.json",
-    "docs/measurements/t154-native-composition-linux.json"
+    "docs/measurements/t154-native-composition-linux.json",
+    "docs/measurements/t154-native-owner-linux.json"
   ],
   "supersessions": [
     {

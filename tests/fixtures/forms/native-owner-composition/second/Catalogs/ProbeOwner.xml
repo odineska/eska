@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Catalog uuid="08442196-ce37-4d0a-9cbe-25ad2bc804f0">
+		<InternalInfo>
+			<xr:GeneratedType name="CatalogObject.ProbeOwner" category="Object">
+				<xr:TypeId>529ead6f-6dd0-4830-8921-27f85be151af</xr:TypeId>
+				<xr:ValueId>4afdf855-4fae-41f5-950c-684b46b24150</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogRef.ProbeOwner" category="Ref">
+				<xr:TypeId>913ab8ed-f85c-4c2c-b3cf-3217b7ab194c</xr:TypeId>
+				<xr:ValueId>48b841d4-967a-49be-8d73-c93babc30edd</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogSelection.ProbeOwner" category="Selection">
+				<xr:TypeId>9542ff27-91b0-40b0-b45a-fbcc695270be</xr:TypeId>
+				<xr:ValueId>a7ce2043-014e-4398-a2b6-a7c254a7512b</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogList.ProbeOwner" category="List">
+				<xr:TypeId>c87c5bda-27f4-44c0-b3cd-02442ce67fae</xr:TypeId>
+				<xr:ValueId>64583d88-ca74-40b0-b687-55896108f6f4</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="CatalogManager.ProbeOwner" category="Manager">
+				<xr:TypeId>37fc17cb-75d5-4a02-985b-f034e3a7f4c6</xr:TypeId>
+				<xr:ValueId>2f34a93b-4154-4591-bfb7-7b6d685da8e2</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<ObjectBelonging>Adopted</ObjectBelonging>
+			<Name>ProbeOwner</Name>
+			<Comment/>
+		</Properties>
+		<ChildObjects>
+			<Form>ProbeObject</Form>
+		</ChildObjects>
+	</Catalog>
+</MetaDataObject>

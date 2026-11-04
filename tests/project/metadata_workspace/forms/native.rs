@@ -5,6 +5,8 @@ use crate::backend::project::forms::{
 };
 use serde_json::{Value, json};
 
+mod owners;
+
 fn inputs() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/forms/native-extension-composition")
 }
