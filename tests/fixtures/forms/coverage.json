@@ -1806,7 +1806,8 @@
         "tables.toolbar-complete",
         "tables.search-placeholder-initial",
         "tables.search-field-initial",
-        "tables.dynamic-toolbar"
+        "tables.dynamic-toolbar",
+        "tables.movement-group-white"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -5120,11 +5121,46 @@
             }
           ],
           "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t159-native-table-movement-linux.json",
+          "sha256": "712b7484bdd7023ff421b50961fdf2659c57acff89789f1cfddf4f6644ea1e65",
+          "assertions": [
+            {
+              "pointer": "/completeMovementGroupPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/movementPixelsCompared",
+              "equals": 22680
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/movementPixelsCompared",
+              "equals": 22680
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/movementZoomFallbackVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/movementZoomFallbackVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeToolbarPixelParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
         }
       ],
-      "lastConfirmation": "docs/measurements/t159-native-table-menus-linux.json",
-      "remaining": "Default, ReadOnly and MetadataTable remain mismatched (632 en / 619 ru pixels in current recorded poses); DynamicList initial toolbar is accepted separately in tables.dynamic-toolbar. Alternate search states, other property matrices, full forms and Windows remain open.",
-      "nextAction": "Establish native alternate search states and complete icons/joined buttons/border poses without weakening accepted initial search controls."
+      "lastConfirmation": "docs/measurements/t159-native-table-movement-linux.json",
+      "remaining": "Default, ReadOnly and MetadataTable remain mismatched (163 en / 149 ru pixels in current recorded poses), on adjacent ordinary-button lower-border paint. Complete movement groups and DynamicList initial toolbar are accepted separately; alternate search states, other profiles, full forms and Windows remain open.",
+      "nextAction": "Resolve native lower-border pose without masking its pixels; preserve complete movement groups, DynamicList toolbar and initial search controls."
     },
     {
       "id": "tables.search-placeholder-initial",
@@ -5438,6 +5474,92 @@
       },
       "remaining": "Automatic movement/joined buttons and full other table toolbars; alternate native 11px search variants, other palettes/fonts/states/sources, full forms, DPI and Windows.",
       "nextAction": "Calibrate automatic table movement icons and joined buttons while preserving the complete accepted DynamicList toolbar."
+    },
+    {
+      "id": "tables.movement-group-white",
+      "milestone": "T159",
+      "kinds": [
+        "Table"
+      ],
+      "axes": [
+        "appearance.pictures",
+        "appearance.colors",
+        "layout.geometry",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete 60x27 automatic MoveUp/MoveDown group with shadow, white 26px buttons and white solid parent, 100% preview zoom. Eight native source forms, fourteen UI poses per locale including dirty XML/floating/return; unsupported zoom falls back visibly and recovers.",
+      "fixtures": [
+        "tests/fixtures/forms/native-table-movement"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "table-pixels",
+        "path": "test/form-table-pixels-host.cjs",
+        "caseIds": [
+          "Default",
+          "restored-default",
+          "floating-default",
+          "floating-restored",
+          "reattached-default",
+          "Horizontal",
+          "HorizontalTitled",
+          "Vertical",
+          "InCell",
+          "Marked",
+          "ReadOnly",
+          "MetadataTable",
+          "dynamic-dirty-footer",
+          "dynamic-floating-dirty-footer"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t159-native-table-movement-linux.json",
+          "sha256": "712b7484bdd7023ff421b50961fdf2659c57acff89789f1cfddf4f6644ea1e65",
+          "assertions": [
+            {
+              "pointer": "/completeMovementGroupPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/movementPixelsCompared",
+              "equals": 22680
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/movementPixelsCompared",
+              "equals": 22680
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/movementZoomFallbackVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/movementZoomFallbackVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeToolbarPixelParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t159-native-table-movement-linux.json",
+      "remaining": "Other palettes/parents/command counts/states/zoom/DPI; lower-border pose of adjacent buttons and complete remaining toolbars/forms; Windows.",
+      "nextAction": "Measure native lower-border pose and additional movement profiles while preserving all calibrated white group pixels."
     }
   ],
   "historicalReports": [
@@ -5506,7 +5628,8 @@
     "docs/measurements/t159-native-table-menus-linux.json",
     "docs/measurements/t159-native-table-search-linux.json",
     "docs/measurements/t159-native-table-search-fields-linux.json",
-    "docs/measurements/t156-native-standard-pictures-linux.json"
+    "docs/measurements/t156-native-standard-pictures-linux.json",
+    "docs/measurements/t159-native-table-movement-linux.json"
   ],
   "supersessions": [
     {
