@@ -1,0 +1,522 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "scope": "Complete initial table search controls in the recorded 13px/gray-outline variant, including all corners/text/clear button. The native 11px/yellow variant remains unresolved and unaccepted.",
+  "noNewIndependentXmlCorpus": true,
+  "newNativeImages": 0,
+  "nativeImages": 8,
+  "nativeVariantSelectionRuleKnown": false,
+  "alternate11pxVariantRendered": false,
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "rows": [
+    {
+      "name": "Default",
+      "source": "tests/fixtures/forms/native-tables/Default.xml",
+      "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+      "locales": {
+        "en": {
+          "name": "search-field",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Default.png",
+          "screenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5",
+          "nativeRegion": [
+            414,
+            551,
+            172,
+            23
+          ],
+          "offset": [
+            140,
+            -63
+          ],
+          "width": 172,
+          "height": 23,
+          "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+          "pixels": 3956,
+          "clearRegion": [
+            157,
+            7,
+            7,
+            7
+          ],
+          "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+        },
+        "ru": {
+          "name": "search-field",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Default.png",
+          "screenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38",
+          "nativeRegion": [
+            448,
+            551,
+            172,
+            23
+          ],
+          "offset": [
+            174,
+            -63
+          ],
+          "width": 172,
+          "height": 23,
+          "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+          "pixels": 3956,
+          "clearRegion": [
+            157,
+            7,
+            7,
+            7
+          ],
+          "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+        }
+      }
+    },
+    {
+      "name": "ReadOnly",
+      "source": "tests/fixtures/forms/native-tables/ReadOnly.xml",
+      "sourceSha256": "efa9ef102cb1e3c1f37543f692bbf4c58980dc2f0cb56bc29decbbb62e3ba0d3",
+      "locales": {
+        "en": {
+          "name": "search-field",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/search-en-ReadOnly-first.png",
+          "screenshotSha256": "b0b269c99691f1886cd181cc2dcb7cf3186e680f5870b02c0e2ca8903aa870a5",
+          "nativeRegion": [
+            414,
+            551,
+            172,
+            23
+          ],
+          "offset": [
+            140,
+            -63
+          ],
+          "width": 172,
+          "height": 23,
+          "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+          "pixels": 3956,
+          "clearRegion": [
+            157,
+            7,
+            7,
+            7
+          ],
+          "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+        },
+        "ru": {
+          "name": "search-field",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/search-ru-ReadOnly-first.png",
+          "screenshotSha256": "fa9e73f1a2bc4dde84679dcf569be818a5924f24608b45d0e9d7fd24d6026e87",
+          "nativeRegion": [
+            448,
+            551,
+            172,
+            23
+          ],
+          "offset": [
+            174,
+            -63
+          ],
+          "width": 172,
+          "height": 23,
+          "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+          "pixels": 3956,
+          "clearRegion": [
+            157,
+            7,
+            7,
+            7
+          ],
+          "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+        }
+      }
+    },
+    {
+      "name": "MetadataTable",
+      "source": "tests/fixtures/forms/native-context-tables/MetadataTable.xml",
+      "sourceSha256": "e892ddbe46307d58fc4fe5baf7569f8d5b33f3ff36a35eb8d76b1587341685a0",
+      "locales": {
+        "en": {
+          "name": "search-field",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/en-MetadataTable-complete.png",
+          "screenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825",
+          "nativeRegion": [
+            417,
+            551,
+            260,
+            23
+          ],
+          "offset": [
+            143,
+            -63
+          ],
+          "width": 260,
+          "height": 23,
+          "rgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+          "pixels": 5980,
+          "clearRegion": [
+            245,
+            7,
+            7,
+            7
+          ],
+          "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+        },
+        "ru": {
+          "name": "search-field",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/search-ru-Metadata-first.png",
+          "screenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb",
+          "nativeRegion": [
+            465,
+            551,
+            260,
+            23
+          ],
+          "offset": [
+            191,
+            -63
+          ],
+          "width": 260,
+          "height": 23,
+          "rgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+          "pixels": 5980,
+          "clearRegion": [
+            245,
+            7,
+            7,
+            7
+          ],
+          "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+        }
+      }
+    },
+    {
+      "name": "DynamicList",
+      "source": "tests/fixtures/forms/native-context-tables/DynamicList.xml",
+      "sourceSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+      "locales": {
+        "en": {
+          "name": "search-field",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+          "screenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f",
+          "nativeRegion": [
+            388,
+            399,
+            172,
+            23
+          ],
+          "offset": [
+            114,
+            -63
+          ],
+          "width": 172,
+          "height": 23,
+          "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+          "pixels": 3956,
+          "clearRegion": [
+            157,
+            7,
+            7,
+            7
+          ],
+          "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+        },
+        "ru": {
+          "name": "search-field",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+          "screenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723",
+          "nativeRegion": [
+            400,
+            399,
+            172,
+            23
+          ],
+          "offset": [
+            126,
+            -63
+          ],
+          "width": 172,
+          "height": 23,
+          "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+          "pixels": 3956,
+          "clearRegion": [
+            157,
+            7,
+            7,
+            7
+          ],
+          "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+        }
+      }
+    }
+  ],
+  "clearStencil": {
+    "width": 7,
+    "height": 7,
+    "alpha": [
+      0,
+      27,
+      0,
+      0,
+      0,
+      27,
+      0,
+      30,
+      212,
+      57,
+      0,
+      57,
+      212,
+      30,
+      0,
+      57,
+      212,
+      105,
+      212,
+      59,
+      0,
+      0,
+      0,
+      106,
+      231,
+      106,
+      0,
+      0,
+      0,
+      57,
+      212,
+      106,
+      212,
+      57,
+      0,
+      30,
+      212,
+      57,
+      0,
+      57,
+      212,
+      30,
+      0,
+      27,
+      0,
+      0,
+      0,
+      27,
+      0
+    ],
+    "foreground": "#4d4d4d",
+    "background": "#ffffff",
+    "nativeImagesVerified": 8,
+    "rgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+  },
+  "corners": {
+    "source": "shared inputBorderPixels with choice=true",
+    "border": [
+      160,
+      160,
+      160
+    ],
+    "background": [
+      255,
+      255,
+      255
+    ],
+    "outside": [
+      255,
+      255,
+      255
+    ],
+    "pixelsPerField": 36,
+    "nativeImagesVerified": 8,
+    "rgbCorners": [
+      [
+        [
+          253,
+          253,
+          253
+        ],
+        [
+          204,
+          204,
+          204
+        ],
+        [
+          169,
+          169,
+          169
+        ],
+        [
+          204,
+          204,
+          204
+        ],
+        [
+          206,
+          206,
+          206
+        ],
+        [
+          254,
+          254,
+          254
+        ],
+        [
+          169,
+          169,
+          169
+        ],
+        [
+          254,
+          254,
+          254
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      [
+        [
+          169,
+          169,
+          169
+        ],
+        [
+          204,
+          204,
+          204
+        ],
+        [
+          253,
+          253,
+          253
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          220,
+          220,
+          220
+        ],
+        [
+          204,
+          204,
+          204
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          169,
+          169,
+          169
+        ]
+      ],
+      [
+        [
+          169,
+          169,
+          169
+        ],
+        [
+          254,
+          254,
+          254
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          204,
+          204,
+          204
+        ],
+        [
+          206,
+          206,
+          206
+        ],
+        [
+          254,
+          254,
+          254
+        ],
+        [
+          253,
+          253,
+          253
+        ],
+        [
+          204,
+          204,
+          204
+        ],
+        [
+          169,
+          169,
+          169
+        ]
+      ],
+      [
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          169,
+          169,
+          169
+        ],
+        [
+          255,
+          255,
+          255
+        ],
+        [
+          220,
+          220,
+          220
+        ],
+        [
+          204,
+          204,
+          204
+        ],
+        [
+          169,
+          169,
+          169
+        ],
+        [
+          204,
+          204,
+          204
+        ],
+        [
+          253,
+          253,
+          253
+        ]
+      ]
+    ]
+  }
+}

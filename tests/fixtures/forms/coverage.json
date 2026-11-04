@@ -1705,7 +1705,8 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "tables.search-placeholder-initial"
+        "tables.search-placeholder-initial",
+        "tables.search-field-initial"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1800,7 +1801,8 @@
         "tables.recorded-context-grids",
         "tables.menu-glyphs",
         "tables.toolbar-complete",
-        "tables.search-placeholder-initial"
+        "tables.search-placeholder-initial",
+        "tables.search-field-initial"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -5117,8 +5119,8 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t159-native-table-menus-linux.json",
-      "remaining": "Initial 13px search text is accepted separately; alternate native 11px states, search outline/clear, standard icons, grouped buttons and lower native borders still differ.",
-      "nextAction": "Determine native search initialization states, then calibrate outlines/clear/icons and joined buttons. Keep both complete toolbar variants rejected until all pixels match."
+      "remaining": "Complete initial 13px search fields are accepted separately. Native 11px/yellow states, standard icons, joined-button fill/borders and lower native border repaint still differ.",
+      "nextAction": "Establish native alternate search states and complete icons/joined buttons/border poses without weakening accepted initial search controls."
     },
     {
       "id": "tables.search-placeholder-initial",
@@ -5209,6 +5211,101 @@
       "lastConfirmation": "docs/measurements/t159-native-table-search-linux.json",
       "remaining": "Native 11px initialization states/selection rule, complete input outline/clear/states and full toolbars/forms, widths/fonts/styles, DPI and Windows.",
       "nextAction": "Establish native initialization-state rules and complete search outline/clear/icon comparisons without weakening accepted initial text bitmaps."
+    },
+    {
+      "id": "tables.search-field-initial",
+      "milestone": "T159",
+      "kinds": [
+        "Table",
+        "SearchStringAddition"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "All pixels of complete initial 13px/gray-outline search controls in four recorded XML-only table sources, native/IDE ru/en. Includes all corners/placeholder/separator/clear, source selection, dirty updates and actual detached windows. Alternate native 11px states and other property/state matrices remain open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-table-search-fields"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "table-pixels",
+        "path": "test/form-table-pixels-host.cjs",
+        "caseIds": [
+          "Default",
+          "restored-default",
+          "floating-default",
+          "floating-restored",
+          "reattached-default",
+          "ReadOnly",
+          "MetadataTable",
+          "DynamicList",
+          "dynamic-dirty-footer",
+          "dynamic-restored-default",
+          "dynamic-floating-default",
+          "dynamic-floating-dirty-footer",
+          "dynamic-floating-restored",
+          "dynamic-reattached-default"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t159-native-table-search-fields-linux.json",
+          "sha256": "114e451fe79f9499dcf43284ef8b2a0b0c92bbbeb1d14d1cbafe1f0a8b43de63",
+          "assertions": [
+            {
+              "pointer": "/initialSearchFieldPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/completeFieldPixelsCompared",
+              "equals": 61456
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/completeFieldPixelsCompared",
+              "equals": 61456
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/nativeVariantSelectionRuleKnown",
+              "equals": false
+            },
+            {
+              "pointer": "/alternate11pxVariantRendered",
+              "equals": false
+            },
+            {
+              "pointer": "/wholeToolbarPixelParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t159-native-table-search-fields-linux.json",
+      "remaining": "Alternate native 11px/yellow states and selection rule, other widths/fonts/palettes/disabled/focus states, full toolbars/forms, DPI and Windows.",
+      "nextAction": "Preserve complete initial search controls while establishing alternate state rules and completing native icons/joined buttons/border poses."
     }
   ],
   "historicalReports": [
@@ -5275,7 +5372,8 @@
     "docs/measurements/t159-native-table-grids-linux.json",
     "docs/measurements/t159-native-context-grids-linux.json",
     "docs/measurements/t159-native-table-menus-linux.json",
-    "docs/measurements/t159-native-table-search-linux.json"
+    "docs/measurements/t159-native-table-search-linux.json",
+    "docs/measurements/t159-native-table-search-fields-linux.json"
   ],
   "supersessions": [
     {

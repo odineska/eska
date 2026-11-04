@@ -164,3 +164,7 @@ python3 -B -m unittest discover -s tests -p test_form_coverage.py
 `native-table-search/` отдельно фиксирует начальные подсказки поиска 13 px и
 неподдержанные native-варианты 11 px тех же XML. [Приёмка текста](../../../docs/measurements/t159-native-table-search-linux.json)
 не закрывает всё поле поиска, выбор native-варианта или командную панель.
+
+`native-table-search-fields/` закрывает полные поля начального варианта 13 px:
+общие углы ввода, подсказка, разделитель и очистка. [Приёмка](../../../docs/measurements/t159-native-table-search-fields-linux.json)
+не закрывает native-вариант 11 px/жёлтой рамки или все состояния поиска.
