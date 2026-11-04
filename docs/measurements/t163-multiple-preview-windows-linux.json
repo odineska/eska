@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendRuntimeUnchangedSince": "498fad3",
+  "clientRuntimeUnchangedSince": "db788a2",
+  "clientTestCommit": "99ab6581652aebce9d2fbd3e6231b2aa8a18a4c0",
+  "visualParityVerified": false,
+  "scope": "Functional isolation of two forms in two native VS Code preview windows; existing pixel matrices verify unchanged rendering",
+  "fixture": "test/form-fixture.mjs#createFormSource",
+  "behavior": [
+    "Each form has its own backend session, native window, selection and page navigation despite equal local XML IDs",
+    "Dirty XML updates only the corresponding image; closing the first main panel and preview releases only its session",
+    "The second window continues to update after the first closes; both dirty XML documents remain open and source files unchanged",
+    "Repeated focus retains both native targets and sessions",
+    "The test activates each target XML in the main editor before invoking the form command",
+    "Native window discovery joins page and out-of-process iframe frame trees through parent IDs to the exact matched webview context"
+  ],
+  "checks": {
+    "scriptsSyntax": "passed",
+    "node": {
+      "passed": 498,
+      "failed": 0,
+      "skipped": 11
+    },
+    "nativeRunsPassed": 10,
+    "runs": [
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 4.3
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 6.85
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.31
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 8.99
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 16.95
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.45
+      },
+      {
+        "suite": "input-dates",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 20.35
+      },
+      {
+        "suite": "input-dates",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 23.53
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 17.87
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 21.15
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "locale": "en",
+        "multipleNativeWindows": true,
+        "exactFrameOwnership": true,
+        "independentSessions": true,
+        "independentDirtyUpdates": true,
+        "equalLocalIds": true,
+        "independentSelection": true,
+        "independentPageNavigation": true,
+        "repeatedFocus": true,
+        "independentClose": true,
+        "dirtyDocumentsRetained": true,
+        "sourceWritesDuringViewing": false,
+        "forms": 2,
+        "nativeWindows": 2,
+        "selectedLocalXmlId": "2",
+        "regressionPixels": {
+          "wholeTabFormPixels": 3379919,
+          "dateMatrixWholeWidgetPixels": 1197585,
+          "fontMatrixWholeWidgetPixels": 934530
+        },
+        "differentRgbPixels": 0
+      },
+      "ru": {
+        "passed": true,
+        "locale": "ru",
+        "multipleNativeWindows": true,
+        "exactFrameOwnership": true,
+        "independentSessions": true,
+        "independentDirtyUpdates": true,
+        "equalLocalIds": true,
+        "independentSelection": true,
+        "independentPageNavigation": true,
+        "repeatedFocus": true,
+        "independentClose": true,
+        "dirtyDocumentsRetained": true,
+        "sourceWritesDuringViewing": false,
+        "forms": 2,
+        "nativeWindows": 2,
+        "selectedLocalXmlId": "2",
+        "regressionPixels": {
+          "wholeTabFormPixels": 3379919,
+          "dateMatrixWholeWidgetPixels": 1197585,
+          "fontMatrixWholeWidgetPixels": 934530
+        },
+        "differentRgbPixels": 0
+      }
+    }
+  },
+  "historicalTargetTitleObservation": {
+    "reference": "t158-native-input-dates-linux.json",
+    "causeConfirmed": false,
+    "reproducedWithExactFrameOwnership": false
+  },
+  "remaining": [
+    "More than two windows, the same source under different application contexts, physical window coordinates and desktop/monitor DPI combinations",
+    "Windows and Remote IDE acceptance",
+    "Other unclosed T152–T165 matrices"
+  ]
+}
