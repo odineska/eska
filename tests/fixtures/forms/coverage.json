@@ -1851,7 +1851,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "surfaces.text-document-plain"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3688,8 +3689,8 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
-      "remaining": "Document toolbars/content, calendar/scheduler, chart axes/legend/colors, all property/state combinations; only agreed random chart values may be excluded.",
-      "nextAction": "Choose one native complex surface with deterministic content and accept its full widget before broadening."
+      "remaining": "Document toolbars/content, text-document fonts and other properties, calendar/scheduler, chart axes/legend/colors, and all remaining state/property combinations. Empty normal 10pt text-document widgets are accepted separately in surfaces.text-document-plain; only agreed random chart values may be excluded.",
+      "nextAction": "Extend deterministic document/surface widgets and native editor font/size rules without treating the accepted plain text-document cases as full T160 acceptance."
     },
     {
       "id": "buttons.link-types",
@@ -5560,6 +5561,99 @@
       "lastConfirmation": "docs/measurements/t159-native-table-movement-linux.json",
       "remaining": "Other palettes/parents/command counts/states/zoom/DPI; lower-border pose of adjacent buttons and complete remaining toolbars/forms; Windows.",
       "nextAction": "Measure native lower-border pose and additional movement profiles while preserving all calibrated white group pixels."
+    },
+    {
+      "id": "surfaces.text-document-plain",
+      "milestone": "T160",
+      "kinds": [
+        "TextDocumentField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.colors",
+        "appearance.fonts",
+        "surface.content",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "All pixels of eight recorded normal 10pt empty TextDocumentField sources: default/two explicit sizes, ReadOnly, disabled default border, blue border, black background, title hidden. Fifteen complete-widget samples per locale including dirty XML/floating/return. Four native font variants remain unaccepted and display a notice.",
+      "fixtures": [
+        "tests/fixtures/forms/native-text-documents"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "text-document",
+        "path": "test/form-text-document-host.cjs",
+        "caseIds": [
+          "A_Default",
+          "dirty-background",
+          "dirty-border",
+          "restored-default",
+          "floating-default",
+          "floating-dirty-size",
+          "floating-restored",
+          "reattached-default",
+          "B_Size",
+          "C_ReadOnly",
+          "D_Disabled",
+          "E_Border",
+          "F_Background",
+          "H_NoTitle",
+          "I_Large"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-text-document-linux.json",
+          "sha256": "7724ac281c3b14f2e5a190682456f8989d527f456a75dd1b65390c12877f32b0",
+          "assertions": [
+            {
+              "pointer": "/completePlainTextDocumentPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/completeWidgetPixelsCompared",
+              "equals": 1581500
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/completeWidgetPixelsCompared",
+              "equals": 1581500
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/fontVariantsAccepted",
+              "equals": false
+            },
+            {
+              "pointer": "/wholeFormVisualParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-text-document-linux.json",
+      "remaining": "Four recorded font variants; all other font/dimension bounds/fractions/stretch and state/color combinations, document properties/toolbars/content, captions/full forms, DPI and Windows.",
+      "nextAction": "Establish native editor font/preferred-size/maximum rules and preserve full empty 10pt document pixels while accepting other deterministic surfaces."
     }
   ],
   "historicalReports": [
@@ -5629,7 +5723,8 @@
     "docs/measurements/t159-native-table-search-linux.json",
     "docs/measurements/t159-native-table-search-fields-linux.json",
     "docs/measurements/t156-native-standard-pictures-linux.json",
-    "docs/measurements/t159-native-table-movement-linux.json"
+    "docs/measurements/t159-native-table-movement-linux.json",
+    "docs/measurements/t160-native-text-document-linux.json"
   ],
   "supersessions": [
     {

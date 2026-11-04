@@ -179,3 +179,8 @@ python3 -B -m unittest discover -s tests -p test_form_coverage.py
 на белом фоне в подтверждённом профиле 96 DPI/100%. [Отчёт](../../../docs/measurements/t159-native-table-movement-linux.json)
 проверяет все пиксели 14 состояний на локаль и явный fallback других масштабов;
 полные остальные панели сохраняют ошибки нижних границ соседних кнопок.
+
+`native-text-documents/` содержит 12 native-форм и 24 снимка ru/en. Восемь
+обычных пустых TextDocumentField приняты целиком по 1 581 500 пикселям на локаль,
+включая цвета/размеры/недоступность/dirty XML и отдельное окно. Четыре шрифтовых
+случая сохранены как незавершённые. [Отчёт](../../../docs/measurements/t160-native-text-document-linux.json).
