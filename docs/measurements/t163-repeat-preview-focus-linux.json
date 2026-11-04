@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendRuntimeUnchangedSince": "498fad3",
+  "clientCommit": "db788a241238cc30240a20be6465624fd2961ba8",
+  "visualParityVerified": false,
+  "scope": "Repeated preview requests focus the existing native preview without reparenting it or executing another move-to-window command",
+  "before": {
+    "clientCommit": "6e4d964",
+    "nativeRegression": "failed: repeat keeps the native window",
+    "nativeTargetChanged": true
+  },
+  "after": {
+    "existingPanel": "reveal in its current column",
+    "newPanel": "create once and use the guarded native move command",
+    "backendContract": "unchanged",
+    "sourceWrites": false
+  },
+  "checks": {
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 498,
+        "failed": 0,
+        "skipped": 11
+      }
+    },
+    "nativeRunsPassed": 14,
+    "runs": [
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.31
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 8.77
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 3.04
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 5.86
+      },
+      {
+        "suite": "restore",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 8.87
+      },
+      {
+        "suite": "restore",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.9
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 10.72
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 13.49
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 16.5
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.87
+      },
+      {
+        "suite": "input-dates",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 19.92
+      },
+      {
+        "suite": "input-dates",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 22.67
+      }
+    ],
+    "finalRechecks": [
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.18
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 8.83
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "concurrentRequests": 2,
+        "nativePreviewWindows": 1,
+        "nativeTargetPreservedOnRepeat": true,
+        "solidOwnerPreservedOnRepeat": true,
+        "dirtyUpdatesAfterRepeat": true,
+        "staleAndUndoAfterRepeat": true,
+        "ownerClosedBeforeDock": true,
+        "independentForms": true,
+        "sourceWritesDuringViewing": false,
+        "wholeTabFormRegressionPixels": 3379919,
+        "wholeDateMatrixWidgetPixels": 1197585,
+        "differentRgbPixels": 0
+      },
+      "ru": {
+        "passed": true,
+        "concurrentRequests": 2,
+        "nativePreviewWindows": 1,
+        "nativeTargetPreservedOnRepeat": true,
+        "solidOwnerPreservedOnRepeat": true,
+        "dirtyUpdatesAfterRepeat": true,
+        "staleAndUndoAfterRepeat": true,
+        "ownerClosedBeforeDock": true,
+        "independentForms": true,
+        "sourceWritesDuringViewing": false,
+        "wholeTabFormRegressionPixels": 3379919,
+        "wholeDateMatrixWidgetPixels": 1197585,
+        "differentRgbPixels": 0
+      }
+    }
+  },
+  "remaining": [
+    "Physical window position, mixed monitor DPI, other desktops/window managers and Windows acceptance",
+    "The separate preliminary target-title observation recorded in t158-native-input-dates-linux.json remains open; this fix addresses a reproduced repeated-command scenario",
+    "Other unclosed T152–T165 matrices"
+  ]
+}
