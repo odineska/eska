@@ -2065,5 +2065,10 @@
     "fixture": "../native-input-stretch/metrics.json",
     "scope": "Sixteen non-fractional Stretch/Default states are accepted by the later initial-layout matrix. Remaining observations stay unaccepted.",
     "report": "../../../../docs/measurements/t157-native-input-stretch-linux.json"
+  },
+  "subsequentFontAcceptance": {
+    "fixture": "../native-input-fonts/metrics.json",
+    "scope": "Eight additional font observations are accepted by the later 34-form font matrix; resizing and raw fractional inputs remain unaccepted.",
+    "report": "../../../../docs/measurements/t157-native-input-fonts-linux.json"
   }
 }

@@ -8088,7 +8088,8 @@
         }
       ],
       "independentValidation": false,
-      "independentClippingValidation": true
+      "independentClippingValidation": false,
+      "clippingRole": "derivation"
     },
     {
       "name": "Font32Width1",
@@ -8358,7 +8359,8 @@
         }
       ],
       "independentValidation": false,
-      "independentClippingValidation": true
+      "independentClippingValidation": false,
+      "clippingRole": "derivation"
     },
     {
       "name": "Font48Width1",
@@ -8628,7 +8630,8 @@
         }
       ],
       "independentValidation": false,
-      "independentClippingValidation": true
+      "independentClippingValidation": false,
+      "clippingRole": "derivation"
     },
     {
       "name": "Font18Width1",
@@ -8898,7 +8901,8 @@
         }
       ],
       "independentValidation": false,
-      "independentClippingValidation": true
+      "independentClippingValidation": false,
+      "clippingRole": "refinement"
     },
     {
       "name": "Font20Width2",
@@ -9168,7 +9172,8 @@
         }
       ],
       "independentValidation": false,
-      "independentClippingValidation": true
+      "independentClippingValidation": true,
+      "clippingRole": "validation"
     }
   ]
 }

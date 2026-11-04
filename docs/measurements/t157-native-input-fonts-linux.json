@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendRuntimeUnchangedSince": "498fad3",
+  "fixtureCommit": "9c7ffcc9c8c5842f8f89a2568beb12b2203c84fa",
+  "clientCommit": "9199c5224ebf665b1a232796f1121cb29b6e60d7",
+  "acceptedInputFontMatrix": true,
+  "visualParityVerified": false,
+  "scope": {
+    "forms": 34,
+    "fields": 136,
+    "normalPoints": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      26,
+      28,
+      32,
+      40,
+      48
+    ],
+    "boldPoints": [
+      18
+    ],
+    "inactivePoints": [
+      7
+    ],
+    "clippingCases": [
+      "Font18Width1",
+      "Font20Width1",
+      "Font20Width2",
+      "Font32Width1",
+      "Font48Width1"
+    ],
+    "independentHeightCases": 13,
+    "independentFinalClippingCases": [
+      "Font20Width2"
+    ],
+    "clippingRefinementCase": "Font18Width1",
+    "smallCalculatorVariants": 5,
+    "pixels": "whole string/numeric widgets; date corners only; full calculator interiors",
+    "exclusions": [],
+    "tolerance": 0,
+    "wholeFormAcceptance": false
+  },
+  "behavior": [
+    "Linux input height rounds the font line allocation multiplied by 20/13; side captions establish the minimum row height",
+    "Text baseline uses ceiling ascender/descender metrics and the measured four-pixel top inset",
+    "Native clipping preserves LCD overhang when text fits, and uses the measured viewport when it overflows",
+    "Small input positions use relative pixel alignment without filtering the border",
+    "Tiny calculator images use measured native raster variants, including matching disabled/ReadOnly samples",
+    "Dirty font changes preserve Solid owners, including in the detached native window"
+  ],
+  "checks": {
+    "backendFullReference": "t155-native-font-roles-linux.json",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 496,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeRunsPassed": 24,
+    "runs": [
+      {
+        "suite": "input-fonts",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 17.39
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 20.31
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 17.37
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 20.17
+      },
+      {
+        "suite": "input-stretch",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 9.4
+      },
+      {
+        "suite": "input-stretch",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 12.35
+      },
+      {
+        "suite": "input-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 18.73
+      },
+      {
+        "suite": "input-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 23.7
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 16.76
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.4
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 10.87
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 13.82
+      },
+      {
+        "suite": "states",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.68
+      },
+      {
+        "suite": "states",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.41
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.31
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.08
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 3.15
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 5.97
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 10.32
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 12.98
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 7.08
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.84
+      },
+      {
+        "suite": "font-roles",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.22
+      },
+      {
+        "suite": "font-roles",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.04
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "samples": 38,
+        "frameAndFieldGeometry": "exact",
+        "stringAndNumericWidgets": "exact",
+        "dates": "geometry and four corners only",
+        "differentRgbPixels": 0,
+        "regionsOverlap": true,
+        "cornerPixelsCompared": 5472,
+        "wholeWidgetPixelsCompared": 934530,
+        "calculatorPixelsCompared": 32680,
+        "pixelsCompared": 972682,
+        "dirtyFont": true,
+        "stableOwnersDuringDirtyUpdates": true,
+        "nativeFloatingWindow": true,
+        "floatingDirtyFont": true,
+        "dock": true,
+        "sourceWritesDuringViewing": false,
+        "wholeFormRegressionPixels": 3379919
+      },
+      "ru": {
+        "passed": true,
+        "samples": 38,
+        "frameAndFieldGeometry": "exact",
+        "stringAndNumericWidgets": "exact",
+        "dates": "geometry and four corners only",
+        "differentRgbPixels": 0,
+        "regionsOverlap": true,
+        "cornerPixelsCompared": 5472,
+        "wholeWidgetPixelsCompared": 934530,
+        "calculatorPixelsCompared": 32680,
+        "pixelsCompared": 972682,
+        "dirtyFont": true,
+        "stableOwnersDuringDirtyUpdates": true,
+        "nativeFloatingWindow": true,
+        "floatingDirtyFont": true,
+        "dock": true,
+        "sourceWritesDuringViewing": false,
+        "wholeFormRegressionPixels": 3379919
+      }
+    },
+    "fixedWidthMatrixReference": "t157-native-input-dimensions-linux.json",
+    "stretchMatrixReference": "t157-native-input-stretch-linux.json",
+    "wholeFormMatrixReference": "t157-native-tab-borders-linux.json"
+  },
+  "remaining": [
+    "Other font families, italic and other bold/state combinations; inactive tiny images below 7pt",
+    "Font sizes outside 4–48pt and other physical DPI",
+    "Date value masks and calendar icon remain outside this geometry/corner acceptance",
+    "Root resizing, other ancestor layouts, full styles/extensions and complex surfaces",
+    "Windows, Remote IDE and the other unclosed T152–T165 matrices"
+  ]
+}
