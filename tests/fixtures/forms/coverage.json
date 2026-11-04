@@ -590,7 +590,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "tables.recorded-grids"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1793,7 +1794,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "tables.recorded-grids"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3622,8 +3624,8 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t159-native-tables-linux.json",
-      "remaining": "Headers/footers/cells/hierarchy/selection, nested groups, bindings and all state/style combinations.",
-      "nextAction": "Start with one reproducible whole table and fix shared layout/text/icon causes."
+      "remaining": "Recorded default ValueTable grids are accepted separately in tables.recorded-grids. Complete table-field composition, other sources/column types, hierarchy/selection, all widths/fonts/styles/states and Windows remain open.",
+      "nextAction": "Extend the exact native grid comparison to metadata tabular sections and dynamic lists, then their property/style/state combinations."
     },
     {
       "id": "surfaces.full-matrix",
@@ -4787,6 +4789,95 @@
       "lastConfirmation": "docs/measurements/t157-native-button-rows-linux.json",
       "remaining": "Other fonts, widths, states, parents, nested/wrapped/mixed-field layouts and full widget/form RGB parity; Windows and DPI.",
       "nextAction": "Resolve the retained full RGB lower-border differences and extend the measured native row/layout matrix."
+    },
+    {
+      "id": "tables.recorded-grids",
+      "milestone": "T159",
+      "kinds": [
+        "Table",
+        "ColumnGroup"
+      ],
+      "axes": [
+        "source.identity",
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete grid controls of nine recorded empty ValueTable forms in native/IDE ru/en, including nested headers/footer/mark/scrollbars. Dirty Default/GridFooter and actual detached window preserve the selected table and DOM; composite header hit areas remain selectable. Exterior controls and other matrices are not accepted.",
+      "fixtures": [
+        "tests/fixtures/forms/native-tables",
+        "tests/fixtures/forms/native-table-pixels"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "table-pixels",
+        "path": "test/form-table-pixels-host.cjs",
+        "caseIds": [
+          "Default",
+          "dirty-footer",
+          "restored-default",
+          "floating-default",
+          "floating-dirty-footer",
+          "floating-restored",
+          "reattached-default",
+          "GridFooter",
+          "Horizontal",
+          "HorizontalTitled",
+          "Vertical",
+          "InCell",
+          "Marked",
+          "ReadOnly",
+          "NoAutoFill"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t159-native-table-grids-linux.json",
+          "sha256": "70f54d615cc9974589c5f8c75241bd8874971fecd3daf8ecdb0880aee0753a56",
+          "assertions": [
+            {
+              "pointer": "/wholeGridControlPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/nativeImages",
+              "equals": 18
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/pixelsCompared",
+              "equals": 1336442
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/pixelsCompared",
+              "equals": 1301470
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t159-native-table-grids-linux.json",
+      "remaining": "Table toolbar/additions and full forms, metadata tabular sections/dynamic lists, hierarchy/selection, other widths/fonts/states/styles, DPI and Windows.",
+      "nextAction": "Measure complete grids of metadata tabular sections and dynamic lists, then expand native property/style/state matrices without weakening the accepted ValueTable comparisons."
     }
   ],
   "historicalReports": [
@@ -4849,7 +4940,8 @@
     "docs/measurements/t152-property-candidates-linux.json",
     "docs/measurements/t158-native-button-types-linux.json",
     "docs/measurements/t158-native-link-captions-linux.json",
-    "docs/measurements/t157-native-button-rows-linux.json"
+    "docs/measurements/t157-native-button-rows-linux.json",
+    "docs/measurements/t159-native-table-grids-linux.json"
   ],
   "supersessions": [
     {
@@ -4916,6 +5008,15 @@
         "buttons.mixed-row-geometry"
       ],
       "currentRemainder": "Type/color semantics remain accepted. Current renderer cycle is 48 -> 24 -> 48; complete widget pixels and other matrices remain open."
+    },
+    {
+      "id": "table-recorded-grid-pixels",
+      "historicalReport": "docs/measurements/t159-native-tables-linux.json",
+      "historicalGap": "Default grid retained text/arrow/border differences and had no complete pixel acceptance.",
+      "currentEntries": [
+        "tables.recorded-grids"
+      ],
+      "currentRemainder": "Nine recorded empty ValueTable grids now match in ru/en; other table sources, properties, surrounding controls and complete forms remain open."
     }
   ],
   "nextGroups": [
