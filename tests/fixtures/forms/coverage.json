@@ -798,7 +798,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "context.native-static-composition"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1103,7 +1104,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "context.native-static-composition"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1877,7 +1879,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "context.native-static-composition"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -2065,15 +2068,99 @@
       "profile": "designer-xml",
       "level": "semantics",
       "status": "in_progress",
-      "scope": "Stored BaseForm delta and provenance are implemented and unit-tested; native order/activation/conflict/style equivalence has not been accepted.",
+      "scope": "Stored BaseForm deltas/provenance and the limited native common-form purpose/order matrix are verified; complete context/applicability/style equivalence remains open.",
       "fixtures": [
-        "tests/fixtures/forms/native-basic.xml"
+        "tests/fixtures/forms/native-basic.xml",
+        "tests/fixtures/forms/native-extension-composition"
       ],
       "driver": null,
-      "evidence": [],
-      "lastConfirmation": null,
-      "remaining": "Native composed forms, two competing extensions, activation/dependencies, base replacement and style priority.",
-      "nextAction": "Build own base plus two extensions, establish native effective-form oracle and compare order/identity/provenance."
+      "evidence": [
+        {
+          "report": "docs/measurements/t154-native-composition-linux.json",
+          "sha256": "ad3f4d7703f03b08d91e45f35ad4822dad32fea26889c498a5d76866083603d9",
+          "assertions": [
+            {
+              "pointer": "/nativeCases",
+              "equals": 11
+            },
+            {
+              "pointer": "/noBslModulesOrHandlers",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/cargoTest/failed",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/passedPairsAfterSingleReadinessRecheck",
+              "equals": 12
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t154-native-composition-linux.json",
+      "remaining": "Object-owned and own extension forms, other element families, native style-resource conflicts, arbitrary applicability and deployment selection, Configurator pixels, Windows and 8.5.",
+      "nextAction": "Extend the native semantic oracle to object-owned/own extension forms and conflicting metadata/style resources; retain the limited scope of this common-form matrix."
+    },
+    {
+      "id": "context.native-static-composition",
+      "milestone": "T154",
+      "kinds": [
+        "Form",
+        "LabelDecoration",
+        "UsualGroup"
+      ],
+      "axes": [
+        "context.layers",
+        "values.defaults",
+        "source.identity"
+      ],
+      "profile": "designer-xml",
+      "level": "semantics",
+      "status": "accepted_scope",
+      "scope": "Linux 8.3.27.2342 static common form: eleven native client observations without BSL, purpose priorities, explicit source order matched to registration, active subsets, independent deltas, colliding inserted IDs, base update and ID reallocation. GUI ru/en verifies dirty/saved metadata and detach; no Configurator pixel or arbitrary applicability claim.",
+      "fixtures": [
+        "tests/fixtures/forms/native-extension-composition"
+      ],
+      "driver": {
+        "repository": "eska",
+        "path": "tests/project/metadata_workspace/forms/native.rs",
+        "caseIds": [
+          "native_xml_form_composition_matches_eleven_observed_static_client_cases",
+          "dirty_extension_purpose_reorders_layers_without_changing_element_identity_or_files",
+          "invalid_extension_purpose_does_not_masquerade_as_customization"
+        ],
+        "selection": "whole native semantic matrix plus dirty/invalid metadata regressions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t154-native-composition-linux.json",
+          "sha256": "ad3f4d7703f03b08d91e45f35ad4822dad32fea26889c498a5d76866083603d9",
+          "assertions": [
+            {
+              "pointer": "/nativeCases",
+              "equals": 11
+            },
+            {
+              "pointer": "/noBslModulesOrHandlers",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/cargoTest/failed",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/passedPairsAfterSingleReadinessRecheck",
+              "equals": 12
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t154-native-composition-linux.json",
+      "remaining": "Object-owned and own extension forms, other element families, native style-resource conflicts, arbitrary applicability and deployment selection, Configurator pixels, Windows and 8.5.",
+      "nextAction": "Extend the native semantic oracle to object-owned/own extension forms and conflicting metadata/style resources; retain the limited scope of this common-form matrix."
     },
     {
       "id": "styles.named-values",
@@ -4071,7 +4158,8 @@
     "docs/measurements/t163-pending-close-linux.json",
     "docs/measurements/t163-preview-navigation-linux.json",
     "docs/measurements/t163-repeat-preview-focus-linux.json",
-    "docs/measurements/t163-restart-linux.json"
+    "docs/measurements/t163-restart-linux.json",
+    "docs/measurements/t154-native-composition-linux.json"
   ],
   "supersessions": [
     {

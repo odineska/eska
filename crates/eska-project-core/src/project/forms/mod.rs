@@ -6,6 +6,7 @@ mod commands;
 mod composition;
 mod context;
 mod handlers;
+mod layer_order;
 mod parsing;
 mod pictures;
 mod preparation;

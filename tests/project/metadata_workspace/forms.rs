@@ -4,6 +4,8 @@ use crate::backend::project::{
     metadata_workspace::FormPreviewError,
 };
 
+mod native;
+
 const PATH: &str = "Catalogs/Контрагенты/Forms/ФормаЭлемента/Ext/Form.xml";
 const BODY: &str = "<ChildItems><InputField name=\"Поле\" id=\"1\"><Title>Исходный</Title></InputField></ChildItems>";
 fn form(body: &str, base: Option<&str>) -> String {

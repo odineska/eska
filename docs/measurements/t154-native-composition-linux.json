@@ -1,0 +1,1449 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "scope": "T154 native static common-form composition and purpose ordering; limited semantic acceptance, not whole-profile pixels or arbitrary extension applicability",
+  "fullProfileAccepted": false,
+  "platformBuild": "8.3.27.2342",
+  "nativeReferenceMode": "Native managed client opens a static common form through /URL; no BSL modules or event handlers. Semantic composition only; Designer preview pixels and general applicability are not accepted by these observations.",
+  "noBslModulesOrHandlers": true,
+  "nativeCases": 11,
+  "observedCaptions": 73,
+  "nativeInputs": {
+    "path": "tests/fixtures/forms/native-extension-composition/metrics.json",
+    "sha256": "66cbd88997e5de810cff79b8157d94b85e92222cad8730973bfb2cb1c19a7dd8",
+    "xmlInputs": 17
+  },
+  "rules": {
+    "purposeOrder": [
+      "Patch",
+      "Customization",
+      "AddOn"
+    ],
+    "samePurposeOrder": "The explicitly selected context source order is retained; it must match the chosen native application order. XML does not contain physical registration dates.",
+    "omittedPurpose": "Customization",
+    "emptyPurposeNativeImportExitCode": 255,
+    "stylesAndFormsUseSameLayerOrder": true,
+    "metadataPurposeUsesDirtyOverlay": true,
+    "elementIdentityAndSourceProvenanceRetained": true
+  },
+  "cases": [
+    {
+      "id": "base-only",
+      "activeRegistrationOrder": [],
+      "applicationOrder": [],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "Base caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "B",
+          "title": "Base B"
+        },
+        {
+          "name": "C",
+          "title": "Base C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/base-only.png",
+        "sha256": "135b340bb077e0cdf4a1b6f67ce70e8bd7bb73a04310a60b25d315d81d331871"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/base-only-extensions.log",
+        "sha256": "5966ff122d3c1b7c070336dd8aac044eb116776b99af20d59577f5056618d869"
+      }
+    },
+    {
+      "id": "first-only",
+      "activeRegistrationOrder": [
+        "first"
+      ],
+      "applicationOrder": [
+        "first"
+      ],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "First caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "F_Inserted",
+          "title": "F_inserted"
+        },
+        {
+          "name": "B",
+          "title": "Base B"
+        },
+        {
+          "name": "C",
+          "title": "Base C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/first-only.png",
+        "sha256": "ecff6dd3f81985c3010f18427235dba78bb3759d5ac64c0308c89bab2d735a19"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/first-only-extensions.log",
+        "sha256": "2cd0335cd9bef47c668bb50e86a0b9ef41baf8ccd1223285a0c75738505a2648"
+      }
+    },
+    {
+      "id": "second-only",
+      "activeRegistrationOrder": [
+        "second"
+      ],
+      "applicationOrder": [
+        "second"
+      ],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "Second caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "S_Inserted",
+          "title": "S_inserted"
+        },
+        {
+          "name": "B",
+          "title": "Second B"
+        },
+        {
+          "name": "C",
+          "title": "Base C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/second-only.png",
+        "sha256": "1471dc67c5348377fb1d38c8313c333ef839ad9378d113e12b713059c1c6108a"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/second-only-extensions.log",
+        "sha256": "963a0f12a7d8b374d3398646227a617fee3b0cc7a9b43c0416154ed9432342fc"
+      }
+    },
+    {
+      "id": "both-forward",
+      "activeRegistrationOrder": [
+        "first",
+        "second"
+      ],
+      "applicationOrder": [
+        "first",
+        "second"
+      ],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "Second caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "S_Inserted",
+          "title": "S_inserted"
+        },
+        {
+          "name": "F_Inserted",
+          "title": "F_inserted"
+        },
+        {
+          "name": "B",
+          "title": "Second B"
+        },
+        {
+          "name": "C",
+          "title": "Base C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/both-forward.png",
+        "sha256": "ed39edd38b776e7dad8ef805ac17999a6891721d385ad3a09406d80e7888578d"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/both-forward-extensions.log",
+        "sha256": "2023147ca920d5d06f8898f0abbd2e72d874a8f9aadbf754aed19b547a50e358"
+      }
+    },
+    {
+      "id": "both-reversed",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "second",
+        "first"
+      ],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "First caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "F_Inserted",
+          "title": "F_inserted"
+        },
+        {
+          "name": "S_Inserted",
+          "title": "S_inserted"
+        },
+        {
+          "name": "B",
+          "title": "Second B"
+        },
+        {
+          "name": "C",
+          "title": "Base C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/both-reversed.png",
+        "sha256": "0ee4bf600a1118134aca001d0f871edd0679cb762a7ec377f9b71f7b38c52e18"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/both-reversed-extensions.log",
+        "sha256": "5dfd1b27697f3dde70f82be8e17c2cd4aa504c03d9fed80dd57196ce2a1b0cce"
+      }
+    },
+    {
+      "id": "first-patch",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "first",
+        "second"
+      ],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "Second caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "S_Inserted",
+          "title": "S_inserted"
+        },
+        {
+          "name": "F_Inserted",
+          "title": "F_inserted"
+        },
+        {
+          "name": "B",
+          "title": "Second B"
+        },
+        {
+          "name": "C",
+          "title": "Base C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/first-patch.png",
+        "sha256": "ed39edd38b776e7dad8ef805ac17999a6891721d385ad3a09406d80e7888578d"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/first-patch-extensions.log",
+        "sha256": "7764256f45d06849f0fcdc2a3367d3beaee3ab984f6eb5da81f39ee43feebaae"
+      }
+    },
+    {
+      "id": "first-addon",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "second",
+        "first"
+      ],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "First caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "F_Inserted",
+          "title": "F_inserted"
+        },
+        {
+          "name": "S_Inserted",
+          "title": "S_inserted"
+        },
+        {
+          "name": "B",
+          "title": "Second B"
+        },
+        {
+          "name": "C",
+          "title": "Base C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/first-addon.png",
+        "sha256": "0ee4bf600a1118134aca001d0f871edd0679cb762a7ec377f9b71f7b38c52e18"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/first-addon-extensions.log",
+        "sha256": "2ad071113c99ee3d97dbb313210d4fab2063cf3640bd0227306cde7969144cff"
+      }
+    },
+    {
+      "id": "second-addon",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "first",
+        "second"
+      ],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "Second caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "S_Inserted",
+          "title": "S_inserted"
+        },
+        {
+          "name": "F_Inserted",
+          "title": "F_inserted"
+        },
+        {
+          "name": "B",
+          "title": "Second B"
+        },
+        {
+          "name": "C",
+          "title": "Base C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/second-addon.png",
+        "sha256": "ed39edd38b776e7dad8ef805ac17999a6891721d385ad3a09406d80e7888578d"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/second-addon-extensions.log",
+        "sha256": "d071ee6bbbe02154ef71515956e8fa9e642a3ca8ac8eebb8e65c6edf14207207"
+      }
+    },
+    {
+      "id": "purpose-default",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "second",
+        "first"
+      ],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "First caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "F_Inserted",
+          "title": "F_inserted"
+        },
+        {
+          "name": "S_Inserted",
+          "title": "S_inserted"
+        },
+        {
+          "name": "B",
+          "title": "Second B"
+        },
+        {
+          "name": "C",
+          "title": "Base C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/purpose-default.png",
+        "sha256": "0ee4bf600a1118134aca001d0f871edd0679cb762a7ec377f9b71f7b38c52e18"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/purpose-default-extensions.log",
+        "sha256": "9c33afb02e6ac6698909f38e6b5b77cf53265b2200043fbf58ef835b60fc1bf9"
+      }
+    },
+    {
+      "id": "base-updated",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "second",
+        "first"
+      ],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "First caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "F_Inserted",
+          "title": "F_inserted"
+        },
+        {
+          "name": "S_Inserted",
+          "title": "S_inserted"
+        },
+        {
+          "name": "B",
+          "title": "Second B"
+        },
+        {
+          "name": "C",
+          "title": "Updated C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/base-updated.png",
+        "sha256": "ba955ff027eb05e95f7013f80acc6b3f464078f2499bb0fe2b627d9bcc7c9579"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/base-updated-extensions.log",
+        "sha256": "9c33afb02e6ac6698909f38e6b5b77cf53265b2200043fbf58ef835b60fc1bf9"
+      }
+    },
+    {
+      "id": "base-id-changed",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "second",
+        "first"
+      ],
+      "captions": [
+        {
+          "name": "Caption",
+          "title": "First caption"
+        },
+        {
+          "name": "Group",
+          "title": "Group"
+        },
+        {
+          "name": "A",
+          "title": "Base A"
+        },
+        {
+          "name": "F_Inserted",
+          "title": "F_inserted"
+        },
+        {
+          "name": "S_Inserted",
+          "title": "S_inserted"
+        },
+        {
+          "name": "B",
+          "title": "Second B"
+        },
+        {
+          "name": "C",
+          "title": "Updated C"
+        }
+      ],
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/base-id-changed.png",
+        "sha256": "ba955ff027eb05e95f7013f80acc6b3f464078f2499bb0fe2b627d9bcc7c9579"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/base-id-changed-extensions.log",
+        "sha256": "9c33afb02e6ac6698909f38e6b5b77cf53265b2200043fbf58ef835b60fc1bf9"
+      }
+    }
+  ],
+  "regression": {
+    "before": {
+      "passed": 0,
+      "failed": 3,
+      "logSha256": "005aa1c758e39ef9dbc21baa37606f6fd0f6adcc5cd1d8130190183c5b9a9d46",
+      "reason": "Wrong native purpose precedence and acceptance of invalid dirty purpose; setup-only mistakes were corrected before this recorded reproduction."
+    },
+    "after": {
+      "passed": 3,
+      "failed": 0,
+      "nativeCasesCovered": 11,
+      "logSha256": "418ad533cef9f4d83065f64a30930f711e3cb9f952b1a87e0ca7fbcd18c4fa30"
+    }
+  },
+  "checks": {
+    "cargoFmtCheck": 0,
+    "cargoCheck": 0,
+    "cargoClippyAllTargetsAllFeaturesDenyWarnings": 0,
+    "cargoTest": {
+      "passed": 1506,
+      "failed": 0,
+      "ignored": 19,
+      "suites": 42,
+      "logSha256": "8c5c9553d3897b1dc5d4e5b487e232a07e9325d7da60b5e0fe54765f3466129d"
+    },
+    "backendBuild": {
+      "exitCode": 0,
+      "sha256": "74953d3dd4685a987c2a327562f63149f2625853738a30ad8b84947f0ccfed2c",
+      "logSha256": "4d8472fbf87f0d9e34ace7ad7ceba875c64093d56d322ba0b73ccd2bdcc53dca"
+    },
+    "node": {
+      "passed": 512,
+      "failed": 0,
+      "skipped": 11,
+      "total": 523,
+      "logSha256": "ec503854c8d13567f480742e110ca8efc69eac3d7472f476b020c2c4a3915e7a"
+    },
+    "cliInit": {
+      "cases": [
+        {
+          "locale": "ru-RU",
+          "format": "human",
+          "exitCode": 0,
+          "passed": true,
+          "projectType": "extension",
+          "sourceUnchanged": true,
+          "stdout": "Проект подключён: ⁨/home/kas/Projects/eska-playground/t154-native-init-iosu_mqb⁩.\n",
+          "stderr": "",
+          "artifactDirectory": "t154-native-init-iosu_mqb"
+        },
+        {
+          "locale": "ru-RU",
+          "format": "json",
+          "exitCode": 0,
+          "passed": true,
+          "projectType": "extension",
+          "sourceUnchanged": true,
+          "stdout": "{\"kind\":\"project-init\",\"project\":{\"project_type\":\"extension\",\"root\":{\"encoding\":\"utf-8\",\"value\":\"/home/kas/Projects/eska-playground/t154-native-init-a7caszby\"},\"source\":{\"encoding\":\"utf-8\",\"value\":\"/home/kas/Projects/eska-playground/t154-native-init-a7caszby/src\"}},\"schema_version\":1,\"status\":\"initialized\",\"vcs_initialized\":false}\n",
+          "stderr": "",
+          "artifactDirectory": "t154-native-init-a7caszby"
+        },
+        {
+          "locale": "en-US",
+          "format": "human",
+          "exitCode": 0,
+          "passed": true,
+          "projectType": "extension",
+          "sourceUnchanged": true,
+          "stdout": "Project initialized: ⁨/home/kas/Projects/eska-playground/t154-native-init-v8kx8erd⁩.\n",
+          "stderr": "",
+          "artifactDirectory": "t154-native-init-v8kx8erd"
+        },
+        {
+          "locale": "en-US",
+          "format": "json",
+          "exitCode": 0,
+          "passed": true,
+          "projectType": "extension",
+          "sourceUnchanged": true,
+          "stdout": "{\"kind\":\"project-init\",\"project\":{\"project_type\":\"extension\",\"root\":{\"encoding\":\"utf-8\",\"value\":\"/home/kas/Projects/eska-playground/t154-native-init-1qb28yqr\"},\"source\":{\"encoding\":\"utf-8\",\"value\":\"/home/kas/Projects/eska-playground/t154-native-init-1qb28yqr/src\"}},\"schema_version\":1,\"status\":\"initialized\",\"vcs_initialized\":false}\n",
+          "stderr": "",
+          "artifactDirectory": "t154-native-init-1qb28yqr"
+        }
+      ],
+      "allFourPassed": true,
+      "sourceUnchanged": true,
+      "preliminaryNameValidation": "An initial standalone call incorrectly used workspace-only --name; four expected workspace_required rejections are retained separately in cli-init-name-validation.json."
+    }
+  },
+  "installedBatches": [
+    {
+      "artifactDirectory": "form-batch-y4lQeN",
+      "passed": true,
+      "overallExitCode": 0,
+      "builds": 1,
+      "packages": 1,
+      "batchSha256": "bc68e27e1a91adc736c9ff1bf8b236552de8f952c2827aa6b23db462ff91a36a",
+      "inputsSha256": "fe9973f10c2471698cae2830cbd127ee53c39ad00f043f04abdcc472ad4df2fe",
+      "backendSha256": "74953d3dd4685a987c2a327562f63149f2625853738a30ad8b84947f0ccfed2c",
+      "vsixSha256": "2e28120f9bc57554942195f4530589f8a6e10834934feb0b83bad98f934a8a0d",
+      "runtimeFiles": 1303,
+      "runtimeManifestSha256": "c079d1e1ffa61305d870596447b33b836aa71f2e6f61e40032cc5c9e76fb1690",
+      "timings": {
+        "checkMs": 261.529721,
+        "compileMs": 1024.053802,
+        "packageMs": 1722.1522959999998,
+        "freezeInputsMs": 864.176058,
+        "totalMs": 18283.685731
+      },
+      "runs": [
+        {
+          "suite": "composition",
+          "locale": "en",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 6.057685479000001,
+          "caseIds": [
+            "composition/initial-addon",
+            "composition/dirty-customization",
+            "composition/external-patch-with-dirty-second",
+            "composition/external-addon-with-dirty-second",
+            "composition/invalid-purpose",
+            "composition/external-configuration-restored",
+            "composition/detached-dirty-addon",
+            "composition/detached-dirty-default-purpose",
+            "composition/reattached-default-purpose"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "classification": "passed",
+          "receiptSha256": "000e171e9e5888f1de76834d8087845222cf57a6413718505d2454260f55bc2c",
+          "driverLogSha256": "47c1f96f6260f9b842228111db13a178107506b219e38e269e55a5d07b201ea2",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": [
+            {
+              "label": "initial-addon",
+              "expectedCase": "second-addon",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "dirty-customization",
+              "expectedCase": "both-reversed",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "external-patch-with-dirty-second",
+              "expectedCase": "first-patch",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "external-addon-with-dirty-second",
+              "expectedCase": "first-addon",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "invalid-purpose",
+              "lastGoodModelRetained": true
+            },
+            {
+              "label": "external-configuration-restored",
+              "expectedCase": "both-reversed",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "detached-dirty-addon",
+              "expectedCase": "second-addon",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "detached-dirty-default-purpose",
+              "expectedCase": "purpose-default",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "reattached-default-purpose",
+              "dirtyPreserved": true
+            }
+          ]
+        },
+        {
+          "suite": "composition",
+          "locale": "ru",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 8.278232180000002,
+          "caseIds": [
+            "composition/initial-addon",
+            "composition/dirty-customization",
+            "composition/external-patch-with-dirty-second",
+            "composition/external-addon-with-dirty-second",
+            "composition/invalid-purpose",
+            "composition/external-configuration-restored",
+            "composition/detached-dirty-addon",
+            "composition/detached-dirty-default-purpose",
+            "composition/reattached-default-purpose"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "classification": "passed",
+          "receiptSha256": "484297025868b855bc7914331d5e0a3d47bf2ba1a0798e015250f8c8030b7eb0",
+          "driverLogSha256": "8bf2dbb8db2d2b56511ccbb7c9de59b15ade826c781ef03e0e9655af1217fccc",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": [
+            {
+              "label": "initial-addon",
+              "expectedCase": "second-addon",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "dirty-customization",
+              "expectedCase": "both-reversed",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "external-patch-with-dirty-second",
+              "expectedCase": "first-patch",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "external-addon-with-dirty-second",
+              "expectedCase": "first-addon",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "invalid-purpose",
+              "lastGoodModelRetained": true
+            },
+            {
+              "label": "external-configuration-restored",
+              "expectedCase": "both-reversed",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "detached-dirty-addon",
+              "expectedCase": "second-addon",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "detached-dirty-default-purpose",
+              "expectedCase": "purpose-default",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "reattached-default-purpose",
+              "dirtyPreserved": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "artifactDirectory": "form-batch-WXXYKM",
+      "passed": false,
+      "overallExitCode": 1,
+      "builds": 1,
+      "packages": 1,
+      "batchSha256": "556ebd8fc33957bfc32e936e17a998a7e2dc139c5d6158ae180e54fe3111a4aa",
+      "inputsSha256": "a639cc42944ca79db7ccd73826ef9bcefcc809e03ea3c1c4a1e50b8651371f89",
+      "backendSha256": "74953d3dd4685a987c2a327562f63149f2625853738a30ad8b84947f0ccfed2c",
+      "vsixSha256": "223b6211f1f059ca6aee51d37328a315ef161f4a5e8f8ac2c430efc4767a0055",
+      "runtimeFiles": 1303,
+      "runtimeManifestSha256": "c079d1e1ffa61305d870596447b33b836aa71f2e6f61e40032cc5c9e76fb1690",
+      "timings": {
+        "checkMs": 258.633102,
+        "compileMs": 985.2539999999999,
+        "packageMs": 1706.0602840000001,
+        "freezeInputsMs": 813.9254030000002,
+        "totalMs": 115380.350738
+      },
+      "runs": [
+        {
+          "suite": "composition",
+          "locale": "en",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 8.093051859,
+          "caseIds": [
+            "composition/initial-addon",
+            "composition/dirty-customization",
+            "composition/external-patch-with-dirty-second",
+            "composition/external-addon-with-dirty-second",
+            "composition/invalid-purpose",
+            "composition/external-configuration-restored",
+            "composition/detached-dirty-addon",
+            "composition/detached-dirty-default-purpose",
+            "composition/reattached-default-purpose"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "classification": "passed",
+          "receiptSha256": "d4ce2beadbd0f3ed3ac95d2aa778d3176b89f7f02e6f5ccd619b1d8f1b9ab51e",
+          "driverLogSha256": "de6724072fa42782a5489b1030156646314b037950de2a1f83c8b9adf8688958",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": [
+            {
+              "label": "initial-addon",
+              "expectedCase": "second-addon",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "dirty-customization",
+              "expectedCase": "both-reversed",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "external-patch-with-dirty-second",
+              "expectedCase": "first-patch",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "external-addon-with-dirty-second",
+              "expectedCase": "first-addon",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "invalid-purpose",
+              "lastGoodModelRetained": true
+            },
+            {
+              "label": "external-configuration-restored",
+              "expectedCase": "both-reversed",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "detached-dirty-addon",
+              "expectedCase": "second-addon",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "detached-dirty-default-purpose",
+              "expectedCase": "purpose-default",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "reattached-default-purpose",
+              "dirtyPreserved": true
+            }
+          ]
+        },
+        {
+          "suite": "composition",
+          "locale": "ru",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 8.376721664,
+          "caseIds": [
+            "composition/initial-addon",
+            "composition/dirty-customization",
+            "composition/external-patch-with-dirty-second",
+            "composition/external-addon-with-dirty-second",
+            "composition/invalid-purpose",
+            "composition/external-configuration-restored",
+            "composition/detached-dirty-addon",
+            "composition/detached-dirty-default-purpose",
+            "composition/reattached-default-purpose"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "classification": "passed",
+          "receiptSha256": "642c1ba1a978f258ede3906479f54600bf34690a9d4ca216a72d07bc4968206b",
+          "driverLogSha256": "5e6aa038dbcc6930a76ba42dc36b9af253b7d07f83b11a7b3d6166260ae24380",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": [
+            {
+              "label": "initial-addon",
+              "expectedCase": "second-addon",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "dirty-customization",
+              "expectedCase": "both-reversed",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "external-patch-with-dirty-second",
+              "expectedCase": "first-patch",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "external-addon-with-dirty-second",
+              "expectedCase": "first-addon",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "invalid-purpose",
+              "lastGoodModelRetained": true
+            },
+            {
+              "label": "external-configuration-restored",
+              "expectedCase": "both-reversed",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "detached-dirty-addon",
+              "expectedCase": "second-addon",
+              "captions": [
+                "Second caption",
+                "Base A",
+                "S_inserted",
+                "F_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "detached-dirty-default-purpose",
+              "expectedCase": "purpose-default",
+              "captions": [
+                "First caption",
+                "Base A",
+                "F_inserted",
+                "S_inserted",
+                "Second B",
+                "Base C"
+              ],
+              "independentLocalIds": true
+            },
+            {
+              "label": "reattached-default-purpose",
+              "dirtyPreserved": true
+            }
+          ]
+        },
+        {
+          "suite": "dependencies",
+          "locale": "en",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 5.659610719999997,
+          "caseIds": [
+            "dependencies/suite"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "classification": "passed",
+          "receiptSha256": "436198cd35ab04ee03ff73b14ade6644c550747044bae0c2950f39a23de4b041",
+          "driverLogSha256": "01083422109bf9291e3a77028177e787ce4e25d521587fb9ada79a1e60d9badb",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": null
+        },
+        {
+          "suite": "dependencies",
+          "locale": "ru",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 8.474716439999996,
+          "caseIds": [
+            "dependencies/suite"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "classification": "passed",
+          "receiptSha256": "315a86c1fe2f34f30d5763876cad05ffbf510d8042c5d0aa74b05109b0653158",
+          "driverLogSha256": "a9511d32148198a6626064c2902c51c606d4749c4f5547ed1a99f1262b0ed616",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": null
+        },
+        {
+          "suite": "activity",
+          "locale": "en",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 4.067339308000002,
+          "caseIds": [
+            "activity/suite"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "classification": "passed",
+          "receiptSha256": "ccbdbefecc35635d07bc200c8f83fef72d353709873ca1153c2635d7d55c8afc",
+          "driverLogSha256": "cdbda0864af3bf0ff4d8adb6531b917ec742d71685f4bcaf3565e42a2ee54eb5",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": null
+        },
+        {
+          "suite": "activity",
+          "locale": "ru",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 6.819744268999996,
+          "caseIds": [
+            "activity/suite"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "classification": "passed",
+          "receiptSha256": "1c4811235a56fce591275e1597bbc99a8ef08b9495b7163d28bf9a13aef94658",
+          "driverLogSha256": "4bb0d4589f6e6279b285f227897641af94830a0c869becf0457079edcd758e62",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": null
+        },
+        {
+          "suite": "style",
+          "locale": "en",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 4.382653929,
+          "caseIds": [
+            "style/suite"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "classification": "passed",
+          "receiptSha256": "af796eb916c05bdafb29a62cc719f04abef11e79a04efa8308288c31a0fab851",
+          "driverLogSha256": "950dd61e3a26e08ee2b546654a352c6e7293588e7ef44da5b782dbe052b0e4ca",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": null
+        },
+        {
+          "suite": "style",
+          "locale": "ru",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 7.431538464000004,
+          "caseIds": [
+            "style/suite"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "classification": "passed",
+          "receiptSha256": "5558ce59a826995698d46d6cc3b9e6d0a7484c032badce1925b325018aa16453",
+          "driverLogSha256": "615892befca6f23ba89753bda4d3404eeac32dd82dd08b12c7c7d0e2612b0e37",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": null
+        },
+        {
+          "suite": "button-borders",
+          "locale": "en",
+          "passed": false,
+          "exitCode": 1,
+          "seconds": 12.786543875999996,
+          "caseIds": [],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "classification": "unclassified",
+          "receiptSha256": "81afdb36604ae64dc29003359e5548ea94b5780683e8847dc69b1ce865dc88bb",
+          "driverLogSha256": "c711d345bf8f69df30822e082ba3efe5970b34388e6a56c411f32446e374819b",
+          "triage": "harness.native_window_lookup",
+          "failedStage": "detached native-window ownership lookup before floating sample",
+          "failedPixelAssertions": false,
+          "failureMessage": "native window containing the webview frame",
+          "policy": "One readiness recheck on identical frozen inputs; no pixel retry or weakened comparison."
+        },
+        {
+          "suite": "button-borders",
+          "locale": "ru",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 25.93459645299999,
+          "caseIds": [
+            "button-borders/FontAuto",
+            "button-borders/dirty-FontAuto",
+            "button-borders/floating-FontAuto",
+            "button-borders/floating-dirty-FontAuto",
+            "button-borders/reattached-FontAuto",
+            "button-borders/FontRegular",
+            "button-borders/FontBold",
+            "button-borders/FontPartial14",
+            "button-borders/FontStyleNormal",
+            "button-borders/FontForm14",
+            "button-borders/FontBar14",
+            "button-borders/FontFormBold",
+            "button-borders/FontExplicitAuto",
+            "button-borders/CheckAutoBack",
+            "button-borders/CheckAutoText",
+            "button-borders/CheckNormalFalse",
+            "button-borders/CheckNormal14",
+            "button-borders/CheckSmall",
+            "button-borders/CheckLarge",
+            "button-borders/CheckExtra",
+            "button-borders/CheckText",
+            "button-borders/CheckSysAuto",
+            "button-borders/CheckSys14",
+            "button-borders/CheckBoldOnly",
+            "button-borders/CheckAutoDisabled",
+            "button-borders/Color000000",
+            "button-borders/Color000040",
+            "button-borders/Color000080",
+            "button-borders/dirty-Color000080",
+            "button-borders/default-Color000080",
+            "button-borders/floating-Color000080",
+            "button-borders/floating-dirty-Color000080",
+            "button-borders/reattached-Color000080",
+            "button-borders/Color0000FF",
+            "button-borders/Color008000",
+            "button-borders/Color00FF00",
+            "button-borders/Color00FFFF",
+            "button-borders/Color0A73B7",
+            "button-borders/Color202020",
+            "button-borders/Color20DD20",
+            "button-borders/Color336699",
+            "button-borders/Color345678",
+            "button-borders/Color404040",
+            "button-borders/Color5511FF",
+            "button-borders/Color555555",
+            "button-borders/Color606060",
+            "button-borders/Color747474",
+            "button-borders/Color757575",
+            "button-borders/Color777777",
+            "button-borders/Color800000",
+            "button-borders/Color804020",
+            "button-borders/Color808080",
+            "button-borders/Color9800FF",
+            "button-borders/Color99FFFF",
+            "button-borders/ColorC08080",
+            "button-borders/ColorFF0000",
+            "button-borders/ColorFF00FF",
+            "button-borders/ColorFFE100",
+            "button-borders/ColorFFFF00",
+            "button-borders/ColorFFFFFF"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "classification": "passed",
+          "receiptSha256": "1206137420b604411b1cce9758342583e0e2548b0b8dfa99261c33124e398f31",
+          "driverLogSha256": "4f19494aa9a7a31b2bcc389a749531e1ed6c39b698bba028363fce444dc12a83",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": null,
+          "pixelsCompared": 365164,
+          "differentRgbPixels": 0,
+          "wholeWidgetPixelParity": true
+        },
+        {
+          "suite": "restore",
+          "locale": "en",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 9.208459491999994,
+          "caseIds": [
+            "restore/suite",
+            "restore/suite"
+          ],
+          "hostStarts": 2,
+          "languageRegistrations": 0,
+          "classification": "passed",
+          "receiptSha256": "5e0acd352ba8e15f2385f9d46d68ff972b8f4bcd98437c25df1e0929aa29af9a",
+          "driverLogSha256": "09d84b82dca9e46c9e01db9b17cb0fac7bac6fb228b5cc51e40ec014ed8c4bb8",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": null
+        },
+        {
+          "suite": "restore",
+          "locale": "ru",
+          "passed": true,
+          "exitCode": 0,
+          "seconds": 10.143023918999999,
+          "caseIds": [
+            "restore/suite",
+            "restore/suite"
+          ],
+          "hostStarts": 4,
+          "languageRegistrations": 2,
+          "classification": "passed",
+          "receiptSha256": "32a950f646e4ef7ffa6c55adf7b18b04a740370ca357c05e7e1468dbbdb97ec5",
+          "driverLogSha256": "fa1bab57f3409842da30090f4fb5dfad7dbd356902e032243311b5fba367e9fa",
+          "sourceWritesDuringViewing": false,
+          "publishedResults": null
+        }
+      ]
+    }
+  ],
+  "readinessRecheck": {
+    "schemaVersion": 1,
+    "suite": "button-borders",
+    "locale": "en",
+    "exitCode": 0,
+    "seconds": 23.15535966599964,
+    "root": "t154-readiness-recheck-9f6vnlty",
+    "retryReason": "native-window readiness lookup, before pixel comparison; one retry on identical frozen VSIX, backend and fixture bytes",
+    "sourceBatch": "form-batch-WXXYKM",
+    "receiptSha256": "04fac63fe057658cdd3121a3303cad05a876ea5e128549707c1777c4126fe0e7",
+    "driverLogSha256": "fe3d099c6049187edff703f4ee88585d74840b1a9e2179102fe5d2f5f00a2685",
+    "vsixSha256": "223b6211f1f059ca6aee51d37328a315ef161f4a5e8f8ac2c430efc4767a0055",
+    "runtimeManifestSha256": "c079d1e1ffa61305d870596447b33b836aa71f2e6f61e40032cc5c9e76fb1690",
+    "samples": 60,
+    "pixelsCompared": 365164,
+    "differentRgbPixels": 0,
+    "sourceWritesDuringViewing": false
+  },
+  "acceptance": {
+    "selectedSuiteLocalePairs": 12,
+    "passedPairsAfterSingleReadinessRecheck": 12,
+    "originalBatchRetainedAsFailed": true,
+    "compositionGuiPasses": 4,
+    "compositionPublishedCasesPerLocale": 9,
+    "wholeProfilePixelsAccepted": false,
+    "windowsAccepted": false
+  },
+  "limitations": [
+    "Native managed client is the oracle for static composition only; Configurator preview remains the pixel reference.",
+    "The actual installed extension set, registration order and arbitrary applicability cannot be inferred from XML alone.",
+    "Only common form, text decorations and a usual group are in the observed native matrix.",
+    "Native style-resource conflicts across purposes and the remaining form families still need independent examples.",
+    "One native-window readiness failure remains reproducible evidence of harness instability; it was not converted into a successful original batch.",
+    "Windows, physical-monitor/DPI combinations, complete state/geometry matrices, performance and final profile acceptance remain open."
+  ]
+}

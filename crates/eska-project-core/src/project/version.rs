@@ -326,32 +326,11 @@ fn parse_descriptor<'a>(
         source,
     })?;
     let root = document.root_element();
-    if !root.has_tag_name((NAMESPACE, "MetaDataObject")) {
-        return Ok(None);
-    }
-    let mut objects = root.children().filter(roxmltree::Node::is_element);
-    let Some(object) = objects.next() else {
+    let Some(project_type) = super::designer_xml::project_type_from_root(root) else {
         return Ok(None);
     };
-    if objects.next().is_some() || object.tag_name().namespace() != Some(NAMESPACE) {
+    let Some(object) = root.children().find(roxmltree::Node::is_element) else {
         return Ok(None);
-    }
-    let project_type = match object.tag_name().name() {
-        "Configuration" => {
-            let is_extension = object
-                .children()
-                .filter(|node| node.has_tag_name((NAMESPACE, "Properties")))
-                .flat_map(|node| node.children())
-                .any(|node| node.has_tag_name((NAMESPACE, "ConfigurationExtensionPurpose")));
-            if is_extension {
-                ProjectType::Extension
-            } else {
-                ProjectType::Configuration
-            }
-        }
-        "ExternalDataProcessor" => ProjectType::Processing,
-        "ExternalReport" => ProjectType::Report,
-        _ => return Ok(None),
     };
     let properties: Vec<_> = object
         .children()
@@ -464,6 +443,18 @@ fn replace_published(temporary: &Path, path: &Path) -> io::Result<()> {
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn adopted_extension_without_purpose_keeps_root_version_identity_and_range() {
+        let input = include_str!("../../../../tests/fixtures/forms/native-extension-composition/SecondOmittedPurposeConfiguration.xml")
+            .replace("<Version/>", "<Version>1.2.3.4</Version>");
+        let parsed = super::parse_descriptor(&input, std::path::Path::new("Configuration.xml"))
+            .unwrap()
+            .unwrap();
+        assert_eq!(parsed.project_type, super::ProjectType::Extension);
+        assert_eq!(parsed.value, "1.2.3.4");
+        assert_eq!(&input[parsed.value_range], "1.2.3.4");
+    }
+
     use super::*;
 
     #[test]

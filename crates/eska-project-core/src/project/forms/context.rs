@@ -166,7 +166,7 @@ pub fn load(
     if !selected_found {
         return Err(FormContextError::MissingForm);
     }
-    let resources = super::resources::load(
+    let mut resources = super::resources::load(
         context,
         owner,
         selected_source,
@@ -175,6 +175,7 @@ pub fn load(
         overlays,
     )?;
     validate_overlays(overlays, &dependencies, previous, &metadata)?;
+    super::layer_order::apply(context, &dependencies, &mut documents, &mut resources)?;
     build_preview(context, dependencies, documents, resources)
 }
 
