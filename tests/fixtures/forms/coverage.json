@@ -996,7 +996,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "surfaces.graphical-empty"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3690,7 +3691,7 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
-      "remaining": "Document toolbars/content, text-document fonts, other geographical properties and all remaining document/calendar/scheduler/chart/state combinations. Normal empty text-document and geographical widgets are accepted separately; only agreed random chart values may be excluded.",
+      "remaining": "Document toolbars/content, text-document fonts, further geographical/graphical properties and remaining document/calendar/scheduler/chart state combinations. Recorded normal empty text/geographical/graphical widgets are accepted separately; only agreed random chart values may be excluded.",
       "nextAction": "Extend deterministic document/surface widgets and native editor font/size rules without treating the accepted plain text-document cases as full T160 acceptance."
     },
     {
@@ -5746,6 +5747,97 @@
       "lastConfirmation": "docs/measurements/t160-native-geographical-linux.json",
       "remaining": "Other fonts/dimension bounds/fractions/stretch and state/color/property combinations, domain applicability/computed-property semantics, nonempty static content, captions/full forms, DPI and Windows.",
       "nextAction": "Preserve exact empty geographical frames while measuring further deterministic surfaces and remaining property/state combinations."
+    },
+    {
+      "id": "surfaces.graphical-empty",
+      "milestone": "T160",
+      "kinds": [
+        "GraphicalSchemaField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.colors",
+        "appearance.fonts",
+        "surface.content",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "All pixels of ten recorded empty normal-10pt graphical inputs: dimensions, 20px grid, ReadOnly/Enabled and border, title hidden, native-ignored field BackColor/ShowGrid. Seventeen complete-widget samples per locale include dirty XML/floating/return.",
+      "fixtures": [
+        "tests/fixtures/forms/native-graphical"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "graphical",
+        "path": "test/form-graphical-host.cjs",
+        "caseIds": [
+          "A_Default",
+          "dirty-background",
+          "dirty-border",
+          "restored-default",
+          "floating-default",
+          "floating-dirty-size",
+          "floating-restored",
+          "reattached-default",
+          "B_Size",
+          "C_ReadOnly",
+          "D_Disabled",
+          "E_Border",
+          "F_Background",
+          "G_NoTitle",
+          "H_Large",
+          "I_NoGrid",
+          "J_Grid"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-graphical-linux.json",
+          "sha256": "fbd6a9dcafd67a1832943195c395dbe5875117b98635edd84cd4311725604fd9",
+          "assertions": [
+            {
+              "pointer": "/completeEmptyGraphicalPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/completeWidgetPixelsCompared",
+              "equals": 1824500
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/completeWidgetPixelsCompared",
+              "equals": 1824500
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/wholeFormVisualParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-graphical-linux.json",
+      "remaining": "Other fonts/dimension bounds/fractions/stretch and state/color/property combinations, typed-property applicability/computed inspector semantics, nonempty static content, captions/full forms, DPI and Windows.",
+      "nextAction": "Preserve exact empty graphical grids while extending deterministic surfaces and remaining property/state matrices."
     }
   ],
   "historicalReports": [
@@ -5817,7 +5909,8 @@
     "docs/measurements/t156-native-standard-pictures-linux.json",
     "docs/measurements/t159-native-table-movement-linux.json",
     "docs/measurements/t160-native-text-document-linux.json",
-    "docs/measurements/t160-native-geographical-linux.json"
+    "docs/measurements/t160-native-geographical-linux.json",
+    "docs/measurements/t160-native-graphical-linux.json"
   ],
   "supersessions": [
     {
