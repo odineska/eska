@@ -184,3 +184,8 @@ python3 -B -m unittest discover -s tests -p test_form_coverage.py
 обычных пустых TextDocumentField приняты целиком по 1 581 500 пикселям на локаль,
 включая цвета/размеры/недоступность/dirty XML и отдельное окно. Четыре шрифтовых
 случая сохранены как незавершённые. [Отчёт](../../../docs/measurements/t160-native-text-document-linux.json).
+
+`native-geographical/` принимает пустые географические схемы десяти источников:
+размеры, доступность, четыре цвета рамки и игнорируемый native BackColor.
+[Отчёт](../../../docs/measurements/t160-native-geographical-linux.json) сравнивает
+по 1 824 500 пикселей всех 17 состояний ru/en, включая отдельное окно.
