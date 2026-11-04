@@ -1399,7 +1399,8 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "resources.native-picture-layers"
+        "resources.native-picture-layers",
+        "pictures.standard-six"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1660,7 +1661,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "tables.dynamic-toolbar"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1706,7 +1708,8 @@
         "acceptance.full-profile",
         "profile.windows",
         "tables.search-placeholder-initial",
-        "tables.search-field-initial"
+        "tables.search-field-initial",
+        "tables.dynamic-toolbar"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1802,7 +1805,8 @@
         "tables.menu-glyphs",
         "tables.toolbar-complete",
         "tables.search-placeholder-initial",
-        "tables.search-field-initial"
+        "tables.search-field-initial",
+        "tables.dynamic-toolbar"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3803,7 +3807,7 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t155-form-pictures.json",
-      "remaining": "Exact standard icons, all formats/consumers, alpha/transparency, scale/alignment and full resource pixel matrix. Common-picture layer/empty semantics are accepted separately in resources.native-picture-layers.",
+      "remaining": "Exact standard icons, all formats/consumers, alpha/transparency, scale/alignment and full resource pixel matrix. Common-picture layer/empty semantics are accepted separately in resources.native-picture-layers. Six explicit 16x16 pictures are accepted separately in pictures.standard-six; full image consumers remain open.",
       "nextAction": "Measure a complete native image sizing/transparency matrix and its full widgets; preserve accepted layer semantics."
     },
     {
@@ -5119,7 +5123,7 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t159-native-table-menus-linux.json",
-      "remaining": "Complete initial 13px search fields are accepted separately. Native 11px/yellow states, standard icons, joined-button fill/borders and lower native border repaint still differ.",
+      "remaining": "Default, ReadOnly and MetadataTable remain mismatched (632 en / 619 ru pixels in current recorded poses); DynamicList initial toolbar is accepted separately in tables.dynamic-toolbar. Alternate search states, other property matrices, full forms and Windows remain open.",
       "nextAction": "Establish native alternate search states and complete icons/joined buttons/border poses without weakening accepted initial search controls."
     },
     {
@@ -5306,6 +5310,134 @@
       "lastConfirmation": "docs/measurements/t159-native-table-search-fields-linux.json",
       "remaining": "Alternate native 11px/yellow states and selection rule, other widths/fonts/palettes/disabled/focus states, full toolbars/forms, DPI and Windows.",
       "nextAction": "Preserve complete initial search controls while establishing alternate state rules and completing native icons/joined buttons/border poses."
+    },
+    {
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "fixtures": [
+        "tests/fixtures/forms/native-standard-pictures"
+      ],
+      "evidence": [
+        {
+          "report": "docs/measurements/t156-native-standard-pictures-linux.json",
+          "sha256": "75cc8408daba8638d718daf8972ae04d9080d5e58b141942c7692eff05e1aac7",
+          "assertions": [
+            {
+              "pointer": "/sixStandardPicturesPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/completeDynamicToolbarPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t156-native-standard-pictures-linux.json",
+      "id": "pictures.standard-six",
+      "milestone": "T156",
+      "kinds": [
+        "PictureDecoration"
+      ],
+      "axes": [
+        "appearance.pictures",
+        "appearance.colors",
+        "resources.origin",
+        "source.identity",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions"
+      ],
+      "scope": "Six explicit enabled standard pictures at natural 16x16 size on recorded white/black/red group mattes, XML LoadTransparent=true; nine UI poses per locale, dirty XML and actual detached windows. Native source images en; picture pixels are locale-independent.",
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "standard-pictures",
+        "path": "test/form-standard-pictures-host.cjs",
+        "caseIds": [
+          "White",
+          "dirty-Black",
+          "restored-White",
+          "floating-White",
+          "floating-dirty-Red",
+          "floating-restored-White",
+          "reattached-White",
+          "Black",
+          "Red"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "remaining": "Other standard pictures, other properties/states/palettes/scales/consumers, whole PictureDecoration geometry, all automatic movement pictures, DPI and Windows.",
+      "nextAction": "Preserve six exact picture rasters while measuring further standard aliases and full native image consumers."
+    },
+    {
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "fixtures": [
+        "tests/fixtures/forms/native-standard-pictures"
+      ],
+      "evidence": [
+        {
+          "report": "docs/measurements/t156-native-standard-pictures-linux.json",
+          "sha256": "75cc8408daba8638d718daf8972ae04d9080d5e58b141942c7692eff05e1aac7",
+          "assertions": [
+            {
+              "pointer": "/sixStandardPicturesPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/completeDynamicToolbarPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t156-native-standard-pictures-linux.json",
+      "id": "tables.dynamic-toolbar",
+      "milestone": "T159",
+      "kinds": [
+        "Table",
+        "SearchStringAddition",
+        "SearchControlAddition"
+      ],
+      "axes": [
+        "appearance.pictures",
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions"
+      ],
+      "scope": "Entire recorded DynamicList toolbar including all buttons/icons/fill/borders/corners/shadows/search/menu, initial 13px/gray search variant with white 26px buttons. Five strict full-toolbar samples per locale including dirty XML/floating/return.",
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "table-pixels",
+        "path": "test/form-table-pixels-host.cjs",
+        "caseIds": [
+          "DynamicList",
+          "dynamic-restored-default",
+          "dynamic-floating-default",
+          "dynamic-floating-restored",
+          "dynamic-reattached-default"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "remaining": "Automatic movement/joined buttons and full other table toolbars; alternate native 11px search variants, other palettes/fonts/states/sources, full forms, DPI and Windows.",
+      "nextAction": "Calibrate automatic table movement icons and joined buttons while preserving the complete accepted DynamicList toolbar."
     }
   ],
   "historicalReports": [
@@ -5373,7 +5505,8 @@
     "docs/measurements/t159-native-context-grids-linux.json",
     "docs/measurements/t159-native-table-menus-linux.json",
     "docs/measurements/t159-native-table-search-linux.json",
-    "docs/measurements/t159-native-table-search-fields-linux.json"
+    "docs/measurements/t159-native-table-search-fields-linux.json",
+    "docs/measurements/t156-native-standard-pictures-linux.json"
   ],
   "supersessions": [
     {
