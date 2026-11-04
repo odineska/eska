@@ -88,11 +88,22 @@ impl<'a> Appearance<'a> {
 
     pub fn font(&mut self, property: Option<&SourcedProperty>, role: &str) -> ResolvedFont {
         let mut visited = Vec::new();
-        let mut result = Self::automatic_font(role);
-        if let Some(property) = property {
-            result = self.resolve_font(property, result, &mut visited);
-        }
-        result
+        // An explicit platform font starts at 8pt. Taxi's absent Font is
+        // a separate 10pt role, with contextual bold for default buttons.
+        property.map_or_else(
+            || Self::automatic_font(role),
+            |property| {
+                self.resolve_font(
+                    property,
+                    ResolvedFont {
+                        points: 8.0,
+                        ..ResolvedFont::default()
+                    },
+                    role == "PrimaryButtonFont",
+                    &mut visited,
+                )
+            },
+        )
     }
     pub fn color(&mut self, property: Option<&SourcedProperty>, role: &str) -> ResolvedColor {
         let mut visited = Vec::new();
@@ -126,6 +137,11 @@ impl<'a> Appearance<'a> {
         };
         ResolvedFont {
             points,
+            weight: if role == "PrimaryButtonFont" {
+                700
+            } else {
+                400
+            },
             ..ResolvedFont::default()
         }
     }
@@ -228,6 +244,7 @@ impl<'a> Appearance<'a> {
         &mut self,
         property: &SourcedProperty,
         inherited: ResolvedFont,
+        primary: bool,
         visited: &mut Vec<PropertyKey>,
     ) -> ResolvedFont {
         let mut result = inherited;
@@ -240,16 +257,24 @@ impl<'a> Appearance<'a> {
             match target.namespace.as_deref() {
                 Some(namespace @ (references::CONFIG | references::STYLE)) => {
                     if namespace == references::STYLE
-                        && let Some(font) = predefined_font(&target.name)
+                        && let Some(mut font) = predefined_font(&target.name)
                     {
+                        if primary && target.name == "NormalTextFont" {
+                            font.weight = 700;
+                        }
                         result = font;
                     } else if let Some(value) = self.item(&target) {
-                        result = self.resolve_font(&value, result, visited);
+                        result = self.resolve_font(&value, result, primary, visited);
                     } else {
                         self.problem("style_missing", property, Some(target));
                     }
                 }
-                Some(references::SYSTEM_FONT) => result = ResolvedFont::default(),
+                Some(references::SYSTEM_FONT) => {
+                    result = ResolvedFont {
+                        points: 8.0,
+                        ..ResolvedFont::default()
+                    };
+                }
                 _ => self.problem("font_reference_unsupported", property, Some(target)),
             }
             visited.pop();

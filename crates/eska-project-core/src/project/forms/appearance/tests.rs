@@ -268,6 +268,60 @@ fn palette_resources(body: &str) -> Vec<FormResource> {
 }
 
 #[test]
+fn form_primary_color_uses_the_selected_style_and_retains_the_default_role() {
+    assert_eq!(
+        view("", &[]).important_color,
+        ResolvedColor::Role("ImportantColor".into())
+    );
+    assert_eq!(
+        view("", &palette_resources(NATIVE_PALETTE)).important_color,
+        ResolvedColor::Rgb("#ff0000".into())
+    );
+}
+
+#[test]
+fn native_primary_button_fonts_resolve_before_renderer_layout() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-primary-buttons");
+    let metrics: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(root.join("metrics.json")).unwrap()).unwrap();
+    let mut checked = 0;
+    for row in metrics["rows"].as_array().unwrap() {
+        if row["styleFile"].is_string() {
+            continue;
+        }
+        let text = std::fs::read_to_string(root.join(row["file"].as_str().unwrap())).unwrap();
+        let document = parse("native", text).unwrap();
+        let presentation = present(&compose(&document, &[]), &[document], &[]);
+        assert!(presentation.diagnostics.is_empty(), "{}", row["name"]);
+        for (id, button) in [10, 20, 30]
+            .into_iter()
+            .zip(row["buttons"].as_array().unwrap())
+        {
+            let element = presentation
+                .elements
+                .iter()
+                .find(|value| value.identity.key == super::super::ElementKey::Xml(id))
+                .unwrap();
+            assert_eq!(
+                element.font.points,
+                button["points"].as_f64().unwrap(),
+                "{}: {id}",
+                row["name"]
+            );
+            assert_eq!(
+                element.font.weight,
+                if button["weight"] == "bold" { 700 } else { 400 },
+                "{}: {id}",
+                row["name"]
+            );
+        }
+        checked += 1;
+    }
+    assert_eq!(checked, 21);
+}
+
+#[test]
 fn native_taxi_five_colors_resolve_selected_values_and_keep_predefined_fallbacks() {
     let resources = palette_resources(NATIVE_PALETTE);
     for (role, rgb) in [

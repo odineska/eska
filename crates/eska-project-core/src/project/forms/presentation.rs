@@ -100,6 +100,7 @@ pub struct ElementPresentation {
 #[serde(rename_all = "camelCase")]
 pub struct FormPresentation {
     pub elements: Vec<ElementPresentation>,
+    pub important_color: ResolvedColor,
     pub diagnostics: Vec<AppearanceDiagnostic>,
 }
 
@@ -121,6 +122,7 @@ pub fn present(
     );
     FormPresentation {
         elements,
+        important_color: appearance.color(None, "ImportantColor"),
         diagnostics: appearance.diagnostics,
     }
 }
@@ -173,7 +175,7 @@ fn visit(
         });
     let group = element.kind == Some(ElementKind::UsualGroup);
     let tab = element.kind == Some(ElementKind::Pages) || scope.pages_parent(element).is_some();
-    let font = appearance.font(property(element, "Font"), "NormalTextFont");
+    let font = appearance.font(property(element, "Font"), font_role(element));
     let title_font = appearance.font(
         scope.title_property(element, "TitleFont"),
         title_font_role(element),
@@ -257,6 +259,18 @@ fn visit(
             appearance,
             output,
         );
+    }
+}
+
+fn font_role(element: &EffectiveElement) -> &'static str {
+    if element.kind == Some(ElementKind::Button)
+        && property(element, "DefaultButton")
+            .and_then(|value| appearance::text(&value.property.value))
+            .is_some_and(|value| matches!(value, "true" | "1"))
+    {
+        "PrimaryButtonFont"
+    } else {
+        "NormalTextFont"
     }
 }
 
