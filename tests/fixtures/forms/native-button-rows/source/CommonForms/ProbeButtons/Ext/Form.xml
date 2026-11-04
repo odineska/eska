@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Button types</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Button types</v8:content>
+		</v8:item>
+	</Title>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<UsualGroup name="DefaultUsualGroup" id="10">
+			<Group>Horizontal</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="DefaultUsualGroupРасширеннаяПодсказка" id="162"/>
+			<ChildItems>
+				<Button name="DefaultUsualButton" id="11">
+					<Type>UsualButton</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.DefaultUsualButton</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="DefaultUsualButtonРасширеннаяПодсказка" id="163"/>
+				</Button>
+				<Button name="DefaultHyperlink" id="21">
+					<Type>Hyperlink</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.DefaultHyperlink</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="DefaultHyperlinkРасширеннаяПодсказка" id="164"/>
+				</Button>
+			</ChildItems>
+		</UsualGroup>
+		<CommandBar name="DefaultCommandBar" id="50">
+			<ExtendedTooltip name="DefaultCommandBarРасширеннаяПодсказка" id="165"/>
+			<ChildItems>
+				<Button name="DefaultCommandBarButton" id="51">
+					<Type>CommandBarButton</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.DefaultCommandBarButton</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="DefaultCommandBarButtonРасширеннаяПодсказка" id="166"/>
+				</Button>
+				<Button name="DefaultCommandBarHyperlink" id="61">
+					<Type>CommandBarHyperlink</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.DefaultCommandBarHyperlink</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="DefaultCommandBarHyperlinkРасширеннаяПодсказка" id="167"/>
+				</Button>
+			</ChildItems>
+		</CommandBar>
+		<UsualGroup name="ExplicitUsualGroup" id="110">
+			<Group>Horizontal</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="ExplicitUsualGroupРасширеннаяПодсказка" id="168"/>
+			<ChildItems>
+				<Button name="ExplicitUsualButton" id="111">
+					<Type>UsualButton</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.ExplicitUsualButton</CommandName>
+					<TextColor>#CC2244</TextColor>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="ExplicitUsualButtonРасширеннаяПодсказка" id="169"/>
+				</Button>
+				<Button name="ExplicitHyperlink" id="121">
+					<Type>Hyperlink</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.ExplicitHyperlink</CommandName>
+					<TextColor>#CC2244</TextColor>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="ExplicitHyperlinkРасширеннаяПодсказка" id="170"/>
+				</Button>
+			</ChildItems>
+		</UsualGroup>
+		<CommandBar name="ExplicitCommandBar" id="150">
+			<ExtendedTooltip name="ExplicitCommandBarРасширеннаяПодсказка" id="171"/>
+			<ChildItems>
+				<Button name="ExplicitCommandBarButton" id="151">
+					<Type>CommandBarButton</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.ExplicitCommandBarButton</CommandName>
+					<TextColor>#CC2244</TextColor>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="ExplicitCommandBarButtonРасширеннаяПодсказка" id="172"/>
+				</Button>
+				<Button name="ExplicitCommandBarHyperlink" id="161">
+					<Type>CommandBarHyperlink</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.ExplicitCommandBarHyperlink</CommandName>
+					<TextColor>#CC2244</TextColor>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="ExplicitCommandBarHyperlinkРасширеннаяПодсказка" id="173"/>
+				</Button>
+			</ChildItems>
+		</CommandBar>
+	</ChildItems>
+	<Attributes/>
+	<Commands>
+		<Command name="DefaultUsualButton" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Usual</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Usual</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="DefaultHyperlink" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Link</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Link</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="DefaultCommandBarButton" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Bar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Bar</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="DefaultCommandBarHyperlink" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Bar link</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Bar link</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="ExplicitUsualButton" id="5">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Usual</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Usual</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="ExplicitHyperlink" id="6">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Link</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Link</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="ExplicitCommandBarButton" id="7">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Bar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Bar</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="ExplicitCommandBarHyperlink" id="8">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Bar link</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Bar link</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+	</Commands>
+</Form>
