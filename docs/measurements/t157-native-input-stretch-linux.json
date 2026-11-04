@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendRuntimeUnchangedSince": "498fad3",
+  "fixtureCommit": "402a3e47c47e1865802cc1a3dd5b6a8b7efbdba5",
+  "clientCommit": "f34443f97131b9521d65ff5be336a5dde9e6a9f1",
+  "acceptedInitialStretchMatrix": true,
+  "visualParityVerified": false,
+  "scope": {
+    "forms": 16,
+    "fields": 64,
+    "points": [
+      10,
+      16
+    ],
+    "horizontalStretch": [
+      "automatic",
+      "true"
+    ],
+    "constraints": [
+      "AutoMin20",
+      "AutoMax5",
+      "Width20Min30Max10",
+      "Width20Max10"
+    ],
+    "pixels": "whole string/numeric widgets; date corners only; full calculator interiors",
+    "exclusions": [],
+    "tolerance": 0,
+    "wholeFormAcceptance": false
+  },
+  "behavior": [
+    "Preferred widths remain intrinsic inputs to the form column sizing before fields stretch",
+    "Enabled stretching fills the allocated column. A choice button paints one pixel beyond its logical allocation",
+    "Automatic strings fill the column even with explicit Width; automatic numbers and dates retain their preferred size",
+    "Measured MinWidth/MaxWidth combinations, including conflicts, do not alter the initial preferred layout",
+    "Dirty Width/Font/HorizontalStretch changes preserve Solid owners, including in the detached native window",
+    "The native pixel test reconnects to the current owner webview after docking, since VS Code can recreate its CDP target"
+  ],
+  "checks": {
+    "backendFullReference": "t155-native-font-roles-linux.json",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 494,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeSuitesPassed": 16,
+    "nativeRunsPassed": 22,
+    "runs": [
+      {
+        "suite": "input-stretch",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 9.52
+      },
+      {
+        "suite": "input-stretch",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 12.27
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 18.1
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.85
+      },
+      {
+        "suite": "input-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 18.4
+      },
+      {
+        "suite": "input-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 21.88
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 16.66
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.37
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 10.74
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 13.77
+      },
+      {
+        "suite": "states",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.78
+      },
+      {
+        "suite": "states",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.45
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.08
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 8.93
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 3.19
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 5.9
+      }
+    ],
+    "dockRechecks": [
+      {
+        "suite": "input-stretch",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 9.28
+      },
+      {
+        "suite": "input-stretch",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 12.0
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 17.52
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.6
+      },
+      {
+        "suite": "input-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 18.82
+      },
+      {
+        "suite": "input-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 21.9
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "samples": 20,
+        "frameAndFieldGeometry": "exact",
+        "stringAndNumericWidgets": "exact",
+        "dates": "geometry and four corners only",
+        "differentRgbPixels": 0,
+        "regionsOverlap": true,
+        "cornerPixelsCompared": 2880,
+        "wholeWidgetPixelsCompared": 383116,
+        "calculatorPixelsCompared": 11400,
+        "pixelsCompared": 397396,
+        "dirtyWidthFontStretch": true,
+        "stableOwnersDuringDirtyUpdates": true,
+        "nativeFloatingWindow": true,
+        "floatingDirtyDimensions": true,
+        "dock": true,
+        "sourceWritesDuringViewing": false,
+        "wholeFormRegressionPixels": 3379919
+      },
+      "ru": {
+        "passed": true,
+        "samples": 20,
+        "frameAndFieldGeometry": "exact",
+        "stringAndNumericWidgets": "exact",
+        "dates": "geometry and four corners only",
+        "differentRgbPixels": 0,
+        "regionsOverlap": true,
+        "cornerPixelsCompared": 2880,
+        "wholeWidgetPixelsCompared": 383116,
+        "calculatorPixelsCompared": 11400,
+        "pixelsCompared": 397396,
+        "dirtyWidthFontStretch": true,
+        "stableOwnersDuringDirtyUpdates": true,
+        "nativeFloatingWindow": true,
+        "floatingDirtyDimensions": true,
+        "dock": true,
+        "sourceWritesDuringViewing": false,
+        "wholeFormRegressionPixels": 3379919
+      }
+    },
+    "fixedWidthMatrixReference": "t157-native-input-dimensions-linux.json",
+    "wholeFormMatrixReference": "t157-native-tab-borders-linux.json"
+  },
+  "remaining": [
+    "MinWidth/MaxWidth during manual resizing and other explicit root-size combinations",
+    "The full stretching matrix: bounded strings, other value types/buttons, multiline fields, varied fonts and ancestor layouts",
+    "Eight additional font observations expose height differences and remain unaccepted",
+    "Date value masks and calendar icon are outside this geometry/corner acceptance",
+    "Windows, physical DPI, Remote IDE and the other unclosed T152–T165 matrices"
+  ]
+}

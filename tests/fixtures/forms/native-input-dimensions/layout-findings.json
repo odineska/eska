@@ -2060,5 +2060,10 @@
       "nativeExportSha256": "75132da3c03e0378545126287a932c657780e7d6a0b4e997625343ebaf655c48",
       "screenshotSha256": "7a69aae7172d6526a844f40b465d7b0f339ece9fe1afb9ce535a8a7c1cf9a033"
     }
-  ]
+  ],
+  "subsequentAcceptance": {
+    "fixture": "../native-input-stretch/metrics.json",
+    "scope": "Sixteen non-fractional Stretch/Default states are accepted by the later initial-layout matrix. Remaining observations stay unaccepted.",
+    "report": "../../../../docs/measurements/t157-native-input-stretch-linux.json"
+  }
 }
