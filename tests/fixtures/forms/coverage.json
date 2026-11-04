@@ -1795,7 +1795,8 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "tables.recorded-grids"
+        "tables.recorded-grids",
+        "tables.recorded-context-grids"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3571,8 +3572,8 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
-      "remaining": "Correct complete rendering/semantics and full table pixel comparison remain open.",
-      "nextAction": "Compare effective metadata/dynamic table columns and nested header geometry against native inputs."
+      "remaining": "The two recorded grids/pagination are now accepted separately in tables.recorded-context-grids. Other sources, states/properties and full forms remain open.",
+      "nextAction": "Expand metadata-bound table matrices beyond the two recorded inputs."
     },
     {
       "id": "tables.full-pixels",
@@ -3624,8 +3625,8 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t159-native-tables-linux.json",
-      "remaining": "Recorded default ValueTable grids are accepted separately in tables.recorded-grids. Complete table-field composition, other sources/column types, hierarchy/selection, all widths/fonts/styles/states and Windows remain open.",
-      "nextAction": "Extend the exact native grid comparison to metadata tabular sections and dynamic lists, then their property/style/state combinations."
+      "remaining": "Recorded nine ValueTable grids and two metadata-bound source grids/pagination are accepted separately. Complete table-field composition, other sources/column types, hierarchy/selection, widths/fonts/styles/alignments/states and Windows remain open.",
+      "nextAction": "Expand native property/style/state combinations and table toolbar/additions pixel comparisons."
     },
     {
       "id": "surfaces.full-matrix",
@@ -4878,6 +4879,93 @@
       "lastConfirmation": "docs/measurements/t159-native-table-grids-linux.json",
       "remaining": "Table toolbar/additions and full forms, metadata tabular sections/dynamic lists, hierarchy/selection, other widths/fonts/states/styles, DPI and Windows.",
       "nextAction": "Measure complete grids of metadata tabular sections and dynamic lists, then expand native property/style/state matrices without weakening the accepted ValueTable comparisons."
+    },
+    {
+      "id": "tables.recorded-context-grids",
+      "milestone": "T159",
+      "kinds": [
+        "Table"
+      ],
+      "axes": [
+        "source.identity",
+        "data.bindings",
+        "table.structure",
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete recorded metadata tabular-section and DynamicList grids, including the entire pagination row, native/IDE ru/en. Dirty source replacement and actual detached windows preserve selected table identity and grid DOM. Toolbar/additions and other state/property matrices remain open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-context-tables",
+        "tests/fixtures/forms/native-context-pixels"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "table-pixels",
+        "path": "test/form-table-pixels-host.cjs",
+        "caseIds": [
+          "MetadataTable",
+          "DynamicList",
+          "dynamic-dirty-footer",
+          "dynamic-restored-default",
+          "dynamic-floating-default",
+          "dynamic-floating-dirty-footer",
+          "dynamic-floating-restored",
+          "dynamic-reattached-default"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t159-native-context-grids-linux.json",
+          "sha256": "ca459b99c34939b3f464244189ea491550f13f893c6ae23fffdb1d19cfb7a5c4",
+          "assertions": [
+            {
+              "pointer": "/wholeGridControlPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/paginationRowPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/nativeImages",
+              "equals": 4
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/newSourcePixelsCompared",
+              "equals": 1427830
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/newSourcePixelsCompared",
+              "equals": 1342690
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t159-native-context-grids-linux.json",
+      "remaining": "Other data sources, hierarchy/selection/column states, all widths/fonts/styles/alignments, toolbar/additions/full forms, DPI and Windows.",
+      "nextAction": "Expand native table property/style/state matrices and surrounding controls without weakening the accepted complete grid comparisons."
     }
   ],
   "historicalReports": [
@@ -4941,7 +5029,8 @@
     "docs/measurements/t158-native-button-types-linux.json",
     "docs/measurements/t158-native-link-captions-linux.json",
     "docs/measurements/t157-native-button-rows-linux.json",
-    "docs/measurements/t159-native-table-grids-linux.json"
+    "docs/measurements/t159-native-table-grids-linux.json",
+    "docs/measurements/t159-native-context-grids-linux.json"
   ],
   "supersessions": [
     {
@@ -5017,6 +5106,15 @@
         "tables.recorded-grids"
       ],
       "currentRemainder": "Nine recorded empty ValueTable grids now match in ru/en; other table sources, properties, surrounding controls and complete forms remain open."
+    },
+    {
+      "id": "table-context-grid-pixels",
+      "historicalReport": "docs/measurements/t160-native-complex-linux.json",
+      "historicalGap": "Native metadata table and dynamic list existed but complete pixel parity was not accepted.",
+      "currentEntries": [
+        "tables.recorded-context-grids"
+      ],
+      "currentRemainder": "The two recorded grid controls and DynamicList pagination now match in ru/en; other sources, properties, surrounding controls and complete forms remain open."
     }
   ],
   "nextGroups": [
