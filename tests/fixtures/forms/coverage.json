@@ -1704,7 +1704,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "tables.search-placeholder-initial"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1798,7 +1799,8 @@
         "tables.recorded-grids",
         "tables.recorded-context-grids",
         "tables.menu-glyphs",
-        "tables.toolbar-complete"
+        "tables.toolbar-complete",
+        "tables.search-placeholder-initial"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -5115,8 +5117,98 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t159-native-table-menus-linux.json",
-      "remaining": "Search text/clear/outline states, standard icons, grouped-button fill/borders and lower native border paint remain visibly/pixel different.",
-      "nextAction": "Measure native search placeholder and outline rules, then icons and joined buttons; reject remaining complete-strip mismatches."
+      "remaining": "Initial 13px search text is accepted separately; alternate native 11px states, search outline/clear, standard icons, grouped buttons and lower native borders still differ.",
+      "nextAction": "Determine native search initialization states, then calibrate outlines/clear/icons and joined buttons. Keep both complete toolbar variants rejected until all pixels match."
+    },
+    {
+      "id": "tables.search-placeholder-initial",
+      "milestone": "T159",
+      "kinds": [
+        "Table",
+        "SearchStringAddition"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "text.locale",
+        "layout.geometry",
+        "state.display",
+        "behavior.session",
+        "behavior.window"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete recorded 13px initial search placeholder bitmaps in four XML-only table sources, native/IDE ru/en. Real detached windows, dirty replacement and hit testing/selection preserve DOM/source identity. Native 11px states and complete fields/toolbars are not accepted.",
+      "fixtures": [
+        "tests/fixtures/forms/native-table-search"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "table-pixels",
+        "path": "test/form-table-pixels-host.cjs",
+        "caseIds": [
+          "Default",
+          "restored-default",
+          "floating-default",
+          "floating-restored",
+          "reattached-default",
+          "ReadOnly",
+          "MetadataTable",
+          "DynamicList",
+          "dynamic-dirty-footer",
+          "dynamic-restored-default",
+          "dynamic-floating-default",
+          "dynamic-floating-dirty-footer",
+          "dynamic-floating-restored",
+          "dynamic-reattached-default"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t159-native-table-search-linux.json",
+          "sha256": "f2b758c1cf3e32e1c3f2082390f87686c44ae616ba526672f3a5e9ac296e2bce",
+          "assertions": [
+            {
+              "pointer": "/initial13pxPlaceholderPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/nativeVariantSelectionRuleKnown",
+              "equals": false
+            },
+            {
+              "pointer": "/alternate11pxVariantRendered",
+              "equals": false
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/placeholderPixelsCompared",
+              "equals": 19110
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/placeholderPixelsCompared",
+              "equals": 17850
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/searchControlSelectable",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeToolbarPixelParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t159-native-table-search-linux.json",
+      "remaining": "Native 11px initialization states/selection rule, complete input outline/clear/states and full toolbars/forms, widths/fonts/styles, DPI and Windows.",
+      "nextAction": "Establish native initialization-state rules and complete search outline/clear/icon comparisons without weakening accepted initial text bitmaps."
     }
   ],
   "historicalReports": [
@@ -5182,7 +5274,8 @@
     "docs/measurements/t157-native-button-rows-linux.json",
     "docs/measurements/t159-native-table-grids-linux.json",
     "docs/measurements/t159-native-context-grids-linux.json",
-    "docs/measurements/t159-native-table-menus-linux.json"
+    "docs/measurements/t159-native-table-menus-linux.json",
+    "docs/measurements/t159-native-table-search-linux.json"
   ],
   "supersessions": [
     {

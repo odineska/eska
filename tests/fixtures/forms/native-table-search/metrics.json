@@ -1,0 +1,401 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "scope": "Complete native 13px initial search placeholder bitmaps. The same XML also has recorded 11px native variants after another form; these are retained as unresolved states, not accepted or masked.",
+  "noBslModulesOrHandlers": true,
+  "forms": 4,
+  "nativeImagesFor13pxVariant": 8,
+  "newInitialNativeImages": 3,
+  "font": {
+    "pixels": 13,
+    "points": 10,
+    "weight": 400,
+    "ascent": 12,
+    "descent": 3
+  },
+  "foreground": "#c8c8c8",
+  "background": "#ffffff",
+  "comparisonMasks": [],
+  "pixelTolerance": 0,
+  "nativeVariantSelectionRuleKnown": false,
+  "alternate11pxVariantRendered": false,
+  "rows": [
+    {
+      "name": "Default",
+      "source": "tests/fixtures/forms/native-tables/Default.xml",
+      "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+      "locales": {
+        "en": {
+          "text": "Search (Ctrl+F)",
+          "fontPixels": 13,
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Default.png",
+          "screenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5",
+          "nativeRegion": [
+            416,
+            555,
+            91,
+            15
+          ],
+          "regionInToolbar": [
+            142,
+            6,
+            91,
+            15
+          ],
+          "offset": [
+            142,
+            -59
+          ],
+          "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+          "pixels": 1365,
+          "advance": 89,
+          "originX": -1,
+          "ascent": 12,
+          "descent": 3
+        },
+        "ru": {
+          "text": "Поиск (Ctrl+F)",
+          "fontPixels": 13,
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Default.png",
+          "screenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38",
+          "nativeRegion": [
+            451,
+            555,
+            85,
+            15
+          ],
+          "regionInToolbar": [
+            177,
+            6,
+            85,
+            15
+          ],
+          "offset": [
+            177,
+            -59
+          ],
+          "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+          "pixels": 1275,
+          "advance": 84,
+          "originX": 0,
+          "ascent": 12,
+          "descent": 3
+        }
+      }
+    },
+    {
+      "name": "ReadOnly",
+      "source": "tests/fixtures/forms/native-tables/ReadOnly.xml",
+      "sourceSha256": "efa9ef102cb1e3c1f37543f692bbf4c58980dc2f0cb56bc29decbbb62e3ba0d3",
+      "locales": {
+        "en": {
+          "text": "Search (Ctrl+F)",
+          "fontPixels": 13,
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/search-en-ReadOnly-first.png",
+          "screenshotSha256": "b0b269c99691f1886cd181cc2dcb7cf3186e680f5870b02c0e2ca8903aa870a5",
+          "nativeRegion": [
+            416,
+            555,
+            91,
+            15
+          ],
+          "regionInToolbar": [
+            142,
+            6,
+            91,
+            15
+          ],
+          "offset": [
+            142,
+            -59
+          ],
+          "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+          "pixels": 1365,
+          "advance": 89,
+          "originX": -1,
+          "ascent": 12,
+          "descent": 3
+        },
+        "ru": {
+          "text": "Поиск (Ctrl+F)",
+          "fontPixels": 13,
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/search-ru-ReadOnly-first.png",
+          "screenshotSha256": "fa9e73f1a2bc4dde84679dcf569be818a5924f24608b45d0e9d7fd24d6026e87",
+          "nativeRegion": [
+            451,
+            555,
+            85,
+            15
+          ],
+          "regionInToolbar": [
+            177,
+            6,
+            85,
+            15
+          ],
+          "offset": [
+            177,
+            -59
+          ],
+          "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+          "pixels": 1275,
+          "advance": 84,
+          "originX": 0,
+          "ascent": 12,
+          "descent": 3
+        }
+      }
+    },
+    {
+      "name": "MetadataTable",
+      "source": "tests/fixtures/forms/native-context-tables/MetadataTable.xml",
+      "sourceSha256": "e892ddbe46307d58fc4fe5baf7569f8d5b33f3ff36a35eb8d76b1587341685a0",
+      "locales": {
+        "en": {
+          "text": "Search (Ctrl+F)",
+          "fontPixels": 13,
+          "nativeScreenshot": "native-context-pixels-g93fkhea/en-MetadataTable-complete.png",
+          "screenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825",
+          "nativeRegion": [
+            419,
+            555,
+            91,
+            15
+          ],
+          "regionInToolbar": [
+            145,
+            6,
+            91,
+            15
+          ],
+          "offset": [
+            145,
+            -59
+          ],
+          "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+          "pixels": 1365,
+          "advance": 89,
+          "originX": -1,
+          "ascent": 12,
+          "descent": 3
+        },
+        "ru": {
+          "text": "Поиск (Ctrl+F)",
+          "fontPixels": 13,
+          "nativeScreenshot": "native-context-pixels-g93fkhea/search-ru-Metadata-first.png",
+          "screenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb",
+          "nativeRegion": [
+            468,
+            555,
+            85,
+            15
+          ],
+          "regionInToolbar": [
+            194,
+            6,
+            85,
+            15
+          ],
+          "offset": [
+            194,
+            -59
+          ],
+          "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+          "pixels": 1275,
+          "advance": 84,
+          "originX": 0,
+          "ascent": 12,
+          "descent": 3
+        }
+      }
+    },
+    {
+      "name": "DynamicList",
+      "source": "tests/fixtures/forms/native-context-tables/DynamicList.xml",
+      "sourceSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+      "locales": {
+        "en": {
+          "text": "Search (Ctrl+F)",
+          "fontPixels": 13,
+          "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+          "screenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f",
+          "nativeRegion": [
+            390,
+            403,
+            91,
+            15
+          ],
+          "regionInToolbar": [
+            116,
+            6,
+            91,
+            15
+          ],
+          "offset": [
+            116,
+            -59
+          ],
+          "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+          "pixels": 1365,
+          "advance": 89,
+          "originX": -1,
+          "ascent": 12,
+          "descent": 3
+        },
+        "ru": {
+          "text": "Поиск (Ctrl+F)",
+          "fontPixels": 13,
+          "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+          "screenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723",
+          "nativeRegion": [
+            403,
+            403,
+            85,
+            15
+          ],
+          "regionInToolbar": [
+            129,
+            6,
+            85,
+            15
+          ],
+          "offset": [
+            129,
+            -59
+          ],
+          "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+          "pixels": 1275,
+          "advance": 84,
+          "originX": 0,
+          "ascent": 12,
+          "descent": 3
+        }
+      }
+    }
+  ],
+  "alternate11pxObservations": [
+    {
+      "form": "ReadOnly",
+      "locale": "en",
+      "text": "Search (Ctrl+F)",
+      "fontPixels": 11,
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/en-ReadOnly.png",
+      "screenshotSha256": "6a385741e1a2817fb9a016e79c321f16e3e0ddde9f4b21a5239d5d599ef396cf",
+      "nativeRegion": [
+        416,
+        556,
+        77,
+        13
+      ],
+      "regionInToolbar": [
+        142,
+        7,
+        77,
+        13
+      ],
+      "offset": [
+        142,
+        -58
+      ],
+      "rgbSha256": "b760f4c46529b937b4ff43ca612763a169dda0d53298c77d03f0fb63a8cc9c57",
+      "pixels": 1001,
+      "advance": 76,
+      "originX": -1,
+      "ascent": 10,
+      "descent": 3
+    },
+    {
+      "form": "ReadOnly",
+      "locale": "ru",
+      "text": "Поиск (Ctrl+F)",
+      "fontPixels": 11,
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-ReadOnly.png",
+      "screenshotSha256": "82030ccf6dffce9be8776721c0756858de1ad2817bf6e3db077e241c843327e4",
+      "nativeRegion": [
+        451,
+        556,
+        72,
+        13
+      ],
+      "regionInToolbar": [
+        177,
+        7,
+        72,
+        13
+      ],
+      "offset": [
+        177,
+        -58
+      ],
+      "rgbSha256": "9cc5a705c25568fa547671f8ddf2f92c38aefdbabc86e96cadbefafb4a4bff66",
+      "pixels": 936,
+      "advance": 72,
+      "originX": 0,
+      "ascent": 10,
+      "descent": 3
+    },
+    {
+      "form": "MetadataTable",
+      "locale": "ru",
+      "text": "Поиск (Ctrl+F)",
+      "fontPixels": 11,
+      "nativeScreenshot": "native-context-pixels-g93fkhea/ru-MetadataTable-complete.png",
+      "screenshotSha256": "48713ccf40610e945129abeee70c0f90df5ef80d6dcd44d02ca9b258de90f3bf",
+      "nativeRegion": [
+        468,
+        556,
+        72,
+        13
+      ],
+      "regionInToolbar": [
+        194,
+        7,
+        72,
+        13
+      ],
+      "offset": [
+        194,
+        -58
+      ],
+      "rgbSha256": "9cc5a705c25568fa547671f8ddf2f92c38aefdbabc86e96cadbefafb4a4bff66",
+      "pixels": 936,
+      "advance": 72,
+      "originX": 0,
+      "ascent": 10,
+      "descent": 3
+    },
+    {
+      "form": "Default",
+      "locale": "en",
+      "text": "Search (Ctrl+F)",
+      "fontPixels": 11,
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/search-en-Default-second.png",
+      "screenshotSha256": "48ffb79250137a866db2debf7720c02f344047b575b038414b282b21f471e424",
+      "nativeRegion": [
+        416,
+        556,
+        77,
+        13
+      ],
+      "regionInToolbar": [
+        142,
+        7,
+        77,
+        13
+      ],
+      "offset": [
+        142,
+        -58
+      ],
+      "rgbSha256": "b760f4c46529b937b4ff43ca612763a169dda0d53298c77d03f0fb63a8cc9c57",
+      "pixels": 1001,
+      "advance": 76,
+      "originX": -1,
+      "ascent": 10,
+      "descent": 3
+    }
+  ]
+}

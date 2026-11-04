@@ -160,3 +160,7 @@ python3 -B -m unittest discover -s tests -p test_form_coverage.py
 восьми native-снимках Default/ReadOnly/MetadataTable/DynamicList. Подписи меню
 и стрелки приняты отдельно; полные панели сохраняют [расхождения](../../../docs/measurements/t159-native-table-menus-linux.json)
 без масок и допусков.
+
+`native-table-search/` отдельно фиксирует начальные подсказки поиска 13 px и
+неподдержанные native-варианты 11 px тех же XML. [Приёмка текста](../../../docs/measurements/t159-native-table-search-linux.json)
+не закрывает всё поле поиска, выбор native-варианта или командную панель.
