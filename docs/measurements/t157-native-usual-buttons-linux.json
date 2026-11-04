@@ -1,0 +1,1708 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.40",
+  "backendRuntimeUnchangedSince": "c26f324",
+  "fixtureCommit": "513f0c9",
+  "clientCommit": "f5c2ea77117b9ca3c4b9a525d9934bae1e41d295",
+  "clientMetricTestCommit": "234fb61",
+  "geometryVerified": true,
+  "visualParityVerified": false,
+  "scope": "Automatic common width, row insets and integer centering of text UsualButton controls in horizontal all-button groups without explicit Width; does not accept their full widget pixels",
+  "fixture": "tests/fixtures/forms/native-usual-buttons",
+  "behavior": [
+    "Shared width equals the largest measured preferred width in the row; it also shrinks after a shorter caption or font change",
+    "HorizontalStretch=false does not cancel this automatic common width",
+    "Gap is 10px and row insets are 1px top and 2px bottom; the mixed 14pt/10pt case rounds the shorter controls to whole pixels",
+    "Dirty caption and font updates retain button and row DOM in the main and actual detached native windows, including docking"
+  ],
+  "checks": {
+    "typescript": "passed",
+    "compile": "passed",
+    "package": "passed",
+    "node": {
+      "exit": 0,
+      "seconds": 12.86,
+      "pass": 501,
+      "fail": 0,
+      "skipped": 11
+    },
+    "nativeRunsPassed": 14,
+    "runs": [
+      {
+        "suite": "usual-buttons",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 14.71
+      },
+      {
+        "suite": "usual-buttons",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 11.6
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 8.23
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 11.28
+      },
+      {
+        "suite": "font-roles",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 7.88
+      },
+      {
+        "suite": "font-roles",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.36
+      },
+      {
+        "suite": "primary-buttons",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 24.67
+      },
+      {
+        "suite": "primary-buttons",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 28.5
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 18.67
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 22.76
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.46
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.04
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 4.35
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 7.03
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "forms": 12,
+        "buttons": 36,
+        "geometrySamples": 18,
+        "geometryMismatches": 0,
+        "dirtyCaption": true,
+        "dirtyFont": true,
+        "detachedUpdates": true,
+        "sourceWritesDuringViewing": false,
+        "captures": [
+          {
+            "label": "ParentWhite",
+            "expected": "ParentWhite",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentWhite-en.png",
+            "pngSha256": "2ce782e8eaa99b0c6e0c2ff9593729b9e41900a4fcfb1dd291f80146b44a7540"
+          },
+          {
+            "label": "ParentBlack",
+            "expected": "ParentBlack",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentBlack-en.png",
+            "pngSha256": "14960e42f39a4796bfe48ccc2556fbaec515907f63caf365b283eb34789981b6"
+          },
+          {
+            "label": "ParentLightBlue",
+            "expected": "ParentLightBlue",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentLightBlue-en.png",
+            "pngSha256": "2e0b4856a3c7f4b144e4fd9cc2ae0a4037a195bdc94d96e63e781db6d26f945d"
+          },
+          {
+            "label": "ParentDarkBlue",
+            "expected": "ParentDarkBlue",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentDarkBlue-en.png",
+            "pngSha256": "1cf0905b15da01dd0d1842370ed43bb3ba7c7e73aadc79883b5eda5169bcb0fd"
+          },
+          {
+            "label": "ParentGreen",
+            "expected": "ParentGreen",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentGreen-en.png",
+            "pngSha256": "599415c843b4d051f7714e71a5dfd63ace2d300e9b43d8196601b3822aa191ab"
+          },
+          {
+            "label": "ParentFormLightBlue",
+            "expected": "ParentFormLightBlue",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 399,
+              "height": 79
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 166,
+                "y": 316,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 291,
+                "y": 316,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentFormLightBlue-en.png",
+            "pngSha256": "514b756b229004a5d69cd7e05668eaaa4b1570f8031b1087195d9ec4b21d36ba"
+          },
+          {
+            "label": "ParentLargeBlue14",
+            "expected": "ParentLargeBlue14",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 568,
+              "height": 96
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 168,
+                "height": 33,
+                "caption": "WW",
+                "font": "18.6667px",
+                "weight": "400"
+              },
+              {
+                "x": 224,
+                "y": 321,
+                "width": 168,
+                "height": 33,
+                "caption": "MM",
+                "font": "18.6667px",
+                "weight": "400"
+              },
+              {
+                "x": 402,
+                "y": 321,
+                "width": 168,
+                "height": 33,
+                "caption": "First command",
+                "font": "18.6667px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentLargeBlue14-en.png",
+            "pngSha256": "79c1000b927f8b569e3d2fe1c6af6ebb8faa446a46279d54b8f8379a1c9bf9e5"
+          },
+          {
+            "label": "ParentLargeDark18",
+            "expected": "ParentLargeDark18",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 688,
+              "height": 105
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 208,
+                "height": 42,
+                "caption": "WW",
+                "font": "24px",
+                "weight": "400"
+              },
+              {
+                "x": 264,
+                "y": 321,
+                "width": 208,
+                "height": 42,
+                "caption": "MM",
+                "font": "24px",
+                "weight": "400"
+              },
+              {
+                "x": 482,
+                "y": 321,
+                "width": 208,
+                "height": 42,
+                "caption": "First command",
+                "font": "24px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentLargeDark18-en.png",
+            "pngSha256": "83ee57b0af052bbe55d5cea70283d367dfc4e9e8da2e710feca234a42a360f80"
+          },
+          {
+            "label": "WidthShort",
+            "expected": "WidthShort",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 220,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 108,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 170,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-WidthShort-en.png",
+            "pngSha256": "47051512c6a8b6db1a12d672ade223bc2759143602e69ffe87743b130e5c1df6"
+          },
+          {
+            "label": "dirty-WidthLong",
+            "expected": "WidthLong",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 589,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 231,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 416,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "First command expanded",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-dirty-WidthLong-en.png",
+            "pngSha256": "c3acfe1227060704032032cefe5b533cbd9f8c144bf9bcd55398fd8b92b14854"
+          },
+          {
+            "label": "dirty-WidthMixed",
+            "expected": "WidthMixed",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 292,
+              "height": 96
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 76,
+                "height": 33,
+                "caption": "WW",
+                "font": "18.6667px",
+                "weight": "400"
+              },
+              {
+                "x": 132,
+                "y": 325,
+                "width": 76,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 218,
+                "y": 325,
+                "width": 76,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-dirty-WidthMixed-en.png",
+            "pngSha256": "0426ca0c269f6c8d8b4f4ad25dc05e43bdfe8b91b372f3983c8569efe308115f"
+          },
+          {
+            "label": "floating-WidthShort",
+            "expected": "WidthShort",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 220,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 86,
+                "width": 52,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 108,
+                "y": 86,
+                "width": 52,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 170,
+                "y": 86,
+                "width": 52,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-floating-WidthShort-en.png",
+            "pngSha256": "bf28ff6f421415ef22488330e8a757d24b69bf71ad42660bec8bf7eba8b4daf8"
+          },
+          {
+            "label": "floating-dirty-WidthLong",
+            "expected": "WidthLong",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 589,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 86,
+                "width": 175,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 231,
+                "y": 86,
+                "width": 175,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 416,
+                "y": 86,
+                "width": 175,
+                "height": 26,
+                "caption": "First command expanded",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-floating-dirty-WidthLong-en.png",
+            "pngSha256": "16481ffc984d291a5fc84e7ecfdfee6c908daed468362a564dd047fa64e45254"
+          },
+          {
+            "label": "floating-dirty-WidthMixed",
+            "expected": "WidthMixed",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 292,
+              "height": 96
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 86,
+                "width": 76,
+                "height": 33,
+                "caption": "WW",
+                "font": "18.6667px",
+                "weight": "400"
+              },
+              {
+                "x": 132,
+                "y": 90,
+                "width": 76,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 218,
+                "y": 90,
+                "width": 76,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-floating-dirty-WidthMixed-en.png",
+            "pngSha256": "91e939e6a9f6ff6cced0620ca03de85dceb8759e92f22a2b10518382727a6071"
+          },
+          {
+            "label": "reattached-WidthShort",
+            "expected": "WidthShort",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 220,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 108,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 170,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-reattached-WidthShort-en.png",
+            "pngSha256": "02b341e66b16a493d331619791ee1f5d1cdfae7f69184b30d4261c73f0238bc9"
+          },
+          {
+            "label": "WidthLong",
+            "expected": "WidthLong",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 589,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 231,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 416,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "First command expanded",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-WidthLong-en.png",
+            "pngSha256": "3a7f1f3442052211f8bd5d1f7f818b321e54a2ebf463615f74282f6acd050667"
+          },
+          {
+            "label": "WidthNoStretch",
+            "expected": "WidthNoStretch",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-WidthNoStretch-en.png",
+            "pngSha256": "7c763d9bcdfd923fc28d7d545e9ae437d990516a49de0505ec5ca392b6855a8d"
+          },
+          {
+            "label": "WidthMixed",
+            "expected": "WidthMixed",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 292,
+              "height": 96
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 76,
+                "height": 33,
+                "caption": "WW",
+                "font": "18.6667px",
+                "weight": "400"
+              },
+              {
+                "x": 132,
+                "y": 325,
+                "width": 76,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 218,
+                "y": 325,
+                "width": 76,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-WidthMixed-en.png",
+            "pngSha256": "a7ce3a7f0b8b264e3119e1363288cff8e8a89bb4f0d912475c8959cef04b93fe"
+          }
+        ],
+        "regressionPixels": {
+          "wholeTabForms": 3379919,
+          "primaryButtonInteriors": 250932
+        },
+        "regressionScopesMayOverlap": true,
+        "pixelParityVerifiedForUsualButtons": false
+      },
+      "ru": {
+        "forms": 12,
+        "buttons": 36,
+        "geometrySamples": 18,
+        "geometryMismatches": 0,
+        "dirtyCaption": true,
+        "dirtyFont": true,
+        "detachedUpdates": true,
+        "sourceWritesDuringViewing": false,
+        "captures": [
+          {
+            "label": "ParentWhite",
+            "expected": "ParentWhite",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentWhite-ru.png",
+            "pngSha256": "3c0fd5d20eb09cdfbbed5d6e49ee6a1ec88b1a5046819d055b0389c63f2276f9"
+          },
+          {
+            "label": "ParentBlack",
+            "expected": "ParentBlack",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentBlack-ru.png",
+            "pngSha256": "c28cec16ac1c6b674b58f359664126fe4bf5efaf69845e5c457120eaf2955559"
+          },
+          {
+            "label": "ParentLightBlue",
+            "expected": "ParentLightBlue",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentLightBlue-ru.png",
+            "pngSha256": "acd1e9577037563730671213e51d9869843058ef077ba8effb0de052ebb393a9"
+          },
+          {
+            "label": "ParentDarkBlue",
+            "expected": "ParentDarkBlue",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentDarkBlue-ru.png",
+            "pngSha256": "6b22da05bf85488a6c179870a4156ed44a85bb9b48bc6c7de78af3847137fa81"
+          },
+          {
+            "label": "ParentGreen",
+            "expected": "ParentGreen",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentGreen-ru.png",
+            "pngSha256": "46e4d859ba2d1e5e4b4724ce890fe240f4de3ab065c3d34e9a1b8b7c2e55185b"
+          },
+          {
+            "label": "ParentFormLightBlue",
+            "expected": "ParentFormLightBlue",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 399,
+              "height": 79
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 166,
+                "y": 316,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 291,
+                "y": 316,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentFormLightBlue-ru.png",
+            "pngSha256": "64916a264f6a5ae533caf372ba82ea275bdb5933522a3f571e9ae649a1790834"
+          },
+          {
+            "label": "ParentLargeBlue14",
+            "expected": "ParentLargeBlue14",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 568,
+              "height": 96
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 168,
+                "height": 33,
+                "caption": "WW",
+                "font": "18.6667px",
+                "weight": "400"
+              },
+              {
+                "x": 224,
+                "y": 321,
+                "width": 168,
+                "height": 33,
+                "caption": "MM",
+                "font": "18.6667px",
+                "weight": "400"
+              },
+              {
+                "x": 402,
+                "y": 321,
+                "width": 168,
+                "height": 33,
+                "caption": "First command",
+                "font": "18.6667px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentLargeBlue14-ru.png",
+            "pngSha256": "d214204fece68c495ccbd73e9529f774b8a31fe6056cea186cb15f5fd290e143"
+          },
+          {
+            "label": "ParentLargeDark18",
+            "expected": "ParentLargeDark18",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 688,
+              "height": 105
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 208,
+                "height": 42,
+                "caption": "WW",
+                "font": "24px",
+                "weight": "400"
+              },
+              {
+                "x": 264,
+                "y": 321,
+                "width": 208,
+                "height": 42,
+                "caption": "MM",
+                "font": "24px",
+                "weight": "400"
+              },
+              {
+                "x": 482,
+                "y": 321,
+                "width": 208,
+                "height": 42,
+                "caption": "First command",
+                "font": "24px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-ParentLargeDark18-ru.png",
+            "pngSha256": "00062006611453338475f4a4157b6695223cbb4ed37046a082aaa0f11823b8db"
+          },
+          {
+            "label": "WidthShort",
+            "expected": "WidthShort",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 220,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 108,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 170,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-WidthShort-ru.png",
+            "pngSha256": "85a73a4cb5239f967b57a21de3383c11d45d87655bf1c6dc883e024da19bc2b9"
+          },
+          {
+            "label": "dirty-WidthLong",
+            "expected": "WidthLong",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 589,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 231,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 416,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "First command expanded",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-dirty-WidthLong-ru.png",
+            "pngSha256": "b01c9c717f5df7bfdb00755c514aa1839e661befdda3cb545c3bcfc058e15999"
+          },
+          {
+            "label": "dirty-WidthMixed",
+            "expected": "WidthMixed",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 292,
+              "height": 96
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 76,
+                "height": 33,
+                "caption": "WW",
+                "font": "18.6667px",
+                "weight": "400"
+              },
+              {
+                "x": 132,
+                "y": 325,
+                "width": 76,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 218,
+                "y": 325,
+                "width": 76,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-dirty-WidthMixed-ru.png",
+            "pngSha256": "d04d85b9a9aea81dbe457b47a5732c1f168ba4bd12964472b4c3fe604b94c92f"
+          },
+          {
+            "label": "floating-WidthShort",
+            "expected": "WidthShort",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 220,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 86,
+                "width": 52,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 108,
+                "y": 86,
+                "width": 52,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 170,
+                "y": 86,
+                "width": 52,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-floating-WidthShort-ru.png",
+            "pngSha256": "807326f4a8714c2ceeae6012752d7e5f1145a2bab61215b3dfad99ebcd737fd8"
+          },
+          {
+            "label": "floating-dirty-WidthLong",
+            "expected": "WidthLong",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 589,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 86,
+                "width": 175,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 231,
+                "y": 86,
+                "width": 175,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 416,
+                "y": 86,
+                "width": 175,
+                "height": 26,
+                "caption": "First command expanded",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-floating-dirty-WidthLong-ru.png",
+            "pngSha256": "71e80e0ae77daf63bc414062e5e74555bff423d20790a2c151bf70a6eb5d3edd"
+          },
+          {
+            "label": "floating-dirty-WidthMixed",
+            "expected": "WidthMixed",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 292,
+              "height": 96
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 86,
+                "width": 76,
+                "height": 33,
+                "caption": "WW",
+                "font": "18.6667px",
+                "weight": "400"
+              },
+              {
+                "x": 132,
+                "y": 90,
+                "width": 76,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 218,
+                "y": 90,
+                "width": 76,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-floating-dirty-WidthMixed-ru.png",
+            "pngSha256": "ef40bb83c160a2bf834035abc4f92f9fed891975c41c6980e447e7f29a1ddcfd"
+          },
+          {
+            "label": "reattached-WidthShort",
+            "expected": "WidthShort",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 220,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 108,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 170,
+                "y": 321,
+                "width": 52,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-reattached-WidthShort-ru.png",
+            "pngSha256": "a4a3664f9f7d9d3f6d3f3d243ccb1dec84daaa94a7dd69a6a171ab70266701ee"
+          },
+          {
+            "label": "WidthLong",
+            "expected": "WidthLong",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 589,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 231,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 416,
+                "y": 321,
+                "width": 175,
+                "height": 26,
+                "caption": "First command expanded",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-WidthLong-ru.png",
+            "pngSha256": "97e7aa640bddc28c0b73ed66e87c0722410b15e698faa6897b81bc2aad44aba5"
+          },
+          {
+            "label": "WidthNoStretch",
+            "expected": "WidthNoStretch",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 409,
+              "height": 89
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "WW",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 171,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 296,
+                "y": 321,
+                "width": 115,
+                "height": 26,
+                "caption": "First command",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-WidthNoStretch-ru.png",
+            "pngSha256": "2c1a1918d188e38ff1962561b015646df426fdf718e4b9724d26222cb7992df1"
+          },
+          {
+            "label": "WidthMixed",
+            "expected": "WidthMixed",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 292,
+              "height": 96
+            },
+            "uniform": true,
+            "buttons": [
+              {
+                "x": 46,
+                "y": 321,
+                "width": 76,
+                "height": 33,
+                "caption": "WW",
+                "font": "18.6667px",
+                "weight": "400"
+              },
+              {
+                "x": 132,
+                "y": 325,
+                "width": 76,
+                "height": 26,
+                "caption": "MM",
+                "font": "13.3333px",
+                "weight": "400"
+              },
+              {
+                "x": 218,
+                "y": 325,
+                "width": 76,
+                "height": 26,
+                "caption": "ii",
+                "font": "13.3333px",
+                "weight": "400"
+              }
+            ],
+            "png": "usual-buttons-WidthMixed-ru.png",
+            "pngSha256": "0f2835fe1faa9e457131e71c3757e6c752daf211e34f929de5866e6e15204ce6"
+          }
+        ],
+        "regressionPixels": {
+          "wholeTabForms": 3379919,
+          "primaryButtonInteriors": 250932
+        },
+        "regressionScopesMayOverlap": true,
+        "pixelParityVerifiedForUsualButtons": false
+      }
+    },
+    "backendRust": {
+      "runtimeUnchanged": true,
+      "previousFullRun": "t158-native-primary-buttons-linux.json",
+      "previousPassed": 1501,
+      "rerunForThisClientOnlyChange": false
+    }
+  },
+  "nativeEnvironment": {
+    "capture": "XGetImage of verified owned Configurator window",
+    "transientOwnedVirtualDisplay": {
+      "size": [
+        2560,
+        1080
+      ],
+      "scale": 1,
+      "clientSize": [
+        2560,
+        1019
+      ],
+      "physicalMonitorsBefore": [],
+      "closedAfterAcceptance": true,
+      "monitorsAfter": []
+    },
+    "configurationRestored": true
+  },
+  "preliminaryObservation": {
+    "suite": "button-metrics en",
+    "reason": "Old regression expected browser fallback for the primary button, which was superseded by the previous primary renderer implementation",
+    "fix": "234fb61",
+    "afterFixNativeBothLocalesPassed": true,
+    "independentTemporaryDisplayProcessEnded": true
+  },
+  "remaining": [
+    "Explicit Width, vertical/wrapping and mixed-element groups, other states and Windows",
+    "Full usual-button fill/text/border/shadow pixel acceptance",
+    "Native border pixels vary with preview-pane position; record position for full comparisons, see native-button-poses",
+    "Other unfinished T152-T165 matrices; geometry checks do not establish full form parity"
+  ]
+}
