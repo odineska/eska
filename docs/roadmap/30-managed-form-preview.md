@@ -829,6 +829,19 @@ Native-снимки 16 новых форм получены в обоих язы
 [Native-входы](../../tests/fixtures/forms/native-input-dates/README.md) ·
 [Результаты](../measurements/t158-native-input-dates-linux.json).
 
+Четыре разновидности `Button` сверены в предпросмотре Конфигуратора:
+`UsualButton`, `Hyperlink`, `CommandBarButton`, `CommandBarHyperlink`.
+Восемь native-наблюдений подтверждают цвет и оформление ссылок; явный
+`TextColor` сохраняет приоритет. Оба вида ссылки используют роль
+`HyperlinkTextColor`, Linux-профиль — `#1c55ae`. Исправлены подчёркивание
+и пересчёт ширины при dirty-смене вида; измерен цикл 48 → 22 → 48 px.
+[Отчёт видов кнопок](../measurements/t158-native-button-types-linux.json):
+Rust — 1520 pass / 19 ignored, Node — 512 pass / 11 skip, все 24 связанные
+серии ru/en прошли с первой попытки. Два дополнительных прогона ширины
+используют те же VSIX/backend/XML; 22 новых GUI-сценария сохраняют выделение,
+DOM и отдельное окно. Полные пиксели ссылок и матрица состояний ещё в работе;
+T158 остаётся `IN-PROGRESS`.
+
 ### T159 — Таблицы формы и табличные части
 
 **Статус:** `IN-PROGRESS`. **Зависимости:** T157, T158. **Владелец:** ESKA и Explorer.

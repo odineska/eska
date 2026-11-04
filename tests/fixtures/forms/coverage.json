@@ -367,7 +367,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "buttons.link-types"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -2158,7 +2159,7 @@
       ],
       "lastConfirmation": "docs/measurements/t152-property-candidates-linux.json",
       "remaining": "Designer applicability, visual/runtime/data classification, default values, per-kind states, property combinations and native Configurator pixels.",
-      "nextAction": "Verify the four Button Type variants against native XML and images, then classify unresolved Designer/runtime property names."
+      "nextAction": "Classify unresolved Designer/runtime property names and complete the state/property matrix; preserve the four button-type semantic cases."
     },
     {
       "id": "context.ordered-extensions",
@@ -3673,6 +3674,86 @@
       "nextAction": "Choose one native complex surface with deterministic content and accept its full widget before broadening."
     },
     {
+      "id": "buttons.link-types",
+      "milestone": "T158",
+      "kinds": [
+        "Button"
+      ],
+      "axes": [
+        "values.defaults",
+        "appearance.colors",
+        "source.identity",
+        "behavior.session",
+        "behavior.window"
+      ],
+      "profile": "designer-xml",
+      "level": "semantics",
+      "status": "accepted_scope",
+      "scope": "Linux 8.3.27.2342: four native text-button types, default/explicit link color and underline, Auto role, namespace protection, live type/width changes, selected DOM and real detached window. Semantic/behavior acceptance only.",
+      "fixtures": [
+        "tests/fixtures/forms/native-button-types"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "button-types",
+        "path": "test/form-button-types-host.cjs",
+        "caseIds": [
+          "initial-four-button-types",
+          "dirty-command-bar-link-type",
+          "dirty-usual-button-type",
+          "auto-link-color-keeps-type-role",
+          "foreign-type-does-not-become-a-link",
+          "types-restored",
+          "invalid-xml",
+          "invalid-xml-recovers",
+          "detached-explicit-link-color",
+          "detached-type-switch",
+          "reattached-button-types"
+        ],
+        "selection": "whole-suite-with-existing-transitions and intrinsic-width assertions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-native-button-types-linux.json",
+          "sha256": "e0fa4cedab51b8059a0c1575bc5de7a04d7cca04f46579abb66ace7572638a03",
+          "assertions": [
+            {
+              "pointer": "/nativeControls",
+              "equals": 8
+            },
+            {
+              "pointer": "/noBslModulesOrHandlers",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/cargoTest/failed",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 24
+            },
+            {
+              "pointer": "/acceptance/linkGuiCasesTotal",
+              "equals": 22
+            },
+            {
+              "pointer": "/acceptance/widthRecheck/pairsPassed",
+              "equals": 2
+            },
+            {
+              "pointer": "/acceptance/wholeLinkWidgetsAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-native-button-types-linux.json",
+      "remaining": "Full hyperlink glyph/widget pixels, all fonts, states, menus/images, Windows and DPI.",
+      "nextAction": "Calibrate native hyperlink text and full widget bounds without weakening ordinary-button comparisons."
+    },
+    {
       "id": "resources.pictures",
       "milestone": "T155",
       "kinds": [
@@ -4585,7 +4666,8 @@
     "docs/measurements/t154-native-owner-linux.json",
     "docs/measurements/t155-native-style-layers-linux.json",
     "docs/measurements/t155-native-picture-layers-linux.json",
-    "docs/measurements/t152-property-candidates-linux.json"
+    "docs/measurements/t152-property-candidates-linux.json",
+    "docs/measurements/t158-native-button-types-linux.json"
   ],
   "supersessions": [
     {

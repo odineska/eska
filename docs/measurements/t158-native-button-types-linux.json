@@ -1,0 +1,3720 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "scope": "T158 Linux four text-button types: hyperlink semantics, automatic/explicit/Auto color, underline and dirty type/width updates. No full hyperlink widget pixel acceptance.",
+  "platformBuild": "8.3.27.2342",
+  "fullProfileAccepted": false,
+  "noBslModulesOrHandlers": true,
+  "nativeControls": 8,
+  "nativeTypes": [
+    "UsualButton",
+    "Hyperlink",
+    "CommandBarButton",
+    "CommandBarHyperlink"
+  ],
+  "nativeInputs": {
+    "path": "tests/fixtures/forms/native-button-types/metrics.json",
+    "sha256": "a09b9e4624aec9159b54862d2b2f72b7e7acdb948a908d608040d0ef76f6ae82",
+    "rawXmlFiles": 4,
+    "files": [
+      {
+        "path": "source/CommonForms/ProbeButtons/Ext/Form.xml",
+        "sha256": "6fb3e0d82997d3367ad3230974ae76eb60ff2e06120b2d7d24c4d5cc78d5af04",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "source/CommonForms/ProbeButtons.xml",
+        "sha256": "3911da75252f35eaa40147b406740ab2e7bd8a608c8a06e6d00a316dd0d2f4f3",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "source/Configuration.xml",
+        "sha256": "25fb7c5c4912ddfc14b53f74c47b8b92fbc4e14b35152c72abc3457804c04f00",
+        "nativeRoundTrip": true
+      },
+      {
+        "path": "source/Languages/Русский.xml",
+        "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048",
+        "nativeRoundTrip": true
+      }
+    ]
+  },
+  "nativeReference": {
+    "file": "buttons-form-editor.png",
+    "sha256": "da7bb57a7b531920df6c069719e47dd0622aec6a2a1a1e820d6687ae5b8394d9",
+    "width": 2560,
+    "height": 1019,
+    "clientPhysicalOrigin": [
+      0,
+      61
+    ]
+  },
+  "nativeObservations": [
+    "UsualButton and CommandBarButton are raised text buttons in their corresponding containers.",
+    "Hyperlink and CommandBarHyperlink have no raised border and are underlined.",
+    "Default link ink/underline RGB is #1c55ae. Explicit #cc2244 is honored by both link kinds."
+  ],
+  "expectedControls": [
+    {
+      "name": "DefaultUsualButton",
+      "id": 11,
+      "type": "UsualButton",
+      "hyperlink": false,
+      "foreground": {
+        "kind": "role",
+        "value": "ButtonTextColor"
+      },
+      "nativeRgb": "#4d4d4d",
+      "underline": false,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "DefaultHyperlink",
+      "id": 21,
+      "type": "Hyperlink",
+      "hyperlink": true,
+      "foreground": {
+        "kind": "role",
+        "value": "HyperlinkTextColor"
+      },
+      "nativeRgb": "#1c55ae",
+      "underline": true,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "DefaultCommandBarButton",
+      "id": 51,
+      "type": "CommandBarButton",
+      "hyperlink": false,
+      "foreground": {
+        "kind": "role",
+        "value": "ButtonTextColor"
+      },
+      "nativeRgb": "#4d4d4d",
+      "underline": false,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "DefaultCommandBarHyperlink",
+      "id": 61,
+      "type": "CommandBarHyperlink",
+      "hyperlink": true,
+      "foreground": {
+        "kind": "role",
+        "value": "HyperlinkTextColor"
+      },
+      "nativeRgb": "#1c55ae",
+      "underline": true,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "ExplicitUsualButton",
+      "id": 111,
+      "type": "UsualButton",
+      "hyperlink": false,
+      "foreground": {
+        "kind": "rgb",
+        "value": "#cc2244"
+      },
+      "nativeRgb": "#cc2244",
+      "underline": false,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "ExplicitHyperlink",
+      "id": 121,
+      "type": "Hyperlink",
+      "hyperlink": true,
+      "foreground": {
+        "kind": "rgb",
+        "value": "#cc2244"
+      },
+      "nativeRgb": "#cc2244",
+      "underline": true,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "ExplicitCommandBarButton",
+      "id": 151,
+      "type": "CommandBarButton",
+      "hyperlink": false,
+      "foreground": {
+        "kind": "rgb",
+        "value": "#cc2244"
+      },
+      "nativeRgb": "#cc2244",
+      "underline": false,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "ExplicitCommandBarHyperlink",
+      "id": 161,
+      "type": "CommandBarHyperlink",
+      "hyperlink": true,
+      "foreground": {
+        "kind": "rgb",
+        "value": "#cc2244"
+      },
+      "nativeRgb": "#cc2244",
+      "underline": true,
+      "nativeWidgetPixelsAccepted": false
+    }
+  ],
+  "implementation": {
+    "semanticRole": "HyperlinkTextColor",
+    "bothLinkTypesUseSameReadOnlyButtonComponent": true,
+    "explicitColorOverridesPreserved": true,
+    "forcedCssColorRemoved": true,
+    "intrinsicWidthDependsOnLinkType": true,
+    "foreignNamespaceTypeIgnored": true,
+    "documentedIdeSchemaChanged": false,
+    "newDependencies": false,
+    "applicationActionsExecuted": false
+  },
+  "beforeFix": {
+    "core": {
+      "failed": 1,
+      "log": "core-before.log",
+      "sha256": "d7bb0f81eb80f1b84892d30bded1b681caa480f5a813becc866895574f4c3017",
+      "observed": "DefaultHyperlink incorrectly used ButtonTextColor."
+    },
+    "installedClient": {
+      "directory": "button-types-before-sz02gmd_",
+      "exitCode": 1,
+      "receiptSha256": "7a8f51b37ac781b58bad546ad65f8161e25421ac412daeafca3d68524e9f8f6d",
+      "logSha256": "a1c10c231b3fba7bbc4116c418c981e37db2ce4a94ec4bd8e5a64c239b1f0d21",
+      "runtimeManifestSha256": "c079d1e1ffa61305d870596447b33b836aa71f2e6f61e40032cc5c9e76fb1690",
+      "observed": [
+        {
+          "name": "DefaultUsualButton",
+          "link": false,
+          "color": "rgb(77, 77, 77)",
+          "underline": false
+        },
+        {
+          "name": "DefaultHyperlink",
+          "link": true,
+          "color": "rgb(0, 102, 163)",
+          "underline": false
+        },
+        {
+          "name": "DefaultCommandBarButton",
+          "link": false,
+          "color": "rgb(77, 77, 77)",
+          "underline": false
+        },
+        {
+          "name": "DefaultCommandBarHyperlink",
+          "link": false,
+          "color": "rgb(77, 77, 77)",
+          "underline": false
+        },
+        {
+          "name": "ExplicitUsualButton",
+          "link": false,
+          "color": "rgb(204, 34, 68)",
+          "underline": false
+        },
+        {
+          "name": "ExplicitHyperlink",
+          "link": true,
+          "color": "rgb(0, 102, 163)",
+          "underline": false
+        },
+        {
+          "name": "ExplicitCommandBarButton",
+          "link": false,
+          "color": "rgb(204, 34, 68)",
+          "underline": false
+        },
+        {
+          "name": "ExplicitCommandBarHyperlink",
+          "link": false,
+          "color": "rgb(204, 34, 68)",
+          "underline": false
+        }
+      ],
+      "classification": "Expected regression on the previously frozen backend/VSIX, before production changes."
+    }
+  },
+  "checks": {
+    "rustStatic": {
+      "exitCode": 0,
+      "commands": [
+        "cargo fmt --check",
+        "cargo check",
+        "cargo clippy --all-targets --all-features -- -D warnings"
+      ]
+    },
+    "cargoTest": {
+      "exitCode": 0,
+      "passed": 1520,
+      "failed": 0,
+      "ignored": 19,
+      "suites": 42,
+      "log": "test-final.log",
+      "sha256": "a527b1ceda60bf6aec84eb50e8d2f7c46b212975350a506c30a81eca9986a805",
+      "environment": {
+        "ESKA_TEST_ROOT": "<eska-root>/../eska-playground (absolute)",
+        "RUST_TEST_THREADS": "1"
+      }
+    },
+    "presentationTests": {
+      "passed": 18,
+      "failed": 0,
+      "log": "presentation-after.log",
+      "sha256": "d8cb64396ef6725632a85f1e2844ebc336ead4e450fdaae68d41d94af809ff67"
+    },
+    "backendBuild": {
+      "exitCode": 0,
+      "command": "cargo build -p eska-project --bin eska-project",
+      "sha256": "eede6d102e14d9b194afc36b467c24e11ab6fd653e216a60f4ee70268a7b39c4"
+    },
+    "node": {
+      "exitCode": 0,
+      "passed": 512,
+      "failed": 0,
+      "skipped": 11,
+      "total": 523,
+      "log": "node-tests.log",
+      "sha256": "790210e8b33a465bb67d92a36e18a2824a52ba8c5d213b9b857d8ffc087cf055"
+    },
+    "installedClient": {
+      "checkExitCode": 0,
+      "compileExitCode": 0,
+      "packageExitCode": 0
+    }
+  },
+  "acceptance": {
+    "batchDirectory": "form-batch-r4Lvid",
+    "passed": true,
+    "pairsPassed": 24,
+    "pairsFailed": 0,
+    "publishedCases": 306,
+    "linkGuiCasesTotal": 22,
+    "afterFixAllPairsFirstAttempt": true,
+    "guiConcurrency": 1,
+    "builds": 1,
+    "packages": 1,
+    "seconds": 232.634,
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "vsixSha256": "3625409886d8e9703adc5bbcb51ee1417a0926d292122a4cadd5e32edb73e421",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "eb7a08cb8887fb4b6997670ea72a102579ef2c7b2082b3f72bf1a01f4a720fcd",
+    "batchSha256": "1c5cc665673d5c8012526a863eb41077bfdbb9d8902576b1bf0de3b43da91b5b",
+    "inputsSha256": "db92420486c813d8efdc73039e0d4c41b394242fa68e2369974e0457820523f2",
+    "runs": [
+      {
+        "suite": "button-types",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 5.63404806,
+        "caseIds": [
+          "button-types/initial-four-button-types",
+          "button-types/dirty-command-bar-link-type",
+          "button-types/dirty-usual-button-type",
+          "button-types/auto-link-color-keeps-type-role",
+          "button-types/foreign-type-does-not-become-a-link",
+          "button-types/types-restored",
+          "button-types/invalid-xml",
+          "button-types/invalid-xml-recovers",
+          "button-types/detached-explicit-link-color",
+          "button-types/detached-type-switch",
+          "button-types/reattached-button-types"
+        ]
+      },
+      {
+        "suite": "button-types",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 7.9060191699999995,
+        "caseIds": [
+          "button-types/initial-four-button-types",
+          "button-types/dirty-command-bar-link-type",
+          "button-types/dirty-usual-button-type",
+          "button-types/auto-link-color-keeps-type-role",
+          "button-types/foreign-type-does-not-become-a-link",
+          "button-types/types-restored",
+          "button-types/invalid-xml",
+          "button-types/invalid-xml-recovers",
+          "button-types/detached-explicit-link-color",
+          "button-types/detached-type-switch",
+          "button-types/reattached-button-types"
+        ]
+      },
+      {
+        "suite": "button-borders",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 27.324621404000002,
+        "caseIds": [
+          "button-borders/FontAuto",
+          "button-borders/dirty-FontAuto",
+          "button-borders/floating-FontAuto",
+          "button-borders/floating-dirty-FontAuto",
+          "button-borders/reattached-FontAuto",
+          "button-borders/FontRegular",
+          "button-borders/FontBold",
+          "button-borders/FontPartial14",
+          "button-borders/FontStyleNormal",
+          "button-borders/FontForm14",
+          "button-borders/FontBar14",
+          "button-borders/FontFormBold",
+          "button-borders/FontExplicitAuto",
+          "button-borders/CheckAutoBack",
+          "button-borders/CheckAutoText",
+          "button-borders/CheckNormalFalse",
+          "button-borders/CheckNormal14",
+          "button-borders/CheckSmall",
+          "button-borders/CheckLarge",
+          "button-borders/CheckExtra",
+          "button-borders/CheckText",
+          "button-borders/CheckSysAuto",
+          "button-borders/CheckSys14",
+          "button-borders/CheckBoldOnly",
+          "button-borders/CheckAutoDisabled",
+          "button-borders/Color000000",
+          "button-borders/Color000040",
+          "button-borders/Color000080",
+          "button-borders/dirty-Color000080",
+          "button-borders/default-Color000080",
+          "button-borders/floating-Color000080",
+          "button-borders/floating-dirty-Color000080",
+          "button-borders/reattached-Color000080",
+          "button-borders/Color0000FF",
+          "button-borders/Color008000",
+          "button-borders/Color00FF00",
+          "button-borders/Color00FFFF",
+          "button-borders/Color0A73B7",
+          "button-borders/Color202020",
+          "button-borders/Color20DD20",
+          "button-borders/Color336699",
+          "button-borders/Color345678",
+          "button-borders/Color404040",
+          "button-borders/Color5511FF",
+          "button-borders/Color555555",
+          "button-borders/Color606060",
+          "button-borders/Color747474",
+          "button-borders/Color757575",
+          "button-borders/Color777777",
+          "button-borders/Color800000",
+          "button-borders/Color804020",
+          "button-borders/Color808080",
+          "button-borders/Color9800FF",
+          "button-borders/Color99FFFF",
+          "button-borders/ColorC08080",
+          "button-borders/ColorFF0000",
+          "button-borders/ColorFF00FF",
+          "button-borders/ColorFFE100",
+          "button-borders/ColorFFFF00",
+          "button-borders/ColorFFFFFF"
+        ]
+      },
+      {
+        "suite": "button-borders",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 26.058757142,
+        "caseIds": [
+          "button-borders/FontAuto",
+          "button-borders/dirty-FontAuto",
+          "button-borders/floating-FontAuto",
+          "button-borders/floating-dirty-FontAuto",
+          "button-borders/reattached-FontAuto",
+          "button-borders/FontRegular",
+          "button-borders/FontBold",
+          "button-borders/FontPartial14",
+          "button-borders/FontStyleNormal",
+          "button-borders/FontForm14",
+          "button-borders/FontBar14",
+          "button-borders/FontFormBold",
+          "button-borders/FontExplicitAuto",
+          "button-borders/CheckAutoBack",
+          "button-borders/CheckAutoText",
+          "button-borders/CheckNormalFalse",
+          "button-borders/CheckNormal14",
+          "button-borders/CheckSmall",
+          "button-borders/CheckLarge",
+          "button-borders/CheckExtra",
+          "button-borders/CheckText",
+          "button-borders/CheckSysAuto",
+          "button-borders/CheckSys14",
+          "button-borders/CheckBoldOnly",
+          "button-borders/CheckAutoDisabled",
+          "button-borders/Color000000",
+          "button-borders/Color000040",
+          "button-borders/Color000080",
+          "button-borders/dirty-Color000080",
+          "button-borders/default-Color000080",
+          "button-borders/floating-Color000080",
+          "button-borders/floating-dirty-Color000080",
+          "button-borders/reattached-Color000080",
+          "button-borders/Color0000FF",
+          "button-borders/Color008000",
+          "button-borders/Color00FF00",
+          "button-borders/Color00FFFF",
+          "button-borders/Color0A73B7",
+          "button-borders/Color202020",
+          "button-borders/Color20DD20",
+          "button-borders/Color336699",
+          "button-borders/Color345678",
+          "button-borders/Color404040",
+          "button-borders/Color5511FF",
+          "button-borders/Color555555",
+          "button-borders/Color606060",
+          "button-borders/Color747474",
+          "button-borders/Color757575",
+          "button-borders/Color777777",
+          "button-borders/Color800000",
+          "button-borders/Color804020",
+          "button-borders/Color808080",
+          "button-borders/Color9800FF",
+          "button-borders/Color99FFFF",
+          "button-borders/ColorC08080",
+          "button-borders/ColorFF0000",
+          "button-borders/ColorFF00FF",
+          "button-borders/ColorFFE100",
+          "button-borders/ColorFFFF00",
+          "button-borders/ColorFFFFFF"
+        ]
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 8.134659065,
+        "caseIds": [
+          "button-metrics/10Normal",
+          "button-metrics/10Bold",
+          "button-metrics/12Normal",
+          "button-metrics/12Bold",
+          "button-metrics/14Normal",
+          "button-metrics/14Bold",
+          "button-metrics/16Normal",
+          "button-metrics/dirty 20pt",
+          "button-metrics/dirty 16pt",
+          "button-metrics/16Bold",
+          "button-metrics/18Normal",
+          "button-metrics/20Normal",
+          "button-metrics/20Bold",
+          "button-metrics/24Normal",
+          "button-metrics/24Bold",
+          "button-metrics/28Normal",
+          "button-metrics/32Normal",
+          "button-metrics/32Bold"
+        ]
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 12.536425417000006,
+        "caseIds": [
+          "button-metrics/10Normal",
+          "button-metrics/10Bold",
+          "button-metrics/12Normal",
+          "button-metrics/12Bold",
+          "button-metrics/14Normal",
+          "button-metrics/14Bold",
+          "button-metrics/16Normal",
+          "button-metrics/dirty 20pt",
+          "button-metrics/dirty 16pt",
+          "button-metrics/16Bold",
+          "button-metrics/18Normal",
+          "button-metrics/20Normal",
+          "button-metrics/20Bold",
+          "button-metrics/24Normal",
+          "button-metrics/24Bold",
+          "button-metrics/28Normal",
+          "button-metrics/32Normal",
+          "button-metrics/32Bold"
+        ]
+      },
+      {
+        "suite": "button-captions",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 6.9617406080000075,
+        "caseIds": [
+          "button-captions/10Normal",
+          "button-captions/10Bold",
+          "button-captions/20Normal",
+          "button-captions/20Bold",
+          "button-captions/10NormalColor",
+          "button-captions/20BoldColor"
+        ]
+      },
+      {
+        "suite": "button-captions",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 7.591587662000006,
+        "caseIds": [
+          "button-captions/10Normal",
+          "button-captions/10Bold",
+          "button-captions/20Normal",
+          "button-captions/20Bold",
+          "button-captions/10NormalColor",
+          "button-captions/20BoldColor"
+        ]
+      },
+      {
+        "suite": "style-composition",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 5.611732398000007,
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ]
+      },
+      {
+        "suite": "style-composition",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 8.119668512999997,
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ]
+      },
+      {
+        "suite": "picture-composition",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 12.488707767999992,
+        "caseIds": [
+          "picture-composition/initial-borrowed-image",
+          "picture-composition/dirty-extended-clear",
+          "picture-composition/foreign-property-state-keeps-inheritance",
+          "picture-composition/dirty-extended-restored",
+          "picture-composition/invalid-metadata",
+          "picture-composition/dirty-metadata-recovers",
+          "picture-composition/detached-dirty-clear",
+          "picture-composition/external-image-shadowed-by-clear",
+          "picture-composition/detached-inherited-external-image",
+          "picture-composition/external-image-restored",
+          "picture-composition/native-zero-byte-payload",
+          "picture-composition/dirty-empty-picture-property",
+          "picture-composition/dirty-payload-image-selected",
+          "picture-composition/reattached-image",
+          "picture-composition/own-form-global-picture-and-own-resource",
+          "picture-composition/own-form-cleared-global-picture",
+          "picture-composition/own-form-global-picture-recovered",
+          "picture-composition/external-own-empty-definition",
+          "picture-composition/external-own-image-restored"
+        ]
+      },
+      {
+        "suite": "picture-composition",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 9.774096086000005,
+        "caseIds": [
+          "picture-composition/initial-borrowed-image",
+          "picture-composition/dirty-extended-clear",
+          "picture-composition/foreign-property-state-keeps-inheritance",
+          "picture-composition/dirty-extended-restored",
+          "picture-composition/invalid-metadata",
+          "picture-composition/dirty-metadata-recovers",
+          "picture-composition/detached-dirty-clear",
+          "picture-composition/external-image-shadowed-by-clear",
+          "picture-composition/detached-inherited-external-image",
+          "picture-composition/external-image-restored",
+          "picture-composition/native-zero-byte-payload",
+          "picture-composition/dirty-empty-picture-property",
+          "picture-composition/dirty-payload-image-selected",
+          "picture-composition/reattached-image",
+          "picture-composition/own-form-global-picture-and-own-resource",
+          "picture-composition/own-form-cleared-global-picture",
+          "picture-composition/own-form-global-picture-recovered",
+          "picture-composition/external-own-empty-definition",
+          "picture-composition/external-own-image-restored"
+        ]
+      },
+      {
+        "suite": "composition",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 5.856992216999992,
+        "caseIds": [
+          "composition/initial-addon",
+          "composition/dirty-customization",
+          "composition/external-patch-with-dirty-second",
+          "composition/external-addon-with-dirty-second",
+          "composition/invalid-purpose",
+          "composition/external-configuration-restored",
+          "composition/detached-dirty-addon",
+          "composition/detached-dirty-default-purpose",
+          "composition/reattached-default-purpose"
+        ]
+      },
+      {
+        "suite": "composition",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 8.400850424000003,
+        "caseIds": [
+          "composition/initial-addon",
+          "composition/dirty-customization",
+          "composition/external-patch-with-dirty-second",
+          "composition/external-addon-with-dirty-second",
+          "composition/invalid-purpose",
+          "composition/external-configuration-restored",
+          "composition/detached-dirty-addon",
+          "composition/detached-dirty-default-purpose",
+          "composition/reattached-default-purpose"
+        ]
+      },
+      {
+        "suite": "owners",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 5.086789248999994,
+        "caseIds": [
+          "owners/object-both",
+          "owners/extension-own-form",
+          "owners/extension-own-object",
+          "owners/dirty-invalid-owner",
+          "owners/foreign-owner-property",
+          "owners/dirty-own-form",
+          "owners/detached-dirty-own-form",
+          "owners/detached-invalid-owner-recovery",
+          "owners/reattached-own-form"
+        ]
+      },
+      {
+        "suite": "owners",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 7.729190874000022,
+        "caseIds": [
+          "owners/object-both",
+          "owners/extension-own-form",
+          "owners/extension-own-object",
+          "owners/dirty-invalid-owner",
+          "owners/foreign-owner-property",
+          "owners/dirty-own-form",
+          "owners/detached-dirty-own-form",
+          "owners/detached-invalid-owner-recovery",
+          "owners/reattached-own-form"
+        ]
+      },
+      {
+        "suite": "dependencies",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 8.39957821799998,
+        "caseIds": [
+          "dependencies/suite"
+        ]
+      },
+      {
+        "suite": "dependencies",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 8.533698562000005,
+        "caseIds": [
+          "dependencies/suite"
+        ]
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 4.5345282820000135,
+        "caseIds": [
+          "multiple-windows/suite"
+        ]
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 6.9363734529999785,
+        "caseIds": [
+          "multiple-windows/suite"
+        ]
+      },
+      {
+        "suite": "restore",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 9.248070397000003,
+        "caseIds": [
+          "restore/suite",
+          "restore/suite"
+        ]
+      },
+      {
+        "suite": "restore",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 9.852344088000013,
+        "caseIds": [
+          "restore/suite",
+          "restore/suite"
+        ]
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 7.123724769000022,
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ]
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "seconds": 8.57390735200001,
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ]
+      }
+    ],
+    "buttonTypeGui": [
+      {
+        "passed": true,
+        "buttonTypes": true,
+        "locale": "en",
+        "stableIdentity": true,
+        "stableDom": true,
+        "detachedUpdates": true,
+        "sourceWritesDuringViewing": false,
+        "wholeWidgetPixelParity": false,
+        "results": [
+          {
+            "label": "initial-four-button-types",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "dirty-command-bar-link-type",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "dirty-usual-button-type",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "auto-link-color-keeps-type-role",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "foreign-type-does-not-become-a-link",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              }
+            ]
+          },
+          {
+            "label": "types-restored",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "invalid-xml",
+            "lastGoodModelRetained": true
+          },
+          {
+            "label": "invalid-xml-recovers",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "detached-explicit-link-color",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(136, 68, 204)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(136, 68, 204)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "detached-type-switch",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(136, 68, 204)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "reattached-button-types",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(136, 68, 204)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "buttonTypes": true,
+        "locale": "ru",
+        "stableIdentity": true,
+        "stableDom": true,
+        "detachedUpdates": true,
+        "sourceWritesDuringViewing": false,
+        "wholeWidgetPixelParity": false,
+        "results": [
+          {
+            "label": "initial-four-button-types",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "dirty-command-bar-link-type",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "dirty-usual-button-type",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "auto-link-color-keeps-type-role",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "foreign-type-does-not-become-a-link",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              }
+            ]
+          },
+          {
+            "label": "types-restored",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "invalid-xml",
+            "lastGoodModelRetained": true
+          },
+          {
+            "label": "invalid-xml-recovers",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(204, 34, 68)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(204, 34, 68)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "detached-explicit-link-color",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(136, 68, 204)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": false,
+                "color": "rgb(136, 68, 204)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "detached-type-switch",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(136, 68, 204)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          },
+          {
+            "label": "reattached-button-types",
+            "controls": [
+              {
+                "name": "DefaultUsualButton",
+                "link": false,
+                "color": "rgb(77, 77, 77)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "DefaultHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(28, 85, 174)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "link": false,
+                "color": "rgb(136, 68, 204)",
+                "underline": false,
+                "flat": false
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "link": true,
+                "color": "rgb(136, 68, 204)",
+                "underline": true,
+                "flat": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "widthRecheck": {
+      "directory": "button-types-width-a02xwgqy",
+      "pairsPassed": 2,
+      "sameBackendVsixAndFixtures": true,
+      "sourceChange": "Only the driver adds width assertions; renderer, backend and native inputs are unchanged.",
+      "measurements": [
+        {
+          "passed": true,
+          "buttonTypes": true,
+          "locale": "en",
+          "stableIdentity": true,
+          "stableDom": true,
+          "detachedUpdates": true,
+          "sourceWritesDuringViewing": false,
+          "widthRecalculation": true,
+          "wholeWidgetPixelParity": false,
+          "results": [
+            {
+              "label": "initial-four-button-types",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "dirty-command-bar-link-type",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "dirty-usual-button-type",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "auto-link-color-keeps-type-role",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "foreign-type-does-not-become-a-link",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 72
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 72
+                }
+              ]
+            },
+            {
+              "label": "types-restored",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "invalid-xml",
+              "lastGoodModelRetained": true
+            },
+            {
+              "label": "invalid-xml-recovers",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "detached-explicit-link-color",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "detached-type-switch",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "reattached-button-types",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "buttonTypes": true,
+          "locale": "ru",
+          "stableIdentity": true,
+          "stableDom": true,
+          "detachedUpdates": true,
+          "sourceWritesDuringViewing": false,
+          "widthRecalculation": true,
+          "wholeWidgetPixelParity": false,
+          "results": [
+            {
+              "label": "initial-four-button-types",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "dirty-command-bar-link-type",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "dirty-usual-button-type",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "auto-link-color-keeps-type-role",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "foreign-type-does-not-become-a-link",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 72
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 72
+                }
+              ]
+            },
+            {
+              "label": "types-restored",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "invalid-xml",
+              "lastGoodModelRetained": true
+            },
+            {
+              "label": "invalid-xml-recovers",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(204, 34, 68)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "detached-explicit-link-color",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": false,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 48
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "detached-type-switch",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            },
+            {
+              "label": "reattached-button-types",
+              "controls": [
+                {
+                  "name": "DefaultUsualButton",
+                  "link": false,
+                  "color": "rgb(77, 77, 77)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "DefaultHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "DefaultCommandBarButton",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "DefaultCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(28, 85, 174)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                },
+                {
+                  "name": "ExplicitUsualButton",
+                  "link": false,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": false,
+                  "flat": false,
+                  "width": 61
+                },
+                {
+                  "name": "ExplicitHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 26
+                },
+                {
+                  "name": "ExplicitCommandBarButton",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 22
+                },
+                {
+                  "name": "ExplicitCommandBarHyperlink",
+                  "link": true,
+                  "color": "rgb(136, 68, 204)",
+                  "underline": true,
+                  "flat": true,
+                  "width": 46
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "observedBarWidths": {
+        "initialRaised": 48,
+        "link": 22,
+        "restoredRaised": 48
+      },
+      "receiptSha256": {
+        "en": "09b80e0e9341f8019db0a86bb98c86cb2aec63622fa4d8d56886156c6bc59eec",
+        "ru": "43c400c7bbdeb141a28bfa212863bb21e61a7970d4164ef7ba58fc92aac2e2d7"
+      }
+    },
+    "ordinaryButtonPixelRegression": [
+      {
+        "locale": "en",
+        "samples": 60,
+        "pixelsCompared": 365164,
+        "differentRgbPixels": 0,
+        "wholeFormAccepted": false
+      },
+      {
+        "locale": "ru",
+        "samples": 60,
+        "pixelsCompared": 365164,
+        "differentRgbPixels": 0,
+        "wholeFormAccepted": false
+      }
+    ],
+    "application": [
+      {
+        "passed": true,
+        "formApplication": true,
+        "locale": "en",
+        "sourceWritesDuringViewing": false,
+        "results": [
+          {
+            "sample": 0,
+            "openThroughFirstPaintMs": 421,
+            "elements": 13,
+            "retainedElements": 22,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 1,
+            "commandButtons": 5,
+            "scrollWidth": 635,
+            "scrollHeight": 686,
+            "dependencies": 13,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 1,
+            "openThroughFirstPaintMs": 170,
+            "elements": 7,
+            "retainedElements": 7,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 0,
+            "commandButtons": 0,
+            "scrollWidth": 679,
+            "scrollHeight": 490,
+            "dependencies": 12,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 2,
+            "openThroughFirstPaintMs": 211,
+            "elements": 21,
+            "retainedElements": 22,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 6,
+            "commandButtons": 7,
+            "scrollWidth": 1104,
+            "scrollHeight": 640,
+            "dependencies": 9,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 3,
+            "openThroughFirstPaintMs": 135,
+            "elements": 3,
+            "retainedElements": 3,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 0,
+            "commandButtons": 4,
+            "scrollWidth": 565,
+            "scrollHeight": 322,
+            "dependencies": 6,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          }
+        ]
+      },
+      {
+        "passed": true,
+        "formApplication": true,
+        "locale": "ru",
+        "sourceWritesDuringViewing": false,
+        "results": [
+          {
+            "sample": 0,
+            "openThroughFirstPaintMs": 329,
+            "elements": 13,
+            "retainedElements": 22,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 1,
+            "commandButtons": 5,
+            "scrollWidth": 635,
+            "scrollHeight": 686,
+            "dependencies": 13,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 1,
+            "openThroughFirstPaintMs": 184,
+            "elements": 7,
+            "retainedElements": 7,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 0,
+            "commandButtons": 0,
+            "scrollWidth": 679,
+            "scrollHeight": 490,
+            "dependencies": 12,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 2,
+            "openThroughFirstPaintMs": 222,
+            "elements": 21,
+            "retainedElements": 22,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 6,
+            "commandButtons": 7,
+            "scrollWidth": 1104,
+            "scrollHeight": 640,
+            "dependencies": 9,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          },
+          {
+            "sample": 3,
+            "openThroughFirstPaintMs": 110,
+            "elements": 3,
+            "retainedElements": 3,
+            "unsupported": 0,
+            "pictures": 0,
+            "incompleteFields": 0,
+            "commandButtons": 4,
+            "scrollWidth": 535,
+            "scrollHeight": 322,
+            "dependencies": 6,
+            "assets": 0,
+            "compositionDiagnostics": 0,
+            "appearanceDiagnostics": []
+          }
+        ]
+      }
+    ],
+    "wholeLinkWidgetsAccepted": false
+  },
+  "preparationNotes": [
+    "F10 did not open the menu. Alt then Right, Right, Down, Return opened Configuration/Open configuration; the main X11 capture excludes popup menus.",
+    "Clippy reported visit at 106 lines. Color-role selection was extracted into a small function; no lint was suppressed and all checks then passed.",
+    "Automatic permission review timed out before one cargo-test invocation and before adding width assertions. Their permitted retries completed; no check remains blocked."
+  ],
+  "artifactLocations": {
+    "nativePlayground": "native-button-types-jc2a16bu",
+    "installedBatch": "form-batch-r4Lvid",
+    "preFixGui": "button-types-before-sz02gmd_",
+    "widthRecheck": "button-types-width-a02xwgqy",
+    "relativeTo": "<eska-root>/../eska-playground"
+  },
+  "remaining": [
+    "Hyperlink glyph rasterization/geometry and complete widget/form pixels.",
+    "Other font/style/parent/state/image/menu combinations and precise Auto behavior.",
+    "Windows/Remote physical profiles, DPI, platform 8.5."
+  ]
+}

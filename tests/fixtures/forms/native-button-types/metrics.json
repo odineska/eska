@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "reference": "Configurator managed form preview; actual source only, no modules/events/actions",
+  "noBslModulesOrHandlers": true,
+  "fullProfileAccepted": false,
+  "files": [
+    {
+      "path": "source/CommonForms/ProbeButtons/Ext/Form.xml",
+      "sha256": "6fb3e0d82997d3367ad3230974ae76eb60ff2e06120b2d7d24c4d5cc78d5af04",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "source/CommonForms/ProbeButtons.xml",
+      "sha256": "3911da75252f35eaa40147b406740ab2e7bd8a608c8a06e6d00a316dd0d2f4f3",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "source/Configuration.xml",
+      "sha256": "25fb7c5c4912ddfc14b53f74c47b8b92fbc4e14b35152c72abc3457804c04f00",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "source/Languages/Русский.xml",
+      "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048",
+      "nativeRoundTrip": true
+    }
+  ],
+  "controls": [
+    {
+      "name": "DefaultUsualButton",
+      "id": 11,
+      "type": "UsualButton",
+      "hyperlink": false,
+      "foreground": {
+        "kind": "role",
+        "value": "ButtonTextColor"
+      },
+      "nativeRgb": "#4d4d4d",
+      "underline": false,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "DefaultHyperlink",
+      "id": 21,
+      "type": "Hyperlink",
+      "hyperlink": true,
+      "foreground": {
+        "kind": "role",
+        "value": "HyperlinkTextColor"
+      },
+      "nativeRgb": "#1c55ae",
+      "underline": true,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "DefaultCommandBarButton",
+      "id": 51,
+      "type": "CommandBarButton",
+      "hyperlink": false,
+      "foreground": {
+        "kind": "role",
+        "value": "ButtonTextColor"
+      },
+      "nativeRgb": "#4d4d4d",
+      "underline": false,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "DefaultCommandBarHyperlink",
+      "id": 61,
+      "type": "CommandBarHyperlink",
+      "hyperlink": true,
+      "foreground": {
+        "kind": "role",
+        "value": "HyperlinkTextColor"
+      },
+      "nativeRgb": "#1c55ae",
+      "underline": true,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "ExplicitUsualButton",
+      "id": 111,
+      "type": "UsualButton",
+      "hyperlink": false,
+      "foreground": {
+        "kind": "rgb",
+        "value": "#cc2244"
+      },
+      "nativeRgb": "#cc2244",
+      "underline": false,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "ExplicitHyperlink",
+      "id": 121,
+      "type": "Hyperlink",
+      "hyperlink": true,
+      "foreground": {
+        "kind": "rgb",
+        "value": "#cc2244"
+      },
+      "nativeRgb": "#cc2244",
+      "underline": true,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "ExplicitCommandBarButton",
+      "id": 151,
+      "type": "CommandBarButton",
+      "hyperlink": false,
+      "foreground": {
+        "kind": "rgb",
+        "value": "#cc2244"
+      },
+      "nativeRgb": "#cc2244",
+      "underline": false,
+      "nativeWidgetPixelsAccepted": false
+    },
+    {
+      "name": "ExplicitCommandBarHyperlink",
+      "id": 161,
+      "type": "CommandBarHyperlink",
+      "hyperlink": true,
+      "foreground": {
+        "kind": "rgb",
+        "value": "#cc2244"
+      },
+      "nativeRgb": "#cc2244",
+      "underline": true,
+      "nativeWidgetPixelsAccepted": false
+    }
+  ],
+  "screenshot": {
+    "file": "buttons-form-editor.png",
+    "sha256": "da7bb57a7b531920df6c069719e47dd0622aec6a2a1a1e820d6687ae5b8394d9",
+    "width": 2560,
+    "height": 1019,
+    "clientPhysicalOrigin": [
+      0,
+      61
+    ]
+  },
+  "nativeObservations": [
+    "UsualButton and CommandBarButton are raised text buttons in their corresponding containers.",
+    "Hyperlink and CommandBarHyperlink have no raised border and are underlined.",
+    "Default link ink/underline RGB is #1c55ae. Explicit #cc2244 is honored by both link kinds."
+  ],
+  "limits": [
+    "Default color, explicit color and type appearance only; whole glyph/widget pixel acceptance remains open.",
+    "Disabled, hover, focus, check, pictures, other fonts, sizes, Windows and DPI matrices remain open."
+  ]
+}

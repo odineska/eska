@@ -50,6 +50,63 @@ fn input_value_and_title_use_distinct_style_roles_without_losing_overrides() {
 }
 
 #[test]
+fn native_button_types_keep_link_roles_and_explicit_color() {
+    let document = parse(
+        "button-types",
+        include_str!("../../../../../../tests/fixtures/forms/native-button-types/source/CommonForms/ProbeButtons/Ext/Form.xml").into(),
+    ).unwrap();
+    let form = compose(&document, &[]);
+    assert!(form.diagnostics.is_empty());
+    let view = present(&form, &[document], &[]);
+    assert!(view.diagnostics.is_empty());
+    let expected: serde_json::Value = serde_json::from_str(include_str!(
+        "../../../../../../tests/fixtures/forms/native-button-types/metrics.json"
+    ))
+    .unwrap();
+    let controls = expected["controls"].as_array().unwrap();
+    assert_eq!(controls.len(), 8);
+    for control in controls {
+        let id = control["id"].as_i64().unwrap();
+        let item = view
+            .elements
+            .iter()
+            .find(|item| item.identity.key == super::super::ElementKey::Xml(id))
+            .unwrap();
+        assert_eq!(
+            serde_json::to_value(&item.foreground).unwrap(),
+            control["foreground"],
+            "{}",
+            control["name"]
+        );
+        assert_eq!(item.font.points, 10.0);
+        assert!(item.displayed);
+    }
+}
+
+#[test]
+fn button_auto_color_uses_its_type_without_accepting_foreign_namespace_type() {
+    for (kind, role) in [
+        ("<Type>Hyperlink</Type>", "HyperlinkTextColor"),
+        ("<Type>CommandBarHyperlink</Type>", "HyperlinkTextColor"),
+        ("<Type>UsualButton</Type>", "ButtonTextColor"),
+        ("<Type>CommandBarButton</Type>", "ButtonTextColor"),
+        (
+            "<other:Type xmlns:other=\"urn:other\">Hyperlink</other:Type>",
+            "ButtonTextColor",
+        ),
+        ("", "ButtonTextColor"),
+    ] {
+        let document = parse("auto-link", format!("<Form xmlns=\"{}\"><ChildItems><Button name=\"Control\" id=\"1\">{kind}<TextColor>Auto</TextColor></Button></ChildItems></Form>", super::super::FORM_NAMESPACE)).unwrap();
+        let view = present(&compose(&document, &[]), &[document], &[]);
+        assert_eq!(
+            view.elements[1].foreground,
+            ResolvedColor::Role(role.into()),
+            "{kind}"
+        );
+    }
+}
+
+#[test]
 fn native_groups_keep_title_styles_and_command_area_visibility() {
     let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("../../tests/fixtures/forms/native-groups");

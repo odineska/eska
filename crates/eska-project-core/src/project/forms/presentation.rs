@@ -180,15 +180,7 @@ fn visit(
         scope.title_property(element, "TitleFont"),
         title_font_role(element),
     );
-    let foreground = appearance.color(
-        property(element, "TextColor"),
-        match element.kind {
-            Some(ElementKind::Button) => "ButtonTextColor",
-            Some(ElementKind::InputField) => "FieldTextColor",
-            Some(ElementKind::LabelDecoration | ElementKind::PictureDecoration) => "TextColor",
-            _ => "FormTextColor",
-        },
-    );
+    let foreground = appearance.color(property(element, "TextColor"), text_color_role(element));
     let background = appearance.color(
         property(element, "BackColor"),
         if element.kind == Some(ElementKind::Button) {
@@ -259,6 +251,23 @@ fn visit(
             appearance,
             output,
         );
+    }
+}
+
+fn text_color_role(element: &EffectiveElement) -> &'static str {
+    match element.kind {
+        Some(ElementKind::Button)
+            if matches!(
+                scalar(&element.properties, "Type"),
+                Some("Hyperlink" | "CommandBarHyperlink")
+            ) =>
+        {
+            "HyperlinkTextColor"
+        }
+        Some(ElementKind::Button) => "ButtonTextColor",
+        Some(ElementKind::InputField) => "FieldTextColor",
+        Some(ElementKind::LabelDecoration | ElementKind::PictureDecoration) => "TextColor",
+        _ => "FormTextColor",
     }
 }
 
