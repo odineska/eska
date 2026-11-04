@@ -368,7 +368,8 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "buttons.link-types"
+        "buttons.link-types",
+        "buttons.link-captions"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3750,8 +3751,8 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t158-native-button-types-linux.json",
-      "remaining": "Full hyperlink glyph/widget pixels, all fonts, states, menus/images, Windows and DPI.",
-      "nextAction": "Calibrate native hyperlink text and full widget bounds without weakening ordinary-button comparisons."
+      "remaining": "Full hyperlink widgets and layout, other fonts, states, menus/images, Windows and DPI. Recorded regular 10 pt caption bitmaps are accepted separately in buttons.link-captions.",
+      "nextAction": "Measure native hyperlink widget bounds and placement while retaining the accepted caption raster."
     },
     {
       "id": "resources.pictures",
@@ -4607,6 +4608,92 @@
       "remaining": "Native Windows build/fonts/DPI and all relevant Windows matrices.",
       "nextAction": "Use docs/measurements/form-preview-windows-handoff.md on the Windows stand.",
       "decision": "docs/roadmap/30-managed-form-preview.md"
+    },
+    {
+      "id": "buttons.link-captions",
+      "milestone": "T158",
+      "kinds": [
+        "Button"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "behavior.session",
+        "behavior.window"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete caption bitmaps only for four recorded regular 10 pt hyperlinks on white: LCD, underline and blank rows. Five screenshot states per IDE locale; no whole-widget geometry acceptance.",
+      "fixtures": [
+        "tests/fixtures/forms/native-button-types"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "button-links",
+        "path": "test/form-button-links-host.cjs",
+        "caseIds": [
+          "initial-four-button-types",
+          "main-native",
+          "dirty-command-bar-link-type",
+          "dirty-usual-button-type",
+          "auto-link-color-keeps-type-role",
+          "main-dirty-auto",
+          "foreign-type-does-not-become-a-link",
+          "types-restored",
+          "invalid-xml",
+          "invalid-xml-recovers",
+          "floating-native",
+          "floating-auto-link-color",
+          "floating-dirty-auto",
+          "detached-explicit-link-color",
+          "detached-type-switch",
+          "reattached-button-types",
+          "reattached-native-source",
+          "reattached-native",
+          "uncalibrated-font",
+          "links-with-picture",
+          "disabled-links-use-browser",
+          "calibrated-font-restored"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-native-link-captions-linux.json",
+          "sha256": "cd95bbc55fb12541bebd04549bf03a1a848b860587b10ae28b5833402007c3d7",
+          "assertions": [
+            {
+              "pointer": "/acceptance/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/pixelsCompared",
+              "equals": 10500
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/pixelsCompared",
+              "equals": 10500
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/wholeLinkWidgetsAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-native-link-captions-linux.json",
+      "remaining": "Whole-link bounds/layout, other fonts, states, pictures/menus, nonwhite parents, DPI and Windows.",
+      "nextAction": "Measure full link widgets and mixed-group placement without altering the accepted caption raster or comparison policy."
     }
   ],
   "historicalReports": [
@@ -4667,7 +4754,8 @@
     "docs/measurements/t155-native-style-layers-linux.json",
     "docs/measurements/t155-native-picture-layers-linux.json",
     "docs/measurements/t152-property-candidates-linux.json",
-    "docs/measurements/t158-native-button-types-linux.json"
+    "docs/measurements/t158-native-button-types-linux.json",
+    "docs/measurements/t158-native-link-captions-linux.json"
   ],
   "supersessions": [
     {

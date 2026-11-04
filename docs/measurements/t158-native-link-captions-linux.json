@@ -1,0 +1,2583 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "scope": "Complete regular 10 pt text-only hyperlink caption bitmaps: LCD coverage, underline and blank rows. Full link widgets, placement and form layout are not accepted.",
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "fullProfileAccepted": false,
+  "wholeLinkWidgetsAccepted": false,
+  "noBslModulesOrHandlers": true,
+  "nativeReference": {
+    "fixture": "tests/fixtures/forms/native-button-types/link-pixels.json",
+    "sha256": "115528ee90d03ec36361b0a8d7777f1a971c5ffac39f955ac64b012455280b03",
+    "sourceMetadataSha256": "a09b9e4624aec9159b54862d2b2f72b7e7acdb948a908d608040d0ef76f6ae82",
+    "screenshotSha256": "da7bb57a7b531920df6c069719e47dd0622aec6a2a1a1e820d6687ae5b8394d9",
+    "captionCount": 4,
+    "captionPixels": 2100,
+    "font": "Liberation Sans 2.1.5 regular 10 pt, native sys:DefaultGUIFont",
+    "reusesNativeScreenshotFrom": "docs/measurements/t158-native-button-types-linux.json",
+    "notAnAdditionalIndependentNativeCorpus": true
+  },
+  "implementation": {
+    "renderer": "Solid NativeLabel with existing FreeType LCD WASM runtime",
+    "underline": "One foreground row at native baseline over the hinted advance; blank terminal column retained.",
+    "calibrationGate": "Regular 10 pt, enabled, no picture/menu/dropdown; NativeLabel also rejects italic/underline/strikeout, other faces and unsupported shaping. Other combinations retain browser text and the existing localized approximation notice.",
+    "ordinaryCaptionPathUnchanged": true,
+    "freetypeWasmSha256": "d6a6b99e866f54b369afc9e883f19e3ec36cee462f161953acd465deb63566b8",
+    "noNewDependenciesOrFonts": true
+  },
+  "beforeFix": {
+    "scope": "Native caption unit hash failed without the underline raster path; this is not an installed-VSIX pixel comparison.",
+    "testPassed": false,
+    "log": "native-button-types-jc2a16bu/link-caption-before.log",
+    "logSha256": "4b3d8465bf375aa8cacd38c2e544c44f4afaad11574dc49154babc35bf39d195"
+  },
+  "checks": {
+    "node": {
+      "passed": 513,
+      "failed": 0,
+      "skipped": 11,
+      "total": 524,
+      "log": "native-button-types-jc2a16bu/link-caption-node-final.log",
+      "logSha256": "d09b68033d4dc70850d084af86fef3efb844508b1e134432ce9db2c5ea5da007"
+    },
+    "nativeBitmapUnit": {
+      "passed": 1,
+      "pixelsCompared": 2100,
+      "differentRgbPixels": 0
+    },
+    "backend": {
+      "codeChangedInThisSlice": false,
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "fullChecksReuse": "docs/measurements/t158-native-button-types-linux.json",
+      "cargoPassed": 1520,
+      "cargoFailed": 0,
+      "cargoIgnored": 19,
+      "note": "The Rust source and built backend are unchanged; the prior complete fmt/check/clippy/test/build proof applies to this exact backend."
+    }
+  },
+  "acceptance": {
+    "passed": true,
+    "finalDistinctPairsPassed": 8,
+    "publishedCasesOnFinalRuntime": 104,
+    "sameFrozenArtifactsForDriverRecheck": true,
+    "vsixSha256": "0bbdb7e9ba2ddf3c96bd0e4750cdcfad21414ee996fb0e9e496bb979e1a5d256",
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "4b857cfbc35fb2b3c03113a639375c7ebaf805ae2804a07cf2a1ce2205757285",
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "cases": 22,
+        "pixelsCompared": 10500,
+        "differentRgbPixels": 0,
+        "samples": [
+          {
+            "label": "main-native",
+            "links": [
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 315,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 321,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 349,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 355,
+                  "width": 45,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 110,
+                  "y": 384,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 390,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 98,
+                  "y": 418,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 424,
+                  "width": 45,
+                  "height": 15
+                }
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "regions": [
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "c65e290eee8b73781525d5abb38f56ecf2ebe2bded9848c24e06bfe2a93b62ea"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "877a785ca66f6f41dcbff9d5d0c665bd62622760c27db2a941fca9eaec01c77c"
+              }
+            ],
+            "captureAttempts": 1,
+            "pixelsCompared": 2100,
+            "differentRgbPixels": 0,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "main-dirty-auto",
+            "links": [
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 315,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 321,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 349,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 355,
+                  "width": 45,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 384,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 390,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 418,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 424,
+                  "width": 45,
+                  "height": 15
+                }
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "regions": [
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "captureAttempts": 1,
+            "pixelsCompared": 2100,
+            "differentRgbPixels": 0,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "floating-native",
+            "links": [
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 80,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 86,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 114,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 120,
+                  "width": 45,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 110,
+                  "y": 149,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 155,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 98,
+                  "y": 183,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 189,
+                  "width": 45,
+                  "height": 15
+                }
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "regions": [
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "c65e290eee8b73781525d5abb38f56ecf2ebe2bded9848c24e06bfe2a93b62ea"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "877a785ca66f6f41dcbff9d5d0c665bd62622760c27db2a941fca9eaec01c77c"
+              }
+            ],
+            "captureAttempts": 1,
+            "pixelsCompared": 2100,
+            "differentRgbPixels": 0,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "floating-dirty-auto",
+            "links": [
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 80,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 86,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 114,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 120,
+                  "width": 45,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 149,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 155,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 183,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 189,
+                  "width": 45,
+                  "height": 15
+                }
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "regions": [
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "captureAttempts": 1,
+            "pixelsCompared": 2100,
+            "differentRgbPixels": 0,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "reattached-native",
+            "links": [
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 315,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 321,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 349,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 355,
+                  "width": 45,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 110,
+                  "y": 384,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 390,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 98,
+                  "y": 418,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 424,
+                  "width": 45,
+                  "height": 15
+                }
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "regions": [
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "c65e290eee8b73781525d5abb38f56ecf2ebe2bded9848c24e06bfe2a93b62ea"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "877a785ca66f6f41dcbff9d5d0c665bd62622760c27db2a941fca9eaec01c77c"
+              }
+            ],
+            "captureAttempts": 1,
+            "pixelsCompared": 2100,
+            "differentRgbPixels": 0,
+            "wholeWidgetAccepted": false
+          }
+        ],
+        "caseIds": [
+          "initial-four-button-types",
+          "main-native",
+          "dirty-command-bar-link-type",
+          "dirty-usual-button-type",
+          "auto-link-color-keeps-type-role",
+          "main-dirty-auto",
+          "foreign-type-does-not-become-a-link",
+          "types-restored",
+          "invalid-xml",
+          "invalid-xml-recovers",
+          "floating-native",
+          "floating-auto-link-color",
+          "floating-dirty-auto",
+          "detached-explicit-link-color",
+          "detached-type-switch",
+          "reattached-button-types",
+          "reattached-native-source",
+          "reattached-native",
+          "uncalibrated-font",
+          "links-with-picture",
+          "disabled-links-use-browser",
+          "calibrated-font-restored"
+        ],
+        "stableIdentity": true,
+        "stableDom": true,
+        "sourceWritesDuringViewing": false,
+        "receiptSha256": "4fd4de699281de29547662312912ce332392db2f44e2526e55467af53af63db4"
+      },
+      "ru": {
+        "passed": true,
+        "cases": 22,
+        "pixelsCompared": 10500,
+        "differentRgbPixels": 0,
+        "samples": [
+          {
+            "label": "main-native",
+            "links": [
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 315,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 321,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 349,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 355,
+                  "width": 45,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 110,
+                  "y": 384,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 390,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 98,
+                  "y": 418,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 424,
+                  "width": 45,
+                  "height": 15
+                }
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "regions": [
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "c65e290eee8b73781525d5abb38f56ecf2ebe2bded9848c24e06bfe2a93b62ea"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "877a785ca66f6f41dcbff9d5d0c665bd62622760c27db2a941fca9eaec01c77c"
+              }
+            ],
+            "captureAttempts": 1,
+            "pixelsCompared": 2100,
+            "differentRgbPixels": 0,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "main-dirty-auto",
+            "links": [
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 315,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 321,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 349,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 355,
+                  "width": 45,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 384,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 390,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 418,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 424,
+                  "width": 45,
+                  "height": 15
+                }
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "regions": [
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "captureAttempts": 1,
+            "pixelsCompared": 2100,
+            "differentRgbPixels": 0,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "floating-native",
+            "links": [
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 80,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 86,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 114,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 120,
+                  "width": 45,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 110,
+                  "y": 149,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 155,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 98,
+                  "y": 183,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 189,
+                  "width": 45,
+                  "height": 15
+                }
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "regions": [
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "c65e290eee8b73781525d5abb38f56ecf2ebe2bded9848c24e06bfe2a93b62ea"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "877a785ca66f6f41dcbff9d5d0c665bd62622760c27db2a941fca9eaec01c77c"
+              }
+            ],
+            "captureAttempts": 1,
+            "pixelsCompared": 2100,
+            "differentRgbPixels": 0,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "floating-dirty-auto",
+            "links": [
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 80,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 86,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 114,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 120,
+                  "width": 45,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 149,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 155,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 183,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 189,
+                  "width": 45,
+                  "height": 15
+                }
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "regions": [
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "captureAttempts": 1,
+            "pixelsCompared": 2100,
+            "differentRgbPixels": 0,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "reattached-native",
+            "links": [
+              {
+                "text": "Link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 110,
+                  "y": 315,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 321,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(28, 85, 174)",
+                "button": {
+                  "x": 98,
+                  "y": 349,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 355,
+                  "width": 45,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 110,
+                  "y": 384,
+                  "width": 26,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 111,
+                  "y": 390,
+                  "width": 25,
+                  "height": 15
+                }
+              },
+              {
+                "text": "Bar link",
+                "color": "rgb(204, 34, 68)",
+                "button": {
+                  "x": 98,
+                  "y": 418,
+                  "width": 46,
+                  "height": 26
+                },
+                "canvas": {
+                  "x": 99,
+                  "y": 424,
+                  "width": 45,
+                  "height": 15
+                }
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "regions": [
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "text": "Link",
+                "pixels": 375,
+                "sha": "c65e290eee8b73781525d5abb38f56ecf2ebe2bded9848c24e06bfe2a93b62ea"
+              },
+              {
+                "text": "Bar link",
+                "pixels": 675,
+                "sha": "877a785ca66f6f41dcbff9d5d0c665bd62622760c27db2a941fca9eaec01c77c"
+              }
+            ],
+            "captureAttempts": 1,
+            "pixelsCompared": 2100,
+            "differentRgbPixels": 0,
+            "wholeWidgetAccepted": false
+          }
+        ],
+        "caseIds": [
+          "initial-four-button-types",
+          "main-native",
+          "dirty-command-bar-link-type",
+          "dirty-usual-button-type",
+          "auto-link-color-keeps-type-role",
+          "main-dirty-auto",
+          "foreign-type-does-not-become-a-link",
+          "types-restored",
+          "invalid-xml",
+          "invalid-xml-recovers",
+          "floating-native",
+          "floating-auto-link-color",
+          "floating-dirty-auto",
+          "detached-explicit-link-color",
+          "detached-type-switch",
+          "reattached-button-types",
+          "reattached-native-source",
+          "reattached-native",
+          "uncalibrated-font",
+          "links-with-picture",
+          "disabled-links-use-browser",
+          "calibrated-font-restored"
+        ],
+        "stableIdentity": true,
+        "stableDom": true,
+        "sourceWritesDuringViewing": false,
+        "receiptSha256": "948b5721b17d607cfbfdecedc74a12020c8f61cc373c3bfd9a7374f95496eed3"
+      }
+    },
+    "batch": {
+      "directory": "form-batch-Dv5jRM",
+      "originalBatchPassed": false,
+      "originalPassedPairs": 6,
+      "originalFailedPairs": 2,
+      "builds": 1,
+      "packages": 1,
+      "batchSha256": "b8ecb31273dd3a0f29fc60ce626037abdae61b7923288a86252dabeaada0fe96",
+      "inputsSha256": "d4f2ac1e47aa5ff4149b0c6c7ad93fa2206e2a033f79762da76a09f73bad9393",
+      "runs": [
+        {
+          "suite": "button-links",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 1,
+          "signal": null,
+          "seconds": 14.899757502,
+          "passed": false,
+          "inputsStable": true,
+          "classification": "unclassified",
+          "log": "button-links-en/driver.log",
+          "receipt": "button-links-en/receipt.json",
+          "caseIds": [],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 826.129684,
+            "runtimeVerificationMs": 325.0061099999999,
+            "preHostMs": 1162.0047719999998,
+            "cleanupMs": 31.370976000000155,
+            "totalMs": 14738.5123
+          }
+        },
+        {
+          "suite": "button-links",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 1,
+          "signal": null,
+          "seconds": 20.304496209999996,
+          "passed": false,
+          "inputsStable": true,
+          "classification": "unclassified",
+          "log": "button-links-ru/driver.log",
+          "receipt": "button-links-ru/receipt.json",
+          "caseIds": [],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 3514.1255889999998,
+            "runtimeVerificationMs": 334.7231310000002,
+            "preHostMs": 3870.561883,
+            "cleanupMs": 35.86238299999968,
+            "totalMs": 20149.022619
+          }
+        },
+        {
+          "suite": "button-types",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 5.5509386930000035,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "button-types-en/driver.log",
+          "receipt": "button-types-en/receipt.json",
+          "caseIds": [
+            "button-types/initial-four-button-types",
+            "button-types/dirty-command-bar-link-type",
+            "button-types/dirty-usual-button-type",
+            "button-types/auto-link-color-keeps-type-role",
+            "button-types/foreign-type-does-not-become-a-link",
+            "button-types/types-restored",
+            "button-types/invalid-xml",
+            "button-types/invalid-xml-recovers",
+            "button-types/detached-explicit-link-color",
+            "button-types/detached-type-switch",
+            "button-types/reattached-button-types"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 841.3947350000001,
+            "runtimeVerificationMs": 328.4881859999999,
+            "preHostMs": 1180.1359830000001,
+            "cleanupMs": 30.82651900000019,
+            "totalMs": 5416.5908070000005
+          }
+        },
+        {
+          "suite": "button-types",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 7.940153056000002,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "button-types-ru/driver.log",
+          "receipt": "button-types-ru/receipt.json",
+          "caseIds": [
+            "button-types/initial-four-button-types",
+            "button-types/dirty-command-bar-link-type",
+            "button-types/dirty-usual-button-type",
+            "button-types/auto-link-color-keeps-type-role",
+            "button-types/foreign-type-does-not-become-a-link",
+            "button-types/types-restored",
+            "button-types/invalid-xml",
+            "button-types/invalid-xml-recovers",
+            "button-types/detached-explicit-link-color",
+            "button-types/detached-type-switch",
+            "button-types/reattached-button-types"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 798.160576,
+            "runtimeVerificationMs": 332.69121900000005,
+            "preHostMs": 1155.2894939999999,
+            "cleanupMs": 33.30609600000025,
+            "totalMs": 7771.743785
+          }
+        },
+        {
+          "suite": "states",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 7.171603419000006,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "states-en/driver.log",
+          "receipt": "states-en/receipt.json",
+          "caseIds": [
+            "states/InputHidden",
+            "states/InputDisabled",
+            "states/InputReadOnly",
+            "states/InputColors",
+            "states/InputFont",
+            "states/InputNumber",
+            "states/InputDate",
+            "states/InputDateTime",
+            "states/InputTime",
+            "states/Font10Bold",
+            "states/Font12Normal",
+            "states/Font14Normal",
+            "states/Font16Normal",
+            "states/Font14Number",
+            "states/TableHidden"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 903.078022,
+            "runtimeVerificationMs": 348.8803929999999,
+            "preHostMs": 1261.3707299999999,
+            "cleanupMs": 36.10784100000001,
+            "totalMs": 7054.916872000001
+          }
+        },
+        {
+          "suite": "states",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 9.459530912000002,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "states-ru/driver.log",
+          "receipt": "states-ru/receipt.json",
+          "caseIds": [
+            "states/InputHidden",
+            "states/InputDisabled",
+            "states/InputReadOnly",
+            "states/InputColors",
+            "states/InputFont",
+            "states/InputNumber",
+            "states/InputDate",
+            "states/InputDateTime",
+            "states/InputTime",
+            "states/Font10Bold",
+            "states/Font12Normal",
+            "states/Font14Normal",
+            "states/Font16Normal",
+            "states/Font14Number",
+            "states/TableHidden"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 675.785833,
+            "runtimeVerificationMs": 321.9191159999999,
+            "preHostMs": 1019.354904,
+            "cleanupMs": 42.243743999999424,
+            "totalMs": 9343.415156
+          }
+        },
+        {
+          "suite": "application",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 14.871258019999994,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "application-en/driver.log",
+          "receipt": "application-en/receipt.json",
+          "caseIds": [
+            "application/0",
+            "application/1",
+            "application/2",
+            "application/3"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 11104.323337,
+            "runtimeVerificationMs": 366.86364800000047,
+            "preHostMs": 11474.568976999999,
+            "cleanupMs": 30.5741450000005,
+            "totalMs": 14717.518343
+          }
+        },
+        {
+          "suite": "application",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 7.331932499000002,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "application-ru/driver.log",
+          "receipt": "application-ru/receipt.json",
+          "caseIds": [
+            "application/0",
+            "application/1",
+            "application/2",
+            "application/3"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 1003.1803540000001,
+            "runtimeVerificationMs": 333.41009299999996,
+            "preHostMs": 1355.78624,
+            "cleanupMs": 35.43121699999938,
+            "totalMs": 7186.052596
+          }
+        }
+      ]
+    },
+    "driverCorrection": {
+      "directory": "button-link-pixels-recheck-qv2qtgmm",
+      "reason": "The new image scenario retained Representation=Text, so the renderer correctly hid its image. Only the driver changed to Representation=Auto; no production/runtime/backend/native source changes.",
+      "failedTest": "link pictures keep browser text layout",
+      "pixelComparisonsWereNotRetriedToHideMismatch": true,
+      "result": {
+        "schemaVersion": 1,
+        "passed": true,
+        "sameFrozenBatch": "form-batch-Dv5jRM",
+        "vsixSha256": "0bbdb7e9ba2ddf3c96bd0e4750cdcfad21414ee996fb0e9e496bb979e1a5d256",
+        "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+        "changedDriverFiles": [
+          {
+            "path": "test/form-button-types-host.cjs",
+            "sha256": "b0cf75433a0bc709499f466a6415fb32c5d823e561765935c73724815a87318d"
+          }
+        ],
+        "results": [
+          {
+            "locale": "en",
+            "exitCode": 0,
+            "passed": true,
+            "seconds": 7.038064114996814,
+            "receiptSha256": "4fd4de699281de29547662312912ce332392db2f44e2526e55467af53af63db4"
+          },
+          {
+            "locale": "ru",
+            "exitCode": 0,
+            "passed": true,
+            "seconds": 9.792109589994652,
+            "receiptSha256": "948b5721b17d607cfbfdecedc74a12020c8f61cc373c3bfd9a7374f95496eed3"
+          }
+        ]
+      },
+      "resultSha256": "838987c7f52466de8eb2008343a3d6333589f22f4c41a06f2614796a560bb9e6"
+    },
+    "candidateRegression": {
+      "directory": "form-batch-G12vwR",
+      "scope": "Before adding conservative picture/menu/disabled calibration gates; same LCD glyph implementation, ordinary-caption and underline implementations. These are recorded against the earlier candidate, not presented as runs of the final VSIX.",
+      "passed": true,
+      "pairsPassed": 24,
+      "pairsFailed": 0,
+      "publishedCases": 534,
+      "seconds": 322.526,
+      "vsixSha256": "8210d7df38a6e08fcca3bcfe9c4d24249f6bf30604504838105093ba27c0da9d",
+      "batchSha256": "045ac989ec9e9c295833b79621997ec6e0da3560ff9c7218e6b81ff94ebf3568",
+      "inputsSha256": "386508903473f057db74a213499d7303430035bfca22f249fb220746a1e42bea",
+      "runs": [
+        {
+          "suite": "button-links",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 6.769258637000001,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "button-links-en/driver.log",
+          "receipt": "button-links-en/receipt.json",
+          "caseIds": [
+            "button-links/initial-four-button-types",
+            "button-links/main-native",
+            "button-links/dirty-command-bar-link-type",
+            "button-links/dirty-usual-button-type",
+            "button-links/auto-link-color-keeps-type-role",
+            "button-links/main-dirty-auto",
+            "button-links/foreign-type-does-not-become-a-link",
+            "button-links/types-restored",
+            "button-links/invalid-xml",
+            "button-links/invalid-xml-recovers",
+            "button-links/floating-native",
+            "button-links/floating-auto-link-color",
+            "button-links/floating-dirty-auto",
+            "button-links/detached-explicit-link-color",
+            "button-links/detached-type-switch",
+            "button-links/reattached-button-types",
+            "button-links/reattached-native-source",
+            "button-links/reattached-native",
+            "button-links/uncalibrated-font",
+            "button-links/calibrated-font-restored"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 909.391718,
+            "runtimeVerificationMs": 349.12106000000006,
+            "preHostMs": 1267.950216,
+            "cleanupMs": 33.352554999999484,
+            "totalMs": 6652.732674
+          }
+        },
+        {
+          "suite": "button-links",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 12.688481807000002,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "button-links-ru/driver.log",
+          "receipt": "button-links-ru/receipt.json",
+          "caseIds": [
+            "button-links/initial-four-button-types",
+            "button-links/main-native",
+            "button-links/dirty-command-bar-link-type",
+            "button-links/dirty-usual-button-type",
+            "button-links/auto-link-color-keeps-type-role",
+            "button-links/main-dirty-auto",
+            "button-links/foreign-type-does-not-become-a-link",
+            "button-links/types-restored",
+            "button-links/invalid-xml",
+            "button-links/invalid-xml-recovers",
+            "button-links/floating-native",
+            "button-links/floating-auto-link-color",
+            "button-links/floating-dirty-auto",
+            "button-links/detached-explicit-link-color",
+            "button-links/detached-type-switch",
+            "button-links/reattached-button-types",
+            "button-links/reattached-native-source",
+            "button-links/reattached-native",
+            "button-links/uncalibrated-font",
+            "button-links/calibrated-font-restored"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 3951.342838,
+            "runtimeVerificationMs": 355.2956299999996,
+            "preHostMs": 4326.782884,
+            "cleanupMs": 39.60008300000118,
+            "totalMs": 12541.522990000001
+          }
+        },
+        {
+          "suite": "button-types",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 8.60393404,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "button-types-en/driver.log",
+          "receipt": "button-types-en/receipt.json",
+          "caseIds": [
+            "button-types/initial-four-button-types",
+            "button-types/dirty-command-bar-link-type",
+            "button-types/dirty-usual-button-type",
+            "button-types/auto-link-color-keeps-type-role",
+            "button-types/foreign-type-does-not-become-a-link",
+            "button-types/types-restored",
+            "button-types/invalid-xml",
+            "button-types/invalid-xml-recovers",
+            "button-types/detached-explicit-link-color",
+            "button-types/detached-type-switch",
+            "button-types/reattached-button-types"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 3993.719791,
+            "runtimeVerificationMs": 312.05826199999956,
+            "preHostMs": 4315.442367,
+            "cleanupMs": 36.309173999999985,
+            "totalMs": 8467.715074999998
+          }
+        },
+        {
+          "suite": "button-types",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 11.914339846999999,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "button-types-ru/driver.log",
+          "receipt": "button-types-ru/receipt.json",
+          "caseIds": [
+            "button-types/initial-four-button-types",
+            "button-types/dirty-command-bar-link-type",
+            "button-types/dirty-usual-button-type",
+            "button-types/auto-link-color-keeps-type-role",
+            "button-types/foreign-type-does-not-become-a-link",
+            "button-types/types-restored",
+            "button-types/invalid-xml",
+            "button-types/invalid-xml-recovers",
+            "button-types/detached-explicit-link-color",
+            "button-types/detached-type-switch",
+            "button-types/reattached-button-types"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 4801.996137,
+            "runtimeVerificationMs": 329.59610000000066,
+            "preHostMs": 5151.870612,
+            "cleanupMs": 29.562520999999833,
+            "totalMs": 11769.138651
+          }
+        },
+        {
+          "suite": "button-borders",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 28.548287795999997,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "button-borders-en/driver.log",
+          "receipt": "button-borders-en/receipt.json",
+          "caseIds": [
+            "button-borders/FontAuto",
+            "button-borders/dirty-FontAuto",
+            "button-borders/floating-FontAuto",
+            "button-borders/floating-dirty-FontAuto",
+            "button-borders/reattached-FontAuto",
+            "button-borders/FontRegular",
+            "button-borders/FontBold",
+            "button-borders/FontPartial14",
+            "button-borders/FontStyleNormal",
+            "button-borders/FontForm14",
+            "button-borders/FontBar14",
+            "button-borders/FontFormBold",
+            "button-borders/FontExplicitAuto",
+            "button-borders/CheckAutoBack",
+            "button-borders/CheckAutoText",
+            "button-borders/CheckNormalFalse",
+            "button-borders/CheckNormal14",
+            "button-borders/CheckSmall",
+            "button-borders/CheckLarge",
+            "button-borders/CheckExtra",
+            "button-borders/CheckText",
+            "button-borders/CheckSysAuto",
+            "button-borders/CheckSys14",
+            "button-borders/CheckBoldOnly",
+            "button-borders/CheckAutoDisabled",
+            "button-borders/Color000000",
+            "button-borders/Color000040",
+            "button-borders/Color000080",
+            "button-borders/dirty-Color000080",
+            "button-borders/default-Color000080",
+            "button-borders/floating-Color000080",
+            "button-borders/floating-dirty-Color000080",
+            "button-borders/reattached-Color000080",
+            "button-borders/Color0000FF",
+            "button-borders/Color008000",
+            "button-borders/Color00FF00",
+            "button-borders/Color00FFFF",
+            "button-borders/Color0A73B7",
+            "button-borders/Color202020",
+            "button-borders/Color20DD20",
+            "button-borders/Color336699",
+            "button-borders/Color345678",
+            "button-borders/Color404040",
+            "button-borders/Color5511FF",
+            "button-borders/Color555555",
+            "button-borders/Color606060",
+            "button-borders/Color747474",
+            "button-borders/Color757575",
+            "button-borders/Color777777",
+            "button-borders/Color800000",
+            "button-borders/Color804020",
+            "button-borders/Color808080",
+            "button-borders/Color9800FF",
+            "button-borders/Color99FFFF",
+            "button-borders/ColorC08080",
+            "button-borders/ColorFF0000",
+            "button-borders/ColorFF00FF",
+            "button-borders/ColorFFE100",
+            "button-borders/ColorFFFF00",
+            "button-borders/ColorFFFFFF"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 5982.128996,
+            "runtimeVerificationMs": 323.7315290000006,
+            "preHostMs": 6339.108164,
+            "cleanupMs": 39.93383299999914,
+            "totalMs": 28373.572788
+          }
+        },
+        {
+          "suite": "button-borders",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 38.13844718400001,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "button-borders-ru/driver.log",
+          "receipt": "button-borders-ru/receipt.json",
+          "caseIds": [
+            "button-borders/FontAuto",
+            "button-borders/dirty-FontAuto",
+            "button-borders/floating-FontAuto",
+            "button-borders/floating-dirty-FontAuto",
+            "button-borders/reattached-FontAuto",
+            "button-borders/FontRegular",
+            "button-borders/FontBold",
+            "button-borders/FontPartial14",
+            "button-borders/FontStyleNormal",
+            "button-borders/FontForm14",
+            "button-borders/FontBar14",
+            "button-borders/FontFormBold",
+            "button-borders/FontExplicitAuto",
+            "button-borders/CheckAutoBack",
+            "button-borders/CheckAutoText",
+            "button-borders/CheckNormalFalse",
+            "button-borders/CheckNormal14",
+            "button-borders/CheckSmall",
+            "button-borders/CheckLarge",
+            "button-borders/CheckExtra",
+            "button-borders/CheckText",
+            "button-borders/CheckSysAuto",
+            "button-borders/CheckSys14",
+            "button-borders/CheckBoldOnly",
+            "button-borders/CheckAutoDisabled",
+            "button-borders/Color000000",
+            "button-borders/Color000040",
+            "button-borders/Color000080",
+            "button-borders/dirty-Color000080",
+            "button-borders/default-Color000080",
+            "button-borders/floating-Color000080",
+            "button-borders/floating-dirty-Color000080",
+            "button-borders/reattached-Color000080",
+            "button-borders/Color0000FF",
+            "button-borders/Color008000",
+            "button-borders/Color00FF00",
+            "button-borders/Color00FFFF",
+            "button-borders/Color0A73B7",
+            "button-borders/Color202020",
+            "button-borders/Color20DD20",
+            "button-borders/Color336699",
+            "button-borders/Color345678",
+            "button-borders/Color404040",
+            "button-borders/Color5511FF",
+            "button-borders/Color555555",
+            "button-borders/Color606060",
+            "button-borders/Color747474",
+            "button-borders/Color757575",
+            "button-borders/Color777777",
+            "button-borders/Color800000",
+            "button-borders/Color804020",
+            "button-borders/Color808080",
+            "button-borders/Color9800FF",
+            "button-borders/Color99FFFF",
+            "button-borders/ColorC08080",
+            "button-borders/ColorFF0000",
+            "button-borders/ColorFF00FF",
+            "button-borders/ColorFFE100",
+            "button-borders/ColorFFFF00",
+            "button-borders/ColorFFFFFF"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 13050.192839,
+            "runtimeVerificationMs": 329.1658520000001,
+            "preHostMs": 13421.480228,
+            "cleanupMs": 41.52174599999853,
+            "totalMs": 38007.802417
+          }
+        },
+        {
+          "suite": "tab-titles",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 7.490497791000002,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "tab-titles-en/driver.log",
+          "receipt": "tab-titles-en/receipt.json",
+          "caseIds": [
+            "tab-titles/Default",
+            "tab-titles/PagesFont16",
+            "tab-titles/PageFont16",
+            "tab-titles/PageFont16Bold",
+            "tab-titles/PagesColorRed",
+            "tab-titles/PageColorBlue",
+            "tab-titles/PagesAndPage",
+            "tab-titles/PagesFont8",
+            "tab-titles/PagesFont12",
+            "tab-titles/PagesFont14",
+            "tab-titles/PagesFont18",
+            "tab-titles/PagesFont24",
+            "tab-titles/PagesFont28",
+            "tab-titles/PagesFont32",
+            "tab-titles/PagesFont12Bold"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 693.378379,
+            "runtimeVerificationMs": 411.3961790000001,
+            "preHostMs": 1113.8386639999999,
+            "cleanupMs": 36.27342399999998,
+            "totalMs": 7355.390907999999
+          }
+        },
+        {
+          "suite": "tab-titles",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 10.217242406000004,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "tab-titles-ru/driver.log",
+          "receipt": "tab-titles-ru/receipt.json",
+          "caseIds": [
+            "tab-titles/Default",
+            "tab-titles/PagesFont16",
+            "tab-titles/PageFont16",
+            "tab-titles/PageFont16Bold",
+            "tab-titles/PagesColorRed",
+            "tab-titles/PageColorBlue",
+            "tab-titles/PagesAndPage",
+            "tab-titles/PagesFont8",
+            "tab-titles/PagesFont12",
+            "tab-titles/PagesFont14",
+            "tab-titles/PagesFont18",
+            "tab-titles/PagesFont24",
+            "tab-titles/PagesFont28",
+            "tab-titles/PagesFont32",
+            "tab-titles/PagesFont12Bold"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 999.605321,
+            "runtimeVerificationMs": 336.07125299999984,
+            "preHostMs": 1361.158187,
+            "cleanupMs": 41.17332999999962,
+            "totalMs": 10089.163383
+          }
+        },
+        {
+          "suite": "tab-borders",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 17.010988534000003,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "tab-borders-en/driver.log",
+          "receipt": "tab-borders-en/receipt.json",
+          "caseIds": [
+            "tab-borders/font-Default-0",
+            "tab-borders/font-Default-1",
+            "tab-borders/font-PagesFont16-0",
+            "tab-borders/font-PageFont16-0",
+            "tab-borders/font-PageFont16Bold-0",
+            "tab-borders/font-PagesColorRed-0",
+            "tab-borders/font-PageColorBlue-0",
+            "tab-borders/font-PagesAndPage-0",
+            "tab-borders/font-PagesFont8-0",
+            "tab-borders/font-PagesFont12-0",
+            "tab-borders/font-PagesFont14-0",
+            "tab-borders/font-PagesFont18-0",
+            "tab-borders/font-PagesFont24-0",
+            "tab-borders/font-PagesFont28-0",
+            "tab-borders/font-PagesFont32-0",
+            "tab-borders/font-PagesFont12Bold-0",
+            "tab-borders/ColorOutsideRed-0",
+            "tab-borders/ColorOutsideRed-1",
+            "tab-borders/ColorOutsideGreen-0",
+            "tab-borders/ColorOutsideGreen-1",
+            "tab-borders/ColorOutsideBlue-0",
+            "tab-borders/ColorOutsideBlue-1",
+            "tab-borders/ColorFreshA-0",
+            "tab-borders/ColorFreshA-1",
+            "tab-borders/dirty-FreshB",
+            "tab-borders/floating-FreshA",
+            "tab-borders/floating-dirty-FreshB",
+            "tab-borders/reattached-FreshA",
+            "tab-borders/ColorFreshB-0",
+            "tab-borders/ColorFreshB-1",
+            "tab-borders/ColorPrimary-0",
+            "tab-borders/ColorPrimary-1",
+            "tab-borders/ColorBlueCyan-0",
+            "tab-borders/ColorBlueCyan-1",
+            "tab-borders/ColorYellowMagenta-0",
+            "tab-borders/ColorYellowMagenta-1",
+            "tab-borders/ColorGreys-0",
+            "tab-borders/ColorGreys-1",
+            "tab-borders/ColorTies-0",
+            "tab-borders/ColorTies-1",
+            "tab-borders/TripleTriplet-0",
+            "tab-borders/TripleTriplet-1",
+            "tab-borders/TripleTriplet-2",
+            "tab-borders/TripleAutoParent-0",
+            "tab-borders/TripleAutoParent-1",
+            "tab-borders/TripleAutoParent-2",
+            "tab-borders/MaximumFont8-0",
+            "tab-borders/MaximumFont10-0",
+            "tab-borders/MaximumFont12-0",
+            "tab-borders/MaximumFont14-0",
+            "tab-borders/MaximumFont16-0"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 794.744458,
+            "runtimeVerificationMs": 319.105373,
+            "preHostMs": 1130.359212,
+            "cleanupMs": 35.850383000000875,
+            "totalMs": 16891.647699999998
+          }
+        },
+        {
+          "suite": "tab-borders",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 19.667288670999987,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "tab-borders-ru/driver.log",
+          "receipt": "tab-borders-ru/receipt.json",
+          "caseIds": [
+            "tab-borders/font-Default-0",
+            "tab-borders/font-Default-1",
+            "tab-borders/font-PagesFont16-0",
+            "tab-borders/font-PageFont16-0",
+            "tab-borders/font-PageFont16Bold-0",
+            "tab-borders/font-PagesColorRed-0",
+            "tab-borders/font-PageColorBlue-0",
+            "tab-borders/font-PagesAndPage-0",
+            "tab-borders/font-PagesFont8-0",
+            "tab-borders/font-PagesFont12-0",
+            "tab-borders/font-PagesFont14-0",
+            "tab-borders/font-PagesFont18-0",
+            "tab-borders/font-PagesFont24-0",
+            "tab-borders/font-PagesFont28-0",
+            "tab-borders/font-PagesFont32-0",
+            "tab-borders/font-PagesFont12Bold-0",
+            "tab-borders/ColorOutsideRed-0",
+            "tab-borders/ColorOutsideRed-1",
+            "tab-borders/ColorOutsideGreen-0",
+            "tab-borders/ColorOutsideGreen-1",
+            "tab-borders/ColorOutsideBlue-0",
+            "tab-borders/ColorOutsideBlue-1",
+            "tab-borders/ColorFreshA-0",
+            "tab-borders/ColorFreshA-1",
+            "tab-borders/dirty-FreshB",
+            "tab-borders/floating-FreshA",
+            "tab-borders/floating-dirty-FreshB",
+            "tab-borders/reattached-FreshA",
+            "tab-borders/ColorFreshB-0",
+            "tab-borders/ColorFreshB-1",
+            "tab-borders/ColorPrimary-0",
+            "tab-borders/ColorPrimary-1",
+            "tab-borders/ColorBlueCyan-0",
+            "tab-borders/ColorBlueCyan-1",
+            "tab-borders/ColorYellowMagenta-0",
+            "tab-borders/ColorYellowMagenta-1",
+            "tab-borders/ColorGreys-0",
+            "tab-borders/ColorGreys-1",
+            "tab-borders/ColorTies-0",
+            "tab-borders/ColorTies-1",
+            "tab-borders/TripleTriplet-0",
+            "tab-borders/TripleTriplet-1",
+            "tab-borders/TripleTriplet-2",
+            "tab-borders/TripleAutoParent-0",
+            "tab-borders/TripleAutoParent-1",
+            "tab-borders/TripleAutoParent-2",
+            "tab-borders/MaximumFont8-0",
+            "tab-borders/MaximumFont10-0",
+            "tab-borders/MaximumFont12-0",
+            "tab-borders/MaximumFont14-0",
+            "tab-borders/MaximumFont16-0"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 823.247607,
+            "runtimeVerificationMs": 360.40382799999986,
+            "preHostMs": 1214.949702,
+            "cleanupMs": 39.39941700000054,
+            "totalMs": 19534.791616
+          }
+        },
+        {
+          "suite": "window-titles",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 5.709606651000009,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "window-titles-en/driver.log",
+          "receipt": "window-titles-en/receipt.json",
+          "caseIds": [
+            "window-titles/Default",
+            "window-titles/ASCII",
+            "window-titles/Cyrillic",
+            "window-titles/Diacritics",
+            "window-titles/Long",
+            "window-titles/KernLatin1",
+            "window-titles/KernLatin2",
+            "window-titles/KernCyrillic"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 923.743479,
+            "runtimeVerificationMs": 349.54243399999996,
+            "preHostMs": 1279.27215,
+            "cleanupMs": 32.104223999999704,
+            "totalMs": 5589.687652
+          }
+        },
+        {
+          "suite": "window-titles",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 8.13704335199998,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "window-titles-ru/driver.log",
+          "receipt": "window-titles-ru/receipt.json",
+          "caseIds": [
+            "window-titles/Default",
+            "window-titles/ASCII",
+            "window-titles/Cyrillic",
+            "window-titles/Diacritics",
+            "window-titles/Long",
+            "window-titles/KernLatin1",
+            "window-titles/KernLatin2",
+            "window-titles/KernCyrillic"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 780.3362810000001,
+            "runtimeVerificationMs": 328.73322700000006,
+            "preHostMs": 1131.122711,
+            "cleanupMs": 34.84596899999997,
+            "totalMs": 7986.894499999999
+          }
+        },
+        {
+          "suite": "input-borders",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 19.13770165599999,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "input-borders-en/driver.log",
+          "receipt": "input-borders-en/receipt.json",
+          "caseIds": [
+            "input-borders/InputNumber",
+            "input-borders/InputColors",
+            "input-borders/InputFont",
+            "input-borders/InputReadOnly",
+            "input-borders/InputDisabled",
+            "input-borders/Font10Bold",
+            "input-borders/Font12Normal",
+            "input-borders/Font14Normal",
+            "input-borders/Font16Normal",
+            "input-borders/Font14Number",
+            "input-borders/InputDate",
+            "input-borders/InputDateTime",
+            "input-borders/InputTime",
+            "input-borders/GroupBackColor",
+            "input-borders/PagesAuto",
+            "input-borders/ColorOcean",
+            "input-borders/ColorPrimary",
+            "input-borders/ColorMid",
+            "input-borders/ColorBlack",
+            "input-borders/ColorWhite",
+            "input-borders/ColorYellow",
+            "input-borders/ColorTies",
+            "input-borders/FreshA",
+            "input-borders/dirty-FreshB",
+            "input-borders/floating-FreshA",
+            "input-borders/floating-dirty-FreshB",
+            "input-borders/reattached-FreshA",
+            "input-borders/FreshB",
+            "input-borders/FreshC",
+            "input-borders/FreshD",
+            "input-borders/FreshE",
+            "input-borders/FreshF",
+            "input-borders/FreshG",
+            "input-borders/StatesA",
+            "input-borders/StatesB",
+            "input-borders/ChoiceA",
+            "input-borders/DisabledA",
+            "input-borders/DisabledB",
+            "input-borders/DisabledC",
+            "input-borders/DisabledD",
+            "input-borders/DisabledE",
+            "input-borders/DisabledF",
+            "input-borders/DisabledG",
+            "input-borders/DisabledH",
+            "input-borders/DisabledI",
+            "input-borders/DisabledJ",
+            "input-borders/DisabledK",
+            "input-borders/DisabledL",
+            "input-borders/DisabledExplicitA",
+            "input-borders/DisabledExplicitB",
+            "input-borders/DisabledExplicitC",
+            "input-borders/DisabledExplicitD"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 819.357031,
+            "runtimeVerificationMs": 318.477082,
+            "preHostMs": 1159.312819,
+            "cleanupMs": 39.40700100000322,
+            "totalMs": 19021.645066999998
+          }
+        },
+        {
+          "suite": "input-borders",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 22.033130417999985,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "input-borders-ru/driver.log",
+          "receipt": "input-borders-ru/receipt.json",
+          "caseIds": [
+            "input-borders/InputNumber",
+            "input-borders/InputColors",
+            "input-borders/InputFont",
+            "input-borders/InputReadOnly",
+            "input-borders/InputDisabled",
+            "input-borders/Font10Bold",
+            "input-borders/Font12Normal",
+            "input-borders/Font14Normal",
+            "input-borders/Font16Normal",
+            "input-borders/Font14Number",
+            "input-borders/InputDate",
+            "input-borders/InputDateTime",
+            "input-borders/InputTime",
+            "input-borders/GroupBackColor",
+            "input-borders/PagesAuto",
+            "input-borders/ColorOcean",
+            "input-borders/ColorPrimary",
+            "input-borders/ColorMid",
+            "input-borders/ColorBlack",
+            "input-borders/ColorWhite",
+            "input-borders/ColorYellow",
+            "input-borders/ColorTies",
+            "input-borders/FreshA",
+            "input-borders/dirty-FreshB",
+            "input-borders/floating-FreshA",
+            "input-borders/floating-dirty-FreshB",
+            "input-borders/reattached-FreshA",
+            "input-borders/FreshB",
+            "input-borders/FreshC",
+            "input-borders/FreshD",
+            "input-borders/FreshE",
+            "input-borders/FreshF",
+            "input-borders/FreshG",
+            "input-borders/StatesA",
+            "input-borders/StatesB",
+            "input-borders/ChoiceA",
+            "input-borders/DisabledA",
+            "input-borders/DisabledB",
+            "input-borders/DisabledC",
+            "input-borders/DisabledD",
+            "input-borders/DisabledE",
+            "input-borders/DisabledF",
+            "input-borders/DisabledG",
+            "input-borders/DisabledH",
+            "input-borders/DisabledI",
+            "input-borders/DisabledJ",
+            "input-borders/DisabledK",
+            "input-borders/DisabledL",
+            "input-borders/DisabledExplicitA",
+            "input-borders/DisabledExplicitB",
+            "input-borders/DisabledExplicitC",
+            "input-borders/DisabledExplicitD"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 837.852035,
+            "runtimeVerificationMs": 398.53483099999994,
+            "preHostMs": 1275.570033,
+            "cleanupMs": 41.26812200000131,
+            "totalMs": 21893.826835
+          }
+        },
+        {
+          "suite": "input-dates",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 21.671805300999985,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "input-dates-en/driver.log",
+          "receipt": "input-dates-en/receipt.json",
+          "caseIds": [
+            "input-dates/Date10",
+            "input-dates/dirty-Time10",
+            "input-dates/floating-Date10",
+            "input-dates/floating-dirty-Time10",
+            "input-dates/reattached-Date10",
+            "input-dates/DateTime10",
+            "input-dates/Time10",
+            "input-dates/DateDisabled4",
+            "input-dates/DateDisabled5",
+            "input-dates/DateDisabled6",
+            "input-dates/DateDisabled7",
+            "input-dates/DateDisabled10",
+            "input-dates/DateReadOnly10",
+            "input-dates/dirty-DateReadOnlyChoice10",
+            "input-dates/floating-DateReadOnly10",
+            "input-dates/floating-dirty-DateReadOnlyChoice10",
+            "input-dates/reattached-DateReadOnly10",
+            "input-dates/DateReadOnlyChoice10",
+            "input-dates/Time7",
+            "input-dates/DateTime14",
+            "input-dates/Time18",
+            "input-dates/DateTime24",
+            "input-dates/Time48",
+            "input-dates/DateTime18",
+            "input-dates/Font4",
+            "input-dates/dirty-DateDisabled4",
+            "input-dates/floating-Font4",
+            "input-dates/floating-dirty-DateDisabled4",
+            "input-dates/reattached-Font4",
+            "input-dates/Font5",
+            "input-dates/Font6",
+            "input-dates/Font7Width20",
+            "input-dates/Font8Width20",
+            "input-dates/dirty-Font48Width20",
+            "input-dates/floating-Font8Width20",
+            "input-dates/floating-dirty-Font48Width20",
+            "input-dates/reattached-Font8Width20",
+            "input-dates/Font12Width20",
+            "input-dates/Font14Width20",
+            "input-dates/Font18Width20",
+            "input-dates/Font32Width20",
+            "input-dates/Font48Width20"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 1724.888049,
+            "runtimeVerificationMs": 354.7627560000001,
+            "preHostMs": 2094.6649399999997,
+            "cleanupMs": 34.37267799999972,
+            "totalMs": 21550.644846
+          }
+        },
+        {
+          "suite": "input-dates",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 24.003263911000015,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "input-dates-ru/driver.log",
+          "receipt": "input-dates-ru/receipt.json",
+          "caseIds": [
+            "input-dates/Date10",
+            "input-dates/dirty-Time10",
+            "input-dates/floating-Date10",
+            "input-dates/floating-dirty-Time10",
+            "input-dates/reattached-Date10",
+            "input-dates/DateTime10",
+            "input-dates/Time10",
+            "input-dates/DateDisabled4",
+            "input-dates/DateDisabled5",
+            "input-dates/DateDisabled6",
+            "input-dates/DateDisabled7",
+            "input-dates/DateDisabled10",
+            "input-dates/DateReadOnly10",
+            "input-dates/dirty-DateReadOnlyChoice10",
+            "input-dates/floating-DateReadOnly10",
+            "input-dates/floating-dirty-DateReadOnlyChoice10",
+            "input-dates/reattached-DateReadOnly10",
+            "input-dates/DateReadOnlyChoice10",
+            "input-dates/Time7",
+            "input-dates/DateTime14",
+            "input-dates/Time18",
+            "input-dates/DateTime24",
+            "input-dates/Time48",
+            "input-dates/DateTime18",
+            "input-dates/Font4",
+            "input-dates/dirty-DateDisabled4",
+            "input-dates/floating-Font4",
+            "input-dates/floating-dirty-DateDisabled4",
+            "input-dates/reattached-Font4",
+            "input-dates/Font5",
+            "input-dates/Font6",
+            "input-dates/Font7Width20",
+            "input-dates/Font8Width20",
+            "input-dates/dirty-Font48Width20",
+            "input-dates/floating-Font8Width20",
+            "input-dates/floating-dirty-Font48Width20",
+            "input-dates/reattached-Font8Width20",
+            "input-dates/Font12Width20",
+            "input-dates/Font14Width20",
+            "input-dates/Font18Width20",
+            "input-dates/Font32Width20",
+            "input-dates/Font48Width20"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 994.96108,
+            "runtimeVerificationMs": 393.8507989999998,
+            "preHostMs": 1426.4438420000001,
+            "cleanupMs": 34.94417600000088,
+            "totalMs": 23846.856656
+          }
+        },
+        {
+          "suite": "dependencies",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 5.850412063999975,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "dependencies-en/driver.log",
+          "receipt": "dependencies-en/receipt.json",
+          "caseIds": [
+            "dependencies/suite"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 923.370105,
+            "runtimeVerificationMs": 336.7215019999999,
+            "preHostMs": 1267.082218,
+            "cleanupMs": 35.90192500000012,
+            "totalMs": 5729.1664439999995
+          }
+        },
+        {
+          "suite": "dependencies",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 8.489373613000032,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "dependencies-ru/driver.log",
+          "receipt": "dependencies-ru/receipt.json",
+          "caseIds": [
+            "dependencies/suite"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 744.027607,
+            "runtimeVerificationMs": 353.026885,
+            "preHostMs": 1117.78028,
+            "cleanupMs": 37.93833700000141,
+            "totalMs": 8375.903976
+          }
+        },
+        {
+          "suite": "multiple-windows",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 4.4523765799999815,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "multiple-windows-en/driver.log",
+          "receipt": "multiple-windows-en/receipt.json",
+          "caseIds": [
+            "multiple-windows/suite"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 791.2672150000001,
+            "runtimeVerificationMs": 312.57805299999995,
+            "preHostMs": 1108.701884,
+            "cleanupMs": 33.16901299999972,
+            "totalMs": 4316.639531
+          }
+        },
+        {
+          "suite": "multiple-windows",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 7.260836272999994,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "multiple-windows-ru/driver.log",
+          "receipt": "multiple-windows-ru/receipt.json",
+          "caseIds": [
+            "multiple-windows/suite"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 800.053489,
+            "runtimeVerificationMs": 321.7342000000001,
+            "preHostMs": 1140.475692,
+            "cleanupMs": 35.46834200000012,
+            "totalMs": 7130.97217
+          }
+        },
+        {
+          "suite": "restore",
+          "locale": "en",
+          "mode": "restart",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 9.156361465000023,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "restore-en/driver.log",
+          "receipt": "restore-en/receipt.json",
+          "caseIds": [
+            "restore/suite",
+            "restore/suite"
+          ],
+          "hostStarts": 2,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 809.287595,
+            "runtimeVerificationMs": 325.8796500000001,
+            "preHostMs": 1737.178149,
+            "cleanupMs": 35.69063399999868,
+            "totalMs": 9025.611572
+          }
+        },
+        {
+          "suite": "restore",
+          "locale": "ru",
+          "mode": "restart",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 10.019505529000016,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "restore-ru/driver.log",
+          "receipt": "restore-ru/receipt.json",
+          "caseIds": [
+            "restore/suite",
+            "restore/suite"
+          ],
+          "hostStarts": 4,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 732.824879,
+            "runtimeVerificationMs": 340.80157700000007,
+            "preHostMs": 1726.9187120000001,
+            "cleanupMs": 36.68625699999939,
+            "totalMs": 9897.902326
+          }
+        },
+        {
+          "suite": "application",
+          "locale": "en",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 4.215413783999975,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "application-en/driver.log",
+          "receipt": "application-en/receipt.json",
+          "caseIds": [
+            "application/0",
+            "application/1",
+            "application/2",
+            "application/3"
+          ],
+          "hostStarts": 1,
+          "languageRegistrations": 0,
+          "timings": {
+            "installCliMs": 886.742807,
+            "runtimeVerificationMs": 297.96950000000004,
+            "preHostMs": 1187.5938010000002,
+            "cleanupMs": 30.95297699999992,
+            "totalMs": 4092.7798749999997
+          }
+        },
+        {
+          "suite": "application",
+          "locale": "ru",
+          "mode": "installed",
+          "exitCode": 0,
+          "signal": null,
+          "seconds": 7.0769354919999605,
+          "passed": true,
+          "inputsStable": true,
+          "classification": "passed",
+          "log": "application-ru/driver.log",
+          "receipt": "application-ru/receipt.json",
+          "caseIds": [
+            "application/0",
+            "application/1",
+            "application/2",
+            "application/3"
+          ],
+          "hostStarts": 3,
+          "languageRegistrations": 2,
+          "timings": {
+            "installCliMs": 815.298748,
+            "runtimeVerificationMs": 341.9011169999999,
+            "preHostMs": 1172.209708,
+            "cleanupMs": 35.40125900000021,
+            "totalMs": 6932.227586999999
+          }
+        }
+      ],
+      "ordinaryButtonPixels": {
+        "en": {
+          "samples": 60,
+          "pixelsCompared": 365164,
+          "differentRgbPixels": 0
+        },
+        "ru": {
+          "samples": 60,
+          "pixelsCompared": 365164,
+          "differentRgbPixels": 0
+        }
+      }
+    }
+  },
+  "artifactLocations": {
+    "base": "<eska repository>/../eska-playground",
+    "native": "native-button-types-jc2a16bu",
+    "candidate": "form-batch-G12vwR",
+    "final": "form-batch-Dv5jRM",
+    "recheck": "button-link-pixels-recheck-qv2qtgmm"
+  },
+  "remaining": [
+    "Complete native link bounds, mixed-group gaps and full form/widget comparison.",
+    "Other fonts, glyph/layout combinations, pictures/menus, hover/focus/disabled states and nonwhite parent matrices.",
+    "Windows native captions, physical DPI, Remote and 8.5."
+  ]
+}
