@@ -1,0 +1,989 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "reference": "Native Linux managed client static style semantics; Designer preview remains the pixel oracle.",
+  "noBslModulesOrHandlers": true,
+  "fullProfileAccepted": false,
+  "files": [
+    {
+      "path": "base/CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "sha256": "f3ef0d2e5a04765ae83415d073df2e414c951c92903badfba672825776485e90",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/CommonForms/ProbeStyleConsumer.xml",
+      "sha256": "f4389450894231c345800941cf0534227d55f1353904f5d4d0e15b418cbe856a",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/Configuration.xml",
+      "sha256": "82de58565195bdda56b7619cecc93dd13dc9760107de413c988bf442ab58d092",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/Languages/Русский.xml",
+      "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/StyleItems/ProbeColor.xml",
+      "sha256": "cc779a159efb87055a03653ecf172d5bc983e3c49a4777e4d032317f011d3814",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/StyleItems/ProbeFont.xml",
+      "sha256": "6ee1c1b2f699e8e92c2ffe3e0673b2d716e1cf0fd0c3ed28273b6fe8a976b098",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/Styles/ProbeStyleValues/Ext/Style.xml",
+      "sha256": "a26e4f69adc7bf2c2489e885561b6c9fed132fb31c639ce0b3dfd49604f931a9",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/Styles/ProbeStyleValues.xml",
+      "sha256": "dc74069627658c8d846523d5e320f0da0dbd4ef217fd581efa18ed3baeff5912",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/CommonForms/F_StyleOwn/Ext/Form.xml",
+      "sha256": "2a39d15769950174788c6b0a5b5ba4c8cf5e9f5a5405ed98e34f7eaff1973c50",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/CommonForms/F_StyleOwn.xml",
+      "sha256": "f2073ad0236851362423f45190c5cebccf6e5c56c78fa43be5402b848d0c18e0",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/Configuration.xml",
+      "sha256": "eaa96e55cb95eb8bbc87bd69c026b4cad1fbfb160c753b724af245a269be221e",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/StyleItems/F_ProbeColor.xml",
+      "sha256": "38c155cb6fdf06bf1757899430e05fb29563fc35998f427e69252c8fb365621c",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/StyleItems/F_ProbeFont.xml",
+      "sha256": "6a1b1e0a52139e109ee0afb853f442fc11b571643e6f0e408b17f90c3ecbe1e0",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/StyleItems/ProbeColor.xml",
+      "sha256": "cc705b4fac7818ad4fa3d54140b21a5a5779af3ff0ed7d479242a08e9aef4b91",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/StyleItems/ProbeFont.xml",
+      "sha256": "630de00c9a6f59a1d06a4623b413a50a9062ef57cbc782fd7428f3f0a4c8ecd6",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/Styles/F_ReportStyle/Ext/Style.xml",
+      "sha256": "385992726217b90377fcad283dac691bf8a971d2c55d9fbd994a46202a938a2f",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/Styles/F_ReportStyle.xml",
+      "sha256": "1d833311141db841b9d17e4a54b87a1bc19376bf4ba33ee6849a795a19f9a052",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/Styles/ProbeStyleValues/Ext/Style.xml",
+      "sha256": "7720d14a4ff477cf4af1968337605763456ff776f104e862a7e3fe6c0aa93d75",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/Styles/ProbeStyleValues.xml",
+      "sha256": "0d5e221b8457bfe002d82c447b2bd6c1380092b2c1062116d3b56bd7afff2e98",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/Configuration.xml",
+      "sha256": "505195d13c3393f5b013c2c248280645a4df9e8854890dbad6b08d32ace33030",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/StyleItems/ProbeColor.xml",
+      "sha256": "9d3234af7c33cbed198a1617063a0d0956fd21174ca15d659a13733ee9eea651",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/StyleItems/ProbeFont.xml",
+      "sha256": "42359401d1492fbd70aabceab3db8346fcb2d8dfd8d998b9a1d56a66d51493ce",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/Styles/ProbeStyleValues/Ext/Style.xml",
+      "sha256": "48a6e964393b71eff54833050d09c8cf45497fb6f4e4c915c071cf2f93412607",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/Styles/ProbeStyleValues.xml",
+      "sha256": "c21aa1a781b957ca7e525d0dbef2ebfaf568b574fd909090132b04ffb0efe1a2",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/FirstInitialConfiguration.xml",
+      "sha256": "86032fdb34b6a3ae126e18e545efb6285f242675fd77f88c5094214b7a9e1fef",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/FirstOwnedConfiguration.xml",
+      "sha256": "d1c0d8d6c1947618f9b832a1a38ea7b9fdd4ad6f00ba1d969c2b9589e2d36c84",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/FirstDefaultConfiguration.xml",
+      "sha256": "eaa96e55cb95eb8bbc87bd69c026b4cad1fbfb160c753b724af245a269be221e",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/FirstBaseSelectedConfiguration.xml",
+      "sha256": "79aa5dbf51cd5d697dca6fb24854a548871bbd6177399385358c6b8bed6a9afc",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/FirstDefaultStyle.xml",
+      "sha256": "0043e322d35dfdbe719d17ebc1ba7266adfe2b87b0072bd6c2aeaa94ded34cbd",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/FirstBaseSelectedStyle.xml",
+      "sha256": "6a83b21140945ff23763a1d9f1765713672eae6f8a635c606ea2844c625b1498",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/BaseUpdatedStyle.xml",
+      "sha256": "b52ed2bfa23e005a323f049e7472e28d89c5418849bd45c4901fc65d77869dfb",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/BaseNoStyleConfiguration.xml",
+      "sha256": "1ab6cca5221d3c7d128093060e6f87a4d53f212edba4c1f1b42675c2127de0b5",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/FirstBorrowedColor.xml",
+      "sha256": "06ca4b3061cbd72df3de1df1ee069179f0685f121217e13348c2cf072c835426",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/FirstBorrowedFont.xml",
+      "sha256": "ce4a8e46fb1459ac97697f2b82a451c4080c88f2506bfc3a1f692147b2a9f7b3",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/FirstBorrowedSelectedConfiguration.xml",
+      "sha256": "53ffa71f3652a3bb441b785d6f1963f12cb95ea5ac9c85003f416b6aa58ad14a",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/FirstInheritedConfiguration.xml",
+      "sha256": "82f821561aff522d2eb0efb672fdbf2807d9efe575a60fd233204ddea1bf05fd",
+      "nativeRoundTrip": true
+    }
+  ],
+  "cases": [
+    {
+      "id": "styles-base-only",
+      "activeExtensions": [],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstInitialConfiguration.xml",
+          "output": "Configuration.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#9800ff"
+        },
+        "font": {
+          "points": 18,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "ee766473cf957c3fa78001ef14ed454ca6f3900c817e609d30932f014e95b4fd",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-first-only",
+      "activeExtensions": [
+        "first"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstInitialConfiguration.xml",
+          "output": "Configuration.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#9800ff"
+        },
+        "font": {
+          "points": 18,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "6d56b75178531e29ea9bb3e149bed2583e043825e1e6dc469bbebff6f43fa9b6",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-second-only",
+      "activeExtensions": [
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstInitialConfiguration.xml",
+          "output": "Configuration.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#9800ff"
+        },
+        "font": {
+          "points": 18,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "6d56b75178531e29ea9bb3e149bed2583e043825e1e6dc469bbebff6f43fa9b6",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-both",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstInitialConfiguration.xml",
+          "output": "Configuration.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#9800ff"
+        },
+        "font": {
+          "points": 18,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "fbcc1a7a0eea144f6b71238acb001937fe91113cbb0a969074417ab1e87577e2",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-owned-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_StyleOwn/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstOwnedConfiguration.xml",
+          "output": "Configuration.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#008800"
+        },
+        "font": {
+          "points": 16,
+          "weight": 400,
+          "italic": false,
+          "underline": true
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "StyleItems/F_ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "646626a86adeccc4ab32ad96b1d96def4bcb4b353f0b9489a7ea8abbcde4e08a",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-extension-default",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstDefaultConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstDefaultStyle.xml",
+          "output": "Styles/F_ReportStyle/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "web",
+          "value": "DarkOrange"
+        },
+        "font": {
+          "points": 12,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "StyleItems/ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "6a4b2a6611d81589b93f5d8b05201b4f865994d3a85f9344326e96f6f986fbc2",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-owned-extension-default",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_StyleOwn/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstDefaultConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstDefaultStyle.xml",
+          "output": "Styles/F_ReportStyle/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#008800"
+        },
+        "font": {
+          "points": 16,
+          "weight": 400,
+          "italic": false,
+          "underline": true
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "StyleItems/F_ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "a5f82cc4c75d02cc00d3e42fd7db0ad51bd59cd77d078b562c836dea59aecf4c",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-active-base-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [],
+      "expected": {
+        "color": {
+          "kind": "web",
+          "value": "DarkOrange"
+        },
+        "font": {
+          "points": 12,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "StyleItems/ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "781ca6cf55b956f47106b373e7171ac95456a95c5d8bd69aa5997f5de651cd08",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-active-own-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_StyleOwn/Ext/Form.xml",
+      "inputs": [],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#ff00ff"
+        },
+        "font": {
+          "points": 24,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "Styles/F_ReportStyle/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "81260fcd03318430c2d87e0ed005c486528ffd18f2a3553b3b51fde67a3b262d",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-adopted-base-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#9800ff"
+        },
+        "font": {
+          "points": 18,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "11cbe5624c6ed4bf5d27740fa5ba35d7e38e2f9e002ec1aa3fb8608b0888fed1",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-adopted-own-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_StyleOwn/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#ff00ff"
+        },
+        "font": {
+          "points": 24,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "5fab3de5aa7b210a65008eafc4144b35731245ee94b34381b9368b6fe5249cc9",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-base-updated",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseUpdatedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#b02040"
+        },
+        "font": {
+          "points": 14,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "ea7078e044b01127f8f903d258dd461c2ce540401f96171d2ba25ddf639fa34c",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-base-no-style",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstOwnedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseNoStyleConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseUpdatedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "web",
+          "value": "DarkOrange"
+        },
+        "font": {
+          "points": 12,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "StyleItems/ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "6a4b2a6611d81589b93f5d8b05201b4f865994d3a85f9344326e96f6f986fbc2",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-borrowed-values",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstOwnedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseNoStyleConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseUpdatedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBorrowedColor.xml",
+          "output": "StyleItems/ProbeColor.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBorrowedFont.xml",
+          "output": "StyleItems/ProbeFont.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#00ffff"
+        },
+        "font": {
+          "points": 26,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "StyleItems/ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "ea98edf5ce12ee2822d4a67a663d56dd6604be7e25ef91168f78c3ad48e3e678",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-borrowed-selected",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstBorrowedSelectedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseNoStyleConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseUpdatedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBorrowedColor.xml",
+          "output": "StyleItems/ProbeColor.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBorrowedFont.xml",
+          "output": "StyleItems/ProbeFont.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#b02040"
+        },
+        "font": {
+          "points": 14,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "d1c1764df8cf0656613549f9e193b141647682eb55f516ed974e9a2c8eb8a251",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-inherited-own-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_StyleOwn/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstInheritedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseUpdatedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#ff00ff"
+        },
+        "font": {
+          "points": 24,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "5fab3de5aa7b210a65008eafc4144b35731245ee94b34381b9368b6fe5249cc9",
+        "width": 1918,
+        "height": 770
+      }
+    }
+  ],
+  "rules": [
+    "StyleItem overrides from a common style are bound to the layer defining the item. Borrowed aliases do not change that layer.",
+    "The selected common style may contain values for items owned by its extension, including in a borrowed common style.",
+    "Standard common-style color roles remain shared across layers.",
+    "Explicit Type/Value on a borrowed item, placed after ObjectBelonging in native order, are retained and used when the selected style has no value in its defining layer.",
+    "A matching base common-style value takes precedence over the modified fallback Value.",
+    "Explicit element TextColor remains authoritative."
+  ],
+  "nativeRegionEquality": {
+    "scope": "Native-to-native static form region only; no ESKA pixel acceptance.",
+    "rectangle": {
+      "x": 8,
+      "y": 158,
+      "width": 412,
+      "height": 142
+    },
+    "pixels": 58504,
+    "allFourInitialSubsetsIdentical": {
+      "styles-base-only": true,
+      "styles-first-only": true,
+      "styles-second-only": true,
+      "styles-both": true
+    }
+  },
+  "applicabilityChecks": [
+    {
+      "name": "applicability",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    },
+    {
+      "name": "own-active-applicability",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    },
+    {
+      "name": "final-applicability",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    },
+    {
+      "name": "inherited-applicability",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    }
+  ],
+  "preparationNotes": [
+    {
+      "log": "first-marked-import.log",
+      "sha256": "a444d83e150c94d1b4228776d7f42ee46610e07ecfb862c92b8a759abbbcc078",
+      "exitCode": 255,
+      "reason": "Style metadata rejects InternalInfo; excluded preparation attempt, no accepted observation."
+    },
+    {
+      "log": "first-own-active-import.log",
+      "sha256": "b26906a8621aae54924ef79de23892e0b455f247d3ed46511c484ad72ef4986c",
+      "exitCode": 255,
+      "reason": "The helper copied a native-normalized Color node for a Font item; corrected before the accepted own-style observations."
+    },
+    {
+      "scope": "styles-borrowed-values",
+      "reason": "A helper postcondition wrongly asserted Type/Value would be removed. Native import/apply/check all returned 0; export retains the values and UI shows cyan/26pt. The observation uses those actual values. Initial out-of-order preparation inputs are excluded."
+    }
+  ],
+  "limits": [
+    "Static common forms, labels and a group only; no full Configurator pixel acceptance.",
+    "Native checks do not constitute general static applicability verification by the viewer.",
+    "Windows, 8.5, other metadata resources and the complete profile remain open."
+  ]
+}

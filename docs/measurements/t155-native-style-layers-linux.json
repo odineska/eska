@@ -1,0 +1,2235 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "scope": "T154/T155 Linux static common-style tables and StyleItem defining layers across extensions; inherited dependency discovery and dirty/detached behavior. No complete profile or Configurator pixel acceptance.",
+  "fullProfileAccepted": false,
+  "platformBuild": "8.3.27.2342",
+  "noBslModulesOrHandlers": true,
+  "nativeCases": 16,
+  "nativeInputs": {
+    "path": "tests/fixtures/forms/native-style-composition/metrics.json",
+    "sha256": "f795b20194995d74834ed1e60e1107ef5823735be4e8dc7f33da236a1d4cedc6",
+    "rawXmlFiles": 36
+  },
+  "nativeRules": [
+    "StyleItem overrides from a common style are bound to the layer defining the item. Borrowed aliases do not change that layer.",
+    "The selected common style may contain values for items owned by its extension, including in a borrowed common style.",
+    "Standard common-style color roles remain shared across layers.",
+    "Explicit Type/Value on a borrowed item, placed after ObjectBelonging in native order, are retained and used when the selected style has no value in its defining layer.",
+    "A matching base common-style value takes precedence over the modified fallback Value.",
+    "Explicit element TextColor remains authoritative."
+  ],
+  "nativeObservations": [
+    {
+      "id": "styles-base-only",
+      "activeExtensions": [],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstInitialConfiguration.xml",
+          "output": "Configuration.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#9800ff"
+        },
+        "font": {
+          "points": 18,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "ee766473cf957c3fa78001ef14ed454ca6f3900c817e609d30932f014e95b4fd",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-first-only",
+      "activeExtensions": [
+        "first"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstInitialConfiguration.xml",
+          "output": "Configuration.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#9800ff"
+        },
+        "font": {
+          "points": 18,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "6d56b75178531e29ea9bb3e149bed2583e043825e1e6dc469bbebff6f43fa9b6",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-second-only",
+      "activeExtensions": [
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstInitialConfiguration.xml",
+          "output": "Configuration.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#9800ff"
+        },
+        "font": {
+          "points": 18,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "6d56b75178531e29ea9bb3e149bed2583e043825e1e6dc469bbebff6f43fa9b6",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-both",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstInitialConfiguration.xml",
+          "output": "Configuration.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#9800ff"
+        },
+        "font": {
+          "points": 18,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "fbcc1a7a0eea144f6b71238acb001937fe91113cbb0a969074417ab1e87577e2",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-owned-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_StyleOwn/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstOwnedConfiguration.xml",
+          "output": "Configuration.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#008800"
+        },
+        "font": {
+          "points": 16,
+          "weight": 400,
+          "italic": false,
+          "underline": true
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "StyleItems/F_ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "646626a86adeccc4ab32ad96b1d96def4bcb4b353f0b9489a7ea8abbcde4e08a",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-extension-default",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstDefaultConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstDefaultStyle.xml",
+          "output": "Styles/F_ReportStyle/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "web",
+          "value": "DarkOrange"
+        },
+        "font": {
+          "points": 12,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "StyleItems/ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "6a4b2a6611d81589b93f5d8b05201b4f865994d3a85f9344326e96f6f986fbc2",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-owned-extension-default",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_StyleOwn/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstDefaultConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstDefaultStyle.xml",
+          "output": "Styles/F_ReportStyle/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#008800"
+        },
+        "font": {
+          "points": 16,
+          "weight": 400,
+          "italic": false,
+          "underline": true
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "StyleItems/F_ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "a5f82cc4c75d02cc00d3e42fd7db0ad51bd59cd77d078b562c836dea59aecf4c",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-active-base-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [],
+      "expected": {
+        "color": {
+          "kind": "web",
+          "value": "DarkOrange"
+        },
+        "font": {
+          "points": 12,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "StyleItems/ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "781ca6cf55b956f47106b373e7171ac95456a95c5d8bd69aa5997f5de651cd08",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-active-own-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_StyleOwn/Ext/Form.xml",
+      "inputs": [],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#ff00ff"
+        },
+        "font": {
+          "points": 24,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "Styles/F_ReportStyle/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "81260fcd03318430c2d87e0ed005c486528ffd18f2a3553b3b51fde67a3b262d",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-adopted-base-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#9800ff"
+        },
+        "font": {
+          "points": 18,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "11cbe5624c6ed4bf5d27740fa5ba35d7e38e2f9e002ec1aa3fb8608b0888fed1",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-adopted-own-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_StyleOwn/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#ff00ff"
+        },
+        "font": {
+          "points": 24,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "5fab3de5aa7b210a65008eafc4144b35731245ee94b34381b9368b6fe5249cc9",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-base-updated",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseUpdatedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#b02040"
+        },
+        "font": {
+          "points": 14,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "ea7078e044b01127f8f903d258dd461c2ce540401f96171d2ba25ddf639fa34c",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-base-no-style",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstOwnedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseNoStyleConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseUpdatedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "web",
+          "value": "DarkOrange"
+        },
+        "font": {
+          "points": 12,
+          "weight": 700,
+          "italic": false,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "StyleItems/ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "6a4b2a6611d81589b93f5d8b05201b4f865994d3a85f9344326e96f6f986fbc2",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-borrowed-values",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstOwnedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseNoStyleConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseUpdatedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBorrowedColor.xml",
+          "output": "StyleItems/ProbeColor.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBorrowedFont.xml",
+          "output": "StyleItems/ProbeFont.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#00ffff"
+        },
+        "font": {
+          "points": 26,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "StyleItems/ProbeFont.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "ea98edf5ce12ee2822d4a67a663d56dd6604be7e25ef91168f78c3ad48e3e678",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-borrowed-selected",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbeStyleConsumer/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstBorrowedSelectedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseNoStyleConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseUpdatedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBorrowedColor.xml",
+          "output": "StyleItems/ProbeColor.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBorrowedFont.xml",
+          "output": "StyleItems/ProbeFont.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#b02040"
+        },
+        "font": {
+          "points": 14,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "base",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "d1c1764df8cf0656613549f9e193b141647682eb55f516ed974e9a2c8eb8a251",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "styles-inherited-own-items",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_StyleOwn/Ext/Form.xml",
+      "inputs": [
+        {
+          "member": "first",
+          "input": "variants/FirstInheritedConfiguration.xml",
+          "output": "Configuration.xml"
+        },
+        {
+          "member": "first",
+          "input": "variants/FirstBaseSelectedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        {
+          "member": "base",
+          "input": "variants/BaseUpdatedStyle.xml",
+          "output": "Styles/ProbeStyleValues/Ext/Style.xml"
+        }
+      ],
+      "expected": {
+        "color": {
+          "kind": "rgb",
+          "value": "#ff00ff"
+        },
+        "font": {
+          "points": 24,
+          "weight": 400,
+          "italic": true,
+          "underline": false
+        },
+        "fontOrigin": {
+          "member": "first",
+          "path": "Styles/ProbeStyleValues/Ext/Style.xml"
+        },
+        "explicitColor": {
+          "kind": "rgb",
+          "value": "#123456"
+        }
+      },
+      "screenshot": {
+        "sha256": "5fab3de5aa7b210a65008eafc4144b35731245ee94b34381b9368b6fe5249cc9",
+        "width": 1918,
+        "height": 770
+      }
+    }
+  ],
+  "nativeRegionEquality": {
+    "scope": "Native-to-native static form region only; no ESKA pixel acceptance.",
+    "rectangle": {
+      "x": 8,
+      "y": 158,
+      "width": 412,
+      "height": 142
+    },
+    "pixels": 58504,
+    "allFourInitialSubsetsIdentical": {
+      "styles-base-only": true,
+      "styles-first-only": true,
+      "styles-second-only": true,
+      "styles-both": true
+    }
+  },
+  "nativeApplicabilityChecks": [
+    {
+      "name": "applicability",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    },
+    {
+      "name": "own-active-applicability",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    },
+    {
+      "name": "final-applicability",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    },
+    {
+      "name": "inherited-applicability",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    }
+  ],
+  "nativePreparationNotes": [
+    {
+      "log": "first-marked-import.log",
+      "sha256": "a444d83e150c94d1b4228776d7f42ee46610e07ecfb862c92b8a759abbbcc078",
+      "exitCode": 255,
+      "reason": "Style metadata rejects InternalInfo; excluded preparation attempt, no accepted observation."
+    },
+    {
+      "log": "first-own-active-import.log",
+      "sha256": "b26906a8621aae54924ef79de23892e0b455f247d3ed46511c484ad72ef4986c",
+      "exitCode": 255,
+      "reason": "The helper copied a native-normalized Color node for a Font item; corrected before the accepted own-style observations."
+    },
+    {
+      "scope": "styles-borrowed-values",
+      "reason": "A helper postcondition wrongly asserted Type/Value would be removed. Native import/apply/check all returned 0; export retains the values and UI shows cyan/26pt. The observation uses those actual values. Initial out-of-order preparation inputs are excluded."
+    }
+  ],
+  "architecture": {
+    "styleItemIdentity": "The first definition in the ordered context fixes the common-style table layer. A later Value override remains an effective fallback and does not move the item.",
+    "standardRoles": "Shared common-style role values retain normal ordered-layer precedence.",
+    "resourceDiscovery": "Load local roots/owners, then resolve each distinct reachable metadata ID in all applicable sources; preserve containment and external-object isolation. No unrelated tree traversal, new dependencies or cache.",
+    "limits": {
+      "uniqueRequestedMetadataIds": 1024,
+      "descriptorsPerLayer": 256,
+      "contextInputBytes": 33554432
+    },
+    "rustApiChange": "Experimental FormResource construction now requires layer_source: the owning root descriptor source identity. IDE JSON/config schemas are unchanged."
+  },
+  "regression": {
+    "before": {
+      "passed": 1,
+      "failed": 3,
+      "logSha256": "aa41ccc0e63fc21b88e14a20fdc331a576dc0fcf184eb7620aa6b304f8749583",
+      "failures": [
+        "Cross-layer style value used for a base item",
+        "Same binding error during dirty style selection",
+        "Extension of inherited DefaultStyle not loaded"
+      ]
+    },
+    "after": {
+      "formContextTestsPassed": 24,
+      "newTests": 4,
+      "nativeCasesCovered": 16,
+      "cycleTerminatesWithDiagnostic": true,
+      "logSha256": "c2c31cd8190bf1728411edee40967cc28a6908537a32f3490d6923d0f70bf9d4"
+    }
+  },
+  "checks": {
+    "rust": [
+      {
+        "check": "fmt",
+        "exitCode": 0,
+        "seconds": 1.2861938870009908
+      },
+      {
+        "check": "check",
+        "exitCode": 0,
+        "seconds": 1.762894862000394
+      },
+      {
+        "check": "clippy",
+        "exitCode": 0,
+        "seconds": 4.485675325999182
+      },
+      {
+        "check": "test",
+        "exitCode": 0,
+        "seconds": 149.59746226700008
+      },
+      {
+        "check": "backend-build",
+        "exitCode": 0,
+        "seconds": 5.769885050001903
+      }
+    ],
+    "cargoTest": {
+      "passed": 1513,
+      "failed": 0,
+      "ignored": 19,
+      "suites": 42,
+      "logSha256": "c2c31cd8190bf1728411edee40967cc28a6908537a32f3490d6923d0f70bf9d4"
+    },
+    "node": {
+      "passed": 512,
+      "failed": 0,
+      "skipped": 11,
+      "total": 523,
+      "logSha256": "4fd2ce0b39e324e15f2f8120206d9bf016bebc11bef079b4ac808651aa963adb"
+    },
+    "nativeXml": {
+      "rawSha256Verified": true,
+      "xmlSyntaxVerified": true,
+      "files": 36
+    }
+  },
+  "installedBatch": {
+    "artifactDirectory": "form-batch-jWejlv",
+    "passed": false,
+    "overallExitCode": 1,
+    "originalFailurePreserved": true,
+    "builds": 1,
+    "packages": 1,
+    "timings": {
+      "checkMs": 291.564023,
+      "compileMs": 1076.897277,
+      "packageMs": 1722.6296120000002,
+      "freezeInputsMs": 817.4440220000001,
+      "totalMs": 221467.297862
+    },
+    "inputsSha256": "dbddcfea47e57dfb3e64dce2b58bb82f948d497cdacd090a67634d5decd183bb",
+    "batchSha256": "4e309e363024369f0d1407513a409ab5f7fcc189cd931907e372c7a38a0cb97d",
+    "backendSha256": "9380f93716ee206420ad997b4d76b95e7744d2bf425f02f99b0690fb96c67df4",
+    "vsixSha256": "e5836199e62175a958000025a48883a396528774693ad4d5f0c6c8ca600125bf",
+    "runtimeManifestSha256": "c079d1e1ffa61305d870596447b33b836aa71f2e6f61e40032cc5c9e76fb1690",
+    "runtimeFiles": 1303,
+    "runs": [
+      {
+        "suite": "style-composition",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.871735091,
+        "inputsStable": true,
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "09a8c902d2e8bcc0652041b8abff9dbd0d0208ca09623c8c5ddc6b540aad3408",
+        "driverLogSha256": "b1ec4fde4fb908b2d8663c12c93655c164b7ef4644c6fe87a41854a2c2709a2f",
+        "publishedResults": [
+          {
+            "passed": true,
+            "styleComposition": true,
+            "locale": "en",
+            "results": [
+              {
+                "label": "initial-base-item-fallback",
+                "color": {
+                  "kind": "web",
+                  "value": "DarkOrange"
+                },
+                "font": {
+                  "points": 12,
+                  "weight": 700,
+                  "italic": false,
+                  "underline": false
+                }
+              },
+              {
+                "label": "foreign-layer-style-value-ignored",
+                "color": {
+                  "kind": "web",
+                  "value": "DarkOrange"
+                },
+                "font": {
+                  "points": 12,
+                  "weight": 700,
+                  "italic": false,
+                  "underline": false
+                }
+              },
+              {
+                "label": "unselected-base-style-dirty",
+                "color": {
+                  "kind": "web",
+                  "value": "DarkOrange"
+                },
+                "font": {
+                  "points": 12,
+                  "weight": 700,
+                  "italic": false,
+                  "underline": false
+                }
+              },
+              {
+                "label": "selected-base-style-dirty",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#b02040"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "borrowed-alias-keeps-base-style-table",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#b02040"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "detached-base-style-dirty",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#2040a0"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "reattached-base-style",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#2040a0"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "own-item-default-value",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#008800"
+                },
+                "font": {
+                  "points": 16,
+                  "weight": 400,
+                  "italic": false,
+                  "underline": true
+                }
+              },
+              {
+                "label": "inherited-style-without-cfe-default",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#008800"
+                },
+                "font": {
+                  "points": 16,
+                  "weight": 400,
+                  "italic": false,
+                  "underline": true
+                }
+              },
+              {
+                "label": "inherited-own-style-override",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#ff00ff"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "detached-default-value-shadowed",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#ff00ff"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "detached-own-item-default-restored",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#aa5500"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "reattached-own-style",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#aa5500"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              }
+            ],
+            "sourceWritesDuringViewing": false,
+            "stableIdentity": true,
+            "stableDom": true,
+            "inheritedStyle": true,
+            "definingLayerPreserved": true,
+            "detachedUpdates": true,
+            "hostDriver": {
+              "suiteBodyMs": 2910.007994
+            }
+          }
+        ],
+        "triage": "passed"
+      },
+      {
+        "suite": "style-composition",
+        "locale": "ru",
+        "passed": false,
+        "exitCode": 1,
+        "seconds": 15.027811694000002,
+        "inputsStable": true,
+        "caseIds": [],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "a05288f0a1259f618a08155a8ddca111de6dc6668fb60c01ea03b46619ab604a",
+        "driverLogSha256": "d84ef2ed938f0333ca9667670542049e83f920161283ccb5f9bb0ab7310b4711",
+        "publishedResults": [
+          null
+        ],
+        "triage": "harness.primary_editor_focus"
+      },
+      {
+        "suite": "style",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 4.229488855,
+        "inputsStable": true,
+        "caseIds": [
+          "style/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "e574a4bc26a93420a3a855e0992876d38e63b46c9a00146672c5bc9c6135c5ad",
+        "driverLogSha256": "ad951df39d10b875086d109fe96c46ef4c6391b4a9c8fc65e5d9651a99806a6e"
+      },
+      {
+        "suite": "style",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 6.802006129000001,
+        "inputsStable": true,
+        "caseIds": [
+          "style/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "268e0fc2014ea34dd1bf3fc1ce13a6caa90ada40c7983ceebe59dac7e8dbd2bb",
+        "driverLogSha256": "462db96d003b4ad0c8422f870142e3f08ee502b02c446c07fbf62a9b33621672"
+      },
+      {
+        "suite": "style-color-roles",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 9.587076589999997,
+        "inputsStable": true,
+        "caseIds": [
+          "style-color-roles/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "4c455871c8214f0dfb9631e9b982eec9848e82484998dcc1b4443f0310a1a685",
+        "driverLogSha256": "ecc0949f4378ab7b77a490e56a7ea5fdfb05d51af26006f3918830fba7e4160b"
+      },
+      {
+        "suite": "style-color-roles",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.3705745810000005,
+        "inputsStable": true,
+        "caseIds": [
+          "style-color-roles/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "31dfba48687613ad0601d59a2acacd037b3611d322774578a44d1f9c956ae528",
+        "driverLogSha256": "3377736f67f6cad3ef81a928ea7d8fe68533793d16ee97b4735b8556e272e427"
+      },
+      {
+        "suite": "style-palette",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.005386437,
+        "inputsStable": true,
+        "caseIds": [
+          "style-palette/ImportantColor",
+          "style-palette/AccentColor",
+          "style-palette/ActivityColor",
+          "style-palette/NavigationColor",
+          "style-palette/AuxiliaryNavigationColor",
+          "style-palette/Group",
+          "style-palette/GroupAccent",
+          "style-palette/TabAccent",
+          "style-palette/ImportantColor",
+          "style-palette/AccentColor",
+          "style-palette/ActivityColor",
+          "style-palette/NavigationColor",
+          "style-palette/AuxiliaryNavigationColor",
+          "style-palette/Group",
+          "style-palette/GroupAccent",
+          "style-palette/TabAccent"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "397093aee2a73b1d253509f84d89d275dab75a423dcbad4718968761b0e854b0",
+        "driverLogSha256": "6c917c87561703c90000b046c39fb5f11059dfd5df14f3df6d7ad15b4049a699"
+      },
+      {
+        "suite": "style-palette",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 12.180960528000004,
+        "inputsStable": true,
+        "caseIds": [
+          "style-palette/ImportantColor",
+          "style-palette/AccentColor",
+          "style-palette/ActivityColor",
+          "style-palette/NavigationColor",
+          "style-palette/AuxiliaryNavigationColor",
+          "style-palette/Group",
+          "style-palette/GroupAccent",
+          "style-palette/TabAccent",
+          "style-palette/ImportantColor",
+          "style-palette/AccentColor",
+          "style-palette/ActivityColor",
+          "style-palette/NavigationColor",
+          "style-palette/AuxiliaryNavigationColor",
+          "style-palette/Group",
+          "style-palette/GroupAccent",
+          "style-palette/TabAccent"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "5ba14324b5aea4b075f16cf872e746ff9624da82819284b5b702d673b5ca5e1f",
+        "driverLogSha256": "f191049c3a3541d8fc5356583b0f1f60a1102eea9f01f1ec7cbf29b38cc93b09"
+      },
+      {
+        "suite": "composition",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.698229657000003,
+        "inputsStable": true,
+        "caseIds": [
+          "composition/initial-addon",
+          "composition/dirty-customization",
+          "composition/external-patch-with-dirty-second",
+          "composition/external-addon-with-dirty-second",
+          "composition/invalid-purpose",
+          "composition/external-configuration-restored",
+          "composition/detached-dirty-addon",
+          "composition/detached-dirty-default-purpose",
+          "composition/reattached-default-purpose"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "7542cd7c9e7c8f0b0cd53fa6784d4632c0a4a4d94536b6930eae3dc3213a2810",
+        "driverLogSha256": "be2a8c4b634add0898c446e49c3ff1544bae2df30d50b686f33eb8a755869423"
+      },
+      {
+        "suite": "composition",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.218018789999988,
+        "inputsStable": true,
+        "caseIds": [
+          "composition/initial-addon",
+          "composition/dirty-customization",
+          "composition/external-patch-with-dirty-second",
+          "composition/external-addon-with-dirty-second",
+          "composition/invalid-purpose",
+          "composition/external-configuration-restored",
+          "composition/detached-dirty-addon",
+          "composition/detached-dirty-default-purpose",
+          "composition/reattached-default-purpose"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "47505279886baac8fd151de7f424148f2ca343b2cee965197110bf32aa4e1333",
+        "driverLogSha256": "b98b7e33648a5ac7b80bbb0d892d0a1e5142c972787dd80f58dc27e8dc5f74fc"
+      },
+      {
+        "suite": "owners",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 4.956728436999998,
+        "inputsStable": true,
+        "caseIds": [
+          "owners/object-both",
+          "owners/extension-own-form",
+          "owners/extension-own-object",
+          "owners/dirty-invalid-owner",
+          "owners/foreign-owner-property",
+          "owners/dirty-own-form",
+          "owners/detached-dirty-own-form",
+          "owners/detached-invalid-owner-recovery",
+          "owners/reattached-own-form"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "f045a04c0a24af9673c43f8286bc43a145df9e94b11151562005b30dc098e476",
+        "driverLogSha256": "3c9bffa32fec1f6f0073e231a74759b9df4437a20957dc6b0feb9b808982b753"
+      },
+      {
+        "suite": "owners",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.582337644000014,
+        "inputsStable": true,
+        "caseIds": [
+          "owners/object-both",
+          "owners/extension-own-form",
+          "owners/extension-own-object",
+          "owners/dirty-invalid-owner",
+          "owners/foreign-owner-property",
+          "owners/dirty-own-form",
+          "owners/detached-dirty-own-form",
+          "owners/detached-invalid-owner-recovery",
+          "owners/reattached-own-form"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "8e07f7ea722e6259495126dbe9738c1f9b097045a6e542fc05f758393be5af1f",
+        "driverLogSha256": "178b18dc66e809f4ada85315851896a31243e31e4d46915c03788445420b503a"
+      },
+      {
+        "suite": "dependencies",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 6.122792613999991,
+        "inputsStable": true,
+        "caseIds": [
+          "dependencies/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "1578df182105c82dbc1c9048caffcb898d4974d47b5fb6d24bfd1993ced398b3",
+        "driverLogSha256": "889b0eb8b87de711769bc65d658cdcbe4568d7875c2f50b035dcee66ade33b20"
+      },
+      {
+        "suite": "dependencies",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.436927588000007,
+        "inputsStable": true,
+        "caseIds": [
+          "dependencies/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "1b8a543c7fa3c0385e4f2af4596725523c98c2c193e107510d07ed59b5f4e404",
+        "driverLogSha256": "c68ebf3cd64725e5f5e101a11729b956d28037507089e05b2ba1c8b90c5e572d"
+      },
+      {
+        "suite": "activity",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 4.167921189999993,
+        "inputsStable": true,
+        "caseIds": [
+          "activity/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "4be6fcc22775766f653cd256ac01179209881e4d53e9c55950a5647da81c9844",
+        "driverLogSha256": "ef90569f8a0e8a07a5d25b11063f36ffac6734f64c893bdba0228f1c033dae86"
+      },
+      {
+        "suite": "activity",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 6.816719515000004,
+        "inputsStable": true,
+        "caseIds": [
+          "activity/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "b2ab5253f69574d75a9159b7fc12c809987230fb99a065a77174a948843ce213",
+        "driverLogSha256": "f044ccd79d47384b637bcb19bcb4b96aeb047a86cc8b9b4eabf3c930f20d0740"
+      },
+      {
+        "suite": "button-borders",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 22.793650501000013,
+        "inputsStable": true,
+        "caseIds": [
+          "button-borders/FontAuto",
+          "button-borders/dirty-FontAuto",
+          "button-borders/floating-FontAuto",
+          "button-borders/floating-dirty-FontAuto",
+          "button-borders/reattached-FontAuto",
+          "button-borders/FontRegular",
+          "button-borders/FontBold",
+          "button-borders/FontPartial14",
+          "button-borders/FontStyleNormal",
+          "button-borders/FontForm14",
+          "button-borders/FontBar14",
+          "button-borders/FontFormBold",
+          "button-borders/FontExplicitAuto",
+          "button-borders/CheckAutoBack",
+          "button-borders/CheckAutoText",
+          "button-borders/CheckNormalFalse",
+          "button-borders/CheckNormal14",
+          "button-borders/CheckSmall",
+          "button-borders/CheckLarge",
+          "button-borders/CheckExtra",
+          "button-borders/CheckText",
+          "button-borders/CheckSysAuto",
+          "button-borders/CheckSys14",
+          "button-borders/CheckBoldOnly",
+          "button-borders/CheckAutoDisabled",
+          "button-borders/Color000000",
+          "button-borders/Color000040",
+          "button-borders/Color000080",
+          "button-borders/dirty-Color000080",
+          "button-borders/default-Color000080",
+          "button-borders/floating-Color000080",
+          "button-borders/floating-dirty-Color000080",
+          "button-borders/reattached-Color000080",
+          "button-borders/Color0000FF",
+          "button-borders/Color008000",
+          "button-borders/Color00FF00",
+          "button-borders/Color00FFFF",
+          "button-borders/Color0A73B7",
+          "button-borders/Color202020",
+          "button-borders/Color20DD20",
+          "button-borders/Color336699",
+          "button-borders/Color345678",
+          "button-borders/Color404040",
+          "button-borders/Color5511FF",
+          "button-borders/Color555555",
+          "button-borders/Color606060",
+          "button-borders/Color747474",
+          "button-borders/Color757575",
+          "button-borders/Color777777",
+          "button-borders/Color800000",
+          "button-borders/Color804020",
+          "button-borders/Color808080",
+          "button-borders/Color9800FF",
+          "button-borders/Color99FFFF",
+          "button-borders/ColorC08080",
+          "button-borders/ColorFF0000",
+          "button-borders/ColorFF00FF",
+          "button-borders/ColorFFE100",
+          "button-borders/ColorFFFF00",
+          "button-borders/ColorFFFFFF"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "cf76121dae84f354b453fc6657999a8d9f4976a56413bdc40a1a4b7ddc20ded1",
+        "driverLogSha256": "2be0375b2a4e4d7ba3341fda258357160d35a273c9ececb8e63f67c34321d708"
+      },
+      {
+        "suite": "button-borders",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 25.240269117999997,
+        "inputsStable": true,
+        "caseIds": [
+          "button-borders/FontAuto",
+          "button-borders/dirty-FontAuto",
+          "button-borders/floating-FontAuto",
+          "button-borders/floating-dirty-FontAuto",
+          "button-borders/reattached-FontAuto",
+          "button-borders/FontRegular",
+          "button-borders/FontBold",
+          "button-borders/FontPartial14",
+          "button-borders/FontStyleNormal",
+          "button-borders/FontForm14",
+          "button-borders/FontBar14",
+          "button-borders/FontFormBold",
+          "button-borders/FontExplicitAuto",
+          "button-borders/CheckAutoBack",
+          "button-borders/CheckAutoText",
+          "button-borders/CheckNormalFalse",
+          "button-borders/CheckNormal14",
+          "button-borders/CheckSmall",
+          "button-borders/CheckLarge",
+          "button-borders/CheckExtra",
+          "button-borders/CheckText",
+          "button-borders/CheckSysAuto",
+          "button-borders/CheckSys14",
+          "button-borders/CheckBoldOnly",
+          "button-borders/CheckAutoDisabled",
+          "button-borders/Color000000",
+          "button-borders/Color000040",
+          "button-borders/Color000080",
+          "button-borders/dirty-Color000080",
+          "button-borders/default-Color000080",
+          "button-borders/floating-Color000080",
+          "button-borders/floating-dirty-Color000080",
+          "button-borders/reattached-Color000080",
+          "button-borders/Color0000FF",
+          "button-borders/Color008000",
+          "button-borders/Color00FF00",
+          "button-borders/Color00FFFF",
+          "button-borders/Color0A73B7",
+          "button-borders/Color202020",
+          "button-borders/Color20DD20",
+          "button-borders/Color336699",
+          "button-borders/Color345678",
+          "button-borders/Color404040",
+          "button-borders/Color5511FF",
+          "button-borders/Color555555",
+          "button-borders/Color606060",
+          "button-borders/Color747474",
+          "button-borders/Color757575",
+          "button-borders/Color777777",
+          "button-borders/Color800000",
+          "button-borders/Color804020",
+          "button-borders/Color808080",
+          "button-borders/Color9800FF",
+          "button-borders/Color99FFFF",
+          "button-borders/ColorC08080",
+          "button-borders/ColorFF0000",
+          "button-borders/ColorFF00FF",
+          "button-borders/ColorFFE100",
+          "button-borders/ColorFFFF00",
+          "button-borders/ColorFFFFFF"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "37bb2bc2e2abdfc09ec04932d4e205432955c9b5fca8c04f5e8eb5a938cea1e6",
+        "driverLogSha256": "1b6dcf09e58f895a259a883a370e75e5d6504ff73ad143681d2313f6141f1d57"
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 4.612348981999996,
+        "inputsStable": true,
+        "caseIds": [
+          "multiple-windows/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "a39db49d3b1a56f5663ce381b66157e08b42ff9b7ebf475802b40fbc95c0dd4f",
+        "driverLogSha256": "b801177e99c7c9f2394b1c30bdeea907505456a5d6fd116c59cb68011a44478d"
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 12.977187719000009,
+        "inputsStable": true,
+        "caseIds": [
+          "multiple-windows/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "195c76e534b9a9da6848fc799c7fbaad4da175d0a6ea78c20504046ee78f6c9d",
+        "driverLogSha256": "04f293606e012038aeea73b68f036de99bfc67738f9779903af01b743a034c08"
+      },
+      {
+        "suite": "restore",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 9.153262652000006,
+        "inputsStable": true,
+        "caseIds": [
+          "restore/suite",
+          "restore/suite"
+        ],
+        "hostStarts": 2,
+        "languageRegistrations": 0,
+        "receiptSha256": "45949064af55b24103242f9579849baa1044ae29391709fecbf5bb6c1c0d9be9",
+        "driverLogSha256": "842039f7702b4f9a9f2a5d1be6ca05509ccfa082fcb3ded6fece28fc9f12a21c"
+      },
+      {
+        "suite": "restore",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.05664170400001,
+        "inputsStable": true,
+        "caseIds": [
+          "restore/suite",
+          "restore/suite"
+        ],
+        "hostStarts": 4,
+        "languageRegistrations": 2,
+        "receiptSha256": "a93c61d04850e752944033c07e777c03b127bb306dc8404b845f92994fb723d0",
+        "driverLogSha256": "082bffa1a98c26263da7aadbc4b025d2c21a594154911b74ce0562ac68fa27e1"
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 4.300749623999989,
+        "inputsStable": true,
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "9bd4a6f6e053d2115743300dbd00adf672f21d87f8308a71dedd6ac46dc2380b",
+        "driverLogSha256": "ffba5b6bf364c77503e52169f27cbc8daefb3447e355a8261fbcab9789c3537a"
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 6.92706733000002,
+        "inputsStable": true,
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "27d5e8b00c68262d9dff9e2d3a0dcf6909e14792929e9d5f40833af3769c9677",
+        "driverLogSha256": "3f45eb59c77c4cccd6238adfd10324bb2a6ce22d49b1b631ea809950db61e8ec"
+      }
+    ]
+  },
+  "correctedDriverVerification": {
+    "artifactDirectory": "t155-style-focus-recheck-wc99kdi4",
+    "resultSha256": "6536a485cc9364ccdd35a385103dc2edc262a53d351a7c45a672713204503483",
+    "passed": true,
+    "reason": "Explicitly focus the primary workbench before opening the second XML after reattachment. Original failed batch remains failed.",
+    "driverSha256": "bde5586da99aee2147dbe0eb4d9658f7258b04df84a6001261adf4068fc17fbd",
+    "backendSha256": "9380f93716ee206420ad997b4d76b95e7744d2bf425f02f99b0690fb96c67df4",
+    "vsixSha256": "e5836199e62175a958000025a48883a396528774693ad4d5f0c6c8ca600125bf",
+    "runtimeManifestSha256": "c079d1e1ffa61305d870596447b33b836aa71f2e6f61e40032cc5c9e76fb1690",
+    "runs": [
+      {
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "seconds": 19.15050518699718,
+        "receiptSha256": "4f41d50ea276074da1b1072380ffe8453e8edcff90f8030e2b3648bbe8328e24",
+        "driverLogSha256": "744a68457c2afe450fd0fc50c26e24e8ec8e9cb130b34ce3b3d268a39e5f4067",
+        "results": [
+          {
+            "passed": true,
+            "styleComposition": true,
+            "locale": "en",
+            "results": [
+              {
+                "label": "initial-base-item-fallback",
+                "color": {
+                  "kind": "web",
+                  "value": "DarkOrange"
+                },
+                "font": {
+                  "points": 12,
+                  "weight": 700,
+                  "italic": false,
+                  "underline": false
+                }
+              },
+              {
+                "label": "foreign-layer-style-value-ignored",
+                "color": {
+                  "kind": "web",
+                  "value": "DarkOrange"
+                },
+                "font": {
+                  "points": 12,
+                  "weight": 700,
+                  "italic": false,
+                  "underline": false
+                }
+              },
+              {
+                "label": "unselected-base-style-dirty",
+                "color": {
+                  "kind": "web",
+                  "value": "DarkOrange"
+                },
+                "font": {
+                  "points": 12,
+                  "weight": 700,
+                  "italic": false,
+                  "underline": false
+                }
+              },
+              {
+                "label": "selected-base-style-dirty",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#b02040"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "borrowed-alias-keeps-base-style-table",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#b02040"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "detached-base-style-dirty",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#2040a0"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "reattached-base-style",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#2040a0"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "own-item-default-value",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#008800"
+                },
+                "font": {
+                  "points": 16,
+                  "weight": 400,
+                  "italic": false,
+                  "underline": true
+                }
+              },
+              {
+                "label": "inherited-style-without-cfe-default",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#008800"
+                },
+                "font": {
+                  "points": 16,
+                  "weight": 400,
+                  "italic": false,
+                  "underline": true
+                }
+              },
+              {
+                "label": "inherited-own-style-override",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#ff00ff"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "detached-default-value-shadowed",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#ff00ff"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "detached-own-item-default-restored",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#aa5500"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "reattached-own-style",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#aa5500"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              }
+            ],
+            "sourceWritesDuringViewing": false,
+            "stableIdentity": true,
+            "stableDom": true,
+            "inheritedStyle": true,
+            "definingLayerPreserved": true,
+            "detachedUpdates": true,
+            "hostDriver": {
+              "suiteBodyMs": 2813.119361
+            }
+          }
+        ]
+      },
+      {
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "seconds": 57.51572296900122,
+        "receiptSha256": "bf2c2a3f633b5725c2ffcf911d3aa0ca6dacc55b30437fade7db7df2f67c4a53",
+        "driverLogSha256": "3de1fe58f33affd3d1e35ceb095ff6a7eae6aab239efec893348796cfe4e4998",
+        "results": [
+          {
+            "passed": true,
+            "styleComposition": true,
+            "locale": "ru",
+            "results": [
+              {
+                "label": "initial-base-item-fallback",
+                "color": {
+                  "kind": "web",
+                  "value": "DarkOrange"
+                },
+                "font": {
+                  "points": 12,
+                  "weight": 700,
+                  "italic": false,
+                  "underline": false
+                }
+              },
+              {
+                "label": "foreign-layer-style-value-ignored",
+                "color": {
+                  "kind": "web",
+                  "value": "DarkOrange"
+                },
+                "font": {
+                  "points": 12,
+                  "weight": 700,
+                  "italic": false,
+                  "underline": false
+                }
+              },
+              {
+                "label": "unselected-base-style-dirty",
+                "color": {
+                  "kind": "web",
+                  "value": "DarkOrange"
+                },
+                "font": {
+                  "points": 12,
+                  "weight": 700,
+                  "italic": false,
+                  "underline": false
+                }
+              },
+              {
+                "label": "selected-base-style-dirty",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#b02040"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "borrowed-alias-keeps-base-style-table",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#b02040"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "detached-base-style-dirty",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#2040a0"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "reattached-base-style",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#2040a0"
+                },
+                "font": {
+                  "points": 14,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "own-item-default-value",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#008800"
+                },
+                "font": {
+                  "points": 16,
+                  "weight": 400,
+                  "italic": false,
+                  "underline": true
+                }
+              },
+              {
+                "label": "inherited-style-without-cfe-default",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#008800"
+                },
+                "font": {
+                  "points": 16,
+                  "weight": 400,
+                  "italic": false,
+                  "underline": true
+                }
+              },
+              {
+                "label": "inherited-own-style-override",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#ff00ff"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "detached-default-value-shadowed",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#ff00ff"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "detached-own-item-default-restored",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#aa5500"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              },
+              {
+                "label": "reattached-own-style",
+                "color": {
+                  "kind": "rgb",
+                  "value": "#aa5500"
+                },
+                "font": {
+                  "points": 24,
+                  "weight": 400,
+                  "italic": true,
+                  "underline": false
+                }
+              }
+            ],
+            "sourceWritesDuringViewing": false,
+            "stableIdentity": true,
+            "stableDom": true,
+            "inheritedStyle": true,
+            "definingLayerPreserved": true,
+            "detachedUpdates": true,
+            "hostDriver": {
+              "suiteBodyMs": 2830.043451
+            }
+          }
+        ]
+      }
+    ],
+    "change": "One explicit primary-workbench focus before opening the second XML; rendering assertions and runtime remain unchanged.",
+    "originalFailurePhase": "open second XML after base preview reattachment; activeTextEditor did not switch.",
+    "sameFrozenRuntimeAndFixtures": true
+  },
+  "acceptance": {
+    "distinctPairsPassedAfterDriverFocusCorrection": 24,
+    "publishedCasesAcrossAcceptedPairs": 236,
+    "styleGuiCasesPerLocale": 13,
+    "styleGuiCasesTotal": 26,
+    "originalBatchPassedPairs": 23,
+    "originalBatchFailedPairs": 1,
+    "correctedDriverPassedPairs": 2,
+    "buttonWholeWidgetPixels": [
+      {
+        "locale": "en",
+        "samples": 60,
+        "pixels": 365164,
+        "differentPixels": 0,
+        "wholeFormVisualParity": false
+      },
+      {
+        "locale": "ru",
+        "samples": 60,
+        "pixels": 365164,
+        "differentPixels": 0,
+        "wholeFormVisualParity": false
+      }
+    ],
+    "providedDtForms": [
+      {
+        "locale": "en",
+        "sample": 0,
+        "openThroughFirstPaintMs": 290,
+        "elements": 13,
+        "retainedElements": 22,
+        "unsupported": 0,
+        "pictures": 0,
+        "incompleteFields": 1,
+        "commandButtons": 5,
+        "scrollWidth": 635,
+        "scrollHeight": 686,
+        "dependencies": 13,
+        "assets": 0,
+        "compositionDiagnostics": 0,
+        "appearanceDiagnostics": []
+      },
+      {
+        "locale": "en",
+        "sample": 1,
+        "openThroughFirstPaintMs": 172,
+        "elements": 7,
+        "retainedElements": 7,
+        "unsupported": 0,
+        "pictures": 0,
+        "incompleteFields": 0,
+        "commandButtons": 0,
+        "scrollWidth": 679,
+        "scrollHeight": 490,
+        "dependencies": 12,
+        "assets": 0,
+        "compositionDiagnostics": 0,
+        "appearanceDiagnostics": []
+      },
+      {
+        "locale": "en",
+        "sample": 2,
+        "openThroughFirstPaintMs": 198,
+        "elements": 21,
+        "retainedElements": 22,
+        "unsupported": 0,
+        "pictures": 0,
+        "incompleteFields": 6,
+        "commandButtons": 7,
+        "scrollWidth": 1104,
+        "scrollHeight": 640,
+        "dependencies": 9,
+        "assets": 0,
+        "compositionDiagnostics": 0,
+        "appearanceDiagnostics": []
+      },
+      {
+        "locale": "en",
+        "sample": 3,
+        "openThroughFirstPaintMs": 145,
+        "elements": 3,
+        "retainedElements": 3,
+        "unsupported": 0,
+        "pictures": 0,
+        "incompleteFields": 0,
+        "commandButtons": 4,
+        "scrollWidth": 565,
+        "scrollHeight": 322,
+        "dependencies": 6,
+        "assets": 0,
+        "compositionDiagnostics": 0,
+        "appearanceDiagnostics": []
+      },
+      {
+        "locale": "ru",
+        "sample": 0,
+        "openThroughFirstPaintMs": 335,
+        "elements": 13,
+        "retainedElements": 22,
+        "unsupported": 0,
+        "pictures": 0,
+        "incompleteFields": 1,
+        "commandButtons": 5,
+        "scrollWidth": 635,
+        "scrollHeight": 686,
+        "dependencies": 13,
+        "assets": 0,
+        "compositionDiagnostics": 0,
+        "appearanceDiagnostics": []
+      },
+      {
+        "locale": "ru",
+        "sample": 1,
+        "openThroughFirstPaintMs": 165,
+        "elements": 7,
+        "retainedElements": 7,
+        "unsupported": 0,
+        "pictures": 0,
+        "incompleteFields": 0,
+        "commandButtons": 0,
+        "scrollWidth": 679,
+        "scrollHeight": 490,
+        "dependencies": 12,
+        "assets": 0,
+        "compositionDiagnostics": 0,
+        "appearanceDiagnostics": []
+      },
+      {
+        "locale": "ru",
+        "sample": 2,
+        "openThroughFirstPaintMs": 207,
+        "elements": 21,
+        "retainedElements": 22,
+        "unsupported": 0,
+        "pictures": 0,
+        "incompleteFields": 6,
+        "commandButtons": 7,
+        "scrollWidth": 1104,
+        "scrollHeight": 640,
+        "dependencies": 9,
+        "assets": 0,
+        "compositionDiagnostics": 0,
+        "appearanceDiagnostics": []
+      },
+      {
+        "locale": "ru",
+        "sample": 3,
+        "openThroughFirstPaintMs": 128,
+        "elements": 3,
+        "retainedElements": 3,
+        "unsupported": 0,
+        "pictures": 0,
+        "incompleteFields": 0,
+        "commandButtons": 4,
+        "scrollWidth": 535,
+        "scrollHeight": 322,
+        "dependencies": 6,
+        "assets": 0,
+        "compositionDiagnostics": 0,
+        "appearanceDiagnostics": []
+      }
+    ],
+    "sourceWritesDuringViewing": false
+  },
+  "remaining": [
+    "Other resource kinds and metadata owners/element families.",
+    "General controlled-property/deployment applicability of arbitrary extensions.",
+    "Canonical Designer XML property-order variations are not exhaustively modeled.",
+    "Full Configurator pixels, other DPI, Windows, 8.5 and the whole profile remain open."
+  ]
+}

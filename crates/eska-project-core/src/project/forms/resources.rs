@@ -1,5 +1,7 @@
 //! Discover only metadata needed by static captions, appearance and bound field types.
 
+use std::{collections::HashSet, path::PathBuf};
+
 use roxmltree::{Document, Node};
 
 use super::{
@@ -19,6 +21,8 @@ use crate::{
 #[derive(Debug)]
 pub struct FormResource {
     pub source: String,
+    /// Identity of the owning project root descriptor, shared by this layer's resources.
+    pub layer_source: String,
     pub descriptor: ParsedDescriptor,
     pub references: Vec<FormReference>,
     pub picture: Option<designer_source::PicturePreview>,
@@ -36,11 +40,22 @@ pub(super) fn load(
 ) -> Result<Vec<FormResource>, FormContextError> {
     let external = selected.role() == SourceRole::ExternalObject;
     let (owners, requests) = requests(owner, documents)?;
-    let mut output = Vec::new();
-    let mut input_bytes: usize = documents
-        .iter()
-        .map(|document| document.input().len())
-        .sum();
+    let mut loader = Loader {
+        context,
+        dependencies,
+        overlays,
+        output: Vec::new(),
+        input_bytes: documents
+            .iter()
+            .map(|document| document.input().len())
+            .sum(),
+        pending: Vec::new(),
+        requested: HashSet::new(),
+    };
+    for request in requests {
+        loader.request(request)?;
+    }
+    let mut readers = Vec::new();
     for input in context.context.sources().iter().filter(|input| {
         input.role() != SourceRole::ExternalObject
             || input.project().source() == selected.project().source()
@@ -50,81 +65,131 @@ pub(super) fn load(
         });
         let (source, _) = designer_source::open_analysis_project(input.project().clone(), scope)
             .map_err(FormContextError::Source)?;
-        // DefaultStyle is a configuration-level dependency even when no element overrides appearance.
-        let mut pending = vec![source.root().id().clone()];
+        let root = source.root().id().clone();
+        let mut reader = Reader {
+            source,
+            member: input
+                .member()
+                .map(super::super::workspace::ProjectName::as_str),
+            role: input.role(),
+            read: HashSet::new(),
+            layer_source: source_identity(context, input.project().source(), input.descriptor()),
+        };
+        // Roots stay local; their referenced styles/types must reach every applicable layer.
+        loader.read(&mut reader, &root)?;
         if !external || input.role() == SourceRole::ExternalObject {
-            pending.extend(owners.iter().cloned());
+            for owner in &owners {
+                loader.read(&mut reader, owner)?;
+            }
         }
-        pending.extend(requests.iter().cloned());
-        let mut read = std::collections::HashSet::new();
-        let mut cursor = 0;
-        while cursor < pending.len() {
-            let id = pending[cursor].clone();
-            cursor += 1;
-            if !resource_belongs_to_source(&source, &id, input.role()) {
-                continue;
-            }
-            let Some(location) = source
-                .object_descriptor(&id)
-                .map_err(FormContextError::Source)?
-            else {
-                continue;
-            };
-            if !read.insert(location.path.clone()) {
-                continue;
-            }
-            if read.len() > 256 {
-                return Err(FormContextError::TooManyResources);
-            }
-            let Some((dependency, text)) = read_input(
-                context,
-                &source,
-                &location.path,
-                overlays,
-                input
-                    .member()
-                    .map(super::super::workspace::ProjectName::as_str),
-                super::context::FormDependencyRole::Metadata,
-            )?
-            else {
-                continue;
-            };
-            input_bytes = input_bytes.saturating_add(text.len());
-            if input_bytes > super::MAX_FORM_CONTEXT_BYTES {
-                return Err(FormContextError::InputTooLarge);
-            }
-            let (descriptor, references) = parse_metadata(&text, &id, &dependency, &mut pending)?;
-            let payload = load_payload(
-                context,
-                &source,
-                &descriptor,
-                &location.path,
-                input
-                    .member()
-                    .map(super::super::workspace::ProjectName::as_str),
-                overlays,
-                dependencies,
-            )?;
-            pending.extend(payload.requests);
-            input_bytes = input_bytes.saturating_add(payload.bytes);
-            if input_bytes > super::MAX_FORM_CONTEXT_BYTES {
-                return Err(FormContextError::InputTooLarge);
-            }
-            output.push(FormResource {
-                source: dependency.id.clone(),
-                descriptor,
-                references,
-                picture: payload.picture,
-                style: payload.style,
-                retained_bytes: text.len().saturating_add(payload.bytes),
-            });
-            dependencies.push(dependency);
-            if dependencies.len() > super::MAX_FORM_DEPENDENCIES {
-                return Err(FormContextError::TooManyResources);
-            }
+        readers.push(reader);
+    }
+    let mut cursor = 0;
+    while cursor < loader.pending.len() {
+        let id = loader.pending[cursor].clone();
+        cursor += 1;
+        for reader in &mut readers {
+            loader.read(reader, &id)?;
         }
     }
-    Ok(output)
+    Ok(loader.output)
+}
+
+struct Reader<'a> {
+    source: DesignerSource,
+    member: Option<&'a str>,
+    role: SourceRole,
+    read: HashSet<PathBuf>,
+    layer_source: String,
+}
+
+struct Loader<'a> {
+    context: &'a ContextSnapshot,
+    dependencies: &'a mut Vec<FormDependency>,
+    overlays: &'a [FormOverlay],
+    output: Vec<FormResource>,
+    input_bytes: usize,
+    pending: Vec<ObjectId>,
+    requested: HashSet<ObjectId>,
+}
+
+impl Loader<'_> {
+    fn request(&mut self, id: ObjectId) -> Result<(), FormContextError> {
+        if self.requested.insert(id.clone()) {
+            if self.requested.len() > super::MAX_FORM_DEPENDENCIES {
+                return Err(FormContextError::TooManyResources);
+            }
+            self.pending.push(id);
+        }
+        Ok(())
+    }
+
+    fn read(&mut self, reader: &mut Reader<'_>, id: &ObjectId) -> Result<(), FormContextError> {
+        if !resource_belongs_to_source(&reader.source, id, reader.role) {
+            return Ok(());
+        }
+        let Some(location) = reader
+            .source
+            .object_descriptor(id)
+            .map_err(FormContextError::Source)?
+        else {
+            return Ok(());
+        };
+        if !reader.read.insert(location.path.clone()) {
+            return Ok(());
+        }
+        if reader.read.len() > 256 {
+            return Err(FormContextError::TooManyResources);
+        }
+        let Some((dependency, text)) = read_input(
+            self.context,
+            &reader.source,
+            &location.path,
+            self.overlays,
+            reader.member,
+            super::context::FormDependencyRole::Metadata,
+        )?
+        else {
+            return Ok(());
+        };
+        self.input_bytes = self.input_bytes.saturating_add(text.len());
+        if self.input_bytes > super::MAX_FORM_CONTEXT_BYTES {
+            return Err(FormContextError::InputTooLarge);
+        }
+        let mut requests = Vec::new();
+        let (descriptor, references) = parse_metadata(&text, id, &dependency, &mut requests)?;
+        let payload = load_payload(
+            self.context,
+            &reader.source,
+            &descriptor,
+            &location.path,
+            reader.member,
+            self.overlays,
+            self.dependencies,
+        )?;
+        requests.extend(payload.requests);
+        self.input_bytes = self.input_bytes.saturating_add(payload.bytes);
+        if self.input_bytes > super::MAX_FORM_CONTEXT_BYTES {
+            return Err(FormContextError::InputTooLarge);
+        }
+        self.output.push(FormResource {
+            source: dependency.id.clone(),
+            layer_source: reader.layer_source.clone(),
+            descriptor,
+            references,
+            picture: payload.picture,
+            style: payload.style,
+            retained_bytes: text.len().saturating_add(payload.bytes),
+        });
+        self.dependencies.push(dependency);
+        if self.dependencies.len() > super::MAX_FORM_DEPENDENCIES {
+            return Err(FormContextError::TooManyResources);
+        }
+        for id in requests {
+            self.request(id)?;
+        }
+        Ok(())
+    }
 }
 
 fn parse_metadata(

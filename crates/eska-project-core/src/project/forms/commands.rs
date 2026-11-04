@@ -198,6 +198,7 @@ mod tests {
             super::super::references::CONFIG
         );
         FormResource {
+            layer_source: "base".into(),
             style: None,
             source: source.into(),
             descriptor: metadata_parser::parse(&xml, None, PropertiesMode::All).unwrap(),

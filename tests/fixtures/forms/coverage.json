@@ -800,7 +800,8 @@
         "acceptance.full-profile",
         "profile.windows",
         "context.native-static-composition",
-        "context.native-owner-forms"
+        "context.native-owner-forms",
+        "styles.native-layer-values"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1107,7 +1108,8 @@
         "acceptance.full-profile",
         "profile.windows",
         "context.native-static-composition",
-        "context.native-owner-forms"
+        "context.native-owner-forms",
+        "styles.native-layer-values"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1883,7 +1885,8 @@
         "acceptance.full-profile",
         "profile.windows",
         "context.native-static-composition",
-        "context.native-owner-forms"
+        "context.native-owner-forms",
+        "styles.native-layer-values"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -2071,11 +2074,12 @@
       "profile": "designer-xml",
       "level": "semantics",
       "status": "in_progress",
-      "scope": "Stored BaseForm deltas/provenance, native common-form purpose/order and limited catalog/extension-own-form cases are verified; complete applicability/style equivalence remains open.",
+      "scope": "Stored BaseForm deltas/provenance, native purpose/order, limited catalog/extension-own forms and common-style item-layer cases are verified; complete applicability and all resource families remain open.",
       "fixtures": [
         "tests/fixtures/forms/native-basic.xml",
         "tests/fixtures/forms/native-extension-composition",
-        "tests/fixtures/forms/native-owner-composition"
+        "tests/fixtures/forms/native-owner-composition",
+        "tests/fixtures/forms/native-style-composition"
       ],
       "driver": null,
       "evidence": [
@@ -2132,11 +2136,38 @@
             }
           ],
           "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t155-native-style-layers-linux.json",
+          "sha256": "1bc972bdf74915517ac6ffeb54e9b3b390542a9692c6dc634aaf54a20ac12a20",
+          "assertions": [
+            {
+              "pointer": "/nativeCases",
+              "equals": 16
+            },
+            {
+              "pointer": "/noBslModulesOrHandlers",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/cargoTest/failed",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/distinctPairsPassedAfterDriverFocusCorrection",
+              "equals": 24
+            },
+            {
+              "pointer": "/acceptance/styleGuiCasesTotal",
+              "equals": 26
+            }
+          ],
+          "clientCommit": null
         }
       ],
-      "lastConfirmation": "docs/measurements/t154-native-owner-linux.json",
-      "remaining": "Other owner kinds/families, unrelated metadata and controlled properties, style/resource conflicts, Configurator pixels, Windows and 8.5.",
-      "nextAction": "Extend the native semantic oracle to style and metadata conflicts; keep validation limited to known loaded inputs."
+      "lastConfirmation": "docs/measurements/t155-native-style-layers-linux.json",
+      "remaining": "Other metadata owner/element/resource kinds, controlled properties, arbitrary applicability/deployment selection, full Configurator pixels, Windows and 8.5.",
+      "nextAction": "Extend native picture/resource overrides and metadata applicability without treating these limited matrices as whole-profile acceptance."
     },
     {
       "id": "context.native-static-composition",
@@ -2344,6 +2375,72 @@
       "lastConfirmation": "docs/measurements/t155-native-style-values-linux.json",
       "remaining": "Complete consumer matrix and ordered extension style overrides.",
       "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "styles.native-layer-values",
+      "milestone": "T155",
+      "kinds": [
+        "Form",
+        "LabelDecoration",
+        "UsualGroup"
+      ],
+      "axes": [
+        "context.layers",
+        "appearance.colors",
+        "appearance.fonts",
+        "resources.origin",
+        "source.identity"
+      ],
+      "profile": "designer-xml",
+      "level": "semantics",
+      "status": "accepted_scope",
+      "scope": "Linux 8.3.27.2342: sixteen native common-style/StyleItem observations across base and two extensions; defining-layer tables, Value fallback, own items, standard roles, base update, inherited style, dirty and detached GUI. Semantic/behavior acceptance only.",
+      "fixtures": [
+        "tests/fixtures/forms/native-style-composition"
+      ],
+      "driver": {
+        "repository": "eska",
+        "path": "tests/project/metadata_workspace/forms/native/styles.rs",
+        "caseIds": [
+          "native_style_composition_matches_static_client_observations_without_writes",
+          "native_style_inherited_default_loads_extension_values_without_redeclaring_default_style",
+          "native_style_dirty_selection_preserves_defining_layer_and_element_identity",
+          "style_reference_cycle_across_layers_is_bounded_and_keeps_sources_unchanged"
+        ],
+        "selection": "whole native style matrix, dirty selection and bounded cross-layer cycle"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t155-native-style-layers-linux.json",
+          "sha256": "1bc972bdf74915517ac6ffeb54e9b3b390542a9692c6dc634aaf54a20ac12a20",
+          "assertions": [
+            {
+              "pointer": "/nativeCases",
+              "equals": 16
+            },
+            {
+              "pointer": "/noBslModulesOrHandlers",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/cargoTest/failed",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/distinctPairsPassedAfterDriverFocusCorrection",
+              "equals": 24
+            },
+            {
+              "pointer": "/acceptance/styleGuiCasesTotal",
+              "equals": 26
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t155-native-style-layers-linux.json",
+      "remaining": "Other resource kinds, complete property/owner/state matrices, arbitrary applicability, full Configurator pixels, Windows and 8.5.",
+      "nextAction": "Extend the native oracle to picture/resource overrides and preserve item-origin binding when expanding appearance."
     },
     {
       "id": "styles.color-roles",
@@ -4262,7 +4359,8 @@
     "docs/measurements/t163-repeat-preview-focus-linux.json",
     "docs/measurements/t163-restart-linux.json",
     "docs/measurements/t154-native-composition-linux.json",
-    "docs/measurements/t154-native-owner-linux.json"
+    "docs/measurements/t154-native-owner-linux.json",
+    "docs/measurements/t155-native-style-layers-linux.json"
   ],
   "supersessions": [
     {

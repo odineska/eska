@@ -11,6 +11,7 @@ fn resource(name: &str, value: &str) -> FormResource {
     );
     let document = roxmltree::Document::parse(&text).unwrap();
     FormResource {
+        layer_source: "base".into(),
         style: None,
         picture: None,
         retained_bytes: 0,
@@ -95,6 +96,7 @@ fn descriptor(kind: &str, name: &str, properties: &str) -> FormResource {
         "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><{kind} uuid=\"11111111-1111-1111-1111-111111111111\"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"
     );
     FormResource {
+        layer_source: "base".into(),
         style: None,
         picture: None,
         retained_bytes: 0,
@@ -450,6 +452,7 @@ fn native_style_item_named_like_internal_text_color_uses_its_definition_and_sele
     let text = std::fs::read_to_string(root.join("TextColor.xml")).unwrap();
     let document = roxmltree::Document::parse(&text).unwrap();
     let definition = FormResource {
+        layer_source: "base".into(),
         style: None,
         picture: None,
         retained_bytes: 0,
@@ -548,6 +551,7 @@ fn native_named_title_font_uses_selected_value_definition_and_partial_overrides(
     let text = std::fs::read_to_string(root.join("TitleFont.xml")).unwrap();
     let document = roxmltree::Document::parse(&text).unwrap();
     let definition = FormResource {
+        layer_source: "base".into(),
         style: None,
         picture: None,
         retained_bytes: 0,

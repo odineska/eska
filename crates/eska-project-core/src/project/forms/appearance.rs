@@ -118,7 +118,7 @@ impl<'a> Appearance<'a> {
             role if modern_color_role(role) => role,
             _ => return ResolvedColor::Role(role.into()),
         };
-        if let Some(property) = self.style_property(selected) {
+        if let Some(property) = self.style_property(selected, None) {
             if text(&property.property.value)
                 .is_none_or(|value| value.is_empty() || value == "Auto")
             {
@@ -171,8 +171,11 @@ impl<'a> Appearance<'a> {
             .find(|reference| reference.range == property.origin.range && reference.slot == slot)
             .map(|reference| reference.target.clone())
     }
-    fn style_property(&self, name: &str) -> Option<SourcedProperty> {
+    fn style_property(&self, name: &str, layer: Option<&str>) -> Option<SourcedProperty> {
         self.resources.iter().rev().find_map(|resource| {
+            if layer.is_some_and(|layer| resource.layer_source != layer) {
+                return None;
+            }
             if !resource.descriptor.objects.iter().any(|object| {
                 object.metadata.kind() == MetadataKind::Style
                     && Some(object.metadata.name()) == self.active_style.as_deref()
@@ -193,14 +196,16 @@ impl<'a> Appearance<'a> {
             .name
             .strip_prefix("StyleItem.")
             .unwrap_or(&target.name);
-        if !self.resources.iter().any(|resource| {
+        let definition = self.resources.iter().find(|resource| {
             resource.descriptor.objects.iter().any(|object| {
                 object.metadata.kind() == MetadataKind::StyleItem && object.metadata.name() == name
             })
-        }) {
-            return None;
-        }
-        if let Some(value) = self.style_property(&format!("StyleItem.{name}")) {
+        })?;
+        // A borrowed item's Value can change in a later layer without moving the
+        // item into that layer's common-style value table. Standard roles stay shared.
+        if let Some(value) =
+            self.style_property(&format!("StyleItem.{name}"), Some(&definition.layer_source))
+        {
             return Some(value);
         }
         self.resources.iter().rev().find_map(|resource| {
