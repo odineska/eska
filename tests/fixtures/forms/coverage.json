@@ -1,0 +1,4207 @@
+{
+  "schemaVersion": 1,
+  "catalog": "tests/fixtures/forms/catalog.json",
+  "roadmap": "docs/roadmap/30-managed-form-preview.md",
+  "scope": "Current evidence ledger for T152–T165; related kinds do not imply complete acceptance of that kind. No completion percentage is inferred.",
+  "nativePropertyInventoryComplete": false,
+  "axesAreRequirementsNotAnExhaustiveNativePropertySchema": true,
+  "comparisonPolicy": {
+    "pixelTolerance": 0,
+    "onlyPermittedException": "Random native chart demonstration values, with an explicit reproducible mask; all axes/legend/colors and other pixels remain required."
+  },
+  "profiles": [
+    {
+      "id": "designer-xml",
+      "platformFamily": "8.3.27",
+      "os": "locale-independent semantics",
+      "dpi": null,
+      "zoom": null,
+      "locales": [
+        "ru",
+        "en"
+      ]
+    },
+    {
+      "id": "linux-taxi-96",
+      "platformBuild": "8.3.27.2342",
+      "nativeOs": "Linux ARM64 ALT 10",
+      "ideLocales": [
+        "ru",
+        "en"
+      ],
+      "dpi": 96,
+      "zoom": 100,
+      "nativeUiLocales": "recorded per input/report",
+      "originAndViewport": "recorded per fixture; not position-invariant"
+    },
+    {
+      "id": "windows-taxi-pending",
+      "platformFamily": "8.3.27",
+      "platformBuild": null,
+      "nativeOs": "Windows",
+      "dpi": null,
+      "zoom": null,
+      "status": "deferred"
+    }
+  ],
+  "requiredAxes": [
+    {
+      "id": "source.identity",
+      "requirements": [
+        "identity",
+        "source ranges",
+        "unknown XML",
+        "lossless read-only ownership"
+      ]
+    },
+    {
+      "id": "context.layers",
+      "requirements": [
+        "base configuration",
+        "stored BaseForm",
+        "ordered extensions",
+        "activation",
+        "library",
+        "missing or changed base"
+      ]
+    },
+    {
+      "id": "values.defaults",
+      "requirements": [
+        "absent",
+        "explicit",
+        "Auto",
+        "empty string",
+        "zero",
+        "style reference",
+        "applicable inheritance",
+        "broken reference",
+        "provenance"
+      ]
+    },
+    {
+      "id": "appearance.colors",
+      "requirements": [
+        "foreground",
+        "background",
+        "title",
+        "border",
+        "line",
+        "platform/configuration/style/form/container/element overrides"
+      ]
+    },
+    {
+      "id": "appearance.fonts",
+      "requirements": [
+        "family",
+        "size",
+        "weight",
+        "italic",
+        "underline",
+        "strikeout",
+        "partial override",
+        "shaping",
+        "missing font"
+      ]
+    },
+    {
+      "id": "appearance.pictures",
+      "requirements": [
+        "standard",
+        "common",
+        "custom",
+        "alpha",
+        "scaling",
+        "alignment",
+        "missing resource",
+        "resource provenance"
+      ]
+    },
+    {
+      "id": "layout.geometry",
+      "requirements": [
+        "XML units",
+        "rounding",
+        "order",
+        "nesting",
+        "orientation",
+        "label placement",
+        "empty and hidden containers"
+      ]
+    },
+    {
+      "id": "layout.resizing",
+      "requirements": [
+        "narrow and wide viewport",
+        "long captions",
+        "stretch",
+        "min/max width/height",
+        "wrapping",
+        "scrolling"
+      ]
+    },
+    {
+      "id": "state.display",
+      "requirements": [
+        "normal",
+        "hover",
+        "focus",
+        "selection",
+        "disabled",
+        "read-only",
+        "hidden",
+        "page selection",
+        "collapse"
+      ]
+    },
+    {
+      "id": "text.locale",
+      "requirements": [
+        "metadata language",
+        "IDE ru/en",
+        "Latin",
+        "Cyrillic",
+        "diacritics",
+        "clipping",
+        "line wrapping"
+      ]
+    },
+    {
+      "id": "data.bindings",
+      "requirements": [
+        "scalar types",
+        "references",
+        "composite",
+        "metadata table",
+        "dynamic list",
+        "default preview content",
+        "conditional appearance without BSL"
+      ]
+    },
+    {
+      "id": "commands.automatic",
+      "requirements": [
+        "command areas",
+        "placement",
+        "Auto",
+        "source",
+        "menu",
+        "separators",
+        "picture/text representation"
+      ]
+    },
+    {
+      "id": "table.structure",
+      "requirements": [
+        "column groups",
+        "headers",
+        "footers",
+        "cells",
+        "hierarchy",
+        "rows",
+        "selection",
+        "embedded controls",
+        "command areas"
+      ]
+    },
+    {
+      "id": "surface.content",
+      "requirements": [
+        "all field variants",
+        "document surfaces",
+        "calendar",
+        "scheduler",
+        "chart axes/legend/colors",
+        "native empty data behavior"
+      ]
+    },
+    {
+      "id": "behavior.session",
+      "requirements": [
+        "dirty XML",
+        "external file",
+        "dependencies",
+        "atomic snapshots",
+        "stale recovery",
+        "Undo/Redo",
+        "retained UI identity",
+        "no writes"
+      ]
+    },
+    {
+      "id": "behavior.window",
+      "requirements": [
+        "native detach",
+        "dock",
+        "close",
+        "selection/page handoff",
+        "independent windows",
+        "restart/reload",
+        "same file/different context",
+        "desktops"
+      ]
+    },
+    {
+      "id": "profile.conditions",
+      "requirements": [
+        "platform build",
+        "native OS",
+        "font and graphics versions",
+        "origin",
+        "viewport",
+        "DPI",
+        "zoom",
+        "visible state",
+        "repeatability"
+      ]
+    },
+    {
+      "id": "resources.origin",
+      "requirements": [
+        "font/image origin",
+        "distribution notices",
+        "offline resources"
+      ]
+    },
+    {
+      "id": "performance",
+      "requirements": [
+        "first preview",
+        "dirty latency",
+        "large forms",
+        "incremental dependencies",
+        "memory",
+        "session cleanup"
+      ]
+    }
+  ],
+  "kinds": [
+    {
+      "kind": "AutoCommandBar",
+      "family": "auxiliary",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-tables/Default.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "commands.automatic",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "commands.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "Button",
+      "family": "button",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-primary-buttons/FontRegular.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "commands.automatic",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "styles.color-roles",
+        "styles.font-roles",
+        "buttons.primary-interiors",
+        "buttons.text-widgets",
+        "buttons.usual-widths",
+        "buttons.native-origin",
+        "layout.complete-matrix",
+        "resources.pictures",
+        "commands.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "ButtonGroup",
+      "family": "group",
+      "milestone": "T157",
+      "nativeExample": "tests/fixtures/forms/native-groups/ButtonGroup.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "commands.automatic",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "commands.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "CalendarField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/CalendarField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "ChartField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/ChartField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "CheckBoxField",
+      "family": "field",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-fields/CheckBoxField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "ordinary.complete-states",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "ColumnGroup",
+      "family": "group",
+      "milestone": "T159",
+      "nativeExample": "tests/fixtures/forms/native-tables/Horizontal.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "table.structure",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "tables.native-context-fixtures",
+        "tables.full-pixels",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "CommandBar",
+      "family": "group",
+      "milestone": "T157",
+      "nativeExample": "tests/fixtures/forms/native-groups/CommandBar.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "commands.automatic",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "buttons.primary-interiors",
+        "buttons.text-widgets",
+        "buttons.native-origin",
+        "layout.complete-matrix",
+        "commands.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "ContextMenu",
+      "family": "group",
+      "milestone": "T157",
+      "nativeExample": "tests/fixtures/forms/native-tables/Default.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "commands.automatic",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "commands.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "DendrogramField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/DendrogramField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "ExtendedTooltip",
+      "family": "auxiliary",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-tables/Default.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "commands.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "Form",
+      "family": "root",
+      "milestone": "T157",
+      "nativeExample": "tests/fixtures/forms/native-basic.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "commands.automatic",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "pages.horizontal-forms",
+        "layout.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.navigation-handoff",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "FormattedDocumentField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/FormattedDocumentField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "GanttChartField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/GanttChartField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "GeographicalSchemaField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/GeographicalSchemaField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "GraphicalSchemaField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/GraphicalSchemaField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "HTMLDocumentField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/HTMLDocumentField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "InputField",
+      "family": "field",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-fields/InputField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "styles.color-roles",
+        "input.borders",
+        "input.dimensions",
+        "input.initial-stretch",
+        "input.fonts",
+        "input.default-dates",
+        "pages.horizontal-forms",
+        "layout.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "LabelDecoration",
+      "family": "decoration",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-groups/Decorations.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "ordinary.complete-states",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "LabelField",
+      "family": "field",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-fields/LabelField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "ordinary.complete-states",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "PDFDocumentField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/PDFDocumentField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "Page",
+      "family": "group",
+      "milestone": "T157",
+      "nativeExample": "tests/fixtures/forms/native-groups/PagesTop.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "styles.color-roles",
+        "pages.horizontal-forms",
+        "layout.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.navigation-handoff",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "Pages",
+      "family": "group",
+      "milestone": "T157",
+      "nativeExample": "tests/fixtures/forms/native-groups/PagesTop.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "styles.color-roles",
+        "pages.horizontal-forms",
+        "layout.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.navigation-handoff",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "PeriodField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/PeriodField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "PictureDecoration",
+      "family": "decoration",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-groups/Decorations.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "resources.pictures",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "PictureField",
+      "family": "field",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-fields/PictureField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "resources.pictures",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "PlannerField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/PlannerField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "Popup",
+      "family": "group",
+      "milestone": "T157",
+      "nativeExample": "tests/fixtures/forms/native-groups/Popup.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "commands.automatic",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "commands.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "ProgressBarField",
+      "family": "field",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-fields/ProgressBarField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "ordinary.complete-states",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "RadioButtonField",
+      "family": "field",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-fields/RadioButtonField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "ordinary.complete-states",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "SearchControlAddition",
+      "family": "addition",
+      "milestone": "T159",
+      "nativeExample": "tests/fixtures/forms/native-tables/Default.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "table.structure",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "tables.full-pixels",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "SearchStringAddition",
+      "family": "addition",
+      "milestone": "T159",
+      "nativeExample": "tests/fixtures/forms/native-tables/Default.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "table.structure",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "tables.full-pixels",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "SpreadSheetDocumentField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/SpreadSheetDocumentField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "Table",
+      "family": "table",
+      "milestone": "T159",
+      "nativeExample": "tests/fixtures/forms/native-tables/Default.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "commands.automatic",
+        "table.structure",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "tables.native-context-fixtures",
+        "tables.full-pixels",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "TextDocumentField",
+      "family": "field",
+      "milestone": "T160",
+      "nativeExample": "tests/fixtures/forms/native-fields/TextDocumentField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "surfaces.full-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "TrackBarField",
+      "family": "field",
+      "milestone": "T158",
+      "nativeExample": "tests/fixtures/forms/native-fields/TrackBarField.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "ordinary.complete-states",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "UsualGroup",
+      "family": "group",
+      "milestone": "T157",
+      "nativeExample": "tests/fixtures/forms/native-groups/GroupDefault.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "styles.color-roles",
+        "buttons.usual-widths",
+        "pages.horizontal-forms",
+        "layout.complete-matrix",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.navigation-handoff",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    },
+    {
+      "kind": "ViewStatusAddition",
+      "family": "addition",
+      "milestone": "T159",
+      "nativeExample": "tests/fixtures/forms/native-tables/Default.xml",
+      "status": "in_progress",
+      "nativePropertyInventory": "unmeasured",
+      "requiredAxes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "table.structure",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "scopes": [
+        "model.recorded-corpora",
+        "context.ordered-extensions",
+        "styles.named-values",
+        "layout.complete-matrix",
+        "tables.full-pixels",
+        "shell.inspectors",
+        "sessions.dirty-dependencies",
+        "windows.restart",
+        "windows.multiple",
+        "profile.physical-dpi",
+        "performance.full-viewer",
+        "acceptance.full-profile",
+        "profile.windows"
+      ],
+      "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
+    }
+  ],
+  "entries": [
+    {
+      "id": "model.recorded-corpora",
+      "milestone": "T153",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "source.identity"
+      ],
+      "profile": "designer-xml",
+      "level": "semantics",
+      "status": "accepted_scope",
+      "scope": "Read-only structural model: recorded 909 BSP forms, 74 demo forms, 4 demo extension forms, 20 native field fixtures; not complete extension/style semantics.",
+      "fixtures": [
+        "tests/fixtures/forms/native-fields"
+      ],
+      "driver": {
+        "repository": "eska",
+        "path": "crates/eska-project-core/src/project/forms/tests.rs",
+        "caseIds": [
+          "catalog_matches_installed_platform_inventory",
+          "native_exported_field_fixtures_keep_platform_generated_helpers",
+          "source_ranges_preserve_bom_comments_unicode_and_crlf",
+          "namespace_collisions_and_unknown_nodes_remain_explicit"
+        ],
+        "selection": "recorded-corpus-and-parser-unit-tests"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t153-form-model.json",
+          "sha256": "8ae20fe9f42d9c47bc1b857aaf566b65ebdf0bfa521d6e87423081e0013d6cee",
+          "assertions": [
+            {
+              "pointer": "/structuralDiagnostics",
+              "equals": 0
+            },
+            {
+              "pointer": "/sourceWrites",
+              "equals": false
+            },
+            {
+              "pointer": "/unitTestsPassed",
+              "equals": 13
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t153-form-model.json",
+      "remaining": "Native property inventory and complete layer/style semantics remain open.",
+      "nextAction": "Keep model/source mapping checks when extending context semantics."
+    },
+    {
+      "id": "context.ordered-extensions",
+      "milestone": "T154",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "context.layers",
+        "values.defaults"
+      ],
+      "profile": "designer-xml",
+      "level": "semantics",
+      "status": "in_progress",
+      "scope": "Stored BaseForm delta and provenance are implemented and unit-tested; native order/activation/conflict/style equivalence has not been accepted.",
+      "fixtures": [
+        "tests/fixtures/forms/native-basic.xml"
+      ],
+      "driver": null,
+      "evidence": [],
+      "lastConfirmation": null,
+      "remaining": "Native composed forms, two competing extensions, activation/dependencies, base replacement and style priority.",
+      "nextAction": "Build own base plus two extensions, establish native effective-form oracle and compare order/identity/provenance."
+    },
+    {
+      "id": "styles.named-values",
+      "milestone": "T155",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts"
+      ],
+      "profile": "designer-xml",
+      "level": "semantics",
+      "status": "accepted_scope",
+      "scope": "Named selected style payload and partial font overrides in the recorded fixtures.",
+      "fixtures": [
+        "tests/fixtures/forms/native-style-values"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "style",
+        "path": "test/form-style-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t155-native-style-values-linux.json",
+          "sha256": "a5e89fcab0b29798ac2ca12a8f6b288795a423feaa749e9ff112ce955eb379c0",
+          "assertions": [
+            {
+              "pointer": "/namedStyleOverridesVerified",
+              "equals": true
+            }
+          ],
+          "clientCommit": "3e201205f7fbe5b099c23c84a448f262a93f5115"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t155-native-style-values-linux.json",
+      "remaining": "Complete consumer matrix and ordered extension style overrides.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "styles.color-roles",
+      "milestone": "T155",
+      "kinds": [
+        "Button",
+        "InputField",
+        "UsualGroup",
+        "Pages",
+        "Page"
+      ],
+      "axes": [
+        "appearance.colors",
+        "values.defaults"
+      ],
+      "profile": "designer-xml",
+      "level": "semantics",
+      "status": "accepted_scope",
+      "scope": "Recorded predefined/user Color role resolution, including dirty alias fallback.",
+      "fixtures": [
+        "tests/fixtures/forms/native-style-color-roles"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "style-color-roles",
+        "path": "test/form-style-color-roles-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t155-native-style-color-roles-linux.json",
+          "sha256": "1d8ae09d4b7728b0953274ae299acf60b21c2e4d23c9f7696ac3c823f03c0bbe",
+          "assertions": [
+            {
+              "pointer": "/styleColorResolutionVerified",
+              "equals": true
+            }
+          ],
+          "clientCommit": "35eb5f2968a8d8f4af389fcc4388a9d436d0ca21"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t155-native-style-color-roles-linux.json",
+      "remaining": "Other consumers and states; primary button paint is tracked separately.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "styles.font-roles",
+      "milestone": "T155",
+      "kinds": [
+        "Button"
+      ],
+      "axes": [
+        "appearance.fonts",
+        "values.defaults"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Recorded predefined/user font roles and mixed button caption rows; excludes full borders/states outside that corpus.",
+      "fixtures": [
+        "tests/fixtures/forms/native-font-roles"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "font-roles",
+        "path": "test/form-font-roles-host.cjs",
+        "caseIds": [
+          "NormalTextFont",
+          "SmallTextFont",
+          "LargeTextFont",
+          "ExtraLargeTextFont",
+          "TextFont",
+          "AliasTitle",
+          "AliasTitlePartial"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t155-native-font-roles-linux.json",
+          "sha256": "c7b1a62763d2f2af25ef0a2a7e1d744cb654dc8772d679ce40c6c879aca14320",
+          "assertions": [
+            {
+              "pointer": "/fontReferencesVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/mixedFontButtonRowsVerified",
+              "equals": true
+            }
+          ],
+          "clientCommit": "4cd9007898738017d0519cd3f9b427b98d436cba"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t155-native-font-roles-linux.json",
+      "remaining": "Other font families/shaping, state combinations and extension overrides; primary automatic font and borders have later scoped evidence.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "buttons.primary-interiors",
+      "milestone": "T158",
+      "kinds": [
+        "Button",
+        "CommandBar"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "values.defaults"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Primary/ordinary interiors of the recorded 51-form font and 30-color palette corpus.",
+      "fixtures": [
+        "tests/fixtures/forms/native-primary-buttons"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "primary-buttons",
+        "path": "test/form-primary-buttons-host.cjs",
+        "caseIds": [
+          "FontAuto",
+          "FontRegular",
+          "FontBold",
+          "FontPartial14",
+          "FontStyleNormal",
+          "FontForm14",
+          "FontBar14",
+          "FontFormBold",
+          "FontExplicitAuto",
+          "CheckAutoBack",
+          "CheckAutoText",
+          "CheckNormalFalse",
+          "CheckNormal14",
+          "CheckSmall",
+          "CheckLarge",
+          "CheckExtra",
+          "CheckText",
+          "CheckSysAuto",
+          "CheckSys14",
+          "CheckBoldOnly",
+          "CheckAutoDisabled",
+          "Color000000",
+          "Color000040",
+          "Color000080",
+          "Color0000FF",
+          "Color008000",
+          "Color00FF00",
+          "Color00FFFF",
+          "Color0A73B7",
+          "Color202020",
+          "Color20DD20",
+          "Color336699",
+          "Color345678",
+          "Color404040",
+          "Color5511FF",
+          "Color555555",
+          "Color606060",
+          "Color747474",
+          "Color757575",
+          "Color777777",
+          "Color800000",
+          "Color804020",
+          "Color808080",
+          "Color9800FF",
+          "Color99FFFF",
+          "ColorC08080",
+          "ColorFF0000",
+          "ColorFF00FF",
+          "ColorFFE100",
+          "ColorFFFF00",
+          "ColorFFFFFF"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-native-primary-buttons-linux.json",
+          "sha256": "237e996995f43123fbcca347a3924a243399d2cbb2568210efad13a6c763822a",
+          "assertions": [
+            {
+              "pointer": "/checks/scenarios/en/interiorPixelsCompared",
+              "equals": 250932
+            },
+            {
+              "pointer": "/checks/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/checks/scenarios/ru/interiorPixelsCompared",
+              "equals": 250932
+            },
+            {
+              "pointer": "/checks/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            }
+          ],
+          "clientCommit": "0fa6027211624cf6b8d7bfd3edb68753b0b52d16"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-native-primary-buttons-linux.json",
+      "remaining": "Full-widget evidence is tracked in buttons.text-widgets; other representations/states/parents remain open.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "buttons.text-widgets",
+      "milestone": "T158",
+      "kinds": [
+        "Button",
+        "CommandBar"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "All pixels of 153 raised text buttons on white parents in the 51 recorded forms, including one bottom shadow row; 60 samples per IDE locale.",
+      "fixtures": [
+        "tests/fixtures/forms/native-button-borders"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "button-borders",
+        "path": "test/form-button-borders-host.cjs",
+        "caseIds": [
+          "FontAuto",
+          "FontRegular",
+          "FontBold",
+          "FontPartial14",
+          "FontStyleNormal",
+          "FontForm14",
+          "FontBar14",
+          "FontFormBold",
+          "FontExplicitAuto",
+          "CheckAutoBack",
+          "CheckAutoText",
+          "CheckNormalFalse",
+          "CheckNormal14",
+          "CheckSmall",
+          "CheckLarge",
+          "CheckExtra",
+          "CheckText",
+          "CheckSysAuto",
+          "CheckSys14",
+          "CheckBoldOnly",
+          "CheckAutoDisabled",
+          "Color000000",
+          "Color000040",
+          "Color000080",
+          "Color0000FF",
+          "Color008000",
+          "Color00FF00",
+          "Color00FFFF",
+          "Color0A73B7",
+          "Color202020",
+          "Color20DD20",
+          "Color336699",
+          "Color345678",
+          "Color404040",
+          "Color5511FF",
+          "Color555555",
+          "Color606060",
+          "Color747474",
+          "Color757575",
+          "Color777777",
+          "Color800000",
+          "Color804020",
+          "Color808080",
+          "Color9800FF",
+          "Color99FFFF",
+          "ColorC08080",
+          "ColorFF0000",
+          "ColorFF00FF",
+          "ColorFFE100",
+          "ColorFFFF00",
+          "ColorFFFFFF"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-native-button-borders-linux.json",
+          "sha256": "da26d704831c57adf5ba457889df6032d5ec1056c40d3f852c395e2e9c6b4ec5",
+          "assertions": [
+            {
+              "pointer": "/wholeWidgetPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": "fb44d8d3b9cc3038fa66748a74b64d075dc5f9ad"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-native-button-borders-linux.json",
+      "remaining": "Colored parents, UsualButton groups, other representations/states and native origins, DPI/zoom and Windows.",
+      "nextAction": "Use pinned native origin/viewport; expand parent/state/group matrices without new masks."
+    },
+    {
+      "id": "buttons.usual-widths",
+      "milestone": "T157",
+      "kinds": [
+        "Button",
+        "UsualGroup"
+      ],
+      "axes": [
+        "layout.geometry",
+        "layout.resizing"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "Automatic equal widths in horizontal all-UsualButton rows without Width, row insets and mixed font alignment; 12 forms/36 buttons.",
+      "fixtures": [
+        "tests/fixtures/forms/native-usual-buttons"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "usual-buttons",
+        "path": "test/form-usual-buttons-host.cjs",
+        "caseIds": [
+          "ParentWhite",
+          "ParentBlack",
+          "ParentLightBlue",
+          "ParentDarkBlue",
+          "ParentGreen",
+          "ParentFormLightBlue",
+          "ParentLargeBlue14",
+          "ParentLargeDark18",
+          "WidthShort",
+          "WidthLong",
+          "WidthNoStretch",
+          "WidthMixed"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-native-usual-buttons-linux.json",
+          "sha256": "efa1847042a60980fd441f95fbc9c499fe09614483979a6e7c25ce48e0858705",
+          "assertions": [
+            {
+              "pointer": "/geometryVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/visualParityVerified",
+              "equals": false
+            }
+          ],
+          "clientCommit": "f5c2ea77117b9ca3c4b9a525d9934bae1e41d295"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-native-usual-buttons-linux.json",
+      "remaining": "Full pixels, explicit Width, vertical/wrapped/mixed groups.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "buttons.native-origin",
+      "milestone": "T152",
+      "kinds": [
+        "Button",
+        "CommandBar"
+      ],
+      "axes": [
+        "profile.conditions"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "reproduced_mismatch",
+      "scope": "Same native XML produces different border pixels after default/maximized/moved pane positions; a reference-condition difference, not a waived mismatch.",
+      "fixtures": [
+        "tests/fixtures/forms/native-button-poses"
+      ],
+      "driver": null,
+      "evidence": [
+        {
+          "report": "tests/fixtures/forms/native-button-poses/metrics.json",
+          "sha256": "39ae308bd275d8bd93f160d12fc3c70025c013cb45a796717ed24b8ec302f14a",
+          "assertions": [
+            {
+              "pointer": "/rows/0/buttons/0/differentPixelsFromOld",
+              "equals": 2
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "tests/fixtures/forms/native-button-poses/metrics.json",
+      "remaining": "Universal pane-coordinate quantization has not been accepted.",
+      "nextAction": "Restore matching origin/viewport before comparison; retain all pixels and separately measure other poses.",
+      "classification": "reference_conditions"
+    },
+    {
+      "id": "input.borders",
+      "milestone": "T158",
+      "kinds": [
+        "InputField"
+      ],
+      "axes": [
+        "appearance.colors",
+        "state.display",
+        "layout.geometry"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Recorded string/numeric whole widgets, input corners, calculator interiors and states; dates have later dedicated evidence.",
+      "fixtures": [
+        "tests/fixtures/forms/native-input-borders"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "input-borders",
+        "path": "test/form-input-borders-host.cjs",
+        "caseIds": [
+          "InputNumber",
+          "InputColors",
+          "InputFont",
+          "InputReadOnly",
+          "InputDisabled",
+          "Font10Bold",
+          "Font12Normal",
+          "Font14Normal",
+          "Font16Normal",
+          "Font14Number",
+          "InputDate",
+          "InputDateTime",
+          "InputTime",
+          "GroupBackColor",
+          "PagesAuto",
+          "ColorOcean",
+          "ColorPrimary",
+          "ColorMid",
+          "ColorBlack",
+          "ColorWhite",
+          "ColorYellow",
+          "ColorTies",
+          "FreshA",
+          "FreshB",
+          "FreshC",
+          "FreshD",
+          "FreshE",
+          "FreshF",
+          "FreshG",
+          "StatesA",
+          "StatesB",
+          "ChoiceA",
+          "DisabledA",
+          "DisabledB",
+          "DisabledC",
+          "DisabledD",
+          "DisabledE",
+          "DisabledF",
+          "DisabledG",
+          "DisabledH",
+          "DisabledI",
+          "DisabledJ",
+          "DisabledK",
+          "DisabledL",
+          "DisabledExplicitA",
+          "DisabledExplicitB",
+          "DisabledExplicitC",
+          "DisabledExplicitD"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-native-input-borders-linux.json",
+          "sha256": "f5db3ddec08e20e560b0e5bbeddc9382aaef516bc680f615aa9857575b79110d",
+          "assertions": [
+            {
+              "pointer": "/inputBorderPixelsVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/stringAndNumericWidgetsInReferenceMatrixVerified",
+              "equals": true
+            }
+          ],
+          "clientCommit": "c271ae8fcc704487446e7f4c80dcd75756a76f27"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-native-input-borders-linux.json",
+      "remaining": "Other types/states/parents and full property combinations; date masks/calendars are tracked separately.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "input.dimensions",
+      "milestone": "T157",
+      "kinds": [
+        "InputField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "layout.resizing"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "40 recorded forms/160 fields with explicit widths and dimensions.",
+      "fixtures": [
+        "tests/fixtures/forms/native-input-dimensions"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "input-dimensions",
+        "path": "test/form-input-dimensions-host.cjs",
+        "caseIds": [
+          "WidthFont8Width1",
+          "WidthFont8Width10",
+          "WidthFont8Width20",
+          "WidthFont8Width40",
+          "WidthFont10Width1",
+          "WidthFont10Width10",
+          "WidthFont10Width20",
+          "WidthFont10Width40",
+          "WidthFont12Width1",
+          "WidthFont12Width10",
+          "WidthFont12Width20",
+          "WidthFont12Width40",
+          "WidthFont14Width1",
+          "WidthFont14Width10",
+          "WidthFont14Width20",
+          "WidthFont14Width40",
+          "WidthFont16Width1",
+          "WidthFont16Width10",
+          "WidthFont16Width20",
+          "WidthFont16Width40",
+          "BoundsAutoMin10Font10",
+          "BoundsAutoMax10Font10",
+          "BoundsAutoMin20Font10",
+          "BoundsAutoMax5Font10",
+          "BoundsAutoRangeFont10",
+          "BoundsWidth20Max10Font10",
+          "BoundsWidth20Min30Font10",
+          "BoundsWidth20ConflictFont10",
+          "BoundsWidth10RangeFont10",
+          "BoundsWidth40Max20Font10",
+          "BoundsAutoMin10Font16",
+          "BoundsAutoMax10Font16",
+          "BoundsAutoMin20Font16",
+          "BoundsAutoMax5Font16",
+          "BoundsAutoRangeFont16",
+          "BoundsWidth20Max10Font16",
+          "BoundsWidth20Min30Font16",
+          "BoundsWidth20ConflictFont16",
+          "BoundsWidth10RangeFont16",
+          "BoundsWidth40Max20Font16"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-native-input-dimensions-linux.json",
+          "sha256": "15a573dc22472c5310954423b44e22435663f1ae0abc7c3eae25a91c7976c390",
+          "assertions": [
+            {
+              "pointer": "/acceptedMatrix",
+              "equals": true
+            }
+          ],
+          "clientCommit": "d167928be41e98bef858c11a169b02abe8bdf84e"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-native-input-dimensions-linux.json",
+      "remaining": "Manual resizing constraints, bounded strings, other types and ancestor layouts.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "input.initial-stretch",
+      "milestone": "T157",
+      "kinds": [
+        "InputField"
+      ],
+      "axes": [
+        "layout.resizing"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "Initial automatic/true stretch states for the recorded 16 forms/64 fields.",
+      "fixtures": [
+        "tests/fixtures/forms/native-input-stretch"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "input-stretch",
+        "path": "test/form-input-stretch-host.cjs",
+        "caseIds": [
+          "StretchAutoMin20Font10",
+          "StretchAutoMax5Font10",
+          "StretchWidth20ConflictFont10",
+          "StretchWidth20Max10Font10",
+          "StretchAutoMin20Font16",
+          "StretchAutoMax5Font16",
+          "StretchWidth20ConflictFont16",
+          "StretchWidth20Max10Font16",
+          "DefaultAutoMin20Font10",
+          "DefaultAutoMax5Font10",
+          "DefaultWidth20ConflictFont10",
+          "DefaultWidth20Max10Font10",
+          "DefaultAutoMin20Font16",
+          "DefaultAutoMax5Font16",
+          "DefaultWidth20ConflictFont16",
+          "DefaultWidth20Max10Font16"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-native-input-stretch-linux.json",
+          "sha256": "4db0abbc6fd0ea1f74da8a50f45532ec04153f79d34cdd405b080c891f6ede96",
+          "assertions": [
+            {
+              "pointer": "/acceptedInitialStretchMatrix",
+              "equals": true
+            }
+          ],
+          "clientCommit": "f34443f97131b9521d65ff5be336a5dde9e6a9f1"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-native-input-stretch-linux.json",
+      "remaining": "Manual resize min/max, other root dimensions, types and groups.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "input.fonts",
+      "milestone": "T157",
+      "kinds": [
+        "InputField"
+      ],
+      "axes": [
+        "appearance.fonts",
+        "text.locale",
+        "layout.geometry"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Recorded 34 forms/136 fields: full string/numeric widgets, date corners, calculator variants, normal 4–48pt and specified bold/inactive cases.",
+      "fixtures": [
+        "tests/fixtures/forms/native-input-fonts"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "input-fonts",
+        "path": "test/form-input-fonts-host.cjs",
+        "caseIds": [
+          "Font4",
+          "Font5",
+          "Font6",
+          "Font7Disabled",
+          "Font7ReadOnly",
+          "Font7Width20",
+          "Font8Width20",
+          "Font9Width20",
+          "Font10Width20",
+          "Font11Width20",
+          "Font12Width20",
+          "Font13Width20",
+          "Font14Width20",
+          "Font15Width20",
+          "Font16Width20",
+          "Font17Width20",
+          "Font18Width20",
+          "Font18Bold",
+          "Font19Width20",
+          "Font20Width20",
+          "Font21Width20",
+          "Font22Width20",
+          "Font23Width20",
+          "Font24Width20",
+          "Font26Width20",
+          "Font28Width20",
+          "Font32Width20",
+          "Font40Width20",
+          "Font48Width20",
+          "Font20Width1",
+          "Font32Width1",
+          "Font48Width1",
+          "Font18Width1",
+          "Font20Width2"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-native-input-fonts-linux.json",
+          "sha256": "87e052f1c9d79c8dd02e2c976491f5bbbebd9cb6b38c65b2f45d1cb46617fd45",
+          "assertions": [
+            {
+              "pointer": "/acceptedInputFontMatrix",
+              "equals": true
+            }
+          ],
+          "clientCommit": "9199c5224ebf665b1a232796f1121cb29b6e60d7"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-native-input-fonts-linux.json",
+      "remaining": "Other families/italic and state combinations, fonts outside the matrix, DPI and ancestor layouts. The old date-value gap is superseded only by input.default-dates.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "input.default-dates",
+      "milestone": "T158",
+      "kinds": [
+        "InputField"
+      ],
+      "axes": [
+        "data.bindings",
+        "appearance.fonts",
+        "state.display"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "26 recorded forms/104 fields: default empty Date/DateTime/Time masks, calendars, specified fonts and inactive/choice states, including dirty and detached cases.",
+      "fixtures": [
+        "tests/fixtures/forms/native-input-dates"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "input-dates",
+        "path": "test/form-input-dates-host.cjs",
+        "caseIds": [
+          "Date10",
+          "DateTime10",
+          "Time10",
+          "DateDisabled4",
+          "DateDisabled5",
+          "DateDisabled6",
+          "DateDisabled7",
+          "DateDisabled10",
+          "DateReadOnly10",
+          "DateReadOnlyChoice10",
+          "Time7",
+          "DateTime14",
+          "Time18",
+          "DateTime24",
+          "Time48",
+          "DateTime18",
+          "Font4",
+          "Font5",
+          "Font6",
+          "Font7Width20",
+          "Font8Width20",
+          "Font12Width20",
+          "Font14Width20",
+          "Font18Width20",
+          "Font32Width20",
+          "Font48Width20"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-native-input-dates-linux.json",
+          "sha256": "444b7cf3733abe10a4085a3394ed852843de2f8623b06c016b31dc0e780fd277",
+          "assertions": [
+            {
+              "pointer": "/acceptedDefaultDateMatrix",
+              "equals": true
+            }
+          ],
+          "clientCommit": "e05cde7fd1f8fd5c0f0df015d9a7d4dcfadd7ea8"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-native-input-dates-linux.json",
+      "remaining": "Other regional formats, custom Format/input masks, families, states, layouts and DPI.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "pages.horizontal-forms",
+      "milestone": "T157",
+      "kinds": [
+        "Form",
+        "Pages",
+        "Page",
+        "InputField",
+        "UsualGroup"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.colors",
+        "appearance.fonts",
+        "state.display"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "form_pixels",
+      "status": "accepted_scope",
+      "scope": "Whole forms including selection frame/shadow for 32 recorded horizontal tab forms, 47 source states and 51 samples per locale.",
+      "fixtures": [
+        "tests/fixtures/forms/native-tab-borders"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "tab-borders",
+        "path": "test/form-tab-borders-host.cjs",
+        "caseIds": [
+          "font-Default",
+          "font-PagesFont16",
+          "font-PageFont16",
+          "font-PageFont16Bold",
+          "font-PagesColorRed",
+          "font-PageColorBlue",
+          "font-PagesAndPage",
+          "font-PagesFont8",
+          "font-PagesFont12",
+          "font-PagesFont14",
+          "font-PagesFont18",
+          "font-PagesFont24",
+          "font-PagesFont28",
+          "font-PagesFont32",
+          "font-PagesFont12Bold",
+          "ColorOutsideRed",
+          "ColorOutsideGreen",
+          "ColorOutsideBlue",
+          "ColorFreshA",
+          "ColorFreshB",
+          "ColorPrimary",
+          "ColorBlueCyan",
+          "ColorYellowMagenta",
+          "ColorGreys",
+          "ColorTies",
+          "TripleTriplet",
+          "TripleAutoParent",
+          "MaximumFont8",
+          "MaximumFont10",
+          "MaximumFont12",
+          "MaximumFont14",
+          "MaximumFont16"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-native-tab-borders-linux.json",
+          "sha256": "cbb5d0f020768165903ee4c35df8a7b9bd45e148ff83c3cf12e92ac2585ab788",
+          "assertions": [
+            {
+              "pointer": "/wholeFormsInReferenceMatrixVerified",
+              "equals": true
+            }
+          ],
+          "clientCommit": "6467bdf684a3760465d04c56d879a8a29dc1d278"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-native-tab-borders-linux.json",
+      "remaining": "Other tab sides/representations, containers, layout and appearance combinations. Initial detached page transfer is tracked separately.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "layout.complete-matrix",
+      "milestone": "T157",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "layout.geometry",
+        "layout.resizing"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "in_progress",
+      "scope": "Container/field/page implementation and several accepted matrices exist; complete nested/empty/hidden/wrapped/stretch combinations are not accepted.",
+      "fixtures": [
+        "tests/fixtures/forms/native-groups"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "groups",
+        "path": "test/form-groups-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-native-groups-linux.json",
+          "sha256": "3e235d0571b0b9383a986d6c2c7d6e5b3bc2a3b4dffd2e6c13b93f3ac61ac36b",
+          "assertions": [],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-native-groups-linux.json",
+      "remaining": "All relevant container/property/state combinations, narrow/wide roots and explicit constraints.",
+      "nextAction": "Measure common layout rules across several control families; do not calibrate isolated forms."
+    },
+    {
+      "id": "tables.native-context-fixtures",
+      "milestone": "T159",
+      "kinds": [
+        "Table",
+        "ColumnGroup"
+      ],
+      "axes": [
+        "data.bindings",
+        "table.structure"
+      ],
+      "profile": "designer-xml",
+      "level": "semantics",
+      "status": "accepted_scope",
+      "scope": "Own native-exported metadata-bound table and dynamic-list inputs now exist; this closes only the historical fixture absence.",
+      "fixtures": [
+        "tests/fixtures/forms/native-context-tables"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "tables",
+        "path": "test/form-tables-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-complex-linux.json",
+          "sha256": "ce70a95f85c0afb517bf38870ee3841089502adcffe1f25ef7dcbd781e7646cd",
+          "assertions": [
+            {
+              "pointer": "/nativeImportExitCode",
+              "equals": 0
+            },
+            {
+              "pointer": "/nativeExportExitCode",
+              "equals": 0
+            },
+            {
+              "pointer": "/visualParityVerified",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
+      "remaining": "Correct complete rendering/semantics and full table pixel comparison remain open.",
+      "nextAction": "Compare effective metadata/dynamic table columns and nested header geometry against native inputs."
+    },
+    {
+      "id": "tables.full-pixels",
+      "milestone": "T159",
+      "kinds": [
+        "Table",
+        "ColumnGroup",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "table.structure",
+        "appearance.colors",
+        "state.display",
+        "commands.automatic"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "in_progress",
+      "scope": "Static table sources, groups, command areas and additions are implemented and characterized; full pixels are not accepted.",
+      "fixtures": [
+        "tests/fixtures/forms/native-tables",
+        "tests/fixtures/forms/native-context-tables",
+        "tests/fixtures/forms/native-table-commands",
+        "tests/fixtures/forms/native-addition-variants"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "tables",
+        "path": "test/form-tables-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t159-native-tables-linux.json",
+          "sha256": "6e295c7a55d669b1fef32e60cbfd55aae7264558a43404b92b4c2b789a3e25ae",
+          "assertions": [],
+          "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t160-native-complex-linux.json",
+          "sha256": "ce70a95f85c0afb517bf38870ee3841089502adcffe1f25ef7dcbd781e7646cd",
+          "assertions": [],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t159-native-tables-linux.json",
+      "remaining": "Headers/footers/cells/hierarchy/selection, nested groups, bindings and all state/style combinations.",
+      "nextAction": "Start with one reproducible whole table and fix shared layout/text/icon causes."
+    },
+    {
+      "id": "surfaces.full-matrix",
+      "milestone": "T160",
+      "kinds": [
+        "CalendarField",
+        "ChartField",
+        "DendrogramField",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "PDFDocumentField",
+        "PeriodField",
+        "PlannerField",
+        "SpreadSheetDocumentField",
+        "TextDocumentField"
+      ],
+      "axes": [
+        "surface.content",
+        "appearance.colors",
+        "appearance.fonts",
+        "state.display"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "in_progress",
+      "scope": "Native minimal/bound fixtures and functional renderers exist for special fields; complete geometry and pixel matrices remain open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-complex-linux.json",
+          "sha256": "ce70a95f85c0afb517bf38870ee3841089502adcffe1f25ef7dcbd781e7646cd",
+          "assertions": [],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
+      "remaining": "Document toolbars/content, calendar/scheduler, chart axes/legend/colors, all property/state combinations; only agreed random chart values may be excluded.",
+      "nextAction": "Choose one native complex surface with deterministic content and accept its full widget before broadening."
+    },
+    {
+      "id": "resources.pictures",
+      "milestone": "T155",
+      "kinds": [
+        "Button",
+        "PictureField",
+        "PictureDecoration"
+      ],
+      "axes": [
+        "appearance.pictures",
+        "resources.origin"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "in_progress",
+      "scope": "Common/standard image resolution and UI behavior are implemented; full image/icon/scaling/composition matrix is not accepted.",
+      "fixtures": [
+        "tests/fixtures/forms/native-groups/Decorations.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "pictures",
+        "path": "test/form-pictures-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t155-form-pictures.json",
+          "sha256": "00a01f160f23e5343e18ca2d29ccbc53d62ed8c67a8d4ffe00645ac10b52d578",
+          "assertions": [],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t155-form-pictures.json",
+      "remaining": "Exact standard icons and all resource kinds, alpha, scale/alignment, missing resources and extension/style overrides.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "commands.complete-matrix",
+      "milestone": "T158",
+      "kinds": [
+        "AutoCommandBar",
+        "CommandBar",
+        "Button",
+        "Popup",
+        "ButtonGroup",
+        "ContextMenu",
+        "ExtendedTooltip"
+      ],
+      "axes": [
+        "commands.automatic",
+        "state.display",
+        "appearance.pictures"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "in_progress",
+      "scope": "Custom/automatic command renderers and inspection exist; complete native command/representation/state matrix is not accepted.",
+      "fixtures": [
+        "tests/fixtures/forms/native-groups"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "groups",
+        "path": "test/form-groups-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [],
+      "lastConfirmation": null,
+      "remaining": "Automatic consumers, separators, menus, hyperlinks, picture/text modes, states and tooltip behavior.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "ordinary.complete-states",
+      "milestone": "T158",
+      "kinds": [
+        "CheckBoxField",
+        "RadioButtonField",
+        "LabelField",
+        "LabelDecoration",
+        "ProgressBarField",
+        "TrackBarField"
+      ],
+      "axes": [
+        "state.display",
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "in_progress",
+      "scope": "Basic controls are implemented and have native inputs; full state/style/font matrices remain open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [],
+      "lastConfirmation": null,
+      "remaining": "All required ordinary-control states, labels, image modes, fonts/colors and native geometry/pixels.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "shell.inspectors",
+      "milestone": "T161",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "source.identity",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "in_progress",
+      "scope": "Configurator-like tree, definitions/properties, XML/module/handler navigation are implemented and separately tested; complete shell behavior matrix remains open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-basic.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "inspectors",
+        "path": "test/form-inspectors-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t161-form-inspectors-linux.json",
+          "sha256": "6e44076e7cd17be812bf4f5ff412b78cf04ccd0aebd28bf49d37f914cd4829e5",
+          "assertions": [],
+          "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t161-form-handlers-linux.json",
+          "sha256": "34dcf95de4d02e3467a08ac287b02314fb98e4a5a2dd2f00077f06720024c24b",
+          "assertions": [],
+          "clientCommit": "7eeb5bf595f00a51103e399baa939e7404cb3363"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t161-form-inspectors-linux.json",
+      "remaining": "Other shell/native navigation/property combinations and complete acceptance.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "sessions.dirty-dependencies",
+      "milestone": "T162",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "behavior.session",
+        "context.layers"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Recorded initial/new/retired/nested dirty inputs, malformed recovery, atomic publication, no writes, stable DOM and detached updates.",
+      "fixtures": [
+        "tests/fixtures/forms/native-basic.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "dependencies",
+        "path": "test/form-dependencies-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t162-input-preparation-linux.json",
+          "sha256": "5390a8414656b1db2cfa194b7d7d1578962a97f4072efe0d809197b040c6aa3f",
+          "assertions": [
+            {
+              "pointer": "/nativeAcceptance/en/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/nativeAcceptance/ru/passed",
+              "equals": true
+            }
+          ],
+          "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t162-dirty-dependencies-linux.json",
+          "sha256": "a7a4d1bf533b4af5066e9cd33f094f2d4705ccb3d9abd24e994721bfdde7b228",
+          "assertions": [],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t162-input-preparation-linux.json",
+      "remaining": "Other dependency/context combinations; restart is tracked in windows.restart rather than retained as a stale blanket gap.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "windows.navigation-handoff",
+      "milestone": "T163",
+      "kinds": [
+        "Form",
+        "Pages",
+        "Page",
+        "UsualGroup"
+      ],
+      "axes": [
+        "behavior.window",
+        "state.display"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Current page/collapse transfers on first detach with root selected, synchronized navigation and docking for the recorded cases.",
+      "fixtures": [
+        "tests/fixtures/forms/native-basic.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "preview",
+        "path": "test/form-preview-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t163-preview-navigation-linux.json",
+          "sha256": "536aafc9c11a487f67a3c149ff4ee8ebff0c50711d3e9d16053c5459cd857377",
+          "assertions": [
+            {
+              "pointer": "/navigationHandoffVerified",
+              "equals": true
+            }
+          ],
+          "clientCommit": "ead9f82496de309c60b495eeca3805131c1eef01"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t163-preview-navigation-linux.json",
+      "remaining": "Physical monitor/DPI, Windows/Remote and other UI-state/context combinations.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "windows.restart",
+      "milestone": "T163",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "behavior.window",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Recorded backend reconnect/held-update and normal-workbench reload/quit+start restore, including dirty hot exit and two serialized panels.",
+      "fixtures": [
+        "tests/fixtures/forms/native-basic.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "restore",
+        "path": "test/form-restore-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t163-restart-linux.json",
+          "sha256": "411d6fa81b68a5a07edc967c8a8052550467271f6f59824aab2594d4f5698ce1",
+          "assertions": [
+            {
+              "pointer": "/backendLifecycle/passed",
+              "equals": true
+            },
+            {
+              "pointer": "/nativeRestoration/passed",
+              "equals": true
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t163-restart-linux.json",
+      "remaining": "Physical DPI, Windows/Remote and other context/window combinations; this is not complete lifecycle or visual acceptance.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "windows.multiple",
+      "milestone": "T163",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "behavior.window"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "in_progress",
+      "scope": "Independent native preview windows, repeated focus and pending close have accepted recorded scenarios; broader display/context matrix remains open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-basic.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "multiple-windows",
+        "path": "test/form-multiple-windows-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t163-multiple-preview-windows-linux.json",
+          "sha256": "d311f9509ea53a4b5f2cc4ace1e38ccaf42a4c36e7ab0bb20420625c228b8470",
+          "assertions": [],
+          "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t163-repeat-preview-focus-linux.json",
+          "sha256": "2d8506244cfed6a031ca42cd8ab84719d965e9f09e8d3b6731db10a6eaebb4d1",
+          "assertions": [],
+          "clientCommit": "db788a241238cc30240a20be6465624fd2961ba8"
+        },
+        {
+          "report": "docs/measurements/t163-pending-close-linux.json",
+          "sha256": "4b01f6ad5ea09a0a8a3e188d8de9bd0d6712b7ad2142b38711078c78e03a62dd",
+          "assertions": [],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t163-multiple-preview-windows-linux.json",
+      "remaining": "Same file in distinct contexts, physical monitors/desktops/DPI and Windows/Remote.",
+      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "profile.physical-dpi",
+      "milestone": "T163",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "profile.conditions",
+        "behavior.window"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "unmeasured",
+      "scope": "Physical monitor/desktop transfers and full DPI/zoom matrix require their own native conditions.",
+      "fixtures": [],
+      "driver": null,
+      "evidence": [],
+      "lastConfirmation": null,
+      "remaining": "DPI, zoom, monitor/desktop changes and matching native viewport/origin.",
+      "nextAction": "Measure isolated native/display profiles; preserve conditions and no pixel tolerances."
+    },
+    {
+      "id": "performance.full-viewer",
+      "milestone": "T164",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "performance"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "unmeasured",
+      "scope": "Full viewer performance acceptance is planned; previous scenario wall times are not product latency/memory acceptance.",
+      "fixtures": [],
+      "driver": null,
+      "evidence": [],
+      "lastConfirmation": null,
+      "remaining": "First view/dirty budgets, large forms, dependency fanout, CPU/memory, cleanup.",
+      "nextAction": "Measure representative full forms after rendering/context matrices stabilize; optimize a demonstrated bottleneck."
+    },
+    {
+      "id": "acceptance.full-profile",
+      "milestone": "T165",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "commands.automatic",
+        "table.structure",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "form_pixels",
+      "status": "unmeasured",
+      "scope": "The complete Taxi 8.3.27 viewer is not accepted by the limited matrices above.",
+      "fixtures": [],
+      "driver": null,
+      "evidence": [],
+      "lastConfirmation": null,
+      "remaining": "All unclosed property/state/profile/context and end-to-end requirements.",
+      "nextAction": "Audit every requirement against current independent evidence; retain Windows deferral and handoff."
+    },
+    {
+      "id": "profile.windows",
+      "milestone": "T165",
+      "kinds": [
+        "AutoCommandBar",
+        "Button",
+        "ButtonGroup",
+        "CalendarField",
+        "ChartField",
+        "CheckBoxField",
+        "ColumnGroup",
+        "CommandBar",
+        "ContextMenu",
+        "DendrogramField",
+        "ExtendedTooltip",
+        "Form",
+        "FormattedDocumentField",
+        "GanttChartField",
+        "GeographicalSchemaField",
+        "GraphicalSchemaField",
+        "HTMLDocumentField",
+        "InputField",
+        "LabelDecoration",
+        "LabelField",
+        "PDFDocumentField",
+        "Page",
+        "Pages",
+        "PeriodField",
+        "PictureDecoration",
+        "PictureField",
+        "PlannerField",
+        "Popup",
+        "ProgressBarField",
+        "RadioButtonField",
+        "SearchControlAddition",
+        "SearchStringAddition",
+        "SpreadSheetDocumentField",
+        "Table",
+        "TextDocumentField",
+        "TrackBarField",
+        "UsualGroup",
+        "ViewStatusAddition"
+      ],
+      "axes": [
+        "source.identity",
+        "context.layers",
+        "values.defaults",
+        "appearance.colors",
+        "appearance.fonts",
+        "appearance.pictures",
+        "layout.geometry",
+        "layout.resizing",
+        "state.display",
+        "text.locale",
+        "data.bindings",
+        "commands.automatic",
+        "table.structure",
+        "surface.content",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "resources.origin",
+        "performance"
+      ],
+      "profile": "windows-taxi-pending",
+      "level": "form_pixels",
+      "status": "deferred",
+      "scope": "User requested Linux implementation first, with notes for a later Windows acceptance agent.",
+      "fixtures": [],
+      "driver": null,
+      "evidence": [],
+      "lastConfirmation": null,
+      "remaining": "Native Windows build/fonts/DPI and all relevant Windows matrices.",
+      "nextAction": "Use docs/measurements/form-preview-windows-handoff.md on the Windows stand.",
+      "decision": "docs/roadmap/30-managed-form-preview.md"
+    }
+  ],
+  "historicalReports": [
+    "docs/measurements/t152-form-catalog.json",
+    "docs/measurements/t152-native-capture-path-linux.json",
+    "docs/measurements/t152-native-fields.json",
+    "docs/measurements/t153-form-model.json",
+    "docs/measurements/t155-form-bindings.json",
+    "docs/measurements/t155-form-pictures.json",
+    "docs/measurements/t155-native-color-roles-linux.json",
+    "docs/measurements/t155-native-font-roles-linux.json",
+    "docs/measurements/t155-native-style-color-roles-linux.json",
+    "docs/measurements/t155-native-style-palette-linux.json",
+    "docs/measurements/t155-native-style-values-linux.json",
+    "docs/measurements/t156-native-button-backgrounds-linux.json",
+    "docs/measurements/t156-native-button-captions-linux.json",
+    "docs/measurements/t156-native-button-kerning-linux.json",
+    "docs/measurements/t156-native-button-metrics-linux.json",
+    "docs/measurements/t156-native-form-titles-linux.json",
+    "docs/measurements/t156-native-frame-corners-linux.json",
+    "docs/measurements/t156-native-frame-selection-linux.json",
+    "docs/measurements/t156-native-lcd-labels-linux.json",
+    "docs/measurements/t157-native-baseline.json",
+    "docs/measurements/t157-native-field-states-linux.json",
+    "docs/measurements/t157-native-groups-linux.json",
+    "docs/measurements/t157-native-input-dimensions-linux.json",
+    "docs/measurements/t157-native-input-fonts-linux.json",
+    "docs/measurements/t157-native-input-stretch-linux.json",
+    "docs/measurements/t157-native-label-allocation-linux.json",
+    "docs/measurements/t157-native-pages-linux.json",
+    "docs/measurements/t157-native-tab-borders-linux.json",
+    "docs/measurements/t157-native-tab-titles-linux.json",
+    "docs/measurements/t157-native-usual-buttons-linux.json",
+    "docs/measurements/t158-bound-fields-linux.json",
+    "docs/measurements/t158-native-button-borders-linux.json",
+    "docs/measurements/t158-native-button-colors-linux.json",
+    "docs/measurements/t158-native-input-borders-linux.json",
+    "docs/measurements/t158-native-input-dates-linux.json",
+    "docs/measurements/t158-native-number-choice-linux.json",
+    "docs/measurements/t158-native-number-edge-linux.json",
+    "docs/measurements/t158-native-number-values-linux.json",
+    "docs/measurements/t158-native-primary-buttons-linux.json",
+    "docs/measurements/t158-native-primary-overrides-linux.json",
+    "docs/measurements/t159-native-table-commands-linux.json",
+    "docs/measurements/t159-native-tables-linux.json",
+    "docs/measurements/t160-native-complex-linux.json",
+    "docs/measurements/t161-form-handlers-linux.json",
+    "docs/measurements/t161-form-inspectors-linux.json",
+    "docs/measurements/t162-dirty-dependencies-linux.json",
+    "docs/measurements/t162-input-preparation-linux.json",
+    "docs/measurements/t163-multiple-preview-windows-linux.json",
+    "docs/measurements/t163-pending-close-linux.json",
+    "docs/measurements/t163-preview-navigation-linux.json",
+    "docs/measurements/t163-repeat-preview-focus-linux.json",
+    "docs/measurements/t163-restart-linux.json"
+  ],
+  "supersessions": [
+    {
+      "id": "input-date-values",
+      "historicalReport": "docs/measurements/t157-native-input-fonts-linux.json",
+      "historicalGap": "Date values/masks/calendars were outside that font/corner scope.",
+      "currentEntries": [
+        "input.default-dates"
+      ],
+      "currentRemainder": "Only recorded default masks/calendars are now accepted; other formats and states remain open."
+    },
+    {
+      "id": "initial-detached-page",
+      "historicalReport": "docs/measurements/t157-native-tab-borders-linux.json",
+      "historicalGap": "New detach with root selected could start on first page.",
+      "currentEntries": [
+        "windows.navigation-handoff"
+      ],
+      "currentRemainder": "Current page/collapse handoff is accepted for recorded cases; physical display/context matrices remain open."
+    },
+    {
+      "id": "restart-blanket-gap",
+      "historicalReport": "docs/measurements/t162-input-preparation-linux.json",
+      "historicalGap": "Restart was left open by input preparation acceptance.",
+      "currentEntries": [
+        "windows.restart"
+      ],
+      "currentRemainder": "Recorded reconnect/restart/restoration is accepted; other lifecycle/display/context combinations remain open."
+    },
+    {
+      "id": "table-context-inputs",
+      "historicalReport": "docs/measurements/t159-native-tables-linux.json",
+      "historicalGap": "Contextual/dynamic table fixtures were missing.",
+      "currentEntries": [
+        "tables.native-context-fixtures"
+      ],
+      "currentRemainder": "Those canonical inputs exist; complete table semantics/pixels remain open."
+    },
+    {
+      "id": "primary-style-and-border",
+      "historicalReport": "docs/measurements/t155-native-style-palette-linux.json",
+      "historicalGap": "Primary palette/ink/borders had not yet been accepted.",
+      "currentEntries": [
+        "buttons.primary-interiors",
+        "buttons.text-widgets"
+      ],
+      "currentRemainder": "Only the recorded primary/font/color and white-parent widget matrices are accepted; other palette consumers remain open."
+    },
+    {
+      "id": "button-text-and-border",
+      "historicalReport": "docs/measurements/t156-native-button-backgrounds-linux.json",
+      "historicalGap": "Text and border rasterization were outside background acceptance.",
+      "currentEntries": [
+        "buttons.text-widgets"
+      ],
+      "currentRemainder": "Recorded full text-button widgets are accepted; other representations, states, parents and profiles remain open."
+    }
+  ],
+  "nextGroups": [
+    {
+      "id": "extensions",
+      "milestones": [
+        "T154"
+      ],
+      "entries": [
+        "context.ordered-extensions"
+      ]
+    },
+    {
+      "id": "styles-resources",
+      "milestones": [
+        "T155",
+        "T156"
+      ],
+      "entries": [
+        "resources.pictures"
+      ]
+    },
+    {
+      "id": "layout-controls",
+      "milestones": [
+        "T157",
+        "T158"
+      ],
+      "entries": [
+        "layout.complete-matrix",
+        "ordinary.complete-states",
+        "commands.complete-matrix"
+      ]
+    },
+    {
+      "id": "tables",
+      "milestones": [
+        "T159"
+      ],
+      "entries": [
+        "tables.full-pixels"
+      ]
+    },
+    {
+      "id": "special-surfaces",
+      "milestones": [
+        "T160"
+      ],
+      "entries": [
+        "surfaces.full-matrix"
+      ]
+    },
+    {
+      "id": "display-lifecycle",
+      "milestones": [
+        "T161",
+        "T162",
+        "T163"
+      ],
+      "entries": [
+        "profile.physical-dpi",
+        "windows.multiple"
+      ]
+    },
+    {
+      "id": "performance-final",
+      "milestones": [
+        "T164",
+        "T165"
+      ],
+      "entries": [
+        "performance.full-viewer",
+        "acceptance.full-profile"
+      ]
+    }
+  ]
+}
