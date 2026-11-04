@@ -1,0 +1,4376 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "exclusions": [],
+  "forms": [
+    {
+      "name": "StretchAutoMin20Font10",
+      "file": "StretchAutoMin20Font10.xml",
+      "sourceXmlSha256": "1b1d837524a716fc97b4bc8a81a79139758c09d0f10307a02af7050a4cdfb1b6",
+      "screenshot": "native-explicit-input-stretch-bounds-StretchAutoMin20Font10-en-full.png",
+      "screenshotSha256": "3d882aabfee9ddc5e459c35a92251789747f10305df8be99f0f2317321a13864",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        259,
+        204
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            161,
+            23
+          ],
+          "logicalWidth": 161,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20",
+            "HorizontalStretch": "true"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "773c8754a071f2f317713c463067cac9de52e62e69934ea5bca561f29844c927",
+          "preferredLogicalWidth": 161
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            99,
+            161,
+            23
+          ],
+          "logicalWidth": 160,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "cd847f62518f900bd1d1addae2ed832069da1a9ce8d336d14cf60328a687af8f",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              211,
+              100,
+              20,
+              21
+            ],
+            "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7"
+          },
+          "preferredLogicalWidth": 121
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            131,
+            161,
+            23
+          ],
+          "logicalWidth": 160,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "a5939ea5452dfabf934fd3909c050d4964c80b9d2070a239e0ec3cd68e9ac431",
+          "preferredLogicalWidth": 121
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            163,
+            161,
+            23
+          ],
+          "logicalWidth": 161,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20",
+            "HorizontalStretch": "true",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "1bdcde40b7c2a09bd48598fb4f9fa5c63c494fc352dce1ad8869ef1e33fcc95b",
+          "preferredLogicalWidth": 101
+        }
+      ]
+    },
+    {
+      "name": "StretchAutoMax5Font10",
+      "file": "StretchAutoMax5Font10.xml",
+      "sourceXmlSha256": "5e554c7a1a7dbbf2b1b8e0ec6f3b9eb7fcc7295b2b1592d12389e12e5aeda5a5",
+      "screenshot": "native-explicit-input-stretch-bounds-StretchAutoMax5Font10-en-full.png",
+      "screenshotSha256": "ffd1e7337d67d364705cf05d2d1544d7a0623622ccf04d63f146fedc113219b4",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        259,
+        204
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            161,
+            23
+          ],
+          "logicalWidth": 161,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5",
+            "HorizontalStretch": "true"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "773c8754a071f2f317713c463067cac9de52e62e69934ea5bca561f29844c927",
+          "preferredLogicalWidth": 161
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            99,
+            161,
+            23
+          ],
+          "logicalWidth": 160,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "cd847f62518f900bd1d1addae2ed832069da1a9ce8d336d14cf60328a687af8f",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              211,
+              100,
+              20,
+              21
+            ],
+            "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7"
+          },
+          "preferredLogicalWidth": 121
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            131,
+            161,
+            23
+          ],
+          "logicalWidth": 160,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "a5939ea5452dfabf934fd3909c050d4964c80b9d2070a239e0ec3cd68e9ac431",
+          "preferredLogicalWidth": 121
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            163,
+            161,
+            23
+          ],
+          "logicalWidth": 161,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5",
+            "HorizontalStretch": "true",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "1bdcde40b7c2a09bd48598fb4f9fa5c63c494fc352dce1ad8869ef1e33fcc95b",
+          "preferredLogicalWidth": 101
+        }
+      ]
+    },
+    {
+      "name": "StretchWidth20ConflictFont10",
+      "file": "StretchWidth20ConflictFont10.xml",
+      "sourceXmlSha256": "f87427434011a50ca389287ab6fc2bb57e7649b81b8c21271787a69d1138193b",
+      "screenshot": "native-explicit-input-stretch-bounds-StretchWidth20ConflictFont10-en-full.png",
+      "screenshotSha256": "873501408994db4283571b3a59975a4064724f4cdda13a16e6d5b0dd5550bc59",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        330,
+        204
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            232,
+            23
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30",
+            "HorizontalStretch": "true"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "8988ebb6b279ebc014495eff9a675cc413e18b6c6ca89c6f440a7a5b9e63130a",
+          "preferredLogicalWidth": 211
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            99,
+            232,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "18d7262b44dbe7768852d5a9a523c6fcb12874404ffd81941b625b07f73a8217",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              282,
+              100,
+              20,
+              21
+            ],
+            "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7"
+          },
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            131,
+            232,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "4d00f4274459ca6d574c7140ae5da622896cb96b2f1a45144ef89a2b7d920ccf",
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            163,
+            232,
+            23
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30",
+            "HorizontalStretch": "true",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "9d33187975f1fabb9e0d661589251061c9f01e00545828ad5428f71df0646cf2",
+          "preferredLogicalWidth": 211
+        }
+      ]
+    },
+    {
+      "name": "StretchWidth20Max10Font10",
+      "file": "StretchWidth20Max10Font10.xml",
+      "sourceXmlSha256": "f028b6e8bb7ebdf2b66a5e50eaed33c771d09c3ee1c14354bb41abacaa6b3386",
+      "screenshot": "native-explicit-input-stretch-bounds-StretchWidth20Max10Font10-en-full.png",
+      "screenshotSha256": "deddb554d9b090af9d9a92993a6c7b2d4cc186f3461d7515616b14d189d4702e",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        330,
+        204
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            232,
+            23
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "HorizontalStretch": "true"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "8988ebb6b279ebc014495eff9a675cc413e18b6c6ca89c6f440a7a5b9e63130a",
+          "preferredLogicalWidth": 211
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            99,
+            232,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "18d7262b44dbe7768852d5a9a523c6fcb12874404ffd81941b625b07f73a8217",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              282,
+              100,
+              20,
+              21
+            ],
+            "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7"
+          },
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            131,
+            232,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "4d00f4274459ca6d574c7140ae5da622896cb96b2f1a45144ef89a2b7d920ccf",
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            163,
+            232,
+            23
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "HorizontalStretch": "true",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "9d33187975f1fabb9e0d661589251061c9f01e00545828ad5428f71df0646cf2",
+          "preferredLogicalWidth": 211
+        }
+      ]
+    },
+    {
+      "name": "StretchAutoMin20Font16",
+      "file": "StretchAutoMin20Font16.xml",
+      "sourceXmlSha256": "0b500bb8671ccebdd8b1c19418d456a34d56b398dc2fa02deaa863a9b9ea0545",
+      "screenshot": "native-explicit-input-stretch-bounds-StretchAutoMin20Font16-en-full.png",
+      "screenshotSha256": "889e567f4fc6f3602bb511a1d79054896867f1ffffc516e7148c9b9c448853aa",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        359,
+        264
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            261,
+            38
+          ],
+          "logicalWidth": 261,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20",
+            "HorizontalStretch": "true"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "769805dde3c639e500066401e2f5f5d8335f2adf70e5f09f18e20c27a1b37e29",
+          "preferredLogicalWidth": 261
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            114,
+            261,
+            38
+          ],
+          "logicalWidth": 260,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "26e80f6f596e63fc6e4ce99e4576c8d3a0d3337f2e2c97ad85aa8e2c8d866ff4",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              311,
+              115,
+              20,
+              36
+            ],
+            "rgbSha256": "f1aced43df387f0e51be42bb2338b4584cab49844fd2623fedb86588cd180dc9"
+          },
+          "preferredLogicalWidth": 181
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            161,
+            261,
+            38
+          ],
+          "logicalWidth": 260,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "835ce71dd41c982b00eecbb80b5500ac19353843002c441d63bb04e94df23696",
+          "preferredLogicalWidth": 181
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            208,
+            261,
+            38
+          ],
+          "logicalWidth": 261,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20",
+            "HorizontalStretch": "true",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "168eedb205f172b90f9d0aa81c3cc36146da7eaf84aa4bff3589419d28ff8fe1",
+          "preferredLogicalWidth": 161
+        }
+      ]
+    },
+    {
+      "name": "StretchAutoMax5Font16",
+      "file": "StretchAutoMax5Font16.xml",
+      "sourceXmlSha256": "fc0c51add776d877c93245e8ef26ac9f75b99c6ed2b5ccf17cc90a7a0f81f04a",
+      "screenshot": "native-explicit-input-stretch-bounds-StretchAutoMax5Font16-en-full.png",
+      "screenshotSha256": "117c30d7f94c88651374a3784203f6b240075938eb9a1f82dc435d6403ffa250",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        359,
+        264
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            261,
+            38
+          ],
+          "logicalWidth": 261,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5",
+            "HorizontalStretch": "true"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "769805dde3c639e500066401e2f5f5d8335f2adf70e5f09f18e20c27a1b37e29",
+          "preferredLogicalWidth": 261
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            114,
+            261,
+            38
+          ],
+          "logicalWidth": 260,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "26e80f6f596e63fc6e4ce99e4576c8d3a0d3337f2e2c97ad85aa8e2c8d866ff4",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              311,
+              115,
+              20,
+              36
+            ],
+            "rgbSha256": "f1aced43df387f0e51be42bb2338b4584cab49844fd2623fedb86588cd180dc9"
+          },
+          "preferredLogicalWidth": 181
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            161,
+            261,
+            38
+          ],
+          "logicalWidth": 260,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "835ce71dd41c982b00eecbb80b5500ac19353843002c441d63bb04e94df23696",
+          "preferredLogicalWidth": 181
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            208,
+            261,
+            38
+          ],
+          "logicalWidth": 261,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5",
+            "HorizontalStretch": "true",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "168eedb205f172b90f9d0aa81c3cc36146da7eaf84aa4bff3589419d28ff8fe1",
+          "preferredLogicalWidth": 161
+        }
+      ]
+    },
+    {
+      "name": "StretchWidth20ConflictFont16",
+      "file": "StretchWidth20ConflictFont16.xml",
+      "sourceXmlSha256": "bce05b394a268239b25c9fa44469866362daa5fe8162db1971007de9bf1f720d",
+      "screenshot": "native-explicit-input-stretch-bounds-StretchWidth20ConflictFont16-en-full.png",
+      "screenshotSha256": "00ec01f9728201e3ee034cad138c3da6bc42c6d9b4e7c11035a325f966633263",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        330,
+        264
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            232,
+            38
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30",
+            "HorizontalStretch": "true"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "9f122e3b72fb633c575f046a06878b6087caf4a78ae5f9423180d1482fc9235d",
+          "preferredLogicalWidth": 211
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            114,
+            232,
+            38
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "a84a962fb38aa3515c7967c03dfe8d14c4373b12af4782288aaa4329cac4c573",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              282,
+              115,
+              20,
+              36
+            ],
+            "rgbSha256": "f1aced43df387f0e51be42bb2338b4584cab49844fd2623fedb86588cd180dc9"
+          },
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            161,
+            232,
+            38
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "110a1efee1abdcf602b11a45d4b9c95465a2dbe762951dfa82db9cb5f0970648",
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            208,
+            232,
+            38
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30",
+            "HorizontalStretch": "true",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "a700214843017f796936a809162172adbd1a228088210b2467be54dafef1652c",
+          "preferredLogicalWidth": 211
+        }
+      ]
+    },
+    {
+      "name": "StretchWidth20Max10Font16",
+      "file": "StretchWidth20Max10Font16.xml",
+      "sourceXmlSha256": "85d7238420d51f2a202e5c700517a0fd564aa0234fd30be224587f21b7b607b6",
+      "screenshot": "native-explicit-input-stretch-bounds-StretchWidth20Max10Font16-en-full.png",
+      "screenshotSha256": "997efc2a344c0c93eb6fa88c717088c3b46b7f1846b87e1b5eecff1860fe404c",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        330,
+        264
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            232,
+            38
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "HorizontalStretch": "true"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "9f122e3b72fb633c575f046a06878b6087caf4a78ae5f9423180d1482fc9235d",
+          "preferredLogicalWidth": 211
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            114,
+            232,
+            38
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "a84a962fb38aa3515c7967c03dfe8d14c4373b12af4782288aaa4329cac4c573",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              282,
+              115,
+              20,
+              36
+            ],
+            "rgbSha256": "f1aced43df387f0e51be42bb2338b4584cab49844fd2623fedb86588cd180dc9"
+          },
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            161,
+            232,
+            38
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "HorizontalStretch": "true"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "110a1efee1abdcf602b11a45d4b9c95465a2dbe762951dfa82db9cb5f0970648",
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            208,
+            232,
+            38
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "HorizontalStretch": "true",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "a700214843017f796936a809162172adbd1a228088210b2467be54dafef1652c",
+          "preferredLogicalWidth": 211
+        }
+      ]
+    },
+    {
+      "name": "DefaultAutoMin20Font10",
+      "file": "DefaultAutoMin20Font10.xml",
+      "sourceXmlSha256": "2c8defe8313ee2e0a219eaf742e8e7ae6d7c52b5026cf2e3326af741169e9880",
+      "screenshot": "native-explicit-input-stretch-bounds-DefaultAutoMin20Font10-en-full.png",
+      "screenshotSha256": "bfcd0c8e8457859ba569095bbed21bdca3c3b5dc86d4d76a79d672acc786bd8b",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        259,
+        204
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            161,
+            23
+          ],
+          "logicalWidth": 161,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "773c8754a071f2f317713c463067cac9de52e62e69934ea5bca561f29844c927",
+          "preferredLogicalWidth": 161
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            99,
+            122,
+            23
+          ],
+          "logicalWidth": 121,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "29c1945d7416b7a29d69bea79ad9ae6eb5258189101d58b993bb788e5dc5f508",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              172,
+              100,
+              20,
+              21
+            ],
+            "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7"
+          },
+          "preferredLogicalWidth": 121
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            131,
+            122,
+            23
+          ],
+          "logicalWidth": 121,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "5e743eb0f547bde30947d437dd3caedc0ef369c398e51c1a911d49d434cde118",
+          "preferredLogicalWidth": 121
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            163,
+            101,
+            23
+          ],
+          "logicalWidth": 101,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "f26b05770d6caee319c17d080398ba373177f0e32bc682dd2b25ae6a7b972243",
+          "preferredLogicalWidth": 101
+        }
+      ]
+    },
+    {
+      "name": "DefaultAutoMax5Font10",
+      "file": "DefaultAutoMax5Font10.xml",
+      "sourceXmlSha256": "447deb2eec5898e4220511aa1ed8427a8365dc20625c6b66fbd12c6f5ca5a35d",
+      "screenshot": "native-explicit-input-stretch-bounds-DefaultAutoMax5Font10-en-full.png",
+      "screenshotSha256": "46b644dfd6805eafc544198ff37690355223a09a64b4746a4f3c196acc8ec002",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        259,
+        204
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            161,
+            23
+          ],
+          "logicalWidth": 161,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "773c8754a071f2f317713c463067cac9de52e62e69934ea5bca561f29844c927",
+          "preferredLogicalWidth": 161
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            99,
+            122,
+            23
+          ],
+          "logicalWidth": 121,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "29c1945d7416b7a29d69bea79ad9ae6eb5258189101d58b993bb788e5dc5f508",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              172,
+              100,
+              20,
+              21
+            ],
+            "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7"
+          },
+          "preferredLogicalWidth": 121
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            131,
+            122,
+            23
+          ],
+          "logicalWidth": 121,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "5e743eb0f547bde30947d437dd3caedc0ef369c398e51c1a911d49d434cde118",
+          "preferredLogicalWidth": 121
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            163,
+            101,
+            23
+          ],
+          "logicalWidth": 101,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "f26b05770d6caee319c17d080398ba373177f0e32bc682dd2b25ae6a7b972243",
+          "preferredLogicalWidth": 101
+        }
+      ]
+    },
+    {
+      "name": "DefaultWidth20ConflictFont10",
+      "file": "DefaultWidth20ConflictFont10.xml",
+      "sourceXmlSha256": "9a52a1629aa451891cade047dcd415bca886cc914585d679c01ae9d1ac5a5a8d",
+      "screenshot": "native-explicit-input-stretch-bounds-DefaultWidth20ConflictFont10-en-full.png",
+      "screenshotSha256": "b70316c3d282ebde80d8df4e1df71b53ba0e31bbf34f294df8c8fdac86c5d177",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        330,
+        204
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            232,
+            23
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "8988ebb6b279ebc014495eff9a675cc413e18b6c6ca89c6f440a7a5b9e63130a",
+          "preferredLogicalWidth": 211
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            99,
+            232,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "18d7262b44dbe7768852d5a9a523c6fcb12874404ffd81941b625b07f73a8217",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              282,
+              100,
+              20,
+              21
+            ],
+            "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7"
+          },
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            131,
+            232,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "4d00f4274459ca6d574c7140ae5da622896cb96b2f1a45144ef89a2b7d920ccf",
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            163,
+            211,
+            23
+          ],
+          "logicalWidth": 211,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "a09abf391289705b568b719d164075f61f14e1cd664cc6fe33cbc9e6730a0ec0",
+          "preferredLogicalWidth": 211
+        }
+      ]
+    },
+    {
+      "name": "DefaultWidth20Max10Font10",
+      "file": "DefaultWidth20Max10Font10.xml",
+      "sourceXmlSha256": "c5b76ec355911e8cfa3fdacb601163d0d8d12fa4dcce70cbc94a62a2ed1e8586",
+      "screenshot": "native-explicit-input-stretch-bounds-DefaultWidth20Max10Font10-en-full.png",
+      "screenshotSha256": "f4945146c63ad39af00a14b9a88454d9a7e6ac2c6fe84e0802086ac64702a1d1",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        330,
+        204
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            232,
+            23
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "8988ebb6b279ebc014495eff9a675cc413e18b6c6ca89c6f440a7a5b9e63130a",
+          "preferredLogicalWidth": 211
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            99,
+            232,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "18d7262b44dbe7768852d5a9a523c6fcb12874404ffd81941b625b07f73a8217",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              282,
+              100,
+              20,
+              21
+            ],
+            "rgbSha256": "bd3e73c3f2aa5b8860fe799a63b469c63e3b97d5e6e0475777dae7d0bf54e2d7"
+          },
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            131,
+            232,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "4d00f4274459ca6d574c7140ae5da622896cb96b2f1a45144ef89a2b7d920ccf",
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            163,
+            211,
+            23
+          ],
+          "logicalWidth": 211,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "a09abf391289705b568b719d164075f61f14e1cd664cc6fe33cbc9e6730a0ec0",
+          "preferredLogicalWidth": 211
+        }
+      ]
+    },
+    {
+      "name": "DefaultAutoMin20Font16",
+      "file": "DefaultAutoMin20Font16.xml",
+      "sourceXmlSha256": "bea2aeeb84832f7641dbf110656d99b76fe1ee586c68f20e2bf4819e6462b8f0",
+      "screenshot": "native-explicit-input-stretch-bounds-DefaultAutoMin20Font16-en-full.png",
+      "screenshotSha256": "8535d580fd6fcddc0fc5f24e56cf9dab9d96eb81b87022d3ac291e92052ca415",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        359,
+        264
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            261,
+            38
+          ],
+          "logicalWidth": 261,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "769805dde3c639e500066401e2f5f5d8335f2adf70e5f09f18e20c27a1b37e29",
+          "preferredLogicalWidth": 261
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            114,
+            182,
+            38
+          ],
+          "logicalWidth": 181,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "01d11e695527e699c6e7de5504ad8a11c3bf3dabb9238dcb573ac95ec2b97b78",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              232,
+              115,
+              20,
+              36
+            ],
+            "rgbSha256": "f1aced43df387f0e51be42bb2338b4584cab49844fd2623fedb86588cd180dc9"
+          },
+          "preferredLogicalWidth": 181
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            161,
+            182,
+            38
+          ],
+          "logicalWidth": 181,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "89eb8ce994fe00dd3d82a6981bc1b986da635a0826cac3beffddcdad9a2583e5",
+          "preferredLogicalWidth": 181
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            208,
+            161,
+            38
+          ],
+          "logicalWidth": 161,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MinWidth": "20",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "faadcde606a420993d2b066d1e7ac9e53db4a8c40c0fa0cab64412fdf1f8b6cb",
+          "preferredLogicalWidth": 161
+        }
+      ]
+    },
+    {
+      "name": "DefaultAutoMax5Font16",
+      "file": "DefaultAutoMax5Font16.xml",
+      "sourceXmlSha256": "4bfdead6a97072b144419f676cb91f7a36d8b7273006780b1418fb8209667d5a",
+      "screenshot": "native-explicit-input-stretch-bounds-DefaultAutoMax5Font16-en-full.png",
+      "screenshotSha256": "adecd8e3ca4ac7330b2c114ce84b3bc3df97d9171c5b3478a27baa72673e04ba",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        359,
+        264
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            261,
+            38
+          ],
+          "logicalWidth": 261,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "769805dde3c639e500066401e2f5f5d8335f2adf70e5f09f18e20c27a1b37e29",
+          "preferredLogicalWidth": 261
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            114,
+            182,
+            38
+          ],
+          "logicalWidth": 181,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "01d11e695527e699c6e7de5504ad8a11c3bf3dabb9238dcb573ac95ec2b97b78",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              232,
+              115,
+              20,
+              36
+            ],
+            "rgbSha256": "f1aced43df387f0e51be42bb2338b4584cab49844fd2623fedb86588cd180dc9"
+          },
+          "preferredLogicalWidth": 181
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            161,
+            182,
+            38
+          ],
+          "logicalWidth": 181,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "89eb8ce994fe00dd3d82a6981bc1b986da635a0826cac3beffddcdad9a2583e5",
+          "preferredLogicalWidth": 181
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            208,
+            161,
+            38
+          ],
+          "logicalWidth": 161,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "MaxWidth": "5",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "faadcde606a420993d2b066d1e7ac9e53db4a8c40c0fa0cab64412fdf1f8b6cb",
+          "preferredLogicalWidth": 161
+        }
+      ]
+    },
+    {
+      "name": "DefaultWidth20ConflictFont16",
+      "file": "DefaultWidth20ConflictFont16.xml",
+      "sourceXmlSha256": "5bac76b8f45c0ecff9d6c6a2382271b68d4a32109bb43533f5bba84e3908b111",
+      "screenshot": "native-explicit-input-stretch-bounds-DefaultWidth20ConflictFont16-en-full.png",
+      "screenshotSha256": "6a0ae88028e68f7d47bbd588b0ced91342aa9b0f1621d1104cdfa17b3ad0983e",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        330,
+        264
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            232,
+            38
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "9f122e3b72fb633c575f046a06878b6087caf4a78ae5f9423180d1482fc9235d",
+          "preferredLogicalWidth": 211
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            114,
+            232,
+            38
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "a84a962fb38aa3515c7967c03dfe8d14c4373b12af4782288aaa4329cac4c573",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              282,
+              115,
+              20,
+              36
+            ],
+            "rgbSha256": "f1aced43df387f0e51be42bb2338b4584cab49844fd2623fedb86588cd180dc9"
+          },
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            161,
+            232,
+            38
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "110a1efee1abdcf602b11a45d4b9c95465a2dbe762951dfa82db9cb5f0970648",
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            208,
+            211,
+            38
+          ],
+          "logicalWidth": 211,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "MinWidth": "30",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "299c11ee0ed0cfa3c76bd9e7cbe7f82476a60d54ef4aa37f62d8417fc38b9c74",
+          "preferredLogicalWidth": 211
+        }
+      ]
+    },
+    {
+      "name": "DefaultWidth20Max10Font16",
+      "file": "DefaultWidth20Max10Font16.xml",
+      "sourceXmlSha256": "1a7f7b4cb4d6f12b0ec50a2308a9bcd0cc94f12e868e6b30e8930135a9180d76",
+      "screenshot": "native-explicit-input-stretch-bounds-DefaultWidth20Max10Font16-en-full.png",
+      "screenshotSha256": "b8236fe77449ba1d364d2c3285874a4acd3e23efcc9f8378a83336eaf1d00ff0",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "frame": [
+        330,
+        264
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            232,
+            38
+          ],
+          "logicalWidth": 232,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "9f122e3b72fb633c575f046a06878b6087caf4a78ae5f9423180d1482fc9235d",
+          "preferredLogicalWidth": 211
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            114,
+            232,
+            38
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "a84a962fb38aa3515c7967c03dfe8d14c4373b12af4782288aaa4329cac4c573",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              282,
+              115,
+              20,
+              36
+            ],
+            "rgbSha256": "f1aced43df387f0e51be42bb2338b4584cab49844fd2623fedb86588cd180dc9"
+          },
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "When",
+          "id": 30,
+          "rect": [
+            72,
+            161,
+            232,
+            38
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "date",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "Date"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddeffffffdcdcd8ccccbeffffffffffffa9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "ffffffffffffa9a9a6ffffffdcdcd8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "110a1efee1abdcf602b11a45d4b9c95465a2dbe762951dfa82db9cb5f0970648",
+          "preferredLogicalWidth": 231
+        },
+        {
+          "name": "NoChoice",
+          "id": 40,
+          "rect": [
+            72,
+            208,
+            211,
+            38
+          ],
+          "logicalWidth": 211,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 16,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20",
+            "MaxWidth": "10",
+            "ChoiceButton": "false"
+          },
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": false,
+          "border": [
+            160,
+            160,
+            160
+          ],
+          "background": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            224
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "cornersRgb": {
+            "topLeft": "fdfddeccccbea9a9a6ccccbececec8fefefba9a9a6fefefbffffff",
+            "topRight": "a9a9a6ccccbefdfddefefefbcecec8ccccbefffffffefefba9a9a6",
+            "bottomLeft": "a9a9a6fefefbffffffccccbececec8fefefbfdfddeccccbea9a9a6",
+            "bottomRight": "fffffffefefba9a9a6fefefbcecec8ccccbea9a9a6ccccbefdfdde"
+          },
+          "wholeInputRgbSha256": "299c11ee0ed0cfa3c76bd9e7cbe7f82476a60d54ef4aa37f62d8417fc38b9c74",
+          "preferredLogicalWidth": 211
+        }
+      ]
+    }
+  ]
+}
