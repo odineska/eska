@@ -1042,7 +1042,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "surfaces.html-empty"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3692,7 +3693,7 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
-      "remaining": "Document toolbars/content, text-document fonts, further geographical/graphical/formatted properties and remaining document/calendar/scheduler/chart state combinations. Recorded normal empty text/geographical/graphical/formatted widgets are accepted separately; only agreed random chart values may be excluded.",
+      "remaining": "Document toolbars/content, text-document fonts, further geographical/graphical/formatted/HTML properties and remaining document/calendar/scheduler/chart state combinations. Recorded normal empty text/geographical/graphical/formatted/HTML widgets are accepted separately; only agreed random chart values may be excluded.",
       "nextAction": "Extend deterministic document/surface widgets and native editor font/size rules without treating the accepted plain text-document cases as full T160 acceptance."
     },
     {
@@ -5930,6 +5931,97 @@
       "lastConfirmation": "docs/measurements/t160-native-formatted-linux.json",
       "remaining": "Other fonts/dimension bounds/fractions/stretch and state/color/property combinations, typed-property applicability/computed inspector semantics, nonempty static content, captions/full forms, DPI and Windows.",
       "nextAction": "Preserve exact empty formatted surfaces while extending deterministic surfaces and remaining property/state matrices."
+    },
+    {
+      "id": "surfaces.html-empty",
+      "milestone": "T160",
+      "kinds": [
+        "HTMLDocumentField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.colors",
+        "appearance.fonts",
+        "surface.content",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "All pixels of ten recorded empty normal-10pt html-document inputs: dimensions, ReadOnly/Enabled and border, title hidden, native-removed field BackColor/ShowToolbar requests. Seventeen complete-widget samples per locale include dirty XML/floating/return.",
+      "fixtures": [
+        "tests/fixtures/forms/native-html"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "html",
+        "path": "test/form-html-host.cjs",
+        "caseIds": [
+          "A_Default",
+          "dirty-background",
+          "dirty-border",
+          "restored-default",
+          "floating-default",
+          "floating-dirty-size",
+          "floating-restored",
+          "reattached-default",
+          "B_Size",
+          "C_ReadOnly",
+          "D_Disabled",
+          "E_Border",
+          "F_Background",
+          "G_NoTitle",
+          "H_Large",
+          "I_Toolbar",
+          "J_NoToolbar"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-html-linux.json",
+          "sha256": "cd67b41dbab542fc1205f048cb1123cb16c769ab9fe8eeecdef1db413eee4fec",
+          "assertions": [
+            {
+              "pointer": "/completeEmptyHtmlPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/completeWidgetPixelsCompared",
+              "equals": 1824500
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/completeWidgetPixelsCompared",
+              "equals": 1824500
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/wholeFormVisualParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": "0faf15dcd0438cd0133145d0da6074df7567c1ce"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-html-linux.json",
+      "remaining": "Other fonts/dimension bounds/fractions/stretch and state/color/property combinations, typed-property applicability/computed inspector semantics, nonempty static content, captions/full forms, DPI and Windows.",
+      "nextAction": "Preserve exact empty html surfaces while extending deterministic surfaces and remaining property/state matrices."
     }
   ],
   "historicalReports": [
@@ -6003,7 +6095,8 @@
     "docs/measurements/t160-native-text-document-linux.json",
     "docs/measurements/t160-native-geographical-linux.json",
     "docs/measurements/t160-native-graphical-linux.json",
-    "docs/measurements/t160-native-formatted-linux.json"
+    "docs/measurements/t160-native-formatted-linux.json",
+    "docs/measurements/t160-native-html-linux.json"
   ],
   "supersessions": [
     {
