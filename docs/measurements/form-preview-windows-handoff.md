@@ -1119,19 +1119,21 @@ Linux-координаты относятся к 8.3.27.2342 ARM64. По ним 
 [Формы](../../tests/fixtures/forms/native-united-layout/README.md) ·
 [Linux-замеры до исправления](t157-united-layout-baseline-linux.json).
 
-Для реализованного выравнивания строк запустить `test/form-united-host.cjs`
+Для реализованного выравнивания строк и столбцов запустить `test/form-united-host.cjs`
 с каталогом `tests/fixtures/forms/native-united-layout` в
 `ESKA_FORM_FIXTURES`. Прогон включает оба состояния объединения, вложенную
 пару, resize и изменение dirty XML в отдельном окне. Числовые проверки
-в suite относятся к Linux. Для Windows измерить высоты многострочного
-поля и автоматический отступ на родном Конфигураторе.
-[Результаты Linux](t157-united-rows-linux.json).
+в suite относятся к Linux. Для Windows измерить высоты многострочного поля,
+автоматический отступ и распределение ширины в `RowsF` и `RowsT` на родном
+Конфигураторе.
+[Строки](t157-united-rows-linux.json) ·
+[Столбцы](t157-united-columns-linux.json).
 
 Для сквозного выравнивания запустить suite `through-align` в установленном
 VSIX. Эталон `Labels.xml` проверяет переход `Auto` → `DontUse` → `Use` у
 дочерней группы, `DontUse` у родителя, resize и dirty XML в отдельном окне.
-Сверить собственные размеры полей, длинные подписи и сильный разделитель
-в Конфигураторе Windows.
+Сверить собственные размеры полей, длинные подписи, сильный разделитель,
+корень формы, страницу и окрашенную группу в Конфигураторе Windows.
 [Эталон формы](../../tests/fixtures/forms/native-through-align/README.md) ·
 [Результаты Linux](t157-through-align-linux.json).
 

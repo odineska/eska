@@ -409,6 +409,178 @@
   "eskaCommit": "9b907b40f9c056a7f7ab151a0f8393b8466941de",
   "exactRelativeInputRectangles": 10,
   "explorerCommit": "ca6bc13e646dbb7bdac7341870fab1e9b35616c4",
+  "extendedScopes": {
+    "backendSha256": "1a9f39b5e4b7d29f04bb30579eef8b5b07f49efddfcf57b22a20d5cdeffe75f3",
+    "cases": [
+      {
+        "case": "LabelsRoot",
+        "exactRelativeRectangles": [
+          "en",
+          "ru"
+        ],
+        "nativeScreenshotSha256": "3ddb31cd9da888a9f6b99f10ace1aeb001721378bbec0145f8f3cc0421c945c7",
+        "settings": {
+          "scope": "Form"
+        },
+        "sourceSha256": "38f75005cca50a7d723331136f462f19656af1ef220a76a42c919e94f32cde31"
+      },
+      {
+        "case": "LabelsPage",
+        "exactRelativeRectangles": [
+          "en",
+          "ru"
+        ],
+        "nativeScreenshotSha256": "b89a16dd6b6c68c035eaed29c51e41b739194fada7d24143eb85cf312a23f58b",
+        "settings": {
+          "scope": "Page"
+        },
+        "sourceSha256": "530a01f4c91d3fb5700657c035c646cbcd74521aba9c086f9b26abc5363ca692"
+      },
+      {
+        "case": "LabelsFramedUse",
+        "deltaByLocale": {
+          "en": {
+            "B1": [
+              0,
+              -8,
+              0,
+              0
+            ],
+            "B2": [
+              0,
+              -8,
+              0,
+              0
+            ]
+          },
+          "ru": {
+            "B1": [
+              0,
+              -8,
+              0,
+              0
+            ],
+            "B2": [
+              0,
+              -8,
+              0,
+              0
+            ]
+          }
+        },
+        "exactRelativeRectangles": [],
+        "nativeScreenshotSha256": "a09591a5eb1d560998026bd20ca68967f66be7a860c959f561b5e2865b4c4ede",
+        "settings": {
+          "leftRepresentation": "StrongSeparation",
+          "leftThroughAlign": "Use"
+        },
+        "sourceSha256": "791332971dcf49b86c03bf82470b0c4fc904597a8464d1d9eef3738d492ca6a6"
+      },
+      {
+        "case": "LabelsWeak",
+        "deltaByLocale": {
+          "en": {
+            "A1": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "A2": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "B1": [
+              1,
+              0,
+              0,
+              0
+            ],
+            "B2": [
+              1,
+              0,
+              0,
+              0
+            ]
+          },
+          "ru": {
+            "A1": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "A2": [
+              0,
+              0,
+              1,
+              0
+            ],
+            "B1": [
+              1,
+              0,
+              0,
+              0
+            ],
+            "B2": [
+              1,
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "exactRelativeRectangles": [],
+        "nativeScreenshotSha256": "7eeab32080658cfe63904a1d5449d8442eebde036a458579ca07d0d13acf7103",
+        "settings": {
+          "leftRepresentation": "WeakSeparation"
+        },
+        "sourceSha256": "0e64bbfcb030444a1f78816b3f1b5b66fbb5dcd93708c8f3877c5c8ba7b6dea0"
+      },
+      {
+        "case": "LabelsPainted",
+        "exactRelativeRectangles": [
+          "en",
+          "ru"
+        ],
+        "nativeScreenshotSha256": "54ae4590bcfd0e1e572848a2755cd22c646063b290251ad8292fbfd84f93e287",
+        "settings": {
+          "painted": true
+        },
+        "sourceSha256": "c91a835233680b428ac8ca8bf60dcaf9c1f2097a51ab92958e5af6bac81efdbb"
+      },
+      {
+        "case": "LabelsPaintedUse",
+        "exactRelativeRectangles": [
+          "en",
+          "ru"
+        ],
+        "nativeScreenshotSha256": "d53be85189a286154f7f357c67f37e7bf174c7500b331ad196f34cc4b2ca7a1e",
+        "settings": {
+          "leftThroughAlign": "Use",
+          "painted": true
+        },
+        "sourceSha256": "82f58555d3f51ddb3ec6edd19987e5dbfa21b39682a9287ee6687f9276994fd7"
+      }
+    ],
+    "eskaCommit": "533e2bae32b84828a30f023a93fd4f239a2d160e",
+    "exactRelativeInputRectangles": 4,
+    "explorerCommit": "20ca1c0e526230ea33082133b585417055ba8415",
+    "nativeCases": 6,
+    "regressionCaseCount": 270,
+    "regressionRuns": 16,
+    "verifiedContexts": [
+      "Form root",
+      "Page",
+      "Painted group",
+      "Explicit Use through strong separation",
+      "Auto with weak separation"
+    ],
+    "verifiedInstalledRuntimeFiles": 1303,
+    "vsixSha256": "072f8c7accd7a90eae216b3042641f7a237c6b2794fee4a631c7cce0d67b0dd5"
+  },
   "measurement": "Input border boxes relative to the first input A1. Native interior measurements include a two-pixel correction for the two borders.",
   "nativeBuild": "8.3.27.2342",
   "nativeLocale": "en",
@@ -416,9 +588,8 @@
     "Whole-form pixel comparisons",
     "Title typography and automatic wrapping",
     "Strong separation spacing",
-    "Group participation in form and page roots",
-    "Shared columns in horizontal child groups",
-    "Windows acceptance"
+    "Windows acceptance",
+    "Additional horizontal group and control combinations"
   ],
   "platform": "Linux ARM64 X11",
   "regressionCaseCount": 258,
