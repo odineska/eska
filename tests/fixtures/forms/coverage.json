@@ -1758,7 +1758,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "surfaces.spreadsheet-empty"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3694,7 +3695,7 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
-      "remaining": "Document content/toolbars, text-document fonts, further text/geographical/graphical/formatted/HTML/PDF properties and unrecorded sizes, general PDF scrollbar thumb rules, external additions and remaining document/calendar/scheduler/chart state combinations. Recorded surfaces are accepted separately; only agreed random chart values may be excluded.",
+      "remaining": "Document content/toolbars, text-document fonts, further text/geographical/graphical/formatted/HTML/PDF/spreadsheet properties and unrecorded sizes/combinations, general PDF scrollbar thumb rules, external additions and remaining calendar/scheduler/chart states. Recorded surfaces are accepted separately; only agreed random chart values may be excluded.",
       "nextAction": "Extend deterministic document/surface widgets and native editor font/size rules without treating the accepted plain text-document cases as full T160 acceptance."
     },
     {
@@ -6124,6 +6125,102 @@
       "lastConfirmation": "docs/measurements/t160-native-pdf-linux.json",
       "remaining": "General native thumb-length formula, unrecorded sizes/fonts/stretch/color/property combinations, external ViewStatus/title pixels, content, computed applicability, DPI, full forms and Windows.",
       "nextAction": "Establish the general scrollbar thumb rule, then extend native surface/property matrices while preserving the recorded PDF pixels."
+    },
+    {
+      "id": "surfaces.spreadsheet-empty",
+      "milestone": "T160",
+      "kinds": [
+        "SpreadSheetDocumentField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.colors",
+        "appearance.fonts",
+        "surface.content",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "All pixels of twelve recorded empty normal-10pt spreadsheet sources: three sizes, ReadOnly/Enabled and border, first-cell selection, 63x15 grid, numeric bevel headers and native-removed BackColor/omitted false defaults. Twenty-two complete-surface samples per locale include live dirty/floating grid/header changes. Captions/full forms and other combinations remain open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-spreadsheet"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "spreadsheet",
+        "path": "test/form-spreadsheet-host.cjs",
+        "caseIds": [
+          "A_Default",
+          "dirty-background",
+          "dirty-border",
+          "dirty-grid",
+          "dirty-headers",
+          "restored-default",
+          "floating-default",
+          "floating-dirty-size",
+          "floating-headers",
+          "floating-restored",
+          "reattached-default",
+          "B_Size",
+          "C_ReadOnly",
+          "D_Disabled",
+          "E_Border",
+          "F_Background",
+          "G_NoTitle",
+          "H_Large",
+          "I_NoGrid",
+          "J_Grid",
+          "K_NoHeaders",
+          "L_Headers"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-spreadsheet-linux.json",
+          "sha256": "a2ec42db6c9989a4961e091ca36f934565b3334722fce6ab4d583ca0520cee65",
+          "assertions": [
+            {
+              "pointer": "/completeEmptySpreadsheetSurfacePixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/completeWidgetPixelsCompared",
+              "equals": 2432000
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/completeWidgetPixelsCompared",
+              "equals": 2432000
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/wholeFormVisualParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": "14ddc09536ec7105a5b64a56fc66d4bfef83ccb7"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-spreadsheet-linux.json",
+      "remaining": "Other properties/combinations/styles/fonts/scroll/selection/view-scaling modes, large-document canvas limits, typed applicability, captions/full forms, DPI and Windows.",
+      "nextAction": "Preserve the complete spreadsheet surface and numeric headers while expanding remaining native property/state/size matrices and deterministic surface families."
     }
   ],
   "historicalReports": [
@@ -6199,7 +6296,8 @@
     "docs/measurements/t160-native-graphical-linux.json",
     "docs/measurements/t160-native-formatted-linux.json",
     "docs/measurements/t160-native-html-linux.json",
-    "docs/measurements/t160-native-pdf-linux.json"
+    "docs/measurements/t160-native-pdf-linux.json",
+    "docs/measurements/t160-native-spreadsheet-linux.json"
   ],
   "supersessions": [
     {
