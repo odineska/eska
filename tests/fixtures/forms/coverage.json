@@ -823,7 +823,8 @@
         "context.native-owner-forms",
         "styles.native-layer-values",
         "resources.native-picture-layers",
-        "windows.frame-discovery"
+        "windows.frame-discovery",
+        "sessions.atomic-publication"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -6921,6 +6922,66 @@
       "lastConfirmation": "docs/measurements/t163-native-frame-discovery-linux.json",
       "remaining": "Other target-reparenting races and complete monitor/DPI/Remote/context/window matrices remain open; a test-driver fix does not close T163.",
       "nextAction": "Keep exact frame ownership and pixel checks while implementing the requested Solid state/table/canvas/module/type quality work."
+    },
+    {
+      "id": "sessions.atomic-publication",
+      "milestone": "T162",
+      "kinds": [
+        "Form"
+      ],
+      "axes": [
+        "behavior.session",
+        "state.display",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Atomic incoming SolidJS state, selection and preview-navigation publication; coherent model/culture/sequence/UI snapshot. Native16pair regression includes the separate beta marker changes in the same frozen artifact.",
+      "fixtures": [
+        "tests/fixtures/forms/native-basic.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "preview",
+        "path": "test/form-preview-host.cjs",
+        "caseIds": [
+          "suite"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t162-solid-state-batching-linux.json",
+          "sha256": "70633809827705c71294704616b311559fe9e711e5daf1d49c63c1434ed9a573",
+          "assertions": [
+            {
+              "pointer": "/reactivePublicationCoherent",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/controller/observedSnapshotsAfter",
+              "equals": 1
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 16
+            },
+            {
+              "pointer": "/performanceClaimed",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t162-solid-state-batching-linux.json",
+      "remaining": "Specific canvas dependencies, stable table models, shared lifecycle, module boundaries/types and full native matrices remain open.",
+      "nextAction": "Publish the requested form-preview beta, then continue the queued quality work without weakening pixel diagnostics."
     }
   ],
   "historicalReports": [
@@ -7004,7 +7065,8 @@
     "docs/measurements/t160-native-dendrogram-linux.json",
     "docs/measurements/t160-native-gantt-linux.json",
     "docs/measurements/t160-native-chart-linux.json",
-    "docs/measurements/t163-native-frame-discovery-linux.json"
+    "docs/measurements/t163-native-frame-discovery-linux.json",
+    "docs/measurements/t162-solid-state-batching-linux.json"
   ],
   "supersessions": [
     {
