@@ -1562,3 +1562,15 @@ form-palette-value-doNotUse = Не использовать
 form-palette-value-top = Верх
 form-palette-value-disableAvailability = Отключать доступность
 form-palette-value-always = Всегда
+
+# Additional text box bindings in the Designer palette.
+form-palette-property-MultipleValuesExtendedEdit = РасширенноеРедактированиеМножественныхЗначений
+form-palette-property-Format = Формат
+form-palette-property-ChoiceParameterLinks = СвязиПараметровВыбора
+form-palette-property-ChoiceParameters = ПараметрыВыбора
+form-palette-property-ChoiceForm = ФормаВыбора
+form-palette-property-MultipleValuesBackColor = ЦветФонаМножественныхЗначений
+form-palette-property-MultipleValuesTextColor = ЦветТекстаМножественныхЗначений
+form-palette-property-MultipleValuesFont = ШрифтМножественныхЗначений
+form-palette-property-MultipleValuePictureSize = РазмерКартинкиМножественногоЗначения
+form-palette-property-MultipleValuePictureShape = ФигураКартинкиМножественногоЗначения

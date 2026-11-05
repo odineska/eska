@@ -123,6 +123,7 @@ fn is_boolean(
                 | "Wrap"
                 | "ShowInHeader"
                 | "ShowInFooter"
+                | "ExtendedEditMultipleValues"
                 | "MultiLine"
                 | "PasswordMode"
                 | "AutoMarkIncomplete"

@@ -70,6 +70,10 @@ const BOUND_INPUT: &str =
     include_str!("../../../../tests/fixtures/forms/native-bound-fields/InputField.xml");
 const TABLE_INPUTS: &str =
     include_str!("../../../../tests/fixtures/forms/native-tables/Default.xml");
+const NATIVE_GOODS: &str =
+    include_str!("../../../../tests/fixtures/forms/native-context-tables/Catalog.xml");
+const INPUT_PALETTE: &str =
+    include_str!("../../../../tests/fixtures/forms/native-property-palette/input-field.json");
 
 fn inspect_group(client: &mut Client, context: &Value, snapshot: &Value) -> Value {
     client.request(
@@ -150,21 +154,27 @@ fn update_input(
     )
 }
 
+fn input_without_title() -> String {
+    let title_start = BOUND_INPUT.find("<Title>\n\t\t\t\t<v8:item>").unwrap();
+    let title_end =
+        title_start + BOUND_INPUT[title_start..].find("</Title>").unwrap() + "</Title>".len();
+    [&BOUND_INPUT[..title_start], &BOUND_INPUT[title_end..]].concat()
+}
+
+fn with_form_type(xml: &str, owner: &str, types: &str) -> String {
+    let owner = xml.find(owner).unwrap();
+    let start = owner + xml[owner..].find("<Type>").unwrap();
+    let end = start + xml[start..].find("</Type>").unwrap() + "</Type>".len();
+    format!("{}<Type>{types}</Type>{}", &xml[..start], &xml[end..])
+}
+
 #[test]
 fn form_input_palette_agrees_with_scalar_and_column_contexts_on_dirty_revisions() {
     let directory = fixture();
     let path = directory.0.join("src").join(PATH);
-    let title_start = BOUND_INPUT.find("<Title>\n\t\t\t\t<v8:item>").unwrap();
-    let title_end =
-        title_start + BOUND_INPUT[title_start..].find("</Title>").unwrap() + "</Title>".len();
-    let baseline = [&BOUND_INPUT[..title_start], &BOUND_INPUT[title_end..]].concat();
-    let type_start = baseline.find("<Type>").unwrap();
-    let type_end = type_start + baseline[type_start..].find("</Type>").unwrap() + "</Type>".len();
+    let baseline = input_without_title();
     fs::write(&path, &baseline).unwrap();
-    let native: Value = serde_json::from_str(include_str!(
-        "../../../../tests/fixtures/forms/native-property-palette/input-field.json"
-    ))
-    .unwrap();
+    let native: Value = serde_json::from_str(INPUT_PALETTE).unwrap();
     for locale in ["en-US", "ru-RU"] {
         let mut client = Client::new(&directory.0, locale);
         let (context, node) = connect(&mut client, &directory.0, locale, 41);
@@ -178,10 +188,10 @@ fn form_input_palette_agrees_with_scalar_and_column_contexts_on_dirty_revisions(
             ("boolean", "xs:boolean"),
         ] {
             if raw_type != "xs:string" {
-                let text = format!(
-                    "{}<Type><v8:Type>{raw_type}</v8:Type></Type>{}",
-                    &baseline[..type_start],
-                    &baseline[type_end..]
+                let text = with_form_type(
+                    &baseline,
+                    r#"<Attribute name="Value""#,
+                    &format!("<v8:Type>{raw_type}</v8:Type>"),
                 );
                 opened = update_input(&mut client, &context, &opened, version, &text);
                 version += 1;
@@ -194,6 +204,74 @@ fn form_input_palette_agrees_with_scalar_and_column_contexts_on_dirty_revisions(
         }
         opened = update_input(&mut client, &context, &opened, version, TABLE_INPUTS);
         for (index, case) in ["tableString", "tableNumber"].into_iter().enumerate() {
+            let field = &opened["model"]["root"]["children"][0]["children"][index];
+            let inspected = inspect_input(&mut client, &context, &opened, field, true);
+            assert_input_palette(&inspected, &native, case, locale);
+        }
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(path).unwrap(), baseline);
+}
+
+#[test]
+fn form_input_palette_agrees_with_reference_list_and_additional_column_contexts() {
+    let directory = fixture();
+    let src = directory.0.join("src");
+    let path = src.join(PATH);
+    let baseline = input_without_title();
+    fs::write(&path, &baseline).unwrap();
+    fs::create_dir(src.join("Catalogs")).unwrap();
+    fs::write(src.join("Catalogs/NativeGoods.xml"), NATIVE_GOODS).unwrap();
+    let configuration = src.join("Configuration.xml");
+    let descriptor = fs::read_to_string(&configuration).unwrap().replace(
+        "<ChildObjects>",
+        "<ChildObjects><Catalog>NativeGoods</Catalog>",
+    );
+    fs::write(configuration, descriptor).unwrap();
+    let native: Value = serde_json::from_str(INPUT_PALETTE).unwrap();
+    let table = with_form_type(
+        TABLE_INPUTS,
+        r#"<Column name="Text""#,
+        "<v8:Type>xs:dateTime</v8:Type><v8:DateQualifiers><v8:DateFractions>DateTime</v8:DateFractions></v8:DateQualifiers>",
+    );
+    let table = with_form_type(
+        &table,
+        r#"<Column name="Amount""#,
+        "<v8:Type>xs:boolean</v8:Type>",
+    );
+    for locale in ["en-US", "ru-RU"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let mut opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let identity = opened["model"]["root"]["children"][0]["identity"].clone();
+        let mut version = 2;
+        for (case, types) in [
+            ("unbound", ""),
+            (
+                "mixed",
+                "<v8:Type>xs:string</v8:Type><v8:Type>xs:decimal</v8:Type>",
+            ),
+            ("reference", "<v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>"),
+            (
+                "mixedReference",
+                "<v8:Type>xs:string</v8:Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>",
+            ),
+            ("valueList", "<v8:Type>v8:ValueListType</v8:Type>"),
+        ] {
+            let text = if types.is_empty() {
+                baseline.replace("<DataPath>Value</DataPath>", "")
+            } else {
+                with_form_type(&baseline, r#"<Attribute name="Value""#, types)
+            };
+            opened = update_input(&mut client, &context, &opened, version, &text);
+            version += 1;
+            let field = &opened["model"]["root"]["children"][0];
+            assert_eq!(field["identity"], identity);
+            let inspected = inspect_input(&mut client, &context, &opened, field, true);
+            assert_input_palette(&inspected, &native, case, locale);
+        }
+        opened = update_input(&mut client, &context, &opened, version, &table);
+        for (index, case) in ["tableDate", "tableBoolean"].into_iter().enumerate() {
             let field = &opened["model"]["root"]["children"][0]["children"][index];
             let inspected = inspect_input(&mut client, &context, &opened, field, true);
             assert_input_palette(&inspected, &native, case, locale);
@@ -383,16 +461,16 @@ fn form_input_palette_projects_only_opted_in_events_with_real_xml_sources() {
     assert!(previous["rows"].as_array().unwrap().iter().any(|row| {
         row["category"].is_null() && row["value"]["propertyIndex"] == event["propertyIndex"]
     }));
-    let unbound = changed.replace("<DataPath>Value</DataPath>", "");
-    let updated = update_input(&mut client, &context, &opened, 3, &unbound);
-    let unbound = inspect_input(
+    let unresolved = changed.replace("<DataPath>Value</DataPath>", "<DataPath>Missing</DataPath>");
+    let updated = update_input(&mut client, &context, &opened, 3, &unresolved);
+    let unresolved = inspect_input(
         &mut client,
         &context,
         &updated,
         &updated["model"]["root"]["children"][0],
         true,
     );
-    assert!(unbound["rows"].is_null());
+    assert!(unresolved["rows"].is_null());
     client.finish();
     assert_eq!(fs::read_to_string(path).unwrap(), BOUND_INPUT);
 }

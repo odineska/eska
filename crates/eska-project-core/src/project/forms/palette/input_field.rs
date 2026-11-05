@@ -2,12 +2,83 @@ use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
 };
 use crate::project::forms::{
-    EffectiveElement, ElementPresentation, FieldValueKind, appearance, presentation,
+    EffectiveElement, ElementPresentation, FieldValueKind, appearance, presentation, references,
 };
+use crate::project::metadata_model::PropertyKey;
+
+#[derive(Clone, Copy, Eq, PartialEq)]
+enum InputBinding {
+    Unbound,
+    String,
+    Number,
+    Date,
+    Boolean,
+    CatalogReference,
+    StringAndNumber,
+    StringAndReference,
+    ValueList,
+}
+
+impl InputBinding {
+    fn new(view: &ElementPresentation, element: &EffectiveElement) -> Option<Self> {
+        let types = &view.value_type.types;
+        Some(match view.value_type.kind {
+            FieldValueKind::String => Self::String,
+            FieldValueKind::Number => Self::Number,
+            FieldValueKind::Date => Self::Date,
+            FieldValueKind::Boolean => Self::Boolean,
+            FieldValueKind::Reference if types.iter().any(catalog_reference) => {
+                Self::CatalogReference
+            }
+            FieldValueKind::Composite if types.len() == 2 => {
+                let primitive = |key| {
+                    types.iter().any(|kind| {
+                        presentation::field_value_kind(std::slice::from_ref(kind)) == key
+                    })
+                };
+                if !primitive(FieldValueKind::String) {
+                    return None;
+                }
+                if primitive(FieldValueKind::Number) {
+                    Self::StringAndNumber
+                } else if types.iter().any(catalog_reference) {
+                    Self::StringAndReference
+                } else {
+                    return None;
+                }
+            }
+            FieldValueKind::Document
+                if types.iter().any(|key| {
+                    key.namespace.as_deref() == Some("http://v8.1c.ru/8.1/data/core")
+                        && key.name == "ValueListType"
+                }) && setting_text(element, "ExtendedEditMultipleValues")
+                    .is_none_or(|value| matches!(value, "false" | "0")) =>
+            {
+                Self::ValueList
+            }
+            FieldValueKind::Unknown
+                if presentation::property(element, "DataPath").is_none_or(|property| {
+                    appearance::text(&property.property.value) == Some("")
+                }) =>
+            {
+                Self::Unbound
+            }
+            _ => return None,
+        })
+    }
+}
+
+fn catalog_reference(key: &PropertyKey) -> bool {
+    key.namespace.as_deref() == Some(references::CONFIG) && key.name.starts_with("CatalogRef.")
+}
+
+fn setting_text<'a>(element: &'a EffectiveElement, name: &str) -> Option<&'a str> {
+    appearance::text(&presentation::property(element, name)?.property.value)
+}
 
 #[derive(Clone, Copy)]
 pub(super) struct Context {
-    kind: FieldValueKind,
+    binding: InputBinding,
     in_table: bool,
     manual_max_width: bool,
     manual_max_height: bool,
@@ -15,23 +86,28 @@ pub(super) struct Context {
 
 impl Context {
     pub(super) fn new(view: &ElementPresentation, element: &EffectiveElement) -> Option<Self> {
-        let kind = view.value_type.kind;
+        let binding = InputBinding::new(view, element)?;
         let in_table = view.in_table;
-        let manual_max = |name| {
-            presentation::property(element, name)
-                .and_then(|property| appearance::text(&property.property.value))
-                .is_some_and(|value| matches!(value, "false" | "No" | "0"))
-        };
-        match (kind, in_table) {
-            (FieldValueKind::String | FieldValueKind::Number, _)
-            | (FieldValueKind::Date | FieldValueKind::Boolean, false) => Some(Self {
-                kind,
-                in_table,
-                manual_max_width: manual_max("AutoMaxWidth"),
-                manual_max_height: manual_max("AutoMaxHeight"),
-            }),
-            _ => None,
+        if in_table
+            && !matches!(
+                binding,
+                InputBinding::String
+                    | InputBinding::Number
+                    | InputBinding::Date
+                    | InputBinding::Boolean
+            )
+        {
+            return None;
         }
+        let manual_max = |name| {
+            setting_text(element, name).is_some_and(|value| matches!(value, "false" | "No" | "0"))
+        };
+        Some(Self {
+            binding,
+            in_table,
+            manual_max_width: manual_max("AutoMaxWidth"),
+            manual_max_height: manual_max("AutoMaxHeight"),
+        })
     }
 }
 
@@ -45,10 +121,17 @@ pub(super) fn definitions(context: Context) -> impl Iterator<Item = &'static Pal
 #[derive(Clone, Copy)]
 enum Rule {
     Always,
+    Bound,
+    Unbound,
     Text,
-    NonText,
+    Format,
+    EditFormat,
     Numeric,
-    TextOrBoolean,
+    Wrap,
+    InputHint,
+    ReferenceChoices,
+    ChoiceForm,
+    ValueList,
     Column,
     OutsideTable,
     ManualMaxWidth,
@@ -57,15 +140,31 @@ enum Rule {
 
 impl Rule {
     fn applies(self, context: Context) -> bool {
+        use InputBinding as B;
+        let binding = context.binding;
+        let text = matches!(
+            binding,
+            B::String | B::Unbound | B::StringAndNumber | B::StringAndReference | B::ValueList
+        );
         match self {
             Self::Always => true,
-            Self::Text => context.kind == FieldValueKind::String,
-            Self::NonText => context.kind != FieldValueKind::String,
-            Self::Numeric => context.kind == FieldValueKind::Number,
-            Self::TextOrBoolean => matches!(
-                context.kind,
-                FieldValueKind::String | FieldValueKind::Boolean
+            Self::Bound => binding != B::Unbound,
+            Self::Unbound => binding == B::Unbound,
+            Self::Text => text,
+            Self::Format => binding == B::ValueList || context.in_table && binding != B::String,
+            Self::EditFormat => !matches!(binding, B::String | B::CatalogReference),
+            Self::Numeric => matches!(
+                binding,
+                B::Number | B::Unbound | B::StringAndNumber | B::StringAndReference | B::ValueList
             ),
+            Self::Wrap => text || binding == B::Boolean && !context.in_table,
+            Self::InputHint => text || matches!(binding, B::Boolean | B::CatalogReference),
+            Self::ReferenceChoices => matches!(
+                binding,
+                B::CatalogReference | B::StringAndReference | B::ValueList
+            ),
+            Self::ChoiceForm => binding == B::CatalogReference,
+            Self::ValueList => binding == B::ValueList,
             Self::Column => context.in_table,
             Self::OutsideTable => !context.in_table,
             Self::ManualMaxWidth => context.manual_max_width,
@@ -126,7 +225,7 @@ const INPUT_FIELD: &[Setting] = {
         Binding, Boolean, Color, Dialog, Enum, Font, Localized, Number, Picture, Shortcut, Text,
     };
     use PlatformPropertyValue::{Auto, AutoStretch, Choice, Empty, Unknown};
-    use Rule::{Column, NonText, Numeric, OutsideTable, TextOrBoolean};
+    use Rule::{Column, Numeric, OutsideTable, ReferenceChoices, ValueList};
     use SettingSource::{Attribute, Property};
 
     const CHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(true);
@@ -138,7 +237,12 @@ const INPUT_FIELD: &[Setting] = {
     &[
         setting("Name", Main, Text, Unknown).from(SettingSource::Name),
         setting("Title", Main, Localized, Empty),
-        setting("Type", Main, Enum, Unknown).from(SettingSource::Kind),
+        setting("Type", Main, Enum, Unknown)
+            .from(SettingSource::Kind)
+            .on(Rule::Bound),
+        setting("Type", Main, Enum, Empty)
+            .from(SettingSource::Unmapped)
+            .on(Rule::Unbound),
         setting("DataPath", Main, Binding, Empty),
         setting("TitleLocation", Main, Enum, Auto).captions(&[("Top", "top")]),
         setting("Visible", Main, Boolean, CHECKED),
@@ -159,7 +263,11 @@ const INPUT_FIELD: &[Setting] = {
         setting("ExtendedEdit", Main, Enum, DEFAULT)
             .on(Rule::Text)
             .captions(TRISTATE),
-        setting("EditFormat", Main, Dialog, Empty).on(NonText),
+        setting("MultipleValuesExtendedEdit", Main, Boolean, UNCHECKED)
+            .from(Property("ExtendedEditMultipleValues"))
+            .on(ValueList),
+        setting("Format", Main, Dialog, Empty).on(Rule::Format),
+        setting("EditFormat", Main, Dialog, Empty).on(Rule::EditFormat),
         setting("MinValue", Main, Number, Empty).on(Numeric),
         setting("MaxValue", Main, Number, Empty).on(Numeric),
         setting("FooterText", Main, Localized, Empty).on(Column),
@@ -190,15 +298,18 @@ const INPUT_FIELD: &[Setting] = {
         ),
         setting("TextEdit", Usage, Boolean, CHECKED),
         setting("EditTextUpdate", Usage, Enum, Auto),
-        setting("Wrap", Usage, Boolean, CHECKED).on(TextOrBoolean),
+        setting("Wrap", Usage, Boolean, CHECKED).on(Rule::Wrap),
         setting("MarkNegatives", Usage, Enum, DEFAULT)
             .on(Numeric)
             .captions(TRISTATE),
         setting("AutoMarkIncomplete", Usage, Enum, DEFAULT).captions(TRISTATE),
         setting("AutoChoiceIncomplete", Usage, Enum, DEFAULT).captions(TRISTATE),
         setting("ChoiceFoldersAndItems", Usage, Enum, Auto),
+        setting("ChoiceParameterLinks", Usage, Dialog, Empty).on(ReferenceChoices),
+        setting("ChoiceParameters", Usage, Dialog, Empty).on(ReferenceChoices),
         setting("QuickChoice", Usage, Enum, DEFAULT).captions(TRISTATE),
         setting("ChoiceHistoryOnInput", Usage, Enum, Auto),
+        setting("ChoiceForm", Usage, Dialog, Empty).on(Rule::ChoiceForm),
         setting("TypeLink", Usage, Dialog, Empty),
         setting("AutoShowClearButton", Usage, Enum, Auto)
             .from(Property("AutoShowClearButtonMode"))
@@ -216,7 +327,7 @@ const INPUT_FIELD: &[Setting] = {
         setting("ShowInFooter", Usage, Boolean, CHECKED).on(Column),
         setting("ToolTip", Usage, Localized, Empty),
         setting("ToolTipRepresentation", Usage, Enum, Auto),
-        setting("InputHint", Usage, Localized, Empty).on(TextOrBoolean),
+        setting("InputHint", Usage, Localized, Empty).on(Rule::InputHint),
         setting("HeaderPicture", Appearance, Picture, Empty).on(Column),
         setting("FooterPicture", Appearance, Picture, Empty).on(Column),
         setting("TitleBackColor", Appearance, Color, Auto).on(Column),
@@ -230,6 +341,11 @@ const INPUT_FIELD: &[Setting] = {
         setting("TextColor", Appearance, Color, Auto),
         setting("BorderColor", Appearance, Color, Auto),
         setting("Font", Appearance, Font, Auto),
+        setting("MultipleValuesBackColor", Appearance, Color, Auto).on(ValueList),
+        setting("MultipleValuesTextColor", Appearance, Color, Auto).on(ValueList),
+        setting("MultipleValuesFont", Appearance, Font, Auto).on(ValueList),
+        setting("MultipleValuePictureSize", Appearance, Enum, Auto).on(ValueList),
+        setting("MultipleValuePictureShape", Appearance, Enum, Auto).on(ValueList),
         setting("HorizontalAlignInGroup", Layout, Enum, Auto)
             .from(Property("GroupHorizontalAlign"))
             .on(OutsideTable),

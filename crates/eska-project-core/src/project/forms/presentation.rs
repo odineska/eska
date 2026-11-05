@@ -546,7 +546,12 @@ pub(super) fn field_type(value: &MetadataValue) -> FieldType {
             }
         }
     }
-    result.kind = match result.types.as_slice() {
+    result.kind = field_value_kind(&result.types);
+    result
+}
+
+pub(super) fn field_value_kind(types: &[PropertyKey]) -> FieldValueKind {
+    match types {
         [] => FieldValueKind::Unknown,
         [kind] if kind.namespace.as_deref() == Some("http://www.w3.org/2001/XMLSchema") => {
             match kind.name.as_str() {
@@ -570,8 +575,7 @@ pub(super) fn field_type(value: &MetadataValue) -> FieldType {
         }
         [_] => FieldValueKind::Document,
         _ => FieldValueKind::Composite,
-    };
-    result
+    }
 }
 fn bind(
     element: &EffectiveElement,

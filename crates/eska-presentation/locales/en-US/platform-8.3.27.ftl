@@ -1464,7 +1464,7 @@ form-palette-property-DataPath = DataPath
 form-palette-property-TitleLocation = TitleLocation
 form-palette-property-SkipOnInput = SkipOnInput
 form-palette-property-DefaultItem = DefaultItem
-form-palette-property-OnMainServerUnavailableBehavior = OnMainServerUnavailableBehavior
+form-palette-property-OnMainServerUnavailableBehavior = OnMainServerUnavalableBehavior
 form-palette-property-Mask = Mask
 form-palette-property-PasswordMode = PasswordMode
 form-palette-property-MultiLine = MultiLine
@@ -1562,3 +1562,15 @@ form-palette-value-doNotUse = Do not use
 form-palette-value-top = Top
 form-palette-value-disableAvailability = Disable availability
 form-palette-value-always = Always
+
+# Additional text box bindings in the Designer palette.
+form-palette-property-MultipleValuesExtendedEdit = MultipleValuesExtendedEdit
+form-palette-property-Format = Format
+form-palette-property-ChoiceParameterLinks = ChoiceParameterLinks
+form-palette-property-ChoiceParameters = ChoiceParameters
+form-palette-property-ChoiceForm = ChoiceForm
+form-palette-property-MultipleValuesBackColor = MultipleValuesBackColor
+form-palette-property-MultipleValuesTextColor = MultipleValuesTextColor
+form-palette-property-MultipleValuesFont = MultipleValuesFont
+form-palette-property-MultipleValuePictureSize = MultipleValuePictureSize
+form-palette-property-MultipleValuePictureShape = MultipleValuePictureShape
