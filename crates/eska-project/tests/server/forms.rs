@@ -131,6 +131,7 @@ fn form_palette_agrees_with_the_native_group_catalog_and_round_trip() {
             );
         }
         let group = &opened["model"]["root"]["children"][0];
+        assert_eq!(group["presentation"]["united"], true);
         assert_eq!(group["properties"].as_array().unwrap().len(), 2);
         for (row, expected) in rows.iter().zip(native["rows"].as_array().unwrap()) {
             assert_native_row(row, expected, locale);
@@ -151,6 +152,10 @@ fn form_palette_agrees_with_the_native_group_catalog_and_round_trip() {
             .as_array()
             .unwrap();
         let updated_inspection = inspect_group(&mut client, &context, &updated);
+        assert_eq!(
+            updated["model"]["root"]["children"][0]["presentation"]["united"],
+            false
+        );
         let overrides = updated_inspection["rows"].as_array().unwrap();
         assert_eq!(overrides.len(), rows.len());
         for ((row, updated), expected) in rows

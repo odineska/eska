@@ -1118,3 +1118,10 @@ Linux-координаты относятся к 8.3.27.2342 ARM64. По ним 
 структурная регрессия, а размеры сверяются с родным Конфигуратором Windows.
 [Формы](../../tests/fixtures/forms/native-united-layout/README.md) ·
 [Linux-замеры до исправления](t157-united-layout-baseline-linux.json).
+
+Для реализованного выравнивания строк запустить `test/form-united-host.cjs`
+с каталогом `tests/fixtures/forms/native-united-layout` в
+`ESKA_FORM_FIXTURES`. Прогон включает оба состояния объединения, вложенную
+пару, resize и изменение dirty XML в отдельном окне. Сопоставление
+числовых размеров остаётся отдельной проверкой.
+[Результаты Linux](t157-united-rows-linux.json).

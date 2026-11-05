@@ -280,7 +280,7 @@ const USUAL_GROUP: &[PaletteDefinition] = {
             "United",
             Main,
             Boolean,
-            PlatformPropertyValue::Boolean(true),
+            PlatformPropertyValue::Boolean(super::DEFAULT_GROUP_UNITED),
         ),
         PaletteDefinition::new("ThroughAlign", Main, Enum, Auto),
         PaletteDefinition::new("TitleDataPath", Main, Binding, Empty),

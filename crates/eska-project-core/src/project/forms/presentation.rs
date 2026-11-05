@@ -77,6 +77,7 @@ pub enum FieldTitleLocation {
 pub struct ElementPresentation {
     pub identity: ElementIdentity,
     pub grouping: FormGrouping,
+    pub united: Option<bool>,
     pub displayed: bool,
     pub mark_incomplete: bool,
     pub title_location: FieldTitleLocation,
@@ -214,6 +215,7 @@ fn visit(
     output.push(ElementPresentation {
         identity: element.identity.clone(),
         grouping: grouping(element),
+        united: group_united(element),
         displayed: is_displayed(element, binding.as_ref(), command, appearance)
             && (scope.parent.is_some_and(is_command_area)
                 || !matches!(
@@ -392,10 +394,20 @@ fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
     }
 }
 
+fn group_united(element: &EffectiveElement) -> Option<bool> {
+    (element.kind == Some(ElementKind::UsualGroup)).then(|| {
+        match scalar(&element.properties, "United") {
+            Some("true" | "1") => true,
+            Some("false" | "0") => false,
+            _ => super::DEFAULT_GROUP_UNITED,
+        }
+    })
+}
+
 fn grouping(element: &EffectiveElement) -> FormGrouping {
     match property(element, "Group").and_then(|property| appearance::text(&property.property.value))
     {
-        Some("Horizontal") => FormGrouping::Horizontal,
+        Some("Horizontal" | "AlwaysHorizontal") => FormGrouping::Horizontal,
         Some("HorizontalIfPossible") => FormGrouping::HorizontalIfPossible,
         Some("Vertical") => FormGrouping::Vertical,
         _ if matches!(

@@ -145,6 +145,13 @@ fn form_palette_preserves_each_extensions_declared_property_and_attribute() {
         .unwrap();
     let element = &preview.form.root.children[0];
     let palette = preview.property_palette(&element.identity).unwrap();
+    let group = preview
+        .presentation
+        .elements
+        .iter()
+        .find(|group| group.identity == element.identity)
+        .unwrap();
+    assert_eq!(group.united, Some(false));
     let rows = palette.rows.unwrap();
     let first_source = preview
         .dependencies

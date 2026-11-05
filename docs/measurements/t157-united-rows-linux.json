@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "scope": "Shared rows of ordinary vertical groups in a horizontal container",
+  "platform": "Linux ARM64, X11",
+  "profile": "taxi-8.3.27",
+  "nativeBuild": "8.3.27.2342",
+  "apiVersion": "1.41",
+  "explorerCommit": "5c3b8bb",
+  "nativeBaseline": "t157-united-layout-baseline-linux.json",
+  "artifact": {
+    "vsixSha256": "b616207fc1199ebac057e584cf9773f53a5c865e140ded33c2e2ef08e1609487",
+    "backendSha256": "355acce7b4002de008ba782689d0b39edc27bd18f5d005889f06dcfba82b778f",
+    "verifiedRuntimeFilesPerRun": 1303
+  },
+  "rust": {
+    "suites": 42,
+    "passed": 1524,
+    "ignored": 19
+  },
+  "node": {
+    "passed": 603,
+    "skipped": 8
+  },
+  "bun": {
+    "passed": 591,
+    "skipped": 8
+  },
+  "installedRuns": [
+    {
+      "suite": "united",
+      "locale": "en",
+      "passed": true,
+      "cases": 6
+    },
+    {
+      "suite": "united",
+      "locale": "ru",
+      "passed": true,
+      "cases": 6
+    },
+    {
+      "suite": "responsive",
+      "locale": "en",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "responsive",
+      "locale": "ru",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "detached-space",
+      "locale": "en",
+      "passed": true,
+      "cases": 6
+    },
+    {
+      "suite": "detached-space",
+      "locale": "ru",
+      "passed": true,
+      "cases": 6
+    },
+    {
+      "suite": "inspectors",
+      "locale": "en",
+      "passed": true,
+      "cases": 1
+    },
+    {
+      "suite": "inspectors",
+      "locale": "ru",
+      "passed": true,
+      "cases": 1
+    },
+    {
+      "suite": "application",
+      "locale": "en",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "suite": "application",
+      "locale": "ru",
+      "passed": true,
+      "cases": 4
+    }
+  ],
+  "preferredGeometryByLocale": {
+    "en": [
+      {
+        "kind": "ColumnsFF",
+        "leftGap": 48,
+        "rightGap": 47,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsFT",
+        "leftGap": 65,
+        "rightGap": 32,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsTF",
+        "leftGap": 48,
+        "rightGap": 79,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsTT",
+        "leftGap": 48,
+        "rightGap": 32,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "NestedFF",
+        "leftGap": 48,
+        "rightGap": 47,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "NestedFT",
+        "leftGap": 48,
+        "rightGap": 79,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      }
+    ],
+    "ru": [
+      {
+        "kind": "ColumnsFF",
+        "leftGap": 48,
+        "rightGap": 47,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsFT",
+        "leftGap": 65,
+        "rightGap": 32,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsTF",
+        "leftGap": 48,
+        "rightGap": 79,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsTT",
+        "leftGap": 48,
+        "rightGap": 32,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "NestedFF",
+        "leftGap": 48,
+        "rightGap": 47,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "NestedFT",
+        "leftGap": 48,
+        "rightGap": 79,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      }
+    ]
+  },
+  "validatedTransitions": [
+    "grouped and exposed rows",
+    "nested grouping",
+    "dirty XML in a detached native window",
+    "CSS resize without a new source revision",
+    "retained DOM and untouched files"
+  ],
+  "pending": [
+    "exact multiline input sizes and spacing",
+    "shared column tracks",
+    "ThroughAlign rendering",
+    "complete complex native forms",
+    "Windows acceptance"
+  ]
+}

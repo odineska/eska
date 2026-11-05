@@ -56,6 +56,7 @@ use super::{
 };
 
 pub const FORM_NAMESPACE: &str = "http://v8.1c.ru/8.3/xcf/logform";
+const DEFAULT_GROUP_UNITED: bool = true;
 pub const MAX_FORM_BYTES: usize = 16 * 1024 * 1024;
 pub const MAX_FORM_ELEMENTS: usize = 16_384;
 pub const MAX_FORM_CONTEXT_BYTES: usize = 32 * 1024 * 1024;
