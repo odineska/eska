@@ -1,0 +1,654 @@
+{
+  "schemaVersion": 1,
+  "status": "visual baseline with confirmed differences",
+  "library": "BSP 3.1",
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_24",
+  "eskaCommit": "e01b8c7",
+  "explorerCommit": "3d7a19a",
+  "vsixSha256": "1a64771b7ce1c69be6d023be46e99b6ea66b2aae058520ac5696d743ada560da",
+  "backendSha256": "355acce7b4002de008ba782689d0b39edc27bd18f5d005889f06dcfba82b778f",
+  "nativeWidthMeasurement": "The continuous top frame stroke in the Configurator screenshot. Rounded corners and shadows are outside this stroke.",
+  "sourceWritesDuringViewing": false,
+  "forms": [
+    {
+      "path": "src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml",
+      "sha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "elements": 81,
+      "depth": 6,
+      "groupDepth": 3,
+      "pages": 10,
+      "tables": 2,
+      "manualSizes": 17,
+      "united": {
+        "absent": 12,
+        "false": 3
+      },
+      "parentChildUnited": {
+        "absent/absent": 3
+      },
+      "mixedSiblingSets": 1,
+      "throughAlign": {
+        "absent": 15
+      },
+      "score": 255,
+      "nativeCaptures": [
+        {
+          "file": "native-data-import-max.png",
+          "sha256": "f4b96c84be54cc5248843018a9b59090e7cc92de970dfac0b7b0fab949f6528a",
+          "frameTopStrokePx": 809
+        },
+        {
+          "file": "native-data-matching-page.png",
+          "sha256": "8604aaf8f09db68aebcee30362fc8f9ae729e377aeacd6daff3b09ff5d8c7b53",
+          "frameTopStrokePx": 810
+        }
+      ],
+      "explorer": {
+        "en": {
+          "openThroughFirstPaintMs": 777,
+          "dependencies": 4,
+          "composition": 0,
+          "appearance": [],
+          "samples": [
+            {
+              "label": "preferred-initial",
+              "frame": {
+                "width": 2085,
+                "height": 369
+              },
+              "viewport": {
+                "width": 2109,
+                "height": 393
+              },
+              "visible": 10,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Выбор справочника для загрузки",
+                "Страница вариант заполнение таблицы"
+              ]
+            },
+            {
+              "label": "preferred-alternate",
+              "frame": {
+                "width": 2085,
+                "height": 369
+              },
+              "viewport": {
+                "width": 2109,
+                "height": 393
+              },
+              "visible": 24,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Страница вариант заполнение таблицы",
+                "Сопоставление загружаемых данных"
+              ]
+            },
+            {
+              "label": "allocation-640",
+              "frame": {
+                "width": 2084.625,
+                "height": 314
+              },
+              "viewport": {
+                "width": 625,
+                "height": 81
+              },
+              "visible": 24,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Страница вариант заполнение таблицы",
+                "Сопоставление загружаемых данных"
+              ]
+            },
+            {
+              "label": "allocation-1150",
+              "frame": {
+                "width": 2084.625,
+                "height": 314
+              },
+              "viewport": {
+                "width": 1135,
+                "height": 333
+              },
+              "visible": 24,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Страница вариант заполнение таблицы",
+                "Сопоставление загружаемых данных"
+              ]
+            }
+          ]
+        },
+        "ru": {
+          "openThroughFirstPaintMs": 763,
+          "dependencies": 4,
+          "composition": 0,
+          "appearance": [],
+          "samples": [
+            {
+              "label": "preferred-initial",
+              "frame": {
+                "width": 2085,
+                "height": 369
+              },
+              "viewport": {
+                "width": 2109,
+                "height": 393
+              },
+              "visible": 10,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Выбор справочника для загрузки",
+                "Страница вариант заполнение таблицы"
+              ]
+            },
+            {
+              "label": "preferred-alternate",
+              "frame": {
+                "width": 2085,
+                "height": 369
+              },
+              "viewport": {
+                "width": 2109,
+                "height": 393
+              },
+              "visible": 24,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Страница вариант заполнение таблицы",
+                "Сопоставление загружаемых данных"
+              ]
+            },
+            {
+              "label": "allocation-640",
+              "frame": {
+                "width": 2084.625,
+                "height": 314
+              },
+              "viewport": {
+                "width": 625,
+                "height": 81
+              },
+              "visible": 24,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Страница вариант заполнение таблицы",
+                "Сопоставление загружаемых данных"
+              ]
+            },
+            {
+              "label": "allocation-1150",
+              "frame": {
+                "width": 2084.625,
+                "height": 314
+              },
+              "viewport": {
+                "width": 1135,
+                "height": 333
+              },
+              "visible": 24,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Страница вариант заполнение таблицы",
+                "Сопоставление загружаемых данных"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+      "sha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "elements": 52,
+      "depth": 6,
+      "groupDepth": 3,
+      "pages": 7,
+      "tables": 2,
+      "manualSizes": 18,
+      "united": {
+        "absent": 8,
+        "false": 2
+      },
+      "parentChildUnited": {
+        "absent/absent": 1,
+        "absent/false": 2
+      },
+      "mixedSiblingSets": 0,
+      "throughAlign": {
+        "absent": 10
+      },
+      "score": 190,
+      "nativeCaptures": [
+        {
+          "file": "native-questionnaire-large.png",
+          "sha256": "0b73f53b1415ce85dcd2d55c3ee9b089980df9a7f5895f70b7e78a47c3bc1696",
+          "frameTopStrokePx": 799
+        }
+      ],
+      "explorer": {
+        "en": {
+          "openThroughFirstPaintMs": 513,
+          "dependencies": 10,
+          "composition": 0,
+          "appearance": [],
+          "samples": [
+            {
+              "label": "preferred-initial",
+              "frame": {
+                "width": 754,
+                "height": 768
+              },
+              "viewport": {
+                "width": 778,
+                "height": 792
+              },
+              "visible": 32,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Вид переключателя не отображать",
+                "Страница число"
+              ]
+            },
+            {
+              "label": "preferred-alternate",
+              "frame": {
+                "width": 754,
+                "height": 768
+              },
+              "viewport": {
+                "width": 778,
+                "height": 792
+              },
+              "visible": 14,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Вид переключателя не отображать",
+                "Страница строка"
+              ]
+            },
+            {
+              "label": "allocation-640",
+              "frame": {
+                "width": 737.71875,
+                "height": 768
+              },
+              "viewport": {
+                "width": 625,
+                "height": 81
+              },
+              "visible": 14,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Вид переключателя не отображать",
+                "Страница строка"
+              ]
+            },
+            {
+              "label": "allocation-1150",
+              "frame": {
+                "width": 1111,
+                "height": 768
+              },
+              "viewport": {
+                "width": 1135,
+                "height": 348
+              },
+              "visible": 14,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Вид переключателя не отображать",
+                "Страница строка"
+              ]
+            }
+          ]
+        },
+        "ru": {
+          "openThroughFirstPaintMs": 540,
+          "dependencies": 10,
+          "composition": 0,
+          "appearance": [],
+          "samples": [
+            {
+              "label": "preferred-initial",
+              "frame": {
+                "width": 754,
+                "height": 768
+              },
+              "viewport": {
+                "width": 778,
+                "height": 792
+              },
+              "visible": 32,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Вид переключателя не отображать",
+                "Страница число"
+              ]
+            },
+            {
+              "label": "preferred-alternate",
+              "frame": {
+                "width": 754,
+                "height": 768
+              },
+              "viewport": {
+                "width": 778,
+                "height": 792
+              },
+              "visible": 14,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Вид переключателя не отображать",
+                "Страница строка"
+              ]
+            },
+            {
+              "label": "allocation-640",
+              "frame": {
+                "width": 744,
+                "height": 768
+              },
+              "viewport": {
+                "width": 625,
+                "height": 81
+              },
+              "visible": 14,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Вид переключателя не отображать",
+                "Страница строка"
+              ]
+            },
+            {
+              "label": "allocation-1150",
+              "frame": {
+                "width": 1111,
+                "height": 768
+              },
+              "viewport": {
+                "width": 1135,
+                "height": 348
+              },
+              "visible": 14,
+              "tables": 2,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Вид переключателя не отображать",
+                "Страница строка"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml",
+      "sha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "elements": 52,
+      "depth": 7,
+      "groupDepth": 2,
+      "pages": 4,
+      "tables": 3,
+      "manualSizes": 18,
+      "united": {
+        "absent": 5,
+        "false": 2
+      },
+      "parentChildUnited": {
+        "absent/false": 2,
+        "absent/absent": 2
+      },
+      "mixedSiblingSets": 0,
+      "throughAlign": {
+        "absent": 7
+      },
+      "score": 153,
+      "nativeCaptures": [
+        {
+          "file": "native-totals.png",
+          "sha256": "451f02acc167976d249e63a9bd9b0b48949ada4023089ca490d8caff0ce11af0",
+          "frameTopStrokePx": 1222
+        },
+        {
+          "file": "native-totals-advanced-large.png",
+          "sha256": "487afe4a2884dbe58cbe5cec8ff0894cc868843a9bc2ff5761e1dc773a90889d",
+          "frameTopStrokePx": 1223
+        }
+      ],
+      "explorer": {
+        "en": {
+          "openThroughFirstPaintMs": 694,
+          "dependencies": 8,
+          "composition": 0,
+          "appearance": [],
+          "samples": [
+            {
+              "label": "preferred-initial",
+              "frame": {
+                "width": 1338,
+                "height": 729
+              },
+              "viewport": {
+                "width": 1362,
+                "height": 753
+              },
+              "visible": 18,
+              "tables": 3,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Типовые операции",
+                "Итоги"
+              ]
+            },
+            {
+              "label": "preferred-alternate",
+              "frame": {
+                "width": 1338,
+                "height": 729
+              },
+              "viewport": {
+                "width": 1362,
+                "height": 753
+              },
+              "visible": 17,
+              "tables": 3,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Расширенная",
+                "Итоги"
+              ]
+            },
+            {
+              "label": "allocation-640",
+              "frame": {
+                "width": 1337.640625,
+                "height": 415
+              },
+              "viewport": {
+                "width": 625,
+                "height": 81
+              },
+              "visible": 17,
+              "tables": 3,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Расширенная",
+                "Итоги"
+              ]
+            },
+            {
+              "label": "allocation-1150",
+              "frame": {
+                "width": 1337.640625,
+                "height": 415
+              },
+              "viewport": {
+                "width": 1135,
+                "height": 333
+              },
+              "visible": 17,
+              "tables": 3,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Расширенная",
+                "Итоги"
+              ]
+            }
+          ]
+        },
+        "ru": {
+          "openThroughFirstPaintMs": 696,
+          "dependencies": 8,
+          "composition": 0,
+          "appearance": [],
+          "samples": [
+            {
+              "label": "preferred-initial",
+              "frame": {
+                "width": 1338,
+                "height": 729
+              },
+              "viewport": {
+                "width": 1362,
+                "height": 753
+              },
+              "visible": 18,
+              "tables": 3,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Типовые операции",
+                "Итоги"
+              ]
+            },
+            {
+              "label": "preferred-alternate",
+              "frame": {
+                "width": 1338,
+                "height": 729
+              },
+              "viewport": {
+                "width": 1362,
+                "height": 753
+              },
+              "visible": 17,
+              "tables": 3,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Расширенная",
+                "Итоги"
+              ]
+            },
+            {
+              "label": "allocation-640",
+              "frame": {
+                "width": 1337.640625,
+                "height": 415
+              },
+              "viewport": {
+                "width": 625,
+                "height": 81
+              },
+              "visible": 17,
+              "tables": 3,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Расширенная",
+                "Итоги"
+              ]
+            },
+            {
+              "label": "allocation-1150",
+              "frame": {
+                "width": 1337.640625,
+                "height": 415
+              },
+              "viewport": {
+                "width": 1135,
+                "height": 333
+              },
+              "visible": 17,
+              "tables": 3,
+              "outside": [],
+              "unsupported": [],
+              "pages": [
+                "Расширенная",
+                "Итоги"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "confirmedDifferences": [
+    {
+      "sample": 0,
+      "kind": "form_width",
+      "explorerPreferredWidth": 2085,
+      "nativeTopStrokePx": [
+        809,
+        810
+      ],
+      "contributor": {
+        "name": "ПояснениеОтчетаОЗагрузке",
+        "kind": "LabelDecoration",
+        "explorerMinimumPx": 2051
+      }
+    },
+    {
+      "sample": 0,
+      "kind": "alternate_page_command_bar",
+      "page": "СопоставлениеЗагружаемыхДанных",
+      "native": "Overflow menu for the table commands",
+      "explorer": "Extra inline Find, Cancel matching and CustomizeForm buttons"
+    }
+  ],
+  "pending": [
+    "corrected complex layout",
+    "pixel comparison of the three corrected forms",
+    "ThroughAlign",
+    "Windows acceptance"
+  ]
+}
