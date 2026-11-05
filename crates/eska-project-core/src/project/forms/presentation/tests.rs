@@ -89,6 +89,82 @@ fn designer_choice_list_uses_caption_inside_the_typed_value_wrapper() {
 }
 
 #[test]
+fn standalone_command_bar_uses_the_declared_table_and_its_exclusions() {
+    let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:v8="http://v8.1c.ru/8.1/data/core"
+        xmlns:foreign="urn:foreign">
+        <ChildItems>
+            <CommandBar name="Separate" id="1">
+                <CommandSource>Item.Rows</CommandSource>
+                <ChildItems>
+                    <Button name="Find" id="2"><CommandName>Form.Item.Rows.StandardCommand.Find</CommandName></Button>
+                    <Button name="Cancel" id="3"><CommandName>Form.Item.Rows.StandardCommand.CancelSearch</CommandName></Button>
+                </ChildItems>
+            </CommandBar>
+            <Table name="Rows" id="4"><DataPath>Rows</DataPath>
+                <AutoCommandBar name="RowsBar" id="5"><Autofill>false</Autofill></AutoCommandBar>
+                <CommandSet>
+                    <ExcludedCommand>Add</ExcludedCommand>
+                    <ExcludedCommand>MoveDown</ExcludedCommand>
+                    <ExcludedCommand>Find</ExcludedCommand>
+                    <foreign:ExcludedCommand>MoveUp</foreign:ExcludedCommand>
+                </CommandSet>
+                <ChildItems><ColumnGroup name="Columns" id="6"><ChildItems>
+                    <InputField name="Hidden" id="7"><Visible>false</Visible></InputField>
+                </ChildItems></ColumnGroup></ChildItems>
+            </Table>
+        </ChildItems>
+        <Attributes><Attribute name="Rows" id="1"><Type><v8:Type>v8:ValueTable</v8:Type></Type></Attribute></Attributes>
+    </Form>"#;
+    for (xml, own_commands, projected_commands, find_displayed) in [
+        (xml.to_owned(), false, true, false),
+        (
+            xml.replace("<Autofill>false</Autofill>", ""),
+            true,
+            true,
+            false,
+        ),
+        (
+            xml.replace(
+                r#"<InputField name="Hidden" id="7"><Visible>false</Visible></InputField>"#,
+                "",
+            ),
+            false,
+            false,
+            false,
+        ),
+        (xml.replace("Item.Rows", "Item.Missing"), false, false, true),
+    ] {
+        let document = parse("command-source", xml).unwrap();
+        let form = compose(&document, &[]);
+        let view = present(&form, &[document], &[]);
+        let element = |id| {
+            view.elements
+                .iter()
+                .find(|item| item.identity.key == super::super::ElementKey::Xml(id))
+                .unwrap()
+        };
+        let assert_commands = |item: &ElementPresentation, present| {
+            let keys: Vec<_> = item
+                .auto_command_items
+                .iter()
+                .map(|command| command.key.as_str())
+                .collect();
+            let expected: &[&str] = if present {
+                &["Table.StandardCommand.MoveUp"]
+            } else {
+                &[]
+            };
+            assert_eq!(keys, expected);
+        };
+        assert_commands(element(1), projected_commands);
+        assert_commands(element(4), own_commands);
+        assert_eq!(element(2).displayed, find_displayed);
+        assert!(element(3).displayed);
+    }
+}
+
+#[test]
 fn input_value_and_title_use_distinct_style_roles_without_losing_overrides() {
     let document=parse("colors",format!("<Form xmlns=\"{}\"><ChildItems><InputField name=\"Default\" id=\"1\"/><InputField name=\"Explicit\" id=\"2\"><TextColor>#0000ff</TextColor><TitleTextColor>#ff0000</TitleTextColor></InputField><Button name=\"Action\" id=\"3\"/></ChildItems></Form>",super::super::FORM_NAMESPACE)).unwrap();
     let view = present(&compose(&document, &[]), &[document], &[]);

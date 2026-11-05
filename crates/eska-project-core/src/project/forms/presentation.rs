@@ -113,11 +113,13 @@ pub fn present(
 ) -> FormPresentation {
     let mut appearance = Appearance::new(documents, resources);
     let mut elements = Vec::new();
+    let tables = super::commands::table_index(&form.root);
     visit(
         &form.root,
         VisitScope::default(),
         form,
         resources,
+        &tables,
         &mut appearance,
         &mut elements,
     );
@@ -160,6 +162,7 @@ fn visit(
     scope: VisitScope<'_>,
     form: &ComposedForm,
     resources: &[FormResource],
+    tables: &super::commands::TableIndex<'_>,
     appearance: &mut Appearance<'_>,
     output: &mut Vec<ElementPresentation>,
 ) {
@@ -209,18 +212,15 @@ fn visit(
         .map(|value| choices(&value.property.value, resources))
         .filter(|values| !values.is_empty())
         .unwrap_or_else(|| enum_choices(&value_type, resources));
-    let auto_command_items = match element.kind {
-        Some(ElementKind::Form) => super::commands::automatic(form, resources),
-        Some(ElementKind::Table) => super::commands::table(element, &value_type),
-        _ => Vec::new(),
-    };
+    let auto_command_items = element_commands(element, &value_type, form, resources, tables);
     let auto_commands = standard_form_commands(&auto_command_items);
     let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
     output.push(ElementPresentation {
         identity: element.identity.clone(),
         grouping: grouping(element),
         united: group_united(element),
-        displayed: is_displayed(element, binding.as_ref(), command, appearance)
+        displayed: is_displayed(element, binding.as_ref(), appearance)
+            && super::commands::visible(tables, command)
             && (scope.parent.is_some_and(is_command_area)
                 || !matches!(
                     element.kind,
@@ -254,6 +254,7 @@ fn visit(
             },
             form,
             resources,
+            tables,
             appearance,
             output,
         );
@@ -323,6 +324,26 @@ fn column_caption(caption: PresentationText, in_table: bool) -> PresentationText
     }
 }
 
+fn element_commands(
+    element: &EffectiveElement,
+    value_type: &FieldType,
+    form: &ComposedForm,
+    resources: &[FormResource],
+    tables: &super::commands::TableIndex<'_>,
+) -> Vec<super::AutoCommandItem> {
+    match element.kind {
+        Some(ElementKind::Form) => super::commands::automatic(form, resources),
+        Some(ElementKind::Table) => super::commands::table(element, value_type),
+        Some(ElementKind::CommandBar) => super::commands::table_source(element, tables)
+            .map(|table| {
+                let (_, value_type, _) = bind(table, form, resources);
+                super::commands::table_items(table, &value_type)
+            })
+            .unwrap_or_default(),
+        _ => Vec::new(),
+    }
+}
+
 fn standard_form_commands(items: &[super::AutoCommandItem]) -> Vec<String> {
     items
         .iter()
@@ -337,7 +358,6 @@ fn standard_form_commands(items: &[super::AutoCommandItem]) -> Vec<String> {
 fn is_displayed(
     element: &EffectiveElement,
     binding: Option<&PropertySource>,
-    command: Option<&str>,
     appearance: &mut Appearance<'_>,
 ) -> bool {
     let needs_binding = element.kind.is_some_and(|kind| {
@@ -361,7 +381,6 @@ fn is_displayed(
     (!needs_binding || binding.is_some())
         && property(element, "Visible").and_then(|value| appearance::text(&value.property.value))
             != Some("false")
-        && super::commands::visible(command)
 }
 
 fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
