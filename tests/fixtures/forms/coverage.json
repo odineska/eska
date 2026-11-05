@@ -910,7 +910,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "surfaces.gantt-recorded"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3699,7 +3700,7 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
-      "remaining": "Further document properties/fonts/sizes/combinations, general PDF thumb rules and external additions; calendar/period/planner dates/regions/properties beyond recorded Nov5 2026/en-US, general period-height rules and native planner clock cadence; dendrogram properties/styles/sizes/cultures beyond recorded settled examples; chart/Gantt states and full forms. Recorded scopes do not close the full matrix; only agreed random chart values may be excluded.",
+      "remaining": "Further document properties/fonts/sizes/combinations, general PDF thumb rules and external additions; calendar/period/planner dates/regions/properties beyond recorded Nov5 2026/en-US, general period-height rules and native planner clock cadence; dendrogram properties/styles/sizes/cultures beyond recorded settled examples; Gantt general geometry/properties beyond the recorded five pairs; ordinary chart states and full forms. Recorded scopes do not close the full matrix; only agreed random chart values may be excluded.",
       "nextAction": "Extend deterministic document/surface widgets and native editor font/size rules without treating the accepted plain text-document cases as full T160 acceptance."
     },
     {
@@ -6633,7 +6634,123 @@
       ],
       "lastConfirmation": "docs/measurements/t160-native-dendrogram-linux.json",
       "remaining": "Other dimension/property/style/culture combinations, opening animation and navigation; typed applicability/computed inspector, full forms, DPI and Windows.",
-      "nextAction": "Preserve recorded settled dendrogram parity while measuring Gantt/chart and remaining property/regional profiles."
+      "nextAction": "Preserve recorded settled dendrogram parity while measuring ordinary chart and remaining property/regional profiles."
+    },
+    {
+      "id": "surfaces.gantt-recorded",
+      "milestone": "T160",
+      "kinds": [
+        "GanttChartField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.colors",
+        "appearance.fonts",
+        "surface.content",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "20 complete settled native Gantt sources, en-US regional settings and ru/en UI, five dimension pairs, full493px height, ReadOnly/Enabled, dropped Font/BackColor/BorderColor/HorizontalLines/VerticalLines and retained-but-preview-ignored TableLocation. General timeline/table/row/scroll formulas, other dimensions/properties/styles/cultures/combinations and full forms remain open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-gantt"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "gantt",
+        "path": "test/form-gantt-host.cjs",
+        "caseIds": [
+          "A_Default",
+          "dirty-background",
+          "dirty-border",
+          "dirty-size",
+          "dirty-small-size",
+          "dirty-tall-size",
+          "dirty-font-12",
+          "dirty-font-16-bold",
+          "dirty-readonly",
+          "dirty-disabled",
+          "dirty-horizontal-false",
+          "dirty-horizontal-true",
+          "dirty-vertical-false",
+          "dirty-vertical-true",
+          "dirty-table-left",
+          "dirty-table-right",
+          "dirty-table-none",
+          "restored-default",
+          "floating-default",
+          "floating-dirty-size",
+          "floating-small-size",
+          "floating-restored",
+          "reattached-default",
+          "B_Size",
+          "C_ReadOnly",
+          "D_Disabled",
+          "E_Border",
+          "F_Background",
+          "G_NoTitle",
+          "H_Large",
+          "I_Small",
+          "J_Larger",
+          "K_Font12",
+          "L_Font16Bold",
+          "M_HorizontalFalse",
+          "N_HorizontalTrue",
+          "O_VerticalFalse",
+          "P_VerticalTrue",
+          "Q_TableAuto",
+          "R_TableLeft",
+          "S_TableRight",
+          "T_TableNone"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-gantt-linux.json",
+          "sha256": "a3d502f36671d6f144655c130f1bdc7393befa93cbe54c00f37af4de4d8712aa",
+          "assertions": [
+            {
+              "pointer": "/completeRecordedGanttSurfacePixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/nativeGanttSurfaceSourceProof/completePixelsCompared",
+              "equals": 4699800
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/settledNativeReferences",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormVisualParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-gantt-linux.json",
+      "remaining": "General timeline/table/row/scroll rules; other dimensions/properties/styles/cultures/combinations and typed applicability/computed inspector; full forms, DPI and Windows.",
+      "nextAction": "Preserve recorded Gantt parity while measuring ordinary chart surfaces and closing general property/layout rules."
     }
   ],
   "historicalReports": [
@@ -6714,7 +6831,8 @@
     "docs/measurements/t160-native-calendar-linux.json",
     "docs/measurements/t160-native-period-linux.json",
     "docs/measurements/t160-native-planner-linux.json",
-    "docs/measurements/t160-native-dendrogram-linux.json"
+    "docs/measurements/t160-native-dendrogram-linux.json",
+    "docs/measurements/t160-native-gantt-linux.json"
   ],
   "supersessions": [
     {
