@@ -1092,6 +1092,7 @@
         "pages.horizontal-forms",
         "layout.complete-matrix",
         "shell.inspectors",
+        "shell.input-properties",
         "sessions.dirty-dependencies",
         "windows.restart",
         "windows.multiple",
@@ -4045,6 +4046,74 @@
       "lastConfirmation": "docs/measurements/t158-radio-choices-linux.json",
       "remaining": "RadioButtonField has measured layout and detached dirty transitions. Radio and Tumbler raster, the remaining 1 px width, and other ordinary-control state/property combinations remain open.",
       "nextAction": "Complete the circle and Tumbler pixels in the radio matrix; expand other ordinary-control states, fonts and colors."
+    },
+    {
+      "id": "shell.input-properties",
+      "milestone": "T161",
+      "kinds": [
+        "InputField"
+      ],
+      "axes": [
+        "source.identity",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Native property order, labels and default values for recorded scalar and ValueTable contexts. Selected events, conditional maximum sizes, dirty type transitions and real XML navigation.",
+      "fixtures": [
+        "tests/fixtures/forms/native-property-palette/input-field.json",
+        "tests/fixtures/forms/native-bound-fields/InputField.xml",
+        "tests/fixtures/forms/native-tables/Default.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "property-catalogue",
+        "path": "test/form-property-catalogue-host.cjs",
+        "caseIds": [
+          "5",
+          "6",
+          "7"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t161-input-field-palette-linux.json",
+          "sha256": "e5b20c26d6b373c36ffb6a58dfe201691335b1302baadedc9fd4772e70818304",
+          "assertions": [
+            {
+              "pointer": "/native/defaultRowCounts/string",
+              "equals": 88
+            },
+            {
+              "pointer": "/native/defaultRowCounts/tableString",
+              "equals": 102
+            },
+            {
+              "pointer": "/acceptance/dirtyEventAndTypeVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/primaryPairsPassed",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/compatibilityPairsPassed",
+              "equals": 4
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": "903fb7a362783c067effc882aace9444c82e62b3"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t161-input-field-palette-linux.json",
+      "remaining": "Other InputField contexts, explicit enum captions and resolved style provenance. Windows native comparison.",
+      "nextAction": "Extend native input catalogue for reference, composite, multiple-value and remaining column contexts."
     },
     {
       "id": "shell.inspectors",

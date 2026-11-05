@@ -1,0 +1,444 @@
+{
+  "schemaVersion": 1,
+  "task": "T161",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "nativeFixture": "../../tests/fixtures/forms/native-property-palette/input-field.json",
+  "nativeFixtureSha256": "126ef2d523cc78dd6fdd5e0c69e6d4f1098463bd39de7cbde7160cfe2f9e9cbe",
+  "native": {
+    "contexts": [
+      {
+        "context": "string",
+        "form": "ProbeUnitedPaletteInputPlain",
+        "element": "Control",
+        "rows": 88,
+        "fixtureSha256": "4a6c92d5ea9109ae4d0a5ed4ac040911b46aedbe21d4bc87cd74b58c070d88e2",
+        "pageSha256": {
+          "en": [
+            "35b64e33268d871fb799fac9ece30cabb14a80192f4cc9b9b2f2c11fbc174688",
+            "770d24e0aa441a164b38941fc7d1fba852bebadb61b12174cd13ad1e568504f2",
+            "cd0f4c5586fea2ea82a99f6dcc92520dc2840cf7de61bb3ae2f093327767513b",
+            "d4f40ba5e1716d5ea8c2598dceac22e9ab5bf0bc911b2375e1fdb5a1522ca932"
+          ],
+          "ru": [
+            "83d42a8862c957617a7b6891d6dfb1a7e774360e6b25bafe8f975257fe8c4b69",
+            "e04b7fe3a6c3422394980c54712e5b5b4450ce914f8d17d6d94f9de794f3efe5",
+            "588d9d5ff7f98e2bcc3ed4312d6ed89b5c26000642c35ac15dbbc8529b4d8e00",
+            "b4db561da8ec51616246f04177c7c7471f79f000955959575ce547341adac104"
+          ]
+        }
+      },
+      {
+        "context": "number",
+        "form": "ProbeUnitedPaletteInputNumber",
+        "element": "Control",
+        "rows": 87,
+        "fixtureSha256": "9cca992432c144acec5b09b861f011fa90fb6ebdba44b986f8b010d0b20d1002",
+        "pageSha256": {
+          "en": [
+            "e28677925966051adccba1a125a1e810ff8ab34ad355ea8ba2a9db532f5cd320",
+            "ec3e71d2077ed95dfb734ed9b119b455889d58202bb11ef201636f197333c634",
+            "c366bdf83e1e1ac66f6b2b83ad166ac70f5edd00ecefc3daa13c47965edfc514",
+            "99f0f54cc9aacc37016706610ca65bcb15f02bf7cf8fd359b5c54d11d7adde88"
+          ],
+          "ru": [
+            "30d98a0f76597e94f56383eddb3d85e9e0bf0201d7704c1ccef9ea779abaaf9b",
+            "1e7d968c3e3083b8f07141f835d04f61df97c6d5e53f1d9048105dd7f43696af",
+            "ae5e7fb67d7aa2465bc576bc2e7a496cf6de40bcc4dcc0aa6256d02e363dc49a",
+            "3e5803df44cd50568a811d1d48853067506f99503f822e7b98d41fc15a4f034a"
+          ]
+        }
+      },
+      {
+        "context": "date",
+        "form": "ProbeUnitedPaletteInputDate",
+        "element": "Control",
+        "rows": 84,
+        "fixtureSha256": "7cee599fb51c2bf7da0f8f1c31ab0f6e1b7f9ff2fcee0372ede9cef6e218092c",
+        "pageSha256": {
+          "en": [
+            "9d643b69c828c570e90daf8ff55ecc1d702034d34489edea5fa817b6d329c1b4",
+            "86055c42526b60a27190aa09040c67363b074e893f17eac6d7a1a43ec882b77e",
+            "5d177689eb09446d3a5947662d5c36d6b4788a89b8b6c557f322f6d6f262dc73",
+            "223cb8f22324537ab3bedd3159b637b78c7b864c4eb5043a939dc2cf107d8ed6"
+          ],
+          "ru": [
+            "5d9702874964f55d2fb147b2b6ea341e4e6a85c8588c273c98a34c7d8eae6291",
+            "20c65996bd05b6d0a318ca621e828344ab87fd19eb51c49c882b155771cffc4f",
+            "ad4b009182ace4d4f3e44822112de70b49195945f35a83d6e3ed8a369d657ebb",
+            "6308044814183149cba2b350af06a94f7e0986436fe66658f467101fff017a44"
+          ]
+        }
+      },
+      {
+        "context": "boolean",
+        "form": "ProbeUnitedPaletteInputBoolean",
+        "element": "Control",
+        "rows": 86,
+        "fixtureSha256": "eb490a829a916b9a704455be100128a98bd677269aae2ce45fbdb8e2119f3bc1",
+        "pageSha256": {
+          "en": [
+            "d28a25eea81b653e55a6749b6d608509c4e8462016122024640f7f214000003d",
+            "6d006f173fffc6257c084aa2047648b6b37bd1e779b2b246521251148409fe4e",
+            "59792ca2bcdc65a5d7b03ceaa032b3dcfee37583150c461478b5f08187c56c8c",
+            "56b964a2a2a15b9cd66d56f3ac91fa81cc91d13f4821de71288104c64917b3a3"
+          ],
+          "ru": [
+            "d07e1969451cdd193aad19cfbe13160c1d5d60950c94e7f83d27e8f252fa6d43",
+            "55d33f5c01d3110febad3316f7dd9b6022f74c7df3a11152cf75feda8039152f",
+            "de981a20b9c22d703c86e5778be47bcd46bc15bd7e8826c4bbdff37b80655cbd",
+            "b6de1b9b00d2ef80b7d0b8d158d6fee7089f13d794c41177771620f5cf1a5a3e"
+          ]
+        }
+      },
+      {
+        "context": "explicitString",
+        "form": "ProbeUnitedPaletteInputExplicit",
+        "element": "Control",
+        "rows": 88,
+        "fixtureSha256": "5e3b60fbb9a0c1e846d728b7d0394b3d3ad39a5b372433fd75d1ffc4bb8cc11b",
+        "pageSha256": {
+          "en": [
+            "bf103d2025600799952257fd7f153c93cafdaeab2f1291838362ed0d9fb3c6b8",
+            "3c901ef3fc6f22b629d412419516dc88bfb823e3f3d3e684848ac917ca2a5291",
+            "1c580d5d661cd2820a7c7ec1a49ad3e600f137add972dfa0d657e1096e808d2f",
+            "451e3cf18d9b0a3deee2fd7eee66a9f0f30d9b93f6c0c4e23014482151b14239"
+          ],
+          "ru": [
+            "01b89996da55506e7066e772c924918ef2d5479cc08ca648585af2b52362ad72",
+            "5656a9b248060a788b5a76f789eaa815c59a5184a7df19bd2975beebffb2517b",
+            "439a9d1cd8ab2741c99cc50379e9ecbaebc7918716ab9c6d14ee1796e2657377",
+            "1171919d51aecdfdcf335d8012349b472f17a00b36430b97bd162efd4374f641"
+          ]
+        }
+      },
+      {
+        "context": "tableString",
+        "form": "ProbeUnitedPaletteInputColumn",
+        "element": "Text",
+        "rows": 102,
+        "fixtureSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+        "pageSha256": {
+          "en": [
+            "d0d6918fbbff8449e6737f8af2cd94bca397cb2b445db8662f4552cf19c32bd5",
+            "b6933f49b47b7fc606017f673ddff280479fa886d729fd30d05b27e192422a3e",
+            "60c6d039b5eadeaf6ff367626b898defe626a9b41980e18702c07174f813c154",
+            "45c3707ddc1eef8c2158c8aebd64245139034167d2412d7db5df26004ecc7ce3",
+            "8750d3607d8ecf6079d802c65721416177f04a03d1cc3e0d4e7884f58889b731"
+          ],
+          "ru": [
+            "db052051dfa57aa0d093aec1ffe25dfff6548f0c3da14b5c8b6872661f0379eb",
+            "564c4291d8bf16967a949386801fd85d760216447d3ebd762af6a41e7cc3d184",
+            "67c4206ac7eac4ee0ee01cfb1fbbc0fdfc5540c87e7f2ab9b2a48912cd99bcfe",
+            "32ebc163363cf578f3eee0048a51f54135b2fe78d9038922bda3f0389c96a3b2",
+            "d3e0e3268d96c59babb96425b7ab2a5cb627da3e669acc620e32b3527192bfd8"
+          ]
+        }
+      },
+      {
+        "context": "tableNumber",
+        "form": "ProbeUnitedPaletteInputColumn",
+        "element": "Amount",
+        "rows": 101,
+        "fixtureSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+        "pageSha256": {
+          "en": [
+            "fc6c5c0751e322595c2c247da35697217d693fc192821e6ed63c6470a09abc49",
+            "8af07052db47f662e1427953ec75abc8e581c22348e64cea40b768cbab40f307",
+            "523483ab8a58e225ea3a91d9daa1aeee24b16ecd8b1f5ea505eae6ebad4f31b6",
+            "bd746b48cd6a1e9f51fb6ea377ec0b8ba45575c2c77dfea8503e00fa7f4cee57",
+            "214b2b9f27eb2648860a1946619f6d992bf7fa737a5a2c5dfb25213c9548970c"
+          ],
+          "ru": [
+            "966149135d90e015980a40a96561240ee294c0abca55b4b4ebb2327cecab3899",
+            "af303a66c15e3eca620c912a43021312d2dd2dd4e105fd717b641841b45b24c9",
+            "8a1e2b9f2cdcaf370b01c69b44222b91416e7b491a7d00695bf6a3b1ae8b27c9",
+            "a728a8307088aee7f24968cabe4785b6492e5dd22d7d45aba9f91ef30638f96f",
+            "9283799c4b91f13e8943b42e25049b5fb285877a086fb015736f2e5820112c6f"
+          ]
+        }
+      }
+    ],
+    "defaultRowCounts": {
+      "string": 88,
+      "number": 87,
+      "date": 84,
+      "boolean": 86,
+      "tableString": 102,
+      "tableNumber": 101
+    },
+    "eventRowsPerContext": 16,
+    "cataloguePages": 60,
+    "nestedString": {
+      "form": "ProbeGroupDefault",
+      "element": "Name",
+      "locale": "en",
+      "pages": 4,
+      "rowsAfterNameTitleAndBindingMatchRoot": true
+    },
+    "manualMaximum": {
+      "rows": [
+        "AutoMaxWidth",
+        "MaxWidth",
+        "AutoMaxHeight",
+        "MaxHeight"
+      ],
+      "initialMaximum": 0
+    },
+    "roundtrip": {
+      "exportSha256": "a586426dfa76799a449a9e24350f087d533da9141a77d0a4663f012ede77ff11",
+      "xml": {
+        "OnMainServerUnavalableBehavior": "MakeDisable",
+        "AutoShowClearButtonMode": "Always",
+        "AutoShowOpenButtonMode": "Always",
+        "AutoMaxWidth": "false",
+        "AutoMaxHeight": "false"
+      },
+      "sourceWasSynthetic": true
+    },
+    "standClosedNormally": true
+  },
+  "protocol": {
+    "apiMinor": 41,
+    "eventRowsOptIn": "includeEventRows",
+    "eventLocation": "existing Events wrapper",
+    "rawEventsAndUnrecognizedPropertiesRetained": true,
+    "executesBsl": false
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "backendCommit": "d0d890f0049384aeb31fda8b7e6ca19376190dcb",
+    "explorerRuntimeCommit": "903fb7a362783c067effc882aace9444c82e62b3",
+    "explorerDriverCommit": "f683180a80639d3abad5e0582066bc382aed8e02",
+    "vsixSha256": "571252408902c44881272c3d90853c151d8be5ee74bf7bd69f7f421c0d52b4ae",
+    "backendSha256": "3ccce8d283fa8c0364ae6499d38a72767aaa0a58472add610ecbc1a665648e46",
+    "runtimeManifestSha256": "8ccc3de8930f2396143385417cd3f85ea2b269c2067a4c3ca97bf3e02fe2f2f8",
+    "runtimeFilesVerifiedPerRun": 1303
+  },
+  "checks": {
+    "rust": {
+      "suites": 42,
+      "passed": 1531,
+      "ignored": 19,
+      "commands": [
+        "cargo fmt --check",
+        "cargo check",
+        "cargo clippy --all-targets --all-features -- -D warnings",
+        "cargo test",
+        "cargo build -p eska-project --bin eska-project"
+      ],
+      "firstFullTest": "Temporary copy of the CLI returned ETXTBSY during the self-update test. Isolated retry and full retry passed."
+    },
+    "typescript": true,
+    "compile": true,
+    "node": {
+      "passed": 606,
+      "skipped": 8
+    },
+    "bun": {
+      "version": "1.4.2",
+      "passed": 594,
+      "skipped": 8
+    }
+  },
+  "acceptance": {
+    "initialPairsPassed": 14,
+    "primaryPairsPassed": 16,
+    "inspectorRepeats": 2,
+    "compatibilityPairsPassed": 4,
+    "sameRuntimeAcrossRuns": true,
+    "dirtyEventAndTypeVerified": true,
+    "initialInspectorFailures": {
+      "en": "Old Visibility caption assertion after native Visible became available",
+      "ru": "Record was opened while raw XML was still shown during initial catalogue request"
+    },
+    "runs": [
+      {
+        "suite": "property-catalogue",
+        "locale": "en",
+        "passed": true,
+        "cases": [
+          "native-order-categories-and-defaults",
+          "dirty-aliases-and-stable-expanded-title",
+          "exact-attribute-source",
+          "exact-repeated-xml-source",
+          "removed-override-restores-default",
+          "native-field-catalogue-and-unbound-events",
+          "dirty-type-maximum-and-event-rows",
+          "event-row-navigates-existing-xml",
+          "rapid-context-switch-and-raw-fallback"
+        ],
+        "diskUnchanged": true
+      },
+      {
+        "suite": "property-catalogue",
+        "locale": "ru",
+        "passed": true,
+        "cases": [
+          "native-order-categories-and-defaults",
+          "dirty-aliases-and-stable-expanded-title",
+          "exact-attribute-source",
+          "exact-repeated-xml-source",
+          "removed-override-restores-default",
+          "native-field-catalogue-and-unbound-events",
+          "dirty-type-maximum-and-event-rows",
+          "event-row-navigates-existing-xml",
+          "rapid-context-switch-and-raw-fallback"
+        ],
+        "diskUnchanged": true
+      },
+      {
+        "suite": "handlers",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "handlers",
+        "locale": "ru",
+        "passed": true
+      },
+      {
+        "suite": "inspectors",
+        "locale": "en",
+        "passed": true,
+        "repeatAfterTestReadinessFix": true,
+        "localizationCases": 10,
+        "recordDomRetained": true
+      },
+      {
+        "suite": "inspectors",
+        "locale": "ru",
+        "passed": true,
+        "repeatAfterTestReadinessFix": true,
+        "localizationCases": 10,
+        "recordDomRetained": true
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "passed": true
+      },
+      {
+        "suite": "detached-space",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "detached-space",
+        "locale": "ru",
+        "passed": true
+      },
+      {
+        "suite": "composition",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "composition",
+        "locale": "ru",
+        "passed": true
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "passed": true,
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ]
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ]
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "passed": true
+      }
+    ],
+    "compatibility": [
+      {
+        "mode": "group-only",
+        "apiMinor": 41,
+        "locale": "en",
+        "passed": true,
+        "backendSha256": "bcc21b9581227af41a10380cdfd0c9c7f8ee84f9371e3f68f69deac2b01a29fd",
+        "cases": [
+          "native-order-categories-and-defaults",
+          "dirty-aliases-and-stable-expanded-title",
+          "exact-attribute-source",
+          "exact-repeated-xml-source",
+          "removed-override-restores-default",
+          "earlier-1.41-field-fallback",
+          "rapid-context-switch-and-raw-fallback"
+        ]
+      },
+      {
+        "mode": "group-only",
+        "apiMinor": 41,
+        "locale": "ru",
+        "passed": true,
+        "backendSha256": "bcc21b9581227af41a10380cdfd0c9c7f8ee84f9371e3f68f69deac2b01a29fd",
+        "cases": [
+          "native-order-categories-and-defaults",
+          "dirty-aliases-and-stable-expanded-title",
+          "exact-attribute-source",
+          "exact-repeated-xml-source",
+          "removed-override-restores-default",
+          "earlier-1.41-field-fallback",
+          "rapid-context-switch-and-raw-fallback"
+        ]
+      },
+      {
+        "mode": "legacy",
+        "apiMinor": 40,
+        "locale": "en",
+        "passed": true,
+        "backendSha256": "3663a43e04bf10357b7cc179a669535f10564b7a1eec5016202a48da005187df",
+        "cases": [
+          "api-1.40-raw-properties"
+        ]
+      },
+      {
+        "mode": "legacy",
+        "apiMinor": 40,
+        "locale": "ru",
+        "passed": true,
+        "backendSha256": "3663a43e04bf10357b7cc179a669535f10564b7a1eec5016202a48da005187df",
+        "cases": [
+          "api-1.40-raw-properties"
+        ]
+      }
+    ]
+  },
+  "pending": [
+    "Other InputField bindings and complex property availability states",
+    "Other element palettes",
+    "Full localization of declared enum values and resolved style/inheritance provenance",
+    "Windows native acceptance"
+  ]
+}
