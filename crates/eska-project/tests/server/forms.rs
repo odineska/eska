@@ -66,6 +66,10 @@ const GROUP: &str =
 const GROUP_OVERRIDES: &str = include_str!(
     "../../../../tests/fixtures/forms/native-property-palette/UsualGroupOverrides.xml"
 );
+const BOUND_INPUT: &str =
+    include_str!("../../../../tests/fixtures/forms/native-bound-fields/InputField.xml");
+const TABLE_INPUTS: &str =
+    include_str!("../../../../tests/fixtures/forms/native-tables/Default.xml");
 
 fn inspect_group(client: &mut Client, context: &Value, snapshot: &Value) -> Value {
     client.request(
@@ -106,6 +110,291 @@ fn assert_native_row(row: &Value, expected: &Value, locale: &str) {
         },
         _ => {}
     }
+}
+
+fn inspect_input(
+    client: &mut Client,
+    context: &Value,
+    opened: &Value,
+    field: &Value,
+    include_events: bool,
+) -> Value {
+    client.request(
+        "form/inspect",
+        &params(
+            context,
+            json!({
+                "formSessionId":opened["formSessionId"],"revision":opened["revision"],
+                "identity":field["identity"],"includeEventRows":include_events
+            }),
+        ),
+    )
+}
+
+fn update_input(
+    client: &mut Client,
+    context: &Value,
+    opened: &Value,
+    version: u32,
+    text: &str,
+) -> Value {
+    client.request(
+        "form/update",
+        &params(
+            context,
+            json!({
+                "formSessionId":opened["formSessionId"],"revision":opened["revision"],
+                "overlays":[{"source":opened["dependencies"][0]["id"],"version":version.to_string(),"text":text}]
+            }),
+        ),
+    )
+}
+
+#[test]
+fn form_input_palette_agrees_with_scalar_and_column_contexts_on_dirty_revisions() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let title_start = BOUND_INPUT.find("<Title>\n\t\t\t\t<v8:item>").unwrap();
+    let title_end =
+        title_start + BOUND_INPUT[title_start..].find("</Title>").unwrap() + "</Title>".len();
+    let baseline = [&BOUND_INPUT[..title_start], &BOUND_INPUT[title_end..]].concat();
+    let type_start = baseline.find("<Type>").unwrap();
+    let type_end = type_start + baseline[type_start..].find("</Type>").unwrap() + "</Type>".len();
+    fs::write(&path, &baseline).unwrap();
+    let native: Value = serde_json::from_str(include_str!(
+        "../../../../tests/fixtures/forms/native-property-palette/input-field.json"
+    ))
+    .unwrap();
+    for locale in ["en-US", "ru-RU"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let mut opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let identity = opened["model"]["root"]["children"][0]["identity"].clone();
+        let mut version = 2;
+        for (case, raw_type) in [
+            ("string", "xs:string"),
+            ("number", "xs:decimal"),
+            ("date", "xs:dateTime"),
+            ("boolean", "xs:boolean"),
+        ] {
+            if raw_type != "xs:string" {
+                let text = format!(
+                    "{}<Type><v8:Type>{raw_type}</v8:Type></Type>{}",
+                    &baseline[..type_start],
+                    &baseline[type_end..]
+                );
+                opened = update_input(&mut client, &context, &opened, version, &text);
+                version += 1;
+            }
+            let field = &opened["model"]["root"]["children"][0];
+            assert_eq!(field["identity"], identity);
+            assert_eq!(field["presentation"]["valueType"]["kind"], case);
+            let inspected = inspect_input(&mut client, &context, &opened, field, true);
+            assert_input_palette(&inspected, &native, case, locale);
+        }
+        opened = update_input(&mut client, &context, &opened, version, TABLE_INPUTS);
+        for (index, case) in ["tableString", "tableNumber"].into_iter().enumerate() {
+            let field = &opened["model"]["root"]["children"][0]["children"][index];
+            let inspected = inspect_input(&mut client, &context, &opened, field, true);
+            assert_input_palette(&inspected, &native, case, locale);
+        }
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(path).unwrap(), baseline);
+}
+
+fn assert_input_palette(inspected: &Value, native: &Value, case: &str, locale: &str) {
+    let expected = native["rows"].as_array().unwrap().iter().filter(|row| {
+        row["contexts"]
+            .as_array()
+            .is_none_or(|contexts| contexts.iter().any(|context| context == case))
+    });
+    let rows = inspected["rows"].as_array().unwrap();
+    assert_eq!(json!(rows.len()), native["rowCounts"][case], "{case}");
+    for (row, expected) in rows.iter().zip(expected) {
+        assert_native_row(row, expected, locale);
+    }
+    let categories = inspected["categories"].as_array().unwrap();
+    assert_eq!(categories.len(), 5);
+    for (category, id) in categories
+        .iter()
+        .zip(["main", "usage", "appearance", "layout", "events"])
+    {
+        assert_eq!(category["id"], id);
+        assert_eq!(category["caption"], native["categoryLabels"][id]);
+    }
+}
+
+fn input_palette_value<'a>(inspection: &'a Value, key: &str) -> &'a Value {
+    let id = format!("platform:{key}");
+    &inspection["rows"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|row| row["id"] == id)
+        .unwrap()["value"]
+}
+
+#[test]
+fn form_input_palette_preserves_declared_values_and_size_overrides() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let changed = BOUND_INPUT.replace(
+        "</InputField>",
+        r#"<TitleLocation>Top</TitleLocation><MultiLine>true</MultiLine>
+<GroupHorizontalAlign>Left</GroupHorizontalAlign><TextColor>web:Blue</TextColor>
+<Font ref="sys:DefaultGUIFont" height="14" bold="true" kind="WindowsFont"/>
+<OnMainServerUnavalableBehavior>MakeDisable</OnMainServerUnavalableBehavior>
+<AutoShowClearButtonMode>Always</AutoShowClearButtonMode><AutoShowOpenButtonMode>Always</AutoShowOpenButtonMode>
+<AutoMaxWidth>false</AutoMaxWidth><AutoMaxHeight>false</AutoMaxHeight><MaxHeight>0</MaxHeight>
+<ReadOnly>false</ReadOnly><Width>0</Width><InputHint/></InputField>"#,
+    );
+    fs::write(&path, BOUND_INPUT).unwrap();
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let opened = update_input(&mut client, &context, &opened, 2, &changed);
+    let input = &opened["model"]["root"]["children"][0];
+    let inspected = inspect_input(&mut client, &context, &opened, input, true);
+    let row = |key: &str| input_palette_value(&inspected, key);
+    for (id, expected) in [
+        ("TitleLocation", json!({"ru-RU":"Верх","en-US":"Top"})),
+        ("MultiLine", json!({"ru-RU":"Да","en-US":"Yes"})),
+        (
+            "OnMainServerUnavailableBehavior",
+            json!({"ru-RU":"Отключать доступность","en-US":"Disable availability"}),
+        ),
+        (
+            "AutoShowClearButton",
+            json!({"ru-RU":"Всегда","en-US":"Always"}),
+        ),
+        (
+            "AutoShowOpenButton",
+            json!({"ru-RU":"Всегда","en-US":"Always"}),
+        ),
+    ] {
+        assert_eq!(row(id)["caption"], expected);
+        assert_eq!(row(id)["kind"], "declared");
+    }
+    let property = |value: &Value| {
+        let index = usize::try_from(value["propertyIndex"].as_u64().unwrap()).unwrap();
+        &input["properties"][index]
+    };
+    for (id, key, text) in [
+        ("HorizontalAlignInGroup", "GroupHorizontalAlign", "Left"),
+        ("ReadOnly", "ReadOnly", "false"),
+        ("Width", "Width", "0"),
+        ("InputHint", "InputHint", ""),
+        ("MaxHeight", "MaxHeight", "0"),
+        ("AutoShowClearButton", "AutoShowClearButtonMode", "Always"),
+        ("AutoShowOpenButton", "AutoShowOpenButtonMode", "Always"),
+        (
+            "OnMainServerUnavailableBehavior",
+            "OnMainServerUnavalableBehavior",
+            "MakeDisable",
+        ),
+    ] {
+        assert_eq!(row(id)["kind"], "declared");
+        let property = property(row(id));
+        assert_eq!(property["key"]["name"], key);
+        assert_eq!(property["value"]["text"], text);
+    }
+    assert_eq!(
+        row("MaxWidth")["default"],
+        json!({"kind":"number","value":0})
+    );
+    assert_eq!(
+        inspected["rows"]
+            .as_array()
+            .unwrap()
+            .windows(4)
+            .find(|rows| rows[0]["id"] == "platform:AutoMaxWidth")
+            .unwrap()
+            .iter()
+            .map(|row| row["id"].as_str().unwrap())
+            .collect::<Vec<_>>(),
+        [
+            "platform:AutoMaxWidth",
+            "platform:MaxWidth",
+            "platform:AutoMaxHeight",
+            "platform:MaxHeight"
+        ]
+    );
+    assert_eq!(property(row("TextColor"))["value"]["text"], "web:Blue");
+    assert_eq!(input["presentation"]["foreground"]["value"], "Blue");
+    assert_eq!(input["presentation"]["font"]["points"], 14.0);
+    assert_eq!(
+        property(row("Font"))["qualifiers"]
+            .as_array()
+            .unwrap()
+            .len(),
+        4
+    );
+    client.finish();
+    assert_eq!(fs::read_to_string(path).unwrap(), BOUND_INPUT);
+}
+
+#[test]
+fn form_input_palette_projects_only_opted_in_events_with_real_xml_sources() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let events = concat!(
+        "<Events><f:Event xmlns:f=\"urn:foreign\" name=\"OnChange\">Foreign</f:Event>",
+        "<Event name=\"OnChange\">HandleChange</Event><Event name=\"Unrecognized\">Other</Event></Events>"
+    );
+    let changed = BOUND_INPUT.replace("</InputField>", &format!("{events}</InputField>"));
+    fs::write(&path, BOUND_INPUT).unwrap();
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let opened = update_input(&mut client, &context, &opened, 2, &changed);
+    let input = &opened["model"]["root"]["children"][0];
+    let inspected = inspect_input(&mut client, &context, &opened, input, true);
+    let event = input_palette_value(&inspected, "OnChange");
+    assert_eq!(event["kind"], "declaredEvent");
+    assert_eq!(event["entryIndex"], 1);
+    assert_eq!(event["sourceKind"], "form");
+    let index = usize::try_from(event["propertyIndex"].as_u64().unwrap()).unwrap();
+    let wrapper = &input["properties"][index];
+    assert_eq!(wrapper["key"]["name"], "Events");
+    assert_eq!(
+        wrapper["value"]["fields"][1]["value"]["text"],
+        "HandleChange"
+    );
+    assert_eq!(
+        input_palette_value(&inspected, "StartChoice")["kind"],
+        "absent"
+    );
+    let location = client.request("form/locate", &params(&context, json!({
+        "formSessionId":opened["formSessionId"],"revision":opened["revision"],
+        "target":{"kind":"property","identity":input["identity"],"property":wrapper["key"],"occurrence":event["occurrence"]}
+    })));
+    assert_eq!(xml_at(&changed, &location["range"]), events);
+
+    let previous = inspect_input(&mut client, &context, &opened, input, false);
+    assert_eq!(previous["categories"].as_array().unwrap().len(), 4);
+    assert!(
+        previous["rows"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .all(|row| row["category"] != "events")
+    );
+    assert!(previous["rows"].as_array().unwrap().iter().any(|row| {
+        row["category"].is_null() && row["value"]["propertyIndex"] == event["propertyIndex"]
+    }));
+    let unbound = changed.replace("<DataPath>Value</DataPath>", "");
+    let updated = update_input(&mut client, &context, &opened, 3, &unbound);
+    let unbound = inspect_input(
+        &mut client,
+        &context,
+        &updated,
+        &updated["model"]["root"]["children"][0],
+        true,
+    );
+    assert!(unbound["rows"].is_null());
+    client.finish();
+    assert_eq!(fs::read_to_string(path).unwrap(), BOUND_INPUT);
 }
 
 #[test]

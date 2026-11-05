@@ -10,7 +10,7 @@ use crate::{
     application::ContextSnapshot,
     project::{
         designer_source,
-        metadata_model::{MetadataValue, ModuleRole, ObjectId, ProjectScope},
+        metadata_model::{MetadataProperty, MetadataValue, ModuleRole, ObjectId, ProjectScope},
         query::{self, bsl},
     },
 };
@@ -73,25 +73,16 @@ fn element_handlers(node: &EffectiveElement, output: &mut Vec<FormHandler>) {
             continue;
         };
         for event in events {
-            let MetadataValue::Text(handler) = &event.value else {
-                continue;
-            };
-            if event.key.namespace.as_deref() != Some(FORM_NAMESPACE)
-                || event.key.name != "Event"
-                || !identifier(handler.trim())
-            {
-                continue;
-            }
-            let Some((_, name)) = event
-                .qualifiers
-                .iter()
-                .find(|(key, _)| key.namespace.is_none() && key.name == "name")
+            let (Some(name), MetadataValue::Text(handler)) = (event_name(event), &event.value)
             else {
                 continue;
             };
+            if !identifier(handler.trim()) {
+                continue;
+            }
             output.push(FormHandler {
                 owner: FormHandlerOwner::Element(node.identity.clone()),
-                event: name.clone(),
+                event: name.into(),
                 name: handler.trim().into(),
                 origin: origin.clone(),
             });
@@ -100,6 +91,17 @@ fn element_handlers(node: &EffectiveElement, output: &mut Vec<FormHandler>) {
     for child in node.children.iter().chain(&node.auxiliary) {
         element_handlers(child, output);
     }
+}
+
+pub(super) fn event_name(event: &MetadataProperty) -> Option<&str> {
+    if event.key.namespace.as_deref() != Some(FORM_NAMESPACE) || event.key.name != "Event" {
+        return None;
+    }
+    event
+        .qualifiers
+        .iter()
+        .find(|(key, _)| key.namespace.is_none() && key.name == "name")
+        .map(|(_, name)| name.as_str())
 }
 
 /// Resolve an existing module through Designer ownership, without reading or creating BSL.

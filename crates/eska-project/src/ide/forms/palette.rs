@@ -2,14 +2,19 @@
 
 use super::{Entry, dto, failure, limit, navigation};
 use crate::ide::{dto::Labels, params};
-use eska_project_core::project::forms::{PaletteRow, PaletteValue, PlatformPropertyValue};
+use eska_project_core::project::forms::{
+    EffectiveElement, PaletteCategory, PaletteRow, PaletteValue, PlatformPropertyValue,
+};
 use serde::Deserialize;
 use serde_json::{Value, json};
 
 #[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
 struct Input {
     revision: String,
     identity: Value,
+    #[serde(default)]
+    include_event_rows: bool,
 }
 
 pub(super) fn inspect(
@@ -25,52 +30,28 @@ pub(super) fn inspect(
         .preview
         .property_palette(&identity)
         .ok_or_else(|| failure("target_unavailable"))?;
-    let rows =
-        palette.rows.map(|rows| {
-            rows.into_iter()
-            .map(|row| {
-                let (raw_id, value) = match row.value {
-                    PaletteValue::Declared {
-                        index,
-                        occurrence,
-                        extension,
-                    } => {
-                        let key = &palette.element.properties[index].property.key;
-                        (
-                            format!("xml:{}", json!([key.namespace, key.name, occurrence])),
-                            json!({"kind":"declared","propertyIndex":index,"occurrence":occurrence,
-                                "sourceKind":if extension { "extension" } else { "form" }}),
-                        )
+    let mut categories = Vec::new();
+    let rows = palette.rows.map(|rows| {
+        rows.into_iter()
+            .filter(|row| {
+                if let Some(definition) = row.definition {
+                    let category = definition.category;
+                    if category == PaletteCategory::Events && !input.include_event_rows {
+                        return false;
                     }
-                    PaletteValue::Qualifier { attribute, extension } => {
-                        let key = &attribute.key;
-                        (
-                            format!("attribute:{}", json!([key.namespace, key.name])),
-                            json!({"kind":"qualifier","key":key,"text":attribute.text,
-                                "origin":dto::origin(&attribute.origin),
-                                "sourceKind":if extension { "extension" } else { "form" }}),
-                        )
+                    if !categories.contains(&category) {
+                        categories.push(category);
                     }
-                    PaletteValue::Name(name) => {
-                        (String::new(), json!({"kind":"name","value":name}))
-                    }
-                    PaletteValue::Kind(kind) => {
-                        let caption =
-                            translate(labels, &format!("form-palette-type-{}", kind.xml_name()));
-                        (
-                            String::new(),
-                            json!({"kind":"elementKind","value":kind,"caption":caption}),
-                        )
-                    }
-                    PaletteValue::Absent(value) => (String::new(), absent(labels, value)),
-                };
-                row_dto(labels, &row, raw_id, value)
+                }
+                true
             })
+            .map(|row| row_dto(labels, &row, palette.element))
             .collect::<Vec<_>>()
-        });
+    });
     let categories = rows.as_ref().map(|_| {
-        ["main", "usage", "appearance", "layout"]
+        categories
             .into_iter()
+            .map(PaletteCategory::id)
             .map(|id| json!({"id":id,"caption":translate(labels, &format!("form-palette-category-{id}"))}))
             .collect::<Vec<_>>()
     });
@@ -86,7 +67,63 @@ pub(super) fn inspect(
     Ok(value)
 }
 
-fn row_dto(labels: &Labels, row: &PaletteRow<'_>, raw_id: String, value: Value) -> Value {
+const fn source_kind(extension: bool) -> &'static str {
+    if extension { "extension" } else { "form" }
+}
+
+fn row_dto(labels: &Labels, row: &PaletteRow<'_>, element: &EffectiveElement) -> Value {
+    let (raw_id, value) = match row.value {
+        PaletteValue::Declared {
+            index,
+            occurrence,
+            extension,
+        } => {
+            let property = &element.properties[index].property;
+            let key = &property.key;
+            let mut value = json!({"kind":"declared","propertyIndex":index,"occurrence":occurrence,
+                "sourceKind":source_kind(extension)});
+            if let Some(caption) = row
+                .definition
+                .and_then(|definition| definition.enum_caption(&property.value))
+            {
+                value["caption"] = translate(labels, &format!("form-palette-value-{caption}"));
+            }
+            (
+                format!("xml:{}", json!([key.namespace, key.name, occurrence])),
+                value,
+            )
+        }
+        PaletteValue::DeclaredEvent {
+            index,
+            entry_index,
+            occurrence,
+            extension,
+        } => (
+            String::new(),
+            json!({"kind":"declaredEvent","propertyIndex":index,"entryIndex":entry_index,
+                "occurrence":occurrence,"sourceKind":source_kind(extension)}),
+        ),
+        PaletteValue::Qualifier {
+            attribute,
+            extension,
+        } => {
+            let key = &attribute.key;
+            (
+                format!("attribute:{}", json!([key.namespace, key.name])),
+                json!({"kind":"qualifier","key":key,"text":attribute.text,
+                    "origin":dto::origin(&attribute.origin),"sourceKind":source_kind(extension)}),
+            )
+        }
+        PaletteValue::Name(name) => (String::new(), json!({"kind":"name","value":name})),
+        PaletteValue::Kind(kind) => {
+            let caption = translate(labels, &format!("form-palette-type-{}", kind.xml_name()));
+            (
+                String::new(),
+                json!({"kind":"elementKind","value":kind,"caption":caption}),
+            )
+        }
+        PaletteValue::Absent(value) => (String::new(), absent(labels, value)),
+    };
     let (id, category, editor, caption) = row.definition.map_or_else(
         || (raw_id, Value::Null, Value::Null, Value::Null),
         |definition| {
@@ -98,9 +135,7 @@ fn row_dto(labels: &Labels, row: &PaletteRow<'_>, raw_id: String, value: Value) 
             )
         },
     );
-    let mut row = json!({"id":id,"category":category,"editor":editor,"caption":caption});
-    row["value"] = value;
-    row
+    json!({"id":id,"category":category,"editor":editor,"caption":caption,"value":value})
 }
 
 fn absent(labels: &Labels, default: PlatformPropertyValue) -> Value {

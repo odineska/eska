@@ -76,6 +76,8 @@ pub enum FieldTitleLocation {
 #[serde(rename_all = "camelCase")]
 pub struct ElementPresentation {
     pub identity: ElementIdentity,
+    #[serde(skip)]
+    pub(super) in_table: bool,
     pub grouping: FormGrouping,
     pub united: Option<bool>,
     pub displayed: bool,
@@ -217,6 +219,7 @@ fn visit(
     let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
     output.push(ElementPresentation {
         identity: element.identity.clone(),
+        in_table: scope.in_table,
         grouping: grouping(element),
         united: group_united(element),
         displayed: is_displayed(element, binding.as_ref(), appearance)

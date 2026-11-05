@@ -1,21 +1,38 @@
 //! The Designer palette describes applicable settings separately from declared XML.
 
+mod input_field;
+
 use std::collections::{HashMap, HashSet};
 
 use serde::Serialize;
 
 use super::{
     EffectiveElement, ElementIdentity, ElementKind, FORM_NAMESPACE, FormPreview, SourcedQualifier,
-    appearance, presentation,
+    appearance, handlers, presentation,
 };
+use crate::project::metadata_model::MetadataValue;
 
-#[derive(Clone, Copy, Debug, Serialize)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub enum PaletteCategory {
     Main,
     Usage,
     Appearance,
     Layout,
+    Events,
+}
+
+impl PaletteCategory {
+    #[must_use]
+    pub const fn id(self) -> &'static str {
+        match self {
+            Self::Main => "main",
+            Self::Usage => "usage",
+            Self::Appearance => "appearance",
+            Self::Layout => "layout",
+            Self::Events => "events",
+        }
+    }
 }
 
 #[derive(Clone, Copy, Debug, Serialize)]
@@ -32,6 +49,8 @@ pub enum PaletteEditor {
     Color,
     Font,
     Number,
+    Picture,
+    Event,
 }
 
 #[derive(Clone, Copy, Debug, Serialize)]
@@ -54,6 +73,7 @@ pub struct PaletteDefinition {
     pub editor: PaletteEditor,
     source: SettingSource,
     absent: PlatformPropertyValue,
+    enum_captions: &'static [(&'static str, &'static str)],
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -62,6 +82,7 @@ enum SettingSource {
     Attribute(&'static str),
     Name,
     Kind,
+    Event,
     Unmapped,
 }
 
@@ -78,12 +99,30 @@ impl PaletteDefinition {
             editor,
             source: SettingSource::Property(id),
             absent,
+            enum_captions: &[],
         }
     }
 
     const fn with_source(mut self, source: SettingSource) -> Self {
         self.source = source;
         self
+    }
+
+    const fn with_enum_captions(
+        mut self,
+        captions: &'static [(&'static str, &'static str)],
+    ) -> Self {
+        self.enum_captions = captions;
+        self
+    }
+
+    /// A localized caption key for a measured Designer token. The source token stays in the model.
+    #[must_use]
+    pub fn enum_caption(self, value: &MetadataValue) -> Option<&'static str> {
+        let text = appearance::text(value)?;
+        self.enum_captions
+            .iter()
+            .find_map(|(token, caption)| (*token == text).then_some(*caption))
     }
 }
 
@@ -92,6 +131,13 @@ pub enum PaletteValue<'a> {
     /// Points into this revision's effective XML properties. The occurrence is within the `QName`.
     Declared {
         index: usize,
+        occurrence: usize,
+        extension: bool,
+    },
+    /// An entry of the effective Events property, with navigation to the real XML wrapper.
+    DeclaredEvent {
+        index: usize,
+        entry_index: usize,
         occurrence: usize,
         extension: bool,
     },
@@ -122,14 +168,23 @@ impl FormPreview {
     #[must_use]
     pub fn property_palette(&self, identity: &ElementIdentity) -> Option<PropertyPalette<'_>> {
         let element = self.form.root.find(identity)?;
-        let rows = applicable(element).map(|catalog| self.palette_rows(element, catalog));
+        let rows = if element.kind == Some(ElementKind::InputField) {
+            self.presentation
+                .elements
+                .iter()
+                .find(|item| &item.identity == identity)
+                .and_then(|item| input_field::Context::new(item, element))
+                .map(|context| self.palette_rows(element, input_field::definitions(context)))
+        } else {
+            ordinary_vertical_group(element).then(|| self.palette_rows(element, USUAL_GROUP))
+        };
         Some(PropertyPalette { element, rows })
     }
 
     fn palette_rows<'a>(
         &self,
         element: &'a EffectiveElement,
-        catalog: &'static [PaletteDefinition],
+        catalog: impl IntoIterator<Item = &'static PaletteDefinition>,
     ) -> Vec<PaletteRow<'a>> {
         let extension_sources: HashSet<_> = self
             .dependencies
@@ -148,7 +203,7 @@ impl FormPreview {
             attribute,
             extension: extension_sources.contains(attribute.origin.source.as_str()),
         };
-        let mut rows = Vec::with_capacity(catalog.len());
+        let mut rows = Vec::new();
         for definition in catalog {
             let missing = || PaletteValue::Absent(definition.absent);
             let value = match definition.source {
@@ -174,6 +229,16 @@ impl FormPreview {
                     }),
                 SettingSource::Name => PaletteValue::Name(element.name.as_deref()),
                 SettingSource::Kind => element.kind.map_or_else(missing, PaletteValue::Kind),
+                SettingSource::Event => event_entry(element, definition.id).map_or_else(
+                    missing,
+                    |(index, occurrence, entry_index)| PaletteValue::DeclaredEvent {
+                        index,
+                        occurrence,
+                        entry_index,
+                        extension: extension_sources
+                            .contains(element.properties[index].origin.source.as_str()),
+                    },
+                ),
                 SettingSource::Unmapped => missing(),
             };
             rows.push(PaletteRow {
@@ -217,17 +282,38 @@ impl FormPreview {
     }
 }
 
-fn applicable(element: &EffectiveElement) -> Option<&'static [PaletteDefinition]> {
+fn event_entry(element: &EffectiveElement, name: &str) -> Option<(usize, usize, usize)> {
+    element
+        .properties
+        .iter()
+        .enumerate()
+        .filter(|(_, value)| {
+            value.property.key.namespace.as_deref() == Some(FORM_NAMESPACE)
+                && value.property.key.name == "Events"
+        })
+        .enumerate()
+        .find_map(|(occurrence, (index, value))| {
+            let MetadataValue::Record(events) = &value.property.value else {
+                return None;
+            };
+            let entry_index = events.iter().position(|event| {
+                matches!(event.value, MetadataValue::Text(_))
+                    && handlers::event_name(event) == Some(name)
+            })?;
+            Some((index, occurrence, entry_index))
+        })
+}
+
+fn ordinary_vertical_group(element: &EffectiveElement) -> bool {
     let setting = |name| {
         presentation::property(element, name)
             .and_then(|property| appearance::text(&property.property.value))
     };
     // This catalog was captured for an ordinary vertical group. Specialized
     // behavior can introduce other properties and change their availability.
-    (element.kind == Some(ElementKind::UsualGroup)
+    element.kind == Some(ElementKind::UsualGroup)
         && matches!(setting("Behavior"), None | Some("Auto" | "Usual"))
-        && setting("Group") == Some("Vertical"))
-    .then_some(USUAL_GROUP)
+        && setting("Group") == Some("Vertical")
 }
 
 const USUAL_GROUP: &[PaletteDefinition] = {
