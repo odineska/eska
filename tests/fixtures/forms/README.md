@@ -194,3 +194,8 @@ python3 -B -m unittest discover -s tests -p test_form_coverage.py
 размеры, сетку 20 px, рамку/доступность и native-игнорируемые BackColor/ShowGrid.
 [Отчёт](../../../docs/measurements/t160-native-graphical-linux.json) сравнивает
 по 1 824 500 пикселей всех 17 состояний ru/en с dirty XML и отдельным окном.
+
+`native-formatted/` принимает пустое поле форматированного документа десяти
+источников: размеры, рамку/доступность, белую поверхность при заданном BackColor
+и удаляемые native-выгрузкой ShowToolbar. [Отчёт](../../../docs/measurements/t160-native-formatted-linux.json)
+сравнивает по 1 824 500 пикселей всех 17 состояний ru/en с dirty XML и отдельным окном.
