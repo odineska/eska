@@ -155,7 +155,12 @@ pub(super) fn table_items(
     let dynamic = value_type.types.iter().any(|kind| {
         kind.namespace.as_deref() == Some(super::references::CONFIG) && kind.name == "DynamicList"
     });
-    let commands: &[&str] = if dynamic {
+    let commands: &[&str] = if dynamic
+        && property(element, "SearchStringLocation").and_then(|value| text(&value.property.value))
+            == Some("None")
+    {
+        &["Create", "Copy", "Find", "CancelSearch"]
+    } else if dynamic {
         &["Create", "Copy"]
     } else {
         &["Add", "MoveUp", "MoveDown"]

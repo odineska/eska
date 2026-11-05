@@ -165,6 +165,56 @@ fn standalone_command_bar_uses_the_declared_table_and_its_exclusions() {
 }
 
 #[test]
+fn dynamic_list_without_search_string_offers_find_actions_in_both_bars() {
+    let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:v8="http://v8.1c.ru/8.1/data/core"
+        xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <ChildItems>
+            <CommandBar name="Separate" id="1"><CommandSource>Item.Rows</CommandSource></CommandBar>
+            <Table name="Rows" id="2"><DataPath>Rows</DataPath>
+                <SearchStringLocation>None</SearchStringLocation>
+                <SearchStringAddition name="Search" id="3"><Visible>false</Visible></SearchStringAddition>
+                <ChildItems><InputField name="Text" id="4"/></ChildItems>
+            </Table>
+        </ChildItems>
+        <Attributes><Attribute name="Rows" id="1"><Type><v8:Type>cfg:DynamicList</v8:Type></Type></Attribute></Attributes>
+    </Form>"#;
+    for (input, expected) in [
+        (
+            xml.to_owned(),
+            &["Create", "Copy", "Find", "CancelSearch"][..],
+        ),
+        (
+            xml.replace(
+                "<SearchStringLocation>None",
+                "<SearchStringLocation>CommandBar",
+            ),
+            &["Create", "Copy"][..],
+        ),
+        (
+            xml.replace("cfg:DynamicList", "v8:ValueTable"),
+            &["Add", "MoveUp", "MoveDown"][..],
+        ),
+    ] {
+        let document = parse("dynamic-list-commands", input).unwrap();
+        let view = present(&compose(&document, &[]), &[document], &[]);
+        for id in [1, 2] {
+            let item = view
+                .elements
+                .iter()
+                .find(|item| item.identity.key == super::super::ElementKey::Xml(id))
+                .unwrap();
+            let names: Vec<_> = item
+                .auto_command_items
+                .iter()
+                .filter_map(|command| command.key.strip_prefix("Table.StandardCommand."))
+                .collect();
+            assert_eq!(names, expected);
+        }
+    }
+}
+
+#[test]
 fn input_value_and_title_use_distinct_style_roles_without_losing_overrides() {
     let document=parse("colors",format!("<Form xmlns=\"{}\"><ChildItems><InputField name=\"Default\" id=\"1\"/><InputField name=\"Explicit\" id=\"2\"><TextColor>#0000ff</TextColor><TitleTextColor>#ff0000</TitleTextColor></InputField><Button name=\"Action\" id=\"3\"/></ChildItems></Form>",super::super::FORM_NAMESPACE)).unwrap();
     let view = present(&compose(&document, &[]), &[document], &[]);
