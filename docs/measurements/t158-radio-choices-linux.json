@@ -1,0 +1,2189 @@
+{
+  "schemaVersion": 1,
+  "platform": "Linux ARM64 X11",
+  "nativeBuild": "8.3.27.2342",
+  "nativeCompatibility": "Version8_3_27",
+  "nativeReference": "Configurator, selected form frame at 100%",
+  "eskaCommit": "4e88fa3c6e5fb461f02abc9226e49930969599a6",
+  "explorerCommit": "56cda344036d92e08f42f008c7f8376f634af589",
+  "vsixSha256": "367675ec78ae78eb5f367d26a3f5874f405844a668e99c4d06b5654f76b1c655",
+  "backendSha256": "3a8a0ccba70e10f1e4e52b0425610e57ee1fc108a5ed0d1027882da3a093e2b0",
+  "verifiedInstalledRuntimeFiles": 1303,
+  "referenceSource": "tests/fixtures/forms/native-bound-fields/RadioButtonField.xml",
+  "nativeSnapshots": 33,
+  "installedSnapshots": 44,
+  "exactOuterFramesByLocale": {
+    "en": 21,
+    "ru": 21
+  },
+  "matrixRules": [
+    "Auto and RadioButtons balance the options across columns and fill each from top to bottom.",
+    "Tumbler fills rows left to right and adjacent segments share dividers.",
+    "With no explicit ColumnsCount all options are in one row.",
+    "Trailing spaces do not allocate width in the measured caption. Raw XML and presentation retain them.",
+    "Scenarios with explicit Font/TextColor or multiple rows retain separate title and option metrics."
+  ],
+  "rgbMethod": "Compare the common rectangular form body, excluding selected frame chrome. Different-sized bodies remain failures. No per-pixel tolerance or mask.",
+  "regression": {
+    "packagedSuiteRuns": 16,
+    "packagedCases": 198,
+    "nodePassed": 605,
+    "nodeSkipped": 8,
+    "bunPassed": 593,
+    "bunSkipped": 8,
+    "detachedDirtyTransition": "RadioButtons (three columns) to disabled Tumbler (one column), then dock",
+    "sourceWritesDuringViewing": false
+  },
+  "bsp": {
+    "previousImportFrame": [
+      822,
+      612
+    ],
+    "nativeImportFrame": [
+      812,
+      612
+    ],
+    "results": {
+      "en": [
+        {
+          "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+          "frames": {
+            "preferred-initial": {
+              "width": 814,
+              "height": 612
+            },
+            "preferred-alternate": {
+              "width": 814,
+              "height": 612
+            },
+            "allocation-640": {
+              "width": 814,
+              "height": 612
+            },
+            "allocation-1150": {
+              "width": 1111,
+              "height": 612
+            }
+          },
+          "displayedRadioCaptions": [
+            [
+              "Заполнение таблицы",
+              "Из внешнего файла"
+            ],
+            [
+              "Обновлять",
+              "Пропускать"
+            ],
+            [
+              "Создавать",
+              "Пропускать"
+            ]
+          ],
+          "sourceRadioCaption": "Создавать  ",
+          "matchingBar": {
+            "inline": [],
+            "more": "More actions",
+            "items": [
+              "Отменить сопоставление",
+              "Customize form..."
+            ],
+            "spacerText": "",
+            "spacer": [
+              20,
+              17
+            ],
+            "grid": false
+          }
+        },
+        {
+          "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+          "frames": {
+            "preferred-initial": {
+              "width": 754,
+              "height": 768
+            },
+            "preferred-alternate": {
+              "width": 754,
+              "height": 768
+            },
+            "allocation-640": {
+              "width": 728,
+              "height": 768
+            },
+            "allocation-1150": {
+              "width": 1111,
+              "height": 768
+            }
+          }
+        },
+        {
+          "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+          "frames": {
+            "preferred-initial": {
+              "width": 1217,
+              "height": 729
+            },
+            "preferred-alternate": {
+              "width": 1217,
+              "height": 729
+            },
+            "allocation-640": {
+              "width": 1216.6875,
+              "height": 415
+            },
+            "allocation-1150": {
+              "width": 1216.6875,
+              "height": 415
+            }
+          }
+        }
+      ],
+      "ru": [
+        {
+          "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+          "frames": {
+            "preferred-initial": {
+              "width": 814,
+              "height": 612
+            },
+            "preferred-alternate": {
+              "width": 814,
+              "height": 612
+            },
+            "allocation-640": {
+              "width": 814,
+              "height": 612
+            },
+            "allocation-1150": {
+              "width": 1111,
+              "height": 612
+            }
+          },
+          "displayedRadioCaptions": [
+            [
+              "Заполнение таблицы",
+              "Из внешнего файла"
+            ],
+            [
+              "Обновлять",
+              "Пропускать"
+            ],
+            [
+              "Создавать",
+              "Пропускать"
+            ]
+          ],
+          "sourceRadioCaption": "Создавать  ",
+          "matchingBar": {
+            "inline": [],
+            "more": "Еще",
+            "items": [
+              "Отменить сопоставление",
+              "Изменить форму..."
+            ],
+            "spacerText": "",
+            "spacer": [
+              20,
+              17
+            ],
+            "grid": false
+          }
+        },
+        {
+          "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+          "frames": {
+            "preferred-initial": {
+              "width": 754,
+              "height": 768
+            },
+            "preferred-alternate": {
+              "width": 754,
+              "height": 768
+            },
+            "allocation-640": {
+              "width": 744,
+              "height": 768
+            },
+            "allocation-1150": {
+              "width": 1111,
+              "height": 768
+            }
+          }
+        },
+        {
+          "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+          "frames": {
+            "preferred-initial": {
+              "width": 1217,
+              "height": 729
+            },
+            "preferred-alternate": {
+              "width": 1217,
+              "height": 729
+            },
+            "allocation-640": {
+              "width": 1216.6875,
+              "height": 415
+            },
+            "allocation-1150": {
+              "width": 1216.6875,
+              "height": 415
+            }
+          }
+        }
+      ]
+    },
+    "initialCheckFailure": "The observation script compared displayed choice text to the raw trailing spaces. The retry checked source and display separately against the same VSIX."
+  },
+  "russianCustomizeCommand": {
+    "caption": "Изменить форму...",
+    "nativeImageSha256": "a3249b2bbe541bbe4439fba5d151ad364ee1a269c4e76820614567481d8ca4e0"
+  },
+  "pending": [
+    "Radio glyph, Tumbler fill, rounded borders, text antialiasing and trailing-space glyph raster.",
+    "SegmentsUnequal frame remains 1 px narrower than the native 205 px.",
+    "Exact visuals of large authored BSP forms and Windows."
+  ],
+  "cases": [
+    {
+      "name": "Automatic",
+      "settings": {
+        "type": "Auto",
+        "columns": null,
+        "titleLocation": "None",
+        "enabled": true,
+        "labels": [
+          "Update",
+          "Skip"
+        ]
+      },
+      "sourceSha256": "7dcb20db91155d95378832e046f69d1285cef93d31e3f358d1e81ab90d8c8a98",
+      "native": {
+        "en": {
+          "frame": [
+            155,
+            69
+          ],
+          "imageSha256": "8a4d6734b69eb82563fe7ccd55997b58b91344916d3051ce77ec58e5d4e55491"
+        },
+        "ru": {
+          "frame": [
+            155,
+            69
+          ],
+          "imageSha256": "fc3dae768eb2904a4b3ca142fb5f7869b31cc52b108c3cb68ce5a2626642ccaf"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 5811,
+          "differentBodyRgbPixels": 196,
+          "imageSha256": "8c963a2108175a4ec85d54cb0d3fd5925e8de0771cca615729632d6f307156fc"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 5811,
+          "differentBodyRgbPixels": 196,
+          "imageSha256": "15b50a745484498ceb86fe9b371d9540d3d3c527ce55d1382db620dc4fa2c59e"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          155,
+          69
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 121,
+          "height": 19
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 38,
+            "width": 63,
+            "height": 19
+          },
+          {
+            "x": 86,
+            "y": 38,
+            "width": 48,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 14,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 87,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "Buttons",
+      "settings": {
+        "type": "RadioButtons",
+        "columns": null,
+        "titleLocation": "None",
+        "enabled": true,
+        "labels": [
+          "Update",
+          "Skip"
+        ]
+      },
+      "sourceSha256": "9a90b496e4f5b20955a7a242dd1a00c485fdf127231a9848413ac9e5ccef5e2e",
+      "native": {
+        "en": {
+          "frame": [
+            155,
+            69
+          ],
+          "imageSha256": "6d9179b6de8f7863db56b69f4e7ced3ab81218828290840eade913f8fccb659b"
+        },
+        "ru": {
+          "frame": [
+            155,
+            69
+          ],
+          "imageSha256": "9d6741a5338f3500b013459688b72fdfd9f0419d2654b6affd02f24f3df4cc4c"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 5811,
+          "differentBodyRgbPixels": 196,
+          "imageSha256": "3be2c30b06e60ad2bfd4210526e4715d4381b9d9bc367bbb86c62b974ba3acc7"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 5811,
+          "differentBodyRgbPixels": 196,
+          "imageSha256": "27575a7a0cf50235b54d63c4d3ae299aac848fe5a2ba68d842dc52dc563476c8"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          155,
+          69
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 121,
+          "height": 19
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 38,
+            "width": 63,
+            "height": 19
+          },
+          {
+            "x": 86,
+            "y": 38,
+            "width": 48,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 14,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 87,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "SingleColumn",
+      "settings": {
+        "type": "Auto",
+        "columns": 1,
+        "titleLocation": "None",
+        "enabled": true,
+        "labels": [
+          "Update",
+          "Skip"
+        ]
+      },
+      "sourceSha256": "ae1bebe492336f317427daff4fd53f514bc135441ef996f4133093637a1930d3",
+      "native": {
+        "en": {
+          "frame": [
+            97,
+            95
+          ],
+          "imageSha256": "3bf4e168fe77e398bea22acbead95b2cbf6bd80441c1013c6925705d2990c074"
+        },
+        "ru": {
+          "frame": [
+            97,
+            95
+          ],
+          "imageSha256": "1d6b6207e19394e5857218e24ea737454b2a144edfeae3bdf7ed162e83bf20be"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 5915,
+          "differentBodyRgbPixels": 196,
+          "imageSha256": "1c56405743c4b9dffc260f87fe6d3542864c5b0942bcbede7b6bc97ae718696d"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 5915,
+          "differentBodyRgbPixels": 196,
+          "imageSha256": "64f0b156cb836bdf2c611452284374d9cb65263ab5ffab712d02d4ae600dda3a"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          97,
+          95
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 63,
+          "height": 45
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 38,
+            "width": 63,
+            "height": 19
+          },
+          {
+            "x": 13,
+            "y": 64,
+            "width": 63,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 14,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 14,
+            "y": 66,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "TwoColumns",
+      "settings": {
+        "type": "Auto",
+        "columns": 2,
+        "titleLocation": "None",
+        "enabled": true,
+        "labels": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth"
+        ]
+      },
+      "sourceSha256": "95394cc2d2e3a93a5a2ca79afa5a238e96aa342a0d3f250242bb0b23b4f7c50a",
+      "native": {
+        "en": {
+          "frame": [
+            197,
+            95
+          ],
+          "imageSha256": "cd5daf351d51e4194a675c61dfea5cd3e65bbb85a98e7415b42927700e56f975"
+        },
+        "ru": {
+          "frame": [
+            197,
+            95
+          ],
+          "imageSha256": "293923c610acb56d24471f1630b2c9db815186355cc80b7f1ed92f22f59855e2"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 12415,
+          "differentBodyRgbPixels": 376,
+          "imageSha256": "82454d840ba55a78125f82e94764a40ce27ce488e1a0448ae607dd7c2c5344f8"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 12415,
+          "differentBodyRgbPixels": 376,
+          "imageSha256": "ef55b39ea00bc9cceb8cd2f5b555a0804f20eafa1d3417717624aaab09e0aa6d"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          197,
+          95
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 163,
+          "height": 45
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 38,
+            "width": 94,
+            "height": 19
+          },
+          {
+            "x": 13,
+            "y": 64,
+            "width": 94,
+            "height": 19
+          },
+          {
+            "x": 117,
+            "y": 38,
+            "width": 59,
+            "height": 19
+          },
+          {
+            "x": 117,
+            "y": 64,
+            "width": 59,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 14,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 14,
+            "y": 66,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 118,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 118,
+            "y": 66,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "ThreeColumns",
+      "settings": {
+        "type": "RadioButtons",
+        "columns": 3,
+        "titleLocation": "None",
+        "enabled": true,
+        "labels": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth",
+          "Fifth"
+        ]
+      },
+      "sourceSha256": "316d237c7bfcded88217ab30494f64c3cb27154340a2cf0c0ba7ccbd1d95aee6",
+      "native": {
+        "en": {
+          "frame": [
+            255,
+            95
+          ],
+          "imageSha256": "700361a7a00cb319960b50f5859a84b222dd165f1a0c579293483a1573bbae3c"
+        },
+        "ru": {
+          "frame": [
+            255,
+            95
+          ],
+          "imageSha256": "009e413f459a80df5d2581cff11f50a1474354311cc13b750f9a5b279b625269"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 16185,
+          "differentBodyRgbPixels": 466,
+          "imageSha256": "b3ec7f2caf4ea89726d88dd844ef182a7e2bbe9cc78025582525326555c6846d"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 16185,
+          "differentBodyRgbPixels": 466,
+          "imageSha256": "11767f74639e47640e78fa77cb2d6fe2462f253d6d7b5c17971a177b391ba127"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          255,
+          95
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 221,
+          "height": 45
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 38,
+            "width": 94,
+            "height": 19
+          },
+          {
+            "x": 13,
+            "y": 64,
+            "width": 94,
+            "height": 19
+          },
+          {
+            "x": 117,
+            "y": 38,
+            "width": 59,
+            "height": 19
+          },
+          {
+            "x": 117,
+            "y": 64,
+            "width": 59,
+            "height": 19
+          },
+          {
+            "x": 186,
+            "y": 38,
+            "width": 48,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 14,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 14,
+            "y": 66,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 118,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 118,
+            "y": 66,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 187,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth",
+          "Fifth"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "Segments",
+      "settings": {
+        "type": "Tumbler",
+        "columns": null,
+        "titleLocation": "None",
+        "enabled": true,
+        "labels": [
+          "Update",
+          "Skip"
+        ]
+      },
+      "sourceSha256": "de6d2e94a173aabfdeae83a06e31067fdacd70c529713c30cc48177ef6a59816",
+      "native": {
+        "en": {
+          "frame": [
+            140,
+            76
+          ],
+          "imageSha256": "a701f37784fc1c7fdd3b8599388653b0b0e8dab5526cba39a4201b2b0a69e9fc"
+        },
+        "ru": {
+          "frame": [
+            140,
+            76
+          ],
+          "imageSha256": "5ffa2e1ced41b0fd83fb70a7e26b9bbc867ad368ec48ef03ad32763419daa494"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 6164,
+          "differentBodyRgbPixels": 1669,
+          "imageSha256": "5ec0f932d40c9528da33360c80c581f22e0a4e1f760e63a103e0731d2856c7be"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 6164,
+          "differentBodyRgbPixels": 1669,
+          "imageSha256": "b3d726e5c92c8a5f6496d43f063365666e6c4cf8152e33f200b32e415f57db91"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          140,
+          76
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 106,
+          "height": 26
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 39,
+            "width": 59,
+            "height": 24
+          },
+          {
+            "x": 71,
+            "y": 39,
+            "width": 48,
+            "height": 24
+          }
+        ],
+        "radioGlyphRects": [],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "SegmentGrid",
+      "settings": {
+        "type": "Tumbler",
+        "columns": 1,
+        "titleLocation": "None",
+        "enabled": true,
+        "labels": [
+          "Update",
+          "Skip"
+        ]
+      },
+      "sourceSha256": "a5fe128612bc67960a7415b9aa53a254876837aa1d7f37a54e676ab34c7fc4eb",
+      "native": {
+        "en": {
+          "frame": [
+            95,
+            99
+          ],
+          "imageSha256": "e10689f445d0fd96c2612c70c419440fccce9e47e958661cf6e1c07221f224dd"
+        },
+        "ru": {
+          "frame": [
+            95,
+            99
+          ],
+          "imageSha256": "5573bfdaf96dddeab51497f84d1aeacb060dcf7c94ba4c1b243e697f3c177c6d"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 6141,
+          "differentBodyRgbPixels": 1863,
+          "imageSha256": "85f57f987930368a72efc9113c25ef7b9bee05cab6d8544c47b1a1e928b9ecd2"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 6141,
+          "differentBodyRgbPixels": 1863,
+          "imageSha256": "8d50d1f9c4f1185b8a24044fa419c5533c3072e378dd73f7eaf2026e67e03f46"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          95,
+          99
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 61,
+          "height": 49
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 39,
+            "width": 61,
+            "height": 24
+          },
+          {
+            "x": 13,
+            "y": 61,
+            "width": 61,
+            "height": 24
+          }
+        ],
+        "radioGlyphRects": [],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "DisabledToggle",
+      "settings": {
+        "type": "Tumbler",
+        "columns": null,
+        "titleLocation": "None",
+        "enabled": false,
+        "labels": [
+          "Update",
+          "Skip"
+        ]
+      },
+      "sourceSha256": "1d66474067f06ce3ee2a3d73238256300e66fbd1fa83f58d73c8fd35df10cb43",
+      "native": {
+        "en": {
+          "frame": [
+            140,
+            76
+          ],
+          "imageSha256": "75f146c395428da02b4408f31a7f91ba8845c79098a29d47bc37f25a52f422d7"
+        },
+        "ru": {
+          "frame": [
+            140,
+            76
+          ],
+          "imageSha256": "a550b0d7ff562e79555e67207aa7ac4bb04aa35f772b84947ef8c9acdfeeff56"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 6164,
+          "differentBodyRgbPixels": 1664,
+          "imageSha256": "578867920479e8ded1010e8a80601c095d9240b5fe9ea13b5a065e3c8dc0652e"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 6164,
+          "differentBodyRgbPixels": 1664,
+          "imageSha256": "354d06bf206b8a215bed6f115e1c614f4f6ef53865d22b296a5a5751ed281936"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          140,
+          76
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 106,
+          "height": 26
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 39,
+            "width": 59,
+            "height": 24
+          },
+          {
+            "x": 71,
+            "y": 39,
+            "width": 48,
+            "height": 24
+          }
+        ],
+        "radioGlyphRects": [],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(128, 128, 128)"
+      }
+    },
+    {
+      "name": "TrailingSpaces",
+      "settings": {
+        "type": "Auto",
+        "columns": null,
+        "titleLocation": "None",
+        "enabled": true,
+        "labels": [
+          "Update  ",
+          "Skip"
+        ]
+      },
+      "sourceSha256": "2bd4223938c471a23bf8d55bcaaecb7442a5117511136e78359e548890d8e9e9",
+      "native": {
+        "en": {
+          "frame": [
+            155,
+            69
+          ],
+          "imageSha256": "041c1b9b7ea0047d039bcc93b6c5725374e21fbc9829e17c6a276654e89b54c1"
+        },
+        "ru": {
+          "frame": [
+            155,
+            69
+          ],
+          "imageSha256": "246e9498c0c273c34db39567bb0367a5a31fd0a830369821767a24d9c833077c"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 5811,
+          "differentBodyRgbPixels": 207,
+          "imageSha256": "b29f488ef46e3f625a9feb14d3789f2d35e08a13e063005db4673379927c0b37"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 5811,
+          "differentBodyRgbPixels": 207,
+          "imageSha256": "7e65512b2cbac664db55728b3f82fd5112219f6277bcbb73b2cdb0b0370b4aa7"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          155,
+          69
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 121,
+          "height": 19
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 38,
+            "width": 63,
+            "height": 19
+          },
+          {
+            "x": 86,
+            "y": 38,
+            "width": 48,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 14,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 87,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "TitleLeft",
+      "settings": {
+        "type": "Auto",
+        "columns": null,
+        "titleLocation": "Left",
+        "enabled": true,
+        "labels": [
+          "Update",
+          "Skip"
+        ]
+      },
+      "sourceSha256": "3d2e5142e7c7ede90feb8b2d18e4cf0155eb0e91c5f99fce8e3dfd3a633d01be",
+      "native": {
+        "en": {
+          "frame": [
+            263,
+            69
+          ],
+          "imageSha256": "edf2d49dc28588da79480976f64a0b86e3a150cac0db235797968ff287485e9c"
+        },
+        "ru": {
+          "frame": [
+            263,
+            69
+          ],
+          "imageSha256": "4c3e23be325574f12db3ac63d3dcc60f2de0e9d5b41e873dd3565230e9dafce3"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 10023,
+          "differentBodyRgbPixels": 196,
+          "imageSha256": "71f467d7d2f781b9243d66768899de30be4a63e4860e5b38a9264e0573f2e54d"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 10023,
+          "differentBodyRgbPixels": 196,
+          "imageSha256": "d8923e28f5daa8e96c79a9fcc6b64cebec8008848746fd993c1a23ed9bf97ff8"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          263,
+          69
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 121,
+          "y": 38,
+          "width": 121,
+          "height": 19
+        },
+        "title": {
+          "x": 13,
+          "y": 39.5,
+          "width": 104,
+          "height": 16
+        },
+        "optionRects": [
+          {
+            "x": 121,
+            "y": 38,
+            "width": 63,
+            "height": 19
+          },
+          {
+            "x": 194,
+            "y": 38,
+            "width": 48,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 122,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 195,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "TitleAbove",
+      "settings": {
+        "type": "Tumbler",
+        "columns": null,
+        "titleLocation": "Top",
+        "enabled": true,
+        "labels": [
+          "Update",
+          "Skip"
+        ]
+      },
+      "sourceSha256": "2f66d0c6e31127f18d6d7649e89f2d304a13d1693abb8252956065d3c82a490d",
+      "native": {
+        "en": {
+          "frame": [
+            140,
+            95
+          ],
+          "imageSha256": "1c0657ff9390cb95e09b5872af6a125dd0f099cd58293b8d3c5b8b136589249f"
+        },
+        "ru": {
+          "frame": [
+            140,
+            95
+          ],
+          "imageSha256": "34bc7b4df8237be7cf709272ea1f2afb323d5838605dbb1f3ffde73a0dcfdf33"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 8710,
+          "differentBodyRgbPixels": 2237,
+          "imageSha256": "4ea448793419c63b0ce2c759aa4701f5bccd71fdb3f968fc8fed8110c97b18e1"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 8710,
+          "differentBodyRgbPixels": 2237,
+          "imageSha256": "5c546906a1b52b6d8214f42841b68d3434994cce4890f6cb8096096e0c9581c3"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          140,
+          95
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 57,
+          "width": 106,
+          "height": 26
+        },
+        "title": {
+          "x": 13,
+          "y": 38,
+          "width": 106,
+          "height": 16
+        },
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 58,
+            "width": 59,
+            "height": 24
+          },
+          {
+            "x": 71,
+            "y": 58,
+            "width": 48,
+            "height": 24
+          }
+        ],
+        "radioGlyphRects": [],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "AutoFive",
+      "settings": {
+        "type": "Auto",
+        "columns": null,
+        "titleLocation": "None",
+        "labels": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth",
+          "Fifth"
+        ],
+        "extraProperties": ""
+      },
+      "sourceSha256": "5d99e70bd4bd0e025fbe9714a26384be6df6c98afc4b288521addf117b5af99f",
+      "native": {
+        "en": {
+          "frame": [
+            374,
+            69
+          ],
+          "imageSha256": "5eb677b15ad09513eb4700e53ca6311cb5cdbe240a522e333a6bc9279b104d0d"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 14352,
+          "differentBodyRgbPixels": 466,
+          "imageSha256": "0a0c4831916d304857c8ef92ab683cb532fb8c5e44eec23265a085e5104de7b4"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 14352,
+          "differentBodyRgbPixels": 466,
+          "imageSha256": "c0777238941a9767d8417782e664d2280a48fdc4a7cc839fa52143eda5e8ff2d"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          374,
+          69
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 340,
+          "height": 19
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 38,
+            "width": 48,
+            "height": 19
+          },
+          {
+            "x": 71,
+            "y": 38,
+            "width": 94,
+            "height": 19
+          },
+          {
+            "x": 175,
+            "y": 38,
+            "width": 51,
+            "height": 19
+          },
+          {
+            "x": 236,
+            "y": 38,
+            "width": 59,
+            "height": 19
+          },
+          {
+            "x": 305,
+            "y": 38,
+            "width": 48,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 14,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 72,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 176,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 237,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 306,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth",
+          "Fifth"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "UnevenFour",
+      "settings": {
+        "type": "RadioButtons",
+        "columns": 3,
+        "titleLocation": "None",
+        "labels": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth"
+        ],
+        "extraProperties": ""
+      },
+      "sourceSha256": "200191f14a75f3029b612a2098a69d9e599d21fd9fe840d87dc0691ba11993c2",
+      "native": {
+        "en": {
+          "frame": [
+            258,
+            95
+          ],
+          "imageSha256": "6997d0ac76be5fb7312b4dbd111427c3e5009dd6dd7c7a733e429d85eddb98bd"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 16380,
+          "differentBodyRgbPixels": 376,
+          "imageSha256": "af00f4f43f79d6259fbd49f0176205b8efe6e9abdebaff8c2057c6ba87d64c83"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 16380,
+          "differentBodyRgbPixels": 376,
+          "imageSha256": "ab94531e52a18677cc99d61c6d41f3d8138ab6938aed56df70fe71f5379f4e3b"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          258,
+          95
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 224,
+          "height": 45
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 38,
+            "width": 94,
+            "height": 19
+          },
+          {
+            "x": 13,
+            "y": 64,
+            "width": 94,
+            "height": 19
+          },
+          {
+            "x": 117,
+            "y": 38,
+            "width": 51,
+            "height": 19
+          },
+          {
+            "x": 178,
+            "y": 38,
+            "width": 59,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 14,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 14,
+            "y": 66,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 118,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 179,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "SegmentsFive",
+      "settings": {
+        "type": "Tumbler",
+        "columns": 3,
+        "titleLocation": "None",
+        "labels": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth",
+          "Fifth"
+        ],
+        "extraProperties": ""
+      },
+      "sourceSha256": "1cf01052ec781b908818340874946680276d05fd27a94ebffe7ac40b7900dc0a",
+      "native": {
+        "en": {
+          "frame": [
+            230,
+            99
+          ],
+          "imageSha256": "e1ac007a3be9e674baa54e6dbdb838549d7c7f20afa18e0fd5073140a69a4637"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 15456,
+          "differentBodyRgbPixels": 5244,
+          "imageSha256": "611a0d6f71fa9ae16325cd61195b78ba651b7cc5a39a7ab275c6d7f9dc1f2708"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 15456,
+          "differentBodyRgbPixels": 5244,
+          "imageSha256": "1d0c374514daa687b773daaebcbf40fbc7f238761970d2e30e9d50e5ba120cec"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          230,
+          99
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 196,
+          "height": 49
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 39,
+            "width": 55,
+            "height": 24
+          },
+          {
+            "x": 67,
+            "y": 39,
+            "width": 91,
+            "height": 24
+          },
+          {
+            "x": 157,
+            "y": 39,
+            "width": 52,
+            "height": 24
+          },
+          {
+            "x": 13,
+            "y": 61,
+            "width": 55,
+            "height": 24
+          },
+          {
+            "x": 67,
+            "y": 61,
+            "width": 91,
+            "height": 24
+          }
+        ],
+        "radioGlyphRects": [],
+        "options": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth",
+          "Fifth"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "SegmentsReverse",
+      "settings": {
+        "type": "Tumbler",
+        "columns": null,
+        "titleLocation": "None",
+        "labels": [
+          "Skip",
+          "Update"
+        ],
+        "extraProperties": ""
+      },
+      "sourceSha256": "cd48b2bdaa35a87cf61aaa3f563dae94f6b0d3d3348c81ca8fa8acace9b61318",
+      "native": {
+        "en": {
+          "frame": [
+            140,
+            76
+          ],
+          "imageSha256": "6e17ec2c9386204317b9fae701216ed27eecebbe757722196d4949184d18c648"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 6164,
+          "differentBodyRgbPixels": 1679,
+          "imageSha256": "d1c87d6c70f5b9994c603f0a54f0e26a86d124c18ac540b139b0a5a450c0dc9a"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 6164,
+          "differentBodyRgbPixels": 1679,
+          "imageSha256": "dc037d0605ba4cdd0610b534e98995d8e1747f86c1383c820fa87eccfa5bef4e"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          140,
+          76
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 106,
+          "height": 26
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 39,
+            "width": 44,
+            "height": 24
+          },
+          {
+            "x": 56,
+            "y": 39,
+            "width": 63,
+            "height": 24
+          }
+        ],
+        "radioGlyphRects": [],
+        "options": [
+          "Skip",
+          "Update"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "SegmentsEqual",
+      "settings": {
+        "type": "Tumbler",
+        "columns": null,
+        "titleLocation": "None",
+        "labels": [
+          "Update",
+          "Update"
+        ],
+        "extraProperties": ""
+      },
+      "sourceSha256": "dc45ca4d3132e720670ef6e2a7cfb06f87a28dee05883e9f83cc2a8e99bf3a67",
+      "native": {
+        "en": {
+          "frame": [
+            155,
+            76
+          ],
+          "imageSha256": "f9f39d349eae1784cc97a2317f4783af23a33ef5a9be2ce4272f48283466a498"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 6854,
+          "differentBodyRgbPixels": 1913,
+          "imageSha256": "5cd03e73e6c65aabeb110a85ea54c00a425e5c78e435c649d88661f28832b5c2"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 6854,
+          "differentBodyRgbPixels": 1913,
+          "imageSha256": "0918586b4e9a82798da8f1273575e8443ddd5d566a344567468f6d81060abea4"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          155,
+          76
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 121,
+          "height": 26
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 39,
+            "width": 59,
+            "height": 24
+          },
+          {
+            "x": 71,
+            "y": 39,
+            "width": 63,
+            "height": 24
+          }
+        ],
+        "radioGlyphRects": [],
+        "options": [
+          "Update",
+          "Update"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "SegmentsUnequal",
+      "settings": {
+        "type": "Tumbler",
+        "columns": null,
+        "titleLocation": "None",
+        "labels": [
+          "A",
+          "A much longer option"
+        ],
+        "extraProperties": ""
+      },
+      "sourceSha256": "a6d24660a5d8fb3fd44114b50436029c14aec7e39a3abd3eafbae74940a19a6e",
+      "native": {
+        "en": {
+          "frame": [
+            205,
+            76
+          ],
+          "imageSha256": "1ef9564fae620468b98eb7336b0345c2f126ef6a519b285747a97be1962937d8"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 9108,
+          "differentBodyRgbPixels": 2723,
+          "imageSha256": "01dbbbfc3cd9089ab36f061949cffeac098afe228b70937a12cc8443b0dba492"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 9108,
+          "differentBodyRgbPixels": 2723,
+          "imageSha256": "d50bdbb6479b262cf1ee1c5f9d2f939a26bff4bca4056ee09ba7e498637ed5a3"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          204,
+          76
+        ],
+        "frameExact": false,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 170,
+          "height": 26
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 39,
+            "width": 27,
+            "height": 24
+          },
+          {
+            "x": 39,
+            "y": 39,
+            "width": 144,
+            "height": 24
+          }
+        ],
+        "radioGlyphRects": [],
+        "options": [
+          "A",
+          "A much longer option"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "SegmentsWidth",
+      "settings": {
+        "type": "Tumbler",
+        "columns": null,
+        "titleLocation": "None",
+        "labels": [
+          "Update",
+          "Skip"
+        ],
+        "extraProperties": "<Width>30</Width>"
+      },
+      "sourceSha256": "0762c186c4e4bdf475dfe7b8143c1a63bc87738c8b61c879ead47045f8d2e715",
+      "native": {
+        "en": {
+          "frame": [
+            140,
+            76
+          ],
+          "imageSha256": "4dfd7e901d9fc00f52b60883923dfcc548af0c58a69666e26a2bd6d9f2914742"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 6164,
+          "differentBodyRgbPixels": 1669,
+          "imageSha256": "631c712719b4f1e7ecbd36a7072187de8b933f2d02c2caf0e478382fceacf24f"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 6164,
+          "differentBodyRgbPixels": 1669,
+          "imageSha256": "ac1ef8d41f354f21ddc805dc79f3f05428c149ba79a2d4cd4b70eae6dd124bbf"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          140,
+          76
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 106,
+          "height": 26
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 39,
+            "width": 59,
+            "height": 24
+          },
+          {
+            "x": 71,
+            "y": 39,
+            "width": 48,
+            "height": 24
+          }
+        ],
+        "radioGlyphRects": [],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "ButtonsDisabled",
+      "settings": {
+        "type": "RadioButtons",
+        "columns": null,
+        "titleLocation": "None",
+        "labels": [
+          "Update",
+          "Skip"
+        ],
+        "extraProperties": "<Enabled>false</Enabled>"
+      },
+      "sourceSha256": "2f00f4b622de5c739dc653d438c97ec5bf30ab6264f708eb578f4f1ec8bc8902",
+      "native": {
+        "en": {
+          "frame": [
+            155,
+            69
+          ],
+          "imageSha256": "c9d7f0e8757eab742f712f5e87f7e6bfd32893f5bec9d275b04537760648b78c"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 5811,
+          "differentBodyRgbPixels": 619,
+          "imageSha256": "fd01555a5e2d655e96137bab75d9321ad40cde0def6a03bc0880f7ee6af4eb61"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 5811,
+          "differentBodyRgbPixels": 619,
+          "imageSha256": "c30358edd7af4e9b5a9cdbb929747aeaaef59eed2154f6799d4d78ac2abb399b"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          155,
+          69
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 38,
+          "width": 121,
+          "height": 19
+        },
+        "title": null,
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 38,
+            "width": 63,
+            "height": 19
+          },
+          {
+            "x": 86,
+            "y": 38,
+            "width": 48,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 14,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 87,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(160, 160, 160)"
+      }
+    },
+    {
+      "name": "ButtonsTitleColumn",
+      "settings": {
+        "type": "RadioButtons",
+        "columns": 1,
+        "titleLocation": "Left",
+        "labels": [
+          "Update",
+          "Skip"
+        ],
+        "extraProperties": ""
+      },
+      "sourceSha256": "00ba22f5637da56e37b26ac98ff3ad79c291ee5c17a87019b383a024a75b4cf0",
+      "native": {
+        "en": {
+          "frame": [
+            205,
+            95
+          ],
+          "imageSha256": "63ab7cdb824a75f0c78b458cdc2759ccc1f6f50c67c951cd180007bfb8077a2f"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 12935,
+          "differentBodyRgbPixels": 865,
+          "imageSha256": "c4fe44957a71d983914f50b21a5ecd25e285c4684437d1b357c63decced0862d"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 12935,
+          "differentBodyRgbPixels": 1580,
+          "imageSha256": "8a25b9c8bd2fac2245a6c90a06855ffd5099c048d829235435368af995822e12"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          205,
+          95
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 121,
+          "y": 38,
+          "width": 63,
+          "height": 45
+        },
+        "title": {
+          "x": 13,
+          "y": 38,
+          "width": 104,
+          "height": 16
+        },
+        "optionRects": [
+          {
+            "x": 121,
+            "y": 38,
+            "width": 63,
+            "height": 19
+          },
+          {
+            "x": 121,
+            "y": 64,
+            "width": 63,
+            "height": 19
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 122,
+            "y": 40,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 122,
+            "y": 66,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "Update",
+          "Skip"
+        ],
+        "textColor": "rgb(77, 77, 77)"
+      }
+    },
+    {
+      "name": "ButtonsFont",
+      "settings": {
+        "type": "RadioButtons",
+        "columns": 1,
+        "titleLocation": "Top",
+        "labels": [
+          "Обновлять",
+          "Пропускать"
+        ],
+        "extraProperties": "<Font ref=\"sys:DefaultGUIFont\" height=\"16\" bold=\"true\" kind=\"WindowsFont\"/><TextColor>web:Blue</TextColor>"
+      },
+      "sourceSha256": "43b559b0c5bcc7b0a13a4f216d641308d9bfb38a539159c1f64e9ef0cfe855ee",
+      "native": {
+        "en": {
+          "frame": [
+            179,
+            130
+          ],
+          "imageSha256": "6c8768cb533f27b4b8aaa4cc7edca8a9686cb8daac608d98b9939f02a1789f72"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 17300,
+          "differentBodyRgbPixels": 865,
+          "imageSha256": "e2b3afd5bb6cdaa9180fbb74e65e2fc5e9e7fd7587c90dafaa65d0db4d534ed3"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 17300,
+          "differentBodyRgbPixels": 865,
+          "imageSha256": "a516151d0e84216578bed0e5f4916bf6b2a7f3cffe3056a9116c6a115f47d1e6"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          179,
+          130
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 13,
+          "y": 57,
+          "width": 145,
+          "height": 61
+        },
+        "title": {
+          "x": 13,
+          "y": 38,
+          "width": 145,
+          "height": 16
+        },
+        "optionRects": [
+          {
+            "x": 13,
+            "y": 57,
+            "width": 145,
+            "height": 27
+          },
+          {
+            "x": 13,
+            "y": 91,
+            "width": 145,
+            "height": 27
+          }
+        ],
+        "radioGlyphRects": [
+          {
+            "x": 14,
+            "y": 63,
+            "width": 15,
+            "height": 15
+          },
+          {
+            "x": 14,
+            "y": 97,
+            "width": 15,
+            "height": 15
+          }
+        ],
+        "options": [
+          "Обновлять",
+          "Пропускать"
+        ],
+        "textColor": "rgb(0, 0, 255)"
+      }
+    },
+    {
+      "name": "SegmentsFont",
+      "settings": {
+        "type": "Tumbler",
+        "columns": 1,
+        "titleLocation": "Left",
+        "labels": [
+          "Обновлять",
+          "Пропускать"
+        ],
+        "extraProperties": "<Font ref=\"sys:DefaultGUIFont\" height=\"16\" bold=\"true\" kind=\"WindowsFont\"/><TextColor>web:Blue</TextColor>"
+      },
+      "sourceSha256": "e19da37827bef353ee9f641ffb812a2723a5fd3d03f31604de2cf1ddb92414c8",
+      "native": {
+        "en": {
+          "frame": [
+            297,
+            127
+          ],
+          "imageSha256": "81daa3cccf19cad1811ff9d9c7c62f052294207a364ad288b8834100cee2b1a6"
+        }
+      },
+      "explorer": {
+        "en": {
+          "commonBodyRgbPixels": 28227,
+          "differentBodyRgbPixels": 8334,
+          "imageSha256": "8078b8dda8d123a54cf780ce207d482afb3981426e912c89167ebac81240f912"
+        },
+        "ru": {
+          "commonBodyRgbPixels": 28227,
+          "differentBodyRgbPixels": 8334,
+          "imageSha256": "542e7893ac3f82be2061c4c487920100ab21dd613284d2466f8fecbf070a6ec5"
+        }
+      },
+      "commonExplorerGeometry": {
+        "frame": [
+          297,
+          127
+        ],
+        "frameExact": true,
+        "control": {
+          "x": 121,
+          "y": 38,
+          "width": 155,
+          "height": 77
+        },
+        "title": {
+          "x": 13,
+          "y": 38,
+          "width": 104,
+          "height": 16
+        },
+        "optionRects": [
+          {
+            "x": 121,
+            "y": 39,
+            "width": 155,
+            "height": 38
+          },
+          {
+            "x": 121,
+            "y": 75,
+            "width": 155,
+            "height": 38
+          }
+        ],
+        "radioGlyphRects": [],
+        "options": [
+          "Обновлять",
+          "Пропускать"
+        ],
+        "textColor": "rgb(0, 0, 255)"
+      }
+    }
+  ]
+}
