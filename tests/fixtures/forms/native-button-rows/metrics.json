@@ -1,0 +1,813 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "scope": "Two recorded text-button forms, six mixed/fixed rows, native selection-outline geometry and additional link caption bitmaps; full widgets and full forms are not accepted.",
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "wholeWidgetAccepted": false,
+  "fullProfileAccepted": false,
+  "noBslModulesOrHandlers": true,
+  "geometryMethod": "Native painted raised bounds and exact 2 px blue selection rectangles. CSS border-box coordinates are reconstructed from their recorded type-specific decoration insets; native internal widget handles were not queried.",
+  "files": [
+    {
+      "path": "source/CommonForms/ProbeButtons/Ext/Form.xml",
+      "sha256": "6fb3e0d82997d3367ad3230974ae76eb60ff2e06120b2d7d24c4d5cc78d5af04"
+    },
+    {
+      "path": "source/CommonForms/ProbeButtons.xml",
+      "sha256": "3911da75252f35eaa40147b406740ab2e7bd8a608c8a06e6d00a316dd0d2f4f3"
+    },
+    {
+      "path": "source/CommonForms/ProbeRows/Ext/Form.xml",
+      "sha256": "3ebdd864dbd250cdeb40d9feca80093cfa0a724003632a210693da32266e8400"
+    },
+    {
+      "path": "source/CommonForms/ProbeRows.xml",
+      "sha256": "72e70c53039cc3b29e7d8bc02d7b3b950560b27b1f65e9b1763d2fd103c77b19"
+    },
+    {
+      "path": "source/Configuration.xml",
+      "sha256": "67b735cb6494a18381f5688e071d7a4b1a04bd58e19b2a09b144de1e1fff8f3e"
+    },
+    {
+      "path": "source/Languages/Русский.xml",
+      "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048"
+    }
+  ],
+  "cases": [
+    {
+      "name": "ProbeButtons",
+      "path": "CommonForms/ProbeButtons/Ext/Form.xml",
+      "nativeFrame": [
+        142,
+        187
+      ],
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "screenshot": "buttons-form-editor.png",
+      "screenshotSha256": "da7bb57a7b531920df6c069719e47dd0622aec6a2a1a1e820d6687ae5b8394d9",
+      "controls": [
+        {
+          "name": "DefaultUsualButton",
+          "type": "UsualButton",
+          "caption": "Usual",
+          "buttonRect": [
+            13,
+            39,
+            61,
+            26
+          ],
+          "selectionBlueBounds": [
+            10,
+            36,
+            67,
+            33
+          ],
+          "selectionBluePixels": 384,
+          "selectionScreenshot": "link-bounds-DefaultUsualButton.png",
+          "selectionScreenshotSha256": "ffe85425361f47b2dc44c37425ab6d362889c2bf6de260acdb7050e0d8112d75"
+        },
+        {
+          "name": "DefaultHyperlink",
+          "type": "Hyperlink",
+          "caption": "Link",
+          "buttonRect": [
+            84,
+            44,
+            26,
+            17
+          ],
+          "selectionBlueBounds": [
+            81,
+            41,
+            32,
+            23
+          ],
+          "selectionBluePixels": 204,
+          "selectionScreenshot": "link-bounds-DefaultHyperlink.png",
+          "selectionScreenshotSha256": "200b45d25fcd13a7e96d728d92ee427f65d12e3e123c08ee5de222f2ac67fcb3"
+        },
+        {
+          "name": "DefaultCommandBarButton",
+          "type": "CommandBarButton",
+          "caption": "Bar",
+          "buttonRect": [
+            13,
+            75,
+            48,
+            26
+          ],
+          "selectionBlueBounds": [
+            10,
+            73,
+            54,
+            29
+          ],
+          "selectionBluePixels": 316,
+          "selectionScreenshot": "link-bounds-DefaultCommandBarButton.png",
+          "selectionScreenshotSha256": "18a4a1c117b2a3c94c22c3cffeb684cccee074cd037c01495813673b917da0a8"
+        },
+        {
+          "name": "DefaultCommandBarHyperlink",
+          "type": "CommandBarHyperlink",
+          "caption": "Bar link",
+          "buttonRect": [
+            70,
+            75,
+            48,
+            26
+          ],
+          "selectionBlueBounds": [
+            67,
+            73,
+            54,
+            29
+          ],
+          "selectionBluePixels": 316,
+          "selectionScreenshot": "link-bounds-DefaultCommandBarHyperlink.png",
+          "selectionScreenshotSha256": "f2c78fa7cd0c3829d53daf569c4f1f64159d62d447dd4f133a918091219206cc"
+        },
+        {
+          "name": "ExplicitUsualButton",
+          "type": "UsualButton",
+          "caption": "Usual",
+          "buttonRect": [
+            13,
+            111,
+            61,
+            26
+          ],
+          "selectionBlueBounds": [
+            10,
+            108,
+            67,
+            33
+          ],
+          "selectionBluePixels": 384,
+          "selectionScreenshot": "link-bounds-ExplicitUsualButton.png",
+          "selectionScreenshotSha256": "091efd5153b673427de93d31b40826d2a75c025d4ffddd9c63c610a1caba8ae6"
+        },
+        {
+          "name": "ExplicitHyperlink",
+          "type": "Hyperlink",
+          "caption": "Link",
+          "buttonRect": [
+            84,
+            116,
+            26,
+            17
+          ],
+          "selectionBlueBounds": [
+            81,
+            113,
+            32,
+            23
+          ],
+          "selectionBluePixels": 204,
+          "selectionScreenshot": "link-bounds-ExplicitHyperlink.png",
+          "selectionScreenshotSha256": "038668bcc09047e53752211bfc683cb91bbcb52fc79c276c1577346bd9b8c7ec"
+        },
+        {
+          "name": "ExplicitCommandBarButton",
+          "type": "CommandBarButton",
+          "caption": "Bar",
+          "buttonRect": [
+            13,
+            147,
+            48,
+            26
+          ],
+          "selectionBlueBounds": [
+            10,
+            145,
+            54,
+            29
+          ],
+          "selectionBluePixels": 316,
+          "selectionScreenshot": "link-bounds-ExplicitCommandBarButton.png",
+          "selectionScreenshotSha256": "147b5266a3ce73d07c780fc278ee4fee423c8c8ed829c41df4a60ac4448cfa9c"
+        },
+        {
+          "name": "ExplicitCommandBarHyperlink",
+          "type": "CommandBarHyperlink",
+          "caption": "Bar link",
+          "buttonRect": [
+            70,
+            147,
+            48,
+            26
+          ],
+          "selectionBlueBounds": [
+            67,
+            145,
+            54,
+            29
+          ],
+          "selectionBluePixels": 316,
+          "selectionScreenshot": "link-bounds-ExplicitCommandBarHyperlink.png",
+          "selectionScreenshotSha256": "4878c1a1f237c0fbe3c0f71821d404803b085fe7e608aaa66b8655ac8b3491cb"
+        }
+      ],
+      "linkCaptions": [
+        {
+          "name": "DefaultHyperlink",
+          "text": "Link",
+          "points": 10,
+          "weight": 400,
+          "foreground": "#1c55ae",
+          "background": "#ffffff",
+          "region": [
+            350,
+            459,
+            25,
+            15
+          ],
+          "advance": 24,
+          "ascent": 12,
+          "descent": 3,
+          "underlineRow": 12,
+          "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+        },
+        {
+          "name": "DefaultCommandBarHyperlink",
+          "text": "Bar link",
+          "points": 10,
+          "weight": 400,
+          "foreground": "#1c55ae",
+          "background": "#ffffff",
+          "region": [
+            337,
+            495,
+            45,
+            15
+          ],
+          "advance": 44,
+          "ascent": 12,
+          "descent": 3,
+          "underlineRow": 12,
+          "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+        },
+        {
+          "name": "ExplicitHyperlink",
+          "text": "Link",
+          "points": 10,
+          "weight": 400,
+          "foreground": "#cc2244",
+          "background": "#ffffff",
+          "region": [
+            350,
+            531,
+            25,
+            15
+          ],
+          "advance": 24,
+          "ascent": 12,
+          "descent": 3,
+          "underlineRow": 12,
+          "rgbSha256": "c65e290eee8b73781525d5abb38f56ecf2ebe2bded9848c24e06bfe2a93b62ea"
+        },
+        {
+          "name": "ExplicitCommandBarHyperlink",
+          "text": "Bar link",
+          "points": 10,
+          "weight": 400,
+          "foreground": "#cc2244",
+          "background": "#ffffff",
+          "region": [
+            337,
+            567,
+            45,
+            15
+          ],
+          "advance": 44,
+          "ascent": 12,
+          "descent": 3,
+          "underlineRow": 12,
+          "rgbSha256": "877a785ca66f6f41dcbff9d5d0c665bd62622760c27db2a941fca9eaec01c77c"
+        }
+      ]
+    },
+    {
+      "name": "ProbeRows",
+      "path": "CommonForms/ProbeRows/Ext/Form.xml",
+      "nativeFrame": [
+        204,
+        249
+      ],
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "screenshot": "rows-form-editor.png",
+      "screenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68",
+      "controls": [
+        {
+          "name": "Forward1",
+          "type": "UsualButton",
+          "caption": "Long usual",
+          "buttonRect": [
+            13,
+            39,
+            91,
+            26
+          ],
+          "selectionBlueBounds": [
+            10,
+            36,
+            97,
+            33
+          ],
+          "selectionBluePixels": 504,
+          "selectionScreenshot": "selected-Forward1.png",
+          "selectionScreenshotSha256": "604eda112d51b44c24b8f14d3b16362b72eeedb910c26ee434cefeedea9bccb7"
+        },
+        {
+          "name": "Forward2",
+          "type": "Hyperlink",
+          "caption": "Link",
+          "buttonRect": [
+            114,
+            44,
+            26,
+            17
+          ],
+          "selectionBlueBounds": [
+            111,
+            41,
+            32,
+            23
+          ],
+          "selectionBluePixels": 204,
+          "selectionScreenshot": "selected-Forward2.png",
+          "selectionScreenshotSha256": "e7bff83d39eedb34af2e4a8e5f1a78f7a0f3820b271a76e25f7df3f38295596c"
+        },
+        {
+          "name": "Reverse1",
+          "type": "Hyperlink",
+          "caption": "Link",
+          "buttonRect": [
+            13,
+            80,
+            26,
+            17
+          ],
+          "selectionBlueBounds": [
+            10,
+            77,
+            32,
+            23
+          ],
+          "selectionBluePixels": 204,
+          "selectionScreenshot": "selected-Reverse1.png",
+          "selectionScreenshotSha256": "b618ab7695a26d42edc2f2fa13ead46ac0c92c8c59e64ca0d0aca4d7ad914158"
+        },
+        {
+          "name": "Reverse2",
+          "type": "UsualButton",
+          "caption": "Long usual",
+          "buttonRect": [
+            49,
+            75,
+            91,
+            26
+          ],
+          "selectionBlueBounds": [
+            46,
+            72,
+            97,
+            33
+          ],
+          "selectionBluePixels": 504,
+          "selectionScreenshot": "selected-Reverse2.png",
+          "selectionScreenshotSha256": "f4f158a44130ccbffc863aa7882ff93f1e805ec50ff99e1be9370def473f6557"
+        },
+        {
+          "name": "Links1",
+          "type": "Hyperlink",
+          "caption": "Left link",
+          "buttonRect": [
+            13,
+            111,
+            48,
+            17
+          ],
+          "selectionBlueBounds": [
+            10,
+            108,
+            54,
+            23
+          ],
+          "selectionBluePixels": 292,
+          "selectionScreenshot": "selected-Links1.png",
+          "selectionScreenshotSha256": "4a7e0bc661419c64be34076a3a15ba37ae08fd32f36cfe007c07897f8a0e7dcd"
+        },
+        {
+          "name": "Links2",
+          "type": "Hyperlink",
+          "caption": "Right link",
+          "buttonRect": [
+            71,
+            111,
+            56,
+            17
+          ],
+          "selectionBlueBounds": [
+            68,
+            108,
+            62,
+            23
+          ],
+          "selectionBluePixels": 324,
+          "selectionScreenshot": "selected-Links2.png",
+          "selectionScreenshotSha256": "e8c324dd997835f2dc0ffe239af81791016199d13571b1cd2fa714a26063dfd9"
+        },
+        {
+          "name": "FixedMixed1",
+          "type": "UsualButton",
+          "caption": "Fixed",
+          "buttonRect": [
+            13,
+            137,
+            80,
+            26
+          ],
+          "selectionBlueBounds": [
+            10,
+            134,
+            86,
+            33
+          ],
+          "selectionBluePixels": 460,
+          "selectionScreenshot": "selected-FixedMixed1.png",
+          "selectionScreenshotSha256": "aed1a4adb8a4f99abbc9dda062d1af1c94f42cf986b5e4564443b3f5d2b56b3f"
+        },
+        {
+          "name": "FixedMixed2",
+          "type": "Hyperlink",
+          "caption": "Link",
+          "buttonRect": [
+            103,
+            142,
+            26,
+            17
+          ],
+          "selectionBlueBounds": [
+            100,
+            139,
+            32,
+            23
+          ],
+          "selectionBluePixels": 204,
+          "selectionScreenshot": "selected-FixedMixed2.png",
+          "selectionScreenshotSha256": "7415742330ee30e1d5f5a4692b17356275e4ad8f855f83d014e33214d43fcec2"
+        },
+        {
+          "name": "Bar1",
+          "type": "CommandBarButton",
+          "caption": "Bar",
+          "buttonRect": [
+            13,
+            173,
+            48,
+            26
+          ],
+          "selectionBlueBounds": [
+            10,
+            171,
+            54,
+            29
+          ],
+          "selectionBluePixels": 316,
+          "selectionScreenshot": "selected-Bar1.png",
+          "selectionScreenshotSha256": "a1f480b0be52b0a64fd560773b076fc3f513ef4c9caf123488cf99ab36bc85c1"
+        },
+        {
+          "name": "Bar2",
+          "type": "CommandBarHyperlink",
+          "caption": "Bar link",
+          "buttonRect": [
+            70,
+            173,
+            48,
+            26
+          ],
+          "selectionBlueBounds": [
+            67,
+            171,
+            54,
+            29
+          ],
+          "selectionBluePixels": 316,
+          "selectionScreenshot": "selected-Bar2.png",
+          "selectionScreenshotSha256": "0c1f43492a288eb93db7061fd2f80310d12894121f6f1a7d1ac6179db68886af"
+        },
+        {
+          "name": "Bar3",
+          "type": "CommandBarButton",
+          "caption": "Bar",
+          "buttonRect": [
+            127,
+            173,
+            48,
+            26
+          ],
+          "selectionBlueBounds": [
+            124,
+            171,
+            54,
+            29
+          ],
+          "selectionBluePixels": 316,
+          "selectionScreenshot": "selected-Bar3.png",
+          "selectionScreenshotSha256": "46415484db4e984358ebe8cfda560215976688efb95b65413dfeef9b392f641d"
+        },
+        {
+          "name": "FixedUsual1",
+          "type": "UsualButton",
+          "caption": "First",
+          "buttonRect": [
+            13,
+            209,
+            60,
+            26
+          ],
+          "selectionBlueBounds": [
+            10,
+            206,
+            66,
+            33
+          ],
+          "selectionBluePixels": 380,
+          "selectionScreenshot": "selected-FixedUsual1.png",
+          "selectionScreenshotSha256": "9bf296eac9cc87dfd5c88570a80c1043be7d87662dae1278760f8291d85370cf"
+        },
+        {
+          "name": "FixedUsual2",
+          "type": "UsualButton",
+          "caption": "Second",
+          "buttonRect": [
+            83,
+            209,
+            100,
+            26
+          ],
+          "selectionBlueBounds": [
+            80,
+            206,
+            106,
+            33
+          ],
+          "selectionBluePixels": 540,
+          "selectionScreenshot": "selected-FixedUsual2.png",
+          "selectionScreenshotSha256": "4131aac3b97e4d8f8f70275094c99fe64d03d47567481108ecfc7626244f5168"
+        }
+      ],
+      "linkCaptions": [
+        {
+          "name": "Forward2",
+          "text": "Link",
+          "points": 10,
+          "weight": 400,
+          "foreground": "#1c55ae",
+          "background": "#ffffff",
+          "region": [
+            380,
+            459,
+            25,
+            15
+          ],
+          "advance": 24,
+          "ascent": 12,
+          "descent": 3,
+          "underlineRow": 12,
+          "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+        },
+        {
+          "name": "Reverse1",
+          "text": "Link",
+          "points": 10,
+          "weight": 400,
+          "foreground": "#1c55ae",
+          "background": "#ffffff",
+          "region": [
+            279,
+            495,
+            25,
+            15
+          ],
+          "advance": 24,
+          "ascent": 12,
+          "descent": 3,
+          "underlineRow": 12,
+          "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+        },
+        {
+          "name": "Links1",
+          "text": "Left link",
+          "points": 10,
+          "weight": 400,
+          "foreground": "#1c55ae",
+          "background": "#ffffff",
+          "region": [
+            279,
+            526,
+            47,
+            15
+          ],
+          "advance": 46,
+          "ascent": 12,
+          "descent": 3,
+          "underlineRow": 12,
+          "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+        },
+        {
+          "name": "Links2",
+          "text": "Right link",
+          "points": 10,
+          "weight": 400,
+          "foreground": "#1c55ae",
+          "background": "#ffffff",
+          "region": [
+            337,
+            526,
+            55,
+            15
+          ],
+          "advance": 54,
+          "ascent": 12,
+          "descent": 3,
+          "underlineRow": 12,
+          "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+        },
+        {
+          "name": "FixedMixed2",
+          "text": "Link",
+          "points": 10,
+          "weight": 400,
+          "foreground": "#1c55ae",
+          "background": "#ffffff",
+          "region": [
+            369,
+            557,
+            25,
+            15
+          ],
+          "advance": 24,
+          "ascent": 12,
+          "descent": 3,
+          "underlineRow": 12,
+          "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+        },
+        {
+          "name": "Bar2",
+          "text": "Bar link",
+          "points": 10,
+          "weight": 400,
+          "foreground": "#1c55ae",
+          "background": "#ffffff",
+          "region": [
+            337,
+            593,
+            45,
+            15
+          ],
+          "advance": 44,
+          "ascent": 12,
+          "descent": 3,
+          "underlineRow": 12,
+          "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+        }
+      ]
+    }
+  ],
+  "linkCaptions": {
+    "rows": [
+      {
+        "name": "Forward2",
+        "text": "Link",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#1c55ae",
+        "background": "#ffffff",
+        "region": [
+          380,
+          459,
+          25,
+          15
+        ],
+        "advance": 24,
+        "ascent": 12,
+        "descent": 3,
+        "underlineRow": 12,
+        "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+      },
+      {
+        "name": "Reverse1",
+        "text": "Link",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#1c55ae",
+        "background": "#ffffff",
+        "region": [
+          279,
+          495,
+          25,
+          15
+        ],
+        "advance": 24,
+        "ascent": 12,
+        "descent": 3,
+        "underlineRow": 12,
+        "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+      },
+      {
+        "name": "Links1",
+        "text": "Left link",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#1c55ae",
+        "background": "#ffffff",
+        "region": [
+          279,
+          526,
+          47,
+          15
+        ],
+        "advance": 46,
+        "ascent": 12,
+        "descent": 3,
+        "underlineRow": 12,
+        "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+      },
+      {
+        "name": "Links2",
+        "text": "Right link",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#1c55ae",
+        "background": "#ffffff",
+        "region": [
+          337,
+          526,
+          55,
+          15
+        ],
+        "advance": 54,
+        "ascent": 12,
+        "descent": 3,
+        "underlineRow": 12,
+        "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+      },
+      {
+        "name": "FixedMixed2",
+        "text": "Link",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#1c55ae",
+        "background": "#ffffff",
+        "region": [
+          369,
+          557,
+          25,
+          15
+        ],
+        "advance": 24,
+        "ascent": 12,
+        "descent": 3,
+        "underlineRow": 12,
+        "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+      },
+      {
+        "name": "Bar2",
+        "text": "Bar link",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#1c55ae",
+        "background": "#ffffff",
+        "region": [
+          337,
+          593,
+          45,
+          15
+        ],
+        "advance": 44,
+        "ascent": 12,
+        "descent": 3,
+        "underlineRow": 12,
+        "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+      }
+    ],
+    "pixels": 3330,
+    "pixelTolerance": 0,
+    "comparisonMasks": []
+  },
+  "limits": [
+    "Regular 10 pt text controls and white parents only.",
+    "Full widget raster still includes unresolved pose-dependent bottom-border differences; no pixels are waived.",
+    "Other fonts, widths, wrapping, nested mixed fields, states, DPI and Windows remain open."
+  ]
+}

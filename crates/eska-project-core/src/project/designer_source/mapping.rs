@@ -82,6 +82,22 @@ impl DesignerSource {
         }
     }
 
+    /// Read the same checked common picture with an unsaved external-property XML snapshot.
+    #[must_use]
+    pub fn picture_preview_xml(&self, id: &ObjectId, xml: &str) -> PicturePreview {
+        match self.object_descriptor(id) {
+            Ok(Some(location))
+                if self
+                    .locations(id)
+                    .is_ok_and(|locations| locations.kind == MetadataKind::CommonPicture) =>
+            {
+                super::picture::read_with_xml(self, &location.path, Some(xml))
+            }
+            Ok(None) => PicturePreview::Failed(PictureError::Missing),
+            _ => PicturePreview::Failed(PictureError::Unavailable),
+        }
+    }
+
     /// Resolve lexical descriptor ownership even after a source file was removed.
     pub(crate) fn descriptor_candidates(
         &self,

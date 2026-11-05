@@ -1,0 +1,734 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64",
+  "nativeUiLocale": "en",
+  "culture": "C.UTF-8 (en-US masks/months)",
+  "nativeImportExitCode": 0,
+  "nativeExportExitCode": 0,
+  "visualParityVerified": false,
+  "fixtures": [
+    {
+      "file": "InputHidden.xml",
+      "nativeExportSha256": "194bf212100e5f359d7c49843f5da694a714aa3137b4af4bf8c2b48c763a7bc0",
+      "fixtureSha256": "3c51ab04731875b39e343da1babe0982c7bf9af9b76d89b773a8d7fa7503e2c2",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "InputDisabled.xml",
+      "nativeExportSha256": "337d3dd87d55de23eabf96438d23c687ffe491753cef1401fa1522f2663050ca",
+      "fixtureSha256": "a4dae911862fd19106c1580ca285f6a6c24c112cea299de19bd2426fed356617",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "InputReadOnly.xml",
+      "nativeExportSha256": "1c66af4ff09bc9bf796a7249748437f24d2aa0d254102b0cfaf6715ac0438da1",
+      "fixtureSha256": "f087b6ed6162648cf2d79bbb449427d467528e32a32852bbf1c513ba95ca1d5a",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "InputColors.xml",
+      "nativeExportSha256": "3d6937c137ce15ed566d111129844a4f6e3093aff7daa11065b8e505b25d9eae",
+      "fixtureSha256": "b03c1840e0167b4137f7c5a494174e482d2d1de02b5d2668572bd223d4432ee0",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "InputFont.xml",
+      "nativeExportSha256": "b2bcde5dabd62af8babece2d8168bafda6364add886da726b3d8e8977942e884",
+      "fixtureSha256": "35c879e5d1f7f4c176ab871802c4df4516d437be0f135cec72ec03d695a16341",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "InputNumber.xml",
+      "nativeExportSha256": "baf93080bf83a1885c2a56ad2cd81cc7f292b8f53a5b0002da0160d1c2c76de6",
+      "fixtureSha256": "7659692174e2d2467065399ad464cbc94138c6ad37a8dca8e731aef0597851bc",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "InputDate.xml",
+      "nativeExportSha256": "0ca2db37c906d8a9de2af559cedaedd7eb9760041fe696f7dff1e41f3428bd88",
+      "fixtureSha256": "43738076a0de89798598b7f66e3d7d6611136f844ff717e13095c425d9721c79",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "InputDateTime.xml",
+      "nativeExportSha256": "bd0ac611a648dfebeea693c795834ee1d5899c46cbee61687096c4fe18ddb71b",
+      "fixtureSha256": "bed7bd979f548ff22567bac343775df4b4093235245464eb3a9fabe112ecc81a",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "TableHidden.xml",
+      "nativeExportSha256": "67d7f1e0be4df9ca1e7d8efab31a2ceef97e6c2dd5e27f1a21b2f2e6b5a8a0bc",
+      "fixtureSha256": "7ba1f1e186387ea8c6fd54acdee514107f23c1f4b3f2458febfdcd86c8038f77",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "ColumnHidden.xml",
+      "nativeExportSha256": "c835d7d8f2ad917ee76230f740556c31e0af7e40a652b0c05aebf22d28b52fc5",
+      "fixtureSha256": "26afa624af6f46dbfb7b3862a046fda85d95d678dbb707ae8642e5ac3efe47d6",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "Font14Normal.xml",
+      "nativeExportSha256": "cd1ff27be4ffcd1348d113cbbd20c0704c60780df48dd95dfabab793c854577a",
+      "fixtureSha256": "6cd360539694d748b75d4f55474a581708cdf1cac08c05ba05bc35f2bda4f04a",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "Font10Bold.xml",
+      "nativeExportSha256": "61e53aa4f06296476ee2f027d9313a6ba10c613b7a11df929fdc91c071d3b1d9",
+      "fixtureSha256": "f177da2108e728cdb51645da658b839f720eff1356be6d330d5d4156154e93ea",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "TableDefault.xml",
+      "nativeExportSha256": "9f4443e74de6fe3187648b61554b90b4f4d6a7bed4b935513a2b3327c7968bf0",
+      "fixtureSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "DynamicList.xml",
+      "nativeExportSha256": "16f5fd7d1d5c324c435207cb3ac15c71d4f5a7c8f19b9b15140d1a5cf9e78dd1",
+      "fixtureSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "Font12Normal.xml",
+      "nativeExportSha256": "78080d65ce699b8bd8e73fcc59758baa9dd9f6bf6047d8ebd1db5e2c1f32cd1a",
+      "fixtureSha256": "dc28d15804e0ce6ce1d1c7964f37806e60db8ecd94a7fa9452702aec12df68cd",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "Font16Normal.xml",
+      "nativeExportSha256": "f70c55601789016105fce797eaab28b8dff6f9c8de69ad83dde2eaf8b16ff024",
+      "fixtureSha256": "e173221e2e07e514e47ed8a65c22690132ecc0b1bc3d984e0708b7e913f6d351",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "Font14Number.xml",
+      "nativeExportSha256": "31b15fc7ad47cc6faffb2631ba2f33706502c756b476a91426139fc7bfd0450c",
+      "fixtureSha256": "abc59528e75ad60d8a7fec7408a9bb72f4430d72d05ef6feabb4673da8b6bf9a",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "InputTime.xml",
+      "nativeExportSha256": "ed08d1e8eecb07cae77e4bd1cd0b6e798e63ca1d16ed455d0006ca33c9eb0087",
+      "fixtureSha256": "c751cefea7c9d6bf217bce87ce566d3b18e5580933eef6b967e9359a2b4ffeac",
+      "nativeImageInspected": true
+    }
+  ],
+  "observations": {
+    "visibility": "Input and table Visible false hide the whole control. Column Visible false hides that column. The tree retains the nodes.",
+    "emptyFormFramePixels": [
+      34,
+      52
+    ],
+    "disabledInput": "White background, D7D7D7 border, title/text at half opacity relative to the enabled view.",
+    "readOnlyInput": "White background, D7D7D7 border, normal title.",
+    "colorsInput": "Red title, blue zero, LightYellow background, DarkGreen border.",
+    "numberInput": {
+      "controlPixels": [
+        121,
+        23
+      ],
+      "value": "0",
+      "choiceButton": "Calculator"
+    },
+    "dateInput": {
+      "controlPixels": [
+        121,
+        23
+      ],
+      "value": "regional empty date mask",
+      "choiceButton": "Calendar"
+    },
+    "dateTimeInput": {
+      "controlPixels": [
+        181,
+        23
+      ],
+      "value": "regional empty date/time mask; AM for this culture",
+      "choiceButton": "Calendar"
+    },
+    "timeInput": {
+      "controlPixels": [
+        91,
+        23
+      ],
+      "value": "empty time mask with AM",
+      "choiceButton": false
+    },
+    "stringFontMetrics": [
+      {
+        "points": 10,
+        "controlPixels": [
+          161,
+          23
+        ]
+      },
+      {
+        "points": 12,
+        "controlPixels": [
+          199,
+          29
+        ]
+      },
+      {
+        "points": 14,
+        "controlPixels": [
+          236,
+          35
+        ]
+      },
+      {
+        "points": 16,
+        "controlPixels": [
+          261,
+          38
+        ]
+      }
+    ],
+    "boldSizing": "10pt bold keeps 161x23; 14pt bold keeps 236x35.",
+    "numericFont14Pixels": [
+      166,
+      35
+    ],
+    "englishTable": "More actions caption expands the default automatic toolbar/table to429px (ru415).",
+    "englishDynamicList": "Default automatic toolbar/table454px (ru418)."
+  },
+  "remaining": [
+    "Full property combinations and other table sources; measured ru/en command-bar cases are implemented.",
+    "Native other font faces, style references and nested inheritance.",
+    "Broader format/property combinations and Windows acceptance."
+  ],
+  "installedVsix": {
+    "version": "VS Code1.109.0 ARM64",
+    "runs": {
+      "ru": {
+        "passed": true,
+        "cases": 15,
+        "states": [
+          {
+            "kind": "InputHidden",
+            "control": null,
+            "buttons": 0
+          },
+          {
+            "kind": "InputDisabled",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 161,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(215, 215, 215)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "InputReadOnly",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 161,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(215, 215, 215)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "InputColors",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 121,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 224)",
+            "border": "rgb(0, 100, 0)",
+            "value": "0",
+            "buttons": 1
+          },
+          {
+            "kind": "InputFont",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 236,
+              "height": 35
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "InputNumber",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 121,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "0",
+            "buttons": 1
+          },
+          {
+            "kind": "InputDate",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 121,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "  /  /    ",
+            "buttons": 1
+          },
+          {
+            "kind": "InputDateTime",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 181,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "  /  /       :  :   AM",
+            "buttons": 1
+          },
+          {
+            "kind": "InputTime",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 91,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "  :  :   AM",
+            "buttons": 0
+          },
+          {
+            "kind": "Font10Bold",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 161,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "Font12Normal",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 199,
+              "height": 29
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "Font14Normal",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 236,
+              "height": 35
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "Font16Normal",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 261,
+              "height": 38
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "Font14Number",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 166,
+              "height": 35
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "0",
+            "buttons": 1
+          },
+          {
+            "kind": "TableHidden",
+            "control": null,
+            "buttons": 0
+          }
+        ]
+      },
+      "en": {
+        "passed": true,
+        "cases": 15,
+        "states": [
+          {
+            "kind": "InputHidden",
+            "control": null,
+            "buttons": 0
+          },
+          {
+            "kind": "InputDisabled",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 161,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(215, 215, 215)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "InputReadOnly",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 161,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(215, 215, 215)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "InputColors",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 121,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 224)",
+            "border": "rgb(0, 100, 0)",
+            "value": "0",
+            "buttons": 1
+          },
+          {
+            "kind": "InputFont",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 236,
+              "height": 35
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "InputNumber",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 121,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "0",
+            "buttons": 1
+          },
+          {
+            "kind": "InputDate",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 121,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "  /  /    ",
+            "buttons": 1
+          },
+          {
+            "kind": "InputDateTime",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 181,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "  /  /       :  :   AM",
+            "buttons": 1
+          },
+          {
+            "kind": "InputTime",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 91,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "  :  :   AM",
+            "buttons": 0
+          },
+          {
+            "kind": "Font10Bold",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 161,
+              "height": 23
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "Font12Normal",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 199,
+              "height": 29
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "Font14Normal",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 236,
+              "height": 35
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "Font16Normal",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 261,
+              "height": 38
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "",
+            "buttons": 0
+          },
+          {
+            "kind": "Font14Number",
+            "control": {
+              "x": 107.25,
+              "y": 316,
+              "width": 166,
+              "height": 35
+            },
+            "background": "rgb(255, 255, 255)",
+            "border": "rgb(160, 160, 160)",
+            "value": "0",
+            "buttons": 1
+          },
+          {
+            "kind": "TableHidden",
+            "control": null,
+            "buttons": 0
+          }
+        ]
+      }
+    },
+    "sourceWritesDuringViewing": false,
+    "original20FieldGalleryRuEn": true,
+    "fullPixelParityVerified": false
+  },
+  "checks": {
+    "corePresentationTests": 12,
+    "cargoFmtCheck": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeatures": true,
+    "cargoTest": {
+      "passed": 1465,
+      "ignored": 19,
+      "suites": 42
+    },
+    "extensionTypecheck": true,
+    "extensionCompile": true,
+    "extensionNodeTests": {
+      "passed": 454,
+      "skipped": 11
+    },
+    "installedTableGalleryRuEn": true,
+    "providedDtApplicationRuEnReadOnly": true
+  },
+  "testRunNotes": [
+    "The first hidden-state VSIX assertion exposed an unused grid column gap in the empty form. Removing it made both15case galleries pass."
+  ],
+  "installedTables": {
+    "ru": {
+      "passed": true,
+      "cases": 14,
+      "controlPixels": {
+        "Default": [
+          415,
+          227
+        ],
+        "GridFooter": [
+          400,
+          145
+        ],
+        "Horizontal": [
+          415,
+          227
+        ],
+        "HorizontalTitled": [
+          415,
+          227
+        ],
+        "Vertical": [
+          415,
+          228
+        ],
+        "InCell": [
+          415,
+          227
+        ],
+        "Marked": [
+          415,
+          227
+        ],
+        "ReadOnly": [
+          415,
+          227
+        ],
+        "NoAutoFill": [
+          400,
+          227
+        ],
+        "MetadataTable": [
+          520,
+          227
+        ],
+        "DynamicList": [
+          418,
+          452
+        ],
+        "NoViewStatus": [
+          415,
+          227
+        ],
+        "NoSearchControl": [
+          415,
+          227
+        ],
+        "ColumnHidden": [
+          415,
+          227
+        ]
+      }
+    },
+    "en": {
+      "passed": true,
+      "cases": 14,
+      "controlPixels": {
+        "Default": [
+          429,
+          227
+        ],
+        "GridFooter": [
+          400,
+          145
+        ],
+        "Horizontal": [
+          429,
+          227
+        ],
+        "HorizontalTitled": [
+          429,
+          227
+        ],
+        "Vertical": [
+          429,
+          228
+        ],
+        "InCell": [
+          429,
+          227
+        ],
+        "Marked": [
+          429,
+          227
+        ],
+        "ReadOnly": [
+          429,
+          227
+        ],
+        "NoAutoFill": [
+          400,
+          227
+        ],
+        "MetadataTable": [
+          520,
+          227
+        ],
+        "DynamicList": [
+          454,
+          452
+        ],
+        "NoViewStatus": [
+          429,
+          227
+        ],
+        "NoSearchControl": [
+          429,
+          227
+        ],
+        "ColumnHidden": [
+          429,
+          227
+        ]
+      }
+    }
+  },
+  "equivalentTableFixtures": {
+    "TableDefault": true,
+    "DynamicList": true
+  }
+}

@@ -22,7 +22,7 @@ pub use settings::{
     SettingsError, TargetPlatformVersion,
 };
 pub(crate) use settings::{RawAnalysis, RawApplication, RawConfiguration};
-pub use snapshot::{ContextSnapshot, resolve_snapshot};
+pub use snapshot::{ContextSnapshot, resolve_active_snapshot, resolve_snapshot};
 
 #[cfg(test)]
 mod tests;

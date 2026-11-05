@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 reference container)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "clientCommit": "0642496b04c98d8f17983a794ae36c31fa34dd30",
+  "referenceCommit": "7601ec8e58a2c9c6cf4f5bb06ead65026726f32d",
+  "reference": "tests/fixtures/forms/native-groups/label-pixels.json",
+  "referenceConditions": {
+    "dpi": 96,
+    "scalePercent": 100,
+    "devicePixelRatio": 1,
+    "font": "Liberation Sans 2.1.5 / 10pt normal",
+    "componentNativeScreenshot": "native-pages-auto-first-en-full.png",
+    "componentState": "First page selected; Name/Amount label rectangles exclude the selected tab",
+    "wholeFormState": "Root selected, first page visible; separate matching native-pages-auto-en-full.png reference retained below"
+  },
+  "implementation": {
+    "sharedEngine": "Existing bundled FreeType 2.13.2 WASM and font faces; no new native dependency",
+    "mode": "Optional lcd internal raster mode preserves all RGB channels and bitmap overhang",
+    "composition": "Round each channel after compositing each glyph onto the opaque background in order; combined alpha masks differ at overlaps",
+    "layout": "Original DOM text still allocates label size. Canvas is positioned independently using line metrics; no rounded font-size in layout",
+    "scope": "Enabled Linux InputField side labels, Sans regular/bold, simple supported text; other labels/states remain separate acceptance",
+    "appearance": "Resolve solid background through ancestors. Resize/appearance observers redraw, disconnect on cleanup. Unsupported background/font retains accessible browser text and localized notice."
+  },
+  "proof": {
+    "nativeRectangles": 2,
+    "nativePixelsPerLocale": 1734,
+    "installedPixelsBothLocales": 3468,
+    "differingPixels": 0,
+    "sameFieldCoordinates": true,
+    "dirtyAncestorBackground": "LightYellow to LightBlue to LightYellow without replacing label DOM or writing XML, both locales",
+    "previousButtonPixelsReverified": 789872,
+    "previousButtonDifferences": 0
+  },
+  "checks": {
+    "typecheck": "passed",
+    "compile": "passed",
+    "vsix": "59 out and 38 documentation files byte-identical; one current WASM",
+    "node": {
+      "passed": 475,
+      "skipped": 11,
+      "failed": 0
+    },
+    "rust": "Unchanged backend: full fmt/check/clippy/test passed in t156-native-button-kerning-linux.json (1481 passed, 19 ignored)"
+  },
+  "nativeRegressions": [
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.58
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 13.48
+    },
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.32
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.01
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 9.9
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.75
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.19
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.01
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.1
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.67
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.84
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.61
+    },
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.94
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.29
+    },
+    {
+      "name": "button-captions",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.49
+    },
+    {
+      "name": "button-captions",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.32
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.23
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.96
+    }
+  ],
+  "results": [
+    {
+      "locale": "en",
+      "screenshotSha256": "169094b4bdcad39dc1c302d2c7478e4c63ea620057a1868b1b26261595461243",
+      "labels": [
+        {
+          "caption": "Name:",
+          "pixelsCompared": 867,
+          "differingPixels": 0
+        },
+        {
+          "caption": "Amount:",
+          "pixelsCompared": 867,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "referenceScreenshot": "native-pages-auto-en-full.png",
+        "referenceScreenshotSha256": "73f2772d440c605cc86b7e1fa9908190ba59f425e6f81fcdd6f298bbe8d82ad7",
+        "state": "root selected, first page visible",
+        "pixelsCompared": 42900,
+        "differingPixels": 2582,
+        "exactRgbRatio": 0.939814
+      }
+    },
+    {
+      "locale": "ru",
+      "screenshotSha256": "5921510ee056bb5fc4817972e4a04c4183e45616b73c4fe95cd3587cd9272f60",
+      "labels": [
+        {
+          "caption": "Name:",
+          "pixelsCompared": 867,
+          "differingPixels": 0
+        },
+        {
+          "caption": "Amount:",
+          "pixelsCompared": 867,
+          "differingPixels": 0
+        }
+      ],
+      "wholeFormWith4pxShadow": {
+        "referenceScreenshot": "native-pages-auto-en-full.png",
+        "referenceScreenshotSha256": "73f2772d440c605cc86b7e1fa9908190ba59f425e6f81fcdd6f298bbe8d82ad7",
+        "state": "root selected, first page visible",
+        "pixelsCompared": 42900,
+        "differingPixels": 2582,
+        "exactRgbRatio": 0.939814
+      }
+    }
+  ],
+  "remaining": [
+    "Whole-form parity is false; tab captions/borders, value text, icons, corners and other surfaces remain in the strict comparison",
+    "Other title locations, disabled state, font families/styles, complex shaping, conditional/style/extension matrices require native validation",
+    "No Windows or non-96DPI acceptance claimed"
+  ],
+  "masks": 0
+}

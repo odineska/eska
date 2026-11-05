@@ -1,0 +1,492 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "scope": "Complete empty ValueTable grid controls: header/column groups/footer/body/mark/scrollbar. Form shell, toolbar and view-status chips are outside this control. No masks or tolerances.",
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "noBslModulesOrHandlers": true,
+  "forms": 9,
+  "nativeImages": 18,
+  "nativeDirectory": "native-table-pixels-kbagfn6p",
+  "roundTripExitCodes": [
+    0,
+    0,
+    0
+  ],
+  "rows": [
+    {
+      "name": "Default",
+      "source": "tests/fixtures/forms/native-tables/Default.xml",
+      "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+      "nativeExport": "native/CommonForms/P_Default/Ext/Form.xml",
+      "nativeExportSha256": "9f4443e74de6fe3187648b61554b90b4f4d6a7bed4b935513a2b3327c7968bf0",
+      "locales": {
+        "en": {
+          "screenshot": "en-Default.png",
+          "screenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-Default.png",
+          "screenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "GridFooter",
+      "source": "tests/fixtures/forms/native-tables/GridFooter.xml",
+      "sourceSha256": "e83073f4c5ef11ca85463f484fa4854e119d4d836b0cd533e830535143ca4ebf",
+      "nativeExport": "native/CommonForms/P_GridFooter/Ext/Form.xml",
+      "nativeExportSha256": "2a540462f19b7a30069bd68022b3f464b8e23e3db46615627b3a0ba9d923b0aa",
+      "locales": {
+        "en": {
+          "screenshot": "en-GridFooter.png",
+          "screenshotSha256": "69d2ea6657ebe011d9231494616ab18971bbf077e311deab3fea150c9ee9d232",
+          "nativeRegion": [
+            274,
+            579,
+            400,
+            145
+          ],
+          "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+          "pixels": 58000
+        },
+        "ru": {
+          "screenshot": "ru-GridFooter.png",
+          "screenshotSha256": "efa0588684128fc930bf21352361f6fb5e78fdd8357e1324c81acdb96f9e1e84",
+          "nativeRegion": [
+            274,
+            579,
+            400,
+            145
+          ],
+          "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+          "pixels": 58000
+        }
+      }
+    },
+    {
+      "name": "Horizontal",
+      "source": "tests/fixtures/forms/native-tables/Horizontal.xml",
+      "sourceSha256": "5309ad9001470b2cd9366f4a7fa38caf5309953f926971e14be57a9ba93f9bba",
+      "nativeExport": "native/CommonForms/P_Horizontal/Ext/Form.xml",
+      "nativeExportSha256": "278aaef7840a9ef6f954c285d946a99f45875ed4b15e57d69f28fe05836a0dac",
+      "locales": {
+        "en": {
+          "screenshot": "en-Horizontal.png",
+          "screenshotSha256": "d05b4ab31b2a601256a68bf56f184f93a880540e871e3297fc14eec06aeabf34",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-Horizontal.png",
+          "screenshotSha256": "484f5e01d2262517e97232be3786ad03f5224fa7edd7a53596ab1f2bda8e4678",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "HorizontalTitled",
+      "source": "tests/fixtures/forms/native-tables/HorizontalTitled.xml",
+      "sourceSha256": "606ae882f63efe22ec05d0c9a9e11315f4df2008be89982cba1831ed15e279bc",
+      "nativeExport": "native/CommonForms/P_HorizontalTitled/Ext/Form.xml",
+      "nativeExportSha256": "f3e757e5c726de38f612fcf0c4ff3f2bd9004f9233d56de763ddf27314be373c",
+      "locales": {
+        "en": {
+          "screenshot": "en-HorizontalTitled.png",
+          "screenshotSha256": "ffbca5cd49b77ef09e8c5494235515a22ba6bcdda38e74593b54447806262a0b",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "c58e8f5710cf9616d0ce53ac60d5f162159461d0f514b7750eb902429b98077b",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-HorizontalTitled.png",
+          "screenshotSha256": "c5b0525c5cd37c54d36e19b6be292a97e7d9af0bd931fb3667b9212513996f77",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "41e1107da3231180ccc9285cac8c0d236e8d53ba186eb9403c04fa3373302217",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "InCell",
+      "source": "tests/fixtures/forms/native-tables/InCell.xml",
+      "sourceSha256": "a1c4d8a2a44fb6d21246ec2904177a2de9f6783feb8d058d7b591284c09a8c3d",
+      "nativeExport": "native/CommonForms/P_InCell/Ext/Form.xml",
+      "nativeExportSha256": "6597e1b6738a9d85a8b544b20dc3ecc13661cfea552a183ec510f705cc8effb4",
+      "locales": {
+        "en": {
+          "screenshot": "en-InCell.png",
+          "screenshotSha256": "f7fe11b0be504e47bb0aa1fe55cbc00ee72bec5cb4f6baac87b8f978282e52cb",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "868c11a6a51ba10505f052943599e4ccb9775737634ae4f2be1ced471b2d69cd",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-InCell.png",
+          "screenshotSha256": "a872a02f43f0643acabf42050d7a05e01df9b6d315baac999fa50b09e59c2416",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "1d8da1744456e8f5615abae2d3509ba88b2c54d46cf9934a4a70d53e5da49b92",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "Marked",
+      "source": "tests/fixtures/forms/native-tables/Marked.xml",
+      "sourceSha256": "8394399403079ec22fc746f87522f51116dca0440ce0dfc5e4f5059aed04dcb6",
+      "nativeExport": "native/CommonForms/P_Marked/Ext/Form.xml",
+      "nativeExportSha256": "d00b470fe6214b43824f64231186bc6c0a994601e1cc2272ee4b9252eacd2c4f",
+      "locales": {
+        "en": {
+          "screenshot": "en-Marked.png",
+          "screenshotSha256": "b0aa416c15f4d6e6e60d81d734482b92701e90ae0834284c1e184b2ff65694d3",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "ed36933503208eeb26bcd6a3f8ad77a0c283660a099373fb0af391e8acaef416",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-Marked.png",
+          "screenshotSha256": "73187e25d288047702005788c6b7211c7e725a2a9d53de0a778c0266801c5c4d",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "13f3e4a82cc3a58d7928977190791ac104977f2577cd541960dffa1157d73ee3",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "NoAutoFill",
+      "source": "tests/fixtures/forms/native-tables/NoAutoFill.xml",
+      "sourceSha256": "7089e42787ca6c5c46a29ecfd9965ca0ff3564daf3feb807fd203877367bd8ca",
+      "nativeExport": "native/CommonForms/P_NoAutoFill/Ext/Form.xml",
+      "nativeExportSha256": "0cb0344b4774219bc894d57a25965f0c13a5458e0bbb0173334c379d8d0d09c5",
+      "locales": {
+        "en": {
+          "screenshot": "en-NoAutoFill.png",
+          "screenshotSha256": "7238738ad2a3d21f70cb45f23bfa11cee4a8afef9062b46a4cad8400e89ee8cd",
+          "nativeRegion": [
+            274,
+            579,
+            400,
+            227
+          ],
+          "rgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+          "pixels": 90800
+        },
+        "ru": {
+          "screenshot": "ru-NoAutoFill.png",
+          "screenshotSha256": "66c1e28fc04ce59dfdbd9e9bd575642c6587e0c5b999b048e7c1452d3f113559",
+          "nativeRegion": [
+            274,
+            579,
+            400,
+            227
+          ],
+          "rgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+          "pixels": 90800
+        }
+      }
+    },
+    {
+      "name": "ReadOnly",
+      "source": "tests/fixtures/forms/native-tables/ReadOnly.xml",
+      "sourceSha256": "efa9ef102cb1e3c1f37543f692bbf4c58980dc2f0cb56bc29decbbb62e3ba0d3",
+      "nativeExport": "native/CommonForms/P_ReadOnly/Ext/Form.xml",
+      "nativeExportSha256": "4d3691b13b54a19dd25cb7cd3c996ffc745af2448ed8cca5828b93a5cc3c59cb",
+      "locales": {
+        "en": {
+          "screenshot": "en-ReadOnly.png",
+          "screenshotSha256": "6a385741e1a2817fb9a016e79c321f16e3e0ddde9f4b21a5239d5d599ef396cf",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-ReadOnly.png",
+          "screenshotSha256": "82030ccf6dffce9be8776721c0756858de1ad2817bf6e3db077e241c843327e4",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "Vertical",
+      "source": "tests/fixtures/forms/native-tables/Vertical.xml",
+      "sourceSha256": "5144cc2e8c2d37ad91f85516c0e9646b2acc5e2d329e90fbdd8492760f2d017a",
+      "nativeExport": "native/CommonForms/P_Vertical/Ext/Form.xml",
+      "nativeExportSha256": "4550a747431c3f86b6f8f28dd0456334799d6af468a893ff19b98da330d595cc",
+      "locales": {
+        "en": {
+          "screenshot": "en-Vertical.png",
+          "screenshotSha256": "e425de17d6bbe10bc91271bdb18cf01fbd2bfe6ef73961277020ed9415a7e1ea",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            228
+          ],
+          "rgbSha256": "09437a95bab7d7093ed3438d5bb3b44dd57299338b53ec4e417a00cbba8c45d9",
+          "pixels": 97812
+        },
+        "ru": {
+          "screenshot": "ru-Vertical.png",
+          "screenshotSha256": "5caad7ca3d13c097dea2c45c9a3c9be03027e3982d5eff5c11738d72cfa737ef",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            228
+          ],
+          "rgbSha256": "c16d177176f65e1714fe8c19eccbf9fd739e9e3034def389a6544abcfef3afee",
+          "pixels": 94620
+        }
+      }
+    }
+  ],
+  "captions": {
+    "rows": [
+      {
+        "name": "Text",
+        "text": "Text",
+        "form": "Default",
+        "locale": "ru",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#4d4d4d",
+        "background": "#f2f2f2",
+        "region": [
+          8,
+          7,
+          27,
+          15
+        ],
+        "advance": 25,
+        "ascent": 12,
+        "descent": 3,
+        "originX": -1,
+        "segments": null,
+        "rgbSha256": "808bb50a5bd03382d7aef834cb3419c5249e6f65e99927ce5394dff46bce4371"
+      },
+      {
+        "name": "Amount",
+        "text": "Amount",
+        "form": "Default",
+        "locale": "ru",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#4d4d4d",
+        "background": "#f2f2f2",
+        "region": [
+          224,
+          7,
+          47,
+          15
+        ],
+        "advance": 45,
+        "ascent": 12,
+        "descent": 3,
+        "originX": -1,
+        "segments": null,
+        "rgbSha256": "63a026e945d6961c4f0a92a1a0c887866a472d6238b5700fe43ed40ed2916cc9"
+      },
+      {
+        "name": "Active",
+        "text": "Active",
+        "form": "Default",
+        "locale": "ru",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#4d4d4d",
+        "background": "#f2f2f2",
+        "region": [
+          353,
+          7,
+          39,
+          15
+        ],
+        "advance": 37,
+        "ascent": 12,
+        "descent": 3,
+        "originX": -1,
+        "segments": null,
+        "rgbSha256": "848f99b57c7b74d9b977a602ca8fee8bc7314aa13ed291018c214bc02a6ed35d"
+      },
+      {
+        "name": "Group",
+        "text": "Group",
+        "form": "HorizontalTitled",
+        "locale": "ru",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#4d4d4d",
+        "background": "#f2f2f2",
+        "region": [
+          8,
+          7,
+          37,
+          15
+        ],
+        "advance": 35,
+        "ascent": 12,
+        "descent": 3,
+        "originX": -1,
+        "segments": null,
+        "rgbSha256": "17a67b1c938a91dded303c7d2c36a3e16b0c8bb7f423d8012d5e8bc4c4fbfa06"
+      },
+      {
+        "name": "Joined",
+        "text": "Text, Amount",
+        "form": "InCell",
+        "locale": "ru",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#4d4d4d",
+        "background": "#f2f2f2",
+        "region": [
+          8,
+          37,
+          80,
+          15
+        ],
+        "advance": 78,
+        "ascent": 12,
+        "descent": 3,
+        "originX": -1,
+        "segments": [
+          "Text",
+          ", ",
+          "Amount"
+        ],
+        "rgbSha256": "79c50383c1f567b17ebddb66c4f99752f448e4e562c8e947c95b438d5f3eb386"
+      },
+      {
+        "name": "Total",
+        "text": "Total",
+        "form": "GridFooter",
+        "locale": "ru",
+        "points": 10,
+        "weight": 400,
+        "foreground": "#4d4d4d",
+        "background": "#f2f2f2",
+        "region": [
+          209,
+          121,
+          29,
+          15
+        ],
+        "advance": 28,
+        "ascent": 12,
+        "descent": 3,
+        "originX": -1,
+        "segments": null,
+        "rgbSha256": "ba9a1c5fe180baf35eaad79b8802c67042b5f6acebc59393c24575983d1d5067"
+      }
+    ],
+    "pixels": 3885
+  },
+  "scrollbar": {
+    "width": 6,
+    "height": 4,
+    "upperGrays": [
+      255,
+      255,
+      232,
+      232,
+      255,
+      255,
+      255,
+      245,
+      196,
+      196,
+      245,
+      255,
+      253,
+      204,
+      194,
+      194,
+      204,
+      253,
+      217,
+      194,
+      194,
+      194,
+      194,
+      217
+    ],
+    "lowerIsRotation180": true,
+    "upperRgbSha256": "1ea3b9198d31e743fb45ee0fd19c9ca95c00df907f60708cc267608a8a7173ea",
+    "nativeImagesVerified": 18
+  }
+}

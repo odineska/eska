@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "inputBorderPixelsVerified": true,
+  "stringAndNumericWidgetsInReferenceMatrixVerified": true,
+  "backendFixtureCommit": "100cff13f7bf940f9c0c974cd9591be70b661928",
+  "backendRuntimeUnchangedSince": "498fad3",
+  "clientCommit": "c271ae8fcc704487446e7f4c80dcd75756a76f27",
+  "references": [
+    "tests/fixtures/forms/native-input-borders/README.md",
+    "tests/fixtures/forms/native-input-borders/metrics.json",
+    "tests/fixtures/forms/native-input-borders/geometry-findings.json"
+  ],
+  "implementation": [
+    "Shared single-line input component composes the measured border before field fill; choice-button corners add their white fill afterward",
+    "ReadOnly/disabled inputs use their parent backdrop; explicit borders lighten by 76, automatic borders use #d7d7d7",
+    "Disabled numeric text is neutral gray from ceil(max(original field fill RGB)/2), independent of parent backdrop and own TextColor",
+    "ReadOnly hides the automatic numeric choice; an explicit ChoiceButton overrides it. Logical width excludes the one-pixel button paint outset",
+    "Side-label allocation rounds to the nearest CSS pixel; forty-eight native forms verify exact field positions and sizes",
+    "Dirty ancestor appearance changes repaint retained Solid input/corner nodes. Actual main and floating workbench PNGs are decoded and checked with zero tolerance",
+    "No dependencies or public wire changes"
+  ],
+  "comparison": {
+    "scope": "48 forms / 173 initial fields per locale; 170 whole string/numeric widgets, plus three date geometry/corner cases. Four additional dirty/floating/reattached samples per locale contain sixteen fields.",
+    "baseCornerPixelsPerLocale": 6228,
+    "baseWholeWidgetPixelsPerLocale": 572114,
+    "baseCalculatorPixelsPerLocale": 23760,
+    "pixelRegionChecksAcrossBothLocales": 1320036,
+    "overlapBetweenWholeWidgetAndCornerOrButtonRegions": true,
+    "differentRgbPixels": 0,
+    "maskedPixels": 0,
+    "exclusions": []
+  },
+  "checks": {
+    "backendFullReference": "t155-native-font-roles-linux.json",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 488,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeVsix": {
+      "relevantSuitesPassed": 16,
+      "runs": [
+        {
+          "suite": "input-borders",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 21.78
+        },
+        {
+          "suite": "input-borders",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 20.78
+        },
+        {
+          "suite": "groups",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.36
+        },
+        {
+          "suite": "groups",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.73
+        },
+        {
+          "suite": "states",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.41
+        },
+        {
+          "suite": "states",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.7
+        },
+        {
+          "suite": "renderer",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 12.94
+        },
+        {
+          "suite": "renderer",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.35
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.7
+        },
+        {
+          "suite": "tables",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.95
+        },
+        {
+          "suite": "frame-corners",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 12.47
+        },
+        {
+          "suite": "frame-corners",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 9.96
+        },
+        {
+          "suite": "font-roles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.72
+        },
+        {
+          "suite": "font-roles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.15
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.01
+        },
+        {
+          "suite": "preview",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.37
+        }
+      ],
+      "inputScenarios": {
+        "ru": {
+          "passed": true,
+          "locale": "ru",
+          "inputBorders": true,
+          "forms": 48,
+          "fields": 173,
+          "dirtyPalette": true,
+          "detachedUpdates": true,
+          "sourceWritesDuringViewing": false,
+          "wholeFormVisualParity": false,
+          "samplesIncludingDirtyAndFloating": 52,
+          "cornerPixelsCompared": 6804,
+          "wholeWidgetPixelsCompared": 627774,
+          "calculatorPixelsCompared": 25440,
+          "pixelsCompared": 660018,
+          "differentRgbPixels": 0,
+          "maskedPixels": 0
+        },
+        "en": {
+          "passed": true,
+          "locale": "en",
+          "inputBorders": true,
+          "forms": 48,
+          "fields": 173,
+          "dirtyPalette": true,
+          "detachedUpdates": true,
+          "sourceWritesDuringViewing": false,
+          "wholeFormVisualParity": false,
+          "samplesIncludingDirtyAndFloating": 52,
+          "cornerPixelsCompared": 6804,
+          "wholeWidgetPixelsCompared": 627774,
+          "calculatorPixelsCompared": 25440,
+          "pixelsCompared": 660018,
+          "differentRgbPixels": 0,
+          "maskedPixels": 0
+        }
+      },
+      "fontReattachTestUsesCurrentWebviewContext": true,
+      "sourceWritesDuringViewing": false
+    }
+  },
+  "wholeFormControl": {
+    "sourceFixture": "tests/fixtures/forms/native-groups/PagesAuto.xml",
+    "scope": "Whole form including four pixels of right and bottom shadow",
+    "differentRgbPixelsBeforePerLocale": 89,
+    "resultsAfter": [
+      {
+        "locale": "en",
+        "pixelsCompared": 42900,
+        "differentRgbPixels": 31,
+        "maskedPixels": 0,
+        "nativeScreenshot": "native-selection-auto-root-en.png",
+        "nativeScreenshotSha256": "ccf6b4c1c390a3f46ee61374c69fc2ec5993df3cc5b9f540c99f5110412ef375",
+        "clientScreenshot": "group-design-root-en.png",
+        "clientScreenshotSha256": "db76d8cb0f1f0aa06745918216b66bab641669863a920e4e8ad4f787e24b9e17"
+      },
+      {
+        "locale": "ru",
+        "pixelsCompared": 42900,
+        "differentRgbPixels": 31,
+        "maskedPixels": 0,
+        "nativeScreenshot": "native-selection-auto-root-ru.png",
+        "nativeScreenshotSha256": "019872d368745692fa55c1ad2013d88907632015a52c681141a4edade129e096",
+        "clientScreenshot": "group-design-root-ru.png",
+        "clientScreenshotSha256": "61ba51f368a2f08c5925fd04ae0b84bb75e19ecc01f04fd00e9dd831105f12a3"
+      }
+    ],
+    "accepted": false,
+    "remainingDifferentRegions": "Tab corners and tab/page border intersections only in this control"
+  },
+  "remaining": [
+    "Explicit Width and shared alignment fixture ChoiceB (T157), captured separately and not accepted",
+    "Date value formatting/calendar icon; inactive dates; string embedded buttons; reference/composite/multiline/spin/open/clear combinations",
+    "Tab/page corner rendering, other appearance matrices, resources, complex surfaces and ordered native extension appearance",
+    "Windows, physical monitor DPI and all other open T152–T165 acceptance"
+  ]
+}

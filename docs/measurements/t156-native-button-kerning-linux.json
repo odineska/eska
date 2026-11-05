@@ -1,0 +1,528 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 reference container)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "clientCommit": "c1e631b22511d78ea3d3045b2d2783fe5b3d4f03",
+  "referenceCommit": "8c74410a70308bd8c5da33b870d7789f29f442e8",
+  "reference": "tests/fixtures/forms/native-button-captions/metrics.json",
+  "referenceConditions": {
+    "dpi": 96,
+    "scalePercent": 100,
+    "devicePixelRatio": 1,
+    "nativeLocale": "en",
+    "vsixLocales": [
+      "en",
+      "ru"
+    ]
+  },
+  "corrections": {
+    "kerning": "Rounded UNFITTED kerning per pair. DEFAULT attenuates small ppem and does not match the native preview. Native Cyrillic ат and Latin AV/To widths independently confirmed.",
+    "diacritics": "Retain bitmap overflow above ascent/below descent, including top dots of Ё at 13 px.",
+    "explicitColor": "All pixels compared for web:Blue, web:Red and web:Green TextColor overrides.",
+    "incrementalPackaging": "Prune obsolete hashed TTF/WASM outputs absent from current esbuild manifest; exactly one current WASM and twelve fonts in VSIX."
+  },
+  "rasterManifest": {
+    "freeType": "2.13.2",
+    "emscripten": "6.0.13",
+    "sourceSha256": "12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d",
+    "bridgeSha256": "44af015a207bdeb1b92e8612c37373547c0aa91818714d837c2bcfe006b3c9d2",
+    "wasmSha256": "d6a6b99e866f54b369afc9e883f19e3ec36cee462f161953acd465deb63566b8",
+    "interpreterVersion": 40,
+    "lcdFilter": "default",
+    "curveRasterizer": "native-dda"
+  },
+  "wasmBytes": 270016,
+  "advanceTableSha256": "334e736ac047def25f3f914d6a25b66ec0e699f6ccd847130c44c8caa85dfad0",
+  "advanceTableBytes": 353076,
+  "newMatrix": {
+    "forms": 6,
+    "buttons": 18,
+    "nativeInteriorPixelsPerLocale": 119723,
+    "installedPixelsCompared": 239446,
+    "differingPixels": 0,
+    "rows": [
+      {
+        "name": "10Normal",
+        "points": 10,
+        "weight": "normal",
+        "nativeFrame": [
+          451,
+          79
+        ],
+        "interiorPixelsPerLocale": 7620,
+        "exactBothLocales": true,
+        "screenshotSha256": {
+          "en": "e80a4299b06fe428f76148c00da3900740db92d22e3c4bc600974e61d7c3f0c2",
+          "ru": "51730de4c1c23ee39efa35dbc6f8934585dad93d9aafd4761bf9e8993e2aeae9"
+        },
+        "wholeFormWith4pxShadow": {
+          "en": {
+            "pixelsCompared": 37765,
+            "differingPixels": 565,
+            "exactRgbRatio": 0.985039
+          },
+          "ru": {
+            "pixelsCompared": 37765,
+            "differingPixels": 565,
+            "exactRgbRatio": 0.985039
+          }
+        }
+      },
+      {
+        "name": "10Bold",
+        "points": 10,
+        "weight": "bold",
+        "nativeFrame": [
+          464,
+          79
+        ],
+        "interiorPixelsPerLocale": 7880,
+        "exactBothLocales": true,
+        "screenshotSha256": {
+          "en": "4f3e8033eeff25ae8acc4b4a511092bf8694464f85cc14cf59cfcf7cc150f564",
+          "ru": "0c6ecb17adc7dbfad4e2a9a235ac5fbd03aded79bd30eb17748446f12a73b39b"
+        },
+        "wholeFormWith4pxShadow": {
+          "en": {
+            "pixelsCompared": 38844,
+            "differingPixels": 565,
+            "exactRgbRatio": 0.985455
+          },
+          "ru": {
+            "pixelsCompared": 38844,
+            "differingPixels": 565,
+            "exactRgbRatio": 0.985455
+          }
+        }
+      },
+      {
+        "name": "20Normal",
+        "points": 20,
+        "weight": "normal",
+        "nativeFrame": [
+          871,
+          98
+        ],
+        "interiorPixelsPerLocale": 31239,
+        "exactBothLocales": true,
+        "screenshotSha256": {
+          "en": "6932f5334f6ac7f96ff21b17fade0cb8fb0321d6972454643d483871ddfcdc50",
+          "ru": "5592e84b5b17a015f53dfd5a40d9e7aeecdbd2d4f84ed843aa8fd728b6d1b3f6"
+        },
+        "wholeFormWith4pxShadow": {
+          "en": {
+            "pixelsCompared": 89250,
+            "differingPixels": 1366,
+            "exactRgbRatio": 0.984695
+          },
+          "ru": {
+            "pixelsCompared": 89250,
+            "differingPixels": 1366,
+            "exactRgbRatio": 0.984695
+          }
+        }
+      },
+      {
+        "name": "20Bold",
+        "points": 20,
+        "weight": "bold",
+        "nativeFrame": [
+          908,
+          98
+        ],
+        "interiorPixelsPerLocale": 32682,
+        "exactBothLocales": true,
+        "screenshotSha256": {
+          "en": "40d92e3e06be0b31b4a985f841c9439b3ebec26e1c17e2ecf7aa3688d6b9cfbb",
+          "ru": "7e7cc3da65c0bfd116695e4b9adf48a94ecc6dbccb19f226023a8b24ba39a491"
+        },
+        "wholeFormWith4pxShadow": {
+          "en": {
+            "pixelsCompared": 93024,
+            "differingPixels": 1403,
+            "exactRgbRatio": 0.984918
+          },
+          "ru": {
+            "pixelsCompared": 93024,
+            "differingPixels": 1403,
+            "exactRgbRatio": 0.984918
+          }
+        }
+      },
+      {
+        "name": "10NormalColor",
+        "points": 10,
+        "weight": "normal",
+        "nativeFrame": [
+          451,
+          79
+        ],
+        "interiorPixelsPerLocale": 7620,
+        "exactBothLocales": true,
+        "screenshotSha256": {
+          "en": "6d9dec1d641608918318ab29ee4d2ced8ca7a2c70198c314f1f4c9f27af8c254",
+          "ru": "e2a848f35378e69ff66a19f83c995198e09213d16f5f489aff9d5882887c1bb6"
+        },
+        "wholeFormWith4pxShadow": {
+          "en": {
+            "pixelsCompared": 37765,
+            "differingPixels": 565,
+            "exactRgbRatio": 0.985039
+          },
+          "ru": {
+            "pixelsCompared": 37765,
+            "differingPixels": 565,
+            "exactRgbRatio": 0.985039
+          }
+        }
+      },
+      {
+        "name": "20BoldColor",
+        "points": 20,
+        "weight": "bold",
+        "nativeFrame": [
+          908,
+          98
+        ],
+        "interiorPixelsPerLocale": 32682,
+        "exactBothLocales": true,
+        "screenshotSha256": {
+          "en": "ceb22f2c27d4c4349221da4efac9093d2d502b9c15828233a293a580c400f124",
+          "ru": "0c14008f6e119fa6f4e80bb656564d4fb07668447536e8233aabb6d89bb8863b"
+        },
+        "wholeFormWith4pxShadow": {
+          "en": {
+            "pixelsCompared": 93024,
+            "differingPixels": 1403,
+            "exactRgbRatio": 0.984918
+          },
+          "ru": {
+            "pixelsCompared": 93024,
+            "differingPixels": 1403,
+            "exactRgbRatio": 0.984918
+          }
+        }
+      }
+    ]
+  },
+  "priorMatrix": {
+    "reference": "t156-native-button-captions-linux.json",
+    "buttons": 48,
+    "installedPixelsReverified": 550426,
+    "differingPixels": 0,
+    "screenshots": [
+      {
+        "locale": "en",
+        "name": "10Normal",
+        "sha256": "d043a60850ab39b8dcad5b624f3ed21468b9f08aec20bb1dba7f6b8a01d31aa3"
+      },
+      {
+        "locale": "en",
+        "name": "10Bold",
+        "sha256": "5ad750583b770c74d4b4347f3ceadbbcc3c4652d768739d6975685803f9371a5"
+      },
+      {
+        "locale": "en",
+        "name": "12Normal",
+        "sha256": "1e7b9cea4d306241dcb9f98b0235eacf173c6500f1047b1305f6b67292cbc8db"
+      },
+      {
+        "locale": "en",
+        "name": "12Bold",
+        "sha256": "31d7304bbdd01ac66e1f38b136b91b1cf2c4dc90690c7a05c27841f491409e11"
+      },
+      {
+        "locale": "en",
+        "name": "14Normal",
+        "sha256": "f829b982d531790c2ad26baa4961338591d09a5d94e8bdda08c53acf78b1a374"
+      },
+      {
+        "locale": "en",
+        "name": "14Bold",
+        "sha256": "f14a5eca7c4afc7dc9d77590f9a7157943dcbde8fa60b638ca1b7505c6bf4387"
+      },
+      {
+        "locale": "en",
+        "name": "16Normal",
+        "sha256": "ef5e9a0131be19872540cc8cd99df788d090e1c2dd55017088f7ce803c5c430c"
+      },
+      {
+        "locale": "en",
+        "name": "16Bold",
+        "sha256": "3ade62e34a97f147a678118df6dd12ab6e4911b363e2d36cba662eb21567295b"
+      },
+      {
+        "locale": "en",
+        "name": "18Normal",
+        "sha256": "a1ad7db20ab83ec809789142f63431d986c264b7ff115124515cb45e2ce7504b"
+      },
+      {
+        "locale": "en",
+        "name": "20Normal",
+        "sha256": "9807030e3b0cdb8dc860ca18dbd9030653e8d7eeea9911cf22af57fb761b6a91"
+      },
+      {
+        "locale": "en",
+        "name": "20Bold",
+        "sha256": "eab8d6dbbb8280d81a432e79a2ff42773cdba3f0137c545d4a83d89ea5b7cbb0"
+      },
+      {
+        "locale": "en",
+        "name": "24Normal",
+        "sha256": "044d1dd7aa9539497bcaeb2d6a1ea9d6903537c0bafc24727bd4f8197929534c"
+      },
+      {
+        "locale": "en",
+        "name": "24Bold",
+        "sha256": "3ed86d485ad288005bd29ba1cf1106a222294f28e4df02b037fef0d2b539dc18"
+      },
+      {
+        "locale": "en",
+        "name": "28Normal",
+        "sha256": "dc7de432aec1067422de42a840ba2c0c6863acd38d85d8737d2e5e669a41980b"
+      },
+      {
+        "locale": "en",
+        "name": "32Normal",
+        "sha256": "f8e3f8bf8846bb280525e24ed0b97db5e391297c298e0693589e81d697b08de9"
+      },
+      {
+        "locale": "en",
+        "name": "32Bold",
+        "sha256": "1ea98e3865d5c9e494cc94b22c747e66806f1c1a42608e22fc701b7961da628a"
+      },
+      {
+        "locale": "ru",
+        "name": "10Normal",
+        "sha256": "7c0e6be1aeaaa643253184ab2076581099aaf985232417ceecb0337f6b3dc8cc"
+      },
+      {
+        "locale": "ru",
+        "name": "10Bold",
+        "sha256": "116afa0585a8fa1210dbfc03e69f76e0eedcb28ab3c8847bb07fb8801627d5f1"
+      },
+      {
+        "locale": "ru",
+        "name": "12Normal",
+        "sha256": "eebb8a2c549e8368396cad5a230751f213b831134c6e47882d0a8abf381f6012"
+      },
+      {
+        "locale": "ru",
+        "name": "12Bold",
+        "sha256": "e8a70a714633359fc38acc52136fa5a8c90fa47daa7efd5f61fc59ed3ba8d223"
+      },
+      {
+        "locale": "ru",
+        "name": "14Normal",
+        "sha256": "d26aa2c667bfbea803c3fa2271ed9656c87ce14dd58d8901da011d5913361940"
+      },
+      {
+        "locale": "ru",
+        "name": "14Bold",
+        "sha256": "1e352e7ffdf41801b74fa1759cbfbad66aa2138dfc558f27c26252c34a5c7b22"
+      },
+      {
+        "locale": "ru",
+        "name": "16Normal",
+        "sha256": "0c7c14b382d748b5e01e1199a8d8b25ed52d54868cb00173bc2a94defafc096c"
+      },
+      {
+        "locale": "ru",
+        "name": "16Bold",
+        "sha256": "3a90e02b06a0181c5884127327447145bd0afbdf564ceaae085590b2df9da427"
+      },
+      {
+        "locale": "ru",
+        "name": "18Normal",
+        "sha256": "2885e46f8d48bba06ba8c5055de8bace01fd885e8791b3d5c533fa4719bd22f0"
+      },
+      {
+        "locale": "ru",
+        "name": "20Normal",
+        "sha256": "7ba7abecb080a41f7eb7fd1697cccf3c2a583543d5815ac897c9bc2d72137e03"
+      },
+      {
+        "locale": "ru",
+        "name": "20Bold",
+        "sha256": "2823b37565d889838e82acb7b93298ab5876d8935b74f1b3cc144c7fa20de0b4"
+      },
+      {
+        "locale": "ru",
+        "name": "24Normal",
+        "sha256": "1c536cf120dd0ab77066b3a6de546361b696dd87476d9982eb5faeae6dcd03f4"
+      },
+      {
+        "locale": "ru",
+        "name": "24Bold",
+        "sha256": "e02e87772bbd9aab7ab5da469fee9006c939a90a992e47cf8c98e914d623af3b"
+      },
+      {
+        "locale": "ru",
+        "name": "28Normal",
+        "sha256": "de8cf8fe7a726c033ea910bdc98dad6c2303ea75f61889b536ff9dab9846c80f"
+      },
+      {
+        "locale": "ru",
+        "name": "32Normal",
+        "sha256": "eca960893fb1e14e739851a5552b51402567e80e2ab994548d34e1481b9d1871"
+      },
+      {
+        "locale": "ru",
+        "name": "32Bold",
+        "sha256": "7cc4bf5c0aa487968fc963ee36e408a5b0754112a31b12907a297f82ca496cbf"
+      }
+    ]
+  },
+  "total": {
+    "buttonsPerLocale": 66,
+    "interiorPixelsPerLocale": 394936,
+    "installedPixelsBothLocales": 789872,
+    "differingPixels": 0
+  },
+  "comparison": "Complete rectangular interiors inset 3px, no text/AA masks. Full form plus shadow also retained separately; whole-form parity remains false. Native origin (261,240), browser webview offset (348,70).",
+  "checks": {
+    "typecheck": "passed",
+    "compile": "passed",
+    "node": {
+      "passed": 474,
+      "skipped": 11,
+      "failed": 0
+    },
+    "wasmCleanRebuild": "Byte-identical",
+    "vsix": "Current runtime only, 59 out files and 38 documentation files byte-identical",
+    "dirtyColor": "Blue to Green to Blue, same DOM button, no source writes, both locales",
+    "priorDirtyRegressions": "16 to 20 to 16 pt, DefaultButton switch, fallback restore, both locales",
+    "rust": {
+      "fmt": "passed",
+      "check": "passed",
+      "clippyAllTargetsAllFeaturesDenyWarnings": "passed",
+      "test": {
+        "passed": 1481,
+        "failed": 0,
+        "ignored": 19,
+        "testSuites": 42,
+        "threads": 1,
+        "testRoot": "<repo>/../eska-playground"
+      }
+    }
+  },
+  "nativeRegressions": [
+    {
+      "name": "button-captions",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.96
+    },
+    {
+      "name": "button-captions",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.27
+    },
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.87
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.24
+    },
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.08
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.81
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.82
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.62
+    },
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.33
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.97
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 9.87
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.79
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.23
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 5.91
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.7
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.57
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.38
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.82
+    }
+  ],
+  "resolvedTestIssue": "The first async recolor assertion expected a fully opaque stroke; native LCD red coverage reaches 250 at 13px. It now checks the changed dominant ink channel. Independent exact RGB hash assertions remain unchanged. The failed run is retained in the private stand.",
+  "remaining": [
+    "All other button representations, custom background, italic/underline/strikeout, other families and complex shaping need native coverage",
+    "Borders/corners/shadows, field/title LCD text and whole-form parity remain open",
+    "No Windows or non-96DPI acceptance is claimed"
+  ]
+}

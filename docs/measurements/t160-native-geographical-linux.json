@@ -1,0 +1,2273 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "scope": "Complete recorded empty normal-10pt GeographicalSchemaField widgets: default/two explicit sizes, ReadOnly, Enabled, four active border colors, title hidden and a requested BackColor that native XML ignores. Ten native sources, seventeen complete-widget samples per locale; captions/full forms and other property/state/display matrices remain open.",
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "nativeForms": 10,
+  "nativeImages": 20,
+  "nativeLocales": [
+    "en",
+    "ru"
+  ],
+  "nativeLocalePixelDifferences": 0,
+  "nativeInputs": {
+    "schemaVersion": 1,
+    "platformBuild": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "zoom": 100,
+    "scope": "Ten measured empty normal-10pt GeographicalSchemaField inputs on native ru/en; the complete recorded widget cases are calibrated, other properties/profiles and full forms remain open.",
+    "nativeImages": 20,
+    "nativeLocaleDifferences": 0,
+    "pixelTolerance": 0,
+    "comparisonMasks": [],
+    "bslExecuted": false,
+    "rows": [
+      {
+        "name": "A_Default",
+        "file": "A_Default.xml",
+        "sourceSha256": "a4091911a3c82721d5caafe6ba22b4876ce1fe7639d6cba175249b68af7bbac9",
+        "nativeExport": "A_Default.xml",
+        "nativeExportSha256": "a4091911a3c82721d5caafe6ba22b4876ce1fe7639d6cba175249b68af7bbac9",
+        "calibrationCandidate": true,
+        "nativeProperties": "",
+        "nativeSize": [
+          500,
+          243
+        ],
+        "activeBorder": [
+          160,
+          160,
+          160
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/en-A_Default.png",
+            "screenshotSha256": "ec77d3d0d8434c8f0c35dd5e45661b5309da8482fa092906e3dd67ee79a6ea92",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          },
+          "ru": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/ru-A_Default.png",
+            "screenshotSha256": "4fc8e76b6314e6dd7010b17a20f8ecc919bfd5dc959a2dfeae1fb792425fe281",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          }
+        },
+        "droppedProperties": []
+      },
+      {
+        "name": "B_Size",
+        "file": "B_Size.xml",
+        "sourceSha256": "b4f147e4a9a084b9c462dabf1e7860d278e897dba074f4a41354dfd32377a68e",
+        "nativeExport": "B_Size.xml",
+        "nativeExportSha256": "b4f147e4a9a084b9c462dabf1e7860d278e897dba074f4a41354dfd32377a68e",
+        "calibrationCandidate": true,
+        "nativeProperties": "<Width>20</Width><Height>5</Height>",
+        "nativeSize": [
+          200,
+          118
+        ],
+        "activeBorder": [
+          160,
+          160,
+          160
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/en-B_Size.png",
+            "screenshotSha256": "511718d923080bc466f828e17cf12b617866706e49ba1578f03c56f677d849ce",
+            "nativeRegion": [
+              274,
+              568,
+              200,
+              118
+            ],
+            "rgbSha256": "cfc4275a411faf72c26a4034ee023705a5575c7b3b4864caf054d3aeb21ab866",
+            "pixels": 23600,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          },
+          "ru": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/ru-B_Size.png",
+            "screenshotSha256": "99b3db53391e87591fc073a6d042d34b69d626e004a32390ed8056d14b105e14",
+            "nativeRegion": [
+              274,
+              568,
+              200,
+              118
+            ],
+            "rgbSha256": "cfc4275a411faf72c26a4034ee023705a5575c7b3b4864caf054d3aeb21ab866",
+            "pixels": 23600,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          }
+        },
+        "droppedProperties": []
+      },
+      {
+        "name": "C_ReadOnly",
+        "file": "C_ReadOnly.xml",
+        "sourceSha256": "d8d70d159d463856385b917112fef3f87830aec87bc84939634a9715c23cd251",
+        "nativeExport": "C_ReadOnly.xml",
+        "nativeExportSha256": "d8d70d159d463856385b917112fef3f87830aec87bc84939634a9715c23cd251",
+        "calibrationCandidate": true,
+        "nativeProperties": "<ReadOnly>true</ReadOnly>",
+        "nativeSize": [
+          500,
+          243
+        ],
+        "activeBorder": [
+          160,
+          160,
+          160
+        ],
+        "outerBorder": [
+          232,
+          232,
+          232
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/en-C_ReadOnly.png",
+            "screenshotSha256": "1f3cd41c731d27598c1d6af688314adb9d239a53e5e5e3886dbbfde21436838e",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          },
+          "ru": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/ru-C_ReadOnly.png",
+            "screenshotSha256": "78d738d83425764f70e897a02978861e8aa5bcc91a5025326eb94d6730f2e6eb",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          }
+        },
+        "droppedProperties": []
+      },
+      {
+        "name": "D_Disabled",
+        "file": "D_Disabled.xml",
+        "sourceSha256": "8a5accaba98bdf4f8434461da3327fd32a909f17c19868185838b3a186c63cd4",
+        "nativeExport": "D_Disabled.xml",
+        "nativeExportSha256": "8a5accaba98bdf4f8434461da3327fd32a909f17c19868185838b3a186c63cd4",
+        "calibrationCandidate": true,
+        "nativeProperties": "<Enabled>false</Enabled>",
+        "nativeSize": [
+          500,
+          243
+        ],
+        "activeBorder": [
+          160,
+          160,
+          160
+        ],
+        "outerBorder": [
+          232,
+          232,
+          232
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/en-D_Disabled.png",
+            "screenshotSha256": "2bc403cc18c67aa03be6058cca8a41b100066f0fd602ef26c397c1c3b14bc025",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          },
+          "ru": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/ru-D_Disabled.png",
+            "screenshotSha256": "13112c2fd3b958a3a29a0ba750710fb085e66a73979adf5dc45e10ecaa75d673",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          }
+        },
+        "droppedProperties": []
+      },
+      {
+        "name": "E_Border",
+        "file": "E_Border.xml",
+        "sourceSha256": "d08862f5c6455ddbbfe9e09b75c83f8643c3aeb817634933e6177ec98313064c",
+        "nativeExport": "E_Border.xml",
+        "nativeExportSha256": "d08862f5c6455ddbbfe9e09b75c83f8643c3aeb817634933e6177ec98313064c",
+        "calibrationCandidate": true,
+        "nativeProperties": "<BorderColor>web:Blue</BorderColor>",
+        "nativeSize": [
+          500,
+          243
+        ],
+        "activeBorder": [
+          0,
+          0,
+          255
+        ],
+        "outerBorder": [
+          0,
+          0,
+          255
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/en-E_Border.png",
+            "screenshotSha256": "96d39253c666198541d442836b82b8d943b9a046f124d3d357a60aa30e01be53",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "9fe3c32f6e4fee9a1fd0203ed01221b9bc48880b1de4e62cce483d4cbb9e7137",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "d703508084e593e2d1296a5b43570d92683da0a01ac83b91c8936b54aad92eba",
+              "b95bb1adb3c8dc9fa04944a5c2781f5cc1b102394734865d75f640814a4482c5",
+              "ed3625c3a2c77765fc43a3d595fe866909d4700f1349b8df32620af823b0c670",
+              "7d7649e7545a38a7b05d4d2ba52ea5e3c37be2a6bd845fd22d28952d53fa6b06"
+            ]
+          },
+          "ru": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/ru-E_Border.png",
+            "screenshotSha256": "f948f89bed11022c49c7c8011206979b0f77fec54ac5315f6e82434e4f37f2b0",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "9fe3c32f6e4fee9a1fd0203ed01221b9bc48880b1de4e62cce483d4cbb9e7137",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "d703508084e593e2d1296a5b43570d92683da0a01ac83b91c8936b54aad92eba",
+              "b95bb1adb3c8dc9fa04944a5c2781f5cc1b102394734865d75f640814a4482c5",
+              "ed3625c3a2c77765fc43a3d595fe866909d4700f1349b8df32620af823b0c670",
+              "7d7649e7545a38a7b05d4d2ba52ea5e3c37be2a6bd845fd22d28952d53fa6b06"
+            ]
+          }
+        },
+        "droppedProperties": []
+      },
+      {
+        "name": "F_Background",
+        "file": "F_Background.xml",
+        "sourceSha256": "0b52ef0d91d1943c94fbc009577abae1dbcbf31083b54d48025ba66afa939d3b",
+        "nativeExport": "canonical/F_Background.xml",
+        "nativeExportSha256": "186d61cc79f900dd5f766143b1dbef04b2d78db3e7d2370ae2c432c4168c7e6f",
+        "calibrationCandidate": true,
+        "nativeProperties": "<BackColor>web:Black</BackColor>",
+        "nativeSize": [
+          500,
+          243
+        ],
+        "activeBorder": [
+          160,
+          160,
+          160
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/en-F_Background.png",
+            "screenshotSha256": "001a7c05f4554a94507c11a08cc2b9ec6be1647f1fbdb3a40869c5e53624fb40",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          },
+          "ru": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/ru-F_Background.png",
+            "screenshotSha256": "435f96629816bf005b11ea2a37ab72ff8b57047231e7bbca6890449258527de6",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          }
+        },
+        "droppedProperties": [
+          "BackColor"
+        ]
+      },
+      {
+        "name": "G_NoTitle",
+        "file": "G_NoTitle.xml",
+        "sourceSha256": "ddf104f533cb0df7d14476fa015711935d694d3b87df192ea73992df7b29d4da",
+        "nativeExport": "G_NoTitle.xml",
+        "nativeExportSha256": "ddf104f533cb0df7d14476fa015711935d694d3b87df192ea73992df7b29d4da",
+        "calibrationCandidate": true,
+        "nativeProperties": "<TitleLocation>None</TitleLocation>",
+        "nativeSize": [
+          500,
+          243
+        ],
+        "activeBorder": [
+          160,
+          160,
+          160
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/en-G_NoTitle.png",
+            "screenshotSha256": "374e5bf837e72c72dac77402795b243bd9100391d4cb97751d817ec8a16fcbba",
+            "nativeRegion": [
+              274,
+              549,
+              500,
+              243
+            ],
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          },
+          "ru": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/ru-G_NoTitle.png",
+            "screenshotSha256": "48486f4fa85978ea5e11efd4b249d4034b1ea3eec05fed35f7e0f95f25fdef94",
+            "nativeRegion": [
+              274,
+              549,
+              500,
+              243
+            ],
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          }
+        },
+        "droppedProperties": []
+      },
+      {
+        "name": "H_Large",
+        "file": "H_Large.xml",
+        "sourceSha256": "9c9608b2cc69aace6d0cc1110c9bb023d30f0f02d20c5dd0da89535cebb85504",
+        "nativeExport": "H_Large.xml",
+        "nativeExportSha256": "9c9608b2cc69aace6d0cc1110c9bb023d30f0f02d20c5dd0da89535cebb85504",
+        "calibrationCandidate": true,
+        "nativeProperties": "<Width>35</Width><Height>9</Height>",
+        "nativeSize": [
+          350,
+          218
+        ],
+        "activeBorder": [
+          160,
+          160,
+          160
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/en-H_Large.png",
+            "screenshotSha256": "649407b38c8457f2e3dabb2b70ddbb40ad01fd6f8fb64653f0659f30c5f5f645",
+            "nativeRegion": [
+              274,
+              568,
+              350,
+              218
+            ],
+            "rgbSha256": "38524de15edf5835e84998593774755c209918131da6f387e4aa52ebc68c9cf1",
+            "pixels": 76300,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          },
+          "ru": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/ru-H_Large.png",
+            "screenshotSha256": "dd63cc6c03fac4e4b0bfad6c65a385895ff3ffe42ad1f6ebcc08f9d2784f97e5",
+            "nativeRegion": [
+              274,
+              568,
+              350,
+              218
+            ],
+            "rgbSha256": "38524de15edf5835e84998593774755c209918131da6f387e4aa52ebc68c9cf1",
+            "pixels": 76300,
+            "cornerRgbSha256": [
+              "310a9607fd3b4dc94faff15530e8a27b990f5d8887b0dedf9523a757aed3bdd3",
+              "0d6b2155e536789b29a13e9e7ddcdbd3bff34b44f2b5bfc83d46cb5b161d2bd7",
+              "74a2f393c82dbb56d2edcfd5b7bf5bca0ae2ec4c155c70594cec9fb4dba902f8",
+              "89748b4e0df2623cc1d5a4ee5750096bcbd54ddbda752e72e28b6dde9b8790a6"
+            ]
+          }
+        },
+        "droppedProperties": []
+      },
+      {
+        "name": "I_BorderChocolate",
+        "file": "I_BorderChocolate.xml",
+        "sourceSha256": "b03e647fb2f7532f6511faba1aec2472df1c7e0b07cc37ad1dda627ceb23adba",
+        "nativeExport": "I_BorderChocolate.xml",
+        "nativeExportSha256": "b03e647fb2f7532f6511faba1aec2472df1c7e0b07cc37ad1dda627ceb23adba",
+        "calibrationCandidate": true,
+        "nativeProperties": "<BorderColor>web:Chocolate</BorderColor>",
+        "nativeSize": [
+          500,
+          243
+        ],
+        "activeBorder": [
+          210,
+          105,
+          30
+        ],
+        "outerBorder": [
+          210,
+          105,
+          30
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/en-I_BorderChocolate.png",
+            "screenshotSha256": "148eddb7310a894224bc7c4cf4876f88a036914900c24415250845effd23a8bf",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "8550c1490040396eabcbbaf2768c37038efc282f9cc100d35313b3fb5ea4e3b2",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "0516cabe3d7d690f9596a3de555ce6083b04ad3761395f8f80f5b51b8fed4a38",
+              "2dd656ca0ce0b5a5dd0d1f908e310b4246f5f8273f4a2766e2536a65c2a78d72",
+              "c73ffc1e10ee2cd136824369158bd02174a9f9c8f73335e3ce27c2a54c283d18",
+              "e55ef750e3024f0424de0a59ce72e64e13a749b5ddf9ee20e565d9eebacec646"
+            ]
+          },
+          "ru": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/ru-I_BorderChocolate.png",
+            "screenshotSha256": "8ef246528e137ff44f2a5347e1716a2f59dc39c5e655d996fa9ebe794c2efbb7",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "8550c1490040396eabcbbaf2768c37038efc282f9cc100d35313b3fb5ea4e3b2",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "0516cabe3d7d690f9596a3de555ce6083b04ad3761395f8f80f5b51b8fed4a38",
+              "2dd656ca0ce0b5a5dd0d1f908e310b4246f5f8273f4a2766e2536a65c2a78d72",
+              "c73ffc1e10ee2cd136824369158bd02174a9f9c8f73335e3ce27c2a54c283d18",
+              "e55ef750e3024f0424de0a59ce72e64e13a749b5ddf9ee20e565d9eebacec646"
+            ]
+          }
+        },
+        "droppedProperties": []
+      },
+      {
+        "name": "J_BorderSlate",
+        "file": "J_BorderSlate.xml",
+        "sourceSha256": "8ff30b0ce9da75945f72d3358c7e7fdad7fed59d841aa46ac14d1b8dce4e827f",
+        "nativeExport": "J_BorderSlate.xml",
+        "nativeExportSha256": "8ff30b0ce9da75945f72d3358c7e7fdad7fed59d841aa46ac14d1b8dce4e827f",
+        "calibrationCandidate": true,
+        "nativeProperties": "<BorderColor>web:DarkSlateBlue</BorderColor>",
+        "nativeSize": [
+          500,
+          243
+        ],
+        "activeBorder": [
+          72,
+          61,
+          139
+        ],
+        "outerBorder": [
+          72,
+          61,
+          139
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/en-J_BorderSlate.png",
+            "screenshotSha256": "2b353e92b3828b19ff3f0bbf801b1f3f7ef19de6e5b950c39584739120acfb80",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "8774a5cd1f921b338a89dc58f772316fe0b2bdbb96e51854ed9489029f56e8f2",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "875456701358af11cc348c63f71689c89118b13cd50b04b55cc0e68c1c3dd169",
+              "4fd9649010de42c0e55444b8abaa20ae1c7256d40b9021b8364330d90a9951a5",
+              "f57220dea111a73c15b0b67427e6da3b9ebea9388a355455a51a1d6df4a952db",
+              "a0beeae67084aa657837be8ff9d3c6ecb101c155ad0cdfbf091a522785edc3d8"
+            ]
+          },
+          "ru": {
+            "nativeScreenshot": "native-geographical-tdfs2qjr/ru-J_BorderSlate.png",
+            "screenshotSha256": "c7ee861c9fe10eb92202c4f6ee078f86d1534f001c12699e831113ceed1fd0c8",
+            "nativeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "rgbSha256": "8774a5cd1f921b338a89dc58f772316fe0b2bdbb96e51854ed9489029f56e8f2",
+            "pixels": 121500,
+            "cornerRgbSha256": [
+              "875456701358af11cc348c63f71689c89118b13cd50b04b55cc0e68c1c3dd169",
+              "4fd9649010de42c0e55444b8abaa20ae1c7256d40b9021b8364330d90a9951a5",
+              "f57220dea111a73c15b0b67427e6da3b9ebea9388a355455a51a1d6df4a952db",
+              "a0beeae67084aa657837be8ff9d3c6ecb101c155ad0cdfbf091a522785edc3d8"
+            ]
+          }
+        },
+        "droppedProperties": []
+      }
+    ],
+    "innerBorder": {
+      "activeShade": "max(channel - 17, 0)",
+      "topLeftAlpha": [
+        [
+          74,
+          227,
+          255
+        ],
+        [
+          227,
+          59,
+          0
+        ],
+        [
+          255,
+          0,
+          0
+        ]
+      ],
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "nativeColorsVerified": [
+        [
+          160,
+          160,
+          160
+        ],
+        [
+          0,
+          0,
+          255
+        ],
+        [
+          210,
+          105,
+          30
+        ],
+        [
+          72,
+          61,
+          139
+        ]
+      ],
+      "cornerPixelsPerWidget": 36,
+      "cornerPixelsTotal": 720
+    },
+    "files": [
+      {
+        "path": "A_Default.xml",
+        "sha256": "a4091911a3c82721d5caafe6ba22b4876ce1fe7639d6cba175249b68af7bbac9"
+      },
+      {
+        "path": "B_Size.xml",
+        "sha256": "b4f147e4a9a084b9c462dabf1e7860d278e897dba074f4a41354dfd32377a68e"
+      },
+      {
+        "path": "C_ReadOnly.xml",
+        "sha256": "d8d70d159d463856385b917112fef3f87830aec87bc84939634a9715c23cd251"
+      },
+      {
+        "path": "D_Disabled.xml",
+        "sha256": "8a5accaba98bdf4f8434461da3327fd32a909f17c19868185838b3a186c63cd4"
+      },
+      {
+        "path": "E_Border.xml",
+        "sha256": "d08862f5c6455ddbbfe9e09b75c83f8643c3aeb817634933e6177ec98313064c"
+      },
+      {
+        "path": "F_Background.xml",
+        "sha256": "0b52ef0d91d1943c94fbc009577abae1dbcbf31083b54d48025ba66afa939d3b"
+      },
+      {
+        "path": "G_NoTitle.xml",
+        "sha256": "ddf104f533cb0df7d14476fa015711935d694d3b87df192ea73992df7b29d4da"
+      },
+      {
+        "path": "H_Large.xml",
+        "sha256": "9c9608b2cc69aace6d0cc1110c9bb023d30f0f02d20c5dd0da89535cebb85504"
+      },
+      {
+        "path": "I_BorderChocolate.xml",
+        "sha256": "b03e647fb2f7532f6511faba1aec2472df1c7e0b07cc37ad1dda627ceb23adba"
+      },
+      {
+        "path": "J_BorderSlate.xml",
+        "sha256": "8ff30b0ce9da75945f72d3358c7e7fdad7fed59d841aa46ac14d1b8dce4e827f"
+      },
+      {
+        "path": "canonical/F_Background.xml",
+        "sha256": "186d61cc79f900dd5f766143b1dbef04b2d78db3e7d2370ae2c432c4168c7e6f"
+      },
+      {
+        "path": "source/CommonForms/P_A_Default.xml",
+        "sha256": "6dedeb3b79b468055ac2180041b3b67b5e07d99defbc7cdeb7b8b1e2de4435ff"
+      },
+      {
+        "path": "source/CommonForms/P_B_Size.xml",
+        "sha256": "be6073897e6b04384aa660ce6cbaf370bff85de8b23237d99c98d83c456328ed"
+      },
+      {
+        "path": "source/CommonForms/P_C_ReadOnly.xml",
+        "sha256": "6d56aaf5496e55bc330bef30ad3d524fe299205c91050665e6afc901b06ef3d5"
+      },
+      {
+        "path": "source/CommonForms/P_D_Disabled.xml",
+        "sha256": "4c3582a9934fb6833a6cb540c1cf301ceee954c1a293a2931044d4b957cb8a51"
+      },
+      {
+        "path": "source/CommonForms/P_E_Border.xml",
+        "sha256": "f3aba8ad34832819bf506e2de2ab7eb0cf057f57a70a83ed08289817379b0da6"
+      },
+      {
+        "path": "source/CommonForms/P_F_Background.xml",
+        "sha256": "4b3c8a3b7985e410390b74dacde62699bcbd31963dbe6324abee6ff3254e1f8a"
+      },
+      {
+        "path": "source/CommonForms/P_G_NoTitle.xml",
+        "sha256": "b97e2451df76a8e606820360db1ff0befa6414b889659cc242f4b4c085ee755d"
+      },
+      {
+        "path": "source/CommonForms/P_H_Large.xml",
+        "sha256": "12c76da5aeb52d87f28ffcd38890a360a6aa6defffff6baf0397f3434c6bb5b4"
+      },
+      {
+        "path": "source/CommonForms/P_I_BorderChocolate.xml",
+        "sha256": "e806ee9428a8e4ecf00676e1c1f31326a62a053cfac925f7fa88ab727475569f"
+      },
+      {
+        "path": "source/CommonForms/P_J_BorderSlate.xml",
+        "sha256": "1511feae938f7525d22aecd2d4177031f3e1e00a0dec89b5e6dc36f794988ae0"
+      },
+      {
+        "path": "source/ConfigDumpInfo.xml",
+        "sha256": "6134f2769912c4a2faebf9f0b6f0fed96deac43e0ea154974ee08df0ce4538cb"
+      },
+      {
+        "path": "source/Configuration.xml",
+        "sha256": "46835935898c3be0c98c542b94fdc0a81e48f85fc980d0932a4ecaa78c504479"
+      },
+      {
+        "path": "source/Languages/Русский.xml",
+        "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048"
+      }
+    ],
+    "viewerRecordedWidgetPixelParity": true
+  },
+  "nativeMetricsSha256": "b9616165334b2cf19f0f68cf6fc2d89928533e56b32aae6563e47ccd95922c7e",
+  "frozenNativeMetricsSha256": "ac99cf697a1926f12f12a536a9937b3a0b9bff152bbcce29b68c39255b2cfa2a",
+  "nativeMetricsChangedAfterFreeze": "Only explanatory scope/acceptance metadata; all XML, native sizes, rows and pixel hashes are unchanged.",
+  "completeEmptyGeographicalPixelParity": true,
+  "wholeFormVisualParity": false,
+  "fullProfileAccepted": false,
+  "noBslExecuted": true,
+  "implementation": {
+    "sharedDimensions": "documentSurfaceMetrics is shared by text documents and geographical surfaces after both native families confirmed the same normal metrics; the experimental internal JS module/function were renamed from text-document.mjs/textDocumentMetrics.",
+    "outerBorder": "ReadOnly or Enabled=false uses the measured #e8e8e8 outer frame, distinct from read-only text documents. Active BorderColor remains the source for the inner stroke.",
+    "innerBorder": "Each RGB channel is max(active BorderColor - 17, 0); one 3x3 alpha stencil mirrored to four corners reproduces all 720 measured corner pixels. Gray/blue/Chocolate/DarkSlateBlue verified natively.",
+    "ignoredBackground": "GeographicalSchemaField.BackColor is removed by native export and leaves the empty canvas white. The requested source and canonical export are both retained; the renderer does not apply text-document background styling to this consumer.",
+    "applicabilityLimit": "This pixel matrix does not complete the domain inventory/applicability of every XML property or computed-property inspector value in T152/T155.",
+    "dependenciesAdded": false,
+    "publicProtocolChanged": false
+  },
+  "checks": {
+    "node": {
+      "passed": 523,
+      "failed": 0,
+      "skipped": 11,
+      "total": 534,
+      "log": "native-geographical-tdfs2qjr/node-tests.log",
+      "logSha256": "00b43f491289f6ab89a2d1cdf0839ed3b483ba28d4d05dc8328208599c8978e2"
+    },
+    "nativeUnit": {
+      "measuredSourceSizes": 10,
+      "cornerPixelsCompared": 720,
+      "differentRgbPixels": 0
+    },
+    "nativeOperations": {
+      "createExitCode": 0,
+      "exportExitCode": 0,
+      "applyExitCode": 0,
+      "expandedImportExitCode": 0,
+      "expandedExportExitCode": 0,
+      "expandedApplyExitCode": 0
+    },
+    "backend": {
+      "codeChangedInThisSlice": false,
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "completeChecksReuse": "docs/measurements/t158-native-button-types-linux.json",
+      "cargoPassed": 1520,
+      "cargoFailed": 0,
+      "cargoIgnored": 19,
+      "sourceHashesVerifiedAgainstBatch": true,
+      "verifiedCoreFiles": 607,
+      "rustSourcesAndCargoFilesUnchangedSince": "ad8020e"
+    }
+  },
+  "acceptance": {
+    "passed": true,
+    "batchDirectory": "form-batch-LPShQC",
+    "pairsPassed": 8,
+    "pairsFailed": 0,
+    "publishedCases": 120,
+    "allFinalPairsFirstAttempt": true,
+    "builds": 1,
+    "packages": 1,
+    "guiConcurrency": 1,
+    "seconds": 78.774254088,
+    "vsixSha256": "a960acac48acea7cb49eef89ea4d66841a2e03d62a138fff9614346f59348e79",
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "728ee086bd9907af5ff5f002593193a25c47f323072438d023619b2456d44474",
+    "batchSha256": "ac4b0cd7331a9c9efba398cfa0a1fe45ce0dd1b4b9587bd85071b6f759bfd267",
+    "inputsSha256": "804ac5f3b7043f33641fc88e342d46e3faa269f6b423a7bf56f404a94e5cc326",
+    "runs": [
+      {
+        "suite": "geographical",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.516159824999999,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "geographical-en/driver.log",
+        "receipt": "geographical-en/receipt.json",
+        "caseIds": [
+          "geographical/A_Default",
+          "geographical/dirty-background",
+          "geographical/dirty-border",
+          "geographical/restored-default",
+          "geographical/floating-default",
+          "geographical/floating-dirty-size",
+          "geographical/floating-restored",
+          "geographical/reattached-default",
+          "geographical/B_Size",
+          "geographical/C_ReadOnly",
+          "geographical/D_Disabled",
+          "geographical/E_Border",
+          "geographical/F_Background",
+          "geographical/G_NoTitle",
+          "geographical/H_Large",
+          "geographical/I_BorderChocolate",
+          "geographical/J_BorderSlate"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 997.7940209999999,
+          "runtimeVerificationMs": 360.67495899999994,
+          "preHostMs": 1366.1620870000002,
+          "cleanupMs": 37.05941900000107,
+          "totalMs": 8399.500455000001
+        }
+      },
+      {
+        "suite": "geographical",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.231835994,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "geographical-ru/driver.log",
+        "receipt": "geographical-ru/receipt.json",
+        "caseIds": [
+          "geographical/A_Default",
+          "geographical/dirty-background",
+          "geographical/dirty-border",
+          "geographical/restored-default",
+          "geographical/floating-default",
+          "geographical/floating-dirty-size",
+          "geographical/floating-restored",
+          "geographical/reattached-default",
+          "geographical/B_Size",
+          "geographical/C_ReadOnly",
+          "geographical/D_Disabled",
+          "geographical/E_Border",
+          "geographical/F_Background",
+          "geographical/G_NoTitle",
+          "geographical/H_Large",
+          "geographical/I_BorderChocolate",
+          "geographical/J_BorderSlate"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 920.742064,
+          "runtimeVerificationMs": 365.04194900000005,
+          "preHostMs": 1307.688424,
+          "cleanupMs": 36.926502000000255,
+          "totalMs": 11085.415441
+        }
+      },
+      {
+        "suite": "text-document",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.445498355,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "text-document-en/driver.log",
+        "receipt": "text-document-en/receipt.json",
+        "caseIds": [
+          "text-document/A_Default",
+          "text-document/dirty-background",
+          "text-document/dirty-border",
+          "text-document/restored-default",
+          "text-document/floating-default",
+          "text-document/floating-dirty-size",
+          "text-document/floating-restored",
+          "text-document/reattached-default",
+          "text-document/B_Size",
+          "text-document/C_ReadOnly",
+          "text-document/D_Disabled",
+          "text-document/E_Border",
+          "text-document/F_Background",
+          "text-document/fallback-G_Font",
+          "text-document/H_NoTitle",
+          "text-document/I_Large",
+          "text-document/fallback-J_SizeFont16",
+          "text-document/fallback-K_Font12",
+          "text-document/fallback-L_Font14"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 703.3694150000001,
+          "runtimeVerificationMs": 358.24029800000005,
+          "preHostMs": 1069.777779,
+          "cleanupMs": 33.497134999999616,
+          "totalMs": 8325.445409999998
+        }
+      },
+      {
+        "suite": "text-document",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.447284314000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "text-document-ru/driver.log",
+        "receipt": "text-document-ru/receipt.json",
+        "caseIds": [
+          "text-document/A_Default",
+          "text-document/dirty-background",
+          "text-document/dirty-border",
+          "text-document/restored-default",
+          "text-document/floating-default",
+          "text-document/floating-dirty-size",
+          "text-document/floating-restored",
+          "text-document/reattached-default",
+          "text-document/B_Size",
+          "text-document/C_ReadOnly",
+          "text-document/D_Disabled",
+          "text-document/E_Border",
+          "text-document/F_Background",
+          "text-document/fallback-G_Font",
+          "text-document/H_NoTitle",
+          "text-document/I_Large",
+          "text-document/fallback-J_SizeFont16",
+          "text-document/fallback-K_Font12",
+          "text-document/fallback-L_Font14"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 869.529177,
+          "runtimeVerificationMs": 326.20340999999996,
+          "preHostMs": 1215.315668,
+          "cleanupMs": 40.59882800000014,
+          "totalMs": 11292.79486
+        }
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.357325495999998,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "renderer-en/driver.log",
+        "receipt": "renderer-en/receipt.json",
+        "caseIds": [
+          "renderer/InputField",
+          "renderer/CheckBoxField",
+          "renderer/CalendarField",
+          "renderer/ChartField",
+          "renderer/FormattedDocumentField",
+          "renderer/HTMLDocumentField",
+          "renderer/LabelField",
+          "renderer/ProgressBarField",
+          "renderer/TrackBarField",
+          "renderer/RadioButtonField",
+          "renderer/PictureField",
+          "renderer/SpreadSheetDocumentField",
+          "renderer/PlannerField",
+          "renderer/TextDocumentField",
+          "renderer/PDFDocumentField",
+          "renderer/DendrogramField",
+          "renderer/GanttChartField",
+          "renderer/GeographicalSchemaField",
+          "renderer/GraphicalSchemaField",
+          "renderer/PeriodField"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 796.594754,
+          "runtimeVerificationMs": 307.5534500000001,
+          "preHostMs": 1113.281434,
+          "cleanupMs": 33.79663400000027,
+          "totalMs": 10229.969525
+        }
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 13.283143953999993,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "renderer-ru/driver.log",
+        "receipt": "renderer-ru/receipt.json",
+        "caseIds": [
+          "renderer/InputField",
+          "renderer/CheckBoxField",
+          "renderer/CalendarField",
+          "renderer/ChartField",
+          "renderer/FormattedDocumentField",
+          "renderer/HTMLDocumentField",
+          "renderer/LabelField",
+          "renderer/ProgressBarField",
+          "renderer/TrackBarField",
+          "renderer/RadioButtonField",
+          "renderer/PictureField",
+          "renderer/SpreadSheetDocumentField",
+          "renderer/PlannerField",
+          "renderer/TextDocumentField",
+          "renderer/PDFDocumentField",
+          "renderer/DendrogramField",
+          "renderer/GanttChartField",
+          "renderer/GeographicalSchemaField",
+          "renderer/GraphicalSchemaField",
+          "renderer/PeriodField"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 927.507299,
+          "runtimeVerificationMs": 344.75541099999987,
+          "preHostMs": 1292.308707,
+          "cleanupMs": 34.310341000000335,
+          "totalMs": 13123.613346
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 4.405104672999994,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-en/driver.log",
+        "receipt": "application-en/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 826.322354,
+          "runtimeVerificationMs": 361.16666599999996,
+          "preHostMs": 1191.02443,
+          "cleanupMs": 34.070425000000796,
+          "totalMs": 4261.391156
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.89881962200001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-ru/driver.log",
+        "receipt": "application-ru/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 842.2268620000001,
+          "runtimeVerificationMs": 329.465695,
+          "preHostMs": 1189.956265,
+          "cleanupMs": 36.24629600000026,
+          "totalMs": 6759.337594
+        }
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "fullWidgetSamples": 17,
+        "completeWidgetPixelsCompared": 1824500,
+        "differentRgbPixels": 0,
+        "results": [
+          {
+            "label": "A_Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-background",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-border",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "9fe3c32f6e4fee9a1fd0203ed01221b9bc48880b1de4e62cce483d4cbb9e7137",
+            "expectedRgbSha256": "9fe3c32f6e4fee9a1fd0203ed01221b9bc48880b1de4e62cce483d4cbb9e7137",
+            "captureAttempts": 1
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-dirty-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 234,
+              "height": 189
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 200,
+              "height": 118
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              200,
+              118
+            ],
+            "pixels": 23600,
+            "rgbSha256": "cfc4275a411faf72c26a4034ee023705a5575c7b3b4864caf054d3aeb21ab866",
+            "expectedRgbSha256": "cfc4275a411faf72c26a4034ee023705a5575c7b3b4864caf054d3aeb21ab866",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "B_Size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 234,
+              "height": 189
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 200,
+              "height": 118
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              200,
+              118
+            ],
+            "pixels": 23600,
+            "rgbSha256": "cfc4275a411faf72c26a4034ee023705a5575c7b3b4864caf054d3aeb21ab866",
+            "expectedRgbSha256": "cfc4275a411faf72c26a4034ee023705a5575c7b3b4864caf054d3aeb21ab866",
+            "captureAttempts": 1
+          },
+          {
+            "label": "C_ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "expectedRgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "captureAttempts": 1
+          },
+          {
+            "label": "D_Disabled",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "expectedRgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "captureAttempts": 1
+          },
+          {
+            "label": "E_Border",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "9fe3c32f6e4fee9a1fd0203ed01221b9bc48880b1de4e62cce483d4cbb9e7137",
+            "expectedRgbSha256": "9fe3c32f6e4fee9a1fd0203ed01221b9bc48880b1de4e62cce483d4cbb9e7137",
+            "captureAttempts": 1
+          },
+          {
+            "label": "F_Background",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "G_NoTitle",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 293
+            },
+            "control": {
+              "x": 41,
+              "y": 315,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              385,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "H_Large",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 384,
+              "height": 289
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 350,
+              "height": 218
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              350,
+              218
+            ],
+            "pixels": 76300,
+            "rgbSha256": "38524de15edf5835e84998593774755c209918131da6f387e4aa52ebc68c9cf1",
+            "expectedRgbSha256": "38524de15edf5835e84998593774755c209918131da6f387e4aa52ebc68c9cf1",
+            "captureAttempts": 1
+          },
+          {
+            "label": "I_BorderChocolate",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "8550c1490040396eabcbbaf2768c37038efc282f9cc100d35313b3fb5ea4e3b2",
+            "expectedRgbSha256": "8550c1490040396eabcbbaf2768c37038efc282f9cc100d35313b3fb5ea4e3b2",
+            "captureAttempts": 1
+          },
+          {
+            "label": "J_BorderSlate",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "8774a5cd1f921b338a89dc58f772316fe0b2bdbb96e51854ed9489029f56e8f2",
+            "expectedRgbSha256": "8774a5cd1f921b338a89dc58f772316fe0b2bdbb96e51854ed9489029f56e8f2",
+            "captureAttempts": 1
+          }
+        ],
+        "stableControlDom": true,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true,
+        "sourceWritesDuringViewing": false,
+        "receipt": "form-batch-LPShQC/geographical-en/receipt.json",
+        "receiptSha256": "6363ac65c90351574ab59e365a20ab5eac1439efb9bfe5f6c36f2a4db451f17b"
+      },
+      "ru": {
+        "passed": true,
+        "fullWidgetSamples": 17,
+        "completeWidgetPixelsCompared": 1824500,
+        "differentRgbPixels": 0,
+        "results": [
+          {
+            "label": "A_Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-background",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-border",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "9fe3c32f6e4fee9a1fd0203ed01221b9bc48880b1de4e62cce483d4cbb9e7137",
+            "expectedRgbSha256": "9fe3c32f6e4fee9a1fd0203ed01221b9bc48880b1de4e62cce483d4cbb9e7137",
+            "captureAttempts": 1
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-dirty-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 234,
+              "height": 189
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 200,
+              "height": 118
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              200,
+              118
+            ],
+            "pixels": 23600,
+            "rgbSha256": "cfc4275a411faf72c26a4034ee023705a5575c7b3b4864caf054d3aeb21ab866",
+            "expectedRgbSha256": "cfc4275a411faf72c26a4034ee023705a5575c7b3b4864caf054d3aeb21ab866",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "B_Size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 234,
+              "height": 189
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 200,
+              "height": 118
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              200,
+              118
+            ],
+            "pixels": 23600,
+            "rgbSha256": "cfc4275a411faf72c26a4034ee023705a5575c7b3b4864caf054d3aeb21ab866",
+            "expectedRgbSha256": "cfc4275a411faf72c26a4034ee023705a5575c7b3b4864caf054d3aeb21ab866",
+            "captureAttempts": 1
+          },
+          {
+            "label": "C_ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "expectedRgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "captureAttempts": 1
+          },
+          {
+            "label": "D_Disabled",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "expectedRgbSha256": "b8abaa1bf6bdd66d2088fc8b13c34b476a5ce90e8a989f5551f6a86f3f929626",
+            "captureAttempts": 1
+          },
+          {
+            "label": "E_Border",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "9fe3c32f6e4fee9a1fd0203ed01221b9bc48880b1de4e62cce483d4cbb9e7137",
+            "expectedRgbSha256": "9fe3c32f6e4fee9a1fd0203ed01221b9bc48880b1de4e62cce483d4cbb9e7137",
+            "captureAttempts": 1
+          },
+          {
+            "label": "F_Background",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "G_NoTitle",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 293
+            },
+            "control": {
+              "x": 41,
+              "y": 315,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              385,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "expectedRgbSha256": "1bb152948c234afd4f0c38259bfa2480f98817a36d96afa4746269648e7c4890",
+            "captureAttempts": 1
+          },
+          {
+            "label": "H_Large",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 384,
+              "height": 289
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 350,
+              "height": 218
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              350,
+              218
+            ],
+            "pixels": 76300,
+            "rgbSha256": "38524de15edf5835e84998593774755c209918131da6f387e4aa52ebc68c9cf1",
+            "expectedRgbSha256": "38524de15edf5835e84998593774755c209918131da6f387e4aa52ebc68c9cf1",
+            "captureAttempts": 1
+          },
+          {
+            "label": "I_BorderChocolate",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "8550c1490040396eabcbbaf2768c37038efc282f9cc100d35313b3fb5ea4e3b2",
+            "expectedRgbSha256": "8550c1490040396eabcbbaf2768c37038efc282f9cc100d35313b3fb5ea4e3b2",
+            "captureAttempts": 1
+          },
+          {
+            "label": "J_BorderSlate",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              406,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "8774a5cd1f921b338a89dc58f772316fe0b2bdbb96e51854ed9489029f56e8f2",
+            "expectedRgbSha256": "8774a5cd1f921b338a89dc58f772316fe0b2bdbb96e51854ed9489029f56e8f2",
+            "captureAttempts": 1
+          }
+        ],
+        "stableControlDom": true,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true,
+        "sourceWritesDuringViewing": false,
+        "receipt": "form-batch-LPShQC/geographical-ru/receipt.json",
+        "receiptSha256": "2c281b6cab253b49131cc7ded358c72104569178e80e373061853b08341c8a92"
+      }
+    }
+  },
+  "remaining": [
+    "Fonts, dimensional limits/fractions/stretching and combined read-only/disabled/custom-color cases; other geographical properties and nonempty design-time content where native XML supplies it.",
+    "Full property applicability/computed-property semantics, captions/full forms, all other special surfaces, full Linux profile, DPI/performance and Windows acceptance."
+  ]
+}

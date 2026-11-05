@@ -1,0 +1,4340 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "scope": "12 complete recorded planner sources at Nov5 2026/en-US, ru/en UI; native hour axis/date/meeting/current-time line, five dimension pairs including both scrollbars and full493px height, ReadOnly/Enabled, ignored Font/BackColor/BorderColor and no-title case. Other dates/regions/styles/properties/dimensions/combinations and full forms remain open.",
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "nativeForms": 12,
+  "nativeImages": 24,
+  "nativeLocales": [
+    "en",
+    "ru"
+  ],
+  "nativeLocalePixelDifferences": null,
+  "nativeInputs": {
+    "schemaVersion": 1,
+    "platformBuild": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "zoom": 100,
+    "scope": "12 complete recorded planner sources at Nov5 2026/en-US, ru/en UI; native hour axis/date/meeting/current-time line, five dimension pairs including both scrollbars and full493px height, ReadOnly/Enabled, ignored Font/BackColor/BorderColor and no-title case. Other dates/regions/styles/properties/dimensions/combinations and full forms remain open.",
+    "nativeImages": 24,
+    "pixelTolerance": 0,
+    "comparisonMasks": [],
+    "bslExecuted": false,
+    "referenceLocalDate": "2026-11-05",
+    "nativeTimeZone": "Europe/Moscow",
+    "culture": "en-US",
+    "rows": [
+      {
+        "name": "A_Default",
+        "file": "A_Default.xml",
+        "sourceSha256": "26ec7d61e2bdd34f1a4ff08342a7b33b479e8b04128b11988f68fbe79dab3976",
+        "nativeExport": "canonical/A_Default.xml",
+        "nativeExportSha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3",
+        "calibrationCandidate": true,
+        "nativeProperties": "",
+        "renderProperties": {},
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": null,
+        "nativeSize": [
+          500,
+          243
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-A_Default.png",
+            "screenshotSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:35:22.385",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "A_Default",
+              "openedAtUtc": "2026-11-05T03:35:22.385155+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:23.369871+00:00",
+              "beforeScreenshot": "en-fresh-A_Default.png",
+              "beforeSha256": "344143ba58bb9eb45a0e9390735b5f82a94b7c1d59ff83661c369eba329e20a9",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-control-A_Default.png",
+              "surfacePngSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-A_Default.png",
+            "screenshotSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:42:06.886",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "A_Default",
+              "openedAtUtc": "2026-11-05T03:42:06.886247+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:07.856287+00:00",
+              "beforeScreenshot": "ru-fresh-A_Default.png",
+              "beforeSha256": "dacc56b48092ee94b628620d815230654e90d4f14026a498eb3747671e6ed7c6",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-A_Default.png",
+              "surfacePngSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298"
+            }
+          }
+        }
+      },
+      {
+        "name": "B_Size",
+        "file": "B_Size.xml",
+        "sourceSha256": "7652d27d4dac9f4d25ed3bd97fe3e877d7807fc9fd0ec5e79204ed0597c5f334",
+        "nativeExport": "canonical/B_Size.xml",
+        "nativeExportSha256": "ee3797b1a5025ddbe46b8fd987a2295183aec9a09ae38d5426cc5b2069e8c5ec",
+        "calibrationCandidate": true,
+        "nativeProperties": "<Width>20</Width><Height>5</Height>",
+        "renderProperties": {
+          "Width": "20",
+          "Height": "5"
+        },
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": null,
+        "nativeSize": [
+          200,
+          118
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-B_Size.png",
+            "screenshotSha256": "9554bf5044ee5651f6454d7732786aea0e7d37d344038232ebdcdc03d2a55d0f",
+            "nativeRegion": [
+              0,
+              0,
+              200,
+              118
+            ],
+            "rgbSha256": "868e7d9bf3c0b88b1d2ad9f574ea061c848846bf1e6b8476d1f551b8896ed0da",
+            "pixels": 23600,
+            "referenceLocalTime": "2026-11-05T06:35:25.411",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "B_Size",
+              "openedAtUtc": "2026-11-05T03:35:25.411566+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:26.357568+00:00",
+              "beforeScreenshot": "en-fresh-B_Size.png",
+              "beforeSha256": "d01407e23b7918e5b7459f770d1192c6e93ef74ec611c567fba4bc321b5f1a0b",
+              "beforeRegion": [
+                274,
+                568,
+                200,
+                118
+              ],
+              "height": 118,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-control-B_Size.png",
+              "surfacePngSha256": "9554bf5044ee5651f6454d7732786aea0e7d37d344038232ebdcdc03d2a55d0f",
+              "nativeSize": [
+                200,
+                118
+              ],
+              "rgbSha256": "868e7d9bf3c0b88b1d2ad9f574ea061c848846bf1e6b8476d1f551b8896ed0da"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-B_Size.png",
+            "screenshotSha256": "44b9a488da1791a07ed5a5bdc842183a41ea7641f7858c249fc557df1c6633a3",
+            "nativeRegion": [
+              0,
+              0,
+              200,
+              118
+            ],
+            "rgbSha256": "93d2e80f04536f30323979b7425cc1ccbf931ff7e0b52f702eb1de0ef1141baa",
+            "pixels": 23600,
+            "referenceLocalTime": "2026-11-05T06:42:09.868",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "B_Size",
+              "openedAtUtc": "2026-11-05T03:42:09.868890+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:10.829685+00:00",
+              "beforeScreenshot": "ru-fresh-B_Size.png",
+              "beforeSha256": "a476dec42211349d5a801e782c85b47c8491c050ab39572eb54645f1a4e60372",
+              "beforeRegion": [
+                274,
+                568,
+                200,
+                118
+              ],
+              "height": 118,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-B_Size.png",
+              "surfacePngSha256": "44b9a488da1791a07ed5a5bdc842183a41ea7641f7858c249fc557df1c6633a3",
+              "nativeSize": [
+                200,
+                118
+              ],
+              "rgbSha256": "93d2e80f04536f30323979b7425cc1ccbf931ff7e0b52f702eb1de0ef1141baa"
+            }
+          }
+        }
+      },
+      {
+        "name": "C_ReadOnly",
+        "file": "C_ReadOnly.xml",
+        "sourceSha256": "707bb3b393fa84011cf8daa5e7defae353baaa6d973217f530099304305dd0fd",
+        "nativeExport": "canonical/C_ReadOnly.xml",
+        "nativeExportSha256": "5fa6b942c9899d165b0193619e12094801e6633511b5a94963090351b2186e57",
+        "calibrationCandidate": true,
+        "nativeProperties": "<ReadOnly>true</ReadOnly>",
+        "renderProperties": {
+          "ReadOnly": "true"
+        },
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": null,
+        "nativeSize": [
+          500,
+          243
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-C_ReadOnly.png",
+            "screenshotSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:35:28.325",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "C_ReadOnly",
+              "openedAtUtc": "2026-11-05T03:35:28.325952+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:29.293149+00:00",
+              "beforeScreenshot": "en-fresh-C_ReadOnly.png",
+              "beforeSha256": "317c37cd4f2b7e5dc25c46b5c158f6c5b01a3373956577434e1c7dfd163e9d46",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-control-C_ReadOnly.png",
+              "surfacePngSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-C_ReadOnly.png",
+            "screenshotSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:42:12.787",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "C_ReadOnly",
+              "openedAtUtc": "2026-11-05T03:42:12.787759+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:13.750011+00:00",
+              "beforeScreenshot": "ru-fresh-C_ReadOnly.png",
+              "beforeSha256": "a54cbc484bb4bafe04ff7fe8cc746ddca0c92d46622ae3c071d90fd784d07ce9",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-C_ReadOnly.png",
+              "surfacePngSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298"
+            }
+          }
+        }
+      },
+      {
+        "name": "D_Disabled",
+        "file": "D_Disabled.xml",
+        "sourceSha256": "8ea19f2232eff69190b9724425f0b860085e6086799a857bf65e759b75d7e763",
+        "nativeExport": "canonical/D_Disabled.xml",
+        "nativeExportSha256": "0caaf9ff897e9d8d755dd18f963c0b9e7b52bd8767c343ba843b86c926b7ca8b",
+        "calibrationCandidate": true,
+        "nativeProperties": "<Enabled>false</Enabled>",
+        "renderProperties": {
+          "Enabled": "false"
+        },
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": null,
+        "nativeSize": [
+          500,
+          243
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-D_Disabled.png",
+            "screenshotSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:35:31.312",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "D_Disabled",
+              "openedAtUtc": "2026-11-05T03:35:31.312806+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:32.278167+00:00",
+              "beforeScreenshot": "en-fresh-D_Disabled.png",
+              "beforeSha256": "7c4f634192162af0e4d5632c7bd5ed1116f7a08e649658546709d755de639f9e",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-control-D_Disabled.png",
+              "surfacePngSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-D_Disabled.png",
+            "screenshotSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:42:15.763",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "D_Disabled",
+              "openedAtUtc": "2026-11-05T03:42:15.763730+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:16.742763+00:00",
+              "beforeScreenshot": "ru-fresh-D_Disabled.png",
+              "beforeSha256": "ab8530f93bdf1e32c00014dc916363619629ddac489ad650ff853fb032d93739",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-D_Disabled.png",
+              "surfacePngSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298"
+            }
+          }
+        }
+      },
+      {
+        "name": "E_Border",
+        "file": "E_Border.xml",
+        "sourceSha256": "6087d85dbf401b1aff19c42fd695f59dfb479c4568faa1d4775a2f9071111d51",
+        "nativeExport": "canonical/E_Border.xml",
+        "nativeExportSha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3",
+        "calibrationCandidate": true,
+        "nativeProperties": "<BorderColor>web:Blue</BorderColor>",
+        "renderProperties": {},
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": null,
+        "nativeSize": [
+          500,
+          243
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [
+          "BorderColor"
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-E_Border.png",
+            "screenshotSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:35:34.269",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "E_Border",
+              "openedAtUtc": "2026-11-05T03:35:34.269583+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:35.241451+00:00",
+              "beforeScreenshot": "en-fresh-E_Border.png",
+              "beforeSha256": "543635e2b11ff9e5fd5b0a35be27faf177808bce9cdec3db7a3dbfbd867f22d4",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-control-E_Border.png",
+              "surfacePngSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-E_Border.png",
+            "screenshotSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:42:18.769",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "E_Border",
+              "openedAtUtc": "2026-11-05T03:42:18.769072+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:19.736907+00:00",
+              "beforeScreenshot": "ru-fresh-E_Border.png",
+              "beforeSha256": "844507433ffb598d20241a8aca9af40c65004161da0a5d6133a58b8726748cf8",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-E_Border.png",
+              "surfacePngSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298"
+            }
+          }
+        }
+      },
+      {
+        "name": "F_Background",
+        "file": "F_Background.xml",
+        "sourceSha256": "f939eb7e44d30d3e06f14483528fa95db0ae03f8b9b27a01a398c71c49de1700",
+        "nativeExport": "canonical/F_Background.xml",
+        "nativeExportSha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3",
+        "calibrationCandidate": true,
+        "nativeProperties": "<BackColor>web:Black</BackColor>",
+        "renderProperties": {},
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": null,
+        "nativeSize": [
+          500,
+          243
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [
+          "BackColor"
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-F_Background.png",
+            "screenshotSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:35:37.260",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "F_Background",
+              "openedAtUtc": "2026-11-05T03:35:37.260262+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:38.237664+00:00",
+              "beforeScreenshot": "en-fresh-F_Background.png",
+              "beforeSha256": "b9f8add9b76a9d6bbf198818a17eb085e2cef42a562e4ac932e6e1f53a95af1c",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-control-F_Background.png",
+              "surfacePngSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-F_Background.png",
+            "screenshotSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:42:21.768",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "F_Background",
+              "openedAtUtc": "2026-11-05T03:42:21.768400+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:22.736951+00:00",
+              "beforeScreenshot": "ru-fresh-F_Background.png",
+              "beforeSha256": "897dbbc6fa3664b78aaa744d9496f8ceeea116a8274367c11aab1c80097dbb5d",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-F_Background.png",
+              "surfacePngSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298"
+            }
+          }
+        }
+      },
+      {
+        "name": "G_NoTitle",
+        "file": "G_NoTitle.xml",
+        "sourceSha256": "11cedfac1fbb50663d361cd577177616528c6b6ca2cd65b6dee109302caf8bbc",
+        "nativeExport": "canonical/G_NoTitle.xml",
+        "nativeExportSha256": "834b60e037eacbe2f11ea187c51e1065cd0776ee1876a7413fbf81bc8e7b0361",
+        "calibrationCandidate": true,
+        "nativeProperties": "<TitleLocation>None</TitleLocation>",
+        "renderProperties": {
+          "TitleLocation": "None"
+        },
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": null,
+        "nativeSize": [
+          500,
+          243
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-repeat-control-G_NoTitle.png",
+            "screenshotSha256": "726d87dea5d44c9c81cbb7b5aab9e8031544e684def6af31b17c1ebd6a75e7e8",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "77d58cb34f368f4389ea659f9e9d2fb5ea14e8c9297b8163b1929c14f4d2e8d9",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T07:19:19.531",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "G_NoTitle",
+              "openedAtUtc": "2026-11-05T04:19:19.531192+00:00",
+              "capturedAtUtc": "2026-11-05T04:19:20.554496+00:00",
+              "beforeScreenshot": "en-repeat-G_NoTitle.png",
+              "beforeSha256": "b67cfcf9bc1b96de28f92dd15049ab2cf220bc4e2597b3f00f3a391d0117c9ea",
+              "beforeRegion": [
+                332,
+                496,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-repeat-control-G_NoTitle.png",
+              "surfacePngSha256": "726d87dea5d44c9c81cbb7b5aab9e8031544e684def6af31b17c1ebd6a75e7e8",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "77d58cb34f368f4389ea659f9e9d2fb5ea14e8c9297b8163b1929c14f4d2e8d9"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-G_NoTitle.png",
+            "screenshotSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:42:24.766",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "G_NoTitle",
+              "openedAtUtc": "2026-11-05T03:42:24.766574+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:25.730558+00:00",
+              "beforeScreenshot": "ru-fresh-G_NoTitle.png",
+              "beforeSha256": "828a844770ca7b7349c7c928b6fab5c9b683aa3d85828a07db0538c805956a3d",
+              "beforeRegion": [
+                274,
+                549,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-G_NoTitle.png",
+              "surfacePngSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298"
+            }
+          }
+        }
+      },
+      {
+        "name": "H_Large",
+        "file": "H_Large.xml",
+        "sourceSha256": "61a12607c9adfbd4077428511d9d4568c2ceeba8a34c0a504936500ae3a532f3",
+        "nativeExport": "canonical/H_Large.xml",
+        "nativeExportSha256": "6e4ec40beadc36aaffd3ebd22ab580322d6d52b9a18a3666abcb644373be9b05",
+        "calibrationCandidate": true,
+        "nativeProperties": "<Width>35</Width><Height>9</Height>",
+        "renderProperties": {
+          "Width": "35",
+          "Height": "9"
+        },
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": null,
+        "nativeSize": [
+          350,
+          218
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-H_Large.png",
+            "screenshotSha256": "2b2166cdee9c192754cdc0bc4a804e785bd8293a5ff0eb98dde7ac27bc6c9c92",
+            "nativeRegion": [
+              0,
+              0,
+              350,
+              218
+            ],
+            "rgbSha256": "015c8c6dd4de0da4374bbe955d388599601b846ac252ec0ef40aa215076eacac",
+            "pixels": 76300,
+            "referenceLocalTime": "2026-11-05T06:35:43.305",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "H_Large",
+              "openedAtUtc": "2026-11-05T03:35:43.305420+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:44.254562+00:00",
+              "beforeScreenshot": "en-fresh-H_Large.png",
+              "beforeSha256": "e9e2a82cafb400c47ebc0dbaefef381886f6305480fc41cdcd813d19ce6f15d6",
+              "beforeRegion": [
+                274,
+                568,
+                350,
+                218
+              ],
+              "height": 218,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-control-H_Large.png",
+              "surfacePngSha256": "2b2166cdee9c192754cdc0bc4a804e785bd8293a5ff0eb98dde7ac27bc6c9c92",
+              "nativeSize": [
+                350,
+                218
+              ],
+              "rgbSha256": "015c8c6dd4de0da4374bbe955d388599601b846ac252ec0ef40aa215076eacac"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-H_Large.png",
+            "screenshotSha256": "82dce30d5c79870a1037041b39ac5da1061594111e222a093c7a8e33c36e5710",
+            "nativeRegion": [
+              0,
+              0,
+              350,
+              218
+            ],
+            "rgbSha256": "c761aad9592ce4e3324fed0fdbc96746b0a4de4dd843121ecc008e5f7016c093",
+            "pixels": 76300,
+            "referenceLocalTime": "2026-11-05T06:42:27.741",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "H_Large",
+              "openedAtUtc": "2026-11-05T03:42:27.741970+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:28.702554+00:00",
+              "beforeScreenshot": "ru-fresh-H_Large.png",
+              "beforeSha256": "3b7044886dd36f2f7103845d0b1e0f6f973a4a686ea4151bebfd07b5ba7b1a55",
+              "beforeRegion": [
+                274,
+                568,
+                350,
+                218
+              ],
+              "height": 218,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-H_Large.png",
+              "surfacePngSha256": "82dce30d5c79870a1037041b39ac5da1061594111e222a093c7a8e33c36e5710",
+              "nativeSize": [
+                350,
+                218
+              ],
+              "rgbSha256": "c761aad9592ce4e3324fed0fdbc96746b0a4de4dd843121ecc008e5f7016c093"
+            }
+          }
+        }
+      },
+      {
+        "name": "I_Small",
+        "file": "I_Small.xml",
+        "sourceSha256": "ccb55a722578b0761b5eb7cc4cb7300e9a5a0a5b267856b35a5218a11c9485da",
+        "nativeExport": "canonical/I_Small.xml",
+        "nativeExportSha256": "752e6b5efbfaaa7bb8e412c3a09dc63f25a6037e9d68c03dfb8748b23cb0c9e7",
+        "calibrationCandidate": true,
+        "nativeProperties": "<Width>15</Width><Height>3</Height>",
+        "renderProperties": {
+          "Width": "15",
+          "Height": "3"
+        },
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": null,
+        "nativeSize": [
+          150,
+          68
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-I_Small.png",
+            "screenshotSha256": "7252627a3e78a902ad1f9d5fe58b6bbf28f02ddc9c6d9fb68e0d477df2c62f78",
+            "nativeRegion": [
+              0,
+              0,
+              150,
+              68
+            ],
+            "rgbSha256": "2534a6bcf30e4e2cc295dac8103247197a18a2b4066ad033b826bf73db5444e2",
+            "pixels": 10200,
+            "referenceLocalTime": "2026-11-05T06:35:46.258",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "I_Small",
+              "openedAtUtc": "2026-11-05T03:35:46.258295+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:47.211216+00:00",
+              "beforeScreenshot": "en-fresh-I_Small.png",
+              "beforeSha256": "ead1cdf6292bcdf321ccbd5bbd174d195e54aa224f1eb8893cc0384386d9e129",
+              "beforeRegion": [
+                274,
+                568,
+                150,
+                68
+              ],
+              "height": 68,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-control-I_Small.png",
+              "surfacePngSha256": "7252627a3e78a902ad1f9d5fe58b6bbf28f02ddc9c6d9fb68e0d477df2c62f78",
+              "nativeSize": [
+                150,
+                68
+              ],
+              "rgbSha256": "2534a6bcf30e4e2cc295dac8103247197a18a2b4066ad033b826bf73db5444e2"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-I_Small.png",
+            "screenshotSha256": "1ee82cd5c3c1f01bfaf5183b087065ef6e310263fe66f95936b3e2bbf97ba6af",
+            "nativeRegion": [
+              0,
+              0,
+              150,
+              68
+            ],
+            "rgbSha256": "0c8b2e42f3d0d7556f251519c9d6e2553bd0bad04bceab044367d9c23383776e",
+            "pixels": 10200,
+            "referenceLocalTime": "2026-11-05T06:42:30.696",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "I_Small",
+              "openedAtUtc": "2026-11-05T03:42:30.696902+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:31.657745+00:00",
+              "beforeScreenshot": "ru-fresh-I_Small.png",
+              "beforeSha256": "00c93444d336782506a8fdba226f087ddbe9e177d2413ddd572552dc84c754f4",
+              "beforeRegion": [
+                274,
+                568,
+                150,
+                68
+              ],
+              "height": 68,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-I_Small.png",
+              "surfacePngSha256": "1ee82cd5c3c1f01bfaf5183b087065ef6e310263fe66f95936b3e2bbf97ba6af",
+              "nativeSize": [
+                150,
+                68
+              ],
+              "rgbSha256": "0c8b2e42f3d0d7556f251519c9d6e2553bd0bad04bceab044367d9c23383776e"
+            }
+          }
+        }
+      },
+      {
+        "name": "J_Larger",
+        "file": "J_Larger.xml",
+        "sourceSha256": "0c770f57e1e89d82c3ccde987a35e72b293fc9ab4e05b8151b8db5f2d14a965f",
+        "nativeExport": "canonical/J_Larger.xml",
+        "nativeExportSha256": "fe46953dc142a9a4e3ac3fb3268f9d3b92fae44bea600eb3ff4f7e0e172c3065",
+        "calibrationCandidate": true,
+        "nativeProperties": "<Width>60</Width><Height>20</Height>",
+        "renderProperties": {
+          "Width": "60",
+          "Height": "20"
+        },
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": null,
+        "nativeSize": [
+          600,
+          493
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-J_Larger.png",
+            "screenshotSha256": "0b61cb8d657f7efc85d96a9ede82696bf438918bfef3e457e16a39999913862c",
+            "nativeRegion": [
+              0,
+              0,
+              600,
+              493
+            ],
+            "rgbSha256": "432476b5e5c06a7c5d386c56c4651b4fcf02cb7618138a3f4730a9fe1f1c4eb0",
+            "pixels": 295800,
+            "referenceLocalTime": "2026-11-05T06:35:49.161",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "J_Larger",
+              "openedAtUtc": "2026-11-05T03:35:49.161662+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:50.123337+00:00",
+              "beforeScreenshot": "en-fresh-J_Larger.png",
+              "beforeSha256": "614711e5775c63269762688a884a3eba62f77d8a827d01e22f842fadfd3bbda5",
+              "beforeRegion": [
+                274,
+                563,
+                600,
+                390
+              ],
+              "height": 493,
+              "captureMethod": "stitched_native_viewports",
+              "afterScreenshot": "en-fresh-J_Larger-scrolled.png",
+              "afterSha256": "f898ea60d45f9826e947e3cec6fc1fd8aa9547036bf8cd63a7917c3fad4d5355",
+              "afterWidgetTop": 443,
+              "viewportTop": 506,
+              "viewportBottom": 953,
+              "overlapRows": [
+                63,
+                390
+              ],
+              "overlapPixels": 196200,
+              "overlapDifferentPixels": 0,
+              "nativeSurface": "en-control-J_Larger.png",
+              "surfacePngSha256": "0b61cb8d657f7efc85d96a9ede82696bf438918bfef3e457e16a39999913862c",
+              "nativeSize": [
+                600,
+                493
+              ],
+              "rgbSha256": "432476b5e5c06a7c5d386c56c4651b4fcf02cb7618138a3f4730a9fe1f1c4eb0"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-J_Larger.png",
+            "screenshotSha256": "3ed0f7da653a786a50deeecc08a12e1c855e0ebdf1d8c3027e65248109c2c7b3",
+            "nativeRegion": [
+              0,
+              0,
+              600,
+              493
+            ],
+            "rgbSha256": "959b6ea67f0a1b4e36e28782cf5f7a89cd8b5330e65372e8f652cc144ba50258",
+            "pixels": 295800,
+            "referenceLocalTime": "2026-11-05T06:42:33.623",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "J_Larger",
+              "openedAtUtc": "2026-11-05T03:42:33.623355+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:34.584648+00:00",
+              "beforeScreenshot": "ru-fresh-J_Larger.png",
+              "beforeSha256": "d8914c28658ddc40cffe26565dcbf3fbe1059405128a55ffb26e3e4541ad8f95",
+              "beforeRegion": [
+                274,
+                563,
+                600,
+                390
+              ],
+              "height": 493,
+              "captureMethod": "stitched_native_viewports",
+              "afterScreenshot": "ru-fresh-J_Larger-scrolled.png",
+              "afterSha256": "06192ac758210297556e311dfa03d797ae2d9e9c2e39f1be78475ba0e1ee4cf4",
+              "afterWidgetTop": 443,
+              "viewportTop": 506,
+              "viewportBottom": 953,
+              "overlapRows": [
+                63,
+                390
+              ],
+              "overlapPixels": 196200,
+              "overlapDifferentPixels": 0,
+              "nativeSurface": "ru-control-J_Larger.png",
+              "surfacePngSha256": "3ed0f7da653a786a50deeecc08a12e1c855e0ebdf1d8c3027e65248109c2c7b3",
+              "nativeSize": [
+                600,
+                493
+              ],
+              "rgbSha256": "959b6ea67f0a1b4e36e28782cf5f7a89cd8b5330e65372e8f652cc144ba50258"
+            }
+          }
+        }
+      },
+      {
+        "name": "K_Font12",
+        "file": "K_Font12.xml",
+        "sourceSha256": "cb7710fe58792fd97486919136a67c1a557de16b7aa24ddff6de7660b7848641",
+        "nativeExport": "canonical/K_Font12.xml",
+        "nativeExportSha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3",
+        "calibrationCandidate": true,
+        "nativeProperties": "<Font ref=\"style:NormalTextFont\" height=\"12\"/>",
+        "renderProperties": {},
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": {
+          "ref": "style:NormalTextFont",
+          "height": "12"
+        },
+        "nativeSize": [
+          500,
+          243
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [
+          "Font"
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-K_Font12.png",
+            "screenshotSha256": "d14a54caa62993b236b92532880769e219af36a91df37328e93be4ab2adb4af8",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:35:53.524",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "K_Font12",
+              "openedAtUtc": "2026-11-05T03:35:53.524180+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:54.501967+00:00",
+              "beforeScreenshot": "en-fresh-K_Font12.png",
+              "beforeSha256": "84caca58718e22e8707f6ec13da6a52694095cd19124d4021ab3783011c820f4",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-control-K_Font12.png",
+              "surfacePngSha256": "d14a54caa62993b236b92532880769e219af36a91df37328e93be4ab2adb4af8",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-K_Font12.png",
+            "screenshotSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:42:37.983",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "K_Font12",
+              "openedAtUtc": "2026-11-05T03:42:37.983857+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:38.947731+00:00",
+              "beforeScreenshot": "ru-fresh-K_Font12.png",
+              "beforeSha256": "ebe4f79c7cc66fa74d73b45853140e3943af2b31eec04db67c35c5f25c71a80e",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-K_Font12.png",
+              "surfacePngSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298"
+            }
+          }
+        }
+      },
+      {
+        "name": "L_Font16Bold",
+        "file": "L_Font16Bold.xml",
+        "sourceSha256": "8d529a22684f09ddc352789f547d6ac1889c4680949dc982657a882b146249e8",
+        "nativeExport": "canonical/L_Font16Bold.xml",
+        "nativeExportSha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3",
+        "calibrationCandidate": true,
+        "nativeProperties": "<Font ref=\"style:NormalTextFont\" height=\"16\" bold=\"true\"/>",
+        "renderProperties": {},
+        "font": {
+          "points": 10,
+          "weight": 400
+        },
+        "requestedFont": {
+          "ref": "style:NormalTextFont",
+          "height": "16",
+          "bold": "true"
+        },
+        "nativeSize": [
+          500,
+          243
+        ],
+        "outerBorder": [
+          160,
+          160,
+          160
+        ],
+        "droppedProperties": [
+          "Font"
+        ],
+        "locales": {
+          "en": {
+            "nativeScreenshot": "native-planner-bacdk3c5/en-control-L_Font16Bold.png",
+            "screenshotSha256": "d14a54caa62993b236b92532880769e219af36a91df37328e93be4ab2adb4af8",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:35:56.541",
+            "sampleMeeting": "Meeting",
+            "provenance": {
+              "name": "L_Font16Bold",
+              "openedAtUtc": "2026-11-05T03:35:56.541167+00:00",
+              "capturedAtUtc": "2026-11-05T03:35:57.506719+00:00",
+              "beforeScreenshot": "en-fresh-L_Font16Bold.png",
+              "beforeSha256": "d4675cb3ac34c26686e7eea6e6d289a79100309da764deee4682413c8b8dcad0",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "en-control-L_Font16Bold.png",
+              "surfacePngSha256": "d14a54caa62993b236b92532880769e219af36a91df37328e93be4ab2adb4af8",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104"
+            }
+          },
+          "ru": {
+            "nativeScreenshot": "native-planner-bacdk3c5/ru-control-L_Font16Bold.png",
+            "screenshotSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+            "nativeRegion": [
+              0,
+              0,
+              500,
+              243
+            ],
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "pixels": 121500,
+            "referenceLocalTime": "2026-11-05T06:42:40.982",
+            "sampleMeeting": "Встреча",
+            "provenance": {
+              "name": "L_Font16Bold",
+              "openedAtUtc": "2026-11-05T03:42:40.982525+00:00",
+              "capturedAtUtc": "2026-11-05T03:42:41.945275+00:00",
+              "beforeScreenshot": "ru-fresh-L_Font16Bold.png",
+              "beforeSha256": "964526ff41e2128060831c96cd13653a63d23044374fa921c0ca1bfa6daa7b25",
+              "beforeRegion": [
+                274,
+                568,
+                500,
+                243
+              ],
+              "height": 243,
+              "captureMethod": "single_native_viewport",
+              "nativeSurface": "ru-control-L_Font16Bold.png",
+              "surfacePngSha256": "07c8d54e9e1fc33fb1511f02400d99353e4e150a8e79d5be580e225ff011b4b3",
+              "nativeSize": [
+                500,
+                243
+              ],
+              "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298"
+            }
+          }
+        }
+      }
+    ],
+    "surface": {
+      "paintSha256": "e43d71d8ba2099ef4e31629011d06e7f4504c82e2d6bebbf0af59a77e19faddb",
+      "paintScalarValues": 255,
+      "nativePixels": 2755800,
+      "glyphs": "Shared regular13px FreeType LCD; hinted single advances without kerning. Premultiplied glyph terms are rounded separately, then the native demonstration layer is blended halfway onto white.",
+      "scope": "Other dates/regions, dimension/property combinations and exact native clock sampling cadence remain open. No pixels are masked. The original EN no-title capture lies at a clock quantization boundary and remains preserved as an unaccepted investigation."
+    },
+    "files": [
+      {
+        "path": "A_Default.xml",
+        "sha256": "26ec7d61e2bdd34f1a4ff08342a7b33b479e8b04128b11988f68fbe79dab3976"
+      },
+      {
+        "path": "B_Size.xml",
+        "sha256": "7652d27d4dac9f4d25ed3bd97fe3e877d7807fc9fd0ec5e79204ed0597c5f334"
+      },
+      {
+        "path": "C_ReadOnly.xml",
+        "sha256": "707bb3b393fa84011cf8daa5e7defae353baaa6d973217f530099304305dd0fd"
+      },
+      {
+        "path": "D_Disabled.xml",
+        "sha256": "8ea19f2232eff69190b9724425f0b860085e6086799a857bf65e759b75d7e763"
+      },
+      {
+        "path": "E_Border.xml",
+        "sha256": "6087d85dbf401b1aff19c42fd695f59dfb479c4568faa1d4775a2f9071111d51"
+      },
+      {
+        "path": "F_Background.xml",
+        "sha256": "f939eb7e44d30d3e06f14483528fa95db0ae03f8b9b27a01a398c71c49de1700"
+      },
+      {
+        "path": "G_NoTitle.xml",
+        "sha256": "11cedfac1fbb50663d361cd577177616528c6b6ca2cd65b6dee109302caf8bbc"
+      },
+      {
+        "path": "H_Large.xml",
+        "sha256": "61a12607c9adfbd4077428511d9d4568c2ceeba8a34c0a504936500ae3a532f3"
+      },
+      {
+        "path": "I_Small.xml",
+        "sha256": "ccb55a722578b0761b5eb7cc4cb7300e9a5a0a5b267856b35a5218a11c9485da"
+      },
+      {
+        "path": "J_Larger.xml",
+        "sha256": "0c770f57e1e89d82c3ccde987a35e72b293fc9ab4e05b8151b8db5f2d14a965f"
+      },
+      {
+        "path": "K_Font12.xml",
+        "sha256": "cb7710fe58792fd97486919136a67c1a557de16b7aa24ddff6de7660b7848641"
+      },
+      {
+        "path": "L_Font16Bold.xml",
+        "sha256": "8d529a22684f09ddc352789f547d6ac1889c4680949dc982657a882b146249e8"
+      },
+      {
+        "path": "canonical/A_Default.xml",
+        "sha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3"
+      },
+      {
+        "path": "canonical/B_Size.xml",
+        "sha256": "ee3797b1a5025ddbe46b8fd987a2295183aec9a09ae38d5426cc5b2069e8c5ec"
+      },
+      {
+        "path": "canonical/C_ReadOnly.xml",
+        "sha256": "5fa6b942c9899d165b0193619e12094801e6633511b5a94963090351b2186e57"
+      },
+      {
+        "path": "canonical/D_Disabled.xml",
+        "sha256": "0caaf9ff897e9d8d755dd18f963c0b9e7b52bd8767c343ba843b86c926b7ca8b"
+      },
+      {
+        "path": "canonical/E_Border.xml",
+        "sha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3"
+      },
+      {
+        "path": "canonical/F_Background.xml",
+        "sha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3"
+      },
+      {
+        "path": "canonical/G_NoTitle.xml",
+        "sha256": "834b60e037eacbe2f11ea187c51e1065cd0776ee1876a7413fbf81bc8e7b0361"
+      },
+      {
+        "path": "canonical/H_Large.xml",
+        "sha256": "6e4ec40beadc36aaffd3ebd22ab580322d6d52b9a18a3666abcb644373be9b05"
+      },
+      {
+        "path": "canonical/I_Small.xml",
+        "sha256": "752e6b5efbfaaa7bb8e412c3a09dc63f25a6037e9d68c03dfb8748b23cb0c9e7"
+      },
+      {
+        "path": "canonical/J_Larger.xml",
+        "sha256": "fe46953dc142a9a4e3ac3fb3268f9d3b92fae44bea600eb3ff4f7e0e172c3065"
+      },
+      {
+        "path": "canonical/K_Font12.xml",
+        "sha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3"
+      },
+      {
+        "path": "canonical/L_Font16Bold.xml",
+        "sha256": "d5a85070f5cc081080159b960e4294b43c6af266498f863eabc51137804c04b3"
+      },
+      {
+        "path": "source/CommonForms/P_A_Default.xml",
+        "sha256": "220d1a1486403bf9626ada15b11da08ff8aeb69e216864280f87687d1b67f196"
+      },
+      {
+        "path": "source/CommonForms/P_B_Size.xml",
+        "sha256": "d8ea0340673bfada7f70499db73969c9b40a3d4140c68ca7513ed267433071c8"
+      },
+      {
+        "path": "source/CommonForms/P_C_ReadOnly.xml",
+        "sha256": "35edbd06f5effabf15c06bfa0c4077d8b348186e0b121ce1dca6d9c0c39b4722"
+      },
+      {
+        "path": "source/CommonForms/P_D_Disabled.xml",
+        "sha256": "1f8806c6b786721f30f9897efa69547c4f7413e8976d799c53b40cff1fcf5aee"
+      },
+      {
+        "path": "source/CommonForms/P_E_Border.xml",
+        "sha256": "bde9772763b35546c7d9ea6ac5b4c5adf76c94d51fb7919018b341c3ed4919e0"
+      },
+      {
+        "path": "source/CommonForms/P_F_Background.xml",
+        "sha256": "9eb5b3a84b8126f8cac5ed186bdcf6ecb72016f6e1925d41c459e7abc80b5813"
+      },
+      {
+        "path": "source/CommonForms/P_G_NoTitle.xml",
+        "sha256": "fe833769440b16cf0a83b1edc4adee27d5423e5753c1d2ff1b3001d1e94ee11e"
+      },
+      {
+        "path": "source/CommonForms/P_H_Large.xml",
+        "sha256": "ee14d8120fca0694b61e0701f874a871669d4f3b063900f7f331566f0e164e9a"
+      },
+      {
+        "path": "source/CommonForms/P_I_Small.xml",
+        "sha256": "3c7ea316570a542269d5806845fde1cd1b5ed0a8a9ad6a1436a6481a86196c45"
+      },
+      {
+        "path": "source/CommonForms/P_J_Larger.xml",
+        "sha256": "a35377f8502fac360031b7bb8ad87d76b0885adaf75255416b03bc9cc165f644"
+      },
+      {
+        "path": "source/CommonForms/P_K_Font12.xml",
+        "sha256": "bff8ceaba9d846485875d35029771218bfd4202733113e59574f3c4d6454af0d"
+      },
+      {
+        "path": "source/CommonForms/P_L_Font16Bold.xml",
+        "sha256": "e2e91a2e7b2908304a998a6b36204f9687e724f84e044e5109e837a0acd34012"
+      },
+      {
+        "path": "source/ConfigDumpInfo.xml",
+        "sha256": "e96ac9da73d119629fdbe2d4b7dbc8dbdf02ac45d232a6bd2b37f5e58ddfbcd1"
+      },
+      {
+        "path": "source/Configuration.xml",
+        "sha256": "6651ccbc3a656db7f4fd10b5ffc025ae288005109f04f7d88e06068b3e79b962"
+      },
+      {
+        "path": "source/Languages/Русский.xml",
+        "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048"
+      }
+    ],
+    "viewerRecordedSurfacePixelParity": true
+  },
+  "nativeMetricsSha256": "2abdcc50f07cae70be898039b985849f847a03f82da5fa905a28a16f275bf968",
+  "frozenNativeMetricsSha256": "de059a1626f54573c4a721e220b759833b595ba03950d972dda91287526c76cc",
+  "nativeMetricsChangedAfterFreeze": "Explanatory scope/acceptance metadata only; all XML, rows, dimensions and RGB hashes are unchanged.",
+  "wholeFormVisualParity": false,
+  "fullProfileAccepted": false,
+  "noBslExecuted": true,
+  "implementation": {
+    "dimensions": "Native default500x243. Explicit sizes at (Width,Height)20:5,35:9,15:3,60:20 are200x118,350x218,150x68,600x493. Width/height conversion10W and25H-7 is used only at these recorded pairs for pixel acceptance; other pairs fall back with the existing notice.",
+    "layout": "Header baseline14; hour axis width40 and plot starts42. The virtual minimum plot width110 introduces a horizontal scrollbar at150px. Plot minimum full-day extent384px differs from the time-axis383px, so late hour labels/grid lines can differ by one row. Time labels use a reduced clip for the last partial cell. The native meeting occupies01:00–04:00 and95% of the plot width with white surrounding gaps.",
+    "paint": "The demonstration layer uses inner grid227, text162 and event159/198/231, shared LCD glyphs with separately rounded premultiplied terms, then half blending onto white. Border stays160 for ReadOnly/Disabled and ignored BorderColor. The current-time line is red and included in the full comparison.",
+    "text": "Shared regular13px Liberation Sans/FreeType face; unkerned hinted single advances, including11. Date uses regional en-US formatting, while the sample meeting caption uses UI localization. Recorded caption clip rectangles differ at the leading Cyrillic glyph. No glyph bitmap is stored.",
+    "fragments": "255 scalar color values record small thumb/track caps in both directions, four invariant axis-join RGB pixels and the scrollbar corner. Reopening the field at a different editor position reproduces the axis fragment; no whole-widget bitmap or comparison mask is used.",
+    "sourceSemantics": "Native export removes Font, BackColor and BorderColor from PlannerField. Explicit12pt/16pt-bold inputs keep the same internal13px regular paint. ReadOnly/Enabled do not alter the recorded planner surface. Requested and canonical XML are both retained. No BSL executes. Typed inspector/applicability and style inheritance remain open.",
+    "clock": "Production uses current local Date and a one-second repaint timer, also updating on model/resize/zoom. Test Date proxies exist only in owned isolated webviews, using each native opening timestamp in Europe/Moscow. The clock-tick case repaints without changing XML. Exact native clock sampling cadence is unaccepted after an initial boundary sample differed by one pixel row.",
+    "lifecycle": "The Solid outer control and selected identity survive dirty XML, dimensions and ignored font/color changes, floating updates and reattachment. One existing lazy regular face is reused; no dependency or WASM changes.",
+    "nativeCapture": "Resizing a native preview splitter can clear its planner demo; those blank captures are not accepted. Fresh close/reopen captures preserve the demonstration. The full600x493 field uses two visible native viewports with an exactly matching overlap and complete bottom border, not offscreen pixels.",
+    "testEnvironment": "Main and active floating isolated IDE windows use stock fullscreen so complete control/frame borders fit. Native and installed viewer captures compare all pixels, including fonts, scrollbar edges and clock line.",
+    "scopeGate": "Linux/DPR1/zoom100, en-US, recorded dimensions. Unsupported profiles keep browser fallback and the existing localized approximation notice. Other date/region/style/property combinations and full forms remain open.",
+    "dependenciesAdded": false,
+    "publicProtocolChanged": false
+  },
+  "checks": {
+    "node": {
+      "passed": 536,
+      "failed": 0,
+      "skipped": 11,
+      "total": 547,
+      "log": "native-planner-bacdk3c5/node-tests.log",
+      "logSha256": "9a0100d6dfcbf0e764465b0b8bcef1213466eb2b4bd2055a1e4c859bed7bd916"
+    },
+    "nativeDimensionUnit": {
+      "measuredSourceSizes": 12,
+      "distinctDimensionPairs": 5,
+      "internalFontProfiles": 1,
+      "ignoredFontInputs": 2
+    },
+    "nativeOperations": {
+      "create": 0,
+      "export": 0,
+      "apply": 0
+    },
+    "backend": {
+      "codeChangedInThisSlice": false,
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "completeChecksReuse": "docs/measurements/t158-native-button-types-linux.json",
+      "cargoPassed": 1520,
+      "cargoFailed": 0,
+      "cargoIgnored": 19,
+      "sourceHashesVerifiedAgainstBatch": true,
+      "verifiedCoreFiles": 607,
+      "rustSourcesAndCargoFilesUnchangedSince": "ad8020e"
+    },
+    "nativeCloseAudit": {
+      "path": "native-planner-bacdk3c5/repeat-close-audit.json",
+      "sha256": "8591e5105bf41bc24cf606f8457f18163de7e716be0ac6e1658c279d9d6e447d",
+      "data": {
+        "checkedAtUtc": "2026-11-05T04:22:27.216308+00:00",
+        "hostNamespace": true,
+        "ownedHostPid": 1388697,
+        "ownedContainerPid": "205426",
+        "ownedHostProcessGone": true,
+        "x11InventorySucceeded": true,
+        "ownedWindowGone": true,
+        "savePrompt": "No on owned PlannerProbe configuration"
+      },
+      "earlierAudits": [
+        {
+          "path": "native-planner-bacdk3c5/en-close-audit.json",
+          "sha256": "89567d8144242b7eabafc677a4f23ef62c8b8b908af502bdf4a2d20d8264a867"
+        },
+        {
+          "path": "native-planner-bacdk3c5/final-host-close-audit.json",
+          "sha256": "037ef2f196612c8ad4bcab870b8b01bf7b4efb08d05dfdb520d7e40b90a9970e"
+        }
+      ],
+      "note": "After repeat EN measurement the separate save dialog was captured, guarded by owned PID/IB, answered No, and closure was verified using escalated host /proc plus working X11 inventory."
+    },
+    "preAcceptanceFailures": [],
+    "nativePlannerSurfaceSourceProof": {
+      "completePixelsCompared": 2755800,
+      "differentRgbPixels": 0,
+      "sourceImages": 24,
+      "glyphsFromExistingFreeType": true,
+      "completeBottomBordersVerified": true,
+      "referenceLocalDate": "2026-11-05",
+      "culture": "en-US",
+      "nativeTimeZone": "Europe/Moscow",
+      "currentTimeLineIncluded": true
+    },
+    "preliminaryEnBatch": {
+      "batch": "form-batch-PmPbUs",
+      "passed": true,
+      "samples": 26,
+      "completePixelsCompared": 3159700
+    },
+    "nativeClockBoundaryInvestigation": {
+      "reference": {
+        "name": "G_NoTitle",
+        "openedAtUtc": "2026-11-05T03:35:40.287020+00:00",
+        "capturedAtUtc": "2026-11-05T03:35:41.266179+00:00",
+        "beforeScreenshot": "en-fresh-G_NoTitle.png",
+        "beforeSha256": "3e539791caa01d7f968fd4bbe7bade9767d3e28cdeceab3b4029ef1d4bff777f",
+        "beforeRegion": [
+          274,
+          549,
+          500,
+          243
+        ],
+        "height": 243,
+        "captureMethod": "single_native_viewport",
+        "nativeSurface": "en-control-G_NoTitle.png",
+        "surfacePngSha256": "3b3b02dee83965dca4b2c13d547b2a46cb0c92b14763360355a14bf7ce077771",
+        "nativeSize": [
+          500,
+          243
+        ],
+        "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b"
+      },
+      "accepted": false,
+      "observedLineY": 123,
+      "computedFromOpeningTimestampLineY": 124,
+      "note": "Original complete capture and timestamps are preserved, not masked or edited. The accepted no-title input was reopened and captured at another editor position and time (new provenance in nativeInputs). Exact native clock sampling/cache cadence remains open."
+    }
+  },
+  "acceptance": {
+    "passed": true,
+    "batchDirectory": "form-batch-uxpx5q",
+    "pairsPassed": 24,
+    "pairsFailed": 0,
+    "publishedCases": 512,
+    "allFinalPairsFirstAttempt": true,
+    "builds": 1,
+    "packages": 1,
+    "guiConcurrency": 1,
+    "seconds": 320.356889502,
+    "vsixSha256": "a3455e359a818d2fef01fbf5c4efb0d74185ee0e4adf6c971de9fc581a115506",
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "114ef135f5dc0a846bacf9eefdfc99df53688b6da6a8c6afe2b0edf08dd46154",
+    "batchSha256": "a917384d19f5c8c6ac1ba743a02511c3c4e6927a3ba288593b36df929e6a3f44",
+    "inputsSha256": "04585fdb8a8e8b6c5d4a6a7bfe434cca26a2524cf4b9d1ab3baf0e49dc4dd182",
+    "runs": [
+      {
+        "suite": "application",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 4.563679796000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-en/driver.log",
+        "receipt": "application-en/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 938.771294,
+          "runtimeVerificationMs": 348.774219,
+          "preHostMs": 1290.729791,
+          "cleanupMs": 29.342861000000084,
+          "totalMs": 4421.037058
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.077516780999998,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-ru/driver.log",
+        "receipt": "application-ru/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 827.5722800000001,
+          "runtimeVerificationMs": 312.0419360000001,
+          "preHostMs": 1156.382052,
+          "cleanupMs": 40.62293200000022,
+          "totalMs": 6949.0931820000005
+        }
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.651237026999999,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "renderer-en/driver.log",
+        "receipt": "renderer-en/receipt.json",
+        "caseIds": [
+          "renderer/InputField",
+          "renderer/CheckBoxField",
+          "renderer/CalendarField",
+          "renderer/ChartField",
+          "renderer/FormattedDocumentField",
+          "renderer/HTMLDocumentField",
+          "renderer/LabelField",
+          "renderer/ProgressBarField",
+          "renderer/TrackBarField",
+          "renderer/RadioButtonField",
+          "renderer/PictureField",
+          "renderer/SpreadSheetDocumentField",
+          "renderer/PlannerField",
+          "renderer/TextDocumentField",
+          "renderer/PDFDocumentField",
+          "renderer/DendrogramField",
+          "renderer/GanttChartField",
+          "renderer/GeographicalSchemaField",
+          "renderer/GraphicalSchemaField",
+          "renderer/PeriodField"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 806.206882,
+          "runtimeVerificationMs": 335.6258230000001,
+          "preHostMs": 1153.0626519999998,
+          "cleanupMs": 35.25158199999896,
+          "totalMs": 10496.811344
+        }
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 13.084003563000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "renderer-ru/driver.log",
+        "receipt": "renderer-ru/receipt.json",
+        "caseIds": [
+          "renderer/InputField",
+          "renderer/CheckBoxField",
+          "renderer/CalendarField",
+          "renderer/ChartField",
+          "renderer/FormattedDocumentField",
+          "renderer/HTMLDocumentField",
+          "renderer/LabelField",
+          "renderer/ProgressBarField",
+          "renderer/TrackBarField",
+          "renderer/RadioButtonField",
+          "renderer/PictureField",
+          "renderer/SpreadSheetDocumentField",
+          "renderer/PlannerField",
+          "renderer/TextDocumentField",
+          "renderer/PDFDocumentField",
+          "renderer/DendrogramField",
+          "renderer/GanttChartField",
+          "renderer/GeographicalSchemaField",
+          "renderer/GraphicalSchemaField",
+          "renderer/PeriodField"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 870.918367,
+          "runtimeVerificationMs": 332.0955899999999,
+          "preHostMs": 1225.589933,
+          "cleanupMs": 39.00531500000034,
+          "totalMs": 12932.950447000001
+        }
+      },
+      {
+        "suite": "text-document",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.779633785999998,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "text-document-en/driver.log",
+        "receipt": "text-document-en/receipt.json",
+        "caseIds": [
+          "text-document/A_Default",
+          "text-document/dirty-background",
+          "text-document/dirty-border",
+          "text-document/restored-default",
+          "text-document/floating-default",
+          "text-document/floating-dirty-size",
+          "text-document/floating-restored",
+          "text-document/reattached-default",
+          "text-document/B_Size",
+          "text-document/C_ReadOnly",
+          "text-document/D_Disabled",
+          "text-document/E_Border",
+          "text-document/F_Background",
+          "text-document/fallback-G_Font",
+          "text-document/H_NoTitle",
+          "text-document/I_Large",
+          "text-document/fallback-J_SizeFont16",
+          "text-document/fallback-K_Font12",
+          "text-document/fallback-L_Font14"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 801.5853619999999,
+          "runtimeVerificationMs": 317.070203,
+          "preHostMs": 1127.377565,
+          "cleanupMs": 34.10617099999945,
+          "totalMs": 8611.914081
+        }
+      },
+      {
+        "suite": "text-document",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.212604237999999,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "text-document-ru/driver.log",
+        "receipt": "text-document-ru/receipt.json",
+        "caseIds": [
+          "text-document/A_Default",
+          "text-document/dirty-background",
+          "text-document/dirty-border",
+          "text-document/restored-default",
+          "text-document/floating-default",
+          "text-document/floating-dirty-size",
+          "text-document/floating-restored",
+          "text-document/reattached-default",
+          "text-document/B_Size",
+          "text-document/C_ReadOnly",
+          "text-document/D_Disabled",
+          "text-document/E_Border",
+          "text-document/F_Background",
+          "text-document/fallback-G_Font",
+          "text-document/H_NoTitle",
+          "text-document/I_Large",
+          "text-document/fallback-J_SizeFont16",
+          "text-document/fallback-K_Font12",
+          "text-document/fallback-L_Font14"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 849.366135,
+          "runtimeVerificationMs": 313.19138799999996,
+          "preHostMs": 1185.7232470000001,
+          "cleanupMs": 41.20709600000009,
+          "totalMs": 11054.304073
+        }
+      },
+      {
+        "suite": "geographical",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.165617658999995,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "geographical-en/driver.log",
+        "receipt": "geographical-en/receipt.json",
+        "caseIds": [
+          "geographical/A_Default",
+          "geographical/dirty-background",
+          "geographical/dirty-border",
+          "geographical/restored-default",
+          "geographical/floating-default",
+          "geographical/floating-dirty-size",
+          "geographical/floating-restored",
+          "geographical/reattached-default",
+          "geographical/B_Size",
+          "geographical/C_ReadOnly",
+          "geographical/D_Disabled",
+          "geographical/E_Border",
+          "geographical/F_Background",
+          "geographical/G_NoTitle",
+          "geographical/H_Large",
+          "geographical/I_BorderChocolate",
+          "geographical/J_BorderSlate"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 723.005401,
+          "runtimeVerificationMs": 305.875673,
+          "preHostMs": 1036.834703,
+          "cleanupMs": 37.47615599999972,
+          "totalMs": 8014.193585000001
+        }
+      },
+      {
+        "suite": "geographical",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.142631820000009,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "geographical-ru/driver.log",
+        "receipt": "geographical-ru/receipt.json",
+        "caseIds": [
+          "geographical/A_Default",
+          "geographical/dirty-background",
+          "geographical/dirty-border",
+          "geographical/restored-default",
+          "geographical/floating-default",
+          "geographical/floating-dirty-size",
+          "geographical/floating-restored",
+          "geographical/reattached-default",
+          "geographical/B_Size",
+          "geographical/C_ReadOnly",
+          "geographical/D_Disabled",
+          "geographical/E_Border",
+          "geographical/F_Background",
+          "geographical/G_NoTitle",
+          "geographical/H_Large",
+          "geographical/I_BorderChocolate",
+          "geographical/J_BorderSlate"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 862.2915740000001,
+          "runtimeVerificationMs": 324.36912699999993,
+          "preHostMs": 1209.638341,
+          "cleanupMs": 35.72637200000099,
+          "totalMs": 10982.299455
+        }
+      },
+      {
+        "suite": "graphical",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.204319975000006,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "graphical-en/driver.log",
+        "receipt": "graphical-en/receipt.json",
+        "caseIds": [
+          "graphical/A_Default",
+          "graphical/dirty-background",
+          "graphical/dirty-border",
+          "graphical/restored-default",
+          "graphical/floating-default",
+          "graphical/floating-dirty-size",
+          "graphical/floating-restored",
+          "graphical/reattached-default",
+          "graphical/B_Size",
+          "graphical/C_ReadOnly",
+          "graphical/D_Disabled",
+          "graphical/E_Border",
+          "graphical/F_Background",
+          "graphical/G_NoTitle",
+          "graphical/H_Large",
+          "graphical/I_NoGrid",
+          "graphical/J_Grid"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 794.7550190000001,
+          "runtimeVerificationMs": 307.14766800000007,
+          "preHostMs": 1109.3710259999998,
+          "cleanupMs": 34.158879999999954,
+          "totalMs": 8062.363232
+        }
+      },
+      {
+        "suite": "graphical",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.774406858999996,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "graphical-ru/driver.log",
+        "receipt": "graphical-ru/receipt.json",
+        "caseIds": [
+          "graphical/A_Default",
+          "graphical/dirty-background",
+          "graphical/dirty-border",
+          "graphical/restored-default",
+          "graphical/floating-default",
+          "graphical/floating-dirty-size",
+          "graphical/floating-restored",
+          "graphical/reattached-default",
+          "graphical/B_Size",
+          "graphical/C_ReadOnly",
+          "graphical/D_Disabled",
+          "graphical/E_Border",
+          "graphical/F_Background",
+          "graphical/G_NoTitle",
+          "graphical/H_Large",
+          "graphical/I_NoGrid",
+          "graphical/J_Grid"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 823.2440929999999,
+          "runtimeVerificationMs": 363.0289019999999,
+          "preHostMs": 1209.211885,
+          "cleanupMs": 39.97439400000076,
+          "totalMs": 10638.698378
+        }
+      },
+      {
+        "suite": "formatted",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.053174275999991,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "formatted-en/driver.log",
+        "receipt": "formatted-en/receipt.json",
+        "caseIds": [
+          "formatted/A_Default",
+          "formatted/dirty-background",
+          "formatted/dirty-border",
+          "formatted/restored-default",
+          "formatted/floating-default",
+          "formatted/floating-dirty-size",
+          "formatted/floating-restored",
+          "formatted/reattached-default",
+          "formatted/B_Size",
+          "formatted/C_ReadOnly",
+          "formatted/D_Disabled",
+          "formatted/E_Border",
+          "formatted/F_Background",
+          "formatted/G_NoTitle",
+          "formatted/H_Large",
+          "formatted/I_Toolbar",
+          "formatted/J_NoToolbar"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 822.3487640000001,
+          "runtimeVerificationMs": 327.090698,
+          "preHostMs": 1156.807717,
+          "cleanupMs": 34.25292099999933,
+          "totalMs": 7905.9883070000005
+        }
+      },
+      {
+        "suite": "formatted",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.579965823000006,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "formatted-ru/driver.log",
+        "receipt": "formatted-ru/receipt.json",
+        "caseIds": [
+          "formatted/A_Default",
+          "formatted/dirty-background",
+          "formatted/dirty-border",
+          "formatted/restored-default",
+          "formatted/floating-default",
+          "formatted/floating-dirty-size",
+          "formatted/floating-restored",
+          "formatted/reattached-default",
+          "formatted/B_Size",
+          "formatted/C_ReadOnly",
+          "formatted/D_Disabled",
+          "formatted/E_Border",
+          "formatted/F_Background",
+          "formatted/G_NoTitle",
+          "formatted/H_Large",
+          "formatted/I_Toolbar",
+          "formatted/J_NoToolbar"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 844.923739,
+          "runtimeVerificationMs": 323.10530000000006,
+          "preHostMs": 1189.194605,
+          "cleanupMs": 38.22727699999996,
+          "totalMs": 10448.490781
+        }
+      },
+      {
+        "suite": "html",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.113398572999998,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "html-en/driver.log",
+        "receipt": "html-en/receipt.json",
+        "caseIds": [
+          "html/A_Default",
+          "html/dirty-background",
+          "html/dirty-border",
+          "html/restored-default",
+          "html/floating-default",
+          "html/floating-dirty-size",
+          "html/floating-restored",
+          "html/reattached-default",
+          "html/B_Size",
+          "html/C_ReadOnly",
+          "html/D_Disabled",
+          "html/E_Border",
+          "html/F_Background",
+          "html/G_NoTitle",
+          "html/H_Large",
+          "html/I_Toolbar",
+          "html/J_NoToolbar"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 820.019899,
+          "runtimeVerificationMs": 331.335969,
+          "preHostMs": 1160.205451,
+          "cleanupMs": 38.26690100000087,
+          "totalMs": 7963.373326999999
+        }
+      },
+      {
+        "suite": "html",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.643952686999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "html-ru/driver.log",
+        "receipt": "html-ru/receipt.json",
+        "caseIds": [
+          "html/A_Default",
+          "html/dirty-background",
+          "html/dirty-border",
+          "html/restored-default",
+          "html/floating-default",
+          "html/floating-dirty-size",
+          "html/floating-restored",
+          "html/reattached-default",
+          "html/B_Size",
+          "html/C_ReadOnly",
+          "html/D_Disabled",
+          "html/E_Border",
+          "html/F_Background",
+          "html/G_NoTitle",
+          "html/H_Large",
+          "html/I_Toolbar",
+          "html/J_NoToolbar"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 823.9005890000001,
+          "runtimeVerificationMs": 313.762386,
+          "preHostMs": 1160.244493,
+          "cleanupMs": 36.943365999999514,
+          "totalMs": 10522.484929999999
+        }
+      },
+      {
+        "suite": "pdf",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.632785658999987,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "pdf-en/driver.log",
+        "receipt": "pdf-en/receipt.json",
+        "caseIds": [
+          "pdf/A_Default",
+          "pdf/dirty-background",
+          "pdf/dirty-border",
+          "pdf/dirty-no-view-status",
+          "pdf/restored-default",
+          "pdf/floating-default",
+          "pdf/floating-dirty-size",
+          "pdf/floating-no-view-status",
+          "pdf/floating-restored",
+          "pdf/reattached-default",
+          "pdf/B_Size",
+          "pdf/C_ReadOnly",
+          "pdf/D_Disabled",
+          "pdf/E_Border",
+          "pdf/F_Background",
+          "pdf/G_NoTitle",
+          "pdf/H_Large",
+          "pdf/I_Toolbar",
+          "pdf/J_NoToolbar",
+          "pdf/K_NoViewStatus",
+          "pdf/L_SmallNoStatus",
+          "pdf/M_Width15",
+          "pdf/N_Width30",
+          "pdf/O_Width31",
+          "pdf/P_Height2",
+          "pdf/Q_Height3",
+          "pdf/R_Height4"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 939.7420400000001,
+          "runtimeVerificationMs": 331.03284500000007,
+          "preHostMs": 1280.652838,
+          "cleanupMs": 38.41190099999949,
+          "totalMs": 11490.743124999999
+        }
+      },
+      {
+        "suite": "pdf",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 14.029090243999992,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "pdf-ru/driver.log",
+        "receipt": "pdf-ru/receipt.json",
+        "caseIds": [
+          "pdf/A_Default",
+          "pdf/dirty-background",
+          "pdf/dirty-border",
+          "pdf/dirty-no-view-status",
+          "pdf/restored-default",
+          "pdf/floating-default",
+          "pdf/floating-dirty-size",
+          "pdf/floating-no-view-status",
+          "pdf/floating-restored",
+          "pdf/reattached-default",
+          "pdf/B_Size",
+          "pdf/C_ReadOnly",
+          "pdf/D_Disabled",
+          "pdf/E_Border",
+          "pdf/F_Background",
+          "pdf/G_NoTitle",
+          "pdf/H_Large",
+          "pdf/I_Toolbar",
+          "pdf/J_NoToolbar",
+          "pdf/K_NoViewStatus",
+          "pdf/L_SmallNoStatus",
+          "pdf/M_Width15",
+          "pdf/N_Width30",
+          "pdf/O_Width31",
+          "pdf/P_Height2",
+          "pdf/Q_Height3",
+          "pdf/R_Height4"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 846.3544830000001,
+          "runtimeVerificationMs": 341.69067000000007,
+          "preHostMs": 1212.9999919999998,
+          "cleanupMs": 40.827806999999666,
+          "totalMs": 13899.696232999999
+        }
+      },
+      {
+        "suite": "spreadsheet",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 9.940792064999988,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "spreadsheet-en/driver.log",
+        "receipt": "spreadsheet-en/receipt.json",
+        "caseIds": [
+          "spreadsheet/A_Default",
+          "spreadsheet/dirty-background",
+          "spreadsheet/dirty-border",
+          "spreadsheet/dirty-grid",
+          "spreadsheet/dirty-headers",
+          "spreadsheet/restored-default",
+          "spreadsheet/floating-default",
+          "spreadsheet/floating-dirty-size",
+          "spreadsheet/floating-headers",
+          "spreadsheet/floating-restored",
+          "spreadsheet/reattached-default",
+          "spreadsheet/B_Size",
+          "spreadsheet/C_ReadOnly",
+          "spreadsheet/D_Disabled",
+          "spreadsheet/E_Border",
+          "spreadsheet/F_Background",
+          "spreadsheet/G_NoTitle",
+          "spreadsheet/H_Large",
+          "spreadsheet/I_NoGrid",
+          "spreadsheet/J_Grid",
+          "spreadsheet/K_NoHeaders",
+          "spreadsheet/L_Headers"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 901.1518060000001,
+          "runtimeVerificationMs": 321.3460170000001,
+          "preHostMs": 1230.9533239999998,
+          "cleanupMs": 37.27128099999936,
+          "totalMs": 9818.712561999999
+        }
+      },
+      {
+        "suite": "spreadsheet",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 12.402102759000002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "spreadsheet-ru/driver.log",
+        "receipt": "spreadsheet-ru/receipt.json",
+        "caseIds": [
+          "spreadsheet/A_Default",
+          "spreadsheet/dirty-background",
+          "spreadsheet/dirty-border",
+          "spreadsheet/dirty-grid",
+          "spreadsheet/dirty-headers",
+          "spreadsheet/restored-default",
+          "spreadsheet/floating-default",
+          "spreadsheet/floating-dirty-size",
+          "spreadsheet/floating-headers",
+          "spreadsheet/floating-restored",
+          "spreadsheet/reattached-default",
+          "spreadsheet/B_Size",
+          "spreadsheet/C_ReadOnly",
+          "spreadsheet/D_Disabled",
+          "spreadsheet/E_Border",
+          "spreadsheet/F_Background",
+          "spreadsheet/G_NoTitle",
+          "spreadsheet/H_Large",
+          "spreadsheet/I_NoGrid",
+          "spreadsheet/J_Grid",
+          "spreadsheet/K_NoHeaders",
+          "spreadsheet/L_Headers"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 809.405575,
+          "runtimeVerificationMs": 359.27004499999987,
+          "preHostMs": 1191.6434270000002,
+          "cleanupMs": 40.017227000000275,
+          "totalMs": 12261.491216999999
+        }
+      },
+      {
+        "suite": "calendar",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 18.042545775000004,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "calendar-en/driver.log",
+        "receipt": "calendar-en/receipt.json",
+        "caseIds": [
+          "calendar/A_Default",
+          "calendar/dirty-background",
+          "calendar/dirty-border",
+          "calendar/dirty-current-date",
+          "calendar/dirty-month-panel",
+          "calendar/dirty-two-by-two",
+          "calendar/dirty-font-12",
+          "calendar/dirty-font-16-bold",
+          "calendar/restored-default",
+          "calendar/floating-default",
+          "calendar/floating-dirty-size",
+          "calendar/floating-month-panel",
+          "calendar/floating-restored",
+          "calendar/reattached-default",
+          "calendar/B_Size",
+          "calendar/C_ReadOnly",
+          "calendar/D_Disabled",
+          "calendar/E_Border",
+          "calendar/F_Background",
+          "calendar/G_NoTitle",
+          "calendar/H_Large",
+          "calendar/I_NoMonthPanel",
+          "calendar/J_NoCurrentDate",
+          "calendar/K_Width2Months",
+          "calendar/L_Height2Months",
+          "calendar/M_Font12",
+          "calendar/N_Font16Bold",
+          "calendar/O_CurrentDate",
+          "calendar/P_MonthPanel",
+          "calendar/Q_2x2",
+          "calendar/R_WidthZero20",
+          "calendar/S_HeightZero5",
+          "calendar/T_Zero35x9",
+          "calendar/U_Zero60x20",
+          "calendar/V_Panel2Months"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 711.84908,
+          "runtimeVerificationMs": 310.0031540000001,
+          "preHostMs": 1031.652354,
+          "cleanupMs": 39.718361999999615,
+          "totalMs": 17889.899565
+        }
+      },
+      {
+        "suite": "calendar",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 20.423841314999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "calendar-ru/driver.log",
+        "receipt": "calendar-ru/receipt.json",
+        "caseIds": [
+          "calendar/A_Default",
+          "calendar/dirty-background",
+          "calendar/dirty-border",
+          "calendar/dirty-current-date",
+          "calendar/dirty-month-panel",
+          "calendar/dirty-two-by-two",
+          "calendar/dirty-font-12",
+          "calendar/dirty-font-16-bold",
+          "calendar/restored-default",
+          "calendar/floating-default",
+          "calendar/floating-dirty-size",
+          "calendar/floating-month-panel",
+          "calendar/floating-restored",
+          "calendar/reattached-default",
+          "calendar/B_Size",
+          "calendar/C_ReadOnly",
+          "calendar/D_Disabled",
+          "calendar/E_Border",
+          "calendar/F_Background",
+          "calendar/G_NoTitle",
+          "calendar/H_Large",
+          "calendar/I_NoMonthPanel",
+          "calendar/J_NoCurrentDate",
+          "calendar/K_Width2Months",
+          "calendar/L_Height2Months",
+          "calendar/M_Font12",
+          "calendar/N_Font16Bold",
+          "calendar/O_CurrentDate",
+          "calendar/P_MonthPanel",
+          "calendar/Q_2x2",
+          "calendar/R_WidthZero20",
+          "calendar/S_HeightZero5",
+          "calendar/T_Zero35x9",
+          "calendar/U_Zero60x20",
+          "calendar/V_Panel2Months"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 832.520394,
+          "runtimeVerificationMs": 340.1525909999999,
+          "preHostMs": 1226.978728,
+          "cleanupMs": 43.17601999999897,
+          "totalMs": 20269.88973
+        }
+      },
+      {
+        "suite": "period",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 20.191895709999983,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "period-en/driver.log",
+        "receipt": "period-en/receipt.json",
+        "caseIds": [
+          "period/A_Default",
+          "period/dirty-background",
+          "period/dirty-border",
+          "period/dirty-size",
+          "period/dirty-two-years",
+          "period/dirty-tall-size",
+          "period/dirty-font-12",
+          "period/dirty-font-16-bold",
+          "period/restored-default",
+          "period/floating-default",
+          "period/floating-dirty-size",
+          "period/floating-two-years",
+          "period/floating-restored",
+          "period/reattached-default",
+          "period/B_Size",
+          "period/C_ReadOnly",
+          "period/D_Disabled",
+          "period/E_Border",
+          "period/F_Background",
+          "period/G_NoTitle",
+          "period/H_Large",
+          "period/I_Small",
+          "period/J_Larger",
+          "period/K_Font12",
+          "period/L_Font16Bold",
+          "period/M_Height3",
+          "period/N_Height5",
+          "period/O_Height9",
+          "period/P_Height20",
+          "period/Q_Width20",
+          "period/R_Width30",
+          "period/S_Width31",
+          "period/T_Width35",
+          "period/U_Width60",
+          "period/V_Width20Height9"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 860.5209100000001,
+          "runtimeVerificationMs": 348.76469499999996,
+          "preHostMs": 1220.7539100000001,
+          "cleanupMs": 34.01141800000187,
+          "totalMs": 20039.903372
+        }
+      },
+      {
+        "suite": "period",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 22.731067626999984,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "period-ru/driver.log",
+        "receipt": "period-ru/receipt.json",
+        "caseIds": [
+          "period/A_Default",
+          "period/dirty-background",
+          "period/dirty-border",
+          "period/dirty-size",
+          "period/dirty-two-years",
+          "period/dirty-tall-size",
+          "period/dirty-font-12",
+          "period/dirty-font-16-bold",
+          "period/restored-default",
+          "period/floating-default",
+          "period/floating-dirty-size",
+          "period/floating-two-years",
+          "period/floating-restored",
+          "period/reattached-default",
+          "period/B_Size",
+          "period/C_ReadOnly",
+          "period/D_Disabled",
+          "period/E_Border",
+          "period/F_Background",
+          "period/G_NoTitle",
+          "period/H_Large",
+          "period/I_Small",
+          "period/J_Larger",
+          "period/K_Font12",
+          "period/L_Font16Bold",
+          "period/M_Height3",
+          "period/N_Height5",
+          "period/O_Height9",
+          "period/P_Height20",
+          "period/Q_Width20",
+          "period/R_Width30",
+          "period/S_Width31",
+          "period/T_Width35",
+          "period/U_Width60",
+          "period/V_Width20Height9"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 824.584914,
+          "runtimeVerificationMs": 329.18028400000014,
+          "preHostMs": 1180.3729250000001,
+          "cleanupMs": 42.47789700000067,
+          "totalMs": 22563.076993
+        }
+      },
+      {
+        "suite": "planner",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 25.842668028000045,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "planner-en/driver.log",
+        "receipt": "planner-en/receipt.json",
+        "caseIds": [
+          "planner/A_Default",
+          "planner/clock-tick-without-xml",
+          "planner/dirty-background",
+          "planner/dirty-border",
+          "planner/dirty-size",
+          "planner/dirty-small-size",
+          "planner/dirty-tall-size",
+          "planner/dirty-font-12",
+          "planner/dirty-font-16-bold",
+          "planner/restored-default",
+          "planner/floating-default",
+          "planner/floating-dirty-size",
+          "planner/floating-small-size",
+          "planner/floating-restored",
+          "planner/reattached-default",
+          "planner/B_Size",
+          "planner/C_ReadOnly",
+          "planner/D_Disabled",
+          "planner/E_Border",
+          "planner/F_Background",
+          "planner/G_NoTitle",
+          "planner/H_Large",
+          "planner/I_Small",
+          "planner/J_Larger",
+          "planner/K_Font12",
+          "planner/L_Font16Bold"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 784.7053440000001,
+          "runtimeVerificationMs": 315.6249839999999,
+          "preHostMs": 1107.705643,
+          "cleanupMs": 37.65111700000125,
+          "totalMs": 25686.477658
+        }
+      },
+      {
+        "suite": "planner",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 29.583833650999992,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "planner-ru/driver.log",
+        "receipt": "planner-ru/receipt.json",
+        "caseIds": [
+          "planner/A_Default",
+          "planner/clock-tick-without-xml",
+          "planner/dirty-background",
+          "planner/dirty-border",
+          "planner/dirty-size",
+          "planner/dirty-small-size",
+          "planner/dirty-tall-size",
+          "planner/dirty-font-12",
+          "planner/dirty-font-16-bold",
+          "planner/restored-default",
+          "planner/floating-default",
+          "planner/floating-dirty-size",
+          "planner/floating-small-size",
+          "planner/floating-restored",
+          "planner/reattached-default",
+          "planner/B_Size",
+          "planner/C_ReadOnly",
+          "planner/D_Disabled",
+          "planner/E_Border",
+          "planner/F_Background",
+          "planner/G_NoTitle",
+          "planner/H_Large",
+          "planner/I_Small",
+          "planner/J_Larger",
+          "planner/K_Font12",
+          "planner/L_Font16Bold"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 852.689971,
+          "runtimeVerificationMs": 354.94688800000006,
+          "preHostMs": 1228.9643489999999,
+          "cleanupMs": 36.512243999997736,
+          "totalMs": 29405.603959
+        }
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "fullSurfaceSamples": 26,
+        "completeWidgetPixelsCompared": 3159700,
+        "differentRgbPixels": 0,
+        "results": [
+          {
+            "label": "A_Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "clock-tick-without-xml",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "expectedRgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-background",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-border",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 384,
+              "height": 289
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 350,
+              "height": 218
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              350,
+              218
+            ],
+            "pixels": 76300,
+            "rgbSha256": "015c8c6dd4de0da4374bbe955d388599601b846ac252ec0ef40aa215076eacac",
+            "expectedRgbSha256": "015c8c6dd4de0da4374bbe955d388599601b846ac252ec0ef40aa215076eacac",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-small-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 184,
+              "height": 139
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 150,
+              "height": 68
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              150,
+              68
+            ],
+            "pixels": 10200,
+            "rgbSha256": "2534a6bcf30e4e2cc295dac8103247197a18a2b4066ad033b826bf73db5444e2",
+            "expectedRgbSha256": "2534a6bcf30e4e2cc295dac8103247197a18a2b4066ad033b826bf73db5444e2",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-tall-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 634,
+              "height": 564
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 600,
+              "height": 493
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              600,
+              493
+            ],
+            "pixels": 295800,
+            "rgbSha256": "432476b5e5c06a7c5d386c56c4651b4fcf02cb7618138a3f4730a9fe1f1c4eb0",
+            "expectedRgbSha256": "432476b5e5c06a7c5d386c56c4651b4fcf02cb7618138a3f4730a9fe1f1c4eb0",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-font-12",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "expectedRgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-font-16-bold",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "expectedRgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "captureAttempts": 1
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-dirty-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 634,
+              "height": 564
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 600,
+              "height": 493
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              600,
+              493
+            ],
+            "pixels": 295800,
+            "rgbSha256": "432476b5e5c06a7c5d386c56c4651b4fcf02cb7618138a3f4730a9fe1f1c4eb0",
+            "expectedRgbSha256": "432476b5e5c06a7c5d386c56c4651b4fcf02cb7618138a3f4730a9fe1f1c4eb0",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-small-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 184,
+              "height": 139
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 150,
+              "height": 68
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              150,
+              68
+            ],
+            "pixels": 10200,
+            "rgbSha256": "2534a6bcf30e4e2cc295dac8103247197a18a2b4066ad033b826bf73db5444e2",
+            "expectedRgbSha256": "2534a6bcf30e4e2cc295dac8103247197a18a2b4066ad033b826bf73db5444e2",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "B_Size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 234,
+              "height": 189
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 200,
+              "height": 118
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              200,
+              118
+            ],
+            "pixels": 23600,
+            "rgbSha256": "868e7d9bf3c0b88b1d2ad9f574ea061c848846bf1e6b8476d1f551b8896ed0da",
+            "expectedRgbSha256": "868e7d9bf3c0b88b1d2ad9f574ea061c848846bf1e6b8476d1f551b8896ed0da",
+            "captureAttempts": 1
+          },
+          {
+            "label": "C_ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "D_Disabled",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "E_Border",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "F_Background",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "expectedRgbSha256": "d16a1ff078b2995df490840959ac5e4f402c977aa1923a64ca9428bf565d388b",
+            "captureAttempts": 1
+          },
+          {
+            "label": "G_NoTitle",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 293
+            },
+            "control": {
+              "x": 41,
+              "y": 185,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              255,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "77d58cb34f368f4389ea659f9e9d2fb5ea14e8c9297b8163b1929c14f4d2e8d9",
+            "expectedRgbSha256": "77d58cb34f368f4389ea659f9e9d2fb5ea14e8c9297b8163b1929c14f4d2e8d9",
+            "captureAttempts": 1
+          },
+          {
+            "label": "H_Large",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 384,
+              "height": 289
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 350,
+              "height": 218
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              350,
+              218
+            ],
+            "pixels": 76300,
+            "rgbSha256": "015c8c6dd4de0da4374bbe955d388599601b846ac252ec0ef40aa215076eacac",
+            "expectedRgbSha256": "015c8c6dd4de0da4374bbe955d388599601b846ac252ec0ef40aa215076eacac",
+            "captureAttempts": 1
+          },
+          {
+            "label": "I_Small",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 184,
+              "height": 139
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 150,
+              "height": 68
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              150,
+              68
+            ],
+            "pixels": 10200,
+            "rgbSha256": "2534a6bcf30e4e2cc295dac8103247197a18a2b4066ad033b826bf73db5444e2",
+            "expectedRgbSha256": "2534a6bcf30e4e2cc295dac8103247197a18a2b4066ad033b826bf73db5444e2",
+            "captureAttempts": 1
+          },
+          {
+            "label": "J_Larger",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 634,
+              "height": 564
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 600,
+              "height": 493
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              600,
+              493
+            ],
+            "pixels": 295800,
+            "rgbSha256": "432476b5e5c06a7c5d386c56c4651b4fcf02cb7618138a3f4730a9fe1f1c4eb0",
+            "expectedRgbSha256": "432476b5e5c06a7c5d386c56c4651b4fcf02cb7618138a3f4730a9fe1f1c4eb0",
+            "captureAttempts": 1
+          },
+          {
+            "label": "K_Font12",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "expectedRgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "captureAttempts": 1
+          },
+          {
+            "label": "L_Font16Bold",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "expectedRgbSha256": "69395bc47b3e6ed604cdd8fd3247960a1983d9bded8b44a058405d188c507104",
+            "captureAttempts": 1
+          }
+        ],
+        "stableControlDom": true,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true,
+        "referenceLocalDate": "2026-11-05",
+        "testClockOnlyInOwnedWebviews": true,
+        "clockRepaintThroughUnsavedXml": true,
+        "liveClockTickWithoutXml": true,
+        "clockSamplesFromNativeCapture": true,
+        "isolatedIdeFullscreen": true,
+        "floatingWindowFullscreen": true,
+        "sourceWritesDuringViewing": false,
+        "receipt": "form-batch-uxpx5q/planner-en/receipt.json",
+        "receiptSha256": "b53c2938a016e89f1e863cf952eb40d7aa313ca0eb0fd52c7b9d98faff439b93"
+      },
+      "ru": {
+        "passed": true,
+        "fullSurfaceSamples": 26,
+        "completeWidgetPixelsCompared": 3159700,
+        "differentRgbPixels": 0,
+        "results": [
+          {
+            "label": "A_Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "clock-tick-without-xml",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-background",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-border",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 384,
+              "height": 289
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 350,
+              "height": 218
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              350,
+              218
+            ],
+            "pixels": 76300,
+            "rgbSha256": "c761aad9592ce4e3324fed0fdbc96746b0a4de4dd843121ecc008e5f7016c093",
+            "expectedRgbSha256": "c761aad9592ce4e3324fed0fdbc96746b0a4de4dd843121ecc008e5f7016c093",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-small-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 184,
+              "height": 139
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 150,
+              "height": 68
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              150,
+              68
+            ],
+            "pixels": 10200,
+            "rgbSha256": "0c8b2e42f3d0d7556f251519c9d6e2553bd0bad04bceab044367d9c23383776e",
+            "expectedRgbSha256": "0c8b2e42f3d0d7556f251519c9d6e2553bd0bad04bceab044367d9c23383776e",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-tall-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 634,
+              "height": 564
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 600,
+              "height": 493
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              600,
+              493
+            ],
+            "pixels": 295800,
+            "rgbSha256": "959b6ea67f0a1b4e36e28782cf5f7a89cd8b5330e65372e8f652cc144ba50258",
+            "expectedRgbSha256": "959b6ea67f0a1b4e36e28782cf5f7a89cd8b5330e65372e8f652cc144ba50258",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-font-12",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-font-16-bold",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-dirty-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 634,
+              "height": 564
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 600,
+              "height": 493
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              600,
+              493
+            ],
+            "pixels": 295800,
+            "rgbSha256": "959b6ea67f0a1b4e36e28782cf5f7a89cd8b5330e65372e8f652cc144ba50258",
+            "expectedRgbSha256": "959b6ea67f0a1b4e36e28782cf5f7a89cd8b5330e65372e8f652cc144ba50258",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-small-size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 184,
+              "height": 139
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 150,
+              "height": 68
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              150,
+              68
+            ],
+            "pixels": 10200,
+            "rgbSha256": "0c8b2e42f3d0d7556f251519c9d6e2553bd0bad04bceab044367d9c23383776e",
+            "expectedRgbSha256": "0c8b2e42f3d0d7556f251519c9d6e2553bd0bad04bceab044367d9c23383776e",
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 101,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              171,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "B_Size",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 234,
+              "height": 189
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 200,
+              "height": 118
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              200,
+              118
+            ],
+            "pixels": 23600,
+            "rgbSha256": "93d2e80f04536f30323979b7425cc1ccbf931ff7e0b52f702eb1de0ef1141baa",
+            "expectedRgbSha256": "93d2e80f04536f30323979b7425cc1ccbf931ff7e0b52f702eb1de0ef1141baa",
+            "captureAttempts": 1
+          },
+          {
+            "label": "C_ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "D_Disabled",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "E_Border",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "F_Background",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "G_NoTitle",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 293
+            },
+            "control": {
+              "x": 41,
+              "y": 185,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              255,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "H_Large",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 384,
+              "height": 289
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 350,
+              "height": 218
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              350,
+              218
+            ],
+            "pixels": 76300,
+            "rgbSha256": "c761aad9592ce4e3324fed0fdbc96746b0a4de4dd843121ecc008e5f7016c093",
+            "expectedRgbSha256": "c761aad9592ce4e3324fed0fdbc96746b0a4de4dd843121ecc008e5f7016c093",
+            "captureAttempts": 1
+          },
+          {
+            "label": "I_Small",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 184,
+              "height": 139
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 150,
+              "height": 68
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              150,
+              68
+            ],
+            "pixels": 10200,
+            "rgbSha256": "0c8b2e42f3d0d7556f251519c9d6e2553bd0bad04bceab044367d9c23383776e",
+            "expectedRgbSha256": "0c8b2e42f3d0d7556f251519c9d6e2553bd0bad04bceab044367d9c23383776e",
+            "captureAttempts": 1
+          },
+          {
+            "label": "J_Larger",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 634,
+              "height": 564
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 600,
+              "height": 493
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              600,
+              493
+            ],
+            "pixels": 295800,
+            "rgbSha256": "959b6ea67f0a1b4e36e28782cf5f7a89cd8b5330e65372e8f652cc144ba50258",
+            "expectedRgbSha256": "959b6ea67f0a1b4e36e28782cf5f7a89cd8b5330e65372e8f652cc144ba50258",
+            "captureAttempts": 1
+          },
+          {
+            "label": "K_Font12",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          },
+          {
+            "label": "L_Font16Bold",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 147,
+              "width": 534,
+              "height": 314
+            },
+            "control": {
+              "x": 41,
+              "y": 206,
+              "width": 500,
+              "height": 243
+            },
+            "origin": {
+              "x": 376,
+              "y": 217
+            },
+            "region": [
+              389,
+              276,
+              500,
+              243
+            ],
+            "pixels": 121500,
+            "rgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "expectedRgbSha256": "69a873e7e020e11c268dd1785eb8662c143bc1cb8ecd8c173987a4fc913f2298",
+            "captureAttempts": 1
+          }
+        ],
+        "stableControlDom": true,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true,
+        "referenceLocalDate": "2026-11-05",
+        "testClockOnlyInOwnedWebviews": true,
+        "clockRepaintThroughUnsavedXml": true,
+        "liveClockTickWithoutXml": true,
+        "clockSamplesFromNativeCapture": true,
+        "isolatedIdeFullscreen": true,
+        "floatingWindowFullscreen": true,
+        "sourceWritesDuringViewing": false,
+        "receipt": "form-batch-uxpx5q/planner-ru/receipt.json",
+        "receiptSha256": "9009dad3e917ed3afbb29e8e0e2a1579ea5f5fc1840f3dfdd216a38d079ec1e8"
+      }
+    }
+  },
+  "remaining": [
+    "Other planner dates/regions, dimensions and property/style/state combinations, native clock sampling cadence and navigation/selection.",
+    "Typed applicability/computed inspector semantics, captions/full forms, other complex surfaces, DPI/Remote/large forms, full Linux and Windows acceptance remain open."
+  ],
+  "referenceLocalDate": "2026-11-05",
+  "culture": "en-US",
+  "completeRecordedPlannerSurfacePixelParity": true,
+  "nativeLocaleComparison": "The native sample caption is Meeting/Встреча. Regional en-US date/hour text stays the same. Native capture times differ, so time-line pixels are compared separately against each locale reference, never masked."
+}

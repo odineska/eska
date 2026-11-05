@@ -1,0 +1,4029 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "scope": "Complete empty metadata-bound tabular-section and DynamicList grid pixels, including the entire pagination row of DynamicList. Nine accepted ValueTable grids are retained as regressions. Toolbar/view-status/form shell and arbitrary states remain outside this acceptance.",
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "nativeUiLocales": [
+    "en",
+    "ru"
+  ],
+  "viewerLocales": [
+    "en",
+    "ru"
+  ],
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "noBslModulesOrHandlers": true,
+  "nativeForms": 2,
+  "nativeImages": 4,
+  "wholeGridControlPixelParity": true,
+  "paginationRowPixelParity": true,
+  "wholeFormVisualParity": false,
+  "fullProfileAccepted": false,
+  "nativeInputs": {
+    "schemaVersion": 1,
+    "platformBuild": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "zoom": 100,
+    "scope": "Complete empty metadata tabular-section grid and DynamicList grid plus entire pagination row, ru/en. Toolbar/view-status/form shell outside scope.",
+    "pixelTolerance": 0,
+    "comparisonMasks": [],
+    "noBslModulesOrHandlers": true,
+    "nativeDirectory": "native-context-pixels-g93fkhea",
+    "roundTripExitCodes": [
+      0,
+      0,
+      0
+    ],
+    "forms": 2,
+    "nativeImages": 4,
+    "catalog": {
+      "source": "tests/fixtures/forms/native-context-tables/Catalog.xml",
+      "sourceSha256": "18d4f7ff8c42ba96cdacae27d6df5cab9e025f42c35995ced0b51ab57ecef0f2",
+      "nativeExport": "native/Catalogs/NativeGoods.xml",
+      "nativeExportSha256": "54623e6582cd68ee6a1267e4627e710f56783c66835149b4041a75d477071c15"
+    },
+    "rows": [
+      {
+        "name": "DynamicList",
+        "source": "tests/fixtures/forms/native-context-tables/DynamicList.xml",
+        "sourceSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+        "nativeExport": "native/CommonForms/P_DynamicList/Ext/Form.xml",
+        "nativeExportSha256": "16f5fd7d1d5c324c435207cb3ac15c71d4f5a7c8f19b9b15140d1a5cf9e78dd1",
+        "locales": {
+          "en": {
+            "screenshot": "en-DynamicList-complete.png",
+            "screenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f",
+            "nativeRegion": [
+              274,
+              462,
+              454,
+              473
+            ],
+            "gridHeight": 452,
+            "extraBottom": 21,
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "gridRgbSha256": "1258145aeb177bacb2b3b8b6b1347fc9cbc8e90923991eeb819ddc3337063a12",
+            "pixels": 214742,
+            "pagination": {
+              "region": [
+                357,
+                452,
+                97,
+                21
+              ],
+              "rgbSha256": "5d9762d1cd1ac68459f65cacf3ace745c7418eb2ca4fcd1f76d5270ad533583c"
+            }
+          },
+          "ru": {
+            "screenshot": "ru-DynamicList-complete.png",
+            "screenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723",
+            "nativeRegion": [
+              274,
+              462,
+              418,
+              473
+            ],
+            "gridHeight": 452,
+            "extraBottom": 21,
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "gridRgbSha256": "9a75e8b8183d135263b59635a4617c7a6cabccfaf236a9a0c15531dbdc69e281",
+            "pixels": 197714,
+            "pagination": {
+              "region": [
+                321,
+                452,
+                97,
+                21
+              ],
+              "rgbSha256": "5d9762d1cd1ac68459f65cacf3ace745c7418eb2ca4fcd1f76d5270ad533583c"
+            }
+          }
+        }
+      },
+      {
+        "name": "MetadataTable",
+        "source": "tests/fixtures/forms/native-context-tables/MetadataTable.xml",
+        "sourceSha256": "e892ddbe46307d58fc4fe5baf7569f8d5b33f3ff36a35eb8d76b1587341685a0",
+        "nativeExport": "native/CommonForms/P_MetadataTable/Ext/Form.xml",
+        "nativeExportSha256": "2d2e4e5b2f72515493bcde4e38723f1b70284e35ec25887e677f7e126892e775",
+        "locales": {
+          "en": {
+            "screenshot": "en-MetadataTable-complete.png",
+            "screenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825",
+            "nativeRegion": [
+              274,
+              614,
+              520,
+              227
+            ],
+            "gridHeight": 227,
+            "extraBottom": 0,
+            "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "gridRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "pixels": 118040
+          },
+          "ru": {
+            "screenshot": "ru-MetadataTable-complete.png",
+            "screenshotSha256": "48713ccf40610e945129abeee70c0f90df5ef80d6dcd44d02ca9b258de90f3bf",
+            "nativeRegion": [
+              274,
+              614,
+              520,
+              227
+            ],
+            "gridHeight": 227,
+            "extraBottom": 0,
+            "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "gridRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "pixels": 118040
+          }
+        }
+      }
+    ],
+    "paginationGlyphs": {
+      "rows": [
+        {
+          "width": 9,
+          "height": 6,
+          "grays": [
+            194,
+            194,
+            194,
+            194,
+            194,
+            194,
+            194,
+            194,
+            194,
+            243,
+            243,
+            243,
+            209,
+            169,
+            209,
+            243,
+            243,
+            243,
+            255,
+            255,
+            213,
+            175,
+            175,
+            175,
+            213,
+            255,
+            255,
+            255,
+            214,
+            175,
+            175,
+            175,
+            175,
+            175,
+            214,
+            255,
+            215,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            215,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175
+          ],
+          "region": [
+            8,
+            7,
+            9,
+            6
+          ],
+          "rgbSha256": "adc5d3cbe71359b187d52666dffd204a31d66d91d795fcdf15bbc17b977b8328"
+        },
+        {
+          "width": 9,
+          "height": 5,
+          "grays": [
+            255,
+            255,
+            255,
+            219,
+            177,
+            219,
+            255,
+            255,
+            255,
+            255,
+            255,
+            213,
+            175,
+            175,
+            175,
+            213,
+            255,
+            255,
+            255,
+            214,
+            175,
+            175,
+            175,
+            175,
+            175,
+            214,
+            255,
+            215,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            215,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175
+          ],
+          "region": [
+            32,
+            8,
+            9,
+            5
+          ],
+          "rgbSha256": "160545a249170da64c601b93c56d859d6957b38128f4eced5b7acfe7e3d7ba1f"
+        },
+        {
+          "width": 9,
+          "height": 5,
+          "grays": [
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            216,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            216,
+            255,
+            217,
+            175,
+            175,
+            175,
+            175,
+            175,
+            217,
+            255,
+            255,
+            255,
+            213,
+            175,
+            175,
+            175,
+            214,
+            255,
+            255,
+            255,
+            255,
+            255,
+            218,
+            177,
+            218,
+            255,
+            255,
+            255
+          ],
+          "region": [
+            56,
+            8,
+            9,
+            5
+          ],
+          "rgbSha256": "7674099952baafeeb903befabf8a8ab3bd0580181242c439d9e02a44fc0d76a3"
+        },
+        {
+          "width": 9,
+          "height": 6,
+          "grays": [
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            216,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            175,
+            216,
+            255,
+            217,
+            175,
+            175,
+            175,
+            175,
+            175,
+            217,
+            255,
+            255,
+            255,
+            213,
+            175,
+            175,
+            175,
+            214,
+            255,
+            255,
+            243,
+            243,
+            243,
+            208,
+            169,
+            208,
+            243,
+            243,
+            243,
+            194,
+            194,
+            194,
+            194,
+            194,
+            194,
+            194,
+            194,
+            194
+          ],
+          "region": [
+            80,
+            8,
+            9,
+            6
+          ],
+          "rgbSha256": "87f91415301e2c47fdd9f9c4e40ff141c7aaddf1b4abc849f247a824100c9313"
+        }
+      ],
+      "pixels": 198,
+      "nativeLocalesVerified": [
+        "en",
+        "ru"
+      ]
+    }
+  },
+  "nativeMetricsSha256": "cbe886e40510fc39c621197e35dc0f5ccb8d62c9e58e90d15897902476365559",
+  "nativeSessionsClosed": true,
+  "implementation": [
+    "English native line-number heading is #; Russian remains N. Standard title keys remain locale-independent.",
+    "Linux incomplete mark uses a left-anchored one-pixel repeating pattern; browser dotted-border centering changes the phase at even widths.",
+    "Four disabled pagination glyphs preserve all 198 measured grayscale pixels; verified independently in native ru/en images.",
+    "First pagination segment is 25 px including its left border; the other three are 24 px. One native lighter corner pixel is retained. Windows styles/glyphs remain unchanged.",
+    "The same grid DOM and selected table identity survive dirty replacement DynamicList/MetadataTable in main and actual detached windows, then return. No source XML is saved."
+  ],
+  "checks": {
+    "node": {
+      "passed": 516,
+      "failed": 0,
+      "skipped": 11,
+      "total": 527,
+      "log": "native-context-pixels-g93fkhea/node-tests.log",
+      "logSha256": "56506beced8d49c571d9ff2a695f71474c0bba143b111f4bf324963fc40d9051",
+      "note": "Final CSS changes two pagination placement/corner rules only; all JS/test inputs match this Node run. Final installed suites verify those CSS pixels."
+    },
+    "paginationUnit": {
+      "passed": true,
+      "pixelsCompared": 198,
+      "differentRgbPixels": 0,
+      "nativeLocalesVerified": [
+        "en",
+        "ru"
+      ]
+    },
+    "backend": {
+      "codeChangedInThisSlice": false,
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "completeChecksReuse": "docs/measurements/t158-native-button-types-linux.json",
+      "cargoPassed": 1520,
+      "cargoFailed": 0,
+      "cargoIgnored": 19,
+      "sourceHashesVerifiedAgainstBatch": true,
+      "rustSourcesAndCargoFilesUnchangedSince": "ad8020e"
+    }
+  },
+  "harnessPreparation": {
+    "directory": "context-pixels-before-3z22qacs",
+    "passed": false,
+    "en": "Complete DynamicList frame was clipped by the default 1440x900 test window; no complete pixel result was published. The driver now uses the existing native full-screen command.",
+    "ru": "The direct invocation used an incorrect language-pack environment variable and failed the host locale assertion before preview. Corrected to ESKA_HOST_LANGUAGE_PACK_DIRECTORY. No renderer changes for either harness issue."
+  },
+  "beforeFix": {
+    "directory": "context-pixels-before-ifk7kfhh",
+    "passed": false,
+    "vsixSha256": "fc374c05de606f5082cbe39fc8fbf93520b7768163a64a90a24ff982dbd88fe5",
+    "receiptSha256": {
+      "en": "f569804a4c28b7024bbd03617312fb7ae386a5c51b436b5621ed360ed8529429",
+      "ru": "aa02320b8cf5b4515e4a0a22e951c3e57c1ff60123dd5544048a27c9c1613f20"
+    },
+    "differentRgbPixels": {
+      "en": {
+        "MetadataTable": 594,
+        "DynamicListIncludingPagination": 243
+      },
+      "ru": {
+        "MetadataTable": 503,
+        "DynamicListIncludingPagination": 243
+      }
+    },
+    "measurements": {
+      "en": [
+        {
+          "label": "MetadataTable",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 554,
+            "height": 342
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 520,
+            "height": 227
+          },
+          "headers": [
+            {
+              "text": "N",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Text",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Amount",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Active",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            520,
+            227
+          ],
+          "rgbSha256": "ab4c89685d4973c2837ff56eca42a19f66c76e02d0219b20cc4d27a9f747cbaa",
+          "pixels": 118040,
+          "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 0
+        },
+        {
+          "label": "DynamicList",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 488,
+            "height": 588
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 454,
+            "height": 452
+          },
+          "headers": [
+            {
+              "text": "Code",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Description",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            454,
+            473
+          ],
+          "rgbSha256": "d565d1699e72bce348f061ca65cb54423253c2c29f70befffc527fb69b0994b5",
+          "pixels": 214742,
+          "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 21
+        }
+      ],
+      "ru": [
+        {
+          "label": "MetadataTable",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 554,
+            "height": 342
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 520,
+            "height": 227
+          },
+          "headers": [
+            {
+              "text": "N",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Text",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Amount",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Active",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            520,
+            227
+          ],
+          "rgbSha256": "ab4c89685d4973c2837ff56eca42a19f66c76e02d0219b20cc4d27a9f747cbaa",
+          "pixels": 118040,
+          "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 0
+        },
+        {
+          "label": "DynamicList",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 452,
+            "height": 588
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 418,
+            "height": 452
+          },
+          "headers": [
+            {
+              "text": "Код",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Наименование",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            418,
+            473
+          ],
+          "rgbSha256": "2ab1ad4f1af427380ae537c48b19bec6455bd85b8f78de2c0f8558d09ce0e358",
+          "pixels": 197714,
+          "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 21
+        }
+      ]
+    }
+  },
+  "intermediateCandidate": {
+    "directory": "form-batch-m8sVS8",
+    "passed": false,
+    "pairsPassed": 6,
+    "pairsFailed": 2,
+    "publishedCases": 66,
+    "batchSha256": "d29e208e7b71d7ab666db4eb8199dfb4f9f869dd8254abfd90c08e861b921015",
+    "vsixSha256": "ce5249dddd0d5912197397ed250a82e6781ec66d921616e37258866c5c0c3edd",
+    "differentRgbPixels": {
+      "en": {
+        "DynamicListIncludingPagination": 24
+      },
+      "ru": {
+        "DynamicListIncludingPagination": 24
+      }
+    },
+    "measurements": {
+      "en": [
+        {
+          "label": "DynamicList",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 488,
+            "height": 588
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 454,
+            "height": 452
+          },
+          "headers": [
+            {
+              "text": "Code",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Description",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            454,
+            473
+          ],
+          "rgbSha256": "95a735f3529f6986ec64cd417c6d305daab5fac2817d789425bd850e5740806d",
+          "pixels": 214742,
+          "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 21
+        }
+      ],
+      "ru": [
+        {
+          "label": "DynamicList",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 452,
+            "height": 588
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 418,
+            "height": 452
+          },
+          "headers": [
+            {
+              "text": "Код",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Наименование",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            418,
+            473
+          ],
+          "rgbSha256": "d06e6d0af6b9dbaebd8755cfd4023c7418d1787379dbbd2edc33179d7ac0debf",
+          "pixels": 197714,
+          "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 21
+        }
+      ]
+    },
+    "runs": [
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 1,
+        "signal": null,
+        "seconds": 9.252998046,
+        "passed": false,
+        "inputsStable": true,
+        "classification": "unclassified",
+        "log": "table-pixels-en/driver.log",
+        "receipt": "table-pixels-en/receipt.json",
+        "caseIds": [],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 937.120318,
+          "runtimeVerificationMs": 318.21925999999996,
+          "preHostMs": 1263.77477,
+          "cleanupMs": 33.515723000000435,
+          "totalMs": 9101.267693
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 1,
+        "signal": null,
+        "seconds": 12.266362417,
+        "passed": false,
+        "inputsStable": true,
+        "classification": "unclassified",
+        "log": "table-pixels-ru/driver.log",
+        "receipt": "table-pixels-ru/receipt.json",
+        "caseIds": [],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 846.993837,
+          "runtimeVerificationMs": 350.3524440000001,
+          "preHostMs": 1220.92765,
+          "cleanupMs": 37.65575499999977,
+          "totalMs": 12142.435214
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.574310257999998,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-en/driver.log",
+        "receipt": "tables-en/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 844.734174,
+          "runtimeVerificationMs": 354.335728,
+          "preHostMs": 1207.658926,
+          "cleanupMs": 32.2696420000002,
+          "totalMs": 7427.296060000001
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.123201044000002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-ru/driver.log",
+        "receipt": "tables-ru/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 802.440137,
+          "runtimeVerificationMs": 317.86097000000007,
+          "preHostMs": 1143.532101,
+          "cleanupMs": 39.16150200000084,
+          "totalMs": 10000.795338
+        }
+      },
+      {
+        "suite": "style-composition",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.012487143999999,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "style-composition-en/driver.log",
+        "receipt": "style-composition-en/receipt.json",
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 1042.374393,
+          "runtimeVerificationMs": 349.42594600000007,
+          "preHostMs": 1408.41268,
+          "cleanupMs": 31.79539299999942,
+          "totalMs": 5881.592498000001
+        }
+      },
+      {
+        "suite": "style-composition",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.416479937999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "style-composition-ru/driver.log",
+        "receipt": "style-composition-ru/receipt.json",
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 910.818039,
+          "runtimeVerificationMs": 326.1915359999999,
+          "preHostMs": 1264.31581,
+          "cleanupMs": 36.376383000000715,
+          "totalMs": 8273.414524
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 4.7072535019999995,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-en/driver.log",
+        "receipt": "application-en/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 974.919365,
+          "runtimeVerificationMs": 332.88048000000003,
+          "preHostMs": 1311.14463,
+          "cleanupMs": 34.93984399999954,
+          "totalMs": 4572.696696
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.9134535780000075,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-ru/driver.log",
+        "receipt": "application-ru/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 834.743696,
+          "runtimeVerificationMs": 302.13254400000005,
+          "preHostMs": 1153.131748,
+          "cleanupMs": 39.920460000000276,
+          "totalMs": 6764.430844
+        }
+      }
+    ]
+  },
+  "acceptance": {
+    "passed": true,
+    "batchDirectory": "form-batch-6Up0LF",
+    "pairsPassed": 8,
+    "pairsFailed": 0,
+    "publishedCases": 112,
+    "allFinalPairsFirstAttempt": true,
+    "builds": 1,
+    "packages": 1,
+    "guiConcurrency": 1,
+    "seconds": 72.483588586,
+    "vsixSha256": "f471907f528d20797866ff2021c40548026e48e8b6ca7f3b5dbaff85b9cee44c",
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "0a99a64c239178c4750e7503b847bc84a878700f1cf925b480623bc1d3b2cb21",
+    "batchSha256": "241112d5d125617962ae77596d4c8a76049b16768acef51709cff525a957f3b3",
+    "inputsSha256": "6a25914389580cc2534ce41a4ea72a89e2bbbb88b9c2fc9e342c037b0f10d9a2",
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "samples": 23,
+        "newSourceSamples": 8,
+        "pixelsCompared": 2764272,
+        "newSourcePixelsCompared": 1427830,
+        "differentRgbPixels": 0,
+        "sourceWritesDuringViewing": false,
+        "selectedIdentityPreserved": true,
+        "stableTableDom": true,
+        "detachedUpdates": true,
+        "receiptSha256": "447bc109484f96963e45b09a8f4f39cdb565826d30429712287c914262597881",
+        "results": [
+          {
+            "label": "Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 110,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              180,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "GridFooter",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "Horizontal",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "HorizontalTitled",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 60,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "c58e8f5710cf9616d0ce53ac60d5f162159461d0f514b7750eb902429b98077b",
+            "pixels": 97383,
+            "expectedRgbSha256": "c58e8f5710cf9616d0ce53ac60d5f162159461d0f514b7750eb902429b98077b",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "Vertical",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 343
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 228
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 90,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              228
+            ],
+            "rgbSha256": "09437a95bab7d7093ed3438d5bb3b44dd57299338b53ec4e417a00cbba8c45d9",
+            "pixels": 97812,
+            "expectedRgbSha256": "09437a95bab7d7093ed3438d5bb3b44dd57299338b53ec4e417a00cbba8c45d9",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "InCell",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text, Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 60,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "868c11a6a51ba10505f052943599e4ccb9775737634ae4f2be1ced471b2d69cd",
+            "pixels": 97383,
+            "expectedRgbSha256": "868c11a6a51ba10505f052943599e4ccb9775737634ae4f2be1ced471b2d69cd",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0,
+            "logicalColumnsSelectable": true
+          },
+          {
+            "label": "Marked",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "ed36933503208eeb26bcd6a3f8ad77a0c283660a099373fb0af391e8acaef416",
+            "pixels": 97383,
+            "expectedRgbSha256": "ed36933503208eeb26bcd6a3f8ad77a0c283660a099373fb0af391e8acaef416",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+            "pixels": 97383,
+            "expectedRgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "NoAutoFill",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 307
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              227
+            ],
+            "rgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+            "pixels": 90800,
+            "expectedRgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "MetadataTable",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "#",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "pixels": 118040,
+            "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "DynamicList",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "#",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "pixels": 118040,
+            "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "#",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              520,
+              227
+            ],
+            "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "pixels": 118040,
+            "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          }
+        ]
+      },
+      "ru": {
+        "passed": true,
+        "samples": 23,
+        "newSourceSamples": 8,
+        "pixelsCompared": 2644160,
+        "newSourcePixelsCompared": 1342690,
+        "differentRgbPixels": 0,
+        "sourceWritesDuringViewing": false,
+        "selectedIdentityPreserved": true,
+        "stableTableDom": true,
+        "detachedUpdates": true,
+        "receiptSha256": "0e10f9053d43d338f6cb078d179a126c25a089c6f48f3c1ec27004982ef44f4b",
+        "results": [
+          {
+            "label": "Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 110,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              180,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "GridFooter",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "Horizontal",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "HorizontalTitled",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 60,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "41e1107da3231180ccc9285cac8c0d236e8d53ba186eb9403c04fa3373302217",
+            "pixels": 94205,
+            "expectedRgbSha256": "41e1107da3231180ccc9285cac8c0d236e8d53ba186eb9403c04fa3373302217",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "Vertical",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 343
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 228
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 90,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              228
+            ],
+            "rgbSha256": "c16d177176f65e1714fe8c19eccbf9fd739e9e3034def389a6544abcfef3afee",
+            "pixels": 94620,
+            "expectedRgbSha256": "c16d177176f65e1714fe8c19eccbf9fd739e9e3034def389a6544abcfef3afee",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "InCell",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text, Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 60,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "1d8da1744456e8f5615abae2d3509ba88b2c54d46cf9934a4a70d53e5da49b92",
+            "pixels": 94205,
+            "expectedRgbSha256": "1d8da1744456e8f5615abae2d3509ba88b2c54d46cf9934a4a70d53e5da49b92",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0,
+            "logicalColumnsSelectable": true
+          },
+          {
+            "label": "Marked",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "13f3e4a82cc3a58d7928977190791ac104977f2577cd541960dffa1157d73ee3",
+            "pixels": 94205,
+            "expectedRgbSha256": "13f3e4a82cc3a58d7928977190791ac104977f2577cd541960dffa1157d73ee3",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+            "pixels": 94205,
+            "expectedRgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "NoAutoFill",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 307
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              227
+            ],
+            "rgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+            "pixels": 90800,
+            "expectedRgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "MetadataTable",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "N",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "pixels": 118040,
+            "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "DynamicList",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "N",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "pixels": 118040,
+            "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "N",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              520,
+              227
+            ],
+            "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "pixels": 118040,
+            "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          }
+        ]
+      }
+    },
+    "runs": [
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.451054389000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-en/driver.log",
+        "receipt": "table-pixels-en/receipt.json",
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill",
+          "table-pixels/MetadataTable",
+          "table-pixels/DynamicList",
+          "table-pixels/dynamic-dirty-footer",
+          "table-pixels/dynamic-restored-default",
+          "table-pixels/dynamic-floating-default",
+          "table-pixels/dynamic-floating-dirty-footer",
+          "table-pixels/dynamic-floating-restored",
+          "table-pixels/dynamic-reattached-default"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 806.090546,
+          "runtimeVerificationMs": 357.98013600000013,
+          "preHostMs": 1172.814748,
+          "cleanupMs": 36.72009099999923,
+          "totalMs": 11303.621526
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 14.247658747999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-ru/driver.log",
+        "receipt": "table-pixels-ru/receipt.json",
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill",
+          "table-pixels/MetadataTable",
+          "table-pixels/DynamicList",
+          "table-pixels/dynamic-dirty-footer",
+          "table-pixels/dynamic-restored-default",
+          "table-pixels/dynamic-floating-default",
+          "table-pixels/dynamic-floating-dirty-footer",
+          "table-pixels/dynamic-floating-restored",
+          "table-pixels/dynamic-reattached-default"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 825.009883,
+          "runtimeVerificationMs": 377.92455400000006,
+          "preHostMs": 1225.705806,
+          "cleanupMs": 40.17308400000002,
+          "totalMs": 14092.399359
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.460847658000002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-en/driver.log",
+        "receipt": "tables-en/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 733.456904,
+          "runtimeVerificationMs": 336.34163999999987,
+          "preHostMs": 1078.091527,
+          "cleanupMs": 37.942879999999604,
+          "totalMs": 7317.22612
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 9.846164864999999,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-ru/driver.log",
+        "receipt": "tables-ru/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 797.40369,
+          "runtimeVerificationMs": 358.149761,
+          "preHostMs": 1178.028571,
+          "cleanupMs": 42.90216099999998,
+          "totalMs": 9734.099721
+        }
+      },
+      {
+        "suite": "style-composition",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 5.7416127449999985,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "style-composition-en/driver.log",
+        "receipt": "style-composition-en/receipt.json",
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 802.450387,
+          "runtimeVerificationMs": 317.1432209999999,
+          "preHostMs": 1137.582613,
+          "cleanupMs": 37.67442200000005,
+          "totalMs": 5603.68682
+        }
+      },
+      {
+        "suite": "style-composition",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.450410659999994,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "style-composition-ru/driver.log",
+        "receipt": "style-composition-ru/receipt.json",
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 855.4764449999999,
+          "runtimeVerificationMs": 341.42712900000015,
+          "preHostMs": 1222.400521,
+          "cleanupMs": 39.79741800000011,
+          "totalMs": 8328.794369
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 4.194662434000005,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-en/driver.log",
+        "receipt": "application-en/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 799.768101,
+          "runtimeVerificationMs": 319.35463300000004,
+          "preHostMs": 1122.4472269999999,
+          "cleanupMs": 32.756515999999465,
+          "totalMs": 4082.309916
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.934905450999999,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-ru/driver.log",
+        "receipt": "application-ru/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 715.358525,
+          "runtimeVerificationMs": 350.8832769999999,
+          "preHostMs": 1085.118512,
+          "cleanupMs": 37.82896399999936,
+          "totalMs": 6756.532985000001
+        }
+      }
+    ],
+    "legacyTableCasesPerLocale": 16,
+    "styleCompositionCasesPerLocale": 13,
+    "providedApplicationFormsPerLocale": 4,
+    "labelNote": "The dynamic-* labels reuse legacy transition names: dirty-footer means the entire MetadataTable XML, restored-default means DynamicList. Both replace the complete in-memory XML; no footer is fabricated."
+  },
+  "artifactLocations": {
+    "nativeDirectory": "native-context-pixels-g93fkhea",
+    "batchDirectory": "form-batch-6Up0LF",
+    "originalDtChanged": false
+  },
+  "remaining": [
+    "Table toolbar/additions and complete forms are outside these accepted grid regions.",
+    "Other metadata objects, dynamic-list types, column/selection/hierarchy states, widths, alignments, fonts and style combinations remain open.",
+    "Windows, other DPI and complete property inventory remain unaccepted."
+  ]
+}

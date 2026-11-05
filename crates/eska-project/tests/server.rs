@@ -32,6 +32,9 @@ mod libraries;
 #[path = "server/language.rs"]
 mod language;
 
+#[path = "server/forms.rs"]
+mod forms;
+
 struct Client {
     child: Child,
     input: ChildStdin,

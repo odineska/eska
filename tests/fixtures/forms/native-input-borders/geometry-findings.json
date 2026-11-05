@@ -1,0 +1,396 @@
+{
+  "platform": "8.3.27.2342",
+  "accepted": false,
+  "reason": "Explicit Width and shared alignment require separate T157 work; this row is not accepted as current whole-form geometry.",
+  "forms": [
+    {
+      "name": "ChoiceB",
+      "file": "ChoiceB.xml",
+      "sourceXmlSha256": "4c609aa60b3ed4f538df65f7e8b05452cacb0f0269dc1ebf01d402794b924751",
+      "screenshot": "native-input-corners-choice-B-en-full.png",
+      "screenshotSha256": "37868af03285b157a6fc74f31f31c9f8034f58baaebd688e44d9bbfdc458633d",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "fields": [
+        {
+          "name": "Name",
+          "id": 10,
+          "rect": [
+            72,
+            67,
+            231,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {},
+          "choice": false,
+          "inactive": false,
+          "explicitBorder": true,
+          "border": [
+            255,
+            95,
+            90
+          ],
+          "background": [
+            10,
+            90,
+            241
+          ],
+          "outside": [
+            116,
+            193,
+            230
+          ],
+          "actualBorder": [
+            255,
+            95,
+            90
+          ],
+          "actualBackground": [
+            10,
+            90,
+            241
+          ],
+          "cornersRgb": {
+            "topLeft": "77bfe3be8d9bf16968be8d9b9c72a21764eef169681764ee0a5af1",
+            "topRight": "ff5f5af16968be8d9b0a5af11764ee9c72a20a5af10a5af11764ee",
+            "bottomLeft": "f169681764ee0a5af1be8d9b9c72a21764ee77bfe3be8d9bf16968",
+            "bottomRight": "0a5af10a5af11764ee0a5af11764ee9c72a2ff5f5af16968be8d9b"
+          },
+          "wholeInputRgbSha256": "0a66162388a0e5e32e92424abed8418bccf817e42a3651d1c5c151bd3e020405"
+        },
+        {
+          "name": "Amount",
+          "id": 20,
+          "rect": [
+            72,
+            99,
+            232,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Width": "20"
+          },
+          "choice": true,
+          "inactive": false,
+          "explicitBorder": true,
+          "border": [
+            255,
+            95,
+            90
+          ],
+          "background": [
+            10,
+            90,
+            241
+          ],
+          "outside": [
+            116,
+            193,
+            230
+          ],
+          "actualBorder": [
+            255,
+            95,
+            90
+          ],
+          "actualBackground": [
+            10,
+            90,
+            241
+          ],
+          "cornersRgb": {
+            "topLeft": "77bfe3be8d9bf16968be8d9b9c72a21764eef169681764ee0a5af1",
+            "topRight": "f16968be8d9b77bfe3e6eefdb89abdbe8d9bffffffe6eefdf16968",
+            "bottomLeft": "f169681764ee0a5af1be8d9b9c72a21764ee77bfe3be8d9bf16968",
+            "bottomRight": "ffffffe6eefdf16968e6eefdb89abdbe8d9bf16968be8d9b77bfe3"
+          },
+          "wholeInputRgbSha256": "f7d919f815c2a133c0fef85b0b2dfda581381535e7e3f6b883617e14eebdfbdb",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              282,
+              100,
+              20,
+              21
+            ],
+            "rgbSha256": "1fb6010cda03dcca7f51ddb8cc63f3e97aae405db6ef95aec3268b5c477c1e88"
+          }
+        },
+        {
+          "name": "ReadOnlyName",
+          "id": 30,
+          "rect": [
+            72,
+            131,
+            231,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "ReadOnly": "true"
+          },
+          "choice": false,
+          "inactive": true,
+          "explicitBorder": true,
+          "border": [
+            255,
+            95,
+            90
+          ],
+          "background": [
+            10,
+            90,
+            241
+          ],
+          "outside": [
+            116,
+            193,
+            230
+          ],
+          "actualBorder": [
+            255,
+            171,
+            166
+          ],
+          "actualBackground": [
+            116,
+            193,
+            230
+          ],
+          "cornersRgb": {
+            "topLeft": "77c0e4beb5c4f1adacbeb5c4d7b1b883bfdff1adac83bfdf74c1e6",
+            "topRight": "ffaba6f1adacbeb5c474c1e683bfdfd7b1b874c1e674c1e683bfdf",
+            "bottomLeft": "f1adac83bfdf74c1e6beb5c4d7b1b883bfdf77c0e4beb5c4f1adac",
+            "bottomRight": "74c1e674c1e683bfdf74c1e683bfdfd7b1b8ffaba6f1adacbeb5c4"
+          },
+          "wholeInputRgbSha256": "9e7307ec2f36e0bd260fcc8434aaac9f2c3d9ce2f45bae000dcbeb0b0d91f8c9"
+        },
+        {
+          "name": "DisabledName",
+          "id": 40,
+          "rect": [
+            72,
+            163,
+            231,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "string",
+            "digits": 0,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Enabled": "false"
+          },
+          "choice": false,
+          "inactive": true,
+          "explicitBorder": true,
+          "border": [
+            255,
+            95,
+            90
+          ],
+          "background": [
+            10,
+            90,
+            241
+          ],
+          "outside": [
+            116,
+            193,
+            230
+          ],
+          "actualBorder": [
+            255,
+            171,
+            166
+          ],
+          "actualBackground": [
+            116,
+            193,
+            230
+          ],
+          "cornersRgb": {
+            "topLeft": "77c0e4beb5c4f1adacbeb5c4d7b1b883bfdff1adac83bfdf74c1e6",
+            "topRight": "ffaba6f1adacbeb5c474c1e683bfdfd7b1b874c1e674c1e683bfdf",
+            "bottomLeft": "f1adac83bfdf74c1e6beb5c4d7b1b883bfdf77c0e4beb5c4f1adac",
+            "bottomRight": "74c1e674c1e683bfdf74c1e683bfdfd7b1b8ffaba6f1adacbeb5c4"
+          },
+          "wholeInputRgbSha256": "9e7307ec2f36e0bd260fcc8434aaac9f2c3d9ce2f45bae000dcbeb0b0d91f8c9"
+        },
+        {
+          "name": "ReadOnlyAmount",
+          "id": 50,
+          "rect": [
+            72,
+            195,
+            232,
+            23
+          ],
+          "logicalWidth": 231,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "ReadOnly": "true",
+            "ChoiceButton": "true",
+            "Width": "20"
+          },
+          "choice": true,
+          "inactive": true,
+          "explicitBorder": true,
+          "border": [
+            255,
+            95,
+            90
+          ],
+          "background": [
+            10,
+            90,
+            241
+          ],
+          "outside": [
+            116,
+            193,
+            230
+          ],
+          "actualBorder": [
+            255,
+            171,
+            166
+          ],
+          "actualBackground": [
+            116,
+            193,
+            230
+          ],
+          "cornersRgb": {
+            "topLeft": "77c0e4beb5c4f1adacbeb5c4d7b1b883bfdff1adac83bfdf74c1e6",
+            "topRight": "f1adacbeb5c477c0e4f1f8fbe2c7ccbeb5c4fffffff1f8fbf1adac",
+            "bottomLeft": "f1adac83bfdf74c1e6beb5c4d7b1b883bfdf77c0e4beb5c4f1adac",
+            "bottomRight": "fffffff1f8fbf1adacf1f8fbe2c7ccbeb5c4f1adacbeb5c477c0e4"
+          },
+          "wholeInputRgbSha256": "68ade60c090a22daa44be429642598af85d0246f5825a90f6c930b1506291e75",
+          "button": {
+            "kind": "calculator",
+            "rect": [
+              282,
+              196,
+              20,
+              21
+            ],
+            "rgbSha256": "91f397f11b77b122f0e1cf53398d09658a64de9dc4d7bf484d7c8d968e57e53a"
+          }
+        },
+        {
+          "name": "DisabledAmount",
+          "id": 60,
+          "rect": [
+            72,
+            227,
+            211,
+            23
+          ],
+          "logicalWidth": 211,
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "length": 0,
+            "dateParts": "DateTime"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "properties": {
+            "Enabled": "false",
+            "ChoiceButton": "false",
+            "Width": "20"
+          },
+          "choice": false,
+          "inactive": true,
+          "explicitBorder": true,
+          "border": [
+            255,
+            95,
+            90
+          ],
+          "background": [
+            10,
+            90,
+            241
+          ],
+          "outside": [
+            116,
+            193,
+            230
+          ],
+          "actualBorder": [
+            255,
+            171,
+            166
+          ],
+          "actualBackground": [
+            116,
+            193,
+            230
+          ],
+          "cornersRgb": {
+            "topLeft": "77c0e4beb5c4f1adacbeb5c4d7b1b883bfdff1adac83bfdf74c1e6",
+            "topRight": "f1adacbeb5c477c0e483bfdfd7b1b8beb5c474c1e683bfdff1adac",
+            "bottomLeft": "f1adac83bfdf74c1e6beb5c4d7b1b883bfdf77c0e4beb5c4f1adac",
+            "bottomRight": "74c1e683bfdff1adac83bfdfd7b1b8beb5c4f1adacbeb5c477c0e4"
+          },
+          "wholeInputRgbSha256": "29d1dbdd934b6715dd93d0c7e81f80275da50601e04356367100a03537048d93"
+        }
+      ]
+    }
+  ]
+}

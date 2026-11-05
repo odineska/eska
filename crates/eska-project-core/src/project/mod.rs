@@ -7,6 +7,7 @@ pub mod create;
 pub mod designer_source;
 pub mod designer_xml;
 pub mod discovery;
+pub mod forms;
 mod ignore;
 pub mod init;
 pub mod metadata;

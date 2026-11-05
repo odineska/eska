@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "readyForLinuxFunctionalTesting": true,
+  "featureStatus": "beta",
+  "packagePrereleaseRequested": false,
+  "calculatedCoveragePercentage": null,
+  "fullT165Accepted": false,
+  "fullProfileAccepted": false,
+  "scope": "Managed Designer XML static form preview, Linux ARM64, checked ru/en functional scenarios. Minor borders/AA/blending/custom-color differences may remain known limitations. Major missing/misordered/overlapping/clipped content, hangs/crashes or silent stale views are not accepted as cosmetic.",
+  "betaMarker": {
+    "command": {
+      "en": "Open form preview (beta)",
+      "ru": "Открыть просмотр формы (beta)"
+    },
+    "status": {
+      "en": "Beta form preview",
+      "ru": "Просмотр форм: beta"
+    },
+    "nativeScreenshot": {
+      "path": "form-batch-mVIkQw/application-ru/application-form-0-ru.png",
+      "sha256": "c049bd0003a04badd7524390672a96ab66d672ae97430be8e522e379c4550bdd",
+      "visuallyVerified": true
+    }
+  },
+  "checks": {
+    "node": {
+      "passed": 549,
+      "failed": 0,
+      "skipped": 11,
+      "total": 560,
+      "log": "solid-state-zje24d4y/beta-node-full.log",
+      "sha256": "fd28639901cd967ebec9ceb6f88a5dcc7101e80c42fcf749a0cfb7a0a5822a12"
+    },
+    "controller": {
+      "passed": 4,
+      "failed": 0,
+      "log": "solid-state-zje24d4y/controller-tests.log",
+      "sha256": "d4b78cabb17dc63c0d01bc0de7b37ca9be9ac2bc9c9601d3c423cd6f38787475",
+      "beforeRegressionFailedAsExpected": true,
+      "beforeLog": "solid-state-zje24d4y/before-regression.log",
+      "beforeLogSha256": "f8a187619a81df6a56308b31e87b1451df5abb0cc1bc0ee17cd6b7fc47f7b707",
+      "observedSnapshotsBefore": 6,
+      "observedSnapshotsAfter": 1,
+      "realSolidBrowserBuild": true,
+      "staleSequenceRejected": true,
+      "selectionAndNavigationPreserved": true
+    },
+    "rust": {
+      "fmt": true,
+      "check": true,
+      "strictClippy": true,
+      "test": true,
+      "build": true,
+      "suites": 42,
+      "passed": 1520,
+      "failed": 0,
+      "ignored": 19,
+      "coreSourceFilesVerified": 607,
+      "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "logs": {
+        "fmt": {
+          "path": "solid-state-zje24d4y/cargo-fmt.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "check": {
+          "path": "solid-state-zje24d4y/cargo-check.log",
+          "sha256": "9a30d54c8b16d7e49510b182028079bca120aeebb7d662e88f8566e6196a49f6"
+        },
+        "clippy": {
+          "path": "solid-state-zje24d4y/cargo-clippy.log",
+          "sha256": "22e0df986057b9ba5be07526ac5fb348862a3dedef42108383cc3e088acbb889"
+        },
+        "test": {
+          "path": "solid-state-zje24d4y/cargo-test.log",
+          "sha256": "cec1319d135360868c55647ded01920876053144edf38b56731cf22463fbca91"
+        },
+        "build": {
+          "path": "solid-state-zje24d4y/cargo-build.log",
+          "sha256": "02db5a66fa0c60ca8618bd08aac556eac4f3ec863e8630a0d353dba6a0f6e126"
+        }
+      }
+    }
+  },
+  "acceptance": {
+    "atomicStateReport": "docs/measurements/t162-solid-state-batching-linux.json",
+    "atomicStateReportSha256": "70633809827705c71294704616b311559fe9e711e5daf1d49c63c1434ed9a573",
+    "pairs": 16,
+    "cases": 104,
+    "applicationForms": 4,
+    "noUnsupportedElementsInCheckedApplicationForms": true,
+    "sourceWritesDuringViewing": false,
+    "bslExecuted": false,
+    "userFlows": [
+      "tree/canvas selection",
+      "pages/groups",
+      "property reading and XML navigation",
+      "dirty/saved/external XML",
+      "Undo/Redo",
+      "malformed XML retains latest good view with status",
+      "detach/reattach and two independent native windows",
+      "restart and recovery"
+    ],
+    "frozenVsix": {
+      "path": "form-batch-mVIkQw/artifacts/viewer.vsix",
+      "sha256": "aaec6317db57c5f93def65db7fcd33c58916f9661086c2ef676791958f98ba8d"
+    },
+    "frozenBackend": {
+      "path": "form-batch-mVIkQw/artifacts/eska-project",
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84"
+    },
+    "runtimeManifestSha256": "1af53445f2d3f000d8c2cfd3f3a91da8642a8953b2566cdd7de80b2049e322b9"
+  },
+  "previousDeliveredBundle": "linux-form-preview-test-_skng4il",
+  "knownLimitations": [
+    "Only static managed Designer XML; BSL-created content and runtime documents are not executed.",
+    "Full arbitrary layout/property/font/style/state combinations are not accepted as pixel-identical.",
+    "Windows native form acceptance, other DPI/Remote, interface8.5 and graphical editing remain open.",
+    "Large-form stress/performance and remaining SolidJS refactors remain queued."
+  ],
+  "releasePolicy": "Use existing PR/CI/CD and version automation. Publish compatible ESKA assets before Explorer. Mark form rendering beta in UI/docs/release notes; do not claim full T165."
+}

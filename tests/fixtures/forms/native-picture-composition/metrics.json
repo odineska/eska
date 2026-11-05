@@ -1,0 +1,476 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342 Linux ALT 10 ARM64",
+  "reference": "Static managed client, XML-only own IB, /URL; semantic resource oracle, not Configurator pixel acceptance",
+  "noBslModulesOrHandlers": true,
+  "fullProfileAccepted": false,
+  "files": [
+    {
+      "path": "base/CommonForms/ProbePicture/Ext/Form.xml",
+      "sha256": "f82134277c8fd97059196e3e36291437b5ea0a7f810b7024199260991567230e",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/CommonForms/ProbePicture.xml",
+      "sha256": "1e780774d6fbceab6eb30c9db62a8440ae3e283422f03bbf79e8385538c53b2f",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/CommonPictures/ProbeIcon/Ext/Picture/Picture.svg",
+      "sha256": "1ab85192fab3115b99459e7ab0d1edfe6b5726561583ade9404336a372ccee62",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/CommonPictures/ProbeIcon/Ext/Picture.xml",
+      "sha256": "ce1c74d7499ec536457922a70e5b2061d17e2330879e1ce2de67e1288e988dea",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/CommonPictures/ProbeIcon.xml",
+      "sha256": "d44431ddbf269b6b1f78b7e74d930cd8c582ce35a432c08482b7b70b473c59ea",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/Configuration.xml",
+      "sha256": "4f592575553ebb4be95a6c155667e6cb34bd35112acbf2a2fc027ad5f66c2482",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "base/Languages/Русский.xml",
+      "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/CommonForms/F_PictureOwn/Ext/Form.xml",
+      "sha256": "0cebf455120955992b1dd55b67bca3ad64d564a34cdb74fe5e83d511ad13e32e",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/CommonForms/F_PictureOwn.xml",
+      "sha256": "9cd8eba541a974b030a092349653fff658ec8c75cd9e65346f0137721f7ec3ff",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/CommonPictures/F_OwnIcon/Ext/Picture/Picture.svg",
+      "sha256": "d3c459de77c1ece06c4eec5716b54786667b29f2e1f5f3a57fbb4113b6fdea09",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/CommonPictures/F_OwnIcon/Ext/Picture.xml",
+      "sha256": "ce1c74d7499ec536457922a70e5b2061d17e2330879e1ce2de67e1288e988dea",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/CommonPictures/F_OwnIcon.xml",
+      "sha256": "be1de1eeb2ef3db24e8489c134bfbb9a9848d5bd48d72baeb10f9acf4242abf9",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/CommonPictures/ProbeIcon/Ext/Picture/Picture.svg",
+      "sha256": "87f9cccf22d7379e954ac9278d104f039af6c6b836bc88d7ec42e230ed2987ef",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/CommonPictures/ProbeIcon/Ext/Picture.xml",
+      "sha256": "ce1c74d7499ec536457922a70e5b2061d17e2330879e1ce2de67e1288e988dea",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/CommonPictures/ProbeIcon.xml",
+      "sha256": "e026b390d2a652fa88c7d95403e13f3691f3923a38baa89f651b4a19f060c7f4",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "first/Configuration.xml",
+      "sha256": "6fc68d9e1dcaa4416810fdca497e2c78b34d27c149f4f6cf2508a063c199750f",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/CommonForms/S_PictureOwn/Ext/Form.xml",
+      "sha256": "f82134277c8fd97059196e3e36291437b5ea0a7f810b7024199260991567230e",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/CommonForms/S_PictureOwn.xml",
+      "sha256": "1e7894e96ecb02b0040f7079f098859b7cad954945fd00086dd9a21077c5b851",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/CommonPictures/ProbeIcon/Ext/Picture/Picture.svg",
+      "sha256": "6d46c4e15aeb4f0b4c3e484c3db523c865000b49e5e8fe457b9191ae4ae25345",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/CommonPictures/ProbeIcon/Ext/Picture.xml",
+      "sha256": "ce1c74d7499ec536457922a70e5b2061d17e2330879e1ce2de67e1288e988dea",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/CommonPictures/ProbeIcon.xml",
+      "sha256": "a0aa4ec90d08711f71682af13a038e0df506a845830ceff443712d614976b3b6",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "second/Configuration.xml",
+      "sha256": "e2c5bbd16b0e35a4908259336d43edf08a8e323cefb2ab717a4cd9a37be747e0",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/EmptyPicture.zip",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/SecondBorrowedPicture.xml",
+      "sha256": "1b65d53b8678135f4b5f18551636fb9a12100045b9058d86dc463e85cd270b87",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "variants/SecondEmptyPicture.xml",
+      "sha256": "6e14e5440f26d37553d68a02e8872b80e6453340a7b04a2f2dbf5081a91c0010",
+      "nativeRoundTrip": true
+    }
+  ],
+  "cases": [
+    {
+      "id": "pictures-base-only",
+      "activeExtensions": [],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "base",
+          "color": "#E02020"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-base-only.png",
+        "sha256": "b40c5c6c8806b55e09d278a7ca0a78e77bba536a70f25d01fdb4566212f02c34",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-first-only",
+      "activeExtensions": [
+        "first"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "first",
+          "color": "#00AA00"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-first-only.png",
+        "sha256": "587718066a45ebd833f90047485bc07da0188ebc402081475fe30a7202b1a21a",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-second-only",
+      "activeExtensions": [
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "second",
+          "color": "#2050EE"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-second-only.png",
+        "sha256": "7f797e00450d44487a8129b62559cda72526a054a1e9b2d6a63c341d9e013102",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-base-both",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "second",
+          "color": "#2050EE"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-base-both.png",
+        "sha256": "1fa80efec7bc19fd4adab79d59c5e2cde7e5163c75fdd2da54d9e5b741fda408",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-first-own-both",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_PictureOwn/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "second",
+          "color": "#2050EE"
+        },
+        "OwnLogo": {
+          "member": "first",
+          "color": "#FFCC00"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-first-own-both.png",
+        "sha256": "2a5bc2208127d120946fb289d07b75db1a9f5a71374f0e7dca6a2b903e6d2a11",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-second-own-both",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "second",
+      "payload": "CommonForms/S_PictureOwn/Ext/Form.xml",
+      "remove": [],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "second",
+          "color": "#2050EE"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-second-own-both.png",
+        "sha256": "ce0e19540c1a08fe55dfe33edd411869bc96db67ae0a0f362170c436c6e33594",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-borrow-only",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [
+        "second/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [
+        {
+          "input": "variants/SecondBorrowedPicture.xml",
+          "output": "second/CommonPictures/ProbeIcon.xml"
+        }
+      ],
+      "expected": {
+        "Logo": {
+          "member": "first",
+          "color": "#00AA00"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-borrow-only.png",
+        "sha256": "e37e4342b73d5ed8418ba32e18a1d26f53a0c1d15419cfc00407212a85d0d6d0",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-clear-no-file",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [
+        "second/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [],
+      "expected": {
+        "Logo": null
+      },
+      "screenshot": {
+        "file": "pictures-v2-clear-no-file.png",
+        "sha256": "f741a24bbe7b2d2813187af706ad929384f117815fd9f71e7a7cbf3f4e31c660",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-clear-empty-file",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [
+        "second/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [
+        {
+          "input": "variants/SecondEmptyPicture.xml",
+          "output": "second/CommonPictures/ProbeIcon/Ext/Picture.xml"
+        },
+        {
+          "input": "variants/EmptyPicture.zip",
+          "output": "second/CommonPictures/ProbeIcon/Ext/Picture/Picture.zip"
+        }
+      ],
+      "expected": {
+        "Logo": null
+      },
+      "screenshot": {
+        "file": "pictures-v2-clear-empty-file.png",
+        "sha256": "f741a24bbe7b2d2813187af706ad929384f117815fd9f71e7a7cbf3f4e31c660",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-first-own-clear",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_PictureOwn/Ext/Form.xml",
+      "remove": [
+        "second/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [],
+      "expected": {
+        "Logo": null,
+        "OwnLogo": {
+          "member": "first",
+          "color": "#FFCC00"
+        }
+      },
+      "screenshot": {
+        "file": "pictures-v2-first-own-clear.png",
+        "sha256": "4ea8408ca33aba8fc15571544aac779a08b8d634c45d69bc7a7f1d574bb272ae",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-second-own-clear",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "second",
+      "payload": "CommonForms/S_PictureOwn/Ext/Form.xml",
+      "remove": [
+        "second/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [],
+      "expected": {
+        "Logo": null
+      },
+      "screenshot": {
+        "file": "pictures-v2-second-own-clear.png",
+        "sha256": "5804045f2e23dc9deb83a3647ca00bf8f314c3c858a0586ac3c77d525458e51a",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-base-empty-definition",
+      "activeExtensions": [],
+      "selectedMember": "base",
+      "payload": "CommonForms/ProbePicture/Ext/Form.xml",
+      "remove": [
+        "base/CommonPictures/ProbeIcon/Ext"
+      ],
+      "inputs": [],
+      "expected": {
+        "Logo": null
+      },
+      "screenshot": {
+        "file": "pictures-v2-base-empty-definition.png",
+        "sha256": "7d3ccdb6f103c96d2ad62b1188fd56dd5f3eebcc47c027696777af2812366e7e",
+        "width": 1918,
+        "height": 770
+      }
+    },
+    {
+      "id": "pictures-first-empty-definition",
+      "activeExtensions": [
+        "first",
+        "second"
+      ],
+      "selectedMember": "first",
+      "payload": "CommonForms/F_PictureOwn/Ext/Form.xml",
+      "remove": [
+        "first/CommonPictures/F_OwnIcon/Ext"
+      ],
+      "inputs": [],
+      "expected": {
+        "Logo": {
+          "member": "second",
+          "color": "#2050EE"
+        },
+        "OwnLogo": null
+      },
+      "screenshot": {
+        "file": "pictures-v2-first-empty-definition.png",
+        "sha256": "58d0f0e36ce24b5fa363a4e33997b339a9d549fb2cdca30271040de9f2b37b47",
+        "width": 1918,
+        "height": 770
+      }
+    }
+  ],
+  "rules": [
+    "Common picture payload override is global to base and own extension forms.",
+    "Borrowed metadata without Picture Extended and without payload inherits the preceding picture.",
+    "Picture Extended without external payload explicitly clears the image.",
+    "An empty Picture imported by 1C exports a zero-byte Picture.zip, which is also an explicit empty image.",
+    "An unrelated own common picture remains unchanged.",
+    "An initially empty base or own-extension common picture has no Ext payload and is valid empty, not a missing-image diagnostic."
+  ],
+  "applicabilityChecks": [
+    {
+      "variant": "clear",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    },
+    {
+      "variant": "both",
+      "exitCode": 0,
+      "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+    }
+  ],
+  "limits": [
+    "Other picture formats, sizing, transparent color and standard icons require separate acceptance.",
+    "No full Configurator form pixels, Windows, DPI or 8.5 acceptance."
+  ],
+  "preparationNotes": [
+    "The initial hand-authored Logo id 10 and OwnLogo id 11 collided with auxiliary IDs. All three forms were re-imported with unique primary IDs 100/101 and all 11 observations plus two applicability checks repeated. Only the v2 native exports and screenshots are accepted. Initial snapshots and logs remain in the playground."
+  ]
+}

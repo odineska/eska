@@ -96,6 +96,33 @@ fn reads_current_picture_contents_and_distinguishes_missing_from_unsupported() {
     ));
 }
 
+/// Native 8.3.27 exports an empty common picture as a referenced zero-byte Picture.zip.
+#[test]
+fn native_empty_picture_retains_inputs_without_becoming_a_broken_archive() {
+    let (_directory, source, id) = picture_fixture("Picture.zip", b"");
+    let PicturePreview::Empty { inputs } = source.picture_preview(&id) else {
+        panic!("native empty picture was not recognized")
+    };
+    assert_eq!(inputs.len(), 2);
+    assert!(inputs[1].path.ends_with("Picture.zip"));
+    assert_eq!(
+        inputs[1].snapshot,
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    );
+    let PicturePreview::Empty { inputs } = source.picture_preview_xml(
+        &id,
+        "<ExtPicture xmlns=\"http://v8.1c.ru/8.3/xcf/extrnprops\"><Picture/></ExtPicture>",
+    ) else {
+        panic!("empty external property was not recognized")
+    };
+    assert_eq!(inputs.len(), 1);
+    reference(&source, "missing.zip");
+    assert!(matches!(
+        source.picture_preview(&id),
+        PicturePreview::Failed(PictureError::Missing)
+    ));
+}
+
 /// A larger legacy-interface variant must not replace the modern-interface picture.
 #[test]
 fn zip_selects_largest_current_variant_and_never_extracts_files() {

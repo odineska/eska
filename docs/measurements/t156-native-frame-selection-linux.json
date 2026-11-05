@@ -1,0 +1,538 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 container)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.38",
+  "visualParityVerified": false,
+  "sourceFixture": "tests/fixtures/forms/native-groups/PagesAuto.xml",
+  "fixtureSha256": "e92790ab23e1cbe1412925f713bc27da6661bbc4154340da9dcd301643aaf289",
+  "method": {
+    "nativeOrigin": [
+      261,
+      240
+    ],
+    "browserOrigin": [
+      376,
+      347
+    ],
+    "comparisonSize": [
+      275,
+      156
+    ],
+    "region": "Entire form and four pixels for right/bottom shadow",
+    "maskedPixels": 0,
+    "selectionComparison": "Full pixel-coordinate sets of RGB (30,144,255), no mask applied to the whole-form comparison"
+  },
+  "nativeMetrics": {
+    "outerBorderPixels": 1,
+    "titleBackground": "#f6f5f4",
+    "titleColor": "#ffffff",
+    "titleFontCssPixels": 11,
+    "titleWeight": 700,
+    "selectionColor": "#1e90ff",
+    "selectionBorderPixels": 2,
+    "shadowSolidSteps": [
+      "#3f3f3f",
+      "#555555",
+      "#7f7f7f"
+    ]
+  },
+  "wholeFormStates": {
+    "ru": {
+      "root": {
+        "nativeCropRgbSha256": "3282aae164c1f1d0cbed1c0c20e45828396d0f21c3fef1b7fb6fd2e238a3f06d",
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 39589,
+        "equalRgbRatio": 0.922821,
+        "selectionNativeBoundsInclusive": [
+          1,
+          1,
+          269,
+          150
+        ],
+        "selectionBrowserBoundsInclusive": [
+          1,
+          1,
+          269,
+          150
+        ],
+        "selectionNativePixels": 1660,
+        "selectionBrowserPixels": 1660,
+        "selectionPixelCoordinatesEqual": true,
+        "regions": {
+          "title": {
+            "pixelsCompared": 6994,
+            "equalRgbPixels": 6657,
+            "equalRgbRatio": 0.951816
+          },
+          "content": {
+            "pixelsCompared": 33356,
+            "equalRgbPixels": 30545,
+            "equalRgbRatio": 0.915727
+          },
+          "rightShadow": {
+            "pixelsCompared": 444,
+            "equalRgbPixels": 296,
+            "equalRgbRatio": 0.666667
+          },
+          "bottomShadow": {
+            "pixelsCompared": 798,
+            "equalRgbPixels": 797,
+            "equalRgbRatio": 0.998747
+          }
+        }
+      },
+      "input": {
+        "nativeCropRgbSha256": "e07d6e9ed5e951f06a1720a520f4411cc65dbcb4656c11f89c60aa257a4fe34d",
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 39589,
+        "equalRgbRatio": 0.922821,
+        "selectionNativeBoundsInclusive": [
+          21,
+          71,
+          241,
+          99
+        ],
+        "selectionBrowserBoundsInclusive": [
+          21,
+          71,
+          241,
+          99
+        ],
+        "selectionNativePixels": 984,
+        "selectionBrowserPixels": 984,
+        "selectionPixelCoordinatesEqual": true,
+        "regions": {
+          "title": {
+            "pixelsCompared": 6994,
+            "equalRgbPixels": 6657,
+            "equalRgbRatio": 0.951816
+          },
+          "content": {
+            "pixelsCompared": 33356,
+            "equalRgbPixels": 30545,
+            "equalRgbRatio": 0.915727
+          },
+          "rightShadow": {
+            "pixelsCompared": 444,
+            "equalRgbPixels": 296,
+            "equalRgbRatio": 0.666667
+          },
+          "bottomShadow": {
+            "pixelsCompared": 798,
+            "equalRgbPixels": 797,
+            "equalRgbRatio": 0.998747
+          }
+        }
+      },
+      "page": {
+        "nativeCropRgbSha256": "4f3c71855226ad143654f18a20f9063ba3850ac8b0da232c77e133f7d29f85a2",
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 39597,
+        "equalRgbRatio": 0.923007,
+        "selectionNativeBoundsInclusive": [
+          10,
+          36,
+          93,
+          67
+        ],
+        "selectionBrowserBoundsInclusive": [
+          10,
+          36,
+          93,
+          67
+        ],
+        "selectionNativePixels": 448,
+        "selectionBrowserPixels": 448,
+        "selectionPixelCoordinatesEqual": true,
+        "regions": {
+          "title": {
+            "pixelsCompared": 6994,
+            "equalRgbPixels": 6657,
+            "equalRgbRatio": 0.951816
+          },
+          "content": {
+            "pixelsCompared": 33356,
+            "equalRgbPixels": 30553,
+            "equalRgbRatio": 0.915967
+          },
+          "rightShadow": {
+            "pixelsCompared": 444,
+            "equalRgbPixels": 296,
+            "equalRgbRatio": 0.666667
+          },
+          "bottomShadow": {
+            "pixelsCompared": 798,
+            "equalRgbPixels": 797,
+            "equalRgbRatio": 0.998747
+          }
+        }
+      }
+    },
+    "en": {
+      "root": {
+        "nativeCropRgbSha256": "3282aae164c1f1d0cbed1c0c20e45828396d0f21c3fef1b7fb6fd2e238a3f06d",
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 39589,
+        "equalRgbRatio": 0.922821,
+        "selectionNativeBoundsInclusive": [
+          1,
+          1,
+          269,
+          150
+        ],
+        "selectionBrowserBoundsInclusive": [
+          1,
+          1,
+          269,
+          150
+        ],
+        "selectionNativePixels": 1660,
+        "selectionBrowserPixels": 1660,
+        "selectionPixelCoordinatesEqual": true,
+        "regions": {
+          "title": {
+            "pixelsCompared": 6994,
+            "equalRgbPixels": 6657,
+            "equalRgbRatio": 0.951816
+          },
+          "content": {
+            "pixelsCompared": 33356,
+            "equalRgbPixels": 30545,
+            "equalRgbRatio": 0.915727
+          },
+          "rightShadow": {
+            "pixelsCompared": 444,
+            "equalRgbPixels": 296,
+            "equalRgbRatio": 0.666667
+          },
+          "bottomShadow": {
+            "pixelsCompared": 798,
+            "equalRgbPixels": 797,
+            "equalRgbRatio": 0.998747
+          }
+        }
+      },
+      "input": {
+        "nativeCropRgbSha256": "e07d6e9ed5e951f06a1720a520f4411cc65dbcb4656c11f89c60aa257a4fe34d",
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 39589,
+        "equalRgbRatio": 0.922821,
+        "selectionNativeBoundsInclusive": [
+          21,
+          71,
+          241,
+          99
+        ],
+        "selectionBrowserBoundsInclusive": [
+          21,
+          71,
+          241,
+          99
+        ],
+        "selectionNativePixels": 984,
+        "selectionBrowserPixels": 984,
+        "selectionPixelCoordinatesEqual": true,
+        "regions": {
+          "title": {
+            "pixelsCompared": 6994,
+            "equalRgbPixels": 6657,
+            "equalRgbRatio": 0.951816
+          },
+          "content": {
+            "pixelsCompared": 33356,
+            "equalRgbPixels": 30545,
+            "equalRgbRatio": 0.915727
+          },
+          "rightShadow": {
+            "pixelsCompared": 444,
+            "equalRgbPixels": 296,
+            "equalRgbRatio": 0.666667
+          },
+          "bottomShadow": {
+            "pixelsCompared": 798,
+            "equalRgbPixels": 797,
+            "equalRgbRatio": 0.998747
+          }
+        }
+      },
+      "page": {
+        "nativeCropRgbSha256": "4f3c71855226ad143654f18a20f9063ba3850ac8b0da232c77e133f7d29f85a2",
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 39597,
+        "equalRgbRatio": 0.923007,
+        "selectionNativeBoundsInclusive": [
+          10,
+          36,
+          93,
+          67
+        ],
+        "selectionBrowserBoundsInclusive": [
+          10,
+          36,
+          93,
+          67
+        ],
+        "selectionNativePixels": 448,
+        "selectionBrowserPixels": 448,
+        "selectionPixelCoordinatesEqual": true,
+        "regions": {
+          "title": {
+            "pixelsCompared": 6994,
+            "equalRgbPixels": 6657,
+            "equalRgbRatio": 0.951816
+          },
+          "content": {
+            "pixelsCompared": 33356,
+            "equalRgbPixels": 30553,
+            "equalRgbRatio": 0.915967
+          },
+          "rightShadow": {
+            "pixelsCompared": 444,
+            "equalRgbPixels": 296,
+            "equalRgbRatio": 0.666667
+          },
+          "bottomShadow": {
+            "pixelsCompared": 798,
+            "equalRgbPixels": 797,
+            "equalRgbRatio": 0.998747
+          }
+        }
+      }
+    }
+  },
+  "pagesBeforeReference": "t157-native-pages-linux.json",
+  "pagesBefore": {
+    "ru": {
+      "PagesAuto-first": 0.697086,
+      "PagesAuto-second": 0.708182,
+      "PagesLeft-first": 0.669031,
+      "PagesLeft-second": 0.682031,
+      "PagesRight-first": 0.66822,
+      "PagesRight-second": 0.681324,
+      "PagesSwipe-first": 0.697086,
+      "PagesSwipe-second": 0.708182
+    },
+    "en": {
+      "PagesAuto-first": 0.697086,
+      "PagesAuto-second": 0.708182,
+      "PagesLeft-first": 0.669031,
+      "PagesLeft-second": 0.682031,
+      "PagesRight-first": 0.66822,
+      "PagesRight-second": 0.681324,
+      "PagesSwipe-first": 0.697086,
+      "PagesSwipe-second": 0.708182
+    }
+  },
+  "pagesAfter": {
+    "ru": {
+      "PagesAuto-first": {
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 39597,
+        "equalRgbRatio": 0.923007
+      },
+      "PagesAuto-second": {
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 40161,
+        "equalRgbRatio": 0.936154
+      },
+      "PagesLeft-first": {
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 44048,
+        "equalRgbRatio": 0.916197
+      },
+      "PagesLeft-second": {
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 44668,
+        "equalRgbRatio": 0.929093
+      },
+      "PagesRight-first": {
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 43919,
+        "equalRgbRatio": 0.913514
+      },
+      "PagesRight-second": {
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 44542,
+        "equalRgbRatio": 0.926472
+      },
+      "PagesSwipe-first": {
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 39540,
+        "equalRgbRatio": 0.921678
+      },
+      "PagesSwipe-second": {
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 40104,
+        "equalRgbRatio": 0.934825
+      }
+    },
+    "en": {
+      "PagesAuto-first": {
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 39597,
+        "equalRgbRatio": 0.923007
+      },
+      "PagesAuto-second": {
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 40161,
+        "equalRgbRatio": 0.936154
+      },
+      "PagesLeft-first": {
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 44048,
+        "equalRgbRatio": 0.916197
+      },
+      "PagesLeft-second": {
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 44668,
+        "equalRgbRatio": 0.929093
+      },
+      "PagesRight-first": {
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 43919,
+        "equalRgbRatio": 0.913514
+      },
+      "PagesRight-second": {
+        "comparisonPixels": [
+          367,
+          131
+        ],
+        "pixelsCompared": 48077,
+        "equalRgbPixels": 44542,
+        "equalRgbRatio": 0.926472
+      },
+      "PagesSwipe-first": {
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 39540,
+        "equalRgbRatio": 0.921678
+      },
+      "PagesSwipe-second": {
+        "comparisonPixels": [
+          275,
+          156
+        ],
+        "pixelsCompared": 42900,
+        "equalRgbPixels": 40104,
+        "equalRgbRatio": 0.934825
+      }
+    }
+  },
+  "checks": {
+    "nativeVsixLocales": [
+      "ru",
+      "en"
+    ],
+    "nativeGroupCases": 22,
+    "rootAndFieldSelectionCaptured": true,
+    "sourceWritesDuringViewing": false,
+    "typecheck": true,
+    "compile": true,
+    "package": true,
+    "nodeTest": {
+      "passed": 463,
+      "failed": 0,
+      "skipped": 11
+    },
+    "rustUnchangedSinceCommit": "61b9c73",
+    "nativeRegressionExitCodes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "finalGroupRerunExitCodes": [
+      0,
+      0
+    ],
+    "packagedOutputFilesExact": 58,
+    "finalGroupRerunReason": "One-pixel frame/title stacking correction after the full native regression batch"
+  },
+  "regressions": {
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "rendererKinds": 20,
+    "groupCases": 22,
+    "tableCases": 16,
+    "fieldStates": 15,
+    "livePreviewDetachUndoRedoExternal": true,
+    "providedDtForms": 4
+  },
+  "remaining": [
+    "Text rasterization and glyph advances; title ink has a one-pixel width difference",
+    "Fractional intrinsic form widths affect right border and shadow rasterization",
+    "Shadow corners and remaining control/tab borders",
+    "Selection geometry for other element kinds, fonts and sizes",
+    "Windows and physical monitor DPI acceptance",
+    "All other open T152-T165 acceptance items"
+  ],
+  "clientCommit": "017543a3728fe2304dc67b752f89dfc05b847487",
+  "nativeLocalesEqual": true
+}

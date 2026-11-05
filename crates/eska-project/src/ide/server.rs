@@ -60,6 +60,7 @@ pub(super) struct Server {
     pub labels: dto::Labels,
     pub(super) client_minor: u32,
     pub(super) queries: super::query::State,
+    pub(super) forms: super::forms::State,
     pub(super) recovery: super::query::RecoveryState,
     pub(super) recovery_root: Option<std::path::PathBuf>,
     pub(super) source_root: Option<std::path::PathBuf>,
@@ -82,6 +83,7 @@ impl Server {
             labels: dto::Labels::new()?,
             client_minor: 0,
             queries: super::query::State::default(),
+            forms: super::forms::State::default(),
             source_root: std::env::current_dir()
                 .ok()
                 .and_then(|path| std::fs::canonicalize(path).ok()),
@@ -148,16 +150,12 @@ impl Server {
             }
             "workspace/close" => {
                 self.check_session(args)?;
-                self.analyzer_lease = None;
-                self.queries.clear();
-                self.session = None;
+                self.close_workspace();
                 Ok(Value::Null)
             }
             "shutdown" => {
-                self.analyzer_lease = None;
-                self.queries.clear();
+                self.close_workspace();
                 self.recovery = super::query::RecoveryState::default();
-                self.session = None;
                 self.closing = true;
                 Ok(Value::Null)
             }
@@ -168,6 +166,9 @@ impl Server {
                 self.language(method, args, cancelled, connection_closed)
             }
             method if super::metadata::is_method(method) => self.metadata(method, args, events),
+            method if super::forms::is_method(method) && self.client_minor >= 36 => {
+                self.forms(method, args)
+            }
             method if super::query::is_recovery_method(method) => {
                 if self.client_minor < 14
                     || (method == "query/recoveryPreparedRead" && self.client_minor < 16)
@@ -281,6 +282,13 @@ impl Server {
             result["capabilities"]["workspaceActivity"] =
                 json!({"schemaVersion":1,"localPersistence":true});
         }
+        if self.client_minor >= 36 {
+            result["capabilities"]["formPreview"] = super::forms::capability(
+                self.client_minor >= 37,
+                self.client_minor >= 38,
+                self.client_minor >= 39,
+            );
+        }
         if self.client_minor >= 34 {
             result["capabilities"]["bslMultilineStrings"] = super::query::language_capability();
         }
@@ -385,6 +393,13 @@ impl Server {
             activity,
         });
         self.info()
+    }
+
+    fn close_workspace(&mut self) {
+        self.analyzer_lease = None;
+        self.queries.clear();
+        self.forms.clear();
+        self.session = None;
     }
 
     /// Validate session tokens before resolving any project-local identity.

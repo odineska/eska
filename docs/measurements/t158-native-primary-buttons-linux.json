@@ -1,0 +1,1938 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.40",
+  "backendCommit": "c26f324",
+  "clientCommit": "0fa6027211624cf6b8d7bfd3edb68753b0b52d16",
+  "driverCommit": "558a061",
+  "visualParityVerified": false,
+  "scope": "Geometry and full rectangular interiors inset 3px of 153 buttons on 51 forms, including primary styles/fonts; excludes borders and shadow, root automatic commands and other unaccepted matrices",
+  "fixture": "tests/fixtures/forms/native-primary-buttons",
+  "nativeScreenshotsLocale": "en; form captions identical in ru/en; installed VSIX checked in both locales",
+  "nativeFontCases": {
+    "characterization": 21,
+    "independentFontValidationClaimed": false
+  },
+  "contrast": {
+    "uiColours": 30,
+    "independentNativeVectors": 4096,
+    "independentSeed": "0x83272342",
+    "derivationUiColoursExcludedFromIndependentVectors": true,
+    "pixelTolerance": 0,
+    "comparisonMasks": [],
+    "nativeSearchInternalBand": [
+      6.99,
+      7.01
+    ],
+    "nativeSearchBandIsNotPixelTolerance": true,
+    "platformRuntimeDependency": false
+  },
+  "behavior": [
+    "ImportantColor resolved by ESKA from the selected style or retained as the default role; Explorer requires API 1.40 for viewing",
+    "DefaultButton automatic font and NormalTextFont use contextual bold; explicit font attributes and other predefined font references retain priority",
+    "A custom BackColor disables primary fill while preserving contextual font; explicit TextColor wins",
+    "Dirty Font, style payload and DefaultStyle update the existing DOM, including a real detached native window and docking",
+    "For dirty palette samples only the primary button uses the alternative palette reference; the second button retains its own explicit RGB reference"
+  ],
+  "checks": {
+    "rust": {
+      "suites": 42,
+      "passed": 1501,
+      "failed": 0,
+      "ignored": 19,
+      "checks": [
+        {
+          "check": "fmt",
+          "exit": 0
+        },
+        {
+          "check": "check",
+          "exit": 0
+        },
+        {
+          "check": "clippy",
+          "exit": 0
+        },
+        {
+          "check": "test",
+          "exit": 0
+        },
+        {
+          "check": "build",
+          "exit": 0
+        }
+      ]
+    },
+    "node": {
+      "exit": 0,
+      "seconds": 12.85,
+      "pass": 501,
+      "fail": 0,
+      "skipped": 11
+    },
+    "typescript": "passed",
+    "compile": "passed",
+    "package": "passed",
+    "normalizedXmlHashesVerified": 45,
+    "nativeRunsPassed": 20,
+    "runs": [
+      {
+        "suite": "button-colors",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 10.76
+      },
+      {
+        "suite": "button-colors",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 13.48
+      },
+      {
+        "suite": "primary-appearance",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 4.4
+      },
+      {
+        "suite": "primary-appearance",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 7.06
+      },
+      {
+        "suite": "font-roles",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.26
+      },
+      {
+        "suite": "font-roles",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 8.85
+      },
+      {
+        "suite": "style-palette",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 7.67
+      },
+      {
+        "suite": "style-palette",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 10.45
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 16.72
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.36
+      },
+      {
+        "suite": "input-dates",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 20.47
+      },
+      {
+        "suite": "input-dates",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 23.08
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 18.21
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 20.86
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.26
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 8.99
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 4.16
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 7.0
+      },
+      {
+        "suite": "primary-buttons",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 22.04
+      },
+      {
+        "suite": "primary-buttons",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 24.57
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "forms": 51,
+        "buttons": 153,
+        "screenshots": 60,
+        "interiorPixelsCompared": 250932,
+        "differentRgbPixels": 0,
+        "dirtyFont": true,
+        "dirtySelectedStyle": true,
+        "dirtyDefaultStyle": true,
+        "detachedUpdates": true,
+        "sourceWritesDuringViewing": false,
+        "captures": [
+          {
+            "label": "FontAuto",
+            "reference": "FontAuto",
+            "png": "primary-buttons-FontAuto-en.png",
+            "pngSha256": "7d424ac52e5a754a0def513a6a6f9ca442205e9c2443a806137c062fd1ac13f3",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-FontAuto",
+            "reference": "FontRegular",
+            "png": "primary-buttons-dirty-FontAuto-en.png",
+            "pngSha256": "d9004714c143e800b127a5051657c282b4257dae17de8f9599e5d7580021134f",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-FontAuto",
+            "reference": "FontAuto",
+            "png": "primary-buttons-floating-FontAuto-en.png",
+            "pngSha256": "1ad318bebc909c5b199a420d359ad0c6a566d3ddc4de1df753df9478714ca13c",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-dirty-FontAuto",
+            "reference": "FontRegular",
+            "png": "primary-buttons-floating-dirty-FontAuto-en.png",
+            "pngSha256": "6d896f02165f4efd609ec9a35aab2fcf6a6ce20afa6f41ece4918c5121270209",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "reattached-FontAuto",
+            "reference": "FontAuto",
+            "png": "primary-buttons-reattached-FontAuto-en.png",
+            "pngSha256": "7634532e9c0c1a23b05e5d95ead7df83f679ae7c388051fdad9ec4c71e9b3f50",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontRegular",
+            "reference": "FontRegular",
+            "png": "primary-buttons-FontRegular-en.png",
+            "pngSha256": "c08cdcd65b34a2d2ed97b677effed0bb68b0f943c8f3b6588db91c5f1234bf25",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontBold",
+            "reference": "FontBold",
+            "png": "primary-buttons-FontBold-en.png",
+            "pngSha256": "32b5db538f31a22e4f330f5d651a5408ebf98dbe171b8901882742e82943377e",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontPartial14",
+            "reference": "FontPartial14",
+            "png": "primary-buttons-FontPartial14-en.png",
+            "pngSha256": "4870fdc6eb7e3ec362de18c9c9f19fd97755659522e71b3f92fe5f1b6c86d141",
+            "pixelsCompared": 6021,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "16892b86f28d3bf27ec19ce15a886c4d4c4fb699a76a1dbb3efc40acd140853b",
+              "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085",
+              "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontStyleNormal",
+            "reference": "FontStyleNormal",
+            "png": "primary-buttons-FontStyleNormal-en.png",
+            "pngSha256": "eaaafdd997ea55bb847c2791f3f5674215dd9606f63aaae7733b57525108353f",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontForm14",
+            "reference": "FontForm14",
+            "png": "primary-buttons-FontForm14-en.png",
+            "pngSha256": "53c6c8190d904dfb1d0d7050bd224765f3f70903ac915f45e0bc25e72256e23f",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontBar14",
+            "reference": "FontBar14",
+            "png": "primary-buttons-FontBar14-en.png",
+            "pngSha256": "e112c202c07503eec1aac28e1fb15cb852ed4779e4a4509dc0478bb6b833b184",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontFormBold",
+            "reference": "FontFormBold",
+            "png": "primary-buttons-FontFormBold-en.png",
+            "pngSha256": "a51b4a52bb6ea9531be69d18bb3c2d1854d2455b3d37ebd9b0ca1b38f798f1bf",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontExplicitAuto",
+            "reference": "FontExplicitAuto",
+            "png": "primary-buttons-FontExplicitAuto-en.png",
+            "pngSha256": "6913eec5d638829db175b3a33913bff590ea3affcd20abc689ac6e9f0cf68612",
+            "pixelsCompared": 3820,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckAutoBack",
+            "reference": "CheckAutoBack",
+            "png": "primary-buttons-CheckAutoBack-en.png",
+            "pngSha256": "2b8a2e301aba92c5209eb41f1164b1f32e1bc3606276899b72eaa8bf1cba4711",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "a942f7bfc79e8fd681854b88ddff8069733a9edcb6e2226c4a4814aec4305fbe",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckAutoText",
+            "reference": "CheckAutoText",
+            "png": "primary-buttons-CheckAutoText-en.png",
+            "pngSha256": "f9f01758b4a9293f200d4d735f3a264bf0b854092ce2ee382b8bd7767b543b8f",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "940a106cd0feb8930d89bff5dd6ff78eadff2a17ef972f4a234586176478378a",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckNormalFalse",
+            "reference": "CheckNormalFalse",
+            "png": "primary-buttons-CheckNormalFalse-en.png",
+            "pngSha256": "f271903e737d534f71c15a1bde4f7e1f24de3272332247b90275c1a487827067",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckNormal14",
+            "reference": "CheckNormal14",
+            "png": "primary-buttons-CheckNormal14-en.png",
+            "pngSha256": "dae1a174b9ed5a7bebabe33a9127bfff6ff2ffe3461fba993638584be675fb7a",
+            "pixelsCompared": 6021,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "83ccd6851dff1cf35e0132695df49eec574e764a2c42ecc50dda6fdb709b38ea",
+              "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085",
+              "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckSmall",
+            "reference": "CheckSmall",
+            "png": "primary-buttons-CheckSmall-en.png",
+            "pngSha256": "6b0819843504e897ba6e86011def043135f97b5430cd6657497dc91add450d8b",
+            "pixelsCompared": 3820,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckLarge",
+            "reference": "CheckLarge",
+            "png": "primary-buttons-CheckLarge-en.png",
+            "pngSha256": "c48e7461ebdeda1e7d9a66d4ad16767a981038ce096e3aa395dfa6f2175a8a41",
+            "pixelsCompared": 6021,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "16892b86f28d3bf27ec19ce15a886c4d4c4fb699a76a1dbb3efc40acd140853b",
+              "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085",
+              "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckExtra",
+            "reference": "CheckExtra",
+            "png": "primary-buttons-CheckExtra-en.png",
+            "pngSha256": "a3a9e368303459d108863b550d96fc794ef3ce0fbd2aec36ae7ae8b1b17ae7b2",
+            "pixelsCompared": 8748,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "18f6d2dcbeafabdc41c48aa4039d98fb928900dc09f9220cb4a2cf07d4e66e40",
+              "7525a8a647c5a8bbd8851f6deeec9e5e6ce0a28a836607b680e16b3190de8b35",
+              "84b6bf2fa010837252da5244b6ded5759cbd8bb628284adde5aed3467b342df1"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckText",
+            "reference": "CheckText",
+            "png": "primary-buttons-CheckText-en.png",
+            "pngSha256": "afd2c5ae64a3c7144a0adf859359db957748c2a86ceb7ba6717ef17b59dfd8cf",
+            "pixelsCompared": 3820,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckSysAuto",
+            "reference": "CheckSysAuto",
+            "png": "primary-buttons-CheckSysAuto-en.png",
+            "pngSha256": "40b3136a8c1d65a0d6e36d559f9ee7ba0e1a83e0598c11d5cb32330493f462c5",
+            "pixelsCompared": 3820,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckSys14",
+            "reference": "CheckSys14",
+            "png": "primary-buttons-CheckSys14-en.png",
+            "pngSha256": "bb17982be9c96dde9c07014b2493f3727c50860ee32a530c8955bebb24ab0d56",
+            "pixelsCompared": 6021,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "16892b86f28d3bf27ec19ce15a886c4d4c4fb699a76a1dbb3efc40acd140853b",
+              "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085",
+              "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckBoldOnly",
+            "reference": "CheckBoldOnly",
+            "png": "primary-buttons-CheckBoldOnly-en.png",
+            "pngSha256": "49559910c1a76adc98ad18fe62fccaf7c2807d047e5534cf09ed23b1fa842e0a",
+            "pixelsCompared": 3820,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "7924728e0f99aeae0d0ee130e010b287629f9ee5125b0339d4bf63bb0c1fe29a",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckAutoDisabled",
+            "reference": "CheckAutoDisabled",
+            "png": "primary-buttons-CheckAutoDisabled-en.png",
+            "pngSha256": "ce740b1e0c8127192fb2cb2d1db4cd871d26d0084fd17564afb793eab234a83f",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color000000",
+            "reference": "Color000000",
+            "png": "primary-buttons-Color000000-en.png",
+            "pngSha256": "4be3b8da84c0ec5eaedc04eb783f6603bcbab5a28e7060b4e2fda11a8be354b6",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "41e317e21581343b34420481ca7125d9d8a3c81b032b037f33daf91cfc481ff4",
+              "1868534bd41a19a7b001cd87610b20e6604f223f76e70c73469c536385ec3119",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color000040",
+            "reference": "Color000040",
+            "png": "primary-buttons-Color000040-en.png",
+            "pngSha256": "26b8ca69452df04cb10ccba9207497766dbd2900d6d861b42a39e2cdaacc4517",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "574dd02a179755912d01ba186e1bf2a5d4f48165c6051cbdf4ab2a3deacabdb5",
+              "164df8d438c79dfa57a7fc45369a0c7b967dd44174af36206e830df7e0246579",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color000080",
+            "reference": "Color000080",
+            "png": "primary-buttons-Color000080-en.png",
+            "pngSha256": "c4666eb03d85706270196e5269c139856827e5847791f7ffc4a1052f0175fe2a",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "77161db2ed6c7268803e370ae46c034f1afefe6f9f581334a0079c384f4ce315",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-Color000080",
+            "reference": "ColorFF0000",
+            "png": "primary-buttons-dirty-Color000080-en.png",
+            "pngSha256": "05eefc6cda49f4ebe2063bd00db9ebf0e656ae0103a633c3c8a5d527a6d211a5",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "1c32e65de1349e6c883243d2abe5d5694c352ca99fe87f661f6577c5dfba0db7",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "default-Color000080",
+            "reference": "ColorFFE100",
+            "png": "primary-buttons-default-Color000080-en.png",
+            "pngSha256": "b3819c550568c6e2efdce0d6f29a787a274f232e3146d726354dbe73a80475e8",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-Color000080",
+            "reference": "Color000080",
+            "png": "primary-buttons-floating-Color000080-en.png",
+            "pngSha256": "a8b492e0dcb1df132de0474d8b43bb3fc1af31b63770841022f4e8646590ada6",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "77161db2ed6c7268803e370ae46c034f1afefe6f9f581334a0079c384f4ce315",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-dirty-Color000080",
+            "reference": "ColorFF0000",
+            "png": "primary-buttons-floating-dirty-Color000080-en.png",
+            "pngSha256": "e2dcb9bab2e4e288669a06efa14f946c1f884215ab7dae15cbe64d5790b2be3d",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "1c32e65de1349e6c883243d2abe5d5694c352ca99fe87f661f6577c5dfba0db7",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "reattached-Color000080",
+            "reference": "Color000080",
+            "png": "primary-buttons-reattached-Color000080-en.png",
+            "pngSha256": "a99fa23ad48620c3b2e6229e5582a3df914347391fffa4515fb9bae0aad5fa0f",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "77161db2ed6c7268803e370ae46c034f1afefe6f9f581334a0079c384f4ce315",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color0000FF",
+            "reference": "Color0000FF",
+            "png": "primary-buttons-Color0000FF-en.png",
+            "pngSha256": "e28f54fc96412325f79aed9e028f4492efb1e1e0aebfbcb18c4db3c43b75ab6b",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "f8f7fd7b18f41e7bc5c55675971c43490b0253a214e5ed39397b9e1b763f1567",
+              "a378a775443fa18175dbe27ece12eeb23905bd7de152f7543d4e66ba97981a4c",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color008000",
+            "reference": "Color008000",
+            "png": "primary-buttons-Color008000-en.png",
+            "pngSha256": "83f36ff20c3fac9f761412caa5d3585ceeda866dbebfd29d553c6c67ea8a2bb2",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "788f29aed2d16c411234dd53e76d0b0089a4765f9cf006cebc678c4768bc34fd",
+              "d838dbb7d6e8fbad1c6a70a629962b828d0fcc4d6d1ed87f3edf9f045b9a1979",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color00FF00",
+            "reference": "Color00FF00",
+            "png": "primary-buttons-Color00FF00-en.png",
+            "pngSha256": "a219ce7ef254a86643fbcc728efb8badd5c218ad9d4be46ced8be4eac684696f",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "e0098340ab5e9d8150343f28b8c7a3017768b704a79a4e73eb08a84d459de71a",
+              "cae5801b0476ad7305ae020837a1618e2dc5d88a8f963fb8454b0c04bfa91611",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color00FFFF",
+            "reference": "Color00FFFF",
+            "png": "primary-buttons-Color00FFFF-en.png",
+            "pngSha256": "0f6b8648454fc0041b49b5f91f6146c01b3f38b8a81debc9de7c3cd05920738f",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "150faa7dc0e6747999fa52f5abfaadedfb190d33fbe8707fae86b197bb2db58d",
+              "66ec2b7d59ce032ff20c34675025e8d852dd962758f0fd7c820a3c0a8723b2f4",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color0A73B7",
+            "reference": "Color0A73B7",
+            "png": "primary-buttons-Color0A73B7-en.png",
+            "pngSha256": "ffe422fc5e805d540124e6df7dd8503937696f28cbd9254d3bd9e77bbca77305",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "6b53a9a3ab423eb83f7a14842478980bed6f1fa7f8b848f2fa0ca080b5279546",
+              "ba9a7d20a28c8d4183a50fdb992953100169cf20c00ae146f16b3a6d3cf45edf",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color202020",
+            "reference": "Color202020",
+            "png": "primary-buttons-Color202020-en.png",
+            "pngSha256": "69f0dfdaff783bf5b5e53309d2ad65458918fde8fea7b1416a77caca9bcbfb84",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "d08ca542eedda769f8927516bde7bc4a7d06b0437aeb5974817bbfc4003422a8",
+              "a2ec89b7ec7ec9857570fb9693a65a9bf3d170c7b74fe129b83b499b99cbb36a",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color20DD20",
+            "reference": "Color20DD20",
+            "png": "primary-buttons-Color20DD20-en.png",
+            "pngSha256": "a2bcd6ad1d4a380a50e1d2e557e3ad3360e77ad66a455b6606aadf026dae074b",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "7382bae7fb06e6c92fa80e058971bd76af858c2fae532cff38a673e8c5b1bdc2",
+              "3a6fe28467397ea37fa110f0f89121648957233a7279737c6455687d181cdcf4",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color336699",
+            "reference": "Color336699",
+            "png": "primary-buttons-Color336699-en.png",
+            "pngSha256": "fa2ff44c180e3b5ff92bb0aaa9baff896998aa22199155248c2efcb7c719f880",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "3734fd2e8d3319090ac934d30b334a228844cba3fed2e53ceef9ab2bc80b5331",
+              "ea2f2c5d0896fb8aedd5b698ea1bbcfbdcb767bec4baa278750299443f08ebc4",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color345678",
+            "reference": "Color345678",
+            "png": "primary-buttons-Color345678-en.png",
+            "pngSha256": "013f8f967a3078ebe9a67f85ec5d16a256c8a2fd47862ae7e8074f3cee76bbae",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "04bab384a8559ddcfc2fd140cbf0a27275ca4b4b8bc47b9fb6043e61b6790dbf",
+              "89f54bcbdd10473953b4302bfecbf06a253abbb1fcd18dadf568a52aa0f64876",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color404040",
+            "reference": "Color404040",
+            "png": "primary-buttons-Color404040-en.png",
+            "pngSha256": "ee95290b95f77e740feb03b6d5d560ba8d598023aa2672d434504315ed899b7a",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "b94e20fc5caaacb2448ab1eabfc85c838c62d2270ebb3edb01ce841ec7186d35",
+              "3eccb32b34302e014590f40f04eef5afec79301344a95cf97044fea2b14892c1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color5511FF",
+            "reference": "Color5511FF",
+            "png": "primary-buttons-Color5511FF-en.png",
+            "pngSha256": "d2e5c24b9a75e5ee0ef9c6d5d492bdd89859d7b54513cf8c26649daa21005f04",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "f7936f2bddc0f420ff2cb868f1ada2498c290220ff3b6b5f4ffcccb61a312b82",
+              "b627cafac250041f85f7a4fd6954ae0ca634614a5e8b790f6d9022c7fc5208eb",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color555555",
+            "reference": "Color555555",
+            "png": "primary-buttons-Color555555-en.png",
+            "pngSha256": "4f2eeb4429bed52359b56fc6d9546f11b7fd07812a8b6a6c0f12db681d52b615",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "54a1cefa31fedbce8f4ddd164f1238b68ee59498dab29c9c1a5cf71b5711c8fe",
+              "461c4503ee8a73500176081b51436a439d45ac85501ec05281759304bd658e2c",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color606060",
+            "reference": "Color606060",
+            "png": "primary-buttons-Color606060-en.png",
+            "pngSha256": "2527445e6986e8e5e17b754fae6ba2f65ee58116ab6dcc28ccc73024657bbd47",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "9f114ee03c8a34d376196aa7b7e1a8b05b0b5d098b4a8d4aaa358dcbfc97e385",
+              "d86b2792823326f23ec8b867f1fbf959ddc7d79d72047dd88cda33db76556958",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color747474",
+            "reference": "Color747474",
+            "png": "primary-buttons-Color747474-en.png",
+            "pngSha256": "bcd0f40167819569493ba8978229d27a7b4e25d4b674beb3c4c50f0c8ebecfad",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "58d9a5c8712cc02f2289e01c9488b4bfb93ea7f6e0d980d0aef51f8f39cdea8a",
+              "a931a0d8d88ba8f8bbe684153b22f93c4a66da43958a87928c59444ff23033fd",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color757575",
+            "reference": "Color757575",
+            "png": "primary-buttons-Color757575-en.png",
+            "pngSha256": "fdba8e9b89a449ee0279b19b6c98419bff803bc54e394bb2765a0868d20cebbc",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "4f97fef8af11ef6630395f97b9ec893b1528d6e786162f6306f91bad18d6626d",
+              "20af6c99da8e727998011c695d8d5140c40f94c8f7636254324199b198998d83",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color777777",
+            "reference": "Color777777",
+            "png": "primary-buttons-Color777777-en.png",
+            "pngSha256": "bfdca6e5c3edcd5334fb3e6fd5c8a7bc4f21a60cc925567cc1189612d08601fd",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "1a81a6332af53c99ad569489cefa105658c902d1a40e9215559d9cbceb64d0ba",
+              "cc27543aec303f5dbe3345cd464b6330002c24c41600af5300ffab69bae59252",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color800000",
+            "reference": "Color800000",
+            "png": "primary-buttons-Color800000-en.png",
+            "pngSha256": "045d39e6f22527df2b7619e6671a40339d47b1b844fcd4b47571a9274271f679",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "40053addc49ba0292a10e368e1b913b6888a4571ca227e7c87c59da2cb495f88",
+              "1ce004bf730fdb3f2069a5eb85c027e8ae1ef06d864795e0116b30ca64c055bb",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color804020",
+            "reference": "Color804020",
+            "png": "primary-buttons-Color804020-en.png",
+            "pngSha256": "a6d0a1eea8be2f727b7154a4bd6bcd1a85eba95bd7f71309e2d0534f9f15b950",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "f5134704451a90f29c957010a2cd3fa240d3ea8494cb7319a9b481ae04556142",
+              "6f53c63dbffc6c66405e2cc5aa213ffdba0d3dbf9da84bb4cad9d634921c7553",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color808080",
+            "reference": "Color808080",
+            "png": "primary-buttons-Color808080-en.png",
+            "pngSha256": "e6ab42560eb0f42267805e43637abc2b19fe8cf752b610537677e608ecbac046",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "2db0351ec3c69ad40f6c8bd59bd65763148fe690a34bfd15385e02be0ba8eae8",
+              "f5599ffccb129b0f2a08794fda6c1adb65baf084eef44f0f3f00a8c30576e9cc",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color9800FF",
+            "reference": "Color9800FF",
+            "png": "primary-buttons-Color9800FF-en.png",
+            "pngSha256": "f9bc77e2505e1d852073f6e3b062af0c7759e1097830629b6de6070b6bc316af",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "fa9b8ea73acf45df4b352e1607b8bddac51a6c073693921bf1609670f6992a1f",
+              "0c5a6beca38cffd5b08153972180a986c08cced14683a3ab63d159cbebcae198",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color99FFFF",
+            "reference": "Color99FFFF",
+            "png": "primary-buttons-Color99FFFF-en.png",
+            "pngSha256": "5b65e9f209bacd651e13d9b7c79757aec8457d5629a7d78ff23018495c746eed",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "97480a778927b076de3183aa5fdf4542b8e760b142268f8630f241ef7d74e085",
+              "bfffff951d263c449b0f9e682e7ef7b5cf135950f2b9a07445125d61e2b2002d",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorC08080",
+            "reference": "ColorC08080",
+            "png": "primary-buttons-ColorC08080-en.png",
+            "pngSha256": "4f42225b5b26d5e6e3c8542e61f79288d144a7b0e273b03bc54f2f6828526c34",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "f8ccef48e677276458db8720897b61335824bb57fe8eac9408c293ae33984d60",
+              "bf1432aebd3294019392c630b930dd064e2db046c44d6efcd39a2fc24ee1579d",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorFF0000",
+            "reference": "ColorFF0000",
+            "png": "primary-buttons-ColorFF0000-en.png",
+            "pngSha256": "470549f03a580a5468007b30debcb4df9a7f0bf35cbd4546039a58d7e61adcaf",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "1c32e65de1349e6c883243d2abe5d5694c352ca99fe87f661f6577c5dfba0db7",
+              "46e4b319bd89e140a5d9a1b9e13802e6049441017f12b0856f863264cdf120af",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorFF00FF",
+            "reference": "ColorFF00FF",
+            "png": "primary-buttons-ColorFF00FF-en.png",
+            "pngSha256": "30fc34fa3ec7e25f906a657ca318496df2808b44ab07b70c6c5cf5fded2f38ea",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "4ae33fdfd2a7578f3f97b8f8413866b5f8580f93ff4120810111440b84fb65d9",
+              "ddd8ec2940c1be7899c58cbf8786996b17dfcd6ae4c5f94a76ddf04deb779115",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorFFE100",
+            "reference": "ColorFFE100",
+            "png": "primary-buttons-ColorFFE100-en.png",
+            "pngSha256": "4375f8cda41bf8f55249c8afcfc7310db80e18687135e3d52d30f98d88a2edae",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "55e6e3fa0632ac8a255c2c7f4308d184382ecb27a0bcefaecee52736517d1563",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorFFFF00",
+            "reference": "ColorFFFF00",
+            "png": "primary-buttons-ColorFFFF00-en.png",
+            "pngSha256": "c7b86cfc8fdd49e38423bfbca698337256fa714d5ce952b0cbc3d5ddb1a915a6",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "87a763d3467e697dc71e8355f7bf42c8d3b93f5e81d423bc42ebe71825df5602",
+              "d144e2f953728be6384007f4e17c0bfded63dce6ca3405418e8e0764451ba17e",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorFFFFFF",
+            "reference": "ColorFFFFFF",
+            "png": "primary-buttons-ColorFFFFFF-en.png",
+            "pngSha256": "815ea990697e5622a0f02428b2ba655952248d820d70b19fe3e5f2d3816dd257",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cca654adca7067adbbad64afb77a5d0b3918ad80ed4a55d9076fd5878d48743c",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          }
+        ],
+        "regressionPixels": {
+          "wholeTabFormPixels": 3379919,
+          "dateMatrixWholeWidgetPixels": 1197585,
+          "fontMatrixWholeWidgetPixels": 934530
+        },
+        "regressionScopesMayOverlap": true
+      },
+      "ru": {
+        "forms": 51,
+        "buttons": 153,
+        "screenshots": 60,
+        "interiorPixelsCompared": 250932,
+        "differentRgbPixels": 0,
+        "dirtyFont": true,
+        "dirtySelectedStyle": true,
+        "dirtyDefaultStyle": true,
+        "detachedUpdates": true,
+        "sourceWritesDuringViewing": false,
+        "captures": [
+          {
+            "label": "FontAuto",
+            "reference": "FontAuto",
+            "png": "primary-buttons-FontAuto-ru.png",
+            "pngSha256": "f058571af0b8ae5585f6892b739cf17f665bfae713aa9c671c88334092b80d39",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-FontAuto",
+            "reference": "FontRegular",
+            "png": "primary-buttons-dirty-FontAuto-ru.png",
+            "pngSha256": "782ce92982e193d7914fc64702f3db580a1426924c0d2b906de0a5aadaf6016b",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-FontAuto",
+            "reference": "FontAuto",
+            "png": "primary-buttons-floating-FontAuto-ru.png",
+            "pngSha256": "492d08ec542f148779b2382211b491eedfeae5adbf9be1805ac54a9b30b34cd7",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-dirty-FontAuto",
+            "reference": "FontRegular",
+            "png": "primary-buttons-floating-dirty-FontAuto-ru.png",
+            "pngSha256": "b6621473eee221713c510aa4218477e841cd27d23580517b8056e51002927e35",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "reattached-FontAuto",
+            "reference": "FontAuto",
+            "png": "primary-buttons-reattached-FontAuto-ru.png",
+            "pngSha256": "a58e53d14049d16cabe6016a0a07bb97016d74273c3f13ac9c41b5779085ec92",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontRegular",
+            "reference": "FontRegular",
+            "png": "primary-buttons-FontRegular-ru.png",
+            "pngSha256": "c14a716b74327770239aa3ced17e8fb2dd78a180bcd8d1336a00b5bf4c750c03",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontBold",
+            "reference": "FontBold",
+            "png": "primary-buttons-FontBold-ru.png",
+            "pngSha256": "ff780d64088cd8bdd6162f34335347c635516926624aa4e824f89858e3b973c3",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontPartial14",
+            "reference": "FontPartial14",
+            "png": "primary-buttons-FontPartial14-ru.png",
+            "pngSha256": "92988761713e70c21eb0098b72e28e5546898cf90e5697664523c29c7be79495",
+            "pixelsCompared": 6021,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "16892b86f28d3bf27ec19ce15a886c4d4c4fb699a76a1dbb3efc40acd140853b",
+              "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085",
+              "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontStyleNormal",
+            "reference": "FontStyleNormal",
+            "png": "primary-buttons-FontStyleNormal-ru.png",
+            "pngSha256": "6a699fe45de68318297c01986df384437fee6c7bd33a751c65ba836f387eb5ed",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontForm14",
+            "reference": "FontForm14",
+            "png": "primary-buttons-FontForm14-ru.png",
+            "pngSha256": "8bb95a68cbce0e57a656e16db9e47b8a72ef28cf168167c6d9edabbfe42f33d0",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontBar14",
+            "reference": "FontBar14",
+            "png": "primary-buttons-FontBar14-ru.png",
+            "pngSha256": "7760db85c2b38ff4f9abcbc8e7da03fa0767973e12f4625d86922d11c438ba99",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontFormBold",
+            "reference": "FontFormBold",
+            "png": "primary-buttons-FontFormBold-ru.png",
+            "pngSha256": "f1079bdf1806f758ee484c3b172babd897d2212001ff8f841bae173db713ace3",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "FontExplicitAuto",
+            "reference": "FontExplicitAuto",
+            "png": "primary-buttons-FontExplicitAuto-ru.png",
+            "pngSha256": "291a62d110c244d4a66508ff875225509120eb1273bf59e0b81039f8a150e4d5",
+            "pixelsCompared": 3820,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckAutoBack",
+            "reference": "CheckAutoBack",
+            "png": "primary-buttons-CheckAutoBack-ru.png",
+            "pngSha256": "beaab4aea65ef3122bde98f65a054510dd09d666ad560be1eda9c49db9ecfb8a",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "a942f7bfc79e8fd681854b88ddff8069733a9edcb6e2226c4a4814aec4305fbe",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckAutoText",
+            "reference": "CheckAutoText",
+            "png": "primary-buttons-CheckAutoText-ru.png",
+            "pngSha256": "343c7b355e82fc117f4ecec2f3e561bba3bbcea90fbf62526ad6ce27f6ace181",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "940a106cd0feb8930d89bff5dd6ff78eadff2a17ef972f4a234586176478378a",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckNormalFalse",
+            "reference": "CheckNormalFalse",
+            "png": "primary-buttons-CheckNormalFalse-ru.png",
+            "pngSha256": "d490d1cecded4a1cc96335a4c91cf7896f8058acb8acb9840dc050c6dadb0c43",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckNormal14",
+            "reference": "CheckNormal14",
+            "png": "primary-buttons-CheckNormal14-ru.png",
+            "pngSha256": "127e33accada369ed6a20fa729a03bd48e1bcee9f2828616e8f710eba5973e52",
+            "pixelsCompared": 6021,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "83ccd6851dff1cf35e0132695df49eec574e764a2c42ecc50dda6fdb709b38ea",
+              "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085",
+              "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckSmall",
+            "reference": "CheckSmall",
+            "png": "primary-buttons-CheckSmall-ru.png",
+            "pngSha256": "90cd7b220e846f4f6de63307310dd152560d91b62355f25ae4d72145da446aef",
+            "pixelsCompared": 3820,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckLarge",
+            "reference": "CheckLarge",
+            "png": "primary-buttons-CheckLarge-ru.png",
+            "pngSha256": "1ac7e91c1e7507b00e828d279ef2e38f6a0aad5995edb9867893db71a3c1b119",
+            "pixelsCompared": 6021,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "16892b86f28d3bf27ec19ce15a886c4d4c4fb699a76a1dbb3efc40acd140853b",
+              "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085",
+              "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckExtra",
+            "reference": "CheckExtra",
+            "png": "primary-buttons-CheckExtra-ru.png",
+            "pngSha256": "316f175348895a5f8399fc2426322b1c2117e24b203c74a6d580e4b21bd67966",
+            "pixelsCompared": 8748,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "18f6d2dcbeafabdc41c48aa4039d98fb928900dc09f9220cb4a2cf07d4e66e40",
+              "7525a8a647c5a8bbd8851f6deeec9e5e6ce0a28a836607b680e16b3190de8b35",
+              "84b6bf2fa010837252da5244b6ded5759cbd8bb628284adde5aed3467b342df1"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckText",
+            "reference": "CheckText",
+            "png": "primary-buttons-CheckText-ru.png",
+            "pngSha256": "a6984f1ba6dcc795eb168f3c9a3b2d41c34c1dd680e900ac65cf0f5a108e98ea",
+            "pixelsCompared": 3820,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckSysAuto",
+            "reference": "CheckSysAuto",
+            "png": "primary-buttons-CheckSysAuto-ru.png",
+            "pngSha256": "649701cbce3509bc638e58a0af23f01a70fc251a7e8daa2209c178483401de73",
+            "pixelsCompared": 3820,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckSys14",
+            "reference": "CheckSys14",
+            "png": "primary-buttons-CheckSys14-ru.png",
+            "pngSha256": "65a59a48217718914eea80af83c78ecb980999db106e609f89da66354ad06a2c",
+            "pixelsCompared": 6021,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "16892b86f28d3bf27ec19ce15a886c4d4c4fb699a76a1dbb3efc40acd140853b",
+              "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085",
+              "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckBoldOnly",
+            "reference": "CheckBoldOnly",
+            "png": "primary-buttons-CheckBoldOnly-ru.png",
+            "pngSha256": "922196e21209d2e3e8b411074738d237601d0e55cb7e53c1bc5a4649be86d72d",
+            "pixelsCompared": 3820,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "7924728e0f99aeae0d0ee130e010b287629f9ee5125b0339d4bf63bb0c1fe29a",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "CheckAutoDisabled",
+            "reference": "CheckAutoDisabled",
+            "png": "primary-buttons-CheckAutoDisabled-ru.png",
+            "pngSha256": "cbac914469b5433b1f0406c00aa9f2686ac504fc549e729d1d00d076cc076f51",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color000000",
+            "reference": "Color000000",
+            "png": "primary-buttons-Color000000-ru.png",
+            "pngSha256": "6dfa8fb31251af640b65b3bec07705d9f65268847137a1b21bc8885e061c072c",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "41e317e21581343b34420481ca7125d9d8a3c81b032b037f33daf91cfc481ff4",
+              "1868534bd41a19a7b001cd87610b20e6604f223f76e70c73469c536385ec3119",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color000040",
+            "reference": "Color000040",
+            "png": "primary-buttons-Color000040-ru.png",
+            "pngSha256": "a400fabe2205bbb52b72d3c4888b78ba1a846af8b9a23a43a59ee37eed381e5e",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "574dd02a179755912d01ba186e1bf2a5d4f48165c6051cbdf4ab2a3deacabdb5",
+              "164df8d438c79dfa57a7fc45369a0c7b967dd44174af36206e830df7e0246579",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color000080",
+            "reference": "Color000080",
+            "png": "primary-buttons-Color000080-ru.png",
+            "pngSha256": "b564be623b3ecba08639445baaab7930977bb93ca76a659206ec2d8f12858ee5",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "77161db2ed6c7268803e370ae46c034f1afefe6f9f581334a0079c384f4ce315",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "dirty-Color000080",
+            "reference": "ColorFF0000",
+            "png": "primary-buttons-dirty-Color000080-ru.png",
+            "pngSha256": "97dc73e3f1153c1847ac074ba4456f157bf66397ff5648ddbee6d033ed211d86",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "1c32e65de1349e6c883243d2abe5d5694c352ca99fe87f661f6577c5dfba0db7",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "default-Color000080",
+            "reference": "ColorFFE100",
+            "png": "primary-buttons-default-Color000080-ru.png",
+            "pngSha256": "e239a601faefcec930bfd9f5c5de212917dc18e0d2d7357a15ad53603556feb5",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-Color000080",
+            "reference": "Color000080",
+            "png": "primary-buttons-floating-Color000080-ru.png",
+            "pngSha256": "4db8ecf97e64b6ff3e16d06acb7055ad04b1dfa770e0b7be3ad8c9da04acddce",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "77161db2ed6c7268803e370ae46c034f1afefe6f9f581334a0079c384f4ce315",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "floating-dirty-Color000080",
+            "reference": "ColorFF0000",
+            "png": "primary-buttons-floating-dirty-Color000080-ru.png",
+            "pngSha256": "c346612a5ce7efa8eb6f060ab18154d1b3ddac7d344311baf4b747c500c28631",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "1c32e65de1349e6c883243d2abe5d5694c352ca99fe87f661f6577c5dfba0db7",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "reattached-Color000080",
+            "reference": "Color000080",
+            "png": "primary-buttons-reattached-Color000080-ru.png",
+            "pngSha256": "ce393f15bfcec926662de0799cef77a269e3aacc4d4614f95d7a6a2a9ea6ef1c",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "77161db2ed6c7268803e370ae46c034f1afefe6f9f581334a0079c384f4ce315",
+              "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color0000FF",
+            "reference": "Color0000FF",
+            "png": "primary-buttons-Color0000FF-ru.png",
+            "pngSha256": "be3e8c786930a83f5e93d23f8737df38d3c1811aa1a46acddd84d3356ea357f5",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "f8f7fd7b18f41e7bc5c55675971c43490b0253a214e5ed39397b9e1b763f1567",
+              "a378a775443fa18175dbe27ece12eeb23905bd7de152f7543d4e66ba97981a4c",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color008000",
+            "reference": "Color008000",
+            "png": "primary-buttons-Color008000-ru.png",
+            "pngSha256": "2880b246e32a32973d9d1eafc0be9ca2888a16fde0868a15e38cedf54b5181ae",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "788f29aed2d16c411234dd53e76d0b0089a4765f9cf006cebc678c4768bc34fd",
+              "d838dbb7d6e8fbad1c6a70a629962b828d0fcc4d6d1ed87f3edf9f045b9a1979",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color00FF00",
+            "reference": "Color00FF00",
+            "png": "primary-buttons-Color00FF00-ru.png",
+            "pngSha256": "b50b0dc6db508834f5d6cd05e8361f1c7ea1bfbf7f8aebae69fc7e976ea68466",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "e0098340ab5e9d8150343f28b8c7a3017768b704a79a4e73eb08a84d459de71a",
+              "cae5801b0476ad7305ae020837a1618e2dc5d88a8f963fb8454b0c04bfa91611",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color00FFFF",
+            "reference": "Color00FFFF",
+            "png": "primary-buttons-Color00FFFF-ru.png",
+            "pngSha256": "e3d3beb9ac470c7849d22b30f3b9a08ac9c50f8503e27684a325dfe96997e6fb",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "150faa7dc0e6747999fa52f5abfaadedfb190d33fbe8707fae86b197bb2db58d",
+              "66ec2b7d59ce032ff20c34675025e8d852dd962758f0fd7c820a3c0a8723b2f4",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color0A73B7",
+            "reference": "Color0A73B7",
+            "png": "primary-buttons-Color0A73B7-ru.png",
+            "pngSha256": "650088073c550cf2ec5304314810d079a7601200f88593f4f1ea9641debb9125",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "6b53a9a3ab423eb83f7a14842478980bed6f1fa7f8b848f2fa0ca080b5279546",
+              "ba9a7d20a28c8d4183a50fdb992953100169cf20c00ae146f16b3a6d3cf45edf",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color202020",
+            "reference": "Color202020",
+            "png": "primary-buttons-Color202020-ru.png",
+            "pngSha256": "65ff41bc8507c3f601298fd69d6ce51d3c7b8fcd114326b7639c3cccaee3ee01",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "d08ca542eedda769f8927516bde7bc4a7d06b0437aeb5974817bbfc4003422a8",
+              "a2ec89b7ec7ec9857570fb9693a65a9bf3d170c7b74fe129b83b499b99cbb36a",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color20DD20",
+            "reference": "Color20DD20",
+            "png": "primary-buttons-Color20DD20-ru.png",
+            "pngSha256": "6dcfbaf3cfdb8dd9252bdf93b4942acae1b128a9a6db6eb00a52633851246087",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "7382bae7fb06e6c92fa80e058971bd76af858c2fae532cff38a673e8c5b1bdc2",
+              "3a6fe28467397ea37fa110f0f89121648957233a7279737c6455687d181cdcf4",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color336699",
+            "reference": "Color336699",
+            "png": "primary-buttons-Color336699-ru.png",
+            "pngSha256": "b62458984c481287c411aca5117b0d4d97749ddddbc382570da2a80a919876ea",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "3734fd2e8d3319090ac934d30b334a228844cba3fed2e53ceef9ab2bc80b5331",
+              "ea2f2c5d0896fb8aedd5b698ea1bbcfbdcb767bec4baa278750299443f08ebc4",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color345678",
+            "reference": "Color345678",
+            "png": "primary-buttons-Color345678-ru.png",
+            "pngSha256": "a5e193ddf89dd1721ed239e2733d78bd15040ab56505782da1ffaa093dd7f4e2",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "04bab384a8559ddcfc2fd140cbf0a27275ca4b4b8bc47b9fb6043e61b6790dbf",
+              "89f54bcbdd10473953b4302bfecbf06a253abbb1fcd18dadf568a52aa0f64876",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color404040",
+            "reference": "Color404040",
+            "png": "primary-buttons-Color404040-ru.png",
+            "pngSha256": "f0e2695948d1a2eee3a4d0d347f368b9c7c9a0ac5794e7fc4ec3c77e37f877b5",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "b94e20fc5caaacb2448ab1eabfc85c838c62d2270ebb3edb01ce841ec7186d35",
+              "3eccb32b34302e014590f40f04eef5afec79301344a95cf97044fea2b14892c1",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color5511FF",
+            "reference": "Color5511FF",
+            "png": "primary-buttons-Color5511FF-ru.png",
+            "pngSha256": "46d44015322509e8fdd929acb6b4a6b8493616a227d0d255a8526eec59bbf214",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "f7936f2bddc0f420ff2cb868f1ada2498c290220ff3b6b5f4ffcccb61a312b82",
+              "b627cafac250041f85f7a4fd6954ae0ca634614a5e8b790f6d9022c7fc5208eb",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color555555",
+            "reference": "Color555555",
+            "png": "primary-buttons-Color555555-ru.png",
+            "pngSha256": "575a7a89121cf1fac2243bbcac972da0f8c0f9f57d53f97f7944db3f532b5ddf",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "54a1cefa31fedbce8f4ddd164f1238b68ee59498dab29c9c1a5cf71b5711c8fe",
+              "461c4503ee8a73500176081b51436a439d45ac85501ec05281759304bd658e2c",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color606060",
+            "reference": "Color606060",
+            "png": "primary-buttons-Color606060-ru.png",
+            "pngSha256": "69abb8ec9390c0495c6fe9f902a216c9e1c4878ed42a80dc6699c536fa9f389c",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "9f114ee03c8a34d376196aa7b7e1a8b05b0b5d098b4a8d4aaa358dcbfc97e385",
+              "d86b2792823326f23ec8b867f1fbf959ddc7d79d72047dd88cda33db76556958",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color747474",
+            "reference": "Color747474",
+            "png": "primary-buttons-Color747474-ru.png",
+            "pngSha256": "833fe0bfc92ebcd4194cc6ffb3d6df2ea6a20914498ab54e1df766221c4b221e",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "58d9a5c8712cc02f2289e01c9488b4bfb93ea7f6e0d980d0aef51f8f39cdea8a",
+              "a931a0d8d88ba8f8bbe684153b22f93c4a66da43958a87928c59444ff23033fd",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color757575",
+            "reference": "Color757575",
+            "png": "primary-buttons-Color757575-ru.png",
+            "pngSha256": "abdc87887a6c0d76459afe9b2c6930d6852ab2b498bdd47ed18f6dd2bf110abe",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "4f97fef8af11ef6630395f97b9ec893b1528d6e786162f6306f91bad18d6626d",
+              "20af6c99da8e727998011c695d8d5140c40f94c8f7636254324199b198998d83",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color777777",
+            "reference": "Color777777",
+            "png": "primary-buttons-Color777777-ru.png",
+            "pngSha256": "780bfef083790a5de245be12fbeccaddb9b69e0fdb3c7e71a7e6747362e3d6e1",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "1a81a6332af53c99ad569489cefa105658c902d1a40e9215559d9cbceb64d0ba",
+              "cc27543aec303f5dbe3345cd464b6330002c24c41600af5300ffab69bae59252",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color800000",
+            "reference": "Color800000",
+            "png": "primary-buttons-Color800000-ru.png",
+            "pngSha256": "64d87c6aa704249fc69af9812b2b7c226c446541a33e021d435fdb5aef458091",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "40053addc49ba0292a10e368e1b913b6888a4571ca227e7c87c59da2cb495f88",
+              "1ce004bf730fdb3f2069a5eb85c027e8ae1ef06d864795e0116b30ca64c055bb",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color804020",
+            "reference": "Color804020",
+            "png": "primary-buttons-Color804020-ru.png",
+            "pngSha256": "2981ea9d881b8ad688f3d4ee296beb9b891bd1ef77fdedf1b5b911dbc6135b32",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "f5134704451a90f29c957010a2cd3fa240d3ea8494cb7319a9b481ae04556142",
+              "6f53c63dbffc6c66405e2cc5aa213ffdba0d3dbf9da84bb4cad9d634921c7553",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color808080",
+            "reference": "Color808080",
+            "png": "primary-buttons-Color808080-ru.png",
+            "pngSha256": "b940776b2ec8f5b80dd2621fe6b57d4d1863556bae536dd22de9e3114aced9cc",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "2db0351ec3c69ad40f6c8bd59bd65763148fe690a34bfd15385e02be0ba8eae8",
+              "f5599ffccb129b0f2a08794fda6c1adb65baf084eef44f0f3f00a8c30576e9cc",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color9800FF",
+            "reference": "Color9800FF",
+            "png": "primary-buttons-Color9800FF-ru.png",
+            "pngSha256": "c80ab50ff05e4ed483307ed1d171b69563279ad63480575eac56952550b045f3",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "fa9b8ea73acf45df4b352e1607b8bddac51a6c073693921bf1609670f6992a1f",
+              "0c5a6beca38cffd5b08153972180a986c08cced14683a3ab63d159cbebcae198",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "Color99FFFF",
+            "reference": "Color99FFFF",
+            "png": "primary-buttons-Color99FFFF-ru.png",
+            "pngSha256": "4af2b710d53ea940a544863a7661b3da0fef5f7c9a36713ee7b726274c20aeae",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "97480a778927b076de3183aa5fdf4542b8e760b142268f8630f241ef7d74e085",
+              "bfffff951d263c449b0f9e682e7ef7b5cf135950f2b9a07445125d61e2b2002d",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorC08080",
+            "reference": "ColorC08080",
+            "png": "primary-buttons-ColorC08080-ru.png",
+            "pngSha256": "c0ab9984a7f866eeabc440c531547f868644505ae4b63c703d56a3996ad26022",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "f8ccef48e677276458db8720897b61335824bb57fe8eac9408c293ae33984d60",
+              "bf1432aebd3294019392c630b930dd064e2db046c44d6efcd39a2fc24ee1579d",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorFF0000",
+            "reference": "ColorFF0000",
+            "png": "primary-buttons-ColorFF0000-ru.png",
+            "pngSha256": "e2e1530976ceaf873a203a61c5eda1bcc8869aeffaad55aba70692d0eb6343ce",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "1c32e65de1349e6c883243d2abe5d5694c352ca99fe87f661f6577c5dfba0db7",
+              "46e4b319bd89e140a5d9a1b9e13802e6049441017f12b0856f863264cdf120af",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorFF00FF",
+            "reference": "ColorFF00FF",
+            "png": "primary-buttons-ColorFF00FF-ru.png",
+            "pngSha256": "b28e00bf68df631a6734c9aed1b46b17dba38796fde8bbf3ca97b14cdb753eaa",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "4ae33fdfd2a7578f3f97b8f8413866b5f8580f93ff4120810111440b84fb65d9",
+              "ddd8ec2940c1be7899c58cbf8786996b17dfcd6ae4c5f94a76ddf04deb779115",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorFFE100",
+            "reference": "ColorFFE100",
+            "png": "primary-buttons-ColorFFE100-ru.png",
+            "pngSha256": "8a7a5e5f21fb6b4b094e682c6d0d254723359e1c6e58b07a8a91aecd35856f3f",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc",
+              "55e6e3fa0632ac8a255c2c7f4308d184382ecb27a0bcefaecee52736517d1563",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorFFFF00",
+            "reference": "ColorFFFF00",
+            "png": "primary-buttons-ColorFFFF00-ru.png",
+            "pngSha256": "a68eb52eaad9ad1dc1171d9fd4145c1beea78afd37e632bd9b3a669a305069ac",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "87a763d3467e697dc71e8355f7bf42c8d3b93f5e81d423bc42ebe71825df5602",
+              "d144e2f953728be6384007f4e17c0bfded63dce6ca3405418e8e0764451ba17e",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          },
+          {
+            "label": "ColorFFFFFF",
+            "reference": "ColorFFFFFF",
+            "png": "primary-buttons-ColorFFFFFF-ru.png",
+            "pngSha256": "788a8f37de55ca11e131cff74c8798d16a7d98f032db5689a5560b72acb16d26",
+            "pixelsCompared": 3980,
+            "differentRgbPixels": 0,
+            "regionRgbSha256": [
+              "cca654adca7067adbbad64afb77a5d0b3918ad80ed4a55d9076fd5878d48743c",
+              "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514",
+              "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+            ],
+            "captureAttempts": 1
+          }
+        ],
+        "regressionPixels": {
+          "wholeTabFormPixels": 3379919,
+          "dateMatrixWholeWidgetPixels": 1197585,
+          "fontMatrixWholeWidgetPixels": 934530
+        },
+        "regressionScopesMayOverlap": true
+      }
+    }
+  },
+  "driverObservation": {
+    "suite": "tab-borders en",
+    "observed": "The exact webview frame still belonged to the main page immediately after the native move command",
+    "change": "nativeWindow({detached:true}) waits for the exact ancestor page to differ from the main page; pixel mismatches are never retried",
+    "historicalTargetTitleCauseConfirmed": false
+  },
+  "remaining": [
+    "Button borders, corners, shadow and other unaccepted states, picture/menu variants and root automatic command styling",
+    "Special font height values including height=0, other font faces/decorations and DPI/zoom combinations",
+    "Windows native acceptance, including automatic and explicit platform font defaults",
+    "Other open T152-T165 matrices; these button interiors do not establish global form parity"
+  ]
+}

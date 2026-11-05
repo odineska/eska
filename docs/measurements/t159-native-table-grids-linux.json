@@ -1,0 +1,2707 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "scope": "Complete empty ValueTable grid controls: header/column groups/footer/body/mark/scrollbar. Form shell, toolbar and view-status chips are outside this control. No masks or tolerances.",
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "nativeUiLocales": [
+    "en",
+    "ru"
+  ],
+  "viewerLocales": [
+    "en",
+    "ru"
+  ],
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "noBslModulesOrHandlers": true,
+  "nativeForms": 9,
+  "nativeImages": 18,
+  "nativeMetricsSha256": "5113fc787002fff2a65fc4ffb3199a58daed6166b1b75501502f75f41077dced",
+  "wholeGridControlPixelParity": true,
+  "wholeFormVisualParity": false,
+  "fullProfileAccepted": false,
+  "nativeInputs": [
+    {
+      "name": "Default",
+      "source": "tests/fixtures/forms/native-tables/Default.xml",
+      "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+      "nativeExport": "native/CommonForms/P_Default/Ext/Form.xml",
+      "nativeExportSha256": "9f4443e74de6fe3187648b61554b90b4f4d6a7bed4b935513a2b3327c7968bf0",
+      "locales": {
+        "en": {
+          "screenshot": "en-Default.png",
+          "screenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-Default.png",
+          "screenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "GridFooter",
+      "source": "tests/fixtures/forms/native-tables/GridFooter.xml",
+      "sourceSha256": "e83073f4c5ef11ca85463f484fa4854e119d4d836b0cd533e830535143ca4ebf",
+      "nativeExport": "native/CommonForms/P_GridFooter/Ext/Form.xml",
+      "nativeExportSha256": "2a540462f19b7a30069bd68022b3f464b8e23e3db46615627b3a0ba9d923b0aa",
+      "locales": {
+        "en": {
+          "screenshot": "en-GridFooter.png",
+          "screenshotSha256": "69d2ea6657ebe011d9231494616ab18971bbf077e311deab3fea150c9ee9d232",
+          "nativeRegion": [
+            274,
+            579,
+            400,
+            145
+          ],
+          "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+          "pixels": 58000
+        },
+        "ru": {
+          "screenshot": "ru-GridFooter.png",
+          "screenshotSha256": "efa0588684128fc930bf21352361f6fb5e78fdd8357e1324c81acdb96f9e1e84",
+          "nativeRegion": [
+            274,
+            579,
+            400,
+            145
+          ],
+          "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+          "pixels": 58000
+        }
+      }
+    },
+    {
+      "name": "Horizontal",
+      "source": "tests/fixtures/forms/native-tables/Horizontal.xml",
+      "sourceSha256": "5309ad9001470b2cd9366f4a7fa38caf5309953f926971e14be57a9ba93f9bba",
+      "nativeExport": "native/CommonForms/P_Horizontal/Ext/Form.xml",
+      "nativeExportSha256": "278aaef7840a9ef6f954c285d946a99f45875ed4b15e57d69f28fe05836a0dac",
+      "locales": {
+        "en": {
+          "screenshot": "en-Horizontal.png",
+          "screenshotSha256": "d05b4ab31b2a601256a68bf56f184f93a880540e871e3297fc14eec06aeabf34",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-Horizontal.png",
+          "screenshotSha256": "484f5e01d2262517e97232be3786ad03f5224fa7edd7a53596ab1f2bda8e4678",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "HorizontalTitled",
+      "source": "tests/fixtures/forms/native-tables/HorizontalTitled.xml",
+      "sourceSha256": "606ae882f63efe22ec05d0c9a9e11315f4df2008be89982cba1831ed15e279bc",
+      "nativeExport": "native/CommonForms/P_HorizontalTitled/Ext/Form.xml",
+      "nativeExportSha256": "f3e757e5c726de38f612fcf0c4ff3f2bd9004f9233d56de763ddf27314be373c",
+      "locales": {
+        "en": {
+          "screenshot": "en-HorizontalTitled.png",
+          "screenshotSha256": "ffbca5cd49b77ef09e8c5494235515a22ba6bcdda38e74593b54447806262a0b",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "c58e8f5710cf9616d0ce53ac60d5f162159461d0f514b7750eb902429b98077b",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-HorizontalTitled.png",
+          "screenshotSha256": "c5b0525c5cd37c54d36e19b6be292a97e7d9af0bd931fb3667b9212513996f77",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "41e1107da3231180ccc9285cac8c0d236e8d53ba186eb9403c04fa3373302217",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "InCell",
+      "source": "tests/fixtures/forms/native-tables/InCell.xml",
+      "sourceSha256": "a1c4d8a2a44fb6d21246ec2904177a2de9f6783feb8d058d7b591284c09a8c3d",
+      "nativeExport": "native/CommonForms/P_InCell/Ext/Form.xml",
+      "nativeExportSha256": "6597e1b6738a9d85a8b544b20dc3ecc13661cfea552a183ec510f705cc8effb4",
+      "locales": {
+        "en": {
+          "screenshot": "en-InCell.png",
+          "screenshotSha256": "f7fe11b0be504e47bb0aa1fe55cbc00ee72bec5cb4f6baac87b8f978282e52cb",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "868c11a6a51ba10505f052943599e4ccb9775737634ae4f2be1ced471b2d69cd",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-InCell.png",
+          "screenshotSha256": "a872a02f43f0643acabf42050d7a05e01df9b6d315baac999fa50b09e59c2416",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "1d8da1744456e8f5615abae2d3509ba88b2c54d46cf9934a4a70d53e5da49b92",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "Marked",
+      "source": "tests/fixtures/forms/native-tables/Marked.xml",
+      "sourceSha256": "8394399403079ec22fc746f87522f51116dca0440ce0dfc5e4f5059aed04dcb6",
+      "nativeExport": "native/CommonForms/P_Marked/Ext/Form.xml",
+      "nativeExportSha256": "d00b470fe6214b43824f64231186bc6c0a994601e1cc2272ee4b9252eacd2c4f",
+      "locales": {
+        "en": {
+          "screenshot": "en-Marked.png",
+          "screenshotSha256": "b0aa416c15f4d6e6e60d81d734482b92701e90ae0834284c1e184b2ff65694d3",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "ed36933503208eeb26bcd6a3f8ad77a0c283660a099373fb0af391e8acaef416",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-Marked.png",
+          "screenshotSha256": "73187e25d288047702005788c6b7211c7e725a2a9d53de0a778c0266801c5c4d",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "13f3e4a82cc3a58d7928977190791ac104977f2577cd541960dffa1157d73ee3",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "NoAutoFill",
+      "source": "tests/fixtures/forms/native-tables/NoAutoFill.xml",
+      "sourceSha256": "7089e42787ca6c5c46a29ecfd9965ca0ff3564daf3feb807fd203877367bd8ca",
+      "nativeExport": "native/CommonForms/P_NoAutoFill/Ext/Form.xml",
+      "nativeExportSha256": "0cb0344b4774219bc894d57a25965f0c13a5458e0bbb0173334c379d8d0d09c5",
+      "locales": {
+        "en": {
+          "screenshot": "en-NoAutoFill.png",
+          "screenshotSha256": "7238738ad2a3d21f70cb45f23bfa11cee4a8afef9062b46a4cad8400e89ee8cd",
+          "nativeRegion": [
+            274,
+            579,
+            400,
+            227
+          ],
+          "rgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+          "pixels": 90800
+        },
+        "ru": {
+          "screenshot": "ru-NoAutoFill.png",
+          "screenshotSha256": "66c1e28fc04ce59dfdbd9e9bd575642c6587e0c5b999b048e7c1452d3f113559",
+          "nativeRegion": [
+            274,
+            579,
+            400,
+            227
+          ],
+          "rgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+          "pixels": 90800
+        }
+      }
+    },
+    {
+      "name": "ReadOnly",
+      "source": "tests/fixtures/forms/native-tables/ReadOnly.xml",
+      "sourceSha256": "efa9ef102cb1e3c1f37543f692bbf4c58980dc2f0cb56bc29decbbb62e3ba0d3",
+      "nativeExport": "native/CommonForms/P_ReadOnly/Ext/Form.xml",
+      "nativeExportSha256": "4d3691b13b54a19dd25cb7cd3c996ffc745af2448ed8cca5828b93a5cc3c59cb",
+      "locales": {
+        "en": {
+          "screenshot": "en-ReadOnly.png",
+          "screenshotSha256": "6a385741e1a2817fb9a016e79c321f16e3e0ddde9f4b21a5239d5d599ef396cf",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            227
+          ],
+          "rgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+          "pixels": 97383
+        },
+        "ru": {
+          "screenshot": "ru-ReadOnly.png",
+          "screenshotSha256": "82030ccf6dffce9be8776721c0756858de1ad2817bf6e3db077e241c843327e4",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            227
+          ],
+          "rgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+          "pixels": 94205
+        }
+      }
+    },
+    {
+      "name": "Vertical",
+      "source": "tests/fixtures/forms/native-tables/Vertical.xml",
+      "sourceSha256": "5144cc2e8c2d37ad91f85516c0e9646b2acc5e2d329e90fbdd8492760f2d017a",
+      "nativeExport": "native/CommonForms/P_Vertical/Ext/Form.xml",
+      "nativeExportSha256": "4550a747431c3f86b6f8f28dd0456334799d6af468a893ff19b98da330d595cc",
+      "locales": {
+        "en": {
+          "screenshot": "en-Vertical.png",
+          "screenshotSha256": "e425de17d6bbe10bc91271bdb18cf01fbd2bfe6ef73961277020ed9415a7e1ea",
+          "nativeRegion": [
+            274,
+            614,
+            429,
+            228
+          ],
+          "rgbSha256": "09437a95bab7d7093ed3438d5bb3b44dd57299338b53ec4e417a00cbba8c45d9",
+          "pixels": 97812
+        },
+        "ru": {
+          "screenshot": "ru-Vertical.png",
+          "screenshotSha256": "5caad7ca3d13c097dea2c45c9a3c9be03027e3982d5eff5c11738d72cfa737ef",
+          "nativeRegion": [
+            274,
+            614,
+            415,
+            228
+          ],
+          "rgbSha256": "c16d177176f65e1714fe8c19eccbf9fd739e9e3034def389a6544abcfef3afee",
+          "pixels": 94620
+        }
+      }
+    }
+  ],
+  "nativeCaptionPixels": 3885,
+  "nativeArrowImagesVerified": 18,
+  "implementation": [
+    "Shared NativeLabel renders regular 10 pt left/top table captions and single-field footers with the native baseline and padding. Unsupported text styles keep browser text and the existing localized approximation notice.",
+    "Composite captions preserve fragment boundaries: kerning stays inside each fragment. Transparent text hit areas keep the logical column spans selectable.",
+    "Inactive scrollbar triangles reproduce the measured 6x4 pixels; lower arrow rotates 180 degrees.",
+    "Footer bottom shadow and the required mark match native positions and extents.",
+    "Four 3x3 native border images preserve exact edge/corner joins; headers and footers use their respective orientations.",
+    "No new dependencies, fonts, WASM or backend protocol changes."
+  ],
+  "checks": {
+    "node": {
+      "passed": 515,
+      "failed": 0,
+      "skipped": 11,
+      "total": 526,
+      "log": "native-table-pixels-kbagfn6p/node-tests.log",
+      "logSha256": "938173ca13cd1b0e9b2e5704418cbf8786b3c2d2c050f57e118b5bf91aaf4e81"
+    },
+    "nativeCaptionUnit": {
+      "passed": true,
+      "pixelsCompared": 3885,
+      "differentRgbPixels": 0,
+      "includesFragmentBoundary": true,
+      "includesArrowHash": true
+    },
+    "backend": {
+      "codeChangedInThisSlice": false,
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "completeChecksReuse": "docs/measurements/t158-native-button-types-linux.json",
+      "cargoPassed": 1520,
+      "cargoFailed": 0,
+      "cargoIgnored": 19,
+      "sourceHashesVerifiedAgainstBatch": true
+    }
+  },
+  "beforeFix": {
+    "directory": "table-pixels-before-c0593j6w",
+    "passed": false,
+    "expectedFailure": true,
+    "vsixSha256": "f924ccad24c386e4f4716c670d311f82f3898dff0c3855938ce9361f36f2ffc8",
+    "receiptSha256": "937e1e5f7c8454882547158e1f1c06d7dd5f078db6364598062dd8ca0bf1b8d0",
+    "measurements": [
+      {
+        "form": "Default",
+        "geometryMatched": true,
+        "differentRgbPixels": 833,
+        "actualRgbSha256": "2ffc33c21f38b7a9159c337c6e091e7f363e1cd35912cc3452bc35796a3bd186",
+        "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe"
+      },
+      {
+        "form": "GridFooter",
+        "geometryMatched": true,
+        "differentRgbPixels": 1468,
+        "actualRgbSha256": "b8d31d72393526b939011093ea3115af936c7c794ce09c1decf0e4bdafde175f",
+        "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621"
+      },
+      {
+        "form": "Horizontal",
+        "geometryMatched": true,
+        "differentRgbPixels": 833,
+        "actualRgbSha256": "2ffc33c21f38b7a9159c337c6e091e7f363e1cd35912cc3452bc35796a3bd186",
+        "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe"
+      },
+      {
+        "form": "HorizontalTitled",
+        "geometryMatched": true,
+        "differentRgbPixels": 1143,
+        "actualRgbSha256": "47107c2b9268ca25ebc14661a0140b1ff39e833405b624e4ff47bdffd6d9d4c2",
+        "expectedRgbSha256": "c58e8f5710cf9616d0ce53ac60d5f162159461d0f514b7750eb902429b98077b"
+      },
+      {
+        "form": "Vertical",
+        "geometryMatched": true,
+        "differentRgbPixels": 1143,
+        "actualRgbSha256": "4e749692ccd2c75137de3eb762cdc82dcbfc12240c84b0db2464df926a4c2191",
+        "expectedRgbSha256": "09437a95bab7d7093ed3438d5bb3b44dd57299338b53ec4e417a00cbba8c45d9"
+      },
+      {
+        "form": "InCell",
+        "geometryMatched": true,
+        "differentRgbPixels": 1125,
+        "actualRgbSha256": "fceb245d72c846f9b083e0a86c0edbc76f2922aeef7811798e5f831cd04f1ee7",
+        "expectedRgbSha256": "868c11a6a51ba10505f052943599e4ccb9775737634ae4f2be1ced471b2d69cd"
+      },
+      {
+        "form": "Marked",
+        "geometryMatched": true,
+        "differentRgbPixels": 1244,
+        "actualRgbSha256": "2e3238626737711e5e5908db99985490e19714a8034aceab4313ed9c51d2a368",
+        "expectedRgbSha256": "ed36933503208eeb26bcd6a3f8ad77a0c283660a099373fb0af391e8acaef416"
+      },
+      {
+        "form": "ReadOnly",
+        "geometryMatched": true,
+        "differentRgbPixels": 833,
+        "actualRgbSha256": "437cfe50fe06d571c0cbb69a899b50aeda6bec216217937437f2d26ad883e290",
+        "expectedRgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615"
+      },
+      {
+        "form": "NoAutoFill",
+        "geometryMatched": true,
+        "differentRgbPixels": 833,
+        "actualRgbSha256": "ec06d935f8ba7f1510a63368f1c1edb2b22a08fc42ea09809277d130166bbb58",
+        "expectedRgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686"
+      }
+    ]
+  },
+  "intermediateCandidate": {
+    "directory": "form-batch-cGf3Ec",
+    "passed": false,
+    "requestedPairs": 20,
+    "pairsPassed": 17,
+    "pairsFailed": 3,
+    "publishedCases": 391,
+    "vsixSha256": "08daaf8d7f868b8b26f63a4dd9f53376cc00aab075259fd8204862cc4a697ef3",
+    "batchSha256": "91697da2a4a2b27cd80e173f20e474b41353be618d01ffc0e68faa7e7b2bc5bb",
+    "inputsSha256": "4b21c3230d12d37e4672cb1d8cd2828ce8080bb2ba203c8338ee7b375d83ea45",
+    "remainingTablePixels": {
+      "en": [
+        {
+          "form": "Default",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "38a8a559dc3c8b163076156f650a2bbe22223025d3660536ce82a46490acaa72",
+          "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe"
+        },
+        {
+          "form": "GridFooter",
+          "geometryMatched": true,
+          "differentRgbPixels": 12,
+          "actualRgbSha256": "29241eec8ec5d65d869c89534ed05fa5dabcb550703d0c9b074399818b439fc6",
+          "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621"
+        },
+        {
+          "form": "Horizontal",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "38a8a559dc3c8b163076156f650a2bbe22223025d3660536ce82a46490acaa72",
+          "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe"
+        },
+        {
+          "form": "HorizontalTitled",
+          "geometryMatched": true,
+          "differentRgbPixels": 8,
+          "actualRgbSha256": "5708703d3412ce49f8529304d436c664f29a55c83137e0ed1b49c1e57019a523",
+          "expectedRgbSha256": "c58e8f5710cf9616d0ce53ac60d5f162159461d0f514b7750eb902429b98077b"
+        },
+        {
+          "form": "Vertical",
+          "geometryMatched": true,
+          "differentRgbPixels": 8,
+          "actualRgbSha256": "585792442a5bab588482b4bdfbe3facdefa8fb6282885f9b9b533fa568c3bfe5",
+          "expectedRgbSha256": "09437a95bab7d7093ed3438d5bb3b44dd57299338b53ec4e417a00cbba8c45d9"
+        },
+        {
+          "form": "InCell",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "dda18420b24a23a1a2bbef70872314387a57a918085eb58f1a2e7a01a19af53b",
+          "expectedRgbSha256": "868c11a6a51ba10505f052943599e4ccb9775737634ae4f2be1ced471b2d69cd"
+        },
+        {
+          "form": "Marked",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "a8ad358696be987637640b82b9c3effc8c722a3e473caa6a7624c4afdec6ad98",
+          "expectedRgbSha256": "ed36933503208eeb26bcd6a3f8ad77a0c283660a099373fb0af391e8acaef416"
+        },
+        {
+          "form": "ReadOnly",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "1c4afae5849e4827335e707ac5942c6d11769f40f568b6cd45d82d51b093668d",
+          "expectedRgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615"
+        },
+        {
+          "form": "NoAutoFill",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "ca2a25ec20f0bd32e1d2d478a1ab3950c9c783cc581bb193db400d38477cd1b3",
+          "expectedRgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686"
+        }
+      ],
+      "ru": [
+        {
+          "form": "Default",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "1eaa414ddee3f36487fdc917254cc7a757bba024d8bb3bd88000484c931f961b",
+          "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336"
+        },
+        {
+          "form": "GridFooter",
+          "geometryMatched": true,
+          "differentRgbPixels": 12,
+          "actualRgbSha256": "29241eec8ec5d65d869c89534ed05fa5dabcb550703d0c9b074399818b439fc6",
+          "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621"
+        },
+        {
+          "form": "Horizontal",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "1eaa414ddee3f36487fdc917254cc7a757bba024d8bb3bd88000484c931f961b",
+          "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336"
+        },
+        {
+          "form": "HorizontalTitled",
+          "geometryMatched": true,
+          "differentRgbPixels": 8,
+          "actualRgbSha256": "6a6023b459ca8c7cc8eced4c0be00f49346c6937dd4eb35e38e21d6e5495fdfd",
+          "expectedRgbSha256": "41e1107da3231180ccc9285cac8c0d236e8d53ba186eb9403c04fa3373302217"
+        },
+        {
+          "form": "Vertical",
+          "geometryMatched": true,
+          "differentRgbPixels": 8,
+          "actualRgbSha256": "3159cc68a38cc13797ad7435ede43974327635937460a4f54660bd0ee8bb84ca",
+          "expectedRgbSha256": "c16d177176f65e1714fe8c19eccbf9fd739e9e3034def389a6544abcfef3afee"
+        },
+        {
+          "form": "InCell",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "f36b75a1c7136f93112da81e95616a4364da879f38d6662d8f8d192bf070b346",
+          "expectedRgbSha256": "1d8da1744456e8f5615abae2d3509ba88b2c54d46cf9934a4a70d53e5da49b92"
+        },
+        {
+          "form": "Marked",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "2274acf54655801f7bb7f365d7c0e22dbaa8273eaa975a9014e92a6c0ac10190",
+          "expectedRgbSha256": "13f3e4a82cc3a58d7928977190791ac104977f2577cd541960dffa1157d73ee3"
+        },
+        {
+          "form": "ReadOnly",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "3f9c09d39a44b7b258306cdff56eaa0fb9457113681258044b0dd2092aa6a39c",
+          "expectedRgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360"
+        },
+        {
+          "form": "NoAutoFill",
+          "geometryMatched": true,
+          "differentRgbPixels": 6,
+          "actualRgbSha256": "ca2a25ec20f0bd32e1d2d478a1ab3950c9c783cc581bb193db400d38477cd1b3",
+          "expectedRgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686"
+        }
+      ]
+    },
+    "styleRuFailure": "native debug timeout: Runtime.enable",
+    "styleRuFailurePhase": "CDP test-driver connection; the final run uses the corrected CSS artifact.",
+    "runs": [
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "passed": false,
+        "caseCount": 0,
+        "seconds": 5.9851402
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "passed": false,
+        "caseCount": 0,
+        "seconds": 8.624405883000001
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "passed": true,
+        "caseCount": 16,
+        "seconds": 7.591471722000002
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "passed": true,
+        "caseCount": 16,
+        "seconds": 10.291270530000002
+      },
+      {
+        "suite": "button-rows",
+        "locale": "en",
+        "passed": true,
+        "caseCount": 8,
+        "seconds": 8.461656969000003
+      },
+      {
+        "suite": "button-rows",
+        "locale": "ru",
+        "passed": true,
+        "caseCount": 8,
+        "seconds": 11.047551512999998
+      },
+      {
+        "suite": "button-links",
+        "locale": "en",
+        "passed": true,
+        "caseCount": 22,
+        "seconds": 7.146842056000001
+      },
+      {
+        "suite": "button-links",
+        "locale": "ru",
+        "passed": true,
+        "caseCount": 22,
+        "seconds": 9.871143230000001
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "passed": true,
+        "caseCount": 51,
+        "seconds": 17.187954268000002
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "passed": true,
+        "caseCount": 51,
+        "seconds": 19.760912754999996
+      },
+      {
+        "suite": "input-dates",
+        "locale": "en",
+        "passed": true,
+        "caseCount": 42,
+        "seconds": 20.621015939999996
+      },
+      {
+        "suite": "input-dates",
+        "locale": "ru",
+        "passed": true,
+        "caseCount": 42,
+        "seconds": 23.33907712699998
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "en",
+        "passed": true,
+        "caseCount": 38,
+        "seconds": 18.66009414899998
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "ru",
+        "passed": true,
+        "caseCount": 38,
+        "seconds": 27.764207586000005
+      },
+      {
+        "suite": "window-titles",
+        "locale": "en",
+        "passed": true,
+        "caseCount": 8,
+        "seconds": 5.6191275809999786
+      },
+      {
+        "suite": "window-titles",
+        "locale": "ru",
+        "passed": true,
+        "caseCount": 8,
+        "seconds": 8.269080783000012
+      },
+      {
+        "suite": "style-composition",
+        "locale": "en",
+        "passed": true,
+        "caseCount": 13,
+        "seconds": 5.8884679839999885
+      },
+      {
+        "suite": "style-composition",
+        "locale": "ru",
+        "passed": false,
+        "caseCount": 0,
+        "seconds": 13.454455840999987
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "passed": true,
+        "caseCount": 4,
+        "seconds": 4.408805909999995
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "passed": true,
+        "caseCount": 4,
+        "seconds": 7.086503888999985
+      }
+    ]
+  },
+  "acceptance": {
+    "passed": true,
+    "pairsPassed": 6,
+    "pairsFailed": 0,
+    "publishedCases": 88,
+    "allFinalPairsFirstAttempt": true,
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "samples": 15,
+        "pixelsCompared": 1336442,
+        "differentRgbPixels": 0,
+        "dirtyFooter": true,
+        "stableTableDom": true,
+        "selectedIdentityPreserved": true,
+        "logicalColumnSelection": true,
+        "sourceWritesDuringViewing": false,
+        "receiptSha256": "1644da71759a53ff6be63bb868e72193eadb4e18d77d896c06addc9b913bfac3",
+        "results": [
+          {
+            "label": "Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "floating-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 110,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              180,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "GridFooter",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "Horizontal",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "HorizontalTitled",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 60,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "c58e8f5710cf9616d0ce53ac60d5f162159461d0f514b7750eb902429b98077b",
+            "pixels": 97383,
+            "expectedRgbSha256": "c58e8f5710cf9616d0ce53ac60d5f162159461d0f514b7750eb902429b98077b",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "Vertical",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 343
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 228
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 90,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              228
+            ],
+            "rgbSha256": "09437a95bab7d7093ed3438d5bb3b44dd57299338b53ec4e417a00cbba8c45d9",
+            "pixels": 97812,
+            "expectedRgbSha256": "09437a95bab7d7093ed3438d5bb3b44dd57299338b53ec4e417a00cbba8c45d9",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "InCell",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text, Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 60,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "868c11a6a51ba10505f052943599e4ccb9775737634ae4f2be1ced471b2d69cd",
+            "pixels": 97383,
+            "expectedRgbSha256": "868c11a6a51ba10505f052943599e4ccb9775737634ae4f2be1ced471b2d69cd",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "logicalColumnsSelectable": true
+          },
+          {
+            "label": "Marked",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "ed36933503208eeb26bcd6a3f8ad77a0c283660a099373fb0af391e8acaef416",
+            "pixels": 97383,
+            "expectedRgbSha256": "ed36933503208eeb26bcd6a3f8ad77a0c283660a099373fb0af391e8acaef416",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+            "pixels": 97383,
+            "expectedRgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "NoAutoFill",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 307
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              227
+            ],
+            "rgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+            "pixels": 90800,
+            "expectedRgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          }
+        ]
+      },
+      "ru": {
+        "passed": true,
+        "samples": 15,
+        "pixelsCompared": 1301470,
+        "differentRgbPixels": 0,
+        "dirtyFooter": true,
+        "stableTableDom": true,
+        "selectedIdentityPreserved": true,
+        "logicalColumnSelection": true,
+        "sourceWritesDuringViewing": false,
+        "receiptSha256": "5d38a3c2ece6a6487bdd1ef527127214cd469e5308e61f0f1ca8e534500c5179",
+        "results": [
+          {
+            "label": "Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "floating-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 110,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              180,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "GridFooter",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 225
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 145
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              145
+            ],
+            "rgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "pixels": 58000,
+            "expectedRgbSha256": "16264a5e9ebd653c241e80538ff9750a052463a7a372b724542169fc4ba1c621",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "Horizontal",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "HorizontalTitled",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 60,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "41e1107da3231180ccc9285cac8c0d236e8d53ba186eb9403c04fa3373302217",
+            "pixels": 94205,
+            "expectedRgbSha256": "41e1107da3231180ccc9285cac8c0d236e8d53ba186eb9403c04fa3373302217",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "Vertical",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 343
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 228
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 90,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              228
+            ],
+            "rgbSha256": "c16d177176f65e1714fe8c19eccbf9fd739e9e3034def389a6544abcfef3afee",
+            "pixels": 94620,
+            "expectedRgbSha256": "c16d177176f65e1714fe8c19eccbf9fd739e9e3034def389a6544abcfef3afee",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "InCell",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Group",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text, Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 60,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "1d8da1744456e8f5615abae2d3509ba88b2c54d46cf9934a4a70d53e5da49b92",
+            "pixels": 94205,
+            "expectedRgbSha256": "1d8da1744456e8f5615abae2d3509ba88b2c54d46cf9934a4a70d53e5da49b92",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "logicalColumnsSelectable": true
+          },
+          {
+            "label": "Marked",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "13f3e4a82cc3a58d7928977190791ac104977f2577cd541960dffa1157d73ee3",
+            "pixels": 94205,
+            "expectedRgbSha256": "13f3e4a82cc3a58d7928977190791ac104977f2577cd541960dffa1157d73ee3",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+            "pixels": 94205,
+            "expectedRgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          },
+          {
+            "label": "NoAutoFill",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 434,
+              "height": 307
+            },
+            "control": {
+              "x": 41,
+              "y": 345,
+              "width": 400,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              415,
+              400,
+              227
+            ],
+            "rgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+            "pixels": 90800,
+            "expectedRgbSha256": "2b010a540a3d0066fc775f1c8ca2811d6510d6ccab440eb5238298ae90f8e686",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true
+          }
+        ]
+      }
+    },
+    "batchDirectory": "form-batch-6I3Dqs",
+    "builds": 1,
+    "packages": 1,
+    "guiConcurrency": 1,
+    "seconds": 53.972,
+    "vsixSha256": "fc374c05de606f5082cbe39fc8fbf93520b7768163a64a90a24ff982dbd88fe5",
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "06ceedc13483219d75a11f1b4fc31f3890a1f4873fbda115d78b821a79618ca8",
+    "runtimeChangesFromIntermediate": [
+      "out/form-preview.css"
+    ],
+    "allOtherRuntimeFilesByteIdentical": true,
+    "batchSha256": "fc162a7f3ce3afd82e269a08107e3eea3fe3e5133ddb7bf7c54eedc1b13ab429",
+    "inputsSha256": "2a34f0cb3a1bc549074476838309f0bc13203011e72d3f172475f8a4c2f2d242",
+    "runs": [
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.780854665,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-en/driver.log",
+        "receipt": "table-pixels-en/receipt.json",
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 930.97233,
+          "runtimeVerificationMs": 301.958711,
+          "preHostMs": 1241.197482,
+          "cleanupMs": 37.07633999999962,
+          "totalMs": 7644.882778
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.568282876000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-ru/driver.log",
+        "receipt": "table-pixels-ru/receipt.json",
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 902.020057,
+          "runtimeVerificationMs": 350.3033189999999,
+          "preHostMs": 1270.427048,
+          "cleanupMs": 38.22921300000053,
+          "totalMs": 10435.691149999999
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.4933474239999995,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-en/driver.log",
+        "receipt": "tables-en/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 837.1422739999999,
+          "runtimeVerificationMs": 365.33120599999995,
+          "preHostMs": 1231.6707940000001,
+          "cleanupMs": 36.906715999999506,
+          "totalMs": 7313.521836999999
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.106486287,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-ru/driver.log",
+        "receipt": "tables-ru/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 813.203198,
+          "runtimeVerificationMs": 347.4702840000001,
+          "preHostMs": 1185.939388,
+          "cleanupMs": 34.52230400000008,
+          "totalMs": 9973.557685
+        }
+      },
+      {
+        "suite": "style-composition",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 5.827778609000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "style-composition-en/driver.log",
+        "receipt": "style-composition-en/receipt.json",
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 892.408201,
+          "runtimeVerificationMs": 346.737118,
+          "preHostMs": 1259.75336,
+          "cleanupMs": 32.466057999999975,
+          "totalMs": 5643.813779
+        }
+      },
+      {
+        "suite": "style-composition",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.149498905,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "style-composition-ru/driver.log",
+        "receipt": "style-composition-ru/receipt.json",
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 816.605525,
+          "runtimeVerificationMs": 313.85931099999993,
+          "preHostMs": 1155.8762000000002,
+          "cleanupMs": 39.051627999999255,
+          "totalMs": 8036.9240119999995
+        }
+      }
+    ],
+    "legacyTableCasesPerLocale": {
+      "en": 16,
+      "ru": 16
+    },
+    "styleCompositionCasesPerLocale": {
+      "en": 13,
+      "ru": 13
+    }
+  },
+  "artifactLocations": {
+    "base": "<eska repository>/../eska-playground",
+    "native": "native-table-pixels-kbagfn6p",
+    "before": "table-pixels-before-c0593j6w",
+    "intermediate": "form-batch-cGf3Ec",
+    "final": "form-batch-6I3Dqs"
+  },
+  "remaining": [
+    "Complete managed-form/table-field composition including automatic toolbar, view-status additions, icons and outer form shell.",
+    "Metadata tabular sections and dynamic lists, hierarchy/selection, all column types, narrow/fixed/stretch widths and all style/state/font combinations.",
+    "Caption calibration covers recorded regular 10 pt left/top text and single-field footers; other text styles retain browser fallback.",
+    "Windows native acceptance, physical DPI/Remote and the later 8.5 profile."
+  ]
+}

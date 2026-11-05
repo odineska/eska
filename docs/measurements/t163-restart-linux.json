@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "os": "Linux ARM64",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.38",
+  "native1cRequired": false,
+  "locales": ["ru", "en"],
+  "backendLifecycle": {
+    "test": "eska-vscode-explorer/test/form-reconnect-host.cjs",
+    "passed": true,
+    "disconnectConnect": true,
+    "restartWithHeldUpdate": true,
+    "oldProcessExited": true,
+    "replacementProcessPid": true,
+    "lastModelRetained": true,
+    "latestDirtyXmlUsed": true,
+    "obsoleteModelNeverPublished": true,
+    "sharedSelectionRetained": true,
+    "detachedDomRetained": true
+  },
+  "nativeRestoration": {
+    "test": "eska-vscode-explorer/test/form-restore-host.cjs",
+    "environment": "ESKA_HOST_RESTART=1; installed VSIX and private startup probe, normal workbench mode",
+    "passed": true,
+    "reloadWindow": true,
+    "normalQuitAndStart": true,
+    "newExtensionHostPid": true,
+    "dirtyHotExit": true,
+    "twoSerializedPanels": true,
+    "floatingWindowRestored": true,
+    "selectedElementAndPage": true,
+    "mainZoom": 125,
+    "previewZoom": 150,
+    "inspectorHeight": 240,
+    "subsequentLiveUpdates": true
+  },
+  "fix": "Persist full selection identity across the initial loading message; validate the restored identity against the newly loaded model",
+  "sourceWritesDuringViewing": false,
+  "checks": {
+    "typecheck": true,
+    "compile": true,
+    "package": true,
+    "node": {"passed": 459, "failed": 0, "skipped": 11},
+    "rustChanged": false
+  },
+  "testCorrections": [
+    "Compare backend PID and client ownership; formSessionId is scoped to its backend process and may repeat after restart",
+    "Wait for the selected tree row after shared selection delivery before recording the expected identity",
+    "Quit the isolated normal workbench rather than closing only its active auxiliary window"
+  ],
+  "remaining": [
+    "Different monitor DPI and independent Windows/Remote acceptance",
+    "Other open T152–T165 work, including full native visual parity"
+  ]
+}

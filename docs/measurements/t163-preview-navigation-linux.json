@@ -1,0 +1,156 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendRuntimeUnchangedSince": "498fad3",
+  "clientCommit": "ead9f82496de309c60b495eeca3805131c1eef01",
+  "navigationHandoffVerified": true,
+  "visualParityVerified": false,
+  "behavior": [
+    "A newly detached preview opens on the current page even when the root form is selected",
+    "Collapsed groups transfer to a new preview; changes in either window reach the other and survive dock",
+    "Pages and collapsed state belong to the shared view. Zoom, pane sizes, inspector tabs and tree folding remain local to each window",
+    "The first state message initializes shared navigation before the model paints. Normal model refreshes keep live UI navigation",
+    "Shared navigation persists in the existing webview UI state; backend models and session handles are not serialized",
+    "Malformed navigation and navigation from disposed/replaced panels are ignored. Received updates do not echo to their sender"
+  ],
+  "implementation": {
+    "coreProtocolChanged": false,
+    "adapterMessages": "previewNavigation plus ready-handshake initialization",
+    "savedUiSchemaVersion": 1,
+    "dependenciesAdded": false
+  },
+  "checks": {
+    "backendFullReference": "t155-native-font-roles-linux.json",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 491,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeSuitesPassed": 14,
+    "runs": [
+      {
+        "suite": "groups",
+        "locale": "en",
+        "exit": 0
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 15.53
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 16.75
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.47
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.26
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 8.95
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 3.21
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 5.81
+      },
+      {
+        "suite": "restore",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 8.77
+      },
+      {
+        "suite": "restore",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 10.21
+      },
+      {
+        "suite": "dependencies",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 5.61
+      },
+      {
+        "suite": "dependencies",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 8.25
+      },
+      {
+        "suite": "activity",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 3.92
+      },
+      {
+        "suite": "activity",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 6.59
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "rootSelectedPageHandoff": true,
+        "collapsedGroupHandoff": true,
+        "floatingExpansionReturnsToOwner": true,
+        "normalDock": true,
+        "reloadWindow": true,
+        "normalRestart": true,
+        "wholeFormRegressionPixels": 3379919,
+        "differentRgbPixels": 0,
+        "sourceWritesDuringViewing": false
+      },
+      "ru": {
+        "passed": true,
+        "rootSelectedPageHandoff": true,
+        "collapsedGroupHandoff": true,
+        "floatingExpansionReturnsToOwner": true,
+        "normalDock": true,
+        "reloadWindow": true,
+        "normalRestart": true,
+        "wholeFormRegressionPixels": 3379919,
+        "differentRgbPixels": 0,
+        "sourceWritesDuringViewing": false
+      }
+    },
+    "wholeFormMatrixReference": "t157-native-tab-borders-linux.json"
+  },
+  "remaining": [
+    "Physical monitor DPI, Windows and Remote IDE acceptance",
+    "Other unclosed T152–T165 layout, appearance, extension, resource and complex field matrices",
+    "No graphical editing, XML writing or BSL execution is introduced"
+  ]
+}

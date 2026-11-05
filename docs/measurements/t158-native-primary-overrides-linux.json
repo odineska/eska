@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "explicitPrimaryBackColorVerified": true,
+  "automaticPrimaryAccepted": false,
+  "backendCommit": "7f061155774513ef7c985f58775ac026059c4c12",
+  "clientCommit": "5b35a32d45188cdd15ea2396f0e85993c2b5514f",
+  "references": [
+    "tests/fixtures/forms/native-primary-appearance/manifest.json",
+    "tests/fixtures/forms/native-primary-appearance/metrics.json"
+  ],
+  "nativeFindings": [
+    "DefaultButton=true with explicit BackColor has ordinary fill and ordinary automatic ink #4d4d4d",
+    "Explicit TextColor wins; an automatic background still uses ImportantColor",
+    "An explicit style:AccentColor background also suppresses default-button appearance",
+    "Native blue buttons with/without DefaultButton match in all 1350 full button and bottom-shadow pixels"
+  ],
+  "implementation": [
+    "Linux visual default marking is derived separately from the source DefaultButton flag",
+    "Explicit BackColor enables the shared ordinary fill/caption path; raw XML properties and model flag stay unchanged",
+    "Windows appearance and wire schema are unchanged"
+  ],
+  "comparison": {
+    "scope": "Five explicit-background button interiors in three forms",
+    "regions": 10,
+    "pixelsCompared": 14000,
+    "differentRgbPixels": 0,
+    "maskedPixels": 0,
+    "exclusions": []
+  },
+  "checks": {
+    "rustUnchangedSince": "1850b74",
+    "fullRustReference": "t155-native-style-color-roles-linux.json",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 483,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeVsix": {
+      "suitesPassed": 12,
+      "runs": [
+        {
+          "suite": "primary-appearance",
+          "locale": "en",
+          "exit": 0,
+          "passed": true
+        },
+        {
+          "suite": "primary-appearance",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 7.33,
+          "passed": true
+        },
+        {
+          "suite": "button-metrics",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 12.81,
+          "passed": true
+        },
+        {
+          "suite": "button-metrics",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 10.65,
+          "passed": true
+        },
+        {
+          "suite": "button-colors",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.68,
+          "passed": true
+        },
+        {
+          "suite": "button-colors",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.43,
+          "passed": true
+        },
+        {
+          "suite": "style-palette",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 7.5,
+          "passed": true
+        },
+        {
+          "suite": "style-palette",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 10.44,
+          "passed": true
+        },
+        {
+          "suite": "style-color-roles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 4.14,
+          "passed": true
+        },
+        {
+          "suite": "style-color-roles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 7.2,
+          "passed": true
+        },
+        {
+          "suite": "preview",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.38,
+          "passed": true
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.82,
+          "passed": true
+        }
+      ],
+      "previousFull30Reference": "t155-native-style-color-roles-linux.json",
+      "dirtyDefaultMarking": true,
+      "detachedUpdates": true,
+      "sourceWritesDuringViewing": false
+    }
+  },
+  "remaining": [
+    "Automatic primary backgrounds and their automatic ink",
+    "Other button appearances, borders, corners and disabled states",
+    "Font namespace/name matrix and other style combinations",
+    "Whole-form/complex-surface and ordered extension matrices",
+    "Windows and physical monitor/DPI acceptance"
+  ]
+}

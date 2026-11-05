@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 container)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "implementation": {
+    "scope": "Side field labels with TitleLocation Left/Right, Linux only",
+    "css": "width: calc-size(max-content, round(up, size, 1px))",
+    "referenceFontSizeRetained": true,
+    "runtimeCssSupportsVerified": true,
+    "specification": "https://drafts.csswg.org/css-sizing-4/#calc-size"
+  },
+  "rejectedExperiment": {
+    "reason": "Rounding the font size itself decreases whole-form equality and shifts the input",
+    "cases": [
+      {
+        "mode": "original",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 270.640625,
+          "height": 152
+        },
+        "input": {
+          "x": 105.640625,
+          "y": 351,
+          "width": 161,
+          "height": 23
+        },
+        "equalRgbRatio": 0.923006993006993,
+        "maskedPixels": 0
+      },
+      {
+        "mode": "rounded",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 269.4375,
+          "height": 152
+        },
+        "input": {
+          "x": 104.4375,
+          "y": 351,
+          "width": 161,
+          "height": 23
+        },
+        "equalRgbRatio": 0.9014918414918415,
+        "maskedPixels": 0
+      },
+      {
+        "mode": "labels",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 270,
+          "height": 152
+        },
+        "input": {
+          "x": 105,
+          "y": 351,
+          "width": 161,
+          "height": 23
+        },
+        "equalRgbRatio": 0.9055244755244756,
+        "maskedPixels": 0
+      },
+      {
+        "mode": "kerning",
+        "frame": {
+          "x": 28,
+          "y": 277,
+          "width": 270,
+          "height": 152
+        },
+        "input": {
+          "x": 105,
+          "y": 351,
+          "width": 161,
+          "height": 23
+        },
+        "equalRgbRatio": 0.9055244755244756,
+        "maskedPixels": 0
+      }
+    ]
+  },
+  "captionAllocationExperiment": [
+    {
+      "mode": "original",
+      "frame": {
+        "x": 28,
+        "y": 277,
+        "width": 270.640625,
+        "height": 152
+      },
+      "input": {
+        "x": 105.640625,
+        "y": 351,
+        "width": 161,
+        "height": 23
+      },
+      "equalRgbRatio": 0.923006993006993,
+      "maskedPixels": 0
+    },
+    {
+      "mode": "ceilLabels",
+      "frame": {
+        "x": 28,
+        "y": 277,
+        "width": 271,
+        "height": 152
+      },
+      "input": {
+        "x": 106,
+        "y": 351,
+        "width": 161,
+        "height": 23
+      },
+      "equalRgbRatio": 0.9265967365967366,
+      "maskedPixels": 0
+    },
+    {
+      "mode": "frameRound",
+      "frame": {
+        "x": 28,
+        "y": 277,
+        "width": 271,
+        "height": 152
+      },
+      "input": {
+        "x": 106,
+        "y": 351,
+        "width": 161,
+        "height": 23
+      },
+      "equalRgbRatio": 0.9265967365967366,
+      "maskedPixels": 0
+    }
+  ],
+  "wholeFormPixelMethod": {
+    "region": "Union of the native and ceil(browser) form bounds, plus four pixels for right/bottom shadow",
+    "nativeOrigin": [
+      261,
+      240
+    ],
+    "browserWebviewOffset": [
+      348,
+      70
+    ],
+    "maskedPixels": 0
+  },
+  "pages": {
+    "ru": {
+      "PagesAuto-first": {
+        "beforeEqualRgbRatio": 0.923007,
+        "afterEqualRgbRatio": 0.926597,
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          271,
+          152
+        ]
+      },
+      "PagesAuto-second": {
+        "beforeEqualRgbRatio": 0.936154,
+        "afterEqualRgbRatio": 0.939604,
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          271,
+          152
+        ]
+      },
+      "PagesLeft-first": {
+        "beforeEqualRgbRatio": 0.916197,
+        "afterEqualRgbRatio": 0.916322,
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          363,
+          127
+        ]
+      },
+      "PagesLeft-second": {
+        "beforeEqualRgbRatio": 0.929093,
+        "afterEqualRgbRatio": 0.929093,
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          363,
+          127
+        ]
+      },
+      "PagesRight-first": {
+        "beforeEqualRgbRatio": 0.913514,
+        "afterEqualRgbRatio": 0.914013,
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          363,
+          127
+        ]
+      },
+      "PagesRight-second": {
+        "beforeEqualRgbRatio": 0.926472,
+        "afterEqualRgbRatio": 0.926847,
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          363,
+          127
+        ]
+      },
+      "PagesSwipe-first": {
+        "beforeEqualRgbRatio": 0.921678,
+        "afterEqualRgbRatio": 0.925268,
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          271,
+          152
+        ]
+      },
+      "PagesSwipe-second": {
+        "beforeEqualRgbRatio": 0.934825,
+        "afterEqualRgbRatio": 0.938275,
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          271,
+          152
+        ]
+      }
+    },
+    "en": {
+      "PagesAuto-first": {
+        "beforeEqualRgbRatio": 0.923007,
+        "afterEqualRgbRatio": 0.926597,
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          271,
+          152
+        ]
+      },
+      "PagesAuto-second": {
+        "beforeEqualRgbRatio": 0.936154,
+        "afterEqualRgbRatio": 0.939604,
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          271,
+          152
+        ]
+      },
+      "PagesLeft-first": {
+        "beforeEqualRgbRatio": 0.916197,
+        "afterEqualRgbRatio": 0.916322,
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          363,
+          127
+        ]
+      },
+      "PagesLeft-second": {
+        "beforeEqualRgbRatio": 0.929093,
+        "afterEqualRgbRatio": 0.929093,
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          363,
+          127
+        ]
+      },
+      "PagesRight-first": {
+        "beforeEqualRgbRatio": 0.913514,
+        "afterEqualRgbRatio": 0.914013,
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          363,
+          127
+        ]
+      },
+      "PagesRight-second": {
+        "beforeEqualRgbRatio": 0.926472,
+        "afterEqualRgbRatio": 0.926847,
+        "nativeFormPixels": [
+          362,
+          127
+        ],
+        "browserFormCssPixels": [
+          363,
+          127
+        ]
+      },
+      "PagesSwipe-first": {
+        "beforeEqualRgbRatio": 0.921678,
+        "afterEqualRgbRatio": 0.925268,
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          271,
+          152
+        ]
+      },
+      "PagesSwipe-second": {
+        "beforeEqualRgbRatio": 0.934825,
+        "afterEqualRgbRatio": 0.938275,
+        "nativeFormPixels": [
+          271,
+          152
+        ],
+        "browserFormCssPixels": [
+          271,
+          152
+        ]
+      }
+    }
+  },
+  "nativeVsix": {
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "passed": true,
+    "groupCases": 22,
+    "exactFrameCases": [
+      "PagesAuto",
+      "PagesSwipe"
+    ],
+    "exactFrameWidth": 271,
+    "exactInputOffsets": [
+      [
+        78,
+        74
+      ],
+      [
+        78,
+        106
+      ]
+    ],
+    "sourceWritesDuringViewing": false
+  },
+  "regressions": {
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "fieldStates": 15,
+    "rendererKinds": 20,
+    "tableCases": 16
+  },
+  "checks": {
+    "typecheck": true,
+    "compile": true,
+    "package": true,
+    "diffCheck": true,
+    "rustUnchangedSinceCommit": "74547a1"
+  },
+  "remaining": [
+    "Text rasterization and glyph positions remain different; no antialias exemption",
+    "Side-tab caption allocations and other sizing combinations",
+    "Windows and physical monitor DPI acceptance",
+    "All other open T152-T165 acceptance items"
+  ],
+  "clientCommit": "0c5fe5d7fcfde35efe50f9b3b262526a28a4173f"
+}

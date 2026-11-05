@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendRuntimeUnchangedSince": "498fad3",
+  "fixtureCommit": "ad00eb2de275ee1d5a5bb7f003b98cafdfb3a3ab",
+  "clientCommit": "d167928be41e98bef858c11a169b02abe8bdf84e",
+  "acceptedMatrix": true,
+  "visualParityVerified": false,
+  "scope": {
+    "forms": 40,
+    "fields": 160,
+    "fieldKinds": [
+      "unbounded string",
+      "decimal with calculator",
+      "date with calendar",
+      "decimal without choice"
+    ],
+    "points": [
+      8,
+      10,
+      12,
+      14,
+      16
+    ],
+    "explicitWidths": [
+      1,
+      10,
+      20,
+      40
+    ],
+    "horizontalStretch": false,
+    "constraints": "automatic/explicit preferred width, MinWidth/MaxWidth and conflicting bounds at 10/16pt",
+    "pixels": "whole string/numeric widgets; date corners only; full calculator interiors",
+    "exclusions": [],
+    "tolerance": 0,
+    "wholeFormAcceptance": false
+  },
+  "behavior": [
+    "Explicit logical width is 10 * trunc(Width) + 11, independent of value font; one choice button adds 20 pixels",
+    "The painted choice border extends one pixel past the logical input. This pixel contributes to the intrinsic column and form width",
+    "HorizontalStretch=false retains preferred width even when MinWidth/MaxWidth conflict with Width",
+    "Numeric text centering uses rounded font ascender/descender values; the 16pt baseline now matches the native field",
+    "Calculator centering uses round((height - 13) / 2), including even 20/38px field heights",
+    "Dirty width/font changes preserve Solid DOM owners in the main and detached native window and return correctly when docked"
+  ],
+  "checks": {
+    "backendFullReference": "t155-native-font-roles-linux.json",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 493,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeSuitesPassed": 18,
+    "runs": [
+      {
+        "suite": "input-dimensions",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 17.25
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.86
+      },
+      {
+        "suite": "input-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 18.98
+      },
+      {
+        "suite": "input-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 22.32
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 16.96
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.22
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 11.11
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 13.9
+      },
+      {
+        "suite": "states",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.63
+      },
+      {
+        "suite": "states",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.38
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.36
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 8.77
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 3.17
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 5.87
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 10.05
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 13.18
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.82
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.88
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "samples": 44,
+        "frameAndFieldGeometry": "exact",
+        "stringAndNumericWidgets": "exact",
+        "dates": "geometry and four corners only",
+        "differentRgbPixels": 0,
+        "regionsOverlap": true,
+        "cornerPixelsCompared": 6336,
+        "wholeWidgetPixelsCompared": 842248,
+        "calculatorPixelsCompared": 24480,
+        "pixelsCompared": 873064,
+        "dirtyDimensions": true,
+        "stableSolidOwners": true,
+        "nativeFloatingWindow": true,
+        "floatingDirtyDimensions": true,
+        "dock": true,
+        "sourceWritesDuringViewing": false,
+        "wholeFormRegressionPixels": 3379919
+      },
+      "ru": {
+        "passed": true,
+        "samples": 44,
+        "frameAndFieldGeometry": "exact",
+        "stringAndNumericWidgets": "exact",
+        "dates": "geometry and four corners only",
+        "differentRgbPixels": 0,
+        "regionsOverlap": true,
+        "cornerPixelsCompared": 6336,
+        "wholeWidgetPixelsCompared": 842248,
+        "calculatorPixelsCompared": 24480,
+        "pixelsCompared": 873064,
+        "dirtyDimensions": true,
+        "stableSolidOwners": true,
+        "nativeFloatingWindow": true,
+        "floatingDirtyDimensions": true,
+        "dock": true,
+        "sourceWritesDuringViewing": false,
+        "wholeFormRegressionPixels": 3379919
+      }
+    },
+    "wholeFormMatrixReference": "t157-native-tab-borders-linux.json"
+  },
+  "remaining": [
+    "Automatic/enabled horizontal stretch and constraints during manual resizing; sixteen initial states were measured but not accepted in this matrix",
+    "Eight additional value fonts exposed height differences; observations and provenance remain in layout-findings.json",
+    "Date value masks and calendar icon are not accepted by this geometry/corner matrix",
+    "Other input buttons, reference/multiline fields, bounded strings and other layout combinations",
+    "Windows, physical DPI and Remote IDE acceptance",
+    "The other unclosed T152–T165 style, extension, resource and complex-field matrices"
+  ]
+}

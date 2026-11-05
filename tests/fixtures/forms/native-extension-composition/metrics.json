@@ -1,0 +1,729 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ALT 10 ARM64",
+  "referenceMode": "Native managed client opens a static common form through /URL; no BSL modules or event handlers. Semantic composition only; Designer preview pixels and general applicability are not accepted by these observations.",
+  "noBslModulesOrHandlers": true,
+  "wholeProfilePixelAcceptance": false,
+  "nativePurposeOrder": [
+    "Patch",
+    "Customization",
+    "AddOn"
+  ],
+  "samePurposeOrder": "Explicit selected source order, matched to native registration order in these fixtures; never inferred from XML name or UUID.",
+  "omittedPurpose": "Customization",
+  "emptyPurposeNativeImportExitCode": 255,
+  "files": [
+    {
+      "path": "Base.xml",
+      "sha256": "88155ab2d7067d4b0543429cc9ae97ba303be9d0e34d1701d2322ab25ad8c9a2",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "First.xml",
+      "sha256": "8dea82ad9ffa286a20897a3def9134738d844fdfbcc44c16af40db10060c3169",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "Second.xml",
+      "sha256": "96ec54423da5f521e3eba50e3e5fe52ac04af7b4febae70454e143825b71d1e7",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "BaseUpdated.xml",
+      "sha256": "3ff0e77aec8326535665e52de0884e4d540426e098aec042ef9f6855244289ee",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "BaseIdChanged.xml",
+      "sha256": "6f0594f011c1531777e9ff8da0f576c9f01d3a1635ea506fa9201f16dde62072",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "BaseConfiguration.xml",
+      "sha256": "9557a086f8d5451b73e8793d7e2e4116d3dd53e076848c9055125f6135104870",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "FirstConfiguration.xml",
+      "sha256": "567bb8857d751d3a41729ec3e21a91a551203dc41f567ea9f8b4ac57f925a0f4",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "SecondConfiguration.xml",
+      "sha256": "ce8f368e55088b86ef3666be60667636a73f34e164f42d855244b46ed526da15",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "FirstPatchConfiguration.xml",
+      "sha256": "8e18bee975103181ccf8ad299d4dac621753fe711595207c788e199f9d716c42",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "FirstAddonConfiguration.xml",
+      "sha256": "9e41de32e46296288e25800da1408e14b4c24055e999e5d6de49f53fcbf61bd3",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "SecondAddonConfiguration.xml",
+      "sha256": "ec7799068995715d9628479377be19c254c16f2ae74a911bb6408182744c9398",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "SecondOmittedPurposeConfiguration.xml",
+      "sha256": "a4e087e6fb964f161a8098e0eaf1b4a1d25a85c4f81aeedcfb192e3fe0ce72de",
+      "nativeRoundTrip": false
+    },
+    {
+      "path": "SecondEmptyPurposeConfiguration.xml",
+      "sha256": "1ab264f8a5b74c22e1a902198cd9ffb0e7ca23e771b29e49f6dadeb09dbb484d",
+      "nativeRoundTrip": false
+    },
+    {
+      "path": "BaseDescriptor.xml",
+      "sha256": "cb27cd523804a9c44e046540ec1a70bc9a088285a73e5f60912f0eafe7f28ba4",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "FirstDescriptor.xml",
+      "sha256": "8ba352b9c0937a1e6abb707b27a4189ca86c9510ceb334eb92fb7f8dd78df30f",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "SecondDescriptor.xml",
+      "sha256": "da11efaa6cac390de2fa6a4f345efdf18387028d740072304e51a22a034ec8e8",
+      "nativeRoundTrip": true
+    },
+    {
+      "path": "Language.xml",
+      "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048",
+      "nativeRoundTrip": true
+    }
+  ],
+  "cases": [
+    {
+      "id": "base-only",
+      "base": "Base.xml",
+      "activeRegistrationOrder": [],
+      "applicationOrder": [],
+      "configurationInputs": {
+        "first": "FirstConfiguration.xml",
+        "second": "SecondConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "base",
+        "blue14PointCaption": false,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "Base caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "B",
+            "title": "Base B"
+          },
+          {
+            "name": "C",
+            "title": "Base C"
+          }
+        ],
+        "baseBXmlId": 4
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/base-only.png",
+        "sha256": "135b340bb077e0cdf4a1b6f67ce70e8bd7bb73a04310a60b25d315d81d331871"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/base-only-extensions.log",
+        "sha256": "5966ff122d3c1b7c070336dd8aac044eb116776b99af20d59577f5056618d869"
+      }
+    },
+    {
+      "id": "first-only",
+      "base": "Base.xml",
+      "activeRegistrationOrder": [
+        "first"
+      ],
+      "applicationOrder": [
+        "first"
+      ],
+      "configurationInputs": {
+        "first": "FirstConfiguration.xml",
+        "second": "SecondConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "first",
+        "blue14PointCaption": true,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "First caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "F_Inserted",
+            "title": "F_inserted"
+          },
+          {
+            "name": "B",
+            "title": "Base B"
+          },
+          {
+            "name": "C",
+            "title": "Base C"
+          }
+        ],
+        "baseBXmlId": 4
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/first-only.png",
+        "sha256": "ecff6dd3f81985c3010f18427235dba78bb3759d5ac64c0308c89bab2d735a19"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/first-only-extensions.log",
+        "sha256": "2cd0335cd9bef47c668bb50e86a0b9ef41baf8ccd1223285a0c75738505a2648"
+      }
+    },
+    {
+      "id": "second-only",
+      "base": "Base.xml",
+      "activeRegistrationOrder": [
+        "second"
+      ],
+      "applicationOrder": [
+        "second"
+      ],
+      "configurationInputs": {
+        "first": "FirstConfiguration.xml",
+        "second": "SecondConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "second",
+        "blue14PointCaption": false,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "Second caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "S_Inserted",
+            "title": "S_inserted"
+          },
+          {
+            "name": "B",
+            "title": "Second B"
+          },
+          {
+            "name": "C",
+            "title": "Base C"
+          }
+        ],
+        "baseBXmlId": 4
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/second-only.png",
+        "sha256": "1471dc67c5348377fb1d38c8313c333ef839ad9378d113e12b713059c1c6108a"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/second-only-extensions.log",
+        "sha256": "963a0f12a7d8b374d3398646227a617fee3b0cc7a9b43c0416154ed9432342fc"
+      }
+    },
+    {
+      "id": "both-forward",
+      "base": "Base.xml",
+      "activeRegistrationOrder": [
+        "first",
+        "second"
+      ],
+      "applicationOrder": [
+        "first",
+        "second"
+      ],
+      "configurationInputs": {
+        "first": "FirstConfiguration.xml",
+        "second": "SecondConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "second",
+        "blue14PointCaption": true,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "Second caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "S_Inserted",
+            "title": "S_inserted"
+          },
+          {
+            "name": "F_Inserted",
+            "title": "F_inserted"
+          },
+          {
+            "name": "B",
+            "title": "Second B"
+          },
+          {
+            "name": "C",
+            "title": "Base C"
+          }
+        ],
+        "baseBXmlId": 4
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/both-forward.png",
+        "sha256": "ed39edd38b776e7dad8ef805ac17999a6891721d385ad3a09406d80e7888578d"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/both-forward-extensions.log",
+        "sha256": "2023147ca920d5d06f8898f0abbd2e72d874a8f9aadbf754aed19b547a50e358"
+      }
+    },
+    {
+      "id": "both-reversed",
+      "base": "Base.xml",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "second",
+        "first"
+      ],
+      "configurationInputs": {
+        "first": "FirstConfiguration.xml",
+        "second": "SecondConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "first",
+        "blue14PointCaption": true,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "First caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "F_Inserted",
+            "title": "F_inserted"
+          },
+          {
+            "name": "S_Inserted",
+            "title": "S_inserted"
+          },
+          {
+            "name": "B",
+            "title": "Second B"
+          },
+          {
+            "name": "C",
+            "title": "Base C"
+          }
+        ],
+        "baseBXmlId": 4
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/both-reversed.png",
+        "sha256": "0ee4bf600a1118134aca001d0f871edd0679cb762a7ec377f9b71f7b38c52e18"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/both-reversed-extensions.log",
+        "sha256": "5dfd1b27697f3dde70f82be8e17c2cd4aa504c03d9fed80dd57196ce2a1b0cce"
+      }
+    },
+    {
+      "id": "first-patch",
+      "base": "Base.xml",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "first",
+        "second"
+      ],
+      "configurationInputs": {
+        "first": "FirstPatchConfiguration.xml",
+        "second": "SecondConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "second",
+        "blue14PointCaption": true,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "Second caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "S_Inserted",
+            "title": "S_inserted"
+          },
+          {
+            "name": "F_Inserted",
+            "title": "F_inserted"
+          },
+          {
+            "name": "B",
+            "title": "Second B"
+          },
+          {
+            "name": "C",
+            "title": "Base C"
+          }
+        ],
+        "baseBXmlId": 4
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/first-patch.png",
+        "sha256": "ed39edd38b776e7dad8ef805ac17999a6891721d385ad3a09406d80e7888578d"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/first-patch-extensions.log",
+        "sha256": "7764256f45d06849f0fcdc2a3367d3beaee3ab984f6eb5da81f39ee43feebaae"
+      }
+    },
+    {
+      "id": "first-addon",
+      "base": "Base.xml",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "second",
+        "first"
+      ],
+      "configurationInputs": {
+        "first": "FirstAddonConfiguration.xml",
+        "second": "SecondConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "first",
+        "blue14PointCaption": true,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "First caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "F_Inserted",
+            "title": "F_inserted"
+          },
+          {
+            "name": "S_Inserted",
+            "title": "S_inserted"
+          },
+          {
+            "name": "B",
+            "title": "Second B"
+          },
+          {
+            "name": "C",
+            "title": "Base C"
+          }
+        ],
+        "baseBXmlId": 4
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/first-addon.png",
+        "sha256": "0ee4bf600a1118134aca001d0f871edd0679cb762a7ec377f9b71f7b38c52e18"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/first-addon-extensions.log",
+        "sha256": "2ad071113c99ee3d97dbb313210d4fab2063cf3640bd0227306cde7969144cff"
+      }
+    },
+    {
+      "id": "second-addon",
+      "base": "Base.xml",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "first",
+        "second"
+      ],
+      "configurationInputs": {
+        "first": "FirstConfiguration.xml",
+        "second": "SecondAddonConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "second",
+        "blue14PointCaption": true,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "Second caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "S_Inserted",
+            "title": "S_inserted"
+          },
+          {
+            "name": "F_Inserted",
+            "title": "F_inserted"
+          },
+          {
+            "name": "B",
+            "title": "Second B"
+          },
+          {
+            "name": "C",
+            "title": "Base C"
+          }
+        ],
+        "baseBXmlId": 4
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/second-addon.png",
+        "sha256": "ed39edd38b776e7dad8ef805ac17999a6891721d385ad3a09406d80e7888578d"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/second-addon-extensions.log",
+        "sha256": "d071ee6bbbe02154ef71515956e8fa9e642a3ca8ac8eebb8e65c6edf14207207"
+      }
+    },
+    {
+      "id": "purpose-default",
+      "base": "Base.xml",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "second",
+        "first"
+      ],
+      "configurationInputs": {
+        "first": "FirstConfiguration.xml",
+        "second": "SecondOmittedPurposeConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "first",
+        "blue14PointCaption": true,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "First caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "F_Inserted",
+            "title": "F_inserted"
+          },
+          {
+            "name": "S_Inserted",
+            "title": "S_inserted"
+          },
+          {
+            "name": "B",
+            "title": "Second B"
+          },
+          {
+            "name": "C",
+            "title": "Base C"
+          }
+        ],
+        "baseBXmlId": 4
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/purpose-default.png",
+        "sha256": "0ee4bf600a1118134aca001d0f871edd0679cb762a7ec377f9b71f7b38c52e18"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/purpose-default-extensions.log",
+        "sha256": "9c33afb02e6ac6698909f38e6b5b77cf53265b2200043fbf58ef835b60fc1bf9"
+      }
+    },
+    {
+      "id": "base-updated",
+      "base": "BaseUpdated.xml",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "second",
+        "first"
+      ],
+      "configurationInputs": {
+        "first": "FirstConfiguration.xml",
+        "second": "SecondConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "first",
+        "blue14PointCaption": true,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "First caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "F_Inserted",
+            "title": "F_inserted"
+          },
+          {
+            "name": "S_Inserted",
+            "title": "S_inserted"
+          },
+          {
+            "name": "B",
+            "title": "Second B"
+          },
+          {
+            "name": "C",
+            "title": "Updated C"
+          }
+        ],
+        "baseBXmlId": 4
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/base-updated.png",
+        "sha256": "ba955ff027eb05e95f7013f80acc6b3f464078f2499bb0fe2b627d9bcc7c9579"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/base-updated-extensions.log",
+        "sha256": "9c33afb02e6ac6698909f38e6b5b77cf53265b2200043fbf58ef835b60fc1bf9"
+      }
+    },
+    {
+      "id": "base-id-changed",
+      "base": "BaseIdChanged.xml",
+      "activeRegistrationOrder": [
+        "second",
+        "first"
+      ],
+      "applicationOrder": [
+        "second",
+        "first"
+      ],
+      "configurationInputs": {
+        "first": "FirstConfiguration.xml",
+        "second": "SecondConfiguration.xml"
+      },
+      "expected": {
+        "captionSource": "first",
+        "blue14PointCaption": true,
+        "captionsInOrder": [
+          {
+            "name": "Caption",
+            "title": "First caption"
+          },
+          {
+            "name": "Group",
+            "title": "Group"
+          },
+          {
+            "name": "A",
+            "title": "Base A"
+          },
+          {
+            "name": "F_Inserted",
+            "title": "F_inserted"
+          },
+          {
+            "name": "S_Inserted",
+            "title": "S_inserted"
+          },
+          {
+            "name": "B",
+            "title": "Second B"
+          },
+          {
+            "name": "C",
+            "title": "Updated C"
+          }
+        ],
+        "baseBXmlId": 104
+      },
+      "nativeScreenshot": {
+        "artifact": "native-form-composition-xeeipvm5/base-id-changed.png",
+        "sha256": "ba955ff027eb05e95f7013f80acc6b3f464078f2499bb0fe2b627d9bcc7c9579"
+      },
+      "nativeExtensionList": {
+        "artifact": "native-form-composition-xeeipvm5/base-id-changed-extensions.log",
+        "sha256": "9c33afb02e6ac6698909f38e6b5b77cf53265b2200043fbf58ef835b60fc1bf9"
+      }
+    }
+  ],
+  "excludedSetup": "Initial ibcmd-created extensions both contained an owned role named ОсновнаяРоль; only the first extension applied. Those roles were removed and both extensions were re-imported/exported before every accepted case. Startup splash detection was corrected before the accepted case sequence."
+}

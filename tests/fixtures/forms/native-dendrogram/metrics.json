@@ -1,0 +1,1782 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "scope": "12 complete settled native dendrogram sources, en-US regional settings and ru/en UI, five dimension pairs with full493px height, elided captions and adaptive tick labels, ReadOnly/Enabled and ignored Font/BackColor/BorderColor. Other dimensions/properties/styles/cultures/combinations, opening animation and full forms remain open.",
+  "nativeImages": 24,
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "bslExecuted": false,
+  "culture": "en-US",
+  "rows": [
+    {
+      "name": "A_Default",
+      "file": "A_Default.xml",
+      "sourceSha256": "a63b3b1875dc80018dccb6732a1d3e6bd1a5e56a17f3fd71e3b715a0911ce2d9",
+      "nativeExport": "canonical/A_Default.xml",
+      "nativeExportSha256": "404a481972d2afba639d5b92dfc18ffb28cdaac80db4e2e451b92f23a7b47fa3",
+      "calibrationCandidate": true,
+      "nativeProperties": "",
+      "renderProperties": {},
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": null,
+      "nativeSize": [
+        500,
+        243
+      ],
+      "outerBorder": [
+        160,
+        160,
+        160
+      ],
+      "droppedProperties": [],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-A_Default.png",
+          "screenshotSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917",
+          "pixels": 121500,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "A_Default",
+            "openedAtUtc": "2026-11-05T04:46:25.716826+00:00",
+            "capturedAtUtc": "2026-11-05T04:46:29.310624+00:00",
+            "beforeScreenshot": "en-settle-A_Default-1.png",
+            "beforeSha256": "aad3890a31cd5036e607eaca81975d62216ef5cfac88cec1706e6a7909f2d0bc",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-A_Default-0.png",
+                  "sha256": "aad3890a31cd5036e607eaca81975d62216ef5cfac88cec1706e6a7909f2d0bc",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-A_Default-1.png",
+                  "sha256": "aad3890a31cd5036e607eaca81975d62216ef5cfac88cec1706e6a7909f2d0bc",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-A_Default.png",
+            "surfacePngSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-A_Default.png",
+          "screenshotSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb",
+          "pixels": 121500,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "A_Default",
+            "openedAtUtc": "2026-11-05T04:50:20.842019+00:00",
+            "capturedAtUtc": "2026-11-05T04:50:24.457122+00:00",
+            "beforeScreenshot": "ru-settle-A_Default-1.png",
+            "beforeSha256": "b90534994312a80dce073abbf7c6f451e20b78747b660c3666e4c9cd7d3f59c7",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-A_Default-0.png",
+                  "sha256": "b90534994312a80dce073abbf7c6f451e20b78747b660c3666e4c9cd7d3f59c7",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-A_Default-1.png",
+                  "sha256": "b90534994312a80dce073abbf7c6f451e20b78747b660c3666e4c9cd7d3f59c7",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-A_Default.png",
+            "surfacePngSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb"
+          }
+        }
+      }
+    },
+    {
+      "name": "B_Size",
+      "file": "B_Size.xml",
+      "sourceSha256": "7209dcef7f8f1af9a0e68ab0f0b27c4b958fdb7dd53bc7d22aae1e77a61c998c",
+      "nativeExport": "canonical/B_Size.xml",
+      "nativeExportSha256": "cb50da82ee24fb8256bde1761bec5f4e702c4953eb8c50ab129782f45f2af96a",
+      "calibrationCandidate": true,
+      "nativeProperties": "<Width>20</Width><Height>5</Height>",
+      "renderProperties": {
+        "Width": "20",
+        "Height": "5"
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": null,
+      "nativeSize": [
+        200,
+        118
+      ],
+      "outerBorder": [
+        160,
+        160,
+        160
+      ],
+      "droppedProperties": [],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-B_Size.png",
+          "screenshotSha256": "0ffeeb76e56039d19e76e790eb5cf57f6d69523ff9e282ad8d5553c509ba9dfb",
+          "nativeRegion": [
+            0,
+            0,
+            200,
+            118
+          ],
+          "rgbSha256": "ee23ff41c4878bce80bf06028f4201281e684a1421145e47c9628c6b2f5e21af",
+          "pixels": 23600,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "B_Size",
+            "openedAtUtc": "2026-11-05T04:46:31.356810+00:00",
+            "capturedAtUtc": "2026-11-05T04:46:34.930644+00:00",
+            "beforeScreenshot": "en-settle-B_Size-1.png",
+            "beforeSha256": "73bc55b6a47bd1460c69c2ce827e77fc87a9e975cbe1947ccbceb6d77d6d4d4d",
+            "beforeRegion": [
+              274,
+              568,
+              200,
+              118
+            ],
+            "height": 118,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-B_Size-0.png",
+                  "sha256": "73bc55b6a47bd1460c69c2ce827e77fc87a9e975cbe1947ccbceb6d77d6d4d4d",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-B_Size-1.png",
+                  "sha256": "73bc55b6a47bd1460c69c2ce827e77fc87a9e975cbe1947ccbceb6d77d6d4d4d",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-B_Size.png",
+            "surfacePngSha256": "0ffeeb76e56039d19e76e790eb5cf57f6d69523ff9e282ad8d5553c509ba9dfb",
+            "nativeSize": [
+              200,
+              118
+            ],
+            "rgbSha256": "ee23ff41c4878bce80bf06028f4201281e684a1421145e47c9628c6b2f5e21af"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-B_Size.png",
+          "screenshotSha256": "578209c41bf5248a5091f22b967e8c2c8851ba9b033bf077e4407c995e89af1f",
+          "nativeRegion": [
+            0,
+            0,
+            200,
+            118
+          ],
+          "rgbSha256": "b1168cd9e157c679ba08c8392120af33f7553a54b7d6b2d29d7318af8a00254d",
+          "pixels": 23600,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "B_Size",
+            "openedAtUtc": "2026-11-05T04:50:26.503675+00:00",
+            "capturedAtUtc": "2026-11-05T04:50:30.072974+00:00",
+            "beforeScreenshot": "ru-settle-B_Size-1.png",
+            "beforeSha256": "e53e5918aa264599ca3e958f94c08d27d17dfadbf67d4211b594ac207ff5e37b",
+            "beforeRegion": [
+              274,
+              568,
+              200,
+              118
+            ],
+            "height": 118,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-B_Size-0.png",
+                  "sha256": "e53e5918aa264599ca3e958f94c08d27d17dfadbf67d4211b594ac207ff5e37b",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-B_Size-1.png",
+                  "sha256": "e53e5918aa264599ca3e958f94c08d27d17dfadbf67d4211b594ac207ff5e37b",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-B_Size.png",
+            "surfacePngSha256": "578209c41bf5248a5091f22b967e8c2c8851ba9b033bf077e4407c995e89af1f",
+            "nativeSize": [
+              200,
+              118
+            ],
+            "rgbSha256": "b1168cd9e157c679ba08c8392120af33f7553a54b7d6b2d29d7318af8a00254d"
+          }
+        }
+      }
+    },
+    {
+      "name": "C_ReadOnly",
+      "file": "C_ReadOnly.xml",
+      "sourceSha256": "f81f1e562cd82f242a7488f64bfeb454ff9a74197985ec6cba5ca5398376a887",
+      "nativeExport": "canonical/C_ReadOnly.xml",
+      "nativeExportSha256": "b50ff24bef7bb90b95c4e75ff5389f02fe262c7697c4e61933b56eb18ee82474",
+      "calibrationCandidate": true,
+      "nativeProperties": "<ReadOnly>true</ReadOnly>",
+      "renderProperties": {
+        "ReadOnly": "true"
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": null,
+      "nativeSize": [
+        500,
+        243
+      ],
+      "outerBorder": [
+        232,
+        232,
+        232
+      ],
+      "droppedProperties": [],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-C_ReadOnly.png",
+          "screenshotSha256": "bc1a5c52546570615563819ec2f18d1525854c53bc7094d487b92cf28ffeb1f1",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "35be62067a8adc7bc4d5bc55a3c433f37fc3ef5b57c9696b4a2b1157f27f4a23",
+          "pixels": 121500,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "C_ReadOnly",
+            "openedAtUtc": "2026-11-05T04:46:36.884593+00:00",
+            "capturedAtUtc": "2026-11-05T04:46:40.482224+00:00",
+            "beforeScreenshot": "en-settle-C_ReadOnly-1.png",
+            "beforeSha256": "e4db3b9900a17d0ccd6ca4f38688744a75911c87b8b65621bb1b705362331fab",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-C_ReadOnly-0.png",
+                  "sha256": "e4db3b9900a17d0ccd6ca4f38688744a75911c87b8b65621bb1b705362331fab",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-C_ReadOnly-1.png",
+                  "sha256": "e4db3b9900a17d0ccd6ca4f38688744a75911c87b8b65621bb1b705362331fab",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-C_ReadOnly.png",
+            "surfacePngSha256": "bc1a5c52546570615563819ec2f18d1525854c53bc7094d487b92cf28ffeb1f1",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "35be62067a8adc7bc4d5bc55a3c433f37fc3ef5b57c9696b4a2b1157f27f4a23"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-C_ReadOnly.png",
+          "screenshotSha256": "eef826df89651400e50acee6d1f3a2904997d44beb967ab3b25edf6088da51b1",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "a3986d2817720f8c19220f241e3997eb17f81c63e3395663d79ddd176f5b9e1b",
+          "pixels": 121500,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "C_ReadOnly",
+            "openedAtUtc": "2026-11-05T04:50:32.045737+00:00",
+            "capturedAtUtc": "2026-11-05T04:50:35.638897+00:00",
+            "beforeScreenshot": "ru-settle-C_ReadOnly-1.png",
+            "beforeSha256": "cbd928869de46c197f0254ffcc860308c33fde7a2623053798c42c5310a30895",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-C_ReadOnly-0.png",
+                  "sha256": "cbd928869de46c197f0254ffcc860308c33fde7a2623053798c42c5310a30895",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-C_ReadOnly-1.png",
+                  "sha256": "cbd928869de46c197f0254ffcc860308c33fde7a2623053798c42c5310a30895",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-C_ReadOnly.png",
+            "surfacePngSha256": "eef826df89651400e50acee6d1f3a2904997d44beb967ab3b25edf6088da51b1",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "a3986d2817720f8c19220f241e3997eb17f81c63e3395663d79ddd176f5b9e1b"
+          }
+        }
+      }
+    },
+    {
+      "name": "D_Disabled",
+      "file": "D_Disabled.xml",
+      "sourceSha256": "0df4940aee9f362284e5ecaf2ee8d4d35c374d341461102e374da3c05c8814d5",
+      "nativeExport": "canonical/D_Disabled.xml",
+      "nativeExportSha256": "b5c75ad0e9614ff67195d8abeabd1a496aa636f41c28f647dfc8c91b139d66da",
+      "calibrationCandidate": true,
+      "nativeProperties": "<Enabled>false</Enabled>",
+      "renderProperties": {
+        "Enabled": "false"
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": null,
+      "nativeSize": [
+        500,
+        243
+      ],
+      "outerBorder": [
+        232,
+        232,
+        232
+      ],
+      "droppedProperties": [],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-D_Disabled.png",
+          "screenshotSha256": "bc1a5c52546570615563819ec2f18d1525854c53bc7094d487b92cf28ffeb1f1",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "35be62067a8adc7bc4d5bc55a3c433f37fc3ef5b57c9696b4a2b1157f27f4a23",
+          "pixels": 121500,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "D_Disabled",
+            "openedAtUtc": "2026-11-05T04:46:42.494723+00:00",
+            "capturedAtUtc": "2026-11-05T04:46:46.067328+00:00",
+            "beforeScreenshot": "en-settle-D_Disabled-1.png",
+            "beforeSha256": "0b202b21752a1c1945ef123667728e5fd44963de48bd67e5a3d7b3e2cacb47f1",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-D_Disabled-0.png",
+                  "sha256": "0b202b21752a1c1945ef123667728e5fd44963de48bd67e5a3d7b3e2cacb47f1",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-D_Disabled-1.png",
+                  "sha256": "0b202b21752a1c1945ef123667728e5fd44963de48bd67e5a3d7b3e2cacb47f1",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-D_Disabled.png",
+            "surfacePngSha256": "bc1a5c52546570615563819ec2f18d1525854c53bc7094d487b92cf28ffeb1f1",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "35be62067a8adc7bc4d5bc55a3c433f37fc3ef5b57c9696b4a2b1157f27f4a23"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-D_Disabled.png",
+          "screenshotSha256": "eef826df89651400e50acee6d1f3a2904997d44beb967ab3b25edf6088da51b1",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "a3986d2817720f8c19220f241e3997eb17f81c63e3395663d79ddd176f5b9e1b",
+          "pixels": 121500,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "D_Disabled",
+            "openedAtUtc": "2026-11-05T04:50:37.695354+00:00",
+            "capturedAtUtc": "2026-11-05T04:50:41.267737+00:00",
+            "beforeScreenshot": "ru-settle-D_Disabled-1.png",
+            "beforeSha256": "7dc0fde61f2fef30c8d105a42ff0f2e179743204bd49927d4fc739cd41f56add",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-D_Disabled-0.png",
+                  "sha256": "7dc0fde61f2fef30c8d105a42ff0f2e179743204bd49927d4fc739cd41f56add",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-D_Disabled-1.png",
+                  "sha256": "7dc0fde61f2fef30c8d105a42ff0f2e179743204bd49927d4fc739cd41f56add",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-D_Disabled.png",
+            "surfacePngSha256": "eef826df89651400e50acee6d1f3a2904997d44beb967ab3b25edf6088da51b1",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "a3986d2817720f8c19220f241e3997eb17f81c63e3395663d79ddd176f5b9e1b"
+          }
+        }
+      }
+    },
+    {
+      "name": "E_Border",
+      "file": "E_Border.xml",
+      "sourceSha256": "f8fdfea89a58fcb0f4d1233692ff763efa3557e997402db9aa69bcea579765a9",
+      "nativeExport": "canonical/E_Border.xml",
+      "nativeExportSha256": "764e139ef1dc8c0f26a1a4581ecdc461f814b3b08c25d211e77ec70dd66f482c",
+      "calibrationCandidate": true,
+      "nativeProperties": "<BorderColor>web:Blue</BorderColor>",
+      "renderProperties": {},
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": null,
+      "nativeSize": [
+        500,
+        243
+      ],
+      "outerBorder": [
+        160,
+        160,
+        160
+      ],
+      "droppedProperties": [
+        "BorderColor"
+      ],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-E_Border.png",
+          "screenshotSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917",
+          "pixels": 121500,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "E_Border",
+            "openedAtUtc": "2026-11-05T04:46:48.091635+00:00",
+            "capturedAtUtc": "2026-11-05T04:46:51.678805+00:00",
+            "beforeScreenshot": "en-settle-E_Border-1.png",
+            "beforeSha256": "455d097fc0a9fb2d69ed37a93a1c38f33f3be5871f20eb07d17de76a9dc9cf74",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-E_Border-0.png",
+                  "sha256": "455d097fc0a9fb2d69ed37a93a1c38f33f3be5871f20eb07d17de76a9dc9cf74",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-E_Border-1.png",
+                  "sha256": "455d097fc0a9fb2d69ed37a93a1c38f33f3be5871f20eb07d17de76a9dc9cf74",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-E_Border.png",
+            "surfacePngSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-E_Border.png",
+          "screenshotSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb",
+          "pixels": 121500,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "E_Border",
+            "openedAtUtc": "2026-11-05T04:50:43.297462+00:00",
+            "capturedAtUtc": "2026-11-05T04:50:46.901299+00:00",
+            "beforeScreenshot": "ru-settle-E_Border-1.png",
+            "beforeSha256": "ff0cd9b55c24f4109521826b6e0bce9704c18bd421129b89fc86d73adee2ef02",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-E_Border-0.png",
+                  "sha256": "ff0cd9b55c24f4109521826b6e0bce9704c18bd421129b89fc86d73adee2ef02",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-E_Border-1.png",
+                  "sha256": "ff0cd9b55c24f4109521826b6e0bce9704c18bd421129b89fc86d73adee2ef02",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-E_Border.png",
+            "surfacePngSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb"
+          }
+        }
+      }
+    },
+    {
+      "name": "F_Background",
+      "file": "F_Background.xml",
+      "sourceSha256": "8b24a8abb9db07058775eec9e838560781730d536a399d6bc8a8c7bee37835bd",
+      "nativeExport": "canonical/F_Background.xml",
+      "nativeExportSha256": "dd9442200231ce917c8cdbb73d3d35f10f366080a8fa70736d14721bb608cc48",
+      "calibrationCandidate": true,
+      "nativeProperties": "<BackColor>web:Black</BackColor>",
+      "renderProperties": {},
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": null,
+      "nativeSize": [
+        500,
+        243
+      ],
+      "outerBorder": [
+        160,
+        160,
+        160
+      ],
+      "droppedProperties": [
+        "BackColor"
+      ],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-F_Background.png",
+          "screenshotSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917",
+          "pixels": 121500,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "F_Background",
+            "openedAtUtc": "2026-11-05T04:46:53.721236+00:00",
+            "capturedAtUtc": "2026-11-05T04:46:57.323591+00:00",
+            "beforeScreenshot": "en-settle-F_Background-1.png",
+            "beforeSha256": "a7758e9313cb74ea2ec485642f676312b18140d5f00f2907128fdf08c344d91d",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-F_Background-0.png",
+                  "sha256": "a7758e9313cb74ea2ec485642f676312b18140d5f00f2907128fdf08c344d91d",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-F_Background-1.png",
+                  "sha256": "a7758e9313cb74ea2ec485642f676312b18140d5f00f2907128fdf08c344d91d",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-F_Background.png",
+            "surfacePngSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-F_Background.png",
+          "screenshotSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb",
+          "pixels": 121500,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "F_Background",
+            "openedAtUtc": "2026-11-05T04:50:48.887896+00:00",
+            "capturedAtUtc": "2026-11-05T04:50:52.487277+00:00",
+            "beforeScreenshot": "ru-settle-F_Background-1.png",
+            "beforeSha256": "c43ed5e99aefd9dd81f099fbe07be5e421691b934b7bbdfc029743c4c9f42803",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-F_Background-0.png",
+                  "sha256": "c43ed5e99aefd9dd81f099fbe07be5e421691b934b7bbdfc029743c4c9f42803",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-F_Background-1.png",
+                  "sha256": "c43ed5e99aefd9dd81f099fbe07be5e421691b934b7bbdfc029743c4c9f42803",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-F_Background.png",
+            "surfacePngSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb"
+          }
+        }
+      }
+    },
+    {
+      "name": "G_NoTitle",
+      "file": "G_NoTitle.xml",
+      "sourceSha256": "04097d311ff4b5fe1886c1827fb36e99c3f852ba0eeeace6f73afe24b41f8c81",
+      "nativeExport": "canonical/G_NoTitle.xml",
+      "nativeExportSha256": "db825a0cf4dfb42bdd8c53e38206822949f81ce5fbb00cff4b0e3084d103c987",
+      "calibrationCandidate": true,
+      "nativeProperties": "<TitleLocation>None</TitleLocation>",
+      "renderProperties": {
+        "TitleLocation": "None"
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": null,
+      "nativeSize": [
+        500,
+        243
+      ],
+      "outerBorder": [
+        160,
+        160,
+        160
+      ],
+      "droppedProperties": [],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-G_NoTitle.png",
+          "screenshotSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917",
+          "pixels": 121500,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "G_NoTitle",
+            "openedAtUtc": "2026-11-05T04:46:59.326069+00:00",
+            "capturedAtUtc": "2026-11-05T04:47:02.930593+00:00",
+            "beforeScreenshot": "en-settle-G_NoTitle-1.png",
+            "beforeSha256": "aa49042e4c18e1f83833c4b542513d8a26377992999cecdf58952402bee857ee",
+            "beforeRegion": [
+              274,
+              549,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-G_NoTitle-0.png",
+                  "sha256": "aa49042e4c18e1f83833c4b542513d8a26377992999cecdf58952402bee857ee",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-G_NoTitle-1.png",
+                  "sha256": "aa49042e4c18e1f83833c4b542513d8a26377992999cecdf58952402bee857ee",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-G_NoTitle.png",
+            "surfacePngSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-G_NoTitle.png",
+          "screenshotSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb",
+          "pixels": 121500,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "G_NoTitle",
+            "openedAtUtc": "2026-11-05T04:50:54.522520+00:00",
+            "capturedAtUtc": "2026-11-05T04:50:58.159873+00:00",
+            "beforeScreenshot": "ru-settle-G_NoTitle-1.png",
+            "beforeSha256": "ed048d5cbdb6f277d717985b73fddb56d42a4c610663b8ef1c4b16cd2c55160e",
+            "beforeRegion": [
+              274,
+              549,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-G_NoTitle-0.png",
+                  "sha256": "ed048d5cbdb6f277d717985b73fddb56d42a4c610663b8ef1c4b16cd2c55160e",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-G_NoTitle-1.png",
+                  "sha256": "ed048d5cbdb6f277d717985b73fddb56d42a4c610663b8ef1c4b16cd2c55160e",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-G_NoTitle.png",
+            "surfacePngSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb"
+          }
+        }
+      }
+    },
+    {
+      "name": "H_Large",
+      "file": "H_Large.xml",
+      "sourceSha256": "c239bcf5cb8107fe6c2fe845fed4e2cd48196c634c97cd5cd80a900a84db5d80",
+      "nativeExport": "canonical/H_Large.xml",
+      "nativeExportSha256": "f728aff0d23a102762f55241b47812fa8763b59d190a28e1dbf9bc400ebbfe0b",
+      "calibrationCandidate": true,
+      "nativeProperties": "<Width>35</Width><Height>9</Height>",
+      "renderProperties": {
+        "Width": "35",
+        "Height": "9"
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": null,
+      "nativeSize": [
+        350,
+        218
+      ],
+      "outerBorder": [
+        160,
+        160,
+        160
+      ],
+      "droppedProperties": [],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-H_Large.png",
+          "screenshotSha256": "c84839c761b78d903f6145002b975705756cb2c11b58cba322f69d3eefb2454f",
+          "nativeRegion": [
+            0,
+            0,
+            350,
+            218
+          ],
+          "rgbSha256": "9e2ef108b46e56ae88f9d43513cac00c699fd7b8617d3c65e4e5ace0f2d4fd40",
+          "pixels": 76300,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "H_Large",
+            "openedAtUtc": "2026-11-05T04:47:04.956765+00:00",
+            "capturedAtUtc": "2026-11-05T04:47:08.548681+00:00",
+            "beforeScreenshot": "en-settle-H_Large-1.png",
+            "beforeSha256": "1607f280d840c6a12b0c5b80afa5d999ccb0ca6611bc63e1d919800dbd0c194c",
+            "beforeRegion": [
+              274,
+              568,
+              350,
+              218
+            ],
+            "height": 218,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-H_Large-0.png",
+                  "sha256": "1607f280d840c6a12b0c5b80afa5d999ccb0ca6611bc63e1d919800dbd0c194c",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-H_Large-1.png",
+                  "sha256": "1607f280d840c6a12b0c5b80afa5d999ccb0ca6611bc63e1d919800dbd0c194c",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-H_Large.png",
+            "surfacePngSha256": "c84839c761b78d903f6145002b975705756cb2c11b58cba322f69d3eefb2454f",
+            "nativeSize": [
+              350,
+              218
+            ],
+            "rgbSha256": "9e2ef108b46e56ae88f9d43513cac00c699fd7b8617d3c65e4e5ace0f2d4fd40"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-H_Large.png",
+          "screenshotSha256": "8fc5ae3f08563e8e45f326bee1e613731932184670ed75f57482f621d8445b83",
+          "nativeRegion": [
+            0,
+            0,
+            350,
+            218
+          ],
+          "rgbSha256": "c5c3b2ec5f1232cc04a4087c9e30a293a920afed8bfc024a6cee505c2e255913",
+          "pixels": 76300,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "H_Large",
+            "openedAtUtc": "2026-11-05T04:51:00.202836+00:00",
+            "capturedAtUtc": "2026-11-05T04:51:03.792909+00:00",
+            "beforeScreenshot": "ru-settle-H_Large-1.png",
+            "beforeSha256": "f32f40c63ef6c7756e733e31aa6498894ee39e1d6f7696798a722f1bc9cf6423",
+            "beforeRegion": [
+              274,
+              568,
+              350,
+              218
+            ],
+            "height": 218,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-H_Large-0.png",
+                  "sha256": "f32f40c63ef6c7756e733e31aa6498894ee39e1d6f7696798a722f1bc9cf6423",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-H_Large-1.png",
+                  "sha256": "f32f40c63ef6c7756e733e31aa6498894ee39e1d6f7696798a722f1bc9cf6423",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-H_Large.png",
+            "surfacePngSha256": "8fc5ae3f08563e8e45f326bee1e613731932184670ed75f57482f621d8445b83",
+            "nativeSize": [
+              350,
+              218
+            ],
+            "rgbSha256": "c5c3b2ec5f1232cc04a4087c9e30a293a920afed8bfc024a6cee505c2e255913"
+          }
+        }
+      }
+    },
+    {
+      "name": "I_Small",
+      "file": "I_Small.xml",
+      "sourceSha256": "0b3a67e3ec4a43d1399b65ccdb9f2d5c01a40e4fbc404d2dca99a3462a394d6c",
+      "nativeExport": "canonical/I_Small.xml",
+      "nativeExportSha256": "7189e0b67b0b88770a0b98da1c00e189785bcf2d1cf4cb668291ccfd7be9dd3d",
+      "calibrationCandidate": true,
+      "nativeProperties": "<Width>15</Width><Height>3</Height>",
+      "renderProperties": {
+        "Width": "15",
+        "Height": "3"
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": null,
+      "nativeSize": [
+        150,
+        68
+      ],
+      "outerBorder": [
+        160,
+        160,
+        160
+      ],
+      "droppedProperties": [],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-I_Small.png",
+          "screenshotSha256": "178a463f17a24acd965422e4b53798ccb3ecb8f233c72787e8aeaf69b4c789af",
+          "nativeRegion": [
+            0,
+            0,
+            150,
+            68
+          ],
+          "rgbSha256": "38f16b53d8296872d16f0c70ee5c8fe6f20589f369aad6758edf7d3bc91224a7",
+          "pixels": 10200,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "I_Small",
+            "openedAtUtc": "2026-11-05T04:47:10.541419+00:00",
+            "capturedAtUtc": "2026-11-05T04:47:14.110134+00:00",
+            "beforeScreenshot": "en-settle-I_Small-1.png",
+            "beforeSha256": "daeba5b7e6610e0c6bd16f045bc21a3ebd866006fe36ffa5aec493b23af425a8",
+            "beforeRegion": [
+              274,
+              568,
+              150,
+              68
+            ],
+            "height": 68,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-I_Small-0.png",
+                  "sha256": "daeba5b7e6610e0c6bd16f045bc21a3ebd866006fe36ffa5aec493b23af425a8",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-I_Small-1.png",
+                  "sha256": "daeba5b7e6610e0c6bd16f045bc21a3ebd866006fe36ffa5aec493b23af425a8",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-I_Small.png",
+            "surfacePngSha256": "178a463f17a24acd965422e4b53798ccb3ecb8f233c72787e8aeaf69b4c789af",
+            "nativeSize": [
+              150,
+              68
+            ],
+            "rgbSha256": "38f16b53d8296872d16f0c70ee5c8fe6f20589f369aad6758edf7d3bc91224a7"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-I_Small.png",
+          "screenshotSha256": "aa4cf883438b3358f18050f5bf6c55470daf4d2af5bb5b8ad8990cfd5ac0d5e5",
+          "nativeRegion": [
+            0,
+            0,
+            150,
+            68
+          ],
+          "rgbSha256": "bbbe07dd4055f5b419680eae4a6fecb721af2f7d6f2645a2b45ca7014e432588",
+          "pixels": 10200,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "I_Small",
+            "openedAtUtc": "2026-11-05T04:51:05.792064+00:00",
+            "capturedAtUtc": "2026-11-05T04:51:09.373167+00:00",
+            "beforeScreenshot": "ru-settle-I_Small-1.png",
+            "beforeSha256": "19c4b9c115b22807729ae9fa9fe469c82082441470a0897df803fa6418015cad",
+            "beforeRegion": [
+              274,
+              568,
+              150,
+              68
+            ],
+            "height": 68,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-I_Small-0.png",
+                  "sha256": "19c4b9c115b22807729ae9fa9fe469c82082441470a0897df803fa6418015cad",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-I_Small-1.png",
+                  "sha256": "19c4b9c115b22807729ae9fa9fe469c82082441470a0897df803fa6418015cad",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-I_Small.png",
+            "surfacePngSha256": "aa4cf883438b3358f18050f5bf6c55470daf4d2af5bb5b8ad8990cfd5ac0d5e5",
+            "nativeSize": [
+              150,
+              68
+            ],
+            "rgbSha256": "bbbe07dd4055f5b419680eae4a6fecb721af2f7d6f2645a2b45ca7014e432588"
+          }
+        }
+      }
+    },
+    {
+      "name": "J_Larger",
+      "file": "J_Larger.xml",
+      "sourceSha256": "9b3e106a378df71d3bf52aa0dddf28bfbc12e592bfd9173c0321c790ac74eaef",
+      "nativeExport": "canonical/J_Larger.xml",
+      "nativeExportSha256": "147acf9f53c7094dfe40061dbf0a777b5fb001b21c8c919ef48fb6c48f273f00",
+      "calibrationCandidate": true,
+      "nativeProperties": "<Width>60</Width><Height>20</Height>",
+      "renderProperties": {
+        "Width": "60",
+        "Height": "20"
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": null,
+      "nativeSize": [
+        600,
+        493
+      ],
+      "outerBorder": [
+        160,
+        160,
+        160
+      ],
+      "droppedProperties": [],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-J_Larger.png",
+          "screenshotSha256": "61b1c4ac781042de5593ca650d28aede52c73a5e8f1221d8a62c0e58733fd55c",
+          "nativeRegion": [
+            0,
+            0,
+            600,
+            493
+          ],
+          "rgbSha256": "754fd42a8527725c9ff1cfb6d9f28f4efa89001686dedb889ec9de5e49523552",
+          "pixels": 295800,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "J_Larger",
+            "openedAtUtc": "2026-11-05T04:47:16.075151+00:00",
+            "capturedAtUtc": "2026-11-05T04:47:19.671664+00:00",
+            "beforeScreenshot": "en-settle-J_Larger-1.png",
+            "beforeSha256": "a8048bdf379b8ed9ed3d788b8c5ac0fddf16ff2d1fbb971e7a12f0876bfa6d0c",
+            "beforeRegion": [
+              274,
+              563,
+              600,
+              390
+            ],
+            "height": 493,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-J_Larger-0.png",
+                  "sha256": "a8048bdf379b8ed9ed3d788b8c5ac0fddf16ff2d1fbb971e7a12f0876bfa6d0c",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-J_Larger-1.png",
+                  "sha256": "a8048bdf379b8ed9ed3d788b8c5ac0fddf16ff2d1fbb971e7a12f0876bfa6d0c",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "stitched_native_viewports",
+            "afterScreenshot": "en-fresh-J_Larger-scrolled.png",
+            "afterSha256": "ffe89689c53ea7fe6d9629aa38020cbd843df5259dd1e23a76d0b0d460ae1d86",
+            "afterWidgetTop": 443,
+            "viewportTop": 506,
+            "viewportBottom": 953,
+            "overlapRows": [
+              63,
+              390
+            ],
+            "overlapPixels": 196200,
+            "overlapDifferentPixels": 0,
+            "nativeSurface": "en-control-J_Larger.png",
+            "surfacePngSha256": "61b1c4ac781042de5593ca650d28aede52c73a5e8f1221d8a62c0e58733fd55c",
+            "nativeSize": [
+              600,
+              493
+            ],
+            "rgbSha256": "754fd42a8527725c9ff1cfb6d9f28f4efa89001686dedb889ec9de5e49523552"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-J_Larger.png",
+          "screenshotSha256": "fea0980249282211e7abaec0bfa2ff47f949e4480997af62324ad3bb73c54093",
+          "nativeRegion": [
+            0,
+            0,
+            600,
+            493
+          ],
+          "rgbSha256": "61a2b23c88f6a75dc523e3ccc1b19ff1cf219ad6b6b748631b574fa21520fe42",
+          "pixels": 295800,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "J_Larger",
+            "openedAtUtc": "2026-11-05T04:51:11.343423+00:00",
+            "capturedAtUtc": "2026-11-05T04:51:14.951324+00:00",
+            "beforeScreenshot": "ru-settle-J_Larger-1.png",
+            "beforeSha256": "9746ea8aa0f70bd135a943173e55e1044678579475e85ebade72610e6c9093d1",
+            "beforeRegion": [
+              274,
+              563,
+              600,
+              390
+            ],
+            "height": 493,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-J_Larger-0.png",
+                  "sha256": "9746ea8aa0f70bd135a943173e55e1044678579475e85ebade72610e6c9093d1",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-J_Larger-1.png",
+                  "sha256": "9746ea8aa0f70bd135a943173e55e1044678579475e85ebade72610e6c9093d1",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "stitched_native_viewports",
+            "afterScreenshot": "ru-fresh-J_Larger-scrolled.png",
+            "afterSha256": "a623c78774178dc5db059cfa1c466b2ca6eaab8dab5e98f4d7632346d425898e",
+            "afterWidgetTop": 443,
+            "viewportTop": 506,
+            "viewportBottom": 953,
+            "overlapRows": [
+              63,
+              390
+            ],
+            "overlapPixels": 196200,
+            "overlapDifferentPixels": 0,
+            "nativeSurface": "ru-control-J_Larger.png",
+            "surfacePngSha256": "fea0980249282211e7abaec0bfa2ff47f949e4480997af62324ad3bb73c54093",
+            "nativeSize": [
+              600,
+              493
+            ],
+            "rgbSha256": "61a2b23c88f6a75dc523e3ccc1b19ff1cf219ad6b6b748631b574fa21520fe42"
+          }
+        }
+      }
+    },
+    {
+      "name": "K_Font12",
+      "file": "K_Font12.xml",
+      "sourceSha256": "a5dbff7c2ba7c9116adf024a216c0b937059452d7d01537772a3795f0fb990c8",
+      "nativeExport": "canonical/K_Font12.xml",
+      "nativeExportSha256": "decc385977e716d11c6f0ffbc8e92af6ccd7cec6083562dd6d05fdfea96fc424",
+      "calibrationCandidate": true,
+      "nativeProperties": "<Font ref=\"style:NormalTextFont\" height=\"12\"/>",
+      "renderProperties": {},
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": {
+        "ref": "style:NormalTextFont",
+        "height": "12"
+      },
+      "nativeSize": [
+        500,
+        243
+      ],
+      "outerBorder": [
+        160,
+        160,
+        160
+      ],
+      "droppedProperties": [
+        "Font"
+      ],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-K_Font12.png",
+          "screenshotSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917",
+          "pixels": 121500,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "K_Font12",
+            "openedAtUtc": "2026-11-05T04:47:23.047222+00:00",
+            "capturedAtUtc": "2026-11-05T04:47:26.637114+00:00",
+            "beforeScreenshot": "en-settle-K_Font12-1.png",
+            "beforeSha256": "608a63fb07657636a57698f55ae5abe8797dcfabfb3d6d3eebca5308c93f83a3",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-K_Font12-0.png",
+                  "sha256": "608a63fb07657636a57698f55ae5abe8797dcfabfb3d6d3eebca5308c93f83a3",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-K_Font12-1.png",
+                  "sha256": "608a63fb07657636a57698f55ae5abe8797dcfabfb3d6d3eebca5308c93f83a3",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-K_Font12.png",
+            "surfacePngSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-K_Font12.png",
+          "screenshotSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb",
+          "pixels": 121500,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "K_Font12",
+            "openedAtUtc": "2026-11-05T04:51:18.324456+00:00",
+            "capturedAtUtc": "2026-11-05T04:51:21.913938+00:00",
+            "beforeScreenshot": "ru-settle-K_Font12-1.png",
+            "beforeSha256": "896ea9ae29ee956e029ac8afede8d8ecaab37a42bd2f80511fccd40ef472a509",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-K_Font12-0.png",
+                  "sha256": "896ea9ae29ee956e029ac8afede8d8ecaab37a42bd2f80511fccd40ef472a509",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-K_Font12-1.png",
+                  "sha256": "896ea9ae29ee956e029ac8afede8d8ecaab37a42bd2f80511fccd40ef472a509",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-K_Font12.png",
+            "surfacePngSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb"
+          }
+        }
+      }
+    },
+    {
+      "name": "L_Font16Bold",
+      "file": "L_Font16Bold.xml",
+      "sourceSha256": "ab4ad3c51bee8e887d19eea7341f6712060a177f9e78bfb2a9290a8301a6e7ae",
+      "nativeExport": "canonical/L_Font16Bold.xml",
+      "nativeExportSha256": "84b3a653090044da76e1defd8b5f7c667e4e6dca3ccb181e3d22a9f05e4e3e18",
+      "calibrationCandidate": true,
+      "nativeProperties": "<Font ref=\"style:NormalTextFont\" height=\"16\" bold=\"true\"/>",
+      "renderProperties": {},
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "requestedFont": {
+        "ref": "style:NormalTextFont",
+        "height": "16",
+        "bold": "true"
+      },
+      "nativeSize": [
+        500,
+        243
+      ],
+      "outerBorder": [
+        160,
+        160,
+        160
+      ],
+      "droppedProperties": [
+        "Font"
+      ],
+      "locales": {
+        "en": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/en-control-L_Font16Bold.png",
+          "screenshotSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917",
+          "pixels": 121500,
+          "chartElement": "Element",
+          "provenance": {
+            "name": "L_Font16Bold",
+            "openedAtUtc": "2026-11-05T04:47:28.642358+00:00",
+            "capturedAtUtc": "2026-11-05T04:47:32.232185+00:00",
+            "beforeScreenshot": "en-settle-L_Font16Bold-1.png",
+            "beforeSha256": "b29963f4aac03d503fa8a42fe6dafc77816e203b7eedb46ef927b7429aa24916",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "en-settle-L_Font16Bold-0.png",
+                  "sha256": "b29963f4aac03d503fa8a42fe6dafc77816e203b7eedb46ef927b7429aa24916",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "en-settle-L_Font16Bold-1.png",
+                  "sha256": "b29963f4aac03d503fa8a42fe6dafc77816e203b7eedb46ef927b7429aa24916",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "en-control-L_Font16Bold.png",
+            "surfacePngSha256": "6afe15e1018eecfa8f7de49b2f830836c983b101ab0ccc5e649e84f01ce6b24b",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "9a94ca128f1256fe08d1a5b7b0f72a8c59c0416401de94d1a294937376b65917"
+          }
+        },
+        "ru": {
+          "nativeScreenshot": "native-dendrogram-yzniggna/ru-control-L_Font16Bold.png",
+          "screenshotSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+          "nativeRegion": [
+            0,
+            0,
+            500,
+            243
+          ],
+          "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb",
+          "pixels": 121500,
+          "chartElement": "Элемент",
+          "provenance": {
+            "name": "L_Font16Bold",
+            "openedAtUtc": "2026-11-05T04:51:23.935483+00:00",
+            "capturedAtUtc": "2026-11-05T04:51:27.510721+00:00",
+            "beforeScreenshot": "ru-settle-L_Font16Bold-1.png",
+            "beforeSha256": "fd2968c1438ce164c8dbafdcb20f067d908ad5e08f1dd9e2cff9c7db3acb978d",
+            "beforeRegion": [
+              274,
+              568,
+              500,
+              243
+            ],
+            "height": 243,
+            "settling": {
+              "minimumWaitSeconds": 2,
+              "consecutiveEqualControlCaptures": 2,
+              "frames": [
+                {
+                  "screenshot": "ru-settle-L_Font16Bold-0.png",
+                  "sha256": "fd2968c1438ce164c8dbafdcb20f067d908ad5e08f1dd9e2cff9c7db3acb978d",
+                  "sameControlRgbAsPrevious": true
+                },
+                {
+                  "screenshot": "ru-settle-L_Font16Bold-1.png",
+                  "sha256": "fd2968c1438ce164c8dbafdcb20f067d908ad5e08f1dd9e2cff9c7db3acb978d",
+                  "sameControlRgbAsPrevious": true
+                }
+              ]
+            },
+            "captureMethod": "single_native_viewport",
+            "nativeSurface": "ru-control-L_Font16Bold.png",
+            "surfacePngSha256": "91480e9357b340c42dae3f3d3851611970ad83a7853b80f139427fe9efe7a7e2",
+            "nativeSize": [
+              500,
+              243
+            ],
+            "rgbSha256": "86a933dc5fda335deb6a9481d4be4a301bd5d8c061fc461ed8454b67800d63fb"
+          }
+        }
+      }
+    }
+  ],
+  "surface": {
+    "nativePixels": 2755800,
+    "glyphs": "Shared regular13px FreeType LCD; normal composition, native hinted kerning and ceiling caption alignment. No raster fragments or widget bitmaps.",
+    "scope": "Other properties/dimensions/styles/cultures/combinations and full forms remain open. Initial native opening animation is not a settled reference."
+  },
+  "files": [
+    {
+      "path": "A_Default.xml",
+      "sha256": "a63b3b1875dc80018dccb6732a1d3e6bd1a5e56a17f3fd71e3b715a0911ce2d9"
+    },
+    {
+      "path": "B_Size.xml",
+      "sha256": "7209dcef7f8f1af9a0e68ab0f0b27c4b958fdb7dd53bc7d22aae1e77a61c998c"
+    },
+    {
+      "path": "C_ReadOnly.xml",
+      "sha256": "f81f1e562cd82f242a7488f64bfeb454ff9a74197985ec6cba5ca5398376a887"
+    },
+    {
+      "path": "D_Disabled.xml",
+      "sha256": "0df4940aee9f362284e5ecaf2ee8d4d35c374d341461102e374da3c05c8814d5"
+    },
+    {
+      "path": "E_Border.xml",
+      "sha256": "f8fdfea89a58fcb0f4d1233692ff763efa3557e997402db9aa69bcea579765a9"
+    },
+    {
+      "path": "F_Background.xml",
+      "sha256": "8b24a8abb9db07058775eec9e838560781730d536a399d6bc8a8c7bee37835bd"
+    },
+    {
+      "path": "G_NoTitle.xml",
+      "sha256": "04097d311ff4b5fe1886c1827fb36e99c3f852ba0eeeace6f73afe24b41f8c81"
+    },
+    {
+      "path": "H_Large.xml",
+      "sha256": "c239bcf5cb8107fe6c2fe845fed4e2cd48196c634c97cd5cd80a900a84db5d80"
+    },
+    {
+      "path": "I_Small.xml",
+      "sha256": "0b3a67e3ec4a43d1399b65ccdb9f2d5c01a40e4fbc404d2dca99a3462a394d6c"
+    },
+    {
+      "path": "J_Larger.xml",
+      "sha256": "9b3e106a378df71d3bf52aa0dddf28bfbc12e592bfd9173c0321c790ac74eaef"
+    },
+    {
+      "path": "K_Font12.xml",
+      "sha256": "a5dbff7c2ba7c9116adf024a216c0b937059452d7d01537772a3795f0fb990c8"
+    },
+    {
+      "path": "L_Font16Bold.xml",
+      "sha256": "ab4ad3c51bee8e887d19eea7341f6712060a177f9e78bfb2a9290a8301a6e7ae"
+    },
+    {
+      "path": "canonical/A_Default.xml",
+      "sha256": "404a481972d2afba639d5b92dfc18ffb28cdaac80db4e2e451b92f23a7b47fa3"
+    },
+    {
+      "path": "canonical/B_Size.xml",
+      "sha256": "cb50da82ee24fb8256bde1761bec5f4e702c4953eb8c50ab129782f45f2af96a"
+    },
+    {
+      "path": "canonical/C_ReadOnly.xml",
+      "sha256": "b50ff24bef7bb90b95c4e75ff5389f02fe262c7697c4e61933b56eb18ee82474"
+    },
+    {
+      "path": "canonical/D_Disabled.xml",
+      "sha256": "b5c75ad0e9614ff67195d8abeabd1a496aa636f41c28f647dfc8c91b139d66da"
+    },
+    {
+      "path": "canonical/E_Border.xml",
+      "sha256": "764e139ef1dc8c0f26a1a4581ecdc461f814b3b08c25d211e77ec70dd66f482c"
+    },
+    {
+      "path": "canonical/F_Background.xml",
+      "sha256": "dd9442200231ce917c8cdbb73d3d35f10f366080a8fa70736d14721bb608cc48"
+    },
+    {
+      "path": "canonical/G_NoTitle.xml",
+      "sha256": "db825a0cf4dfb42bdd8c53e38206822949f81ce5fbb00cff4b0e3084d103c987"
+    },
+    {
+      "path": "canonical/H_Large.xml",
+      "sha256": "f728aff0d23a102762f55241b47812fa8763b59d190a28e1dbf9bc400ebbfe0b"
+    },
+    {
+      "path": "canonical/I_Small.xml",
+      "sha256": "7189e0b67b0b88770a0b98da1c00e189785bcf2d1cf4cb668291ccfd7be9dd3d"
+    },
+    {
+      "path": "canonical/J_Larger.xml",
+      "sha256": "147acf9f53c7094dfe40061dbf0a777b5fb001b21c8c919ef48fb6c48f273f00"
+    },
+    {
+      "path": "canonical/K_Font12.xml",
+      "sha256": "decc385977e716d11c6f0ffbc8e92af6ccd7cec6083562dd6d05fdfea96fc424"
+    },
+    {
+      "path": "canonical/L_Font16Bold.xml",
+      "sha256": "84b3a653090044da76e1defd8b5f7c667e4e6dca3ccb181e3d22a9f05e4e3e18"
+    },
+    {
+      "path": "source/CommonForms/P_A_Default.xml",
+      "sha256": "194619076bcfad75f00ab2d83de1ccb3d3aa3ec34adf2bff8c529cf34e50dc8b"
+    },
+    {
+      "path": "source/CommonForms/P_B_Size.xml",
+      "sha256": "2e777a26cb54df3c591bd70265e893137c3f6771db1e67a9f3aa0aad3f15a931"
+    },
+    {
+      "path": "source/CommonForms/P_C_ReadOnly.xml",
+      "sha256": "2e92dc16cc1c947bd7bbe7029539ebfd9101e4fb1c04f8e45c0fdc414bb0f026"
+    },
+    {
+      "path": "source/CommonForms/P_D_Disabled.xml",
+      "sha256": "e1b65234884d97ef0f94b659dd823385505f44f87b29428543f535d7128d6430"
+    },
+    {
+      "path": "source/CommonForms/P_E_Border.xml",
+      "sha256": "adc30cf3cacbcec8cde71f7aa514f8957430b9652e6917b76e0e5a8f4bb4c6df"
+    },
+    {
+      "path": "source/CommonForms/P_F_Background.xml",
+      "sha256": "dc58c5ac2300d1551555c304ba04471fed0150d415f2b4f72a720bc00036b9b2"
+    },
+    {
+      "path": "source/CommonForms/P_G_NoTitle.xml",
+      "sha256": "598324ab3fc9084613caf983b2502b0857e6f0fce55cb0472508c125adc4402f"
+    },
+    {
+      "path": "source/CommonForms/P_H_Large.xml",
+      "sha256": "e76ba2061f2f470355fe6c0122208d51c013baa6e5a7901cb91f77cd8634b041"
+    },
+    {
+      "path": "source/CommonForms/P_I_Small.xml",
+      "sha256": "0d86081f002fb7f951e2af24867d2f59e882a2f767af4b7fd8bfdfe8c94e5704"
+    },
+    {
+      "path": "source/CommonForms/P_J_Larger.xml",
+      "sha256": "3c6a8a52babbe309768752880162a8749afb43202f2063fe33e1567650e4d3b7"
+    },
+    {
+      "path": "source/CommonForms/P_K_Font12.xml",
+      "sha256": "4a08245c8596cbbdbe71ad00a3ce741e3f5b01e337dd51b9c9fb94129cf5be57"
+    },
+    {
+      "path": "source/CommonForms/P_L_Font16Bold.xml",
+      "sha256": "9c1caddd3c0cdfc5afcb0c244f14edbde88bf4be4f386c5f35f92bb6b2de590b"
+    },
+    {
+      "path": "source/ConfigDumpInfo.xml",
+      "sha256": "3095ce6c6c78af3d07887fc252c50c3ca0f3c154b6e229289194df9647484066"
+    },
+    {
+      "path": "source/Configuration.xml",
+      "sha256": "196de5cfd0916e50bbb3fe1caa59e2d1b1c941d820d93fce3eadf01aee96c862"
+    },
+    {
+      "path": "source/Languages/Русский.xml",
+      "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048"
+    }
+  ],
+  "viewerRecordedSurfacePixelParity": true
+}

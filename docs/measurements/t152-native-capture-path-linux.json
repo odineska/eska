@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 reference container; Fedora host)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "referenceFixture": "tests/fixtures/forms/native-groups/PagesAuto.xml",
+  "referenceState": "First page selected",
+  "browserFrameCssPixels": [
+    271,
+    152
+  ],
+  "comparisonPixels": [
+    275,
+    156
+  ],
+  "nativeOrigin": [
+    261,
+    240
+  ],
+  "browserOrigin": [
+    376,
+    347
+  ],
+  "maskedPixels": 0,
+  "nativeCaptionNonGrayPixels": 242,
+  "captionRegion": [
+    24,
+    77,
+    75,
+    94
+  ],
+  "modes": {
+    "defaultTestArguments": {
+      "formOsAndCdpRgbEqual": true,
+      "formOsRepeatRgbEqual": true,
+      "formRgbSha256": "9fde3bc766db9a0a2ee637e18ab885d3523b747f0a16710e898c540b64d76082",
+      "nativeEqualRgbRatio": 0.926597,
+      "captionNonGrayPixels": 0,
+      "hardwareAccelerationVerified": false
+    },
+    "disableGpuArgumentOmitted": {
+      "formOsAndCdpRgbEqual": true,
+      "formOsRepeatRgbEqual": true,
+      "formRgbSha256": "10ed5e75b0d2e9d3fd4c26c0ab74ba0525b5ff21f5882d0592e29afa0d372038",
+      "nativeEqualRgbRatio": 0.92669,
+      "captionNonGrayPixels": 0,
+      "hardwareAccelerationVerified": false
+    }
+  },
+  "modesFormRgbEqual": false,
+  "captureScope": "Only the isolated VS Code test profile; process command-line/profile ownership and native window PID checked before OS capture",
+  "decision": "Retain the existing browser capture method; form captures match OS pixels exactly in both modes. Text rasterization differences remain part of acceptance; no antialias exemption. Omitting the GPU-disable flag does not by itself prove hardware acceleration.",
+  "applicationChanges": false,
+  "modeDifferencePixels": 639,
+  "modeDifferenceSummary": {
+    "pixelsCompared": 42900,
+    "differingPixels": 639,
+    "boundsInclusive": [
+      4,
+      10,
+      238,
+      128
+    ],
+    "maximumChannelDifference": 24,
+    "changedChannelsByAbsoluteDifference": {
+      "1": 1519,
+      "2": 15,
+      "3": 9,
+      "4": 3,
+      "5": 12,
+      "6": 63,
+      "9": 24,
+      "11": 3,
+      "12": 9,
+      "23": 24,
+      "24": 24
+    }
+  }
+}

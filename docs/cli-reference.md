@@ -1310,6 +1310,11 @@ Options:
 
 </details>
 
+Тип существующей выгрузки определяется по корневому Designer XML.
+Заимствованная `Configuration` с `ObjectBelonging=Adopted` распознаётся как
+расширение и при отсутствующем `ConfigurationExtensionPurpose`. Исходные XML
+при `init` не переписываются; запуск платформы для определения типа не требуется.
+
 <a id="command-eska-project-metadata"></a>
 
 <details>

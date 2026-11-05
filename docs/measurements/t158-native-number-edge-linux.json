@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendCommit": "3020073",
+  "clientCommit": "44fe5d06491a6f9158076d313369f9b26a6058d4",
+  "referenceCommit": "8e9f5a5",
+  "reference": "tests/fixtures/forms/native-state-variants/number-choice-pixels.json",
+  "visualParityVerified": false,
+  "numericChoiceAreaPixelsVerified": true,
+  "conditions": {
+    "dpi": 96,
+    "scalePercent": 100,
+    "devicePixelRatio": 1,
+    "scope": "Enabled numeric choices; normal10pt/enlarged14pt; white button background"
+  },
+  "implementation": [
+    "Numeric button paint extends1px past its logical size; pseudo-element covers the previous edge and paints the new border",
+    "Logical input/button sizes, text allocation and SVG mark unchanged",
+    "Only Linux numeric inputs allow paint overflow; border color inherited from the field"
+  ],
+  "proof": {
+    "choiceAreaPixelsBothLocales": 3000,
+    "differingChoiceAreaPixels": 0,
+    "paintedRightEdge": "Straight portion matches; six corner pixels per case remain in full edge comparison",
+    "differingRightEdgePixelsBothLocales": 36,
+    "defaultWholeFormWith4pxShadow": {
+      "pixelsCompared": 42900,
+      "differingPixels": 106,
+      "exactRatio": 0.997529,
+      "masks": 0,
+      "tolerance": 0
+    },
+    "sourceWritesDuringViewing": false
+  },
+  "checks": {
+    "rust": "Unchanged backend: full fmt/check/clippy/test passed at3020073,1488 passed,19 ignored",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "node": {
+        "passed": 480,
+        "skipped": 11,
+        "failed": 0
+      },
+      "vsixByteCheck": {
+        "out": 59,
+        "docs": 38
+      }
+    }
+  },
+  "nativeRegressions": [
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.64
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.33
+    },
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.75
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 13.56
+    },
+    {
+      "name": "window-titles",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.96
+    },
+    {
+      "name": "window-titles",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.89
+    },
+    {
+      "name": "tab-titles",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.92
+    },
+    {
+      "name": "tab-titles",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.6
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 9.84
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.63
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.14
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 5.85
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.17
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.56
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.84
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.54
+    },
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.45
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.33
+    },
+    {
+      "name": "button-captions",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.63
+    },
+    {
+      "name": "button-captions",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.42
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.42
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.67
+    },
+    {
+      "name": "style",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.81
+    },
+    {
+      "name": "style",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.66
+    }
+  ],
+  "componentScreenshotResults": [
+    {
+      "name": "PagesAuto",
+      "locale": "en",
+      "choiceAreaPixels": 420,
+      "differingChoicePixels": 0,
+      "paintedRightEdgePixels": 42,
+      "differingRightEdgePixels": 6
+    },
+    {
+      "name": "InputNumber",
+      "locale": "en",
+      "choiceAreaPixels": 420,
+      "differingChoicePixels": 0,
+      "paintedRightEdgePixels": 42,
+      "differingRightEdgePixels": 6
+    },
+    {
+      "name": "Font14Number",
+      "locale": "en",
+      "choiceAreaPixels": 660,
+      "differingChoicePixels": 0,
+      "paintedRightEdgePixels": 66,
+      "differingRightEdgePixels": 6
+    },
+    {
+      "name": "PagesAuto",
+      "locale": "ru",
+      "choiceAreaPixels": 420,
+      "differingChoicePixels": 0,
+      "paintedRightEdgePixels": 42,
+      "differingRightEdgePixels": 6
+    },
+    {
+      "name": "InputNumber",
+      "locale": "ru",
+      "choiceAreaPixels": 420,
+      "differingChoicePixels": 0,
+      "paintedRightEdgePixels": 42,
+      "differingRightEdgePixels": 6
+    },
+    {
+      "name": "Font14Number",
+      "locale": "ru",
+      "choiceAreaPixels": 660,
+      "differingChoicePixels": 0,
+      "paintedRightEdgePixels": 66,
+      "differingRightEdgePixels": 6
+    }
+  ],
+  "remaining": [
+    "Input and page corner antialiasing, frame/shadow corner pixels; no pixel waiver",
+    "Colored backgrounds and all states/alignments/fonts/DPI; native extension/style/full catalog/performance matrices",
+    "Windows acceptance remains deferred"
+  ],
+  "screenshots": [
+    {
+      "file": "group-design-root-en.png",
+      "sha256": "020d346abe42bd09d6436511758863a44763952c090465d68b6df04313e97093"
+    },
+    {
+      "file": "state-InputNumber-en.png",
+      "sha256": "e45a8642d62bcbfda9cb1c9e7460fd732aedb16f4dabac22cdf0900a10c43dd4"
+    },
+    {
+      "file": "state-Font14Number-en.png",
+      "sha256": "24378682ed6791a999f7c418abba80466ecc969dda10663cbb74e2244204f589"
+    },
+    {
+      "file": "state-InputColors-en.png",
+      "sha256": "d5be537b2cfe371344838435d0102834488bcd62dccf03f470f835860181a3f1"
+    },
+    {
+      "file": "group-design-root-ru.png",
+      "sha256": "5679bb14a7d60db0d98560f70af2ecbc60c8230c99672a0f6ecbd9fec90d0ff6"
+    },
+    {
+      "file": "state-InputNumber-ru.png",
+      "sha256": "39691f4fb4add7dffb9ff81bc24e6c0da63010703dc49ae2953e3d9e107bcc80"
+    },
+    {
+      "file": "state-Font14Number-ru.png",
+      "sha256": "551df0d45a33553b99306e8277d0a170c923f5da18c85460b0eb653fabfd4515"
+    },
+    {
+      "file": "state-InputColors-ru.png",
+      "sha256": "fe8ed02379b21c58910dcd5b8793e0af27d584e2b0eab6900352afe922c7aaf2"
+    }
+  ]
+}

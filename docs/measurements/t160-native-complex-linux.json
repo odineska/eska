@@ -1,0 +1,667 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64",
+  "nativeUiLocale": "ru",
+  "nativeImportExitCode": 0,
+  "nativeExportExitCode": 0,
+  "visualParityVerified": false,
+  "fixtures": [
+    {
+      "file": "TextDocumentField.xml",
+      "nativeExportSha256": "17ed020317adb7601db04c80ded5e3a15b88417f3507bb82e597d8cafc463584",
+      "fixtureSha256": "83e1baadaa3e8271491f77fd106dd0e8776340ed7b8ccedcced2de0cad10598f",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "PDFDocumentField.xml",
+      "nativeExportSha256": "c579f50beed545bc10c07d5b237b28e85391e4ff2739a9ab07e1a3b93b3a170a",
+      "fixtureSha256": "8a9dcfdec956086ab195dd15b01d1df6ddc583da046ea7d7b2c20a8e0fa9c676",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "DendrogramField.xml",
+      "nativeExportSha256": "a7b3f09ac758f7d2600a7f0547d43b5c8966986b18d1a018badc3849bb023092",
+      "fixtureSha256": "f870062837df273f444ca80fd30c4e3327682e403087b0732cf07e91414c8a9f",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "GanttChartField.xml",
+      "nativeExportSha256": "d43465f41bba1374c22f0db48d9d41d4dbe9c87edb48a61b80203fdd4d2cc299",
+      "fixtureSha256": "c042a6fca67b5bd063eac468af59efb8f3d896a08d08c5d143b2790a13211320",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "GeographicalSchemaField.xml",
+      "nativeExportSha256": "bf29a9cbd999dff2d39944c25d9464762388f759fdd6be30088b3bc0ffa44c9d",
+      "fixtureSha256": "120a22620904a7d5de51be95ebb6bd8b67c1ae0d5a1bd032d9ae5f7a163fc930",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "GraphicalSchemaField.xml",
+      "nativeExportSha256": "548400087fd44d148258b0843635a0342121068a5fd500340cb5a71c601cb73a",
+      "fixtureSha256": "52f679b0345ffd7d90bca983934a2821bbdd89c77b27f8d18f3f190fefd09670",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "PeriodField.xml",
+      "nativeExportSha256": "347c38cbb70af471921d79e99cd6a89610527da009439f652e2b1a0b7eb4813c",
+      "fixtureSha256": "b3321639749bbdee7510c10fb57b626c27ed0ebe84c4dc0c5e9e876c331b123c",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "native-context-tables/Catalog.xml",
+      "nativeExportSha256": "54623e6582cd68ee6a1267e4627e710f56783c66835149b4041a75d477071c15",
+      "fixtureSha256": "18d4f7ff8c42ba96cdacae27d6df5cab9e025f42c35995ced0b51ab57ecef0f2",
+      "nativeImageInspected": false
+    },
+    {
+      "file": "native-context-tables/MetadataTable.xml",
+      "nativeExportSha256": "2d2e4e5b2f72515493bcde4e38723f1b70284e35ec25887e677f7e126892e775",
+      "fixtureSha256": "e892ddbe46307d58fc4fe5baf7569f8d5b33f3ff36a35eb8d76b1587341685a0",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "native-context-tables/DynamicList.xml",
+      "nativeExportSha256": "16f5fd7d1d5c324c435207cb3ac15c71d4f5a7c8f19b9b15140d1a5cf9e78dd1",
+      "fixtureSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "native-addition-variants/NoViewStatus.xml",
+      "nativeExportSha256": "f6f9bebd6df3a29c83d9304d249289e6e95debfead98e8969145cde2cce93cb2",
+      "fixtureSha256": "6bdbaf17fd8e3381835ecf2d888b0976e14a7f9f7f12566fd9702f332674d07f",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "native-addition-variants/NoSearchControl.xml",
+      "nativeExportSha256": "b8ec711711bd6edacafedeba1a1a1a41485d38bc54ad7ba09ff5376573b5ebc6",
+      "fixtureSha256": "ae1ed88f2da9ab7547710c33039379b76d9d66d700dc9a8ad8d628a8149a15ce",
+      "nativeImageInspected": true
+    },
+    {
+      "file": "native-addition-variants/PDFNoViewStatus.xml",
+      "nativeExportSha256": "6894c1ca1a2264c3bd5ceee43a475156aaa49cd7cf9d7551e74672c794519c46",
+      "fixtureSha256": "7b765603d28492ac478b56cea525a474232f87432667c2f3be10112127c4554a",
+      "nativeImageInspected": true
+    }
+  ],
+  "observations": {
+    "TextDocumentField": "500x243, top title, patterned 16px left gutter.",
+    "PDFDocumentField": "500x243 surface, view-status sample filter chips above, blank page with horizontal/vertical scrollbars; no document toolbar.",
+    "DendrogramField": "500x243 with four labeled leaves, numeric left axis and blue branch sample.",
+    "GanttChartField": "500x243 with point/column samples, scale 01..12, blue intervals and series legend.",
+    "GeographicalSchemaField": "500x243, blank white surface and inset border.",
+    "GraphicalSchemaField": "500x243, 20px square grid.",
+    "PeriodField": "500x209, top title; three years of month grids, current month outlined.",
+    "metadataTable": "520x227; LineNumberLength9, unlimited string/number types, four columns; empty mark from metadata.",
+    "dynamicList": "418x452; Create/Copy, search/dropdown, filter chips, no vertical gutter in empty body, paging strip.",
+    "providedTotalsCorrection": "The totals strip of the provided invoice is a separate UsualGroup/LabelFields; it is not ViewStatusAddition.",
+    "additionIsolation": "ViewStatusLocation None removes table chips. SearchControlLocation None leaves them. Visible false on the PDF ViewStatusAddition removes its chips. The earlier assumption that table chips were SearchControlAddition was incorrect.",
+    "complexChartSamplesRepeat": "Dendrogram and Gantt surfaces were pixel-identical on a second open without XML/BSL changes. Their sample values are not treated as random.",
+    "GanttLocales": "ru sample uses 70px rows and vertical scrolling; en uses 54px rows and shows all four points, including a blue/orange fourth-row interval. This follows wrapped sample value captions, not random data.",
+    "DendrogramEnglishCaption": "Element, not Item; confirmed in native /L en."
+  },
+  "remaining": [
+    "Full pixel/text calibration for complex samples and the outer shell; geometry/state tests do not close full visual parity.",
+    "Properties, styles and size variants of all special fields.",
+    "Windows acceptance is deferred by user."
+  ],
+  "checks": {
+    "corePresentationTests": 11,
+    "coreClippyAllTargetsAllFeatures": true,
+    "cargoFmtCheck": true,
+    "projectBuild": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeatures": true,
+    "cargoTest": {
+      "passed": 1464,
+      "ignored": 19,
+      "suites": 42
+    },
+    "extensionTypecheck": true,
+    "extensionCompile": true,
+    "extensionNodeTests": {
+      "passed": 451,
+      "skipped": 11
+    },
+    "installedFieldGalleryRuEn": true
+  },
+  "installedTableGallery": {
+    "version": "VS Code1.109.0 ARM64",
+    "runs": {
+      "ru": {
+        "passed": true,
+        "cases": 13,
+        "contextCases": [
+          {
+            "kind": "MetadataTable",
+            "control": [
+              520,
+              227
+            ],
+            "columnWidths": [
+              97,
+              177,
+              176,
+              54
+            ],
+            "chips": true,
+            "mark": true,
+            "gutter": true,
+            "paging": 0
+          },
+          {
+            "kind": "DynamicList",
+            "control": [
+              418,
+              452
+            ],
+            "columnWidths": [
+              108,
+              308
+            ],
+            "chips": true,
+            "mark": false,
+            "gutter": false,
+            "paging": 4
+          },
+          {
+            "kind": "NoViewStatus",
+            "control": [
+              415,
+              227
+            ],
+            "columnWidths": [
+              216,
+              129,
+              54
+            ],
+            "chips": false,
+            "mark": false,
+            "gutter": true,
+            "paging": 0
+          },
+          {
+            "kind": "NoSearchControl",
+            "control": [
+              415,
+              227
+            ],
+            "columnWidths": [
+              216,
+              129,
+              54
+            ],
+            "chips": true,
+            "mark": false,
+            "gutter": true,
+            "paging": 0
+          }
+        ]
+      },
+      "en": {
+        "passed": true,
+        "cases": 13,
+        "contextCases": [
+          {
+            "kind": "MetadataTable",
+            "control": [
+              520,
+              227
+            ],
+            "columnWidths": [
+              97,
+              177,
+              176,
+              54
+            ],
+            "chips": true,
+            "mark": true,
+            "gutter": true,
+            "paging": 0
+          },
+          {
+            "kind": "DynamicList",
+            "control": [
+              418,
+              452
+            ],
+            "columnWidths": [
+              108,
+              308
+            ],
+            "chips": true,
+            "mark": false,
+            "gutter": false,
+            "paging": 4
+          },
+          {
+            "kind": "NoViewStatus",
+            "control": [
+              415,
+              227
+            ],
+            "columnWidths": [
+              216,
+              129,
+              54
+            ],
+            "chips": false,
+            "mark": false,
+            "gutter": true,
+            "paging": 0
+          },
+          {
+            "kind": "NoSearchControl",
+            "control": [
+              415,
+              227
+            ],
+            "columnWidths": [
+              216,
+              129,
+              54
+            ],
+            "chips": true,
+            "mark": false,
+            "gutter": true,
+            "paging": 0
+          }
+        ]
+      }
+    },
+    "sourceWritesDuringViewing": false,
+    "fullPixelParityVerified": false
+  },
+  "installedFieldGallery": {
+    "version": "VS Code1.109.0 ARM64",
+    "runs": {
+      "ru": {
+        "passed": true,
+        "fieldKinds": 20,
+        "fields": [
+          {
+            "kind": "TextDocumentField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "PDFDocumentField",
+            "control": {
+              "x": 41,
+              "y": 366,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 344
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "DendrogramField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "GanttChartField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "GeographicalSchemaField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "GraphicalSchemaField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "PeriodField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 209
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 280
+            },
+            "title": "Top"
+          }
+        ]
+      },
+      "en": {
+        "passed": true,
+        "fieldKinds": 20,
+        "fields": [
+          {
+            "kind": "TextDocumentField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "PDFDocumentField",
+            "control": {
+              "x": 41,
+              "y": 366,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 344
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "DendrogramField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "GanttChartField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "GeographicalSchemaField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "GraphicalSchemaField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 243
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 314
+            },
+            "title": "Top"
+          },
+          {
+            "kind": "PeriodField",
+            "control": {
+              "x": 41,
+              "y": 336,
+              "width": 500,
+              "height": 209
+            },
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 534,
+              "height": 280
+            },
+            "title": "Top"
+          }
+        ]
+      }
+    },
+    "sourceWritesDuringViewing": false,
+    "pdfDirtyViewStatusToggle": true,
+    "fullPixelParityVerified": false
+  },
+  "surfacePixelComparisons": {
+    "mask": "none; exact RGB including text, borders and samples",
+    "excludes": "outer form shell and field title",
+    "locales": {
+      "ru": {
+        "TextDocumentField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 121500,
+          "totalPixels": 121500,
+          "exactFraction": 1.0
+        },
+        "PDFDocumentField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 121378,
+          "totalPixels": 121500,
+          "exactFraction": 0.9989958847736625
+        },
+        "DendrogramField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 118809,
+          "totalPixels": 121500,
+          "exactFraction": 0.9778518518518519
+        },
+        "GanttChartField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 112633,
+          "totalPixels": 121500,
+          "exactFraction": 0.9270205761316872
+        },
+        "GeographicalSchemaField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 121468,
+          "totalPixels": 121500,
+          "exactFraction": 0.9997366255144033
+        },
+        "GraphicalSchemaField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 121500,
+          "totalPixels": 121500,
+          "exactFraction": 1.0
+        },
+        "PeriodField": {
+          "region": [
+            500,
+            209
+          ],
+          "exactPixels": 97066,
+          "totalPixels": 104500,
+          "exactFraction": 0.9288612440191387
+        }
+      },
+      "en": {
+        "TextDocumentField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 121500,
+          "totalPixels": 121500,
+          "exactFraction": 1.0
+        },
+        "PDFDocumentField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 121378,
+          "totalPixels": 121500,
+          "exactFraction": 0.9989958847736625
+        },
+        "DendrogramField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 118871,
+          "totalPixels": 121500,
+          "exactFraction": 0.9783621399176955
+        },
+        "GanttChartField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 112066,
+          "totalPixels": 121500,
+          "exactFraction": 0.9223539094650206
+        },
+        "GeographicalSchemaField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 121468,
+          "totalPixels": 121500,
+          "exactFraction": 0.9997366255144033
+        },
+        "GraphicalSchemaField": {
+          "region": [
+            500,
+            243
+          ],
+          "exactPixels": 121500,
+          "totalPixels": 121500,
+          "exactFraction": 1.0
+        },
+        "PeriodField": {
+          "region": [
+            500,
+            209
+          ],
+          "exactPixels": 97066,
+          "totalPixels": 104500,
+          "exactFraction": 0.9288612440191387
+        }
+      }
+    },
+    "acceptedAsFullParity": false
+  },
+  "nativeEnSamplesInspected": [
+    "DendrogramField",
+    "GanttChartField",
+    "PDFDocumentField",
+    "PeriodField"
+  ],
+  "testRunNotes": [
+    "The first field-gallery run compared a two-layer CSS backgroundSize to a one-layer string. The assertion was corrected, then both full native VSIX galleries passed."
+  ]
+}

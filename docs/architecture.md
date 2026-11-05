@@ -30,6 +30,7 @@ crates/eska-project-core/
         ├── onboarding.rs            # exact root-manifest enrollment
         ├── designer_xml.rs         # root descriptor classification
         ├── designer_source/        # checked source mapping and bounded reads
+        ├── forms/                  # read-only managed-form model, qualified identities and XML ranges
         ├── metadata.rs             # logical paths and descriptor-child comparisons
         ├── object_model.rs         # source ownership and affected-object discovery
         ├── metadata_model/         # typed identities, kinds and values

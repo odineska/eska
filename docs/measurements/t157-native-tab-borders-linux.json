@@ -1,0 +1,253 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "wholeFormsInReferenceMatrixVerified": true,
+  "backendFixtureCommit": "183a9c1daefaaa46da7638fdf4dd8470aa1164e5",
+  "backendRuntimeUnchangedSince": "498fad3",
+  "clientCommit": "6467bdf684a3760465d04c56d879a8a29dc1d278",
+  "references": [
+    "tests/fixtures/forms/native-tab-borders/README.md",
+    "tests/fixtures/forms/native-tab-borders/metrics.json"
+  ],
+  "implementation": [
+    "Shared native tab fill and asymmetric corner coverage use premultiplied source/destination rounding, both neighbouring tabs and the selected page background",
+    "Inactive tab fill subtracts sixteen per channel; white resolves to #ebebeb. Automatic page fill comes from its surrounding background",
+    "Horizontal group field rules affect direct fields only, preserving nested vertical page alignment",
+    "Unbounded string fields keep their intrinsic preferred width, fill allocated columns and stop at the native automatic maximum calibrated at five point sizes",
+    "Field title baselines snap in form coordinates, including even-height rows; root resizing redraws affected captions",
+    "Painted groups expose one parent-background row at each vertical end without changing layout or clipping content",
+    "Dirty parent/page colors repaint retained Solid DOM. Full main and floating workbench PNGs are compared; no dependencies or public API changes"
+  ],
+  "comparison": {
+    "sourceForms": 32,
+    "sourceStatesPerLocale": 47,
+    "baseTabsPerLocale": 105,
+    "baseCornerPixelsPerLocale": 4620,
+    "samplesIncludingDirtyAndFloatingPerLocale": 51,
+    "wholeFormPixelsAcrossBothLocales": 6759838,
+    "wholeTabPixelsAcrossBothLocales": 1474012,
+    "cornerPixelsAcrossBothLocales": 9944,
+    "overlapBetweenWholeFormAndTabOrCornerRegions": true,
+    "scope": "The full form, root selection frame and four pixels of right/bottom shadow; IDE and OS window chrome are outside the form",
+    "differentRgbPixels": 0,
+    "maskedPixels": 0,
+    "exclusions": []
+  },
+  "checks": {
+    "backendFullReference": "t155-native-font-roles-linux.json",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 490,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeVsix": {
+      "relevantSuitesPassed": 20,
+      "runs": [
+        {
+          "suite": "tab-borders",
+          "locale": "en",
+          "exit": 0
+        },
+        {
+          "suite": "tab-borders",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 21.38
+        },
+        {
+          "suite": "groups",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.28
+        },
+        {
+          "suite": "groups",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.68
+        },
+        {
+          "suite": "tab-titles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.72
+        },
+        {
+          "suite": "tab-titles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.96
+        },
+        {
+          "suite": "input-borders",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 21.74
+        },
+        {
+          "suite": "input-borders",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 19.29
+        },
+        {
+          "suite": "states",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.4
+        },
+        {
+          "suite": "states",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.55
+        },
+        {
+          "suite": "renderer",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 12.99
+        },
+        {
+          "suite": "renderer",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.0
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.65
+        },
+        {
+          "suite": "tables",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.94
+        },
+        {
+          "suite": "frame-corners",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 12.52
+        },
+        {
+          "suite": "frame-corners",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 9.89
+        },
+        {
+          "suite": "font-roles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.85
+        },
+        {
+          "suite": "font-roles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.17
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.95
+        },
+        {
+          "suite": "preview",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.17
+        }
+      ],
+      "pageScenarios": {
+        "ru": {
+          "passed": true,
+          "locale": "ru",
+          "tabBorders": true,
+          "forms": 32,
+          "nativeStates": 47,
+          "nativeTabs": 105,
+          "dirtyPalette": true,
+          "detachedPixels": true,
+          "localNavigationStateHandoffVerified": false,
+          "sourceWritesDuringViewing": false,
+          "wholeFormVisualParity": false,
+          "samplesIncludingDirtyAndFloating": 51,
+          "cornerPixelsCompared": 4972,
+          "wholeTabPixelsCompared": 737006,
+          "wholeFormPixelsCompared": 3379919,
+          "differentRgbPixels": 0,
+          "maskedPixels": 0
+        },
+        "en": {
+          "passed": true,
+          "locale": "en",
+          "tabBorders": true,
+          "forms": 32,
+          "nativeStates": 47,
+          "nativeTabs": 105,
+          "dirtyPalette": true,
+          "detachedPixels": true,
+          "localNavigationStateHandoffVerified": false,
+          "sourceWritesDuringViewing": false,
+          "wholeFormVisualParity": false,
+          "samplesIncludingDirtyAndFloating": 51,
+          "cornerPixelsCompared": 4972,
+          "wholeTabPixelsCompared": 737006,
+          "wholeFormPixelsCompared": 3379919,
+          "differentRgbPixels": 0,
+          "maskedPixels": 0
+        }
+      },
+      "sourceWritesDuringViewing": false
+    }
+  },
+  "wholePagesAutoControl": {
+    "sourceFixture": "tests/fixtures/forms/native-groups/PagesAuto.xml",
+    "previousDifferentRgbPixelsPerLocale": 31,
+    "pages": [
+      {
+        "selected": 0,
+        "locales": [
+          "ru",
+          "en"
+        ],
+        "pixelsPerLocale": 42900,
+        "differentRgbPixels": 0,
+        "maskedPixels": 0
+      },
+      {
+        "selected": 1,
+        "locales": [
+          "ru",
+          "en"
+        ],
+        "pixelsPerLocale": 42900,
+        "differentRgbPixels": 0,
+        "maskedPixels": 0
+      }
+    ],
+    "acceptedForThisSourceAndProfile": true
+  },
+  "remaining": [
+    "T163: a newly detached preview with root selected starts at its first page; this pixel suite explicitly selects its reference page, so local navigation handoff is not accepted",
+    "Explicit Width/MinWidth/MaxWidth, bounded strings and further font/type/resize combinations, including ChoiceB",
+    "Bottom/side/disabled tab variants and all other unclosed container/appearance matrices",
+    "All element families, resources, complex fields and ordered native extension appearance remain subject to their own matrices",
+    "Physical monitor DPI, Windows and remaining T152–T165 acceptance"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "task": "T157",
+  "reference": {
+    "platform": "8.3.27.2342",
+    "interface": "Taxi",
+    "os": "Linux",
+    "fixture": "tests/fixtures/forms/native-basic.xml",
+    "sha256": "1b8576411c63db47fc8411961621c56edbc277c7441b16eb236e319420142ddf",
+    "nativeImportedAndExported": true
+  },
+  "observations": [
+    {
+      "property": "Form.Group",
+      "explicitInFixture": false,
+      "nativeValue": "Vertical"
+    },
+    {
+      "property": "UsualGroup.Group",
+      "explicitInFixture": false,
+      "nativeValue": "Horizontal"
+    },
+    {
+      "property": "UsualGroup.TitleTextColor",
+      "explicitInFixture": false,
+      "nativeRgb": "#009646"
+    },
+    {
+      "property": "InputField.Subject",
+      "nativeWidthPixels": 161,
+      "nativeHeightPixels": 23,
+      "referenceBounds": {
+        "x": 513,
+        "y": 403,
+        "width": 161,
+        "height": 23
+      }
+    }
+  ],
+  "checks": {
+    "coreFormTests": {
+      "passed": 25,
+      "ignoredCorpusTest": 1
+    },
+    "formStdioTests": {
+      "passed": 3
+    },
+    "strictClippy": "passed"
+  },
+  "visualParityVerified": false,
+  "remaining": "Full property/layout/control matrix and pixel comparison are still in progress; Windows acceptance deferred by user."
+}

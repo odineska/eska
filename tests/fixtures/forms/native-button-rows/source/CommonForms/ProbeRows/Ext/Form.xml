@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Button rows</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Button rows</v8:content>
+		</v8:item>
+	</Title>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<UsualGroup name="Forward" id="100">
+			<Group>Horizontal</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="ForwardРасширеннаяПодсказка" id="603"/>
+			<ChildItems>
+				<Button name="Forward1" id="101">
+					<Type>UsualButton</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.Forward1</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="Forward1РасширеннаяПодсказка" id="604"/>
+				</Button>
+				<Button name="Forward2" id="102">
+					<Type>Hyperlink</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.Forward2</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="Forward2РасширеннаяПодсказка" id="605"/>
+				</Button>
+			</ChildItems>
+		</UsualGroup>
+		<UsualGroup name="Reverse" id="200">
+			<Group>Horizontal</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="ReverseРасширеннаяПодсказка" id="606"/>
+			<ChildItems>
+				<Button name="Reverse1" id="201">
+					<Type>Hyperlink</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.Reverse1</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="Reverse1РасширеннаяПодсказка" id="607"/>
+				</Button>
+				<Button name="Reverse2" id="202">
+					<Type>UsualButton</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.Reverse2</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="Reverse2РасширеннаяПодсказка" id="608"/>
+				</Button>
+			</ChildItems>
+		</UsualGroup>
+		<UsualGroup name="Links" id="300">
+			<Group>Horizontal</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="LinksРасширеннаяПодсказка" id="609"/>
+			<ChildItems>
+				<Button name="Links1" id="301">
+					<Type>Hyperlink</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.Links1</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="Links1РасширеннаяПодсказка" id="610"/>
+				</Button>
+				<Button name="Links2" id="302">
+					<Type>Hyperlink</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.Links2</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="Links2РасширеннаяПодсказка" id="611"/>
+				</Button>
+			</ChildItems>
+		</UsualGroup>
+		<UsualGroup name="FixedMixed" id="400">
+			<Group>Horizontal</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="FixedMixedРасширеннаяПодсказка" id="612"/>
+			<ChildItems>
+				<Button name="FixedMixed1" id="401">
+					<Type>UsualButton</Type>
+					<Representation>Text</Representation>
+					<Width>8</Width>
+					<CommandName>Form.Command.FixedMixed1</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="FixedMixed1РасширеннаяПодсказка" id="613"/>
+				</Button>
+				<Button name="FixedMixed2" id="402">
+					<Type>Hyperlink</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.FixedMixed2</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="FixedMixed2РасширеннаяПодсказка" id="614"/>
+				</Button>
+			</ChildItems>
+		</UsualGroup>
+		<CommandBar name="Bar" id="500">
+			<ExtendedTooltip name="BarРасширеннаяПодсказка" id="615"/>
+			<ChildItems>
+				<Button name="Bar1" id="501">
+					<Type>CommandBarButton</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.Bar1</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="Bar1РасширеннаяПодсказка" id="616"/>
+				</Button>
+				<Button name="Bar2" id="502">
+					<Type>CommandBarHyperlink</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.Bar2</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="Bar2РасширеннаяПодсказка" id="617"/>
+				</Button>
+				<Button name="Bar3" id="503">
+					<Type>CommandBarButton</Type>
+					<Representation>Text</Representation>
+					<CommandName>Form.Command.Bar3</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="Bar3РасширеннаяПодсказка" id="618"/>
+				</Button>
+			</ChildItems>
+		</CommandBar>
+		<UsualGroup name="FixedUsual" id="600">
+			<Group>Horizontal</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="FixedUsualРасширеннаяПодсказка" id="619"/>
+			<ChildItems>
+				<Button name="FixedUsual1" id="601">
+					<Type>UsualButton</Type>
+					<Representation>Text</Representation>
+					<Width>6</Width>
+					<CommandName>Form.Command.FixedUsual1</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="FixedUsual1РасширеннаяПодсказка" id="620"/>
+				</Button>
+				<Button name="FixedUsual2" id="602">
+					<Type>UsualButton</Type>
+					<Representation>Text</Representation>
+					<Width>10</Width>
+					<CommandName>Form.Command.FixedUsual2</CommandName>
+					<Font ref="sys:DefaultGUIFont" height="10" kind="WindowsFont"/>
+					<ExtendedTooltip name="FixedUsual2РасширеннаяПодсказка" id="621"/>
+				</Button>
+			</ChildItems>
+		</UsualGroup>
+	</ChildItems>
+	<Attributes/>
+	<Commands>
+		<Command name="Forward1" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Long usual</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Long usual</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="Forward2" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Link</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Link</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="Reverse1" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Link</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Link</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="Reverse2" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Long usual</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Long usual</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="Links1" id="5">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Left link</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Left link</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="Links2" id="6">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Right link</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Right link</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="FixedMixed1" id="7">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Fixed</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Fixed</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="FixedMixed2" id="8">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Link</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Link</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="Bar1" id="9">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Bar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Bar</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="Bar2" id="10">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Bar link</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Bar link</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="Bar3" id="11">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Bar</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Bar</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="FixedUsual1" id="12">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>First</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>First</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+		<Command name="FixedUsual2" id="13">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Second</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Second</v8:content>
+				</v8:item>
+			</Title>
+		</Command>
+	</Commands>
+</Form>

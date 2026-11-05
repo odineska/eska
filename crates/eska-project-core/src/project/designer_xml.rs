@@ -36,7 +36,11 @@ pub fn project_type_from_root(root: roxmltree::Node<'_, '_>) -> Option<ProjectTy
                 .children()
                 .filter(|node| node.has_tag_name((NAMESPACE, "Properties")))
                 .flat_map(|node| node.children())
-                .any(|node| node.has_tag_name((NAMESPACE, "ConfigurationExtensionPurpose")));
+                .any(|node| {
+                    node.has_tag_name((NAMESPACE, "ConfigurationExtensionPurpose"))
+                        || node.has_tag_name((NAMESPACE, "ObjectBelonging"))
+                            && node.text().is_some_and(|value| value.trim() == "Adopted")
+                });
             if extension {
                 ProjectType::Extension
             } else {
@@ -66,6 +70,11 @@ mod tests {
             (
                 "Configuration",
                 "<m:ConfigurationExtensionPurpose>Patch</m:ConfigurationExtensionPurpose><m:ConfigurationExtensionCompatibilityMode>Version8_3_27</m:ConfigurationExtensionCompatibilityMode>",
+                ProjectType::Extension,
+            ),
+            (
+                "Configuration",
+                "<m:ObjectBelonging>Adopted</m:ObjectBelonging>",
                 ProjectType::Extension,
             ),
             ("ExternalDataProcessor", "", ProjectType::Processing),
@@ -104,6 +113,26 @@ mod tests {
             project_type(&xml).expect("XML"),
             Some(ProjectType::Configuration)
         );
+        for properties in [
+            "<x:ObjectBelonging>Adopted</x:ObjectBelonging>",
+            "<ObjectBelonging>Own</ObjectBelonging>",
+        ] {
+            let xml = format!(
+                "<MetaDataObject xmlns=\"{NAMESPACE}\" xmlns:x=\"urn:foreign\"><Configuration><Properties>{properties}</Properties></Configuration></MetaDataObject>"
+            );
+            assert_eq!(
+                project_type(&xml).expect("XML"),
+                Some(ProjectType::Configuration)
+            );
+        }
+    }
+
+    #[test]
+    fn recognizes_native_adopted_extension_when_default_purpose_is_omitted() {
+        let xml = include_str!(
+            "../../../../tests/fixtures/forms/native-extension-composition/SecondOmittedPurposeConfiguration.xml"
+        );
+        assert_eq!(project_type(xml).unwrap(), Some(ProjectType::Extension));
     }
 
     #[test]

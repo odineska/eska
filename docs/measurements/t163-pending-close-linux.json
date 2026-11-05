@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "os": "Linux ARM64",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.38",
+  "native1cRequired": false,
+  "scope": "Closing the last consumer while an acknowledged form response is held",
+  "test": "eska-vscode-explorer/test/form-lifecycle-host.cjs",
+  "locales": ["ru", "en"],
+  "passed": true,
+  "stages": [
+    {"method": "form/prepare", "watchersReleased": true, "sessionAllocated": false},
+    {"method": "form/open", "watchersReleased": true, "sessionReleased": true},
+    {"method": "form/update", "lastConsumerDetached": true, "watchersReleased": true, "sessionReleased": true}
+  ],
+  "method": [
+    "Run the installed VSIX with a real backend and native VS Code panels",
+    "Hold the actual successful backend response before returning it to the service",
+    "Close every consumer, then release the response and await cleanup",
+    "Track disposal of the view's actual filesystem watcher subscriptions",
+    "Check form/get rejects the allocated session as unknown_form_session"
+  ],
+  "sourceWritesDuringViewing": false,
+  "remaining": [
+    "Backend restart and normal workbench restoration",
+    "DPI, Remote and independent Windows acceptance",
+    "Other open T152–T165 work, including full native visual parity"
+  ]
+}

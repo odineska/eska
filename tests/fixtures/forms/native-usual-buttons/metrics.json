@@ -1,0 +1,764 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "scope": "Native characterization; geometry acceptance is separate from full widget pixel acceptance.",
+  "rows": [
+    {
+      "name": "ParentWhite",
+      "file": "ParentWhite.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        409,
+        89
+      ],
+      "nativeScreenshotSha256": "05d0e69da8eaf1bbc7a9132524623f47cfff92b4e20ebe3368936b62cafe0cbe",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "03a55651a7dcb42524ae7d06b6f8b0244c85b8b727579e905aa3b3cc228715d2"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 143,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "a7ac57b4e2adb6c3cea23a96a09c3ccfc954a43931c95e902e5f1e632abe073b"
+        },
+        {
+          "name": "Third",
+          "caption": "First command",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 268,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "d986e23e4fec138775d16fb14a98323ffd54a9eba42c174c4b68d9cad81a05a3"
+        }
+      ]
+    },
+    {
+      "name": "ParentBlack",
+      "file": "ParentBlack.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        409,
+        89
+      ],
+      "nativeScreenshotSha256": "d07a66d851069f2a84d1adb57150daf6c6e63ebccb660e69b3424f5cc5317222",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            0,
+            0,
+            0
+          ],
+          "wholeRgbSha256": "954c34c602ca13be46a02d12c9df9855b0f10fab47d0dc515ca9d87558a7c261"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 143,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            0,
+            0,
+            0
+          ],
+          "wholeRgbSha256": "ccacbf60fb02ec42ca34ae26c3518285106c8931173fd83c7c9ba7a439cff332"
+        },
+        {
+          "name": "Third",
+          "caption": "First command",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 268,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            0,
+            0,
+            0
+          ],
+          "wholeRgbSha256": "fb8b2808bc6e3fec05158c831a3937181db88206c37675b363ce6a24e71ee1ac"
+        }
+      ]
+    },
+    {
+      "name": "ParentLightBlue",
+      "file": "ParentLightBlue.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        409,
+        89
+      ],
+      "nativeScreenshotSha256": "b445ed15cb38babbff59b7ea7872f88ba048ba3207befdc28ef21d6edb41f5a2",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            204,
+            238,
+            255
+          ],
+          "wholeRgbSha256": "20e769f078c789192529c20ab1e4304194fc392c69ef25ecfc36f75753a9196a"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 143,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            204,
+            238,
+            255
+          ],
+          "wholeRgbSha256": "69b063af44c5409564ffcad964d3e8a231c56f06ec1f68bcce1dfaafd97c3759"
+        },
+        {
+          "name": "Third",
+          "caption": "First command",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 268,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            204,
+            238,
+            255
+          ],
+          "wholeRgbSha256": "d41231137499270d0a94accf00de46d184e6e08c389e7ddcaec74c9a96ece4e1"
+        }
+      ]
+    },
+    {
+      "name": "ParentDarkBlue",
+      "file": "ParentDarkBlue.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        409,
+        89
+      ],
+      "nativeScreenshotSha256": "f3349056b82c22cabec7bb39da7e8d7f7b0e9175b29d903ad4812ff44758c796",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            18,
+            52,
+            86
+          ],
+          "wholeRgbSha256": "3cddcd032af56620724602152bd706d279b69ca852af7304bf6dc29e3caf5648"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 143,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            18,
+            52,
+            86
+          ],
+          "wholeRgbSha256": "82d5bb812870e5ea2f90696da52c890775d9f54a03e22c4d97487c316956e42b"
+        },
+        {
+          "name": "Third",
+          "caption": "First command",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 268,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            18,
+            52,
+            86
+          ],
+          "wholeRgbSha256": "84c7bcbc937b3de79aa3c1a4e351c719955c3760a07a696c1a5b23c9a32fded2"
+        }
+      ]
+    },
+    {
+      "name": "ParentGreen",
+      "file": "ParentGreen.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        409,
+        89
+      ],
+      "nativeScreenshotSha256": "e5696169d03c1f2451e5a24c35bbc8444497042debbab88f8e0a20b1725c93ce",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            53,
+            172,
+            113
+          ],
+          "wholeRgbSha256": "c031b85ca93711ba8fa1f8c679730a57edd11643e9bf6f6e719a6d012f8959d5"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 143,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            53,
+            172,
+            113
+          ],
+          "wholeRgbSha256": "d148522fc84b802ba8c4f3b5737a8e8be43e8f8cccf311bc42af97b5f8cb3ce3"
+        },
+        {
+          "name": "Third",
+          "caption": "First command",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 268,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            53,
+            172,
+            113
+          ],
+          "wholeRgbSha256": "0c9e0fb2ff637425a7a268d2c2be8a3efe0487b73b48645c41dd13d14917c194"
+        }
+      ]
+    },
+    {
+      "name": "ParentFormLightBlue",
+      "file": "ParentFormLightBlue.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        399,
+        79
+      ],
+      "nativeScreenshotSha256": "1f86fb57400e65eac9d7b2726c6f5e7833e382f469a2b9fc4bae2c2e52b7e970",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 13,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "03a55651a7dcb42524ae7d06b6f8b0244c85b8b727579e905aa3b3cc228715d2"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 138,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "a7ac57b4e2adb6c3cea23a96a09c3ccfc954a43931c95e902e5f1e632abe073b"
+        },
+        {
+          "name": "Third",
+          "caption": "First command",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 263,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "d986e23e4fec138775d16fb14a98323ffd54a9eba42c174c4b68d9cad81a05a3"
+        }
+      ]
+    },
+    {
+      "name": "ParentLargeBlue14",
+      "file": "ParentLargeBlue14.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        568,
+        96
+      ],
+      "nativeScreenshotSha256": "58bb60d258e9faf87ef707d3cdc14478ef13b1c6f654bfe9fc7a44e1baa79117",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 14.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 168,
+          "height": 33,
+          "outside": [
+            204,
+            238,
+            255
+          ],
+          "wholeRgbSha256": "e40d63f04d69ba2c82e79ec8fee88a139ec0601d9bdd07acb8619ee0626b423b"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 14.0,
+          "weight": "regular",
+          "x": 196,
+          "y": 44,
+          "width": 168,
+          "height": 33,
+          "outside": [
+            204,
+            238,
+            255
+          ],
+          "wholeRgbSha256": "a61a377b4e855deb222a5ce81f25cd8ca8601c071676670c69464ce7de194f8d"
+        },
+        {
+          "name": "Third",
+          "caption": "First command",
+          "points": 14.0,
+          "weight": "regular",
+          "x": 374,
+          "y": 44,
+          "width": 168,
+          "height": 33,
+          "outside": [
+            204,
+            238,
+            255
+          ],
+          "wholeRgbSha256": "ad2eba0596932966a159ec394f99f24987f7a794720ed897d44f3347235cc26e"
+        }
+      ]
+    },
+    {
+      "name": "ParentLargeDark18",
+      "file": "ParentLargeDark18.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        688,
+        105
+      ],
+      "nativeScreenshotSha256": "abbc22ca8416f722e5135c303903611c23fac6ad38a025c57fe1f3bc0cca7f9c",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 18.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 208,
+          "height": 42,
+          "outside": [
+            18,
+            52,
+            86
+          ],
+          "wholeRgbSha256": "e0c7bcf48845cee6ea0c3a4ea766d316d46933db4cdb1be9c721766cd2512e4a"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 18.0,
+          "weight": "regular",
+          "x": 236,
+          "y": 44,
+          "width": 208,
+          "height": 42,
+          "outside": [
+            18,
+            52,
+            86
+          ],
+          "wholeRgbSha256": "5f2ceb8980b264c6582d08a7fe42a47ba64a6e7bfc7072128a6c32ab2c0af199"
+        },
+        {
+          "name": "Third",
+          "caption": "First command",
+          "points": 18.0,
+          "weight": "regular",
+          "x": 454,
+          "y": 44,
+          "width": 208,
+          "height": 42,
+          "outside": [
+            18,
+            52,
+            86
+          ],
+          "wholeRgbSha256": "a67f12a061535d522ecfd6100246380f1e2f70273ebd60554552567dabdb6981"
+        }
+      ]
+    },
+    {
+      "name": "WidthShort",
+      "file": "WidthShort.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        220,
+        89
+      ],
+      "nativeScreenshotSha256": "b7cccf71443ef9fe5c2dcdaee1a71fd9206b5e75daec9db40c718201cc74d0e0",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 52,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "ef790a32e0853796aebe24742909ec5c3d33251001dbe31695aaa799d88beef4"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 80,
+          "y": 44,
+          "width": 52,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "1dcddcbb65275ddcc945c266a708b8add4bdd42a749f85fab8e917f3a78bed50"
+        },
+        {
+          "name": "Third",
+          "caption": "ii",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 142,
+          "y": 44,
+          "width": 52,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "3a62b855737d1eef2617e31a4a262cd3f243934add7006d7fd77b31917d84c2a"
+        }
+      ]
+    },
+    {
+      "name": "WidthLong",
+      "file": "WidthLong.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        589,
+        89
+      ],
+      "nativeScreenshotSha256": "e41de84b029e8c927b2481ac20496abdc2cee1ed4f6ff68daa1edc5e94c813d1",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 175,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "4700a7fa433baee520869ca15e825d4265e91016a08c3d210f4ec43b9adcaa70"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 203,
+          "y": 44,
+          "width": 175,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "09872a9abbafd7d6d384d8002701d5a2e79094e657ca4e407848d5e27e3b7fbb"
+        },
+        {
+          "name": "Third",
+          "caption": "First command expanded",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 388,
+          "y": 44,
+          "width": 175,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "0c4fc2ccf1e604d2debceaeba03ab6b4d3f68e245c43d5ad91aab481a4ef80c9"
+        }
+      ]
+    },
+    {
+      "name": "WidthNoStretch",
+      "file": "WidthNoStretch.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        409,
+        89
+      ],
+      "nativeScreenshotSha256": "819c143e17ef637b24414c08c35aed33bda230ff8ac57aa57a82438553b93073",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "03a55651a7dcb42524ae7d06b6f8b0244c85b8b727579e905aa3b3cc228715d2"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 143,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "a7ac57b4e2adb6c3cea23a96a09c3ccfc954a43931c95e902e5f1e632abe073b"
+        },
+        {
+          "name": "Third",
+          "caption": "First command",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 268,
+          "y": 44,
+          "width": 115,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "d986e23e4fec138775d16fb14a98323ffd54a9eba42c174c4b68d9cad81a05a3"
+        }
+      ]
+    },
+    {
+      "name": "WidthMixed",
+      "file": "WidthMixed.xml",
+      "nativeOrigin": [
+        265,
+        414
+      ],
+      "nativeFrame": [
+        292,
+        96
+      ],
+      "nativeScreenshotSha256": "db503753789bfc05cb2decbe4e00ffe6a3b56a7e4c4debe44e122a35f432211f",
+      "buttons": [
+        {
+          "name": "First",
+          "caption": "WW",
+          "points": 14.0,
+          "weight": "regular",
+          "x": 18,
+          "y": 44,
+          "width": 76,
+          "height": 33,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "ae954916e13ece265829f45ff8801df02f71e04dc60119d239b59f45fc34eaca"
+        },
+        {
+          "name": "Second",
+          "caption": "MM",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 104,
+          "y": 48,
+          "width": 76,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "c615f63f85ec34c7986aea7f8b0bb7c86abb509280c752705c1b62a4d9e92dd9"
+        },
+        {
+          "name": "Third",
+          "caption": "ii",
+          "points": 10.0,
+          "weight": "regular",
+          "x": 190,
+          "y": 48,
+          "width": 76,
+          "height": 26,
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "wholeRgbSha256": "26d79912ab371365f760264de7b14c7978cf300b3219558bb3f39f4ae9f89c52"
+        }
+      ]
+    }
+  ]
+}

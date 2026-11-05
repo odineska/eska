@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "scope": "Complete standard table toolbar strip, including the shadow row. Reuses eight previously captured native images of four XML-only forms. Grid/chips/form shell outside this strip.",
+  "noNewIndependentXmlCorpus": true,
+  "nativeImages": 8,
+  "forms": 4,
+  "comparisonMasks": [],
+  "pixelTolerance": 0,
+  "rows": [
+    {
+      "name": "Default",
+      "source": "tests/fixtures/forms/native-tables/Default.xml",
+      "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+      "locales": {
+        "en": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Default.png",
+          "screenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5",
+          "nativeRegion": [
+            274,
+            549,
+            429,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 429,
+          "height": 27,
+          "rgbSha256": "743f31b402737d199db30ae51bb85334071172d5476504ff1b9c4a7e5b7d6f65",
+          "pixels": 11583
+        },
+        "ru": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Default.png",
+          "screenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38",
+          "nativeRegion": [
+            274,
+            549,
+            415,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 415,
+          "height": 27,
+          "rgbSha256": "d07044a609696b206e16dcec8c52a84194d30dd12ea0cb522f332f1db7edbabc",
+          "pixels": 11205
+        }
+      }
+    },
+    {
+      "name": "ReadOnly",
+      "source": "tests/fixtures/forms/native-tables/ReadOnly.xml",
+      "sourceSha256": "efa9ef102cb1e3c1f37543f692bbf4c58980dc2f0cb56bc29decbbb62e3ba0d3",
+      "locales": {
+        "en": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/en-ReadOnly.png",
+          "screenshotSha256": "6a385741e1a2817fb9a016e79c321f16e3e0ddde9f4b21a5239d5d599ef396cf",
+          "nativeRegion": [
+            274,
+            549,
+            429,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 429,
+          "height": 27,
+          "rgbSha256": "060c3d3c46f92a1e62cf1fcff27f8a8bc105e2d335dd55042f7a83929289c6a2",
+          "pixels": 11583
+        },
+        "ru": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-ReadOnly.png",
+          "screenshotSha256": "82030ccf6dffce9be8776721c0756858de1ad2817bf6e3db077e241c843327e4",
+          "nativeRegion": [
+            274,
+            549,
+            415,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 415,
+          "height": 27,
+          "rgbSha256": "970c7da41b64d291547b2e93b3435991dfb644e8a6f8faa9895e828b04932d36",
+          "pixels": 11205
+        }
+      }
+    },
+    {
+      "name": "MetadataTable",
+      "source": "tests/fixtures/forms/native-context-tables/MetadataTable.xml",
+      "sourceSha256": "e892ddbe46307d58fc4fe5baf7569f8d5b33f3ff36a35eb8d76b1587341685a0",
+      "locales": {
+        "en": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/en-MetadataTable-complete.png",
+          "screenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825",
+          "nativeRegion": [
+            274,
+            549,
+            520,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 520,
+          "height": 27,
+          "rgbSha256": "37d77a4e2d7c3cd74d1e74107201ff24d31ffe2faf046bf1c312491aafad57b2",
+          "pixels": 14040
+        },
+        "ru": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/ru-MetadataTable-complete.png",
+          "screenshotSha256": "48713ccf40610e945129abeee70c0f90df5ef80d6dcd44d02ca9b258de90f3bf",
+          "nativeRegion": [
+            274,
+            549,
+            520,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 520,
+          "height": 27,
+          "rgbSha256": "f67d58cdc41b52d19edcbe06c31da954ee908162b59918f20fa3e08f4d7a7304",
+          "pixels": 14040
+        }
+      }
+    },
+    {
+      "name": "DynamicList",
+      "source": "tests/fixtures/forms/native-context-tables/DynamicList.xml",
+      "sourceSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+      "locales": {
+        "en": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+          "screenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f",
+          "nativeRegion": [
+            274,
+            397,
+            454,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 454,
+          "height": 27,
+          "rgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+          "pixels": 12258
+        },
+        "ru": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+          "screenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723",
+          "nativeRegion": [
+            274,
+            397,
+            418,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 418,
+          "height": 27,
+          "rgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+          "pixels": 11286
+        }
+      }
+    }
+  ],
+  "menuCaptions": {
+    "rows": [
+      {
+        "form": "Default",
+        "locale": "en",
+        "text": "More actions",
+        "region": [
+          335,
+          5,
+          75,
+          15
+        ],
+        "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+        "pixels": 1125,
+        "arrowRegion": [
+          416,
+          13,
+          6,
+          3
+        ],
+        "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+      },
+      {
+        "form": "Default",
+        "locale": "ru",
+        "text": "Еще",
+        "region": [
+          369,
+          5,
+          27,
+          15
+        ],
+        "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+        "pixels": 405,
+        "arrowRegion": [
+          402,
+          13,
+          6,
+          3
+        ],
+        "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+      },
+      {
+        "form": "ReadOnly",
+        "locale": "en",
+        "text": "More actions",
+        "region": [
+          335,
+          5,
+          75,
+          15
+        ],
+        "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+        "pixels": 1125,
+        "arrowRegion": [
+          416,
+          13,
+          6,
+          3
+        ],
+        "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+      },
+      {
+        "form": "ReadOnly",
+        "locale": "ru",
+        "text": "Еще",
+        "region": [
+          369,
+          5,
+          27,
+          15
+        ],
+        "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+        "pixels": 405,
+        "arrowRegion": [
+          402,
+          13,
+          6,
+          3
+        ],
+        "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+      },
+      {
+        "form": "MetadataTable",
+        "locale": "en",
+        "text": "More actions",
+        "region": [
+          426,
+          5,
+          75,
+          15
+        ],
+        "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+        "pixels": 1125,
+        "arrowRegion": [
+          507,
+          13,
+          6,
+          3
+        ],
+        "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+      },
+      {
+        "form": "MetadataTable",
+        "locale": "ru",
+        "text": "Еще",
+        "region": [
+          474,
+          5,
+          27,
+          15
+        ],
+        "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+        "pixels": 405,
+        "arrowRegion": [
+          507,
+          13,
+          6,
+          3
+        ],
+        "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+      },
+      {
+        "form": "DynamicList",
+        "locale": "en",
+        "text": "More actions",
+        "region": [
+          360,
+          5,
+          75,
+          15
+        ],
+        "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+        "pixels": 1125,
+        "arrowRegion": [
+          441,
+          13,
+          6,
+          3
+        ],
+        "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+      },
+      {
+        "form": "DynamicList",
+        "locale": "ru",
+        "text": "Еще",
+        "region": [
+          372,
+          5,
+          27,
+          15
+        ],
+        "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+        "pixels": 405,
+        "arrowRegion": [
+          405,
+          13,
+          6,
+          3
+        ],
+        "arrowRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce"
+      }
+    ],
+    "captionPixels": 6120,
+    "arrowPixels": 144,
+    "foreground": "#4d4d4d",
+    "background": "#ffffff",
+    "fontPixels": 13,
+    "ascent": 12,
+    "descent": 3,
+    "buttonHeight": 26,
+    "trailingWidth": 4
+  }
+}

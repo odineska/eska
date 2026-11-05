@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27",
+  "elements": [
+    {
+      "xmlTag": "AutoCommandBar",
+      "family": "auxiliary",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "Button",
+      "family": "button",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "ButtonGroup",
+      "family": "group",
+      "platformEnum": "FormGroupType",
+      "platformValue": "ButtonGroup",
+      "stage": "T157"
+    },
+    {
+      "xmlTag": "CalendarField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "CalendarField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "ChartField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "ChartField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "CheckBoxField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "CheckBoxField",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "ColumnGroup",
+      "family": "group",
+      "platformEnum": "FormGroupType",
+      "platformValue": "ColumnGroup",
+      "stage": "T159"
+    },
+    {
+      "xmlTag": "CommandBar",
+      "family": "group",
+      "platformEnum": "FormGroupType",
+      "platformValue": "CommandBar",
+      "stage": "T157"
+    },
+    {
+      "xmlTag": "ContextMenu",
+      "family": "group",
+      "platformEnum": "FormGroupType",
+      "platformValue": "ContextMenu",
+      "stage": "T157"
+    },
+    {
+      "xmlTag": "DendrogramField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "DendrogramField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "ExtendedTooltip",
+      "family": "auxiliary",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "Form",
+      "family": "root",
+      "stage": "T157"
+    },
+    {
+      "xmlTag": "FormattedDocumentField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "FormattedDocumentField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "GanttChartField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "GanttChartField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "GeographicalSchemaField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "GeographicalSchemaField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "GraphicalSchemaField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "GraphicalSchemaField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "HTMLDocumentField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "HTMLDocumentField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "InputField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "InputField",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "LabelDecoration",
+      "family": "decoration",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "LabelField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "LabelField",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "PDFDocumentField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "PDFDocumentField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "Page",
+      "family": "group",
+      "platformEnum": "FormGroupType",
+      "platformValue": "Page",
+      "stage": "T157"
+    },
+    {
+      "xmlTag": "Pages",
+      "family": "group",
+      "platformEnum": "FormGroupType",
+      "platformValue": "Pages",
+      "stage": "T157"
+    },
+    {
+      "xmlTag": "PeriodField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "PeriodField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "PictureDecoration",
+      "family": "decoration",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "PictureField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "PictureField",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "PlannerField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "PlannerField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "Popup",
+      "family": "group",
+      "platformEnum": "FormGroupType",
+      "platformValue": "Popup",
+      "stage": "T157"
+    },
+    {
+      "xmlTag": "ProgressBarField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "ProgressBarField",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "RadioButtonField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "RadioButtonField",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "SearchControlAddition",
+      "family": "addition",
+      "stage": "T159"
+    },
+    {
+      "xmlTag": "SearchStringAddition",
+      "family": "addition",
+      "stage": "T159"
+    },
+    {
+      "xmlTag": "SpreadSheetDocumentField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "SpreadsheetDocumentField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "Table",
+      "family": "table",
+      "stage": "T159"
+    },
+    {
+      "xmlTag": "TextDocumentField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "TextDocumentField",
+      "stage": "T160"
+    },
+    {
+      "xmlTag": "TrackBarField",
+      "family": "field",
+      "platformEnum": "FormFieldType",
+      "platformValue": "TrackBarField",
+      "stage": "T158"
+    },
+    {
+      "xmlTag": "UsualGroup",
+      "family": "group",
+      "platformEnum": "FormGroupType",
+      "platformValue": "UsualGroup",
+      "stage": "T157"
+    },
+    {
+      "xmlTag": "ViewStatusAddition",
+      "family": "addition",
+      "stage": "T159"
+    }
+  ]
+}

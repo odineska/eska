@@ -1,0 +1,570 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendCommit": "302007354cf92b34b9996ebca6092423ff61e801",
+  "clientCommit": "17b637c625a3fb970b8548d40ce4042ca6811df4",
+  "referenceCommit": "acd811b",
+  "reference": "tests/fixtures/forms/native-tab-appearance/metrics.json",
+  "visualParityVerified": false,
+  "tabCaptionPixelsVerified": true,
+  "tabGeometryVerified": true,
+  "formFrameGeometryVerified": true,
+  "conditions": {
+    "dpi": 96,
+    "scalePercent": 100,
+    "devicePixelRatio": 1,
+    "font": "Liberation Sans 2.1.5",
+    "sizesPt": [
+      8,
+      10,
+      12,
+      14,
+      16,
+      18,
+      20,
+      24,
+      28,
+      32
+    ],
+    "weight": [
+      400,
+      700
+    ],
+    "pages": "First page active, root design selection",
+    "backgrounds": [
+      "#ffffff",
+      "#ebebeb"
+    ],
+    "colors": [
+      "#333333",
+      "#ff0000",
+      "#0000ff"
+    ]
+  },
+  "implementation": [
+    "Shared backend inherits missing Page TitleFont/TitleTextColor from Pages and retains source/ranges; own property wins",
+    "Default tab roles NormalTextFont / FieldTextColor; page contents keep separate font/color",
+    "Shared title header height/padding uses largest title; each title retains its own font/color",
+    "Existing FreeType/LCD runtime reused; center logical advance, preserve bitmap overhang and discrete baseline",
+    "Measured header allocations cover ten font sizes; other sizes keep approximate layout/browser text with localized notice",
+    "Native label canvas/placeholder excluded from width adornments; background observer reacts to active class; native border tone #b3b3b3"
+  ],
+  "proof": {
+    "formsPerLocale": 15,
+    "captionsPerLocale": 30,
+    "captionPixelsPerLocale": 96542,
+    "captionPixelsBothLocales": 193084,
+    "differingCaptionPixels": 0,
+    "dirtyTitleFont": "16 to 12 to 16 pt matches alternate native fixture, same tab DOM, both locales",
+    "sourceWritesDuringViewing": false,
+    "screenshotCoordinateProof": "CDP full workbench screenshot, webview offset 348/70; independent native origin 261/240",
+    "masks": 0,
+    "tolerance": 0
+  },
+  "checks": {
+    "rust": {
+      "fmt": "passed",
+      "check": "passed",
+      "clippyAllTargetsAllFeatures": "passed",
+      "tests": {
+        "passed": 1488,
+        "failed": 0,
+        "ignored": 19,
+        "suites": 42
+      },
+      "explicitProjectCliBuild": "passed"
+    },
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "node": {
+        "passed": 477,
+        "failed": 0,
+        "skipped": 11
+      },
+      "vsixByteCheck": {
+        "out": 59,
+        "docs": 38
+      }
+    }
+  },
+  "nativeRegressions": [
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.75
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 13.49
+    },
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.36
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.05
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.22
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 13.83
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 2.98
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 5.73
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.94
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.65
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.89
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.69
+    },
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.71
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.31
+    },
+    {
+      "name": "button-captions",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.62
+    },
+    {
+      "name": "button-captions",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.65
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.03
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.87
+    },
+    {
+      "name": "style",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 5.0
+    },
+    {
+      "name": "style",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.63
+    }
+  ],
+  "results": [
+    {
+      "locale": "en",
+      "tabSuitePassed": true,
+      "wholeFormComparisons": [
+        {
+          "name": "Default",
+          "captionPixels": 2055,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.98289
+        },
+        {
+          "name": "PagesFont16",
+          "captionPixels": 5575,
+          "wholeFormPixels": 56416,
+          "wholeFormDifferingPixels": 878,
+          "wholeFormRatio": 0.984437
+        },
+        {
+          "name": "PageFont16",
+          "captionPixels": 3570,
+          "wholeFormPixels": 47644,
+          "wholeFormDifferingPixels": 774,
+          "wholeFormRatio": 0.983755
+        },
+        {
+          "name": "PageFont16Bold",
+          "captionPixels": 3720,
+          "wholeFormPixels": 48676,
+          "wholeFormDifferingPixels": 788,
+          "wholeFormRatio": 0.983811
+        },
+        {
+          "name": "PagesColorRed",
+          "captionPixels": 2055,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.98289
+        },
+        {
+          "name": "PageColorBlue",
+          "captionPixels": 2055,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.98289
+        },
+        {
+          "name": "PagesAndPage",
+          "captionPixels": 7701,
+          "wholeFormPixels": 71004,
+          "wholeFormDifferingPixels": 998,
+          "wholeFormRatio": 0.985944
+        },
+        {
+          "name": "PagesFont8",
+          "captionPixels": 1508,
+          "wholeFormPixels": 41800,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.98244
+        },
+        {
+          "name": "PagesFont12",
+          "captionPixels": 3154,
+          "wholeFormPixels": 44550,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.983524
+        },
+        {
+          "name": "PagesFont14",
+          "captionPixels": 4646,
+          "wholeFormPixels": 51207,
+          "wholeFormDifferingPixels": 828,
+          "wholeFormRatio": 0.98383
+        },
+        {
+          "name": "PagesFont18",
+          "captionPixels": 6860,
+          "wholeFormPixels": 63724,
+          "wholeFormDifferingPixels": 938,
+          "wholeFormRatio": 0.98528
+        },
+        {
+          "name": "PagesFont24",
+          "captionPixels": 12024,
+          "wholeFormPixels": 89961,
+          "wholeFormDifferingPixels": 1164,
+          "wholeFormRatio": 0.987061
+        },
+        {
+          "name": "PagesFont28",
+          "captionPixels": 16296,
+          "wholeFormPixels": 108741,
+          "wholeFormDifferingPixels": 1270,
+          "wholeFormRatio": 0.988321
+        },
+        {
+          "name": "PagesFont32",
+          "captionPixels": 21903,
+          "wholeFormPixels": 131440,
+          "wholeFormDifferingPixels": 1270,
+          "wholeFormRatio": 0.990338
+        },
+        {
+          "name": "PagesFont12Bold",
+          "captionPixels": 3420,
+          "wholeFormPixels": 44550,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.983524
+        }
+      ],
+      "screenshotHashes": [
+        {
+          "case": "Default",
+          "sha256": "1ad9bc5fbcdb4de252dd5b98f2d25aa9200753113c0a67fd6dfba3a29b8111b0"
+        },
+        {
+          "case": "PagesFont16",
+          "sha256": "85ed981613ad5d0677605cc5f8191275c871e88f977345229af21b281a8e35d4"
+        },
+        {
+          "case": "PageFont16",
+          "sha256": "eca4120490b5d2c12c3c78cef9ec93d3fa1cd18c9ec02bfa3c433d43f359ac7b"
+        },
+        {
+          "case": "PageFont16Bold",
+          "sha256": "eeed0d714f1dfec275f1283d0446ec542ee3ead9ca535c4bfeaea39529b95e09"
+        },
+        {
+          "case": "PagesColorRed",
+          "sha256": "db36cbc4493b197f5cf2510f1658c0491c1509bcbda961914ed53f3b02c3833f"
+        },
+        {
+          "case": "PageColorBlue",
+          "sha256": "df157024270c7a6eeb06b4070efaa0a2e24cab28065990b322aeaf28b5439a74"
+        },
+        {
+          "case": "PagesAndPage",
+          "sha256": "0aa4170f354e57e569a18d6c061e5461da2e950fddc44fd9fdfe97ab69051cf8"
+        },
+        {
+          "case": "PagesFont8",
+          "sha256": "6fc09f186182911c6f8028f8c8557f0731bf97e064b91db15ce254a1132f5dfe"
+        },
+        {
+          "case": "PagesFont12",
+          "sha256": "3444e108f836749268b0a58ab66a4bdd2891c2f88ddf9b3d4b15162ddecca86f"
+        },
+        {
+          "case": "PagesFont14",
+          "sha256": "d2ff5a18a4f5fbc7757b4717a32ed381811b325b2093d449387a31c5006f78d8"
+        },
+        {
+          "case": "PagesFont18",
+          "sha256": "39a489b2f9c346e8778fd027ad558925b49b6e1cc1a169cfe81708f7bb570ca0"
+        },
+        {
+          "case": "PagesFont24",
+          "sha256": "8c5a5e373b3829c162f7e4b1bb035cadc6e19f4e8ed71a92d9462d3cc54665db"
+        },
+        {
+          "case": "PagesFont28",
+          "sha256": "d3ab8b3d568bc71949b0badedc6d33177f9fe81aae017a3ff6da5e8108e6015e"
+        },
+        {
+          "case": "PagesFont32",
+          "sha256": "183e888562fa16ff2e853204f603550979974ae394fcac06e8f060f2ec16d3ec"
+        },
+        {
+          "case": "PagesFont12Bold",
+          "sha256": "c15eff51094d3c8f020ade437c80b086e7d07ef49da7a7e00442bbe8210c1195"
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "tabSuitePassed": true,
+      "wholeFormComparisons": [
+        {
+          "name": "Default",
+          "captionPixels": 2055,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.98289
+        },
+        {
+          "name": "PagesFont16",
+          "captionPixels": 5575,
+          "wholeFormPixels": 56416,
+          "wholeFormDifferingPixels": 878,
+          "wholeFormRatio": 0.984437
+        },
+        {
+          "name": "PageFont16",
+          "captionPixels": 3570,
+          "wholeFormPixels": 47644,
+          "wholeFormDifferingPixels": 774,
+          "wholeFormRatio": 0.983755
+        },
+        {
+          "name": "PageFont16Bold",
+          "captionPixels": 3720,
+          "wholeFormPixels": 48676,
+          "wholeFormDifferingPixels": 788,
+          "wholeFormRatio": 0.983811
+        },
+        {
+          "name": "PagesColorRed",
+          "captionPixels": 2055,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.98289
+        },
+        {
+          "name": "PageColorBlue",
+          "captionPixels": 2055,
+          "wholeFormPixels": 42900,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.98289
+        },
+        {
+          "name": "PagesAndPage",
+          "captionPixels": 7701,
+          "wholeFormPixels": 71004,
+          "wholeFormDifferingPixels": 998,
+          "wholeFormRatio": 0.985944
+        },
+        {
+          "name": "PagesFont8",
+          "captionPixels": 1508,
+          "wholeFormPixels": 41800,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.98244
+        },
+        {
+          "name": "PagesFont12",
+          "captionPixels": 3154,
+          "wholeFormPixels": 44550,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.983524
+        },
+        {
+          "name": "PagesFont14",
+          "captionPixels": 4646,
+          "wholeFormPixels": 51207,
+          "wholeFormDifferingPixels": 828,
+          "wholeFormRatio": 0.98383
+        },
+        {
+          "name": "PagesFont18",
+          "captionPixels": 6860,
+          "wholeFormPixels": 63724,
+          "wholeFormDifferingPixels": 938,
+          "wholeFormRatio": 0.98528
+        },
+        {
+          "name": "PagesFont24",
+          "captionPixels": 12024,
+          "wholeFormPixels": 89961,
+          "wholeFormDifferingPixels": 1164,
+          "wholeFormRatio": 0.987061
+        },
+        {
+          "name": "PagesFont28",
+          "captionPixels": 16296,
+          "wholeFormPixels": 108741,
+          "wholeFormDifferingPixels": 1270,
+          "wholeFormRatio": 0.988321
+        },
+        {
+          "name": "PagesFont32",
+          "captionPixels": 21903,
+          "wholeFormPixels": 131440,
+          "wholeFormDifferingPixels": 1270,
+          "wholeFormRatio": 0.990338
+        },
+        {
+          "name": "PagesFont12Bold",
+          "captionPixels": 3420,
+          "wholeFormPixels": 44550,
+          "wholeFormDifferingPixels": 734,
+          "wholeFormRatio": 0.983524
+        }
+      ],
+      "screenshotHashes": [
+        {
+          "case": "Default",
+          "sha256": "f11720f80ba090edd878865b7ddb64e040d7b93e9c562ab7f4491ae17f2cad73"
+        },
+        {
+          "case": "PagesFont16",
+          "sha256": "bd4f1abc2d31510b2475adad233f62e5b1895fd35b787a4aee55e24b5cb0b84a"
+        },
+        {
+          "case": "PageFont16",
+          "sha256": "2c2e7897035f3414d5893c1a638e19a3b76fcc9df1eaaaa9019a292aa8b3fdac"
+        },
+        {
+          "case": "PageFont16Bold",
+          "sha256": "9be4a86443195aa8c386a9f044416b4a2412fc8d109f4b5525cbff437aecaef9"
+        },
+        {
+          "case": "PagesColorRed",
+          "sha256": "0383a927dca2edc8cfa5a464ab733fb8d459875e06246adaa30e955fdf2dc33f"
+        },
+        {
+          "case": "PageColorBlue",
+          "sha256": "bce615cca740289a1dde8fb3deea8d8f462f2f5cb2f6b3f249eba4664ab8c7f5"
+        },
+        {
+          "case": "PagesAndPage",
+          "sha256": "93467362a9666ac724bb09ba7899c73ac12d73ba799bff4731168f9ff7346c40"
+        },
+        {
+          "case": "PagesFont8",
+          "sha256": "54deccb48e0daa02deefc27f917503016a50c4a9a4152b5669e65164f0347ce3"
+        },
+        {
+          "case": "PagesFont12",
+          "sha256": "cd87b9ac81e26401b9aeff7bae11e30645ee5a8b9ca3c1ac7daf39d1469ad6e3"
+        },
+        {
+          "case": "PagesFont14",
+          "sha256": "1af34357e15b90cdfb94dd8075b1dca3c3a948443d2fbd85a6f6fea4018e69aa"
+        },
+        {
+          "case": "PagesFont18",
+          "sha256": "4cc81482d20aa789b7bef6ca7a6b5b7e0439539fe075bd1b8e66ecc85ed13ae3"
+        },
+        {
+          "case": "PagesFont24",
+          "sha256": "ce9570caf916e7b342d03999a8b2298645ef645a9143d426d623d515792ea27b"
+        },
+        {
+          "case": "PagesFont28",
+          "sha256": "eaabeb5870435a674e21b142ffaa31028aedccabd4f52844da938231b369234a"
+        },
+        {
+          "case": "PagesFont32",
+          "sha256": "c1f8eb906a493acc930b8c49068a96e380a5293a272fa76ebdc0adbfe29254e7"
+        },
+        {
+          "case": "PagesFont12Bold",
+          "sha256": "f4ac88f7d46d1f7a29fe4a9da60c9ebef6d703b9ab6b9bf2de5000786330b1ea"
+        }
+      ]
+    }
+  ],
+  "remaining": [
+    "Whole-form pixel parity false: remaining form title, input value/icon, borders/corners/shadow pixels remain included",
+    "Other fonts/styles/states, fractional and other sizes, side/bottom page representations and extended style matrix",
+    "Native extension composition/conflict/activation/style matrix, complete complex fields and performance acceptance",
+    "Windows and non-96DPI remain separate acceptance"
+  ]
+}

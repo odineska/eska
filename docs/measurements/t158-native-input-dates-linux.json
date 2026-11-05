@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendRuntimeUnchangedSince": "498fad3",
+  "fixtureCommit": "42dc47b64198221068efc82bee78d604ef5316b3",
+  "clientCommit": "e05cde7fd1f8fd5c0f0df015d9a7d4dcfadd7ea8",
+  "acceptedDefaultDateMatrix": true,
+  "visualParityVerified": false,
+  "scope": {
+    "forms": 26,
+    "fields": 104,
+    "ownCanonicalXml": 16,
+    "referencedForms": 10,
+    "nativeUiLocalesCapturedForOwnForms": [
+      "en",
+      "ru"
+    ],
+    "nativeUiLocalesCapturedForReferences": [
+      "en"
+    ],
+    "nativeEnvironment": {
+      "LC_ALL": "C.UTF-8",
+      "LANG": "ru_RU.UTF-8"
+    },
+    "ideIntlCulture": "en-US",
+    "dateParts": [
+      "Date",
+      "DateTime",
+      "Time"
+    ],
+    "fontPoints": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      10,
+      12,
+      14,
+      18,
+      24,
+      32,
+      48
+    ],
+    "inactiveDatePoints": [
+      4,
+      5,
+      6,
+      7,
+      10
+    ],
+    "calendarVariants": 10,
+    "independentMaskPositionCases": [
+      "Time7",
+      "DateTime14",
+      "Time18",
+      "DateTime24",
+      "Time48",
+      "DateTime18"
+    ],
+    "clippingRefinement": "DateTime24",
+    "independentFinalClippingCase": "Time48",
+    "pixels": "whole string, numeric and date/time widgets, including default empty masks and calendar interiors",
+    "tolerance": 0,
+    "exclusions": [],
+    "wholeFormAcceptance": false
+  },
+  "behavior": [
+    "Automatic calendar choice disappears in ReadOnly and for Time; explicit choice remains in ReadOnly",
+    "Inactive dates use the measured parent-background border composition and native inactive calendar image",
+    "Date masks use left aligned LCD text with character advances without pair kerning, preserving the AM position",
+    "Overflowing date masks retain their measured three-pixel right inset; numeric input keeps its existing viewport",
+    "Calendar sizes 9,12,13,15,16 preserve native active and inactive raster samples without resampling",
+    "Dirty date parts, choice, disabled state and font changes update the same session and native floating window",
+    "The test driver waits for floating target disposal before docking and foreground painting before native capture"
+  ],
+  "checks": {
+    "backendFullReference": "t155-native-font-roles-linux.json",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 498,
+        "failed": 0,
+        "skipped": 11
+      }
+    },
+    "nativeSuitesPassed": 26,
+    "nativeRunsPassed": 37,
+    "runs": [
+      {
+        "suite": "input-dates",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 19.54
+      },
+      {
+        "suite": "input-dates",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 22.91
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 17.65
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 20.88
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 17.07
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.72
+      },
+      {
+        "suite": "input-stretch",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 9.58
+      },
+      {
+        "suite": "input-stretch",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 12.1
+      },
+      {
+        "suite": "input-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 19.19
+      },
+      {
+        "suite": "input-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 21.84
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 16.91
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 19.61
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 11.05
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 13.66
+      },
+      {
+        "suite": "states",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.57
+      },
+      {
+        "suite": "states",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.21
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.2
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.01
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 3.06
+      },
+      {
+        "suite": "lifecycle",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 5.83
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 10.16
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 13.04
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.93
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 9.78
+      },
+      {
+        "suite": "font-roles",
+        "locale": "en",
+        "exit": 0,
+        "seconds": 6.0
+      },
+      {
+        "suite": "font-roles",
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 8.84
+      }
+    ],
+    "captureRechecks": [
+      {
+        "attempt": 1,
+        "locale": "en",
+        "exit": 0,
+        "seconds": 19.68
+      },
+      {
+        "attempt": 1,
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 22.69
+      },
+      {
+        "attempt": 2,
+        "locale": "en",
+        "exit": 0,
+        "seconds": 19.59
+      },
+      {
+        "attempt": 2,
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 22.57
+      },
+      {
+        "attempt": 3,
+        "locale": "en",
+        "exit": 0,
+        "seconds": 20.02
+      },
+      {
+        "attempt": 3,
+        "locale": "ru",
+        "exit": 0,
+        "seconds": 22.75
+      }
+    ],
+    "sameLocaleCaptureRechecks": [
+      {
+        "attempt": 1,
+        "exit": 0,
+        "seconds": 22.98
+      },
+      {
+        "attempt": 2,
+        "exit": 0,
+        "seconds": 22.52
+      },
+      {
+        "attempt": 3,
+        "exit": 0,
+        "seconds": 23.13
+      },
+      {
+        "attempt": 4,
+        "exit": 0,
+        "seconds": 22.52
+      },
+      {
+        "attempt": 5,
+        "exit": 0,
+        "seconds": 22.89
+      }
+    ],
+    "testDriverObservation": "One preliminary repeat failed the new native tab-title check. Five same-locale and three en/ru pairs then passed all strict checks; the rare observation remains recorded for T163.",
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "samples": 42,
+        "differentRgbPixels": 0,
+        "regionsOverlap": true,
+        "cornerPixelsCompared": 6048,
+        "wholeWidgetPixelsCompared": 1197585,
+        "calculatorPixelsCompared": 25500,
+        "calendarPixelsCompared": 19680,
+        "pixelsCompared": 1248813,
+        "wholeDatePixelsCompared": 308799,
+        "dirtyDateParts": true,
+        "dirtyReadOnlyChoice": true,
+        "dirtySmallDisabledDate": true,
+        "dirtyLargeFont": true,
+        "nativeFloatingWindow": true,
+        "dock": true,
+        "stableOwners": true,
+        "sourceWritesDuringViewing": false,
+        "wholeFormRegressionPixels": 3379919
+      },
+      "ru": {
+        "passed": true,
+        "samples": 42,
+        "differentRgbPixels": 0,
+        "regionsOverlap": true,
+        "cornerPixelsCompared": 6048,
+        "wholeWidgetPixelsCompared": 1197585,
+        "calculatorPixelsCompared": 25500,
+        "calendarPixelsCompared": 19680,
+        "pixelsCompared": 1248813,
+        "wholeDatePixelsCompared": 308799,
+        "dirtyDateParts": true,
+        "dirtyReadOnlyChoice": true,
+        "dirtySmallDisabledDate": true,
+        "dirtyLargeFont": true,
+        "nativeFloatingWindow": true,
+        "dock": true,
+        "stableOwners": true,
+        "sourceWritesDuringViewing": false,
+        "wholeFormRegressionPixels": 3379919
+      }
+    },
+    "inputFontMatrixReference": "t157-native-input-fonts-linux.json",
+    "wholeFormMatrixReference": "t157-native-tab-borders-linux.json"
+  },
+  "remaining": [
+    "Other regional formats, custom Format and input masks",
+    "Other font families, styles, DPI and additional date-state/layout combinations",
+    "Full-form acceptance beyond the established tab matrix",
+    "The rare preliminary native target-title observation remains tracked under T163; subsequent eleven runs passed",
+    "Windows, full styles/extensions, complex surfaces and remaining T152–T165 matrices"
+  ]
+}

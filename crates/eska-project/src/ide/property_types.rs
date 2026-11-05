@@ -7,6 +7,7 @@ use eska_project_core::project::metadata_model::{
 const MD: &str = "http://v8.1c.ru/8.3/MDClasses";
 const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
 const APP: &str = "http://v8.1c.ru/8.2/managed-application/core";
+const FORM: &str = "http://v8.1c.ru/8.3/xcf/logform";
 
 // Exported EBoolean properties from the EDT model recorded in platform-sources.json.
 // Ambiguous names are handled by owner below; never infer a type from the value alone.
@@ -100,6 +101,27 @@ fn is_boolean(
 ) -> bool {
     use MetadataKind as K;
     let namespace = key.namespace.as_deref();
+    if path.is_empty() && namespace == Some(FORM) && owner == K::Form {
+        return matches!(
+            key.name.as_str(),
+            "Visible"
+                | "Enabled"
+                | "ReadOnly"
+                | "ShowTitle"
+                | "HorizontalStretch"
+                | "VerticalStretch"
+                | "AutoMaxWidth"
+                | "AutoMaxHeight"
+                | "MultiLine"
+                | "PasswordMode"
+                | "AutoMarkIncomplete"
+                | "MarkIncomplete"
+                | "Collapsed"
+                | "Autofill"
+                | "Header"
+                | "Footer"
+        );
+    }
     if path.is_empty() && namespace == Some(MD) {
         return BOOLEAN_PROPERTIES.contains(&key.name.as_str())
             || matches!(

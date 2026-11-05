@@ -23,6 +23,24 @@ pub fn resolve_snapshot(
     requested: Option<&str>,
 ) -> Result<ContextSnapshot, ContextError> {
     let context = super::resolve(start, requested)?;
+    capture(context)
+}
+
+/// Capture the effective IDE application, excluding sources unused by active consumers.
+///
+/// # Errors
+/// Preserves checked application, activity and input errors without loading metadata indexes.
+pub fn resolve_active_snapshot(
+    start: &Path,
+    requested: Option<&str>,
+    activity: &crate::project::activity::State,
+) -> Result<Option<ContextSnapshot>, ContextError> {
+    super::resolve_active(start, requested, activity)?
+        .map(capture)
+        .transpose()
+}
+
+fn capture(context: AnalysisContext) -> Result<ContextSnapshot, ContextError> {
     let mut hash = Sha256::new();
     field(&mut hash, b"eska-query-context-1");
     field(&mut hash, context.root().as_os_str().as_encoded_bytes());

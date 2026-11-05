@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "referenceScreenshotSha256": "da7bb57a7b531920df6c069719e47dd0622aec6a2a1a1e820d6687ae5b8394d9",
+  "sourceMetadataSha256": "a09b9e4624aec9159b54862d2b2f72b7e7acdb948a908d608040d0ef76f6ae82",
+  "scope": "Complete caption bitmaps including LCD coverage, underline and blank rows; widget/form geometry is not accepted.",
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "wholeWidgetAccepted": false,
+  "pixels": 2100,
+  "rows": [
+    {
+      "name": "DefaultHyperlink",
+      "text": "Link",
+      "points": 10,
+      "weight": 400,
+      "foreground": "#1c55ae",
+      "background": "#ffffff",
+      "region": [
+        350,
+        459,
+        25,
+        15
+      ],
+      "advance": 24,
+      "ascent": 12,
+      "descent": 3,
+      "underlineRow": 12,
+      "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+    },
+    {
+      "name": "DefaultCommandBarHyperlink",
+      "text": "Bar link",
+      "points": 10,
+      "weight": 400,
+      "foreground": "#1c55ae",
+      "background": "#ffffff",
+      "region": [
+        337,
+        495,
+        45,
+        15
+      ],
+      "advance": 44,
+      "ascent": 12,
+      "descent": 3,
+      "underlineRow": 12,
+      "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+    },
+    {
+      "name": "ExplicitHyperlink",
+      "text": "Link",
+      "points": 10,
+      "weight": 400,
+      "foreground": "#cc2244",
+      "background": "#ffffff",
+      "region": [
+        350,
+        531,
+        25,
+        15
+      ],
+      "advance": 24,
+      "ascent": 12,
+      "descent": 3,
+      "underlineRow": 12,
+      "rgbSha256": "c65e290eee8b73781525d5abb38f56ecf2ebe2bded9848c24e06bfe2a93b62ea"
+    },
+    {
+      "name": "ExplicitCommandBarHyperlink",
+      "text": "Bar link",
+      "points": 10,
+      "weight": 400,
+      "foreground": "#cc2244",
+      "background": "#ffffff",
+      "region": [
+        337,
+        567,
+        45,
+        15
+      ],
+      "advance": 44,
+      "ascent": 12,
+      "descent": 3,
+      "underlineRow": 12,
+      "rgbSha256": "877a785ca66f6f41dcbff9d5d0c665bd62622760c27db2a941fca9eaec01c77c"
+    }
+  ]
+}

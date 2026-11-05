@@ -1,0 +1,3700 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "scope": "Six explicit standard 16x16 pictures on three recorded flat mattes, and complete white 26px-button DynamicList toolbars in the recorded initial 13px search variant, Linux 96 DPI. Full decoration geometry, automatic movement arrows, other palettes/states/DPI/Windows and complete forms remain unaccepted.",
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "nativeForms": 4,
+  "nativeImages": 5,
+  "newNativeImages": 3,
+  "nativeInputs": {
+    "schemaVersion": 1,
+    "platformBuild": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "zoom": 100,
+    "scope": "Six explicit standard picture decorations, natural 16x16 raster on three mattes. Automatic table movement pictures use a different native raster and remain unaccepted.",
+    "pixelTolerance": 0,
+    "comparisonMasks": [],
+    "nativeLocale": "en",
+    "localeIndependentPictures": true,
+    "bslExecuted": false,
+    "rows": [
+      {
+        "name": "White",
+        "file": "White.xml",
+        "sourceSha256": "facba4e4f3ff65ec7549552258cad133dba745abe351c5abb26ba2c94e32edd5",
+        "matte": [
+          255,
+          255,
+          255
+        ],
+        "nativeScreenshot": "native-picture-mattes-dq8w6966/group-pictures-white.png",
+        "screenshotSha256": "d7c817a3fae8634049f8bf5b0f1065b0d60575cb93ca0eab1a35e85980105636",
+        "pictures": [
+          {
+            "name": "MoveUp",
+            "id": "100",
+            "nativeRegion": [
+              278,
+              554,
+              16,
+              16
+            ],
+            "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6"
+          },
+          {
+            "name": "MoveDown",
+            "id": "110",
+            "nativeRegion": [
+              278,
+              579,
+              16,
+              16
+            ],
+            "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f"
+          },
+          {
+            "name": "CloneListItem",
+            "id": "120",
+            "nativeRegion": [
+              278,
+              604,
+              16,
+              16
+            ],
+            "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156"
+          },
+          {
+            "name": "CloneObject",
+            "id": "130",
+            "nativeRegion": [
+              278,
+              629,
+              16,
+              16
+            ],
+            "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b"
+          },
+          {
+            "name": "Find",
+            "id": "140",
+            "nativeRegion": [
+              278,
+              654,
+              16,
+              16
+            ],
+            "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88"
+          },
+          {
+            "name": "SearchControl",
+            "id": "150",
+            "nativeRegion": [
+              278,
+              679,
+              16,
+              16
+            ],
+            "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88"
+          }
+        ]
+      },
+      {
+        "name": "Black",
+        "file": "Black.xml",
+        "sourceSha256": "30ce967d92c68838ad372851efdc912ca385f4b6281c4104d65003036d4f17bb",
+        "matte": [
+          0,
+          0,
+          0
+        ],
+        "nativeScreenshot": "native-picture-mattes-dq8w6966/group-pictures-black.png",
+        "screenshotSha256": "6d08fcb154a182ad8ca01960508a639cba5c7caa8f85a1a36c3fc6ce74ce86b9",
+        "pictures": [
+          {
+            "name": "MoveUp",
+            "id": "100",
+            "nativeRegion": [
+              278,
+              554,
+              16,
+              16
+            ],
+            "rgbSha256": "613d9f92de9992e044a928c2d8735fcbacb0b21afc2b566201f82b1f7727c420"
+          },
+          {
+            "name": "MoveDown",
+            "id": "110",
+            "nativeRegion": [
+              278,
+              579,
+              16,
+              16
+            ],
+            "rgbSha256": "3abcb7703df1050c2d0580dbb47df3ccaf38db176adab8b6554cc24a1e0427f6"
+          },
+          {
+            "name": "CloneListItem",
+            "id": "120",
+            "nativeRegion": [
+              278,
+              604,
+              16,
+              16
+            ],
+            "rgbSha256": "40747708c31dfd8dbb6ebb4a85f6dacec20659cda4ae1b8fa7031171d1f8777e"
+          },
+          {
+            "name": "CloneObject",
+            "id": "130",
+            "nativeRegion": [
+              278,
+              629,
+              16,
+              16
+            ],
+            "rgbSha256": "dfef6e26a8680d0145c21d0bbc553a9994c5ae81b4e0c78ba45cd41c908491f6"
+          },
+          {
+            "name": "Find",
+            "id": "140",
+            "nativeRegion": [
+              278,
+              654,
+              16,
+              16
+            ],
+            "rgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef"
+          },
+          {
+            "name": "SearchControl",
+            "id": "150",
+            "nativeRegion": [
+              278,
+              679,
+              16,
+              16
+            ],
+            "rgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef"
+          }
+        ]
+      },
+      {
+        "name": "Red",
+        "file": "Red.xml",
+        "sourceSha256": "41de449d9546dc2c5c497d0c76e802e3af7b9183652dd780f3a12b0ed0bea7db",
+        "matte": [
+          255,
+          0,
+          0
+        ],
+        "nativeScreenshot": "native-picture-mattes-dq8w6966/group-pictures-red.png",
+        "screenshotSha256": "4ad421eff547e159201bba71698f81be59c82fa8dd361ab2e2e563238f97e375",
+        "pictures": [
+          {
+            "name": "MoveUp",
+            "id": "100",
+            "nativeRegion": [
+              278,
+              554,
+              16,
+              16
+            ],
+            "rgbSha256": "25dd4ad597b03c9f2a721d64e76c9538cdcb59e14c30b43d23d6a17e326d4565"
+          },
+          {
+            "name": "MoveDown",
+            "id": "110",
+            "nativeRegion": [
+              278,
+              579,
+              16,
+              16
+            ],
+            "rgbSha256": "9b238e0dd8087fc18b74b77bc32b23270805c6b3d2d5d1b3171594fe05f83c36"
+          },
+          {
+            "name": "CloneListItem",
+            "id": "120",
+            "nativeRegion": [
+              278,
+              604,
+              16,
+              16
+            ],
+            "rgbSha256": "f5762829e3f8c39187f7e36e8a22feed23fc6f8bcb224967a7c7dc2c6f5f7507"
+          },
+          {
+            "name": "CloneObject",
+            "id": "130",
+            "nativeRegion": [
+              278,
+              629,
+              16,
+              16
+            ],
+            "rgbSha256": "36c615a3bc86851d767928b9fe18b02110d6c41dbc671f461234818b8feb5484"
+          },
+          {
+            "name": "Find",
+            "id": "140",
+            "nativeRegion": [
+              278,
+              654,
+              16,
+              16
+            ],
+            "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1"
+          },
+          {
+            "name": "SearchControl",
+            "id": "150",
+            "nativeRegion": [
+              278,
+              679,
+              16,
+              16
+            ],
+            "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1"
+          }
+        ]
+      }
+    ],
+    "pixels": 4608,
+    "recovery": {
+      "method": "Premultiplied RGB from black matte, alpha = 255 - (white - black); independent red matte matches every channel.",
+      "independentValidationMatte": [
+        255,
+        0,
+        0
+      ],
+      "differingPixels": 0
+    },
+    "invalidReference": {
+      "name": "StdPicture.Copy",
+      "importExitCode": 255,
+      "log": "native-picture-mattes-dq8w6966/create.log"
+    },
+    "nativeOperations": [
+      {
+        "operation": "import",
+        "exitCode": 0,
+        "log": "native-picture-mattes-dq8w6966/group-color-import.log",
+        "logSha256": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e"
+      },
+      {
+        "operation": "export",
+        "exitCode": 0,
+        "log": "native-picture-mattes-dq8w6966/group-color-export.log",
+        "logSha256": "0b1c529e024422de24bd78666874c0d32528af625453ea7347ad52dea10f4966"
+      },
+      {
+        "operation": "apply",
+        "exitCode": 0,
+        "log": "native-picture-mattes-dq8w6966/group-color-apply.log",
+        "logSha256": "cc081795ea768d56c0c8784bcf22d3ad26297ab3e73b28d0b73d93f49bccfcf0"
+      }
+    ],
+    "files": [
+      {
+        "path": "Black.xml",
+        "sha256": "30ce967d92c68838ad372851efdc912ca385f4b6281c4104d65003036d4f17bb"
+      },
+      {
+        "path": "Red.xml",
+        "sha256": "41de449d9546dc2c5c497d0c76e802e3af7b9183652dd780f3a12b0ed0bea7db"
+      },
+      {
+        "path": "White.xml",
+        "sha256": "facba4e4f3ff65ec7549552258cad133dba745abe351c5abb26ba2c94e32edd5"
+      },
+      {
+        "path": "source/CommonForms/P_AWhite.xml",
+        "sha256": "97282dbef30b67c4cc7a776f4843576d327b9729bed51d068dc3b8e5599c4e3a"
+      },
+      {
+        "path": "source/CommonForms/P_BBlack.xml",
+        "sha256": "70e9b7bb6d9d630660fa507f132feb8ac74949a5bafd00596aca24fd2348b70d"
+      },
+      {
+        "path": "source/CommonForms/P_CColor.xml",
+        "sha256": "c8aa22e3f53052191df8cb2ed0a3b072ae0876f1493102f17fe4ca04de654020"
+      },
+      {
+        "path": "source/ConfigDumpInfo.xml",
+        "sha256": "82d868da6da9f27d14a3829339bdf13f1dafdea7029ff9c5dd28269dc3d4c361"
+      },
+      {
+        "path": "source/Configuration.xml",
+        "sha256": "19173377c79dbb460ecab1ad5acd8e3177ffeb5e8081abd63e3bf6709354db88"
+      },
+      {
+        "path": "source/Languages/Русский.xml",
+        "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048"
+      }
+    ],
+    "tableConsumers": [
+      {
+        "name": "DynamicList",
+        "source": "tests/fixtures/forms/native-context-tables/DynamicList.xml",
+        "sourceSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+        "locales": {
+          "en": [
+            {
+              "name": "CloneListItem",
+              "offset": [
+                81,
+                -60
+              ],
+              "nativeRegion": [
+                355,
+                402,
+                16,
+                16
+              ],
+              "width": 16,
+              "height": 16,
+              "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+              "backgroundRows": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  254,
+                  254,
+                  254
+                ],
+                [
+                  252,
+                  252,
+                  252
+                ],
+                [
+                  251,
+                  251,
+                  251
+                ],
+                [
+                  249,
+                  249,
+                  249
+                ],
+                [
+                  247,
+                  247,
+                  247
+                ],
+                [
+                  246,
+                  246,
+                  246
+                ],
+                [
+                  244,
+                  244,
+                  244
+                ],
+                [
+                  242,
+                  242,
+                  242
+                ]
+              ],
+              "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+              "screenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f"
+            },
+            {
+              "name": "SearchControl",
+              "offset": [
+                301,
+                -60
+              ],
+              "nativeRegion": [
+                575,
+                402,
+                16,
+                16
+              ],
+              "width": 16,
+              "height": 16,
+              "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+              "backgroundRows": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  254,
+                  254,
+                  254
+                ],
+                [
+                  252,
+                  252,
+                  252
+                ],
+                [
+                  251,
+                  251,
+                  251
+                ],
+                [
+                  249,
+                  249,
+                  249
+                ],
+                [
+                  247,
+                  247,
+                  247
+                ],
+                [
+                  246,
+                  246,
+                  246
+                ],
+                [
+                  244,
+                  244,
+                  244
+                ],
+                [
+                  242,
+                  242,
+                  242
+                ]
+              ],
+              "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+              "screenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f"
+            }
+          ],
+          "ru": [
+            {
+              "name": "CloneListItem",
+              "offset": [
+                93,
+                -60
+              ],
+              "nativeRegion": [
+                367,
+                402,
+                16,
+                16
+              ],
+              "width": 16,
+              "height": 16,
+              "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+              "backgroundRows": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  254,
+                  254,
+                  254
+                ],
+                [
+                  252,
+                  252,
+                  252
+                ],
+                [
+                  251,
+                  251,
+                  251
+                ],
+                [
+                  249,
+                  249,
+                  249
+                ],
+                [
+                  247,
+                  247,
+                  247
+                ],
+                [
+                  246,
+                  246,
+                  246
+                ],
+                [
+                  244,
+                  244,
+                  244
+                ],
+                [
+                  242,
+                  242,
+                  242
+                ]
+              ],
+              "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+              "screenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723"
+            },
+            {
+              "name": "SearchControl",
+              "offset": [
+                313,
+                -60
+              ],
+              "nativeRegion": [
+                587,
+                402,
+                16,
+                16
+              ],
+              "width": 16,
+              "height": 16,
+              "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+              "backgroundRows": [
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  255,
+                  255,
+                  255
+                ],
+                [
+                  254,
+                  254,
+                  254
+                ],
+                [
+                  252,
+                  252,
+                  252
+                ],
+                [
+                  251,
+                  251,
+                  251
+                ],
+                [
+                  249,
+                  249,
+                  249
+                ],
+                [
+                  247,
+                  247,
+                  247
+                ],
+                [
+                  246,
+                  246,
+                  246
+                ],
+                [
+                  244,
+                  244,
+                  244
+                ],
+                [
+                  242,
+                  242,
+                  242
+                ]
+              ],
+              "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+              "screenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723"
+            }
+          ]
+        },
+        "toolbar": {
+          "en": {
+            "name": "toolbar",
+            "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+            "screenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f",
+            "nativeRegion": [
+              274,
+              397,
+              454,
+              27
+            ],
+            "offset": [
+              0,
+              -65
+            ],
+            "width": 454,
+            "height": 27,
+            "rgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "pixels": 12258
+          },
+          "ru": {
+            "name": "toolbar",
+            "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+            "screenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723",
+            "nativeRegion": [
+              274,
+              397,
+              418,
+              27
+            ],
+            "offset": [
+              0,
+              -65
+            ],
+            "width": 418,
+            "height": 27,
+            "rgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "pixels": 11286
+          }
+        }
+      }
+    ]
+  },
+  "nativeMetricsSha256": "e99405a4a61f5e2843c226c1874b909a6a96dee84779230acca2a3d65817acf3",
+  "sixStandardPicturesPixelParity": true,
+  "completeDynamicToolbarPixelParity": true,
+  "wholeToolbarPixelParity": false,
+  "wholeFormVisualParity": false,
+  "fullProfileAccepted": false,
+  "noBslModulesOrHandlers": true,
+  "implementation": {
+    "pictureStorage": "Premultiplied RGBA, black/white recovery independently validated on red; one shared Solid canvas renderer with exact standard alias lookup.",
+    "platform": "Linux-only measured images; Windows continues through the unaccepted existing fallback.",
+    "tableReferences": "Automatic Copy uses valid StdPicture.CloneListItem, search uses StdPicture.SearchControl. CloneObject is a different image.",
+    "automaticMovement": "Explicit StdPicture.MoveUp/MoveDown differ from native automatic table movements; tableCommand stays a separate unaccepted picture variant.",
+    "iconButtons": "Calibrated icon-only buttons reuse the ordinary native fill, corners, borders and dropdown stencil.",
+    "capture": "Native HTML tooltip interference is dismissed by moving the pointer outside the measured form through the owned CDP target; no screenshot masks or tolerances.",
+    "publicProtocolChanged": false,
+    "dependenciesAdded": false
+  },
+  "checks": {
+    "node": {
+      "passed": 520,
+      "failed": 0,
+      "skipped": 11,
+      "total": 531,
+      "log": "native-standard-pictures-acceptance-1k1xr8l4/node-tests.log",
+      "logSha256": "dc0460d3c5553bf372a01fc4d81ab3bd86b16610dd501fd199f3ee23f1eaafad"
+    },
+    "nativePixelsUnit": {
+      "passed": true,
+      "mattePixels": 4608,
+      "nativeGradientPixels": 1024,
+      "differentRgbPixels": 0
+    },
+    "backend": {
+      "codeChangedInThisSlice": false,
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "completeChecksReuse": "docs/measurements/t158-native-button-types-linux.json",
+      "cargoPassed": 1520,
+      "cargoFailed": 0,
+      "cargoIgnored": 19,
+      "sourceHashesVerifiedAgainstBatch": true,
+      "verifiedCoreFiles": 607,
+      "rustSourcesAndCargoFilesUnchangedSince": "ad8020e"
+    }
+  },
+  "beforeFix": {
+    "directory": "form-batch-76Bcq2",
+    "batchSha256": "68825e1693407e6a5aa105901d2affd908b5c485e22b3acc3ba2969477d302c0",
+    "pairsPassed": 8,
+    "pairsFailed": 2,
+    "newPicturePairsPassed": 2,
+    "reason": "Native VS Code filename tooltip obscured grid pixels in dirty transitions. Original screenshots/failures retained; no product pixel tolerance or mask introduced."
+  },
+  "intermediateCandidate": {
+    "directory": "form-batch-O3rPdC",
+    "batchSha256": "5490a37687ef45baad24d67ac66402b4859b71e42e18b1203b3efb2b35896507",
+    "pairsPassed": 0,
+    "pairsFailed": 2,
+    "reason": "Both icon crops were explicitly compared before calibration: copy 1px and search 2px too far right; remaining 13/30 aligned pixels differed by one channel value due to browser gradient. All table grids/menu/search pixels passed after pointer parking."
+  },
+  "acceptance": {
+    "passed": true,
+    "batchDirectory": "form-batch-XVm6ME",
+    "pairsPassed": 16,
+    "pairsFailed": 0,
+    "publishedCases": 340,
+    "allFinalPairsFirstAttempt": true,
+    "builds": 1,
+    "packages": 1,
+    "guiConcurrency": 1,
+    "seconds": 187.494181216,
+    "vsixSha256": "d61ad056f1d9858ade257b2385d317c38c4f4764a5527e0fea3e5caf4b39b5b9",
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "2721abd9911571d4286800629251c13514b4453be3ecf75982fa39d51c72d170",
+    "batchSha256": "5543d8f698ccf10f0df5df6ddb7f07e530429f472ff74d4aca00071df1d2871e",
+    "inputsSha256": "5662bd12a30b364b170b9c1f3645b04d9c7cfa69a53641248ea0a1a327ce1fb6",
+    "runs": [
+      {
+        "suite": "standard-pictures",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 5.570164849,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "standard-pictures-en/driver.log",
+        "receipt": "standard-pictures-en/receipt.json",
+        "caseIds": [
+          "standard-pictures/White",
+          "standard-pictures/dirty-Black",
+          "standard-pictures/restored-White",
+          "standard-pictures/floating-White",
+          "standard-pictures/floating-dirty-Red",
+          "standard-pictures/floating-restored-White",
+          "standard-pictures/reattached-White",
+          "standard-pictures/Black",
+          "standard-pictures/Red"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 829.350701,
+          "runtimeVerificationMs": 333.8429259999999,
+          "preHostMs": 1168.641573,
+          "cleanupMs": 37.45508299999983,
+          "totalMs": 5432.684778
+        }
+      },
+      {
+        "suite": "standard-pictures",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.228331409000003,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "standard-pictures-ru/driver.log",
+        "receipt": "standard-pictures-ru/receipt.json",
+        "caseIds": [
+          "standard-pictures/White",
+          "standard-pictures/dirty-Black",
+          "standard-pictures/restored-White",
+          "standard-pictures/floating-White",
+          "standard-pictures/floating-dirty-Red",
+          "standard-pictures/floating-restored-White",
+          "standard-pictures/reattached-White",
+          "standard-pictures/Black",
+          "standard-pictures/Red"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 811.471783,
+          "runtimeVerificationMs": 306.01236200000005,
+          "preHostMs": 1137.6650590000002,
+          "cleanupMs": 32.70305300000018,
+          "totalMs": 8116.441782
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.586045208,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-en/driver.log",
+        "receipt": "table-pixels-en/receipt.json",
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill",
+          "table-pixels/MetadataTable",
+          "table-pixels/DynamicList",
+          "table-pixels/dynamic-dirty-footer",
+          "table-pixels/dynamic-restored-default",
+          "table-pixels/dynamic-floating-default",
+          "table-pixels/dynamic-floating-dirty-footer",
+          "table-pixels/dynamic-floating-restored",
+          "table-pixels/dynamic-reattached-default"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 810.780951,
+          "runtimeVerificationMs": 319.186958,
+          "preHostMs": 1140.637886,
+          "cleanupMs": 36.51962800000001,
+          "totalMs": 11446.535685
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 14.184942691999996,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-ru/driver.log",
+        "receipt": "table-pixels-ru/receipt.json",
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill",
+          "table-pixels/MetadataTable",
+          "table-pixels/DynamicList",
+          "table-pixels/dynamic-dirty-footer",
+          "table-pixels/dynamic-restored-default",
+          "table-pixels/dynamic-floating-default",
+          "table-pixels/dynamic-floating-dirty-footer",
+          "table-pixels/dynamic-floating-restored",
+          "table-pixels/dynamic-reattached-default"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 848.988075,
+          "runtimeVerificationMs": 324.40028000000007,
+          "preHostMs": 1198.203466,
+          "cleanupMs": 38.68495599999915,
+          "totalMs": 14062.764796000001
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.473646541000002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-en/driver.log",
+        "receipt": "tables-en/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 819.046308,
+          "runtimeVerificationMs": 300.98733200000015,
+          "preHostMs": 1132.2455710000002,
+          "cleanupMs": 35.22433900000033,
+          "totalMs": 7308.247076
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.136805798999994,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-ru/driver.log",
+        "receipt": "tables-ru/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 853.0256489999999,
+          "runtimeVerificationMs": 319.5997490000001,
+          "preHostMs": 1194.376683,
+          "cleanupMs": 34.57946500000071,
+          "totalMs": 10014.708611
+        }
+      },
+      {
+        "suite": "button-borders",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 22.945743669000002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "button-borders-en/driver.log",
+        "receipt": "button-borders-en/receipt.json",
+        "caseIds": [
+          "button-borders/FontAuto",
+          "button-borders/dirty-FontAuto",
+          "button-borders/floating-FontAuto",
+          "button-borders/floating-dirty-FontAuto",
+          "button-borders/reattached-FontAuto",
+          "button-borders/FontRegular",
+          "button-borders/FontBold",
+          "button-borders/FontPartial14",
+          "button-borders/FontStyleNormal",
+          "button-borders/FontForm14",
+          "button-borders/FontBar14",
+          "button-borders/FontFormBold",
+          "button-borders/FontExplicitAuto",
+          "button-borders/CheckAutoBack",
+          "button-borders/CheckAutoText",
+          "button-borders/CheckNormalFalse",
+          "button-borders/CheckNormal14",
+          "button-borders/CheckSmall",
+          "button-borders/CheckLarge",
+          "button-borders/CheckExtra",
+          "button-borders/CheckText",
+          "button-borders/CheckSysAuto",
+          "button-borders/CheckSys14",
+          "button-borders/CheckBoldOnly",
+          "button-borders/CheckAutoDisabled",
+          "button-borders/Color000000",
+          "button-borders/Color000040",
+          "button-borders/Color000080",
+          "button-borders/dirty-Color000080",
+          "button-borders/default-Color000080",
+          "button-borders/floating-Color000080",
+          "button-borders/floating-dirty-Color000080",
+          "button-borders/reattached-Color000080",
+          "button-borders/Color0000FF",
+          "button-borders/Color008000",
+          "button-borders/Color00FF00",
+          "button-borders/Color00FFFF",
+          "button-borders/Color0A73B7",
+          "button-borders/Color202020",
+          "button-borders/Color20DD20",
+          "button-borders/Color336699",
+          "button-borders/Color345678",
+          "button-borders/Color404040",
+          "button-borders/Color5511FF",
+          "button-borders/Color555555",
+          "button-borders/Color606060",
+          "button-borders/Color747474",
+          "button-borders/Color757575",
+          "button-borders/Color777777",
+          "button-borders/Color800000",
+          "button-borders/Color804020",
+          "button-borders/Color808080",
+          "button-borders/Color9800FF",
+          "button-borders/Color99FFFF",
+          "button-borders/ColorC08080",
+          "button-borders/ColorFF0000",
+          "button-borders/ColorFF00FF",
+          "button-borders/ColorFFE100",
+          "button-borders/ColorFFFF00",
+          "button-borders/ColorFFFFFF"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 727.023804,
+          "runtimeVerificationMs": 280.3012940000001,
+          "preHostMs": 1038.754778,
+          "cleanupMs": 46.4423139999999,
+          "totalMs": 22819.859073
+        }
+      },
+      {
+        "suite": "button-borders",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 25.40005405600001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "button-borders-ru/driver.log",
+        "receipt": "button-borders-ru/receipt.json",
+        "caseIds": [
+          "button-borders/FontAuto",
+          "button-borders/dirty-FontAuto",
+          "button-borders/floating-FontAuto",
+          "button-borders/floating-dirty-FontAuto",
+          "button-borders/reattached-FontAuto",
+          "button-borders/FontRegular",
+          "button-borders/FontBold",
+          "button-borders/FontPartial14",
+          "button-borders/FontStyleNormal",
+          "button-borders/FontForm14",
+          "button-borders/FontBar14",
+          "button-borders/FontFormBold",
+          "button-borders/FontExplicitAuto",
+          "button-borders/CheckAutoBack",
+          "button-borders/CheckAutoText",
+          "button-borders/CheckNormalFalse",
+          "button-borders/CheckNormal14",
+          "button-borders/CheckSmall",
+          "button-borders/CheckLarge",
+          "button-borders/CheckExtra",
+          "button-borders/CheckText",
+          "button-borders/CheckSysAuto",
+          "button-borders/CheckSys14",
+          "button-borders/CheckBoldOnly",
+          "button-borders/CheckAutoDisabled",
+          "button-borders/Color000000",
+          "button-borders/Color000040",
+          "button-borders/Color000080",
+          "button-borders/dirty-Color000080",
+          "button-borders/default-Color000080",
+          "button-borders/floating-Color000080",
+          "button-borders/floating-dirty-Color000080",
+          "button-borders/reattached-Color000080",
+          "button-borders/Color0000FF",
+          "button-borders/Color008000",
+          "button-borders/Color00FF00",
+          "button-borders/Color00FFFF",
+          "button-borders/Color0A73B7",
+          "button-borders/Color202020",
+          "button-borders/Color20DD20",
+          "button-borders/Color336699",
+          "button-borders/Color345678",
+          "button-borders/Color404040",
+          "button-borders/Color5511FF",
+          "button-borders/Color555555",
+          "button-borders/Color606060",
+          "button-borders/Color747474",
+          "button-borders/Color757575",
+          "button-borders/Color777777",
+          "button-borders/Color800000",
+          "button-borders/Color804020",
+          "button-borders/Color808080",
+          "button-borders/Color9800FF",
+          "button-borders/Color99FFFF",
+          "button-borders/ColorC08080",
+          "button-borders/ColorFF0000",
+          "button-borders/ColorFF00FF",
+          "button-borders/ColorFFE100",
+          "button-borders/ColorFFFF00",
+          "button-borders/ColorFFFFFF"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 808.032207,
+          "runtimeVerificationMs": 300.11233400000003,
+          "preHostMs": 1155.6758109999998,
+          "cleanupMs": 40.64011799999935,
+          "totalMs": 25256.584833
+        }
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 18.175366003999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "input-fonts-en/driver.log",
+        "receipt": "input-fonts-en/receipt.json",
+        "caseIds": [
+          "input-fonts/Font4",
+          "input-fonts/Font5",
+          "input-fonts/Font6",
+          "input-fonts/Font7Disabled",
+          "input-fonts/Font7ReadOnly",
+          "input-fonts/Font7Width20",
+          "input-fonts/Font8Width20",
+          "input-fonts/Font9Width20",
+          "input-fonts/Font10Width20",
+          "input-fonts/dirty-Font32Width20",
+          "input-fonts/floating-Font10Width20",
+          "input-fonts/floating-dirty-Font32Width20",
+          "input-fonts/reattached-Font10Width20",
+          "input-fonts/Font11Width20",
+          "input-fonts/Font12Width20",
+          "input-fonts/Font13Width20",
+          "input-fonts/Font14Width20",
+          "input-fonts/Font15Width20",
+          "input-fonts/Font16Width20",
+          "input-fonts/Font17Width20",
+          "input-fonts/Font18Width20",
+          "input-fonts/Font18Bold",
+          "input-fonts/Font19Width20",
+          "input-fonts/Font20Width20",
+          "input-fonts/Font21Width20",
+          "input-fonts/Font22Width20",
+          "input-fonts/Font23Width20",
+          "input-fonts/Font24Width20",
+          "input-fonts/Font26Width20",
+          "input-fonts/Font28Width20",
+          "input-fonts/Font32Width20",
+          "input-fonts/Font40Width20",
+          "input-fonts/Font48Width20",
+          "input-fonts/Font20Width1",
+          "input-fonts/Font32Width1",
+          "input-fonts/Font48Width1",
+          "input-fonts/Font18Width1",
+          "input-fonts/Font20Width2"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 879.003758,
+          "runtimeVerificationMs": 282.17104099999995,
+          "preHostMs": 1175.658725,
+          "cleanupMs": 31.68151299999954,
+          "totalMs": 18052.576234999997
+        }
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 20.652740631999986,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "input-fonts-ru/driver.log",
+        "receipt": "input-fonts-ru/receipt.json",
+        "caseIds": [
+          "input-fonts/Font4",
+          "input-fonts/Font5",
+          "input-fonts/Font6",
+          "input-fonts/Font7Disabled",
+          "input-fonts/Font7ReadOnly",
+          "input-fonts/Font7Width20",
+          "input-fonts/Font8Width20",
+          "input-fonts/Font9Width20",
+          "input-fonts/Font10Width20",
+          "input-fonts/dirty-Font32Width20",
+          "input-fonts/floating-Font10Width20",
+          "input-fonts/floating-dirty-Font32Width20",
+          "input-fonts/reattached-Font10Width20",
+          "input-fonts/Font11Width20",
+          "input-fonts/Font12Width20",
+          "input-fonts/Font13Width20",
+          "input-fonts/Font14Width20",
+          "input-fonts/Font15Width20",
+          "input-fonts/Font16Width20",
+          "input-fonts/Font17Width20",
+          "input-fonts/Font18Width20",
+          "input-fonts/Font18Bold",
+          "input-fonts/Font19Width20",
+          "input-fonts/Font20Width20",
+          "input-fonts/Font21Width20",
+          "input-fonts/Font22Width20",
+          "input-fonts/Font23Width20",
+          "input-fonts/Font24Width20",
+          "input-fonts/Font26Width20",
+          "input-fonts/Font28Width20",
+          "input-fonts/Font32Width20",
+          "input-fonts/Font40Width20",
+          "input-fonts/Font48Width20",
+          "input-fonts/Font20Width1",
+          "input-fonts/Font32Width1",
+          "input-fonts/Font48Width1",
+          "input-fonts/Font18Width1",
+          "input-fonts/Font20Width2"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 825.345127,
+          "runtimeVerificationMs": 331.89788799999997,
+          "preHostMs": 1187.947489,
+          "cleanupMs": 37.06829300000027,
+          "totalMs": 20468.324499000002
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 4.489180331000011,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-en/driver.log",
+        "receipt": "application-en/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 817.093478,
+          "runtimeVerificationMs": 369.669222,
+          "preHostMs": 1190.206568,
+          "cleanupMs": 34.18596499999967,
+          "totalMs": 4355.9338769999995
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.801180575000005,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-ru/driver.log",
+        "receipt": "application-ru/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 821.3873440000001,
+          "runtimeVerificationMs": 350.4561389999999,
+          "preHostMs": 1191.466231,
+          "cleanupMs": 38.75595599999997,
+          "totalMs": 6684.486333999999
+        }
+      },
+      {
+        "suite": "pictures",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 3.8593155200000036,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "pictures-en/driver.log",
+        "receipt": "pictures-en/receipt.json",
+        "caseIds": [
+          "pictures/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 827.0137060000001,
+          "runtimeVerificationMs": 284.574661,
+          "preHostMs": 1116.531481,
+          "cleanupMs": 32.83463500000016,
+          "totalMs": 3720.842285
+        }
+      },
+      {
+        "suite": "pictures",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.296955653000012,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "pictures-ru/driver.log",
+        "receipt": "pictures-ru/receipt.json",
+        "caseIds": [
+          "pictures/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 813.3019869999999,
+          "runtimeVerificationMs": 303.75349299999993,
+          "preHostMs": 1137.860517,
+          "cleanupMs": 37.25037599999996,
+          "totalMs": 6170.496349999999
+        }
+      },
+      {
+        "suite": "picture-composition",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.322782292999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "picture-composition-en/driver.log",
+        "receipt": "picture-composition-en/receipt.json",
+        "caseIds": [
+          "picture-composition/initial-borrowed-image",
+          "picture-composition/dirty-extended-clear",
+          "picture-composition/foreign-property-state-keeps-inheritance",
+          "picture-composition/dirty-extended-restored",
+          "picture-composition/invalid-metadata",
+          "picture-composition/dirty-metadata-recovers",
+          "picture-composition/detached-dirty-clear",
+          "picture-composition/external-image-shadowed-by-clear",
+          "picture-composition/detached-inherited-external-image",
+          "picture-composition/external-image-restored",
+          "picture-composition/native-zero-byte-payload",
+          "picture-composition/dirty-empty-picture-property",
+          "picture-composition/dirty-payload-image-selected",
+          "picture-composition/reattached-image",
+          "picture-composition/own-form-global-picture-and-own-resource",
+          "picture-composition/own-form-cleared-global-picture",
+          "picture-composition/own-form-global-picture-recovered",
+          "picture-composition/external-own-empty-definition",
+          "picture-composition/external-own-image-restored"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 808.8736210000001,
+          "runtimeVerificationMs": 320.3220809999999,
+          "preHostMs": 1147.631662,
+          "cleanupMs": 31.525555000000168,
+          "totalMs": 7196.065283000001
+        }
+      },
+      {
+        "suite": "picture-composition",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.094833389999986,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "picture-composition-ru/driver.log",
+        "receipt": "picture-composition-ru/receipt.json",
+        "caseIds": [
+          "picture-composition/initial-borrowed-image",
+          "picture-composition/dirty-extended-clear",
+          "picture-composition/foreign-property-state-keeps-inheritance",
+          "picture-composition/dirty-extended-restored",
+          "picture-composition/invalid-metadata",
+          "picture-composition/dirty-metadata-recovers",
+          "picture-composition/detached-dirty-clear",
+          "picture-composition/external-image-shadowed-by-clear",
+          "picture-composition/detached-inherited-external-image",
+          "picture-composition/external-image-restored",
+          "picture-composition/native-zero-byte-payload",
+          "picture-composition/dirty-empty-picture-property",
+          "picture-composition/dirty-payload-image-selected",
+          "picture-composition/reattached-image",
+          "picture-composition/own-form-global-picture-and-own-resource",
+          "picture-composition/own-form-cleared-global-picture",
+          "picture-composition/own-form-global-picture-recovered",
+          "picture-composition/external-own-empty-definition",
+          "picture-composition/external-own-image-restored"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 828.4896620000001,
+          "runtimeVerificationMs": 317.1380469999999,
+          "preHostMs": 1170.751777,
+          "cleanupMs": 41.62036700000135,
+          "totalMs": 9967.542004
+        }
+      }
+    ],
+    "strictCompleteToolbarRecheck": {
+      "directory": "native-standard-pictures-acceptance-1k1xr8l4",
+      "pairsPassed": 2,
+      "pairsFailed": 0,
+      "sameVsixBytes": true,
+      "sameRuntimeManifest": true,
+      "publishedCases": 46,
+      "note": "Only native fixture metrics and the test fixture loader gained full-toolbar assertions after the 16-pair batch. No production code/runtime changes. Both complete 23-sample table suites passed on the identical frozen VSIX.",
+      "manifestSha256": "95aa587cb078b55dfbd4412a31a9c3b99f9e689df2b318827e7947ba1ef819af"
+    },
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "explicitPictureSamples": 9,
+        "explicitPicturePixelsCompared": 13824,
+        "differentPictureRgbPixels": 0,
+        "explicitPictureResults": [
+          {
+            "label": "White",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "name": "MoveUp",
+                "expectedRgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "name": "MoveDown",
+                "expectedRgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "name": "CloneObject",
+                "expectedRgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "Find",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "dirty-Black",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "613d9f92de9992e044a928c2d8735fcbacb0b21afc2b566201f82b1f7727c420",
+                "name": "MoveUp",
+                "expectedRgbSha256": "613d9f92de9992e044a928c2d8735fcbacb0b21afc2b566201f82b1f7727c420",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "3abcb7703df1050c2d0580dbb47df3ccaf38db176adab8b6554cc24a1e0427f6",
+                "name": "MoveDown",
+                "expectedRgbSha256": "3abcb7703df1050c2d0580dbb47df3ccaf38db176adab8b6554cc24a1e0427f6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "40747708c31dfd8dbb6ebb4a85f6dacec20659cda4ae1b8fa7031171d1f8777e",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "40747708c31dfd8dbb6ebb4a85f6dacec20659cda4ae1b8fa7031171d1f8777e",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "dfef6e26a8680d0145c21d0bbc553a9994c5ae81b4e0c78ba45cd41c908491f6",
+                "name": "CloneObject",
+                "expectedRgbSha256": "dfef6e26a8680d0145c21d0bbc553a9994c5ae81b4e0c78ba45cd41c908491f6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "name": "Find",
+                "expectedRgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "restored-White",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "name": "MoveUp",
+                "expectedRgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "name": "MoveDown",
+                "expectedRgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "name": "CloneObject",
+                "expectedRgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "Find",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "floating-White",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  46,
+                  155,
+                  16,
+                  16
+                ],
+                "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "name": "MoveUp",
+                "expectedRgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  178,
+                  16,
+                  16
+                ],
+                "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "name": "MoveDown",
+                "expectedRgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  201,
+                  16,
+                  16
+                ],
+                "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  224,
+                  16,
+                  16
+                ],
+                "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "name": "CloneObject",
+                "expectedRgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  247,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "Find",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  270,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "floating-dirty-Red",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  46,
+                  155,
+                  16,
+                  16
+                ],
+                "rgbSha256": "25dd4ad597b03c9f2a721d64e76c9538cdcb59e14c30b43d23d6a17e326d4565",
+                "name": "MoveUp",
+                "expectedRgbSha256": "25dd4ad597b03c9f2a721d64e76c9538cdcb59e14c30b43d23d6a17e326d4565",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  178,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9b238e0dd8087fc18b74b77bc32b23270805c6b3d2d5d1b3171594fe05f83c36",
+                "name": "MoveDown",
+                "expectedRgbSha256": "9b238e0dd8087fc18b74b77bc32b23270805c6b3d2d5d1b3171594fe05f83c36",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  201,
+                  16,
+                  16
+                ],
+                "rgbSha256": "f5762829e3f8c39187f7e36e8a22feed23fc6f8bcb224967a7c7dc2c6f5f7507",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "f5762829e3f8c39187f7e36e8a22feed23fc6f8bcb224967a7c7dc2c6f5f7507",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  224,
+                  16,
+                  16
+                ],
+                "rgbSha256": "36c615a3bc86851d767928b9fe18b02110d6c41dbc671f461234818b8feb5484",
+                "name": "CloneObject",
+                "expectedRgbSha256": "36c615a3bc86851d767928b9fe18b02110d6c41dbc671f461234818b8feb5484",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  247,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "name": "Find",
+                "expectedRgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  270,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "name": "SearchControl",
+                "expectedRgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "floating-restored-White",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  46,
+                  155,
+                  16,
+                  16
+                ],
+                "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "name": "MoveUp",
+                "expectedRgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  178,
+                  16,
+                  16
+                ],
+                "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "name": "MoveDown",
+                "expectedRgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  201,
+                  16,
+                  16
+                ],
+                "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  224,
+                  16,
+                  16
+                ],
+                "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "name": "CloneObject",
+                "expectedRgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  247,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "Find",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  270,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "reattached-White",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "name": "MoveUp",
+                "expectedRgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "name": "MoveDown",
+                "expectedRgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "name": "CloneObject",
+                "expectedRgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "Find",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "Black",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "613d9f92de9992e044a928c2d8735fcbacb0b21afc2b566201f82b1f7727c420",
+                "name": "MoveUp",
+                "expectedRgbSha256": "613d9f92de9992e044a928c2d8735fcbacb0b21afc2b566201f82b1f7727c420",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "3abcb7703df1050c2d0580dbb47df3ccaf38db176adab8b6554cc24a1e0427f6",
+                "name": "MoveDown",
+                "expectedRgbSha256": "3abcb7703df1050c2d0580dbb47df3ccaf38db176adab8b6554cc24a1e0427f6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "40747708c31dfd8dbb6ebb4a85f6dacec20659cda4ae1b8fa7031171d1f8777e",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "40747708c31dfd8dbb6ebb4a85f6dacec20659cda4ae1b8fa7031171d1f8777e",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "dfef6e26a8680d0145c21d0bbc553a9994c5ae81b4e0c78ba45cd41c908491f6",
+                "name": "CloneObject",
+                "expectedRgbSha256": "dfef6e26a8680d0145c21d0bbc553a9994c5ae81b4e0c78ba45cd41c908491f6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "name": "Find",
+                "expectedRgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "Red",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "25dd4ad597b03c9f2a721d64e76c9538cdcb59e14c30b43d23d6a17e326d4565",
+                "name": "MoveUp",
+                "expectedRgbSha256": "25dd4ad597b03c9f2a721d64e76c9538cdcb59e14c30b43d23d6a17e326d4565",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9b238e0dd8087fc18b74b77bc32b23270805c6b3d2d5d1b3171594fe05f83c36",
+                "name": "MoveDown",
+                "expectedRgbSha256": "9b238e0dd8087fc18b74b77bc32b23270805c6b3d2d5d1b3171594fe05f83c36",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "f5762829e3f8c39187f7e36e8a22feed23fc6f8bcb224967a7c7dc2c6f5f7507",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "f5762829e3f8c39187f7e36e8a22feed23fc6f8bcb224967a7c7dc2c6f5f7507",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "36c615a3bc86851d767928b9fe18b02110d6c41dbc671f461234818b8feb5484",
+                "name": "CloneObject",
+                "expectedRgbSha256": "36c615a3bc86851d767928b9fe18b02110d6c41dbc671f461234818b8feb5484",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "name": "Find",
+                "expectedRgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "name": "SearchControl",
+                "expectedRgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          }
+        ],
+        "completeDynamicToolbarSamples": 5,
+        "completeDynamicToolbarPixelsCompared": 61290,
+        "differentToolbarRgbPixels": 0,
+        "dynamicToolbarResults": [
+          {
+            "label": "DynamicList",
+            "name": "toolbar",
+            "region": [
+              389,
+              385,
+              454,
+              27
+            ],
+            "rgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "pixels": 12258,
+            "expectedRgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "passed": true
+          },
+          {
+            "label": "dynamic-restored-default",
+            "name": "toolbar",
+            "region": [
+              389,
+              385,
+              454,
+              27
+            ],
+            "rgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "pixels": 12258,
+            "expectedRgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "passed": true
+          },
+          {
+            "label": "dynamic-floating-default",
+            "name": "toolbar",
+            "region": [
+              41,
+              150,
+              454,
+              27
+            ],
+            "rgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "pixels": 12258,
+            "expectedRgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "passed": true
+          },
+          {
+            "label": "dynamic-floating-restored",
+            "name": "toolbar",
+            "region": [
+              41,
+              150,
+              454,
+              27
+            ],
+            "rgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "pixels": 12258,
+            "expectedRgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "passed": true
+          },
+          {
+            "label": "dynamic-reattached-default",
+            "name": "toolbar",
+            "region": [
+              389,
+              385,
+              454,
+              27
+            ],
+            "rgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "pixels": 12258,
+            "expectedRgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "passed": true
+          }
+        ],
+        "dynamicIconPixelsCompared": 2560,
+        "dynamicIconResults": [
+          {
+            "name": "CloneListItem",
+            "region": [
+              470,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "pixels": 256,
+            "expectedRgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "passed": true
+          },
+          {
+            "name": "SearchControl",
+            "region": [
+              690,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "pixels": 256,
+            "expectedRgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "passed": true
+          },
+          {
+            "name": "CloneListItem",
+            "region": [
+              470,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "pixels": 256,
+            "expectedRgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "passed": true
+          },
+          {
+            "name": "SearchControl",
+            "region": [
+              690,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "pixels": 256,
+            "expectedRgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "passed": true
+          },
+          {
+            "name": "CloneListItem",
+            "region": [
+              122,
+              155,
+              16,
+              16
+            ],
+            "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "pixels": 256,
+            "expectedRgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "passed": true
+          },
+          {
+            "name": "SearchControl",
+            "region": [
+              342,
+              155,
+              16,
+              16
+            ],
+            "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "pixels": 256,
+            "expectedRgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "passed": true
+          },
+          {
+            "name": "CloneListItem",
+            "region": [
+              122,
+              155,
+              16,
+              16
+            ],
+            "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "pixels": 256,
+            "expectedRgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "passed": true
+          },
+          {
+            "name": "SearchControl",
+            "region": [
+              342,
+              155,
+              16,
+              16
+            ],
+            "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "pixels": 256,
+            "expectedRgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "passed": true
+          },
+          {
+            "name": "CloneListItem",
+            "region": [
+              470,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "pixels": 256,
+            "expectedRgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "passed": true
+          },
+          {
+            "name": "SearchControl",
+            "region": [
+              690,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "pixels": 256,
+            "expectedRgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "passed": true
+          }
+        ],
+        "pictureReceipt": "form-batch-XVm6ME/standard-pictures-en/receipt.json",
+        "pictureReceiptSha256": "01945941a1732fa8d1f1befd7ad888b11543d12e0d19b874fbf1b037fea5e6a9",
+        "tableReceipt": "native-standard-pictures-acceptance-1k1xr8l4/en/receipt.json",
+        "tableReceiptSha256": "e5dad958a9ae6e4bad87dfb19b1f3920716dfc1b02799ce846bede4756ab7784",
+        "stablePictureCanvas": true,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true,
+        "stableTableDom": true,
+        "sourceWritesDuringViewing": false
+      },
+      "ru": {
+        "passed": true,
+        "explicitPictureSamples": 9,
+        "explicitPicturePixelsCompared": 13824,
+        "differentPictureRgbPixels": 0,
+        "explicitPictureResults": [
+          {
+            "label": "White",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "name": "MoveUp",
+                "expectedRgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "name": "MoveDown",
+                "expectedRgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "name": "CloneObject",
+                "expectedRgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "Find",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "dirty-Black",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "613d9f92de9992e044a928c2d8735fcbacb0b21afc2b566201f82b1f7727c420",
+                "name": "MoveUp",
+                "expectedRgbSha256": "613d9f92de9992e044a928c2d8735fcbacb0b21afc2b566201f82b1f7727c420",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "3abcb7703df1050c2d0580dbb47df3ccaf38db176adab8b6554cc24a1e0427f6",
+                "name": "MoveDown",
+                "expectedRgbSha256": "3abcb7703df1050c2d0580dbb47df3ccaf38db176adab8b6554cc24a1e0427f6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "40747708c31dfd8dbb6ebb4a85f6dacec20659cda4ae1b8fa7031171d1f8777e",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "40747708c31dfd8dbb6ebb4a85f6dacec20659cda4ae1b8fa7031171d1f8777e",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "dfef6e26a8680d0145c21d0bbc553a9994c5ae81b4e0c78ba45cd41c908491f6",
+                "name": "CloneObject",
+                "expectedRgbSha256": "dfef6e26a8680d0145c21d0bbc553a9994c5ae81b4e0c78ba45cd41c908491f6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "name": "Find",
+                "expectedRgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "restored-White",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "name": "MoveUp",
+                "expectedRgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "name": "MoveDown",
+                "expectedRgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "name": "CloneObject",
+                "expectedRgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "Find",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "floating-White",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  46,
+                  155,
+                  16,
+                  16
+                ],
+                "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "name": "MoveUp",
+                "expectedRgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  178,
+                  16,
+                  16
+                ],
+                "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "name": "MoveDown",
+                "expectedRgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  201,
+                  16,
+                  16
+                ],
+                "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  224,
+                  16,
+                  16
+                ],
+                "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "name": "CloneObject",
+                "expectedRgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  247,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "Find",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  270,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "floating-dirty-Red",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  46,
+                  155,
+                  16,
+                  16
+                ],
+                "rgbSha256": "25dd4ad597b03c9f2a721d64e76c9538cdcb59e14c30b43d23d6a17e326d4565",
+                "name": "MoveUp",
+                "expectedRgbSha256": "25dd4ad597b03c9f2a721d64e76c9538cdcb59e14c30b43d23d6a17e326d4565",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  178,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9b238e0dd8087fc18b74b77bc32b23270805c6b3d2d5d1b3171594fe05f83c36",
+                "name": "MoveDown",
+                "expectedRgbSha256": "9b238e0dd8087fc18b74b77bc32b23270805c6b3d2d5d1b3171594fe05f83c36",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  201,
+                  16,
+                  16
+                ],
+                "rgbSha256": "f5762829e3f8c39187f7e36e8a22feed23fc6f8bcb224967a7c7dc2c6f5f7507",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "f5762829e3f8c39187f7e36e8a22feed23fc6f8bcb224967a7c7dc2c6f5f7507",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  224,
+                  16,
+                  16
+                ],
+                "rgbSha256": "36c615a3bc86851d767928b9fe18b02110d6c41dbc671f461234818b8feb5484",
+                "name": "CloneObject",
+                "expectedRgbSha256": "36c615a3bc86851d767928b9fe18b02110d6c41dbc671f461234818b8feb5484",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  247,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "name": "Find",
+                "expectedRgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  270,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "name": "SearchControl",
+                "expectedRgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "floating-restored-White",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  46,
+                  155,
+                  16,
+                  16
+                ],
+                "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "name": "MoveUp",
+                "expectedRgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  178,
+                  16,
+                  16
+                ],
+                "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "name": "MoveDown",
+                "expectedRgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  201,
+                  16,
+                  16
+                ],
+                "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  224,
+                  16,
+                  16
+                ],
+                "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "name": "CloneObject",
+                "expectedRgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  247,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "Find",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              },
+              {
+                "region": [
+                  46,
+                  270,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "reattached-White",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "name": "MoveUp",
+                "expectedRgbSha256": "bf851d41d8add0c3b02ac4ee02b758c67864461e683d69d6ea1614e7146e64e6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "name": "MoveDown",
+                "expectedRgbSha256": "d7ba89668531a7986abaf77206fb8cea814235eeeedb1ce8bad396fdd28e2f3f",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "385332b0969bdbc782faa207e495b638be10cf92bdd738cef046db3a3bde5156",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "name": "CloneObject",
+                "expectedRgbSha256": "78d27fc4b80bfe88f5f86456f8a3d34c81ea572435c53352396f35400d83fe2b",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "Find",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0fc59b4e6edd2d374b2590cf9508408a720c2e5e4013129049ccb1a94036cd88",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "Black",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "613d9f92de9992e044a928c2d8735fcbacb0b21afc2b566201f82b1f7727c420",
+                "name": "MoveUp",
+                "expectedRgbSha256": "613d9f92de9992e044a928c2d8735fcbacb0b21afc2b566201f82b1f7727c420",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "3abcb7703df1050c2d0580dbb47df3ccaf38db176adab8b6554cc24a1e0427f6",
+                "name": "MoveDown",
+                "expectedRgbSha256": "3abcb7703df1050c2d0580dbb47df3ccaf38db176adab8b6554cc24a1e0427f6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "40747708c31dfd8dbb6ebb4a85f6dacec20659cda4ae1b8fa7031171d1f8777e",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "40747708c31dfd8dbb6ebb4a85f6dacec20659cda4ae1b8fa7031171d1f8777e",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "dfef6e26a8680d0145c21d0bbc553a9994c5ae81b4e0c78ba45cd41c908491f6",
+                "name": "CloneObject",
+                "expectedRgbSha256": "dfef6e26a8680d0145c21d0bbc553a9994c5ae81b4e0c78ba45cd41c908491f6",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "name": "Find",
+                "expectedRgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "name": "SearchControl",
+                "expectedRgbSha256": "0f6d11bee08168f7f7b21c470c68a151e99e75bcd9974e24e82e0ff59d6e18ef",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          },
+          {
+            "label": "Red",
+            "passed": true,
+            "pictures": [
+              {
+                "region": [
+                  394,
+                  390,
+                  16,
+                  16
+                ],
+                "rgbSha256": "25dd4ad597b03c9f2a721d64e76c9538cdcb59e14c30b43d23d6a17e326d4565",
+                "name": "MoveUp",
+                "expectedRgbSha256": "25dd4ad597b03c9f2a721d64e76c9538cdcb59e14c30b43d23d6a17e326d4565",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  413,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9b238e0dd8087fc18b74b77bc32b23270805c6b3d2d5d1b3171594fe05f83c36",
+                "name": "MoveDown",
+                "expectedRgbSha256": "9b238e0dd8087fc18b74b77bc32b23270805c6b3d2d5d1b3171594fe05f83c36",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  436,
+                  16,
+                  16
+                ],
+                "rgbSha256": "f5762829e3f8c39187f7e36e8a22feed23fc6f8bcb224967a7c7dc2c6f5f7507",
+                "name": "CloneListItem",
+                "expectedRgbSha256": "f5762829e3f8c39187f7e36e8a22feed23fc6f8bcb224967a7c7dc2c6f5f7507",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  459,
+                  16,
+                  16
+                ],
+                "rgbSha256": "36c615a3bc86851d767928b9fe18b02110d6c41dbc671f461234818b8feb5484",
+                "name": "CloneObject",
+                "expectedRgbSha256": "36c615a3bc86851d767928b9fe18b02110d6c41dbc671f461234818b8feb5484",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  482,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "name": "Find",
+                "expectedRgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "passed": true
+              },
+              {
+                "region": [
+                  394,
+                  505,
+                  16,
+                  16
+                ],
+                "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "name": "SearchControl",
+                "expectedRgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1",
+                "passed": true
+              }
+            ],
+            "captureAttempts": 1,
+            "comparedPixels": 1536
+          }
+        ],
+        "completeDynamicToolbarSamples": 5,
+        "completeDynamicToolbarPixelsCompared": 56430,
+        "differentToolbarRgbPixels": 0,
+        "dynamicToolbarResults": [
+          {
+            "label": "DynamicList",
+            "name": "toolbar",
+            "region": [
+              389,
+              385,
+              418,
+              27
+            ],
+            "rgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "pixels": 11286,
+            "expectedRgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "passed": true
+          },
+          {
+            "label": "dynamic-restored-default",
+            "name": "toolbar",
+            "region": [
+              389,
+              385,
+              418,
+              27
+            ],
+            "rgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "pixels": 11286,
+            "expectedRgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "passed": true
+          },
+          {
+            "label": "dynamic-floating-default",
+            "name": "toolbar",
+            "region": [
+              41,
+              150,
+              418,
+              27
+            ],
+            "rgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "pixels": 11286,
+            "expectedRgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "passed": true
+          },
+          {
+            "label": "dynamic-floating-restored",
+            "name": "toolbar",
+            "region": [
+              41,
+              150,
+              418,
+              27
+            ],
+            "rgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "pixels": 11286,
+            "expectedRgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "passed": true
+          },
+          {
+            "label": "dynamic-reattached-default",
+            "name": "toolbar",
+            "region": [
+              389,
+              385,
+              418,
+              27
+            ],
+            "rgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "pixels": 11286,
+            "expectedRgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "passed": true
+          }
+        ],
+        "dynamicIconPixelsCompared": 2560,
+        "dynamicIconResults": [
+          {
+            "name": "CloneListItem",
+            "region": [
+              482,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "pixels": 256,
+            "expectedRgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "passed": true
+          },
+          {
+            "name": "SearchControl",
+            "region": [
+              702,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "pixels": 256,
+            "expectedRgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "passed": true
+          },
+          {
+            "name": "CloneListItem",
+            "region": [
+              482,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "pixels": 256,
+            "expectedRgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "passed": true
+          },
+          {
+            "name": "SearchControl",
+            "region": [
+              702,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "pixels": 256,
+            "expectedRgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "passed": true
+          },
+          {
+            "name": "CloneListItem",
+            "region": [
+              134,
+              155,
+              16,
+              16
+            ],
+            "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "pixels": 256,
+            "expectedRgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "passed": true
+          },
+          {
+            "name": "SearchControl",
+            "region": [
+              354,
+              155,
+              16,
+              16
+            ],
+            "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "pixels": 256,
+            "expectedRgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "passed": true
+          },
+          {
+            "name": "CloneListItem",
+            "region": [
+              134,
+              155,
+              16,
+              16
+            ],
+            "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "pixels": 256,
+            "expectedRgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "passed": true
+          },
+          {
+            "name": "SearchControl",
+            "region": [
+              354,
+              155,
+              16,
+              16
+            ],
+            "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "pixels": 256,
+            "expectedRgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "passed": true
+          },
+          {
+            "name": "CloneListItem",
+            "region": [
+              482,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "pixels": 256,
+            "expectedRgbSha256": "f79d932136fd36df8b41dca6a8f5db4d15e6b1ed194b07e01f561170d2f3f69e",
+            "passed": true
+          },
+          {
+            "name": "SearchControl",
+            "region": [
+              702,
+              390,
+              16,
+              16
+            ],
+            "rgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "pixels": 256,
+            "expectedRgbSha256": "f43b6d3a66ecd92cf0d5b734f011c1ee83c17ef2bb51213a31da548dd36c441b",
+            "passed": true
+          }
+        ],
+        "pictureReceipt": "form-batch-XVm6ME/standard-pictures-ru/receipt.json",
+        "pictureReceiptSha256": "f6cc1ba41c02648f46cc2fda0da0a4e13af3d3d93f6563bd3a1987cf2affed7e",
+        "tableReceipt": "native-standard-pictures-acceptance-1k1xr8l4/ru/receipt.json",
+        "tableReceiptSha256": "88368fb485dcc0c28dc969a81c9f190d8fbc858cb9466f99be8233a2eb04c120",
+        "stablePictureCanvas": true,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true,
+        "stableTableDom": true,
+        "sourceWritesDuringViewing": false
+      }
+    }
+  },
+  "completeToolbarMeasurementsFromFinalScreenshots": [
+    {
+      "name": "Default",
+      "label": "Default",
+      "locale": "en",
+      "differentRgbPixels": 632,
+      "comparedPixels": 11583,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-en/table-pixels-Default-en.png",
+      "screenshotSha256": "070e40ad5c8c89cb16571c9afefe6f907e9b021f520084c0807bf7702a682a94",
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Default.png",
+      "nativeScreenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5"
+    },
+    {
+      "name": "ReadOnly",
+      "label": "ReadOnly",
+      "locale": "en",
+      "differentRgbPixels": 632,
+      "comparedPixels": 11583,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-en/table-pixels-ReadOnly-en.png",
+      "screenshotSha256": "5f02efa22fc6f57d98b6bb890e8cfe42aa4525bbb1615a8401e4498eb38c83da",
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/search-en-ReadOnly-first.png",
+      "nativeScreenshotSha256": "b0b269c99691f1886cd181cc2dcb7cf3186e680f5870b02c0e2ca8903aa870a5"
+    },
+    {
+      "name": "MetadataTable",
+      "label": "MetadataTable",
+      "locale": "en",
+      "differentRgbPixels": 632,
+      "comparedPixels": 14040,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-en/table-pixels-MetadataTable-en.png",
+      "screenshotSha256": "00e3e5c9202072789e4ffdb8f142319e3da4e54a9a6a105db407ebd083746bde",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/en-MetadataTable-complete.png",
+      "nativeScreenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825"
+    },
+    {
+      "name": "DynamicList",
+      "label": "DynamicList",
+      "locale": "en",
+      "differentRgbPixels": 0,
+      "comparedPixels": 12258,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-en/table-pixels-DynamicList-en.png",
+      "screenshotSha256": "f13686f1c0a84d76e847030f6295891dea3ce773cef96ef44088b42992ada882",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+      "nativeScreenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f"
+    },
+    {
+      "name": "DynamicList",
+      "label": "dynamic-restored-default",
+      "locale": "en",
+      "differentRgbPixels": 0,
+      "comparedPixels": 12258,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-en/table-pixels-dynamic-restored-default-en.png",
+      "screenshotSha256": "c5221d1960a3fdbc00f50d6cb0a892d42c8e6c21ba3981415282cef183c795f6",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+      "nativeScreenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f"
+    },
+    {
+      "name": "DynamicList",
+      "label": "dynamic-floating-default",
+      "locale": "en",
+      "differentRgbPixels": 0,
+      "comparedPixels": 12258,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-en/table-pixels-dynamic-floating-default-en.png",
+      "screenshotSha256": "218f529394591fdb05427983385dd740a64076c8c9c456c1f718d0cc2c6a424d",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+      "nativeScreenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f"
+    },
+    {
+      "name": "DynamicList",
+      "label": "dynamic-floating-restored",
+      "locale": "en",
+      "differentRgbPixels": 0,
+      "comparedPixels": 12258,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-en/table-pixels-dynamic-floating-restored-en.png",
+      "screenshotSha256": "218f529394591fdb05427983385dd740a64076c8c9c456c1f718d0cc2c6a424d",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+      "nativeScreenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f"
+    },
+    {
+      "name": "DynamicList",
+      "label": "dynamic-reattached-default",
+      "locale": "en",
+      "differentRgbPixels": 0,
+      "comparedPixels": 12258,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-en/table-pixels-dynamic-reattached-default-en.png",
+      "screenshotSha256": "5ec561df71f3cb9fb674bed57d2cd681294616d98f7ff1c7b4b9b865af5edfa8",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+      "nativeScreenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f"
+    },
+    {
+      "name": "Default",
+      "label": "Default",
+      "locale": "ru",
+      "differentRgbPixels": 619,
+      "comparedPixels": 11205,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-ru/table-pixels-Default-ru.png",
+      "screenshotSha256": "1ee17d55ee7ba9cc4ce333a2c4caf80c2346aba6630400895775d956359a9f21",
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Default.png",
+      "nativeScreenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38"
+    },
+    {
+      "name": "ReadOnly",
+      "label": "ReadOnly",
+      "locale": "ru",
+      "differentRgbPixels": 619,
+      "comparedPixels": 11205,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-ru/table-pixels-ReadOnly-ru.png",
+      "screenshotSha256": "671d3b833d6c0ef66d257b10d109a7b8a38018507c2f21533b87aba331303aee",
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/search-ru-ReadOnly-first.png",
+      "nativeScreenshotSha256": "fa9e73f1a2bc4dde84679dcf569be818a5924f24608b45d0e9d7fd24d6026e87"
+    },
+    {
+      "name": "MetadataTable",
+      "label": "MetadataTable",
+      "locale": "ru",
+      "differentRgbPixels": 619,
+      "comparedPixels": 14040,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-ru/table-pixels-MetadataTable-ru.png",
+      "screenshotSha256": "4077b42f9633863bd81d7ba35cbe47a8d0f4961cc3234d576be0e8f3819f9331",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/search-ru-Metadata-first.png",
+      "nativeScreenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb"
+    },
+    {
+      "name": "DynamicList",
+      "label": "DynamicList",
+      "locale": "ru",
+      "differentRgbPixels": 0,
+      "comparedPixels": 11286,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-ru/table-pixels-DynamicList-ru.png",
+      "screenshotSha256": "7b3fb581bf43e05509263ae8c65079ec461e5699e4f8ae66ef0741820bc7b946",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+      "nativeScreenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723"
+    },
+    {
+      "name": "DynamicList",
+      "label": "dynamic-restored-default",
+      "locale": "ru",
+      "differentRgbPixels": 0,
+      "comparedPixels": 11286,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-ru/table-pixels-dynamic-restored-default-ru.png",
+      "screenshotSha256": "e178c6e0770086fae3dd4d20a9020e68758032229e856aeac1f8107e488bfdb8",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+      "nativeScreenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723"
+    },
+    {
+      "name": "DynamicList",
+      "label": "dynamic-floating-default",
+      "locale": "ru",
+      "differentRgbPixels": 0,
+      "comparedPixels": 11286,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-ru/table-pixels-dynamic-floating-default-ru.png",
+      "screenshotSha256": "31fc5e89ad7d2f33f574ea65c39de3ff32c794d2b4355ecf590c5eedd2c2b473",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+      "nativeScreenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723"
+    },
+    {
+      "name": "DynamicList",
+      "label": "dynamic-floating-restored",
+      "locale": "ru",
+      "differentRgbPixels": 0,
+      "comparedPixels": 11286,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-ru/table-pixels-dynamic-floating-restored-ru.png",
+      "screenshotSha256": "31fc5e89ad7d2f33f574ea65c39de3ff32c794d2b4355ecf590c5eedd2c2b473",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+      "nativeScreenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723"
+    },
+    {
+      "name": "DynamicList",
+      "label": "dynamic-reattached-default",
+      "locale": "ru",
+      "differentRgbPixels": 0,
+      "comparedPixels": 11286,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "form-batch-XVm6ME/table-pixels-ru/table-pixels-dynamic-reattached-default-ru.png",
+      "screenshotSha256": "7fbc09a621f0ee4c79943ef123ad9dfa53fc5ebb9984fd15156795c2afe11f32",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+      "nativeScreenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723"
+    }
+  ],
+  "remaining": [
+    "Other standard pictures, LoadTransparent=false, disabled/scale/alignment/size/palette and consumer matrix; six 16x16 crops do not accept whole PictureDecoration layout.",
+    "Automatic movement images/joined button raster and remaining full standard table toolbars: Default, ReadOnly and MetadataTable still differ by 632 en / 619 ru pixels.",
+    "Native alternate 11px/yellow search state and selection rule; this toolbar acceptance covers the recorded initial 13px/gray variant.",
+    "Full controls/forms and full Linux profile, performance acceptance, native property inventory and Windows acceptance."
+  ]
+}

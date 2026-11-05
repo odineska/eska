@@ -1,0 +1,4560 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "scope": "Atomic incoming SolidJS state, selection and preview-navigation publication; coherent model/culture/sequence/UI snapshot. Native16pair regression includes the separate beta marker changes in the same frozen artifact.",
+  "reactivePublicationCoherent": true,
+  "performanceClaimed": false,
+  "fullProfileAccepted": false,
+  "wholeFormVisualParity": false,
+  "implementation": {
+    "batch": "One synchronous batch wraps all mutations for each accepted message. Existing field/update order, model reconcile identity, stale sequence guard, selection/page navigation and persistence remain intact.",
+    "evidence": "Browser/production build of the pinned real SolidJS. A message changing sequence/culture/model/selection/navigation previously produced six observer snapshots, including mixed revisions. The accepted version produces exactly one coherent snapshot. Older messages have no effect; navigation-only messages remain atomic.",
+    "remaining": "Native canvas dependencies on global sequence are still queued for the common canvas lifecycle refactor; this change does not claim their removal or measured GUI performance gains. Stable table model identity, module boundaries/readability and scoped frontend type checking remain queued.",
+    "publicProtocolChanged": false,
+    "dependenciesAdded": false,
+    "pixelCriteriaWeakened": false
+  },
+  "checks": {
+    "node": {
+      "passed": 549,
+      "failed": 0,
+      "skipped": 11,
+      "total": 560,
+      "log": "solid-state-zje24d4y/beta-node-full.log",
+      "sha256": "fd28639901cd967ebec9ceb6f88a5dcc7101e80c42fcf749a0cfb7a0a5822a12"
+    },
+    "controller": {
+      "passed": 4,
+      "failed": 0,
+      "log": "solid-state-zje24d4y/controller-tests.log",
+      "sha256": "d4b78cabb17dc63c0d01bc0de7b37ca9be9ac2bc9c9601d3c423cd6f38787475",
+      "beforeRegressionFailedAsExpected": true,
+      "beforeLog": "solid-state-zje24d4y/before-regression.log",
+      "beforeLogSha256": "f8a187619a81df6a56308b31e87b1451df5abb0cc1bc0ee17cd6b7fc47f7b707",
+      "observedSnapshotsBefore": 6,
+      "observedSnapshotsAfter": 1,
+      "realSolidBrowserBuild": true,
+      "staleSequenceRejected": true,
+      "selectionAndNavigationPreserved": true
+    },
+    "rust": {
+      "fmt": true,
+      "check": true,
+      "strictClippy": true,
+      "test": true,
+      "build": true,
+      "suites": 42,
+      "passed": 1520,
+      "failed": 0,
+      "ignored": 19,
+      "coreSourceFilesVerified": 607,
+      "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "logs": {
+        "fmt": {
+          "path": "solid-state-zje24d4y/cargo-fmt.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "check": {
+          "path": "solid-state-zje24d4y/cargo-check.log",
+          "sha256": "9a30d54c8b16d7e49510b182028079bca120aeebb7d662e88f8566e6196a49f6"
+        },
+        "clippy": {
+          "path": "solid-state-zje24d4y/cargo-clippy.log",
+          "sha256": "22e0df986057b9ba5be07526ac5fb348862a3dedef42108383cc3e088acbb889"
+        },
+        "test": {
+          "path": "solid-state-zje24d4y/cargo-test.log",
+          "sha256": "cec1319d135360868c55647ded01920876053144edf38b56731cf22463fbca91"
+        },
+        "build": {
+          "path": "solid-state-zje24d4y/cargo-build.log",
+          "sha256": "02db5a66fa0c60ca8618bd08aac556eac4f3ec863e8630a0d353dba6a0f6e126"
+        }
+      }
+    }
+  },
+  "acceptance": {
+    "passed": true,
+    "batch": "form-batch-mVIkQw",
+    "pairsPassed": 16,
+    "pairsFailed": 0,
+    "publishedCases": 104,
+    "allFirstAttempt": true,
+    "builds": 1,
+    "packages": 1,
+    "guiConcurrency": 1,
+    "seconds": 133.113880985,
+    "vsixSha256": "aaec6317db57c5f93def65db7fcd33c58916f9661086c2ef676791958f98ba8d",
+    "runtimeManifestSha256": "1af53445f2d3f000d8c2cfd3f3a91da8642a8953b2566cdd7de80b2049e322b9",
+    "runtimeFiles": 1303,
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "batchSha256": "84729c9d111d855f3c05a2ee5b88658108ad72daf21119f818db1eac46f4a13b",
+    "inputsSha256": "7ad514df4158aae3ca821adfa08e6cf23c991bb403ba5706ece9732e99b16788",
+    "runs": [
+      {
+        "suite": "application",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 4.3479578619999995,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-en/driver.log",
+        "receipt": "application-en/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 894.641657,
+          "runtimeVerificationMs": 286.95228,
+          "preHostMs": 1185.142051,
+          "cleanupMs": 33.641317999999956,
+          "totalMs": 4192.1745710000005
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.808470949,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-ru/driver.log",
+        "receipt": "application-ru/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 853.731194,
+          "runtimeVerificationMs": 325.4697910000001,
+          "preHostMs": 1196.638684,
+          "cleanupMs": 36.070019000000684,
+          "totalMs": 6665.348913
+        }
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.632151938,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "renderer-en/driver.log",
+        "receipt": "renderer-en/receipt.json",
+        "caseIds": [
+          "renderer/InputField",
+          "renderer/CheckBoxField",
+          "renderer/CalendarField",
+          "renderer/ChartField",
+          "renderer/FormattedDocumentField",
+          "renderer/HTMLDocumentField",
+          "renderer/LabelField",
+          "renderer/ProgressBarField",
+          "renderer/TrackBarField",
+          "renderer/RadioButtonField",
+          "renderer/PictureField",
+          "renderer/SpreadSheetDocumentField",
+          "renderer/PlannerField",
+          "renderer/TextDocumentField",
+          "renderer/PDFDocumentField",
+          "renderer/DendrogramField",
+          "renderer/GanttChartField",
+          "renderer/GeographicalSchemaField",
+          "renderer/GraphicalSchemaField",
+          "renderer/PeriodField"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 792.493958,
+          "runtimeVerificationMs": 309.3503800000001,
+          "preHostMs": 1111.797476,
+          "cleanupMs": 38.68801100000019,
+          "totalMs": 10480.034553
+        }
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 13.241741795000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "renderer-ru/driver.log",
+        "receipt": "renderer-ru/receipt.json",
+        "caseIds": [
+          "renderer/InputField",
+          "renderer/CheckBoxField",
+          "renderer/CalendarField",
+          "renderer/ChartField",
+          "renderer/FormattedDocumentField",
+          "renderer/HTMLDocumentField",
+          "renderer/LabelField",
+          "renderer/ProgressBarField",
+          "renderer/TrackBarField",
+          "renderer/RadioButtonField",
+          "renderer/PictureField",
+          "renderer/SpreadSheetDocumentField",
+          "renderer/PlannerField",
+          "renderer/TextDocumentField",
+          "renderer/PDFDocumentField",
+          "renderer/DendrogramField",
+          "renderer/GanttChartField",
+          "renderer/GeographicalSchemaField",
+          "renderer/GraphicalSchemaField",
+          "renderer/PeriodField"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 808.175703,
+          "runtimeVerificationMs": 304.63906099999997,
+          "preHostMs": 1136.158737,
+          "cleanupMs": 35.460478999999395,
+          "totalMs": 13073.132082999999
+        }
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.408761418000002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "preview-en/driver.log",
+        "receipt": "preview-en/receipt.json",
+        "caseIds": [
+          "preview/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 807.192414,
+          "runtimeVerificationMs": 279.6240929999999,
+          "preHostMs": 1091.7798679999999,
+          "cleanupMs": 33.36406899999929,
+          "totalMs": 6264.178469
+        }
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 9.138778752999999,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "preview-ru/driver.log",
+        "receipt": "preview-ru/receipt.json",
+        "caseIds": [
+          "preview/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 691.352005,
+          "runtimeVerificationMs": 275.140356,
+          "preHostMs": 982.6484399999999,
+          "cleanupMs": 37.80180599999949,
+          "totalMs": 8973.897906
+        }
+      },
+      {
+        "suite": "dependencies",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 5.745920744999996,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "dependencies-en/driver.log",
+        "receipt": "dependencies-en/receipt.json",
+        "caseIds": [
+          "dependencies/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 687.039268,
+          "runtimeVerificationMs": 336.80184199999997,
+          "preHostMs": 1029.618885,
+          "cleanupMs": 32.648361999999906,
+          "totalMs": 5606.775739
+        }
+      },
+      {
+        "suite": "dependencies",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.30020893100001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "dependencies-ru/driver.log",
+        "receipt": "dependencies-ru/receipt.json",
+        "caseIds": [
+          "dependencies/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 843.372349,
+          "runtimeVerificationMs": 304.8394770000001,
+          "preHostMs": 1166.892855,
+          "cleanupMs": 34.6986480000005,
+          "totalMs": 8155.166233999999
+        }
+      },
+      {
+        "suite": "inspectors",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 3.5595937249999987,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "inspectors-en/driver.log",
+        "receipt": "inspectors-en/receipt.json",
+        "caseIds": [
+          "inspectors/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 782.536028,
+          "runtimeVerificationMs": 297.09137499999986,
+          "preHostMs": 1084.093558,
+          "cleanupMs": 39.171468000000004,
+          "totalMs": 3388.305438
+        }
+      },
+      {
+        "suite": "inspectors",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.257269572999998,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "inspectors-ru/driver.log",
+        "receipt": "inspectors-ru/receipt.json",
+        "caseIds": [
+          "inspectors/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 821.9181209999999,
+          "runtimeVerificationMs": 390.676099,
+          "preHostMs": 1232.372204,
+          "cleanupMs": 31.995238999999856,
+          "totalMs": 6125.438669
+        }
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.548240116,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "groups-en/driver.log",
+        "receipt": "groups-en/receipt.json",
+        "caseIds": [
+          "groups/GroupDefault",
+          "groups/GroupNone",
+          "groups/GroupStrong",
+          "groups/GroupWeak",
+          "groups/GroupBackColor",
+          "groups/GroupTitleFont",
+          "groups/GroupHidden",
+          "groups/GroupCollapsible",
+          "groups/PagesTop",
+          "groups/PagesBottom",
+          "groups/PagesNone",
+          "groups/PagesAuto",
+          "groups/PagesLeft",
+          "groups/PagesRight",
+          "groups/PagesSwipe",
+          "groups/CommandBar",
+          "groups/ButtonGroup",
+          "groups/Popup",
+          "groups/BarWithButtonGroup",
+          "groups/BarWithPopup",
+          "groups/StyleReferences",
+          "groups/Decorations"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 797.45436,
+          "runtimeVerificationMs": 316.160402,
+          "preHostMs": 1126.755473,
+          "cleanupMs": 33.5989840000002,
+          "totalMs": 11363.62516
+        }
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 13.728726403000008,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "groups-ru/driver.log",
+        "receipt": "groups-ru/receipt.json",
+        "caseIds": [
+          "groups/GroupDefault",
+          "groups/GroupNone",
+          "groups/GroupStrong",
+          "groups/GroupWeak",
+          "groups/GroupBackColor",
+          "groups/GroupTitleFont",
+          "groups/GroupHidden",
+          "groups/GroupCollapsible",
+          "groups/PagesTop",
+          "groups/PagesBottom",
+          "groups/PagesNone",
+          "groups/PagesAuto",
+          "groups/PagesLeft",
+          "groups/PagesRight",
+          "groups/PagesSwipe",
+          "groups/CommandBar",
+          "groups/ButtonGroup",
+          "groups/Popup",
+          "groups/BarWithButtonGroup",
+          "groups/BarWithPopup",
+          "groups/StyleReferences",
+          "groups/Decorations"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 775.4990909999999,
+          "runtimeVerificationMs": 330.2023189999999,
+          "preHostMs": 1132.392873,
+          "cleanupMs": 33.376985000000786,
+          "totalMs": 13578.193638
+        }
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 4.740654122000008,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "multiple-windows-en/driver.log",
+        "receipt": "multiple-windows-en/receipt.json",
+        "caseIds": [
+          "multiple-windows/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 772.590892,
+          "runtimeVerificationMs": 357.185573,
+          "preHostMs": 1137.987857,
+          "cleanupMs": 38.17734599999949,
+          "totalMs": 4566.109428000001
+        }
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.167589183999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "multiple-windows-ru/driver.log",
+        "receipt": "multiple-windows-ru/receipt.json",
+        "caseIds": [
+          "multiple-windows/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 826.640316,
+          "runtimeVerificationMs": 324.49591999999996,
+          "preHostMs": 1168.3269759999998,
+          "cleanupMs": 34.301816000000144,
+          "totalMs": 7017.1038770000005
+        }
+      },
+      {
+        "suite": "restore",
+        "locale": "en",
+        "mode": "restart",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.039667769000007,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "restore-en/driver.log",
+        "receipt": "restore-en/receipt.json",
+        "caseIds": [
+          "restore/suite",
+          "restore/suite"
+        ],
+        "hostStarts": 2,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 739.4420719999999,
+          "runtimeVerificationMs": 354.33787300000006,
+          "preHostMs": 1700.268951,
+          "cleanupMs": 38.63176099999964,
+          "totalMs": 6884.3743509999995
+        }
+      },
+      {
+        "suite": "restore",
+        "locale": "ru",
+        "mode": "restart",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 9.753382734999992,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "restore-ru/driver.log",
+        "receipt": "restore-ru/receipt.json",
+        "caseIds": [
+          "restore/suite",
+          "restore/suite"
+        ],
+        "hostStarts": 4,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 810.388197,
+          "runtimeVerificationMs": 273.045154,
+          "preHostMs": 1699.665286,
+          "cleanupMs": 37.56368099999963,
+          "totalMs": 9603.151302
+        }
+      }
+    ],
+    "scenarios": {
+      "application": {
+        "en": {
+          "receipt": "form-batch-mVIkQw/application-en/receipt.json",
+          "receiptSha256": "89da015d27a7b6129fee490d6f1975edc8995264a2e7a761a522d0a031d344d3",
+          "result": {
+            "passed": true,
+            "formApplication": true,
+            "locale": "en",
+            "sourceWritesDuringViewing": false,
+            "results": [
+              {
+                "sample": 0,
+                "openThroughFirstPaintMs": 316,
+                "elements": 13,
+                "retainedElements": 22,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 1,
+                "commandButtons": 5,
+                "scrollWidth": 635,
+                "scrollHeight": 686,
+                "dependencies": 13,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 1,
+                "openThroughFirstPaintMs": 167,
+                "elements": 7,
+                "retainedElements": 7,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 0,
+                "commandButtons": 0,
+                "scrollWidth": 835,
+                "scrollHeight": 580,
+                "dependencies": 12,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 2,
+                "openThroughFirstPaintMs": 206,
+                "elements": 21,
+                "retainedElements": 22,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 6,
+                "commandButtons": 7,
+                "scrollWidth": 1104,
+                "scrollHeight": 640,
+                "dependencies": 9,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 3,
+                "openThroughFirstPaintMs": 129,
+                "elements": 3,
+                "retainedElements": 3,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 0,
+                "commandButtons": 4,
+                "scrollWidth": 565,
+                "scrollHeight": 322,
+                "dependencies": 6,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              }
+            ],
+            "hostDriver": {
+              "suiteBodyMs": 1550.916766
+            }
+          }
+        },
+        "ru": {
+          "receipt": "form-batch-mVIkQw/application-ru/receipt.json",
+          "receiptSha256": "5d3f79da6f28a68efc1a72e859d110f694cd076794a948c4386c69da7f461576",
+          "result": {
+            "passed": true,
+            "formApplication": true,
+            "locale": "ru",
+            "sourceWritesDuringViewing": false,
+            "results": [
+              {
+                "sample": 0,
+                "openThroughFirstPaintMs": 282,
+                "elements": 13,
+                "retainedElements": 22,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 1,
+                "commandButtons": 5,
+                "scrollWidth": 635,
+                "scrollHeight": 686,
+                "dependencies": 13,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 1,
+                "openThroughFirstPaintMs": 197,
+                "elements": 7,
+                "retainedElements": 7,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 0,
+                "commandButtons": 0,
+                "scrollWidth": 835,
+                "scrollHeight": 580,
+                "dependencies": 12,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 2,
+                "openThroughFirstPaintMs": 212,
+                "elements": 21,
+                "retainedElements": 22,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 6,
+                "commandButtons": 7,
+                "scrollWidth": 1104,
+                "scrollHeight": 640,
+                "dependencies": 9,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 3,
+                "openThroughFirstPaintMs": 141,
+                "elements": 3,
+                "retainedElements": 3,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 0,
+                "commandButtons": 4,
+                "scrollWidth": 535,
+                "scrollHeight": 322,
+                "dependencies": 6,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              }
+            ],
+            "hostDriver": {
+              "suiteBodyMs": 1472.1060400000001
+            }
+          }
+        }
+      },
+      "renderer": {
+        "en": {
+          "receipt": "form-batch-mVIkQw/renderer-en/receipt.json",
+          "receiptSha256": "8114dab72de92e209f843f2d2754fb8bad9e3004f7e3e1349ab33eff732f1200",
+          "result": {
+            "passed": true,
+            "formRenderer": true,
+            "locale": "en",
+            "results": [
+              {
+                "kind": "InputField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 261,
+                  "height": 75
+                },
+                "control": {
+                  "x": 107,
+                  "y": 316,
+                  "width": 161,
+                  "height": 23
+                },
+                "title": "Left",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "CheckBoxField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 148,
+                  "height": 69
+                },
+                "control": {
+                  "x": 140,
+                  "y": 317.484375,
+                  "width": 15,
+                  "height": 15
+                },
+                "title": "Left",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "CalendarField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 372,
+                  "height": 371
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 338,
+                  "height": 300
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "ChartField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "FormattedDocumentField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "HTMLDocumentField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "LabelField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 253,
+                  "height": 69
+                },
+                "control": {
+                  "x": 110,
+                  "y": 316.5,
+                  "width": 150,
+                  "height": 16
+                },
+                "title": "Left",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "ProgressBarField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 465,
+                  "height": 73
+                },
+                "control": {
+                  "x": 152,
+                  "y": 316,
+                  "width": 320,
+                  "height": 21
+                },
+                "title": "Left",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "TrackBarField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 354,
+                  "height": 99
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 320,
+                  "height": 28
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "RadioButtonField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 406.34375,
+                  "height": 69
+                },
+                "control": {
+                  "x": 151,
+                  "y": 315,
+                  "width": 262.34375,
+                  "height": 19
+                },
+                "title": "Left",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "PictureField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 156,
+                  "height": 191
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 122,
+                  "height": 120
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "SpreadSheetDocumentField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "PlannerField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "TextDocumentField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "PDFDocumentField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 344
+                },
+                "control": {
+                  "x": 41,
+                  "y": 366,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "DendrogramField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "GanttChartField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "GeographicalSchemaField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "GraphicalSchemaField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "PeriodField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 280
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 209
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              }
+            ],
+            "hostDriver": {
+              "suiteBodyMs": 5848.021236
+            }
+          }
+        },
+        "ru": {
+          "receipt": "form-batch-mVIkQw/renderer-ru/receipt.json",
+          "receiptSha256": "7c23570717fcf002d83e3929289d4b9b3b63aab7cab92d04c845187ab9b278a6",
+          "result": {
+            "passed": true,
+            "formRenderer": true,
+            "locale": "ru",
+            "results": [
+              {
+                "kind": "InputField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 261,
+                  "height": 75
+                },
+                "control": {
+                  "x": 107,
+                  "y": 316,
+                  "width": 161,
+                  "height": 23
+                },
+                "title": "Left",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "CheckBoxField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 148,
+                  "height": 69
+                },
+                "control": {
+                  "x": 140,
+                  "y": 317.484375,
+                  "width": 15,
+                  "height": 15
+                },
+                "title": "Left",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "CalendarField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 372,
+                  "height": 371
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 338,
+                  "height": 300
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "ChartField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "FormattedDocumentField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "HTMLDocumentField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "LabelField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 253,
+                  "height": 69
+                },
+                "control": {
+                  "x": 110,
+                  "y": 316.5,
+                  "width": 150,
+                  "height": 16
+                },
+                "title": "Left",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "ProgressBarField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 465,
+                  "height": 73
+                },
+                "control": {
+                  "x": 152,
+                  "y": 316,
+                  "width": 320,
+                  "height": 21
+                },
+                "title": "Left",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "TrackBarField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 354,
+                  "height": 99
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 320,
+                  "height": 28
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "RadioButtonField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 484.390625,
+                  "height": 69
+                },
+                "control": {
+                  "x": 151,
+                  "y": 315,
+                  "width": 340.390625,
+                  "height": 19
+                },
+                "title": "Left",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "PictureField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 156,
+                  "height": 191
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 122,
+                  "height": 120
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "SpreadSheetDocumentField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "PlannerField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "TextDocumentField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "PDFDocumentField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 344
+                },
+                "control": {
+                  "x": 41,
+                  "y": 366,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "DendrogramField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "GanttChartField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "GeographicalSchemaField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "GraphicalSchemaField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 314
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 243
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              },
+              {
+                "kind": "PeriodField",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 534,
+                  "height": 280
+                },
+                "control": {
+                  "x": 41,
+                  "y": 336,
+                  "width": 500,
+                  "height": 209
+                },
+                "title": "Top",
+                "font": "\"ESKA Taxi Sans\", Arial, sans-serif"
+              }
+            ],
+            "hostDriver": {
+              "suiteBodyMs": 5855.133422999999
+            }
+          }
+        }
+      },
+      "preview": {
+        "en": {
+          "receipt": "form-batch-mVIkQw/preview-en/receipt.json",
+          "receiptSha256": "14f941b12149a041e0cb1e62c913b6dd614421f5919d16e8ffb34077a7e863d1",
+          "result": {
+            "passed": true,
+            "formPreview": true,
+            "locale": "en",
+            "geometry": {
+              "frame": {
+                "width": 529,
+                "height": 202
+              },
+              "input": {
+                "width": 450,
+                "height": 23
+              },
+              "controlWidth": 450,
+              "script": true
+            },
+            "dirty": true,
+            "incompleteMarkDirtyXml": true,
+            "detached": true,
+            "repeatedDetachFocus": true,
+            "invalidXml": true,
+            "undo": true,
+            "external": true,
+            "navigation": true,
+            "initialInvalidRecovery": true,
+            "ownerClosedBeforeDock": true,
+            "independentForms": true,
+            "sourceWritesDuringViewing": false,
+            "hostDriver": {
+              "suiteBodyMs": 3708.5543700000003
+            }
+          }
+        },
+        "ru": {
+          "receipt": "form-batch-mVIkQw/preview-ru/receipt.json",
+          "receiptSha256": "98af34d0991ec3c995a015dc0a0cf99be9d57d449131ccb11f90d2b9d2d99f14",
+          "result": {
+            "passed": true,
+            "formPreview": true,
+            "locale": "ru",
+            "geometry": {
+              "frame": {
+                "width": 529,
+                "height": 202
+              },
+              "input": {
+                "width": 389,
+                "height": 23
+              },
+              "controlWidth": 389,
+              "script": true
+            },
+            "dirty": true,
+            "incompleteMarkDirtyXml": true,
+            "detached": true,
+            "repeatedDetachFocus": true,
+            "invalidXml": true,
+            "undo": true,
+            "external": true,
+            "navigation": true,
+            "initialInvalidRecovery": true,
+            "ownerClosedBeforeDock": true,
+            "independentForms": true,
+            "sourceWritesDuringViewing": false,
+            "hostDriver": {
+              "suiteBodyMs": 3774.7065919999995
+            }
+          }
+        }
+      },
+      "dependencies": {
+        "en": {
+          "receipt": "form-batch-mVIkQw/dependencies-en/receipt.json",
+          "receiptSha256": "68a28d6fd18261638f1e638f4c4487c651b0333e94bc9895a3d33416965da0ff",
+          "result": {
+            "passed": true,
+            "formDependencies": true,
+            "locale": "en",
+            "newDirtyDependency": true,
+            "malformedFirstDiskMetadata": true,
+            "initialDirtyForm": true,
+            "retiredDirtyDependency": true,
+            "nestedDirtyDependency": true,
+            "invalidMetadataRecovery": true,
+            "atomicModelPublication": true,
+            "failedDiscoveryRetainsDisplayedModel": true,
+            "detached": true,
+            "stableDom": true,
+            "sourceWritesDuringViewing": false,
+            "hostDriver": {
+              "suiteBodyMs": 3129.597534
+            }
+          }
+        },
+        "ru": {
+          "receipt": "form-batch-mVIkQw/dependencies-ru/receipt.json",
+          "receiptSha256": "2b78945c1ffa52172a9fbd790e85589ab2a49adb5dfda5ad3cdc4b05406c20df",
+          "result": {
+            "passed": true,
+            "formDependencies": true,
+            "locale": "ru",
+            "newDirtyDependency": true,
+            "malformedFirstDiskMetadata": true,
+            "initialDirtyForm": true,
+            "retiredDirtyDependency": true,
+            "nestedDirtyDependency": true,
+            "invalidMetadataRecovery": true,
+            "atomicModelPublication": true,
+            "failedDiscoveryRetainsDisplayedModel": true,
+            "detached": true,
+            "stableDom": true,
+            "sourceWritesDuringViewing": false,
+            "hostDriver": {
+              "suiteBodyMs": 2970.8379590000004
+            }
+          }
+        }
+      },
+      "inspectors": {
+        "en": {
+          "receipt": "form-batch-mVIkQw/inspectors-en/receipt.json",
+          "receiptSha256": "ea9e63a6fcee60fd604ec2974b86828512f902456975ad6322364ddd2f6aa0ef",
+          "result": {
+            "passed": true,
+            "formInspectors": true,
+            "locale": "en",
+            "captions": true,
+            "typedBooleans": true,
+            "literalAndForeignValuesPreserved": true,
+            "nestedRecordsAndQualifiers": true,
+            "propertyKeyboardNavigation": true,
+            "dirtyProperties": true,
+            "recordDomRetained": true,
+            "sourceWritesDuringViewing": false,
+            "hostDriver": {
+              "suiteBodyMs": 796.0441969999999
+            }
+          }
+        },
+        "ru": {
+          "receipt": "form-batch-mVIkQw/inspectors-ru/receipt.json",
+          "receiptSha256": "e7981728e67811c4746de32499171c7ef5ab1631e9c166a6076912554cf55a35",
+          "result": {
+            "passed": true,
+            "formInspectors": true,
+            "locale": "ru",
+            "captions": true,
+            "typedBooleans": true,
+            "literalAndForeignValuesPreserved": true,
+            "nestedRecordsAndQualifiers": true,
+            "propertyKeyboardNavigation": true,
+            "dirtyProperties": true,
+            "recordDomRetained": true,
+            "sourceWritesDuringViewing": false,
+            "hostDriver": {
+              "suiteBodyMs": 740.7727770000001
+            }
+          }
+        }
+      },
+      "groups": {
+        "en": {
+          "receipt": "form-batch-mVIkQw/groups-en/receipt.json",
+          "receiptSha256": "cb5de37922c0b4c9fddf65b66d9d17ff7919d546b3acd093ff3b60d020ed700c",
+          "result": {
+            "passed": true,
+            "formGroups": true,
+            "locale": "en",
+            "sourceWritesDuringViewing": false,
+            "pagesKeepAllocation": true,
+            "detachedPageWithRootSelection": true,
+            "collapsedGroupHandoff": true,
+            "sharedGroupExpansion": true,
+            "pageTreeSelectionDetached": true,
+            "dirtySelectedPageVisibility": true,
+            "nestedPageIsolation": true,
+            "results": [
+              {
+                "kind": "GroupDefault",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 249,
+                  "height": 130
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 95,
+                    "y": 339,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 95,
+                    "y": 371,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 342.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 374.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupNone",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 249,
+                  "height": 126
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 95,
+                    "y": 335,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 95,
+                    "y": 367,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 338.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 370.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupStrong",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 259,
+                  "height": 130
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 105,
+                    "y": 339,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 105,
+                    "y": 371,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 51,
+                    "y": 342.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 51,
+                    "y": 374.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupWeak",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 249,
+                  "height": 130
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 95,
+                    "y": 339,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 95,
+                    "y": 371,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 342.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 374.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupBackColor",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 259,
+                  "height": 140
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 100,
+                    "y": 344,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 100,
+                    "y": 376,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 46,
+                    "y": 347.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 46,
+                    "y": 379.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgb(255, 255, 224)"
+                },
+                "title": {
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 0, 255)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupTitleFont",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 249,
+                  "height": 134
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 95,
+                    "y": 343,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 95,
+                    "y": 375,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 346.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 378.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "18.6667px",
+                  "fontWeight": "700",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupHidden",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 34,
+                  "height": 52
+                },
+                "elements": 0,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupCollapsible",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 259,
+                  "height": 132
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 105,
+                    "y": 341,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 105,
+                    "y": 373,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 51,
+                    "y": 344.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 51,
+                    "y": 376.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "PagesTop",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 271,
+                  "height": 152
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 106,
+                    "y": 351,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 106,
+                    "y": 383,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 52,
+                    "y": 354.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 52,
+                    "y": 386.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 316,
+                    "width": 78,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 118,
+                    "y": 316,
+                    "width": 96,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "PagesBottom",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 271,
+                  "height": 152
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 106,
+                    "y": 326,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 106,
+                    "y": 358,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 52,
+                    "y": 329.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 52,
+                    "y": 361.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 389,
+                    "width": 78,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 118,
+                    "y": 389,
+                    "width": 96,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "PagesNone",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 249,
+                  "height": 107
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 95,
+                    "y": 316,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 95,
+                    "y": 348,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 319.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 351.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "PagesAuto",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 271,
+                  "height": 152
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 106,
+                    "y": 351,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 106,
+                    "y": 383,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 52,
+                    "y": 354.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 52,
+                    "y": 386.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 316,
+                    "width": 78,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 118,
+                    "y": 316,
+                    "width": 96,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "PagesLeft",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 363,
+                  "height": 127
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 198,
+                    "y": 326,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 198,
+                    "y": 358,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 144,
+                    "y": 329.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 144,
+                    "y": 361.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 316,
+                    "width": 93,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 342,
+                    "width": 93,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "PagesRight",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 363,
+                  "height": 127
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 106,
+                    "y": 326,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 106,
+                    "y": 358,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 52,
+                    "y": 329.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 52,
+                    "y": 361.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 277,
+                    "y": 316,
+                    "width": 93,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 277,
+                    "y": 342,
+                    "width": 93,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "PagesSwipe",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 271,
+                  "height": 152
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 106,
+                    "y": 351,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 106,
+                    "y": 383,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 52,
+                    "y": 354.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 52,
+                    "y": 386.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 316,
+                    "width": 78,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 118,
+                    "y": 316,
+                    "width": 96,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "CommandBar",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 291,
+                  "height": 79
+                },
+                "elements": 3,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [
+                  {
+                    "label": "First command",
+                    "x": 41,
+                    "y": 316,
+                    "width": 115,
+                    "height": 26
+                  },
+                  {
+                    "label": "Second command",
+                    "x": 165,
+                    "y": 316,
+                    "width": 133,
+                    "height": 26
+                  }
+                ],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "ButtonGroup",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 34,
+                  "height": 52
+                },
+                "elements": 0,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "Popup",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 34,
+                  "height": 52
+                },
+                "elements": 0,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "BarWithButtonGroup",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 291,
+                  "height": 79
+                },
+                "elements": 4,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [
+                  {
+                    "label": "First command",
+                    "x": 41,
+                    "y": 316,
+                    "width": 115,
+                    "height": 26
+                  },
+                  {
+                    "label": "Second command",
+                    "x": 165,
+                    "y": 316,
+                    "width": 133,
+                    "height": 26
+                  }
+                ],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "BarWithPopup",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 142,
+                  "height": 79
+                },
+                "elements": 2,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [
+                  {
+                    "label": "Actions▾",
+                    "x": 41,
+                    "y": 316,
+                    "width": 76,
+                    "height": 26
+                  }
+                ],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "StyleReferences",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 292,
+                  "height": 113
+                },
+                "elements": 2,
+                "inputs": [
+                  {
+                    "x": 100,
+                    "y": 316,
+                    "width": 199,
+                    "height": 29,
+                    "fontSize": "16px",
+                    "fontWeight": "700",
+                    "fontStyle": "italic",
+                    "color": "rgb(255, 140, 0)",
+                    "background": "rgb(255, 255, 224)"
+                  },
+                  {
+                    "x": 100,
+                    "y": 354,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 322.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 357.5,
+                    "width": 55,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "700",
+                    "fontStyle": "normal",
+                    "color": "rgb(255, 140, 0)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "Decorations",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 94,
+                  "height": 118
+                },
+                "elements": 3,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              }
+            ],
+            "mismatches": [],
+            "hostDriver": {
+              "suiteBodyMs": 8792.934105
+            }
+          }
+        },
+        "ru": {
+          "receipt": "form-batch-mVIkQw/groups-ru/receipt.json",
+          "receiptSha256": "0d7aac86b43e46cb357ef537a400056ca20fbade4ad5e3db9a1fdf32fd9bcb68",
+          "result": {
+            "passed": true,
+            "formGroups": true,
+            "locale": "ru",
+            "sourceWritesDuringViewing": false,
+            "pagesKeepAllocation": true,
+            "detachedPageWithRootSelection": true,
+            "collapsedGroupHandoff": true,
+            "sharedGroupExpansion": true,
+            "pageTreeSelectionDetached": true,
+            "dirtySelectedPageVisibility": true,
+            "nestedPageIsolation": true,
+            "results": [
+              {
+                "kind": "GroupDefault",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 249,
+                  "height": 130
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 95,
+                    "y": 339,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 95,
+                    "y": 371,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 342.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 374.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupNone",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 249,
+                  "height": 126
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 95,
+                    "y": 335,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 95,
+                    "y": 367,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 338.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 370.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupStrong",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 259,
+                  "height": 130
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 105,
+                    "y": 339,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 105,
+                    "y": 371,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 51,
+                    "y": 342.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 51,
+                    "y": 374.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupWeak",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 249,
+                  "height": 130
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 95,
+                    "y": 339,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 95,
+                    "y": 371,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 342.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 374.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupBackColor",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 259,
+                  "height": 140
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 100,
+                    "y": 344,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 100,
+                    "y": 376,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 46,
+                    "y": 347.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 46,
+                    "y": 379.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgb(255, 255, 224)"
+                },
+                "title": {
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 0, 255)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupTitleFont",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 249,
+                  "height": 134
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 95,
+                    "y": 343,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 95,
+                    "y": 375,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 346.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 378.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "18.6667px",
+                  "fontWeight": "700",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupHidden",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 34,
+                  "height": 52
+                },
+                "elements": 0,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "GroupCollapsible",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 259,
+                  "height": 132
+                },
+                "elements": 3,
+                "inputs": [
+                  {
+                    "x": 105,
+                    "y": 341,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 105,
+                    "y": 373,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 51,
+                    "y": 344.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 51,
+                    "y": 376.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": {
+                  "fontSize": "13.3333px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(77, 77, 77)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "title": {
+                  "fontSize": "16px",
+                  "fontWeight": "400",
+                  "fontStyle": "normal",
+                  "color": "rgb(0, 150, 70)",
+                  "background": "rgba(0, 0, 0, 0)"
+                },
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "PagesTop",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 271,
+                  "height": 152
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 106,
+                    "y": 351,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 106,
+                    "y": 383,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 52,
+                    "y": 354.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 52,
+                    "y": 386.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 316,
+                    "width": 78,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 118,
+                    "y": 316,
+                    "width": 96,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "PagesBottom",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 271,
+                  "height": 152
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 106,
+                    "y": 326,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 106,
+                    "y": 358,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 52,
+                    "y": 329.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 52,
+                    "y": 361.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 389,
+                    "width": 78,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 118,
+                    "y": 389,
+                    "width": 96,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "PagesNone",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 249,
+                  "height": 107
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 95,
+                    "y": 316,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 95,
+                    "y": 348,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 319.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 351.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "PagesAuto",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 271,
+                  "height": 152
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 106,
+                    "y": 351,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 106,
+                    "y": 383,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 52,
+                    "y": 354.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 52,
+                    "y": 386.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 316,
+                    "width": 78,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 118,
+                    "y": 316,
+                    "width": 96,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "PagesLeft",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 363,
+                  "height": 127
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 198,
+                    "y": 326,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 198,
+                    "y": 358,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 144,
+                    "y": 329.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 144,
+                    "y": 361.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 316,
+                    "width": 93,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 342,
+                    "width": 93,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "PagesRight",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 363,
+                  "height": 127
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 106,
+                    "y": 326,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 106,
+                    "y": 358,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 52,
+                    "y": 329.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 52,
+                    "y": 361.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 277,
+                    "y": 316,
+                    "width": 93,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 277,
+                    "y": 342,
+                    "width": 93,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "PagesSwipe",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 271,
+                  "height": 152
+                },
+                "elements": 4,
+                "inputs": [
+                  {
+                    "x": 106,
+                    "y": 351,
+                    "width": 161,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  },
+                  {
+                    "x": 106,
+                    "y": 383,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 52,
+                    "y": 354.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 52,
+                    "y": 386.5,
+                    "width": 50,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 2,
+                "tabButtons": [
+                  {
+                    "label": "First page",
+                    "overflow": false,
+                    "x": 41,
+                    "y": 316,
+                    "width": 78,
+                    "height": 27
+                  },
+                  {
+                    "label": "Second page",
+                    "overflow": false,
+                    "x": 118,
+                    "y": 316,
+                    "width": 96,
+                    "height": 27
+                  }
+                ],
+                "menu": false
+              },
+              {
+                "kind": "CommandBar",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 291,
+                  "height": 79
+                },
+                "elements": 3,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [
+                  {
+                    "label": "First command",
+                    "x": 41,
+                    "y": 316,
+                    "width": 115,
+                    "height": 26
+                  },
+                  {
+                    "label": "Second command",
+                    "x": 165,
+                    "y": 316,
+                    "width": 133,
+                    "height": 26
+                  }
+                ],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "ButtonGroup",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 34,
+                  "height": 52
+                },
+                "elements": 0,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "Popup",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 34,
+                  "height": 52
+                },
+                "elements": 0,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "BarWithButtonGroup",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 291,
+                  "height": 79
+                },
+                "elements": 4,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [
+                  {
+                    "label": "First command",
+                    "x": 41,
+                    "y": 316,
+                    "width": 115,
+                    "height": 26
+                  },
+                  {
+                    "label": "Second command",
+                    "x": 165,
+                    "y": 316,
+                    "width": 133,
+                    "height": 26
+                  }
+                ],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "BarWithPopup",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 142,
+                  "height": 79
+                },
+                "elements": 2,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [
+                  {
+                    "label": "Actions▾",
+                    "x": 41,
+                    "y": 316,
+                    "width": 76,
+                    "height": 26
+                  }
+                ],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "StyleReferences",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 292,
+                  "height": 113
+                },
+                "elements": 2,
+                "inputs": [
+                  {
+                    "x": 100,
+                    "y": 316,
+                    "width": 199,
+                    "height": 29,
+                    "fontSize": "16px",
+                    "fontWeight": "700",
+                    "fontStyle": "italic",
+                    "color": "rgb(255, 140, 0)",
+                    "background": "rgb(255, 255, 224)"
+                  },
+                  {
+                    "x": 100,
+                    "y": 354,
+                    "width": 121,
+                    "height": 23,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(51, 51, 51)",
+                    "background": "rgb(255, 255, 255)"
+                  }
+                ],
+                "labels": [
+                  {
+                    "x": 41,
+                    "y": 322.5,
+                    "width": 39,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "400",
+                    "fontStyle": "normal",
+                    "color": "rgb(77, 77, 77)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Name:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  },
+                  {
+                    "x": 41,
+                    "y": 357.5,
+                    "width": 55,
+                    "height": 16,
+                    "fontSize": "13.3333px",
+                    "fontWeight": "700",
+                    "fontStyle": "normal",
+                    "color": "rgb(255, 140, 0)",
+                    "background": "rgba(0, 0, 0, 0)",
+                    "caption": "Amount:",
+                    "lineHeight": "16px",
+                    "raster": "ready"
+                  }
+                ],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              },
+              {
+                "kind": "Decorations",
+                "frame": {
+                  "x": 28,
+                  "y": 277,
+                  "width": 94,
+                  "height": 118
+                },
+                "elements": 3,
+                "inputs": [],
+                "labels": [],
+                "group": null,
+                "title": null,
+                "buttons": [],
+                "tabs": 0,
+                "tabButtons": [],
+                "menu": false
+              }
+            ],
+            "mismatches": [],
+            "hostDriver": {
+              "suiteBodyMs": 8377.831995
+            }
+          }
+        }
+      },
+      "multiple-windows": {
+        "en": {
+          "receipt": "form-batch-mVIkQw/multiple-windows-en/receipt.json",
+          "receiptSha256": "c2916804102c4605661dc10e7eec3adcaf7aee0d69577b825421dc0747f9e7ea",
+          "result": {
+            "passed": true,
+            "locale": "en",
+            "multipleNativeWindows": true,
+            "exactFrameOwnership": true,
+            "independentSessions": true,
+            "independentDirtyUpdates": true,
+            "equalLocalIds": true,
+            "independentSelection": true,
+            "independentPageNavigation": true,
+            "repeatedFocus": true,
+            "independentClose": true,
+            "dirtyDocumentsRetained": true,
+            "sourceWritesDuringViewing": false,
+            "hostDriver": {
+              "suiteBodyMs": 1951.424961
+            }
+          }
+        },
+        "ru": {
+          "receipt": "form-batch-mVIkQw/multiple-windows-ru/receipt.json",
+          "receiptSha256": "b2c4b19d968598a39b61c8b41046b96d5e5ff28f4f0d32c69f842fd098343713",
+          "result": {
+            "passed": true,
+            "locale": "ru",
+            "multipleNativeWindows": true,
+            "exactFrameOwnership": true,
+            "independentSessions": true,
+            "independentDirtyUpdates": true,
+            "equalLocalIds": true,
+            "independentSelection": true,
+            "independentPageNavigation": true,
+            "repeatedFocus": true,
+            "independentClose": true,
+            "dirtyDocumentsRetained": true,
+            "sourceWritesDuringViewing": false,
+            "hostDriver": {
+              "suiteBodyMs": 1810.835959
+            }
+          }
+        }
+      },
+      "restore": {
+        "en": {
+          "receipt": "form-batch-mVIkQw/restore-en/receipt.json",
+          "receiptSha256": "a3ea24e9a884167def0e75a550fb3cdd588a999b9f2b1d7d1a3dde56e2d86bfd",
+          "result": {
+            "passed": true,
+            "formRestore": true,
+            "run": "1",
+            "locale": "en",
+            "installedNormalProcesses": true,
+            "dirtyPreserved": true,
+            "detached": true,
+            "restored": true,
+            "mode": "normalRestart",
+            "sourceWritesDuringViewing": false,
+            "hostDriver": {
+              "suiteBodyMs": 557.516483
+            }
+          }
+        },
+        "ru": {
+          "receipt": "form-batch-mVIkQw/restore-ru/receipt.json",
+          "receiptSha256": "a47f1c0db0fb5648fbae07964b8f5a4f75c50a06955002d912be175c621ea384",
+          "result": {
+            "passed": true,
+            "formRestore": true,
+            "run": "1",
+            "locale": "ru",
+            "installedNormalProcesses": true,
+            "dirtyPreserved": true,
+            "detached": true,
+            "restored": true,
+            "mode": "normalRestart",
+            "sourceWritesDuringViewing": false,
+            "hostDriver": {
+              "suiteBodyMs": 355.5829110000001
+            }
+          }
+        }
+      }
+    }
+  },
+  "remaining": [
+    "Specific native canvas paint dependencies and common lifecycle helper.",
+    "Stable table header/footer/list identity and DOM regression.",
+    "Acyclic/readable frontend modules and scoped frontend type checking.",
+    "Full property/layout/state/style/profile matrices, Windows, other DPI, T164 and complete T165."
+  ]
+}

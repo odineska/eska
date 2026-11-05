@@ -1,0 +1,294 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "backendCommit": "3020073",
+  "clientCommit": "149773a48dd179549259ff7852d29bb54a0d5cda",
+  "referenceCommit": "593140d",
+  "reference": "tests/fixtures/forms/native-state-variants/number-choice-pixels.json",
+  "visualParityVerified": false,
+  "numericChoiceIconPixelsVerified": true,
+  "numericChoiceAreaPixelsVerified": false,
+  "conditions": {
+    "dpi": 96,
+    "scalePercent": 100,
+    "devicePixelRatio": 1,
+    "sizes": "Normal 10pt and enlarged 14pt value font; same fixed icon",
+    "states": "Enabled normal inputs, white background; separate explicit color case"
+  },
+  "implementation": [
+    "Fixed 9x11 calculator mark shared as simple SVG rectangles, white button background",
+    "Numeric choice button width20; vertical mark offset -1px; default separator inherits border color",
+    "Native InputColors confirms DarkGreen separator and white button despite LightYellow input / Blue value text",
+    "Other choice buttons and Windows retain their own rendering"
+  ],
+  "proof": {
+    "normalAndEnlargedIconPixelsBothLocales": 594,
+    "explicitColorIconPixelsBothLocales": 198,
+    "differingIconPixels": 0,
+    "nativeChoiceAreaPixelsBothLocales": 3000,
+    "differingChoiceAreaPixels": 12,
+    "remainingChoiceAreaPixels": "Two gray pixels at the right inner edge of each input, introduced by CSS corner rasterization; still fail strict area comparison",
+    "defaultWholeFormWith4pxShadow": {
+      "pixelsCompared": 42900,
+      "differingPixels": 223,
+      "exactRatio": 0.994802,
+      "masks": 0,
+      "tolerance": 0
+    },
+    "sourceWritesDuringViewing": false
+  },
+  "checks": {
+    "rust": "Backend unchanged: full fmt/check/clippy/test passed at3020073 (1488 passed,19 ignored)",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "node": {
+        "passed": 479,
+        "skipped": 11,
+        "failed": 0
+      },
+      "vsixByteCheck": {
+        "out": 59,
+        "docs": 38
+      }
+    }
+  },
+  "nativeRegressions": [
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.32
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 11.82
+    },
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.92
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 13.65
+    },
+    {
+      "name": "window-titles",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.98
+    },
+    {
+      "name": "window-titles",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.66
+    },
+    {
+      "name": "tab-titles",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.89
+    },
+    {
+      "name": "tab-titles",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.44
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.19
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.95
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.15
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 5.65
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.99
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 11.27
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.92
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.57
+    },
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.38
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.42
+    },
+    {
+      "name": "button-captions",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.62
+    },
+    {
+      "name": "button-captions",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 7.21
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.41
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.94
+    },
+    {
+      "name": "style",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 4.26
+    },
+    {
+      "name": "style",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.74
+    }
+  ],
+  "componentScreenshotResults": [
+    {
+      "name": "PagesAuto",
+      "locale": "en",
+      "areaPixels": 420,
+      "differingAreaPixels": 2,
+      "iconPixels": 99,
+      "differingIconPixels": 0
+    },
+    {
+      "name": "InputNumber",
+      "locale": "en",
+      "areaPixels": 420,
+      "differingAreaPixels": 2,
+      "iconPixels": 99,
+      "differingIconPixels": 0
+    },
+    {
+      "name": "Font14Number",
+      "locale": "en",
+      "areaPixels": 660,
+      "differingAreaPixels": 2,
+      "iconPixels": 99,
+      "differingIconPixels": 0
+    },
+    {
+      "name": "PagesAuto",
+      "locale": "ru",
+      "areaPixels": 420,
+      "differingAreaPixels": 2,
+      "iconPixels": 99,
+      "differingIconPixels": 0
+    },
+    {
+      "name": "InputNumber",
+      "locale": "ru",
+      "areaPixels": 420,
+      "differingAreaPixels": 2,
+      "iconPixels": 99,
+      "differingIconPixels": 0
+    },
+    {
+      "name": "Font14Number",
+      "locale": "ru",
+      "areaPixels": 660,
+      "differingAreaPixels": 2,
+      "iconPixels": 99,
+      "differingIconPixels": 0
+    }
+  ],
+  "remaining": [
+    "Numeric button area still has corner differences; whole form remains unaccepted",
+    "Input value text and all input/page/frame/shadow corner pixels remain in strict comparison",
+    "Other states/fonts/DPI, full styles/extensions/elements/performance matrix and Windows remain open"
+  ],
+  "screenshots": [
+    {
+      "file": "group-design-root-en.png",
+      "sha256": "fb2115c95280aec6d64c5b080e82cc07e6c175b11a5b6a8528155c1c96e73387"
+    },
+    {
+      "file": "state-InputNumber-en.png",
+      "sha256": "ece97b15e48e7b878424bda5f8fe17729a0aecb212be49d5a435db794744f439"
+    },
+    {
+      "file": "state-Font14Number-en.png",
+      "sha256": "191f6f2fdbfb1b40983cec83e79c3d41d890d9006b2ac95b500b4e9db29bbe35"
+    },
+    {
+      "file": "state-InputColors-en.png",
+      "sha256": "9a7e43bf2b99647074bccddbca0e384c250794bc8f63cbbf5d6f01b9c755c6c2"
+    },
+    {
+      "file": "group-design-root-ru.png",
+      "sha256": "afddc25f7b0e3d6cf5ba7f5116d48308ec40ffab6d284046b32ab8ade098ee88"
+    },
+    {
+      "file": "state-InputNumber-ru.png",
+      "sha256": "5db05ce631dd3bfe7b7b153475fcb685519eaa4b176f09d92f987709c3a2146c"
+    },
+    {
+      "file": "state-Font14Number-ru.png",
+      "sha256": "d6a780dbda92fb076ebb2318c1708c35694af1690038782257bfe24e1cfffd5f"
+    },
+    {
+      "file": "state-InputColors-ru.png",
+      "sha256": "c0c2e037dc842c27ca25154d495a27147a51d2ee3c5a60e474997f1835978c55"
+    }
+  ]
+}

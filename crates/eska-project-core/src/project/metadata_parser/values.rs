@@ -61,7 +61,7 @@ pub(super) fn localized(node: Node<'_, '_>) -> Option<Vec<LocalizedText>> {
 }
 
 /// Preserve qualified keys and annotations rather than guessing scalar types from text.
-pub(super) fn property(node: Node<'_, '_>, diagnostics: &mut Vec<Diagnostic>) -> MetadataProperty {
+pub fn property(node: Node<'_, '_>, diagnostics: &mut Vec<Diagnostic>) -> MetadataProperty {
     let tag = node.tag_name();
     let value = if node.has_tag_name((MD_NAMESPACE, "Synonym")) {
         localized(node).map_or(

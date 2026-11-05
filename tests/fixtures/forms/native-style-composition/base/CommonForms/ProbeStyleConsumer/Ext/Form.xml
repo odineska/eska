@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Composition probe</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Composition probe</v8:content>
+		</v8:item>
+	</Title>
+	<Width>60</Width>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<LabelDecoration name="Caption" id="1">
+			<TextColor>style:ProbeColor</TextColor>
+			<Font ref="style:ProbeFont" kind="StyleItem"/>
+			<Title formatted="false">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Styled caption</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Styled caption</v8:content>
+				</v8:item>
+			</Title>
+			<ContextMenu name="CaptionКонтекстноеМеню" id="6"/>
+			<ExtendedTooltip name="CaptionРасширеннаяПодсказка" id="7"/>
+		</LabelDecoration>
+		<UsualGroup name="Group" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Group</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Group</v8:content>
+				</v8:item>
+			</Title>
+			<Group>Vertical</Group>
+			<ExtendedTooltip name="GroupРасширеннаяПодсказка" id="8"/>
+			<ChildItems>
+				<LabelDecoration name="A" id="3">
+					<TextColor>style:ProbeColor</TextColor>
+					<Title formatted="false">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Style color</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Style color</v8:content>
+						</v8:item>
+					</Title>
+					<ContextMenu name="AКонтекстноеМеню" id="9"/>
+					<ExtendedTooltip name="AРасширеннаяПодсказка" id="10"/>
+				</LabelDecoration>
+				<LabelDecoration name="B" id="4">
+					<Font ref="style:ProbeFont" kind="StyleItem"/>
+					<Title formatted="false">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Style font</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Style font</v8:content>
+						</v8:item>
+					</Title>
+					<ContextMenu name="BКонтекстноеМеню" id="11"/>
+					<ExtendedTooltip name="BРасширеннаяПодсказка" id="12"/>
+				</LabelDecoration>
+			</ChildItems>
+		</UsualGroup>
+		<LabelDecoration name="C" id="5">
+			<TextColor>#123456</TextColor>
+			<Title formatted="false">
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Direct color</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Direct color</v8:content>
+				</v8:item>
+			</Title>
+			<ContextMenu name="CКонтекстноеМеню" id="13"/>
+			<ExtendedTooltip name="CРасширеннаяПодсказка" id="14"/>
+		</LabelDecoration>
+	</ChildItems>
+	<Attributes/>
+</Form>

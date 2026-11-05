@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "ordinaryButtonInteriorsVerified": true,
+  "primaryButtonAccepted": false,
+  "backendCommit": "13600c5aee408318a94c1913a6deb5e6c1ecee46",
+  "clientCommit": "8957104f2f5dd4df189e83e3ae57abf7924261e5",
+  "references": [
+    "tests/fixtures/forms/native-button-colors/manifest.json",
+    "tests/fixtures/forms/native-button-colors/metrics.json"
+  ],
+  "method": {
+    "scope": "Ordinary second button only; complete measured interior including gradient, text and antialiasing",
+    "casesPerLocale": 28,
+    "distinctColorsAt10Points": 18,
+    "additionalFontPoints": [
+      12,
+      16,
+      20,
+      24,
+      32
+    ],
+    "additionalColors": [
+      "#000080",
+      "#0a73b7"
+    ],
+    "regions": 56,
+    "pixelsCompared": 121504,
+    "differentRgbPixels": 0,
+    "maskedPixels": 0,
+    "exclusions": [],
+    "nativeOrigin": "Per case; selected outer frame boundary determines the origin",
+    "browserWebviewOrigin": [
+      348,
+      70
+    ]
+  },
+  "implementation": [
+    "Explicit BackColor provides the RGB base of the raised-button gradient",
+    "CSS and gray caption bitmap share calibrated upper/lower interpolation",
+    "Computed background is tracked separately from foreground and font; dirty updates redraw the caption",
+    "Native fill applies only to enabled ordinary Linux text buttons; primary, picture, menu and bar cases retain separate acceptance",
+    "Existing input/model/overlay protocol and unchanged WASM bytes"
+  ],
+  "checks": {
+    "rustUnchangedSince": "27d14f8",
+    "fullRustReference": "t155-native-style-palette-linux.json",
+    "client": {
+      "typecheck": "passed",
+      "compile": "passed",
+      "package": "passed",
+      "node": {
+        "passed": 483,
+        "skipped": 11,
+        "failed": 0
+      }
+    },
+    "nativeVsix": {
+      "suitesPassed": 28,
+      "runs": [
+        {
+          "suite": "button-colors",
+          "locale": "en",
+          "exit": 0,
+          "passed": true
+        },
+        {
+          "suite": "button-colors",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 35.88,
+          "passed": true
+        },
+        {
+          "suite": "states",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 9.46,
+          "passed": true
+        },
+        {
+          "suite": "states",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.46,
+          "passed": true
+        },
+        {
+          "suite": "groups",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.78,
+          "passed": true
+        },
+        {
+          "suite": "groups",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.31,
+          "passed": true
+        },
+        {
+          "suite": "window-titles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 4.96,
+          "passed": true
+        },
+        {
+          "suite": "window-titles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 8.06,
+          "passed": true
+        },
+        {
+          "suite": "tab-titles",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.22,
+          "passed": true
+        },
+        {
+          "suite": "tab-titles",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 16.69,
+          "passed": true
+        },
+        {
+          "suite": "renderer",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 10.09,
+          "passed": true
+        },
+        {
+          "suite": "renderer",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 13.04,
+          "passed": true
+        },
+        {
+          "suite": "palette",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 3.21,
+          "passed": true
+        },
+        {
+          "suite": "palette",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 5.92,
+          "passed": true
+        },
+        {
+          "suite": "tables",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.94,
+          "passed": true
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.71,
+          "passed": true
+        },
+        {
+          "suite": "application",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 3.98,
+          "passed": true
+        },
+        {
+          "suite": "application",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 6.73,
+          "passed": true
+        },
+        {
+          "suite": "button-metrics",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 7.63,
+          "passed": true
+        },
+        {
+          "suite": "button-metrics",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 10.34,
+          "passed": true
+        },
+        {
+          "suite": "button-captions",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 4.75,
+          "passed": true
+        },
+        {
+          "suite": "button-captions",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 7.23,
+          "passed": true
+        },
+        {
+          "suite": "preview",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 6.44,
+          "passed": true
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 9.11,
+          "passed": true
+        },
+        {
+          "suite": "style",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 3.96,
+          "passed": true
+        },
+        {
+          "suite": "style",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 6.61,
+          "passed": true
+        },
+        {
+          "suite": "style-palette",
+          "locale": "en",
+          "exit": 0,
+          "seconds": 7.63,
+          "passed": true
+        },
+        {
+          "suite": "style-palette",
+          "locale": "ru",
+          "exit": 0,
+          "seconds": 10.33,
+          "passed": true
+        }
+      ],
+      "dirtyBackgroundNativePixels": true,
+      "detachedBackgroundUpdates": true,
+      "stableButtonDom": true,
+      "sourceWritesDuringViewing": false
+    }
+  },
+  "wholePagesAutoComparison": {
+    "ru": {
+      "pixelsCompared": 42900,
+      "differentRgbPixels": 104,
+      "accepted": false
+    },
+    "en": {
+      "pixelsCompared": 42900,
+      "differentRgbPixels": 104,
+      "accepted": false
+    }
+  },
+  "remaining": [
+    "Primary ImportantColor and automatic primary ink",
+    "Button borders, corners, shadow, disabled and other non-ordinary states",
+    "Colored bold text and remaining font/family combinations",
+    "Full style and ordered extension appearance matrix",
+    "Other whole-form and complex-surface T152-T165 acceptance items",
+    "Native Windows and physical monitor/DPI acceptance"
+  ]
+}

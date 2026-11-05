@@ -1,0 +1,5512 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "scope": "Complete initial table search controls in the recorded 13px/gray-outline Linux variant: all field pixels, including corners, placeholder, separator and clear button. Native 11px/yellow states, other properties and complete toolbars remain unaccepted.",
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "nativeForms": 4,
+  "nativeImages": 8,
+  "newNativeImages": 0,
+  "newIndependentXmlCorpus": false,
+  "nativeInputs": {
+    "schemaVersion": 1,
+    "platformBuild": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "zoom": 100,
+    "scope": "Complete initial table search controls in the recorded 13px/gray-outline variant, including all corners/text/clear button. The native 11px/yellow variant remains unresolved and unaccepted.",
+    "noNewIndependentXmlCorpus": true,
+    "newNativeImages": 0,
+    "nativeImages": 8,
+    "nativeVariantSelectionRuleKnown": false,
+    "alternate11pxVariantRendered": false,
+    "pixelTolerance": 0,
+    "comparisonMasks": [],
+    "rows": [
+      {
+        "name": "Default",
+        "source": "tests/fixtures/forms/native-tables/Default.xml",
+        "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+        "locales": {
+          "en": {
+            "name": "search-field",
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Default.png",
+            "screenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5",
+            "nativeRegion": [
+              414,
+              551,
+              172,
+              23
+            ],
+            "offset": [
+              140,
+              -63
+            ],
+            "width": 172,
+            "height": 23,
+            "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+            "pixels": 3956,
+            "clearRegion": [
+              157,
+              7,
+              7,
+              7
+            ],
+            "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+          },
+          "ru": {
+            "name": "search-field",
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Default.png",
+            "screenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38",
+            "nativeRegion": [
+              448,
+              551,
+              172,
+              23
+            ],
+            "offset": [
+              174,
+              -63
+            ],
+            "width": 172,
+            "height": 23,
+            "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+            "pixels": 3956,
+            "clearRegion": [
+              157,
+              7,
+              7,
+              7
+            ],
+            "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+          }
+        }
+      },
+      {
+        "name": "ReadOnly",
+        "source": "tests/fixtures/forms/native-tables/ReadOnly.xml",
+        "sourceSha256": "efa9ef102cb1e3c1f37543f692bbf4c58980dc2f0cb56bc29decbbb62e3ba0d3",
+        "locales": {
+          "en": {
+            "name": "search-field",
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/search-en-ReadOnly-first.png",
+            "screenshotSha256": "b0b269c99691f1886cd181cc2dcb7cf3186e680f5870b02c0e2ca8903aa870a5",
+            "nativeRegion": [
+              414,
+              551,
+              172,
+              23
+            ],
+            "offset": [
+              140,
+              -63
+            ],
+            "width": 172,
+            "height": 23,
+            "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+            "pixels": 3956,
+            "clearRegion": [
+              157,
+              7,
+              7,
+              7
+            ],
+            "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+          },
+          "ru": {
+            "name": "search-field",
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/search-ru-ReadOnly-first.png",
+            "screenshotSha256": "fa9e73f1a2bc4dde84679dcf569be818a5924f24608b45d0e9d7fd24d6026e87",
+            "nativeRegion": [
+              448,
+              551,
+              172,
+              23
+            ],
+            "offset": [
+              174,
+              -63
+            ],
+            "width": 172,
+            "height": 23,
+            "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+            "pixels": 3956,
+            "clearRegion": [
+              157,
+              7,
+              7,
+              7
+            ],
+            "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+          }
+        }
+      },
+      {
+        "name": "MetadataTable",
+        "source": "tests/fixtures/forms/native-context-tables/MetadataTable.xml",
+        "sourceSha256": "e892ddbe46307d58fc4fe5baf7569f8d5b33f3ff36a35eb8d76b1587341685a0",
+        "locales": {
+          "en": {
+            "name": "search-field",
+            "nativeScreenshot": "native-context-pixels-g93fkhea/en-MetadataTable-complete.png",
+            "screenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825",
+            "nativeRegion": [
+              417,
+              551,
+              260,
+              23
+            ],
+            "offset": [
+              143,
+              -63
+            ],
+            "width": 260,
+            "height": 23,
+            "rgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+            "pixels": 5980,
+            "clearRegion": [
+              245,
+              7,
+              7,
+              7
+            ],
+            "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+          },
+          "ru": {
+            "name": "search-field",
+            "nativeScreenshot": "native-context-pixels-g93fkhea/search-ru-Metadata-first.png",
+            "screenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb",
+            "nativeRegion": [
+              465,
+              551,
+              260,
+              23
+            ],
+            "offset": [
+              191,
+              -63
+            ],
+            "width": 260,
+            "height": 23,
+            "rgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+            "pixels": 5980,
+            "clearRegion": [
+              245,
+              7,
+              7,
+              7
+            ],
+            "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+          }
+        }
+      },
+      {
+        "name": "DynamicList",
+        "source": "tests/fixtures/forms/native-context-tables/DynamicList.xml",
+        "sourceSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+        "locales": {
+          "en": {
+            "name": "search-field",
+            "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+            "screenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f",
+            "nativeRegion": [
+              388,
+              399,
+              172,
+              23
+            ],
+            "offset": [
+              114,
+              -63
+            ],
+            "width": 172,
+            "height": 23,
+            "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+            "pixels": 3956,
+            "clearRegion": [
+              157,
+              7,
+              7,
+              7
+            ],
+            "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+          },
+          "ru": {
+            "name": "search-field",
+            "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+            "screenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723",
+            "nativeRegion": [
+              400,
+              399,
+              172,
+              23
+            ],
+            "offset": [
+              126,
+              -63
+            ],
+            "width": 172,
+            "height": 23,
+            "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+            "pixels": 3956,
+            "clearRegion": [
+              157,
+              7,
+              7,
+              7
+            ],
+            "clearRgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+          }
+        }
+      }
+    ],
+    "clearStencil": {
+      "width": 7,
+      "height": 7,
+      "alpha": [
+        0,
+        27,
+        0,
+        0,
+        0,
+        27,
+        0,
+        30,
+        212,
+        57,
+        0,
+        57,
+        212,
+        30,
+        0,
+        57,
+        212,
+        105,
+        212,
+        59,
+        0,
+        0,
+        0,
+        106,
+        231,
+        106,
+        0,
+        0,
+        0,
+        57,
+        212,
+        106,
+        212,
+        57,
+        0,
+        30,
+        212,
+        57,
+        0,
+        57,
+        212,
+        30,
+        0,
+        27,
+        0,
+        0,
+        0,
+        27,
+        0
+      ],
+      "foreground": "#4d4d4d",
+      "background": "#ffffff",
+      "nativeImagesVerified": 8,
+      "rgbSha256": "8683ff12f66ba3a6558e2d64efd0f6c4568222fdb2e61a8d0d6e19d12b0b2527"
+    },
+    "corners": {
+      "source": "shared inputBorderPixels with choice=true",
+      "border": [
+        160,
+        160,
+        160
+      ],
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "outside": [
+        255,
+        255,
+        255
+      ],
+      "pixelsPerField": 36,
+      "nativeImagesVerified": 8,
+      "rgbCorners": [
+        [
+          [
+            253,
+            253,
+            253
+          ],
+          [
+            204,
+            204,
+            204
+          ],
+          [
+            169,
+            169,
+            169
+          ],
+          [
+            204,
+            204,
+            204
+          ],
+          [
+            206,
+            206,
+            206
+          ],
+          [
+            254,
+            254,
+            254
+          ],
+          [
+            169,
+            169,
+            169
+          ],
+          [
+            254,
+            254,
+            254
+          ],
+          [
+            255,
+            255,
+            255
+          ]
+        ],
+        [
+          [
+            169,
+            169,
+            169
+          ],
+          [
+            204,
+            204,
+            204
+          ],
+          [
+            253,
+            253,
+            253
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            220,
+            220,
+            220
+          ],
+          [
+            204,
+            204,
+            204
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            169,
+            169,
+            169
+          ]
+        ],
+        [
+          [
+            169,
+            169,
+            169
+          ],
+          [
+            254,
+            254,
+            254
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            204,
+            204,
+            204
+          ],
+          [
+            206,
+            206,
+            206
+          ],
+          [
+            254,
+            254,
+            254
+          ],
+          [
+            253,
+            253,
+            253
+          ],
+          [
+            204,
+            204,
+            204
+          ],
+          [
+            169,
+            169,
+            169
+          ]
+        ],
+        [
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            169,
+            169,
+            169
+          ],
+          [
+            255,
+            255,
+            255
+          ],
+          [
+            220,
+            220,
+            220
+          ],
+          [
+            204,
+            204,
+            204
+          ],
+          [
+            169,
+            169,
+            169
+          ],
+          [
+            204,
+            204,
+            204
+          ],
+          [
+            253,
+            253,
+            253
+          ]
+        ]
+      ]
+    }
+  },
+  "nativeMetricsSha256": "7cff8a8a3446e8aefa5db16138b9962748223e148283861773b8074e736e6f5d",
+  "initialSearchFieldPixelParity": true,
+  "nativeVariantSelectionRuleKnown": false,
+  "alternate11pxVariantRendered": false,
+  "wholeToolbarPixelParity": false,
+  "wholeFormVisualParity": false,
+  "fullProfileAccepted": false,
+  "noBslModulesOrHandlers": true,
+  "implementation": [
+    "NativeInputCorners is shared by existing ordinary/choice inputs and TableSearch; the existing choice-input extra right pixel remains unchanged, while search controls allocate their complete width.",
+    "All 36 search corner pixels reuse inputBorderPixels(choice=true), including its additional white composition on the clear-button side.",
+    "The 7x7 clear alpha stencil is verified against all eight native fields and precomposes the current foreground/background. Browser multiplication-character rendering is retained as fallback.",
+    "TableSearch preserves the real read-only input, source selection, normal/wide layout, dirty transitions and actual detached window. Its existing placeholder renderer is reused.",
+    "The final correction changes only the search-clear SVG top inset by 2px; all 1302 other packaged runtime files match the intermediate candidate."
+  ],
+  "checks": {
+    "node": {
+      "passed": 519,
+      "failed": 0,
+      "skipped": 11,
+      "total": 530,
+      "log": "table-search-diagnostic-w3qxgkw2/search-fields-node-tests.log",
+      "logSha256": "6a3f36b593c2f22958a8de66fe3fd1c303ecf3eb31fbb31b540db70f3b9e57cb",
+      "note": "The final CSS change only moves the search-clear SVG by 2px; all JS/test sources match this Node run."
+    },
+    "nativeGeometryUnit": {
+      "passed": true,
+      "cornerPixelsPerField": 36,
+      "clearPixelsPerField": 49,
+      "nativeImagesVerified": 8,
+      "differentRgbPixels": 0
+    },
+    "backend": {
+      "codeChangedInThisSlice": false,
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "completeChecksReuse": "docs/measurements/t158-native-button-types-linux.json",
+      "cargoPassed": 1520,
+      "cargoFailed": 0,
+      "cargoIgnored": 19,
+      "sourceHashesVerifiedAgainstBatch": true,
+      "rustSourcesAndCargoFilesUnchangedSince": "ad8020e"
+    }
+  },
+  "beforeFix": {
+    "directory": "table-search-diagnostic-w3qxgkw2",
+    "reference": "initial-13px",
+    "vsixSha256": "1c3693cb0901b61af5102d9e2868885cd1bcadc0fc3f81b88902ad831cf089c2",
+    "newGuiRun": false,
+    "source": "Previously retained complete screenshots; all eight normal fields differ by 62 pixels in corners/clear glyph.",
+    "measurements": {
+      "en": [
+        {
+          "name": "Default",
+          "leftInToolbar": 140,
+          "width": 172,
+          "height": 23,
+          "differentPixels": 62
+        },
+        {
+          "name": "ReadOnly",
+          "leftInToolbar": 140,
+          "width": 172,
+          "height": 23,
+          "differentPixels": 62
+        },
+        {
+          "name": "MetadataTable",
+          "leftInToolbar": 143,
+          "width": 260,
+          "height": 23,
+          "differentPixels": 62
+        },
+        {
+          "name": "DynamicList",
+          "leftInToolbar": 114,
+          "width": 172,
+          "height": 23,
+          "differentPixels": 62
+        }
+      ],
+      "ru": [
+        {
+          "name": "Default",
+          "leftInToolbar": 174,
+          "width": 172,
+          "height": 23,
+          "differentPixels": 62
+        },
+        {
+          "name": "ReadOnly",
+          "leftInToolbar": 174,
+          "width": 172,
+          "height": 23,
+          "differentPixels": 62
+        },
+        {
+          "name": "MetadataTable",
+          "leftInToolbar": 191,
+          "width": 260,
+          "height": 23,
+          "differentPixels": 62
+        },
+        {
+          "name": "DynamicList",
+          "leftInToolbar": 126,
+          "width": 172,
+          "height": 23,
+          "differentPixels": 62
+        }
+      ]
+    }
+  },
+  "intermediateCandidate": {
+    "directory": "form-batch-zTsa8s",
+    "passed": false,
+    "pairsPassed": 12,
+    "pairsFailed": 2,
+    "publishedCases": 256,
+    "batchSha256": "3f3a2ef5a059e4234548cdbccc5715092f5643e73f88abecaf7f5d5966477568",
+    "vsixSha256": "ccd6440c270665090789f7a2924769568264136e2758e67682c1c1828bf51f35",
+    "fieldMismatch": "42 pixels per field: the clear stencil was 2px too high. All corners, placeholders and menu glyphs already matched.",
+    "failures": {
+      "en": [
+        {
+          "label": "Default",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 463,
+            "height": 342
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 429,
+            "height": 227
+          },
+          "headers": [
+            {
+              "text": "Text",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Amount",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Active",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            429,
+            227
+          ],
+          "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+          "pixels": 97383,
+          "additionalRegions": [
+            {
+              "name": "menu-caption",
+              "region": [
+                724,
+                390,
+                75,
+                15
+              ],
+              "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+              "pixels": 1125,
+              "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+              "passed": true
+            },
+            {
+              "name": "menu-arrow",
+              "region": [
+                805,
+                398,
+                6,
+                3
+              ],
+              "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "pixels": 18,
+              "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "passed": true
+            },
+            {
+              "name": "search-placeholder",
+              "region": [
+                531,
+                391,
+                91,
+                15
+              ],
+              "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+              "pixels": 1365,
+              "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+              "passed": true
+            },
+            {
+              "name": "search-field",
+              "region": [
+                529,
+                387,
+                172,
+                23
+              ],
+              "rgbSha256": "276fdfafa63585f90a72a057f0468fba81bb7aa9c63d75641607c4f4ecb29b0b",
+              "pixels": 3956,
+              "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+              "passed": false
+            }
+          ],
+          "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 0
+        },
+        {
+          "label": "ReadOnly",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 463,
+            "height": 342
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 429,
+            "height": 227
+          },
+          "headers": [
+            {
+              "text": "Text",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Amount",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Active",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            429,
+            227
+          ],
+          "rgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+          "pixels": 97383,
+          "additionalRegions": [
+            {
+              "name": "menu-caption",
+              "region": [
+                724,
+                390,
+                75,
+                15
+              ],
+              "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+              "pixels": 1125,
+              "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+              "passed": true
+            },
+            {
+              "name": "menu-arrow",
+              "region": [
+                805,
+                398,
+                6,
+                3
+              ],
+              "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "pixels": 18,
+              "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "passed": true
+            },
+            {
+              "name": "search-placeholder",
+              "region": [
+                531,
+                391,
+                91,
+                15
+              ],
+              "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+              "pixels": 1365,
+              "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+              "passed": true
+            },
+            {
+              "name": "search-field",
+              "region": [
+                529,
+                387,
+                172,
+                23
+              ],
+              "rgbSha256": "276fdfafa63585f90a72a057f0468fba81bb7aa9c63d75641607c4f4ecb29b0b",
+              "pixels": 3956,
+              "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+              "passed": false
+            }
+          ],
+          "expectedRgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 0
+        },
+        {
+          "label": "MetadataTable",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 554,
+            "height": 342
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 520,
+            "height": 227
+          },
+          "headers": [
+            {
+              "text": "#",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Text",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Amount",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Active",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            520,
+            227
+          ],
+          "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+          "pixels": 118040,
+          "additionalRegions": [
+            {
+              "name": "menu-caption",
+              "region": [
+                815,
+                390,
+                75,
+                15
+              ],
+              "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+              "pixels": 1125,
+              "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+              "passed": true
+            },
+            {
+              "name": "menu-arrow",
+              "region": [
+                896,
+                398,
+                6,
+                3
+              ],
+              "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "pixels": 18,
+              "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "passed": true
+            },
+            {
+              "name": "search-placeholder",
+              "region": [
+                534,
+                391,
+                91,
+                15
+              ],
+              "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+              "pixels": 1365,
+              "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+              "passed": true
+            },
+            {
+              "name": "search-field",
+              "region": [
+                532,
+                387,
+                260,
+                23
+              ],
+              "rgbSha256": "1e396eef3ffa6a0fa38410511d0cdeb74ed712ff939613a6e5f048eae9583b39",
+              "pixels": 5980,
+              "expectedRgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+              "passed": false
+            }
+          ],
+          "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 0
+        },
+        {
+          "label": "DynamicList",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 488,
+            "height": 588
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 454,
+            "height": 452
+          },
+          "headers": [
+            {
+              "text": "Code",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Description",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            454,
+            473
+          ],
+          "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+          "pixels": 214742,
+          "additionalRegions": [
+            {
+              "name": "menu-caption",
+              "region": [
+                749,
+                390,
+                75,
+                15
+              ],
+              "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+              "pixels": 1125,
+              "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+              "passed": true
+            },
+            {
+              "name": "menu-arrow",
+              "region": [
+                830,
+                398,
+                6,
+                3
+              ],
+              "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "pixels": 18,
+              "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "passed": true
+            },
+            {
+              "name": "search-placeholder",
+              "region": [
+                505,
+                391,
+                91,
+                15
+              ],
+              "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+              "pixels": 1365,
+              "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+              "passed": true
+            },
+            {
+              "name": "search-field",
+              "region": [
+                503,
+                387,
+                172,
+                23
+              ],
+              "rgbSha256": "276fdfafa63585f90a72a057f0468fba81bb7aa9c63d75641607c4f4ecb29b0b",
+              "pixels": 3956,
+              "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+              "passed": false
+            }
+          ],
+          "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 21
+        }
+      ],
+      "ru": [
+        {
+          "label": "Default",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 449,
+            "height": 342
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 415,
+            "height": 227
+          },
+          "headers": [
+            {
+              "text": "Text",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Amount",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Active",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            415,
+            227
+          ],
+          "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+          "pixels": 94205,
+          "additionalRegions": [
+            {
+              "name": "menu-caption",
+              "region": [
+                758,
+                390,
+                27,
+                15
+              ],
+              "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+              "pixels": 405,
+              "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+              "passed": true
+            },
+            {
+              "name": "menu-arrow",
+              "region": [
+                791,
+                398,
+                6,
+                3
+              ],
+              "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "pixels": 18,
+              "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "passed": true
+            },
+            {
+              "name": "search-placeholder",
+              "region": [
+                566,
+                391,
+                85,
+                15
+              ],
+              "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+              "pixels": 1275,
+              "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+              "passed": true
+            },
+            {
+              "name": "search-field",
+              "region": [
+                563,
+                387,
+                172,
+                23
+              ],
+              "rgbSha256": "f26e271fbeca5a5d64f0466185e7ec06a3af34c1e8bdeadec0bc1414d30f652a",
+              "pixels": 3956,
+              "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+              "passed": false
+            }
+          ],
+          "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 0
+        },
+        {
+          "label": "ReadOnly",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 449,
+            "height": 342
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 415,
+            "height": 227
+          },
+          "headers": [
+            {
+              "text": "Text",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Amount",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Active",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            415,
+            227
+          ],
+          "rgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+          "pixels": 94205,
+          "additionalRegions": [
+            {
+              "name": "menu-caption",
+              "region": [
+                758,
+                390,
+                27,
+                15
+              ],
+              "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+              "pixels": 405,
+              "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+              "passed": true
+            },
+            {
+              "name": "menu-arrow",
+              "region": [
+                791,
+                398,
+                6,
+                3
+              ],
+              "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "pixels": 18,
+              "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "passed": true
+            },
+            {
+              "name": "search-placeholder",
+              "region": [
+                566,
+                391,
+                85,
+                15
+              ],
+              "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+              "pixels": 1275,
+              "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+              "passed": true
+            },
+            {
+              "name": "search-field",
+              "region": [
+                563,
+                387,
+                172,
+                23
+              ],
+              "rgbSha256": "f26e271fbeca5a5d64f0466185e7ec06a3af34c1e8bdeadec0bc1414d30f652a",
+              "pixels": 3956,
+              "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+              "passed": false
+            }
+          ],
+          "expectedRgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 0
+        },
+        {
+          "label": "MetadataTable",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 554,
+            "height": 342
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 520,
+            "height": 227
+          },
+          "headers": [
+            {
+              "text": "N",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Text",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Amount",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Active",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            520,
+            227
+          ],
+          "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+          "pixels": 118040,
+          "additionalRegions": [
+            {
+              "name": "menu-caption",
+              "region": [
+                863,
+                390,
+                27,
+                15
+              ],
+              "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+              "pixels": 405,
+              "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+              "passed": true
+            },
+            {
+              "name": "menu-arrow",
+              "region": [
+                896,
+                398,
+                6,
+                3
+              ],
+              "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "pixels": 18,
+              "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "passed": true
+            },
+            {
+              "name": "search-placeholder",
+              "region": [
+                583,
+                391,
+                85,
+                15
+              ],
+              "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+              "pixels": 1275,
+              "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+              "passed": true
+            },
+            {
+              "name": "search-field",
+              "region": [
+                580,
+                387,
+                260,
+                23
+              ],
+              "rgbSha256": "f8889bd584140cb665a7e3e2730cfb96280f391e6175c1286443caa7cdeafdbd",
+              "pixels": 5980,
+              "expectedRgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+              "passed": false
+            }
+          ],
+          "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 0
+        },
+        {
+          "label": "DynamicList",
+          "passed": false,
+          "geometryMatches": true,
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 452,
+            "height": 588
+          },
+          "control": {
+            "x": 41,
+            "y": 380,
+            "width": 418,
+            "height": 452
+          },
+          "headers": [
+            {
+              "text": "Код",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            },
+            {
+              "text": "Наименование",
+              "height": 30,
+              "color": "rgb(77, 77, 77)",
+              "font": "13.3333px",
+              "status": "ready"
+            }
+          ],
+          "origin": {
+            "x": 376,
+            "y": 347
+          },
+          "region": [
+            389,
+            450,
+            418,
+            473
+          ],
+          "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+          "pixels": 197714,
+          "additionalRegions": [
+            {
+              "name": "menu-caption",
+              "region": [
+                761,
+                390,
+                27,
+                15
+              ],
+              "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+              "pixels": 405,
+              "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+              "passed": true
+            },
+            {
+              "name": "menu-arrow",
+              "region": [
+                794,
+                398,
+                6,
+                3
+              ],
+              "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "pixels": 18,
+              "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+              "passed": true
+            },
+            {
+              "name": "search-placeholder",
+              "region": [
+                518,
+                391,
+                85,
+                15
+              ],
+              "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+              "pixels": 1275,
+              "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+              "passed": true
+            },
+            {
+              "name": "search-field",
+              "region": [
+                515,
+                387,
+                172,
+                23
+              ],
+              "rgbSha256": "f26e271fbeca5a5d64f0466185e7ec06a3af34c1e8bdeadec0bc1414d30f652a",
+              "pixels": 3956,
+              "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+              "passed": false
+            }
+          ],
+          "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+          "captureAttempts": 1,
+          "wholeGridControlCompared": true,
+          "extraBottom": 21
+        }
+      ]
+    },
+    "runs": [
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 1,
+        "signal": null,
+        "seconds": 7.626513119000001,
+        "passed": false,
+        "inputsStable": true,
+        "classification": "unclassified",
+        "log": "table-pixels-en/driver.log",
+        "receipt": "table-pixels-en/receipt.json",
+        "caseIds": [],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 934.8435929999999,
+          "runtimeVerificationMs": 289.5299409999999,
+          "preHostMs": 1232.147183,
+          "cleanupMs": 36.08175300000039,
+          "totalMs": 7486.4341380000005
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 1,
+        "signal": null,
+        "seconds": 10.032067323000001,
+        "passed": false,
+        "inputsStable": true,
+        "classification": "unclassified",
+        "log": "table-pixels-ru/driver.log",
+        "receipt": "table-pixels-ru/receipt.json",
+        "caseIds": [],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 838.24289,
+          "runtimeVerificationMs": 284.722535,
+          "preHostMs": 1145.995333,
+          "cleanupMs": 38.34812299999976,
+          "totalMs": 9890.564054
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.554253905000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-en/driver.log",
+        "receipt": "tables-en/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 742.895102,
+          "runtimeVerificationMs": 330.8373080000001,
+          "preHostMs": 1082.757264,
+          "cleanupMs": 38.14462300000014,
+          "totalMs": 7408.86106
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.277984945,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-ru/driver.log",
+        "receipt": "tables-ru/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 918.9255860000001,
+          "runtimeVerificationMs": 318.4687519999999,
+          "preHostMs": 1259.449664,
+          "cleanupMs": 38.509289000001445,
+          "totalMs": 10163.280864999999
+        }
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 18.622297262,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "input-fonts-en/driver.log",
+        "receipt": "input-fonts-en/receipt.json",
+        "caseIds": [
+          "input-fonts/Font4",
+          "input-fonts/Font5",
+          "input-fonts/Font6",
+          "input-fonts/Font7Disabled",
+          "input-fonts/Font7ReadOnly",
+          "input-fonts/Font7Width20",
+          "input-fonts/Font8Width20",
+          "input-fonts/Font9Width20",
+          "input-fonts/Font10Width20",
+          "input-fonts/dirty-Font32Width20",
+          "input-fonts/floating-Font10Width20",
+          "input-fonts/floating-dirty-Font32Width20",
+          "input-fonts/reattached-Font10Width20",
+          "input-fonts/Font11Width20",
+          "input-fonts/Font12Width20",
+          "input-fonts/Font13Width20",
+          "input-fonts/Font14Width20",
+          "input-fonts/Font15Width20",
+          "input-fonts/Font16Width20",
+          "input-fonts/Font17Width20",
+          "input-fonts/Font18Width20",
+          "input-fonts/Font18Bold",
+          "input-fonts/Font19Width20",
+          "input-fonts/Font20Width20",
+          "input-fonts/Font21Width20",
+          "input-fonts/Font22Width20",
+          "input-fonts/Font23Width20",
+          "input-fonts/Font24Width20",
+          "input-fonts/Font26Width20",
+          "input-fonts/Font28Width20",
+          "input-fonts/Font32Width20",
+          "input-fonts/Font40Width20",
+          "input-fonts/Font48Width20",
+          "input-fonts/Font20Width1",
+          "input-fonts/Font32Width1",
+          "input-fonts/Font48Width1",
+          "input-fonts/Font18Width1",
+          "input-fonts/Font20Width2"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 891.926563,
+          "runtimeVerificationMs": 310.53681099999994,
+          "preHostMs": 1218.037172,
+          "cleanupMs": 40.58666000000085,
+          "totalMs": 18489.747682
+        }
+      },
+      {
+        "suite": "input-fonts",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 21.191049270999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "input-fonts-ru/driver.log",
+        "receipt": "input-fonts-ru/receipt.json",
+        "caseIds": [
+          "input-fonts/Font4",
+          "input-fonts/Font5",
+          "input-fonts/Font6",
+          "input-fonts/Font7Disabled",
+          "input-fonts/Font7ReadOnly",
+          "input-fonts/Font7Width20",
+          "input-fonts/Font8Width20",
+          "input-fonts/Font9Width20",
+          "input-fonts/Font10Width20",
+          "input-fonts/dirty-Font32Width20",
+          "input-fonts/floating-Font10Width20",
+          "input-fonts/floating-dirty-Font32Width20",
+          "input-fonts/reattached-Font10Width20",
+          "input-fonts/Font11Width20",
+          "input-fonts/Font12Width20",
+          "input-fonts/Font13Width20",
+          "input-fonts/Font14Width20",
+          "input-fonts/Font15Width20",
+          "input-fonts/Font16Width20",
+          "input-fonts/Font17Width20",
+          "input-fonts/Font18Width20",
+          "input-fonts/Font18Bold",
+          "input-fonts/Font19Width20",
+          "input-fonts/Font20Width20",
+          "input-fonts/Font21Width20",
+          "input-fonts/Font22Width20",
+          "input-fonts/Font23Width20",
+          "input-fonts/Font24Width20",
+          "input-fonts/Font26Width20",
+          "input-fonts/Font28Width20",
+          "input-fonts/Font32Width20",
+          "input-fonts/Font40Width20",
+          "input-fonts/Font48Width20",
+          "input-fonts/Font20Width1",
+          "input-fonts/Font32Width1",
+          "input-fonts/Font48Width1",
+          "input-fonts/Font18Width1",
+          "input-fonts/Font20Width2"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 808.4061650000001,
+          "runtimeVerificationMs": 304.65403200000003,
+          "preHostMs": 1143.569338,
+          "cleanupMs": 40.8235339999992,
+          "totalMs": 21070.625412999998
+        }
+      },
+      {
+        "suite": "input-dates",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 20.345372063999996,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "input-dates-en/driver.log",
+        "receipt": "input-dates-en/receipt.json",
+        "caseIds": [
+          "input-dates/Date10",
+          "input-dates/dirty-Time10",
+          "input-dates/floating-Date10",
+          "input-dates/floating-dirty-Time10",
+          "input-dates/reattached-Date10",
+          "input-dates/DateTime10",
+          "input-dates/Time10",
+          "input-dates/DateDisabled4",
+          "input-dates/DateDisabled5",
+          "input-dates/DateDisabled6",
+          "input-dates/DateDisabled7",
+          "input-dates/DateDisabled10",
+          "input-dates/DateReadOnly10",
+          "input-dates/dirty-DateReadOnlyChoice10",
+          "input-dates/floating-DateReadOnly10",
+          "input-dates/floating-dirty-DateReadOnlyChoice10",
+          "input-dates/reattached-DateReadOnly10",
+          "input-dates/DateReadOnlyChoice10",
+          "input-dates/Time7",
+          "input-dates/DateTime14",
+          "input-dates/Time18",
+          "input-dates/DateTime24",
+          "input-dates/Time48",
+          "input-dates/DateTime18",
+          "input-dates/Font4",
+          "input-dates/dirty-DateDisabled4",
+          "input-dates/floating-Font4",
+          "input-dates/floating-dirty-DateDisabled4",
+          "input-dates/reattached-Font4",
+          "input-dates/Font5",
+          "input-dates/Font6",
+          "input-dates/Font7Width20",
+          "input-dates/Font8Width20",
+          "input-dates/dirty-Font48Width20",
+          "input-dates/floating-Font8Width20",
+          "input-dates/floating-dirty-Font48Width20",
+          "input-dates/reattached-Font8Width20",
+          "input-dates/Font12Width20",
+          "input-dates/Font14Width20",
+          "input-dates/Font18Width20",
+          "input-dates/Font32Width20",
+          "input-dates/Font48Width20"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 809.818912,
+          "runtimeVerificationMs": 354.4723379999999,
+          "preHostMs": 1178.090302,
+          "cleanupMs": 36.55979400000069,
+          "totalMs": 20201.870382
+        }
+      },
+      {
+        "suite": "input-dates",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 23.30275866800001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "input-dates-ru/driver.log",
+        "receipt": "input-dates-ru/receipt.json",
+        "caseIds": [
+          "input-dates/Date10",
+          "input-dates/dirty-Time10",
+          "input-dates/floating-Date10",
+          "input-dates/floating-dirty-Time10",
+          "input-dates/reattached-Date10",
+          "input-dates/DateTime10",
+          "input-dates/Time10",
+          "input-dates/DateDisabled4",
+          "input-dates/DateDisabled5",
+          "input-dates/DateDisabled6",
+          "input-dates/DateDisabled7",
+          "input-dates/DateDisabled10",
+          "input-dates/DateReadOnly10",
+          "input-dates/dirty-DateReadOnlyChoice10",
+          "input-dates/floating-DateReadOnly10",
+          "input-dates/floating-dirty-DateReadOnlyChoice10",
+          "input-dates/reattached-DateReadOnly10",
+          "input-dates/DateReadOnlyChoice10",
+          "input-dates/Time7",
+          "input-dates/DateTime14",
+          "input-dates/Time18",
+          "input-dates/DateTime24",
+          "input-dates/Time48",
+          "input-dates/DateTime18",
+          "input-dates/Font4",
+          "input-dates/dirty-DateDisabled4",
+          "input-dates/floating-Font4",
+          "input-dates/floating-dirty-DateDisabled4",
+          "input-dates/reattached-Font4",
+          "input-dates/Font5",
+          "input-dates/Font6",
+          "input-dates/Font7Width20",
+          "input-dates/Font8Width20",
+          "input-dates/dirty-Font48Width20",
+          "input-dates/floating-Font8Width20",
+          "input-dates/floating-dirty-Font48Width20",
+          "input-dates/reattached-Font8Width20",
+          "input-dates/Font12Width20",
+          "input-dates/Font14Width20",
+          "input-dates/Font18Width20",
+          "input-dates/Font32Width20",
+          "input-dates/Font48Width20"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 808.985914,
+          "runtimeVerificationMs": 319.20912499999986,
+          "preHostMs": 1154.788271,
+          "cleanupMs": 37.77654199999961,
+          "totalMs": 23145.672016999997
+        }
+      },
+      {
+        "suite": "states",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.019009425000011,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "states-en/driver.log",
+        "receipt": "states-en/receipt.json",
+        "caseIds": [
+          "states/InputHidden",
+          "states/InputDisabled",
+          "states/InputReadOnly",
+          "states/InputColors",
+          "states/InputFont",
+          "states/InputNumber",
+          "states/InputDate",
+          "states/InputDateTime",
+          "states/InputTime",
+          "states/Font10Bold",
+          "states/Font12Normal",
+          "states/Font14Normal",
+          "states/Font16Normal",
+          "states/Font14Number",
+          "states/TableHidden"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 796.79619,
+          "runtimeVerificationMs": 288.71381800000006,
+          "preHostMs": 1093.217116,
+          "cleanupMs": 36.1303369999996,
+          "totalMs": 6873.606914
+        }
+      },
+      {
+        "suite": "states",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 9.599530032999988,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "states-ru/driver.log",
+        "receipt": "states-ru/receipt.json",
+        "caseIds": [
+          "states/InputHidden",
+          "states/InputDisabled",
+          "states/InputReadOnly",
+          "states/InputColors",
+          "states/InputFont",
+          "states/InputNumber",
+          "states/InputDate",
+          "states/InputDateTime",
+          "states/InputTime",
+          "states/Font10Bold",
+          "states/Font12Normal",
+          "states/Font14Normal",
+          "states/Font16Normal",
+          "states/Font14Number",
+          "states/TableHidden"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 819.5641810000001,
+          "runtimeVerificationMs": 312.65218100000004,
+          "preHostMs": 1154.629896,
+          "cleanupMs": 34.695714999999836,
+          "totalMs": 9469.302196999999
+        }
+      },
+      {
+        "suite": "style-composition",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 5.566869898000005,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "style-composition-en/driver.log",
+        "receipt": "style-composition-en/receipt.json",
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 811.884532,
+          "runtimeVerificationMs": 293.4486820000001,
+          "preHostMs": 1122.5060090000002,
+          "cleanupMs": 35.44700499999999,
+          "totalMs": 5439.285264
+        }
+      },
+      {
+        "suite": "style-composition",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.32746885600002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "style-composition-ru/driver.log",
+        "receipt": "style-composition-ru/receipt.json",
+        "caseIds": [
+          "style-composition/initial-base-item-fallback",
+          "style-composition/foreign-layer-style-value-ignored",
+          "style-composition/unselected-base-style-dirty",
+          "style-composition/selected-base-style-dirty",
+          "style-composition/borrowed-alias-keeps-base-style-table",
+          "style-composition/detached-base-style-dirty",
+          "style-composition/reattached-base-style",
+          "style-composition/own-item-default-value",
+          "style-composition/inherited-style-without-cfe-default",
+          "style-composition/inherited-own-style-override",
+          "style-composition/detached-default-value-shadowed",
+          "style-composition/detached-own-item-default-restored",
+          "style-composition/reattached-own-style"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 822.325342,
+          "runtimeVerificationMs": 307.1486940000001,
+          "preHostMs": 1156.481767,
+          "cleanupMs": 36.618586000000505,
+          "totalMs": 8171.087036
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 4.4175032399999905,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-en/driver.log",
+        "receipt": "application-en/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 834.448648,
+          "runtimeVerificationMs": 326.059527,
+          "preHostMs": 1163.9345010000002,
+          "cleanupMs": 34.160382999999456,
+          "totalMs": 4289.031524999999
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.898632151000027,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-ru/driver.log",
+        "receipt": "application-ru/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 823.5040899999999,
+          "runtimeVerificationMs": 301.66441399999997,
+          "preHostMs": 1148.752784,
+          "cleanupMs": 43.22986200000014,
+          "totalMs": 6728.282779
+        }
+      }
+    ]
+  },
+  "acceptance": {
+    "passed": true,
+    "batchDirectory": "form-batch-c49Wh5",
+    "pairsPassed": 4,
+    "pairsFailed": 0,
+    "publishedCases": 78,
+    "allFinalPairsFirstAttempt": true,
+    "builds": 1,
+    "packages": 1,
+    "guiConcurrency": 1,
+    "seconds": 46.812467711000004,
+    "vsixSha256": "1fcd4ba24d430c74e5d13e8914652846990f0851841be459e424f6f033408936",
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "e8de47133caaf27f8f0338b6e8bd7d76ba090091d5df22dab9466fd4713feac6",
+    "runtimeChangesFromIntermediate": [
+      "out/form-preview.css"
+    ],
+    "allOtherRuntimeFilesByteIdentical": true,
+    "batchSha256": "61c5ffc7f117f30b65ad8c34d6bbcb83f7ddee2b478d989ec3a275dd6e2bf405",
+    "inputsSha256": "ed279706bae7a2dd666e3d52f1207b8ff0c13030423e219bd57991a06d81442d",
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "samples": 14,
+        "completeFieldPixelsCompared": 61456,
+        "differentRgbPixels": 0,
+        "searchControlSelectable": true,
+        "sourceWritesDuringViewing": false,
+        "stableTableDom": true,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true,
+        "receiptSha256": "d290cf4f0fb923975692b835af3f9910bd79ec4d11a120bdbe8e2ec767a824e7",
+        "results": [
+          {
+            "label": "Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  724,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  805,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  531,
+                  391,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  529,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0,
+            "searchPlaceholderHitTestable": true
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  724,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  805,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  531,
+                  391,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  529,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  376,
+                  155,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  457,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  183,
+                  156,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  181,
+                  152,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  376,
+                  155,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  457,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  183,
+                  156,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  181,
+                  152,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  724,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  805,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  531,
+                  391,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  529,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "cc69b934e6ef90a0b351736a4146c2c37c177afcfe887fdfc57da934530a4bbe",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 463,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 429,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              429,
+              227
+            ],
+            "rgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+            "pixels": 97383,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  724,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  805,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  531,
+                  391,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  529,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "09d3694b73d4e5e270404599a85b0329279a760a3d73bff24bb106e0f6b1b615",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "MetadataTable",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "#",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  815,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  896,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  534,
+                  391,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  532,
+                  387,
+                  260,
+                  23
+                ],
+                "rgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+                "pixels": 5980,
+                "expectedRgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "DynamicList",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  749,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  830,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  505,
+                  391,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  503,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "#",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  815,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  896,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  534,
+                  391,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  532,
+                  387,
+                  260,
+                  23
+                ],
+                "rgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+                "pixels": 5980,
+                "expectedRgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  749,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  830,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  505,
+                  391,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  503,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  401,
+                  155,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  482,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  157,
+                  156,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  155,
+                  152,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "#",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              520,
+              227
+            ],
+            "rgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  467,
+                  155,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  548,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  186,
+                  156,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  184,
+                  152,
+                  260,
+                  23
+                ],
+                "rgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+                "pixels": 5980,
+                "expectedRgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "54c48e622fc9295498f74115205a0b6acd5c949f8c4433924bfe2582c35dc57e",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  401,
+                  155,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  482,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  157,
+                  156,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  155,
+                  152,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 488,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 454,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Code",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Description",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              454,
+              473
+            ],
+            "rgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "pixels": 214742,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  749,
+                  390,
+                  75,
+                  15
+                ],
+                "rgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "pixels": 1125,
+                "expectedRgbSha256": "c47f9f65b7b60b4ca56f3087a71527e227943f66891d7ea857c757562b5b68da",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  830,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  505,
+                  391,
+                  91,
+                  15
+                ],
+                "rgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "pixels": 1365,
+                "expectedRgbSha256": "f7b1d70f1f81391a3c8fb6b5aef540b6b25d4055a0638d5e44f8bc3585b12b2b",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  503,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "pixels": 3956,
+                "expectedRgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0de76d023d30351f0b4e37e333dc552555f9ee1f6e46b444e54aec7424f97f87",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          }
+        ]
+      },
+      "ru": {
+        "passed": true,
+        "samples": 14,
+        "completeFieldPixelsCompared": 61456,
+        "differentRgbPixels": 0,
+        "searchControlSelectable": true,
+        "sourceWritesDuringViewing": false,
+        "stableTableDom": true,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true,
+        "receiptSha256": "3a7e79c3fd950c01c6a66113acf629fda4b1dd3a9ba633309d7f1a8b101126c6",
+        "results": [
+          {
+            "label": "Default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  758,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  791,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  566,
+                  391,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  563,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0,
+            "searchPlaceholderHitTestable": true
+          },
+          {
+            "label": "restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  758,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  791,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  566,
+                  391,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  563,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  410,
+                  155,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  443,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  218,
+                  156,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  215,
+                  152,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  410,
+                  155,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  443,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  218,
+                  156,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  215,
+                  152,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  758,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  791,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  566,
+                  391,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  563,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "c5fcc57f7cb2b90ff81e1bdc035ec6e4a67309ee5a56ac314960f9fec00c5336",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "ReadOnly",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 449,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 415,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              415,
+              227
+            ],
+            "rgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+            "pixels": 94205,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  758,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  791,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  566,
+                  391,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  563,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "64239c83f2db88aa6b7ded07adc2e27c368816fa04fe4ea397a5ef14d181a360",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "MetadataTable",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "N",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  863,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  896,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  583,
+                  391,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  580,
+                  387,
+                  260,
+                  23
+                ],
+                "rgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+                "pixels": 5980,
+                "expectedRgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "DynamicList",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  761,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  794,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  518,
+                  391,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  515,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "N",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              520,
+              227
+            ],
+            "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  863,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  896,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  583,
+                  391,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  580,
+                  387,
+                  260,
+                  23
+                ],
+                "rgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+                "pixels": 5980,
+                "expectedRgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-restored-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  761,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  794,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  518,
+                  391,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  515,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  413,
+                  155,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  446,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  170,
+                  156,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  167,
+                  152,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-floating-dirty-footer",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 554,
+              "height": 342
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 520,
+              "height": 227
+            },
+            "headers": [
+              {
+                "text": "N",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Text",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Amount",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Active",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              520,
+              227
+            ],
+            "rgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "pixels": 118040,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  515,
+                  155,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  548,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  235,
+                  156,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  232,
+                  152,
+                  260,
+                  23
+                ],
+                "rgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+                "pixels": 5980,
+                "expectedRgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "0c4c359769dc44f6d94d2e7290db4933807ac2c82d6fdf2256c75460aa7eb0d8",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 0
+          },
+          {
+            "label": "dynamic-floating-restored",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 145,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 28,
+              "y": 112
+            },
+            "region": [
+              41,
+              215,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  413,
+                  155,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  446,
+                  163,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  170,
+                  156,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  167,
+                  152,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          },
+          {
+            "label": "dynamic-reattached-default",
+            "passed": true,
+            "geometryMatches": true,
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 452,
+              "height": 588
+            },
+            "control": {
+              "x": 41,
+              "y": 380,
+              "width": 418,
+              "height": 452
+            },
+            "headers": [
+              {
+                "text": "Код",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              },
+              {
+                "text": "Наименование",
+                "height": 30,
+                "color": "rgb(77, 77, 77)",
+                "font": "13.3333px",
+                "status": "ready"
+              }
+            ],
+            "origin": {
+              "x": 376,
+              "y": 347
+            },
+            "region": [
+              389,
+              450,
+              418,
+              473
+            ],
+            "rgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "pixels": 197714,
+            "additionalRegions": [
+              {
+                "name": "menu-caption",
+                "region": [
+                  761,
+                  390,
+                  27,
+                  15
+                ],
+                "rgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "pixels": 405,
+                "expectedRgbSha256": "78ca3aeba4fae92ed498fda4ac5a7471b5e35de398ee26e3fd24b83497e21c23",
+                "passed": true
+              },
+              {
+                "name": "menu-arrow",
+                "region": [
+                  794,
+                  398,
+                  6,
+                  3
+                ],
+                "rgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "pixels": 18,
+                "expectedRgbSha256": "5670d30d90bc62285f1af207d55a07949ccc159810f74f0cd4970a405bc6bcce",
+                "passed": true
+              },
+              {
+                "name": "search-placeholder",
+                "region": [
+                  518,
+                  391,
+                  85,
+                  15
+                ],
+                "rgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "pixels": 1275,
+                "expectedRgbSha256": "1d4c1388acccf351accd8a0f1af81860e8c7c5c089bae942531eb244514f74c5",
+                "passed": true
+              },
+              {
+                "name": "search-field",
+                "region": [
+                  515,
+                  387,
+                  172,
+                  23
+                ],
+                "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "pixels": 3956,
+                "expectedRgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+                "passed": true
+              }
+            ],
+            "expectedRgbSha256": "e2583f4969464a5c71cf5fb9e953e3e9cf5022e1b527cbee7a627740fdcbd386",
+            "captureAttempts": 1,
+            "wholeGridControlCompared": true,
+            "extraBottom": 21
+          }
+        ]
+      }
+    },
+    "runs": [
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.537298692,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-en/driver.log",
+        "receipt": "table-pixels-en/receipt.json",
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill",
+          "table-pixels/MetadataTable",
+          "table-pixels/DynamicList",
+          "table-pixels/dynamic-dirty-footer",
+          "table-pixels/dynamic-restored-default",
+          "table-pixels/dynamic-floating-default",
+          "table-pixels/dynamic-floating-dirty-footer",
+          "table-pixels/dynamic-floating-restored",
+          "table-pixels/dynamic-reattached-default"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 815.1166499999999,
+          "runtimeVerificationMs": 368.417183,
+          "preHostMs": 1192.701312,
+          "cleanupMs": 33.146552000000156,
+          "totalMs": 11378.884585
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 13.951498876,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-ru/driver.log",
+        "receipt": "table-pixels-ru/receipt.json",
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill",
+          "table-pixels/MetadataTable",
+          "table-pixels/DynamicList",
+          "table-pixels/dynamic-dirty-footer",
+          "table-pixels/dynamic-restored-default",
+          "table-pixels/dynamic-floating-default",
+          "table-pixels/dynamic-floating-dirty-footer",
+          "table-pixels/dynamic-floating-restored",
+          "table-pixels/dynamic-reattached-default"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 825.574335,
+          "runtimeVerificationMs": 277.747426,
+          "preHostMs": 1123.190258,
+          "cleanupMs": 37.74254200000178,
+          "totalMs": 13789.592319000001
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.270676992,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-en/driver.log",
+        "receipt": "tables-en/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 709.999758,
+          "runtimeVerificationMs": 331.30588999999986,
+          "preHostMs": 1050.1894200000002,
+          "cleanupMs": 39.033580000000256,
+          "totalMs": 7131.6750919999995
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 10.100588255000002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-ru/driver.log",
+        "receipt": "tables-ru/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 846.8679960000001,
+          "runtimeVerificationMs": 408.3970939999999,
+          "preHostMs": 1290.90751,
+          "cleanupMs": 39.13224599999921,
+          "totalMs": 9943.856227
+        }
+      }
+    ],
+    "unchangedRuntimeRegressionReuse": {
+      "directory": "form-batch-zTsa8s",
+      "suites": [
+        "input-fonts",
+        "input-dates",
+        "states",
+        "style-composition",
+        "application"
+      ],
+      "pairsPassed": 10,
+      "pairsFailed": 0,
+      "note": "These passed on the byte-identical JS/runtime; the only changed CSS rule targets the search-clear SVG. Existing ordinary input/date/state corner regressions remain valid."
+    }
+  },
+  "completeToolbarMeasurementsFromFinalScreenshots": {
+    "wholeToolbarPixelParity": false,
+    "newGuiRun": false,
+    "scenarios": {
+      "en": [
+        {
+          "form": "Default",
+          "pixelsCompared": 11583,
+          "differentRgbPixels": 632,
+          "screenshot": "table-pixels-en/table-pixels-Default-en.png",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Default.png",
+          "fullToolbarAccepted": false
+        },
+        {
+          "form": "ReadOnly",
+          "pixelsCompared": 11583,
+          "differentRgbPixels": 632,
+          "screenshot": "table-pixels-en/table-pixels-ReadOnly-en.png",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/search-en-ReadOnly-first.png",
+          "fullToolbarAccepted": false
+        },
+        {
+          "form": "MetadataTable",
+          "pixelsCompared": 14040,
+          "differentRgbPixels": 632,
+          "screenshot": "table-pixels-en/table-pixels-MetadataTable-en.png",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/en-MetadataTable-complete.png",
+          "fullToolbarAccepted": false
+        },
+        {
+          "form": "DynamicList",
+          "pixelsCompared": 12258,
+          "differentRgbPixels": 558,
+          "screenshot": "table-pixels-en/table-pixels-DynamicList-en.png",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+          "fullToolbarAccepted": false
+        }
+      ],
+      "ru": [
+        {
+          "form": "Default",
+          "pixelsCompared": 11205,
+          "differentRgbPixels": 619,
+          "screenshot": "table-pixels-ru/table-pixels-Default-ru.png",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Default.png",
+          "fullToolbarAccepted": false
+        },
+        {
+          "form": "ReadOnly",
+          "pixelsCompared": 11205,
+          "differentRgbPixels": 619,
+          "screenshot": "table-pixels-ru/table-pixels-ReadOnly-ru.png",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/search-ru-ReadOnly-first.png",
+          "fullToolbarAccepted": false
+        },
+        {
+          "form": "MetadataTable",
+          "pixelsCompared": 14040,
+          "differentRgbPixels": 619,
+          "screenshot": "table-pixels-ru/table-pixels-MetadataTable-ru.png",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/search-ru-Metadata-first.png",
+          "fullToolbarAccepted": false
+        },
+        {
+          "form": "DynamicList",
+          "pixelsCompared": 11286,
+          "differentRgbPixels": 554,
+          "screenshot": "table-pixels-ru/table-pixels-DynamicList-ru.png",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+          "fullToolbarAccepted": false
+        }
+      ]
+    }
+  },
+  "remaining": [
+    "Native 11px/yellow initialization states and their selection rule remain unresolved; they are not waived or masked.",
+    "Other search widths/fonts/palettes/disabled/focus states, and complete toolbars/forms remain open.",
+    "Native standard icons, joined-button fill/borders and the known lower-border repaint differences still fail complete-toolbar comparisons.",
+    "Windows, other DPI, the native property inventory and full-profile acceptance remain unaccepted."
+  ]
+}

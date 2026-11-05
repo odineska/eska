@@ -1,0 +1,927 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "scope": "T154 Linux static catalog-owned and extension-owned forms; reject impossible borrowing among loaded dependencies only. Semantic/behavior acceptance, not Configurator pixel or whole-extension applicability acceptance.",
+  "fullProfileAccepted": false,
+  "platformBuild": "8.3.27.2342",
+  "noBslModulesOrHandlers": true,
+  "nativeCases": 5,
+  "nativeRejectedCases": 2,
+  "nativeInputs": {
+    "path": "tests/fixtures/forms/native-owner-composition/metrics.json",
+    "sha256": "f2b4e46ef6a02ff6ab34d1875b853eb7816a98ef7433b8d7627e97b42827d3b0",
+    "rawXmlFiles": 27
+  },
+  "nativeObservations": {
+    "cases": [
+      {
+        "id": "object-base-only",
+        "activeExtensions": [],
+        "selectedMember": "base",
+        "owner": "ProbeOwner",
+        "form": "ProbeObject",
+        "payload": "Catalogs/ProbeOwner/Forms/ProbeObject/Ext/Form.xml",
+        "expected": {
+          "captions": [
+            "Base caption",
+            "Group",
+            "Base A",
+            "Base B",
+            "Base C"
+          ],
+          "layers": [
+            "base"
+          ],
+          "blue14PointCaption": false
+        },
+        "screenshot": {
+          "sha256": "ca299c0a772bcb6e5c43e4ba83e9f6ad3c439ab354edc5a9000684d93b193958",
+          "width": 1918,
+          "height": 770
+        }
+      },
+      {
+        "id": "object-first-only",
+        "activeExtensions": [
+          "first"
+        ],
+        "selectedMember": "base",
+        "owner": "ProbeOwner",
+        "form": "ProbeObject",
+        "payload": "Catalogs/ProbeOwner/Forms/ProbeObject/Ext/Form.xml",
+        "expected": {
+          "captions": [
+            "First caption",
+            "Group",
+            "Base A",
+            "F_inserted",
+            "Base B",
+            "Base C"
+          ],
+          "layers": [
+            "base",
+            "first"
+          ],
+          "blue14PointCaption": true
+        },
+        "screenshot": {
+          "sha256": "1b6f49425af28b1c675e56abd2572abd68d1faa5d10ad910ca6c30d491a32efa",
+          "width": 1918,
+          "height": 770
+        }
+      },
+      {
+        "id": "object-both",
+        "activeExtensions": [
+          "first",
+          "second"
+        ],
+        "selectedMember": "base",
+        "owner": "ProbeOwner",
+        "form": "ProbeObject",
+        "payload": "Catalogs/ProbeOwner/Forms/ProbeObject/Ext/Form.xml",
+        "expected": {
+          "captions": [
+            "Second caption",
+            "Group",
+            "Base A",
+            "S_inserted",
+            "F_inserted",
+            "Second B",
+            "Base C"
+          ],
+          "layers": [
+            "base",
+            "first",
+            "second"
+          ],
+          "blue14PointCaption": true
+        },
+        "screenshot": {
+          "sha256": "6ea63fc2bdad5be44bd03c0dd258a0c66650bebbf828ad999cbf8d2775f9392e",
+          "width": 1918,
+          "height": 770
+        }
+      },
+      {
+        "id": "extension-own-form",
+        "activeExtensions": [
+          "first",
+          "second"
+        ],
+        "selectedMember": "first",
+        "owner": "ProbeOwner",
+        "form": "F_OwnForm",
+        "payload": "Catalogs/ProbeOwner/Forms/F_OwnForm/Ext/Form.xml",
+        "expected": {
+          "captions": [
+            "First own form",
+            "Group",
+            "Base A",
+            "Base B",
+            "Base C"
+          ],
+          "layers": [
+            "first"
+          ],
+          "blue14PointCaption": false
+        },
+        "screenshot": {
+          "sha256": "0d2a9b4d2eb28e8bc4a802a53f74a978b12cb7a32780f73843404085d42e78e9",
+          "width": 1918,
+          "height": 770
+        }
+      },
+      {
+        "id": "extension-own-object",
+        "activeExtensions": [
+          "first",
+          "second"
+        ],
+        "selectedMember": "first",
+        "owner": "F_OwnCatalog",
+        "form": "F_OwnObject",
+        "payload": "Catalogs/F_OwnCatalog/Forms/F_OwnObject/Ext/Form.xml",
+        "expected": {
+          "captions": [
+            "First own object",
+            "Group",
+            "Base A",
+            "Base B",
+            "Base C"
+          ],
+          "layers": [
+            "first"
+          ],
+          "blue14PointCaption": false
+        },
+        "screenshot": {
+          "sha256": "d8c2ea0c3e3217a52e33852db0f6bfcb1a174550a8b6ef9f0e30456b58432fe5",
+          "width": 1918,
+          "height": 770
+        }
+      }
+    ],
+    "rejectedCases": [
+      {
+        "id": "adopt-extension-own-form",
+        "activeExtensions": [
+          "first",
+          "second"
+        ],
+        "secondInput": "invalidSecond",
+        "selectedMember": "first",
+        "owner": "ProbeOwner",
+        "form": "F_OwnForm",
+        "payload": "Catalogs/ProbeOwner/Forms/F_OwnForm/Ext/Form.xml",
+        "nativeExtensionApplied": false,
+        "nativeVisibleCaption": "First own form",
+        "screenshotSha256": "e496d52674ca126ddef9694cd6d9f0d2584d6e25053dd40a4bea5b9557ce1ff9",
+        "viewerExpectation": "Reject the known invalid loaded borrowing metadata; do not present the unsupported composition as complete."
+      },
+      {
+        "id": "adopt-extension-own-object",
+        "activeExtensions": [
+          "first",
+          "second"
+        ],
+        "secondInput": "invalidSecond",
+        "selectedMember": "first",
+        "owner": "F_OwnCatalog",
+        "form": "F_OwnObject",
+        "payload": "Catalogs/F_OwnCatalog/Forms/F_OwnObject/Ext/Form.xml",
+        "nativeExtensionApplied": false,
+        "nativeVisibleCaption": "First own object",
+        "screenshotSha256": "af2e64283f61806570446a359d68e05192deb578cd4cac1cac0b7fde002eaa23",
+        "viewerExpectation": "Reject the known invalid loaded borrowing metadata; do not present the unsupported composition as complete."
+      }
+    ],
+    "applicability": {
+      "valid": {
+        "exitCode": 0,
+        "logSha256": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+      },
+      "invalid": {
+        "exitCode": 1,
+        "logSha256": "8a80c9cd861a1ed7ec2c91a98fafee025000b2ce131a365b79f8521e9a849580",
+        "messages": [
+          "ASecond: Object not found: Справочник.ProbeOwner.Форма.F_OwnForm",
+          "ASecond: Object not found: Справочник.F_OwnCatalog"
+        ]
+      },
+      "command": "1cv8 DESIGNER /F <own-db> /CheckCanApplyConfigurationExtensions /Out <own-log>"
+    },
+    "reference": "Native Linux managed client, semantic observations only; Designer preview remains the pixel oracle."
+  },
+  "viewerGuard": {
+    "scope": "Only metadata already loaded for the selected form; no new IO or unrelated metadata traversal.",
+    "source": "crates/eska-project-core/src/project/forms/borrowing.rs",
+    "borrowedMustExistInConfiguration": true,
+    "borrowingFromAnotherExtensionRejected": true,
+    "namespaceAware": true,
+    "dirtyAware": true,
+    "standaloneLimitedContextRetained": true,
+    "wireError": "form_preview_failed / invalid_metadata",
+    "wholeExtensionApplicabilityAccepted": false
+  },
+  "regression": {
+    "before": {
+      "passed": 1,
+      "failed": 2,
+      "logSha256": "c0b7b7cfdb600b5a8ce69e9a37df67693654cf5cef60960371ef043d3c7dedde"
+    },
+    "after": {
+      "formContextTestsPassed": 20,
+      "failed": 0,
+      "newTests": 3,
+      "nativePositiveCases": 5,
+      "nativeRejectedCases": 2,
+      "logSha256": "c892aa4f787f5b960d1aec9bfbfdd1e5970ee5194511503f3dcb1e75153065d1"
+    }
+  },
+  "checks": {
+    "rust": [
+      {
+        "check": "fmt",
+        "exitCode": 0,
+        "seconds": 1.3735356939996564
+      },
+      {
+        "check": "check",
+        "exitCode": 0,
+        "seconds": 0.12127148299987311
+      },
+      {
+        "check": "clippy",
+        "exitCode": 0,
+        "seconds": 1.057588157000282
+      },
+      {
+        "check": "test",
+        "exitCode": 0,
+        "seconds": 149.13312826900074
+      },
+      {
+        "check": "backend-build",
+        "exitCode": 0,
+        "seconds": 5.001866235001216
+      }
+    ],
+    "cargoTest": {
+      "passed": 1509,
+      "failed": 0,
+      "ignored": 19,
+      "suites": 42,
+      "logSha256": "dd7d10bfa1bdaa92e6cd9dacc91a3071e9115d6825238e6072ce8aba64d7f2da"
+    },
+    "node": {
+      "passed": 512,
+      "failed": 0,
+      "skipped": 11,
+      "total": 523,
+      "logSha256": "d6308554ac90b12479a12032d58c50a5ae767538ab15b776a0992f925e84473d"
+    },
+    "nativeXml": {
+      "files": 27,
+      "rawSha256Verified": true,
+      "xmlSyntaxVerified": true
+    },
+    "intermediateLintFailure": {
+      "logSha256": "39ed057f653d3ef076957861dd9b61b550a3488fe2bd6ad21e48b1f0dd3886cd",
+      "reason": "float_cmp in a new test branch; use the fixture boolean rather than a float equality. Final Clippy passes."
+    }
+  },
+  "installedBatch": {
+    "artifactDirectory": "form-batch-kNw0GK",
+    "passed": true,
+    "overallExitCode": 0,
+    "builds": 1,
+    "packages": 1,
+    "guiConcurrency": 1,
+    "timings": {
+      "checkMs": 280.181146,
+      "compileMs": 1066.112225,
+      "packageMs": 1769.447124,
+      "freezeInputsMs": 798.8352639999998,
+      "totalMs": 114332.380437
+    },
+    "batchSha256": "fed26342be3e7529172a0034257a611cf8cfc1d0178f12261851c1488b525f61",
+    "inputsSha256": "323ead7efb9a21d0b021f2c93b8f379215f8aa6cf23ba6783ea6c9d9acf0eba4",
+    "backendSha256": "1d223367ff1c4df95c206a5b7f2be73c456246e11e9fe8ff78a9d5d6af558df3",
+    "vsixSha256": "87beed79c14ed9b4e531efe5ce9728f92e310d3b56358cbbf423198cc2ca27c1",
+    "runtimeManifestSha256": "c079d1e1ffa61305d870596447b33b836aa71f2e6f61e40032cc5c9e76fb1690",
+    "runtimeFiles": 1303,
+    "runs": [
+      {
+        "suite": "owners",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 5.346129344000001,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "owners/object-both",
+          "owners/extension-own-form",
+          "owners/extension-own-object",
+          "owners/dirty-invalid-owner",
+          "owners/foreign-owner-property",
+          "owners/dirty-own-form",
+          "owners/detached-dirty-own-form",
+          "owners/detached-invalid-owner-recovery",
+          "owners/reattached-own-form"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "9873ac9beda8851f9f91c3485707a79fa73cdda824de05a8c8866a63805fbb7c",
+        "driverLogSha256": "e0988b92dc424ae4e23261eb5e32ff113a5b4c46a0c446e985b64a8c94dffeb4",
+        "publishedResults": [
+          {
+            "passed": true,
+            "formOwners": true,
+            "locale": "en",
+            "results": [
+              {
+                "label": "object-both",
+                "captions": [
+                  "Second caption",
+                  "Base A",
+                  "S_inserted",
+                  "F_inserted",
+                  "Second B",
+                  "Base C"
+                ],
+                "ownerSource": "base"
+              },
+              {
+                "label": "extension-own-form",
+                "captions": [
+                  "First own form",
+                  "Base A",
+                  "Base B",
+                  "Base C"
+                ],
+                "ownerSource": "first"
+              },
+              {
+                "label": "extension-own-object",
+                "captions": [
+                  "First own object",
+                  "Base A",
+                  "Base B",
+                  "Base C"
+                ],
+                "ownerSource": "first"
+              },
+              {
+                "label": "dirty-invalid-owner",
+                "lastGoodModelRetained": true
+              },
+              {
+                "label": "foreign-owner-property",
+                "nativeOwnershipUnaffected": true
+              },
+              {
+                "label": "dirty-own-form",
+                "stableIdentity": true
+              },
+              {
+                "label": "detached-dirty-own-form",
+                "nativeWindow": true
+              },
+              {
+                "label": "detached-invalid-owner-recovery",
+                "stableDom": true
+              },
+              {
+                "label": "reattached-own-form",
+                "dirtyRetained": true
+              }
+            ],
+            "sourceWritesDuringViewing": false,
+            "loadedBorrowingValidation": true,
+            "fullNativeApplicabilityAccepted": false,
+            "hostDriver": {
+              "suiteBodyMs": 2281.566797
+            }
+          }
+        ]
+      },
+      {
+        "suite": "owners",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 7.637545748000001,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "owners/object-both",
+          "owners/extension-own-form",
+          "owners/extension-own-object",
+          "owners/dirty-invalid-owner",
+          "owners/foreign-owner-property",
+          "owners/dirty-own-form",
+          "owners/detached-dirty-own-form",
+          "owners/detached-invalid-owner-recovery",
+          "owners/reattached-own-form"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "9011982d0fae3ca3aecad7437bb0fce70c339d694aa97879111a376887766038",
+        "driverLogSha256": "a40fc8c35f06afd8a6217a941ad24e0c0d7a0cb8f071801dfb85e7b413c1cfb8",
+        "publishedResults": [
+          {
+            "passed": true,
+            "formOwners": true,
+            "locale": "ru",
+            "results": [
+              {
+                "label": "object-both",
+                "captions": [
+                  "Second caption",
+                  "Base A",
+                  "S_inserted",
+                  "F_inserted",
+                  "Second B",
+                  "Base C"
+                ],
+                "ownerSource": "base"
+              },
+              {
+                "label": "extension-own-form",
+                "captions": [
+                  "First own form",
+                  "Base A",
+                  "Base B",
+                  "Base C"
+                ],
+                "ownerSource": "first"
+              },
+              {
+                "label": "extension-own-object",
+                "captions": [
+                  "First own object",
+                  "Base A",
+                  "Base B",
+                  "Base C"
+                ],
+                "ownerSource": "first"
+              },
+              {
+                "label": "dirty-invalid-owner",
+                "lastGoodModelRetained": true
+              },
+              {
+                "label": "foreign-owner-property",
+                "nativeOwnershipUnaffected": true
+              },
+              {
+                "label": "dirty-own-form",
+                "stableIdentity": true
+              },
+              {
+                "label": "detached-dirty-own-form",
+                "nativeWindow": true
+              },
+              {
+                "label": "detached-invalid-owner-recovery",
+                "stableDom": true
+              },
+              {
+                "label": "reattached-own-form",
+                "dirtyRetained": true
+              }
+            ],
+            "sourceWritesDuringViewing": false,
+            "loadedBorrowingValidation": true,
+            "fullNativeApplicabilityAccepted": false,
+            "hostDriver": {
+              "suiteBodyMs": 2316.8250230000003
+            }
+          }
+        ]
+      },
+      {
+        "suite": "composition",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 5.695901694,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "composition/initial-addon",
+          "composition/dirty-customization",
+          "composition/external-patch-with-dirty-second",
+          "composition/external-addon-with-dirty-second",
+          "composition/invalid-purpose",
+          "composition/external-configuration-restored",
+          "composition/detached-dirty-addon",
+          "composition/detached-dirty-default-purpose",
+          "composition/reattached-default-purpose"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "5679b45e40e70ca027399eb18ef0c2d30f71e4af7ad2d1da8de9be37cd825c3f",
+        "driverLogSha256": "466c9d0ef65a1ab6c6c009a2911ec8d59873c76a82dd4db41913e15b2648e01e"
+      },
+      {
+        "suite": "composition",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 8.347053636,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "composition/initial-addon",
+          "composition/dirty-customization",
+          "composition/external-patch-with-dirty-second",
+          "composition/external-addon-with-dirty-second",
+          "composition/invalid-purpose",
+          "composition/external-configuration-restored",
+          "composition/detached-dirty-addon",
+          "composition/detached-dirty-default-purpose",
+          "composition/reattached-default-purpose"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "6906a7f35e8645306918f68635491c2979fcc1bc2e848da0246fe258f632410a",
+        "driverLogSha256": "74a0b0f0f7edc75fd9cfe6bad83caf831e2a3e7f6614e39da1aa121cec1f1846"
+      },
+      {
+        "suite": "dependencies",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 5.869734452999998,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "dependencies/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "ce10bccbf22ea2f1488fd8a4f2b6b1d97e998d0bebafa904d46a35eea1fe95aa",
+        "driverLogSha256": "4e0a7d552ecf9b7325fc7e37bc866d8c4754308312a3e0d23143a6b159db8028"
+      },
+      {
+        "suite": "dependencies",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 8.288918369,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "dependencies/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "97cc32238f6ce237991a2f5dcc633f2460a3f5be7de4794f0b31dd590302d5f4",
+        "driverLogSha256": "d4dee56ff7c452ed392bc5ff936cdb2da2c951a20c05e0919e76ee60bb0c03d5"
+      },
+      {
+        "suite": "activity",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 4.2714180520000005,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "activity/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "ef63c54063479bdeea2d2448fd7499e85cd12becc435c9407fb574e18a320461",
+        "driverLogSha256": "28a37dd93adbd0ef038870fe8e34910775e0f5d090fe82f30bf79e709712c16a"
+      },
+      {
+        "suite": "activity",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 6.973724440999998,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "activity/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "a6ce7637e42f69d4932b843a63f697bb5036f6d97786a4035f18e63b596474fe",
+        "driverLogSha256": "34f39fe71550b2b33d846f6b6f951a976d7f50adffcd870532e9c02250dbc855"
+      },
+      {
+        "suite": "style",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 4.257395996000007,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "style/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "e35417d5db8cbb763ab7742af04071b4e3d5dbccac746a5a884f9628695ac185",
+        "driverLogSha256": "b96f2cf1dc446674d6325782c600ee8c9828bb816f080f45dba644afa6b3c7d2"
+      },
+      {
+        "suite": "style",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 6.879626074999993,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "style/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "ab29edbf38f876e16ac9e8352f7eb4970d1883acc0550ca56b10cb87b2bb5fda",
+        "driverLogSha256": "4c48729816b0eb8bb94acb842297870aba26996d7589ce844c14cc43af3e2cba"
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 4.655137964000009,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "multiple-windows/suite"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "0cbbfd85be74196d57ac418cdcd746056922d923d4b918e29014d7ccb4069ea9",
+        "driverLogSha256": "1e40bea47a50cd6561d2837f31d13f12509d3318e969998a00c08cd72793dca2"
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 7.149960864000008,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "multiple-windows/suite"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "f01257418e1b2145136fcdc22e5f241f03b451cb470a08b7cfb755cbb4fdfc33",
+        "driverLogSha256": "2f6d6fefa6a454647b6beef6255202b858bbf794fa9951d323b321accaa402d4"
+      },
+      {
+        "suite": "restore",
+        "locale": "en",
+        "mode": "restart",
+        "exitCode": 0,
+        "seconds": 9.093259789000003,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "restore/suite",
+          "restore/suite"
+        ],
+        "hostStarts": 2,
+        "languageRegistrations": 0,
+        "receiptSha256": "88e7403d25f2d40717d0acfa6edba13f102c5c575ac6be5519e99471a9218a54",
+        "driverLogSha256": "34ffac843867a855daa6dbcffd523dbe449f9588257375e74343fbf09e7ecec1"
+      },
+      {
+        "suite": "restore",
+        "locale": "ru",
+        "mode": "restart",
+        "exitCode": 0,
+        "seconds": 9.980338597000008,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "restore/suite",
+          "restore/suite"
+        ],
+        "hostStarts": 4,
+        "languageRegistrations": 2,
+        "receiptSha256": "9c9a5d1e9466eaf5d4664487b918ca7e39f704abd4da052522a0d39424405468",
+        "driverLogSha256": "be342528815eab14d558bd9232c6a560c1236c113fc51bb58ebb10a1d9f287c2"
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 4.354265606000001,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "receiptSha256": "cd9407d49889426b440b1a16b56eabb3481c32e550d6f5dc348922f34e563c8d",
+        "driverLogSha256": "c402c52e259c74bc7e138da04cd526e5e3a61f19b4f6cab3504951f7e1b0e460",
+        "publishedResults": [
+          {
+            "passed": true,
+            "formApplication": true,
+            "locale": "en",
+            "sourceWritesDuringViewing": false,
+            "results": [
+              {
+                "sample": 0,
+                "openThroughFirstPaintMs": 276,
+                "elements": 13,
+                "retainedElements": 22,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 1,
+                "commandButtons": 5,
+                "scrollWidth": 635,
+                "scrollHeight": 686,
+                "dependencies": 13,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 1,
+                "openThroughFirstPaintMs": 177,
+                "elements": 7,
+                "retainedElements": 7,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 0,
+                "commandButtons": 0,
+                "scrollWidth": 679,
+                "scrollHeight": 490,
+                "dependencies": 12,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 2,
+                "openThroughFirstPaintMs": 224,
+                "elements": 21,
+                "retainedElements": 22,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 6,
+                "commandButtons": 7,
+                "scrollWidth": 1104,
+                "scrollHeight": 640,
+                "dependencies": 9,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 3,
+                "openThroughFirstPaintMs": 135,
+                "elements": 3,
+                "retainedElements": 3,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 0,
+                "commandButtons": 4,
+                "scrollWidth": 565,
+                "scrollHeight": 322,
+                "dependencies": 6,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              }
+            ],
+            "hostDriver": {
+              "suiteBodyMs": 1566.121502
+            }
+          }
+        ]
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "seconds": 11.322935849000002,
+        "passed": true,
+        "inputsStable": true,
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "receiptSha256": "3df12f39209915b97181d97218c3cbe6794699560f596ddfb40a41de5546bd33",
+        "driverLogSha256": "44454a46dcbb1d48d428dc6d79f002cc8d1d2846184daf8b75de325e6bf7d28a",
+        "publishedResults": [
+          {
+            "passed": true,
+            "formApplication": true,
+            "locale": "ru",
+            "sourceWritesDuringViewing": false,
+            "results": [
+              {
+                "sample": 0,
+                "openThroughFirstPaintMs": 294,
+                "elements": 13,
+                "retainedElements": 22,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 1,
+                "commandButtons": 5,
+                "scrollWidth": 635,
+                "scrollHeight": 686,
+                "dependencies": 13,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 1,
+                "openThroughFirstPaintMs": 168,
+                "elements": 7,
+                "retainedElements": 7,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 0,
+                "commandButtons": 0,
+                "scrollWidth": 679,
+                "scrollHeight": 490,
+                "dependencies": 12,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 2,
+                "openThroughFirstPaintMs": 244,
+                "elements": 21,
+                "retainedElements": 22,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 6,
+                "commandButtons": 7,
+                "scrollWidth": 1104,
+                "scrollHeight": 640,
+                "dependencies": 9,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              },
+              {
+                "sample": 3,
+                "openThroughFirstPaintMs": 145,
+                "elements": 3,
+                "retainedElements": 3,
+                "unsupported": 0,
+                "pictures": 0,
+                "incompleteFields": 0,
+                "commandButtons": 4,
+                "scrollWidth": 535,
+                "scrollHeight": 322,
+                "dependencies": 6,
+                "assets": 0,
+                "compositionDiagnostics": 0,
+                "appearanceDiagnostics": []
+              }
+            ],
+            "hostDriver": {
+              "suiteBodyMs": 1608.085258
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "acceptance": {
+    "installedPairs": 16,
+    "failedPairs": 0,
+    "publishedCaseIds": 56,
+    "ownerGuiCasesPerLocale": 9,
+    "ownerGuiCasesTotal": 18,
+    "readinessRechecks": 0,
+    "providedDtFormObservations": 8,
+    "providedDtCompositionDiagnostics": 0,
+    "providedDtAppearanceDiagnostics": 0,
+    "sourceWritesDuringViewing": false
+  },
+  "remaining": [
+    "Other metadata owner kinds and element families.",
+    "Native style/resource conflicts and all controlled-property/deployment applicability rules.",
+    "An invalid unrelated extension object may prevent native application; this guard deliberately does not scan it.",
+    "Native Configurator pixels, Windows, DPI variants and 8.5 are not accepted."
+  ]
+}

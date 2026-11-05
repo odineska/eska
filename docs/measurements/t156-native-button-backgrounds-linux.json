@@ -1,0 +1,285 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10 reference container)",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.39",
+  "visualParityVerified": false,
+  "clientCommit": "475190bf1192637b8c3722a0f417d01b32a0f43a",
+  "reference": "tests/fixtures/forms/native-button-metrics/backgrounds.json",
+  "implementation": {
+    "fill": "Discrete CSS gradient stops at integer rows; 1024-step interpolation then integer RGB",
+    "heightExcludesBorders": true,
+    "backgroundRasterPixelsMasking": false,
+    "scope": "Enabled raised text-only Linux buttons without DefaultButton/primary or explicit BackColor",
+    "otherRepresentationsChanged": false,
+    "borderRasterizationChanged": false,
+    "textRasterizationChanged": false
+  },
+  "nativeVsix": {
+    "en": {
+      "backgroundSamplePoints": 1974,
+      "backgroundSamplesExactlyEqual": true,
+      "geometryStillExactlyEqual": true,
+      "dirtyFontAndPrimaryTransitionsPassed": true
+    },
+    "ru": {
+      "backgroundSamplePoints": 1974,
+      "backgroundSamplesExactlyEqual": true,
+      "geometryStillExactlyEqual": true,
+      "dirtyFontAndPrimaryTransitionsPassed": true
+    }
+  },
+  "comparison": "Full form plus 4px shadow, native origin (261,240), browser webview offset (348,70); no masks. Sample columns separately verify constant fill at x=7 within each of 48 buttons.",
+  "previousWholeFormRgbEnReport": "t156-native-button-metrics-linux.json",
+  "regressions": [
+    {
+      "name": "button-metrics",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.17
+    },
+    {
+      "name": "groups",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.27
+    },
+    {
+      "name": "tables",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 7.0
+    },
+    {
+      "name": "states",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.29
+    },
+    {
+      "name": "renderer",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 10.1
+    },
+    {
+      "name": "palette",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.07
+    },
+    {
+      "name": "application",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 3.9
+    },
+    {
+      "name": "preview",
+      "locale": "en",
+      "exit": 0,
+      "seconds": 6.16
+    },
+    {
+      "name": "button-metrics",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 10.01
+    },
+    {
+      "name": "groups",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 13.13
+    },
+    {
+      "name": "tables",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.35
+    },
+    {
+      "name": "states",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 9.07
+    },
+    {
+      "name": "renderer",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 12.84
+    },
+    {
+      "name": "palette",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 5.8
+    },
+    {
+      "name": "application",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 6.52
+    },
+    {
+      "name": "preview",
+      "locale": "ru",
+      "exit": 0,
+      "seconds": 8.72
+    }
+  ],
+  "checks": {
+    "typecheck": "passed",
+    "compile": "passed",
+    "package": "passed",
+    "packagedOutAndDocsMatch": true,
+    "node": {
+      "passed": 468,
+      "skipped": 11,
+      "failed": 0
+    },
+    "rust": "No Rust changes in this part; preceding full mandatory set passed with 1481 tests, 19 ignored, RUST_TEST_THREADS=1."
+  },
+  "experiments": {
+    "cssRadius3": "Did not increase the number of exactly matching pixels in 5x5 native corner regions; not applied."
+  },
+  "remaining": [
+    "Text and border rasterization, including rounded corners",
+    "Primary/disabled/picture/menu/link button styling and explicit overrides",
+    "Other heights and font families native matrix",
+    "DPI and Windows acceptance"
+  ],
+  "strictWholeFormRgbEn": {
+    "10Normal": {
+      "backgroundSamplePoints": 72,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 22659,
+      "equalRgbPixels": 21108,
+      "equalRgbRatio": 0.93155,
+      "maskedPixels": 0
+    },
+    "10Bold": {
+      "backgroundSamplePoints": 72,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 23240,
+      "equalRgbPixels": 21513,
+      "equalRgbRatio": 0.925688,
+      "maskedPixels": 0
+    },
+    "12Normal": {
+      "backgroundSamplePoints": 81,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 27434,
+      "equalRgbPixels": 25663,
+      "equalRgbRatio": 0.935445,
+      "maskedPixels": 0
+    },
+    "12Bold": {
+      "backgroundSamplePoints": 81,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 28208,
+      "equalRgbPixels": 26410,
+      "equalRgbRatio": 0.936259,
+      "maskedPixels": 0
+    },
+    "14Normal": {
+      "backgroundSamplePoints": 93,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 33480,
+      "equalRgbPixels": 31381,
+      "equalRgbRatio": 0.937306,
+      "maskedPixels": 0
+    },
+    "14Bold": {
+      "backgroundSamplePoints": 93,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 34380,
+      "equalRgbPixels": 32184,
+      "equalRgbRatio": 0.936126,
+      "maskedPixels": 0
+    },
+    "16Normal": {
+      "backgroundSamplePoints": 105,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 38258,
+      "equalRgbPixels": 35273,
+      "equalRgbRatio": 0.921977,
+      "maskedPixels": 0
+    },
+    "16Bold": {
+      "backgroundSamplePoints": 105,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 39198,
+      "equalRgbPixels": 36209,
+      "equalRgbRatio": 0.923746,
+      "maskedPixels": 0
+    },
+    "18Normal": {
+      "backgroundSamplePoints": 120,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 44550,
+      "equalRgbPixels": 41424,
+      "equalRgbRatio": 0.929832,
+      "maskedPixels": 0
+    },
+    "20Normal": {
+      "backgroundSamplePoints": 129,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 50796,
+      "equalRgbPixels": 46923,
+      "equalRgbRatio": 0.923754,
+      "maskedPixels": 0
+    },
+    "20Bold": {
+      "backgroundSamplePoints": 129,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 52530,
+      "equalRgbPixels": 48666,
+      "equalRgbRatio": 0.926442,
+      "maskedPixels": 0
+    },
+    "24Normal": {
+      "backgroundSamplePoints": 150,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 63438,
+      "equalRgbPixels": 59613,
+      "equalRgbRatio": 0.939705,
+      "maskedPixels": 0
+    },
+    "24Bold": {
+      "backgroundSamplePoints": 150,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 65291,
+      "equalRgbPixels": 61638,
+      "equalRgbRatio": 0.94405,
+      "maskedPixels": 0
+    },
+    "28Normal": {
+      "backgroundSamplePoints": 180,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 78897,
+      "equalRgbPixels": 74594,
+      "equalRgbRatio": 0.945461,
+      "maskedPixels": 0
+    },
+    "32Normal": {
+      "backgroundSamplePoints": 207,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 97280,
+      "equalRgbPixels": 91580,
+      "equalRgbRatio": 0.941406,
+      "maskedPixels": 0
+    },
+    "32Bold": {
+      "backgroundSamplePoints": 207,
+      "backgroundSamplesExactlyEqual": true,
+      "pixelsCompared": 99968,
+      "equalRgbPixels": 94732,
+      "equalRgbRatio": 0.947623,
+      "maskedPixels": 0
+    }
+  },
+  "ruEnWholeFormRgbCountsEqual": true
+}

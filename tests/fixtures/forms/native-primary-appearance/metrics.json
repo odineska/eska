@@ -1,0 +1,290 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 (ALT 10)",
+  "dpi": 96,
+  "importantColor": "#ff0000",
+  "accentColor": "#9800ff",
+  "targetScope": "Buttons with explicit BackColor; automatic primary backgrounds remain open",
+  "exclusions": [],
+  "targetInteriorPixels": 7000,
+  "rows": [
+    {
+      "name": "DefaultBack",
+      "points": 10,
+      "weight": "normal",
+      "file": "DefaultBack.xml",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "targetButtons": [
+        1,
+        2
+      ],
+      "buttons": [
+        {
+          "caption": "WW",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "background": "#ff0000",
+          "foreground": "#000000",
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "1c32e65de1349e6c883243d2abe5d5694c352ca99fe87f661f6577c5dfba0db7",
+          "glyph": {
+            "x": 27,
+            "y": 44,
+            "width": 24,
+            "height": 15
+          },
+          "glyphRgbSha256": "d0c58a1ef4ea891e61d33f02c505bb0f9a367a100ff10e758ccd14cdabe2017c",
+          "fullButtonAndShadowRgbSha256": "29d0763642f2c954f6630304d1ee4e4d46dd677313f1bd7e717be08b960a68cd"
+        },
+        {
+          "caption": "MM",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "background": "#0000ff",
+          "foreground": "#4d4d4d",
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "a378a775443fa18175dbe27ece12eeb23905bd7de152f7543d4e66ba97981a4c",
+          "glyph": {
+            "x": 88,
+            "y": 44,
+            "width": 22,
+            "height": 15
+          },
+          "glyphRgbSha256": "9209ab3d97ab5d49703aea68aaf020fe8f9deb991b118351ff0a6656738bcaac",
+          "fullButtonAndShadowRgbSha256": "41b91b8f8cfbab07cd4c8eb7595b823d353264fb051d7ce94b521112f476efcd"
+        },
+        {
+          "caption": "First command",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "background": "#008000",
+          "foreground": "#4d4d4d",
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "6b78545a50d7b8ca760f4eda4813898827a09dde248e99c952a91b6f10dd3025",
+          "glyph": {
+            "x": 147,
+            "y": 44,
+            "width": 87,
+            "height": 15
+          },
+          "glyphRgbSha256": "832c1c67a42ea807d41926439e44c97b7264754457a479799ee84cbe1c10201b",
+          "fullButtonAndShadowRgbSha256": "1611d9ecf21923f6914e7e2846dca7b958af09096b2e0774dd5f58255b9241f5"
+        }
+      ],
+      "nativeScreenshotSha256": "e4c01b5bceeba9ff087365e8212f7c660be4afc0ca7bbafceea9c2ac2e2c2afd"
+    },
+    {
+      "name": "TextOverrides",
+      "points": 10,
+      "weight": "normal",
+      "file": "TextOverrides.xml",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "targetButtons": [
+        1
+      ],
+      "buttons": [
+        {
+          "caption": "WW",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "background": "#ff0000",
+          "foreground": "#0000ff",
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "4b8ce1848e57691ac055eaf9d36e31c76e732ad2ceca020138aae19504194fab",
+          "glyph": {
+            "x": 27,
+            "y": 44,
+            "width": 24,
+            "height": 15
+          },
+          "glyphRgbSha256": "7e0bf4d178afaaa69c740696d851f11f7cc8812b46471b7d9c4981c5d97c1363",
+          "fullButtonAndShadowRgbSha256": "99b61227fdc27ef479b77e8cb59a8aae99dc0d17dcce84fe5d1b9dcafe704262"
+        },
+        {
+          "caption": "MM",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "background": "#0000ff",
+          "foreground": "#ffff00",
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "cd3d4a16b8baa820f2d4f639eeb654386fb9dd829fa325ce81071fa0e92c77d4",
+          "glyph": {
+            "x": 88,
+            "y": 44,
+            "width": 22,
+            "height": 15
+          },
+          "glyphRgbSha256": "94589c692935b51d6348b3d81962007958050c778ad2112700da81f001601788",
+          "fullButtonAndShadowRgbSha256": "b41a490de0a3efbf90efe88467a7e7b74c313667aac7e273c1032b1c25dceda4"
+        },
+        {
+          "caption": "First command",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "background": "#ff0000",
+          "foreground": "#000000",
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "e3f730d029737a66944bc2fba49cc76694f61069948bf25278500166f898cf46",
+          "glyph": {
+            "x": 147,
+            "y": 44,
+            "width": 87,
+            "height": 15
+          },
+          "glyphRgbSha256": "6f7f41b9f952567b0d472adb27b981b085d909ef55123687696597802e6b4c0c",
+          "fullButtonAndShadowRgbSha256": "1e1bea68e9ff25fbcb68dff380f2063f2f4f559a2c4471e9072bb63098c379cc"
+        }
+      ],
+      "nativeScreenshotSha256": "ccb52adde0f91e4eaa45579b571a5af04eebec8f79a5fc1a08b77c9e6bbb2298"
+    },
+    {
+      "name": "StyleBack",
+      "points": 10,
+      "weight": "normal",
+      "file": "StyleBack.xml",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "targetButtons": [
+        1,
+        2
+      ],
+      "buttons": [
+        {
+          "caption": "WW",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "background": "#ff0000",
+          "foreground": "#000000",
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "1c32e65de1349e6c883243d2abe5d5694c352ca99fe87f661f6577c5dfba0db7",
+          "glyph": {
+            "x": 27,
+            "y": 44,
+            "width": 24,
+            "height": 15
+          },
+          "glyphRgbSha256": "d0c58a1ef4ea891e61d33f02c505bb0f9a367a100ff10e758ccd14cdabe2017c",
+          "fullButtonAndShadowRgbSha256": "29d0763642f2c954f6630304d1ee4e4d46dd677313f1bd7e717be08b960a68cd"
+        },
+        {
+          "caption": "MM",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "background": "#9800ff",
+          "foreground": "#4d4d4d",
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "0c5a6beca38cffd5b08153972180a986c08cced14683a3ab63d159cbebcae198",
+          "glyph": {
+            "x": 88,
+            "y": 44,
+            "width": 22,
+            "height": 15
+          },
+          "glyphRgbSha256": "9aafed924c5f2db4249814aeaa40a544727bcc4a96b562a1f5292edb6bddeef1",
+          "fullButtonAndShadowRgbSha256": "6cc6e0eceea11992093f261021cae2bc1aa9fc6008674193862b4ab92ce16c6c"
+        },
+        {
+          "caption": "First command",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "background": "#ff0000",
+          "foreground": "#4d4d4d",
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "da8c320fc1ee24feb3f7574d3c897e2729bc7966730551cd58e207cf2007dc32",
+          "glyph": {
+            "x": 147,
+            "y": 44,
+            "width": 87,
+            "height": 15
+          },
+          "glyphRgbSha256": "9e041d7b990f6d9100ac6772ab302aa3f3c384132685e6cbb8f547f197eb9f7b",
+          "fullButtonAndShadowRgbSha256": "40a5acbba19488f0992c7c0db0dc40c0d413939f1c6cf5c6985846fc576fb4ed"
+        }
+      ],
+      "nativeScreenshotSha256": "773a269f8a930d46a402208118089e9dea726a5e644cf11b3eb061c519970c7e"
+    }
+  ]
+}

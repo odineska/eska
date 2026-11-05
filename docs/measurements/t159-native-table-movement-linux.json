@@ -1,0 +1,1210 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "scope": "Complete two-command automatic table movement group on white button/background, Linux 96 DPI, 100% zoom, measured natural 60x27 raster including shadow. Eight native XML sources / sixteen existing images; complete other table toolbars, arbitrary palettes/states/DPI/Windows remain open.",
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "nativeForms": 8,
+  "nativeImages": 16,
+  "newNativeImages": 0,
+  "noNewIndependentXmlCorpus": true,
+  "nativeInputs": {
+    "schemaVersion": 1,
+    "platformBuild": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "zoom": 100,
+    "scope": "Complete two-command automatic movement group, white 26px buttons and white solid parent, natural 60x27 raster including shadow. Full toolbar lower-border poses and other profiles remain unaccepted.",
+    "noNewIndependentXmlCorpus": true,
+    "newNativeImages": 0,
+    "nativeImages": 16,
+    "pixelTolerance": 0,
+    "comparisonMasks": [],
+    "rows": [
+      {
+        "name": "Default",
+        "source": "tests/fixtures/forms/native-tables/Default.xml",
+        "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+        "locales": {
+          "en": {
+            "name": "movement-group",
+            "offset": [
+              71,
+              -65
+            ],
+            "nativeRegion": [
+              345,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Default.png",
+            "screenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5"
+          },
+          "ru": {
+            "name": "movement-group",
+            "offset": [
+              105,
+              -65
+            ],
+            "nativeRegion": [
+              379,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Default.png",
+            "screenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38"
+          }
+        }
+      },
+      {
+        "name": "Horizontal",
+        "source": "tests/fixtures/forms/native-tables/Horizontal.xml",
+        "sourceSha256": "5309ad9001470b2cd9366f4a7fa38caf5309953f926971e14be57a9ba93f9bba",
+        "locales": {
+          "en": {
+            "name": "movement-group",
+            "offset": [
+              71,
+              -65
+            ],
+            "nativeRegion": [
+              345,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Horizontal.png",
+            "screenshotSha256": "d05b4ab31b2a601256a68bf56f184f93a880540e871e3297fc14eec06aeabf34"
+          },
+          "ru": {
+            "name": "movement-group",
+            "offset": [
+              105,
+              -65
+            ],
+            "nativeRegion": [
+              379,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Horizontal.png",
+            "screenshotSha256": "484f5e01d2262517e97232be3786ad03f5224fa7edd7a53596ab1f2bda8e4678"
+          }
+        }
+      },
+      {
+        "name": "HorizontalTitled",
+        "source": "tests/fixtures/forms/native-tables/HorizontalTitled.xml",
+        "sourceSha256": "606ae882f63efe22ec05d0c9a9e11315f4df2008be89982cba1831ed15e279bc",
+        "locales": {
+          "en": {
+            "name": "movement-group",
+            "offset": [
+              71,
+              -65
+            ],
+            "nativeRegion": [
+              345,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/en-HorizontalTitled.png",
+            "screenshotSha256": "ffbca5cd49b77ef09e8c5494235515a22ba6bcdda38e74593b54447806262a0b"
+          },
+          "ru": {
+            "name": "movement-group",
+            "offset": [
+              105,
+              -65
+            ],
+            "nativeRegion": [
+              379,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-HorizontalTitled.png",
+            "screenshotSha256": "c5b0525c5cd37c54d36e19b6be292a97e7d9af0bd931fb3667b9212513996f77"
+          }
+        }
+      },
+      {
+        "name": "InCell",
+        "source": "tests/fixtures/forms/native-tables/InCell.xml",
+        "sourceSha256": "a1c4d8a2a44fb6d21246ec2904177a2de9f6783feb8d058d7b591284c09a8c3d",
+        "locales": {
+          "en": {
+            "name": "movement-group",
+            "offset": [
+              71,
+              -65
+            ],
+            "nativeRegion": [
+              345,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/en-InCell.png",
+            "screenshotSha256": "f7fe11b0be504e47bb0aa1fe55cbc00ee72bec5cb4f6baac87b8f978282e52cb"
+          },
+          "ru": {
+            "name": "movement-group",
+            "offset": [
+              105,
+              -65
+            ],
+            "nativeRegion": [
+              379,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-InCell.png",
+            "screenshotSha256": "a872a02f43f0643acabf42050d7a05e01df9b6d315baac999fa50b09e59c2416"
+          }
+        }
+      },
+      {
+        "name": "Marked",
+        "source": "tests/fixtures/forms/native-tables/Marked.xml",
+        "sourceSha256": "8394399403079ec22fc746f87522f51116dca0440ce0dfc5e4f5059aed04dcb6",
+        "locales": {
+          "en": {
+            "name": "movement-group",
+            "offset": [
+              71,
+              -65
+            ],
+            "nativeRegion": [
+              345,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Marked.png",
+            "screenshotSha256": "b0aa416c15f4d6e6e60d81d734482b92701e90ae0834284c1e184b2ff65694d3"
+          },
+          "ru": {
+            "name": "movement-group",
+            "offset": [
+              105,
+              -65
+            ],
+            "nativeRegion": [
+              379,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Marked.png",
+            "screenshotSha256": "73187e25d288047702005788c6b7211c7e725a2a9d53de0a778c0266801c5c4d"
+          }
+        }
+      },
+      {
+        "name": "ReadOnly",
+        "source": "tests/fixtures/forms/native-tables/ReadOnly.xml",
+        "sourceSha256": "efa9ef102cb1e3c1f37543f692bbf4c58980dc2f0cb56bc29decbbb62e3ba0d3",
+        "locales": {
+          "en": {
+            "name": "movement-group",
+            "offset": [
+              71,
+              -65
+            ],
+            "nativeRegion": [
+              345,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/en-ReadOnly.png",
+            "screenshotSha256": "6a385741e1a2817fb9a016e79c321f16e3e0ddde9f4b21a5239d5d599ef396cf"
+          },
+          "ru": {
+            "name": "movement-group",
+            "offset": [
+              105,
+              -65
+            ],
+            "nativeRegion": [
+              379,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-ReadOnly.png",
+            "screenshotSha256": "82030ccf6dffce9be8776721c0756858de1ad2817bf6e3db077e241c843327e4"
+          }
+        }
+      },
+      {
+        "name": "Vertical",
+        "source": "tests/fixtures/forms/native-tables/Vertical.xml",
+        "sourceSha256": "5144cc2e8c2d37ad91f85516c0e9646b2acc5e2d329e90fbdd8492760f2d017a",
+        "locales": {
+          "en": {
+            "name": "movement-group",
+            "offset": [
+              71,
+              -65
+            ],
+            "nativeRegion": [
+              345,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Vertical.png",
+            "screenshotSha256": "e425de17d6bbe10bc91271bdb18cf01fbd2bfe6ef73961277020ed9415a7e1ea"
+          },
+          "ru": {
+            "name": "movement-group",
+            "offset": [
+              105,
+              -65
+            ],
+            "nativeRegion": [
+              379,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Vertical.png",
+            "screenshotSha256": "5caad7ca3d13c097dea2c45c9a3c9be03027e3982d5eff5c11738d72cfa737ef"
+          }
+        }
+      },
+      {
+        "name": "MetadataTable",
+        "source": "tests/fixtures/forms/native-context-tables/MetadataTable.xml",
+        "sourceSha256": "e892ddbe46307d58fc4fe5baf7569f8d5b33f3ff36a35eb8d76b1587341685a0",
+        "locales": {
+          "en": {
+            "name": "movement-group",
+            "offset": [
+              71,
+              -65
+            ],
+            "nativeRegion": [
+              345,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-context-pixels-g93fkhea/en-MetadataTable-complete.png",
+            "screenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825"
+          },
+          "ru": {
+            "name": "movement-group",
+            "offset": [
+              105,
+              -65
+            ],
+            "nativeRegion": [
+              379,
+              549,
+              60,
+              27
+            ],
+            "width": 60,
+            "height": 27,
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "nativeScreenshot": "native-context-pixels-g93fkhea/search-ru-Metadata-first.png",
+            "screenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb"
+          }
+        }
+      }
+    ],
+    "referenceRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+    "nativeForms": 8
+  },
+  "nativeMetricsSha256": "4a726421a6bf67353032cf05b443d77f8d655b1b9cb9a2fcc34f73dae1412233",
+  "completeMovementGroupPixelParity": true,
+  "completeDynamicToolbarPixelParityPreserved": true,
+  "wholeToolbarPixelParity": false,
+  "wholeFormVisualParity": false,
+  "fullProfileAccepted": false,
+  "noBslExecuted": true,
+  "implementation": {
+    "sharedSolidComponent": "NativeTableMovement",
+    "painting": "One measured opaque 60x27 group raster, shared across all automatic movement groups; no form-specific CSS. Existing underlying command buttons retain names, hit testing and inert read-only behavior.",
+    "profileGate": [
+      "Linux",
+      "96 DPI/devicePixelRatio 1",
+      "preview zoom 100%",
+      "two commands MoveUp then MoveDown",
+      "60x26 control plus 1px shadow",
+      "white ButtonBackColor",
+      "solid white parent background"
+    ],
+    "unsupported": "Existing command rendering remains visible and the localized incomplete-matching notice is shown; 200% fallback and 100% recovery verified.",
+    "zoom": "The CSS zoom property does not trigger a content-size ResizeObserver; the component also observes the actual preview zoom and redraws on the next frame.",
+    "notice": "Existing notice now says form elements rather than only form text, in both locales.",
+    "dependenciesAdded": false,
+    "publicProtocolChanged": false
+  },
+  "checks": {
+    "node": {
+      "passed": 521,
+      "failed": 0,
+      "skipped": 11,
+      "total": 532,
+      "log": "native-table-movement-acceptance-47nc9u42/node-tests.log",
+      "logSha256": "8300b1c5ddd3d8809ccf5cf8784a038ef33f76d7af3e8ee0446ee7c48cff2cba"
+    },
+    "nativeUnit": {
+      "sourcePixelsCompared": 25920,
+      "differentRgbPixels": 0
+    },
+    "backend": {
+      "codeChangedInThisSlice": false,
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "completeChecksReuse": "docs/measurements/t158-native-button-types-linux.json",
+      "cargoPassed": 1520,
+      "cargoFailed": 0,
+      "cargoIgnored": 19,
+      "sourceHashesVerifiedAgainstBatch": true,
+      "verifiedCoreFiles": 607,
+      "rustSourcesAndCargoFilesUnchangedSince": "ad8020e"
+    },
+    "ordinaryButtonsRegression": {
+      "directory": "form-batch-wqZXah",
+      "pairsPassed": 2,
+      "samplesPerLocale": 60,
+      "note": "Passed before the later table-only zoom-gate correction. Only the new NativeTableMovement production component changed afterward; ordinary button painting was unchanged. Runtime change list confirms only the bundled form JS changed, all other 1302 files are byte-identical.",
+      "runtimeChangesAfterThisRun": [
+        "out/form-preview.js"
+      ]
+    }
+  },
+  "earlierFailures": [
+    {
+      "directory": "form-batch-wqZXah",
+      "pairsFailed": 2,
+      "classification": "product",
+      "reason": "Initial full group pixels passed, but CSS zoom 200% did not invalidate the measurement gate because ResizeObserver reports unscaled content size. Explicit zoom observation and repaint were added.",
+      "batchSha256": "dbe991012f6fed83dc04240e44304b625b3c9c61aba0df719e280807474cbaab"
+    },
+    {
+      "directory": "form-batch-coG977",
+      "pairsFailed": 2,
+      "classification": "harness",
+      "reason": "The corrected product reached zoom fallback/recovery, but the GUI test redeclared global lexical const select. Both calls are now local IIFEs. Production bytes did not change after this batch.",
+      "batchSha256": "4d63e601192f5281001847ef147b0533b0ee7c97de3bb27233a2a751885ed8ff"
+    }
+  ],
+  "acceptance": {
+    "passed": true,
+    "frozenRuntimeBatch": "form-batch-coG977",
+    "successfulSameRuntimePairs": 6,
+    "successfulSameVsixTableRecheckPairs": 2,
+    "pairsPassed": 8,
+    "pairsFailed": 0,
+    "publishedCases": 104,
+    "sameVsixBytes": true,
+    "guiConcurrency": 1,
+    "vsixSha256": "d63fb4d00c2b171407855ecabb9dc630a499c846fa298bc73ed3ab314380dcf3",
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "84e82ecf9d8221d9a3556e1ef9d921c695ad66471b51dddfe5a051a165e789ea",
+    "inputsSha256": "1636eaef45ecc33e95a139d9d7a45be4792aa22815cd5e2454c903ddc0bbc461",
+    "recheckDirectory": "native-table-movement-acceptance-47nc9u42",
+    "recheckManifestSha256": "dfcc60009562aead0ed4ab1156f28a8e830d3d582bb03faa47c89018fb4b7e22",
+    "successfulRuns": [
+      {
+        "suite": "tables",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.671615552000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-en/driver.log",
+        "receipt": "tables-en/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 814.185881,
+          "runtimeVerificationMs": 321.20454499999994,
+          "preHostMs": 1145.7349450000002,
+          "cleanupMs": 34.80413200000021,
+          "totalMs": 7521.821712999999
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 9.954698420000001,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-ru/driver.log",
+        "receipt": "tables-ru/receipt.json",
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 793.511427,
+          "runtimeVerificationMs": 351.74264600000004,
+          "preHostMs": 1163.023242,
+          "cleanupMs": 40.17432899999949,
+          "totalMs": 9798.964429
+        }
+      },
+      {
+        "suite": "standard-pictures",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 5.478944692999997,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "standard-pictures-en/driver.log",
+        "receipt": "standard-pictures-en/receipt.json",
+        "caseIds": [
+          "standard-pictures/White",
+          "standard-pictures/dirty-Black",
+          "standard-pictures/restored-White",
+          "standard-pictures/floating-White",
+          "standard-pictures/floating-dirty-Red",
+          "standard-pictures/floating-restored-White",
+          "standard-pictures/reattached-White",
+          "standard-pictures/Black",
+          "standard-pictures/Red"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 850.913468,
+          "runtimeVerificationMs": 271.2926550000001,
+          "preHostMs": 1127.5178199999998,
+          "cleanupMs": 30.639766000000236,
+          "totalMs": 5335.107009
+        }
+      },
+      {
+        "suite": "standard-pictures",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 7.990173729000002,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "standard-pictures-ru/driver.log",
+        "receipt": "standard-pictures-ru/receipt.json",
+        "caseIds": [
+          "standard-pictures/White",
+          "standard-pictures/dirty-Black",
+          "standard-pictures/restored-White",
+          "standard-pictures/floating-White",
+          "standard-pictures/floating-dirty-Red",
+          "standard-pictures/floating-restored-White",
+          "standard-pictures/reattached-White",
+          "standard-pictures/Black",
+          "standard-pictures/Red"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 855.894873,
+          "runtimeVerificationMs": 330.36935900000014,
+          "preHostMs": 1207.1115619999998,
+          "cleanupMs": 35.062715000000026,
+          "totalMs": 7860.951179
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 4.4293709949999975,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-en/driver.log",
+        "receipt": "application-en/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 850.749759,
+          "runtimeVerificationMs": 352.98710000000005,
+          "preHostMs": 1206.859062,
+          "cleanupMs": 35.63987999999972,
+          "totalMs": 4320.0909839999995
+        }
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 6.965243475999996,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "application-ru/driver.log",
+        "receipt": "application-ru/receipt.json",
+        "caseIds": [
+          "application/0",
+          "application/1",
+          "application/2",
+          "application/3"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 809.720099,
+          "runtimeVerificationMs": 329.75011000000006,
+          "preHostMs": 1153.451012,
+          "cleanupMs": 42.51015699999971,
+          "totalMs": 6824.634284
+        }
+      }
+    ],
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "movementSamples": 14,
+        "movementPixelsCompared": 22680,
+        "differentRgbPixels": 0,
+        "results": [
+          {
+            "label": "Default",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "restored-default",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "floating-default",
+            "name": "movement-group",
+            "region": [
+              112,
+              150,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "floating-restored",
+            "name": "movement-group",
+            "region": [
+              112,
+              150,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "reattached-default",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "Horizontal",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "HorizontalTitled",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "Vertical",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "InCell",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "Marked",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "ReadOnly",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "MetadataTable",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "dynamic-dirty-footer",
+            "name": "movement-group",
+            "region": [
+              460,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "dynamic-floating-dirty-footer",
+            "name": "movement-group",
+            "region": [
+              112,
+              150,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          }
+        ],
+        "wholeDynamicToolbarsPreserved": 5,
+        "movementZoomFallbackVerified": true,
+        "stableTableDom": true,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true,
+        "sourceWritesDuringViewing": false,
+        "receipt": "native-table-movement-acceptance-47nc9u42/en/receipt.json",
+        "receiptSha256": "57f1ecb8ebe838adc6acba3d9f969a4650c9d2a386eed04deac93bf17b0f32ee"
+      },
+      "ru": {
+        "passed": true,
+        "movementSamples": 14,
+        "movementPixelsCompared": 22680,
+        "differentRgbPixels": 0,
+        "results": [
+          {
+            "label": "Default",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "restored-default",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "floating-default",
+            "name": "movement-group",
+            "region": [
+              146,
+              150,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "floating-restored",
+            "name": "movement-group",
+            "region": [
+              146,
+              150,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "reattached-default",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "Horizontal",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "HorizontalTitled",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "Vertical",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "InCell",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "Marked",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "ReadOnly",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "MetadataTable",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "dynamic-dirty-footer",
+            "name": "movement-group",
+            "region": [
+              494,
+              385,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          },
+          {
+            "label": "dynamic-floating-dirty-footer",
+            "name": "movement-group",
+            "region": [
+              146,
+              150,
+              60,
+              27
+            ],
+            "rgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "pixels": 1620,
+            "expectedRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+            "passed": true
+          }
+        ],
+        "wholeDynamicToolbarsPreserved": 5,
+        "movementZoomFallbackVerified": true,
+        "stableTableDom": true,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true,
+        "sourceWritesDuringViewing": false,
+        "receipt": "native-table-movement-acceptance-47nc9u42/ru/receipt.json",
+        "receiptSha256": "e64fbce59c1b3c9b16407a74c1869891e3aa0cf97af87b55b34aeafa409a7d73"
+      }
+    }
+  },
+  "completeToolbarMeasurementsFromFinalScreenshots": [
+    {
+      "name": "Default",
+      "locale": "en",
+      "differentRgbPixels": 163,
+      "comparedPixels": 11583,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "native-table-movement-acceptance-47nc9u42/en/table-pixels-Default-en.png",
+      "screenshotSha256": "6d8b2c5ed798b001adbe89c5162f0f2f99afd2ba51351333cdd6dcda61cabb7d",
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Default.png",
+      "nativeScreenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5"
+    },
+    {
+      "name": "ReadOnly",
+      "locale": "en",
+      "differentRgbPixels": 163,
+      "comparedPixels": 11583,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "native-table-movement-acceptance-47nc9u42/en/table-pixels-ReadOnly-en.png",
+      "screenshotSha256": "d2df39a60c24125ce9c4defe87c606bc2db629a5050d3aafc16fe96f971a2918",
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/search-en-ReadOnly-first.png",
+      "nativeScreenshotSha256": "b0b269c99691f1886cd181cc2dcb7cf3186e680f5870b02c0e2ca8903aa870a5"
+    },
+    {
+      "name": "MetadataTable",
+      "locale": "en",
+      "differentRgbPixels": 163,
+      "comparedPixels": 14040,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "native-table-movement-acceptance-47nc9u42/en/table-pixels-MetadataTable-en.png",
+      "screenshotSha256": "1ab14aa2724c3fc7aea4cc393afd56ac0ee0f494f15cfb74e356c4d40ae575ff",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/en-MetadataTable-complete.png",
+      "nativeScreenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825"
+    },
+    {
+      "name": "DynamicList",
+      "locale": "en",
+      "differentRgbPixels": 0,
+      "comparedPixels": 12258,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "native-table-movement-acceptance-47nc9u42/en/table-pixels-DynamicList-en.png",
+      "screenshotSha256": "f13686f1c0a84d76e847030f6295891dea3ce773cef96ef44088b42992ada882",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+      "nativeScreenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f"
+    },
+    {
+      "name": "Default",
+      "locale": "ru",
+      "differentRgbPixels": 149,
+      "comparedPixels": 11205,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "native-table-movement-acceptance-47nc9u42/ru/table-pixels-Default-ru.png",
+      "screenshotSha256": "f93ef21f185f97b64b79bf6ed7dfb91211325bde9308bd83ae160258270c07c8",
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Default.png",
+      "nativeScreenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38"
+    },
+    {
+      "name": "ReadOnly",
+      "locale": "ru",
+      "differentRgbPixels": 149,
+      "comparedPixels": 11205,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "native-table-movement-acceptance-47nc9u42/ru/table-pixels-ReadOnly-ru.png",
+      "screenshotSha256": "6ccd26d2fc75b06a7cdee95baf0bef7fb1ece7ef7ec269c2ae090a9aa3f9d979",
+      "nativeScreenshot": "native-table-pixels-kbagfn6p/search-ru-ReadOnly-first.png",
+      "nativeScreenshotSha256": "fa9e73f1a2bc4dde84679dcf569be818a5924f24608b45d0e9d7fd24d6026e87"
+    },
+    {
+      "name": "MetadataTable",
+      "locale": "ru",
+      "differentRgbPixels": 149,
+      "comparedPixels": 14040,
+      "wholeToolbarPixelParity": false,
+      "actualScreenshot": "native-table-movement-acceptance-47nc9u42/ru/table-pixels-MetadataTable-ru.png",
+      "screenshotSha256": "669112378dec41733af3f19fb3b5a4bc8512aee246b101793b62353c52bb7e86",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/search-ru-Metadata-first.png",
+      "nativeScreenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb"
+    },
+    {
+      "name": "DynamicList",
+      "locale": "ru",
+      "differentRgbPixels": 0,
+      "comparedPixels": 11286,
+      "wholeToolbarPixelParity": true,
+      "actualScreenshot": "native-table-movement-acceptance-47nc9u42/ru/table-pixels-DynamicList-ru.png",
+      "screenshotSha256": "7b3fb581bf43e05509263ae8c65079ec461e5699e4f8ae66ef0741820bc7b946",
+      "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+      "nativeScreenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723"
+    }
+  ],
+  "remaining": [
+    "Recorded Default, ReadOnly and MetadataTable complete toolbars still differ by 163 en / 149 ru pixels, concentrated on adjacent ordinary buttons lower-border paint; do not mask or waive them.",
+    "Other button/parent colors, command order/count, states and zoom/DPI need independent native measurements; this opaque white group is explicitly profile-gated.",
+    "Full toolbar/form geometry and property matrices, native alternate 11px search states, full Linux profile and Windows remain unaccepted."
+  ]
+}

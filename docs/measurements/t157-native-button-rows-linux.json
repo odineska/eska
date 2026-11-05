@@ -1,0 +1,3517 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-04",
+  "scope": "Recorded Linux 10 pt text-button row geometry and selection outlines, explicit Width 6/8/10, and complete link caption pixels at native form coordinates. Full widget/form RGB comparisons remain failing and are retained.",
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "nativeUiLocale": "en",
+  "viewerLocales": [
+    "en",
+    "ru"
+  ],
+  "formCaptionsIdenticalInBothSourceLanguages": true,
+  "dpi": 96,
+  "zoom": 100,
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "fullProfileAccepted": false,
+  "fullWidgetPixelParity": false,
+  "noBslModulesOrHandlers": true,
+  "nativeButtons": 21,
+  "nativeForms": 2,
+  "nativeInputs": [
+    {
+      "path": "source/CommonForms/ProbeButtons/Ext/Form.xml",
+      "sha256": "6fb3e0d82997d3367ad3230974ae76eb60ff2e06120b2d7d24c4d5cc78d5af04"
+    },
+    {
+      "path": "source/CommonForms/ProbeButtons.xml",
+      "sha256": "3911da75252f35eaa40147b406740ab2e7bd8a608c8a06e6d00a316dd0d2f4f3"
+    },
+    {
+      "path": "source/CommonForms/ProbeRows/Ext/Form.xml",
+      "sha256": "3ebdd864dbd250cdeb40d9feca80093cfa0a724003632a210693da32266e8400"
+    },
+    {
+      "path": "source/CommonForms/ProbeRows.xml",
+      "sha256": "72e70c53039cc3b29e7d8bc02d7b3b950560b27b1f65e9b1763d2fd103c77b19"
+    },
+    {
+      "path": "source/Configuration.xml",
+      "sha256": "67b735cb6494a18381f5688e071d7a4b1a04bd58e19b2a09b144de1e1fff8f3e"
+    },
+    {
+      "path": "source/Languages/Русский.xml",
+      "sha256": "0e8bf1541feebab9044684311e982c007172c0c9861d5cbebca2f8f1933cb048"
+    }
+  ],
+  "nativeMetricsSha256": "b5f618b85c1aedbfe9c0f8da355b5abaa3be9c965ee34955851778020397e8d7",
+  "nativeCaptionPixels": 5430,
+  "newNativeCaptionPixels": 3330,
+  "nativeObservations": {
+    "frames": {
+      "ProbeButtons": [
+        142,
+        187
+      ],
+      "ProbeRows": [
+        204,
+        249
+      ]
+    },
+    "geometryMethod": "Native painted raised bounds and exact 2 px blue selection rectangles. CSS border-box coordinates are reconstructed from their recorded type-specific decoration insets; native internal widget handles were not queried.",
+    "normalLinkHeight": 17,
+    "normalButtonRowGap": 10,
+    "commandBarLinkExtraHorizontalPadding": 2,
+    "explicitWidthPairs": [
+      [
+        6,
+        60
+      ],
+      [
+        8,
+        80
+      ],
+      [
+        10,
+        100
+      ]
+    ],
+    "allSourceFilesFromNativeExport": true,
+    "configDumpInfoExcluded": "Transport snapshot is not a required metadata input. Six metadata/form XML files are preserved byte for byte.",
+    "createImportExportApplyExitCodes": [
+      0,
+      0,
+      0
+    ],
+    "oldTypeFormByteIdentical": true
+  },
+  "implementation": [
+    "Horizontal rows containing visible Button nodes allocate their measured insets; only automatic all-UsualButton rows share widths.",
+    "Hyperlink uses the font line height, no shadow allocation; CommandBarHyperlink retains its toolbar height with 1 px extra padding on each side.",
+    "Linux explicit button Width uses 10 px per unit; input-field and Windows conversions are unchanged.",
+    "Selection overlay follows the painted button with type-specific native insets.",
+    "No new dependencies, fonts, WASM or backend protocol changes."
+  ],
+  "beforeFix": {
+    "passed": false,
+    "expectedFailure": true,
+    "directory": "button-rows-before-19rmpq7d",
+    "vsixSha256": "0bbdb7e9ba2ddf3c96bd0e4750cdcfad21414ee996fb0e9e496bb979e1a5d256",
+    "receiptSha256": "578d43f514f8a566db5488aa5ea2f24d8423290ec4330971647c2a7bebfd7775",
+    "measurementsSha256": "83d880f9c42cebb80094c35592c1a532f884fa8b6eac4f91b6b64553fa78359c",
+    "forms": [
+      {
+        "name": "ProbeButtons",
+        "expectedFrame": [
+          142,
+          187
+        ],
+        "actual": {
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 142,
+            "height": 181
+          },
+          "buttons": [
+            {
+              "x": 41,
+              "y": 315,
+              "width": 61,
+              "height": 26,
+              "caption": "Usual"
+            },
+            {
+              "x": 110,
+              "y": 315,
+              "width": 26,
+              "height": 26,
+              "caption": "Link"
+            },
+            {
+              "x": 41,
+              "y": 349,
+              "width": 48,
+              "height": 26,
+              "caption": "Bar"
+            },
+            {
+              "x": 98,
+              "y": 349,
+              "width": 46,
+              "height": 26,
+              "caption": "Bar link"
+            },
+            {
+              "x": 41,
+              "y": 384,
+              "width": 61,
+              "height": 26,
+              "caption": "Usual"
+            },
+            {
+              "x": 110,
+              "y": 384,
+              "width": 26,
+              "height": 26,
+              "caption": "Link"
+            },
+            {
+              "x": 41,
+              "y": 418,
+              "width": 48,
+              "height": 26,
+              "caption": "Bar"
+            },
+            {
+              "x": 98,
+              "y": 418,
+              "width": 46,
+              "height": 26,
+              "caption": "Bar link"
+            }
+          ]
+        }
+      },
+      {
+        "name": "ProbeRows",
+        "expectedFrame": [
+          204,
+          249
+        ],
+        "actual": {
+          "frame": {
+            "x": 28,
+            "y": 277,
+            "width": 194,
+            "height": 244
+          },
+          "buttons": [
+            {
+              "x": 41,
+              "y": 315,
+              "width": 91,
+              "height": 26,
+              "caption": "Long usual"
+            },
+            {
+              "x": 140,
+              "y": 315,
+              "width": 26,
+              "height": 26,
+              "caption": "Link"
+            },
+            {
+              "x": 41,
+              "y": 348,
+              "width": 26,
+              "height": 26,
+              "caption": "Link"
+            },
+            {
+              "x": 75,
+              "y": 348,
+              "width": 91,
+              "height": 26,
+              "caption": "Long usual"
+            },
+            {
+              "x": 41,
+              "y": 381,
+              "width": 48,
+              "height": 26,
+              "caption": "Left link"
+            },
+            {
+              "x": 97,
+              "y": 381,
+              "width": 56,
+              "height": 26,
+              "caption": "Right link"
+            },
+            {
+              "x": 41,
+              "y": 414,
+              "width": 68,
+              "height": 26,
+              "caption": "Fixed"
+            },
+            {
+              "x": 117,
+              "y": 414,
+              "width": 26,
+              "height": 26,
+              "caption": "Link"
+            },
+            {
+              "x": 41,
+              "y": 448,
+              "width": 48,
+              "height": 26,
+              "caption": "Bar"
+            },
+            {
+              "x": 98,
+              "y": 448,
+              "width": 46,
+              "height": 26,
+              "caption": "Bar link"
+            },
+            {
+              "x": 153,
+              "y": 448,
+              "width": 48,
+              "height": 26,
+              "caption": "Bar"
+            },
+            {
+              "x": 41,
+              "y": 483,
+              "width": 52,
+              "height": 26,
+              "caption": "First"
+            },
+            {
+              "x": 101,
+              "y": 483,
+              "width": 84,
+              "height": 26,
+              "caption": "Second"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "checks": {
+    "node": {
+      "passed": 514,
+      "failed": 0,
+      "skipped": 11,
+      "total": 525,
+      "log": "native-button-rows-g5ngxw2e/node-tests.log",
+      "logSha256": "e11e0cf8f3c2af9a85c906455f2c5cf2e3a15083b7d559779b76f5402dfb147d"
+    },
+    "nativeCaptionUnits": {
+      "passed": 2,
+      "failed": 0,
+      "pixelsCompared": 5430
+    },
+    "backend": {
+      "codeChangedInThisSlice": false,
+      "sha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+      "sourceHashesVerifiedAgainstBatch": true,
+      "completeChecksReuse": "docs/measurements/t158-native-button-types-linux.json",
+      "cargoPassed": 1520,
+      "cargoFailed": 0,
+      "cargoIgnored": 19
+    }
+  },
+  "acceptance": {
+    "allRequestedPairsPassedAfterWindowRecheck": true,
+    "distinctPairsPassed": 26,
+    "publishedCases": 562,
+    "geometryGuiCases": 16,
+    "scenarios": {
+      "en": {
+        "passed": true,
+        "cases": 8,
+        "captionPixelsCompared": 25410,
+        "differentCaptionRgbPixels": 0,
+        "selectionGeometrySamples": 28,
+        "stableIdentity": true,
+        "stableDom": true,
+        "sourceWritesDuringViewing": false,
+        "results": [
+          {
+            "label": "ProbeButtons",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 142,
+              "height": 187
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 61,
+                "height": 26,
+                "caption": "Usual"
+              },
+              {
+                "x": 112,
+                "y": 321,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 352,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 352,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 41,
+                "y": 388,
+                "width": 61,
+                "height": 26,
+                "caption": "Usual"
+              },
+              {
+                "x": 112,
+                "y": 393,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 424,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 424,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              }
+            ],
+            "captionPixelsCompared": 2100,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "DefaultHyperlink",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "pixels": 375,
+                "rgbSha256": "c65e290eee8b73781525d5abb38f56ecf2ebe2bded9848c24e06bfe2a93b62ea"
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "pixels": 675,
+                "rgbSha256": "877a785ca66f6f41dcbff9d5d0c665bd62622760c27db2a941fca9eaec01c77c"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "DefaultUsualButton",
+                "bounds": [
+                  10,
+                  36,
+                  67,
+                  33
+                ],
+                "bluePixels": 384
+              },
+              {
+                "name": "DefaultHyperlink",
+                "bounds": [
+                  81,
+                  41,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "bounds": [
+                  10,
+                  73,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "bounds": [
+                  67,
+                  73,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "bounds": [
+                  10,
+                  108,
+                  67,
+                  33
+                ],
+                "bluePixels": 384
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "bounds": [
+                  81,
+                  113,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "bounds": [
+                  10,
+                  145,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "bounds": [
+                  67,
+                  145,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "ProbeRows",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 204,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 321,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 357,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 352,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 388,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 388,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 414,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 419,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 486,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 486,
+                "width": 100,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "Forward1",
+                "bounds": [
+                  10,
+                  36,
+                  97,
+                  33
+                ],
+                "bluePixels": 504
+              },
+              {
+                "name": "Forward2",
+                "bounds": [
+                  111,
+                  41,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "Reverse1",
+                "bounds": [
+                  10,
+                  77,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "Reverse2",
+                "bounds": [
+                  46,
+                  72,
+                  97,
+                  33
+                ],
+                "bluePixels": 504
+              },
+              {
+                "name": "Links1",
+                "bounds": [
+                  10,
+                  108,
+                  54,
+                  23
+                ],
+                "bluePixels": 292
+              },
+              {
+                "name": "Links2",
+                "bounds": [
+                  68,
+                  108,
+                  62,
+                  23
+                ],
+                "bluePixels": 324
+              },
+              {
+                "name": "FixedMixed1",
+                "bounds": [
+                  10,
+                  134,
+                  86,
+                  33
+                ],
+                "bluePixels": 460
+              },
+              {
+                "name": "FixedMixed2",
+                "bounds": [
+                  100,
+                  139,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "Bar1",
+                "bounds": [
+                  10,
+                  171,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "Bar2",
+                "bounds": [
+                  67,
+                  171,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "Bar3",
+                "bounds": [
+                  124,
+                  171,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "FixedUsual1",
+                "bounds": [
+                  10,
+                  206,
+                  66,
+                  33
+                ],
+                "bluePixels": 380
+              },
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  106,
+                  33
+                ],
+                "bluePixels": 540
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "dirty-explicit-width",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 196,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 321,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 357,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 352,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 388,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 388,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 414,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 419,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 486,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 486,
+                "width": 80,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  86,
+                  33
+                ],
+                "bluePixels": 460
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "restored-explicit-width",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 204,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 321,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 357,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 352,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 388,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 388,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 414,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 419,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 486,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 486,
+                "width": 100,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  106,
+                  33
+                ],
+                "bluePixels": 540
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "floating-native",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 204,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 81,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 86,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 122,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 117,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 153,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 153,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 179,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 184,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 251,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 251,
+                "width": 100,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "Forward2",
+                "bounds": [
+                  111,
+                  41,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "Bar2",
+                "bounds": [
+                  67,
+                  171,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  106,
+                  33
+                ],
+                "bluePixels": 540
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "floating-dirty-width",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 196,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 81,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 86,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 122,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 117,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 153,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 153,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 179,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 184,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 251,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 251,
+                "width": 80,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  86,
+                  33
+                ],
+                "bluePixels": 460
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "floating-restored",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 204,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 81,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 86,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 122,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 117,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 153,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 153,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 179,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 184,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 251,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 251,
+                "width": 100,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "reattached-native",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 204,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 321,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 357,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 352,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 388,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 388,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 414,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 419,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 486,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 486,
+                "width": 100,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  106,
+                  33
+                ],
+                "bluePixels": 540
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          }
+        ],
+        "receiptSha256": "b63698ba4d806c3727e61494d06b40f3df6bc8c72cac7e548c7b723ba52c8e3c"
+      },
+      "ru": {
+        "passed": true,
+        "cases": 8,
+        "captionPixelsCompared": 25410,
+        "differentCaptionRgbPixels": 0,
+        "selectionGeometrySamples": 28,
+        "stableIdentity": true,
+        "stableDom": true,
+        "sourceWritesDuringViewing": false,
+        "results": [
+          {
+            "label": "ProbeButtons",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 142,
+              "height": 187
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 61,
+                "height": 26,
+                "caption": "Usual"
+              },
+              {
+                "x": 112,
+                "y": 321,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 352,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 352,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 41,
+                "y": 388,
+                "width": 61,
+                "height": 26,
+                "caption": "Usual"
+              },
+              {
+                "x": 112,
+                "y": 393,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 424,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 424,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              }
+            ],
+            "captionPixelsCompared": 2100,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "DefaultHyperlink",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "pixels": 375,
+                "rgbSha256": "c65e290eee8b73781525d5abb38f56ecf2ebe2bded9848c24e06bfe2a93b62ea"
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "pixels": 675,
+                "rgbSha256": "877a785ca66f6f41dcbff9d5d0c665bd62622760c27db2a941fca9eaec01c77c"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "DefaultUsualButton",
+                "bounds": [
+                  10,
+                  36,
+                  67,
+                  33
+                ],
+                "bluePixels": 384
+              },
+              {
+                "name": "DefaultHyperlink",
+                "bounds": [
+                  81,
+                  41,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "DefaultCommandBarButton",
+                "bounds": [
+                  10,
+                  73,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "DefaultCommandBarHyperlink",
+                "bounds": [
+                  67,
+                  73,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "ExplicitUsualButton",
+                "bounds": [
+                  10,
+                  108,
+                  67,
+                  33
+                ],
+                "bluePixels": 384
+              },
+              {
+                "name": "ExplicitHyperlink",
+                "bounds": [
+                  81,
+                  113,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "ExplicitCommandBarButton",
+                "bounds": [
+                  10,
+                  145,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "ExplicitCommandBarHyperlink",
+                "bounds": [
+                  67,
+                  145,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "ProbeRows",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 204,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 321,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 357,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 352,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 388,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 388,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 414,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 419,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 486,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 486,
+                "width": 100,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "Forward1",
+                "bounds": [
+                  10,
+                  36,
+                  97,
+                  33
+                ],
+                "bluePixels": 504
+              },
+              {
+                "name": "Forward2",
+                "bounds": [
+                  111,
+                  41,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "Reverse1",
+                "bounds": [
+                  10,
+                  77,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "Reverse2",
+                "bounds": [
+                  46,
+                  72,
+                  97,
+                  33
+                ],
+                "bluePixels": 504
+              },
+              {
+                "name": "Links1",
+                "bounds": [
+                  10,
+                  108,
+                  54,
+                  23
+                ],
+                "bluePixels": 292
+              },
+              {
+                "name": "Links2",
+                "bounds": [
+                  68,
+                  108,
+                  62,
+                  23
+                ],
+                "bluePixels": 324
+              },
+              {
+                "name": "FixedMixed1",
+                "bounds": [
+                  10,
+                  134,
+                  86,
+                  33
+                ],
+                "bluePixels": 460
+              },
+              {
+                "name": "FixedMixed2",
+                "bounds": [
+                  100,
+                  139,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "Bar1",
+                "bounds": [
+                  10,
+                  171,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "Bar2",
+                "bounds": [
+                  67,
+                  171,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "Bar3",
+                "bounds": [
+                  124,
+                  171,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "FixedUsual1",
+                "bounds": [
+                  10,
+                  206,
+                  66,
+                  33
+                ],
+                "bluePixels": 380
+              },
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  106,
+                  33
+                ],
+                "bluePixels": 540
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "dirty-explicit-width",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 196,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 321,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 357,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 352,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 388,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 388,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 414,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 419,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 486,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 486,
+                "width": 80,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  86,
+                  33
+                ],
+                "bluePixels": 460
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "restored-explicit-width",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 204,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 321,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 357,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 352,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 388,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 388,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 414,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 419,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 486,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 486,
+                "width": 100,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  106,
+                  33
+                ],
+                "bluePixels": 540
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "floating-native",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 204,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 81,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 86,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 122,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 117,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 153,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 153,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 179,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 184,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 251,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 251,
+                "width": 100,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "Forward2",
+                "bounds": [
+                  111,
+                  41,
+                  32,
+                  23
+                ],
+                "bluePixels": 204
+              },
+              {
+                "name": "Bar2",
+                "bounds": [
+                  67,
+                  171,
+                  54,
+                  29
+                ],
+                "bluePixels": 316
+              },
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  106,
+                  33
+                ],
+                "bluePixels": 540
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "floating-dirty-width",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 196,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 81,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 86,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 122,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 117,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 153,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 153,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 179,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 184,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 251,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 251,
+                "width": 80,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  86,
+                  33
+                ],
+                "bluePixels": 460
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "floating-restored",
+            "frame": {
+              "x": 28,
+              "y": 42,
+              "width": 204,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 81,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 86,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 122,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 117,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 153,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 153,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 179,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 184,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 215,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 251,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 251,
+                "width": 100,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          },
+          {
+            "label": "reattached-native",
+            "frame": {
+              "x": 28,
+              "y": 277,
+              "width": 204,
+              "height": 249
+            },
+            "buttons": [
+              {
+                "x": 41,
+                "y": 316,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 142,
+                "y": 321,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 357,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 77,
+                "y": 352,
+                "width": 91,
+                "height": 26,
+                "caption": "Long usual"
+              },
+              {
+                "x": 41,
+                "y": 388,
+                "width": 48,
+                "height": 17,
+                "caption": "Left link"
+              },
+              {
+                "x": 99,
+                "y": 388,
+                "width": 56,
+                "height": 17,
+                "caption": "Right link"
+              },
+              {
+                "x": 41,
+                "y": 414,
+                "width": 80,
+                "height": 26,
+                "caption": "Fixed"
+              },
+              {
+                "x": 131,
+                "y": 419,
+                "width": 26,
+                "height": 17,
+                "caption": "Link"
+              },
+              {
+                "x": 41,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 98,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar link"
+              },
+              {
+                "x": 155,
+                "y": 450,
+                "width": 48,
+                "height": 26,
+                "caption": "Bar"
+              },
+              {
+                "x": 41,
+                "y": 486,
+                "width": 60,
+                "height": 26,
+                "caption": "First"
+              },
+              {
+                "x": 111,
+                "y": 486,
+                "width": 100,
+                "height": 26,
+                "caption": "Second"
+              }
+            ],
+            "captionPixelsCompared": 3330,
+            "differentCaptionRgbPixels": 0,
+            "captionRegions": [
+              {
+                "name": "Forward2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Reverse1",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Links1",
+                "pixels": 705,
+                "rgbSha256": "bb86f00765e1c890ca9a670935ca1ad745cf361cb761df2aa35fc112512c4b5a"
+              },
+              {
+                "name": "Links2",
+                "pixels": 825,
+                "rgbSha256": "b3c4c6571a501ae0206d0c33c0194ac9d2bf6900906303ed62e824db448fdc85"
+              },
+              {
+                "name": "FixedMixed2",
+                "pixels": 375,
+                "rgbSha256": "d78114ad4ab99d01284ca077dc08e9a83dec2e937ccb72b1cb0cb7a515055b0b"
+              },
+              {
+                "name": "Bar2",
+                "pixels": 675,
+                "rgbSha256": "a497efcae8ba9b1aa19608b52d5d914322f6ad29a22b2aa3b4a96b94068d29d9"
+              }
+            ],
+            "selectionGeometry": [
+              {
+                "name": "FixedUsual2",
+                "bounds": [
+                  80,
+                  206,
+                  106,
+                  33
+                ],
+                "bluePixels": 540
+              }
+            ],
+            "captureAttempts": 1,
+            "wholeWidgetAccepted": false
+          }
+        ],
+        "receiptSha256": "93313a2063752e81e5fcae61f56a3dbd4e43b2bf16fc4dd8b573a9d6857b3334"
+      }
+    },
+    "currentTypeWidthCycle": {
+      "en": [
+        [
+          48,
+          48
+        ],
+        [
+          24,
+          24
+        ],
+        [
+          48,
+          48
+        ]
+      ],
+      "ru": [
+        [
+          48,
+          48
+        ],
+        [
+          24,
+          24
+        ],
+        [
+          48,
+          48
+        ]
+      ]
+    },
+    "typeWidthNote": "48 -> 24 -> 48 is the current renderer cycle for the Bar caption; the earlier semantic report recorded 22 before native toolbar-link padding was calibrated.",
+    "ordinaryButtonPixels": {
+      "en": {
+        "samples": 60,
+        "pixelsCompared": 365164,
+        "differentRgbPixels": 0
+      },
+      "ru": {
+        "samples": 60,
+        "pixelsCompared": 365164,
+        "differentRgbPixels": 0
+      }
+    },
+    "batchDirectory": "form-batch-lPIvdY",
+    "originalBatchPassed": false,
+    "originalPairsPassed": 25,
+    "originalPairsFailed": 1,
+    "firstAttemptForNewGeometryPairs": true,
+    "guiConcurrency": 1,
+    "builds": 1,
+    "packages": 1,
+    "seconds": 291.81,
+    "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+    "vsixSha256": "f924ccad24c386e4f4716c670d311f82f3898dff0c3855938ce9361f36f2ffc8",
+    "runtimeManifestSha256": "59005d1e7d35ed92d35b69997bdc2a8a3a364634a84ac67e1a02fef5d2b45633",
+    "runtimeFiles": 1303,
+    "batchSha256": "12fb78ea858e8c842b0e89854f04611e3c9f1766ae5afe51e90d87a03c1e76ea",
+    "inputsSha256": "68d3bb592f9e73069a575a1f9f3ba78aabc3290eba926836eecda294ba17edaf",
+    "runs": [
+      {
+        "suite": "button-rows",
+        "locale": "en",
+        "passed": true,
+        "seconds": 8.257186284,
+        "caseCount": 8,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-rows",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 10.831553769000003,
+        "caseCount": 8,
+        "inputsStable": true
+      },
+      {
+        "suite": "usual-buttons",
+        "locale": "en",
+        "passed": true,
+        "seconds": 8.242365855999997,
+        "caseCount": 18,
+        "inputsStable": true
+      },
+      {
+        "suite": "usual-buttons",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 10.783090951999998,
+        "caseCount": 18,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-links",
+        "locale": "en",
+        "passed": true,
+        "seconds": 7.290365094000001,
+        "caseCount": 22,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-links",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 10.012306195000004,
+        "caseCount": 22,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-types",
+        "locale": "en",
+        "passed": true,
+        "seconds": 5.552847480000004,
+        "caseCount": 11,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-types",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 8.064366260999996,
+        "caseCount": 11,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "en",
+        "passed": true,
+        "seconds": 8.194519452999986,
+        "caseCount": 18,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 13.107769990999994,
+        "caseCount": 18,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-borders",
+        "locale": "en",
+        "passed": true,
+        "seconds": 22.887772119,
+        "caseCount": 60,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-borders",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 25.994790057999985,
+        "caseCount": 60,
+        "inputsStable": true
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "passed": true,
+        "seconds": 11.539598905000021,
+        "caseCount": 22,
+        "inputsStable": true
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 13.853075175000006,
+        "caseCount": 22,
+        "inputsStable": true
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "passed": true,
+        "seconds": 16.838418571000016,
+        "caseCount": 51,
+        "inputsStable": true
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 20.216375373000016,
+        "caseCount": 51,
+        "inputsStable": true
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "en",
+        "passed": false,
+        "seconds": 14.766194224999985,
+        "caseCount": 0,
+        "inputsStable": true
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 20.023334183999978,
+        "caseCount": 44,
+        "inputsStable": true
+      },
+      {
+        "suite": "style-composition",
+        "locale": "en",
+        "passed": true,
+        "seconds": 5.606495328000019,
+        "caseCount": 13,
+        "inputsStable": true
+      },
+      {
+        "suite": "style-composition",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 8.381822402999997,
+        "caseCount": 13,
+        "inputsStable": true
+      },
+      {
+        "suite": "owners",
+        "locale": "en",
+        "passed": true,
+        "seconds": 5.102417734000017,
+        "caseCount": 9,
+        "inputsStable": true
+      },
+      {
+        "suite": "owners",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 7.8072789949999715,
+        "caseCount": 9,
+        "inputsStable": true
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "passed": true,
+        "seconds": 5.368448772999982,
+        "caseCount": 1,
+        "inputsStable": true
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 7.377734998000029,
+        "caseCount": 1,
+        "inputsStable": true
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "passed": true,
+        "seconds": 4.341587081000034,
+        "caseCount": 4,
+        "inputsStable": true
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 7.1132807059999905,
+        "caseCount": 4,
+        "inputsStable": true
+      }
+    ],
+    "windowReadinessRecheck": {
+      "directory": "button-rows-input-window-recheck-xc63fxsj",
+      "failure": "native window containing the webview frame",
+      "location": "form-input-pixels-host.cjs, before the first floating capture",
+      "noPixelMismatchFileInFailedRun": true,
+      "sameVsixBackendFixturesAndDrivers": true,
+      "originalReceiptSha256": "7c5356ec762588cee8e9e81b767eac879336faaad61686083d209c982fad92e1",
+      "recheck": {
+        "schemaVersion": 1,
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 24.54531776499789,
+        "sameFrozenBatch": "form-batch-lPIvdY",
+        "vsixSha256": "f924ccad24c386e4f4716c670d311f82f3898dff0c3855938ce9361f36f2ffc8",
+        "backendSha256": "1861e41df75eafad492f99b9276501feb5689cabe1af6bde112ca2e8833d0e84",
+        "driverOrSourceChanges": [],
+        "receiptSha256": "8407e14b05db8fa62c962797907fc808f115056986db812ba1011c47daf0d7b1"
+      },
+      "samples": 44,
+      "pixelsCompared": 873064,
+      "wholeWidgetPixelsCompared": 842248,
+      "pixelComparisonsNotRetriedToHideMismatch": true
+    }
+  },
+  "remainingFullFormComparison": [
+    {
+      "form": "ProbeButtons",
+      "locale": "en",
+      "region": "Recorded frame and 5 px right/bottom shadow crop; includes all RGB pixels.",
+      "nativeRegion": [
+        265,
+        414,
+        147,
+        192
+      ],
+      "viewerRegion": [
+        376,
+        347,
+        147,
+        192
+      ],
+      "pixelsCompared": 28224,
+      "differentRgbPixels": 169,
+      "nativeRgbSha256": "8cc9eef605d430f2a50aa95efe1324beeb1f13498a993ca75e38dd3d420c45a2",
+      "viewerRgbSha256": "cf20d9175a88dce1e1d2652b4f7a847ebad7c380e8e2db0dc1cb8d5334a4aac0",
+      "viewerScreenshotSha256": "04c940fdb68d9f6a66a6f796d5cdcb0e49dd4d842a3d85b1ec279fb50db459a2",
+      "differentRows": {
+        "62": 4,
+        "63": 2,
+        "98": 4,
+        "99": 2,
+        "100": 44,
+        "134": 4,
+        "135": 2,
+        "136": 57,
+        "170": 4,
+        "171": 2,
+        "172": 44
+      },
+      "acceptedAsFullForm": false
+    },
+    {
+      "form": "ProbeButtons",
+      "locale": "ru",
+      "region": "Recorded frame and 5 px right/bottom shadow crop; includes all RGB pixels.",
+      "nativeRegion": [
+        265,
+        414,
+        147,
+        192
+      ],
+      "viewerRegion": [
+        376,
+        347,
+        147,
+        192
+      ],
+      "pixelsCompared": 28224,
+      "differentRgbPixels": 169,
+      "nativeRgbSha256": "8cc9eef605d430f2a50aa95efe1324beeb1f13498a993ca75e38dd3d420c45a2",
+      "viewerRgbSha256": "cf20d9175a88dce1e1d2652b4f7a847ebad7c380e8e2db0dc1cb8d5334a4aac0",
+      "viewerScreenshotSha256": "d86b261baabd0a9ec239292effd2daa5a18b7e0d8255d6a680ef7edf60857a11",
+      "differentRows": {
+        "62": 4,
+        "63": 2,
+        "98": 4,
+        "99": 2,
+        "100": 44,
+        "134": 4,
+        "135": 2,
+        "136": 57,
+        "170": 4,
+        "171": 2,
+        "172": 44
+      },
+      "acceptedAsFullForm": false
+    },
+    {
+      "form": "ProbeRows",
+      "locale": "en",
+      "region": "Recorded frame and 5 px right/bottom shadow crop; includes all RGB pixels.",
+      "nativeRegion": [
+        265,
+        414,
+        209,
+        254
+      ],
+      "viewerRegion": [
+        376,
+        347,
+        209,
+        254
+      ],
+      "pixelsCompared": 53086,
+      "differentRgbPixels": 445,
+      "nativeRgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+      "viewerRgbSha256": "584632ab3b73ef30d8053adc1f3bd1ca8ac4e9ffaeb8bd664b13f3aa8ab261bf",
+      "viewerScreenshotSha256": "2cf8ae18c37c2ce185f644eeee495dbc19423a2258a948b9b157d3d9f9a154ab",
+      "differentRows": {
+        "62": 4,
+        "63": 2,
+        "98": 4,
+        "99": 2,
+        "100": 87,
+        "160": 4,
+        "161": 2,
+        "162": 76,
+        "196": 8,
+        "197": 4,
+        "198": 88,
+        "232": 8,
+        "233": 4,
+        "234": 152
+      },
+      "acceptedAsFullForm": false
+    },
+    {
+      "form": "ProbeRows",
+      "locale": "ru",
+      "region": "Recorded frame and 5 px right/bottom shadow crop; includes all RGB pixels.",
+      "nativeRegion": [
+        265,
+        414,
+        209,
+        254
+      ],
+      "viewerRegion": [
+        376,
+        347,
+        209,
+        254
+      ],
+      "pixelsCompared": 53086,
+      "differentRgbPixels": 445,
+      "nativeRgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+      "viewerRgbSha256": "584632ab3b73ef30d8053adc1f3bd1ca8ac4e9ffaeb8bd664b13f3aa8ab261bf",
+      "viewerScreenshotSha256": "22c38493eccb40e570446d9b1dbd3f00516f515ccf127049a15409ef1cd8a5a7",
+      "differentRows": {
+        "62": 4,
+        "63": 2,
+        "98": 4,
+        "99": 2,
+        "100": 87,
+        "160": 4,
+        "161": 2,
+        "162": 76,
+        "196": 8,
+        "197": 4,
+        "198": 88,
+        "232": 8,
+        "233": 4,
+        "234": 152
+      },
+      "acceptedAsFullForm": false
+    }
+  ],
+  "nativeRepaintObservation": {
+    "scope": "Same original ProbeButtons form before/after read-only selection in the native Designer at the same recorded coordinates.",
+    "pixelsCompared": 28224,
+    "differentRgbPixels": 163,
+    "beforeScreenshotSha256": "da7bb57a7b531920df6c069719e47dd0622aec6a2a1a1e820d6687ae5b8394d9",
+    "afterScreenshotSha256": "4f94a05afe80be1a1facd7efc454e684ddc1f346e5c2c11a9f8c6161b4581066",
+    "note": "Differences lie on lower raised-button borders. The relationship to the existing native-origin condition remains under investigation; no changed pixel is waived."
+  },
+  "artifactLocations": {
+    "base": "<eska repository>/../eska-playground",
+    "native": "native-button-rows-g5ngxw2e",
+    "previousNative": "native-button-types-jc2a16bu",
+    "batch": "form-batch-lPIvdY",
+    "before": "button-rows-before-19rmpq7d",
+    "windowRecheck": "button-rows-input-window-recheck-xc63fxsj"
+  },
+  "remaining": [
+    "169 and 445 strict RGB differences in the two recorded complete frame/shadow crops per IDE locale, concentrated on lower raised-button borders.",
+    "Other fonts/widths/states/parents, wrapping and mixed fields, icons/menus and all remaining managed-form controls.",
+    "Physical DPI/Remote, Windows native acceptance and the later 8.5 profile."
+  ]
+}

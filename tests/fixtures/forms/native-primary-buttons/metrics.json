@@ -1,0 +1,4320 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "exclusions": [],
+  "scope": "Button geometry and complete rectangular interiors inset three pixels; borders, root automatic commands, other states and Windows are not accepted by this corpus.",
+  "rows": [
+    {
+      "name": "FontAuto",
+      "file": "FontAuto.xml",
+      "sourcePhase": "derivation",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "bfa2d240c7a8458eeeb0cd07cc9e86e56301ece94377695a7fff051be66a3063",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "bold",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "FontRegular",
+      "file": "FontRegular.xml",
+      "sourcePhase": "derivation",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "b75f30f41d6d4dab4849937cc65c33e4f1f1be5f1713edbe4b340d69d09e2358",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "FontBold",
+      "file": "FontBold.xml",
+      "sourcePhase": "derivation",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "acc52896d97dce1fb5ce6aacb3d600fcc30a2ab35e09f3e94b58c0ba4474ff36",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "bold",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "FontPartial14",
+      "file": "FontPartial14.xml",
+      "sourcePhase": "derivation",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        293,
+        86
+      ],
+      "nativeScreenshotSha256": "637d8c240189ec93943f368f00e6c151492663983b0dd69380d69ff81d661786",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 14,
+          "weight": "regular",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 76,
+          "height": 33,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 70,
+            "height": 27
+          },
+          "interiorRgbSha256": "16892b86f28d3bf27ec19ce15a886c4d4c4fb699a76a1dbb3efc40acd140853b"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 98,
+          "y": 39,
+          "width": 50,
+          "height": 33,
+          "interior": {
+            "x": 101,
+            "y": 42,
+            "width": 44,
+            "height": 27
+          },
+          "interiorRgbSha256": "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 157,
+          "y": 39,
+          "width": 115,
+          "height": 33,
+          "interior": {
+            "x": 160,
+            "y": 42,
+            "width": 109,
+            "height": 27
+          },
+          "interiorRgbSha256": "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+        }
+      ]
+    },
+    {
+      "name": "FontStyleNormal",
+      "file": "FontStyleNormal.xml",
+      "sourcePhase": "derivation",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "e831b4637c0756cc3157660665898bc7f5e8fa476289f274928f851ff5165db6",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "bold",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "FontForm14",
+      "file": "FontForm14.xml",
+      "sourcePhase": "derivation",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "491e9095f7bf18d00a631319143d29efde6ed471d321565174e52d8ba02ddc13",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "bold",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "FontBar14",
+      "file": "FontBar14.xml",
+      "sourcePhase": "derivation",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "013210af1659513bf1b3653b6772384adbb98c00ab404b1cb1879393bc1bc297",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "bold",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "FontFormBold",
+      "file": "FontFormBold.xml",
+      "sourcePhase": "derivation",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "c229002072a837f1a9ba6a0833cca265927e1fa1de2463e31b80f49e979d7b2e",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "bold",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "FontExplicitAuto",
+      "file": "FontExplicitAuto.xml",
+      "sourcePhase": "derivation",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        261,
+        79
+      ],
+      "nativeScreenshotSha256": "9072b2fe6a8582fe8b5b2da86f50100fc95cc0451e40d799c477d67084d247c1",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 8,
+          "weight": "regular",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 44,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 38,
+            "height": 20
+          },
+          "interiorRgbSha256": "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 66,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 69,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 125,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 128,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "CheckAutoBack",
+      "file": "CheckAutoBack.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "30b25d3cecae0f6b1ea2c607854997e2a8dabf5133b30706cd16b078dfe90b27",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": false,
+          "points": 10,
+          "weight": "bold",
+          "background": "#00ffff",
+          "foreground": "#4d4d4d",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "a942f7bfc79e8fd681854b88ddff8069733a9edcb6e2226c4a4814aec4305fbe"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "CheckAutoText",
+      "file": "CheckAutoText.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "39e20474662af5025ffd302f54b1f9901d5a41a1438c2673e52b687925974619",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "bold",
+          "background": "#ffe100",
+          "foreground": "#00ff00",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "940a106cd0feb8930d89bff5dd6ff78eadff2a17ef972f4a234586176478378a"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "CheckNormalFalse",
+      "file": "CheckNormalFalse.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "61f8a011e02153fb80098ed2709d56f129f622505be2292634e1f6dbbb8eed82",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "CheckNormal14",
+      "file": "CheckNormal14.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        293,
+        86
+      ],
+      "nativeScreenshotSha256": "f31d198bf15bf6e567e14d9d44daacebbcf7a63ce13f8fb674acf86f4b93a2a3",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 14,
+          "weight": "bold",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 76,
+          "height": 33,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 70,
+            "height": 27
+          },
+          "interiorRgbSha256": "83ccd6851dff1cf35e0132695df49eec574e764a2c42ecc50dda6fdb709b38ea"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 98,
+          "y": 39,
+          "width": 50,
+          "height": 33,
+          "interior": {
+            "x": 101,
+            "y": 42,
+            "width": 44,
+            "height": 27
+          },
+          "interiorRgbSha256": "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 157,
+          "y": 39,
+          "width": 115,
+          "height": 33,
+          "interior": {
+            "x": 160,
+            "y": 42,
+            "width": 109,
+            "height": 27
+          },
+          "interiorRgbSha256": "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+        }
+      ]
+    },
+    {
+      "name": "CheckSmall",
+      "file": "CheckSmall.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        261,
+        79
+      ],
+      "nativeScreenshotSha256": "c4c9cb7b51037503211fd7f3355d5e8187edd09e6dff070dbb694fe1d418ddf0",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 8,
+          "weight": "regular",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 44,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 38,
+            "height": 20
+          },
+          "interiorRgbSha256": "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 66,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 69,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 125,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 128,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "CheckLarge",
+      "file": "CheckLarge.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        293,
+        86
+      ],
+      "nativeScreenshotSha256": "7360f3c1f32264f71d7d3d21e5f463f425dabeefe5211849011b3845a33e0f3f",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 14,
+          "weight": "regular",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 76,
+          "height": 33,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 70,
+            "height": 27
+          },
+          "interiorRgbSha256": "16892b86f28d3bf27ec19ce15a886c4d4c4fb699a76a1dbb3efc40acd140853b"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 98,
+          "y": 39,
+          "width": 50,
+          "height": 33,
+          "interior": {
+            "x": 101,
+            "y": 42,
+            "width": 44,
+            "height": 27
+          },
+          "interiorRgbSha256": "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 157,
+          "y": 39,
+          "width": 115,
+          "height": 33,
+          "interior": {
+            "x": 160,
+            "y": 42,
+            "width": 109,
+            "height": 27
+          },
+          "interiorRgbSha256": "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+        }
+      ]
+    },
+    {
+      "name": "CheckExtra",
+      "file": "CheckExtra.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        313,
+        95
+      ],
+      "nativeScreenshotSha256": "bff0605ea2ce04826de84581a484acc40ff5c5fcc291e5be61999bd26937a43c",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 18,
+          "weight": "regular",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 96,
+          "height": 42,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 90,
+            "height": 36
+          },
+          "interiorRgbSha256": "18f6d2dcbeafabdc41c48aa4039d98fb928900dc09f9220cb4a2cf07d4e66e40"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 118,
+          "y": 39,
+          "width": 50,
+          "height": 42,
+          "interior": {
+            "x": 121,
+            "y": 42,
+            "width": 44,
+            "height": 36
+          },
+          "interiorRgbSha256": "7525a8a647c5a8bbd8851f6deeec9e5e6ce0a28a836607b680e16b3190de8b35"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 177,
+          "y": 39,
+          "width": 115,
+          "height": 42,
+          "interior": {
+            "x": 180,
+            "y": 42,
+            "width": 109,
+            "height": 36
+          },
+          "interiorRgbSha256": "84b6bf2fa010837252da5244b6ded5759cbd8bb628284adde5aed3467b342df1"
+        }
+      ]
+    },
+    {
+      "name": "CheckText",
+      "file": "CheckText.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        261,
+        79
+      ],
+      "nativeScreenshotSha256": "9e0150b8d5203550db34586863e2fc4f89fe71726b65917f2968a0e08f3bc46c",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 8,
+          "weight": "regular",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 44,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 38,
+            "height": 20
+          },
+          "interiorRgbSha256": "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 66,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 69,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 125,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 128,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "CheckSysAuto",
+      "file": "CheckSysAuto.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        261,
+        79
+      ],
+      "nativeScreenshotSha256": "4254ae13a6bceefadfa828b6a604e9d83ecb404de3f9e45f879b60c8030f9dbb",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 8,
+          "weight": "regular",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 44,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 38,
+            "height": 20
+          },
+          "interiorRgbSha256": "0ccbe4842549967d7b4b93904a6a8d6e3d0470077f67866dc47f2c41542796dc"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 66,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 69,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 125,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 128,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "CheckSys14",
+      "file": "CheckSys14.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        293,
+        86
+      ],
+      "nativeScreenshotSha256": "f0c9c4ff1bb7dbeb0acc4d5f574ad67d474a8c1b0f58f9c9a72eace445303574",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 14,
+          "weight": "regular",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 76,
+          "height": 33,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 70,
+            "height": 27
+          },
+          "interiorRgbSha256": "16892b86f28d3bf27ec19ce15a886c4d4c4fb699a76a1dbb3efc40acd140853b"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 98,
+          "y": 39,
+          "width": 50,
+          "height": 33,
+          "interior": {
+            "x": 101,
+            "y": 42,
+            "width": 44,
+            "height": 27
+          },
+          "interiorRgbSha256": "8532d3cc3682d4703a04da25e16a303a910488937c4f8fd8ee02054f9965c085"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 157,
+          "y": 39,
+          "width": 115,
+          "height": 33,
+          "interior": {
+            "x": 160,
+            "y": 42,
+            "width": 109,
+            "height": 27
+          },
+          "interiorRgbSha256": "807fe3e19a8f1a65bac3a6ca4cc43dcc03ae8edb4036ba4516b6563f940e260c"
+        }
+      ]
+    },
+    {
+      "name": "CheckBoldOnly",
+      "file": "CheckBoldOnly.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        261,
+        79
+      ],
+      "nativeScreenshotSha256": "c64c5577106cfca32da12a6124454598d49ea699cd626c952fc207c9769394d0",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 8,
+          "weight": "bold",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 44,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 38,
+            "height": 20
+          },
+          "interiorRgbSha256": "7924728e0f99aeae0d0ee130e010b287629f9ee5125b0339d4bf63bb0c1fe29a"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 66,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 69,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 125,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 128,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "CheckAutoDisabled",
+      "file": "CheckAutoDisabled.xml",
+      "sourcePhase": "additional UI characterization",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "nativeScreenshotSha256": "ee2452c07a2d0d7179f3a38c193e2f544e68158827b203678ebd9ea23de8c01f",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "bold",
+          "background": "#ffe100",
+          "foreground": "#474747",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "087f68230245b07a08e9203426f6e57fd02435533e42a44b562bd72f6bf76df1"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "background": "#ffffff",
+          "foreground": "#4d4d4d",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ]
+    },
+    {
+      "name": "Color000000",
+      "file": "../native-button-colors/000000.xml",
+      "styleFile": "../native-button-colors/Styles/000000.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#000000",
+      "backgroundRows": [
+        "#3c3c3c",
+        "#373737",
+        "#323232",
+        "#2d2d2d",
+        "#272727",
+        "#222222",
+        "#1d1d1d",
+        "#181818",
+        "#121212",
+        "#0d0d0d",
+        "#080808",
+        "#030303",
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000"
+      ],
+      "nativeScreenshotSha256": "1176aaebc31ff87a216a78ca177bf2534459dd663b71382a6f5c69b42cdd8e19",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#b2b2b2",
+          "background": "#000000",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "41e317e21581343b34420481ca7125d9d8a3c81b032b037f33daf91cfc481ff4"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#000000",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "1868534bd41a19a7b001cd87610b20e6604f223f76e70c73469c536385ec3119"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "Color000040",
+      "file": "../native-button-colors/000040.xml",
+      "styleFile": "../native-button-colors/Styles/000040.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#000040",
+      "backgroundRows": [
+        "#3c3c6d",
+        "#373769",
+        "#323265",
+        "#2d2d61",
+        "#27275d",
+        "#222259",
+        "#1d1d56",
+        "#181852",
+        "#12124e",
+        "#0d0d4a",
+        "#080846",
+        "#030342",
+        "#000040",
+        "#00003f",
+        "#00003f",
+        "#00003e",
+        "#00003e",
+        "#00003d",
+        "#00003d",
+        "#00003c",
+        "#00003c",
+        "#00003b",
+        "#00003b",
+        "#00003a"
+      ],
+      "nativeScreenshotSha256": "02f71de6d22b4c8cb28361caac2781a80b8b6d6582f9b3cedfc91bb7913341c8",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#b2b2b2",
+          "background": "#000040",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "574dd02a179755912d01ba186e1bf2a5d4f48165c6051cbdf4ab2a3deacabdb5"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#000040",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "164df8d438c79dfa57a7fc45369a0c7b967dd44174af36206e830df7e0246579"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "Color000080",
+      "file": "../native-button-colors/000080.xml",
+      "styleFile": "../native-button-colors/Styles/000080.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#000080",
+      "backgroundRows": [
+        "#3c3c9e",
+        "#37379b",
+        "#323299",
+        "#2d2d96",
+        "#272793",
+        "#222291",
+        "#1d1d8e",
+        "#18188c",
+        "#121289",
+        "#0d0d86",
+        "#080884",
+        "#030381",
+        "#000080",
+        "#00007f",
+        "#00007e",
+        "#00007d",
+        "#00007c",
+        "#00007b",
+        "#00007a",
+        "#000079",
+        "#000078",
+        "#000077",
+        "#000076",
+        "#000075"
+      ],
+      "nativeScreenshotSha256": "04ca7331371e86ae3b38033e84dd9d37a816f46b49ad0a65e02524a02263f3fa",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#b2b2b2",
+          "background": "#000080",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "77161db2ed6c7268803e370ae46c034f1afefe6f9f581334a0079c384f4ce315"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#000080",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "2791e9d2e923e37eab0974ae6c1a17cbbdcba5173ff787efb051093676c957d1"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "Color0000FF",
+      "file": "../native-button-colors/0000FF.xml",
+      "styleFile": "../native-button-colors/Styles/0000FF.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#0000ff",
+      "backgroundRows": [
+        "#3c3cff",
+        "#3737ff",
+        "#3232ff",
+        "#2d2dff",
+        "#2727ff",
+        "#2222ff",
+        "#1d1dff",
+        "#1818ff",
+        "#1212ff",
+        "#0d0dff",
+        "#0808ff",
+        "#0303ff",
+        "#0000fe",
+        "#0000fc",
+        "#0000fb",
+        "#0000f9",
+        "#0000f7",
+        "#0000f6",
+        "#0000f4",
+        "#0000f2",
+        "#0000f1",
+        "#0000ef",
+        "#0000ed",
+        "#0000ec"
+      ],
+      "nativeScreenshotSha256": "79ffbcf3cb4c8274ab334db7500b43832d929411bbc6e7dfaff4642ed08999bd",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#e7e7e7",
+          "background": "#0000ff",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "f8f7fd7b18f41e7bc5c55675971c43490b0253a214e5ed39397b9e1b763f1567"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#0000ff",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "a378a775443fa18175dbe27ece12eeb23905bd7de152f7543d4e66ba97981a4c"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "Color008000",
+      "file": "../native-button-colors/008000.xml",
+      "styleFile": "../native-button-colors/Styles/008000.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#008000",
+      "backgroundRows": [
+        "#3c9e3c",
+        "#379b37",
+        "#329932",
+        "#2d962d",
+        "#279327",
+        "#229122",
+        "#1d8e1d",
+        "#188c18",
+        "#128912",
+        "#0d860d",
+        "#088408",
+        "#038103",
+        "#008000",
+        "#007f00",
+        "#007e00",
+        "#007d00",
+        "#007c00",
+        "#007b00",
+        "#007a00",
+        "#007900",
+        "#007800",
+        "#007700",
+        "#007600",
+        "#007500"
+      ],
+      "nativeScreenshotSha256": "35c89960ae644929f65dd2d1d68ca7d84117d0eb23dfbdc28123aa0c4fe6a420",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#ffffff",
+          "background": "#008000",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "788f29aed2d16c411234dd53e76d0b0089a4765f9cf006cebc678c4768bc34fd"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#008000",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "d838dbb7d6e8fbad1c6a70a629962b828d0fcc4d6d1ed87f3edf9f045b9a1979"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "Color00FF00",
+      "file": "../native-button-colors/00FF00.xml",
+      "styleFile": "../native-button-colors/Styles/00FF00.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#00ff00",
+      "backgroundRows": [
+        "#3cff3c",
+        "#37ff37",
+        "#32ff32",
+        "#2dff2d",
+        "#27ff27",
+        "#22ff22",
+        "#1dff1d",
+        "#18ff18",
+        "#12ff12",
+        "#0dff0d",
+        "#08ff08",
+        "#03ff03",
+        "#00fe00",
+        "#00fc00",
+        "#00fb00",
+        "#00f900",
+        "#00f700",
+        "#00f600",
+        "#00f400",
+        "#00f200",
+        "#00f100",
+        "#00ef00",
+        "#00ed00",
+        "#00ec00"
+      ],
+      "nativeScreenshotSha256": "1077d1a8d3aadbcc8498ca991e7cc39872a644a407b90e94cc7c3989387ec8fd",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#454545",
+          "background": "#00ff00",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "e0098340ab5e9d8150343f28b8c7a3017768b704a79a4e73eb08a84d459de71a"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#00ff00",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "cae5801b0476ad7305ae020837a1618e2dc5d88a8f963fb8454b0c04bfa91611"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "Color00FFFF",
+      "file": "../native-button-colors/00FFFF.xml",
+      "styleFile": "../native-button-colors/Styles/00FFFF.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#00ffff",
+      "backgroundRows": [
+        "#3cffff",
+        "#37ffff",
+        "#32ffff",
+        "#2dffff",
+        "#27ffff",
+        "#22ffff",
+        "#1dffff",
+        "#18ffff",
+        "#12ffff",
+        "#0dffff",
+        "#08ffff",
+        "#03ffff",
+        "#00fefe",
+        "#00fcfc",
+        "#00fbfb",
+        "#00f9f9",
+        "#00f7f7",
+        "#00f6f6",
+        "#00f4f4",
+        "#00f2f2",
+        "#00f1f1",
+        "#00efef",
+        "#00eded",
+        "#00ecec"
+      ],
+      "nativeScreenshotSha256": "f049d52fb4b85a7ff4ac66db4a0b68abbda5f5952858975d04b8cd33c30ef4eb",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4b4b4b",
+          "background": "#00ffff",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "150faa7dc0e6747999fa52f5abfaadedfb190d33fbe8707fae86b197bb2db58d"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#00ffff",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "66ec2b7d59ce032ff20c34675025e8d852dd962758f0fd7c820a3c0a8723b2f4"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "Color0A73B7",
+      "file": "../native-button-colors/0A73B7.xml",
+      "styleFile": "../native-button-colors/Styles/0A73B7.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#0a73b7",
+      "backgroundRows": [
+        "#4494c7",
+        "#3f91c6",
+        "#3a8ec4",
+        "#358bc3",
+        "#3088c2",
+        "#2b85c0",
+        "#2683bf",
+        "#2180bd",
+        "#1c7dbc",
+        "#177abb",
+        "#1277b9",
+        "#0d74b8",
+        "#0a73b6",
+        "#0a72b5",
+        "#0a71b4",
+        "#0a70b3",
+        "#0a6fb1",
+        "#0a6eb0",
+        "#096eaf",
+        "#096dae",
+        "#096cac",
+        "#096bab",
+        "#096aaa",
+        "#0969a9"
+      ],
+      "nativeScreenshotSha256": "8432bda9a9a8aa16c88c560fed043009a0d2103087e6fe7324f96fea85a42eb9",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#ffffff",
+          "background": "#0a73b7",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "6b53a9a3ab423eb83f7a14842478980bed6f1fa7f8b848f2fa0ca080b5279546"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#0a73b7",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "ba9a7d20a28c8d4183a50fdb992953100169cf20c00ae146f16b3a6d3cf45edf"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "file": "Color202020.xml",
+      "styleFile": "Styles/202020.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "Color202020",
+      "sourcePhase": "UI colour derivation",
+      "background": "#202020",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#b2b2b2",
+          "background": "#202020",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "d08ca542eedda769f8927516bde7bc4a7d06b0437aeb5974817bbfc4003422a8"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#202020",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "a2ec89b7ec7ec9857570fb9693a65a9bf3d170c7b74fe129b83b499b99cbb36a"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "0bd1641b933d19c95536be8a945089162d49ac39ed497c41aadb557965b613b0"
+    },
+    {
+      "file": "Color20DD20.xml",
+      "styleFile": "Styles/20DD20.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "Color20DD20",
+      "sourcePhase": "UI colour derivation",
+      "background": "#20dd20",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#313131",
+          "background": "#20dd20",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "7382bae7fb06e6c92fa80e058971bd76af858c2fae532cff38a673e8c5b1bdc2"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#20dd20",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "3a6fe28467397ea37fa110f0f89121648957233a7279737c6455687d181cdcf4"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "2801274450482596a75d557dbb78f154bd892f8add51bd563ad9174c489ac7d5"
+    },
+    {
+      "file": "Color336699.xml",
+      "styleFile": "Styles/336699.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "Color336699",
+      "sourcePhase": "UI colour derivation",
+      "background": "#336699",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#ffffff",
+          "background": "#336699",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "3734fd2e8d3319090ac934d30b334a228844cba3fed2e53ceef9ab2bc80b5331"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#336699",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "ea2f2c5d0896fb8aedd5b698ea1bbcfbdcb767bec4baa278750299443f08ebc4"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "750b9a13458329af74a9a5dc082db00f9446f2c847c7fa7e76c2f23797704dab"
+    },
+    {
+      "file": "Color345678.xml",
+      "styleFile": "Styles/345678.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "Color345678",
+      "sourcePhase": "UI colour derivation",
+      "background": "#345678",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#f5f5f5",
+          "background": "#345678",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "04bab384a8559ddcfc2fd140cbf0a27275ca4b4b8bc47b9fb6043e61b6790dbf"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#345678",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "89f54bcbdd10473953b4302bfecbf06a253abbb1fcd18dadf568a52aa0f64876"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "8dd323ddab46faaca9b1b04c5d85b4e119a7673b2a207fb01ced4a8ded3d3583"
+    },
+    {
+      "name": "Color404040",
+      "file": "../native-button-colors/404040.xml",
+      "styleFile": "../native-button-colors/Styles/404040.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#404040",
+      "backgroundRows": [
+        "#6d6d6d",
+        "#696969",
+        "#656565",
+        "#616161",
+        "#5d5d5d",
+        "#595959",
+        "#565656",
+        "#525252",
+        "#4e4e4e",
+        "#4a4a4a",
+        "#464646",
+        "#424242",
+        "#404040",
+        "#3f3f3f",
+        "#3f3f3f",
+        "#3e3e3e",
+        "#3e3e3e",
+        "#3d3d3d",
+        "#3d3d3d",
+        "#3c3c3c",
+        "#3c3c3c",
+        "#3b3b3b",
+        "#3b3b3b",
+        "#3a3a3a"
+      ],
+      "nativeScreenshotSha256": "85cd3ea086601f9aa8d0b1e9f1c255817b7ba1320abbdd01baf6339e60b31b33",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#d4d4d4",
+          "background": "#404040",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "b94e20fc5caaacb2448ab1eabfc85c838c62d2270ebb3edb01ce841ec7186d35"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#404040",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "3eccb32b34302e014590f40f04eef5afec79301344a95cf97044fea2b14892c1"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "file": "Color5511FF.xml",
+      "styleFile": "Styles/5511FF.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "Color5511FF",
+      "sourcePhase": "UI colour derivation",
+      "background": "#5511ff",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#fbfbfb",
+          "background": "#5511ff",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "f7936f2bddc0f420ff2cb868f1ada2498c290220ff3b6b5f4ffcccb61a312b82"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#5511ff",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "b627cafac250041f85f7a4fd6954ae0ca634614a5e8b790f6d9022c7fc5208eb"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "19b8eba6db5054a0186bf81ffdafa38c9760bd4d6c615b2ff0b4f23a5e5e5207"
+    },
+    {
+      "file": "Color555555.xml",
+      "styleFile": "Styles/555555.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "Color555555",
+      "sourcePhase": "UI colour derivation",
+      "background": "#555555",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#f7f7f7",
+          "background": "#555555",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "54a1cefa31fedbce8f4ddd164f1238b68ee59498dab29c9c1a5cf71b5711c8fe"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#555555",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "461c4503ee8a73500176081b51436a439d45ac85501ec05281759304bd658e2c"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "e8cb92ecbeb0db07ff0db4e0990bef4106d650fadf91f98d59c446ff61137167"
+    },
+    {
+      "file": "Color606060.xml",
+      "styleFile": "Styles/606060.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "Color606060",
+      "sourcePhase": "UI colour derivation",
+      "background": "#606060",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#ffffff",
+          "background": "#606060",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "9f114ee03c8a34d376196aa7b7e1a8b05b0b5d098b4a8d4aaa358dcbfc97e385"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#606060",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "d86b2792823326f23ec8b867f1fbf959ddc7d79d72047dd88cda33db76556958"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "68603a7e0247ded3c1a86d8c5ecb194502dc15c3ef500ecc1d55130c65b28db5"
+    },
+    {
+      "name": "Color747474",
+      "file": "../native-button-colors/747474.xml",
+      "styleFile": "../native-button-colors/Styles/747474.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#747474",
+      "backgroundRows": [
+        "#959595",
+        "#929292",
+        "#8f8f8f",
+        "#8c8c8c",
+        "#898989",
+        "#868686",
+        "#848484",
+        "#818181",
+        "#7e7e7e",
+        "#7b7b7b",
+        "#787878",
+        "#757575",
+        "#747474",
+        "#737373",
+        "#727272",
+        "#717171",
+        "#707070",
+        "#6f6f6f",
+        "#6f6f6f",
+        "#6e6e6e",
+        "#6d6d6d",
+        "#6c6c6c",
+        "#6b6b6b",
+        "#6a6a6a"
+      ],
+      "nativeScreenshotSha256": "3ce82c2809a7dfbf2740eb032ff3d41c4cc82efe08f8d7a7bb25857924186a98",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#ffffff",
+          "background": "#747474",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "58d9a5c8712cc02f2289e01c9488b4bfb93ea7f6e0d980d0aef51f8f39cdea8a"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#747474",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "a931a0d8d88ba8f8bbe684153b22f93c4a66da43958a87928c59444ff23033fd"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "Color757575",
+      "file": "../native-button-colors/757575.xml",
+      "styleFile": "../native-button-colors/Styles/757575.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#757575",
+      "backgroundRows": [
+        "#969696",
+        "#939393",
+        "#909090",
+        "#8d8d8d",
+        "#8a8a8a",
+        "#878787",
+        "#858585",
+        "#828282",
+        "#7f7f7f",
+        "#7c7c7c",
+        "#797979",
+        "#767676",
+        "#757575",
+        "#747474",
+        "#737373",
+        "#727272",
+        "#717171",
+        "#707070",
+        "#707070",
+        "#6f6f6f",
+        "#6e6e6e",
+        "#6d6d6d",
+        "#6c6c6c",
+        "#6b6b6b"
+      ],
+      "nativeScreenshotSha256": "5cfe7de5b8ac67a582ad2a30dc079cb4807f2c0fdfc653bc4adc975eaf358e58",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#ffffff",
+          "background": "#757575",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "4f97fef8af11ef6630395f97b9ec893b1528d6e786162f6306f91bad18d6626d"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#757575",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "20af6c99da8e727998011c695d8d5140c40f94c8f7636254324199b198998d83"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "Color777777",
+      "file": "../native-button-colors/777777.xml",
+      "styleFile": "../native-button-colors/Styles/777777.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#777777",
+      "backgroundRows": [
+        "#979797",
+        "#949494",
+        "#919191",
+        "#8e8e8e",
+        "#8c8c8c",
+        "#898989",
+        "#868686",
+        "#838383",
+        "#818181",
+        "#7e7e7e",
+        "#7b7b7b",
+        "#787878",
+        "#777777",
+        "#767676",
+        "#757575",
+        "#747474",
+        "#737373",
+        "#727272",
+        "#727272",
+        "#717171",
+        "#707070",
+        "#6f6f6f",
+        "#6e6e6e",
+        "#6d6d6d"
+      ],
+      "nativeScreenshotSha256": "789cc25c9430d0005fcc1369ca99030847d7535a1cb2904e5d3f28faacdb2ef9",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#000000",
+          "background": "#777777",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "1a81a6332af53c99ad569489cefa105658c902d1a40e9215559d9cbceb64d0ba"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#777777",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "cc27543aec303f5dbe3345cd464b6330002c24c41600af5300ffab69bae59252"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "file": "Color800000.xml",
+      "styleFile": "Styles/800000.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "Color800000",
+      "sourcePhase": "UI colour derivation",
+      "background": "#800000",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#cfcfcf",
+          "background": "#800000",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "40053addc49ba0292a10e368e1b913b6888a4571ca227e7c87c59da2cb495f88"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#800000",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "1ce004bf730fdb3f2069a5eb85c027e8ae1ef06d864795e0116b30ca64c055bb"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "cc6aace6e13408e2a49ffad676b64b5355829d981e70399558d3fcba9561f6b7"
+    },
+    {
+      "file": "Color804020.xml",
+      "styleFile": "Styles/804020.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "Color804020",
+      "sourcePhase": "UI colour derivation",
+      "background": "#804020",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#f1f1f1",
+          "background": "#804020",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "f5134704451a90f29c957010a2cd3fa240d3ea8494cb7319a9b481ae04556142"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#804020",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "6f53c63dbffc6c66405e2cc5aa213ffdba0d3dbf9da84bb4cad9d634921c7553"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "89d3e0d726e19dc3f97ef402656520cd67a6719a2552634294bf64fb089ede40"
+    },
+    {
+      "name": "Color808080",
+      "file": "../native-button-colors/808080.xml",
+      "styleFile": "../native-button-colors/Styles/808080.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#808080",
+      "backgroundRows": [
+        "#9e9e9e",
+        "#9b9b9b",
+        "#999999",
+        "#969696",
+        "#939393",
+        "#919191",
+        "#8e8e8e",
+        "#8c8c8c",
+        "#898989",
+        "#868686",
+        "#848484",
+        "#818181",
+        "#808080",
+        "#7f7f7f",
+        "#7e7e7e",
+        "#7d7d7d",
+        "#7c7c7c",
+        "#7b7b7b",
+        "#7a7a7a",
+        "#797979",
+        "#787878",
+        "#777777",
+        "#767676",
+        "#757575"
+      ],
+      "nativeScreenshotSha256": "11796cd75d177b2a600c864d02c0334babbbd647b583ee162e2f4fddf19eabc2",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#000000",
+          "background": "#808080",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "2db0351ec3c69ad40f6c8bd59bd65763148fe690a34bfd15385e02be0ba8eae8"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#808080",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "f5599ffccb129b0f2a08794fda6c1adb65baf084eef44f0f3f00a8c30576e9cc"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "Color9800FF",
+      "file": "../native-button-colors/9800FF.xml",
+      "styleFile": "../native-button-colors/Styles/9800FF.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#9800ff",
+      "backgroundRows": [
+        "#b03cff",
+        "#ae37ff",
+        "#ac32ff",
+        "#aa2dff",
+        "#a827ff",
+        "#a622ff",
+        "#a31dff",
+        "#a118ff",
+        "#9f12ff",
+        "#9d0dff",
+        "#9b08ff",
+        "#9903ff",
+        "#9700fe",
+        "#9600fc",
+        "#9500fb",
+        "#9400f9",
+        "#9300f7",
+        "#9200f6",
+        "#9100f4",
+        "#9000f2",
+        "#8f00f1",
+        "#8e00ef",
+        "#8d00ed",
+        "#8c00ec"
+      ],
+      "nativeScreenshotSha256": "09cb399ec69d2f17ccc77bb141679ebe6a5daef90fb20cdefec7524d276d4283",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#ffffff",
+          "background": "#9800ff",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "fa9b8ea73acf45df4b352e1607b8bddac51a6c073693921bf1609670f6992a1f"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#9800ff",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "0c5a6beca38cffd5b08153972180a986c08cced14683a3ab63d159cbebcae198"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "file": "Color99FFFF.xml",
+      "styleFile": "Styles/99FFFF.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "Color99FFFF",
+      "sourcePhase": "UI colour derivation",
+      "background": "#99ffff",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#99ffff",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "97480a778927b076de3183aa5fdf4542b8e760b142268f8630f241ef7d74e085"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#99ffff",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "bfffff951d263c449b0f9e682e7ef7b5cf135950f2b9a07445125d61e2b2002d"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "009eb5618ee8057e6f20c0c3e998dd10ed6fccf974090afea33fded9425dc0ab"
+    },
+    {
+      "file": "ColorC08080.xml",
+      "styleFile": "Styles/C08080.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "ColorC08080",
+      "sourcePhase": "UI colour derivation",
+      "background": "#c08080",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#000000",
+          "background": "#c08080",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "f8ccef48e677276458db8720897b61335824bb57fe8eac9408c293ae33984d60"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#c08080",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "bf1432aebd3294019392c630b930dd064e2db046c44d6efcd39a2fc24ee1579d"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "c4cf7f85e433b142ea8c7cb58a4c37c5e0d50a75333c2086c9e1ff3b1d98af5e"
+    },
+    {
+      "name": "ColorFF0000",
+      "file": "../native-button-colors/FF0000.xml",
+      "styleFile": "../native-button-colors/Styles/FF0000.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#ff0000",
+      "backgroundRows": [
+        "#ff3c3c",
+        "#ff3737",
+        "#ff3232",
+        "#ff2d2d",
+        "#ff2727",
+        "#ff2222",
+        "#ff1d1d",
+        "#ff1818",
+        "#ff1212",
+        "#ff0d0d",
+        "#ff0808",
+        "#ff0303",
+        "#fe0000",
+        "#fc0000",
+        "#fb0000",
+        "#f90000",
+        "#f70000",
+        "#f60000",
+        "#f40000",
+        "#f20000",
+        "#f10000",
+        "#ef0000",
+        "#ed0000",
+        "#ec0000"
+      ],
+      "nativeScreenshotSha256": "08ccfa441f7a9a501a035e225936107285480b3cae66b8f082a8c2a2c43637ad",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#000000",
+          "background": "#ff0000",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "1c32e65de1349e6c883243d2abe5d5694c352ca99fe87f661f6577c5dfba0db7"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ff0000",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "46e4b319bd89e140a5d9a1b9e13802e6049441017f12b0856f863264cdf120af"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "ColorFF00FF",
+      "file": "../native-button-colors/FF00FF.xml",
+      "styleFile": "../native-button-colors/Styles/FF00FF.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#ff00ff",
+      "backgroundRows": [
+        "#ff3cff",
+        "#ff37ff",
+        "#ff32ff",
+        "#ff2dff",
+        "#ff27ff",
+        "#ff22ff",
+        "#ff1dff",
+        "#ff18ff",
+        "#ff12ff",
+        "#ff0dff",
+        "#ff08ff",
+        "#ff03ff",
+        "#fe00fe",
+        "#fc00fc",
+        "#fb00fb",
+        "#f900f9",
+        "#f700f7",
+        "#f600f6",
+        "#f400f4",
+        "#f200f2",
+        "#f100f1",
+        "#ef00ef",
+        "#ed00ed",
+        "#ec00ec"
+      ],
+      "nativeScreenshotSha256": "1d321d9add26c0bee4c85eaa390c3a638b3c92440d380814882067d467d2ecf4",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#000000",
+          "background": "#ff00ff",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "4ae33fdfd2a7578f3f97b8f8413866b5f8580f93ff4120810111440b84fb65d9"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ff00ff",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "ddd8ec2940c1be7899c58cbf8786996b17dfcd6ae4c5f94a76ddf04deb779115"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "file": "ColorFFE100.xml",
+      "styleFile": "Styles/FFE100.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        237
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "name": "ColorFFE100",
+      "sourcePhase": "UI colour derivation",
+      "background": "#ffe100",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#474747",
+          "background": "#ffe100",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "cd48c316ed1ab6bbcf5fa3f549cf7b706b4dc435198e34a6169d3500e8abedfc"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffe100",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "55e6e3fa0632ac8a255c2c7f4308d184382ecb27a0bcefaecee52736517d1563"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "nativeScreenshotSha256": "9d6a265657cc6ffeab68463b2c818d13866d4f3ebef5ef0916aa2c2397562a1e"
+    },
+    {
+      "name": "ColorFFFF00",
+      "file": "../native-button-colors/FFFF00.xml",
+      "styleFile": "../native-button-colors/Styles/FFFF00.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        239
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#ffff00",
+      "backgroundRows": [
+        "#ffff3c",
+        "#ffff37",
+        "#ffff32",
+        "#ffff2d",
+        "#ffff27",
+        "#ffff22",
+        "#ffff1d",
+        "#ffff18",
+        "#ffff12",
+        "#ffff0d",
+        "#ffff08",
+        "#ffff03",
+        "#fefe00",
+        "#fcfc00",
+        "#fbfb00",
+        "#f9f900",
+        "#f7f700",
+        "#f6f600",
+        "#f4f400",
+        "#f2f200",
+        "#f1f100",
+        "#efef00",
+        "#eded00",
+        "#ecec00"
+      ],
+      "nativeScreenshotSha256": "d877c82508c8459d9a54ae8f3268207f4f074f4046a759316412dfd45227ff98",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffff00",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "87a763d3467e697dc71e8355f7bf42c8d3b93f5e81d423bc42ebe71825df5602"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffff00",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "d144e2f953728be6384007f4e17c0bfded63dce6ca3405418e8e0764451ba17e"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    },
+    {
+      "name": "ColorFFFFFF",
+      "file": "../native-button-colors/FFFFFF.xml",
+      "styleFile": "../native-button-colors/Styles/FFFFFF.xml",
+      "points": 10,
+      "weight": "normal",
+      "nativeOrigin": [
+        261,
+        240
+      ],
+      "nativeFrame": [
+        269,
+        79
+      ],
+      "background": "#ffffff",
+      "backgroundRows": [
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#ffffff",
+        "#fefefe",
+        "#fcfcfc",
+        "#fbfbfb",
+        "#f9f9f9",
+        "#f7f7f7",
+        "#f6f6f6",
+        "#f4f4f4",
+        "#f2f2f2",
+        "#f1f1f1",
+        "#efefef",
+        "#ededed",
+        "#ececec"
+      ],
+      "nativeScreenshotSha256": "b5803d346d05ed64c4c5b428f46b571029f0034b819bf8ff7ff444c5d504daf9",
+      "buttons": [
+        {
+          "caption": "WW",
+          "primary": true,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 13,
+          "y": 39,
+          "width": 52,
+          "height": 26,
+          "interior": {
+            "x": 16,
+            "y": 42,
+            "width": 46,
+            "height": 20
+          },
+          "interiorRgbSha256": "cca654adca7067adbbad64afb77a5d0b3918ad80ed4a55d9076fd5878d48743c"
+        },
+        {
+          "caption": "MM",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 74,
+          "y": 39,
+          "width": 50,
+          "height": 26,
+          "interior": {
+            "x": 77,
+            "y": 42,
+            "width": 44,
+            "height": 20
+          },
+          "interiorRgbSha256": "438eb9bc3686a81f7293c617c5096762b499ce91ac3a809e7b85a994e9ad8514"
+        },
+        {
+          "caption": "First command",
+          "primary": false,
+          "points": 10,
+          "weight": "regular",
+          "foreground": "#4d4d4d",
+          "background": "#ffffff",
+          "x": 133,
+          "y": 39,
+          "width": 115,
+          "height": 26,
+          "interior": {
+            "x": 136,
+            "y": 42,
+            "width": 109,
+            "height": 20
+          },
+          "interiorRgbSha256": "7dec66d17a24e5a984e3a8ef87370a22b13dbe568f969a788ea0284fd7dce4b0"
+        }
+      ],
+      "sourcePhase": "UI colour derivation"
+    }
+  ]
+}

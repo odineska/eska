@@ -1,0 +1,196 @@
+{
+  "schemaVersion": 1,
+  "os": "Linux ARM64",
+  "codeVersion": "1.109.0",
+  "apiVersion": "1.37",
+  "native1cRequired": false,
+  "scope": "Discovery and retirement of already-dirty metadata while viewing a form; no source writes",
+  "beforeFix": {
+    "newDirtyDependency": "VSIX wait for the existing dirty FontB buffer failed after the form changed its reference",
+    "retiredDirtyMetadata": "Server integration test returned foreign_form_input while changing the reference from FontA to FontB"
+  },
+  "implementation": {
+    "client": "Recompute dirty overlays after each discovered dependency set; publish the model only when overlays stabilize",
+    "maxDiscoveryPasses": 1025,
+    "supersededUpdates": "Return to the outer refresh loop without publishing an obsolete discovery result",
+    "server": "Ignore unused metadata only when its ID occurred in the prior acknowledged dependency set; retire it from the next response",
+    "earlyValidation": "Reject unknown IDs, binary inputs, duplicates and empty versions before copying text; aggregate overlay text is bounded to 32 MiB",
+    "rustApiChange": "Experimental forms::load and ProjectSession::form_preview now accept the previous dependency set",
+    "wireSchemaChanged": false
+  },
+  "installedVsix": {
+    "ru": {
+      "passed": true,
+      "formDependencies": true,
+      "locale": "ru",
+      "newDirtyDependency": true,
+      "retiredDirtyDependency": true,
+      "nestedDirtyDependency": true,
+      "invalidMetadataRecovery": true,
+      "atomicModelPublication": true,
+      "failedDiscoveryRetainsDisplayedModel": true,
+      "detached": true,
+      "stableDom": true,
+      "sourceWritesDuringViewing": false
+    },
+    "en": {
+      "passed": true,
+      "formDependencies": true,
+      "locale": "en",
+      "newDirtyDependency": true,
+      "retiredDirtyDependency": true,
+      "nestedDirtyDependency": true,
+      "invalidMetadataRecovery": true,
+      "atomicModelPublication": true,
+      "failedDiscoveryRetainsDisplayedModel": true,
+      "detached": true,
+      "stableDom": true,
+      "sourceWritesDuringViewing": false
+    }
+  },
+  "regressions": {
+    "activity": {
+      "ru": {
+        "passed": true,
+        "formActivity": true,
+        "locale": "ru",
+        "sourceWritesDuringViewing": false,
+        "dirtyPreserved": true,
+        "stableDom": true,
+        "filterRetainsSession": true,
+        "detached": true,
+        "ownerResume": true
+      },
+      "en": {
+        "passed": true,
+        "formActivity": true,
+        "locale": "en",
+        "sourceWritesDuringViewing": false,
+        "dirtyPreserved": true,
+        "stableDom": true,
+        "filterRetainsSession": true,
+        "detached": true,
+        "ownerResume": true
+      }
+    },
+    "preview": {
+      "ru": {
+        "passed": true,
+        "formPreview": true,
+        "locale": "ru",
+        "geometry": {
+          "frame": {
+            "width": 529,
+            "height": 202
+          },
+          "input": {
+            "width": 164,
+            "height": 23
+          },
+          "script": true
+        },
+        "dirty": true,
+        "incompleteMarkDirtyXml": true,
+        "detached": true,
+        "invalidXml": true,
+        "undo": true,
+        "external": true,
+        "navigation": true,
+        "initialInvalidRecovery": true,
+        "ownerClosedBeforeDock": true,
+        "independentForms": true,
+        "sourceWritesDuringViewing": false
+      },
+      "en": {
+        "passed": true,
+        "formPreview": true,
+        "locale": "en",
+        "geometry": {
+          "frame": {
+            "width": 529,
+            "height": 202
+          },
+          "input": {
+            "width": 164,
+            "height": 23
+          },
+          "script": true
+        },
+        "dirty": true,
+        "incompleteMarkDirtyXml": true,
+        "detached": true,
+        "invalidXml": true,
+        "undo": true,
+        "external": true,
+        "navigation": true,
+        "initialInvalidRecovery": true,
+        "ownerClosedBeforeDock": true,
+        "independentForms": true,
+        "sourceWritesDuringViewing": false
+      }
+    },
+    "pictures": {
+      "ru": {
+        "passed": true,
+        "formPictures": true,
+        "locale": "ru",
+        "externalPayload": true,
+        "dirtyPictureDescriptor": true,
+        "sourceWritesDuringViewing": false
+      },
+      "en": {
+        "passed": true,
+        "formPictures": true,
+        "locale": "en",
+        "externalPayload": true,
+        "dirtyPictureDescriptor": true,
+        "sourceWritesDuringViewing": false
+      }
+    }
+  },
+  "checks": {
+    "cargoFmtCheck": true,
+    "cargoCheck": true,
+    "cargoClippyAllTargetsAllFeaturesDenyWarnings": true,
+    "cargoTest": {
+      "passed": 1469,
+      "failed": 0,
+      "ignored": 19,
+      "suites": 42
+    },
+    "nodeTest": {
+      "passed": 456,
+      "skipped": 11,
+      "failed": 0
+    },
+    "typecheck": true,
+    "compile": true,
+    "vsixPackage": true,
+    "jsSyntax": true
+  },
+  "nativeTestHarness": {
+    "observedFailure": "CDP -32602: No target with given id found during the detached-preview test",
+    "handling": "Allow this known disappeared-target response during iframe discovery, preserve the original command and stack for other errors",
+    "repeatPreviewPassed": {
+      "ru": true,
+      "en": true
+    }
+  },
+  "remaining": [
+    {
+      "case": "New resource is malformed on disk before discovery while its already-open dirty buffer contains valid XML",
+      "reproduced": true,
+      "fixed": false,
+      "steps": [
+        "Open a form referencing FontA",
+        "Edit FontB to a valid unsaved 16 pt font",
+        "Replace FontB on disk with malformed XML while its buffer remains dirty",
+        "Change the form reference to FontB"
+      ],
+      "observed": "Wait for the 16 pt dirty presentation did not succeed; the new input was not discovered for overlay collection"
+    },
+    "First form XML malformed on disk with correction only in an unsaved buffer still needs separate input preparation",
+    "Reload/restart, remaining lifecycle and performance acceptance in T162–T164",
+    "Independent Windows acceptance"
+  ]
+}

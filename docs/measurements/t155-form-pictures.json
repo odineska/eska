@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "apiVersion": "1.37",
+  "profile": "taxi-8.3.27",
+  "visualParityVerified": false,
+  "checks": {
+    "coreContextTests": 7,
+    "formStdioTests": 4,
+    "nodeTestsPassed": 447,
+    "nodeSkipped": 11,
+    "nativeInstalledVsix": {
+      "os": "Linux ARM64",
+      "vscode": "1.109.0",
+      "passed": true,
+      "externalSvgPayload": true,
+      "dirtyPictureXml": true,
+      "noViewingWrites": true,
+      "locales": [
+        "ru",
+        "en"
+      ]
+    }
+  },
+  "limits": {
+    "imageBytes": 8388608,
+    "archiveBytes": 33554432,
+    "pictureXmlBytes": 65536,
+    "dependencies": 1024,
+    "assets": 256
+  },
+  "knownRemaining": [
+    "native image variants and density selection",
+    "LoadTransparent",
+    "full standard-picture calibration",
+    "embedded form pictures",
+    "native extension picture override cases"
+  ]
+}

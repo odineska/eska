@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>P_AWhite</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>P_AWhite</v8:content>
+		</v8:item>
+	</Title>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<UsualGroup name="Canvas" id="1">
+			<Group>Vertical</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<BackColor>web:White</BackColor>
+			<ExtendedTooltip name="CanvasРасширеннаяПодсказка" id="152"/>
+			<ChildItems>
+				<PictureDecoration name="MoveUp" id="100">
+					<Picture>
+						<xr:Ref>StdPicture.MoveUp</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<ContextMenu name="MoveUpКонтекстноеМеню" id="153"/>
+					<ExtendedTooltip name="MoveUpTooltip" id="101"/>
+				</PictureDecoration>
+				<PictureDecoration name="MoveDown" id="110">
+					<Picture>
+						<xr:Ref>StdPicture.MoveDown</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<ContextMenu name="MoveDownКонтекстноеМеню" id="154"/>
+					<ExtendedTooltip name="MoveDownTooltip" id="111"/>
+				</PictureDecoration>
+				<PictureDecoration name="CloneListItem" id="120">
+					<Picture>
+						<xr:Ref>StdPicture.CloneListItem</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<ContextMenu name="CloneListItemКонтекстноеМеню" id="155"/>
+					<ExtendedTooltip name="CloneListItemTooltip" id="121"/>
+				</PictureDecoration>
+				<PictureDecoration name="CloneObject" id="130">
+					<Picture>
+						<xr:Ref>StdPicture.CloneObject</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<ContextMenu name="CloneObjectКонтекстноеМеню" id="156"/>
+					<ExtendedTooltip name="CloneObjectTooltip" id="131"/>
+				</PictureDecoration>
+				<PictureDecoration name="Find" id="140">
+					<Picture>
+						<xr:Ref>StdPicture.Find</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<ContextMenu name="FindКонтекстноеМеню" id="157"/>
+					<ExtendedTooltip name="FindTooltip" id="141"/>
+				</PictureDecoration>
+				<PictureDecoration name="SearchControl" id="150">
+					<Picture>
+						<xr:Ref>StdPicture.SearchControl</xr:Ref>
+						<xr:LoadTransparent>true</xr:LoadTransparent>
+					</Picture>
+					<ContextMenu name="SearchControlКонтекстноеМеню" id="158"/>
+					<ExtendedTooltip name="SearchControlTooltip" id="151"/>
+				</PictureDecoration>
+			</ChildItems>
+		</UsualGroup>
+	</ChildItems>
+	<Attributes/>
+</Form>
