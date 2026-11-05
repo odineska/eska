@@ -458,7 +458,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "surfaces.calendar-recorded-date"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3695,7 +3696,7 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
-      "remaining": "Document content/toolbars, text-document fonts, further text/geographical/graphical/formatted/HTML/PDF/spreadsheet properties and unrecorded sizes/combinations, general PDF scrollbar thumb rules, external additions and remaining calendar/scheduler/chart states. Recorded surfaces are accepted separately; only agreed random chart values may be excluded.",
+      "remaining": "Further document properties/fonts/sizes/combinations, general PDF thumb rules, external additions; calendar dates/regions/properties beyond recorded Nov5 en-US inputs; period/planner/chart/dendrogram/Gantt states and full forms. Recorded surfaces are accepted separately; only agreed random chart values may be excluded.",
       "nextAction": "Extend deterministic document/surface widgets and native editor font/size rules without treating the accepted plain text-document cases as full T160 acceptance."
     },
     {
@@ -6221,6 +6222,111 @@
       "lastConfirmation": "docs/measurements/t160-native-spreadsheet-linux.json",
       "remaining": "Other properties/combinations/styles/fonts/scroll/selection/view-scaling modes, large-document canvas limits, typed applicability, captions/full forms, DPI and Windows.",
       "nextAction": "Preserve the complete spreadsheet surface and numeric headers while expanding remaining native property/state/size matrices and deterministic surface families."
+    },
+    {
+      "id": "surfaces.calendar-recorded-date",
+      "milestone": "T160",
+      "kinds": [
+        "CalendarField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.colors",
+        "appearance.fonts",
+        "surface.content",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "22 complete recorded calendar surfaces at 2026-11-05, en-US regional settings, ru/en UI, normal 10/12pt and bold16pt: month counts, months panel, current-date display, ReadOnly/Enabled, border and recorded character widths. Other dates/cultures/fonts/properties/combinations/profiles and full forms remain open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-calendar"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "calendar",
+        "path": "test/form-calendar-host.cjs",
+        "caseIds": [
+          "A_Default",
+          "dirty-background",
+          "dirty-border",
+          "dirty-current-date",
+          "dirty-month-panel",
+          "dirty-two-by-two",
+          "dirty-font-12",
+          "dirty-font-16-bold",
+          "restored-default",
+          "floating-default",
+          "floating-dirty-size",
+          "floating-month-panel",
+          "floating-restored",
+          "reattached-default",
+          "B_Size",
+          "C_ReadOnly",
+          "D_Disabled",
+          "E_Border",
+          "F_Background",
+          "G_NoTitle",
+          "H_Large",
+          "I_NoMonthPanel",
+          "J_NoCurrentDate",
+          "K_Width2Months",
+          "L_Height2Months",
+          "M_Font12",
+          "N_Font16Bold",
+          "O_CurrentDate",
+          "P_MonthPanel",
+          "Q_2x2",
+          "R_WidthZero20",
+          "S_HeightZero5",
+          "T_Zero35x9",
+          "U_Zero60x20",
+          "V_Panel2Months"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-calendar-linux.json",
+          "sha256": "bc56b5635d237330550e63097651261ee6c542c0c56cc847199d8d485def2ff5",
+          "assertions": [
+            {
+              "pointer": "/completeRecordedCalendarSurfacePixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/nativeCalendarSurfaceSourceProof/completePixelsCompared",
+              "equals": 5813406
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/wholeFormVisualParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-calendar-linux.json",
+      "remaining": "Other dates/regions/fonts, CalendarNavigation/selection/bounds, states/style/size combinations, arbitrary character dimensions, typed applicability, captions/full forms, DPI and Windows.",
+      "nextAction": "Preserve recorded calendar parity while measuring remaining dates/regions/property combinations and deterministic complex surfaces."
     }
   ],
   "historicalReports": [
@@ -6297,7 +6403,8 @@
     "docs/measurements/t160-native-formatted-linux.json",
     "docs/measurements/t160-native-html-linux.json",
     "docs/measurements/t160-native-pdf-linux.json",
-    "docs/measurements/t160-native-spreadsheet-linux.json"
+    "docs/measurements/t160-native-spreadsheet-linux.json",
+    "docs/measurements/t160-native-calendar-linux.json"
   ],
   "supersessions": [
     {
