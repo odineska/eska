@@ -233,10 +233,165 @@
     "retained DOM and untouched files"
   ],
   "pending": [
-    "exact multiline input sizes and spacing",
     "shared column tracks",
     "ThroughAlign rendering",
     "complete complex native forms",
-    "Windows acceptance"
-  ]
+    "Windows acceptance",
+    "additional typography, spacing overrides and DPI contexts"
+  ],
+  "calibratedGeometry": {
+    "explorerCommits": [
+      "5981128",
+      "3d7a19a"
+    ],
+    "measurement": "Relative input rectangles at the preferred size. Native exact-color interiors are converted to control bounds with a one-pixel border on each side.",
+    "relativeRectanglesExact": 26,
+    "compared": 28,
+    "pendingForms": [
+      "RowsF",
+      "RowsT"
+    ],
+    "calibratedMultilineCases": [
+      {
+        "height": null,
+        "font": null,
+        "controlHeight": 51,
+        "nextRowOffset": 60
+      },
+      {
+        "height": 0,
+        "font": null,
+        "controlHeight": 51,
+        "nextRowOffset": 60
+      },
+      {
+        "height": 1,
+        "font": null,
+        "controlHeight": 23,
+        "nextRowOffset": 32
+      },
+      {
+        "height": 2,
+        "font": null,
+        "controlHeight": 51,
+        "nextRowOffset": 60
+      },
+      {
+        "height": 3,
+        "font": null,
+        "controlHeight": 79,
+        "nextRowOffset": 88
+      },
+      {
+        "height": 4,
+        "font": null,
+        "controlHeight": 107,
+        "nextRowOffset": 116
+      },
+      {
+        "height": 5,
+        "font": null,
+        "controlHeight": 135,
+        "nextRowOffset": 144
+      },
+      {
+        "height": 2,
+        "font": 14,
+        "controlHeight": 76,
+        "nextRowOffset": 85
+      },
+      {
+        "height": 4,
+        "font": 14,
+        "controlHeight": 158,
+        "nextRowOffset": 167
+      },
+      {
+        "height": 1,
+        "font": 8,
+        "controlHeight": 20,
+        "nextRowOffset": 29
+      },
+      {
+        "height": 2,
+        "font": 8,
+        "controlHeight": 45,
+        "nextRowOffset": 54
+      },
+      {
+        "height": 1,
+        "font": 9,
+        "controlHeight": 22,
+        "nextRowOffset": 31
+      },
+      {
+        "height": 2,
+        "font": 9,
+        "controlHeight": 49,
+        "nextRowOffset": 58
+      },
+      {
+        "height": 1,
+        "font": 11,
+        "controlHeight": 28,
+        "nextRowOffset": 37
+      },
+      {
+        "height": 2,
+        "font": 11,
+        "controlHeight": 61,
+        "nextRowOffset": 70
+      },
+      {
+        "height": 1,
+        "font": 12,
+        "controlHeight": 29,
+        "nextRowOffset": 38
+      },
+      {
+        "height": 2,
+        "font": 12,
+        "controlHeight": 64,
+        "nextRowOffset": 73
+      },
+      {
+        "height": 1,
+        "font": 16,
+        "controlHeight": 38,
+        "nextRowOffset": 47
+      },
+      {
+        "height": 2,
+        "font": 16,
+        "controlHeight": 82,
+        "nextRowOffset": 91
+      },
+      {
+        "height": 1,
+        "font": 20,
+        "controlHeight": 48,
+        "nextRowOffset": 57
+      },
+      {
+        "height": 2,
+        "font": 20,
+        "controlHeight": 102,
+        "nextRowOffset": 111
+      }
+    ],
+    "node": {
+      "passed": 605,
+      "skipped": 8
+    },
+    "bun": {
+      "passed": 593,
+      "skipped": 8
+    },
+    "artifact": {
+      "vsixSha256": "1a64771b7ce1c69be6d023be46e99b6ea66b2aae058520ac5696d743ada560da",
+      "backendSha256": "355acce7b4002de008ba782689d0b39edc27bd18f5d005889f06dcfba82b778f"
+    },
+    "installedRuns": 10,
+    "caseIds": 96
+  }
 }
