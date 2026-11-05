@@ -3648,11 +3648,30 @@
           "sha256": "ce70a95f85c0afb517bf38870ee3841089502adcffe1f25ef7dcbd781e7646cd",
           "assertions": [],
           "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t159-table-source-projection-linux.json",
+          "sha256": "b794c68383630655a3b040d11ea7c8eab316c149818b3f8dcf503b7e0f65530a",
+          "assertions": [
+            {
+              "pointer": "/acceptance/widthsExactEn",
+              "equals": 14
+            },
+            {
+              "pointer": "/acceptance/fullFramesExactEn",
+              "equals": 5
+            },
+            {
+              "pointer": "/acceptance/gridOffsetsExactEn",
+              "equals": 11
+            }
+          ],
+          "clientCommit": "2f3c6e2df8eef0c45ae35b8e51217b568a82e2dd"
         }
       ],
-      "lastConfirmation": "docs/measurements/t159-native-tables-linux.json",
-      "remaining": "Recorded nine ValueTable grids and two metadata-bound source grids/pagination are accepted separately. Complete table-field composition, other sources/column types, hierarchy/selection, widths/fonts/styles/alignments/states and Windows remain open.",
-      "nextAction": "Expand native property/style/state combinations and table toolbar/additions pixel comparisons."
+      "lastConfirmation": "docs/measurements/t159-table-source-projection-linux.json",
+      "remaining": "Recorded grids and the geometry of standalone table command sources are confirmed in limited scopes. Complete table-field pixels, toolbar/addition states, other sources and widths/fonts/styles, DPI and Windows remain open.",
+      "nextAction": "Measure additional search placements and dynamic-list command sources; preserve the projected panel and grid geometry while comparing toolbar pixels."
     },
     {
       "id": "surfaces.full-matrix",
@@ -3983,10 +4002,26 @@
         ],
         "selection": "whole-suite-with-transitions"
       },
-      "evidence": [],
-      "lastConfirmation": null,
-      "remaining": "All required ordinary-control states, labels, image modes, fonts/colors and native geometry/pixels.",
-      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-radio-choices-linux.json",
+          "sha256": "44d5c36f0a59d261f5cf39635663d22fe9332cc9df201e52ca2b2372cae995fa",
+          "assertions": [
+            {
+              "pointer": "/exactOuterFramesByLocale/en",
+              "equals": 21
+            },
+            {
+              "pointer": "/exactOuterFramesByLocale/ru",
+              "equals": 21
+            }
+          ],
+          "clientCommit": "56cda344036d92e08f42f008c7f8376f634af589"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-radio-choices-linux.json",
+      "remaining": "RadioButtonField has measured layout and detached dirty transitions. Radio and Tumbler raster, the remaining 1 px width, and other ordinary-control state/property combinations remain open.",
+      "nextAction": "Complete the circle and Tumbler pixels in the radio matrix; expand other ordinary-control states, fonts and colors."
     },
     {
       "id": "shell.inspectors",
