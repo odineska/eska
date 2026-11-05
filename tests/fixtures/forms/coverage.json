@@ -1361,7 +1361,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "surfaces.period-recorded-date"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3696,7 +3697,7 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
-      "remaining": "Further document properties/fonts/sizes/combinations, general PDF thumb rules, external additions; calendar dates/regions/properties beyond recorded Nov5 en-US inputs; period/planner/chart/dendrogram/Gantt states and full forms. Recorded surfaces are accepted separately; only agreed random chart values may be excluded.",
+      "remaining": "Further document properties/fonts/sizes/combinations, general PDF thumb rules, external additions; calendar/period dates/regions/properties beyond recorded Nov2026 en-US and general period-height rules; planner/chart/dendrogram/Gantt states and full forms. Recorded scopes do not close the full matrix; only agreed random chart values may be excluded.",
       "nextAction": "Extend deterministic document/surface widgets and native editor font/size rules without treating the accepted plain text-document cases as full T160 acceptance."
     },
     {
@@ -6327,6 +6328,111 @@
       "lastConfirmation": "docs/measurements/t160-native-calendar-linux.json",
       "remaining": "Other dates/regions/fonts, CalendarNavigation/selection/bounds, states/style/size combinations, arbitrary character dimensions, typed applicability, captions/full forms, DPI and Windows.",
       "nextAction": "Preserve recorded calendar parity while measuring remaining dates/regions/property combinations and deterministic complex surfaces."
+    },
+    {
+      "id": "surfaces.period-recorded-date",
+      "milestone": "T160",
+      "kinds": [
+        "PeriodField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.colors",
+        "appearance.fonts",
+        "surface.content",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "22 complete recorded period-selector sources at Nov2026/en-US, ru/en UI, normal 10/12pt and bold 16pt, one-to-three years, current-month outline, ReadOnly/Enabled, border, recorded widths15/20/30/31/35/60 and heights3/5/9/20. Other dates/regions/fonts/properties/dimensions/combinations and full forms remain open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-period"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "period",
+        "path": "test/form-period-host.cjs",
+        "caseIds": [
+          "A_Default",
+          "dirty-background",
+          "dirty-border",
+          "dirty-size",
+          "dirty-two-years",
+          "dirty-tall-size",
+          "dirty-font-12",
+          "dirty-font-16-bold",
+          "restored-default",
+          "floating-default",
+          "floating-dirty-size",
+          "floating-two-years",
+          "floating-restored",
+          "reattached-default",
+          "B_Size",
+          "C_ReadOnly",
+          "D_Disabled",
+          "E_Border",
+          "F_Background",
+          "G_NoTitle",
+          "H_Large",
+          "I_Small",
+          "J_Larger",
+          "K_Font12",
+          "L_Font16Bold",
+          "M_Height3",
+          "N_Height5",
+          "O_Height9",
+          "P_Height20",
+          "Q_Width20",
+          "R_Width30",
+          "S_Width31",
+          "T_Width35",
+          "U_Width60",
+          "V_Width20Height9"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-period-linux.json",
+          "sha256": "950f4fefbd3d1c9a3f0097a15ec5e3236c167d1f5da419b496c6dd3a8378b0e8",
+          "assertions": [
+            {
+              "pointer": "/completeRecordedPeriodSurfacePixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/nativePeriodSurfaceSourceProof/completePixelsCompared",
+              "equals": 4786404
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/wholeFormVisualParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-period-linux.json",
+      "remaining": "General height conversion/other dimensions, dates/regions/fonts, style/state/property combinations and navigation/selection; typed applicability, captions/full forms, DPI and Windows.",
+      "nextAction": "Preserve recorded period parity while expanding remaining dimensions/date/regional profiles and deterministic complex fields."
     }
   ],
   "historicalReports": [
@@ -6404,7 +6510,8 @@
     "docs/measurements/t160-native-html-linux.json",
     "docs/measurements/t160-native-pdf-linux.json",
     "docs/measurements/t160-native-spreadsheet-linux.json",
-    "docs/measurements/t160-native-calendar-linux.json"
+    "docs/measurements/t160-native-calendar-linux.json",
+    "docs/measurements/t160-native-period-linux.json"
   ],
   "supersessions": [
     {
