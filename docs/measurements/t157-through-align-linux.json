@@ -1,0 +1,441 @@
+{
+  "backendSha256": "1a9f39b5e4b7d29f04bb30579eef8b5b07f49efddfcf57b22a20d5cdeffe75f3",
+  "cases": [
+    {
+      "case": "Auto",
+      "exactRelativeInputRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "ba1e1a67df43b50827e746b5221c615affd535c9be604117468de967fecdb5bc",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "throughAlign": [
+          null,
+          null,
+          null
+        ]
+      },
+      "sourceSha256": "abd01113dc68c1902394b07bf134cad9a717ef93efbeb589c3bea95b0961836d"
+    },
+    {
+      "case": "Use",
+      "exactRelativeInputRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "eacab64d4278037c9a6bd472c5dda75bfdfa358fbdbcd3d8e96491713b48a0aa",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "throughAlign": [
+          "Use",
+          "Use",
+          "Use"
+        ]
+      },
+      "sourceSha256": "c13bbf0832eeb7d1323f2fea9796ce8fb9d575c4bd4d17a28c9322b89313d4d5"
+    },
+    {
+      "case": "Dont",
+      "deltaXyWidthHeightPx": {
+        "A1": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "A2": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "B1": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "B2": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "exactRelativeInputRectangles": [],
+      "nativeScreenshotSha256": "bac17112b11af9fa55197f42c36bcc17012e9274459e497633377b84544e7fe9",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "throughAlign": [
+          "DontUse",
+          "DontUse",
+          "DontUse"
+        ]
+      },
+      "sourceSha256": "bbe644eea6fa0893db708422f4f4edefa2d1b87930f116034d73b18e3d378b4e"
+    },
+    {
+      "case": "Left",
+      "deltaXyWidthHeightPx": {
+        "A1": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "A2": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "B1": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "B2": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "exactRelativeInputRectangles": [],
+      "nativeScreenshotSha256": "44917665badfdc6c2fe69b8d034d538e26312cfb27968425791012bc8e1cebfa",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "throughAlign": [
+          null,
+          "Use",
+          "DontUse"
+        ]
+      },
+      "sourceSha256": "70d1edb84543c3032af16fc079fd5ca4a981cda492e429413cff787c7e958767"
+    },
+    {
+      "case": "Right",
+      "deltaXyWidthHeightPx": {
+        "A1": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "A2": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "B1": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "B2": [
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "exactRelativeInputRectangles": [],
+      "nativeScreenshotSha256": "2474a4c1dddc7fb0c2e22061faabdb6769d932ed99efc245b995d745a21d0979",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "throughAlign": [
+          null,
+          "DontUse",
+          "Use"
+        ]
+      },
+      "sourceSha256": "ddf3b5263eacb504d33d28bd029ba1cfe38f5681ab67a86c5ae513e54f007458"
+    },
+    {
+      "case": "Parent",
+      "exactRelativeInputRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "b4d638ab34c3cb1e63d234312956bc0cdacec72fa5051ac40f5737d3e2cc5f4d",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "throughAlign": [
+          "Use",
+          null,
+          null
+        ]
+      },
+      "sourceSha256": "b990fc88970a8a98508349dd19b5a3bab6599dd0cd2b5376bde80258dc847b2d"
+    },
+    {
+      "case": "OuterDont",
+      "exactRelativeInputRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "2253bc306626754f6dfcc1b96fedc5f5ccac4fa72bbb28ead0756e46f17659cc",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "throughAlign": [
+          "DontUse",
+          null,
+          null
+        ]
+      },
+      "sourceSha256": "a9367914a3a3bb73950027a8750a046d63d845aca7227541bfbf7f4c5640dd6e"
+    },
+    {
+      "case": "OuterDontChildrenUse",
+      "exactRelativeInputRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "398d19b0305d58efeb0f0ebbfbf8766333598fb0c2c6dd3f6d2f19c2f25a39a6",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "throughAlign": [
+          "DontUse",
+          "Use",
+          "Use"
+        ]
+      },
+      "sourceSha256": "c33c93e0a52d8125cd7f844febf5483c76011797d05c5e6cb7099ce858606543"
+    },
+    {
+      "case": "Separated",
+      "exactRelativeInputRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "61a485c7a594bc9f118a6f90b813fe96cf2b8a84f302dad5fcf8ce59272d039d",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "united": [
+          false,
+          false
+        ]
+      },
+      "sourceSha256": "e86fad29ca1624e68b356a73afcf3bcb5c0a092c9aea41f23c06e89d78e33222"
+    },
+    {
+      "case": "Titled",
+      "exactRelativeInputRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "bc25f383988cb7a2b835d9fd94baccf70d68251c612dea30a31f25cb6b7058d6",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "leftTitle": true
+      },
+      "sourceSha256": "84a5a2b4cd591b3dd770d1e369801c74c14b78f0d41d2ae6afd0493e6e8f986a"
+    },
+    {
+      "case": "Framed",
+      "deltaXyWidthHeightPx": {
+        "A1": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "A2": [
+          0,
+          0,
+          1,
+          0
+        ],
+        "B1": [
+          1,
+          -8,
+          0,
+          0
+        ],
+        "B2": [
+          1,
+          -8,
+          0,
+          0
+        ]
+      },
+      "exactRelativeInputRectangles": [],
+      "nativeScreenshotSha256": "a9aa094782e60685f8176214d49fe799d96892b752bfbe0b9fda0f2bd8cbac45",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "leftRepresentation": "StrongSeparation"
+      },
+      "sourceSha256": "4d5a6df8f5cd8a9c7e9ced57fb4e0e4361a3e89583b8444224d51dd0f3b68363"
+    },
+    {
+      "case": "Top",
+      "exactRelativeInputRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "98dfc94eacd88c22e814958a9a16009afb00050d33bfc6a509d6a20bb22549c2",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "a1TitleLocation": "Top"
+      },
+      "sourceSha256": "86654ed144f98a746e2e6c13e809635bdb6a9010a1990dcd812a6212c21e8e90"
+    },
+    {
+      "case": "Barrier",
+      "deltaXyWidthHeightPx": {
+        "A1": [
+          0,
+          0,
+          23,
+          0
+        ],
+        "A2": [
+          0,
+          0,
+          23,
+          0
+        ],
+        "B1": [
+          0,
+          -7,
+          23,
+          0
+        ],
+        "B2": [
+          0,
+          -7,
+          23,
+          0
+        ],
+        "C1": [
+          116,
+          0,
+          -93,
+          0
+        ],
+        "C2": [
+          116,
+          -4,
+          -93,
+          0
+        ]
+      },
+      "exactRelativeInputRectangles": [],
+      "nativeScreenshotSha256": "da727275f626277d4bd2109f83dd1601f8f44c0c7ee36d2fd9d1df5873045cc7",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "middleThroughAlign": "DontUse"
+      },
+      "sourceSha256": "6ea479b4c0d6d5950d576373655efc1f058a5decbdbbedf1504abd61dbf64851"
+    },
+    {
+      "case": "Direct",
+      "exactRelativeInputRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "a4452354909853cf34563e92ba4bac5649547c1cb1bda0e10b69155e319e8dc3",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "hasDirectField": true
+      },
+      "sourceSha256": "eee5de015c19aae064193eb8e47c52e9b3c377e8672755996f27616584811026"
+    },
+    {
+      "case": "Nested",
+      "exactRelativeInputRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "b7528abb3124cb28241235072971c651a84ea92794d5d8541ad9cc3a89419e70",
+      "sameLeadingColumnPartition": [
+        "en",
+        "ru"
+      ],
+      "settings": {
+        "nestedLeft": true
+      },
+      "sourceSha256": "3e889e451ac6cfb1813ff2acac1b5e0374689101fee292649bf6c173ff38d2aa"
+    }
+  ],
+  "columnPartitionsMatched": 15,
+  "compatibility": "Version8_3_27",
+  "eskaCommit": "9b907b40f9c056a7f7ab151a0f8393b8466941de",
+  "exactRelativeInputRectangles": 10,
+  "explorerCommit": "ca6bc13e646dbb7bdac7341870fab1e9b35616c4",
+  "measurement": "Input border boxes relative to the first input A1. Native interior measurements include a two-pixel correction for the two borders.",
+  "nativeBuild": "8.3.27.2342",
+  "nativeLocale": "en",
+  "pending": [
+    "Whole-form pixel comparisons",
+    "Title typography and automatic wrapping",
+    "Strong separation spacing",
+    "Group participation in form and page roots",
+    "Shared columns in horizontal child groups",
+    "Windows acceptance"
+  ],
+  "platform": "Linux ARM64 X11",
+  "regressionCaseCount": 258,
+  "regressionRuns": 16,
+  "schemaVersion": 1,
+  "scope": "Leading field labels in nested ordinary vertical groups",
+  "sourceWritesDuringViewing": false,
+  "testedTransitions": [
+    "automatic cross-group alignment",
+    "alignment in detached preview",
+    "allocated width 470",
+    "allocated width 910",
+    "left group excludes its titles",
+    "left group rejoins the shared track",
+    "parent flag preserves alignment within the group",
+    "aligned after return"
+  ],
+  "verifiedInstalledRuntimeFiles": 1303,
+  "vsixSha256": "9df0c7550a621d5f52e234841d9148cacbe8a919a8e98541b9c35e95a748bfcb"
+}
