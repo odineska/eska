@@ -1,0 +1,404 @@
+{
+  "schemaVersion": 1,
+  "task": "T161 single localization presentation",
+  "date": "2026-11-05",
+  "platform": "Linux ARM64, X11, VS Code 1.109.0, ru/en",
+  "passed": true,
+  "windowsAccepted": false,
+  "fullPropertyCatalogueAccepted": false,
+  "implementation": {
+    "recognition": "Reuse resources/properties/model.mjs localizedEntries; no second XML wrapper parser.",
+    "single": "A sole recognized localization is plain text, even when its language differs from the UI. Empty content stays empty; a value type caption does not replace content.",
+    "multiple": "A bounded summary uses the UI language when available. Expanding retains every language row and full content.",
+    "unknown": "Annotated/nonstandard inner wrappers retain generic structured inspection. Outer qualifiers remain visible beside the plain value.",
+    "source": "Source values, repeats, qualifiers and XML remain unchanged; no BSL execution.",
+    "protocolChanged": false,
+    "dependenciesAdded": false
+  },
+  "matrix": [
+    {
+      "locale": "en",
+      "passed": true,
+      "sourceWritesDuringViewing": false,
+      "unrelatedRecordDomRetained": true,
+      "cases": [
+        {
+          "name": "single-ru",
+          "plain": "Один вариант",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "single-other-language",
+          "plain": "Only English",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "multiple",
+          "plain": null,
+          "multipleLanguages": true,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "single-return",
+          "plain": "Вернулся один",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "empty-single",
+          "plain": "",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "zero",
+          "plain": "",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "outer-annotation",
+          "plain": "Annotated",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "inner-annotation",
+          "plain": null,
+          "multipleLanguages": false,
+          "genericStructure": true,
+          "annotationRetained": true
+        },
+        {
+          "name": "extra-field",
+          "plain": null,
+          "multipleLanguages": false,
+          "genericStructure": true,
+          "annotationRetained": true
+        },
+        {
+          "name": "single-final",
+          "plain": "Plain localized text",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "passed": true,
+      "sourceWritesDuringViewing": false,
+      "unrelatedRecordDomRetained": true,
+      "cases": [
+        {
+          "name": "single-ru",
+          "plain": "Один вариант",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "single-other-language",
+          "plain": "Only English",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "multiple",
+          "plain": null,
+          "multipleLanguages": true,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "single-return",
+          "plain": "Вернулся один",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "empty-single",
+          "plain": "",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "zero",
+          "plain": "",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "outer-annotation",
+          "plain": "Annotated",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        },
+        {
+          "name": "inner-annotation",
+          "plain": null,
+          "multipleLanguages": false,
+          "genericStructure": true,
+          "annotationRetained": true
+        },
+        {
+          "name": "extra-field",
+          "plain": null,
+          "multipleLanguages": false,
+          "genericStructure": true,
+          "annotationRetained": true
+        },
+        {
+          "name": "single-final",
+          "plain": "Plain localized text",
+          "multipleLanguages": false,
+          "genericStructure": false,
+          "annotationRetained": true
+        }
+      ]
+    }
+  ],
+  "unitCases": [
+    "0/1/several recognized variants",
+    "typed and exact Designer wrappers",
+    "other-language sole variant",
+    "explicit empty content",
+    "outer and inner annotations/extra fields",
+    "literal boolean text",
+    "HTML escaping and immutable source value"
+  ],
+  "regression": {
+    "pairs": 12,
+    "passed": true,
+    "sameProductionRuntimeVerified": true,
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "04df605c5281d8d30626babf515353b995f4d6d0f007b969f68bf477a189426b",
+    "attempts": [
+      {
+        "batch": "form-batch-FvQrV0",
+        "rawPassed": false,
+        "reason": "Native inspector test toggled a structured record that correctly remained open; ten other pairs passed.",
+        "testOnlyInputChanges": [],
+        "batchSha256": "60ae7c7abb1eebe6e3ce89065e07a1da92afa36fe4f41e2fe7e6947acfbc34a1",
+        "inputsSha256": "9392d865b3f0e01eb23dd503b36164b387582dd29d2a4bae8d4ee4d39fb4190d",
+        "vsixSha256": "2f14bf5dc65d710418773e5a489fcf7686c388c639c8b268e7c70d134cc7b5c4",
+        "rawFailures": [
+          {
+            "suite": "inspectors",
+            "locale": "en"
+          },
+          {
+            "suite": "inspectors",
+            "locale": "ru"
+          }
+        ]
+      },
+      {
+        "batch": "form-batch-CvzzK9",
+        "rawPassed": false,
+        "reason": "Test-only browser-evaluate local declaration was reused across iterations; wrapped in a local function.",
+        "testOnlyInputChanges": [
+          "test/form-inspectors-host.cjs"
+        ],
+        "batchSha256": "f53de4e46d2a405469a11cd2b9053fc788de4689f52975de5c6ec92231fedf52",
+        "inputsSha256": "4dcc827520e78dae211198a0429df8fb8525987ca08b4811551e8f2d593caa67",
+        "vsixSha256": "97c36923219f0f457d97f3be30272704c80ab7f035f684a16fed5a3fb3a40233",
+        "rawFailures": [
+          {
+            "suite": "inspectors",
+            "locale": "en"
+          },
+          {
+            "suite": "inspectors",
+            "locale": "ru"
+          }
+        ]
+      },
+      {
+        "batch": "form-batch-VweSAC",
+        "rawPassed": true,
+        "reason": "Final inspector matrix passed in both locales.",
+        "testOnlyInputChanges": [
+          "test/form-inspectors-host.cjs"
+        ],
+        "batchSha256": "85011a5fcb071b712783d2fc9179bc8a640400d04ce3b06f6e9ae9765dd8fd6c",
+        "inputsSha256": "87a96adfbc3d720ca6a2631169e2974a30ba64ff210eabde952d83e17054a629",
+        "vsixSha256": "ffcf84295a71fbd2495df0cea628ad8a0e216eedb82ec3b45dca8c1208b0f1de",
+        "rawFailures": []
+      }
+    ],
+    "runs": [
+      {
+        "suite": "inspectors",
+        "locale": "en",
+        "batch": "form-batch-VweSAC",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "inspectors",
+        "locale": "ru",
+        "batch": "form-batch-VweSAC",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "detached-space",
+        "locale": "en",
+        "batch": "form-batch-FvQrV0",
+        "passed": true,
+        "caseIds": 6
+      },
+      {
+        "suite": "detached-space",
+        "locale": "ru",
+        "batch": "form-batch-FvQrV0",
+        "passed": true,
+        "caseIds": 6
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "batch": "form-batch-FvQrV0",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "batch": "form-batch-FvQrV0",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "restore",
+        "locale": "en",
+        "batch": "form-batch-FvQrV0",
+        "passed": true,
+        "caseIds": 2
+      },
+      {
+        "suite": "restore",
+        "locale": "ru",
+        "batch": "form-batch-FvQrV0",
+        "passed": true,
+        "caseIds": 2
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "batch": "form-batch-FvQrV0",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "batch": "form-batch-FvQrV0",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "palette",
+        "locale": "en",
+        "batch": "form-batch-FvQrV0",
+        "passed": true,
+        "caseIds": 2
+      },
+      {
+        "suite": "palette",
+        "locale": "ru",
+        "batch": "form-batch-FvQrV0",
+        "passed": true,
+        "caseIds": 2
+      }
+    ]
+  },
+  "checks": {
+    "unit": [
+      {
+        "name": "typescript",
+        "exitCode": 0,
+        "seconds": 0.24,
+        "log": "validated-typescript.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "compile",
+        "exitCode": 0,
+        "seconds": 0.211,
+        "log": "validated-compile.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "compile-ts",
+        "exitCode": 0,
+        "seconds": 0.238,
+        "log": "validated-compile-ts.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "bundle",
+        "exitCode": 0,
+        "seconds": 0.603,
+        "log": "validated-bundle.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "node",
+        "exitCode": 0,
+        "seconds": 8.271,
+        "log": "validated-node.log",
+        "sha256": "083ac55a1a58538217edaa558bbeeda390e504acfdee3610fc2cf8f2c920906e"
+      },
+      {
+        "name": "bun",
+        "exitCode": 0,
+        "seconds": 24.887,
+        "log": "validated-bun.log",
+        "sha256": "a7957a5903320e73a1b76bd1f7ad7f2b5f6bc29028d069938f3822b7e4257bf1"
+      }
+    ],
+    "counts": {
+      "node": {
+        "pass": 602,
+        "fail": 0,
+        "skipped": 8
+      },
+      "bun": {
+        "pass": 590,
+        "skip": 8,
+        "fail": 0
+      }
+    },
+    "rust": "Mandatory Rust fmt/check/clippy/test passed on unchanged core; core source hashes are identical to previous accepted checkpoints."
+  },
+  "limits": [
+    "The full applicable-property/default catalogue is a separate next task.",
+    "Windows acceptance remains deferred.",
+    "No complete visual parity or performance thresholds are claimed."
+  ],
+  "publication": {
+    "newPush": false,
+    "newRelease": false,
+    "versionsUnchanged": {
+      "eska": "0.24.0",
+      "explorer": "0.1.9"
+    }
+  }
+}
