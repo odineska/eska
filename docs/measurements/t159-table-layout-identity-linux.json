@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "scope": "Stable derived table header/physical-column models and list identity through geometry changes; unchanged native geometry formulas.",
+  "fullProfileAccepted": false,
+  "wholeFormVisualParity": false,
+  "performanceClaimed": false,
+  "implementation": {
+    "componentScoped": true,
+    "projection": "Existing pure tableLayout remains the geometry authority; component-owned stores retain keyed header/column identities and unchanged arrays. Source nodes/fields remain the controller store proxies; shallow publication avoids mutating replaced source records.",
+    "cacheBound": "Entries absent from the current projection are pruned; the component clears both maps on disposal.",
+    "publication": "One synchronous, untracked batch publishes derived geometry after the source calculation.",
+    "pixelCriteriaWeakened": false,
+    "publicProtocolChanged": false,
+    "dependenciesAdded": false
+  },
+  "before": {
+    "batch": "form-batch-mKtu1Q",
+    "runtimeManifestSha256": "1af53445f2d3f000d8c2cfd3f3a91da8642a8953b2566cdd7de80b2049e322b9",
+    "failedAssertion": "Default: Width retains all header DOM nodes; actual 0, expected 3",
+    "inputsStable": true
+  },
+  "checks": {
+    "node": {
+      "passed": 566,
+      "failed": 0,
+      "skipped": 9,
+      "log": "table-identity-ydgnp0bs/node-full.log",
+      "sha256": "8acb1578c8623b52f129752ce3112dc6755d03b87e8a85c120f7a801f212e1b2"
+    },
+    "bun142": {
+      "passed": 554,
+      "failed": 0,
+      "skipped": 9,
+      "log": "table-identity-ydgnp0bs/bun-full.log",
+      "sha256": "592c56e2cc855bcfcb8cdac1d92e09355104f2f89f21e7ce543763837a46d3a2"
+    },
+    "modelRegression": {
+      "passed": 10,
+      "failed": 0,
+      "scopes": [
+        "Width and stable lists/For owners",
+        "Horizontal/Vertical/InCell groups",
+        "Reordering and hidden-entry release",
+        "Rebinding replacement source without mutation",
+        "Changed widget kind",
+        "Group modes, readonly and locale",
+        "Unrelated state and disposal"
+      ]
+    },
+    "pythonPackaging": {
+      "passed": 7,
+      "failed": 0
+    },
+    "cargo": {
+      "suites": 42,
+      "passed": 1520,
+      "failed": 0,
+      "ignored": 19,
+      "commands": [
+        {
+          "name": "cargo-fmt",
+          "exitCode": 0,
+          "seconds": 1.329
+        },
+        {
+          "name": "cargo-check",
+          "exitCode": 0,
+          "seconds": 4.57
+        },
+        {
+          "name": "cargo-clippy",
+          "exitCode": 0,
+          "seconds": 8.786
+        },
+        {
+          "name": "cargo-test",
+          "exitCode": 0,
+          "seconds": 169.09
+        }
+      ]
+    }
+  },
+  "native": {
+    "batch": "form-batch-JX8e3J",
+    "passed": true,
+    "pairs": 4,
+    "cases": 78,
+    "guiConcurrency": 1,
+    "builds": 1,
+    "packages": 1,
+    "runs": [
+      {
+        "suite": "tables",
+        "locale": "en",
+        "passed": true,
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "receipt": "form-batch-JX8e3J/tables-en/receipt.json",
+        "receiptSha256": "236d3732cc57ea774da8c35ff505fd7cdc14bccef9604262489a221e3d47f5eb",
+        "identity": [
+          {
+            "kind": "Default",
+            "headers": 3,
+            "footerCells": 3,
+            "widthEdit": 32,
+            "selection": "4",
+            "restored": true
+          },
+          {
+            "kind": "GridFooter",
+            "headers": 3,
+            "footerCells": 3,
+            "widthEdit": 32,
+            "selection": "4",
+            "restored": true
+          },
+          {
+            "kind": "HorizontalTitled",
+            "headers": 4,
+            "footerCells": 3,
+            "widthEdit": 32,
+            "selection": "4",
+            "restored": true
+          },
+          {
+            "kind": "Vertical",
+            "headers": 4,
+            "footerCells": 2,
+            "widthEdit": 32,
+            "selection": "4",
+            "restored": true
+          },
+          {
+            "kind": "InCell",
+            "headers": 4,
+            "footerCells": 2,
+            "widthEdit": 32,
+            "selection": "4",
+            "restored": true
+          }
+        ]
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": [
+          "tables/Default",
+          "tables/GridFooter",
+          "tables/Horizontal",
+          "tables/HorizontalTitled",
+          "tables/Vertical",
+          "tables/InCell",
+          "tables/Marked",
+          "tables/ReadOnly",
+          "tables/NoAutoFill",
+          "tables/MetadataTable",
+          "tables/DynamicList",
+          "tables/NoViewStatus",
+          "tables/NoSearchControl",
+          "tables/ColumnHidden",
+          "tables/TablePopup",
+          "tables/TableButtonGroup"
+        ],
+        "receipt": "form-batch-JX8e3J/tables-ru/receipt.json",
+        "receiptSha256": "873e0c2e48f95f07870cd3c946f7f004972112f4222dd351e15f6748feeea450",
+        "identity": [
+          {
+            "kind": "Default",
+            "headers": 3,
+            "footerCells": 3,
+            "widthEdit": 32,
+            "selection": "4",
+            "restored": true
+          },
+          {
+            "kind": "GridFooter",
+            "headers": 3,
+            "footerCells": 3,
+            "widthEdit": 32,
+            "selection": "4",
+            "restored": true
+          },
+          {
+            "kind": "HorizontalTitled",
+            "headers": 4,
+            "footerCells": 3,
+            "widthEdit": 32,
+            "selection": "4",
+            "restored": true
+          },
+          {
+            "kind": "Vertical",
+            "headers": 4,
+            "footerCells": 2,
+            "widthEdit": 32,
+            "selection": "4",
+            "restored": true
+          },
+          {
+            "kind": "InCell",
+            "headers": 4,
+            "footerCells": 2,
+            "widthEdit": 32,
+            "selection": "4",
+            "restored": true
+          }
+        ]
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "passed": true,
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill",
+          "table-pixels/MetadataTable",
+          "table-pixels/DynamicList",
+          "table-pixels/dynamic-dirty-footer",
+          "table-pixels/dynamic-restored-default",
+          "table-pixels/dynamic-floating-default",
+          "table-pixels/dynamic-floating-dirty-footer",
+          "table-pixels/dynamic-floating-restored",
+          "table-pixels/dynamic-reattached-default"
+        ],
+        "receipt": "form-batch-JX8e3J/table-pixels-en/receipt.json",
+        "receiptSha256": "7012cca20e3c98df528db3c3d09b20ead455cc59c21bcaea1aa68343288b412a",
+        "sourceWritesDuringViewing": false,
+        "stableTableDom": true,
+        "wholeGridControlPixelParity": true,
+        "wholeFormVisualParity": false,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": [
+          "table-pixels/Default",
+          "table-pixels/dirty-footer",
+          "table-pixels/restored-default",
+          "table-pixels/floating-default",
+          "table-pixels/floating-dirty-footer",
+          "table-pixels/floating-restored",
+          "table-pixels/reattached-default",
+          "table-pixels/GridFooter",
+          "table-pixels/Horizontal",
+          "table-pixels/HorizontalTitled",
+          "table-pixels/Vertical",
+          "table-pixels/InCell",
+          "table-pixels/Marked",
+          "table-pixels/ReadOnly",
+          "table-pixels/NoAutoFill",
+          "table-pixels/MetadataTable",
+          "table-pixels/DynamicList",
+          "table-pixels/dynamic-dirty-footer",
+          "table-pixels/dynamic-restored-default",
+          "table-pixels/dynamic-floating-default",
+          "table-pixels/dynamic-floating-dirty-footer",
+          "table-pixels/dynamic-floating-restored",
+          "table-pixels/dynamic-reattached-default"
+        ],
+        "receipt": "form-batch-JX8e3J/table-pixels-ru/receipt.json",
+        "receiptSha256": "23a97600004facb0b1b9402638c070d65a462a16762d6d3625aaea8e90400fe8",
+        "sourceWritesDuringViewing": false,
+        "stableTableDom": true,
+        "wholeGridControlPixelParity": true,
+        "wholeFormVisualParity": false,
+        "selectedIdentityPreserved": true,
+        "detachedUpdates": true
+      }
+    ]
+  },
+  "source": {
+    "eskaHead": "938ca74de808cac36bbb5901a9c5caef0c249a4a",
+    "explorerBaseHead": "88d279794d7bc150f6a828005227bed02deac5f5",
+    "files": [
+      {
+        "path": "webview/forms/Table.jsx",
+        "sha256": "74a64e9268dfe88dd87f5f3c3fe5b7e26a87c9f68a6e2b4f408a68daa12eb971"
+      },
+      {
+        "path": "webview/forms/table-layout.js",
+        "sha256": "f903810b7d8278d93c66bedb4434b799214d903cc7c282525513577e455eb714"
+      },
+      {
+        "path": "test/form-table-layout.test.mjs",
+        "sha256": "d4033f0aec6c4ffaa2ae00c04f02ea1601a2c987fe54c33c11b1f2cf63af9444"
+      },
+      {
+        "path": "test/form-tables-host.cjs",
+        "sha256": "2e6778f352629013e968de2015761f1f73a55f97540ca9813a28ba73f3a4db51"
+      }
+    ]
+  },
+  "remaining": [
+    "Responsive viewport task t157-responsive-layout is the next functional priority",
+    "Native canvas dependency/lifecycle, module boundaries and scoped frontend types remain queued",
+    "Full T159/T157/T165 visual and property matrix and Windows acceptance remain incomplete"
+  ],
+  "primaryReferences": [
+    "https://docs.solidjs.com/reference/secondary-primitives/create-computed",
+    "https://docs.solidjs.com/reference/store-utilities/create-store",
+    "https://docs.solidjs.com/reference/reactive-utilities/untrack"
+  ]
+}
