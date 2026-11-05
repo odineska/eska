@@ -24,6 +24,27 @@ fn native_basic_fixture_uses_horizontal_group_and_vertical_form_defaults() {
 }
 
 #[test]
+fn untitled_label_decoration_keeps_its_name_only_as_source_identity() {
+    let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"><ChildItems>
+        <LabelDecoration name="Spacer" id="1"><Width>2</Width></LabelDecoration>
+        <LabelDecoration name="Hint" id="2"><Title>Help text</Title></LabelDecoration>
+        <Button name="Action" id="3"/>
+    </ChildItems></Form>"#;
+    let document = parse("label-caption", xml.into()).unwrap();
+    let form = compose(&document, &[]);
+    assert_eq!(form.root.children[0].name.as_deref(), Some("Spacer"));
+    let view = present(&form, &[document], &[]);
+    let captions: Vec<_> = view.elements[1..]
+        .iter()
+        .map(|item| match &item.caption {
+            PresentationText::Name { text } => text.as_str(),
+            _ => panic!("expected a scalar caption"),
+        })
+        .collect();
+    assert_eq!(captions, ["", "Help text", "Action"]);
+}
+
+#[test]
 fn designer_choice_list_uses_caption_inside_the_typed_value_wrapper() {
     let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
         xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable"

@@ -172,7 +172,11 @@ fn visit(
         .or_else(|| command.and_then(|command| command_caption(command, form, resources)))
         .or(binding_caption)
         .unwrap_or_else(|| PresentationText::Name {
-            text: element.name.clone().unwrap_or_default(),
+            text: if element.kind == Some(ElementKind::LabelDecoration) {
+                String::new()
+            } else {
+                element.name.clone().unwrap_or_default()
+            },
         });
     let group = element.kind == Some(ElementKind::UsualGroup);
     let tab = element.kind == Some(ElementKind::Pages) || scope.pages_parent(element).is_some();
