@@ -652,7 +652,11 @@
       "applyExitCode": 0,
       "captureAndCloseShellExitCode": 143,
       "closeVerifiedSeparately": true,
-      "closeNote": "All twenty captures completed. The capture/close orchestration shell ended with signal 15; the owned native process was confirmed absent before fixture construction and no native GUI remained open."
+      "closeNote": "The initial capture/close shell ended with signal 15 and the HTML session remained open. The sandbox /proc namespace could not establish host-process absence. Later host-side inspection found the owned session; a separate owned-PID/XID guarded stop returned 0 and host process/window inventory confirmed closure. Native captures and all pixel/session comparisons were independently scoped to their targets; their results are unchanged.",
+      "closeVerifiedBeforeFixtureConstruction": false,
+      "initialSandboxProcCheckWasInvalid": true,
+      "ownedSessionWasLeftOpen": true,
+      "verifiedHostCloseExitCode": 0
     },
     "backend": {
       "codeChangedInThisSlice": false,
@@ -2331,5 +2335,13 @@
   "remaining": [
     "Other fonts/dimensional limits/fractions/stretching, combined color/state properties, other html field properties and nonempty static document content where supplied by XML.",
     "Full typed-property applicability/computed inspector semantics, captions/full forms, other special surfaces, full Linux profile, DPI/performance and Windows acceptance."
-  ]
+  ],
+  "auditCorrection": {
+    "date": "2026-11-05",
+    "originalReportSha256": "cd67b41dbab542fc1205f048cb1123cb16c769ab9fe8eeecdef1db413eee4fec",
+    "hostCloseAudit": "native-html-j8lz77hf/host-close-audit.json",
+    "hostCloseAuditSha256": "a61f6d40080ad6e9e032486b983bcde924997b667a6115df5be469a0886716cd",
+    "nativePixelResultsChanged": false,
+    "viewerAcceptanceResultsChanged": false
+  }
 }
