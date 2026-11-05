@@ -1,0 +1,3232 @@
+{
+  "schemaVersion": 1,
+  "platform": "Linux ARM64 X11",
+  "nativeBuild": "8.3.27.2342",
+  "nativeCompatibility": "Version8_3_27",
+  "eskaCommit": "d18d88a7f00d7e18bef3befa132f56485ca68609",
+  "explorerCommit": "1e4ceca5f75b43f11645937caf0c16915bbcf7f6",
+  "vsixSha256": "1fb3e1c19b1fa68fd196d773abccbc73c91281be855863e9f64e61d9d26886c2",
+  "backendSha256": "c96ea91aaf72cdcfeeb136d1f61438f83142bd38cee359e2ce2c29fbfbc5152c",
+  "verifiedInstalledRuntimeFiles": 1303,
+  "sourceWritesDuringViewing": false,
+  "acceptance": {
+    "installedObservations": 34,
+    "nativeComparable": 22,
+    "widthAndGridExact": 22,
+    "topSearchRectsCompared": 8,
+    "topSearchRectsExact": 8,
+    "topSearchPixelsCompared": 73600,
+    "topSearchPixelsDifferent": 0
+  },
+  "scope": [
+    "SearchStringLocation=Top appears below the visible bars and above filters and grid.",
+    "SearchControl is projected independently. With two bars it is shown once.",
+    "DynamicList gets Find and CancelSearch only when its search location is explicitly None.",
+    "Declaring a hidden search addition at CommandBar keeps the authored search mode."
+  ],
+  "regression": {
+    "installedRuns": 16,
+    "installedCases": 238,
+    "rustPassed": 1528,
+    "rustIgnored": 19,
+    "nodePassed": 605,
+    "nodeSkipped": 8,
+    "bunPassed": 593,
+    "bunSkipped": 8,
+    "selectionIdentity": "Projected SearchControlAddition id 13 remains selectable; removing the source restores the local control."
+  },
+  "narrow": {
+    "en": {
+      "viewport": 350,
+      "scrollWidth": 532,
+      "frame": 512,
+      "toolbar": 478,
+      "grid": 478
+    },
+    "ru": {
+      "viewport": 350,
+      "scrollWidth": 521,
+      "frame": 501,
+      "toolbar": 467,
+      "grid": 467
+    }
+  },
+  "rgbMethod": "Exact RGB comparisons in the full search rectangles and 27 px toolbar bands. No tolerance or masks.",
+  "pending": [
+    "Full toolbar, special search paint variants, unrelated table states and sources.",
+    "Screenshots clipped at bottom support width/offset checks only.",
+    "Windows native acceptance."
+  ],
+  "cases": [
+    {
+      "name": "AdditionOwnTop",
+      "locale": "en",
+      "settings": {
+        "search": "Top",
+        "external": false,
+        "own": true
+      },
+      "sourceSha256": "520fbf734074f35caf5a89d8c050d59d6d62897702ee1ff67ffe2dbc534f8f76",
+      "frame": [
+        434,
+        344
+      ],
+      "grid": [
+        13,
+        105,
+        400,
+        227
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            74,
+            400,
+            23
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            39,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 105,
+        "imageSha256": "9ab3986b1c3be7ebd3bf043f1ce9b5c0a94e519e405f9241a908cf8ec79d5abd"
+      },
+      "widthAndGridExact": true,
+      "topSearchRgb": {
+        "pixels": 9200,
+        "differentPixels": 0
+      },
+      "tableBarRgb": {
+        "pixels": 10800,
+        "differentPixels": 68
+      }
+    },
+    {
+      "name": "AdditionExternalTop",
+      "locale": "en",
+      "settings": {
+        "search": "Top",
+        "external": true,
+        "own": false
+      },
+      "sourceSha256": "5631c790ff35c950f7f997a42c6c4cddf6f334a4303c6fcb1dbc8779ae7c26da",
+      "frame": [
+        434,
+        346
+      ],
+      "grid": [
+        13,
+        106,
+        400,
+        229
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            75,
+            400,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            39,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 106,
+        "imageSha256": "7facc22016e9657e6d730bef8dbf1a573480859b0dd252123572b7a67c49b067"
+      },
+      "widthAndGridExact": true,
+      "topSearchRgb": {
+        "pixels": 9200,
+        "differentPixels": 0
+      },
+      "barRgb": {
+        "pixels": 10800,
+        "differentPixels": 68
+      }
+    },
+    {
+      "name": "AdditionBothTop",
+      "locale": "en",
+      "settings": {
+        "search": "Top",
+        "external": true,
+        "own": true
+      },
+      "sourceSha256": "47f74fe325b1fc9ca230cdf581514f9917be9ba4ef7b32a47e4c4773d0214279",
+      "frame": [
+        434,
+        381
+      ],
+      "grid": [
+        13,
+        141,
+        400,
+        229
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            110,
+            400,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            39,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            75,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            75,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 141,
+        "imageSha256": "635c35f36527eba9fdfccd65a5cddfa81206add718e01297111ffbe4f556d15b"
+      },
+      "widthAndGridExact": true,
+      "topSearchRgb": {
+        "pixels": 9200,
+        "differentPixels": 0
+      },
+      "barRgb": {
+        "pixels": 10800,
+        "differentPixels": 68
+      },
+      "tableBarRgb": {
+        "pixels": 10800,
+        "differentPixels": 68
+      }
+    },
+    {
+      "name": "AdditionBothCommandBar",
+      "locale": "en",
+      "settings": {
+        "search": "CommandBar",
+        "external": true,
+        "own": true
+      },
+      "sourceSha256": "64d1d485c0b69cbfff3c3fa337dac2a2529cf5b5b65ad6ab41c4924be4d1ac64",
+      "frame": [
+        463,
+        350
+      ],
+      "grid": [
+        13,
+        110,
+        429,
+        229
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search",
+          "parent": "taxi-command-bar",
+          "rect": [
+            153,
+            41,
+            172,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            39,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            334,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            75,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            334,
+            75,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 463,
+        "height": null,
+        "gridTop": 110,
+        "imageSha256": "b72c88dbbf0b94cbbbd13ad57efd9ec61125ecd4759b67a729dc0faf3483b10d"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 11583,
+        "differentPixels": 1169
+      },
+      "tableBarRgb": {
+        "pixels": 11583,
+        "differentPixels": 172
+      }
+    },
+    {
+      "name": "AdditionTopWithStatus",
+      "locale": "en",
+      "settings": {
+        "search": "Top",
+        "status": "Top",
+        "external": true,
+        "own": true
+      },
+      "sourceSha256": "6f4517bc886bed1d9ef0cf72f999fe949a8330ff2a69c39ecf950dda6307752e",
+      "frame": [
+        434,
+        411
+      ],
+      "grid": [
+        13,
+        171,
+        400,
+        229
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            110,
+            400,
+            23
+          ]
+        },
+        {
+          "kind": "taxi-table-search-controls",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            141,
+            400,
+            21
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            39,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            75,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            75,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 171,
+        "imageSha256": "475cf35e4cb64d4d651ac2ee738f7a7e3dd345153e186849bff9486d9638fca1"
+      },
+      "widthAndGridExact": true,
+      "topSearchRgb": {
+        "pixels": 9200,
+        "differentPixels": 0
+      },
+      "barRgb": {
+        "pixels": 10800,
+        "differentPixels": 68
+      },
+      "tableBarRgb": {
+        "pixels": 10800,
+        "differentPixels": 68
+      }
+    },
+    {
+      "name": "AdditionHiddenTop",
+      "locale": "en",
+      "settings": {
+        "search": "Top",
+        "searchVisible": false,
+        "external": true,
+        "own": true
+      },
+      "sourceSha256": "c3b69f4078121b25908b628c4cb9b1ff02faf00cb25d1f2af65f522c43324c86",
+      "frame": [
+        434,
+        350
+      ],
+      "grid": [
+        13,
+        110,
+        400,
+        229
+      ],
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            39,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            75,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            75,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 110,
+        "imageSha256": "839dcd40ea45900043a12726a91e430829b9a90a5ea51d4d6995d8663a3e6280"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 10800,
+        "differentPixels": 68
+      },
+      "tableBarRgb": {
+        "pixels": 10800,
+        "differentPixels": 68
+      }
+    },
+    {
+      "name": "AdditionDynamicDefault",
+      "locale": "en",
+      "settings": {
+        "type": "DynamicList",
+        "search": "Auto",
+        "control": "Auto",
+        "external": true,
+        "own": false
+      },
+      "sourceSha256": "2c36e050874655af5d85fc8d55520072a09fb7149f8d052533015734e11e10ed",
+      "frame": [
+        488,
+        591
+      ],
+      "grid": [
+        13,
+        105,
+        454,
+        454
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search",
+          "parent": "taxi-command-bar",
+          "rect": [
+            127,
+            41,
+            172,
+            23
+          ]
+        },
+        {
+          "kind": "taxi-table-search-controls",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            75,
+            454,
+            21
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Create",
+          "rect": [
+            13,
+            39,
+            66,
+            26
+          ]
+        },
+        {
+          "caption": "Copy",
+          "rect": [
+            88,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Search",
+          "rect": [
+            308,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            359,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 488,
+        "height": null,
+        "gridTop": 105,
+        "imageSha256": "1bebeabd845ca597556a9accaa50fcd9ebce254314d0f989320bcb6c5c521daf"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 12258,
+        "differentPixels": 1125
+      }
+    },
+    {
+      "name": "AdditionDynamicControl",
+      "locale": "en",
+      "settings": {
+        "type": "DynamicList",
+        "search": "None",
+        "control": "CommandBar",
+        "external": true,
+        "own": false
+      },
+      "sourceSha256": "22b4116c88caea76e000d41dcf45d07b10d03591ca28d335a114f019fd10787d",
+      "frame": [
+        512,
+        561
+      ],
+      "grid": [
+        13,
+        75,
+        478,
+        454
+      ],
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Create",
+          "rect": [
+            13,
+            39,
+            66,
+            26
+          ]
+        },
+        {
+          "caption": "Copy",
+          "rect": [
+            88,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Find...",
+          "rect": [
+            127,
+            39,
+            65,
+            26
+          ]
+        },
+        {
+          "caption": "Cancel search",
+          "rect": [
+            201,
+            39,
+            111,
+            26
+          ]
+        },
+        {
+          "caption": "Search",
+          "rect": [
+            321,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            383,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 512,
+        "height": null,
+        "gridTop": 75,
+        "imageSha256": "90793f673a55bf01e876fb67edf18466894249a19a0b9fbf0ac2d6a096694b01"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 12906,
+        "differentPixels": 36
+      }
+    },
+    {
+      "name": "AdditionDynamicTop",
+      "locale": "en",
+      "settings": {
+        "type": "DynamicList",
+        "search": "Top",
+        "control": "CommandBar",
+        "external": true,
+        "own": false
+      },
+      "sourceSha256": "c5e4df94ec8a1212fd9d47183fcce34cc50d293998e88f7208e3ac8699fe1e62",
+      "frame": [
+        434,
+        592
+      ],
+      "grid": [
+        13,
+        106,
+        400,
+        454
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            75,
+            400,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Create",
+          "rect": [
+            13,
+            39,
+            66,
+            26
+          ]
+        },
+        {
+          "caption": "Copy",
+          "rect": [
+            88,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Search",
+          "rect": [
+            127,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 106,
+        "imageSha256": "4369235dc90e66ce2b37b8e0f60190aa39ba499c1b5faa547d07f93ca8fa42fe"
+      },
+      "widthAndGridExact": true,
+      "topSearchRgb": {
+        "pixels": 9200,
+        "differentPixels": 0
+      },
+      "barRgb": {
+        "pixels": 10800,
+        "differentPixels": 24
+      }
+    },
+    {
+      "name": "AdditionOwnTop",
+      "locale": "ru",
+      "settings": {
+        "search": "Top",
+        "external": false,
+        "own": true
+      },
+      "sourceSha256": "520fbf734074f35caf5a89d8c050d59d6d62897702ee1ff67ffe2dbc534f8f76",
+      "frame": [
+        434,
+        344
+      ],
+      "grid": [
+        13,
+        105,
+        400,
+        227
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            74,
+            400,
+            23
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            39,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            39,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdditionExternalTop",
+      "locale": "ru",
+      "settings": {
+        "search": "Top",
+        "external": true,
+        "own": false
+      },
+      "sourceSha256": "5631c790ff35c950f7f997a42c6c4cddf6f334a4303c6fcb1dbc8779ae7c26da",
+      "frame": [
+        434,
+        346
+      ],
+      "grid": [
+        13,
+        106,
+        400,
+        229
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            75,
+            400,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            39,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            39,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdditionBothTop",
+      "locale": "ru",
+      "settings": {
+        "search": "Top",
+        "external": true,
+        "own": true
+      },
+      "sourceSha256": "47f74fe325b1fc9ca230cdf581514f9917be9ba4ef7b32a47e4c4773d0214279",
+      "frame": [
+        434,
+        381
+      ],
+      "grid": [
+        13,
+        141,
+        400,
+        229
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            110,
+            400,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            39,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            39,
+            60,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            75,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            75,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdditionBothCommandBar",
+      "locale": "ru",
+      "settings": {
+        "search": "CommandBar",
+        "external": true,
+        "own": true
+      },
+      "sourceSha256": "64d1d485c0b69cbfff3c3fa337dac2a2529cf5b5b65ad6ab41c4924be4d1ac64",
+      "frame": [
+        449,
+        350
+      ],
+      "grid": [
+        13,
+        110,
+        415,
+        229
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search",
+          "parent": "taxi-command-bar",
+          "rect": [
+            187,
+            41,
+            172,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            39,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            368,
+            39,
+            60,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            75,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            368,
+            75,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdditionTopWithStatus",
+      "locale": "ru",
+      "settings": {
+        "search": "Top",
+        "status": "Top",
+        "external": true,
+        "own": true
+      },
+      "sourceSha256": "6f4517bc886bed1d9ef0cf72f999fe949a8330ff2a69c39ecf950dda6307752e",
+      "frame": [
+        434,
+        411
+      ],
+      "grid": [
+        13,
+        171,
+        400,
+        229
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            110,
+            400,
+            23
+          ]
+        },
+        {
+          "kind": "taxi-table-search-controls",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            141,
+            400,
+            21
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            39,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            39,
+            60,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            75,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            75,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdditionHiddenTop",
+      "locale": "ru",
+      "settings": {
+        "search": "Top",
+        "searchVisible": false,
+        "external": true,
+        "own": true
+      },
+      "sourceSha256": "c3b69f4078121b25908b628c4cb9b1ff02faf00cb25d1f2af65f522c43324c86",
+      "frame": [
+        434,
+        350
+      ],
+      "grid": [
+        13,
+        110,
+        400,
+        229
+      ],
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            39,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            39,
+            60,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            75,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            75,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdditionDynamicDefault",
+      "locale": "ru",
+      "settings": {
+        "type": "DynamicList",
+        "search": "Auto",
+        "control": "Auto",
+        "external": true,
+        "own": false
+      },
+      "sourceSha256": "2c36e050874655af5d85fc8d55520072a09fb7149f8d052533015734e11e10ed",
+      "frame": [
+        452,
+        591
+      ],
+      "grid": [
+        13,
+        105,
+        418,
+        454
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search",
+          "parent": "taxi-command-bar",
+          "rect": [
+            139,
+            41,
+            172,
+            23
+          ]
+        },
+        {
+          "kind": "taxi-table-search-controls",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            75,
+            418,
+            21
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Создать",
+          "rect": [
+            13,
+            39,
+            78,
+            26
+          ]
+        },
+        {
+          "caption": "Скопировать",
+          "rect": [
+            100,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Поиск",
+          "rect": [
+            320,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            371,
+            39,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdditionDynamicControl",
+      "locale": "ru",
+      "settings": {
+        "type": "DynamicList",
+        "search": "None",
+        "control": "CommandBar",
+        "external": true,
+        "own": false
+      },
+      "sourceSha256": "22b4116c88caea76e000d41dcf45d07b10d03591ca28d335a114f019fd10787d",
+      "frame": [
+        501,
+        561
+      ],
+      "grid": [
+        13,
+        75,
+        467,
+        454
+      ],
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Создать",
+          "rect": [
+            13,
+            39,
+            78,
+            26
+          ]
+        },
+        {
+          "caption": "Скопировать",
+          "rect": [
+            100,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Найти...",
+          "rect": [
+            139,
+            39,
+            76,
+            26
+          ]
+        },
+        {
+          "caption": "Отменить поиск",
+          "rect": [
+            224,
+            39,
+            125,
+            26
+          ]
+        },
+        {
+          "caption": "Поиск",
+          "rect": [
+            358,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            420,
+            39,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdditionDynamicTop",
+      "locale": "ru",
+      "settings": {
+        "type": "DynamicList",
+        "search": "Top",
+        "control": "CommandBar",
+        "external": true,
+        "own": false
+      },
+      "sourceSha256": "c5e4df94ec8a1212fd9d47183fcce34cc50d293998e88f7208e3ac8699fe1e62",
+      "frame": [
+        434,
+        592
+      ],
+      "grid": [
+        13,
+        106,
+        400,
+        454
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            75,
+            400,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Создать",
+          "rect": [
+            13,
+            39,
+            78,
+            26
+          ]
+        },
+        {
+          "caption": "Скопировать",
+          "rect": [
+            100,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Поиск",
+          "rect": [
+            139,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            39,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DynamicSearchOwnWithoutString",
+      "locale": "en",
+      "settings": {
+        "type": "DynamicList",
+        "source": false,
+        "own": true,
+        "string": "None",
+        "control": "CommandBar"
+      },
+      "sourceSha256": "a9d55d2cfaba7399004d206a3dc5bc489d14aeb86a373449f5e0ab7c70e5c3d5",
+      "frame": [
+        512,
+        560
+      ],
+      "grid": [
+        13,
+        74,
+        478,
+        452
+      ],
+      "additions": [],
+      "tableBar": [
+        {
+          "caption": "Create",
+          "rect": [
+            13,
+            39,
+            66,
+            26
+          ]
+        },
+        {
+          "caption": "Copy",
+          "rect": [
+            88,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Find...",
+          "rect": [
+            127,
+            39,
+            65,
+            26
+          ]
+        },
+        {
+          "caption": "Cancel search",
+          "rect": [
+            201,
+            39,
+            111,
+            26
+          ]
+        },
+        {
+          "caption": "Search",
+          "rect": [
+            321,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            383,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 512,
+        "height": null,
+        "gridTop": 74,
+        "imageSha256": "1fedbe4452cbfea2b9418f09ef87b75a038bc2423c0303bcfac6394bf82242b9"
+      },
+      "widthAndGridExact": true,
+      "tableBarRgb": {
+        "pixels": 12906,
+        "differentPixels": 36
+      }
+    },
+    {
+      "name": "DynamicSearchBothWithoutString",
+      "locale": "en",
+      "settings": {
+        "type": "DynamicList",
+        "source": true,
+        "own": true,
+        "string": "None",
+        "control": "CommandBar"
+      },
+      "sourceSha256": "e6df6c5984c9fdeaa274b0b027f9ac4c844fc5b9bab307de56dac3b6d83df7c0",
+      "frame": [
+        512,
+        596
+      ],
+      "grid": [
+        13,
+        110,
+        478,
+        454
+      ],
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Create",
+          "rect": [
+            13,
+            39,
+            66,
+            26
+          ]
+        },
+        {
+          "caption": "Copy",
+          "rect": [
+            88,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Find...",
+          "rect": [
+            127,
+            39,
+            65,
+            26
+          ]
+        },
+        {
+          "caption": "Cancel search",
+          "rect": [
+            201,
+            39,
+            111,
+            26
+          ]
+        },
+        {
+          "caption": "Search",
+          "rect": [
+            321,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            383,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Create",
+          "rect": [
+            13,
+            75,
+            66,
+            26
+          ]
+        },
+        {
+          "caption": "Copy",
+          "rect": [
+            88,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Find...",
+          "rect": [
+            127,
+            75,
+            65,
+            26
+          ]
+        },
+        {
+          "caption": "Cancel search",
+          "rect": [
+            201,
+            75,
+            111,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            383,
+            75,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 512,
+        "height": null,
+        "gridTop": 110,
+        "imageSha256": "d8efd28f9f6b8c7337bd6c8a492840fa3282979c463718daaf07150baa8be523"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 12906,
+        "differentPixels": 36
+      },
+      "tableBarRgb": {
+        "pixels": 12906,
+        "differentPixels": 30
+      }
+    },
+    {
+      "name": "DynamicSearchNoSearchControls",
+      "locale": "en",
+      "settings": {
+        "type": "DynamicList",
+        "source": true,
+        "own": false,
+        "string": "None",
+        "control": "None"
+      },
+      "sourceSha256": "7b0874456d8a42e6e577ef2b0590b46d46a0239e99936c6d8f08dd3912d2ce71",
+      "frame": [
+        450,
+        561
+      ],
+      "grid": [
+        13,
+        75,
+        416,
+        454
+      ],
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Create",
+          "rect": [
+            13,
+            39,
+            66,
+            26
+          ]
+        },
+        {
+          "caption": "Copy",
+          "rect": [
+            88,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Find...",
+          "rect": [
+            127,
+            39,
+            65,
+            26
+          ]
+        },
+        {
+          "caption": "Cancel search",
+          "rect": [
+            201,
+            39,
+            111,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            321,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 450,
+        "height": null,
+        "gridTop": 75,
+        "imageSha256": "1f679618a528ba300506d5236cc9372750b57bfaf602e258e6d22a35806f9622"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 11232,
+        "differentPixels": 30
+      }
+    },
+    {
+      "name": "DynamicSearchHiddenSearchAddition",
+      "locale": "en",
+      "settings": {
+        "type": "DynamicList",
+        "source": true,
+        "own": false,
+        "string": "CommandBar",
+        "searchVisible": false,
+        "control": "CommandBar"
+      },
+      "sourceSha256": "557385e9afe288e4e8e2c9fec6ede249c0789ba3f440941fea2598486f3557c4",
+      "frame": [
+        434,
+        561
+      ],
+      "grid": [
+        13,
+        75,
+        400,
+        454
+      ],
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Create",
+          "rect": [
+            13,
+            39,
+            66,
+            26
+          ]
+        },
+        {
+          "caption": "Copy",
+          "rect": [
+            88,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Search",
+          "rect": [
+            127,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 75,
+        "imageSha256": "a8279db91bbd6f68bded4a6e44254965265e19a01db511f14f9e5a012f80bdc6"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 10800,
+        "differentPixels": 24
+      }
+    },
+    {
+      "name": "DynamicSearchBothWithTop",
+      "locale": "en",
+      "settings": {
+        "type": "DynamicList",
+        "source": true,
+        "own": true,
+        "string": "Top",
+        "control": "CommandBar"
+      },
+      "sourceSha256": "68ef0c120c6f81b116899a1440d55037452e017f508c0c49e7de160460c4fd8c",
+      "frame": [
+        434,
+        627
+      ],
+      "grid": [
+        13,
+        141,
+        400,
+        454
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            110,
+            400,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Create",
+          "rect": [
+            13,
+            39,
+            66,
+            26
+          ]
+        },
+        {
+          "caption": "Copy",
+          "rect": [
+            88,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Search",
+          "rect": [
+            127,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Create",
+          "rect": [
+            13,
+            75,
+            66,
+            26
+          ]
+        },
+        {
+          "caption": "Copy",
+          "rect": [
+            88,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            75,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 141,
+        "imageSha256": "273e96edc6836af64862fbb439bec0a4f5df431f4ba844076c26f8cf955b0027"
+      },
+      "widthAndGridExact": true,
+      "topSearchRgb": {
+        "pixels": 9200,
+        "differentPixels": 0
+      },
+      "barRgb": {
+        "pixels": 10800,
+        "differentPixels": 24
+      },
+      "tableBarRgb": {
+        "pixels": 10800,
+        "differentPixels": 18
+      }
+    },
+    {
+      "name": "DynamicSearchOwnValueTable",
+      "locale": "en",
+      "settings": {
+        "type": "ValueTable",
+        "source": false,
+        "own": true,
+        "string": "None"
+      },
+      "sourceSha256": "7d7a280d56c9b0227e55407eb76b56ff81802141dbe8cf57c9a8de55d1a69e1e",
+      "frame": [
+        434,
+        314
+      ],
+      "grid": [
+        13,
+        74,
+        400,
+        227
+      ],
+      "additions": [],
+      "tableBar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            39,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": 314,
+        "gridTop": 74,
+        "imageSha256": "524b6e37505b907e35bbf06dbbe8b69a2f3db0b13d32b4c18e40df91afeb0975"
+      },
+      "widthAndGridExact": true,
+      "tableBarRgb": {
+        "pixels": 10800,
+        "differentPixels": 68
+      }
+    },
+    {
+      "name": "DynamicSearchExplicitTop",
+      "locale": "en",
+      "settings": {
+        "type": "ValueTable",
+        "source": true,
+        "own": false,
+        "string": "Top",
+        "explicitLookup": true
+      },
+      "sourceSha256": "9ddedc6ecbc517123626e2ca1a39b755ab2cf136300a5e8d7dd2b82cb813b23d",
+      "frame": [
+        434,
+        346
+      ],
+      "grid": [
+        13,
+        106,
+        400,
+        229
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            75,
+            400,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            39,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            305,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 106,
+        "imageSha256": "88c941c1f9e3e6a90d3a922c671a93c43fafe77f8b181429736fb4f4b1f1609e"
+      },
+      "widthAndGridExact": true,
+      "topSearchRgb": {
+        "pixels": 9200,
+        "differentPixels": 0
+      },
+      "barRgb": {
+        "pixels": 10800,
+        "differentPixels": 68
+      }
+    },
+    {
+      "name": "DynamicSearchHiddenColumnsTop",
+      "locale": "en",
+      "settings": {
+        "type": "ValueTable",
+        "source": true,
+        "own": false,
+        "string": "Top",
+        "allColumnsVisible": false
+      },
+      "sourceSha256": "4ae487d1616f7931e62b3d576261f972914df80fef70654e69e365f635b289e4",
+      "frame": [
+        282,
+        79
+      ],
+      "grid": null,
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Add",
+          "rect": [
+            13,
+            39,
+            51,
+            26
+          ]
+        },
+        {
+          "caption": "Move up",
+          "rect": [
+            84,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Move down",
+          "rect": [
+            114,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "More actions",
+          "rect": [
+            153,
+            39,
+            108,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 282,
+        "height": 79,
+        "gridTop": null,
+        "imageSha256": "b26d972523a39a2b75d4e8a9b14701e7fb795221dc427e3c6e3bf226ce5b7900"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 6696,
+        "differentPixels": 68
+      }
+    },
+    {
+      "name": "DynamicSearchOwnWithoutString",
+      "locale": "ru",
+      "settings": {
+        "type": "DynamicList",
+        "source": false,
+        "own": true,
+        "string": "None",
+        "control": "CommandBar"
+      },
+      "sourceSha256": "a9d55d2cfaba7399004d206a3dc5bc489d14aeb86a373449f5e0ab7c70e5c3d5",
+      "frame": [
+        501,
+        560
+      ],
+      "grid": [
+        13,
+        74,
+        467,
+        452
+      ],
+      "additions": [],
+      "tableBar": [
+        {
+          "caption": "Создать",
+          "rect": [
+            13,
+            39,
+            78,
+            26
+          ]
+        },
+        {
+          "caption": "Скопировать",
+          "rect": [
+            100,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Найти...",
+          "rect": [
+            139,
+            39,
+            76,
+            26
+          ]
+        },
+        {
+          "caption": "Отменить поиск",
+          "rect": [
+            224,
+            39,
+            125,
+            26
+          ]
+        },
+        {
+          "caption": "Поиск",
+          "rect": [
+            358,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            420,
+            39,
+            60,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 501,
+        "height": null,
+        "gridTop": 74,
+        "imageSha256": "9b88d7d5fc8599a83c8bb7a3310abe01f6198ddbe29044358080023dc2d4b6eb"
+      },
+      "widthAndGridExact": true,
+      "tableBarRgb": {
+        "pixels": 12609,
+        "differentPixels": 36
+      }
+    },
+    {
+      "name": "DynamicSearchBothWithoutString",
+      "locale": "ru",
+      "settings": {
+        "type": "DynamicList",
+        "source": true,
+        "own": true,
+        "string": "None",
+        "control": "CommandBar"
+      },
+      "sourceSha256": "e6df6c5984c9fdeaa274b0b027f9ac4c844fc5b9bab307de56dac3b6d83df7c0",
+      "frame": [
+        501,
+        596
+      ],
+      "grid": [
+        13,
+        110,
+        467,
+        454
+      ],
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Создать",
+          "rect": [
+            13,
+            39,
+            78,
+            26
+          ]
+        },
+        {
+          "caption": "Скопировать",
+          "rect": [
+            100,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Найти...",
+          "rect": [
+            139,
+            39,
+            76,
+            26
+          ]
+        },
+        {
+          "caption": "Отменить поиск",
+          "rect": [
+            224,
+            39,
+            125,
+            26
+          ]
+        },
+        {
+          "caption": "Поиск",
+          "rect": [
+            358,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            420,
+            39,
+            60,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Создать",
+          "rect": [
+            13,
+            75,
+            78,
+            26
+          ]
+        },
+        {
+          "caption": "Скопировать",
+          "rect": [
+            100,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Найти...",
+          "rect": [
+            139,
+            75,
+            76,
+            26
+          ]
+        },
+        {
+          "caption": "Отменить поиск",
+          "rect": [
+            224,
+            75,
+            125,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            420,
+            75,
+            60,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 501,
+        "height": null,
+        "gridTop": 110,
+        "imageSha256": "6ddbe0dc2e90c1fcc4cab8ed8ecf7e8b4b1ac1961f15d2099951547826e119d0"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 12609,
+        "differentPixels": 36
+      },
+      "tableBarRgb": {
+        "pixels": 12609,
+        "differentPixels": 30
+      }
+    },
+    {
+      "name": "DynamicSearchNoSearchControls",
+      "locale": "ru",
+      "settings": {
+        "type": "DynamicList",
+        "source": true,
+        "own": false,
+        "string": "None",
+        "control": "None"
+      },
+      "sourceSha256": "7b0874456d8a42e6e577ef2b0590b46d46a0239e99936c6d8f08dd3912d2ce71",
+      "frame": [
+        439,
+        561
+      ],
+      "grid": [
+        13,
+        75,
+        405,
+        454
+      ],
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Создать",
+          "rect": [
+            13,
+            39,
+            78,
+            26
+          ]
+        },
+        {
+          "caption": "Скопировать",
+          "rect": [
+            100,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Найти...",
+          "rect": [
+            139,
+            39,
+            76,
+            26
+          ]
+        },
+        {
+          "caption": "Отменить поиск",
+          "rect": [
+            224,
+            39,
+            125,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            358,
+            39,
+            60,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 439,
+        "height": null,
+        "gridTop": 75,
+        "imageSha256": "aa1159a9c67489b3861be9f664f96f19f2e1f67c4b01a62208ba5a420e1fe420"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 10935,
+        "differentPixels": 30
+      }
+    },
+    {
+      "name": "DynamicSearchHiddenSearchAddition",
+      "locale": "ru",
+      "settings": {
+        "type": "DynamicList",
+        "source": true,
+        "own": false,
+        "string": "CommandBar",
+        "searchVisible": false,
+        "control": "CommandBar"
+      },
+      "sourceSha256": "557385e9afe288e4e8e2c9fec6ede249c0789ba3f440941fea2598486f3557c4",
+      "frame": [
+        434,
+        561
+      ],
+      "grid": [
+        13,
+        75,
+        400,
+        454
+      ],
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Создать",
+          "rect": [
+            13,
+            39,
+            78,
+            26
+          ]
+        },
+        {
+          "caption": "Скопировать",
+          "rect": [
+            100,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Поиск",
+          "rect": [
+            139,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            39,
+            60,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 75,
+        "imageSha256": "258e8558883f7c6673c728c21d2c3bd3cb26e38f75c538d6b8225278720f573b"
+      },
+      "widthAndGridExact": true,
+      "barRgb": {
+        "pixels": 10800,
+        "differentPixels": 24
+      }
+    },
+    {
+      "name": "DynamicSearchBothWithTop",
+      "locale": "ru",
+      "settings": {
+        "type": "DynamicList",
+        "source": true,
+        "own": true,
+        "string": "Top",
+        "control": "CommandBar"
+      },
+      "sourceSha256": "68ef0c120c6f81b116899a1440d55037452e017f508c0c49e7de160460c4fd8c",
+      "frame": [
+        434,
+        627
+      ],
+      "grid": [
+        13,
+        141,
+        400,
+        454
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            110,
+            400,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Создать",
+          "rect": [
+            13,
+            39,
+            78,
+            26
+          ]
+        },
+        {
+          "caption": "Скопировать",
+          "rect": [
+            100,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Поиск",
+          "rect": [
+            139,
+            39,
+            42,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            39,
+            60,
+            26
+          ]
+        }
+      ],
+      "tableBar": [
+        {
+          "caption": "Создать",
+          "rect": [
+            13,
+            75,
+            78,
+            26
+          ]
+        },
+        {
+          "caption": "Скопировать",
+          "rect": [
+            100,
+            75,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            75,
+            60,
+            26
+          ]
+        }
+      ],
+      "native": {
+        "width": 434,
+        "height": null,
+        "gridTop": 141,
+        "imageSha256": "f6599d9a4bf21a5aaa19b96b0c4d342c4170fc6b80833d0aa9262dfabdd0e913"
+      },
+      "widthAndGridExact": true,
+      "topSearchRgb": {
+        "pixels": 9200,
+        "differentPixels": 0
+      },
+      "barRgb": {
+        "pixels": 10800,
+        "differentPixels": 24
+      },
+      "tableBarRgb": {
+        "pixels": 10800,
+        "differentPixels": 18
+      }
+    },
+    {
+      "name": "DynamicSearchOwnValueTable",
+      "locale": "ru",
+      "settings": {
+        "type": "ValueTable",
+        "source": false,
+        "own": true,
+        "string": "None"
+      },
+      "sourceSha256": "7d7a280d56c9b0227e55407eb76b56ff81802141dbe8cf57c9a8de55d1a69e1e",
+      "frame": [
+        434,
+        314
+      ],
+      "grid": [
+        13,
+        74,
+        400,
+        227
+      ],
+      "additions": [],
+      "tableBar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            39,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            39,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DynamicSearchExplicitTop",
+      "locale": "ru",
+      "settings": {
+        "type": "ValueTable",
+        "source": true,
+        "own": false,
+        "string": "Top",
+        "explicitLookup": true
+      },
+      "sourceSha256": "9ddedc6ecbc517123626e2ca1a39b755ab2cf136300a5e8d7dd2b82cb813b23d",
+      "frame": [
+        434,
+        346
+      ],
+      "grid": [
+        13,
+        106,
+        400,
+        229
+      ],
+      "additions": [
+        {
+          "kind": "taxi-table-search taxi-table-search--top",
+          "parent": "taxi-table-field",
+          "rect": [
+            13,
+            75,
+            400,
+            23
+          ]
+        }
+      ],
+      "bar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            39,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            353,
+            39,
+            60,
+            26
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DynamicSearchHiddenColumnsTop",
+      "locale": "ru",
+      "settings": {
+        "type": "ValueTable",
+        "source": true,
+        "own": false,
+        "string": "Top",
+        "allColumnsVisible": false
+      },
+      "sourceSha256": "4ae487d1616f7931e62b3d576261f972914df80fef70654e69e365f635b289e4",
+      "frame": [
+        268,
+        79
+      ],
+      "grid": null,
+      "additions": [],
+      "bar": [
+        {
+          "caption": "Добавить",
+          "rect": [
+            13,
+            39,
+            85,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вверх",
+          "rect": [
+            118,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Переместить вниз",
+          "rect": [
+            148,
+            39,
+            30,
+            26
+          ]
+        },
+        {
+          "caption": "Еще",
+          "rect": [
+            187,
+            39,
+            60,
+            26
+          ]
+        }
+      ]
+    }
+  ]
+}

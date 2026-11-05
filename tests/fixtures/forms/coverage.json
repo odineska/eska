@@ -3667,11 +3667,34 @@
             }
           ],
           "clientCommit": "2f3c6e2df8eef0c45ae35b8e51217b568a82e2dd"
+        },
+        {
+          "report": "docs/measurements/t159-table-search-locations-linux.json",
+          "sha256": "8f597dc35eac1c1d40d2be465dd704b5b3227debe68ffa01f69b2b8047e5822b",
+          "assertions": [
+            {
+              "pointer": "/acceptance/widthAndGridExact",
+              "equals": 22
+            },
+            {
+              "pointer": "/acceptance/topSearchRectsExact",
+              "equals": 8
+            },
+            {
+              "pointer": "/acceptance/topSearchPixelsCompared",
+              "equals": 73600
+            },
+            {
+              "pointer": "/acceptance/topSearchPixelsDifferent",
+              "equals": 0
+            }
+          ],
+          "clientCommit": "1e4ceca5f75b43f11645937caf0c16915bbcf7f6"
         }
       ],
-      "lastConfirmation": "docs/measurements/t159-table-source-projection-linux.json",
-      "remaining": "Recorded grids and the geometry of standalone table command sources are confirmed in limited scopes. Complete table-field pixels, toolbar/addition states, other sources and widths/fonts/styles, DPI and Windows remain open.",
-      "nextAction": "Measure additional search placements and dynamic-list command sources; preserve the projected panel and grid geometry while comparing toolbar pixels."
+      "lastConfirmation": "docs/measurements/t159-table-search-locations-linux.json",
+      "remaining": "Recorded grids, command-source geometry and full Top search rectangles are confirmed in limited scopes. Complete toolbar pixels, other states/sources, width/font/style combinations, DPI and Windows remain open.",
+      "nextAction": "Resolve remaining toolbar pixels and extend table state/source measurements while preserving the Top and projected search cases."
     },
     {
       "id": "surfaces.full-matrix",
