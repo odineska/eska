@@ -1225,7 +1225,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "surfaces.pdf-empty"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3693,7 +3694,7 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
-      "remaining": "Document toolbars/content, text-document fonts, further geographical/graphical/formatted/HTML properties and remaining document/calendar/scheduler/chart state combinations. Recorded normal empty text/geographical/graphical/formatted/HTML widgets are accepted separately; only agreed random chart values may be excluded.",
+      "remaining": "Document content/toolbars, text-document fonts, further text/geographical/graphical/formatted/HTML/PDF properties and unrecorded sizes, general PDF scrollbar thumb rules, external additions and remaining document/calendar/scheduler/chart state combinations. Recorded surfaces are accepted separately; only agreed random chart values may be excluded.",
       "nextAction": "Extend deterministic document/surface widgets and native editor font/size rules without treating the accepted plain text-document cases as full T160 acceptance."
     },
     {
@@ -6022,6 +6023,107 @@
       "lastConfirmation": "docs/measurements/t160-native-html-linux.json",
       "remaining": "Other fonts/dimension bounds/fractions/stretch and state/color/property combinations, typed-property applicability/computed inspector semantics, nonempty static content, captions/full forms, DPI and Windows.",
       "nextAction": "Preserve exact empty html surfaces while extending deterministic surfaces and remaining property/state matrices."
+    },
+    {
+      "id": "surfaces.pdf-empty",
+      "milestone": "T160",
+      "kinds": [
+        "PDFDocumentField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.colors",
+        "appearance.fonts",
+        "surface.content",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "All pixels of eighteen recorded empty normal-10pt PDF source surfaces, including known size axes, short surfaces, ReadOnly/Enabled, border, hidden title, native-removed BackColor/ShowToolbar and ViewStatus width coupling. Twenty-seven surface samples per locale include live dirty/floating status/size changes. External addition/title pixels are outside this region.",
+      "fixtures": [
+        "tests/fixtures/forms/native-pdf"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "pdf",
+        "path": "test/form-pdf-host.cjs",
+        "caseIds": [
+          "A_Default",
+          "dirty-background",
+          "dirty-border",
+          "dirty-no-view-status",
+          "restored-default",
+          "floating-default",
+          "floating-dirty-size",
+          "floating-no-view-status",
+          "floating-restored",
+          "reattached-default",
+          "B_Size",
+          "C_ReadOnly",
+          "D_Disabled",
+          "E_Border",
+          "F_Background",
+          "G_NoTitle",
+          "H_Large",
+          "I_Toolbar",
+          "J_NoToolbar",
+          "K_NoViewStatus",
+          "L_SmallNoStatus",
+          "M_Width15",
+          "N_Width30",
+          "O_Width31",
+          "P_Height2",
+          "Q_Height3",
+          "R_Height4"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-pdf-linux.json",
+          "sha256": "eb6ef9ac2c054089040b3be7b4d833d02f9abe08ee85e96baae4139759d01f62",
+          "assertions": [
+            {
+              "pointer": "/completeEmptyPdfSurfacePixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/completeWidgetPixelsCompared",
+              "equals": 2461430
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/completeWidgetPixelsCompared",
+              "equals": 2461430
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/wholeFormVisualParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": "ad684766d104533eb515c0f801f213397e94c98a"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-pdf-linux.json",
+      "remaining": "General native thumb-length formula, unrecorded sizes/fonts/stretch/color/property combinations, external ViewStatus/title pixels, content, computed applicability, DPI, full forms and Windows.",
+      "nextAction": "Establish the general scrollbar thumb rule, then extend native surface/property matrices while preserving the recorded PDF pixels."
     }
   ],
   "historicalReports": [
@@ -6096,7 +6198,8 @@
     "docs/measurements/t160-native-geographical-linux.json",
     "docs/measurements/t160-native-graphical-linux.json",
     "docs/measurements/t160-native-formatted-linux.json",
-    "docs/measurements/t160-native-html-linux.json"
+    "docs/measurements/t160-native-html-linux.json",
+    "docs/measurements/t160-native-pdf-linux.json"
   ],
   "supersessions": [
     {
