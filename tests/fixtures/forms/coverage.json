@@ -4061,11 +4061,12 @@
       "profile": "linux-taxi-96",
       "level": "behavior",
       "status": "accepted_scope",
-      "scope": "Native property order, labels and default values for recorded scalar and ValueTable contexts. Selected events, conditional maximum sizes, dirty type transitions and real XML navigation.",
+      "scope": "Native property order, labels and defaults for thirteen recorded InputField contexts, including reference, composite and value list bindings. Dirty selection and real event locations.",
       "fixtures": [
         "tests/fixtures/forms/native-property-palette/input-field.json",
         "tests/fixtures/forms/native-bound-fields/InputField.xml",
-        "tests/fixtures/forms/native-tables/Default.xml"
+        "tests/fixtures/forms/native-tables/Default.xml",
+        "tests/fixtures/forms/native-context-tables/Catalog.xml"
       ],
       "driver": {
         "repository": "eska-vscode-explorer",
@@ -4074,7 +4075,12 @@
         "caseIds": [
           "5",
           "6",
-          "7"
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12"
         ],
         "selection": "whole-suite-with-existing-transitions"
       },
@@ -4109,11 +4115,46 @@
             }
           ],
           "clientCommit": "903fb7a362783c067effc882aace9444c82e62b3"
+        },
+        {
+          "report": "docs/measurements/t161-input-binding-contexts-linux.json",
+          "sha256": "6f0f0f2e0009ddcf362b7eb09e4768bb1c30b3091aeb4e7299aa17ac305c971e",
+          "assertions": [
+            {
+              "pointer": "/native/rowCounts/tableNumber",
+              "equals": 102
+            },
+            {
+              "pointer": "/native/rowCounts/tableDate",
+              "equals": 99
+            },
+            {
+              "pointer": "/native/rowCounts/tableBoolean",
+              "equals": 100
+            },
+            {
+              "pointer": "/native/rowCounts/valueList",
+              "equals": 101
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/advancedTransitionsPerLocale",
+              "equals": 5
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": "93f320e86a24430b213a93c408ae6fad66670d00"
         }
       ],
-      "lastConfirmation": "docs/measurements/t161-input-field-palette-linux.json",
-      "remaining": "Other InputField contexts, explicit enum captions and resolved style provenance. Windows native comparison.",
-      "nextAction": "Extend native input catalogue for reference, composite, multiple-value and remaining column contexts."
+      "lastConfirmation": "docs/measurements/t161-input-binding-contexts-linux.json",
+      "remaining": "Extended multiple-value editing, other binding domains, availability and resolved style provenance. Windows native comparison.",
+      "nextAction": "Capture the extended value list state and remaining native contexts."
     },
     {
       "id": "shell.inspectors",
@@ -7197,6 +7238,14 @@
     "docs/measurements/t165-linux-beta-readiness.json"
   ],
   "supersessions": [
+    {
+      "id": "input-property-palette-first-table-count",
+      "historicalReport": "docs/measurements/t161-input-field-palette-linux.json",
+      "currentEntries": [
+        "shell.input-properties"
+      ],
+      "currentRemainder": "The corrected native tableNumber palette has 102 rows including Format. Other contexts and Windows remain open."
+    },
     {
       "id": "input-date-values",
       "historicalReport": "docs/measurements/t157-native-input-fonts-linux.json",
