@@ -24,6 +24,50 @@ fn native_basic_fixture_uses_horizontal_group_and_vertical_form_defaults() {
 }
 
 #[test]
+fn designer_choice_list_uses_caption_inside_the_typed_value_wrapper() {
+    let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:foreign="urn:foreign">
+        <ChildItems><RadioButtonField name="Choice" id="1"><ChoiceList>
+            <xr:Item>
+                <xr:Presentation/><xr:CheckState>0</xr:CheckState>
+                <xr:Value xsi:type="FormChoiceListDesTimeValue">
+                    <foreign:Presentation>Foreign caption</foreign:Presentation>
+                    <Presentation>
+                        <v8:item><v8:lang>ru</v8:lang><v8:content>Первый</v8:content></v8:item>
+                        <v8:item><v8:lang>en</v8:lang><v8:content>First</v8:content></v8:item>
+                    </Presentation>
+                    <Value xsi:type="xs:decimal">0</Value>
+                </xr:Value>
+            </xr:Item>
+            <xr:Item>
+                <xr:Presentation/><xr:CheckState>0</xr:CheckState>
+                <xr:Value xsi:type="FormChoiceListDesTimeValue">
+                    <Presentation/>
+                    <Value xsi:type="xs:string">10m</Value>
+                </xr:Value>
+            </xr:Item>
+            <Item><Presentation>Other</Presentation></Item>
+        </ChoiceList></RadioButtonField></ChildItems>
+    </Form>"#;
+    let document = parse("choice-list", xml.into()).unwrap();
+    let view = present(&compose(&document, &[]), &[document], &[]);
+    let choices = serde_json::to_value(&view.elements[1].choices).unwrap();
+    assert_eq!(
+        choices,
+        serde_json::json!([
+            {"kind": "literal", "items": [
+                {"language": "ru", "content": "Первый"},
+                {"language": "en", "content": "First"}
+            ]},
+            {"kind": "name", "text": "10m"},
+            {"kind": "name", "text": "Other"}
+        ])
+    );
+}
+
+#[test]
 fn input_value_and_title_use_distinct_style_roles_without_losing_overrides() {
     let document=parse("colors",format!("<Form xmlns=\"{}\"><ChildItems><InputField name=\"Default\" id=\"1\"/><InputField name=\"Explicit\" id=\"2\"><TextColor>#0000ff</TextColor><TitleTextColor>#ff0000</TitleTextColor></InputField><Button name=\"Action\" id=\"3\"/></ChildItems></Form>",super::super::FORM_NAMESPACE)).unwrap();
     let view = present(&compose(&document, &[]), &[document], &[]);

@@ -904,9 +904,52 @@ fn choices(value: &MetadataValue, resources: &[FormResource]) -> Vec<Presentatio
                 return Some(caption);
             }
 
-            record(&item.value, "Value").and_then(|value| choice_reference(&value.value, resources))
+            design_time_choice(item, resources).or_else(|| {
+                record(&item.value, "Value")
+                    .and_then(|value| choice_reference(&value.value, resources))
+            })
         })
         .collect()
+}
+
+fn design_time_choice(
+    item: &MetadataProperty,
+    resources: &[FormResource],
+) -> Option<PresentationText> {
+    const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
+    if item.key.namespace.as_deref() != Some(READABLE) || item.key.name != "Item" {
+        return None;
+    }
+    let MetadataValue::Record(fields) = &item.value else {
+        return None;
+    };
+    let wrapper = fields.iter().find(|field| {
+        field.key.namespace.as_deref() == Some(READABLE) && field.key.name == "Value"
+    })?;
+    let MetadataValue::Record(fields) = &wrapper.value else {
+        return None;
+    };
+    // Designer exports an empty outer presentation and the caption inside this value wrapper.
+    let field = |name: &str| {
+        fields
+            .iter()
+            .find(|field| {
+                field.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
+                    && field.key.name == name
+            })
+            .map(|field| &field.value)
+    };
+    if let Some(caption) = field("Presentation").and_then(literal) {
+        return Some(caption);
+    }
+    let value = field("Value")?;
+    if let MetadataValue::TypedText { text, key } = value
+        && key.namespace.as_deref() == Some("http://www.w3.org/2001/XMLSchema")
+        && key.name == "string"
+    {
+        return Some(PresentationText::Name { text: text.clone() });
+    }
+    choice_reference(value, resources)
 }
 
 fn choice_reference(value: &MetadataValue, resources: &[FormResource]) -> Option<PresentationText> {
