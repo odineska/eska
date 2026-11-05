@@ -154,6 +154,7 @@ pub enum PaletteValue<'a> {
 pub struct PaletteRow<'a> {
     pub definition: Option<&'static PaletteDefinition>,
     pub value: PaletteValue<'a>,
+    pub available: bool,
 }
 
 #[derive(Debug)]
@@ -176,7 +177,8 @@ impl FormPreview {
                 .and_then(|item| input_field::Context::new(item, element))
                 .map(|context| self.palette_rows(element, input_field::definitions(context)))
         } else {
-            ordinary_vertical_group(element).then(|| self.palette_rows(element, USUAL_GROUP))
+            ordinary_vertical_group(element)
+                .then(|| self.palette_rows(element, USUAL_GROUP.iter().map(|row| (row, true))))
         };
         Some(PropertyPalette { element, rows })
     }
@@ -184,7 +186,7 @@ impl FormPreview {
     fn palette_rows<'a>(
         &self,
         element: &'a EffectiveElement,
-        catalog: impl IntoIterator<Item = &'static PaletteDefinition>,
+        catalog: impl IntoIterator<Item = (&'static PaletteDefinition, bool)>,
     ) -> Vec<PaletteRow<'a>> {
         let extension_sources: HashSet<_> = self
             .dependencies
@@ -204,7 +206,7 @@ impl FormPreview {
             extension: extension_sources.contains(attribute.origin.source.as_str()),
         };
         let mut rows = Vec::new();
-        for definition in catalog {
+        for (definition, available) in catalog {
             let missing = || PaletteValue::Absent(definition.absent);
             let value = match definition.source {
                 SettingSource::Property(name) => element
@@ -244,6 +246,7 @@ impl FormPreview {
             rows.push(PaletteRow {
                 definition: Some(definition),
                 value,
+                available,
             });
         }
         let mut occurrences = HashMap::new();
@@ -256,6 +259,7 @@ impl FormPreview {
                 rows.push(PaletteRow {
                     definition: None,
                     value: declared(index, *occurrence),
+                    available: true,
                 });
             }
             *occurrence += 1;
@@ -275,6 +279,7 @@ impl FormPreview {
                     Some(PaletteRow {
                         definition: None,
                         value: qualifier(attribute),
+                        available: true,
                     })
                 }),
         );

@@ -124,6 +124,8 @@ fn is_boolean(
                 | "ShowInHeader"
                 | "ShowInFooter"
                 | "ExtendedEditMultipleValues"
+                | "AllowInputEmptyMultipleValues"
+                | "AllowMultipleValuesDuplicates"
                 | "MultiLine"
                 | "PasswordMode"
                 | "AutoMarkIncomplete"

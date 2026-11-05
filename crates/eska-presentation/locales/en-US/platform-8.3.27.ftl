@@ -1574,3 +1574,7 @@ form-palette-property-MultipleValuesTextColor = MultipleValuesTextColor
 form-palette-property-MultipleValuesFont = MultipleValuesFont
 form-palette-property-MultipleValuePictureSize = MultipleValuePictureSize
 form-palette-property-MultipleValuePictureShape = MultipleValuePictureShape
+form-palette-property-AllowInputEmptyMultipleValues = AllowInputEmptyMultipleValues
+form-palette-property-AllowMultipleValuesDuplicates = AllowMultipleValuesDuplicates
+form-palette-property-ShowCheckBoxesInDropListWhenInputMultipleValues = ShowCheckBoxesInDropListWhenInputMultipleValues
+form-palette-property-MultipleValuesHyperlink = MultipleValuesHyperlink

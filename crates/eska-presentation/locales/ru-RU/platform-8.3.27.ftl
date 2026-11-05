@@ -1574,3 +1574,7 @@ form-palette-property-MultipleValuesTextColor = ЦветТекстаМножес
 form-palette-property-MultipleValuesFont = ШрифтМножественныхЗначений
 form-palette-property-MultipleValuePictureSize = РазмерКартинкиМножественногоЗначения
 form-palette-property-MultipleValuePictureShape = ФигураКартинкиМножественногоЗначения
+form-palette-property-AllowInputEmptyMultipleValues = РазрешитьВводПустыхМножественныхЗначений
+form-palette-property-AllowMultipleValuesDuplicates = РазрешитьДублированиеМножественныхЗначений
+form-palette-property-ShowCheckBoxesInDropListWhenInputMultipleValues = ОтображатьФлажкиВВыпадающемСпискеПриВводеМножественныхЗначений
+form-palette-property-MultipleValuesHyperlink = ГиперссылкаМножественныхЗначений

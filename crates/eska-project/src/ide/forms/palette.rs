@@ -135,7 +135,12 @@ fn row_dto(labels: &Labels, row: &PaletteRow<'_>, element: &EffectiveElement) ->
             )
         },
     );
-    json!({"id":id,"category":category,"editor":editor,"caption":caption,"value":value})
+    let mut result =
+        json!({"id":id,"category":category,"editor":editor,"caption":caption,"value":value});
+    if !row.available {
+        result["available"] = json!(false);
+    }
+    result
 }
 
 fn absent(labels: &Labels, default: PlatformPropertyValue) -> Value {

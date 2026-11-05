@@ -16,7 +16,7 @@ enum InputBinding {
     CatalogReference,
     StringAndNumber,
     StringAndReference,
-    ValueList,
+    ValueList { extended: bool },
 }
 
 impl InputBinding {
@@ -51,10 +51,14 @@ impl InputBinding {
                 if types.iter().any(|key| {
                     key.namespace.as_deref() == Some("http://v8.1c.ru/8.1/data/core")
                         && key.name == "ValueListType"
-                }) && setting_text(element, "ExtendedEditMultipleValues")
-                    .is_none_or(|value| matches!(value, "false" | "0")) =>
+                }) =>
             {
-                Self::ValueList
+                let extended = match setting_text(element, "ExtendedEditMultipleValues") {
+                    None | Some("false" | "0") => false,
+                    Some("true" | "1") => true,
+                    _ => return None,
+                };
+                Self::ValueList { extended }
             }
             FieldValueKind::Unknown
                 if presentation::property(element, "DataPath").is_none_or(|property| {
@@ -111,11 +115,18 @@ impl Context {
     }
 }
 
-pub(super) fn definitions(context: Context) -> impl Iterator<Item = &'static PaletteDefinition> {
+pub(super) fn definitions(
+    context: Context,
+) -> impl Iterator<Item = (&'static PaletteDefinition, bool)> {
     INPUT_FIELD
         .iter()
         .filter(move |setting| setting.rule.applies(context))
-        .map(|setting| &setting.definition)
+        .map(move |setting| {
+            let available = setting
+                .disabled_on
+                .is_none_or(|rule| !rule.applies(context));
+            (&setting.definition, available)
+        })
 }
 
 #[derive(Clone, Copy)]
@@ -132,6 +143,7 @@ enum Rule {
     ReferenceChoices,
     ChoiceForm,
     ValueList,
+    ExtendedValueList,
     Column,
     OutsideTable,
     ManualMaxWidth,
@@ -144,27 +156,38 @@ impl Rule {
         let binding = context.binding;
         let text = matches!(
             binding,
-            B::String | B::Unbound | B::StringAndNumber | B::StringAndReference | B::ValueList
+            B::String
+                | B::Unbound
+                | B::StringAndNumber
+                | B::StringAndReference
+                | B::ValueList { .. }
         );
         match self {
             Self::Always => true,
             Self::Bound => binding != B::Unbound,
             Self::Unbound => binding == B::Unbound,
             Self::Text => text,
-            Self::Format => binding == B::ValueList || context.in_table && binding != B::String,
+            Self::Format => {
+                matches!(binding, B::ValueList { .. }) || context.in_table && binding != B::String
+            }
             Self::EditFormat => !matches!(binding, B::String | B::CatalogReference),
             Self::Numeric => matches!(
                 binding,
-                B::Number | B::Unbound | B::StringAndNumber | B::StringAndReference | B::ValueList
+                B::Number
+                    | B::Unbound
+                    | B::StringAndNumber
+                    | B::StringAndReference
+                    | B::ValueList { .. }
             ),
             Self::Wrap => text || binding == B::Boolean && !context.in_table,
             Self::InputHint => text || matches!(binding, B::Boolean | B::CatalogReference),
             Self::ReferenceChoices => matches!(
                 binding,
-                B::CatalogReference | B::StringAndReference | B::ValueList
+                B::CatalogReference | B::StringAndReference | B::ValueList { .. }
             ),
             Self::ChoiceForm => binding == B::CatalogReference,
-            Self::ValueList => binding == B::ValueList,
+            Self::ValueList => matches!(binding, B::ValueList { .. }),
+            Self::ExtendedValueList => matches!(binding, B::ValueList { extended: true }),
             Self::Column => context.in_table,
             Self::OutsideTable => !context.in_table,
             Self::ManualMaxWidth => context.manual_max_width,
@@ -176,6 +199,7 @@ impl Rule {
 struct Setting {
     definition: PaletteDefinition,
     rule: Rule,
+    disabled_on: Option<Rule>,
 }
 
 const fn setting(
@@ -187,6 +211,7 @@ const fn setting(
     Setting {
         definition: PaletteDefinition::new(id, category, editor, default),
         rule: Rule::Always,
+        disabled_on: None,
     }
 }
 
@@ -198,6 +223,11 @@ impl Setting {
 
     const fn from(mut self, source: SettingSource) -> Self {
         self.definition = self.definition.with_source(source);
+        self
+    }
+
+    const fn disabled_on(mut self, rule: Rule) -> Self {
+        self.disabled_on = Some(rule);
         self
     }
 
@@ -225,7 +255,7 @@ const INPUT_FIELD: &[Setting] = {
         Binding, Boolean, Color, Dialog, Enum, Font, Localized, Number, Picture, Shortcut, Text,
     };
     use PlatformPropertyValue::{Auto, AutoStretch, Choice, Empty, Unknown};
-    use Rule::{Column, Numeric, OutsideTable, ReferenceChoices, ValueList};
+    use Rule::{Column, ExtendedValueList, Numeric, OutsideTable, ReferenceChoices, ValueList};
     use SettingSource::{Attribute, Property};
 
     const CHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(true);
@@ -289,7 +319,7 @@ const INPUT_FIELD: &[Setting] = {
         setting("ChoiceButtonRepresentation", Usage, Enum, Auto),
         setting("ListChoiceMode", Usage, Boolean, UNCHECKED),
         setting("ChooseType", Usage, Boolean, CHECKED),
-        setting("ChoiceList", Usage, Dialog, Empty),
+        setting("ChoiceList", Usage, Dialog, Empty).disabled_on(ExtendedValueList),
         setting(
             "IncompleteChoiceMode",
             Usage,
@@ -328,6 +358,17 @@ const INPUT_FIELD: &[Setting] = {
         setting("ToolTip", Usage, Localized, Empty),
         setting("ToolTipRepresentation", Usage, Enum, Auto),
         setting("InputHint", Usage, Localized, Empty).on(Rule::InputHint),
+        setting("AllowInputEmptyMultipleValues", Usage, Boolean, UNCHECKED).on(ExtendedValueList),
+        setting("AllowMultipleValuesDuplicates", Usage, Boolean, UNCHECKED).on(ExtendedValueList),
+        setting(
+            "ShowCheckBoxesInDropListWhenInputMultipleValues",
+            Usage,
+            Enum,
+            DEFAULT,
+        )
+        .on(ExtendedValueList)
+        .from(Property("ShowCheckBoxesInDropList"))
+        .captions(TRISTATE),
         setting("HeaderPicture", Appearance, Picture, Empty).on(Column),
         setting("FooterPicture", Appearance, Picture, Empty).on(Column),
         setting("TitleBackColor", Appearance, Color, Auto).on(Column),
@@ -344,6 +385,9 @@ const INPUT_FIELD: &[Setting] = {
         setting("MultipleValuesBackColor", Appearance, Color, Auto).on(ValueList),
         setting("MultipleValuesTextColor", Appearance, Color, Auto).on(ValueList),
         setting("MultipleValuesFont", Appearance, Font, Auto).on(ValueList),
+        setting("MultipleValuesHyperlink", Appearance, Enum, DEFAULT)
+            .on(ExtendedValueList)
+            .captions(TRISTATE),
         setting("MultipleValuePictureSize", Appearance, Enum, Auto).on(ValueList),
         setting("MultipleValuePictureShape", Appearance, Enum, Auto).on(ValueList),
         setting("HorizontalAlignInGroup", Layout, Enum, Auto)

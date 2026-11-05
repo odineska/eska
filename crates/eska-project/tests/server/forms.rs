@@ -95,6 +95,10 @@ fn assert_native_row(row: &Value, expected: &Value, locale: &str) {
     assert_eq!(row["caption"], expected["label"]);
     assert_eq!(row["category"], expected["category"]);
     assert_eq!(row["editor"], expected["editor"]);
+    assert_eq!(
+        row["available"].as_bool().unwrap_or(true),
+        expected["available"].as_bool().unwrap_or(true)
+    );
     let kind = match expected["sourcePresence"].as_str().unwrap() {
         "attribute" => "name",
         "element-kind" => "elementKind",
@@ -257,12 +261,19 @@ fn form_input_palette_agrees_with_reference_list_and_additional_column_contexts(
                 "<v8:Type>xs:string</v8:Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>",
             ),
             ("valueList", "<v8:Type>v8:ValueListType</v8:Type>"),
+            ("valueListExtended", "<v8:Type>v8:ValueListType</v8:Type>"),
         ] {
-            let text = if types.is_empty() {
+            let mut text = if types.is_empty() {
                 baseline.replace("<DataPath>Value</DataPath>", "")
             } else {
                 with_form_type(&baseline, r#"<Attribute name="Value""#, types)
             };
+            if case == "valueListExtended" {
+                text = text.replace(
+                    "<DataPath>Value</DataPath>",
+                    "<DataPath>Value</DataPath><ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>",
+                );
+            }
             opened = update_input(&mut client, &context, &opened, version, &text);
             version += 1;
             let field = &opened["model"]["root"]["children"][0];
@@ -304,13 +315,99 @@ fn assert_input_palette(inspected: &Value, native: &Value, case: &str, locale: &
 }
 
 fn input_palette_value<'a>(inspection: &'a Value, key: &str) -> &'a Value {
+    &input_palette_row(inspection, key)["value"]
+}
+
+fn input_palette_row<'a>(inspection: &'a Value, key: &str) -> &'a Value {
     let id = format!("platform:{key}");
-    &inspection["rows"]
+    inspection["rows"]
         .as_array()
         .unwrap()
         .iter()
         .find(|row| row["id"] == id)
-        .unwrap()["value"]
+        .unwrap()
+}
+
+#[test]
+fn form_input_palette_keeps_the_source_of_a_disabled_choice_list() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let choice_list = concat!(
+        "<ChoiceList xmlns:xr=\"http://v8.1c.ru/8.3/xcf/readable\">",
+        "<xr:Item><xr:Value>Existing</xr:Value></xr:Item></ChoiceList>"
+    );
+    let form = with_form_type(
+        BOUND_INPUT,
+        r#"<Attribute name="Value""#,
+        "<v8:Type>v8:ValueListType</v8:Type>",
+    )
+    .replace("</InputField>", &format!("{choice_list}</InputField>"));
+    fs::write(&path, &form).unwrap();
+    let mut client = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut client, &directory.0, "en-US", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let field = &opened["model"]["root"]["children"][0];
+    let inspected = inspect_input(&mut client, &context, &opened, field, true);
+    assert!(input_palette_row(&inspected, "ChoiceList")["available"].is_null());
+    let changed = form.replace(
+        "<DataPath>Value</DataPath>",
+        concat!(
+            "<DataPath>Value</DataPath><ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>",
+            "<AllowInputEmptyMultipleValues>true</AllowInputEmptyMultipleValues>",
+            "<AllowMultipleValuesDuplicates>true</AllowMultipleValuesDuplicates>",
+            "<ShowCheckBoxesInDropList>true</ShowCheckBoxesInDropList>",
+            "<MultipleValuesHyperlink>true</MultipleValuesHyperlink>"
+        ),
+    );
+    let updated = update_input(&mut client, &context, &opened, 2, &changed);
+    let field = &updated["model"]["root"]["children"][0];
+    let inspected = inspect_input(&mut client, &context, &updated, field, true);
+    for (id, key) in [
+        (
+            "AllowInputEmptyMultipleValues",
+            "AllowInputEmptyMultipleValues",
+        ),
+        (
+            "AllowMultipleValuesDuplicates",
+            "AllowMultipleValuesDuplicates",
+        ),
+        (
+            "ShowCheckBoxesInDropListWhenInputMultipleValues",
+            "ShowCheckBoxesInDropList",
+        ),
+        ("MultipleValuesHyperlink", "MultipleValuesHyperlink"),
+    ] {
+        let value = input_palette_value(&inspected, id);
+        assert_eq!(value["kind"], "declared");
+        let index = usize::try_from(value["propertyIndex"].as_u64().unwrap()).unwrap();
+        let property = &field["properties"][index];
+        assert_eq!(property["key"]["name"], key);
+        assert_eq!(property["value"]["text"], "true");
+        if matches!(key, "ShowCheckBoxesInDropList" | "MultipleValuesHyperlink") {
+            assert_eq!(value["caption"], json!({"ru-RU":"Да","en-US":"Yes"}));
+        } else {
+            assert_eq!(property["value"]["scalarType"], "boolean");
+        }
+    }
+    let choice = input_palette_row(&inspected, "ChoiceList");
+    assert_eq!(choice["available"], false);
+    assert_eq!(choice["value"]["kind"], "declared");
+    let index = usize::try_from(choice["value"]["propertyIndex"].as_u64().unwrap()).unwrap();
+    let property = &field["properties"][index];
+    assert_eq!(property["key"]["name"], "ChoiceList");
+    let location = client.request("form/locate", &params(&context, json!({
+        "formSessionId":updated["formSessionId"],"revision":updated["revision"],
+        "target":{"kind":"property","identity":field["identity"],"property":property["key"],"occurrence":choice["value"]["occurrence"]}
+    })));
+    assert_eq!(xml_at(&changed, &location["range"]), choice_list);
+    let restored = update_input(&mut client, &context, &updated, 3, &form);
+    let field = &restored["model"]["root"]["children"][0];
+    let restored = inspect_input(&mut client, &context, &restored, field, true);
+    let choice = input_palette_row(&restored, "ChoiceList");
+    assert!(choice["available"].is_null());
+    assert_eq!(choice["value"]["kind"], "declared");
+    client.finish();
+    assert_eq!(fs::read_to_string(path).unwrap(), form);
 }
 
 #[test]
