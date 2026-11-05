@@ -1494,7 +1494,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "surfaces.planner-recorded-date"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3697,7 +3698,7 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t160-native-complex-linux.json",
-      "remaining": "Further document properties/fonts/sizes/combinations, general PDF thumb rules, external additions; calendar/period dates/regions/properties beyond recorded Nov2026 en-US and general period-height rules; planner/chart/dendrogram/Gantt states and full forms. Recorded scopes do not close the full matrix; only agreed random chart values may be excluded.",
+      "remaining": "Further document properties/fonts/sizes/combinations, general PDF thumb rules, external additions; calendar/period/planner dates/regions/properties beyond recorded Nov5 2026/en-US, general period-height rules and native planner clock cadence; chart/dendrogram/Gantt states and full forms. Recorded scopes do not close the full matrix; only agreed random chart values may be excluded.",
       "nextAction": "Extend deterministic document/surface widgets and native editor font/size rules without treating the accepted plain text-document cases as full T160 acceptance."
     },
     {
@@ -6433,6 +6434,106 @@
       "lastConfirmation": "docs/measurements/t160-native-period-linux.json",
       "remaining": "General height conversion/other dimensions, dates/regions/fonts, style/state/property combinations and navigation/selection; typed applicability, captions/full forms, DPI and Windows.",
       "nextAction": "Preserve recorded period parity while expanding remaining dimensions/date/regional profiles and deterministic complex fields."
+    },
+    {
+      "id": "surfaces.planner-recorded-date",
+      "milestone": "T160",
+      "kinds": [
+        "PlannerField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.colors",
+        "appearance.fonts",
+        "surface.content",
+        "state.display",
+        "text.locale",
+        "behavior.session",
+        "behavior.window",
+        "profile.conditions",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "12 complete recorded planner sources at Nov5 2026/en-US, ru/en UI; native hour axis/date/meeting/current-time line, five dimension pairs including both scrollbars and full493px height, ReadOnly/Enabled, ignored Font/BackColor/BorderColor and no-title case. Other dates/regions/styles/properties/dimensions/combinations and full forms remain open.",
+      "fixtures": [
+        "tests/fixtures/forms/native-planner"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "planner",
+        "path": "test/form-planner-host.cjs",
+        "caseIds": [
+          "A_Default",
+          "clock-tick-without-xml",
+          "dirty-background",
+          "dirty-border",
+          "dirty-size",
+          "dirty-small-size",
+          "dirty-tall-size",
+          "dirty-font-12",
+          "dirty-font-16-bold",
+          "restored-default",
+          "floating-default",
+          "floating-dirty-size",
+          "floating-small-size",
+          "floating-restored",
+          "reattached-default",
+          "B_Size",
+          "C_ReadOnly",
+          "D_Disabled",
+          "E_Border",
+          "F_Background",
+          "G_NoTitle",
+          "H_Large",
+          "I_Small",
+          "J_Larger",
+          "K_Font12",
+          "L_Font16Bold"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t160-native-planner-linux.json",
+          "sha256": "03152ed85457b6374bde1842e41cefefcf08c8235ec1a1728b4b5ef694e0351a",
+          "assertions": [
+            {
+              "pointer": "/completeRecordedPlannerSurfacePixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/checks/nativePlannerSurfaceSourceProof/completePixelsCompared",
+              "equals": 2755800
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/ru/differentRgbPixels",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/scenarios/en/liveClockTickWithoutXml",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormVisualParity",
+              "equals": false
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": null
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t160-native-planner-linux.json",
+      "remaining": "Other dates/regions, dimension/property/style combinations, native clock sampling cadence and navigation; typed applicability/computed inspector, full forms, DPI and Windows.",
+      "nextAction": "Preserve recorded planner parity while measuring charts/dendrogram/Gantt and remaining property/date/regional profiles."
     }
   ],
   "historicalReports": [
@@ -6511,7 +6612,8 @@
     "docs/measurements/t160-native-pdf-linux.json",
     "docs/measurements/t160-native-spreadsheet-linux.json",
     "docs/measurements/t160-native-calendar-linux.json",
-    "docs/measurements/t160-native-period-linux.json"
+    "docs/measurements/t160-native-period-linux.json",
+    "docs/measurements/t160-native-planner-linux.json"
   ],
   "supersessions": [
     {
