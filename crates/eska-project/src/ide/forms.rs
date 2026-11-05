@@ -3,6 +3,7 @@
 mod dto;
 mod handlers;
 mod navigation;
+mod palette;
 mod requests;
 
 use super::{
@@ -81,13 +82,13 @@ struct Overlay {
     buffer_id: Option<String>,
 }
 
-pub(super) fn capability(
-    pictures: bool,
-    input_preparation: bool,
-    handler_navigation: bool,
-) -> Value {
-    json!({"pictures":pictures,"inputPreparation":input_preparation,"handlerNavigation":handler_navigation,"schemaVersion":1,"profile":"taxi-8.3.27","readOnly":true,"executesBsl":false,"maxSessions":MAX_SESSIONS,"maxRetainedBytes":MAX_RETAINED_BYTES,
-        "maxFormBytes":eska_project_core::project::forms::MAX_FORM_BYTES,"maxOverlayBytes":8*1024*1024,"maxInlineBytes":128*1024,"uploads":"queryBuffers"})
+pub(super) fn capability(minor: u32) -> Value {
+    let mut result = json!({"pictures":minor >= 37,"inputPreparation":minor >= 38,"handlerNavigation":minor >= 39,"schemaVersion":1,"profile":"taxi-8.3.27","readOnly":true,"executesBsl":false,"maxSessions":MAX_SESSIONS,"maxRetainedBytes":MAX_RETAINED_BYTES,
+        "maxFormBytes":eska_project_core::project::forms::MAX_FORM_BYTES,"maxOverlayBytes":8*1024*1024,"maxInlineBytes":128*1024,"uploads":"queryBuffers"});
+    if minor >= 41 {
+        result["propertyPalette"] = json!(true);
+    }
+    result
 }
 pub(super) fn is_method(method: &str) -> bool {
     matches!(
@@ -98,6 +99,7 @@ pub(super) fn is_method(method: &str) -> bool {
             | "form/update"
             | "form/close"
             | "form/locate"
+            | "form/inspect"
             | "form/handlerSource"
             | "form/handlerLocate"
     )
@@ -186,7 +188,10 @@ impl Server {
                     &input.form_session_id,
                     args,
                 )?,
-                "form/locate" => navigation::locate(entry, args)?,
+                "form/locate" => navigation::locate(entry, args, self.client_minor >= 41)?,
+                "form/inspect" if self.client_minor >= 41 => {
+                    palette::inspect(&self.labels, entry, &input.form_session_id, args)?
+                }
                 "form/handlerSource" | "form/handlerLocate" => {
                     if self.client_minor < 39 {
                         return Err(error(-32601));

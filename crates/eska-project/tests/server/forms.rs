@@ -28,6 +28,14 @@ fn connect(client: &mut Client, root: &Path, locale: &str, minor: u32) -> (Value
             hello["capabilities"]["formPreview"]["inputPreparation"],
             minor >= 38
         );
+        assert_eq!(
+            hello["capabilities"]["formPreview"]["propertyPalette"],
+            if minor >= 41 {
+                json!(true)
+            } else {
+                Value::Null
+            }
+        );
     }
     let opened = client.request("workspace/open", &json!({"start":{"value":root,"encoding":"utf-8"},"selection":{"kind":"current"},"diskCache":false}));
     let project = &opened["projects"][0];
@@ -51,6 +59,250 @@ fn params(context: &Value, values: Value) -> Value {
     };
     value.as_object_mut().unwrap().extend(values);
     value
+}
+
+const GROUP: &str =
+    include_str!("../../../../tests/fixtures/forms/native-property-palette/UsualGroup.xml");
+const GROUP_OVERRIDES: &str = include_str!(
+    "../../../../tests/fixtures/forms/native-property-palette/UsualGroupOverrides.xml"
+);
+
+fn inspect_group(client: &mut Client, context: &Value, snapshot: &Value) -> Value {
+    client.request(
+        "form/inspect",
+        &params(
+            context,
+            json!({
+                "formSessionId": snapshot["formSessionId"],
+                "revision": snapshot["revision"],
+                "identity": snapshot["model"]["root"]["children"][0]["identity"]
+            }),
+        ),
+    )
+}
+
+fn assert_native_row(row: &Value, expected: &Value, locale: &str) {
+    let id = expected["nativeKey"].as_str().unwrap_or("UserVisibility");
+    assert_eq!(row["id"], format!("platform:{id}"));
+    assert_eq!(row["caption"], expected["label"]);
+    assert_eq!(row["category"], expected["category"]);
+    assert_eq!(row["editor"], expected["editor"]);
+    let kind = match expected["sourcePresence"].as_str().unwrap() {
+        "attribute" => "name",
+        "element-kind" => "elementKind",
+        "property" => "declared",
+        "absent" => "absent",
+        other => panic!("unrecognized native source {other}"),
+    };
+    let value = &row["value"];
+    assert_eq!(value["kind"], kind);
+    let display = &expected["displayValue"];
+    match kind {
+        "elementKind" => assert_eq!(value["caption"], *display),
+        "absent" => match display["en-US"].as_str() {
+            Some("") => assert_eq!(value["default"]["kind"], "empty"),
+            Some(_) => assert_eq!(value["caption"], *display),
+            None => assert_eq!(value["default"]["value"], display[locale]),
+        },
+        _ => {}
+    }
+}
+
+#[test]
+fn form_palette_agrees_with_the_native_group_catalog_and_round_trip() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    fs::write(&path, GROUP).unwrap();
+    let native: Value = serde_json::from_str(include_str!(
+        "../../../../tests/fixtures/forms/native-property-palette/usual-group.json"
+    ))
+    .unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let inspected = inspect_group(&mut client, &context, &opened);
+        let rows = inspected["rows"].as_array().unwrap();
+        assert_eq!(rows.len(), 35);
+        for category in inspected["categories"].as_array().unwrap() {
+            assert_eq!(
+                category["caption"],
+                native["categoryLabels"][category["id"].as_str().unwrap()]
+            );
+        }
+        let group = &opened["model"]["root"]["children"][0];
+        assert_eq!(group["properties"].as_array().unwrap().len(), 2);
+        for (row, expected) in rows.iter().zip(native["rows"].as_array().unwrap()) {
+            assert_native_row(row, expected, locale);
+        }
+        let id = &opened["formSessionId"];
+        let source = &opened["dependencies"][0]["id"];
+        let updated = client.request(
+            "form/update",
+            &params(
+                &context,
+                json!({
+                    "formSessionId":id,"revision":opened["revision"],
+                    "overlays":[{"source":source,"version":"2","text":GROUP_OVERRIDES}]
+                }),
+            ),
+        );
+        let properties = updated["model"]["root"]["children"][0]["properties"]
+            .as_array()
+            .unwrap();
+        let updated_inspection = inspect_group(&mut client, &context, &updated);
+        let overrides = updated_inspection["rows"].as_array().unwrap();
+        assert_eq!(overrides.len(), rows.len());
+        for ((row, updated), expected) in rows
+            .iter()
+            .zip(overrides)
+            .zip(native["rows"].as_array().unwrap())
+        {
+            assert_eq!(row["id"], updated["id"]);
+            if let Some(key) = expected["roundtrip"]["key"].as_str() {
+                let value = &updated["value"];
+                assert_eq!(value["sourceKind"], "form");
+                if expected["roundtrip"]["kind"] == "attribute" {
+                    assert_eq!(value["kind"], "qualifier");
+                    assert_eq!(value["key"]["name"], key);
+                    assert_eq!(value["text"], expected["roundtrip"]["value"]);
+                } else {
+                    assert_eq!(value["kind"], "declared");
+                    let index = usize::try_from(value["propertyIndex"].as_u64().unwrap()).unwrap();
+                    let field = &properties[index];
+                    assert_eq!(field["key"]["name"], key);
+                    assert_eq!(field["value"]["text"], expected["roundtrip"]["value"]);
+                }
+            }
+        }
+        let stale = client.response(
+            "form/inspect",
+            &params(
+                &context,
+                json!({
+                    "formSessionId":id,"revision":opened["revision"],"identity":group["identity"]
+                }),
+            ),
+        );
+        assert_eq!(
+            stale["error"]["data"]["details"]["reason"],
+            "stale_form_revision"
+        );
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(path).unwrap(), GROUP);
+}
+
+#[test]
+fn form_palette_keeps_qualified_repeated_properties_and_only_navigates_real_xml() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let source = GROUP
+        .replace(
+            r#"<UsualGroup name="Group" id="1">"#,
+            r#"<UsualGroup xmlns:f="urn:foreign" f:hint="raw" name="Group" id="1">"#,
+        )
+        .replace(
+            "<Group>Vertical</Group>",
+            "<Group>Vertical</Group><f:United>false</f:United><f:United/><Width>0</Width><ToolTip/>",
+        );
+    fs::write(&path, &source).unwrap();
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let inspected = inspect_group(&mut client, &context, &opened);
+    let rows = inspected["rows"].as_array().unwrap();
+    assert_eq!(rows.len(), 38);
+    let row = |id: &str| &rows.iter().find(|row| row["id"] == id).unwrap()["value"];
+    assert_eq!(row("platform:United")["default"]["value"], true);
+    for id in ["platform:Width", "platform:ToolTip"] {
+        assert_eq!(row(id)["kind"], "declared");
+    }
+    assert_eq!(rows[35]["value"]["occurrence"], 0);
+    assert_eq!(rows[36]["value"]["occurrence"], 1);
+    let attribute = &rows[37]["value"];
+    assert_eq!(attribute["kind"], "qualifier");
+    assert_eq!(attribute["text"], "raw");
+    assert_eq!(attribute["sourceKind"], "form");
+    let identity = &inspected["identity"];
+    let location = client.request("form/locate", &params(&context, json!({
+        "formSessionId":opened["formSessionId"],"revision":opened["revision"],
+        "target":{"kind":"attribute","identity":identity,"attribute":{"namespace":"urn:foreign","name":"hint"}}
+    })));
+    assert_eq!(location["range"], attribute["origin"]["range"]);
+    assert_eq!(xml_at(&source, &location["range"]), r#"f:hint="raw""#);
+    let locate = |namespace: &str, occurrence: usize| {
+        params(
+            &context,
+            json!({
+                "formSessionId":opened["formSessionId"],"revision":opened["revision"],
+                "target":{"kind":"property","identity":identity,"property":{"namespace":namespace,"name":"United"},"occurrence":occurrence}
+            }),
+        )
+    };
+    for (occurrence, text) in ["<f:United>false</f:United>", "<f:United/>"]
+        .iter()
+        .enumerate()
+    {
+        let location = client.request("form/locate", &locate("urn:foreign", occurrence));
+        assert_eq!(xml_at(&source, &location["range"]), *text);
+    }
+    let absent = client.response("form/locate", &locate("http://v8.1c.ru/8.3/xcf/logform", 0));
+    assert_eq!(
+        absent["error"]["data"]["details"]["reason"],
+        "target_unavailable"
+    );
+    let other = client.request(
+        "form/inspect",
+        &params(
+            &context,
+            json!({
+                "formSessionId":opened["formSessionId"],"revision":opened["revision"],
+                "identity":opened["model"]["root"]["identity"]
+            }),
+        ),
+    );
+    assert!(other["rows"].is_null());
+    client.finish();
+}
+
+fn xml_at<'a>(source: &'a str, range: &Value) -> &'a str {
+    let start = usize::try_from(range["start"].as_u64().unwrap()).unwrap();
+    let end = usize::try_from(range["end"].as_u64().unwrap()).unwrap();
+    &source[start..end]
+}
+
+#[test]
+fn form_palette_is_negotiated_and_rejects_stale_models() {
+    let directory = fixture();
+    for minor in [40, 41] {
+        let mut client = Client::new(&directory.0, "en-US");
+        let (context, node) = connect(&mut client, &directory.0, "en-US", minor);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let id = &opened["formSessionId"];
+        let revision = &opened["revision"];
+        let identity = &opened["model"]["root"]["identity"];
+        let inspect = params(
+            &context,
+            json!({"formSessionId":id,"revision":revision,"identity":identity}),
+        );
+        if minor == 40 {
+            let unsupported = client.response("form/inspect", &inspect);
+            assert_eq!(unsupported["error"]["code"], -32601);
+        } else {
+            let source = &opened["dependencies"][0]["id"];
+            let invalid = client.response("form/update", &params(&context, json!({
+                "formSessionId":id,"revision":revision,"overlays":[{"source":source,"version":"2","text":"<Form"}]
+            })));
+            assert_eq!(invalid["error"]["data"]["details"]["reason"], "invalid_xml");
+            let stale = client.response("form/inspect", &inspect);
+            assert_eq!(
+                stale["error"]["data"]["details"]["reason"],
+                "stale_form_model"
+            );
+        }
+        client.finish();
+    }
 }
 
 #[test]

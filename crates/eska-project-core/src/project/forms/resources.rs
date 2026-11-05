@@ -423,6 +423,7 @@ fn load_picture(
             version: None,
             member: member.map(str::to_owned),
             role: super::FormDependencyRole::Picture,
+            extension_form: false,
         });
     }
     let bytes = text.len().saturating_add(match &preview {
@@ -470,6 +471,7 @@ pub(super) fn read_input(
             version: overlay.map(|overlay| overlay.version.clone()),
             member: member.map(str::to_owned),
             role,
+            extension_form: false,
         },
         text,
     )))

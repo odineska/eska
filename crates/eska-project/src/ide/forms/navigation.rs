@@ -3,7 +3,7 @@
 use super::{Entry, failure};
 use crate::ide::{envelope::error, params};
 use eska_project_core::project::{
-    forms::{EffectiveElement, ElementIdentity, ElementKey, FormPart, PropertySource},
+    forms::{ElementIdentity, ElementKey, FormPart, PropertySource},
     metadata_model::PropertyKey,
 };
 use serde::Deserialize;
@@ -26,7 +26,7 @@ enum Key {
     Root,
     Xml { value: String },
 }
-fn identity(value: &Value) -> Result<ElementIdentity, Value> {
+pub(super) fn identity(value: &Value) -> Result<ElementIdentity, Value> {
     let value: Identity = params::decode(value)?;
     if value.part != "current" {
         return Err(error(-32602));
@@ -40,24 +40,18 @@ fn identity(value: &Value) -> Result<ElementIdentity, Value> {
         },
     })
 }
-fn find<'a>(value: &'a EffectiveElement, id: &ElementIdentity) -> Option<&'a EffectiveElement> {
-    if &value.identity == id {
-        return Some(value);
-    }
-    value
-        .children
-        .iter()
-        .chain(&value.auxiliary)
-        .find_map(|value| find(value, id))
-}
-pub(super) fn locate(entry: &Entry, args: &Value) -> Result<Value, Value> {
+pub(super) fn check_revision(entry: &Entry, revision: &str) -> Result<(), Value> {
     if entry.last_error.is_some() {
         return Err(failure("stale_form_model"));
     }
-    let input: Target = params::decode(args)?;
-    if params::counter(&input.revision)? != entry.revision {
+    if params::counter(revision)? != entry.revision {
         return Err(failure("stale_form_revision"));
     }
+    Ok(())
+}
+pub(super) fn locate(entry: &Entry, args: &Value, palette: bool) -> Result<Value, Value> {
+    let input: Target = params::decode(args)?;
+    check_revision(entry, &input.revision)?;
     let kind = input.target["kind"].as_str().ok_or_else(|| error(-32602))?;
     let origin: &PropertySource = if kind == "definition" {
         let values = match input.target["section"].as_str() {
@@ -73,8 +67,12 @@ pub(super) fn locate(entry: &Entry, args: &Value) -> Result<Value, Value> {
             .origin
     } else {
         let id = identity(&input.target["identity"])?;
-        let value =
-            find(&entry.preview.form.root, &id).ok_or_else(|| failure("target_unavailable"))?;
+        let value = entry
+            .preview
+            .form
+            .root
+            .find(&id)
+            .ok_or_else(|| failure("target_unavailable"))?;
         match kind {
             "element" => &value.origin,
             "binding" => entry
@@ -87,10 +85,24 @@ pub(super) fn locate(entry: &Entry, args: &Value) -> Result<Value, Value> {
                 .ok_or_else(|| failure("target_unavailable"))?,
             "property" => {
                 let key: PropertyKey = params::decode(&input.target["property"])?;
+                let occurrence = match input.target.get("occurrence") {
+                    Some(index) if palette => params::decode::<usize>(index)?,
+                    _ => 0,
+                };
                 &value
                     .properties
                     .iter()
-                    .find(|value| value.property.key == key)
+                    .filter(|value| value.property.key == key)
+                    .nth(occurrence)
+                    .ok_or_else(|| failure("target_unavailable"))?
+                    .origin
+            }
+            "attribute" if palette => {
+                let key: PropertyKey = params::decode(&input.target["attribute"])?;
+                &value
+                    .qualifiers
+                    .iter()
+                    .find(|value| value.key == key)
                     .ok_or_else(|| failure("target_unavailable"))?
                     .origin
             }

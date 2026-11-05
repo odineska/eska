@@ -7,7 +7,10 @@ use std::{
 
 use serde::Serialize;
 
-use super::{ElementIdentity, ElementKey, ElementKind, FormDefinition, FormDocument, FormElement};
+use super::{
+    ElementIdentity, ElementKey, ElementKind, FormDefinition, FormDocument, FormElement,
+    LocatedQualifier,
+};
 use crate::project::{
     metadata_model::{MetadataProperty, PropertyKey},
     metadata_parser::LocatedProperty,
@@ -29,16 +32,48 @@ pub struct SourcedProperty {
 
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
+pub struct SourcedQualifier {
+    pub key: PropertyKey,
+    pub text: String,
+    pub origin: PropertySource,
+}
+
+impl SourcedQualifier {
+    fn new(value: &LocatedQualifier, source: &str) -> Self {
+        Self {
+            key: value.key.clone(),
+            text: value.text.clone(),
+            origin: origin(source, value.range.clone()),
+        }
+    }
+}
+
+#[derive(Clone, Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct EffectiveElement {
     pub identity: ElementIdentity,
     pub origin: PropertySource,
     pub kind: Option<ElementKind>,
     pub xml_name: PropertyKey,
     pub name: Option<String>,
-    pub qualifiers: Vec<(PropertyKey, String)>,
+    pub qualifiers: Vec<SourcedQualifier>,
     pub properties: Vec<SourcedProperty>,
     pub children: Vec<Self>,
     pub auxiliary: Vec<Self>,
+}
+
+impl EffectiveElement {
+    /// Find a composed identity, including elements outside the main layout tree.
+    #[must_use]
+    pub fn find(&self, identity: &ElementIdentity) -> Option<&Self> {
+        if &self.identity == identity {
+            return Some(self);
+        }
+        self.children
+            .iter()
+            .chain(&self.auxiliary)
+            .find_map(|child| child.find(identity))
+    }
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -215,7 +250,11 @@ fn effective(value: &FormElement, source: &str) -> EffectiveElement {
         kind: value.kind,
         xml_name: value.xml_name.clone(),
         name: value.name.clone(),
-        qualifiers: value.qualifiers.clone(),
+        qualifiers: value
+            .qualifiers
+            .iter()
+            .map(|value| SourcedQualifier::new(value, source))
+            .collect(),
         properties: properties(&value.properties, source),
         children: Vec::new(),
         auxiliary: Vec::new(),
@@ -265,6 +304,32 @@ fn patch_properties(
             .iter_mut()
             .find(|value| value.property.key == after.property.key)
         {
+            *value = replacement;
+        } else {
+            target.push(replacement);
+        }
+    }
+}
+
+fn patch_qualifiers(
+    target: &mut Vec<SourcedQualifier>,
+    baseline: &[LocatedQualifier],
+    modified: &[LocatedQualifier],
+    source: &str,
+) {
+    target.retain(|value| {
+        !baseline.iter().any(|before| before.key == value.key)
+            || modified.iter().any(|after| after.key == value.key)
+    });
+    for after in modified {
+        if baseline
+            .iter()
+            .any(|before| before.key == after.key && before.text == after.text)
+        {
+            continue;
+        }
+        let replacement = SourcedQualifier::new(after, source);
+        if let Some(value) = target.iter_mut().find(|value| value.key == after.key) {
             *value = replacement;
         } else {
             target.push(replacement);
@@ -482,9 +547,12 @@ impl Graph {
             if before.name != modified.name {
                 entry.value.name.clone_from(&modified.name);
             }
-            if before.qualifiers != modified.qualifiers {
-                entry.value.qualifiers.clone_from(&modified.qualifiers);
-            }
+            patch_qualifiers(
+                &mut entry.value.qualifiers,
+                &before.qualifiers,
+                &modified.qualifiers,
+                &document.source,
+            );
             patch_order(&mut entry.children, &old_children, &new_children);
             patch_order(&mut entry.auxiliary, &old_auxiliary, &new_auxiliary);
         }

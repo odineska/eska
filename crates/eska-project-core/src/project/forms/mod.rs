@@ -8,6 +8,7 @@ mod composition;
 mod context;
 mod handlers;
 mod layer_order;
+mod palette;
 mod parsing;
 mod pictures;
 mod preparation;
@@ -21,7 +22,7 @@ pub use catalog::{ElementFamily, ElementKind};
 pub use commands::AutoCommandItem;
 pub use composition::{
     ComposedForm, CompositionIssue, EffectiveDefinition, EffectiveElement,
-    FormCompositionDiagnostic, PropertySource, SourcedProperty, compose,
+    FormCompositionDiagnostic, PropertySource, SourcedProperty, SourcedQualifier, compose,
 };
 pub use context::{
     FormContextError, FormDependency, FormDependencyRole, FormOverlay, FormPreview, load,
@@ -29,6 +30,10 @@ pub use context::{
 pub use handlers::{
     FormHandler, FormHandlerOwner, FormHandlerSource, HandlerLookupError, handler_range,
     handler_source, handlers,
+};
+pub use palette::{
+    PaletteCategory, PaletteEditor, PaletteRow, PaletteValue, PlatformPropertyValue,
+    PropertyPalette,
 };
 pub use parsing::parse;
 pub use pictures::FormPicture;
@@ -111,11 +116,19 @@ pub struct FormElement {
     pub xml_name: PropertyKey,
     pub name: Option<String>,
     pub range: Range<usize>,
-    pub qualifiers: Vec<(PropertyKey, String)>,
+    pub qualifiers: Vec<LocatedQualifier>,
     pub properties: Vec<LocatedProperty>,
     pub children: Vec<Self>,
     /// Menus, tooltips and table additions are not ordinary layout children.
     pub auxiliary: Vec<Self>,
+}
+
+#[derive(Clone, Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct LocatedQualifier {
+    pub key: PropertyKey,
+    pub text: String,
+    pub range: Range<usize>,
 }
 
 impl FormElement {

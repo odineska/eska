@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "nativeFixture": "../../tests/fixtures/forms/native-property-palette/usual-group.json",
+  "scope": "ordinary vertical UsualGroup",
+  "nativeRows": 35,
+  "roundtripProperties": 8,
+  "roundtripAttributes": 1,
+  "explorerCommit": "ec932f6b25fe724d7e6e8f1ce482601e4ffa89b0",
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "vsixSha256": "d37493de57bfa8574476679694366263c2218878764d77440e699bb25ae2507d",
+    "backendSha256": "bcc21b9581227af41a10380cdfd0c9c7f8ee84f9371e3f68f69deac2b01a29fd",
+    "runtimeFilesVerifiedPerRun": 1303,
+    "runtimeManifestSha256": "fc29988b8242dd755b99096ed61ec14baac31cd40418a319dc35bba5d2e530a7"
+  },
+  "checks": {
+    "rust": {
+      "suites": 42,
+      "passed": 1524,
+      "ignored": 19
+    },
+    "node": {
+      "passed": 603,
+      "skipped": 8
+    },
+    "bun": {
+      "version": "1.4.2",
+      "passed": 591,
+      "skipped": 8
+    },
+    "commands": [
+      "cargo-fmt",
+      "cargo-check",
+      "cargo-clippy",
+      "cargo-test",
+      "typescript",
+      "compile",
+      "compile-ts",
+      "bundle",
+      "node",
+      "bun"
+    ]
+  },
+  "installedRuns": [
+    {
+      "suite": "form-detached-space-host.cjs",
+      "locale": "en",
+      "apiVersion": "1.41",
+      "passed": true,
+      "sourceWritesDuringViewing": false,
+      "propertyExpansionRetained": true
+    },
+    {
+      "suite": "form-detached-space-host.cjs",
+      "locale": "ru",
+      "apiVersion": "1.41",
+      "passed": true,
+      "sourceWritesDuringViewing": false,
+      "propertyExpansionRetained": true
+    },
+    {
+      "suite": "form-inspectors-host.cjs",
+      "locale": "en",
+      "apiVersion": "1.41",
+      "passed": true,
+      "sourceWritesDuringViewing": false,
+      "recordDomRetained": true
+    },
+    {
+      "suite": "form-inspectors-host.cjs",
+      "locale": "ru",
+      "apiVersion": "1.41",
+      "passed": true,
+      "sourceWritesDuringViewing": false,
+      "recordDomRetained": true
+    },
+    {
+      "suite": "form-property-catalogue-host.cjs",
+      "locale": "en",
+      "apiVersion": "1.41",
+      "passed": true,
+      "cases": [
+        "native-order-categories-and-defaults",
+        "dirty-aliases-and-stable-expanded-title",
+        "exact-attribute-source",
+        "exact-repeated-xml-source",
+        "removed-override-restores-default",
+        "rapid-context-switch-and-raw-fallback"
+      ],
+      "diskUnchanged": true
+    },
+    {
+      "suite": "form-property-catalogue-host.cjs",
+      "locale": "ru",
+      "apiVersion": "1.41",
+      "passed": true,
+      "cases": [
+        "native-order-categories-and-defaults",
+        "dirty-aliases-and-stable-expanded-title",
+        "exact-attribute-source",
+        "exact-repeated-xml-source",
+        "removed-override-restores-default",
+        "rapid-context-switch-and-raw-fallback"
+      ],
+      "diskUnchanged": true
+    },
+    {
+      "suite": "form-property-catalogue-host.cjs",
+      "locale": "en",
+      "apiVersion": "1.40",
+      "passed": true,
+      "cases": [
+        "api-1.40-raw-properties"
+      ],
+      "diskUnchanged": true
+    },
+    {
+      "suite": "form-property-catalogue-host.cjs",
+      "locale": "ru",
+      "apiVersion": "1.40",
+      "passed": true,
+      "cases": [
+        "api-1.40-raw-properties"
+      ],
+      "diskUnchanged": true
+    }
+  ],
+  "pending": [
+    "other element contexts",
+    "context-sensitive availability",
+    "localized explicit choice values",
+    "resolved style and inheritance provenance",
+    "Windows acceptance"
+  ]
+}

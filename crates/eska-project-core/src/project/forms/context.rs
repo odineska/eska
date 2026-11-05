@@ -35,6 +35,8 @@ pub struct FormDependency {
     pub version: Option<String>,
     pub member: Option<String>,
     pub role: FormDependencyRole,
+    #[serde(skip)]
+    pub(super) extension_form: bool,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
@@ -157,6 +159,7 @@ pub fn load(
             version: overlay.map(|overlay| overlay.version.clone()),
             member: input.member().map(|member| member.as_str().into()),
             role: FormDependencyRole::Form,
+            extension_form: input.role() == SourceRole::Extension,
         });
         documents.push(document);
         if dependencies.len() > super::MAX_FORM_DEPENDENCIES {
@@ -285,6 +288,7 @@ mod tests {
             version: None,
             member: None,
             role,
+            extension_form: false,
         };
         for role in [
             FormDependencyRole::Form,

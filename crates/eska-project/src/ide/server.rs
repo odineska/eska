@@ -283,11 +283,7 @@ impl Server {
                 json!({"schemaVersion":1,"localPersistence":true});
         }
         if self.client_minor >= 36 {
-            result["capabilities"]["formPreview"] = super::forms::capability(
-                self.client_minor >= 37,
-                self.client_minor >= 38,
-                self.client_minor >= 39,
-            );
+            result["capabilities"]["formPreview"] = super::forms::capability(self.client_minor);
         }
         if self.client_minor >= 34 {
             result["capabilities"]["bslMultilineStrings"] = super::query::language_capability();

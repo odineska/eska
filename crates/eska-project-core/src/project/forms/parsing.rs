@@ -2,13 +2,13 @@
 
 use std::{collections::HashSet, fmt::Write};
 
-use roxmltree::{Document, Node, ParsingOptions};
+use roxmltree::{Attribute, Document, Node, ParsingOptions};
 use sha2::{Digest, Sha256};
 
 use super::{
     ElementFamily, ElementIdentity, ElementKey, ElementKind, FORM_NAMESPACE, FormDefinition,
     FormDiagnostic, FormDocument, FormElement, FormIssue, FormParseError, FormPart, FormSnapshot,
-    MAX_FORM_BYTES, MAX_FORM_ELEMENTS,
+    LocatedQualifier, MAX_FORM_BYTES, MAX_FORM_ELEMENTS,
 };
 use crate::project::{
     metadata_model::PropertyKey,
@@ -160,7 +160,7 @@ impl<'a> Parser<'a> {
             xml_name: key(node),
             name,
             range: node.range(),
-            qualifiers: qualifiers(node),
+            qualifiers: located_qualifiers(node),
             properties: Vec::new(),
             children: Vec::new(),
             auxiliary: Vec::new(),
@@ -287,14 +287,23 @@ fn key(node: Node<'_, '_>) -> PropertyKey {
 
 fn qualifiers(node: Node<'_, '_>) -> Vec<(PropertyKey, String)> {
     node.attributes()
-        .map(|attribute| {
-            (
-                PropertyKey {
-                    namespace: attribute.namespace().map(str::to_owned),
-                    name: attribute.name().to_owned(),
-                },
-                attribute.value().to_owned(),
-            )
+        .map(|attribute| (attribute_key(attribute), attribute.value().to_owned()))
+        .collect()
+}
+
+fn located_qualifiers(node: Node<'_, '_>) -> Vec<LocatedQualifier> {
+    node.attributes()
+        .map(|attribute| LocatedQualifier {
+            key: attribute_key(attribute),
+            text: attribute.value().to_owned(),
+            range: attribute.range(),
         })
         .collect()
+}
+
+fn attribute_key(attribute: Attribute<'_, '_>) -> PropertyKey {
+    PropertyKey {
+        namespace: attribute.namespace().map(str::to_owned),
+        name: attribute.name().to_owned(),
+    }
 }

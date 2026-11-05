@@ -162,7 +162,12 @@
         "ru-RU": "Авто",
         "en-US": "Auto"
       },
-      "sourcePresence": "absent"
+      "sourcePresence": "absent",
+      "roundtrip": {
+        "key": "DisplayImportance",
+        "value": "High",
+        "kind": "attribute"
+      }
     },
     {
       "category": "main",
@@ -577,7 +582,7 @@
   "observedConstraints": [
     "Grouping Vertical is explicit in the baseline fixture.",
     "User visibility opens a separate editor.",
-    "DisplayImportance selection High was visible in the probe UI and no matching property was exported in this context.",
+    "DisplayImportance selection High is exported as an unqualified attribute of UsualGroup.",
     "AssociatedTable has an empty display in the baseline; nonempty serialization remains to be verified."
   ],
   "verification": {
@@ -589,6 +594,7 @@
     "roundtripProperties": 8,
     "originalFixtureUnchanged": true,
     "fullPropertyCatalogueAccepted": false,
-    "visualLayoutAcceptance": false
+    "visualLayoutAcceptance": false,
+    "roundtripAttributes": 1
   }
 }
