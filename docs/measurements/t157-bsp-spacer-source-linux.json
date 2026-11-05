@@ -1,0 +1,506 @@
+{
+  "backendSha256": "3a8a0ccba70e10f1e4e52b0425610e57ee1fc108a5ed0d1027882da3a093e2b0",
+  "blankDecorationVerticalFrameHeightPx": 99,
+  "bsp": {
+    "installed": {
+      "en": {
+        "matchingCommands": {
+          "grid": false,
+          "inline": [],
+          "items": [
+            "Отменить сопоставление",
+            "Customize form..."
+          ],
+          "more": "More actions",
+          "spacer": [
+            20,
+            17
+          ],
+          "spacerText": ""
+        },
+        "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+        "states": {
+          "allocation-1150": [
+            1111,
+            612
+          ],
+          "allocation-640": [
+            821.78125,
+            612
+          ],
+          "preferred-alternate": [
+            822,
+            612
+          ],
+          "preferred-initial": [
+            822,
+            612
+          ]
+        },
+        "widestGroup": "ГруппаИтогоНеСопоставленных"
+      },
+      "ru": {
+        "matchingCommands": {
+          "grid": false,
+          "inline": [],
+          "items": [
+            "Отменить сопоставление",
+            "Изменить форму..."
+          ],
+          "more": "Еще",
+          "spacer": [
+            20,
+            17
+          ],
+          "spacerText": ""
+        },
+        "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+        "states": {
+          "allocation-1150": [
+            1111,
+            612
+          ],
+          "allocation-640": [
+            821.78125,
+            612
+          ],
+          "preferred-alternate": [
+            822,
+            612
+          ],
+          "preferred-initial": [
+            822,
+            612
+          ]
+        },
+        "widestGroup": "ГруппаИтогоНеСопоставленных"
+      }
+    },
+    "nativeMatchingFrameWidthHeightPx": [
+      812,
+      612
+    ],
+    "previousReport": "t157-bsp-frame-actions-linux.json",
+    "threeFormsStateCount": 24
+  },
+  "eskaCommit": "4d3e67150f0ffd207f891562627fc6c6e2a76ef9",
+  "explorerCommit": "92007ff823076cef2701c6f879bbf18988ccefe4",
+  "nativeBuild": "8.3.27.2342",
+  "nativeCompatibility": "Version8_3_27",
+  "nativeLocale": "en",
+  "pending": [
+    "RadioButtonField spacing and Tumbler",
+    "Automatic table command and search projection from CommandSource",
+    "Full complex form pixel comparisons",
+    "Windows acceptance"
+  ],
+  "platform": "Linux ARM64 X11",
+  "regression": {
+    "initialFailure": "The fixed area was observed before the preferred size settled. The four input widths were 16 pixels larger.",
+    "initialSuccessfulRuns": 15,
+    "retriedSuite": "through-align",
+    "retryRunCount": 4,
+    "retryTestCommit": "6a61c51",
+    "suiteLocaleCombinations": 16,
+    "uniqueSuccessfulCases": 246
+  },
+  "schemaVersion": 1,
+  "sourceWritesDuringViewing": false,
+  "spacers": [
+    {
+      "case": "ProbeUnitedSpacerControl",
+      "installedSpacerWidthHeightPx": {
+        "en": null,
+        "ru": null
+      },
+      "nativeScreenshotSha256": "da8b90735564e782fffdc549ffe8476bc13cf0f2a82b59c6052eee917e828aa1",
+      "relativeInputRectanglePx": [
+        0,
+        0,
+        151,
+        23
+      ],
+      "settings": {
+        "location": "Absent",
+        "spacerWidth": null
+      },
+      "sourceSha256": "8f186469bf6d83f0368abf45d39f793a5d04cf81f048fa42d03ec8da9d354753"
+    },
+    {
+      "case": "ProbeUnitedSpacerAuto",
+      "installedSpacerWidthHeightPx": {
+        "en": [
+          0,
+          17
+        ],
+        "ru": [
+          0,
+          17
+        ]
+      },
+      "nativeScreenshotSha256": "6f30115a81e1cadbb8af40b7c6a5952534dfd529562e38c69b699a46e7a359d0",
+      "relativeInputRectanglePx": [
+        10,
+        0,
+        151,
+        23
+      ],
+      "settings": {
+        "location": "Horizontal",
+        "spacerWidth": null
+      },
+      "sourceSha256": "566b4e451a249229a3098ddd9b9ed87ad43a04ee705a93d37ab2975adf9fb3b0"
+    },
+    {
+      "case": "ProbeUnitedSpacerNarrow",
+      "installedSpacerWidthHeightPx": {
+        "en": [
+          20,
+          17
+        ],
+        "ru": [
+          20,
+          17
+        ]
+      },
+      "nativeScreenshotSha256": "06b5c365cf56ff7c59e477eb54868ed35a12b68da00f9f3e489757d2fff265ce",
+      "relativeInputRectanglePx": [
+        30,
+        0,
+        151,
+        23
+      ],
+      "settings": {
+        "location": "Horizontal",
+        "spacerWidth": 2
+      },
+      "sourceSha256": "ece032115f5abde498efbe7aa1a5730ff77ffb43fa49afce02d350bb1e5f3176"
+    },
+    {
+      "case": "ProbeUnitedSpacerWide",
+      "installedSpacerWidthHeightPx": {
+        "en": [
+          70,
+          17
+        ],
+        "ru": [
+          70,
+          17
+        ]
+      },
+      "nativeScreenshotSha256": "f89c7b738a146a11810ecc5e507dce271796d9a60cb0da60e627f1485d22da2a",
+      "relativeInputRectanglePx": [
+        80,
+        0,
+        151,
+        23
+      ],
+      "settings": {
+        "location": "Horizontal",
+        "spacerWidth": 7
+      },
+      "sourceSha256": "ffef822a0463f0b573c939a20f7545d8699065056cbd4fcfb200f0df1e69f909"
+    },
+    {
+      "case": "ProbeUnitedSpacerVertical",
+      "installedSpacerWidthHeightPx": {
+        "en": [
+          20,
+          17
+        ],
+        "ru": [
+          20,
+          17
+        ]
+      },
+      "nativeScreenshotSha256": "933eada0d0d1c1ab95cdf9e6b5d9c93041511fbf42b5ebcde3a3719c5273e0e9",
+      "relativeInputRectanglePx": [
+        0,
+        24,
+        151,
+        23
+      ],
+      "settings": {
+        "location": "Vertical",
+        "spacerWidth": 2
+      },
+      "sourceSha256": "94e72f3ef2984ed02ad1825fe73c917e6dc90109a1414dfb68ad437ede4aa7cc"
+    }
+  ],
+  "tableSources": [
+    {
+      "case": "ProbeUnitedSourceBarDetached",
+      "installed": {
+        "en": {
+          "commandBar": {
+            "inline": [
+              "Find",
+              "Cancel search"
+            ],
+            "menu": [
+              "Customize form...",
+              "Second command"
+            ],
+            "more": "More actions"
+          },
+          "frameWidthHeightPx": [
+            434,
+            313
+          ],
+          "grid": true
+        },
+        "ru": {
+          "commandBar": {
+            "inline": [
+              "Найти",
+              "Отменить поиск"
+            ],
+            "menu": [
+              "Изменить форму...",
+              "Second command"
+            ],
+            "more": "Еще"
+          },
+          "frameWidthHeightPx": [
+            434,
+            313
+          ],
+          "grid": true
+        }
+      },
+      "nativeFrameWidthPx": 434,
+      "nativeGrid": true,
+      "nativePanelItems": [
+        "Find",
+        "CancelSearch",
+        "More"
+      ],
+      "nativeScreenshotSha256": "f37e4273a127997a55edd55e7e9a99823400ae1dc9e395c158e1456060a26fb1",
+      "settings": {
+        "columns": true,
+        "forced": false,
+        "search": false,
+        "source": false
+      },
+      "sourceSha256": "58ae33a8a76f4b710a87ade7716907b902da87d7ed1f85a615541e305cb2738c"
+    },
+    {
+      "case": "ProbeUnitedSourceBarColumns",
+      "installed": {
+        "en": {
+          "commandBar": {
+            "inline": [
+              "Find",
+              "Cancel search"
+            ],
+            "menu": [
+              "Customize form...",
+              "Second command"
+            ],
+            "more": "More actions"
+          },
+          "frameWidthHeightPx": [
+            434,
+            313
+          ],
+          "grid": true
+        },
+        "ru": {
+          "commandBar": {
+            "inline": [
+              "Найти",
+              "Отменить поиск"
+            ],
+            "menu": [
+              "Изменить форму...",
+              "Second command"
+            ],
+            "more": "Еще"
+          },
+          "frameWidthHeightPx": [
+            434,
+            313
+          ],
+          "grid": true
+        }
+      },
+      "nativeFrameWidthPx": 434,
+      "nativeGrid": true,
+      "nativePanelItems": [
+        "Add",
+        "MoveUp",
+        "MoveDown",
+        "Find",
+        "CancelSearch",
+        "More"
+      ],
+      "nativeScreenshotSha256": "ccb7920ab197cccfaf6d24e3cc8135f3a7a3638b5cc9c33899b08a117550c30d",
+      "settings": {
+        "columns": true,
+        "forced": false,
+        "search": false,
+        "source": true
+      },
+      "sourceSha256": "f17c4bca61d85d8d40037c951561c01906c2b1593ac73fd8bf44bf1349d6260f"
+    },
+    {
+      "case": "ProbeUnitedSourceBarEmpty",
+      "installed": {
+        "en": {
+          "commandBar": {
+            "inline": [],
+            "menu": [
+              "Customize form...",
+              "Second command"
+            ],
+            "more": "More actions"
+          },
+          "frameWidthHeightPx": [
+            142,
+            79
+          ],
+          "grid": false
+        },
+        "ru": {
+          "commandBar": {
+            "inline": [],
+            "menu": [
+              "Изменить форму...",
+              "Second command"
+            ],
+            "more": "Еще"
+          },
+          "frameWidthHeightPx": [
+            142,
+            79
+          ],
+          "grid": false
+        }
+      },
+      "nativeFrameWidthPx": 142,
+      "nativeGrid": false,
+      "nativePanelItems": [
+        "More"
+      ],
+      "nativeScreenshotSha256": "d54adae7d85e5aa3141719824c955c4051b792e530db55fec3134fc74ba01f56",
+      "settings": {
+        "columns": false,
+        "forced": false,
+        "search": false,
+        "source": true
+      },
+      "sourceSha256": "6572a4a3016dbbfaaeb455a1fefb7fb89c2d3f6dc254e7a194b34e6db77ccd67"
+    },
+    {
+      "case": "ProbeUnitedSourceBarSearch",
+      "installed": {
+        "en": {
+          "commandBar": {
+            "inline": [
+              "Find",
+              "Cancel search"
+            ],
+            "menu": [
+              "Customize form...",
+              "Second command"
+            ],
+            "more": "More actions"
+          },
+          "frameWidthHeightPx": [
+            434,
+            313
+          ],
+          "grid": true
+        },
+        "ru": {
+          "commandBar": {
+            "inline": [
+              "Найти",
+              "Отменить поиск"
+            ],
+            "menu": [
+              "Изменить форму...",
+              "Second command"
+            ],
+            "more": "Еще"
+          },
+          "frameWidthHeightPx": [
+            434,
+            313
+          ],
+          "grid": true
+        }
+      },
+      "nativeFrameWidthPx": 463,
+      "nativeGrid": true,
+      "nativePanelItems": [
+        "Add",
+        "MoveUp",
+        "MoveDown",
+        "SearchString",
+        "More"
+      ],
+      "nativeScreenshotSha256": "ed9cd1c0f295cbe5c1ff65b096c4ac74c683a31e816c293aedcfeb1040145bf4",
+      "settings": {
+        "columns": true,
+        "forced": false,
+        "search": true,
+        "source": true
+      },
+      "sourceSha256": "4727f6dc22f299e31af6736aa9077009e2a7e9c839bd2ae5b966d35ac9d54660"
+    },
+    {
+      "case": "ProbeUnitedSourceBarForced",
+      "installed": {
+        "en": {
+          "commandBar": {
+            "inline": [
+              "Customize form..."
+            ],
+            "menu": [
+              "Second command"
+            ],
+            "more": "More actions"
+          },
+          "frameWidthHeightPx": [
+            282,
+            79
+          ],
+          "grid": false
+        },
+        "ru": {
+          "commandBar": {
+            "inline": [
+              "Изменить форму..."
+            ],
+            "menu": [
+              "Second command"
+            ],
+            "more": "Еще"
+          },
+          "frameWidthHeightPx": [
+            244,
+            79
+          ],
+          "grid": false
+        }
+      },
+      "nativeFrameWidthPx": 283,
+      "nativeGrid": false,
+      "nativePanelItems": [
+        "More",
+        "CustomizeForm"
+      ],
+      "nativeScreenshotSha256": "ec0dcda04f63efd7e2923de87c4accfe81f1713fe91d526637b28d4a71e6f31a",
+      "settings": {
+        "columns": false,
+        "forced": true,
+        "search": false,
+        "source": true
+      },
+      "sourceSha256": "282f16bc387fbe67a6a12c6989d1872cf737df7da7db2adbeace73991c73d4a0"
+    }
+  ],
+  "verifiedInstalledRuntimeFiles": 1303,
+  "vsixSha256": "fc4b8c33d6d4383b9e83d0a59f4abf5ebc945934e09f9c3dd750e0adf3758789"
+}
