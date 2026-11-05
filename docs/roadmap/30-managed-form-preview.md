@@ -1382,6 +1382,13 @@ Node: 602 passed / 8 skipped; Bun 1.4.2: 590 passed / 8 skipped.
 [Матрица и результаты](../measurements/t161-localized-values-linux.json).
 Каталог применимости/default и его backend-контракт этой частью не реализованы.
 
+Для обычной группы общей формы сняты 35 строк native-палитры в ru/en при
+`Version8_3_27`. При отсутствии XML-записи `United` установлен, а `ThroughAlign`
+показывает «Авто». Для восьми свойств штатная выгрузка подтверждает ключи и
+значения Designer XML. В частности, `HorizontalAlignInGroup` записывается как
+`GroupHorizontalAlign`, а `ItemsAndTitlesAlign` — как `ChildrenAlign`.
+[Форма, выгрузка с переопределениями и эталон палитры](../../tests/fixtures/forms/native-property-palette/README.md).
+
 ### T162 — Сессии просмотра и обновление несохранённых исходников
 
 **Статус:** `IN-PROGRESS`. **Зависимости:** T154, T155, T161. **Владелец:** ESKA и Explorer.
