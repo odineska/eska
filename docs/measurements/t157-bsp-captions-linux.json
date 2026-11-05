@@ -1,0 +1,211 @@
+{
+  "backendSha256": "1a9f39b5e4b7d29f04bb30579eef8b5b07f49efddfcf57b22a20d5cdeffe75f3",
+  "baseline": "t157-bsp-complex-baseline-linux.json",
+  "compatibility": "Version8_3_24",
+  "eskaCommit": "a2010abeba72889599bc9a22ebf47a32cc38f99e",
+  "explorerCommit": "88feee3cb3ca7d1b230f9df76ad67f227c9c1022",
+  "forms": [
+    {
+      "beforePreferredFrameWidthHeightPx": {
+        "en": [
+          2085,
+          369
+        ],
+        "ru": [
+          2085,
+          369
+        ]
+      },
+      "choiceListLabels": [
+        [
+          "Заполнение таблицы",
+          "Из внешнего файла"
+        ],
+        [
+          "Обновлять",
+          "Пропускать"
+        ],
+        [
+          "Создавать  ",
+          "Пропускать"
+        ]
+      ],
+      "installedFrameWidthHeightPx": {
+        "en": [
+          [
+            959,
+            381
+          ],
+          [
+            959,
+            381
+          ],
+          [
+            959,
+            326.1875
+          ],
+          [
+            1126,
+            326.1875
+          ]
+        ],
+        "ru": [
+          [
+            970,
+            381
+          ],
+          [
+            970,
+            381
+          ],
+          [
+            970,
+            326.1875
+          ],
+          [
+            1126,
+            326.1875
+          ]
+        ]
+      },
+      "nativeTopFrameStrokePx": [
+        809,
+        810
+      ],
+      "path": "src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml",
+      "sha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da"
+    },
+    {
+      "beforePreferredFrameWidthHeightPx": {
+        "en": [
+          754,
+          768
+        ],
+        "ru": [
+          754,
+          768
+        ]
+      },
+      "installedFrameWidthHeightPx": {
+        "en": [
+          [
+            754,
+            768
+          ],
+          [
+            754,
+            768
+          ],
+          [
+            737.71875,
+            768
+          ],
+          [
+            1111,
+            768
+          ]
+        ],
+        "ru": [
+          [
+            754,
+            768
+          ],
+          [
+            754,
+            768
+          ],
+          [
+            744,
+            768
+          ],
+          [
+            1111,
+            768
+          ]
+        ]
+      },
+      "nativeTopFrameStrokePx": [
+        799
+      ],
+      "path": "src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+      "sha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3"
+    },
+    {
+      "beforePreferredFrameWidthHeightPx": {
+        "en": [
+          1338,
+          729
+        ],
+        "ru": [
+          1338,
+          729
+        ]
+      },
+      "installedFrameWidthHeightPx": {
+        "en": [
+          [
+            1217,
+            729
+          ],
+          [
+            1217,
+            729
+          ],
+          [
+            1216.6875,
+            415
+          ],
+          [
+            1216.6875,
+            415
+          ]
+        ],
+        "ru": [
+          [
+            1217,
+            729
+          ],
+          [
+            1217,
+            729
+          ],
+          [
+            1216.6875,
+            415
+          ],
+          [
+            1216.6875,
+            415
+          ]
+        ]
+      },
+      "nativeTopFrameStrokePx": [
+        1222,
+        1223
+      ],
+      "path": "src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml",
+      "sha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248"
+    }
+  ],
+  "installedFormStates": 24,
+  "nativeBuild": "8.3.27.2342",
+  "pending": [
+    "Exact full-form screenshots",
+    "Wizard height and command-bar placement on the matching page",
+    "Radio button tumbler representation and field title geometry"
+  ],
+  "platform": "Linux ARM64, X11",
+  "schemaVersion": 1,
+  "sourceWritesDuringViewing": false,
+  "stateOrder": [
+    "preferred-initial",
+    "preferred-alternate",
+    "allocation-640",
+    "allocation-1150"
+  ],
+  "statesWithoutOutOfFrameElements": 24,
+  "statesWithoutUnsupportedElements": 24,
+  "status": "targeted verification of explicit line breaks and Designer choice captions",
+  "verifiedInstalledRuntimeFiles": 1303,
+  "vsixSha256": "fa8bf23efcf19d101899dc02e3f24ed42e8bd82565f2e03e8642a20079859c80"
+}
