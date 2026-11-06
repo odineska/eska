@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-06",
+  "scope": "Widths of empty table columns and their independently allocated viewports in Linux Designer preview.",
+  "platformBuild": "8.3.27.2342",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "explorerCommit": "fb213fb9eca6a143118686d52a734042a5646b6e",
+  "nativeUiLocale": "ru",
+  "noBslExecution": true,
+  "sourceXmlUnchanged": true,
+  "nativeProbes": {
+    "comparison": "Visible separator positions and the preferred outer table widths of forms without an authored form width.",
+    "probes": 62,
+    "preferred": 21,
+    "preferredExact": 21,
+    "dividers": 242,
+    "exact": 241,
+    "maxDelta": 1,
+    "discrepancies": [
+      {
+        "probe": "MixedGrowth",
+        "mismatched": [
+          {
+            "column": "Cat",
+            "native": 463,
+            "viewer": 464
+          }
+        ]
+      }
+    ],
+    "cases": [
+      "String length",
+      "Numeric precision",
+      "Reference and enumeration",
+      "Date, time and combined date/time",
+      "ReadOnly and editing affordances",
+      "Table and column Width",
+      "HorizontalStretch",
+      "Width distribution and scrolling"
+    ],
+    "directories": [
+      "form-native-table-widths-MpaEr7CN",
+      "form-native-table-widths-fLI02ghE",
+      "form-native-table-widths-JP7oqnWU",
+      "form-native-table-widths-ihbLWbOy",
+      "form-native-table-widths-Eamw69t7"
+    ]
+  },
+  "loanDisbursement": {
+    "application": "Менеджер займов",
+    "form": "Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "table": "РасшифровкаУдержаний",
+    "native": {
+      "frameWidth": 1156,
+      "tableRelativeFrame": [
+        13,
+        530,
+        1123,
+        227
+      ],
+      "completeColumnWidths": [
+        87,
+        314,
+        158,
+        142,
+        158,
+        189
+      ],
+      "visibleColumns": 7,
+      "snapshot": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-native-full-crop.png"
+    },
+    "before": {
+      "basis": "Preferred form width from the earlier installed VSIX measurement, column widths recalculated from the pre-change model.",
+      "preferredFrameWidth": 3432,
+      "preferredTableWidth": 3398,
+      "columnWidths": [
+        67,
+        427,
+        427,
+        427,
+        427,
+        129,
+        197,
+        427,
+        427,
+        427
+      ],
+      "visibleColumns": 4,
+      "gridWidth": 3382
+    },
+    "installed": {
+      "frame": [
+        1156,
+        871
+      ],
+      "preferredFrameWidth": 1291,
+      "tableRelativeFrame": [
+        13,
+        529,
+        1122,
+        227
+      ],
+      "preferredTableWidth": 880,
+      "columnWidths": [
+        87,
+        314,
+        158,
+        142,
+        158,
+        189,
+        189,
+        158,
+        158,
+        158
+      ],
+      "visibleColumns": 7,
+      "gridWidth": 1711,
+      "narrowTableViewport": 910,
+      "maximumHorizontalScroll": 801,
+      "attachedAndDetachedWidthMatch": true,
+      "defaultTimeCycle": "24h",
+      "dirtyOrderColumnWidths": {
+        "initial": 314,
+        "authoredWidth24": 193,
+        "authoredStretchFalse": 418,
+        "restored": 314
+      },
+      "retainedSelectionAndHeader": true,
+      "measurements": "form-cf-intake-1RN3roMt/loan-table-width-vsYOvgxD/table-width-measurement.json",
+      "detachedSnapshot": "form-cf-intake-1RN3roMt/loan-table-width-vsYOvgxD/loan-table-detached.png",
+      "receiptSha256": "164072fff07e1a63fa3bc1b85c8c1cd93967a19a4614b081bf27ee30d2cd56dd"
+    }
+  },
+  "checks": {
+    "node": {
+      "pass": 645,
+      "fail": 0,
+      "skipped": 9
+    },
+    "installedBatch": {
+      "directory": "form-batch-IzLXNM",
+      "vsixSha256": "ed68d5c692412aa21f3e0a59134c8e35d3bdc0a14cc46a4010d4478c8008e0b0",
+      "backendSha256": "2bdecff9ee2f3ebfd667ae9ac2d94086cba3218db120d33be4bc70eefb7d0d58",
+      "batchSha256": "ea26ffd2cd79b26e17a53b39867a76ae03b1198977fb6e66eafcb38f4de14043",
+      "inputsSha256": "e6acb0b3ed5171813a5335b54056f1f6ff06f5ea0f8c3fd42a470857b1a8e965",
+      "runs": [
+        {
+          "suite": "tables",
+          "locale": "en",
+          "passed": true,
+          "cases": 17
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "passed": true,
+          "cases": 17
+        },
+        {
+          "suite": "table-pixels",
+          "locale": "en",
+          "passed": true,
+          "cases": 48
+        },
+        {
+          "suite": "table-pixels",
+          "locale": "ru",
+          "passed": true,
+          "cases": 47
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "passed": true,
+          "cases": 31
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "passed": true,
+          "cases": 31
+        },
+        {
+          "suite": "renderer",
+          "locale": "en",
+          "passed": true,
+          "cases": 20
+        },
+        {
+          "suite": "renderer",
+          "locale": "ru",
+          "passed": true,
+          "cases": 20
+        }
+      ]
+    }
+  },
+  "remaining": [
+    "One separator differs by 1 px when four differently typed columns share surplus width.",
+    "The loan form preferred width, scrollbar paint, view-status chips and whole-form pixel parity remain open.",
+    "Other value and column types, fonts, display densities and Windows require their own comparisons."
+  ],
+  "wholeFormVisualParity": false,
+  "fullProfileAccepted": false
+}
