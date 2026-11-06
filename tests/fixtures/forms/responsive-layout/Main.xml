@@ -1,0 +1,393 @@
+<?xml version="1.0" ?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Title>
+    <v8:item>
+      <v8:lang>ru</v8:lang>
+      <v8:content>Адаптация просмотра</v8:content>
+    </v8:item>
+    <v8:item>
+      <v8:lang>en</v8:lang>
+      <v8:content>Responsive preview</v8:content>
+    </v8:item>
+  </Title>
+  <Width>80</Width>
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <UsualGroup name="Header" id="1">
+      <ShowTitle>false</ShowTitle>
+      <Group>HorizontalIfPossible</Group>
+      <ChildItems>
+        <InputField name="Name" id="2">
+          <DataPath>Name</DataPath>
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Name</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Name</v8:content>
+            </v8:item>
+          </Title>
+          <Width>35</Width>
+        </InputField>
+        <InputField name="Amount" id="3">
+          <DataPath>Amount</DataPath>
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Amount</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Amount</v8:content>
+            </v8:item>
+          </Title>
+          <Width>12</Width>
+          <HorizontalStretch>false</HorizontalStretch>
+        </InputField>
+      </ChildItems>
+    </UsualGroup>
+    <UsualGroup name="Constraints" id="24">
+      <ShowTitle>false</ShowTitle>
+      <HorizontalStretch>true</HorizontalStretch>
+      <ChildItems>
+        <InputField name="Limited" id="25">
+          <DataPath>Name</DataPath>
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Limited</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Limited</v8:content>
+            </v8:item>
+          </Title>
+          <HorizontalStretch>true</HorizontalStretch>
+          <AutoMaxWidth>false</AutoMaxWidth>
+          <MaxWidth>25</MaxWidth>
+        </InputField>
+      </ChildItems>
+    </UsualGroup>
+    <UsualGroup name="Fixed" id="4">
+      <Width>35</Width>
+      <Height>3</Height>
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Fixed group</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Fixed group</v8:content>
+        </v8:item>
+      </Title>
+      <Group>Horizontal</Group>
+      <HorizontalStretch>false</HorizontalStretch>
+      <VerticalStretch>false</VerticalStretch>
+      <ChildItems>
+        <InputField name="Code" id="5">
+          <DataPath>Name</DataPath>
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Code</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Code</v8:content>
+            </v8:item>
+          </Title>
+          <Width>8</Width>
+          <HorizontalStretch>false</HorizontalStretch>
+          <VerticalStretch>false</VerticalStretch>
+        </InputField>
+        <Button name="Find" id="6">
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Find</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Find</v8:content>
+            </v8:item>
+          </Title>
+        </Button>
+      </ChildItems>
+    </UsualGroup>
+    <Pages name="Pages" id="10">
+      <ChildItems>
+        <Page name="Main" id="11">
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Main</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Main</v8:content>
+            </v8:item>
+          </Title>
+          <ChildItems>
+            <UsualGroup name="Data" id="12">
+              <ShowTitle>false</ShowTitle>
+              <Group>Horizontal</Group>
+              <ChildItems>
+                <Table name="Rows" id="13">
+                  <DataPath>Rows</DataPath>
+                  <Width>2</Width>
+                  <Height>2</Height>
+                  <HorizontalStretch>true</HorizontalStretch>
+                  <VerticalStretch>true</VerticalStretch>
+                  <CommandBarLocation>None</CommandBarLocation>
+                  <Footer>true</Footer>
+                  <ChildItems>
+                    <InputField name="Text" id="14">
+                      <DataPath>Rows.Text</DataPath>
+                      <Width>80</Width>
+                      <Title>
+                        <v8:item>
+                          <v8:lang>ru</v8:lang>
+                          <v8:content>Text</v8:content>
+                        </v8:item>
+                        <v8:item>
+                          <v8:lang>en</v8:lang>
+                          <v8:content>Text</v8:content>
+                        </v8:item>
+                      </Title>
+                    </InputField>
+                    <InputField name="Quantity" id="15">
+                      <DataPath>Rows.Amount</DataPath>
+                      <Width>80</Width>
+                      <Title>
+                        <v8:item>
+                          <v8:lang>ru</v8:lang>
+                          <v8:content>Quantity</v8:content>
+                        </v8:item>
+                        <v8:item>
+                          <v8:lang>en</v8:lang>
+                          <v8:content>Quantity</v8:content>
+                        </v8:item>
+                      </Title>
+                    </InputField>
+                  </ChildItems>
+                </Table>
+                <ChartField name="Chart" id="16">
+                  <DataPath>ChartData</DataPath>
+                  <Title>
+                    <v8:item>
+                      <v8:lang>ru</v8:lang>
+                      <v8:content>Chart</v8:content>
+                    </v8:item>
+                    <v8:item>
+                      <v8:lang>en</v8:lang>
+                      <v8:content>Chart</v8:content>
+                    </v8:item>
+                  </Title>
+                  <TitleLocation>Top</TitleLocation>
+                  <Width>1</Width>
+                  <Height>2</Height>
+                  <HorizontalStretch>true</HorizontalStretch>
+                  <VerticalStretch>true</VerticalStretch>
+                </ChartField>
+              </ChildItems>
+            </UsualGroup>
+          </ChildItems>
+        </Page>
+        <Page name="Other" id="17">
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Other</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Other</v8:content>
+            </v8:item>
+          </Title>
+          <ChildItems>
+            <TextDocumentField name="Notes" id="18">
+              <DataPath>NotesData</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Notes</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Notes</v8:content>
+                </v8:item>
+              </Title>
+              <TitleLocation>Top</TitleLocation>
+              <Width>25</Width>
+              <Height>7</Height>
+              <HorizontalStretch>true</HorizontalStretch>
+              <VerticalStretch>true</VerticalStretch>
+            </TextDocumentField>
+            <InputField name="Memo" id="26">
+              <DataPath>Name</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Memo</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Memo</v8:content>
+                </v8:item>
+              </Title>
+              <MultiLine>true</MultiLine>
+              <HorizontalStretch>true</HorizontalStretch>
+              <VerticalStretch>true</VerticalStretch>
+              <AutoMaxHeight>false</AutoMaxHeight>
+              <MaxHeight>8</MaxHeight>
+            </InputField>
+          </ChildItems>
+        </Page>
+        <Page name="Canvas" id="22">
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Canvas</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Canvas</v8:content>
+            </v8:item>
+          </Title>
+          <ChildItems>
+            <SpreadSheetDocumentField name="Sheet" id="23">
+              <DataPath>SheetData</DataPath>
+              <TitleLocation>None</TitleLocation>
+              <ShowGrid>true</ShowGrid>
+              <HorizontalStretch>true</HorizontalStretch>
+              <VerticalStretch>true</VerticalStretch>
+            </SpreadSheetDocumentField>
+          </ChildItems>
+        </Page>
+        <Page name="FixedTablePage" id="27">
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Fixed table</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Fixed table</v8:content>
+            </v8:item>
+          </Title>
+          <ChildItems>
+            <Table name="FixedRows" id="28">
+              <DataPath>Rows</DataPath>
+              <HorizontalStretch>false</HorizontalStretch>
+              <VerticalStretch>true</VerticalStretch>
+              <CommandBarLocation>None</CommandBarLocation>
+              <ChildItems>
+                <InputField name="FixedText" id="29">
+                  <DataPath>Rows.Text</DataPath>
+                </InputField>
+                <InputField name="FixedQuantity" id="30">
+                  <DataPath>Rows.Amount</DataPath>
+                </InputField>
+              </ChildItems>
+            </Table>
+          </ChildItems>
+        </Page>
+      </ChildItems>
+    </Pages>
+    <UsualGroup name="Details" id="19">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Details</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Details</v8:content>
+        </v8:item>
+      </Title>
+      <Behavior>Collapsible</Behavior>
+      <VerticalStretch>false</VerticalStretch>
+      <ChildItems>
+        <LabelDecoration name="Hint" id="20">
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Long caption remains available when the viewing area is narrow.</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Long caption remains available when the viewing area is narrow.</v8:content>
+            </v8:item>
+          </Title>
+          <Wrap>true</Wrap>
+        </LabelDecoration>
+      </ChildItems>
+    </UsualGroup>
+    <Button name="Close" id="21">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Close</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Close</v8:content>
+        </v8:item>
+      </Title>
+      <HorizontalStretch>false</HorizontalStretch>
+      <VerticalStretch>false</VerticalStretch>
+    </Button>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="Name" id="1">
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="Amount" id="2">
+      <Type>
+        <v8:Type>xs:decimal</v8:Type>
+        <v8:NumberQualifiers>
+          <v8:Digits>12</v8:Digits>
+          <v8:FractionDigits>2</v8:FractionDigits>
+        </v8:NumberQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Rows" id="3">
+      <Type>
+        <v8:Type>v8:ValueTable</v8:Type>
+      </Type>
+      <Columns>
+        <Column name="Text" id="1">
+          <Type>
+            <v8:Type>xs:string</v8:Type>
+          </Type>
+        </Column>
+        <Column name="Amount" id="2">
+          <Type>
+            <v8:Type>xs:decimal</v8:Type>
+          </Type>
+        </Column>
+      </Columns>
+    </Attribute>
+    <Attribute name="ChartData" id="4">
+      <Type>
+        <v8:Type xmlns:chart="http://v8.1c.ru/8.2/data/chart">chart:Chart</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="NotesData" id="5">
+      <Type>
+        <v8:Type>v8:TextDocument</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="SheetData" id="6">
+      <Type>
+        <v8:Type>v8:SpreadsheetDocument</v8:Type>
+      </Type>
+    </Attribute>
+  </Attributes>
+</Form>

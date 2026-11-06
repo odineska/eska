@@ -3,9 +3,9 @@
 use crate::ide::dto::{self, Labels};
 use eska_project_core::project::{
     forms::{
-        EffectiveDefinition, EffectiveElement, ElementIdentity, ElementKey, ElementPresentation,
-        FormDependency, FormDependencyRole, FormPart, FormPreparation, FormPreview, PropertySource,
-        SourcedProperty,
+        ComposedForm, EffectiveDefinition, EffectiveElement, ElementIdentity, ElementKey,
+        ElementPresentation, FormDependency, FormDependencyRole, FormPart, FormPreparation,
+        FormPreview, PropertySource, SourcedProperty,
     },
     metadata_model::MetadataKind,
     metadata_parser::LocatedProperty,
@@ -41,17 +41,18 @@ fn property(labels: &Labels, value: &SourcedProperty) -> Value {
 }
 fn element(
     labels: &Labels,
+    form: &ComposedForm,
     value: &EffectiveElement,
     presentations: &HashMap<&ElementIdentity, &ElementPresentation>,
 ) -> Value {
     let presentation = presentations.get(&value.identity).map(|presentation| {
-        json!({"grouping":presentation.grouping,"displayed":presentation.displayed,"markIncomplete":presentation.mark_incomplete,"titleLocation":presentation.title_location,"picture":presentation.picture,"caption":presentation.caption,"tooltip":presentation.tooltip,"footerText":presentation.footer_text,"valueType":presentation.value_type,"binding":presentation.binding,"choices":presentation.choices,
+        json!({"grouping":presentation.grouping,"united":presentation.united,"displayed":presentation.displayed,"markIncomplete":presentation.mark_incomplete,"titleLocation":presentation.title_location,"picture":presentation.picture,"caption":presentation.caption,"tooltip":presentation.tooltip,"footerText":presentation.footer_text,"valueType":presentation.value_type,"binding":presentation.binding,"choices":presentation.choices,
             "font":presentation.font,"titleFont":presentation.title_font,"foreground":presentation.foreground,"background":presentation.background,"border":presentation.border,
             "titleColor":presentation.title_color,"autoCommands":presentation.auto_commands,"autoCommandItems":presentation.auto_command_items})
     });
     json!({"identity":identity(&value.identity),"origin":origin(&value.origin),"kind":value.kind.map(eska_project_core::project::forms::ElementKind::xml_name),"name":value.name,"xmlName":value.xml_name,
-        "properties":value.properties.iter().map(|value| property(labels,value)).collect::<Vec<_>>(),"presentation":presentation,
-        "children":value.children.iter().map(|value| element(labels,value,presentations)).collect::<Vec<_>>(),"auxiliary":value.auxiliary.iter().map(|value| element(labels,value,presentations)).collect::<Vec<_>>()})
+        "properties":form.inspectable_properties(value).map(|value| property(labels,value)).collect::<Vec<_>>(),"presentation":presentation,
+        "children":value.children.iter().map(|value| element(labels,form,value,presentations)).collect::<Vec<_>>(),"auxiliary":value.auxiliary.iter().map(|value| element(labels,form,value,presentations)).collect::<Vec<_>>()})
 }
 fn definition(labels: &Labels, value: &EffectiveDefinition) -> Value {
     json!({"name":value.name,"xmlName":value.xml_name,"origin":origin(&value.origin),"qualifiers":value.qualifiers,"properties":value.properties.iter().map(|value| property(labels,value)).collect::<Vec<_>>()})
@@ -96,9 +97,12 @@ pub(super) fn model(labels: &Labels, preview: &FormPreview) -> Result<(Value, us
         eska_project_core::project::forms::FormHandlerOwner::Element(value)=>json!({"kind":"element","identity":identity(value)}),
         eska_project_core::project::forms::FormHandlerOwner::Command(name)=>json!({"kind":"command","name":name}),
     },"event":handler.event,"name":handler.name,"origin":origin(&handler.origin)})).collect::<Vec<_>>();
-    let model = json!({"root":element(labels,&preview.form.root,&presentations),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
+    let mut model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
         "commands":preview.form.commands.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
         "diagnostics":{"composition":preview.form.diagnostics,"appearance":preview.presentation.diagnostics}});
+    if let Some(variant) = preview.presentation.script_variant {
+        model["scriptVariant"] = json!(variant);
+    }
     let bytes = serde_json::to_vec(&model)
         .map_err(|_| super::failure("invalid_model"))?
         .len();

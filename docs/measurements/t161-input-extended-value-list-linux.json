@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "task": "T161",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "fixture": "tests/fixtures/forms/native-property-palette/input-field.json",
+  "fixtureSha256": "9921a7264437e3d908d4613db33fb945ed5a02d101bc54631c6e5c985728b7a3",
+  "native": {
+    "rows": {
+      "valueList": 101,
+      "extendedValueList": 105
+    },
+    "formSha256": {
+      "ProbeUnitedPaletteInputListDefault": "bc715912c6194445d6ba1cf51e855435a98125b019deb13fb3f1ab2fc917fcd4",
+      "ProbeUnitedPaletteInputListExtended": "315d3c6419361cd318af9c4ccff370920c130b6d491a377bb9c5c525a4591805"
+    },
+    "scans": {
+      "listdefault-en": {
+        "pageSha256": [
+          "3df72cff8d6ebdb4e9828b1c3d644bd5e7aeb09624f0acbd5f974f307508b639",
+          "1df9b346a4479f901018ac53f4839ff5aa8aebeb9fa2c4268dc5b5159c711758",
+          "5fb86bc507251c83a4055c7872569990c0f4fdc560532eabc2931e76be874633",
+          "7417768407c44a92477d1b34583d2f9dadbada59c3b3de3047d872f30c974755",
+          "a13e0f1ccb629559241d77b4375ab65f69ab2cbb3f58e302f0af3752420d4772"
+        ],
+        "stitchedSha256": "722785e4c1311160d9e7fbbbe25a7092a72da6f4471848ef5c86b210ae1e7799"
+      },
+      "listextended-en": {
+        "pageSha256": [
+          "4071a76aa506c7f845d84d5f33a01f81050c310bdb3b58c49d91956915e688b3",
+          "03f3fc555bae7c41caeedaa40bbf8c28b5419202031a0bdc16a7bd44864576a7",
+          "ab7733be8aa3463ce0251392e3ae422c3f1546aeff9ac1d37cc6b775fc1215cd",
+          "81a070f9d49bff73133f3fe94f7bb457db3452a638bc65ab5491d77a4216a910",
+          "5f0ada9eb3c18ede03a4fd136ae8d0b3f35ee1c377b6aa90c2f03d7413aed4ef"
+        ],
+        "stitchedSha256": "02ad4845011f5c2cb6cd407270f6428dc8e9e45c1f3b1abbb2f6771d8e4a0067"
+      },
+      "listextended-ru": {
+        "pageSha256": [
+          "17f262e444ca8955059b59183f581d2ff69098ca8c5719ad9ee61e240fe63d7c",
+          "3140012dce8f0caa9a5e3ff71a475dfab9ca2ebd4ec9cddb1a6028632058090f",
+          "0d84db5a81f3a61e1fb35e62755d2fe711ecb042fbc0da6aaa82d20fcd5f0220",
+          "dbe45442017f79ae96ebb5290c609d4b47d249b8bb3c3925e902381fb4dfdc12",
+          "dce6d0368d7eb19def5f5a303705df80af7d9c3656d04284c5b6e6db5b8e49bb"
+        ],
+        "stitchedSha256": "540e3703abf58abe93001772648b94a367f39dae4c75593113e35b8bce044f01"
+      }
+    },
+    "addedRows": [
+      "AllowInputEmptyMultipleValues",
+      "AllowMultipleValuesDuplicates",
+      "ShowCheckBoxesInDropListWhenInputMultipleValues",
+      "MultipleValuesHyperlink"
+    ],
+    "unavailableRows": [
+      "ChoiceList"
+    ],
+    "bothNativeSessionsClosed": true,
+    "roundTrip": {
+      "formSha256": "f8889803e18ed348e0ef91cf2ee430533a260f50f5bf6c1c776067d70889fe9f",
+      "properties": {
+        "ExtendedEditMultipleValues": "true",
+        "AllowInputEmptyMultipleValues": "true",
+        "AllowMultipleValuesDuplicates": "true",
+        "ShowCheckBoxesInDropList": "true",
+        "MultipleValuesHyperlink": "true"
+      }
+    }
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "backendCommit": "c5ffefface8678bbadaea777c71f4e22fff6011f",
+    "explorerCommit": "91566f66899c55f5f6974868a2aa50042eab50b6",
+    "vsixSha256": "d2678f81c6b235aaa0d3cd1419d31580a640633fa713494a826e5d91f9ffd734",
+    "backendSha256": "655a0e64ff579744a2c0c77c52bf2cbb57510a7f6ec58da2c3be3d41b149e00d",
+    "runtimeManifestSha256": "09653f799e909c1570d45ae9b7398283cea410d0403f1c12950d5a913840f58b",
+    "runtimeFilesVerifiedPerRun": 1303
+  },
+  "checks": {
+    "rust": {
+      "suites": 42,
+      "passed": 1533,
+      "ignored": 19,
+      "fmt": true,
+      "check": true,
+      "clippy": true,
+      "test": true,
+      "build": true
+    },
+    "typescript": true,
+    "compile": true,
+    "node": {
+      "passed": 606,
+      "skipped": 8
+    },
+    "bun": {
+      "version": "1.4.2",
+      "passed": 594,
+      "skipped": 8
+    }
+  },
+  "acceptance": {
+    "pairsPassed": 16,
+    "compatibilityPairsPassed": 4,
+    "singleVsix": true,
+    "dirtyUnavailableChoiceListSourceVerified": true,
+    "current": [
+      {
+        "suite": "property-catalogue",
+        "locale": "en",
+        "cases": 16,
+        "passed": true,
+        "diskUnchanged": true,
+        "transitions": [
+          "dirty-binding-unbound",
+          "dirty-binding-mixed-number",
+          "dirty-binding-catalog-reference",
+          "dirty-binding-mixed-reference",
+          "dirty-binding-value-list",
+          "dirty-binding-value-list-extended"
+        ]
+      },
+      {
+        "suite": "property-catalogue",
+        "locale": "ru",
+        "cases": 16,
+        "passed": true,
+        "diskUnchanged": true,
+        "transitions": [
+          "dirty-binding-unbound",
+          "dirty-binding-mixed-number",
+          "dirty-binding-catalog-reference",
+          "dirty-binding-mixed-reference",
+          "dirty-binding-value-list",
+          "dirty-binding-value-list-extended"
+        ]
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "cases": 17,
+        "passed": true
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "cases": 17,
+        "passed": true
+      },
+      {
+        "suite": "handlers",
+        "locale": "en",
+        "cases": 1,
+        "passed": true
+      },
+      {
+        "suite": "handlers",
+        "locale": "ru",
+        "cases": 1,
+        "passed": true
+      },
+      {
+        "suite": "inspectors",
+        "locale": "en",
+        "cases": 1,
+        "passed": true
+      },
+      {
+        "suite": "inspectors",
+        "locale": "ru",
+        "cases": 1,
+        "passed": true
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "cases": 1,
+        "passed": true
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "cases": 1,
+        "passed": true
+      },
+      {
+        "suite": "detached-space",
+        "locale": "en",
+        "cases": 6,
+        "passed": true
+      },
+      {
+        "suite": "detached-space",
+        "locale": "ru",
+        "cases": 6,
+        "passed": true
+      },
+      {
+        "suite": "composition",
+        "locale": "en",
+        "cases": 9,
+        "passed": true
+      },
+      {
+        "suite": "composition",
+        "locale": "ru",
+        "cases": 9,
+        "passed": true
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "cases": 4,
+        "passed": true
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "cases": 4,
+        "passed": true
+      }
+    ],
+    "compatibility": [
+      {
+        "mode": "group-only",
+        "locale": "en",
+        "passed": true,
+        "diskUnchanged": true,
+        "fallback": "earlier-1.41-field-fallback"
+      },
+      {
+        "mode": "group-only",
+        "locale": "ru",
+        "passed": true,
+        "diskUnchanged": true,
+        "fallback": "earlier-1.41-field-fallback"
+      },
+      {
+        "mode": "legacy",
+        "locale": "en",
+        "passed": true,
+        "diskUnchanged": true,
+        "fallback": "api-1.40-raw-properties"
+      },
+      {
+        "mode": "legacy",
+        "locale": "ru",
+        "passed": true,
+        "diskUnchanged": true,
+        "fallback": "api-1.40-raw-properties"
+      }
+    ]
+  },
+  "pending": [
+    "Other bindings and control palettes",
+    "Additional availability and resolved style provenance",
+    "Windows native acceptance"
+  ]
+}

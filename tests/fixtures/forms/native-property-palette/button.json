@@ -1,0 +1,566 @@
+{
+  "schemaVersion": 1,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "baseRows": 35,
+  "manualBothRows": 37,
+  "types": {
+    "UsualButton": {
+      "en-US": "Common button",
+      "ru-RU": "Обычная кнопка"
+    },
+    "Hyperlink": {
+      "en-US": "Hyperlink",
+      "ru-RU": "Гиперссылка"
+    },
+    "CommandBarButton": {
+      "en-US": "Command bar button",
+      "ru-RU": "Кнопка командной панели"
+    },
+    "CommandBarHyperlink": {
+      "en-US": "Command bar hyperlink",
+      "ru-RU": "Гиперссылка командной панели"
+    }
+  },
+  "categoryLabels": {
+    "main": {
+      "en-US": "General",
+      "ru-RU": "Основные"
+    },
+    "usage": {
+      "en-US": "Use",
+      "ru-RU": "Использование"
+    },
+    "appearance": {
+      "en-US": "Appearance",
+      "ru-RU": "Оформление"
+    },
+    "layout": {
+      "en-US": "Layout",
+      "ru-RU": "Расположение"
+    }
+  },
+  "rows": [
+    {
+      "nativeKey": "Name",
+      "category": "main",
+      "editor": "text",
+      "sourcePresence": "attribute",
+      "label": {
+        "en-US": "Name",
+        "ru-RU": "Имя"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "Title",
+      "category": "main",
+      "editor": "localized",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Title",
+        "ru-RU": "Заголовок"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "Type",
+      "category": "main",
+      "editor": "enum",
+      "sourcePresence": "property",
+      "label": {
+        "en-US": "Type",
+        "ru-RU": "Вид"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "CommandName",
+      "category": "main",
+      "editor": "reference",
+      "sourcePresence": "property",
+      "label": {
+        "en-US": "CommandName",
+        "ru-RU": "ИмяКоманды"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "Visible",
+      "category": "main",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Visible",
+        "ru-RU": "Видимость"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "UserVisibility",
+      "category": "main",
+      "editor": "dialog",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "User visibility",
+        "ru-RU": "Пользовательская видимость"
+      },
+      "displayValue": {
+        "en-US": "Open",
+        "ru-RU": "Открыть"
+      }
+    },
+    {
+      "nativeKey": "Enabled",
+      "category": "main",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Enabled",
+        "ru-RU": "Доступность"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "Representation",
+      "category": "main",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Representation",
+        "ru-RU": "Отображение"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "Picture",
+      "category": "main",
+      "editor": "picture",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Picture",
+        "ru-RU": "Картинка"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "DefaultButton",
+      "category": "main",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "DefaultButton",
+        "ru-RU": "КнопкаПоУмолчанию"
+      },
+      "displayValue": {
+        "en-US": false,
+        "ru-RU": false
+      }
+    },
+    {
+      "nativeKey": "SkipOnInput",
+      "category": "main",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "SkipOnInput",
+        "ru-RU": "ПропускатьПриВводе"
+      },
+      "displayValue": {
+        "en-US": "Default",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "DefaultItem",
+      "category": "main",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "DefaultItem",
+        "ru-RU": "АктивизироватьПоУмолчанию"
+      },
+      "displayValue": {
+        "en-US": false,
+        "ru-RU": false
+      }
+    },
+    {
+      "nativeKey": "Check",
+      "category": "main",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Check",
+        "ru-RU": "Пометка"
+      },
+      "displayValue": {
+        "en-US": false,
+        "ru-RU": false
+      }
+    },
+    {
+      "nativeKey": "RepresentationInContextMenu",
+      "category": "main",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Display in context menu",
+        "ru-RU": "Отображение в контекстном меню"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "DisplayImportance",
+      "category": "main",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "DisplayImportance",
+        "ru-RU": "ВажностьПриОтображении"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "LocationInCommandBar",
+      "category": "main",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "LocationInCommandBar",
+        "ru-RU": "ПоложениеВКоманднойПанели"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "CommandUniqueness",
+      "category": "main",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "CommandUniqueness",
+        "ru-RU": "УникальностьКоманды"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "OnMainServerUnavailableBehavior",
+      "category": "main",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnMainServerUnavalableBehavior",
+        "ru-RU": "ПоведениеПриНедоступностиОсновногоСервера"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "ToolTipRepresentation",
+      "category": "usage",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ToolTipRepresentation",
+        "ru-RU": "ОтображениеПодсказки"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "BackColor",
+      "category": "appearance",
+      "editor": "color",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "BackColor",
+        "ru-RU": "ЦветФона"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "TextColor",
+      "category": "appearance",
+      "editor": "color",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "TextColor",
+        "ru-RU": "ЦветТекста"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "BorderColor",
+      "category": "appearance",
+      "editor": "color",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "BorderColor",
+        "ru-RU": "ЦветРамки"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "Font",
+      "category": "appearance",
+      "editor": "font",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Font",
+        "ru-RU": "Шрифт"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "Shape",
+      "category": "appearance",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Shape",
+        "ru-RU": "Фигура"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "ShapeRepresentation",
+      "category": "appearance",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ShapeRepresentation",
+        "ru-RU": "ОтображениеФигуры"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "PictureLocation",
+      "category": "appearance",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "PictureLocation",
+        "ru-RU": "ПоложениеКартинки"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "Width",
+      "category": "layout",
+      "editor": "number",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Width",
+        "ru-RU": "Ширина"
+      },
+      "displayValue": {
+        "en-US": 0,
+        "ru-RU": 0
+      }
+    },
+    {
+      "nativeKey": "Height",
+      "category": "layout",
+      "editor": "number",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Height",
+        "ru-RU": "Высота"
+      },
+      "displayValue": {
+        "en-US": 0,
+        "ru-RU": 0
+      }
+    },
+    {
+      "nativeKey": "AutoMaxWidth",
+      "category": "layout",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "AutoMaxWidth",
+        "ru-RU": "АвтоМаксимальнаяШирина"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "MaxWidth",
+      "category": "layout",
+      "editor": "number",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "MaxWidth",
+        "ru-RU": "МаксимальнаяШирина"
+      },
+      "displayValue": {
+        "en-US": 0,
+        "ru-RU": 0
+      },
+      "when": "manualWidth"
+    },
+    {
+      "nativeKey": "AutoMaxHeight",
+      "category": "layout",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "AutoMaxHeight",
+        "ru-RU": "АвтоМаксимальнаяВысота"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "MaxHeight",
+      "category": "layout",
+      "editor": "number",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "MaxHeight",
+        "ru-RU": "МаксимальнаяВысота"
+      },
+      "displayValue": {
+        "en-US": 0,
+        "ru-RU": 0
+      },
+      "when": "manualHeight"
+    },
+    {
+      "nativeKey": "TitleHeight",
+      "category": "layout",
+      "editor": "number",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "TitleHeight",
+        "ru-RU": "ВысотаЗаголовка"
+      },
+      "displayValue": {
+        "en-US": 0,
+        "ru-RU": 0
+      }
+    },
+    {
+      "nativeKey": "HorizontalAlignInGroup",
+      "category": "layout",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "HorizontalAlignInGroup",
+        "ru-RU": "ГоризонтальноеПоложениеВГруппе"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "VerticalAlignInGroup",
+      "category": "layout",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "VerticalAlignInGroup",
+        "ru-RU": "ВертикальноеПоложениеВГруппе"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "HorizontalStretch",
+      "category": "layout",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "HorizontalStretch",
+        "ru-RU": "РастягиватьПоГоризонтали"
+      },
+      "displayValue": {
+        "en-US": false,
+        "ru-RU": false
+      }
+    },
+    {
+      "nativeKey": "VerticalStretch",
+      "category": "layout",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "VerticalStretch",
+        "ru-RU": "РастягиватьПоВертикали"
+      },
+      "displayValue": {
+        "en-US": false,
+        "ru-RU": false
+      }
+    }
+  ]
+}

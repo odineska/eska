@@ -24,6 +24,197 @@ fn native_basic_fixture_uses_horizontal_group_and_vertical_form_defaults() {
 }
 
 #[test]
+fn untitled_label_decoration_keeps_its_name_only_as_source_identity() {
+    let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"><ChildItems>
+        <LabelDecoration name="Spacer" id="1"><Width>2</Width></LabelDecoration>
+        <LabelDecoration name="Hint" id="2"><Title>Help text</Title></LabelDecoration>
+        <Button name="Action" id="3"/>
+    </ChildItems></Form>"#;
+    let document = parse("label-caption", xml.into()).unwrap();
+    let form = compose(&document, &[]);
+    assert_eq!(form.root.children[0].name.as_deref(), Some("Spacer"));
+    let view = present(&form, &[document], &[]);
+    let captions: Vec<_> = view.elements[1..]
+        .iter()
+        .map(|item| match &item.caption {
+            PresentationText::Name { text } => text.as_str(),
+            _ => panic!("expected a scalar caption"),
+        })
+        .collect();
+    assert_eq!(captions, ["", "Help text", "Action"]);
+}
+
+#[test]
+fn designer_choice_list_uses_caption_inside_the_typed_value_wrapper() {
+    let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:foreign="urn:foreign">
+        <ChildItems><RadioButtonField name="Choice" id="1"><ChoiceList>
+            <xr:Item>
+                <xr:Presentation/><xr:CheckState>0</xr:CheckState>
+                <xr:Value xsi:type="FormChoiceListDesTimeValue">
+                    <foreign:Presentation>Foreign caption</foreign:Presentation>
+                    <Presentation>
+                        <v8:item><v8:lang>ru</v8:lang><v8:content>Первый</v8:content></v8:item>
+                        <v8:item><v8:lang>en</v8:lang><v8:content>First</v8:content></v8:item>
+                    </Presentation>
+                    <Value xsi:type="xs:decimal">0</Value>
+                </xr:Value>
+            </xr:Item>
+            <xr:Item>
+                <xr:Presentation/><xr:CheckState>0</xr:CheckState>
+                <xr:Value xsi:type="FormChoiceListDesTimeValue">
+                    <Presentation/>
+                    <Value xsi:type="xs:string">10m</Value>
+                </xr:Value>
+            </xr:Item>
+            <Item><Presentation>Other</Presentation></Item>
+        </ChoiceList></RadioButtonField></ChildItems>
+    </Form>"#;
+    let document = parse("choice-list", xml.into()).unwrap();
+    let view = present(&compose(&document, &[]), &[document], &[]);
+    let choices = serde_json::to_value(&view.elements[1].choices).unwrap();
+    assert_eq!(
+        choices,
+        serde_json::json!([
+            {"kind": "literal", "items": [
+                {"language": "ru", "content": "Первый"},
+                {"language": "en", "content": "First"}
+            ]},
+            {"kind": "name", "text": "10m"},
+            {"kind": "name", "text": "Other"}
+        ])
+    );
+}
+
+#[test]
+fn standalone_command_bar_uses_the_declared_table_and_its_exclusions() {
+    let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:v8="http://v8.1c.ru/8.1/data/core"
+        xmlns:foreign="urn:foreign">
+        <ChildItems>
+            <CommandBar name="Separate" id="1">
+                <CommandSource>Item.Rows</CommandSource>
+                <ChildItems>
+                    <Button name="Find" id="2"><CommandName>Form.Item.Rows.StandardCommand.Find</CommandName></Button>
+                    <Button name="Cancel" id="3"><CommandName>Form.Item.Rows.StandardCommand.CancelSearch</CommandName></Button>
+                </ChildItems>
+            </CommandBar>
+            <Table name="Rows" id="4"><DataPath>Rows</DataPath>
+                <AutoCommandBar name="RowsBar" id="5"><Autofill>false</Autofill></AutoCommandBar>
+                <CommandSet>
+                    <ExcludedCommand>Add</ExcludedCommand>
+                    <ExcludedCommand>MoveDown</ExcludedCommand>
+                    <ExcludedCommand>Find</ExcludedCommand>
+                    <foreign:ExcludedCommand>MoveUp</foreign:ExcludedCommand>
+                </CommandSet>
+                <ChildItems><ColumnGroup name="Columns" id="6"><ChildItems>
+                    <InputField name="Hidden" id="7"><Visible>false</Visible></InputField>
+                </ChildItems></ColumnGroup></ChildItems>
+            </Table>
+        </ChildItems>
+        <Attributes><Attribute name="Rows" id="1"><Type><v8:Type>v8:ValueTable</v8:Type></Type></Attribute></Attributes>
+    </Form>"#;
+    for (xml, own_commands, projected_commands, find_displayed) in [
+        (xml.to_owned(), false, true, false),
+        (
+            xml.replace("<Autofill>false</Autofill>", ""),
+            true,
+            true,
+            false,
+        ),
+        (
+            xml.replace(
+                r#"<InputField name="Hidden" id="7"><Visible>false</Visible></InputField>"#,
+                "",
+            ),
+            false,
+            false,
+            false,
+        ),
+        (xml.replace("Item.Rows", "Item.Missing"), false, false, true),
+    ] {
+        let document = parse("command-source", xml).unwrap();
+        let form = compose(&document, &[]);
+        let view = present(&form, &[document], &[]);
+        let element = |id| {
+            view.elements
+                .iter()
+                .find(|item| item.identity.key == super::super::ElementKey::Xml(id))
+                .unwrap()
+        };
+        let assert_commands = |item: &ElementPresentation, present| {
+            let keys: Vec<_> = item
+                .auto_command_items
+                .iter()
+                .map(|command| command.key.as_str())
+                .collect();
+            let expected: &[&str] = if present {
+                &["Table.StandardCommand.MoveUp"]
+            } else {
+                &[]
+            };
+            assert_eq!(keys, expected);
+        };
+        assert_commands(element(1), projected_commands);
+        assert_commands(element(4), own_commands);
+        assert_eq!(element(2).displayed, find_displayed);
+        assert!(element(3).displayed);
+    }
+}
+
+#[test]
+fn dynamic_list_without_search_string_offers_find_actions_in_both_bars() {
+    let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:v8="http://v8.1c.ru/8.1/data/core"
+        xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <ChildItems>
+            <CommandBar name="Separate" id="1"><CommandSource>Item.Rows</CommandSource></CommandBar>
+            <Table name="Rows" id="2"><DataPath>Rows</DataPath>
+                <SearchStringLocation>None</SearchStringLocation>
+                <SearchStringAddition name="Search" id="3"><Visible>false</Visible></SearchStringAddition>
+                <ChildItems><InputField name="Text" id="4"/></ChildItems>
+            </Table>
+        </ChildItems>
+        <Attributes><Attribute name="Rows" id="1"><Type><v8:Type>cfg:DynamicList</v8:Type></Type></Attribute></Attributes>
+    </Form>"#;
+    for (input, expected) in [
+        (
+            xml.to_owned(),
+            &["Create", "Copy", "Find", "CancelSearch"][..],
+        ),
+        (
+            xml.replace(
+                "<SearchStringLocation>None",
+                "<SearchStringLocation>CommandBar",
+            ),
+            &["Create", "Copy"][..],
+        ),
+        (
+            xml.replace("cfg:DynamicList", "v8:ValueTable"),
+            &["Add", "MoveUp", "MoveDown"][..],
+        ),
+    ] {
+        let document = parse("dynamic-list-commands", input).unwrap();
+        let view = present(&compose(&document, &[]), &[document], &[]);
+        for id in [1, 2] {
+            let item = view
+                .elements
+                .iter()
+                .find(|item| item.identity.key == super::super::ElementKey::Xml(id))
+                .unwrap();
+            let names: Vec<_> = item
+                .auto_command_items
+                .iter()
+                .filter_map(|command| command.key.strip_prefix("Table.StandardCommand."))
+                .collect();
+            assert_eq!(names, expected);
+        }
+    }
+}
+
+#[test]
 fn input_value_and_title_use_distinct_style_roles_without_losing_overrides() {
     let document=parse("colors",format!("<Form xmlns=\"{}\"><ChildItems><InputField name=\"Default\" id=\"1\"/><InputField name=\"Explicit\" id=\"2\"><TextColor>#0000ff</TextColor><TitleTextColor>#ff0000</TitleTextColor></InputField><Button name=\"Action\" id=\"3\"/></ChildItems></Form>",super::super::FORM_NAMESPACE)).unwrap();
     let view = present(&compose(&document, &[]), &[document], &[]);

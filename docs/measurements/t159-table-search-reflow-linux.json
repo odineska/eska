@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "task": "T159",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11, 96 DPI",
+  "nativeBuild": "8.3.27.2342",
+  "zoom": 100,
+  "comparisonMasks": [],
+  "pixelTolerance": 0,
+  "fixture": "tests/fixtures/forms/native-table-search-reflow/metrics.json",
+  "fixtureSha256": "d3a01d4481d0ec571b7163ca09b92f6f34fe36a23ce50091dd2d9a40b6c4b043",
+  "scope": "Complete 260 by 23 toolbar search controls in the wide installed workbench, before and after preview viewport reflow.",
+  "native": {
+    "defaultProbe": "table-search-reflow-is9o3kml",
+    "contextProbe": "table-search-sources-w67yura5",
+    "sameXml": true,
+    "noBsl": true,
+    "initialPixels": 11,
+    "reflowedPixels": 13,
+    "behavior": [
+      "Selection and a click on the splitter keep the initial appearance.",
+      "Actual preview viewport resizing switches to the settled appearance, including maximization.",
+      "Closing and opening the editor starts a new appearance state; returning to an already open editor preserves it.",
+      "The measured Top fields retain the settled appearance from their first frame."
+    ],
+    "limitation": "The first-open DynamicList native capture is available in en. Additional ru source probes ended before the form screenshot because the native input driver could not reliably activate the form."
+  },
+  "implementation": {
+    "stateOwner": "Local preview viewport",
+    "publicProtocolChanged": false,
+    "raster": "Shared font raster, input corners, separator and clear glyph.",
+    "onlyChangedOuterViewport": true
+  },
+  "earlierComparison": {
+    "batch": "form-batch-QEWyu4",
+    "expectedWidth": 172,
+    "observedWidth": 260,
+    "resolution": "Use the previously measured complete 260px widget for the wide workbench, keep the separate native-width and complete toolbar comparisons."
+  },
+  "artifact": {
+    "batch": "form-batch-688Yh5",
+    "vsixSha256": "1ef05518283b6cc695c8f33be1bd71b192a5ee7158621b805b81c8fd9b5d6365",
+    "backendSha256": "33bdd9641f13b818ab1f94da57bc80ed6115be3e0f3928d9e200007f9331c501",
+    "runtimeManifestSha256": "b017d4167240e032dd3eef71048dfa42070e1857469af56be9acc3ce01572f68",
+    "runtimeFiles": 1303,
+    "explorerCommit": "c625e54036f42dbde1f6a74654f7cdfe58022081",
+    "preflightCommit": "dd6cd36fd70cd4612aa8dc385cb75a3531634f58",
+    "preflightTrackedInputsMatchCommittedBytes": true
+  },
+  "acceptance": {
+    "pairs": 4,
+    "driverCases": 131,
+    "wideWidgetCrops": 15,
+    "wideWidgetPixels": 89700,
+    "detachedWideWidgetCrops": 2,
+    "keptWholeToolbars": 12,
+    "sourceWritesDuringViewing": false,
+    "resize": {
+      "en": 31,
+      "ru": 31
+    },
+    "scenarios": {
+      "en": {
+        "cases": 35,
+        "keptGridAndToolbarCases": 27,
+        "measurements": [
+          {
+            "label": "Default-search-first",
+            "fontPixels": 11,
+            "region": [
+              2126,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "61ab652b841713e5097b994fb2427dadaa1a7f03e8fce8b40b06aac8621e9f97",
+            "nativeScreenshotSha256": "1725d959be4016d0eb3c471ca4a1019b4016aa8c54b84db3c52b72eede2cb547",
+            "rgbSha256": "e6e175556f1361442f7b6cd6d2dd4b72cc48c4ca5c60a7a5e06fe7c51c58580c",
+            "detached": false
+          },
+          {
+            "label": "Default-search-selected",
+            "fontPixels": 11,
+            "region": [
+              2126,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "c196a7365f75a86c3fe9d7b0dbe6e4f2757ddc93201b4ef1bf7cff8487d190ad",
+            "nativeScreenshotSha256": "1725d959be4016d0eb3c471ca4a1019b4016aa8c54b84db3c52b72eede2cb547",
+            "rgbSha256": "e6e175556f1361442f7b6cd6d2dd4b72cc48c4ca5c60a7a5e06fe7c51c58580c",
+            "detached": false
+          },
+          {
+            "label": "Default-search-resized",
+            "fontPixels": 13,
+            "region": [
+              2126,
+              377,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "6e12050636bae7dc4ddb980c78af60b635633efe8687e15feaa7b9c6e1253542",
+            "nativeScreenshotSha256": "cdab26b81aa496fd85d13af3f51337744e7d21bf87714d5d6ef3c678e2ce182c",
+            "rgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+            "detached": false
+          },
+          {
+            "label": "Default-search-restored",
+            "fontPixels": 13,
+            "region": [
+              2126,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "d16d85f4c9248bbda839003282a44f466264188ca142e8f724d5713546e77f13",
+            "nativeScreenshotSha256": "cdab26b81aa496fd85d13af3f51337744e7d21bf87714d5d6ef3c678e2ce182c",
+            "rgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+            "detached": false
+          },
+          {
+            "label": "floating-search-first",
+            "fontPixels": 11,
+            "region": [
+              590,
+              152,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "56d5430be5b2d8690d2164b7a9885512b49a2c3e1c056aac9255cdc9af9cdc77",
+            "nativeScreenshotSha256": "1725d959be4016d0eb3c471ca4a1019b4016aa8c54b84db3c52b72eede2cb547",
+            "rgbSha256": "e6e175556f1361442f7b6cd6d2dd4b72cc48c4ca5c60a7a5e06fe7c51c58580c",
+            "detached": true
+          },
+          {
+            "label": "ReadOnly-search-first",
+            "fontPixels": 11,
+            "region": [
+              2126,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "470d2fa2bd479ae3b963ba3b1b9e4b9a74b00c6f89cccee67ba1ef97763eaa06",
+            "nativeScreenshotSha256": "1725d959be4016d0eb3c471ca4a1019b4016aa8c54b84db3c52b72eede2cb547",
+            "rgbSha256": "e6e175556f1361442f7b6cd6d2dd4b72cc48c4ca5c60a7a5e06fe7c51c58580c",
+            "detached": false
+          },
+          {
+            "label": "MetadataTable-search-first",
+            "fontPixels": 11,
+            "region": [
+              2126,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "c6cbf5b0fbb38ccde4051431ad529e4721bef36a219d069832f14612c58dc313",
+            "nativeScreenshotSha256": "1725d959be4016d0eb3c471ca4a1019b4016aa8c54b84db3c52b72eede2cb547",
+            "rgbSha256": "e6e175556f1361442f7b6cd6d2dd4b72cc48c4ca5c60a7a5e06fe7c51c58580c",
+            "detached": false
+          },
+          {
+            "label": "DynamicList-search-first",
+            "fontPixels": 11,
+            "region": [
+              2075,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "63fbc0bc75d726b60c1d282520f70716b0a81d6515a628687d5ec30fbd5d761b",
+            "nativeScreenshotSha256": "1725d959be4016d0eb3c471ca4a1019b4016aa8c54b84db3c52b72eede2cb547",
+            "rgbSha256": "e6e175556f1361442f7b6cd6d2dd4b72cc48c4ca5c60a7a5e06fe7c51c58580c",
+            "detached": false
+          }
+        ],
+        "receiptSha256": "88a9c5acbc70e85589596fe900481ee4e15f79ebcc81b9fc865e3f0d05395e5b"
+      },
+      "ru": {
+        "cases": 34,
+        "keptGridAndToolbarCases": 27,
+        "measurements": [
+          {
+            "label": "Default-search-first",
+            "fontPixels": 11,
+            "region": [
+              2174,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "d42d098df8f4bb2a583ba92799db0bd90ba2c006cbc99c2f771e4c80f4a7ba6a",
+            "nativeScreenshotSha256": "48713ccf40610e945129abeee70c0f90df5ef80d6dcd44d02ca9b258de90f3bf",
+            "rgbSha256": "a4b2402b50f37a9bc7e9c79dc3f4e2dd5da15241007d8030ae1b3f98a4c0d26d",
+            "detached": false
+          },
+          {
+            "label": "Default-search-selected",
+            "fontPixels": 11,
+            "region": [
+              2174,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "9938747ebf43b1ff202d90bd37cca075ad3a5b4dabd48b29aac60db779871558",
+            "nativeScreenshotSha256": "48713ccf40610e945129abeee70c0f90df5ef80d6dcd44d02ca9b258de90f3bf",
+            "rgbSha256": "a4b2402b50f37a9bc7e9c79dc3f4e2dd5da15241007d8030ae1b3f98a4c0d26d",
+            "detached": false
+          },
+          {
+            "label": "Default-search-resized",
+            "fontPixels": 13,
+            "region": [
+              2174,
+              377,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "4702142f1660b8c8be1da99cd768a7880998071cabab97c4cedef05585218611",
+            "nativeScreenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb",
+            "rgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+            "detached": false
+          },
+          {
+            "label": "Default-search-restored",
+            "fontPixels": 13,
+            "region": [
+              2174,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "afca6257552d8411fffa5fae4cc5a78dc88b659f99769a9d8e9bc3b4dc7bb82e",
+            "nativeScreenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb",
+            "rgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+            "detached": false
+          },
+          {
+            "label": "floating-search-first",
+            "fontPixels": 11,
+            "region": [
+              638,
+              152,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "e0e3c102f3ecdcbea1f716090b62877b4a2723e69ea6592709e7543772938c05",
+            "nativeScreenshotSha256": "48713ccf40610e945129abeee70c0f90df5ef80d6dcd44d02ca9b258de90f3bf",
+            "rgbSha256": "a4b2402b50f37a9bc7e9c79dc3f4e2dd5da15241007d8030ae1b3f98a4c0d26d",
+            "detached": true
+          },
+          {
+            "label": "ReadOnly-search-first",
+            "fontPixels": 11,
+            "region": [
+              2174,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "f9e90f4d38941471ef2b299044d41b64d6b9ef8e1710571164fc820a7eb11c1b",
+            "nativeScreenshotSha256": "48713ccf40610e945129abeee70c0f90df5ef80d6dcd44d02ca9b258de90f3bf",
+            "rgbSha256": "a4b2402b50f37a9bc7e9c79dc3f4e2dd5da15241007d8030ae1b3f98a4c0d26d",
+            "detached": false
+          },
+          {
+            "label": "MetadataTable-search-first",
+            "fontPixels": 11,
+            "region": [
+              2174,
+              387,
+              260,
+              23
+            ],
+            "exactPixels": 5980,
+            "screenshotSha256": "8aaf8580e9113f98a2fceec232b641ee5ffd90f1289c1b242ad74cd3bbbb71d6",
+            "nativeScreenshotSha256": "48713ccf40610e945129abeee70c0f90df5ef80d6dcd44d02ca9b258de90f3bf",
+            "rgbSha256": "a4b2402b50f37a9bc7e9c79dc3f4e2dd5da15241007d8030ae1b3f98a4c0d26d",
+            "detached": false
+          }
+        ],
+        "receiptSha256": "1cc38fecf7656f92ade79e5d492dbbca2f57f2295e49e4cdc02a9c2802d2b4be"
+      }
+    }
+  },
+  "remaining": [
+    "Full initial compact toolbars and their layouts, including source-specific narrow widths.",
+    "Additional palettes, fonts, states, display profiles and Windows."
+  ]
+}

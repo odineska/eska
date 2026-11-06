@@ -1,0 +1,708 @@
+{
+  "schemaVersion": 1,
+  "task": "T158",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11, 96 DPI",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "fixture": "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml",
+  "fixtureSha256": "68bc20e1c512d4f81572cb741e3d89d66f124039ff12fd9762686a682a4cc812",
+  "native": {
+    "blank": {
+      "stand": "tumbler-paint-laaactaf",
+      "guiLocale": "en",
+      "forms": [
+        {
+          "form": "TumblerBlank",
+          "formSha256": "a6f67e7446d7110c5120df7f4d33cdd2551beb8aed5efad4eb3b4409d37748da",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": null,
+            "appearance": "",
+            "backdrop": null,
+            "blankCaptions": true
+          },
+          "captureSha256": "75369b0b221aa1b55b7c1cd97974762ed0b69d6f86429cb29286445d5f63cce5"
+        },
+        {
+          "form": "TumblerNarrow",
+          "formSha256": "65b969030770e08ca3dea8553401535bcef00116702e13bd31001746afe8cb3f",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 1,
+            "height": null,
+            "appearance": "",
+            "backdrop": null,
+            "blankCaptions": true
+          },
+          "captureSha256": "720dd2c6aead7c782424fb6df0c7c83337ad2fbaa7f831847b118c3ac67d1ab3"
+        },
+        {
+          "form": "TumblerOne",
+          "formSha256": "d847c3d73306a6146363813dbe54911c8791d5aa12ed78839d64c29a022f6c5f",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": 1,
+            "appearance": "",
+            "backdrop": null,
+            "blankCaptions": true
+          },
+          "captureSha256": "3cb8901dec47d532e6ccff6013eb8449369678b8907502c03df5073c1daffd81"
+        },
+        {
+          "form": "TumblerTwo",
+          "formSha256": "6a67cfbf597f2b1cac58301e7fa48f3b653fe20f8cdfe636c8e33155122b09c1",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": 2,
+            "appearance": "",
+            "backdrop": null,
+            "blankCaptions": true
+          },
+          "captureSha256": "3bb326b79d29b9ab7157d067e6de765e05fcc02fc7cc14efd7dc8a0dab4c8f3c"
+        },
+        {
+          "form": "TumblerThree",
+          "formSha256": "45e51d33471af7ef598dedeb1f8d12e09938efcf5eaf30233c3867910f545c2d",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": 3,
+            "appearance": "",
+            "backdrop": null,
+            "blankCaptions": true
+          },
+          "captureSha256": "c421d9c1e343fc6b8dd2c9fdad4a961b25f0739f640b598d7771a84f89db17da"
+        },
+        {
+          "form": "TumblerLargeFont",
+          "formSha256": "8a382902a658d84dac3c3c325f9b6bfef0f20353bce3a84c6e806512a1d5b8ac",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": null,
+            "appearance": "<Font ref=\"sys:DefaultGUIFont\" height=\"16\" bold=\"true\" kind=\"WindowsFont\"/>",
+            "backdrop": null,
+            "blankCaptions": true
+          },
+          "captureSha256": "52dbffc2d114853b3afde3b1ec98b104171a7cdb32c640905c37ce3d2f3b4463"
+        },
+        {
+          "form": "TumblerGreen",
+          "formSha256": "71c3b4dc6a6dacc8af2339ccb5073e336c01d9479f452020cb2aa131ee484ebf",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": null,
+            "appearance": "<BackColor>web:LightGreen</BackColor>",
+            "backdrop": null,
+            "blankCaptions": true
+          },
+          "captureSha256": "c700005e2aff1190f02e727c81adf363f911c9263ff450d49fb014c15b6b4bac"
+        },
+        {
+          "form": "TumblerGreenTwo",
+          "formSha256": "78e2a523be906e5b2e95754bcb89438cd0b93e9a54d8e7a1b71d1bde0f8fd8fa",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": 2,
+            "appearance": "<BackColor>web:LightGreen</BackColor>",
+            "backdrop": null,
+            "blankCaptions": true
+          },
+          "captureSha256": "eae88527ec0e0571b65fae2dfd7ab37c2972bce1d0e92a890e4e3aec1052db71"
+        },
+        {
+          "form": "TumblerBlue",
+          "formSha256": "64ecd8373c09c8368045e0884bb9cd15b496d146934f1a6c14c5b3252659487e",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": null,
+            "appearance": "<BackColor>#2266CC</BackColor><BorderColor>web:Red</BorderColor>",
+            "backdrop": null,
+            "blankCaptions": true
+          },
+          "captureSha256": "6f123256a12a59066d59a70d64945c99ee100d8fee946b6a67b7f1c8c68a84bd"
+        },
+        {
+          "form": "TumblerBlack",
+          "formSha256": "1ad4b2dc36f61b222caa3cba20d19c6cc9025155ecdfa2f925ce9b9f9fba8041",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": null,
+            "appearance": "<BackColor>web:Black</BackColor>",
+            "backdrop": null,
+            "blankCaptions": true
+          },
+          "captureSha256": "1980b50591804c7ce8bdc8b201748ea170af3b5ddf4684b591f5e842b73c275d"
+        },
+        {
+          "form": "TumblerDarkParent",
+          "formSha256": "eb466f58850394bdd2c6e119855f1276216a97b12a997ff95099087a8c560211",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": null,
+            "appearance": "",
+            "backdrop": "web:Black",
+            "blankCaptions": true
+          },
+          "captureSha256": "467e12e9635989f955ce8dd9aa877d61182daccd3a505759b046f974f89e9b25"
+        },
+        {
+          "form": "TumblerColorParent",
+          "formSha256": "6a1a44540cbd9493e283478bfc33bb12ea2b24b9d8a06f8a1aceaf0acffd80aa",
+          "settings": {
+            "mode": "Tumbler",
+            "width": 12,
+            "height": null,
+            "appearance": "<BackColor>web:LightGreen</BackColor>",
+            "backdrop": "#2266CC",
+            "blankCaptions": true
+          },
+          "captureSha256": "f0371a87b06d4627a049e7bfe8ad7ded484e043ce06db4a8952e7d645ef3fbd5"
+        }
+      ]
+    },
+    "neutral": {
+      "stand": "tumbler-color-grid-ne_m1dlf",
+      "guiLocale": "en",
+      "forms": [
+        {
+          "form": "GrayLow",
+          "formSha256": "0d9b100951c97c90e58a395d821192315fcf19e9ee7a08588daaa95a54ff3ffe",
+          "settings": {
+            "low": 0,
+            "columns": 16,
+            "large": false
+          },
+          "captureSha256": "f8eb13f08de3ea373e20dae7601e67ba51f9c6a0a3e56e91d2c15e915b8de128"
+        },
+        {
+          "form": "GrayHigh",
+          "formSha256": "ea0a73fc6b79d4e85bcfa08e60c02dcad1fdd3abaa58111647160c522b9ea2cf",
+          "settings": {
+            "low": 128,
+            "columns": 16,
+            "large": false
+          },
+          "captureSha256": "2d396af58584740f903c70c802a6fa4ddb310ca3760c333831cffe49c7845776"
+        },
+        {
+          "form": "GrayLargeLow",
+          "formSha256": "d66d3ef47ddeb43f68697a364669d4de59fb6ebbaf2d15d1cf40c42d283cf4bf",
+          "settings": {
+            "low": 0,
+            "columns": 32,
+            "large": true
+          },
+          "captureSha256": "8d918f871e59bed087a5c05f91c6ba5f893d2bec492ccec2c304f5f214ea2072"
+        },
+        {
+          "form": "GrayLargeHigh",
+          "formSha256": "a7819459926495994ffeb828935e50be410a6b408a903cf6c3096b4f147c9bef",
+          "settings": {
+            "low": 128,
+            "columns": 32,
+            "large": true
+          },
+          "captureSha256": "55856f0fd97f08a00a70d5f9dc3686c136773a5200efabbbc89935ce46a63299"
+        },
+        {
+          "form": "Width",
+          "formSha256": "bc5b458cbabeb81a148310326865bd29c63fd1c8173e7f247879a7c7b1f73b7f",
+          "settings": {
+            "widths": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "height": null
+          },
+          "captureSha256": "d79d97e44092c4ba98fc5d42b0ea3766097febfbb30603a53b8f3b2ddbbe09a9"
+        },
+        {
+          "form": "WidthTwo",
+          "formSha256": "cb98b6ed624527a8b074365e88eb352da5f87e1c706d8a2ab6c07ccff34f0942",
+          "settings": {
+            "widths": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ],
+            "height": 2
+          },
+          "captureSha256": "54110a66bbeb873d346e51badb7670a7ce66ab4dc386e63698130b101ccf0172"
+        }
+      ]
+    },
+    "chromatic": {
+      "stand": "tumbler-chromatic-4906cuey",
+      "guiLocale": "en",
+      "forms": [
+        {
+          "form": "ChromaticDefault",
+          "formSha256": "07baefb6000d6eca0d7a260a4f1d3c24920f91fd495b4a2b548db1e3c3f7a37e",
+          "settings": {
+            "points": 10,
+            "columns": 32,
+            "colorCount": 128,
+            "colorSequence": "r=i, g=(73i+33) mod 256, b=(117i+101) mod 256"
+          },
+          "captureSha256": "8dcefff90cda031d3453d6a72f0b8b45527a9a16f91fc7696c8512deb9d8f85b"
+        },
+        {
+          "form": "ChromaticSmall",
+          "formSha256": "a58d18f5ed736c9b7b101dd3c64ecb6b609e6f1a08dddd0fdd1609ee2e5f8037",
+          "settings": {
+            "points": 8,
+            "columns": 32,
+            "colorCount": 128,
+            "colorSequence": "r=i, g=(73i+33) mod 256, b=(117i+101) mod 256"
+          },
+          "captureSha256": "2804e2da849e9818625b242a8ea51cf37543ba7181fcd08ef003f17d29c4845f"
+        },
+        {
+          "form": "ChromaticMedium",
+          "formSha256": "4b508317d974eca148dbc92b1d46e04e171b9d214fbb0b60f3ee5d1b5045194e",
+          "settings": {
+            "points": 12,
+            "columns": 32,
+            "colorCount": 128,
+            "colorSequence": "r=i, g=(73i+33) mod 256, b=(117i+101) mod 256"
+          },
+          "captureSha256": "6f6d30ad296265f32abeef24d5f548b1ce6113beb1d8fcf016b784eba974bee3"
+        },
+        {
+          "form": "ChromaticLarge",
+          "formSha256": "643d017201ba99d228a4ae2a7742cf9078a9755b69797515174f16d1a73bb188",
+          "settings": {
+            "points": 16,
+            "columns": 32,
+            "colorCount": 128,
+            "colorSequence": "r=i, g=(73i+33) mod 256, b=(117i+101) mod 256"
+          },
+          "captureSha256": "b6af0099511eea73561bbefded785a0d6875c1b0f5343f926960ffcba10d04db"
+        },
+        {
+          "form": "ChromaticTall",
+          "formSha256": "eae4d646c8d98bf3948e34c04eac23b080ab8e3428e6a4a1f5b499d61b55b714",
+          "settings": {
+            "points": 20,
+            "columns": 32,
+            "colorCount": 128,
+            "colorSequence": "r=i, g=(73i+33) mod 256, b=(117i+101) mod 256"
+          },
+          "captureSha256": "f906ad4fa3ea74977aaf23babedc6b73181848d6c2d1ce361619a3c590e3c837"
+        }
+      ]
+    }
+  },
+  "proceduralRgba": {
+    "groups": [
+      {
+        "group": "rasters",
+        "surfaces": 524,
+        "pixels": 454546,
+        "exact": true
+      },
+      {
+        "group": "chromatic",
+        "surfaces": 640,
+        "pixels": 468096,
+        "exact": true
+      }
+    ],
+    "surfaces": 1164,
+    "pixels": 922642,
+    "pixelTolerance": 0,
+    "blankSurfaceCount": 12,
+    "neutralColorsPerHeight": 256,
+    "chromaticColorsPerHeight": 128
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "batch": "form-batch-aEgkYl",
+    "backendCommit": "9844560ff1f1f0fa2e61dac0dff3e4aea3f23555",
+    "explorerCommit": "b844c5d52cbd0a133a4a35b81f699779a735ef72",
+    "explorerHeadAtFreeze": "fde00913a73a0ffc36dd448e8bb5ac80351cc550",
+    "explorerDirtyAtFreeze": true,
+    "committedWitnessesVerified": 497,
+    "coreWitnessesVerified": 613,
+    "vsixSha256": "7264c59226bb6a8a7a203d045ec524bdf729ca3e72814c6c69556c28ded1b17d",
+    "backendSha256": "2449274394dbef82a32dd03b060c62cd7b1df9817efb47bae958a6f111b595a1",
+    "runtimeManifestSha256": "9b93732b57adc9fbc1dfe320c84c02f225397af9e7b62d6cd3bf811a53c1e47f",
+    "runtimeFilesVerifiedPerRun": 1303
+  },
+  "checks": {
+    "typescript": true,
+    "compile": true,
+    "package": true,
+    "node": {
+      "passed": 609,
+      "skipped": 11
+    },
+    "bun": {
+      "passed": 597,
+      "skipped": 11
+    },
+    "unchangedBackendSha256Verified": true,
+    "previousRustGates": "docs/measurements/t158-checkbox-modes-linux.json"
+  },
+  "acceptance": {
+    "pairsPassed": 26,
+    "driverCases": 282,
+    "caseCountsBySuite": {
+      "renderer": {
+        "en": 20,
+        "ru": 20
+      },
+      "states": {
+        "en": 15,
+        "ru": 15
+      },
+      "property-catalogue": {
+        "en": 30,
+        "ru": 30
+      },
+      "button-types": {
+        "en": 11,
+        "ru": 11
+      },
+      "button-rows": {
+        "en": 8,
+        "ru": 8
+      },
+      "usual-buttons": {
+        "en": 18,
+        "ru": 18
+      },
+      "handlers": {
+        "en": 1,
+        "ru": 1
+      },
+      "inspectors": {
+        "en": 1,
+        "ru": 1
+      },
+      "preview": {
+        "en": 1,
+        "ru": 1
+      },
+      "detached-space": {
+        "en": 6,
+        "ru": 6
+      },
+      "composition": {
+        "en": 9,
+        "ru": 9
+      },
+      "tables": {
+        "en": 17,
+        "ru": 17
+      },
+      "application": {
+        "en": 4,
+        "ru": 4
+      }
+    },
+    "exactFaceCropCount": 12,
+    "exactFacePixels": 76920,
+    "pixelTolerance": 0,
+    "detachedCapturePairs": 2,
+    "blankFaceVariantsPerLocale": 6,
+    "existingCheckboxAndSwitchCropsStillExact": 16,
+    "comparedRegion": "Full blank tumbler face including corners, shared divider and fill.",
+    "fullFormPixelComparison": false,
+    "sourceWritesDuringApplicationViewing": false,
+    "applicationSamples": {
+      "en": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "ru": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "comparisons": [
+      {
+        "case": "face-blank",
+        "locale": "en",
+        "nativeCrop": [
+          24,
+          54,
+          243,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            243,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "75369b0b221aa1b55b7c1cd97974762ed0b69d6f86429cb29286445d5f63cce5",
+        "nativeRgbaSha256": "c169cf96e4f28cd69a89b3027f9773cfa002767aa21cb52d73bf068547042a4d",
+        "vsixCaptureSha256": "574c7ca0da35fcc925abb640903788efe646385a373c0b1197d35bb28b87a414"
+      },
+      {
+        "case": "face-blank",
+        "locale": "ru",
+        "nativeCrop": [
+          24,
+          54,
+          243,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            243,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "75369b0b221aa1b55b7c1cd97974762ed0b69d6f86429cb29286445d5f63cce5",
+        "nativeRgbaSha256": "c169cf96e4f28cd69a89b3027f9773cfa002767aa21cb52d73bf068547042a4d",
+        "vsixCaptureSha256": "a0f257b648ea12d3159fe682b8d8dfdbc88f9e31c013188ae548a4eac5671fd4"
+      },
+      {
+        "case": "face-narrow",
+        "locale": "en",
+        "nativeCrop": [
+          24,
+          54,
+          23,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            23,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "720dd2c6aead7c782424fb6df0c7c83337ad2fbaa7f831847b118c3ac67d1ab3",
+        "nativeRgbaSha256": "258506e5ea18e44cb699c273b2f02629fef4f4317f936a99d81000c4a0d88a30",
+        "vsixCaptureSha256": "c27d24a44bbe5535761dd36971722fdea798c224aa55227dd32e54e268b3d7e1"
+      },
+      {
+        "case": "face-narrow",
+        "locale": "ru",
+        "nativeCrop": [
+          24,
+          54,
+          23,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            23,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "720dd2c6aead7c782424fb6df0c7c83337ad2fbaa7f831847b118c3ac67d1ab3",
+        "nativeRgbaSha256": "258506e5ea18e44cb699c273b2f02629fef4f4317f936a99d81000c4a0d88a30",
+        "vsixCaptureSha256": "57e59b01f60e38c55165605b9fbb23b5bf73719b11cb105d7ca008619ba6964d"
+      },
+      {
+        "case": "face-tall",
+        "locale": "en",
+        "nativeCrop": [
+          24,
+          54,
+          243,
+          46
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            243,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "3bb326b79d29b9ab7157d067e6de765e05fcc02fc7cc14efd7dc8a0dab4c8f3c",
+        "nativeRgbaSha256": "71aeedd26653d0c54bbc86b69439d8725f6f7245944e0778c01b5e466702eb1b",
+        "vsixCaptureSha256": "f6a3766af031fdd14de3db8956f04e3b8609e8e8ab36d758e6474eaefdd9d42b"
+      },
+      {
+        "case": "face-tall",
+        "locale": "ru",
+        "nativeCrop": [
+          24,
+          54,
+          243,
+          46
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            243,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "3bb326b79d29b9ab7157d067e6de765e05fcc02fc7cc14efd7dc8a0dab4c8f3c",
+        "nativeRgbaSha256": "71aeedd26653d0c54bbc86b69439d8725f6f7245944e0778c01b5e466702eb1b",
+        "vsixCaptureSha256": "18a5465440a2eac52dc9dade33f3f25cf8edea1e7d6c7ef0b1c0f3f1c2487572"
+      },
+      {
+        "case": "face-large-font",
+        "locale": "en",
+        "nativeCrop": [
+          24,
+          54,
+          243,
+          38
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            243,
+            38
+          ]
+        ],
+        "nativeCaptureSha256": "52dbffc2d114853b3afde3b1ec98b104171a7cdb32c640905c37ce3d2f3b4463",
+        "nativeRgbaSha256": "fec83fe7616637c926945ab8f3ac3867b1c2ab91be57bc0c7d72fc2f5845d44b",
+        "vsixCaptureSha256": "c81967e4448269136802273ea69499c9f2d9780eb18323c216e17634bbff81af"
+      },
+      {
+        "case": "face-large-font",
+        "locale": "ru",
+        "nativeCrop": [
+          24,
+          54,
+          243,
+          38
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            243,
+            38
+          ]
+        ],
+        "nativeCaptureSha256": "52dbffc2d114853b3afde3b1ec98b104171a7cdb32c640905c37ce3d2f3b4463",
+        "nativeRgbaSha256": "fec83fe7616637c926945ab8f3ac3867b1c2ab91be57bc0c7d72fc2f5845d44b",
+        "vsixCaptureSha256": "1933c2f370702f434f2b0ed5f22f33fead5bef378ecbfa82672c0a39b94b9755"
+      },
+      {
+        "case": "face-colors",
+        "locale": "en",
+        "nativeCrop": [
+          24,
+          54,
+          243,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            243,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "6f123256a12a59066d59a70d64945c99ee100d8fee946b6a67b7f1c8c68a84bd",
+        "nativeRgbaSha256": "db2714d266bf323fdb2338a815665f5905d024dddf0e301481323de7d290f52b",
+        "vsixCaptureSha256": "280fb96a5cd6c248b057d2c73db0dcae089069aa6ed58428a9571088342f2236"
+      },
+      {
+        "case": "face-colors",
+        "locale": "ru",
+        "nativeCrop": [
+          24,
+          54,
+          243,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            243,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "6f123256a12a59066d59a70d64945c99ee100d8fee946b6a67b7f1c8c68a84bd",
+        "nativeRgbaSha256": "db2714d266bf323fdb2338a815665f5905d024dddf0e301481323de7d290f52b",
+        "vsixCaptureSha256": "86576b45ddbd79ce1c2ddf651baf90d17cea4f3d5552b3b4ed9767a3918178ab"
+      },
+      {
+        "case": "face-dark-detached",
+        "locale": "en",
+        "nativeCrop": [
+          29,
+          59,
+          243,
+          24
+        ],
+        "matches": [
+          [
+            46,
+            156,
+            243,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "467e12e9635989f955ce8dd9aa877d61182daccd3a505759b046f974f89e9b25",
+        "nativeRgbaSha256": "a90ea9871b650848a27eee81ab65afd011ad498ec41405d0576ac7f6bd385eb1",
+        "vsixCaptureSha256": "ce79681a73d1307105bb01ad695196c6f20ee14f21da43b88f645473693a199e"
+      },
+      {
+        "case": "face-dark-detached",
+        "locale": "ru",
+        "nativeCrop": [
+          29,
+          59,
+          243,
+          24
+        ],
+        "matches": [
+          [
+            46,
+            156,
+            243,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "467e12e9635989f955ce8dd9aa877d61182daccd3a505759b046f974f89e9b25",
+        "nativeRgbaSha256": "a90ea9871b650848a27eee81ab65afd011ad498ec41405d0576ac7f6bd385eb1",
+        "vsixCaptureSha256": "8f58524f6bb9bedc9e279ca9bc41241de4b3ba870ad1a0e7f580606b544afbdb"
+      }
+    ]
+  },
+  "pending": [
+    "Tumbler captions, clipping and multiline settings",
+    "Additional fill, stroke and backdrop combinations, fonts and non-default DPI",
+    "Windows native acceptance"
+  ]
+}

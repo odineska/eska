@@ -1,0 +1,1264 @@
+{
+  "schemaVersion": 1,
+  "task": "T158",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11, 96 DPI",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "fixture": "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml",
+  "fixtureSha256": "68bc20e1c512d4f81572cb741e3d89d66f124039ff12fd9762686a682a4cc812",
+  "native": {
+    "defaultModes": {
+      "stand": "checkbox-variants-lbg9skp8",
+      "formManifestSha256": "43f428788b7eff90a7625c53750232e83f9aed849442b187f5abb481956951de",
+      "probeForms": [
+        {
+          "form": "ProbeUnitedCheckVariantAuto",
+          "formSha256": "e26a437f9b95d979358541adceaefa88d382e78a0bf31a900be4d3b31bb3c7e2",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantExplicit",
+          "formSha256": "a765a4c9c46d6f1f9d796014c6dc1a73434310f3945d31ca0f8d8231a67f7387",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTriState",
+          "formSha256": "376cb556835c71298af41b1da96207439718ff26d9d28ba42818153afa7e2ab9",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantDisabled",
+          "formSha256": "b0262f0ca959afcb5ccb12a356752228574ed4159fae75586c579b8cbce46eae",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantReadOnly",
+          "formSha256": "3849749f1769a635375e7ce1f55580be7d758b53e1ba60894447f96cd565495f",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumbler",
+          "formSha256": "c6156d6cc88e49b2e942634bced26d2efe1fac5644169539e2c7a6b226d2020c",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerRight",
+          "formSha256": "504f8f415388d76e5ef1afa1c4d770cf556367e1ab5d9b2b8fb601849ea329fa",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerTop",
+          "formSha256": "8491ce70bd90f0c84023d756e87da307d10133b660794cb1f85b81c15ac8c417",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerUnequal",
+          "formSha256": "9ed0a19b05fcf783ea0f4b2df79cc8d06ea0a23ce1ea0f7da287c360df764779",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerManual",
+          "formSha256": "e3f205ec6596413b7f7eda05258e87ee4526fef61a6580f0e432b087a0559abc",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerPaint",
+          "formSha256": "b981e7b30ddd92a175f25ac6c09dfcad6932e32030aa599836ebed177d47143e",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerDisabled",
+          "formSha256": "099e2b0bb056811ea4861bdc377b6ec8a2c923668d37289b3a8dfc136e66dfcd",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerReadOnly",
+          "formSha256": "0125fb0878437dd5bdecf5fd80aa1d96bcc2fed7d3b02df395f32e8c73b598ad",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantSwitch",
+          "formSha256": "19b4e66f0b724c7a72b2a7b0c8ef21c70db4a4c6be723c8f8faa4785b14ffd77",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantSwitchTop",
+          "formSha256": "fffee2d3c41fd9e005add15ff1d62b87346b5b2d7d3db1ceb2bd5cf4f3c76c17",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantSwitchPaint",
+          "formSha256": "292e3229bf7bedfade031f1bc810776578cdaac0cc87e97e66cb098ea3301da7",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantSwitchDisabled",
+          "formSha256": "05ece59f46ac9a9adf21bc86e966098e7181669d51b0ec13b8394546553a37bb",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantSwitchReadOnly",
+          "formSha256": "4ee83ffa4fcfd7fae6385badc1c71fecbfcee430e3c61721623b37cc21c1036d",
+          "capturedLocales": [
+            "en",
+            "ru"
+          ]
+        }
+      ]
+    },
+    "sizing": {
+      "stand": "checkbox-sizing-_9fro6kw",
+      "formManifestSha256": "619b497998bf70fce29fad5e0f1457a736fa06bbda8a0f50c068b77948c1e0e7",
+      "probeForms": [
+        {
+          "form": "ProbeUnitedCheckVariantTumbler",
+          "formSha256": "83e5753237e9925c66a88940c6c6ba58560e9e3eb031a17878d6e7fd64738b3a",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerOne",
+          "formSha256": "54825ee72b99c9c49ebae8252d807aa9e9900006d18b6d1e037aa4398ee96707",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerTwo",
+          "formSha256": "4fa856f56611f5bdecc584db8e194cea2855eeb73abfecc223f2a74b4e7a9b73",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerThree",
+          "formSha256": "e6a9573ecb006ebbe1bbd67aaec0c8bb115c6d4a257c1f70319a60b2f6d6aaea",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerTwoLines",
+          "formSha256": "cf14d4d2d374c04036a91a2d5e5465da905d6d0240b2da095cbb0eb559fad8cc",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerNarrow",
+          "formSha256": "115b6b14db0fe09a5ead31df640874722245a103fb7cb18bae78db78cc1b56b1",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerFormat",
+          "formSha256": "2301f1a009ccc140823cbd5e576b886459c9f98149f5baead36234a9ee690a5e",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerLang",
+          "formSha256": "3de7f4ce462c715a0587ed47454b1a74b2238ac296bb65404633d805e43c3cab",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCheckPaint",
+          "formSha256": "3b9c74ee8fcc4d2bb92da39f16ddf0e503a0c7c7cd6454d3b2d83680ff0e75af",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCheckRight",
+          "formSha256": "c9a3fa935ee609491d62aae4f2f560655071b515dd77e1d451192e1b3300b7a2",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCheckTop",
+          "formSha256": "0156bdabd269fc2bccb3afb7801eaf3f5c60c0a43a4ac94e4847bfe843c45af3",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCheckBlack",
+          "formSha256": "6e34cdd4a9c94ad6af40e0644467e7ff46e8e3c5105c486a97134cdd5e458403",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCheckInactiveBlack",
+          "formSha256": "f487b776e372912ef6bbafa849ac622ed998323e8905540709aa856230271397",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantSwitchBlack",
+          "formSha256": "af57615ac5d477e90327216fd47aa9485592eaf9289e24250368e0d0a365d81d",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantSwitchInactiveBlack",
+          "formSha256": "7030a039dc8e61379efd6f927a9abda2a68cc4a337ad24f8c53385ef76b289e8",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerBlack",
+          "formSha256": "cf465a508a402b88adfab7c068ac77749a3ce07339cee49da1d98aa4d21ea14b",
+          "capturedLocales": [
+            "en"
+          ]
+        }
+      ]
+    },
+    "scriptVariant": {
+      "stand": "checkbox-script-variant-5qu409wd",
+      "formManifestSha256": "0ded7b0fe767fb8ae0faa682e98062605efcfd2926923088beff2332634a5fc8",
+      "probeForms": [
+        {
+          "form": "ProbeUnitedCheckVariantTumbler",
+          "formSha256": "83e5753237e9925c66a88940c6c6ba58560e9e3eb031a17878d6e7fd64738b3a",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerEn",
+          "formSha256": "2e42e56e195961431f8d5de69ca7b207e6f4181d2a6135e8628f3e82c744f4b0",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerOneCaption",
+          "formSha256": "146ce0cde13e5f6ae7556146e4d680370a7b9ad78fa2fca41f7a05f2bc7cc4f2",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerRu",
+          "formSha256": "1b40be5e95468ce57cc2e4e0594f67012f7533f3a763e0f7fef86af22796d659",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantTumblerNoCaption",
+          "formSha256": "643c4011c56340b7d218e0a6f3c6ce7a2472705c476f00fdb11c7394ad75fc00",
+          "capturedLocales": [
+            "en"
+          ]
+        }
+      ]
+    },
+    "overflow": {
+      "stand": "tumbler-caption-fit-a1wx0y3m",
+      "formManifestSha256": "34d4b451200a41a98b8810ab78200f94af4b579068cedf3d3c2065b2a5d54541",
+      "probeForms": [
+        {
+          "form": "ProbeUnitedCheckVariantCaptionWidths",
+          "formSha256": "938330aafeb8f12082512de89db10e91a96140b2681a1879195c2db39529c29f",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCaptionTwoLines",
+          "formSha256": "71c7a7b08f52b36cdfe62ed929d2316dc6b0e3e3c1d1b3ca831382357388a0d5",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCaptionManual",
+          "formSha256": "dbc8d27540f4ced2fdf8c13be08d2215410e9213177a2c5c90602c4c2fd949f2",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCaptionExplicit",
+          "formSha256": "1144128a229f21de4d66899d0dee22f7cac34c5798e051bf3d6014e286d09d4e",
+          "capturedLocales": [
+            "en"
+          ]
+        }
+      ]
+    },
+    "disabledAndHeights": {
+      "stand": "tumbler-disabled-color-21mtnvdd",
+      "formManifestSha256": "753607b3a94bdbcd3afb23972fd101e38dd6bc355dded3c8e56993b0af8ca0ce",
+      "probeForms": [
+        {
+          "form": "ProbeUnitedCheckVariantCaptionDisabledColors",
+          "formSha256": "0613fcd3172e362e9a87e5a3d58d3120f7e6adaaab3fcff3ad676a2e6d696d38",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCaptionDisabledFills",
+          "formSha256": "929977b5e1c11d5b2306c66afe6635ce2a4c975446c6ea9dd17521a82e276a0c",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCaptionLineHeight",
+          "formSha256": "071013cf5a8228080792f969f65ea05cc68dfe97505862924e7a588cce05ad5f",
+          "capturedLocales": [
+            "en"
+          ]
+        }
+      ]
+    },
+    "naturalSizes": {
+      "stand": "tumbler-natural-width-izt92m9f",
+      "formManifestSha256": "60b8160a283f89f2aaefe5010a7975ac38e172e45fa0368a3989112e6b135d86",
+      "probeForms": [
+        {
+          "form": "ProbeUnitedCheckVariantCaptionNaturalEqual",
+          "formSha256": "f2bdb9012ed5e86d8d4e58120227e5045f8f5f39deb422847741758e3568b754",
+          "capturedLocales": [
+            "en"
+          ]
+        },
+        {
+          "form": "ProbeUnitedCheckVariantCaptionNaturalUnequal",
+          "formSha256": "85902395e411fabc2384455dc074c8a44dc8795e14048e0aa88cb6750b30b3d1",
+          "capturedLocales": [
+            "en"
+          ]
+        }
+      ]
+    }
+  },
+  "proceduralRgba": {
+    "groups": [
+      {
+        "group": "labels",
+        "surfaces": 22,
+        "pixels": 97626,
+        "rgbaSha256": "3239709fbe87f81377bb606669c752b1db268b613364ac7c82d90ca411453ff1"
+      },
+      {
+        "group": "overflow",
+        "surfaces": 27,
+        "pixels": 109243,
+        "rgbaSha256": "1d7af65fc3d5b5099cca205f0d8e3f6a2227d6c3a75b6fa7fb73af6bf4ff8eb1"
+      },
+      {
+        "group": "disabled-color",
+        "surfaces": 20,
+        "pixels": 59040,
+        "rgbaSha256": "96b1571a4453a7c6d6bb571ec8825ea4baad066fcb7a0964e7608f826e5e7355"
+      },
+      {
+        "group": "heights",
+        "surfaces": 8,
+        "pixels": 37761,
+        "rgbaSha256": "43d28899aa8bef06f32d3403da27d6325bb6557aa2b2649b8a03dc5c288b5a51"
+      },
+      {
+        "group": "language",
+        "surfaces": 5,
+        "pixels": 9816,
+        "rgbaSha256": "8913e7303f5423f6df60cde92ff22e477698a7b5f76cf30b0fdc29fae3c7ae3a"
+      },
+      {
+        "group": "natural",
+        "surfaces": 16,
+        "pixels": 47781,
+        "rgbaSha256": "cb2fb33ea1c13c7aa1a8497bd09bb281d771add462d2e9026384c6f5bb02b9eb"
+      }
+    ],
+    "surfaces": 98,
+    "pixels": 361267,
+    "pixelTolerance": 0,
+    "supports": [
+      "native logical and regional labels",
+      "same and independent automatic widths",
+      "kerning inside words",
+      "first and subsequent line alignment",
+      "word wrapping and clipped ellipsis",
+      "explicit line breaks and short explicit height",
+      "disabled and read-only text on measured fills"
+    ]
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "batch": "form-batch-B9RBfQ",
+    "backendCommit": "565a5acb179b03bddb1c3d623256465cacae1fb4",
+    "explorerCommit": "b05e63ea0f8de771a28312a55bd3e1ec5e171877",
+    "vsixSha256": "55a664244543b7c28f17bdb817d410b2b86842770737be63a32e7551a3f0e920",
+    "backendSha256": "2449274394dbef82a32dd03b060c62cd7b1df9817efb47bae958a6f111b595a1",
+    "runtimeManifestSha256": "6eb9fe6910b1566ac2d2662ed966e3453fd8b302ec37c8d6baa05d3801629b20",
+    "runtimeFilesVerifiedPerRun": 1303
+  },
+  "checks": {
+    "typescript": true,
+    "compile": true,
+    "package": true,
+    "node": {
+      "passed": 610,
+      "skipped": 11
+    },
+    "bun": {
+      "passed": 598,
+      "skipped": 11
+    },
+    "unchangedBackendSha256Verified": true,
+    "previousRustGates": "docs/measurements/t158-checkbox-modes-linux.json"
+  },
+  "acceptance": {
+    "pairsPassed": 26,
+    "driverCases": 282,
+    "caseCountsBySuite": {
+      "renderer": {
+        "en": 20,
+        "ru": 20
+      },
+      "states": {
+        "en": 15,
+        "ru": 15
+      },
+      "property-catalogue": {
+        "en": 30,
+        "ru": 30
+      },
+      "button-types": {
+        "en": 11,
+        "ru": 11
+      },
+      "button-rows": {
+        "en": 8,
+        "ru": 8
+      },
+      "usual-buttons": {
+        "en": 18,
+        "ru": 18
+      },
+      "handlers": {
+        "en": 1,
+        "ru": 1
+      },
+      "inspectors": {
+        "en": 1,
+        "ru": 1
+      },
+      "preview": {
+        "en": 1,
+        "ru": 1
+      },
+      "detached-space": {
+        "en": 6,
+        "ru": 6
+      },
+      "composition": {
+        "en": 9,
+        "ru": 9
+      },
+      "tables": {
+        "en": 17,
+        "ru": 17
+      },
+      "application": {
+        "en": 4,
+        "ru": 4
+      }
+    },
+    "checkboxTransitionsPerLocale": 32,
+    "exactLabelledTumblerCrops": 32,
+    "exactLabelledTumblerPixels": 126690,
+    "pixelTolerance": 0,
+    "detachedCapturePairs": 2,
+    "existingBlankTumblerCropsStillExact": 12,
+    "existingCheckboxAndSwitchCropsStillExact": 16,
+    "comparedRegion": "Full Boolean tumbler including both labelled segments, divider, corners and clipping.",
+    "fullFormPixelComparison": false,
+    "sourceWritesDuringApplicationViewing": false,
+    "applicationSamplesPerLocale": {
+      "en": 4,
+      "ru": 4
+    },
+    "comparisons": [
+      {
+        "case": "tumbler",
+        "locale": "en",
+        "nativeProbe": "Tumbler",
+        "nativeCrop": [
+          65,
+          54,
+          125,
+          24
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            125,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "88dadcdd39ab3afdad5baab7c676a503c6b43f889d6f8296e272412be23b2ca7",
+        "nativeRgbaSha256": "8e642348eb44e72fe915ad4e1eb202263ffe09ddef0212dcfe29086e559c63f6",
+        "vsixCaptureSha256": "42a20663d72d2ddb5cd3b8f000e49722ba9f69474435e909bed8bd72e9ed4448"
+      },
+      {
+        "case": "tumbler",
+        "locale": "ru",
+        "nativeProbe": "Tumbler",
+        "nativeCrop": [
+          65,
+          54,
+          125,
+          24
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            125,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "88dadcdd39ab3afdad5baab7c676a503c6b43f889d6f8296e272412be23b2ca7",
+        "nativeRgbaSha256": "8e642348eb44e72fe915ad4e1eb202263ffe09ddef0212dcfe29086e559c63f6",
+        "vsixCaptureSha256": "7fd7eb9d554766d81d3c91a5a7b3ca33462d25451d99128771e79661f97ea356"
+      },
+      {
+        "case": "tumbler-right",
+        "locale": "en",
+        "nativeProbe": "TumblerRight",
+        "nativeCrop": [
+          24,
+          54,
+          125,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            125,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "f2841d1aa8a022a7e0da7fa3b4aa331c84c52ae815022a8add82ed6b72b3ff97",
+        "nativeRgbaSha256": "8e642348eb44e72fe915ad4e1eb202263ffe09ddef0212dcfe29086e559c63f6",
+        "vsixCaptureSha256": "3a5f1522d1d4265a96b8bc970f8967e304b543756c26d3d8f6dd698203c98aad"
+      },
+      {
+        "case": "tumbler-right",
+        "locale": "ru",
+        "nativeProbe": "TumblerRight",
+        "nativeCrop": [
+          24,
+          54,
+          125,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            125,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "f2841d1aa8a022a7e0da7fa3b4aa331c84c52ae815022a8add82ed6b72b3ff97",
+        "nativeRgbaSha256": "8e642348eb44e72fe915ad4e1eb202263ffe09ddef0212dcfe29086e559c63f6",
+        "vsixCaptureSha256": "591f770d25da30e5b315851b5758d1f0456388259866d0bfc5cdf2bd97575f20"
+      },
+      {
+        "case": "unequal",
+        "locale": "en",
+        "nativeProbe": "TumblerUnequal",
+        "nativeCrop": [
+          65,
+          54,
+          131,
+          24
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            131,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "04432e5f087acd6632036cad0b1c87f300e68252a593b4ffdbe33bb1d1436170",
+        "nativeRgbaSha256": "6c8f5a4e6fb965d621050aa2020820236a45a2b6d65ebc5c3079984ee361f3ab",
+        "vsixCaptureSha256": "f165d09103ee21101179102d83ca362f92e1abe956a4e9748a6d41df529664be"
+      },
+      {
+        "case": "unequal",
+        "locale": "ru",
+        "nativeProbe": "TumblerUnequal",
+        "nativeCrop": [
+          65,
+          54,
+          131,
+          24
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            131,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "04432e5f087acd6632036cad0b1c87f300e68252a593b4ffdbe33bb1d1436170",
+        "nativeRgbaSha256": "6c8f5a4e6fb965d621050aa2020820236a45a2b6d65ebc5c3079984ee361f3ab",
+        "vsixCaptureSha256": "6be2ed7661131f194327ea3258126a4eae6b333f255e44eb211229bb12a25226"
+      },
+      {
+        "case": "manual",
+        "locale": "en",
+        "nativeProbe": "TumblerManual",
+        "nativeCrop": [
+          65,
+          54,
+          243,
+          46
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            243,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "f9cc92aca2662dac8c6d95bf50f7d4f1ea03f3cc51b6de18c023d5e114d674e3",
+        "nativeRgbaSha256": "c7c554fa06955018c53628fc888ba8c9842420e89642c1740b2dc5ef6af7f8e3",
+        "vsixCaptureSha256": "0ee0f89a1494c5ad48dd07e8fe328817caad715643be3982f6a29b56aac701fb"
+      },
+      {
+        "case": "manual",
+        "locale": "ru",
+        "nativeProbe": "TumblerManual",
+        "nativeCrop": [
+          65,
+          54,
+          243,
+          46
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            243,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "f9cc92aca2662dac8c6d95bf50f7d4f1ea03f3cc51b6de18c023d5e114d674e3",
+        "nativeRgbaSha256": "c7c554fa06955018c53628fc888ba8c9842420e89642c1740b2dc5ef6af7f8e3",
+        "vsixCaptureSha256": "3fdbca50e8bc72de90e768326e4634b9d668838b7ad836cac3eec59ecbba9a51"
+      },
+      {
+        "case": "paint",
+        "locale": "en",
+        "nativeProbe": "TumblerPaint",
+        "nativeCrop": [
+          65,
+          54,
+          213,
+          38
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            213,
+            38
+          ]
+        ],
+        "nativeCaptureSha256": "e26d7f7b1f8cb75784b2028af5297e5ecbbfc6f65a623e0ac5f3f2ee2e9e478a",
+        "nativeRgbaSha256": "0b427cd914c2d3179723796f8b7c10c17a415c6dee148210bd24c0b18f806751",
+        "vsixCaptureSha256": "1b1bb6e9ca7d012bec78efe35591ea97e0e8d5b00e1094e083bcb83e0c055267"
+      },
+      {
+        "case": "paint",
+        "locale": "ru",
+        "nativeProbe": "TumblerPaint",
+        "nativeCrop": [
+          65,
+          54,
+          213,
+          38
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            213,
+            38
+          ]
+        ],
+        "nativeCaptureSha256": "e26d7f7b1f8cb75784b2028af5297e5ecbbfc6f65a623e0ac5f3f2ee2e9e478a",
+        "nativeRgbaSha256": "0b427cd914c2d3179723796f8b7c10c17a415c6dee148210bd24c0b18f806751",
+        "vsixCaptureSha256": "4867d5ab2dc15f0906d2c1c37dc5ef425b94bbeed0e8db46745a640e6ab38176"
+      },
+      {
+        "case": "script-russian",
+        "locale": "en",
+        "nativeProbe": "Tumbler",
+        "nativeCrop": [
+          65,
+          54,
+          125,
+          24
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            125,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "88dadcdd39ab3afdad5baab7c676a503c6b43f889d6f8296e272412be23b2ca7",
+        "nativeRgbaSha256": "8e642348eb44e72fe915ad4e1eb202263ffe09ddef0212dcfe29086e559c63f6",
+        "vsixCaptureSha256": "451d0b07f5a11a1a5522ac90e62924fb8e3090b5e92617d5f14ecf17f3b002f1"
+      },
+      {
+        "case": "script-russian",
+        "locale": "ru",
+        "nativeProbe": "Tumbler",
+        "nativeCrop": [
+          65,
+          54,
+          125,
+          24
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            125,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "88dadcdd39ab3afdad5baab7c676a503c6b43f889d6f8296e272412be23b2ca7",
+        "nativeRgbaSha256": "8e642348eb44e72fe915ad4e1eb202263ffe09ddef0212dcfe29086e559c63f6",
+        "vsixCaptureSha256": "a4efe485ce6b578597a05c5d85ca8aa0b0a1531e175eb56a24b2bee674e5c9a0"
+      },
+      {
+        "case": "script-english",
+        "locale": "en",
+        "nativeProbe": "Tumbler",
+        "nativeCrop": [
+          65,
+          54,
+          103,
+          24
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            103,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "816f73faa325866ed7200e334b0a85e68ff199706c22c460a3cfe872284690b1",
+        "nativeRgbaSha256": "78c66e63abbb9b542b72d1a9850f51ce9187ffc7261e3c4639b8edcb80ce507b",
+        "vsixCaptureSha256": "1eed5511ee0ec98d3a0b8a543a58db425232bc738678d295609bc2d3be5d48d5"
+      },
+      {
+        "case": "script-english",
+        "locale": "ru",
+        "nativeProbe": "Tumbler",
+        "nativeCrop": [
+          65,
+          54,
+          103,
+          24
+        ],
+        "matches": [
+          [
+            430,
+            386,
+            103,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "816f73faa325866ed7200e334b0a85e68ff199706c22c460a3cfe872284690b1",
+        "nativeRgbaSha256": "78c66e63abbb9b542b72d1a9850f51ce9187ffc7261e3c4639b8edcb80ce507b",
+        "vsixCaptureSha256": "3e864b622a64705cacd5c3aad2544651c127d16688bb93d86ff2cddcdb177660"
+      },
+      {
+        "case": "caption-language",
+        "locale": "en",
+        "nativeProbe": "CaptionNaturalEqual-1",
+        "nativeCrop": [
+          24,
+          94,
+          81,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            81,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "a77b26a75382a14287ad77d2ac5e514d3e86515ea73e85c3546683530b85410a",
+        "nativeRgbaSha256": "645a5657eb03f61c95643afae093c4b795320abd0238e1c53cf15c89558c07a0",
+        "vsixCaptureSha256": "3cbd13d63f03bca87529a2249915ddad7c3370ff18f161f69540392e01056996"
+      },
+      {
+        "case": "caption-language",
+        "locale": "ru",
+        "nativeProbe": "CaptionNaturalEqual-1",
+        "nativeCrop": [
+          24,
+          94,
+          81,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            81,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "a77b26a75382a14287ad77d2ac5e514d3e86515ea73e85c3546683530b85410a",
+        "nativeRgbaSha256": "645a5657eb03f61c95643afae093c4b795320abd0238e1c53cf15c89558c07a0",
+        "vsixCaptureSha256": "ecec0edbef28ccb0c0abb7e06ce69300cc5e978ab6c74b37d1579fa8ebacac0b"
+      },
+      {
+        "case": "caption-leading",
+        "locale": "en",
+        "nativeProbe": "CaptionNaturalEqual-3",
+        "nativeCrop": [
+          302,
+          94,
+          167,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            167,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "a77b26a75382a14287ad77d2ac5e514d3e86515ea73e85c3546683530b85410a",
+        "nativeRgbaSha256": "4f589afd340f48b7d3820a5ea7f9ab038be22c93036b8f45e0b5364afa138f4b",
+        "vsixCaptureSha256": "8a86f3148318ca8bf138301e2f94200160dbd30cfc549f65b3438037a1538c0a"
+      },
+      {
+        "case": "caption-leading",
+        "locale": "ru",
+        "nativeProbe": "CaptionNaturalEqual-3",
+        "nativeCrop": [
+          302,
+          94,
+          167,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            167,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "a77b26a75382a14287ad77d2ac5e514d3e86515ea73e85c3546683530b85410a",
+        "nativeRgbaSha256": "4f589afd340f48b7d3820a5ea7f9ab038be22c93036b8f45e0b5364afa138f4b",
+        "vsixCaptureSha256": "dc980f79cf8883c52a403dc1ad1faded6327b7d97d8595d9349b49d080bce34d"
+      },
+      {
+        "case": "caption-ellipsis",
+        "locale": "en",
+        "nativeProbe": "CaptionWidths-3",
+        "nativeCrop": [
+          110,
+          94,
+          63,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            63,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "fca97189d038df532458c4483c9300dec7c1b4bab2ac89d7a9e3d856498d50b3",
+        "nativeRgbaSha256": "a4a56b557aaeb828333a8e316288f8df8e56705e47d3fc6fc4d162f64eb684b1",
+        "vsixCaptureSha256": "8d7f5ad995c64ca66da49a101a6ce6036a3fd6d0803199bb3fc181b4b3a86e39"
+      },
+      {
+        "case": "caption-ellipsis",
+        "locale": "ru",
+        "nativeProbe": "CaptionWidths-3",
+        "nativeCrop": [
+          110,
+          94,
+          63,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            63,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "fca97189d038df532458c4483c9300dec7c1b4bab2ac89d7a9e3d856498d50b3",
+        "nativeRgbaSha256": "a4a56b557aaeb828333a8e316288f8df8e56705e47d3fc6fc4d162f64eb684b1",
+        "vsixCaptureSha256": "9641d149c454121caf777c0b719c0482cf573aa4ca6a4e37bba412ff53eb29b6"
+      },
+      {
+        "case": "caption-wrap-clipped",
+        "locale": "en",
+        "nativeProbe": "CaptionTwoLines-3",
+        "nativeCrop": [
+          110,
+          94,
+          63,
+          46
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            63,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "3d7b1c37448c0820728172e1b586da4f3eec26e1f51793ddfeae36c8adecabee",
+        "nativeRgbaSha256": "effa90787b8c16ae8b280b1c70c7434ece1b6410498dec8fe066aa7ffc7f0f4c",
+        "vsixCaptureSha256": "f28ed0a99ba781fba72a8ef288de9c32d1364cb8b87868d50954a8610a2dbfc7"
+      },
+      {
+        "case": "caption-wrap-clipped",
+        "locale": "ru",
+        "nativeProbe": "CaptionTwoLines-3",
+        "nativeCrop": [
+          110,
+          94,
+          63,
+          46
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            63,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "3d7b1c37448c0820728172e1b586da4f3eec26e1f51793ddfeae36c8adecabee",
+        "nativeRgbaSha256": "effa90787b8c16ae8b280b1c70c7434ece1b6410498dec8fe066aa7ffc7f0f4c",
+        "vsixCaptureSha256": "fa90eaec3aead06832b584dbda8b29276ea1b0e900424d6127b7638f9fa7b7f9"
+      },
+      {
+        "case": "caption-wrap-auto",
+        "locale": "en",
+        "nativeProbe": "CaptionExplicit-7",
+        "nativeCrop": [
+          210,
+          149,
+          83,
+          54
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            83,
+            54
+          ]
+        ],
+        "nativeCaptureSha256": "631c23a198f45267fcbfaf2681dd4eeb03172b50ece90c4743a9de00d4912899",
+        "nativeRgbaSha256": "153bb6c03947561b63135a3408809bafc78e4095670ea1aebc396d14bbffdf31",
+        "vsixCaptureSha256": "b7b0e8bf0a8d8867cf4586c83e898553a10f1016b82a401a347fe7c11ec5c029"
+      },
+      {
+        "case": "caption-wrap-auto",
+        "locale": "ru",
+        "nativeProbe": "CaptionExplicit-7",
+        "nativeCrop": [
+          210,
+          149,
+          83,
+          54
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            83,
+            54
+          ]
+        ],
+        "nativeCaptureSha256": "631c23a198f45267fcbfaf2681dd4eeb03172b50ece90c4743a9de00d4912899",
+        "nativeRgbaSha256": "153bb6c03947561b63135a3408809bafc78e4095670ea1aebc396d14bbffdf31",
+        "vsixCaptureSha256": "b3f7132336137cd1564da20e64d3c7bcf71c52852a52c8ce93a24bb5547b19ea"
+      },
+      {
+        "case": "caption-newline",
+        "locale": "en",
+        "nativeProbe": "CaptionHeight-2",
+        "nativeCrop": [
+          157,
+          110,
+          123,
+          23
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            123,
+            23
+          ]
+        ],
+        "nativeCaptureSha256": "c718c2550fcb0e9a55524e02156a19f697ae62ee77ae9a49ce35e02d987463ca",
+        "nativeRgbaSha256": "36167a5a9deaca04fe236f37319e977212596ed90271d997110d30a111f2accc",
+        "vsixCaptureSha256": "c5153c0f63f6285715972e08642c9a2197a0da5a9e8eeb36e492e585365c98ff"
+      },
+      {
+        "case": "caption-newline",
+        "locale": "ru",
+        "nativeProbe": "CaptionHeight-2",
+        "nativeCrop": [
+          157,
+          110,
+          123,
+          23
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            123,
+            23
+          ]
+        ],
+        "nativeCaptureSha256": "c718c2550fcb0e9a55524e02156a19f697ae62ee77ae9a49ce35e02d987463ca",
+        "nativeRgbaSha256": "36167a5a9deaca04fe236f37319e977212596ed90271d997110d30a111f2accc",
+        "vsixCaptureSha256": "b331ad0b06b1b533e31561a2395825f226edf7e1e1696666998dbe701b8cd088"
+      },
+      {
+        "case": "caption-disabled-fill",
+        "locale": "en",
+        "nativeProbe": "CaptionDisabledFills-2",
+        "nativeCrop": [
+          157,
+          94,
+          123,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            123,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "a3904040cd42cdf706291d1cc04199d2787dd184d183b9813f3e5266017395dc",
+        "nativeRgbaSha256": "9ec769f7f7cd1e22627ceafc951c544fe428d1fd7d5e794929b0730e0d9cc5a9",
+        "vsixCaptureSha256": "455788f49742baa90867d9505446168b25708fd828e38f93244bc65378b38ade"
+      },
+      {
+        "case": "caption-disabled-fill",
+        "locale": "ru",
+        "nativeProbe": "CaptionDisabledFills-2",
+        "nativeCrop": [
+          157,
+          94,
+          123,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            123,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "a3904040cd42cdf706291d1cc04199d2787dd184d183b9813f3e5266017395dc",
+        "nativeRgbaSha256": "9ec769f7f7cd1e22627ceafc951c544fe428d1fd7d5e794929b0730e0d9cc5a9",
+        "vsixCaptureSha256": "c85f0c47b20ed7282966b4b909b15b590a02dc061af56c37ada44d0eab7f87e8"
+      },
+      {
+        "case": "caption-read-only",
+        "locale": "en",
+        "nativeProbe": "CaptionManual-6",
+        "nativeCrop": [
+          450,
+          127,
+          243,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            243,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "72ba80c03a28deeda1ad3cbb9afab63c0c85102b328fcf7bc65a3be1643b8165",
+        "nativeRgbaSha256": "6a00f2663b682d09bd4f950f69e243099a02d8460133e23195c3a2d79b5b788e",
+        "vsixCaptureSha256": "ae2c2a3afd78d9ed26431574b819b4d734588e07ae6bfca2469f6e36661fd6a2"
+      },
+      {
+        "case": "caption-read-only",
+        "locale": "ru",
+        "nativeProbe": "CaptionManual-6",
+        "nativeCrop": [
+          450,
+          127,
+          243,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            243,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "72ba80c03a28deeda1ad3cbb9afab63c0c85102b328fcf7bc65a3be1643b8165",
+        "nativeRgbaSha256": "6a00f2663b682d09bd4f950f69e243099a02d8460133e23195c3a2d79b5b788e",
+        "vsixCaptureSha256": "dc6f97ec630fe99118367fd9c631478c17fad84167d4ec13d45eecfb75469926"
+      },
+      {
+        "case": "caption-dark-detached",
+        "locale": "en",
+        "nativeProbe": "TumblerBlack",
+        "nativeCrop": [
+          29,
+          59,
+          125,
+          24
+        ],
+        "matches": [
+          [
+            46,
+            156,
+            125,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "08f91ccd1806c2a11bf1fa442ff08dca973ca1d2498c2c9096bbd9bd35006dfa",
+        "nativeRgbaSha256": "caac14caaed911aa43f41ead62e105ec2224213d61ea82e1443dcddc8f170c42",
+        "vsixCaptureSha256": "4cce094bde13cafb682cf5624458eebcd5e0707afcd61b508499032607210dbd"
+      },
+      {
+        "case": "caption-dark-detached",
+        "locale": "ru",
+        "nativeProbe": "TumblerBlack",
+        "nativeCrop": [
+          29,
+          59,
+          125,
+          24
+        ],
+        "matches": [
+          [
+            46,
+            156,
+            125,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "08f91ccd1806c2a11bf1fa442ff08dca973ca1d2498c2c9096bbd9bd35006dfa",
+        "nativeRgbaSha256": "caac14caaed911aa43f41ead62e105ec2224213d61ea82e1443dcddc8f170c42",
+        "vsixCaptureSha256": "5790086ed16df3366c0e8dc416089d98ae42751e33a19e7636457eef89828619"
+      }
+    ]
+  },
+  "pending": [
+    "Additional font faces, font styles, colors over non-reference backgrounds and DPI",
+    "RadioButtonField segment grids and circles are separate acceptance scopes",
+    "Windows native acceptance"
+  ]
+}

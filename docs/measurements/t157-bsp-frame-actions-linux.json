@@ -1,0 +1,418 @@
+{
+  "backendSha256": "3a8a0ccba70e10f1e4e52b0425610e57ee1fc108a5ed0d1027882da3a093e2b0",
+  "bsp": {
+    "baseline": "t157-bsp-complex-baseline-linux.json",
+    "captionBaseline": "t157-bsp-captions-linux.json",
+    "installedFormStates": 24,
+    "installedWizard": {
+      "en": {
+        "matchingCommands": {
+          "inline": [
+            "Find",
+            "Cancel search",
+            "CustomizeForm"
+          ],
+          "items": [
+            "Отменить сопоставление"
+          ],
+          "more": "More actions",
+          "spacerText": ""
+        },
+        "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+        "states": {
+          "allocation-1150": [
+            1111,
+            612
+          ],
+          "allocation-640": [
+            884,
+            612
+          ],
+          "preferred-alternate": [
+            884,
+            612
+          ],
+          "preferred-initial": [
+            884,
+            612
+          ]
+        }
+      },
+      "ru": {
+        "matchingCommands": {
+          "inline": [
+            "Найти",
+            "Отменить поиск",
+            "CustomizeForm"
+          ],
+          "items": [
+            "Отменить сопоставление"
+          ],
+          "more": "Еще",
+          "spacerText": ""
+        },
+        "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+        "states": {
+          "allocation-1150": [
+            1111,
+            612
+          ],
+          "allocation-640": [
+            847,
+            612
+          ],
+          "preferred-alternate": [
+            847,
+            612
+          ],
+          "preferred-initial": [
+            847,
+            612
+          ]
+        }
+      }
+    },
+    "wizardNativeMatchingFrameWidthHeightPx": [
+      812,
+      612
+    ],
+    "wizardNativeMatchingScreenshotSha256": "8604aaf8f09db68aebcee30362fc8f9ae729e377aeacd6daff3b09ff5d8c7b53"
+  },
+  "bspCompatibility": "Version8_3_24",
+  "commandPlacementCases": [
+    {
+      "case": "ProbeUnitedActionsDefault",
+      "installed": {
+        "en": {
+          "frameWidthHeightPx": [
+            291,
+            79
+          ],
+          "inline": [
+            "First command",
+            "Second command"
+          ],
+          "more": null
+        },
+        "ru": {
+          "frameWidthHeightPx": [
+            291,
+            79
+          ],
+          "inline": [
+            "First command",
+            "Second command"
+          ],
+          "more": null
+        }
+      },
+      "nativeFrameWidthHeightPx": [
+        291,
+        79
+      ],
+      "nativeScreenshotSha256": "dbfbf6c42d8661211b8774e4d09c693b34647e88c9b4368e9217746af521f63c",
+      "settings": {
+        "locations": [
+          null,
+          null
+        ]
+      },
+      "sourceSha256": "f0dc68da816509cc5e6873dbc3b6bd406ca762e6ea48a2293c35b74da7e9e1c9"
+    },
+    {
+      "case": "ProbeUnitedActionsOverflow",
+      "installed": {
+        "en": {
+          "frameWidthHeightPx": [
+            265,
+            79
+          ],
+          "inline": [
+            "First command"
+          ],
+          "more": "More actions"
+        },
+        "ru": {
+          "frameWidthHeightPx": [
+            217,
+            79
+          ],
+          "inline": [
+            "First command"
+          ],
+          "more": "Еще"
+        }
+      },
+      "nativeFrameWidthHeightPx": [
+        266,
+        79
+      ],
+      "nativeScreenshotSha256": "38b76b64ab3fad9026c6f365745d9757b2d847f1a41b16c3dba43b8a2aeb9eb8",
+      "settings": {
+        "locations": [
+          null,
+          "InAdditionalSubmenu"
+        ]
+      },
+      "sourceSha256": "354abb5cf2e5d15f845c129b3e3b25fdf4a8d53acfa3ca5e0ea803eba92dc069"
+    },
+    {
+      "case": "ProbeUnitedActionsOnlyOverflow",
+      "installed": {
+        "en": {
+          "frameWidthHeightPx": [
+            142,
+            79
+          ],
+          "inline": [],
+          "more": "More actions"
+        },
+        "ru": {
+          "frameWidthHeightPx": [
+            142,
+            79
+          ],
+          "inline": [],
+          "more": "Еще"
+        }
+      },
+      "nativeFrameWidthHeightPx": [
+        142,
+        79
+      ],
+      "nativeScreenshotSha256": "a0396078be4713c7720584b9db18e8e54c3d7bbf0aa8e3e5a14396a7348b8db2",
+      "settings": {
+        "locations": [
+          "InAdditionalSubmenu",
+          "InAdditionalSubmenu"
+        ]
+      },
+      "sourceSha256": "6ee46f244695f467aaf2cc99d5f526d0f6523e6f8730557dae84a995f39bae9f"
+    },
+    {
+      "case": "ProbeUnitedActionsExplicit",
+      "installed": {
+        "en": {
+          "frameWidthHeightPx": [
+            291,
+            79
+          ],
+          "inline": [
+            "First command",
+            "Second command"
+          ],
+          "more": null
+        },
+        "ru": {
+          "frameWidthHeightPx": [
+            291,
+            79
+          ],
+          "inline": [
+            "First command",
+            "Second command"
+          ],
+          "more": null
+        }
+      },
+      "nativeFrameWidthHeightPx": [
+        291,
+        79
+      ],
+      "nativeScreenshotSha256": "4c7645e77916f024a98631ac7d749581a1d04e3ebab0924f8cf53c7341243e07",
+      "settings": {
+        "locations": [
+          "InCommandBar",
+          "InCommandBarAndInAdditionalSubmenu"
+        ]
+      },
+      "sourceSha256": "10e67a27e16486701098c235a53ae861fc4ecbdb67a35a9df51ca6e58642a4eb"
+    }
+  ],
+  "eskaCommit": "aa53f6cce5aaee50a4ac6e231f4793729153fe22",
+  "explorerCommit": "d2fce9346afe084cfe3e60b786ad6535275acb6a",
+  "formHeightFormula": "52 + 16 * Height for positive Height",
+  "nativeBuild": "8.3.27.2342",
+  "nativeFrameHeightCases": [
+    {
+      "case": "ProbeUnitedFrameNone",
+      "frameHeightPx": 75,
+      "installedFrameHeightPx": {
+        "en": 75,
+        "ru": 75
+      },
+      "nativeScreenshotSha256": "03699e26f2f1a6338d1b24973a096080ab626de045089884f093b85563d6c479",
+      "settings": {
+        "font": null,
+        "height": null,
+        "tallBody": false
+      },
+      "sourceSha256": "4c02e9dcf3ec26406681158f6b7846a2ec1ce353ef65eb07efe8d9437b2a10b4"
+    },
+    {
+      "case": "ProbeUnitedFrameZero",
+      "frameHeightPx": 75,
+      "installedFrameHeightPx": {
+        "en": 75,
+        "ru": 75
+      },
+      "nativeScreenshotSha256": "6d07965aa679e10e247ecaea44f0f038e74182ca6b7c0209fd2ac5c3681011a0",
+      "settings": {
+        "font": null,
+        "height": 0,
+        "tallBody": false
+      },
+      "sourceSha256": "9af61d99af4dc8cc89334991a35c08ac35d1a1431bf1590e4e25d3a2047377fd"
+    },
+    {
+      "case": "ProbeUnitedFrameTiny",
+      "frameHeightPx": 68,
+      "installedFrameHeightPx": {
+        "en": 68,
+        "ru": 68
+      },
+      "nativeScreenshotSha256": "5a09b1ce6184766dcb91b962e96bb481732498748099e499835f727218bc0964",
+      "settings": {
+        "font": null,
+        "height": 1,
+        "tallBody": false
+      },
+      "sourceSha256": "22addac3d946f2af2bf953d6c5191cfab19ca8e7ca5c73945a94b891bff2aa6a"
+    },
+    {
+      "case": "ProbeUnitedFrameShort",
+      "frameHeightPx": 116,
+      "installedFrameHeightPx": {
+        "en": 116,
+        "ru": 116
+      },
+      "nativeScreenshotSha256": "2008f3515d43771580bc1a166ce46b0746097867422ea28f40e065dbc5f16d8d",
+      "settings": {
+        "font": null,
+        "height": 4,
+        "tallBody": false
+      },
+      "sourceSha256": "821d0a09446291fff476ef8257fce0f13350c2e236184cea671c6ea2eb46392c"
+    },
+    {
+      "case": "ProbeUnitedFrameMedium",
+      "frameHeightPx": 212,
+      "installedFrameHeightPx": {
+        "en": 212,
+        "ru": 212
+      },
+      "nativeScreenshotSha256": "373f187e7236022365a6d817a55c121023a1f1a224248210598cce3eabf99166",
+      "settings": {
+        "font": null,
+        "height": 10,
+        "tallBody": false
+      },
+      "sourceSha256": "52b95d3cff319aa57b0463f5d2f2df2af21eda5df44e1f565e1f6c3721820960"
+    },
+    {
+      "case": "ProbeUnitedFrameTall",
+      "frameHeightPx": 372,
+      "installedFrameHeightPx": {
+        "en": 372,
+        "ru": 372
+      },
+      "nativeScreenshotSha256": "ecb68c9050dca950838c3a06a9ba423c4814328f5c460963aa33f09acde9c585",
+      "settings": {
+        "font": null,
+        "height": 20,
+        "tallBody": false
+      },
+      "sourceSha256": "0e44e2938b43ba491a3dad3748b95638a0d6135a3bb1b81b99d14316e3178233"
+    },
+    {
+      "case": "ProbeUnitedFrameWizard",
+      "frameHeightPx": 612,
+      "installedFrameHeightPx": {
+        "en": 612,
+        "ru": 612
+      },
+      "nativeScreenshotSha256": "80d2a68b52b2f134d50a1818431083871de3d7d450eb090d68c6fd245ca52293",
+      "settings": {
+        "font": null,
+        "height": 35,
+        "tallBody": false
+      },
+      "sourceSha256": "d6f75b21e9f48e4e9bc6479a0d25eaa40ee4e852b825d48d6329ae88df093da3"
+    },
+    {
+      "case": "ProbeUnitedFrameFontOnly",
+      "frameHeightPx": 75,
+      "installedFrameHeightPx": {
+        "en": 75,
+        "ru": 75
+      },
+      "nativeScreenshotSha256": "d69ce9b6c59d3dc2a6b3a4216958429e43ad477b1b828f36bab09bbd849ae0c9",
+      "settings": {
+        "font": 14,
+        "height": null,
+        "tallBody": false
+      },
+      "sourceSha256": "25ec7d982b020663799246a677cdc30330ea1d22639e410144d1ef530f1dbfb7"
+    },
+    {
+      "case": "ProbeUnitedFrameFontSized",
+      "frameHeightPx": 212,
+      "installedFrameHeightPx": {
+        "en": 212,
+        "ru": 212
+      },
+      "nativeScreenshotSha256": "654a824792c13e340d45df22ad9698b303b550443b49b9d90d8b2132945d47f4",
+      "settings": {
+        "font": 14,
+        "height": 10,
+        "tallBody": false
+      },
+      "sourceSha256": "3bea048c1c5a18913e5b81ab2b2eaa5a6eb188c00c949bc27f33dbe37cdc930a"
+    },
+    {
+      "case": "ProbeUnitedFrameBodyTall",
+      "frameHeightPx": 68,
+      "installedFrameHeightPx": {
+        "en": 68,
+        "ru": 68
+      },
+      "nativeScreenshotSha256": "5faae2282076293011ace6203a5ab8f9899e0c8368e79dd8ad955e71783963af",
+      "settings": {
+        "font": null,
+        "height": 1,
+        "tallBody": true
+      },
+      "sourceSha256": "263642fd43691bffc0c6327f83dae97771deaa504e257ecb4a281c56696a834f"
+    },
+    {
+      "case": "ProbeUnitedBlankLabel",
+      "frameHeightPx": 99,
+      "installedFrameHeightPx": {
+        "en": 101,
+        "ru": 101
+      },
+      "nativeScreenshotSha256": "947f20a81259f80056e52adc2905356cff52b4df06f431e6b2ec195702175019",
+      "settings": {
+        "hasTitle": false
+      },
+      "sourceSha256": "182cba5615566a0232dda0c5fbaea317bef8c5c508b5a066a59619fd22b20a07"
+    }
+  ],
+  "nativeLocale": "en",
+  "pending": [
+    "Blank decoration geometry",
+    "Automatic placement of standard table commands",
+    "Command overflow caption width in the mixed English case",
+    "Native scrollbar appearance and full BSP screenshots",
+    "Windows acceptance"
+  ],
+  "platform": "Linux ARM64 X11",
+  "regressionCaseCount": 244,
+  "regressionRuns": 16,
+  "schemaVersion": 1,
+  "scope": "Form frame height, explicit command placement, blank decoration caption",
+  "sourceWritesDuringViewing": false,
+  "syntheticCompatibility": "Version8_3_27",
+  "verifiedInstalledRuntimeFiles": 1303,
+  "vsixSha256": "db574564e7103d8168651cdd7af99093a6330eb91f1b391793846bdb089896bd"
+}

@@ -370,7 +370,9 @@
         "profile.windows",
         "buttons.link-types",
         "buttons.link-captions",
-        "buttons.mixed-row-geometry"
+        "buttons.mixed-row-geometry",
+        "shell.button-properties",
+        "buttons.mixed-row-full-forms"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -547,7 +549,12 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "shell.checkbox-properties",
+        "ordinary.checkbox-modes",
+        "ordinary.checkbox-glyphs",
+        "ordinary.checkbox-tumbler-face",
+        "ordinary.checkbox-tumbler-captions"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -641,7 +648,8 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "buttons.mixed-row-geometry"
+        "buttons.mixed-row-geometry",
+        "buttons.mixed-row-full-forms"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -824,7 +832,8 @@
         "styles.native-layer-values",
         "resources.native-picture-layers",
         "windows.frame-discovery",
-        "sessions.atomic-publication"
+        "sessions.atomic-publication",
+        "shell.root-properties"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1092,6 +1101,7 @@
         "pages.horizontal-forms",
         "layout.complete-matrix",
         "shell.inspectors",
+        "shell.input-properties",
         "sessions.dirty-dependencies",
         "windows.restart",
         "windows.multiple",
@@ -1630,7 +1640,9 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "ordinary.radio-tumbler",
+        "ordinary.radio-circles"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1722,7 +1734,8 @@
         "profile.windows",
         "tables.search-placeholder-initial",
         "tables.search-field-initial",
-        "tables.dynamic-toolbar"
+        "tables.dynamic-toolbar",
+        "tables.search-reflow"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1821,7 +1834,8 @@
         "tables.search-placeholder-initial",
         "tables.search-field-initial",
         "tables.dynamic-toolbar",
-        "tables.movement-group-white"
+        "tables.movement-group-white",
+        "tables.search-reflow"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1959,7 +1973,8 @@
         "context.native-static-composition",
         "context.native-owner-forms",
         "styles.native-layer-values",
-        "buttons.mixed-row-geometry"
+        "buttons.mixed-row-geometry",
+        "buttons.mixed-row-full-forms"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -2990,12 +3005,22 @@
       ],
       "profile": "linux-taxi-96",
       "level": "widget_pixels",
-      "status": "reproduced_mismatch",
-      "scope": "Same native XML produces different border pixels after default/maximized/moved pane positions; a reference-condition difference, not a waived mismatch.",
+      "status": "accepted_scope",
+      "scope": "Full raised text buttons at the three recorded native origins, with all borders and the shadow included.",
       "fixtures": [
         "tests/fixtures/forms/native-button-poses"
       ],
-      "driver": null,
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "button-borders",
+        "path": "test/form-button-borders-host.cjs",
+        "caseIds": [
+          "native-pose-default",
+          "native-pose-maximized",
+          "native-pose-moved"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
       "evidence": [
         {
           "report": "tests/fixtures/forms/native-button-poses/metrics.json",
@@ -3007,11 +3032,38 @@
             }
           ],
           "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t157-t158-button-raster-position-linux.json",
+          "sha256": "0b444a2a8a40dc909cf3484aa02c4909fad4d4df0f9d7508b2df6c4729af9c5e",
+          "clientCommit": "dd6cd36fd70cd4612aa8dc385cb75a3531634f58",
+          "assertions": [
+            {
+              "pointer": "/acceptance/wholePositionedWidgetCrops",
+              "equals": 18
+            },
+            {
+              "pointer": "/acceptance/wholePositionedWidgetPixels",
+              "equals": 35154
+            },
+            {
+              "pointer": "/implementation/numericChecks",
+              "equals": 153
+            },
+            {
+              "pointer": "/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
         }
       ],
-      "lastConfirmation": "tests/fixtures/forms/native-button-poses/metrics.json",
-      "remaining": "Universal pane-coordinate quantization has not been accepted.",
-      "nextAction": "Restore matching origin/viewport before comparison; retain all pixels and separately measure other poses.",
+      "lastConfirmation": "docs/measurements/t157-t158-button-raster-position-linux.json",
+      "remaining": "Additional positions, clipping, fonts, layout combinations and DPI; Windows.",
+      "nextAction": "Measure further native positions and paint surfaces with the same aligned reference conditions.",
       "classification": "reference_conditions"
     },
     {
@@ -3648,11 +3700,53 @@
           "sha256": "ce70a95f85c0afb517bf38870ee3841089502adcffe1f25ef7dcbd781e7646cd",
           "assertions": [],
           "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t159-table-source-projection-linux.json",
+          "sha256": "b794c68383630655a3b040d11ea7c8eab316c149818b3f8dcf503b7e0f65530a",
+          "assertions": [
+            {
+              "pointer": "/acceptance/widthsExactEn",
+              "equals": 14
+            },
+            {
+              "pointer": "/acceptance/fullFramesExactEn",
+              "equals": 5
+            },
+            {
+              "pointer": "/acceptance/gridOffsetsExactEn",
+              "equals": 11
+            }
+          ],
+          "clientCommit": "2f3c6e2df8eef0c45ae35b8e51217b568a82e2dd"
+        },
+        {
+          "report": "docs/measurements/t159-table-search-locations-linux.json",
+          "sha256": "8f597dc35eac1c1d40d2be465dd704b5b3227debe68ffa01f69b2b8047e5822b",
+          "assertions": [
+            {
+              "pointer": "/acceptance/widthAndGridExact",
+              "equals": 22
+            },
+            {
+              "pointer": "/acceptance/topSearchRectsExact",
+              "equals": 8
+            },
+            {
+              "pointer": "/acceptance/topSearchPixelsCompared",
+              "equals": 73600
+            },
+            {
+              "pointer": "/acceptance/topSearchPixelsDifferent",
+              "equals": 0
+            }
+          ],
+          "clientCommit": "1e4ceca5f75b43f11645937caf0c16915bbcf7f6"
         }
       ],
-      "lastConfirmation": "docs/measurements/t159-native-tables-linux.json",
-      "remaining": "Recorded nine ValueTable grids and two metadata-bound source grids/pagination are accepted separately. Complete table-field composition, other sources/column types, hierarchy/selection, widths/fonts/styles/alignments/states and Windows remain open.",
-      "nextAction": "Expand native property/style/state combinations and table toolbar/additions pixel comparisons."
+      "lastConfirmation": "docs/measurements/t159-table-search-locations-linux.json",
+      "remaining": "Recorded grids, source geometry, Top search and initial toolbars are accepted in measured scopes. Remaining search states/sources and width/font/style combinations, DPI and Windows are open.",
+      "nextAction": "Extend table state and source measurements while preserving the initial toolbars and projected search cases."
     },
     {
       "id": "surfaces.full-matrix",
@@ -3951,6 +4045,442 @@
       "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
     },
     {
+      "id": "ordinary.checkbox-modes",
+      "milestone": "T158",
+      "kinds": [
+        "CheckBoxField"
+      ],
+      "axes": [
+        "state.display",
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "Boolean checkbox, switch and tumbler geometry, script variant, explicit format, sizes and live detached update.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "CheckBoxField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-checkbox-modes-linux.json",
+          "sha256": "2f934c0cedfd413728b3d3b42b34c6cf37e025b56bc36bdf55db773edb4b1538",
+          "clientCommit": "0432096eab680d15d1465c39ec4a8e21796a2c47",
+          "assertions": [
+            {
+              "pointer": "/acceptance/geometryCasesPerLocale",
+              "equals": 17
+            },
+            {
+              "pointer": "/acceptance/resizeAfterScriptVariantChange",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/detachedXmlOverlay",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-checkbox-modes-linux.json",
+      "remaining": "Additional control and title settings, unsupported font faces and Windows.",
+      "nextAction": "Extend native control states and profile measurements."
+    },
+    {
+      "id": "ordinary.checkbox-glyphs",
+      "milestone": "T158",
+      "kinds": [
+        "CheckBoxField"
+      ],
+      "axes": [
+        "state.display",
+        "appearance.colors",
+        "layout.geometry"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete 15×15 checkbox and 34×20 off switch glyphs on white and black solid backgrounds in the measured native states.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "CheckBoxField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-checkbox-modes-linux.json",
+          "sha256": "2f934c0cedfd413728b3d3b42b34c6cf37e025b56bc36bdf55db773edb4b1538",
+          "clientCommit": "0432096eab680d15d1465c39ec4a8e21796a2c47",
+          "assertions": [
+            {
+              "pointer": "/acceptance/exactGlyphCropCount",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/exactGlyphPixels",
+              "equals": 7240
+            },
+            {
+              "pointer": "/acceptance/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/detachedCapturePairs",
+              "equals": 2
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-checkbox-modes-linux.json",
+      "remaining": "Additional backdrop colors and zoom/DPI profiles, whole fields and Windows.",
+      "nextAction": "Measure non-reference solid backdrops and record non-default DPI separately."
+    },
+    {
+      "id": "ordinary.checkbox-tumbler-face",
+      "milestone": "T158",
+      "kinds": [
+        "CheckBoxField"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Blank Boolean tumbler face with its corners, divider and fill in measured sizes, colors and solid backdrops.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "CheckBoxField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-tumbler-face-linux.json",
+          "sha256": "b8c503900f8de1361f5a3cb8e8f9c34406b24c3c75c443520d8da8fb031fbc5c",
+          "clientCommit": "b844c5d52cbd0a133a4a35b81f699779a735ef72",
+          "assertions": [
+            {
+              "pointer": "/proceduralRgba/surfaces",
+              "equals": 1164
+            },
+            {
+              "pointer": "/proceduralRgba/pixels",
+              "equals": 922642
+            },
+            {
+              "pointer": "/acceptance/exactFaceCropCount",
+              "equals": 12
+            },
+            {
+              "pointer": "/acceptance/exactFacePixels",
+              "equals": 76920
+            },
+            {
+              "pointer": "/acceptance/detachedCapturePairs",
+              "equals": 2
+            },
+            {
+              "pointer": "/acceptance/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-tumbler-face-linux.json",
+      "remaining": "Additional backdrop, stroke and DPI cases, and Windows.",
+      "nextAction": "Measure additional native styles and share face rasterization with RadioButtonField."
+    },
+    {
+      "id": "ordinary.checkbox-tumbler-captions",
+      "milestone": "T158",
+      "kinds": [
+        "CheckBoxField"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete Boolean tumbler with native option captions, measured width and height, clipping and inactive text colors.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "CheckBoxField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-tumbler-captions-linux.json",
+          "sha256": "278c65f4ee07b625972a28459ca6971a0f6b2bafb79eef7722fa5bf65312d401",
+          "clientCommit": "b05e63ea0f8de771a28312a55bd3e1ec5e171877",
+          "assertions": [
+            {
+              "pointer": "/proceduralRgba/surfaces",
+              "equals": 98
+            },
+            {
+              "pointer": "/proceduralRgba/pixels",
+              "equals": 361267
+            },
+            {
+              "pointer": "/acceptance/exactLabelledTumblerCrops",
+              "equals": 32
+            },
+            {
+              "pointer": "/acceptance/exactLabelledTumblerPixels",
+              "equals": 126690
+            },
+            {
+              "pointer": "/acceptance/detachedCapturePairs",
+              "equals": 2
+            },
+            {
+              "pointer": "/acceptance/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-tumbler-captions-linux.json",
+      "remaining": "Additional typefaces, fonts and DPI, whole forms and Windows.",
+      "nextAction": "Extend the raster matrix and reuse the verified face and glyph composition for RadioButtonField."
+    },
+    {
+      "id": "ordinary.radio-tumbler",
+      "milestone": "T158",
+      "kinds": [
+        "RadioButtonField"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Measured radio tumbler grids with equal and unequal labels, shared edges, short rows, styled text and backgrounds.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/RadioButtonField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "RadioButtonField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-radio-tumbler-linux.json",
+          "sha256": "170da8a48a7c04e9d6f408ab69558700a74e7a76392d5ac31cbf819671c04d07",
+          "clientCommit": "03ccc4fb24f699079cb467ed491973de57c49c31",
+          "assertions": [
+            {
+              "pointer": "/proceduralRgba/surfaces",
+              "equals": 17
+            },
+            {
+              "pointer": "/proceduralRgba/pixels",
+              "equals": 139990
+            },
+            {
+              "pointer": "/acceptance/exactGridCrops",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/exactGridPixels",
+              "equals": 202148
+            },
+            {
+              "pointer": "/acceptance/detachedCapturePairs",
+              "equals": 4
+            },
+            {
+              "pointer": "/acceptance/unequalFormFrameByLocale/en",
+              "equals": [
+                205,
+                76
+              ]
+            },
+            {
+              "pointer": "/acceptance/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-radio-tumbler-linux.json",
+      "remaining": "Additional label styles, DPI, whole forms and Windows.",
+      "nextAction": "Extend the RadioButtonField tumbler matrix with additional font faces and multiline captions."
+    },
+    {
+      "id": "ordinary.radio-circles",
+      "milestone": "T158",
+      "kinds": [
+        "RadioButtonField"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Measured ordinary RadioButtonField circles and captions on white, black and blue parent backgrounds, with explicit foreground, bold, disabled and ReadOnly.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/RadioButtonField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "RadioButtonField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-radio-circles-linux.json",
+          "sha256": "7ca365fe978797f0a17129afbf76dcc1c1dc7b1941fafc64bed8a2303922782f",
+          "clientCommit": "fe545c178910b60a9ec3446e85659f5176f2f174",
+          "assertions": [
+            {
+              "pointer": "/proceduralChecks/exactGlyphs",
+              "equals": 16
+            },
+            {
+              "pointer": "/proceduralChecks/exactInactiveCaptionColors",
+              "equals": 24
+            },
+            {
+              "pointer": "/acceptance/exactMarkCrops",
+              "equals": 40
+            },
+            {
+              "pointer": "/acceptance/exactMarkPixels",
+              "equals": 9000
+            },
+            {
+              "pointer": "/acceptance/exactControlCrops",
+              "equals": 20
+            },
+            {
+              "pointer": "/acceptance/exactControlPixels",
+              "equals": 59072
+            },
+            {
+              "pointer": "/acceptance/detachedControlCrops",
+              "equals": 4
+            },
+            {
+              "pointer": "/acceptance/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-radio-circles-linux.json",
+      "remaining": "Further fonts, long captions, state and style combinations, DPI, whole forms and Windows.",
+      "nextAction": "Extend the ordinary control measurements to additional text styles and field states."
+    },
+    {
       "id": "ordinary.complete-states",
       "milestone": "T158",
       "kinds": [
@@ -3983,10 +4513,387 @@
         ],
         "selection": "whole-suite-with-transitions"
       },
-      "evidence": [],
-      "lastConfirmation": null,
-      "remaining": "All required ordinary-control states, labels, image modes, fonts/colors and native geometry/pixels.",
-      "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-radio-choices-linux.json",
+          "sha256": "44d5c36f0a59d261f5cf39635663d22fe9332cc9df201e52ca2b2372cae995fa",
+          "assertions": [
+            {
+              "pointer": "/exactOuterFramesByLocale/en",
+              "equals": 21
+            },
+            {
+              "pointer": "/exactOuterFramesByLocale/ru",
+              "equals": 21
+            }
+          ],
+          "clientCommit": "56cda344036d92e08f42f008c7f8376f634af589"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-radio-choices-linux.json",
+      "remaining": "The measured RadioButtonField tumbler grids and ordinary circles with captions are accepted. Additional ordinary-control state and property combinations remain open.",
+      "nextAction": "Extend other ordinary-control states, fonts, colors and bound-field combinations."
+    },
+    {
+      "id": "shell.input-properties",
+      "milestone": "T161",
+      "kinds": [
+        "InputField"
+      ],
+      "axes": [
+        "source.identity",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Native property order, labels and defaults for fourteen recorded InputField contexts, including both value list editing modes. Dirty selection, availability and real XML locations.",
+      "fixtures": [
+        "tests/fixtures/forms/native-property-palette/input-field.json",
+        "tests/fixtures/forms/native-bound-fields/InputField.xml",
+        "tests/fixtures/forms/native-tables/Default.xml",
+        "tests/fixtures/forms/native-context-tables/Catalog.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "property-catalogue",
+        "path": "test/form-property-catalogue-host.cjs",
+        "caseIds": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t161-input-field-palette-linux.json",
+          "sha256": "e5b20c26d6b373c36ffb6a58dfe201691335b1302baadedc9fd4772e70818304",
+          "assertions": [
+            {
+              "pointer": "/native/defaultRowCounts/string",
+              "equals": 88
+            },
+            {
+              "pointer": "/native/defaultRowCounts/tableString",
+              "equals": 102
+            },
+            {
+              "pointer": "/acceptance/dirtyEventAndTypeVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/primaryPairsPassed",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/compatibilityPairsPassed",
+              "equals": 4
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": "903fb7a362783c067effc882aace9444c82e62b3"
+        },
+        {
+          "report": "docs/measurements/t161-input-binding-contexts-linux.json",
+          "sha256": "6f0f0f2e0009ddcf362b7eb09e4768bb1c30b3091aeb4e7299aa17ac305c971e",
+          "assertions": [
+            {
+              "pointer": "/native/rowCounts/tableNumber",
+              "equals": 102
+            },
+            {
+              "pointer": "/native/rowCounts/tableDate",
+              "equals": 99
+            },
+            {
+              "pointer": "/native/rowCounts/tableBoolean",
+              "equals": 100
+            },
+            {
+              "pointer": "/native/rowCounts/valueList",
+              "equals": 101
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/advancedTransitionsPerLocale",
+              "equals": 5
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": "93f320e86a24430b213a93c408ae6fad66670d00"
+        },
+        {
+          "report": "docs/measurements/t161-input-extended-value-list-linux.json",
+          "sha256": "fe8c218f9c731e94a24cfd88b8eb37335d78b08703012f388f55cf84f5f99592",
+          "assertions": [
+            {
+              "pointer": "/native/rows/extendedValueList",
+              "equals": 105
+            },
+            {
+              "pointer": "/native/unavailableRows/0",
+              "equals": "ChoiceList"
+            },
+            {
+              "pointer": "/acceptance/dirtyUnavailableChoiceListSourceVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/compatibilityPairsPassed",
+              "equals": 4
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": "91566f66899c55f5f6974868a2aa50042eab50b6"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t161-input-extended-value-list-linux.json",
+      "remaining": "Other binding domains, property availability combinations and resolved style provenance. Windows native comparison.",
+      "nextAction": "Measure remaining binding and availability contexts against the native palettes."
+    },
+    {
+      "id": "shell.root-properties",
+      "milestone": "T161",
+      "kinds": [
+        "Form"
+      ],
+      "axes": [
+        "source.identity",
+        "values.defaults",
+        "context.layers",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Order, defaults and events for common form and non-hierarchical catalog root palettes, including an owner-bound form and conditional settings storage.",
+      "fixtures": [
+        "tests/fixtures/forms/native-property-palette/form-root.json",
+        "tests/fixtures/forms/native-bound-fields/InputField.xml",
+        "tests/fixtures/forms/native-owner-composition/base/Catalogs/ProbeOwner/Forms/ProbeObject/Ext/Form.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "property-catalogue",
+        "path": "test/form-property-catalogue-host.cjs",
+        "caseIds": [
+          "15",
+          "16",
+          "17",
+          "18"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t161-root-form-palette-linux.json",
+          "sha256": "aa6b9897ce02919276b506df7496171850fcf1647c371f838e9a4a9af24a64c4",
+          "clientCommit": "29cf9db5175f36518e616703f29d5c04cd9bb82a",
+          "assertions": [
+            {
+              "pointer": "/native/defaultRows",
+              "equals": 58
+            },
+            {
+              "pointer": "/native/saveListRows",
+              "equals": 59
+            },
+            {
+              "pointer": "/native/catalogObjectRows",
+              "equals": 66
+            },
+            {
+              "pointer": "/acceptance/rootPropertyNavigationVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/compatibilityPairsPassed",
+              "equals": 6
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t161-root-form-palette-linux.json",
+      "remaining": "Additional owner contexts and settings combinations, resolved appearance provenance and Windows native verification.",
+      "nextAction": "Measure hierarchical catalog, document and report root palettes against the native application."
+    },
+    {
+      "id": "shell.button-properties",
+      "milestone": "T161",
+      "kinds": [
+        "Button"
+      ],
+      "axes": [
+        "source.identity",
+        "values.defaults",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Four button types tied to local unparameterized form commands in a usual group or command bar. Native order, defaults, explicit aliases and manual maxima.",
+      "fixtures": [
+        "tests/fixtures/forms/native-property-palette/button.json",
+        "tests/fixtures/forms/native-button-types/source/CommonForms/ProbeButtons/Ext/Form.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "property-catalogue",
+        "path": "test/form-property-catalogue-host.cjs",
+        "caseIds": [
+          "20",
+          "21",
+          "22",
+          "23"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t161-button-palette-linux.json",
+          "sha256": "f80160791827af1f7759c3207147c9d0276122b635a8bb5bef0a1947d644b428",
+          "clientCommit": "9e2a64cb6629514d741ab122e7d4d7b58f9e27fd",
+          "assertions": [
+            {
+              "pointer": "/native/baseRows",
+              "equals": 35
+            },
+            {
+              "pointer": "/native/manualBothRows",
+              "equals": 37
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 22
+            },
+            {
+              "pointer": "/acceptance/xmlAttributeAndCommandNavigationVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/compatibilityPairsPassed",
+              "equals": 4
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t161-button-palette-linux.json",
+      "remaining": "Other button placements and command types, style resolution and full property/state coverage. Windows native verification.",
+      "nextAction": "Measure native palettes for automatic command bars, context menus and parameterized commands."
+    },
+    {
+      "id": "shell.checkbox-properties",
+      "milestone": "T161",
+      "kinds": [
+        "CheckBoxField"
+      ],
+      "axes": [
+        "source.identity",
+        "values.defaults",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Root Boolean and unbound checkbox fields and direct Boolean columns. Native row order and defaults, all four mode labels, and conditional width rows.",
+      "fixtures": [
+        "tests/fixtures/forms/native-property-palette/checkbox.json",
+        "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml",
+        "tests/fixtures/forms/native-state-variants/TableDefault.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "property-catalogue",
+        "path": "test/form-property-catalogue-host.cjs",
+        "caseIds": [
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t161-checkbox-palette-linux.json",
+          "sha256": "92b13b38b724bb05a58e93327b6600ad677c71f49374e66b7d5eea750559e05f",
+          "clientCommit": "465043664f04ac92d52e1d6c2aaaa2f23ba88667",
+          "assertions": [
+            {
+              "pointer": "/native/rootFieldRows",
+              "equals": 28
+            },
+            {
+              "pointer": "/native/unequalTumblerRows",
+              "equals": 35
+            },
+            {
+              "pointer": "/native/columnRows",
+              "equals": 43
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 22
+            },
+            {
+              "pointer": "/acceptance/exactModeAndEventNavigation",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/unusedWidthPreserved",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/compatibilityPairsPassed",
+              "equals": 4
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t161-checkbox-palette-linux.json",
+      "remaining": "Nested, additional binding and column contexts, styling provenance and Windows native verification.",
+      "nextAction": "Compare the palette for checkbox fields in ordinary groups and for additional table types."
     },
     {
       "id": "shell.inspectors",
@@ -4814,8 +5721,85 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t157-native-button-rows-linux.json",
-      "remaining": "Other fonts, widths, states, parents, nested/wrapped/mixed-field layouts and full widget/form RGB parity; Windows and DPI.",
-      "nextAction": "Resolve the retained full RGB lower-border differences and extend the measured native row/layout matrix."
+      "remaining": "Other fonts, widths, states, parents, nested/wrapped/mixed-field layouts and Windows/DPI. The two recorded complete forms are tracked in buttons.mixed-row-full-forms.",
+      "nextAction": "Extend row geometry to wrapped and mixed-field layouts and capture the full dirty Width=8 variant."
+    },
+    {
+      "id": "buttons.mixed-row-full-forms",
+      "milestone": "T157",
+      "kinds": [
+        "Button",
+        "UsualGroup",
+        "CommandBar"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.fonts",
+        "profile.conditions",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "form_pixels",
+      "status": "accepted_scope",
+      "scope": "Two complete recorded button forms, including their right and bottom shadows, aligned to the measured native raster surface.",
+      "fixtures": [
+        "tests/fixtures/forms/native-button-poses",
+        "tests/fixtures/forms/native-button-rows"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "button-rows",
+        "path": "test/form-button-rows-host.cjs",
+        "caseIds": [
+          "ProbeButtons",
+          "ProbeRows",
+          "restored-explicit-width",
+          "floating-native",
+          "floating-restored",
+          "reattached-native"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-t158-button-raster-position-linux.json",
+          "sha256": "0b444a2a8a40dc909cf3484aa02c4909fad4d4df0f9d7508b2df6c4729af9c5e",
+          "clientCommit": "dd6cd36fd70cd4612aa8dc385cb75a3531634f58",
+          "assertions": [
+            {
+              "pointer": "/acceptance/wholeFormCrops",
+              "equals": 12
+            },
+            {
+              "pointer": "/acceptance/wholeFormPixels",
+              "equals": 587308
+            },
+            {
+              "pointer": "/acceptance/detachedWholeFormCrops",
+              "equals": 4
+            },
+            {
+              "pointer": "/acceptance/retainedToolbarCrops",
+              "equals": 12
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 46
+            },
+            {
+              "pointer": "/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-t158-button-raster-position-linux.json",
+      "remaining": "Whole dirty width variant and additional fonts, states, form types, DPI and Windows.",
+      "nextAction": "Extend exact full-frame comparisons to additional source layouts and actual DPI profiles."
     },
     {
       "id": "tables.recorded-grids",
@@ -5096,86 +6080,73 @@
       ],
       "profile": "linux-taxi-96",
       "level": "widget_pixels",
-      "status": "reproduced_mismatch",
-      "scope": "All pixels of eight complete standard table toolbar strips, including the shadow row. Current renderer differs on all four source forms in ru/en; grid comparisons remain exact. This records a failure, not accepted similarity.",
+      "status": "accepted_scope",
+      "scope": "Complete initial unfocused table command toolbars on Linux, including the moved Default pose and the corresponding detached view.",
       "fixtures": [
-        "tests/fixtures/forms/native-table-bars"
+        "tests/fixtures/forms/native-table-initial-bars"
       ],
       "driver": {
         "repository": "eska-vscode-explorer",
         "suite": "table-pixels",
         "path": "test/form-table-pixels-host.cjs",
         "caseIds": [
-          "Default",
-          "ReadOnly",
-          "MetadataTable",
+          "Default-native-toolbar-pose",
+          "ReadOnly-native-toolbar-pose",
+          "MetadataTable-native-toolbar-pose",
+          "Default-moved-toolbar-pose",
+          "floating-default",
           "DynamicList"
         ],
         "selection": "whole-suite-with-existing-transitions"
       },
       "evidence": [
         {
-          "report": "docs/measurements/t159-native-table-menus-linux.json",
-          "sha256": "5473d82f52e26d21a7a39081f58997f42e00b1b67a206db2ca87ae11f490e422",
+          "report": "docs/measurements/t159-table-toolbar-position-linux.json",
+          "sha256": "70d106c5a5fa52090090a7a6505803fede1380fcd6e9d215f73707f458320bb1",
+          "clientCommit": "0be371589260012e670b7d71ec8739cd8c04358f",
           "assertions": [
             {
-              "pointer": "/wholeToolbarPixelParity",
-              "equals": false
-            },
-            {
-              "pointer": "/afterFixCompleteToolbarDiagnostic/scenarios/en/expectedFailure",
+              "pointer": "/acceptance/wholeToolbarPixelParity",
               "equals": true
             },
             {
-              "pointer": "/afterFixCompleteToolbarDiagnostic/scenarios/ru/expectedFailure",
+              "pointer": "/acceptance/wholeToolbarCrops",
+              "equals": 12
+            },
+            {
+              "pointer": "/acceptance/wholeToolbarPixels",
+              "equals": 142776
+            },
+            {
+              "pointer": "/acceptance/detachedWholeToolbarCrops",
+              "equals": 2
+            },
+            {
+              "pointer": "/acceptance/verifiedMovementCrops",
+              "equals": 28
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 32
+            },
+            {
+              "pointer": "/acceptance/stableTableDom",
               "equals": true
+            },
+            {
+              "pointer": "/pixelTolerance",
+              "equals": 0
             },
             {
               "pointer": "/fullProfileAccepted",
               "equals": false
             }
-          ],
-          "clientCommit": null
-        },
-        {
-          "report": "docs/measurements/t159-native-table-movement-linux.json",
-          "sha256": "712b7484bdd7023ff421b50961fdf2659c57acff89789f1cfddf4f6644ea1e65",
-          "assertions": [
-            {
-              "pointer": "/completeMovementGroupPixelParity",
-              "equals": true
-            },
-            {
-              "pointer": "/acceptance/scenarios/en/movementPixelsCompared",
-              "equals": 22680
-            },
-            {
-              "pointer": "/acceptance/scenarios/ru/movementPixelsCompared",
-              "equals": 22680
-            },
-            {
-              "pointer": "/acceptance/scenarios/en/movementZoomFallbackVerified",
-              "equals": true
-            },
-            {
-              "pointer": "/acceptance/scenarios/ru/movementZoomFallbackVerified",
-              "equals": true
-            },
-            {
-              "pointer": "/wholeToolbarPixelParity",
-              "equals": false
-            },
-            {
-              "pointer": "/fullProfileAccepted",
-              "equals": false
-            }
-          ],
-          "clientCommit": null
+          ]
         }
       ],
-      "lastConfirmation": "docs/measurements/t159-native-table-movement-linux.json",
-      "remaining": "Default, ReadOnly and MetadataTable remain mismatched (163 en / 149 ru pixels in current recorded poses), on adjacent ordinary-button lower-border paint. Complete movement groups and DynamicList initial toolbar are accepted separately; alternate search states, other profiles, full forms and Windows remain open.",
-      "nextAction": "Resolve native lower-border pose without masking its pixels; preserve complete movement groups, DynamicList toolbar and initial search controls."
+      "lastConfirmation": "docs/measurements/t159-table-toolbar-position-linux.json",
+      "remaining": "Focused/alternate search states, other styles, tables and DPI; whole forms and Windows.",
+      "nextAction": "Measure additional search states and command profiles with their actual backdrop, geometry and paint origin."
     },
     {
       "id": "tables.search-placeholder-initial",
@@ -5359,8 +6330,75 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t159-native-table-search-fields-linux.json",
-      "remaining": "Alternate native 11px/yellow states and selection rule, other widths/fonts/palettes/disabled/focus states, full toolbars/forms, DPI and Windows.",
-      "nextAction": "Preserve complete initial search controls while establishing alternate state rules and completing native icons/joined buttons/border poses."
+      "remaining": "Other widths/fonts/palettes/disabled states, full initial toolbars and forms, DPI and Windows. Recorded viewport reflow is tracked in tables.search-reflow.",
+      "nextAction": "Extend complete search field comparison to more visual properties and width profiles."
+    },
+    {
+      "id": "tables.search-reflow",
+      "milestone": "T159",
+      "kinds": [
+        "SearchStringAddition",
+        "Table"
+      ],
+      "axes": [
+        "appearance.fonts",
+        "appearance.colors",
+        "layout.resizing",
+        "behavior.session",
+        "profile.conditions"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete 260 by 23 toolbar search controls in the wide installed workbench, before and after preview viewport reflow.",
+      "fixtures": [
+        "tests/fixtures/forms/native-table-search-reflow"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "table-pixels",
+        "path": "test/form-table-pixels-host.cjs",
+        "caseIds": [
+          "Default-search-first",
+          "Default-search-selected",
+          "Default-search-resized",
+          "Default-search-restored",
+          "floating-search-first"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t159-table-search-reflow-linux.json",
+          "sha256": "b9f5804588111b2fd64762076ba4e21b918491bf660affaf63934519ce1187eb",
+          "clientCommit": "c625e54036f42dbde1f6a74654f7cdfe58022081",
+          "assertions": [
+            {
+              "pointer": "/acceptance/wideWidgetCrops",
+              "equals": 15
+            },
+            {
+              "pointer": "/acceptance/wideWidgetPixels",
+              "equals": 89700
+            },
+            {
+              "pointer": "/acceptance/keptWholeToolbars",
+              "equals": 12
+            },
+            {
+              "pointer": "/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t159-table-search-reflow-linux.json",
+      "remaining": "Full compact toolbars, more allocations, visual properties, DPI and Windows.",
+      "nextAction": "Compare complete first-open toolbar frames in matched native viewports."
     },
     {
       "profile": "linux-taxi-96",
@@ -5570,11 +6608,54 @@
             }
           ],
           "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t159-table-toolbar-position-linux.json",
+          "sha256": "70d106c5a5fa52090090a7a6505803fede1380fcd6e9d215f73707f458320bb1",
+          "clientCommit": "0be371589260012e670b7d71ec8739cd8c04358f",
+          "assertions": [
+            {
+              "pointer": "/acceptance/wholeToolbarPixelParity",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/wholeToolbarCrops",
+              "equals": 12
+            },
+            {
+              "pointer": "/acceptance/wholeToolbarPixels",
+              "equals": 142776
+            },
+            {
+              "pointer": "/acceptance/detachedWholeToolbarCrops",
+              "equals": 2
+            },
+            {
+              "pointer": "/acceptance/verifiedMovementCrops",
+              "equals": 28
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 32
+            },
+            {
+              "pointer": "/acceptance/stableTableDom",
+              "equals": true
+            },
+            {
+              "pointer": "/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
         }
       ],
-      "lastConfirmation": "docs/measurements/t159-native-table-movement-linux.json",
-      "remaining": "Other palettes/parents/command counts/states/zoom/DPI; lower-border pose of adjacent buttons and complete remaining toolbars/forms; Windows.",
-      "nextAction": "Measure native lower-border pose and additional movement profiles while preserving all calibrated white group pixels."
+      "lastConfirmation": "docs/measurements/t159-table-toolbar-position-linux.json",
+      "remaining": "Other palettes, backdrops, commands, states and DPI; arbitrary form positions, whole forms and Windows.",
+      "nextAction": "Extend native profiles for movement groups beyond the measured white 60x27 control and two paint positions."
     },
     {
       "id": "surfaces.text-document-plain",
@@ -7071,6 +8152,14 @@
   ],
   "supersessions": [
     {
+      "id": "input-property-palette-first-table-count",
+      "historicalReport": "docs/measurements/t161-input-field-palette-linux.json",
+      "currentEntries": [
+        "shell.input-properties"
+      ],
+      "currentRemainder": "The corrected native tableNumber palette has 102 rows including Format. Other contexts and Windows remain open."
+    },
+    {
       "id": "input-date-values",
       "historicalReport": "docs/measurements/t157-native-input-fonts-linux.json",
       "historicalGap": "Date values/masks/calendars were outside that font/corner scope.",
@@ -7152,6 +8241,33 @@
         "tables.recorded-context-grids"
       ],
       "currentRemainder": "The two recorded grid controls and DynamicList pagination now match in ru/en; other sources, properties, surrounding controls and complete forms remain open."
+    },
+    {
+      "id": "input-property-palette-extended-value-list",
+      "historicalReport": "docs/measurements/t161-input-binding-contexts-linux.json",
+      "currentEntries": [
+        "shell.input-properties"
+      ],
+      "currentRemainder": "Extended value list is now measured at 105 rows. Other contexts, availability combinations and Windows remain open."
+    },
+    {
+      "id": "button-row-lower-borders",
+      "historicalReport": "docs/measurements/t157-native-button-rows-linux.json",
+      "historicalGap": "Whole frames retained 169 and 445 lower-border pixel differences despite matched geometry and captions.",
+      "currentEntries": [
+        "buttons.native-origin",
+        "buttons.mixed-row-full-forms"
+      ],
+      "currentRemainder": "Both recorded whole forms match after aligning the native paint surface. The dirty Width=8 full frame and additional layouts and profiles remain open."
+    },
+    {
+      "id": "table-search-alternate-mode",
+      "historicalReport": "docs/measurements/t159-native-table-search-linux.json",
+      "historicalGap": "The 11px search variant and its viewport transition were outside the accepted initial hint scope.",
+      "currentEntries": [
+        "tables.search-reflow"
+      ],
+      "currentRemainder": "The 260px widget and its viewport transition are accepted in Linux ru/en. The full compact toolbar matrix and Windows remain open."
     }
   ],
   "nextGroups": [

@@ -1,0 +1,396 @@
+{
+  "schemaVersion": 1,
+  "task": "T161",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "fixture": "tests/fixtures/forms/native-property-palette/input-field.json",
+  "fixtureSha256": "bcdbc172c2d74b87fa6dbb4852c12d94b78fd300fa2343b12a3ae655f23a22aa",
+  "native": {
+    "additionalContexts": [
+      {
+        "context": "unbound",
+        "form": "ProbeUnitedPaletteInputUnbound",
+        "selection": "Control",
+        "rows": 92,
+        "fixtureSha256": "d72fdebc6721a4874eecb3b7696e5b96f0f6ea7fc41ebfc4afe436158a8b207f",
+        "scans": {
+          "en": {
+            "pages": [
+              "ae6d517b0c16595680e49698f988e5e723fede69b0cf30125c14878bd479c1fe",
+              "3b720a44d0285f9fbfb3e2e4de89f6d5e6112726c2d783598cf633778479182d",
+              "d60050881b9a3da55d1ceb3e81b3603c602f742a888b940dedbc73867e28674f",
+              "fee8fc783d817bc2d223dce532003583d4439fa1f1b52d185403dc749f344ead"
+            ],
+            "stitchedSha256": "78a7b2466a178ca347164ae3951b09191f73a115738abb4e037761407cdef326"
+          },
+          "ru": {
+            "pages": [
+              "b863c07b493162397f5d90b9c63a5c9f385f36f7232c8e113865ca39b60fe7a1",
+              "85e8468630b54d6be80011ca12869937c6ca9a3c6cba054b5ee55a1617609a6e",
+              "e3c7e4c1dd482fa77570b2a40417ad3e891374d526771d590c350fee14387b2d",
+              "7c405e6e8c82e6eb78284b981d1de25684a79ad7385c7466c563c51bfff91ff8"
+            ],
+            "stitchedSha256": "84580c687973c6ecc9fc6edd5a0fad0c6f67d99be2e73d30c1df2bc154914f48"
+          }
+        }
+      },
+      {
+        "context": "mixed",
+        "form": "ProbeUnitedPaletteInputMixed",
+        "selection": "Control",
+        "rows": 92,
+        "fixtureSha256": "d0aa90254cbcc62cb973b1d487aac0da1a0da8ef81bacb60356d90373a1fbe21",
+        "scans": {
+          "en": {
+            "pages": [
+              "5e41c17e5127a1b0f413711107f7839468eec52e8bc5e9113815fb120361a6cb",
+              "72ae93ddc40b7e0fca60c82f331c3e8d254e96b5199789f2e6483c24a1c55be6",
+              "3fcd0868a6c91ed5d6e5e26b477ac6b68a65d07a30d0bf5f2daa58b98c412675",
+              "c2e2d8499856e53ac7b6d7af549321a6393e13f71653c01b51e0ac4a884ea16c"
+            ],
+            "stitchedSha256": "c2ad4777452b42a4d8d2552a1f880813355b8c350f150c99ee81c766233a4dfb"
+          },
+          "ru": {
+            "pages": [
+              "ddbd68ce8767e7237fb46a6be04077195b71861c5fffc8e5ccd8931781e01531",
+              "68b1a37dc72c9cfb8d04acc796297236d8e110f573d8f9b49e0d5e9f79b3f465",
+              "8a1c190f0c28a44feef0116a337754a4cf781bf5fc6474f7ff6c0a5274372452",
+              "4651767af97097ef89c797a0c3f940ec6b754fb8f8083913f707eb62e3697dda"
+            ],
+            "stitchedSha256": "c0a4dd344b62a29bbbe8a66d69c7658ab2be9a952123c4838df25c3aa3e38eea"
+          }
+        }
+      },
+      {
+        "context": "reference",
+        "form": "ProbeUnitedPaletteInputReference",
+        "selection": "Control",
+        "rows": 87,
+        "fixtureSha256": "722fa324a4c331c58cce8042341d276ca350bc01dec9f2c90bb91c4e8809e021",
+        "scans": {
+          "en": {
+            "pages": [
+              "ed95a950c4857dbfdb68435530687bd5dcfe6595e260f09e8221e437ffb782c3",
+              "8be24d5f44719fa0b21a81c30efaa3edfcc37feecbdcf4704399cf3282259612",
+              "081c08dd65d1766bc99c7b1c3f2b8e731e84e3055c9664c136f4b70d21b7a144",
+              "531c51da7791522bc5c5c0c41969af029de764932757c6a29b784c245e9357ae"
+            ],
+            "stitchedSha256": "cee280d2b33abe7da4aaf42c754fc75351d70205922d744c959f6850c6158445"
+          },
+          "ru": {
+            "pages": [
+              "0a099ccf3d92b4e8cbc78e3e30bf61fe6c3398687367a18d0f03f035f174df19",
+              "d131afc632542a630e3a83268b928ad398af3bb74e110fc0c6aae002a11bb2ae",
+              "64ff2cb86bf72402989ea5daaf43d24c3b73d18da9b1eba486458eb677d8fe06",
+              "6154fc88e4256fc83bbfad8eff4c175210de845bb28884d0007390d6cad54c2a"
+            ],
+            "stitchedSha256": "098ff5fe641a6f0ad14151c2ba17e87f7f645bb844b518eeb0cbdc51ef2e00d0"
+          }
+        }
+      },
+      {
+        "context": "mixedReference",
+        "form": "ProbeUnitedPaletteInputMixedReference",
+        "selection": "Control",
+        "rows": 94,
+        "fixtureSha256": "fcbec4ce5785347199bd1d9c84c77c289c8a746befd1e1dfe522e5a83018e975",
+        "scans": {
+          "en": {
+            "pages": [
+              "ca641f2e7ef25de71c4276f53698118b6dd1b43f29dc362d75d298ee35984148",
+              "aada2aa99c863187a0bfff475307da60701f89daab63b9c9d33c0d83361779b5",
+              "06509ed41d673bce8b1cf6ff9f8c7dc3acd47ccb55dfedcbdfeecdc8d7bf88f6",
+              "3a36166aeb9ccd633917a2af4af42a330d5e7352c9e54d9431a8928cc81d69db"
+            ],
+            "stitchedSha256": "163c1516ba5a7f9759ebbbeb312406e96f638aebcbc932356310603fbf0d100f"
+          },
+          "ru": {
+            "pages": [
+              "05fc43fdad2322a2e5f1095f89e664c71babf02e3af503c90efffca4f8329ed6",
+              "81eda95230cd2ca3359bf6bfb10627c5ceaee1edff352ac189d562cd089da853",
+              "93e324eeda6a6bf5b4b7333b958664a84a5b0d1d9b75e25f8f0b89862a6a8d98",
+              "f50a760bb77676551314206cacc8e05822ed7caf047002bbe2b17be7bcc4c902"
+            ],
+            "stitchedSha256": "0fd7b6c08a25b26dd8e2d05fa5c6aa92b3da9d00c8499fe9c46a031e70db5542"
+          }
+        }
+      },
+      {
+        "context": "valueList",
+        "form": "ProbeUnitedPaletteInputValueList",
+        "selection": "Control",
+        "rows": 101,
+        "fixtureSha256": "bc715912c6194445d6ba1cf51e855435a98125b019deb13fb3f1ab2fc917fcd4",
+        "scans": {
+          "en": {
+            "pages": [
+              "aa5ace98b7b166dd54afbe7b02229f5c7a19b1e0c583bc32dccfcd9d38c30b20",
+              "65411a195863bf1dbf0cfea925b60a3c723683b3850acdb1feee15f6a92167e6",
+              "264c0aa2fcd555b48712f0cfc297707ccda9ebf5f5826b97f995006cd2a4d381",
+              "0d462fb642dce8d13d3212125557e2bce3caf37fb3441fa7112bf4b7feb85a9a",
+              "dcad335f46214a92b3aa3b15421bad3c7c7b133d174c1186b6ade2f8abe6996b"
+            ],
+            "stitchedSha256": "3ecf7bdfca59f3136bfc274537985011a0200ff753bf32e84b08e86ce30cc7bc"
+          },
+          "ru": {
+            "pages": [
+              "33143a3365cf02ceeddfb41dd5e9530f716667748d0d47079b71c23c30798e2c",
+              "4f5a6549419af759b6f85b39fc667df9b5ac7ef0719876d1961b988d86cf7ccc",
+              "91cceaf7e5c0b8ec7ede2ed37e30ea2811acd2fd0e2366587be99f85bcf53eff",
+              "be22e51bb7bb37edb272014d150c09d1d48f06b0a753cbcdc5da3abf57dbad10"
+            ],
+            "stitchedSha256": "a6decfc6094c008f30925fb792c80fcd6f35be33e17573056bac8e2e871bb561"
+          }
+        }
+      },
+      {
+        "context": "tableDate",
+        "form": "ProbeUnitedPaletteInputDateBoolean",
+        "selection": "Text",
+        "rows": 99,
+        "fixtureSha256": "bf8ee85f239b777ea2b48e565a6bdb517d62b4706051168418588755aa2e1aa9",
+        "scans": {
+          "en": {
+            "pages": [
+              "e46fd4e7db69aabaec29e9a4f9f757418325467d65de4cc8755742c293ed8b14",
+              "d95bfea7a8368fbd0033ac90cc23423a7f9002c0f80bb1bc7677c5147910b624",
+              "5a3623458b5d342850e4eea36ff034a870f16dbc1cb536e86eda773a80cf21c5",
+              "454fb1a2ebdb78fe588413ff0d77dfc02b9b058588949051402cd8e6b8ec2fb8",
+              "28c8fd12f00bb6513301fb7bc2994a030428cea373abed2fde2a0219f9d5b2f6"
+            ],
+            "stitchedSha256": "a46e915e8e4d383d5caf9d5ea421fc63838a9b1c07e2d5532a5254cb8f46ce29"
+          },
+          "ru": {
+            "pages": [
+              "c46392d439bdae523f56e4ccd18eb9bf4289d53c15fa6d4bb26fe6b0eb7cf9a3",
+              "b78922227010925c3111fa0399d9e89cec58f7bfd2b44a2944bf1ba067d353b0",
+              "70cd51adaf046c34bac1a00c026f9ac7fc6a66460bbeaed6c968178636cec5bf",
+              "59a9b06615e33125dd30d34811dfc43beb38ece1e8404c41ca45a31dbe97c355"
+            ],
+            "stitchedSha256": "33c827e8fed99a06180c116b67f7c405983a8ccca5fa77b0181e758efd51257f"
+          }
+        }
+      },
+      {
+        "context": "tableBoolean",
+        "form": "ProbeUnitedPaletteInputDateBoolean",
+        "selection": "Amount",
+        "rows": 100,
+        "fixtureSha256": "bf8ee85f239b777ea2b48e565a6bdb517d62b4706051168418588755aa2e1aa9",
+        "scans": {
+          "en": {
+            "pages": [
+              "06f407925ee966b19ca202b10fd2bd5feea9fee276615155f89ace98dc401694",
+              "4fb2a6452425bba1d6d30e2564b4a0f246ca8c5689202140253559b243afc592",
+              "eb67d387a88929bd3b191f1f37ae019622b1018a671edae8962b028a6feb587a",
+              "f2215c6b7064375bd8ceb5308a4470c35b0d926746638b4a28cdb3e265f38a9b",
+              "92635f0491255623a5288ac406d6b58e5a63b2a7752c65404cf89ceded18ef70"
+            ],
+            "stitchedSha256": "a8a5737276f4f439c22f43f13f6b1375e3a2764c07adcc6e05537014e49eaa16"
+          },
+          "ru": {
+            "pages": [
+              "64f16007cabd97da2d7337d5d4f4bd4c79cf3421330cd2932011d20e1f265f7f",
+              "a8b2465935f3cd301c281898ada3e271c71450a98a68a792a22096169c37ace1",
+              "b60acec649a6dacefce60aa3053a9413e30a1ffc6d43d806fa3be076c43f7c4b",
+              "582a09027321d9481aeb2f1b1d351fb7c3d844b5224f8d69e07db904a0b912c0"
+            ],
+            "stitchedSha256": "2eb1684adc9542ff109a5a7a93293034d0df3a4deef2d77aaab1ecee2ee789a1"
+          }
+        }
+      }
+    ],
+    "rowCounts": {
+      "string": 88,
+      "number": 87,
+      "date": 84,
+      "boolean": 86,
+      "tableString": 102,
+      "tableNumber": 102,
+      "unbound": 92,
+      "mixed": 92,
+      "reference": 87,
+      "mixedReference": 94,
+      "valueList": 101,
+      "tableDate": 99,
+      "tableBoolean": 100
+    },
+    "additionalPageCaptures": 59,
+    "confirmedEnglishLabel": "OnMainServerUnavalableBehavior",
+    "bothNativeSessionsClosed": true
+  },
+  "correction": {
+    "historicalReport": "docs/measurements/t161-input-field-palette-linux.json",
+    "tableNumberPreviousCount": 101,
+    "tableNumberCorrectedCount": 102,
+    "missedRow": "Format",
+    "numericColumnPageSha256": {
+      "en": "fc6c5c0751e322595c2c247da35697217d693fc192821e6ed63c6470a09abc49",
+      "ru": "966149135d90e015980a40a96561240ee294c0abca55b4b4ebb2327cecab3899"
+    }
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "backendCommit": "572bfc426d7e5c32c85a004b75068126fb798aeb",
+    "driverCommit": "55b753690fb9d52319b1dc03c520ee76155574d2",
+    "frozenExplorerCommit": "93f320e86a24430b213a93c408ae6fad66670d00",
+    "vsixSha256": "4ee4ba5a0185e93808ff6a2f467a554fff541ccb3ae0bb6fe106544c9e09f3d0",
+    "backendSha256": "9061289bd4a9b8160e2132e7c0e480cc3b79689a5d84a862ef930327e8cc604e",
+    "runtimeManifestSha256": "8ccc3de8930f2396143385417cd3f85ea2b269c2067a4c3ca97bf3e02fe2f2f8",
+    "runtimeFilesVerifiedPerRun": 1303
+  },
+  "checks": {
+    "rust": {
+      "suites": 42,
+      "passed": 1532,
+      "ignored": 19,
+      "fmt": true,
+      "check": true,
+      "clippy": true,
+      "test": true,
+      "build": true
+    },
+    "typescript": true,
+    "compile": true
+  },
+  "acceptance": {
+    "pairsPassed": 16,
+    "initialPairsPassed": 15,
+    "advancedTransitionsPerLocale": 5,
+    "sameRuntimeAcrossRepeats": true,
+    "tableReadinessRepeats": [
+      {
+        "run": "ru-first",
+        "locale": "ru",
+        "cases": 17,
+        "passed": true
+      },
+      {
+        "run": "en",
+        "locale": "en",
+        "cases": 17,
+        "passed": true
+      },
+      {
+        "run": "ru-repeat",
+        "locale": "ru",
+        "cases": 17,
+        "passed": true
+      }
+    ],
+    "runs": [
+      {
+        "suite": "property-catalogue",
+        "locale": "en",
+        "passed": true,
+        "bindingTransitions": [
+          "dirty-binding-unbound",
+          "dirty-binding-mixed-number",
+          "dirty-binding-catalog-reference",
+          "dirty-binding-mixed-reference",
+          "dirty-binding-value-list"
+        ],
+        "diskUnchanged": true
+      },
+      {
+        "suite": "property-catalogue",
+        "locale": "ru",
+        "passed": true,
+        "bindingTransitions": [
+          "dirty-binding-unbound",
+          "dirty-binding-mixed-number",
+          "dirty-binding-catalog-reference",
+          "dirty-binding-mixed-reference",
+          "dirty-binding-value-list"
+        ],
+        "diskUnchanged": true
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "passed": true,
+        "repeated": true,
+        "results": 17
+      },
+      {
+        "suite": "handlers",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "handlers",
+        "locale": "ru",
+        "passed": true
+      },
+      {
+        "suite": "inspectors",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "inspectors",
+        "locale": "ru",
+        "passed": true
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "passed": true
+      },
+      {
+        "suite": "detached-space",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "detached-space",
+        "locale": "ru",
+        "passed": true
+      },
+      {
+        "suite": "composition",
+        "locale": "en",
+        "passed": true
+      },
+      {
+        "suite": "composition",
+        "locale": "ru",
+        "passed": true
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "passed": true,
+        "caseCount": 4
+      },
+      {
+        "suite": "application",
+        "locale": "ru",
+        "passed": true,
+        "caseCount": 4
+      }
+    ],
+    "initialTableFailure": "The test wrote a reactive frame width and read 172 px. Waiting on the overwritten frame style also timed out. Resizing the preview viewport reached exactly 260 px and restored the initial width."
+  },
+  "pending": [
+    "Extended multiple-value editing",
+    "Additional reference, composite and column domains",
+    "Available-state and style provenance combinations",
+    "Other element palettes",
+    "Windows native acceptance"
+  ]
+}

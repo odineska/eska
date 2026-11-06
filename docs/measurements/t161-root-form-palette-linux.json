@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 1,
+  "task": "T161",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "fixture": "tests/fixtures/forms/native-property-palette/form-root.json",
+  "fixtureSha256": "c0fe2a20c9168f863a08ec867d5ea9a0d435397375619b5cffdba54e40aadb44",
+  "native": {
+    "defaultRows": 58,
+    "saveListRows": 59,
+    "catalogObjectRows": 66,
+    "commonEventRows": 28,
+    "catalogObjectEventRows": 35,
+    "noSettingStorageWithOnlyAutoSave": true,
+    "settingStorageWithOnlySaveList": true,
+    "capturedSessionsClosed": 4,
+    "scans": [
+      {
+        "context": "commonForm",
+        "nativeRows": 58,
+        "formSha256": "05618dfbcf58259e13f4249f6566ed7ceb94c66982467d32a2e3062a0ce4a37d",
+        "locales": {
+          "en": {
+            "pageSha256": [
+              "e2f47cafc2f4bd80499d1bc125d0bfe683f03275b0bc6d9e765f501c2c4c2624",
+              "53ea84f4143635e6919926d90d56f5b7e2dd44e08d44d397ec22389d5fd4ed1f",
+              "01fc02667054bfa15e8d126e5f383eb2a249d29d8fbd2e6e10f15dd506b45eab"
+            ],
+            "stitchedSha256": "1d99eae9bbc6ff33e6648a657deb98be88d2c24a62cd33b6af4eeff57e79de46"
+          },
+          "ru": {
+            "pageSha256": [
+              "54ee715d36bbae988db763ad130e591320bbcb9f56935d8e92429c4bd9cb88ec",
+              "048ab78b98356c71b84d6f18c7818a2261ed5253f37e6dc880801db6a7ea13a7",
+              "331dfb867f095d7c8e9d8945d9c65b6955fea55d80155d622ee9cc9da7600ec6"
+            ],
+            "stitchedSha256": "eb9f7f3add5819c6d5cb6f77af76378fcfccb12f6e6805148c3ef4970a2cc8ad"
+          }
+        }
+      },
+      {
+        "context": "commonFormSavingList",
+        "nativeRows": 59,
+        "formSha256": "d2d86b82108641b7c008820701eec2e8356d8dcf895d3211d43d9da4f5c938d3",
+        "locales": {
+          "en": {
+            "pageSha256": [
+              "6f00cceb3e1052b75ce2661cba686507ed5e87fee753936ba2221559b0fbb866",
+              "4b5531ad9316123b085c0c35b74fd70dcd6dbf2fb6fad7cd6ef09a0acdd5ade4",
+              "25bed9fffc9b82aad079c3457b8f0f95a80a33399cc81738cd21aa9e39f3dde8"
+            ],
+            "stitchedSha256": "17395a413f14527018e1f025c543b9ef0de16e74f0947823404b2baa9896942d"
+          },
+          "ru": {
+            "pageSha256": [
+              "3cc0225a67be2cbf04a7ed86995615e7b269853d0497ce12ab0808617809ee80",
+              "ca42d4b0477e65346200ff1f11b66e09099310c1175030f73f9f2d461bb27e98",
+              "1430e9b8b071274bc999a74243ef229ed9e6bb08f8fae7e7c211c854b0ffbd7b"
+            ],
+            "stitchedSha256": "5b0a7f3275e625b54bf8bf67e6921b4914779697ca09219719ac352d216ccfab"
+          }
+        }
+      },
+      {
+        "context": "catalogFormWithoutMainAttribute",
+        "nativeRows": 58,
+        "formSha256": "88155ab2d7067d4b0543429cc9ae97ba303be9d0e34d1701d2322ab25ad8c9a2",
+        "locales": {
+          "en": {
+            "pageSha256": [
+              "8b92bd597eb9031528094001739f4cdfefcc59f070630cfbcf3738b5003fc144",
+              "fb8b97c184f63b24f004923ebfdbfe334b368fd202e22068c5dfff3294fd253c",
+              "3279b4d913ab6a3f092203d2ccb264487afc86b9303198ac847416636f2a8887"
+            ],
+            "stitchedSha256": "fef0b6851ca24c80a0210c4d699a2bc2a3854463820b64ef29a01fdd76016ebc"
+          },
+          "ru": {
+            "pageSha256": [
+              "172b8ee9fb990864e59b4b29ce9af24ea63c95dbb74dc6ec7d91196c8bd5b1c5",
+              "34fc21bb08684b8786a6ca66b14c742840ac8b25160dfdb446096092497a64ad",
+              "67695056d8423b505652aceff797b9ebb96509f200af6eee727d5d842db84622"
+            ],
+            "stitchedSha256": "f5e7960b3dc3dd213d18ecae41429670fdec8dbb0d85286057d0a924827d0383"
+          }
+        }
+      },
+      {
+        "context": "nonHierarchicalCatalogObjectForm",
+        "nativeRows": 66,
+        "formSha256": "6ff8928ae337a372d294f6e24556d2875bd0aa90c505e695d98bc7a8331fe8b8",
+        "locales": {
+          "en": {
+            "pageSha256": [
+              "d71dc1c36d9e74c8b87bd75c84d12cc2d9b7a054f578429694474626072d95da",
+              "19a6829ea0aaf932a08da581733ea9769b23d6e0578f73792af56885dc15d88d",
+              "3a7e2e7d91ec3cfb920675edadce1b918239fd07300428145b70f6a68073ff23"
+            ],
+            "stitchedSha256": "e33753b35a915d5b2f4de29ed32f716acb3d2631de54be8e7f3e8404c09e8a78"
+          },
+          "ru": {
+            "pageSha256": [
+              "77f42ad58018c8a56302e388bfb294774db390f2a34f907971c2e0b4c415c642",
+              "b9feacff7519f24ea9a81754586b9445f6318aede47af929c857b339619fae9d",
+              "57db7fff3bd3a2998a47b745884f3c1fd1e6857658540a03c5bbae9a8a6796ea"
+            ],
+            "stitchedSha256": "f58d12b9d88ab56f9fe1a6107f0ad6ae8db1901e9e66dc1127bf5301eb3fc59e"
+          }
+        }
+      },
+      {
+        "context": "storedSettingsRoundTrip",
+        "nativeRows": 59,
+        "formSha256": "c4405767d64791bda3ad772b6ba4ee3f2f6d2ed9e935c41e4e2414d170ab07ec",
+        "locales": {
+          "en": {
+            "pageSha256": [
+              "6813ffec42db5c49164cec1c84d7045b967c7ca807a38fd975cd7fcecd8f0360",
+              "e278d8754cbc1c0d09fee997809cdaf4a3bbbe69f3e6b58c1b261bd9b4d9ed9e",
+              "b6b1c090fd4e78a6cfb48e8e652e3b5f59c63c640c881df768bb60db7870a989"
+            ],
+            "stitchedSha256": "35c3d8b37f7b65198ffd3d9df6b768920aec59e4124e89131d9ebdb984820f2b"
+          },
+          "ru": {
+            "pageSha256": [
+              "4ad4678e7ee6861f13f0e34012d40a3591641a916c4db819bf5c4f2e7be3d7e6",
+              "89f3ae41f307b19a0013dce9694a3076c1b78807f59afe42e08fb924d44c7a2f",
+              "6227f91d3063aac85849c5e9f5a0bc44bb7d0829ef6dd8ecc82bc2afb5eddbf7"
+            ],
+            "stitchedSha256": "3fde13b529207123e1c0a774a32cad539e1b627594e2ce3cce098942dcbf241e"
+          }
+        }
+      }
+    ],
+    "roundTrip": {
+      "properties": {
+        "Group": "HorizontalIfPossible",
+        "SettingsStorage": "SettingsStorage.ProbeFormSettings",
+        "ScalingMode": "Normal",
+        "Scale": "110"
+      },
+      "enScale110CaptureSha256": "aed342ea6b1ef5b6d3a1bb6a4b8b1c9011a3938382cb712de3124763e65bb2c1",
+      "englishStorageBeforeScaleChange": true
+    },
+    "saveModeChecksSha256": {
+      "ru-save-list-only": "ef5f20c49e1c99967c7e927992f55e8816416c75b2ad4dcaa0d0b19898695eba",
+      "ru-save-neither": "0f1f2901560417bdd963f22646f21e9cad9b67c08f46b13c225c65cd595072e5",
+      "ru-autosave-only": "c275b8acfd672479a4ffd5f7c68f42d2931d0b3706f2bc14d6f9f8f514645455"
+    }
+  },
+  "implementation": {
+    "coreCommit": "5a9cb3f",
+    "booleanHintCorrection": "30c3c5d",
+    "firstInstalledRunFailure": "Declared AutoTitle=false displayed as raw text in both locales. The backend now sends a boolean hint and keeps the original token."
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "backendCommit": "30c3c5d9daf5828f1258634315f87e5259b25c5e",
+    "explorerCommit": "29cf9db5175f36518e616703f29d5c04cd9bb82a",
+    "backendSha256": "eaa4855b205db3ac677fcb19c02bd335ef7f05ebacd7f6d38e65c3d852ec88fc",
+    "vsixSha256": "60fa0bdf29cc6276daf21bf798923f03de293d297c615ab59c76f22e83298d0b",
+    "runtimeManifestSha256": "09653f799e909c1570d45ae9b7398283cea410d0403f1c12950d5a913840f58b",
+    "runtimeFilesVerifiedPerRun": 1303
+  },
+  "checks": {
+    "rust": {
+      "suites": 42,
+      "passed": 1536,
+      "ignored": 19,
+      "fmt": true,
+      "check": true,
+      "clippy": true,
+      "test": true,
+      "build": true
+    },
+    "typescript": true,
+    "compile": true,
+    "localeKeyCount": 230
+  },
+  "acceptance": {
+    "pairsPassed": 20,
+    "caseCountsBySuite": {
+      "property-catalogue": {
+        "en": 20,
+        "ru": 20
+      },
+      "handlers": {
+        "en": 1,
+        "ru": 1
+      },
+      "inspectors": {
+        "en": 1,
+        "ru": 1
+      },
+      "preview": {
+        "en": 1,
+        "ru": 1
+      },
+      "detached-space": {
+        "en": 6,
+        "ru": 6
+      },
+      "composition": {
+        "en": 9,
+        "ru": 9
+      },
+      "owners": {
+        "en": 9,
+        "ru": 9
+      },
+      "style-composition": {
+        "en": 13,
+        "ru": 13
+      },
+      "tables": {
+        "en": 17,
+        "ru": 17
+      },
+      "application": {
+        "en": 4,
+        "ru": 4
+      }
+    },
+    "rootCasesPerLocale": [
+      "native-form-root-properties-and-events",
+      "dirty-form-root-settings-storage-and-scaling",
+      "root-settings-and-events-navigate-to-existing-xml",
+      "form-root-restores-defaults"
+    ],
+    "compatibilityPairsPassed": 6,
+    "compatibilityRuns": [
+      {
+        "mode": "input-only",
+        "locale": "en",
+        "passed": true,
+        "diskUnchanged": true,
+        "case": "earlier-1.41-root-xml-fallback"
+      },
+      {
+        "mode": "input-only",
+        "locale": "ru",
+        "passed": true,
+        "diskUnchanged": true,
+        "case": "earlier-1.41-root-xml-fallback"
+      },
+      {
+        "mode": "group-only",
+        "locale": "en",
+        "passed": true,
+        "diskUnchanged": true,
+        "case": "earlier-1.41-root-xml-fallback"
+      },
+      {
+        "mode": "group-only",
+        "locale": "ru",
+        "passed": true,
+        "diskUnchanged": true,
+        "case": "earlier-1.41-root-xml-fallback"
+      },
+      {
+        "mode": "legacy",
+        "locale": "en",
+        "passed": true,
+        "diskUnchanged": true,
+        "case": "api-1.40-root-xml-fallback"
+      },
+      {
+        "mode": "legacy",
+        "locale": "ru",
+        "passed": true,
+        "diskUnchanged": true,
+        "case": "api-1.40-root-xml-fallback"
+      }
+    ],
+    "compatibilityVsixSha256": "da36dea042e386f33b9196468d3dff7082d43a7084dc29a37a5b4379cd0f6d9b",
+    "compatibilityRuntimeManifestMatches": true,
+    "rootPropertyNavigationVerified": true,
+    "sourceWritesDuringViewing": false
+  },
+  "pending": [
+    "Hierarchical catalogs, document and report forms and other root contexts",
+    "Additional property availability, enumeration values and resolved style provenance",
+    "Native form geometry and pixels for all property combinations",
+    "Windows native acceptance"
+  ]
+}

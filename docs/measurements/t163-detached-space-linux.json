@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "task": "T163 detached main inspector area",
+  "date": "2026-11-05",
+  "platform": "Linux ARM64, X11, VS Code 1.109.0, ru/en",
+  "passed": true,
+  "windowsAccepted": false,
+  "wholeFormVisualParity": false,
+  "implementation": {
+    "main": "Detached main view renders neither preview placeholder nor horizontal splitter; inspector DOM remains mounted and fills measured shell minus actual toolbar/status.",
+    "preferences": "Only displayed height changes. Saved upper/left/right/zoom/page/group/property expansion are not overwritten. Dock and native close restore the saved split, clamped to the current available height.",
+    "preview": "Floating preview retains independent geometry, shared selection/session/navigation and live dirty XML. Existing toolbar reveal command remains.",
+    "protocolChanged": false,
+    "dependenciesAdded": false,
+    "sourceWrites": false
+  },
+  "matrix": [
+    {
+      "locale": "en",
+      "passed": true,
+      "nativeClose": true,
+      "dirtyUpdates": true,
+      "propertyExpansionRetained": true,
+      "sourceWritesDuringViewing": false,
+      "cases": [
+        {
+          "label": "css-420-360",
+          "shell": 360,
+          "toolbar": 61,
+          "status": 23,
+          "height": 276,
+          "splitters": 0,
+          "preview": 0,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        },
+        {
+          "label": "css-1000-700",
+          "shell": 700,
+          "toolbar": 34,
+          "status": 23,
+          "height": 643,
+          "splitters": 0,
+          "preview": 0,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        },
+        {
+          "label": "css-420-180",
+          "shell": 180,
+          "toolbar": 61,
+          "status": 47,
+          "height": 84,
+          "splitters": 0,
+          "preview": 0,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        },
+        {
+          "label": "native-900-600",
+          "shell": 508,
+          "toolbar": 57,
+          "status": 23,
+          "height": 428,
+          "splitters": 0,
+          "preview": 0,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        },
+        {
+          "label": "native-1280-800",
+          "shell": 708,
+          "toolbar": 34,
+          "status": 23,
+          "height": 651,
+          "splitters": 0,
+          "preview": 0,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        },
+        {
+          "label": "dock-small",
+          "shell": 320,
+          "toolbar": 61,
+          "status": 23,
+          "height": 135,
+          "splitters": 1,
+          "preview": 1,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "passed": true,
+      "nativeClose": true,
+      "dirtyUpdates": true,
+      "propertyExpansionRetained": true,
+      "sourceWritesDuringViewing": false,
+      "cases": [
+        {
+          "label": "css-420-360",
+          "shell": 360,
+          "toolbar": 61,
+          "status": 47,
+          "height": 252,
+          "splitters": 0,
+          "preview": 0,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        },
+        {
+          "label": "css-1000-700",
+          "shell": 700,
+          "toolbar": 34,
+          "status": 23,
+          "height": 643,
+          "splitters": 0,
+          "preview": 0,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        },
+        {
+          "label": "css-420-180",
+          "shell": 180,
+          "toolbar": 61,
+          "status": 47,
+          "height": 84,
+          "splitters": 0,
+          "preview": 0,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        },
+        {
+          "label": "native-900-600",
+          "shell": 508,
+          "toolbar": 57,
+          "status": 23,
+          "height": 428,
+          "splitters": 0,
+          "preview": 0,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        },
+        {
+          "label": "native-1280-800",
+          "shell": 708,
+          "toolbar": 34,
+          "status": 23,
+          "height": 651,
+          "splitters": 0,
+          "preview": 0,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        },
+        {
+          "label": "dock-small",
+          "shell": 320,
+          "toolbar": 61,
+          "status": 47,
+          "height": 111,
+          "splitters": 1,
+          "preview": 1,
+          "placeholder": 0,
+          "sameOwners": true,
+          "recordOpen": true,
+          "zoom": "125",
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "regression": {
+    "pairs": 12,
+    "caseIds": 84,
+    "allPassed": true,
+    "runtimeFiles": 1303,
+    "runtimeManifestSha256": "913a07008c5545d32de20cc83e12df16f8dc34aba1e4df6351522205c38ca10a",
+    "sameProductionRuntimeVerified": true,
+    "attempts": [
+      {
+        "batch": "form-batch-SZoWmX",
+        "rawPassed": false,
+        "reason": "New driver fixture not registered; the other ten pairs passed.",
+        "testOnlyChanges": [],
+        "runtimeManifestSha256": "913a07008c5545d32de20cc83e12df16f8dc34aba1e4df6351522205c38ca10a",
+        "vsixSha256": "309b226802c6bba885b730373b9d43f75dff01fecd10b585d5317bc817883e9c",
+        "batchSha256": "b2347087423ff6d0c242879a6bd540bac9be0eea08536842c4323f234f55275a",
+        "inputsSha256": "44defaad99c3300487addb629796566741f02d90c0109fc29def3eeb74a84150",
+        "rawFailures": [
+          {
+            "suite": "detached-space",
+            "locale": "en"
+          },
+          {
+            "suite": "detached-space",
+            "locale": "ru"
+          }
+        ]
+      },
+      {
+        "batch": "form-batch-mZ7ljc",
+        "rawPassed": false,
+        "reason": "New driver observed transient selection before final acknowledgement.",
+        "testOnlyChanges": [
+          "test/run-host.mjs"
+        ],
+        "runtimeManifestSha256": "913a07008c5545d32de20cc83e12df16f8dc34aba1e4df6351522205c38ca10a",
+        "vsixSha256": "47e034f03c29132ae25ceb191b1953c194e24f17e9c06bdd64211b057f91c43b",
+        "batchSha256": "d75c6567c5c563dffa556981a359a39afe77915b378dce65d95c14298657897c",
+        "inputsSha256": "a1e05b52df1c8cd9b87fa1cb1a985c9fd6f235c591e631d8108f3031fdc72e8e",
+        "rawFailures": [
+          {
+            "suite": "detached-space",
+            "locale": "en"
+          },
+          {
+            "suite": "detached-space",
+            "locale": "ru"
+          }
+        ]
+      },
+      {
+        "batch": "form-batch-l5GDl9",
+        "rawPassed": false,
+        "reason": "Host selection acknowledgement preceded delivery to the webview; test now waits for the actual selection message.",
+        "testOnlyChanges": [
+          "test/form-detached-space-host.cjs",
+          "test/run-host.mjs"
+        ],
+        "runtimeManifestSha256": "913a07008c5545d32de20cc83e12df16f8dc34aba1e4df6351522205c38ca10a",
+        "vsixSha256": "378ebe6f361d1f122f244eb223e1fb1e3d5fb9079e0a7b345d5d5c7c71cf594c",
+        "batchSha256": "f8e9c75728e9a651b49f1edf5fa6e74bd2559be4c65b44464ee1ad27a025484a",
+        "inputsSha256": "e7149eef8b5a3445e1c30707d0156b88d158a0ba9e6bd4b581969a024c889c9b",
+        "rawFailures": [
+          {
+            "suite": "detached-space",
+            "locale": "en"
+          },
+          {
+            "suite": "detached-space",
+            "locale": "ru"
+          }
+        ]
+      },
+      {
+        "batch": "form-batch-mNGm1y",
+        "rawPassed": true,
+        "reason": "Final target run passed after test-only setup repairs.",
+        "testOnlyChanges": [
+          "test/form-detached-space-host.cjs",
+          "test/run-host.mjs"
+        ],
+        "runtimeManifestSha256": "913a07008c5545d32de20cc83e12df16f8dc34aba1e4df6351522205c38ca10a",
+        "vsixSha256": "59df5db972118ecc5b877f4a43ed6c6e619728d35238d5b1d80ca5cd36363c70",
+        "batchSha256": "25fa1a17c90c29d1651d61ee25fd6d7f35cf9525499ee2e726657969b48c1e40",
+        "inputsSha256": "bdca30d0f382878442f1d32f67a2425a9c2657cf17be70b8adbb70cdfb7f7855",
+        "rawFailures": []
+      },
+      {
+        "batch": "form-batch-GpIwSu",
+        "rawPassed": false,
+        "reason": "One target test captured the dock split before the wrapped toolbar ResizeObserver update; assertions now wait for the exact allocation.",
+        "testOnlyChanges": [
+          "test/form-detached-space-host.cjs",
+          "test/run-host.mjs"
+        ],
+        "runtimeManifestSha256": "913a07008c5545d32de20cc83e12df16f8dc34aba1e4df6351522205c38ca10a",
+        "vsixSha256": "8176cb2575c221302d55082155688e8eec6ed1520fedbf13783cb71fe09ef6d8",
+        "batchSha256": "eef7cef43ef545816db190d2056d331fde015510d538d25280872afa4d986c56",
+        "inputsSha256": "9cec7976d6ad2ac3f50fc7f3a306db67d37f993f5ac5e64da1e97d174cedb8a1",
+        "rawFailures": [
+          {
+            "suite": "detached-space",
+            "locale": "en"
+          }
+        ]
+      },
+      {
+        "batch": "form-batch-WhHoHo",
+        "rawPassed": true,
+        "reason": "Final ru/en target test passed, including native snapshots of the filled main view and exact dock allocation.",
+        "testOnlyChanges": [
+          "test/form-detached-space-host.cjs",
+          "test/run-host.mjs"
+        ],
+        "runtimeManifestSha256": "913a07008c5545d32de20cc83e12df16f8dc34aba1e4df6351522205c38ca10a",
+        "vsixSha256": "9569433fd32dc28fb3281b4dd9c78c2501d8a8a4ec517baa12c4585e6c9b0ae7",
+        "batchSha256": "2e6d74abf592f972bcd9c430a4282174ccaeab2cfe927c09995eeac74c158772",
+        "inputsSha256": "1dfa469781642ff4c05231ef2cdfd8d371ed943d54d52ec4a44567f32a953799",
+        "rawFailures": []
+      }
+    ],
+    "runs": [
+      {
+        "suite": "detached-space",
+        "locale": "en",
+        "batch": "form-batch-WhHoHo",
+        "passed": true,
+        "caseIds": 6
+      },
+      {
+        "suite": "detached-space",
+        "locale": "ru",
+        "batch": "form-batch-WhHoHo",
+        "passed": true,
+        "caseIds": 6
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "en",
+        "batch": "form-batch-SZoWmX",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "multiple-windows",
+        "locale": "ru",
+        "batch": "form-batch-SZoWmX",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "restore",
+        "locale": "en",
+        "batch": "form-batch-SZoWmX",
+        "passed": true,
+        "caseIds": 2
+      },
+      {
+        "suite": "restore",
+        "locale": "ru",
+        "batch": "form-batch-SZoWmX",
+        "passed": true,
+        "caseIds": 2
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "batch": "form-batch-SZoWmX",
+        "passed": true,
+        "caseIds": 31
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "batch": "form-batch-SZoWmX",
+        "passed": true,
+        "caseIds": 31
+      },
+      {
+        "suite": "inspectors",
+        "locale": "en",
+        "batch": "form-batch-SZoWmX",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "inspectors",
+        "locale": "ru",
+        "batch": "form-batch-SZoWmX",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "batch": "form-batch-SZoWmX",
+        "passed": true,
+        "caseIds": 1
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "batch": "form-batch-SZoWmX",
+        "passed": true,
+        "caseIds": 1
+      }
+    ]
+  },
+  "checks": {
+    "unit": [
+      {
+        "name": "typescript",
+        "exitCode": 0,
+        "seconds": 0.231,
+        "log": "validated-typescript.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "compile",
+        "exitCode": 0,
+        "seconds": 0.199,
+        "log": "validated-compile.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "compile-ts",
+        "exitCode": 0,
+        "seconds": 0.267,
+        "log": "validated-compile-ts.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "bundle",
+        "exitCode": 0,
+        "seconds": 0.773,
+        "log": "validated-bundle.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "node",
+        "exitCode": 0,
+        "seconds": 8.197,
+        "log": "validated-node.log",
+        "sha256": "be36bf0f154b851cd4b6c712fbb21a7a82baca1b523ee41c9a3ca332a31b93c8"
+      },
+      {
+        "name": "bun",
+        "exitCode": 0,
+        "seconds": 24.784,
+        "log": "validated-bun.log",
+        "sha256": "8d1e811ee41dd11a16a1918cb617fb20f8498ba9f88362e91679b91705de39e1"
+      }
+    ],
+    "counts": {
+      "node": {
+        "pass": 595,
+        "fail": 0,
+        "skipped": 8
+      },
+      "bun": {
+        "pass": 583,
+        "skip": 8,
+        "fail": 0
+      }
+    },
+    "rust": "fmt/check/clippy/test already passed on the unchanged core (1520 passed, 19 ignored); core source hashes equal the previous accepted checkpoint."
+  },
+  "limits": [
+    "Windows acceptance remains deferred; port native window helper and verify native close/reload/focus.",
+    "Parent T163 and full form visual acceptance remain in progress.",
+    "No performance thresholds or visual-parity percentages are claimed."
+  ],
+  "publication": {
+    "newPush": false,
+    "newRelease": false,
+    "versionsUnchanged": {
+      "eska": "0.24.0",
+      "explorer": "0.1.9"
+    }
+  }
+}

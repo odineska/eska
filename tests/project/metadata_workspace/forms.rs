@@ -117,6 +117,81 @@ fn form_context_uses_application_order_dirty_layers_and_per_input_identity_witho
 }
 
 #[test]
+fn form_palette_preserves_each_extensions_declared_property_and_attribute() {
+    use crate::backend::project::forms::PaletteValue;
+
+    let (directory, mut workspace) = setup();
+    let baseline = r#"<ChildItems><UsualGroup name="Group" id="1" DisplayImportance="Low"><Group>Vertical</Group></UsualGroup></ChildItems>"#;
+    let first = baseline
+        .replace("Low", "High")
+        .replace("</UsualGroup>", "<United>false</United></UsualGroup>");
+    let second = baseline.replace(r#"id="1""#, r#"id="1" xmlns:f="urn:extra" f:hint="second""#);
+    let first_xml = form(&first, Some(baseline));
+    for (member, xml) in [
+        ("base", form(baseline, None)),
+        ("one", first_xml.clone()),
+        ("two", form(&second, Some(baseline))),
+    ] {
+        fs::write(directory.0.join(member).join("src").join(PATH), xml).unwrap();
+    }
+    let project = workspace
+        .project_mut(&ProjectScope::Member(
+            crate::backend::project::ProjectName::parse("base".into()).unwrap(),
+        ))
+        .unwrap();
+    let node = node(project);
+    let preview = project
+        .form_preview(&node, Some("app"), &[], &[], Vec::new(), None)
+        .unwrap();
+    let element = &preview.form.root.children[0];
+    let palette = preview.property_palette(&element.identity).unwrap();
+    let group = preview
+        .presentation
+        .elements
+        .iter()
+        .find(|group| group.identity == element.identity)
+        .unwrap();
+    assert_eq!(group.united, Some(false));
+    let rows = palette.rows.unwrap();
+    let first_source = preview
+        .dependencies
+        .iter()
+        .find(|dependency| {
+            dependency.member.as_deref() == Some("one") && dependency.path == Path::new(PATH)
+        })
+        .unwrap();
+    let value = |id| {
+        &rows
+            .iter()
+            .find(|row| row.definition.is_some_and(|definition| definition.id == id))
+            .unwrap()
+            .value
+    };
+    let PaletteValue::Qualifier {
+        attribute,
+        extension,
+    } = value("DisplayImportance")
+    else {
+        panic!("missing declared DisplayImportance attribute");
+    };
+    assert!(*extension);
+    assert_eq!(attribute.text, "High");
+    assert_eq!(attribute.origin.source, first_source.id);
+    assert_eq!(
+        &first_xml[attribute.origin.range.clone()],
+        r#"DisplayImportance="High""#
+    );
+    let PaletteValue::Declared {
+        index, extension, ..
+    } = value("United")
+    else {
+        panic!("missing declared United property");
+    };
+    assert!(*extension);
+    assert_eq!(element.properties[*index].origin.source, first_source.id);
+}
+
+#[test]
 fn handler_modules_follow_effective_property_provenance_and_recheck_context() {
     let (directory, mut workspace) = setup();
     let base = BODY.replace(

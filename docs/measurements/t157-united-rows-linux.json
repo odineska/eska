@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 1,
+  "scope": "Shared rows of ordinary vertical groups in a horizontal container",
+  "platform": "Linux ARM64, X11",
+  "profile": "taxi-8.3.27",
+  "nativeBuild": "8.3.27.2342",
+  "apiVersion": "1.41",
+  "explorerCommit": "5c3b8bb",
+  "nativeBaseline": "t157-united-layout-baseline-linux.json",
+  "artifact": {
+    "vsixSha256": "b616207fc1199ebac057e584cf9773f53a5c865e140ded33c2e2ef08e1609487",
+    "backendSha256": "355acce7b4002de008ba782689d0b39edc27bd18f5d005889f06dcfba82b778f",
+    "verifiedRuntimeFilesPerRun": 1303
+  },
+  "rust": {
+    "suites": 42,
+    "passed": 1524,
+    "ignored": 19
+  },
+  "node": {
+    "passed": 603,
+    "skipped": 8
+  },
+  "bun": {
+    "passed": 591,
+    "skipped": 8
+  },
+  "installedRuns": [
+    {
+      "suite": "united",
+      "locale": "en",
+      "passed": true,
+      "cases": 6
+    },
+    {
+      "suite": "united",
+      "locale": "ru",
+      "passed": true,
+      "cases": 6
+    },
+    {
+      "suite": "responsive",
+      "locale": "en",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "responsive",
+      "locale": "ru",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "detached-space",
+      "locale": "en",
+      "passed": true,
+      "cases": 6
+    },
+    {
+      "suite": "detached-space",
+      "locale": "ru",
+      "passed": true,
+      "cases": 6
+    },
+    {
+      "suite": "inspectors",
+      "locale": "en",
+      "passed": true,
+      "cases": 1
+    },
+    {
+      "suite": "inspectors",
+      "locale": "ru",
+      "passed": true,
+      "cases": 1
+    },
+    {
+      "suite": "application",
+      "locale": "en",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "suite": "application",
+      "locale": "ru",
+      "passed": true,
+      "cases": 4
+    }
+  ],
+  "preferredGeometryByLocale": {
+    "en": [
+      {
+        "kind": "ColumnsFF",
+        "leftGap": 48,
+        "rightGap": 47,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsFT",
+        "leftGap": 65,
+        "rightGap": 32,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsTF",
+        "leftGap": 48,
+        "rightGap": 79,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsTT",
+        "leftGap": 48,
+        "rightGap": 32,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "NestedFF",
+        "leftGap": 48,
+        "rightGap": 47,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "NestedFT",
+        "leftGap": 48,
+        "rightGap": 79,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      }
+    ],
+    "ru": [
+      {
+        "kind": "ColumnsFF",
+        "leftGap": 48,
+        "rightGap": 47,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsFT",
+        "leftGap": 65,
+        "rightGap": 32,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsTF",
+        "leftGap": 48,
+        "rightGap": 79,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "ColumnsTT",
+        "leftGap": 48,
+        "rightGap": 32,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "NestedFF",
+        "leftGap": 48,
+        "rightGap": 47,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      },
+      {
+        "kind": "NestedFT",
+        "leftGap": 48,
+        "rightGap": 79,
+        "widths": [
+          151,
+          151,
+          191,
+          191
+        ]
+      }
+    ]
+  },
+  "validatedTransitions": [
+    "grouped and exposed rows",
+    "nested grouping",
+    "dirty XML in a detached native window",
+    "CSS resize without a new source revision",
+    "retained DOM and untouched files"
+  ],
+  "pending": [
+    "shared column tracks",
+    "ThroughAlign rendering",
+    "complete complex native forms",
+    "Windows acceptance",
+    "additional typography, spacing overrides and DPI contexts"
+  ],
+  "calibratedGeometry": {
+    "explorerCommits": [
+      "5981128",
+      "3d7a19a"
+    ],
+    "measurement": "Relative input rectangles at the preferred size. Native exact-color interiors are converted to control bounds with a one-pixel border on each side.",
+    "relativeRectanglesExact": 26,
+    "compared": 28,
+    "pendingForms": [
+      "RowsF",
+      "RowsT"
+    ],
+    "calibratedMultilineCases": [
+      {
+        "height": null,
+        "font": null,
+        "controlHeight": 51,
+        "nextRowOffset": 60
+      },
+      {
+        "height": 0,
+        "font": null,
+        "controlHeight": 51,
+        "nextRowOffset": 60
+      },
+      {
+        "height": 1,
+        "font": null,
+        "controlHeight": 23,
+        "nextRowOffset": 32
+      },
+      {
+        "height": 2,
+        "font": null,
+        "controlHeight": 51,
+        "nextRowOffset": 60
+      },
+      {
+        "height": 3,
+        "font": null,
+        "controlHeight": 79,
+        "nextRowOffset": 88
+      },
+      {
+        "height": 4,
+        "font": null,
+        "controlHeight": 107,
+        "nextRowOffset": 116
+      },
+      {
+        "height": 5,
+        "font": null,
+        "controlHeight": 135,
+        "nextRowOffset": 144
+      },
+      {
+        "height": 2,
+        "font": 14,
+        "controlHeight": 76,
+        "nextRowOffset": 85
+      },
+      {
+        "height": 4,
+        "font": 14,
+        "controlHeight": 158,
+        "nextRowOffset": 167
+      },
+      {
+        "height": 1,
+        "font": 8,
+        "controlHeight": 20,
+        "nextRowOffset": 29
+      },
+      {
+        "height": 2,
+        "font": 8,
+        "controlHeight": 45,
+        "nextRowOffset": 54
+      },
+      {
+        "height": 1,
+        "font": 9,
+        "controlHeight": 22,
+        "nextRowOffset": 31
+      },
+      {
+        "height": 2,
+        "font": 9,
+        "controlHeight": 49,
+        "nextRowOffset": 58
+      },
+      {
+        "height": 1,
+        "font": 11,
+        "controlHeight": 28,
+        "nextRowOffset": 37
+      },
+      {
+        "height": 2,
+        "font": 11,
+        "controlHeight": 61,
+        "nextRowOffset": 70
+      },
+      {
+        "height": 1,
+        "font": 12,
+        "controlHeight": 29,
+        "nextRowOffset": 38
+      },
+      {
+        "height": 2,
+        "font": 12,
+        "controlHeight": 64,
+        "nextRowOffset": 73
+      },
+      {
+        "height": 1,
+        "font": 16,
+        "controlHeight": 38,
+        "nextRowOffset": 47
+      },
+      {
+        "height": 2,
+        "font": 16,
+        "controlHeight": 82,
+        "nextRowOffset": 91
+      },
+      {
+        "height": 1,
+        "font": 20,
+        "controlHeight": 48,
+        "nextRowOffset": 57
+      },
+      {
+        "height": 2,
+        "font": 20,
+        "controlHeight": 102,
+        "nextRowOffset": 111
+      }
+    ],
+    "node": {
+      "passed": 605,
+      "skipped": 8
+    },
+    "bun": {
+      "passed": 593,
+      "skipped": 8
+    },
+    "artifact": {
+      "vsixSha256": "1a64771b7ce1c69be6d023be46e99b6ea66b2aae058520ac5696d743ada560da",
+      "backendSha256": "355acce7b4002de008ba782689d0b39edc27bd18f5d005889f06dcfba82b778f"
+    },
+    "installedRuns": 10,
+    "caseIds": 96
+  }
+}

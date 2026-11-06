@@ -1,0 +1,600 @@
+{
+  "schemaVersion": 1,
+  "profile": "taxi-8.3.27",
+  "platformBuild": "8.3.27.2342",
+  "platform": "Linux ARM64, X11",
+  "configurationCompatibility": "Version8_3_27",
+  "context": {
+    "owner": "CommonForm",
+    "elementKind": "UsualGroup",
+    "name": "Group",
+    "grouping": "Vertical",
+    "behaviorDisplay": "Auto"
+  },
+  "fixture": {
+    "baseline": "UsualGroup.xml",
+    "baselineSha256": "5ea881cd093a41a5661c918b87defaccc93ea96dde9eda3da169798bda94d281",
+    "overrides": "UsualGroupOverrides.xml",
+    "overridesSha256": "ad41eb7a93a985a3672e72304f3148c6b1a60057b7a2ccc476975d9da32ae5c1",
+    "nativeExportSha256": "88b1243f05b3a7ca93098210f1d478a7753bcd06b7101d5db86825cf4e9d1af7",
+    "normalization": "CRLF to LF"
+  },
+  "categoryLabels": {
+    "main": {
+      "ru-RU": "Основные",
+      "en-US": "General"
+    },
+    "usage": {
+      "ru-RU": "Использование",
+      "en-US": "Use"
+    },
+    "appearance": {
+      "ru-RU": "Оформление",
+      "en-US": "Appearance"
+    },
+    "layout": {
+      "ru-RU": "Расположение",
+      "en-US": "Layout"
+    }
+  },
+  "rows": [
+    {
+      "category": "main",
+      "nativeKey": "Name",
+      "label": {
+        "ru-RU": "Имя",
+        "en-US": "Name"
+      },
+      "editor": "text",
+      "displayValue": {
+        "ru-RU": "Group",
+        "en-US": "Group"
+      },
+      "sourcePresence": "attribute"
+    },
+    {
+      "category": "main",
+      "nativeKey": "Title",
+      "label": {
+        "ru-RU": "Заголовок",
+        "en-US": "Title"
+      },
+      "editor": "localized",
+      "displayValue": {
+        "ru-RU": "Group title",
+        "en-US": "Group title"
+      },
+      "sourcePresence": "property"
+    },
+    {
+      "category": "main",
+      "nativeKey": "Type",
+      "label": {
+        "ru-RU": "Вид",
+        "en-US": "Type"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Обычная группа",
+        "en-US": "Regular group"
+      },
+      "sourcePresence": "element-kind"
+    },
+    {
+      "category": "main",
+      "nativeKey": "Visible",
+      "label": {
+        "ru-RU": "Видимость",
+        "en-US": "Visible"
+      },
+      "editor": "boolean",
+      "displayValue": {
+        "ru-RU": true,
+        "en-US": true
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "main",
+      "nativeKey": null,
+      "label": {
+        "ru-RU": "Пользовательская видимость",
+        "en-US": "User visibility"
+      },
+      "editor": "dialog",
+      "displayValue": {
+        "ru-RU": "Открыть",
+        "en-US": "Open"
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "main",
+      "nativeKey": "Enabled",
+      "label": {
+        "ru-RU": "Доступность",
+        "en-US": "Enabled"
+      },
+      "editor": "boolean",
+      "displayValue": {
+        "ru-RU": true,
+        "en-US": true
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "main",
+      "nativeKey": "ReadOnly",
+      "label": {
+        "ru-RU": "ТолькоПросмотр",
+        "en-US": "ReadOnly"
+      },
+      "editor": "boolean",
+      "displayValue": {
+        "ru-RU": false,
+        "en-US": false
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "main",
+      "nativeKey": "EnableContentChange",
+      "label": {
+        "ru-RU": "РазрешитьИзменениеСостава",
+        "en-US": "EnableContentChange"
+      },
+      "editor": "boolean",
+      "displayValue": {
+        "ru-RU": true,
+        "en-US": true
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "main",
+      "nativeKey": "DisplayImportance",
+      "label": {
+        "ru-RU": "ВажностьПриОтображении",
+        "en-US": "DisplayImportance"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent",
+      "roundtrip": {
+        "key": "DisplayImportance",
+        "value": "High",
+        "kind": "attribute"
+      }
+    },
+    {
+      "category": "main",
+      "nativeKey": "Behavior",
+      "label": {
+        "ru-RU": "Поведение",
+        "en-US": "Behavior"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "main",
+      "nativeKey": "Representation",
+      "label": {
+        "ru-RU": "Отображение",
+        "en-US": "Representation"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Слабое выделение",
+        "en-US": "Light marking"
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "main",
+      "nativeKey": "Group",
+      "label": {
+        "ru-RU": "Группировка",
+        "en-US": "Group"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Вертикальная",
+        "en-US": "Vertical"
+      },
+      "sourcePresence": "property"
+    },
+    {
+      "category": "main",
+      "nativeKey": "United",
+      "label": {
+        "ru-RU": "Объединенная",
+        "en-US": "United"
+      },
+      "editor": "boolean",
+      "displayValue": {
+        "ru-RU": true,
+        "en-US": true
+      },
+      "sourcePresence": "absent",
+      "roundtrip": {
+        "key": "United",
+        "value": "false"
+      }
+    },
+    {
+      "category": "main",
+      "nativeKey": "ThroughAlign",
+      "label": {
+        "ru-RU": "СквозноеВыравнивание",
+        "en-US": "ThroughAlign"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent",
+      "roundtrip": {
+        "key": "ThroughAlign",
+        "value": "Use"
+      }
+    },
+    {
+      "category": "main",
+      "nativeKey": "TitleDataPath",
+      "label": {
+        "ru-RU": "ПутьКДаннымЗаголовка",
+        "en-US": "TitleDataPath"
+      },
+      "editor": "binding",
+      "displayValue": {
+        "ru-RU": "",
+        "en-US": ""
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "main",
+      "nativeKey": "CurrentRowUse",
+      "label": {
+        "ru-RU": "ИспользованиеТекущейСтроки",
+        "en-US": "CurrentRowUse"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent",
+      "roundtrip": {
+        "key": "CurrentRowUse",
+        "value": "Use"
+      }
+    },
+    {
+      "category": "main",
+      "nativeKey": "AssociatedTable",
+      "label": {
+        "ru-RU": "ИспользуемаяТаблица",
+        "en-US": "AssociatedTable"
+      },
+      "editor": "reference",
+      "displayValue": {
+        "ru-RU": "",
+        "en-US": ""
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "usage",
+      "nativeKey": "Shortcut",
+      "label": {
+        "ru-RU": "СочетаниеКлавиш",
+        "en-US": "Shortcut"
+      },
+      "editor": "shortcut",
+      "displayValue": {
+        "ru-RU": "",
+        "en-US": ""
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "usage",
+      "nativeKey": "ToolTip",
+      "label": {
+        "ru-RU": "Подсказка",
+        "en-US": "ToolTip"
+      },
+      "editor": "localized",
+      "displayValue": {
+        "ru-RU": "",
+        "en-US": ""
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "usage",
+      "nativeKey": "ToolTipRepresentation",
+      "label": {
+        "ru-RU": "ОтображениеПодсказки",
+        "en-US": "ToolTipRepresentation"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "usage",
+      "nativeKey": "ItemsAndTitlesAlign",
+      "label": {
+        "ru-RU": "ВыравниваниеЭлементовИЗаголовков",
+        "en-US": "ItemsAndTitlesAlign"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent",
+      "roundtrip": {
+        "key": "ChildrenAlign",
+        "value": "None"
+      }
+    },
+    {
+      "category": "usage",
+      "nativeKey": "ShowTitle",
+      "label": {
+        "ru-RU": "ОтображатьЗаголовок",
+        "en-US": "ShowTitle"
+      },
+      "editor": "boolean",
+      "displayValue": {
+        "ru-RU": true,
+        "en-US": true
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "appearance",
+      "nativeKey": "TitleTextColor",
+      "label": {
+        "ru-RU": "ЦветТекстаЗаголовка",
+        "en-US": "TitleTextColor"
+      },
+      "editor": "color",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "appearance",
+      "nativeKey": "TitleFont",
+      "label": {
+        "ru-RU": "ШрифтЗаголовка",
+        "en-US": "TitleFont"
+      },
+      "editor": "font",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "appearance",
+      "nativeKey": "HorizontalSpacing",
+      "label": {
+        "ru-RU": "ГоризонтальныйИнтервал",
+        "en-US": "HorizontalSpacing"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "appearance",
+      "nativeKey": "VerticalSpacing",
+      "label": {
+        "ru-RU": "ВертикальныйИнтервал",
+        "en-US": "VerticalSpacing"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "appearance",
+      "nativeKey": "BackColor",
+      "label": {
+        "ru-RU": "ЦветФона",
+        "en-US": "BackColor"
+      },
+      "editor": "color",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "layout",
+      "nativeKey": "Width",
+      "label": {
+        "ru-RU": "Ширина",
+        "en-US": "Width"
+      },
+      "editor": "number",
+      "displayValue": {
+        "ru-RU": 0,
+        "en-US": 0
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "layout",
+      "nativeKey": "Height",
+      "label": {
+        "ru-RU": "Высота",
+        "en-US": "Height"
+      },
+      "editor": "number",
+      "displayValue": {
+        "ru-RU": 0,
+        "en-US": 0
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "layout",
+      "nativeKey": "HorizontalAlignInGroup",
+      "label": {
+        "ru-RU": "ГоризонтальноеПоложениеВГруппе",
+        "en-US": "HorizontalAlignInGroup"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent",
+      "roundtrip": {
+        "key": "GroupHorizontalAlign",
+        "value": "Left"
+      }
+    },
+    {
+      "category": "layout",
+      "nativeKey": "VerticalAlignInGroup",
+      "label": {
+        "ru-RU": "ВертикальноеПоложениеВГруппе",
+        "en-US": "VerticalAlignInGroup"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent",
+      "roundtrip": {
+        "key": "GroupVerticalAlign",
+        "value": "Top"
+      }
+    },
+    {
+      "category": "layout",
+      "nativeKey": "ChildItemsHorizontalAlign",
+      "label": {
+        "ru-RU": "ГоризонтальноеПоложениеПодчиненных",
+        "en-US": "ChildItemsHorizontalAlign"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent",
+      "roundtrip": {
+        "key": "HorizontalAlign",
+        "value": "Left"
+      }
+    },
+    {
+      "category": "layout",
+      "nativeKey": "ChildItemsVerticalAlign",
+      "label": {
+        "ru-RU": "ВертикальноеПоложениеПодчиненных",
+        "en-US": "ChildItemsVerticalAlign"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Auto"
+      },
+      "sourcePresence": "absent",
+      "roundtrip": {
+        "key": "VerticalAlign",
+        "value": "Top"
+      }
+    },
+    {
+      "category": "layout",
+      "nativeKey": "HorizontalStretch",
+      "label": {
+        "ru-RU": "РастягиватьПоГоризонтали",
+        "en-US": "HorizontalStretch"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Default"
+      },
+      "sourcePresence": "absent"
+    },
+    {
+      "category": "layout",
+      "nativeKey": "VerticalStretch",
+      "label": {
+        "ru-RU": "РастягиватьПоВертикали",
+        "en-US": "VerticalStretch"
+      },
+      "editor": "enum",
+      "displayValue": {
+        "ru-RU": "Авто",
+        "en-US": "Default"
+      },
+      "sourcePresence": "absent"
+    }
+  ],
+  "confirmedXmlDefaults": {
+    "United": true,
+    "ThroughAlign": {
+      "kind": "auto"
+    },
+    "Visible": true,
+    "Enabled": true,
+    "ReadOnly": false,
+    "EnableContentChange": true,
+    "ShowTitle": true,
+    "Width": 0,
+    "Height": 0
+  },
+  "observedConstraints": [
+    "Grouping Vertical is explicit in the baseline fixture.",
+    "User visibility opens a separate editor.",
+    "DisplayImportance selection High is exported as an unqualified attribute of UsualGroup.",
+    "AssociatedTable has an empty display in the baseline; nonempty serialization remains to be verified."
+  ],
+  "verification": {
+    "localePair": [
+      "ru-RU",
+      "en-US"
+    ],
+    "nativeRows": 35,
+    "roundtripProperties": 8,
+    "originalFixtureUnchanged": true,
+    "fullPropertyCatalogueAccepted": false,
+    "visualLayoutAcceptance": false,
+    "roundtripAttributes": 1
+  }
+}

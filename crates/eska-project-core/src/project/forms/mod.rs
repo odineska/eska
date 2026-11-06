@@ -8,6 +8,7 @@ mod composition;
 mod context;
 mod handlers;
 mod layer_order;
+mod palette;
 mod parsing;
 mod pictures;
 mod preparation;
@@ -21,7 +22,7 @@ pub use catalog::{ElementFamily, ElementKind};
 pub use commands::AutoCommandItem;
 pub use composition::{
     ComposedForm, CompositionIssue, EffectiveDefinition, EffectiveElement,
-    FormCompositionDiagnostic, PropertySource, SourcedProperty, compose,
+    FormCompositionDiagnostic, PropertySource, SourcedProperty, SourcedQualifier, compose,
 };
 pub use context::{
     FormContextError, FormDependency, FormDependencyRole, FormOverlay, FormPreview, load,
@@ -30,12 +31,16 @@ pub use handlers::{
     FormHandler, FormHandlerOwner, FormHandlerSource, HandlerLookupError, handler_range,
     handler_source, handlers,
 };
+pub use palette::{
+    PaletteCaption, PaletteCategory, PaletteEditor, PaletteRow, PaletteValue,
+    PlatformPropertyValue, PropertyPalette,
+};
 pub use parsing::parse;
 pub use pictures::FormPicture;
 pub use preparation::{FormInput, FormInputSource, FormPreparation, prepare};
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,
-    FormPresentation, PresentationText, present,
+    FormPresentation, FormScriptVariant, PresentationText, present,
 };
 pub use references::{FormReference, ReferenceSlot};
 pub use resources::FormResource;
@@ -51,6 +56,7 @@ use super::{
 };
 
 pub const FORM_NAMESPACE: &str = "http://v8.1c.ru/8.3/xcf/logform";
+const DEFAULT_GROUP_UNITED: bool = true;
 pub const MAX_FORM_BYTES: usize = 16 * 1024 * 1024;
 pub const MAX_FORM_ELEMENTS: usize = 16_384;
 pub const MAX_FORM_CONTEXT_BYTES: usize = 32 * 1024 * 1024;
@@ -111,11 +117,19 @@ pub struct FormElement {
     pub xml_name: PropertyKey,
     pub name: Option<String>,
     pub range: Range<usize>,
-    pub qualifiers: Vec<(PropertyKey, String)>,
+    pub qualifiers: Vec<LocatedQualifier>,
     pub properties: Vec<LocatedProperty>,
     pub children: Vec<Self>,
     /// Menus, tooltips and table additions are not ordinary layout children.
     pub auxiliary: Vec<Self>,
+}
+
+#[derive(Clone, Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct LocatedQualifier {
+    pub key: PropertyKey,
+    pub text: String,
+    pub range: Range<usize>,
 }
 
 impl FormElement {

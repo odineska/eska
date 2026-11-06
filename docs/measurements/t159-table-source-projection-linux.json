@@ -1,0 +1,2214 @@
+{
+  "schemaVersion": 1,
+  "platform": "Linux ARM64 X11",
+  "nativeBuild": "8.3.27.2342",
+  "nativeCompatibility": "Version8_3_27",
+  "eskaCommit": "92db5e20ddb83f73810a4cfa452b1c528d36ce40",
+  "explorerCommit": "2f3c6e2df8eef0c45ae35b8e51217b568a82e2dd",
+  "vsixSha256": "6b96c2e5a0ae66a31fc8af020003df91d3c0e35f811a55799544fbc38a63c4b4",
+  "backendSha256": "e5ed4bb5c393b5608ab88d28f1b51ff0e14d1ed532cbc10dff0cbafd9f6301d2",
+  "verifiedInstalledRuntimeFiles": 1303,
+  "sourceWritesDuringViewing": false,
+  "nativeSemantics": [
+    "Standalone CommandSource uses the declared columns independently of the table AutoCommandBar.",
+    "Invisible declared columns keep commands even when the grid disappears.",
+    "CommandSet exclusions remove the corresponding standard actions.",
+    "The table search addition is projected once; forced Find becomes Advanced search."
+  ],
+  "acceptance": {
+    "widthsExactEn": 14,
+    "fullFramesMeasuredEn": 5,
+    "fullFramesExactEn": 5,
+    "gridOffsetsExactEn": 11,
+    "installedObservationCases": 28
+  },
+  "russianLabels": {
+    "advancedSearch": {
+      "caption": "Расширенный поиск",
+      "nativeSha256": "e608b6ec02db78f48403a54ca7998b6c630223de712640b41bd9b02d4093c9be"
+    },
+    "find": {
+      "caption": "Найти...",
+      "nativeSha256": "25ab29930752376b9e2a2c9df995d961310f7deae529953d6168cf3707058261"
+    }
+  },
+  "regression": {
+    "originalRuns": 20,
+    "originalPassed": 19,
+    "originalPassedCases": 236,
+    "originalFailures": [
+      [
+        "renderer",
+        "en",
+        "unclassified"
+      ]
+    ],
+    "rendererSameVsixRetries": [
+      {
+        "run": "en-first",
+        "cases": 20
+      },
+      {
+        "run": "en-second",
+        "cases": 20
+      },
+      {
+        "run": "ru",
+        "cases": 20
+      }
+    ],
+    "nodePassed": 605,
+    "nodeSkipped": 8,
+    "bunPassed": 593,
+    "bunSkipped": 8,
+    "rustPassed": 1527,
+    "rustIgnored": 19,
+    "retryDriverCommit": "51c4bfe4c75dbcc4dfc0d16ff690f83230591d85",
+    "verifiedUniqueCases": 256,
+    "rendererFailure": "The first English run sampled the DOM before the main preview reappeared after docking. The guarded driver passed three times with unchanged runtime assets."
+  },
+  "bsp": {
+    "en": [
+      {
+        "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+        "frames": {
+          "preferred-initial": {
+            "width": 814,
+            "height": 612
+          },
+          "preferred-alternate": {
+            "width": 814,
+            "height": 612
+          },
+          "allocation-640": {
+            "width": 814,
+            "height": 612
+          },
+          "allocation-1150": {
+            "width": 1111,
+            "height": 612
+          }
+        }
+      },
+      {
+        "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+        "frames": {
+          "preferred-initial": {
+            "width": 754,
+            "height": 768
+          },
+          "preferred-alternate": {
+            "width": 754,
+            "height": 768
+          },
+          "allocation-640": {
+            "width": 728,
+            "height": 768
+          },
+          "allocation-1150": {
+            "width": 1111,
+            "height": 768
+          }
+        }
+      },
+      {
+        "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+        "frames": {
+          "preferred-initial": {
+            "width": 1217,
+            "height": 729
+          },
+          "preferred-alternate": {
+            "width": 1217,
+            "height": 729
+          },
+          "allocation-640": {
+            "width": 1216.6875,
+            "height": 415
+          },
+          "allocation-1150": {
+            "width": 1216.6875,
+            "height": 415
+          }
+        }
+      }
+    ],
+    "ru": [
+      {
+        "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+        "frames": {
+          "preferred-initial": {
+            "width": 814,
+            "height": 612
+          },
+          "preferred-alternate": {
+            "width": 814,
+            "height": 612
+          },
+          "allocation-640": {
+            "width": 814,
+            "height": 612
+          },
+          "allocation-1150": {
+            "width": 1111,
+            "height": 612
+          }
+        }
+      },
+      {
+        "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+        "frames": {
+          "preferred-initial": {
+            "width": 754,
+            "height": 768
+          },
+          "preferred-alternate": {
+            "width": 754,
+            "height": 768
+          },
+          "allocation-640": {
+            "width": 744,
+            "height": 768
+          },
+          "allocation-1150": {
+            "width": 1111,
+            "height": 768
+          }
+        }
+      },
+      {
+        "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+        "frames": {
+          "preferred-initial": {
+            "width": 1217,
+            "height": 729
+          },
+          "preferred-alternate": {
+            "width": 1217,
+            "height": 729
+          },
+          "allocation-640": {
+            "width": 1216.6875,
+            "height": 415
+          },
+          "allocation-1150": {
+            "width": 1216.6875,
+            "height": 415
+          }
+        }
+      }
+    ]
+  },
+  "pending": [
+    "Complete native pixels of the separate bars, especially CancelSearch and the alternate search paint.",
+    "Additional search locations and standalone dynamic-list controls.",
+    "Full height for screenshots with clipped lower frame; native Windows acceptance."
+  ],
+  "cases": [
+    {
+      "name": "ProjectionBareNoSearch",
+      "sourceSha256": "8cc09eee0c2dfbd3f083c3de985a61bdae6ffd82161df438c11d8ee4dee8771a",
+      "settings": {
+        "bar": "auto",
+        "explicit": false,
+        "search": "None"
+      },
+      "native": {
+        "frameWidth": 434,
+        "frameHeight": 315,
+        "gridTop": 75,
+        "completeFrame": true,
+        "imageSha256": "50352ea601e4d9325c270019f5dac6028fe72b9376ff42006fa057f39579c01d"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Add",
+              "rect": [
+                13,
+                39,
+                51,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move up",
+              "rect": [
+                84,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move down",
+              "rect": [
+                114,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                305,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Добавить",
+              "rect": [
+                13,
+                39,
+                85,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вверх",
+              "rect": [
+                118,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вниз",
+              "rect": [
+                148,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                353,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": true,
+      "englishGridOffsetMatchesNative": true,
+      "englishBodyRgb": {
+        "pixels": 121980,
+        "differentPixels": 894
+      }
+    },
+    {
+      "name": "ProjectionBareSearch",
+      "sourceSha256": "d191e334470b783ce17f92e38687f963bac0e9891d04e9932a31379fc4525ee8",
+      "settings": {
+        "bar": "auto",
+        "explicit": false,
+        "search": "Auto"
+      },
+      "native": {
+        "frameWidth": 463,
+        "frameHeight": null,
+        "gridTop": 75,
+        "completeFrame": false,
+        "imageSha256": "491400b0cb3ef1338b5e01a088a9a4259f51563a35aa14cb079da867f2251d94"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            463,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Add",
+              "rect": [
+                13,
+                39,
+                51,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move up",
+              "rect": [
+                84,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move down",
+              "rect": [
+                114,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                334,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [],
+          "search": [
+            153,
+            41,
+            172,
+            23
+          ],
+          "grid": [
+            13,
+            75,
+            429,
+            229
+          ],
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            449,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Добавить",
+              "rect": [
+                13,
+                39,
+                85,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вверх",
+              "rect": [
+                118,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вниз",
+              "rect": [
+                148,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                368,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [],
+          "search": [
+            187,
+            41,
+            172,
+            23
+          ],
+          "grid": [
+            13,
+            75,
+            415,
+            229
+          ],
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": null,
+      "englishGridOffsetMatchesNative": true
+    },
+    {
+      "name": "ProjectionNoAutofill",
+      "sourceSha256": "2b7b372c6972084ae106cd48cd326264d3b3c363467853cced0623b5db1e9e81",
+      "settings": {
+        "bar": "disabled",
+        "explicit": true,
+        "search": "None"
+      },
+      "native": {
+        "frameWidth": 434,
+        "frameHeight": null,
+        "gridTop": 75,
+        "completeFrame": false,
+        "imageSha256": "c6d1774ecd23bf6267d46ba90669ac5ceefcc6fb9a01617ad5dd28fea5b0bb7f"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Add",
+              "rect": [
+                13,
+                39,
+                51,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move up",
+              "rect": [
+                84,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move down",
+              "rect": [
+                114,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Find...",
+              "rect": [
+                164,
+                39,
+                65,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Cancel search",
+              "rect": [
+                238,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                305,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Добавить",
+              "rect": [
+                13,
+                39,
+                85,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вверх",
+              "rect": [
+                118,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вниз",
+              "rect": [
+                148,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Найти...",
+              "rect": [
+                198,
+                39,
+                76,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Отменить поиск",
+              "rect": [
+                283,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                353,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": null,
+      "englishGridOffsetMatchesNative": true
+    },
+    {
+      "name": "ProjectionExcludedMovement",
+      "sourceSha256": "062a0c5a919781213460dcebfa891afe937d65a5ebb3a84a8bab7a2677ecec2c",
+      "settings": {
+        "tableExcludes": [
+          "Add",
+          "MoveDown"
+        ]
+      },
+      "native": {
+        "frameWidth": 434,
+        "frameHeight": null,
+        "gridTop": 75,
+        "completeFrame": false,
+        "imageSha256": "273835375d28d0e978fce0a5e8d0c2c0743a002ab3bac33ec350df8da0e3e88e"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Move up",
+              "rect": [
+                13,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Find...",
+              "rect": [
+                63,
+                39,
+                65,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Cancel search",
+              "rect": [
+                137,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                305,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Переместить вверх",
+              "rect": [
+                13,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Найти...",
+              "rect": [
+                63,
+                39,
+                76,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Отменить поиск",
+              "rect": [
+                148,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                353,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": null,
+      "englishGridOffsetMatchesNative": true
+    },
+    {
+      "name": "ProjectionExcludedSearch",
+      "sourceSha256": "2e98f5c0f94574365d7faf344ac84b4446e6ac4f11f753964cbbe8da97562384",
+      "settings": {
+        "tableExcludes": [
+          "Find",
+          "CancelSearch"
+        ]
+      },
+      "native": {
+        "frameWidth": 434,
+        "frameHeight": null,
+        "gridTop": 75,
+        "completeFrame": false,
+        "imageSha256": "a690d62b5f5ebe2753ec054fea9b6de03b9bd108d6f975f111491d663c6f4585"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Add",
+              "rect": [
+                13,
+                39,
+                51,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move up",
+              "rect": [
+                84,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move down",
+              "rect": [
+                114,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                305,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Добавить",
+              "rect": [
+                13,
+                39,
+                85,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вверх",
+              "rect": [
+                118,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вниз",
+              "rect": [
+                148,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                353,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": null,
+      "englishGridOffsetMatchesNative": true
+    },
+    {
+      "name": "ProjectionBothBars",
+      "sourceSha256": "221b98ea5965a6ff5657cce818a4adddec24df6b17a2d168791a3e5bbbf7d00e",
+      "settings": {
+        "tableAutofill": true,
+        "search": "Auto"
+      },
+      "native": {
+        "frameWidth": 463,
+        "frameHeight": null,
+        "gridTop": 110,
+        "completeFrame": false,
+        "imageSha256": "f08f06e578764d21f8d6ebc08def00d54f1900163d2ad3197fb111bba0d5180d"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            463,
+            350
+          ],
+          "buttons": [
+            {
+              "caption": "Add",
+              "rect": [
+                13,
+                39,
+                51,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move up",
+              "rect": [
+                84,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move down",
+              "rect": [
+                114,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                334,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": [
+            153,
+            41,
+            172,
+            23
+          ],
+          "grid": [
+            13,
+            110,
+            429,
+            229
+          ],
+          "ownBar": [
+            13,
+            75,
+            429,
+            26
+          ]
+        },
+        "ru": {
+          "frame": [
+            449,
+            350
+          ],
+          "buttons": [
+            {
+              "caption": "Добавить",
+              "rect": [
+                13,
+                39,
+                85,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вверх",
+              "rect": [
+                118,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вниз",
+              "rect": [
+                148,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                368,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": [
+            187,
+            41,
+            172,
+            23
+          ],
+          "grid": [
+            13,
+            110,
+            415,
+            229
+          ],
+          "ownBar": [
+            13,
+            75,
+            415,
+            26
+          ]
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": null,
+      "englishGridOffsetMatchesNative": true
+    },
+    {
+      "name": "ProjectionSearchForced",
+      "sourceSha256": "abb2a8f8f101f0e6f98fe2a463b59b6fc49e5c5f525c827ddd5814c0ff0cf1bd",
+      "settings": {
+        "search": "Auto",
+        "forceFind": true
+      },
+      "native": {
+        "frameWidth": 601,
+        "frameHeight": 315,
+        "gridTop": 75,
+        "completeFrame": true,
+        "imageSha256": "1c8f9a38b27555f744d17da33591d0d9f513df03c8eeb246a138cbb03f24ddce"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            601,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Add",
+              "rect": [
+                13,
+                39,
+                51,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move up",
+              "rect": [
+                84,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move down",
+              "rect": [
+                114,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Advanced search",
+              "rect": [
+                164,
+                39,
+                129,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                472,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": [
+            302,
+            41,
+            161,
+            23
+          ],
+          "grid": [
+            13,
+            75,
+            567,
+            229
+          ],
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            608,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Добавить",
+              "rect": [
+                13,
+                39,
+                85,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вверх",
+              "rect": [
+                118,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вниз",
+              "rect": [
+                148,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Расширенный поиск",
+              "rect": [
+                198,
+                39,
+                150,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                527,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": [
+            357,
+            41,
+            161,
+            23
+          ],
+          "grid": [
+            13,
+            75,
+            574,
+            229
+          ],
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": true,
+      "englishGridOffsetMatchesNative": true,
+      "englishBodyRgb": {
+        "pixels": 169575,
+        "differentPixels": 2317
+      }
+    },
+    {
+      "name": "ProjectionHiddenColumns",
+      "sourceSha256": "8b362b2a7cfef683b96c10b04d93b54ba81bb4f159fa976f93323bb82fb289e3",
+      "settings": {
+        "allColumns": "Invisible",
+        "search": "None"
+      },
+      "native": {
+        "frameWidth": 406,
+        "frameHeight": 79,
+        "gridTop": null,
+        "completeFrame": true,
+        "imageSha256": "5f54250a4bebd8824eebc8cdc346e8e1149a0ae836b6ba01442b751ef82356b5"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            406,
+            79
+          ],
+          "buttons": [
+            {
+              "caption": "Add",
+              "rect": [
+                13,
+                39,
+                51,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move up",
+              "rect": [
+                84,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move down",
+              "rect": [
+                114,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Find...",
+              "rect": [
+                164,
+                39,
+                65,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Cancel search",
+              "rect": [
+                238,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                277,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": null,
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            403,
+            79
+          ],
+          "buttons": [
+            {
+              "caption": "Добавить",
+              "rect": [
+                13,
+                39,
+                85,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вверх",
+              "rect": [
+                118,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вниз",
+              "rect": [
+                148,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Найти...",
+              "rect": [
+                198,
+                39,
+                76,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Отменить поиск",
+              "rect": [
+                283,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                322,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": null,
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": true,
+      "englishGridOffsetMatchesNative": true,
+      "englishBodyRgb": {
+        "pixels": 19600,
+        "differentPixels": 313
+      }
+    },
+    {
+      "name": "ProjectionDetachedPicture",
+      "sourceSha256": "58ae33a8a76f4b710a87ade7716907b902da87d7ed1f85a615541e305cb2738c",
+      "settings": {
+        "tableSource": false,
+        "explicit": true,
+        "search": "None"
+      },
+      "native": {
+        "frameWidth": 434,
+        "frameHeight": null,
+        "gridTop": 75,
+        "completeFrame": false,
+        "imageSha256": "564294a49aea1d444faeac8304052cf7db8e80640796a2aac6eb6f0e94c3a3f2"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Find...",
+              "rect": [
+                13,
+                39,
+                65,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Cancel search",
+              "rect": [
+                87,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                305,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Найти...",
+              "rect": [
+                13,
+                39,
+                76,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Отменить поиск",
+              "rect": [
+                98,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                353,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": null,
+      "englishGridOffsetMatchesNative": true
+    },
+    {
+      "name": "SourceBarDetached",
+      "sourceSha256": "58ae33a8a76f4b710a87ade7716907b902da87d7ed1f85a615541e305cb2738c",
+      "settings": {
+        "source": false,
+        "columns": true,
+        "search": false,
+        "forced": false
+      },
+      "native": {
+        "frameWidth": 434,
+        "frameHeight": null,
+        "gridTop": 75,
+        "completeFrame": false,
+        "imageSha256": "f37e4273a127997a55edd55e7e9a99823400ae1dc9e395c158e1456060a26fb1"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Find...",
+              "rect": [
+                13,
+                39,
+                65,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Cancel search",
+              "rect": [
+                87,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                305,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Найти...",
+              "rect": [
+                13,
+                39,
+                76,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Отменить поиск",
+              "rect": [
+                98,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                353,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": null,
+      "englishGridOffsetMatchesNative": true
+    },
+    {
+      "name": "SourceBarColumns",
+      "sourceSha256": "f17c4bca61d85d8d40037c951561c01906c2b1593ac73fd8bf44bf1349d6260f",
+      "settings": {
+        "source": true,
+        "columns": true,
+        "search": false,
+        "forced": false
+      },
+      "native": {
+        "frameWidth": 434,
+        "frameHeight": null,
+        "gridTop": 75,
+        "completeFrame": false,
+        "imageSha256": "ccb7920ab197cccfaf6d24e3cc8135f3a7a3638b5cc9c33899b08a117550c30d"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Add",
+              "rect": [
+                13,
+                39,
+                51,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move up",
+              "rect": [
+                84,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move down",
+              "rect": [
+                114,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Find...",
+              "rect": [
+                164,
+                39,
+                65,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Cancel search",
+              "rect": [
+                238,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                305,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            434,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Добавить",
+              "rect": [
+                13,
+                39,
+                85,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вверх",
+              "rect": [
+                118,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вниз",
+              "rect": [
+                148,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Найти...",
+              "rect": [
+                198,
+                39,
+                76,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Отменить поиск",
+              "rect": [
+                283,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                353,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": [
+            13,
+            75,
+            400,
+            229
+          ],
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": null,
+      "englishGridOffsetMatchesNative": true
+    },
+    {
+      "name": "SourceBarEmpty",
+      "sourceSha256": "6572a4a3016dbbfaaeb455a1fefb7fb89c2d3f6dc254e7a194b34e6db77ccd67",
+      "settings": {
+        "source": true,
+        "columns": false,
+        "search": false,
+        "forced": false
+      },
+      "native": {
+        "frameWidth": 142,
+        "frameHeight": 79,
+        "gridTop": null,
+        "completeFrame": true,
+        "imageSha256": "d54adae7d85e5aa3141719824c955c4051b792e530db55fec3134fc74ba01f56"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            142,
+            79
+          ],
+          "buttons": [
+            {
+              "caption": "More actions",
+              "rect": [
+                13,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": null,
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            142,
+            79
+          ],
+          "buttons": [
+            {
+              "caption": "Еще",
+              "rect": [
+                13,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": null,
+          "grid": null,
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": true,
+      "englishGridOffsetMatchesNative": true,
+      "englishBodyRgb": {
+        "pixels": 6664,
+        "differentPixels": 0
+      }
+    },
+    {
+      "name": "SourceBarSearch",
+      "sourceSha256": "4727f6dc22f299e31af6736aa9077009e2a7e9c839bd2ae5b966d35ac9d54660",
+      "settings": {
+        "source": true,
+        "columns": true,
+        "search": true,
+        "forced": false
+      },
+      "native": {
+        "frameWidth": 463,
+        "frameHeight": null,
+        "gridTop": 75,
+        "completeFrame": false,
+        "imageSha256": "ed9cd1c0f295cbe5c1ff65b096c4ac74c683a31e816c293aedcfeb1040145bf4"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            463,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Add",
+              "rect": [
+                13,
+                39,
+                51,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move up",
+              "rect": [
+                84,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Move down",
+              "rect": [
+                114,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "More actions",
+              "rect": [
+                334,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Customize form...",
+            "Second command"
+          ],
+          "search": [
+            153,
+            41,
+            172,
+            23
+          ],
+          "grid": [
+            13,
+            75,
+            429,
+            229
+          ],
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            449,
+            315
+          ],
+          "buttons": [
+            {
+              "caption": "Добавить",
+              "rect": [
+                13,
+                39,
+                85,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вверх",
+              "rect": [
+                118,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Переместить вниз",
+              "rect": [
+                148,
+                39,
+                30,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Еще",
+              "rect": [
+                368,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Изменить форму...",
+            "Second command"
+          ],
+          "search": [
+            187,
+            41,
+            172,
+            23
+          ],
+          "grid": [
+            13,
+            75,
+            415,
+            229
+          ],
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": null,
+      "englishGridOffsetMatchesNative": true
+    },
+    {
+      "name": "SourceBarForced",
+      "sourceSha256": "282f16bc387fbe67a6a12c6989d1872cf737df7da7db2adbeace73991c73d4a0",
+      "settings": {
+        "source": true,
+        "columns": false,
+        "search": false,
+        "forced": true
+      },
+      "native": {
+        "frameWidth": 283,
+        "frameHeight": 79,
+        "gridTop": null,
+        "completeFrame": true,
+        "imageSha256": "ec0dcda04f63efd7e2923de87c4accfe81f1713fe91d526637b28d4a71e6f31a"
+      },
+      "explorer": {
+        "en": {
+          "frame": [
+            283,
+            79
+          ],
+          "buttons": [
+            {
+              "caption": "More actions",
+              "rect": [
+                13,
+                39,
+                108,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Customize form...",
+              "rect": [
+                130,
+                39,
+                132,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Second command"
+          ],
+          "search": null,
+          "grid": null,
+          "ownBar": null
+        },
+        "ru": {
+          "frame": [
+            245,
+            79
+          ],
+          "buttons": [
+            {
+              "caption": "Еще",
+              "rect": [
+                13,
+                39,
+                60,
+                26
+              ],
+              "icon": true
+            },
+            {
+              "caption": "Изменить форму...",
+              "rect": [
+                82,
+                39,
+                142,
+                26
+              ],
+              "icon": true
+            }
+          ],
+          "menu": [
+            "Second command"
+          ],
+          "search": null,
+          "grid": null,
+          "ownBar": null
+        }
+      },
+      "englishWidthMatchesNative": true,
+      "englishHeightMatchesNative": true,
+      "englishGridOffsetMatchesNative": true,
+      "englishBodyRgb": {
+        "pixels": 13573,
+        "differentPixels": 0
+      }
+    }
+  ],
+  "rgbMethod": "Compare every RGB pixel of the common complete form body inside the selected frame, excluding form chrome. No tolerance or mask."
+}

@@ -1,0 +1,220 @@
+{
+  "automaticColumnGapPx": 11,
+  "backendSha256": "1a9f39b5e4b7d29f04bb30579eef8b5b07f49efddfcf57b22a20d5cdeffe75f3",
+  "canonicalCaptureCorrections": [
+    {
+      "canonicalScreenshotSha256": "f0ba9304adbbffd016b8c5eb029efb0183878fb0cd4a4d7def4229de28435f13",
+      "expectedDocument": "ProbeUnitedRowsF",
+      "observedDocument": "ProbeUnitedRowsFT",
+      "sourceSha256": "1a4875eae4c163a4f111c8d174fda6a38ee3599ac2e45c780a90ab2bf0f1fa23"
+    },
+    {
+      "canonicalScreenshotSha256": "a66768d24134ca3a3f2cd7823ebfb2d9105acf7653191ba9b1cafaa89c71963d",
+      "expectedDocument": "ProbeUnitedRowsT",
+      "observedDocument": "ProbeUnitedRowsTT",
+      "sourceSha256": "3c6b2d6b8f8df493f752b42b45ec45a7e5fcf79c9866ec80799d5aeecaba49b3"
+    }
+  ],
+  "cases": [
+    {
+      "case": "RowsF",
+      "exactRelativeRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "f0ba9304adbbffd016b8c5eb029efb0183878fb0cd4a4d7def4229de28435f13",
+      "settings": {
+        "columns": false,
+        "left": "false",
+        "right": "false"
+      },
+      "sourceSha256": "1a4875eae4c163a4f111c8d174fda6a38ee3599ac2e45c780a90ab2bf0f1fa23"
+    },
+    {
+      "case": "RowsT",
+      "exactRelativeRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "a66768d24134ca3a3f2cd7823ebfb2d9105acf7653191ba9b1cafaa89c71963d",
+      "settings": {
+        "columns": false,
+        "left": "true",
+        "right": "false"
+      },
+      "sourceSha256": "3c6b2d6b8f8df493f752b42b45ec45a7e5fcf79c9866ec80799d5aeecaba49b3"
+    },
+    {
+      "case": "RowsFT",
+      "exactRelativeRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "96ad8365b723ddd0c4f23311f7b39ae48b877d9dd0ecf567da734b4de93ca942",
+      "settings": {
+        "left": "false",
+        "right": "true"
+      },
+      "sourceSha256": "8b655abd202eee5d97b0cd991967beccc29224830cb8febc77665c33cc4ad31e"
+    },
+    {
+      "case": "RowsTT",
+      "exactRelativeRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "5b0c96952c2982b89db383133a082a0ccfaa3961d04f2431eb715af4b1112c28",
+      "settings": {
+        "left": "true",
+        "right": "true"
+      },
+      "sourceSha256": "ea6e264de95ee67fe10b164661d68c792f76ef76165e26ab99a4424887078c1d"
+    },
+    {
+      "case": "RowsFNoAlign",
+      "exactRelativeRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "bc6c0db99098ff7d86f898a1b022b2df0ecddee82819eab10eb047f876f7b7b7",
+      "settings": {
+        "throughAlign": [
+          "DontUse",
+          "DontUse"
+        ]
+      },
+      "sourceSha256": "2418f6a58eae8c3d3019a84ac666812fd49db4aba17799adec4a51f36f544cec"
+    },
+    {
+      "case": "RowsTNoAlign",
+      "deltaByLocale": {
+        "en": {
+          "B1": [
+            1,
+            0,
+            -1,
+            0
+          ]
+        },
+        "ru": {
+          "B1": [
+            1,
+            0,
+            -1,
+            0
+          ]
+        }
+      },
+      "exactRelativeRectangles": [],
+      "nativeScreenshotSha256": "1ff939d86a26f06ef49fda62ae88a5a7183f34ce1b4b28d238113a029c4081bf",
+      "settings": {
+        "throughAlign": [
+          "DontUse",
+          "DontUse"
+        ]
+      },
+      "sourceSha256": "436f73cfc7db67133259c6ac77b0cce7d022e833a39de243739bce7c234f95ef"
+    },
+    {
+      "case": "RowsLeftAlign",
+      "exactRelativeRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "e2fcbdca0ba53ea950ce7294b7a3b6dc26a00623a89013986bf2e44ba7ae4529",
+      "settings": {
+        "throughAlign": [
+          "Use",
+          "DontUse"
+        ]
+      },
+      "sourceSha256": "e78b73b69297cb09b70a7cd592d357b10e218bc56c6b5aa193a236d7be1d348d"
+    },
+    {
+      "case": "RowsTitle",
+      "exactRelativeRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "ddd19e3896375c3c24de9d29d37c4d21c933c655e5e9065c427add980ba475e0",
+      "settings": {
+        "leftTitle": true
+      },
+      "sourceSha256": "35f5b510f4159a25013be62116074a32f0625f020b036ee829f6faefe52a1684"
+    },
+    {
+      "case": "RowsFixed",
+      "exactRelativeRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "81df3052555166ff68f1d6916bc919bcf2643899f7236c3709ae3751af027906",
+      "settings": {
+        "b1HorizontalStretch": false
+      },
+      "sourceSha256": "a66d5e38ab3ea35a918fa9741b895a8089942558cc00a41e864f386d50f1a5e1"
+    },
+    {
+      "case": "RowsNestedOpen",
+      "exactRelativeRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "192bf3efbaacdcd796d5979942cdc10af341a29d653ce9e3caf751df7f634e33",
+      "settings": {
+        "innerUnited": "false"
+      },
+      "sourceSha256": "54c747feb08cbe59f3df7f3602f7569651e9d53219cb69a56e3e105c144021cd"
+    },
+    {
+      "case": "RowsNestedUnited",
+      "exactRelativeRectangles": [
+        "en",
+        "ru"
+      ],
+      "nativeScreenshotSha256": "789f0f3971fc1b4ec62f7491cf43d21a4f4ce5075db26d8b1fbc65f60141bb15",
+      "settings": {
+        "innerUnited": "true"
+      },
+      "sourceSha256": "b72026322725b132892c14fbf7a6d21a50c09f9440a86350e29931be65ba38fe"
+    }
+  ],
+  "compatibility": "Version8_3_27",
+  "eskaCommit": "533e2bae32b84828a30f023a93fd4f239a2d160e",
+  "exactRelativeInputRectangles": 10,
+  "explorerCommit": "20ca1c0e526230ea33082133b585417055ba8415",
+  "measurement": "Input border boxes relative to A1 at the preferred form size. Native interior measurements include two pixels for the visible borders.",
+  "nativeBuild": "8.3.27.2342",
+  "nativeLocale": "en",
+  "originalMatrix": {
+    "baseline": "t157-united-layout-baseline-linux.json",
+    "cases": 28,
+    "exactRelativeInputRectangles": 28,
+    "locales": [
+      "en",
+      "ru"
+    ]
+  },
+  "pending": [
+    "Additional group and field kinds",
+    "Explicit spacing and sizing overrides on column groups",
+    "Whole-form pixel comparisons and native resize calibration",
+    "Complete BSP geometry",
+    "Windows acceptance"
+  ],
+  "platform": "Linux ARM64 X11",
+  "regressionCaseCount": 270,
+  "regressionRuns": 16,
+  "schemaVersion": 1,
+  "scope": "Shared columns of ordinary horizontal groups with leading labels and input fields",
+  "sourceWritesDuringViewing": false,
+  "testedTransitions": [
+    "Dirty United in a detached window",
+    "Viewport resize",
+    "Return to the workbench",
+    "Existing shared row regression",
+    "Two locales with the same installed runtime"
+  ],
+  "verifiedInstalledRuntimeFiles": 1303,
+  "vsixSha256": "072f8c7accd7a90eae216b3042641f7a237c6b2794fee4a631c7cce0d67b0dd5"
+}

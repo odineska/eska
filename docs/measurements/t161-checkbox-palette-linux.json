@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 1,
+  "task": "T161",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "fixture": "tests/fixtures/forms/native-property-palette/checkbox.json",
+  "fixtureSha256": "aae2b63d589d0de22e92d25a1f46153632254a2e6d066df945b5a253daeed21d",
+  "sources": [
+    "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml",
+    "tests/fixtures/forms/native-state-variants/TableDefault.xml"
+  ],
+  "native": {
+    "rootFieldRows": 28,
+    "unboundRows": 27,
+    "tumblerRows": 36,
+    "unequalTumblerRows": 35,
+    "switcherRows": 31,
+    "columnRows": 43,
+    "scans": [
+      {
+        "case": "auto",
+        "rows": 28,
+        "initialFormSha256": "b9dc550cb8d387bb4a9c9e97e72c06405c34a137245a8ba8b838640fb94e1e85",
+        "locales": {
+          "en": {
+            "pages": [
+              "0c53d0641bda788067abcbe1810e2a386ceb42db6230ece4af33f8f944cb2d51",
+              "3637d9b6122f483a13b81327490ffa924e179d9f22f74ffe734d6d2e3ca5f9f7"
+            ],
+            "stitchedSha256": "487d2f54ba8e88189dddd3490cb9f138a76de38fd62e884ab57849233e87eaf9"
+          },
+          "ru": {
+            "pages": [
+              "c9ad44b5c297a2d99425708c947f5842b1bf787cb7f9accc84ac455450420397",
+              "468853a86e3fd86052687ad32aef3752f85feb9c1cc3628fd3ab9a04c3b6e2c7"
+            ],
+            "stitchedSha256": "cb9b45153c28040e5e92523ccb9791b7d1dbc98730d75a6186f0987bf483973a"
+          }
+        }
+      },
+      {
+        "case": "unbound",
+        "rows": 27,
+        "initialFormSha256": "0891e64f8b5209c58dbda30ccbb3dcf53d85bbd1d41aacf977fe27b3db0327d6",
+        "locales": {
+          "en": {
+            "pages": [
+              "f6c34050a06f47491357aa1153ece8d0426d7ca8748305febb7d6d05e6b9e32f",
+              "7a1c3a86c7011e6d2ffe908c1ee3c35b05d04e2bd199384b9e91b52473809b00"
+            ],
+            "stitchedSha256": "a96fd94f7e809f273408d21f12b011e33da9d975184f054836aba956a2f62b96"
+          },
+          "ru": {
+            "pages": [
+              "75d7a24eb8ddb4b247becca6502fd3ca2f22505624cd3ab8a850d067558f4719",
+              "9384e0e8bb00a48b3272dc502ced44ad73bce519f5df74f51a222bec67a16f85"
+            ],
+            "stitchedSha256": "2bf8e3ad6f4beee053568ca4bdc2e89a1dff5237cb62522d94d8502f72b2bb8e"
+          }
+        }
+      },
+      {
+        "case": "threeStateAuto",
+        "rows": 28,
+        "initialFormSha256": "6beaccf48593183eb536370fdb209173f86c371863ef448b54e88575f8557b30",
+        "locales": {
+          "en": {
+            "pages": [
+              "b93c9b75a6a573f4c062d0d92f5ce9f638b7d56f7e148ec3c9582b7b1c62c91a",
+              "5a990e9cdc2281a4b6b88d87c99cf8ac230341f440c266b04d912a9c00828b5e"
+            ],
+            "stitchedSha256": "487d2f54ba8e88189dddd3490cb9f138a76de38fd62e884ab57849233e87eaf9"
+          },
+          "ru": {
+            "pages": [
+              "ff7620e8c298ac26415f49742ece745f11b4f4446120a19c0c52ff834e122a00",
+              "08aa725e119792ce98d16ce4dadde297d494c21c5850c8187d626071fa03c47c"
+            ],
+            "stitchedSha256": "cb9b45153c28040e5e92523ccb9791b7d1dbc98730d75a6186f0987bf483973a"
+          }
+        }
+      },
+      {
+        "case": "checkbox",
+        "rows": 28,
+        "initialFormSha256": "b9dc550cb8d387bb4a9c9e97e72c06405c34a137245a8ba8b838640fb94e1e85",
+        "locales": {
+          "en": {
+            "pages": [
+              "17bdc0d8b07120da7faf8f7e0463c1b2c417fbe4d7384da99b413d4dce18f629",
+              "10b711501d09150fd4fcbbe7df9b110a508cf23a6114223ca2fb343a76a82421"
+            ],
+            "stitchedSha256": "e6d17bbcac6890291c1c2872566c2410e3af0ee196607ba30ddcbbdb5326b51b"
+          },
+          "ru": {
+            "pages": [
+              "a17236313ad9eeca595712051eefef77b1b7831b32485358e0fdb4e2f8f468de",
+              "346c9c89ad54c4aaec6ffc98fd2a830d015fd9f96d4478bfc159c4f6b630d67e"
+            ],
+            "stitchedSha256": "8d6d37ee45116412ed0d02a226319bebdbc886177ca30827998b8c480bf325e8"
+          }
+        }
+      },
+      {
+        "case": "tumbler",
+        "rows": 36,
+        "initialFormSha256": "b9dc550cb8d387bb4a9c9e97e72c06405c34a137245a8ba8b838640fb94e1e85",
+        "locales": {
+          "en": {
+            "pages": [
+              "e0b356a458ed2c0691ffe0b56831ac8e8c92e2e922d3aedda04267b3ed505ca9",
+              "fd0ec3339f89779c3e936a508f76f37e5880a7f6007fd960834af704c73e4cb7"
+            ],
+            "stitchedSha256": "c813f2085325e9c2aa607a1a9f8788b08c77c7212da5d7c374b99760842a5afd"
+          },
+          "ru": {
+            "pages": [
+              "b320a33446e9ba86eefafa8eb6e6e5859b5642cff14c075b74158a97dedbaefd",
+              "e4d1967fdc63390998c63d5b7b9ab886682553acb7247d4b46900020ea2ad3a8"
+            ],
+            "stitchedSha256": "4a098b3a1e6bba39de7a5fdf83e23654e2c562c23a9168c3b6430709786ba298"
+          }
+        }
+      },
+      {
+        "case": "switcher",
+        "rows": 31,
+        "initialFormSha256": "b9dc550cb8d387bb4a9c9e97e72c06405c34a137245a8ba8b838640fb94e1e85",
+        "locales": {
+          "en": {
+            "pages": [
+              "41bd574ff96f840583a195c7ca68582047f6784ed9903881b73aa43495f1e317",
+              "973ca8aa4f013c6e48630d2bf29d6561b952f1c917ebc5e86230c24b79b7e93d"
+            ],
+            "stitchedSha256": "1231f14cc6041b16ef459adaf5f848e225d1b8c40c46a35fb281ad1fc4d279f9"
+          },
+          "ru": {
+            "pages": [
+              "221cf732b3b7a88c9395d4eb0526a4a5820847a66539bba0cf4e8d8ac9031e7c",
+              "4dca3e7fc776061cd38551086cd36b3922467a287117e236b8bce1fe5d75bb21"
+            ],
+            "stitchedSha256": "a0f08384f2a1dd9dbcc30226cb50b25c8b58f190a390dffdd1ccdd8811732781"
+          }
+        }
+      },
+      {
+        "case": "column",
+        "rows": 43,
+        "initialFormSha256": "95b7e622572a7ef2d7e57fbd86aed6b47068d52ef17bd98e8f4914fbf2f97782",
+        "locales": {
+          "en": {
+            "pages": [
+              "89aaa76962000bb4a613a01af8ef0d97f43f72ee61d5e02407eae9430b56042d",
+              "0808ead74859e7c09c1eb8b6b38ee5bf63708c22a2056de8e9c05286125ba2b1"
+            ],
+            "stitchedSha256": "a9398e4541d249bc4c3caccb9d0bd5b1d3d18c59a9d58de50fd0d7e0b8aa972b"
+          },
+          "ru": {
+            "pages": [
+              "a6991d7c8023edb2abecf00c6e7684ab1d8a1e6761e995cfefe622e9a169cbc9",
+              "0421484a92a6cd116238b412e81f911a320dbddc579e19c0ca09ce8bcddf4af1"
+            ],
+            "stitchedSha256": "c995d095d10c57db3653ea514eb44f19c55d06420a6868a5bafea57dae089f1c"
+          }
+        }
+      },
+      {
+        "case": "unequalTumbler",
+        "rows": 35,
+        "initialFormSha256": "9ed0a19b05fcf783ea0f4b2df79cc8d06ea0a23ce1ea0f7da287c360df764779",
+        "locales": {
+          "en": {
+            "pages": [
+              "5f150fecf7cc78433aad0eda7dde8ebb2840437d8833e6b4fc1cc1a2c4a57370",
+              "2c71b8202afcfe6fcc34d7316a2a7559901a4e5176eca1015f4c23ce5cb3652a"
+            ],
+            "stitchedSha256": "d09ff0c833eb31084f3e76fd2d7d1ed5f4180ae4a3462de4ed7d3df1c5bbf581"
+          },
+          "ru": {
+            "pages": [
+              "6dc66ab5f85ca1a8ae53cc5555608bde8d6994ba6e283e2f5c9735efacca04f1",
+              "744ba8da823d06f75213a1227ac1a445beb3e54dfff9c8557212c70c5ffadd62"
+            ],
+            "stitchedSha256": "5885f43a11ebc9ceef2a9a42c671092072fee3af907075f99fe16e8e5557db4e"
+          }
+        }
+      }
+    ],
+    "popupCaptions": {
+      "en": "efb1f319f3d693f567a1a715697ea59685b32429c5e302b6574f515605649ea0",
+      "ru": "488e20a812f098f1c05d260073721a734abc39a55f6444f14085939a15855ab3"
+    },
+    "threeStateExplicitCheckboxRu": {
+      "pages": [
+        "3add534c89964af0362c188224f5d8e9413c1dfcdddff209eee0120dafdc39dc",
+        "a6f8c94acf06d328100765c6556e6ffe4bfb56a1f52a440c0d3bd762240dc19b"
+      ],
+      "stitchedSha256": "8d6d37ee45116412ed0d02a226319bebdbc886177ca30827998b8c480bf325e8"
+    },
+    "roundTrip": {
+      "Explicit": {
+        "formSha256": "b69e765053a2a051af5e8a2744e103c6a2757febb89845d5ba16b51a439f98e4",
+        "CheckBoxType": "CheckBox"
+      },
+      "TumblerUnequal": {
+        "formSha256": "bb4f1cb6abb5055224b583cad9a58ac109f8a08e447cf1f4e420bc28a9cbc579",
+        "CheckBoxType": "Tumbler",
+        "EqualItemsWidth": "false",
+        "ItemWidth": "12",
+        "widthVisible": false
+      },
+      "Switch": {
+        "formSha256": "1cbdd028bd9423701409302eee19af13bbbc0e5bde1fc285419304923036a005",
+        "CheckBoxType": "Switcher"
+      }
+    }
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "backendCommit": "0792de9ecbc34fd56aae7e2be84f4905999ff98a",
+    "explorerCommit": "465043664f04ac92d52e1d6c2aaaa2f23ba88667",
+    "vsixSha256": "e75e7cb9669e0061882075632fc5d662b93bc059f3397fc0a87a7005d5d14697",
+    "backendSha256": "7d20bfbbe8170c830d3241642d68051d43619db7f68183cf85e35ef0d12c5405",
+    "runtimeManifestSha256": "e11e0701f074473517367cb1d0f611ac961306b5ce7769d83a37be91c684418b",
+    "runtimeFilesVerifiedPerRun": 1303
+  },
+  "checks": {
+    "rust": {
+      "suites": 42,
+      "passed": 1541,
+      "ignored": 19,
+      "fmt": true,
+      "check": true,
+      "clippy": true,
+      "test": true,
+      "build": true
+    },
+    "typescript": true,
+    "compile": true,
+    "node": {
+      "passed": 603,
+      "skipped": 11
+    },
+    "bun": {
+      "version": "1.4.2",
+      "passed": 591,
+      "skipped": 11
+    }
+  },
+  "acceptance": {
+    "pairsPassed": 22,
+    "caseCountsBySuite": {
+      "property-catalogue": {
+        "en": 30,
+        "ru": 30
+      },
+      "button-types": {
+        "en": 11,
+        "ru": 11
+      },
+      "button-rows": {
+        "en": 8,
+        "ru": 8
+      },
+      "usual-buttons": {
+        "en": 18,
+        "ru": 18
+      },
+      "handlers": {
+        "en": 1,
+        "ru": 1
+      },
+      "inspectors": {
+        "en": 1,
+        "ru": 1
+      },
+      "preview": {
+        "en": 1,
+        "ru": 1
+      },
+      "detached-space": {
+        "en": 6,
+        "ru": 6
+      },
+      "composition": {
+        "en": 9,
+        "ru": 9
+      },
+      "tables": {
+        "en": 17,
+        "ru": 17
+      },
+      "application": {
+        "en": 4,
+        "ru": 4
+      }
+    },
+    "checkboxCasesPerLocale": [
+      "checkbox-palette-bound-auto-defaults",
+      "checkbox-palette-dirty-tumbler-and-raw-three-state",
+      "checkbox-palette-mode-and-event-keep-xml-source",
+      "checkbox-palette-unequal-width-keeps-unused-xml",
+      "checkbox-palette-switcher-keeps-inapplicable-xml",
+      "checkbox-palette-unbound-context"
+    ],
+    "exactModeAndEventNavigation": true,
+    "unusedWidthPreserved": true,
+    "compatibilityPairsPassed": 4,
+    "sameArtifactForCompatibility": true,
+    "compatibility": [
+      {
+        "mode": "button-only",
+        "locale": "en",
+        "case": "earlier-1.41-checkbox-xml-fallback",
+        "passed": true
+      },
+      {
+        "mode": "button-only",
+        "locale": "ru",
+        "case": "earlier-1.41-checkbox-xml-fallback",
+        "passed": true
+      },
+      {
+        "mode": "legacy",
+        "locale": "en",
+        "case": "api-1.40-root-xml-fallback",
+        "passed": true
+      },
+      {
+        "mode": "legacy",
+        "locale": "ru",
+        "case": "api-1.40-root-xml-fallback",
+        "passed": true
+      }
+    ],
+    "diskUnchanged": true
+  },
+  "pending": [
+    "Other bindings and nested table and form contexts",
+    "Further enumeration captions and styling provenance",
+    "Windows native acceptance"
+  ]
+}

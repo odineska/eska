@@ -1,0 +1,629 @@
+{
+  "schemaVersion": 1,
+  "status": "baseline mismatch",
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "locale": "en",
+  "casesMeasured": 28,
+  "explorerCommit": "ec932f6",
+  "backendCommit": "b2db41b",
+  "apiVersion": "1.41",
+  "nativeExplicitTrueElisions": {
+    "United": 21,
+    "ShowTitle": 4
+  },
+  "coordinates": [
+    "x relative to A1",
+    "y relative to A1",
+    "width",
+    "height"
+  ],
+  "nativeMeasurement": "Exact-color input interiors, one visible form document per screenshot",
+  "explorerMeasurement": "Input CSS border boxes at the measured preferred size in installed VSIX",
+  "openThroughPaintMs": {
+    "min": 217,
+    "median": 238,
+    "max": 366
+  },
+  "cases": [
+    {
+      "name": "ColumnsFF",
+      "settings": {
+        "left": "false",
+        "right": "false"
+      },
+      "sourceSha256": "34e599297a1abc2f6fe83a3b7cdbd0cc7648571bdb39b45018e78b2c0eefec5a",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 60, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      },
+      "fixture": "ColumnsFF.xml"
+    },
+    {
+      "name": "ColumnsFT",
+      "settings": {
+        "left": "false",
+        "right": "true"
+      },
+      "sourceSha256": "90b8ac096cd99d8e2f9171146eec282ccbfc164013fd0a6b4d977a552d5a75fd",
+      "native": {
+        "A1": [0, 0, 149, 53],
+        "A2": [0, 64, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 32, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      },
+      "fixture": "ColumnsFT.xml"
+    },
+    {
+      "name": "ColumnsTF",
+      "settings": {
+        "left": "true",
+        "right": "false"
+      },
+      "sourceSha256": "21f198ebd260b29cd689f9a4ea996078ad9a10d01f74b7b9db9c4e3a7e7840b0",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      },
+      "fixture": "ColumnsTF.xml"
+    },
+    {
+      "name": "ColumnsTT",
+      "settings": {
+        "left": "true",
+        "right": "true"
+      },
+      "sourceSha256": "21ce5798abc8730982573e0ca5553f205ed3fd68acd011611116b72e11f209a9",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 32, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      },
+      "fixture": "ColumnsTT.xml"
+    },
+    {
+      "name": "ColumnsAbsentF",
+      "settings": {
+        "left": null,
+        "right": "false"
+      },
+      "sourceSha256": "cd54d30160edcd3112a3e2b4c1e14c10c1dcdde002d82c07bdfdff53d4683c6b",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "NestedFF",
+      "settings": {
+        "left": "false",
+        "right": "false",
+        "nested": "false"
+      },
+      "sourceSha256": "e7066c98f85401c7747bf1fbe2727a63b8f05068e396eb6d6a23f9cafcc361b1",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 60, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      },
+      "fixture": "NestedFF.xml"
+    },
+    {
+      "name": "NestedFT",
+      "settings": {
+        "left": "false",
+        "right": "false",
+        "nested": "true"
+      },
+      "sourceSha256": "7a03ee55486e9eff82d53256bafff12fcffa5845caff661560da96693940ba00",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      },
+      "fixture": "NestedFT.xml"
+    },
+    {
+      "name": "NestedTF",
+      "settings": {
+        "left": "true",
+        "right": "false",
+        "nested": "false"
+      },
+      "sourceSha256": "c449e8b57e8db68aea4ce50648e5f8cb5327efa8ec612e962e1e006e4c623f51",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "NestedTT",
+      "settings": {
+        "left": "true",
+        "right": "false",
+        "nested": "true"
+      },
+      "sourceSha256": "453f3d7051800dda80576a899efd81002bce568d088ea3419da709eecb92e493",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "ThreeFTF",
+      "settings": {
+        "left": "false",
+        "nested": "true",
+        "third_level": "false",
+        "right": "false"
+      },
+      "sourceSha256": "00364637853b97f625c4e501702baab0fbb347ea41c7034ae1271053d4cde6d5",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "ThreeTFT",
+      "settings": {
+        "left": "true",
+        "nested": "false",
+        "third_level": "true",
+        "right": "false"
+      },
+      "sourceSha256": "7e6dbd193e27f29fc6414a937dec7f8da3b5925244112063273480d6876e726e",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "ThreeFFF",
+      "settings": {
+        "left": "false",
+        "nested": "false",
+        "third_level": "false",
+        "right": "false"
+      },
+      "sourceSha256": "530acd555a03badd61c313eadb88cfbeba1b818ad78b86920ec8da794897018c",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 60, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "ThroughAutoF",
+      "settings": {
+        "left": "false",
+        "right": "false",
+        "through": null
+      },
+      "sourceSha256": "34e599297a1abc2f6fe83a3b7cdbd0cc7648571bdb39b45018e78b2c0eefec5a",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 60, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "ThroughAutoT",
+      "settings": {
+        "left": "true",
+        "right": "false",
+        "through": null
+      },
+      "sourceSha256": "21f198ebd260b29cd689f9a4ea996078ad9a10d01f74b7b9db9c4e3a7e7840b0",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "ThroughUseF",
+      "settings": {
+        "left": "false",
+        "right": "false",
+        "through": "Use"
+      },
+      "sourceSha256": "bc42d64c775d142e73d71851e22e686d1c67efa5dc1722c64ee563fab8cf5d26",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 60, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "ThroughUseT",
+      "settings": {
+        "left": "true",
+        "right": "false",
+        "through": "Use"
+      },
+      "sourceSha256": "3f3dc2b9d0d4482553fe16c7b2b93c26cbb7b02b050084548915b8ebbe7d40f9",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "ThroughDontUseF",
+      "settings": {
+        "left": "false",
+        "right": "false",
+        "through": "DontUse"
+      },
+      "sourceSha256": "6e050e67e6bc6621230cc0d4fee849b6f662705f4c4bf0f09107e7cc2e0f7152",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 60, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "ThroughDontUseT",
+      "settings": {
+        "left": "true",
+        "right": "false",
+        "through": "DontUse"
+      },
+      "sourceSha256": "27deb878f703d93040d206632357381877d57cae1234f3645ee5a4e3a93cf96a",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "RowsF",
+      "settings": {
+        "left": "false",
+        "right": "false",
+        "columns": false
+      },
+      "sourceSha256": "1a4875eae4c163a4f111c8d174fda6a38ee3599ac2e45c780a90ab2bf0f1fa23",
+      "native": {
+        "A1": [0, 0, 189, 49],
+        "A2": [276, 0, 149, 21],
+        "B1": [0, 60, 189, 21],
+        "B2": [276, 60, 149, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 212.390625, 40],
+        "A2": [294.39, 8.5, 193.609375, 23],
+        "B1": [171, 48, 143.328125, 23],
+        "B2": [339.33, 48, 148.671875, 23]
+      },
+      "fixture": "RowsF.xml"
+    },
+    {
+      "name": "MixedF",
+      "settings": {
+        "left": "false",
+        "right": "false",
+        "middle": "true"
+      },
+      "sourceSha256": "c8428fbf2fbaf9d4e35ce80b82e51220c9d401712e3168c370eeaf22fcfad605",
+      "native": {
+        "A1": [0, 0, 149, 53],
+        "A2": [0, 64, 149, 21],
+        "B1": [537, 0, 189, 21],
+        "B2": [537, 64, 189, 21],
+        "C1": [208, 0, 129, 21],
+        "C2": [208, 32, 129, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 183, 40],
+        "A2": [0, 48, 183, 23],
+        "C1": [238, 8.5, 210, 23],
+        "C2": [238, 40.5, 210, 23],
+        "B1": [644, 8.5, 80, 23],
+        "B2": [644, 40.5, 80, 23]
+      }
+    },
+    {
+      "name": "ConditionalF",
+      "settings": {
+        "left": "false",
+        "right": "false",
+        "orientation": "Horizontal"
+      },
+      "sourceSha256": "689d27f645a168fe9309a021d617d359fd4362da40bcf4307370da2985e5d20c",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 60, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "TitledF",
+      "settings": {
+        "left": "false",
+        "right": "false",
+        "shown_title": true
+      },
+      "sourceSha256": "d86acb6a5812ebb5260d3b161f303f61a31974f4da8b4561cf437560a620ab6d",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 60, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "HiddenF",
+      "settings": {
+        "left": "false",
+        "right": "false",
+        "hidden": true
+      },
+      "sourceSha256": "a6a8e349a98c3fbb714a06d9f9b8dc80bcad5df633cc4b4923dc7e372ae65c41",
+      "native": {
+        "A1": [0, 0, 129, 49],
+        "B1": [329, 0, 189, 21],
+        "B2": [329, 60, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 211, 57],
+        "B1": [407, 1, 80, 23],
+        "B2": [407, 33, 80, 23]
+      }
+    },
+    {
+      "name": "RowsT",
+      "settings": {
+        "left": "true",
+        "right": "false",
+        "columns": false
+      },
+      "sourceSha256": "3c6b2d6b8f8df493f752b42b45ec45a7e5fcf79c9866ec80799d5aeecaba49b3",
+      "native": {
+        "A1": [0, 0, 129, 49],
+        "A2": [216, 0, 149, 21],
+        "B1": [0, 60, 365, 21],
+        "B2": [395, 60, 99, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 212.390625, 40],
+        "A2": [294.39, 8.5, 193.609375, 23],
+        "B1": [171, 48, 143.328125, 23],
+        "B2": [339.33, 48, 148.671875, 23]
+      },
+      "fixture": "RowsT.xml"
+    },
+    {
+      "name": "MixedT",
+      "settings": {
+        "left": "true",
+        "right": "false",
+        "middle": "true"
+      },
+      "sourceSha256": "ed6205f4de5d4bebfa13aafa86f5c1e6350d595203c464357b739851eb1a20c3",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [537, 0, 189, 21],
+        "B2": [537, 92, 189, 21],
+        "C1": [208, 0, 129, 21],
+        "C2": [208, 32, 129, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 183, 40],
+        "A2": [0, 48, 183, 23],
+        "C1": [238, 8.5, 210, 23],
+        "C2": [238, 40.5, 210, 23],
+        "B1": [644, 8.5, 80, 23],
+        "B2": [644, 40.5, 80, 23]
+      }
+    },
+    {
+      "name": "ConditionalT",
+      "settings": {
+        "left": "true",
+        "right": "false",
+        "orientation": "Horizontal"
+      },
+      "sourceSha256": "d8570e1a60b4aa0f7a06f957f8aa57cafe7260b1a809a749eaa2e01023ad8681",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 0, 189, 21],
+        "B2": [349, 92, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "TitledT",
+      "settings": {
+        "left": "true",
+        "right": "false",
+        "shown_title": true
+      },
+      "sourceSha256": "48914ff374ff77c996f19aab032d0a5feb0cd3d5848f20cb9350e2aad2faf431",
+      "native": {
+        "A1": [0, 0, 149, 49],
+        "A2": [0, 60, 149, 21],
+        "B1": [349, 92, 189, 21],
+        "B2": [349, 124, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 228, 40],
+        "A2": [0, 48, 228, 23],
+        "B1": [424, 8.5, 114, 23],
+        "B2": [424, 40.5, 114, 23]
+      }
+    },
+    {
+      "name": "HiddenT",
+      "settings": {
+        "left": "true",
+        "right": "false",
+        "hidden": true
+      },
+      "sourceSha256": "34dd476b0bd652e959a08c07ab100a4b12eb9252f2cb54212f0f0761178ea64c",
+      "native": {
+        "A1": [0, 0, 129, 49],
+        "B1": [329, 0, 189, 21],
+        "B2": [329, 60, 189, 21]
+      },
+      "explorerBefore": {
+        "A1": [0, 0, 211, 57],
+        "B1": [407, 1, 80, 23],
+        "B2": [407, 33, 80, 23]
+      }
+    }
+  ]
+}

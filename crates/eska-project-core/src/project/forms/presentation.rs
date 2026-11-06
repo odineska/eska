@@ -8,7 +8,7 @@ use super::{
 };
 use crate::project::{
     metadata_model::{LocalizedText, MetadataKind, MetadataProperty, MetadataValue, PropertyKey},
-    metadata_parser::ParsedObject,
+    metadata_parser::{MD_NAMESPACE, ParsedObject},
 };
 use serde::Serialize;
 
@@ -76,7 +76,12 @@ pub enum FieldTitleLocation {
 #[serde(rename_all = "camelCase")]
 pub struct ElementPresentation {
     pub identity: ElementIdentity,
+    #[serde(skip)]
+    pub(super) in_table: bool,
+    #[serde(skip)]
+    pub(super) parent_kind: Option<ElementKind>,
     pub grouping: FormGrouping,
+    pub united: Option<bool>,
     pub displayed: bool,
     pub mark_incomplete: bool,
     pub title_location: FieldTitleLocation,
@@ -101,7 +106,16 @@ pub struct ElementPresentation {
 pub struct FormPresentation {
     pub elements: Vec<ElementPresentation>,
     pub important_color: ResolvedColor,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub script_variant: Option<FormScriptVariant>,
     pub diagnostics: Vec<AppearanceDiagnostic>,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum FormScriptVariant {
+    Russian,
+    English,
 }
 
 #[must_use]
@@ -112,18 +126,38 @@ pub fn present(
 ) -> FormPresentation {
     let mut appearance = Appearance::new(documents, resources);
     let mut elements = Vec::new();
+    let tables = super::commands::table_index(&form.root);
     visit(
         &form.root,
         VisitScope::default(),
         form,
         resources,
+        &tables,
         &mut appearance,
         &mut elements,
     );
     FormPresentation {
         elements,
         important_color: appearance.color(None, "ImportantColor"),
+        script_variant: script_variant(resources),
         diagnostics: appearance.diagnostics,
+    }
+}
+
+fn script_variant(resources: &[FormResource]) -> Option<FormScriptVariant> {
+    // Application resources start with the base configuration, even for a borrowed form.
+    let config = resources
+        .iter()
+        .flat_map(|resource| &resource.descriptor.objects)
+        .find(|object| object.metadata.kind() == MetadataKind::Configuration)?;
+    let variant = config.properties.as_ref()?.iter().find(|entry| {
+        let key = &entry.property.key;
+        key.name == "ScriptVariant" && key.namespace.as_deref() == Some(MD_NAMESPACE)
+    })?;
+    match appearance::text(&variant.property.value)? {
+        "Russian" => Some(FormScriptVariant::Russian),
+        "English" => Some(FormScriptVariant::English),
+        _ => None,
     }
 }
 #[derive(Clone, Copy, Default)]
@@ -159,6 +193,7 @@ fn visit(
     scope: VisitScope<'_>,
     form: &ComposedForm,
     resources: &[FormResource],
+    tables: &super::commands::TableIndex<'_>,
     appearance: &mut Appearance<'_>,
     output: &mut Vec<ElementPresentation>,
 ) {
@@ -171,7 +206,11 @@ fn visit(
         .or_else(|| command.and_then(|command| command_caption(command, form, resources)))
         .or(binding_caption)
         .unwrap_or_else(|| PresentationText::Name {
-            text: element.name.clone().unwrap_or_default(),
+            text: if element.kind == Some(ElementKind::LabelDecoration) {
+                String::new()
+            } else {
+                element.name.clone().unwrap_or_default()
+            },
         });
     let group = element.kind == Some(ElementKind::UsualGroup);
     let tab = element.kind == Some(ElementKind::Pages) || scope.pages_parent(element).is_some();
@@ -204,17 +243,17 @@ fn visit(
         .map(|value| choices(&value.property.value, resources))
         .filter(|values| !values.is_empty())
         .unwrap_or_else(|| enum_choices(&value_type, resources));
-    let auto_command_items = match element.kind {
-        Some(ElementKind::Form) => super::commands::automatic(form, resources),
-        Some(ElementKind::Table) => super::commands::table(element, &value_type),
-        _ => Vec::new(),
-    };
+    let auto_command_items = element_commands(element, &value_type, form, resources, tables);
     let auto_commands = standard_form_commands(&auto_command_items);
     let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
     output.push(ElementPresentation {
         identity: element.identity.clone(),
+        in_table: scope.in_table,
+        parent_kind: scope.parent.and_then(|parent| parent.kind),
         grouping: grouping(element),
-        displayed: is_displayed(element, binding.as_ref(), command, appearance)
+        united: group_united(element),
+        displayed: is_displayed(element, binding.as_ref(), appearance)
+            && super::commands::visible(tables, command)
             && (scope.parent.is_some_and(is_command_area)
                 || !matches!(
                     element.kind,
@@ -248,6 +287,7 @@ fn visit(
             },
             form,
             resources,
+            tables,
             appearance,
             output,
         );
@@ -317,6 +357,26 @@ fn column_caption(caption: PresentationText, in_table: bool) -> PresentationText
     }
 }
 
+fn element_commands(
+    element: &EffectiveElement,
+    value_type: &FieldType,
+    form: &ComposedForm,
+    resources: &[FormResource],
+    tables: &super::commands::TableIndex<'_>,
+) -> Vec<super::AutoCommandItem> {
+    match element.kind {
+        Some(ElementKind::Form) => super::commands::automatic(form, resources),
+        Some(ElementKind::Table) => super::commands::table(element, value_type),
+        Some(ElementKind::CommandBar) => super::commands::table_source(element, tables)
+            .map(|table| {
+                let (_, value_type, _) = bind(table, form, resources);
+                super::commands::table_items(table, &value_type)
+            })
+            .unwrap_or_default(),
+        _ => Vec::new(),
+    }
+}
+
 fn standard_form_commands(items: &[super::AutoCommandItem]) -> Vec<String> {
     items
         .iter()
@@ -331,7 +391,6 @@ fn standard_form_commands(items: &[super::AutoCommandItem]) -> Vec<String> {
 fn is_displayed(
     element: &EffectiveElement,
     binding: Option<&PropertySource>,
-    command: Option<&str>,
     appearance: &mut Appearance<'_>,
 ) -> bool {
     let needs_binding = element.kind.is_some_and(|kind| {
@@ -355,7 +414,6 @@ fn is_displayed(
     (!needs_binding || binding.is_some())
         && property(element, "Visible").and_then(|value| appearance::text(&value.property.value))
             != Some("false")
-        && super::commands::visible(command)
 }
 
 fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
@@ -392,10 +450,20 @@ fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
     }
 }
 
+fn group_united(element: &EffectiveElement) -> Option<bool> {
+    (element.kind == Some(ElementKind::UsualGroup)).then(|| {
+        match scalar(&element.properties, "United") {
+            Some("true" | "1") => true,
+            Some("false" | "0") => false,
+            _ => super::DEFAULT_GROUP_UNITED,
+        }
+    })
+}
+
 fn grouping(element: &EffectiveElement) -> FormGrouping {
     match property(element, "Group").and_then(|property| appearance::text(&property.property.value))
     {
-        Some("Horizontal") => FormGrouping::Horizontal,
+        Some("Horizontal" | "AlwaysHorizontal") => FormGrouping::Horizontal,
         Some("HorizontalIfPossible") => FormGrouping::HorizontalIfPossible,
         Some("Vertical") => FormGrouping::Vertical,
         _ if matches!(
@@ -508,7 +576,12 @@ pub(super) fn field_type(value: &MetadataValue) -> FieldType {
             }
         }
     }
-    result.kind = match result.types.as_slice() {
+    result.kind = field_value_kind(&result.types);
+    result
+}
+
+pub(super) fn field_value_kind(types: &[PropertyKey]) -> FieldValueKind {
+    match types {
         [] => FieldValueKind::Unknown,
         [kind] if kind.namespace.as_deref() == Some("http://www.w3.org/2001/XMLSchema") => {
             match kind.name.as_str() {
@@ -532,8 +605,7 @@ pub(super) fn field_type(value: &MetadataValue) -> FieldType {
         }
         [_] => FieldValueKind::Document,
         _ => FieldValueKind::Composite,
-    };
-    result
+    }
 }
 fn bind(
     element: &EffectiveElement,
@@ -818,12 +890,8 @@ fn command_caption(
     form: &ComposedForm,
     resources: &[FormResource],
 ) -> Option<PresentationText> {
-    if let Some(name) = command.strip_prefix("Form.Command.") {
-        return form
-            .commands
-            .iter()
-            .find(|value| value.name.as_deref() == Some(name))
-            .and_then(definition_caption);
+    if let Some(name) = super::commands::local_command_name(command) {
+        return super::commands::local_command(form, name).and_then(definition_caption);
     }
     if let Some(name) = command.strip_prefix("CommonCommand.") {
         return resources
@@ -892,9 +960,52 @@ fn choices(value: &MetadataValue, resources: &[FormResource]) -> Vec<Presentatio
                 return Some(caption);
             }
 
-            record(&item.value, "Value").and_then(|value| choice_reference(&value.value, resources))
+            design_time_choice(item, resources).or_else(|| {
+                record(&item.value, "Value")
+                    .and_then(|value| choice_reference(&value.value, resources))
+            })
         })
         .collect()
+}
+
+fn design_time_choice(
+    item: &MetadataProperty,
+    resources: &[FormResource],
+) -> Option<PresentationText> {
+    const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
+    if item.key.namespace.as_deref() != Some(READABLE) || item.key.name != "Item" {
+        return None;
+    }
+    let MetadataValue::Record(fields) = &item.value else {
+        return None;
+    };
+    let wrapper = fields.iter().find(|field| {
+        field.key.namespace.as_deref() == Some(READABLE) && field.key.name == "Value"
+    })?;
+    let MetadataValue::Record(fields) = &wrapper.value else {
+        return None;
+    };
+    // Designer exports an empty outer presentation and the caption inside this value wrapper.
+    let field = |name: &str| {
+        fields
+            .iter()
+            .find(|field| {
+                field.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
+                    && field.key.name == name
+            })
+            .map(|field| &field.value)
+    };
+    if let Some(caption) = field("Presentation").and_then(literal) {
+        return Some(caption);
+    }
+    let value = field("Value")?;
+    if let MetadataValue::TypedText { text, key } = value
+        && key.namespace.as_deref() == Some("http://www.w3.org/2001/XMLSchema")
+        && key.name == "string"
+    {
+        return Some(PresentationText::Name { text: text.clone() });
+    }
+    choice_reference(value, resources)
 }
 
 fn choice_reference(value: &MetadataValue, resources: &[FormResource]) -> Option<PresentationText> {

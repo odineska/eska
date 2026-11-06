@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "scope": "Complete command toolbars in the initial Configurator preview with the search input unfocused, plus the same Default toolbar after moving the splitter. The shadow row is included.",
+  "comparisonMasks": [],
+  "pixelTolerance": 0,
+  "forms": 4,
+  "nativeImages": 10,
+  "historicalInputs": "docs/measurements/t159-native-table-movement-linux.json#/completeToolbarMeasurementsFromFinalScreenshots",
+  "rows": [
+    {
+      "name": "Default",
+      "source": "tests/fixtures/forms/native-tables/Default.xml",
+      "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+      "locales": {
+        "en": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/en-Default.png",
+          "screenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5",
+          "nativeRegion": [
+            274,
+            549,
+            429,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 429,
+          "height": 27,
+          "rgbSha256": "743f31b402737d199db30ae51bb85334071172d5476504ff1b9c4a7e5b7d6f65",
+          "pixels": 11583
+        },
+        "ru": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/ru-Default.png",
+          "screenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38",
+          "nativeRegion": [
+            274,
+            549,
+            415,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 415,
+          "height": 27,
+          "rgbSha256": "d07044a609696b206e16dcec8c52a84194d30dd12ea0cb522f332f1db7edbabc",
+          "pixels": 11205
+        }
+      }
+    },
+    {
+      "name": "ReadOnly",
+      "source": "tests/fixtures/forms/native-tables/ReadOnly.xml",
+      "sourceSha256": "efa9ef102cb1e3c1f37543f692bbf4c58980dc2f0cb56bc29decbbb62e3ba0d3",
+      "locales": {
+        "en": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/search-en-ReadOnly-first.png",
+          "screenshotSha256": "b0b269c99691f1886cd181cc2dcb7cf3186e680f5870b02c0e2ca8903aa870a5",
+          "nativeRegion": [
+            274,
+            549,
+            429,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 429,
+          "height": 27,
+          "rgbSha256": "743f31b402737d199db30ae51bb85334071172d5476504ff1b9c4a7e5b7d6f65",
+          "pixels": 11583
+        },
+        "ru": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-table-pixels-kbagfn6p/search-ru-ReadOnly-first.png",
+          "screenshotSha256": "fa9e73f1a2bc4dde84679dcf569be818a5924f24608b45d0e9d7fd24d6026e87",
+          "nativeRegion": [
+            274,
+            549,
+            415,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 415,
+          "height": 27,
+          "rgbSha256": "d07044a609696b206e16dcec8c52a84194d30dd12ea0cb522f332f1db7edbabc",
+          "pixels": 11205
+        }
+      }
+    },
+    {
+      "name": "MetadataTable",
+      "source": "tests/fixtures/forms/native-context-tables/MetadataTable.xml",
+      "sourceSha256": "e892ddbe46307d58fc4fe5baf7569f8d5b33f3ff36a35eb8d76b1587341685a0",
+      "locales": {
+        "en": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/en-MetadataTable-complete.png",
+          "screenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825",
+          "nativeRegion": [
+            274,
+            549,
+            520,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 520,
+          "height": 27,
+          "rgbSha256": "37d77a4e2d7c3cd74d1e74107201ff24d31ffe2faf046bf1c312491aafad57b2",
+          "pixels": 14040
+        },
+        "ru": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/search-ru-Metadata-first.png",
+          "screenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb",
+          "nativeRegion": [
+            274,
+            549,
+            520,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 520,
+          "height": 27,
+          "rgbSha256": "5793e59691633e68c01c8be0124dafa10030d1f4446fdce3b309bc38d6f2857c",
+          "pixels": 14040
+        }
+      }
+    },
+    {
+      "name": "DynamicList",
+      "source": "tests/fixtures/forms/native-context-tables/DynamicList.xml",
+      "sourceSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+      "locales": {
+        "en": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/en-DynamicList-complete.png",
+          "screenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f",
+          "nativeRegion": [
+            274,
+            397,
+            454,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 454,
+          "height": 27,
+          "rgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+          "pixels": 12258
+        },
+        "ru": {
+          "name": "toolbar",
+          "nativeScreenshot": "native-context-pixels-g93fkhea/ru-DynamicList-complete.png",
+          "screenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723",
+          "nativeRegion": [
+            274,
+            397,
+            418,
+            27
+          ],
+          "offset": [
+            0,
+            -65
+          ],
+          "width": 418,
+          "height": 27,
+          "rgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+          "pixels": 11286
+        }
+      }
+    }
+  ],
+  "movedTable": {
+    "name": "Default",
+    "source": "tests/fixtures/forms/native-tables/Default.xml",
+    "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+    "locales": {
+      "en": {
+        "name": "toolbar",
+        "nativeScreenshot": "table-toolbar-pose-_bnsk58b/moved-en-attempt.png",
+        "screenshotSha256": "6ff007dedf34158e707113943441ea5d7398c0bf8f06e6c8c89889f4ad20affb",
+        "nativeRegion": [
+          278,
+          268,
+          429,
+          27
+        ],
+        "offset": [
+          0,
+          -65
+        ],
+        "width": 429,
+        "height": 27,
+        "rgbSha256": "7b0cc70b0cb4ee0e30c7833f67608a1d0f6ce44c34679bfa55a8d497a8d3851b",
+        "pixels": 11583,
+        "lowerEdgeRgb": [
+          155,
+          155,
+          155
+        ],
+        "movementRgbSha256": "262596e50156d05e5bd41d59d269e2c15d0dd061bb4115555b86e8c93490a4d3"
+      },
+      "ru": {
+        "name": "toolbar",
+        "nativeScreenshot": "table-toolbar-pose-_bnsk58b/moved-up-ru.png",
+        "screenshotSha256": "641e2b26e5e3ad3c0b51b1650527c17f45b883eb6efe431c6ac33f13ffb3cb96",
+        "nativeRegion": [
+          278,
+          268,
+          415,
+          27
+        ],
+        "offset": [
+          0,
+          -65
+        ],
+        "width": 415,
+        "height": 27,
+        "rgbSha256": "11a2631f179168a494f54536e957a68bab0017e2365ade9448420fbe5cd600e9",
+        "pixels": 11205,
+        "lowerEdgeRgb": [
+          155,
+          155,
+          155
+        ],
+        "movementRgbSha256": "262596e50156d05e5bd41d59d269e2c15d0dd061bb4115555b86e8c93490a4d3"
+      }
+    }
+  }
+}

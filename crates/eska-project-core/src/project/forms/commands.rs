@@ -2,11 +2,13 @@
 
 use super::presentation::{definition_type, field_type, literal, metadata_property};
 use super::{
-    ComposedForm, EffectiveElement, ElementKind, FormResource, PresentationText, PropertySource,
+    ComposedForm, EffectiveDefinition, EffectiveElement, ElementFamily, ElementKind,
+    FORM_NAMESPACE, FormResource, PresentationText, PropertySource, appearance::text,
+    presentation::property,
 };
-use crate::project::metadata_model::{MetadataKind, PropertyKey};
+use crate::project::metadata_model::{MetadataKind, MetadataValue, PropertyKey};
 use serde::Serialize;
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -17,29 +19,47 @@ pub struct AutoCommandItem {
     pub origin: Option<PropertySource>,
 }
 
-pub(super) fn visible(command: Option<&str>) -> bool {
+pub(super) fn local_command_name(command: &str) -> Option<&str> {
+    command
+        .strip_prefix("Form.Command.")
+        .filter(|name| !name.trim().is_empty())
+}
+
+pub(super) fn local_command<'a>(
+    form: &'a ComposedForm,
+    name: &str,
+) -> Option<&'a EffectiveDefinition> {
+    form.commands
+        .iter()
+        .find(|command| command.name.as_deref() == Some(name))
+}
+
+pub(super) fn visible(tables: &TableIndex<'_>, command: Option<&str>) -> bool {
     // These commands require a distributed/standalone server context. The ordinary desktop
     // Configurator profile retains their XML nodes but excludes them from the visual bar.
-    !matches!(
+    if matches!(
         command,
         Some(
             "Form.StandardCommand.OpenFromMainServer"
                 | "Form.StandardCommand.OpenFromStandaloneServer"
         )
-    )
+    ) {
+        return false;
+    }
+    let Some((table, name)) = command
+        .and_then(|value| value.strip_prefix("Form.Item."))
+        .and_then(|value| value.split_once(".StandardCommand."))
+    else {
+        return true;
+    };
+    !tables.get(table).is_some_and(|table| excludes(table, name))
 }
 
 pub(super) fn automatic(form: &ComposedForm, resources: &[FormResource]) -> Vec<AutoCommandItem> {
     if !autofill(&form.root) {
         return Vec::new();
     }
-    let Some(attribute) = form.attributes.iter().find(|attribute| {
-        attribute.properties.iter().any(|value| {
-            value.property.key.name == "MainAttribute"
-                && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
-                && super::appearance::text(&value.property.value) == Some("true")
-        })
-    }) else {
+    let Some(attribute) = form.main_attribute() else {
         return Vec::new();
     };
     let types = definition_type(attribute);
@@ -80,17 +100,84 @@ pub(super) fn table(
     if !autofill(element) {
         return Vec::new();
     }
+    table_items(element, value_type)
+}
+
+pub(super) type TableIndex<'a> = HashMap<&'a str, &'a EffectiveElement>;
+
+pub(super) fn table_index(root: &EffectiveElement) -> TableIndex<'_> {
+    fn visit<'a>(element: &'a EffectiveElement, tables: &mut TableIndex<'a>) {
+        if element.kind == Some(ElementKind::Table)
+            && let Some(name) = element.name.as_deref()
+        {
+            tables.entry(name).or_insert(element);
+        }
+        for child in &element.children {
+            visit(child, tables);
+        }
+    }
+
+    let mut tables = TableIndex::new();
+    visit(root, &mut tables);
+    tables
+}
+
+fn declares_columns(element: &EffectiveElement) -> bool {
+    element.children.iter().any(|child| {
+        child.kind.is_some_and(|kind| {
+            kind.family() == ElementFamily::Field
+                || kind == ElementKind::ColumnGroup && declares_columns(child)
+        })
+    })
+}
+
+/// A standalone command bar can draw table actions independently of the table's own bar.
+pub(super) fn table_source<'a>(
+    bar: &EffectiveElement,
+    tables: &TableIndex<'a>,
+) -> Option<&'a EffectiveElement> {
+    let name = text(&property(bar, "CommandSource")?.property.value)?.strip_prefix("Item.")?;
+    tables
+        .get(name)
+        .copied()
+        .filter(|table| declares_columns(table))
+}
+
+fn excludes(table: &EffectiveElement, command: &str) -> bool {
+    let Some(set) = property(table, "CommandSet") else {
+        return false;
+    };
+    let MetadataValue::Record(fields) = &set.property.value else {
+        return false;
+    };
+    fields.iter().any(|field| {
+        field.key.namespace.as_deref() == Some(FORM_NAMESPACE)
+            && field.key.name == "ExcludedCommand"
+            && text(&field.value) == Some(command)
+    })
+}
+
+pub(super) fn table_items(
+    element: &EffectiveElement,
+    value_type: &super::FieldType,
+) -> Vec<AutoCommandItem> {
     // ReadOnly does not remove these design-time buttons; no preview command executes.
     let dynamic = value_type.types.iter().any(|kind| {
         kind.namespace.as_deref() == Some(super::references::CONFIG) && kind.name == "DynamicList"
     });
-    let commands: &[&str] = if dynamic {
+    let commands: &[&str] = if dynamic
+        && property(element, "SearchStringLocation").and_then(|value| text(&value.property.value))
+            == Some("None")
+    {
+        &["Create", "Copy", "Find", "CancelSearch"]
+    } else if dynamic {
         &["Create", "Copy"]
     } else {
         &["Add", "MoveUp", "MoveDown"]
     };
     commands
         .iter()
+        .filter(|name| !excludes(element, name))
         .map(|name| AutoCommandItem {
             key: format!("Table.StandardCommand.{name}"),
             caption: PresentationText::Standard {
