@@ -1,0 +1,645 @@
+{
+  "schemaVersion": 1,
+  "scope": "Explicit column header and footer appearance and measured band geometry",
+  "platform": "Linux ARM64, X11, 96 DPI, 100%",
+  "nativeBuild": "8.3.27.2342",
+  "nativeCompatibility": "Version8_3_27",
+  "fixtures": "tests/fixtures/forms/native-table-bands/metrics.json",
+  "eskaCommit": "1d5154b",
+  "explorerCommit": "a0dde04",
+  "backendSha256": "e175f36b95911ffb14ef396df1cea3b30d2a16240fb00692ad493964ada7eca4",
+  "vsixSha256": "9382e534ae382aa88b1a124eedb30e2cb81225506e03271f61f4d21a1525c05e",
+  "runtimeManifestSha256": "24e4871fe3cc9e73512c33024fa5c3aeb0835a0f3b9d3a0296076f64dbf8cf56",
+  "verifiedInstalledRuntimeFiles": 1303,
+  "runs": {
+    "en": {
+      "unchangedExactCases": 35,
+      "styledCases": [
+        {
+          "name": "BandsDefault",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsDirect",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-dirty-footer",
+          "detached": false,
+          "grid": [
+            400,
+            143
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            38
+          ],
+          "footer": [
+            1,
+            104,
+            384,
+            38
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-restored-default",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-floating-default",
+          "detached": true,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-floating-dirty-footer",
+          "detached": true,
+          "grid": [
+            400,
+            143
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            38
+          ],
+          "footer": [
+            1,
+            104,
+            384,
+            38
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-floating-restored",
+          "detached": true,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-reattached-default",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsReferences",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsAlign",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsSmall",
+          "detached": false,
+          "grid": [
+            400,
+            117
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            28
+          ],
+          "footer": [
+            1,
+            88,
+            384,
+            28
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsLarge",
+          "detached": false,
+          "grid": [
+            400,
+            143
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            38
+          ],
+          "footer": [
+            1,
+            104,
+            384,
+            38
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsExtraLarge",
+          "detached": false,
+          "grid": [
+            400,
+            157
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            51
+          ],
+          "footer": [
+            1,
+            105,
+            384,
+            51
+          ],
+          "fullGridPixelParity": false
+        }
+      ]
+    },
+    "ru": {
+      "unchangedExactCases": 34,
+      "styledCases": [
+        {
+          "name": "BandsDefault",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsDirect",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-dirty-footer",
+          "detached": false,
+          "grid": [
+            400,
+            143
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            38
+          ],
+          "footer": [
+            1,
+            104,
+            384,
+            38
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-restored-default",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-floating-default",
+          "detached": true,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-floating-dirty-footer",
+          "detached": true,
+          "grid": [
+            400,
+            143
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            38
+          ],
+          "footer": [
+            1,
+            104,
+            384,
+            38
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-floating-restored",
+          "detached": true,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "styled-reattached-default",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsReferences",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsAlign",
+          "detached": false,
+          "grid": [
+            400,
+            145
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            30
+          ],
+          "footer": [
+            1,
+            114,
+            384,
+            30
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsSmall",
+          "detached": false,
+          "grid": [
+            400,
+            117
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            28
+          ],
+          "footer": [
+            1,
+            88,
+            384,
+            28
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsLarge",
+          "detached": false,
+          "grid": [
+            400,
+            143
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            38
+          ],
+          "footer": [
+            1,
+            104,
+            384,
+            38
+          ],
+          "fullGridPixelParity": false
+        },
+        {
+          "name": "BandsExtraLarge",
+          "detached": false,
+          "grid": [
+            400,
+            157
+          ],
+          "header": [
+            1,
+            1,
+            384,
+            51
+          ],
+          "footer": [
+            1,
+            105,
+            384,
+            51
+          ],
+          "fullGridPixelParity": false
+        }
+      ]
+    }
+  },
+  "regressionRuns": [
+    {
+      "suite": "table-pixels",
+      "locale": "en",
+      "passed": true,
+      "cases": 48
+    },
+    {
+      "suite": "table-pixels",
+      "locale": "ru",
+      "passed": true,
+      "cases": 47
+    },
+    {
+      "suite": "united",
+      "locale": "en",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "suite": "united",
+      "locale": "ru",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "suite": "through-align",
+      "locale": "en",
+      "passed": true,
+      "cases": 12
+    },
+    {
+      "suite": "through-align",
+      "locale": "ru",
+      "passed": true,
+      "cases": 12
+    },
+    {
+      "suite": "responsive",
+      "locale": "en",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "responsive",
+      "locale": "ru",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "application",
+      "locale": "en",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "suite": "application",
+      "locale": "ru",
+      "passed": true,
+      "cases": 4
+    }
+  ],
+  "geometryParity": true,
+  "detachedDirtyXmlGeometry": true,
+  "stableTableDomAndSelection": true,
+  "sourceWritesDuringViewing": false,
+  "fullStyledGridPixelParity": false,
+  "remaining": [
+    "Caption glyph raster differences",
+    "Column widths with all 8 pt captions",
+    "Unmeasured mixed band sizes and column group properties",
+    "Native Windows acceptance"
+  ]
+}
