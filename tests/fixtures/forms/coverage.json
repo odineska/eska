@@ -3688,11 +3688,26 @@
             }
           ],
           "clientCommit": "20a9e2f"
+        },
+        {
+          "report": "docs/measurements/t157-native-invoice-resize-linux.json",
+          "sha256": "116b972cbf6be082c0fdab6e17e6a20798809566457c407d6dbc0c2da310f8e3",
+          "clientCommit": "16de583",
+          "assertions": [
+            {
+              "pointer": "/nativeFixedSiblingCasesAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ]
         }
       ],
-      "lastConfirmation": "docs/measurements/t157-narrow-reference-lanes-linux.json",
-      "remaining": "Wrap thresholds for long and reordered numeric captions, remaining shared-title and nested layouts, real-form vertical offsets and native resize, and full native geometry.",
-      "nextAction": "Compare the real form at several native widths, then calibrate the remaining nested and shared-title layouts."
+      "lastConfirmation": "docs/measurements/t157-native-invoice-resize-linux.json",
+      "remaining": "Root command projection and placement, vertical offsets and table height on the real form, wrap thresholds for long and reordered numeric captions, other nested/shared-title layouts, and full native geometry.",
+      "nextAction": "Resolve metadata command captions and native command groups on the real form, then measure adaptive root-command placement."
     },
     {
       "id": "tables.native-context-fixtures",

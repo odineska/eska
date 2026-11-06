@@ -1,0 +1,1095 @@
+{
+  "schemaVersion": 1,
+  "milestone": "T157",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "eskaBackendCommit": "77425e9",
+  "explorerCommit": "16de583",
+  "backendSha256": "418323be8f91fd4e6f34086b6950403e8fe3a1941a5edebb6e92f4759dc28001",
+  "vsixSha256": "2673be97bdf5710a6dc6e3208058fd528fb1ac6687ca787b8534cd04a433f6c0",
+  "verifiedInstalledRuntimeFiles": 1262,
+  "fixture": {
+    "source": "tests/fixtures/forms/native-column-widths/AutoFixedSiblings.xml",
+    "sha256": "43ac5cfc2c1f98c1a24d20c211d159a24f69acb1ca568b8b4c38c34380f34e49",
+    "metrics": "tests/fixtures/forms/native-column-widths/fixed-sibling-metrics.json",
+    "metricsSha256": "8fb2a6f0090ee837ef4a8ab73efe773e58b506a4328c72c13e8917306394c8e8"
+  },
+  "coordinateSpace": "x, y, width, height in pixels relative to the form frame",
+  "nativeFixedSiblingCasesAccepted": true,
+  "wholeFormGeometryParity": false,
+  "sourceWritesDuringViewing": false,
+  "syntheticInstalled": {
+    "en": {
+      "cases": 16,
+      "fieldRects": 112,
+      "exactFieldRects": 74,
+      "maximumFieldErrorPx": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "detachedSameDom": true,
+      "detachedSelectionPreserved": true,
+      "scrollBelowMinimum": true
+    },
+    "ru": {
+      "cases": 15,
+      "fieldRects": 105,
+      "exactFieldRects": 86,
+      "maximumFieldErrorPx": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "detachedSameDom": true,
+      "detachedSelectionPreserved": true,
+      "scrollBelowMinimum": true
+    }
+  },
+  "realForm": {
+    "form": "Documents/РасходТовара/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "1f889c1b3dd13b8a1ca37fbce6a43330c1d9c9b52a13557815af771afadcc530",
+    "native": [
+      {
+        "label": "native",
+        "screen": [
+          1920,
+          1200
+        ],
+        "frame": [
+          1011,
+          638
+        ],
+        "screenshotSha256": "017c8c72646fc964b3648a298244ea51b35997387852028b8aea4d32849eaaaa",
+        "controls": {
+          "Номер": [
+            98,
+            66,
+            101,
+            23
+          ],
+          "Дата": [
+            98,
+            98,
+            182,
+            23
+          ],
+          "Организация": [
+            98,
+            130,
+            410,
+            23
+          ],
+          "Покупатель": [
+            98,
+            162,
+            410,
+            23
+          ],
+          "Склад": [
+            98,
+            194,
+            410,
+            23
+          ],
+          "ВидЦен": [
+            667,
+            66,
+            323,
+            23
+          ],
+          "Валюта": [
+            667,
+            98,
+            323,
+            23
+          ]
+        },
+        "currencyCaptionLines": [
+          "Валюта взиморасчетов:"
+        ],
+        "tableScroll": [
+          24,
+          326,
+          955,
+          255
+        ],
+        "totals": [
+          24,
+          590,
+          889,
+          25
+        ]
+      },
+      {
+        "label": "narrow",
+        "screen": [
+          1024,
+          768
+        ],
+        "frame": [
+          802,
+          638
+        ],
+        "screenshotSha256": "055cc75ae23a05cc582d212b69e2d82f685919dbd1e9aabe520e8e43835a0143",
+        "controls": {
+          "Номер": [
+            98,
+            66,
+            101,
+            23
+          ],
+          "Дата": [
+            98,
+            98,
+            182,
+            23
+          ],
+          "Организация": [
+            98,
+            130,
+            363,
+            23
+          ],
+          "Покупатель": [
+            98,
+            162,
+            363,
+            23
+          ],
+          "Склад": [
+            98,
+            194,
+            363,
+            23
+          ],
+          "ВидЦен": [
+            573,
+            66,
+            208,
+            23
+          ],
+          "Валюта": [
+            573,
+            98,
+            208,
+            23
+          ]
+        },
+        "currencyCaptionLines": [
+          "Валюта",
+          "взиморасчетов:"
+        ],
+        "tableScroll": [
+          24,
+          326,
+          746,
+          255
+        ],
+        "totals": [
+          24,
+          590,
+          746,
+          25
+        ]
+      },
+      {
+        "label": "medium",
+        "screen": [
+          1280,
+          720
+        ],
+        "frame": [
+          994,
+          638
+        ],
+        "screenshotSha256": "cefb77a24ef42ea70b1f923c9d85c025586d3e7969f3c0677d668730ec09508b",
+        "controls": {
+          "Номер": [
+            98,
+            66,
+            101,
+            23
+          ],
+          "Дата": [
+            98,
+            98,
+            182,
+            23
+          ],
+          "Организация": [
+            98,
+            130,
+            410,
+            23
+          ],
+          "Покупатель": [
+            98,
+            162,
+            410,
+            23
+          ],
+          "Склад": [
+            98,
+            194,
+            410,
+            23
+          ],
+          "ВидЦен": [
+            667,
+            66,
+            306,
+            23
+          ],
+          "Валюта": [
+            667,
+            98,
+            306,
+            23
+          ]
+        },
+        "currencyCaptionLines": [
+          "Валюта взиморасчетов:"
+        ],
+        "tableScroll": [
+          24,
+          326,
+          938,
+          255
+        ],
+        "totals": [
+          24,
+          590,
+          889,
+          25
+        ]
+      },
+      {
+        "label": "restored",
+        "screen": [
+          1920,
+          1200
+        ],
+        "frame": [
+          1011,
+          638
+        ],
+        "screenshotSha256": "5400f706824325366afe68d64e5d7a40e1485b722cb99a628e6a05442ae6f14a",
+        "controls": {
+          "Номер": [
+            98,
+            66,
+            101,
+            23
+          ],
+          "Дата": [
+            98,
+            98,
+            182,
+            23
+          ],
+          "Организация": [
+            98,
+            130,
+            410,
+            23
+          ],
+          "Покупатель": [
+            98,
+            162,
+            410,
+            23
+          ],
+          "Склад": [
+            98,
+            194,
+            410,
+            23
+          ],
+          "ВидЦен": [
+            667,
+            66,
+            323,
+            23
+          ],
+          "Валюта": [
+            667,
+            98,
+            323,
+            23
+          ]
+        },
+        "currencyCaptionLines": [
+          "Валюта взиморасчетов:"
+        ],
+        "tableScroll": [
+          24,
+          326,
+          955,
+          255
+        ],
+        "totals": [
+          24,
+          590,
+          889,
+          25
+        ]
+      }
+    ],
+    "secondaryMediumScreen": {
+      "screen": [
+        1280,
+        1024
+      ],
+      "frame": [
+        994,
+        638
+      ],
+      "screenshotSha256": "95d604670501233243256c0d42df6ece02ceb8bee59b932c0db44647c201ab01"
+    },
+    "previousInstalledNarrow": {
+      "label": "narrow",
+      "frame": [
+        802,
+        638
+      ],
+      "controls": {
+        "Номер": [
+          98,
+          67,
+          100,
+          23
+        ],
+        "Дата": [
+          98,
+          99,
+          181,
+          23
+        ],
+        "Организация": [
+          98,
+          131,
+          334,
+          23
+        ],
+        "Покупатель": [
+          98,
+          163,
+          334,
+          23
+        ],
+        "Склад": [
+          98,
+          195,
+          334,
+          23
+        ],
+        "ВидЦен": [
+          591,
+          67,
+          190,
+          23
+        ],
+        "Валюта": [
+          591,
+          99,
+          190,
+          23
+        ]
+      },
+      "currencyCaptionLines": [
+        "Валюта взиморасчетов:"
+      ],
+      "tableScroll": [
+        24,
+        326,
+        746,
+        258
+      ],
+      "totals": [
+        24,
+        591,
+        746,
+        25
+      ],
+      "visibleCommands": [
+        "Провести и закрыть",
+        "Записать",
+        "Провести",
+        "Пересчитать",
+        "Склад",
+        "Еще",
+        "?"
+      ]
+    },
+    "installed": {
+      "ru": [
+        {
+          "label": "native",
+          "frame": [
+            1011,
+            638
+          ],
+          "controls": {
+            "Номер": [
+              98,
+              67,
+              101,
+              23
+            ],
+            "Дата": [
+              98,
+              99,
+              182,
+              23
+            ],
+            "Организация": [
+              98,
+              131,
+              410,
+              23
+            ],
+            "Покупатель": [
+              98,
+              163,
+              410,
+              23
+            ],
+            "Склад": [
+              98,
+              195,
+              410,
+              23
+            ],
+            "ВидЦен": [
+              667,
+              67,
+              323,
+              23
+            ],
+            "Валюта": [
+              667,
+              99,
+              323,
+              23
+            ]
+          },
+          "currencyCaptionLines": [
+            "Валюта взиморасчетов:"
+          ],
+          "tableScroll": [
+            24,
+            326,
+            955,
+            258
+          ],
+          "totals": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "visibleCommands": [
+            "Провести и закрыть",
+            "Записать",
+            "Провести",
+            "Пересчитать",
+            "Склад",
+            "Еще",
+            "?"
+          ]
+        },
+        {
+          "label": "narrow",
+          "frame": [
+            802,
+            638
+          ],
+          "controls": {
+            "Номер": [
+              98,
+              67,
+              101,
+              23
+            ],
+            "Дата": [
+              98,
+              99,
+              182,
+              23
+            ],
+            "Организация": [
+              98,
+              131,
+              363,
+              23
+            ],
+            "Покупатель": [
+              98,
+              163,
+              363,
+              23
+            ],
+            "Склад": [
+              98,
+              195,
+              363,
+              23
+            ],
+            "ВидЦен": [
+              573,
+              67,
+              208,
+              23
+            ],
+            "Валюта": [
+              573,
+              99,
+              208,
+              23
+            ]
+          },
+          "currencyCaptionLines": [
+            "Валюта",
+            "взиморасчетов:"
+          ],
+          "tableScroll": [
+            24,
+            326,
+            746,
+            258
+          ],
+          "totals": [
+            24,
+            591,
+            746,
+            25
+          ],
+          "visibleCommands": [
+            "Провести и закрыть",
+            "Записать",
+            "Провести",
+            "Пересчитать",
+            "Склад",
+            "Еще",
+            "?"
+          ]
+        },
+        {
+          "label": "medium",
+          "frame": [
+            994,
+            638
+          ],
+          "controls": {
+            "Номер": [
+              98,
+              67,
+              101,
+              23
+            ],
+            "Дата": [
+              98,
+              99,
+              182,
+              23
+            ],
+            "Организация": [
+              98,
+              131,
+              410,
+              23
+            ],
+            "Покупатель": [
+              98,
+              163,
+              410,
+              23
+            ],
+            "Склад": [
+              98,
+              195,
+              410,
+              23
+            ],
+            "ВидЦен": [
+              667,
+              67,
+              306,
+              23
+            ],
+            "Валюта": [
+              667,
+              99,
+              306,
+              23
+            ]
+          },
+          "currencyCaptionLines": [
+            "Валюта взиморасчетов:"
+          ],
+          "tableScroll": [
+            24,
+            326,
+            938,
+            258
+          ],
+          "totals": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "visibleCommands": [
+            "Провести и закрыть",
+            "Записать",
+            "Провести",
+            "Пересчитать",
+            "Склад",
+            "Еще",
+            "?"
+          ]
+        },
+        {
+          "label": "restored",
+          "frame": [
+            1011,
+            638
+          ],
+          "controls": {
+            "Номер": [
+              98,
+              67,
+              101,
+              23
+            ],
+            "Дата": [
+              98,
+              99,
+              182,
+              23
+            ],
+            "Организация": [
+              98,
+              131,
+              410,
+              23
+            ],
+            "Покупатель": [
+              98,
+              163,
+              410,
+              23
+            ],
+            "Склад": [
+              98,
+              195,
+              410,
+              23
+            ],
+            "ВидЦен": [
+              667,
+              67,
+              323,
+              23
+            ],
+            "Валюта": [
+              667,
+              99,
+              323,
+              23
+            ]
+          },
+          "currencyCaptionLines": [
+            "Валюта взиморасчетов:"
+          ],
+          "tableScroll": [
+            24,
+            326,
+            955,
+            258
+          ],
+          "totals": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "visibleCommands": [
+            "Провести и закрыть",
+            "Записать",
+            "Провести",
+            "Пересчитать",
+            "Склад",
+            "Еще",
+            "?"
+          ]
+        }
+      ],
+      "en": [
+        {
+          "label": "native",
+          "frame": [
+            1011,
+            638
+          ],
+          "controls": {
+            "Номер": [
+              98,
+              67,
+              101,
+              23
+            ],
+            "Дата": [
+              98,
+              99,
+              182,
+              23
+            ],
+            "Организация": [
+              98,
+              131,
+              410,
+              23
+            ],
+            "Покупатель": [
+              98,
+              163,
+              410,
+              23
+            ],
+            "Склад": [
+              98,
+              195,
+              410,
+              23
+            ],
+            "ВидЦен": [
+              667,
+              67,
+              323,
+              23
+            ],
+            "Валюта": [
+              667,
+              99,
+              323,
+              23
+            ]
+          },
+          "currencyCaptionLines": [
+            "Валюта взиморасчетов:"
+          ],
+          "tableScroll": [
+            24,
+            326,
+            955,
+            258
+          ],
+          "totals": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "visibleCommands": [
+            "Post and close",
+            "Save",
+            "Post",
+            "Пересчитать",
+            "Склад",
+            "More actions",
+            "?"
+          ]
+        },
+        {
+          "label": "narrow",
+          "frame": [
+            802,
+            638
+          ],
+          "controls": {
+            "Номер": [
+              98,
+              67,
+              101,
+              23
+            ],
+            "Дата": [
+              98,
+              99,
+              182,
+              23
+            ],
+            "Организация": [
+              98,
+              131,
+              363,
+              23
+            ],
+            "Покупатель": [
+              98,
+              163,
+              363,
+              23
+            ],
+            "Склад": [
+              98,
+              195,
+              363,
+              23
+            ],
+            "ВидЦен": [
+              573,
+              67,
+              208,
+              23
+            ],
+            "Валюта": [
+              573,
+              99,
+              208,
+              23
+            ]
+          },
+          "currencyCaptionLines": [
+            "Валюта",
+            "взиморасчетов:"
+          ],
+          "tableScroll": [
+            24,
+            326,
+            746,
+            258
+          ],
+          "totals": [
+            24,
+            591,
+            746,
+            25
+          ],
+          "visibleCommands": [
+            "Post and close",
+            "Save",
+            "Post",
+            "Пересчитать",
+            "Склад",
+            "More actions",
+            "?"
+          ]
+        },
+        {
+          "label": "medium",
+          "frame": [
+            994,
+            638
+          ],
+          "controls": {
+            "Номер": [
+              98,
+              67,
+              101,
+              23
+            ],
+            "Дата": [
+              98,
+              99,
+              182,
+              23
+            ],
+            "Организация": [
+              98,
+              131,
+              410,
+              23
+            ],
+            "Покупатель": [
+              98,
+              163,
+              410,
+              23
+            ],
+            "Склад": [
+              98,
+              195,
+              410,
+              23
+            ],
+            "ВидЦен": [
+              667,
+              67,
+              306,
+              23
+            ],
+            "Валюта": [
+              667,
+              99,
+              306,
+              23
+            ]
+          },
+          "currencyCaptionLines": [
+            "Валюта взиморасчетов:"
+          ],
+          "tableScroll": [
+            24,
+            326,
+            938,
+            258
+          ],
+          "totals": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "visibleCommands": [
+            "Post and close",
+            "Save",
+            "Post",
+            "Пересчитать",
+            "Склад",
+            "More actions",
+            "?"
+          ]
+        },
+        {
+          "label": "restored",
+          "frame": [
+            1011,
+            638
+          ],
+          "controls": {
+            "Номер": [
+              98,
+              67,
+              101,
+              23
+            ],
+            "Дата": [
+              98,
+              99,
+              182,
+              23
+            ],
+            "Организация": [
+              98,
+              131,
+              410,
+              23
+            ],
+            "Покупатель": [
+              98,
+              163,
+              410,
+              23
+            ],
+            "Склад": [
+              98,
+              195,
+              410,
+              23
+            ],
+            "ВидЦен": [
+              667,
+              67,
+              323,
+              23
+            ],
+            "Валюта": [
+              667,
+              99,
+              323,
+              23
+            ]
+          },
+          "currencyCaptionLines": [
+            "Валюта взиморасчетов:"
+          ],
+          "tableScroll": [
+            24,
+            326,
+            955,
+            258
+          ],
+          "totals": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "visibleCommands": [
+            "Post and close",
+            "Save",
+            "Post",
+            "Пересчитать",
+            "Склад",
+            "More actions",
+            "?"
+          ]
+        }
+      ]
+    }
+  },
+  "rootCommandBar": {
+    "nativeWideOnly": [
+      "Пересчитать",
+      "Остатки по складу"
+    ],
+    "nativeAtAllMeasuredWidths": [
+      "Создать на основании",
+      "Печать"
+    ],
+    "missingInInstalledWide": [
+      "Создать на основании",
+      "Печать"
+    ],
+    "authoredMetadataCommand": {
+      "reference": "Report.ОстаткиТоваровНаСкладах.Command.ОстаткиПоСкладу",
+      "nativeCaption": "Остатки по складу",
+      "installedCaption": "Склад"
+    },
+    "inputs": [
+      "Documents/РасходТовара/Forms/ФормаДокумента/Ext/Form.xml",
+      "Documents/РасходТовара.xml",
+      "Documents/ПоступлениеДенег.xml",
+      "Reports/ОстаткиТоваровНаСкладах.xml",
+      "CommandGroups/Печать.xml"
+    ]
+  },
+  "regressionRuns": {
+    "installedRuns": 30,
+    "installedCaseIds": 1010,
+    "suites": [
+      "column-widths",
+      "united",
+      "through-align",
+      "numeric-labels",
+      "responsive",
+      "groups",
+      "input-dimensions",
+      "input-borders",
+      "input-fonts",
+      "input-stretch",
+      "input-dates",
+      "table-pixels",
+      "tables",
+      "preview",
+      "application"
+    ],
+    "node": {
+      "pass": 628,
+      "fail": 0,
+      "skipped": 11
+    },
+    "bun": {
+      "pass": 616,
+      "fail": 0,
+      "skipped": 11
+    },
+    "packagingVerified": true
+  },
+  "remaining": "The real form still has a one-pixel vertical offset in header fields and totals, a taller table scroll area, missing command groups, an unresolved authored command caption, and incomplete adaptive command placement. Native Windows measurements remain open."
+}
