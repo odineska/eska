@@ -20,10 +20,7 @@ pub(super) fn resolve(
     resources: &[FormResource],
     diagnostics: &mut Vec<AppearanceDiagnostic>,
 ) -> Option<FormPicture> {
-    let property = element.properties.iter().find(|property| {
-        property.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
-            && property.property.key.name == "Picture"
-    })?;
+    let property = element.property("Picture")?;
     let MetadataValue::Record(fields) = &property.property.value else {
         return None;
     };

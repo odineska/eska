@@ -4,7 +4,6 @@ use super::presentation::{definition_type, field_type, literal, metadata_propert
 use super::{
     ComposedForm, EffectiveDefinition, EffectiveElement, ElementFamily, ElementKind,
     FORM_NAMESPACE, FormResource, PresentationText, PropertySource, appearance::text,
-    presentation::property,
 };
 use crate::project::metadata_model::{MetadataKind, MetadataValue, PropertyKey};
 use serde::Serialize;
@@ -88,8 +87,7 @@ fn autofill(element: &EffectiveElement) -> bool {
         .auxiliary
         .iter()
         .find(|node| node.kind == Some(ElementKind::AutoCommandBar))
-        .and_then(|bar| super::presentation::property(bar, "Autofill"))
-        .and_then(|value| super::appearance::text(&value.property.value))
+        .and_then(|bar| bar.scalar("Autofill"))
         != Some("false")
 }
 
@@ -136,7 +134,7 @@ pub(super) fn table_source<'a>(
     bar: &EffectiveElement,
     tables: &TableIndex<'a>,
 ) -> Option<&'a EffectiveElement> {
-    let name = text(&property(bar, "CommandSource")?.property.value)?.strip_prefix("Item.")?;
+    let name = bar.scalar("CommandSource")?.strip_prefix("Item.")?;
     tables
         .get(name)
         .copied()
@@ -144,7 +142,7 @@ pub(super) fn table_source<'a>(
 }
 
 fn excludes(table: &EffectiveElement, command: &str) -> bool {
-    let Some(set) = property(table, "CommandSet") else {
+    let Some(set) = table.property("CommandSet") else {
         return false;
     };
     let MetadataValue::Record(fields) = &set.property.value else {
@@ -165,10 +163,7 @@ pub(super) fn table_items(
     let dynamic = value_type.types.iter().any(|kind| {
         kind.namespace.as_deref() == Some(super::references::CONFIG) && kind.name == "DynamicList"
     });
-    let commands: &[&str] = if dynamic
-        && property(element, "SearchStringLocation").and_then(|value| text(&value.property.value))
-            == Some("None")
-    {
+    let commands: &[&str] = if dynamic && element.scalar("SearchStringLocation") == Some("None") {
         &["Create", "Copy", "Find", "CancelSearch"]
     } else if dynamic {
         &["Create", "Copy"]

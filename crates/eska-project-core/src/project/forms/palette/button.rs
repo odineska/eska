@@ -2,7 +2,6 @@
 
 use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
-    setting_text,
 };
 use crate::project::forms::{
     ComposedForm, EffectiveElement, ElementKind, ElementPresentation, FORM_NAMESPACE, commands,
@@ -24,7 +23,7 @@ impl Context {
         if view.in_table {
             return None;
         }
-        let command_bar = match (view.parent_kind, setting_text(element, "Type")) {
+        let command_bar = match (view.parent_kind, element.scalar("Type")) {
             (Some(ElementKind::UsualGroup), None | Some("UsualButton" | "Hyperlink")) => false,
             (
                 Some(ElementKind::CommandBar),
@@ -32,7 +31,7 @@ impl Context {
             ) => true,
             _ => return None,
         };
-        let name = commands::local_command_name(setting_text(element, "CommandName")?)?;
+        let name = commands::local_command_name(element.scalar("CommandName")?)?;
         let command = commands::local_command(form, name)?;
         if command.properties.iter().any(|entry| {
             let key = &entry.property.key;
@@ -40,7 +39,7 @@ impl Context {
         }) {
             return None;
         }
-        let manual_max = |name| matches!(setting_text(element, name), Some("false" | "0"));
+        let manual_max = |name| matches!(element.scalar(name), Some("false" | "0"));
         Some(Self {
             command_bar,
             manual_max_width: manual_max("AutoMaxWidth"),
