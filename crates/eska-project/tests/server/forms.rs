@@ -418,6 +418,9 @@ fn form_root_palette_agrees_with_native_defaults_and_settings_visibility() {
             let property = &updated["model"]["root"]["properties"][index];
             assert_eq!(property["key"]["name"], key);
             assert_eq!(property["value"]["text"], setting["value"]);
+            if matches!(key, "AutoTitle" | "AutoFillCheck") {
+                assert_eq!(property["value"]["scalarType"], "boolean");
+            }
         }
         assert_eq!(
             input_palette_value(&inspection, "SettingsStorage")["default"]["kind"],
