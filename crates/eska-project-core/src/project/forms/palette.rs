@@ -1,14 +1,15 @@
 //! The Designer palette describes applicable settings separately from declared XML.
 
 mod input_field;
+mod root_form;
 
 use std::collections::{HashMap, HashSet};
 
 use serde::Serialize;
 
 use super::{
-    EffectiveElement, ElementIdentity, ElementKind, FORM_NAMESPACE, FormPreview, SourcedQualifier,
-    appearance, handlers, presentation,
+    EffectiveElement, ElementIdentity, ElementKind, FORM_NAMESPACE, FormPreview, SourcedProperty,
+    SourcedQualifier, appearance, handlers, presentation,
 };
 use crate::project::metadata_model::MetadataValue;
 
@@ -131,6 +132,7 @@ pub enum PaletteValue<'a> {
     /// Points into this revision's effective XML properties. The occurrence is within the `QName`.
     Declared {
         index: usize,
+        property: &'a SourcedProperty,
         occurrence: usize,
         extension: bool,
     },
@@ -159,7 +161,6 @@ pub struct PaletteRow<'a> {
 
 #[derive(Debug)]
 pub struct PropertyPalette<'a> {
-    pub element: &'a EffectiveElement,
     /// None signals that a native palette for this element context is not yet established.
     pub rows: Option<Vec<PaletteRow<'a>>>,
 }
@@ -169,22 +170,27 @@ impl FormPreview {
     #[must_use]
     pub fn property_palette(&self, identity: &ElementIdentity) -> Option<PropertyPalette<'_>> {
         let element = self.form.root.find(identity)?;
-        let rows = if element.kind == Some(ElementKind::InputField) {
-            self.presentation
+        let rows = match element.kind {
+            Some(ElementKind::Form) if identity == &self.form.root.identity => {
+                root_form::Context::new(self).map(|context| {
+                    self.palette_rows(element, root_form::definitions(context, element))
+                })
+            }
+            Some(ElementKind::InputField) => self
+                .presentation
                 .elements
                 .iter()
                 .find(|item| &item.identity == identity)
                 .and_then(|item| input_field::Context::new(item, element))
-                .map(|context| self.palette_rows(element, input_field::definitions(context)))
-        } else {
-            ordinary_vertical_group(element)
-                .then(|| self.palette_rows(element, USUAL_GROUP.iter().map(|row| (row, true))))
+                .map(|context| self.palette_rows(element, input_field::definitions(context))),
+            _ => ordinary_vertical_group(element)
+                .then(|| self.palette_rows(element, USUAL_GROUP.iter().map(|row| (row, true)))),
         };
-        Some(PropertyPalette { element, rows })
+        Some(PropertyPalette { rows })
     }
 
     fn palette_rows<'a>(
-        &self,
+        &'a self,
         element: &'a EffectiveElement,
         catalog: impl IntoIterator<Item = (&'static PaletteDefinition, bool)>,
     ) -> Vec<PaletteRow<'a>> {
@@ -194,12 +200,14 @@ impl FormPreview {
             .filter(|dependency| dependency.extension_form)
             .map(|dependency| dependency.id.as_str())
             .collect();
-        let mut taken_properties = vec![false; element.properties.len()];
+        let properties: Vec<_> = self.form.inspectable_properties(element).collect();
+        let mut taken_properties = vec![false; properties.len()];
         let mut taken_attributes = vec![false; element.qualifiers.len()];
         let declared = |index: usize, occurrence| PaletteValue::Declared {
             index,
+            property: properties[index],
             occurrence,
-            extension: extension_sources.contains(element.properties[index].origin.source.as_str()),
+            extension: extension_sources.contains(properties[index].origin.source.as_str()),
         };
         let qualifier = |attribute: &'a SourcedQualifier| PaletteValue::Qualifier {
             attribute,
@@ -209,8 +217,7 @@ impl FormPreview {
         for (definition, available) in catalog {
             let missing = || PaletteValue::Absent(definition.absent);
             let value = match definition.source {
-                SettingSource::Property(name) => element
-                    .properties
+                SettingSource::Property(name) => properties
                     .iter()
                     .position(|property| {
                         property.property.key.namespace.as_deref() == Some(FORM_NAMESPACE)
@@ -250,7 +257,7 @@ impl FormPreview {
             });
         }
         let mut occurrences = HashMap::new();
-        for (index, property) in element.properties.iter().enumerate() {
+        for (index, property) in properties.iter().enumerate() {
             let key = &property.property.key;
             let occurrence = occurrences
                 .entry((key.namespace.as_deref(), key.name.as_str()))

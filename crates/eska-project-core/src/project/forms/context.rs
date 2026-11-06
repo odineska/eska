@@ -12,7 +12,7 @@ use super::{ComposedForm, FormDocument, FormInput, FormParseError, compose, pars
 use crate::{
     application::{ContextSnapshot, ContextSource, SourceRole},
     project::{
-        designer_source::{self, SourceError},
+        designer_source::{self, LogicalLocation, SourceError},
         metadata_model::{ObjectId, ProjectScope},
     },
 };
@@ -52,6 +52,7 @@ pub struct FormPreview {
     pub context_fingerprint: String,
     pub application: Option<String>,
     pub limited_context: bool,
+    pub(super) form_owner: Option<LogicalLocation>,
     pub dependencies: Vec<FormDependency>,
     pub documents: Vec<FormDocument>,
     pub resources: Vec<super::FormResource>,
@@ -180,11 +181,15 @@ pub fn load(
     validate_overlays(overlays, &dependencies, previous, &metadata)?;
     super::layer_order::apply(context, &dependencies, &mut documents, &mut resources)?;
     super::borrowing::validate(context, &dependencies, &resources)?;
-    build_preview(context, dependencies, documents, resources)
+    let mut parts = designer_source::identity_parts(owner).map_err(FormContextError::Source)?;
+    let form = parts.pop();
+    let form_owner = parts.pop().or(form);
+    build_preview(context, form_owner, dependencies, documents, resources)
 }
 
 fn build_preview(
     context: &ContextSnapshot,
+    form_owner: Option<LogicalLocation>,
     dependencies: Vec<FormDependency>,
     documents: Vec<FormDocument>,
     resources: Vec<super::FormResource>,
@@ -198,6 +203,7 @@ fn build_preview(
         context_fingerprint: context.fingerprint.clone(),
         application: context.context.name().map(|name| name.as_str().into()),
         limited_context: context.context.limited_context(),
+        form_owner,
         dependencies,
         documents,
         resources,

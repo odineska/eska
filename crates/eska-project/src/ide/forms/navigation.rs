@@ -89,9 +89,10 @@ pub(super) fn locate(entry: &Entry, args: &Value, palette: bool) -> Result<Value
                     Some(index) if palette => params::decode::<usize>(index)?,
                     _ => 0,
                 };
-                &value
-                    .properties
-                    .iter()
+                &entry
+                    .preview
+                    .form
+                    .inspectable_properties(value)
                     .filter(|value| value.property.key == key)
                     .nth(occurrence)
                     .ok_or_else(|| failure("target_unavailable"))?

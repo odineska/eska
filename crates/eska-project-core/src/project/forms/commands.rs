@@ -43,13 +43,7 @@ pub(super) fn automatic(form: &ComposedForm, resources: &[FormResource]) -> Vec<
     if !autofill(&form.root) {
         return Vec::new();
     }
-    let Some(attribute) = form.attributes.iter().find(|attribute| {
-        attribute.properties.iter().any(|value| {
-            value.property.key.name == "MainAttribute"
-                && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
-                && super::appearance::text(&value.property.value) == Some("true")
-        })
-    }) else {
+    let Some(attribute) = form.main_attribute() else {
         return Vec::new();
     };
     let types = definition_type(attribute);

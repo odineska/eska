@@ -115,6 +115,34 @@ pub struct ComposedForm {
     pub diagnostics: Vec<FormCompositionDiagnostic>,
 }
 
+impl ComposedForm {
+    pub(super) fn main_attribute(&self) -> Option<&EffectiveDefinition> {
+        self.attributes.iter().find(|attribute| {
+            attribute.properties.iter().any(|value| {
+                value.property.key.name == "MainAttribute"
+                    && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
+                    && matches!(
+                        super::appearance::text(&value.property.value),
+                        Some("true" | "1")
+                    )
+            })
+        })
+    }
+
+    /// Form-level settings under Attributes follow the root's direct properties in the inspector.
+    pub fn inspectable_properties<'a>(
+        &'a self,
+        element: &'a EffectiveElement,
+    ) -> impl Iterator<Item = &'a SourcedProperty> {
+        let attributes = if element.identity == self.root.identity {
+            self.attribute_properties.as_slice()
+        } else {
+            &[]
+        };
+        element.properties.iter().chain(attributes)
+    }
+}
+
 /// Compose ordered application layers. Missing baselines never masquerade as a complete form.
 #[must_use]
 pub fn compose(base: &FormDocument, extensions: &[&FormDocument]) -> ComposedForm {

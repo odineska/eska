@@ -1,0 +1,1048 @@
+{
+  "schemaVersion": 1,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "contexts": [
+    "commonForm",
+    "catalogFormWithoutMainAttribute",
+    "nonHierarchicalCatalogObjectForm"
+  ],
+  "categoryLabels": {
+    "main": {
+      "en-US": "General",
+      "ru-RU": "Основные"
+    },
+    "usage": {
+      "en-US": "Use",
+      "ru-RU": "Использование"
+    },
+    "appearance": {
+      "en-US": "Appearance",
+      "ru-RU": "Оформление"
+    },
+    "layout": {
+      "en-US": "Layout",
+      "ru-RU": "Расположение"
+    },
+    "events": {
+      "en-US": "Events",
+      "ru-RU": "События"
+    }
+  },
+  "rows": [
+    {
+      "nativeKey": "Title",
+      "category": "main",
+      "editor": "localized",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Title",
+        "ru-RU": "Заголовок"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "AutoTitle",
+      "category": "main",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "AutoTitle",
+        "ru-RU": "АвтоЗаголовок"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "Enabled",
+      "category": "main",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Enabled",
+        "ru-RU": "Доступность"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "Customizable",
+      "category": "main",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Enable form change",
+        "ru-RU": "Разрешить изменять форму"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "Group",
+      "category": "main",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Group",
+        "ru-RU": "Группировка"
+      },
+      "displayValue": {
+        "en-US": "Vertical",
+        "ru-RU": "Вертикальная"
+      }
+    },
+    {
+      "nativeKey": "CommandBarLocation",
+      "category": "usage",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "CommandBarLocation",
+        "ru-RU": "ПоложениеКоманднойПанели"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "MobileDeviceCommandBarContent",
+      "category": "usage",
+      "editor": "dialog",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "MobileDeviceCommandBarContent",
+        "ru-RU": "СоставКоманднойПанелиНаМобильномУстройстве"
+      },
+      "displayValue": {
+        "en-US": "Open",
+        "ru-RU": "Открыть"
+      }
+    },
+    {
+      "nativeKey": "CommandSet",
+      "category": "usage",
+      "editor": "dialog",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Command set",
+        "ru-RU": "Состав команд"
+      },
+      "displayValue": {
+        "en-US": "Open",
+        "ru-RU": "Открыть"
+      }
+    },
+    {
+      "nativeKey": "WindowOpeningMode",
+      "category": "usage",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "WindowOpeningMode",
+        "ru-RU": "РежимОткрытияОкна"
+      },
+      "displayValue": {
+        "en-US": "Independent",
+        "ru-RU": "Независимый"
+      }
+    },
+    {
+      "nativeKey": "EnterKeyBehavior",
+      "category": "usage",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "EnterKeyBehavior",
+        "ru-RU": "ПоведениеКлавишиEnter"
+      },
+      "displayValue": {
+        "en-US": "Element navigation",
+        "ru-RU": "Переход по элементам"
+      }
+    },
+    {
+      "nativeKey": "AutoFillCheck",
+      "category": "usage",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "AutoFillCheck",
+        "ru-RU": "ПроверятьЗаполнениеАвтоматически"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "AutoURL",
+      "category": "usage",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "AutoURL",
+        "ru-RU": "АвтоНавигационнаяСсылка"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "ItemsAndTitlesAlign",
+      "category": "usage",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ItemsAndTitlesAlign",
+        "ru-RU": "ВыравниваниеЭлементовИЗаголовков"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "ShowTitle",
+      "category": "usage",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ShowTitle",
+        "ru-RU": "ОтображатьЗаголовок"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "ShowCloseButton",
+      "category": "usage",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ShowCloseButton",
+        "ru-RU": "ОтображатьКнопкуЗакрытия"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "ConversationsRepresentation",
+      "category": "usage",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ConversationsRepresentation",
+        "ru-RU": "ОтображениеОбсуждений"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "CollapseItemsByImportance",
+      "category": "usage",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "CollapseItemsByImportance",
+        "ru-RU": "СворачиваниеЭлементовПоВажности"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "UseForFoldersAndItems",
+      "category": "usage",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "UseForFoldersAndItems",
+        "ru-RU": "ИспользованиеДляГруппИЭлементов"
+      },
+      "displayValue": {
+        "en-US": "For item",
+        "ru-RU": "Для элемента"
+      },
+      "when": "catalogObject"
+    },
+    {
+      "nativeKey": "AutoSaveDataInSettings",
+      "category": "usage",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "AutoSaveDataInSettings",
+        "ru-RU": "АвтоматическоеСохранениеДанныхВНастройках"
+      },
+      "displayValue": {
+        "en-US": "Do not use",
+        "ru-RU": "Не использовать"
+      }
+    },
+    {
+      "nativeKey": "SaveDataInSettings",
+      "category": "usage",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "SaveDataInSettings",
+        "ru-RU": "СохранениеДанныхВНастройках"
+      },
+      "displayValue": {
+        "en-US": "Do not use",
+        "ru-RU": "Не использовать"
+      }
+    },
+    {
+      "nativeKey": "SaveWindowSettings",
+      "category": "usage",
+      "editor": "boolean",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Save window settings",
+        "ru-RU": "Сохранять настройки окна"
+      },
+      "displayValue": {
+        "en-US": true,
+        "ru-RU": true
+      }
+    },
+    {
+      "nativeKey": "SettingsStorage",
+      "category": "usage",
+      "editor": "reference",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Settings storage",
+        "ru-RU": "Хранилище настроек"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      },
+      "when": "saveList"
+    },
+    {
+      "nativeKey": "ScalingMode",
+      "category": "appearance",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Scaling mode",
+        "ru-RU": "Вариант масштаба"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "ConditionalAppearance",
+      "category": "appearance",
+      "editor": "dialog",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ConditionalAppearance",
+        "ru-RU": "УсловноеОформление"
+      },
+      "displayValue": {
+        "en-US": "Open",
+        "ru-RU": "Открыть"
+      }
+    },
+    {
+      "nativeKey": "HorizontalSpacing",
+      "category": "appearance",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "HorizontalSpacing",
+        "ru-RU": "ГоризонтальныйИнтервал"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "VerticalSpacing",
+      "category": "appearance",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "VerticalSpacing",
+        "ru-RU": "ВертикальныйИнтервал"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "ChildItemsHorizontalAlign",
+      "category": "layout",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ChildItemsHorizontalAlign",
+        "ru-RU": "ГоризонтальноеПоложениеПодчиненных"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "ChildItemsVerticalAlign",
+      "category": "layout",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ChildItemsVerticalAlign",
+        "ru-RU": "ВертикальноеПоложениеПодчиненных"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "Width",
+      "category": "layout",
+      "editor": "number",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Width",
+        "ru-RU": "Ширина"
+      },
+      "displayValue": {
+        "en-US": 0,
+        "ru-RU": 0
+      }
+    },
+    {
+      "nativeKey": "Height",
+      "category": "layout",
+      "editor": "number",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Height",
+        "ru-RU": "Высота"
+      },
+      "displayValue": {
+        "en-US": 0,
+        "ru-RU": 0
+      }
+    },
+    {
+      "nativeKey": "Scale",
+      "category": "layout",
+      "editor": "number",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "Scale",
+        "ru-RU": "Масштаб"
+      },
+      "displayValue": {
+        "en-US": 100,
+        "ru-RU": 100
+      }
+    },
+    {
+      "nativeKey": "VerticalScroll",
+      "category": "layout",
+      "editor": "enum",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "VerticalScroll",
+        "ru-RU": "ВертикальнаяПрокрутка"
+      },
+      "displayValue": {
+        "en-US": "Auto",
+        "ru-RU": "Авто"
+      }
+    },
+    {
+      "nativeKey": "OnCreateAtServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnCreateAtServer",
+        "ru-RU": "ПриСозданииНаСервере"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnOpen",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnOpen",
+        "ru-RU": "ПриОткрытии"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnReopen",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnReopen",
+        "ru-RU": "ПриПовторномОткрытии"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "BeforeClose",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "BeforeClose",
+        "ru-RU": "ПередЗакрытием"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnClose",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnClose",
+        "ru-RU": "ПриЗакрытии"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "ChoiceProcessing",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ChoiceProcessing",
+        "ru-RU": "ОбработкаВыбора"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "NotificationProcessing",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "NotificationProcessing",
+        "ru-RU": "ОбработкаОповещения"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "ActivationProcessing",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ActivationProcessing",
+        "ru-RU": "ОбработкаАктивизации"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "NewWriteProcessing",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "NewWriteProcessing",
+        "ru-RU": "ОбработкаЗаписиНового"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnReadAtServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnReadAtServer",
+        "ru-RU": "ПриЧтенииНаСервере"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      },
+      "when": "catalogObject"
+    },
+    {
+      "nativeKey": "BeforeWrite",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "BeforeWrite",
+        "ru-RU": "ПередЗаписью"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      },
+      "when": "catalogObject"
+    },
+    {
+      "nativeKey": "BeforeWriteAtServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "BeforeWriteAtServer",
+        "ru-RU": "ПередЗаписьюНаСервере"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      },
+      "when": "catalogObject"
+    },
+    {
+      "nativeKey": "OnWriteAtServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnWriteAtServer",
+        "ru-RU": "ПриЗаписиНаСервере"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      },
+      "when": "catalogObject"
+    },
+    {
+      "nativeKey": "AfterWriteAtServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "AfterWriteAtServer",
+        "ru-RU": "ПослеЗаписиНаСервере"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      },
+      "when": "catalogObject"
+    },
+    {
+      "nativeKey": "AfterWrite",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "AfterWrite",
+        "ru-RU": "ПослеЗаписи"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      },
+      "when": "catalogObject"
+    },
+    {
+      "nativeKey": "FillCheckProcessingAtServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "FillCheckProcessingAtServer",
+        "ru-RU": "ОбработкаПроверкиЗаполненияНаСервере"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "ExternalEvent",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ExternalEvent",
+        "ru-RU": "ВнешнееСобытие"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "AddInDetachmentOnError",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "AddInDetachmentOnError",
+        "ru-RU": "ОтключениеВнешнейКомпонентыПриОшибке"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnSaveDataInSettingsAtServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnSaveDataInSettingsAtServer",
+        "ru-RU": "ПриСохраненииДанныхВНастройкахНаСервере"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "BeforeLoadDataFromSettingsAtServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "BeforeLoadDataFromSettingsAtServer",
+        "ru-RU": "ПередЗагрузкойДанныхИзНастроекНаСервере"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnLoadDataFromSettingsAtServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnLoadDataFromSettingsAtServer",
+        "ru-RU": "ПриЗагрузкеДанныхИзНастроекНаСервере"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "URLProcessing",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "URLProcessing",
+        "ru-RU": "ОбработкаНавигационнойСсылки"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "URLGetProcessing",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "URLGetProcessing",
+        "ru-RU": "ОбработкаПолученияНавигационнойСсылки"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "URLListGetProcessing",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "URLListGetProcessing",
+        "ru-RU": "ОбработкаПолученияСпискаНавигационныхСсылок"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "NavigationProcessing",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "NavigationProcessing",
+        "ru-RU": "ОбработкаПерехода"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "ValueChoice",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "ValueChoice",
+        "ru-RU": "ВыборЗначения"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      },
+      "when": "catalogObject"
+    },
+    {
+      "nativeKey": "OnChangeDisplaySettings",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnChangeDisplaySettings",
+        "ru-RU": "ПриИзмененииПараметровЭкрана"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "CollaborationSystemUsersAutoComplete",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "CollaborationSystemUsersAutoComplete",
+        "ru-RU": "АвтоПодборПользователейСистемыВзаимодействия"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "CollaborationSystemUsersChoiceFormGetProcessing",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "CollaborationSystemUsersChoiceFormGetProcessing",
+        "ru-RU": "ОбработкаПолученияФормыВыбораПользователейСистемыВзаимодействия"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnMainServerAvailabilityChange",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnMainServerAvailabilityChange",
+        "ru-RU": "ПриИзмененииДоступностиОсновногоСервера"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "BeforeReopenFromOtherServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "BeforeReopenFromOtherServer",
+        "ru-RU": "ПередПереоткрытиемСДругогоСервера"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnReopenFromOtherServer",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnReopenFromOtherServer",
+        "ru-RU": "ПриПереоткрытииСДругогоСервера"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnClientApplicationSuspend",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnClientApplicationSuspend",
+        "ru-RU": "ПриЗасыпанииКлиентскогоПриложения"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnClientApplicationResume",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnClientApplicationResume",
+        "ru-RU": "ПриПробужденииКлиентскогоПриложения"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    },
+    {
+      "nativeKey": "OnPasteFromClipboard",
+      "category": "events",
+      "editor": "event",
+      "sourcePresence": "absent",
+      "label": {
+        "en-US": "OnPasteFromClipboard",
+        "ru-RU": "ПриВставкеИзБуфераОбмена"
+      },
+      "displayValue": {
+        "en-US": "",
+        "ru-RU": ""
+      }
+    }
+  ],
+  "explicit": [
+    {
+      "nativeKey": "CommandBarLocation",
+      "value": "Bottom",
+      "caption": {
+        "en-US": "Bottom",
+        "ru-RU": "Низ"
+      }
+    },
+    {
+      "nativeKey": "WindowOpeningMode",
+      "value": "LockOwnerWindow",
+      "caption": {
+        "en-US": "Lock parent window",
+        "ru-RU": "Блокировать окно владельца"
+      }
+    },
+    {
+      "nativeKey": "EnterKeyBehavior",
+      "value": "DefaultButton",
+      "caption": {
+        "en-US": "Default button",
+        "ru-RU": "Кнопка по умолчанию"
+      }
+    },
+    {
+      "nativeKey": "AutoSaveDataInSettings",
+      "value": "Use",
+      "caption": {
+        "en-US": "Use",
+        "ru-RU": "Использовать"
+      }
+    },
+    {
+      "nativeKey": "SaveDataInSettings",
+      "value": "UseList",
+      "caption": {
+        "en-US": "Use list",
+        "ru-RU": "Использовать список"
+      }
+    },
+    {
+      "nativeKey": "VerticalScroll",
+      "value": "useIfNecessary",
+      "caption": {
+        "en-US": "Use if necessary",
+        "ru-RU": "Использовать при необходимости"
+      }
+    },
+    {
+      "nativeKey": "AutoTitle",
+      "value": "false"
+    },
+    {
+      "nativeKey": "AutoFillCheck",
+      "value": "false"
+    },
+    {
+      "nativeKey": "Width",
+      "value": "47"
+    },
+    {
+      "nativeKey": "Height",
+      "value": "18"
+    }
+  ]
+}

@@ -52,3 +52,22 @@ Alt+Enter. Переключайте язык Конфигуратора чере
 использует написание из выгрузки. Автоматическое отображение кнопок очистки
 и открытия хранится как `AutoShowClearButtonMode` и
 `AutoShowOpenButtonMode`.
+
+## Корень формы
+
+В `form-root.json` записан порядок свойств и событий корня в ru/en. Для
+общей формы используйте [форму с полем ввода](../native-bound-fields/InputField.xml)
+и удалите корневые `Title` и `CommandBarLocation`. Выберите корень в дереве.
+Свойства `Width` и `Height` считаются отдельно, хотя Конфигуратор размещает
+их в одной строке. В палитре 58 настроек, включая 28 событий.
+
+`SaveDataInSettings=UseList` добавляет строку `SettingsStorage` после
+`SaveWindowSettings`. Отдельное включение `AutoSaveDataInSettings` её не
+добавляет. Выгрузка из Конфигуратора подтверждает `SettingsStorage`,
+`Scale` и `ScalingMode`. Для события сохраняется диапазон обёртки `Events`.
+Условное оформление берётся из записи в `Attributes`.
+
+Для формы справочника используйте [ProbeObject](../native-owner-composition/base/Catalogs/ProbeOwner/Forms/ProbeObject/Ext/Form.xml)
+в неиерархическом справочнике `ProbeOwner`. Без основного реквизита состав
+совпадает с общей формой. Реквизит типа `cfg:CatalogObject.ProbeOwner` с
+`MainAttribute=true` добавляет `UseForFoldersAndItems` и семь событий.

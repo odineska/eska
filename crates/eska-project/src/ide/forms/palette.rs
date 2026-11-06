@@ -3,7 +3,7 @@
 use super::{Entry, dto, failure, limit, navigation};
 use crate::ide::{dto::Labels, params};
 use eska_project_core::project::forms::{
-    EffectiveElement, PaletteCategory, PaletteRow, PaletteValue, PlatformPropertyValue,
+    PaletteCategory, PaletteRow, PaletteValue, PlatformPropertyValue,
 };
 use serde::Deserialize;
 use serde_json::{Value, json};
@@ -45,7 +45,7 @@ pub(super) fn inspect(
                 }
                 true
             })
-            .map(|row| row_dto(labels, &row, palette.element))
+            .map(|row| row_dto(labels, &row))
             .collect::<Vec<_>>()
     });
     let categories = rows.as_ref().map(|_| {
@@ -71,14 +71,15 @@ const fn source_kind(extension: bool) -> &'static str {
     if extension { "extension" } else { "form" }
 }
 
-fn row_dto(labels: &Labels, row: &PaletteRow<'_>, element: &EffectiveElement) -> Value {
+fn row_dto(labels: &Labels, row: &PaletteRow<'_>) -> Value {
     let (raw_id, value) = match row.value {
         PaletteValue::Declared {
             index,
+            property,
             occurrence,
             extension,
         } => {
-            let property = &element.properties[index].property;
+            let property = &property.property;
             let key = &property.key;
             let mut value = json!({"kind":"declared","propertyIndex":index,"occurrence":occurrence,
                 "sourceKind":source_kind(extension)});

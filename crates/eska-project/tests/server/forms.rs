@@ -74,6 +74,18 @@ const NATIVE_GOODS: &str =
     include_str!("../../../../tests/fixtures/forms/native-context-tables/Catalog.xml");
 const INPUT_PALETTE: &str =
     include_str!("../../../../tests/fixtures/forms/native-property-palette/input-field.json");
+const ROOT_PALETTE: &str =
+    include_str!("../../../../tests/fixtures/forms/native-property-palette/form-root.json");
+const ROOT_OVERRIDES: &str = concat!(
+    "<CommandBarLocation>Bottom</CommandBarLocation>",
+    "<WindowOpeningMode>LockOwnerWindow</WindowOpeningMode>",
+    "<EnterKeyBehavior>DefaultButton</EnterKeyBehavior>",
+    "<AutoSaveDataInSettings>Use</AutoSaveDataInSettings>",
+    "<SaveDataInSettings>UseList</SaveDataInSettings>",
+    "<VerticalScroll>useIfNecessary</VerticalScroll>",
+    "<AutoTitle>false</AutoTitle><AutoFillCheck>false</AutoFillCheck>",
+    "<Width>47</Width><Height>18</Height>",
+);
 
 fn inspect_group(client: &mut Client, context: &Value, snapshot: &Value) -> Value {
     client.request(
@@ -326,6 +338,252 @@ fn input_palette_row<'a>(inspection: &'a Value, key: &str) -> &'a Value {
         .iter()
         .find(|row| row["id"] == id)
         .unwrap()
+}
+
+#[test]
+fn form_root_palette_agrees_with_native_defaults_and_settings_visibility() {
+    let native: Value = serde_json::from_str(ROOT_PALETTE).unwrap();
+    let expected = native["rows"].as_array().unwrap();
+    let directory = fixture();
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        assert_eq!(opened["model"]["root"]["properties"], json!([]));
+        let rows = |client: &mut Client, snapshot: &Value, events: bool| {
+            inspect_input(
+                client,
+                &context,
+                snapshot,
+                &snapshot["model"]["root"],
+                events,
+            )
+        };
+        let inspected = rows(&mut client, &opened, true);
+        let baseline = inspected["rows"].as_array().unwrap();
+        assert_eq!(baseline.len(), 58);
+        for (row, expected) in baseline
+            .iter()
+            .zip(expected.iter().filter(|row| row["when"].is_null()))
+        {
+            assert_native_row(row, expected, locale);
+        }
+        for category in inspected["categories"].as_array().unwrap() {
+            assert_eq!(
+                category["caption"],
+                native["categoryLabels"][category["id"].as_str().unwrap()]
+            );
+        }
+        assert_eq!(
+            rows(&mut client, &opened, false)["rows"]
+                .as_array()
+                .unwrap()
+                .len(),
+            30
+        );
+
+        let autosave = INPUT.replace(
+            "<ChildItems>",
+            "<AutoSaveDataInSettings>Use</AutoSaveDataInSettings><ChildItems>",
+        );
+        let updated = update_input(&mut client, &context, &opened, 2, &autosave);
+        assert_eq!(
+            rows(&mut client, &updated, true)["rows"]
+                .as_array()
+                .unwrap()
+                .len(),
+            58
+        );
+        let explicit = INPUT.replace("<ChildItems>", &format!("{ROOT_OVERRIDES}<ChildItems>"));
+        let updated = update_input(&mut client, &context, &updated, 3, &explicit);
+        let inspection = rows(&mut client, &updated, true);
+        let actual = inspection["rows"].as_array().unwrap();
+        assert_eq!(actual.len(), 59);
+        for (row, expected) in actual
+            .iter()
+            .zip(expected.iter().filter(|row| row["when"] != "catalogObject"))
+        {
+            assert_eq!(
+                row["id"],
+                format!("platform:{}", expected["nativeKey"].as_str().unwrap())
+            );
+        }
+        for setting in native["explicit"].as_array().unwrap() {
+            let key = setting["nativeKey"].as_str().unwrap();
+            let value = input_palette_value(&inspection, key);
+            assert_eq!(value["kind"], "declared");
+            assert_eq!(value["sourceKind"], "form");
+            assert_eq!(value["caption"], setting["caption"]);
+            let index = usize::try_from(value["propertyIndex"].as_u64().unwrap()).unwrap();
+            let property = &updated["model"]["root"]["properties"][index];
+            assert_eq!(property["key"]["name"], key);
+            assert_eq!(property["value"]["text"], setting["value"]);
+        }
+        assert_eq!(
+            input_palette_value(&inspection, "SettingsStorage")["default"]["kind"],
+            "empty"
+        );
+        let restored = update_input(&mut client, &context, &updated, 4, INPUT);
+        assert_eq!(
+            rows(&mut client, &restored, true)["rows"],
+            inspected["rows"]
+        );
+        client.finish();
+    }
+    assert_eq!(
+        fs::read_to_string(directory.0.join("src").join(PATH)).unwrap(),
+        INPUT
+    );
+}
+
+#[test]
+fn form_root_palette_navigates_to_the_attributes_record_and_root_events() {
+    const APPEARANCE: &str = concat!(
+        "<ConditionalAppearance xmlns:dcsset=\"http://v8.1c.ru/8.1/data-composition-system/settings\">",
+        "<dcsset:item/></ConditionalAppearance>"
+    );
+    const EVENTS: &str = "<Events><Event name=\"OnOpen\">InspectOpen</Event></Events>";
+    let directory = fixture();
+    let mut client = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut client, &directory.0, "en-US", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let explicit = INPUT.replace(
+        "</Form>",
+        &format!("{EVENTS}<Attributes>{APPEARANCE}</Attributes></Form>"),
+    );
+    let updated = update_input(&mut client, &context, &opened, 2, &explicit);
+    let root = &updated["model"]["root"];
+    let palette = inspect_input(&mut client, &context, &updated, root, true);
+    for (id, kind, xml) in [
+        ("ConditionalAppearance", "declared", APPEARANCE),
+        ("OnOpen", "declaredEvent", EVENTS),
+    ] {
+        let value = input_palette_value(&palette, id);
+        assert_eq!(value["kind"], kind);
+        assert_eq!(value["sourceKind"], "form");
+        let index = usize::try_from(value["propertyIndex"].as_u64().unwrap()).unwrap();
+        let property = &root["properties"][index];
+        assert_eq!(xml_at(&explicit, &property["origin"]["range"]), xml);
+        let located = client.request("form/locate", &params(&context, json!({
+            "formSessionId":updated["formSessionId"],"revision":updated["revision"],
+            "target":{"kind":"property","identity":root["identity"],"property":property["key"],"occurrence":value["occurrence"]}
+        })));
+        assert_eq!(located["source"], property["origin"]["source"]);
+        assert_eq!(xml_at(&explicit, &located["range"]), xml);
+    }
+    let event = input_palette_value(&palette, "OnOpen");
+    let index = usize::try_from(event["propertyIndex"].as_u64().unwrap()).unwrap();
+    assert_eq!(
+        root["properties"][index]["value"]["fields"][0]["value"]["text"],
+        "InspectOpen"
+    );
+    let earlier = inspect_input(&mut client, &context, &updated, root, false);
+    assert!(
+        earlier["rows"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .all(|row| row["category"] != "events")
+    );
+    client.finish();
+    assert_eq!(
+        fs::read_to_string(directory.0.join("src").join(PATH)).unwrap(),
+        INPUT
+    );
+}
+
+#[test]
+fn form_root_palette_uses_the_catalog_owner_and_effective_main_attribute() {
+    const OWNER: &str = include_str!(
+        "../../../../tests/fixtures/forms/native-owner-composition/base/Catalogs/ProbeOwner.xml"
+    );
+    const DESCRIPTOR: &str = include_str!(
+        "../../../../tests/fixtures/forms/native-owner-composition/base/Catalogs/ProbeOwner/Forms/ProbeObject.xml"
+    );
+    const FORM: &str = include_str!(
+        "../../../../tests/fixtures/forms/native-owner-composition/base/Catalogs/ProbeOwner/Forms/ProbeObject/Ext/Form.xml"
+    );
+    const FORM_PATH: &str = "Catalogs/ProbeOwner/Forms/ProbeObject/Ext/Form.xml";
+    let directory = fixture();
+    let source = directory.0.join("src");
+    let payload = source.join(FORM_PATH);
+    fs::create_dir_all(payload.parent().unwrap()).unwrap();
+    let config = source.join("Configuration.xml");
+    let config_xml = fs::read_to_string(&config).unwrap();
+    fs::write(
+        config,
+        config_xml.replace(
+            "<ChildObjects>",
+            "<ChildObjects><Catalog>ProbeOwner</Catalog>",
+        ),
+    )
+    .unwrap();
+    fs::write(source.join("Catalogs/ProbeOwner.xml"), OWNER).unwrap();
+    fs::write(
+        source.join("Catalogs/ProbeOwner/Forms/ProbeObject.xml"),
+        DESCRIPTOR,
+    )
+    .unwrap();
+    fs::write(&payload, FORM).unwrap();
+
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, _) = connect(&mut client, &directory.0, "ru-RU", 41);
+    let revealed = client.request(
+        "metadata/revealSource",
+        &params(
+            &context,
+            json!({"path":{"value":FORM_PATH,"encoding":"utf-8"}}),
+        ),
+    );
+    let node = revealed["nodes"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|node| node["metadataKind"] == "form")
+        .unwrap();
+    let opened = client.request("form/open", &params(&context, json!({"node":node["id"]})));
+    let rows = |client: &mut Client, snapshot: &Value| {
+        let mut inspection =
+            inspect_input(client, &context, snapshot, &snapshot["model"]["root"], true);
+        let Value::Array(mut rows) = inspection["rows"].take() else {
+            panic!("expected measured catalog form palette");
+        };
+        rows.retain(|row| !row["category"].is_null());
+        rows
+    };
+    assert_eq!(rows(&mut client, &opened).len(), 58);
+
+    let bound = FORM.replace(
+        "<Attributes/>",
+        concat!(
+            "<Attributes><Attribute name=\"Object\" id=\"1\">",
+            "<Type><v8:Type>cfg:CatalogObject.ProbeOwner</v8:Type></Type>",
+            "<MainAttribute>true</MainAttribute></Attribute></Attributes>"
+        ),
+    );
+    let updated = update_input(&mut client, &context, &opened, 2, &bound);
+    let actual = rows(&mut client, &updated);
+    let native: Value = serde_json::from_str(ROOT_PALETTE).unwrap();
+    assert_eq!(actual.len(), 66);
+    for (row, expected) in actual.iter().zip(
+        native["rows"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .filter(|row| row["when"] != "saveList"),
+    ) {
+        assert_eq!(
+            row["id"],
+            format!("platform:{}", expected["nativeKey"].as_str().unwrap())
+        );
+        if expected["when"] == "catalogObject" {
+            assert_native_row(row, expected, "ru-RU");
+        }
+    }
+    let unbound = update_input(&mut client, &context, &updated, 3, FORM);
+    assert_eq!(rows(&mut client, &unbound).len(), 58);
+    client.finish();
+    assert_eq!(fs::read_to_string(payload).unwrap(), FORM);
 }
 
 #[test]
@@ -721,13 +979,15 @@ fn form_palette_keeps_qualified_repeated_properties_and_only_navigates_real_xml(
         absent["error"]["data"]["details"]["reason"],
         "target_unavailable"
     );
+    let bar = &opened["model"]["root"]["auxiliary"][0];
+    assert_eq!(bar["kind"], "AutoCommandBar");
     let other = client.request(
         "form/inspect",
         &params(
             &context,
             json!({
                 "formSessionId":opened["formSessionId"],"revision":opened["revision"],
-                "identity":opened["model"]["root"]["identity"]
+                "identity":bar["identity"]
             }),
         ),
     );
