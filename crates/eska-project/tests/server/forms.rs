@@ -1955,6 +1955,40 @@ fn form_update_retires_dirty_metadata_but_rejects_unknown_and_replayed_inputs() 
 }
 
 #[test]
+fn oversized_metadata_depth_preserves_the_last_form_revision() {
+    let (directory, _) = dependency_fixture();
+    let deeply_nested = format!("{}{}", "<Nested>".repeat(80), "</Nested>".repeat(80));
+    let descriptor = dependency_style("FontA")
+        .replace("</Properties>", &format!("{deeply_nested}</Properties>"));
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 38);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let id = &opened["formSessionId"];
+        let source = &opened["dependencies"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|input| input["path"]["value"] == "StyleItems/FontA.xml")
+            .unwrap()["id"];
+        let rejected = client.response(
+            "form/update",
+            &params(&context, json!({"formSessionId":id,"revision":"1","overlays":[{"source":source,"version":"2","text":descriptor}]})),
+        );
+        assert_eq!(
+            rejected["error"]["data"]["details"]["reason"],
+            "invalid_metadata"
+        );
+        assert_eq!(rejected["error"]["data"]["details"]["source"], *source);
+        let retained = client.request("form/get", &params(&context, json!({"formSessionId":id})));
+        assert_eq!(retained["status"], "stale");
+        assert_eq!(retained["revision"], "1");
+        assert_eq!(retained["model"], opened["model"]);
+        client.finish();
+    }
+}
+
+#[test]
 fn form_overlay_accepts_existing_chunk_upload_and_external_saved_changes() {
     let directory = fixture();
     let mut client = Client::new(&directory.0, "ru");

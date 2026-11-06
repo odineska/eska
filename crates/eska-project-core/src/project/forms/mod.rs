@@ -52,7 +52,7 @@ use std::ops::Range;
 use serde::Serialize;
 
 use super::{
-    metadata_model::{MetadataProperty, PropertyKey},
+    metadata_model::{MetadataProperty, ObjectId, PropertyKey},
     metadata_parser::LocatedProperty,
 };
 
@@ -184,6 +184,8 @@ pub struct FormDocument {
     pub diagnostics: Vec<FormDiagnostic>,
     pub base: Option<FormSnapshot>,
     pub references: Vec<FormReference>,
+    #[serde(skip)]
+    resource_ids: Vec<ObjectId>,
     /// Keep exact bytes for source navigation and future checked edits; never send them with the model.
     #[serde(skip)]
     input: String,

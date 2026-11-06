@@ -711,7 +711,7 @@ fn bind(
         .filter(|kind| kind.namespace.as_deref() == Some(super::references::CONFIG))
         .find_map(|kind| {
             let (kind, name) = kind.name.split_once('.')?;
-            super::resources::type_kind(kind).map(|kind| (kind, name))
+            super::references::type_kind(kind).map(|kind| (kind, name))
         })
         .or_else(|| {
             attribute
@@ -837,7 +837,7 @@ fn find_main_table(value: &MetadataValue) -> Option<(MetadataKind, &str)> {
             if field.key.name == "MainTable"
                 && let Some((kind, name)) =
                     appearance::text(&field.value).and_then(|text| text.split_once('.'))
-                && let Some(kind) = super::resources::type_kind(kind)
+                && let Some(kind) = super::references::type_kind(kind)
             {
                 return Some((kind, name));
             }

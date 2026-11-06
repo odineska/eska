@@ -7,6 +7,7 @@ use roxmltree::{Document, Node};
 use super::{
     FormContextError, FormReference,
     context::{FormDependency, FormOverlay, FormSources, open_designer, source_identity},
+    references,
 };
 use crate::{
     application::{ContextSnapshot, SourceRole},
@@ -38,7 +39,7 @@ pub(super) fn load(
     dependencies: &mut Vec<FormDependency>,
     overlays: &[FormOverlay],
 ) -> Result<Vec<FormResource>, FormContextError> {
-    let (owners, requests) = requests(owner, documents)?;
+    let owners = std::iter::successors(Some(owner.clone()), ObjectId::parent).collect::<Vec<_>>();
     let mut loader = Loader {
         context,
         dependencies,
@@ -51,8 +52,8 @@ pub(super) fn load(
         pending: Vec::new(),
         requested: HashSet::new(),
     };
-    for request in requests {
-        loader.request(request)?;
+    for request in documents.iter().flat_map(|document| &document.resource_ids) {
+        loader.request(request.clone())?;
     }
     let mut readers = Vec::new();
     for input in sources.roots() {
@@ -203,14 +204,17 @@ fn parse_metadata(
     let invalid = || FormContextError::InvalidMetadata {
         source: dependency.id.clone(),
     };
-    let xml = Document::parse(text).map_err(|_| invalid())?;
-    let descriptor =
-        metadata_parser::parse(text, id.parent(), PropertiesMode::All).map_err(|_| invalid())?;
-    discover(xml.root_element(), pending, false);
+    let xml = metadata_parser::parse_xml(text, metadata_parser::MAX_DESCRIPTOR_NODES)
+        .map_err(|_| invalid())?;
+    let descriptor = metadata_parser::parse_descriptor(&xml, id.parent(), PropertiesMode::All)
+        .map_err(|_| invalid())?;
+    let root = xml.root_element();
+    let references = references::collect(root);
+    pending.extend(references::discover_resources(root, &references, false));
     Ok(ResourceMetadata {
         descriptor,
-        references: super::references::collect(xml.root_element()),
-        picture_extended: picture_extended(xml.root_element()),
+        references,
+        picture_extended: picture_extended(root),
     })
 }
 
@@ -243,27 +247,6 @@ fn resource_belongs_to_source(source: &DesignerSource, id: &ObjectId, role: Sour
             .as_str()
             .strip_prefix(source.root().id().as_str())
             .is_some_and(|tail| tail.starts_with('/'))
-}
-
-fn requests(
-    owner: &ObjectId,
-    documents: &[super::FormDocument],
-) -> Result<(Vec<ObjectId>, Vec<ObjectId>), FormContextError> {
-    let mut owners = vec![owner.clone()];
-    let mut ancestor = owner.parent();
-    while let Some(id) = ancestor {
-        ancestor = id.parent();
-        owners.push(id);
-    }
-    let mut requests = Vec::new();
-    for document in documents {
-        let parsed = Document::parse(document.input()).map_err(|_| FormContextError::Parse {
-            source: document.source.clone(),
-            error: super::FormParseError::InvalidXml,
-        })?;
-        discover(parsed.root_element(), &mut requests, true);
-    }
-    Ok((owners, requests))
 }
 
 struct ResourcePayload {
@@ -340,10 +323,11 @@ fn load_style(
     let invalid = || FormContextError::InvalidMetadata {
         source: dependency.id.clone(),
     };
-    let document = Document::parse(&text).map_err(|_| invalid())?;
+    let document = metadata_parser::parse_xml(&text, metadata_parser::MAX_DESCRIPTOR_NODES)
+        .map_err(|_| invalid())?;
     let style = super::style_data::parse(&dependency.id, &document).ok_or_else(invalid)?;
-    let mut requests = Vec::new();
-    discover(document.root_element(), &mut requests, false);
+    let requests =
+        references::discover_resources(document.root_element(), &style.references, false);
     dependencies.push(dependency);
     Ok((Some(style), text.len(), requests))
 }
@@ -467,94 +451,4 @@ pub(super) fn read_input(
         },
         text,
     )))
-}
-
-fn request(kind: MetadataKind, name: &str, output: &mut Vec<ObjectId>) {
-    if name.is_empty() || name.contains(['/', '\\', '\0']) {
-        return;
-    }
-    let id = ObjectId::from_parts(None, kind.as_str(), name);
-    if !output.contains(&id) {
-        output.push(id);
-    }
-}
-
-fn discover(root: Node<'_, '_>, output: &mut Vec<ObjectId>, include_types: bool) {
-    for node in root.descendants().filter(Node::is_element) {
-        let name = node.tag_name().name();
-        let text = node.text().unwrap_or_default().trim();
-        let text = text
-            .split_once(':')
-            .filter(|(prefix, _)| {
-                node.lookup_namespace_uri(Some(prefix)) == Some(super::references::CONFIG)
-            })
-            .map_or(text, |(_, value)| value);
-        let mut parts = text.split('.');
-        let kind = parts.next().unwrap_or_default();
-        let value = parts.next().unwrap_or_default();
-        if matches!(name, "DefaultStyle" | "Style") && kind == "Style" {
-            request(MetadataKind::Style, value, output);
-        }
-        if name == "CommandName" && kind == "CommonCommand" {
-            request(MetadataKind::CommonCommand, value, output);
-        }
-        if name == "Ref"
-            && node.tag_name().namespace() == Some("http://v8.1c.ru/8.3/xcf/readable")
-            && kind == "CommonPicture"
-        {
-            request(MetadataKind::CommonPicture, value, output);
-        }
-        if include_types
-            && matches!(name, "Type" | "MainTable" | "Value")
-            && !kind.starts_with("External")
-            && let Some(kind) = type_kind(kind)
-        {
-            request(kind, value, output);
-        }
-    }
-    for reference in super::references::collect(root) {
-        if reference.target.namespace.as_deref() == Some(super::references::STYLE) {
-            request(MetadataKind::StyleItem, &reference.target.name, output);
-        }
-        if reference.target.namespace.as_deref() == Some(super::references::CONFIG)
-            && let Some(name) = reference.target.name.strip_prefix("StyleItem.")
-        {
-            request(MetadataKind::StyleItem, name, output);
-        }
-    }
-}
-
-pub(super) fn type_kind(name: &str) -> Option<MetadataKind> {
-    match name {
-        "Catalog" | "CatalogObject" | "CatalogRef" => Some(MetadataKind::Catalog),
-        "Document" | "DocumentObject" | "DocumentRef" => Some(MetadataKind::Document),
-        "Enum" | "EnumRef" => Some(MetadataKind::Enum),
-        "DataProcessor" | "DataProcessorObject" | "ExternalDataProcessorObject" => {
-            Some(MetadataKind::DataProcessor)
-        }
-        "Report" | "ReportObject" | "ExternalReportObject" => Some(MetadataKind::Report),
-        "InformationRegister" | "InformationRegisterRecordSet" => {
-            Some(MetadataKind::InformationRegister)
-        }
-        "AccumulationRegister" | "AccumulationRegisterRecordSet" => {
-            Some(MetadataKind::AccumulationRegister)
-        }
-        "ChartOfCharacteristicTypes"
-        | "ChartOfCharacteristicTypesRef"
-        | "ChartOfCharacteristicTypesObject" => Some(MetadataKind::ChartOfCharacteristicTypes),
-        "ChartOfAccounts" | "ChartOfAccountsRef" | "ChartOfAccountsObject" => {
-            Some(MetadataKind::ChartOfAccounts)
-        }
-        "ChartOfCalculationTypes"
-        | "ChartOfCalculationTypesRef"
-        | "ChartOfCalculationTypesObject" => Some(MetadataKind::ChartOfCalculationTypes),
-        "BusinessProcess" | "BusinessProcessObject" | "BusinessProcessRef" => {
-            Some(MetadataKind::BusinessProcess)
-        }
-        "Task" | "TaskObject" | "TaskRef" => Some(MetadataKind::Task),
-        "ExchangePlan" | "ExchangePlanObject" | "ExchangePlanRef" => {
-            Some(MetadataKind::ExchangePlan)
-        }
-        _ => None,
-    }
 }
