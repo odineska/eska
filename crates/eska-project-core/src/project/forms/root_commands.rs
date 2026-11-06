@@ -264,7 +264,8 @@ fn add_metadata_commands(
         })
         .map(|object| object.metadata.id());
     let mut seen = HashSet::new();
-    for id in object_commands.chain(common) {
+    // The Designer places global actions before commands belonging to the object in each group.
+    for id in common.chain(object_commands) {
         if authored.contains(id) || !seen.insert(id) {
             continue;
         }

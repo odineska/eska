@@ -325,6 +325,43 @@ mod tests {
         );
         compose(&parse("form", xml).unwrap(), &[])
     }
+
+    #[test]
+    fn application_actions_precede_object_actions_in_the_main_bar() {
+        let parse_descriptor = |source: &str, object: &str| {
+            FormResource {
+                descriptor: metadata_parser::parse(
+                    &format!(r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="{}">{object}</MetaDataObject>"#, super::super::references::CONFIG),
+                    None,
+                    PropertiesMode::All,
+                ).unwrap(),
+                ..resource(source, "")
+            }
+        };
+        let resources = [
+            parse_descriptor(
+                "root",
+                r#"<Configuration uuid="base"><Properties><Name>Base</Name></Properties><ChildObjects><CommonCommand>Global</CommonCommand></ChildObjects></Configuration>"#,
+            ),
+            parse_descriptor(
+                "global",
+                r#"<CommonCommand uuid="global"><Properties><Name>Global</Name><Group>FormCommandBarImportant</Group><CommandParameterType><v8:Type>cfg:CatalogRef.Demo</v8:Type></CommandParameterType></Properties></CommonCommand>"#,
+            ),
+            resource(
+                "owner",
+                &command(
+                    "Owned",
+                    "Объект",
+                    "FormCommandBarImportant",
+                    "cfg:CatalogRef.Demo",
+                ),
+            ),
+        ];
+        let commands = root_commands::project(&form(""), &resources, &mut Vec::new());
+        assert_eq!(commands.inline[2].key, "common-command:Global");
+        assert_eq!(commands.inline[3].key, "catalog:Demo/command:Owned");
+    }
+
     #[test]
     fn object_bar_matches_parameter_type_group_and_inherited_command_properties() {
         let commands = [
