@@ -1927,6 +1927,144 @@ fn based_on_targets(snapshot: &Value) -> Vec<Value> {
         .collect()
 }
 
+const MENU_ORDER_PATH: &str = "Documents/Order.xml";
+const MENU_ORDER_XML: &str = r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses">
+        <Document uuid="order"><Properties><Name>Order</Name><Posting>Allow</Posting>
+          <ListPresentation>Orders</ListPresentation><DataHistory>Use</DataHistory>
+        </Properties></Document></MetaDataObject>"#;
+const MENU_JOURNAL_PATH: &str = "DocumentJournals/Sales.xml";
+const MENU_JOURNAL_XML: &str = r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable">
+        <DocumentJournal uuid="sales"><Properties><Name>Sales</Name><ListPresentation>Sales journal</ListPresentation>
+          <RegisteredDocuments><xr:Item>Document.Other</xr:Item></RegisteredDocuments>
+        </Properties></DocumentJournal></MetaDataObject>"#;
+
+fn object_menu_fixture() -> support::TestDir {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    let configuration = root.join("Configuration.xml");
+    let xml = fs::read_to_string(&configuration).unwrap().replace(
+        "</ChildObjects>",
+        "<Document>Order</Document><DocumentJournal>Sales</DocumentJournal></ChildObjects>",
+    );
+    fs::write(configuration, xml).unwrap();
+    fs::create_dir(root.join("Documents")).unwrap();
+    fs::create_dir(root.join("DocumentJournals")).unwrap();
+    fs::write(root.join(MENU_ORDER_PATH), MENU_ORDER_XML).unwrap();
+    fs::write(root.join(MENU_JOURNAL_PATH), MENU_JOURNAL_XML).unwrap();
+    let form = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:DocumentObject.Order</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes></Form>"#;
+    fs::write(root.join(PATH), form).unwrap();
+    directory
+}
+
+fn menu_keys(group: &Value) -> Vec<Value> {
+    group
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|item| item["key"].clone())
+        .collect()
+}
+
+#[test]
+fn form_projects_standard_object_menu_and_discovers_dirty_document_journals() {
+    let directory = object_menu_fixture();
+    let root = directory.0.join("src");
+    let menu =
+        |snapshot: &Value| snapshot["model"]["root"]["presentation"]["objectCommandMenu"].clone();
+    let dependency = |snapshot: &Value, path: &str| {
+        snapshot["dependencies"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|item| item["path"]["value"] == path)
+            .cloned()
+    };
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 41);
+    let prepared = client.request("form/prepare", &params(&context, json!({"node":node})));
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let original = menu(&opened);
+    assert_eq!(original.as_array().unwrap().len(), 3);
+    assert_eq!(
+        menu_keys(&original[0]),
+        [
+            "Form.StandardCommand.PostAndClose",
+            "Form.StandardCommand.Write",
+            "Form.StandardCommand.Reread",
+            "Form.StandardCommand.Copy",
+            "Form.StandardCommand.SetDeletionMark",
+            "Form.StandardCommand.Delete",
+        ]
+        .map(Value::from)
+    );
+    assert_eq!(
+        menu_keys(&original[1]),
+        [
+            "Form.StandardCommand.Post",
+            "Form.StandardCommand.UndoPosting"
+        ]
+        .map(Value::from)
+    );
+    assert_eq!(
+        menu_keys(&original[2]),
+        [
+            "Form.StandardCommand.ShowInList",
+            "Form.StandardCommand.ChangeHistory"
+        ]
+        .map(Value::from)
+    );
+    assert!(original[2][0].get("items").is_none());
+    assert!(dependency(&opened, MENU_JOURNAL_PATH).is_none());
+
+    let journal_input = prepared_input(
+        &prepared,
+        MENU_JOURNAL_PATH,
+        &MENU_JOURNAL_XML.replace("Document.Other", "Document.Order"),
+        "2",
+    );
+    let order_input = prepared_input(
+        &prepared,
+        MENU_ORDER_PATH,
+        &MENU_ORDER_XML
+            .replace(">Allow<", ">Deny<")
+            .replace(">Use<", ">DontUse<"),
+        "2",
+    );
+    let session = &opened["formSessionId"];
+    let updated = client.request("form/update", &params(&context, json!({"formSessionId":session,"revision":"1","overlays":[],"inputs":[journal_input,order_input]})));
+    let new_menu = menu(&updated);
+    assert_eq!(new_menu.as_array().unwrap().len(), 1);
+    let group = new_menu[0].as_array().unwrap();
+    assert_eq!(group.len(), 7);
+    assert_eq!(group[0]["key"], "Form.StandardCommand.WriteAndClose");
+    let lists = &group[6]["items"];
+    assert_eq!(lists[0]["caption"]["text"], "Orders");
+    assert_eq!(lists[1]["caption"]["text"], "Sales journal");
+    assert_eq!(
+        lists[1]["origin"]["source"],
+        dependency(&updated, MENU_JOURNAL_PATH).unwrap()["id"]
+    );
+    let recovered = client.request(
+        "form/update",
+        &params(
+            &context,
+            json!({"formSessionId":session,"revision":"2","overlays":[],"inputs":[]}),
+        ),
+    );
+    assert_eq!(menu(&recovered), original);
+    assert!(dependency(&recovered, MENU_JOURNAL_PATH).is_none());
+    assert_eq!(
+        fs::read_to_string(root.join(MENU_JOURNAL_PATH)).unwrap(),
+        MENU_JOURNAL_XML
+    );
+    assert_eq!(
+        fs::read_to_string(root.join(MENU_ORDER_PATH)).unwrap(),
+        MENU_ORDER_XML
+    );
+    client.finish();
+}
+
 #[test]
 fn form_discovers_new_based_on_targets_and_preserves_last_valid_menu() {
     let directory = fixture();

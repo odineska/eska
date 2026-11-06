@@ -131,12 +131,15 @@ pub struct ElementPresentation {
     pub title_color: ResolvedColor,
     pub auto_commands: Vec<String>,
     pub auto_command_items: Vec<super::AutoCommandItem>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub object_command_menu: Vec<Vec<super::AutoCommandItem>>,
 }
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FormPresentation {
     pub elements: Vec<ElementPresentation>,
     pub important_color: ResolvedColor,
+    pub activity_color: ResolvedColor,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub script_variant: Option<FormScriptVariant>,
     pub diagnostics: Vec<AppearanceDiagnostic>,
@@ -170,6 +173,7 @@ pub fn present(
     FormPresentation {
         elements,
         important_color: appearance.color(None, "ImportantColor"),
+        activity_color: appearance.color(None, "ActivityColor"),
         script_variant: script_variant(resources),
         diagnostics: appearance.diagnostics,
     }
@@ -305,14 +309,15 @@ fn present_element(
         resources,
         &mut appearance.diagnostics,
     );
-    let auto_command_items = element_commands(
-        element,
-        &value_type,
-        form,
-        resources,
-        tables,
-        &mut appearance.diagnostics,
-    );
+    let (auto_command_items, object_command_menu) = if element.kind == Some(ElementKind::Form) {
+        let commands = super::root_commands::project(form, resources, &mut appearance.diagnostics);
+        (commands.inline, commands.object_menu)
+    } else {
+        (
+            element_commands(element, &value_type, form, resources, tables),
+            Vec::new(),
+        )
+    };
     let auto_commands = standard_form_commands(&auto_command_items);
     let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
     ElementPresentation {
@@ -352,6 +357,7 @@ fn present_element(
         title_color,
         auto_commands,
         auto_command_items,
+        object_command_menu,
     }
 }
 
@@ -520,10 +526,8 @@ fn element_commands(
     form: &ComposedForm,
     resources: &[FormResource],
     tables: &super::commands::TableIndex<'_>,
-    diagnostics: &mut Vec<AppearanceDiagnostic>,
 ) -> Vec<super::AutoCommandItem> {
     match element.kind {
-        Some(ElementKind::Form) => super::root_commands::automatic(form, resources, diagnostics),
         Some(ElementKind::Table) => super::commands::table(element, value_type),
         Some(ElementKind::CommandBar) => super::commands::table_source(element, tables)
             .map(|table| {

@@ -1,5 +1,7 @@
 //! Compose the main form bar from the effective object and its command interface.
 
+mod menu;
+
 use std::collections::{HashMap, HashSet};
 
 use super::{
@@ -17,24 +19,33 @@ use crate::project::{
     metadata_parser::ParsedObject,
 };
 
-pub(super) fn automatic(
+#[derive(Default)]
+pub(super) struct RootCommands {
+    pub inline: Vec<AutoCommandItem>,
+    pub object_menu: Vec<Vec<AutoCommandItem>>,
+}
+
+pub(super) fn project(
     form: &ComposedForm,
     resources: &[FormResource],
     diagnostics: &mut Vec<AppearanceDiagnostic>,
-) -> Vec<AutoCommandItem> {
+) -> RootCommands {
     if !autofill(&form.root) {
-        return Vec::new();
+        return RootCommands::default();
     }
     let interface = interface_items(form);
     let authored = authored_commands(&form.root);
     let mut bar = CommandBar::default();
+    let mut object_menu = Vec::new();
     if let Some(owner_type) = object_type(form) {
         let owner = owner_id(&owner_type);
         let descriptor = owner
             .as_ref()
             .and_then(|id| effective_metadata(id, resources));
-        bar.buttons =
-            standard_commands(&owner_type, descriptor.map(|(_, object)| object), resources);
+        if let Some(standard) = ObjectCommands::for_type(&owner_type, descriptor, resources) {
+            bar.buttons = standard.inline();
+            object_menu = menu::sections(standard, descriptor, resources);
+        }
         add_based_on(&mut bar, &owner_type, &interface, resources, diagnostics);
         add_metadata_commands(
             &mut bar,
@@ -54,7 +65,10 @@ pub(super) fn automatic(
     }
     bar.buttons
         .extend(bar.menus.into_iter().filter(|menu| !menu.items.is_empty()));
-    bar.buttons
+    RootCommands {
+        inline: bar.buttons,
+        object_menu,
+    }
 }
 
 fn add_based_on(
@@ -92,27 +106,50 @@ fn owner_id(owner_type: &PropertyKey) -> Option<ObjectId> {
     Some(ObjectId::from_parts(None, kind.as_str(), name))
 }
 
-fn standard_commands(
-    owner_type: &PropertyKey,
-    owner: Option<&ParsedObject>,
-    resources: &[FormResource],
-) -> Vec<AutoCommandItem> {
-    let names: &[&str] = if owner_type.name.starts_with("DocumentObject.")
-        && owner.and_then(|owner| metadata_text(owner, "Posting", resources)) != Some("Deny")
-    {
-        &["PostAndClose", "Write", "Post"]
-    } else if owner_type.name.starts_with("CatalogObject.")
-        || owner_type.name.starts_with("DocumentObject.")
-    {
-        &["WriteAndClose", "Write"]
-    } else {
-        &[]
-    };
-    names
-        .iter()
-        .enumerate()
-        .map(|(index, name)| AutoCommandItem::standard("Form", name, index == 0))
-        .collect()
+#[derive(Clone, Copy)]
+enum ObjectCommands {
+    Document { posting: bool },
+    Catalog,
+}
+
+impl ObjectCommands {
+    fn for_type(
+        owner_type: &PropertyKey,
+        owner: Option<(&FormResource, &ParsedObject)>,
+        resources: &[FormResource],
+    ) -> Option<Self> {
+        match owner_type.name.split_once('.')?.0 {
+            "DocumentObject" => Some(Self::Document {
+                posting: owner.and_then(|(_, owner)| metadata_text(owner, "Posting", resources))
+                    != Some("Deny"),
+            }),
+            "CatalogObject" => Some(Self::Catalog),
+            _ => None,
+        }
+    }
+
+    const fn posting(self) -> bool {
+        matches!(self, Self::Document { posting: true })
+    }
+
+    const fn close_action(self) -> &'static str {
+        if self.posting() {
+            "PostAndClose"
+        } else {
+            "WriteAndClose"
+        }
+    }
+
+    fn inline(self) -> Vec<AutoCommandItem> {
+        let mut items = vec![
+            AutoCommandItem::standard("Form", self.close_action(), true),
+            AutoCommandItem::standard("Form", "Write", false),
+        ];
+        if self.posting() {
+            items.push(AutoCommandItem::standard("Form", "Post", false));
+        }
+        items
+    }
 }
 
 #[derive(Default)]
@@ -219,7 +256,7 @@ fn add_metadata_commands(
         .flat_map(|resource| configuration_objects(&resource.descriptor))
         .filter(|reference| loaded_common.contains(&reference.id))
         .map(|reference| &reference.id);
-    let owned = objects()
+    let object_commands = objects()
         .filter(|object| {
             object.metadata.kind() == MetadataKind::Command
                 && owner.is_some()
@@ -227,7 +264,7 @@ fn add_metadata_commands(
         })
         .map(|object| object.metadata.id());
     let mut seen = HashSet::new();
-    for id in owned.chain(common) {
+    for id in object_commands.chain(common) {
         if authored.contains(id) || !seen.insert(id) {
             continue;
         }

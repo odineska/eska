@@ -6,16 +6,11 @@ use super::{
     AutoCommandItem, FormResource, PropertySource,
     commands::{effective_metadata, metadata_caption},
     presentation::{literal, metadata_property},
-    resources::{configuration_objects, direct_property},
+    resources::{configuration_objects, has_readable_reference},
 };
-use crate::project::{
-    metadata_model::{MetadataKind, MetadataValue, ObjectId, PropertyKey},
-    metadata_parser::{self, MetadataReference, ParsedDescriptor},
-};
+use crate::project::metadata_model::{MetadataKind, ObjectId, PropertyKey};
 
-const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
-
-const fn supports_creation(kind: MetadataKind) -> bool {
+pub(super) const fn supports_creation(kind: MetadataKind) -> bool {
     matches!(
         kind,
         MetadataKind::Catalog
@@ -36,33 +31,6 @@ pub(super) fn basis(owner_type: &PropertyKey) -> Option<String> {
     supports_creation(MetadataKind::from_xml_tag(tag).ok()?).then(|| format!("{tag}.{name}"))
 }
 
-pub(super) fn candidates(
-    descriptor: &ParsedDescriptor,
-) -> impl Iterator<Item = &MetadataReference> {
-    configuration_objects(descriptor).filter(|reference| supports_creation(reference.kind))
-}
-
-/// Skip the self-closing property emitted for objects without a basis. A prefixed
-/// spelling still reaches the namespace-aware check below.
-pub(super) fn may_declare(input: &str) -> bool {
-    input.contains("</BasedOn") || input.contains(":BasedOn")
-}
-
-/// Only inspect the target's direct metadata property.
-pub(super) fn declares(
-    input: &str,
-    kind: MetadataKind,
-    basis: &str,
-) -> Result<bool, metadata_parser::ParseError> {
-    let document = metadata_parser::parse_xml(input, metadata_parser::MAX_DESCRIPTOR_NODES)?;
-    let relation = direct_property(document.root_element(), kind, "BasedOn");
-    Ok(relation.is_some_and(|relation| {
-        relation.children().any(|item| {
-            item.has_tag_name((READABLE, "Item")) && item.text().map(str::trim) == Some(basis)
-        })
-    }))
-}
-
 pub(super) fn commands(
     owner_type: &PropertyKey,
     resources: &[FormResource],
@@ -73,19 +41,12 @@ pub(super) fn commands(
     let mut seen = HashSet::<&ObjectId>::new();
     resources
         .iter()
-        .flat_map(|resource| candidates(&resource.descriptor))
-        .filter(|reference| seen.insert(&reference.id))
+        .flat_map(|resource| configuration_objects(&resource.descriptor))
+        .filter(|reference| supports_creation(reference.kind) && seen.insert(&reference.id))
         .filter_map(|reference| {
             let (resource, object) = effective_metadata(&reference.id, resources)?;
             let property = metadata_property(object, "BasedOn", resources)?;
-            let MetadataValue::Record(items) = &property.value else {
-                return None;
-            };
-            if !items.iter().any(|item| {
-                item.key.namespace.as_deref() == Some(READABLE)
-                    && item.key.name == "Item"
-                    && super::appearance::text(&item.value).map(str::trim) == Some(basis.as_str())
-            }) {
+            if !has_readable_reference(&property.value, &basis) {
                 return None;
             }
             let target = format!(

@@ -294,7 +294,7 @@ pub(super) fn metadata_caption(
 mod tests {
     use super::*;
     use crate::project::{
-        forms::{compose, parse, root_commands::automatic},
+        forms::{compose, parse, root_commands},
         metadata_parser::{self, PropertiesMode},
     };
     fn resource(source: &str, commands: &str) -> FormResource {
@@ -360,7 +360,8 @@ mod tests {
             ),
         ];
         let composed = form("");
-        let auto = |form: &ComposedForm| automatic(form, &resources, &mut Vec::new());
+        let auto =
+            |form: &ComposedForm| root_commands::project(form, &resources, &mut Vec::new()).inline;
         let result = auto(&composed);
         assert_eq!(result.len(), 3);
         assert!(result[0].primary);

@@ -143,6 +143,18 @@ struct Loader<'a> {
 }
 
 type KnownPaths<'a> = HashSet<(&'a Path, &'a Path)>;
+const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
+
+pub(super) fn has_readable_reference(value: &MetadataValue, reference: &str) -> bool {
+    let MetadataValue::Record(items) = value else {
+        return false;
+    };
+    items.iter().any(|item| {
+        item.key.namespace.as_deref() == Some(READABLE)
+            && item.key.name == "Item"
+            && super::appearance::text(&item.value).map(str::trim) == Some(reference)
+    })
+}
 
 impl Loader<'_> {
     fn discover_automatic_commands(
@@ -160,7 +172,7 @@ impl Loader<'_> {
         let mut targets =
             command_candidates::select(self, readers, form, &parameter, &known_paths)?;
         if let Some(basis) = based_on::basis(owner_type) {
-            self.discover_based_on(readers, &basis, &known_paths, &mut targets)?;
+            self.discover_reverse_relations(readers, &basis, &known_paths, &mut targets)?;
         }
         // Keep later overrides as well as the layer that first identified the candidate.
         for target in targets {
@@ -169,7 +181,7 @@ impl Loader<'_> {
         Ok(())
     }
 
-    fn discover_based_on(
+    fn discover_reverse_relations(
         &self,
         readers: &[Reader<'_>],
         basis: &str,
@@ -184,16 +196,39 @@ impl Loader<'_> {
             else {
                 continue;
             };
-            for candidate in based_on::candidates(&root.descriptor) {
+            for candidate in configuration_objects(&root.descriptor) {
+                let (relation, end_tag, qualified) = match candidate.kind {
+                    MetadataKind::DocumentJournal if basis.starts_with("Document.") => (
+                        "RegisteredDocuments",
+                        "</RegisteredDocuments",
+                        ":RegisteredDocuments",
+                    ),
+                    kind if based_on::supports_creation(kind) => {
+                        ("BasedOn", "</BasedOn", ":BasedOn")
+                    }
+                    _ => continue,
+                };
                 let Some((input, known)) = self.probe_input(reader, &candidate.id, known_paths)?
                 else {
                     continue;
                 };
-                if !known && !based_on::may_declare(&input.text) {
+                // Empty relation properties are normally exported as self-closing tags.
+                if !known && !input.text.contains(end_tag) && !input.text.contains(qualified) {
                     continue;
                 }
-                match based_on::declares(&input.text, candidate.kind, basis) {
-                    Ok(true) => targets.push(candidate.id.clone()),
+                match metadata_parser::parse_xml(&input.text, metadata_parser::MAX_DESCRIPTOR_NODES)
+                {
+                    Ok(document)
+                        if direct_property(document.root_element(), candidate.kind, relation)
+                            .is_some_and(|property| {
+                                property.children().any(|item| {
+                                    item.has_tag_name((READABLE, "Item"))
+                                        && item.text().map(str::trim) == Some(basis)
+                                })
+                            }) =>
+                    {
+                        targets.push(candidate.id.clone());
+                    }
                     Err(_) if known => {
                         return Err(FormContextError::InvalidMetadata { source: input.id });
                     }
