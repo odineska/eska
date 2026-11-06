@@ -4,11 +4,11 @@
   "os": "Linux ARM64 ALT 10",
   "dpi": 96,
   "zoom": 100,
-  "scope": "Complete command toolbars in the initial Configurator preview with the search input unfocused. Existing native captures; the shadow row is included.",
+  "scope": "Complete command toolbars in the initial Configurator preview with the search input unfocused, plus the same Default toolbar after moving the splitter. The shadow row is included.",
   "comparisonMasks": [],
   "pixelTolerance": 0,
   "forms": 4,
-  "nativeImages": 8,
+  "nativeImages": 10,
   "historicalInputs": "docs/measurements/t159-native-table-movement-linux.json#/completeToolbarMeasurementsFromFinalScreenshots",
   "rows": [
     {
@@ -191,5 +191,62 @@
         }
       }
     }
-  ]
+  ],
+  "movedTable": {
+    "name": "Default",
+    "source": "tests/fixtures/forms/native-tables/Default.xml",
+    "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+    "locales": {
+      "en": {
+        "name": "toolbar",
+        "nativeScreenshot": "table-toolbar-pose-_bnsk58b/moved-en-attempt.png",
+        "screenshotSha256": "6ff007dedf34158e707113943441ea5d7398c0bf8f06e6c8c89889f4ad20affb",
+        "nativeRegion": [
+          278,
+          268,
+          429,
+          27
+        ],
+        "offset": [
+          0,
+          -65
+        ],
+        "width": 429,
+        "height": 27,
+        "rgbSha256": "7b0cc70b0cb4ee0e30c7833f67608a1d0f6ce44c34679bfa55a8d497a8d3851b",
+        "pixels": 11583,
+        "lowerEdgeRgb": [
+          155,
+          155,
+          155
+        ],
+        "movementRgbSha256": "262596e50156d05e5bd41d59d269e2c15d0dd061bb4115555b86e8c93490a4d3"
+      },
+      "ru": {
+        "name": "toolbar",
+        "nativeScreenshot": "table-toolbar-pose-_bnsk58b/moved-up-ru.png",
+        "screenshotSha256": "641e2b26e5e3ad3c0b51b1650527c17f45b883eb6efe431c6ac33f13ffb3cb96",
+        "nativeRegion": [
+          278,
+          268,
+          415,
+          27
+        ],
+        "offset": [
+          0,
+          -65
+        ],
+        "width": 415,
+        "height": 27,
+        "rgbSha256": "11a2631f179168a494f54536e957a68bab0017e2365ade9448420fbe5cd600e9",
+        "pixels": 11205,
+        "lowerEdgeRgb": [
+          155,
+          155,
+          155
+        ],
+        "movementRgbSha256": "262596e50156d05e5bd41d59d269e2c15d0dd061bb4115555b86e8c93490a4d3"
+      }
+    }
+  }
 }
