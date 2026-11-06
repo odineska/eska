@@ -1,0 +1,1592 @@
+{
+  "schemaVersion": 1,
+  "milestone": "T157",
+  "platform": "Linux ARM64, X11, 96 DPI, 100%",
+  "nativeBuild": "8.3.27.2342",
+  "nativeCompatibility": "Version8_3_27",
+  "coordinateSpace": "Form frame x/y and pixel width/height",
+  "scope": "Shared title column through the leading branch of an ordinary nested row",
+  "eskaBackendCommit": "1d5154b",
+  "explorerCommit": "dfeac6c",
+  "backendSha256": "e175f36b95911ffb14ef396df1cea3b30d2a16240fb00692ad493964ada7eca4",
+  "vsixSha256": "7bc16a6cfe58dba05d70caef1d53e96ad65060eca5b565023df7e9af0373c96b",
+  "verifiedInstalledRuntimeFiles": 1303,
+  "fixture": "tests/fixtures/forms/native-through-align-rows/metrics.json",
+  "syntheticInstalled": {
+    "en": [
+      {
+        "label": "nested-row-Default",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-TT",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-TF",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-FT",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-FF",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-DontUse",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            87,
+            99,
+            305,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": false
+      },
+      {
+        "label": "nested-row-Use",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-Conditional",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-detached-resize-dirty",
+        "sameDom": true,
+        "sameSelection": true
+      },
+      {
+        "label": "nested-row-Deep",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-Multiple",
+        "frame": [
+          484,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            262,
+            51
+          ],
+          [
+            201,
+            99,
+            151,
+            23
+          ],
+          [
+            201,
+            131,
+            262,
+            23
+          ],
+          [
+            201,
+            163,
+            262,
+            23
+          ],
+          [
+            362,
+            99,
+            101,
+            23
+          ]
+        ],
+        "aligned": true
+      }
+    ],
+    "ru": [
+      {
+        "label": "nested-row-Default",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-TT",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-TF",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-FT",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-FF",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-DontUse",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            87,
+            99,
+            305,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": false
+      },
+      {
+        "label": "nested-row-Use",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-Conditional",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-detached-resize-dirty",
+        "sameDom": true,
+        "sameSelection": true
+      },
+      {
+        "label": "nested-row-Deep",
+        "frame": [
+          413,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            191,
+            51
+          ],
+          [
+            201,
+            99,
+            191,
+            23
+          ],
+          [
+            201,
+            131,
+            191,
+            23
+          ],
+          [
+            201,
+            163,
+            191,
+            23
+          ]
+        ],
+        "aligned": true
+      },
+      {
+        "label": "nested-row-Multiple",
+        "frame": [
+          484,
+          199
+        ],
+        "controls": [
+          [
+            201,
+            39,
+            262,
+            51
+          ],
+          [
+            201,
+            99,
+            151,
+            23
+          ],
+          [
+            201,
+            131,
+            262,
+            23
+          ],
+          [
+            201,
+            163,
+            262,
+            23
+          ],
+          [
+            362,
+            99,
+            101,
+            23
+          ]
+        ],
+        "aligned": true
+      }
+    ]
+  },
+  "multiFieldAllocation": [
+    {
+      "pose": "preferred",
+      "frame": [
+        484,
+        199
+      ],
+      "expected": {
+        "A1": [
+          201,
+          262
+        ],
+        "A2": [
+          201,
+          151
+        ],
+        "B1": [
+          201,
+          262
+        ],
+        "B2": [
+          201,
+          262
+        ],
+        "A3": [
+          362,
+          101
+        ]
+      },
+      "actual": {
+        "A1": [
+          201,
+          262
+        ],
+        "A2": [
+          201,
+          151
+        ],
+        "A3": [
+          362,
+          101
+        ],
+        "B1": [
+          201,
+          262
+        ],
+        "B2": [
+          201,
+          262
+        ]
+      },
+      "nativeSourceWidth": null,
+      "nativeScreenshotSha256": "d0a2cbd54c002b18ed499951eef30ad25edddad37f0c10cf960fd7ebdbba0ed8",
+      "maxRowDeviationPx": 0
+    },
+    {
+      "pose": "narrow",
+      "frame": [
+        434,
+        199
+      ],
+      "expected": {
+        "A1": [
+          201,
+          212
+        ],
+        "A2": [
+          201,
+          117
+        ],
+        "B1": [
+          201,
+          212
+        ],
+        "B2": [
+          201,
+          212
+        ],
+        "A3": [
+          328,
+          85
+        ]
+      },
+      "actual": {
+        "A1": [
+          201,
+          212
+        ],
+        "A2": [
+          201,
+          112.484375
+        ],
+        "A3": [
+          323.484375,
+          89.515625
+        ],
+        "B1": [
+          201,
+          212
+        ],
+        "B2": [
+          201,
+          212
+        ]
+      },
+      "nativeSourceWidth": 40,
+      "nativeScreenshotSha256": "8c8bca6f61e2cf1839e4a42cc0512f281b6d9060b9c3675904adb4dcf2d0c802",
+      "maxRowDeviationPx": 4.515625
+    },
+    {
+      "pose": "wide",
+      "frame": [
+        584,
+        199
+      ],
+      "expected": {
+        "A1": [
+          201,
+          362
+        ],
+        "A2": [
+          201,
+          211
+        ],
+        "B1": [
+          201,
+          362
+        ],
+        "B2": [
+          201,
+          362
+        ],
+        "A3": [
+          422,
+          141
+        ]
+      },
+      "actual": {
+        "A1": [
+          201,
+          362
+        ],
+        "A2": [
+          201,
+          211.875
+        ],
+        "A3": [
+          422.875,
+          140.125
+        ],
+        "B1": [
+          201,
+          362
+        ],
+        "B2": [
+          201,
+          362
+        ]
+      },
+      "nativeSourceWidth": 55,
+      "nativeScreenshotSha256": "f550e0f1d2655f9e8885c28e38fea11cd04b06765df982c65b72fe48a8b76c27",
+      "maxRowDeviationPx": 0.875
+    },
+    {
+      "pose": "larger",
+      "frame": [
+        834,
+        199
+      ],
+      "expected": {
+        "A1": [
+          201,
+          410
+        ],
+        "A2": [
+          201,
+          361
+        ],
+        "B1": [
+          201,
+          410
+        ],
+        "B2": [
+          201,
+          410
+        ],
+        "A3": [
+          572,
+          241
+        ]
+      },
+      "actual": {
+        "A1": [
+          201,
+          612
+        ],
+        "A2": [
+          201,
+          364.046875
+        ],
+        "A3": [
+          575.046875,
+          237.953125
+        ],
+        "B1": [
+          201,
+          612
+        ],
+        "B2": [
+          201,
+          612
+        ]
+      },
+      "nativeSourceWidth": 80,
+      "nativeScreenshotSha256": "23df0771f1ebaf2d54a751f29d9f04221f1a5faf5dbf42aea2af15213f5d5646",
+      "maxRowDeviationPx": 3.046875
+    },
+    {
+      "pose": "restored",
+      "frame": [
+        484,
+        199
+      ],
+      "expected": {
+        "A1": [
+          201,
+          262
+        ],
+        "A2": [
+          201,
+          151
+        ],
+        "B1": [
+          201,
+          262
+        ],
+        "B2": [
+          201,
+          262
+        ],
+        "A3": [
+          362,
+          101
+        ]
+      },
+      "actual": {
+        "A1": [
+          201,
+          262
+        ],
+        "A2": [
+          201,
+          151
+        ],
+        "A3": [
+          362,
+          101
+        ],
+        "B1": [
+          201,
+          262
+        ],
+        "B2": [
+          201,
+          262
+        ]
+      },
+      "nativeSourceWidth": null,
+      "nativeScreenshotSha256": "d0a2cbd54c002b18ed499951eef30ad25edddad37f0c10cf960fd7ebdbba0ed8",
+      "maxRowDeviationPx": 0
+    }
+  ],
+  "realForm": {
+    "form": "Documents/РасходТовара/Forms/ФормаДокумента/Ext/Form.xml",
+    "page": "ГруппаТабличныеЧасти/ГруппаТовары",
+    "sourceSha256": "1f889c1b3dd13b8a1ca37fbce6a43330c1d9c9b52a13557815af771afadcc530",
+    "nativeScreenshotSha256": "a632f8dc98c6aa6e157e0c22d4275b836d54144e96b72be610009316aea104c0",
+    "nativeFrame": [
+      1011,
+      638
+    ],
+    "comparisonAtNativeFrame": [
+      {
+        "path": "Form/Шапка/ЛеваяКолонка/Номер",
+        "parent": "ЛеваяКолонка",
+        "component": "InputField",
+        "expected": [
+          98,
+          66,
+          101,
+          23
+        ],
+        "before": [
+          101,
+          67,
+          100,
+          23
+        ],
+        "afterRu": [
+          101,
+          67,
+          100,
+          23
+        ],
+        "afterEn": [
+          101,
+          67,
+          100,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ЛеваяКолонка/Дата",
+        "parent": "ЛеваяКолонка",
+        "component": "InputField",
+        "expected": [
+          98,
+          98,
+          182,
+          23
+        ],
+        "before": [
+          101,
+          99,
+          181,
+          23
+        ],
+        "afterRu": [
+          101,
+          99,
+          181,
+          23
+        ],
+        "afterEn": [
+          101,
+          99,
+          181,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ЛеваяКолонка/Организация",
+        "parent": "ЛеваяКолонка",
+        "component": "InputField",
+        "expected": [
+          98,
+          130,
+          410,
+          23
+        ],
+        "before": [
+          101,
+          131,
+          395.5,
+          23
+        ],
+        "afterRu": [
+          101,
+          131,
+          395.5,
+          23
+        ],
+        "afterEn": [
+          101,
+          131,
+          395.5,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ЛеваяКолонка/ГруппаПокупатель/Покупатель",
+        "parent": "ГруппаПокупатель",
+        "component": "InputField",
+        "expected": [
+          98,
+          162,
+          410,
+          23
+        ],
+        "before": [
+          92,
+          163,
+          404.5,
+          23
+        ],
+        "afterRu": [
+          101,
+          163,
+          395.5,
+          23
+        ],
+        "afterEn": [
+          101,
+          163,
+          395.5,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ЛеваяКолонка/Склад",
+        "parent": "ЛеваяКолонка",
+        "component": "InputField",
+        "expected": [
+          98,
+          194,
+          410,
+          23
+        ],
+        "before": [
+          101,
+          195,
+          395.5,
+          23
+        ],
+        "afterRu": [
+          101,
+          195,
+          395.5,
+          23
+        ],
+        "afterEn": [
+          101,
+          195,
+          395.5,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ПраваяКолонка/ВидЦен",
+        "parent": "ПраваяКолонка",
+        "component": "InputField",
+        "expected": [
+          667,
+          66,
+          323,
+          23
+        ],
+        "before": [
+          657.5,
+          67,
+          332.5,
+          23
+        ],
+        "afterRu": [
+          657.5,
+          67,
+          332.5,
+          23
+        ],
+        "afterEn": [
+          657.5,
+          67,
+          332.5,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ПраваяКолонка/Валюта",
+        "parent": "ПраваяКолонка",
+        "component": "InputField",
+        "expected": [
+          667,
+          98,
+          323,
+          23
+        ],
+        "before": [
+          657.5,
+          99,
+          332.5,
+          23
+        ],
+        "afterRu": [
+          657.5,
+          99,
+          332.5,
+          23
+        ],
+        "afterEn": [
+          657.5,
+          99,
+          332.5,
+          23
+        ]
+      },
+      {
+        "path": "Form/ГруппаТабличныеЧасти",
+        "parent": "Form",
+        "component": "Pages",
+        "expected": [
+          13,
+          226,
+          977,
+          399
+        ],
+        "before": [
+          13,
+          226,
+          977,
+          400
+        ],
+        "afterRu": [
+          13,
+          226,
+          977,
+          400
+        ],
+        "afterEn": [
+          13,
+          226,
+          977,
+          400
+        ]
+      },
+      {
+        "path": "Form/ГруппаТабличныеЧасти/ГруппаТовары/Товары",
+        "parent": "ГруппаТовары",
+        "component": "Table",
+        "expected": [
+          24,
+          326,
+          955,
+          255
+        ],
+        "before": [
+          24,
+          326,
+          955,
+          254
+        ],
+        "afterRu": [
+          24,
+          326,
+          955,
+          254
+        ],
+        "afterEn": [
+          24,
+          326,
+          955,
+          254
+        ]
+      },
+      {
+        "path": "Form/ГруппаТабличныеЧасти/ГруппаТовары/Итоги",
+        "parent": "ГруппаТовары",
+        "component": "UsualGroup",
+        "expected": [
+          24,
+          590,
+          889,
+          25
+        ],
+        "before": [
+          24,
+          587,
+          955,
+          29
+        ],
+        "afterRu": [
+          24,
+          587,
+          955,
+          29
+        ],
+        "afterEn": [
+          24,
+          587,
+          955,
+          29
+        ]
+      }
+    ],
+    "resizeInstalled": {
+      "en": {
+        "poses": [
+          {
+            "pose": "native",
+            "frame": [
+              1011,
+              638
+            ],
+            "buyer": [
+              101,
+              163,
+              395.5,
+              23
+            ],
+            "organization": [
+              101,
+              131,
+              395.5,
+              23
+            ],
+            "table": [
+              24,
+              326,
+              955,
+              254
+            ],
+            "sameDom": true
+          },
+          {
+            "pose": "narrow",
+            "frame": [
+              900,
+              570
+            ],
+            "buyer": [
+              101,
+              163,
+              340,
+              23
+            ],
+            "organization": [
+              101,
+              131,
+              340,
+              23
+            ],
+            "table": [
+              24,
+              326,
+              844,
+              186
+            ],
+            "sameDom": true
+          },
+          {
+            "pose": "large",
+            "frame": [
+              1150,
+              700
+            ],
+            "buyer": [
+              101,
+              163,
+              465,
+              23
+            ],
+            "organization": [
+              101,
+              131,
+              465,
+              23
+            ],
+            "table": [
+              24,
+              326,
+              1094,
+              316
+            ],
+            "sameDom": true
+          },
+          {
+            "pose": "restored",
+            "frame": [
+              1011,
+              638
+            ],
+            "buyer": [
+              101,
+              163,
+              395.5,
+              23
+            ],
+            "organization": [
+              101,
+              131,
+              395.5,
+              23
+            ],
+            "table": [
+              24,
+              326,
+              955,
+              254
+            ],
+            "sameDom": true
+          }
+        ]
+      },
+      "ru": {
+        "poses": [
+          {
+            "pose": "native",
+            "frame": [
+              1011,
+              638
+            ],
+            "buyer": [
+              101,
+              163,
+              395.5,
+              23
+            ],
+            "organization": [
+              101,
+              131,
+              395.5,
+              23
+            ],
+            "table": [
+              24,
+              326,
+              955,
+              254
+            ],
+            "sameDom": true
+          },
+          {
+            "pose": "narrow",
+            "frame": [
+              900,
+              570
+            ],
+            "buyer": [
+              101,
+              163,
+              340,
+              23
+            ],
+            "organization": [
+              101,
+              131,
+              340,
+              23
+            ],
+            "table": [
+              24,
+              326,
+              844,
+              186
+            ],
+            "sameDom": true
+          },
+          {
+            "pose": "large",
+            "frame": [
+              1150,
+              700
+            ],
+            "buyer": [
+              101,
+              163,
+              465,
+              23
+            ],
+            "organization": [
+              101,
+              131,
+              465,
+              23
+            ],
+            "table": [
+              24,
+              326,
+              1094,
+              316
+            ],
+            "sameDom": true
+          },
+          {
+            "pose": "restored",
+            "frame": [
+              1011,
+              638
+            ],
+            "buyer": [
+              101,
+              163,
+              395.5,
+              23
+            ],
+            "organization": [
+              101,
+              131,
+              395.5,
+              23
+            ],
+            "table": [
+              24,
+              326,
+              955,
+              254
+            ],
+            "sameDom": true
+          }
+        ]
+      }
+    },
+    "remaining": [
+      {
+        "path": "Form/Шапка",
+        "hypothesis": "Unmeasured ChildItemsWidth=LeftWide allocation and label widths"
+      },
+      {
+        "path": "Form/ГруппаТабличныеЧасти/ГруппаТовары/Итоги",
+        "difference": "Group is 66 pixels wider"
+      },
+      {
+        "path": "Form/ФормаКоманднаяПанель",
+        "difference": "Command set still differs from native preview"
+      }
+    ]
+  },
+  "regressionRuns": [
+    {
+      "suite": "through-align",
+      "locale": "en",
+      "passed": true,
+      "cases": 23
+    },
+    {
+      "suite": "through-align",
+      "locale": "ru",
+      "passed": true,
+      "cases": 23
+    },
+    {
+      "suite": "united",
+      "locale": "en",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "suite": "united",
+      "locale": "ru",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "suite": "responsive",
+      "locale": "en",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "responsive",
+      "locale": "ru",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "application",
+      "locale": "en",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "suite": "application",
+      "locale": "ru",
+      "passed": true,
+      "cases": 4
+    }
+  ],
+  "sourceWritesDuringViewing": false,
+  "wholeFormGeometryParity": false,
+  "remaining": [
+    "Native real-form resize references",
+    "Further combinations of ChildItemsWidth, United and wrapped groups",
+    "Natively calibrated Windows geometry"
+  ],
+  "installedNestedGeometryAccepted": true,
+  "regressionBeforeScopeSeparation": {
+    "suite": "united",
+    "case": "RowsF",
+    "correctedInFinalRun": true
+  }
+}
