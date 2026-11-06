@@ -40,7 +40,7 @@ pub use pictures::FormPicture;
 pub use preparation::{FormInput, FormInputSource, FormPreparation, prepare};
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,
-    FormPresentation, PresentationText, present,
+    FormPresentation, FormScriptVariant, PresentationText, present,
 };
 pub use references::{FormReference, ReferenceSlot};
 pub use resources::FormResource;

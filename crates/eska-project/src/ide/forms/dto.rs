@@ -97,9 +97,12 @@ pub(super) fn model(labels: &Labels, preview: &FormPreview) -> Result<(Value, us
         eska_project_core::project::forms::FormHandlerOwner::Element(value)=>json!({"kind":"element","identity":identity(value)}),
         eska_project_core::project::forms::FormHandlerOwner::Command(name)=>json!({"kind":"command","name":name}),
     },"event":handler.event,"name":handler.name,"origin":origin(&handler.origin)})).collect::<Vec<_>>();
-    let model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
+    let mut model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
         "commands":preview.form.commands.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
         "diagnostics":{"composition":preview.form.diagnostics,"appearance":preview.presentation.diagnostics}});
+    if let Some(variant) = preview.presentation.script_variant {
+        model["scriptVariant"] = json!(variant);
+    }
     let bytes = serde_json::to_vec(&model)
         .map_err(|_| super::failure("invalid_model"))?
         .len();

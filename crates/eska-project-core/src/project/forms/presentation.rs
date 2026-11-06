@@ -8,7 +8,7 @@ use super::{
 };
 use crate::project::{
     metadata_model::{LocalizedText, MetadataKind, MetadataProperty, MetadataValue, PropertyKey},
-    metadata_parser::ParsedObject,
+    metadata_parser::{MD_NAMESPACE, ParsedObject},
 };
 use serde::Serialize;
 
@@ -106,7 +106,16 @@ pub struct ElementPresentation {
 pub struct FormPresentation {
     pub elements: Vec<ElementPresentation>,
     pub important_color: ResolvedColor,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub script_variant: Option<FormScriptVariant>,
     pub diagnostics: Vec<AppearanceDiagnostic>,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum FormScriptVariant {
+    Russian,
+    English,
 }
 
 #[must_use]
@@ -130,7 +139,25 @@ pub fn present(
     FormPresentation {
         elements,
         important_color: appearance.color(None, "ImportantColor"),
+        script_variant: script_variant(resources),
         diagnostics: appearance.diagnostics,
+    }
+}
+
+fn script_variant(resources: &[FormResource]) -> Option<FormScriptVariant> {
+    // Application resources start with the base configuration, even for a borrowed form.
+    let config = resources
+        .iter()
+        .flat_map(|resource| &resource.descriptor.objects)
+        .find(|object| object.metadata.kind() == MetadataKind::Configuration)?;
+    let variant = config.properties.as_ref()?.iter().find(|entry| {
+        let key = &entry.property.key;
+        key.name == "ScriptVariant" && key.namespace.as_deref() == Some(MD_NAMESPACE)
+    })?;
+    match appearance::text(&variant.property.value)? {
+        "Russian" => Some(FormScriptVariant::Russian),
+        "English" => Some(FormScriptVariant::English),
+        _ => None,
     }
 }
 #[derive(Clone, Copy, Default)]

@@ -367,6 +367,48 @@ fn checkbox_palette_ids(palette: &Value) -> Vec<&str> {
         .collect()
 }
 
+#[test]
+fn form_checkbox_script_variant_follows_configuration_overlay() {
+    let directory = fixture();
+    let source = directory.0.join("src");
+    let config = source.join("Configuration.xml");
+    let original = fs::read_to_string(&config).unwrap();
+    fs::write(source.join(PATH), BOUND_CHECKBOX).unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let mut snapshot = client.request("form/open", &params(&context, json!({"node":node})));
+        assert!(snapshot["model"].get("scriptVariant").is_none());
+        let dependency = snapshot["dependencies"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|input| input["path"]["value"] == "Configuration.xml")
+            .unwrap()["id"]
+            .clone();
+        for (version, value, expected) in [("1", "Russian", "russian"), ("2", "English", "english")]
+        {
+            let xml = original.replace(
+                "</Properties>",
+                &format!("<ScriptVariant>{value}</ScriptVariant></Properties>"),
+            );
+            snapshot = client.request(
+                "form/update",
+                &params(
+                    &context,
+                    json!({
+                        "formSessionId":snapshot["formSessionId"],"revision":snapshot["revision"],
+                        "overlays":[{"source":dependency,"version":version,"text":xml}]
+                    }),
+                ),
+            );
+            assert_eq!(snapshot["model"]["scriptVariant"], expected);
+        }
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(config).unwrap(), original);
+}
+
 fn assert_checkbox_mode(palette: &Value, base_order: &[&str], mode: &str, native: &Value) {
     let mut expected = base_order.to_vec();
     let mut insert_before = |id, values: &[&'static str]| {
