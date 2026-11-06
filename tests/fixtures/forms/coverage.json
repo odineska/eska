@@ -1734,7 +1734,8 @@
         "profile.windows",
         "tables.search-placeholder-initial",
         "tables.search-field-initial",
-        "tables.dynamic-toolbar"
+        "tables.dynamic-toolbar",
+        "tables.search-reflow"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1833,7 +1834,8 @@
         "tables.search-placeholder-initial",
         "tables.search-field-initial",
         "tables.dynamic-toolbar",
-        "tables.movement-group-white"
+        "tables.movement-group-white",
+        "tables.search-reflow"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -6328,8 +6330,75 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t159-native-table-search-fields-linux.json",
-      "remaining": "Alternate native 11px/yellow states and selection rule, other widths/fonts/palettes/disabled/focus states, full toolbars/forms, DPI and Windows.",
-      "nextAction": "Preserve complete initial search controls while establishing alternate state rules and completing native icons/joined buttons/border poses."
+      "remaining": "Other widths/fonts/palettes/disabled states, full initial toolbars and forms, DPI and Windows. Recorded viewport reflow is tracked in tables.search-reflow.",
+      "nextAction": "Extend complete search field comparison to more visual properties and width profiles."
+    },
+    {
+      "id": "tables.search-reflow",
+      "milestone": "T159",
+      "kinds": [
+        "SearchStringAddition",
+        "Table"
+      ],
+      "axes": [
+        "appearance.fonts",
+        "appearance.colors",
+        "layout.resizing",
+        "behavior.session",
+        "profile.conditions"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete 260 by 23 toolbar search controls in the wide installed workbench, before and after preview viewport reflow.",
+      "fixtures": [
+        "tests/fixtures/forms/native-table-search-reflow"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "table-pixels",
+        "path": "test/form-table-pixels-host.cjs",
+        "caseIds": [
+          "Default-search-first",
+          "Default-search-selected",
+          "Default-search-resized",
+          "Default-search-restored",
+          "floating-search-first"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t159-table-search-reflow-linux.json",
+          "sha256": "b9f5804588111b2fd64762076ba4e21b918491bf660affaf63934519ce1187eb",
+          "clientCommit": "c625e54036f42dbde1f6a74654f7cdfe58022081",
+          "assertions": [
+            {
+              "pointer": "/acceptance/wideWidgetCrops",
+              "equals": 15
+            },
+            {
+              "pointer": "/acceptance/wideWidgetPixels",
+              "equals": 89700
+            },
+            {
+              "pointer": "/acceptance/keptWholeToolbars",
+              "equals": 12
+            },
+            {
+              "pointer": "/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t159-table-search-reflow-linux.json",
+      "remaining": "Full compact toolbars, more allocations, visual properties, DPI and Windows.",
+      "nextAction": "Compare complete first-open toolbar frames in matched native viewports."
     },
     {
       "profile": "linux-taxi-96",
@@ -8190,6 +8259,15 @@
         "buttons.mixed-row-full-forms"
       ],
       "currentRemainder": "Both recorded whole forms match after aligning the native paint surface. The dirty Width=8 full frame and additional layouts and profiles remain open."
+    },
+    {
+      "id": "table-search-alternate-mode",
+      "historicalReport": "docs/measurements/t159-native-table-search-linux.json",
+      "historicalGap": "The 11px search variant and its viewport transition were outside the accepted initial hint scope.",
+      "currentEntries": [
+        "tables.search-reflow"
+      ],
+      "currentRemainder": "The 260px widget and its viewport transition are accepted in Linux ru/en. The full compact toolbar matrix and Windows remain open."
     }
   ],
   "nextGroups": [
