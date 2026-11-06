@@ -6,14 +6,14 @@ use roxmltree::{Document, Node};
 
 use super::{
     FormContextError, FormReference,
-    context::{FormDependency, FormOverlay, source_identity},
+    context::{FormDependency, FormOverlay, FormSources, open_designer, source_identity},
 };
 use crate::{
-    application::{ContextSnapshot, ContextSource, SourceRole},
+    application::{ContextSnapshot, SourceRole},
     project::{
         designer_source::{self, DesignerSource},
         metadata_edit::snapshot,
-        metadata_model::{MetadataKind, MetadataValue, ObjectId, ProjectScope},
+        metadata_model::{MetadataKind, MetadataValue, ObjectId},
         metadata_parser::{self, ParsedDescriptor, PropertiesMode},
     },
 };
@@ -33,12 +33,11 @@ pub struct FormResource {
 pub(super) fn load(
     context: &ContextSnapshot,
     owner: &ObjectId,
-    selected: &ContextSource,
+    sources: &FormSources<'_>,
     documents: &[super::FormDocument],
     dependencies: &mut Vec<FormDependency>,
     overlays: &[FormOverlay],
 ) -> Result<Vec<FormResource>, FormContextError> {
-    let external = selected.role() == SourceRole::ExternalObject;
     let (owners, requests) = requests(owner, documents)?;
     let mut loader = Loader {
         context,
@@ -56,15 +55,8 @@ pub(super) fn load(
         loader.request(request)?;
     }
     let mut readers = Vec::new();
-    for input in context.context.sources().iter().filter(|input| {
-        input.role() != SourceRole::ExternalObject
-            || input.project().source() == selected.project().source()
-    }) {
-        let scope = input.member().map_or(ProjectScope::Standalone, |member| {
-            ProjectScope::Member(member.clone())
-        });
-        let (source, _) = designer_source::open_analysis_project(input.project().clone(), scope)
-            .map_err(FormContextError::Source)?;
+    for input in sources.roots() {
+        let source = open_designer(input)?;
         let root = source.root().id().clone();
         let mut reader = Reader {
             source,
@@ -77,7 +69,7 @@ pub(super) fn load(
         };
         // Roots stay local; their referenced styles/types must reach every applicable layer.
         loader.read(&mut reader, &root)?;
-        if !external || input.role() == SourceRole::ExternalObject {
+        if sources.composes(input) {
             for owner in &owners {
                 loader.read(&mut reader, owner)?;
             }
