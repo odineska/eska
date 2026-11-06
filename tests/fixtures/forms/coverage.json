@@ -3580,7 +3580,8 @@
       "fixtures": [
         "tests/fixtures/forms/native-groups",
         "tests/fixtures/forms/native-through-align-rows",
-        "tests/fixtures/forms/native-column-widths"
+        "tests/fixtures/forms/native-column-widths",
+        "tests/fixtures/forms/native-numeric-labels"
       ],
       "driver": {
         "repository": "eska-vscode-explorer",
@@ -3627,11 +3628,26 @@
             }
           ],
           "clientCommit": "8c2cb79"
+        },
+        {
+          "report": "docs/measurements/t157-numeric-label-rows-linux.json",
+          "sha256": "08377489ee0c754454c2ef457631329739bf2f4c552df240e063f65fd9580aa0",
+          "assertions": [
+            {
+              "pointer": "/numericLabelWidthsAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "6509c60"
         }
       ],
-      "lastConfirmation": "docs/measurements/t157-column-widths-linux.json",
-      "remaining": "Wide automatic lanes, native real-form resize, nested/hidden/wrapped/stretch combinations, and full native geometry.",
-      "nextAction": "Measure the real document totals group and wide automatic lanes with unequal captions."
+      "lastConfirmation": "docs/measurements/t157-numeric-label-rows-linux.json",
+      "remaining": "Narrow numeric caption wrap, the 1 px real totals row offset, wide automatic reference lanes, native real-form resize, other container combinations, and full native geometry.",
+      "nextAction": "Measure numeric caption wrapping and wide automatic reference lanes with unequal captions."
     },
     {
       "id": "tables.native-context-fixtures",

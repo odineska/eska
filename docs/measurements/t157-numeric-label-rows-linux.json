@@ -1,0 +1,615 @@
+{
+  "schemaVersion": 1,
+  "milestone": "T157",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "eskaBackendCommit": "77425e9",
+  "explorerCommit": "6509c60",
+  "backendSha256": "418323be8f91fd4e6f34086b6950403e8fe3a1941a5edebb6e92f4759dc28001",
+  "vsixSha256": "2dda53e190baf96996cbad7a657315db410d3db3619b59fab5be76d379a86898",
+  "verifiedInstalledRuntimeFiles": 1262,
+  "coordinateSpace": "x, y, width, height in pixels relative to the form frame",
+  "fixture": "tests/fixtures/forms/native-numeric-labels/metrics.json",
+  "fixtureSha256": "f1e15315fba60107be37012614e655d98d00094ff1b486a9f34888b41a40c6d3",
+  "numericLabelWidthsAccepted": true,
+  "wholeFormGeometryParity": false,
+  "sourceWritesDuringViewing": false,
+  "syntheticInstalled": {
+    "locales": [
+      "en",
+      "ru"
+    ],
+    "caseIdsPerLocale": 16,
+    "baseCasesPerLocale": 11,
+    "detachedCasesPerLocale": 5,
+    "rowTolerancePx": [
+      0,
+      1,
+      0,
+      0
+    ],
+    "paintedControlTolerancePx": 1,
+    "selectionAndDomPreservedDuringDirtyEdits": true,
+    "rowWidthCaps": {
+      "en": 872,
+      "ru": 889
+    }
+  },
+  "realForm": {
+    "form": "Documents/РасходТовара/Forms/ФормаДокумента/Ext/Form.xml",
+    "page": "ГруппаТабличныеЧасти/ГруппаТовары",
+    "sourceSha256": "1f889c1b3dd13b8a1ca37fbce6a43330c1d9c9b52a13557815af771afadcc530",
+    "nativeFrame": [
+      1011,
+      638
+    ],
+    "nativeScreenshotSha256": "a632f8dc98c6aa6e157e0c22d4275b836d54144e96b72be610009316aea104c0",
+    "rowPath": "Form/ГруппаТабличныеЧасти/ГруппаТовары/Итоги",
+    "nativeRowRu": [
+      24,
+      590,
+      889,
+      25
+    ],
+    "previousInstalledRowRu": [
+      24,
+      587,
+      955,
+      29
+    ],
+    "installedMinusNativeRu": [
+      0,
+      1,
+      0,
+      0
+    ],
+    "resizeInstalled": {
+      "en": [
+        {
+          "label": "native",
+          "frame": [
+            1011,
+            638
+          ],
+          "row": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "captions": [
+            "Количество (total):",
+            "Сумма (total):"
+          ],
+          "captionBoxes": [
+            [
+              29,
+              596,
+              112,
+              15
+            ],
+            [
+              489,
+              596,
+              81,
+              15
+            ]
+          ],
+          "valueBoxes": [
+            [
+              146,
+              596,
+              333,
+              15
+            ],
+            [
+              575,
+              596,
+              333,
+              15
+            ]
+          ],
+          "sameDom": true
+        },
+        {
+          "label": "narrow",
+          "frame": [
+            900,
+            570
+          ],
+          "row": [
+            24,
+            523,
+            844,
+            25
+          ],
+          "captions": [
+            "Количество (total):",
+            "Сумма (total):"
+          ],
+          "captionBoxes": [
+            [
+              29,
+              528,
+              112,
+              15
+            ],
+            [
+              487.1875,
+              528,
+              81,
+              15
+            ]
+          ],
+          "valueBoxes": [
+            [
+              146,
+              528,
+              331.1875,
+              15
+            ],
+            [
+              573.1875,
+              528,
+              289.8125,
+              15
+            ]
+          ],
+          "sameDom": true
+        },
+        {
+          "label": "large",
+          "frame": [
+            1150,
+            700
+          ],
+          "row": [
+            24,
+            653,
+            889,
+            25
+          ],
+          "captions": [
+            "Количество (total):",
+            "Сумма (total):"
+          ],
+          "captionBoxes": [
+            [
+              29,
+              658,
+              112,
+              15
+            ],
+            [
+              489,
+              658,
+              81,
+              15
+            ]
+          ],
+          "valueBoxes": [
+            [
+              146,
+              658,
+              333,
+              15
+            ],
+            [
+              575,
+              658,
+              333,
+              15
+            ]
+          ],
+          "sameDom": true
+        },
+        {
+          "label": "restored",
+          "frame": [
+            1011,
+            638
+          ],
+          "row": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "captions": [
+            "Количество (total):",
+            "Сумма (total):"
+          ],
+          "captionBoxes": [
+            [
+              29,
+              596,
+              112,
+              15
+            ],
+            [
+              489,
+              596,
+              81,
+              15
+            ]
+          ],
+          "valueBoxes": [
+            [
+              146,
+              596,
+              333,
+              15
+            ],
+            [
+              575,
+              596,
+              333,
+              15
+            ]
+          ],
+          "sameDom": true
+        }
+      ],
+      "ru": [
+        {
+          "label": "native",
+          "frame": [
+            1011,
+            638
+          ],
+          "row": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "captions": [
+            "Количество (итог):",
+            "Сумма (итог):"
+          ],
+          "captionBoxes": [
+            [
+              29,
+              596,
+              112,
+              15
+            ],
+            [
+              489,
+              596,
+              81,
+              15
+            ]
+          ],
+          "valueBoxes": [
+            [
+              146,
+              596,
+              333,
+              15
+            ],
+            [
+              575,
+              596,
+              333,
+              15
+            ]
+          ],
+          "sameDom": true
+        },
+        {
+          "label": "narrow",
+          "frame": [
+            900,
+            570
+          ],
+          "row": [
+            24,
+            523,
+            844,
+            25
+          ],
+          "captions": [
+            "Количество (итог):",
+            "Сумма (итог):"
+          ],
+          "captionBoxes": [
+            [
+              29,
+              528,
+              112,
+              15
+            ],
+            [
+              487.1875,
+              528,
+              81,
+              15
+            ]
+          ],
+          "valueBoxes": [
+            [
+              146,
+              528,
+              331.1875,
+              15
+            ],
+            [
+              573.1875,
+              528,
+              289.8125,
+              15
+            ]
+          ],
+          "sameDom": true
+        },
+        {
+          "label": "large",
+          "frame": [
+            1150,
+            700
+          ],
+          "row": [
+            24,
+            653,
+            889,
+            25
+          ],
+          "captions": [
+            "Количество (итог):",
+            "Сумма (итог):"
+          ],
+          "captionBoxes": [
+            [
+              29,
+              658,
+              112,
+              15
+            ],
+            [
+              489,
+              658,
+              81,
+              15
+            ]
+          ],
+          "valueBoxes": [
+            [
+              146,
+              658,
+              333,
+              15
+            ],
+            [
+              575,
+              658,
+              333,
+              15
+            ]
+          ],
+          "sameDom": true
+        },
+        {
+          "label": "restored",
+          "frame": [
+            1011,
+            638
+          ],
+          "row": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "captions": [
+            "Количество (итог):",
+            "Сумма (итог):"
+          ],
+          "captionBoxes": [
+            [
+              29,
+              596,
+              112,
+              15
+            ],
+            [
+              489,
+              596,
+              81,
+              15
+            ]
+          ],
+          "valueBoxes": [
+            [
+              146,
+              596,
+              333,
+              15
+            ],
+            [
+              575,
+              596,
+              333,
+              15
+            ]
+          ],
+          "sameDom": true
+        }
+      ]
+    }
+  },
+  "regressionRuns": [
+    {
+      "suite": "numeric-labels",
+      "locale": "en",
+      "passed": true,
+      "cases": 16
+    },
+    {
+      "suite": "numeric-labels",
+      "locale": "ru",
+      "passed": true,
+      "cases": 16
+    },
+    {
+      "suite": "column-widths",
+      "locale": "en",
+      "passed": true,
+      "cases": 17
+    },
+    {
+      "suite": "column-widths",
+      "locale": "ru",
+      "passed": true,
+      "cases": 17
+    },
+    {
+      "suite": "united",
+      "locale": "en",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "suite": "united",
+      "locale": "ru",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "suite": "through-align",
+      "locale": "en",
+      "passed": true,
+      "cases": 23
+    },
+    {
+      "suite": "through-align",
+      "locale": "ru",
+      "passed": true,
+      "cases": 23
+    },
+    {
+      "suite": "responsive",
+      "locale": "en",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "responsive",
+      "locale": "ru",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "groups",
+      "locale": "en",
+      "passed": true,
+      "cases": 22
+    },
+    {
+      "suite": "groups",
+      "locale": "ru",
+      "passed": true,
+      "cases": 22
+    },
+    {
+      "suite": "input-dimensions",
+      "locale": "en",
+      "passed": true,
+      "cases": 44
+    },
+    {
+      "suite": "input-dimensions",
+      "locale": "ru",
+      "passed": true,
+      "cases": 44
+    },
+    {
+      "suite": "renderer",
+      "locale": "en",
+      "passed": true,
+      "cases": 20
+    },
+    {
+      "suite": "renderer",
+      "locale": "ru",
+      "passed": true,
+      "cases": 20
+    },
+    {
+      "suite": "table-pixels",
+      "locale": "en",
+      "passed": true,
+      "cases": 48
+    },
+    {
+      "suite": "table-pixels",
+      "locale": "ru",
+      "passed": true,
+      "cases": 47
+    },
+    {
+      "suite": "tables",
+      "locale": "en",
+      "passed": true,
+      "cases": 17
+    },
+    {
+      "suite": "tables",
+      "locale": "ru",
+      "passed": true,
+      "cases": 17
+    },
+    {
+      "suite": "preview",
+      "locale": "en",
+      "passed": true,
+      "cases": 1
+    },
+    {
+      "suite": "preview",
+      "locale": "ru",
+      "passed": true,
+      "cases": 1
+    },
+    {
+      "suite": "application",
+      "locale": "en",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "suite": "application",
+      "locale": "ru",
+      "passed": true,
+      "cases": 4
+    }
+  ],
+  "remaining": {
+    "narrowCaptionWrap": {
+      "locale": "ru",
+      "nativeFrame": [
+        275,
+        107
+      ],
+      "nativeRow": [
+        13,
+        39,
+        241,
+        55
+      ],
+      "installedFrame": [
+        357,
+        92
+      ],
+      "installedRow": [
+        13,
+        38,
+        323,
+        25
+      ],
+      "description": "At this width Designer wraps the captions. The browser retains a larger horizontal minimum."
+    },
+    "language": "The fixtures align the configuration default language with the Designer interface language. With different languages, native captions use the configuration language and the total suffix uses the Designer language.",
+    "layout": "Wide automatic reference lanes, vertical alignment of the real row, whole-form geometry, and Windows measurements remain open."
+  }
+}
