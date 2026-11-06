@@ -1412,6 +1412,77 @@ fn xml_at<'a>(source: &'a str, range: &Value) -> &'a str {
 }
 
 #[test]
+fn table_column_appearance_resolves_styles_and_follows_dirty_xml() {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    let configuration = root.join("Configuration.xml");
+    let descriptor = fs::read_to_string(&configuration).unwrap();
+    fs::write(
+        &configuration,
+        descriptor.replace(
+            "<ChildObjects>",
+            "<ChildObjects><StyleItem>Band</StyleItem>",
+        ),
+    )
+    .unwrap();
+    fs::create_dir(root.join("StyleItems")).unwrap();
+    fs::write(
+        root.join("StyleItems/Band.xml"),
+        r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web"><StyleItem uuid="11111111-1111-1111-1111-111111111111"><Properties><Name>Band</Name><Type>Color</Type><Value>web:DarkOrange</Value></Properties></StyleItem></MetaDataObject>"#,
+    )
+    .unwrap();
+    let xml = include_str!("../../../../tests/fixtures/forms/native-tables/GridFooter.xml").replace(
+        "<BackColor>web:AliceBlue</BackColor>",
+        r#"<BackColor>web:AliceBlue</BackColor><TitleBackColor>style:Band</TitleBackColor><FooterBackColor>web:LightPink</FooterBackColor><FooterTextColor>style:Band</FooterTextColor><FooterFont ref="sys:DefaultGUIFont" height="14" bold="true" kind="WindowsFont"/>"#,
+    );
+    let path = root.join(PATH);
+    fs::write(&path, &xml).unwrap();
+
+    let mut client = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut client, &directory.0, "en-US", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let table = &opened["model"]["root"]["children"][0];
+    assert!(table["presentation"].get("tableColumnAppearance").is_none());
+    assert!(
+        table["children"][0]["presentation"]
+            .get("tableColumnAppearance")
+            .is_none()
+    );
+    let appearance = &table["children"][1]["presentation"]["tableColumnAppearance"];
+    let orange = json!({"kind":"web","value":"DarkOrange"});
+    assert_eq!(appearance["headerBackground"], orange);
+    assert_eq!(appearance["footerForeground"], orange);
+    assert_eq!(
+        appearance["footerBackground"],
+        json!({"kind":"web","value":"LightPink"})
+    );
+    assert_eq!(appearance["footerFont"]["points"], 14.0);
+    assert_eq!(appearance["footerFont"]["weight"], 700);
+    assert_eq!(
+        table["children"][1]["presentation"]["background"],
+        json!({"kind":"web","value":"AliceBlue"})
+    );
+    assert_eq!(opened["model"]["diagnostics"]["appearance"], json!([]));
+
+    let changed = client.request(
+        "form/update",
+        &params(
+            &context,
+            json!({
+                "formSessionId":opened["formSessionId"],"revision":opened["revision"],
+                "overlays":[{"source":opened["model"]["root"]["identity"]["source"],"version":"2",
+                    "text":xml.replace("<TitleBackColor>style:Band</TitleBackColor>", "")}]
+            }),
+        ),
+    );
+    let updated = &changed["model"]["root"]["children"][0]["children"][1]["presentation"]["tableColumnAppearance"];
+    assert!(updated.get("headerBackground").is_none());
+    assert_eq!(updated["footerForeground"], orange);
+    assert_eq!(fs::read_to_string(&path).unwrap(), xml);
+    client.finish();
+}
+
+#[test]
 fn form_palette_is_negotiated_and_rejects_stale_models() {
     let directory = fixture();
     for minor in [40, 41] {

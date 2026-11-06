@@ -1,9 +1,9 @@
 //! Derive captions, binding types and appearance once in the shared backend; the UI only lays them out.
 
 use super::{
-    AppearanceDiagnostic, ComposedForm, EffectiveDefinition, EffectiveElement, ElementIdentity,
-    ElementKind, FormDocument, FormResource, PropertySource, ResolvedColor, ResolvedFont,
-    SourcedProperty,
+    AppearanceDiagnostic, ComposedForm, EffectiveDefinition, EffectiveElement, ElementFamily,
+    ElementIdentity, ElementKind, FormDocument, FormResource, PropertySource, ResolvedColor,
+    ResolvedFont, SourcedProperty,
     appearance::{self, Appearance},
 };
 use crate::project::{
@@ -72,6 +72,20 @@ pub enum FieldTitleLocation {
     None,
 }
 
+/// Explicit band appearance on a table column or column group.
+#[derive(Clone, Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TableColumnAppearance {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub header_background: Option<ResolvedColor>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub footer_background: Option<ResolvedColor>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub footer_foreground: Option<ResolvedColor>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub footer_font: Option<ResolvedFont>,
+}
+
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ElementPresentation {
@@ -89,6 +103,8 @@ pub struct ElementPresentation {
     pub caption: PresentationText,
     pub tooltip: Option<PresentationText>,
     pub footer_text: Option<PresentationText>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub table_column_appearance: Option<TableColumnAppearance>,
     pub value_type: FieldType,
     pub binding: Option<PropertySource>,
     pub choices: Vec<PresentationText>,
@@ -266,6 +282,7 @@ fn visit(
         tooltip: property(element, "ToolTip").and_then(|value| literal(&value.property.value)),
         footer_text: property(element, "FooterText")
             .and_then(|value| literal(&value.property.value)),
+        table_column_appearance: table_column_appearance(element, scope, appearance),
         value_type,
         binding,
         choices,
@@ -292,6 +309,43 @@ fn visit(
             output,
         );
     }
+}
+
+fn table_column_appearance(
+    element: &EffectiveElement,
+    scope: VisitScope<'_>,
+    appearance: &mut Appearance<'_>,
+) -> Option<TableColumnAppearance> {
+    let kind = element.kind?;
+    if !scope.in_table
+        || (kind != ElementKind::ColumnGroup && kind.family() != ElementFamily::Field)
+    {
+        return None;
+    }
+    let header_background = property(element, "TitleBackColor");
+    let footer_background = property(element, "FooterBackColor");
+    let footer_foreground = property(element, "FooterTextColor");
+    let footer_font = property(element, "FooterFont");
+    if [
+        header_background,
+        footer_background,
+        footer_foreground,
+        footer_font,
+    ]
+    .into_iter()
+    .all(|property| property.is_none())
+    {
+        return None;
+    }
+    Some(TableColumnAppearance {
+        header_background: header_background
+            .map(|value| appearance.color(Some(value), "HeaderBackColor")),
+        footer_background: footer_background
+            .map(|value| appearance.color(Some(value), "TableFooterBackColor")),
+        footer_foreground: footer_foreground
+            .map(|value| appearance.color(Some(value), "FormTextColor")),
+        footer_font: footer_font.map(|value| appearance.font(Some(value), "NormalTextFont")),
+    })
 }
 
 fn text_color_role(element: &EffectiveElement) -> &'static str {

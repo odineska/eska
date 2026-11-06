@@ -2286,6 +2286,14 @@ XML/метаданные или превышение бюджета сохран
 подпись подвала колонки. Стандартный номер строки в таблице использует ключ
 `table.LineNumber`; явный `Title` колонки имеет приоритет.
 
+Необязательное `presentation.tableColumnAppearance` содержит явно заданное
+оформление колонки или группы колонок. `headerBackground`, `footerBackground`
+и `footerForeground` передают разрешённые цвета из `TitleBackColor`,
+`FooterBackColor` и `FooterTextColor`. `footerFont` передаёт разрешённый
+`FooterFont` в том же формате, что и `titleFont`. Поля без свойства
+опущены. Шрифт и цвет текста шапки остаются в `titleFont` и `titleColor`.
+Цвета и шрифт разрешаются из итоговых свойств формы и её стилей.
+
 `presentation.autoCommandItems` — необязательное дополнение к `autoCommands`:
 `[{key,caption,primary,origin}]`. Оно сохраняет локализованную подпись и источник
 автоматической команды метаданных. Сейчас автозаполнение главной панели включает
