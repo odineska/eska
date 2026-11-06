@@ -551,7 +551,8 @@
         "profile.windows",
         "shell.checkbox-properties",
         "ordinary.checkbox-modes",
-        "ordinary.checkbox-glyphs"
+        "ordinary.checkbox-glyphs",
+        "ordinary.checkbox-tumbler-face"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -4057,8 +4058,8 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t158-checkbox-modes-linux.json",
-      "remaining": "Exact tumbler pixels, additional control and title settings, Windows.",
-      "nextAction": "Measure the gradient, separator and native text of both tumbler segments."
+      "remaining": "Tumbler caption pixels, additional control and title settings, Windows.",
+      "nextAction": "Measure native text, clipping and multiline settings in both tumbler segments."
     },
     {
       "id": "ordinary.checkbox-glyphs",
@@ -4123,6 +4124,79 @@
       "lastConfirmation": "docs/measurements/t158-checkbox-modes-linux.json",
       "remaining": "Additional backdrop colors and zoom/DPI profiles, whole fields and Windows.",
       "nextAction": "Measure non-reference solid backdrops and record non-default DPI separately."
+    },
+    {
+      "id": "ordinary.checkbox-tumbler-face",
+      "milestone": "T158",
+      "kinds": [
+        "CheckBoxField"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Blank Boolean tumbler face with its corners, divider and fill in measured sizes, colors and solid backdrops.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "CheckBoxField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-tumbler-face-linux.json",
+          "sha256": "b8c503900f8de1361f5a3cb8e8f9c34406b24c3c75c443520d8da8fb031fbc5c",
+          "clientCommit": "b844c5d52cbd0a133a4a35b81f699779a735ef72",
+          "assertions": [
+            {
+              "pointer": "/proceduralRgba/surfaces",
+              "equals": 1164
+            },
+            {
+              "pointer": "/proceduralRgba/pixels",
+              "equals": 922642
+            },
+            {
+              "pointer": "/acceptance/exactFaceCropCount",
+              "equals": 12
+            },
+            {
+              "pointer": "/acceptance/exactFacePixels",
+              "equals": 76920
+            },
+            {
+              "pointer": "/acceptance/detachedCapturePairs",
+              "equals": 2
+            },
+            {
+              "pointer": "/acceptance/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-tumbler-face-linux.json",
+      "remaining": "Option captions, additional style and DPI cases, and Windows.",
+      "nextAction": "Calibrate LCD glyph placement, overflow and multiline labels over the verified face."
     },
     {
       "id": "ordinary.complete-states",
