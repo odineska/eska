@@ -370,7 +370,8 @@
         "profile.windows",
         "buttons.link-types",
         "buttons.link-captions",
-        "buttons.mixed-row-geometry"
+        "buttons.mixed-row-geometry",
+        "shell.button-properties"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -4259,6 +4260,75 @@
       "lastConfirmation": "docs/measurements/t161-root-form-palette-linux.json",
       "remaining": "Additional owner contexts and settings combinations, resolved appearance provenance and Windows native verification.",
       "nextAction": "Measure hierarchical catalog, document and report root palettes against the native application."
+    },
+    {
+      "id": "shell.button-properties",
+      "milestone": "T161",
+      "kinds": [
+        "Button"
+      ],
+      "axes": [
+        "source.identity",
+        "values.defaults",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Four button types tied to local unparameterized form commands in a usual group or command bar. Native order, defaults, explicit aliases and manual maxima.",
+      "fixtures": [
+        "tests/fixtures/forms/native-property-palette/button.json",
+        "tests/fixtures/forms/native-button-types/source/CommonForms/ProbeButtons/Ext/Form.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "property-catalogue",
+        "path": "test/form-property-catalogue-host.cjs",
+        "caseIds": [
+          "20",
+          "21",
+          "22",
+          "23"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t161-button-palette-linux.json",
+          "sha256": "f80160791827af1f7759c3207147c9d0276122b635a8bb5bef0a1947d644b428",
+          "clientCommit": "9e2a64cb6629514d741ab122e7d4d7b58f9e27fd",
+          "assertions": [
+            {
+              "pointer": "/native/baseRows",
+              "equals": 35
+            },
+            {
+              "pointer": "/native/manualBothRows",
+              "equals": 37
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 22
+            },
+            {
+              "pointer": "/acceptance/xmlAttributeAndCommandNavigationVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/compatibilityPairsPassed",
+              "equals": 4
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t161-button-palette-linux.json",
+      "remaining": "Other button placements and command types, style resolution and full property/state coverage. Windows native verification.",
+      "nextAction": "Measure native palettes for automatic command bars, context menus and parameterized commands."
     },
     {
       "id": "shell.inspectors",

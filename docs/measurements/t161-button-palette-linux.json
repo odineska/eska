@@ -1,0 +1,422 @@
+{
+  "schemaVersion": 1,
+  "task": "T161",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "fixture": "tests/fixtures/forms/native-property-palette/button.json",
+  "fixtureSha256": "d0e1562bfba5d097a023efa30062878ad2fd63fa4c2339836a9c3a615856492b",
+  "source": "tests/fixtures/forms/native-button-types/source/CommonForms/ProbeButtons/Ext/Form.xml",
+  "native": {
+    "baseRows": 35,
+    "manualBothRows": 37,
+    "explicitFontAndRepresentationInitiallyPresent": true,
+    "absentRepresentation": "Auto",
+    "absentFont": "Auto",
+    "absentTypeInUsualGroup": "Common button",
+    "absentTypeInCommandBar": "",
+    "scans": [
+      {
+        "case": "usual",
+        "rows": 35,
+        "formSha256": "bff734fc9d652be62daaa1e4465869f89913a9cae8dbf1d14e05dacad26c05ab",
+        "locales": {
+          "en": {
+            "pages": [
+              "4eb2d35e391f9c6132c1a72e2c62d5833ef05bc338f1650a9842aa8432f227f6",
+              "576e4cb95b37b19310d2cd71df660be5339245a11f09d5099d935b43caea78fc"
+            ],
+            "stitchedSha256": "1217970ebc6507969a55ec1e3092bbeaf525e87c21b6dcf836175ad52c2c0388"
+          },
+          "ru": {
+            "pages": [
+              "9d2146785b04e3654d7efa9fbe2f3170979b8f04ed89bae3b64928797f965067",
+              "ffa2b06d9ee73351028bb16e7d4bd53805b34cbd6240b2be7b8d96f9d79c43ca"
+            ],
+            "stitchedSha256": "b975432b01a155b2d0fc4860e6e0e0875731aca177f5a39190ba71ddc3b383f3"
+          }
+        }
+      },
+      {
+        "case": "link",
+        "rows": 35,
+        "formSha256": "bff734fc9d652be62daaa1e4465869f89913a9cae8dbf1d14e05dacad26c05ab",
+        "locales": {
+          "en": {
+            "pages": [
+              "eee5877fccdce31f8ecfb3b1f5e1b1c4ccd3de4ffb5e7308529382e94980d122",
+              "c2ab0cca4cfd729dbcb89ba72eb0e80467ec8e94a0db51d0fc6bd15873fc0037"
+            ],
+            "stitchedSha256": "4d12caa62114b3261dd771bb897510d5bd5b0916b85aa00d663f335dc559c183"
+          },
+          "ru": {
+            "pages": [
+              "2920009a66dafabf3f92e9ed3fce7765ed909fc8773443584d44313c40a9db24",
+              "165bc3e44346528dbf8b8210a197ecae662eea99a9027b361cf99ff1e63e8d16"
+            ],
+            "stitchedSha256": "3c30affda9ab16a345c2ca42fa81ef11507625d208ec4677935569ca8e412938"
+          }
+        }
+      },
+      {
+        "case": "bar",
+        "rows": 35,
+        "formSha256": "bff734fc9d652be62daaa1e4465869f89913a9cae8dbf1d14e05dacad26c05ab",
+        "locales": {
+          "en": {
+            "pages": [
+              "f5fbce66a2643f5ffd6259c63df562b427fa48b34e37cd2ceb9e87fb2aa6bdd6",
+              "263e3c3e2d15b2567eb0f458886ed4827314e79e7c0fe95b9c19f8d28dd47fb0"
+            ],
+            "stitchedSha256": "a84192f4af9ee2e7e13f175afcac317c8342b4f920973d12630e446a202db7c8"
+          },
+          "ru": {
+            "pages": [
+              "113d5b45b8804d7ebbd1ab982affa1b43661c6bb087ac7332046c01700ec1f32",
+              "8f989d81f9a4e187f4f9c4fad52d9f2fc99e655838db793da6080b54f46c4172"
+            ],
+            "stitchedSha256": "6be7f88c752cf2b94f1c2fe0c19cf362e49048270bbc8084223c34d93170fa55"
+          }
+        }
+      },
+      {
+        "case": "barlink",
+        "rows": 35,
+        "formSha256": "bff734fc9d652be62daaa1e4465869f89913a9cae8dbf1d14e05dacad26c05ab",
+        "locales": {
+          "en": {
+            "pages": [
+              "9d1e6426c7bfe515e0a16569e87243e178e5237733e49b319636b30f31d8eaa0",
+              "fa9bf775c309e2b0e5df868b9619b5665b136880f2b5923920f845f7a6630f04"
+            ],
+            "stitchedSha256": "49d716b906c72a41443dc5fea7d29d19a79a7e10730823450b9ff882b4232e4c"
+          },
+          "ru": {
+            "pages": [
+              "509337d8a41079e8567bf1a33af7ba5e962beb186f80c35e0bb46913c5d05be2",
+              "3c34c5779c4881772de03218a5de352fc80cdbdbe5f9e1e79151e7cbb0f85613"
+            ],
+            "stitchedSha256": "29fd5b1651696f4efa93ab763b3d199900be15093b48944948646b73339a61fd"
+          }
+        }
+      },
+      {
+        "case": "usualmanual",
+        "rows": 37,
+        "formSha256": "9616399d7d4526b80bbfa8e3fcd66165c2d3c4c59ff84e9cbb31d52f65493e4d",
+        "locales": {
+          "en": {
+            "pages": [
+              "6194495f50c18f1fff7bf301e74c21b80156e6bf2a4479ca710b537bef8e68f2",
+              "364121f7cf474b3150891f6276b38c8d138775e3d94be308bffadfbb45bb0d41"
+            ],
+            "stitchedSha256": "335ca9b7f2cb43907dd193586767f6dd54a57a3112c84937d3c210edec184c11"
+          },
+          "ru": {
+            "pages": [
+              "e72db9e33ba80ed4b103611b5ffc4b07edb34244d6dd05ea9a340279e3b91a4a",
+              "487e5c251388aeb3760874ac76f6ce8013d27013b86db193e876334b03173ddf"
+            ],
+            "stitchedSha256": "eb51b8c7f49dd573db11b2d02108d748efa2c2adcf7ae2f19d795b00005f46cc"
+          }
+        }
+      },
+      {
+        "case": "barmanual",
+        "rows": 37,
+        "formSha256": "9616399d7d4526b80bbfa8e3fcd66165c2d3c4c59ff84e9cbb31d52f65493e4d",
+        "locales": {
+          "en": {
+            "pages": [
+              "7c2ead2b361809bb8ff896a4c32db7dd1817e113cca6af8728c6e96f5894a554",
+              "621fcf3573a6a67f1531f576fa320dbb057073c276d01f6036f79301c95b224b"
+            ],
+            "stitchedSha256": "bb80cf728ade6b856b8148443a167974c6e901678953237bd01b2e62f3538e70"
+          },
+          "ru": {
+            "pages": [
+              "537b297858793e29c78dd97533630a600ed3a8f5937cf1db8ac7f0d267a7d56d",
+              "7088c5b4469f4e7b9ddd86ec6b5f42a96a0d5193e4b7b2fd7faa0e77b5d33511"
+            ],
+            "stitchedSha256": "05cba883feb78ac6f4b4e5e4eb5a0e2118a6adb1ca1c7fc265bd116502ce5288"
+          }
+        }
+      },
+      {
+        "case": "usualinferred",
+        "rows": 35,
+        "formSha256": "05293533ea465ed424b466e98ad638feaf6bbd5ee5188e99e6ff8eae6a7cfd12",
+        "locales": {
+          "en": {
+            "pages": [
+              "06eaeae434bb61115ecf5ef98518306328099658bc40a36b1f664b2ac83b2655",
+              "c9c1655474086a0bdcc3c886b2cc81b2431c6109756285d8bf484604c637bbb4"
+            ],
+            "stitchedSha256": "1217970ebc6507969a55ec1e3092bbeaf525e87c21b6dcf836175ad52c2c0388"
+          },
+          "ru": {
+            "pages": [
+              "5a36aceebe480575c3f19667bbc012a2439e877cf590e7ed38aff51ed52c5145",
+              "0588e153e53430cb41bf466fbc2a6dd8d31178d00f22f88fd175813b50a5336b"
+            ],
+            "stitchedSha256": "b975432b01a155b2d0fc4860e6e0e0875731aca177f5a39190ba71ddc3b383f3"
+          }
+        }
+      },
+      {
+        "case": "barinferred",
+        "rows": 35,
+        "formSha256": "05293533ea465ed424b466e98ad638feaf6bbd5ee5188e99e6ff8eae6a7cfd12",
+        "locales": {
+          "en": {
+            "pages": [
+              "ad56aad769888fa54530aa1a37cfe60de4e2b568ee946af1b18484d4d5b40af2",
+              "0aa48b8e997a351830dfb639ef6d77a28388a319a14b80ea4d1f94006665fc3d"
+            ],
+            "stitchedSha256": "ccb002f119eed825ce51242fe661022c7eaf2fa3118d94edc53cd831359ca080"
+          },
+          "ru": {
+            "pages": [
+              "0e93ef7fe9e53cbb1a69363b6a752aa94bb4de170493274ace8f08fde9a137b8",
+              "af60f0780d845677525fbeaa242882cb7f8c707b295f72be3a4bc935cb1110d2"
+            ],
+            "stitchedSha256": "826671953a312f26cf50805975ad6bad5779f7dd936596a775a958fbf5712f8c"
+          }
+        }
+      }
+    ],
+    "appearanceScans": {
+      "en": {
+        "usual": {
+          "pages": [
+            "d0143ee6c9ee56c1603f8057914a410b928b8aea24c9ea7f5a70ad7e43a0f015",
+            "eab3ce820bc1082441ac70e18d1229327b4d91f1018756aaf06da8bdfb8d89a0"
+          ],
+          "stitchedSha256": "341abbea607187191dbea5b320337371e1e652f05f9750eddc1801f9cfe7c42e"
+        },
+        "link": {
+          "pages": [
+            "7f904bb78bda2b64d1825b35c1cddc9a4d3a8536294c208a253f84b63e7b0645",
+            "07e3906641dc6e199ed580ae62c0def2ea1453102e4f8a15441d0424149f6588"
+          ],
+          "stitchedSha256": "900abc74419b5099f2a2aa5015196cadc19b6992e37979f30bfafca8ed5a8f87"
+        },
+        "bar": {
+          "pages": [
+            "3f3b725ce6cd6803566b1c1bb82da607f04795c30a927ee0c0faa64e3949ca0b",
+            "82cbfcea38686f5e634f783619fa305ebd834371763f3a090f1ef014667e7ed6"
+          ],
+          "stitchedSha256": "2b8863358c46dc6ce9d2acf0bf5f2026306b807005e737242aba13eaa53ac5de"
+        },
+        "barlink": {
+          "pages": [
+            "4be319d82b65d744f9e0ea1ac4be230476c76783ef74a5d75af71d47f4eb3926",
+            "0a7b4b6197c92a88f41938d7fb067b3e15b9f9f79e7bc9215de6773b3351bfc8"
+          ],
+          "stitchedSha256": "03d1e65ec6ecbe76badf1f8e5ae0cfcd02f9bf800bd4ff12a5b0639da34d5b54"
+        },
+        "usualexplicit": {
+          "pages": [
+            "d4055d5d756778db395785d6ef77e4de1eefdf0a32fa43777970137f05265885",
+            "3d639c6902f203b1d268b70e551e814d798464856ac24a74a09d0c4986ebe762"
+          ],
+          "stitchedSha256": "91eb48824a2cda55d0f9d39a8bd4b2a2a63c6b12c59357d9a32270833fbfd733"
+        },
+        "linkexplicit": {
+          "pages": [
+            "fc218d98b4013705c2d5f4d1cf33c791c0a1517f0ab0457a2cabaa7cc956e2f0",
+            "c6a04a518f58316324c2ed3b78821fc1ec37dd868d11e5b98618ac55603871b4"
+          ],
+          "stitchedSha256": "b278f26a7321947dbd218c288a9b8ecda0a0e1f5d059bfeaf5838abaac90950c"
+        },
+        "barexplicit": {
+          "pages": [
+            "7f23bcbafc26da3c66d44b3820563d684a9e304c364bdf44b01b8d322a75c0a2",
+            "caee8777860c63099699db0a3a1dfefbb8b149b9e88d8bb8b5b8a05c5bffa8eb"
+          ],
+          "stitchedSha256": "80da00b86d01a58dfddd99182ec839173e705fd28e700e5f42f7b60b0d068a42"
+        },
+        "barlinkexplicit": {
+          "pages": [
+            "31b4e6d3abfa047d1a55a8a4dc5d693ee6a53154971a811c5092bee1fbfae156",
+            "3043adaa35ea8e9668f3054059a199e95569a9493186b27ada3b592ea59afd9f"
+          ],
+          "stitchedSha256": "af734208974ec60eada74bee4ea751fac79c4bb5c2197918f1f51fb4ede3626e"
+        }
+      },
+      "ru": {
+        "usual": {
+          "pages": [
+            "193e68201b89f0d59d6f80329d3943b0c8131475dc9ca91bc8098ab9ca218021",
+            "d3f8d6f1f84a600cdf10b97b46d8605e7605a6d1153619df123ccf65b21b132b"
+          ],
+          "stitchedSha256": "b29d4f6ebbd256217d478d0a02b6e819aa7cfb677dcac2fc82b9fbf732a18745"
+        },
+        "link": {
+          "pages": [
+            "db549c8ce4fea6bfdcb0fea4537fc8de29bc9a93d763b617e9cd7788e7fa3bcf",
+            "4c51eac47cfea423780abdabeae62411bbca13bf374ba9f30bca47ab0d301c0f"
+          ],
+          "stitchedSha256": "7ff4b8de517140fd4e4f6228927013ef1999151602cab1bc32483c111ca7850a"
+        },
+        "bar": {
+          "pages": [
+            "73f54f5150de5f256ac5155db5c5c5efb380960e7681f5ec53c8b1482c612692",
+            "6fc77effa705300a05df00dfe15639729302eec8f81e3a68bc873d71fb3a4968"
+          ],
+          "stitchedSha256": "c0c020150328edb3b0df2473d8bca8ff36edb414aa4f286d54188547e95ff8fc"
+        },
+        "barlink": {
+          "pages": [
+            "44bb390c2e572ec69b3ad5311db31b30b34b2403b4ed855753320baf35a693db",
+            "ad96dd9fa7a91679f2d589eb70bdbefce0202f27dfdea792cc89a70f6839c52f"
+          ],
+          "stitchedSha256": "aae38576e5d2e78490e166008251a9575d725710c64123abcc9d8df675eb6485"
+        }
+      }
+    },
+    "roundTrip": {
+      "formSha256": "eaab4a907db5f827350bc145bbef7d3129e12ad8800b7d34edd4affe826dba15",
+      "properties": {
+        "DefaultButton": "true",
+        "CommandUniqueness": "false",
+        "Shape": "Oval",
+        "DisplayImportance": "High"
+      },
+      "zeroBoundsFormSha256": "cc4c7b448f912ed1983479165954519aebde28bdb06c400d58abf52f07f8d5d0",
+      "zeroBoundsProperties": {
+        "Shape": "Usual",
+        "AutoMaxWidth": "false",
+        "AutoMaxHeight": "false",
+        "MaxWidth": null,
+        "MaxHeight": null
+      },
+      "zeroBoundsCaptureSha256": "d3765c81ef7811b1d08aaec2bf27e4af6f6c2c9e8204f41d27818a2d3205bfc1"
+    }
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "backendCommit": "f200c31bb1252d5efcd5772950d38289a4302b2b",
+    "explorerCommit": "9e2a64cb6629514d741ab122e7d4d7b58f9e27fd",
+    "vsixSha256": "2a6f457fc4bf4dc42bd52bbf12aedc8d8798b358a7c9697af613bdce8e7a5c31",
+    "backendSha256": "3cb9846b4b29bbfd8adf4cbccedcb2c1e4f4ad320ac807711d9a39e9b86e24d1",
+    "runtimeManifestSha256": "e11e0701f074473517367cb1d0f611ac961306b5ce7769d83a37be91c684418b",
+    "runtimeFilesVerifiedPerRun": 1303
+  },
+  "checks": {
+    "rust": {
+      "suites": 42,
+      "passed": 1539,
+      "ignored": 19,
+      "fmt": true,
+      "check": true,
+      "clippy": true,
+      "test": true,
+      "build": true
+    },
+    "typescript": true,
+    "compile": true,
+    "node": {
+      "passed": 603,
+      "skipped": 11
+    },
+    "bun": {
+      "version": "1.4.2",
+      "passed": 591,
+      "skipped": 11
+    }
+  },
+  "acceptance": {
+    "pairsPassed": 22,
+    "caseCountsBySuite": {
+      "property-catalogue": {
+        "en": 24,
+        "ru": 24
+      },
+      "button-types": {
+        "en": 11,
+        "ru": 11
+      },
+      "button-rows": {
+        "en": 8,
+        "ru": 8
+      },
+      "usual-buttons": {
+        "en": 18,
+        "ru": 18
+      },
+      "handlers": {
+        "en": 1,
+        "ru": 1
+      },
+      "inspectors": {
+        "en": 1,
+        "ru": 1
+      },
+      "preview": {
+        "en": 1,
+        "ru": 1
+      },
+      "detached-space": {
+        "en": 6,
+        "ru": 6
+      },
+      "composition": {
+        "en": 9,
+        "ru": 9
+      },
+      "tables": {
+        "en": 17,
+        "ru": 17
+      },
+      "application": {
+        "en": 4,
+        "ru": 4
+      }
+    },
+    "buttonCasesPerLocale": [
+      "button-palette-local-command-and-defaults",
+      "button-palette-dirty-manual-bounds-and-importance",
+      "button-palette-caption-keeps-xml-source",
+      "button-palette-command-bar-and-absent-type"
+    ],
+    "xmlAttributeAndCommandNavigationVerified": true,
+    "compatibilityPairsPassed": 4,
+    "sameArtifactForCompatibility": true,
+    "compatibility": [
+      {
+        "mode": "root-only",
+        "locale": "en",
+        "passed": true,
+        "case": "form-root-restores-defaults"
+      },
+      {
+        "mode": "root-only",
+        "locale": "ru",
+        "passed": true,
+        "case": "form-root-restores-defaults"
+      },
+      {
+        "mode": "legacy",
+        "locale": "en",
+        "passed": true,
+        "case": "api-1.40-root-xml-fallback"
+      },
+      {
+        "mode": "legacy",
+        "locale": "ru",
+        "passed": true,
+        "case": "api-1.40-root-xml-fallback"
+      }
+    ],
+    "diskUnchanged": true
+  },
+  "pending": [
+    "Other placements and command sources including parameterized commands",
+    "Further enumeration values, style provenance and the remaining property catalogue",
+    "Windows native acceptance"
+  ]
+}
