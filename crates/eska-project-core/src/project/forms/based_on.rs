@@ -6,15 +6,16 @@ use super::{
     AutoCommandItem, FormResource, PropertySource,
     commands::{effective_metadata, metadata_caption},
     presentation::{literal, metadata_property},
+    resources::{configuration_objects, direct_property},
 };
 use crate::project::{
     metadata_model::{MetadataKind, MetadataValue, ObjectId, PropertyKey},
-    metadata_parser::{self, MD_NAMESPACE, MetadataReference, ParsedDescriptor},
+    metadata_parser::{self, MetadataReference, ParsedDescriptor},
 };
 
 const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
 
-const fn supports_creation(kind: MetadataKind) -> bool {
+pub(super) const fn supports_creation(kind: MetadataKind) -> bool {
     matches!(
         kind,
         MetadataKind::Catalog
@@ -38,14 +39,7 @@ pub(super) fn basis(owner_type: &PropertyKey) -> Option<String> {
 pub(super) fn candidates(
     descriptor: &ParsedDescriptor,
 ) -> impl Iterator<Item = &MetadataReference> {
-    let configuration = descriptor
-        .objects
-        .first()
-        .filter(|object| object.metadata.kind() == MetadataKind::Configuration);
-    descriptor.references.iter().filter(move |reference| {
-        configuration.is_some_and(|root| &reference.owner == root.metadata.id())
-            && supports_creation(reference.kind)
-    })
+    configuration_objects(descriptor).filter(|reference| supports_creation(reference.kind))
 }
 
 /// Skip the self-closing property emitted for objects without a basis. A prefixed
@@ -61,20 +55,7 @@ pub(super) fn declares(
     basis: &str,
 ) -> Result<bool, metadata_parser::ParseError> {
     let document = metadata_parser::parse_xml(input, metadata_parser::MAX_DESCRIPTOR_NODES)?;
-    let relation = document
-        .root_element()
-        .children()
-        .find(|node| node.has_tag_name((MD_NAMESPACE, kind.designer_tag())))
-        .and_then(|object| {
-            object
-                .children()
-                .find(|node| node.has_tag_name((MD_NAMESPACE, "Properties")))
-        })
-        .and_then(|props| {
-            props
-                .children()
-                .find(|node| node.has_tag_name((MD_NAMESPACE, "BasedOn")))
-        });
+    let relation = direct_property(document.root_element(), kind, "BasedOn");
     Ok(relation.is_some_and(|relation| {
         relation.children().any(|item| {
             item.has_tag_name((READABLE, "Item")) && item.text().map(str::trim) == Some(basis)

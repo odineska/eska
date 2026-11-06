@@ -1223,3 +1223,145 @@ fn style_payload_discovers_its_own_references_and_missing_payload_keeps_defaults
     assert!(fallback.presentation.diagnostics.is_empty());
     assert_eq!(bytes(&directory.0), before);
 }
+
+#[test]
+fn root_bar_resolves_application_commands_and_dirty_defined_types() {
+    use crate::backend::project::forms::{FormPicture, FormPreview};
+
+    let directory = TestDir::new();
+    fixture(&directory.0, "configuration");
+    let root = directory.0.join("src");
+    fs::create_dir_all(root.join("CommonCommands")).unwrap();
+    fs::create_dir_all(root.join("DefinedTypes")).unwrap();
+    let config = root.join("Configuration.xml");
+    let config_xml = fs::read_to_string(&config).unwrap();
+    let mut declarations = String::new();
+    let mut write = |kind: &str, name: &str, properties: &str| {
+        let input = format!(
+            r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><{kind} uuid="{name}"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"#
+        );
+        fs::write(root.join(format!("{kind}s/{name}.xml")), &input).unwrap();
+        declarations.push_str(&format!("<{kind}>{name}</{kind}>"));
+        input
+    };
+    let reference = "<v8:Type>cfg:CatalogRef.Контрагенты</v8:Type>";
+    for (name, group, parameter) in [
+        ("Direct", "Important", reference),
+        (
+            "ThroughSet",
+            "Important",
+            "<v8:TypeSet>cfg:DefinedType.Outer</v8:TypeSet>",
+        ),
+        ("Authored", "Important", reference),
+        ("Generate", "CreateBasedOn", reference),
+        ("Family", "Important", "<v8:Type>cfg:CatalogRef</v8:Type>"),
+        ("Any", "Important", "<v8:Type>cfg:AnyRef</v8:Type>"),
+        (
+            "WrongType",
+            "Important",
+            "<v8:Type>cfg:DocumentRef.Other</v8:Type>",
+        ),
+        ("Unbound", "Important", ""),
+    ] {
+        write(
+            "CommonCommand",
+            name,
+            &format!(
+                "<Group>FormCommandBar{group}</Group><CommandParameterType>{parameter}</CommandParameterType><Picture><xr:Ref>StdPicture.CloneObject</xr:Ref></Picture><Representation>PictureAndText</Representation>"
+            ),
+        );
+    }
+    write(
+        "DefinedType",
+        "Outer",
+        "<Type><v8:TypeSet>cfg:DefinedType.Inner</v8:TypeSet></Type>",
+    );
+    let inner = write(
+        "DefinedType",
+        "Inner",
+        &format!("<Type>{reference}<v8:TypeSet>cfg:DefinedType.Outer</v8:TypeSet></Type>"),
+    );
+    fs::write(
+        config,
+        config_xml.replace("</ChildObjects>", &format!("{declarations}</ChildObjects>")),
+    )
+    .unwrap();
+    let form_xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <AutoCommandBar name="Bar" id="-1"><ChildItems><Button name="Authored" id="11"><Type>CommandBarButton</Type><CommandName>CommonCommand.Authored</CommandName></Button></ChildItems></AutoCommandBar>
+        <Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:CatalogObject.Контрагенты</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes>
+    </Form>"#;
+    fs::write(root.join(PATH), form_xml).unwrap();
+    let before = bytes(&directory.0);
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let preview = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    let keys = |preview: &FormPreview| {
+        preview.presentation.elements[0]
+            .auto_command_items
+            .iter()
+            .map(|item| item.key.clone())
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(
+        keys(&preview),
+        [
+            "Form.StandardCommand.WriteAndClose",
+            "Form.StandardCommand.Write",
+            "common-command:Direct",
+            "common-command:ThroughSet",
+            "common-command:Family",
+            "common-command:Any",
+            "Form.StandardCommand.CreateBasedOn"
+        ]
+    );
+    let items = &preview.presentation.elements[0].auto_command_items;
+    assert_eq!(
+        items.last().unwrap().items[0].key,
+        "common-command:Generate"
+    );
+    assert_eq!(items[3].order_by_caption, Some(true));
+    assert!(
+        matches!(&items[3].picture, Some(FormPicture::Standard {name}) if name == "CloneObject")
+    );
+    assert!(preview.dependencies.iter().all(
+        |input| !input.path.ends_with("WrongType.xml") && !input.path.ends_with("Unbound.xml")
+    ));
+    let dependency = preview
+        .dependencies
+        .iter()
+        .find(|input| input.path.ends_with("DefinedTypes/Inner.xml"))
+        .unwrap();
+    let changed = project
+        .form_preview(
+            &node,
+            None,
+            &[FormOverlay {
+                source: dependency.id.clone(),
+                version: "2".into(),
+                text: inner.replace(reference, ""),
+            }],
+            &preview.dependencies,
+            Vec::new(),
+            None,
+        )
+        .unwrap();
+    assert_eq!(
+        keys(&changed),
+        [
+            "Form.StandardCommand.WriteAndClose",
+            "Form.StandardCommand.Write",
+            "common-command:Direct",
+            "common-command:Family",
+            "common-command:Any",
+            "Form.StandardCommand.CreateBasedOn"
+        ]
+    );
+    assert_eq!(
+        preview.form.root.auxiliary[0].children[0].identity,
+        changed.form.root.auxiliary[0].children[0].identity
+    );
+    assert_eq!(bytes(&directory.0), before);
+}

@@ -3,12 +3,14 @@
 use std::collections::{HashMap, HashSet};
 
 use super::{
-    AppearanceDiagnostic, AutoCommandItem, ComposedForm, FORM_NAMESPACE, FormResource,
-    PropertySource,
+    AppearanceDiagnostic, AutoCommandItem, ComposedForm, EffectiveElement, ElementKind,
+    FORM_NAMESPACE, FormResource, PropertySource,
     appearance::text,
+    command_types,
     commands::{ResolvedCommand, autofill, effective_metadata},
-    presentation::{definition_type, field_type, metadata_property},
+    presentation::{definition_type, metadata_property},
     references::{self, CONFIG, command_group_id, metadata_command_id},
+    resources::configuration_objects,
 };
 use crate::project::{
     metadata_model::{MetadataKind, MetadataProperty, MetadataValue, ObjectId, PropertyKey},
@@ -24,23 +26,32 @@ pub(super) fn automatic(
         return Vec::new();
     }
     let interface = interface_items(form);
+    let authored = authored_commands(&form.root);
     let mut bar = CommandBar::default();
     if let Some(owner_type) = object_type(form) {
-        let owner = owner_id(&owner_type).and_then(|id| effective_metadata(&id, resources));
-        bar.buttons = standard_commands(&owner_type, owner.map(|(_, object)| object), resources);
+        let owner = owner_id(&owner_type);
+        let descriptor = owner
+            .as_ref()
+            .and_then(|id| effective_metadata(id, resources));
+        bar.buttons =
+            standard_commands(&owner_type, descriptor.map(|(_, object)| object), resources);
         add_based_on(&mut bar, &owner_type, &interface, resources, diagnostics);
-        if let Some((_, owner)) = owner {
-            add_owner_commands(
-                &mut bar,
-                owner,
-                &owner_type,
-                &interface,
-                resources,
-                diagnostics,
-            );
-        }
+        add_metadata_commands(
+            &mut bar,
+            owner.as_ref(),
+            &command_types::reference_type(&owner_type),
+            &interface,
+            &authored,
+            resources,
+            diagnostics,
+        );
     }
     add_explicit_commands(&mut bar, form, &interface, resources, diagnostics);
+    if !bar.generate.is_empty() {
+        let mut menu = AutoCommandItem::standard("Form", "CreateBasedOn", false);
+        menu.items = bar.generate;
+        bar.buttons.push(menu);
+    }
     bar.buttons
         .extend(bar.menus.into_iter().filter(|menu| !menu.items.is_empty()));
     bar.buttons
@@ -53,7 +64,6 @@ fn add_based_on(
     resources: &[FormResource],
     diagnostics: &mut Vec<AppearanceDiagnostic>,
 ) {
-    let mut menu = AutoCommandItem::standard("Form", "CreateBasedOn", false);
     for command in super::based_on::commands(owner_type, resources) {
         if let Some(placement) = interface
             .iter()
@@ -64,11 +74,8 @@ fn add_based_on(
                 items.push(command);
             }
         } else {
-            menu.items.push(command);
+            bar.generate.push(command);
         }
-    }
-    if !menu.items.is_empty() {
-        bar.menus.insert(0, menu);
     }
 }
 
@@ -79,7 +86,7 @@ pub(super) fn object_type(form: &ComposedForm) -> Option<PropertyKey> {
         .find(|kind| kind.namespace.as_deref() == Some(CONFIG) && kind.name.contains("Object."))
 }
 
-pub(super) fn owner_id(owner_type: &PropertyKey) -> Option<ObjectId> {
+fn owner_id(owner_type: &PropertyKey) -> Option<ObjectId> {
     let (kind, name) = owner_type.name.split_once('.')?;
     let kind = references::type_kind(kind)?;
     Some(ObjectId::from_parts(None, kind.as_str(), name))
@@ -111,6 +118,7 @@ fn standard_commands(
 #[derive(Default)]
 struct CommandBar {
     buttons: Vec<AutoCommandItem>,
+    generate: Vec<AutoCommandItem>,
     menus: Vec<AutoCommandItem>,
 }
 
@@ -121,8 +129,10 @@ impl CommandBar {
         resources: &[FormResource],
         diagnostics: &mut Vec<AppearanceDiagnostic>,
     ) -> Option<&mut Vec<AutoCommandItem>> {
-        if group == "FormCommandBarImportant" {
-            return Some(&mut self.buttons);
+        match group {
+            "FormCommandBarImportant" => return Some(&mut self.buttons),
+            "FormCommandBarCreateBasedOn" => return Some(&mut self.generate),
+            _ => {}
         }
         let id = command_group_id(group)?;
         let (resource, group) = effective_metadata(&id, resources)?;
@@ -145,11 +155,35 @@ impl CommandBar {
     }
 }
 
-fn add_owner_commands(
+fn authored_commands(root: &EffectiveElement) -> HashSet<ObjectId> {
+    fn collect(element: &EffectiveElement, output: &mut HashSet<ObjectId>) {
+        if element.kind == Some(ElementKind::Button)
+            && let Some(id) = element.scalar("CommandName").and_then(metadata_command_id)
+        {
+            output.insert(id);
+        }
+        for child in &element.children {
+            collect(child, output);
+        }
+    }
+
+    let mut result = HashSet::new();
+    if let Some(bar) = root
+        .auxiliary
+        .iter()
+        .find(|node| node.kind == Some(ElementKind::AutoCommandBar))
+    {
+        collect(bar, &mut result);
+    }
+    result
+}
+
+fn add_metadata_commands(
     bar: &mut CommandBar,
-    owner: &ParsedObject,
-    owner_type: &PropertyKey,
+    owner: Option<&ObjectId>,
+    parameter: &str,
     interface: &[InterfaceItem<'_>],
+    authored: &HashSet<ObjectId>,
     resources: &[FormResource],
     diagnostics: &mut Vec<AppearanceDiagnostic>,
 ) {
@@ -157,48 +191,57 @@ fn add_owner_commands(
         .iter()
         .filter_map(|item| metadata_command_id(item.reference).map(|id| (id, item.group)))
         .collect::<HashMap<_, _>>();
-    let parameter_type = owner_type.name.replacen("Object.", "Ref.", 1);
-    let mut seen = HashSet::new();
-    for object in resources
+    let objects = || {
+        resources
+            .iter()
+            .flat_map(|resource| &resource.descriptor.objects)
+    };
+    let loaded_common = objects()
+        .filter(|object| object.metadata.kind() == MetadataKind::CommonCommand)
+        .map(|object| object.metadata.id())
+        .collect::<HashSet<_>>();
+    let common = resources
         .iter()
-        .flat_map(|resource| &resource.descriptor.objects)
-    {
-        let id = object.metadata.id();
-        if object.metadata.kind() != MetadataKind::Command
-            || object.metadata.parent() != Some(owner.metadata.id())
-            || !seen.insert(id)
-            || !accepts_parameter(object, &parameter_type, resources)
-        {
+        .flat_map(|resource| configuration_objects(&resource.descriptor))
+        .filter(|reference| loaded_common.contains(&reference.id))
+        .map(|reference| &reference.id);
+    let owned = objects()
+        .filter(|object| {
+            object.metadata.kind() == MetadataKind::Command
+                && owner.is_some()
+                && object.metadata.parent() == owner
+        })
+        .map(|object| object.metadata.id());
+    let mut seen = HashSet::new();
+    for id in owned.chain(common) {
+        if authored.contains(id) || !seen.insert(id) {
             continue;
         }
-        let group = placements
-            .get(id)
-            .copied()
-            .or_else(|| metadata_text(object, "Group", resources));
-        let Some(items) = group.and_then(|group| bar.items(group, resources, diagnostics)) else {
-            continue;
-        };
         let Some((resource, command)) = effective_metadata(id, resources) else {
             continue;
         };
-        items.extend(ResolvedCommand::Metadata(command).item(
+        let group = placements
+            .get(id)
+            .copied()
+            .or_else(|| metadata_text(command, "Group", resources));
+        if !command_types::accepts(command, parameter, resources) {
+            continue;
+        }
+        let Some(items) = group.and_then(|group| bar.items(group, resources, diagnostics)) else {
+            continue;
+        };
+        if let Some(mut item) = ResolvedCommand::Metadata(command).item(
             id.to_string(),
             Some(origin(resource, command)),
             resources,
             diagnostics,
-        ));
+        ) {
+            if command.metadata.kind() == MetadataKind::CommonCommand {
+                item.order_by_caption = Some(true);
+            }
+            items.push(item);
+        }
     }
-}
-
-fn accepts_parameter(command: &ParsedObject, parameter: &str, resources: &[FormResource]) -> bool {
-    let types = metadata_property(command, "CommandParameterType", resources)
-        .map(|value| field_type(&value.value))
-        .unwrap_or_default()
-        .types;
-    types.is_empty()
-        || types
-            .iter()
-            .any(|value| value.namespace.as_deref() == Some(CONFIG) && value.name == parameter)
 }
 
 fn add_explicit_commands(

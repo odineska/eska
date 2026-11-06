@@ -9,7 +9,7 @@ use std::{
 use roxmltree::{Document, Node};
 
 use super::{
-    ComposedForm, FormContextError, FormReference, based_on, compose,
+    ComposedForm, FormContextError, FormReference, based_on, command_types, compose,
     context::{FormDependency, FormOverlay, FormSources, open_designer, source_identity},
     layer_order::LayerOrder,
     presentation, references,
@@ -19,8 +19,10 @@ use crate::{
     project::{
         designer_source::{self, DesignerSource},
         metadata_edit::snapshot,
-        metadata_model::{MetadataKind, MetadataValue, ObjectId},
-        metadata_parser::{self, ParsedDescriptor, PropertiesMode},
+        metadata_model::{MetadataKind, MetadataValue, ObjectId, PropertyKey},
+        metadata_parser::{
+            self, MD_NAMESPACE, MetadataReference, ParsedDescriptor, PropertiesMode,
+        },
     },
 };
 
@@ -91,11 +93,9 @@ pub(super) fn load(
         .ok_or(FormContextError::MissingForm)?;
     let form = compose(base, &extensions.iter().collect::<Vec<_>>());
     if super::commands::autofill(&form.root)
-        && let Some(basis) = super::root_commands::object_type(&form)
-            .as_ref()
-            .and_then(based_on::basis)
+        && let Some(owner_type) = super::root_commands::object_type(&form)
     {
-        loader.discover_based_on(&readers, &basis, previous)?;
+        loader.discover_automatic_commands(&readers, &owner_type, previous)?;
     }
     let mut cursor = 0;
     loop {
@@ -138,12 +138,14 @@ struct Loader<'a> {
 }
 
 impl Loader<'_> {
-    fn discover_based_on(
+    fn discover_automatic_commands(
         &mut self,
         readers: &[Reader<'_>],
-        basis: &str,
+        owner_type: &PropertyKey,
         previous: &[FormDependency],
     ) -> Result<(), FormContextError> {
+        let basis = based_on::basis(owner_type);
+        let parameter = command_types::reference_type(owner_type);
         let mut targets = Vec::new();
         let known_paths = previous
             .iter()
@@ -157,7 +159,14 @@ impl Loader<'_> {
             else {
                 continue;
             };
-            for candidate in based_on::candidates(&root.descriptor) {
+            for candidate in configuration_objects(&root.descriptor) {
+                let common = candidate.kind == MetadataKind::CommonCommand;
+                let based_on = basis
+                    .as_deref()
+                    .filter(|_| based_on::supports_creation(candidate.kind));
+                if !common && based_on.is_none() {
+                    continue;
+                }
                 let Some(location) = reader
                     .source
                     .object_descriptor(&candidate.id)
@@ -174,10 +183,16 @@ impl Loader<'_> {
                     Err(error) if known => return Err(error),
                     _ => continue,
                 };
-                if !known && !based_on::may_declare(&input.text) {
+                let matches = if common && (known || command_types::may_declare(&input.text)) {
+                    command_types::common_candidate(&input.text, &parameter)
+                } else if let Some(basis) =
+                    based_on.filter(|_| known || based_on::may_declare(&input.text))
+                {
+                    based_on::declares(&input.text, candidate.kind, basis)
+                } else {
                     continue;
-                }
-                match based_on::declares(&input.text, candidate.kind, basis) {
+                };
+                match matches {
                     Ok(true) => targets.push(candidate.id.clone()),
                     Err(_) if known => {
                         return Err(FormContextError::InvalidMetadata { source: input.id });
@@ -186,7 +201,7 @@ impl Loader<'_> {
                 }
             }
         }
-        // Keep every effective layer of a matching identity, including a later explicit empty BasedOn.
+        // Keep later overrides as well as the layer that first identified the candidate.
         for target in targets {
             self.request(target)?;
         }
@@ -303,11 +318,42 @@ fn parse_metadata(
     let root = xml.root_element();
     let references = references::collect(root);
     pending.extend(references::discover_resources(root, &references, false));
+    pending.extend(
+        descriptor
+            .objects
+            .iter()
+            .flat_map(command_types::dependencies),
+    );
     Ok(ResourceMetadata {
         descriptor,
         references,
         picture_extended: picture_extended(root),
     })
+}
+
+pub(super) fn configuration_objects(
+    descriptor: &ParsedDescriptor,
+) -> impl Iterator<Item = &MetadataReference> {
+    let configuration = descriptor
+        .objects
+        .first()
+        .filter(|object| object.metadata.kind() == MetadataKind::Configuration);
+    descriptor.references.iter().filter(move |reference| {
+        configuration.is_some_and(|root| &reference.owner == root.metadata.id())
+    })
+}
+
+pub(super) fn direct_property<'a, 'input>(
+    root: Node<'a, 'input>,
+    kind: MetadataKind,
+    property: &str,
+) -> Option<Node<'a, 'input>> {
+    root.children()
+        .find(|node| node.has_tag_name((MD_NAMESPACE, kind.designer_tag())))?
+        .children()
+        .find(|node| node.has_tag_name((MD_NAMESPACE, "Properties")))?
+        .children()
+        .find(|node| node.has_tag_name((MD_NAMESPACE, property)))
 }
 
 fn picture_extended(root: Node<'_, '_>) -> bool {

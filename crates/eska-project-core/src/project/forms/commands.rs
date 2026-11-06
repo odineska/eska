@@ -24,6 +24,8 @@ pub struct AutoCommandItem {
     pub picture: Option<FormPicture>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub button_representation: Option<ButtonRepresentation>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub order_by_caption: Option<bool>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub items: Vec<Self>,
 }
@@ -39,6 +41,7 @@ impl AutoCommandItem {
             origin: None,
             picture: None,
             button_representation: None,
+            order_by_caption: None,
             items: Vec::new(),
         }
     }
@@ -123,6 +126,7 @@ impl<'a> ResolvedCommand<'a> {
             origin,
             picture,
             button_representation,
+            order_by_caption: None,
             items: Vec::new(),
         })
     }

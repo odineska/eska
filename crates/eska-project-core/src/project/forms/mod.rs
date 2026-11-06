@@ -4,6 +4,7 @@ mod appearance;
 mod based_on;
 mod borrowing;
 mod catalog;
+mod command_types;
 mod commands;
 mod composition;
 mod context;
