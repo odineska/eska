@@ -14,6 +14,7 @@ use super::{
 };
 
 pub(super) const MD_NAMESPACE: &str = "http://v8.1c.ru/8.3/MDClasses";
+pub(super) const MAX_DESCRIPTOR_NODES: u32 = 1_000_000;
 const MAX_BYTES: usize = 64 * 1024 * 1024;
 const MAX_DEPTH: usize = 64;
 
@@ -158,15 +159,27 @@ pub fn parse(
     parent: Option<ObjectId>,
     mode: PropertiesMode,
 ) -> Result<ParsedDescriptor, ParseError> {
+    let document = parse_xml(input, MAX_DESCRIPTOR_NODES)?;
+    parse_descriptor(&document, parent, mode)
+}
+
+pub(super) fn parse_xml(input: &str, nodes_limit: u32) -> Result<Document<'_>, ParseError> {
     check_envelope(input)?;
-    let document = Document::parse_with_options(
+    Document::parse_with_options(
         input,
         ParsingOptions {
-            nodes_limit: 1_000_000,
+            nodes_limit,
             ..Default::default()
         },
     )
-    .map_err(ParseError::Xml)?;
+    .map_err(ParseError::Xml)
+}
+
+pub(super) fn parse_descriptor(
+    document: &Document<'_>,
+    parent: Option<ObjectId>,
+    mode: PropertiesMode,
+) -> Result<ParsedDescriptor, ParseError> {
     let root = document.root_element();
     let mut children = root.children().filter(Node::is_element);
     let object = children

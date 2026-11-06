@@ -203,7 +203,7 @@ fn metadata_commands(
     let Some((kind, name)) = owner_type.name.split_once('.') else {
         return;
     };
-    let Some(kind) = super::resources::type_kind(kind) else {
+    let Some(kind) = super::references::type_kind(kind) else {
         return;
     };
     let Some(owner) = resources

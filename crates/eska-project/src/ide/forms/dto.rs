@@ -52,6 +52,9 @@ fn element(
         if let Some(column) = &presentation.table_column_appearance {
             value["tableColumnAppearance"] = json!(column);
         }
+        if let Some(total) = presentation.tabular_total {
+            value["tabularTotal"] = json!(total);
+        }
         value
     });
     json!({"identity":identity(&value.identity),"origin":origin(&value.origin),"kind":value.kind.map(eska_project_core::project::forms::ElementKind::xml_name),"name":value.name,"xmlName":value.xml_name,

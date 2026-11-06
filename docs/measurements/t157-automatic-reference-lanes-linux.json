@@ -1,0 +1,1338 @@
+{
+  "schemaVersion": 1,
+  "milestone": "T157",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "eskaBackendCommit": "77425e9",
+  "explorerCommit": "c8e08eb",
+  "backendSha256": "418323be8f91fd4e6f34086b6950403e8fe3a1941a5edebb6e92f4759dc28001",
+  "vsixSha256": "26652817453b6ee4fcaf5799d98c824a7693900cac39272341b3654cc8fbe2a0",
+  "verifiedInstalledRuntimeFiles": 1262,
+  "fixture": "tests/fixtures/forms/native-column-widths/automatic-metrics.json",
+  "fixtureSha256": "8ddac92c71a6eb292703bf06f954fddc889d752e11627f78983951862ecd1a41",
+  "coordinateSpace": "x, y, width, height in pixels relative to the form frame",
+  "automaticLaneCasesAccepted": true,
+  "wholeFormGeometryParity": false,
+  "sourceWritesDuringViewing": false,
+  "previousWideEnglish": {
+    "frameWidths": [
+      658,
+      974
+    ],
+    "nativeControlWidths": [
+      [
+        203,
+        203
+      ],
+      [
+        325,
+        397
+      ]
+    ],
+    "installedControlWidths": [
+      [
+        202,
+        203
+      ],
+      [
+        361,
+        360
+      ]
+    ]
+  },
+  "syntheticInstalled": {
+    "en": {
+      "nativeCases": 59,
+      "columnCaseIds": 76,
+      "exactFieldRects": 115,
+      "fieldRects": 133,
+      "maximumFieldErrorPx": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "wideTwoColumns": {
+        "label": "Standard94",
+        "frame": [
+          974,
+          75
+        ],
+        "controls": {
+          "A": [
+            95,
+            39,
+            325,
+            23
+          ],
+          "B": [
+            556,
+            39,
+            397,
+            23
+          ]
+        }
+      },
+      "detachedTransition": {
+        "label": "detached-auto-reference-resize-dirty",
+        "sameDom": true,
+        "sameSelection": true
+      },
+      "manualMaximumBelowPreferred": {
+        "label": "RefMax14",
+        "frame": [
+          974,
+          75
+        ],
+        "controls": {
+          "A": [
+            95,
+            39,
+            410,
+            23
+          ],
+          "B": [
+            641,
+            39,
+            151,
+            23
+          ]
+        }
+      },
+      "minimumWithNoTitles": {
+        "label": "BareSmall10",
+        "frame": [
+          270,
+          75
+        ],
+        "controls": {
+          "A": [
+            13,
+            39,
+            113,
+            23
+          ],
+          "B": [
+            136,
+            39,
+            113,
+            23
+          ]
+        }
+      }
+    },
+    "ru": {
+      "nativeCases": 24,
+      "columnCaseIds": 42,
+      "exactFieldRects": 55,
+      "fieldRects": 55,
+      "maximumFieldErrorPx": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "wideTwoColumns": {
+        "label": "Standard94",
+        "frame": [
+          974,
+          75
+        ],
+        "controls": {
+          "A": [
+            98,
+            39,
+            306,
+            23
+          ],
+          "B": [
+            570,
+            39,
+            383,
+            23
+          ]
+        }
+      },
+      "detachedTransition": {
+        "label": "detached-auto-reference-resize-dirty",
+        "sameDom": true,
+        "sameSelection": true
+      }
+    }
+  },
+  "realForm": {
+    "form": "Documents/РасходТовара/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "1f889c1b3dd13b8a1ca37fbce6a43330c1d9c9b52a13557815af771afadcc530",
+    "nativeScreenshotSha256": "a632f8dc98c6aa6e157e0c22d4275b836d54144e96b72be610009316aea104c0",
+    "poses": {
+      "en": [
+        {
+          "label": "native",
+          "frame": [
+            1011,
+            638
+          ],
+          "totalsRow": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "referenceFields": [
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Организация",
+              "before": [
+                101,
+                131,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                131,
+                410,
+                23
+              ],
+              "native": [
+                98,
+                130,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/ГруппаПокупатель/Покупатель",
+              "before": [
+                101,
+                163,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                163,
+                410,
+                23
+              ],
+              "native": [
+                98,
+                162,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Склад",
+              "before": [
+                101,
+                195,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                195,
+                410,
+                23
+              ],
+              "native": [
+                98,
+                194,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/ВидЦен",
+              "before": [
+                672,
+                67,
+                318,
+                23
+              ],
+              "installed": [
+                667,
+                67,
+                323,
+                23
+              ],
+              "native": [
+                667,
+                66,
+                323,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/Валюта",
+              "before": [
+                672,
+                99,
+                318,
+                23
+              ],
+              "installed": [
+                667,
+                99,
+                323,
+                23
+              ],
+              "native": [
+                667,
+                98,
+                323,
+                23
+              ]
+            }
+          ]
+        },
+        {
+          "label": "narrow",
+          "frame": [
+            900,
+            570
+          ],
+          "totalsRow": [
+            24,
+            523,
+            844,
+            25
+          ],
+          "referenceFields": [
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Организация",
+              "before": [
+                101,
+                131,
+                392,
+                23
+              ],
+              "installed": [
+                98,
+                131,
+                395,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/ГруппаПокупатель/Покупатель",
+              "before": [
+                101,
+                163,
+                392,
+                23
+              ],
+              "installed": [
+                98,
+                163,
+                395,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Склад",
+              "before": [
+                101,
+                195,
+                392,
+                23
+              ],
+              "installed": [
+                98,
+                195,
+                395,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/ВидЦен",
+              "before": [
+                654,
+                67,
+                225,
+                23
+              ],
+              "installed": [
+                652,
+                67,
+                227,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/Валюта",
+              "before": [
+                654,
+                99,
+                225,
+                23
+              ],
+              "installed": [
+                652,
+                99,
+                227,
+                23
+              ]
+            }
+          ]
+        },
+        {
+          "label": "large",
+          "frame": [
+            1150,
+            700
+          ],
+          "totalsRow": [
+            24,
+            653,
+            889,
+            25
+          ],
+          "referenceFields": [
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Организация",
+              "before": [
+                101,
+                131,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                131,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/ГруппаПокупатель/Покупатель",
+              "before": [
+                101,
+                163,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                163,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Склад",
+              "before": [
+                101,
+                195,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                195,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/ВидЦен",
+              "before": [
+                672,
+                67,
+                410,
+                23
+              ],
+              "installed": [
+                667,
+                67,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/Валюта",
+              "before": [
+                672,
+                99,
+                410,
+                23
+              ],
+              "installed": [
+                667,
+                99,
+                410,
+                23
+              ]
+            }
+          ]
+        },
+        {
+          "label": "restored",
+          "frame": [
+            1011,
+            638
+          ],
+          "totalsRow": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "referenceFields": [
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Организация",
+              "before": [
+                101,
+                131,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                131,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/ГруппаПокупатель/Покупатель",
+              "before": [
+                101,
+                163,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                163,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Склад",
+              "before": [
+                101,
+                195,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                195,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/ВидЦен",
+              "before": [
+                672,
+                67,
+                318,
+                23
+              ],
+              "installed": [
+                667,
+                67,
+                323,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/Валюта",
+              "before": [
+                672,
+                99,
+                318,
+                23
+              ],
+              "installed": [
+                667,
+                99,
+                323,
+                23
+              ]
+            }
+          ]
+        }
+      ],
+      "ru": [
+        {
+          "label": "native",
+          "frame": [
+            1011,
+            638
+          ],
+          "totalsRow": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "referenceFields": [
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Организация",
+              "before": [
+                101,
+                131,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                131,
+                410,
+                23
+              ],
+              "native": [
+                98,
+                130,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/ГруппаПокупатель/Покупатель",
+              "before": [
+                101,
+                163,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                163,
+                410,
+                23
+              ],
+              "native": [
+                98,
+                162,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Склад",
+              "before": [
+                101,
+                195,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                195,
+                410,
+                23
+              ],
+              "native": [
+                98,
+                194,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/ВидЦен",
+              "before": [
+                672,
+                67,
+                318,
+                23
+              ],
+              "installed": [
+                667,
+                67,
+                323,
+                23
+              ],
+              "native": [
+                667,
+                66,
+                323,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/Валюта",
+              "before": [
+                672,
+                99,
+                318,
+                23
+              ],
+              "installed": [
+                667,
+                99,
+                323,
+                23
+              ],
+              "native": [
+                667,
+                98,
+                323,
+                23
+              ]
+            }
+          ]
+        },
+        {
+          "label": "narrow",
+          "frame": [
+            900,
+            570
+          ],
+          "totalsRow": [
+            24,
+            523,
+            844,
+            25
+          ],
+          "referenceFields": [
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Организация",
+              "before": [
+                101,
+                131,
+                392,
+                23
+              ],
+              "installed": [
+                98,
+                131,
+                395,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/ГруппаПокупатель/Покупатель",
+              "before": [
+                101,
+                163,
+                392,
+                23
+              ],
+              "installed": [
+                98,
+                163,
+                395,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Склад",
+              "before": [
+                101,
+                195,
+                392,
+                23
+              ],
+              "installed": [
+                98,
+                195,
+                395,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/ВидЦен",
+              "before": [
+                654,
+                67,
+                225,
+                23
+              ],
+              "installed": [
+                652,
+                67,
+                227,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/Валюта",
+              "before": [
+                654,
+                99,
+                225,
+                23
+              ],
+              "installed": [
+                652,
+                99,
+                227,
+                23
+              ]
+            }
+          ]
+        },
+        {
+          "label": "large",
+          "frame": [
+            1150,
+            700
+          ],
+          "totalsRow": [
+            24,
+            653,
+            889,
+            25
+          ],
+          "referenceFields": [
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Организация",
+              "before": [
+                101,
+                131,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                131,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/ГруппаПокупатель/Покупатель",
+              "before": [
+                101,
+                163,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                163,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Склад",
+              "before": [
+                101,
+                195,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                195,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/ВидЦен",
+              "before": [
+                672,
+                67,
+                410,
+                23
+              ],
+              "installed": [
+                667,
+                67,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/Валюта",
+              "before": [
+                672,
+                99,
+                410,
+                23
+              ],
+              "installed": [
+                667,
+                99,
+                410,
+                23
+              ]
+            }
+          ]
+        },
+        {
+          "label": "restored",
+          "frame": [
+            1011,
+            638
+          ],
+          "totalsRow": [
+            24,
+            591,
+            889,
+            25
+          ],
+          "referenceFields": [
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Организация",
+              "before": [
+                101,
+                131,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                131,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/ГруппаПокупатель/Покупатель",
+              "before": [
+                101,
+                163,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                163,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ЛеваяКолонка/Склад",
+              "before": [
+                101,
+                195,
+                410,
+                23
+              ],
+              "installed": [
+                98,
+                195,
+                410,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/ВидЦен",
+              "before": [
+                672,
+                67,
+                318,
+                23
+              ],
+              "installed": [
+                667,
+                67,
+                323,
+                23
+              ]
+            },
+            {
+              "path": "Form/Шапка/ПраваяКолонка/Валюта",
+              "before": [
+                672,
+                99,
+                318,
+                23
+              ],
+              "installed": [
+                667,
+                99,
+                323,
+                23
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "narrowCaptionDiagnosticsRu": [
+    {
+      "case": "Narrow23",
+      "nativeFrame": [
+        461,
+        82
+      ],
+      "installedFrame": [
+        461,
+        82
+      ],
+      "native": {
+        "A": [
+          98,
+          39,
+          113,
+          23
+        ],
+        "B": [
+          327,
+          39,
+          113,
+          23
+        ]
+      },
+      "installed": {
+        "A": [
+          98,
+          39,
+          88,
+          23
+        ],
+        "B": [
+          352,
+          39,
+          88,
+          23
+        ]
+      }
+    },
+    {
+      "case": "Narrow40",
+      "nativeFrame": [
+        461,
+        82
+      ],
+      "installedFrame": [
+        461,
+        82
+      ],
+      "native": {
+        "A": [
+          98,
+          39,
+          113,
+          23
+        ],
+        "B": [
+          327,
+          39,
+          113,
+          23
+        ]
+      },
+      "installed": {
+        "A": [
+          98,
+          39,
+          88,
+          23
+        ],
+        "B": [
+          352,
+          39,
+          88,
+          23
+        ]
+      }
+    },
+    {
+      "case": "Narrow52",
+      "nativeFrame": [
+        554,
+        82
+      ],
+      "installedFrame": [
+        554,
+        82
+      ],
+      "native": {
+        "A": [
+          98,
+          39,
+          150,
+          23
+        ],
+        "B": [
+          364,
+          39,
+          169,
+          23
+        ]
+      },
+      "installed": {
+        "A": [
+          98,
+          39,
+          134,
+          23
+        ],
+        "B": [
+          398,
+          39,
+          135,
+          23
+        ]
+      }
+    },
+    {
+      "case": "Narrow60",
+      "nativeFrame": [
+        634,
+        82
+      ],
+      "installedFrame": [
+        634,
+        82
+      ],
+      "native": {
+        "A": [
+          98,
+          39,
+          196,
+          23
+        ],
+        "B": [
+          410,
+          39,
+          203,
+          23
+        ]
+      },
+      "installed": {
+        "A": [
+          98,
+          39,
+          174,
+          23
+        ],
+        "B": [
+          438,
+          39,
+          175,
+          23
+        ]
+      }
+    },
+    {
+      "case": "Narrow65",
+      "nativeFrame": [
+        684,
+        82
+      ],
+      "installedFrame": [
+        684,
+        82
+      ],
+      "native": {
+        "A": [
+          98,
+          39,
+          220,
+          23
+        ],
+        "B": [
+          443,
+          39,
+          220,
+          23
+        ]
+      },
+      "installed": {
+        "A": [
+          98,
+          39,
+          199,
+          23
+        ],
+        "B": [
+          463,
+          39,
+          200,
+          23
+        ]
+      }
+    }
+  ],
+  "regressionRuns": [
+    {
+      "suite": "column-widths",
+      "locale": "en",
+      "passed": true,
+      "cases": 77
+    },
+    {
+      "suite": "column-widths",
+      "locale": "ru",
+      "passed": true,
+      "cases": 42
+    },
+    {
+      "suite": "numeric-labels",
+      "locale": "en",
+      "passed": true,
+      "cases": 41
+    },
+    {
+      "suite": "numeric-labels",
+      "locale": "ru",
+      "passed": true,
+      "cases": 42
+    },
+    {
+      "suite": "united",
+      "locale": "en",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "suite": "united",
+      "locale": "ru",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "suite": "through-align",
+      "locale": "en",
+      "passed": true,
+      "cases": 23
+    },
+    {
+      "suite": "through-align",
+      "locale": "ru",
+      "passed": true,
+      "cases": 23
+    },
+    {
+      "suite": "responsive",
+      "locale": "en",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "responsive",
+      "locale": "ru",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "groups",
+      "locale": "en",
+      "passed": true,
+      "cases": 22
+    },
+    {
+      "suite": "groups",
+      "locale": "ru",
+      "passed": true,
+      "cases": 22
+    },
+    {
+      "suite": "input-dimensions",
+      "locale": "en",
+      "passed": true,
+      "cases": 44
+    },
+    {
+      "suite": "input-dimensions",
+      "locale": "ru",
+      "passed": true,
+      "cases": 44
+    },
+    {
+      "suite": "input-borders",
+      "locale": "en",
+      "passed": true,
+      "cases": 52
+    },
+    {
+      "suite": "input-borders",
+      "locale": "ru",
+      "passed": true,
+      "cases": 52
+    },
+    {
+      "suite": "input-fonts",
+      "locale": "en",
+      "passed": true,
+      "cases": 38
+    },
+    {
+      "suite": "input-fonts",
+      "locale": "ru",
+      "passed": true,
+      "cases": 38
+    },
+    {
+      "suite": "input-stretch",
+      "locale": "en",
+      "passed": true,
+      "cases": 20
+    },
+    {
+      "suite": "input-stretch",
+      "locale": "ru",
+      "passed": true,
+      "cases": 20
+    },
+    {
+      "suite": "renderer",
+      "locale": "en",
+      "passed": true,
+      "cases": 20
+    },
+    {
+      "suite": "renderer",
+      "locale": "ru",
+      "passed": true,
+      "cases": 20
+    },
+    {
+      "suite": "table-pixels",
+      "locale": "en",
+      "passed": true,
+      "cases": 48
+    },
+    {
+      "suite": "table-pixels",
+      "locale": "ru",
+      "passed": true,
+      "cases": 47
+    },
+    {
+      "suite": "tables",
+      "locale": "en",
+      "passed": true,
+      "cases": 17
+    },
+    {
+      "suite": "tables",
+      "locale": "ru",
+      "passed": true,
+      "cases": 17
+    },
+    {
+      "suite": "preview",
+      "locale": "en",
+      "passed": true,
+      "cases": 1
+    },
+    {
+      "suite": "preview",
+      "locale": "ru",
+      "passed": true,
+      "cases": 1
+    },
+    {
+      "suite": "application",
+      "locale": "en",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "suite": "application",
+      "locale": "ru",
+      "passed": true,
+      "cases": 4
+    }
+  ],
+  "remaining": [
+    "Titled reference fields still need native caption reflow and minimum track allocation at narrow widths.",
+    "The installed real-form resize was measured against a native screenshot at the initial frame size.",
+    "Full geometry and pixel acceptance, including Windows, remain open."
+  ]
+}

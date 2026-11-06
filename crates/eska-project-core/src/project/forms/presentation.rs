@@ -72,6 +72,13 @@ pub enum FieldTitleLocation {
     None,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub enum TabularTotalCaption {
+    Automatic,
+    Overridden,
+}
+
 /// Explicit band appearance on a table column or column group.
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -101,6 +108,8 @@ pub struct ElementPresentation {
     pub title_location: FieldTitleLocation,
     pub picture: Option<super::FormPicture>,
     pub caption: PresentationText,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tabular_total: Option<TabularTotalCaption>,
     pub tooltip: Option<PresentationText>,
     pub footer_text: Option<PresentationText>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -213,13 +222,52 @@ fn visit(
     appearance: &mut Appearance<'_>,
     output: &mut Vec<ElementPresentation>,
 ) {
-    let (binding_caption, value_type, binding) = bind(element, form, resources);
+    output.push(present_element(
+        element, scope, form, resources, tables, appearance,
+    ));
+    let child_scope = VisitScope {
+        parent: Some(element),
+        in_table: scope.in_table || element.kind == Some(ElementKind::Table),
+    };
+    for child in element.children.iter().chain(&element.auxiliary) {
+        visit(
+            child,
+            child_scope,
+            form,
+            resources,
+            tables,
+            appearance,
+            output,
+        );
+    }
+}
+
+fn present_element(
+    element: &EffectiveElement,
+    scope: VisitScope<'_>,
+    form: &ComposedForm,
+    resources: &[FormResource],
+    tables: &super::commands::TableIndex<'_>,
+    appearance: &mut Appearance<'_>,
+) -> ElementPresentation {
+    let FieldBinding {
+        caption: binding_caption,
+        value_type,
+        source: binding,
+        tabular_total,
+    } = bind(element, form, resources);
     let binding_caption = binding_caption.map(|caption| column_caption(caption, scope.in_table));
     let command = element.scalar("CommandName");
-    let caption = element
+    let authored_caption = element
         .property("Title")
         .and_then(|value| literal(&value.property.value))
-        .or_else(|| command.and_then(|command| command_caption(command, form, resources)))
+        .or_else(|| command.and_then(|command| command_caption(command, form, resources)));
+    let tabular_total = tabular_total.then_some(if authored_caption.is_some() {
+        TabularTotalCaption::Overridden
+    } else {
+        TabularTotalCaption::Automatic
+    });
+    let caption = authored_caption
         .or(binding_caption)
         .unwrap_or_else(|| PresentationText::Name {
             text: if element.kind == Some(ElementKind::LabelDecoration) {
@@ -263,7 +311,7 @@ fn visit(
     let auto_command_items = element_commands(element, &value_type, form, resources, tables);
     let auto_commands = standard_form_commands(&auto_command_items);
     let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
-    output.push(ElementPresentation {
+    ElementPresentation {
         identity: element.identity.clone(),
         in_table: scope.in_table,
         parent_kind: scope.parent.and_then(|parent| parent.kind),
@@ -280,6 +328,7 @@ fn visit(
         title_location: title_location(element),
         picture: super::pictures::resolve(element, resources, &mut appearance.diagnostics),
         caption,
+        tabular_total,
         tooltip: element
             .property("ToolTip")
             .and_then(|value| literal(&value.property.value)),
@@ -298,20 +347,6 @@ fn visit(
         title_color,
         auto_commands,
         auto_command_items,
-    });
-    for child in element.children.iter().chain(&element.auxiliary) {
-        visit(
-            child,
-            VisitScope {
-                parent: Some(element),
-                in_table: scope.in_table || element.kind == Some(ElementKind::Table),
-            },
-            form,
-            resources,
-            tables,
-            appearance,
-            output,
-        );
     }
 }
 
@@ -427,8 +462,8 @@ fn element_commands(
         Some(ElementKind::Table) => super::commands::table(element, value_type),
         Some(ElementKind::CommandBar) => super::commands::table_source(element, tables)
             .map(|table| {
-                let (_, value_type, _) = bind(table, form, resources);
-                super::commands::table_items(table, &value_type)
+                let binding = bind(table, form, resources);
+                super::commands::table_items(table, &binding.value_type)
             })
             .unwrap_or_default(),
         _ => Vec::new(),
@@ -633,13 +668,21 @@ pub(super) fn field_value_kind(types: &[PropertyKey]) -> FieldValueKind {
         _ => FieldValueKind::Composite,
     }
 }
+#[derive(Default)]
+struct FieldBinding {
+    caption: Option<PresentationText>,
+    value_type: FieldType,
+    source: Option<PropertySource>,
+    tabular_total: bool,
+}
+
 fn bind(
     element: &EffectiveElement,
     form: &ComposedForm,
     resources: &[FormResource],
-) -> (Option<PresentationText>, FieldType, Option<PropertySource>) {
+) -> FieldBinding {
     let Some(path) = element.scalar("DataPath") else {
-        return (None, FieldType::default(), None);
+        return FieldBinding::default();
     };
     let mut path = path.split('.');
     let Some(attribute) = path.next().and_then(|name| {
@@ -647,15 +690,16 @@ fn bind(
             .iter()
             .find(|definition| definition.name.as_deref() == Some(name))
     }) else {
-        return (None, FieldType::default(), None);
+        return FieldBinding::default();
     };
     let remaining: Vec<_> = path.collect();
     if remaining.is_empty() {
-        return (
-            definition_caption(attribute),
-            definition_type(attribute),
-            Some(attribute.origin.clone()),
-        );
+        return FieldBinding {
+            caption: definition_caption(attribute),
+            value_type: definition_type(attribute),
+            source: Some(attribute.origin.clone()),
+            tabular_total: false,
+        };
     }
     if let Some(value) = column_binding(attribute, &remaining) {
         return value;
@@ -667,7 +711,7 @@ fn bind(
         .filter(|kind| kind.namespace.as_deref() == Some(super::references::CONFIG))
         .find_map(|kind| {
             let (kind, name) = kind.name.split_once('.')?;
-            super::resources::type_kind(kind).map(|kind| (kind, name))
+            super::references::type_kind(kind).map(|kind| (kind, name))
         })
         .or_else(|| {
             attribute
@@ -675,18 +719,19 @@ fn bind(
                 .iter()
                 .find_map(|property| find_main_table(&property.property.value))
         });
-    let Some((kind, name)) = target else {
-        return (None, FieldType::default(), Some(attribute.origin.clone()));
-    };
-    metadata_binding(kind, name, &remaining, resources)
-        .unwrap_or_else(|| (None, FieldType::default(), Some(attribute.origin.clone())))
+    target
+        .and_then(|(kind, name)| metadata_binding(kind, name, &remaining, resources))
+        .unwrap_or_else(|| FieldBinding {
+            source: Some(attribute.origin.clone()),
+            ..FieldBinding::default()
+        })
 }
 fn metadata_binding(
     kind: MetadataKind,
     name: &str,
     remaining: &[&str],
     resources: &[FormResource],
-) -> Option<(Option<PresentationText>, FieldType, Option<PropertySource>)> {
+) -> Option<FieldBinding> {
     let (mut resource, mut owner) = resources.iter().rev().find_map(|resource| {
         resource
             .descriptor
@@ -696,32 +741,60 @@ fn metadata_binding(
             .map(|owner| (resource, owner))
     })?;
     for (index, part) in remaining.iter().enumerate() {
-        if let Some((layer, child)) = resources.iter().rev().find_map(|layer| {
-            layer
-                .descriptor
-                .objects
-                .iter()
-                .find(|object| {
-                    object.metadata.parent() == Some(owner.metadata.id())
-                        && object.metadata.name() == *part
-                })
-                .map(|child| (layer, child))
-        }) {
+        if let Some((layer, child)) = metadata_child(owner, part, resources) {
             resource = layer;
             owner = child;
-        } else if index + 1 == remaining.len() && standard_attribute(part) {
-            return Some((
-                Some(standard_caption(part, owner, resources)),
-                standard_type(part, owner, resources),
-                Some(PropertySource {
+        } else if index + 1 != remaining.len() {
+            return None;
+        } else if standard_attribute(part) {
+            return Some(FieldBinding {
+                caption: Some(standard_caption(part, owner, resources)),
+                value_type: standard_type(part, owner, resources),
+                source: Some(PropertySource {
                     source: resource.source.clone(),
                     range: owner.range.clone(),
                 }),
-            ));
+                tabular_total: false,
+            });
+        } else if owner.metadata.kind() == MetadataKind::TabularSection {
+            // Designer exports the synthetic total as Total<column> in DataPath.
+            let (layer, column) = metadata_child(owner, part.strip_prefix("Total")?, resources)?;
+            let mut binding = metadata_field(layer, column, resources);
+            if binding.value_type.kind != FieldValueKind::Number {
+                return None;
+            }
+            binding.tabular_total = true;
+            return Some(binding);
         } else {
             return None;
         }
     }
+    Some(metadata_field(resource, owner, resources))
+}
+
+fn metadata_child<'a>(
+    owner: &ParsedObject,
+    name: &str,
+    resources: &'a [FormResource],
+) -> Option<(&'a FormResource, &'a ParsedObject)> {
+    resources.iter().rev().find_map(|layer| {
+        layer
+            .descriptor
+            .objects
+            .iter()
+            .find(|object| {
+                object.metadata.parent() == Some(owner.metadata.id())
+                    && object.metadata.name() == name
+            })
+            .map(|child| (layer, child))
+    })
+}
+
+fn metadata_field(
+    resource: &FormResource,
+    owner: &ParsedObject,
+    resources: &[FormResource],
+) -> FieldBinding {
     let caption = metadata_property(owner, "Synonym", resources)
         .and_then(|value| literal(&value.value))
         .unwrap_or_else(|| PresentationText::Name {
@@ -737,14 +810,15 @@ fn metadata_binding(
             .map(|value| field_type(&value.value))
             .unwrap_or_default()
     };
-    Some((
-        Some(caption),
+    FieldBinding {
+        caption: Some(caption),
         value_type,
-        Some(PropertySource {
+        source: Some(PropertySource {
             source: resource.source.clone(),
             range: owner.range.clone(),
         }),
-    ))
+        tabular_total: false,
+    }
 }
 fn definition_caption(value: &EffectiveDefinition) -> Option<PresentationText> {
     value
@@ -763,7 +837,7 @@ fn find_main_table(value: &MetadataValue) -> Option<(MetadataKind, &str)> {
             if field.key.name == "MainTable"
                 && let Some((kind, name)) =
                     appearance::text(&field.value).and_then(|text| text.split_once('.'))
-                && let Some(kind) = super::resources::type_kind(kind)
+                && let Some(kind) = super::references::type_kind(kind)
             {
                 return Some((kind, name));
             }
@@ -1060,10 +1134,7 @@ fn choice_reference(value: &MetadataValue, resources: &[FormResource]) -> Option
     }
 }
 
-fn column_binding(
-    attribute: &EffectiveDefinition,
-    remaining: &[&str],
-) -> Option<(Option<PresentationText>, FieldType, Option<PropertySource>)> {
+fn column_binding(attribute: &EffectiveDefinition, remaining: &[&str]) -> Option<FieldBinding> {
     if let Some(columns) = attribute
         .properties
         .iter()
@@ -1085,13 +1156,14 @@ fn column_binding(
             value = record(&column.value, "Columns").map_or(&column.value, |field| &field.value);
         }
         if let Some(column) = found {
-            return Some((
-                record(&column.value, "Title").and_then(|value| literal(&value.value)),
-                record(&column.value, "Type")
+            return Some(FieldBinding {
+                caption: record(&column.value, "Title").and_then(|value| literal(&value.value)),
+                value_type: record(&column.value, "Type")
                     .map(|value| field_type(&value.value))
                     .unwrap_or_default(),
-                Some(columns.origin.clone()),
-            ));
+                source: Some(columns.origin.clone()),
+                tabular_total: false,
+            });
         }
     }
 

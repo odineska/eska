@@ -1,0 +1,123 @@
+{
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "fixtures": {
+    "AutoReference": {
+      "en": [
+        {"name": "Standard94", "frame": [974, 75], "controls": {"A": [95, 39, 325, 23], "B": [556, 39, 397, 23]}, "screenshotSha256": "8fead8dfeed7a98268870fa37bd1ab1318efcc211adc028cbd6a6b30916dbdfd", "tolerancePx": 1},
+        {"name": "Standard99", "frame": [1024, 75], "controls": {"A": [95, 39, 362, 23], "B": [593, 39, 410, 23]}, "screenshotSha256": "6f66e6d68a3bf9f771a75cb601a73beddb485d6d465a5239cff24254777cc232", "tolerancePx": 1},
+        {"name": "Standard100", "frame": [1034, 75], "controls": {"A": [95, 39, 372, 23], "B": [603, 39, 410, 23]}, "screenshotSha256": "bc4edd069cac623631ff3400aa374cf1002cb474560fcbc3a83dfa3b65e38d32", "tolerancePx": 1},
+        {"name": "Standard104", "frame": [1074, 75], "controls": {"A": [95, 39, 410, 23], "B": [641, 39, 410, 23]}, "screenshotSha256": "f43e2f30702bb48d1db009c50f6ba7f1521818a4262ac5181a7dc49470427395", "tolerancePx": 1},
+        {"name": "Standard110", "frame": [1134, 75], "controls": {"A": [95, 39, 410, 23], "B": [641, 39, 410, 23]}, "screenshotSha256": "59a76374863fe086337688829c77c4ffc059f1a40ddf90e6a8a4ea6fdc149dcd", "tolerancePx": 1},
+        {"name": "Standard122", "frame": [1254, 75], "controls": {"A": [95, 39, 410, 23], "B": [641, 39, 410, 23]}, "screenshotSha256": "301a38dd126a74ef7f2e8efded555e5ec1802b91032023c04d0e6c2ab4b81c1a", "tolerancePx": 1},
+        {"name": "ShortAuto", "frame": [594, 75], "controls": {"A": [31, 39, 203, 23], "B": [370, 39, 203, 23]}, "screenshotSha256": "41fe1f7c4eac1494c5489f36bbc5a21ff6110c5422865cf8e800d1513f1f4d20", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"]}}},
+        {"name": "Short66", "frame": [694, 75], "controls": {"A": [31, 39, 242, 23], "B": [409, 39, 264, 23]}, "screenshotSha256": "0dc2e910a5df8ea14ceaa2053be5e371f5e977f83e1c878f480d58705ea6e1b8", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"]}}},
+        {"name": "Short74", "frame": [774, 75], "controls": {"A": [31, 39, 272, 23], "B": [439, 39, 314, 23]}, "screenshotSha256": "c63c71eac5fd31d0f73924c963cc47b20d75426d41f8ae895a9bf50f64272f7d", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"]}}},
+        {"name": "Short82", "frame": [854, 75], "controls": {"A": [31, 39, 303, 23], "B": [470, 39, 363, 23]}, "screenshotSha256": "ebc9377d9e45b9d7f533101f1e4b2972503d15f7d58fe7849c88be625097879a", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"]}}},
+        {"name": "Short88", "frame": [914, 75], "controls": {"A": [31, 39, 326, 23], "B": [493, 39, 400, 23]}, "screenshotSha256": "f91541bca9f0eb135b92e662c5df97cbb1b11b0db01ae44d7fdd91fe3f3a796f", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"]}}},
+        {"name": "Short94", "frame": [974, 75], "controls": {"A": [31, 39, 376, 23], "B": [543, 39, 410, 23]}, "screenshotSha256": "d70cbea4b385158d65f9c1ac1e7db1b3fd6d07db9ef4d1075e2566b4f2fbcff5", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"]}}},
+        {"name": "OneTitleAuto", "frame": [576, 75], "controls": {"A": [13, 39, 203, 23], "B": [352, 39, 203, 23]}, "screenshotSha256": "e0aff7f50fdf0c54023ab439b0b08633938ed3ca321159eac3b844a0cf255fce", "tolerancePx": 1, "edit": {"hideTitle": "A"}},
+        {"name": "OneTitle66", "frame": [694, 75], "controls": {"A": [13, 39, 249, 23], "B": [398, 39, 275, 23]}, "screenshotSha256": "c615626b742bfb0eb68801cadc7d7570a32e308315b487a18b32aa571c31d646", "tolerancePx": 1, "edit": {"hideTitle": "A"}},
+        {"name": "OneTitle74", "frame": [774, 75], "controls": {"A": [13, 39, 279, 23], "B": [428, 39, 325, 23]}, "screenshotSha256": "0af2fa5919bc6f32d40c42bf6a118432bf6f5d9e8179b04605639e4e0bb042f6", "tolerancePx": 1, "edit": {"hideTitle": "A"}},
+        {"name": "OneTitle82", "frame": [854, 75], "controls": {"A": [13, 39, 310, 23], "B": [459, 39, 374, 23]}, "screenshotSha256": "c51889174e8717cc8dd5a689fbd734af0d40278348ec74f89ec6c256729bf97b", "tolerancePx": 1, "edit": {"hideTitle": "A"}},
+        {"name": "OneTitle94", "frame": [974, 75], "controls": {"A": [13, 39, 394, 23], "B": [543, 39, 410, 23]}, "screenshotSha256": "3ee6dc349706ba41f70d77d55bdbd79737905c807a5152912d8138fee502d5e0", "tolerancePx": 1, "edit": {"hideTitle": "A"}},
+        {"name": "Limited82", "frame": [854, 75], "controls": {"A": [95, 39, 292, 23], "B": [523, 39, 310, 23]}, "screenshotSha256": "2f876ced3cffe03686071b72bc1dfcb9570202e38eff4ba8be4eb27da93ce1a0", "tolerancePx": 1, "edit": {"maximum": 30}},
+        {"name": "Limited94", "frame": [974, 75], "controls": {"A": [95, 39, 410, 23], "B": [641, 39, 310, 23]}, "screenshotSha256": "bc0db624cb50a8a43d9f7bcee75ab93431c3f61f02a9eb49040a3f59dc7cccce", "tolerancePx": 1, "edit": {"maximum": 30}},
+        {"name": "PhraseAuto", "frame": [589, 75], "controls": {"A": [31, 39, 203, 23], "B": [365, 39, 203, 23]}, "screenshotSha256": "d5869bd79f2be86c350786f6d9082dfb43661e0d33956ce1c857f9d61cfa0f86", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"], "B": ["Номер документа", "A very long caption"]}}},
+        {"name": "Phrase74", "frame": [774, 75], "controls": {"A": [31, 39, 275, 23], "B": [437, 39, 316, 23]}, "screenshotSha256": "0e8bfaf3be059c64521f4e819518f9be0fde7d311e2438f217e622dca46ecb1e", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"], "B": ["Номер документа", "A very long caption"]}}},
+        {"name": "Phrase86", "frame": [894, 75], "controls": {"A": [31, 39, 322, 23], "B": [484, 39, 389, 23]}, "screenshotSha256": "d48e0672f9aaef4cb664db6fff66fc296a4ea4ca682861beca5d60ddb4a300c6", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"], "B": ["Номер документа", "A very long caption"]}}},
+        {"name": "Phrase96", "frame": [994, 75], "controls": {"A": [31, 39, 401, 23], "B": [563, 39, 410, 23]}, "screenshotSha256": "f35ffa741fbd33bd2003caa62a5043ad6e36ce0af1e219103c5f504f8f4e9aac", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"], "B": ["Номер документа", "A very long caption"]}}},
+        {"name": "RefMax14", "frame": [974, 75], "controls": {"A": [95, 39, 410, 23], "B": [641, 39, 151, 23]}, "screenshotSha256": "60fbb126b20d145fd9f26275635338814ed12091eb7a9f34fd6be5f7b7ce95cc", "tolerancePx": 1, "edit": {"maximum": 14}},
+        {"name": "RefMax26", "frame": [974, 75], "controls": {"A": [95, 39, 410, 23], "B": [641, 39, 270, 23]}, "screenshotSha256": "4d7571ae633c9b3db31f1e90ff9189e81fae1892c531e714f23360f1d0f5a774", "tolerancePx": 1, "edit": {"maximum": 26}},
+        {"name": "RefMax42", "frame": [974, 75], "controls": {"A": [95, 39, 325, 23], "B": [556, 39, 397, 23]}, "screenshotSha256": "ba5d12c393f8ba7e95e09e3a4333a3c700a30027f44eafb67e890604d3f2ce0b", "tolerancePx": 1, "edit": {"maximum": 42}},
+        {"name": "RefFixed", "frame": [974, 75], "controls": {"A": [95, 39, 203, 23], "B": [434, 39, 410, 23]}, "screenshotSha256": "fca37fdf385d5f6dbda22d4c2f21afc711f1100af967a877fac6179ac5e5745b", "tolerancePx": 1, "edit": "fixLeft"},
+        {"name": "RefAuto", "frame": [658, 75], "controls": {"A": [95, 39, 203, 23], "B": [434, 39, 203, 23]}, "screenshotSha256": "b479dbb6b9ab95094965b759d43c72a603ece2b232f0dfab9112fe1bf48b1162", "tolerancePx": 1},
+        {"name": "Standard63", "frame": [664, 75], "controls": {"A": [95, 39, 205, 23], "B": [436, 39, 207, 23]}, "screenshotSha256": "b2f6ef23d0b2661d873da0739257e7a88110ee723470b22e4c950e49d58f066a", "tolerancePx": 1},
+        {"name": "Standard70", "frame": [734, 75], "controls": {"A": [95, 39, 232, 23], "B": [463, 39, 250, 23]}, "screenshotSha256": "71b697a72bd19e039ff4e3e7c4b596ba499e10ddf9fa8729bd8d73c2761a650e", "tolerancePx": 1},
+        {"name": "Standard76", "frame": [794, 75], "controls": {"A": [95, 39, 255, 23], "B": [486, 39, 287, 23]}, "screenshotSha256": "1fa3ba317eb06d1485473a2d4a9b3837a535411e3b1d1f06befdbf9db0c1195b", "tolerancePx": 1},
+        {"name": "Standard82", "frame": [854, 75], "controls": {"A": [95, 39, 279, 23], "B": [510, 39, 323, 23]}, "screenshotSha256": "f0b875735dedc3ab24be09d6257c18160f5fdb4c74472e2a0f405543407c98de", "tolerancePx": 1},
+        {"name": "Standard90", "frame": [934, 75], "controls": {"A": [95, 39, 309, 23], "B": [540, 39, 373, 23]}, "screenshotSha256": "438d4bbd215bc5ed43527bef7f01b536c9f3083e964a7d0cbac458d20835c277", "tolerancePx": 1}
+      ],
+      "ru": [
+        {"name": "StandardAuto", "frame": [691, 75], "controls": {"A": [98, 39, 203, 23], "B": [467, 39, 203, 23]}, "screenshotSha256": "25e8f1b5cb0c6ed1d569bc321aa13ad3e4b259d60342cf4d97b20df08304ac4b", "tolerancePx": 1},
+        {"name": "Standard74", "frame": [774, 75], "controls": {"A": [98, 39, 233, 23], "B": [497, 39, 256, 23]}, "screenshotSha256": "c13e3f11bf0714c9781a11e4cb5d546049e64ac15a9b640f3a00deb4ebe7bc2c", "tolerancePx": 1},
+        {"name": "Standard82", "frame": [854, 75], "controls": {"A": [98, 39, 262, 23], "B": [526, 39, 307, 23]}, "screenshotSha256": "7273b48f636c56f333d0297c0c99a4b1ab97ec3f61da39e119b0d69ebbcae0c1", "tolerancePx": 1},
+        {"name": "Standard94", "frame": [974, 75], "controls": {"A": [98, 39, 306, 23], "B": [570, 39, 383, 23]}, "screenshotSha256": "5ef0a74464123b41364b5fcfe8ccef19b5c93e37672be9664ceb1e414c1af89a", "tolerancePx": 1},
+        {"name": "Standard110", "frame": [1134, 75], "controls": {"A": [98, 39, 410, 23], "B": [674, 39, 410, 23]}, "screenshotSha256": "500bb82fcba5f97b3b33bcf1da76d9055c84caa2f268d431288e5ca05b7321fe", "tolerancePx": 1},
+        {"name": "Reverse82", "frame": [854, 75], "controls": {"A": [169, 39, 307, 23], "B": [571, 39, 262, 23]}, "screenshotSha256": "4886a9d4f541901ef7a5743d79b27d5f5c7a7e49755eedadee9f569377796e68", "tolerancePx": 1, "edit": {"titles": {"A": ["Валюта взаиморасчётов", "Settlement currency"], "B": ["Организация", "Organization"]}}},
+        {"name": "Reverse94", "frame": [974, 75], "controls": {"A": [169, 39, 383, 23], "B": [647, 39, 306, 23]}, "screenshotSha256": "b882127ebc2866e9397ebfdea208fbf1903776eea0d538243415cf596d78942c", "tolerancePx": 1, "edit": {"titles": {"A": ["Валюта взаиморасчётов", "Settlement currency"], "B": ["Организация", "Organization"]}}},
+        {"name": "ShortAuto", "frame": [624, 75], "controls": {"A": [31, 39, 203, 23], "B": [400, 39, 203, 23]}, "screenshotSha256": "d19c02f90ab36d135355d589f143a295090e86ecebf29a5c901083cfd957e999", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"]}}},
+        {"name": "Short74", "frame": [774, 75], "controls": {"A": [31, 39, 258, 23], "B": [455, 39, 298, 23]}, "screenshotSha256": "2424453ce43600b93991a166cdb09903fe86fdc5ab887a3ff41101175cd61456", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"]}}},
+        {"name": "Short94", "frame": [974, 75], "controls": {"A": [31, 39, 346, 23], "B": [543, 39, 410, 23]}, "screenshotSha256": "3eeb7c02f8dff005e0d12291979ec7103f848d7620a1be4686a3d21a2d26dd86", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"]}}},
+        {"name": "OneTitle74", "frame": [774, 75], "controls": {"A": [13, 39, 264, 23], "B": [443, 39, 310, 23]}, "screenshotSha256": "0a53a10485dadcc47055e3a92ed7297da2ec2cf0a4681543380a71f44f2de61a", "tolerancePx": 1, "edit": {"hideTitle": "A"}},
+        {"name": "OneTitle94", "frame": [974, 75], "controls": {"A": [13, 39, 364, 23], "B": [543, 39, 410, 23]}, "screenshotSha256": "2c40728baabaab12e07a9b5604321a963d220ba7c074e847644443fbb6aa0675", "tolerancePx": 1, "edit": {"hideTitle": "A"}},
+        {"name": "PhraseAuto", "frame": [583, 75], "controls": {"A": [31, 39, 203, 23], "B": [359, 39, 203, 23]}, "screenshotSha256": "076147533c8382b8b2425db33f0fe9c2d2ce16bb0b5213551fd182dc6dee2791", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"], "B": ["Номер документа", "A very long caption"]}}},
+        {"name": "Phrase74", "frame": [774, 75], "controls": {"A": [31, 39, 278, 23], "B": [434, 39, 319, 23]}, "screenshotSha256": "cea7e538b8b5a3be46a5b7d3c3dceeaa589d680776ef97b27be7c2cebc65af01", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"], "B": ["Номер документа", "A very long caption"]}}},
+        {"name": "Phrase82", "frame": [854, 75], "controls": {"A": [31, 39, 310, 23], "B": [466, 39, 367, 23]}, "screenshotSha256": "a493aec0f8ae0681f53a7d74ed6b53c5b1e3b9e80e865566b7269436642e31e5", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"], "B": ["Номер документа", "A very long caption"]}}},
+        {"name": "Phrase94", "frame": [974, 75], "controls": {"A": [31, 39, 387, 23], "B": [543, 39, 410, 23]}, "screenshotSha256": "c1b4295baf4742e73a4f3bde67b3589494034a5852730d386fac13bbefd26394", "tolerancePx": 1, "edit": {"titles": {"A": ["А", "A"], "B": ["Номер документа", "A very long caption"]}}},
+        {"name": "DoublePhraseAuto", "frame": [708, 75], "controls": {"A": [115, 39, 203, 23], "B": [484, 39, 203, 23]}, "screenshotSha256": "32ccf9057f395a7b11395114da59784d16ebbbfe962fbbbec5e5ba59893fb757", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "DoublePhrase82", "frame": [854, 75], "controls": {"A": [115, 39, 270, 23], "B": [551, 39, 282, 23]}, "screenshotSha256": "1de6c8cf65aab75ad8f1a4f8361684c5a2c6a26026078d36a844a01adc007759", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "DoublePhrase94", "frame": [974, 75], "controls": {"A": [115, 39, 325, 23], "B": [606, 39, 347, 23]}, "screenshotSha256": "0d3275c434c69ae5d650404705c24e13ae4f50099ffebaaf1efb5a8ac211ee8d", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}}
+      ]
+    },
+    "AutoBare": {
+      "en": [
+        {"name": "BareAuto", "frame": [450, 75], "controls": {"A": [13, 39, 203, 23], "B": [226, 39, 203, 23]}, "screenshotSha256": "f33b1d10ecc05d92be85fd8eb4519e78cc1d30854dacff592af8b7f6679414b3", "tolerancePx": 1},
+        {"name": "Bare60", "frame": [634, 75], "controls": {"A": [13, 39, 295, 23], "B": [318, 39, 295, 23]}, "screenshotSha256": "fb9ff1e6c0eedf08b9f19e6ac24d1e93fdf042a96966a7630a05b58b8660e560", "tolerancePx": 1},
+        {"name": "Bare76", "frame": [794, 75], "controls": {"A": [13, 39, 375, 23], "B": [398, 39, 375, 23]}, "screenshotSha256": "0a45ebebb3ae4eecbbc70e7f41bddcb4be47b5466a322d0dad38ada51ba66f49", "tolerancePx": 1},
+        {"name": "Bare94", "frame": [974, 75], "controls": {"A": [13, 39, 410, 23], "B": [433, 39, 410, 23]}, "screenshotSha256": "e697d8a20c1b05ceb9608041e2f6b4e076c2436a523d250a735e50d81f8972a4", "tolerancePx": 1},
+        {"name": "BareSmall10", "frame": [270, 75], "controls": {"A": [13, 39, 113, 23], "B": [136, 39, 113, 23]}, "screenshotSha256": "edd5158e2afeca4697e299502c4b2e75320a33af02ed2964e8a485769b57a024", "tolerancePx": 1},
+        {"name": "BareSmall18", "frame": [270, 75], "controls": {"A": [13, 39, 113, 23], "B": [136, 39, 113, 23]}, "screenshotSha256": "c2ecb0fa79710783cfff40f1a9121414dcc246c010663002cfcabbb333ba1c3e", "tolerancePx": 1},
+        {"name": "BareSmall24", "frame": [274, 75], "controls": {"A": [13, 39, 115, 23], "B": [138, 39, 115, 23]}, "screenshotSha256": "ace2b8e3aff80e61978af33a0396229bd875d28a058bd467a6fdb9947e173db2", "tolerancePx": 1},
+        {"name": "BareSmall31", "frame": [344, 75], "controls": {"A": [13, 39, 150, 23], "B": [173, 39, 150, 23]}, "screenshotSha256": "433fb050713c8126f223e4d4643892db5c1c198e9a93da303d075493d8f88e0d", "tolerancePx": 1}
+      ]
+    },
+    "AutoThree": {
+      "en": [
+        {"name": "TripleAuto", "frame": [889, 75], "controls": {"A": [31, 39, 203, 23], "B": [326, 39, 203, 23], "C": [665, 39, 203, 23]}, "screenshotSha256": "9254a54924a4628857171b0ee5f5831696a7de8eff7d5f93a68b62f3ad1e09cf", "tolerancePx": 1},
+        {"name": "Triple100", "frame": [1034, 75], "controls": {"A": [31, 39, 243, 23], "B": [366, 39, 243, 23], "C": [745, 39, 268, 23]}, "screenshotSha256": "66e9834d9bf0dddb033056f8962e0a4da91c651d5934391580754edbe0979f54", "tolerancePx": 1},
+        {"name": "Triple110", "frame": [1134, 75], "controls": {"A": [31, 39, 271, 23], "B": [394, 39, 271, 23], "C": [801, 39, 312, 23]}, "screenshotSha256": "6a461bfbc7d53fb69c997b5ed7103cd6f4fb5c78dae032594e170a8b9763b6f5", "tolerancePx": 1},
+        {"name": "Triple122", "frame": [1254, 75], "controls": {"A": [31, 39, 305, 23], "B": [428, 39, 304, 23], "C": [868, 39, 365, 23]}, "screenshotSha256": "0f5162e61f32d9423b055cf8a09052aaeaf9cb8a335f44855d4e885c00e64c3f", "tolerancePx": 1}
+      ],
+      "ru": [
+        {"name": "TripleAuto", "frame": [922, 75], "controls": {"A": [31, 39, 203, 23], "B": [329, 39, 203, 23], "C": [698, 39, 203, 23]}, "screenshotSha256": "a3adf98b16f039dbe147ef47d98fb5df2fea84e2eb1e07f5dbcc1d74af83ac26", "tolerancePx": 1},
+        {"name": "Triple110", "frame": [1134, 75], "controls": {"A": [31, 39, 260, 23], "B": [386, 39, 259, 23], "C": [811, 39, 302, 23]}, "screenshotSha256": "d683f3abe45bd3509fb22c171bdd919a14b77ea3bfd1077aa3221eb6d17aa5ea", "tolerancePx": 1},
+        {"name": "Triple130", "frame": [1334, 75], "controls": {"A": [31, 39, 313, 23], "B": [439, 39, 313, 23], "C": [918, 39, 395, 23]}, "screenshotSha256": "9a467e48fcb09755c9f2780c19f1fee6298e0806f90f9a91f29088e34a5a1372", "tolerancePx": 1}
+      ]
+    },
+    "AutoMultiple": {
+      "en": [
+        {"name": "MultiAuto", "frame": [658, 107], "controls": {"A": [95, 39, 203, 23], "B": [95, 71, 203, 23], "C": [434, 39, 203, 23], "D": [434, 71, 203, 23]}, "screenshotSha256": "1f109b3f69a5160bbf1414662308c0193acc049c1f5c6ad5fd18d5414e3b5386", "tolerancePx": 1},
+        {"name": "Multi82", "frame": [854, 107], "controls": {"A": [95, 39, 279, 23], "B": [95, 71, 279, 23], "C": [510, 39, 323, 23], "D": [510, 71, 323, 23]}, "screenshotSha256": "7f70ca451463da21aad2438d262f54f1d3c7403b652e1fc9cca19c4d1553aef1", "tolerancePx": 1},
+        {"name": "Multi94", "frame": [974, 107], "controls": {"A": [95, 39, 325, 23], "B": [95, 71, 325, 23], "C": [556, 39, 397, 23], "D": [556, 71, 397, 23]}, "screenshotSha256": "06d41264c676f701656efbcd0be8f8ed3a59cbbd47c0bde866dc79d2d766d064", "tolerancePx": 1},
+        {"name": "Multi112", "frame": [1154, 107], "controls": {"A": [95, 39, 410, 23], "B": [95, 71, 410, 23], "C": [641, 39, 410, 23], "D": [641, 71, 410, 23]}, "screenshotSha256": "8835469b9b74f700f090395c8c4e99b6df5414a416ce6f4915f9399f5bb976cf", "tolerancePx": 1}
+      ],
+      "ru": [
+        {"name": "Multi82", "frame": [854, 107], "controls": {"A": [98, 39, 262, 23], "B": [98, 71, 262, 23], "C": [526, 39, 307, 23], "D": [526, 71, 307, 23]}, "screenshotSha256": "111248e164c7b849618d5e1b6f64fdb507b19b6fac43089390e72bb131c47347", "tolerancePx": 1},
+        {"name": "Multi94", "frame": [974, 107], "controls": {"A": [98, 39, 306, 23], "B": [98, 71, 306, 23], "C": [570, 39, 383, 23], "D": [570, 71, 383, 23]}, "screenshotSha256": "c0636506ff548a8c255894cf7c001304591a85ee14ee8740db8ec40369f1182e", "tolerancePx": 1}
+      ]
+    },
+    "AutoMixed": {
+      "en": [
+        {"name": "Mixed78", "frame": [814, 75], "controls": {"A": [95, 39, 286, 23], "B": [517, 39, 276, 23]}, "screenshotSha256": "9be378044f1beea441db4b00e49965bf6eca6c1a91a7d0ff773db15c4f32776d", "tolerancePx": 2},
+        {"name": "Mixed94", "frame": [974, 75], "controls": {"A": [95, 39, 353, 23], "B": [584, 39, 369, 23]}, "screenshotSha256": "49d69bd77c235a70a43996335e10625f2061ff4ea92d747fc97f1295ec1d1419", "tolerancePx": 2}
+      ]
+    },
+    "AutoConflicting": {
+      "en": [
+        {"name": "ConflictingAuto", "frame": [621, 107], "controls": {"A": [31, 39, 203, 23], "B": [397, 39, 203, 23], "C": [397, 71, 203, 23]}, "screenshotSha256": "e3a47d2a44e83339858db94ca7ffab9667ea8885de6edfefe6e28591655d53a4", "tolerancePx": 1},
+        {"name": "Conflicting92", "frame": [954, 107], "controls": {"A": [31, 39, 332, 23], "B": [526, 39, 407, 23], "C": [526, 71, 407, 23]}, "screenshotSha256": "f17bf339bb53bb6835ba41fe29fcf0ca4d3b93a64d3948dc041f7f1719a05a1c", "tolerancePx": 1},
+        {"name": "Conflicting110", "frame": [1134, 107], "controls": {"A": [31, 39, 410, 23], "B": [604, 39, 410, 23], "C": [604, 71, 410, 23]}, "screenshotSha256": "66b13ae0ffc3e4460848689db0407d2e52ffb4464d32837dbc72d086ffbb54cd", "tolerancePx": 1}
+      ]
+    },
+    "AutoString": {
+      "en": [
+        {"name": "StrMax14", "frame": [974, 75], "controls": {"A": [95, 39, 410, 23], "B": [641, 39, 151, 23]}, "screenshotSha256": "40018be5c9b12ea3c6843e86061daa1ff3625a57d30ffb2137a989aab7968b0d", "tolerancePx": 2, "edit": {"maximum": 14}},
+        {"name": "StrMax30", "frame": [974, 75], "controls": {"A": [95, 39, 410, 23], "B": [641, 39, 310, 23]}, "screenshotSha256": "8c94500967a4ea0ce7a07ac0608e862285c9f08334449b175c2d2feb3433a720", "tolerancePx": 2, "edit": {"maximum": 30}},
+        {"name": "StringAt60", "frame": [634, 75], "controls": {"A": [95, 39, 183, 23], "B": [414, 39, 199, 23]}, "screenshotSha256": "6b16f68b2d1c3cb2de5604ae3475227db3f7e92b7382e3a8e3e87c136e12d69e", "tolerancePx": 2},
+        {"name": "StringAt72", "frame": [754, 75], "controls": {"A": [95, 39, 227, 23], "B": [458, 39, 275, 23]}, "screenshotSha256": "fb6035611293f6640f24de88170614414af7956ccf7007e357ab9d34c32df21b", "tolerancePx": 2},
+        {"name": "StringAt82", "frame": [854, 75], "controls": {"A": [95, 39, 263, 23], "B": [494, 39, 339, 23]}, "screenshotSha256": "a4e10568f93d4301c0ad1c3f3977f836415f1ddce287369b1c8e3713927dc58f", "tolerancePx": 2}
+      ]
+    }
+  }
+}

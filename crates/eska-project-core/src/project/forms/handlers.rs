@@ -5,12 +5,13 @@ use std::{ops::Range, path::PathBuf};
 use super::{
     ComposedForm, EffectiveElement, ElementIdentity, FORM_NAMESPACE, FormContextError, FormPreview,
     PropertySource, SourcedProperty,
+    context::{open_designer, source_identity},
 };
 use crate::{
     application::ContextSnapshot,
     project::{
         designer_source,
-        metadata_model::{MetadataProperty, MetadataValue, ModuleRole, ObjectId, ProjectScope},
+        metadata_model::{MetadataProperty, MetadataValue, ModuleRole, ObjectId},
         query::{self, bsl},
     },
 };
@@ -136,11 +137,7 @@ pub fn handler_source(
     else {
         return Ok(None);
     };
-    let scope = input.member().map_or(ProjectScope::Standalone, |member| {
-        ProjectScope::Member(member.clone())
-    });
-    let (source, _) = designer_source::open_analysis_project(input.project().clone(), scope)
-        .map_err(FormContextError::Source)?;
+    let source = open_designer(input)?;
     let Some(module) = source
         .sources(owner)
         .map_err(FormContextError::Source)?
@@ -150,7 +147,7 @@ pub fn handler_source(
         return Ok(None);
     };
     Ok(Some(FormHandlerSource {
-        id: super::context::source_identity(context, input.project().source(), &module.path),
+        id: source_identity(context, input.project().source(), &module.path),
         root: input.project().source().to_path_buf(),
         path: module.path,
         name: handler.name.clone(),

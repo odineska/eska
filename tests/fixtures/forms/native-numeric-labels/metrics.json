@@ -1,0 +1,480 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "linux",
+  "dpi": 96,
+  "interface": "Taxi",
+  "fixtures": {
+    "Totals": {
+      "ru": {
+        "captions": [
+          "Количество (итог):",
+          "Сумма (итог):"
+        ],
+        "cases": [
+          {
+            "name": "auto",
+            "frame": [
+              407,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              373,
+              25
+            ],
+            "screenshotSha256": "0d5c9eaad41b254a1290593abcf3016f6f847d8e3b9d0943c2d93b8cdcab1e43"
+          },
+          {
+            "name": "medium",
+            "frame": [
+              554,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              520,
+              25
+            ],
+            "screenshotSha256": "bc7f5a9c827c2e4b89e369033bd16c4a793b5349a5165c73abd6b0780ffd4356"
+          },
+          {
+            "name": "wide",
+            "frame": [
+              774,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              740,
+              25
+            ],
+            "screenshotSha256": "0bd42f805733d650e4772c9394cf9b9977f38b5362d22df6c2afb4d4c3d59cfb"
+          },
+          {
+            "name": "at-cap",
+            "frame": [
+              1014,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              889,
+              25
+            ],
+            "screenshotSha256": "cee5be527d7365d0a8bd1150b501644124089c6f3cc654c7be1eaa881a348170"
+          },
+          {
+            "name": "beyond-cap",
+            "frame": [
+              1254,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              889,
+              25
+            ],
+            "screenshotSha256": "2261737875b1e403e0c75fe8a77e3a1db4ff4dd2edaa592cd2af35b053c13704"
+          },
+          {
+            "name": "manual-max",
+            "frame": [
+              1014,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              696,
+              25
+            ],
+            "screenshotSha256": "ea884b7ee95a8bc172a3e524725e75fa7bff118e090c64c0b91e38c1e188b0da"
+          }
+        ]
+      },
+      "en": {
+        "captions": [
+          "Quantity (total):",
+          "Amount (total):"
+        ],
+        "cases": [
+          {
+            "name": "auto",
+            "frame": [
+              390,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              356,
+              25
+            ],
+            "screenshotSha256": "c034ed01f61a124ae51503d4c32f49c2c580e8c9ac60598c05f2c608e6b32f88"
+          },
+          {
+            "name": "medium",
+            "frame": [
+              554,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              520,
+              25
+            ],
+            "screenshotSha256": "47b7a85864473b9d27eaef820a5df8e2dc4c5e6e843c786ba661f4b816bfc89e"
+          },
+          {
+            "name": "wide",
+            "frame": [
+              774,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              740,
+              25
+            ],
+            "screenshotSha256": "fc89e9c6bb1e1e04c74c4b1757d3c25faa49131e2312e1f4ae9b707e1d48e697"
+          },
+          {
+            "name": "at-cap",
+            "frame": [
+              1014,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              872,
+              25
+            ],
+            "screenshotSha256": "2f40078c31bcdf98875305f9e377205bfc329bb54829794b5a8a3bf078e8746e"
+          },
+          {
+            "name": "beyond-cap",
+            "frame": [
+              1254,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              872,
+              25
+            ],
+            "screenshotSha256": "1ef0e1fba801f4e0030cbd4d9aecfa8be500c7a5e0bc72bcf6278b4637d4d7b2"
+          },
+          {
+            "name": "manual-max",
+            "frame": [
+              1014,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              679,
+              25
+            ],
+            "screenshotSha256": "60dc39f3205776d52cc407977c1feefc23a6f07152daeac8a15a233f42bdbdef"
+          }
+        ]
+      }
+    },
+    "Painted": {
+      "ru": {
+        "captions": [
+          "Количество (итог):",
+          "Сумма (итог):"
+        ],
+        "cases": [
+          {
+            "name": "painted",
+            "frame": [
+              1014,
+              79
+            ],
+            "row": [
+              13,
+              39,
+              893,
+              27
+            ],
+            "screenshotSha256": "044f3ea9dfdcc86ff47b4780c50ed5ffce4d0bdd1865b34881c90e350e01c19a",
+            "controls": [
+              [
+                135,
+                44,
+                335,
+                17
+              ],
+              [
+                566,
+                44,
+                335,
+                17
+              ]
+            ]
+          }
+        ]
+      },
+      "en": {
+        "captions": [
+          "Quantity (total):",
+          "Amount (total):"
+        ],
+        "cases": [
+          {
+            "name": "painted",
+            "frame": [
+              1014,
+              79
+            ],
+            "row": [
+              13,
+              39,
+              876,
+              27
+            ],
+            "screenshotSha256": "70d046d2c99086347c0261b9cd20b2eef4f75e1085068b12540a84b25be321f4",
+            "controls": [
+              [
+                113,
+                44,
+                335,
+                17
+              ],
+              [
+                549,
+                44,
+                335,
+                17
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "NoTitle": {
+      "ru": {
+        "captions": [
+          null,
+          null
+        ],
+        "cases": [
+          {
+            "name": "no-title",
+            "frame": [
+              1014,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              686,
+              25
+            ],
+            "screenshotSha256": "25eaa2a12dd82a5b91c89848e344726c962bd476252c9bd7b71b2c827cfcd19f"
+          }
+        ]
+      },
+      "en": {
+        "captions": [
+          null,
+          null
+        ],
+        "cases": [
+          {
+            "name": "no-title",
+            "frame": [
+              1014,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              686,
+              25
+            ],
+            "screenshotSha256": "a1ca4de151a44895f288e82611b0bea34bc4844c5571435c39433daa35680998"
+          }
+        ]
+      }
+    },
+    "Fixed": {
+      "ru": {
+        "captions": [
+          "Количество (итог):",
+          "Сумма (итог):"
+        ],
+        "cases": [
+          {
+            "name": "no-stretch",
+            "frame": [
+              1014,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              373,
+              25
+            ],
+            "screenshotSha256": "2f60ac6f9226177d65a5b1e403693f2a6ceef8fedfe5840a74fb324fcb319fcd"
+          }
+        ]
+      },
+      "en": {
+        "captions": [
+          "Quantity (total):",
+          "Amount (total):"
+        ],
+        "cases": [
+          {
+            "name": "no-stretch",
+            "frame": [
+              1014,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              356,
+              25
+            ],
+            "screenshotSha256": "b1bdb2dd079b61e369a100e2e2e25d59d1cf668decb7873aaf56a87fbe0d9d2f"
+          }
+        ]
+      }
+    },
+    "Authored": {
+      "ru": {
+        "captions": [
+          "Количество (итог):",
+          "Сумма (итог):"
+        ],
+        "cases": [
+          {
+            "name": "authored-width",
+            "frame": [
+              532,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              498,
+              25
+            ],
+            "screenshotSha256": "b0b966ad8626c35c4101ece93c4f716a565944549403c77b3496d67c6f43b70b"
+          }
+        ]
+      },
+      "en": {
+        "captions": [
+          "Quantity (total):",
+          "Amount (total):"
+        ],
+        "cases": [
+          {
+            "name": "authored-width",
+            "frame": [
+              515,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              481,
+              25
+            ],
+            "screenshotSha256": "dd7123da253441c4eec4edd91eb7f5cad93bf22f9a983abbd8ecc580a72c30a2"
+          }
+        ]
+      }
+    },
+    "Numbers": {
+      "ru": {
+        "captions": [
+          "А:",
+          "Б:"
+        ],
+        "cases": [
+          {
+            "name": "numbers-auto",
+            "frame": [
+              324,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              290,
+              25
+            ],
+            "screenshotSha256": "4a0505f716844a49021c6260cca31c496007a3f756393923e0cdc3f8bd2e93a4"
+          },
+          {
+            "name": "numbers-wide",
+            "frame": [
+              1014,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              722,
+              25
+            ],
+            "screenshotSha256": "1acd412c23c674179f603f4b7a47ffa79c5e3f3c09f7c2c4208926bfbf2fcb74"
+          }
+        ]
+      },
+      "en": {
+        "captions": [
+          "A:",
+          "B:"
+        ],
+        "cases": [
+          {
+            "name": "numbers-auto",
+            "frame": [
+              324,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              290,
+              25
+            ],
+            "screenshotSha256": "9366c5e33d562b4ef3afa1a260ae146f35ae745c0c78fccaf73695a1e6430dcb"
+          },
+          {
+            "name": "numbers-wide",
+            "frame": [
+              1014,
+              77
+            ],
+            "row": [
+              13,
+              39,
+              722,
+              25
+            ],
+            "screenshotSha256": "810ca66dbe0c757a37c1027302e97380df681fafe633bff74040813c3544ca42"
+          }
+        ]
+      }
+    }
+  }
+}

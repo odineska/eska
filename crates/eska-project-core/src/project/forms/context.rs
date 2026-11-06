@@ -12,7 +12,7 @@ use super::{ComposedForm, FormDocument, FormInput, FormParseError, compose, pars
 use crate::{
     application::{ContextSnapshot, ContextSource, SourceRole},
     project::{
-        designer_source::{self, LogicalLocation, SourceError},
+        designer_source::{self, DesignerSource, LogicalLocation, SourceError},
         metadata_model::{ObjectId, ProjectScope},
     },
 };
@@ -95,51 +95,29 @@ pub fn load(
     if !overlays.is_empty() && !inputs.is_empty() {
         return Err(FormContextError::InvalidOverlay);
     }
+    let sources = FormSources::new(context, selected)?;
     let (prepared, metadata) =
-        super::preparation::resolve_inputs(context, selected, owner, inputs)?;
+        super::preparation::resolve_inputs(context, &sources, owner, inputs)?;
     let overlays = if prepared.is_empty() {
         overlays
     } else {
         &prepared
     };
-    let selected_source = context_source(context, selected)?;
-    let external = selected_source.role() == SourceRole::ExternalObject;
     let mut dependencies = Vec::new();
     let mut documents = Vec::new();
     let mut selected_found = false;
     let mut input_bytes = 0usize;
-    for input in context.context.sources().iter().filter(|source| {
-        if external {
-            source.project().source() == selected
-        } else {
-            source.role() != SourceRole::ExternalObject
-        }
-    }) {
-        let scope = input.member().map_or(ProjectScope::Standalone, |member| {
-            ProjectScope::Member(member.clone())
-        });
-        let (source, _) = designer_source::open_analysis_project(input.project().clone(), scope)
-            .map_err(FormContextError::Source)?;
-        let Some(location) = source
-            .sources(owner)
-            .map_err(FormContextError::Source)?
-            .into_iter()
-            .find(|location| {
-                location.role == designer_source::SourceRole::Payload
-                    && location
-                        .path
-                        .file_name()
-                        .is_some_and(|name| name == "Form.xml")
-            })
-        else {
+    for input in sources.roots().filter(|input| sources.composes(input)) {
+        let source = open_designer(input)?;
+        let Some(path) = managed_payload(&source, owner)? else {
             continue;
         };
-        let id = source_identity(context, input.project().source(), &location.path);
+        let id = source_identity(context, input.project().source(), &path);
         let overlay = overlays.iter().find(|overlay| overlay.source == id);
         let text = match overlay {
             Some(overlay) => overlay.text.clone(),
             None => source
-                .read_xml(&location.path)
+                .read_xml(&path)
                 .map_err(FormContextError::Source)?
                 .ok_or(FormContextError::MissingForm)?,
         };
@@ -155,7 +133,7 @@ pub fn load(
         dependencies.push(FormDependency {
             id,
             root: input.project().source().into(),
-            path: location.path,
+            path,
             snapshot: document.revision.clone(),
             version: overlay.map(|overlay| overlay.version.clone()),
             member: input.member().map(|member| member.as_str().into()),
@@ -173,7 +151,7 @@ pub fn load(
     let mut resources = super::resources::load(
         context,
         owner,
-        selected_source,
+        &sources,
         &documents,
         &mut dependencies,
         overlays,
@@ -212,16 +190,66 @@ fn build_preview(
     })
 }
 
-pub(super) fn context_source<'a>(
-    context: &'a ContextSnapshot,
-    selected: &Path,
-) -> Result<&'a ContextSource, FormContextError> {
-    context
-        .context
-        .sources()
-        .iter()
-        .find(|source| source.project().source() == selected)
-        .ok_or(FormContextError::MemberMismatch)
+pub(super) struct FormSources<'a> {
+    sources: &'a [ContextSource],
+    selected: &'a ContextSource,
+}
+
+impl<'a> FormSources<'a> {
+    pub(super) fn new(
+        context: &'a ContextSnapshot,
+        selected: &Path,
+    ) -> Result<Self, FormContextError> {
+        let sources = context.context.sources();
+        let selected = sources
+            .iter()
+            .find(|source| source.project().source() == selected)
+            .ok_or(FormContextError::MemberMismatch)?;
+        Ok(Self { sources, selected })
+    }
+
+    pub(super) fn roots(&self) -> impl Iterator<Item = &'a ContextSource> + '_ {
+        self.sources.iter().filter(|source| {
+            source.role() != SourceRole::ExternalObject
+                || source.project().source() == self.selected.project().source()
+        })
+    }
+
+    /// External forms borrow metadata from the application but compose only their own form XML.
+    pub(super) fn composes(&self, source: &ContextSource) -> bool {
+        if self.selected.role() == SourceRole::ExternalObject {
+            source.project().source() == self.selected.project().source()
+        } else {
+            source.role() != SourceRole::ExternalObject
+        }
+    }
+}
+
+pub(super) fn open_designer(input: &ContextSource) -> Result<DesignerSource, FormContextError> {
+    let scope = input.member().map_or(ProjectScope::Standalone, |member| {
+        ProjectScope::Member(member.clone())
+    });
+    designer_source::open_analysis_project(input.project().clone(), scope)
+        .map(|(source, _)| source)
+        .map_err(FormContextError::Source)
+}
+
+pub(super) fn managed_payload(
+    source: &DesignerSource,
+    owner: &ObjectId,
+) -> Result<Option<PathBuf>, FormContextError> {
+    Ok(source
+        .sources(owner)
+        .map_err(FormContextError::Source)?
+        .into_iter()
+        .find(|location| {
+            location.role == designer_source::SourceRole::Payload
+                && location
+                    .path
+                    .file_name()
+                    .is_some_and(|name| name == "Form.xml")
+        })
+        .map(|location| location.path))
 }
 
 pub(super) fn source_identity(context: &ContextSnapshot, root: &Path, path: &Path) -> String {

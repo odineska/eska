@@ -1,0 +1,70 @@
+{
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "captions": {"ru": ["Количество (итог):", "Сумма (итог):"], "en": ["Quantity (total):", "Amount (total):"]},
+  "fixtures": {
+    "Totals": {
+      "ru": [
+        {"name": "wrap-minimum", "frame": [275, 107], "row": [13, 39, 241, 55], "lines": [["Количество", "(итог):"], ["Сумма", "(итог)", ":"]], "screenshotSha256": "b48f5584ca7a5fdae4f5f2aca88a03e3def95353e30c16b0b79f8930f14f0ffe"},
+        {"name": "wrap-one", "frame": [374, 92], "row": [13, 39, 340, 40], "lines": [["Количество", "(итог):"], ["Сумма (итог):"]], "screenshotSha256": "242f78d4a259cef2abd982cd6dd4f2c7ed5ac149e59542d665afd6e4890aa4a2"}
+      ],
+      "en": [
+        {"name": "wrap-minimum", "frame": [258, 92], "row": [13, 39, 224, 40], "lines": [["Quantity", "(total):"], ["Amount", "(total):"]], "screenshotSha256": "c02ae22e6fa304e20ed68fe342221b1cff539cd74e4f1854770adced8ba10c04"},
+        {"name": "wrap-one", "frame": [374, 92], "row": [13, 39, 340, 40], "lines": [["Quantity", "(total):"], ["Amount (total):"]], "screenshotSha256": "3fde02911a8693451369ad81a0c0d03e88513b0d5b1c59f13235a91b6121b8be"}
+      ]
+    },
+    "Painted": {
+      "ru": [
+        {"name": "paint-n8at20", "frame": [279, 107], "row": [13, 39, 245, 55], "lines": [["Количество", "(итог):"], ["Сумма", "(итог)", ":"]], "screenshotSha256": "d04b4c503cce1ddf9ea03388c669a415f90c09889aef2db20494fca417a6322e", "controls": [[94, 44, 52, 17], [201, 44, 52, 17]]},
+        {"name": "paint-n8at24", "frame": [279, 107], "row": [13, 39, 245, 55], "lines": [["Количество", "(итог):"], ["Сумма", "(итог)", ":"]], "screenshotSha256": "b7e7780d85cbb337112be106a7cff18eed087b9010dc54ea07c0343b60a43d55", "controls": [[94, 44, 52, 17], [201, 44, 52, 17]]},
+        {"name": "paint-n8at26", "frame": [294, 107], "row": [13, 39, 260, 55], "lines": [["Количество", "(итог):"], ["Сумма", "(итог)", ":"]], "screenshotSha256": "12a55593971ce4eb4b9e5807af2c89ec46e2dad43517cf972e1d71bef0debdd5", "controls": [[94, 44, 59, 17], [208, 44, 60, 17]]},
+        {"name": "paint-n8at28", "frame": [314, 107], "row": [13, 39, 280, 55], "lines": [["Количество", "(итог):"], ["Сумма", "(итог)", ":"]], "screenshotSha256": "57e45b961e0583926e4e94ea3f70f06c96b1f3d429f05288b0694192be03dc65", "controls": [[94, 44, 69, 17], [218, 44, 70, 17]]},
+        {"name": "paint-n8at30", "frame": [334, 92], "row": [13, 39, 300, 40], "lines": [["Количество", "(итог):"], ["Сумма", "(итог):"]], "screenshotSha256": "336e0b3e61b8b74ecf2faf21e3dc3714ca905ad03c71bc5d45c641f6c50ca095", "controls": [[95, 44, 79, 17], [230, 44, 78, 17]]},
+        {"name": "paint-n8at32", "frame": [354, 92], "row": [13, 39, 320, 40], "lines": [["Количество", "(итог):"], ["Сумма", "(итог):"]], "screenshotSha256": "39daf3cecbe9a02f8d7bcbd584b1b556743dbc4117e0cb4f2a657b4c40bba54d", "controls": [[101, 44, 84, 17], [244, 44, 84, 17]]},
+        {"name": "paint-n8at34", "frame": [374, 92], "row": [13, 39, 340, 40], "lines": [["Количество", "(итог):"], ["Сумма (итог):"]], "screenshotSha256": "4f22593049f7da3faf909ccd8e77f4886d2bc596496969150230bd6fd38b5207", "controls": [[95, 44, 78, 17], [269, 44, 79, 17]]},
+        {"name": "paint-n8at35", "frame": [384, 92], "row": [13, 39, 350, 40], "lines": [["Количество", "(итог):"], ["Сумма (итог):"]], "screenshotSha256": "9c22428c27538d355dc92b4cd686f43c5d70c943357e440b9631913ef3f64078", "controls": [[97, 44, 81, 17], [274, 44, 84, 17]]},
+        {"name": "paint-n8at36", "frame": [394, 92], "row": [13, 39, 360, 40], "lines": [["Количество", "(итог):"], ["Сумма (итог):"]], "screenshotSha256": "447542e3675404ffe8768ec2c0fd624aab10c35e1772eec8a9d541e1105250c5", "controls": [[100, 44, 83, 17], [279, 44, 89, 17]]},
+        {"name": "paint-n8at37", "frame": [404, 92], "row": [13, 39, 370, 40], "lines": [["Количество", "(итог):"], ["Сумма (итог):"]], "screenshotSha256": "626ccd1fcd796a8596ff9806086a6fe51d5839573f2cc60b8709751ab09bd778", "controls": [[102, 44, 86, 17], [284, 44, 94, 17]]},
+        {"name": "paint-n8at38", "frame": [414, 79], "row": [13, 39, 380, 27], "lines": [["Количество (итог):"], ["Сумма (итог):"]], "screenshotSha256": "3c2a5ce2bdf721fdd92ac9b05f8a95a438ca36c6dfc7b0be7476e56cf9e8c795", "controls": [[135, 44, 79, 17], [310, 44, 78, 17]]},
+        {"name": "paint-n8at39", "frame": [424, 79], "row": [13, 39, 390, 27], "lines": [["Количество (итог):"], ["Сумма (итог):"]], "screenshotSha256": "aed519704cf76feaf0146103fe6115c27f5dddb868ef8ebdd1030d4a040d47f2", "controls": [[135, 44, 84, 17], [315, 44, 83, 17]]},
+        {"name": "paint-n8at40", "frame": [434, 79], "row": [13, 39, 400, 27], "lines": [["Количество (итог):"], ["Сумма (итог):"]], "screenshotSha256": "cf16b2d4e4927f373abd38752771c1227b7148c5ed1285686b1297ffd7e8c4c8", "controls": [[135, 44, 90, 17], [321, 44, 87, 17]]},
+        {"name": "paint-n8auto", "frame": [411, 79], "row": [13, 39, 377, 27], "lines": [["Количество (итог):"], ["Сумма (итог):"]], "screenshotSha256": "58e371d00a951e605d5a4c0c0a65c4b41bc4082d275002b886d9e78428d556aa", "controls": [[135, 44, 77, 17], [308, 44, 77, 17]]},
+        {"name": "wrap-fixed", "frame": [374, 92], "row": [13, 39, 340, 40], "lines": [["Количество", "(итог):"], ["Сумма (итог):"]], "screenshotSha256": "3b6b806d5a221b9c726e09b29c59220aba2f0ecf82235ccd9112737e314260f8", "controls": [[95, 44, 77, 17], [268, 44, 80, 17]], "edit": "left-fixed"},
+        {"name": "wrap-fixed-minimum", "frame": [304, 107], "row": [13, 39, 270, 55], "lines": [["Количество", "(итог):"], ["Сумма", "(итог)", ":"]], "screenshotSha256": "ae017b09150206ff03200a714f1fea64e5a9ed7c356465329c44da2cc8ac958d", "controls": [[94, 44, 77, 17], [226, 44, 52, 17]], "edit": "left-fixed"}
+      ],
+      "en": [
+        {"name": "paint-n8at20", "frame": [262, 92], "row": [13, 39, 228, 40], "lines": [["Quantity", "(total):"], ["Amount", "(total):"]], "screenshotSha256": "d8eecd822adb043a363224097fbb2f8349b226697c79c5d9c9842cd333478e94", "controls": [[72, 44, 52, 17], [184, 44, 52, 17]]},
+        {"name": "paint-n8at24", "frame": [274, 92], "row": [13, 39, 240, 40], "lines": [["Quantity", "(total):"], ["Amount", "(total):"]], "screenshotSha256": "4d7532551e9b996228a7c6479eb52ee29e7e26aeb2203f43c6d10b995d8d1c66", "controls": [[72, 44, 58, 17], [190, 44, 58, 17]]},
+        {"name": "paint-n8at26", "frame": [294, 92], "row": [13, 39, 260, 40], "lines": [["Quantity", "(total):"], ["Amount", "(total):"]], "screenshotSha256": "8ccc99a50393fb0ebddc36c4b5a57fd047c520eb6bf54abcb97c9f5d9b57cc23", "controls": [[72, 44, 68, 17], [200, 44, 68, 17]]},
+        {"name": "paint-n8at28", "frame": [314, 92], "row": [13, 39, 280, 40], "lines": [["Quantity", "(total):"], ["Amount", "(total):"]], "screenshotSha256": "209865f3d4940efbadce2fa17670cfdefc448e0969a50dc1d33d3b5a7c66b805", "controls": [[72, 44, 78, 17], [211, 44, 77, 17]]},
+        {"name": "paint-n8at30", "frame": [334, 92], "row": [13, 39, 300, 40], "lines": [["Quantity", "(total):"], ["Amount", "(total):"]], "screenshotSha256": "f9cd9851dabdf0454092d5285256ba0a1afc8a4f218670bb96d3d292205d819a", "controls": [[76, 44, 84, 17], [224, 44, 84, 17]]},
+        {"name": "paint-n8at32", "frame": [354, 92], "row": [13, 39, 320, 40], "lines": [["Quantity", "(total):"], ["Amount (total):"]], "screenshotSha256": "7c91c87e55e9ef24358b80037ffc38246a39bcaf6dd8a3bc0a8dc68bc29dd00f", "controls": [[72, 44, 77, 17], [250, 44, 78, 17]]},
+        {"name": "paint-n8at34", "frame": [374, 92], "row": [13, 39, 340, 40], "lines": [["Quantity", "(total):"], ["Amount (total):"]], "screenshotSha256": "5c6bf37d2d05a150025d335c00892ed222ad5ad04834ff7d49a9a891fc26f1ab", "controls": [[76, 44, 82, 17], [259, 44, 89, 17]]},
+        {"name": "paint-n8at35", "frame": [384, 92], "row": [13, 39, 350, 40], "lines": [["Quantity", "(total):"], ["Amount (total):"]], "screenshotSha256": "7b4dd615fd4084f1d2fd85b8ab03e8ddcf999864c6067330e9573ddd82d95f29", "controls": [[78, 44, 85, 17], [264, 44, 94, 17]]},
+        {"name": "paint-n8at36", "frame": [394, 79], "row": [13, 39, 360, 27], "lines": [["Quantity (total):"], ["Amount (total):"]], "screenshotSha256": "7be2fc1073a3da2f2dbf8534661331df7b55bda36902c44b03e03d823c1c5456", "controls": [[113, 44, 77, 17], [291, 44, 77, 17]]},
+        {"name": "paint-n8at37", "frame": [404, 79], "row": [13, 39, 370, 27], "lines": [["Quantity (total):"], ["Amount (total):"]], "screenshotSha256": "f966c99deb782292c26cb2c27a27c280cb6a59ae0b1c8fd276a20d1e312513be", "controls": [[113, 44, 82, 17], [296, 44, 82, 17]]},
+        {"name": "paint-n8at38", "frame": [414, 79], "row": [13, 39, 380, 27], "lines": [["Quantity (total):"], ["Amount (total):"]], "screenshotSha256": "bc78e86f6b13bdaaeddc4d6b545039fcbeb326c49432553eeff8157df0e589cd", "controls": [[113, 44, 87, 17], [301, 44, 87, 17]]},
+        {"name": "paint-n8at39", "frame": [424, 79], "row": [13, 39, 390, 27], "lines": [["Quantity (total):"], ["Amount (total):"]], "screenshotSha256": "381ab6eaa91fe1ae08dc6c36b5d2c1fe5eb7c9a2364c94273fd37a0ce1fc06b1", "controls": [[113, 44, 92, 17], [306, 44, 92, 17]]},
+        {"name": "paint-n8at40", "frame": [434, 79], "row": [13, 39, 400, 27], "lines": [["Quantity (total):"], ["Amount (total):"]], "screenshotSha256": "bb64feb1c5c9ccbf2be543dc20493a7611a8d7d477ab304cba73ef50dc8098cb", "controls": [[113, 44, 97, 17], [311, 44, 97, 17]]},
+        {"name": "paint-n8auto", "frame": [394, 79], "row": [13, 39, 360, 27], "lines": [["Quantity (total):"], ["Amount (total):"]], "screenshotSha256": "bba4baa0af9cf79158d43a484506a632899ac9349cd284616da2fdd8073eee1a", "controls": [[113, 44, 77, 17], [291, 44, 77, 17]]},
+        {"name": "wrap-fixed", "frame": [374, 92], "row": [13, 39, 340, 40], "lines": [["Quantity", "(total):"], ["Amount (total):"]], "screenshotSha256": "03f1d0d1bfffebbc805fe49c8403964deeca864505d4e2062b7620085d5c7b58", "controls": [[77, 44, 77, 17], [255, 44, 93, 17]], "edit": "left-fixed"}
+      ]
+    },
+    "PaintedNormal": {
+      "ru": [
+        {"name": "paint-n10at29", "frame": [324, 107], "row": [13, 39, 290, 55], "lines": [["Количество", "(итог):"], ["Сумма", "(итог)", ":"]], "screenshotSha256": "cf43410942f20e78636d40a54573e76e18547241a2e835b394f28db263e04b26", "controls": [[94, 44, 74, 19], [223, 44, 75, 19]]},
+        {"name": "paint-n10at32", "frame": [354, 107], "row": [13, 39, 320, 55], "lines": [["Количество", "(итог):"], ["Сумма", "(итог)", ":"]], "screenshotSha256": "2d1da244f039fb6c838570e8da225951d9e1f632ab20111d4614ae4139981ca4", "controls": [[94, 44, 89, 19], [238, 44, 90, 19]]},
+        {"name": "paint-n10at34", "frame": [374, 92], "row": [13, 39, 340, 40], "lines": [["Количество", "(итог):"], ["Сумма", "(итог):"]], "screenshotSha256": "1cef261e335698382c9d1aacac599e03183bf1b6472bc1be30d986b6c400763d", "controls": [[97, 44, 97, 19], [251, 44, 97, 19]]},
+        {"name": "paint-n10at38", "frame": [414, 92], "row": [13, 39, 380, 40], "lines": [["Количество", "(итог):"], ["Сумма (итог):"]], "screenshotSha256": "1b391f5c9709521084cffde6ade6105e92d31e2c1e8d41e8756f31f8c9296e83", "controls": [[97, 44, 96, 19], [289, 44, 99, 19]]},
+        {"name": "paint-n10at40", "frame": [434, 92], "row": [13, 39, 400, 40], "lines": [["Количество", "(итог):"], ["Сумма (итог):"]], "screenshotSha256": "5f05513e268be0a3e7820104daf65e24146ef0847745589c8ef9fd6ec660db71", "controls": [[101, 44, 102, 19], [299, 44, 109, 19]]}
+      ],
+      "en": [
+        {"name": "paint-n10at29", "frame": [324, 92], "row": [13, 39, 290, 40], "lines": [["Quantity", "(total):"], ["Amount", "(total):"]], "screenshotSha256": "2a7586d905fe70f3bfe268d883f8ad72a97aeaea9c0b39cb0cab089f5b514f63", "controls": [[72, 44, 83, 19], [215, 44, 83, 19]]},
+        {"name": "paint-n10at32", "frame": [354, 92], "row": [13, 39, 320, 40], "lines": [["Quantity", "(total):"], ["Amount", "(total):"]], "screenshotSha256": "02b9247c595ed52e50576c7a6ae486b1dff4fd7c2e25a59f920c442c7a29c851", "controls": [[74, 44, 96, 19], [232, 44, 96, 19]]},
+        {"name": "paint-n10at34", "frame": [374, 92], "row": [13, 39, 340, 40], "lines": [["Quantity", "(total):"], ["Amount", "(total):"]], "screenshotSha256": "7be8a4c182499e9b1e9f4471ecb596d377a4afe7f39bdf7059b370bc452ffe88", "controls": [[77, 44, 103, 19], [245, 44, 103, 19]]},
+        {"name": "paint-n10at38", "frame": [414, 92], "row": [13, 39, 380, 40], "lines": [["Quantity", "(total):"], ["Amount (total):"]], "screenshotSha256": "a247ded9dfccf6b74b904ecc4ebc5d3f5597ebf9c7a90e54e9b1aaf602784235", "controls": [[77, 44, 101, 19], [279, 44, 109, 19]]},
+        {"name": "paint-n10at40", "frame": [434, 81], "row": [13, 39, 400, 29], "lines": [["Quantity (total):"], ["Amount (total):"]], "screenshotSha256": "015652450139eb071058e157fadbc82fe10b84a605d97d1284cb0a1a41360d45", "controls": [[113, 44, 97, 19], [311, 44, 97, 19]]}
+      ]
+    }
+  }
+}

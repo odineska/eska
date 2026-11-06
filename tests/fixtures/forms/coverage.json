@@ -3580,7 +3580,8 @@
       "fixtures": [
         "tests/fixtures/forms/native-groups",
         "tests/fixtures/forms/native-through-align-rows",
-        "tests/fixtures/forms/native-column-widths"
+        "tests/fixtures/forms/native-column-widths",
+        "tests/fixtures/forms/native-numeric-labels"
       ],
       "driver": {
         "repository": "eska-vscode-explorer",
@@ -3627,11 +3628,86 @@
             }
           ],
           "clientCommit": "8c2cb79"
+        },
+        {
+          "report": "docs/measurements/t157-numeric-label-rows-linux.json",
+          "sha256": "08377489ee0c754454c2ef457631329739bf2f4c552df240e063f65fd9580aa0",
+          "assertions": [
+            {
+              "pointer": "/numericLabelWidthsAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "6509c60"
+        },
+        {
+          "report": "docs/measurements/t157-numeric-caption-wrap-linux.json",
+          "sha256": "e872e3f0043dd984b31be9fbe0ed1fc87c5618c04e8d52aaa1d8af3882e4aa7e",
+          "assertions": [
+            {
+              "pointer": "/measuredWrapCasesAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "80edb62"
+        },
+        {
+          "report": "docs/measurements/t157-automatic-reference-lanes-linux.json",
+          "sha256": "22ad810dca0bd38b9ebebd750093100134fffcf187528e869a0d597df96c7a32",
+          "assertions": [
+            {
+              "pointer": "/automaticLaneCasesAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "c8e08eb"
+        },
+        {
+          "report": "docs/measurements/t157-narrow-reference-lanes-linux.json",
+          "sha256": "0af10c4e0b62ee0b84db28a4217880543f1e1c77ff815e9a318d9018bdbb34bf",
+          "assertions": [
+            {
+              "pointer": "/narrowLaneCasesAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "20a9e2f"
+        },
+        {
+          "report": "docs/measurements/t157-native-invoice-resize-linux.json",
+          "sha256": "116b972cbf6be082c0fdab6e17e6a20798809566457c407d6dbc0c2da310f8e3",
+          "clientCommit": "16de583",
+          "assertions": [
+            {
+              "pointer": "/nativeFixedSiblingCasesAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ]
         }
       ],
-      "lastConfirmation": "docs/measurements/t157-column-widths-linux.json",
-      "remaining": "Wide automatic lanes, native real-form resize, nested/hidden/wrapped/stretch combinations, and full native geometry.",
-      "nextAction": "Measure the real document totals group and wide automatic lanes with unequal captions."
+      "lastConfirmation": "docs/measurements/t157-native-invoice-resize-linux.json",
+      "remaining": "Root command projection and placement, vertical offsets and table height on the real form, wrap thresholds for long and reordered numeric captions, other nested/shared-title layouts, and full native geometry.",
+      "nextAction": "Resolve metadata command captions and native command groups on the real form, then measure adaptive root-command placement."
     },
     {
       "id": "tables.native-context-fixtures",

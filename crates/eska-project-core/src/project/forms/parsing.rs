@@ -2,13 +2,13 @@
 
 use std::{collections::HashSet, fmt::Write};
 
-use roxmltree::{Attribute, Document, Node, ParsingOptions};
+use roxmltree::{Attribute, Node};
 use sha2::{Digest, Sha256};
 
 use super::{
     ElementFamily, ElementIdentity, ElementKey, ElementKind, FORM_NAMESPACE, FormDefinition,
     FormDiagnostic, FormDocument, FormElement, FormIssue, FormParseError, FormPart, FormSnapshot,
-    LocatedQualifier, MAX_FORM_BYTES, MAX_FORM_ELEMENTS,
+    LocatedQualifier, MAX_FORM_BYTES, MAX_FORM_ELEMENTS, references,
 };
 use crate::project::{
     metadata_model::PropertyKey,
@@ -26,19 +26,11 @@ pub fn parse(source: &str, input: String) -> Result<FormDocument, FormParseError
     if input.len() > MAX_FORM_BYTES {
         return Err(FormParseError::TooLarge);
     }
-    metadata_parser::check_envelope(&input).map_err(|error| match error {
+    let document = metadata_parser::parse_xml(&input, 262_144).map_err(|error| match error {
         ParseError::TooLarge => FormParseError::TooLarge,
         ParseError::TooDeep => FormParseError::TooDeep,
         _ => FormParseError::InvalidXml,
     })?;
-    let document = Document::parse_with_options(
-        &input,
-        ParsingOptions {
-            nodes_limit: 262_144,
-            ..Default::default()
-        },
-    )
-    .map_err(|_| FormParseError::InvalidXml)?;
     let node = document.root_element();
     if !node.has_tag_name((FORM_NAMESPACE, "Form")) {
         return Err(FormParseError::UnsupportedRoot);
@@ -61,6 +53,8 @@ pub fn parse(source: &str, input: String) -> Result<FormDocument, FormParseError
             })
         })
         .transpose()?;
+    let references = references::collect(node);
+    let resource_ids = references::discover_resources(node, &references, true);
     Ok(FormDocument {
         source: source.to_owned(),
         version: node.attribute("version").map(str::to_owned),
@@ -78,7 +72,8 @@ pub fn parse(source: &str, input: String) -> Result<FormDocument, FormParseError
         parameters: parser.parameters,
         diagnostics: parser.diagnostics,
         base,
-        references: super::references::collect(node),
+        references,
+        resource_ids,
         input,
     })
 }

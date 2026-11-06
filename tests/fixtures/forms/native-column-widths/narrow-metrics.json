@@ -1,0 +1,104 @@
+{
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "fixtures": {
+    "AutoReference": {
+      "en": [
+        {"name": "NarrowMinimum", "frame": [420, 82], "controls": {"A": [95, 39, 113, 23], "B": [286, 39, 113, 23]}, "screenshotSha256": "5132f41b5caa87b19e59cb2e3a778f8006c7dda622007bf895521f457b6d8ced", "tolerancePx": 1, "captions": {"A": ["Organization:"], "B": ["Settlement", "currency:"]}},
+        {"name": "NarrowStandard45", "frame": [484, 82], "controls": {"A": [95, 39, 138, 23], "B": [311, 39, 152, 23]}, "screenshotSha256": "5dcb8f5c79664bb6ad55b2a3134246087a7131bb876377b7052dc983b796d12c", "tolerancePx": 1},
+        {"name": "NarrowStandard49", "frame": [524, 82], "controls": {"A": [95, 39, 153, 23], "B": [326, 39, 177, 23]}, "screenshotSha256": "4ae3244bf4bfa1dc0d4c93fcc1b1eb7890d1a7341f70dc09aff9b496ac027596", "tolerancePx": 1},
+        {"name": "NarrowStandard55", "frame": [584, 82], "controls": {"A": [95, 39, 187, 23], "B": [360, 39, 203, 23]}, "screenshotSha256": "bbc20d777c3c8863f198c7be5e4f448a49effcfde2a29389132f7bb55027a8a5", "tolerancePx": 1},
+        {"name": "NarrowStandard57", "frame": [604, 82], "controls": {"A": [95, 39, 205, 23], "B": [378, 39, 205, 23]}, "screenshotSha256": "cd3ad72df30539cfc7f730d397c50af73db44f21d5c679a80b41691bbb6151fb", "tolerancePx": 1},
+        {"name": "NarrowStandard59", "frame": [624, 82], "controls": {"A": [95, 39, 213, 23], "B": [389, 39, 214, 23]}, "screenshotSha256": "312b9d8c37fe3ff785407bf91c8abcd9ad044a1328a1e587c2800a30dc3580a4", "tolerancePx": 1},
+        {"name": "NarrowStandard60", "frame": [634, 82], "controls": {"A": [95, 39, 218, 23], "B": [395, 39, 218, 23]}, "screenshotSha256": "b6d9b83db1137878b663d0f6a1e06964dfd84a43414b8e15772a75477f9024af", "tolerancePx": 1},
+        {"name": "NarrowStandard61", "frame": [644, 82], "controls": {"A": [95, 39, 222, 23], "B": [401, 39, 222, 23]}, "screenshotSha256": "9be6930b979b3a113d5585762b5e69dc37bee3bee4a09e5b7963d337a20b2c75", "tolerancePx": 1},
+        {"name": "NarrowStandard62", "frame": [654, 82], "controls": {"A": [95, 39, 226, 23], "B": [406, 39, 227, 23]}, "screenshotSha256": "07c2f10d7786500390c2ddf180001b450f22d58dbe9dd996db413fb6d2881b30", "tolerancePx": 1},
+        {"name": "NarrowStandard63", "frame": [664, 75], "controls": {"A": [95, 39, 205, 23], "B": [436, 39, 207, 23]}, "screenshotSha256": "9601dbadc9e8bf4c0ab8ffe0f49381ffb30e27cacacdc62dd315e3fe2c14f93b", "tolerancePx": 1},
+        {"name": "NarrowDouble20", "frame": [399, 82], "controls": {"A": [74, 39, 113, 23], "B": [265, 39, 113, 23]}, "screenshotSha256": "25dd08f3d878480cfcf3e975ab11bec24a04355d3e517f07da47daa2c3de4a54", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble43", "frame": [464, 82], "controls": {"A": [74, 39, 143, 23], "B": [295, 39, 148, 23]}, "screenshotSha256": "1454f42e5aad4d4477a0b21276b35c5c066374fe713dffb3dcde1e3efcdb4dcb", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble48", "frame": [514, 82], "controls": {"A": [74, 39, 166, 23], "B": [318, 39, 175, 23]}, "screenshotSha256": "6ce427ec6b041848cd80ca2023b338f3060290bdccb8652c51fd86d535f380e4", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble53", "frame": [564, 82], "controls": {"A": [74, 39, 190, 23], "B": [342, 39, 201, 23]}, "screenshotSha256": "d2f639e61cf483bd270e55212f0d3104eaed8bdded6469fae9c072c0f66ba6be", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble57", "frame": [604, 82], "controls": {"A": [77, 39, 212, 23], "B": [370, 39, 213, 23]}, "screenshotSha256": "1b0efaad302d5987b8acc6e626e03f842ab4a182aa957ffcaa6acf4fc179b4e1", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble59", "frame": [624, 82], "controls": {"A": [79, 39, 220, 23], "B": [382, 39, 221, 23]}, "screenshotSha256": "370834a73bcee47e55203254621d0b557d0c0491d22da6e877b53f3df277f1b7", "tolerancePx": 1, "captions": {"A": ["Customer", "group:"], "B": ["Settlement", "currency:"]}, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble61", "frame": [644, 82], "controls": {"A": [75, 39, 205, 23], "B": [416, 39, 207, 23]}, "screenshotSha256": "fa230a2206514bf91aa51bd4ba511f044a2a7e81947e8ab7f3e8dd26cb98e4e4", "tolerancePx": 1, "captions": {"A": ["Customer", "group:"], "B": ["Settlement currency:"]}, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble63", "frame": [664, 82], "controls": {"A": [77, 39, 212, 23], "B": [425, 39, 218, 23]}, "screenshotSha256": "aee0f98ebba13a154b13d3815f0a47b03e85eb921173482555ab6c764e49cf3b", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble65", "frame": [684, 75], "controls": {"A": [114, 39, 206, 23], "B": [456, 39, 207, 23]}, "screenshotSha256": "0cdbfd9f6dbcf0b8e30148a97ab8dddead23c261f1530edf45757d0915cf83fc", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble68", "frame": [714, 75], "controls": {"A": [114, 39, 221, 23], "B": [471, 39, 222, 23]}, "screenshotSha256": "bd037993104fc9fc4705781592fe210fb4a16983f1982645fd82c4bca715119f", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowExplicit20", "frame": [420, 82], "controls": {"A": [95, 39, 113, 23], "B": [286, 39, 113, 23]}, "screenshotSha256": "1bd458d855f8b06c0919e005a773c7b30d3db29cf416545ea75fa1a00c3dc15e", "tolerancePx": 1, "edit": {"widths": {"A": 30}}},
+        {"name": "NarrowExplicit54", "frame": [574, 82], "controls": {"A": [95, 39, 209, 23], "B": [382, 39, 171, 23]}, "screenshotSha256": "2b074b027b375570401b6af297157c39b2fd2fdd8169891b1231433fde06482c", "tolerancePx": 1, "edit": {"widths": {"A": 30}}},
+        {"name": "NarrowExplicit62", "frame": [654, 82], "controls": {"A": [95, 39, 258, 23], "B": [431, 39, 202, 23]}, "screenshotSha256": "8b6f46149d002bb0543f10390e25e99c6905ca654f87943e87072a8e69451653", "tolerancePx": 1, "edit": {"widths": {"A": 30}}},
+        {"name": "NarrowExplicit68", "frame": [714, 82], "controls": {"A": [95, 39, 317, 23], "B": [490, 39, 203, 23]}, "screenshotSha256": "3c49e9f1bd493195f399f09677c595c69668c41a54a833c72bcc5724fa617d48", "tolerancePx": 1, "edit": {"widths": {"A": 30}}},
+        {"name": "NarrowExplicit72", "frame": [754, 82], "controls": {"A": [95, 39, 355, 23], "B": [528, 39, 205, 23]}, "screenshotSha256": "f54b1af3fd5e8356ddb37049558e8c9b73e12d3ac594bf37e3e3330db4ca5d83", "tolerancePx": 1, "edit": {"widths": {"A": 30}}},
+        {"name": "NarrowExplicit77", "frame": [804, 82], "controls": {"A": [95, 39, 384, 23], "B": [562, 39, 221, 23]}, "screenshotSha256": "973765cd6c403d3e71155ac1b44dd449880a87393c493d6a00ef9239e02c2375", "tolerancePx": 1, "edit": {"widths": {"A": 30}}},
+        {"name": "NarrowFixed20", "frame": [510, 82], "controls": {"A": [95, 39, 203, 23], "B": [376, 39, 113, 23]}, "screenshotSha256": "83423c50d914f1ff62d96ce6a52328f7df32d129d848d4c3615a7da1d0f33de1", "tolerancePx": 1, "edit": "fixLeft"},
+        {"name": "NarrowFixed50", "frame": [534, 82], "controls": {"A": [95, 39, 203, 23], "B": [376, 39, 137, 23]}, "screenshotSha256": "bf931ec7bc5e07f29c412ee72d80100e9b755d7059b856db688729bde398abd4", "tolerancePx": 1, "edit": "fixLeft"},
+        {"name": "NarrowFixed57", "frame": [604, 82], "controls": {"A": [95, 39, 203, 23], "B": [377, 39, 206, 23]}, "screenshotSha256": "88f26d024d43d57ff99776110200c4a2c7727aa8670047eeacb84795576ea66b", "tolerancePx": 1, "edit": "fixLeft"},
+        {"name": "NarrowFixed61", "frame": [644, 82], "controls": {"A": [95, 39, 203, 23], "B": [386, 39, 237, 23]}, "screenshotSha256": "093132c5f1be194fe2b9fbaaa80d1e67f279203c6fbeaf14b47935fe287a23c7", "tolerancePx": 1, "edit": "fixLeft"}
+      ],
+      "ru": [
+        {"name": "NarrowMinimum", "frame": [461, 82], "controls": {"A": [98, 39, 113, 23], "B": [327, 39, 113, 23]}, "screenshotSha256": "b91e58489bbd3c0c8f1e86339299a883c086c67dd51667e78b24c8ab6ad9b2ac", "tolerancePx": 1, "captions": {"A": ["Организация:"], "B": ["Валюта", "взаиморасчётов:"]}},
+        {"name": "Narrow52", "frame": [554, 82], "controls": {"A": [98, 39, 150, 23], "B": [364, 39, 169, 23]}, "screenshotSha256": "492f963652390c449ef9f085f22394367792771ba7298a593488490132e65df1", "tolerancePx": 1},
+        {"name": "Narrow60", "frame": [634, 82], "controls": {"A": [98, 39, 196, 23], "B": [410, 39, 203, 23]}, "screenshotSha256": "e4fa60ede6b2135b9dde849cddfccf1d763a1585bf483141174961b64f657b30", "tolerancePx": 1},
+        {"name": "Narrow65", "frame": [684, 82], "controls": {"A": [98, 39, 220, 23], "B": [443, 39, 220, 23]}, "screenshotSha256": "976f3b38e5df0726b595505b7ed4f59b8bf726ae609071f7c37a55ad0552fd98", "tolerancePx": 1},
+        {"name": "NarrowStandard46", "frame": [494, 82], "controls": {"A": [98, 39, 126, 23], "B": [340, 39, 133, 23]}, "screenshotSha256": "05b845989665247600d6b121ac41d8404ad6828ead6bcae46bc275bed9b5577a", "tolerancePx": 1, "captions": {"A": ["Организация:"], "B": ["Валюта", "взаиморасчётов:"]}},
+        {"name": "NarrowStandard49", "frame": [524, 82], "controls": {"A": [98, 39, 138, 23], "B": [352, 39, 151, 23]}, "screenshotSha256": "5cab7ff80db6848dcadd4d996b16a22e36ab6be6a057e796eca4a249c8ea65b8", "tolerancePx": 1},
+        {"name": "NarrowStandard55", "frame": [584, 82], "controls": {"A": [98, 39, 162, 23], "B": [376, 39, 187, 23]}, "screenshotSha256": "066f8d7fa128efb967d82ee569010c511d2eff849e0d085870a84866a03cfcb7", "tolerancePx": 1},
+        {"name": "NarrowStandard57", "frame": [604, 82], "controls": {"A": [98, 39, 169, 23], "B": [383, 39, 200, 23]}, "screenshotSha256": "6989f0eed9f9b45b1f86fadc3f8e7d4a806ed7be402bf175e35d619cc81f0c75", "tolerancePx": 1},
+        {"name": "NarrowStandard61", "frame": [644, 82], "controls": {"A": [98, 39, 204, 23], "B": [419, 39, 204, 23]}, "screenshotSha256": "6d63d14f034e61682ba05fe94b6939030a13db6497662f325ed4c075d5ec10ca", "tolerancePx": 1},
+        {"name": "NarrowStandard62", "frame": [654, 82], "controls": {"A": [98, 39, 208, 23], "B": [425, 39, 208, 23]}, "screenshotSha256": "11814d0cefdca54f4147f8e7aae230e59ebe14838e489bd1a8486e6e26e947b8", "tolerancePx": 1},
+        {"name": "NarrowStandard64", "frame": [674, 82], "controls": {"A": [98, 39, 216, 23], "B": [437, 39, 216, 23]}, "screenshotSha256": "ac85f7f4f421a78ba8d60a870b9ecdfb61f5a46d2c37e00302797f46fbcbcadf", "tolerancePx": 1},
+        {"name": "NarrowStandard66", "frame": [694, 75], "controls": {"A": [98, 39, 204, 23], "B": [468, 39, 205, 23]}, "screenshotSha256": "e948e81b05ab3199af89613e5db1b45e9076ee07ed28991c6af10322bcbaf1e7", "tolerancePx": 1},
+        {"name": "NarrowDouble20", "frame": [433, 82], "controls": {"A": [70, 39, 113, 23], "B": [299, 39, 113, 23]}, "screenshotSha256": "c541a0261856b1d6e4eecfffa408437bb3dd9d473642581a3117ae0aa618912c", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble47", "frame": [504, 82], "controls": {"A": [70, 39, 147, 23], "B": [333, 39, 150, 23]}, "screenshotSha256": "d1eb80a151bef38e0b7e2f1b671b003b4ad71c2c552deb06357351c38ae2248f", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble51", "frame": [544, 82], "controls": {"A": [70, 39, 167, 23], "B": [353, 39, 170, 23]}, "screenshotSha256": "8fc416be1af1af53f251e1f3eed7ac449a7a59a3260f604dffafc97802aec9e7", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble55", "frame": [584, 82], "controls": {"A": [70, 39, 187, 23], "B": [373, 39, 190, 23]}, "screenshotSha256": "b5efd1708ed77c843e3e92a918ad529975f1ece92841b00752a1f0215b673a85", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble59", "frame": [624, 82], "controls": {"A": [71, 39, 207, 23], "B": [396, 39, 207, 23]}, "screenshotSha256": "ee9a353c33ac8ce975f949b1bbed4e8904ec83381479ad6895613c79d3636e3c", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble62", "frame": [654, 82], "controls": {"A": [74, 39, 218, 23], "B": [415, 39, 218, 23]}, "screenshotSha256": "338a9c5802f7d2f821f4017043a9ddec642fbc35466fb612af23b15f93e7755e", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble65", "frame": [684, 82], "controls": {"A": [72, 39, 210, 23], "B": [448, 39, 215, 23]}, "screenshotSha256": "0413ac8cb8230f80e47b1792cb8b31aec5aaec404792fbe1a7adb3e5dca43cde", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble67", "frame": [704, 82], "controls": {"A": [74, 39, 216, 23], "B": [456, 39, 227, 23]}, "screenshotSha256": "edb0715823f52b9caa30929c21c9207402906cdfd79f96046452cee4cab16bc4", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowDouble70", "frame": [734, 75], "controls": {"A": [115, 39, 215, 23], "B": [496, 39, 217, 23]}, "screenshotSha256": "e59f608f914183f4ed9e3644662b764e4863b141b9959514a12396abb0a5df11", "tolerancePx": 1, "edit": {"titles": {"A": ["Группа клиента", "Customer group"]}}},
+        {"name": "NarrowFixed20", "frame": [551, 82], "controls": {"A": [98, 39, 203, 23], "B": [417, 39, 113, 23]}, "screenshotSha256": "fac5458fb6a78f8e0ef3a350719426578606c1187915478e28a4e921f341a983", "tolerancePx": 1, "edit": "fixLeft"},
+        {"name": "NarrowFixed53", "frame": [564, 82], "controls": {"A": [98, 39, 203, 23], "B": [417, 39, 126, 23]}, "screenshotSha256": "4487ce471d9f093920dc407d84ceb0aa32111759c1f8f4d7bb011cdc6e58834b", "tolerancePx": 1, "edit": "fixLeft"},
+        {"name": "NarrowFixed61", "frame": [644, 82], "controls": {"A": [98, 39, 203, 23], "B": [418, 39, 205, 23]}, "screenshotSha256": "addb28dbdb5f41f39a3ea62e9a810be5e1f16385c9d8d9816e17a438268ef0c9", "tolerancePx": 1, "edit": "fixLeft"},
+        {"name": "NarrowFixed65", "frame": [684, 82], "controls": {"A": [98, 39, 203, 23], "B": [431, 39, 232, 23]}, "screenshotSha256": "4edede6ccd61ca70cb49b950121c451934eb549bb7b1e48c688b0a5d6a920abd", "tolerancePx": 1, "edit": "fixLeft"}
+      ]
+    },
+    "AutoMixed": {
+      "en": [
+        {"name": "NarrowMixed20", "frame": [378, 82], "controls": {"A": [95, 39, 113, 23], "B": [286, 39, 71, 23]}, "screenshotSha256": "3eecd468122d1ef6875a9d45975de04725c169390d0275d3a8d669b6d9f895db", "tolerancePx": 1},
+        {"name": "NarrowMixed48", "frame": [514, 82], "controls": {"A": [95, 39, 165, 23], "B": [338, 39, 155, 23]}, "screenshotSha256": "e9c66ceb6f8802cc39b048960155f8515e2d3fd972d3c651fbdee95ae8cb49d1", "tolerancePx": 1},
+        {"name": "NarrowMixed52", "frame": [554, 82], "controls": {"A": [95, 39, 199, 23], "B": [372, 39, 161, 23]}, "screenshotSha256": "76850f4e16590533db54ec4b094d5872432a1733cc63c3592bb5808bfc2a6b8e", "tolerancePx": 1},
+        {"name": "NarrowMixed54", "frame": [574, 82], "controls": {"A": [95, 39, 210, 23], "B": [386, 39, 167, 23]}, "screenshotSha256": "2fd53f124fda7a9368431338aa3cfd2d80b2f08f22d9621a0f4abae39fec4a6d", "tolerancePx": 1},
+        {"name": "NarrowMixed56", "frame": [594, 82], "controls": {"A": [95, 39, 220, 23], "B": [398, 39, 175, 23]}, "screenshotSha256": "10b309c99463010119972a40f89682ce3e5352c1d478797d860030ce6a2723dc", "tolerancePx": 1},
+        {"name": "NarrowMixed59", "frame": [624, 75], "controls": {"A": [95, 39, 206, 23], "B": [437, 39, 166, 23]}, "screenshotSha256": "8eb8ce66f26937dbe5eb6d367bcf025e5a6b8d826583a2d863bac4e85c73dba0", "tolerancePx": 1},
+        {"name": "NarrowMixed61", "frame": [644, 75], "controls": {"A": [95, 39, 215, 23], "B": [446, 39, 177, 23]}, "screenshotSha256": "c6bc4541529e83aaf3d525e6f807fd6416dd307cc10ff7d6d249bf097e696192", "tolerancePx": 1}
+      ],
+      "ru": []
+    },
+    "AutoMultiple": {
+      "en": [],
+      "ru": [
+        {"name": "NarrowMulti20", "frame": [461, 114], "controls": {"A": [98, 39, 113, 23], "B": [91, 71, 120, 23], "C": [276, 39, 164, 23], "D": [327, 71, 113, 23]}, "screenshotSha256": "5cd251b048660651c20212dbf1f8aacdde0764f0f99c58c8c0712bd0cd6b530b", "tolerancePx": 1, "captions": {"A": ["Организация:"], "B": ["Кладовщик:"], "C": ["Валюта:"], "D": ["Валюта", "взаиморасчётов:"]}},
+        {"name": "NarrowMulti52", "frame": [554, 114], "controls": {"A": [98, 39, 150, 23], "B": [98, 71, 150, 23], "C": [364, 39, 169, 23], "D": [364, 71, 169, 23]}, "screenshotSha256": "85039607e3511381fa7083e3e09c60d4f01fff00d1bc84864ace2fab4198d0a6", "tolerancePx": 1},
+        {"name": "NarrowMulti59", "frame": [624, 114], "controls": {"A": [98, 39, 186, 23], "B": [98, 71, 186, 23], "C": [400, 39, 203, 23], "D": [400, 71, 203, 23]}, "screenshotSha256": "1757da8f2cf8fe83dc1d4d64a26a1f8bf22e2332e5bef154668989b84035fdf7", "tolerancePx": 1},
+        {"name": "NarrowMulti64", "frame": [674, 114], "controls": {"A": [98, 39, 216, 23], "B": [98, 71, 216, 23], "C": [437, 39, 216, 23], "D": [437, 71, 216, 23]}, "screenshotSha256": "d65822601ee9c1edb7e9b4ac11be234e0354a3777bd6c38143b574d1a90f153e", "tolerancePx": 1},
+        {"name": "NarrowMulti66", "frame": [694, 107], "controls": {"A": [98, 39, 204, 23], "B": [98, 71, 204, 23], "C": [468, 39, 205, 23], "D": [468, 71, 205, 23]}, "screenshotSha256": "c34d7ddffe8ef1a9cbb729bfeb97493ee4eb2e9698aa3beb536eb8bbc0a8c5d9", "tolerancePx": 1, "captions": {"D": ["Валюта взаиморасчётов:"]}}
+      ]
+    },
+    "AutoThree": {
+      "en": [
+        {"name": "NarrowTriple20", "frame": [561, 82], "controls": {"A": [31, 39, 113, 23], "B": [236, 39, 113, 23], "C": [427, 39, 113, 23]}, "screenshotSha256": "edc9aa09e8014495e45f01d66ff31edda8720d17cb274ae8f968e2bc56b27590", "tolerancePx": 1},
+        {"name": "NarrowTriple60", "frame": [634, 82], "controls": {"A": [31, 39, 133, 23], "B": [256, 39, 134, 23], "C": [468, 39, 145, 23]}, "screenshotSha256": "a7fabeeb015e5a296e6cda2020949e910c4ef11ea33438d041900f543414db14", "tolerancePx": 1},
+        {"name": "NarrowTriple75", "frame": [784, 82], "controls": {"A": [31, 39, 179, 23], "B": [302, 39, 180, 23], "C": [560, 39, 203, 23]}, "screenshotSha256": "f647b5c71aecdc9b748f5dea7060c25a73a11f4e518ce10293c1f0fb8a28ad72", "tolerancePx": 1},
+        {"name": "NarrowTriple81", "frame": [844, 82], "controls": {"A": [31, 39, 207, 23], "B": [330, 39, 207, 23], "C": [616, 39, 207, 23]}, "screenshotSha256": "0abb63c4749c64310f90678e27593d371fc12202cb7a3bc6e74daeec04dc9e52", "tolerancePx": 1},
+        {"name": "NarrowTriple85", "frame": [884, 82], "controls": {"A": [31, 39, 219, 23], "B": [342, 39, 219, 23], "C": [644, 39, 219, 23]}, "screenshotSha256": "5a876678fa7214c50e73a9661d0f86eb2241e822617be237de606c312b275ca6", "tolerancePx": 1}
+      ],
+      "ru": [
+        {"name": "NarrowTriple20", "frame": [602, 82], "controls": {"A": [31, 39, 113, 23], "B": [239, 39, 113, 23], "C": [468, 39, 113, 23]}, "screenshotSha256": "317ffb37394fc51c67136f13945636edd8228b96efe0df83860f0b4d809982ce", "tolerancePx": 1},
+        {"name": "NarrowTriple65", "frame": [684, 82], "controls": {"A": [31, 39, 136, 23], "B": [262, 39, 137, 23], "C": [515, 39, 148, 23]}, "screenshotSha256": "562088370a018dddf0031bf8c02521ad02b75d1fa3341375142b9cb607a131f1", "tolerancePx": 1},
+        {"name": "NarrowTriple78", "frame": [814, 82], "controls": {"A": [31, 39, 174, 23], "B": [300, 39, 174, 23], "C": [590, 39, 203, 23]}, "screenshotSha256": "5d93c976a9c624e17d4efdca29325bb033317100d98c90b563856bb9d5147a81", "tolerancePx": 1},
+        {"name": "NarrowTriple85", "frame": [884, 82], "controls": {"A": [31, 39, 206, 23], "B": [332, 39, 206, 23], "C": [656, 39, 207, 23]}, "screenshotSha256": "d5cbcdf921fc8141c2118095563b6a541be8c86da92d1ac01e99d7d55a4e98d2", "tolerancePx": 1}
+      ]
+    }
+  }
+}

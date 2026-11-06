@@ -6,16 +6,13 @@ use std::{
 };
 
 use crate::{
-    application::{ContextSnapshot, SourceRole},
-    project::{
-        designer_source,
-        metadata_model::{ObjectId, ProjectScope},
-    },
+    application::ContextSnapshot,
+    project::{designer_source::DesignerSource, metadata_model::ObjectId},
 };
 
 use super::{
     FormContextError, FormOverlay,
-    context::{context_source, source_identity},
+    context::{FormSources, managed_payload, open_designer, source_identity},
 };
 
 /// A dirty XML candidate is checked against the selected context before its text can be used.
@@ -53,45 +50,27 @@ pub fn prepare(
     selected: &Path,
     owner: &ObjectId,
 ) -> Result<FormPreparation, FormContextError> {
-    let selected_source = context_source(context, selected)?;
-    let external = selected_source.role() == SourceRole::ExternalObject;
+    let sources = FormSources::new(context, selected)?;
     let mut roots = Vec::new();
     let mut forms = Vec::new();
     let mut selected_found = false;
-    for input in context.context.sources().iter().filter(|source| {
-        source.role() != SourceRole::ExternalObject || source.project().source() == selected
-    }) {
+    for input in sources.roots() {
         roots.push(input.project().source().to_path_buf());
         if roots.len() > super::MAX_FORM_DEPENDENCIES {
             return Err(FormContextError::TooManyResources);
         }
-        if external && input.project().source() != selected {
+        if !sources.composes(input) {
             continue;
         }
-        let scope = input.member().map_or(ProjectScope::Standalone, |member| {
-            ProjectScope::Member(member.clone())
-        });
-        let (source, _) = designer_source::open_analysis_project(input.project().clone(), scope)
-            .map_err(FormContextError::Source)?;
-        let Some(location) = source
-            .sources(owner)
-            .map_err(FormContextError::Source)?
-            .into_iter()
-            .find(|location| {
-                location.role == designer_source::SourceRole::Payload
-                    && location
-                        .path
-                        .file_name()
-                        .is_some_and(|name| name == "Form.xml")
-            })
-        else {
+        let source = open_designer(input)?;
+        let Some(path) = managed_payload(&source, owner)? else {
             continue;
         };
         selected_found |= input.project().source() == selected;
         forms.push(FormInputSource {
-            id: source_identity(context, input.project().source(), &location.path),
+            id: source_identity(context, input.project().source(), &path),
             root: input.project().source().to_path_buf(),
-            path: location.path,
+            path,
         });
         if forms.len() > super::MAX_FORM_DEPENDENCIES {
             return Err(FormContextError::TooManyResources);
@@ -111,14 +90,13 @@ pub fn prepare(
 
 pub(super) fn resolve_inputs(
     context: &ContextSnapshot,
-    selected: &Path,
+    sources: &FormSources<'_>,
     owner: &ObjectId,
     inputs: Vec<FormInput>,
 ) -> Result<(Vec<FormOverlay>, HashSet<String>), FormContextError> {
     if inputs.len() > super::MAX_FORM_DEPENDENCIES {
         return Err(FormContextError::TooManyResources);
     }
-    let external = context_source(context, selected)?.role() == SourceRole::ExternalObject;
     let mut groups: BTreeMap<PathBuf, Vec<FormInput>> = BTreeMap::new();
     let mut bytes = 0usize;
     for input in inputs {
@@ -132,26 +110,14 @@ pub(super) fn resolve_inputs(
     let mut metadata = HashSet::new();
     let mut seen = HashSet::new();
     for (root, inputs) in groups {
-        let input_source = context
-            .context
-            .sources()
-            .iter()
-            .find(|source| {
-                source.project().source() == root
-                    && (source.role() != SourceRole::ExternalObject || root == selected)
-            })
+        let input_source = sources
+            .roots()
+            .find(|source| source.project().source() == root)
             .ok_or(FormContextError::InvalidOverlay)?;
-        let scope = input_source
-            .member()
-            .map_or(ProjectScope::Standalone, |member| {
-                ProjectScope::Member(member.clone())
-            });
-        let (source, _) =
-            designer_source::open_analysis_project(input_source.project().clone(), scope)
-                .map_err(FormContextError::Source)?;
+        let source = open_designer(input_source)?;
         for input in inputs {
             let form =
-                checked_input_is_form(&source, owner, &input, !external || root == selected)?;
+                checked_input_is_form(&source, owner, &input, sources.composes(input_source))?;
             let id = source_identity(context, input_source.project().source(), &input.path);
             if !seen.insert(id.clone()) {
                 return Err(FormContextError::InvalidOverlay);
@@ -170,7 +136,7 @@ pub(super) fn resolve_inputs(
 }
 
 fn checked_input_is_form(
-    source: &designer_source::DesignerSource,
+    source: &DesignerSource,
     owner: &ObjectId,
     input: &FormInput,
     form_allowed: bool,
@@ -191,17 +157,7 @@ fn checked_input_is_form(
         .path
         .file_name()
         .is_some_and(|name| name.eq_ignore_ascii_case("Form.xml"));
-    if form
-        && (!form_allowed
-            || !source
-                .sources(owner)
-                .map_err(FormContextError::Source)?
-                .iter()
-                .any(|location| {
-                    location.role == designer_source::SourceRole::Payload
-                        && location.path == input.path
-                }))
-    {
+    if form && (!form_allowed || managed_payload(source, owner)?.as_ref() != Some(&input.path)) {
         return Err(FormContextError::InvalidOverlay);
     }
     Ok(form)
