@@ -1,0 +1,669 @@
+{
+  "schemaVersion": 1,
+  "task": "T159",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11, 96 DPI",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "zoom": 100,
+  "scope": "Complete unfocused initial table toolbars in the recorded Linux profile, plus Default with a moved splitter and in the detached window.",
+  "comparisonMasks": [],
+  "pixelTolerance": 0,
+  "native": {
+    "fixture": "tests/fixtures/forms/native-table-initial-bars/metrics.json",
+    "fixtureSha256": "2ce7a717399868fce5bc006ca60c76895eab612edf698e2b48a6e8fdbdd34a55",
+    "previousFourForms": 8,
+    "newNativeCaptures": 4,
+    "sameDefaultXmlVerified": true,
+    "stand": "table-toolbar-pose-_bnsk58b",
+    "standManifestSha256": "b2cd48b4913e8cc49699155b8bd754c261403043683fe691790cabf98cb3aa60",
+    "noBslExecuted": true,
+    "captures": {
+      "en": {
+        "low": {
+          "screenshot": "table-toolbar-pose-_bnsk58b/moved-en-attempt.png",
+          "screenshotSha256": "6ff007dedf34158e707113943441ea5d7398c0bf8f06e6c8c89889f4ad20affb",
+          "region": [
+            278,
+            268,
+            429,
+            27
+          ],
+          "rgbSha256": "7b0cc70b0cb4ee0e30c7833f67608a1d0f6ce44c34679bfa55a8d497a8d3851b",
+          "lowerEdgeRgb": [
+            155,
+            155,
+            155
+          ],
+          "differentFromPreviousHigh": 227,
+          "differentRows": [
+            23,
+            24,
+            25
+          ],
+          "movementRgbSha256": "262596e50156d05e5bd41d59d269e2c15d0dd061bb4115555b86e8c93490a4d3",
+          "movementDifferentRgbPixels": 64
+        },
+        "high": {
+          "screenshot": "table-toolbar-pose-_bnsk58b/moved-down-en.png",
+          "screenshotSha256": "3871b33cf37ebb609eb75e38b19a929ed26aea1c9087c42d0482ab272e511fd4",
+          "region": [
+            278,
+            546,
+            429,
+            27
+          ],
+          "rgbSha256": "743f31b402737d199db30ae51bb85334071172d5476504ff1b9c4a7e5b7d6f65",
+          "lowerEdgeRgb": [
+            156,
+            156,
+            156
+          ],
+          "differentFromPreviousHigh": 0,
+          "differentRows": [],
+          "movementRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+          "movementDifferentRgbPixels": 0
+        }
+      },
+      "ru": {
+        "low": {
+          "screenshot": "table-toolbar-pose-_bnsk58b/moved-up-ru.png",
+          "screenshotSha256": "641e2b26e5e3ad3c0b51b1650527c17f45b883eb6efe431c6ac33f13ffb3cb96",
+          "region": [
+            278,
+            268,
+            415,
+            27
+          ],
+          "rgbSha256": "11a2631f179168a494f54536e957a68bab0017e2365ade9448420fbe5cd600e9",
+          "lowerEdgeRgb": [
+            155,
+            155,
+            155
+          ],
+          "differentFromPreviousHigh": 213,
+          "differentRows": [
+            23,
+            24,
+            25
+          ],
+          "movementRgbSha256": "262596e50156d05e5bd41d59d269e2c15d0dd061bb4115555b86e8c93490a4d3",
+          "movementDifferentRgbPixels": 64
+        },
+        "high": {
+          "screenshot": "table-toolbar-pose-_bnsk58b/moved-down-ru.png",
+          "screenshotSha256": "35cff3b69f43c16c00d210014f3e1f7f263f3229008e855bd9b0088668d44761",
+          "region": [
+            278,
+            546,
+            415,
+            27
+          ],
+          "rgbSha256": "d07044a609696b206e16dcec8c52a84194d30dd12ea0cb522f332f1db7edbabc",
+          "lowerEdgeRgb": [
+            156,
+            156,
+            156
+          ],
+          "differentFromPreviousHigh": 0,
+          "differentRows": [],
+          "movementRgbSha256": "3f0df263dd722b7fd45383166532394cf48c2725c499042a891943c220b02643",
+          "movementDifferentRgbPixels": 0
+        }
+      }
+    }
+  },
+  "implementation": {
+    "position": "Integral logical paint coordinates in the preview at 96 DPI, 100% and an opaque backdrop.",
+    "gradient": "The split translation and centre correction of the 16.16 transform determine the phase; shared float32 sampler then paints the last three scanlines.",
+    "primaryReference": "https://raw.githubusercontent.com/Distrotech/cairo/master/src/cairo-matrix.c",
+    "movement": "Apply the same calculated corners and straight edge to the fixed 60x27 movement group, including its shared seam.",
+    "redraw": "Position changes from the surrounding inspector/viewport size and the late measured caption width repaint existing owners.",
+    "numericChecks": {
+      "color-phase": {
+        "cases": 8256,
+        "exactRgbScanlineSamples": 24768,
+        "oracleSha256": "937a3ca571fd5fe8c18d6c3cb783d39d26defa6d181b333448f05d57860a889f"
+      },
+      "image-gradient": {
+        "cases": 130,
+        "exactRgbScanlineSamples": 390,
+        "oracleSha256": "e02dd88953998903309119e1e74f28c7a7b4956aab68891390da1a451a902b10"
+      },
+      "xlib-gradient": {
+        "cases": 130,
+        "exactRgbScanlineSamples": 390,
+        "oracleSha256": "ef2b27766dca5c93a6c2d7f0bd316937ff366b4629ca53bf8ff532a1081bc478"
+      }
+    },
+    "numericCases": 8516,
+    "exactRgbScanlineSamples": 25548,
+    "publicProtocolChanged": false,
+    "noNewPackageDependency": true
+  },
+  "earlierFailures": [
+    {
+      "batch": "form-batch-wcBnWn",
+      "reason": "Applying position to all button families changed FontPartial14 against its earlier unaligned widget reference. This change is limited to table command bars."
+    },
+    {
+      "batch": "form-batch-pI8HcT",
+      "reason": "Three older reference screenshots had search focus. The comparison now uses the recorded unfocused captures of the same XML. The focused state remains separate.",
+      "comparedFocusedToUnfocusedPixels": {
+        "ReadOnly/en": 1101,
+        "ReadOnly/ru": 1053,
+        "MetadataTable/ru": 1229
+      }
+    },
+    {
+      "batches": [
+        "form-batch-3FR8M9",
+        "form-batch-aEzxac",
+        "form-batch-mrjcq9"
+      ],
+      "reason": "The movement group started with fractional X, then moved when the preceding caption reached its measured width. Its own size stayed 60x26. The painter now observes the same form-layout measurement.",
+      "diagnostic": {
+        "en": {
+          "xBeforeNativeWidth": 113.921875,
+          "xAfterNativeWidth": 112,
+          "y": 315,
+          "receiptSha256": "51638b4255789bdce113b27cacc684e42a1f13dd5f240ee7053d900c6faabc66"
+        },
+        "ru": {
+          "xBeforeNativeWidth": 151.265625,
+          "xAfterNativeWidth": 146,
+          "y": 315,
+          "receiptSha256": "1ff4f385d36afaa53b093fe01ca29c596dc9d4948ea0efff0c024a2d9be4a270"
+        }
+      },
+      "diagnosticInstrumentationRemoved": true
+    }
+  ],
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "batch": "form-batch-BUY2RD",
+    "backendCommit": "c682fc3bb9783a8209848f5b317185a915491d00",
+    "explorerCommit": "0be371589260012e670b7d71ec8739cd8c04358f",
+    "vsixSha256": "e4c73fcee2adb07e9ae9f174c3b8fe0f6d926732a371f6b2ecfa9a92548621e1",
+    "backendSha256": "2449274394dbef82a32dd03b060c62cd7b1df9817efb47bae958a6f111b595a1",
+    "runtimeManifestSha256": "b7091902a6fc67d3694f24f2d64dcf8ec0b2b6748f66df86311cfa3a93720e88",
+    "runtimeFilesVerifiedPerRun": 1303,
+    "explorerSourceFilesVerified": 506,
+    "coreSourceFilesVerified": 613
+  },
+  "checks": {
+    "typescript": true,
+    "compile": true,
+    "package": true,
+    "node": {
+      "passed": 615,
+      "skipped": 11
+    },
+    "bun": {
+      "passed": 603,
+      "skipped": 11
+    },
+    "unchangedBackendSha256Verified": true,
+    "previousRustGates": "docs/measurements/t158-checkbox-modes-linux.json"
+  },
+  "acceptance": {
+    "pairsPassed": 32,
+    "driverCases": 576,
+    "caseCountsBySuite": {
+      "table-pixels": {
+        "en": 27,
+        "ru": 27
+      },
+      "button-borders": {
+        "en": 60,
+        "ru": 60
+      },
+      "primary-buttons": {
+        "en": 60,
+        "ru": 60
+      },
+      "renderer": {
+        "en": 20,
+        "ru": 20
+      },
+      "states": {
+        "en": 15,
+        "ru": 15
+      },
+      "property-catalogue": {
+        "en": 30,
+        "ru": 30
+      },
+      "button-types": {
+        "en": 11,
+        "ru": 11
+      },
+      "button-rows": {
+        "en": 8,
+        "ru": 8
+      },
+      "usual-buttons": {
+        "en": 18,
+        "ru": 18
+      },
+      "handlers": {
+        "en": 1,
+        "ru": 1
+      },
+      "inspectors": {
+        "en": 1,
+        "ru": 1
+      },
+      "preview": {
+        "en": 1,
+        "ru": 1
+      },
+      "detached-space": {
+        "en": 6,
+        "ru": 6
+      },
+      "composition": {
+        "en": 9,
+        "ru": 9
+      },
+      "tables": {
+        "en": 17,
+        "ru": 17
+      },
+      "application": {
+        "en": 4,
+        "ru": 4
+      }
+    },
+    "wholeToolbarPixelParity": true,
+    "wholeToolbarCrops": 12,
+    "wholeToolbarPixels": 142776,
+    "detachedWholeToolbarCrops": 2,
+    "originalPositionCrops": 8,
+    "movedPositionCrops": 2,
+    "verifiedMovementCrops": 28,
+    "movementZoomFallbackVerified": true,
+    "stableTableDom": true,
+    "dirtyDetachedUpdates": true,
+    "wholeFormVisualParity": false,
+    "sourceWritesDuringViewing": false,
+    "applicationsPerLocale": {
+      "en": 4,
+      "ru": 4
+    },
+    "preservedRaisedButtonCasesPerLocale": {
+      "en": 60,
+      "ru": 60
+    },
+    "scenarios": {
+      "en": {
+        "gridCases": 27,
+        "wholeToolbarCrops": 6,
+        "pixels": 72630,
+        "movementCrops": 14,
+        "movementPixels": 22680,
+        "scenarios": [
+          {
+            "case": "Default-native-toolbar-pose",
+            "matchedPaintOrigin": [
+              274,
+              549
+            ],
+            "bottomRgb": [
+              156,
+              156,
+              156
+            ],
+            "positionRestored": true,
+            "actualDetachedWindow": false,
+            "actualRegion": [
+              622,
+              619,
+              429,
+              27
+            ],
+            "pixels": 11583,
+            "differentRgbPixels": 0,
+            "rgbSha256": "743f31b402737d199db30ae51bb85334071172d5476504ff1b9c4a7e5b7d6f65",
+            "screenshotSha256": "1db9d4f485f208c2141449d058d5c35f721235a3e5a024710960586b7bbed8bc",
+            "nativeRegion": [
+              274,
+              549,
+              429,
+              27
+            ],
+            "nativeScreenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5"
+          },
+          {
+            "case": "Default-moved-toolbar-pose",
+            "matchedPaintOrigin": [
+              278,
+              268
+            ],
+            "bottomRgb": [
+              155,
+              155,
+              155
+            ],
+            "positionRestored": true,
+            "actualDetachedWindow": false,
+            "actualRegion": [
+              626,
+              338,
+              429,
+              27
+            ],
+            "pixels": 11583,
+            "differentRgbPixels": 0,
+            "rgbSha256": "7b0cc70b0cb4ee0e30c7833f67608a1d0f6ce44c34679bfa55a8d497a8d3851b",
+            "screenshotSha256": "a275281b297f7d5498acb64679288d9175bd2668f31510ebe2a415bbf5ad92b6",
+            "nativeRegion": [
+              278,
+              268,
+              429,
+              27
+            ],
+            "nativeScreenshotSha256": "6ff007dedf34158e707113943441ea5d7398c0bf8f06e6c8c89889f4ad20affb"
+          },
+          {
+            "case": "floating-default",
+            "matchedPaintOrigin": null,
+            "bottomRgb": null,
+            "positionRestored": false,
+            "actualDetachedWindow": true,
+            "actualRegion": [
+              41,
+              150,
+              429,
+              27
+            ],
+            "pixels": 11583,
+            "differentRgbPixels": 0,
+            "rgbSha256": "7b0cc70b0cb4ee0e30c7833f67608a1d0f6ce44c34679bfa55a8d497a8d3851b",
+            "screenshotSha256": "cf5b03bb87ccf5a8679f157b81028d61331b6345432a79a44bdc5ed10574a083",
+            "nativeRegion": [
+              278,
+              268,
+              429,
+              27
+            ],
+            "nativeScreenshotSha256": "6ff007dedf34158e707113943441ea5d7398c0bf8f06e6c8c89889f4ad20affb"
+          },
+          {
+            "case": "ReadOnly-native-toolbar-pose",
+            "matchedPaintOrigin": [
+              274,
+              549
+            ],
+            "bottomRgb": [
+              156,
+              156,
+              156
+            ],
+            "positionRestored": true,
+            "actualDetachedWindow": false,
+            "actualRegion": [
+              622,
+              619,
+              429,
+              27
+            ],
+            "pixels": 11583,
+            "differentRgbPixels": 0,
+            "rgbSha256": "743f31b402737d199db30ae51bb85334071172d5476504ff1b9c4a7e5b7d6f65",
+            "screenshotSha256": "0dee0dd18d379e60c85709944f28036f7db861d0e5fd871caec85d9874387fa0",
+            "nativeRegion": [
+              274,
+              549,
+              429,
+              27
+            ],
+            "nativeScreenshotSha256": "b0b269c99691f1886cd181cc2dcb7cf3186e680f5870b02c0e2ca8903aa870a5"
+          },
+          {
+            "case": "MetadataTable-native-toolbar-pose",
+            "matchedPaintOrigin": [
+              274,
+              549
+            ],
+            "bottomRgb": [
+              156,
+              156,
+              156
+            ],
+            "positionRestored": true,
+            "actualDetachedWindow": false,
+            "actualRegion": [
+              622,
+              619,
+              520,
+              27
+            ],
+            "pixels": 14040,
+            "differentRgbPixels": 0,
+            "rgbSha256": "37d77a4e2d7c3cd74d1e74107201ff24d31ffe2faf046bf1c312491aafad57b2",
+            "screenshotSha256": "950331d63678da6eb58231187c77a37d25d569c517fd9f79f537e7819ba2e29d",
+            "nativeRegion": [
+              274,
+              549,
+              520,
+              27
+            ],
+            "nativeScreenshotSha256": "5763ea71a62884f3525d7a36b5072fd2b669ee5faea7f6a338211a2df4d87825"
+          },
+          {
+            "case": "DynamicList",
+            "matchedPaintOrigin": null,
+            "bottomRgb": null,
+            "positionRestored": false,
+            "actualDetachedWindow": false,
+            "actualRegion": [
+              389,
+              385,
+              454,
+              27
+            ],
+            "pixels": 12258,
+            "differentRgbPixels": 0,
+            "rgbSha256": "265a45c8796f6c214e6e21d82d6fe6fddee7244d04af13ff60873c75e0a37951",
+            "screenshotSha256": "cd358a612c0c384b3d500c671a227f4c4ccfa78dc203fbe0881db616c5a90bd5",
+            "nativeRegion": [
+              274,
+              397,
+              454,
+              27
+            ],
+            "nativeScreenshotSha256": "4a2a23969f2f13bacce101e36cbe0e92877f279c8653c46e2e5f022439e20e9f"
+          }
+        ]
+      },
+      "ru": {
+        "gridCases": 27,
+        "wholeToolbarCrops": 6,
+        "pixels": 70146,
+        "movementCrops": 14,
+        "movementPixels": 22680,
+        "scenarios": [
+          {
+            "case": "Default-native-toolbar-pose",
+            "matchedPaintOrigin": [
+              274,
+              549
+            ],
+            "bottomRgb": [
+              156,
+              156,
+              156
+            ],
+            "positionRestored": true,
+            "actualDetachedWindow": false,
+            "actualRegion": [
+              622,
+              619,
+              415,
+              27
+            ],
+            "pixels": 11205,
+            "differentRgbPixels": 0,
+            "rgbSha256": "d07044a609696b206e16dcec8c52a84194d30dd12ea0cb522f332f1db7edbabc",
+            "screenshotSha256": "0d19027843836a2e9c744f6a24478bc9a9e88c863381c3b9bc247392a22a2a4f",
+            "nativeRegion": [
+              274,
+              549,
+              415,
+              27
+            ],
+            "nativeScreenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38"
+          },
+          {
+            "case": "Default-moved-toolbar-pose",
+            "matchedPaintOrigin": [
+              278,
+              268
+            ],
+            "bottomRgb": [
+              155,
+              155,
+              155
+            ],
+            "positionRestored": true,
+            "actualDetachedWindow": false,
+            "actualRegion": [
+              626,
+              338,
+              415,
+              27
+            ],
+            "pixels": 11205,
+            "differentRgbPixels": 0,
+            "rgbSha256": "11a2631f179168a494f54536e957a68bab0017e2365ade9448420fbe5cd600e9",
+            "screenshotSha256": "2ee1b96c68d2cab71e340e97931aeb9f36468828af1f06ced86fc5322bde58ae",
+            "nativeRegion": [
+              278,
+              268,
+              415,
+              27
+            ],
+            "nativeScreenshotSha256": "641e2b26e5e3ad3c0b51b1650527c17f45b883eb6efe431c6ac33f13ffb3cb96"
+          },
+          {
+            "case": "floating-default",
+            "matchedPaintOrigin": null,
+            "bottomRgb": null,
+            "positionRestored": false,
+            "actualDetachedWindow": true,
+            "actualRegion": [
+              41,
+              150,
+              415,
+              27
+            ],
+            "pixels": 11205,
+            "differentRgbPixels": 0,
+            "rgbSha256": "11a2631f179168a494f54536e957a68bab0017e2365ade9448420fbe5cd600e9",
+            "screenshotSha256": "46845a500e422faa2b948434ecbcd2e6c66a7d18e81ef90321573bb3063bec70",
+            "nativeRegion": [
+              278,
+              268,
+              415,
+              27
+            ],
+            "nativeScreenshotSha256": "641e2b26e5e3ad3c0b51b1650527c17f45b883eb6efe431c6ac33f13ffb3cb96"
+          },
+          {
+            "case": "ReadOnly-native-toolbar-pose",
+            "matchedPaintOrigin": [
+              274,
+              549
+            ],
+            "bottomRgb": [
+              156,
+              156,
+              156
+            ],
+            "positionRestored": true,
+            "actualDetachedWindow": false,
+            "actualRegion": [
+              622,
+              619,
+              415,
+              27
+            ],
+            "pixels": 11205,
+            "differentRgbPixels": 0,
+            "rgbSha256": "d07044a609696b206e16dcec8c52a84194d30dd12ea0cb522f332f1db7edbabc",
+            "screenshotSha256": "9b1831a43b62feabe2436f1c6f6b74c3d7af8b6c0b32bead78c83ebbfdc3db4d",
+            "nativeRegion": [
+              274,
+              549,
+              415,
+              27
+            ],
+            "nativeScreenshotSha256": "fa9e73f1a2bc4dde84679dcf569be818a5924f24608b45d0e9d7fd24d6026e87"
+          },
+          {
+            "case": "MetadataTable-native-toolbar-pose",
+            "matchedPaintOrigin": [
+              274,
+              549
+            ],
+            "bottomRgb": [
+              156,
+              156,
+              156
+            ],
+            "positionRestored": true,
+            "actualDetachedWindow": false,
+            "actualRegion": [
+              622,
+              619,
+              520,
+              27
+            ],
+            "pixels": 14040,
+            "differentRgbPixels": 0,
+            "rgbSha256": "5793e59691633e68c01c8be0124dafa10030d1f4446fdce3b309bc38d6f2857c",
+            "screenshotSha256": "9772ad27705b36fc27cb2140f0f15e193d578c400fac27eff91eb7731552e06a",
+            "nativeRegion": [
+              274,
+              549,
+              520,
+              27
+            ],
+            "nativeScreenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb"
+          },
+          {
+            "case": "DynamicList",
+            "matchedPaintOrigin": null,
+            "bottomRgb": null,
+            "positionRestored": false,
+            "actualDetachedWindow": false,
+            "actualRegion": [
+              389,
+              385,
+              418,
+              27
+            ],
+            "pixels": 11286,
+            "differentRgbPixels": 0,
+            "rgbSha256": "dd645a0abbeef72050ee4a308b3ff5f1a9bc311c1d21c2b8b46878735993863f",
+            "screenshotSha256": "b6a442ff0211d0a97adf97ef73a14b6f1f6adcaa3f9acae0d907051dc7630ed7",
+            "nativeRegion": [
+              274,
+              397,
+              418,
+              27
+            ],
+            "nativeScreenshotSha256": "0db9b711e036a15d1fb2a4673d497c26c29d37c394f800ca53981db8d3910723"
+          }
+        ]
+      }
+    }
+  },
+  "remaining": [
+    "Focused and alternative 11px search states, other palettes/command sets and DPI.",
+    "The full set of form properties, full forms and Windows."
+  ]
+}
