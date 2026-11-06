@@ -3643,11 +3643,26 @@
             }
           ],
           "clientCommit": "6509c60"
+        },
+        {
+          "report": "docs/measurements/t157-numeric-caption-wrap-linux.json",
+          "sha256": "e872e3f0043dd984b31be9fbe0ed1fc87c5618c04e8d52aaa1d8af3882e4aa7e",
+          "assertions": [
+            {
+              "pointer": "/measuredWrapCasesAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "80edb62"
         }
       ],
-      "lastConfirmation": "docs/measurements/t157-numeric-label-rows-linux.json",
-      "remaining": "Narrow numeric caption wrap, the 1 px real totals row offset, wide automatic reference lanes, native real-form resize, other container combinations, and full native geometry.",
-      "nextAction": "Measure numeric caption wrapping and wide automatic reference lanes with unequal captions."
+      "lastConfirmation": "docs/measurements/t157-numeric-caption-wrap-linux.json",
+      "remaining": "Wrap thresholds for long and reordered numeric captions, the 1 px real totals row offset, wide automatic reference lanes, native real-form resize, other container combinations, and full native geometry.",
+      "nextAction": "Measure wide automatic reference lanes with unequal captions and remaining numeric caption wrap thresholds."
     },
     {
       "id": "tables.native-context-fixtures",
