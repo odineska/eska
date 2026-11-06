@@ -1669,3 +1669,15 @@ form-palette-value-text = Text
 form-palette-value-roundedShape = Rounded
 form-palette-value-standardShape = Standard
 form-palette-value-highImportance = High
+
+# Checkbox palette in forms and table columns.
+form-palette-type-CheckBoxField = Checkbox
+form-palette-property-CheckBoxType = CheckBoxType
+form-palette-property-VerticalAlign = VerticalAlign
+form-palette-property-ItemTitleHeight = ItemTitleHeight
+form-palette-property-ItemHeight = ItemHeight
+form-palette-property-EqualItemsWidth = EqualItemsWidth
+form-palette-property-ItemWidth = ItemWidth
+form-palette-value-checkbox = Checkbox
+form-palette-value-tumblers = Tumblers
+form-palette-value-switcher = Switch

@@ -1669,3 +1669,15 @@ form-palette-value-text = Текст
 form-palette-value-roundedShape = Овальная
 form-palette-value-standardShape = Обычная
 form-palette-value-highImportance = Высокая
+
+# Checkbox palette in forms and table columns.
+form-palette-type-CheckBoxField = Поле флажка
+form-palette-property-CheckBoxType = ВидФлажка
+form-palette-property-VerticalAlign = ВертикальноеПоложение
+form-palette-property-ItemTitleHeight = ВысотаЗаголовкаЭлемента
+form-palette-property-ItemHeight = ВысотаЭлемента
+form-palette-property-EqualItemsWidth = ОдинаковаяШиринаЭлементов
+form-palette-property-ItemWidth = ШиринаЭлемента
+form-palette-value-checkbox = Флажок
+form-palette-value-tumblers = Тумблер
+form-palette-value-switcher = Выключатель

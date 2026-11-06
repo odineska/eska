@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "kindCaption": {"en-US": "Checkbox", "ru-RU": "Поле флажка"},
+  "unequalTumblerRows": 35,
+  "fieldOrder": [
+    "Name", "Title", "Type", "DataPath", "TitleLocation", "Visible", "UserVisibility", "Enabled",
+    "ReadOnly", "SkipOnInput", "DefaultItem", "DisplayImportance", "OnMainServerUnavailableBehavior",
+    "CheckBoxType", "WarningOnEditRepresentation", "WarningOnEdit", "Shortcut", "CommandSet",
+    "ToolTip", "ToolTipRepresentation", "TitleTextColor", "TitleFont", "BorderColor",
+    "HorizontalAlignInGroup", "VerticalAlignInGroup", "VerticalAlign", "TitleHeight", "OnChange"
+  ],
+  "columnOrder": [
+    "Name", "Title", "Type", "DataPath", "TitleLocation", "Visible", "UserVisibility", "Enabled",
+    "ReadOnly", "SkipOnInput", "DefaultItem", "DisplayImportance", "OnMainServerUnavailableBehavior",
+    "FooterText", "FooterDataPath", "WarningOnEditRepresentation", "WarningOnEdit", "EditMode",
+    "AutoCellHeight", "CellHyperlink", "FixingInTable", "Shortcut", "CommandSet", "ShowInHeader",
+    "ShowInFooter", "ToolTip", "ToolTipRepresentation", "HeaderPicture", "FooterPicture",
+    "TitleBackColor", "TitleTextColor", "TitleFont", "FooterBackColor", "FooterTextColor", "FooterFont",
+    "BackColor", "BorderColor", "HorizontalAlign", "HeaderHorizontalAlign", "FooterHorizontalAlign",
+    "VerticalAlign", "TitleHeight", "OnChange"
+  ],
+  "modes": {
+    "Auto": {"caption": {"en-US": "Auto", "ru-RU": "Авто"}, "rows": 28},
+    "CheckBox": {"caption": {"en-US": "Checkbox", "ru-RU": "Флажок"}, "rows": 28},
+    "Tumbler": {"caption": {"en-US": "Tumblers", "ru-RU": "Тумблер"}, "rows": 36},
+    "Switcher": {"caption": {"en-US": "Switch", "ru-RU": "Выключатель"}, "rows": 31}
+  },
+  "labels": {
+    "CheckBoxType": {"en-US": "CheckBoxType", "ru-RU": "ВидФлажка"},
+    "VerticalAlign": {"en-US": "VerticalAlign", "ru-RU": "ВертикальноеПоложение"},
+    "ItemTitleHeight": {"en-US": "ItemTitleHeight", "ru-RU": "ВысотаЗаголовкаЭлемента"},
+    "ItemHeight": {"en-US": "ItemHeight", "ru-RU": "ВысотаЭлемента"},
+    "EqualItemsWidth": {"en-US": "EqualItemsWidth", "ru-RU": "ОдинаковаяШиринаЭлементов"},
+    "ItemWidth": {"en-US": "ItemWidth", "ru-RU": "ШиринаЭлемента"},
+    "OnChange": {"en-US": "OnChange", "ru-RU": "ПриИзменении"}
+  }
+}

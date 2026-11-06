@@ -78,6 +78,10 @@ const ROOT_PALETTE: &str =
     include_str!("../../../../tests/fixtures/forms/native-property-palette/form-root.json");
 const BUTTON_PALETTE: &str =
     include_str!("../../../../tests/fixtures/forms/native-property-palette/button.json");
+const CHECKBOX_PALETTE: &str =
+    include_str!("../../../../tests/fixtures/forms/native-property-palette/checkbox.json");
+const BOUND_CHECKBOX: &str =
+    include_str!("../../../../tests/fixtures/forms/native-bound-fields/CheckBoxField.xml");
 const NATIVE_BUTTONS: &str = include_str!(
     "../../../../tests/fixtures/forms/native-button-types/source/CommonForms/ProbeButtons/Ext/Form.xml"
 );
@@ -352,6 +356,197 @@ fn native_button_defaults() -> String {
             "<Font ref=\"sys:DefaultGUIFont\" height=\"10\" kind=\"WindowsFont\"/>",
             "",
         )
+}
+
+fn checkbox_palette_ids(palette: &Value) -> Vec<&str> {
+    palette["rows"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter_map(|row| row["id"].as_str()?.strip_prefix("platform:"))
+        .collect()
+}
+
+fn assert_checkbox_mode(palette: &Value, base_order: &[&str], mode: &str, native: &Value) {
+    let mut expected = base_order.to_vec();
+    let mut insert_before = |id, values: &[&'static str]| {
+        let index = expected.iter().position(|key| *key == id).unwrap();
+        expected.splice(index..index, values.iter().copied());
+    };
+    if mode != "CheckBox" {
+        insert_before("BorderColor", &["BackColor"]);
+        insert_before("HorizontalAlignInGroup", &["TextColor", "Font"]);
+    }
+    if mode == "Tumbler" {
+        insert_before("WarningOnEditRepresentation", &["EditFormat"]);
+        insert_before(
+            "TitleHeight",
+            &[
+                "ItemTitleHeight",
+                "ItemHeight",
+                "EqualItemsWidth",
+                "ItemWidth",
+            ],
+        );
+        assert_eq!(
+            input_palette_value(palette, "ItemWidth")["default"]["value"],
+            0
+        );
+        assert_eq!(
+            input_palette_value(palette, "EqualItemsWidth")["default"]["value"],
+            "default"
+        );
+    }
+    let ids = checkbox_palette_ids(palette);
+    assert_eq!(json!(ids.len()), native["modes"][mode]["rows"]);
+    assert_eq!(ids, expected);
+    let mode_value = input_palette_value(palette, "CheckBoxType");
+    assert_eq!(mode_value["kind"], "declared");
+    assert_eq!(mode_value["caption"], native["modes"][mode]["caption"]);
+    for (key, label) in native["labels"].as_object().unwrap() {
+        if ids.contains(&key.as_str()) {
+            assert_eq!(input_palette_row(palette, key)["caption"], *label);
+        }
+    }
+}
+
+#[test]
+fn form_checkbox_palette_tracks_binding_and_mode() {
+    let native: Value = serde_json::from_str(CHECKBOX_PALETTE).unwrap();
+    let expected: Vec<_> = native["fieldOrder"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|id| id.as_str().unwrap())
+        .collect();
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let form = BOUND_CHECKBOX.replace("<CheckBoxType>Auto</CheckBoxType>", "");
+    fs::write(&path, &form).unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let mut opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let inspect = |client: &mut Client, opened: &Value| {
+            let field = &opened["model"]["root"]["children"][0];
+            inspect_input(client, &context, opened, field, true)
+        };
+        let palette = inspect(&mut client, &opened);
+        assert_eq!(checkbox_palette_ids(&palette), expected);
+        assert_eq!(
+            input_palette_value(&palette, "Type")["caption"],
+            native["kindCaption"]
+        );
+        assert_eq!(
+            input_palette_value(&palette, "CheckBoxType")["default"],
+            json!({"kind":"auto"})
+        );
+        assert_eq!(
+            input_palette_value(&palette, "Visible")["default"]["value"],
+            true
+        );
+        assert_eq!(
+            input_palette_value(&palette, "ReadOnly")["default"]["value"],
+            false
+        );
+        let change = |client: &mut Client, opened: &Value, version, mode: &str| {
+            let replacement =
+                format!("<DataPath>Value</DataPath><CheckBoxType>{mode}</CheckBoxType>");
+            update_input(
+                client,
+                &context,
+                opened,
+                version,
+                &form.replace("<DataPath>Value</DataPath>", &replacement),
+            )
+        };
+        for (version, mode) in [(2, "CheckBox"), (3, "Switcher"), (4, "Tumbler")] {
+            opened = change(&mut client, &opened, version, mode);
+            let palette = inspect(&mut client, &opened);
+            assert_checkbox_mode(&palette, &expected, mode, &native);
+        }
+        let unequal = form.replace(
+            "<DataPath>Value</DataPath>",
+            concat!(
+                "<DataPath>Value</DataPath><CheckBoxType>Tumbler</CheckBoxType>",
+                "<EqualItemsWidth>false</EqualItemsWidth><ItemWidth>12</ItemWidth>"
+            ),
+        );
+        opened = update_input(&mut client, &context, &opened, 5, &unequal);
+        let palette = inspect(&mut client, &opened);
+        let ids = checkbox_palette_ids(&palette);
+        assert_eq!(json!(ids.len()), native["unequalTumblerRows"]);
+        assert!(!ids.contains(&"ItemWidth"));
+        assert_eq!(
+            input_palette_value(&palette, "EqualItemsWidth")["caption"][locale],
+            if locale == "ru-RU" { "Нет" } else { "No" }
+        );
+
+        let unbound = form.replace("<DataPath>Value</DataPath>", "");
+        opened = update_input(&mut client, &context, &opened, 6, &unbound);
+        let palette = inspect(&mut client, &opened);
+        assert_eq!(
+            checkbox_palette_ids(&palette),
+            expected
+                .iter()
+                .copied()
+                .filter(|id| *id != "CheckBoxType")
+                .collect::<Vec<_>>()
+        );
+        assert_eq!(
+            input_palette_value(&palette, "Type")["default"]["kind"],
+            "empty"
+        );
+
+        let unresolved = form.replace("<DataPath>Value</DataPath>", "<DataPath>Missing</DataPath>");
+        opened = update_input(&mut client, &context, &opened, 7, &unresolved);
+        assert!(inspect(&mut client, &opened)["rows"].is_null());
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(path).unwrap(), form);
+}
+
+#[test]
+fn form_checkbox_palette_has_table_defaults_and_keeps_raw_xml() {
+    let native: Value = serde_json::from_str(CHECKBOX_PALETTE).unwrap();
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    fs::write(&path, TABLE_INPUTS).unwrap();
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let table = &opened["model"]["root"]["children"][0];
+    let field = table["children"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|node| node["name"] == "Active")
+        .unwrap();
+    let palette = inspect_input(&mut client, &context, &opened, field, true);
+    assert_eq!(json!(checkbox_palette_ids(&palette)), native["columnOrder"]);
+    assert_eq!(
+        input_palette_value(&palette, "EditMode")["default"]["value"],
+        "enter"
+    );
+    assert_eq!(
+        input_palette_value(&palette, "HeaderHorizontalAlign")["default"]["value"],
+        "left"
+    );
+    assert_eq!(
+        input_palette_value(&palette, "AutoCellHeight")["default"]["value"],
+        false
+    );
+    assert_eq!(
+        input_palette_value(&palette, "ShowInFooter")["default"]["value"],
+        true
+    );
+    let additional = palette["rows"].as_array().unwrap().last().unwrap();
+    assert_eq!(additional["category"], Value::Null);
+    assert_eq!(additional["value"]["kind"], "declared");
+    let index = usize::try_from(additional["value"]["propertyIndex"].as_u64().unwrap()).unwrap();
+    assert_eq!(field["properties"][index]["key"]["name"], "CheckBoxType");
+    assert_eq!(field["properties"][index]["value"]["text"], "Auto");
+    client.finish();
 }
 
 #[test]

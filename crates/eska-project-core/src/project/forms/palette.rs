@@ -1,6 +1,7 @@
 //! The Designer palette describes applicable settings separately from declared XML.
 
 mod button;
+mod checkbox;
 mod input_field;
 mod root_form;
 
@@ -205,6 +206,13 @@ impl FormPreview {
                 .find(|item| &item.identity == identity)
                 .and_then(|item| button::Context::new(&self.form, item, element))
                 .map(|context| self.palette_rows(element, button::definitions(context))),
+            Some(ElementKind::CheckBoxField) => self
+                .presentation
+                .elements
+                .iter()
+                .find(|item| &item.identity == identity)
+                .and_then(|item| checkbox::Context::new(item, element))
+                .map(|context| self.palette_rows(element, checkbox::definitions(context))),
             _ => ordinary_vertical_group(element)
                 .then(|| self.palette_rows(element, USUAL_GROUP.iter().map(|row| (row, true)))),
         };
