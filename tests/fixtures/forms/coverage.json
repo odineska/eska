@@ -3673,11 +3673,26 @@
             }
           ],
           "clientCommit": "c8e08eb"
+        },
+        {
+          "report": "docs/measurements/t157-narrow-reference-lanes-linux.json",
+          "sha256": "0af10c4e0b62ee0b84db28a4217880543f1e1c77ff815e9a318d9018bdbb34bf",
+          "assertions": [
+            {
+              "pointer": "/narrowLaneCasesAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "20a9e2f"
         }
       ],
-      "lastConfirmation": "docs/measurements/t157-automatic-reference-lanes-linux.json",
-      "remaining": "Narrow reference caption reflow and minima, wrap thresholds for long and reordered numeric captions, vertical offsets on the real form, native real-form resize, other container combinations, and full native geometry.",
-      "nextAction": "Measure caption reflow and minimum tracks in narrow reference columns, then compare the real form at multiple native widths."
+      "lastConfirmation": "docs/measurements/t157-narrow-reference-lanes-linux.json",
+      "remaining": "Wrap thresholds for long and reordered numeric captions, remaining shared-title and nested layouts, real-form vertical offsets and native resize, and full native geometry.",
+      "nextAction": "Compare the real form at several native widths, then calibrate the remaining nested and shared-title layouts."
     },
     {
       "id": "tables.native-context-fixtures",
