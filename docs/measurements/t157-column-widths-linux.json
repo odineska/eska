@@ -1,0 +1,508 @@
+{
+  "schemaVersion": 1,
+  "milestone": "T157",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "eskaBackendCommit": "1495b7b",
+  "explorerCommit": "8c2cb79",
+  "backendSha256": "ad1f4926af4c082364fa3fbb0c46a4a0621e9c8ee0e435bd566c21dddc5e2ab9",
+  "vsixSha256": "913c26bc6317587f53f0a505f5871421c6b725a516cd79849fa62032c88cde36",
+  "coordinateSpace": "x, y, width, height in pixels relative to the form frame",
+  "fixture": "tests/fixtures/forms/native-column-widths/metrics.json",
+  "measuredColumnWidthCasesAccepted": true,
+  "wholeFormGeometryParity": false,
+  "sourceWritesDuringViewing": false,
+  "syntheticInstalled": {
+    "locales": [
+      "en",
+      "ru"
+    ],
+    "geometryCasesPerLocale": 16,
+    "detachedTransitionsPerLocale": 1,
+    "referenceFieldTolerancePx": 2,
+    "allOtherTolerancePx": 0,
+    "conditionalGroup": "The canonical Designer XML omits Group. The narrow frame wraps after applying the native default.",
+    "childItemsWidth": "Native omission, Equal, LeftWide, LeftWidest, LeftNarrow, and LeftNarrowest produced equal allocations within the measured static examples."
+  },
+  "regressionRuns": [
+    {
+      "suite": "column-widths",
+      "locale": "en",
+      "passed": true,
+      "cases": 17
+    },
+    {
+      "suite": "column-widths",
+      "locale": "ru",
+      "passed": true,
+      "cases": 17
+    },
+    {
+      "suite": "united",
+      "locale": "en",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "suite": "united",
+      "locale": "ru",
+      "passed": true,
+      "cases": 8
+    },
+    {
+      "suite": "through-align",
+      "locale": "en",
+      "passed": true,
+      "cases": 23
+    },
+    {
+      "suite": "through-align",
+      "locale": "ru",
+      "passed": true,
+      "cases": 23
+    },
+    {
+      "suite": "responsive",
+      "locale": "en",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "responsive",
+      "locale": "ru",
+      "passed": true,
+      "cases": 31
+    },
+    {
+      "suite": "input-stretch",
+      "locale": "en",
+      "passed": true,
+      "cases": 20
+    },
+    {
+      "suite": "input-stretch",
+      "locale": "ru",
+      "passed": true,
+      "cases": 20
+    },
+    {
+      "suite": "input-dimensions",
+      "locale": "en",
+      "passed": true,
+      "cases": 44
+    },
+    {
+      "suite": "input-dimensions",
+      "locale": "ru",
+      "passed": true,
+      "cases": 44
+    },
+    {
+      "suite": "groups",
+      "locale": "en",
+      "passed": true,
+      "cases": 22
+    },
+    {
+      "suite": "groups",
+      "locale": "ru",
+      "passed": true,
+      "cases": 22
+    },
+    {
+      "suite": "application",
+      "locale": "en",
+      "passed": true,
+      "cases": 4
+    },
+    {
+      "suite": "application",
+      "locale": "ru",
+      "passed": true,
+      "cases": 4
+    }
+  ],
+  "realForm": {
+    "form": "Documents/РасходТовара/Forms/ФормаДокумента/Ext/Form.xml",
+    "page": "ГруппаТабличныеЧасти/ГруппаТовары",
+    "sourceSha256": "1f889c1b3dd13b8a1ca37fbce6a43330c1d9c9b52a13557815af771afadcc530",
+    "nativeScreenshotSha256": "a632f8dc98c6aa6e157e0c22d4275b836d54144e96b72be610009316aea104c0",
+    "nativeFrame": [
+      1011,
+      638
+    ],
+    "comparisonAtNativeFrame": [
+      {
+        "path": "Form/Шапка/ЛеваяКолонка/Номер",
+        "expected": [
+          98,
+          66,
+          101,
+          23
+        ],
+        "beforeRu": [
+          101,
+          67,
+          100,
+          23
+        ],
+        "en": [
+          101,
+          67,
+          100,
+          23
+        ],
+        "ru": [
+          101,
+          67,
+          100,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ЛеваяКолонка/Дата",
+        "expected": [
+          98,
+          98,
+          182,
+          23
+        ],
+        "beforeRu": [
+          101,
+          99,
+          181,
+          23
+        ],
+        "en": [
+          101,
+          99,
+          181,
+          23
+        ],
+        "ru": [
+          101,
+          99,
+          181,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ЛеваяКолонка/Организация",
+        "expected": [
+          98,
+          130,
+          410,
+          23
+        ],
+        "beforeRu": [
+          101,
+          131,
+          395.5,
+          23
+        ],
+        "en": [
+          101,
+          131,
+          410,
+          23
+        ],
+        "ru": [
+          101,
+          131,
+          410,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ЛеваяКолонка/ГруппаПокупатель/Покупатель",
+        "expected": [
+          98,
+          162,
+          410,
+          23
+        ],
+        "beforeRu": [
+          101,
+          163,
+          395.5,
+          23
+        ],
+        "en": [
+          101,
+          163,
+          410,
+          23
+        ],
+        "ru": [
+          101,
+          163,
+          410,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ЛеваяКолонка/Склад",
+        "expected": [
+          98,
+          194,
+          410,
+          23
+        ],
+        "beforeRu": [
+          101,
+          195,
+          395.5,
+          23
+        ],
+        "en": [
+          101,
+          195,
+          410,
+          23
+        ],
+        "ru": [
+          101,
+          195,
+          410,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ПраваяКолонка/ВидЦен",
+        "expected": [
+          667,
+          66,
+          323,
+          23
+        ],
+        "beforeRu": [
+          657.5,
+          67,
+          332.5,
+          23
+        ],
+        "en": [
+          672,
+          67,
+          318,
+          23
+        ],
+        "ru": [
+          672,
+          67,
+          318,
+          23
+        ]
+      },
+      {
+        "path": "Form/Шапка/ПраваяКолонка/Валюта",
+        "expected": [
+          667,
+          98,
+          323,
+          23
+        ],
+        "beforeRu": [
+          657.5,
+          99,
+          332.5,
+          23
+        ],
+        "en": [
+          672,
+          99,
+          318,
+          23
+        ],
+        "ru": [
+          672,
+          99,
+          318,
+          23
+        ]
+      },
+      {
+        "path": "Form/ГруппаТабличныеЧасти",
+        "expected": [
+          13,
+          226,
+          977,
+          399
+        ],
+        "beforeRu": [
+          13,
+          226,
+          977,
+          400
+        ],
+        "en": [
+          13,
+          226,
+          977,
+          400
+        ],
+        "ru": [
+          13,
+          226,
+          977,
+          400
+        ]
+      },
+      {
+        "path": "Form/ГруппаТабличныеЧасти/ГруппаТовары/Товары",
+        "expected": [
+          24,
+          326,
+          955,
+          255
+        ],
+        "beforeRu": [
+          24,
+          326,
+          955,
+          254
+        ],
+        "en": [
+          24,
+          261,
+          955,
+          319
+        ],
+        "ru": [
+          24,
+          261,
+          955,
+          319
+        ]
+      },
+      {
+        "path": "Form/ГруппаТабличныеЧасти/ГруппаТовары/Итоги",
+        "expected": [
+          24,
+          590,
+          889,
+          25
+        ],
+        "beforeRu": [
+          24,
+          587,
+          955,
+          29
+        ],
+        "en": [
+          24,
+          587,
+          955,
+          29
+        ],
+        "ru": [
+          24,
+          587,
+          955,
+          29
+        ]
+      }
+    ],
+    "resizeInstalled": {
+      "en": [
+        {
+          "label": "native",
+          "frame": [
+            1011,
+            638
+          ],
+          "sameNodes": true
+        },
+        {
+          "label": "narrow",
+          "frame": [
+            900,
+            570
+          ],
+          "sameNodes": true
+        },
+        {
+          "label": "large",
+          "frame": [
+            1150,
+            700
+          ],
+          "sameNodes": true
+        },
+        {
+          "label": "restored",
+          "frame": [
+            1011,
+            638
+          ],
+          "sameNodes": true
+        }
+      ],
+      "ru": [
+        {
+          "label": "native",
+          "frame": [
+            1011,
+            638
+          ],
+          "sameNodes": true
+        },
+        {
+          "label": "narrow",
+          "frame": [
+            900,
+            570
+          ],
+          "sameNodes": true
+        },
+        {
+          "label": "large",
+          "frame": [
+            1150,
+            700
+          ],
+          "sameNodes": true
+        },
+        {
+          "label": "restored",
+          "frame": [
+            1011,
+            638
+          ],
+          "sameNodes": true
+        }
+      ]
+    }
+  },
+  "automaticReferenceWidths": {
+    "frameWidths": [
+      658,
+      974
+    ],
+    "nativeControlWidths": [
+      [
+        203,
+        203
+      ],
+      [
+        325,
+        397
+      ]
+    ],
+    "installedControlWidths": [
+      [
+        202,
+        203
+      ],
+      [
+        361,
+        360
+      ]
+    ]
+  },
+  "remaining": [
+    "The real document totals group is 66 pixels wider and 4 pixels taller than its native counterpart at the measured frame.",
+    "The two fully automatic reference fields diverge on large frames when their captions differ.",
+    "The native document was measured at one frame size. Installed resizing, Windows acceptance, and full geometry parity are separate checks."
+  ]
+}

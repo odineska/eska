@@ -2273,6 +2273,8 @@ XML/метаданные или превышение бюджета сохран
 `HorizontalIfPossible`), `displayed`, вычисленную `titleLocation` (`Left`, `Right`,
 `Top`, `Bottom`, `None`), локализованные/стандартные подписи, тип значения, оформление и статические
 варианты выбора. Произвольные обработчики и команды не исполняются.
+Обычная группа без `Group` получает `HorizontalIfPossible`. Явные
+`Horizontal` и `AlwaysHorizontal` задают постоянную горизонтальную раскладку.
 Поле без привязки остаётся в дереве с `displayed:false`, как в предпросмотре
 Конфигуратора. Несуществующий непустой `DataPath` дополнительно даёт `binding_missing`.
 
@@ -2285,6 +2287,14 @@ XML/метаданные или превышение бюджета сохран
 Необязательное `presentation.footerText` содержит разрешённую локализованную
 подпись подвала колонки. Стандартный номер строки в таблице использует ключ
 `table.LineNumber`; явный `Title` колонки имеет приоритет.
+
+Необязательное `presentation.tableColumnAppearance` содержит явно заданное
+оформление колонки или группы колонок. `headerBackground`, `footerBackground`
+и `footerForeground` передают разрешённые цвета из `TitleBackColor`,
+`FooterBackColor` и `FooterTextColor`. `footerFont` передаёт разрешённый
+`FooterFont` в том же формате, что и `titleFont`. Поля без свойства
+опущены. Шрифт и цвет текста шапки остаются в `titleFont` и `titleColor`.
+Цвета и шрифт разрешаются из итоговых свойств формы и её стилей.
 
 `presentation.autoCommandItems` — необязательное дополнение к `autoCommands`:
 `[{key,caption,primary,origin}]`. Оно сохраняет локализованную подпись и источник

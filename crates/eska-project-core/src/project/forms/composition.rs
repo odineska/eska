@@ -9,7 +9,7 @@ use serde::Serialize;
 
 use super::{
     ElementIdentity, ElementKey, ElementKind, FormDefinition, FormDocument, FormElement,
-    LocatedQualifier,
+    LocatedQualifier, is_form_property,
 };
 use crate::project::{
     metadata_model::{MetadataProperty, PropertyKey},
@@ -28,6 +28,20 @@ pub struct PropertySource {
 pub struct SourcedProperty {
     pub origin: PropertySource,
     pub property: MetadataProperty,
+}
+
+impl SourcedProperty {
+    pub(super) fn has_form_name(&self, name: &str) -> bool {
+        is_form_property(&self.property.key, name)
+    }
+
+    pub(super) fn text(&self) -> Option<&str> {
+        super::appearance::text(&self.property.value)
+    }
+}
+
+fn find_property<'a>(values: &'a [SourcedProperty], name: &str) -> Option<&'a SourcedProperty> {
+    values.iter().find(|value| value.has_form_name(name))
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -63,6 +77,14 @@ pub struct EffectiveElement {
 }
 
 impl EffectiveElement {
+    pub(super) fn property(&self, name: &str) -> Option<&SourcedProperty> {
+        find_property(&self.properties, name)
+    }
+
+    pub(super) fn scalar(&self, name: &str) -> Option<&str> {
+        self.property(name).and_then(SourcedProperty::text)
+    }
+
     /// Find a composed identity, including elements outside the main layout tree.
     #[must_use]
     pub fn find(&self, identity: &ElementIdentity) -> Option<&Self> {
@@ -84,6 +106,12 @@ pub struct EffectiveDefinition {
     pub name: Option<String>,
     pub qualifiers: Vec<(PropertyKey, String)>,
     pub properties: Vec<SourcedProperty>,
+}
+
+impl EffectiveDefinition {
+    pub(super) fn property(&self, name: &str) -> Option<&SourcedProperty> {
+        find_property(&self.properties, name)
+    }
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
@@ -119,12 +147,7 @@ impl ComposedForm {
     pub(super) fn main_attribute(&self) -> Option<&EffectiveDefinition> {
         self.attributes.iter().find(|attribute| {
             attribute.properties.iter().any(|value| {
-                value.property.key.name == "MainAttribute"
-                    && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
-                    && matches!(
-                        super::appearance::text(&value.property.value),
-                        Some("true" | "1")
-                    )
+                value.has_form_name("MainAttribute") && matches!(value.text(), Some("true" | "1"))
             })
         })
     }

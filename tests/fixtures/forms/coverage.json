@@ -3578,7 +3578,9 @@
       "status": "in_progress",
       "scope": "Container/field/page implementation and several accepted matrices exist; complete nested/empty/hidden/wrapped/stretch combinations are not accepted.",
       "fixtures": [
-        "tests/fixtures/forms/native-groups"
+        "tests/fixtures/forms/native-groups",
+        "tests/fixtures/forms/native-through-align-rows",
+        "tests/fixtures/forms/native-column-widths"
       ],
       "driver": {
         "repository": "eska-vscode-explorer",
@@ -3595,11 +3597,41 @@
           "sha256": "3e235d0571b0b9383a986d6c2c7d6e5b3bc2a3b4dffd2e6c13b93f3ac61ac36b",
           "assertions": [],
           "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t157-through-align-nested-rows-linux.json",
+          "sha256": "d95b0fa1d248308b393cd9fd09bfc9e6eb8f0543b9d9a41058bb7a4a6bafc67e",
+          "assertions": [
+            {
+              "pointer": "/installedNestedGeometryAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "dfeac6c"
+        },
+        {
+          "report": "docs/measurements/t157-column-widths-linux.json",
+          "sha256": "484d434fc098fa528b036d8098f9a2fa1e24b13af047dd124b3a0809f861b8c6",
+          "assertions": [
+            {
+              "pointer": "/measuredColumnWidthCasesAccepted",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "8c2cb79"
         }
       ],
-      "lastConfirmation": "docs/measurements/t157-native-groups-linux.json",
-      "remaining": "All relevant container/property/state combinations, narrow/wide roots and explicit constraints.",
-      "nextAction": "Measure common layout rules across several control families; do not calibrate isolated forms."
+      "lastConfirmation": "docs/measurements/t157-column-widths-linux.json",
+      "remaining": "Wide automatic lanes, native real-form resize, nested/hidden/wrapped/stretch combinations, and full native geometry.",
+      "nextAction": "Measure the real document totals group and wide automatic lanes with unequal captions."
     },
     {
       "id": "tables.native-context-fixtures",

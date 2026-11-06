@@ -1,9 +1,9 @@
 //! Derive captions, binding types and appearance once in the shared backend; the UI only lays them out.
 
 use super::{
-    AppearanceDiagnostic, ComposedForm, EffectiveDefinition, EffectiveElement, ElementIdentity,
-    ElementKind, FormDocument, FormResource, PropertySource, ResolvedColor, ResolvedFont,
-    SourcedProperty,
+    AppearanceDiagnostic, ComposedForm, EffectiveDefinition, EffectiveElement, ElementFamily,
+    ElementIdentity, ElementKind, FormDocument, FormResource, PropertySource, ResolvedColor,
+    ResolvedFont, SourcedProperty,
     appearance::{self, Appearance},
 };
 use crate::project::{
@@ -72,6 +72,20 @@ pub enum FieldTitleLocation {
     None,
 }
 
+/// Explicit band appearance on a table column or column group.
+#[derive(Clone, Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TableColumnAppearance {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub header_background: Option<ResolvedColor>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub footer_background: Option<ResolvedColor>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub footer_foreground: Option<ResolvedColor>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub footer_font: Option<ResolvedFont>,
+}
+
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ElementPresentation {
@@ -89,6 +103,8 @@ pub struct ElementPresentation {
     pub caption: PresentationText,
     pub tooltip: Option<PresentationText>,
     pub footer_text: Option<PresentationText>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub table_column_appearance: Option<TableColumnAppearance>,
     pub value_type: FieldType,
     pub binding: Option<PropertySource>,
     pub choices: Vec<PresentationText>,
@@ -181,9 +197,9 @@ impl<'a> VisitScope<'a> {
     where
         'a: 'b,
     {
-        property(element, name).or_else(|| {
+        element.property(name).or_else(|| {
             self.pages_parent(element)
-                .and_then(|parent| property(parent, name))
+                .and_then(|parent| parent.property(name))
         })
     }
 }
@@ -199,9 +215,9 @@ fn visit(
 ) {
     let (binding_caption, value_type, binding) = bind(element, form, resources);
     let binding_caption = binding_caption.map(|caption| column_caption(caption, scope.in_table));
-    let command =
-        property(element, "CommandName").and_then(|value| appearance::text(&value.property.value));
-    let caption = property(element, "Title")
+    let command = element.scalar("CommandName");
+    let caption = element
+        .property("Title")
         .and_then(|value| literal(&value.property.value))
         .or_else(|| command.and_then(|command| command_caption(command, form, resources)))
         .or(binding_caption)
@@ -214,21 +230,21 @@ fn visit(
         });
     let group = element.kind == Some(ElementKind::UsualGroup);
     let tab = element.kind == Some(ElementKind::Pages) || scope.pages_parent(element).is_some();
-    let font = appearance.font(property(element, "Font"), font_role(element));
+    let font = appearance.font(element.property("Font"), font_role(element));
     let title_font = appearance.font(
         scope.title_property(element, "TitleFont"),
         title_font_role(element),
     );
-    let foreground = appearance.color(property(element, "TextColor"), text_color_role(element));
+    let foreground = appearance.color(element.property("TextColor"), text_color_role(element));
     let background = appearance.color(
-        property(element, "BackColor"),
+        element.property("BackColor"),
         if element.kind == Some(ElementKind::Button) {
             "ButtonBackColor"
         } else {
             "BackColor"
         },
     );
-    let border = appearance.color(property(element, "BorderColor"), "BorderColor");
+    let border = appearance.color(element.property("BorderColor"), "BorderColor");
     let title_color = appearance.color(
         scope.title_property(element, "TitleTextColor"),
         if tab {
@@ -239,7 +255,8 @@ fn visit(
             "FormTextColor"
         },
     );
-    let choices = property(element, "ChoiceList")
+    let choices = element
+        .property("ChoiceList")
         .map(|value| choices(&value.property.value, resources))
         .filter(|values| !values.is_empty())
         .unwrap_or_else(|| enum_choices(&value_type, resources));
@@ -263,9 +280,13 @@ fn visit(
         title_location: title_location(element),
         picture: super::pictures::resolve(element, resources, &mut appearance.diagnostics),
         caption,
-        tooltip: property(element, "ToolTip").and_then(|value| literal(&value.property.value)),
-        footer_text: property(element, "FooterText")
+        tooltip: element
+            .property("ToolTip")
             .and_then(|value| literal(&value.property.value)),
+        footer_text: element
+            .property("FooterText")
+            .and_then(|value| literal(&value.property.value)),
+        table_column_appearance: table_column_appearance(element, scope, appearance),
         value_type,
         binding,
         choices,
@@ -294,11 +315,48 @@ fn visit(
     }
 }
 
+fn table_column_appearance(
+    element: &EffectiveElement,
+    scope: VisitScope<'_>,
+    appearance: &mut Appearance<'_>,
+) -> Option<TableColumnAppearance> {
+    let kind = element.kind?;
+    if !scope.in_table
+        || (kind != ElementKind::ColumnGroup && kind.family() != ElementFamily::Field)
+    {
+        return None;
+    }
+    let header_background = element.property("TitleBackColor");
+    let footer_background = element.property("FooterBackColor");
+    let footer_foreground = element.property("FooterTextColor");
+    let footer_font = element.property("FooterFont");
+    if [
+        header_background,
+        footer_background,
+        footer_foreground,
+        footer_font,
+    ]
+    .into_iter()
+    .all(|property| property.is_none())
+    {
+        return None;
+    }
+    Some(TableColumnAppearance {
+        header_background: header_background
+            .map(|value| appearance.color(Some(value), "HeaderBackColor")),
+        footer_background: footer_background
+            .map(|value| appearance.color(Some(value), "TableFooterBackColor")),
+        footer_foreground: footer_foreground
+            .map(|value| appearance.color(Some(value), "FormTextColor")),
+        footer_font: footer_font.map(|value| appearance.font(Some(value), "NormalTextFont")),
+    })
+}
+
 fn text_color_role(element: &EffectiveElement) -> &'static str {
     match element.kind {
         Some(ElementKind::Button)
             if matches!(
-                scalar(&element.properties, "Type"),
+                element.scalar("Type"),
                 Some("Hyperlink" | "CommandBarHyperlink")
             ) =>
         {
@@ -313,8 +371,8 @@ fn text_color_role(element: &EffectiveElement) -> &'static str {
 
 fn font_role(element: &EffectiveElement) -> &'static str {
     if element.kind == Some(ElementKind::Button)
-        && property(element, "DefaultButton")
-            .and_then(|value| appearance::text(&value.property.value))
+        && element
+            .scalar("DefaultButton")
             .is_some_and(|value| matches!(value, "true" | "1"))
     {
         "PrimaryButtonFont"
@@ -325,7 +383,7 @@ fn font_role(element: &EffectiveElement) -> &'static str {
 
 fn title_font_role(element: &EffectiveElement) -> &'static str {
     if element.kind == Some(ElementKind::UsualGroup)
-        && scalar(&element.properties, "Representation") != Some("None")
+        && element.scalar("Representation") != Some("None")
     {
         "LargeTextFont"
     } else {
@@ -401,9 +459,9 @@ fn is_displayed(
     });
     if needs_binding
         && binding.is_none()
-        && let Some(path) = property(element, "DataPath").filter(|property| {
-            appearance::text(&property.property.value).is_some_and(|path| !path.is_empty())
-        })
+        && let Some(path) = element
+            .property("DataPath")
+            .filter(|property| property.text().is_some_and(|path| !path.is_empty()))
     {
         appearance.diagnostics.push(AppearanceDiagnostic {
             code: "binding_missing",
@@ -411,13 +469,11 @@ fn is_displayed(
             target: None,
         });
     }
-    (!needs_binding || binding.is_some())
-        && property(element, "Visible").and_then(|value| appearance::text(&value.property.value))
-            != Some("false")
+    (!needs_binding || binding.is_some()) && element.scalar("Visible") != Some("false")
 }
 
 fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
-    match scalar(&element.properties, "TitleLocation") {
+    match element.scalar("TitleLocation") {
         Some("Left") => FieldTitleLocation::Left,
         Some("Right") => FieldTitleLocation::Right,
         Some("Top") => FieldTitleLocation::Top,
@@ -451,29 +507,22 @@ fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
 }
 
 fn group_united(element: &EffectiveElement) -> Option<bool> {
-    (element.kind == Some(ElementKind::UsualGroup)).then(|| {
-        match scalar(&element.properties, "United") {
-            Some("true" | "1") => true,
-            Some("false" | "0") => false,
-            _ => super::DEFAULT_GROUP_UNITED,
-        }
+    (element.kind == Some(ElementKind::UsualGroup)).then(|| match element.scalar("United") {
+        Some("true" | "1") => true,
+        Some("false" | "0") => false,
+        _ => super::DEFAULT_GROUP_UNITED,
     })
 }
 
 fn grouping(element: &EffectiveElement) -> FormGrouping {
-    match property(element, "Group").and_then(|property| appearance::text(&property.property.value))
-    {
+    match element.scalar("Group") {
         Some("Horizontal" | "AlwaysHorizontal") => FormGrouping::Horizontal,
         Some("HorizontalIfPossible") => FormGrouping::HorizontalIfPossible,
         Some("Vertical") => FormGrouping::Vertical,
+        _ if element.kind == Some(ElementKind::UsualGroup) => FormGrouping::HorizontalIfPossible,
         _ if matches!(
             element.kind,
-            Some(
-                ElementKind::UsualGroup
-                    | ElementKind::ButtonGroup
-                    | ElementKind::CommandBar
-                    | ElementKind::Popup
-            )
+            Some(ElementKind::ButtonGroup | ElementKind::CommandBar | ElementKind::Popup)
         ) =>
         {
             FormGrouping::Horizontal
@@ -482,24 +531,6 @@ fn grouping(element: &EffectiveElement) -> FormGrouping {
     }
 }
 
-pub(super) fn property<'a>(
-    element: &'a EffectiveElement,
-    name: &str,
-) -> Option<&'a SourcedProperty> {
-    element.properties.iter().find(|value| {
-        value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
-            && value.property.key.name == name
-    })
-}
-fn scalar<'a>(values: &'a [SourcedProperty], name: &str) -> Option<&'a str> {
-    values
-        .iter()
-        .find(|value| {
-            value.property.key.name == name
-                && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
-        })
-        .and_then(|value| appearance::text(&value.property.value))
-}
 fn record<'a>(value: &'a MetadataValue, name: &str) -> Option<&'a MetadataProperty> {
     if let MetadataValue::Record(fields) = value {
         fields.iter().find(|value| value.key.name == name)
@@ -538,12 +569,7 @@ pub(super) fn literal(value: &MetadataValue) -> Option<PresentationText> {
 }
 pub(super) fn definition_type(definition: &EffectiveDefinition) -> FieldType {
     definition
-        .properties
-        .iter()
-        .find(|value| {
-            value.property.key.name == "Type"
-                && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
-        })
+        .property("Type")
         .map(|value| field_type(&value.property.value))
         .unwrap_or_default()
 }
@@ -612,9 +638,7 @@ fn bind(
     form: &ComposedForm,
     resources: &[FormResource],
 ) -> (Option<PresentationText>, FieldType, Option<PropertySource>) {
-    let Some(path) =
-        property(element, "DataPath").and_then(|value| appearance::text(&value.property.value))
-    else {
+    let Some(path) = element.scalar("DataPath") else {
         return (None, FieldType::default(), None);
     };
     let mut path = path.split('.');
@@ -724,12 +748,7 @@ fn metadata_binding(
 }
 fn definition_caption(value: &EffectiveDefinition) -> Option<PresentationText> {
     value
-        .properties
-        .iter()
-        .find(|value| {
-            value.property.key.name == "Title"
-                && value.property.key.namespace.as_deref() == Some(super::FORM_NAMESPACE)
-        })
+        .property("Title")
         .and_then(|value| literal(&value.property.value))
         .or_else(|| {
             value

@@ -11,7 +11,7 @@ use serde::Serialize;
 
 use super::{
     EffectiveElement, ElementIdentity, ElementKind, FORM_NAMESPACE, FormPreview, SourcedProperty,
-    SourcedQualifier, appearance, commands, handlers, presentation,
+    SourcedQualifier, appearance, commands, handlers,
 };
 use crate::project::metadata_model::MetadataValue;
 
@@ -186,31 +186,25 @@ impl FormPreview {
     #[must_use]
     pub fn property_palette(&self, identity: &ElementIdentity) -> Option<PropertyPalette<'_>> {
         let element = self.form.root.find(identity)?;
+        let presentation = || {
+            self.presentation
+                .elements
+                .iter()
+                .find(|item| &item.identity == identity)
+        };
         let rows = match element.kind {
             Some(ElementKind::Form) if identity == &self.form.root.identity => {
                 root_form::Context::new(self).map(|context| {
                     self.palette_rows(element, root_form::definitions(context, element))
                 })
             }
-            Some(ElementKind::InputField) => self
-                .presentation
-                .elements
-                .iter()
-                .find(|item| &item.identity == identity)
+            Some(ElementKind::InputField) => presentation()
                 .and_then(|item| input_field::Context::new(item, element))
                 .map(|context| self.palette_rows(element, input_field::definitions(context))),
-            Some(ElementKind::Button) => self
-                .presentation
-                .elements
-                .iter()
-                .find(|item| &item.identity == identity)
+            Some(ElementKind::Button) => presentation()
                 .and_then(|item| button::Context::new(&self.form, item, element))
                 .map(|context| self.palette_rows(element, button::definitions(context))),
-            Some(ElementKind::CheckBoxField) => self
-                .presentation
-                .elements
-                .iter()
-                .find(|item| &item.identity == identity)
+            Some(ElementKind::CheckBoxField) => presentation()
                 .and_then(|item| checkbox::Context::new(item, element))
                 .map(|context| self.palette_rows(element, checkbox::definitions(context))),
             _ => ordinary_vertical_group(element)
@@ -249,10 +243,7 @@ impl FormPreview {
             let value = match definition.source {
                 SettingSource::Property(name) => properties
                     .iter()
-                    .position(|property| {
-                        property.property.key.namespace.as_deref() == Some(FORM_NAMESPACE)
-                            && property.property.key.name == name
-                    })
+                    .position(|property| property.has_form_name(name))
                     .map_or_else(missing, |index| {
                         taken_properties[index] = true;
                         declared(index, 0)
@@ -350,15 +341,14 @@ fn ordinary_vertical_group(element: &EffectiveElement) -> bool {
     // This catalog was captured for an ordinary vertical group. Specialized
     // behavior can introduce other properties and change their availability.
     element.kind == Some(ElementKind::UsualGroup)
-        && matches!(
-            setting_text(element, "Behavior"),
-            None | Some("Auto" | "Usual")
-        )
-        && setting_text(element, "Group") == Some("Vertical")
+        && matches!(element.scalar("Behavior"), None | Some("Auto" | "Usual"))
+        && element.scalar("Group") == Some("Vertical")
 }
 
-fn setting_text<'a>(element: &'a EffectiveElement, name: &str) -> Option<&'a str> {
-    appearance::text(&presentation::property(element, name)?.property.value)
+fn unbound_field(element: &EffectiveElement) -> bool {
+    element
+        .property("DataPath")
+        .is_none_or(|property| property.text() == Some(""))
 }
 
 const USUAL_GROUP: &[PaletteDefinition] = {

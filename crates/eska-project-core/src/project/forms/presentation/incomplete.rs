@@ -2,7 +2,7 @@
 
 use super::{
     EffectiveElement, ElementKind, FormResource, PropertySource, appearance, metadata_property,
-    property, standard_property,
+    standard_property,
 };
 
 pub(super) fn mark(
@@ -16,9 +16,7 @@ pub(super) fn mark(
     ) {
         return false;
     }
-    let scalar =
-        |name| property(element, name).and_then(|value| appearance::text(&value.property.value));
-    match scalar("AutoMarkIncomplete") {
+    match element.scalar("AutoMarkIncomplete") {
         Some("true") => return true,
         Some("false") => return false,
         _ => {}
@@ -39,7 +37,8 @@ pub(super) fn mark(
     ) {
         metadata_property(owner, "FillChecking", resources)
     } else {
-        scalar("DataPath")
+        element
+            .scalar("DataPath")
             .and_then(|path| path.rsplit('.').next())
             .and_then(|name| standard_property(owner, name, "FillChecking", resources))
     };

@@ -2,7 +2,7 @@
 
 use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
-    appearance, presentation, setting_text,
+    unbound_field,
 };
 use crate::project::forms::{EffectiveElement, ElementKind, ElementPresentation, FieldValueKind};
 
@@ -20,11 +20,11 @@ impl Context {
         match (view.parent_kind, view.value_type.kind) {
             (Some(ElementKind::Table), FieldValueKind::Boolean) => Some(Self::Column),
             (Some(ElementKind::Form), FieldValueKind::Boolean) => {
-                match setting_text(element, "CheckBoxType") {
+                match element.scalar("CheckBoxType") {
                     None | Some("Auto" | "CheckBox") => Some(Self::Checkbox),
                     Some("Tumbler") => Some(Self::Tumbler {
                         equal_width: !matches!(
-                            setting_text(element, "EqualItemsWidth"),
+                            element.scalar("EqualItemsWidth"),
                             Some("false" | "0")
                         ),
                     }),
@@ -32,11 +32,7 @@ impl Context {
                     _ => None,
                 }
             }
-            (Some(ElementKind::Form), FieldValueKind::Unknown)
-                if presentation::property(element, "DataPath").is_none_or(|property| {
-                    appearance::text(&property.property.value) == Some("")
-                }) =>
-            {
+            (Some(ElementKind::Form), FieldValueKind::Unknown) if unbound_field(element) => {
                 Some(Self::Unbound)
             }
             _ => None,

@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "locale": "en",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "sourceFiles": {
+    "Leading": "8c06d99c0b3742140f421a4b152fa6555d1a7c0ab6452a224eb07d9b880f9ddb",
+    "Deep": "a16126a4b2d01c5f2a116875ef41561200e3db7adec71f8f6da55b980c17a5a5",
+    "Multiple": "2c63e488e1edcd50cd55a1a9a91c9d8c16d57d3ac08ff18150d5291236eaa660"
+  },
+  "cases": [
+    {
+      "form": "ProbeRowFlat",
+      "case": "Flat",
+      "parentUnited": null,
+      "wrapperUnited": null,
+      "grouping": null,
+      "throughAlign": "Auto",
+      "screenshotSha256": "236c0415469e2f155566c6c3bcd9eb783ac646e96f16389229f982a6a4398115",
+      "frame": [
+        413,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          191,
+          51
+        ],
+        "A2": [
+          201,
+          99,
+          191,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          191,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          191,
+          23
+        ]
+      },
+      "fixture": null
+    },
+    {
+      "form": "ProbeRowDefault",
+      "case": "Default",
+      "parentUnited": null,
+      "wrapperUnited": null,
+      "grouping": "Horizontal",
+      "throughAlign": "Auto",
+      "screenshotSha256": "34d4852187e9fa9afc3ae16d6b2f147fa480d7e857b3191dbbf49c3740e471cd",
+      "frame": [
+        413,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          191,
+          51
+        ],
+        "A2": [
+          201,
+          99,
+          191,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          191,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          191,
+          23
+        ]
+      },
+      "fixture": "Leading"
+    },
+    {
+      "form": "ProbeRowTT",
+      "case": "TT",
+      "parentUnited": "true",
+      "wrapperUnited": "true",
+      "grouping": "Horizontal",
+      "throughAlign": "Auto",
+      "screenshotSha256": "0bf416e6c51e970e8a175bfa68f38368c2823b102a28e29841b26b9d5b20ae45",
+      "frame": [
+        413,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          191,
+          51
+        ],
+        "A2": [
+          201,
+          99,
+          191,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          191,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          191,
+          23
+        ]
+      },
+      "fixture": "Leading"
+    },
+    {
+      "form": "ProbeRowTF",
+      "case": "TF",
+      "parentUnited": "true",
+      "wrapperUnited": "false",
+      "grouping": "Horizontal",
+      "throughAlign": "Auto",
+      "screenshotSha256": "01ed30957cd1c9da0f3b9964840160e71d959029e2c0f2c6c82d9c9de2a8f1b9",
+      "frame": [
+        413,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          191,
+          51
+        ],
+        "A2": [
+          201,
+          99,
+          191,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          191,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          191,
+          23
+        ]
+      },
+      "fixture": "Leading"
+    },
+    {
+      "form": "ProbeRowFT",
+      "case": "FT",
+      "parentUnited": "false",
+      "wrapperUnited": "true",
+      "grouping": "Horizontal",
+      "throughAlign": "Auto",
+      "screenshotSha256": "76bbc781f2535ad92413f7dca60157f805a46e9ad84add0f6652c4ebc83ac688",
+      "frame": [
+        413,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          191,
+          51
+        ],
+        "A2": [
+          201,
+          99,
+          191,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          191,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          191,
+          23
+        ]
+      },
+      "fixture": "Leading"
+    },
+    {
+      "form": "ProbeRowFF",
+      "case": "FF",
+      "parentUnited": "false",
+      "wrapperUnited": "false",
+      "grouping": "Horizontal",
+      "throughAlign": "Auto",
+      "screenshotSha256": "7cc9e80678a8c16bddbc6692692a8589ac5acf213e11cf8283ec834e010fb2eb",
+      "frame": [
+        413,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          191,
+          51
+        ],
+        "A2": [
+          201,
+          99,
+          191,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          191,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          191,
+          23
+        ]
+      },
+      "fixture": "Leading"
+    },
+    {
+      "form": "ProbeRowDeep",
+      "case": "Deep",
+      "parentUnited": "false",
+      "wrapperUnited": "false",
+      "grouping": "Horizontal",
+      "throughAlign": "Auto",
+      "screenshotSha256": "c58197cc640d5fdfe560c16c6603dce0fecabc57b21116f74103f0b7189316f0",
+      "frame": [
+        413,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          191,
+          51
+        ],
+        "A2": [
+          201,
+          99,
+          191,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          191,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          191,
+          23
+        ]
+      },
+      "fixture": "Deep"
+    },
+    {
+      "form": "ProbeRowDontUse",
+      "case": "DontUse",
+      "parentUnited": null,
+      "wrapperUnited": null,
+      "grouping": "Horizontal",
+      "throughAlign": "DontUse",
+      "screenshotSha256": "db9829dfab4ac644dd86c48ea896f32827b0637d1615938c4334bb18e452aa18",
+      "frame": [
+        413,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          191,
+          51
+        ],
+        "A2": [
+          88,
+          99,
+          304,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          191,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          191,
+          23
+        ]
+      },
+      "fixture": "Leading",
+      "positionTolerancePx": 1
+    },
+    {
+      "form": "ProbeRowUse",
+      "case": "Use",
+      "parentUnited": null,
+      "wrapperUnited": null,
+      "grouping": "Horizontal",
+      "throughAlign": "Use",
+      "screenshotSha256": "0341eb868e85d53c2eb11276dc73f624d24cfe002213a1c29386b35008d731b7",
+      "frame": [
+        413,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          191,
+          51
+        ],
+        "A2": [
+          201,
+          99,
+          191,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          191,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          191,
+          23
+        ]
+      },
+      "fixture": "Leading"
+    },
+    {
+      "form": "ProbeRowConditional",
+      "case": "Conditional",
+      "parentUnited": null,
+      "wrapperUnited": null,
+      "grouping": "HorizontalIfPossible",
+      "throughAlign": "Auto",
+      "screenshotSha256": "e2c73df03c114f75fcaadbffd5625a32e214be09ed8e92cec4d881d9aa7fb413",
+      "frame": [
+        413,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          191,
+          51
+        ],
+        "A2": [
+          201,
+          99,
+          191,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          191,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          191,
+          23
+        ]
+      },
+      "fixture": "Leading"
+    },
+    {
+      "form": "ProbeRowMultiple",
+      "case": "Multiple",
+      "parentUnited": null,
+      "wrapperUnited": null,
+      "grouping": "Horizontal",
+      "throughAlign": "Auto",
+      "screenshotSha256": "5590489cc8e189941b0268254fa17a4582aaeb5a44eae51b8dd283ac3300b5be",
+      "frame": [
+        484,
+        199
+      ],
+      "controls": {
+        "A1": [
+          201,
+          39,
+          262,
+          51
+        ],
+        "A2": [
+          201,
+          99,
+          151,
+          23
+        ],
+        "B1": [
+          201,
+          131,
+          262,
+          23
+        ],
+        "B2": [
+          201,
+          163,
+          262,
+          23
+        ],
+        "A3": [
+          362,
+          99,
+          101,
+          23
+        ]
+      },
+      "fixture": "Multiple"
+    }
+  ]
+}

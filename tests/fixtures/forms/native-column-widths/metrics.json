@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 1,
+  "profile": "linux-taxi-96",
+  "build": "8.3.27.2342",
+  "coordinates": "form-frame",
+  "fixtures": {
+    "Columns": {
+      "sha256": "21e54d63f0e636aaf31f8695891b7e80153121137d1f7d7670087cb4797ae4d3",
+      "cases": [
+        {
+          "name": "Default",
+          "frame": [
+            366,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              131,
+              23
+            ],
+            "B": [
+              154,
+              39,
+              191,
+              23
+            ]
+          },
+          "screenshotSha256": "dea0294149eeebf623b6f2dd03958da7b447d8879a2d338a87c3d8929b70bc78"
+        },
+        {
+          "name": "WideAt34",
+          "frame": [
+            374,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              134,
+              23
+            ],
+            "B": [
+              157,
+              39,
+              196,
+              23
+            ]
+          },
+          "screenshotSha256": "6434d64f21128729d2d852ebc5782c2addc0284a4cff7b2d46bacd7fdf390337"
+        },
+        {
+          "name": "WideAt44",
+          "frame": [
+            474,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              175,
+              23
+            ],
+            "B": [
+              198,
+              39,
+              255,
+              23
+            ]
+          },
+          "screenshotSha256": "2aac7eb22e963e7f6a9078b7a8223b82d86222b4398b0106dca6320fef868301"
+        },
+        {
+          "name": "LeftWideLarge",
+          "frame": [
+            754,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              300,
+              23
+            ],
+            "B": [
+              323,
+              39,
+              410,
+              23
+            ]
+          },
+          "screenshotSha256": "dcffa50a932b53538b679d09220f3604e28f973a6134a2355714a771f5dc4a5c"
+        },
+        {
+          "name": "WideAt94",
+          "frame": [
+            974,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              410,
+              23
+            ],
+            "B": [
+              433,
+              39,
+              410,
+              23
+            ]
+          },
+          "screenshotSha256": "df3113c830bf5dfc2815a6f865b07f474998b6178493afe021bd27db9f1e5bfc"
+        },
+        {
+          "name": "Shrink15",
+          "frame": [
+            186,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              71,
+              23
+            ],
+            "B": [
+              94,
+              39,
+              71,
+              23
+            ]
+          },
+          "screenshotSha256": "f25102c40374d4ab3b0f8b235e4e9545ac6911315568eba0b323333953804d1c"
+        },
+        {
+          "name": "Shrink20",
+          "frame": [
+            234,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              87,
+              23
+            ],
+            "B": [
+              110,
+              39,
+              103,
+              23
+            ]
+          },
+          "screenshotSha256": "c3a7e380d56ce4930e105c72ce24813eec029e1967f2d1fd361893c44a903e38"
+        },
+        {
+          "name": "Shrink25",
+          "frame": [
+            284,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              103,
+              23
+            ],
+            "B": [
+              126,
+              39,
+              137,
+              23
+            ]
+          },
+          "screenshotSha256": "884c7f95b699e4c77adc41d2351e2b23b30bb3e0080d89270dcf72f3e632e786"
+        },
+        {
+          "name": "WideFixedRight",
+          "frame": [
+            754,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              410,
+              23
+            ],
+            "B": [
+              433,
+              39,
+              191,
+              23
+            ]
+          },
+          "screenshotSha256": "b9483cf77cf3c237e62494ba0ca75d8aa12a5d414e980a0faae7caa5be822c19",
+          "edit": "fixRight"
+        }
+      ]
+    },
+    "Three": {
+      "sha256": "b13406a7d6cf6a187948084e2eb502947bff1560e24025e763d65acaf4984aae",
+      "cases": [
+        {
+          "name": "LeftWideThree",
+          "frame": [
+            754,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              212,
+              23
+            ],
+            "B": [
+              235,
+              39,
+              309,
+              23
+            ],
+            "C": [
+              554,
+              39,
+              179,
+              23
+            ]
+          },
+          "screenshotSha256": "e366ede08450fcbe7b2214c3d7b4691af2cefc5b38796d14229d243953d27e15"
+        }
+      ]
+    },
+    "Conditional": {
+      "sha256": "91458145c78b225c5c4b45fce97901b9a661bd948e1ccecca8c1c68d4b84b565",
+      "cases": [
+        {
+          "name": "ShrinkConditional",
+          "frame": [
+            234,
+            107
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              200,
+              23
+            ],
+            "B": [
+              13,
+              71,
+              200,
+              23
+            ]
+          },
+          "screenshotSha256": "3196a74f4501a35a3c3f58b0cc37ba086449d50c3241c174e397f8564eeb8ac5"
+        },
+        {
+          "name": "WideConditional",
+          "frame": [
+            754,
+            75
+          ],
+          "controls": {
+            "A": [
+              13,
+              39,
+              300,
+              23
+            ],
+            "B": [
+              323,
+              39,
+              410,
+              23
+            ]
+          },
+          "screenshotSha256": "ee273653a2a2151add9c472e135430a357b3add6ffb7ba88bb810353fdcff2e1"
+        }
+      ]
+    },
+    "Reference": {
+      "sha256": "c5af73a9a2ca1df804982cbebd1966d54d9bdc377e1ebc35fb65d5b4e2206336",
+      "cases": [
+        {
+          "name": "RefExplicit",
+          "frame": [
+            808,
+            75
+          ],
+          "controls": {
+            "A": [
+              95,
+              39,
+              353,
+              23
+            ],
+            "B": [
+              584,
+              39,
+              203,
+              23
+            ]
+          },
+          "screenshotSha256": "2eb1c077e09527101aad5aaa152ba04e86883e4bd9242eccfa730c240507c47d",
+          "tolerancePx": 2
+        },
+        {
+          "name": "RefExplicit94",
+          "frame": [
+            974,
+            75
+          ],
+          "controls": {
+            "A": [
+              95,
+              39,
+              410,
+              23
+            ],
+            "B": [
+              641,
+              39,
+              312,
+              23
+            ]
+          },
+          "screenshotSha256": "5e4bc517c0b509ee263df0b28b0c57a639f7dca933a5c80daef8a90e241d30eb",
+          "tolerancePx": 2
+        },
+        {
+          "name": "RefExplicitFixed",
+          "frame": [
+            974,
+            75
+          ],
+          "controls": {
+            "A": [
+              95,
+              39,
+              353,
+              23
+            ],
+            "B": [
+              584,
+              39,
+              369,
+              23
+            ]
+          },
+          "screenshotSha256": "30defffecbfa153bb9c5aebed224418cfb7dcf5dc8a1698368aff2cf6e4c2c7d",
+          "tolerancePx": 2,
+          "edit": "fixLeft"
+        },
+        {
+          "name": "RefAuto",
+          "frame": [
+            658,
+            75
+          ],
+          "controls": {
+            "A": [
+              95,
+              39,
+              203,
+              23
+            ],
+            "B": [
+              434,
+              39,
+              203,
+              23
+            ]
+          },
+          "screenshotSha256": "b479dbb6b9ab95094965b759d43c72a603ece2b232f0dfab9112fe1bf48b1162",
+          "tolerancePx": 2,
+          "edit": "automatic"
+        }
+      ]
+    }
+  }
+}

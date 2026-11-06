@@ -50,9 +50,7 @@ pub(super) fn definitions(
     context: Context,
     element: &EffectiveElement,
 ) -> impl Iterator<Item = (&'static PaletteDefinition, bool)> {
-    let settings_storage = presentation::property(element, "SaveDataInSettings")
-        .and_then(|property| appearance::text(&property.property.value))
-        == Some("UseList");
+    let settings_storage = element.scalar("SaveDataInSettings") == Some("UseList");
     FORM.iter()
         .filter(move |definition| match definition.id {
             "SettingsStorage" => settings_storage,

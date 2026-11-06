@@ -40,7 +40,7 @@ pub use pictures::FormPicture;
 pub use preparation::{FormInput, FormInputSource, FormPreparation, prepare};
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,
-    FormPresentation, FormScriptVariant, PresentationText, present,
+    FormPresentation, FormScriptVariant, PresentationText, TableColumnAppearance, present,
 };
 pub use references::{FormReference, ReferenceSlot};
 pub use resources::FormResource;
@@ -61,6 +61,10 @@ pub const MAX_FORM_BYTES: usize = 16 * 1024 * 1024;
 pub const MAX_FORM_ELEMENTS: usize = 16_384;
 pub const MAX_FORM_CONTEXT_BYTES: usize = 32 * 1024 * 1024;
 pub const MAX_FORM_DEPENDENCIES: usize = 1024;
+
+fn is_form_property(key: &PropertyKey, name: &str) -> bool {
+    key.name == name && key.namespace.as_deref() == Some(FORM_NAMESPACE)
+}
 
 /// Root identity cannot collide with any user-provided XML id, including negative helper ids.
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq, Serialize)]
@@ -138,10 +142,7 @@ impl FormElement {
     pub fn property(&self, name: &str) -> Option<&MetadataProperty> {
         self.properties
             .iter()
-            .find(|value| {
-                value.property.key.namespace.as_deref() == Some(FORM_NAMESPACE)
-                    && value.property.key.name == name
-            })
+            .find(|value| is_form_property(&value.property.key, name))
             .map(|value| &value.property)
     }
 

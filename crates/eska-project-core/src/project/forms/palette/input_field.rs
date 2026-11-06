@@ -1,9 +1,9 @@
 use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
-    setting_text,
+    unbound_field,
 };
 use crate::project::forms::{
-    EffectiveElement, ElementPresentation, FieldValueKind, appearance, presentation, references,
+    EffectiveElement, ElementPresentation, FieldValueKind, presentation, references,
 };
 use crate::project::metadata_model::PropertyKey;
 
@@ -54,20 +54,14 @@ impl InputBinding {
                         && key.name == "ValueListType"
                 }) =>
             {
-                let extended = match setting_text(element, "ExtendedEditMultipleValues") {
+                let extended = match element.scalar("ExtendedEditMultipleValues") {
                     None | Some("false" | "0") => false,
                     Some("true" | "1") => true,
                     _ => return None,
                 };
                 Self::ValueList { extended }
             }
-            FieldValueKind::Unknown
-                if presentation::property(element, "DataPath").is_none_or(|property| {
-                    appearance::text(&property.property.value) == Some("")
-                }) =>
-            {
-                Self::Unbound
-            }
+            FieldValueKind::Unknown if unbound_field(element) => Self::Unbound,
             _ => return None,
         })
     }
@@ -101,7 +95,9 @@ impl Context {
             return None;
         }
         let manual_max = |name| {
-            setting_text(element, name).is_some_and(|value| matches!(value, "false" | "No" | "0"))
+            element
+                .scalar(name)
+                .is_some_and(|value| matches!(value, "false" | "No" | "0"))
         };
         Some(Self {
             binding,
