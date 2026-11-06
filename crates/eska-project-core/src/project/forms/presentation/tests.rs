@@ -524,6 +524,60 @@ fn borrowed_attribute_inherits_type_and_fill_check_but_overrides_its_caption() {
 }
 
 #[test]
+fn tabular_total_uses_the_effective_numeric_column_and_preserves_explicit_titles() {
+    let resources = [
+        binding_resource(
+            "base",
+            "",
+            r#"<TabularSection uuid="base-lines"><Properties><Name>Lines</Name></Properties><ChildObjects>
+                <Attribute uuid="base-qty"><Properties><Name>Qty</Name><Type><v8:Type>xs:decimal</v8:Type><v8:NumberQualifiers><v8:Digits>10</v8:Digits><v8:FractionDigits>2</v8:FractionDigits></v8:NumberQualifiers></Type></Properties></Attribute>
+                <Attribute uuid="base-comment"><Properties><Name>Comment</Name><Type><v8:Type>xs:string</v8:Type></Type></Properties></Attribute>
+                <Attribute uuid="base-total-comment"><Properties><Name>TotalComment</Name><Type><v8:Type>xs:string</v8:Type></Type></Properties></Attribute>
+                <Attribute uuid="base-text"><Properties><Name>Text</Name><Type><v8:Type>xs:string</v8:Type></Type></Properties></Attribute>
+            </ChildObjects></TabularSection>"#,
+        ),
+        binding_resource(
+            "extension",
+            "",
+            r#"<TabularSection uuid="extension-lines"><Properties><Name>Lines</Name></Properties><ChildObjects>
+                <Attribute uuid="extension-qty"><Properties><Name>Qty</Name><Synonym><v8:item><v8:lang>en</v8:lang><v8:content>Quantity</v8:content></v8:item></Synonym></Properties></Attribute>
+            </ChildObjects></TabularSection>"#,
+        ),
+    ];
+    let view = binding_view(
+        &resources,
+        r#"<LabelField name="Total" id="1"><DataPath>Object.Lines.TotalQty</DataPath></LabelField>
+           <LabelField name="OwnTitle" id="2"><DataPath>Object.Lines.TotalQty</DataPath><Title>Custom total</Title></LabelField>
+           <LabelField name="Direct" id="3"><DataPath>Object.Lines.TotalComment</DataPath></LabelField>
+           <LabelField name="NonNumeric" id="4"><DataPath>Object.Lines.TotalText</DataPath></LabelField>
+           <LabelField name="Missing" id="5"><DataPath>Object.Lines.TotalMissing</DataPath></LabelField>"#,
+    );
+    let total = &view.elements[1];
+    assert_eq!(total.tabular_total, Some(TabularTotalCaption::Automatic));
+    assert!(
+        matches!(&total.caption, PresentationText::Literal { items } if items[0].content == "Quantity")
+    );
+    assert_eq!(total.value_type.kind, FieldValueKind::Number);
+    assert_eq!(total.value_type.digits, Some(10));
+    assert_eq!(total.value_type.fraction, Some(2));
+    assert_eq!(total.binding.as_ref().unwrap().source, "extension");
+    assert_eq!(
+        view.elements[2].tabular_total,
+        Some(TabularTotalCaption::Overridden)
+    );
+    assert!(
+        matches!(&view.elements[2].caption, PresentationText::Name { text } if text == "Custom total")
+    );
+    assert_eq!(view.elements[3].value_type.kind, FieldValueKind::String);
+    for field in &view.elements[3..] {
+        assert_eq!(field.tabular_total, None);
+    }
+    for field in &view.elements[4..] {
+        assert_eq!(field.value_type.kind, FieldValueKind::Unknown);
+    }
+}
+
+#[test]
 fn standard_attribute_properties_merge_individually_across_partial_extension_records() {
     let resources = [
         binding_resource(
