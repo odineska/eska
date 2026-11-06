@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "comparisonMasks": [],
+  "pixelTolerance": 0,
+  "source": "Reuses the recorded native button pose and row images; the unmaximized viewport origin follows the MDI child surface.",
+  "primaryButtonForm": "FontRegular",
+  "primaryButtonSource": "../native-primary-buttons/FontRegular.xml",
+  "primaryButtonSourceSha256": "59966b967492fae76d621c3eee1d85015febf81c1432265e0e9b8bb7d0adc9f9",
+  "buttonPoses": [
+    {
+      "pose": "default",
+      "screenshot": "t152-forms-_orrhvey/native-button-pose-v1-default.png",
+      "screenshotSha256": "aa83ffa3da4260532720162d0583e450b8efede1818399e14323107e7dcba328",
+      "screenFrameOrigin": [
+        265,
+        414
+      ],
+      "surfaceOrigin": [
+        257,
+        77
+      ],
+      "paintFrameOrigin": [
+        8,
+        337
+      ],
+      "buttons": [
+        {
+          "caption": "WW",
+          "bottom": [
+            148,
+            131,
+            0
+          ],
+          "wholeRgbSha256": "ef790a32e0853796aebe24742909ec5c3d33251001dbe31695aaa799d88beef4"
+        },
+        {
+          "caption": "MM",
+          "bottom": [
+            155,
+            155,
+            155
+          ],
+          "wholeRgbSha256": "5bd1884d5a8e125252251868664de2e4666651ea6ab6c564304c245c3e5f6a53"
+        },
+        {
+          "caption": "First command",
+          "bottom": [
+            155,
+            155,
+            155
+          ],
+          "wholeRgbSha256": "d986e23e4fec138775d16fb14a98323ffd54a9eba42c174c4b68d9cad81a05a3"
+        }
+      ]
+    },
+    {
+      "pose": "maximized",
+      "screenshot": "t152-forms-_orrhvey/native-button-pose-v1-maximized.png",
+      "screenshotSha256": "bad7aecade3e7eaa39821267ae8afb58278bd49debe9478148211d8d050946b0",
+      "screenFrameOrigin": [
+        261,
+        510
+      ],
+      "surfaceOrigin": [
+        0,
+        0
+      ],
+      "paintFrameOrigin": [
+        261,
+        510
+      ],
+      "buttons": [
+        {
+          "caption": "WW",
+          "bottom": [
+            148,
+            131,
+            0
+          ],
+          "wholeRgbSha256": "ef790a32e0853796aebe24742909ec5c3d33251001dbe31695aaa799d88beef4"
+        },
+        {
+          "caption": "MM",
+          "bottom": [
+            156,
+            156,
+            156
+          ],
+          "wholeRgbSha256": "ee9b3816bc2b68efa69034307d112088060f955f8799cbccfe7eaf0c95e9c022"
+        },
+        {
+          "caption": "First command",
+          "bottom": [
+            156,
+            156,
+            156
+          ],
+          "wholeRgbSha256": "cfba49f3ed4e5491214d0a3d835290c2b85240b798128059ca398b6e3665c173"
+        }
+      ]
+    },
+    {
+      "pose": "moved",
+      "screenshot": "t152-forms-_orrhvey/native-button-pose-v1-moved.png",
+      "screenshotSha256": "4984ec3f415b8a972d7c06e831ce1bfc38cf11e4c50140ab479e24f89fcc98bd",
+      "screenFrameOrigin": [
+        261,
+        240
+      ],
+      "surfaceOrigin": [
+        0,
+        0
+      ],
+      "paintFrameOrigin": [
+        261,
+        240
+      ],
+      "buttons": [
+        {
+          "caption": "WW",
+          "bottom": [
+            148,
+            131,
+            0
+          ],
+          "wholeRgbSha256": "00d5aa99fc99c5b0a2e371532d1f72b2b6bd0a0c302ae0c31137fb52cc000dda"
+        },
+        {
+          "caption": "MM",
+          "bottom": [
+            155,
+            155,
+            155
+          ],
+          "wholeRgbSha256": "7a535c942f49a25be2fab783f431727d6e49064815442a2a827a65eab19eee26"
+        },
+        {
+          "caption": "First command",
+          "bottom": [
+            155,
+            155,
+            155
+          ],
+          "wholeRgbSha256": "8452694732cbac6de83df179f61b3d5ade4469f2dc0bbb026a3cdc3e6fa0ef8f"
+        }
+      ]
+    }
+  ],
+  "formFrames": [
+    {
+      "form": "ProbeButtons",
+      "source": "tests/fixtures/forms/native-button-rows/source/CommonForms/ProbeButtons/Ext/Form.xml",
+      "sourceSha256": "6fb3e0d82997d3367ad3230974ae76eb60ff2e06120b2d7d24c4d5cc78d5af04",
+      "screenshot": "native-button-types-jc2a16bu/buttons-form-editor.png",
+      "screenshotSha256": "da7bb57a7b531920df6c069719e47dd0622aec6a2a1a1e820d6687ae5b8394d9",
+      "nativeRegion": [
+        265,
+        414,
+        147,
+        192
+      ],
+      "surfaceOrigin": [
+        257,
+        77
+      ],
+      "paintFrameOrigin": [
+        8,
+        337
+      ],
+      "rgbSha256": "8cc9eef605d430f2a50aa95efe1324beeb1f13498a993ca75e38dd3d420c45a2",
+      "pixels": 28224
+    },
+    {
+      "form": "ProbeRows",
+      "source": "tests/fixtures/forms/native-button-rows/source/CommonForms/ProbeRows/Ext/Form.xml",
+      "sourceSha256": "3ebdd864dbd250cdeb40d9feca80093cfa0a724003632a210693da32266e8400",
+      "screenshot": "native-button-rows-g5ngxw2e/rows-form-editor.png",
+      "screenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68",
+      "nativeRegion": [
+        265,
+        414,
+        209,
+        254
+      ],
+      "surfaceOrigin": [
+        257,
+        77
+      ],
+      "paintFrameOrigin": [
+        8,
+        337
+      ],
+      "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+      "pixels": 53086
+    }
+  ]
+}
