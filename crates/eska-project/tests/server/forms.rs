@@ -1913,6 +1913,119 @@ fn form_projects_command_groups_with_effective_placements_and_dirty_metadata() {
     client.finish();
 }
 
+fn based_on_targets(snapshot: &Value) -> Vec<Value> {
+    snapshot["model"]["root"]["presentation"]["autoCommandItems"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|item| item["key"] == "Form.StandardCommand.CreateBasedOn")
+        .unwrap()["items"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|item| item["key"].clone())
+        .collect()
+}
+
+#[test]
+fn form_discovers_new_based_on_targets_and_preserves_last_valid_menu() {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    let configuration = root.join("Configuration.xml");
+    let configuration_xml = fs::read_to_string(&configuration).unwrap().replace(
+        "</ChildObjects>",
+        "<Document>Order</Document><Document>Invoice</Document><Document>Receipt</Document></ChildObjects>",
+    );
+    fs::write(configuration, configuration_xml).unwrap();
+    fs::create_dir(root.join("Documents")).unwrap();
+    let document = |name: &str, basis: &str| {
+        format!(
+            r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable">
+        <Document uuid="{name}"><Properties><Name>{name}</Name><BasedOn><xr:Item>Document.{basis}</xr:Item></BasedOn></Properties></Document>
+        </MetaDataObject>"#
+        )
+    };
+    let invoice = "Documents/Invoice.xml";
+    let receipt = "Documents/Receipt.xml";
+    let saved_receipt = document("Receipt", "Other");
+    for (path, content) in [
+        ("Documents/Order.xml", document("Order", "Other")),
+        (invoice, document("Invoice", "Order")),
+        (receipt, saved_receipt.clone()),
+    ] {
+        fs::write(root.join(path), content).unwrap();
+    }
+    fs::write(root.join(PATH), r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:DocumentObject.Order</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes></Form>"#).unwrap();
+    let dependency = |snapshot: &Value, path: &str| {
+        snapshot["dependencies"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|input| input["path"]["value"] == path)
+            .cloned()
+    };
+    let mut client = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut client, &directory.0, "en-US", 41);
+    let prepared = client.request("form/prepare", &params(&context, json!({"node":node})));
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    assert_eq!(
+        based_on_targets(&opened),
+        [Value::from(
+            "Document.Invoice.StandardCommand.CreateBasedOn"
+        )]
+    );
+    assert!(dependency(&opened, receipt).is_none());
+    assert!(dependency(&opened, invoice).is_some());
+
+    let id = &opened["formSessionId"];
+    let input = prepared_input(&prepared, receipt, &document("Receipt", "Order"), "2");
+    let updated = client.request(
+        "form/update",
+        &params(
+            &context,
+            json!({"formSessionId":id,"revision":"1","overlays":[],"inputs":[input]}),
+        ),
+    );
+    assert_eq!(
+        based_on_targets(&updated),
+        [
+            "Document.Invoice.StandardCommand.CreateBasedOn",
+            "Document.Receipt.StandardCommand.CreateBasedOn"
+        ]
+        .map(Value::from)
+    );
+    assert_eq!(dependency(&updated, receipt).unwrap()["version"], "2");
+    let broken = prepared_input(&prepared, receipt, "<broken", "3");
+    let rejected = client.response(
+        "form/update",
+        &params(
+            &context,
+            json!({"formSessionId":id,"revision":"2","overlays":[],"inputs":[broken]}),
+        ),
+    );
+    assert_eq!(
+        rejected["error"]["data"]["details"]["reason"],
+        "invalid_metadata"
+    );
+    let retained = client.request("form/get", &params(&context, json!({"formSessionId":id})));
+    assert_eq!(retained["status"], "stale");
+    assert_eq!(based_on_targets(&retained), based_on_targets(&updated));
+    let recovered = client.request(
+        "form/update",
+        &params(
+            &context,
+            json!({"formSessionId":id,"revision":"2","overlays":[],"inputs":[]}),
+        ),
+    );
+    assert_eq!(based_on_targets(&recovered), based_on_targets(&opened));
+    assert_eq!(
+        fs::read_to_string(root.join(receipt)).unwrap(),
+        saved_receipt
+    );
+    client.finish();
+}
+
 #[test]
 fn prepared_inputs_recover_invalid_disk_form_and_metadata_without_writes() {
     let (directory, form) = dependency_fixture();

@@ -1,12 +1,17 @@
 //! Discover only metadata needed by static captions, appearance and bound field types.
 
-use std::{collections::HashSet, path::PathBuf};
+use std::{
+    borrow::Cow,
+    collections::HashSet,
+    path::{Path, PathBuf},
+};
 
 use roxmltree::{Document, Node};
 
 use super::{
-    FormContextError, FormReference,
+    ComposedForm, FormContextError, FormReference, based_on, compose,
     context::{FormDependency, FormOverlay, FormSources, open_designer, source_identity},
+    layer_order::LayerOrder,
     references,
 };
 use crate::{
@@ -35,10 +40,11 @@ pub(super) fn load(
     context: &ContextSnapshot,
     owner: &ObjectId,
     sources: &FormSources<'_>,
-    documents: &[super::FormDocument],
+    documents: &mut [super::FormDocument],
     dependencies: &mut Vec<FormDependency>,
     overlays: &[FormOverlay],
-) -> Result<Vec<FormResource>, FormContextError> {
+    previous: &[FormDependency],
+) -> Result<(ComposedForm, Vec<FormResource>), FormContextError> {
     let owners = std::iter::successors(Some(owner.clone()), ObjectId::parent).collect::<Vec<_>>();
     let mut loader = Loader {
         context,
@@ -77,6 +83,20 @@ pub(super) fn load(
         }
         readers.push(reader);
     }
+    // Resolve priority from effective root descriptors before asking which object this form edits.
+    let order = LayerOrder::resolve(context, &loader.output)?;
+    order.sort(documents, loader.dependencies, |document| &document.source)?;
+    let (base, extensions) = documents
+        .split_first()
+        .ok_or(FormContextError::MissingForm)?;
+    let form = compose(base, &extensions.iter().collect::<Vec<_>>());
+    if super::commands::autofill(&form.root)
+        && let Some(basis) = super::root_commands::object_type(&form)
+            .as_ref()
+            .and_then(based_on::basis)
+    {
+        loader.discover_based_on(&readers, &basis, previous)?;
+    }
     let mut cursor = 0;
     while cursor < loader.pending.len() {
         let id = loader.pending[cursor].clone();
@@ -85,7 +105,10 @@ pub(super) fn load(
             loader.read(reader, &id)?;
         }
     }
-    Ok(loader.output)
+    order.sort(&mut loader.output, loader.dependencies, |resource| {
+        &resource.source
+    })?;
+    Ok((form, loader.output))
 }
 
 struct Reader<'a> {
@@ -107,6 +130,61 @@ struct Loader<'a> {
 }
 
 impl Loader<'_> {
+    fn discover_based_on(
+        &mut self,
+        readers: &[Reader<'_>],
+        basis: &str,
+        previous: &[FormDependency],
+    ) -> Result<(), FormContextError> {
+        let mut targets = Vec::new();
+        let known_paths = previous
+            .iter()
+            .map(|input| (input.root.as_path(), input.path.as_path()))
+            .collect::<HashSet<_>>();
+        for reader in readers {
+            let Some(root) = self
+                .output
+                .iter()
+                .find(|resource| resource.source == reader.layer_source)
+            else {
+                continue;
+            };
+            for candidate in based_on::candidates(&root.descriptor) {
+                let Some(location) = reader
+                    .source
+                    .object_descriptor(&candidate.id)
+                    .map_err(FormContextError::Source)?
+                else {
+                    continue;
+                };
+                let known = known_paths
+                    .contains(&(reader.source.project().source(), location.path.as_path()));
+                let loaded =
+                    read_input_text(self.context, &reader.source, &location.path, self.overlays);
+                let input = match loaded {
+                    Ok(Some(input)) => input,
+                    Err(error) if known => return Err(error),
+                    _ => continue,
+                };
+                if !known && !based_on::may_declare(&input.text) {
+                    continue;
+                }
+                match based_on::declares(&input.text, candidate.kind, basis) {
+                    Ok(true) => targets.push(candidate.id.clone()),
+                    Err(_) if known => {
+                        return Err(FormContextError::InvalidMetadata { source: input.id });
+                    }
+                    _ => {}
+                }
+            }
+        }
+        // Keep every effective layer of a matching identity, including a later explicit empty BasedOn.
+        for target in targets {
+            self.request(target)?;
+        }
+        Ok(())
+    }
+
     fn request(&mut self, id: ObjectId) -> Result<(), FormContextError> {
         if self.requested.insert(id.clone()) {
             if self.requested.len() > super::MAX_FORM_DEPENDENCIES {
@@ -419,42 +497,65 @@ fn load_picture(
 pub(super) fn read_input(
     context: &ContextSnapshot,
     source: &DesignerSource,
-    path: &std::path::Path,
+    path: &Path,
     overlays: &[FormOverlay],
     member: Option<&str>,
     role: super::context::FormDependencyRole,
 ) -> Result<Option<(FormDependency, String)>, FormContextError> {
-    // Containment/existence is checked even for unsaved buffers; arbitrary paths cannot become dependencies.
-    if source
-        .checked_file(path)
-        .map_err(FormContextError::Source)?
-        .is_none()
-    {
+    let Some(input) = read_input_text(context, source, path, overlays)? else {
         return Ok(None);
-    }
-    let id = source_identity(context, source.project().source(), path);
-    let overlay = overlays.iter().find(|overlay| overlay.source == id);
-    let text = match overlay {
-        Some(overlay) => overlay.text.clone(),
-        None => source
-            .read_xml(path)
-            .map_err(FormContextError::Source)?
-            .ok_or(FormContextError::MissingForm)?,
     };
-    if text.len() > super::MAX_FORM_BYTES {
-        return Err(FormContextError::InputTooLarge);
-    }
     Ok(Some((
         FormDependency {
-            id,
+            id: input.id,
             root: source.project().source().into(),
             path: path.into(),
-            snapshot: snapshot(&text),
-            version: overlay.map(|overlay| overlay.version.clone()),
+            snapshot: snapshot(&input.text),
+            version: input.version.map(str::to_owned),
             member: member.map(str::to_owned),
             role,
             extension_form: false,
         },
-        text,
+        input.text.into_owned(),
     )))
+}
+
+struct InputText<'a> {
+    id: String,
+    text: Cow<'a, str>,
+    version: Option<&'a str>,
+}
+
+fn read_input_text<'a>(
+    context: &ContextSnapshot,
+    source: &DesignerSource,
+    path: &Path,
+    overlays: &'a [FormOverlay],
+) -> Result<Option<InputText<'a>>, FormContextError> {
+    let id = source_identity(context, source.project().source(), path);
+    let overlay = overlays.iter().find(|overlay| overlay.source == id);
+    let text = if let Some(overlay) = overlay {
+        // An unsaved buffer cannot bypass Designer source containment.
+        if source
+            .checked_file(path)
+            .map_err(FormContextError::Source)?
+            .is_none()
+        {
+            return Ok(None);
+        }
+        Cow::Borrowed(overlay.text.as_str())
+    } else {
+        let Some(text) = source.read_xml(path).map_err(FormContextError::Source)? else {
+            return Ok(None);
+        };
+        Cow::Owned(text)
+    };
+    if text.len() > super::MAX_FORM_BYTES {
+        return Err(FormContextError::InputTooLarge);
+    }
+    Ok(Some(InputText {
+        id,
+        text,
+        version: overlay.map(|overlay| overlay.version.as_str()),
+    }))
 }

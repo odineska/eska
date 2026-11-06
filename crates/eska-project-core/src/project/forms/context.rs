@@ -8,7 +8,7 @@ use std::{
 use serde::Serialize;
 use sha2::{Digest, Sha256};
 
-use super::{ComposedForm, FormDocument, FormInput, FormParseError, compose, parse};
+use super::{ComposedForm, FormDocument, FormInput, FormParseError, parse};
 use crate::{
     application::{ContextSnapshot, ContextSource, SourceRole},
     project::{
@@ -148,21 +148,28 @@ pub fn load(
     if !selected_found {
         return Err(FormContextError::MissingForm);
     }
-    let mut resources = super::resources::load(
+    let (form, resources) = super::resources::load(
         context,
         owner,
         &sources,
-        &documents,
+        &mut documents,
         &mut dependencies,
         overlays,
+        previous,
     )?;
     validate_overlays(overlays, &dependencies, previous, &metadata)?;
-    super::layer_order::apply(context, &dependencies, &mut documents, &mut resources)?;
     super::borrowing::validate(context, &dependencies, &resources)?;
     let mut parts = designer_source::identity_parts(owner).map_err(FormContextError::Source)?;
-    let form = parts.pop();
-    let form_owner = parts.pop().or(form);
-    build_preview(context, form_owner, dependencies, documents, resources)
+    let form_part = parts.pop();
+    let form_owner = parts.pop().or(form_part);
+    Ok(build_preview(
+        context,
+        form_owner,
+        dependencies,
+        documents,
+        resources,
+        form,
+    ))
 }
 
 fn build_preview(
@@ -171,13 +178,10 @@ fn build_preview(
     dependencies: Vec<FormDependency>,
     documents: Vec<FormDocument>,
     resources: Vec<super::FormResource>,
-) -> Result<FormPreview, FormContextError> {
-    let (base, extensions) = documents
-        .split_first()
-        .ok_or(FormContextError::MissingForm)?;
-    let form = compose(base, &extensions.iter().collect::<Vec<_>>());
+    form: ComposedForm,
+) -> FormPreview {
     let presentation = super::present(&form, &documents, &resources);
-    Ok(FormPreview {
+    FormPreview {
         context_fingerprint: context.fingerprint.clone(),
         application: context.context.name().map(|name| name.as_str().into()),
         limited_context: context.context.limited_context(),
@@ -187,7 +191,7 @@ fn build_preview(
         resources,
         form,
         presentation,
-    })
+    }
 }
 
 pub(super) struct FormSources<'a> {

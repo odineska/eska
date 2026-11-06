@@ -275,7 +275,10 @@ pub(super) fn effective_metadata<'a>(
     })
 }
 
-fn metadata_caption(command: &ParsedObject, resources: &[FormResource]) -> PresentationText {
+pub(super) fn metadata_caption(
+    command: &ParsedObject,
+    resources: &[FormResource],
+) -> PresentationText {
     metadata_property(command, "Synonym", resources)
         .and_then(|value| literal(&value.value))
         .unwrap_or_else(|| PresentationText::Name {

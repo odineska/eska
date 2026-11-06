@@ -28,6 +28,7 @@ pub(super) fn automatic(
     if let Some(owner_type) = object_type(form) {
         let owner = owner_id(&owner_type).and_then(|id| effective_metadata(&id, resources));
         bar.buttons = standard_commands(&owner_type, owner.map(|(_, object)| object), resources);
+        add_based_on(&mut bar, &owner_type, &interface, resources, diagnostics);
         if let Some((_, owner)) = owner {
             add_owner_commands(
                 &mut bar,
@@ -43,6 +44,32 @@ pub(super) fn automatic(
     bar.buttons
         .extend(bar.menus.into_iter().filter(|menu| !menu.items.is_empty()));
     bar.buttons
+}
+
+fn add_based_on(
+    bar: &mut CommandBar,
+    owner_type: &PropertyKey,
+    interface: &[InterfaceItem<'_>],
+    resources: &[FormResource],
+    diagnostics: &mut Vec<AppearanceDiagnostic>,
+) {
+    let mut menu = AutoCommandItem::standard("Form", "CreateBasedOn", false);
+    for command in super::based_on::commands(owner_type, resources) {
+        if let Some(placement) = interface
+            .iter()
+            .rev()
+            .find(|item| item.reference == command.key)
+        {
+            if let Some(items) = bar.items(placement.group, resources, diagnostics) {
+                items.push(command);
+            }
+        } else {
+            menu.items.push(command);
+        }
+    }
+    if !menu.items.is_empty() {
+        bar.menus.insert(0, menu);
+    }
 }
 
 pub(super) fn object_type(form: &ComposedForm) -> Option<PropertyKey> {

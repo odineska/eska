@@ -1,10 +1,8 @@
 //! Native extension purpose precedes the selected context's order within each purpose.
 
-use std::collections::HashMap;
+use std::{collections::HashMap, path::Path};
 
-use super::{
-    FormContextError, FormDependency, FormDocument, FormResource, context::source_identity,
-};
+use super::{FormContextError, FormDependency, FormResource, context::source_identity};
 use crate::{
     application::{ContextSnapshot, SourceRole},
     project::{metadata_model::MetadataValue, metadata_parser::MD_NAMESPACE},
@@ -19,53 +17,60 @@ enum Priority {
     ExternalObject,
 }
 
-pub(super) fn apply(
-    context: &ContextSnapshot,
-    dependencies: &[FormDependency],
-    documents: &mut [FormDocument],
-    resources: &mut [FormResource],
-) -> Result<(), FormContextError> {
-    let mut roots = HashMap::new();
-    for (position, input) in context.context.sources().iter().enumerate() {
-        let priority = match input.role() {
-            SourceRole::Configuration => Priority::Configuration,
-            SourceRole::ExternalObject => Priority::ExternalObject,
-            SourceRole::Extension => {
-                let id = source_identity(context, input.project().source(), input.descriptor());
-                let descriptor = resources
-                    .iter()
-                    .find(|resource| resource.source == id)
-                    .ok_or(FormContextError::InvalidMetadata { source: id })?;
-                extension_priority(descriptor)?
-            }
-        };
-        roots.insert(input.project().source(), (priority, position));
+pub(super) struct LayerOrder<'a> {
+    roots: HashMap<&'a Path, (Priority, usize)>,
+}
+
+impl<'a> LayerOrder<'a> {
+    pub(super) fn resolve(
+        context: &'a ContextSnapshot,
+        resources: &[FormResource],
+    ) -> Result<Self, FormContextError> {
+        let mut roots = HashMap::new();
+        for (position, input) in context.context.sources().iter().enumerate() {
+            let priority = match input.role() {
+                SourceRole::Configuration => Priority::Configuration,
+                SourceRole::ExternalObject => Priority::ExternalObject,
+                SourceRole::Extension => {
+                    let id = source_identity(context, input.project().source(), input.descriptor());
+                    let descriptor = resources
+                        .iter()
+                        .find(|resource| resource.source == id)
+                        .ok_or(FormContextError::InvalidMetadata { source: id })?;
+                    extension_priority(descriptor)?
+                }
+            };
+            roots.insert(input.project().source(), (priority, position));
+        }
+        Ok(Self { roots })
     }
-    let inputs: HashMap<_, _> = dependencies
-        .iter()
-        .filter_map(|dependency| {
-            roots
-                .get(dependency.root.as_path())
-                .copied()
-                .map(|priority| (dependency.id.as_str(), priority))
-        })
-        .collect();
-    // Validate before mutating either sequence; every input must belong to a selected source.
-    if let Some(source) = documents
-        .iter()
-        .map(|document| document.source.as_str())
-        .chain(resources.iter().map(|resource| resource.source.as_str()))
-        .find(|source| !inputs.contains_key(source))
-    {
-        return Err(FormContextError::InvalidMetadata {
-            source: source.into(),
-        });
+
+    pub(super) fn sort<T>(
+        &self,
+        inputs: &mut [T],
+        dependencies: &[FormDependency],
+        source: impl Fn(&T) -> &str,
+    ) -> Result<(), FormContextError> {
+        let positions: HashMap<_, _> = dependencies
+            .iter()
+            .filter_map(|dependency| {
+                self.roots
+                    .get(dependency.root.as_path())
+                    .map(|priority| (dependency.id.as_str(), *priority))
+            })
+            .collect();
+        if let Some(source) = inputs
+            .iter()
+            .map(&source)
+            .find(|source| !positions.contains_key(source))
+        {
+            return Err(FormContextError::InvalidMetadata {
+                source: source.into(),
+            });
+        }
+        inputs.sort_by_key(|input| positions.get(source(input)).copied());
+        Ok(())
     }
-    // Both form deltas and style/type resources use the same layer precedence. Purpose is
-    // read from the parsed metadata overlay, so unsaved Configuration.xml changes participate.
-    documents.sort_by_key(|document| inputs.get(document.source.as_str()).copied());
-    resources.sort_by_key(|resource| inputs.get(resource.source.as_str()).copied());
-    Ok(())
 }
 
 fn extension_priority(resource: &FormResource) -> Result<Priority, FormContextError> {

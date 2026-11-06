@@ -1,6 +1,7 @@
 //! Read-only managed-form documents with source-qualified identities and lossless source ranges.
 
 mod appearance;
+mod based_on;
 mod borrowing;
 mod catalog;
 mod commands;
