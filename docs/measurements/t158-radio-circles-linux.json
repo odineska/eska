@@ -1,0 +1,1945 @@
+{
+  "schemaVersion": 1,
+  "task": "T158",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11, 96 DPI",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "fixture": "tests/fixtures/forms/native-bound-fields/RadioButtonField.xml",
+  "fixtureSha256": "bb209cf88403d2f93233291d32ff7cec620aa97464bf171da27d356cc14aa08f",
+  "native": {
+    "circles": {
+      "stand": "radio-raster-s7loy2t9",
+      "caseManifestSha256": "be1a93457ca204f6cd84ddb93e1ad8d6a18f6bbed9339dad4de56cd68ea2134a",
+      "exitCode": 0
+    },
+    "inactiveCaptions": {
+      "stand": "radio-disabled-label-o6e3iulv",
+      "caseManifestSha256": "fe07e98b6d7476d658a83c58faa7a57ff0a43cd3052a4b2bbf65f0b1a632d6a9",
+      "exitCode": 0
+    }
+  },
+  "implementation": {
+    "markSize": [
+      15,
+      15
+    ],
+    "composite": "Measured glyph alpha and neutral ink composited over the resolved opaque parent backdrop.",
+    "inactiveCaptions": "Mix resolved foreground saturation and value with the lightened parent backdrop in HSV, then render the caption with the existing LCD text path.",
+    "states": [
+      "selected",
+      "unselected",
+      "Enabled=false",
+      "ReadOnly"
+    ],
+    "newDependency": false,
+    "publicProtocolChanged": false
+  },
+  "proceduralChecks": {
+    "exactGlyphs": 16,
+    "exactGlyphPixels": 3600,
+    "exactInactiveCaptionColors": 24,
+    "pixelTolerance": 0,
+    "glyphs": [
+      {
+        "name": "White",
+        "selected": true,
+        "inactive": false,
+        "crop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "rgbaSha256": "3743ea24120bc04b11630fabc1458119a8759ef589e5ce53ac4e662f3113d07e",
+        "captureSha256": "025c15f239895f32c3a1ff1547a15d40175473cf39fb29a7725d2cd0134a86d0"
+      },
+      {
+        "name": "White",
+        "selected": false,
+        "inactive": false,
+        "crop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "rgbaSha256": "01511f7e1ef69ea6ab67d100c894b2238c41dbfc2b0adca63c094f4280eecfdf",
+        "captureSha256": "025c15f239895f32c3a1ff1547a15d40175473cf39fb29a7725d2cd0134a86d0"
+      },
+      {
+        "name": "Black",
+        "selected": true,
+        "inactive": false,
+        "crop": [
+          30,
+          130,
+          15,
+          15
+        ],
+        "rgbaSha256": "9d9f5b730562fe6407cd43c914aa0475b6ccc81a889e3d81b7907d8508147713",
+        "captureSha256": "812f75b015ff216e66b5ea34426cfbeaebd1b3e496aa64738139b567dfe7a793"
+      },
+      {
+        "name": "Black",
+        "selected": false,
+        "inactive": false,
+        "crop": [
+          103,
+          130,
+          15,
+          15
+        ],
+        "rgbaSha256": "14735fb5dc4632a7aad8de5152eb10a47e48d60e472a02d6b5992113de06304a",
+        "captureSha256": "812f75b015ff216e66b5ea34426cfbeaebd1b3e496aa64738139b567dfe7a793"
+      },
+      {
+        "name": "BlueParent",
+        "selected": true,
+        "inactive": false,
+        "crop": [
+          30,
+          130,
+          15,
+          15
+        ],
+        "rgbaSha256": "da2e7060787e453218ef569de34b8286c3a2f50ffeda4b39a720da701ae91633",
+        "captureSha256": "86f780129b33ed21c74d6b869096fc2350d18dcf1f2c656ed16384b7c0205a38"
+      },
+      {
+        "name": "BlueParent",
+        "selected": false,
+        "inactive": false,
+        "crop": [
+          103,
+          130,
+          15,
+          15
+        ],
+        "rgbaSha256": "cf617e35974a4d59b564b3bd9db77e831dfa17cb9eea3adcfc56ddbb63a6ad9e",
+        "captureSha256": "86f780129b33ed21c74d6b869096fc2350d18dcf1f2c656ed16384b7c0205a38"
+      },
+      {
+        "name": "DisabledWhite",
+        "selected": true,
+        "inactive": true,
+        "crop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "rgbaSha256": "5e386c042b8c28a8aeb98951931abd56c444f89587126557a5123cd426fe03c9",
+        "captureSha256": "7d287e5a4b665b89fa3f4803ed2a0e33719a592df681b0fa9990637f07bb99fc"
+      },
+      {
+        "name": "DisabledWhite",
+        "selected": false,
+        "inactive": true,
+        "crop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "rgbaSha256": "6c710aae1722905e05c597c7f8bfa67d64d366ecbbcc099ab13914f2a8f99e96",
+        "captureSha256": "7d287e5a4b665b89fa3f4803ed2a0e33719a592df681b0fa9990637f07bb99fc"
+      },
+      {
+        "name": "DisabledBlack",
+        "selected": true,
+        "inactive": true,
+        "crop": [
+          30,
+          130,
+          15,
+          15
+        ],
+        "rgbaSha256": "9f8ad32a9f1760b7631476c86f2a06a5a5870fd73ec829c19d8e220d623f13d5",
+        "captureSha256": "03a5fcfcebf8e9adfd4526ea9e547840d787732c80241064b5e6da0f33478d44"
+      },
+      {
+        "name": "DisabledBlack",
+        "selected": false,
+        "inactive": true,
+        "crop": [
+          103,
+          130,
+          15,
+          15
+        ],
+        "rgbaSha256": "ce076d7dde79a435be421a068301555f933a155b96d95784a15d79d4b1ae00ee",
+        "captureSha256": "03a5fcfcebf8e9adfd4526ea9e547840d787732c80241064b5e6da0f33478d44"
+      },
+      {
+        "name": "ReadOnly",
+        "selected": true,
+        "inactive": true,
+        "crop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "rgbaSha256": "5e386c042b8c28a8aeb98951931abd56c444f89587126557a5123cd426fe03c9",
+        "captureSha256": "773a729b004dd6fb59d5a9e47c1270dc83240acfcf5344ebd807a2ab53c57a51"
+      },
+      {
+        "name": "ReadOnly",
+        "selected": false,
+        "inactive": true,
+        "crop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "rgbaSha256": "6c710aae1722905e05c597c7f8bfa67d64d366ecbbcc099ab13914f2a8f99e96",
+        "captureSha256": "773a729b004dd6fb59d5a9e47c1270dc83240acfcf5344ebd807a2ab53c57a51"
+      },
+      {
+        "name": "Paint",
+        "selected": true,
+        "inactive": false,
+        "crop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "rgbaSha256": "3743ea24120bc04b11630fabc1458119a8759ef589e5ce53ac4e662f3113d07e",
+        "captureSha256": "eb8173cdda84a20572e558c2b4734d83aa5bb6ad49208aba3d7db42ff7d59c74"
+      },
+      {
+        "name": "Paint",
+        "selected": false,
+        "inactive": false,
+        "crop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "rgbaSha256": "01511f7e1ef69ea6ab67d100c894b2238c41dbfc2b0adca63c094f4280eecfdf",
+        "captureSha256": "eb8173cdda84a20572e558c2b4734d83aa5bb6ad49208aba3d7db42ff7d59c74"
+      },
+      {
+        "name": "Bold",
+        "selected": true,
+        "inactive": false,
+        "crop": [
+          25,
+          129,
+          15,
+          15
+        ],
+        "rgbaSha256": "3743ea24120bc04b11630fabc1458119a8759ef589e5ce53ac4e662f3113d07e",
+        "captureSha256": "90be4f40ed08f6acd3b107f0481c7fe47d0146bae50b479d90eb3f08fcdb95c8"
+      },
+      {
+        "name": "Bold",
+        "selected": false,
+        "inactive": false,
+        "crop": [
+          25,
+          163,
+          15,
+          15
+        ],
+        "rgbaSha256": "01511f7e1ef69ea6ab67d100c894b2238c41dbfc2b0adca63c094f4280eecfdf",
+        "captureSha256": "90be4f40ed08f6acd3b107f0481c7fe47d0146bae50b479d90eb3f08fcdb95c8"
+      }
+    ],
+    "inactiveColors": [
+      {
+        "name": "LabelForeColors-1",
+        "foreground": null,
+        "backdrop": [
+          255,
+          255,
+          255
+        ],
+        "rgb": [
+          166,
+          166,
+          166
+        ],
+        "captureSha256": "31a70fc9aee5e02f3cf8fbb14361f75e7669cded176388a0bc60f0bd832d30d1"
+      },
+      {
+        "name": "LabelForeColors-2",
+        "foreground": [
+          0,
+          0,
+          0
+        ],
+        "backdrop": [
+          255,
+          255,
+          255
+        ],
+        "rgb": [
+          128,
+          128,
+          128
+        ],
+        "captureSha256": "31a70fc9aee5e02f3cf8fbb14361f75e7669cded176388a0bc60f0bd832d30d1"
+      },
+      {
+        "name": "LabelForeColors-3",
+        "foreground": [
+          255,
+          255,
+          255
+        ],
+        "backdrop": [
+          255,
+          255,
+          255
+        ],
+        "rgb": [
+          255,
+          255,
+          255
+        ],
+        "captureSha256": "31a70fc9aee5e02f3cf8fbb14361f75e7669cded176388a0bc60f0bd832d30d1"
+      },
+      {
+        "name": "LabelForeColors-4",
+        "foreground": [
+          128,
+          128,
+          128
+        ],
+        "backdrop": [
+          255,
+          255,
+          255
+        ],
+        "rgb": [
+          192,
+          192,
+          192
+        ],
+        "captureSha256": "31a70fc9aee5e02f3cf8fbb14361f75e7669cded176388a0bc60f0bd832d30d1"
+      },
+      {
+        "name": "LabelForeColors-5",
+        "foreground": [
+          255,
+          0,
+          0
+        ],
+        "backdrop": [
+          255,
+          255,
+          255
+        ],
+        "rgb": [
+          255,
+          128,
+          128
+        ],
+        "captureSha256": "31a70fc9aee5e02f3cf8fbb14361f75e7669cded176388a0bc60f0bd832d30d1"
+      },
+      {
+        "name": "LabelForeColors-6",
+        "foreground": [
+          34,
+          102,
+          204
+        ],
+        "backdrop": [
+          255,
+          255,
+          255
+        ],
+        "rgb": [
+          134,
+          172,
+          230
+        ],
+        "captureSha256": "31a70fc9aee5e02f3cf8fbb14361f75e7669cded176388a0bc60f0bd832d30d1"
+      },
+      {
+        "name": "LabelForeColors-7",
+        "foreground": [
+          144,
+          238,
+          144
+        ],
+        "backdrop": [
+          255,
+          255,
+          255
+        ],
+        "rgb": [
+          198,
+          247,
+          198
+        ],
+        "captureSha256": "31a70fc9aee5e02f3cf8fbb14361f75e7669cded176388a0bc60f0bd832d30d1"
+      },
+      {
+        "name": "LabelForeColors-8",
+        "foreground": [
+          255,
+          102,
+          0
+        ],
+        "backdrop": [
+          255,
+          255,
+          255
+        ],
+        "rgb": [
+          255,
+          179,
+          128
+        ],
+        "captureSha256": "31a70fc9aee5e02f3cf8fbb14361f75e7669cded176388a0bc60f0bd832d30d1"
+      },
+      {
+        "name": "LabelBackdrops-1",
+        "foreground": null,
+        "backdrop": [
+          255,
+          255,
+          255
+        ],
+        "rgb": [
+          166,
+          166,
+          166
+        ],
+        "captureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b"
+      },
+      {
+        "name": "LabelBackdrops-2",
+        "foreground": null,
+        "backdrop": [
+          0,
+          0,
+          0
+        ],
+        "rgb": [
+          103,
+          103,
+          103
+        ],
+        "captureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b"
+      },
+      {
+        "name": "LabelBackdrops-3",
+        "foreground": null,
+        "backdrop": [
+          34,
+          102,
+          204
+        ],
+        "rgb": [
+          154,
+          154,
+          154
+        ],
+        "captureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b"
+      },
+      {
+        "name": "LabelBackdrops-4",
+        "foreground": null,
+        "backdrop": [
+          144,
+          238,
+          144
+        ],
+        "rgb": [
+          162,
+          162,
+          162
+        ],
+        "captureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b"
+      },
+      {
+        "name": "LabelBackdrops-5",
+        "foreground": null,
+        "backdrop": [
+          128,
+          128,
+          128
+        ],
+        "rgb": [
+          135,
+          135,
+          135
+        ],
+        "captureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b"
+      },
+      {
+        "name": "LabelBackdrops-6",
+        "foreground": null,
+        "backdrop": [
+          32,
+          32,
+          32
+        ],
+        "rgb": [
+          111,
+          111,
+          111
+        ],
+        "captureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b"
+      },
+      {
+        "name": "LabelBackdrops-7",
+        "foreground": null,
+        "backdrop": [
+          255,
+          102,
+          0
+        ],
+        "rgb": [
+          166,
+          166,
+          166
+        ],
+        "captureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b"
+      },
+      {
+        "name": "LabelBackdrops-8",
+        "foreground": null,
+        "backdrop": [
+          255,
+          0,
+          0
+        ],
+        "rgb": [
+          166,
+          166,
+          166
+        ],
+        "captureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b"
+      },
+      {
+        "name": "LabelCombinations-1",
+        "foreground": [
+          255,
+          0,
+          0
+        ],
+        "backdrop": [
+          0,
+          0,
+          0
+        ],
+        "rgb": [
+          192,
+          96,
+          96
+        ],
+        "captureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae"
+      },
+      {
+        "name": "LabelCombinations-2",
+        "foreground": [
+          255,
+          0,
+          0
+        ],
+        "backdrop": [
+          34,
+          102,
+          204
+        ],
+        "rgb": [
+          243,
+          71,
+          71
+        ],
+        "captureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae"
+      },
+      {
+        "name": "LabelCombinations-3",
+        "foreground": [
+          34,
+          102,
+          204
+        ],
+        "backdrop": [
+          144,
+          238,
+          144
+        ],
+        "rgb": [
+          109,
+          156,
+          226
+        ],
+        "captureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae"
+      },
+      {
+        "name": "LabelCombinations-4",
+        "foreground": [
+          144,
+          238,
+          144
+        ],
+        "backdrop": [
+          128,
+          128,
+          128
+        ],
+        "rgb": [
+          173,
+          215,
+          173
+        ],
+        "captureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae"
+      },
+      {
+        "name": "LabelCombinations-5",
+        "foreground": [
+          0,
+          0,
+          0
+        ],
+        "backdrop": [
+          34,
+          102,
+          204
+        ],
+        "rgb": [
+          115,
+          115,
+          115
+        ],
+        "captureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae"
+      },
+      {
+        "name": "LabelCombinations-6",
+        "foreground": [
+          128,
+          128,
+          128
+        ],
+        "backdrop": [
+          144,
+          238,
+          144
+        ],
+        "rgb": [
+          188,
+          188,
+          188
+        ],
+        "captureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae"
+      },
+      {
+        "name": "LabelCombinations-7",
+        "foreground": null,
+        "backdrop": [
+          0,
+          0,
+          0
+        ],
+        "rgb": [
+          103,
+          103,
+          103
+        ],
+        "captureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae"
+      },
+      {
+        "name": "LabelCombinations-8",
+        "foreground": [
+          255,
+          0,
+          0
+        ],
+        "backdrop": [
+          34,
+          102,
+          204
+        ],
+        "rgb": [
+          243,
+          71,
+          71
+        ],
+        "captureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae"
+      }
+    ]
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "batch": "form-batch-1Dxlmg",
+    "backendCommit": "b65d2d00d24b6512f8a37c9b4a8b79377d4ace09",
+    "explorerCommit": "fe545c178910b60a9ec3446e85659f5176f2f174",
+    "vsixSha256": "a4edc1f9a906eba0b43fcee4caa34b6cf08270ca6fa11a302ef5f0bee07de3de",
+    "backendSha256": "2449274394dbef82a32dd03b060c62cd7b1df9817efb47bae958a6f111b595a1",
+    "runtimeManifestSha256": "555fed2518051a4c1f424cf6c406638f6e3193a522ea5f3c4359050f0ef2e1c8",
+    "runtimeFilesVerifiedPerRun": 1303,
+    "explorerSourceFilesVerified": 505,
+    "coreSourceFilesVerified": 613
+  },
+  "checks": {
+    "typescript": true,
+    "compile": true,
+    "package": true,
+    "node": {
+      "passed": 613,
+      "skipped": 11
+    },
+    "bun": {
+      "passed": 601,
+      "skipped": 11
+    },
+    "unchangedBackendSha256Verified": true,
+    "previousRustGates": "docs/measurements/t158-checkbox-modes-linux.json"
+  },
+  "firstPreflight": {
+    "batch": "form-batch-oxmWJh",
+    "exactMarks": 32,
+    "controlsWithCaptionDifferences": 6,
+    "resolution": "Measured and applied inactive caption foreground mixing against the actual parent."
+  },
+  "acceptance": {
+    "pairsPassed": 26,
+    "driverCases": 282,
+    "caseCountsBySuite": {
+      "renderer": {
+        "en": 20,
+        "ru": 20
+      },
+      "states": {
+        "en": 15,
+        "ru": 15
+      },
+      "property-catalogue": {
+        "en": 30,
+        "ru": 30
+      },
+      "button-types": {
+        "en": 11,
+        "ru": 11
+      },
+      "button-rows": {
+        "en": 8,
+        "ru": 8
+      },
+      "usual-buttons": {
+        "en": 18,
+        "ru": 18
+      },
+      "handlers": {
+        "en": 1,
+        "ru": 1
+      },
+      "inspectors": {
+        "en": 1,
+        "ru": 1
+      },
+      "preview": {
+        "en": 1,
+        "ru": 1
+      },
+      "detached-space": {
+        "en": 6,
+        "ru": 6
+      },
+      "composition": {
+        "en": 9,
+        "ru": 9
+      },
+      "tables": {
+        "en": 17,
+        "ru": 17
+      },
+      "application": {
+        "en": 4,
+        "ru": 4
+      }
+    },
+    "exactMarkCrops": 40,
+    "exactMarkPixels": 9000,
+    "exactControlCrops": 20,
+    "exactControlPixels": 59072,
+    "detachedControlCrops": 4,
+    "comparisonMasks": [],
+    "pixelTolerance": 0,
+    "comparedRegion": "The complete ordinary RadioButtonField area includes both marks, captions and the gap between variants.",
+    "regressions": {
+      "radio-tumblers": {
+        "crops": 16,
+        "pixels": 202148
+      },
+      "tumbler-captions": {
+        "crops": 32,
+        "pixels": 126690
+      },
+      "tumbler-faces": {
+        "crops": 12,
+        "pixels": 76920
+      },
+      "checkbox-marks": {
+        "crops": 16,
+        "pixels": 7240
+      }
+    },
+    "wholeFormPixelComparison": false,
+    "sourceWritesDuringApplicationViewing": false,
+    "applicationSamplesPerLocale": {
+      "en": 4,
+      "ru": 4
+    },
+    "markComparisons": [
+      {
+        "case": "white",
+        "locale": "en",
+        "selected": true,
+        "inactive": false,
+        "nativeCrop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            390,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "3743ea24120bc04b11630fabc1458119a8759ef589e5ce53ac4e662f3113d07e",
+        "nativeCaptureSha256": "025c15f239895f32c3a1ff1547a15d40175473cf39fb29a7725d2cd0134a86d0",
+        "vsixCaptureSha256": "1b4ac52804975f0cee968e8e56ea76a6d2f52e7c3ee7c3d6d014d723cbbc90f6"
+      },
+      {
+        "case": "white",
+        "locale": "en",
+        "selected": false,
+        "inactive": false,
+        "nativeCrop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            463,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "01511f7e1ef69ea6ab67d100c894b2238c41dbfc2b0adca63c094f4280eecfdf",
+        "nativeCaptureSha256": "025c15f239895f32c3a1ff1547a15d40175473cf39fb29a7725d2cd0134a86d0",
+        "vsixCaptureSha256": "1b4ac52804975f0cee968e8e56ea76a6d2f52e7c3ee7c3d6d014d723cbbc90f6"
+      },
+      {
+        "case": "white",
+        "locale": "ru",
+        "selected": true,
+        "inactive": false,
+        "nativeCrop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            390,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "3743ea24120bc04b11630fabc1458119a8759ef589e5ce53ac4e662f3113d07e",
+        "nativeCaptureSha256": "025c15f239895f32c3a1ff1547a15d40175473cf39fb29a7725d2cd0134a86d0",
+        "vsixCaptureSha256": "e2f9b75ce6f16281625f212a6170f939bddbd647ada4c4bcca70aa41eba99401"
+      },
+      {
+        "case": "white",
+        "locale": "ru",
+        "selected": false,
+        "inactive": false,
+        "nativeCrop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            463,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "01511f7e1ef69ea6ab67d100c894b2238c41dbfc2b0adca63c094f4280eecfdf",
+        "nativeCaptureSha256": "025c15f239895f32c3a1ff1547a15d40175473cf39fb29a7725d2cd0134a86d0",
+        "vsixCaptureSha256": "e2f9b75ce6f16281625f212a6170f939bddbd647ada4c4bcca70aa41eba99401"
+      },
+      {
+        "case": "black",
+        "locale": "en",
+        "selected": true,
+        "inactive": false,
+        "nativeCrop": [
+          30,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "9d9f5b730562fe6407cd43c914aa0475b6ccc81a889e3d81b7907d8508147713",
+        "nativeCaptureSha256": "812f75b015ff216e66b5ea34426cfbeaebd1b3e496aa64738139b567dfe7a793",
+        "vsixCaptureSha256": "2fb39a3f2049f56f8e3a69d2e1982d65a416ba8835d2c308792060163fb35d1f"
+      },
+      {
+        "case": "black",
+        "locale": "en",
+        "selected": false,
+        "inactive": false,
+        "nativeCrop": [
+          103,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            468,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "14735fb5dc4632a7aad8de5152eb10a47e48d60e472a02d6b5992113de06304a",
+        "nativeCaptureSha256": "812f75b015ff216e66b5ea34426cfbeaebd1b3e496aa64738139b567dfe7a793",
+        "vsixCaptureSha256": "2fb39a3f2049f56f8e3a69d2e1982d65a416ba8835d2c308792060163fb35d1f"
+      },
+      {
+        "case": "black",
+        "locale": "ru",
+        "selected": true,
+        "inactive": false,
+        "nativeCrop": [
+          30,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "9d9f5b730562fe6407cd43c914aa0475b6ccc81a889e3d81b7907d8508147713",
+        "nativeCaptureSha256": "812f75b015ff216e66b5ea34426cfbeaebd1b3e496aa64738139b567dfe7a793",
+        "vsixCaptureSha256": "004a4d845e1d0e785a93ec8be08a0a04b72a66e5fe63766936cd6e06f739c620"
+      },
+      {
+        "case": "black",
+        "locale": "ru",
+        "selected": false,
+        "inactive": false,
+        "nativeCrop": [
+          103,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            468,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "14735fb5dc4632a7aad8de5152eb10a47e48d60e472a02d6b5992113de06304a",
+        "nativeCaptureSha256": "812f75b015ff216e66b5ea34426cfbeaebd1b3e496aa64738139b567dfe7a793",
+        "vsixCaptureSha256": "004a4d845e1d0e785a93ec8be08a0a04b72a66e5fe63766936cd6e06f739c620"
+      },
+      {
+        "case": "blue-parent",
+        "locale": "en",
+        "selected": true,
+        "inactive": false,
+        "nativeCrop": [
+          30,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "da2e7060787e453218ef569de34b8286c3a2f50ffeda4b39a720da701ae91633",
+        "nativeCaptureSha256": "86f780129b33ed21c74d6b869096fc2350d18dcf1f2c656ed16384b7c0205a38",
+        "vsixCaptureSha256": "4797b787a3b81d7535578ee10b09a235bac62ff698e71f3027d1a77f454cdb34"
+      },
+      {
+        "case": "blue-parent",
+        "locale": "en",
+        "selected": false,
+        "inactive": false,
+        "nativeCrop": [
+          103,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            468,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "cf617e35974a4d59b564b3bd9db77e831dfa17cb9eea3adcfc56ddbb63a6ad9e",
+        "nativeCaptureSha256": "86f780129b33ed21c74d6b869096fc2350d18dcf1f2c656ed16384b7c0205a38",
+        "vsixCaptureSha256": "4797b787a3b81d7535578ee10b09a235bac62ff698e71f3027d1a77f454cdb34"
+      },
+      {
+        "case": "blue-parent",
+        "locale": "ru",
+        "selected": true,
+        "inactive": false,
+        "nativeCrop": [
+          30,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "da2e7060787e453218ef569de34b8286c3a2f50ffeda4b39a720da701ae91633",
+        "nativeCaptureSha256": "86f780129b33ed21c74d6b869096fc2350d18dcf1f2c656ed16384b7c0205a38",
+        "vsixCaptureSha256": "30680e162852bf0f6501f5565a456dfa7ad5e0c64e882aa54d7e8274ea0d2c6c"
+      },
+      {
+        "case": "blue-parent",
+        "locale": "ru",
+        "selected": false,
+        "inactive": false,
+        "nativeCrop": [
+          103,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            468,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "cf617e35974a4d59b564b3bd9db77e831dfa17cb9eea3adcfc56ddbb63a6ad9e",
+        "nativeCaptureSha256": "86f780129b33ed21c74d6b869096fc2350d18dcf1f2c656ed16384b7c0205a38",
+        "vsixCaptureSha256": "30680e162852bf0f6501f5565a456dfa7ad5e0c64e882aa54d7e8274ea0d2c6c"
+      },
+      {
+        "case": "disabled-white",
+        "locale": "en",
+        "selected": true,
+        "inactive": true,
+        "nativeCrop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            390,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "5e386c042b8c28a8aeb98951931abd56c444f89587126557a5123cd426fe03c9",
+        "nativeCaptureSha256": "7d287e5a4b665b89fa3f4803ed2a0e33719a592df681b0fa9990637f07bb99fc",
+        "vsixCaptureSha256": "3e883cd870b1bf5f289f541a79018c30b8eec9bee03713e6f23251577846abfd"
+      },
+      {
+        "case": "disabled-white",
+        "locale": "en",
+        "selected": false,
+        "inactive": true,
+        "nativeCrop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            463,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "6c710aae1722905e05c597c7f8bfa67d64d366ecbbcc099ab13914f2a8f99e96",
+        "nativeCaptureSha256": "7d287e5a4b665b89fa3f4803ed2a0e33719a592df681b0fa9990637f07bb99fc",
+        "vsixCaptureSha256": "3e883cd870b1bf5f289f541a79018c30b8eec9bee03713e6f23251577846abfd"
+      },
+      {
+        "case": "disabled-white",
+        "locale": "ru",
+        "selected": true,
+        "inactive": true,
+        "nativeCrop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            390,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "5e386c042b8c28a8aeb98951931abd56c444f89587126557a5123cd426fe03c9",
+        "nativeCaptureSha256": "7d287e5a4b665b89fa3f4803ed2a0e33719a592df681b0fa9990637f07bb99fc",
+        "vsixCaptureSha256": "ffe3a6e21f46206edd3129c4ec9be9ae06f0a86905b341202bb5c6218d82bef3"
+      },
+      {
+        "case": "disabled-white",
+        "locale": "ru",
+        "selected": false,
+        "inactive": true,
+        "nativeCrop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            463,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "6c710aae1722905e05c597c7f8bfa67d64d366ecbbcc099ab13914f2a8f99e96",
+        "nativeCaptureSha256": "7d287e5a4b665b89fa3f4803ed2a0e33719a592df681b0fa9990637f07bb99fc",
+        "vsixCaptureSha256": "ffe3a6e21f46206edd3129c4ec9be9ae06f0a86905b341202bb5c6218d82bef3"
+      },
+      {
+        "case": "disabled-blue",
+        "locale": "en",
+        "selected": true,
+        "inactive": true,
+        "nativeCrop": [
+          312,
+          95,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "0a5593a7e054b0ff0a40f11857ea2c467bc8f5655f15fce4a3278e4d801f8c50",
+        "nativeCaptureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b",
+        "vsixCaptureSha256": "265b83160854580b0fde8531a1e781925206dd98de0f8538ac1d4f532e5ad926"
+      },
+      {
+        "case": "disabled-blue",
+        "locale": "en",
+        "selected": false,
+        "inactive": true,
+        "nativeCrop": [
+          385,
+          95,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            468,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "40adcf8527d1f21f63fbed48d4e9d5217470a95d9bb5fd15e8521ae67e26651e",
+        "nativeCaptureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b",
+        "vsixCaptureSha256": "265b83160854580b0fde8531a1e781925206dd98de0f8538ac1d4f532e5ad926"
+      },
+      {
+        "case": "disabled-blue",
+        "locale": "ru",
+        "selected": true,
+        "inactive": true,
+        "nativeCrop": [
+          312,
+          95,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "0a5593a7e054b0ff0a40f11857ea2c467bc8f5655f15fce4a3278e4d801f8c50",
+        "nativeCaptureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b",
+        "vsixCaptureSha256": "c67c222cc6943d1397276064beeabc9c1464aa766f962e6b7f39b6c1c768753e"
+      },
+      {
+        "case": "disabled-blue",
+        "locale": "ru",
+        "selected": false,
+        "inactive": true,
+        "nativeCrop": [
+          385,
+          95,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            468,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "40adcf8527d1f21f63fbed48d4e9d5217470a95d9bb5fd15e8521ae67e26651e",
+        "nativeCaptureSha256": "baa36a8aebb9dcf903ee91e964bf88bc3495a0d5a93daf567e9bf2b02016f66b",
+        "vsixCaptureSha256": "c67c222cc6943d1397276064beeabc9c1464aa766f962e6b7f39b6c1c768753e"
+      },
+      {
+        "case": "disabled-paint-blue",
+        "locale": "en",
+        "selected": true,
+        "inactive": true,
+        "nativeCrop": [
+          171,
+          95,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "0a5593a7e054b0ff0a40f11857ea2c467bc8f5655f15fce4a3278e4d801f8c50",
+        "nativeCaptureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae",
+        "vsixCaptureSha256": "1a448198b4c9abb810a594acc040d8d72b0ff2b8b2f9079bb13fa8293c9b7fd8"
+      },
+      {
+        "case": "disabled-paint-blue",
+        "locale": "en",
+        "selected": false,
+        "inactive": true,
+        "nativeCrop": [
+          244,
+          95,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            468,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "40adcf8527d1f21f63fbed48d4e9d5217470a95d9bb5fd15e8521ae67e26651e",
+        "nativeCaptureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae",
+        "vsixCaptureSha256": "1a448198b4c9abb810a594acc040d8d72b0ff2b8b2f9079bb13fa8293c9b7fd8"
+      },
+      {
+        "case": "disabled-paint-blue",
+        "locale": "ru",
+        "selected": true,
+        "inactive": true,
+        "nativeCrop": [
+          171,
+          95,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "0a5593a7e054b0ff0a40f11857ea2c467bc8f5655f15fce4a3278e4d801f8c50",
+        "nativeCaptureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae",
+        "vsixCaptureSha256": "65c0b33449d044fb88926e8086781f780963aa8cc96ba25f3a98b2cf22252200"
+      },
+      {
+        "case": "disabled-paint-blue",
+        "locale": "ru",
+        "selected": false,
+        "inactive": true,
+        "nativeCrop": [
+          244,
+          95,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            468,
+            392,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "40adcf8527d1f21f63fbed48d4e9d5217470a95d9bb5fd15e8521ae67e26651e",
+        "nativeCaptureSha256": "841c7732df29115d95572f2425d12535640822d7d3eb7e3089274f4ec45116ae",
+        "vsixCaptureSha256": "65c0b33449d044fb88926e8086781f780963aa8cc96ba25f3a98b2cf22252200"
+      },
+      {
+        "case": "paint",
+        "locale": "en",
+        "selected": true,
+        "inactive": false,
+        "nativeCrop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            390,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "3743ea24120bc04b11630fabc1458119a8759ef589e5ce53ac4e662f3113d07e",
+        "nativeCaptureSha256": "eb8173cdda84a20572e558c2b4734d83aa5bb6ad49208aba3d7db42ff7d59c74",
+        "vsixCaptureSha256": "f488acdd28abd24b5664ba80420476bbfa0762722f849819c459523a196eb318"
+      },
+      {
+        "case": "paint",
+        "locale": "en",
+        "selected": false,
+        "inactive": false,
+        "nativeCrop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            463,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "01511f7e1ef69ea6ab67d100c894b2238c41dbfc2b0adca63c094f4280eecfdf",
+        "nativeCaptureSha256": "eb8173cdda84a20572e558c2b4734d83aa5bb6ad49208aba3d7db42ff7d59c74",
+        "vsixCaptureSha256": "f488acdd28abd24b5664ba80420476bbfa0762722f849819c459523a196eb318"
+      },
+      {
+        "case": "paint",
+        "locale": "ru",
+        "selected": true,
+        "inactive": false,
+        "nativeCrop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            390,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "3743ea24120bc04b11630fabc1458119a8759ef589e5ce53ac4e662f3113d07e",
+        "nativeCaptureSha256": "eb8173cdda84a20572e558c2b4734d83aa5bb6ad49208aba3d7db42ff7d59c74",
+        "vsixCaptureSha256": "af748b445eb026dd741d7adecffb3ce531a9b01d0a4909a69e8db162f5fbaea1"
+      },
+      {
+        "case": "paint",
+        "locale": "ru",
+        "selected": false,
+        "inactive": false,
+        "nativeCrop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            463,
+            387,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "01511f7e1ef69ea6ab67d100c894b2238c41dbfc2b0adca63c094f4280eecfdf",
+        "nativeCaptureSha256": "eb8173cdda84a20572e558c2b4734d83aa5bb6ad49208aba3d7db42ff7d59c74",
+        "vsixCaptureSha256": "af748b445eb026dd741d7adecffb3ce531a9b01d0a4909a69e8db162f5fbaea1"
+      },
+      {
+        "case": "bold",
+        "locale": "en",
+        "selected": true,
+        "inactive": false,
+        "nativeCrop": [
+          25,
+          129,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            390,
+            391,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "3743ea24120bc04b11630fabc1458119a8759ef589e5ce53ac4e662f3113d07e",
+        "nativeCaptureSha256": "90be4f40ed08f6acd3b107f0481c7fe47d0146bae50b479d90eb3f08fcdb95c8",
+        "vsixCaptureSha256": "26fb6c779ab494ae248b6e9efd04c98030fe45b74394873e0fabef03df038e8b"
+      },
+      {
+        "case": "bold",
+        "locale": "en",
+        "selected": false,
+        "inactive": false,
+        "nativeCrop": [
+          25,
+          163,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            390,
+            425,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "01511f7e1ef69ea6ab67d100c894b2238c41dbfc2b0adca63c094f4280eecfdf",
+        "nativeCaptureSha256": "90be4f40ed08f6acd3b107f0481c7fe47d0146bae50b479d90eb3f08fcdb95c8",
+        "vsixCaptureSha256": "26fb6c779ab494ae248b6e9efd04c98030fe45b74394873e0fabef03df038e8b"
+      },
+      {
+        "case": "bold",
+        "locale": "ru",
+        "selected": true,
+        "inactive": false,
+        "nativeCrop": [
+          25,
+          129,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            390,
+            391,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "3743ea24120bc04b11630fabc1458119a8759ef589e5ce53ac4e662f3113d07e",
+        "nativeCaptureSha256": "90be4f40ed08f6acd3b107f0481c7fe47d0146bae50b479d90eb3f08fcdb95c8",
+        "vsixCaptureSha256": "bd8f7911a6e5ad899767634877672eb82aa1fa1a28337616cc8984653aa0a5df"
+      },
+      {
+        "case": "bold",
+        "locale": "ru",
+        "selected": false,
+        "inactive": false,
+        "nativeCrop": [
+          25,
+          163,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            390,
+            425,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "01511f7e1ef69ea6ab67d100c894b2238c41dbfc2b0adca63c094f4280eecfdf",
+        "nativeCaptureSha256": "90be4f40ed08f6acd3b107f0481c7fe47d0146bae50b479d90eb3f08fcdb95c8",
+        "vsixCaptureSha256": "bd8f7911a6e5ad899767634877672eb82aa1fa1a28337616cc8984653aa0a5df"
+      },
+      {
+        "case": "disabled-black-detached",
+        "locale": "en",
+        "selected": true,
+        "inactive": true,
+        "nativeCrop": [
+          30,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            47,
+            157,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "9f8ad32a9f1760b7631476c86f2a06a5a5870fd73ec829c19d8e220d623f13d5",
+        "nativeCaptureSha256": "03a5fcfcebf8e9adfd4526ea9e547840d787732c80241064b5e6da0f33478d44",
+        "vsixCaptureSha256": "cc7981da5ff64e6a3a9c87b64bc88567d8512b888b883907d09f296b40d5e681"
+      },
+      {
+        "case": "disabled-black-detached",
+        "locale": "en",
+        "selected": false,
+        "inactive": true,
+        "nativeCrop": [
+          103,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            120,
+            157,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "ce076d7dde79a435be421a068301555f933a155b96d95784a15d79d4b1ae00ee",
+        "nativeCaptureSha256": "03a5fcfcebf8e9adfd4526ea9e547840d787732c80241064b5e6da0f33478d44",
+        "vsixCaptureSha256": "cc7981da5ff64e6a3a9c87b64bc88567d8512b888b883907d09f296b40d5e681"
+      },
+      {
+        "case": "disabled-black-detached",
+        "locale": "ru",
+        "selected": true,
+        "inactive": true,
+        "nativeCrop": [
+          30,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            47,
+            157,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "9f8ad32a9f1760b7631476c86f2a06a5a5870fd73ec829c19d8e220d623f13d5",
+        "nativeCaptureSha256": "03a5fcfcebf8e9adfd4526ea9e547840d787732c80241064b5e6da0f33478d44",
+        "vsixCaptureSha256": "124b7716c24925b4f5d4bcd67105503d5d14e3b789d8cefff6064846d01a04f5"
+      },
+      {
+        "case": "disabled-black-detached",
+        "locale": "ru",
+        "selected": false,
+        "inactive": true,
+        "nativeCrop": [
+          103,
+          130,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            120,
+            157,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "ce076d7dde79a435be421a068301555f933a155b96d95784a15d79d4b1ae00ee",
+        "nativeCaptureSha256": "03a5fcfcebf8e9adfd4526ea9e547840d787732c80241064b5e6da0f33478d44",
+        "vsixCaptureSha256": "124b7716c24925b4f5d4bcd67105503d5d14e3b789d8cefff6064846d01a04f5"
+      },
+      {
+        "case": "read-only-detached",
+        "locale": "en",
+        "selected": true,
+        "inactive": true,
+        "nativeCrop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            42,
+            152,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "5e386c042b8c28a8aeb98951931abd56c444f89587126557a5123cd426fe03c9",
+        "nativeCaptureSha256": "773a729b004dd6fb59d5a9e47c1270dc83240acfcf5344ebd807a2ab53c57a51",
+        "vsixCaptureSha256": "9d3dfb08a9abdad17c6e8f2a1260923e5d64d9d2b8aa50739cc12f1ed7f92e07"
+      },
+      {
+        "case": "read-only-detached",
+        "locale": "en",
+        "selected": false,
+        "inactive": true,
+        "nativeCrop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            115,
+            152,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "6c710aae1722905e05c597c7f8bfa67d64d366ecbbcc099ab13914f2a8f99e96",
+        "nativeCaptureSha256": "773a729b004dd6fb59d5a9e47c1270dc83240acfcf5344ebd807a2ab53c57a51",
+        "vsixCaptureSha256": "9d3dfb08a9abdad17c6e8f2a1260923e5d64d9d2b8aa50739cc12f1ed7f92e07"
+      },
+      {
+        "case": "read-only-detached",
+        "locale": "ru",
+        "selected": true,
+        "inactive": true,
+        "nativeCrop": [
+          25,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            42,
+            152,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "5e386c042b8c28a8aeb98951931abd56c444f89587126557a5123cd426fe03c9",
+        "nativeCaptureSha256": "773a729b004dd6fb59d5a9e47c1270dc83240acfcf5344ebd807a2ab53c57a51",
+        "vsixCaptureSha256": "be7a25241f12d459e139b3819f3354d65d42b5aa9058ceab87c8c012ce69182c"
+      },
+      {
+        "case": "read-only-detached",
+        "locale": "ru",
+        "selected": false,
+        "inactive": true,
+        "nativeCrop": [
+          98,
+          125,
+          15,
+          15
+        ],
+        "matches": [
+          [
+            115,
+            152,
+            15,
+            15
+          ]
+        ],
+        "rgbaSha256": "6c710aae1722905e05c597c7f8bfa67d64d366ecbbcc099ab13914f2a8f99e96",
+        "nativeCaptureSha256": "773a729b004dd6fb59d5a9e47c1270dc83240acfcf5344ebd807a2ab53c57a51",
+        "vsixCaptureSha256": "be7a25241f12d459e139b3819f3354d65d42b5aa9058ceab87c8c012ce69182c"
+      }
+    ],
+    "controlComparisons": [
+      {
+        "case": "white",
+        "locale": "en",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "white",
+        "locale": "ru",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "black",
+        "locale": "en",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "black",
+        "locale": "ru",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "blue-parent",
+        "locale": "en",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "blue-parent",
+        "locale": "ru",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "disabled-white",
+        "locale": "en",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "disabled-white",
+        "locale": "ru",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "disabled-blue",
+        "locale": "en",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "disabled-blue",
+        "locale": "ru",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "disabled-paint-blue",
+        "locale": "en",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "disabled-paint-blue",
+        "locale": "ru",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "paint",
+        "locale": "en",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "paint",
+        "locale": "ru",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "bold",
+        "locale": "en",
+        "control": [
+          145,
+          61
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "bold",
+        "locale": "ru",
+        "control": [
+          145,
+          61
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "disabled-black-detached",
+        "locale": "en",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "disabled-black-detached",
+        "locale": "ru",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "read-only-detached",
+        "locale": "en",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      },
+      {
+        "case": "read-only-detached",
+        "locale": "ru",
+        "control": [
+          121,
+          19
+        ],
+        "different": 0,
+        "maxChannelDifference": 0,
+        "differenceBounds": null
+      }
+    ]
+  },
+  "pending": [
+    "Additional fonts, sizes, long and multiline labels, state and style combinations",
+    "Full form comparisons, additional DPI and Windows"
+  ]
+}

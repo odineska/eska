@@ -1639,7 +1639,8 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "ordinary.radio-tumbler"
+        "ordinary.radio-tumbler",
+        "ordinary.radio-circles"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -4353,7 +4354,89 @@
       ],
       "lastConfirmation": "docs/measurements/t158-radio-tumbler-linux.json",
       "remaining": "Additional label styles, DPI, whole forms and Windows.",
-      "nextAction": "Extend the RadioButtonField matrix with native circle glyphs and additional font faces."
+      "nextAction": "Extend the RadioButtonField tumbler matrix with additional font faces and multiline captions."
+    },
+    {
+      "id": "ordinary.radio-circles",
+      "milestone": "T158",
+      "kinds": [
+        "RadioButtonField"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Measured ordinary RadioButtonField circles and captions on white, black and blue parent backgrounds, with explicit foreground, bold, disabled and ReadOnly.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/RadioButtonField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "RadioButtonField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-radio-circles-linux.json",
+          "sha256": "7ca365fe978797f0a17129afbf76dcc1c1dc7b1941fafc64bed8a2303922782f",
+          "clientCommit": "fe545c178910b60a9ec3446e85659f5176f2f174",
+          "assertions": [
+            {
+              "pointer": "/proceduralChecks/exactGlyphs",
+              "equals": 16
+            },
+            {
+              "pointer": "/proceduralChecks/exactInactiveCaptionColors",
+              "equals": 24
+            },
+            {
+              "pointer": "/acceptance/exactMarkCrops",
+              "equals": 40
+            },
+            {
+              "pointer": "/acceptance/exactMarkPixels",
+              "equals": 9000
+            },
+            {
+              "pointer": "/acceptance/exactControlCrops",
+              "equals": 20
+            },
+            {
+              "pointer": "/acceptance/exactControlPixels",
+              "equals": 59072
+            },
+            {
+              "pointer": "/acceptance/detachedControlCrops",
+              "equals": 4
+            },
+            {
+              "pointer": "/acceptance/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-radio-circles-linux.json",
+      "remaining": "Further fonts, long captions, state and style combinations, DPI, whole forms and Windows.",
+      "nextAction": "Extend the ordinary control measurements to additional text styles and field states."
     },
     {
       "id": "ordinary.complete-states",
@@ -4406,8 +4489,8 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t158-radio-choices-linux.json",
-      "remaining": "The measured RadioButtonField tumbler grids are accepted. Circle raster and other ordinary-control state/property combinations remain open.",
-      "nextAction": "Match radio circle glyphs and extend other ordinary-control states, fonts and colors."
+      "remaining": "The measured RadioButtonField tumbler grids and ordinary circles with captions are accepted. Additional ordinary-control state and property combinations remain open.",
+      "nextAction": "Extend other ordinary-control states, fonts, colors and bound-field combinations."
     },
     {
       "id": "shell.input-properties",
