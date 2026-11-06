@@ -1,14 +1,16 @@
 //! Derive captions, binding types and appearance once in the shared backend; the UI only lays them out.
 
 use super::{
-    AppearanceDiagnostic, ComposedForm, EffectiveDefinition, EffectiveElement, ElementFamily,
-    ElementIdentity, ElementKind, FormDocument, FormResource, PropertySource, ResolvedColor,
-    ResolvedFont, SourcedProperty,
+    AppearanceDiagnostic, ButtonRepresentation, ComposedForm, EffectiveDefinition,
+    EffectiveElement, ElementFamily, ElementIdentity, ElementKind, FormDocument, FormResource,
+    PropertySource, ResolvedColor, ResolvedFont, SourcedProperty,
     appearance::{self, Appearance},
+    commands::ResolvedCommand,
+    pictures,
 };
 use crate::project::{
     metadata_model::{LocalizedText, MetadataKind, MetadataProperty, MetadataValue, PropertyKey},
-    metadata_parser::{MD_NAMESPACE, ParsedObject},
+    metadata_parser::{LocatedProperty, MD_NAMESPACE, ParsedObject},
 };
 use serde::Serialize;
 
@@ -107,6 +109,8 @@ pub struct ElementPresentation {
     pub mark_incomplete: bool,
     pub title_location: FieldTitleLocation,
     pub picture: Option<super::FormPicture>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub button_representation: Option<ButtonRepresentation>,
     pub caption: PresentationText,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tabular_total: Option<TabularTotalCaption>,
@@ -257,11 +261,16 @@ fn present_element(
         tabular_total,
     } = bind(element, form, resources);
     let binding_caption = binding_caption.map(|caption| column_caption(caption, scope.in_table));
-    let command = element.scalar("CommandName");
+    let command_name = element.scalar("CommandName");
+    let command = command_name.and_then(|name| ResolvedCommand::resolve(name, form, resources));
     let authored_caption = element
         .property("Title")
         .and_then(|value| literal(&value.property.value))
-        .or_else(|| command.and_then(|command| command_caption(command, form, resources)));
+        .or_else(|| {
+            command
+                .as_ref()
+                .and_then(|command| command.caption(resources))
+        });
     let tabular_total = tabular_total.then_some(if authored_caption.is_some() {
         TabularTotalCaption::Overridden
     } else {
@@ -276,39 +285,32 @@ fn present_element(
                 element.name.clone().unwrap_or_default()
             },
         });
-    let group = element.kind == Some(ElementKind::UsualGroup);
-    let tab = element.kind == Some(ElementKind::Pages) || scope.pages_parent(element).is_some();
     let font = appearance.font(element.property("Font"), font_role(element));
     let title_font = appearance.font(
         scope.title_property(element, "TitleFont"),
         title_font_role(element),
     );
-    let foreground = appearance.color(element.property("TextColor"), text_color_role(element));
-    let background = appearance.color(
-        element.property("BackColor"),
-        if element.kind == Some(ElementKind::Button) {
-            "ButtonBackColor"
-        } else {
-            "BackColor"
-        },
-    );
-    let border = appearance.color(element.property("BorderColor"), "BorderColor");
-    let title_color = appearance.color(
-        scope.title_property(element, "TitleTextColor"),
-        if tab {
-            "FieldTextColor"
-        } else if group {
-            "GroupTitleTextColor"
-        } else {
-            "FormTextColor"
-        },
-    );
+    let (foreground, background, border, title_color) = element_colors(element, scope, appearance);
     let choices = element
         .property("ChoiceList")
         .map(|value| choices(&value.property.value, resources))
         .filter(|values| !values.is_empty())
         .unwrap_or_else(|| enum_choices(&value_type, resources));
-    let auto_command_items = element_commands(element, &value_type, form, resources, tables);
+    let (picture, button_representation) = element_picture(
+        element,
+        scope,
+        command.as_ref(),
+        resources,
+        &mut appearance.diagnostics,
+    );
+    let auto_command_items = element_commands(
+        element,
+        &value_type,
+        form,
+        resources,
+        tables,
+        &mut appearance.diagnostics,
+    );
     let auto_commands = standard_form_commands(&auto_command_items);
     let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
     ElementPresentation {
@@ -318,7 +320,7 @@ fn present_element(
         grouping: grouping(element),
         united: group_united(element),
         displayed: is_displayed(element, binding.as_ref(), appearance)
-            && super::commands::visible(tables, command)
+            && super::commands::visible(tables, command_name)
             && (scope.parent.is_some_and(is_command_area)
                 || !matches!(
                     element.kind,
@@ -326,7 +328,8 @@ fn present_element(
                 )),
         mark_incomplete,
         title_location: title_location(element),
-        picture: super::pictures::resolve(element, resources, &mut appearance.diagnostics),
+        picture,
+        button_representation,
         caption,
         tabular_total,
         tooltip: element
@@ -348,6 +351,65 @@ fn present_element(
         auto_commands,
         auto_command_items,
     }
+}
+
+fn element_colors(
+    element: &EffectiveElement,
+    scope: VisitScope<'_>,
+    appearance: &mut Appearance<'_>,
+) -> (ResolvedColor, ResolvedColor, ResolvedColor, ResolvedColor) {
+    let foreground = appearance.color(element.property("TextColor"), text_color_role(element));
+    let background = appearance.color(
+        element.property("BackColor"),
+        if element.kind == Some(ElementKind::Button) {
+            "ButtonBackColor"
+        } else {
+            "BackColor"
+        },
+    );
+    let border = appearance.color(element.property("BorderColor"), "BorderColor");
+    let tab = element.kind == Some(ElementKind::Pages) || scope.pages_parent(element).is_some();
+    let title_role = if tab {
+        "FieldTextColor"
+    } else if element.kind == Some(ElementKind::UsualGroup) {
+        "GroupTitleTextColor"
+    } else {
+        "FormTextColor"
+    };
+    let title_color = appearance.color(scope.title_property(element, "TitleTextColor"), title_role);
+    (foreground, background, border, title_color)
+}
+
+fn element_picture(
+    element: &EffectiveElement,
+    scope: VisitScope<'_>,
+    command: Option<&ResolvedCommand<'_>>,
+    resources: &[FormResource],
+    diagnostics: &mut Vec<AppearanceDiagnostic>,
+) -> (Option<super::FormPicture>, Option<ButtonRepresentation>) {
+    let button = element.kind == Some(ElementKind::Button);
+    let picture = if let Some(property) = element.property("Picture") {
+        pictures::form_picture(property, resources, diagnostics)
+    } else if button {
+        command.and_then(|command| command.picture(resources, diagnostics))
+    } else {
+        None
+    };
+    let representation = button.then(|| {
+        let automatic = match element.scalar("Type") {
+            Some("CommandBarButton" | "CommandBarHyperlink") => ButtonRepresentation::Picture,
+            Some("Hyperlink") => ButtonRepresentation::PictureAndText,
+            None if scope.parent.is_some_and(is_command_area) => ButtonRepresentation::Picture,
+            _ => ButtonRepresentation::Text,
+        };
+        ButtonRepresentation::effective(
+            picture.as_ref(),
+            element.scalar("Representation"),
+            command.and_then(|command| command.representation(resources)),
+            automatic,
+        )
+    });
+    (picture, representation)
 }
 
 fn table_column_appearance(
@@ -456,9 +518,10 @@ fn element_commands(
     form: &ComposedForm,
     resources: &[FormResource],
     tables: &super::commands::TableIndex<'_>,
+    diagnostics: &mut Vec<AppearanceDiagnostic>,
 ) -> Vec<super::AutoCommandItem> {
     match element.kind {
-        Some(ElementKind::Form) => super::commands::automatic(form, resources),
+        Some(ElementKind::Form) => super::commands::automatic(form, resources, diagnostics),
         Some(ElementKind::Table) => super::commands::table(element, value_type),
         Some(ElementKind::CommandBar) => super::commands::table_source(element, tables)
             .map(|table| {
@@ -820,7 +883,7 @@ fn metadata_field(
         tabular_total: false,
     }
 }
-fn definition_caption(value: &EffectiveDefinition) -> Option<PresentationText> {
+pub(super) fn definition_caption(value: &EffectiveDefinition) -> Option<PresentationText> {
     value
         .property("Title")
         .and_then(|value| literal(&value.property.value))
@@ -875,23 +938,33 @@ pub(super) fn metadata_property<'a>(
     name: &str,
     resources: &'a [FormResource],
 ) -> Option<&'a MetadataProperty> {
-    resources
-        .iter()
-        .rev()
-        .flat_map(|resource| &resource.descriptor.objects)
-        .filter(|object| object.metadata.id() == owner.metadata.id())
-        .find_map(|object| own_metadata_property(object, name))
+    located_metadata_property(owner, name, resources).map(|(_, value)| &value.property)
+}
+pub(super) fn located_metadata_property<'a>(
+    owner: &ParsedObject,
+    name: &str,
+    resources: &'a [FormResource],
+) -> Option<(&'a FormResource, &'a LocatedProperty)> {
+    resources.iter().rev().find_map(|resource| {
+        let object = resource
+            .descriptor
+            .objects
+            .iter()
+            .find(|object| object.metadata.id() == owner.metadata.id())?;
+        own_metadata_located_property(object, name).map(|property| (resource, property))
+    })
 }
 fn own_metadata_property<'a>(owner: &'a ParsedObject, name: &str) -> Option<&'a MetadataProperty> {
-    owner
-        .properties
-        .as_ref()?
-        .iter()
-        .find(|value| {
-            value.property.key.name == name
-                && value.property.key.namespace.as_deref() == Some("http://v8.1c.ru/8.3/MDClasses")
-        })
-        .map(|value| &value.property)
+    own_metadata_located_property(owner, name).map(|value| &value.property)
+}
+fn own_metadata_located_property<'a>(
+    owner: &'a ParsedObject,
+    name: &str,
+) -> Option<&'a LocatedProperty> {
+    owner.properties.as_ref()?.iter().find(|value| {
+        value.property.key.name == name
+            && value.property.key.namespace.as_deref() == Some(MD_NAMESPACE)
+    })
 }
 fn standard_property<'a>(
     owner: &ParsedObject,
@@ -977,23 +1050,6 @@ fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -
         digits,
         ..FieldType::default()
     }
-}
-fn command_caption(
-    command: &str,
-    form: &ComposedForm,
-    resources: &[FormResource],
-) -> Option<PresentationText> {
-    if let Some(name) = super::commands::local_command_name(command) {
-        return super::commands::local_command(form, name).and_then(definition_caption);
-    }
-    if let Some(caption) = super::commands::referenced_caption(command, resources) {
-        return Some(caption);
-    }
-    command
-        .split_once(".StandardCommand.")
-        .map(|(_, key)| PresentationText::Standard {
-            key: format!("command.{key}"),
-        })
 }
 fn enum_choices(value_type: &FieldType, resources: &[FormResource]) -> Vec<PresentationText> {
     let Some(name) = value_type

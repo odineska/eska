@@ -36,7 +36,7 @@ pub use palette::{
     PlatformPropertyValue, PropertyPalette,
 };
 pub use parsing::parse;
-pub use pictures::FormPicture;
+pub use pictures::{ButtonRepresentation, FormPicture};
 pub use preparation::{FormInput, FormInputSource, FormPreparation, prepare};
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,

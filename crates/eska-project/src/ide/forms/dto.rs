@@ -55,6 +55,9 @@ fn element(
         if let Some(total) = presentation.tabular_total {
             value["tabularTotal"] = json!(total);
         }
+        if let Some(mode) = presentation.button_representation {
+            value["buttonRepresentation"] = json!(mode);
+        }
         value
     });
     json!({"identity":identity(&value.identity),"origin":origin(&value.origin),"kind":value.kind.map(eska_project_core::project::forms::ElementKind::xml_name),"name":value.name,"xmlName":value.xml_name,
@@ -75,8 +78,16 @@ pub(super) fn model(labels: &Labels, preview: &FormPreview) -> Result<(Value, us
         .presentation
         .elements
         .iter()
-        .filter_map(|element| match &element.picture {
-            Some(eska_project_core::project::forms::FormPicture::Common { source }) => {
+        .flat_map(|element| {
+            element.picture.iter().chain(
+                element
+                    .auto_command_items
+                    .iter()
+                    .filter_map(|command| command.picture.as_ref()),
+            )
+        })
+        .filter_map(|picture| match picture {
+            eska_project_core::project::forms::FormPicture::Common { source } => {
                 Some(source.as_str())
             }
             _ => None,
