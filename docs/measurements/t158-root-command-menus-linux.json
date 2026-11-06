@@ -960,5 +960,630 @@
     "Compatible commands owned by other metadata objects, such as the native Send email button on the Counterparties form.",
     "Full T164 budgets, including repeated scans of large configuration descriptors.",
     "Full native acceptance of extension-specific BasedOn overrides, other display densities, and Windows."
-  ]
+  ],
+  "rootAdditionalMenu": {
+    "scope": "Main toolbar prefix at measured widths, additional menu groups, shortcuts, icon cells and active color on Linux. This does not assert whole menu pixel equality.",
+    "configurator": "8.3.27.2342",
+    "nativeLocale": "ru",
+    "scalePercent": 100,
+    "nativeCommandAllocation": [
+      {
+        "widthUnits": 16,
+        "frameWidth": 192,
+        "inlineCount": 0,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW16-crop.png",
+          "sha256": "960600e2db09b8a05b3dd5da1bf08fd6c19b480ff8364a9ee9ef904d4fef64fe"
+        }
+      },
+      {
+        "widthUnits": 27,
+        "frameWidth": 302,
+        "inlineCount": 1,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW27-crop.png",
+          "sha256": "3f4aa0248a17a1578279dd2581a9e07d4024a0d106fbe393fad22afb28166232"
+        }
+      },
+      {
+        "widthUnits": 38,
+        "frameWidth": 412,
+        "inlineCount": 2,
+        "native": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-narrow-before-crop.png",
+          "sha256": "38c84cbbd77b90b065a9462b2c6753892014dc7f3d2bcc8effc7dd0d6b074b15"
+        }
+      },
+      {
+        "widthUnits": 42,
+        "frameWidth": 452,
+        "inlineCount": 2,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW42-crop.png",
+          "sha256": "96bf929e4d0da970578f38195e6fd1aca3628475b8b693ef0be78d173abdd969"
+        }
+      },
+      {
+        "widthUnits": 50,
+        "frameWidth": 532,
+        "inlineCount": 3,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW50-crop.png",
+          "sha256": "2e343cce74212bc30fc5c1656057ed2b5301a282c8ec5f464bc50faa8bd2a56e"
+        }
+      },
+      {
+        "widthUnits": 62,
+        "frameWidth": 652,
+        "inlineCount": 4,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW62-crop.png",
+          "sha256": "5c96e8b62ebc4e5cf0721868afae1aa5024a7d88ddbf52b86abd78c0433b735c"
+        }
+      },
+      {
+        "widthUnits": 85,
+        "frameWidth": 882,
+        "inlineCount": 6,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW85-crop.png",
+          "sha256": "ea6d2d8ba56f98589a2149d52ea624d18c5ddd88f245aef819c8b29843cf0a97"
+        }
+      },
+      {
+        "widthUnits": 94,
+        "frameWidth": 972,
+        "inlineCount": 8,
+        "native": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/more-wide-split-crop.png",
+          "sha256": "8f02d0aae62c7e918219a30df4a790d904f71962b2d05e0abf8d5020415662fd"
+        }
+      }
+    ],
+    "nativeMenus": {
+      "narrow": {
+        "pathInPlayground": "form-native-command-order-uk9P8rsL/more-narrow-full-crop.png",
+        "sha256": "8e5bd2088291ae42879dff8be6a587d6aa3615f78d62093a1608802a1f555df5"
+      },
+      "wide": {
+        "pathInPlayground": "form-native-command-order-uk9P8rsL/more-wide-full-crop.png",
+        "sha256": "1f3624449d05cf6ef11b22caecbe3968055b3049c6e04d4d7337f2d7261bc3f5"
+      },
+      "documentWithoutPosting": {
+        "pathInPlayground": "form-native-command-order-uk9P8rsL/more-other-owner-full-crop.png",
+        "sha256": "485b2edcf10aa18988d44364c699456c4a95afd07a4d1b1c0c28eb3a0470e931"
+      },
+      "documentJournalSubmenu": {
+        "pathInPlayground": "form-native-command-order-uk9P8rsL/more-authored-list-crop.png",
+        "sha256": "b7e3fe5b5ca3a96db97f5eb6d59fe56e69a43ca63b7d2a9d5ba4ab26f1e9f2d5"
+      },
+      "explicitPlacement": {
+        "pathInPlayground": "form-native-root-more-hwhMzVPq/AuthoredWide-menu-crop.png",
+        "sha256": "9f420b5b3d9a80afd9a7c8ac16bc69525557c45956f4f722ef3818c021739b48"
+      },
+      "manualPlacementToolbar": {
+        "pathInPlayground": "form-native-root-more-hwhMzVPq/AuthoredManual-before-crop.png",
+        "sha256": "dfa49b2a3bea4dbaef64519ad273cb68d5d6ece777d24ac61debb70fc8a349aa"
+      },
+      "plainFormToolbar": {
+        "pathInPlayground": "form-native-root-more-hwhMzVPq/FormOnly-before-crop.png",
+        "sha256": "71be3a68653da613fec427b21277d49583cbe34a275dc412a7297eae303a263d"
+      },
+      "realLoan": {
+        "pathInPlayground": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-more-full-crop.png",
+        "sha256": "f0b178c3acdfa94907c7f689fa029465953096a82d41b81ac20b4aba917ea912"
+      }
+    },
+    "defaultRowHeight": 30,
+    "defaultMenuWidth": 344,
+    "defaultActivityColor": "#facc1f",
+    "realLoanActivityColor": "#004152",
+    "standardPictureCells": {
+      "PostAndClose": {
+        "white": "4aa100412baed98331a3cf87fa964b454b0bcf06547b8b219fe5902b9ac827d4",
+        "active": "b1acb1c90ca800d3b7e8800a3fbf130bce60afc449d56c7b980c46bc6cfcc7fe",
+        "rowTop": 9,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/00.png",
+          "sha256": "1d4888ab32c024d009712743d0562743cc16c80c772f0017fea5e0d8fe374b48"
+        }
+      },
+      "Write": {
+        "white": "cfb6a69bb8869f1e64b8c751fe034a22abdff0ebfc6d9004cbe14a966afb7de2",
+        "active": null,
+        "rowTop": 39,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        }
+      },
+      "MarkObjectForDeletion": {
+        "white": "16b89a4e98e0bd8faae1c6193cc7853ac671d5daf5ada2b8e8a40b59902b225e",
+        "active": "8dd000bd08d1a3f3622a23363f8794d7d98972b5224a237618a1cd7d5672b443",
+        "rowTop": 129,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/06.png",
+          "sha256": "497224e4a9fa5a23f66ebb91d886bb13734dca1f0fb3dd4cbee3b2ab0cc15bae"
+        }
+      },
+      "UndoPosting": {
+        "white": "faa8cd80aafd9445508e38e8e34d3d17f8c21aaca48484ad7a8339a9ea609f54",
+        "active": "f785fcd9833678bb78ca81045cabc2011eaa71d0813c733485babeb2f454fab3",
+        "rowTop": 223,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/10.png",
+          "sha256": "7afef1487cf0119008a05ca09ccb5dcf8d5a6eb8aa8d568deb4efe22a4c0afee"
+        }
+      },
+      "ShowInList": {
+        "white": "6fce299a2ecf68d6b0eadd8b5bb8bc2fc2d9d5ae5698269bc05c8bd673eec147",
+        "active": "cfbdb208cbd94a4f929a8aac9eb75ee82491fb47976a23afd229e3bf86f190e2",
+        "rowTop": 257,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/11.png",
+          "sha256": "587ebb0b42cc0a4814f5833790e60f9449fb4443dbd10f22a03d2877f369cc4e"
+        }
+      },
+      "ChangeHistory": {
+        "white": "70db1c221cbf9f11053692cf276951615bf7480e55f781ff23c4a4848c161030",
+        "active": "cc6a696388f15b065d53523f2ac6105735abdc5a141084ba85aa23f0d6bb8382",
+        "rowTop": 287,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/14.png",
+          "sha256": "0712985addeb45e40f503156328dbb9e0661a6fccf114823eacd5cf1563fb2e2"
+        }
+      },
+      "CustomizeForm": {
+        "white": "343625ace762a677d58ed21abdb608b0432cb417abf92f8ab18dbe5f564f3847",
+        "active": "7841aa2ea3c481cc8b822c2a0cf9a3e49552acd7993190da9c72771809d474e0",
+        "rowTop": 587,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/15.png",
+          "sha256": "57cfc6e094a536b2139584a5550df6214f8d756790f40faf4e4e318bc4a8e561"
+        }
+      },
+      "Help": {
+        "white": "4ce995460c62e4d9b64b4b3b5aaf3053cc8c2cd8f5219f585bff168ee857e076",
+        "active": null,
+        "rowTop": 617,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        }
+      }
+    },
+    "installed": [
+      {
+        "mode": "loan",
+        "locale": "ru",
+        "receipt": {
+          "pathInPlayground": "form-installed-root-more-VPbza3af/loan-ru/receipt.json",
+          "sha256": "d24d42a6962425674b2bdc0d97b0ab54d95214ad4343cf247fdf6f83348ec5fa",
+          "locale": "ru",
+          "passed": true
+        },
+        "captures": [
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/loan-ru/loan-more-detached-ru.png",
+            "sha256": "b669edcdcfda40931013838608a41a21264a7e57ed4f8c0b72732b5f161162e8"
+          },
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/loan-ru/loan-more-ru.png",
+            "sha256": "b5d74c344f6d6daa2ea1564390ddcb244de6dc6ef0f73a4ea022e90b3f768537"
+          }
+        ]
+      },
+      {
+        "mode": "loan",
+        "locale": "en",
+        "receipt": {
+          "pathInPlayground": "form-installed-root-more-VPbza3af/loan-en/receipt.json",
+          "sha256": "eec224fdbf17ac62f025db32de64916803264d3dbaa46443c0501264c9d426a1",
+          "locale": "en",
+          "passed": true
+        },
+        "captures": [
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/loan-en/loan-more-detached-en.png",
+            "sha256": "9ec9688790cf15ae59a0df33d8d1679cdaa682392bef98f2245bb3eeab9fbe99"
+          },
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/loan-en/loan-more-en.png",
+            "sha256": "a8905f9741afedf2053524e6491e3a9e36a0465a5fcdb51bf93940397181b20e"
+          }
+        ]
+      },
+      {
+        "mode": "matrix",
+        "locale": "ru",
+        "receipt": {
+          "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-ru/receipt.json",
+          "sha256": "7988246695caf698d2383181853908b5003eade5db527c72c924997058d0cec5",
+          "locale": "ru",
+          "passed": true
+        },
+        "captures": [
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-ru/more-manual-ru.png",
+            "sha256": "9b4b6e46c6e8fbbbe92b01054adde84c43033358e65e14cf70d186fa8c5b11f2"
+          },
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-ru/more-matrix-nested-ru.png",
+            "sha256": "6ac1ff795fa32a4477d4a148a7731c0a8185648b87f3b56ec30bd35f0976f4c3"
+          }
+        ]
+      },
+      {
+        "mode": "matrix",
+        "locale": "en",
+        "receipt": {
+          "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-en/receipt.json",
+          "sha256": "21187ec90d02666bcf4ba5ef150ff0265d675a41577301f51e04467cad582028",
+          "locale": "en",
+          "passed": true
+        },
+        "captures": [
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-en/more-manual-en.png",
+            "sha256": "5dc5c30a90b38ff3069eb0f2878ba5b4bf47da3788f46bce4b34ea731306ba2f"
+          },
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-en/more-matrix-nested-en.png",
+            "sha256": "12484f6c2fab904c9347fe796c03f1bf9c1a1d9404234fcae0fa782c56f95682"
+          }
+        ]
+      }
+    ],
+    "rustChecks": {
+      "fmt": true,
+      "check": true,
+      "clippy": true,
+      "passed": 1555,
+      "ignored": 19
+    },
+    "nodeChecks": {
+      "passed": 641,
+      "skipped": 9
+    },
+    "batch": {
+      "root": "form-batch-vcVugC",
+      "backend": {
+        "pathInPlayground": "form-batch-vcVugC/artifacts/eska-project",
+        "sha256": "2bdecff9ee2f3ebfd667ae9ac2d94086cba3218db120d33be4bc70eefb7d0d58"
+      },
+      "vsix": {
+        "pathInPlayground": "form-batch-vcVugC/artifacts/viewer.vsix",
+        "sha256": "67d1045aabd30394357b6699db5a8116407402458264cd22289e514ed76bc425"
+      },
+      "runs": [
+        {
+          "suite": "pictures",
+          "locale": "en",
+          "caseCount": 1,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/pictures-en/receipt.json",
+            "sha256": "54b4970a5c007677648f3785bcc6511c1e5e392b21f8af9036bea6555256e8d2",
+            "locale": "en",
+            "passed": true
+          }
+        },
+        {
+          "suite": "pictures",
+          "locale": "ru",
+          "caseCount": 1,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/pictures-ru/receipt.json",
+            "sha256": "65388f6ee03036b1ec7da595f41fe59bcbe5c7e5eccf3ea06db773e1d18523f1",
+            "locale": "ru",
+            "passed": true
+          }
+        },
+        {
+          "suite": "groups",
+          "locale": "en",
+          "caseCount": 22,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/groups-en/receipt.json",
+            "sha256": "0b398d43d3b6b2e381c0361feaae4ab6dc31e5b879ff680d3be35fdb2cd7e994",
+            "locale": "en",
+            "passed": true
+          }
+        },
+        {
+          "suite": "groups",
+          "locale": "ru",
+          "caseCount": 22,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/groups-ru/receipt.json",
+            "sha256": "3057061550145533953d94f76654dd90bb0d8d8ebb2fdab70fa6806ca4a98774",
+            "locale": "ru",
+            "passed": true
+          }
+        },
+        {
+          "suite": "tables",
+          "locale": "en",
+          "caseCount": 17,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/tables-en/receipt.json",
+            "sha256": "d4ab23c504b0540e0940a764552244914f748765ac30cda7edf31d30f543be97",
+            "locale": "en",
+            "passed": true
+          }
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "caseCount": 17,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/tables-ru/receipt.json",
+            "sha256": "d262c6814752f23aa49937f128d12865235bc603876d675816bc99082ba5a6a0",
+            "locale": "ru",
+            "passed": true
+          }
+        },
+        {
+          "suite": "renderer",
+          "locale": "en",
+          "caseCount": 20,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/renderer-en/receipt.json",
+            "sha256": "54f3f2cdfc7617d53e7b3ec94bd20a8eb2c8bc7acdc2f4763c0d743dbd211f9e",
+            "locale": "en",
+            "passed": true
+          }
+        },
+        {
+          "suite": "renderer",
+          "locale": "ru",
+          "caseCount": 0,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/renderer-ru/receipt.json",
+            "sha256": "b7a06996409dd963fd2ee0f4a07d242592ccaca71d276646581f551fd6c5802f",
+            "locale": "ru",
+            "passed": false
+          }
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "caseCount": 31,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/responsive-en/receipt.json",
+            "sha256": "c4f82134a207845a82130567577b061c0ddb2baa24749c98d2aecfc8e39d6571",
+            "locale": "en",
+            "passed": true
+          }
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "caseCount": 31,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/responsive-ru/receipt.json",
+            "sha256": "ad2743b6fc9e59bfb32e72cf370a4804da866811e476054d8307ed8b1b2cf234",
+            "locale": "ru",
+            "passed": true
+          }
+        }
+      ],
+      "caseCount": 182,
+      "initialBatch": {
+        "pathInPlayground": "form-batch-vcVugC/batch.json",
+        "sha256": "d66a9279a341181c57a64a1d7173dc52ce0ea095f8defe51ab17f5fb942e4cee"
+      },
+      "rendererRussianRetry": {
+        "pathInPlayground": "form-root-more-renderer-ru-retry-QbvOGYyA/receipt.json",
+        "sha256": "58a5716d199983df7d29a8573f4a26fb7b5aa22012bd2cd6cdf0c0ebeee6e87c",
+        "locale": "ru",
+        "passed": true
+      },
+      "rendererRussianInitialFailure": "The host could not locate the detached RadioButtonField preview frame. A fresh isolated profile passed all 20 renderer cases with the same VSIX."
+    },
+    "installedRussianGeometry": {
+      "allocation": [
+        {
+          "frameWidth": 192,
+          "inlineCount": 0
+        },
+        {
+          "frameWidth": 302,
+          "inlineCount": 1
+        },
+        {
+          "frameWidth": 412,
+          "inlineCount": 2
+        },
+        {
+          "frameWidth": 452,
+          "inlineCount": 2
+        },
+        {
+          "frameWidth": 532,
+          "inlineCount": 3
+        },
+        {
+          "frameWidth": 652,
+          "inlineCount": 4
+        },
+        {
+          "frameWidth": 882,
+          "inlineCount": 6
+        },
+        {
+          "frameWidth": 972,
+          "inlineCount": 8
+        },
+        {
+          "frameWidth": 412,
+          "inlineCount": 2
+        }
+      ],
+      "realLoan": {
+        "box": [
+          718,
+          55,
+          344,
+          474
+        ],
+        "intrinsicHeight": 490,
+        "trigger": [
+          1037,
+          29,
+          60,
+          26
+        ],
+        "color": "rgb(0, 65, 82)",
+        "ink": "rgb(205, 205, 205)",
+        "separators": 2,
+        "rows": [
+          {
+            "label": "Провести и закрыть",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Записать",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": "Ctrl+S",
+            "height": 30
+          },
+          {
+            "label": "Перечитать",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Скопировать",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Пометить на удаление / Снять пометку",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Удалить",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Провести",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Отменить проведение",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Показать в списке",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "История изменений",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Связанные документы",
+            "sub": false,
+            "icon": "common",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Скопировать УИД",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Движения документа",
+            "sub": false,
+            "icon": "common",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Зарегистрировать на обмен",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Изменить форму...",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Справка",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": "F1",
+            "height": 30
+          }
+        ]
+      },
+      "journalSubmenu": [
+        "Продажи",
+        "Документы продаж"
+      ],
+      "manualRows": [
+        "More only",
+        "Both places",
+        "Auto placement"
+      ]
+    }
+  }
 }
