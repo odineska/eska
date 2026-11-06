@@ -552,7 +552,8 @@
         "shell.checkbox-properties",
         "ordinary.checkbox-modes",
         "ordinary.checkbox-glyphs",
-        "ordinary.checkbox-tumbler-face"
+        "ordinary.checkbox-tumbler-face",
+        "ordinary.checkbox-tumbler-captions"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -4058,8 +4059,8 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t158-checkbox-modes-linux.json",
-      "remaining": "Tumbler caption pixels, additional control and title settings, Windows.",
-      "nextAction": "Measure native text, clipping and multiline settings in both tumbler segments."
+      "remaining": "Additional control and title settings, unsupported font faces and Windows.",
+      "nextAction": "Extend native control states and profile measurements."
     },
     {
       "id": "ordinary.checkbox-glyphs",
@@ -4195,8 +4196,82 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t158-tumbler-face-linux.json",
-      "remaining": "Option captions, additional style and DPI cases, and Windows.",
-      "nextAction": "Calibrate LCD glyph placement, overflow and multiline labels over the verified face."
+      "remaining": "Additional backdrop, stroke and DPI cases, and Windows.",
+      "nextAction": "Measure additional native styles and share face rasterization with RadioButtonField."
+    },
+    {
+      "id": "ordinary.checkbox-tumbler-captions",
+      "milestone": "T158",
+      "kinds": [
+        "CheckBoxField"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete Boolean tumbler with native option captions, measured width and height, clipping and inactive text colors.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "CheckBoxField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-tumbler-captions-linux.json",
+          "sha256": "278c65f4ee07b625972a28459ca6971a0f6b2bafb79eef7722fa5bf65312d401",
+          "clientCommit": "b05e63ea0f8de771a28312a55bd3e1ec5e171877",
+          "assertions": [
+            {
+              "pointer": "/proceduralRgba/surfaces",
+              "equals": 98
+            },
+            {
+              "pointer": "/proceduralRgba/pixels",
+              "equals": 361267
+            },
+            {
+              "pointer": "/acceptance/exactLabelledTumblerCrops",
+              "equals": 32
+            },
+            {
+              "pointer": "/acceptance/exactLabelledTumblerPixels",
+              "equals": 126690
+            },
+            {
+              "pointer": "/acceptance/detachedCapturePairs",
+              "equals": 2
+            },
+            {
+              "pointer": "/acceptance/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-tumbler-captions-linux.json",
+      "remaining": "Additional typefaces, fonts and DPI, whole forms and Windows.",
+      "nextAction": "Extend the raster matrix and reuse the verified face and glyph composition for RadioButtonField."
     },
     {
       "id": "ordinary.complete-states",
