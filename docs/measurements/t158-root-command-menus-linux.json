@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 1,
+  "platform": {
+    "build": "8.3.27.2342",
+    "os": "Linux ALT 10 ARM64",
+    "interface": "Taxi",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "scope": "Main form command-menu membership, item order and captions. Complete toolbar and popup geometry remain open.",
+  "platformGuide": "https://1c-dn.com/library/tutorials/1c_enterprise_developer_guide_8_3_27/",
+  "bslExecuted": false,
+  "native": {
+    "defaultPrintItems": [
+      "Печать расходной накладной"
+    ],
+    "defaultVisibleFalseStillShowsPrintItem": true,
+    "navigationCategoryRemovesPrintButton": true,
+    "postingDeniedUsesWrite": true,
+    "orderGenerateItems": [
+      "Продажа"
+    ],
+    "invoiceGenerateItems": [
+      "Поступление денег"
+    ],
+    "counterpartyGenerateItems": [
+      "Заказ",
+      "Оплата",
+      "Поступление денег",
+      "Поступление товара",
+      "Продажа"
+    ],
+    "captures": [
+      {
+        "pathInPlayground": "form-native-root-groups-lXcztGip/default-print-menu.png",
+        "sha256": "23a1e02410e4f6210baae63307a79fe33d8ced7bf425069eb8f03ed799f4d71a"
+      },
+      {
+        "pathInPlayground": "form-native-root-groups-lXcztGip/hidden-print-menu.png",
+        "sha256": "87f303072492ca6dc5f0e6e83fa8b5c6bdba15e88786d0c6d69b06170db90d6b"
+      },
+      {
+        "pathInPlayground": "form-native-root-groups-lXcztGip/ProbeWidthBarMovePrint.png",
+        "sha256": "f706624752b8780c51a4c83ace8bb45fca2d30605a11f5756cf6fad8f4a6c5be"
+      },
+      {
+        "pathInPlayground": "form-native-root-groups-lXcztGip/ProbeWidthBarLocalPrint.png",
+        "sha256": "97c9e89bf158cace115dae6cfc71e1de2f15549077e5277b6c99fc47bee71df5"
+      },
+      {
+        "pathInPlayground": "form-native-root-groups-lXcztGip/ProbeWidthBarOtherOwner.png",
+        "sha256": "12f6c1fe45875059f81c167206c03c1b9f013b000aed00b2967ab656dd44ecba"
+      },
+      {
+        "pathInPlayground": "form-native-based-on-en-lOubxjvD/order-create-menu-en.png",
+        "sha256": "19adc2a5f08cbe71d0a6ff9057547c7eaaa31e1ee0cf3b9fb342015564e2bd55"
+      },
+      {
+        "pathInPlayground": "form-native-based-on-en-lOubxjvD/counterparty-generate-en.png",
+        "sha256": "daeb34e605168a5aded531d9c097f07d0b80e50547239524e635b6e8b505cb1c"
+      },
+      {
+        "pathInPlayground": "form-native-command-bar-KidA8lpC/create-group-click.png",
+        "sha256": "d7c24a4e192b27cca922bc18b43b8922c928e35beea621726ea2f142ab884674"
+      }
+    ],
+    "configuratorExitAfterCapture": {
+      "ru": 134,
+      "en": 134
+    }
+  },
+  "backendProbes": [
+    {
+      "source": "CommonForms/ProbeWidthBarDefault/Ext/Form.xml",
+      "sourceSha256": "2f0ec3d24d4a1b9188b8cda6e54bf7754adf1613d9a7a46d2240a18ddf9b92b4",
+      "items": [
+        {
+          "key": "Form.StandardCommand.PostAndClose",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Write",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Post",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.CreateBasedOn",
+          "items": [
+            "Document.ПоступлениеДенег.StandardCommand.CreateBasedOn"
+          ]
+        },
+        {
+          "key": "command-group:Печать",
+          "items": [
+            "document:РасходТовара/command:ПечатьРасходнойНакладной"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "CommonForms/ProbeWidthBarHiddenPrint/Ext/Form.xml",
+      "sourceSha256": "f7458b0a7bf570a73490d8707d0a4313df506df8db7f9589069afa0e671bdce4",
+      "items": [
+        {
+          "key": "Form.StandardCommand.PostAndClose",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Write",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Post",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.CreateBasedOn",
+          "items": [
+            "Document.ПоступлениеДенег.StandardCommand.CreateBasedOn"
+          ]
+        },
+        {
+          "key": "command-group:Печать",
+          "items": [
+            "document:РасходТовара/command:ПечатьРасходнойНакладной"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "CommonForms/ProbeWidthBarMovePrint/Ext/Form.xml",
+      "sourceSha256": "08d17dd4da1d74f5e1158dab0382c1ebb7959c45365c424fb9c2991ba7c378df",
+      "items": [
+        {
+          "key": "Form.StandardCommand.PostAndClose",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Write",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Post",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.CreateBasedOn",
+          "items": [
+            "Document.ПоступлениеДенег.StandardCommand.CreateBasedOn"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "CommonForms/ProbeWidthBarLocalPrint/Ext/Form.xml",
+      "sourceSha256": "7a8b7e86c78a34cdb5307a680534dad952fa4e2bf4b37c4b035b2219f3185231",
+      "items": [
+        {
+          "key": "Form.StandardCommand.PostAndClose",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Write",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Post",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.CreateBasedOn",
+          "items": [
+            "Document.РасходТовара.StandardCommand.CreateBasedOn"
+          ]
+        },
+        {
+          "key": "command-group:Печать",
+          "items": [
+            "Form.Command.ОформитьДоставку"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "CommonForms/ProbeWidthBarNoAutofill/Ext/Form.xml",
+      "sourceSha256": "34ff6906c65788e94b110bd49fa75da336d58d410e4ac9722363f303913352f9",
+      "items": []
+    },
+    {
+      "source": "CommonForms/ProbeWidthBarOtherOwner/Ext/Form.xml",
+      "sourceSha256": "c61f178da53cbdc93ccc6423fa9d3b8f2ae51cc3ae4240e3d1ebc63b3d81fffd",
+      "items": [
+        {
+          "key": "Form.StandardCommand.WriteAndClose",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Write",
+          "items": []
+        }
+      ]
+    }
+  ],
+  "installed": {
+    "batch": {
+      "pathInPlayground": "form-batch-RiC9P0/batch.json",
+      "sha256": "8c0525d7340b797fc4bb2fc579dc5df6bea97b5a0af193956b5ea212153e6c23"
+    },
+    "vsixSha256": "105d58efbbfbac10a2d0e5c9cf79a6906b84b65cd1f428bb7598094324cfc124",
+    "backendSha256": "90492b3a8ae9c3d52fd7c0aa8bc12b1ab7299fd508f24d0ae6224db4f6935788",
+    "runs": 18,
+    "verifiedCaseIds": 206,
+    "initialRendererRuFailure": "Checkbox observer sampled the previous form revision. The harness now waits for the XML version and the published revision before comparing.",
+    "rendererRechecksOnSameVsix": {
+      "en": {
+        "pathInPlayground": "form-native-based-on-en-lOubxjvD/renderer-recheck-en/receipt.json",
+        "sha256": "541286dd17c08cbef2fe36e46bc404531b02e167d2d791af7613cda0547d20b8"
+      },
+      "ru": {
+        "pathInPlayground": "form-native-based-on-en-lOubxjvD/renderer-recheck-ru/receipt.json",
+        "sha256": "cfafed84250773418ace5710a614e15847e35943090e50cce50b71247b90edcc"
+      }
+    },
+    "locales": {
+      "en": {
+        "nativeTitleLocalized": "Generate",
+        "commandMenuLiveUpdate": true,
+        "newBasedOnTargetInDetachedWindow": true,
+        "sourceWritesDuringViewing": false,
+        "applicationFormCount": 6,
+        "applicationMenuSamples": [
+          {
+            "source": "Documents/РасходТовара/Forms/ФормаДокумента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Generate",
+                "items": [
+                  "Поступление денег"
+                ]
+              },
+              {
+                "key": "command-group:Печать",
+                "label": "Печать",
+                "items": [
+                  "Печать расходной накладной",
+                  "Доставка"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 307,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          },
+          {
+            "source": "Documents/Заказ/Forms/ФормаДокумента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Generate",
+                "items": [
+                  "Продажа"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 315,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          },
+          {
+            "source": "Catalogs/Контрагенты/Forms/ФормаЭлемента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Generate",
+                "items": [
+                  "Заказ",
+                  "Оплата",
+                  "Поступление денег",
+                  "Поступление товара",
+                  "Продажа"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 437,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          }
+        ]
+      },
+      "ru": {
+        "nativeTitleLocalized": "Создать на основании",
+        "commandMenuLiveUpdate": true,
+        "newBasedOnTargetInDetachedWindow": true,
+        "sourceWritesDuringViewing": false,
+        "applicationFormCount": 6,
+        "applicationMenuSamples": [
+          {
+            "source": "Documents/РасходТовара/Forms/ФормаДокумента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Создать на основании",
+                "items": [
+                  "Поступление денег"
+                ]
+              },
+              {
+                "key": "command-group:Печать",
+                "label": "Печать",
+                "items": [
+                  "Печать расходной накладной",
+                  "Доставка"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 375,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          },
+          {
+            "source": "Documents/Заказ/Forms/ФормаДокумента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Создать на основании",
+                "items": [
+                  "Продажа"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 339,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          },
+          {
+            "source": "Catalogs/Контрагенты/Forms/ФормаЭлемента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Создать на основании",
+                "items": [
+                  "Заказ",
+                  "Оплата",
+                  "Поступление денег",
+                  "Поступление товара",
+                  "Продажа"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 455,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "debugTiming": {
+    "scope": "Four sequential form opens over stdio, including process startup and shutdown. Four paired runs.",
+    "results": {
+      "previous": {
+        "milliseconds": [
+          339.3,
+          334.6,
+          310.7,
+          320.0
+        ],
+        "medianMilliseconds": 327.3
+      },
+      "withBasedOn": {
+        "milliseconds": [
+          400.8,
+          420.5,
+          427.8,
+          430.0
+        ],
+        "medianMilliseconds": 424.15
+      }
+    }
+  },
+  "remaining": [
+    "Native popup width and anchor, toolbar geometry at narrow widths, and full More actions contents.",
+    "Application-wide compatible commands such as the native Send email button on the Counterparties form.",
+    "Full native acceptance of extension-specific BasedOn overrides, other display densities, and Windows."
+  ]
+}
