@@ -1649,3 +1649,23 @@ form-palette-property-AfterWriteAtServer = ПослеЗаписиНаСерве�
 form-palette-property-AfterWrite = ПослеЗаписи
 form-palette-property-ValueChoice = ВыборЗначения
 form-palette-value-forItem = Для элемента
+
+# Button palette in the Designer for local form commands.
+form-palette-property-CommandName = ИмяКоманды
+form-palette-property-Picture = Картинка
+form-palette-property-DefaultButton = КнопкаПоУмолчанию
+form-palette-property-Check = Пометка
+form-palette-property-RepresentationInContextMenu = Отображение в контекстном меню
+form-palette-property-LocationInCommandBar = ПоложениеВКоманднойПанели
+form-palette-property-CommandUniqueness = УникальностьКоманды
+form-palette-property-Shape = Фигура
+form-palette-property-ShapeRepresentation = ОтображениеФигуры
+form-palette-property-PictureLocation = ПоложениеКартинки
+form-palette-value-commonButton = Обычная кнопка
+form-palette-value-hyperlink = Гиперссылка
+form-palette-value-commandBarButton = Кнопка командной панели
+form-palette-value-commandBarHyperlink = Гиперссылка командной панели
+form-palette-value-text = Текст
+form-palette-value-roundedShape = Овальная
+form-palette-value-standardShape = Обычная
+form-palette-value-highImportance = Высокая

@@ -32,8 +32,8 @@ pub use handlers::{
     handler_source, handlers,
 };
 pub use palette::{
-    PaletteCategory, PaletteEditor, PaletteRow, PaletteValue, PlatformPropertyValue,
-    PropertyPalette,
+    PaletteCaption, PaletteCategory, PaletteEditor, PaletteRow, PaletteValue,
+    PlatformPropertyValue, PropertyPalette,
 };
 pub use parsing::parse;
 pub use pictures::FormPicture;

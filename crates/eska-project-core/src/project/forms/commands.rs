@@ -2,8 +2,9 @@
 
 use super::presentation::{definition_type, field_type, literal, metadata_property};
 use super::{
-    ComposedForm, EffectiveElement, ElementFamily, ElementKind, FORM_NAMESPACE, FormResource,
-    PresentationText, PropertySource, appearance::text, presentation::property,
+    ComposedForm, EffectiveDefinition, EffectiveElement, ElementFamily, ElementKind,
+    FORM_NAMESPACE, FormResource, PresentationText, PropertySource, appearance::text,
+    presentation::property,
 };
 use crate::project::metadata_model::{MetadataKind, MetadataValue, PropertyKey};
 use serde::Serialize;
@@ -16,6 +17,21 @@ pub struct AutoCommandItem {
     pub caption: PresentationText,
     pub primary: bool,
     pub origin: Option<PropertySource>,
+}
+
+pub(super) fn local_command_name(command: &str) -> Option<&str> {
+    command
+        .strip_prefix("Form.Command.")
+        .filter(|name| !name.trim().is_empty())
+}
+
+pub(super) fn local_command<'a>(
+    form: &'a ComposedForm,
+    name: &str,
+) -> Option<&'a EffectiveDefinition> {
+    form.commands
+        .iter()
+        .find(|command| command.name.as_deref() == Some(name))
 }
 
 pub(super) fn visible(tables: &TableIndex<'_>, command: Option<&str>) -> bool {

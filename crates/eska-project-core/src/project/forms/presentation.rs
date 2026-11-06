@@ -78,6 +78,8 @@ pub struct ElementPresentation {
     pub identity: ElementIdentity,
     #[serde(skip)]
     pub(super) in_table: bool,
+    #[serde(skip)]
+    pub(super) parent_kind: Option<ElementKind>,
     pub grouping: FormGrouping,
     pub united: Option<bool>,
     pub displayed: bool,
@@ -220,6 +222,7 @@ fn visit(
     output.push(ElementPresentation {
         identity: element.identity.clone(),
         in_table: scope.in_table,
+        parent_kind: scope.parent.and_then(|parent| parent.kind),
         grouping: grouping(element),
         united: group_united(element),
         displayed: is_displayed(element, binding.as_ref(), appearance)
@@ -860,12 +863,8 @@ fn command_caption(
     form: &ComposedForm,
     resources: &[FormResource],
 ) -> Option<PresentationText> {
-    if let Some(name) = command.strip_prefix("Form.Command.") {
-        return form
-            .commands
-            .iter()
-            .find(|value| value.name.as_deref() == Some(name))
-            .and_then(definition_caption);
+    if let Some(name) = super::commands::local_command_name(command) {
+        return super::commands::local_command(form, name).and_then(definition_caption);
     }
     if let Some(name) = command.strip_prefix("CommonCommand.") {
         return resources

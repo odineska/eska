@@ -3,7 +3,7 @@
 use super::{Entry, dto, failure, limit, navigation};
 use crate::ide::{dto::Labels, params};
 use eska_project_core::project::forms::{
-    PaletteCategory, PaletteRow, PaletteValue, PlatformPropertyValue,
+    PaletteCaption, PaletteCategory, PaletteRow, PaletteValue, PlatformPropertyValue,
 };
 use serde::Deserialize;
 use serde_json::{Value, json};
@@ -85,9 +85,9 @@ fn row_dto(labels: &Labels, row: &PaletteRow<'_>) -> Value {
                 "sourceKind":source_kind(extension)});
             if let Some(caption) = row
                 .definition
-                .and_then(|definition| definition.enum_caption(&property.value))
+                .and_then(|definition| definition.value_caption(&property.value))
             {
-                value["caption"] = translate(labels, &format!("form-palette-value-{caption}"));
+                value["caption"] = value_caption(labels, caption);
             }
             (
                 format!("xml:{}", json!([key.namespace, key.name, occurrence])),
@@ -109,10 +109,17 @@ fn row_dto(labels: &Labels, row: &PaletteRow<'_>) -> Value {
             extension,
         } => {
             let key = &attribute.key;
+            let mut value = json!({"kind":"qualifier","key":key,"text":attribute.text,
+                "origin":dto::origin(&attribute.origin),"sourceKind":source_kind(extension)});
+            if let Some(caption) = row
+                .definition
+                .and_then(|definition| definition.text_caption(&attribute.text))
+            {
+                value["caption"] = value_caption(labels, caption);
+            }
             (
                 format!("attribute:{}", json!([key.namespace, key.name])),
-                json!({"kind":"qualifier","key":key,"text":attribute.text,
-                    "origin":dto::origin(&attribute.origin),"sourceKind":source_kind(extension)}),
+                value,
             )
         }
         PaletteValue::Name(name) => (String::new(), json!({"kind":"name","value":name})),
@@ -142,6 +149,13 @@ fn row_dto(labels: &Labels, row: &PaletteRow<'_>) -> Value {
         result["available"] = json!(false);
     }
     result
+}
+
+fn value_caption(labels: &Labels, value: PaletteCaption<'_>) -> Value {
+    match value {
+        PaletteCaption::Platform(key) => translate(labels, &format!("form-palette-value-{key}")),
+        PaletteCaption::Identifier(name) => json!({"ru-RU":name,"en-US":name}),
+    }
 }
 
 fn absent(labels: &Labels, default: PlatformPropertyValue) -> Value {

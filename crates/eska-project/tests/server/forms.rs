@@ -76,6 +76,11 @@ const INPUT_PALETTE: &str =
     include_str!("../../../../tests/fixtures/forms/native-property-palette/input-field.json");
 const ROOT_PALETTE: &str =
     include_str!("../../../../tests/fixtures/forms/native-property-palette/form-root.json");
+const BUTTON_PALETTE: &str =
+    include_str!("../../../../tests/fixtures/forms/native-property-palette/button.json");
+const NATIVE_BUTTONS: &str = include_str!(
+    "../../../../tests/fixtures/forms/native-button-types/source/CommonForms/ProbeButtons/Ext/Form.xml"
+);
 const ROOT_OVERRIDES: &str = concat!(
     "<CommandBarLocation>Bottom</CommandBarLocation>",
     "<WindowOpeningMode>LockOwnerWindow</WindowOpeningMode>",
@@ -338,6 +343,171 @@ fn input_palette_row<'a>(inspection: &'a Value, key: &str) -> &'a Value {
         .iter()
         .find(|row| row["id"] == id)
         .unwrap()
+}
+
+fn native_button_defaults() -> String {
+    NATIVE_BUTTONS
+        .replace("<Representation>Text</Representation>", "")
+        .replace(
+            "<Font ref=\"sys:DefaultGUIFont\" height=\"10\" kind=\"WindowsFont\"/>",
+            "",
+        )
+}
+
+#[test]
+fn form_button_palette_matches_the_four_native_button_types() {
+    let native: Value = serde_json::from_str(BUTTON_PALETTE).unwrap();
+    let expected = native["rows"].as_array().unwrap();
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let form = native_button_defaults();
+    fs::write(&path, &form).unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        for (parent, child, kind) in [
+            (0, 0, "UsualButton"),
+            (0, 1, "Hyperlink"),
+            (1, 0, "CommandBarButton"),
+            (1, 1, "CommandBarHyperlink"),
+        ] {
+            let button = &opened["model"]["root"]["children"][parent]["children"][child];
+            let inspected = inspect_input(&mut client, &context, &opened, button, true);
+            let rows = inspected["rows"].as_array().unwrap();
+            assert_eq!(rows.len(), 35, "{kind}");
+            for (row, expected) in rows
+                .iter()
+                .zip(expected.iter().filter(|row| row["when"].is_null()))
+            {
+                assert_native_row(row, expected, locale);
+            }
+            for category in inspected["categories"].as_array().unwrap() {
+                assert_eq!(
+                    category["caption"],
+                    native["categoryLabels"][category["id"].as_str().unwrap()]
+                );
+            }
+            assert_eq!(
+                input_palette_value(&inspected, "Type")["caption"],
+                native["types"][kind]
+            );
+            let command = input_palette_value(&inspected, "CommandName");
+            let name = button["name"].as_str().unwrap();
+            assert_eq!(command["caption"], json!({"ru-RU":name,"en-US":name}));
+            let index = usize::try_from(command["propertyIndex"].as_u64().unwrap()).unwrap();
+            assert_eq!(
+                button["properties"][index]["value"]["text"],
+                format!("Form.Command.{name}")
+            );
+        }
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(path).unwrap(), form);
+}
+
+#[test]
+fn form_button_palette_keeps_manual_maxima_and_the_xml_importance_token() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let form = native_button_defaults();
+    fs::write(&path, &form).unwrap();
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let changed = form.replace(r#"<Button name="DefaultUsualButton" id="11">"#, concat!(
+        "<Button name=\"DefaultUsualButton\" id=\"11\" DisplayImportance=\"High\">",
+        "<DefaultButton>true</DefaultButton><CommandUniqueness>false</CommandUniqueness>",
+        "<Shape>Oval</Shape><AutoMaxWidth>false</AutoMaxWidth><MaxWidth>25</MaxWidth><AutoMaxHeight>false</AutoMaxHeight>"
+    ));
+    let updated = update_input(&mut client, &context, &opened, 2, &changed);
+    let button = &updated["model"]["root"]["children"][0]["children"][0];
+    let palette = inspect_input(&mut client, &context, &updated, button, true);
+    assert_eq!(palette["rows"].as_array().unwrap().len(), 37);
+    let importance = input_palette_value(&palette, "DisplayImportance");
+    assert_eq!(importance["kind"], "qualifier");
+    assert_eq!(importance["text"], "High");
+    assert_eq!(
+        importance["caption"],
+        json!({"ru-RU":"Высокая","en-US":"High"})
+    );
+    let range = client.request("form/locate", &params(&context, json!({
+        "formSessionId":updated["formSessionId"],"revision":updated["revision"],
+        "target":{"kind":"attribute","identity":button["identity"],"attribute":importance["key"]}
+    })));
+    assert_eq!(range["range"], importance["origin"]["range"]);
+    assert_eq!(
+        xml_at(&changed, &range["range"]),
+        r#"DisplayImportance="High""#
+    );
+    assert_eq!(
+        input_palette_value(&palette, "Shape")["caption"],
+        json!({"ru-RU":"Овальная","en-US":"Rounded"})
+    );
+    assert_eq!(
+        input_palette_value(&palette, "MaxHeight")["default"],
+        json!({"kind":"number","value":0})
+    );
+    for (id, expected) in [
+        ("MaxWidth", "25"),
+        ("DefaultButton", "true"),
+        ("CommandUniqueness", "false"),
+    ] {
+        let row = input_palette_value(&palette, id);
+        assert_eq!(row["kind"], "declared");
+        let index = usize::try_from(row["propertyIndex"].as_u64().unwrap()).unwrap();
+        let value = &button["properties"][index]["value"];
+        assert_eq!(value["text"], expected);
+        if id != "MaxWidth" {
+            assert_eq!(value["scalarType"], "boolean");
+        }
+    }
+    client.finish();
+    assert_eq!(fs::read_to_string(path).unwrap(), form);
+}
+
+#[test]
+fn form_button_palette_distinguishes_a_missing_type_by_parent_kind() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let form = native_button_defaults()
+        .replacen("<Type>UsualButton</Type>", "", 1)
+        .replacen("<Type>CommandBarButton</Type>", "", 1);
+    fs::write(&path, &form).unwrap();
+    let mut client = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut client, &directory.0, "en-US", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let inspect = |client: &mut Client, view: &Value, parent: usize| {
+        let button = &view["model"]["root"]["children"][parent]["children"][0];
+        inspect_input(client, &context, view, button, true)
+    };
+    let ordinary = inspect(&mut client, &opened, 0);
+    let bar = inspect(&mut client, &opened, 1);
+    assert_eq!(
+        input_palette_value(&ordinary, "Type")["default"],
+        json!({"kind":"choice","value":"commonButton"})
+    );
+    assert_eq!(
+        input_palette_value(&bar, "Type")["default"],
+        json!({"kind":"empty"})
+    );
+    let parameter = form.replace(
+        r#"<Command name="DefaultUsualButton" id="1">"#,
+        concat!(
+            "<Command name=\"DefaultUsualButton\" id=\"1\">",
+            "<ParameterType><v8:Type>xs:string</v8:Type></ParameterType>"
+        ),
+    );
+    let updated = update_input(&mut client, &context, &opened, 2, &parameter);
+    assert!(inspect(&mut client, &updated, 0)["rows"].is_null());
+    assert_eq!(
+        inspect(&mut client, &updated, 1)["rows"]
+            .as_array()
+            .unwrap()
+            .len(),
+        35
+    );
+    client.finish();
 }
 
 #[test]

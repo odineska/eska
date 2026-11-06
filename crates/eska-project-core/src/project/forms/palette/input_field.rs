@@ -1,5 +1,6 @@
 use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
+    setting_text,
 };
 use crate::project::forms::{
     EffectiveElement, ElementPresentation, FieldValueKind, appearance, presentation, references,
@@ -74,10 +75,6 @@ impl InputBinding {
 
 fn catalog_reference(key: &PropertyKey) -> bool {
     key.namespace.as_deref() == Some(references::CONFIG) && key.name.starts_with("CatalogRef.")
-}
-
-fn setting_text<'a>(element: &'a EffectiveElement, name: &str) -> Option<&'a str> {
-    appearance::text(&presentation::property(element, name)?.property.value)
 }
 
 #[derive(Clone, Copy)]

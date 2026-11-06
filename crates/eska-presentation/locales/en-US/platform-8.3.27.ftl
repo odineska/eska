@@ -1649,3 +1649,23 @@ form-palette-property-AfterWriteAtServer = AfterWriteAtServer
 form-palette-property-AfterWrite = AfterWrite
 form-palette-property-ValueChoice = ValueChoice
 form-palette-value-forItem = For item
+
+# Button palette in the Designer for local form commands.
+form-palette-property-CommandName = CommandName
+form-palette-property-Picture = Picture
+form-palette-property-DefaultButton = DefaultButton
+form-palette-property-Check = Check
+form-palette-property-RepresentationInContextMenu = Display in context menu
+form-palette-property-LocationInCommandBar = LocationInCommandBar
+form-palette-property-CommandUniqueness = CommandUniqueness
+form-palette-property-Shape = Shape
+form-palette-property-ShapeRepresentation = ShapeRepresentation
+form-palette-property-PictureLocation = PictureLocation
+form-palette-value-commonButton = Common button
+form-palette-value-hyperlink = Hyperlink
+form-palette-value-commandBarButton = Command bar button
+form-palette-value-commandBarHyperlink = Command bar hyperlink
+form-palette-value-text = Text
+form-palette-value-roundedShape = Rounded
+form-palette-value-standardShape = Standard
+form-palette-value-highImportance = High

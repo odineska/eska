@@ -1,5 +1,6 @@
 //! The Designer palette describes applicable settings separately from declared XML.
 
+mod button;
 mod input_field;
 mod root_form;
 
@@ -9,7 +10,7 @@ use serde::Serialize;
 
 use super::{
     EffectiveElement, ElementIdentity, ElementKind, FORM_NAMESPACE, FormPreview, SourcedProperty,
-    SourcedQualifier, appearance, handlers, presentation,
+    SourcedQualifier, appearance, commands, handlers, presentation,
 };
 use crate::project::metadata_model::MetadataValue;
 
@@ -77,6 +78,13 @@ pub struct PaletteDefinition {
     enum_captions: &'static [(&'static str, &'static str)],
 }
 
+/// A display caption leaves the raw XML value available through its source property.
+#[derive(Clone, Copy, Debug)]
+pub enum PaletteCaption<'a> {
+    Platform(&'static str),
+    Identifier(&'a str),
+}
+
 #[derive(Clone, Copy, Debug)]
 enum SettingSource {
     Property(&'static str),
@@ -117,13 +125,20 @@ impl PaletteDefinition {
         self
     }
 
-    /// A localized caption key for a measured Designer token. The source token stays in the model.
+    /// A display caption for a recognized Designer value.
     #[must_use]
-    pub fn enum_caption(self, value: &MetadataValue) -> Option<&'static str> {
-        let text = appearance::text(value)?;
-        self.enum_captions
-            .iter()
-            .find_map(|(token, caption)| (*token == text).then_some(*caption))
+    pub fn value_caption(self, value: &MetadataValue) -> Option<PaletteCaption<'_>> {
+        self.text_caption(appearance::text(value)?)
+    }
+
+    #[must_use]
+    pub fn text_caption(self, text: &str) -> Option<PaletteCaption<'_>> {
+        if self.id == "CommandName" {
+            return commands::local_command_name(text).map(PaletteCaption::Identifier);
+        }
+        self.enum_captions.iter().find_map(|(token, caption)| {
+            (*token == text).then_some(PaletteCaption::Platform(caption))
+        })
     }
 }
 
@@ -183,6 +198,13 @@ impl FormPreview {
                 .find(|item| &item.identity == identity)
                 .and_then(|item| input_field::Context::new(item, element))
                 .map(|context| self.palette_rows(element, input_field::definitions(context))),
+            Some(ElementKind::Button) => self
+                .presentation
+                .elements
+                .iter()
+                .find(|item| &item.identity == identity)
+                .and_then(|item| button::Context::new(&self.form, item, element))
+                .map(|context| self.palette_rows(element, button::definitions(context))),
             _ => ordinary_vertical_group(element)
                 .then(|| self.palette_rows(element, USUAL_GROUP.iter().map(|row| (row, true)))),
         };
@@ -317,15 +339,18 @@ fn event_entry(element: &EffectiveElement, name: &str) -> Option<(usize, usize, 
 }
 
 fn ordinary_vertical_group(element: &EffectiveElement) -> bool {
-    let setting = |name| {
-        presentation::property(element, name)
-            .and_then(|property| appearance::text(&property.property.value))
-    };
     // This catalog was captured for an ordinary vertical group. Specialized
     // behavior can introduce other properties and change their availability.
     element.kind == Some(ElementKind::UsualGroup)
-        && matches!(setting("Behavior"), None | Some("Auto" | "Usual"))
-        && setting("Group") == Some("Vertical")
+        && matches!(
+            setting_text(element, "Behavior"),
+            None | Some("Auto" | "Usual")
+        )
+        && setting_text(element, "Group") == Some("Vertical")
+}
+
+fn setting_text<'a>(element: &'a EffectiveElement, name: &str) -> Option<&'a str> {
+    appearance::text(&presentation::property(element, name)?.property.value)
 }
 
 const USUAL_GROUP: &[PaletteDefinition] = {
