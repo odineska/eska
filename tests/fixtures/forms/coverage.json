@@ -548,7 +548,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "shell.checkbox-properties"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -4329,6 +4330,86 @@
       "lastConfirmation": "docs/measurements/t161-button-palette-linux.json",
       "remaining": "Other button placements and command types, style resolution and full property/state coverage. Windows native verification.",
       "nextAction": "Measure native palettes for automatic command bars, context menus and parameterized commands."
+    },
+    {
+      "id": "shell.checkbox-properties",
+      "milestone": "T161",
+      "kinds": [
+        "CheckBoxField"
+      ],
+      "axes": [
+        "source.identity",
+        "values.defaults",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Root Boolean and unbound checkbox fields and direct Boolean columns. Native row order and defaults, all four mode labels, and conditional width rows.",
+      "fixtures": [
+        "tests/fixtures/forms/native-property-palette/checkbox.json",
+        "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml",
+        "tests/fixtures/forms/native-state-variants/TableDefault.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "property-catalogue",
+        "path": "test/form-property-catalogue-host.cjs",
+        "caseIds": [
+          "24",
+          "25",
+          "26",
+          "27",
+          "28",
+          "29"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t161-checkbox-palette-linux.json",
+          "sha256": "92b13b38b724bb05a58e93327b6600ad677c71f49374e66b7d5eea750559e05f",
+          "clientCommit": "465043664f04ac92d52e1d6c2aaaa2f23ba88667",
+          "assertions": [
+            {
+              "pointer": "/native/rootFieldRows",
+              "equals": 28
+            },
+            {
+              "pointer": "/native/unequalTumblerRows",
+              "equals": 35
+            },
+            {
+              "pointer": "/native/columnRows",
+              "equals": 43
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 22
+            },
+            {
+              "pointer": "/acceptance/exactModeAndEventNavigation",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/unusedWidthPreserved",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/compatibilityPairsPassed",
+              "equals": 4
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t161-checkbox-palette-linux.json",
+      "remaining": "Nested, additional binding and column contexts, styling provenance and Windows native verification.",
+      "nextAction": "Compare the palette for checkbox fields in ordinary groups and for additional table types."
     },
     {
       "id": "shell.inspectors",

@@ -1154,6 +1154,15 @@ dirty-переходы для `AutoTitle`, `Scale` и хранилища, пер
 dirty-правки и переходы к исходным `DisplayImportance` и `CommandName`.
 [Матрица кнопок Linux](t161-button-palette-linux.json).
 
+Для флажков используйте [формы и варианты](../../tests/fixtures/forms/native-property-palette/README.md#флажок).
+Сравните 27 строк у поля без привязки, 28 у поля с булевой привязкой и
+43 у прямой булевой колонки. У тумблера проверьте 36 строк и переход к
+35 при `EqualItemsWidth=false`. У выключателя 31 строка. В `property-catalogue`
+проверьте обновление при несохранённых правках и переходы к `CheckBoxType`
+и `Events`. Предыдущий backend 1.41 проверяется с
+`ESKA_HOST_PROPERTY_CATALOGUE=button-only`.
+[Матрица флажков Linux](t161-checkbox-palette-linux.json).
+
 Для `United` снять парные эталоны отдельно в Конфигураторе Windows. Начать
 с четырёх сочетаний Columns и вложенной пары Nested. Сверить правила общих
 строк и столбцов, затем измерить собственные размеры полей и отступы.
