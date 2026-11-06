@@ -549,7 +549,9 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "shell.checkbox-properties"
+        "shell.checkbox-properties",
+        "ordinary.checkbox-modes",
+        "ordinary.checkbox-glyphs"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3995,6 +3997,132 @@
       "lastConfirmation": null,
       "remaining": "Automatic consumers, separators, menus, hyperlinks, picture/text modes, states and tooltip behavior.",
       "nextAction": "Extend the native matrix for the listed remaining scope; preserve already accepted regions."
+    },
+    {
+      "id": "ordinary.checkbox-modes",
+      "milestone": "T158",
+      "kinds": [
+        "CheckBoxField"
+      ],
+      "axes": [
+        "state.display",
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "Boolean checkbox, switch and tumbler geometry, script variant, explicit format, sizes and live detached update.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "CheckBoxField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-checkbox-modes-linux.json",
+          "sha256": "2f934c0cedfd413728b3d3b42b34c6cf37e025b56bc36bdf55db773edb4b1538",
+          "clientCommit": "0432096eab680d15d1465c39ec4a8e21796a2c47",
+          "assertions": [
+            {
+              "pointer": "/acceptance/geometryCasesPerLocale",
+              "equals": 17
+            },
+            {
+              "pointer": "/acceptance/resizeAfterScriptVariantChange",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/detachedXmlOverlay",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-checkbox-modes-linux.json",
+      "remaining": "Exact tumbler pixels, additional control and title settings, Windows.",
+      "nextAction": "Measure the gradient, separator and native text of both tumbler segments."
+    },
+    {
+      "id": "ordinary.checkbox-glyphs",
+      "milestone": "T158",
+      "kinds": [
+        "CheckBoxField"
+      ],
+      "axes": [
+        "state.display",
+        "appearance.colors",
+        "layout.geometry"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Complete 15×15 checkbox and 34×20 off switch glyphs on white and black solid backgrounds in the measured native states.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "CheckBoxField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-checkbox-modes-linux.json",
+          "sha256": "2f934c0cedfd413728b3d3b42b34c6cf37e025b56bc36bdf55db773edb4b1538",
+          "clientCommit": "0432096eab680d15d1465c39ec4a8e21796a2c47",
+          "assertions": [
+            {
+              "pointer": "/acceptance/exactGlyphCropCount",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/exactGlyphPixels",
+              "equals": 7240
+            },
+            {
+              "pointer": "/acceptance/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/detachedCapturePairs",
+              "equals": 2
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-checkbox-modes-linux.json",
+      "remaining": "Additional backdrop colors and zoom/DPI profiles, whole fields and Windows.",
+      "nextAction": "Measure non-reference solid backdrops and record non-default DPI separately."
     },
     {
       "id": "ordinary.complete-states",

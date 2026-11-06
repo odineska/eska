@@ -1,0 +1,1695 @@
+{
+  "schemaVersion": 1,
+  "task": "T158",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11, 96 DPI",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "fixture": "tests/fixtures/forms/native-bound-fields/CheckBoxField.xml",
+  "fixtureSha256": "68bc20e1c512d4f81572cb741e3d89d66f124039ff12fd9762686a682a4cc812",
+  "native": {
+    "modes": [
+      {
+        "name": "Auto",
+        "formSha256": "e26a437f9b95d979358541adceaefa88d382e78a0bf31a900be4d3b31bb3c7e2",
+        "settings": {
+          "mode": null,
+          "properties": ""
+        },
+        "screenshots": {
+          "en": "d6ac4af53774cf009d15ba7d2b14952a2945c9fc4e3d3b9a183bb5be063b331a",
+          "ru": "9ddc21029607ffafbf4daa1ba8c0dda8614c5457a5270bb0e06a2301a44e5fa7"
+        }
+      },
+      {
+        "name": "Explicit",
+        "formSha256": "a765a4c9c46d6f1f9d796014c6dc1a73434310f3945d31ca0f8d8231a67f7387",
+        "settings": {
+          "mode": "CheckBox",
+          "properties": ""
+        },
+        "screenshots": {
+          "en": "3c067398e766d18aa6ef92dd7c549db64b1e925a640175ceac0eb11175565380",
+          "ru": "737c7039ec9b6b731336e48ebf9fdf0278c72e96b4ea4ccdd20abb64163e4fef"
+        }
+      },
+      {
+        "name": "TriState",
+        "formSha256": "376cb556835c71298af41b1da96207439718ff26d9d28ba42818153afa7e2ab9",
+        "settings": {
+          "mode": "Auto",
+          "properties": "<ThreeState>true</ThreeState>"
+        },
+        "screenshots": {
+          "en": "4330c58b753ec7f517a90c50a47a070d736c61fa9a688be05a97a5cae192d54a",
+          "ru": "71f510b5912916ad9de68b4def56fe423365f5fca80ec626709781422b4dfd1a"
+        }
+      },
+      {
+        "name": "Disabled",
+        "formSha256": "b0262f0ca959afcb5ccb12a356752228574ed4159fae75586c579b8cbce46eae",
+        "settings": {
+          "mode": "CheckBox",
+          "properties": "<Enabled>false</Enabled>"
+        },
+        "screenshots": {
+          "en": "536d7243880c9c274472fa086713bfc10c3b16d0c179ce834ef1d735a5253e9e",
+          "ru": "71c3408974396a56b8ac34d5ddc6d9aa38c2aceef9b5943bdb7ba1b78fac3c35"
+        }
+      },
+      {
+        "name": "ReadOnly",
+        "formSha256": "3849749f1769a635375e7ce1f55580be7d758b53e1ba60894447f96cd565495f",
+        "settings": {
+          "mode": "CheckBox",
+          "properties": "<ReadOnly>true</ReadOnly>"
+        },
+        "screenshots": {
+          "en": "a11de9f3330e826643a3b195917687c8c165ab71812448e43bab23930fcf3b40",
+          "ru": "0fe87ecf3b1b49432d98c3768d8a4669d3f20d4be2417607760ca5097020fdf7"
+        }
+      },
+      {
+        "name": "Tumbler",
+        "formSha256": "c6156d6cc88e49b2e942634bced26d2efe1fac5644169539e2c7a6b226d2020c",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": ""
+        },
+        "screenshots": {
+          "en": "88dadcdd39ab3afdad5baab7c676a503c6b43f889d6f8296e272412be23b2ca7",
+          "ru": "c72f831dda833daa711849ce0b4adf8d5910f91bc0c8897986059b344c96d39f"
+        }
+      },
+      {
+        "name": "TumblerRight",
+        "formSha256": "504f8f415388d76e5ef1afa1c4d770cf556367e1ab5d9b2b8fb601849ea329fa",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<TitleLocation>Right</TitleLocation>"
+        },
+        "screenshots": {
+          "en": "f2841d1aa8a022a7e0da7fa3b4aa331c84c52ae815022a8add82ed6b72b3ff97",
+          "ru": "658d843e292f47085d15fee889f038017ca76820bd8c48783af2fb1d4f2a596f"
+        }
+      },
+      {
+        "name": "TumblerTop",
+        "formSha256": "8491ce70bd90f0c84023d756e87da307d10133b660794cb1f85b81c15ac8c417",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<TitleLocation>Top</TitleLocation>"
+        },
+        "screenshots": {
+          "en": "f2cbb56a058246174b79db5bc8fe0dbe6a9d01c8cffc027101eb350ea5114944",
+          "ru": "8a12e76da751232138e0d79c22ab245cff8a170d3958f3c41c6ae0916d312add"
+        }
+      },
+      {
+        "name": "TumblerUnequal",
+        "formSha256": "9ed0a19b05fcf783ea0f4b2df79cc8d06ea0a23ce1ea0f7da287c360df764779",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<EqualItemsWidth>false</EqualItemsWidth><ItemWidth>12</ItemWidth><EditFormat><v8:item><v8:lang>ru</v8:lang><v8:content>БИ=Вкл; БЛ=Выключено</v8:content></v8:item></EditFormat>"
+        },
+        "screenshots": {
+          "en": "04432e5f087acd6632036cad0b1c87f300e68252a593b4ffdbe33bb1d1436170",
+          "ru": "0556fe6d56461e0a8190c2cd7191528a314ba0271eb3c1140f379cf9a3f28d7d"
+        }
+      },
+      {
+        "name": "TumblerManual",
+        "formSha256": "e3f205ec6596413b7f7eda05258e87ee4526fef61a6580f0e432b087a0559abc",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<ItemWidth>12</ItemWidth><ItemHeight>2</ItemHeight><ItemTitleHeight>2</ItemTitleHeight><EditFormat><v8:item><v8:lang>ru</v8:lang><v8:content>BT=On; BF=Off</v8:content></v8:item></EditFormat>"
+        },
+        "screenshots": {
+          "en": "f9cc92aca2662dac8c6d95bf50f7d4f1ea03f3cc51b6de18c023d5e114d674e3",
+          "ru": "2f87937fae3f5efaa68932766b1840741724e383f867555be6781e80ef428f43"
+        }
+      },
+      {
+        "name": "TumblerPaint",
+        "formSha256": "b981e7b30ddd92a175f25ac6c09dfcad6932e32030aa599836ebed177d47143e",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<BackColor>web:LightGreen</BackColor><BorderColor>web:Blue</BorderColor><TextColor>web:Red</TextColor><Font ref=\"sys:DefaultGUIFont\" height=\"16\" bold=\"true\" kind=\"WindowsFont\"/>"
+        },
+        "screenshots": {
+          "en": "e26d7f7b1f8cb75784b2028af5297e5ecbbfc6f65a623e0ac5f3f2ee2e9e478a",
+          "ru": "e3762e25ebd1b1cda04f4f726e74c7c4ccad54e9bd32073881d4788c4c8cad30"
+        }
+      },
+      {
+        "name": "TumblerDisabled",
+        "formSha256": "099e2b0bb056811ea4861bdc377b6ec8a2c923668d37289b3a8dfc136e66dfcd",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<Enabled>false</Enabled>"
+        },
+        "screenshots": {
+          "en": "ba374be12da68f7b3b2d0e8f60204b9c67707ff80aa2fac27acf576b4fcf4d56",
+          "ru": "c72b5d76dc7e713930fe87abd4467a700a96e5cdb6bf76d1fa8aeee54a458903"
+        }
+      },
+      {
+        "name": "TumblerReadOnly",
+        "formSha256": "0125fb0878437dd5bdecf5fd80aa1d96bcc2fed7d3b02df395f32e8c73b598ad",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<ReadOnly>true</ReadOnly>"
+        },
+        "screenshots": {
+          "en": "d51063db00714c5aef49c8d96da70144c47dc0004799fbcba4e03c653f76942a",
+          "ru": "f62737fca5c4f0acd9e7639011271971eafa710c27ccd80e717903a9b58dd947"
+        }
+      },
+      {
+        "name": "Switch",
+        "formSha256": "19b4e66f0b724c7a72b2a7b0c8ef21c70db4a4c6be723c8f8faa4785b14ffd77",
+        "settings": {
+          "mode": "Switcher",
+          "properties": ""
+        },
+        "screenshots": {
+          "en": "9e0115669e3c48040edeb10c4b4fabb78f3a5fd08ca90360e9f0832f10eb2d97",
+          "ru": "e6ce00f80aca7a4d440d23a2713e6973bb956bac4ec19155244f38a83efb8ea7"
+        }
+      },
+      {
+        "name": "SwitchTop",
+        "formSha256": "fffee2d3c41fd9e005add15ff1d62b87346b5b2d7d3db1ceb2bd5cf4f3c76c17",
+        "settings": {
+          "mode": "Switcher",
+          "properties": "<TitleLocation>Top</TitleLocation>"
+        },
+        "screenshots": {
+          "en": "897f70edef3de51018c0869aba5cb1aef0fdb086cf986cbbe511005fad0e10ca",
+          "ru": "20a914c1e20a6af15098ad40637f4b040c2394233fe23c5d726b74608abf530e"
+        }
+      },
+      {
+        "name": "SwitchPaint",
+        "formSha256": "292e3229bf7bedfade031f1bc810776578cdaac0cc87e97e66cb098ea3301da7",
+        "settings": {
+          "mode": "Switcher",
+          "properties": "<BackColor>web:LightGreen</BackColor><BorderColor>web:Blue</BorderColor><TextColor>web:Red</TextColor><Font ref=\"sys:DefaultGUIFont\" height=\"16\" bold=\"true\" kind=\"WindowsFont\"/>"
+        },
+        "screenshots": {
+          "en": "9145b79c8574332ce0acf47db2c0184a25af05057b84ea35977c96745ef712d0",
+          "ru": "554b1db6eada6dede153c53cb9004b520c07bac818626938f3b870cef3fa458e"
+        }
+      },
+      {
+        "name": "SwitchDisabled",
+        "formSha256": "05ece59f46ac9a9adf21bc86e966098e7181669d51b0ec13b8394546553a37bb",
+        "settings": {
+          "mode": "Switcher",
+          "properties": "<Enabled>false</Enabled>"
+        },
+        "screenshots": {
+          "en": "905b12fdbd7aae48c9fe884eae6a5d7e1b271131ded29bdad9b9b2e478eb051e",
+          "ru": "dfbb49ecff2b3264902f8971ef7147968ff587a75774ec05f73d85be699e7e53"
+        }
+      },
+      {
+        "name": "SwitchReadOnly",
+        "formSha256": "4ee83ffa4fcfd7fae6385badc1c71fecbfcee430e3c61721623b37cc21c1036d",
+        "settings": {
+          "mode": "Switcher",
+          "properties": "<ReadOnly>true</ReadOnly>"
+        },
+        "screenshots": {
+          "en": "4de313ba32c0c7538f15493c786aa9ba677d5f1a4179d6b0b4275a2d51434a8b",
+          "ru": "57b00aca310c63671df2aabb2ca6167dc0ae800d7f59334a5740fda44d9bbe2a"
+        }
+      }
+    ],
+    "sizes": [
+      {
+        "name": "Tumbler",
+        "formSha256": "83e5753237e9925c66a88940c6c6ba58560e9e3eb031a17878d6e7fd64738b3a",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "924f7c3730eaa03d4b968c4af54053c776dcc5c71ba5cf6507330856a8f9b192"
+        }
+      },
+      {
+        "name": "TumblerOne",
+        "formSha256": "54825ee72b99c9c49ebae8252d807aa9e9900006d18b6d1e037aa4398ee96707",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<ItemHeight>1</ItemHeight>",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "b86c2a33a624dbc1bbf5584307d5879c1977ef7aadaa9807260bb354d55e7acd"
+        }
+      },
+      {
+        "name": "TumblerTwo",
+        "formSha256": "4fa856f56611f5bdecc584db8e194cea2855eeb73abfecc223f2a74b4e7a9b73",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<ItemHeight>2</ItemHeight>",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "42f421d93fa4ff5b554452c414de6e9902e48a38df93aaa134a79743f0446077"
+        }
+      },
+      {
+        "name": "TumblerThree",
+        "formSha256": "e6a9573ecb006ebbe1bbd67aaec0c8bb115c6d4a257c1f70319a60b2f6d6aaea",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<ItemHeight>3</ItemHeight>",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "fc7fa4bf94458c1b8e6299fdf379baacf173a4f25183d612ded2ba5ba9732639"
+        }
+      },
+      {
+        "name": "TumblerTwoLines",
+        "formSha256": "cf14d4d2d374c04036a91a2d5e5465da905d6d0240b2da095cbb0eb559fad8cc",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<ItemTitleHeight>2</ItemTitleHeight>",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "28521566b5fbcdf613ceddeffea640463227e42f341ce534ffffe5a9b9562ba9"
+        }
+      },
+      {
+        "name": "TumblerNarrow",
+        "formSha256": "115b6b14db0fe09a5ead31df640874722245a103fb7cb18bae78db78cc1b56b1",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<ItemWidth>1</ItemWidth>",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "1d279d7902b45db1841b5a92fee4fb059b44f54b0fad891c325c1a0cd25925c9"
+        }
+      },
+      {
+        "name": "TumblerFormat",
+        "formSha256": "2301f1a009ccc140823cbd5e576b886459c9f98149f5baead36234a9ee690a5e",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<EditFormat><v8:item><v8:lang>en</v8:lang><v8:content>BT=\" Yes; really \"; BF=No</v8:content></v8:item><v8:item><v8:lang>ru</v8:lang><v8:content>BT=\" Yes; really \"; BF=No</v8:content></v8:item></EditFormat>",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "5dba167fa40006d8c3cf5b7602fbbb95102c72b7daf933329785d45800c9eb7f"
+        }
+      },
+      {
+        "name": "TumblerLang",
+        "formSha256": "3de7f4ce462c715a0587ed47454b1a74b2238ac296bb65404633d805e43c3cab",
+        "settings": {
+          "mode": "Tumbler",
+          "properties": "<EditFormat><v8:item><v8:lang>en</v8:lang><v8:content>L=ru_RU</v8:content></v8:item><v8:item><v8:lang>ru</v8:lang><v8:content>L=ru_RU</v8:content></v8:item></EditFormat>",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "4f8ee3493705a26b1ccbabcd0c1728525b8d0fa57dee22b9ac5f1c26c5fbe7ac"
+        }
+      },
+      {
+        "name": "CheckPaint",
+        "formSha256": "3b9c74ee8fcc4d2bb92da39f16ddf0e503a0c7c7cd6454d3b2d83680ff0e75af",
+        "settings": {
+          "mode": "CheckBox",
+          "properties": "<BorderColor>web:Red</BorderColor>",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "af2cf1edbaea3b0203171cc3585604d571b4c1fab8344e648e1455914e951579"
+        }
+      },
+      {
+        "name": "CheckRight",
+        "formSha256": "c9a3fa935ee609491d62aae4f2f560655071b515dd77e1d451192e1b3300b7a2",
+        "settings": {
+          "mode": "CheckBox",
+          "properties": "<TitleLocation>Right</TitleLocation>",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "9656a10752051607523c9d7b1f8ddfb4c69bbe3e12091e322ccde8b2d89d685f"
+        }
+      },
+      {
+        "name": "CheckTop",
+        "formSha256": "0156bdabd269fc2bccb3afb7801eaf3f5c60c0a43a4ac94e4847bfe843c45af3",
+        "settings": {
+          "mode": "CheckBox",
+          "properties": "<TitleLocation>Top</TitleLocation>",
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "3166088b9bcd4a84a8031a658d1c975bbdbf692335e4dce3502353a81ff40fe9"
+        }
+      },
+      {
+        "name": "CheckBlack",
+        "formSha256": "6e34cdd4a9c94ad6af40e0644467e7ff46e8e3c5105c486a97134cdd5e458403",
+        "settings": {
+          "mode": "CheckBox",
+          "background": "black",
+          "inactive": false,
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "496572e88a7005f893512d49316b2db6310da3292b7a67fc46e123cf1b8157f4"
+        }
+      },
+      {
+        "name": "CheckInactiveBlack",
+        "formSha256": "f487b776e372912ef6bbafa849ac622ed998323e8905540709aa856230271397",
+        "settings": {
+          "mode": "CheckBox",
+          "background": "black",
+          "inactive": true,
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "c96c9f4755e8b31fd8af14cbf40fa51d3e7881600dd7613caecfe5ad0e41dc7d"
+        }
+      },
+      {
+        "name": "SwitchBlack",
+        "formSha256": "af57615ac5d477e90327216fd47aa9485592eaf9289e24250368e0d0a365d81d",
+        "settings": {
+          "mode": "Switcher",
+          "background": "black",
+          "inactive": false,
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "04f4e8503b202d377f40cecb502ab0621e201739c906dcf433206253fdaef45e"
+        }
+      },
+      {
+        "name": "SwitchInactiveBlack",
+        "formSha256": "7030a039dc8e61379efd6f927a9abda2a68cc4a337ad24f8c53385ef76b289e8",
+        "settings": {
+          "mode": "Switcher",
+          "background": "black",
+          "inactive": true,
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "d1ec2a075fc1931bb185320aa5c6b018d97e53556ae3f3d698b59b3e8699bfe8"
+        }
+      },
+      {
+        "name": "TumblerBlack",
+        "formSha256": "cf465a508a402b88adfab7c068ac77749a3ce07339cee49da1d98aa4d21ea14b",
+        "settings": {
+          "mode": "Tumbler",
+          "background": "black",
+          "inactive": false,
+          "defaultLanguageCode": "en"
+        },
+        "screenshots": {
+          "en": "08f91ccd1806c2a11bf1fa442ff08dca973ca1d2498c2c9096bbd9bd35006dfa"
+        }
+      }
+    ],
+    "scriptVariantEnglish": [
+      {
+        "name": "Tumbler",
+        "formSha256": "83e5753237e9925c66a88940c6c6ba58560e9e3eb031a17878d6e7fd64738b3a",
+        "settings": {
+          "mode": "Tumbler",
+          "format": "",
+          "scriptVariant": "English"
+        },
+        "screenshots": {
+          "en": "816f73faa325866ed7200e334b0a85e68ff199706c22c460a3cfe872284690b1"
+        }
+      },
+      {
+        "name": "TumblerEn",
+        "formSha256": "2e42e56e195961431f8d5de69ca7b207e6f4181d2a6135e8628f3e82c744f4b0",
+        "settings": {
+          "mode": "Tumbler",
+          "format": "L=en_US",
+          "scriptVariant": "English"
+        },
+        "screenshots": {
+          "en": "c211b4799e031699e13a8ef45d8e2efc3e8a9ae3dc0a196677473b6d962a7ba4"
+        }
+      },
+      {
+        "name": "TumblerOneCaption",
+        "formSha256": "146ce0cde13e5f6ae7556146e4d680370a7b9ad78fa2fca41f7a05f2bc7cc4f2",
+        "settings": {
+          "mode": "Tumbler",
+          "format": "BT=On",
+          "scriptVariant": "English"
+        },
+        "screenshots": {
+          "en": "e3c2d446b128bbccc848bd093ef92c1819136e95a0ceb744311ae681aa5c25d7"
+        }
+      },
+      {
+        "name": "TumblerRu",
+        "formSha256": "1b40be5e95468ce57cc2e4e0594f67012f7533f3a763e0f7fef86af22796d659",
+        "settings": {
+          "mode": "Tumbler",
+          "format": "L=ru_RU",
+          "scriptVariant": "English"
+        },
+        "screenshots": {
+          "en": "7e66afcf4a83e423f86a297ec25b1500d3cd84f33535a1ecd6b72499b50b5e59"
+        }
+      },
+      {
+        "name": "TumblerNoCaption",
+        "formSha256": "643c4011c56340b7d218e0a6f3c6ce7a2472705c476f00fdb11c7394ad75fc00",
+        "settings": {
+          "mode": "Tumbler",
+          "format": "BT=; BF=",
+          "scriptVariant": "English"
+        },
+        "screenshots": {
+          "en": "8c04b96f1d0b240f2319217547076b8b2c3b444173f6ed8fff61da8eb402a802"
+        }
+      }
+    ],
+    "configurationLanguageOnlyChanged": {
+      "metadataLanguageCode": "en",
+      "scriptVariant": "Russian",
+      "defaultLabels": [
+        "Истина",
+        "Ложь"
+      ],
+      "enRegionLaunchCropSha256": "b28e740edacfba22059928fd3609e460e62404e42d40c1a0a9627b239774f806"
+    }
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "backendCommit": "385a2b4faf35a30ef85983c0c7d53415367b3e9d",
+    "explorerCommit": "0432096eab680d15d1465c39ec4a8e21796a2c47",
+    "vsixSha256": "9f7e63e336ffdf8cd5b467ec880f64b123142733b3494250022696587e14ec8b",
+    "backendSha256": "2449274394dbef82a32dd03b060c62cd7b1df9817efb47bae958a6f111b595a1",
+    "runtimeManifestSha256": "37f2022b0fb522d0fdfa96e1e11e2f672195b38e85cc001e1baeb67d30cb00d7",
+    "runtimeFilesVerifiedPerRun": 1303
+  },
+  "checks": {
+    "rust": {
+      "suites": 42,
+      "passed": 1542,
+      "ignored": 19,
+      "fmt": true,
+      "check": true,
+      "clippy": true,
+      "test": true,
+      "build": true
+    },
+    "typescript": true,
+    "compile": true,
+    "node": {
+      "passed": 607,
+      "skipped": 11
+    },
+    "bun": {
+      "version": "1.4.2",
+      "passed": 595,
+      "skipped": 11
+    }
+  },
+  "acceptance": {
+    "pairsPassed": 26,
+    "caseCountsBySuite": {
+      "renderer": {
+        "en": 20,
+        "ru": 20
+      },
+      "states": {
+        "en": 15,
+        "ru": 15
+      },
+      "property-catalogue": {
+        "en": 30,
+        "ru": 30
+      },
+      "button-types": {
+        "en": 11,
+        "ru": 11
+      },
+      "button-rows": {
+        "en": 8,
+        "ru": 8
+      },
+      "usual-buttons": {
+        "en": 18,
+        "ru": 18
+      },
+      "handlers": {
+        "en": 1,
+        "ru": 1
+      },
+      "inspectors": {
+        "en": 1,
+        "ru": 1
+      },
+      "preview": {
+        "en": 1,
+        "ru": 1
+      },
+      "detached-space": {
+        "en": 6,
+        "ru": 6
+      },
+      "composition": {
+        "en": 9,
+        "ru": 9
+      },
+      "tables": {
+        "en": 17,
+        "ru": 17
+      },
+      "application": {
+        "en": 4,
+        "ru": 4
+      }
+    },
+    "geometryCasesPerLocale": 17,
+    "resizeAfterScriptVariantChange": true,
+    "detachedXmlOverlay": true,
+    "installedGeometry": {
+      "en": [
+        {
+          "name": "auto",
+          "settled": true,
+          "frame": [
+            92,
+            69
+          ],
+          "glyph": [
+            55,
+            40,
+            15,
+            15
+          ],
+          "clipped": false,
+          "role": "checkbox",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": null,
+          "markSha256": "9b9c8570a995e299cfc3729a3cfc7640c72753bd3e5f9a35b4d7e8729d1c54bb"
+        },
+        {
+          "name": "right",
+          "settled": true,
+          "frame": [
+            88,
+            69
+          ],
+          "glyph": [
+            14,
+            40,
+            15,
+            15
+          ],
+          "clipped": false,
+          "role": "checkbox",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": null,
+          "markSha256": "9b9c8570a995e299cfc3729a3cfc7640c72753bd3e5f9a35b4d7e8729d1c54bb"
+        },
+        {
+          "name": "box-read-only",
+          "settled": true,
+          "frame": [
+            92,
+            69
+          ],
+          "glyph": [
+            55,
+            40,
+            15,
+            15
+          ],
+          "clipped": false,
+          "role": "checkbox",
+          "disabled": "true",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": null,
+          "markSha256": "1b66a0f5b52fc8382694de9ea37e19bbfcf606d08133a10f2ac981306a8c1a4e"
+        },
+        {
+          "name": "tumbler",
+          "settled": true,
+          "frame": [
+            200,
+            76
+          ],
+          "glyph": [
+            54,
+            39,
+            125,
+            24
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "Истина",
+            "Ложь"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "tumbler-right",
+          "settled": true,
+          "frame": [
+            196,
+            76
+          ],
+          "glyph": [
+            13,
+            39,
+            125,
+            24
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "Истина",
+            "Ложь"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "unequal",
+          "settled": true,
+          "frame": [
+            206,
+            76
+          ],
+          "glyph": [
+            54,
+            39,
+            131,
+            24
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "Вкл",
+            "Выключено"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "manual",
+          "settled": true,
+          "frame": [
+            318,
+            98
+          ],
+          "glyph": [
+            54,
+            39,
+            243,
+            46
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "On",
+            "Off"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "paint",
+          "settled": true,
+          "frame": [
+            288,
+            90
+          ],
+          "glyph": [
+            54,
+            39,
+            213,
+            38
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "Истина",
+            "Ложь"
+          ],
+          "checked": 0,
+          "color": "rgb(255, 0, 0)",
+          "border": "rgb(0, 0, 255)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "switch",
+          "settled": true,
+          "frame": [
+            112,
+            73
+          ],
+          "glyph": [
+            55,
+            40,
+            34,
+            20
+          ],
+          "clipped": false,
+          "role": "switch",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(255, 0, 0)",
+          "border": "rgb(255, 0, 0)",
+          "track": "rgb(177, 177, 177)",
+          "markSha256": "96d763ca4b5e42d4b8b8e2a680a548fb4304159eedec2262edb206635d477653"
+        },
+        {
+          "name": "switch-top",
+          "settled": true,
+          "frame": [
+            71,
+            92
+          ],
+          "glyph": [
+            14,
+            59,
+            34,
+            20
+          ],
+          "clipped": false,
+          "role": "switch",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": "rgb(177, 177, 177)",
+          "markSha256": "96d763ca4b5e42d4b8b8e2a680a548fb4304159eedec2262edb206635d477653"
+        },
+        {
+          "name": "box-black",
+          "settled": true,
+          "frame": [
+            61,
+            79
+          ],
+          "glyph": [
+            19,
+            45,
+            15,
+            15
+          ],
+          "clipped": false,
+          "role": "checkbox",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": null,
+          "markSha256": "62b439d05b9c6a0540e74c586965c9071485f460a4b87f454ca49c70ad927774"
+        },
+        {
+          "name": "box-black-disabled",
+          "settled": true,
+          "frame": [
+            61,
+            79
+          ],
+          "glyph": [
+            19,
+            45,
+            15,
+            15
+          ],
+          "clipped": false,
+          "role": "checkbox",
+          "disabled": "true",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(160, 160, 160)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": "2370f0b69ba9b59e37112b37bd60bc206993a6cbe1aeb989c0a9736bcac69ab7"
+        },
+        {
+          "name": "switch-black",
+          "settled": true,
+          "frame": [
+            81,
+            83
+          ],
+          "glyph": [
+            19,
+            45,
+            34,
+            20
+          ],
+          "clipped": false,
+          "role": "switch",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": "rgb(177, 177, 177)",
+          "markSha256": "e4022d513f5a1e503ab6b4d7b062fccb2d1b5d9cffaac60e90497d5b0a975e96"
+        },
+        {
+          "name": "switch-black-disabled",
+          "settled": true,
+          "frame": [
+            81,
+            83
+          ],
+          "glyph": [
+            19,
+            45,
+            34,
+            20
+          ],
+          "clipped": false,
+          "role": "switch",
+          "disabled": "true",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(160, 160, 160)",
+          "border": "rgb(160, 160, 160)",
+          "track": "rgb(216, 216, 216)",
+          "markSha256": "488a708d0681636abca8901377af360136b95600cef2a850c0203f0012dd0f9f"
+        },
+        {
+          "name": "script-russian",
+          "settled": true,
+          "frame": [
+            200,
+            76
+          ],
+          "glyph": [
+            54,
+            39,
+            125,
+            24
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "Истина",
+            "Ложь"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "script-english",
+          "settled": true,
+          "frame": [
+            178,
+            76
+          ],
+          "glyph": [
+            54,
+            39,
+            103,
+            24
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "True",
+            "False"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "switch-detached-read-only",
+          "settled": true,
+          "frame": [
+            112,
+            73
+          ],
+          "glyph": [
+            55,
+            40,
+            34,
+            20
+          ],
+          "clipped": false,
+          "role": "switch",
+          "disabled": "true",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": "rgb(216, 216, 216)",
+          "markSha256": "b50db8a4d3329ceacc6f86d1e147cf382ec9b69beeb58b0779ed7515a9a5272e"
+        }
+      ],
+      "ru": [
+        {
+          "name": "auto",
+          "settled": true,
+          "frame": [
+            92,
+            69
+          ],
+          "glyph": [
+            55,
+            40,
+            15,
+            15
+          ],
+          "clipped": false,
+          "role": "checkbox",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": null,
+          "markSha256": "9b9c8570a995e299cfc3729a3cfc7640c72753bd3e5f9a35b4d7e8729d1c54bb"
+        },
+        {
+          "name": "right",
+          "settled": true,
+          "frame": [
+            88,
+            69
+          ],
+          "glyph": [
+            14,
+            40,
+            15,
+            15
+          ],
+          "clipped": false,
+          "role": "checkbox",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": null,
+          "markSha256": "9b9c8570a995e299cfc3729a3cfc7640c72753bd3e5f9a35b4d7e8729d1c54bb"
+        },
+        {
+          "name": "box-read-only",
+          "settled": true,
+          "frame": [
+            92,
+            69
+          ],
+          "glyph": [
+            55,
+            40,
+            15,
+            15
+          ],
+          "clipped": false,
+          "role": "checkbox",
+          "disabled": "true",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": null,
+          "markSha256": "1b66a0f5b52fc8382694de9ea37e19bbfcf606d08133a10f2ac981306a8c1a4e"
+        },
+        {
+          "name": "tumbler",
+          "settled": true,
+          "frame": [
+            200,
+            76
+          ],
+          "glyph": [
+            54,
+            39,
+            125,
+            24
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "Истина",
+            "Ложь"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "tumbler-right",
+          "settled": true,
+          "frame": [
+            196,
+            76
+          ],
+          "glyph": [
+            13,
+            39,
+            125,
+            24
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "Истина",
+            "Ложь"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "unequal",
+          "settled": true,
+          "frame": [
+            206,
+            76
+          ],
+          "glyph": [
+            54,
+            39,
+            131,
+            24
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "Вкл",
+            "Выключено"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "manual",
+          "settled": true,
+          "frame": [
+            318,
+            98
+          ],
+          "glyph": [
+            54,
+            39,
+            243,
+            46
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "On",
+            "Off"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "paint",
+          "settled": true,
+          "frame": [
+            288,
+            90
+          ],
+          "glyph": [
+            54,
+            39,
+            213,
+            38
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "Истина",
+            "Ложь"
+          ],
+          "checked": 0,
+          "color": "rgb(255, 0, 0)",
+          "border": "rgb(0, 0, 255)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "switch",
+          "settled": true,
+          "frame": [
+            112,
+            73
+          ],
+          "glyph": [
+            55,
+            40,
+            34,
+            20
+          ],
+          "clipped": false,
+          "role": "switch",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(255, 0, 0)",
+          "border": "rgb(255, 0, 0)",
+          "track": "rgb(177, 177, 177)",
+          "markSha256": "96d763ca4b5e42d4b8b8e2a680a548fb4304159eedec2262edb206635d477653"
+        },
+        {
+          "name": "switch-top",
+          "settled": true,
+          "frame": [
+            71,
+            92
+          ],
+          "glyph": [
+            14,
+            59,
+            34,
+            20
+          ],
+          "clipped": false,
+          "role": "switch",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": "rgb(177, 177, 177)",
+          "markSha256": "96d763ca4b5e42d4b8b8e2a680a548fb4304159eedec2262edb206635d477653"
+        },
+        {
+          "name": "box-black",
+          "settled": true,
+          "frame": [
+            61,
+            79
+          ],
+          "glyph": [
+            19,
+            45,
+            15,
+            15
+          ],
+          "clipped": false,
+          "role": "checkbox",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": null,
+          "markSha256": "62b439d05b9c6a0540e74c586965c9071485f460a4b87f454ca49c70ad927774"
+        },
+        {
+          "name": "box-black-disabled",
+          "settled": true,
+          "frame": [
+            61,
+            79
+          ],
+          "glyph": [
+            19,
+            45,
+            15,
+            15
+          ],
+          "clipped": false,
+          "role": "checkbox",
+          "disabled": "true",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(160, 160, 160)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": "2370f0b69ba9b59e37112b37bd60bc206993a6cbe1aeb989c0a9736bcac69ab7"
+        },
+        {
+          "name": "switch-black",
+          "settled": true,
+          "frame": [
+            81,
+            83
+          ],
+          "glyph": [
+            19,
+            45,
+            34,
+            20
+          ],
+          "clipped": false,
+          "role": "switch",
+          "disabled": "false",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": "rgb(177, 177, 177)",
+          "markSha256": "e4022d513f5a1e503ab6b4d7b062fccb2d1b5d9cffaac60e90497d5b0a975e96"
+        },
+        {
+          "name": "switch-black-disabled",
+          "settled": true,
+          "frame": [
+            81,
+            83
+          ],
+          "glyph": [
+            19,
+            45,
+            34,
+            20
+          ],
+          "clipped": false,
+          "role": "switch",
+          "disabled": "true",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(160, 160, 160)",
+          "border": "rgb(160, 160, 160)",
+          "track": "rgb(216, 216, 216)",
+          "markSha256": "488a708d0681636abca8901377af360136b95600cef2a850c0203f0012dd0f9f"
+        },
+        {
+          "name": "script-russian",
+          "settled": true,
+          "frame": [
+            200,
+            76
+          ],
+          "glyph": [
+            54,
+            39,
+            125,
+            24
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "Истина",
+            "Ложь"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "script-english",
+          "settled": true,
+          "frame": [
+            178,
+            76
+          ],
+          "glyph": [
+            54,
+            39,
+            103,
+            24
+          ],
+          "clipped": false,
+          "role": "radiogroup",
+          "disabled": "false",
+          "labels": [
+            "True",
+            "False"
+          ],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(160, 160, 160)",
+          "track": null,
+          "markSha256": null
+        },
+        {
+          "name": "switch-detached-read-only",
+          "settled": true,
+          "frame": [
+            112,
+            73
+          ],
+          "glyph": [
+            55,
+            40,
+            34,
+            20
+          ],
+          "clipped": false,
+          "role": "switch",
+          "disabled": "true",
+          "labels": [],
+          "checked": 0,
+          "color": "rgb(77, 77, 77)",
+          "border": "rgb(77, 77, 77)",
+          "track": "rgb(216, 216, 216)",
+          "markSha256": "b50db8a4d3329ceacc6f86d1e147cf382ec9b69beeb58b0779ed7515a9a5272e"
+        }
+      ]
+    },
+    "exactGlyphCropCount": 16,
+    "exactGlyphPixels": 7240,
+    "pixelTolerance": 0,
+    "comparedRegion": "Full static 15×15 checkbox or 34×20 switch glyph, including edge and shadow pixels.",
+    "fullFormPixelComparison": false,
+    "comparisons": [
+      {
+        "name": "auto",
+        "locale": "en",
+        "present": true,
+        "match": [
+          [
+            431,
+            387,
+            15,
+            15
+          ]
+        ],
+        "nativeCaptureSha256": "d6ac4af53774cf009d15ba7d2b14952a2945c9fc4e3d3b9a183bb5be063b331a",
+        "markSha256": "b5dbb429515f7d69667e2760174005e0cd637d626badd9d1989eb7654f945e79",
+        "vsixCaptureSha256": "e07da56c7b92490f563442c0c63fe93979990eeeec9f1998248dc80abb36df8d"
+      },
+      {
+        "name": "auto",
+        "locale": "ru",
+        "present": true,
+        "match": [
+          [
+            431,
+            387,
+            15,
+            15
+          ]
+        ],
+        "nativeCaptureSha256": "9ddc21029607ffafbf4daa1ba8c0dda8614c5457a5270bb0e06a2301a44e5fa7",
+        "markSha256": "b5dbb429515f7d69667e2760174005e0cd637d626badd9d1989eb7654f945e79",
+        "vsixCaptureSha256": "6c9796658f42e16ced700cd9a0a7b860177238a2eb522f197950b1168df8244f"
+      },
+      {
+        "name": "box-read-only",
+        "locale": "en",
+        "present": true,
+        "match": [
+          [
+            431,
+            387,
+            15,
+            15
+          ]
+        ],
+        "nativeCaptureSha256": "a11de9f3330e826643a3b195917687c8c165ab71812448e43bab23930fcf3b40",
+        "markSha256": "952ba4a0f1a06037ee2581a826409dd2760fec259d595610cad944839e6819c0",
+        "vsixCaptureSha256": "1c35264c02a23ea68bd3363f3910293b1c8f7d04dc94f76b8bee5637465c493a"
+      },
+      {
+        "name": "box-read-only",
+        "locale": "ru",
+        "present": true,
+        "match": [
+          [
+            431,
+            387,
+            15,
+            15
+          ]
+        ],
+        "nativeCaptureSha256": "0fe87ecf3b1b49432d98c3768d8a4669d3f20d4be2417607760ca5097020fdf7",
+        "markSha256": "952ba4a0f1a06037ee2581a826409dd2760fec259d595610cad944839e6819c0",
+        "vsixCaptureSha256": "d78778549858fd5ace52eca088e4e76b72dc7aca92312075b251de50d0a587e5"
+      },
+      {
+        "name": "switch",
+        "locale": "en",
+        "present": true,
+        "match": [
+          [
+            431,
+            387,
+            34,
+            20
+          ]
+        ],
+        "nativeCaptureSha256": "9e0115669e3c48040edeb10c4b4fabb78f3a5fd08ca90360e9f0832f10eb2d97",
+        "markSha256": "2e155a25b113ac1f2c7e2ddf80584529778ec0beec7d42006bf2e0f1f8bc9ab0",
+        "vsixCaptureSha256": "ffb52b1d6873888e4d5ee68ec8f27f05dfe6c486c708ed8cc214af66eeed6068"
+      },
+      {
+        "name": "switch",
+        "locale": "ru",
+        "present": true,
+        "match": [
+          [
+            431,
+            387,
+            34,
+            20
+          ]
+        ],
+        "nativeCaptureSha256": "e6ce00f80aca7a4d440d23a2713e6973bb956bac4ec19155244f38a83efb8ea7",
+        "markSha256": "2e155a25b113ac1f2c7e2ddf80584529778ec0beec7d42006bf2e0f1f8bc9ab0",
+        "vsixCaptureSha256": "db1221c08f06e5229c156e082d3592f6549994dccb7857c1c081954e324a3210"
+      },
+      {
+        "name": "switch-detached-read-only",
+        "locale": "en",
+        "present": true,
+        "match": [
+          [
+            83,
+            152,
+            34,
+            20
+          ]
+        ],
+        "nativeCaptureSha256": "4de313ba32c0c7538f15493c786aa9ba677d5f1a4179d6b0b4275a2d51434a8b",
+        "markSha256": "dc1d55a9ead12d666b693182bb2d5beaad7a34bc67998a52afc055e50279bc77",
+        "vsixCaptureSha256": "bc75cfb83cb7b532e67d17fd0ae265faade5a8cbfcd03afc82773b7208573552"
+      },
+      {
+        "name": "switch-detached-read-only",
+        "locale": "ru",
+        "present": true,
+        "match": [
+          [
+            83,
+            152,
+            34,
+            20
+          ]
+        ],
+        "nativeCaptureSha256": "57b00aca310c63671df2aabb2ca6167dc0ae800d7f59334a5740fda44d9bbe2a",
+        "markSha256": "dc1d55a9ead12d666b693182bb2d5beaad7a34bc67998a52afc055e50279bc77",
+        "vsixCaptureSha256": "79dbdc5245eddc2e5bfd4c7ba09b612ad7ea66dd2f13629fb0653c8850bab92b"
+      },
+      {
+        "name": "box-black",
+        "locale": "en",
+        "present": true,
+        "match": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "nativeCaptureSha256": "496572e88a7005f893512d49316b2db6310da3292b7a67fc46e123cf1b8157f4",
+        "markSha256": "7f355ce5db40f6be71210d9052d9369feb28803ae7d47d4fbe561a2848d1dc00",
+        "vsixCaptureSha256": "a526e1cac6ce62899c0244e109217d0ba1b403a32d1934585cebe95542588d9c"
+      },
+      {
+        "name": "box-black",
+        "locale": "ru",
+        "present": true,
+        "match": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "nativeCaptureSha256": "496572e88a7005f893512d49316b2db6310da3292b7a67fc46e123cf1b8157f4",
+        "markSha256": "7f355ce5db40f6be71210d9052d9369feb28803ae7d47d4fbe561a2848d1dc00",
+        "vsixCaptureSha256": "82b61d26e2f83c4528a34b4e3503b2df62dae32943de1903963f735b92f33bfb"
+      },
+      {
+        "name": "box-black-disabled",
+        "locale": "en",
+        "present": true,
+        "match": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "nativeCaptureSha256": "c96c9f4755e8b31fd8af14cbf40fa51d3e7881600dd7613caecfe5ad0e41dc7d",
+        "markSha256": "6c2a7e495067d855705c94966187b503f3ead20c50ac88874277af1e664e5eda",
+        "vsixCaptureSha256": "9b17788af64645686eace5114e5e70337652899ff9cdbe1f4e74376707295993"
+      },
+      {
+        "name": "box-black-disabled",
+        "locale": "ru",
+        "present": true,
+        "match": [
+          [
+            395,
+            392,
+            15,
+            15
+          ]
+        ],
+        "nativeCaptureSha256": "c96c9f4755e8b31fd8af14cbf40fa51d3e7881600dd7613caecfe5ad0e41dc7d",
+        "markSha256": "6c2a7e495067d855705c94966187b503f3ead20c50ac88874277af1e664e5eda",
+        "vsixCaptureSha256": "5cba3e5387e75054e1d84536e95c955b599d7b9dcfeade392b9ecdecdf0960a2"
+      },
+      {
+        "name": "switch-black",
+        "locale": "en",
+        "present": true,
+        "match": [
+          [
+            395,
+            392,
+            34,
+            20
+          ]
+        ],
+        "nativeCaptureSha256": "04f4e8503b202d377f40cecb502ab0621e201739c906dcf433206253fdaef45e",
+        "markSha256": "301a9abe7bf4c1f23003a7e0ee9c0fa6c74369eb9ec0d93a36b46fa659cb0319",
+        "vsixCaptureSha256": "6510d17cdd7e162bdad3ffa89f459a1a7a0b865b977f56f61358095f40896fd8"
+      },
+      {
+        "name": "switch-black",
+        "locale": "ru",
+        "present": true,
+        "match": [
+          [
+            395,
+            392,
+            34,
+            20
+          ]
+        ],
+        "nativeCaptureSha256": "04f4e8503b202d377f40cecb502ab0621e201739c906dcf433206253fdaef45e",
+        "markSha256": "301a9abe7bf4c1f23003a7e0ee9c0fa6c74369eb9ec0d93a36b46fa659cb0319",
+        "vsixCaptureSha256": "bb9be319e0ebfba5b89d38d7e30c0f8ce76e413d6a780ee9b06e845c810eec0f"
+      },
+      {
+        "name": "switch-black-disabled",
+        "locale": "en",
+        "present": true,
+        "match": [
+          [
+            395,
+            392,
+            34,
+            20
+          ]
+        ],
+        "nativeCaptureSha256": "d1ec2a075fc1931bb185320aa5c6b018d97e53556ae3f3d698b59b3e8699bfe8",
+        "markSha256": "6a6d183d0c323219bb972f5b985744b1014abc47a83cbacd2a7e2bc4583a3232",
+        "vsixCaptureSha256": "0f69b8a5d2a66f0bb50f844ccd43e5e29d9636aa08abbdacde5150ada610a015"
+      },
+      {
+        "name": "switch-black-disabled",
+        "locale": "ru",
+        "present": true,
+        "match": [
+          [
+            395,
+            392,
+            34,
+            20
+          ]
+        ],
+        "nativeCaptureSha256": "d1ec2a075fc1931bb185320aa5c6b018d97e53556ae3f3d698b59b3e8699bfe8",
+        "markSha256": "6a6d183d0c323219bb972f5b985744b1014abc47a83cbacd2a7e2bc4583a3232",
+        "vsixCaptureSha256": "8c56ed652fcd2d0689314948ae15b7243d8e0d9d4a890a19a20ac62254fc5e89"
+      }
+    ],
+    "detachedCapturePairs": 2,
+    "detachedCaptureDriverCommit": "fde00913a73a0ffc36dd448e8bb5ac80351cc550",
+    "sameArtifactForDetachedCaptures": true
+  },
+  "pending": [
+    "Tumbler pixels including ramp, shared divider and subpixel captions",
+    "Additional title height, manual font sizes, parent styles and platform scaling",
+    "Windows native acceptance"
+  ]
+}
