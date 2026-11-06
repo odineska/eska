@@ -705,10 +705,260 @@
       }
     }
   },
+  "commonCommandResourcePruning": {
+    "scope": "Same-form model hashes and five sequential form/open RPC measurements per Linux debug build.",
+    "baselineBackendSha256": "243e23f7936eb32e4fe75968c562ecb968c017cebae30ac971d0a441cf0853fb",
+    "filteredBackendSha256": "3fdcc3fd25ec061634e9ed7ecd3c40c7c7e5b282a385f0b43b08378d693266d8",
+    "stalingrad": {
+      "formPath": "Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+      "baseline": {
+        "milliseconds": [
+          293.66,
+          294.7,
+          291.06,
+          290.74,
+          287.64
+        ],
+        "medianMilliseconds": 291.06,
+        "dependencies": 35,
+        "assets": 2,
+        "modelSha256": "16123e625cce67bd7b67a7d936d5d252e558915aa42edf2e33de3c70cfe094b9"
+      },
+      "filtered": {
+        "milliseconds": [
+          289.25,
+          291.82,
+          288.17,
+          288.21,
+          287.89
+        ],
+        "medianMilliseconds": 288.21,
+        "dependencies": 22,
+        "assets": 2,
+        "modelSha256": "16123e625cce67bd7b67a7d936d5d252e558915aa42edf2e33de3c70cfe094b9"
+      }
+    },
+    "buhmfo": {
+      "formPath": "Documents/dzp_ЗакрытиеЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+      "baseline": {
+        "milliseconds": [
+          3414.15,
+          2829.53,
+          2829.99,
+          2831.74,
+          2830.12
+        ],
+        "medianMilliseconds": 2830.12,
+        "dependencies": 120,
+        "assets": 2,
+        "modelSha256": "9273d75da0cc910ff845bc46a5cd5ff21d29e41fe18f38e32b0166e12905cd33"
+      },
+      "filtered": {
+        "milliseconds": [
+          2784.01,
+          2778.96,
+          2782.1,
+          2779.47,
+          2783.64
+        ],
+        "medianMilliseconds": 2782.1,
+        "dependencies": 17,
+        "assets": 2,
+        "modelSha256": "9273d75da0cc910ff845bc46a5cd5ff21d29e41fe18f38e32b0166e12905cd33"
+      }
+    },
+    "installed": {
+      "batch": "form-batch-DGulWN",
+      "backendSha256": "3fdcc3fd25ec061634e9ed7ecd3c40c7c7e5b282a385f0b43b08378d693266d8",
+      "vsixSha256": "6c40f000e40b5b73e3392e2b43896b1b1f945224014e32f4bf8bbb8cecff4482",
+      "caseCount": 106,
+      "receipts": [
+        {
+          "pathInPlayground": "form-installed-pruned-toolbar-Lw1A3W6r/loan-en/receipt.json",
+          "sha256": "5485f843ab278e813d8cc7fbb7a29e1b0ae63e954c3b43c6e7921af4e7d9b80c"
+        },
+        {
+          "pathInPlayground": "form-installed-pruned-toolbar-Lw1A3W6r/loan-ru/receipt.json",
+          "sha256": "5229904d06b712982fba2331232e03a0e13ce5ceb3d8b0fd7e88099b0a987270"
+        },
+        {
+          "pathInPlayground": "form-installed-pruned-toolbar-Lw1A3W6r/order-en/receipt.json",
+          "sha256": "4a6dd2324f40043d36f24d80b2f6646ac275a8289b2ced4c57e87d83e058dde3"
+        },
+        {
+          "pathInPlayground": "form-installed-pruned-toolbar-Lw1A3W6r/order-ru/receipt.json",
+          "sha256": "a982f95aa6a094360cca5811d2dcc5469101511fdd9dec90d0eb5e0b21cc1174"
+        }
+      ]
+    },
+    "dynamicInputs": [
+      "a previously absent command added by an unsaved parameter edit",
+      "another absent command added by saving XML outside the editor",
+      "the dependency is retired again after restoration"
+    ]
+  },
+  "rootBarGeometry": {
+    "scope": "Nine button border boxes on the real loan form at 1156 px, 100% zoom, Russian Configurator Linux.",
+    "frameWidth": 1156,
+    "rectangles": [
+      {
+        "label": "Провести и закрыть",
+        "box": [
+          13,
+          29,
+          158,
+          26
+        ]
+      },
+      {
+        "label": "Записать",
+        "box": [
+          180,
+          29,
+          84,
+          26
+        ]
+      },
+      {
+        "label": "Провести",
+        "box": [
+          284,
+          29,
+          85,
+          26
+        ]
+      },
+      {
+        "label": "Связанные документы",
+        "box": [
+          389,
+          29,
+          30,
+          26
+        ]
+      },
+      {
+        "label": "Скопировать УИД",
+        "box": [
+          428,
+          29,
+          151,
+          26
+        ]
+      },
+      {
+        "label": "Движения документа",
+        "box": [
+          588,
+          29,
+          30,
+          26
+        ]
+      },
+      {
+        "label": "Зарегистрировать на обмен",
+        "box": [
+          627,
+          29,
+          212,
+          26
+        ]
+      },
+      {
+        "label": "Еще",
+        "box": [
+          1037,
+          29,
+          60,
+          26
+        ]
+      },
+      {
+        "label": "?",
+        "box": [
+          1106,
+          29,
+          30,
+          26
+        ]
+      }
+    ],
+    "native": {
+      "pathInPlayground": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-native-full-crop.png",
+      "sha256": "dd4b56fa373eb5728d3bb4f1cf66267826c2afc3cf3b57d2305f096c5abc136c"
+    },
+    "screenshot": {
+      "pathInPlayground": "form-installed-toolbar-geometry-aPXjwvmI/loan-ru/loan-command-bar-ru.png",
+      "sha256": "f13065eb7179ec5889eb6f205eb9778c7d7a2123a529c22a2b5095eda2b11e30"
+    },
+    "installed": {
+      "batch": "form-batch-8bOm6i",
+      "backendSha256": "3fdcc3fd25ec061634e9ed7ecd3c40c7c7e5b282a385f0b43b08378d693266d8",
+      "vsixSha256": "871363e89bdb399cf7615e18a88923783ace8863f3c88610403945c82df228d0",
+      "caseCount": 104,
+      "receipts": [
+        {
+          "pathInPlayground": "form-installed-toolbar-geometry-aPXjwvmI/loan-en/receipt.json",
+          "sha256": "390aefd2e38faee3882cbb0a6ab51d982a68181a61083f9fb005d239f87315f0"
+        },
+        {
+          "pathInPlayground": "form-installed-toolbar-geometry-aPXjwvmI/loan-ru/receipt.json",
+          "sha256": "40c0ec30f4594bdc170fa8669954972c9c41f532b8f76260b56d6de766c239ef"
+        },
+        {
+          "pathInPlayground": "form-installed-toolbar-geometry-aPXjwvmI/order-en/receipt.json",
+          "sha256": "09a2aa427435c5064eee9902fecf15af96dbc42a3b8537929730c144697afabc"
+        },
+        {
+          "pathInPlayground": "form-installed-toolbar-geometry-aPXjwvmI/order-ru/receipt.json",
+          "sha256": "cd9d41e07781a3cd04b47ecc47b58289bb61b2919cd8e1625c7e52b2261e907b"
+        }
+      ]
+    },
+    "narrowMoreObservation": {
+      "frameWidth": 412,
+      "menuWidth": 344,
+      "rowHeight": 30,
+      "alignment": "Popup starts below the trigger at its left edge.",
+      "visibleRows": [
+        "Провести и закрыть",
+        "Записать",
+        "Перечитать",
+        "Скопировать",
+        "Пометить на удаление / Снять пометку",
+        "Удалить",
+        "Провести",
+        "Отменить проведение"
+      ],
+      "visibleSubmenu": [
+        "Продажи",
+        "Документы продаж"
+      ],
+      "captures": [
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-narrow-before-crop.png",
+          "sha256": "38c84cbbd77b90b065a9462b2c6753892014dc7f3d2bcc8effc7dd0d6b074b15"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-narrow-top-crop.png",
+          "sha256": "c43aa93e2115525d70456a872b72ad8ec9ad8e25b5f3a712cad4459e83948c88"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-narrow-middle-crop.png",
+          "sha256": "5f0197d5f31fe482f6af4f4101492ceae75e3af896eeda98bac669d1c942cf94"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-narrow-tail-crop.png",
+          "sha256": "e22215f477eda84cf2da8f6523c3cb388e7f998e729d7bd41978c521532e2afa"
+        }
+      ],
+      "nativeExitAfterCapture": 134
+    }
+  },
   "remaining": [
     "Native popup width and anchor, toolbar geometry at narrow widths, and full More actions contents.",
     "Compatible commands owned by other metadata objects, such as the native Send email button on the Counterparties form.",
-    "Limit retained dependencies to applicable commands and their resources before the T164 performance acceptance.",
+    "Full T164 budgets, including repeated scans of large configuration descriptors.",
     "Full native acceptance of extension-specific BasedOn overrides, other display densities, and Windows."
   ]
 }
