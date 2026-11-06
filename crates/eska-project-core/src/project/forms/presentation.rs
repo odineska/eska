@@ -583,6 +583,15 @@ fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
         Some("Top") => FieldTitleLocation::Top,
         Some("Bottom") => FieldTitleLocation::Bottom,
         Some("None") => FieldTitleLocation::None,
+        _ if element.kind == Some(ElementKind::InputField)
+            && matches!(element.scalar("MultiLine"), Some("true" | "1"))
+            && !element
+                .scalar("Height")
+                .and_then(|value| value.parse::<f64>().ok())
+                .is_some_and(|height| height > 0.0 && height <= 1.0) =>
+        {
+            FieldTitleLocation::Top
+        }
         _ if matches!(
             element.kind,
             Some(

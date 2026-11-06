@@ -471,6 +471,39 @@ fn native_bound_field_fixtures_resolve_their_attributes_and_title_defaults() {
     assert_eq!(count, 20);
 }
 
+#[test]
+fn multiline_input_caption_defaults_to_top_when_it_has_multiple_rows() {
+    use FieldTitleLocation::{Left, None, Top};
+
+    for (properties, expected) in [
+        ("", Left),
+        ("<MultiLine>true</MultiLine>", Top),
+        (
+            "<TitleLocation>Auto</TitleLocation><MultiLine>1</MultiLine>",
+            Top,
+        ),
+        ("<MultiLine>true</MultiLine><Height>1</Height>", Left),
+        ("<MultiLine>true</MultiLine><Height>2</Height>", Top),
+        (
+            "<MultiLine>true</MultiLine><TitleLocation>Left</TitleLocation>",
+            Left,
+        ),
+        (
+            "<MultiLine>true</MultiLine><TitleLocation>None</TitleLocation>",
+            None,
+        ),
+    ] {
+        let xml = format!(
+            r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"><ChildItems>
+                <InputField name="Memo" id="1">{properties}</InputField>
+            </ChildItems></Form>"#
+        );
+        let document = parse("memo-caption", xml).unwrap();
+        let view = present(&compose(&document, &[]), &[document], &[]);
+        assert_eq!(view.elements[1].title_location, expected, "{properties}");
+    }
+}
+
 fn binding_resource(source: &str, properties: &str, children: &str) -> FormResource {
     let xml = format!(
         "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\" xmlns:xr=\"http://v8.1c.ru/8.3/xcf/readable\" xmlns:v8=\"http://v8.1c.ru/8.1/data/core\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><Catalog uuid=\"{source}\"><Properties><Name>Goods</Name>{properties}</Properties><ChildObjects>{children}</ChildObjects></Catalog></MetaDataObject>"
