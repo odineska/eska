@@ -12,7 +12,7 @@ use super::{
     ComposedForm, FormContextError, FormReference, based_on, compose,
     context::{FormDependency, FormOverlay, FormSources, open_designer, source_identity},
     layer_order::LayerOrder,
-    references,
+    presentation, references,
 };
 use crate::{
     application::{ContextSnapshot, SourceRole},
@@ -98,16 +98,24 @@ pub(super) fn load(
         loader.discover_based_on(&readers, &basis, previous)?;
     }
     let mut cursor = 0;
-    while cursor < loader.pending.len() {
-        let id = loader.pending[cursor].clone();
-        cursor += 1;
-        for reader in &mut readers {
-            loader.read(reader, &id)?;
+    loop {
+        while cursor < loader.pending.len() {
+            let id = loader.pending[cursor].clone();
+            cursor += 1;
+            for reader in &mut readers {
+                loader.read(reader, &id)?;
+            }
+        }
+        order.sort(&mut loader.output, loader.dependencies, |resource| {
+            &resource.source
+        })?;
+        for target in presentation::binding_resource_requests(&form, &loader.output) {
+            loader.request(target)?;
+        }
+        if cursor == loader.pending.len() {
+            break;
         }
     }
-    order.sort(&mut loader.output, loader.dependencies, |resource| {
-        &resource.source
-    })?;
     Ok((form, loader.output))
 }
 

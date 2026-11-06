@@ -76,6 +76,14 @@ fn object_id(parent: Option<&ObjectId>, kind: MetadataKind, name: &str) -> Optio
         .then(|| ObjectId::from_parts(parent, kind.as_str(), name))
 }
 
+pub(super) fn metadata_type_id(key: &PropertyKey) -> Option<ObjectId> {
+    if key.namespace.as_deref() != Some(CONFIG) {
+        return None;
+    }
+    let (kind, name) = key.name.split_once('.')?;
+    object_id(None, type_kind(kind)?, name)
+}
+
 pub(super) fn metadata_command_id(reference: &str) -> Option<ObjectId> {
     let mut parts = reference.split('.');
     let kind = MetadataKind::from_xml_tag(parts.next()?).ok()?;

@@ -434,6 +434,141 @@ fn form_presentation_tracks_dirty_metadata_captions_without_changing_element_ide
     assert_eq!(bytes(&directory.0), before);
 }
 
+fn reference_path_fixture(root: &Path) {
+    use std::fmt::Write as _;
+
+    fixture(root, "configuration");
+    let source = root.join("src");
+    let attribute = |id: u16, name: &str, title: &str, xml_type: &str| {
+        format!(
+            r#"<Attribute uuid="305a3340-34ad-4e84-85b5-{id:012x}"><Properties><Name>{name}</Name><Synonym><v8:item xmlns:v8="http://v8.1c.ru/8.1/data/core"><v8:lang>ru</v8:lang><v8:content>{title}</v8:content></v8:item></Synonym><Type xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema"><v8:Type>{xml_type}</v8:Type></Type></Properties></Attribute>"#
+        )
+    };
+    let owner = source.join("Catalogs/Контрагенты.xml");
+    let original = fs::read_to_string(&owner).unwrap();
+    let (children, tail) = original.rsplit_once("</ChildObjects>").unwrap();
+    fs::write(
+        owner,
+        format!(
+            "{children}{}{}</ChildObjects>{tail}",
+            attribute(1, "Link", "Договор", "cfg:CatalogRef.Agreement"),
+            attribute(2, "NotUsed", "Без поля формы", "cfg:CatalogRef.Unused"),
+        ),
+    )
+    .unwrap();
+
+    let mut declarations = String::new();
+    for (id, name, fields) in [
+        (
+            6,
+            "Agreement",
+            attribute(3, "Company", "Организация", "cfg:CatalogRef.Company"),
+        ),
+        (
+            7,
+            "Company",
+            attribute(4, "Value", "Сокращённое имя", "xs:string"),
+        ),
+        (
+            8,
+            "Alternate",
+            attribute(5, "Value", "Активна", "xs:boolean"),
+        ),
+        (9, "Unused", String::new()),
+    ] {
+        write!(declarations, "<Catalog>{name}</Catalog>").unwrap();
+        fs::write(
+            source.join(format!("Catalogs/{name}.xml")),
+            format!(
+                r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><Catalog uuid="305a3340-34ad-4e84-85b5-{id:012x}"><Properties><Name>{name}</Name></Properties><ChildObjects>{fields}</ChildObjects></Catalog></MetaDataObject>"#
+            ),
+        )
+        .unwrap();
+    }
+    let configuration = source.join("Configuration.xml");
+    fs::write(
+        &configuration,
+        fs::read_to_string(&configuration)
+            .unwrap()
+            .replace("</ChildObjects>", &format!("{declarations}</ChildObjects>")),
+    )
+    .unwrap();
+    fs::write(
+        source.join(PATH),
+        form(
+            r#"<ChildItems><LabelField name="Value" id="1"><DataPath>Object.Link.Company.Value</DataPath></LabelField></ChildItems><Attributes><Attribute name="Object" id="1"><Type xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><v8:Type>cfg:CatalogObject.Контрагенты</v8:Type></Type></Attribute></Attributes>"#,
+            None,
+        ),
+    )
+    .unwrap();
+}
+
+#[test]
+fn form_reference_paths_load_only_used_descriptors_and_rebind_on_dirty_type_change() {
+    use crate::backend::project::forms::{FieldValueKind, PresentationText};
+
+    let directory = TestDir::new();
+    reference_path_fixture(&directory.0);
+    let source = directory.0.join("src");
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let before = bytes(&directory.0);
+    let preview = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    let paths = |preview: &crate::backend::project::forms::FormPreview| {
+        preview
+            .dependencies
+            .iter()
+            .map(|input| input.path.clone())
+            .collect::<Vec<_>>()
+    };
+    assert!(paths(&preview).contains(&PathBuf::from("Catalogs/Company.xml")));
+    assert!(!paths(&preview).contains(&PathBuf::from("Catalogs/Unused.xml")));
+    let field = &preview.presentation.elements[1];
+    assert_eq!(field.value_type.kind, FieldValueKind::String);
+    assert!(
+        matches!(&field.caption, PresentationText::Literal { items } if items[0].content == "Сокращённое имя")
+    );
+    let agreement = preview
+        .dependencies
+        .iter()
+        .find(|input| input.path == Path::new("Catalogs/Agreement.xml"))
+        .unwrap();
+    let overlay = FormOverlay {
+        source: agreement.id.clone(),
+        text: fs::read_to_string(source.join(&agreement.path))
+            .unwrap()
+            .replace("CatalogRef.Company", "CatalogRef.Alternate"),
+        version: "5".into(),
+    };
+    let changed = project
+        .form_preview(
+            &node,
+            None,
+            &[overlay],
+            &preview.dependencies,
+            Vec::new(),
+            None,
+        )
+        .unwrap();
+    assert!(!paths(&changed).contains(&PathBuf::from("Catalogs/Company.xml")));
+    let alternate = changed
+        .dependencies
+        .iter()
+        .find(|input| input.path == Path::new("Catalogs/Alternate.xml"))
+        .unwrap();
+    let new_field = &changed.presentation.elements[1];
+    assert_eq!(new_field.identity, field.identity);
+    assert_eq!(new_field.value_type.kind, FieldValueKind::Boolean);
+    assert_eq!(new_field.binding.as_ref().unwrap().source, alternate.id);
+    assert!(
+        matches!(&new_field.caption, PresentationText::Literal { items } if items[0].content == "Активна")
+    );
+    assert_eq!(bytes(&directory.0), before);
+}
+
 #[test]
 fn external_form_resolves_configuration_types_without_composing_an_unrelated_form() {
     use crate::backend::project::forms::{FormDependencyRole, PresentationText};

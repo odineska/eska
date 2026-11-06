@@ -496,6 +496,42 @@ fn binding_view(resources: &[FormResource], fields: &str) -> FormPresentation {
 }
 
 #[test]
+fn declared_columns_follow_only_unambiguous_reference_types() {
+    let goods = binding_resource(
+        "catalog",
+        "",
+        r#"<Attribute uuid="quantity"><Properties><Name>Quantity</Name><Type><v8:Type>xs:decimal</v8:Type></Type></Properties></Attribute>"#,
+    );
+    let xml = format!(
+        r#"<Form xmlns="{namespace}" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="{config}" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <ChildItems>
+          <LabelField name="Quantity" id="1"><DataPath>Rows.Product.Quantity</DataPath></LabelField>
+          <LabelField name="Ambiguous" id="2"><DataPath>Rows.Mixed.Quantity</DataPath></LabelField>
+        </ChildItems>
+        <Attributes><Attribute name="Rows" id="1"><Columns>
+          <Column name="Product" id="1"><Type><v8:Type>cfg:CatalogRef.Goods</v8:Type></Type></Column>
+          <Column name="Mixed" id="2"><Type><v8:Type>cfg:CatalogRef.Goods</v8:Type><v8:Type>xs:string</v8:Type></Type></Column>
+        </Columns></Attribute></Attributes></Form>"#,
+        namespace = super::super::FORM_NAMESPACE,
+        config = super::super::references::CONFIG,
+    );
+    let document = parse("form", xml).unwrap();
+    let form = compose(&document, &[]);
+    assert_eq!(
+        binding_resource_requests(&form, &[]),
+        [ObjectId::from_parts(
+            None,
+            MetadataKind::Catalog.as_str(),
+            "Goods"
+        )]
+    );
+    let view = present(&form, &[document], &[goods]);
+    assert_eq!(view.elements[1].value_type.kind, FieldValueKind::Number);
+    assert_eq!(view.elements[1].binding.as_ref().unwrap().source, "catalog");
+    assert_eq!(view.elements[2].value_type.kind, FieldValueKind::Unknown);
+}
+
+#[test]
 fn borrowed_attribute_inherits_type_and_fill_check_but_overrides_its_caption() {
     let resources = [
         binding_resource(

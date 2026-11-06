@@ -6,10 +6,12 @@ use super::{
     PropertySource, ResolvedColor, ResolvedFont, SourcedProperty,
     appearance::{self, Appearance},
     commands::ResolvedCommand,
-    pictures,
+    pictures, references,
 };
 use crate::project::{
-    metadata_model::{LocalizedText, MetadataKind, MetadataProperty, MetadataValue, PropertyKey},
+    metadata_model::{
+        LocalizedText, MetadataKind, MetadataProperty, MetadataValue, ObjectId, PropertyKey,
+    },
     metadata_parser::{LocatedProperty, MD_NAMESPACE, ParsedObject},
 };
 use serde::Serialize;
@@ -744,73 +746,122 @@ fn bind(
     form: &ComposedForm,
     resources: &[FormResource],
 ) -> FieldBinding {
-    let Some(path) = element.scalar("DataPath") else {
+    let Some((attribute, remaining)) = binding_path(element, form) else {
         return FieldBinding::default();
     };
-    let mut path = path.split('.');
-    let Some(attribute) = path.next().and_then(|name| {
-        form.attributes
-            .iter()
-            .find(|definition| definition.name.as_deref() == Some(name))
-    }) else {
-        return FieldBinding::default();
-    };
-    let remaining: Vec<_> = path.collect();
+    resolve_binding(attribute, &remaining, resources).unwrap_or_else(|_| FieldBinding {
+        source: Some(attribute.origin.clone()),
+        ..FieldBinding::default()
+    })
+}
+
+fn binding_path<'e, 'f>(
+    element: &'e EffectiveElement,
+    form: &'f ComposedForm,
+) -> Option<(&'f EffectiveDefinition, Vec<&'e str>)> {
+    let mut path = element.scalar("DataPath")?.split('.');
+    let name = path.next()?;
+    let attribute = form
+        .attributes
+        .iter()
+        .find(|definition| definition.name.as_deref() == Some(name))?;
+    Some((attribute, path.collect()))
+}
+
+/// Only follow reference types on paths used by the composed form.
+pub(super) fn binding_resource_requests(
+    form: &ComposedForm,
+    resources: &[FormResource],
+) -> Vec<ObjectId> {
+    let mut pending = vec![&form.root];
+    let mut requests = Vec::new();
+    while let Some(element) = pending.pop() {
+        pending.extend(element.children.iter().chain(&element.auxiliary));
+        if let Some((attribute, remaining)) = binding_path(element, form)
+            && remaining.len() > 1
+            && let Err(BindingFailure::Unloaded(target)) =
+                resolve_binding(attribute, &remaining, resources)
+        {
+            requests.push(target);
+        }
+    }
+    requests
+}
+
+enum BindingFailure {
+    Unresolved,
+    Unloaded(ObjectId),
+}
+
+fn resolve_binding(
+    attribute: &EffectiveDefinition,
+    remaining: &[&str],
+    resources: &[FormResource],
+) -> Result<FieldBinding, BindingFailure> {
     if remaining.is_empty() {
-        return FieldBinding {
+        return Ok(FieldBinding {
             caption: definition_caption(attribute),
             value_type: definition_type(attribute),
             source: Some(attribute.origin.clone()),
             tabular_total: false,
-        };
+        });
     }
-    if let Some(value) = column_binding(attribute, &remaining) {
-        return value;
+    if let Some((column, consumed)) = column_binding(attribute, remaining) {
+        if consumed == remaining.len() {
+            return Ok(column);
+        }
+        if let Some(target) = single_type_target(&column.value_type) {
+            match metadata_binding(target, &remaining[consumed..], resources) {
+                Err(BindingFailure::Unresolved) => {}
+                binding => return binding,
+            }
+        }
     }
-    let kind = definition_type(attribute);
-    let target = kind
+    let target = definition_type(attribute)
         .types
         .iter()
-        .filter(|kind| kind.namespace.as_deref() == Some(super::references::CONFIG))
-        .find_map(|kind| {
-            let (kind, name) = kind.name.split_once('.')?;
-            super::references::type_kind(kind).map(|kind| (kind, name))
-        })
+        .find_map(references::metadata_type_id)
         .or_else(|| {
-            attribute
+            let (kind, name) = attribute
                 .properties
                 .iter()
-                .find_map(|property| find_main_table(&property.property.value))
-        });
-    target
-        .and_then(|(kind, name)| metadata_binding(kind, name, &remaining, resources))
-        .unwrap_or_else(|| FieldBinding {
-            source: Some(attribute.origin.clone()),
-            ..FieldBinding::default()
+                .find_map(|property| find_main_table(&property.property.value))?;
+            Some(ObjectId::from_parts(None, kind.as_str(), name))
         })
+        .ok_or(BindingFailure::Unresolved)?;
+    metadata_binding(target, remaining, resources)
 }
+
+fn single_type_target(value_type: &FieldType) -> Option<ObjectId> {
+    let [key] = value_type.types.as_slice() else {
+        return None;
+    };
+    references::metadata_type_id(key)
+}
+
 fn metadata_binding(
-    kind: MetadataKind,
-    name: &str,
+    target: ObjectId,
     remaining: &[&str],
     resources: &[FormResource],
-) -> Option<FieldBinding> {
-    let (mut resource, mut owner) = resources.iter().rev().find_map(|resource| {
-        resource
-            .descriptor
-            .objects
-            .iter()
-            .find(|object| object.metadata.kind() == kind && object.metadata.name() == name)
-            .map(|owner| (resource, owner))
-    })?;
+) -> Result<FieldBinding, BindingFailure> {
+    let (mut resource, mut owner) =
+        metadata_owner(&target, resources).ok_or(BindingFailure::Unloaded(target))?;
     for (index, part) in remaining.iter().enumerate() {
+        let terminal = index + 1 == remaining.len();
         if let Some((layer, child)) = metadata_child(owner, part, resources) {
-            resource = layer;
-            owner = child;
-        } else if index + 1 != remaining.len() {
-            return None;
+            if terminal || child.metadata.kind() == MetadataKind::TabularSection {
+                (resource, owner) = (layer, child);
+            } else {
+                let target = metadata_property(child, "Type", resources)
+                    .and_then(|property| single_type_target(&field_type(&property.value)))
+                    .ok_or(BindingFailure::Unresolved)?;
+                (resource, owner) =
+                    metadata_owner(&target, resources).ok_or(BindingFailure::Unloaded(target))?;
+            }
+        } else if !terminal {
+            return Err(BindingFailure::Unresolved);
         } else if standard_attribute(part) {
-            return Some(FieldBinding {
+            return Ok(FieldBinding {
                 caption: Some(standard_caption(part, owner, resources)),
                 value_type: standard_type(part, owner, resources),
                 source: Some(PropertySource {
@@ -821,18 +872,36 @@ fn metadata_binding(
             });
         } else if owner.metadata.kind() == MetadataKind::TabularSection {
             // Designer exports the synthetic total as Total<column> in DataPath.
-            let (layer, column) = metadata_child(owner, part.strip_prefix("Total")?, resources)?;
+            let column_name = part
+                .strip_prefix("Total")
+                .ok_or(BindingFailure::Unresolved)?;
+            let (layer, column) =
+                metadata_child(owner, column_name, resources).ok_or(BindingFailure::Unresolved)?;
             let mut binding = metadata_field(layer, column, resources);
             if binding.value_type.kind != FieldValueKind::Number {
-                return None;
+                return Err(BindingFailure::Unresolved);
             }
             binding.tabular_total = true;
-            return Some(binding);
+            return Ok(binding);
         } else {
-            return None;
+            return Err(BindingFailure::Unresolved);
         }
     }
-    Some(metadata_field(resource, owner, resources))
+    Ok(metadata_field(resource, owner, resources))
+}
+
+fn metadata_owner<'a>(
+    id: &ObjectId,
+    resources: &'a [FormResource],
+) -> Option<(&'a FormResource, &'a ParsedObject)> {
+    resources.iter().rev().find_map(|resource| {
+        resource
+            .descriptor
+            .objects
+            .iter()
+            .find(|object| object.metadata.id() == id)
+            .map(|owner| (resource, owner))
+    })
 }
 
 fn metadata_child<'a>(
@@ -1180,40 +1249,41 @@ fn choice_reference(value: &MetadataValue, resources: &[FormResource]) -> Option
     }
 }
 
-fn column_binding(attribute: &EffectiveDefinition, remaining: &[&str]) -> Option<FieldBinding> {
-    if let Some(columns) = attribute
+fn column_binding(
+    attribute: &EffectiveDefinition,
+    remaining: &[&str],
+) -> Option<(FieldBinding, usize)> {
+    let columns = attribute
         .properties
         .iter()
-        .find(|value| value.property.key.name == "Columns")
-    {
-        let mut value = &columns.property.value;
-        let mut found = None;
-        for part in remaining {
-            found = if let MetadataValue::Record(fields) = value {
-                fields
-                    .iter()
-                    .find(|field| appearance::qualifier(field, "name") == Some(*part))
-            } else {
-                None
-            };
-            let Some(column) = found else {
-                break;
-            };
-            value = record(&column.value, "Columns").map_or(&column.value, |field| &field.value);
-        }
-        if let Some(column) = found {
-            return Some(FieldBinding {
-                caption: record(&column.value, "Title").and_then(|value| literal(&value.value)),
-                value_type: record(&column.value, "Type")
-                    .map(|value| field_type(&value.value))
-                    .unwrap_or_default(),
-                source: Some(columns.origin.clone()),
-                tabular_total: false,
-            });
-        }
+        .find(|value| value.property.key.name == "Columns")?;
+    let mut value = &columns.property.value;
+    let mut found = None;
+    for (index, part) in remaining.iter().enumerate() {
+        let MetadataValue::Record(fields) = value else {
+            break;
+        };
+        let Some(column) = fields
+            .iter()
+            .find(|field| appearance::qualifier(field, "name") == Some(*part))
+        else {
+            break;
+        };
+        found = Some((column, index + 1));
+        value = record(&column.value, "Columns").map_or(&column.value, |field| &field.value);
     }
-
-    None
+    let (column, consumed) = found?;
+    Some((
+        FieldBinding {
+            caption: record(&column.value, "Title").and_then(|value| literal(&value.value)),
+            value_type: record(&column.value, "Type")
+                .map(|value| field_type(&value.value))
+                .unwrap_or_default(),
+            source: Some(columns.origin.clone()),
+            tabular_total: false,
+        },
+        consumed,
+    ))
 }
 
 #[cfg(test)]
