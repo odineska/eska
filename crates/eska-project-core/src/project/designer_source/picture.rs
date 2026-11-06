@@ -24,6 +24,8 @@ pub struct Picture {
     pub mime_type: &'static str,
     pub bytes: Vec<u8>,
     pub file_name: String,
+    /// Template variants use the image alpha with the effective text color.
+    pub is_template: bool,
     pub inputs: Vec<PictureInput>,
 }
 
@@ -57,15 +59,17 @@ pub enum PictureError {
 
 /// Read only the payload explicitly referenced by the external-property descriptor.
 pub(super) fn read(source: &DesignerSource, descriptor: &Path) -> PicturePreview {
-    read_with_xml(source, descriptor, None)
+    resolve(source, descriptor, None, archive::Target::Metadata)
+        .unwrap_or_else(PicturePreview::Failed)
 }
 
-pub(super) fn read_with_xml(
+pub(super) fn read_for_form(
     source: &DesignerSource,
     descriptor: &Path,
-    xml: Option<&str>,
+    xml: &str,
 ) -> PicturePreview {
-    resolve(source, descriptor, xml).unwrap_or_else(PicturePreview::Failed)
+    resolve(source, descriptor, Some(xml), archive::Target::Form)
+        .unwrap_or_else(PicturePreview::Failed)
 }
 
 /// Resolve all workspace paths through the existing source-containment boundary.
@@ -73,6 +77,7 @@ fn resolve(
     source: &DesignerSource,
     descriptor: &Path,
     overlay: Option<&str>,
+    target: archive::Target,
 ) -> Result<PicturePreview, PictureError> {
     let ext = descriptor.with_extension("").join("Ext");
     let mut inputs = Vec::new();
@@ -128,7 +133,7 @@ fn resolve(
         return Ok(PicturePreview::Empty { inputs });
     }
     let mut picture = if bytes.starts_with(b"PK\x03\x04") || bytes.starts_with(b"PK\x05\x06") {
-        archive::picture(&bytes)
+        archive::picture(&bytes, target)
     } else {
         image(bytes, name.to_owned())
     }?;
@@ -223,6 +228,7 @@ fn image(bytes: Vec<u8>, file_name: String) -> Result<Picture, PictureError> {
         mime_type,
         bytes,
         file_name,
+        is_template: false,
         inputs: Vec::new(),
     })
 }

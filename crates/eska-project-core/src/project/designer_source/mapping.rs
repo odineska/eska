@@ -90,7 +90,7 @@ impl DesignerSource {
         }
     }
 
-    /// Read the same checked common picture with an unsaved external-property XML snapshot.
+    /// Read a common picture for the form profile using the effective external-property XML.
     #[must_use]
     pub fn picture_preview_xml(&self, id: &ObjectId, xml: &str) -> PicturePreview {
         match self.object_descriptor(id) {
@@ -99,7 +99,7 @@ impl DesignerSource {
                     .locations(id)
                     .is_ok_and(|locations| locations.kind == MetadataKind::CommonPicture) =>
             {
-                super::picture::read_with_xml(self, &location.path, Some(xml))
+                super::picture::read_for_form(self, &location.path, xml)
             }
             Ok(None) => PicturePreview::Failed(PictureError::Missing),
             _ => PicturePreview::Failed(PictureError::Unavailable),
