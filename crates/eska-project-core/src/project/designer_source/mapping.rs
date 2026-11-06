@@ -35,6 +35,14 @@ pub struct SourceLocation {
     pub inline: Vec<LogicalLocation>,
 }
 
+impl SourceLocation {
+    pub(crate) fn descriptor_id(&self, id: &ObjectId) -> Option<ObjectId> {
+        self.inline
+            .iter()
+            .try_fold(id.clone(), |owner, _| owner.parent())
+    }
+}
+
 const MODULE_FILES: &[(ModuleRole, &str)] = &[
     (ModuleRole::Module, "Module.bsl"),
     (ModuleRole::Object, "ObjectModule.bsl"),

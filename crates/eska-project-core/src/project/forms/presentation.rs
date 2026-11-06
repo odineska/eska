@@ -986,18 +986,8 @@ fn command_caption(
     if let Some(name) = super::commands::local_command_name(command) {
         return super::commands::local_command(form, name).and_then(definition_caption);
     }
-    if let Some(name) = command.strip_prefix("CommonCommand.") {
-        return resources
-            .iter()
-            .rev()
-            .flat_map(|resource| &resource.descriptor.objects)
-            .find(|object| {
-                object.metadata.kind() == MetadataKind::CommonCommand
-                    && object.metadata.name() == name
-            })
-            .map(|object| PresentationText::Literal {
-                items: object.synonyms.clone(),
-            });
+    if let Some(caption) = super::commands::referenced_caption(command, resources) {
+        return Some(caption);
     }
     command
         .split_once(".StandardCommand.")

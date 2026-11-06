@@ -1756,6 +1756,89 @@ fn prepared_input(prepared: &Value, path: &str, text: &str, version: &str) -> Va
 }
 
 #[test]
+fn form_resolves_owned_command_captions_and_tracks_their_descriptors() {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    let inline_path = "Reports/Inline.xml";
+    let separate_path = "Reports/Separate/Commands/Show.xml";
+    let command = |ru: &str, en: &str| {
+        format!(
+            r#"<Command uuid="show"><Properties><Name>Show</Name><Synonym><v8:item><v8:lang>ru</v8:lang><v8:content>{ru}</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>{en}</v8:content></v8:item></Synonym></Properties></Command>"#
+        )
+    };
+    let wrap = |object: &str| {
+        format!(
+            r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core">{object}</MetaDataObject>"#
+        )
+    };
+    fs::create_dir_all(root.join("Reports/Separate/Commands")).unwrap();
+    fs::write(
+        root.join(inline_path),
+        wrap(&format!(
+            r#"<Report uuid="inline"><Properties><Name>Inline</Name></Properties><ChildObjects>{}</ChildObjects></Report>"#,
+            command("Остатки", "Stock")
+        )),
+    )
+    .unwrap();
+    fs::write(root.join("Reports/Separate.xml"), wrap(
+        r#"<Report uuid="separate"><Properties><Name>Separate</Name></Properties><ChildObjects><Command>Show</Command></ChildObjects></Report>"#
+    )).unwrap();
+    let separate = wrap(&command("Обороты", "Turnover"));
+    fs::write(root.join(separate_path), &separate).unwrap();
+    let form = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"><AutoCommandBar name="Bar" id="-1"><Autofill>false</Autofill><ChildItems>
+        <Button name="Inline" id="1"><Type>CommandBarHyperlink</Type><CommandName>Report.Inline.Command.Show</CommandName><DataPath>Warehouse</DataPath></Button>
+        <Button name="Separate" id="2"><CommandName>Report.Separate.Command.Show</CommandName><DataPath>Warehouse</DataPath></Button>
+        <Button name="Explicit" id="3"><CommandName>Report.Separate.Command.Show</CommandName><Title>Custom</Title></Button>
+        <Button name="Missing" id="4"><CommandName>Report.Missing.Command.Show</CommandName><DataPath>Warehouse</DataPath></Button>
+        </ChildItems></AutoCommandBar><Attributes><Attribute name="Warehouse" id="1"><Title>Warehouse</Title></Attribute></Attributes></Form>"#;
+    fs::write(root.join(PATH), form).unwrap();
+    let captions = |response: &Value| {
+        response["model"]["root"]["auxiliary"][0]["children"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|button| button["presentation"]["caption"].clone())
+            .collect::<Vec<_>>()
+    };
+    let literal = |ru, en| json!({"kind":"literal","items":[{"language":"ru","content":ru},{"language":"en","content":en}]});
+    let expected = vec![
+        literal("Остатки", "Stock"),
+        literal("Обороты", "Turnover"),
+        json!({"kind":"name","text":"Custom"}),
+        json!({"kind":"name","text":"Warehouse"}),
+    ];
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 38);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        assert_eq!(captions(&opened), expected);
+        let dependency = |path| {
+            opened["dependencies"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .find(|dependency| {
+                    dependency["path"]["value"] == path && dependency["role"] == "metadata"
+                })
+                .unwrap()
+        };
+        let id = &dependency(separate_path)["id"];
+        assert_ne!(dependency(inline_path)["id"], *id);
+        let edited = wrap(&command("Новые обороты", "New turnover"));
+        let updated = client.request("form/update", &params(&context, json!({"formSessionId":opened["formSessionId"],"revision":"1","overlays":[{"source":id,"version":"2","text":edited}]})));
+        let mut expected = expected.clone();
+        expected[1] = literal("Новые обороты", "New turnover");
+        assert_eq!(captions(&updated), expected);
+        client.finish();
+    }
+    assert_eq!(
+        fs::read_to_string(root.join(separate_path)).unwrap(),
+        separate
+    );
+    assert_eq!(fs::read_to_string(root.join(PATH)).unwrap(), form);
+}
+
+#[test]
 fn prepared_inputs_recover_invalid_disk_form_and_metadata_without_writes() {
     let (directory, form) = dependency_fixture();
     let root = directory.0.join("src");

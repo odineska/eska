@@ -5,7 +5,10 @@ use super::{
     ComposedForm, EffectiveDefinition, EffectiveElement, ElementFamily, ElementKind,
     FORM_NAMESPACE, FormResource, PresentationText, PropertySource, appearance::text,
 };
-use crate::project::metadata_model::{MetadataKind, MetadataValue, PropertyKey};
+use crate::project::{
+    metadata_model::{MetadataKind, MetadataValue, ObjectId, PropertyKey},
+    metadata_parser::ParsedObject,
+};
 use serde::Serialize;
 use std::collections::{HashMap, HashSet};
 
@@ -195,6 +198,37 @@ fn standard(name: &str, primary: bool) -> AutoCommandItem {
     }
 }
 
+pub(super) fn referenced_caption(
+    reference: &str,
+    resources: &[FormResource],
+) -> Option<PresentationText> {
+    let id = super::references::metadata_command_id(reference)?;
+    let (_, command) = effective_command(&id, resources)?;
+    Some(metadata_caption(command, resources))
+}
+
+fn effective_command<'a>(
+    id: &ObjectId,
+    resources: &'a [FormResource],
+) -> Option<(&'a FormResource, &'a ParsedObject)> {
+    resources.iter().rev().find_map(|resource| {
+        resource
+            .descriptor
+            .objects
+            .iter()
+            .find(|object| object.metadata.id() == id)
+            .map(|object| (resource, object))
+    })
+}
+
+fn metadata_caption(command: &ParsedObject, resources: &[FormResource]) -> PresentationText {
+    metadata_property(command, "Synonym", resources)
+        .and_then(|value| literal(&value.value))
+        .unwrap_or_else(|| PresentationText::Name {
+            text: command.metadata.name().into(),
+        })
+}
+
 fn metadata_commands(
     owner_type: &PropertyKey,
     resources: &[FormResource],
@@ -238,25 +272,13 @@ fn metadata_commands(
             {
                 continue;
             }
-            let effective = resources.iter().rev().find_map(|resource| {
-                resource
-                    .descriptor
-                    .objects
-                    .iter()
-                    .find(|object| object.metadata.id() == command.metadata.id())
-                    .map(|object| (resource, object))
-            });
-            let Some((resource, command)) = effective else {
+            let Some((resource, command)) = effective_command(command.metadata.id(), resources)
+            else {
                 continue;
             };
-            let caption = metadata_property(command, "Synonym", resources)
-                .and_then(|value| literal(&value.value))
-                .unwrap_or_else(|| PresentationText::Name {
-                    text: command.metadata.name().into(),
-                });
             output.push(AutoCommandItem {
                 key: command.metadata.id().to_string(),
-                caption,
+                caption: metadata_caption(command, resources),
                 primary: false,
                 origin: Some(PropertySource {
                     source: resource.source.clone(),
@@ -339,6 +361,11 @@ mod tests {
             matches!(&result[2].caption,PresentationText::Literal {items} if items[0].content=="Переопределено")
         );
         assert_eq!(result[2].origin.as_ref().unwrap().source, "extension");
+        assert!(matches!(
+            referenced_caption("Catalog.Demo.Command.Run", &resources),
+            Some(PresentationText::Literal { items }) if items[0].content == "Переопределено"
+        ));
+        assert!(referenced_caption("Report.Demo.Command.Run", &resources).is_none());
         assert!(automatic(&form("<Autofill>false</Autofill>"), &resources).is_empty());
         assert_eq!(
             automatic(&form("<AutoFill>false</AutoFill>"), &resources).len(),

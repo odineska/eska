@@ -149,8 +149,14 @@ impl Loader<'_> {
         if self.input_bytes > super::MAX_FORM_CONTEXT_BYTES {
             return Err(FormContextError::InputTooLarge);
         }
+        let descriptor_id =
+            location
+                .descriptor_id(id)
+                .ok_or_else(|| FormContextError::InvalidMetadata {
+                    source: dependency.id.clone(),
+                })?;
         let mut requests = Vec::new();
-        let metadata = parse_metadata(&text, id, &dependency, &mut requests)?;
+        let metadata = parse_metadata(&text, &descriptor_id, &dependency, &mut requests)?;
         let mut payload = load_payload(
             self.context,
             &reader.source,
