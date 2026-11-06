@@ -824,7 +824,8 @@
         "styles.native-layer-values",
         "resources.native-picture-layers",
         "windows.frame-discovery",
-        "sessions.atomic-publication"
+        "sessions.atomic-publication",
+        "shell.root-properties"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -4188,6 +4189,76 @@
       "lastConfirmation": "docs/measurements/t161-input-extended-value-list-linux.json",
       "remaining": "Other binding domains, property availability combinations and resolved style provenance. Windows native comparison.",
       "nextAction": "Measure remaining binding and availability contexts against the native palettes."
+    },
+    {
+      "id": "shell.root-properties",
+      "milestone": "T161",
+      "kinds": [
+        "Form"
+      ],
+      "axes": [
+        "source.identity",
+        "values.defaults",
+        "context.layers",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "behavior",
+      "status": "accepted_scope",
+      "scope": "Order, defaults and events for common form and non-hierarchical catalog root palettes, including an owner-bound form and conditional settings storage.",
+      "fixtures": [
+        "tests/fixtures/forms/native-property-palette/form-root.json",
+        "tests/fixtures/forms/native-bound-fields/InputField.xml",
+        "tests/fixtures/forms/native-owner-composition/base/Catalogs/ProbeOwner/Forms/ProbeObject/Ext/Form.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "property-catalogue",
+        "path": "test/form-property-catalogue-host.cjs",
+        "caseIds": [
+          "15",
+          "16",
+          "17",
+          "18"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t161-root-form-palette-linux.json",
+          "sha256": "aa6b9897ce02919276b506df7496171850fcf1647c371f838e9a4a9af24a64c4",
+          "clientCommit": "29cf9db5175f36518e616703f29d5c04cd9bb82a",
+          "assertions": [
+            {
+              "pointer": "/native/defaultRows",
+              "equals": 58
+            },
+            {
+              "pointer": "/native/saveListRows",
+              "equals": 59
+            },
+            {
+              "pointer": "/native/catalogObjectRows",
+              "equals": 66
+            },
+            {
+              "pointer": "/acceptance/rootPropertyNavigationVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/compatibilityPairsPassed",
+              "equals": 6
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t161-root-form-palette-linux.json",
+      "remaining": "Additional owner contexts and settings combinations, resolved appearance provenance and Windows native verification.",
+      "nextAction": "Measure hierarchical catalog, document and report root palettes against the native application."
     },
     {
       "id": "shell.inspectors",
