@@ -521,7 +521,7 @@ fn element_commands(
     diagnostics: &mut Vec<AppearanceDiagnostic>,
 ) -> Vec<super::AutoCommandItem> {
     match element.kind {
-        Some(ElementKind::Form) => super::commands::automatic(form, resources, diagnostics),
+        Some(ElementKind::Form) => super::root_commands::automatic(form, resources, diagnostics),
         Some(ElementKind::Table) => super::commands::table(element, value_type),
         Some(ElementKind::CommandBar) => super::commands::table_source(element, tables)
             .map(|table| {

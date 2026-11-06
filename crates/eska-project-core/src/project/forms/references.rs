@@ -94,6 +94,11 @@ pub(super) fn metadata_command_id(reference: &str) -> Option<ObjectId> {
     object_id(Some(&owner), MetadataKind::Command, name)
 }
 
+pub(super) fn command_group_id(reference: &str) -> Option<ObjectId> {
+    let name = reference.strip_prefix("CommandGroup.")?;
+    object_id(None, MetadataKind::CommandGroup, name)
+}
+
 fn request(id: Option<ObjectId>, output: &mut Vec<ObjectId>) {
     if let Some(id) = id
         && !output.contains(&id)
@@ -121,8 +126,15 @@ pub(super) fn discover_resources(
         if matches!(name, "DefaultStyle" | "Style") && kind == "Style" {
             request(object_id(None, MetadataKind::Style, value), &mut output);
         }
-        if node.has_tag_name((super::FORM_NAMESPACE, "CommandName")) {
+        if node.tag_name().namespace() == Some(super::FORM_NAMESPACE)
+            && matches!(name, "CommandName" | "Command")
+        {
             request(metadata_command_id(text), &mut output);
+        }
+        if node.has_tag_name((super::FORM_NAMESPACE, "CommandGroup"))
+            || node.has_tag_name((super::super::metadata_parser::MD_NAMESPACE, "Group"))
+        {
+            request(command_group_id(text), &mut output);
         }
         if name == "Ref"
             && node.tag_name().namespace() == Some("http://v8.1c.ru/8.3/xcf/readable")

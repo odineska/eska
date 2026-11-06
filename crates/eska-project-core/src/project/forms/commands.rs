@@ -1,19 +1,17 @@
 //! Static desktop Configurator commands; preview buttons never execute application actions.
 
-use super::presentation::{
-    definition_caption, definition_type, field_type, literal, metadata_property,
-};
+use super::presentation::{definition_caption, literal, metadata_property};
 use super::{
     AppearanceDiagnostic, ButtonRepresentation, ComposedForm, EffectiveDefinition,
     EffectiveElement, ElementFamily, ElementKind, FORM_NAMESPACE, FormPicture, FormResource,
     PresentationText, PropertySource, appearance::text, pictures,
 };
 use crate::project::{
-    metadata_model::{MetadataKind, MetadataValue, ObjectId, PropertyKey},
+    metadata_model::{MetadataValue, ObjectId},
     metadata_parser::ParsedObject,
 };
 use serde::Serialize;
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -26,6 +24,24 @@ pub struct AutoCommandItem {
     pub picture: Option<FormPicture>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub button_representation: Option<ButtonRepresentation>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub items: Vec<Self>,
+}
+
+impl AutoCommandItem {
+    pub(super) fn standard(scope: &str, name: &str, primary: bool) -> Self {
+        Self {
+            key: format!("{scope}.StandardCommand.{name}"),
+            caption: PresentationText::Standard {
+                key: format!("command.{name}"),
+            },
+            primary,
+            origin: None,
+            picture: None,
+            button_representation: None,
+            items: Vec::new(),
+        }
+    }
 }
 
 pub(super) enum ResolvedCommand<'a> {
@@ -44,7 +60,7 @@ impl<'a> ResolvedCommand<'a> {
             return local_command(form, name).map(Self::Local);
         }
         if let Some(id) = super::references::metadata_command_id(reference) {
-            return effective_command(&id, resources).map(|(_, command)| Self::Metadata(command));
+            return effective_metadata(&id, resources).map(|(_, command)| Self::Metadata(command));
         }
         reference
             .split_once(".StandardCommand.")
@@ -81,6 +97,34 @@ impl<'a> ResolvedCommand<'a> {
                 .and_then(|property| text(&property.value)),
             _ => None,
         }
+    }
+
+    pub(super) fn item(
+        &self,
+        key: String,
+        origin: Option<PropertySource>,
+        resources: &[FormResource],
+        diagnostics: &mut Vec<AppearanceDiagnostic>,
+    ) -> Option<AutoCommandItem> {
+        let caption = self.caption(resources)?;
+        let picture = self.picture(resources, diagnostics);
+        let button_representation = picture.as_ref().map(|picture| {
+            ButtonRepresentation::effective(
+                Some(picture),
+                None,
+                self.representation(resources),
+                ButtonRepresentation::Picture,
+            )
+        });
+        Some(AutoCommandItem {
+            key,
+            caption,
+            primary: false,
+            origin,
+            picture,
+            button_representation,
+            items: Vec::new(),
+        })
     }
 }
 
@@ -120,45 +164,15 @@ pub(super) fn visible(tables: &TableIndex<'_>, command: Option<&str>) -> bool {
     !tables.get(table).is_some_and(|table| excludes(table, name))
 }
 
-pub(super) fn automatic(
-    form: &ComposedForm,
-    resources: &[FormResource],
-    diagnostics: &mut Vec<AppearanceDiagnostic>,
-) -> Vec<AutoCommandItem> {
-    if !autofill(&form.root) {
-        return Vec::new();
-    }
-    let Some(attribute) = form.main_attribute() else {
-        return Vec::new();
-    };
-    let types = definition_type(attribute);
-    let Some(owner_type) = types.types.iter().find(|kind| {
-        kind.namespace.as_deref() == Some(super::references::CONFIG)
-            && kind.name.contains("Object.")
-    }) else {
-        return Vec::new();
-    };
-    let mut result = Vec::new();
-    if owner_type.name.starts_with("DocumentObject.") {
-        result.extend([
-            standard("PostAndClose", true),
-            standard("Write", false),
-            standard("Post", false),
-        ]);
-    } else if owner_type.name.starts_with("CatalogObject.") {
-        result.extend([standard("WriteAndClose", true), standard("Write", false)]);
-    }
-    metadata_commands(owner_type, resources, diagnostics, &mut result);
-    result
-}
-
-fn autofill(element: &EffectiveElement) -> bool {
-    element
-        .auxiliary
-        .iter()
-        .find(|node| node.kind == Some(ElementKind::AutoCommandBar))
-        .and_then(|bar| bar.scalar("Autofill"))
-        != Some("false")
+pub(super) fn autofill(element: &EffectiveElement) -> bool {
+    !matches!(
+        element
+            .auxiliary
+            .iter()
+            .find(|node| node.kind == Some(ElementKind::AutoCommandBar))
+            .and_then(|bar| bar.scalar("Autofill")),
+        Some("false" | "0")
+    )
 }
 
 pub(super) fn table(
@@ -243,33 +257,11 @@ pub(super) fn table_items(
     commands
         .iter()
         .filter(|name| !excludes(element, name))
-        .map(|name| AutoCommandItem {
-            key: format!("Table.StandardCommand.{name}"),
-            caption: PresentationText::Standard {
-                key: format!("command.{name}"),
-            },
-            primary: false,
-            origin: None,
-            picture: None,
-            button_representation: None,
-        })
+        .map(|name| AutoCommandItem::standard("Table", name, false))
         .collect()
 }
 
-fn standard(name: &str, primary: bool) -> AutoCommandItem {
-    AutoCommandItem {
-        key: format!("Form.StandardCommand.{name}"),
-        caption: PresentationText::Standard {
-            key: format!("command.{name}"),
-        },
-        primary,
-        origin: None,
-        picture: None,
-        button_representation: None,
-    }
-}
-
-fn effective_command<'a>(
+pub(super) fn effective_metadata<'a>(
     id: &ObjectId,
     resources: &'a [FormResource],
 ) -> Option<(&'a FormResource, &'a ParsedObject)> {
@@ -291,84 +283,11 @@ fn metadata_caption(command: &ParsedObject, resources: &[FormResource]) -> Prese
         })
 }
 
-fn metadata_commands(
-    owner_type: &PropertyKey,
-    resources: &[FormResource],
-    diagnostics: &mut Vec<AppearanceDiagnostic>,
-    output: &mut Vec<AutoCommandItem>,
-) {
-    let Some((kind, name)) = owner_type.name.split_once('.') else {
-        return;
-    };
-    let Some(kind) = super::references::type_kind(kind) else {
-        return;
-    };
-    let Some(owner) = resources
-        .iter()
-        .flat_map(|resource| &resource.descriptor.objects)
-        .find(|object| object.metadata.kind() == kind && object.metadata.name() == name)
-    else {
-        return;
-    };
-    let parameter_type = owner_type.name.replacen("Object.", "Ref.", 1);
-    let mut seen = HashSet::new();
-    for resource in resources {
-        for command in resource.descriptor.objects.iter().filter(|object| {
-            object.metadata.kind() == MetadataKind::Command
-                && object.metadata.parent() == Some(owner.metadata.id())
-        }) {
-            if !seen.insert(command.metadata.id()) {
-                continue;
-            }
-            let group = metadata_property(command, "Group", resources)
-                .and_then(|value| super::appearance::text(&value.value));
-            if !matches!(group, Some("FormCommandBarImportant")) {
-                continue;
-            }
-            let parameter = metadata_property(command, "CommandParameterType", resources)
-                .map(|value| field_type(&value.value))
-                .unwrap_or_default();
-            if !parameter.types.is_empty()
-                && !parameter.types.iter().any(|value| {
-                    value.namespace == owner_type.namespace && value.name == parameter_type
-                })
-            {
-                continue;
-            }
-            let Some((resource, command)) = effective_command(command.metadata.id(), resources)
-            else {
-                continue;
-            };
-            let resolved = ResolvedCommand::Metadata(command);
-            let picture = resolved.picture(resources, diagnostics);
-            let button_representation = picture.as_ref().map(|picture| {
-                ButtonRepresentation::effective(
-                    Some(picture),
-                    None,
-                    resolved.representation(resources),
-                    ButtonRepresentation::Picture,
-                )
-            });
-            output.push(AutoCommandItem {
-                key: command.metadata.id().to_string(),
-                caption: metadata_caption(command, resources),
-                primary: false,
-                origin: Some(PropertySource {
-                    source: resource.source.clone(),
-                    range: command.range.clone(),
-                }),
-                picture,
-                button_representation,
-            });
-        }
-    }
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::project::{
-        forms::{compose, parse},
+        forms::{compose, parse, root_commands::automatic},
         metadata_parser::{self, PropertiesMode},
     };
     fn resource(source: &str, commands: &str) -> FormResource {

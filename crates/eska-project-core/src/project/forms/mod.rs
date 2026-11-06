@@ -15,6 +15,7 @@ mod preparation;
 mod presentation;
 mod references;
 mod resources;
+mod root_commands;
 mod style_data;
 
 pub use appearance::{AppearanceDiagnostic, ResolvedColor, ResolvedFont};

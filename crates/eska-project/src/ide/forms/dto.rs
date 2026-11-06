@@ -83,6 +83,7 @@ pub(super) fn model(labels: &Labels, preview: &FormPreview) -> Result<(Value, us
                 element
                     .auto_command_items
                     .iter()
+                    .flat_map(|command| std::iter::once(command).chain(&command.items))
                     .filter_map(|command| command.picture.as_ref()),
             )
         })

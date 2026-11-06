@@ -1839,6 +1839,81 @@ fn form_resolves_owned_command_captions_and_tracks_their_descriptors() {
 }
 
 #[test]
+fn form_projects_command_groups_with_effective_placements_and_dirty_metadata() {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    let wrap = |object: &str| {
+        format!(
+            r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">{object}</MetaDataObject>"#
+        )
+    };
+    let group = wrap(
+        r#"<CommandGroup uuid="print"><Properties><Name>Print</Name><Category>FormCommandBar</Category></Properties></CommandGroup>"#,
+    );
+    let group_path = "CommandGroups/Print.xml";
+    fs::create_dir(root.join("CommandGroups")).unwrap();
+    fs::write(root.join(group_path), &group).unwrap();
+    fs::create_dir(root.join("Documents")).unwrap();
+    fs::write(root.join("Documents/Order.xml"), wrap(r#"
+        <Document uuid="order"><Properties><Name>Order</Name><Posting>Deny</Posting></Properties><ChildObjects>
+          <Command uuid="invoice"><Properties><Name>Invoice</Name><Group>CommandGroup.Print</Group>
+            <CommandParameterType><v8:Type>cfg:DocumentRef.Order</v8:Type></CommandParameterType>
+          </Properties></Command>
+        </ChildObjects></Document>"#)).unwrap();
+    let form = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:DocumentObject.Order</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes>
+        <Commands><Command name="Receipt" id="2"><Title>Print receipt</Title></Command></Commands>
+        <CommandInterface><CommandBar>
+          <Item><Command>Document.Order.Command.Invoice</Command><Type>Auto</Type><CommandGroup>CommandGroup.Print</CommandGroup><DefaultVisible>false</DefaultVisible></Item>
+          <Item><Command>Form.Command.Receipt</Command><Type>Added</Type><CommandGroup>CommandGroup.Print</CommandGroup></Item>
+        </CommandBar></CommandInterface></Form>"#;
+    fs::write(root.join(PATH), form).unwrap();
+    let commands = |snapshot: &Value| {
+        snapshot["model"]["root"]["presentation"]["autoCommandItems"]
+            .as_array()
+            .unwrap()
+            .clone()
+    };
+    let keys = |items: &[Value]| {
+        items
+            .iter()
+            .map(|item| item["key"].clone())
+            .collect::<Vec<_>>()
+    };
+
+    let mut client = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut client, &directory.0, "en-US", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let projected = commands(&opened);
+    assert_eq!(
+        keys(&projected),
+        [
+            "Form.StandardCommand.WriteAndClose",
+            "Form.StandardCommand.Write",
+            "command-group:Print"
+        ]
+        .map(Value::from)
+    );
+    assert_eq!(
+        keys(projected[2]["items"].as_array().unwrap()),
+        ["document:Order/command:Invoice", "Form.Command.Receipt"].map(Value::from)
+    );
+    let group_id = &opened["dependencies"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|dependency| dependency["path"]["value"] == group_path)
+        .unwrap()["id"];
+    assert_eq!(projected[2]["origin"]["source"], *group_id);
+    let updated = client.request("form/update", &params(&context, json!({"formSessionId":opened["formSessionId"],"revision":"1","overlays":[{
+        "source":group_id,"version":"2","text":group.replace("FormCommandBar", "FormNavigationPanel")
+    }]})));
+    assert_eq!(commands(&updated), projected[..2]);
+    assert_eq!(fs::read_to_string(root.join(group_path)).unwrap(), group);
+    client.finish();
+}
+
+#[test]
 fn prepared_inputs_recover_invalid_disk_form_and_metadata_without_writes() {
     let (directory, form) = dependency_fixture();
     let root = directory.0.join("src");
