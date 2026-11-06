@@ -1638,7 +1638,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "ordinary.radio-tumbler"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -4274,6 +4275,87 @@
       "nextAction": "Extend the raster matrix and reuse the verified face and glyph composition for RadioButtonField."
     },
     {
+      "id": "ordinary.radio-tumbler",
+      "milestone": "T158",
+      "kinds": [
+        "RadioButtonField"
+      ],
+      "axes": [
+        "appearance.colors",
+        "appearance.fonts",
+        "layout.geometry",
+        "state.display",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "widget_pixels",
+      "status": "accepted_scope",
+      "scope": "Measured radio tumbler grids with equal and unequal labels, shared edges, short rows, styled text and backgrounds.",
+      "fixtures": [
+        "tests/fixtures/forms/native-bound-fields/RadioButtonField.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "renderer",
+        "path": "test/form-renderer-host.cjs",
+        "caseIds": [
+          "RadioButtonField"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t158-radio-tumbler-linux.json",
+          "sha256": "170da8a48a7c04e9d6f408ab69558700a74e7a76392d5ac31cbf819671c04d07",
+          "clientCommit": "03ccc4fb24f699079cb467ed491973de57c49c31",
+          "assertions": [
+            {
+              "pointer": "/proceduralRgba/surfaces",
+              "equals": 17
+            },
+            {
+              "pointer": "/proceduralRgba/pixels",
+              "equals": 139990
+            },
+            {
+              "pointer": "/acceptance/exactGridCrops",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/exactGridPixels",
+              "equals": 202148
+            },
+            {
+              "pointer": "/acceptance/detachedCapturePairs",
+              "equals": 4
+            },
+            {
+              "pointer": "/acceptance/unequalFormFrameByLocale/en",
+              "equals": [
+                205,
+                76
+              ]
+            },
+            {
+              "pointer": "/acceptance/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 26
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t158-radio-tumbler-linux.json",
+      "remaining": "Additional label styles, DPI, whole forms and Windows.",
+      "nextAction": "Extend the RadioButtonField matrix with native circle glyphs and additional font faces."
+    },
+    {
       "id": "ordinary.complete-states",
       "milestone": "T158",
       "kinds": [
@@ -4324,8 +4406,8 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t158-radio-choices-linux.json",
-      "remaining": "RadioButtonField has measured layout and detached dirty transitions. Radio and Tumbler raster, the remaining 1 px width, and other ordinary-control state/property combinations remain open.",
-      "nextAction": "Complete the circle and Tumbler pixels in the radio matrix; expand other ordinary-control states, fonts and colors."
+      "remaining": "The measured RadioButtonField tumbler grids are accepted. Circle raster and other ordinary-control state/property combinations remain open.",
+      "nextAction": "Match radio circle glyphs and extend other ordinary-control states, fonts and colors."
     },
     {
       "id": "shell.input-properties",

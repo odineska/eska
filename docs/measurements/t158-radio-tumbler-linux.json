@@ -1,0 +1,778 @@
+{
+  "schemaVersion": 1,
+  "task": "T158",
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11, 96 DPI",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "fixture": "tests/fixtures/forms/native-bound-fields/RadioButtonField.xml",
+  "fixtureSha256": "bb209cf88403d2f93233291d32ff7cec620aa97464bf171da27d356cc14aa08f",
+  "native": {
+    "base": {
+      "stand": "radio-layout-4f4zommn",
+      "caseManifestSha256": "7e955a2454b02966aeea7f89ef4a76f601f61d02cc2762e4705808af5a8becf7"
+    },
+    "extended": {
+      "stand": "radio-extra-8qao3kj9",
+      "caseManifestSha256": "4e2c5f9ec3fd182a6b95a1b97d458cf1ef57327c58d32a29b04bb7976c402e6b"
+    },
+    "stylesAndRows": {
+      "stand": "radio-raster-s7loy2t9",
+      "caseManifestSha256": "be1a93457ca204f6cd84ddb93e1ad8d6a18f6bbed9339dad4de56cd68ea2134a"
+    }
+  },
+  "proceduralRgba": {
+    "surfaces": 17,
+    "pixels": 139990,
+    "pixelTolerance": 0,
+    "probes": [
+      {
+        "probe": "ProbeUnitedRadioSegments",
+        "region": [
+          278,
+          378,
+          106,
+          24
+        ],
+        "labels": [
+          "Update",
+          "Skip"
+        ],
+        "captureSha256": "a701f37784fc1c7fdd3b8599388653b0b0e8dab5526cba39a4201b2b0a69e9fc"
+      },
+      {
+        "probe": "ProbeUnitedRadioDisabledToggle",
+        "region": [
+          278,
+          378,
+          106,
+          24
+        ],
+        "labels": [
+          "Update",
+          "Skip"
+        ],
+        "captureSha256": "75f146c395428da02b4408f31a7f91ba8845c79098a29d47bc37f25a52f422d7"
+      },
+      {
+        "probe": "ProbeUnitedRadioTitleAbove",
+        "region": [
+          278,
+          397,
+          106,
+          24
+        ],
+        "labels": [
+          "Update",
+          "Skip"
+        ],
+        "captureSha256": "1c0657ff9390cb95e09b5872af6a125dd0f099cd58293b8d3c5b8b136589249f"
+      },
+      {
+        "probe": "ProbeUnitedRadioSegmentsReverse",
+        "region": [
+          278,
+          378,
+          106,
+          24
+        ],
+        "labels": [
+          "Skip",
+          "Update"
+        ],
+        "captureSha256": "6e17ec2c9386204317b9fae701216ed27eecebbe757722196d4949184d18c648"
+      },
+      {
+        "probe": "ProbeUnitedRadioSegmentsEqual",
+        "region": [
+          278,
+          378,
+          121,
+          24
+        ],
+        "labels": [
+          "Update",
+          "Update"
+        ],
+        "captureSha256": "f9f39d349eae1784cc97a2317f4783af23a33ef5a9be2ce4272f48283466a498"
+      },
+      {
+        "probe": "ProbeUnitedRadioSegmentsUnequal",
+        "region": [
+          278,
+          378,
+          171,
+          24
+        ],
+        "labels": [
+          "A",
+          "A much longer option"
+        ],
+        "captureSha256": "1ef9564fae620468b98eb7336b0345c2f126ef6a519b285747a97be1962937d8"
+      },
+      {
+        "probe": "ProbeUnitedRadioSegmentsWidth",
+        "region": [
+          278,
+          378,
+          106,
+          24
+        ],
+        "labels": [
+          "Update",
+          "Skip"
+        ],
+        "captureSha256": "4dfd7e901d9fc00f52b60883923dfcc548af0c58a69666e26a2bd6d9f2914742"
+      },
+      {
+        "probe": "SegmentGrid",
+        "region": [
+          278,
+          378,
+          61,
+          46
+        ],
+        "labels": [
+          "Update",
+          "Skip"
+        ],
+        "captureSha256": "e10689f445d0fd96c2612c70c419440fccce9e47e958661cf6e1c07221f224dd"
+      },
+      {
+        "probe": "SegmentsFive",
+        "region": [
+          278,
+          378,
+          196,
+          46
+        ],
+        "labels": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth",
+          "Fifth"
+        ],
+        "captureSha256": "e1ac007a3be9e674baa54e6dbdb838549d7c7f20afa18e0fd5073140a69a4637"
+      },
+      {
+        "probe": "SegmentsFont",
+        "region": [
+          386,
+          378,
+          155,
+          74
+        ],
+        "labels": [
+          "Обновлять",
+          "Пропускать"
+        ],
+        "captureSha256": "81daa3cccf19cad1811ff9d9c7c62f052294207a364ad288b8834100cee2b1a6"
+      },
+      {
+        "probe": "SegmentsTallGrid",
+        "region": [
+          24,
+          124,
+          208,
+          69
+        ],
+        "labels": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth",
+          "Fifth",
+          "Sixth",
+          "Seventh"
+        ],
+        "captureSha256": "8feeca0fbc1c1cdf46015996c3a66e8e28ee0c5b96923d0fcfbe30c16998eeca"
+      },
+      {
+        "probe": "SegmentsShortLast",
+        "region": [
+          24,
+          124,
+          196,
+          46
+        ],
+        "labels": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth"
+        ],
+        "captureSha256": "889c24f2d82c88b1e75962b7db113ed03d773a948825ca5d53d027d240385e38"
+      },
+      {
+        "probe": "SegmentsBoldGrid",
+        "region": [
+          24,
+          124,
+          402,
+          111
+        ],
+        "labels": [
+          "Да",
+          "Широкий вариант",
+          "Третья кнопка",
+          "Четвёртая",
+          "Пятая"
+        ],
+        "captureSha256": "1beb801453513ec8536b20c7a2a0ee6fad3c7cf3ffc772058111685314c0a4c0"
+      },
+      {
+        "probe": "SegmentsStyle",
+        "region": [
+          24,
+          124,
+          106,
+          46
+        ],
+        "labels": [
+          "Update",
+          "Skip",
+          "More"
+        ],
+        "captureSha256": "42dfbf672aa2280b0111a37fc20e14887d1f49050ba524e328e3a438e2ca2627"
+      },
+      {
+        "probe": "SegmentsDisabledStyle",
+        "region": [
+          24,
+          124,
+          106,
+          46
+        ],
+        "labels": [
+          "Update",
+          "Skip",
+          "More"
+        ],
+        "captureSha256": "80fee09f135837cd18104e3d2d3934acdc1d3a709ae6827e778bd619450bd471"
+      },
+      {
+        "probe": "SegmentsReadOnlyStyle",
+        "region": [
+          24,
+          124,
+          106,
+          46
+        ],
+        "labels": [
+          "Update",
+          "Skip",
+          "More"
+        ],
+        "captureSha256": "8b603921fcbbb6507154243bda2eed11f1cf6ac5e70b33d347e6c3b2a00ac8a6"
+      },
+      {
+        "probe": "SegmentsDark",
+        "region": [
+          29,
+          129,
+          208,
+          69
+        ],
+        "labels": [
+          "First",
+          "Second long",
+          "Third",
+          "Fourth",
+          "Fifth",
+          "Sixth",
+          "Seventh"
+        ],
+        "captureSha256": "49fb9cee9a32cf7a69b6aa488d963938f9f64217eb02d3a0c0c808ff88255993"
+      }
+    ]
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "batch": "form-batch-kEZ4K4",
+    "backendCommit": "082bfe9e0397df6229532010d914c8c42e2f613c",
+    "explorerCommit": "03ccc4fb24f699079cb467ed491973de57c49c31",
+    "vsixSha256": "d1495f157176e876a1a9bdce591d76e50033e70a1eb940eb5e3425dac0b00bdd",
+    "backendSha256": "2449274394dbef82a32dd03b060c62cd7b1df9817efb47bae958a6f111b595a1",
+    "runtimeManifestSha256": "6e20179ba185ac45124ce66ffbfdf5c4ecfa0efc3460b744312ec70261351ab0",
+    "runtimeFilesVerifiedPerRun": 1303
+  },
+  "checks": {
+    "typescript": true,
+    "compile": true,
+    "package": true,
+    "node": {
+      "passed": 611,
+      "skipped": 11
+    },
+    "bun": {
+      "passed": 599,
+      "skipped": 11
+    },
+    "unchangedBackendSha256Verified": true,
+    "previousRustGates": "docs/measurements/t158-checkbox-modes-linux.json",
+    "detachedSpaceRace": {
+      "initialPassedPairs": 25,
+      "initialFailure": "detached-space/en",
+      "cause": "The test captured the raw XML Title row before the asynchronous native palette replaced it.",
+      "sameArtifactOriginalDriverPasses": 3,
+      "delayedPaletteReproduced": true,
+      "fixedDriverCommit": "915bb3131a2de7e051d7495668ded5a50bcd4019",
+      "correctedDriverRuns": {
+        "en": {
+          "scenarios": 6,
+          "receiptSha256": "ecf890f2a6507a32bd5a68355f928bbc99f861489ddee4392e7b58e5a4ecc725"
+        },
+        "ru": {
+          "scenarios": 6,
+          "receiptSha256": "f4afb590fe83aecb6064d9d76f547d4918888eea577f35effe31b3f06737f71c"
+        },
+        "delayed-en": {
+          "scenarios": 6,
+          "receiptSha256": "3a681369caa275813e0e00a92120ef9471d4cae3907135a254d23c12f5cdad08"
+        }
+      },
+      "changedProductBytes": false
+    }
+  },
+  "acceptance": {
+    "pairsPassed": 26,
+    "driverCases": 282,
+    "caseCountsBySuite": {
+      "renderer": {
+        "en": 20,
+        "ru": 20
+      },
+      "states": {
+        "en": 15,
+        "ru": 15
+      },
+      "property-catalogue": {
+        "en": 30,
+        "ru": 30
+      },
+      "button-types": {
+        "en": 11,
+        "ru": 11
+      },
+      "button-rows": {
+        "en": 8,
+        "ru": 8
+      },
+      "usual-buttons": {
+        "en": 18,
+        "ru": 18
+      },
+      "handlers": {
+        "en": 1,
+        "ru": 1
+      },
+      "inspectors": {
+        "en": 1,
+        "ru": 1
+      },
+      "preview": {
+        "en": 1,
+        "ru": 1
+      },
+      "detached-space": {
+        "en": 6,
+        "ru": 6
+      },
+      "composition": {
+        "en": 9,
+        "ru": 9
+      },
+      "tables": {
+        "en": 17,
+        "ru": 17
+      },
+      "application": {
+        "en": 4,
+        "ru": 4
+      }
+    },
+    "exactGridCrops": 16,
+    "exactGridPixels": 202148,
+    "pixelTolerance": 0,
+    "detachedCapturePairs": 4,
+    "unequalFormFrameByLocale": {
+      "en": [
+        205,
+        76
+      ],
+      "ru": [
+        205,
+        76
+      ]
+    },
+    "existingCheckboxCropsStillExact": 60,
+    "comparedRegion": "Full RadioButtonField tumbler grid including shared seams, outlines, captions and the unused part of a short row.",
+    "fullFormPixelComparison": false,
+    "sourceWritesDuringApplicationViewing": false,
+    "applicationSamplesPerLocale": {
+      "en": 4,
+      "ru": 4
+    },
+    "comparisons": [
+      {
+        "case": "unequal",
+        "locale": "en",
+        "probe": "SegmentsUnequal",
+        "nativeCrop": [
+          278,
+          378,
+          171,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            171,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "1ef9564fae620468b98eb7336b0345c2f126ef6a519b285747a97be1962937d8",
+        "nativeRgbaSha256": "bf011cabd0804cd5c880742980a8e94a1ce2966c4c156400f92342cbeac82973",
+        "vsixCaptureSha256": "3f0813ec069597f36cdc94b8fe10924783fb14a290a64f683ba8c0cf8b9f633f"
+      },
+      {
+        "case": "unequal",
+        "locale": "ru",
+        "probe": "SegmentsUnequal",
+        "nativeCrop": [
+          278,
+          378,
+          171,
+          24
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            171,
+            24
+          ]
+        ],
+        "nativeCaptureSha256": "1ef9564fae620468b98eb7336b0345c2f126ef6a519b285747a97be1962937d8",
+        "nativeRgbaSha256": "bf011cabd0804cd5c880742980a8e94a1ce2966c4c156400f92342cbeac82973",
+        "vsixCaptureSha256": "d0f5529aca1a8dd8296c58295961e38e97cfd5f320694e14f052405b4313f2c8"
+      },
+      {
+        "case": "grid",
+        "locale": "en",
+        "probe": "SegmentsFive",
+        "nativeCrop": [
+          278,
+          378,
+          196,
+          46
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            196,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "e1ac007a3be9e674baa54e6dbdb838549d7c7f20afa18e0fd5073140a69a4637",
+        "nativeRgbaSha256": "37a7e0cfc223491ad818a32f1e4deb34273cdb85b1c94703478c2a5b8437be23",
+        "vsixCaptureSha256": "0352b5fdaf8ffd73323250dce453f735a1d640be285672a7e92b63b7d7f1699f"
+      },
+      {
+        "case": "grid",
+        "locale": "ru",
+        "probe": "SegmentsFive",
+        "nativeCrop": [
+          278,
+          378,
+          196,
+          46
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            196,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "e1ac007a3be9e674baa54e6dbdb838549d7c7f20afa18e0fd5073140a69a4637",
+        "nativeRgbaSha256": "37a7e0cfc223491ad818a32f1e4deb34273cdb85b1c94703478c2a5b8437be23",
+        "vsixCaptureSha256": "799e138107e4fd7bf1e14e39639be545a5ae81b99ea473b6a1cff17986ab5cc5"
+      },
+      {
+        "case": "tall",
+        "locale": "en",
+        "probe": "SegmentsTallGrid",
+        "nativeCrop": [
+          24,
+          124,
+          208,
+          69
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            208,
+            69
+          ]
+        ],
+        "nativeCaptureSha256": "8feeca0fbc1c1cdf46015996c3a66e8e28ee0c5b96923d0fcfbe30c16998eeca",
+        "nativeRgbaSha256": "3aa517d55b9b189c11217736a43eae720bc37555a58254edb3f346e35ec451b6",
+        "vsixCaptureSha256": "25fb87b45f2ea54f760f31522e192a1156d975435f3a2b6941af25061eb67337"
+      },
+      {
+        "case": "tall",
+        "locale": "ru",
+        "probe": "SegmentsTallGrid",
+        "nativeCrop": [
+          24,
+          124,
+          208,
+          69
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            208,
+            69
+          ]
+        ],
+        "nativeCaptureSha256": "8feeca0fbc1c1cdf46015996c3a66e8e28ee0c5b96923d0fcfbe30c16998eeca",
+        "nativeRgbaSha256": "3aa517d55b9b189c11217736a43eae720bc37555a58254edb3f346e35ec451b6",
+        "vsixCaptureSha256": "38ee04a9e436514523b9a73a0a4be50a223d16fa7c1c2d3df1fe28ded5e67596"
+      },
+      {
+        "case": "bold",
+        "locale": "en",
+        "probe": "SegmentsBoldGrid",
+        "nativeCrop": [
+          24,
+          124,
+          402,
+          111
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            402,
+            111
+          ]
+        ],
+        "nativeCaptureSha256": "1beb801453513ec8536b20c7a2a0ee6fad3c7cf3ffc772058111685314c0a4c0",
+        "nativeRgbaSha256": "22730c965f7593aa8a730950aba2e39ea0cb953239366aac3082b457b0e440be",
+        "vsixCaptureSha256": "6de6f23648619c4dd904d4ff60604b6a2eb3198f74b3a72b97f8f1a5723ea1f7"
+      },
+      {
+        "case": "bold",
+        "locale": "ru",
+        "probe": "SegmentsBoldGrid",
+        "nativeCrop": [
+          24,
+          124,
+          402,
+          111
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            402,
+            111
+          ]
+        ],
+        "nativeCaptureSha256": "1beb801453513ec8536b20c7a2a0ee6fad3c7cf3ffc772058111685314c0a4c0",
+        "nativeRgbaSha256": "22730c965f7593aa8a730950aba2e39ea0cb953239366aac3082b457b0e440be",
+        "vsixCaptureSha256": "4b178be62235b501530fcbd13d234c2c9de5087ed94bdcda9708805504073406"
+      },
+      {
+        "case": "style",
+        "locale": "en",
+        "probe": "SegmentsStyle",
+        "nativeCrop": [
+          24,
+          124,
+          106,
+          46
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            106,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "42dfbf672aa2280b0111a37fc20e14887d1f49050ba524e328e3a438e2ca2627",
+        "nativeRgbaSha256": "7238b179d2abd86542cc3cf62e17df5e81da8663325675d29a1e22e5de10fafc",
+        "vsixCaptureSha256": "ee648bfab9eb7d177cec41c668f744bea0b27ba644f48c5aa87e68526c3d5dcc"
+      },
+      {
+        "case": "style",
+        "locale": "ru",
+        "probe": "SegmentsStyle",
+        "nativeCrop": [
+          24,
+          124,
+          106,
+          46
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            106,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "42dfbf672aa2280b0111a37fc20e14887d1f49050ba524e328e3a438e2ca2627",
+        "nativeRgbaSha256": "7238b179d2abd86542cc3cf62e17df5e81da8663325675d29a1e22e5de10fafc",
+        "vsixCaptureSha256": "7ee4db66a11d0d9e71c23a4190799e0cd2531d6dcaa8ed02c9f94e406e4758f7"
+      },
+      {
+        "case": "disabled",
+        "locale": "en",
+        "probe": "SegmentsDisabledStyle",
+        "nativeCrop": [
+          24,
+          124,
+          106,
+          46
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            106,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "80fee09f135837cd18104e3d2d3934acdc1d3a709ae6827e778bd619450bd471",
+        "nativeRgbaSha256": "d8f9922354257dd078948952ad6dffe2f21d245b5bcbadbe7b5f8767e64375ae",
+        "vsixCaptureSha256": "79186e3205742df982bf42852071d7ea7377e0decb46cb6f5fa95144d6c3dd1c"
+      },
+      {
+        "case": "disabled",
+        "locale": "ru",
+        "probe": "SegmentsDisabledStyle",
+        "nativeCrop": [
+          24,
+          124,
+          106,
+          46
+        ],
+        "matches": [
+          [
+            389,
+            386,
+            106,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "80fee09f135837cd18104e3d2d3934acdc1d3a709ae6827e778bd619450bd471",
+        "nativeRgbaSha256": "d8f9922354257dd078948952ad6dffe2f21d245b5bcbadbe7b5f8767e64375ae",
+        "vsixCaptureSha256": "500eddac07bed9e6b0453d3b736888fea7fccb1e0d6d714249e3a2f36a191de6"
+      },
+      {
+        "case": "read-only-detached",
+        "locale": "en",
+        "probe": "SegmentsReadOnlyStyle",
+        "nativeCrop": [
+          24,
+          124,
+          106,
+          46
+        ],
+        "matches": [
+          [
+            41,
+            151,
+            106,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "8b603921fcbbb6507154243bda2eed11f1cf6ac5e70b33d347e6c3b2a00ac8a6",
+        "nativeRgbaSha256": "d8f9922354257dd078948952ad6dffe2f21d245b5bcbadbe7b5f8767e64375ae",
+        "vsixCaptureSha256": "e46be6b224f7e7438038de1c1e7cfff3cb7ac4d8d5d6db31c2cb78bcdc8a8c84"
+      },
+      {
+        "case": "read-only-detached",
+        "locale": "ru",
+        "probe": "SegmentsReadOnlyStyle",
+        "nativeCrop": [
+          24,
+          124,
+          106,
+          46
+        ],
+        "matches": [
+          [
+            41,
+            151,
+            106,
+            46
+          ]
+        ],
+        "nativeCaptureSha256": "8b603921fcbbb6507154243bda2eed11f1cf6ac5e70b33d347e6c3b2a00ac8a6",
+        "nativeRgbaSha256": "d8f9922354257dd078948952ad6dffe2f21d245b5bcbadbe7b5f8767e64375ae",
+        "vsixCaptureSha256": "b293fcd7004b1b81c4be785d06c3ec0aacd1d7282372d92f70e9548a41de09d7"
+      },
+      {
+        "case": "dark-detached",
+        "locale": "en",
+        "probe": "SegmentsDark",
+        "nativeCrop": [
+          29,
+          129,
+          208,
+          69
+        ],
+        "matches": [
+          [
+            46,
+            156,
+            208,
+            69
+          ]
+        ],
+        "nativeCaptureSha256": "49fb9cee9a32cf7a69b6aa488d963938f9f64217eb02d3a0c0c808ff88255993",
+        "nativeRgbaSha256": "9b6e19e73467cf3a8d608856402a620f10afc669c831a78607fa839cda070b81",
+        "vsixCaptureSha256": "d005fa9e4334445e57fe8f38c2e79360a3fb88a549b37d2e0c9cf76b7bab6293"
+      },
+      {
+        "case": "dark-detached",
+        "locale": "ru",
+        "probe": "SegmentsDark",
+        "nativeCrop": [
+          29,
+          129,
+          208,
+          69
+        ],
+        "matches": [
+          [
+            46,
+            156,
+            208,
+            69
+          ]
+        ],
+        "nativeCaptureSha256": "49fb9cee9a32cf7a69b6aa488d963938f9f64217eb02d3a0c0c808ff88255993",
+        "nativeRgbaSha256": "9b6e19e73467cf3a8d608856402a620f10afc669c831a78607fa839cda070b81",
+        "vsixCaptureSha256": "dfba490314da43ffee192773ed5ce67644a31c04472e369529b55d4f3b84911c"
+      }
+    ]
+  },
+  "pending": [
+    "Ordinary radio circle raster and remaining text styles",
+    "Additional font faces, multiline choices, configurations, DPI and Windows"
+  ]
+}
