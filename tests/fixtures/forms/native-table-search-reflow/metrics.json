@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "platformBuild": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "scope": "Complete toolbar search fields before and after preview viewport reflow. Each measured field includes the four corners, outline, hint, divider and clear glyph.",
+  "initialBorderRgb": [
+    179,
+    172,
+    134
+  ],
+  "settledBorderRgb": [
+    160,
+    160,
+    160
+  ],
+  "pixelTolerance": 0,
+  "comparisonMasks": [],
+  "noBslModulesOrHandlers": true,
+  "rows": [
+    {
+      "name": "Default",
+      "source": "tests/fixtures/forms/native-tables/Default.xml",
+      "sourceSha256": "f674d9fa836807357f8104251489933abae024725d8caece2af1ec3532052961",
+      "locales": {
+        "en": {
+          "initial": {
+            "nativeScreenshot": "table-search-reflow-is9o3kml/en/first-open.png",
+            "screenshotSha256": "65c841d9f8423daa80af0bbcdc79e17b5be7375309292d2a8eca1c0547fcf6ac",
+            "nativeRegion": [
+              418,
+              375,
+              172,
+              23
+            ],
+            "rgbSha256": "4c3a7bc76373ddbd2808c57579f34e290a27ba21488cdb6c1f52cd8e3675d792",
+            "pixels": 3956,
+            "fontPixels": 11
+          },
+          "settled": {
+            "nativeScreenshot": "table-search-reflow-is9o3kml/en/mdi-restore.png",
+            "screenshotSha256": "8ab8490275b50657edff1ce1f76584b417eb7f15b77044a4b1d5ade7d9ab2a12",
+            "nativeRegion": [
+              418,
+              375,
+              172,
+              23
+            ],
+            "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+            "pixels": 3956,
+            "fontPixels": 13
+          }
+        },
+        "ru": {
+          "initial": {
+            "nativeScreenshot": "table-search-reflow-is9o3kml/ru/first-open.png",
+            "screenshotSha256": "d3e766f2ded28bd6fa5252e0498ba699bcb9fb07fced9148aff88ba7526606ea",
+            "nativeRegion": [
+              452,
+              375,
+              172,
+              23
+            ],
+            "rgbSha256": "3ed259be94cf96ce1e003ec4e3af56618894948146717ffde6935ce2875e08aa",
+            "pixels": 3956,
+            "fontPixels": 11
+          },
+          "settled": {
+            "nativeScreenshot": "table-search-reflow-is9o3kml/ru/mdi-restore.png",
+            "screenshotSha256": "93f4352a8333c736923d9470b0a1aa94c07920277a7ec019f0d812a3dfcdcabc",
+            "nativeRegion": [
+              452,
+              375,
+              172,
+              23
+            ],
+            "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+            "pixels": 3956,
+            "fontPixels": 13
+          }
+        }
+      }
+    },
+    {
+      "name": "ReadOnly",
+      "source": "tests/fixtures/forms/native-tables/ReadOnly.xml",
+      "sourceSha256": "efa9ef102cb1e3c1f37543f692bbf4c58980dc2f0cb56bc29decbbb62e3ba0d3",
+      "locales": {
+        "en": {
+          "initial": {
+            "nativeScreenshot": "table-search-reflow-is9o3kml/en/read-only-between.png",
+            "screenshotSha256": "742cd1141d65840b185709ba33ce5aec90ac90107ee0d50b22159c8600eaabeb",
+            "nativeRegion": [
+              418,
+              375,
+              172,
+              23
+            ],
+            "rgbSha256": "4c3a7bc76373ddbd2808c57579f34e290a27ba21488cdb6c1f52cd8e3675d792",
+            "pixels": 3956,
+            "fontPixels": 11
+          },
+          "settled": {
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/search-en-ReadOnly-first.png",
+            "screenshotSha256": "b0b269c99691f1886cd181cc2dcb7cf3186e680f5870b02c0e2ca8903aa870a5",
+            "nativeRegion": [
+              414,
+              551,
+              172,
+              23
+            ],
+            "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+            "pixels": 3956,
+            "fontPixels": 13
+          }
+        },
+        "ru": {
+          "initial": {
+            "nativeScreenshot": "table-search-reflow-is9o3kml/ru/read-only-between.png",
+            "screenshotSha256": "5e1d41e671c64e73ee5b5ed265e9515a4c9d0f66d89bfce970faa740efccedb1",
+            "nativeRegion": [
+              452,
+              375,
+              172,
+              23
+            ],
+            "rgbSha256": "3ed259be94cf96ce1e003ec4e3af56618894948146717ffde6935ce2875e08aa",
+            "pixels": 3956,
+            "fontPixels": 11
+          },
+          "settled": {
+            "nativeScreenshot": "native-table-pixels-kbagfn6p/search-ru-ReadOnly-first.png",
+            "screenshotSha256": "fa9e73f1a2bc4dde84679dcf569be818a5924f24608b45d0e9d7fd24d6026e87",
+            "nativeRegion": [
+              448,
+              551,
+              172,
+              23
+            ],
+            "rgbSha256": "a9afe42112fd56fb2ad09acd0a5ccd829ce9b5770cbf028f07b60d95526d4465",
+            "pixels": 3956,
+            "fontPixels": 13
+          }
+        }
+      }
+    },
+    {
+      "name": "MetadataTable",
+      "source": "tests/fixtures/forms/native-context-tables/MetadataTable.xml",
+      "sourceSha256": "e892ddbe46307d58fc4fe5baf7569f8d5b33f3ff36a35eb8d76b1587341685a0",
+      "locales": {
+        "en": {
+          "initial": {
+            "nativeScreenshot": "table-search-sources-w67yura5/context-en/P_MetadataTable-first-open.png",
+            "screenshotSha256": "1725d959be4016d0eb3c471ca4a1019b4016aa8c54b84db3c52b72eede2cb547",
+            "nativeRegion": [
+              421,
+              375,
+              260,
+              23
+            ],
+            "rgbSha256": "e6e175556f1361442f7b6cd6d2dd4b72cc48c4ca5c60a7a5e06fe7c51c58580c",
+            "pixels": 5980,
+            "fontPixels": 11
+          },
+          "settled": {
+            "nativeScreenshot": "table-search-sources-w67yura5/context-en/P_MetadataTable-restored.png",
+            "screenshotSha256": "cdab26b81aa496fd85d13af3f51337744e7d21bf87714d5d6ef3c678e2ce182c",
+            "nativeRegion": [
+              421,
+              375,
+              260,
+              23
+            ],
+            "rgbSha256": "3c6369294e06549c0f20d4e02b09febacdd6006503718d20a7fd8174d87693cf",
+            "pixels": 5980,
+            "fontPixels": 13
+          }
+        },
+        "ru": {
+          "initial": {
+            "nativeScreenshot": "native-context-pixels-g93fkhea/ru-MetadataTable-complete.png",
+            "screenshotSha256": "48713ccf40610e945129abeee70c0f90df5ef80d6dcd44d02ca9b258de90f3bf",
+            "nativeRegion": [
+              465,
+              551,
+              260,
+              23
+            ],
+            "rgbSha256": "a4b2402b50f37a9bc7e9c79dc3f4e2dd5da15241007d8030ae1b3f98a4c0d26d",
+            "pixels": 5980,
+            "fontPixels": 11
+          },
+          "settled": {
+            "nativeScreenshot": "native-context-pixels-g93fkhea/search-ru-Metadata-first.png",
+            "screenshotSha256": "64c63d50390b6638e8d153ec7bbe95c8875d55b81e3db2119164eb06e9e83ccb",
+            "nativeRegion": [
+              465,
+              551,
+              260,
+              23
+            ],
+            "rgbSha256": "4cdeba525f46b8f32e6c564a52f356459f18035bd47f03023ab3cea3713a7d02",
+            "pixels": 5980,
+            "fontPixels": 13
+          }
+        }
+      }
+    },
+    {
+      "name": "DynamicList",
+      "source": "tests/fixtures/forms/native-context-tables/DynamicList.xml",
+      "sourceSha256": "f5a0e94a8d020155c8ae6783672729457ede6076dec28e0fa151a4bf12dee5c0",
+      "locales": {
+        "en": {
+          "initial": {
+            "nativeScreenshot": "table-search-sources-w67yura5/context-en/P_DynamicList-first-open.png",
+            "screenshotSha256": "266ed4b06ce7cf643e7bb9ab55ddb2a5bd379eba69708c9639352cbd6f6e25e1",
+            "nativeRegion": [
+              392,
+              375,
+              172,
+              23
+            ],
+            "rgbSha256": "4c3a7bc76373ddbd2808c57579f34e290a27ba21488cdb6c1f52cd8e3675d792",
+            "pixels": 3956,
+            "fontPixels": 11
+          },
+          "settled": {
+            "nativeScreenshot": "table-search-sources-w67yura5/context-en/P_DynamicList-restored.png",
+            "screenshotSha256": "b1faff52544afd335e775d05934ba6494d27651090ce970bbf40bb2986afeab0",
+            "nativeRegion": [
+              392,
+              375,
+              172,
+              23
+            ],
+            "rgbSha256": "09bc610decb93d3b16609f3d61bfcac5da6c18dbc1d14e52b0ef0c82349d8005",
+            "pixels": 3956,
+            "fontPixels": 13
+          }
+        }
+      }
+    }
+  ]
+}
