@@ -1,0 +1,982 @@
+{
+  "schemaVersion": 1,
+  "tasks": [
+    "T157",
+    "T158"
+  ],
+  "status": "accepted_scope",
+  "fullProfileAccepted": false,
+  "platform": "Linux ARM64, X11, 96 DPI",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "zoom": 100,
+  "comparisonMasks": [],
+  "pixelTolerance": 0,
+  "scope": "Complete text buttons at the three recorded native pane positions, and two complete button forms with their shadows.",
+  "native": {
+    "reference": "tests/fixtures/forms/native-button-poses/positioned.json",
+    "referenceSha256": "d64f15d5853113ab01c4bcc5808816de4383a33dab71c7bbae2b2651986d81db",
+    "sameXmlReused": true,
+    "origin": "The unmaximized MDI client begins at [257,77] in the recorded captures; subtract this from the screenshot position for the paint coordinates. The maximized editor uses the parent surface origin.",
+    "documentedHistoricalOrigins": "tests/fixtures/forms/native-button-poses/metrics.json",
+    "documentedHistoricalFullFrameMismatch": "docs/measurements/t157-native-button-rows-linux.json",
+    "previousFrameDifferencesPerLocale": {
+      "ProbeButtons": 169,
+      "ProbeRows": 445
+    }
+  },
+  "implementation": {
+    "shared": "The shared 16.16 gradient sampler from table toolbars now receives integer preview coordinates for all enabled native text-button borders.",
+    "layout": "The same measured box and DOM identities survive width and pane transitions. Both attached and detached test frames are placed at the reference paint origin without changing content styles.",
+    "numericChecks": 153,
+    "redraw": "One queued paint per animation frame after ResizeObserver delivery, with cancellation on cleanup.",
+    "publicProtocolChanged": false,
+    "noNewPackageDependency": true
+  },
+  "earlierFailure": {
+    "batch": "form-batch-mztWbl",
+    "passedPairs": 44,
+    "passedCases": 754,
+    "failedPairs": [
+      "responsive/en",
+      "responsive/ru"
+    ],
+    "cause": "Synchronous raster writes from the resize callback after extending position observation to the common text button.",
+    "controlArtifact": "form-batch-BUY2RD",
+    "controlVerifiedRuntimeFiles": 1303,
+    "control": {
+      "en": {
+        "cases": 31,
+        "baselineReceiptSha256": "ac1d3c7c2834c3f6bfafa8d90783e7748697377a8aaf2390fa83d51782c03611",
+        "initialFailureEvidenceSha256": "145a2c2580832fe85160ca4ee44c4fe8d60bf99c2d52dda1c673e736c9c5ca7b"
+      },
+      "ru": {
+        "cases": 31,
+        "baselineReceiptSha256": "b8e7374f1e7f562d1c4fbbb7155ffc3a9189e3b7972d8584f31f4ff54ac56380",
+        "initialFailureEvidenceSha256": "4a91a7b404397c8350836a6f7a2eac49daa80a4a9b46dbd41255c2674a03d1a1"
+      }
+    },
+    "resolution": "Schedule a coalesced repaint after layout and cancel it when the owner is released."
+  },
+  "installedArtifact": {
+    "extensionVersion": "0.1.9",
+    "versionStatus": "local beta",
+    "batch": "form-batch-fa62q5",
+    "backendCommit": "67e01b70f761d8201440d202ca6bc98b6b0cfcd6",
+    "explorerCommit": "dd6cd36fd70cd4612aa8dc385cb75a3531634f58",
+    "vsixSha256": "c451981aa4cdbb37ed5fa2e872e34d44f8a8b9ba43c431c74e9e6e46565a82ef",
+    "backendSha256": "2449274394dbef82a32dd03b060c62cd7b1df9817efb47bae958a6f111b595a1",
+    "runtimeManifestSha256": "19dbcb82916522becc4ad59419096e4a2958f7ebe8d61ee2af2710f839859451",
+    "runtimeFilesVerifiedPerRun": 1303,
+    "explorerSourceFilesVerified": 507,
+    "coreSourceFilesVerified": 613
+  },
+  "checks": {
+    "typescript": true,
+    "compile": true,
+    "package": true,
+    "node": {
+      "passed": 615,
+      "skipped": 11
+    },
+    "bun": {
+      "passed": 603,
+      "skipped": 11
+    },
+    "unchangedBackendSha256Verified": true,
+    "previousRustGates": "docs/measurements/t158-checkbox-modes-linux.json"
+  },
+  "acceptance": {
+    "pairsPassed": 46,
+    "driverCases": 816,
+    "caseCountsBySuite": {
+      "button-borders": {
+        "en": 63,
+        "ru": 63
+      },
+      "button-rows": {
+        "en": 8,
+        "ru": 8
+      },
+      "table-pixels": {
+        "en": 27,
+        "ru": 27
+      },
+      "standard-pictures": {
+        "en": 9,
+        "ru": 9
+      },
+      "button-colors": {
+        "en": 28,
+        "ru": 28
+      },
+      "button-metrics": {
+        "en": 18,
+        "ru": 18
+      },
+      "primary-appearance": {
+        "en": 3,
+        "ru": 3
+      },
+      "button-captions": {
+        "en": 6,
+        "ru": 6
+      },
+      "button-links": {
+        "en": 22,
+        "ru": 22
+      },
+      "responsive": {
+        "en": 31,
+        "ru": 31
+      },
+      "primary-buttons": {
+        "en": 60,
+        "ru": 60
+      },
+      "renderer": {
+        "en": 20,
+        "ru": 20
+      },
+      "states": {
+        "en": 15,
+        "ru": 15
+      },
+      "property-catalogue": {
+        "en": 30,
+        "ru": 30
+      },
+      "button-types": {
+        "en": 11,
+        "ru": 11
+      },
+      "usual-buttons": {
+        "en": 18,
+        "ru": 18
+      },
+      "handlers": {
+        "en": 1,
+        "ru": 1
+      },
+      "inspectors": {
+        "en": 1,
+        "ru": 1
+      },
+      "preview": {
+        "en": 1,
+        "ru": 1
+      },
+      "detached-space": {
+        "en": 6,
+        "ru": 6
+      },
+      "composition": {
+        "en": 9,
+        "ru": 9
+      },
+      "tables": {
+        "en": 17,
+        "ru": 17
+      },
+      "application": {
+        "en": 4,
+        "ru": 4
+      }
+    },
+    "wholePositionedWidgetCrops": 18,
+    "wholePositionedWidgetPixels": 35154,
+    "positionedWidgets": {
+      "en": {
+        "wholeWidgetCases": 63,
+        "positions": 3,
+        "crops": [
+          {
+            "pose": "default",
+            "caption": "WW",
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              369,
+              446,
+              52,
+              27
+            ],
+            "nativeRegion": [
+              278,
+              453,
+              52,
+              27
+            ],
+            "exactPixels": 1404,
+            "rgbSha256": "ef790a32e0853796aebe24742909ec5c3d33251001dbe31695aaa799d88beef4",
+            "screenshotSha256": "290f213eab836b52316827a20254d85a5a1afee537aa858c565f926e7a004df1",
+            "nativeScreenshotSha256": "aa83ffa3da4260532720162d0583e450b8efede1818399e14323107e7dcba328"
+          },
+          {
+            "pose": "default",
+            "caption": "MM",
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              430,
+              446,
+              50,
+              27
+            ],
+            "nativeRegion": [
+              339,
+              453,
+              50,
+              27
+            ],
+            "exactPixels": 1350,
+            "rgbSha256": "5bd1884d5a8e125252251868664de2e4666651ea6ab6c564304c245c3e5f6a53",
+            "screenshotSha256": "290f213eab836b52316827a20254d85a5a1afee537aa858c565f926e7a004df1",
+            "nativeScreenshotSha256": "aa83ffa3da4260532720162d0583e450b8efede1818399e14323107e7dcba328"
+          },
+          {
+            "pose": "default",
+            "caption": "First command",
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              489,
+              446,
+              115,
+              27
+            ],
+            "nativeRegion": [
+              398,
+              453,
+              115,
+              27
+            ],
+            "exactPixels": 3105,
+            "rgbSha256": "d986e23e4fec138775d16fb14a98323ffd54a9eba42c174c4b68d9cad81a05a3",
+            "screenshotSha256": "290f213eab836b52316827a20254d85a5a1afee537aa858c565f926e7a004df1",
+            "nativeScreenshotSha256": "aa83ffa3da4260532720162d0583e450b8efede1818399e14323107e7dcba328"
+          },
+          {
+            "pose": "maximized",
+            "caption": "WW",
+            "paintOrigin": [
+              261,
+              510
+            ],
+            "observedRegion": [
+              622,
+              619,
+              52,
+              27
+            ],
+            "nativeRegion": [
+              274,
+              549,
+              52,
+              27
+            ],
+            "exactPixels": 1404,
+            "rgbSha256": "ef790a32e0853796aebe24742909ec5c3d33251001dbe31695aaa799d88beef4",
+            "screenshotSha256": "1a7eb1eec1601a9f0e72a97ae28b0bd60990df52d882f09ad6a3293b53dbbde2",
+            "nativeScreenshotSha256": "bad7aecade3e7eaa39821267ae8afb58278bd49debe9478148211d8d050946b0"
+          },
+          {
+            "pose": "maximized",
+            "caption": "MM",
+            "paintOrigin": [
+              261,
+              510
+            ],
+            "observedRegion": [
+              683,
+              619,
+              50,
+              27
+            ],
+            "nativeRegion": [
+              335,
+              549,
+              50,
+              27
+            ],
+            "exactPixels": 1350,
+            "rgbSha256": "ee9b3816bc2b68efa69034307d112088060f955f8799cbccfe7eaf0c95e9c022",
+            "screenshotSha256": "1a7eb1eec1601a9f0e72a97ae28b0bd60990df52d882f09ad6a3293b53dbbde2",
+            "nativeScreenshotSha256": "bad7aecade3e7eaa39821267ae8afb58278bd49debe9478148211d8d050946b0"
+          },
+          {
+            "pose": "maximized",
+            "caption": "First command",
+            "paintOrigin": [
+              261,
+              510
+            ],
+            "observedRegion": [
+              742,
+              619,
+              115,
+              27
+            ],
+            "nativeRegion": [
+              394,
+              549,
+              115,
+              27
+            ],
+            "exactPixels": 3105,
+            "rgbSha256": "cfba49f3ed4e5491214d0a3d835290c2b85240b798128059ca398b6e3665c173",
+            "screenshotSha256": "1a7eb1eec1601a9f0e72a97ae28b0bd60990df52d882f09ad6a3293b53dbbde2",
+            "nativeScreenshotSha256": "bad7aecade3e7eaa39821267ae8afb58278bd49debe9478148211d8d050946b0"
+          },
+          {
+            "pose": "moved",
+            "caption": "WW",
+            "paintOrigin": [
+              261,
+              240
+            ],
+            "observedRegion": [
+              622,
+              349,
+              52,
+              27
+            ],
+            "nativeRegion": [
+              274,
+              279,
+              52,
+              27
+            ],
+            "exactPixels": 1404,
+            "rgbSha256": "00d5aa99fc99c5b0a2e371532d1f72b2b6bd0a0c302ae0c31137fb52cc000dda",
+            "screenshotSha256": "6bfcbebf7eccac97d1efab5f6adcbbaf4160adfb20a208155d0a08f2335f69e5",
+            "nativeScreenshotSha256": "4984ec3f415b8a972d7c06e831ce1bfc38cf11e4c50140ab479e24f89fcc98bd"
+          },
+          {
+            "pose": "moved",
+            "caption": "MM",
+            "paintOrigin": [
+              261,
+              240
+            ],
+            "observedRegion": [
+              683,
+              349,
+              50,
+              27
+            ],
+            "nativeRegion": [
+              335,
+              279,
+              50,
+              27
+            ],
+            "exactPixels": 1350,
+            "rgbSha256": "7a535c942f49a25be2fab783f431727d6e49064815442a2a827a65eab19eee26",
+            "screenshotSha256": "6bfcbebf7eccac97d1efab5f6adcbbaf4160adfb20a208155d0a08f2335f69e5",
+            "nativeScreenshotSha256": "4984ec3f415b8a972d7c06e831ce1bfc38cf11e4c50140ab479e24f89fcc98bd"
+          },
+          {
+            "pose": "moved",
+            "caption": "First command",
+            "paintOrigin": [
+              261,
+              240
+            ],
+            "observedRegion": [
+              742,
+              349,
+              115,
+              27
+            ],
+            "nativeRegion": [
+              394,
+              279,
+              115,
+              27
+            ],
+            "exactPixels": 3105,
+            "rgbSha256": "8452694732cbac6de83df179f61b3d5ade4469f2dc0bbb026a3cdc3e6fa0ef8f",
+            "screenshotSha256": "6bfcbebf7eccac97d1efab5f6adcbbaf4160adfb20a208155d0a08f2335f69e5",
+            "nativeScreenshotSha256": "4984ec3f415b8a972d7c06e831ce1bfc38cf11e4c50140ab479e24f89fcc98bd"
+          }
+        ],
+        "exactPositionedPixels": 17577
+      },
+      "ru": {
+        "wholeWidgetCases": 63,
+        "positions": 3,
+        "crops": [
+          {
+            "pose": "default",
+            "caption": "WW",
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              369,
+              446,
+              52,
+              27
+            ],
+            "nativeRegion": [
+              278,
+              453,
+              52,
+              27
+            ],
+            "exactPixels": 1404,
+            "rgbSha256": "ef790a32e0853796aebe24742909ec5c3d33251001dbe31695aaa799d88beef4",
+            "screenshotSha256": "6adac98b713cba6a9383ec4aab73ce18e78e291c7851c0f58afb863134a39ebb",
+            "nativeScreenshotSha256": "aa83ffa3da4260532720162d0583e450b8efede1818399e14323107e7dcba328"
+          },
+          {
+            "pose": "default",
+            "caption": "MM",
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              430,
+              446,
+              50,
+              27
+            ],
+            "nativeRegion": [
+              339,
+              453,
+              50,
+              27
+            ],
+            "exactPixels": 1350,
+            "rgbSha256": "5bd1884d5a8e125252251868664de2e4666651ea6ab6c564304c245c3e5f6a53",
+            "screenshotSha256": "6adac98b713cba6a9383ec4aab73ce18e78e291c7851c0f58afb863134a39ebb",
+            "nativeScreenshotSha256": "aa83ffa3da4260532720162d0583e450b8efede1818399e14323107e7dcba328"
+          },
+          {
+            "pose": "default",
+            "caption": "First command",
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              489,
+              446,
+              115,
+              27
+            ],
+            "nativeRegion": [
+              398,
+              453,
+              115,
+              27
+            ],
+            "exactPixels": 3105,
+            "rgbSha256": "d986e23e4fec138775d16fb14a98323ffd54a9eba42c174c4b68d9cad81a05a3",
+            "screenshotSha256": "6adac98b713cba6a9383ec4aab73ce18e78e291c7851c0f58afb863134a39ebb",
+            "nativeScreenshotSha256": "aa83ffa3da4260532720162d0583e450b8efede1818399e14323107e7dcba328"
+          },
+          {
+            "pose": "maximized",
+            "caption": "WW",
+            "paintOrigin": [
+              261,
+              510
+            ],
+            "observedRegion": [
+              622,
+              619,
+              52,
+              27
+            ],
+            "nativeRegion": [
+              274,
+              549,
+              52,
+              27
+            ],
+            "exactPixels": 1404,
+            "rgbSha256": "ef790a32e0853796aebe24742909ec5c3d33251001dbe31695aaa799d88beef4",
+            "screenshotSha256": "f66c7eb9baae9d6cd01ba443724c51f438a92e5c5d4c1c4f9d27400de76d68e4",
+            "nativeScreenshotSha256": "bad7aecade3e7eaa39821267ae8afb58278bd49debe9478148211d8d050946b0"
+          },
+          {
+            "pose": "maximized",
+            "caption": "MM",
+            "paintOrigin": [
+              261,
+              510
+            ],
+            "observedRegion": [
+              683,
+              619,
+              50,
+              27
+            ],
+            "nativeRegion": [
+              335,
+              549,
+              50,
+              27
+            ],
+            "exactPixels": 1350,
+            "rgbSha256": "ee9b3816bc2b68efa69034307d112088060f955f8799cbccfe7eaf0c95e9c022",
+            "screenshotSha256": "f66c7eb9baae9d6cd01ba443724c51f438a92e5c5d4c1c4f9d27400de76d68e4",
+            "nativeScreenshotSha256": "bad7aecade3e7eaa39821267ae8afb58278bd49debe9478148211d8d050946b0"
+          },
+          {
+            "pose": "maximized",
+            "caption": "First command",
+            "paintOrigin": [
+              261,
+              510
+            ],
+            "observedRegion": [
+              742,
+              619,
+              115,
+              27
+            ],
+            "nativeRegion": [
+              394,
+              549,
+              115,
+              27
+            ],
+            "exactPixels": 3105,
+            "rgbSha256": "cfba49f3ed4e5491214d0a3d835290c2b85240b798128059ca398b6e3665c173",
+            "screenshotSha256": "f66c7eb9baae9d6cd01ba443724c51f438a92e5c5d4c1c4f9d27400de76d68e4",
+            "nativeScreenshotSha256": "bad7aecade3e7eaa39821267ae8afb58278bd49debe9478148211d8d050946b0"
+          },
+          {
+            "pose": "moved",
+            "caption": "WW",
+            "paintOrigin": [
+              261,
+              240
+            ],
+            "observedRegion": [
+              622,
+              349,
+              52,
+              27
+            ],
+            "nativeRegion": [
+              274,
+              279,
+              52,
+              27
+            ],
+            "exactPixels": 1404,
+            "rgbSha256": "00d5aa99fc99c5b0a2e371532d1f72b2b6bd0a0c302ae0c31137fb52cc000dda",
+            "screenshotSha256": "22628a063d027a71062bda25c529b76e55e64ba43460e34e4b7ff85de9aa2a30",
+            "nativeScreenshotSha256": "4984ec3f415b8a972d7c06e831ce1bfc38cf11e4c50140ab479e24f89fcc98bd"
+          },
+          {
+            "pose": "moved",
+            "caption": "MM",
+            "paintOrigin": [
+              261,
+              240
+            ],
+            "observedRegion": [
+              683,
+              349,
+              50,
+              27
+            ],
+            "nativeRegion": [
+              335,
+              279,
+              50,
+              27
+            ],
+            "exactPixels": 1350,
+            "rgbSha256": "7a535c942f49a25be2fab783f431727d6e49064815442a2a827a65eab19eee26",
+            "screenshotSha256": "22628a063d027a71062bda25c529b76e55e64ba43460e34e4b7ff85de9aa2a30",
+            "nativeScreenshotSha256": "4984ec3f415b8a972d7c06e831ce1bfc38cf11e4c50140ab479e24f89fcc98bd"
+          },
+          {
+            "pose": "moved",
+            "caption": "First command",
+            "paintOrigin": [
+              261,
+              240
+            ],
+            "observedRegion": [
+              742,
+              349,
+              115,
+              27
+            ],
+            "nativeRegion": [
+              394,
+              279,
+              115,
+              27
+            ],
+            "exactPixels": 3105,
+            "rgbSha256": "8452694732cbac6de83df179f61b3d5ade4469f2dc0bbb026a3cdc3e6fa0ef8f",
+            "screenshotSha256": "22628a063d027a71062bda25c529b76e55e64ba43460e34e4b7ff85de9aa2a30",
+            "nativeScreenshotSha256": "4984ec3f415b8a972d7c06e831ce1bfc38cf11e4c50140ab479e24f89fcc98bd"
+          }
+        ],
+        "exactPositionedPixels": 17577
+      }
+    },
+    "wholeFormCrops": 12,
+    "wholeFormPixels": 587308,
+    "detachedWholeFormCrops": 4,
+    "wholeForms": {
+      "en": {
+        "completeFormCrops": 6,
+        "exactPixels": 293654,
+        "scenarios": [
+          {
+            "label": "ProbeButtons",
+            "form": "ProbeButtons",
+            "detached": false,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              356,
+              407,
+              147,
+              192
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              147,
+              192
+            ],
+            "exactPixels": 28224,
+            "rgbSha256": "8cc9eef605d430f2a50aa95efe1324beeb1f13498a993ca75e38dd3d420c45a2",
+            "screenshotSha256": "08ee1b3d080b6a2719c422a65ab79625e947d9cf6037ca6915c919b068a02abe",
+            "nativeScreenshotSha256": "da7bb57a7b531920df6c069719e47dd0622aec6a2a1a1e820d6687ae5b8394d9"
+          },
+          {
+            "label": "ProbeRows",
+            "form": "ProbeRows",
+            "detached": false,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              356,
+              407,
+              209,
+              254
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              209,
+              254
+            ],
+            "exactPixels": 53086,
+            "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+            "screenshotSha256": "fdd91815e60448ad7e6d6b2a251f52c1f2ba2db8f9cd3196fadfaaffcffe693e",
+            "nativeScreenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68"
+          },
+          {
+            "label": "restored-explicit-width",
+            "form": "ProbeRows",
+            "detached": false,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              356,
+              407,
+              209,
+              254
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              209,
+              254
+            ],
+            "exactPixels": 53086,
+            "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+            "screenshotSha256": "d64cf222232ffc337844c760ffb045c959937a4d353eaf7d2abc6699c9f53924",
+            "nativeScreenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68"
+          },
+          {
+            "label": "floating-native",
+            "form": "ProbeRows",
+            "detached": true,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              8,
+              407,
+              209,
+              254
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              209,
+              254
+            ],
+            "exactPixels": 53086,
+            "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+            "screenshotSha256": "a1c6167b43b7bdf675685b48b59c70f84639a36c5c7bd28c69dd4942c335aa8d",
+            "nativeScreenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68"
+          },
+          {
+            "label": "floating-restored",
+            "form": "ProbeRows",
+            "detached": true,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              8,
+              407,
+              209,
+              254
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              209,
+              254
+            ],
+            "exactPixels": 53086,
+            "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+            "screenshotSha256": "a1c6167b43b7bdf675685b48b59c70f84639a36c5c7bd28c69dd4942c335aa8d",
+            "nativeScreenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68"
+          },
+          {
+            "label": "reattached-native",
+            "form": "ProbeRows",
+            "detached": false,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              356,
+              407,
+              209,
+              254
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              209,
+              254
+            ],
+            "exactPixels": 53086,
+            "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+            "screenshotSha256": "d64cf222232ffc337844c760ffb045c959937a4d353eaf7d2abc6699c9f53924",
+            "nativeScreenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68"
+          }
+        ]
+      },
+      "ru": {
+        "completeFormCrops": 6,
+        "exactPixels": 293654,
+        "scenarios": [
+          {
+            "label": "ProbeButtons",
+            "form": "ProbeButtons",
+            "detached": false,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              356,
+              407,
+              147,
+              192
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              147,
+              192
+            ],
+            "exactPixels": 28224,
+            "rgbSha256": "8cc9eef605d430f2a50aa95efe1324beeb1f13498a993ca75e38dd3d420c45a2",
+            "screenshotSha256": "cd9bec85df0ff37ccaee016979d2006e44489c2b5be7b66c69fd04c4381f00ec",
+            "nativeScreenshotSha256": "da7bb57a7b531920df6c069719e47dd0622aec6a2a1a1e820d6687ae5b8394d9"
+          },
+          {
+            "label": "ProbeRows",
+            "form": "ProbeRows",
+            "detached": false,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              356,
+              407,
+              209,
+              254
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              209,
+              254
+            ],
+            "exactPixels": 53086,
+            "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+            "screenshotSha256": "ae27abb2ba9ab956d1f04c88b3523edfe19aa2d6eac464e339d1e7d2c1d2f866",
+            "nativeScreenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68"
+          },
+          {
+            "label": "restored-explicit-width",
+            "form": "ProbeRows",
+            "detached": false,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              356,
+              407,
+              209,
+              254
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              209,
+              254
+            ],
+            "exactPixels": 53086,
+            "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+            "screenshotSha256": "ced85cdae31ecad23349a666b57b16f94fb5a1d9edee85021e38246f41d8382e",
+            "nativeScreenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68"
+          },
+          {
+            "label": "floating-native",
+            "form": "ProbeRows",
+            "detached": true,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              8,
+              407,
+              209,
+              254
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              209,
+              254
+            ],
+            "exactPixels": 53086,
+            "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+            "screenshotSha256": "957af129896ada86c3a6137bd9ac5cd6cb565f1b1f629c1790d1cbf821c4f306",
+            "nativeScreenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68"
+          },
+          {
+            "label": "floating-restored",
+            "form": "ProbeRows",
+            "detached": true,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              8,
+              407,
+              209,
+              254
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              209,
+              254
+            ],
+            "exactPixels": 53086,
+            "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+            "screenshotSha256": "957af129896ada86c3a6137bd9ac5cd6cb565f1b1f629c1790d1cbf821c4f306",
+            "nativeScreenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68"
+          },
+          {
+            "label": "reattached-native",
+            "form": "ProbeRows",
+            "detached": false,
+            "paintOrigin": [
+              8,
+              337
+            ],
+            "observedRegion": [
+              356,
+              407,
+              209,
+              254
+            ],
+            "nativeRegion": [
+              265,
+              414,
+              209,
+              254
+            ],
+            "exactPixels": 53086,
+            "rgbSha256": "5bd18013cca7f831b72f0ebe3b04e532b541e7b9f262072997952af8737867fe",
+            "screenshotSha256": "ced85cdae31ecad23349a666b57b16f94fb5a1d9edee85021e38246f41d8382e",
+            "nativeScreenshotSha256": "1917691a24fd9017848299f1a6ae54af858d8a5433405ea8f933e0d53841ff68"
+          }
+        ]
+      }
+    },
+    "retainedToolbarCrops": 12,
+    "responsive": {
+      "en": {
+        "cases": 31,
+        "errors": [],
+        "sameDomOwners": true,
+        "nativeWindowCases": 6,
+        "detachedCases": 7,
+        "receiptSha256": "ed5e277a2da99c4fde0cb5b81c48ccbbfaacf6d652ab7221f6b9d2e948e765e7"
+      },
+      "ru": {
+        "cases": 31,
+        "errors": [],
+        "sameDomOwners": true,
+        "nativeWindowCases": 6,
+        "detachedCases": 7,
+        "receiptSha256": "b5d2348c44cc6182849954291745aeb9110246607c261b716e3a8b0d1c6f5457"
+      }
+    },
+    "sourceWritesDuringViewing": false,
+    "applicationSamplesPerLocale": {
+      "en": 4,
+      "ru": 4
+    }
+  },
+  "remaining": [
+    "Additional button/form property and style combinations, positions, fonts, DPI and Windows.",
+    "Complete frame comparison of the dirty Width=8 variant remains separate; geometry and native caption regions were checked."
+  ]
+}

@@ -371,7 +371,8 @@
         "buttons.link-types",
         "buttons.link-captions",
         "buttons.mixed-row-geometry",
-        "shell.button-properties"
+        "shell.button-properties",
+        "buttons.mixed-row-full-forms"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -647,7 +648,8 @@
         "performance.full-viewer",
         "acceptance.full-profile",
         "profile.windows",
-        "buttons.mixed-row-geometry"
+        "buttons.mixed-row-geometry",
+        "buttons.mixed-row-full-forms"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1969,7 +1971,8 @@
         "context.native-static-composition",
         "context.native-owner-forms",
         "styles.native-layer-values",
-        "buttons.mixed-row-geometry"
+        "buttons.mixed-row-geometry",
+        "buttons.mixed-row-full-forms"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -3000,12 +3003,22 @@
       ],
       "profile": "linux-taxi-96",
       "level": "widget_pixels",
-      "status": "reproduced_mismatch",
-      "scope": "Same native XML produces different border pixels after default/maximized/moved pane positions; a reference-condition difference, not a waived mismatch.",
+      "status": "accepted_scope",
+      "scope": "Full raised text buttons at the three recorded native origins, with all borders and the shadow included.",
       "fixtures": [
         "tests/fixtures/forms/native-button-poses"
       ],
-      "driver": null,
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "button-borders",
+        "path": "test/form-button-borders-host.cjs",
+        "caseIds": [
+          "native-pose-default",
+          "native-pose-maximized",
+          "native-pose-moved"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
       "evidence": [
         {
           "report": "tests/fixtures/forms/native-button-poses/metrics.json",
@@ -3017,11 +3030,38 @@
             }
           ],
           "clientCommit": null
+        },
+        {
+          "report": "docs/measurements/t157-t158-button-raster-position-linux.json",
+          "sha256": "0b444a2a8a40dc909cf3484aa02c4909fad4d4df0f9d7508b2df6c4729af9c5e",
+          "clientCommit": "dd6cd36fd70cd4612aa8dc385cb75a3531634f58",
+          "assertions": [
+            {
+              "pointer": "/acceptance/wholePositionedWidgetCrops",
+              "equals": 18
+            },
+            {
+              "pointer": "/acceptance/wholePositionedWidgetPixels",
+              "equals": 35154
+            },
+            {
+              "pointer": "/implementation/numericChecks",
+              "equals": 153
+            },
+            {
+              "pointer": "/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
         }
       ],
-      "lastConfirmation": "tests/fixtures/forms/native-button-poses/metrics.json",
-      "remaining": "Universal pane-coordinate quantization has not been accepted.",
-      "nextAction": "Restore matching origin/viewport before comparison; retain all pixels and separately measure other poses.",
+      "lastConfirmation": "docs/measurements/t157-t158-button-raster-position-linux.json",
+      "remaining": "Additional positions, clipping, fonts, layout combinations and DPI; Windows.",
+      "nextAction": "Measure further native positions and paint surfaces with the same aligned reference conditions.",
       "classification": "reference_conditions"
     },
     {
@@ -5679,8 +5719,85 @@
         }
       ],
       "lastConfirmation": "docs/measurements/t157-native-button-rows-linux.json",
-      "remaining": "Other fonts, widths, states, parents, nested/wrapped/mixed-field layouts and full widget/form RGB parity; Windows and DPI.",
-      "nextAction": "Resolve the retained full RGB lower-border differences and extend the measured native row/layout matrix."
+      "remaining": "Other fonts, widths, states, parents, nested/wrapped/mixed-field layouts and Windows/DPI. The two recorded complete forms are tracked in buttons.mixed-row-full-forms.",
+      "nextAction": "Extend row geometry to wrapped and mixed-field layouts and capture the full dirty Width=8 variant."
+    },
+    {
+      "id": "buttons.mixed-row-full-forms",
+      "milestone": "T157",
+      "kinds": [
+        "Button",
+        "UsualGroup",
+        "CommandBar"
+      ],
+      "axes": [
+        "layout.geometry",
+        "appearance.fonts",
+        "profile.conditions",
+        "behavior.session"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "form_pixels",
+      "status": "accepted_scope",
+      "scope": "Two complete recorded button forms, including their right and bottom shadows, aligned to the measured native raster surface.",
+      "fixtures": [
+        "tests/fixtures/forms/native-button-poses",
+        "tests/fixtures/forms/native-button-rows"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "button-rows",
+        "path": "test/form-button-rows-host.cjs",
+        "caseIds": [
+          "ProbeButtons",
+          "ProbeRows",
+          "restored-explicit-width",
+          "floating-native",
+          "floating-restored",
+          "reattached-native"
+        ],
+        "selection": "whole-suite-with-existing-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-t158-button-raster-position-linux.json",
+          "sha256": "0b444a2a8a40dc909cf3484aa02c4909fad4d4df0f9d7508b2df6c4729af9c5e",
+          "clientCommit": "dd6cd36fd70cd4612aa8dc385cb75a3531634f58",
+          "assertions": [
+            {
+              "pointer": "/acceptance/wholeFormCrops",
+              "equals": 12
+            },
+            {
+              "pointer": "/acceptance/wholeFormPixels",
+              "equals": 587308
+            },
+            {
+              "pointer": "/acceptance/detachedWholeFormCrops",
+              "equals": 4
+            },
+            {
+              "pointer": "/acceptance/retainedToolbarCrops",
+              "equals": 12
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 46
+            },
+            {
+              "pointer": "/pixelTolerance",
+              "equals": 0
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ]
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-t158-button-raster-position-linux.json",
+      "remaining": "Whole dirty width variant and additional fonts, states, form types, DPI and Windows.",
+      "nextAction": "Extend exact full-frame comparisons to additional source layouts and actual DPI profiles."
     },
     {
       "id": "tables.recorded-grids",
@@ -8063,6 +8180,16 @@
         "shell.input-properties"
       ],
       "currentRemainder": "Extended value list is now measured at 105 rows. Other contexts, availability combinations and Windows remain open."
+    },
+    {
+      "id": "button-row-lower-borders",
+      "historicalReport": "docs/measurements/t157-native-button-rows-linux.json",
+      "historicalGap": "Whole frames retained 169 and 445 lower-border pixel differences despite matched geometry and captions.",
+      "currentEntries": [
+        "buttons.native-origin",
+        "buttons.mixed-row-full-forms"
+      ],
+      "currentRemainder": "Both recorded whole forms match after aligning the native paint surface. The dirty Width=8 full frame and additional layouts and profiles remain open."
     }
   ],
   "nextGroups": [
