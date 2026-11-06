@@ -520,14 +520,10 @@ fn grouping(element: &EffectiveElement) -> FormGrouping {
         Some("Horizontal" | "AlwaysHorizontal") => FormGrouping::Horizontal,
         Some("HorizontalIfPossible") => FormGrouping::HorizontalIfPossible,
         Some("Vertical") => FormGrouping::Vertical,
+        _ if element.kind == Some(ElementKind::UsualGroup) => FormGrouping::HorizontalIfPossible,
         _ if matches!(
             element.kind,
-            Some(
-                ElementKind::UsualGroup
-                    | ElementKind::ButtonGroup
-                    | ElementKind::CommandBar
-                    | ElementKind::Popup
-            )
+            Some(ElementKind::ButtonGroup | ElementKind::CommandBar | ElementKind::Popup)
         ) =>
         {
             FormGrouping::Horizontal

@@ -4,7 +4,7 @@ use crate::project::{
     metadata_parser::{self, PropertiesMode},
 };
 #[test]
-fn native_basic_fixture_uses_horizontal_group_and_vertical_form_defaults() {
+fn native_basic_fixture_uses_conditional_group_and_vertical_form_defaults() {
     let document = parse(
         "basic",
         include_str!("../../../../../../tests/fixtures/forms/native-basic.xml").into(),
@@ -12,7 +12,10 @@ fn native_basic_fixture_uses_horizontal_group_and_vertical_form_defaults() {
     .unwrap();
     let view = present(&compose(&document, &[]), &[document], &[]);
     assert_eq!(view.elements[0].grouping, FormGrouping::Vertical);
-    assert_eq!(view.elements[1].grouping, FormGrouping::Horizontal);
+    assert_eq!(
+        view.elements[1].grouping,
+        FormGrouping::HorizontalIfPossible
+    );
     assert_eq!(
         view.elements[2].foreground,
         ResolvedColor::Role("TextColor".into())
