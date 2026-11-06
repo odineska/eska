@@ -4061,7 +4061,7 @@
       "profile": "linux-taxi-96",
       "level": "behavior",
       "status": "accepted_scope",
-      "scope": "Native property order, labels and defaults for thirteen recorded InputField contexts, including reference, composite and value list bindings. Dirty selection and real event locations.",
+      "scope": "Native property order, labels and defaults for fourteen recorded InputField contexts, including both value list editing modes. Dirty selection, availability and real XML locations.",
       "fixtures": [
         "tests/fixtures/forms/native-property-palette/input-field.json",
         "tests/fixtures/forms/native-bound-fields/InputField.xml",
@@ -4080,7 +4080,9 @@
           "9",
           "10",
           "11",
-          "12"
+          "12",
+          "13",
+          "14"
         ],
         "selection": "whole-suite-with-existing-transitions"
       },
@@ -4150,11 +4152,42 @@
             }
           ],
           "clientCommit": "93f320e86a24430b213a93c408ae6fad66670d00"
+        },
+        {
+          "report": "docs/measurements/t161-input-extended-value-list-linux.json",
+          "sha256": "fe8c218f9c731e94a24cfd88b8eb37335d78b08703012f388f55cf84f5f99592",
+          "assertions": [
+            {
+              "pointer": "/native/rows/extendedValueList",
+              "equals": 105
+            },
+            {
+              "pointer": "/native/unavailableRows/0",
+              "equals": "ChoiceList"
+            },
+            {
+              "pointer": "/acceptance/dirtyUnavailableChoiceListSourceVerified",
+              "equals": true
+            },
+            {
+              "pointer": "/acceptance/pairsPassed",
+              "equals": 16
+            },
+            {
+              "pointer": "/acceptance/compatibilityPairsPassed",
+              "equals": 4
+            },
+            {
+              "pointer": "/fullProfileAccepted",
+              "equals": false
+            }
+          ],
+          "clientCommit": "91566f66899c55f5f6974868a2aa50042eab50b6"
         }
       ],
-      "lastConfirmation": "docs/measurements/t161-input-binding-contexts-linux.json",
-      "remaining": "Extended multiple-value editing, other binding domains, availability and resolved style provenance. Windows native comparison.",
-      "nextAction": "Capture the extended value list state and remaining native contexts."
+      "lastConfirmation": "docs/measurements/t161-input-extended-value-list-linux.json",
+      "remaining": "Other binding domains, property availability combinations and resolved style provenance. Windows native comparison.",
+      "nextAction": "Measure remaining binding and availability contexts against the native palettes."
     },
     {
       "id": "shell.inspectors",
@@ -7328,6 +7361,14 @@
         "tables.recorded-context-grids"
       ],
       "currentRemainder": "The two recorded grid controls and DynamicList pagination now match in ru/en; other sources, properties, surrounding controls and complete forms remain open."
+    },
+    {
+      "id": "input-property-palette-extended-value-list",
+      "historicalReport": "docs/measurements/t161-input-binding-contexts-linux.json",
+      "currentEntries": [
+        "shell.input-properties"
+      ],
+      "currentRemainder": "Extended value list is now measured at 105 rows. Other contexts, availability combinations and Windows remain open."
     }
   ],
   "nextGroups": [
