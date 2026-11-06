@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestone": "T157",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "zoom": 100,
+  "compatibility": {
+    "loan": "Version8_3_21",
+    "probes": "Version8_3_27"
+  },
+  "artifactBase": "../eska-playground",
+  "coordinateSpace": "Frame-relative CSS pixels at 100% zoom.",
+  "comparisonAllocation": "The renderer is assigned the measured native width plus one outline pixel. Height is held at 250 px for the control probes.",
+  "explorerCommit": "422164e0bb4b9b0a519af954ba462e2f3fe2d1c3",
+  "eskaBackendCommit": "e6fb50d9c46bac3be5e266c253eea7bfa779b7df",
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "bslExecuted": false,
+  "probes": {
+    "directory": "form-native-auto-title-sweep-dbthKAAi",
+    "caseProperties": "cases.json",
+    "referenceMetrics": "native-metrics.json",
+    "referenceSha256": "c1e1b170f7bb2e075f4be38355d667c1201648c59551e193b569d413b9159164",
+    "widthStates": 40,
+    "beforeTitleLocationMatches": 25,
+    "installedTitleLocationMatches": 40,
+    "receipts": {
+      "ru": {
+        "report": "form-installed-auto-title-b1JrpOey/sweep-ru/geometry.json",
+        "receiptSha256": "0318b94d5ed7108bf70e35657556da07890b245a45d3ca34fb57163e334b93b4"
+      },
+      "en": {
+        "report": "form-installed-auto-title-b1JrpOey/sweep-en/geometry.json",
+        "receiptSha256": "158b3676659fac55ad60e6791f3b2b13058cd7facc19de164f03786e27fae06a"
+      }
+    },
+    "observations": [
+      {"form": "ProbeWidthTitle41901", "size": "medium", "nativeFrame": [902, 139], "installedFrame": [903, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 3},
+      {"form": "ProbeWidthTitle41901", "size": "compact", "nativeFrame": [800, 160], "installedFrame": [801, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 7},
+      {"form": "ProbeWidthTitle41902", "size": "medium", "nativeFrame": [932, 139], "installedFrame": [933, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 3},
+      {"form": "ProbeWidthTitle41902", "size": "compact", "nativeFrame": [731, 184], "installedFrame": [732, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Top", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Top", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 6},
+      {"form": "ProbeWidthTitle41903", "size": "medium", "nativeFrame": [962, 139], "installedFrame": [963, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 3},
+      {"form": "ProbeWidthTitle41903", "size": "compact", "nativeFrame": [761, 184], "installedFrame": [762, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Top", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Top", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 6},
+      {"form": "ProbeWidthTitle41904", "size": "medium", "nativeFrame": [992, 139], "installedFrame": [993, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 3},
+      {"form": "ProbeWidthTitle41904", "size": "compact", "nativeFrame": [791, 184], "installedFrame": [792, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Top", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Top", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 6},
+      {"form": "ProbeWidthTitle41905", "size": "medium", "nativeFrame": [952, 153], "installedFrame": [953, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 39},
+      {"form": "ProbeWidthTitle41905", "size": "compact", "nativeFrame": [769, 184], "installedFrame": [770, 250], "nativeTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 6},
+      {"form": "ProbeWidthTitle41906", "size": "medium", "nativeFrame": [982, 153], "installedFrame": [983, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 39},
+      {"form": "ProbeWidthTitle41906", "size": "compact", "nativeFrame": [799, 184], "installedFrame": [800, 250], "nativeTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 6},
+      {"form": "ProbeWidthTitle41907", "size": "medium", "nativeFrame": [980, 160], "installedFrame": [981, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 7},
+      {"form": "ProbeWidthTitle41907", "size": "compact", "nativeFrame": [829, 184], "installedFrame": [830, 250], "nativeTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 6},
+      {"form": "ProbeWidthTitle41908", "size": "medium", "nativeFrame": [982, 153], "installedFrame": [983, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 39},
+      {"form": "ProbeWidthTitle41908", "size": "compact", "nativeFrame": [799, 184], "installedFrame": [800, 250], "nativeTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 6},
+      {"form": "ProbeWidthTitle41909", "size": "medium", "nativeFrame": [982, 153], "installedFrame": [983, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 39},
+      {"form": "ProbeWidthTitle41909", "size": "compact", "nativeFrame": [943, 160], "installedFrame": [944, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 7},
+      {"form": "ProbeWidthTitle41910", "size": "medium", "nativeFrame": [976, 177], "installedFrame": [977, 250], "nativeTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "installedTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 1},
+      {"form": "ProbeWidthTitle41910", "size": "compact", "nativeFrame": [801, 184], "installedFrame": [802, 250], "nativeTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "installedTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 6},
+      {"form": "ProbeWidthTitle41911", "size": "medium", "nativeFrame": [976, 139], "installedFrame": [977, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 2},
+      {"form": "ProbeWidthTitle41911", "size": "compact", "nativeFrame": [799, 184], "installedFrame": [800, 250], "nativeTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Top", "Currency": "Top", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 6},
+      {"form": "ProbeWidthTitle41912", "size": "medium", "nativeFrame": [982, 153], "installedFrame": [983, 250], "nativeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "maxControlCoordinateErrorPx": 39},
+      {"form": "ProbeWidthTitle41912", "size": "compact", "nativeFrame": [871, 191], "installedFrame": [872, 250], "nativeTitleLocations": { "Amount": "Top", "Currency": "Left", "Withheld": "Top" }, "beforeTitleLocations": { "Amount": "Left", "Currency": "Left", "Withheld": "Left" }, "installedTitleLocations": { "Amount": "Top", "Currency": "Left", "Withheld": "Top" }, "maxControlCoordinateErrorPx": 13},
+      {"form": "ProbeWidthTitle41913", "size": "medium", "nativeFrame": [886, 107], "installedFrame": [887, 250], "nativeTitleLocations": { "Date": "Left", "Currency": "Left" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Left", "Currency": "Left" }, "maxControlCoordinateErrorPx": 2},
+      {"form": "ProbeWidthTitle41913", "size": "compact", "nativeFrame": [801, 121], "installedFrame": [802, 250], "nativeTitleLocations": { "Date": "Left", "Currency": "Left" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Left", "Currency": "Left" }, "maxControlCoordinateErrorPx": 53},
+      {"form": "ProbeWidthTitle41914", "size": "medium", "nativeFrame": [946, 107], "installedFrame": [947, 250], "nativeTitleLocations": { "Date": "Left", "Currency": "Left" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Left", "Currency": "Left" }, "maxControlCoordinateErrorPx": 2},
+      {"form": "ProbeWidthTitle41914", "size": "compact", "nativeFrame": [679, 126], "installedFrame": [680, 250], "nativeTitleLocations": { "Date": "Top", "Currency": "Top" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Top", "Currency": "Top" }, "maxControlCoordinateErrorPx": 1},
+      {"form": "ProbeWidthTitle41915", "size": "medium", "nativeFrame": [985, 114], "installedFrame": [986, 250], "nativeTitleLocations": { "Date": "Left", "Currency": "Left" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Left", "Currency": "Left" }, "maxControlCoordinateErrorPx": 23},
+      {"form": "ProbeWidthTitle41915", "size": "compact", "nativeFrame": [739, 126], "installedFrame": [740, 250], "nativeTitleLocations": { "Date": "Top", "Currency": "Top" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Top", "Currency": "Top" }, "maxControlCoordinateErrorPx": 1},
+      {"form": "ProbeWidthTitle41916", "size": "medium", "nativeFrame": [993, 121], "installedFrame": [994, 250], "nativeTitleLocations": { "Date": "Left", "Currency": "Left" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Left", "Currency": "Left" }, "maxControlCoordinateErrorPx": 65},
+      {"form": "ProbeWidthTitle41916", "size": "compact", "nativeFrame": [799, 126], "installedFrame": [800, 250], "nativeTitleLocations": { "Date": "Top", "Currency": "Top" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Top", "Currency": "Top" }, "maxControlCoordinateErrorPx": 1},
+      {"form": "ProbeWidthTitle41917", "size": "medium", "nativeFrame": [988, 121], "installedFrame": [989, 250], "nativeTitleLocations": { "Date": "Left", "Currency": "Left" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Left", "Currency": "Left" }, "maxControlCoordinateErrorPx": 7},
+      {"form": "ProbeWidthTitle41917", "size": "compact", "nativeFrame": [859, 133], "installedFrame": [860, 250], "nativeTitleLocations": { "Date": "Top", "Currency": "Top" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Top", "Currency": "Top" }, "maxControlCoordinateErrorPx": 6},
+      {"form": "ProbeWidthTitle41918", "size": "medium", "nativeFrame": [985, 114], "installedFrame": [986, 250], "nativeTitleLocations": { "Date": "Left", "Currency": "Left" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Left", "Currency": "Left" }, "maxControlCoordinateErrorPx": 23},
+      {"form": "ProbeWidthTitle41918", "size": "compact", "nativeFrame": [868, 121], "installedFrame": [869, 250], "nativeTitleLocations": { "Date": "Left", "Currency": "Left" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Left", "Currency": "Left" }, "maxControlCoordinateErrorPx": 7},
+      {"form": "ProbeWidthTitle41919", "size": "medium", "nativeFrame": [974, 121], "installedFrame": [975, 250], "nativeTitleLocations": { "Date": "Left", "Currency": "Left" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Left", "Currency": "Left" }, "maxControlCoordinateErrorPx": 36},
+      {"form": "ProbeWidthTitle41919", "size": "compact", "nativeFrame": [719, 141], "installedFrame": [720, 250], "nativeTitleLocations": { "Date": "Top", "Currency": "Top" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Top", "Currency": "Top" }, "maxControlCoordinateErrorPx": 3},
+      {"form": "ProbeWidthTitle41920", "size": "medium", "nativeFrame": [993, 121], "installedFrame": [994, 250], "nativeTitleLocations": { "Date": "Left", "Currency": "Left" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Left", "Currency": "Left" }, "maxControlCoordinateErrorPx": 23},
+      {"form": "ProbeWidthTitle41920", "size": "compact", "nativeFrame": [779, 141], "installedFrame": [780, 250], "nativeTitleLocations": { "Date": "Top", "Currency": "Top" }, "beforeTitleLocations": { "Date": "Left", "Currency": "Left" }, "installedTitleLocations": { "Date": "Top", "Currency": "Top" }, "maxControlCoordinateErrorPx": 3}
+    ]
+  },
+  "loanDisbursement": {
+    "form": "Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "sourceXmlUnchanged": true,
+    "nativeCompact": {
+      "emulatedScreen": [1024, 768],
+      "capture": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-bottom-crop.png",
+      "sha256": "5493bc1e893b69e1836a0daf1d07c52ded1de9fd974ee3d1bd15897d03b255f7",
+      "frame": [696, 760],
+      "memoSize": [511, 51],
+      "footerRows": 2
+    },
+    "before": {
+      "receipt": {
+        "report": "form-installed-auto-title-69LbpbX1/loan-ru/geometry.json",
+        "receiptSha256": "0fb2f98982b598014d311e7e45c88d7f18c6e2e476c6753a4df5846e19260493"
+      },
+      "compact": {
+        "frame": [865, 748],
+        "columns": [530, 291],
+        "locations": {
+          "payout": "Left",
+          "withheld": "Left",
+          "currency": "Left",
+          "date": "Left",
+          "transaction": "Left"
+        },
+        "controls": {
+          "payout": [133, 218, 211, 23],
+          "withheld": [133, 250, 211, 23],
+          "currency": [410, 218, 133, 23],
+          "date": [133, 314, 121, 23],
+          "transaction": [342, 314, 201, 23]
+        }
+      }
+    },
+    "after": {
+      "receipt": {
+        "report": "form-installed-auto-title-b1JrpOey/loan-ru/geometry.json",
+        "receiptSha256": "fd064685dac16b29d80c2649cb026dbaeb73b135fccc6226b576250cdd16df75"
+      },
+      "nativeDetachedWindow": true,
+      "retainedDomAndSelection": true,
+      "restoredWideGeometry": true,
+      "requestedCompact": [696, 760],
+      "compact": {
+        "frame": [768, 748],
+        "columns": [433, 291],
+        "locations": {
+          "payout": "Left",
+          "withheld": "Top",
+          "currency": "Top",
+          "date": "Left",
+          "transaction": "Left"
+        },
+        "controls": {
+          "payout": [66, 238, 211, 23],
+          "withheld": [13, 289, 211, 23],
+          "currency": [288, 238, 133, 23],
+          "date": [66, 352, 121, 23],
+          "transaction": [275, 352, 171, 23]
+        }
+      },
+      "diagnostic": {
+        "edit": "Temporarily hide checkbox group 985 in the unsaved test buffer.",
+        "sourceRestored": true,
+        "geometry": {
+          "frame": [696, 760],
+          "columns": [361, 291],
+          "locations": {
+            "payout": "Top",
+            "withheld": "Top",
+            "currency": "Top",
+            "date": "Top",
+            "transaction": "Top"
+          },
+          "controls": {
+            "payout": [13, 238, 211, 23],
+            "withheld": [13, 289, 211, 23],
+            "currency": [235, 238, 133, 23],
+            "date": [13, 372, 121, 23],
+            "transaction": [145, 372, 203, 23]
+          }
+        }
+      }
+    }
+  },
+  "checks": {
+    "node": {
+      "passed": 649,
+      "failed": 0,
+      "skipped": 9
+    },
+    "installedBatch": {
+      "report": "form-batch-cHX23e/batch.json",
+      "inputWitness": "form-batch-cHX23e/inputs.json",
+      "vsixSha256": "350076b2a0b655fde4a7b600d82cdf435247fe78fd8d8ebb01fff19526586848",
+      "runs": 14,
+      "caseEntries": 568
+    }
+  },
+  "remaining": [
+    "The checked title modes match at the measured widths. Parent title scopes and absolute control coordinates still differ in some probes.",
+    "The compact loan still has a 433 px left minimum from the checkbox group. Checkbox wrapping and footer layout require further work.",
+    "Automatic placement for standalone fixed inputs, other types and layouts, and Windows measurements require separate coverage."
+  ]
+}

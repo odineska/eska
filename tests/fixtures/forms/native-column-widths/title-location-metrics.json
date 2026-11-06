@@ -1,0 +1,206 @@
+{
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "nativeLocale": "ru",
+  "sourceFiles": {
+    "AutoAmountTitles": "b74d9ededd2d7ac021148af5d624edb224bbf17a07552b0909e7476daa4a592d",
+    "AutoDateTitles": "f35bfd3ca5f9a0d87b236401c1fc50c7d4e918c8d86b3a1273b7a796e016642c"
+  },
+  "fixtures": {
+    "AutoAmountTitles": {
+      "cases": [
+        {
+          "name": "AmountsAbove",
+          "frame": [830, null],
+          "viewport": [830, 250],
+          "nativeFrame": [829, 184],
+          "nativeProbe": "ProbeWidthTitle41907",
+          "screenshotSha256": "b22c6130239279f61a30467d53385236fc0bfa21c0224d9144df70175eb196b3",
+          "locations": {
+            "Amount": "Top",
+            "Currency": "Top",
+            "Withheld": "Top"
+          },
+          "tolerancePx": 1,
+          "controlSizes": {
+            "Amount": [211, 23],
+            "Currency": [132, 23],
+            "Withheld": [211, 23]
+          },
+          "alignedY": [
+            "Amount",
+            "Currency"
+          ]
+        },
+        {
+          "name": "AmountsPartlyAbove",
+          "frame": [762, null],
+          "viewport": [762, 250],
+          "nativeFrame": [761, 184],
+          "nativeProbe": "ProbeWidthTitle41903",
+          "screenshotSha256": "f82300fd1c9d91004f3568cea33f28444a46c82c6852e43fbbd5b401034900f4",
+          "locations": {
+            "Amount": "Left",
+            "Currency": "Top",
+            "Withheld": "Top"
+          },
+          "tolerancePx": 1,
+          "controlSizes": {
+            "Amount": [211, 23],
+            "Currency": [132, 23],
+            "Withheld": [211, 23]
+          },
+          "alignedY": [
+            "Amount",
+            "Currency"
+          ],
+          "edit": {
+            "widths": {
+              "B": 30
+            }
+          }
+        },
+        {
+          "name": "AmountsExplicitLeft",
+          "frame": [944, null],
+          "viewport": [800, 250],
+          "nativeFrame": [943, 160],
+          "nativeProbe": "ProbeWidthTitle41909",
+          "screenshotSha256": "61a2a9ac76e471976a06110dbb9f208233ac9355383ea97089b2b2f0fab0df92",
+          "locations": {
+            "Amount": "Left",
+            "Currency": "Left",
+            "Withheld": "Left"
+          },
+          "tolerancePx": 1,
+          "controlSizes": {
+            "Amount": [211, 23],
+            "Currency": [132, 23],
+            "Withheld": [211, 23]
+          },
+          "alignedY": [
+            "Amount",
+            "Currency"
+          ],
+          "edit": {
+            "widths": {
+              "B": 39
+            },
+            "titleLocations": {
+              "Amount": "Left",
+              "Withheld": "Left",
+              "Currency": "Left"
+            }
+          }
+        },
+        {
+          "name": "AmountsMixedOverride",
+          "frame": [872, null],
+          "viewport": [872, 250],
+          "nativeFrame": [871, 191],
+          "nativeProbe": "ProbeWidthTitle41912",
+          "screenshotSha256": "ef027261b2713468b23b9186763dfb3839657b6820eb89acb2a9cb236047d3f1",
+          "locations": {
+            "Amount": "Top",
+            "Currency": "Left",
+            "Withheld": "Top"
+          },
+          "tolerancePx": 1,
+          "controlSizes": {
+            "Amount": [211, 23],
+            "Currency": [132, 23],
+            "Withheld": [211, 23]
+          },
+          "alignedY": [
+            "Amount",
+            "Currency"
+          ],
+          "edit": {
+            "widths": {
+              "B": 39
+            },
+            "titleLocations": {
+              "Currency": "Left"
+            }
+          }
+        },
+        {
+          "name": "AmountsExplicitAuto",
+          "frame": [800, null],
+          "viewport": [800, 250],
+          "nativeFrame": [799, 184],
+          "nativeProbe": "ProbeWidthTitle41908",
+          "screenshotSha256": "3864819359503081da38b2fba8a5a3f700c8916c20397de4c558b4235da6b0bf",
+          "locations": {
+            "Amount": "Top",
+            "Currency": "Top",
+            "Withheld": "Top"
+          },
+          "tolerancePx": 1,
+          "controlSizes": {
+            "Amount": [211, 23],
+            "Currency": [132, 23],
+            "Withheld": [211, 23]
+          },
+          "alignedY": [
+            "Amount",
+            "Currency"
+          ],
+          "edit": {
+            "widths": {
+              "B": 39
+            },
+            "titleLocations": {
+              "Amount": "Auto",
+              "Withheld": "Auto",
+              "Currency": "Auto"
+            }
+          }
+        }
+      ]
+    },
+    "AutoDateTitles": {
+      "cases": [
+        {
+          "name": "CappedReferenceAbove",
+          "frame": [720, null],
+          "viewport": [720, 250],
+          "nativeFrame": [719, 141],
+          "nativeProbe": "ProbeWidthTitle41919",
+          "screenshotSha256": "254a2881aa2015de930a44796cdbfc386332bf73fa2c112c48f34e1ad2e34821",
+          "locations": {
+            "Date": "Top",
+            "Currency": "Top"
+          },
+          "tolerancePx": 1,
+          "controlSizes": {
+            "Date": [121, 23],
+            "Currency": [112, 23]
+          },
+          "alignedY": [
+            "Date",
+            "Currency"
+          ]
+        },
+        {
+          "name": "CappedReferenceAside",
+          "frame": [994, null],
+          "viewport": [994, 250],
+          "nativeFrame": [993, 121],
+          "nativeProbe": "ProbeWidthTitle41920",
+          "screenshotSha256": "719d0e2f5b444736cb10501c2b545f573647e1b409952f08be28bdc3dc346e20",
+          "locations": {
+            "Date": "Left",
+            "Currency": "Left"
+          },
+          "tolerancePx": 1,
+          "edit": {
+            "widths": {
+              "B": 48
+            }
+          }
+        }
+      ]
+    }
+  }
+}
