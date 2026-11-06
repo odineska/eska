@@ -1,6 +1,6 @@
 use super::*;
 use crate::backend::project::{
-    forms::{FormContextError, FormOverlay},
+    forms::{FormContextError, FormOverlay, FormPreview},
     metadata_workspace::FormPreviewError,
 };
 
@@ -1234,9 +1234,11 @@ fn write_command_metadata(root: &Path, kind: &str, name: &str, properties: &str)
     input
 }
 
-#[test]
-fn root_bar_resolves_application_commands_and_dirty_defined_types() {
-    use crate::backend::project::forms::{FormInput, FormPicture, FormPreview};
+const BAR_COMMAND_REFERENCE: &str = "<v8:Type>cfg:CatalogRef.Контрагенты</v8:Type>";
+const OTHER_COMMAND_REFERENCE: &str = "<v8:Type>cfg:DocumentRef.Other</v8:Type>";
+
+fn root_bar_command_fixture() -> (TestDir, [String; 3]) {
+    use std::fmt::Write as _;
 
     let directory = TestDir::new();
     fixture(&directory.0, "configuration");
@@ -1245,19 +1247,18 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
     let config_xml = fs::read_to_string(&config).unwrap();
     let mut declarations = String::new();
     let mut write = |kind: &str, name: &str, properties: &str| {
-        declarations.push_str(&format!("<{kind}>{name}</{kind}>"));
+        write!(&mut declarations, "<{kind}>{name}</{kind}>").unwrap();
         write_command_metadata(&root, kind, name, properties)
     };
-    let reference = "<v8:Type>cfg:CatalogRef.Контрагенты</v8:Type>";
     for (name, group, parameter) in [
-        ("Direct", "Important", reference),
+        ("Direct", "Important", BAR_COMMAND_REFERENCE),
         (
             "ThroughSet",
             "Important",
             "<v8:TypeSet>cfg:DefinedType.Outer</v8:TypeSet>",
         ),
-        ("Authored", "Important", reference),
-        ("Generate", "CreateBasedOn", reference),
+        ("Authored", "Important", BAR_COMMAND_REFERENCE),
+        ("Generate", "CreateBasedOn", BAR_COMMAND_REFERENCE),
         ("Family", "Important", "<v8:Type>cfg:CatalogRef</v8:Type>"),
         ("Any", "Important", "<v8:Type>cfg:AnyRef</v8:Type>"),
         (
@@ -1283,10 +1284,15 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
     let inner = write(
         "DefinedType",
         "Inner",
-        &format!("<Type>{reference}<v8:TypeSet>cfg:DefinedType.Outer</v8:TypeSet></Type>"),
+        &format!(
+            "<Type>{BAR_COMMAND_REFERENCE}<v8:TypeSet>cfg:DefinedType.Outer</v8:TypeSet></Type>"
+        ),
     );
-    let wrong = "<v8:Type>cfg:DocumentRef.Other</v8:Type>";
-    let unused = write("DefinedType", "Unused", &format!("<Type>{wrong}</Type>"));
+    let unused = write(
+        "DefinedType",
+        "Unused",
+        &format!("<Type>{OTHER_COMMAND_REFERENCE}</Type>"),
+    );
     write("CommonPicture", "UnusedIcon", "<Picture/>");
     write(
         "CommonCommand",
@@ -1302,7 +1308,7 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
         "CommonCommand",
         "OutsideBar",
         &format!(
-            "<Group>CommandGroup.Extra</Group><CommandParameterType>{reference}</CommandParameterType>"
+            "<Group>CommandGroup.Extra</Group><CommandParameterType>{BAR_COMMAND_REFERENCE}</CommandParameterType>"
         ),
     );
     fs::write(
@@ -1315,22 +1321,22 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
         <Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:CatalogObject.Контрагенты</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes>
     </Form>"#;
     fs::write(root.join(PATH), form_xml).unwrap();
-    let before = bytes(&directory.0);
-    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
-    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
-    let node = node(project);
-    let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
-        .unwrap();
-    let keys = |preview: &FormPreview| {
-        preview.presentation.elements[0]
-            .auto_command_items
-            .iter()
-            .map(|item| item.key.clone())
-            .collect::<Vec<_>>()
-    };
+    (directory, [inner, unused, group])
+}
+
+fn root_command_keys(preview: &FormPreview) -> Vec<String> {
+    preview.presentation.elements[0]
+        .auto_command_items
+        .iter()
+        .map(|item| item.key.clone())
+        .collect::<Vec<_>>()
+}
+
+fn assert_initial_root_commands(preview: &FormPreview) {
+    use crate::backend::project::forms::FormPicture;
+
     assert_eq!(
-        keys(&preview),
+        root_command_keys(preview),
         [
             "Form.StandardCommand.WriteAndClose",
             "Form.StandardCommand.Write",
@@ -1367,6 +1373,48 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
             "{name}"
         );
     }
+}
+
+fn assert_recovered_root_commands(preview: &FormPreview) {
+    let commands = &preview.presentation.elements[0].auto_command_items;
+    assert!(
+        commands
+            .iter()
+            .any(|item| item.key == "common-command:ThroughSet")
+    );
+    assert!(
+        commands
+            .iter()
+            .any(|item| item.key == "common-command:WrongSet")
+    );
+    let menu = commands
+        .iter()
+        .find(|item| item.key == "command-group:Extra")
+        .unwrap();
+    assert_eq!(menu.items[0].key, "common-command:OutsideBar");
+    for name in ["Inner.xml", "Unused.xml", "Extra.xml"] {
+        assert!(
+            preview
+                .dependencies
+                .iter()
+                .any(|input| input.path.ends_with(name) && input.version.as_deref() == Some("3"))
+        );
+    }
+}
+
+#[test]
+fn root_bar_resolves_application_commands_and_dirty_defined_types() {
+    use crate::backend::project::forms::FormInput;
+
+    let (directory, [inner, unused, group]) = root_bar_command_fixture();
+    let before = bytes(&directory.0);
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let preview = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    assert_initial_root_commands(&preview);
     let dependency = preview
         .dependencies
         .iter()
@@ -1382,7 +1430,7 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
             &[FormOverlay {
                 source: dependency.id.clone(),
                 version: "2".into(),
-                text: inner.replace(reference, ""),
+                text: inner.replace(BAR_COMMAND_REFERENCE, ""),
             }],
             &preview.dependencies,
             Vec::new(),
@@ -1390,7 +1438,7 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
         )
         .unwrap();
     assert_eq!(
-        keys(&changed),
+        root_command_keys(&changed),
         [
             "Form.StandardCommand.WriteAndClose",
             "Form.StandardCommand.Write",
@@ -1423,7 +1471,10 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
             &changed.dependencies,
             vec![
                 input("DefinedTypes/Inner.xml", inner),
-                input("DefinedTypes/Unused.xml", unused.replace(wrong, reference)),
+                input(
+                    "DefinedTypes/Unused.xml",
+                    unused.replace(OTHER_COMMAND_REFERENCE, BAR_COMMAND_REFERENCE),
+                ),
                 input(
                     "CommandGroups/Extra.xml",
                     group.replace("FormNavigationPanel", "FormCommandBar"),
@@ -1432,30 +1483,7 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
             None,
         )
         .unwrap();
-    let commands = &recovered.presentation.elements[0].auto_command_items;
-    assert!(
-        commands
-            .iter()
-            .any(|item| item.key == "common-command:ThroughSet")
-    );
-    assert!(
-        commands
-            .iter()
-            .any(|item| item.key == "common-command:WrongSet")
-    );
-    let menu = commands
-        .iter()
-        .find(|item| item.key == "command-group:Extra")
-        .unwrap();
-    assert_eq!(menu.items[0].key, "common-command:OutsideBar");
-    for name in ["Inner.xml", "Unused.xml", "Extra.xml"] {
-        assert!(
-            recovered
-                .dependencies
-                .iter()
-                .any(|input| input.path.ends_with(name) && input.version.as_deref() == Some("3"))
-        );
-    }
+    assert_recovered_root_commands(&recovered);
     assert_eq!(bytes(&directory.0), before);
 }
 
