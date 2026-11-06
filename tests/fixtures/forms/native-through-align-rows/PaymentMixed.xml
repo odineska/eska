@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" version="2.20">
+  <Title>
+    <v8:item>
+      <v8:lang>ru</v8:lang>
+      <v8:content>ProbeWidthPayment41804</v8:content>
+    </v8:item>
+    <v8:item>
+      <v8:lang>en</v8:lang>
+      <v8:content>ProbeWidthPayment41804</v8:content>
+    </v8:item>
+  </Title>
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <UsualGroup name="Row" id="1">
+      <Representation>None</Representation>
+      <Behavior>Usual</Behavior>
+      <Group>AlwaysHorizontal</Group>
+      <ShowTitle>false</ShowTitle>
+      <HorizontalStretch>true</HorizontalStretch>
+      <VerticalStretch>false</VerticalStretch>
+      <ThroughAlign>DontUse</ThroughAlign>
+      <United>true</United>
+      <ChildItems>
+        <UsualGroup name="LeftGroup" id="10">
+          <Representation>None</Representation>
+          <Behavior>Usual</Behavior>
+          <Group>Vertical</Group>
+          <ShowTitle>false</ShowTitle>
+          <HorizontalStretch>false</HorizontalStretch>
+          <VerticalStretch>false</VerticalStretch>
+          <ThroughAlign>Use</ThroughAlign>
+          <United>true</United>
+          <ChildItems>
+            <InputField name="A" id="12">
+              <DataPath>A</DataPath>
+              <TitleLocation>None</TitleLocation>
+              <Width>35</Width>
+              <BackColor>web:Lavender</BackColor>
+              <HorizontalStretch>false</HorizontalStretch>
+            </InputField>
+          </ChildItems>
+        </UsualGroup>
+        <UsualGroup name="RightGroup" id="20">
+          <Representation>None</Representation>
+          <Behavior>Usual</Behavior>
+          <Group>Vertical</Group>
+          <ShowTitle>false</ShowTitle>
+          <HorizontalStretch>true</HorizontalStretch>
+          <VerticalStretch>false</VerticalStretch>
+          <ThroughAlign>Use</ThroughAlign>
+          <United>true</United>
+          <ChildItems>
+            <UsualGroup name="Inner" id="30"><Representation>None</Representation><Behavior>Usual</Behavior><Group>Vertical</Group><ShowTitle>false</ShowTitle><ChildItems><UsualGroup name="DetailRow" id="22">
+              <Representation>None</Representation>
+              <Behavior>Usual</Behavior>
+              <Group>AlwaysHorizontal</Group>
+              <ShowTitle>false</ShowTitle>
+              <ThroughAlign>Use</ThroughAlign>
+              <ChildItems>
+                <InputField name="Num" id="23">
+                  <DataPath>Num</DataPath>
+                  <Title>
+                    <v8:item>
+                      <v8:lang>ru</v8:lang>
+                      <v8:content>No.</v8:content>
+                    </v8:item>
+                    <v8:item>
+                      <v8:lang>en</v8:lang>
+                      <v8:content>No.</v8:content>
+                    </v8:item>
+                  </Title>
+                  <MaxWidth>10</MaxWidth>
+                  <AutoMaxWidth>false</AutoMaxWidth>
+                  <BackColor>web:LavenderBlush</BackColor>
+                </InputField>
+                <InputField name="Date" id="24">
+                  <DataPath>Date</DataPath>
+                  <Title>
+                    <v8:item>
+                      <v8:lang>ru</v8:lang>
+                      <v8:content>on</v8:content>
+                    </v8:item>
+                    <v8:item>
+                      <v8:lang>en</v8:lang>
+                      <v8:content>on</v8:content>
+                    </v8:item>
+                  </Title>
+                  <ChoiceButton>false</ChoiceButton>
+                  <BackColor>web:LightYellow</BackColor>
+                </InputField>
+              </ChildItems>
+            </UsualGroup>
+            <InputField name="Bank" id="25">
+              <DataPath>Bank</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Bank transaction number</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Bank transaction number</v8:content>
+                </v8:item>
+              </Title>
+              <Width>41</Width>
+              <BackColor>web:LightCyan</BackColor>
+            </InputField>
+          </ChildItems></UsualGroup><InputField name="Agency" id="31">
+              <DataPath>Agency</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Payment agency registration</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Payment agency registration</v8:content>
+                </v8:item>
+              </Title>
+              <Width>18</Width>
+              <BackColor>web:Honeydew</BackColor>
+            <HorizontalStretch>false</HorizontalStretch></InputField></ChildItems>
+        </UsualGroup>
+      </ChildItems>
+    </UsualGroup>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="A" id="1">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>A</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>A</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Num" id="2">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Num</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Num</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Date" id="3">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Date</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Date</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:dateTime</v8:Type>
+        <v8:DateQualifiers>
+          <v8:DateFractions>Date</v8:DateFractions>
+        </v8:DateQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Bank" id="4">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Bank</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Bank</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+  <Attribute name="Agency" id="5">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Bank</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Bank</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute></Attributes>
+</Form>

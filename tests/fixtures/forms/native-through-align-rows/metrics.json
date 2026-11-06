@@ -9,7 +9,9 @@
   "sourceFiles": {
     "Leading": "8c06d99c0b3742140f421a4b152fa6555d1a7c0ab6452a224eb07d9b880f9ddb",
     "Deep": "a16126a4b2d01c5f2a116875ef41561200e3db7adec71f8f6da55b980c17a5a5",
-    "Multiple": "2c63e488e1edcd50cd55a1a9a91c9d8c16d57d3ac08ff18150d5291236eaa660"
+    "Multiple": "2c63e488e1edcd50cd55a1a9a91c9d8c16d57d3ac08ff18150d5291236eaa660",
+    "Payment": "0acf01708a602d469967f27725cb5eb9b89e7136477ed8c56ae06e801c6e2618",
+    "PaymentMixed": "e67486e4654df2e3a8979ae4d90d745191cd21cbf9e87c598d9b671e75469ae1"
   },
   "cases": [
     {
@@ -458,6 +460,174 @@
         ]
       },
       "fixture": "Multiple"
+    },
+    {
+      "fixture": "Payment",
+      "case": "Full",
+      "form": "ProbeWidthPayment41703",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1280, 1024],
+      "leftWidth": 35,
+      "throughAlign": "Use",
+      "screenshotSha256": "2662ea7898a6ebe34453d6ee476471315d3249ef6a9c1d7ae23f99834ed92f68",
+      "frame": [979, 107],
+      "viewport": [980, 107],
+      "positionTolerancePx": 2,
+      "aligned": true,
+      "bankLines": ["Bank transaction number:"],
+      "controls": {
+        "A": [13, 39, 361, 23],
+        "Num": [538, 39, 111, 23],
+        "Date": [682, 39, 101, 23],
+        "Bank": [538, 71, 421, 23]
+      }
+    },
+    {
+      "fixture": "Payment",
+      "case": "TwoLinesWithNumberShrink",
+      "form": "ProbeWidthPayment41706",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1024, 768],
+      "leftWidth": 42,
+      "throughAlign": "Use",
+      "screenshotSha256": "62d361bf1a5e4a662a027c48a5edd35ec35b79f869fe52220550817e8d4a16b3",
+      "frame": [801, 114],
+      "viewport": [802, 114],
+      "positionTolerancePx": 1,
+      "aligned": true,
+      "bankLines": ["Bank transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 431, 23],
+        "Num": [557, 39, 90, 23],
+        "Date": [680, 39, 101, 23],
+        "Bank": [557, 71, 224, 23]
+      }
+    },
+    {
+      "fixture": "Payment",
+      "case": "TwoLines",
+      "form": "ProbeWidthPayment41708",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1280, 1024],
+      "leftWidth": 46,
+      "throughAlign": "Use",
+      "screenshotSha256": "82acf086eeb43cc84f6218a31636ef5aa4e670f4731df784aa4ee70c882a6274",
+      "frame": [993, 114],
+      "viewport": [994, 114],
+      "positionTolerancePx": 1,
+      "aligned": true,
+      "bankLines": ["Bank transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 471, 23],
+        "Num": [597, 39, 111, 23],
+        "Date": [741, 39, 101, 23],
+        "Bank": [597, 71, 376, 23]
+      }
+    },
+    {
+      "fixture": "Payment",
+      "case": "ThreeLines",
+      "form": "ProbeWidthPayment41708",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1024, 768],
+      "leftWidth": 46,
+      "throughAlign": "Use",
+      "screenshotSha256": "116b6f0e77ef5d3a6bd5444669ad5dfd2e23659a86b86849aada54558867f96a",
+      "frame": [788, 129],
+      "viewport": [789, 130],
+      "positionTolerancePx": 1,
+      "aligned": true,
+      "bankLines": ["Bank", "transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 471, 23],
+        "Num": [563, 39, 71, 23],
+        "Date": [667, 39, 101, 23],
+        "Bank": [563, 71, 205, 23]
+      }
+    },
+    {
+      "fixture": "Payment",
+      "case": "IndependentNumber",
+      "form": "ProbeWidthPayment41709",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1024, 768],
+      "leftWidth": 49,
+      "throughAlign": "Use",
+      "screenshotSha256": "381c19e4ba8a81bbac0b7cb87f6c548e17d1dd0e34fe364e0dae9c9219e65732",
+      "frame": [778, 129],
+      "viewport": [779, 130],
+      "positionTolerancePx": 1,
+      "aligned": false,
+      "bankLines": ["Bank", "transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 501, 23],
+        "Num": [553, 39, 71, 23],
+        "Date": [657, 39, 101, 23],
+        "Bank": [593, 71, 165, 23]
+      }
+    },
+    {
+      "fixture": "Payment",
+      "case": "AuthoredDontUse",
+      "form": "ProbeWidthPayment41714",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1024, 768],
+      "leftWidth": 44,
+      "throughAlign": "DontUse",
+      "screenshotSha256": "54f50efba59c02f9a4e00ca4f4b2dd634b72d6b4bce40752825a2b2bcfe73ee2",
+      "frame": [801, 114],
+      "viewport": [802, 114],
+      "positionTolerancePx": 2,
+      "aligned": false,
+      "bankLines": ["Bank transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 451, 23],
+        "Num": [503, 39, 111, 23],
+        "Date": [647, 39, 101, 23],
+        "Bank": [577, 71, 204, 23]
+      }
+    },
+    {
+      "fixture": "PaymentMixed",
+      "case": "MixedFull",
+      "form": "ProbeWidthPayment41804",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1280, 1024],
+      "leftWidth": 35,
+      "throughAlign": "Use",
+      "screenshotSha256": "8d45d350042ca71de86bdcdd70b11862aa7a55020794aaead49b5a541d80689d",
+      "frame": [993, 139],
+      "viewport": [994, 139],
+      "positionTolerancePx": 2,
+      "aligned": true,
+      "bankLines": ["Bank transaction number:"],
+      "controls": {
+        "A": [13, 39, 361, 23],
+        "Num": [559, 39, 111, 23],
+        "Date": [703, 39, 101, 23],
+        "Bank": [559, 71, 414, 23]
+      }
+    },
+    {
+      "fixture": "PaymentMixed",
+      "case": "MixedTwoLinesKeepsNumber",
+      "form": "ProbeWidthPayment41804",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1024, 768],
+      "leftWidth": 35,
+      "throughAlign": "Use",
+      "screenshotSha256": "9f2b0719fc174ce2439efc8d717b5d16d0a02b53b4e9be555f1b1a9651e46d50",
+      "frame": [801, 153],
+      "viewport": [802, 153],
+      "positionTolerancePx": 2,
+      "aligned": true,
+      "bankLines": ["Bank transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 361, 23],
+        "Num": [487, 39, 111, 23],
+        "Date": [631, 39, 101, 23],
+        "Bank": [487, 71, 294, 23]
+      }
     }
   ]
 }

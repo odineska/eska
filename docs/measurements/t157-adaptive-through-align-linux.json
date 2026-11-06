@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestone": "T157",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "zoom": 100,
+  "compatibility": {
+    "loan": "Version8_3_21",
+    "probes": "Version8_3_27"
+  },
+  "artifactBase": "../eska-playground",
+  "coordinateSpace": "Frame-relative CSS pixels at 100% zoom.",
+  "comparisonAllocation": "Requested width includes the one-pixel difference between the captured outline and the renderer frame. Three-line samples allow one pixel of extra label height.",
+  "explorerReflowCommit": "265364809daf72b2dd079ddda26dfee82be6f7c1",
+  "explorerCommit": "27bc475d882c581d52b250d58131690a91969631",
+  "eskaBackendCommit": "cc37dc12e821a3d9c8f775beffbd2f8dd6ef5158",
+  "sourceXmlUnchanged": true,
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "sweep": {
+    "directory": "form-native-payment-sweep-vmL1WgOg",
+    "caseProperties": "cases.json",
+    "referenceMetrics": "native-metrics.json",
+    "referenceSha256": "bb56d2a7c777f973a9d28be4bffa84beaec348606b3822a1d3d9537da5ee9688",
+    "receipts": {
+      "ru": {
+        "report": "form-installed-payment-layout-rXrYdjSK/sweep-ru/geometry.json",
+        "receiptSha256": "81c27b83ff10e1584165e4d3e6c08de43d4bf2c72d9e0f3d2b90f71244bfc9e3"
+      },
+      "en": {
+        "report": "form-installed-payment-layout-rXrYdjSK/sweep-en/geometry.json",
+        "receiptSha256": "42e95239e55177eac2f435e543958f6d339947c819c1630693ca0bc9b9b410b4"
+      }
+    },
+    "widthStates": 30,
+    "within2PxAndSameCaptionShape": 30,
+    "captionObservations": [
+      {"form": "ProbeWidthPayment41701", "size": "medium", "nativeFrame": [909, 107], "nativeLabelTracks": [154, 154], "nativeBankLines": 1, "vsix": { "frame": [910, 107], "labelTracks": [156, 156], "bankLines": 1, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41701", "size": "compact", "nativeFrame": [801, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41702", "size": "medium", "nativeFrame": [949, 107], "nativeLabelTracks": [154, 154], "nativeBankLines": 1, "vsix": { "frame": [950, 107], "labelTracks": [156, 156], "bankLines": 1, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41702", "size": "compact", "nativeFrame": [801, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41703", "size": "medium", "nativeFrame": [979, 107], "nativeLabelTracks": [154, 154], "nativeBankLines": 1, "vsix": { "frame": [980, 107], "labelTracks": [156, 156], "bankLines": 1, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41703", "size": "compact", "nativeFrame": [801, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41704", "size": "medium", "nativeFrame": [958, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [959, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41704", "size": "compact", "nativeFrame": [801, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41705", "size": "medium", "nativeFrame": [978, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [979, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41705", "size": "compact", "nativeFrame": [801, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41706", "size": "medium", "nativeFrame": [993, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [994, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41706", "size": "compact", "nativeFrame": [801, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41707", "size": "medium", "nativeFrame": [993, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [994, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41707", "size": "compact", "nativeFrame": [768, 129], "nativeLabelTracks": [69, 69], "nativeBankLines": 3, "vsix": { "frame": [769, 130], "labelTracks": [69, 69], "bankLines": 3, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41708", "size": "medium", "nativeFrame": [993, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [994, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41708", "size": "compact", "nativeFrame": [788, 129], "nativeLabelTracks": [69, 69], "nativeBankLines": 3, "vsix": { "frame": [789, 130], "labelTracks": [69, 69], "bankLines": 3, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41709", "size": "medium", "nativeFrame": [993, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [994, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41709", "size": "compact", "nativeFrame": [778, 129], "nativeLabelTracks": [29, 69], "nativeBankLines": 3, "vsix": { "frame": [779, 130], "labelTracks": [29, 69], "bankLines": 3, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41710", "size": "medium", "nativeFrame": [969, 107], "nativeLabelTracks": [154, 154], "nativeBankLines": 1, "vsix": { "frame": [970, 107], "labelTracks": [156, 156], "bankLines": 1, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41710", "size": "compact", "nativeFrame": [801, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41711", "size": "medium", "nativeFrame": [988, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [989, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41711", "size": "compact", "nativeFrame": [801, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41712", "size": "medium", "nativeFrame": [993, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [994, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41712", "size": "compact", "nativeFrame": [788, 129], "nativeLabelTracks": [69, 69], "nativeBankLines": 3, "vsix": { "frame": [789, 130], "labelTracks": [69, 69], "bankLines": 3, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41713", "size": "medium", "nativeFrame": [993, 114], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [994, 114], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41713", "size": "compact", "nativeFrame": [778, 129], "nativeLabelTracks": [29, 69], "nativeBankLines": 3, "vsix": { "frame": [779, 130], "labelTracks": [29, 69], "bankLines": 3, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41714", "size": "medium", "nativeFrame": [993, 114], "nativeLabelTracks": [29, 103], "nativeBankLines": 2, "vsix": { "frame": [994, 114], "labelTracks": [28, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41714", "size": "compact", "nativeFrame": [801, 114], "nativeLabelTracks": [29, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 114], "labelTracks": [28, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41715", "size": "medium", "nativeFrame": [993, 114], "nativeLabelTracks": [29, 103], "nativeBankLines": 2, "vsix": { "frame": [994, 114], "labelTracks": [28, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41715", "size": "compact", "nativeFrame": [801, 114], "nativeLabelTracks": [29, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 114], "labelTracks": [28, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 2 }}
+    ]
+  },
+  "mixedTitles": {
+    "directory": "form-native-payment-mixed-pce4XrcT",
+    "caseProperties": "cases.json",
+    "referenceMetrics": "native-metrics.json",
+    "referenceSha256": "b73d2b4bbbaba2bd0fc0d5a87a42fa67f2c4e1164329871b451db11bdbbf755c",
+    "receipts": {
+      "ru": {
+        "report": "form-installed-payment-layout-fF4gJX4s/sweep-ru/geometry.json",
+        "receiptSha256": "c6c12cfab22747f1822b1123e832b4464547134f7babc273e3753896cc000981"
+      }
+    },
+    "widthStates": 10,
+    "within2PxAndSameCaptionShape": 9,
+    "captionObservations": [
+      {"form": "ProbeWidthPayment41801", "size": "medium", "nativeFrame": [993, 146], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [994, 146], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41801", "size": "compact", "nativeFrame": [788, 161], "nativeLabelTracks": [69, 69], "nativeBankLines": 3, "vsix": { "frame": [789, 162], "labelTracks": [69, 69], "bankLines": 3, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41802", "size": "medium", "nativeFrame": [993, 139], "nativeLabelTracks": [175, 175], "nativeBankLines": 1, "vsix": { "frame": [994, 139], "labelTracks": [177, 177], "bankLines": 1, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41802", "size": "compact", "nativeFrame": [792, 183], "nativeLabelTracks": [73, 73], "nativeBankLines": 3, "vsix": { "frame": [793, 185], "labelTracks": [73, 73], "bankLines": 3, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41803", "size": "medium", "nativeFrame": [993, 139], "nativeLabelTracks": [175, 175], "nativeBankLines": 1, "vsix": { "frame": [994, 139], "labelTracks": [177, 177], "bankLines": 1, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41803", "size": "compact", "nativeFrame": [792, 183], "nativeLabelTracks": [73, 73], "nativeBankLines": 3, "vsix": { "frame": [793, 185], "labelTracks": [73, 73], "bankLines": 3, "maxControlCoordinateErrorPx": 0 }},
+      {"form": "ProbeWidthPayment41804", "size": "medium", "nativeFrame": [993, 139], "nativeLabelTracks": [175, 175], "nativeBankLines": 1, "vsix": { "frame": [994, 139], "labelTracks": [177, 177], "bankLines": 1, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41804", "size": "compact", "nativeFrame": [801, 153], "nativeLabelTracks": [103, 103], "nativeBankLines": 2, "vsix": { "frame": [802, 153], "labelTracks": [103, 103], "bankLines": 2, "maxControlCoordinateErrorPx": 1 }},
+      {"form": "ProbeWidthPayment41805", "size": "medium", "nativeFrame": [993, 139], "nativeLabelTracks": [175, 175], "nativeBankLines": 1, "vsix": { "frame": [994, 139], "labelTracks": [177, 177], "bankLines": 1, "maxControlCoordinateErrorPx": 2 }},
+      {"form": "ProbeWidthPayment41805", "size": "compact", "nativeFrame": [778, 180], "nativeLabelTracks": [29, 69], "nativeBankLines": 3, "vsix": { "frame": [809, 185], "labelTracks": [29, 73], "bankLines": 3, "maxControlCoordinateErrorPx": 30 }}
+    ]
+  },
+  "loanDisbursement": {
+    "form": "Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "nativeCompact": {
+      "emulatedScreen": [1024, 768],
+      "capture": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-bottom-crop.png",
+      "sha256": "5493bc1e893b69e1836a0daf1d07c52ded1de9fd974ee3d1bd15897d03b255f7",
+      "frame": [696, 760],
+      "memoSize": [511, 51],
+      "footerRows": 2
+    },
+    "before": {
+      "receipt": {
+        "report": "form-installed-payment-layout-L6pjWKxQ/loan-ru/geometry.json",
+        "receiptSha256": "4a7e75ca706e9461d4fad7fcfd2b7544dd29beb64c2cc44264bcc7c6a6ff19aa"
+      },
+      "compact": {
+        "requested": [696, 760],
+        "frame": [958, 745],
+        "columns": [530, 384],
+        "sharedWithNumber": true,
+        "number": [725, 122, 80, 23],
+        "bank": [725, 154, 212, 23],
+        "bankCaptionLines": [
+          "Номер транзакции банка:"
+        ]
+      }
+    },
+    "after": {
+      "receipt": {
+        "report": "form-installed-payment-layout-rXrYdjSK/loan-ru/geometry.json",
+        "receiptSha256": "90ba7be3d5db4d2cf93eb366278ea38baeae863d8dfa6026a00b06b92be5a706"
+      },
+      "nativeDetachedWindow": true,
+      "retainedDomAndSelection": true,
+      "poses": [
+        {
+          "requested": [1156, 875],
+          "frame": [1156, 875],
+          "columns": [530, 582],
+          "sharedWithNumber": true,
+          "number": [725, 122, 110, 23],
+          "bank": [725, 154, 410, 23],
+          "bankCaptionLines": [
+            "Номер транзакции банка:"
+          ]
+        },
+        {
+          "requested": [994, 875],
+          "frame": [994, 875],
+          "columns": [530, 420],
+          "sharedWithNumber": true,
+          "number": [725, 122, 110, 23],
+          "bank": [725, 154, 248, 23],
+          "bankCaptionLines": [
+            "Номер транзакции банка:"
+          ]
+        },
+        {
+          "requested": [905, 875],
+          "frame": [905, 875],
+          "columns": [530, 331],
+          "sharedWithNumber": true,
+          "number": [637, 122, 110, 23],
+          "bank": [637, 154, 247, 23],
+          "bankCaptionLines": [
+            "Номер",
+            "транзакции",
+            "банка:"
+          ]
+        },
+        {
+          "requested": [862, 875],
+          "frame": [865, 875],
+          "columns": [530, 291],
+          "sharedWithNumber": false,
+          "number": [576, 122, 110, 23],
+          "bank": [637, 154, 207, 23],
+          "bankCaptionLines": [
+            "Номер",
+            "транзакции",
+            "банка:"
+          ]
+        },
+        {
+          "requested": [830, 875],
+          "frame": [865, 860],
+          "columns": [530, 291],
+          "sharedWithNumber": false,
+          "number": [576, 122, 110, 23],
+          "bank": [637, 154, 207, 23],
+          "bankCaptionLines": [
+            "Номер",
+            "транзакции",
+            "банка:"
+          ]
+        },
+        {
+          "requested": [696, 760],
+          "frame": [865, 748],
+          "columns": [530, 291],
+          "sharedWithNumber": false,
+          "number": [576, 122, 110, 23],
+          "bank": [637, 154, 207, 23],
+          "bankCaptionLines": [
+            "Номер",
+            "транзакции",
+            "банка:"
+          ]
+        },
+        {
+          "requested": [1156, 875],
+          "frame": [1156, 875],
+          "columns": [530, 582],
+          "sharedWithNumber": true,
+          "number": [725, 122, 110, 23],
+          "bank": [725, 154, 410, 23],
+          "bankCaptionLines": [
+            "Номер транзакции банка:"
+          ]
+        }
+      ]
+    }
+  },
+  "checks": {
+    "node": {
+      "passed": 649,
+      "failed": 0,
+      "skipped": 9
+    },
+    "installedBatch": {
+      "report": "form-batch-IhrzoZ/batch.json",
+      "inputWitness": "form-batch-IhrzoZ/inputs.json",
+      "vsixSha256": "fafbe826ed6df19c18a0587be55d364507e5566c29222883e47273f8cf5c446b",
+      "runs": 14,
+      "caseEntries": 550
+    }
+  },
+  "remaining": [
+    "An automatic caption can move above a fixed input at the narrowest mixed width. In 41805 it also leaves the shared track.",
+    "The native screen preset can choose a smaller frame than its available work area. Viewer comparisons allocate the measured area.",
+    "The compact loan still requires automatic title placement for amounts and dates, checkbox caption reflow and footer layout.",
+    "Windows requires its own measurements. Offset scopes and specialized layouts need separate coverage."
+  ]
+}
