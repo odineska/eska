@@ -460,9 +460,255 @@
       }
     }
   },
+  "commonParameterCommands": {
+    "scope": "Automatically filled common commands for the main object, authored button replacement, and effective pictures.",
+    "platformCommandReference": "https://v8.1c.ru/platforma/komanda/",
+    "native": {
+      "captureInputsInPlayground": "form-native-command-order-uk9P8rsL/src",
+      "captionOrder": [
+        "Alpha synonym",
+        "Any ref",
+        "Broad type",
+        "Zulu synonym"
+      ],
+      "authoredSuppressesGenerated": "Alpha synonym",
+      "disabledAutofill": [
+        "Authored Zulu"
+      ],
+      "narrowFrameWidth": 412,
+      "narrowVisibleCommands": [
+        "Провести и закрыть",
+        "Записать",
+        "Еще",
+        "?"
+      ],
+      "captures": [
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/Default.png",
+          "sha256": "a33ee916d84a0488e71345cded3c74164f816d397897d8b4dfe1a8c17baf0b4d"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/Authored.png",
+          "sha256": "b93dac49e4c87d6c2ddc3b507f8a31dd138e90b341ab1cdeaac81cf925a750f8"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/Disabled.png",
+          "sha256": "1c11e5530f26ae08b84b45d1592be8837b89311a1d1c7eac74cd0522171cc4d7"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/Narrow.png",
+          "sha256": "7bc133e7e066225b4c95a8665bd572f9ad53d6bea2451a34c616c94e45fdc203"
+        }
+      ],
+      "loanCapture": {
+        "pathInPlayground": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-native-full-crop.png",
+        "sha256": "dd4b56fa373eb5728d3bb4f1cf66267826c2afc3cf3b57d2305f096c5abc136c"
+      },
+      "loanCommandGroupRectangles": [
+        [
+          389,
+          29,
+          30,
+          26
+        ],
+        [
+          428,
+          29,
+          151,
+          26
+        ],
+        [
+          588,
+          29,
+          30,
+          26
+        ],
+        [
+          627,
+          29,
+          212,
+          26
+        ]
+      ],
+      "loanCommandGroupOrder": [
+        "Связанные документы",
+        "Скопировать УИД",
+        "Движения документа",
+        "Зарегистрировать на обмен"
+      ],
+      "exchangePlan": [
+        {
+          "matte": [
+            255,
+            255,
+            255
+          ],
+          "region": [
+            391,
+            555,
+            16,
+            16
+          ],
+          "rgbSha256": "d12622c367d2d62c224f1b813215ff17c20f65bb65e17889599250cc12cbb594",
+          "screenshotSha256": "3b76782b1686205be62473f98ecf2ddae16033dc3df1aaef3b9159c531dfca1d",
+          "capture": {
+            "pathInPlayground": "form-native-command-order-uk9P8rsL/White.png",
+            "sha256": "3b76782b1686205be62473f98ecf2ddae16033dc3df1aaef3b9159c531dfca1d"
+          }
+        },
+        {
+          "matte": [
+            0,
+            0,
+            0
+          ],
+          "region": [
+            418,
+            582,
+            16,
+            16
+          ],
+          "rgbSha256": "1e46c749c1ff45a837f2ccaa47d91fb5ed17e74ccd386aa6d1522c25f5c0a658",
+          "screenshotSha256": "6a0a0a1c14db5d27fe7f32b3138692b73e7fb99acbdc4d53cd0efad826c5f521",
+          "capture": {
+            "pathInPlayground": "form-native-command-order-uk9P8rsL/Black.png",
+            "sha256": "6a0a0a1c14db5d27fe7f32b3138692b73e7fb99acbdc4d53cd0efad826c5f521"
+          }
+        },
+        {
+          "matte": [
+            255,
+            0,
+            0
+          ],
+          "region": [
+            445,
+            609,
+            16,
+            16
+          ],
+          "rgbSha256": "9eba85ddb1d441de8ef9bb8e841451b0fde41dfad1fec0aa2677281a2d85b1ee",
+          "screenshotSha256": "54aa23ece69d53cf0a9a83a34204ae8617f4e3ff5aedb1428401c7b9c4c4a59c",
+          "capture": {
+            "pathInPlayground": "form-native-command-order-uk9P8rsL/Red.png",
+            "sha256": "54aa23ece69d53cf0a9a83a34204ae8617f4e3ff5aedb1428401c7b9c4c4a59c"
+          }
+        }
+      ]
+    },
+    "installed": {
+      "batch": "form-batch-BUilQQ",
+      "vsixSha256": "46b3e12b8ee68bd4951a7ba41bac79d02d755efb3e36bd8f33e8e96255c8d6ff",
+      "backendSha256": "243e23f7936eb32e4fe75968c562ecb968c017cebae30ac971d0a441cf0853fb",
+      "caseCount": 104,
+      "receipts": [
+        {
+          "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/loan-en/receipt.json",
+          "sha256": "2f9d260dd6d54cde72acd36ae7782d89d91add93cef69bdafb020d058d2db2b8"
+        },
+        {
+          "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/loan-ru/receipt.json",
+          "sha256": "073455cdbbc9a9e9702dae525c43abc23a007152107bdcfbbcd14da790f51528"
+        },
+        {
+          "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/order-en/receipt.json",
+          "sha256": "4199f330db5d25973d998e2305dc49c4ac238778b61f852ac8a72524ff8d6594"
+        },
+        {
+          "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/order-ru/receipt.json",
+          "sha256": "1ba5c8679bd2dc7e8dcb318520138c2463c71359b9f754fd142aea83f00e3583"
+        }
+      ],
+      "loanScreenshot": {
+        "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/loan-ru/loan-command-bar-ru.png",
+        "sha256": "c2dfde305838add0c7991406059075d4a8d2f23d6886b1c859a1932fd68c23c5"
+      },
+      "loanDetachedScreenshot": {
+        "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/loan-ru/loan-commands-detached-ru.png",
+        "sha256": "4283d029079448380bf258631307746e7a4283f2959442a5e4f2dfa2864230b0"
+      },
+      "verified": [
+        "common command order and icon representation",
+        "dirty defined type and autofill in a detached window",
+        "authored identity and source bytes preserved"
+      ]
+    },
+    "debugFormOpen": {
+      "scope": "Five sequential form/open RPC calls after opening the workspace. Same Linux host, debug builds.",
+      "stalingrad": {
+        "formPath": "Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+        "previous": {
+          "milliseconds": [
+            281.73,
+            278.86,
+            277.73,
+            279.98,
+            277.9
+          ],
+          "medianMilliseconds": 278.86,
+          "dependencies": 16,
+          "assets": 1,
+          "modelComplete": true,
+          "automaticCommands": 3
+        },
+        "current": {
+          "milliseconds": [
+            289.88,
+            291.19,
+            294.52,
+            291.39,
+            291.03
+          ],
+          "medianMilliseconds": 291.19,
+          "dependencies": 35,
+          "assets": 2,
+          "modelComplete": true,
+          "automaticCommands": 5
+        }
+      },
+      "buhmfoAutofill": {
+        "formPath": "Documents/dzp_ЗакрытиеЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+        "previous": {
+          "milliseconds": [
+            3081.49,
+            2712.5,
+            2714.08,
+            2714.22,
+            2715.02
+          ],
+          "medianMilliseconds": 2714.22,
+          "dependencies": 17,
+          "assets": 2,
+          "modelComplete": true,
+          "automaticCommands": 3
+        },
+        "current": {
+          "milliseconds": [
+            2838.37,
+            2829.65,
+            2830.18,
+            2831.05,
+            2834.78
+          ],
+          "medianMilliseconds": 2831.05,
+          "dependencies": 120,
+          "assets": 2,
+          "modelComplete": true,
+          "automaticCommands": 3
+        },
+        "addedDependenciesByCollection": {
+          "CommonCommands": 39,
+          "DefinedTypes": 30,
+          "CommonPictures": 30,
+          "CommandGroups": 4
+        }
+      }
+    }
+  },
   "remaining": [
     "Native popup width and anchor, toolbar geometry at narrow widths, and full More actions contents.",
-    "Application-wide compatible commands such as the native Send email button on the Counterparties form.",
+    "Compatible commands owned by other metadata objects, such as the native Send email button on the Counterparties form.",
+    "Limit retained dependencies to applicable commands and their resources before the T164 performance acceptance.",
     "Full native acceptance of extension-specific BasedOn overrides, other display densities, and Windows."
   ]
 }
