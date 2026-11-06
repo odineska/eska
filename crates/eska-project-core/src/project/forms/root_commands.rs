@@ -122,6 +122,24 @@ struct CommandBar {
     menus: Vec<AutoCommandItem>,
 }
 
+pub(super) const BAR_GROUP_CATEGORY: &str = "FormCommandBar";
+
+pub(super) enum BarGroup {
+    Important,
+    Generate,
+    Named(ObjectId),
+}
+
+impl BarGroup {
+    pub(super) fn parse(group: &str) -> Option<Self> {
+        match group {
+            "FormCommandBarImportant" => Some(Self::Important),
+            "FormCommandBarCreateBasedOn" => Some(Self::Generate),
+            _ => command_group_id(group).map(Self::Named),
+        }
+    }
+}
+
 impl CommandBar {
     fn items(
         &mut self,
@@ -129,14 +147,13 @@ impl CommandBar {
         resources: &[FormResource],
         diagnostics: &mut Vec<AppearanceDiagnostic>,
     ) -> Option<&mut Vec<AutoCommandItem>> {
-        match group {
-            "FormCommandBarImportant" => return Some(&mut self.buttons),
-            "FormCommandBarCreateBasedOn" => return Some(&mut self.generate),
-            _ => {}
-        }
-        let id = command_group_id(group)?;
+        let id = match BarGroup::parse(group)? {
+            BarGroup::Important => return Some(&mut self.buttons),
+            BarGroup::Generate => return Some(&mut self.generate),
+            BarGroup::Named(id) => id,
+        };
         let (resource, group) = effective_metadata(&id, resources)?;
-        if metadata_text(group, "Category", resources) != Some("FormCommandBar") {
+        if metadata_text(group, "Category", resources) != Some(BAR_GROUP_CATEGORY) {
             return None;
         }
         let key = id.to_string();
@@ -187,10 +204,7 @@ fn add_metadata_commands(
     resources: &[FormResource],
     diagnostics: &mut Vec<AppearanceDiagnostic>,
 ) {
-    let placements = interface
-        .iter()
-        .filter_map(|item| metadata_command_id(item.reference).map(|id| (id, item.group)))
-        .collect::<HashMap<_, _>>();
+    let placements = metadata_placements(interface);
     let objects = || {
         resources
             .iter()
@@ -278,13 +292,22 @@ fn add_explicit_commands(
     }
 }
 
-struct InterfaceItem<'a> {
+pub(super) struct InterfaceItem<'a> {
     reference: &'a str,
     group: &'a str,
     added: bool,
 }
 
-fn interface_items(form: &ComposedForm) -> Vec<InterfaceItem<'_>> {
+pub(super) fn metadata_placements<'a>(
+    interface: &[InterfaceItem<'a>],
+) -> HashMap<ObjectId, &'a str> {
+    interface
+        .iter()
+        .filter_map(|item| metadata_command_id(item.reference).map(|id| (id, item.group)))
+        .collect()
+}
+
+pub(super) fn interface_items(form: &ComposedForm) -> Vec<InterfaceItem<'_>> {
     let Some(interface) = form.root.property("CommandInterface") else {
         return Vec::new();
     };

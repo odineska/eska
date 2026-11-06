@@ -1224,25 +1224,29 @@ fn style_payload_discovers_its_own_references_and_missing_payload_keeps_defaults
     assert_eq!(bytes(&directory.0), before);
 }
 
+fn write_command_metadata(root: &Path, kind: &str, name: &str, properties: &str) -> String {
+    let input = format!(
+        r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><{kind} uuid="{name}"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"#
+    );
+    let path = root.join(format!("{kind}s/{name}.xml"));
+    fs::create_dir_all(path.parent().unwrap()).unwrap();
+    fs::write(path, &input).unwrap();
+    input
+}
+
 #[test]
 fn root_bar_resolves_application_commands_and_dirty_defined_types() {
-    use crate::backend::project::forms::{FormPicture, FormPreview};
+    use crate::backend::project::forms::{FormInput, FormPicture, FormPreview};
 
     let directory = TestDir::new();
     fixture(&directory.0, "configuration");
     let root = directory.0.join("src");
-    fs::create_dir_all(root.join("CommonCommands")).unwrap();
-    fs::create_dir_all(root.join("DefinedTypes")).unwrap();
     let config = root.join("Configuration.xml");
     let config_xml = fs::read_to_string(&config).unwrap();
     let mut declarations = String::new();
     let mut write = |kind: &str, name: &str, properties: &str| {
-        let input = format!(
-            r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><{kind} uuid="{name}"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"#
-        );
-        fs::write(root.join(format!("{kind}s/{name}.xml")), &input).unwrap();
         declarations.push_str(&format!("<{kind}>{name}</{kind}>"));
-        input
+        write_command_metadata(&root, kind, name, properties)
     };
     let reference = "<v8:Type>cfg:CatalogRef.Контрагенты</v8:Type>";
     for (name, group, parameter) in [
@@ -1280,6 +1284,26 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
         "DefinedType",
         "Inner",
         &format!("<Type>{reference}<v8:TypeSet>cfg:DefinedType.Outer</v8:TypeSet></Type>"),
+    );
+    let wrong = "<v8:Type>cfg:DocumentRef.Other</v8:Type>";
+    let unused = write("DefinedType", "Unused", &format!("<Type>{wrong}</Type>"));
+    write("CommonPicture", "UnusedIcon", "<Picture/>");
+    write(
+        "CommonCommand",
+        "WrongSet",
+        "<Group>FormCommandBarImportant</Group><CommandParameterType><v8:TypeSet>cfg:DefinedType.Unused</v8:TypeSet></CommandParameterType><Picture><xr:Ref>CommonPicture.UnusedIcon</xr:Ref></Picture>",
+    );
+    let group = write(
+        "CommandGroup",
+        "Extra",
+        "<Category>FormNavigationPanel</Category>",
+    );
+    write(
+        "CommonCommand",
+        "OutsideBar",
+        &format!(
+            "<Group>CommandGroup.Extra</Group><CommandParameterType>{reference}</CommandParameterType>"
+        ),
     );
     fs::write(
         config,
@@ -1326,14 +1350,31 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
     assert!(
         matches!(&items[3].picture, Some(FormPicture::Standard {name}) if name == "CloneObject")
     );
-    assert!(preview.dependencies.iter().all(
-        |input| !input.path.ends_with("WrongType.xml") && !input.path.ends_with("Unbound.xml")
-    ));
+    for name in [
+        "WrongType.xml",
+        "Unbound.xml",
+        "WrongSet.xml",
+        "Unused.xml",
+        "UnusedIcon.xml",
+        "OutsideBar.xml",
+        "Extra.xml",
+    ] {
+        assert!(
+            preview
+                .dependencies
+                .iter()
+                .all(|input| !input.path.ends_with(name)),
+            "{name}"
+        );
+    }
     let dependency = preview
         .dependencies
         .iter()
         .find(|input| input.path.ends_with("DefinedTypes/Inner.xml"))
         .unwrap();
+    assert!(matches!(project.form_preview(&node, None, &[FormOverlay {
+        source: dependency.id.clone(), version: "2".into(), text: "<incomplete".into(),
+    }], &preview.dependencies, Vec::new(), None), Err(FormPreviewError::Form(FormContextError::InvalidMetadata { source })) if source == dependency.id));
     let changed = project
         .form_preview(
             &node,
@@ -1362,6 +1403,157 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
     assert_eq!(
         preview.form.root.auxiliary[0].children[0].identity,
         changed.form.root.auxiliary[0].children[0].identity
+    );
+    assert!(changed.dependencies.iter().all(|input| {
+        !["ThroughSet.xml", "Inner.xml", "Outer.xml"]
+            .iter()
+            .any(|name| input.path.ends_with(name))
+    }));
+    let input = |path: &str, text| FormInput {
+        root: dependency.root.clone(),
+        path: path.into(),
+        text,
+        version: "3".into(),
+    };
+    let recovered = project
+        .form_preview(
+            &node,
+            None,
+            &[],
+            &changed.dependencies,
+            vec![
+                input("DefinedTypes/Inner.xml", inner),
+                input("DefinedTypes/Unused.xml", unused.replace(wrong, reference)),
+                input(
+                    "CommandGroups/Extra.xml",
+                    group.replace("FormNavigationPanel", "FormCommandBar"),
+                ),
+            ],
+            None,
+        )
+        .unwrap();
+    let commands = &recovered.presentation.elements[0].auto_command_items;
+    assert!(
+        commands
+            .iter()
+            .any(|item| item.key == "common-command:ThroughSet")
+    );
+    assert!(
+        commands
+            .iter()
+            .any(|item| item.key == "common-command:WrongSet")
+    );
+    let menu = commands
+        .iter()
+        .find(|item| item.key == "command-group:Extra")
+        .unwrap();
+    assert_eq!(menu.items[0].key, "common-command:OutsideBar");
+    for name in ["Inner.xml", "Unused.xml", "Extra.xml"] {
+        assert!(
+            recovered
+                .dependencies
+                .iter()
+                .any(|input| input.path.ends_with(name) && input.version.as_deref() == Some("3"))
+        );
+    }
+    assert_eq!(bytes(&directory.0), before);
+}
+
+#[test]
+fn root_bar_filters_by_effective_group_and_parameter_in_extension_layers() {
+    use crate::backend::project::forms::FormInput;
+
+    let (directory, _) = setup();
+    let body = r#"<Attributes><Attribute name="Object" id="1"><Type xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><v8:Type>cfg:CatalogObject.Контрагенты</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes>"#;
+    let base = directory.0.join("base/src");
+    let high = directory.0.join("one/src");
+    let low = directory.0.join("two/src");
+    for (root, purpose) in [(&base, ""), (&high, "AddOn"), (&low, "Patch")] {
+        let config = root.join("Configuration.xml");
+        let mut text = fs::read_to_string(&config)
+            .unwrap()
+            .replace("Customization", purpose);
+        text = text.replace("</ChildObjects>", "<CommonCommand>Shared</CommonCommand><DefinedType>Recipients</DefinedType><CommandGroup>Options</CommandGroup></ChildObjects>");
+        fs::write(config, text).unwrap();
+        fs::write(root.join(PATH), form(body, (root != &base).then_some(body))).unwrap();
+    }
+    let recipients = "<Type><v8:Type>cfg:CatalogRef.Контрагенты</v8:Type></Type>";
+    let category = "<Category>FormCommandBar</Category>";
+    let adopted = "<ObjectBelonging>Adopted</ObjectBelonging>";
+    write_command_metadata(
+        &base,
+        "CommonCommand",
+        "Shared",
+        "<Group>CommandGroup.Options</Group><CommandParameterType><v8:TypeSet>cfg:DefinedType.Recipients</v8:TypeSet></CommandParameterType>",
+    );
+    write_command_metadata(&base, "DefinedType", "Recipients", recipients);
+    write_command_metadata(&base, "CommandGroup", "Options", category);
+    write_command_metadata(
+        &low,
+        "DefinedType",
+        "Recipients",
+        &format!("{adopted}<Type><v8:Type>cfg:DocumentRef.Other</v8:Type></Type>"),
+    );
+    write_command_metadata(
+        &high,
+        "DefinedType",
+        "Recipients",
+        &format!("{adopted}{recipients}"),
+    );
+    let group = write_command_metadata(
+        &high,
+        "CommandGroup",
+        "Options",
+        &format!(
+            "{adopted}{}",
+            category.replace("FormCommandBar", "FormNavigationPanel")
+        ),
+    );
+
+    let before = bytes(&directory.0);
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], true).unwrap();
+    let project = workspace
+        .project_mut(&ProjectScope::Member(
+            crate::backend::project::ProjectName::parse("one".into()).unwrap(),
+        ))
+        .unwrap();
+    let node = node(project);
+    let initial = project
+        .form_preview(&node, Some("app"), &[], &[], Vec::new(), None)
+        .unwrap();
+    assert!(initial.dependencies.iter().all(|item| {
+        !["Shared.xml", "Recipients.xml", "Options.xml"]
+            .iter()
+            .any(|name| item.path.ends_with(name))
+    }));
+    let changed = project
+        .form_preview(
+            &node,
+            Some("app"),
+            &[],
+            &initial.dependencies,
+            vec![FormInput {
+                root: high,
+                path: "CommandGroups/Options.xml".into(),
+                version: "2".into(),
+                text: group.replace("FormNavigationPanel", "FormCommandBar"),
+            }],
+            None,
+        )
+        .unwrap();
+    let menu = changed.presentation.elements[0]
+        .auto_command_items
+        .iter()
+        .find(|item| item.key == "command-group:Options")
+        .unwrap();
+    assert_eq!(menu.items[0].key, "common-command:Shared");
+    assert_eq!(
+        changed
+            .dependencies
+            .iter()
+            .filter(|item| item.path.ends_with("Recipients.xml"))
+            .count(),
+        3
     );
     assert_eq!(bytes(&directory.0), before);
 }

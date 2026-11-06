@@ -7,14 +7,13 @@ use super::{
     commands::effective_metadata,
     presentation::metadata_property,
     references::{self, CONFIG},
-    resources::direct_property,
 };
 use crate::project::{
     metadata_model::{MetadataKind, MetadataValue, ObjectId, PropertyKey},
     metadata_parser::{self, ParsedObject},
 };
 
-const PARAMETER: &str = "CommandParameterType";
+pub(super) const PARAMETER: &str = "CommandParameterType";
 
 pub(super) fn reference_type(owner_type: &PropertyKey) -> String {
     owner_type.name.replacen("Object.", "Ref.", 1)
@@ -22,24 +21,6 @@ pub(super) fn reference_type(owner_type: &PropertyKey) -> String {
 
 pub(super) fn may_declare(input: &str) -> bool {
     input.contains("</CommandParameterType") || input.contains(":CommandParameterType")
-}
-
-/// A type set is resolved after loading its effective declaration and all of its layers.
-pub(super) fn common_candidate(
-    input: &str,
-    parameter: &str,
-) -> Result<bool, metadata_parser::ParseError> {
-    let document = metadata_parser::parse_xml(input, metadata_parser::MAX_DESCRIPTOR_NODES)?;
-    let Some(property) = direct_property(
-        document.root_element(),
-        MetadataKind::CommonCommand,
-        PARAMETER,
-    ) else {
-        return Ok(false);
-    };
-    let value = metadata_parser::values::property(property, &mut Vec::new()).value;
-    Ok(members(&value)
-        .any(|(slot, key)| accepts_type(slot, key, parameter) || defined_type(slot, key).is_some()))
 }
 
 pub(super) fn dependencies(object: &ParsedObject) -> impl Iterator<Item = ObjectId> {
@@ -57,8 +38,7 @@ pub(super) fn dependencies(object: &ParsedObject) -> impl Iterator<Item = Object
                 && value.property.key.namespace.as_deref() == Some(metadata_parser::MD_NAMESPACE)
         })
         .into_iter()
-        .flat_map(|value| members(&value.property.value))
-        .filter_map(|(slot, key)| defined_type(slot, key))
+        .flat_map(|value| type_sets(&value.property.value))
 }
 
 pub(super) fn accepts(command: &ParsedObject, parameter: &str, resources: &[FormResource]) -> bool {
@@ -67,7 +47,18 @@ pub(super) fn accepts(command: &ParsedObject, parameter: &str, resources: &[Form
     else {
         return command.metadata.kind() == MetadataKind::Command;
     };
-    let mut values = vec![&property.value];
+    matches_parameter(&property.value, parameter, |id| {
+        let (_, definition) = effective_metadata(id, resources)?;
+        metadata_property(definition, "Type", resources).map(|property| &property.value)
+    })
+}
+
+pub(super) fn matches_parameter<'a>(
+    value: &'a MetadataValue,
+    parameter: &str,
+    definition: impl Fn(&ObjectId) -> Option<&'a MetadataValue>,
+) -> bool {
+    let mut values = vec![value];
     let mut seen = HashSet::new();
     while let Some(value) = values.pop() {
         for (slot, key) in members(value) {
@@ -76,15 +67,18 @@ pub(super) fn accepts(command: &ParsedObject, parameter: &str, resources: &[Form
             }
             if let Some(id) = defined_type(slot, key)
                 && !seen.contains(&id)
-                && let Some((_, definition)) = effective_metadata(&id, resources)
-                && let Some(value) = metadata_property(definition, "Type", resources)
+                && let Some(value) = definition(&id)
             {
                 seen.insert(id);
-                values.push(&value.value);
+                values.push(value);
             }
         }
     }
     false
+}
+
+pub(super) fn type_sets(value: &MetadataValue) -> impl Iterator<Item = ObjectId> {
+    members(value).filter_map(|(slot, key)| defined_type(slot, key))
 }
 
 fn members(value: &MetadataValue) -> impl Iterator<Item = (&str, &PropertyKey)> {

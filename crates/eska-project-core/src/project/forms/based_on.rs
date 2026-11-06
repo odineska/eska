@@ -15,7 +15,7 @@ use crate::project::{
 
 const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
 
-pub(super) const fn supports_creation(kind: MetadataKind) -> bool {
+const fn supports_creation(kind: MetadataKind) -> bool {
     matches!(
         kind,
         MetadataKind::Catalog

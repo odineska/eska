@@ -1,5 +1,7 @@
 //! Discover only metadata needed by static captions, appearance and bound field types.
 
+mod command_candidates;
+
 use std::{
     borrow::Cow,
     collections::HashSet,
@@ -95,7 +97,10 @@ pub(super) fn load(
     if super::commands::autofill(&form.root)
         && let Some(owner_type) = super::root_commands::object_type(&form)
     {
-        loader.discover_automatic_commands(&readers, &owner_type, previous)?;
+        order.sort(&mut readers, loader.dependencies, |reader| {
+            &reader.layer_source
+        })?;
+        loader.discover_automatic_commands(&readers, &form, &owner_type, previous)?;
     }
     let mut cursor = 0;
     loop {
@@ -137,20 +142,40 @@ struct Loader<'a> {
     requested: HashSet<ObjectId>,
 }
 
+type KnownPaths<'a> = HashSet<(&'a Path, &'a Path)>;
+
 impl Loader<'_> {
     fn discover_automatic_commands(
         &mut self,
         readers: &[Reader<'_>],
+        form: &ComposedForm,
         owner_type: &PropertyKey,
         previous: &[FormDependency],
     ) -> Result<(), FormContextError> {
-        let basis = based_on::basis(owner_type);
         let parameter = command_types::reference_type(owner_type);
-        let mut targets = Vec::new();
         let known_paths = previous
             .iter()
             .map(|input| (input.root.as_path(), input.path.as_path()))
             .collect::<HashSet<_>>();
+        let mut targets =
+            command_candidates::select(self, readers, form, &parameter, &known_paths)?;
+        if let Some(basis) = based_on::basis(owner_type) {
+            self.discover_based_on(readers, &basis, &known_paths, &mut targets)?;
+        }
+        // Keep later overrides as well as the layer that first identified the candidate.
+        for target in targets {
+            self.request(target)?;
+        }
+        Ok(())
+    }
+
+    fn discover_based_on(
+        &self,
+        readers: &[Reader<'_>],
+        basis: &str,
+        known_paths: &KnownPaths<'_>,
+        targets: &mut Vec<ObjectId>,
+    ) -> Result<(), FormContextError> {
         for reader in readers {
             let Some(root) = self
                 .output
@@ -159,40 +184,15 @@ impl Loader<'_> {
             else {
                 continue;
             };
-            for candidate in configuration_objects(&root.descriptor) {
-                let common = candidate.kind == MetadataKind::CommonCommand;
-                let based_on = basis
-                    .as_deref()
-                    .filter(|_| based_on::supports_creation(candidate.kind));
-                if !common && based_on.is_none() {
-                    continue;
-                }
-                let Some(location) = reader
-                    .source
-                    .object_descriptor(&candidate.id)
-                    .map_err(FormContextError::Source)?
+            for candidate in based_on::candidates(&root.descriptor) {
+                let Some((input, known)) = self.probe_input(reader, &candidate.id, known_paths)?
                 else {
                     continue;
                 };
-                let known = known_paths
-                    .contains(&(reader.source.project().source(), location.path.as_path()));
-                let loaded =
-                    read_input_text(self.context, &reader.source, &location.path, self.overlays);
-                let input = match loaded {
-                    Ok(Some(input)) => input,
-                    Err(error) if known => return Err(error),
-                    _ => continue,
-                };
-                let matches = if common && (known || command_types::may_declare(&input.text)) {
-                    command_types::common_candidate(&input.text, &parameter)
-                } else if let Some(basis) =
-                    based_on.filter(|_| known || based_on::may_declare(&input.text))
-                {
-                    based_on::declares(&input.text, candidate.kind, basis)
-                } else {
+                if !known && !based_on::may_declare(&input.text) {
                     continue;
-                };
-                match matches {
+                }
+                match based_on::declares(&input.text, candidate.kind, basis) {
                     Ok(true) => targets.push(candidate.id.clone()),
                     Err(_) if known => {
                         return Err(FormContextError::InvalidMetadata { source: input.id });
@@ -201,11 +201,29 @@ impl Loader<'_> {
                 }
             }
         }
-        // Keep later overrides as well as the layer that first identified the candidate.
-        for target in targets {
-            self.request(target)?;
-        }
         Ok(())
+    }
+
+    fn probe_input(
+        &self,
+        reader: &Reader<'_>,
+        id: &ObjectId,
+        known_paths: &KnownPaths<'_>,
+    ) -> Result<Option<(InputText<'_>, bool)>, FormContextError> {
+        let Some(location) = reader
+            .source
+            .object_descriptor(id)
+            .map_err(FormContextError::Source)?
+        else {
+            return Ok(None);
+        };
+        let known =
+            known_paths.contains(&(reader.source.project().source(), location.path.as_path()));
+        match read_input_text(self.context, &reader.source, &location.path, self.overlays) {
+            Ok(input) => Ok(input.map(|input| (input, known))),
+            Err(error) if known => Err(error),
+            Err(_) => Ok(None),
+        }
     }
 
     fn request(&mut self, id: ObjectId) -> Result<(), FormContextError> {
@@ -348,12 +366,19 @@ pub(super) fn direct_property<'a, 'input>(
     kind: MetadataKind,
     property: &str,
 ) -> Option<Node<'a, 'input>> {
+    descriptor_properties(root, kind)?
+        .children()
+        .find(|node| node.has_tag_name((MD_NAMESPACE, property)))
+}
+
+fn descriptor_properties<'a, 'input>(
+    root: Node<'a, 'input>,
+    kind: MetadataKind,
+) -> Option<Node<'a, 'input>> {
     root.children()
         .find(|node| node.has_tag_name((MD_NAMESPACE, kind.designer_tag())))?
         .children()
-        .find(|node| node.has_tag_name((MD_NAMESPACE, "Properties")))?
-        .children()
-        .find(|node| node.has_tag_name((MD_NAMESPACE, property)))
+        .find(|node| node.has_tag_name((MD_NAMESPACE, "Properties")))
 }
 
 fn picture_extended(root: Node<'_, '_>) -> bool {
