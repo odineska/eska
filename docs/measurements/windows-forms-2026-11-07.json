@@ -1416,5 +1416,77 @@
     "installedRuntimeFiles": 1262,
     "defaultLocale": "ru",
     "otherLocale": "en"
-  }
+  },
+  "ci": {
+    "eska": {
+      "url": "https://github.com/odineska/eska/actions/runs/42383600705",
+      "checkedCommit": "70a60149b181e0e6b02333c0c68ad15d3e80ad1e",
+      "conclusion": "success",
+      "attempts": [
+        {
+          "attempt": 1,
+          "conclusion": "cancelled"
+        },
+        {
+          "attempt": 2,
+          "conclusion": "success"
+        }
+      ]
+    },
+    "explorer": {
+      "url": "https://github.com/odineska/eska-vscode-explorer/actions/runs/42383613363",
+      "checkedCommit": "0c76e03e003b9621543b5802ab3829e700ca5d04",
+      "conclusion": "failure",
+      "passed": 660,
+      "skipped": 8,
+      "failed": 3,
+      "fixtureSourceRelease": "v0.25.2",
+      "missing": [
+        "native-string-choice",
+        "native-command-bars/metrics.json",
+        "native-list-menu/metrics.json"
+      ],
+      "localRecheck": {
+        "passed": 21,
+        "failed": 0,
+        "referenceCommit": "70a60149b181e0e6b02333c0c68ad15d3e80ad1e",
+        "log": "ci-reference-reproduction.log"
+      },
+      "referenceLoaderAndPixelTestsUnchangedFromInput": true
+    },
+    "bothGreen": false,
+    "workflowChanged": false
+  },
+  "commits": [
+    {
+      "repository": "eska",
+      "hash": "647a2a75",
+      "message": "test(forms): Исправлены проверки native-путей на Windows"
+    },
+    {
+      "repository": "eska",
+      "hash": "70a60149",
+      "message": "docs(forms): Зафиксирована Windows-приёмка просмотра форм"
+    },
+    {
+      "repository": "eska-vscode-explorer",
+      "hash": "3aad018",
+      "message": "test(forms): Адаптирована приёмка форм для Windows"
+    },
+    {
+      "repository": "eska-vscode-explorer",
+      "hash": "4fc9048",
+      "message": "fix(forms): Сохранён контраст заголовка выбранной формы"
+    },
+    {
+      "repository": "eska-vscode-explorer",
+      "hash": "d2b1fb2",
+      "message": "test(forms): Завершена адаптация Windows-сценариев"
+    },
+    {
+      "repository": "eska-vscode-explorer",
+      "hash": "0c76e03",
+      "message": "docs(forms): Зафиксирована Windows-приёмка просмотра форм"
+    }
+  ]
 }
