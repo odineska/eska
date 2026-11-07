@@ -2,6 +2,7 @@
 
 [![Release-plz](https://github.com/odineska/eska/actions/workflows/release-plz.yml/badge.svg)](https://github.com/odineska/eska/actions/workflows/release-plz.yml)
 [![Binaries](https://github.com/odineska/eska/actions/workflows/release.yml/badge.svg)](https://github.com/odineska/eska/actions/workflows/release.yml)
+[![Open VSX](https://img.shields.io/open-vsx/v/1c-tooling/eska-explorer?label=Open%20VSX)](https://open-vsx.org/extension/1c-tooling/eska-explorer)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 **Инструменты для разработки на 1С в формате Designer XML.**
@@ -10,6 +11,14 @@ ESKA объединяет работу с выгрузкой Конфигура�
 `.cf`, `.cfe`, `.epf`, `.erf`. Расширение **ESKA: 1C Explorer** добавляет дерево
 метаданных, свойства, редактор и конструктор запросов, BSL-сервисы и форматирование
 в VS Code / VSCodium. Исходниками остаются обычные XML, BSL и ресурсы проекта.
+
+> **ESKA — экспериментальный проект в активной разработке.**
+> Возможности и интерфейсы могут меняться.
+
+Принять участие может любой желающий: протестировать ESKA на своих проектах,
+[сообщить об ошибке или предложить улучшение](https://github.com/odineska/eska/issues),
+помочь с документацией или прислать pull request.
+[Правила участия и работа с задачами](docs/task-tracker.md).
 
 [Подробное руководство на сайте](https://odineska.github.io/eska/docs/) ·
 [Руководство в репозитории](docs/user-guide.md) ·
@@ -33,8 +42,10 @@ ESKA объединяет работу с выгрузкой Конфигура�
 | `eska-build` | Сборка, распаковка, import и patch средствами установленной платформы 1С |
 | `eska-vcs` | Git-workflow, состояние, semantic diff, история, сохранение и полки |
 
-Для дерева Explorer достаточно `eska-project`. BSL Analyzer — отдельный внешний
-инструмент; для сборки нужна установленная платформа с `ibcmd`.
+Для дерева Explorer достаточно `eska-project`.
+[BSL Analyzer](https://github.com/itrous/bsl-analyzer) — отдельный внешний
+инструмент для анализа BSL и языковых функций; для сборки нужна установленная
+платформа с `ibcmd`.
 [ESKA: 1C Explorer](https://github.com/odineska/eska-vscode-explorer).
 
 ## Быстрый старт
