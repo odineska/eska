@@ -16,7 +16,12 @@
     "StretchDirect": "e726bde53ab590dc66c4862265f7731c219116ff82fe108134a27ac9e80a94c9",
     "StretchInput": "884254c1353595f333ebafc3dae8dac768351eadf20fe454494acf570aca81e5",
     "StretchCheck": "0efeb1a45b35359c30e6cf0c6326689b7c37d510d378a6d6b9c8165b075429c9",
-    "StretchTrailing": "8669eb45b29b267105be71e434bf6f3874621de9c12e304f87b1fb2b98730034"
+    "StretchTrailing": "8669eb45b29b267105be71e434bf6f3874621de9c12e304f87b1fb2b98730034",
+    "ValueRadio": "dc26620dd274577f1b61e2ab445d081bd476b52485a4f7dedc9cb568e7ca07cb",
+    "ValueInput": "4f142ff3e2d4857cdce617fee713687ce84ce25b0665478482205bc7a45db6d4",
+    "ValueLong": "b5d4e2957b47898958ac72d46d6bf90401844f8c0e957140f0a6dd7f16e861cb",
+    "ValueOuter": "0e1b818981dfd3f7ae28925619502a41f3706e45594dc384344f356c6521c71f",
+    "ValueSibling": "1a365c67ebb745ed8306b9eb7304da285438e802f2fb8fccb080eac6ddbb3861"
   },
   "cases": [
     {
@@ -2218,6 +2223,896 @@
           15,
           15
         ]
+      ]
+    }
+  ],
+  "valueCompatibility": "Version8_3_24",
+  "valueLocale": "ru",
+  "valueCases": [
+    {
+      "united": true,
+      "form": "ProbeWidthValue43501",
+      "case": "RadioTrue",
+      "fixture": "ValueRadio",
+      "sourceSha256": "bbc48f728ad4cbe794dbcbcf0b4ab1646f97e8a9494b9dfeac5c9b1bb43efc97",
+      "screenshotSha256": "6b3a5d219ebcfdbb2e8112fa2c3d4f73c866d68c4f78629c93e137ea8756c558",
+      "frame": [
+        452,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "form": "ProbeWidthValue43502",
+      "case": "RadioFalse",
+      "fixture": "ValueRadio",
+      "sourceSha256": "dc26620dd274577f1b61e2ab445d081bd476b52485a4f7dedc9cb568e7ca07cb",
+      "screenshotSha256": "98b5f7628f79a4295636b0580c433f171cae5e686129b55b455ffe64718489d8",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": true,
+      "input": 8,
+      "form": "ProbeWidthValue43503",
+      "case": "InputTrue",
+      "fixture": "ValueInput",
+      "sourceSha256": "f09ca659ca7f12083322e9f92cb3a37a2c11ad33b10d9be4f6749a8ba65d5b42",
+      "screenshotSha256": "eef227864be9e3976dbd49e2050db6ca40b36211958022a8463012401c48a0b2",
+      "frame": [
+        419,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          307,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ],
+        "Option": [
+          177,
+          71,
+          91,
+          23
+        ]
+      },
+      "marks": []
+    },
+    {
+      "united": false,
+      "input": 8,
+      "form": "ProbeWidthValue43504",
+      "case": "InputFalse",
+      "fixture": "ValueInput",
+      "sourceSha256": "4f142ff3e2d4857cdce617fee713687ce84ce25b0665478482205bc7a45db6d4",
+      "screenshotSha256": "69d0cf70f35a1799bed0d1c1292e6794ec7821632cc84cd7b24c1396e153cf69",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ],
+        "Option": [
+          177,
+          71,
+          91,
+          23
+        ]
+      },
+      "marks": []
+    },
+    {
+      "united": false,
+      "input": 30,
+      "form": "ProbeWidthValue43505",
+      "case": "WideInputFalse",
+      "fixture": "ValueInput",
+      "sourceSha256": "6253d09a3d1cf2302cb62748dca7483e1eb29ba5b370233d4dc27025835236b5",
+      "screenshotSha256": "fcf3b3f52cb4163422b8d0856a5efe12c687dd5b263bda653323949fcb4d6ddb",
+      "frame": [
+        639,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          527,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ],
+        "Option": [
+          177,
+          71,
+          311,
+          23
+        ]
+      },
+      "marks": []
+    },
+    {
+      "united": true,
+      "long": true,
+      "form": "ProbeWidthValue43506",
+      "case": "LongRadioTrue",
+      "fixture": "ValueLong",
+      "sourceSha256": "cef3cdb2ad75c54838a12a82250f9c4d92c6b278640c6da362e892fadea40bf8",
+      "screenshotSha256": "ad537d0b1bcb95fc459bc3572de0a3a8b002495c527e54073a69fa7188ba486f",
+      "frame": [
+        635,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          523,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            419,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "long": true,
+      "form": "ProbeWidthValue43507",
+      "case": "LongRadioFalse",
+      "fixture": "ValueLong",
+      "sourceSha256": "b5d4e2957b47898958ac72d46d6bf90401844f8c0e957140f0a6dd7f16e861cb",
+      "screenshotSha256": "8231c60bf7f6d3366fcc7f4c32c53bfd16604a7f8a8aee5cb474dec01b503576",
+      "frame": [
+        635,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          523,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            419,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "fixed": true,
+      "form": "ProbeWidthValue43508",
+      "case": "FixedFalse",
+      "fixture": "ValueRadio",
+      "sourceSha256": "136c24027aa4d5c2766d2a402bcb80e74fd180202a66da04610eb427a735fbba",
+      "screenshotSha256": "d3b1315b55219b3a385485f9a2d9a42c80ba9ba521fc7a91459520c0443dd6e4",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "through": "DontUse",
+      "form": "ProbeWidthValue43509",
+      "case": "ExcludedFalse",
+      "fixture": "ValueRadio",
+      "sourceSha256": "2a2b983b157d9d5c7ec32812d43b1a06fefe58982d8f96eb666a8048cda81c20",
+      "screenshotSha256": "c385a5a8b559187748616694eb806aba4813d12b86eba1054182970631382255",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": true,
+      "parent": true,
+      "form": "ProbeWidthValue43510",
+      "case": "ParentTrueChildTrue",
+      "fixture": "ValueRadio",
+      "sourceSha256": "cff1c95d72163a599599fc070c0a44d53633c491b7439a42bfd1c5fed8f20c40",
+      "screenshotSha256": "8d13db324463f8cf2f66fc8362a2864b42c9bd619087f114cb2f8141a5e63a08",
+      "frame": [
+        452,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "parent": true,
+      "form": "ProbeWidthValue43511",
+      "case": "ParentTrueChildFalse",
+      "fixture": "ValueRadio",
+      "sourceSha256": "4305bb71fecb260debb719cb6eb0d98faaeb32b5c10d1b939b84001e2ddabc55",
+      "screenshotSha256": "8b05d8025a91a851f78da43d94d974e9314cb5cfdc4c379d8e55ad55915519ff",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": true,
+      "parent": false,
+      "form": "ProbeWidthValue43512",
+      "case": "ParentFalseChildTrue",
+      "fixture": "ValueRadio",
+      "sourceSha256": "92803bc9ab4ed039787c2270176cb30e23c73f3fcff5d412cfcb71fa7bed027f",
+      "screenshotSha256": "5db66f9d2657c9357f86e5bc236d39615c7c7e0eb19273e58d47ed23f493263d",
+      "frame": [
+        452,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "parent": false,
+      "form": "ProbeWidthValue43513",
+      "case": "ParentFalseChildFalse",
+      "fixture": "ValueRadio",
+      "sourceSha256": "1b61fc34e536a1be37a0c4df147447104ecbe9b9e3602cfd82294b287aec56d8",
+      "screenshotSha256": "e07fd1c4835ab5890544a0ada1daf2fd430225304e40154f5e480e49bc711534",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "parent": true,
+      "outer": true,
+      "form": "ProbeWidthValue43514",
+      "case": "OuterWideParentTrue",
+      "fixture": "ValueOuter",
+      "sourceSha256": "e73446c6be3ec6e9f24b603d1c727982f2dae0f75b76de1609a348cbdd89ccea",
+      "screenshotSha256": "829a9830b1a75141eb0068c0c60ee1ce4dd367b461f3064e2363f65dc3b82926",
+      "frame": [
+        609,
+        171
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          71,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          103,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          135,
+          211,
+          23
+        ],
+        "OuterWide": [
+          177,
+          39,
+          411,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            107,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            107,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "parent": false,
+      "outer": true,
+      "form": "ProbeWidthValue43515",
+      "case": "OuterWideParentFalse",
+      "fixture": "ValueOuter",
+      "sourceSha256": "0e1b818981dfd3f7ae28925619502a41f3706e45594dc384344f356c6521c71f",
+      "screenshotSha256": "7ba52da7bf729a982131ee768d9acd7ad0c78bb9821896733a099c2a6f8c39d4",
+      "frame": [
+        739,
+        171
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          71,
+          211,
+          23
+        ],
+        "Tail": [
+          627,
+          103,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          135,
+          211,
+          23
+        ],
+        "OuterWide": [
+          177,
+          39,
+          411,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            107,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            107,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "sibling": true,
+      "form": "ProbeWidthValue43516",
+      "case": "SiblingTrue",
+      "fixture": "ValueSibling",
+      "sourceSha256": "d292814f84e139d51fb3b405547a262e07e350106ee7990754d0cf6b0964c883",
+      "screenshotSha256": "240b4c33f9d935e7953d8726d24ea7cd054be957685f68671876bb79b90031be",
+      "frame": [
+        739,
+        171
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          627,
+          103,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          135,
+          211,
+          23
+        ],
+        "SiblingWide": [
+          177,
+          71,
+          411,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            107,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            107,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "sibling": false,
+      "form": "ProbeWidthValue43517",
+      "case": "SiblingFalse",
+      "fixture": "ValueSibling",
+      "sourceSha256": "1a365c67ebb745ed8306b9eb7304da285438e802f2fb8fccb080eac6ddbb3861",
+      "screenshotSha256": "d6081b8833eff49f124e6273af6729c365f4293a14fed9ab2e7aea78306ec762",
+      "frame": [
+        739,
+        171
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          627,
+          103,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          135,
+          211,
+          23
+        ],
+        "SiblingWide": [
+          177,
+          71,
+          411,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            107,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            107,
+            15,
+            15
+          ]
+        }
       ]
     }
   ]
