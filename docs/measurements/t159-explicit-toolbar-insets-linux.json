@@ -1,0 +1,739 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-07T22:09:39.003667+00:00",
+  "milestone": "T159",
+  "relatedMilestones": [
+    "T157",
+    "T165"
+  ],
+  "scope": "Linux outer vertical insets of standalone visible table toolbars with SearchStringLocation=None; authored Popup and ButtonGroup with Autofill=false.",
+  "eskaCommit": "d9d51837e8d0892cafbf1ed79002617bf1a3246e",
+  "explorerCommit": "92cebad48e40c1239d0d902ee84d9967a2b748a7",
+  "platformBuild": "8.3.27.2342",
+  "nativeCompatibility": {
+    "TablePopup": [
+      "Version8_3_27"
+    ],
+    "TableButtonGroup": [
+      "Version8_3_27"
+    ]
+  },
+  "platform": "linux",
+  "dpi": 96,
+  "zoom": 1,
+  "locales": [
+    "en",
+    "ru"
+  ],
+  "architecture": "One existing outer table-field inset rule now applies to a visible inline toolbar regardless of Autofill. No fixture names, XML writes, duplicated renderers or per-form offsets are used.",
+  "publicProtocolChanged": false,
+  "fullProfileAccepted": false,
+  "fullFormRasterAccepted": false,
+  "windowsGeometryAccepted": false,
+  "nativeResizeAccepted": false,
+  "sourceWritesDuringViewing": false,
+  "bslExecuted": false,
+  "nativeReferences": {
+    "originalReport": "docs/measurements/t159-native-table-commands-linux.json",
+    "exactSourceRecheck": "docs/measurements/t157-command-bars-linux.json",
+    "fixtureDirectory": "tests/fixtures/forms/native-table-commands",
+    "gridBorderMeasurement": "Native #a0a0a0 border runs are 400 pixels wide and 227 pixels tall, at [13,74] relative to the logical form frame. Original ru/en captures and the exact-source 8.3.27 Popup recapture agree.",
+    "fullNativeCapturesNewlyTaken": 0
+  },
+  "baseline": {
+    "assertion": "TablePopup native frame height: 312 !== 314",
+    "executedOnOldInstalledVsix": true,
+    "receipt": "form-table-bar-before-i6y9u7f8/receipt.json",
+    "frame": [
+      434,
+      312
+    ],
+    "popupButton": [
+      13,
+      38,
+      77,
+      26
+    ],
+    "grid": [
+      13,
+      73,
+      400,
+      227
+    ]
+  },
+  "observations": [
+    {
+      "case": "TablePopup",
+      "locale": "en",
+      "frame": [
+        434,
+        314
+      ],
+      "grid": [
+        13,
+        74,
+        400,
+        227
+      ],
+      "buttons": [
+        [
+          13,
+          39,
+          77,
+          26
+        ]
+      ]
+    },
+    {
+      "case": "TableButtonGroup",
+      "locale": "en",
+      "frame": [
+        434,
+        314
+      ],
+      "grid": [
+        13,
+        74,
+        400,
+        227
+      ],
+      "buttons": [
+        [
+          13,
+          39,
+          115,
+          26
+        ],
+        [
+          137,
+          39,
+          133,
+          26
+        ]
+      ]
+    },
+    {
+      "case": "TablePopup",
+      "locale": "ru",
+      "frame": [
+        434,
+        314
+      ],
+      "grid": [
+        13,
+        74,
+        400,
+        227
+      ],
+      "buttons": [
+        [
+          13,
+          39,
+          77,
+          26
+        ]
+      ]
+    },
+    {
+      "case": "TableButtonGroup",
+      "locale": "ru",
+      "frame": [
+        434,
+        314
+      ],
+      "grid": [
+        13,
+        74,
+        400,
+        227
+      ],
+      "buttons": [
+        [
+          13,
+          39,
+          115,
+          26
+        ],
+        [
+          137,
+          39,
+          133,
+          26
+        ]
+      ]
+    }
+  ],
+  "installedVsix": {
+    "runtimeManifestSha256": "843600139d055e17d04590202647f24e09b3e0815bb57eae775462f0f8975f7a",
+    "backendSha256": "10b7e4b520dc9ac6f06fa3a56ebbe0b85c59a5e18658551c860e2b558ac3489d",
+    "batches": [
+      {
+        "path": "form-batch-PjdIXm",
+        "vsixSha256": "c2b7eab116407210550caf9627b1e74a844048a6189c0ba1f8ce415f853dabc4",
+        "passedAsWhole": false
+      },
+      {
+        "path": "form-batch-uHHg01",
+        "vsixSha256": "c87e766e7d2700b3583b867463820305a0c8d2ef8b9dc4460735a002bbeb3b7c",
+        "passedAsWhole": true
+      }
+    ],
+    "runtimeAssetsIdenticalBetweenBatches": true,
+    "sourceWitnessesMatchCommittedExplorer": true,
+    "acceptedRuns": 16,
+    "acceptedCaseIds": 555,
+    "runs": [
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "tables",
+        "locale": "en",
+        "caseIds": 17,
+        "receipt": "form-batch-PjdIXm/tables-en/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "tables",
+        "locale": "ru",
+        "caseIds": 17,
+        "receipt": "form-batch-PjdIXm/tables-ru/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "command-bars",
+        "locale": "en",
+        "caseIds": 64,
+        "receipt": "form-batch-PjdIXm/command-bars-en/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "command-bars",
+        "locale": "ru",
+        "caseIds": 64,
+        "receipt": "form-batch-PjdIXm/command-bars-ru/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "groups",
+        "locale": "en",
+        "caseIds": 22,
+        "receipt": "form-batch-PjdIXm/groups-en/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "groups",
+        "locale": "ru",
+        "caseIds": 22,
+        "receipt": "form-batch-PjdIXm/groups-ru/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "group-visibility",
+        "locale": "en",
+        "caseIds": 27,
+        "receipt": "form-batch-PjdIXm/group-visibility-en/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "group-visibility",
+        "locale": "ru",
+        "caseIds": 27,
+        "receipt": "form-batch-PjdIXm/group-visibility-ru/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "group-spacing",
+        "locale": "en",
+        "caseIds": 60,
+        "receipt": "form-batch-PjdIXm/group-spacing-en/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "group-spacing",
+        "locale": "ru",
+        "caseIds": 60,
+        "receipt": "form-batch-PjdIXm/group-spacing-ru/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "owners",
+        "locale": "en",
+        "caseIds": 9,
+        "receipt": "form-batch-PjdIXm/owners-en/receipt.json"
+      },
+      {
+        "batch": "form-batch-PjdIXm",
+        "suite": "owners",
+        "locale": "ru",
+        "caseIds": 9,
+        "receipt": "form-batch-PjdIXm/owners-ru/receipt.json"
+      },
+      {
+        "batch": "form-batch-uHHg01",
+        "suite": "table-pixels",
+        "locale": "en",
+        "caseIds": 48,
+        "receipt": "form-batch-uHHg01/table-pixels-en/receipt.json"
+      },
+      {
+        "batch": "form-batch-uHHg01",
+        "suite": "table-pixels",
+        "locale": "ru",
+        "caseIds": 47,
+        "receipt": "form-batch-uHHg01/table-pixels-ru/receipt.json"
+      },
+      {
+        "batch": "form-batch-uHHg01",
+        "suite": "responsive",
+        "locale": "en",
+        "caseIds": 31,
+        "receipt": "form-batch-uHHg01/responsive-en/receipt.json"
+      },
+      {
+        "batch": "form-batch-uHHg01",
+        "suite": "responsive",
+        "locale": "ru",
+        "caseIds": 31,
+        "receipt": "form-batch-uHHg01/responsive-ru/receipt.json"
+      }
+    ]
+  },
+  "wholeFormRegression": {
+    "reference": "docs/measurements/t157-group-spacing-linux.json",
+    "runs": 6,
+    "matchedGeometrySamples": 56,
+    "samples": [
+      {
+        "mode": "bsp",
+        "locale": "en",
+        "forms": 3,
+        "comparedSamples": 12,
+        "equal": true
+      },
+      {
+        "mode": "loan-docked",
+        "locale": "en",
+        "comparedSamples": 8,
+        "equal": true,
+        "preferred": [
+          1157,
+          875
+        ],
+        "rawStyleNotes": []
+      },
+      {
+        "mode": "loan-detached",
+        "locale": "en",
+        "comparedSamples": 8,
+        "equal": true,
+        "preferred": [
+          1157,
+          875
+        ],
+        "rawStyleNotes": [
+          {
+            "pose": 0,
+            "element": "987",
+            "property": "groupGap",
+            "before": "8px",
+            "after": "10px"
+          },
+          {
+            "pose": 0,
+            "element": "987",
+            "property": "columnGap",
+            "before": "8px",
+            "after": "10px"
+          },
+          {
+            "pose": 7,
+            "element": "987",
+            "property": "groupGap",
+            "before": "8px",
+            "after": "10px"
+          },
+          {
+            "pose": 7,
+            "element": "987",
+            "property": "columnGap",
+            "before": "8px",
+            "after": "10px"
+          }
+        ]
+      },
+      {
+        "mode": "bsp",
+        "locale": "ru",
+        "forms": 3,
+        "comparedSamples": 12,
+        "equal": true
+      },
+      {
+        "mode": "loan-docked",
+        "locale": "ru",
+        "comparedSamples": 8,
+        "equal": true,
+        "preferred": [
+          1157,
+          875
+        ],
+        "rawStyleNotes": []
+      },
+      {
+        "mode": "loan-detached",
+        "locale": "ru",
+        "comparedSamples": 8,
+        "equal": true,
+        "preferred": [
+          1157,
+          875
+        ],
+        "rawStyleNotes": []
+      }
+    ],
+    "loanGeometryKeysCompared": [
+      "canvas",
+      "caption",
+      "captionLines",
+      "childMinima",
+      "control",
+      "element",
+      "heading",
+      "items",
+      "row",
+      "tableColumns",
+      "tableToolbar"
+    ],
+    "rawStyleNoteExplanation": "Only the en detached snapshots 0 and 7 differ in groupGap/columnGap on element 987 (8px -> 10px). This group contains one child (957); its full recorded geometry and all descendants are identical. Raw values remain in both artifacts.",
+    "sourceHashesEqual": true
+  },
+  "validation": {
+    "typescript": "passed",
+    "compile": "passed",
+    "node": {
+      "passed": 680,
+      "skipped": 8,
+      "failed": 0
+    },
+    "rust": {
+      "rerun": false,
+      "reason": "Rust sources, Cargo.toml and Cargo.lock are unchanged from the full passing validation in the font-face report. This ESKA commit only records documentation; the renderer fix is in Explorer.",
+      "reference": "docs/measurements/t155-font-face-name-linux.json",
+      "sourceCommit": "ee35616d1970263ec15830d0dae1f74d3574c0db",
+      "verified": {
+        "fmt": "passed",
+        "check": "passed",
+        "clippyAllTargetsAllFeatures": "passed",
+        "test": {
+          "command": "RUST_TEST_THREADS=1 ESKA_TEST_ROOT=\"$(realpath ../eska-playground)\" cargo test",
+          "passed": 1564,
+          "ignored": 19,
+          "failed": 0
+        }
+      }
+    }
+  },
+  "environmentAttempts": {
+    "initialXvfb": {
+      "batch": "form-batch-PjdIXm",
+      "unacceptedRuns": [
+        {
+          "suite": "table-pixels",
+          "locale": "en",
+          "classification": "unclassified"
+        },
+        {
+          "suite": "table-pixels",
+          "locale": "ru",
+          "classification": "unclassified"
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "classification": "unclassified"
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "classification": "unclassified"
+        }
+      ],
+      "reason": "Xvfb without an EWMH window manager: resize could not locate the owned window and 1440x900 Code clipped the complete table frame at the native toolbar pose."
+    },
+    "firstPrivateDesktop": {
+      "batch": "form-batch-BIs7ql",
+      "completedRuns": 0,
+      "interrupted": true,
+      "reason": "Code startup waited for secret-service unlock on the private session bus. No credentials were supplied; the prompt was left unanswered."
+    },
+    "successfulRetry": "Private headless Mutter desktop, independent runtime directory and D-Bus session, initial owned Code windows 2560x1019. Empty disposable Code profiles use password-store=basic; user profiles and credential stores are not modified.",
+    "credentialStoreDocumentation": "https://code.visualstudio.com/docs/configure/settings-sync#_troubleshoot-credentialstore-issues"
+  },
+  "remaining": [
+    "Complete pixels of these two forms, other toolbar locations and styling combinations, native resize and Windows are outside this acceptance.",
+    "The BSP wizard Next button x=628 versus reconstructed native x=625 and frame width 814 versus 812 remain unchanged.",
+    "The independent positive empty-group table height residual and multiline BSP heading metrics remain open."
+  ],
+  "artifactBase": "../eska-playground",
+  "artifactReferences": [
+    {
+      "path": "form-batch-BIs7ql/batch.json",
+      "sha256": "ecf903f9af28fd3cd77ba7446e436eedcb615adb5533641fe40f4756d64a8e6f"
+    },
+    {
+      "path": "form-batch-BIs7ql/inputs.json",
+      "sha256": "b2b2360351647661ea6e8ef6d4f1c03a7e8fe73927e0344acce0b7b5be50af6e"
+    },
+    {
+      "path": "form-batch-BIs7ql/table-pixels-en/host.log",
+      "sha256": "a02cf75c28f44d3bba02344b79ba22447837cdbbca4ac842d464a20d3116ec3c"
+    },
+    {
+      "path": "form-batch-BIs7ql/table-pixels-en/receipt.json",
+      "sha256": "9086f51a6b4e87d330164940539e1353dc620f01e96592b178b08c2dab4c0fb3"
+    },
+    {
+      "path": "form-batch-PjdIXm/batch.json",
+      "sha256": "021a61ec7c8f97e77cca49b1dc8478a8ae40e8c98d80c1b4b9a03e7b047a04a4"
+    },
+    {
+      "path": "form-batch-PjdIXm/check.log",
+      "sha256": "3074f884c12f5b2f1db23b58f4521c2682623ceb356117414be8cb2b0e765742"
+    },
+    {
+      "path": "form-batch-PjdIXm/command-bars-en/receipt.json",
+      "sha256": "e3d5899967a198123432a74ef101ef9f66a414af81d789d820d1f7fb45551504"
+    },
+    {
+      "path": "form-batch-PjdIXm/command-bars-ru/receipt.json",
+      "sha256": "2c471021dd10815bfef6022e44ee6caa678abd73090ff77fd35bd9504de4f55d"
+    },
+    {
+      "path": "form-batch-PjdIXm/compile.log",
+      "sha256": "21facd5e7ad07eeb615bd2f4fc87832c04c7589373303a0dbb7ead94bb3e5413"
+    },
+    {
+      "path": "form-batch-PjdIXm/group-spacing-en/receipt.json",
+      "sha256": "c64d6f3eb1b749a7fbb9bab01acfe59d7b8941b3f0011ad38c9576568c377898"
+    },
+    {
+      "path": "form-batch-PjdIXm/group-spacing-ru/receipt.json",
+      "sha256": "10c8a5a5421a03842791309d654fd93929562373975d084d72a5bcfdd744eb8a"
+    },
+    {
+      "path": "form-batch-PjdIXm/group-visibility-en/receipt.json",
+      "sha256": "a31b5a45de25a9cfb4bc597d4187a6a5568ce7f9beb1bb99749310dc312b6755"
+    },
+    {
+      "path": "form-batch-PjdIXm/group-visibility-ru/receipt.json",
+      "sha256": "585e2a2c69545588cd74d8211f072d74132b182efbd0e0424979f835f0510f77"
+    },
+    {
+      "path": "form-batch-PjdIXm/groups-en/receipt.json",
+      "sha256": "030f936e5e2651f1130046e8228a5d070e85dade60af9fb84cf7060be82e0fb7"
+    },
+    {
+      "path": "form-batch-PjdIXm/groups-ru/receipt.json",
+      "sha256": "48c28bf90e173f4fb8651b05976e9d0eb440976c7cc40640bd175cc6c6501690"
+    },
+    {
+      "path": "form-batch-PjdIXm/inputs.json",
+      "sha256": "587ad9b2aceebb2d4f9ae5971dc279f4270259ed99444caa3e0dcce2ba09f9ca"
+    },
+    {
+      "path": "form-batch-PjdIXm/owners-en/receipt.json",
+      "sha256": "bafda8b19993d807beb4618f24997418a17cacdb2342a4ede7eff12559eb9613"
+    },
+    {
+      "path": "form-batch-PjdIXm/owners-ru/receipt.json",
+      "sha256": "58fe6d79d39a2f7dcf65825aae3be58b7169281825780c175d12a6a45463281c"
+    },
+    {
+      "path": "form-batch-PjdIXm/package.log",
+      "sha256": "629c00d1eb9476f547ab14877487538705b9244860f9717a98fc2931431bd098"
+    },
+    {
+      "path": "form-batch-PjdIXm/responsive-en/receipt.json",
+      "sha256": "9aa43567bbb251c8566bd688721f71c6de7895acab43d24def6b42f6b3e94ce8"
+    },
+    {
+      "path": "form-batch-PjdIXm/responsive-ru/receipt.json",
+      "sha256": "38344c3463fb930b489d4891288f0d62cf6a63acf77336b6cc814a23e6a2b885"
+    },
+    {
+      "path": "form-batch-PjdIXm/table-pixels-en/receipt.json",
+      "sha256": "96d23f610f3981beb39195481d3b9cf8ae9b63a008a9e0e51668a149db667253"
+    },
+    {
+      "path": "form-batch-PjdIXm/table-pixels-ru/receipt.json",
+      "sha256": "01daf17509b747df4cdeb337bb9f554997e85ed208997f3ff4ac70fbb91cd9df"
+    },
+    {
+      "path": "form-batch-PjdIXm/tables-en/receipt.json",
+      "sha256": "99a43ab1f086086483a9667629db2c5be37043bc5a80a571f7507ae22422f7f3"
+    },
+    {
+      "path": "form-batch-PjdIXm/tables-en/table-TableButtonGroup-en.png",
+      "sha256": "8b0e127b08883e6af58ff2728fb3730ffac625387701c9332fe85fa0c99f88ac"
+    },
+    {
+      "path": "form-batch-PjdIXm/tables-en/table-TablePopup-en.png",
+      "sha256": "d57c359e8168dd1dab9bdbd34925931931ea16cfbd626d00f994c78b07372ab5"
+    },
+    {
+      "path": "form-batch-PjdIXm/tables-ru/receipt.json",
+      "sha256": "327a651dac2cc99d6ee9c2bbee58a3b74686240934e1cab29eb303f270bc9b59"
+    },
+    {
+      "path": "form-batch-PjdIXm/tables-ru/table-TableButtonGroup-ru.png",
+      "sha256": "73ece452be5a2c1cfa59e97350e9f4c0c7b55ef911a5543b5fd0f6160ec9990f"
+    },
+    {
+      "path": "form-batch-PjdIXm/tables-ru/table-TablePopup-ru.png",
+      "sha256": "f9eb60026de53ac2d841903a867a8ada12e7d4d98d4c4e69774d4974bcee9e81"
+    },
+    {
+      "path": "form-batch-uHHg01/batch.json",
+      "sha256": "42378a34fc9c6bc2fec20cc1d5611c7dc67ef5f4204fe0416c4037b90442525d"
+    },
+    {
+      "path": "form-batch-uHHg01/check.log",
+      "sha256": "3074f884c12f5b2f1db23b58f4521c2682623ceb356117414be8cb2b0e765742"
+    },
+    {
+      "path": "form-batch-uHHg01/compile.log",
+      "sha256": "21facd5e7ad07eeb615bd2f4fc87832c04c7589373303a0dbb7ead94bb3e5413"
+    },
+    {
+      "path": "form-batch-uHHg01/inputs.json",
+      "sha256": "f348816b18de72bf3f2f7c318a24e1f75bd437b84d874b1124fc43fa5160ad84"
+    },
+    {
+      "path": "form-batch-uHHg01/package.log",
+      "sha256": "f3168bb52357722a8e9ce53fc790e71449eaddb81cd071fe70ca4c991700e39d"
+    },
+    {
+      "path": "form-batch-uHHg01/responsive-en/receipt.json",
+      "sha256": "687191952dd9b38fc3f79d16c2ca599eca15069312087bcddada39d03cf67a30"
+    },
+    {
+      "path": "form-batch-uHHg01/responsive-ru/receipt.json",
+      "sha256": "9268e9cd2f0c1039bfebe35ef2e62869ec55f0bee7a8578f756273217c858285"
+    },
+    {
+      "path": "form-batch-uHHg01/table-pixels-en/receipt.json",
+      "sha256": "4ad521d3c3bc435e4e2aa8fd7f29e1a7100f6f66edad95ad52f7e38d1d93cd44"
+    },
+    {
+      "path": "form-batch-uHHg01/table-pixels-ru/receipt.json",
+      "sha256": "732ee558a3f82497a0ab1753bfcd2fef1de3d9766be752cf97023c5cc21295b5"
+    },
+    {
+      "path": "form-native-command-bars-JEdbTy78/native-ru/ProbeWidthBars43841.png",
+      "sha256": "ff4d1d6a5a3b76275fa8569615c49589cedc4694f63f6c9aa60e6e91503289a0"
+    },
+    {
+      "path": "form-private-desktop-3vhd9uw5/display.json",
+      "sha256": "fe070619c51a4a84016070c109a6255648a4459a5e3d8bdb925a26133aafe536"
+    },
+    {
+      "path": "form-private-desktop-3vhd9uw5/interruption.json",
+      "sha256": "44f84db47601ff4ab6be64c887eee2cc2a3fe9d4dfab24bb7fac37c6a2320ab2"
+    },
+    {
+      "path": "form-table-bar-before-i6y9u7f8/host.log",
+      "sha256": "707facefb9a5fe1ac6d5e4b1987f7e50de32a95f7901ba5ad55015cc1cc75910"
+    },
+    {
+      "path": "form-table-bar-before-i6y9u7f8/receipt.json",
+      "sha256": "a7de6821609a618d57d41a4a65f6a98cd56f225574bbbb1a813d9fbeef51903f"
+    },
+    {
+      "path": "form-table-bar-node-xybycojm/check.log",
+      "sha256": "e33233e5056d5c1ed2a12c59ce118fd65e2f1690933578b90df85f0a8ee388a0"
+    },
+    {
+      "path": "form-table-bar-node-xybycojm/node.log",
+      "sha256": "10fe574be8369f7ad3e497bfab4229de6d7bd6043f09d2d87201245deee240e7"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/bsp-driver.cjs",
+      "sha256": "b42335ebb62e1ae346db69e5fd2f917daaaf322108715c930319cf441297584b"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/bsp-en/receipt.json",
+      "sha256": "f00f7b84e12c7457586d0c23f063c976ccba92fdaadf1ab90134881ae0f171a5"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/bsp-en/review.json",
+      "sha256": "5395a197965f77f448cab739d0d7b16920da26af3e9ddfe358ec0816dcb919de"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/bsp-ru/receipt.json",
+      "sha256": "a0a7c21e48d1802ffb80a35dbf1c3dc51a34124b3206930f15d4d5c81692bebe"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/bsp-ru/review.json",
+      "sha256": "d109fe44468a011197f326a15b95014233e3b6820833aa50600a30bd891f239f"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/loan-detached-en/geometry.json",
+      "sha256": "fbdf0db07232f71b3572d280c40c04dcc922520573d2f2493d31e3c360b8568d"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/loan-detached-en/receipt.json",
+      "sha256": "4087aed924258c47f7cc740697de2fc5f059153c5579e4063b85fcbc6bebaedd"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/loan-detached-ru/geometry.json",
+      "sha256": "73495cf35f69d62f3eab95e4a737d94464e1a89efc71cf11305b4cb40e48b2eb"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/loan-detached-ru/receipt.json",
+      "sha256": "fdc3e8030d912f2a2a2be4b80932328de014921756dbd2a827ee254b3f174da2"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/loan-docked-en/geometry.json",
+      "sha256": "ab5abbb94bb1764e87b294511a3e2d6f9b5f1435fbe82ae04027e68ea29459a5"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/loan-docked-en/receipt.json",
+      "sha256": "45906c1791339eca2964863be58168e7e293c5c47a14a3e7a119368add05b95a"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/loan-docked-ru/geometry.json",
+      "sha256": "9626e855b633bad102fb954cd6dfe1558a5c9746a0d518e9f5741674cccbccde"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/loan-docked-ru/receipt.json",
+      "sha256": "134567912305334b205e8783d27af49f990c9c40eb09420bacbc8929c25c5178"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/loan-driver.cjs",
+      "sha256": "6b244c4ed3f01a3b96232e7f00a674cda6b40cea7bf3a3d1f9476e1e679c3d87"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/source-hashes-after.json",
+      "sha256": "4605edd5f3e781b8babc68f13e64861dd0fa7443651e8088f82a468b93bb1248"
+    },
+    {
+      "path": "form-table-bar-whole-nm8r311m/source-hashes-before.json",
+      "sha256": "4605edd5f3e781b8babc68f13e64861dd0fa7443651e8088f82a468b93bb1248"
+    },
+    {
+      "path": "t152-forms-_orrhvey/native-complex-haal9s6i/src/Configuration.xml",
+      "sha256": "358464d6dad42dbae392350e54e698e3feb2504309d14d1cfb19187c74736ab4"
+    },
+    {
+      "path": "t152-forms-_orrhvey/native-table-button-group-en-full.png",
+      "sha256": "1b4d7764bbc7eaebc5a16f1d4d3e7c3181b5a42f3abcf876c8cb29f7af657f10"
+    },
+    {
+      "path": "t152-forms-_orrhvey/native-table-button-group-full.png",
+      "sha256": "dcc20d9e74873499a67039a3282432f9418a0c7e774d5a19ac604ce7ca18c626"
+    },
+    {
+      "path": "t152-forms-_orrhvey/native-table-popup-en-full.png",
+      "sha256": "5d6a3aec4f51da0c423c06f6ff1f4348b7301b9136bc3290815655eafc2de931"
+    }
+  ]
+}
