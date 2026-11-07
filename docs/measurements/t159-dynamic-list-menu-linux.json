@@ -1,0 +1,5040 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestone": "T159",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "zoom": 100,
+  "artifactBase": "../eska-playground",
+  "eskaCommit": "f23a4cbb38378b2f24bdbcfb178c727c599fd13c",
+  "explorerCommit": "bdfccaf67d0095684c9f48aecd15328623725383",
+  "scope": "Состав, секции, подписи и вложенные пункты дополнительного меню динамического списка. Полная пиксельная приёмка раскрытого меню продолжается.",
+  "native": {
+    "forms": 12,
+    "states": 24,
+    "observations": [
+      {
+        "kind": "Catalog",
+        "locale": "ru",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43301",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43301/Ext/Form.xml",
+          "sha256": "bff6ccdd009558710ca0b19ab3a129e767300530311133cefbee35ad0d9b1df7"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43301-more.png",
+          "sha256": "c5cfd576dacc8b43c2c75d1adb7d093f29551106e55a9d4c5f96ba095d2de62a"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43301.png",
+          "sha256": "2d9c31a84bfad57e93254fcf619262dc8db985eb1b01a29916b84d7b5eacbfc0"
+        },
+        "grayBorderRegion": [
+          513,
+          281,
+          394,
+          521
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogWide",
+        "locale": "ru",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43302",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43302/Ext/Form.xml",
+          "sha256": "07c92fa0208ccafa38609a3740706c79556d0dee6762a8b5b5b78e77a7717ceb"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43302-more.png",
+          "sha256": "dcfc54d097640137de272154f0543b2b3eb8f46901e3d55c5fd37a9db733f5f4"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43302.png",
+          "sha256": "3b063cad9f882287f2306b5c6b30b0c4cd1edbabf3a7dc4d3611a6b93566101b"
+        },
+        "grayBorderRegion": [
+          834,
+          281,
+          394,
+          521
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogNoSearch",
+        "locale": "ru",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43303",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43303/Ext/Form.xml",
+          "sha256": "987411ee463488b452b509ad57ae0d153708c0be84663418e468e3531753493d"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43303-more.png",
+          "sha256": "3c127248fb200c48fff828e84ff9968b0e15429452fe359c9f6abe71627c1aaa"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43303.png",
+          "sha256": "0db1917f8d6a245dbcc65b85eb3dd927b2849d532350005dc6238692da0b2cd8"
+        },
+        "grayBorderRegion": [
+          514,
+          281,
+          394,
+          521
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogNoControl",
+        "locale": "ru",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43304",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43304/Ext/Form.xml",
+          "sha256": "f05c35b221269614ef3d8fe7254e087a439d88db8d0a9d688f19bb7e4fe17cb2"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43304-more.png",
+          "sha256": "090fba45a9388a98c71a801234785b8ea78f8f077940b8a66a0bf13cf908c35b"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43304.png",
+          "sha256": "5473b3484cfa490b90c8b5b350ccb28f22135449d0e8009419eef81e97617170"
+        },
+        "grayBorderRegion": [
+          513,
+          281,
+          394,
+          491
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogExcluded",
+        "locale": "ru",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43305",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43305/Ext/Form.xml",
+          "sha256": "5b0e47426d9fa7a6ca6b0a567cd4f8197200952c18de6a64f04fc0cfe7081d6c"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43305-more.png",
+          "sha256": "a0c27045d32b24ac56c32e2625599d76d19465325abdae66c7eac9b1e8bd15ae"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43305.png",
+          "sha256": "ba0fd1ffe4aed1bbe00f010430e970245c41380e3186b8fcc076ce5053907768"
+        },
+        "grayBorderRegion": [
+          514,
+          281,
+          377,
+          251
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogReadOnly",
+        "locale": "ru",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43306",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43306/Ext/Form.xml",
+          "sha256": "219e50e92ad140b0b3f5094030e4ab5f9339bd6dd7f3a07e92e0960ddf6bd353"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43306-more.png",
+          "sha256": "6adb630bae5bed5012fafb615870089d4731cb584e064ee6528f2710e8a304aa"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43306.png",
+          "sha256": "4b274524a1a480d38a43d91490e34d6a89a82b5971614afb4169658b815c0249"
+        },
+        "grayBorderRegion": [
+          513,
+          281,
+          394,
+          521
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogHierarchy",
+        "locale": "ru",
+        "mainTable": "Catalog.Товары",
+        "form": "ProbeWidthDynamicMenu43307",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43307/Ext/Form.xml",
+          "sha256": "e4e6b3b84bb4eb7f8128ccac0f78d186586f2dea4962b75f922cf580c25c2624"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43307-more.png",
+          "sha256": "739aea4aaa4bc87dc4e8e746a87257dde2fd446cb64a4632a9ef14c49b20b846"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43307.png",
+          "sha256": "106e937fea9398c0a62d730493112cd8d354d9563d2a59c8482de4bf2d48a447"
+        },
+        "grayBorderRegion": [
+          513,
+          281,
+          394,
+          662
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogNoHistory",
+        "locale": "ru",
+        "mainTable": "Catalog.Банки",
+        "form": "ProbeWidthDynamicMenu43308",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43308/Ext/Form.xml",
+          "sha256": "99f3aa3d4c7087f384e031d16596960be6706f206f1d45b1793480efe42b72c9"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43308-more.png",
+          "sha256": "ac7c36acdf5bb67a8cc4faa8a9362286089a5b71955ac252be4eb59db1d81869"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43308.png",
+          "sha256": "95b9a140441a76a0b57236b8d650fb01db3eb394473c311547bd57b98dda0a2f"
+        },
+        "grayBorderRegion": [
+          513,
+          281,
+          394,
+          521
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "Document",
+        "locale": "ru",
+        "mainTable": "Document.Заказ",
+        "form": "ProbeWidthDynamicMenu43309",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43309/Ext/Form.xml",
+          "sha256": "2708820fca588429949f54d98c895326ca88a88713816335833a6fe5fb4846c1"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43309-more.png",
+          "sha256": "42d7c83479ffef797eac57cd29ea3b99e7ace9fda7af511677d7ce57cd04f051"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43309.png",
+          "sha256": "9b4b7b48562df148c3127ff8a060f478c3365804053182deb9e59a3cc62c3327"
+        },
+        "grayBorderRegion": [
+          513,
+          281,
+          394,
+          623
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "Register",
+        "locale": "ru",
+        "mainTable": "InformationRegister.КурсыВалют",
+        "form": "ProbeWidthDynamicMenu43310",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43310/Ext/Form.xml",
+          "sha256": "886f3a0f5edfa2148e5014d379c1a89905549cb0e0c2900cce50f2b7fa3a2968"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43310-more.png",
+          "sha256": "3805ca708e3a44af1cc6b8f85326666007035adc881da3769ac177e92d9af3fc"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43310.png",
+          "sha256": "d7995a41ec3ae37b8a03d3efa64df5b482b0d867f952e1cd24cadc03373a6bb5"
+        },
+        "grayBorderRegion": [
+          513,
+          281,
+          377,
+          529
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "Journal",
+        "locale": "ru",
+        "mainTable": "DocumentJournal.ДокументыПродаж",
+        "form": "ProbeWidthDynamicMenu43311",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43311/Ext/Form.xml",
+          "sha256": "03ae5e5f8f98611a2df2bcb9e4a457191fa35db5a95915ca910d19716d6893cd"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43311-more.png",
+          "sha256": "8b5514ae83720036df6089653c2c4a6cbf8e988b281c4a51f16273cdbc53761d"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43311.png",
+          "sha256": "ad89627b071bdbed97996ae765094048eee8ccd999acac9334724390dc00913e"
+        },
+        "grayBorderRegion": [
+          513,
+          281,
+          394,
+          623
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "NoMainTable",
+        "locale": "ru",
+        "mainTable": null,
+        "form": "ProbeWidthDynamicMenu43312",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43312/Ext/Form.xml",
+          "sha256": "fbd7707a2e9939f67393a4b0e0aca2266f4aa1f4fdc0b545b670ece36201af8a"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43312-more.png",
+          "sha256": "a0588d00b9460496fe6339c99162c4435e60b7c24a5ffdba35898783466fa65b"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-ru/ProbeWidthDynamicMenu43312.png",
+          "sha256": "367f89039d3a4211f7ff1d7ff4e9f3f2a094e20d094349d11426d2443ddfa4a8"
+        },
+        "grayBorderRegion": [
+          513,
+          281,
+          377,
+          311
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "Catalog",
+        "locale": "en",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43301",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43301/Ext/Form.xml",
+          "sha256": "bff6ccdd009558710ca0b19ab3a129e767300530311133cefbee35ad0d9b1df7"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43301-more.png",
+          "sha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43301.png",
+          "sha256": "cdafebb9e512d412b09c38f8aaa3a0c7037724cd45072db56bdc2875b6c1d6a2"
+        },
+        "grayBorderRegion": [
+          465,
+          281,
+          335,
+          521
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogWide",
+        "locale": "en",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43302",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43302/Ext/Form.xml",
+          "sha256": "07c92fa0208ccafa38609a3740706c79556d0dee6762a8b5b5b78e77a7717ceb"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43302-more.png",
+          "sha256": "21bcde806ef39e3b1aecad5c38f483eeee443c3bbd8191f331a018c888136224"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43302.png",
+          "sha256": "9f9719ba15efa743b9bd900e35c95f51bfb3bcca8ace6266364534548d94cd36"
+        },
+        "grayBorderRegion": [
+          786,
+          281,
+          335,
+          521
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogNoSearch",
+        "locale": "en",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43303",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43303/Ext/Form.xml",
+          "sha256": "987411ee463488b452b509ad57ae0d153708c0be84663418e468e3531753493d"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43303-more.png",
+          "sha256": "3d672f10d2285dface782ad3098c6eadaf7c35dd3b72ae38ebc8e0fcf40cca36"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43303.png",
+          "sha256": "9f2f88864a6c8ae03f1a144901d70c23940a61f0ddab9064d982969510a6870e"
+        },
+        "grayBorderRegion": [
+          466,
+          281,
+          335,
+          521
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogNoControl",
+        "locale": "en",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43304",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43304/Ext/Form.xml",
+          "sha256": "f05c35b221269614ef3d8fe7254e087a439d88db8d0a9d688f19bb7e4fe17cb2"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43304-more.png",
+          "sha256": "b3547284bb3c2e7bd3b225e1430fd90f9e8d25bb02b8edd2a414f3a721ea3ea2"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43304.png",
+          "sha256": "8f285fba35936ee36bf4df6db0967295d354ff586fd474216428e407c4e29890"
+        },
+        "grayBorderRegion": [
+          465,
+          281,
+          335,
+          491
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogExcluded",
+        "locale": "en",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43305",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43305/Ext/Form.xml",
+          "sha256": "5b0e47426d9fa7a6ca6b0a567cd4f8197200952c18de6a64f04fc0cfe7081d6c"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43305-more.png",
+          "sha256": "18dda64b8acc02e92ae8e35e7c2c152676e9bd156084591b5345aa927d4ef707"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43305.png",
+          "sha256": "3a8a31fe32e28a8e602224263ff32cc085e290e54192b76bd1d137fe569ac3f6"
+        },
+        "grayBorderRegion": [
+          465,
+          281,
+          335,
+          251
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogReadOnly",
+        "locale": "en",
+        "mainTable": "Catalog.Регионы",
+        "form": "ProbeWidthDynamicMenu43306",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43306/Ext/Form.xml",
+          "sha256": "219e50e92ad140b0b3f5094030e4ab5f9339bd6dd7f3a07e92e0960ddf6bd353"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43306-more.png",
+          "sha256": "fb131c2f2169b074d8c1fce33bb4c56594ba4638913266c5ff6c6645f571543c"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43306.png",
+          "sha256": "5037dfb166e42228c5ffe79aecc1e2608335e3266cb0f5503a44b9abd499d489"
+        },
+        "grayBorderRegion": [
+          465,
+          281,
+          335,
+          521
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogHierarchy",
+        "locale": "en",
+        "mainTable": "Catalog.Товары",
+        "form": "ProbeWidthDynamicMenu43307",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43307/Ext/Form.xml",
+          "sha256": "e4e6b3b84bb4eb7f8128ccac0f78d186586f2dea4962b75f922cf580c25c2624"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43307-more.png",
+          "sha256": "0eb7aa9ea0ec4dd9a2300227de933b5cf3027e022bdadecd47c5d30654e577fc"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43307.png",
+          "sha256": "b0c9ac67edc840571e53f31a93a987a50477c01344002b6fe62449d2617d55b9"
+        },
+        "grayBorderRegion": [
+          465,
+          281,
+          335,
+          662
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "CatalogNoHistory",
+        "locale": "en",
+        "mainTable": "Catalog.Банки",
+        "form": "ProbeWidthDynamicMenu43308",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43308/Ext/Form.xml",
+          "sha256": "99f3aa3d4c7087f384e031d16596960be6706f206f1d45b1793480efe42b72c9"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43308-more.png",
+          "sha256": "b7879c71ad396fe0a0fa05d5c06b41477500ef8e6aa7b9e8e82fd515f6cb98b3"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43308.png",
+          "sha256": "8456407fdf7a606514e51f3456a5ee1e08cf07526fdf305b70c217df69f52a75"
+        },
+        "grayBorderRegion": [
+          465,
+          281,
+          335,
+          521
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "Document",
+        "locale": "en",
+        "mainTable": "Document.Заказ",
+        "form": "ProbeWidthDynamicMenu43309",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43309/Ext/Form.xml",
+          "sha256": "2708820fca588429949f54d98c895326ca88a88713816335833a6fe5fb4846c1"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43309-more.png",
+          "sha256": "97f6fac0509629380454f88b88c10a9daccf910beb5aad7884b2d957b0d9a4c2"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43309.png",
+          "sha256": "6a9b80708475eaac9aaa81e9b403971f55248ddc117402ffd79066322c30365c"
+        },
+        "grayBorderRegion": [
+          465,
+          281,
+          335,
+          623
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "Register",
+        "locale": "en",
+        "mainTable": "InformationRegister.КурсыВалют",
+        "form": "ProbeWidthDynamicMenu43310",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43310/Ext/Form.xml",
+          "sha256": "886f3a0f5edfa2148e5014d379c1a89905549cb0e0c2900cce50f2b7fa3a2968"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43310-more.png",
+          "sha256": "ffb4e8a568218d729de712c9c11933c6e56f1a9eea34c4f6125dd8d5ff9f7037"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43310.png",
+          "sha256": "ab8d9e155dfe9bf3a8d179d934b93e46d31df837ad621f2aaa017cd4ce2d0042"
+        },
+        "grayBorderRegion": [
+          465,
+          281,
+          335,
+          529
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "Journal",
+        "locale": "en",
+        "mainTable": "DocumentJournal.ДокументыПродаж",
+        "form": "ProbeWidthDynamicMenu43311",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43311/Ext/Form.xml",
+          "sha256": "03ae5e5f8f98611a2df2bcb9e4a457191fa35db5a95915ca910d19716d6893cd"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43311-more.png",
+          "sha256": "0d70527605aa6d99107f7499dc81ee58ffc9748e9d6c4d6a76d976c1ef5154de"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43311.png",
+          "sha256": "4d2b381c1c6d07c19dd44db8dbd9468efec46de1cbeaf5113a72487549f6e548"
+        },
+        "grayBorderRegion": [
+          465,
+          281,
+          335,
+          623
+        ],
+        "markerMatches": true
+      },
+      {
+        "kind": "NoMainTable",
+        "locale": "en",
+        "mainTable": null,
+        "form": "ProbeWidthDynamicMenu43312",
+        "source": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/src/CommonForms/ProbeWidthDynamicMenu43312/Ext/Form.xml",
+          "sha256": "fbd7707a2e9939f67393a4b0e0aca2266f4aa1f4fdc0b545b670ece36201af8a"
+        },
+        "capture": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43312-more.png",
+          "sha256": "b3e5e33330d649e1a08cfacca0f656424b7f75a8449aecf1c1ffd000ef3ecbbe"
+        },
+        "base": {
+          "path": "form-native-dynamic-menu-Th3kO1Xk/menu-en/ProbeWidthDynamicMenu43312.png",
+          "sha256": "9bd7f928c248633ab2f7bf222644e3e1966d9d72706ebff6d2ac8664f0ba6504"
+        },
+        "grayBorderRegion": [
+          465,
+          281,
+          335,
+          311
+        ],
+        "markerMatches": true
+      }
+    ],
+    "journalSortCounterprobe": {
+      "capture": {
+        "path": "form-native-menu-command-names-QBh2y7lQ/submenus-en/Journal-submenu.png",
+        "sha256": "f8e98f0a6c2f71e3c1f1676090babfd7f384b050c84e6b933284ac8fa2da6aa0"
+      },
+      "synonyms": {
+        "Заказ": "ZZZ-Zakaz",
+        "РасходТовара": "AAA-Rashod"
+      },
+      "observedOrder": [
+        "AAA-Rashod",
+        "ZZZ-Zakaz"
+      ],
+      "explanation": "Порядок синонимов противоположен порядку имён документов. В меню использован порядок синонимов."
+    },
+    "acceptedCommandNames": [
+      "CreateFolder",
+      "MoveItem",
+      "HierarchicalList",
+      "List",
+      "Tree",
+      "SearchHistory"
+    ],
+    "import": {
+      "path": "form-native-menu-command-names-QBh2y7lQ/import-supported.log",
+      "sha256": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e"
+    },
+    "shutdownObservation": "Съёмка выполнена до закрытия. В нескольких сеансах Конфигуратор завершился с кодом 134 при закрытии. Это не успешная проверка завершения платформы."
+  },
+  "pictureEvidence": {
+    "rasterPictures": 17,
+    "listMenuVariants": 5,
+    "templatePictures": 1,
+    "rgbaComparisonPixels": 11264,
+    "rgbaPixelTolerance": 0,
+    "comparisonMasks": [],
+    "pictures": {
+      "Create": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-1.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "whiteSha256": "b8d3dc4b4084544a251e0760d5553acdd227a04fa00874b69624047f1f939e7c",
+        "activeSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "region": [
+          481,
+          289,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "1102de4c5919fbce43b8e65a6c59d85efad605ca53fa3b520aff49387f6c9771",
+        "activeRgbSha256": "8e834505d484baaa29421cbbf654e82b346efe914f488fb0bd36d9dc0ef014ff",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "Change": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-2.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "ccc78e84e8d59f2477f578d10b3c75ec5bd9e8c4d42054a217122a601cca52ca",
+        "region": [
+          481,
+          349,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "aa44489cda7ea3aa6205eceb6b1ba7ee25b108b26fdf4e2b6add222f5adad269",
+        "activeRgbSha256": "531ef173f84963f079fe2b864a63c7882e2ba0a7439f00a7c846f7f2e3805152",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "CancelSearch": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-8.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "2560d9212366b384da488b4b82606ffca0adc76c154db13ae1bdf3a7c51ff8de",
+        "region": [
+          481,
+          529,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "ef093e03ea900314e3ddc9905add2a12de1874ffd760ba5aaea27b355d400ec3",
+        "activeRgbSha256": "50b02ba147803cbc87a8ef4c2674f70101f53d5ff6c8f1c8b5aec75ea268536f",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "GetCurrentRowURL": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-10.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "c1b494b38230df3d0b017fbb16540e9d9e241c1466efa1ae8050056a4ecf473a",
+        "region": [
+          481,
+          589,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "962baa6b744e0dcfaefb9c7f9308db0b827a47f27d714a3514458379eb8e399a",
+        "activeRgbSha256": "030fa6fd60fa536c345e0e215d56fa10c2264d3f9a818f6718a913bd216446be",
+        "activeChannelError": 0,
+        "template": true
+      },
+      "ListSettings": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-11.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "c25f11187738016e8a5ec7c21a700dadb959a18c3f64a4f09ef3838e16f90f7a",
+        "region": [
+          481,
+          623,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "6760e977086370151d4529c8d05c12d926f3e28fe8b7693875f4acdda77713ab",
+        "activeRgbSha256": "9fd6fa9f06677a08d5d6968ba39e4178f45e4b23fa2d1aef92b233e50e0b2608",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "SelectSettings": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-12.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "1c671c65c2ba76cdabb6af7c92aad66e87be1b43fb7116bda0117c69bef1b47e",
+        "region": [
+          481,
+          653,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "e8e34ebfdb6ec1f6226f15af35b9c2c8c27477fcf3dc40aada3b553b3f2aac57",
+        "activeRgbSha256": "22349e3780dbc682224cfa6b788a980df20069e136f6df600be909f56394c284",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "SaveSettings": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-13.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "fbffbb5bd51a4853c50b224e54dc4338d582c4dd92d9332203810f7cd96a12d6",
+        "region": [
+          481,
+          683,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "a9dca2431099fa23f80b9e6a708e83c1e0d7053f593bb849a1b76c56c019a9d9",
+        "activeRgbSha256": "784ba18fc133e059221becd4166dd425d7cd7fd71212b58ff26e47733e1c2628",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "OutputList": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-15.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "fd9a91c70d867489cfe4663f786ea72d6186c1875a6a4432fc6f5790818f7be7",
+        "region": [
+          481,
+          747,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "a93188f00e5bbb6ae268168b91b7799dc15cee2e65b6b1d5d41dfc38bdc3c5bc",
+        "activeRgbSha256": "278c38065db296c8ae8c38b8e13caf47060f8ca02a321923d6ff86e700804bef",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "SetPeriod": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Document-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Document-clicked-6.png",
+        "whiteSha256": "c9d0fa8eb388c6f567c2fac5633e4c6e03cdee62e085ee64014781dd0d553310",
+        "activeSha256": "893faa1952374b18444e9465049499875e873f1d7ab6fdab6912a023ab72d304",
+        "region": [
+          481,
+          473,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "9713acdad13711a5e6acd3da26f9abbb1c673d4c1cb5b4d365d36b56576e7f37",
+        "activeRgbSha256": "68f7abe063f885786292c6b677a8c93bd858f90d619e3f90d58829a9572f53c1",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "DeleteListItem": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Register-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Register-clicked-3.png",
+        "whiteSha256": "669a1ae63357a7b20e9e93b9c10c1a209632e85c8b37e6bdf8495575fce7c6ff",
+        "activeSha256": "13fd5a7907b9db08583e3aec9bd73bbf2b71782ff342fe170ae79c077345ceaa",
+        "region": [
+          481,
+          379,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "7afb1fb763b70adddb1be4b9d99edca262123c9e33947670f540875d3f8d401f",
+        "activeRgbSha256": "02e2372617a180d8320c8304284cf53439f224ff4162fc55189bda1b63b418fa",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "CreateFolder": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-clicked-1.png",
+        "whiteSha256": "55ddc0465d26fce52073955386e58999204942791657df103ead9dd48d60f319",
+        "activeSha256": "e5a47d80c5c5bb4d1ada55bf0f82c543aa1fbbd01d56ac4e88f37c8873028bb5",
+        "region": [
+          481,
+          319,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "7f25465ba83b7145ef93382801b13c6e8d3d4a00758964e0165bd0d711dd5426",
+        "activeRgbSha256": "a8600bbf7fa5bf75db48b36f9466d595c1d79952b22194a2ccc9277df9b50872",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "ViewMode": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-clicked-7.png",
+        "whiteSha256": "55ddc0465d26fce52073955386e58999204942791657df103ead9dd48d60f319",
+        "activeSha256": "3c9796ad2c11ab17ab0a7a67e38859954c86569223bda7f6cd62d4a632cef64b",
+        "region": [
+          481,
+          499,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "fb1b7b332a172d46c57cd791a8e7788cdab7968002fdfd972aefc7283837ab85",
+        "activeRgbSha256": "baace1cbe5817f990eac1cf55ede52e0b35ac00310ea5775490ac3f1b97eb24f",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "MoveItem": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-clicked-8.png",
+        "whiteSha256": "55ddc0465d26fce52073955386e58999204942791657df103ead9dd48d60f319",
+        "activeSha256": "71b094e44c04ee593a082d8a85a2fe7ef51f100a011ffafa66f6a3aa97932b19",
+        "region": [
+          481,
+          529,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "54125858fc04416ef812ca4b086c4120710c82a574269527a0b38d91d42f4ae6",
+        "activeRgbSha256": "dedf56e2edf270fe69ded79edd67e8ace87e88553fc7014324603d41f6841baf",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "LevelDown": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-clicked-9.png",
+        "whiteSha256": "55ddc0465d26fce52073955386e58999204942791657df103ead9dd48d60f319",
+        "activeSha256": "c2e2abde3c0176d5212ca69df46ba26f60c6ef7ebd113fa8dab40689feeb8774",
+        "region": [
+          481,
+          559,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "1806b5bf4e3382521d9ccf14ada8abf8704f42a088a9e33bc05eada306fa74ca",
+        "activeRgbSha256": "1c1e607803779fcc95197b04b33aa28a543d5f143310d9e1e4693c7067d44534",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "LevelUp": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-clicked-10.png",
+        "whiteSha256": "55ddc0465d26fce52073955386e58999204942791657df103ead9dd48d60f319",
+        "activeSha256": "edaa988a2d2f4581b430d610c8004ff3f34da4cd717ee49f7c43d9b93bd16b5d",
+        "region": [
+          481,
+          589,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "375a9c1792a2fb7d3cb6f7136392f84afcaa8d50014f9003ee8a6a221ea94ff8",
+        "activeRgbSha256": "3896532a183a063495e3dad0bd6077c104b02de89d791c19a1d28d558d5ea1c2",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "HierarchicalList": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-view-1.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-view-before.png",
+        "whiteSha256": "2e44e63a415e0ca1287cae51f78668307f6304effe8ff5838ec0c460a156aa86",
+        "activeSha256": "3c9796ad2c11ab17ab0a7a67e38859954c86569223bda7f6cd62d4a632cef64b",
+        "region": [
+          813,
+          501,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "7a34286c50ec716272b0deda2d44e6cfb9fc23a4725fec754cb64ab611f511bc",
+        "activeRgbSha256": "d8d492f0ebaad8e48c1c198e2f18bc21e5ad3d22cafa1614b97d5715f95aaf7b",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "List": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-view-before.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-view-1.png",
+        "whiteSha256": "3c9796ad2c11ab17ab0a7a67e38859954c86569223bda7f6cd62d4a632cef64b",
+        "activeSha256": "2e44e63a415e0ca1287cae51f78668307f6304effe8ff5838ec0c460a156aa86",
+        "region": [
+          813,
+          531,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "1b3a00cfe580899551766b2af750a966b1602aa415fa9b115eabf3f2e2b15cc2",
+        "activeRgbSha256": "68f2da8778a8bcf2eae1b4bea7be2c7eb23c55d339a6459fadab27571020ef05",
+        "activeChannelError": 0,
+        "template": false
+      },
+      "Tree": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-view-before.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/CatalogHierarchy-view-2.png",
+        "whiteSha256": "3c9796ad2c11ab17ab0a7a67e38859954c86569223bda7f6cd62d4a632cef64b",
+        "activeSha256": "6fe15a3935a60161813665574726d1237d887a5a0d9a6a6f0fe7292c13abdfd5",
+        "region": [
+          813,
+          561,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "d8a24075736be746beeb5144ccd205a9208ca40206490f7303af4d37afff3f10",
+        "activeRgbSha256": "889d54b5727af4cfe5116ad9456ee2e8e9bd3a080d5a505e66159a43f502d455",
+        "activeChannelError": 0,
+        "template": false
+      }
+    },
+    "variants": {
+      "MarkObjectForDeletion": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-3.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "cd416a731734236d7ad9190ecd12624460cf0aefc9645853ee4fa7114b530203",
+        "region": [
+          481,
+          379,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "38a6f4dfa30c5a2d1d7c49770c1bf4fefb307f5c13bab56d45ae91eb2c80b887",
+        "activeRgbSha256": "2afbd13ab99dcd48c464fabddf37b7027704210b32a01f3c64f245eb842cb24f",
+        "activeChannelError": 0
+      },
+      "DeleteListItemDirectly": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-4.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "38f23f4975cc81873373efe8683748d4f3779e56c7a498e28374af39051f9ab4",
+        "region": [
+          481,
+          409,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "afd3a55251ae9eb527a798d67ff161ed85811f35daeafc98f77a509b2aab904f",
+        "activeRgbSha256": "fb3012f25b211bef28d36b3be1a2735351fdecfcb4171304adaf7a122f98bd6b",
+        "activeChannelError": 0
+      },
+      "Refresh": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-5.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "6be06734ebb8fc304a3ab7fb7fc32a5c8bafefcd1304d5c33ad0647cf0e1f6fa",
+        "region": [
+          481,
+          439,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "d79f637ed58e1577504c74e111ec0f1d883e8974f5630cfddcbd7aa83d181a8a",
+        "activeRgbSha256": "0fdca571562c165d9dc64fb72b331c5068175e1c5a612ea6d025d3f4eec44c9c",
+        "activeChannelError": 0
+      },
+      "Find": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Catalog-clicked-7.png",
+        "whiteSha256": "9502ed6483285bfb74adee179243f9e0388b7489b03adc26b1c392f3279c428d",
+        "activeSha256": "b50a210f22b54d2585e5d77d124014757f52a2663f9e104057567f73e780b8c9",
+        "region": [
+          481,
+          499,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "da08de9b28915cd2ef5d74edd0b70f9a3b5c83340d826cee6da7f8643f921710",
+        "activeRgbSha256": "3b2dcce4e083abc33e9055902e329ddff32ed6eee4a9bb7869bc2e2997cbefd3",
+        "activeChannelError": 0
+      },
+      "Post": {
+        "white": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Document-more.png",
+        "active": "form-native-dynamic-menu-Th3kO1Xk/submenus-en/Document-clicked-7.png",
+        "whiteSha256": "c9d0fa8eb388c6f567c2fac5633e4c6e03cdee62e085ee64014781dd0d553310",
+        "activeSha256": "4377ff4e9ded6815881fbf9d291810879417e8c3c01cfff1c1e7812ed263d019",
+        "region": [
+          481,
+          507,
+          16,
+          16
+        ],
+        "whiteRgbSha256": "1fc9103b0f62bf663b4efd0db42908a85d9c675e0b91381d55efd632ec28db74",
+        "activeRgbSha256": "32a25d60937860c2b399d9d9c18dbf45ca8f4b93d1a3a131cdb2db5b264fa765",
+        "activeChannelError": 0
+      }
+    },
+    "templateObservation": "Шаблон ссылки восстановлен как альфа-маска. Математическая композиция с foreground 77 и 61 совпадает с исходными снимками. Полные пиксели CSS-маски установленного VSIX отдельно не приняты."
+  },
+  "verification": {
+    "rust": {
+      "fmtCheck": true,
+      "check": true,
+      "clippyAllTargetsAllFeaturesDenyWarnings": true,
+      "testThreads": 1,
+      "passed": 1561,
+      "failed": 0,
+      "ignored": 19
+    },
+    "node": {
+      "tests": 675,
+      "pass": 666,
+      "fail": 0,
+      "skipped": 9
+    },
+    "installedMenus": [
+      {
+        "locale": "ru",
+        "report": {
+          "path": "form-dynamic-menu-viewer-ayWVCQEg/ru/menus.json",
+          "sha256": "94083cb66c35c237e90c353d3e172b3de2d8e50d0a0eeb53b4ceb510262b400b"
+        },
+        "receipt": {
+          "path": "form-dynamic-menu-viewer-ayWVCQEg/ru/receipt.json",
+          "sha256": "7a44d953974304512c3c7bc664383133fbbd25ed7565722fa42162ce96ec5136"
+        },
+        "sourceWrites": false,
+        "results": [
+          {
+            "kind": "Catalog",
+            "form": "ProbeWidthDynamicMenu43301",
+            "box": [
+              252,
+              97,
+              394,
+              432
+            ],
+            "intrinsicHeight": 520,
+            "rows": [
+              {
+                "label": "Создать",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Пометить на удаление / Снять пометку",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Расширенный поиск",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "История изменений",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Получить ссылку...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2,
+            "search": {
+              "labels": [
+                "Найти по текущему значению",
+                "Расширенный поиск",
+                "История поиска",
+                "Отменить поиск"
+              ],
+              "separators": 2,
+              "disabled": [
+                "История поиска"
+              ],
+              "box": [
+                377,
+                60
+              ]
+            },
+            "dirty": {
+              "box": [
+                252,
+                97,
+                394,
+                370
+              ],
+              "intrinsicHeight": 370,
+              "rows": [
+                {
+                  "label": "Изменить",
+                  "shortcut": "F2",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Пометить на удаление / Снять пометку",
+                  "shortcut": "Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Удалить",
+                  "shortcut": "Shift+Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Обновить",
+                  "shortcut": "F5",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Найти по текущему значению",
+                  "shortcut": "Ctrl+Alt+F",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "История изменений",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Получить ссылку...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Настроить список...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Выбрать настройки...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Сохранить настройки...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Установить стандартные настройки",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "Вывести список...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                }
+              ],
+              "separators": 2
+            },
+            "detached": {
+              "box": [
+                252,
+                97,
+                394,
+                520
+              ],
+              "intrinsicHeight": 520,
+              "rows": [
+                {
+                  "label": "Создать",
+                  "shortcut": "Ins",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Скопировать",
+                  "shortcut": "F9",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Изменить",
+                  "shortcut": "F2",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Пометить на удаление / Снять пометку",
+                  "shortcut": "Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Удалить",
+                  "shortcut": "Shift+Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Обновить",
+                  "shortcut": "F5",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Найти по текущему значению",
+                  "shortcut": "Ctrl+Alt+F",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "Расширенный поиск",
+                  "shortcut": "Alt+F",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Отменить поиск",
+                  "shortcut": "Ctrl+Q",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "История изменений",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Получить ссылку...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Настроить список...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Выбрать настройки...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Сохранить настройки...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Установить стандартные настройки",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "Вывести список...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Управление поиском",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": true,
+                  "icon": "ready"
+                }
+              ],
+              "separators": 2
+            },
+            "detachedDirty": {
+              "box": [
+                252,
+                97,
+                394,
+                370
+              ],
+              "intrinsicHeight": 370,
+              "rows": [
+                {
+                  "label": "Изменить",
+                  "shortcut": "F2",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Пометить на удаление / Снять пометку",
+                  "shortcut": "Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Удалить",
+                  "shortcut": "Shift+Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Обновить",
+                  "shortcut": "F5",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Найти по текущему значению",
+                  "shortcut": "Ctrl+Alt+F",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "История изменений",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Получить ссылку...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Настроить список...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Выбрать настройки...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Сохранить настройки...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Установить стандартные настройки",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "Вывести список...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                }
+              ],
+              "separators": 2
+            }
+          },
+          {
+            "kind": "CatalogWide",
+            "form": "ProbeWidthDynamicMenu43302",
+            "box": [
+              573,
+              97,
+              394,
+              432
+            ],
+            "intrinsicHeight": 520,
+            "rows": [
+              {
+                "label": "Создать",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Пометить на удаление / Снять пометку",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Расширенный поиск",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "История изменений",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Получить ссылку...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "CatalogNoSearch",
+            "form": "ProbeWidthDynamicMenu43303",
+            "box": [
+              253,
+              97,
+              394,
+              432
+            ],
+            "intrinsicHeight": 520,
+            "rows": [
+              {
+                "label": "Создать",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Пометить на удаление / Снять пометку",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Найти...",
+                "shortcut": "Ctrl+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "История изменений",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Получить ссылку...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "CatalogNoControl",
+            "form": "ProbeWidthDynamicMenu43304",
+            "box": [
+              252,
+              97,
+              394,
+              432
+            ],
+            "intrinsicHeight": 490,
+            "rows": [
+              {
+                "label": "Создать",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Пометить на удаление / Снять пометку",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Расширенный поиск",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "История изменений",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Получить ссылку...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "CatalogExcluded",
+            "form": "ProbeWidthDynamicMenu43305",
+            "box": [
+              253,
+              97,
+              377,
+              250
+            ],
+            "intrinsicHeight": 250,
+            "rows": [
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "CatalogReadOnly",
+            "form": "ProbeWidthDynamicMenu43306",
+            "box": [
+              252,
+              97,
+              394,
+              432
+            ],
+            "intrinsicHeight": 520,
+            "rows": [
+              {
+                "label": "Создать",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Пометить на удаление / Снять пометку",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Расширенный поиск",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "История изменений",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Получить ссылку...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "CatalogHierarchy",
+            "form": "ProbeWidthDynamicMenu43307",
+            "box": [
+              252,
+              97,
+              394,
+              432
+            ],
+            "intrinsicHeight": 670,
+            "rows": [
+              {
+                "label": "Создать",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Создать группу",
+                "shortcut": "Ctrl+F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Пометить на удаление / Снять пометку",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Режим просмотра",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              },
+              {
+                "label": "Переместить в группу",
+                "shortcut": "Ctrl+Shift+M",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Перейти на уровень ниже",
+                "shortcut": "Ctrl+Down",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Перейти на уровень выше",
+                "shortcut": "Ctrl+Up",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Расширенный поиск",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "История изменений",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Получить ссылку...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2,
+            "hierarchy": {
+              "labels": [
+                "Иерархический список",
+                "Список",
+                "Дерево"
+              ],
+              "separators": 0,
+              "disabled": [],
+              "box": [
+                242,
+                92
+              ]
+            }
+          },
+          {
+            "kind": "CatalogNoHistory",
+            "form": "ProbeWidthDynamicMenu43308",
+            "box": [
+              252,
+              97,
+              394,
+              432
+            ],
+            "intrinsicHeight": 520,
+            "rows": [
+              {
+                "label": "Создать",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Пометить на удаление / Снять пометку",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Расширенный поиск",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "История изменений",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Получить ссылку...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "Document",
+            "form": "ProbeWidthDynamicMenu43309",
+            "box": [
+              252,
+              97,
+              394,
+              432
+            ],
+            "intrinsicHeight": 622,
+            "rows": [
+              {
+                "label": "Создать",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Пометить на удаление / Снять пометку",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить период...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Провести",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить проведение",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Расширенный поиск",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "История изменений",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Получить ссылку...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 5
+          },
+          {
+            "kind": "Register",
+            "form": "ProbeWidthDynamicMenu43310",
+            "box": [
+              252,
+              97,
+              377,
+              432
+            ],
+            "intrinsicHeight": 528,
+            "rows": [
+              {
+                "label": "Создать",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить период...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Расширенный поиск",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "История изменений",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Получить ссылку...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 4
+          },
+          {
+            "kind": "Journal",
+            "form": "ProbeWidthDynamicMenu43311",
+            "box": [
+              252,
+              97,
+              394,
+              432
+            ],
+            "intrinsicHeight": 622,
+            "rows": [
+              {
+                "label": "Создать",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              },
+              {
+                "label": "Скопировать",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Изменить",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Пометить на удаление / Снять пометку",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Удалить",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить период...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Провести",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить проведение",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Расширенный поиск",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "История изменений",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Получить ссылку...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 5,
+            "create": {
+              "labels": [
+                "Заказ",
+                "Расход товара"
+              ],
+              "separators": 0,
+              "disabled": [],
+              "box": [
+                210,
+                62
+              ]
+            }
+          },
+          {
+            "kind": "NoMainTable",
+            "form": "ProbeWidthDynamicMenu43312",
+            "box": [
+              252,
+              97,
+              377,
+              310
+            ],
+            "intrinsicHeight": 310,
+            "rows": [
+              {
+                "label": "Обновить",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Найти по текущему значению",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Расширенный поиск",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Отменить поиск",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Настроить список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Выбрать настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Сохранить настройки...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Установить стандартные настройки",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Вывести список...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Управление поиском",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          }
+        ]
+      },
+      {
+        "locale": "en",
+        "report": {
+          "path": "form-dynamic-menu-viewer-ayWVCQEg/en/menus.json",
+          "sha256": "776139bb8cb60094a201cdc3536ed51c2755744fc102975769a345f3fd73c419"
+        },
+        "receipt": {
+          "path": "form-dynamic-menu-viewer-ayWVCQEg/en/receipt.json",
+          "sha256": "5ad9f0c3e11a49f1e811e7ba6e02d387e6a54a1803e253963e05e03e7764f58e"
+        },
+        "sourceWrites": false,
+        "results": [
+          {
+            "kind": "Catalog",
+            "form": "ProbeWidthDynamicMenu43301",
+            "box": [
+              204,
+              97,
+              335,
+              432
+            ],
+            "intrinsicHeight": 520,
+            "rows": [
+              {
+                "label": "Create",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Toggle deletion mark",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Advanced search",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Change history",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Get link...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2,
+            "search": {
+              "labels": [
+                "Search by current value",
+                "Advanced search",
+                "Search history",
+                "Cancel search"
+              ],
+              "separators": 2,
+              "disabled": [
+                "Search history"
+              ],
+              "box": [
+                335,
+                60
+              ]
+            },
+            "dirty": {
+              "box": [
+                204,
+                97,
+                335,
+                370
+              ],
+              "intrinsicHeight": 370,
+              "rows": [
+                {
+                  "label": "Edit",
+                  "shortcut": "F2",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Toggle deletion mark",
+                  "shortcut": "Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Delete",
+                  "shortcut": "Shift+Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Refresh",
+                  "shortcut": "F5",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Search by current value",
+                  "shortcut": "Ctrl+Alt+F",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "Change history",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Get link...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Configure list...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Select settings...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Save settings...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Restore default settings",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "Output list...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                }
+              ],
+              "separators": 2
+            },
+            "detached": {
+              "box": [
+                204,
+                97,
+                335,
+                520
+              ],
+              "intrinsicHeight": 520,
+              "rows": [
+                {
+                  "label": "Create",
+                  "shortcut": "Ins",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Copy",
+                  "shortcut": "F9",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Edit",
+                  "shortcut": "F2",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Toggle deletion mark",
+                  "shortcut": "Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Delete",
+                  "shortcut": "Shift+Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Refresh",
+                  "shortcut": "F5",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Search by current value",
+                  "shortcut": "Ctrl+Alt+F",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "Advanced search",
+                  "shortcut": "Alt+F",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Cancel search",
+                  "shortcut": "Ctrl+Q",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Change history",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Get link...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Configure list...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Select settings...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Save settings...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Restore default settings",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "Output list...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Search management",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": true,
+                  "icon": "ready"
+                }
+              ],
+              "separators": 2
+            },
+            "detachedDirty": {
+              "box": [
+                204,
+                97,
+                335,
+                370
+              ],
+              "intrinsicHeight": 370,
+              "rows": [
+                {
+                  "label": "Edit",
+                  "shortcut": "F2",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Toggle deletion mark",
+                  "shortcut": "Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Delete",
+                  "shortcut": "Shift+Del",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Refresh",
+                  "shortcut": "F5",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Search by current value",
+                  "shortcut": "Ctrl+Alt+F",
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "Change history",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Get link...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Configure list...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Select settings...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Save settings...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                },
+                {
+                  "label": "Restore default settings",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": null
+                },
+                {
+                  "label": "Output list...",
+                  "shortcut": null,
+                  "height": 30,
+                  "submenu": false,
+                  "icon": "ready"
+                }
+              ],
+              "separators": 2
+            }
+          },
+          {
+            "kind": "CatalogWide",
+            "form": "ProbeWidthDynamicMenu43302",
+            "box": [
+              525,
+              97,
+              335,
+              432
+            ],
+            "intrinsicHeight": 520,
+            "rows": [
+              {
+                "label": "Create",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Toggle deletion mark",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Advanced search",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Change history",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Get link...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "CatalogNoSearch",
+            "form": "ProbeWidthDynamicMenu43303",
+            "box": [
+              205,
+              97,
+              335,
+              432
+            ],
+            "intrinsicHeight": 520,
+            "rows": [
+              {
+                "label": "Create",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Toggle deletion mark",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Find...",
+                "shortcut": "Ctrl+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Change history",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Get link...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "CatalogNoControl",
+            "form": "ProbeWidthDynamicMenu43304",
+            "box": [
+              204,
+              97,
+              335,
+              432
+            ],
+            "intrinsicHeight": 490,
+            "rows": [
+              {
+                "label": "Create",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Toggle deletion mark",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Advanced search",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Change history",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Get link...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "CatalogExcluded",
+            "form": "ProbeWidthDynamicMenu43305",
+            "box": [
+              204,
+              97,
+              335,
+              250
+            ],
+            "intrinsicHeight": 250,
+            "rows": [
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "CatalogReadOnly",
+            "form": "ProbeWidthDynamicMenu43306",
+            "box": [
+              204,
+              97,
+              335,
+              432
+            ],
+            "intrinsicHeight": 520,
+            "rows": [
+              {
+                "label": "Create",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Toggle deletion mark",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Advanced search",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Change history",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Get link...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "CatalogHierarchy",
+            "form": "ProbeWidthDynamicMenu43307",
+            "box": [
+              204,
+              97,
+              335,
+              432
+            ],
+            "intrinsicHeight": 670,
+            "rows": [
+              {
+                "label": "Create",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Create group",
+                "shortcut": "Ctrl+F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Toggle deletion mark",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "View mode",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              },
+              {
+                "label": "Move to group",
+                "shortcut": "Ctrl+Shift+M",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Go one level down",
+                "shortcut": "Ctrl+Down",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Go one level up",
+                "shortcut": "Ctrl+Up",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Advanced search",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Change history",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Get link...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2,
+            "hierarchy": {
+              "labels": [
+                "Hierarchical list",
+                "List",
+                "Tree"
+              ],
+              "separators": 0,
+              "disabled": [],
+              "box": [
+                210,
+                92
+              ]
+            }
+          },
+          {
+            "kind": "CatalogNoHistory",
+            "form": "ProbeWidthDynamicMenu43308",
+            "box": [
+              204,
+              97,
+              335,
+              432
+            ],
+            "intrinsicHeight": 520,
+            "rows": [
+              {
+                "label": "Create",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Toggle deletion mark",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Advanced search",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Change history",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Get link...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          },
+          {
+            "kind": "Document",
+            "form": "ProbeWidthDynamicMenu43309",
+            "box": [
+              204,
+              97,
+              335,
+              432
+            ],
+            "intrinsicHeight": 622,
+            "rows": [
+              {
+                "label": "Create",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Toggle deletion mark",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Set period...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Post",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel posting",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Advanced search",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Change history",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Get link...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 5
+          },
+          {
+            "kind": "Register",
+            "form": "ProbeWidthDynamicMenu43310",
+            "box": [
+              204,
+              97,
+              335,
+              432
+            ],
+            "intrinsicHeight": 528,
+            "rows": [
+              {
+                "label": "Create",
+                "shortcut": "Ins",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Set period...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Advanced search",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Change history",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Get link...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 4
+          },
+          {
+            "kind": "Journal",
+            "form": "ProbeWidthDynamicMenu43311",
+            "box": [
+              204,
+              97,
+              335,
+              432
+            ],
+            "intrinsicHeight": 622,
+            "rows": [
+              {
+                "label": "Create",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              },
+              {
+                "label": "Copy",
+                "shortcut": "F9",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Edit",
+                "shortcut": "F2",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Toggle deletion mark",
+                "shortcut": "Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Delete",
+                "shortcut": "Shift+Del",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Set period...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Post",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel posting",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Advanced search",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Change history",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Get link...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 5,
+            "create": {
+              "labels": [
+                "Заказ",
+                "Расход товара"
+              ],
+              "separators": 0,
+              "disabled": [],
+              "box": [
+                210,
+                62
+              ]
+            }
+          },
+          {
+            "kind": "NoMainTable",
+            "form": "ProbeWidthDynamicMenu43312",
+            "box": [
+              204,
+              97,
+              335,
+              310
+            ],
+            "intrinsicHeight": 310,
+            "rows": [
+              {
+                "label": "Refresh",
+                "shortcut": "F5",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search by current value",
+                "shortcut": "Ctrl+Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Advanced search",
+                "shortcut": "Alt+F",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Cancel search",
+                "shortcut": "Ctrl+Q",
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Configure list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Select settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Save settings...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Restore default settings",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": null
+              },
+              {
+                "label": "Output list...",
+                "shortcut": null,
+                "height": 30,
+                "submenu": false,
+                "icon": "ready"
+              },
+              {
+                "label": "Search management",
+                "shortcut": null,
+                "height": 30,
+                "submenu": true,
+                "icon": "ready"
+              }
+            ],
+            "separators": 2
+          }
+        ]
+      }
+    ],
+    "batch": {
+      "report": {
+        "path": "form-batch-7V7Aop/batch.json",
+        "sha256": "f0ead9f839a39ed9615f57e12f7406f9d713edccf425ce96da4e8729327e5677"
+      },
+      "passed": true,
+      "runs": [
+        {
+          "suite": "tables",
+          "locale": "en",
+          "passed": true,
+          "caseIds": 17
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "passed": true,
+          "caseIds": 17
+        },
+        {
+          "suite": "table-pixels",
+          "locale": "en",
+          "passed": true,
+          "caseIds": 48
+        },
+        {
+          "suite": "table-pixels",
+          "locale": "ru",
+          "passed": true,
+          "caseIds": 47
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "passed": true,
+          "caseIds": 31
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "passed": true,
+          "caseIds": 31
+        },
+        {
+          "suite": "detached-space",
+          "locale": "en",
+          "passed": true,
+          "caseIds": 6
+        },
+        {
+          "suite": "detached-space",
+          "locale": "ru",
+          "passed": true,
+          "caseIds": 6
+        },
+        {
+          "suite": "standard-pictures",
+          "locale": "en",
+          "passed": true,
+          "caseIds": 12
+        },
+        {
+          "suite": "standard-pictures",
+          "locale": "ru",
+          "passed": true,
+          "caseIds": 12
+        },
+        {
+          "suite": "pictures",
+          "locale": "en",
+          "passed": true,
+          "caseIds": 1
+        },
+        {
+          "suite": "pictures",
+          "locale": "ru",
+          "passed": true,
+          "caseIds": 1
+        }
+      ]
+    },
+    "retryNotes": [
+      "До итогового последовательного прогона полный Rust-набор имел отдельные падения в тестах update (ETXTBSY) и query recovery. Эти модули не изменялись.",
+      "GUI-драйвер дважды закрывал меню. Последующий dirty-сценарий выявил исчезновение панели при исключении inline-команд. Драйвер исправлен, панель сохранена, регрессия покрыта постоянными тестами.",
+      "Матрица журнала выявила ObjectPresentation вместо Synonym и исходный порядок RegisteredDocuments. Исправлены подписи и сортировка, добавлены unit- и protocol-регрессии."
+    ],
+    "rootMenuRegression": {
+      "cases": [
+        {
+          "kind": "loan",
+          "locale": "ru",
+          "receipt": {
+            "path": "form-dynamic-menu-root-regression-1Asg7rH5/loan-ru/receipt.json",
+            "sha256": "db2124b15ec3cf95c0c9abf06413ced3b7cda5b16bb7a56781a2e0c42b395af7"
+          }
+        },
+        {
+          "kind": "loan",
+          "locale": "en",
+          "receipt": {
+            "path": "form-dynamic-menu-root-regression-1Asg7rH5/loan-en/receipt.json",
+            "sha256": "d4db0d6e0b482fd32335ee7a3da36511ccb9222d8bc6a38a27089fc4c1e57751"
+          }
+        },
+        {
+          "kind": "matrix",
+          "locale": "ru",
+          "receipt": {
+            "path": "form-dynamic-menu-root-regression-1Asg7rH5/matrix-ru/receipt.json",
+            "sha256": "4798ae2342a632b14be5eb29d3fe44e355c33cf3010efab362f6db1187266725"
+          }
+        },
+        {
+          "kind": "matrix",
+          "locale": "en",
+          "receipt": {
+            "path": "form-dynamic-menu-root-regression-1Asg7rH5/matrix-en/receipt.json",
+            "sha256": "b74dbd224d700ab70f77b0af173029cb5e9a88f9c6063bd13b7e7a541a120257"
+          }
+        }
+      ],
+      "passed": true,
+      "scope": "Главное меню формы выдачи займа и прежняя матрица автоматических и явных команд в том же VSIX."
+    }
+  },
+  "limits": [
+    "Полное RGB-сравнение меню, клавиатурных подсказок и всех состояний фокуса ещё не выполнено.",
+    "Прежний минимум 210 px увеличивает небольшие вложенные меню журнала и английской иерархии относительно native. Их полная геометрия ещё не принята.",
+    "Эталонный состав ограничен справочником, документом, журналом, периодическим независимым регистром сведений и запросом без MainTable.",
+    "Прочие виды списков, все сочетания расширений, шрифтов, оформления, размеров и DPI требуют сверки.",
+    "Windows и профиль 8.5 остаются в приёмке. T159 и общая приёмка форм продолжаются."
+  ]
+}
