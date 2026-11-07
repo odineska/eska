@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestone": "T157",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "zoom": 100,
+  "artifactBase": "../eska-playground",
+  "explorerCommit": "db5b5aef0a67cd77c53fe2e5e16f8d40f704fd7a",
+  "eskaSourceCommit": "d43ad5577a1f6d807fdff783417542be7431769d",
+  "compatibility": {
+    "loan": "Version8_3_21",
+    "probes": "Version8_3_27"
+  },
+  "coordinateSpace": "Form-relative CSS pixels at 100% zoom. Probe frame widths include one additional outline pixel in the viewer.",
+  "bslExecuted": false,
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "checks": {
+    "node": {
+      "passed": 649,
+      "failed": 0,
+      "skipped": 9
+    },
+    "installedBatch": {
+      "report": "form-batch-2sj5oc/batch.json",
+      "inputWitness": "form-batch-2sj5oc/inputs.json",
+      "runs": 4,
+      "caseEntries": 324,
+      "vsixSha256": "2b608435c204e77f1bfc45d107af7787ef042291c682a4c9e4bcb67c9d2ef5cc"
+    }
+  },
+  "nativeProbes": {
+    "states": 56,
+    "frameWidthsMatched": 56,
+    "titlePlacementsMatched": 112,
+    "controlXWidthsHeightsMatched": 224,
+    "maximumVerticalErrorPx": 0.5,
+    "runs": [
+      {
+        "nativeDirectory": "form-native-mixed-titles-sweep-iXzOKF68",
+        "nativeCaseProperties": "cases.json",
+        "geometry": "form-installed-settlement-layout-bIWzma2c/mixed-ru/geometry.json",
+        "geometrySha256": "0a7be40ceed6d4024227f282e808c41b920b592f8178e47c4f80c787383f9bb7",
+        "states": [
+          {"capture": "ProbeWidthMixed42101-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[492, 62, 203, 23], [492, 94, 203, 23], [705, 62, 20, 18], [705, 94, 20, 18]], "viewerControls": [[492, 62, 203, 23], [492, 94, 203, 23], [705, 61.5, 20, 18], [705, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42101-compact.png", "rightWidth": 367, "titleLocations": ["Left", "Left"], "nativeControls": [[492, 62, 151, 23], [492, 94, 151, 23], [653, 62, 20, 18], [653, 94, 20, 18]], "viewerControls": [[492, 62, 151, 23], [492, 94, 151, 23], [653, 61.5, 20, 18], [653, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42102-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[522, 62, 203, 23], [522, 94, 203, 23], [735, 62, 20, 18], [735, 94, 20, 18]], "viewerControls": [[522, 62, 203, 23], [522, 94, 203, 23], [735, 61.5, 20, 18], [735, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42102-compact.png", "rightWidth": 337, "titleLocations": ["Left", "Left"], "nativeControls": [[522, 62, 136, 23], [522, 94, 136, 23], [668, 62, 20, 18], [668, 94, 20, 18]], "viewerControls": [[522, 62, 136, 23], [522, 94, 136, 23], [668, 61.5, 20, 18], [668, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42103-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[532, 62, 203, 23], [532, 94, 203, 23], [745, 62, 20, 18], [745, 94, 20, 18]], "viewerControls": [[532, 62, 203, 23], [532, 94, 203, 23], [745, 61.5, 20, 18], [745, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42103-compact.png", "rightWidth": 327, "titleLocations": ["Left", "Left"], "nativeControls": [[532, 62, 131, 23], [532, 94, 131, 23], [673, 62, 20, 18], [673, 94, 20, 18]], "viewerControls": [[532, 62, 131, 23], [532, 94, 131, 23], [673, 61.5, 20, 18], [673, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42104-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[542, 62, 203, 23], [542, 94, 203, 23], [755, 62, 20, 18], [755, 94, 20, 18]], "viewerControls": [[542, 62, 203, 23], [542, 94, 203, 23], [755, 61.5, 20, 18], [755, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42104-compact.png", "rightWidth": 317, "titleLocations": ["Left", "Left"], "nativeControls": [[542, 62, 126, 23], [542, 94, 126, 23], [678, 62, 20, 18], [678, 94, 20, 18]], "viewerControls": [[542, 62, 126, 23], [542, 94, 126, 23], [678, 61.5, 20, 18], [678, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42105-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[552, 62, 203, 23], [552, 94, 203, 23], [765, 62, 20, 18], [765, 94, 20, 18]], "viewerControls": [[552, 62, 203, 23], [552, 94, 203, 23], [765, 61.5, 20, 18], [765, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42105-compact.png", "rightWidth": 307, "titleLocations": ["Left", "Left"], "nativeControls": [[552, 62, 121, 23], [552, 94, 121, 23], [683, 62, 20, 18], [683, 94, 20, 18]], "viewerControls": [[552, 62, 121, 23], [552, 94, 121, 23], [683, 61.5, 20, 18], [683, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42106-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[562, 62, 203, 23], [562, 94, 203, 23], [775, 62, 20, 18], [775, 94, 20, 18]], "viewerControls": [[562, 62, 203, 23], [562, 94, 203, 23], [775, 61.5, 20, 18], [775, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42106-compact.png", "rightWidth": 297, "titleLocations": ["Left", "Left"], "nativeControls": [[562, 62, 116, 23], [562, 94, 116, 23], [688, 62, 20, 18], [688, 94, 20, 18]], "viewerControls": [[562, 62, 116, 23], [562, 94, 116, 23], [688, 61.5, 20, 18], [688, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42107-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[572, 62, 203, 23], [572, 94, 203, 23], [785, 62, 20, 18], [785, 94, 20, 18]], "viewerControls": [[572, 62, 203, 23], [572, 94, 203, 23], [785, 61.5, 20, 18], [785, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42107-compact.png", "rightWidth": 284, "titleLocations": ["Top", "Left"], "nativeControls": [[494, 81, 184, 23], [565, 113, 113, 23], [688, 62, 20, 18], [688, 113, 20, 18]], "viewerControls": [[494, 81, 184, 23], [565, 113, 113, 23], [688, 61.5, 20, 18], [688, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42108-medium.png", "rightWidth": 469, "titleLocations": ["Left", "Left"], "nativeControls": [[582, 62, 202, 23], [582, 94, 202, 23], [794, 62, 20, 18], [794, 94, 20, 18]], "viewerControls": [[582, 62, 202, 23], [582, 94, 202, 23], [794, 61.5, 20, 18], [794, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42108-compact.png", "rightWidth": 275, "titleLocations": ["Top", "Top"], "nativeControls": [[504, 81, 154, 23], [504, 132, 154, 23], [668, 62, 20, 18], [668, 113, 20, 18]], "viewerControls": [[504, 81, 154, 23], [504, 132, 154, 23], [668, 61.5, 20, 18], [668, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42109-medium.png", "rightWidth": 459, "titleLocations": ["Left", "Left"], "nativeControls": [[592, 62, 197, 23], [592, 94, 197, 23], [799, 62, 20, 18], [799, 94, 20, 18]], "viewerControls": [[592, 62, 197, 23], [592, 94, 197, 23], [799, 61.5, 20, 18], [799, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42109-compact.png", "rightWidth": 267, "titleLocations": ["Top", "Top"], "nativeControls": [[514, 100, 131, 23], [514, 151, 131, 23], [655, 81, 20, 18], [655, 132, 20, 18]], "viewerControls": [[514, 100, 131, 23], [514, 151, 131, 23], [655, 80.5, 20, 18], [655, 131.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42110-medium.png", "rightWidth": 429, "titleLocations": ["Left", "Left"], "nativeControls": [[622, 62, 182, 23], [622, 94, 182, 23], [814, 62, 20, 18], [814, 94, 20, 18]], "viewerControls": [[622, 62, 182, 23], [622, 94, 182, 23], [814, 61.5, 20, 18], [814, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42110-compact.png", "rightWidth": 237, "titleLocations": ["Top", "Top"], "nativeControls": [[544, 100, 114, 23], [544, 151, 114, 23], [668, 81, 20, 18], [668, 132, 20, 18]], "viewerControls": [[544, 100, 114, 23], [544, 151, 114, 23], [668, 80.5, 20, 18], [668, 131.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42111-medium.png", "rightWidth": 359, "titleLocations": ["Left", "Left"], "nativeControls": [[692, 62, 147, 23], [692, 94, 147, 23], [849, 62, 20, 18], [849, 94, 20, 18]], "viewerControls": [[692, 62, 147, 23], [692, 94, 147, 23], [849, 61.5, 20, 18], [849, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42111-compact.png", "rightWidth": 213, "titleLocations": ["Top", "Top"], "nativeControls": [[614, 100, 113, 23], [614, 151, 113, 23], [737, 81, 20, 18], [737, 132, 20, 18]], "viewerControls": [[614, 100, 113, 23], [614, 151, 113, 23], [737, 80.5, 20, 18], [737, 131.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42112-medium.png", "rightWidth": 469, "titleLocations": ["Left", "Left"], "nativeControls": [[582, 62, 202, 23], [582, 94, 202, 23], [794, 62, 20, 18], [794, 94, 20, 18]], "viewerControls": [[582, 62, 202, 23], [582, 94, 202, 23], [794, 61.5, 20, 18], [794, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42112-compact.png", "rightWidth": 291, "titleLocations": ["Left", "Left"], "nativeControls": [[582, 62, 113, 23], [575, 94, 120, 23], [705, 62, 20, 18], [705, 94, 20, 18]], "viewerControls": [[582, 62, 113, 23], [575, 94, 120, 23], [705, 61.5, 20, 18], [705, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42113-medium.png", "rightWidth": 449, "titleLocations": ["Left", "Left"], "nativeControls": [[602, 39, 192, 23], [602, 71, 192, 23], [804, 39, 20, 18], [804, 71, 20, 18]], "viewerControls": [[602, 39, 192, 23], [602, 71, 192, 23], [804, 38.5, 20, 18], [804, 70.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42113-compact.png", "rightWidth": 213, "titleLocations": ["Top", "Top"], "nativeControls": [[524, 58, 113, 23], [524, 109, 113, 23], [647, 39, 20, 18], [647, 90, 20, 18]], "viewerControls": [[524, 58, 113, 23], [524, 109, 113, 23], [647, 38.5, 20, 18], [647, 89.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42114-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[562, 62, 203, 23], [555, 94, 207, 23], [775, 62, 20, 18], [772, 94, 20, 18]], "viewerControls": [[562, 62, 203, 23], [555, 94, 207, 23], [775, 61.5, 20, 18], [772, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42114-compact.png", "rightWidth": 297, "titleLocations": ["Left", "Left"], "nativeControls": [[562, 62, 116, 23], [555, 94, 119, 23], [688, 62, 20, 18], [684, 94, 20, 18]], "viewerControls": [[562, 62, 116, 23], [555, 94, 119, 23], [688, 61.5, 20, 18], [684, 93.5, 20, 18]]}
+        ]
+      },
+      {
+        "nativeDirectory": "form-native-settlement-layout-Gdrvt76K",
+        "nativeCaseProperties": "cases.json",
+        "geometry": "form-installed-settlement-layout-bIWzma2c/mixed-extra-ru/geometry.json",
+        "geometrySha256": "a2f72ac61b2272d7bc234559b58e63d8aab237ff4ab30f65f915dd70f9ae8a98",
+        "states": [
+          {"capture": "ProbeWidthMixed42201-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[572, 39, 203, 23], [572, 71, 203, 23], [785, 39, 20, 18], [785, 71, 20, 18]], "viewerControls": [[572, 39, 203, 23], [572, 71, 203, 23], [785, 38.5, 20, 18], [785, 70.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42201-compact.png", "rightWidth": 284, "titleLocations": ["Top", "Left"], "nativeControls": [[494, 58, 184, 23], [565, 90, 113, 23], [688, 39, 20, 18], [688, 90, 20, 18]], "viewerControls": [[494, 58, 184, 23], [565, 90, 113, 23], [688, 38.5, 20, 18], [688, 89.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42202-medium.png", "rightWidth": 469, "titleLocations": ["Left", "Left"], "nativeControls": [[582, 39, 202, 23], [582, 71, 202, 23], [794, 39, 20, 18], [794, 71, 20, 18]], "viewerControls": [[582, 39, 202, 23], [582, 71, 202, 23], [794, 38.5, 20, 18], [794, 70.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42202-compact.png", "rightWidth": 213, "titleLocations": ["Top", "Top"], "nativeControls": [[504, 58, 113, 23], [504, 109, 113, 23], [627, 39, 20, 18], [627, 90, 20, 18]], "viewerControls": [[504, 58, 113, 23], [504, 109, 113, 23], [627, 38.5, 20, 18], [627, 89.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42203-medium.png", "rightWidth": 459, "titleLocations": ["Left", "Left"], "nativeControls": [[592, 39, 197, 23], [592, 71, 197, 23], [799, 39, 20, 18], [799, 71, 20, 18]], "viewerControls": [[592, 39, 197, 23], [592, 71, 197, 23], [799, 38.5, 20, 18], [799, 70.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42203-compact.png", "rightWidth": 213, "titleLocations": ["Top", "Top"], "nativeControls": [[514, 58, 113, 23], [514, 109, 113, 23], [637, 39, 20, 18], [637, 90, 20, 18]], "viewerControls": [[514, 58, 113, 23], [514, 109, 113, 23], [637, 38.5, 20, 18], [637, 89.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42204-medium.png", "rightWidth": 439, "titleLocations": ["Left", "Left"], "nativeControls": [[612, 39, 187, 23], [612, 71, 187, 23], [809, 39, 20, 18], [809, 71, 20, 18]], "viewerControls": [[612, 39, 187, 23], [612, 71, 187, 23], [809, 38.5, 20, 18], [809, 70.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42204-compact.png", "rightWidth": 213, "titleLocations": ["Top", "Top"], "nativeControls": [[534, 58, 113, 23], [534, 109, 113, 23], [657, 39, 20, 18], [657, 90, 20, 18]], "viewerControls": [[534, 58, 113, 23], [534, 109, 113, 23], [657, 38.5, 20, 18], [657, 89.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42205-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[572, 62, 203, 23], [572, 94, 203, 23], [785, 62, 20, 18], [785, 94, 20, 18]], "viewerControls": [[572, 62, 203, 23], [572, 94, 203, 23], [785, 61.5, 20, 18], [785, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42205-compact.png", "rightWidth": 284, "titleLocations": ["Top", "Left"], "nativeControls": [[494, 81, 184, 23], [565, 113, 113, 23], [688, 62, 20, 18], [688, 113, 20, 18]], "viewerControls": [[494, 81, 184, 23], [565, 113, 113, 23], [688, 61.5, 20, 18], [688, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42206-medium.png", "rightWidth": 469, "titleLocations": ["Left", "Left"], "nativeControls": [[582, 62, 202, 23], [582, 94, 202, 23], [794, 62, 20, 18], [794, 94, 20, 18]], "viewerControls": [[582, 62, 202, 23], [582, 94, 202, 23], [794, 61.5, 20, 18], [794, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42206-compact.png", "rightWidth": 213, "titleLocations": ["Top", "Top"], "nativeControls": [[504, 81, 113, 23], [504, 132, 113, 23], [627, 62, 20, 18], [627, 113, 20, 18]], "viewerControls": [[504, 81, 113, 23], [504, 132, 113, 23], [627, 61.5, 20, 18], [627, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42207-medium.png", "rightWidth": 459, "titleLocations": ["Left", "Left"], "nativeControls": [[592, 62, 197, 23], [592, 94, 197, 23], [799, 62, 20, 18], [799, 94, 20, 18]], "viewerControls": [[592, 62, 197, 23], [592, 94, 197, 23], [799, 61.5, 20, 18], [799, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42207-compact.png", "rightWidth": 213, "titleLocations": ["Top", "Top"], "nativeControls": [[514, 81, 113, 23], [514, 132, 113, 23], [637, 62, 20, 18], [637, 113, 20, 18]], "viewerControls": [[514, 81, 113, 23], [514, 132, 113, 23], [637, 61.5, 20, 18], [637, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42208-medium.png", "rightWidth": 439, "titleLocations": ["Left", "Left"], "nativeControls": [[612, 62, 187, 23], [612, 94, 187, 23], [809, 62, 20, 18], [809, 94, 20, 18]], "viewerControls": [[612, 62, 187, 23], [612, 94, 187, 23], [809, 61.5, 20, 18], [809, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42208-compact.png", "rightWidth": 213, "titleLocations": ["Top", "Top"], "nativeControls": [[534, 81, 113, 23], [534, 132, 113, 23], [657, 62, 20, 18], [657, 113, 20, 18]], "viewerControls": [[534, 81, 113, 23], [534, 132, 113, 23], [657, 61.5, 20, 18], [657, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42209-medium.png", "rightWidth": 393, "titleLocations": ["Top", "Top"], "nativeControls": [[504, 81, 203, 23], [504, 132, 203, 23], [717, 62, 20, 18], [717, 113, 20, 18]], "viewerControls": [[504, 81, 203, 23], [504, 132, 203, 23], [717, 61.5, 20, 18], [717, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42209-compact.png", "rightWidth": 277, "titleLocations": ["Top", "Top"], "nativeControls": [[504, 81, 145, 23], [504, 132, 145, 23], [659, 62, 20, 18], [659, 113, 20, 18]], "viewerControls": [[504, 81, 145, 23], [504, 132, 145, 23], [659, 61.5, 20, 18], [659, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42210-medium.png", "rightWidth": 393, "titleLocations": ["Top", "Top"], "nativeControls": [[504, 81, 203, 23], [504, 132, 203, 23], [717, 62, 20, 18], [717, 113, 20, 18]], "viewerControls": [[504, 81, 203, 23], [504, 132, 203, 23], [717, 61.5, 20, 18], [717, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42210-compact.png", "rightWidth": 277, "titleLocations": ["Top", "Top"], "nativeControls": [[504, 81, 145, 23], [504, 132, 145, 23], [659, 62, 20, 18], [659, 113, 20, 18]], "viewerControls": [[504, 81, 145, 23], [504, 132, 145, 23], [659, 61.5, 20, 18], [659, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42211-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[572, 62, 203, 23], [565, 94, 207, 23], [785, 62, 20, 18], [782, 94, 20, 18]], "viewerControls": [[572, 62, 203, 23], [565, 94, 207, 23], [785, 61.5, 20, 18], [782, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42211-compact.png", "rightWidth": 284, "titleLocations": ["Top", "Left"], "nativeControls": [[494, 81, 159, 23], [565, 113, 113, 23], [663, 62, 20, 18], [688, 113, 20, 18]], "viewerControls": [[494, 81, 159, 23], [565, 113, 113, 23], [663, 61.5, 20, 18], [688, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42212-medium.png", "rightWidth": 469, "titleLocations": ["Left", "Left"], "nativeControls": [[582, 62, 202, 23], [575, 94, 206, 23], [794, 62, 20, 18], [791, 94, 20, 18]], "viewerControls": [[582, 62, 202, 23], [575, 94, 206, 23], [794, 61.5, 20, 18], [791, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42212-compact.png", "rightWidth": 275, "titleLocations": ["Top", "Top"], "nativeControls": [[504, 81, 153, 23], [504, 132, 153, 23], [667, 62, 20, 18], [667, 113, 20, 18]], "viewerControls": [[504, 81, 153, 23], [504, 132, 153, 23], [667, 61.5, 20, 18], [667, 112.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42213-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[572, 62, 203, 23], [572, 94, 203, 23], [785, 62, 20, 18], [785, 94, 20, 18]], "viewerControls": [[572, 62, 203, 23], [572, 94, 203, 23], [785, 61.5, 20, 18], [785, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42213-compact.png", "rightWidth": 291, "titleLocations": ["Left", "Left"], "nativeControls": [[572, 62, 113, 23], [565, 94, 120, 23], [695, 62, 20, 18], [695, 94, 20, 18]], "viewerControls": [[572, 62, 113, 23], [565, 94, 120, 23], [695, 61.5, 20, 18], [695, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42214-medium.png", "rightWidth": 471, "titleLocations": ["Left", "Left"], "nativeControls": [[562, 62, 203, 23], [562, 94, 203, 23], [775, 62, 20, 18], [775, 94, 20, 18]], "viewerControls": [[562, 62, 203, 23], [562, 94, 203, 23], [775, 61.5, 20, 18], [775, 93.5, 20, 18]]},
+          {"capture": "ProbeWidthMixed42214-compact.png", "rightWidth": 297, "titleLocations": ["Left", "Left"], "nativeControls": [[562, 62, 116, 23], [562, 94, 116, 23], [688, 62, 20, 18], [688, 94, 20, 18]], "viewerControls": [[562, 62, 116, 23], [562, 94, 116, 23], [688, 61.5, 20, 18], [688, 93.5, 20, 18]]}
+        ]
+      }
+    ]
+  },
+  "loanDisbursement": {
+    "source": "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "sourceXmlUnchanged": true,
+    "nativeCompact": {
+      "capture": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-top-crop.png",
+      "sha256": "0d236d878fe55602d62c62dd4cf50a9931348f4f75edbe6edecaf3f196399fbd",
+      "frame": [696, 760],
+      "rightWidth": 275,
+      "titleLocations": [
+        "Top",
+        "Top"
+      ],
+      "references": [
+        [400, 447, 154, 23],
+        [400, 498, 154, 23]
+      ],
+      "pictures": [
+        [564, 428, 20, 18],
+        [564, 479, 20, 18]
+      ]
+    },
+    "before": {
+      "geometry": "form-installed-checkbox-wrap-6W3lY3Ku/loan-ru/geometry.json",
+      "geometrySha256": "55eb0698cf05e4a7d39f83aa183bb71eec05c4100215f182646c9e3e5e3ff823",
+      "detached": true,
+      "compact": {
+        "frame": [712, 748],
+        "wrapper": [400, 390, 291, 128],
+        "group": [400, 390, 291, 80],
+        "heading": null,
+        "titleLocations": [
+          "Left",
+          "Left"
+        ],
+        "references": [
+          [478, 414, 120.171875, 23],
+          [478, 446, 120.171875, 23]
+        ],
+        "pictures": [
+          null,
+          null
+        ],
+        "sameOwners": true,
+        "selection": "932"
+      }
+    },
+    "installed": {
+      "ru": {
+        "geometry": "form-installed-settlement-layout-bIWzma2c/loan-ru/geometry.json",
+        "geometrySha256": "63b6b3af766aba758b4e3bd39fc55f46815170e0e1002dfe2503711517e8779f",
+        "detached": true,
+        "compact": {
+          "frame": [696, 760],
+          "wrapper": [400, 390, 275, 128],
+          "group": [400, 390, 275, 118],
+          "heading": [400, 390, 275, 19],
+          "titleLocations": [
+            "Top",
+            "Top"
+          ],
+          "references": [
+            [400, 433, 154, 23],
+            [400, 484, 154, 23]
+          ],
+          "pictures": [
+            [564, 413.5, 20, 18],
+            [564, 464.5, 20, 18]
+          ],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        "explicitLeft": {
+          "frame": [712, 748],
+          "wrapper": [400, 390, 291, 128],
+          "group": [400, 390, 291, 80],
+          "heading": [400, 390, 291, 19],
+          "titleLocations": [
+            "Left",
+            "Left"
+          ],
+          "references": [
+            [478, 414, 113, 23],
+            [471, 446, 120, 23]
+          ],
+          "pictures": [
+            [601, 413.5, 20, 18],
+            [601, 445.5, 20, 18]
+          ],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        "restored": {
+          "frame": [696, 760],
+          "wrapper": [400, 390, 275, 128],
+          "group": [400, 390, 275, 118],
+          "heading": [400, 390, 275, 19],
+          "titleLocations": [
+            "Top",
+            "Top"
+          ],
+          "references": [
+            [400, 433, 154, 23],
+            [400, 484, 154, 23]
+          ],
+          "pictures": [
+            [564, 413.5, 20, 18],
+            [564, 464.5, 20, 18]
+          ],
+          "sameOwners": true,
+          "selection": "948"
+        }
+      },
+      "en": {
+        "geometry": "form-installed-settlement-layout-bIWzma2c/loan-en/geometry.json",
+        "geometrySha256": "63b6b3af766aba758b4e3bd39fc55f46815170e0e1002dfe2503711517e8779f",
+        "detached": true,
+        "compact": {
+          "frame": [696, 760],
+          "wrapper": [400, 390, 275, 128],
+          "group": [400, 390, 275, 118],
+          "heading": [400, 390, 275, 19],
+          "titleLocations": [
+            "Top",
+            "Top"
+          ],
+          "references": [
+            [400, 433, 154, 23],
+            [400, 484, 154, 23]
+          ],
+          "pictures": [
+            [564, 413.5, 20, 18],
+            [564, 464.5, 20, 18]
+          ],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        "explicitLeft": {
+          "frame": [712, 748],
+          "wrapper": [400, 390, 291, 128],
+          "group": [400, 390, 291, 80],
+          "heading": [400, 390, 291, 19],
+          "titleLocations": [
+            "Left",
+            "Left"
+          ],
+          "references": [
+            [478, 414, 113, 23],
+            [471, 446, 120, 23]
+          ],
+          "pictures": [
+            [601, 413.5, 20, 18],
+            [601, 445.5, 20, 18]
+          ],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        "restored": {
+          "frame": [696, 760],
+          "wrapper": [400, 390, 275, 128],
+          "group": [400, 390, 275, 118],
+          "heading": [400, 390, 275, 19],
+          "titleLocations": [
+            "Top",
+            "Top"
+          ],
+          "references": [
+            [400, 433, 154, 23],
+            [400, 484, 154, 23]
+          ],
+          "pictures": [
+            [564, 413.5, 20, 18],
+            [564, 464.5, 20, 18]
+          ],
+          "sameOwners": true,
+          "selection": "948"
+        }
+      }
+    }
+  },
+  "remaining": [
+    "The compact real form matches the frame, title positions relative to their own controls, and right-hand control widths. Absolute positions require the enclosing group alignment.",
+    "The mixed profile covers a single-line reference, a fixed picture, and a stretching label. Other combinations retain the existing mixed layout.",
+    "The lower table, footer and Windows need separate acceptance."
+  ]
+}
