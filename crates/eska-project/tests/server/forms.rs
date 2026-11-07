@@ -3,6 +3,12 @@ use eska_project_core::project::metadata_edit::snapshot;
 
 const PATH: &str = "CommonForms/Preview/Ext/Form.xml";
 const INPUT: &str = "\u{feff}<Form xmlns=\"http://v8.1c.ru/8.3/xcf/logform\"><ChildItems><InputField name=\"Поле\" id=\"9223372036854775807\"><Title>Исходный</Title></InputField></ChildItems></Form>\r\n";
+
+fn source_path(source: &Value) -> &Path {
+    assert_eq!(source["path"]["encoding"], "utf-8");
+    Path::new(source["path"]["value"].as_str().unwrap())
+}
+
 fn fixture() -> support::TestDir {
     let directory = support::TestDir::new();
     fs::write(
@@ -1530,7 +1536,7 @@ fn form_preparation_is_versioned_and_does_not_parse_payloads() {
             let prepared = &prepared["result"];
             assert_eq!(prepared["roots"].as_array().unwrap().len(), 1);
             assert_eq!(prepared["forms"].as_array().unwrap().len(), 1);
-            assert_eq!(prepared["forms"][0]["path"]["value"], PATH);
+            assert_eq!(source_path(&prepared["forms"][0]), Path::new(PATH));
             assert_eq!(prepared["forms"][0]["id"].as_str().unwrap().len(), 64);
             let opened = client.response("form/open", &params(&context, json!({"node":node})));
             assert_eq!(opened["error"]["data"]["details"]["reason"], "invalid_xml");
@@ -1568,8 +1574,8 @@ fn handler_navigation_uses_checked_modules_and_the_current_editor_snapshot() {
         let target = json!({"formSessionId":id,"revision":"1","index":0});
         let source = client.request("form/handlerSource", &params(&context, target.clone()));
         assert_eq!(
-            source["path"]["value"],
-            "CommonForms/Preview/Ext/Form/Module.bsl"
+            source_path(&source),
+            Path::new("CommonForms/Preview/Ext/Form/Module.bsl")
         );
         let input = json!({"source":source["source"],"version":"7","text":text});
         let mut locate = target.clone();
@@ -1818,7 +1824,7 @@ fn form_resolves_owned_command_captions_and_tracks_their_descriptors() {
                 .unwrap()
                 .iter()
                 .find(|dependency| {
-                    dependency["path"]["value"] == path && dependency["role"] == "metadata"
+                    source_path(dependency) == Path::new(path) && dependency["role"] == "metadata"
                 })
                 .unwrap()
         };
@@ -1902,7 +1908,7 @@ fn form_projects_command_groups_with_effective_placements_and_dirty_metadata() {
         .as_array()
         .unwrap()
         .iter()
-        .find(|dependency| dependency["path"]["value"] == group_path)
+        .find(|dependency| source_path(dependency) == Path::new(group_path))
         .unwrap()["id"];
     assert_eq!(projected[2]["origin"]["source"], *group_id);
     let updated = client.request("form/update", &params(&context, json!({"formSessionId":opened["formSessionId"],"revision":"1","overlays":[{
@@ -1977,7 +1983,7 @@ fn form_projects_standard_object_menu_and_discovers_dirty_document_journals() {
             .as_array()
             .unwrap()
             .iter()
-            .find(|item| item["path"]["value"] == path)
+            .find(|item| source_path(item) == Path::new(path))
             .cloned()
     };
     let mut client = Client::new(&directory.0, "ru-RU");
@@ -2091,7 +2097,7 @@ fn dynamic_list_menu_loads_journal_documents_and_updates_unsaved_sources() {
                 .as_array()
                 .unwrap()
                 .iter()
-                .find(|dependency| dependency["path"]["value"] == path)
+                .find(|dependency| source_path(dependency) == Path::new(path))
                 .unwrap()["id"]
                 .clone()
         };
@@ -2170,7 +2176,7 @@ fn form_discovers_new_based_on_targets_and_preserves_last_valid_menu() {
             .as_array()
             .unwrap()
             .iter()
-            .find(|input| input["path"]["value"] == path)
+            .find(|input| source_path(input) == Path::new(path))
             .cloned()
     };
     let mut client = Client::new(&directory.0, "en-US");
@@ -2448,7 +2454,7 @@ fn oversized_metadata_depth_preserves_the_last_form_revision() {
             .as_array()
             .unwrap()
             .iter()
-            .find(|input| input["path"]["value"] == "StyleItems/FontA.xml")
+            .find(|input| source_path(input) == Path::new("StyleItems/FontA.xml"))
             .unwrap()["id"];
         let rejected = client.response(
             "form/update",
