@@ -21,7 +21,12 @@
     "ValueInput": "4f142ff3e2d4857cdce617fee713687ce84ce25b0665478482205bc7a45db6d4",
     "ValueLong": "b5d4e2957b47898958ac72d46d6bf90401844f8c0e957140f0a6dd7f16e861cb",
     "ValueOuter": "0e1b818981dfd3f7ae28925619502a41f3706e45594dc384344f356c6521c71f",
-    "ValueSibling": "1a365c67ebb745ed8306b9eb7304da285438e802f2fb8fccb080eac6ddbb3861"
+    "ValueSibling": "1a365c67ebb745ed8306b9eb7304da285438e802f2fb8fccb080eac6ddbb3861",
+    "ScopeInputs": "94546e4c5c609dccb4604cf86aea2e4aed23c96bf68ec5073f26a2758a9545eb",
+    "ScopeButton": "5c4e622a204623ec097482eceb3ca96a5a38edfe03ddace5ddd8e2be0643454b",
+    "ScopeParent": "67daf25ac658ab6fdc39c0c306e65fcd30675a2e112d5484b80ca882d608b4a8",
+    "ScopeParentButton": "0b5b3d39f689966569c26f67e6ae6deb1cc278bbbe5ccb2c4774f1252621b76f",
+    "ScopePage": "6639f32bf4feeb769e4ed128d766e56f41779ae938fa9bc101b795e75ac0bb5a"
   },
   "cases": [
     {
@@ -3114,6 +3119,1226 @@
           ]
         }
       ]
+    }
+  ],
+  "representationCompatibility": "Version8_3_24",
+  "representationLocale": "ru",
+  "representationCases": [
+    {
+      "case": "TwoInputsAuto",
+      "form": "ProbeWidthWizard43602",
+      "fixture": "ScopeInputs",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "94546e4c5c609dccb4604cf86aea2e4aed23c96bf68ec5073f26a2758a9545eb",
+      "screenshotSha256": "8124862525f3b82d50963bb5084a7d4823c7a3b1cc5f077f251fc407fee1f89f"
+    },
+    {
+      "case": "TwoInputsLeft",
+      "form": "ProbeWidthWizard43603",
+      "fixture": "ScopeInputs",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": "Left",
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "36b273f75e883f4f957e56b2dddfae60e3c14aa03e3c2d12b4a62f737322318c",
+      "screenshotSha256": "9488a355412596526f648182b55f95f16b653f614f136466a54f62524fc63147"
+    },
+    {
+      "case": "ButtonAuto",
+      "form": "ProbeWidthWizard43604",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "5c4e622a204623ec097482eceb3ca96a5a38edfe03ddace5ddd8e2be0643454b",
+      "screenshotSha256": "5a9caf866a0ce6fd8f10e3e3ed666ad6cf758ef670329fe332bf322be5093b61"
+    },
+    {
+      "case": "ButtonLeft",
+      "form": "ProbeWidthWizard43605",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": "Left",
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "1a6376616b15b2c3d6a0b51ca945ebe47698fc83912292e8f9613b4dea2c1a1b",
+      "screenshotSha256": "d1ca9d6f38a43343e4dab12274a75ad257c5098cca26f48274e4aeac3db1129f"
+    },
+    {
+      "case": "ButtonUseAuto",
+      "form": "ProbeWidthWizard43606",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": "Use",
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "511d6b7b74facef1a1b7d775b28e7a78ec12dbd2a61562da0d7a55103147afb4",
+      "screenshotSha256": "37c322fab177f78c35584eacea857ceaf57aafb515be7888d4dc31802d08089a"
+    },
+    {
+      "case": "ButtonUseLeft",
+      "form": "ProbeWidthWizard43607",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": "Use",
+      "titleLocation": "Left",
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "cd29938a0aac8de56c95bf5351b86472422539505e21b9da7efc58e6cb3d5bce",
+      "screenshotSha256": "03daf517a8d2af153d8238a81f98a435e382459a5c49c81e5f48dabe7fcc663d"
+    },
+    {
+      "case": "ButtonDontUse",
+      "form": "ProbeWidthWizard43608",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": "DontUse",
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "30992796f642de1240a88ac8e4d078e29300ef38b79d9e379236c50abeb09fe1",
+      "screenshotSha256": "b279d238dceaffd2e5425ddd014b8ae3e2fbc8caf01717cf9ec339e63be98077"
+    },
+    {
+      "case": "ButtonHorizontal",
+      "form": "ProbeWidthWizard43609",
+      "fixture": "ScopeButton",
+      "grouping": "Horizontal",
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "4fd23786f316ed45dba595dc1e61d36e76c555767c397f8ff3a6e619f374b350",
+      "screenshotSha256": "67463a059c94a25e218f54dfbf46172bdaa6413d36c7300ece94eccfcbcb4461"
+    },
+    {
+      "case": "ButtonBothLeft",
+      "form": "ProbeWidthWizard43612",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": "Left",
+      "topTitle": "Left",
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "a20035d55c84a16df37f11dc244564c478d07005b43c931ad8374587196479a0",
+      "screenshotSha256": "3a43bc331563fb390c29ff546daa07ea3f55e753091662cf4389355217aa8016"
+    },
+    {
+      "case": "ParentInputs",
+      "form": "ProbeWidthWizard43613",
+      "fixture": "ScopeParent",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "67daf25ac658ab6fdc39c0c306e65fcd30675a2e112d5484b80ca882d608b4a8",
+      "screenshotSha256": "9e39f2ce4ac40b4d758de6d6cae83d3b1395c1adbb7068bbe6b84e209e00c6ff"
+    },
+    {
+      "case": "ParentButton",
+      "form": "ProbeWidthWizard43614",
+      "fixture": "ScopeParentButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "0b5b3d39f689966569c26f67e6ae6deb1cc278bbbe5ccb2c4774f1252621b76f",
+      "screenshotSha256": "1a873e25170d1b73562db73fad63adb3f5bf496f7816003b02cceb7246553418"
+    },
+    {
+      "case": "PageDefault",
+      "form": "ProbeWidthWizard43615",
+      "fixture": "ScopePage",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "6639f32bf4feeb769e4ed128d766e56f41779ae938fa9bc101b795e75ac0bb5a",
+      "screenshotSha256": "598c7d8c31422cd988f498b4c427580c147b44df5beb7a7434108dc0451734f9"
+    },
+    {
+      "case": "PageVertical",
+      "form": "ProbeWidthWizard43616",
+      "fixture": "ScopePage",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": "Vertical",
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "3725a17df5a38429e75f2e5dbab33b35ebdd80f478b44c2baf24a14a27461d90",
+      "screenshotSha256": "45a4054abcacf36ed03944afffb0754fffc462e8b092e5e1bcce79d162da4517"
+    },
+    {
+      "case": "PageUse",
+      "form": "ProbeWidthWizard43617",
+      "fixture": "ScopePage",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": "Use",
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            545,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            545,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "35d5e0ecbbd159d69a21ba92382f996c241446a356d5c58b56f96323b44e4b06",
+      "screenshotSha256": "d1cdf8f7b3be392e6102a337f25a9657f37a8676beb13808461e7c40f3296f2b"
+    },
+    {
+      "case": "RepNoneInputs",
+      "form": "ProbeWidthWizard43618",
+      "fixture": "ScopeInputs",
+      "grouping": null,
+      "representation": "None",
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            545,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            545,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "b8bbbb940b0700257262abab9e0504a984f98c0096a5cfd50c86eb32d8c13376",
+      "screenshotSha256": "456294a72841d3cb7ae45fc595bf9808d28576f984ab0bf890c7f32088ef5fe9"
+    },
+    {
+      "case": "RepNormalInputs",
+      "form": "ProbeWidthWizard43620",
+      "fixture": "ScopeInputs",
+      "grouping": null,
+      "representation": "NormalSeparation",
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            79,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            79,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            79,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            79,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        115
+      ],
+      "sourceSha256": "af697cc2f72d566a78c9571bd3616e9cc6e48dd8afaac0a4c7517bdbcc266caf",
+      "screenshotSha256": "3e4c45782d31046203328f6062763a1d4fa157582b92b195fee921a7786640db"
+    },
+    {
+      "case": "RepNoneButton",
+      "form": "ProbeWidthWizard43621",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": "None",
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "2c1c3d719a7252512906d285cd161ac98830c55e6e58113b76670bd3f80d9fe2",
+      "screenshotSha256": "6e93e8e845a55bded55e62de49103c109b8d79f07d16c3dfacf1e2a63145cf30"
+    },
+    {
+      "case": "VerticalAuto",
+      "form": "ProbeWidthWizard43622",
+      "fixture": "ScopeInputs",
+      "grouping": "Vertical",
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            93,
+            103,
+            91,
+            23
+          ],
+          "logical": [
+            93,
+            103,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        139
+      ],
+      "sourceSha256": "19261d17cbe61c864f4ea41e5f78fe9bc302ea0114a543ebfc1cb00142bb8d73",
+      "screenshotSha256": "e61c686f02304303bcbaf117306b7bedbf35bc461aff4a7816c7b0b845815c78"
+    },
+    {
+      "case": "VerticalNone",
+      "form": "ProbeWidthWizard43623",
+      "fixture": "ScopeInputs",
+      "grouping": "Vertical",
+      "representation": "None",
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            263,
+            103,
+            91,
+            23
+          ],
+          "logical": [
+            263,
+            103,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        139
+      ],
+      "sourceSha256": "20317bea1de6b964e0dbbfc405604c52b369717749aec2ac005a65e264925be9",
+      "screenshotSha256": "3b4e3a47d753394b7d8846111ac49beb117410da3a23a4d2776fc840bb690b33"
+    },
+    {
+      "case": "VerticalUse",
+      "form": "ProbeWidthWizard43624",
+      "fixture": "ScopeInputs",
+      "grouping": "Vertical",
+      "representation": null,
+      "throughAlign": "Use",
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            263,
+            103,
+            91,
+            23
+          ],
+          "logical": [
+            263,
+            103,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        139
+      ],
+      "sourceSha256": "7c84a3a9a623e712167a9d462058349c5def929cea54d5a24e63c4ad29f9b36b",
+      "screenshotSha256": "08a90a1c12cb66f2a5787e616811e3a6f82c1e990582d95caabe77c82c3c7dd2"
     }
   ]
 }
