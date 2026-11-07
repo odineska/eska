@@ -61,6 +61,40 @@ fn params(context: &Value, values: Value) -> Value {
     value
 }
 
+#[test]
+fn native_font_face_names_reach_rpc_and_dirty_revisions_in_both_locales() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let source = INPUT.replace(
+        "<Title>Исходный</Title>",
+        "<Title>Исходный</Title><Font faceName=\"Liberation Serif\" height=\"10\" kind=\"WindowsFont\"/><TitleFont faceName=\"Liberation Mono\" height=\"12\" kind=\"WindowsFont\"/>",
+    );
+    fs::write(&path, &source).unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let element = &opened["model"]["root"]["children"][0];
+        let identity = element["identity"].clone();
+        assert_eq!(element["presentation"]["font"]["face"], "Liberation Serif");
+        assert_eq!(
+            element["presentation"]["titleFont"]["face"],
+            "Liberation Mono"
+        );
+        let changed = source.replace("Liberation Serif", "Arial");
+        let updated = update_input(&mut client, &context, &opened, 2, &changed);
+        let element = &updated["model"]["root"]["children"][0];
+        assert_eq!(element["identity"], identity);
+        assert_eq!(element["presentation"]["font"]["face"], "Arial");
+        assert_eq!(
+            element["presentation"]["titleFont"]["face"],
+            "Liberation Mono"
+        );
+        client.finish();
+        assert_eq!(fs::read_to_string(&path).unwrap(), source);
+    }
+}
+
 const GROUP: &str =
     include_str!("../../../../tests/fixtures/forms/native-property-palette/UsualGroup.xml");
 const GROUP_OVERRIDES: &str = include_str!(
