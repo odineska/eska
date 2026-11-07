@@ -1,0 +1,3243 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-07T06:10:22.349374+00:00",
+  "milestone": "T157",
+  "scope": "Граница сквозной колонки обычной группы при явном HorizontalStretch=false. Это часть приёмки геометрии; полные формы не объявляются совпавшими.",
+  "platform": "Linux ARM64 ALT 10",
+  "platformBuild": "8.3.27.2342",
+  "dpi": 96,
+  "zoom": 100,
+  "nativeBoundaryLocale": "ru",
+  "nativeBoundaryCompatibility": "Version8_3_24",
+  "bspNativeLocale": "en",
+  "viewerLocales": [
+    "ru",
+    "en"
+  ],
+  "artifactBase": "../eska-playground",
+  "eskaCommit": "6e9d1b039c33986d53908b9c3fa7e90ea0df2a42",
+  "explorerCommit": "bb03e7a8cf06e7993ebdd930ca3e3889dad01ca0",
+  "baselineExplorerCommit": "57203f25653c70f844ce21a41d1bd2e4e13f0295",
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "sourceWritesDuringViewing": false,
+  "bslExecuted": false,
+  "rule": {
+    "sharedRenderer": "alignThroughLabels/sharesLabels",
+    "authoredHorizontalStretchFalseOwnsScope": true,
+    "throughAlignUseDoesNotOverrideBoundary": true,
+    "automaticNonStretchIsNotAnAuthoredBoundary": true,
+    "noFormNameCssExceptions": true
+  },
+  "nativeReference": {
+    "path": "tests/fixtures/forms/native-through-align-rows/metrics.json",
+    "sha256": "ddcb8b42686d62121b0e2a242530e3f7891f6691b3b8bfa5675e4ed6aa694d44",
+    "forms": 5,
+    "cases": 23,
+    "ownCaptionCases": 10
+  },
+  "smallForms": {
+    "coordinateSpace": "x/y/width/height relative to the respective form frame. Native marker rectangles were found by the complete existing 15x15 glyph, without masks.",
+    "observations": [
+      {
+        "case": "Direct",
+        "nativeFrame": [
+          409,
+          133
+        ],
+        "beforeFrame": [
+          412,
+          133
+        ],
+        "afterFrame": [
+          412,
+          133
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Last": [
+            177,
+            97,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              178,
+              72,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              236,
+              72,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            70,
+            124,
+            19
+          ],
+          "Last": [
+            180,
+            97,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            70,
+            124,
+            19
+          ],
+          "Last": [
+            180,
+            97,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "Auto",
+        "nativeFrame": [
+          452,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          454,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            340,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              178,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              236,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "Use",
+        "nativeFrame": [
+          452,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          454,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            340,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              178,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              236,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "DontUse",
+        "nativeFrame": [
+          409,
+          139
+        ],
+        "beforeFrame": [
+          412,
+          139
+        ],
+        "afterFrame": [
+          412,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            223,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              61,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              119,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            222,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            222,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": true
+      },
+      {
+        "case": "Check",
+        "nativeFrame": [
+          409,
+          139
+        ],
+        "beforeFrame": [
+          412,
+          139
+        ],
+        "afterFrame": [
+          412,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            233,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            182,
+            75,
+            15,
+            15
+          ],
+          "Tail": [
+            236,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            182,
+            75,
+            15,
+            15
+          ],
+          "Tail": [
+            236,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "Input",
+        "nativeFrame": [
+          419,
+          139
+        ],
+        "beforeFrame": [
+          421,
+          139
+        ],
+        "afterFrame": [
+          421,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            307,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ],
+          "OptionInput": [
+            177,
+            71,
+            91,
+            23
+          ]
+        },
+        "nativeMarks": [],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            71,
+            91,
+            23
+          ],
+          "Tail": [
+            309,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            71,
+            91,
+            23
+          ],
+          "Tail": [
+            309,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "UnitedTrue",
+        "nativeFrame": [
+          452,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          454,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            340,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              178,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              236,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "UnitedFalse",
+        "nativeFrame": [
+          539,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          454,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            427,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              178,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              236,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "Trailing",
+        "nativeFrame": [
+          470,
+          139
+        ],
+        "beforeFrame": [
+          473,
+          139
+        ],
+        "afterFrame": [
+          473,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            177,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              326,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              384,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            180,
+            71,
+            91,
+            23
+          ],
+          "Option": [
+            328,
+            73,
+            124,
+            19
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            180,
+            71,
+            91,
+            23
+          ],
+          "Option": [
+            328,
+            73,
+            124,
+            19
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "Default",
+        "nativeFrame": [
+          452,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          454,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            340,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              178,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              236,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "Conditional",
+        "nativeFrame": [
+          452,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          454,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            340,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              178,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              236,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "DefaultFixed",
+        "nativeFrame": [
+          409,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          412,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            223,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              61,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              119,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            220,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": true
+      },
+      {
+        "case": "HorizontalFixed",
+        "nativeFrame": [
+          409,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          412,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            223,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              61,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              119,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            220,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": true
+      },
+      {
+        "case": "ConditionalFixed",
+        "nativeFrame": [
+          409,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          412,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            223,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              61,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              119,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            220,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": true
+      },
+      {
+        "case": "DefaultUseFixed",
+        "nativeFrame": [
+          409,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          412,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            223,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              61,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              119,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            220,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": true
+      },
+      {
+        "case": "DefaultDontUseFixed",
+        "nativeFrame": [
+          409,
+          139
+        ],
+        "beforeFrame": [
+          412,
+          139
+        ],
+        "afterFrame": [
+          412,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            223,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              61,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              119,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            220,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            220,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": true
+      },
+      {
+        "case": "TitleAuto",
+        "nativeFrame": [
+          452,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          454,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            340,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              178,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              236,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "TitleAutoFixed",
+        "nativeFrame": [
+          409,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          412,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            223,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              61,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              119,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            220,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": true
+      },
+      {
+        "case": "TitleAutoUse",
+        "nativeFrame": [
+          452,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          454,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            340,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              178,
+              75,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              236,
+              75,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "DirectTitleAuto",
+        "nativeFrame": [
+          409,
+          133
+        ],
+        "beforeFrame": [
+          412,
+          133
+        ],
+        "afterFrame": [
+          412,
+          133
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Last": [
+            177,
+            97,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              178,
+              72,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              236,
+              72,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            70,
+            124,
+            19
+          ],
+          "Last": [
+            180,
+            97,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            70,
+            124,
+            19
+          ],
+          "Last": [
+            180,
+            97,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": false
+      },
+      {
+        "case": "FixedInput",
+        "nativeFrame": [
+          409,
+          139
+        ],
+        "beforeFrame": [
+          421,
+          139
+        ],
+        "afterFrame": [
+          412,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            190,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ],
+          "OptionInput": [
+            60,
+            71,
+            91,
+            23
+          ]
+        },
+        "nativeMarks": [],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            71,
+            91,
+            23
+          ],
+          "Tail": [
+            309,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            71,
+            91,
+            23
+          ],
+          "Tail": [
+            187,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": true
+      },
+      {
+        "case": "FixedVertical",
+        "nativeFrame": [
+          409,
+          165
+        ],
+        "beforeFrame": [
+          412,
+          165
+        ],
+        "afterFrame": [
+          412,
+          165
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            60,
+            97,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            129,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              61,
+              72,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              119,
+              72,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            70,
+            124,
+            19
+          ],
+          "Tail": [
+            180,
+            97,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            129,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            70,
+            124,
+            19
+          ],
+          "Tail": [
+            60,
+            97,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            129,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": true
+      },
+      {
+        "case": "FixedVerticalUse",
+        "nativeFrame": [
+          409,
+          165
+        ],
+        "beforeFrame": [
+          412,
+          165
+        ],
+        "afterFrame": [
+          412,
+          165
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            60,
+            97,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            129,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          {
+            "selected": true,
+            "box": [
+              61,
+              72,
+              15,
+              15
+            ]
+          },
+          {
+            "selected": false,
+            "box": [
+              119,
+              72,
+              15,
+              15
+            ]
+          }
+        ],
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            70,
+            124,
+            19
+          ],
+          "Tail": [
+            180,
+            97,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            129,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            70,
+            124,
+            19
+          ],
+          "Tail": [
+            60,
+            97,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            129,
+            211,
+            23
+          ]
+        },
+        "ownCaptionAccepted": true
+      }
+    ],
+    "beforeReports": [
+      {
+        "pathInPlayground": "form-choice-through-viewer-4SByyVEH/ru/geometry.json",
+        "sha256": "8e68ebfb86dc25acde2641f95831891eedd903bcbd74c6f72ce93b7699090861"
+      },
+      {
+        "pathInPlayground": "form-choice-through-viewer-4SByyVEH/en/geometry.json",
+        "sha256": "801d387ae86bd830faff70e6fbde55d4db0e9b9702a764098028d35b560da155"
+      }
+    ],
+    "afterReports": [
+      {
+        "pathInPlayground": "form-choice-through-viewer-fgaf5sMc/ru/geometry.json",
+        "sha256": "aac33214dc43f1b28084d888495c832dcaf3c74b9045bd99e4abece63bab4531"
+      },
+      {
+        "pathInPlayground": "form-choice-through-viewer-fgaf5sMc/en/geometry.json",
+        "sha256": "f61b27c5e8a0eaf79c8e9786c6b8ecb0e77ce317013898054fe91fc28b72a0a3"
+      }
+    ],
+    "fullFrameAccepted": false,
+    "coordinateSetsIdenticalInLocales": [
+      "ru",
+      "en"
+    ]
+  },
+  "bsp": {
+    "compatibility": "Version8_3_24",
+    "forms": 3,
+    "statesPerLocale": 12,
+    "sourceContext": {
+      "pathInPlayground": "united-bsp-context-763t8lxb/context.json",
+      "sha256": "1792163b441b04a3511c870ac48a5c8b3535709c6fe80f3b0c49707453e57212"
+    },
+    "observations": [
+      {
+        "locale": "ru",
+        "sample": 0,
+        "source": {
+          "pathInPlayground": "united-bsp-context-763t8lxb/src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml",
+          "sha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da"
+        },
+        "beforePreferredFrame": {
+          "width": 861,
+          "height": 612
+        },
+        "afterPreferredFrame": {
+          "width": 835,
+          "height": 612
+        },
+        "before": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/ru/review.json",
+          "sha256": "45ebe819319cb583c7eec9bcbece71057b5c374a1cacb9df43d08489d71bc836"
+        },
+        "after": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/ru/review.json",
+          "sha256": "1d6a913bc2e73acc992596bef4cba3c0e476588d6babd05448e76ee3c6b5db97"
+        },
+        "beforeCapture": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/ru/bsp-0-preferred-alternate.png",
+          "sha256": "3594f1cbe352b51282896347683b4992f054de0581113b25e9262365179202b3"
+        },
+        "afterCapture": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/ru/bsp-0-preferred-alternate.png",
+          "sha256": "defe4aa1d24a7dbfc4b98e61d1514a2f26fc72d2f6ca96671bda50fa67f28ad2"
+        },
+        "beforeOpenThroughFirstPaintMs": 764,
+        "afterOpenThroughFirstPaintMs": 756
+      },
+      {
+        "locale": "ru",
+        "sample": 1,
+        "source": {
+          "pathInPlayground": "united-bsp-context-763t8lxb/src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+          "sha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3"
+        },
+        "beforePreferredFrame": {
+          "width": 756,
+          "height": 796
+        },
+        "afterPreferredFrame": {
+          "width": 756,
+          "height": 796
+        },
+        "before": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/ru/review.json",
+          "sha256": "45ebe819319cb583c7eec9bcbece71057b5c374a1cacb9df43d08489d71bc836"
+        },
+        "after": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/ru/review.json",
+          "sha256": "1d6a913bc2e73acc992596bef4cba3c0e476588d6babd05448e76ee3c6b5db97"
+        },
+        "beforeCapture": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/ru/bsp-1-preferred-alternate.png",
+          "sha256": "c118ebc23f61df99ace0d79757ff5e602a33064fc33268680aeae3c6581f16d6"
+        },
+        "afterCapture": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/ru/bsp-1-preferred-alternate.png",
+          "sha256": "7793e6b6aeb284d427d395ada5156bec1efaae9330cfc21fdee146ba3680e0fb"
+        },
+        "beforeOpenThroughFirstPaintMs": 716,
+        "afterOpenThroughFirstPaintMs": 673
+      },
+      {
+        "locale": "ru",
+        "sample": 2,
+        "source": {
+          "pathInPlayground": "united-bsp-context-763t8lxb/src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml",
+          "sha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248"
+        },
+        "beforePreferredFrame": {
+          "width": 1217,
+          "height": 533
+        },
+        "afterPreferredFrame": {
+          "width": 1217,
+          "height": 533
+        },
+        "before": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/ru/review.json",
+          "sha256": "45ebe819319cb583c7eec9bcbece71057b5c374a1cacb9df43d08489d71bc836"
+        },
+        "after": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/ru/review.json",
+          "sha256": "1d6a913bc2e73acc992596bef4cba3c0e476588d6babd05448e76ee3c6b5db97"
+        },
+        "beforeCapture": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/ru/bsp-2-preferred-alternate.png",
+          "sha256": "b2bcb6c5b89b7bbcfa7a983bd59574c82f458314c6d86a0a42e5c048738bdf8a"
+        },
+        "afterCapture": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/ru/bsp-2-preferred-alternate.png",
+          "sha256": "13f1aa8fc8c8c317f90c96df91e40a251753e47d02c587fc313799822506c547"
+        },
+        "beforeOpenThroughFirstPaintMs": 716,
+        "afterOpenThroughFirstPaintMs": 793
+      },
+      {
+        "locale": "en",
+        "sample": 0,
+        "source": {
+          "pathInPlayground": "united-bsp-context-763t8lxb/src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml",
+          "sha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da"
+        },
+        "beforePreferredFrame": {
+          "width": 861,
+          "height": 612
+        },
+        "afterPreferredFrame": {
+          "width": 835,
+          "height": 612
+        },
+        "before": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/en/review.json",
+          "sha256": "3bffc30af295245d3ecc190cfefda4424c9e3e29242500822a584e5221184a70"
+        },
+        "after": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/en/review.json",
+          "sha256": "a2ad38b375e4003a046db8cb80cb925655a55ce5be0e2e1101a54fba18a7dc6d"
+        },
+        "beforeCapture": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/en/bsp-0-preferred-alternate.png",
+          "sha256": "b6098a40fba605c97b1b7fdd5b5f3474eb8878b152f82324000072f542b127cf"
+        },
+        "afterCapture": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/en/bsp-0-preferred-alternate.png",
+          "sha256": "10f11fa28380dbef327b438d97ec1df097a438654402b7d3883e664a71953a91"
+        },
+        "beforeOpenThroughFirstPaintMs": 790,
+        "afterOpenThroughFirstPaintMs": 766
+      },
+      {
+        "locale": "en",
+        "sample": 1,
+        "source": {
+          "pathInPlayground": "united-bsp-context-763t8lxb/src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+          "sha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3"
+        },
+        "beforePreferredFrame": {
+          "width": 766,
+          "height": 796
+        },
+        "afterPreferredFrame": {
+          "width": 766,
+          "height": 796
+        },
+        "before": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/en/review.json",
+          "sha256": "3bffc30af295245d3ecc190cfefda4424c9e3e29242500822a584e5221184a70"
+        },
+        "after": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/en/review.json",
+          "sha256": "a2ad38b375e4003a046db8cb80cb925655a55ce5be0e2e1101a54fba18a7dc6d"
+        },
+        "beforeCapture": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/en/bsp-1-preferred-alternate.png",
+          "sha256": "085fb4bd0470a97d4460a72e339d0812a8b82a01493ce793c090a7d124740ba0"
+        },
+        "afterCapture": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/en/bsp-1-preferred-alternate.png",
+          "sha256": "085fb4bd0470a97d4460a72e339d0812a8b82a01493ce793c090a7d124740ba0"
+        },
+        "beforeOpenThroughFirstPaintMs": 689,
+        "afterOpenThroughFirstPaintMs": 652
+      },
+      {
+        "locale": "en",
+        "sample": 2,
+        "source": {
+          "pathInPlayground": "united-bsp-context-763t8lxb/src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml",
+          "sha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248"
+        },
+        "beforePreferredFrame": {
+          "width": 1217,
+          "height": 533
+        },
+        "afterPreferredFrame": {
+          "width": 1217,
+          "height": 533
+        },
+        "before": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/en/review.json",
+          "sha256": "3bffc30af295245d3ecc190cfefda4424c9e3e29242500822a584e5221184a70"
+        },
+        "after": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/en/review.json",
+          "sha256": "a2ad38b375e4003a046db8cb80cb925655a55ce5be0e2e1101a54fba18a7dc6d"
+        },
+        "beforeCapture": {
+          "pathInPlayground": "bsp-layout-review-B8wvgonb/en/bsp-2-preferred-alternate.png",
+          "sha256": "93a77113d86d905becd8f758c5336c7b5530eae6855927862cc12a883279d494"
+        },
+        "afterCapture": {
+          "pathInPlayground": "bsp-layout-after-8eGMHqC9/en/bsp-2-preferred-alternate.png",
+          "sha256": "30a90084e1920ac6de0b4240e52a6a3d1dfeb6214e58147df0ea2bd20fc5ecee"
+        },
+        "beforeOpenThroughFirstPaintMs": 767,
+        "afterOpenThroughFirstPaintMs": 732
+      }
+    ],
+    "wizard": {
+      "path": [
+        "СтраницыПомощника",
+        "СопоставлениеЗагружаемыхДанных",
+        "ГруппаИтогоНеСопоставленных"
+      ],
+      "nativeFrame": [
+        812,
+        612
+      ],
+      "beforeFrame": [
+        861,
+        612
+      ],
+      "afterFrame": [
+        835,
+        612
+      ],
+      "remainingWidthPx": 23,
+      "currentWidthConstraint": {
+        "path": [
+          "СтраницыПомощника",
+          "СопоставлениеЗагружаемыхДанных",
+          "СписокКолонокСопоставления"
+        ],
+        "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:456",
+        "minimum": "537px",
+        "preferred": "801px"
+      },
+      "nativeMarkCapture": {
+        "pathInPlayground": "united-bsp-context-763t8lxb/native-data-matching-page.png",
+        "sha256": "8604aaf8f09db68aebcee30362fc8f9ae729e377aeacd6daff3b09ff5d8c7b53"
+      },
+      "nativeFrameOrigin": [
+        261,
+        320
+      ],
+      "nativeMarks": [
+        {
+          "selected": true,
+          "absolute": [
+            480,
+            495,
+            15,
+            15
+          ],
+          "relative": [
+            219,
+            175,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "absolute": [
+            578,
+            495,
+            15,
+            15
+          ],
+          "relative": [
+            317,
+            175,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": true,
+          "absolute": [
+            865,
+            495,
+            15,
+            15
+          ],
+          "relative": [
+            604,
+            175,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "absolute": [
+            961,
+            495,
+            15,
+            15
+          ],
+          "relative": [
+            700,
+            175,
+            15,
+            15
+          ]
+        }
+      ],
+      "viewerMarkMeasurements": [
+        {
+          "kind": "eska-bsp-layout-baseline",
+          "marks": [
+            {
+              "selected": true,
+              "absolute": [
+                343,
+                421,
+                15,
+                15
+              ],
+              "relative": [
+                267,
+                204,
+                15,
+                15
+              ]
+            },
+            {
+              "selected": true,
+              "absolute": [
+                729,
+                421,
+                15,
+                15
+              ],
+              "relative": [
+                653,
+                204,
+                15,
+                15
+              ]
+            },
+            {
+              "selected": false,
+              "absolute": [
+                441,
+                421,
+                15,
+                15
+              ],
+              "relative": [
+                365,
+                204,
+                15,
+                15
+              ]
+            },
+            {
+              "selected": false,
+              "absolute": [
+                825,
+                421,
+                15,
+                15
+              ],
+              "relative": [
+                749,
+                204,
+                15,
+                15
+              ]
+            }
+          ],
+          "frame": [
+            76,
+            217,
+            861,
+            612
+          ]
+        },
+        {
+          "kind": "eska-bsp-layout-after",
+          "marks": [
+            {
+              "selected": true,
+              "absolute": [
+                296,
+                421,
+                15,
+                15
+              ],
+              "relative": [
+                220,
+                204,
+                15,
+                15
+              ]
+            },
+            {
+              "selected": true,
+              "absolute": [
+                682,
+                421,
+                15,
+                15
+              ],
+              "relative": [
+                606,
+                204,
+                15,
+                15
+              ]
+            },
+            {
+              "selected": false,
+              "absolute": [
+                394,
+                421,
+                15,
+                15
+              ],
+              "relative": [
+                318,
+                204,
+                15,
+                15
+              ]
+            },
+            {
+              "selected": false,
+              "absolute": [
+                778,
+                421,
+                15,
+                15
+              ],
+              "relative": [
+                702,
+                204,
+                15,
+                15
+              ]
+            }
+          ],
+          "frame": [
+            76,
+            217,
+            835,
+            612
+          ]
+        }
+      ],
+      "comparisonImage": {
+        "pathInPlayground": "form-choice-through-viewer-fgaf5sMc/evidence/wizard-before-after.png",
+        "sha256": "f85a8e6fa6ca3e977a865a3ab2e78e50210c29759b26efeb0b3e7788fc02f9ae"
+      },
+      "comparisonImageIsIllustrative": true,
+      "viewerMarkMeasurementsLocale": "ru"
+    }
+  },
+  "verification": {
+    "rust": {
+      "fmtCheck": true,
+      "check": true,
+      "clippyAllTargetsAllFeaturesDenyWarnings": true,
+      "testThreads": 1,
+      "passed": 1561,
+      "failed": 0,
+      "ignored": 19,
+      "log": {
+        "pathInPlayground": "form-choice-through-viewer-fgaf5sMc/evidence/eska-through-boundary-rust.log",
+        "sha256": "1db10f91759693cbe2b9e47271ea28f65a90842ef7d415a66eb4715ef1c7325b"
+      }
+    },
+    "node": {
+      "tests": 676,
+      "pass": 667,
+      "fail": 0,
+      "skipped": 9,
+      "log": {
+        "pathInPlayground": "form-choice-through-viewer-fgaf5sMc/evidence/eska-through-boundary-node.log",
+        "sha256": "efad4b16010cc23212d5362f847663669f34d5052b3ed95cace0904fc308a3a4"
+      }
+    },
+    "installedSuites": {
+      "passingRuns": 10,
+      "cases": 572,
+      "runs": [
+        {
+          "suite": "united",
+          "locale": "en",
+          "cases": 9,
+          "receipt": {
+            "pathInPlayground": "form-batch-9aRrmY/united-en/receipt.json",
+            "sha256": "771c7114941a0180f9871e5370ea0a9143257fc28bdbe0b362bb9bb194b2d7b0"
+          },
+          "passed": true
+        },
+        {
+          "suite": "united",
+          "locale": "ru",
+          "cases": 9,
+          "receipt": {
+            "pathInPlayground": "form-batch-9aRrmY/united-ru/receipt.json",
+            "sha256": "1c8ae3d042995470ddd0eb2f117d5efcbaa9c24ad7ae2a415209c1c65cfa40ea"
+          },
+          "passed": true
+        },
+        {
+          "suite": "groups",
+          "locale": "en",
+          "cases": 22,
+          "receipt": {
+            "pathInPlayground": "form-batch-9aRrmY/groups-en/receipt.json",
+            "sha256": "a95c2c319957ecaba159a1dc3f36157acc9240c7525990304c11216118835eff"
+          },
+          "passed": true
+        },
+        {
+          "suite": "groups",
+          "locale": "ru",
+          "cases": 22,
+          "receipt": {
+            "pathInPlayground": "form-batch-9aRrmY/groups-ru/receipt.json",
+            "sha256": "5a48e3124838e72f454bcd346904aaad618092f06d5ab500376ebc96589d2541"
+          },
+          "passed": true
+        },
+        {
+          "suite": "column-widths",
+          "locale": "en",
+          "cases": 187,
+          "receipt": {
+            "pathInPlayground": "form-batch-9aRrmY/column-widths-en/receipt.json",
+            "sha256": "a87d678752c7dec2bfdbd1f586da384278458ed36a088be9f822164102929598"
+          },
+          "passed": true
+        },
+        {
+          "suite": "column-widths",
+          "locale": "ru",
+          "cases": 143,
+          "receipt": {
+            "pathInPlayground": "form-batch-9aRrmY/column-widths-ru/receipt.json",
+            "sha256": "34482c6ef02d27b16d554e2c4d28568bf9af1ef89dec1e64ab53b07f5f1b9172"
+          },
+          "passed": true
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "cases": 31,
+          "receipt": {
+            "pathInPlayground": "form-batch-9aRrmY/responsive-en/receipt.json",
+            "sha256": "5658575e14b61944fcb51d6cf599fcdf4314fa6528cd3c5c1242d291961ba873"
+          },
+          "passed": true
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "cases": 31,
+          "receipt": {
+            "pathInPlayground": "form-batch-9aRrmY/responsive-ru/receipt.json",
+            "sha256": "d80a76f3bfabb8218342a09e5a47229f8938bf85a0c1c023c4feff33673fc14e"
+          },
+          "passed": true
+        },
+        {
+          "suite": "through-align",
+          "locale": "en",
+          "cases": 59,
+          "receipt": {
+            "pathInPlayground": "form-batch-SZUXdq/through-align-en/receipt.json",
+            "sha256": "84689e150867d4d013783fbbbb5becccab8a68db862bd31e0d3fe73a04ed5149"
+          },
+          "passed": true
+        },
+        {
+          "suite": "through-align",
+          "locale": "ru",
+          "cases": 59,
+          "receipt": {
+            "pathInPlayground": "form-batch-SZUXdq/through-align-ru/receipt.json",
+            "sha256": "8689624cbfbd1231e2addc6a0c69eed4d8b6c7aacfd6032b40b7b4ddda5de5ee"
+          },
+          "passed": true
+        }
+      ],
+      "finalBatch": {
+        "pathInPlayground": "form-batch-SZUXdq/batch.json",
+        "sha256": "80b3407925aa84f52ce0bb6da64d7139f0c8095b40b779cc8c1d10333ae34b4a"
+      },
+      "earlierBatch": {
+        "pathInPlayground": "form-batch-9aRrmY/batch.json",
+        "sha256": "6ba4df4974c57cb51eb6cca67ab4d7aaa72aa25b3ba3e1ffbdd2aa6c884005c0"
+      },
+      "productRuntimeEqualAcrossBatches": true,
+      "equalRuntimeFiles": 1262,
+      "runtimeReverifiedAfterCommit": {
+        "pathInPlayground": "form-choice-through-viewer-fgaf5sMc/evidence/eska-through-boundary-runtime.json",
+        "sha256": "455e44211dfd2bf9bf0b98e332b01a356f34a9714556bb8fa642e0edc5d89bbc"
+      },
+      "vsix": {
+        "pathInPlayground": "form-batch-SZUXdq/artifacts/viewer.vsix",
+        "sha256": "7552a649b91307d58592e85103b7b83feedebfd6003f25bf623e72fe07c9e987"
+      },
+      "backend": {
+        "pathInPlayground": "form-batch-SZUXdq/artifacts/eska-project",
+        "sha256": "344a85998ceb188ece3069e87049781447e96eef37f212fe2767487c4a132260"
+      },
+      "firstScopeFailure": "Первые два прогона сравнивали левый край внутреннего флажка с полем ввода. Их промежутки различаются. Проверка исправлена на край колонки подписи, и оба прогона повторены успешно. Код приложения между пакетами не менялся."
+    },
+    "loanRegression": [
+      {
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "pathInPlayground": "form-installed-loan-lower-8fOGqnXs/loan-ru/receipt.json",
+          "sha256": "857036c4bcadd66a52781450f123c2c3b41881ae333f973bbf456c6dbe8b24cf"
+        },
+        "geometry": {
+          "pathInPlayground": "form-installed-loan-lower-8fOGqnXs/loan-ru/geometry.json",
+          "sha256": "f4de6d32eba6edff83fd4220251d9575941ed29e812b3657caa64b750268c4cc"
+        }
+      },
+      {
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "pathInPlayground": "form-installed-loan-lower-8fOGqnXs/loan-en/receipt.json",
+          "sha256": "bc13fd8988c788bec6d3cb004b1e2df7c521102f23c122902374a178e48c801c"
+        },
+        "geometry": {
+          "pathInPlayground": "form-installed-loan-lower-8fOGqnXs/loan-en/geometry.json",
+          "sha256": "b2d5e97c4d3087a10de558047f0eafff0fcd5ea1493e2b77cd1674034c9d61d0"
+        }
+      }
+    ]
+  },
+  "remainingGeometry": [
+    {
+      "id": "wizard-preferred-width",
+      "status": "open",
+      "sourcePath": [
+        "СтраницыПомощника",
+        "СопоставлениеЗагружаемыхДанных",
+        "СписокКолонокСопоставления"
+      ],
+      "expectedFrame": [
+        812,
+        612
+      ],
+      "actualFrame": [
+        835,
+        612
+      ],
+      "constraintPreferredPx": 801,
+      "nextAction": "Сверить предпочитаемую ширину поля и размещение его кнопок на минимальном примере; повторить целую форму."
+    },
+    {
+      "id": "wizard-radio-row-y",
+      "status": "needs-matched-width-measurement",
+      "sourcePath": [
+        "СтраницыПомощника",
+        "СопоставлениеЗагружаемыхДанных",
+        "ГруппаИтогоНеСопоставленных"
+      ],
+      "nativeMarkerY": 175,
+      "viewerMarkerY": 204,
+      "note": "Оба ряда расположены относительно рамок по верхней чёрной границе. Предпочитаемые ширины native и просмотрщика пока различаются; причинная связь с переносами не установлена."
+    },
+    {
+      "id": "united-leading-value-track",
+      "status": "open",
+      "fixture": "StretchRadio.xml",
+      "case": "UnitedFalse",
+      "treePath": [
+        "Parent",
+        "Row",
+        "Tail"
+      ],
+      "nativeControl": [
+        427,
+        71,
+        91,
+        23
+      ],
+      "viewerControl": [
+        342,
+        71,
+        91,
+        23
+      ],
+      "nativeFrame": [
+        539,
+        139
+      ],
+      "viewerFrame": [
+        454,
+        139
+      ],
+      "nextAction": "Проверить, резервирует ли United=false общую ширину значения ведущего поля, а не только подписи."
+    },
+    {
+      "id": "small-caption-rounding",
+      "status": "open",
+      "nativeWideX": 177,
+      "viewerWideX": 180,
+      "note": "В нескольких других случаях координаты и размеры расходятся на 2–3 px. Все прямоугольники сохранены, полной геометрической приёмки нет."
+    },
+    {
+      "id": "remaining-complex-corpus",
+      "status": "open",
+      "note": "Для двух других форм БСП исходные и повторные размеры записаны. Наблюдатель outside учитывает также DOM внутри прокручиваемого/обрезанного тела и не доказывает видимые наложения. Нужна полная native-сверка на одинаковых размерах."
+    }
+  ],
+  "additionalNativeObservation": {
+    "scope": "Булевый RadioButtonField с RadioButtonType=Auto показывает квадратный флажок в native-пробе. Это не нормализация тега при выгрузке. Текущий VSIX с этой булевой пробой отдельно не сравнивался.",
+    "source": {
+      "pathInPlayground": "form-native-choice-through-3mcQz8lt/src/CommonForms/ProbeWidthChoiceAlign43402/Ext/Form.xml",
+      "sha256": "6d5fe89579f228ac5f7390d714517429a687c26305819ac9e6d093ce7de56128"
+    },
+    "exportedSource": {
+      "pathInPlayground": "form-native-choice-through-3mcQz8lt/export-observation/CommonForms/ProbeWidthChoiceAlign43402/Ext/Form.xml",
+      "sha256": "50e363d338e1465a299d5359e2867b238dc36f6da22b0fb11f7c8ff7ee2f3e65"
+    },
+    "exportLog": {
+      "pathInPlayground": "form-native-choice-through-3mcQz8lt/export-observation.log",
+      "sha256": "0b1c529e024422de24bd78666874c0d32528af625453ea7347ad52dea10f4966"
+    },
+    "capture": {
+      "pathInPlayground": "form-native-choice-through-3mcQz8lt/native-ru/ProbeWidthChoiceAlign43402.png",
+      "sha256": "89a37915a4abf124e5775279a8b5bce90f48b88fe0e04978c2b08ec97119dc35"
+    },
+    "exportedElementKind": "RadioButtonField",
+    "requiresCurrentViewerComparison": true
+  },
+  "nextAcceptance": [
+    "Оставшиеся геометрические различия выше, включая полный корпус сложных форм и масштабирование.",
+    "Независимая Windows-приёмка. Linux-координаты и метрики не подменяют её.",
+    "Полные пиксели и оформление после контрольной точки геометрии; текущая серия не возвращает цветовую матрицу в приоритет."
+  ],
+  "reproducibility": {
+    "drivers": [
+      {
+        "pathInPlayground": "form-choice-through-viewer-fgaf5sMc/evidence/eska-bsp-layout-observation-host.cjs",
+        "sha256": "994d154f0ebda032c7a9124a30dfc00180b04fc7907e3050716b352dd4ee17ba"
+      },
+      {
+        "pathInPlayground": "form-choice-through-viewer-fgaf5sMc/evidence/eska-choice-native-metrics.py",
+        "sha256": "a0a7c802a909e3b1365f4a2d633e1703dfd8832d46adee0fc56619bf4b6fa6e7"
+      },
+      {
+        "pathInPlayground": "form-choice-through-viewer-fgaf5sMc/evidence/eska-choice-through-capture.py",
+        "sha256": "f24d42b246eddd020e4cc37241bfe7acdb679ac4001866183277afd5ef641509"
+      },
+      {
+        "pathInPlayground": "form-choice-through-viewer-fgaf5sMc/evidence/form-choice-through-host.cjs",
+        "sha256": "a3afbd069698af172570e20467fb9de355c0ad8d53afdb715683f0585b8fc196"
+      }
+    ],
+    "evidenceDirectory": "form-choice-through-viewer-fgaf5sMc/evidence",
+    "released": false,
+    "pushed": false
+  }
+}
