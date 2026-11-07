@@ -1979,7 +1979,8 @@
         "styles.native-layer-values",
         "buttons.mixed-row-geometry",
         "buttons.mixed-row-full-forms",
-        "layout.representation-caption-scope"
+        "layout.representation-caption-scope",
+        "layout.empty-groups"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -8293,6 +8294,78 @@
       "lastConfirmation": "docs/measurements/t157-wizard-choice-layout-linux.json",
       "remaining": "Automatic and multiline string widths, complete appearance/state matrices, native extended-tooltip window and Windows.",
       "nextAction": "Verify the multiline choice field on the whole BSP questionnaire and expand the native matrix without claiming full widget pixel acceptance."
+    },
+    {
+      "id": "layout.empty-groups",
+      "milestone": "T157",
+      "kinds": [
+        "UsualGroup"
+      ],
+      "axes": [
+        "layout.geometry",
+        "state.display",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "21 native forms cover omission of ordinary/collapsible groups without rendered content, nested hidden fields and absent table surfaces. Twenty exact frame/control footprints and one positive table presence case with a separately recorded 2 px height residual. Source nodes, neighbour DOM and selection survive dirty/detached transitions.",
+      "fixtures": [
+        "tests/fixtures/forms/native-group-visibility"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "group-visibility",
+        "path": "test/form-group-visibility-host.cjs",
+        "caseIds": [
+          "Control",
+          "Empty",
+          "HiddenField",
+          "HiddenTable",
+          "NestedHidden",
+          "VisibleField",
+          "VisibleTable",
+          "HiddenColumns",
+          "TitleHidden",
+          "NormalHidden",
+          "StrongHidden",
+          "PaintedHidden",
+          "FixedWidthHidden",
+          "FixedHeightHidden",
+          "StretchHidden",
+          "StretchXHidden",
+          "CollapsibleHidden",
+          "EmptyTitle",
+          "EmptyPainted",
+          "EmptyFixedHeight",
+          "EmptyCollapsible"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-empty-groups-linux.json",
+          "sha256": "a5ce36a80162c3c13bcf50dc7b45f8674de6cd2f11c05835d488a825cb672ae3",
+          "assertions": [
+            {
+              "pointer": "/acceptedGroupVisibility",
+              "equals": true
+            },
+            {
+              "pointer": "/nativeReference/exactFootprintForms",
+              "equals": 20
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "8a5b9da01e1eac27c9f22b0f55888e13a7baa371"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-empty-groups-linux.json",
+      "remaining": "Right-aligned and empty command bars, NormalSeparation edge/nested insets, label metrics, the 2 px visible-table height residual, whole forms and Windows.",
+      "nextAction": "Measure the master footer HorizontalLocation and parent stretch on native microforms, then repeat the complete form at matched viewport sizes."
     }
   ],
   "historicalReports": [
