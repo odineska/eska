@@ -61,6 +61,9 @@ fn element(
         if !presentation.object_command_menu.is_empty() {
             value["objectCommandMenu"] = json!(presentation.object_command_menu);
         }
+        if !presentation.table_command_menu.is_empty() {
+            value["tableCommandMenu"] = json!(presentation.table_command_menu);
+        }
         value
     });
     json!({"identity":identity(&value.identity),"origin":origin(&value.origin),"kind":value.kind.map(eska_project_core::project::forms::ElementKind::xml_name),"name":value.name,"xmlName":value.xml_name,

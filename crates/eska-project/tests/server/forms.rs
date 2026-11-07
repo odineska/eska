@@ -2066,6 +2066,76 @@ fn form_projects_standard_object_menu_and_discovers_dirty_document_journals() {
 }
 
 #[test]
+fn dynamic_list_menu_loads_journal_documents_and_updates_unsaved_sources() {
+    let directory = object_menu_fixture();
+    let root = directory.0.join("src");
+    let journal = MENU_JOURNAL_XML.replace("Document.Other", "Document.Order");
+    fs::write(root.join(MENU_JOURNAL_PATH), &journal).unwrap();
+    let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <ChildItems><Table name="Rows" id="11"><DataPath>Rows</DataPath><ChildItems><InputField name="Number" id="12"><DataPath>Rows.Number</DataPath></InputField></ChildItems></Table></ChildItems>
+        <Attributes><Attribute name="Rows" id="1"><Type><v8:Type>cfg:DynamicList</v8:Type></Type><Settings><MainTable>DocumentJournal.Sales</MainTable></Settings></Attribute></Attributes></Form>"#;
+    fs::write(root.join(PATH), xml).unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let menu = |snapshot: &Value| {
+            snapshot["model"]["root"]["children"][0]["presentation"]["tableCommandMenu"].clone()
+        };
+        let original = menu(&opened);
+        assert_eq!(original.as_array().unwrap().len(), 6);
+        assert_eq!(original[0][0]["items"][0]["caption"]["text"], "Order");
+        assert_eq!(original[0][0].get("shortcut"), None);
+        let dependency = |snapshot: &Value, path: &str| {
+            snapshot["dependencies"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .find(|dependency| dependency["path"]["value"] == path)
+                .unwrap()["id"]
+                .clone()
+        };
+        let order_id = dependency(&opened, MENU_ORDER_PATH);
+        assert_eq!(original[0][0]["items"][0]["origin"]["source"], order_id);
+        assert_eq!(original[3][1]["shortcut"], "Alt+F");
+        let form_id = dependency(&opened, PATH);
+        let changed = xml.replace("<DataPath>Rows</DataPath>", "<DataPath>Rows</DataPath><SearchStringLocation>None</SearchStringLocation><CommandSet><ExcludedCommand>Copy</ExcludedCommand><ExcludedCommand>OutputList</ExcludedCommand></CommandSet>");
+        let session = &opened["formSessionId"];
+        let updated = client.request("form/update", &params(&context, json!({"formSessionId":session,"revision":"1","overlays":[
+            {"source":form_id,"version":"2","text":changed},
+            {"source":order_id,"version":"2","text":MENU_ORDER_XML.replace("<ListPresentation>Orders</ListPresentation>", "<ObjectPresentation>Updated invoice</ObjectPresentation>")}
+        ]})));
+        let result = menu(&updated);
+        assert_eq!(
+            result[0][0]["items"][0]["caption"]["text"],
+            "Updated invoice"
+        );
+        assert!(!menu_keys(&result[0]).contains(&Value::from("Table.StandardCommand.Copy")));
+        assert_eq!(result[3][1]["caption"]["key"], "command.Find");
+        assert_eq!(result[3][1]["shortcut"], "Ctrl+F");
+        assert_eq!(result[5][0]["key"], "Table.StandardCommand.SearchControl");
+        let recovered = client.request(
+            "form/update",
+            &params(
+                &context,
+                json!({"formSessionId":session,"revision":"2","overlays":[]}),
+            ),
+        );
+        assert_eq!(menu(&recovered), original);
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(root.join(PATH)).unwrap(), xml);
+    assert_eq!(
+        fs::read_to_string(root.join(MENU_ORDER_PATH)).unwrap(),
+        MENU_ORDER_XML
+    );
+    assert_eq!(
+        fs::read_to_string(root.join(MENU_JOURNAL_PATH)).unwrap(),
+        journal
+    );
+}
+
+#[test]
 fn form_discovers_new_based_on_targets_and_preserves_last_valid_menu() {
     let directory = fixture();
     let root = directory.0.join("src");

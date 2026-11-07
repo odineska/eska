@@ -5,7 +5,7 @@ use super::{
     EffectiveElement, ElementFamily, ElementIdentity, ElementKind, FormDocument, FormResource,
     PropertySource, ResolvedColor, ResolvedFont, SourcedProperty,
     appearance::{self, Appearance},
-    commands::ResolvedCommand,
+    commands::{ResolvedCommand, effective_metadata},
     pictures, references,
 };
 use crate::project::{
@@ -133,6 +133,8 @@ pub struct ElementPresentation {
     pub auto_command_items: Vec<super::AutoCommandItem>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub object_command_menu: Vec<Vec<super::AutoCommandItem>>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub table_command_menu: Vec<Vec<super::AutoCommandItem>>,
 }
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -346,6 +348,7 @@ fn present_element(
             .property("FooterText")
             .and_then(|value| literal(&value.property.value)),
         table_column_appearance: table_column_appearance(element, scope, appearance),
+        table_command_menu: table_command_menu(element, &value_type, form, resources, tables),
         value_type,
         binding,
         choices,
@@ -537,6 +540,41 @@ fn element_commands(
             .unwrap_or_default(),
         _ => Vec::new(),
     }
+}
+
+fn table_command_menu(
+    element: &EffectiveElement,
+    value_type: &FieldType,
+    form: &ComposedForm,
+    resources: &[FormResource],
+    tables: &super::commands::TableIndex<'_>,
+) -> Vec<Vec<super::AutoCommandItem>> {
+    let table = match element.kind {
+        Some(ElementKind::Table) if super::commands::autofill(element) => element,
+        Some(ElementKind::CommandBar) => {
+            let Some(table) = super::commands::table_source(element, tables) else {
+                return Vec::new();
+            };
+            table
+        }
+        _ => return Vec::new(),
+    };
+    let binding;
+    let value_type = if element.kind == Some(ElementKind::Table) {
+        value_type
+    } else {
+        binding = bind(table, form, resources);
+        &binding.value_type
+    };
+    if !super::commands::is_dynamic_list(value_type) {
+        return Vec::new();
+    }
+    let source = binding_path(table, form)
+        .filter(|(_, remaining)| remaining.is_empty())
+        .and_then(|(attribute, _)| main_table_id(attribute))
+        .and_then(|id| effective_metadata(&id, resources))
+        .map(|(_, owner)| owner);
+    super::table_commands::sections(table, source, resources)
 }
 
 fn standard_form_commands(items: &[super::AutoCommandItem]) -> Vec<String> {
@@ -790,8 +828,18 @@ pub(super) fn binding_resource_requests(
     let mut requests = Vec::new();
     while let Some(element) = pending.pop() {
         pending.extend(element.children.iter().chain(&element.auxiliary));
-        if let Some((attribute, remaining)) = binding_path(element, form)
-            && remaining.len() > 1
+        let Some((attribute, remaining)) = binding_path(element, form) else {
+            continue;
+        };
+        if element.kind == Some(ElementKind::Table)
+            && remaining.is_empty()
+            && super::commands::is_dynamic_list(&definition_type(attribute))
+            && let Some(id) = main_table_id(attribute)
+            && let Some((_, source)) = effective_metadata(&id, resources)
+        {
+            requests.extend(super::table_commands::creation_requests(source, resources));
+        }
+        if remaining.len() > 1
             && let Err(BindingFailure::Unloaded(target)) =
                 resolve_binding(attribute, &remaining, resources)
         {
@@ -834,13 +882,7 @@ fn resolve_binding(
         .types
         .iter()
         .find_map(references::metadata_type_id)
-        .or_else(|| {
-            let (kind, name) = attribute
-                .properties
-                .iter()
-                .find_map(|property| find_main_table(&property.property.value))?;
-            Some(ObjectId::from_parts(None, kind.as_str(), name))
-        })
+        .or_else(|| main_table_id(attribute))
         .ok_or(BindingFailure::Unresolved)?;
     metadata_binding(target, remaining, resources)
 }
@@ -858,7 +900,7 @@ fn metadata_binding(
     resources: &[FormResource],
 ) -> Result<FieldBinding, BindingFailure> {
     let (mut resource, mut owner) =
-        metadata_owner(&target, resources).ok_or(BindingFailure::Unloaded(target))?;
+        effective_metadata(&target, resources).ok_or(BindingFailure::Unloaded(target))?;
     for (index, part) in remaining.iter().enumerate() {
         let terminal = index + 1 == remaining.len();
         if let Some((layer, child)) = metadata_child(owner, part, resources) {
@@ -868,8 +910,8 @@ fn metadata_binding(
                 let target = metadata_property(child, "Type", resources)
                     .and_then(|property| single_type_target(&field_type(&property.value)))
                     .ok_or(BindingFailure::Unresolved)?;
-                (resource, owner) =
-                    metadata_owner(&target, resources).ok_or(BindingFailure::Unloaded(target))?;
+                (resource, owner) = effective_metadata(&target, resources)
+                    .ok_or(BindingFailure::Unloaded(target))?;
             }
         } else if !terminal {
             return Err(BindingFailure::Unresolved);
@@ -901,20 +943,6 @@ fn metadata_binding(
         }
     }
     Ok(metadata_field(resource, owner, resources))
-}
-
-fn metadata_owner<'a>(
-    id: &ObjectId,
-    resources: &'a [FormResource],
-) -> Option<(&'a FormResource, &'a ParsedObject)> {
-    resources.iter().rev().find_map(|resource| {
-        resource
-            .descriptor
-            .objects
-            .iter()
-            .find(|object| object.metadata.id() == id)
-            .map(|owner| (resource, owner))
-    })
 }
 
 fn metadata_child<'a>(
@@ -976,6 +1004,14 @@ pub(super) fn definition_caption(value: &EffectiveDefinition) -> Option<Presenta
                 .map(|text| PresentationText::Name { text: text.clone() })
         })
 }
+fn main_table_id(attribute: &EffectiveDefinition) -> Option<ObjectId> {
+    let (kind, name) = attribute
+        .properties
+        .iter()
+        .find_map(|property| find_main_table(&property.property.value))?;
+    Some(ObjectId::from_parts(None, kind.as_str(), name))
+}
+
 fn find_main_table(value: &MetadataValue) -> Option<(MetadataKind, &str)> {
     if let MetadataValue::Record(fields) = value {
         for field in fields {

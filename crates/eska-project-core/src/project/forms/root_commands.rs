@@ -9,8 +9,8 @@ use super::{
     FORM_NAMESPACE, FormResource, PropertySource,
     appearance::text,
     command_types,
-    commands::{ResolvedCommand, autofill, effective_metadata},
-    presentation::{definition_type, metadata_property},
+    commands::{ResolvedCommand, autofill, effective_metadata, metadata_text},
+    presentation::definition_type,
     references::{self, CONFIG, command_group_id, metadata_command_id},
     resources::configuration_objects,
 };
@@ -381,14 +381,6 @@ fn field<'a>(value: &'a MetadataValue, name: &str) -> Option<&'a MetadataValue> 
 
 fn named(field: &MetadataProperty, name: &str) -> bool {
     field.key.namespace.as_deref() == Some(FORM_NAMESPACE) && field.key.name == name
-}
-
-fn metadata_text<'a>(
-    object: &ParsedObject,
-    name: &str,
-    resources: &'a [FormResource],
-) -> Option<&'a str> {
-    metadata_property(object, name, resources).and_then(|value| text(&value.value))
 }
 
 fn origin(resource: &FormResource, object: &ParsedObject) -> PropertySource {

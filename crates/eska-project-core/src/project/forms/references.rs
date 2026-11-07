@@ -181,6 +181,7 @@ pub(super) fn type_kind(name: &str) -> Option<MetadataKind> {
     match name {
         "Catalog" | "CatalogObject" | "CatalogRef" => Some(MetadataKind::Catalog),
         "Document" | "DocumentObject" | "DocumentRef" => Some(MetadataKind::Document),
+        "DocumentJournal" => Some(MetadataKind::DocumentJournal),
         "Enum" | "EnumRef" => Some(MetadataKind::Enum),
         "DataProcessor" | "DataProcessorObject" | "ExternalDataProcessorObject" => {
             Some(MetadataKind::DataProcessor)

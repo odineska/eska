@@ -26,6 +26,12 @@ pub struct AutoCommandItem {
     pub button_representation: Option<ButtonRepresentation>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub order_by_caption: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub shortcut: Option<&'static str>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub enabled: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub begin_group: Option<bool>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub items: Vec<Self>,
 }
@@ -42,6 +48,9 @@ impl AutoCommandItem {
             picture: None,
             button_representation: None,
             order_by_caption: None,
+            shortcut: None,
+            enabled: None,
+            begin_group: None,
             items: Vec::new(),
         }
     }
@@ -127,6 +136,9 @@ impl<'a> ResolvedCommand<'a> {
             picture,
             button_representation,
             order_by_caption: None,
+            shortcut: None,
+            enabled: None,
+            begin_group: None,
             items: Vec::new(),
         })
     }
@@ -229,7 +241,7 @@ pub(super) fn table_source<'a>(
         .filter(|table| declares_columns(table))
 }
 
-fn excludes(table: &EffectiveElement, command: &str) -> bool {
+pub(super) fn excludes(table: &EffectiveElement, command: &str) -> bool {
     let Some(set) = table.property("CommandSet") else {
         return false;
     };
@@ -248,9 +260,7 @@ pub(super) fn table_items(
     value_type: &super::FieldType,
 ) -> Vec<AutoCommandItem> {
     // ReadOnly does not remove these design-time buttons; no preview command executes.
-    let dynamic = value_type.types.iter().any(|kind| {
-        kind.namespace.as_deref() == Some(super::references::CONFIG) && kind.name == "DynamicList"
-    });
+    let dynamic = is_dynamic_list(value_type);
     let commands: &[&str] = if dynamic && element.scalar("SearchStringLocation") == Some("None") {
         &["Create", "Copy", "Find", "CancelSearch"]
     } else if dynamic {
@@ -263,6 +273,12 @@ pub(super) fn table_items(
         .filter(|name| !excludes(element, name))
         .map(|name| AutoCommandItem::standard("Table", name, false))
         .collect()
+}
+
+pub(super) fn is_dynamic_list(value_type: &super::FieldType) -> bool {
+    value_type.types.iter().any(|kind| {
+        kind.namespace.as_deref() == Some(super::references::CONFIG) && kind.name == "DynamicList"
+    })
 }
 
 pub(super) fn effective_metadata<'a>(
@@ -288,6 +304,14 @@ pub(super) fn metadata_caption(
         .unwrap_or_else(|| PresentationText::Name {
             text: command.metadata.name().into(),
         })
+}
+
+pub(super) fn metadata_text<'a>(
+    object: &ParsedObject,
+    name: &str,
+    resources: &'a [FormResource],
+) -> Option<&'a str> {
+    metadata_property(object, name, resources).and_then(|value| text(&value.value))
 }
 
 #[cfg(test)]

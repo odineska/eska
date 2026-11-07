@@ -19,6 +19,7 @@ mod references;
 mod resources;
 mod root_commands;
 mod style_data;
+mod table_commands;
 
 pub use appearance::{AppearanceDiagnostic, ResolvedColor, ResolvedFont};
 pub use catalog::{ElementFamily, ElementKind};
