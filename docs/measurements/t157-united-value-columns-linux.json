@@ -1,0 +1,3108 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-07T06:51:33.817704+00:00",
+  "milestone": "T157",
+  "scope": "Общие колонки значений в смешанном вертикальном стеке и их границы United. Полная визуальная приёмка остаётся открытой.",
+  "platform": "Linux ARM64 ALT 10",
+  "platformBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_24",
+  "nativeLocale": "ru",
+  "viewerLocales": [
+    "ru",
+    "en"
+  ],
+  "dpi": 96,
+  "zoom": 100,
+  "eskaCommit": "70249aae232d0cd3165a950f487ae2c349c27f3e",
+  "explorerCommit": "112b6bbbb27b512569d1a6ccbe3b1bd889a41dac",
+  "baselineExplorerCommit": "bb03e7a8cf06e7993ebdd930ca3e3889dad01ca0",
+  "artifactBase": "../eska-playground",
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "sourceWritesDuringViewing": false,
+  "bslExecuted": false,
+  "rule": {
+    "sharedRenderer": "alignUnitedColumns",
+    "captionAlignmentBeforeColumnWidths": true,
+    "unitedFalseExposesValueTracks": true,
+    "unitedTrueVerticalParentOwnsValueTracks": true,
+    "unitedFalseIgnoresDontUseAndFixedStretchForColumnParticipation": true,
+    "standaloneFieldsKeepExistingStretch": true,
+    "combinedFlexibleRowsKeepAdaptiveCaptions": true,
+    "mixedRowsKeepTheirVerticalAlignment": true,
+    "noFormNameCssExceptions": true
+  },
+  "nativeReference": {
+    "path": "tests/fixtures/forms/native-through-align-rows/metrics.json",
+    "sha256": "40337540a2e00491b4258412495470be9501c1cef0f8a8664c34c8177d93538f",
+    "cases": 17,
+    "forms": 5,
+    "coverage": "Новые 17 случаев используют фиксированные поля ввода и переключатели. Полная native-матрица растягиваемых разобранных строк остаётся частью общей приёмки T157."
+  },
+  "smallForms": {
+    "coordinateSpace": "x/y/width/height relative to the form frame",
+    "coordinateSetsIdenticalInLocales": true,
+    "observations": [
+      {
+        "case": "RadioTrue",
+        "fixture": "ValueRadio",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43501/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43501.png",
+        "nativeFrame": [
+          452,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          455,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            340,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            343,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            75,
+            15,
+            15
+          ],
+          [
+            236,
+            75,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            75,
+            15,
+            15
+          ],
+          [
+            239,
+            75,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": 2,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "RadioFalse",
+        "fixture": "ValueRadio",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43502/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43502.png",
+        "nativeFrame": [
+          539,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          542,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            427,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            430,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            75,
+            15,
+            15
+          ],
+          [
+            236,
+            75,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            75,
+            15,
+            15
+          ],
+          [
+            239,
+            75,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": -85,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "InputTrue",
+        "fixture": "ValueInput",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43503/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43503.png",
+        "nativeFrame": [
+          419,
+          139
+        ],
+        "beforeFrame": [
+          421,
+          139
+        ],
+        "afterFrame": [
+          422,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            307,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ],
+          "Option": [
+            177,
+            71,
+            91,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            71,
+            91,
+            23
+          ],
+          "Tail": [
+            309,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            71,
+            91,
+            23
+          ],
+          "Tail": [
+            310,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [],
+        "afterMarks": [],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": 2,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "InputFalse",
+        "fixture": "ValueInput",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43504/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43504.png",
+        "nativeFrame": [
+          539,
+          139
+        ],
+        "beforeFrame": [
+          421,
+          139
+        ],
+        "afterFrame": [
+          542,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            427,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ],
+          "Option": [
+            177,
+            71,
+            91,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            71,
+            91,
+            23
+          ],
+          "Tail": [
+            309,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            71,
+            91,
+            23
+          ],
+          "Tail": [
+            430,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [],
+        "afterMarks": [],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": -118,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "WideInputFalse",
+        "fixture": "ValueInput",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43505/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43505.png",
+        "nativeFrame": [
+          639,
+          139
+        ],
+        "beforeFrame": [
+          641,
+          139
+        ],
+        "afterFrame": [
+          642,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            527,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ],
+          "Option": [
+            177,
+            71,
+            311,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            71,
+            311,
+            23
+          ],
+          "Tail": [
+            529,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            71,
+            311,
+            23
+          ],
+          "Tail": [
+            530,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [],
+        "afterMarks": [],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": 2,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "LongRadioTrue",
+        "fixture": "ValueLong",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43506/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43506.png",
+        "nativeFrame": [
+          635,
+          139
+        ],
+        "beforeFrame": [
+          637,
+          139
+        ],
+        "afterFrame": [
+          638,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            523,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            307,
+            19
+          ],
+          "Tail": [
+            525,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            307,
+            19
+          ],
+          "Tail": [
+            526,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            75,
+            15,
+            15
+          ],
+          [
+            419,
+            75,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            75,
+            15,
+            15
+          ],
+          [
+            422,
+            75,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": 2,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "LongRadioFalse",
+        "fixture": "ValueLong",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43507/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43507.png",
+        "nativeFrame": [
+          635,
+          139
+        ],
+        "beforeFrame": [
+          637,
+          139
+        ],
+        "afterFrame": [
+          638,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            523,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            307,
+            19
+          ],
+          "Tail": [
+            525,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            307,
+            19
+          ],
+          "Tail": [
+            526,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            75,
+            15,
+            15
+          ],
+          [
+            419,
+            75,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            75,
+            15,
+            15
+          ],
+          [
+            422,
+            75,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": 2,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "FixedFalse",
+        "fixture": "ValueRadio",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43508/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43508.png",
+        "nativeFrame": [
+          539,
+          139
+        ],
+        "beforeFrame": [
+          412,
+          139
+        ],
+        "afterFrame": [
+          542,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            427,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            220,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            430,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            75,
+            15,
+            15
+          ],
+          [
+            236,
+            75,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            75,
+            15,
+            15
+          ],
+          [
+            239,
+            75,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": -207,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "ExcludedFalse",
+        "fixture": "ValueRadio",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43509/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43509.png",
+        "nativeFrame": [
+          539,
+          139
+        ],
+        "beforeFrame": [
+          412,
+          139
+        ],
+        "afterFrame": [
+          542,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            427,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            60,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            222,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            430,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            75,
+            15,
+            15
+          ],
+          [
+            236,
+            75,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            75,
+            15,
+            15
+          ],
+          [
+            239,
+            75,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": -205,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "ParentTrueChildTrue",
+        "fixture": "ValueRadio",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43510/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43510.png",
+        "nativeFrame": [
+          452,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          455,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            340,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            343,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            75,
+            15,
+            15
+          ],
+          [
+            236,
+            75,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            75,
+            15,
+            15
+          ],
+          [
+            239,
+            75,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": 2,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "ParentTrueChildFalse",
+        "fixture": "ValueRadio",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43511/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43511.png",
+        "nativeFrame": [
+          539,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          542,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            427,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            430,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            75,
+            15,
+            15
+          ],
+          [
+            236,
+            75,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            75,
+            15,
+            15
+          ],
+          [
+            239,
+            75,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": -85,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "ParentFalseChildTrue",
+        "fixture": "ValueRadio",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43512/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43512.png",
+        "nativeFrame": [
+          452,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          455,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            340,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            343,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            75,
+            15,
+            15
+          ],
+          [
+            236,
+            75,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            75,
+            15,
+            15
+          ],
+          [
+            239,
+            75,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": 2,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "ParentFalseChildFalse",
+        "fixture": "ValueRadio",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43513/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43513.png",
+        "nativeFrame": [
+          539,
+          139
+        ],
+        "beforeFrame": [
+          454,
+          139
+        ],
+        "afterFrame": [
+          542,
+          139
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            427,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            103,
+            211,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            73,
+            124,
+            19
+          ],
+          "Tail": [
+            430,
+            71,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            103,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            75,
+            15,
+            15
+          ],
+          [
+            236,
+            75,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            75,
+            15,
+            15
+          ],
+          [
+            239,
+            75,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": -85,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "OuterWideParentTrue",
+        "fixture": "ValueOuter",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43514/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43514.png",
+        "nativeFrame": [
+          609,
+          171
+        ],
+        "beforeFrame": [
+          612,
+          171
+        ],
+        "afterFrame": [
+          612,
+          171
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            71,
+            211,
+            23
+          ],
+          "Tail": [
+            427,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            135,
+            211,
+            23
+          ],
+          "OuterWide": [
+            177,
+            39,
+            411,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            71,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            105,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            135,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "OuterWide": [
+            180,
+            39,
+            411,
+            23
+          ],
+          "Wide": [
+            180,
+            71,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            105,
+            124,
+            19
+          ],
+          "Tail": [
+            430,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            135,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            107,
+            15,
+            15
+          ],
+          [
+            236,
+            107,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            107,
+            15,
+            15
+          ],
+          [
+            239,
+            107,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": -85,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "OuterWideParentFalse",
+        "fixture": "ValueOuter",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43515/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43515.png",
+        "nativeFrame": [
+          739,
+          171
+        ],
+        "beforeFrame": [
+          612,
+          171
+        ],
+        "afterFrame": [
+          742,
+          171
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            71,
+            211,
+            23
+          ],
+          "Tail": [
+            627,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            135,
+            211,
+            23
+          ],
+          "OuterWide": [
+            177,
+            39,
+            411,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            71,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            105,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            135,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "OuterWide": [
+            180,
+            39,
+            411,
+            23
+          ],
+          "Wide": [
+            180,
+            71,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            105,
+            124,
+            19
+          ],
+          "Tail": [
+            630,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            135,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            107,
+            15,
+            15
+          ],
+          [
+            236,
+            107,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            107,
+            15,
+            15
+          ],
+          [
+            239,
+            107,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": -285,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "SiblingTrue",
+        "fixture": "ValueSibling",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43516/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43516.png",
+        "nativeFrame": [
+          739,
+          171
+        ],
+        "beforeFrame": [
+          612,
+          171
+        ],
+        "afterFrame": [
+          742,
+          171
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            627,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            135,
+            211,
+            23
+          ],
+          "SiblingWide": [
+            177,
+            71,
+            411,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            105,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            135,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "SiblingWide": [
+            180,
+            71,
+            411,
+            23
+          ],
+          "Option": [
+            180,
+            105,
+            124,
+            19
+          ],
+          "Tail": [
+            630,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            135,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            107,
+            15,
+            15
+          ],
+          [
+            236,
+            107,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            107,
+            15,
+            15
+          ],
+          [
+            239,
+            107,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": -285,
+        "afterTailErrorX": 3
+      },
+      {
+        "case": "SiblingFalse",
+        "fixture": "ValueSibling",
+        "nativeSource": "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43517/Ext/Form.xml",
+        "nativeCapture": "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43517.png",
+        "nativeFrame": [
+          739,
+          171
+        ],
+        "beforeFrame": [
+          612,
+          171
+        ],
+        "afterFrame": [
+          742,
+          171
+        ],
+        "nativeControls": {
+          "Wide": [
+            177,
+            39,
+            211,
+            23
+          ],
+          "Tail": [
+            627,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            177,
+            135,
+            211,
+            23
+          ],
+          "SiblingWide": [
+            177,
+            71,
+            411,
+            23
+          ]
+        },
+        "beforeControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "Option": [
+            180,
+            105,
+            124,
+            19
+          ],
+          "Tail": [
+            342,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            135,
+            211,
+            23
+          ]
+        },
+        "afterControls": {
+          "Wide": [
+            180,
+            39,
+            211,
+            23
+          ],
+          "SiblingWide": [
+            180,
+            71,
+            411,
+            23
+          ],
+          "Option": [
+            180,
+            105,
+            124,
+            19
+          ],
+          "Tail": [
+            630,
+            103,
+            91,
+            23
+          ],
+          "Last": [
+            180,
+            135,
+            211,
+            23
+          ]
+        },
+        "nativeMarks": [
+          [
+            178,
+            107,
+            15,
+            15
+          ],
+          [
+            236,
+            107,
+            15,
+            15
+          ]
+        ],
+        "afterMarks": [
+          [
+            181,
+            107,
+            15,
+            15
+          ],
+          [
+            239,
+            107,
+            15,
+            15
+          ]
+        ],
+        "captionOriginDeltaPx": 3,
+        "nativeColumnsMatchAfterCaptionOffset": true,
+        "beforeTailErrorX": -285,
+        "afterTailErrorX": 3
+      }
+    ],
+    "additionalViewerAllocations": [
+      600,
+      380,
+      600
+    ],
+    "nativeResizeParityForThoseAllocations": false
+  },
+  "wholeForms": {
+    "bsp": [
+      {
+        "locale": "ru",
+        "sample": 0,
+        "path": "src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml",
+        "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+        "states": [
+          {
+            "state": "preferred-initial",
+            "beforeFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "afterFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "measuredElements": 10,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "preferred-alternate",
+            "beforeFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "afterFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "measuredElements": 18,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "allocation-640",
+            "beforeFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "afterFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "measuredElements": 18,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "allocation-1150",
+            "beforeFrame": {
+              "width": 1111,
+              "height": 612
+            },
+            "afterFrame": {
+              "width": 1111,
+              "height": 612
+            },
+            "measuredElements": 18,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          }
+        ]
+      },
+      {
+        "locale": "ru",
+        "sample": 1,
+        "path": "src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+        "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+        "states": [
+          {
+            "state": "preferred-initial",
+            "beforeFrame": {
+              "width": 756,
+              "height": 796
+            },
+            "afterFrame": {
+              "width": 756,
+              "height": 796
+            },
+            "measuredElements": 32,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "preferred-alternate",
+            "beforeFrame": {
+              "width": 756,
+              "height": 796
+            },
+            "afterFrame": {
+              "width": 756,
+              "height": 796
+            },
+            "measuredElements": 14,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "allocation-640",
+            "beforeFrame": {
+              "width": 756,
+              "height": 57
+            },
+            "afterFrame": {
+              "width": 756,
+              "height": 57
+            },
+            "measuredElements": 14,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 14
+          },
+          {
+            "state": "allocation-1150",
+            "beforeFrame": {
+              "width": 1126,
+              "height": 324
+            },
+            "afterFrame": {
+              "width": 1126,
+              "height": 324
+            },
+            "measuredElements": 14,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 2
+          }
+        ]
+      },
+      {
+        "locale": "ru",
+        "sample": 2,
+        "path": "src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml",
+        "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+        "states": [
+          {
+            "state": "preferred-initial",
+            "beforeFrame": {
+              "width": 1217,
+              "height": 533
+            },
+            "afterFrame": {
+              "width": 1217,
+              "height": 533
+            },
+            "measuredElements": 18,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "preferred-alternate",
+            "beforeFrame": {
+              "width": 1217,
+              "height": 533
+            },
+            "afterFrame": {
+              "width": 1217,
+              "height": 533
+            },
+            "measuredElements": 17,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "allocation-640",
+            "beforeFrame": {
+              "width": 1216.6875,
+              "height": 57
+            },
+            "afterFrame": {
+              "width": 1216.6875,
+              "height": 57
+            },
+            "measuredElements": 17,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 17
+          },
+          {
+            "state": "allocation-1150",
+            "beforeFrame": {
+              "width": 1216.6875,
+              "height": 309
+            },
+            "afterFrame": {
+              "width": 1216.6875,
+              "height": 309
+            },
+            "measuredElements": 17,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 6
+          }
+        ]
+      },
+      {
+        "locale": "en",
+        "sample": 0,
+        "path": "src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml",
+        "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+        "states": [
+          {
+            "state": "preferred-initial",
+            "beforeFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "afterFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "measuredElements": 10,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "preferred-alternate",
+            "beforeFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "afterFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "measuredElements": 18,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "allocation-640",
+            "beforeFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "afterFrame": {
+              "width": 835,
+              "height": 612
+            },
+            "measuredElements": 18,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "allocation-1150",
+            "beforeFrame": {
+              "width": 1111,
+              "height": 612
+            },
+            "afterFrame": {
+              "width": 1111,
+              "height": 612
+            },
+            "measuredElements": 18,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          }
+        ]
+      },
+      {
+        "locale": "en",
+        "sample": 1,
+        "path": "src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+        "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+        "states": [
+          {
+            "state": "preferred-initial",
+            "beforeFrame": {
+              "width": 766,
+              "height": 796
+            },
+            "afterFrame": {
+              "width": 766,
+              "height": 796
+            },
+            "measuredElements": 32,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "preferred-alternate",
+            "beforeFrame": {
+              "width": 766,
+              "height": 796
+            },
+            "afterFrame": {
+              "width": 766,
+              "height": 796
+            },
+            "measuredElements": 14,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "allocation-640",
+            "beforeFrame": {
+              "width": 766,
+              "height": 57
+            },
+            "afterFrame": {
+              "width": 766,
+              "height": 57
+            },
+            "measuredElements": 14,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 14
+          },
+          {
+            "state": "allocation-1150",
+            "beforeFrame": {
+              "width": 1126,
+              "height": 324
+            },
+            "afterFrame": {
+              "width": 1126,
+              "height": 324
+            },
+            "measuredElements": 14,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 2
+          }
+        ]
+      },
+      {
+        "locale": "en",
+        "sample": 2,
+        "path": "src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml",
+        "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+        "states": [
+          {
+            "state": "preferred-initial",
+            "beforeFrame": {
+              "width": 1217,
+              "height": 533
+            },
+            "afterFrame": {
+              "width": 1217,
+              "height": 533
+            },
+            "measuredElements": 18,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "preferred-alternate",
+            "beforeFrame": {
+              "width": 1217,
+              "height": 533
+            },
+            "afterFrame": {
+              "width": 1217,
+              "height": 533
+            },
+            "measuredElements": 17,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 0
+          },
+          {
+            "state": "allocation-640",
+            "beforeFrame": {
+              "width": 1216.6875,
+              "height": 57
+            },
+            "afterFrame": {
+              "width": 1216.6875,
+              "height": 57
+            },
+            "measuredElements": 17,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 17
+          },
+          {
+            "state": "allocation-1150",
+            "beforeFrame": {
+              "width": 1216.6875,
+              "height": 309
+            },
+            "afterFrame": {
+              "width": 1216.6875,
+              "height": 309
+            },
+            "measuredElements": 17,
+            "changedMeasuredBoxes": 0,
+            "clippedDomOutsideCount": 6
+          }
+        ]
+      }
+    ],
+    "loan": [
+      {
+        "locale": "ru",
+        "passed": true,
+        "detached": true,
+        "dirtyHeight": true,
+        "states": [
+          {
+            "state": "initial",
+            "frame": [
+              1376,
+              827
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-0",
+            "frame": [
+              1156,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-1",
+            "frame": [
+              994,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-2",
+            "frame": [
+              865,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-3",
+            "frame": [
+              800,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-4",
+            "frame": [
+              760,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-5",
+            "frame": [
+              696,
+              760
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-6",
+            "frame": [
+              660,
+              760
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-7",
+            "frame": [
+              1156,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "bottom",
+            "frame": [
+              696,
+              760
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          }
+        ]
+      },
+      {
+        "locale": "en",
+        "passed": true,
+        "detached": true,
+        "dirtyHeight": true,
+        "states": [
+          {
+            "state": "initial",
+            "frame": [
+              1376,
+              827
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-0",
+            "frame": [
+              1156,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-1",
+            "frame": [
+              994,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-2",
+            "frame": [
+              865,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-3",
+            "frame": [
+              800,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-4",
+            "frame": [
+              760,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-5",
+            "frame": [
+              696,
+              760
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-6",
+            "frame": [
+              660,
+              760
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "resize-7",
+            "frame": [
+              1156,
+              875
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "state": "bottom",
+            "frame": [
+              696,
+              760
+            ],
+            "preferred": [
+              1159,
+              875
+            ],
+            "changedMeasuredBoxes": 0,
+            "sameOwners": true,
+            "selection": "948"
+          }
+        ]
+      }
+    ],
+    "scope": "Повторный контроль целых форм до/после. Не доказывает совпадение всех их элементов с native.",
+    "outsideMeaning": "Число DOM-элементов за рамкой, включая скрытые обрезкой. Не доказательство видимого наложения."
+  },
+  "validation": {
+    "rust": {
+      "testThreads": 1,
+      "checks": [
+        {
+          "check": "fmt",
+          "command": [
+            "cargo",
+            "fmt",
+            "--check"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 1.32,
+          "log": "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-rust-fmt.log"
+        },
+        {
+          "check": "check",
+          "command": [
+            "cargo",
+            "check"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 0.11,
+          "log": "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-rust-check.log"
+        },
+        {
+          "check": "clippy",
+          "command": [
+            "cargo",
+            "clippy",
+            "--all-targets",
+            "--all-features",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 0.19,
+          "log": "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-rust-clippy.log"
+        },
+        {
+          "check": "test",
+          "command": [
+            "cargo",
+            "test"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 145.92,
+          "log": "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-rust-test.log"
+        }
+      ],
+      "passed": 1561,
+      "ignored": 19
+    },
+    "node": {
+      "tests": 676,
+      "pass": 667,
+      "fail": 0,
+      "skipped": 9,
+      "log": "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-node.log"
+    },
+    "installedBatches": [
+      {
+        "manifest": "form-batch-BUMwJz/batch.json",
+        "inputs": "form-batch-BUMwJz/inputs.json",
+        "vsix": "form-batch-BUMwJz/artifacts/viewer.vsix",
+        "runs": [
+          {
+            "suite": "through-align",
+            "locale": "en",
+            "passed": true,
+            "cases": 77,
+            "receipt": "form-batch-BUMwJz/through-align-en/receipt.json"
+          },
+          {
+            "suite": "through-align",
+            "locale": "ru",
+            "passed": true,
+            "cases": 77,
+            "receipt": "form-batch-BUMwJz/through-align-ru/receipt.json"
+          }
+        ]
+      },
+      {
+        "manifest": "form-batch-kRJvVw/batch.json",
+        "inputs": "form-batch-kRJvVw/inputs.json",
+        "vsix": "form-batch-kRJvVw/artifacts/viewer.vsix",
+        "runs": [
+          {
+            "suite": "united",
+            "locale": "en",
+            "passed": true,
+            "cases": 9,
+            "receipt": "form-batch-kRJvVw/united-en/receipt.json"
+          },
+          {
+            "suite": "united",
+            "locale": "ru",
+            "passed": true,
+            "cases": 9,
+            "receipt": "form-batch-kRJvVw/united-ru/receipt.json"
+          },
+          {
+            "suite": "groups",
+            "locale": "en",
+            "passed": true,
+            "cases": 22,
+            "receipt": "form-batch-kRJvVw/groups-en/receipt.json"
+          },
+          {
+            "suite": "groups",
+            "locale": "ru",
+            "passed": true,
+            "cases": 22,
+            "receipt": "form-batch-kRJvVw/groups-ru/receipt.json"
+          },
+          {
+            "suite": "column-widths",
+            "locale": "en",
+            "passed": true,
+            "cases": 187,
+            "receipt": "form-batch-kRJvVw/column-widths-en/receipt.json"
+          },
+          {
+            "suite": "column-widths",
+            "locale": "ru",
+            "passed": true,
+            "cases": 143,
+            "receipt": "form-batch-kRJvVw/column-widths-ru/receipt.json"
+          },
+          {
+            "suite": "responsive",
+            "locale": "en",
+            "passed": true,
+            "cases": 31,
+            "receipt": "form-batch-kRJvVw/responsive-en/receipt.json"
+          },
+          {
+            "suite": "responsive",
+            "locale": "ru",
+            "passed": true,
+            "cases": 31,
+            "receipt": "form-batch-kRJvVw/responsive-ru/receipt.json"
+          }
+        ]
+      }
+    ],
+    "installedCases": 608,
+    "runtimeFilesIdentical": 1262,
+    "sourceAndDriverFilesMatchCommittedCode": 530,
+    "dirtyDetachedResize": {
+      "suite": "through-align",
+      "widths": [
+        600,
+        800,
+        600
+      ],
+      "nativeTailDisplacementPx": 87,
+      "sameDom": true,
+      "sameSelection": true
+    }
+  },
+  "remainingGeometry": [
+    {
+      "id": "shared-long-caption-metrics",
+      "nativeInputX": 177,
+      "viewerInputX": 180,
+      "differencePx": 3,
+      "note": "Одинаковая добавка к подписям, рамкам и положениям соседей во всех 17 случаях; ширины контролов и смещение United проверены отдельно."
+    },
+    {
+      "id": "wizard-preferred-width",
+      "nativeFrame": [
+        812,
+        612
+      ],
+      "viewerFrame": [
+        835,
+        612
+      ],
+      "element": "СписокКолонокСопоставления",
+      "reference": "docs/measurements/t157-through-align-boundaries-linux.json"
+    },
+    {
+      "id": "wizard-radio-row-y",
+      "nativeRelativeY": 175,
+      "viewerRelativeY": 204,
+      "note": "Сверка при одинаковой ширине остаётся открытой; эти значения получены при разных предпочитаемых размерах."
+    },
+    {
+      "id": "whole-bsp-native-parity",
+      "note": "Полная native-сверка двух остальных форм и обрезания при минимальной области остаётся открытой."
+    }
+  ],
+  "resolvedPreviousGeometry": [
+    {
+      "reference": "docs/measurements/t157-through-align-boundaries-linux.json",
+      "id": "united-leading-value-track",
+      "nativeTailX": 427,
+      "beforeTailX": 342,
+      "afterTailX": 430,
+      "nativeFrame": [
+        539,
+        139
+      ],
+      "beforeFrame": [
+        454,
+        139
+      ],
+      "afterFrame": [
+        542,
+        139
+      ]
+    }
+  ],
+  "artifactReferences": {
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43501/Ext/Form.xml": "bbc48f728ad4cbe794dbcbcf0b4ab1646f97e8a9494b9dfeac5c9b1bb43efc97",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43501.png": "6b3a5d219ebcfdbb2e8112fa2c3d4f73c866d68c4f78629c93e137ea8756c558",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43502/Ext/Form.xml": "dc26620dd274577f1b61e2ab445d081bd476b52485a4f7dedc9cb568e7ca07cb",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43502.png": "98b5f7628f79a4295636b0580c433f171cae5e686129b55b455ffe64718489d8",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43503/Ext/Form.xml": "f09ca659ca7f12083322e9f92cb3a37a2c11ad33b10d9be4f6749a8ba65d5b42",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43503.png": "eef227864be9e3976dbd49e2050db6ca40b36211958022a8463012401c48a0b2",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43504/Ext/Form.xml": "4f142ff3e2d4857cdce617fee713687ce84ce25b0665478482205bc7a45db6d4",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43504.png": "69d0cf70f35a1799bed0d1c1292e6794ec7821632cc84cd7b24c1396e153cf69",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43505/Ext/Form.xml": "6253d09a3d1cf2302cb62748dca7483e1eb29ba5b370233d4dc27025835236b5",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43505.png": "fcf3b3f52cb4163422b8d0856a5efe12c687dd5b263bda653323949fcb4d6ddb",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43506/Ext/Form.xml": "cef3cdb2ad75c54838a12a82250f9c4d92c6b278640c6da362e892fadea40bf8",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43506.png": "ad537d0b1bcb95fc459bc3572de0a3a8b002495c527e54073a69fa7188ba486f",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43507/Ext/Form.xml": "b5d4e2957b47898958ac72d46d6bf90401844f8c0e957140f0a6dd7f16e861cb",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43507.png": "8231c60bf7f6d3366fcc7f4c32c53bfd16604a7f8a8aee5cb474dec01b503576",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43508/Ext/Form.xml": "136c24027aa4d5c2766d2a402bcb80e74fd180202a66da04610eb427a735fbba",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43508.png": "d3b1315b55219b3a385485f9a2d9a42c80ba9ba521fc7a91459520c0443dd6e4",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43509/Ext/Form.xml": "2a2b983b157d9d5c7ec32812d43b1a06fefe58982d8f96eb666a8048cda81c20",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43509.png": "c385a5a8b559187748616694eb806aba4813d12b86eba1054182970631382255",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43510/Ext/Form.xml": "cff1c95d72163a599599fc070c0a44d53633c491b7439a42bfd1c5fed8f20c40",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43510.png": "8d13db324463f8cf2f66fc8362a2864b42c9bd619087f114cb2f8141a5e63a08",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43511/Ext/Form.xml": "4305bb71fecb260debb719cb6eb0d98faaeb32b5c10d1b939b84001e2ddabc55",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43511.png": "8b05d8025a91a851f78da43d94d974e9314cb5cfdc4c379d8e55ad55915519ff",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43512/Ext/Form.xml": "92803bc9ab4ed039787c2270176cb30e23c73f3fcff5d412cfcb71fa7bed027f",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43512.png": "5db66f9d2657c9357f86e5bc236d39615c7c7e0eb19273e58d47ed23f493263d",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43513/Ext/Form.xml": "1b61fc34e536a1be37a0c4df147447104ecbe9b9e3602cfd82294b287aec56d8",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43513.png": "e07fd1c4835ab5890544a0ada1daf2fd430225304e40154f5e480e49bc711534",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43514/Ext/Form.xml": "e73446c6be3ec6e9f24b603d1c727982f2dae0f75b76de1609a348cbdd89ccea",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43514.png": "829a9830b1a75141eb0068c0c60ee1ce4dd367b461f3064e2363f65dc3b82926",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43515/Ext/Form.xml": "0e1b818981dfd3f7ae28925619502a41f3706e45594dc384344f356c6521c71f",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43515.png": "7ba52da7bf729a982131ee768d9acd7ad0c78bb9821896733a099c2a6f8c39d4",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43516/Ext/Form.xml": "d292814f84e139d51fb3b405547a262e07e350106ee7990754d0cf6b0964c883",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43516.png": "240b4c33f9d935e7953d8726d24ea7cd054be957685f68671876bb79b90031be",
+    "form-native-united-value-a7Is4dXj/src/CommonForms/ProbeWidthValue43517/Ext/Form.xml": "1a365c67ebb745ed8306b9eb7304da285438e802f2fb8fccb080eac6ddbb3861",
+    "form-native-united-value-a7Is4dXj/native-ru/ProbeWidthValue43517.png": "d6081b8833eff49f124e6273af6729c365f4293a14fed9ab2e7aea78306ec762",
+    "form-united-value-viewer-1wTPu6rp/ru/geometry.json": "de284b4c2758e9f93fb40ba133be88fd2faf6a070dc9fdc7f84ff742db81a380",
+    "form-united-value-viewer-1wTPu6rp/ru/receipt.json": "d5885c2d822e99567cb57c7904ad0ff697f820d1e3053dd205ad35404f3dd26e",
+    "form-united-value-viewer-1wTPu6rp/en/geometry.json": "c5e7448481aaafa533475f4a10ee87e25d87f706d2871934a978750f1b3ab251",
+    "form-united-value-viewer-1wTPu6rp/en/receipt.json": "194193a78ba27a6900df6108c7ffa54b427e2fc8dc4424af3635a7aef0e58189",
+    "form-united-value-viewer-76bLWPRk/ru/geometry.json": "84b960280a8d9355ba53c49ccdd9bdd90873fa86ab06d40f921b77aed7ddc8e2",
+    "form-united-value-viewer-76bLWPRk/ru/receipt.json": "6331c6dd6e7f7ce7150f27011340544c4bfa7ce77085d8b228a7c5942bc1d9a4",
+    "form-united-value-viewer-76bLWPRk/en/geometry.json": "38a28267fd3cc8ed35b610016dab544c29c925ef3e5a382558602d22cb904305",
+    "form-united-value-viewer-76bLWPRk/en/receipt.json": "a04c2ad29fe48a0721154ecbd89891d5984cf64620664016bbc20be449d9dcc7",
+    "form-batch-BUMwJz/batch.json": "d32fd467d4df7bfcdc9ddb8e8b7ee4842bf567da8e1135ee99fc33a3606e0d98",
+    "form-batch-BUMwJz/inputs.json": "57d9c74ccd5225ced366cfe40f500091c0abfaa5a80e0143da9935f323612e6d",
+    "form-batch-BUMwJz/artifacts/viewer.vsix": "c88ddc5a297af2900b410d916d9f53f818b1eea248e6f834dee0629c564b383a",
+    "form-batch-BUMwJz/through-align-en/receipt.json": "5415b537a31bd04e793449c579f940bd89c0252e76188f322d724d702a4b2940",
+    "form-batch-BUMwJz/through-align-ru/receipt.json": "05cd450cacc678c3260a7e214c3ffd6d2e845cbba77cb8d7e47bcdd4e8f7db40",
+    "form-batch-kRJvVw/batch.json": "6172c52fd683f3741f761738b36749a8c9dbda5abed881f823881c0dde0af0a4",
+    "form-batch-kRJvVw/inputs.json": "daf1f5caf500bf477250e3d35e3d748c4a7aff4d2f4f1bee2b700ceb97e5b0ac",
+    "form-batch-kRJvVw/artifacts/viewer.vsix": "0bf78bd76195cedf58aeb8fadf218e7a80fdd95962dfe40007153f55e1278c97",
+    "form-batch-kRJvVw/united-en/receipt.json": "de14a67d14f6647edc97f3eeeb2d152405499e14527f9ac57f812fda72aaf75b",
+    "form-batch-kRJvVw/united-ru/receipt.json": "582f29465ed0c4a9f3b76f8448b8e470722a73d2d5ae49afdb67b60d5706688d",
+    "form-batch-kRJvVw/groups-en/receipt.json": "f6e5e17a1ee910877ff8c266aeb51941482832700d13b6c223ce2a5c0a6e9553",
+    "form-batch-kRJvVw/groups-ru/receipt.json": "a6aaf8bb925d62e7a4fa8e30df525c294adc8bb920424470ef8f1a4387748850",
+    "form-batch-kRJvVw/column-widths-en/receipt.json": "f3b40c26f823393cbf2f61739d24d40cbb646d29846e3174d321c2df23dd1b73",
+    "form-batch-kRJvVw/column-widths-ru/receipt.json": "21edd496fc5936b9e19789406f43691b09b953baafab2a7e576af1cd9d2c62ab",
+    "form-batch-kRJvVw/responsive-en/receipt.json": "52c6931a0b6da014d25626df0e4e3f5c1e3b8768e7f7dc736c8e75d75109ac9a",
+    "form-batch-kRJvVw/responsive-ru/receipt.json": "217924d3d3d0bc0b299854a64b342400d86c82e576f282af1918dff4ea11d2ef",
+    "bsp-layout-after-8eGMHqC9/ru/review.json": "1d6a913bc2e73acc992596bef4cba3c0e476588d6babd05448e76ee3c6b5db97",
+    "bsp-layout-after-vXBbDJrF/ru/review.json": "8b97f542cc350349fb816657377f93ed43b3c9fc1b8ba781c5e24dc166cc8556",
+    "bsp-layout-after-8eGMHqC9/en/review.json": "a2ad38b375e4003a046db8cb80cb925655a55ce5be0e2e1101a54fba18a7dc6d",
+    "bsp-layout-after-vXBbDJrF/en/review.json": "f0c2d3b09d1b1995f1f6e3dcc07452f99c6d38ea64fc482289dfee4e82d4fda0",
+    "form-installed-loan-lower-8fOGqnXs/loan-ru/geometry.json": "f4de6d32eba6edff83fd4220251d9575941ed29e812b3657caa64b750268c4cc",
+    "form-installed-loan-lower-8fOGqnXs/loan-ru/receipt.json": "857036c4bcadd66a52781450f123c2c3b41881ae333f973bbf456c6dbe8b24cf",
+    "form-installed-loan-lower-6eAJPnoa/loan-ru/geometry.json": "f4de6d32eba6edff83fd4220251d9575941ed29e812b3657caa64b750268c4cc",
+    "form-installed-loan-lower-6eAJPnoa/loan-ru/receipt.json": "fccac4a5471f1a32bf570458e868af4128a98912635950727dd4bd6d32b95200",
+    "form-installed-loan-lower-8fOGqnXs/loan-en/geometry.json": "b2d5e97c4d3087a10de558047f0eafff0fcd5ea1493e2b77cd1674034c9d61d0",
+    "form-installed-loan-lower-8fOGqnXs/loan-en/receipt.json": "bc13fd8988c788bec6d3cb004b1e2df7c521102f23c122902374a178e48c801c",
+    "form-installed-loan-lower-6eAJPnoa/loan-en/geometry.json": "b2d5e97c4d3087a10de558047f0eafff0fcd5ea1493e2b77cd1674034c9d61d0",
+    "form-installed-loan-lower-6eAJPnoa/loan-en/receipt.json": "8b292fa82628b7e37d086cca5dd73017a14c3cec491f484a8fa338600941028b",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-rust-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-rust-check.log": "8c233a54790c4800d3dd585436af679aa838da259bfdb129412e2d51cdb75cdc",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-rust-clippy.log": "a5f4c585ee974ca44916ac30a98bbc189e067a7e0a6bc6d2e8d6bc525be724af",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-rust-test.log": "b7cab4dbaeb2c937e2e39f553725a8aa238f5dd3e230a5020e80361f3f940fac",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-node.log": "d320c1fc586349b96721159cac04e35e42a30bc1f3e44c6f183642870311b40f",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-rust-checks.json": "12a1217caa4830173dcc2b6f6f4d587733582d1bfa6e532cc328046624767dce",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-prepare.py": "d1a37f14f708c08cb434a8cb77ab85a9ff379eec06b2a55084824f2a7d10c88f",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-prepare.sh": "636870f995870c120cd3ee7f73fb36f903576d35fcba4ce64753553059e43042",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-capture.sh": "4a1a7a361fccc677e96a38e4606b93cfafae28701e90995d92b34120fa723049",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-choice-through-capture.py": "f24d42b246eddd020e4cc37241bfe7acdb679ac4001866183277afd5ef641509",
+    "form-united-value-viewer-76bLWPRk/evidence/eska-united-value-metrics.py": "b4ba84fa69e0ea7086867a1d963fed871c0f9cd948b84d1be1d1d9e4de67067d",
+    "form-united-value-viewer-76bLWPRk/evidence/form-united-value-host.cjs": "95989367a7a845426043ea61d67e63333ee66004778eeb420112f47acabd5306",
+    "form-native-united-value-a7Is4dXj/process.json": "7ce688d7a9356b3281874256017b00e1bb3ee3487c7672a7a5ac62a1273dfc4b",
+    "form-native-united-value-a7Is4dXj/cases.json": "55c911979984422a3bbbdaea079e95ff561fc0344473059a8f411141e095927e",
+    "form-native-united-value-a7Is4dXj/create.log": "7d7a1f82734a987f0a1dd4994381d9a2ba35b9ec40fd6590bc66b4ecabf50ad8",
+    "form-native-united-value-a7Is4dXj/import.log": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e",
+    "form-native-united-value-a7Is4dXj/apply.log": "39371df2fcceb22b668b6c1c1673813e78b6ac6bc9a900b2be9bc9867161056f"
+  }
+}
