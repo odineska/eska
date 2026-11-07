@@ -1,0 +1,306 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "platform": "linux",
+  "dpi": 96,
+  "coordinateSpace": "Unzoomed form-relative checkbox outline. Add one pixel to native frame width for the preview border.",
+  "fixtures": {
+    "CheckboxWrap": {
+      "cases": [
+        {
+          "name": "checkbox columns at preferred size",
+          "frame": [906, 250],
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [147, 77, 15, 15],
+            "Flag3": [147, 103, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Дубль по займу"
+            ],
+            "Flag2": [
+              "Провести дубль как выдачу"
+            ],
+            "Flag3": [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          }
+        },
+        {
+          "name": "checkbox columns at the minimum width",
+          "frame": [802, 250],
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [89, 77, 15, 15],
+            "Flag3": [89, 103, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Дубль",
+              "по",
+              "займу"
+            ],
+            "Flag2": [
+              "Провести дубль как выдачу"
+            ],
+            "Flag3": [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          }
+        },
+        {
+          "name": "checkbox columns scroll below the minimum",
+          "frame": [802, 250],
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [89, 77, 15, 15],
+            "Flag3": [89, 103, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Дубль",
+              "по",
+              "займу"
+            ],
+            "Flag2": [
+              "Провести дубль как выдачу"
+            ],
+            "Flag3": [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          },
+          "viewport": [770, 250]
+        },
+        {
+          "name": "checkbox columns reflow after dirty width",
+          "frame": [802, 250],
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [129, 77, 15, 15],
+            "Flag3": [129, 103, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Дубль по",
+              "займу"
+            ],
+            "Flag2": [
+              "Провести дубль как выдачу"
+            ],
+            "Flag3": [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          },
+          "edit": {
+            "widths": {
+              "B": 33
+            }
+          }
+        },
+        {
+          "name": "checkbox columns at a three-line intermediate width",
+          "frame": [802, 250],
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [99, 77, 15, 15],
+            "Flag3": [99, 103, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Дубль",
+              "по",
+              "займу"
+            ],
+            "Flag2": [
+              "Провести дубль как выдачу"
+            ],
+            "Flag3": [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          },
+          "edit": {
+            "widths": {
+              "B": 36
+            }
+          }
+        },
+        {
+          "name": "checkbox columns restore after dirty width",
+          "frame": [802, 250],
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [89, 77, 15, 15],
+            "Flag3": [89, 103, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Дубль",
+              "по",
+              "займу"
+            ],
+            "Flag2": [
+              "Провести дубль как выдачу"
+            ],
+            "Flag3": [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          }
+        }
+      ]
+    },
+    "CheckboxReverse": {
+      "cases": [
+        {
+          "name": "reversed checkbox columns at preferred size",
+          "frame": [906, 250],
+          "controls": {
+            "Flag2": [19, 77, 15, 15],
+            "Flag1": [326, 77, 15, 15],
+            "Flag3": [19, 103, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Дубль по займу"
+            ],
+            "Flag2": [
+              "Провести дубль как выдачу"
+            ],
+            "Flag3": [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          }
+        },
+        {
+          "name": "reversed checkbox columns at the minimum width",
+          "frame": [802, 250],
+          "controls": {
+            "Flag2": [19, 77, 15, 15],
+            "Flag1": [326, 77, 15, 15],
+            "Flag3": [19, 103, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Дубль",
+              "по",
+              "займу"
+            ],
+            "Flag2": [
+              "Провести дубль как выдачу"
+            ],
+            "Flag3": [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          }
+        }
+      ]
+    },
+    "CheckboxFlat": {
+      "cases": [
+        {
+          "name": "three sibling checkboxes above the minimum width",
+          "frame": [994, 250],
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [93, 77, 15, 15],
+            "Flag3": [191, 77, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Дубль",
+              "по",
+              "займу"
+            ],
+            "Flag2": [
+              "Провести",
+              "дубль как",
+              "выдачу"
+            ],
+            "Flag3": [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          }
+        },
+        {
+          "name": "three sibling checkboxes at the minimum width",
+          "frame": [981, 250],
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [89, 77, 15, 15],
+            "Flag3": [178, 77, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Дубль",
+              "по",
+              "займу"
+            ],
+            "Flag2": [
+              "Провести",
+              "дубль",
+              "как",
+              "выдачу"
+            ],
+            "Flag3": [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          }
+        }
+      ]
+    },
+    "CheckboxLongFirst": {
+      "cases": [
+        {
+          "name": "long caption in the first column, preferred size",
+          "frame": [934, 250],
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [326, 77, 15, 15],
+            "Flag3": [326, 103, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Отнести на счет дебиторской задолженности"
+            ],
+            "Flag2": [
+              "Провести дубль как выдачу"
+            ],
+            "Flag3": [
+              "Дубль по займу"
+            ]
+          }
+        },
+        {
+          "name": "long caption in the first column, minimum width",
+          "frame": [821, 250],
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [326, 77, 15, 15],
+            "Flag3": [326, 146, 15, 15]
+          },
+          "captions": {
+            "Flag1": [
+              "Отнести на счет дебиторской задолженности"
+            ],
+            "Flag2": [
+              "Провести",
+              "дубль",
+              "как",
+              "выдачу"
+            ],
+            "Flag3": [
+              "Дубль по",
+              "займу"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "sourceFiles": {
+    "CheckboxWrap": "51dffa30ddf066a9f6b79ef78a3b9c29a42d58be1179837f34a6bbf98f29ba59",
+    "CheckboxReverse": "c0c76991ffe72d6ef534bdca707bf892badb634941c5699ef89b08a20e7e3917",
+    "CheckboxFlat": "4cc2194959b22b1822be9c1a2f870126ff15e9a33b5d8b045ec58a88b5344e6b",
+    "CheckboxLongFirst": "d0e75ccc432eb6b5bb861a3caa22e474b03f123da762d21faec839553549e8c4"
+  }
+}
