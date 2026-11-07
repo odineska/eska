@@ -11,7 +11,12 @@
     "Deep": "a16126a4b2d01c5f2a116875ef41561200e3db7adec71f8f6da55b980c17a5a5",
     "Multiple": "2c63e488e1edcd50cd55a1a9a91c9d8c16d57d3ac08ff18150d5291236eaa660",
     "Payment": "0acf01708a602d469967f27725cb5eb9b89e7136477ed8c56ae06e801c6e2618",
-    "PaymentMixed": "e67486e4654df2e3a8979ae4d90d745191cd21cbf9e87c598d9b671e75469ae1"
+    "PaymentMixed": "e67486e4654df2e3a8979ae4d90d745191cd21cbf9e87c598d9b671e75469ae1",
+    "StretchRadio": "9b32ba48522a661f9bec7e5ece08ae34591ec58d48317e6efc7e0b7f69f2ab68",
+    "StretchDirect": "e726bde53ab590dc66c4862265f7731c219116ff82fe108134a27ac9e80a94c9",
+    "StretchInput": "884254c1353595f333ebafc3dae8dac768351eadf20fe454494acf570aca81e5",
+    "StretchCheck": "0efeb1a45b35359c30e6cf0c6326689b7c37d510d378a6d6b9c8165b075429c9",
+    "StretchTrailing": "8669eb45b29b267105be71e434bf6f3874621de9c12e304f87b1fb2b98730034"
   },
   "cases": [
     {
@@ -628,6 +633,1592 @@
         "Date": [631, 39, 101, 23],
         "Bank": [487, 71, 294, 23]
       }
+    }
+  ],
+  "boundaryScope": "Caption sharing across authored HorizontalStretch=false groups. Complete frame geometry is recorded but not accepted by these scope assertions.",
+  "boundaryCompatibility": "Version8_3_24",
+  "boundaryLocale": "ru",
+  "boundaryCases": [
+    {
+      "fixture": "StretchDirect",
+      "case": "Direct",
+      "form": "ProbeWidthChoiceAlign43401",
+      "row": false,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        409,
+        133
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Last": [
+          177,
+          97,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            72,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            72,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43401.png",
+        "sha256": "59700dca8af0b5e93997229b4a64a912425b3b174c79bdfe7574c894d219b95b"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43401/Ext/Form.xml",
+        "sha256": "e726bde53ab590dc66c4862265f7731c219116ff82fe108134a27ac9e80a94c9"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "Auto",
+      "form": "ProbeWidthChoiceAlign43402",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43402.png",
+        "sha256": "35bf3a9754de56d02d7e38acb67e30cf1eecaacefd8fc67590dddc2c2d0e4e8a"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43402/Ext/Form.xml",
+        "sha256": "9b32ba48522a661f9bec7e5ece08ae34591ec58d48317e6efc7e0b7f69f2ab68"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "Use",
+      "form": "ProbeWidthChoiceAlign43403",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": "Use",
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43403.png",
+        "sha256": "8b6875445e499efcccb38bd3b7e78ca6e580846325a0035e5549de1b5b9b4691"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43403/Ext/Form.xml",
+        "sha256": "23756cc7d47b7d38d487928969bc833cf6a21ad4cbd675c77bdc8d078a221495"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "DontUse",
+      "form": "ProbeWidthChoiceAlign43404",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": "DontUse",
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43404.png",
+        "sha256": "b23850a5171625259480953769257ae9ce27976e2826b71551850cf9edf70537"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43404/Ext/Form.xml",
+        "sha256": "a2e62b6350e69241c6a5b13758e32614fe596427038709a1c202bdf05ce1fd0d"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchCheck",
+      "case": "Check",
+      "form": "ProbeWidthChoiceAlign43405",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          233,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43405.png",
+        "sha256": "8367746676bdc0bfa93a83746a696248e8337743850dbe0136e4e32267144e65"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43405/Ext/Form.xml",
+        "sha256": "0efeb1a45b35359c30e6cf0c6326689b7c37d510d378a6d6b9c8165b075429c9"
+      }
+    },
+    {
+      "fixture": "StretchInput",
+      "case": "Input",
+      "form": "ProbeWidthChoiceAlign43406",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        419,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          307,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ],
+        "OptionInput": [
+          177,
+          71,
+          91,
+          23
+        ]
+      },
+      "nativeMarks": [],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43406.png",
+        "sha256": "d99c8c8bdab52afad0f6c9d009e88df70feec77765a63c411325e072192347c9"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43406/Ext/Form.xml",
+        "sha256": "884254c1353595f333ebafc3dae8dac768351eadf20fe454494acf570aca81e5"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "UnitedTrue",
+      "form": "ProbeWidthChoiceAlign43407",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": "true",
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43407.png",
+        "sha256": "2880766508e2656e16d6c0f4b486c4415fa0184233078ab17b436888707baf2f"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43407/Ext/Form.xml",
+        "sha256": "86a7823673819f88d971e579bfe6e7753886e0569a61b027e824146fd43bbfae"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "UnitedFalse",
+      "form": "ProbeWidthChoiceAlign43408",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": "false",
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        539,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43408.png",
+        "sha256": "2560750dd6bfef09d6f3f49d50392ed46e10fbbec6f92bc196d1449a17d33faf"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43408/Ext/Form.xml",
+        "sha256": "d37e8309f099fce926c54b0a411f5ff7564f004f9e23ebed7852f650987531f6"
+      }
+    },
+    {
+      "fixture": "StretchTrailing",
+      "case": "Trailing",
+      "form": "ProbeWidthChoiceAlign43409",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Tail",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        470,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          177,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            326,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            384,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43409.png",
+        "sha256": "bcd46e1197d3c2695c78eeed20f9c48293d1f7861c0db3cd72586250deb0de09"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43409/Ext/Form.xml",
+        "sha256": "8669eb45b29b267105be71e434bf6f3874621de9c12e304f87b1fb2b98730034"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "Default",
+      "form": "ProbeWidthChoiceAlign43410",
+      "row": true,
+      "grouping": "Absent",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43410.png",
+        "sha256": "d91ae1cdfb6ac2e12afedf8f825a227583f0222f5406e00989930f91422deb7f"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43410/Ext/Form.xml",
+        "sha256": "72df7922461d5c58a935f51c4253c82d01922221445a7d0d52de60397a32c020"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "Conditional",
+      "form": "ProbeWidthChoiceAlign43411",
+      "row": true,
+      "grouping": "HorizontalIfPossible",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43411.png",
+        "sha256": "b839cfbfe0898c9cf8aabfedaed69da43556cb1c59de0fd7abd7514709248e0e"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43411/Ext/Form.xml",
+        "sha256": "a8efa2f3a4f3aefaf14370b43cdeffc002de1bdfa19f474e5de90165cd3c65a2"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "DefaultFixed",
+      "form": "ProbeWidthChoiceAlign43412",
+      "row": true,
+      "grouping": "Absent",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43412.png",
+        "sha256": "89cde9fe5ab67d47121adbd13887d5082f13a85b31cf306e6f795733c45528dc"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43412/Ext/Form.xml",
+        "sha256": "f124d8e47b2cd39542c72a5c722e5670efe577a6b6b59a880c9fa6c9874be0b3"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "HorizontalFixed",
+      "form": "ProbeWidthChoiceAlign43413",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43413.png",
+        "sha256": "f2e1094b6811d553177d00f1d7f33a9430d98f7e5104f74fcde49a90553d70b1"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43413/Ext/Form.xml",
+        "sha256": "32ec3702320c9301fa424e68a311489d3cbcfeb4d4568ee1cb0bc2d2b5795ac1"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "ConditionalFixed",
+      "form": "ProbeWidthChoiceAlign43414",
+      "row": true,
+      "grouping": "HorizontalIfPossible",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43414.png",
+        "sha256": "6b3b27813b7d350e00be6659d78fb7ea32c3570762d996f2e99cd965cf692a10"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43414/Ext/Form.xml",
+        "sha256": "1c752545d4852b466236ef504da74852063f09d70a6faed402c1bdfbc00809c5"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "DefaultUseFixed",
+      "form": "ProbeWidthChoiceAlign43415",
+      "row": true,
+      "grouping": "Absent",
+      "horizontalStretch": "false",
+      "throughAlign": "Use",
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43415.png",
+        "sha256": "4b9d72cdd8d5aee7d6fa1dbf7198aedab89f5bec94c3673e5483589ea8bc624b"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43415/Ext/Form.xml",
+        "sha256": "5e7828bf83bf401bbbc6e917b6f3a6cc52037b24d37b8c0f9640fae3e3446048"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "DefaultDontUseFixed",
+      "form": "ProbeWidthChoiceAlign43416",
+      "row": true,
+      "grouping": "Absent",
+      "horizontalStretch": "false",
+      "throughAlign": "DontUse",
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43416.png",
+        "sha256": "286c744d814ecef3e7f4aaa4fa56dcc71e6814cf8ef35c90b2457226d961caa7"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43416/Ext/Form.xml",
+        "sha256": "6c3b05f4edb9900fac93d5c3fea6df9ac0b3163569239cdc5c4ed30a9c47c1d5"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "TitleAuto",
+      "form": "ProbeWidthChoiceAlign43417",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": null,
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43417.png",
+        "sha256": "96df513ce1671b528bec8c3d7a39bb4ac4d5ae790c73195c91b142fe5566d492"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43417/Ext/Form.xml",
+        "sha256": "94cfc7aca05cc21d9f2c5164c622a930523d0c8291dcd537cb03bb94eba19cf3"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "TitleAutoFixed",
+      "form": "ProbeWidthChoiceAlign43418",
+      "row": true,
+      "grouping": "Absent",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": null,
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43418.png",
+        "sha256": "bee922ec96a93559f8cd3e4008d4b7117f9f21cfafe6687d81e104674cecd2f2"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43418/Ext/Form.xml",
+        "sha256": "efb71fdc516181d6bd2af3cbc6f0313d94cdf5a44fa7332d15b2c720950d7214"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "TitleAutoUse",
+      "form": "ProbeWidthChoiceAlign43419",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": "Use",
+      "united": null,
+      "titleLocation": null,
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43419.png",
+        "sha256": "62b63c7528880381db12348e8fcd784a115346eed811e93dc614178ec01522cf"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43419/Ext/Form.xml",
+        "sha256": "27f72ba5cf50be6942298d482b57f7ca433307b0a18dd601fd3c793ce104390e"
+      }
+    },
+    {
+      "fixture": "StretchDirect",
+      "case": "DirectTitleAuto",
+      "form": "ProbeWidthChoiceAlign43420",
+      "row": false,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": null,
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        409,
+        133
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Last": [
+          177,
+          97,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            72,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            72,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43420.png",
+        "sha256": "d49871b336c01c1c4e500afce58d3a60f274bf28c4f7dae970041153d2a53ccf"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43420/Ext/Form.xml",
+        "sha256": "065c40048e7a559e2e34a34cc2fddf952ef6c9badd766867ef489385a822dc8a"
+      }
+    },
+    {
+      "fixture": "StretchInput",
+      "case": "FixedInput",
+      "form": "ProbeWidthChoiceAlign43421",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          190,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ],
+        "OptionInput": [
+          60,
+          71,
+          91,
+          23
+        ]
+      },
+      "nativeMarks": [],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43421.png",
+        "sha256": "7e64d8c9e3b966d219781a8d5c73fc89e26892f09cf00517ecb0c43ee5c85ae6"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43421/Ext/Form.xml",
+        "sha256": "fff4546bc3ea10ff810edd24798b7dc5c0ca7aa4fcb650e3076d9072d6988b8d"
+      },
+      "ownControlX": 60,
+      "ownControl": [
+        60,
+        71,
+        91,
+        23
+      ],
+      "ownMarks": []
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "FixedVertical",
+      "form": "ProbeWidthChoiceAlign43422",
+      "row": true,
+      "grouping": "Vertical",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        165
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          60,
+          97,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          129,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            72,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            72,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43422.png",
+        "sha256": "d178156f8cb68ababed4d3b5158b3ab4b2bae3606b90a8303113314ec3c15372"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43422/Ext/Form.xml",
+        "sha256": "1fc8ba1761d8fcbdea94622c85a921431f239d6aa904a1bc63a68630bbbd46a4"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          72,
+          15,
+          15
+        ],
+        [
+          119,
+          72,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "FixedVerticalUse",
+      "form": "ProbeWidthChoiceAlign43423",
+      "row": true,
+      "grouping": "Vertical",
+      "horizontalStretch": "false",
+      "throughAlign": "Use",
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        165
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          60,
+          97,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          129,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            72,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            72,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43423.png",
+        "sha256": "8fbf807ea2bbf81ae99caf358768fe4fe5b99cdde45d7439735671fa347bac6b"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43423/Ext/Form.xml",
+        "sha256": "cfb31ed43ce31864b93a150abf3de6c3866db7de89af04e52ec7c86bc282c627"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          72,
+          15,
+          15
+        ],
+        [
+          119,
+          72,
+          15,
+          15
+        ]
+      ]
     }
   ]
 }
