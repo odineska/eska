@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-07T21:24:05.274751+00:00",
+  "milestone": "T155",
+  "relatedMilestones": [
+    "T157"
+  ],
+  "scope": "Чтение имени гарнитуры из канонического Designer XML, включая поля, заголовки, стиль и dirty RPC. Приёмка пикселей и геометрии новых надписей не заявляется.",
+  "eskaCommit": "ee35616d1970263ec15830d0dae1f74d3574c0db",
+  "platformBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "nativePlatform": "ALT Linux ARM64",
+  "sourceAttribute": "faceName",
+  "publicJsonProperty": "font.face",
+  "jsonSchemaChanged": false,
+  "sharedResolver": "crates/eska-project-core/src/project/forms/appearance.rs:resolve_font",
+  "semanticFontFaceCorrection": true,
+  "nativeProducerRoundtrip": {
+    "importPassed": true,
+    "exportPassed": true,
+    "cases": [
+      {
+        "case": "SerifTwoLines",
+        "fontAttributes": {
+          "ref": "sys:DefaultGUIFont",
+          "faceName": "Liberation Serif",
+          "height": "10",
+          "kind": "WindowsFont"
+        },
+        "canonicalXml": "form-native-heading-metrics-ChOGk12i/canonical-export/CommonForms/ProbeWidthHeading44126/Ext/Form.xml",
+        "canonicalXmlSha256": "c7355f1649d653255721f64cb342199998fc2b5c5c3c2d3bb37a7f1f3f088ec5"
+      },
+      {
+        "case": "MonoTwoLines",
+        "fontAttributes": {
+          "ref": "sys:DefaultGUIFont",
+          "faceName": "Liberation Mono",
+          "height": "10",
+          "kind": "WindowsFont"
+        },
+        "canonicalXml": "form-native-heading-metrics-ChOGk12i/canonical-export/CommonForms/ProbeWidthHeading44127/Ext/Form.xml",
+        "canonicalXmlSha256": "994948106b418d6c4b72ce0502031c175ac643ef0292c19c36fe4b5228eef3f7"
+      }
+    ]
+  },
+  "validation": {
+    "rust": {
+      "fmt": "passed",
+      "check": "passed",
+      "clippyAllTargetsAllFeatures": "passed",
+      "test": {
+        "command": "RUST_TEST_THREADS=1 ESKA_TEST_ROOT=\"$(realpath ../eska-playground)\" cargo test",
+        "passed": 1564,
+        "ignored": 19,
+        "failed": 0
+      }
+    },
+    "node": {
+      "passed": 680,
+      "skipped": 8,
+      "failed": 0
+    },
+    "rpc": {
+      "test": "forms::native_font_face_names_reach_rpc_and_dirty_revisions_in_both_locales",
+      "locales": [
+        "ru-RU",
+        "en-US"
+      ],
+      "dirtyFaceChange": [
+        "Liberation Serif",
+        "Arial"
+      ],
+      "titleFaceRetained": "Liberation Mono",
+      "identityRetained": true,
+      "sourceBytesUnchanged": true
+    },
+    "unitTests": [
+      "native_font_face_name_is_resolved_for_control_and_title",
+      "native_style_font_face_name_is_inherited_and_locally_overridden"
+    ]
+  },
+  "fullProfileAccepted": false,
+  "nativeGlyphParityAccepted": false,
+  "nativeHeaderGeometryAccepted": false,
+  "nativeHeaderResearch": {
+    "formsPrepared": 41,
+    "schemaImportExportPassed": true,
+    "acceptedGuiCaptures": 0,
+    "physicalInputFailure": "Window activation request ignored; pointer target guard stopped the run. A user check is pending.",
+    "isolatedExperiments": "Xvfb alone, with twm and with software/MIT-SHM settings produced blank Designer contents; all such captures were rejected.",
+    "testContainerToolsAdded": [
+      "xorg-xvfb",
+      "twm"
+    ],
+    "applicationDependenciesChanged": false
+  },
+  "artifactBase": "../eska-playground",
+  "artifacts": [
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/face-name-evidence/rust-fmt-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/face-name-evidence/rust-check-final.log",
+      "sha256": "22e0df986057b9ba5be07526ac5fb348862a3dedef42108383cc3e088acbb889"
+    },
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/face-name-evidence/rust-clippy-final.log",
+      "sha256": "53a3bea76a1db087490869ba84d5afbab42884a172e11af68346d8d9cdc1ef76"
+    },
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/face-name-evidence/rust-test-final.log",
+      "sha256": "0992487b7fcfe5a594a80c32d637f99abf87d791c48ca77988451dc26cdeb805"
+    },
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/face-name-evidence/node-test.log",
+      "sha256": "6fbe82b16683ea23d98aada2a0d0aee111181477fdea75764146b098010a8c2c"
+    },
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/face-name-evidence/rpc-test.log",
+      "sha256": "47ab3060a6625a9b478dbdeb21608b2363b788ac23ad7283d5b55d16e4887bf2"
+    },
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/face-name-evidence/unit-tests.log",
+      "sha256": "30b74db4c920657cc5074e9cca69cac83d117847130b92e47f49b62f6d704ae3"
+    },
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/import-canonical.log",
+      "sha256": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e"
+    },
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/export-canonical.log",
+      "sha256": "0b1c529e024422de24bd78666874c0d32528af625453ea7347ad52dea10f4966"
+    },
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/canonical-export/CommonForms/ProbeWidthHeading44126/Ext/Form.xml",
+      "sha256": "c7355f1649d653255721f64cb342199998fc2b5c5c3c2d3bb37a7f1f3f088ec5"
+    },
+    {
+      "path": "form-native-heading-metrics-ChOGk12i/canonical-export/CommonForms/ProbeWidthHeading44127/Ext/Form.xml",
+      "sha256": "994948106b418d6c4b72ce0502031c175ac643ef0292c19c36fe4b5228eef3f7"
+    }
+  ],
+  "remaining": [
+    "Сравнить фактические гарнитуры и метрики в Конфигураторе Windows и Linux.",
+    "Продолжить Native-матрицу надписей и многострочных заголовков после восстановления ввода в тестовое окно.",
+    "Полная визуальная приёмка T155/T157/T165 остаётся открытой."
+  ]
+}
