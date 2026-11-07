@@ -6,7 +6,7 @@ use crate::project::{
 
 fn resource(kind: &str, name: &str, properties: &str) -> FormResource {
     let xml = format!(
-        r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable"><{kind} uuid="{name}"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"#
+        r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:v8="http://v8.1c.ru/8.1/data/core"><{kind} uuid="{name}"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"#
     );
     FormResource {
         layer_source: "base".into(),
@@ -262,15 +262,16 @@ fn journal_creation_entries_use_effective_registered_documents() {
         resource(
             "Document",
             "Invoice",
-            "<ObjectPresentation>Invoice entry</ObjectPresentation>",
+            "<Synonym><v8:item><v8:lang>en</v8:lang><v8:content>Invoice entry</v8:content></v8:item></Synonym><ObjectPresentation>Ignored object title</ObjectPresentation>",
         ),
     ];
     let views = presentations("DocumentJournal.Sales", "", &resources);
     let create = &views[1].table_command_menu[0][0];
     assert_eq!(create.shortcut, None);
     assert_eq!(create.items.len(), 1);
+    assert_eq!(create.items[0].order_by_caption, Some(true));
     assert!(
-        matches!(&create.items[0].caption, PresentationText::Name { text } if text == "Invoice entry")
+        matches!(&create.items[0].caption, PresentationText::Literal { items } if items[0].content == "Invoice entry")
     );
     assert_eq!(
         create.items[0].origin.as_ref().unwrap().source,

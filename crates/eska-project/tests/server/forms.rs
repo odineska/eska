@@ -2103,11 +2103,11 @@ fn dynamic_list_menu_loads_journal_documents_and_updates_unsaved_sources() {
         let session = &opened["formSessionId"];
         let updated = client.request("form/update", &params(&context, json!({"formSessionId":session,"revision":"1","overlays":[
             {"source":form_id,"version":"2","text":changed},
-            {"source":order_id,"version":"2","text":MENU_ORDER_XML.replace("<ListPresentation>Orders</ListPresentation>", "<ObjectPresentation>Updated invoice</ObjectPresentation>")}
+            {"source":order_id,"version":"2","text":MENU_ORDER_XML.replace("<ListPresentation>Orders</ListPresentation>", "<Synonym xmlns:v8=\"http://v8.1c.ru/8.1/data/core\"><v8:item><v8:lang>en</v8:lang><v8:content>Updated invoice</v8:content></v8:item></Synonym>")}
         ]})));
         let result = menu(&updated);
         assert_eq!(
-            result[0][0]["items"][0]["caption"]["text"],
+            result[0][0]["items"][0]["caption"]["items"][0]["content"],
             "Updated invoice"
         );
         assert!(!menu_keys(&result[0]).contains(&Value::from("Table.StandardCommand.Copy")));

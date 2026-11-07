@@ -4,7 +4,7 @@ use super::{
     AutoCommandItem, EffectiveElement, FormPicture, FormResource, PresentationText, PropertySource,
     appearance::text,
     commands::{effective_metadata, excludes, metadata_caption, metadata_text},
-    presentation::{literal, metadata_property},
+    presentation::metadata_property,
 };
 use crate::project::{
     metadata_model::{MetadataKind, MetadataValue, ObjectId},
@@ -178,9 +178,8 @@ pub(super) fn creation_requests(owner: &ParsedObject, resources: &[FormResource]
 fn creation_item(id: &ObjectId, resources: &[FormResource]) -> Option<AutoCommandItem> {
     let (resource, owner) = effective_metadata(id, resources)?;
     let mut command = AutoCommandItem::standard(id.as_str(), "Create", false);
-    command.caption = metadata_property(owner, "ObjectPresentation", resources)
-        .and_then(|property| literal(&property.value))
-        .unwrap_or_else(|| metadata_caption(owner, resources));
+    command.caption = metadata_caption(owner, resources);
+    command.order_by_caption = Some(true);
     command.origin = Some(PropertySource {
         source: resource.source.clone(),
         range: owner.range.clone(),
