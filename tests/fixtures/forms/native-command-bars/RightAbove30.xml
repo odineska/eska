@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <InputField name="Above" id="1">
+      <Width>30</Width>
+      <BackColor>#FFEFBA</BackColor>
+      <HorizontalStretch>false</HorizontalStretch>
+      <TitleLocation>None</TitleLocation>
+      <DataPath>Name</DataPath>
+      <ContextMenu name="AboveMenu" id="2"/>
+      <ExtendedTooltip name="AboveTooltip" id="3"/>
+    </InputField>
+    <UsualGroup name="Footer" id="10">
+      <Representation>None</Representation>
+      <ShowTitle>false</ShowTitle>
+      <ExtendedTooltip name="FooterTooltip" id="11"/>
+      <ChildItems>
+        <CommandBar name="Left" id="20">
+          <ChildItems>
+            <Button name="Back" id="30">
+              <CommandName>Form.Command.Back</CommandName>
+              <Type>CommandBarButton</Type>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Назад</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Назад</v8:content>
+                </v8:item>
+              </Title>
+              <ExtendedTooltip name="BackTooltip" id="31"/>
+            </Button>
+          </ChildItems>
+        </CommandBar>
+        <CommandBar name="Right" id="40">
+          <HorizontalLocation>Right</HorizontalLocation>
+          <ChildItems>
+            <Button name="Next" id="50">
+              <DefaultButton>true</DefaultButton>
+              <CommandName>Form.Command.Next</CommandName>
+              <Type>CommandBarButton</Type>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Далее &gt;</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Далее &gt;</v8:content>
+                </v8:item>
+              </Title>
+              <ExtendedTooltip name="NextTooltip" id="51"/>
+            </Button>
+            <Button name="Close" id="60">
+              <CommandName>Form.StandardCommand.Close</CommandName>
+              <Type>CommandBarButton</Type>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Закрыть</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Закрыть</v8:content>
+                </v8:item>
+              </Title>
+              <ExtendedTooltip name="CloseTooltip" id="61"/>
+            </Button>
+          </ChildItems>
+        </CommandBar>
+      </ChildItems>
+    </UsualGroup>
+    <InputField name="Below" id="100">
+      <BackColor>#A8E4B8</BackColor>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <TitleLocation>None</TitleLocation>
+      <DataPath>Name</DataPath>
+      <ContextMenu name="BelowMenu" id="106"/>
+      <ExtendedTooltip name="BelowTooltip" id="107"/>
+    </InputField>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="Name" id="1">
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Choice" id="2">
+      <Type>
+        <v8:Type>xs:decimal</v8:Type>
+        <v8:NumberQualifiers>
+          <v8:Digits>10</v8:Digits>
+          <v8:FractionDigits>0</v8:FractionDigits>
+          <v8:AllowedSign>Any</v8:AllowedSign>
+        </v8:NumberQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Flag" id="3">
+      <Type>
+        <v8:Type>xs:boolean</v8:Type>
+      </Type>
+    </Attribute>
+  </Attributes>
+  <Title>
+    <v8:item>
+      <v8:lang>ru</v8:lang>
+      <v8:content>Layout</v8:content>
+    </v8:item>
+    <v8:item>
+      <v8:lang>en</v8:lang>
+      <v8:content>Layout</v8:content>
+    </v8:item>
+  </Title>
+  <Commands>
+    <Command name="Back" id="1">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Назад</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Назад</v8:content>
+        </v8:item>
+      </Title>
+    </Command>
+    <Command name="Next" id="2">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Далее &gt;</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Далее &gt;</v8:content>
+        </v8:item>
+      </Title>
+    </Command>
+  </Commands>
+</Form>
