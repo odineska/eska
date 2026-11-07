@@ -1,0 +1,59 @@
+name: Предложение
+description: Предложить новую возможность или улучшение ESKA.
+title: "Предложение: "
+labels: [enhancement]
+projects: [odineska/1]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Напишите заголовок и описание на русском языке. Имена команд,
+        бинарников и технических идентификаторов сохраняйте без перевода.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Компонент
+      description: Выберите затронутые бинарники. При разборе задачи сопровождающий добавит соответствующие метки.
+      multiple: true
+      options:
+        - cli — общий вход eska
+        - project — eska-project
+        - check — eska-check
+        - fmt — eska-fmt
+        - build — eska-build
+        - vcs — eska-vcs
+        - Не знаю / общий вопрос
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Проблема или потребность
+      description: Какую задачу сейчас трудно решить? Приведите пользовательский сценарий.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Ожидаемый результат
+      description: Какое поведение ESKA поможет решить эту задачу?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Границы задачи
+      description: Что входит в предложение и что следует рассматривать отдельно?
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Критерии готовности
+      description: По каким проверяемым результатам можно принять работу?
+      placeholder: |
+        - [ ] Пользователь может…
+        - [ ] Проверен сценарий…
+  - type: textarea
+    id: context
+    attributes:
+      label: Дополнительные сведения
+      description: Альтернативы, связанные задачи и ссылки на спецификации. Для существующего roadmap укажите номер T…

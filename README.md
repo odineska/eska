@@ -84,4 +84,7 @@ cargo build --workspace --bins --release --locked
 [Контракты IDE](docs/ide-protocol.md) · [Форматирование](docs/formatting.md) ·
 [Сборка и её проверка](docs/build-validation.md) · [История выпусков](docs/releases.md)
 
+[Задачи и правила трекера](docs/task-tracker.md) ·
+[Публичная доска разработки](https://github.com/orgs/odineska/projects/1)
+
 Лицензия: [Apache-2.0](LICENSE).
