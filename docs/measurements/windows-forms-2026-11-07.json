@@ -1,0 +1,1420 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "status": "functional Windows acceptance passed; native pixel parity remains unverified",
+  "inputCommits": {
+    "eska": "d80c1b7d1596ca5c8f6782751ee142f9e921a9da",
+    "explorer": "ffeb0e6b2d36ba1d422027adda76793a4ee06971"
+  },
+  "versions": {
+    "eska": "0.25.2",
+    "explorer": "0.1.12",
+    "metadataApi": "1.41",
+    "nativePlatform": "8.3.27.2342"
+  },
+  "environment": {
+    "os": "Windows 11 IoT Enterprise LTSC 2024",
+    "architecture": "x64",
+    "rust": "1.99.1 MSVC",
+    "node": "24.22.2",
+    "bun": "1.4.4",
+    "vscode": "1.144.0"
+  },
+  "artifactRoot": "../eska-playground/forms-windows-20261107-142029-38176c",
+  "artifactPathsRelativeTo": "repository root",
+  "checks": {
+    "rust": {
+      "steps": [
+        {
+          "name": "fmt",
+          "exit": 0,
+          "seconds": 18.0195607
+        },
+        {
+          "name": "check",
+          "exit": 0,
+          "seconds": 6.1435883
+        },
+        {
+          "name": "clippy",
+          "exit": 0,
+          "seconds": 7.2806297
+        },
+        {
+          "name": "test",
+          "exit": 0,
+          "seconds": 768.3597805
+        }
+      ],
+      "passed": 1443,
+      "ignored": 19
+    },
+    "node": {
+      "passed": 654,
+      "skipped": 29,
+      "failed": 0,
+      "log": "frontend-node-final.log"
+    },
+    "bun": {
+      "passed": 642,
+      "skipped": 29,
+      "failed": 0,
+      "log": "frontend-bun-caption-final.log"
+    },
+    "python": {
+      "total": 35,
+      "skipped": 2,
+      "failed": 0,
+      "log": "frontend-python-final.log"
+    }
+  },
+  "nativeGallery": {
+    "inputForms": 97,
+    "kinds": 38,
+    "importExit": 0,
+    "loadExit": 0,
+    "exportExit": 0,
+    "artifactSha256": "6ca73bab97eb5a447fc4c6acf0e20a39a31a2783bf169d804823b0f4d40ad0c0",
+    "backendLocales": [
+      {
+        "locale": "en-US",
+        "forms": 97,
+        "kinds": 38
+      },
+      {
+        "locale": "ru-RU",
+        "forms": 97,
+        "kinds": 38
+      }
+    ],
+    "sourceFilesVerifiedUnchanged": 203,
+    "gui": {
+      "en": {
+        "forms": 97,
+        "allSourcesUnchanged": true,
+        "minimumTitleContrast": 6.778256003634927
+      },
+      "ru": {
+        "forms": 97,
+        "allSourcesUnchanged": true,
+        "minimumTitleContrast": 6.778256003634927
+      }
+    },
+    "record": "native-gallery/backend-roundtrip.json"
+  },
+  "nativeBuild": {
+    "locales": [
+      "en-US",
+      "ru-RU"
+    ],
+    "exitCodes": [
+      0,
+      0
+    ],
+    "unicodeSpacesBrackets": true,
+    "record": "native-build-results-final.json"
+  },
+  "accepted": [
+    {
+      "suite": "application",
+      "locale": "en",
+      "batch": "form-batch-vg60cS",
+      "publishedCases": 97,
+      "receipt": "application-en\\receipt.json"
+    },
+    {
+      "suite": "application",
+      "locale": "ru",
+      "batch": "form-batch-vg60cS",
+      "publishedCases": 97,
+      "receipt": "application-ru\\receipt.json"
+    },
+    {
+      "suite": "composition",
+      "locale": "en",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 9,
+      "receipt": "composition-en\\receipt.json"
+    },
+    {
+      "suite": "composition",
+      "locale": "ru",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 9,
+      "receipt": "composition-ru\\receipt.json"
+    },
+    {
+      "suite": "dependencies",
+      "locale": "en",
+      "batch": "form-batch-T29PyP",
+      "publishedCases": 1,
+      "receipt": "dependencies-en\\receipt.json"
+    },
+    {
+      "suite": "dependencies",
+      "locale": "ru",
+      "batch": "form-batch-T29PyP",
+      "publishedCases": 1,
+      "receipt": "dependencies-ru\\receipt.json"
+    },
+    {
+      "suite": "detached-space",
+      "locale": "en",
+      "batch": "form-batch-T29PyP",
+      "publishedCases": 6,
+      "receipt": "detached-space-en\\receipt.json"
+    },
+    {
+      "suite": "detached-space",
+      "locale": "ru",
+      "batch": "form-batch-T29PyP",
+      "publishedCases": 6,
+      "receipt": "detached-space-ru\\receipt.json"
+    },
+    {
+      "suite": "group-visibility",
+      "locale": "en",
+      "batch": "form-batch-vg60cS",
+      "publishedCases": 27,
+      "receipt": "group-visibility-en\\receipt.json"
+    },
+    {
+      "suite": "group-visibility",
+      "locale": "ru",
+      "batch": "form-batch-vg60cS",
+      "publishedCases": 27,
+      "receipt": "group-visibility-ru\\receipt.json"
+    },
+    {
+      "suite": "handlers",
+      "locale": "en",
+      "batch": "form-batch-4RP4YM",
+      "publishedCases": 1,
+      "receipt": "handlers-en\\receipt.json"
+    },
+    {
+      "suite": "handlers",
+      "locale": "ru",
+      "batch": "form-batch-4RP4YM",
+      "publishedCases": 1,
+      "receipt": "handlers-ru\\receipt.json"
+    },
+    {
+      "suite": "input-choice",
+      "locale": "en",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 6,
+      "receipt": "input-choice-en\\receipt.json"
+    },
+    {
+      "suite": "input-choice",
+      "locale": "ru",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 6,
+      "receipt": "input-choice-ru\\receipt.json"
+    },
+    {
+      "suite": "inspectors",
+      "locale": "en",
+      "batch": "form-batch-4RP4YM",
+      "publishedCases": 1,
+      "receipt": "inspectors-en\\receipt.json"
+    },
+    {
+      "suite": "inspectors",
+      "locale": "ru",
+      "batch": "form-batch-4RP4YM",
+      "publishedCases": 1,
+      "receipt": "inspectors-ru\\receipt.json"
+    },
+    {
+      "suite": "lifecycle",
+      "locale": "en",
+      "batch": "form-batch-4RP4YM",
+      "publishedCases": 3,
+      "receipt": "lifecycle-en\\receipt.json"
+    },
+    {
+      "suite": "lifecycle",
+      "locale": "ru",
+      "batch": "form-batch-4RP4YM",
+      "publishedCases": 3,
+      "receipt": "lifecycle-ru\\receipt.json"
+    },
+    {
+      "suite": "multiple-windows",
+      "locale": "en",
+      "batch": "form-batch-T29PyP",
+      "publishedCases": 1,
+      "receipt": "multiple-windows-en\\receipt.json"
+    },
+    {
+      "suite": "multiple-windows",
+      "locale": "ru",
+      "batch": "form-batch-T29PyP",
+      "publishedCases": 1,
+      "receipt": "multiple-windows-ru\\receipt.json"
+    },
+    {
+      "suite": "owners",
+      "locale": "en",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 9,
+      "receipt": "owners-en\\receipt.json"
+    },
+    {
+      "suite": "owners",
+      "locale": "ru",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 9,
+      "receipt": "owners-ru\\receipt.json"
+    },
+    {
+      "suite": "picture-composition",
+      "locale": "en",
+      "batch": "form-batch-9jORqo",
+      "publishedCases": 19,
+      "receipt": "picture-composition-en\\receipt.json"
+    },
+    {
+      "suite": "picture-composition",
+      "locale": "ru",
+      "batch": "form-batch-9jORqo",
+      "publishedCases": 19,
+      "receipt": "picture-composition-ru\\receipt.json"
+    },
+    {
+      "suite": "pictures",
+      "locale": "en",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 1,
+      "receipt": "pictures-en\\receipt.json"
+    },
+    {
+      "suite": "pictures",
+      "locale": "ru",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 1,
+      "receipt": "pictures-ru\\receipt.json"
+    },
+    {
+      "suite": "preview",
+      "locale": "en",
+      "batch": "form-batch-vg60cS",
+      "publishedCases": 1,
+      "receipt": "preview-en\\receipt.json"
+    },
+    {
+      "suite": "preview",
+      "locale": "ru",
+      "batch": "form-batch-vg60cS",
+      "publishedCases": 1,
+      "receipt": "preview-ru\\receipt.json"
+    },
+    {
+      "suite": "property-catalogue",
+      "locale": "en",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 30,
+      "receipt": "property-catalogue-en\\receipt.json"
+    },
+    {
+      "suite": "property-catalogue",
+      "locale": "ru",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 30,
+      "receipt": "property-catalogue-ru\\receipt.json"
+    },
+    {
+      "suite": "reconnect",
+      "locale": "en",
+      "batch": "form-batch-4RP4YM",
+      "publishedCases": 1,
+      "receipt": "reconnect-en\\receipt.json"
+    },
+    {
+      "suite": "reconnect",
+      "locale": "ru",
+      "batch": "form-batch-4RP4YM",
+      "publishedCases": 1,
+      "receipt": "reconnect-ru\\receipt.json"
+    },
+    {
+      "suite": "responsive",
+      "locale": "en",
+      "batch": "form-batch-9jORqo",
+      "publishedCases": 31,
+      "receipt": "responsive-en\\receipt.json"
+    },
+    {
+      "suite": "responsive",
+      "locale": "ru",
+      "batch": "form-batch-9jORqo",
+      "publishedCases": 31,
+      "receipt": "responsive-ru\\receipt.json"
+    },
+    {
+      "suite": "restore",
+      "locale": "en",
+      "batch": "form-batch-4RP4YM",
+      "publishedCases": 2,
+      "receipt": "restore-en\\receipt.json"
+    },
+    {
+      "suite": "restore",
+      "locale": "ru",
+      "batch": "form-batch-4RP4YM",
+      "publishedCases": 2,
+      "receipt": "restore-ru\\receipt.json"
+    },
+    {
+      "suite": "style-composition",
+      "locale": "en",
+      "batch": "form-batch-LkfXLl",
+      "publishedCases": 13,
+      "receipt": "style-composition-en\\receipt.json"
+    },
+    {
+      "suite": "style-composition",
+      "locale": "ru",
+      "batch": "form-batch-LkfXLl",
+      "publishedCases": 13,
+      "receipt": "style-composition-ru\\receipt.json"
+    },
+    {
+      "suite": "style",
+      "locale": "en",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 1,
+      "receipt": "style-en\\receipt.json"
+    },
+    {
+      "suite": "style",
+      "locale": "ru",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 1,
+      "receipt": "style-ru\\receipt.json"
+    },
+    {
+      "suite": "tables",
+      "locale": "en",
+      "batch": "form-batch-vg60cS",
+      "publishedCases": 17,
+      "receipt": "tables-en\\receipt.json"
+    },
+    {
+      "suite": "tables",
+      "locale": "ru",
+      "batch": "form-batch-vg60cS",
+      "publishedCases": 17,
+      "receipt": "tables-ru\\receipt.json"
+    },
+    {
+      "suite": "through-align",
+      "locale": "en",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 86,
+      "receipt": "through-align-en\\receipt.json"
+    },
+    {
+      "suite": "through-align",
+      "locale": "ru",
+      "batch": "form-batch-VNMROZ",
+      "publishedCases": 86,
+      "receipt": "through-align-ru\\receipt.json"
+    }
+  ],
+  "missing": [],
+  "changes": [
+    "Rust form protocol tests compare native Path values.",
+    "GUI drivers normalize native paths including drive casing and extended Windows namespaces.",
+    "Windows native resize is restricted to the isolated Code PID and validates executable, title, class and geometry.",
+    "Selected form captions retain readable contrast in dark and light themes.",
+    "CDP connections close between application forms; test observations wait for their first revision."
+  ],
+  "limits": {
+    "wholeFormNativeWindowsPixelParity": false,
+    "windowsConfiguratorGoldenCaptures": false,
+    "nativeUiToolError": "Computer Use was not approved to use 1cv8",
+    "multipleHardwareDpiAndMonitorsTested": false,
+    "linuxGoldensAreNotWindowsGoldens": true,
+    "milestoneT165Closed": false,
+    "releasePublished": false
+  },
+  "intermediateFailuresPreserved": {
+    "batches": true,
+    "nativeProfileExperiment": "native-application/interruption.json",
+    "antimalwareCpuObservedPercent": 262,
+    "securitySettingsModified": false
+  },
+  "batches": [
+    {
+      "id": "form-batch-1hPVDP",
+      "passed": false,
+      "finishedAt": "2026-11-07T11:40:40.298Z",
+      "runs": [
+        {
+          "suite": "preview",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 75.0811085,
+          "publishedCases": 0,
+          "receipt": "preview-en\\receipt.json"
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 66.01383909999998,
+          "publishedCases": 0,
+          "receipt": "preview-ru\\receipt.json"
+        },
+        {
+          "suite": "lifecycle",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 40.011555200000004,
+          "publishedCases": 3,
+          "receipt": "lifecycle-en\\receipt.json"
+        },
+        {
+          "suite": "lifecycle",
+          "locale": "ru",
+          "passed": false,
+          "classification": "harness",
+          "seconds": 112.99741599999997,
+          "publishedCases": 3,
+          "receipt": "lifecycle-ru\\receipt.json"
+        }
+      ],
+      "vsixSha256": "487a82747f64f430847b3d414c642ed7e0fa10584932479681dccd758392d28a",
+      "backendSha256": "41dcbb625800324bac35f3b01921f89b38029012ca3718ec815dde072cb48db1",
+      "runtimeManifestSha256": "bc7b52fb639898cf5a3a8d94c418654b8fd1523e038710967aed75e52302eb78",
+      "runtimeFiles": 1262
+    },
+    {
+      "id": "form-batch-4RP4YM",
+      "passed": false,
+      "finishedAt": "2026-11-07T12:05:11.457Z",
+      "runs": [
+        {
+          "suite": "preview",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 58.729196899999984,
+          "publishedCases": 0,
+          "receipt": "preview-en\\receipt.json"
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 55.784622399999996,
+          "publishedCases": 0,
+          "receipt": "preview-ru\\receipt.json"
+        },
+        {
+          "suite": "lifecycle",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 29.46250999999998,
+          "publishedCases": 3,
+          "receipt": "lifecycle-en\\receipt.json"
+        },
+        {
+          "suite": "lifecycle",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 61.39360419999997,
+          "publishedCases": 3,
+          "receipt": "lifecycle-ru\\receipt.json"
+        },
+        {
+          "suite": "dependencies",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 78.18038500000002,
+          "publishedCases": 0,
+          "receipt": "dependencies-en\\receipt.json"
+        },
+        {
+          "suite": "dependencies",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 123.764517,
+          "publishedCases": 0,
+          "receipt": "dependencies-ru\\receipt.json"
+        },
+        {
+          "suite": "reconnect",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 63.02598139999993,
+          "publishedCases": 1,
+          "receipt": "reconnect-en\\receipt.json"
+        },
+        {
+          "suite": "reconnect",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 102.29693090000004,
+          "publishedCases": 1,
+          "receipt": "reconnect-ru\\receipt.json"
+        },
+        {
+          "suite": "handlers",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 46.12286239999998,
+          "publishedCases": 1,
+          "receipt": "handlers-en\\receipt.json"
+        },
+        {
+          "suite": "handlers",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 62.785151100000014,
+          "publishedCases": 1,
+          "receipt": "handlers-ru\\receipt.json"
+        },
+        {
+          "suite": "inspectors",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 37.38632039999997,
+          "publishedCases": 1,
+          "receipt": "inspectors-en\\receipt.json"
+        },
+        {
+          "suite": "inspectors",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 75.5490982,
+          "publishedCases": 1,
+          "receipt": "inspectors-ru\\receipt.json"
+        },
+        {
+          "suite": "multiple-windows",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 35.78335370000009,
+          "publishedCases": 0,
+          "receipt": "multiple-windows-en\\receipt.json"
+        },
+        {
+          "suite": "multiple-windows",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 58.880934099999955,
+          "publishedCases": 0,
+          "receipt": "multiple-windows-ru\\receipt.json"
+        },
+        {
+          "suite": "restore",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 80.06980520000006,
+          "publishedCases": 2,
+          "receipt": "restore-en\\receipt.json"
+        },
+        {
+          "suite": "restore",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 96.99090189999994,
+          "publishedCases": 2,
+          "receipt": "restore-ru\\receipt.json"
+        },
+        {
+          "suite": "detached-space",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 36.522090000000084,
+          "publishedCases": 0,
+          "receipt": "detached-space-en\\receipt.json"
+        },
+        {
+          "suite": "detached-space",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 53.252128300000216,
+          "publishedCases": 0,
+          "receipt": "detached-space-ru\\receipt.json"
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 29.796225900000195,
+          "publishedCases": 0,
+          "receipt": "responsive-en\\receipt.json"
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 53.526760999999944,
+          "publishedCases": 0,
+          "receipt": "responsive-ru\\receipt.json"
+        }
+      ],
+      "vsixSha256": "51a63fc192a52f18fcec17f92e0a2645ec67cc9ee2537d643403e4ae8fce3c04",
+      "backendSha256": "41dcbb625800324bac35f3b01921f89b38029012ca3718ec815dde072cb48db1",
+      "runtimeManifestSha256": "bc7b52fb639898cf5a3a8d94c418654b8fd1523e038710967aed75e52302eb78",
+      "runtimeFiles": 1262
+    },
+    {
+      "id": "form-batch-T29PyP",
+      "passed": false,
+      "finishedAt": "2026-11-07T12:27:12.037Z",
+      "runs": [
+        {
+          "suite": "preview",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 212.52271530000002,
+          "publishedCases": 1,
+          "receipt": "preview-en\\receipt.json"
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 181.01691059999993,
+          "publishedCases": 1,
+          "receipt": "preview-ru\\receipt.json"
+        },
+        {
+          "suite": "dependencies",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 160.7577711,
+          "publishedCases": 1,
+          "receipt": "dependencies-en\\receipt.json"
+        },
+        {
+          "suite": "dependencies",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 116.38774400000007,
+          "publishedCases": 1,
+          "receipt": "dependencies-ru\\receipt.json"
+        },
+        {
+          "suite": "multiple-windows",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 34.93670829999994,
+          "publishedCases": 1,
+          "receipt": "multiple-windows-en\\receipt.json"
+        },
+        {
+          "suite": "multiple-windows",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 70.97415179999999,
+          "publishedCases": 1,
+          "receipt": "multiple-windows-ru\\receipt.json"
+        },
+        {
+          "suite": "detached-space",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 40.09772480000009,
+          "publishedCases": 6,
+          "receipt": "detached-space-en\\receipt.json"
+        },
+        {
+          "suite": "detached-space",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 85.24969010000001,
+          "publishedCases": 6,
+          "receipt": "detached-space-ru\\receipt.json"
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 37.793713099999934,
+          "publishedCases": 0,
+          "receipt": "responsive-en\\receipt.json"
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 54.15157110000006,
+          "publishedCases": 0,
+          "receipt": "responsive-ru\\receipt.json"
+        }
+      ],
+      "vsixSha256": "537e945a6dea08f1e42fa431f96ec1d022da80d8017c322ec97fefb5deb484aa",
+      "backendSha256": "885e1ee41ad628d8d7e68897d5fde08b951c24a1d249a20ab75eae332fd901ff",
+      "runtimeManifestSha256": "bc7b52fb639898cf5a3a8d94c418654b8fd1523e038710967aed75e52302eb78",
+      "runtimeFiles": 1262
+    },
+    {
+      "id": "form-batch-VNMROZ",
+      "passed": false,
+      "finishedAt": "2026-11-07T13:01:59.607Z",
+      "runs": [
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 41.683269900000006,
+          "publishedCases": 0,
+          "receipt": "responsive-en\\receipt.json"
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 63.047007400000005,
+          "publishedCases": 0,
+          "receipt": "responsive-ru\\receipt.json"
+        },
+        {
+          "suite": "renderer",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 33.64528879999998,
+          "publishedCases": 0,
+          "receipt": "renderer-en\\receipt.json"
+        },
+        {
+          "suite": "renderer",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 57.15995370000001,
+          "publishedCases": 0,
+          "receipt": "renderer-ru\\receipt.json"
+        },
+        {
+          "suite": "states",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 35.113512699999994,
+          "publishedCases": 0,
+          "receipt": "states-en\\receipt.json"
+        },
+        {
+          "suite": "states",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 74.05246490000002,
+          "publishedCases": 0,
+          "receipt": "states-ru\\receipt.json"
+        },
+        {
+          "suite": "groups",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 30.64291459999996,
+          "publishedCases": 0,
+          "receipt": "groups-en\\receipt.json"
+        },
+        {
+          "suite": "groups",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 57.11696120000002,
+          "publishedCases": 0,
+          "receipt": "groups-ru\\receipt.json"
+        },
+        {
+          "suite": "composition",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 31.64446280000004,
+          "publishedCases": 9,
+          "receipt": "composition-en\\receipt.json"
+        },
+        {
+          "suite": "composition",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 53.66091740000004,
+          "publishedCases": 9,
+          "receipt": "composition-ru\\receipt.json"
+        },
+        {
+          "suite": "owners",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 33.29266679999989,
+          "publishedCases": 9,
+          "receipt": "owners-en\\receipt.json"
+        },
+        {
+          "suite": "owners",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 55.54132090000005,
+          "publishedCases": 9,
+          "receipt": "owners-ru\\receipt.json"
+        },
+        {
+          "suite": "tables",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 56.56974049999996,
+          "publishedCases": 17,
+          "receipt": "tables-en\\receipt.json"
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 48.05048259999999,
+          "publishedCases": 0,
+          "receipt": "tables-ru\\receipt.json"
+        },
+        {
+          "suite": "pictures",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 31.350961899999994,
+          "publishedCases": 1,
+          "receipt": "pictures-en\\receipt.json"
+        },
+        {
+          "suite": "pictures",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 57.14305119999999,
+          "publishedCases": 1,
+          "receipt": "pictures-ru\\receipt.json"
+        },
+        {
+          "suite": "style",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 30.78730950000009,
+          "publishedCases": 1,
+          "receipt": "style-en\\receipt.json"
+        },
+        {
+          "suite": "style",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 53.808506300000005,
+          "publishedCases": 1,
+          "receipt": "style-ru\\receipt.json"
+        },
+        {
+          "suite": "style-composition",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 37.45231429999997,
+          "publishedCases": 0,
+          "receipt": "style-composition-en\\receipt.json"
+        },
+        {
+          "suite": "style-composition",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 59.135407599999915,
+          "publishedCases": 0,
+          "receipt": "style-composition-ru\\receipt.json"
+        },
+        {
+          "suite": "picture-composition",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 39.054292599999926,
+          "publishedCases": 0,
+          "receipt": "picture-composition-en\\receipt.json"
+        },
+        {
+          "suite": "picture-composition",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 61.54135309999983,
+          "publishedCases": 0,
+          "receipt": "picture-composition-ru\\receipt.json"
+        },
+        {
+          "suite": "standard-pictures",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 39.58686670000013,
+          "publishedCases": 0,
+          "receipt": "standard-pictures-en\\receipt.json"
+        },
+        {
+          "suite": "standard-pictures",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 57.76914599999995,
+          "publishedCases": 0,
+          "receipt": "standard-pictures-ru\\receipt.json"
+        },
+        {
+          "suite": "united",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 38.02188210000005,
+          "publishedCases": 0,
+          "receipt": "united-en\\receipt.json"
+        },
+        {
+          "suite": "united",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 58.04394420000003,
+          "publishedCases": 0,
+          "receipt": "united-ru\\receipt.json"
+        },
+        {
+          "suite": "through-align",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 89.94453940000012,
+          "publishedCases": 86,
+          "receipt": "through-align-en\\receipt.json"
+        },
+        {
+          "suite": "through-align",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 111.81764919999986,
+          "publishedCases": 86,
+          "receipt": "through-align-ru\\receipt.json"
+        },
+        {
+          "suite": "command-bars",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 41.98740409999993,
+          "publishedCases": 0,
+          "receipt": "command-bars-en\\receipt.json"
+        },
+        {
+          "suite": "command-bars",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 65.47144109999994,
+          "publishedCases": 0,
+          "receipt": "command-bars-ru\\receipt.json"
+        },
+        {
+          "suite": "group-visibility",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 58.99213829999999,
+          "publishedCases": 27,
+          "receipt": "group-visibility-en\\receipt.json"
+        },
+        {
+          "suite": "group-visibility",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 56.300675800000086,
+          "publishedCases": 0,
+          "receipt": "group-visibility-ru\\receipt.json"
+        },
+        {
+          "suite": "input-choice",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 32.59162029999983,
+          "publishedCases": 6,
+          "receipt": "input-choice-en\\receipt.json"
+        },
+        {
+          "suite": "input-choice",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 53.62419660000014,
+          "publishedCases": 6,
+          "receipt": "input-choice-ru\\receipt.json"
+        },
+        {
+          "suite": "property-catalogue",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 35.20912419999996,
+          "publishedCases": 30,
+          "receipt": "property-catalogue-en\\receipt.json"
+        },
+        {
+          "suite": "property-catalogue",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 56.78267090000003,
+          "publishedCases": 30,
+          "receipt": "property-catalogue-ru\\receipt.json"
+        },
+        {
+          "suite": "application",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 48.553163900000044,
+          "publishedCases": 3,
+          "receipt": "application-en\\receipt.json"
+        },
+        {
+          "suite": "application",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 57.862320999999994,
+          "publishedCases": 3,
+          "receipt": "application-ru\\receipt.json"
+        }
+      ],
+      "vsixSha256": "d576247eb6387a369ca5628ce7de52a613717e2de3f1f7a0cf84575fa2e1d38e",
+      "backendSha256": "885e1ee41ad628d8d7e68897d5fde08b951c24a1d249a20ab75eae332fd901ff",
+      "runtimeManifestSha256": "bc7b52fb639898cf5a3a8d94c418654b8fd1523e038710967aed75e52302eb78",
+      "runtimeFiles": 1262
+    },
+    {
+      "id": "form-batch-vg60cS",
+      "passed": false,
+      "finishedAt": "2026-11-07T14:24:58.050Z",
+      "runs": [
+        {
+          "suite": "preview",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 39.939364299999994,
+          "publishedCases": 1,
+          "receipt": "preview-en\\receipt.json"
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 57.782631999999985,
+          "publishedCases": 1,
+          "receipt": "preview-ru\\receipt.json"
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 31.848139599999996,
+          "publishedCases": 0,
+          "receipt": "responsive-en\\receipt.json"
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 52.19998569999999,
+          "publishedCases": 0,
+          "receipt": "responsive-ru\\receipt.json"
+        },
+        {
+          "suite": "style-composition",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 38.53882999999999,
+          "publishedCases": 0,
+          "receipt": "style-composition-en\\receipt.json"
+        },
+        {
+          "suite": "style-composition",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 58.18511459999997,
+          "publishedCases": 0,
+          "receipt": "style-composition-ru\\receipt.json"
+        },
+        {
+          "suite": "picture-composition",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 37.2090663,
+          "publishedCases": 0,
+          "receipt": "picture-composition-en\\receipt.json"
+        },
+        {
+          "suite": "picture-composition",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 57.45714840000001,
+          "publishedCases": 0,
+          "receipt": "picture-composition-ru\\receipt.json"
+        },
+        {
+          "suite": "tables",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 57.58239939999999,
+          "publishedCases": 17,
+          "receipt": "tables-en\\receipt.json"
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 75.33911540000001,
+          "publishedCases": 17,
+          "receipt": "tables-ru\\receipt.json"
+        },
+        {
+          "suite": "group-visibility",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 56.69771219999995,
+          "publishedCases": 27,
+          "receipt": "group-visibility-en\\receipt.json"
+        },
+        {
+          "suite": "group-visibility",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 77.6048554,
+          "publishedCases": 27,
+          "receipt": "group-visibility-ru\\receipt.json"
+        },
+        {
+          "suite": "application",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 251.30495240000008,
+          "publishedCases": 97,
+          "receipt": "application-en\\receipt.json"
+        },
+        {
+          "suite": "application",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 373.9263743,
+          "publishedCases": 97,
+          "receipt": "application-ru\\receipt.json"
+        }
+      ],
+      "vsixSha256": "4724584586c4d9cb09deac942bd2c1130e4fb74594a98b2ecc2f1dabe9bf3bb6",
+      "backendSha256": "885e1ee41ad628d8d7e68897d5fde08b951c24a1d249a20ab75eae332fd901ff",
+      "runtimeManifestSha256": "0f6fc3c90f1e0365e77942a9fe95296251bb60f685ec84c2d28b0d4bb402375a",
+      "runtimeFiles": 1262
+    },
+    {
+      "id": "form-batch-LkfXLl",
+      "passed": false,
+      "finishedAt": "2026-11-07T14:33:01.518Z",
+      "runs": [
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 57.146229000000005,
+          "publishedCases": 0,
+          "receipt": "responsive-en\\receipt.json"
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 74.9807476,
+          "publishedCases": 0,
+          "receipt": "responsive-ru\\receipt.json"
+        },
+        {
+          "suite": "style-composition",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 35.60259829999998,
+          "publishedCases": 13,
+          "receipt": "style-composition-en\\receipt.json"
+        },
+        {
+          "suite": "style-composition",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 56.00470349999998,
+          "publishedCases": 13,
+          "receipt": "style-composition-ru\\receipt.json"
+        },
+        {
+          "suite": "picture-composition",
+          "locale": "en",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 35.419674499999964,
+          "publishedCases": 0,
+          "receipt": "picture-composition-en\\receipt.json"
+        },
+        {
+          "suite": "picture-composition",
+          "locale": "ru",
+          "passed": false,
+          "classification": "unclassified",
+          "seconds": 55.5296507,
+          "publishedCases": 0,
+          "receipt": "picture-composition-ru\\receipt.json"
+        }
+      ],
+      "vsixSha256": "614c7f52d81fa4bdca5c4483218ed429d6ec053d476aaf54ce4307b73565f0df",
+      "backendSha256": "885e1ee41ad628d8d7e68897d5fde08b951c24a1d249a20ab75eae332fd901ff",
+      "runtimeManifestSha256": "0f6fc3c90f1e0365e77942a9fe95296251bb60f685ec84c2d28b0d4bb402375a",
+      "runtimeFiles": 1262
+    },
+    {
+      "id": "form-batch-9jORqo",
+      "passed": true,
+      "finishedAt": "2026-11-07T14:43:32.555Z",
+      "runs": [
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 54.69072899999999,
+          "publishedCases": 31,
+          "receipt": "responsive-en\\receipt.json"
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 68.75166890000001,
+          "publishedCases": 31,
+          "receipt": "responsive-ru\\receipt.json"
+        },
+        {
+          "suite": "picture-composition",
+          "locale": "en",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 36.394143600000014,
+          "publishedCases": 19,
+          "receipt": "picture-composition-en\\receipt.json"
+        },
+        {
+          "suite": "picture-composition",
+          "locale": "ru",
+          "passed": true,
+          "classification": "passed",
+          "seconds": 62.10098599999998,
+          "publishedCases": 19,
+          "receipt": "picture-composition-ru\\receipt.json"
+        }
+      ],
+      "vsixSha256": "e42d56008d89f260ccf00232f1979d7a97be118753347592b7c884ee5a49758c",
+      "backendSha256": "885e1ee41ad628d8d7e68897d5fde08b951c24a1d249a20ab75eae332fd901ff",
+      "runtimeManifestSha256": "0f6fc3c90f1e0365e77942a9fe95296251bb60f685ec84c2d28b0d4bb402375a",
+      "runtimeFiles": 1262
+    }
+  ],
+  "changeCommits": {
+    "eska": [
+      "647a2a75"
+    ],
+    "explorer": [
+      "3aad018",
+      "4fc9048",
+      "d2b1fb2"
+    ]
+  },
+  "bsp": {
+    "batch": "form-batch-VNMROZ",
+    "forms": 3,
+    "locales": [
+      "en",
+      "ru"
+    ],
+    "passed": true,
+    "samples": "bsp-samples.json"
+  },
+  "reviewProfile": {
+    "launcher": "Open-Windows-Forms.ps1",
+    "record": "review-install.json",
+    "installedRuntimeFiles": 1262,
+    "defaultLocale": "ru",
+    "otherLocale": "en"
+  }
+}
