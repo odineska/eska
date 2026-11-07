@@ -1,0 +1,71 @@
+name: Ошибка
+description: Сообщить об ошибке в работе ESKA.
+title: "Ошибка: "
+labels: [bug]
+projects: [odineska/1]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Напишите заголовок и описание на русском языке. Команды, имена файлов
+        и сообщения программы приводите без перевода.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Компонент
+      description: Выберите затронутые бинарники. При разборе задачи сопровождающий добавит соответствующие метки.
+      multiple: true
+      options:
+        - cli — общий вход eska
+        - project — eska-project
+        - check — eska-check
+        - fmt — eska-fmt
+        - build — eska-build
+        - vcs — eska-vcs
+        - Не знаю / общий вопрос
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Версия ESKA
+      description: Укажите версию затронутого бинарника или commit для сборки из исходников.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Окружение
+      description: ОС и её версия; при необходимости — версия платформы 1С и редактора.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Как воспроизвести
+      description: Опишите последовательность действий и минимальный пример.
+      placeholder: |
+        1. Подготовить проект…
+        2. Выполнить команду…
+        3. Получить результат…
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Ожидаемый результат
+      description: Как программа должна вести себя в этом сценарии?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Фактический результат
+      description: Что произошло? Можно приложить снимки экрана и вывод команды.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Дополнительные сведения
+      description: Связанные задачи, спецификации, логи и известный способ обойти ошибку.
