@@ -248,8 +248,12 @@ pub fn picture(preview: &eska_project_core::project::designer_source::PicturePre
     use eska_project_core::project::designer_source::{PictureError, PicturePreview};
     let status = match preview {
         PicturePreview::Ready(picture) => {
-            return json!({"status":"ready", "mimeType":picture.mime_type,
+            let mut value = json!({"status":"ready", "mimeType":picture.mime_type,
             "data":STANDARD.encode(&picture.bytes), "fileName":picture.file_name});
+            if picture.is_template {
+                value["isTemplate"] = json!(true);
+            }
+            return value;
         }
         // Metadata properties use the existing no-image status; forms retain empty semantics.
         PicturePreview::Empty { .. } | PicturePreview::Failed(PictureError::Missing) => "missing",

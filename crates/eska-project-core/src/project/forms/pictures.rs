@@ -1,9 +1,15 @@
 //! Picture references remain inert image resources; a form never opens a referenced URL.
 
-use super::{AppearanceDiagnostic, EffectiveElement, FormResource};
+use std::ops::Range;
+
+use super::{
+    AppearanceDiagnostic, FormResource, PropertySource, SourcedProperty,
+    presentation::located_metadata_property,
+};
 use crate::project::{
     designer_source::PicturePreview,
     metadata_model::{MetadataKind, MetadataValue},
+    metadata_parser::ParsedObject,
 };
 use serde::Serialize;
 
@@ -15,13 +21,73 @@ pub enum FormPicture {
     Missing { reference: String },
 }
 
-pub(super) fn resolve(
-    element: &EffectiveElement,
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+pub enum ButtonRepresentation {
+    Text,
+    Picture,
+    PictureAndText,
+}
+
+impl ButtonRepresentation {
+    pub(super) fn effective(
+        picture: Option<&FormPicture>,
+        explicit: Option<&str>,
+        inherited: Option<&str>,
+        automatic: Self,
+    ) -> Self {
+        if matches!(picture, None | Some(FormPicture::Missing { .. })) {
+            return Self::Text;
+        }
+        [explicit, inherited]
+            .into_iter()
+            .flatten()
+            .find_map(|value| match value {
+                "Text" => Some(Self::Text),
+                "Picture" => Some(Self::Picture),
+                "PictureAndText" => Some(Self::PictureAndText),
+                _ => None,
+            })
+            .unwrap_or(automatic)
+    }
+}
+
+pub(super) fn form_picture(
+    property: &SourcedProperty,
     resources: &[FormResource],
     diagnostics: &mut Vec<AppearanceDiagnostic>,
 ) -> Option<FormPicture> {
-    let property = element.property("Picture")?;
-    let MetadataValue::Record(fields) = &property.property.value else {
+    resolve(
+        &property.property.value,
+        &property.origin.source,
+        &property.origin.range,
+        resources,
+        diagnostics,
+    )
+}
+
+pub(super) fn metadata_picture(
+    owner: &ParsedObject,
+    resources: &[FormResource],
+    diagnostics: &mut Vec<AppearanceDiagnostic>,
+) -> Option<FormPicture> {
+    let (resource, property) = located_metadata_property(owner, "Picture", resources)?;
+    resolve(
+        &property.property.value,
+        &resource.source,
+        &property.range,
+        resources,
+        diagnostics,
+    )
+}
+
+fn resolve(
+    value: &MetadataValue,
+    source: &str,
+    range: &Range<usize>,
+    resources: &[FormResource],
+    diagnostics: &mut Vec<AppearanceDiagnostic>,
+) -> Option<FormPicture> {
+    let MetadataValue::Record(fields) = value else {
         return None;
     };
     let field = fields.iter().find(|field| {
@@ -57,7 +123,10 @@ pub(super) fn resolve(
     }
     diagnostics.push(AppearanceDiagnostic {
         code: "picture_unavailable",
-        origin: property.origin.clone(),
+        origin: PropertySource {
+            source: source.into(),
+            range: range.clone(),
+        },
         target: None,
     });
     Some(FormPicture::Missing {

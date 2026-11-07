@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" version="2.20">
+  <Title>
+    <v8:item>
+      <v8:lang>ru</v8:lang>
+      <v8:content>ProbeWidthMixed42108</v8:content>
+    </v8:item>
+    <v8:item>
+      <v8:lang>en</v8:lang>
+      <v8:content>ProbeWidthMixed42108</v8:content>
+    </v8:item>
+  </Title>
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <UsualGroup name="Row" id="1">
+      <Representation>None</Representation>
+      <Behavior>Usual</Behavior>
+      <Group>AlwaysHorizontal</Group>
+      <ShowTitle>false</ShowTitle>
+      <HorizontalStretch>true</HorizontalStretch>
+      <VerticalStretch>false</VerticalStretch>
+      <ThroughAlign>DontUse</ThroughAlign>
+      <United>true</United>
+      <ChildItems>
+        <UsualGroup name="LeftGroup" id="10">
+          <Representation>None</Representation>
+          <Behavior>Usual</Behavior>
+          <Group>Vertical</Group>
+          <ShowTitle>false</ShowTitle>
+          <HorizontalStretch>false</HorizontalStretch>
+          <VerticalStretch>false</VerticalStretch>
+          <ThroughAlign>Use</ThroughAlign>
+          <United>true</United>
+          <ChildItems>
+            <InputField name="B" id="21">
+              <DataPath>B</DataPath>
+              <TitleLocation>None</TitleLocation>
+              <Width>47</Width>
+              <HorizontalStretch>false</HorizontalStretch>
+              <BackColor>web:LightBlue</BackColor>
+            </InputField>
+          </ChildItems>
+        </UsualGroup>
+        <UsualGroup name="RightGroup" id="20">
+          <Behavior>Usual</Behavior>
+          <Group>Vertical</Group>
+          <ShowTitle>true</ShowTitle>
+          <HorizontalStretch>true</HorizontalStretch>
+          <VerticalStretch>false</VerticalStretch>
+          <ThroughAlign>Use</ThroughAlign>
+          <United>true</United>
+          <ChildItems>
+            <UsualGroup name="Settlement0" id="50">
+              <Group>AlwaysHorizontal</Group>
+              <United>false</United>
+              <ShowTitle>false</ShowTitle>
+              <ChildItems>
+                <InputField name="Reference0" id="51">
+                  <DataPath>Ref</DataPath>
+                  <BackColor>web:LightCyan</BackColor>
+                  <Title>
+                    <v8:item>
+                      <v8:lang>ru</v8:lang>
+                      <v8:content>Исходящий</v8:content>
+                    </v8:item>
+                    <v8:item>
+                      <v8:lang>en</v8:lang>
+                      <v8:content>Исходящий</v8:content>
+                    </v8:item>
+                  </Title>
+                </InputField>
+                <PictureField name="State0" id="52">
+                  <DataPath>Image</DataPath>
+                  <TitleLocation>None</TitleLocation>
+                  <Width>2</Width>
+                  <Height>1</Height>
+                  <HorizontalStretch>false</HorizontalStretch>
+                  <VerticalStretch>false</VerticalStretch>
+                </PictureField>
+                <LabelField name="Organization0" id="53">
+                  <DataPath>Organization</DataPath>
+                  <TitleLocation>None</TitleLocation>
+                </LabelField>
+              </ChildItems>
+            </UsualGroup>
+            <UsualGroup name="Settlement1" id="60">
+              <Group>AlwaysHorizontal</Group>
+              <United>false</United>
+              <ShowTitle>false</ShowTitle>
+              <ChildItems>
+                <InputField name="Reference1" id="61">
+                  <DataPath>Ref</DataPath>
+                  <BackColor>web:LightCyan</BackColor>
+                  <Title>
+                    <v8:item>
+                      <v8:lang>ru</v8:lang>
+                      <v8:content>Входящий</v8:content>
+                    </v8:item>
+                    <v8:item>
+                      <v8:lang>en</v8:lang>
+                      <v8:content>Входящий</v8:content>
+                    </v8:item>
+                  </Title>
+                </InputField>
+                <PictureField name="State1" id="62">
+                  <DataPath>Image</DataPath>
+                  <TitleLocation>None</TitleLocation>
+                  <Width>2</Width>
+                  <Height>1</Height>
+                  <HorizontalStretch>false</HorizontalStretch>
+                  <VerticalStretch>false</VerticalStretch>
+                </PictureField>
+                <LabelField name="Organization1" id="63">
+                  <DataPath>Organization</DataPath>
+                  <TitleLocation>None</TitleLocation>
+                </LabelField>
+              </ChildItems>
+            </UsualGroup>
+          </ChildItems>
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Взаиморасчеты по сумме удержания</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Взаиморасчеты по сумме удержания</v8:content>
+            </v8:item>
+          </Title>
+        </UsualGroup>
+      </ChildItems>
+    </UsualGroup>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="Organization" id="1">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Organization</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Organization</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="B" id="5">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>B</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>B</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Ref" id="40">
+      <Type>
+        <v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="Image" id="41">
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+      </Type>
+    </Attribute>
+  </Attributes>
+</Form>

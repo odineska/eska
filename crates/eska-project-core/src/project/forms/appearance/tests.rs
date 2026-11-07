@@ -270,15 +270,19 @@ fn palette_resources(body: &str) -> Vec<FormResource> {
 }
 
 #[test]
-fn form_primary_color_uses_the_selected_style_and_retains_the_default_role() {
+fn form_palette_colors_use_the_selected_style_and_retain_default_roles() {
+    let defaults = view("", &[]);
+    let styled = view("", &palette_resources(NATIVE_PALETTE));
     assert_eq!(
-        view("", &[]).important_color,
+        defaults.important_color,
         ResolvedColor::Role("ImportantColor".into())
     );
     assert_eq!(
-        view("", &palette_resources(NATIVE_PALETTE)).important_color,
-        ResolvedColor::Rgb("#ff0000".into())
+        defaults.activity_color,
+        ResolvedColor::Role("ActivityColor".into())
     );
+    assert_eq!(styled.important_color, ResolvedColor::Rgb("#ff0000".into()));
+    assert_eq!(styled.activity_color, ResolvedColor::Rgb("#000080".into()));
 }
 
 #[test]

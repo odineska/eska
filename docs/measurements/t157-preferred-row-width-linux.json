@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestone": "T157",
+  "scope": "Preferred width of ordinary horizontal input rows with a manual MaxWidth on Linux.",
+  "platformBuild": "8.3.27.2342",
+  "platform": "linux-taxi-96",
+  "zoom": 100,
+  "eskaCommit": "c0b4c1e58e7f9ab9c73e48ff3aee77d1fdf10e0b",
+  "explorerBaseline": "7a9f1e9fe87fbfafeb994771e1732568e2dca632",
+  "explorerCommit": "b27c6be8c28b50fed22c1eb7a2fbe664198045d4",
+  "noBslExecution": true,
+  "sourceXmlUnchanged": true,
+  "wholeFormVisualParity": false,
+  "nativeProbes": {
+    "directory": "form-native-row-preferred-SfSXDHIA",
+    "inputs": "src/CommonForms/<form>/Ext/Form.xml",
+    "captures": "isolated-<locale>/<form>-crop.png",
+    "sameWidthsInRuAndEn": true,
+    "blueStrokeWidth": "Longest horizontal run of the selected frame color, in pixels.",
+    "valueFillWidth": "Solid colored value area between the borders, excluding buttons.",
+    "cases": [
+      {"form": "ProbeWidthRowCap41101", "case": "Standalone", "blueStrokeWidth": 143, "valueFillWidth": 109},
+      {"form": "ProbeWidthRowCap41102", "case": "ConditionalBound", "blueStrokeWidth": 254, "valueFillWidth": 109},
+      {"form": "ProbeWidthRowCap41103", "case": "ConditionalAuto", "blueStrokeWidth": 304, "valueFillWidth": 159},
+      {"form": "ProbeWidthRowCap41104", "case": "AlwaysBound", "blueStrokeWidth": 254, "valueFillWidth": 109},
+      {"form": "ProbeWidthRowCap41105", "case": "AlwaysAuto", "blueStrokeWidth": 304, "valueFillWidth": 159},
+      {"form": "ProbeWidthRowCap41106", "case": "NestedBound", "blueStrokeWidth": 458, "valueFillWidth": 109},
+      {"form": "ProbeWidthRowCap41107", "case": "NestedAuto", "blueStrokeWidth": 508, "valueFillWidth": 159},
+      {"form": "ProbeWidthRowCap41108", "case": "AutomaticMaximum", "blueStrokeWidth": 304, "valueFillWidth": 159},
+      {"form": "ProbeWidthRowCap41109", "case": "FixedControl", "blueStrokeWidth": 254, "valueFillWidth": 109},
+      {"form": "ProbeWidthRowCap41110", "case": "OneChild", "blueStrokeWidth": 143, "valueFillWidth": 109},
+      {"form": "ProbeWidthRowCap41111", "case": "HiddenSibling", "blueStrokeWidth": 143, "valueFillWidth": 109},
+      {"form": "ProbeWidthRowCap41112", "case": "ReferenceBound", "blueStrokeWidth": 234, "valueFillWidth": 47},
+      {"form": "ProbeWidthRowCap41113", "case": "ReferenceAuto", "blueStrokeWidth": 346, "valueFillWidth": 159},
+      {"form": "ProbeWidthRowCap41114", "case": "NarrowBound", "blueStrokeWidth": 204, "valueFillWidth": 59},
+      {"form": "ProbeWidthRowCap41115", "case": "AboveIntrinsic", "blueStrokeWidth": 304, "valueFillWidth": 159}
+    ],
+    "installedComparisons": {
+      "ru": {
+        "report": "form-installed-row-width-0XDkFTXg/matrix-ru/row-width.json",
+        "receiptSha256": "a8986fea12a8d035fc15fd958d7f0baab97d388c0f9917d4694419b3b465a0e3"
+      },
+      "en": {
+        "report": "form-installed-row-width-0XDkFTXg/matrix-en/row-width.json",
+        "receiptSha256": "d354bb440b56201afee6e913ed8684292434fcfabba9dac96dbc9c71ff41e867"
+      }
+    },
+    "pairedWidthDelta": {"native": 50, "installed": 51},
+    "acceptanceScope": "Paired capped and uncapped strings, shared-caption nesting, automatic maximum and a cap above intrinsic width.",
+    "caseProperties": "cases.json",
+    "inputWidths": "Group=Horizontal or AlwaysHorizontal for the paired native measurements. The responsive host covers HorizontalIfPossible.",
+    "installedWidthsRuAndEn": [
+      {"case": "02", "preferredFrameWidth": 253, "controlWidth": 110},
+      {"case": "03", "preferredFrameWidth": 304, "controlWidth": 161},
+      {"case": "04", "preferredFrameWidth": 253, "controlWidth": 110},
+      {"case": "05", "preferredFrameWidth": 304, "controlWidth": 161},
+      {"case": "06", "preferredFrameWidth": 461, "controlWidth": 110},
+      {"case": "07", "preferredFrameWidth": 512, "controlWidth": 161},
+      {"case": "08", "preferredFrameWidth": 304, "controlWidth": 161},
+      {"case": "15", "preferredFrameWidth": 304, "controlWidth": 161}
+    ]
+  },
+  "loanDisbursement": {
+    "form": "Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "pathInForm": "Form/ГруппаДанные/ГруппаПраво/ГруппаПлатежныеДанные/ГруппаГруппаРеквизитыПлатежногоДокументаВертикальная/ГруппаГруппаРеквизитыПлатежногоДокументаГоризонтальная/НомерВходящегоДокументаОплаты",
+    "numberId": 880,
+    "dateId": 883,
+    "rowId": 875,
+    "coordinateSpace": "x, y, width, height in pixels from the form frame origin.",
+    "native": {
+      "directory": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc",
+      "frameWidth": 1156,
+      "captures": [
+        {
+          "file": "loan-native-full-crop.png",
+          "blueStrokeWidth": 1155,
+          "sha256": "dd4b56fa373eb5728d3bb4f1cf66267826c2afc3cf3b57d2305f096c5abc136c"
+        },
+        {
+          "file": "loan-native-crop.png",
+          "blueStrokeWidth": 1155,
+          "sha256": "fa75ee62cc487b00e74b1aef2f84e240e76200d1751514fc66771fba2884abca"
+        },
+        {
+          "file": "loan-maximized-crop.png",
+          "blueStrokeWidth": 1155,
+          "sha256": "9ed7003da2f62ca8cc1e079c26499237c4a321c8d8d590b31421ea25d90101b8"
+        }
+      ],
+      "paymentNumber": [725, 120, 111, 23],
+      "paymentDate": [868, 120, 101, 23],
+      "tableViewport": [13, 530, 1123, 227]
+    },
+    "before": {
+      "trace": "form-cf-intake-1RN3roMt/loan-preferred-trace-cqJUW2HC/trace.json",
+      "preferredFrameWidth": 1291,
+      "preferredNumberControlWidth": 411,
+      "preferredRightGroupWidth": 715
+    },
+    "installed": {
+      "locale": "ru",
+      "preferredFrame": [1159, 871],
+      "preferredFrameWidthError": 3,
+      "preferredNumberTrackWidth": 282,
+      "poses": [
+        {
+          "frame": [1156, 871],
+          "paymentNumber": [727, 122, 110, 23],
+          "paymentDate": [868, 122, 101, 23],
+          "tableViewport": [13, 529, 1122, 227]
+        },
+        {
+          "frame": [1000, 980],
+          "paymentNumber": [727, 122, 110, 23],
+          "paymentDate": [868, 122, 101, 23],
+          "tableViewport": [13, 529, 966, 336]
+        },
+        {
+          "frame": [1400, 980],
+          "paymentNumber": [727, 122, 110, 23],
+          "paymentDate": [868, 122, 101, 23],
+          "tableViewport": [13, 529, 1366, 336]
+        }
+      ],
+      "separateNativeWindow": true,
+      "dirtyXmlPreferredWidths": [1159, 1291, 1159],
+      "retainedDomAndSelection": true,
+      "defaultTimeCycle": "24h",
+      "report": "form-installed-row-width-ya0oY6z4/loan-ru/row-width.json",
+      "receiptSha256": "d623f2972860eb9efa81b111bf4b1c192fc87b7c1687b57ad33f432cd61bda95"
+    }
+  },
+  "checks": {
+    "node": {"pass": 648, "fail": 0, "skipped": 9},
+    "regressionOnBaseline": {
+      "receipt": "form-responsive-row-baseline-1iC42qzP/receipt.json",
+      "expectedPreferredInputWidth": 150,
+      "observedPreferredInputWidth": 161
+    },
+    "installedBatch": {
+      "directory": "form-batch-cbxKLY",
+      "backendSha256": "2bdecff9ee2f3ebfd667ae9ac2d94086cba3218db120d33be4bc70eefb7d0d58",
+      "vsixSha256": "499b64b68a77ea30d38786ab797d6255390707d089fbcd457e4f9d10482880eb",
+      "inputsSha256": "605f375c2e1bdb2ce51327e2ddfec9ee463ff0a29c340313f55018dc285c3e47",
+      "batchSha256": "d2f1cbe98dff5bb8b7655b6bf06e80a914ff24c117e24f0deb5c933856f0d7c5",
+      "verifiedRuntimeFiles": 1262,
+      "cases": 566,
+      "runs": [
+        {"suite": "responsive", "locale": "en", "passed": true, "cases": 31},
+        {"suite": "responsive", "locale": "ru", "passed": true, "cases": 31},
+        {"suite": "through-align", "locale": "en", "passed": true, "cases": 23},
+        {"suite": "through-align", "locale": "ru", "passed": true, "cases": 23},
+        {"suite": "united", "locale": "en", "passed": true, "cases": 9},
+        {"suite": "united", "locale": "ru", "passed": true, "cases": 9},
+        {"suite": "column-widths", "locale": "en", "passed": true, "cases": 136},
+        {"suite": "column-widths", "locale": "ru", "passed": true, "cases": 92},
+        {"suite": "input-stretch", "locale": "en", "passed": true, "cases": 20},
+        {"suite": "input-stretch", "locale": "ru", "passed": true, "cases": 20},
+        {"suite": "input-dimensions", "locale": "en", "passed": true, "cases": 44},
+        {"suite": "input-dimensions", "locale": "ru", "passed": true, "cases": 44},
+        {"suite": "input-dates", "locale": "en", "passed": true, "cases": 42},
+        {"suite": "input-dates", "locale": "ru", "passed": true, "cases": 42}
+      ]
+    }
+  },
+  "remaining": ["Independent Windows measurement.", "Exact full-form geometry and pixels, including remaining offsets on the loan form.", "Standalone, fixed and below-minimum cap profiles outside the changed rule."]
+}

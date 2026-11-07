@@ -1,0 +1,3576 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestone": "T159",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "zoom": 100,
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "artifactBase": "../eska-playground",
+  "eskaSourceCommit": "5ff7bdfa83a1749f59893dea7a787f2e3a10a72b",
+  "explorerCommit": "d9864455af42fe530993710f24794e52bfcef370",
+  "scope": "Автоматическая панель и строка поиска динамического списка при заданной ширине. Геометрия включает рамку, панель, кнопки, строку поиска и сетку.",
+  "nativeProbes": {
+    "forms": 42,
+    "states": 84,
+    "processes": {
+      "ru": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/process-ru.json",
+        "sha256": "d47ba220f7f8a20e826459cf39fe47b654131d4c2ada6f41c52ef7a37fe43a8b"
+      },
+      "en": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/process-en.json",
+        "sha256": "ba25592fbbbee6009889b9f80546d1bf819f6a092b6e88cf61e759a38559a3a8"
+      }
+    },
+    "catalogCase": "Catalog.Регионы",
+    "marker": "Цвет первого поля проверяет соответствие снимка исходному XML.",
+    "ruPopup": {
+      "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43209-more.png",
+      "sha256": "f549b719fff170e9fd6942fef4b7b94846c5a52f26eecf19be788f88a5142c7c"
+    }
+  },
+  "verification": {
+    "node": {
+      "pass": 656,
+      "fail": 0,
+      "skipped": 9
+    },
+    "baselineInstalledBatch": {
+      "path": "form-batch-0QdDR0/batch.json",
+      "sha256": "f9357a8f83f34c0ccfd513c1c6a0659c2494bd208655e1f476407ab9247a395c",
+      "passedRuns": 4,
+      "caseEntries": 129,
+      "runtimeManifestSha256": "10dab1b3efc581a2ba476f3345e57d1fb17d03c9083fec889aa903ae2094ec28",
+      "vsixSha256": "55fab8c40431490ae0823c5c33e6c07f37280724d6b588ab580b6436800450bb"
+    },
+    "finalInstalledBatch": {
+      "path": "form-batch-hZ7gEG/batch.json",
+      "sha256": "6df79233869cc5d848b632e78aeab2e1d1fb861816edcfa0c41694080c7fb6ad",
+      "passedRuns": 8,
+      "caseEntries": 203,
+      "runtimeManifestSha256": "f64e554a8ef14d8a75d157441ddf784dab8f9d6fdc5d5bf058c0477154bf1d1c",
+      "vsixSha256": "86425aabd7018b5a5effa2b28f5275b0446a289e161058dd461e6d4fd7d4601b"
+    },
+    "receipts": {
+      "ru": {
+        "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/receipt.json",
+        "sha256": "774650f3613d32929a16c4b73f98d2dd674dc89eaefc8157b32890133ac1a9b8"
+      },
+      "en": {
+        "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/receipt.json",
+        "sha256": "226b3996e8db800cfdcefbddde95c1f471924004dd9a02e49dfcce6436aa7e74"
+      }
+    }
+  },
+  "fit": {
+    "statusRowMinimumWidth": 300,
+    "searchMinimumWhenCommandsFit": 160,
+    "maximumSearchWidth": 260,
+    "firstMeasuredThresholds": {
+      "ru": [
+        320,
+        360,
+        410
+      ],
+      "en": [
+        360,
+        400,
+        450
+      ]
+    },
+    "withoutFiltersAtWidth240": {
+      "ru": {
+        "searchWidth": 171,
+        "moreWidth": 60
+      },
+      "en": {
+        "searchWidth": 234,
+        "moreVisible": false
+      }
+    },
+    "previousGridAtWidth300": [
+      300,
+      101
+    ],
+    "currentGridAtWidth300": [
+      300,
+      116
+    ]
+  },
+  "comparison": {
+    "geometryStates": 84,
+    "matchingGeometry": 81,
+    "matchingGridDimensions": 84,
+    "measuredRgbRegions": 84,
+    "matchingRgbRegions": 81,
+    "totalPixels": 821880,
+    "differentPixels": 2323,
+    "scope": "Вся полоса высотой 27 px при одинаковых координатах отрисовки. Прямоугольники извлечены из снимков Конфигуратора и установленного VSIX без допусков.",
+    "observations": {
+      "ru": {
+        "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/geometry.json",
+        "sha256": "a25cea474eab07232dd3570d688ac083e25fe17e7336bc67f73b6c6d77a8475c"
+      },
+      "en": {
+        "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/geometry.json",
+        "sha256": "a0bf8d25bcf9e848aec83a55230a1314ae9ebc9252067947bc70fe97b78c3f89"
+      }
+    }
+  },
+  "detached": {
+    "ru": {
+      "capture": {
+        "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/dynamic-toolbar-detached-ru.png",
+        "sha256": "62bd1c4c50bd18840e99f4cc8ade2ccea5893f98fe5b26a6f6a0f357fec2e6a6"
+      },
+      "states": [
+        {
+          "width": 30,
+          "table": [
+            13,
+            136,
+            300,
+            116
+          ],
+          "search": [
+            {
+              "rect": [
+                18,
+                73,
+                225,
+                23
+              ],
+              "compact": false
+            }
+          ],
+          "buttons": 1,
+          "selected": "3",
+          "sameOwners": true
+        },
+        {
+          "width": 62,
+          "table": [
+            13,
+            136,
+            620,
+            116
+          ],
+          "search": [
+            {
+              "rect": [
+                253,
+                73,
+                260,
+                23
+              ],
+              "compact": false
+            }
+          ],
+          "buttons": 4,
+          "selected": "3",
+          "sameOwners": true
+        },
+        {
+          "width": 30,
+          "table": [
+            13,
+            136,
+            300,
+            116
+          ],
+          "search": [
+            {
+              "rect": [
+                18,
+                73,
+                225,
+                23
+              ],
+              "compact": false
+            }
+          ],
+          "buttons": 1,
+          "selected": "3",
+          "sameOwners": true
+        }
+      ]
+    },
+    "en": {
+      "capture": {
+        "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/dynamic-toolbar-detached-en.png",
+        "sha256": "73a1c066b75ae685c72a830cd3e486db1916bfa132a72c794bace6501f92dd38"
+      },
+      "states": [
+        {
+          "width": 30,
+          "table": [
+            13,
+            136,
+            300,
+            116
+          ],
+          "search": [
+            {
+              "rect": [
+                14,
+                73,
+                181,
+                23
+              ],
+              "compact": false
+            }
+          ],
+          "buttons": 1,
+          "selected": "3",
+          "sameOwners": true
+        },
+        {
+          "width": 62,
+          "table": [
+            13,
+            136,
+            620,
+            116
+          ],
+          "search": [
+            {
+              "rect": [
+                205,
+                73,
+                260,
+                23
+              ],
+              "compact": false
+            }
+          ],
+          "buttons": 4,
+          "selected": "3",
+          "sameOwners": true
+        },
+        {
+          "width": 30,
+          "table": [
+            13,
+            136,
+            300,
+            116
+          ],
+          "search": [
+            {
+              "rect": [
+                14,
+                73,
+                181,
+                23
+              ],
+              "compact": false
+            }
+          ],
+          "buttons": 1,
+          "selected": "3",
+          "sameOwners": true
+        }
+      ]
+    }
+  },
+  "sourceWrites": false,
+  "bslExecuted": false,
+  "wholeFormVisualParity": false,
+  "windowsCalibrated": false,
+  "limitations": [
+    "Состав «Ещё» основан на известных автоматических и объявленных командах. Полный порядок стандартных действий и вложенные меню зависят от источника динамического списка.",
+    "Для Windows нужны замеры Конфигуратора при том же масштабе."
+  ],
+  "cases": [
+    {
+      "kind": "Width10",
+      "width": 10,
+      "markerRgb": [
+        240,
+        248,
+        255
+      ],
+      "form": "ProbeWidthDynamic43201",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43201/Ext/Form.xml",
+        "sha256": "66d21433f593228cdfceb0a47e844fd5d7b9afd2a8b8702394351afd41d0f263"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43201.png",
+            "sha256": "5530a81ea2e78c82b8484637265f57f4442a7e3b098d85390a87351dbb1cf17a"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43201.png",
+            "sha256": "006825da8c8b80d90875c557e0dddd348c2a63266c8a2982b29ad1e29aebab54"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43201.png",
+            "sha256": "34e72a4dcdae33626687c5b5fd4b49c7378c0753bb52c73c46f88985d1944a07"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43201.png",
+            "sha256": "e199a87b951bca79a9589f1f3df4dc8864ac35cc0a3e3ef2e37e1137fbe96c68"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width15",
+      "width": 15,
+      "markerRgb": [
+        250,
+        235,
+        215
+      ],
+      "form": "ProbeWidthDynamic43202",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43202/Ext/Form.xml",
+        "sha256": "2e10274a2c4c4f93b47dc06bee12b7d43d96d21e27d0423a9578b488573ab5f0"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43202.png",
+            "sha256": "82f9da9434cfb51344db9b2e3fe4a5a312fc652b3e21d8f72545fc34b846885c"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43202.png",
+            "sha256": "88d06f6b830fc75adadc79fb756c295e7e03381b35fa9a4ffc8800feb85afa4d"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43202.png",
+            "sha256": "dc7eaba3acc4ee8ed84b250ded67091b1f5c363f60afb5aa3ace49185ac6a1c6"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43202.png",
+            "sha256": "1de1916d962ba26a6dcfbecb20827c3a89e60a2b3e8f692a3de68515dd4d5987"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width18",
+      "width": 18,
+      "markerRgb": [
+        127,
+        255,
+        212
+      ],
+      "form": "ProbeWidthDynamic43203",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43203/Ext/Form.xml",
+        "sha256": "7730382deab5af5a4395f92f92734e2d53915cb2a2e226383469e6f181b0d5e0"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43203.png",
+            "sha256": "77c25a854a71b0279734aff388c8708c54380ef585b26cd244c871de7dc51332"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43203.png",
+            "sha256": "085bbcb8fc842532aed2b9842a9210e989da4abe1aa3144fe73f769ca6416693"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43203.png",
+            "sha256": "9583690a80fbf2f049880b714d3662dab4f326b556e5c7f0e83c06545636dc93"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43203.png",
+            "sha256": "f558b3d1e96529a159093e332cb21f8240fdc3bb3137cf179570091c2ddd8be4"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width20",
+      "width": 20,
+      "markerRgb": [
+        245,
+        245,
+        220
+      ],
+      "form": "ProbeWidthDynamic43204",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43204/Ext/Form.xml",
+        "sha256": "797d3386e4087330519c6c8fe0326c91b313ab306944332b0d7e8c25bfda6a14"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43204.png",
+            "sha256": "38b71da11bdd09be6029a81c7be1cf656062eb8a07745a16f6db00b2cb508072"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43204.png",
+            "sha256": "2f7a84f66eae1be66be49c03b90f33199460785e201a845f5172326a75da405f"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43204.png",
+            "sha256": "acf68a1cdbbf9261ecbe6cd733620528780e555755d9453c76bedc284568c331"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43204.png",
+            "sha256": "b7613ca88ebf0f725e3d246fead1902b93da09b75c48c11b489454eef375639a"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width22",
+      "width": 22,
+      "markerRgb": [
+        255,
+        228,
+        196
+      ],
+      "form": "ProbeWidthDynamic43205",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43205/Ext/Form.xml",
+        "sha256": "3d2eb0c59db92a3cb0cb741eac57482346043c5624a62aad8707c64a460f0b23"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43205.png",
+            "sha256": "f8dfac8840e8c61efd41bdf32a4ce4f0bbc5d6bc0ebf92ab35bd28ad51e03995"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43205.png",
+            "sha256": "d4435de745e941b0125ea29a820cba707ff3e8f591a35474903fd35b9d3032b1"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43205.png",
+            "sha256": "5dd51ab09203db0c2f92ce2f6766512666afec6c2cadda4b308256f620142102"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43205.png",
+            "sha256": "b7dd1e9663ff4bc8972d0223f6bc2e83d646d649c4dc261eb6cc9e186496d70b"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width24",
+      "width": 24,
+      "markerRgb": [
+        255,
+        235,
+        205
+      ],
+      "form": "ProbeWidthDynamic43206",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43206/Ext/Form.xml",
+        "sha256": "75cc339f1694d4a59a6880d61151be79064ecc3cb5c190a06aae43cc4f8eddb5"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43206.png",
+            "sha256": "38f6ec8fb52a823fdd8c4f60f657dfbf3abd53983455ee54239921c9066dfbd0"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43206.png",
+            "sha256": "05696b8b42f56d18051524736d2eed9b514abc7b15c8ede9c1aaaf0921e2b1a8"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43206.png",
+            "sha256": "17e12232cdece9c0d9f2ee71d06e5dfd7cbd5fc6caeeeb1883aa29186251ecfa"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43206.png",
+            "sha256": "14273d5ee5087742ffe0a074ac85e8592fcc5b5e485e1fa160d17f4648d78393"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width26",
+      "width": 26,
+      "markerRgb": [
+        138,
+        43,
+        226
+      ],
+      "form": "ProbeWidthDynamic43207",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43207/Ext/Form.xml",
+        "sha256": "ed61155f21be455b50033c1db237e26c8514b64a0145edcbe75aa86a94c1cb92"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43207.png",
+            "sha256": "65885b499fb8fc556d9964d2f3e8228011de9f9c7cd1e174b032ad039baadbe5"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43207.png",
+            "sha256": "65ece24cf0012a7e8b3b84ad54aee37d940e7c090294a81715d93c27b86d693f"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43207.png",
+            "sha256": "d0c7f87a74a1d765f0bbc442a952ac57bcf3725a5ba904bc47ddb2feae1fbd06"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43207.png",
+            "sha256": "50295c0fa0d72ebdf7ba9340b82fbda1067edc2008277e3fc074eb2c273705fa"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width28",
+      "width": 28,
+      "markerRgb": [
+        222,
+        184,
+        135
+      ],
+      "form": "ProbeWidthDynamic43208",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43208/Ext/Form.xml",
+        "sha256": "40e4f7c9539402fabdc0fd374343eeedf3e1c512dd094a7de861e46922581e74"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43208.png",
+            "sha256": "8982095c8463000e6564b5ba995858046caeef9f60a407eb3756ae67a06b73c6"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43208.png",
+            "sha256": "1a2f1c7b12723d6499cf71a369f37b11315e4ea181f6280a131f9e455a361c97"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43208.png",
+            "sha256": "62addf7640f17b690315f17c1df6d30f53a582cea0523c0e385da234081e388a"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43208.png",
+            "sha256": "7e145e8bed34e0c4791bca80cd506373e1d95943bd2f75ac4531ea9ff7474790"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width30",
+      "width": 30,
+      "markerRgb": [
+        95,
+        158,
+        160
+      ],
+      "form": "ProbeWidthDynamic43209",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43209/Ext/Form.xml",
+        "sha256": "d8bc9eb26a81af41b806afe186dab09537308b03c98658af48437fc2d6439a58"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43209.png",
+            "sha256": "dd0065b51e81084ab9b11b99300690e4a94bf80936d7cc824d98d357be1bec96"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43209.png",
+            "sha256": "4f10dac172ee64d3fe3923b1b0ff66f7607e1196611e6e20a607fa465b2f34e5"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43209.png",
+            "sha256": "1b0081055c1bd9beb402d4aa2b89ad818119309d28fe5c9501208a2c0df47045"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43209.png",
+            "sha256": "44bf64e7a81ce0cb0d783698927e8572a8c7b3a4ee131c9f6774cc347f581977"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width31",
+      "width": 31,
+      "markerRgb": [
+        127,
+        255,
+        0
+      ],
+      "form": "ProbeWidthDynamic43210",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43210/Ext/Form.xml",
+        "sha256": "2d3e0ba026e9d8b930334f87931d2ef19a2c81a988619065e104396d1794e8a3"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43210.png",
+            "sha256": "733ef7c421828921f57f92f39d6f32e57ea1c2eb06c106d6ccf3d6029028a196"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43210.png",
+            "sha256": "ecaffe8b9a541c2d7f24a4a0a851657dbfd977ccdf62295a6d5b372907452291"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8370,
+            "different": 0,
+            "nativeRgbSha256": "2e80e92cc2bbd79324b7c26a126637492f998b3d9dc06c68f215c1bfbf878345",
+            "viewerRgbSha256": "2e80e92cc2bbd79324b7c26a126637492f998b3d9dc06c68f215c1bfbf878345",
+            "nativeRegion": [
+              274,
+              255,
+              310,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              310,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43210.png",
+            "sha256": "42e64ff6523208c73c74f65ce6ecfa21cfd20a681450e825be90f9c4624d560e"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43210.png",
+            "sha256": "9c8f32d821e406e9911f4a48671102f7a029fb1ebb6946ed63f2031af94acabc"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8370,
+            "different": 0,
+            "nativeRgbSha256": "e570a58edca93ff78c7afaefb664e5fb641f89a558b695e87f2be6444b840d18",
+            "viewerRgbSha256": "e570a58edca93ff78c7afaefb664e5fb641f89a558b695e87f2be6444b840d18",
+            "nativeRegion": [
+              274,
+              581,
+              310,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              310,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width32",
+      "width": 32,
+      "markerRgb": [
+        210,
+        105,
+        30
+      ],
+      "form": "ProbeWidthDynamic43211",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43211/Ext/Form.xml",
+        "sha256": "eb1552f31cc1339285bce947e3bf81108af33aa82bfa3f312e6d5a66a136457c"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43211.png",
+            "sha256": "4a7390fe14f439a4ca4f079c506b537a528ed256613150a27c5d71cc4e23987a"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43211.png",
+            "sha256": "1cde81bd71f3b32e786dd393bc1daacac168f08c518a27350f69afc7153d1688"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8640,
+            "different": 0,
+            "nativeRgbSha256": "c9ee609fff7381bb7039313ddec4fa983dc3c113247cf075bf1fcb0df303a949",
+            "viewerRgbSha256": "c9ee609fff7381bb7039313ddec4fa983dc3c113247cf075bf1fcb0df303a949",
+            "nativeRegion": [
+              274,
+              255,
+              320,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              320,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43211.png",
+            "sha256": "2d4987194e9b7ef52c2fa2a6b6a51e6a25da67a69d98ad1bb9ed0a0fc6c5b3e7"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43211.png",
+            "sha256": "71b785b4b39e1a926313b27a8a51f782928a1544e3ff44de18971184da634be3"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8640,
+            "different": 0,
+            "nativeRgbSha256": "85ecbc9d60e172fb76bca64985ad2c50d4093acf93ce2865cceb3171c54f0779",
+            "viewerRgbSha256": "85ecbc9d60e172fb76bca64985ad2c50d4093acf93ce2865cceb3171c54f0779",
+            "nativeRegion": [
+              274,
+              581,
+              320,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              320,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width33",
+      "width": 33,
+      "markerRgb": [
+        255,
+        127,
+        80
+      ],
+      "form": "ProbeWidthDynamic43212",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43212/Ext/Form.xml",
+        "sha256": "4ee85cb389d54e86e9ecea685743715db30fc3085888f7650d376ae2d9732cd9"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43212.png",
+            "sha256": "0e0bd6b6b8dd318dbcdfb5d0e31719f1970108b41c4b63fe410e7cab8ea0f6af"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43212.png",
+            "sha256": "2b5baeed75fc0a85b3abfbbc1fb14b616cf023309e45d278d76f90b6110d82b5"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8910,
+            "different": 0,
+            "nativeRgbSha256": "fdf7421389fcd4f849282145989ef383e74ac5d0dc84271cd457828f0cd56568",
+            "viewerRgbSha256": "fdf7421389fcd4f849282145989ef383e74ac5d0dc84271cd457828f0cd56568",
+            "nativeRegion": [
+              274,
+              255,
+              330,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              330,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43212.png",
+            "sha256": "aadceab053db08fa81313e237cea7bd57139b801ead6e797432184b37f344b42"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43212.png",
+            "sha256": "6cfd01db1c75a53555652d32cd6f71442759bbed3661125f3a3ddc66ed4aa1a5"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8910,
+            "different": 0,
+            "nativeRgbSha256": "f5988fb987fb18a5c7e7bd3d8ea29169858c1d081ec0009746a5c3b439f05d48",
+            "viewerRgbSha256": "f5988fb987fb18a5c7e7bd3d8ea29169858c1d081ec0009746a5c3b439f05d48",
+            "nativeRegion": [
+              274,
+              581,
+              330,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              330,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width34",
+      "width": 34,
+      "markerRgb": [
+        100,
+        149,
+        237
+      ],
+      "form": "ProbeWidthDynamic43213",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43213/Ext/Form.xml",
+        "sha256": "52a45d894b8bbcef636813af6f3f482c5309412d261598d43fef6315932720c0"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43213.png",
+            "sha256": "90e651dfd5415f75f56ef0e092a23726197ba26f5dac2596c68f471a63b3a1f6"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43213.png",
+            "sha256": "dd0a46f0e8c74ffcfb28dc136fccbeafeffecc70ce55c46e817836ba7b1d94fb"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9180,
+            "different": 0,
+            "nativeRgbSha256": "d6777cf73f24b1cbd76ec8dd339ef025457fd54161edd2681b2aae28468d2aeb",
+            "viewerRgbSha256": "d6777cf73f24b1cbd76ec8dd339ef025457fd54161edd2681b2aae28468d2aeb",
+            "nativeRegion": [
+              274,
+              255,
+              340,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              340,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43213.png",
+            "sha256": "2fff7b0ed75948e786961815c8f89764e017aad02634426057417191a2112257"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43213.png",
+            "sha256": "4763b084e491799e2fa242d03be1bcee0ee52ba9a7221fd34894bffbd404ea92"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9180,
+            "different": 0,
+            "nativeRgbSha256": "6a788737acd544964845817ee7516b43d964b4ef6636814e5654fd1cf17af4eb",
+            "viewerRgbSha256": "6a788737acd544964845817ee7516b43d964b4ef6636814e5654fd1cf17af4eb",
+            "nativeRegion": [
+              274,
+              581,
+              340,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              340,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width35",
+      "width": 35,
+      "markerRgb": [
+        255,
+        248,
+        220
+      ],
+      "form": "ProbeWidthDynamic43214",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43214/Ext/Form.xml",
+        "sha256": "e7c3aa1dee9dc93a280c64c0d3f9ef007555b539596e73071f9456eb51f639d5"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43214.png",
+            "sha256": "e3dd5b974fc3e7a51c225dfb4581ffc904bbce499f01c76046da4be26027634a"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43214.png",
+            "sha256": "ff8d1b3d9a6ed70acf319f41dfee0959ff1981fc662c9be490bcd17285baf011"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9450,
+            "different": 0,
+            "nativeRgbSha256": "fc57ab160b144a1f3c0cb7cebdd647310889e1ecdf09b50c0b48f00ec181132a",
+            "viewerRgbSha256": "fc57ab160b144a1f3c0cb7cebdd647310889e1ecdf09b50c0b48f00ec181132a",
+            "nativeRegion": [
+              274,
+              255,
+              350,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              350,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43214.png",
+            "sha256": "e72e89cce325b2efafdf2d2bb599600b61433224a3827e665e36293babbe3eff"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43214.png",
+            "sha256": "2a234ec277a69bb076118fd95c46c39fae306627874b1eb1a8f9371a30e07660"
+          },
+          "geometryMatches": false,
+          "differentGeometry": {
+            "buttons": [
+              [
+                [
+                  255,
+                  71,
+                  108,
+                  26
+                ]
+              ],
+              [
+                [
+                  254,
+                  71,
+                  109,
+                  26
+                ]
+              ]
+            ],
+            "search": [
+              [
+                [
+                  19,
+                  73,
+                  227,
+                  23
+                ]
+              ],
+              [
+                [
+                  19,
+                  73,
+                  226,
+                  23
+                ]
+              ]
+            ]
+          },
+          "rgb": {
+            "compared": 9450,
+            "different": 695,
+            "nativeRgbSha256": "dac42b5f11f7d57e5c935e704af4731ab4ab88913358d3754382f81e857b602c",
+            "viewerRgbSha256": "f23c25217e98d8931320f47d6f028db2ca241c9ec346f3f27c33bdfc193f6c19",
+            "nativeRegion": [
+              274,
+              581,
+              350,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              350,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width36",
+      "width": 36,
+      "markerRgb": [
+        220,
+        20,
+        60
+      ],
+      "form": "ProbeWidthDynamic43215",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43215/Ext/Form.xml",
+        "sha256": "7f1a600803fc5a9c44d0645a664c16d25361f434a6e86d0f57be66e844e03f59"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43215.png",
+            "sha256": "559cfc995ff748d6216d87d4f133615a6335d71c1bc737ffd4887546c8b5dae9"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43215.png",
+            "sha256": "7307839840e5dfd5574b7ffc74208038e986db00c9f33100b1e96958e381c416"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9720,
+            "different": 0,
+            "nativeRgbSha256": "f5c7ebd691d9295a8460ba6eb9e7f55db01725b69fe7b49e3e05eb7941e8e919",
+            "viewerRgbSha256": "f5c7ebd691d9295a8460ba6eb9e7f55db01725b69fe7b49e3e05eb7941e8e919",
+            "nativeRegion": [
+              274,
+              255,
+              360,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              360,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43215.png",
+            "sha256": "9fa31a2040aa6dcb688ee01ca3d41803b93b99c82278a125fddcf6a21d94c432"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43215.png",
+            "sha256": "7d1dde29a0362a53bb51a8de6c443a8569841fc5fc10b770bf298039f47b4a22"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9720,
+            "different": 0,
+            "nativeRgbSha256": "bdfd4e30292c15f7afeb4d247bab2d850c323d4a0cdfbad5a9cb1a9ebe5ceae4",
+            "viewerRgbSha256": "bdfd4e30292c15f7afeb4d247bab2d850c323d4a0cdfbad5a9cb1a9ebe5ceae4",
+            "nativeRegion": [
+              274,
+              581,
+              360,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              360,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width37",
+      "width": 37,
+      "markerRgb": [
+        0,
+        139,
+        139
+      ],
+      "form": "ProbeWidthDynamic43216",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43216/Ext/Form.xml",
+        "sha256": "05ea15e03f303244d53d51639b9ab66c5419558eb3d4154457b92e572814dee5"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43216.png",
+            "sha256": "f14c2ad8a9b04b1d4cb3f1fc75a74f582c4882aff3c7244ebc73fa5df7e3f885"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43216.png",
+            "sha256": "1e90e6594725cf2169e2b291f2b530fb6bf07729d3d903c8794d1bbd3958bb6b"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9990,
+            "different": 0,
+            "nativeRgbSha256": "02f2befcff7a20a803bd4773982873d3ca97985234e42b9b36f629b2efa7cdd7",
+            "viewerRgbSha256": "02f2befcff7a20a803bd4773982873d3ca97985234e42b9b36f629b2efa7cdd7",
+            "nativeRegion": [
+              274,
+              255,
+              370,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              370,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43216.png",
+            "sha256": "567c535dc6aa8f2125ca49fa8f0bb461ff07d3498e72eec6f849c5517a71bce6"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43216.png",
+            "sha256": "4edff9ee5c6d69c6a743b9c06d8d4326c587fee9b8e900021caa93d475c93d95"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9990,
+            "different": 0,
+            "nativeRgbSha256": "d167000632b9c0e6cfbbc3f60bbd94e2c1a90f159e0abf2d88016835e956381c",
+            "viewerRgbSha256": "d167000632b9c0e6cfbbc3f60bbd94e2c1a90f159e0abf2d88016835e956381c",
+            "nativeRegion": [
+              274,
+              581,
+              370,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              370,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width38",
+      "width": 38,
+      "markerRgb": [
+        184,
+        134,
+        11
+      ],
+      "form": "ProbeWidthDynamic43217",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43217/Ext/Form.xml",
+        "sha256": "ccc1cb3cd9b3be9b1d283a70a7d4de7a4fa70476cd115047f540c5c0060f9b7a"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43217.png",
+            "sha256": "eeaf2fd25f0accd200a263115dc17e42a24abe3c50ec685cb1f945a1f6d6bd53"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43217.png",
+            "sha256": "ffa8842a8ddb00b40cb64ba9e1d80399e4cdf1f3825f1f28c611d08dd556e527"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 10260,
+            "different": 0,
+            "nativeRgbSha256": "d5bd591f43e9db328b81e65343007c8f478f63ec9f8c53bc092be16b971b2549",
+            "viewerRgbSha256": "d5bd591f43e9db328b81e65343007c8f478f63ec9f8c53bc092be16b971b2549",
+            "nativeRegion": [
+              274,
+              255,
+              380,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              380,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43217.png",
+            "sha256": "3d422f1ace6b9d1d52a03b3dc41b8bc9e5e320ec34c8aa4a4a4200a148ce5171"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43217.png",
+            "sha256": "57122ec0692cbda6fc49f5db6ff8488fc38a70d69b7c44ada855fa453ef8ca4d"
+          },
+          "geometryMatches": false,
+          "differentGeometry": {
+            "buttons": [
+              [
+                [
+                  13,
+                  71,
+                  66,
+                  26
+                ],
+                [
+                  284,
+                  71,
+                  109,
+                  26
+                ]
+              ],
+              [
+                [
+                  13,
+                  71,
+                  66,
+                  26
+                ],
+                [
+                  285,
+                  71,
+                  108,
+                  26
+                ]
+              ]
+            ],
+            "search": [
+              [
+                [
+                  88,
+                  73,
+                  187,
+                  23
+                ]
+              ],
+              [
+                [
+                  88,
+                  73,
+                  188,
+                  23
+                ]
+              ]
+            ]
+          },
+          "rgb": {
+            "compared": 10260,
+            "different": 695,
+            "nativeRgbSha256": "810814fa99595eb4c503f3a2c80b60d1da4ca866e8ee9c9fb888c16ec671012a",
+            "viewerRgbSha256": "c73f92e9e4f9fec15450dd30476f3365996ea31c13541afc73ec4596f31c2298",
+            "nativeRegion": [
+              274,
+              581,
+              380,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              380,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width39",
+      "width": 39,
+      "markerRgb": [
+        169,
+        169,
+        169
+      ],
+      "form": "ProbeWidthDynamic43218",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43218/Ext/Form.xml",
+        "sha256": "9aa7b510a540f491232b0c4842cad73011c3132a3eb23cc17f1f44d81ea86c40"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43218.png",
+            "sha256": "f35b46fa0ba681bc6fe4a6fc5939035f7af22944031c59060bc0041d437864f7"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43218.png",
+            "sha256": "4cb83f7838b14c1bcf971f9fb4cd84072151ca82baa846a58aa820075fc4ecad"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 10530,
+            "different": 0,
+            "nativeRgbSha256": "a696ea98c810e300d39e90776fbca4e82a4f50894c4d17301de1b166ed992f00",
+            "viewerRgbSha256": "a696ea98c810e300d39e90776fbca4e82a4f50894c4d17301de1b166ed992f00",
+            "nativeRegion": [
+              274,
+              255,
+              390,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              390,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43218.png",
+            "sha256": "43ce95ed427626dee302b433026ac56a4ffc3e30e84d279d5c39c01ea002a70e"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43218.png",
+            "sha256": "08d8627790203e4cb1c2f4e67b11d10bc0cfdd6aaf2867e921b2b0918c139765"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 10530,
+            "different": 0,
+            "nativeRgbSha256": "170de8df1044edfdb352f5772a98463fa0be1c82f92d67f48cf7c3a011256ba2",
+            "viewerRgbSha256": "170de8df1044edfdb352f5772a98463fa0be1c82f92d67f48cf7c3a011256ba2",
+            "nativeRegion": [
+              274,
+              581,
+              390,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              390,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width40",
+      "width": 40,
+      "markerRgb": [
+        189,
+        183,
+        107
+      ],
+      "form": "ProbeWidthDynamic43219",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43219/Ext/Form.xml",
+        "sha256": "dc6fe6a0d2f0a28a75b6514e0d401729bf6ede6aad064b22d06b2212425c8d17"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43219.png",
+            "sha256": "080d9a93ee22ac4121b3bfca12283ff83cad9f62f4f1a5af7f40bf80596ee5c3"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43219.png",
+            "sha256": "cbe2f95033ad4f8227382c95fe0d33152b0141d617850c624273ad5f510019c0"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 10800,
+            "different": 0,
+            "nativeRgbSha256": "8d4373629c1aea193883356c5e0fbd1cf262c1bac1b271ea0c747f4b30f87e2f",
+            "viewerRgbSha256": "8d4373629c1aea193883356c5e0fbd1cf262c1bac1b271ea0c747f4b30f87e2f",
+            "nativeRegion": [
+              274,
+              255,
+              400,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              400,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43219.png",
+            "sha256": "1aa06a56cac975f1780eba5883039d2bdee9dc012e6560c31750e8e2300e7bc4"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43219.png",
+            "sha256": "54d00d21c86aa7bfe5626339da1c02798526b5d0850ada6d8525dff481806ff6"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 10800,
+            "different": 0,
+            "nativeRgbSha256": "98b96a70964dfd1b049e0e53dff8d5091625fc18d08afe17e5d1ca4c7f712bfa",
+            "viewerRgbSha256": "98b96a70964dfd1b049e0e53dff8d5091625fc18d08afe17e5d1ca4c7f712bfa",
+            "nativeRegion": [
+              274,
+              581,
+              400,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              400,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width41",
+      "width": 41,
+      "markerRgb": [
+        255,
+        140,
+        0
+      ],
+      "form": "ProbeWidthDynamic43220",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43220/Ext/Form.xml",
+        "sha256": "a4c32de0069273e808ebdeed96b085081dc3844b4ef60c79b85fb9aa26d5b987"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43220.png",
+            "sha256": "98a2521e856dcf8ee3779f948d20d213442c25abe842682eb6f5d9e490bb4902"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43220.png",
+            "sha256": "09aa4c84c6b6da5456898c14e2dd5636532e0964030d84615badd567c00fbbf8"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 11070,
+            "different": 0,
+            "nativeRgbSha256": "47ffdf434f29ae46a7706e1723709357bb63b22f4ef669a8846583184363d4b8",
+            "viewerRgbSha256": "47ffdf434f29ae46a7706e1723709357bb63b22f4ef669a8846583184363d4b8",
+            "nativeRegion": [
+              274,
+              255,
+              410,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              410,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43220.png",
+            "sha256": "e79e1e9f8d69a2537367dbac0a2d8e382dc5f5ed07581118d809d6ec86406982"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43220.png",
+            "sha256": "51aac292bc970ecf7d6efede0e7e5fb347b220bb04ef7d2836567ce8d9f4c062"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 11070,
+            "different": 0,
+            "nativeRgbSha256": "ec72e34f4b8c54cd711ad1e236d744582ee30c8d53892e858ffe519bf325a7cf",
+            "viewerRgbSha256": "ec72e34f4b8c54cd711ad1e236d744582ee30c8d53892e858ffe519bf325a7cf",
+            "nativeRegion": [
+              274,
+              581,
+              410,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              410,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width42",
+      "width": 42,
+      "markerRgb": [
+        233,
+        150,
+        122
+      ],
+      "form": "ProbeWidthDynamic43221",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43221/Ext/Form.xml",
+        "sha256": "194d85383afe1bf6e06fcd54a3994f80c8698c2ccd5df520b53fbc08dc7d40eb"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43221.png",
+            "sha256": "e936151c2fa4da7b4b3d4a34cb131f6ec39157d65e122b0f88253f357a2b80e0"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43221.png",
+            "sha256": "9d332b04cbfadd0c350a4e4e85cefd5b1e50dfbf22a3b0b3c1c0e7bfc80e567b"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 11340,
+            "different": 0,
+            "nativeRgbSha256": "2d1c7aa4bfbd5b8e57ee4a5ffafee0505b6b392dfcc99166a98cf2b931476b25",
+            "viewerRgbSha256": "2d1c7aa4bfbd5b8e57ee4a5ffafee0505b6b392dfcc99166a98cf2b931476b25",
+            "nativeRegion": [
+              274,
+              255,
+              420,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              420,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43221.png",
+            "sha256": "cd877f3266602dc65a15c1e9281f008c552d28547cceee0532dc98c9e6212204"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43221.png",
+            "sha256": "a844addc828b3d61890c4cba4ac5671b454cc714e445045a0404afbcf6881ec8"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 11340,
+            "different": 0,
+            "nativeRgbSha256": "5fc698d77513142aa1e656480810e16e9cfb92f1c6d7714842841c88b857cfb2",
+            "viewerRgbSha256": "5fc698d77513142aa1e656480810e16e9cfb92f1c6d7714842841c88b857cfb2",
+            "nativeRegion": [
+              274,
+              581,
+              420,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              420,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width43",
+      "width": 43,
+      "markerRgb": [
+        143,
+        188,
+        143
+      ],
+      "form": "ProbeWidthDynamic43222",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43222/Ext/Form.xml",
+        "sha256": "31089e1f60ccfde29d9ad9b931f86405cbd4c6ab41873892fab7dc670c859eee"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43222.png",
+            "sha256": "f17d524bbb19f2c2c0f96b35d0978b8c10eb5d043337105d4c9a8d1d671a7fd6"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43222.png",
+            "sha256": "2d07a2696ad2aac16a45ae72a6382a0f9cc01ef289db15fe9334e3017b74f4df"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 11610,
+            "different": 0,
+            "nativeRgbSha256": "c8cb5c8773901a87d24a55181dff0d60043ac28ea6fdeea882ae4bff367327ce",
+            "viewerRgbSha256": "c8cb5c8773901a87d24a55181dff0d60043ac28ea6fdeea882ae4bff367327ce",
+            "nativeRegion": [
+              274,
+              255,
+              430,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              430,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43222.png",
+            "sha256": "f6222b3382c9b361517f7b2117d58d611d4d57065b32e79147e51c1a47c2b229"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43222.png",
+            "sha256": "eb90a33efd593bb2e54a02e7fb83bd1b50fe5b21e49dfb3cc5219aa6c24546d3"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 11610,
+            "different": 0,
+            "nativeRgbSha256": "fd9d1c68e59d096daffd9533b106d6490a04c45fdb34e3730c82ed7785a5daec",
+            "viewerRgbSha256": "fd9d1c68e59d096daffd9533b106d6490a04c45fdb34e3730c82ed7785a5daec",
+            "nativeRegion": [
+              274,
+              581,
+              430,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              430,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width44",
+      "width": 44,
+      "markerRgb": [
+        0,
+        206,
+        209
+      ],
+      "form": "ProbeWidthDynamic43223",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43223/Ext/Form.xml",
+        "sha256": "afb7d4068cb3cb33ae7edd87da2d12cd850601fc773aff7765b58d8e221eac3c"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43223.png",
+            "sha256": "d33696c83059cd0227f9d7981e036ae0fda227687a3224c7d8f29cb2d31b2f3a"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43223.png",
+            "sha256": "d25f7654be91ff0d5a4af1551631e6322313cdecd1d1e8d205f99ff5a211acec"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 11880,
+            "different": 0,
+            "nativeRgbSha256": "6d9f82a5fa51a909741d77c4a018cad13cbce667024a1b15f2c7057a33539570",
+            "viewerRgbSha256": "6d9f82a5fa51a909741d77c4a018cad13cbce667024a1b15f2c7057a33539570",
+            "nativeRegion": [
+              274,
+              255,
+              440,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              440,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43223.png",
+            "sha256": "a2888bcf3afd2e0c1d043f9e7a51dff1c9485aedd2854fa98c090420381323e2"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43223.png",
+            "sha256": "2502408b9e8c5db714c47b2d8812a3df4233f60faadf0e0ca8071440cf7a4fb9"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 11880,
+            "different": 0,
+            "nativeRgbSha256": "0f339972c49df068c71eb149bcb46b86e4d9dfc748998964a2ad13b6a854b2a9",
+            "viewerRgbSha256": "0f339972c49df068c71eb149bcb46b86e4d9dfc748998964a2ad13b6a854b2a9",
+            "nativeRegion": [
+              274,
+              581,
+              440,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              440,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width45",
+      "width": 45,
+      "markerRgb": [
+        255,
+        20,
+        147
+      ],
+      "form": "ProbeWidthDynamic43224",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43224/Ext/Form.xml",
+        "sha256": "48a40e6e1406c8c6deabbc31cf1c32389b4c4a5512dbce497bbccd5a775b517d"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43224.png",
+            "sha256": "f42d409a6080ef09d7c803a19c9db469453d80e23d954489b9a56bb64d21ad7d"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43224.png",
+            "sha256": "36cda43f591c589df4e31fae6923d9d82711adc1f9fb83368875dfe6d0926fcd"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 12150,
+            "different": 0,
+            "nativeRgbSha256": "9eb06f5c35fc659f294aa13d9815d61ad6aac2160ba933c842479250a5b7eebe",
+            "viewerRgbSha256": "9eb06f5c35fc659f294aa13d9815d61ad6aac2160ba933c842479250a5b7eebe",
+            "nativeRegion": [
+              274,
+              255,
+              450,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              450,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43224.png",
+            "sha256": "28b1e9dd062faafa07865654835f5821da0138c43fece9ceb7dd844479d0003a"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43224.png",
+            "sha256": "37ebb47b7f0509f344a6cd3f6c89ff6ed08a37cb21a279b99c41d20b60bc587e"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 12150,
+            "different": 0,
+            "nativeRgbSha256": "c5d7381570b08fb454b47c5f75b400b99893dffa6c164954f8f200a47edc39ad",
+            "viewerRgbSha256": "c5d7381570b08fb454b47c5f75b400b99893dffa6c164954f8f200a47edc39ad",
+            "nativeRegion": [
+              274,
+              581,
+              450,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              450,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width46",
+      "width": 46,
+      "markerRgb": [
+        0,
+        191,
+        255
+      ],
+      "form": "ProbeWidthDynamic43225",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43225/Ext/Form.xml",
+        "sha256": "156a67a3f9aab4a28a7a9d06ebc517e13a71a9f9d9e66c7ba5b64e976f8141c1"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43225.png",
+            "sha256": "7de9a27fe1a6499d587267ce6a8790cf93b3820bb057941c48f7edafb0c27bf8"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43225.png",
+            "sha256": "4760a7a462ce8661573b3b7cbc99d2d427eb54a8911ab14109c63700f0d12b24"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 12420,
+            "different": 0,
+            "nativeRgbSha256": "d7a281d896da12f9931bbe375beb59049260d0ba24191913416d431b927a8117",
+            "viewerRgbSha256": "d7a281d896da12f9931bbe375beb59049260d0ba24191913416d431b927a8117",
+            "nativeRegion": [
+              274,
+              255,
+              460,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              460,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43225.png",
+            "sha256": "5ad6ab569ebb6e86e7d9d894de3c566e881ab00701274ba5a4682956c63096b2"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43225.png",
+            "sha256": "b30897564b11bf7a9548830046d6af500327da88615c5aca5155411d619f3e96"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 12420,
+            "different": 0,
+            "nativeRgbSha256": "b0930d57fee79f77f94f712ef55cd848ef03eb72f309dfd119bf2729915b8dc9",
+            "viewerRgbSha256": "b0930d57fee79f77f94f712ef55cd848ef03eb72f309dfd119bf2729915b8dc9",
+            "nativeRegion": [
+              274,
+              581,
+              460,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              460,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width47",
+      "width": 47,
+      "markerRgb": [
+        30,
+        144,
+        255
+      ],
+      "form": "ProbeWidthDynamic43226",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43226/Ext/Form.xml",
+        "sha256": "d46523a6de7db840347625e41b29892d89293956bd3c2790bd12760fa4b59aee"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43226.png",
+            "sha256": "f1fef89787383b2ee7d3dffea3b79ec96c28e64076ed09ede775d122be94de8b"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43226.png",
+            "sha256": "a24aa77fbeb43aa3b84443268b08e50ab8ff9cff841ec5cc012fbcc6d74169c3"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 12690,
+            "different": 0,
+            "nativeRgbSha256": "008bb972bb0d0059b90af09bbb9c43d257a32508cbd24470960794ea3b34f775",
+            "viewerRgbSha256": "008bb972bb0d0059b90af09bbb9c43d257a32508cbd24470960794ea3b34f775",
+            "nativeRegion": [
+              274,
+              255,
+              470,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              470,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43226.png",
+            "sha256": "382bf3f0a75c7251c8880de91126abecd378b446e4cb08c56d18c8c60eff9585"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43226.png",
+            "sha256": "3601abc4bf910e2a5068a5af242cc2eb7a7941ca614df71beb75b4d971e1296d"
+          },
+          "geometryMatches": false,
+          "differentGeometry": {
+            "buttons": [
+              [
+                [
+                  13,
+                  71,
+                  66,
+                  26
+                ],
+                [
+                  88,
+                  71,
+                  30,
+                  26
+                ],
+                [
+                  323,
+                  71,
+                  42,
+                  26
+                ],
+                [
+                  374,
+                  71,
+                  109,
+                  26
+                ]
+              ],
+              [
+                [
+                  13,
+                  71,
+                  66,
+                  26
+                ],
+                [
+                  88,
+                  71,
+                  30,
+                  26
+                ],
+                [
+                  324,
+                  71,
+                  42,
+                  26
+                ],
+                [
+                  375,
+                  71,
+                  108,
+                  26
+                ]
+              ]
+            ],
+            "search": [
+              [
+                [
+                  127,
+                  73,
+                  187,
+                  23
+                ]
+              ],
+              [
+                [
+                  127,
+                  73,
+                  188,
+                  23
+                ]
+              ]
+            ]
+          },
+          "rgb": {
+            "compared": 12690,
+            "different": 933,
+            "nativeRgbSha256": "a78d1f124b5f13afc1cb53438ef61c82422976242003fb99a753fb7174c9c3a7",
+            "viewerRgbSha256": "537bf3df8fd0a6947e0268beef0d1cb1f5222650d30e43d79ff5c7f173990734",
+            "nativeRegion": [
+              274,
+              581,
+              470,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              470,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width48",
+      "width": 48,
+      "markerRgb": [
+        178,
+        34,
+        34
+      ],
+      "form": "ProbeWidthDynamic43227",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43227/Ext/Form.xml",
+        "sha256": "93372ba4ae50768aef4c87c4faf46303b5f6cec12ee41c6f8c385391e7ccc183"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43227.png",
+            "sha256": "c86e70cc35ca48ceb0d91ac1f82819c93323e43c5c144283a5f2e220358e8071"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43227.png",
+            "sha256": "a5304c569bf9feaf1014d5c9223a78eae28c6236ec4cb887b1256c3472e4cd28"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 12960,
+            "different": 0,
+            "nativeRgbSha256": "4083508c86b42f1aab3471fa4dd3745dd1dbbb1c5fdc722df9d24f3c6de5abe8",
+            "viewerRgbSha256": "4083508c86b42f1aab3471fa4dd3745dd1dbbb1c5fdc722df9d24f3c6de5abe8",
+            "nativeRegion": [
+              274,
+              255,
+              480,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              480,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43227.png",
+            "sha256": "83a7441c4b27e78cf78767f5f754ac70e61ed51bb37f4b7f79eed23fdb79826a"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43227.png",
+            "sha256": "2e8c1d9cfc0edd8b767ce8e706e34679bf17df5a9df14ac12598132b0b4f8537"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 12960,
+            "different": 0,
+            "nativeRgbSha256": "3326699753099e902d623675a9ed25230c88199c472a39c43a77caa547f819e7",
+            "viewerRgbSha256": "3326699753099e902d623675a9ed25230c88199c472a39c43a77caa547f819e7",
+            "nativeRegion": [
+              274,
+              581,
+              480,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              480,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width50",
+      "width": 50,
+      "markerRgb": [
+        255,
+        250,
+        240
+      ],
+      "form": "ProbeWidthDynamic43228",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43228/Ext/Form.xml",
+        "sha256": "ecc229e0195a23a0def0365005a4228cf197ae32d1932b530d70a2b018032e76"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43228.png",
+            "sha256": "332c71e7645adc8276f10fc4202865365892ecd9876d3164a3cba92507357b5d"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43228.png",
+            "sha256": "befbfcb42b8ff010371170cafdba95f57b284ceecf0600f38ced344dd5f4f005"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 13500,
+            "different": 0,
+            "nativeRgbSha256": "eef9955a3e2186f2d4ba64fd10464f87b8e9eb8f80237b396ffbcbf49a0a0417",
+            "viewerRgbSha256": "eef9955a3e2186f2d4ba64fd10464f87b8e9eb8f80237b396ffbcbf49a0a0417",
+            "nativeRegion": [
+              274,
+              255,
+              500,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              500,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43228.png",
+            "sha256": "1c733f8e3a93441e2b98ad17ba7dbe31577ebda2d32e01f98e8222396d9ef6a7"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43228.png",
+            "sha256": "bab45e7e8a0e86a21ce2669af66cd3ed7a56e791b58be5a3db94e6a7d391d342"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 13500,
+            "different": 0,
+            "nativeRgbSha256": "77fea3697ea47347daff8a46cbee2557160e0af6a448000a9c9fe4778cc30da4",
+            "viewerRgbSha256": "77fea3697ea47347daff8a46cbee2557160e0af6a448000a9c9fe4778cc30da4",
+            "nativeRegion": [
+              274,
+              581,
+              500,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              500,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width54",
+      "width": 54,
+      "markerRgb": [
+        34,
+        139,
+        34
+      ],
+      "form": "ProbeWidthDynamic43229",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43229/Ext/Form.xml",
+        "sha256": "f97b0ea7208737c12222acda8c2fc8ce5a0799cc9b6372ceda967b04d9b64557"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43229.png",
+            "sha256": "e13db579bdac46234326a2e6d10e98880415535b06e96f834310cd37b284358b"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43229.png",
+            "sha256": "6586cd560cbba99fa219995dc5b9ee2bcfbc8510ef3a1344394fb882f4ebc9a6"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 14580,
+            "different": 0,
+            "nativeRgbSha256": "47558bfa5ec813f04b787166b72b4f7c30cee1443bc454c33927ca97406ec82f",
+            "viewerRgbSha256": "47558bfa5ec813f04b787166b72b4f7c30cee1443bc454c33927ca97406ec82f",
+            "nativeRegion": [
+              274,
+              255,
+              540,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              540,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43229.png",
+            "sha256": "181065b0578b6cbeaef4f19893628f1800a37cd53d9c54bd3a1b3aa9cfb41325"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43229.png",
+            "sha256": "bdb116dd2ca43a2af2fbb79c707a93ce0b72d9fdbf3c15ecd42f3c211caa8400"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 14580,
+            "different": 0,
+            "nativeRgbSha256": "980eca12392d7c6151c522fe1b360a5e14763cefea5ccaef6dc19f5727764564",
+            "viewerRgbSha256": "980eca12392d7c6151c522fe1b360a5e14763cefea5ccaef6dc19f5727764564",
+            "nativeRegion": [
+              274,
+              581,
+              540,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              540,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Width62",
+      "width": 62,
+      "markerRgb": [
+        220,
+        220,
+        220
+      ],
+      "form": "ProbeWidthDynamic43230",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43230/Ext/Form.xml",
+        "sha256": "6afee646c89c180110ba8b53914a4f5b504cdd1a34560536ee9c8feb3cb9e588"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43230.png",
+            "sha256": "8f831584c17de353b8160a8ac578584558261144fedd92c4c7c9e8c10acafb30"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43230.png",
+            "sha256": "902f9e8ef27c934abb63772bc08a5c403331be619f6b7c46939fd84ccf1131de"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 16740,
+            "different": 0,
+            "nativeRgbSha256": "acaacafe8107e6e5c8dc83c2380cc62d564e13b9657603abb67ae239e7240e0a",
+            "viewerRgbSha256": "acaacafe8107e6e5c8dc83c2380cc62d564e13b9657603abb67ae239e7240e0a",
+            "nativeRegion": [
+              274,
+              255,
+              620,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              620,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43230.png",
+            "sha256": "d2a431cd1c2c83307a18a8ff5d4ea10fd93e30d5d5ea585572b344030bf7168d"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43230.png",
+            "sha256": "7098443ab0fb518483ccee0e04ac2cab150e9d21f8848fcca81a51bb42ed0ef3"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 16740,
+            "different": 0,
+            "nativeRgbSha256": "4d96c3381be968f6da80ce8ef344b03d4c00f3fa98199e6149150dc13d4c037e",
+            "viewerRgbSha256": "4d96c3381be968f6da80ce8ef344b03d4c00f3fa98199e6149150dc13d4c037e",
+            "nativeRegion": [
+              274,
+              581,
+              620,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              620,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "NoControl30",
+      "width": 30,
+      "control": "None",
+      "markerRgb": [
+        248,
+        248,
+        255
+      ],
+      "form": "ProbeWidthDynamic43231",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43231/Ext/Form.xml",
+        "sha256": "df0bf9287313787b9536dbe7b6659eaef65b46e61be45c434f7e3fc8ed08b3ce"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43231.png",
+            "sha256": "3115edf30f0917463d4419d688b1013368d15305146bb465269de89c03278e26"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43231.png",
+            "sha256": "da92e7014ea66185a4bafea8a5bbc4258181697918096c2e8a65df4645f26433"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43231.png",
+            "sha256": "c494071bcc31aefc6d846673246ecdb1a592afed0d8f869099c8b642222e0d09"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43231.png",
+            "sha256": "affa8e9894923c8b7eaafab00e1b1bac9cd573b04fa563ce1016af2dc0687f32"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "NoControl37",
+      "width": 37,
+      "control": "None",
+      "markerRgb": [
+        255,
+        215,
+        0
+      ],
+      "form": "ProbeWidthDynamic43232",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43232/Ext/Form.xml",
+        "sha256": "28339bf958679173bccf899d21607929052de41f87ef12530a3de2d61695d283"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43232.png",
+            "sha256": "adcc96c410573bd973a8d142ead33ce42c2143acd1e1bed6cf106707f311fca9"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43232.png",
+            "sha256": "d97b5fee51c30f1b5e3e86fcc089ae5813353788740e60ee372d50b7e5f7af8d"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9990,
+            "different": 0,
+            "nativeRgbSha256": "02f2befcff7a20a803bd4773982873d3ca97985234e42b9b36f629b2efa7cdd7",
+            "viewerRgbSha256": "02f2befcff7a20a803bd4773982873d3ca97985234e42b9b36f629b2efa7cdd7",
+            "nativeRegion": [
+              274,
+              255,
+              370,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              370,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43232.png",
+            "sha256": "36ef4e4a4248db9a3d5d56c3e10ce32e2cf68a761d703d54d2f5007c2582fa9e"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43232.png",
+            "sha256": "a24c5f283ec8d13099c956b3ef69e75db87894d55ee79116394ec74f7eff3974"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9990,
+            "different": 0,
+            "nativeRgbSha256": "d167000632b9c0e6cfbbc3f60bbd94e2c1a90f159e0abf2d88016835e956381c",
+            "viewerRgbSha256": "d167000632b9c0e6cfbbc3f60bbd94e2c1a90f159e0abf2d88016835e956381c",
+            "nativeRegion": [
+              274,
+              581,
+              370,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              370,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "NoControl40",
+      "width": 40,
+      "control": "None",
+      "markerRgb": [
+        218,
+        165,
+        32
+      ],
+      "form": "ProbeWidthDynamic43233",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43233/Ext/Form.xml",
+        "sha256": "936b750e5a3c32125765850e695518a41c700ebcdb6595d28141aa5c24c49c0c"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43233.png",
+            "sha256": "0fae5f17c37f64687a6415a7cca1b37be6f7bd3fea91e45fc7f59b87b2049e63"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43233.png",
+            "sha256": "841fbb343823052c913ad5ae5f1aafcbd7834432d479d571cb57d85c07f3608b"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 10800,
+            "different": 0,
+            "nativeRgbSha256": "8d4373629c1aea193883356c5e0fbd1cf262c1bac1b271ea0c747f4b30f87e2f",
+            "viewerRgbSha256": "8d4373629c1aea193883356c5e0fbd1cf262c1bac1b271ea0c747f4b30f87e2f",
+            "nativeRegion": [
+              274,
+              255,
+              400,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              400,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43233.png",
+            "sha256": "1120391e32ae9208987fa065b054cd1387d484ec0e61ba68eb13a8f0effc8d38"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43233.png",
+            "sha256": "e27bb7fbe153e2fa487e2445187868cb127e3f642a001d3d54ec50cd89bd4a2b"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 10800,
+            "different": 0,
+            "nativeRgbSha256": "98b96a70964dfd1b049e0e53dff8d5091625fc18d08afe17e5d1ca4c7f712bfa",
+            "viewerRgbSha256": "98b96a70964dfd1b049e0e53dff8d5091625fc18d08afe17e5d1ca4c7f712bfa",
+            "nativeRegion": [
+              274,
+              581,
+              400,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              400,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "NoSearch24",
+      "width": 24,
+      "search": "None",
+      "markerRgb": [
+        173,
+        255,
+        47
+      ],
+      "form": "ProbeWidthDynamic43234",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43234/Ext/Form.xml",
+        "sha256": "7ccfd395eeeecff832069b8c5c4953b91902d7dc0426afa73aae08bfe398e69b"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43234.png",
+            "sha256": "ad044a1ca1063d2670f5a4fec044c56cc1ca7886db6d267755ed6ab3aae277ac"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43234.png",
+            "sha256": "116e61a6f0611835394ead80aebca50dbd1b3d93552d2f92dec1471358399c96"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "6ed475d020914b4fdcfbfc69f234426782a9d41c955cf3699e45ce71b05a615c",
+            "viewerRgbSha256": "6ed475d020914b4fdcfbfc69f234426782a9d41c955cf3699e45ce71b05a615c",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43234.png",
+            "sha256": "c2062bd94a6b3c7a29d242af5b8261416610168c6f10b3eae43b40cf91346eb5"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43234.png",
+            "sha256": "dda940bd4d704b01d431f3fa2f847c06d9faa89223543fa0003efd188324632d"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "9fb4c09b75d75573417eee288a1d3bffa0adc0e718964ddf3c211ef39125c84f",
+            "viewerRgbSha256": "9fb4c09b75d75573417eee288a1d3bffa0adc0e718964ddf3c211ef39125c84f",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "NoSearch34",
+      "width": 34,
+      "search": "None",
+      "markerRgb": [
+        240,
+        255,
+        240
+      ],
+      "form": "ProbeWidthDynamic43235",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43235/Ext/Form.xml",
+        "sha256": "70a15962524c244973171f27b2847c4100d4cc08561e93a811ab8d422ad7c4eb"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43235.png",
+            "sha256": "f7f87046c47468a1887fd05f44586a02452dfe52ff3824764a308c39e365d4ac"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43235.png",
+            "sha256": "470b1d93616aa472442e8dd899861dfbd10b9d0da6c48670da1633e28e87ba21"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9180,
+            "different": 0,
+            "nativeRgbSha256": "6178ad39a109ec4068e00d3d5103af47f79eb3987ecb01f23b706eb25f4f4448",
+            "viewerRgbSha256": "6178ad39a109ec4068e00d3d5103af47f79eb3987ecb01f23b706eb25f4f4448",
+            "nativeRegion": [
+              274,
+              255,
+              340,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              340,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43235.png",
+            "sha256": "ee80cf7bcbe87a30f7f7bed79b861420c89c324fb75e1b1ae72cd2eb2af87a29"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43235.png",
+            "sha256": "656ef4066697c2c22cd8358f237aa8e01623480b4e61ca32a220cdfb77579c5c"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 9180,
+            "different": 0,
+            "nativeRgbSha256": "5cf5dfb461317e4d9f1f07e689739243aa3b7221a5b5457b03a474d1ddab3119",
+            "viewerRgbSha256": "5cf5dfb461317e4d9f1f07e689739243aa3b7221a5b5457b03a474d1ddab3119",
+            "nativeRegion": [
+              274,
+              581,
+              340,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              340,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "TopSearch30",
+      "width": 30,
+      "search": "Top",
+      "markerRgb": [
+        255,
+        105,
+        180
+      ],
+      "form": "ProbeWidthDynamic43236",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43236/Ext/Form.xml",
+        "sha256": "3ed433585ffbc93dca63265b3964f355afeefcd8f0a3787525102cba2c0a8152"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43236.png",
+            "sha256": "fdcb4de35b3658c875a2ccd62fd694cd2a7180e48b11972fbe1b667187ee2f85"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43236.png",
+            "sha256": "dd47bf517b44fa008bb467869b6317591010e846f6edad1b88e88bb834a8938f"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b5d8d23bb0cfec83cd93d0c9f19c06a75e2b969768618eb92b72f721de8cbe50",
+            "viewerRgbSha256": "b5d8d23bb0cfec83cd93d0c9f19c06a75e2b969768618eb92b72f721de8cbe50",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43236.png",
+            "sha256": "8bcfd3bb57602d99d6bd59fd09aaabb2906eed7b6df82cdb1bf563bd18a02794"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43236.png",
+            "sha256": "83a15f010b8f56291d082e4666c46761d1289f48b93a8eb817ce7a97971bb26e"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2661475be06f6b5ed7e4a2461043232ff48b0c4caa2cc91dffe08b5e5848808c",
+            "viewerRgbSha256": "2661475be06f6b5ed7e4a2461043232ff48b0c4caa2cc91dffe08b5e5848808c",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "NoFilter24",
+      "width": 24,
+      "filter": "None",
+      "markerRgb": [
+        205,
+        92,
+        92
+      ],
+      "form": "ProbeWidthDynamic43237",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43237/Ext/Form.xml",
+        "sha256": "833558477caf11560af2c5c9a3ffca4eaa262d81c2ef050e28faebc67867bd0d"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43237.png",
+            "sha256": "6cb02727b2b77b1e7d1698ba68e0eadb141e1708d511975c9b3e69c747349060"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43237.png",
+            "sha256": "9c4fc457dee7a3652e2c6cee52bbe0fa9381545ea7a663c70a22d43a88efad6d"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 6480,
+            "different": 0,
+            "nativeRgbSha256": "3a872f9c18a148eac298194333f1980156b7c28bf6d13a8e6fbf0fe4c09318ec",
+            "viewerRgbSha256": "3a872f9c18a148eac298194333f1980156b7c28bf6d13a8e6fbf0fe4c09318ec",
+            "nativeRegion": [
+              274,
+              255,
+              240,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              240,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43237.png",
+            "sha256": "7512a96f60a35296ddbe00ce530569bb7be08d9a01b05165b84e75d7bdebf3d1"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43237.png",
+            "sha256": "437408dc964810f501bb8c7a5d0417f2bc5d96467ccd250e6dee828028f3c255"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 6480,
+            "different": 0,
+            "nativeRgbSha256": "ea59b33b9ed15618a9a920e31b5bc6b5816c8213d1b1e49cb32525cec57f4836",
+            "viewerRgbSha256": "ea59b33b9ed15618a9a920e31b5bc6b5816c8213d1b1e49cb32525cec57f4836",
+            "nativeRegion": [
+              274,
+              581,
+              240,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              240,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "ExcludeCopy30",
+      "width": 30,
+      "exclude": [
+        "Copy"
+      ],
+      "markerRgb": [
+        255,
+        255,
+        240
+      ],
+      "form": "ProbeWidthDynamic43238",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43238/Ext/Form.xml",
+        "sha256": "bda10d5ee643f408214c2ac624c70aab68e968005ff268fe07b5698e8b1e9e43"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43238.png",
+            "sha256": "e5bf18bf9638293dd482caeed90309b664372aa529c3b886b51cc1677f440130"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43238.png",
+            "sha256": "08e232679e0a2c37b88cc4c38a10b03ca62d70420210852b048dff5207b6c511"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43238.png",
+            "sha256": "2085bbc07f9061ad8c3283343f3dd2dde2e5f63580efcf6307512f95fa4ccbe9"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43238.png",
+            "sha256": "a30050a230e303eebe339a84cfafcfda6531016e0a9252dd64a582bac87bb130"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "ExcludeCreate30",
+      "width": 30,
+      "exclude": [
+        "Create"
+      ],
+      "markerRgb": [
+        240,
+        230,
+        140
+      ],
+      "form": "ProbeWidthDynamic43239",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43239/Ext/Form.xml",
+        "sha256": "110af46724ceb764f4642a17014e31e9dc9116446cb05fff1745a84e75fb2e90"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43239.png",
+            "sha256": "94c490e36c749ef328ccf2a3fd600a5ff791381191364c49d537ea0520f20006"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43239.png",
+            "sha256": "919c18f95c2cd77262de60e718793d470d703b3c001198c89c7fca1d870fa037"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "d081755a1dbdb51c7e3056d8c5f0b6cf785b2eed23fdfe81b4d8122eef656556",
+            "viewerRgbSha256": "d081755a1dbdb51c7e3056d8c5f0b6cf785b2eed23fdfe81b4d8122eef656556",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43239.png",
+            "sha256": "6aab9a537fb5b385e5292959834e43aa72ad711ca433daac3fad67ade9c92fd4"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43239.png",
+            "sha256": "cc2173d936c5235a63983d2eb0d0b303b64900c9e8a931753c7411195a775580"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "ReadOnly30",
+      "width": 30,
+      "readOnly": true,
+      "markerRgb": [
+        230,
+        230,
+        250
+      ],
+      "form": "ProbeWidthDynamic43240",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43240/Ext/Form.xml",
+        "sha256": "baf835cc72671caa1f6587a504ac77a7789ce3f978867e363268ea85080eb8f7"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43240.png",
+            "sha256": "9a5d632e19bbb32e3bd7292b05c4dae3644e15a22cf48b2770dc0b92d662debd"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43240.png",
+            "sha256": "5fa6c4361914f5bbb948fcd9376973901d5e10cd46fc62b5161f625997132811"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43240.png",
+            "sha256": "a8d7102861bf66568f31e70272c436b62376861c316948bbaf411e0707c924b8"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43240.png",
+            "sha256": "78e2be8f675e7d99215108ff6aebbab19186eecc91f18224f9b627237eded31e"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Explicit30",
+      "width": 30,
+      "explicit": true,
+      "markerRgb": [
+        255,
+        240,
+        245
+      ],
+      "form": "ProbeWidthDynamic43241",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43241/Ext/Form.xml",
+        "sha256": "b63fca0829881fb7fe6163759e1bede04d747df37f4c28c16c2180d9eb209161"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43241.png",
+            "sha256": "64f3c19c4fb37c8a2bcc36ace3f37e27ce443c12c4eead95be47ccccca365156"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43241.png",
+            "sha256": "8ec1d53545e0158e5980d1884c7afd0398de886aac9621102d1954baaf8d03a1"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43241.png",
+            "sha256": "5428622809831041ad5b413499c65ae5dfd2b53f4a9dca0e1ac65105731abe0f"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43241.png",
+            "sha256": "555deb5463ff2d3f8fe2e19a70707350c0374d9c501c2209abc1bb484575a116"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Stretch30",
+      "width": 30,
+      "stretch": true,
+      "markerRgb": [
+        124,
+        252,
+        0
+      ],
+      "form": "ProbeWidthDynamic43242",
+      "source": {
+        "path": "form-native-dynamic-toolbar-00JlbH5W/src/CommonForms/ProbeWidthDynamic43242/Ext/Form.xml",
+        "sha256": "cfa1c7d882cbd08c442e03b7d1e0099c397ec6ca976b7605477a0ab12490ea1f"
+      },
+      "locales": {
+        "ru": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-ru/ProbeWidthDynamic43242.png",
+            "sha256": "015c26be71f9afdc8b3231da8a5001e7a9b023413192cefdcd6e7cc99d8efe25"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/ru/ProbeWidthDynamic43242.png",
+            "sha256": "795c8a78ec93a68247eaa7243b9aab7d652bf6b83913ee201b70835cc1c59740"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "viewerRgbSha256": "b816060c27b1834062b24245e00193dbc7d6d665eed575882417117c72be0a85",
+            "nativeRegion": [
+              274,
+              255,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              325,
+              300,
+              27
+            ]
+          }
+        },
+        "en": {
+          "nativeCapture": {
+            "path": "form-native-dynamic-toolbar-00JlbH5W/native-en/ProbeWidthDynamic43242.png",
+            "sha256": "f4f50f78d77d6592a7017e2ad5643387fc0e948af314a2fe0608a33f6428b034"
+          },
+          "viewerCapture": {
+            "path": "form-dynamic-toolbar-viewer-La7FApEQ/en/ProbeWidthDynamic43242.png",
+            "sha256": "018fd6180c4772b654e1f0e1b47d8b13ac0b2de1b2b6479ebb632fc9f374591f"
+          },
+          "geometryMatches": true,
+          "rgb": {
+            "compared": 8100,
+            "different": 0,
+            "nativeRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "viewerRgbSha256": "2afb88a6965b7f448d7fa23fd30a1a6be47624a03489a926d40912885eb08400",
+            "nativeRegion": [
+              274,
+              581,
+              300,
+              27
+            ],
+            "viewerRegion": [
+              622,
+              651,
+              300,
+              27
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

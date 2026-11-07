@@ -1,0 +1,2937 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestones": [
+    "T157",
+    "T159"
+  ],
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "zoom": 100,
+  "artifactBase": "../eska-playground",
+  "nativeLocale": "ru",
+  "installedLocales": [
+    "ru",
+    "en"
+  ],
+  "coordinateSpace": "Координаты прямоугольников относительно рамки формы при масштабе 100%. Для растровых областей записаны координаты в снимке окна.",
+  "eskaSourceCommit": "ef26729db92e024b71b358c7ac5d653881b261fc",
+  "explorerCommits": {
+    "size": "716f3bad51cdade9a26bb7ef71f74a76887e8902",
+    "pagination": "24ac0053b59516dd2b9ab9d9d6930749aa6af281",
+    "emptyGroup": "17b881c493c74eae80c9cd45b78428c21347fecb"
+  },
+  "bslExecuted": false,
+  "sourceWrites": false,
+  "wholeFormVisualParity": false,
+  "windowsCalibrated": false,
+  "checks": {
+    "sizeAndTimeBatch": {
+      "path": "form-batch-vUcE0k/batch.json",
+      "sha256": "8c27481e02fa4c859e0a2bc49b2cbd616991a005511a2efae2edf48673fe3f0c",
+      "passedRuns": 8,
+      "caseEntries": 275,
+      "runtimeManifestSha256": "5a153c1d9fb079a14836b9861b28817a304748e4546dc7b3d4126b4a41cd50c1",
+      "vsixSha256": "cb90372b9a3621f892a28cf6803fecae8a4d2322155ab921602c74997bdd1582"
+    },
+    "paginationBatch": {
+      "path": "form-batch-W7RhRc/batch.json",
+      "sha256": "0bacd4df2d54c7dab6fd12fb666967d3262d41254afe4ab6b41b64b409a1001c",
+      "passedRuns": 4,
+      "caseEntries": 129,
+      "runtimeManifestSha256": "a5d1c3666e60f1b9bdd74b3007892985a0b54cc2ff16d4ec40d640241a7cb770",
+      "vsixSha256": "337d42e49bac8ddbbcfaebdcfeda3b55168aa82f352cee9e46da78791c8bf42f"
+    },
+    "finalBatch": {
+      "path": "form-batch-Dsi4Zb/batch.json",
+      "sha256": "d3e3d418ff06c809ca9c481df6df2847fbde82ec39b706a837a2c8ddfb2603e9",
+      "passedRuns": 10,
+      "caseEntries": 247,
+      "runtimeManifestSha256": "411dc530b08e1e4ab6c96abae6c1387435ec9acacaae05afe02ecf25059b32c9",
+      "vsixSha256": "544505cec37a48bc5b1b2f05ed0645d36fdd7446d5cc412c93448588e0c113a9"
+    },
+    "node": {
+      "pass": 655,
+      "fail": 0,
+      "skipped": 9
+    }
+  },
+  "geometry": {
+    "comparison": "Рамка, сетка, видимые контрольные реквизиты и наличие вертикальной прокрутки внутри формы.",
+    "states": 34,
+    "matchingStates": 33,
+    "initialObservations": {
+      "path": "form-dynamic-list-viewer-3aBBOiDp/geometry.json",
+      "sha256": "411a07063e90c42248f0213812d255333396742c4e35f6f059b0652c43d0845c"
+    },
+    "observations": {
+      "path": "form-dynamic-list-viewer-kBdvaALI/geometry.json",
+      "sha256": "bfcfc77cd61598409dac24687650a586a014205931bb777bfd4639d66bb493c2"
+    },
+    "cases": [
+      {
+        "kind": "Plain",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43101/Ext/Form.xml",
+          "sha256": "9b492f838afb138d83a33497c303b5df28ab356a5b55aa68838e1f9452eb73b0"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43101-compact.png",
+          "sha256": "bcfeeca72f7b74ac8da4e961825050b95e8deaf4be449dc46eff414aa6a99409"
+        },
+        "native": {
+          "frame": [
+            464,
+            589
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            452
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            589
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            452
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "Width24",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43102/Ext/Form.xml",
+          "sha256": "84d19e65417ff6ae293e2e3e630bbff3f8958a25db31ceb46359463aaac3e3c5"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43102-compact.png",
+          "sha256": "079408eeee7c68c1cbf3aeabd2355e27d17ea9c6791072b89a7d16fcf929d9fb"
+        },
+        "native": {
+          "frame": [
+            285,
+            589
+          ],
+          "table": [
+            13,
+            71,
+            240,
+            452
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            285,
+            589
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            240,
+            452
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "Width60",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43103/Ext/Form.xml",
+          "sha256": "2ef7e2a53720b42346d029292f53d3a1ccf8e6bfa158da6b2c41c312609947c2"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43103-compact.png",
+          "sha256": "5e2927bbe39907d62f71fae0e5f0189d419f42f4db5aa67c73e9968f03ac3923"
+        },
+        "native": {
+          "frame": [
+            634,
+            589
+          ],
+          "table": [
+            13,
+            71,
+            600,
+            452
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            634,
+            589
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            600,
+            452
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "AutoWidth",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43104/Ext/Form.xml",
+          "sha256": "16fdabe26daa720e6dc4c9556599e4c4ea52f4cd472cad2a32c319df2c5228bd"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43104-compact.png",
+          "sha256": "95ea551d5f6ac1ba40789f59c7ae59f87ca47074dc4d622d88dc5613a8cfb574"
+        },
+        "native": {
+          "frame": [
+            434,
+            589
+          ],
+          "table": [
+            13,
+            71,
+            400,
+            452
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            434,
+            589
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            400,
+            452
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "StretchedWidth",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43105/Ext/Form.xml",
+          "sha256": "304ba5546ebe1d48c0ac13e9618923d7db6831601a2b44632a093b9a5df78343"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43105-compact.png",
+          "sha256": "24dd7392fcee7947cd7981a9fd239ad09f70965377bce328ab3baf33ddc7144e"
+        },
+        "native": {
+          "frame": [
+            654,
+            589
+          ],
+          "table": [
+            13,
+            71,
+            620,
+            452
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            654,
+            589
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            620,
+            452
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "HeightOne",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43106/Ext/Form.xml",
+          "sha256": "a3de589ee355b872174965ee48115c35b0e35ea9f9405176fc76155212d561fd"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43106-compact.png",
+          "sha256": "6653a086dca342ad19ce1866a3ffcdca5b8918d679fd0a1766b93c322ada8506"
+        },
+        "native": {
+          "frame": [
+            464,
+            174
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            37
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            138,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            174
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            138,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            37
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "HeightTwo",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43107/Ext/Form.xml",
+          "sha256": "8efbeaf23f2577b2adb7b4068288a936f2bbef0a3f022007de1daed369db4ffd"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43107-compact.png",
+          "sha256": "4e38e1ade4a420e1d4115f19df921cf4f399c462fb8b61a8e3ee51eaf682e294"
+        },
+        "native": {
+          "frame": [
+            464,
+            197
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            60
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            161,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            197
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            161,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            60
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "HeightFour",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43108/Ext/Form.xml",
+          "sha256": "bc5f9edbc4d3c9a3998dbfbda259a07835959f07534bca19c4772d0eee546d0a"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43108-compact.png",
+          "sha256": "d21dac910e6548bd1c9f7f83724b87ef562424e5de6ffd14eb82d90a62e34ef5"
+        },
+        "native": {
+          "frame": [
+            464,
+            253
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            116
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            217,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            253
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            217,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            116
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "HeightEight",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43109/Ext/Form.xml",
+          "sha256": "19a801923ad8b301dc22d5400dc6149d629b20e253dc36ee6b009d5e76e9130c"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43109-compact.png",
+          "sha256": "a5649bd15bbf2b0c1ad78daa19c2a0ad3c4f33bf02fdad035d61401bee2b46a7"
+        },
+        "native": {
+          "frame": [
+            464,
+            365
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            228
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            329,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            365
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            329,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            228
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "RowsOne",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43110/Ext/Form.xml",
+          "sha256": "8064e9dc850c301d749e02ba52fba1d3c78e9e6bdce76fe37bf85ed02e0eb7da"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43110-compact.png",
+          "sha256": "1e3f5d179de2cc33b87232ab698375d6bc6b46ebf6df78b09e3394f5ae582fff"
+        },
+        "native": {
+          "frame": [
+            464,
+            197
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            60
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            161,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            197
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            161,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            60
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "RowsTwo",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43111/Ext/Form.xml",
+          "sha256": "bf7c90aff4fe00035f654b565df4923f260ef1fd078c53b9813bb21b6d17c43f"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43111-compact.png",
+          "sha256": "c7b7b4325bca113b08ccc2b5d8ae4650c573734b3528099d1143f2351de98516"
+        },
+        "native": {
+          "frame": [
+            464,
+            225
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            88
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            189,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            225
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            189,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            88
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "RowsFour",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43112/Ext/Form.xml",
+          "sha256": "9db929a7be854f5a2ae170f52f7f9dfa36843a79680caedc34c858b029286897"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43112-compact.png",
+          "sha256": "ff5d53afbf8a5c87971df62bb64b13d2277797f98400fbd5bbcca34a74ae9c1e"
+        },
+        "native": {
+          "frame": [
+            464,
+            281
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            144
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            245,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            281
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            245,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            144
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "HeightAndRows",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43113/Ext/Form.xml",
+          "sha256": "07e14afefe39e18f7cc63e935f57e5acb20b64e92bae7bdf2549685b569a8f17"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43113-compact.png",
+          "sha256": "08a4cee6154a6453e5b4bce9bc05d090dd078b0f31c5c2eb5fa6848f6ee3929f"
+        },
+        "native": {
+          "frame": [
+            464,
+            225
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            88
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            189,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            225
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            189,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            88
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "HeightNoHeader",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43114/Ext/Form.xml",
+          "sha256": "b3d93e0be18ea74c980e717cbe0071190352911b33b3b159080deb1b44e3f9cd"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43114-compact.png",
+          "sha256": "20a917592230028b2f07167d1731ed587a7861a66c0fe88408fd364a018baffb"
+        },
+        "native": {
+          "frame": [
+            464,
+            251
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            114
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            215,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            251
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            215,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            114
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "HeightFooter",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43115/Ext/Form.xml",
+          "sha256": "8a48cde6058e385626213b60c06c65fdf4bf6d8fbb30a2161a456e1e256a43bf"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43115-compact.png",
+          "sha256": "582cdaeefb97afd011b1af20aa9933355c1e93a262ecde318ac756b5cbb957bd"
+        },
+        "native": {
+          "frame": [
+            464,
+            255
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            255
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupMin",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43116/Ext/Form.xml",
+          "sha256": "6f2104fd84ee8742ad53d980cc75fcf8b9188debf347db00f2b78d1244d881c1"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43116-compact.png",
+          "sha256": "561fee1ba0bb600eb59bdd4fdcc9ba7b0344ef43c2d92815a0ce3c3ba745ba10"
+        },
+        "native": {
+          "frame": [
+            464,
+            255
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            255
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupFour",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43117/Ext/Form.xml",
+          "sha256": "e53abdf412b2a6d7748abca7fd977c3a15de88b1f324ef1f1787a0c6e51f8bbc"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43117-compact.png",
+          "sha256": "79bd31be856132f21a034e8a23ca8bd70a50427633aa9f4f644d0185e7335d97"
+        },
+        "native": {
+          "frame": [
+            464,
+            255
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            255
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupEight",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43118/Ext/Form.xml",
+          "sha256": "a3537d05117e4ac747d221151279a86140bcd722bdebb1988759a5a5c00ac3e0"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43118-compact.png",
+          "sha256": "e5a901a18fff7bfbc28024844df4615fdcafe0990167b80fb3310d52c55e9601"
+        },
+        "native": {
+          "frame": [
+            464,
+            255
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            255
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupTwelve",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43119/Ext/Form.xml",
+          "sha256": "fb776d320a2e23dfdbbae095ff153e332972e57a448e12da29b63db27c25a148"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43119-compact.png",
+          "sha256": "91c8fcea6379b9177037425c9f2ae4f6d8c4eb08b871cdf6cc760735868473e1"
+        },
+        "native": {
+          "frame": [
+            464,
+            308
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            171
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            272,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            308
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            272,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            171
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupTitled",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43120/Ext/Form.xml",
+          "sha256": "997036214e80e408008b01f04173245fd7e75ad04a3fd4a05c5e47de4e471656"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43120-compact.png",
+          "sha256": "5fc14a081d65f9e3600aa073570b4725eec6d242af022c66181c53b3b9dcb511"
+        },
+        "native": {
+          "frame": [
+            464,
+            278
+          ],
+          "table": [
+            13,
+            94,
+            430,
+            118
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            242,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            278
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            242,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            94,
+            430,
+            118
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupHeightFour",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43121/Ext/Form.xml",
+          "sha256": "9071e51f80a036adec947fbc78e06439a56970904b26d95db3a47cabbec9c31b"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43121-compact.png",
+          "sha256": "e4dfde79cc67a1e3aeebba86d26021a55bad1d08607609918050788687c7c47c"
+        },
+        "native": {
+          "frame": [
+            464,
+            226
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            89
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            190,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            226
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            190,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            89
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupRowsTwo",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43122/Ext/Form.xml",
+          "sha256": "2e878342b1e921150863b2d7381c010c06f7a6b14ae725b4471161ed28ed011b"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43122-compact.png",
+          "sha256": "83327cfb700ece37e9ce11985b33b6ad3f8ee77775e615c960f5b85c98860ef6"
+        },
+        "native": {
+          "frame": [
+            464,
+            197
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            60
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            161,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            197
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            161,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            60
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupRowsOne",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43123/Ext/Form.xml",
+          "sha256": "6a33797251d0948a743a07818b429ff3662f01a3baabc193fe5ed33eb4bd4621"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43123-compact.png",
+          "sha256": "2b557befa5080e90984d1e19c2a3e13bdcfec9b5c32f62bbb33ae638792b4bc4"
+        },
+        "native": {
+          "frame": [
+            464,
+            168
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            31
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            132,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            168
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            132,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            31
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupNoHeader",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43124/Ext/Form.xml",
+          "sha256": "d5d40257b3d55cdc6c71377945b2d1280b43466c18fa6ad800d6b400eec8fae4"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43124-compact.png",
+          "sha256": "b0d61a40b185f98e1c0d9db48a35ae683e5972565280cd85ec133580a03014a8"
+        },
+        "native": {
+          "frame": [
+            464,
+            225
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            88
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            189,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            225
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            189,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            88
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupFooter",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43125/Ext/Form.xml",
+          "sha256": "d76593920abc754a7ccaf749e17fd1352f5b1dcf420a096ed3db6110d813b51e"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43125-compact.png",
+          "sha256": "67c01918395473af1f9b9005a7866c5af06cdb5ab6624bbebc64080774fafe44"
+        },
+        "native": {
+          "frame": [
+            464,
+            284
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            147
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            248,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            284
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            248,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            147
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "GroupFixed",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43126/Ext/Form.xml",
+          "sha256": "562a28886a9f03ea57a8e5b435173f976e9fde28c037ca2832e6fd0fb8acce74"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43126-compact.png",
+          "sha256": "b0acd4ea18f92b624db5bfea983cb283bd11f627c8d546dcb211eec815b0d910"
+        },
+        "native": {
+          "frame": [
+            464,
+            589
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            452
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            589
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            452
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "Overflow30",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43127/Ext/Form.xml",
+          "sha256": "a71e607c4c995848d137eba056f54eade7ee7497cb17a9737674a50171098eb5"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43127-compact.png",
+          "sha256": "c693f73d95e9c567ff7e758e7657db17eeaf039ff60543bf1c8f692407d43320"
+        },
+        "native": {
+          "frame": [
+            464,
+            769
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            143
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            733,
+            251,
+            23
+          ],
+          "marker": [
+            13,
+            244,
+            251,
+            23
+          ],
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            464,
+            769
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            733,
+            251,
+            23
+          ],
+          "marker": [
+            13,
+            244,
+            251,
+            23
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            143
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "Overflow36",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43128/Ext/Form.xml",
+          "sha256": "d2e45429799e56136505b8786d6e27ab344577207fbe839c4499d3da60ba8d65"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43128-compact.png",
+          "sha256": "f7e48c340d6830eb408f73f5a71691ae796b741b905b5746f17b274be973da8f"
+        },
+        "native": {
+          "frame": [
+            464,
+            769
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": null,
+          "marker": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "scrollThumb": true
+        },
+        "viewer": {
+          "frame": [
+            464,
+            769
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            804,
+            251,
+            23
+          ],
+          "marker": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "scrollThumb": true
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "Overflow44",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43129/Ext/Form.xml",
+          "sha256": "d629f66978f820b86e3f6169c3b200738a4fc9f217fc8f5cbf7db55de89d0790"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43129-compact.png",
+          "sha256": "63f9f4abb18824111e1a7bc29c94632443056c2c8ad710290e3f3fa371d67088"
+        },
+        "native": {
+          "frame": [
+            464,
+            769
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": null,
+          "marker": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "scrollThumb": true
+        },
+        "viewer": {
+          "frame": [
+            464,
+            769
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            932,
+            251,
+            23
+          ],
+          "marker": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "scrollThumb": true
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "OverflowFixed",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43130/Ext/Form.xml",
+          "sha256": "ea6be35f7850f1bf422d078bc07b9542a395e697bc7b0374f9118426ce1d45b4"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43130-compact.png",
+          "sha256": "e899d7d68a73d2bd040ebaaa3eb1d7ad86c0731857ffc7c2e2f12113c9e16816"
+        },
+        "native": {
+          "frame": [
+            464,
+            769
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            452
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": null,
+          "marker": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "scrollThumb": true
+        },
+        "viewer": {
+          "frame": [
+            464,
+            769
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            1138,
+            251,
+            23
+          ],
+          "marker": [
+            13,
+            553,
+            251,
+            23
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            452
+          ],
+          "scrollThumb": true
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "AuthoredForm",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43131/Ext/Form.xml",
+          "sha256": "0fa0d1d88ed063329accbc6f5b37dc8faa36dab03d08a522f2a4124ce6dce5aa"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43131-compact.png",
+          "sha256": "3fd013db864de30ab215898b0c62d9860e14fa4ff9920610217b5906c218886e"
+        },
+        "native": {
+          "frame": [
+            464,
+            212
+          ],
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": null,
+          "marker": null,
+          "scrollThumb": true
+        },
+        "viewer": {
+          "frame": [
+            464,
+            212
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            219,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            71,
+            430,
+            118
+          ],
+          "scrollThumb": true
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "ToolbarDefault",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43132/Ext/Form.xml",
+          "sha256": "a1ab1aef950e9da99c42b984168ecb5945420cd940796ef3fb739716a410f7ee"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43132-compact.png",
+          "sha256": "11dd0f646292dd9d88f0273bdf94da6d780968198684072db8320823914df640"
+        },
+        "native": {
+          "frame": [
+            452,
+            654
+          ],
+          "table": [
+            13,
+            136,
+            400,
+            452
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            618,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            452,
+            654
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            618,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            136,
+            400,
+            452
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "ToolbarHeight",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43133/Ext/Form.xml",
+          "sha256": "e75f369d942dacf0f471ad85de8f19435ccda9333965ddb288e61dca3070b8ac"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43133-compact.png",
+          "sha256": "2b4e432c57cc6a473ff8167c3bf51c9180cda5869c8683d7de7ef1ecff381fc8"
+        },
+        "native": {
+          "frame": [
+            452,
+            318
+          ],
+          "table": [
+            13,
+            136,
+            400,
+            116
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            282,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            452,
+            318
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            282,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            136,
+            400,
+            116
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": true
+      },
+      {
+        "kind": "ToolbarNarrow",
+        "source": {
+          "path": "form-native-dynamic-list-JqavXxqt/src/CommonForms/ProbeWidthDynamic43134/Ext/Form.xml",
+          "sha256": "b6db4b546689f1d335de52d88d3a90e1a2cecbd4a15120f61d7ad78c7c7590ac"
+        },
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43134-compact.png",
+          "sha256": "4865407dab7560009ec5207fc6fe54eed9fce402f28c7246defbe0edce31d868"
+        },
+        "native": {
+          "frame": [
+            334,
+            318
+          ],
+          "table": [
+            13,
+            136,
+            300,
+            116
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            282,
+            251,
+            23
+          ],
+          "marker": null,
+          "scrollThumb": false
+        },
+        "viewer": {
+          "frame": [
+            334,
+            318
+          ],
+          "before": [
+            13,
+            39,
+            251,
+            23
+          ],
+          "after": [
+            13,
+            267,
+            251,
+            23
+          ],
+          "marker": null,
+          "table": [
+            13,
+            136,
+            300,
+            101
+          ],
+          "scrollThumb": false
+        },
+        "visibleGeometryMatches": false
+      }
+    ]
+  },
+  "pagination": {
+    "comparison": "RGB сетки на стыке и полной 21-пиксельной панели навигации. Области совмещены по нижнему краю сетки.",
+    "regions": [
+      {
+        "kind": "Width24",
+        "pixels": 5280,
+        "differing": 0,
+        "nativeRegion": [
+          274,
+          711,
+          240,
+          22
+        ],
+        "viewerRegion": [
+          41,
+          634,
+          240,
+          22
+        ],
+        "nativeRgbSha256": "fd87a8a8a586b079dff01e422e902aec306e66a5bc6f140eb14a0b052401db45",
+        "viewerRgbSha256": "fd87a8a8a586b079dff01e422e902aec306e66a5bc6f140eb14a0b052401db45",
+        "differentPixels": [],
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43102-compact.png",
+          "sha256": "079408eeee7c68c1cbf3aeabd2355e27d17ea9c6791072b89a7d16fcf929d9fb"
+        },
+        "viewerCapture": {
+          "path": "form-dynamic-list-viewer-kBdvaALI/width24-detached.png",
+          "sha256": "4ad58308eb6b50cb735a9d39d02303068bfecbe5bfc8b3b8bae7223c6d9ae235"
+        }
+      },
+      {
+        "kind": "ToolbarNarrow",
+        "pixels": 6600,
+        "differing": 0,
+        "nativeRegion": [
+          274,
+          435,
+          300,
+          22
+        ],
+        "viewerRegion": [
+          389,
+          583,
+          300,
+          22
+        ],
+        "nativeRgbSha256": "ac442bf54a371c6d4c4d44172c4e089b1dc8a6899f36858db9259a3a0d41df30",
+        "viewerRgbSha256": "ac442bf54a371c6d4c4d44172c4e089b1dc8a6899f36858db9259a3a0d41df30",
+        "differentPixels": [],
+        "nativeCapture": {
+          "path": "form-native-dynamic-list-JqavXxqt/ProbeWidthDynamic43134-compact.png",
+          "sha256": "4865407dab7560009ec5207fc6fe54eed9fce402f28c7246defbe0edce31d868"
+        },
+        "viewerCapture": {
+          "path": "form-dynamic-list-viewer-kBdvaALI/ProbeWidthDynamic43134-0.png",
+          "sha256": "af18e119266eb02a6ebd2216da56fcfd446e69bec722e6376f2b05879fa7146c"
+        }
+      }
+    ],
+    "detachedWidthEdit": {
+      "viewport": [
+        285,
+        589
+      ],
+      "states": [
+        {
+          "state": "initial",
+          "grid": [
+            13,
+            71,
+            240,
+            452
+          ],
+          "rail": [
+            14,
+            525,
+            123,
+            14
+          ],
+          "scrollLeft": 0,
+          "selected": "1",
+          "sameOwners": true
+        },
+        {
+          "state": "scrolled",
+          "grid": [
+            13,
+            71,
+            240,
+            452
+          ],
+          "rail": [
+            14,
+            525,
+            123,
+            14
+          ],
+          "scrollLeft": 71,
+          "selected": "1",
+          "sameOwners": true
+        },
+        {
+          "state": "dirty",
+          "grid": [
+            13,
+            71,
+            220,
+            452
+          ],
+          "rail": [
+            14,
+            525,
+            103,
+            14
+          ],
+          "scrollLeft": 71,
+          "selected": "1",
+          "sameOwners": true
+        },
+        {
+          "state": "restored",
+          "grid": [
+            13,
+            71,
+            240,
+            452
+          ],
+          "rail": [
+            14,
+            525,
+            123,
+            14
+          ],
+          "scrollLeft": 71,
+          "selected": "1",
+          "sameOwners": true
+        }
+      ]
+    }
+  },
+  "filePicker": {
+    "source": {
+      "path": "form-cf-intake-1RN3roMt/stalingrad/Catalogs/Файлы/Forms/ФормаПодбора/Ext/Form.xml",
+      "sha256": "09fc015fa985bd5a9ab0fb19b84460a1deab0bbc6c6e97633f58132eeec163ba"
+    },
+    "nativeWide": {
+      "capture": {
+        "path": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/file-picker-1920.png",
+        "sha256": "a786db3bdba05ceb2e230cabeacc33fbe228bd1f4535f8dd90558aab4c3247ab"
+      },
+      "frame": [
+        914,
+        243
+      ],
+      "tables": {
+        "11": [
+          13,
+          85,
+          220,
+          124
+        ],
+        "2": [
+          243,
+          66,
+          650,
+          143
+        ]
+      },
+      "navigationTop": 209,
+      "visibleRails": 2
+    },
+    "nativeNarrow": {
+      "capture": {
+        "path": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/file-picker-1024.png",
+        "sha256": "9e77dc565c60451a210b43181736dd97616eb3d9daa2555a471df6f712f49b5f"
+      },
+      "frame": [
+        684,
+        320
+      ],
+      "firstTable": [
+        13,
+        85,
+        650,
+        88
+      ],
+      "secondGridTop": 203,
+      "secondGridBottomClipped": true
+    },
+    "firstObservations": {
+      "path": "form-dynamic-list-viewer-gaHvWPaO/geometry.json",
+      "sha256": "1e3db84cef4a560c2f37cd7f6a0210e4b60388b28cc5c0709c68f87a06b61e11"
+    },
+    "finalObservations": {
+      "path": "form-dynamic-list-viewer-6GzPWqk4/geometry.json",
+      "sha256": "229639cdbfddb73f3930580189d03af66f950845e6e483a0dd3656a06877a61c"
+    },
+    "viewerWideBefore": {
+      "11": [
+        13,
+        262,
+        220.5,
+        120
+      ],
+      "2": [
+        241.5,
+        243,
+        651.5,
+        139
+      ]
+    },
+    "viewerStates": [
+      {
+        "frame": [
+          914,
+          243
+        ],
+        "bodyRange": 0,
+        "tables": [
+          {
+            "id": "11",
+            "table": [
+              13,
+              86,
+              220.5,
+              123
+            ],
+            "title": [
+              13,
+              67,
+              220.5,
+              15
+            ],
+            "titleText": "Папки:",
+            "field": [
+              13,
+              66,
+              220.5,
+              165
+            ],
+            "toolbar": null,
+            "pagination": [
+              13,
+              209,
+              220.5,
+              21
+            ],
+            "firstButton": [
+              136.5,
+              209,
+              25,
+              21
+            ],
+            "rail": [
+              14,
+              211,
+              103.5,
+              14
+            ],
+            "track": [
+              37,
+              214,
+              58,
+              8
+            ],
+            "thumb": [
+              37,
+              214,
+              20,
+              8
+            ],
+            "maximum": 406,
+            "columns": [],
+            "minimumWidth": "625px",
+            "width": 219,
+            "scrollWidth": 625,
+            "scrollLeft": 0
+          },
+          {
+            "id": "2",
+            "table": [
+              241.5,
+              67,
+              651.5,
+              142
+            ],
+            "title": null,
+            "field": [
+              241.5,
+              66,
+              651.5,
+              165
+            ],
+            "toolbar": null,
+            "pagination": [
+              241.5,
+              209,
+              651.5,
+              21
+            ],
+            "firstButton": [
+              796,
+              209,
+              25,
+              21
+            ],
+            "rail": [
+              242.5,
+              211,
+              534.5,
+              14
+            ],
+            "track": [
+              265.5,
+              214,
+              489,
+              8
+            ],
+            "thumb": [
+              265.5,
+              214,
+              430,
+              8
+            ],
+            "maximum": 88,
+            "columns": [
+              [
+                "Индекс значка, Наименование, Описание",
+                242.5,
+                68,
+                367,
+                30
+              ],
+              [
+                "Автор",
+                609.5,
+                68,
+                157,
+                30
+              ],
+              [
+                "Дата создания",
+                766.5,
+                68,
+                167,
+                30
+              ],
+              [
+                "Ссылка",
+                933.5,
+                68,
+                47,
+                30
+              ]
+            ],
+            "minimumWidth": "738px",
+            "width": 650,
+            "scrollWidth": 738,
+            "scrollLeft": 0
+          }
+        ],
+        "capture": {
+          "path": "form-dynamic-list-viewer-6GzPWqk4/ФормаПодбора-0.png",
+          "sha256": "3f6437a7531b168cd38a43d5775b6d621c14f945c635d27ad1d756de43ea258e"
+        }
+      },
+      {
+        "frame": [
+          684,
+          320
+        ],
+        "bodyRange": 36,
+        "tables": [
+          {
+            "id": "11",
+            "table": [
+              13,
+              86,
+              650,
+              88
+            ],
+            "title": [
+              13,
+              67,
+              650,
+              15
+            ],
+            "titleText": "Папки:",
+            "field": [
+              13,
+              66,
+              650,
+              130
+            ],
+            "toolbar": null,
+            "pagination": [
+              13,
+              174,
+              650,
+              21
+            ],
+            "firstButton": [
+              566,
+              174,
+              25,
+              21
+            ],
+            "rail": null,
+            "track": null,
+            "thumb": null,
+            "maximum": null,
+            "columns": [],
+            "minimumWidth": "625px",
+            "width": 648,
+            "scrollWidth": 648,
+            "scrollLeft": 0
+          },
+          {
+            "id": "2",
+            "table": [
+              13,
+              204,
+              650,
+              118
+            ],
+            "title": null,
+            "field": [
+              13,
+              203,
+              650,
+              141
+            ],
+            "toolbar": null,
+            "pagination": [
+              13,
+              322,
+              650,
+              21
+            ],
+            "firstButton": [
+              566,
+              322,
+              25,
+              21
+            ],
+            "rail": [
+              14,
+              324,
+              533,
+              14
+            ],
+            "track": [
+              37,
+              327,
+              487,
+              8
+            ],
+            "thumb": [
+              37,
+              327,
+              427,
+              8
+            ],
+            "maximum": 90,
+            "columns": [
+              [
+                "Индекс значка, Наименование, Описание",
+                14,
+                205,
+                367,
+                30
+              ],
+              [
+                "Автор",
+                381,
+                205,
+                157,
+                30
+              ],
+              [
+                "Дата создания",
+                538,
+                205,
+                167,
+                30
+              ],
+              [
+                "Ссылка",
+                705,
+                205,
+                47,
+                30
+              ]
+            ],
+            "minimumWidth": "738px",
+            "width": 648,
+            "scrollWidth": 738,
+            "scrollLeft": 0
+          }
+        ],
+        "capture": {
+          "path": "form-dynamic-list-viewer-6GzPWqk4/ФормаПодбора-1.png",
+          "sha256": "e975db2ae6c9d5819f706273ea1c9c0b950c392184d346d8edebe436ed69f07b"
+        }
+      },
+      {
+        "frame": [
+          914,
+          243
+        ],
+        "bodyRange": 0,
+        "tables": [
+          {
+            "id": "11",
+            "table": [
+              13,
+              86,
+              220.5,
+              123
+            ],
+            "title": [
+              13,
+              67,
+              220.5,
+              15
+            ],
+            "titleText": "Папки:",
+            "field": [
+              13,
+              66,
+              220.5,
+              165
+            ],
+            "toolbar": null,
+            "pagination": [
+              13,
+              209,
+              220.5,
+              21
+            ],
+            "firstButton": [
+              136.5,
+              209,
+              25,
+              21
+            ],
+            "rail": [
+              14,
+              211,
+              103.5,
+              14
+            ],
+            "track": [
+              37,
+              214,
+              58,
+              8
+            ],
+            "thumb": [
+              37,
+              214,
+              20,
+              8
+            ],
+            "maximum": 406,
+            "columns": [],
+            "minimumWidth": "625px",
+            "width": 219,
+            "scrollWidth": 625,
+            "scrollLeft": 0
+          },
+          {
+            "id": "2",
+            "table": [
+              241.5,
+              67,
+              651.5,
+              142
+            ],
+            "title": null,
+            "field": [
+              241.5,
+              66,
+              651.5,
+              165
+            ],
+            "toolbar": null,
+            "pagination": [
+              241.5,
+              209,
+              651.5,
+              21
+            ],
+            "firstButton": [
+              796,
+              209,
+              25,
+              21
+            ],
+            "rail": [
+              242.5,
+              211,
+              534.5,
+              14
+            ],
+            "track": [
+              265.5,
+              214,
+              489,
+              8
+            ],
+            "thumb": [
+              265.5,
+              214,
+              430,
+              8
+            ],
+            "maximum": 88,
+            "columns": [
+              [
+                "Индекс значка, Наименование, Описание",
+                242.5,
+                68,
+                367,
+                30
+              ],
+              [
+                "Автор",
+                609.5,
+                68,
+                157,
+                30
+              ],
+              [
+                "Дата создания",
+                766.5,
+                68,
+                167,
+                30
+              ],
+              [
+                "Ссылка",
+                933.5,
+                68,
+                47,
+                30
+              ]
+            ],
+            "minimumWidth": "738px",
+            "width": 650,
+            "scrollWidth": 738,
+            "scrollLeft": 0
+          }
+        ],
+        "capture": {
+          "path": "form-dynamic-list-viewer-6GzPWqk4/ФормаПодбора-2.png",
+          "sha256": "b1fefbafa90ac718d7b3fe0fcdd3c5b7ecaa23cfe049fbaf32d93cf64e6f7235"
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "У панели автоматических команд при Width=30 отличается состав видимых команд. Сетка и следующий реквизит расходятся по вертикали на 15 px.",
+    "Ширины отдельных колонок, заголовки составных колонок и компоновка «Подбора файлов» измерены по частям.",
+    "Для Windows нужны отдельные замеры в родном Конфигураторе."
+  ]
+}

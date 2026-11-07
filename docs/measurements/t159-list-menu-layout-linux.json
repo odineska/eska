@@ -1,0 +1,992 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-07T05:16:35.363329+00:00",
+  "milestone": "T159",
+  "scope": "Размеры, размещение, отступы и контрольные подписи меню Linux. Это не приёмка полных пикселей меню и не завершение T159.",
+  "nativeBuild": "8.3.27.2342",
+  "platform": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "zoom": 100,
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "artifactBase": "../eska-playground",
+  "eskaCommit": "165cedeb8cd14f243976361036fab9e4a386e029",
+  "explorerCommit": "57203f25653c70f844ce21a41d1bd2e4e13f0295",
+  "nativeReference": {
+    "path": "tests/fixtures/forms/native-list-menu/metrics.json",
+    "sha256": "3add4ed5661a0331a975a6ab961c98158f51a031e6e942fa3dd679ec9d0e22be"
+  },
+  "architecture": {
+    "renderer": "Shared Solid MenuLevel and NativeLabel for root and table menus",
+    "captionAdvances": "designTextAdvances",
+    "measuredNativeMinimumReplaces210Px": true,
+    "captionLeft": 45,
+    "captionBaseline": 20,
+    "submenuAnchorOffset": {
+      "right": -2,
+      "top": 1
+    }
+  },
+  "placementMethod": {
+    "nativeAndViewerMenuOriginsEqual": true,
+    "onlyHostPlacementAdjusted": true,
+    "menuDimensionsForced": false,
+    "description": "Тест меняет только размеры собственного окна VS Code, высоту области дерева и отступ preview-scroll. После размещения отправляется resize. Размеры меню, шрифты и кнопки задаёт расширение. Результаты содержат исходные и конечные DOM-прямоугольники.",
+    "requestedWindow": [
+      1440,
+      1200
+    ],
+    "capturedWindow": [
+      1440,
+      1056
+    ],
+    "coordinateOffsetBetweenIframeAndCapture": [
+      48,
+      70
+    ]
+  },
+  "geometry": [
+    {
+      "locale": "ru",
+      "kind": "Catalog",
+      "mainViewerRegion": [
+        513,
+        281,
+        394,
+        521
+      ],
+      "nativeMainRegion": [
+        513,
+        281,
+        394,
+        521
+      ],
+      "mainClippedInNative": false,
+      "submenuViewerRegion": [
+        904,
+        771,
+        377,
+        131
+      ],
+      "submenuNativeRegion": [
+        904,
+        771,
+        377,
+        131
+      ],
+      "submenuMatches": true,
+      "sourceWrites": false,
+      "result": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/layout.json",
+        "sha256": "02ec7a51f4419970a83b642bdbc7d50954a15f9b0d920bbb67c29f60ecc0c61f"
+      },
+      "receipt": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/receipt.json",
+        "sha256": "abf1d445420809ca5d52afb7f91f65cc9343d0d896b86f7ac51d473c2e777b84"
+      }
+    },
+    {
+      "locale": "ru",
+      "kind": "CatalogHierarchy",
+      "mainViewerRegion": [
+        513,
+        281,
+        394,
+        671
+      ],
+      "nativeMainRegion": [
+        513,
+        281,
+        394,
+        662
+      ],
+      "mainClippedInNative": true,
+      "submenuViewerRegion": [
+        904,
+        493,
+        243,
+        93
+      ],
+      "submenuNativeRegion": [
+        904,
+        493,
+        243,
+        93
+      ],
+      "submenuMatches": true,
+      "sourceWrites": false,
+      "result": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/layout.json",
+        "sha256": "02ec7a51f4419970a83b642bdbc7d50954a15f9b0d920bbb67c29f60ecc0c61f"
+      },
+      "receipt": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/receipt.json",
+        "sha256": "abf1d445420809ca5d52afb7f91f65cc9343d0d896b86f7ac51d473c2e777b84"
+      }
+    },
+    {
+      "locale": "ru",
+      "kind": "Journal",
+      "mainViewerRegion": [
+        513,
+        281,
+        394,
+        623
+      ],
+      "nativeMainRegion": [
+        513,
+        281,
+        394,
+        623
+      ],
+      "mainClippedInNative": false,
+      "submenuViewerRegion": [
+        904,
+        283,
+        194,
+        63
+      ],
+      "submenuNativeRegion": [
+        904,
+        283,
+        194,
+        63
+      ],
+      "submenuMatches": true,
+      "sourceWrites": false,
+      "result": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/layout.json",
+        "sha256": "02ec7a51f4419970a83b642bdbc7d50954a15f9b0d920bbb67c29f60ecc0c61f"
+      },
+      "receipt": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/receipt.json",
+        "sha256": "abf1d445420809ca5d52afb7f91f65cc9343d0d896b86f7ac51d473c2e777b84"
+      }
+    },
+    {
+      "locale": "en",
+      "kind": "Catalog",
+      "mainViewerRegion": [
+        465,
+        281,
+        335,
+        521
+      ],
+      "nativeMainRegion": [
+        465,
+        281,
+        335,
+        521
+      ],
+      "mainClippedInNative": false,
+      "submenuViewerRegion": [
+        797,
+        771,
+        335,
+        131
+      ],
+      "submenuNativeRegion": [
+        797,
+        771,
+        335,
+        131
+      ],
+      "submenuMatches": true,
+      "sourceWrites": false,
+      "result": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/layout.json",
+        "sha256": "f16849ff88fadd883c149c8f2746142a7c48cb1e6cee878c4e48faabf327653e"
+      },
+      "receipt": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/receipt.json",
+        "sha256": "024d525d87b826fc5780438cc71a12584df5fb08bb399c8171eee444e1a82939"
+      }
+    },
+    {
+      "locale": "en",
+      "kind": "CatalogHierarchy",
+      "mainViewerRegion": [
+        465,
+        281,
+        335,
+        671
+      ],
+      "nativeMainRegion": [
+        465,
+        281,
+        335,
+        662
+      ],
+      "mainClippedInNative": true,
+      "submenuViewerRegion": [
+        797,
+        493,
+        195,
+        93
+      ],
+      "submenuNativeRegion": [
+        797,
+        493,
+        195,
+        93
+      ],
+      "submenuMatches": true,
+      "sourceWrites": false,
+      "result": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/layout.json",
+        "sha256": "f16849ff88fadd883c149c8f2746142a7c48cb1e6cee878c4e48faabf327653e"
+      },
+      "receipt": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/receipt.json",
+        "sha256": "024d525d87b826fc5780438cc71a12584df5fb08bb399c8171eee444e1a82939"
+      }
+    },
+    {
+      "locale": "en",
+      "kind": "Journal",
+      "mainViewerRegion": [
+        465,
+        281,
+        335,
+        623
+      ],
+      "nativeMainRegion": [
+        465,
+        281,
+        335,
+        623
+      ],
+      "mainClippedInNative": false,
+      "submenuViewerRegion": [
+        797,
+        283,
+        194,
+        63
+      ],
+      "submenuNativeRegion": [
+        797,
+        283,
+        194,
+        63
+      ],
+      "submenuMatches": true,
+      "sourceWrites": false,
+      "result": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/layout.json",
+        "sha256": "f16849ff88fadd883c149c8f2746142a7c48cb1e6cee878c4e48faabf327653e"
+      },
+      "receipt": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/receipt.json",
+        "sha256": "024d525d87b826fc5780438cc71a12584df5fb08bb399c8171eee444e1a82939"
+      }
+    }
+  ],
+  "installedCaptionPixels": {
+    "regions": [
+      {
+        "locale": "en",
+        "text": "Create",
+        "region": [
+          509,
+          290,
+          40,
+          15
+        ],
+        "rgbSha256": "baa39d9f4514116f701fb07dc7de7f49f3ecfdbc17beebfdb144e39e5498239e",
+        "differentPixels": 0,
+        "pixels": 600
+      },
+      {
+        "locale": "en",
+        "text": "Copy",
+        "region": [
+          509,
+          320,
+          32,
+          15
+        ],
+        "rgbSha256": "fd6f136e7fa1e420614f401f2e52d506cdf5386e8d627478f624eb7bae8fea26",
+        "differentPixels": 0,
+        "pixels": 480
+      },
+      {
+        "locale": "en",
+        "text": "Toggle deletion mark",
+        "region": [
+          509,
+          380,
+          122,
+          15
+        ],
+        "rgbSha256": "512ca73130a2442983d94da3f08c8dedfd05b7ed4d91cc4124074317bc102116",
+        "differentPixels": 0,
+        "pixels": 1830
+      },
+      {
+        "locale": "ru",
+        "text": "Пометить на удаление / Снять пометку",
+        "region": [
+          558,
+          380,
+          239,
+          15
+        ],
+        "rgbSha256": "8936d8c3e5c731f4059a27977e44c5dbf44e0b33d45568db80b0c1f9002bb01e",
+        "differentPixels": 0,
+        "pixels": 3585
+      },
+      {
+        "locale": "en",
+        "text": "Ctrl+Alt+F",
+        "region": [
+          709,
+          470,
+          62,
+          15
+        ],
+        "rgbSha256": "46f00dadc59ef8af998ab46f51249e78aab40579fc7af0da4dba65d1aff4ad48",
+        "differentPixels": 0,
+        "pixels": 930
+      },
+      {
+        "locale": "ru",
+        "text": "Ctrl+Alt+F",
+        "region": [
+          816,
+          470,
+          62,
+          15
+        ],
+        "rgbSha256": "46f00dadc59ef8af998ab46f51249e78aab40579fc7af0da4dba65d1aff4ad48",
+        "differentPixels": 0,
+        "pixels": 930
+      }
+    ],
+    "pixels": 8355,
+    "differentPixels": 0,
+    "pixelTolerance": 0,
+    "comparisonMasks": []
+  },
+  "fullRegionComparisons": {
+    "comparisonMasks": [],
+    "pixelTolerance": 0,
+    "wholeMenusAccepted": false,
+    "shadowIncluded": false,
+    "regions": [
+      {
+        "locale": "ru",
+        "kind": "Catalog",
+        "part": "main",
+        "region": [
+          513,
+          281,
+          394,
+          521
+        ],
+        "pixels": 205274,
+        "differentPixels": 947,
+        "nativeRgbSha256": "48e7e1c05a206efdd482015a6e3d3928c7ea2d1bacf9e685ac2309fc5608b870",
+        "viewerRgbSha256": "14ee10a06dea935ff19c6dfaf6ee8c647120c2b07c5c84e34bb60ba99238c274",
+        "differenceBox": [
+          1,
+          11,
+          392,
+          498
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-ru/Catalog-more.png",
+          "sha256": "c5cfd576dacc8b43c2c75d1adb7d093f29551106e55a9d4c5f96ba095d2de62a"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/Catalog-main.png",
+          "sha256": "23829002186684b72d2af702e619ba1729ce4da10cdd9cc4014db5bbcbd018cb"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "ru",
+        "kind": "Catalog",
+        "part": "submenu",
+        "region": [
+          904,
+          771,
+          377,
+          131
+        ],
+        "pixels": 49387,
+        "differentPixels": 1646,
+        "nativeRgbSha256": "c46f450901ed1022de5c6c6a976bf5487eb30729f357cbc4eb79fc092798059c",
+        "viewerRgbSha256": "348ba27b6644f7a5043ae2464ed9fe634a5b766310ab6a2f009ac1a8c2dd0b87",
+        "differenceBox": [
+          0,
+          0,
+          376,
+          98
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-ru/Catalog-submenu.png",
+          "sha256": "a14512fff5c247f1663be1a88c768c7cd921285dacfd28c77a8b39ad5eebe42c"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/Catalog-submenu.png",
+          "sha256": "1fb3561137dd5897df65cb5f2faebdab7f65e5360930d464aa530cf333a4e764"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "ru",
+        "kind": "CatalogHierarchy",
+        "part": "main",
+        "region": [
+          513,
+          281,
+          394,
+          662
+        ],
+        "pixels": 260828,
+        "differentPixels": 3029,
+        "nativeRgbSha256": "63f4a19a272f4914f8585c60f4aace2190ac0d0b94774b959cfabf749b05c633",
+        "viewerRgbSha256": "539e75fac83d84589f34ef69d5e1a44c637b98d0d43752027a742510fc81b2d1",
+        "differenceBox": [
+          1,
+          11,
+          392,
+          651
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-ru/CatalogHierarchy-more.png",
+          "sha256": "7235ca7c40aece5969f226dd1d0ee37c2599455d9db9ce2acdddbd9ed76eaeee"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/CatalogHierarchy-main.png",
+          "sha256": "4cb19099a2249aa7485c38812d15305534346a4f6a56c0432e9c97668ddf1b07"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "ru",
+        "kind": "CatalogHierarchy",
+        "part": "submenu",
+        "region": [
+          904,
+          493,
+          243,
+          93
+        ],
+        "pixels": 22599,
+        "differentPixels": 68,
+        "nativeRgbSha256": "fbdddb333189fc18db5b65274f84fdd9bfad4e53c13f07018810a764bf76f13c",
+        "viewerRgbSha256": "404aab05d291eb2e33a53bfdc7d3d810b1acdd9c1238b0d81931cf02534d2b5f",
+        "differenceBox": [
+          0,
+          0,
+          4,
+          32
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-ru/CatalogHierarchy-submenu.png",
+          "sha256": "65f0cfb9d9e455f703b9f4a8d19d269565e263f06d8c8e56d4f3985cd19902ad"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/CatalogHierarchy-submenu.png",
+          "sha256": "613f077f4db1c4163acfc7ce098abf26388e2f36fe0c492022439d455b74f0e6"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "ru",
+        "kind": "Journal",
+        "part": "main",
+        "region": [
+          513,
+          281,
+          394,
+          623
+        ],
+        "pixels": 245462,
+        "differentPixels": 2049,
+        "nativeRgbSha256": "90235b6a5287974df54e1d4a9c3231428f7b3035b68be86f8c1d3841f4aa9f86",
+        "viewerRgbSha256": "f23f3744c64b4864fa2a7c46b20823157c35ba535a76d42e66da62c1326e9126",
+        "differenceBox": [
+          1,
+          11,
+          392,
+          600
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-ru/Journal-more.png",
+          "sha256": "1fb2b64f55daf55c221fd6f41339133d58e146dc688f786ea37ba6d2210fa223"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/Journal-main.png",
+          "sha256": "b5ed4cafd24d097da490b0491c60981d070029da04351b29cd261718a697871f"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "ru",
+        "kind": "Journal",
+        "part": "submenu",
+        "region": [
+          904,
+          283,
+          194,
+          63
+        ],
+        "pixels": 12222,
+        "differentPixels": 79,
+        "nativeRgbSha256": "b705bd5307b63e22a802262f1517b8928e4e3cbb17453cb1279d58dce24234ce",
+        "viewerRgbSha256": "2f825ff76ceefa8002bdfdd6bc1c29e773047af3bfc6488617ac150bf477fe38",
+        "differenceBox": [
+          0,
+          0,
+          134,
+          51
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-ru/Journal-submenu.png",
+          "sha256": "d5e9537c512de039d22fd3aa4ff82d1574f55e08619a020693d92cfa078f80ce"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/ru/Journal-submenu.png",
+          "sha256": "01b31d6b29e38176667b3578478950949a6ccd6a042df89711c31d0a4ecbfcb2"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "en",
+        "kind": "Catalog",
+        "part": "main",
+        "region": [
+          465,
+          281,
+          335,
+          521
+        ],
+        "pixels": 174535,
+        "differentPixels": 815,
+        "nativeRgbSha256": "9c39422f55967bcfbcc9207f100de691266c32c401a9b6adc0bf5e129561f546",
+        "viewerRgbSha256": "5b7882d286df1392bcdc6090eadeb7c8d978bf39bf8f177dd98b763e1695a700",
+        "differenceBox": [
+          1,
+          11,
+          333,
+          498
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-en/Catalog-more.png",
+          "sha256": "d251fa602b0331b8bf21af21005523c1bece4c5c90b567c9513b8602ba52372b"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/Catalog-main.png",
+          "sha256": "d86f49bcbcc98fd85aab6d5fdbee6c6a4d87fca5b977e61cf1c5dd3a46e19b98"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "en",
+        "kind": "Catalog",
+        "part": "submenu",
+        "region": [
+          797,
+          771,
+          335,
+          131
+        ],
+        "pixels": 43885,
+        "differentPixels": 1506,
+        "nativeRgbSha256": "3262e416af1a9feb21d566f185e668dc7bb762ce481261f436aa181682f6f90c",
+        "viewerRgbSha256": "7c269ac6606643fede49cb682b331a25de4a9406dce941ea0a4130cfd85b9f07",
+        "differenceBox": [
+          0,
+          0,
+          334,
+          98
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-en/Catalog-submenu.png",
+          "sha256": "142f0e4c362836a78b1b3110aa080a1f965b85f674cc8ef909f617fd6496a472"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/Catalog-submenu.png",
+          "sha256": "8c6265241bfaae70bdb9e1bbe5c5fafc252cec0c79e8bd9db8a4fc84546f323f"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "en",
+        "kind": "CatalogHierarchy",
+        "part": "main",
+        "region": [
+          465,
+          281,
+          335,
+          662
+        ],
+        "pixels": 221770,
+        "differentPixels": 2656,
+        "nativeRgbSha256": "223f6770864c93acc4b557297c38bb2829808208bfdfaac313c237a2ac8ec16c",
+        "viewerRgbSha256": "4560876a87fff3d6f72479faea73db71e063086168ab8ddc712d84c88b7a658b",
+        "differenceBox": [
+          1,
+          11,
+          333,
+          651
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-en/CatalogHierarchy-more.png",
+          "sha256": "f76dd7f02c6cddca89a0bfacf5b9112ab34975774f4dead2303ca56d5cf92032"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/CatalogHierarchy-main.png",
+          "sha256": "8c7c9c8d947bfc67031dc9ca707010b00250cb83989b5a0d3e4c13a4e8aa88a8"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "en",
+        "kind": "CatalogHierarchy",
+        "part": "submenu",
+        "region": [
+          797,
+          493,
+          195,
+          93
+        ],
+        "pixels": 18135,
+        "differentPixels": 68,
+        "nativeRgbSha256": "2fa0db49c1f3a996fa8928c2e112e7f4e83b4f0cef54816d3d881c6899434432",
+        "viewerRgbSha256": "55dea6238245c1eefef63ada8d3bb1831326f606a8fe65e75f5ac8c21997407d",
+        "differenceBox": [
+          0,
+          0,
+          4,
+          32
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-en/CatalogHierarchy-submenu.png",
+          "sha256": "c7f672d23300ecb85e7dd527d414fb78efd435c0c0a09e49f694d1a3179f1d68"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/CatalogHierarchy-submenu.png",
+          "sha256": "bab1eb523492ef9206799418ef916f1e541808cfe5e5c4415258178192c88581"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "en",
+        "kind": "Journal",
+        "part": "main",
+        "region": [
+          465,
+          281,
+          335,
+          623
+        ],
+        "pixels": 208705,
+        "differentPixels": 1740,
+        "nativeRgbSha256": "bfb977826cff980be8b0d40d9d4924e287ea74d80e6cd9407dd362e3a99ed8f9",
+        "viewerRgbSha256": "f8ca37dc31d00dbedd1fc381e20255015bea87ceaffebf53a07977f85d6ab89a",
+        "differenceBox": [
+          1,
+          11,
+          333,
+          600
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-en/Journal-more.png",
+          "sha256": "d3173bdb8b228504dcabb15552fef92fb14c4ea2c6bd38eb98212719715bb049"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/Journal-main.png",
+          "sha256": "618cb7d7e1fa724a8a51a65e2072bbe2b9e7279dc9be3ee31afd020888653ce8"
+        },
+        "wholeRegionPixelEqual": false
+      },
+      {
+        "locale": "en",
+        "kind": "Journal",
+        "part": "submenu",
+        "region": [
+          797,
+          283,
+          194,
+          63
+        ],
+        "pixels": 12222,
+        "differentPixels": 79,
+        "nativeRgbSha256": "b705bd5307b63e22a802262f1517b8928e4e3cbb17453cb1279d58dce24234ce",
+        "viewerRgbSha256": "2f825ff76ceefa8002bdfdd6bc1c29e773047af3bfc6488617ac150bf477fe38",
+        "differenceBox": [
+          0,
+          0,
+          134,
+          51
+        ],
+        "native": {
+          "pathInPlayground": "form-native-dynamic-menu-Th3kO1Xk/menu-layout-en/Journal-submenu.png",
+          "sha256": "cad828e395805d6e99c126cad15c0c9df97c8371cc8434d6d94ccd0182aebf8c"
+        },
+        "viewer": {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/en/Journal-submenu.png",
+          "sha256": "3108b0e1ae2c80ebf1b87b5c2032e5fc01dce3011be56a789b7ee80361253cb5"
+        },
+        "wholeRegionPixelEqual": false
+      }
+    ]
+  },
+  "rootMenuHeightObservation": {
+    "native": {
+      "pathInPlayground": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-more-full-crop.png",
+      "sha256": "f0b178c3acdfa94907c7f689fa029465953096a82d41b81ac20b4aba917ea912"
+    },
+    "nativeGrayBorderRegion": [
+      1048,
+      63,
+      344,
+      491
+    ],
+    "previousViewerIntrinsicHeight": 490,
+    "currentViewerIntrinsicHeight": 491,
+    "description": "Предыдущая проверка сравнивала с высотой просмотрщика 490. В сохранённом native-снимке высота 491; повторная проверка учитывает дополнительную нижнюю строку."
+  },
+  "verification": {
+    "rust": {
+      "fmtCheck": true,
+      "check": true,
+      "clippyAllTargetsAllFeaturesDenyWarnings": true,
+      "testThreads": 1,
+      "passed": 1561,
+      "failed": 0,
+      "ignored": 19,
+      "log": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/evidence/eska-menu-layout-rust.log",
+        "sha256": "73a322df87717d3b3564f27cea100228e94bdc70b8272dafc5f917f7d5df4a69"
+      }
+    },
+    "node": {
+      "fullRun": {
+        "tests": 676,
+        "pass": 665,
+        "fail": 0,
+        "skipped": 11
+      },
+      "formatterFollowUp": {
+        "tests": 2,
+        "pass": 2,
+        "fail": 0,
+        "skipped": 0
+      },
+      "uniquePassed": 667,
+      "remainingSkipped": 9,
+      "note": "Две проверки реального форматтера были пропущены без ESKA_TEST_FMT_BINARY и успешно выполнены отдельным адресным запуском.",
+      "logs": [
+        {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/evidence/eska-menu-layout-node.log",
+          "sha256": "0fce4f5ab1655222584532bc759564270c17f0c142a823519e2d49cca6163688"
+        },
+        {
+          "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/evidence/eska-menu-layout-node-formatter.log",
+          "sha256": "76c5a710ff208ca57e36df6d96aad8f7607e8acf87f06e317872c193ec0d8119"
+        }
+      ]
+    },
+    "installedBatch": {
+      "passed": true,
+      "formsAndTransitions": 227,
+      "runs": [
+        {
+          "suite": "tables",
+          "locale": "en",
+          "cases": 17,
+          "passed": true
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "cases": 17,
+          "passed": true
+        },
+        {
+          "suite": "table-pixels",
+          "locale": "en",
+          "cases": 48,
+          "passed": true
+        },
+        {
+          "suite": "table-pixels",
+          "locale": "ru",
+          "cases": 47,
+          "passed": true
+        },
+        {
+          "suite": "standard-pictures",
+          "locale": "en",
+          "cases": 12,
+          "passed": true
+        },
+        {
+          "suite": "standard-pictures",
+          "locale": "ru",
+          "cases": 12,
+          "passed": true
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "cases": 31,
+          "passed": true
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "cases": 31,
+          "passed": true
+        },
+        {
+          "suite": "detached-space",
+          "locale": "en",
+          "cases": 6,
+          "passed": true
+        },
+        {
+          "suite": "detached-space",
+          "locale": "ru",
+          "cases": 6,
+          "passed": true
+        }
+      ],
+      "report": {
+        "pathInPlayground": "form-batch-3jcFEU/batch.json",
+        "sha256": "146885a09af5647a1953125d3bf643cd5a1264a413a5f9893c37e2a16ea9ad62"
+      },
+      "inputs": {
+        "pathInPlayground": "form-batch-3jcFEU/inputs.json",
+        "sha256": "76db882ba8afc372a27e90baae29ca36e70742773442d0de4722da2a996df165"
+      },
+      "vsix": {
+        "pathInPlayground": "form-batch-3jcFEU/artifacts/viewer.vsix",
+        "sha256": "53fc809d897ab84f28cf32705d6123abc2930fd5d4efadf59410a404103bf032"
+      },
+      "backend": {
+        "pathInPlayground": "form-batch-3jcFEU/artifacts/eska-project",
+        "sha256": "344a85998ceb188ece3069e87049781447e96eef37f212fe2767487c4a132260"
+      },
+      "runtimeReverifiedAfterCommit": {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/evidence/eska-menu-layout-runtime.json",
+        "sha256": "de094d52ae78ec98ce03a7cf2ad4baee556eb0b046ee93e17e38b0a82e53e4aa"
+      }
+    },
+    "dynamicMenuMatrix": [
+      {
+        "locale": "ru",
+        "forms": 12,
+        "passed": true,
+        "sourceWrites": false,
+        "dirtyAndDetachedCatalog": true,
+        "result": {
+          "pathInPlayground": "form-menu-layout-matrix-LCsM9lw7/ru/menus.json",
+          "sha256": "7dda7e9a132ee6905228b8a8e89711dfa717b24da64815c6f67087d12ff89302"
+        },
+        "receipt": {
+          "pathInPlayground": "form-menu-layout-matrix-LCsM9lw7/ru/receipt.json",
+          "sha256": "00055b4545009db75d8787b17d8301250785bfb09f2580466d254f20c272463b"
+        }
+      },
+      {
+        "locale": "en",
+        "forms": 12,
+        "passed": true,
+        "sourceWrites": false,
+        "dirtyAndDetachedCatalog": true,
+        "result": {
+          "pathInPlayground": "form-menu-layout-matrix-LCsM9lw7/en/menus.json",
+          "sha256": "a60ff739d6994f3b817e3416d2164335044cf7ecf8e15793b660e58975106dc3"
+        },
+        "receipt": {
+          "pathInPlayground": "form-menu-layout-matrix-LCsM9lw7/en/receipt.json",
+          "sha256": "28ee6b012f40df99c90dadbc3b0f29eb4767fe94a7916726e53480b98afaa157"
+        }
+      }
+    ],
+    "rootMenuRegression": [
+      {
+        "mode": "loan",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "pathInPlayground": "form-menu-layout-root-regression-9Q7fqhEz/loan-ru/receipt.json",
+          "sha256": "15022b0e3835c4955fafe233ba2dafd7f93e8732500b49fd1be0bdff936d8346"
+        }
+      },
+      {
+        "mode": "loan",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "pathInPlayground": "form-menu-layout-root-regression-9Q7fqhEz/loan-en/receipt.json",
+          "sha256": "65d2068ab82b7d5ec0181d1724bd10e82a04b56d3d228e23f6bafbd3007eceba"
+        }
+      },
+      {
+        "mode": "matrix",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "pathInPlayground": "form-menu-layout-root-regression-9Q7fqhEz/matrix-ru/receipt.json",
+          "sha256": "c2382bbd6d3449b39b999ddd85b802858bd6198020df017ff3fb9ee5582cd5fe"
+        }
+      },
+      {
+        "mode": "matrix",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "pathInPlayground": "form-menu-layout-root-regression-9Q7fqhEz/matrix-en/receipt.json",
+          "sha256": "b00fcb550326bdf240233cffa8ab249837b9a8548208d5bffb9e1586cb05be0f"
+        }
+      }
+    ]
+  },
+  "remaining": [
+    "Полный растр меню отличается: разделители, стрелки, отдельные сглаженные пиксели, родительские рамки выбора и недоступные пункты. Различия сохранены без масок; полные области не приняты.",
+    "Тени меню, прокрутка ограниченного по высоте меню, обратное раскрытие у правого края и другие масштабы требуют отдельной native-приёмки.",
+    "Главное меню иерархии обрезано в native-снимке до 662 px. Все три строки подменю видимы полностью; полная естественная высота главного меню не принята этим снимком.",
+    "Общий helper размещения используется и вне Linux. Положение подменю на Windows нужно сверить с родным Конфигуратором; Linux-метрики не являются Windows-эталоном.",
+    "Сочетания переопределённого оформления, весь профиль 8.3.27, Windows и будущий 8.5 остаются в работе."
+  ],
+  "reproducibility": {
+    "drivers": [
+      {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/evidence/eska-menu-fixture.py",
+        "sha256": "9cabca22fb3f08f3e1d89866d29c00389336966d95abe713dde8053eab570373"
+      },
+      {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/evidence/eska-menu-layout-diff.py",
+        "sha256": "c288a92b4e0d09f7cde7d058c6aca716dbd8f508388c2d8e763f3a3267881324"
+      },
+      {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/evidence/eska-menu-layout-native.py",
+        "sha256": "90358709d65d6b84e092bfb46d9923df89cbd669e8556cb9b2bdf4c2a9684f2f"
+      },
+      {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/evidence/eska-menu-physical.py",
+        "sha256": "8312cf5fef34523c8c2d5ca7621d74259e11594346c2a28c5d8bc6496a88184c"
+      },
+      {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/evidence/eska-menu-text-verified.mjs",
+        "sha256": "1ccccacff96f0aac4ec8af688c4b6c1f7b9841b99976626f2993306bccc2afa3"
+      },
+      {
+        "pathInPlayground": "form-menu-layout-viewer-7K47OFNy/evidence/form-menu-layout-host.cjs",
+        "sha256": "59a7147f04d926adc7be1bc1eb0c7ab8c8f278f8eba46a66645d52940646b265"
+      }
+    ],
+    "reportAndInputsStoredInPlayground": "form-menu-layout-viewer-7K47OFNy",
+    "userProjectsModified": false,
+    "released": false,
+    "pushed": false
+  }
+}

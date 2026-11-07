@@ -3,6 +3,12 @@ use eska_project_core::project::metadata_edit::snapshot;
 
 const PATH: &str = "CommonForms/Preview/Ext/Form.xml";
 const INPUT: &str = "\u{feff}<Form xmlns=\"http://v8.1c.ru/8.3/xcf/logform\"><ChildItems><InputField name=\"Поле\" id=\"9223372036854775807\"><Title>Исходный</Title></InputField></ChildItems></Form>\r\n";
+
+fn source_path(source: &Value) -> &Path {
+    assert_eq!(source["path"]["encoding"], "utf-8");
+    Path::new(source["path"]["value"].as_str().unwrap())
+}
+
 fn fixture() -> support::TestDir {
     let directory = support::TestDir::new();
     fs::write(
@@ -1530,7 +1536,7 @@ fn form_preparation_is_versioned_and_does_not_parse_payloads() {
             let prepared = &prepared["result"];
             assert_eq!(prepared["roots"].as_array().unwrap().len(), 1);
             assert_eq!(prepared["forms"].as_array().unwrap().len(), 1);
-            assert_eq!(prepared["forms"][0]["path"]["value"], PATH);
+            assert_eq!(source_path(&prepared["forms"][0]), Path::new(PATH));
             assert_eq!(prepared["forms"][0]["id"].as_str().unwrap().len(), 64);
             let opened = client.response("form/open", &params(&context, json!({"node":node})));
             assert_eq!(opened["error"]["data"]["details"]["reason"], "invalid_xml");
@@ -1568,8 +1574,8 @@ fn handler_navigation_uses_checked_modules_and_the_current_editor_snapshot() {
         let target = json!({"formSessionId":id,"revision":"1","index":0});
         let source = client.request("form/handlerSource", &params(&context, target.clone()));
         assert_eq!(
-            source["path"]["value"],
-            "CommonForms/Preview/Ext/Form/Module.bsl"
+            source_path(&source),
+            Path::new("CommonForms/Preview/Ext/Form/Module.bsl")
         );
         let input = json!({"source":source["source"],"version":"7","text":text});
         let mut locate = target.clone();
@@ -1753,6 +1759,485 @@ fn dependency_fixture() -> (support::TestDir, &'static str) {
 
 fn prepared_input(prepared: &Value, path: &str, text: &str, version: &str) -> Value {
     json!({"root":prepared["roots"][0],"path":{"value":path,"encoding":"utf-8"},"version":version,"text":text})
+}
+
+#[test]
+fn form_resolves_owned_command_captions_and_tracks_their_descriptors() {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    let inline_path = "Reports/Inline.xml";
+    let separate_path = "Reports/Separate/Commands/Show.xml";
+    let command = |ru: &str, en: &str| {
+        format!(
+            r#"<Command uuid="show"><Properties><Name>Show</Name><Synonym><v8:item><v8:lang>ru</v8:lang><v8:content>{ru}</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>{en}</v8:content></v8:item></Synonym></Properties></Command>"#
+        )
+    };
+    let wrap = |object: &str| {
+        format!(
+            r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core">{object}</MetaDataObject>"#
+        )
+    };
+    fs::create_dir_all(root.join("Reports/Separate/Commands")).unwrap();
+    fs::write(
+        root.join(inline_path),
+        wrap(&format!(
+            r#"<Report uuid="inline"><Properties><Name>Inline</Name></Properties><ChildObjects>{}</ChildObjects></Report>"#,
+            command("Остатки", "Stock")
+        )),
+    )
+    .unwrap();
+    fs::write(root.join("Reports/Separate.xml"), wrap(
+        r#"<Report uuid="separate"><Properties><Name>Separate</Name></Properties><ChildObjects><Command>Show</Command></ChildObjects></Report>"#
+    )).unwrap();
+    let separate = wrap(&command("Обороты", "Turnover"));
+    fs::write(root.join(separate_path), &separate).unwrap();
+    let form = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"><AutoCommandBar name="Bar" id="-1"><Autofill>false</Autofill><ChildItems>
+        <Button name="Inline" id="1"><Type>CommandBarHyperlink</Type><CommandName>Report.Inline.Command.Show</CommandName><DataPath>Warehouse</DataPath></Button>
+        <Button name="Separate" id="2"><CommandName>Report.Separate.Command.Show</CommandName><DataPath>Warehouse</DataPath></Button>
+        <Button name="Explicit" id="3"><CommandName>Report.Separate.Command.Show</CommandName><Title>Custom</Title></Button>
+        <Button name="Missing" id="4"><CommandName>Report.Missing.Command.Show</CommandName><DataPath>Warehouse</DataPath></Button>
+        </ChildItems></AutoCommandBar><Attributes><Attribute name="Warehouse" id="1"><Title>Warehouse</Title></Attribute></Attributes></Form>"#;
+    fs::write(root.join(PATH), form).unwrap();
+    let captions = |response: &Value| {
+        response["model"]["root"]["auxiliary"][0]["children"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|button| button["presentation"]["caption"].clone())
+            .collect::<Vec<_>>()
+    };
+    let literal = |ru, en| json!({"kind":"literal","items":[{"language":"ru","content":ru},{"language":"en","content":en}]});
+    let expected = vec![
+        literal("Остатки", "Stock"),
+        literal("Обороты", "Turnover"),
+        json!({"kind":"name","text":"Custom"}),
+        json!({"kind":"name","text":"Warehouse"}),
+    ];
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 38);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        assert_eq!(captions(&opened), expected);
+        let dependency = |path| {
+            opened["dependencies"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .find(|dependency| {
+                    source_path(dependency) == Path::new(path) && dependency["role"] == "metadata"
+                })
+                .unwrap()
+        };
+        let id = &dependency(separate_path)["id"];
+        assert_ne!(dependency(inline_path)["id"], *id);
+        let edited = wrap(&command("Новые обороты", "New turnover"));
+        let updated = client.request("form/update", &params(&context, json!({"formSessionId":opened["formSessionId"],"revision":"1","overlays":[{"source":id,"version":"2","text":edited}]})));
+        let mut expected = expected.clone();
+        expected[1] = literal("Новые обороты", "New turnover");
+        assert_eq!(captions(&updated), expected);
+        client.finish();
+    }
+    assert_eq!(
+        fs::read_to_string(root.join(separate_path)).unwrap(),
+        separate
+    );
+    assert_eq!(fs::read_to_string(root.join(PATH)).unwrap(), form);
+}
+
+#[test]
+fn form_projects_command_groups_with_effective_placements_and_dirty_metadata() {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    let wrap = |object: &str| {
+        format!(
+            r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">{object}</MetaDataObject>"#
+        )
+    };
+    let group = wrap(
+        r#"<CommandGroup uuid="print"><Properties><Name>Print</Name><Category>FormCommandBar</Category></Properties></CommandGroup>"#,
+    );
+    let group_path = "CommandGroups/Print.xml";
+    fs::create_dir(root.join("CommandGroups")).unwrap();
+    fs::write(root.join(group_path), &group).unwrap();
+    fs::create_dir(root.join("Documents")).unwrap();
+    fs::write(root.join("Documents/Order.xml"), wrap(r#"
+        <Document uuid="order"><Properties><Name>Order</Name><Posting>Deny</Posting></Properties><ChildObjects>
+          <Command uuid="invoice"><Properties><Name>Invoice</Name><Group>CommandGroup.Print</Group>
+            <CommandParameterType><v8:Type>cfg:DocumentRef.Order</v8:Type></CommandParameterType>
+          </Properties></Command>
+        </ChildObjects></Document>"#)).unwrap();
+    let form = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:DocumentObject.Order</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes>
+        <Commands><Command name="Receipt" id="2"><Title>Print receipt</Title></Command></Commands>
+        <CommandInterface><CommandBar>
+          <Item><Command>Document.Order.Command.Invoice</Command><Type>Auto</Type><CommandGroup>CommandGroup.Print</CommandGroup><DefaultVisible>false</DefaultVisible></Item>
+          <Item><Command>Form.Command.Receipt</Command><Type>Added</Type><CommandGroup>CommandGroup.Print</CommandGroup></Item>
+        </CommandBar></CommandInterface></Form>"#;
+    fs::write(root.join(PATH), form).unwrap();
+    let commands = |snapshot: &Value| {
+        snapshot["model"]["root"]["presentation"]["autoCommandItems"]
+            .as_array()
+            .unwrap()
+            .clone()
+    };
+    let keys = |items: &[Value]| {
+        items
+            .iter()
+            .map(|item| item["key"].clone())
+            .collect::<Vec<_>>()
+    };
+
+    let mut client = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut client, &directory.0, "en-US", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let projected = commands(&opened);
+    assert_eq!(
+        keys(&projected),
+        [
+            "Form.StandardCommand.WriteAndClose",
+            "Form.StandardCommand.Write",
+            "command-group:Print"
+        ]
+        .map(Value::from)
+    );
+    assert_eq!(
+        keys(projected[2]["items"].as_array().unwrap()),
+        ["document:Order/command:Invoice", "Form.Command.Receipt"].map(Value::from)
+    );
+    let group_id = &opened["dependencies"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|dependency| source_path(dependency) == Path::new(group_path))
+        .unwrap()["id"];
+    assert_eq!(projected[2]["origin"]["source"], *group_id);
+    let updated = client.request("form/update", &params(&context, json!({"formSessionId":opened["formSessionId"],"revision":"1","overlays":[{
+        "source":group_id,"version":"2","text":group.replace("FormCommandBar", "FormNavigationPanel")
+    }]})));
+    assert_eq!(commands(&updated), projected[..2]);
+    assert_eq!(fs::read_to_string(root.join(group_path)).unwrap(), group);
+    client.finish();
+}
+
+fn based_on_targets(snapshot: &Value) -> Vec<Value> {
+    snapshot["model"]["root"]["presentation"]["autoCommandItems"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|item| item["key"] == "Form.StandardCommand.CreateBasedOn")
+        .unwrap()["items"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|item| item["key"].clone())
+        .collect()
+}
+
+const MENU_ORDER_PATH: &str = "Documents/Order.xml";
+const MENU_ORDER_XML: &str = r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses">
+        <Document uuid="order"><Properties><Name>Order</Name><Posting>Allow</Posting>
+          <ListPresentation>Orders</ListPresentation><DataHistory>Use</DataHistory>
+        </Properties></Document></MetaDataObject>"#;
+const MENU_JOURNAL_PATH: &str = "DocumentJournals/Sales.xml";
+const MENU_JOURNAL_XML: &str = r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable">
+        <DocumentJournal uuid="sales"><Properties><Name>Sales</Name><ListPresentation>Sales journal</ListPresentation>
+          <RegisteredDocuments><xr:Item>Document.Other</xr:Item></RegisteredDocuments>
+        </Properties></DocumentJournal></MetaDataObject>"#;
+
+fn object_menu_fixture() -> support::TestDir {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    let configuration = root.join("Configuration.xml");
+    let xml = fs::read_to_string(&configuration).unwrap().replace(
+        "</ChildObjects>",
+        "<Document>Order</Document><DocumentJournal>Sales</DocumentJournal></ChildObjects>",
+    );
+    fs::write(configuration, xml).unwrap();
+    fs::create_dir(root.join("Documents")).unwrap();
+    fs::create_dir(root.join("DocumentJournals")).unwrap();
+    fs::write(root.join(MENU_ORDER_PATH), MENU_ORDER_XML).unwrap();
+    fs::write(root.join(MENU_JOURNAL_PATH), MENU_JOURNAL_XML).unwrap();
+    let form = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:DocumentObject.Order</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes></Form>"#;
+    fs::write(root.join(PATH), form).unwrap();
+    directory
+}
+
+fn menu_keys(group: &Value) -> Vec<Value> {
+    group
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|item| item["key"].clone())
+        .collect()
+}
+
+#[test]
+fn form_projects_standard_object_menu_and_discovers_dirty_document_journals() {
+    let directory = object_menu_fixture();
+    let root = directory.0.join("src");
+    let menu =
+        |snapshot: &Value| snapshot["model"]["root"]["presentation"]["objectCommandMenu"].clone();
+    let dependency = |snapshot: &Value, path: &str| {
+        snapshot["dependencies"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|item| source_path(item) == Path::new(path))
+            .cloned()
+    };
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 41);
+    let prepared = client.request("form/prepare", &params(&context, json!({"node":node})));
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let original = menu(&opened);
+    assert_eq!(original.as_array().unwrap().len(), 3);
+    assert_eq!(
+        menu_keys(&original[0]),
+        [
+            "Form.StandardCommand.PostAndClose",
+            "Form.StandardCommand.Write",
+            "Form.StandardCommand.Reread",
+            "Form.StandardCommand.Copy",
+            "Form.StandardCommand.SetDeletionMark",
+            "Form.StandardCommand.Delete",
+        ]
+        .map(Value::from)
+    );
+    assert_eq!(
+        menu_keys(&original[1]),
+        [
+            "Form.StandardCommand.Post",
+            "Form.StandardCommand.UndoPosting"
+        ]
+        .map(Value::from)
+    );
+    assert_eq!(
+        menu_keys(&original[2]),
+        [
+            "Form.StandardCommand.ShowInList",
+            "Form.StandardCommand.ChangeHistory"
+        ]
+        .map(Value::from)
+    );
+    assert!(original[2][0].get("items").is_none());
+    assert!(dependency(&opened, MENU_JOURNAL_PATH).is_none());
+
+    let journal_input = prepared_input(
+        &prepared,
+        MENU_JOURNAL_PATH,
+        &MENU_JOURNAL_XML.replace("Document.Other", "Document.Order"),
+        "2",
+    );
+    let order_input = prepared_input(
+        &prepared,
+        MENU_ORDER_PATH,
+        &MENU_ORDER_XML
+            .replace(">Allow<", ">Deny<")
+            .replace(">Use<", ">DontUse<"),
+        "2",
+    );
+    let session = &opened["formSessionId"];
+    let updated = client.request("form/update", &params(&context, json!({"formSessionId":session,"revision":"1","overlays":[],"inputs":[journal_input,order_input]})));
+    let new_menu = menu(&updated);
+    assert_eq!(new_menu.as_array().unwrap().len(), 1);
+    let group = new_menu[0].as_array().unwrap();
+    assert_eq!(group.len(), 7);
+    assert_eq!(group[0]["key"], "Form.StandardCommand.WriteAndClose");
+    let lists = &group[6]["items"];
+    assert_eq!(lists[0]["caption"]["text"], "Orders");
+    assert_eq!(lists[1]["caption"]["text"], "Sales journal");
+    assert_eq!(
+        lists[1]["origin"]["source"],
+        dependency(&updated, MENU_JOURNAL_PATH).unwrap()["id"]
+    );
+    let recovered = client.request(
+        "form/update",
+        &params(
+            &context,
+            json!({"formSessionId":session,"revision":"2","overlays":[],"inputs":[]}),
+        ),
+    );
+    assert_eq!(menu(&recovered), original);
+    assert!(dependency(&recovered, MENU_JOURNAL_PATH).is_none());
+    assert_eq!(
+        fs::read_to_string(root.join(MENU_JOURNAL_PATH)).unwrap(),
+        MENU_JOURNAL_XML
+    );
+    assert_eq!(
+        fs::read_to_string(root.join(MENU_ORDER_PATH)).unwrap(),
+        MENU_ORDER_XML
+    );
+    client.finish();
+}
+
+#[test]
+fn dynamic_list_menu_loads_journal_documents_and_updates_unsaved_sources() {
+    let directory = object_menu_fixture();
+    let root = directory.0.join("src");
+    let journal = MENU_JOURNAL_XML.replace("Document.Other", "Document.Order");
+    fs::write(root.join(MENU_JOURNAL_PATH), &journal).unwrap();
+    let xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <ChildItems><Table name="Rows" id="11"><DataPath>Rows</DataPath><ChildItems><InputField name="Number" id="12"><DataPath>Rows.Number</DataPath></InputField></ChildItems></Table></ChildItems>
+        <Attributes><Attribute name="Rows" id="1"><Type><v8:Type>cfg:DynamicList</v8:Type></Type><Settings><MainTable>DocumentJournal.Sales</MainTable></Settings></Attribute></Attributes></Form>"#;
+    fs::write(root.join(PATH), xml).unwrap();
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        let menu = |snapshot: &Value| {
+            snapshot["model"]["root"]["children"][0]["presentation"]["tableCommandMenu"].clone()
+        };
+        let original = menu(&opened);
+        assert_eq!(original.as_array().unwrap().len(), 6);
+        assert_eq!(original[0][0]["items"][0]["caption"]["text"], "Order");
+        assert_eq!(original[0][0].get("shortcut"), None);
+        let dependency = |snapshot: &Value, path: &str| {
+            snapshot["dependencies"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .find(|dependency| source_path(dependency) == Path::new(path))
+                .unwrap()["id"]
+                .clone()
+        };
+        let order_id = dependency(&opened, MENU_ORDER_PATH);
+        assert_eq!(original[0][0]["items"][0]["origin"]["source"], order_id);
+        assert_eq!(original[3][1]["shortcut"], "Alt+F");
+        let form_id = dependency(&opened, PATH);
+        let changed = xml.replace("<DataPath>Rows</DataPath>", "<DataPath>Rows</DataPath><SearchStringLocation>None</SearchStringLocation><CommandSet><ExcludedCommand>Copy</ExcludedCommand><ExcludedCommand>OutputList</ExcludedCommand></CommandSet>");
+        let session = &opened["formSessionId"];
+        let updated = client.request("form/update", &params(&context, json!({"formSessionId":session,"revision":"1","overlays":[
+            {"source":form_id,"version":"2","text":changed},
+            {"source":order_id,"version":"2","text":MENU_ORDER_XML.replace("<ListPresentation>Orders</ListPresentation>", "<Synonym xmlns:v8=\"http://v8.1c.ru/8.1/data/core\"><v8:item><v8:lang>en</v8:lang><v8:content>Updated invoice</v8:content></v8:item></Synonym>")}
+        ]})));
+        let result = menu(&updated);
+        assert_eq!(
+            result[0][0]["items"][0]["caption"]["items"][0]["content"],
+            "Updated invoice"
+        );
+        assert!(!menu_keys(&result[0]).contains(&Value::from("Table.StandardCommand.Copy")));
+        assert_eq!(result[3][1]["caption"]["key"], "command.Find");
+        assert_eq!(result[3][1]["shortcut"], "Ctrl+F");
+        assert_eq!(result[5][0]["key"], "Table.StandardCommand.SearchControl");
+        let recovered = client.request(
+            "form/update",
+            &params(
+                &context,
+                json!({"formSessionId":session,"revision":"2","overlays":[]}),
+            ),
+        );
+        assert_eq!(menu(&recovered), original);
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(root.join(PATH)).unwrap(), xml);
+    assert_eq!(
+        fs::read_to_string(root.join(MENU_ORDER_PATH)).unwrap(),
+        MENU_ORDER_XML
+    );
+    assert_eq!(
+        fs::read_to_string(root.join(MENU_JOURNAL_PATH)).unwrap(),
+        journal
+    );
+}
+
+#[test]
+fn form_discovers_new_based_on_targets_and_preserves_last_valid_menu() {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    let configuration = root.join("Configuration.xml");
+    let configuration_xml = fs::read_to_string(&configuration).unwrap().replace(
+        "</ChildObjects>",
+        "<Document>Order</Document><Document>Invoice</Document><Document>Receipt</Document></ChildObjects>",
+    );
+    fs::write(configuration, configuration_xml).unwrap();
+    fs::create_dir(root.join("Documents")).unwrap();
+    let document = |name: &str, basis: &str| {
+        format!(
+            r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable">
+        <Document uuid="{name}"><Properties><Name>{name}</Name><BasedOn><xr:Item>Document.{basis}</xr:Item></BasedOn></Properties></Document>
+        </MetaDataObject>"#
+        )
+    };
+    let invoice = "Documents/Invoice.xml";
+    let receipt = "Documents/Receipt.xml";
+    let saved_receipt = document("Receipt", "Other");
+    for (path, content) in [
+        ("Documents/Order.xml", document("Order", "Other")),
+        (invoice, document("Invoice", "Order")),
+        (receipt, saved_receipt.clone()),
+    ] {
+        fs::write(root.join(path), content).unwrap();
+    }
+    fs::write(root.join(PATH), r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:DocumentObject.Order</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes></Form>"#).unwrap();
+    let dependency = |snapshot: &Value, path: &str| {
+        snapshot["dependencies"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|input| source_path(input) == Path::new(path))
+            .cloned()
+    };
+    let mut client = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut client, &directory.0, "en-US", 41);
+    let prepared = client.request("form/prepare", &params(&context, json!({"node":node})));
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    assert_eq!(
+        based_on_targets(&opened),
+        [Value::from(
+            "Document.Invoice.StandardCommand.CreateBasedOn"
+        )]
+    );
+    assert!(dependency(&opened, receipt).is_none());
+    assert!(dependency(&opened, invoice).is_some());
+
+    let id = &opened["formSessionId"];
+    let input = prepared_input(&prepared, receipt, &document("Receipt", "Order"), "2");
+    let updated = client.request(
+        "form/update",
+        &params(
+            &context,
+            json!({"formSessionId":id,"revision":"1","overlays":[],"inputs":[input]}),
+        ),
+    );
+    assert_eq!(
+        based_on_targets(&updated),
+        [
+            "Document.Invoice.StandardCommand.CreateBasedOn",
+            "Document.Receipt.StandardCommand.CreateBasedOn"
+        ]
+        .map(Value::from)
+    );
+    assert_eq!(dependency(&updated, receipt).unwrap()["version"], "2");
+    let broken = prepared_input(&prepared, receipt, "<broken", "3");
+    let rejected = client.response(
+        "form/update",
+        &params(
+            &context,
+            json!({"formSessionId":id,"revision":"2","overlays":[],"inputs":[broken]}),
+        ),
+    );
+    assert_eq!(
+        rejected["error"]["data"]["details"]["reason"],
+        "invalid_metadata"
+    );
+    let retained = client.request("form/get", &params(&context, json!({"formSessionId":id})));
+    assert_eq!(retained["status"], "stale");
+    assert_eq!(based_on_targets(&retained), based_on_targets(&updated));
+    let recovered = client.request(
+        "form/update",
+        &params(
+            &context,
+            json!({"formSessionId":id,"revision":"2","overlays":[],"inputs":[]}),
+        ),
+    );
+    assert_eq!(based_on_targets(&recovered), based_on_targets(&opened));
+    assert_eq!(
+        fs::read_to_string(root.join(receipt)).unwrap(),
+        saved_receipt
+    );
+    client.finish();
 }
 
 #[test]
@@ -1969,7 +2454,7 @@ fn oversized_metadata_depth_preserves_the_last_form_revision() {
             .as_array()
             .unwrap()
             .iter()
-            .find(|input| input["path"]["value"] == "StyleItems/FontA.xml")
+            .find(|input| source_path(input) == Path::new("StyleItems/FontA.xml"))
             .unwrap()["id"];
         let rejected = client.response(
             "form/update",

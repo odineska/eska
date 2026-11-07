@@ -372,7 +372,8 @@
         "buttons.link-captions",
         "buttons.mixed-row-geometry",
         "shell.button-properties",
-        "buttons.mixed-row-full-forms"
+        "buttons.mixed-row-full-forms",
+        "layout.command-bars"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -649,7 +650,8 @@
         "acceptance.full-profile",
         "profile.windows",
         "buttons.mixed-row-geometry",
-        "buttons.mixed-row-full-forms"
+        "buttons.mixed-row-full-forms",
+        "layout.command-bars"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -833,7 +835,8 @@
         "resources.native-picture-layers",
         "windows.frame-discovery",
         "sessions.atomic-publication",
-        "shell.root-properties"
+        "shell.root-properties",
+        "layout.representation-caption-scope"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1108,7 +1111,9 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "layout.representation-caption-scope",
+        "input.string-choice-geometry"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1287,7 +1292,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "layout.representation-caption-scope"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1554,7 +1560,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "layout.command-bars"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1974,7 +1981,10 @@
         "context.native-owner-forms",
         "styles.native-layer-values",
         "buttons.mixed-row-geometry",
-        "buttons.mixed-row-full-forms"
+        "buttons.mixed-row-full-forms",
+        "layout.representation-caption-scope",
+        "layout.empty-groups",
+        "layout.command-bars"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -8171,6 +8181,293 @@
       "lastConfirmation": "docs/measurements/t162-solid-state-batching-linux.json",
       "remaining": "Specific canvas dependencies, stable table models, shared lifecycle, module boundaries/types and full native matrices remain open.",
       "nextAction": "Publish the requested form-preview beta, then continue the queued quality work without weakening pixel diagnostics."
+    },
+    {
+      "id": "layout.representation-caption-scope",
+      "milestone": "T157",
+      "kinds": [
+        "Form",
+        "Page",
+        "UsualGroup",
+        "InputField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "layout.resizing"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "20 recorded group-representation cases: absent Representation, explicit None and Use. Only caption participation and input origin are accepted; complete frames and NormalSeparation insets remain open. Existing fixed-stretch boundaries are covered by the same suite.",
+      "fixtures": [
+        "tests/fixtures/forms/native-through-align-rows"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "through-align",
+        "path": "test/form-through-align-host.cjs",
+        "caseIds": [
+          "representation-scope-TwoInputsAuto",
+          "representation-scope-TwoInputsLeft",
+          "representation-scope-ButtonAuto",
+          "representation-scope-ButtonLeft",
+          "representation-scope-ButtonUseAuto",
+          "representation-scope-ButtonUseLeft",
+          "representation-scope-ButtonDontUse",
+          "representation-scope-ButtonHorizontal",
+          "representation-scope-ButtonBothLeft",
+          "representation-scope-ParentInputs",
+          "representation-scope-ParentButton",
+          "representation-scope-PageDefault",
+          "representation-scope-PageVertical",
+          "representation-scope-PageUse",
+          "representation-scope-RepNoneInputs",
+          "representation-scope-RepNormalInputs",
+          "representation-scope-RepNoneButton",
+          "representation-scope-VerticalAuto",
+          "representation-scope-VerticalNone",
+          "representation-scope-VerticalUse"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-wizard-choice-layout-linux.json",
+          "sha256": "b6988e6b4a8d0039fcc0d5e3c50e3a06e543d020f9f4eac88cbecafc578fc7e0",
+          "assertions": [
+            {
+              "pointer": "/acceptedRepresentationCaptionScope",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "73fa3fa6b650487efaeec80f350961d55bcb990d"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-wizard-choice-layout-linux.json",
+      "remaining": "Complete frame geometry, NormalSeparation vertical insets, other group representations, whole BSP forms and Windows.",
+      "nextAction": "Continue matched-viewport whole-form geometry and verify the recorded scope independently on Windows."
+    },
+    {
+      "id": "input.string-choice-geometry",
+      "milestone": "T158",
+      "kinds": [
+        "InputField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "state.display"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "12 recorded fixed single-line string fields in two forms: native logical width and physical edge, choice/list button kind, InputHint and adjacent tooltip content. Dirty XML and detached resize preserve DOM and selection.",
+      "fixtures": [
+        "tests/fixtures/forms/native-string-choice"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "input-choice",
+        "path": "test/form-input-choice-host.cjs",
+        "caseIds": [
+          "Fields",
+          "HelpContent"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-wizard-choice-layout-linux.json",
+          "sha256": "b6988e6b4a8d0039fcc0d5e3c50e3a06e543d020f9f4eac88cbecafc578fc7e0",
+          "assertions": [
+            {
+              "pointer": "/acceptedStringChoiceGeometry",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "73fa3fa6b650487efaeec80f350961d55bcb990d"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-wizard-choice-layout-linux.json",
+      "remaining": "Automatic and multiline string widths, complete appearance/state matrices, native extended-tooltip window and Windows.",
+      "nextAction": "Verify the multiline choice field on the whole BSP questionnaire and expand the native matrix without claiming full widget pixel acceptance."
+    },
+    {
+      "id": "layout.empty-groups",
+      "milestone": "T157",
+      "kinds": [
+        "UsualGroup"
+      ],
+      "axes": [
+        "layout.geometry",
+        "state.display",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "21 native forms cover omission of ordinary/collapsible groups without rendered content, nested hidden fields and absent table surfaces. Twenty exact frame/control footprints and one positive table presence case with a separately recorded 2 px height residual. Source nodes, neighbour DOM and selection survive dirty/detached transitions.",
+      "fixtures": [
+        "tests/fixtures/forms/native-group-visibility"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "group-visibility",
+        "path": "test/form-group-visibility-host.cjs",
+        "caseIds": [
+          "Control",
+          "Empty",
+          "HiddenField",
+          "HiddenTable",
+          "NestedHidden",
+          "VisibleField",
+          "VisibleTable",
+          "HiddenColumns",
+          "TitleHidden",
+          "NormalHidden",
+          "StrongHidden",
+          "PaintedHidden",
+          "FixedWidthHidden",
+          "FixedHeightHidden",
+          "StretchHidden",
+          "StretchXHidden",
+          "CollapsibleHidden",
+          "EmptyTitle",
+          "EmptyPainted",
+          "EmptyFixedHeight",
+          "EmptyCollapsible"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-empty-groups-linux.json",
+          "sha256": "a5ce36a80162c3c13bcf50dc7b45f8674de6cd2f11c05835d488a825cb672ae3",
+          "assertions": [
+            {
+              "pointer": "/acceptedGroupVisibility",
+              "equals": true
+            },
+            {
+              "pointer": "/nativeReference/exactFootprintForms",
+              "equals": 20
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "8a5b9da01e1eac27c9f22b0f55888e13a7baa371"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-empty-groups-linux.json",
+      "remaining": "NormalSeparation edge/nested insets, label metrics, visible-table height, matched-viewport whole forms and Windows. Command-bar placement has a separate accepted limited scope.",
+      "nextAction": "Measure the visible ordinary-group separation insets at parent edges and through nested branches; repeat the BSP headings at equal viewport."
+    },
+    {
+      "id": "layout.command-bars",
+      "milestone": "T157",
+      "kinds": [
+        "CommandBar",
+        "UsualGroup",
+        "Button",
+        "Popup"
+      ],
+      "axes": [
+        "layout.geometry",
+        "state.display",
+        "source.identity"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "38 native forms cover command-only row allocation, Auto/Left/Right, explicit stretch/parent width, hidden or empty bars, vertical nesting and United=false columns on three widths. Exact frame, field and button bounds in Linux ru/en; dirty/floating/resize transitions preserve DOM, selection and source nodes. Exact legacy popup XML was independently rechecked in compatibility 8.3.24/8.3.27.",
+      "fixtures": [
+        "tests/fixtures/forms/native-command-bars",
+        "tests/fixtures/forms/native-groups/BarWithPopup.xml",
+        "tests/fixtures/forms/native-table-commands/TablePopup.xml"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "command-bars",
+        "path": "test/form-command-bars-host.cjs",
+        "caseIds": [
+          "AutoBoth",
+          "LeftBoth",
+          "RightBoth",
+          "RightHiddenLeft",
+          "RightEmptyLeft",
+          "RightOnly",
+          "AutoHiddenLeft",
+          "LeftOnly",
+          "RightHiddenRight",
+          "BothHidden",
+          "EmptyOnly",
+          "RightBarFixed",
+          "RightParentFixed",
+          "RightParentWidth",
+          "RightVerticalParent",
+          "RightNested",
+          "TwoRight",
+          "ReversedSource",
+          "AutoBelow2",
+          "AutoBelow20",
+          "AutoNoBelow",
+          "AutoNestedPopup",
+          "AutoParentFixed",
+          "AutoUnitedFalse",
+          "AutoUnitedTrue",
+          "AutoAbove30",
+          "AutoAbove70",
+          "RightAbove30",
+          "RightAbove70",
+          "AutoLeftFixed",
+          "AutoBothFixed",
+          "RightLeftFixed",
+          "AutoPopupAbove30",
+          "AutoPopupAbove70",
+          "AutoUnitedFalseAbove30",
+          "AutoUnitedFalseAbove70",
+          "RightUnitedFalse",
+          "UnitedFalseHiddenLeft"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-command-bars-linux.json",
+          "sha256": "9870b1b8b8884384a6459362b7b6dcc95e56de1199cfb9a4284e7b57a4f81c20",
+          "assertions": [
+            {
+              "pointer": "/acceptedCommandBarGeometry",
+              "equals": true
+            },
+            {
+              "pointer": "/nativeReference/exactFootprintForms",
+              "equals": 38
+            },
+            {
+              "pointer": "/validation/acceptedInstalledObservations",
+              "equals": 949
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "0323a45a0dbe730502c7c160b555b62ecb47b23d"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-command-bars-linux.json",
+      "remaining": "Matched-viewport BSP footer still differs by 3 px in x and 2 px in frame width. Mixed control/command rows, all fonts/styles, native resize, table popup top/height and Windows remain open.",
+      "nextAction": "Continue the whole-form geometry priority: group separation insets and heading metrics, then independently measure the Windows command-bar matrix."
     }
   ],
   "historicalReports": [
@@ -8376,6 +8673,24 @@
         "tables.search-reflow"
       ],
       "currentRemainder": "The 260px widget and its viewport transition are accepted in Linux ru/en. The full compact toolbar matrix and Windows remain open."
+    },
+    {
+      "id": "command-bar-minimum-and-footer",
+      "historicalReport": "docs/measurements/t157-native-groups-linux.json",
+      "historicalGap": "BarWithPopup recorded frame 142x79 and a 76 px viewer button. Exact legacy XML was recaptured in compatibility 8.3.24 and 8.3.27 as frame 111x79 with a 77 px button.",
+      "currentEntries": [
+        "layout.command-bars"
+      ],
+      "currentRemainder": "Only this popup measurement is superseded. General group/style geometry and the full profile remain open; the legacy table popup still differs in top position and height."
+    },
+    {
+      "id": "empty-groups-footer-follow-up",
+      "historicalReport": "docs/measurements/t157-empty-groups-linux.json",
+      "historicalGap": "The master Next button remained at x=129 instead of the reconstructed native x=625 after empty groups were removed.",
+      "currentEntries": [
+        "layout.command-bars"
+      ],
+      "currentRemainder": "The command-bar rule moves Next to x=628. The 3 px residual, equal viewport, group insets, heading metrics, other full forms and Windows remain open."
     }
   ],
   "nextGroups": [

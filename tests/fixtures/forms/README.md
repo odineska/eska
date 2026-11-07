@@ -169,11 +169,12 @@ python3 -B -m unittest discover -s tests -p test_form_coverage.py
 общие углы ввода, подсказка, разделитель и очистка. [Приёмка](../../../docs/measurements/t159-native-table-search-fields-linux.json)
 не закрывает native-вариант 11 px/жёлтой рамки или все состояния поиска.
 
-`native-standard-pictures/` содержит native XML и матрицу шести стандартных
+`native-standard-pictures/` содержит Designer XML и матрицу двенадцати стандартных
 картинок на трёх фонах; проверена прозрачность и полная панель DynamicList
 в записанном начальном состоянии. [Отчёт](../../../docs/measurements/t156-native-standard-pictures-linux.json).
 Автоматические стрелки остальных таблиц, другие картинки/состояния и полная
 геометрия декораций остаются незавершёнными.
+[Дополнительные значки команд](../../../docs/measurements/t158-command-pictures-linux.json).
 
 `native-table-movement/` принимает полный блок автоматических стрелок 60×27
 на белом фоне в подтверждённом профиле 96 DPI/100%. [Отчёт](../../../docs/measurements/t159-native-table-movement-linux.json)

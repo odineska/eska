@@ -71,12 +71,46 @@ pub(super) fn collect(root: Node<'_, '_>) -> Vec<FormReference> {
     output
 }
 
-fn request(kind: MetadataKind, name: &str, output: &mut Vec<ObjectId>) {
-    if name.is_empty() || name.contains(['/', '\\', '\0']) {
-        return;
+fn object_id(parent: Option<&ObjectId>, kind: MetadataKind, name: &str) -> Option<ObjectId> {
+    (!name.is_empty() && !name.contains(['/', '\\', '\0']))
+        .then(|| ObjectId::from_parts(parent, kind.as_str(), name))
+}
+
+pub(super) fn metadata_type_id(key: &PropertyKey) -> Option<ObjectId> {
+    if key.namespace.as_deref() != Some(CONFIG) {
+        return None;
     }
-    let id = ObjectId::from_parts(None, kind.as_str(), name);
-    if !output.contains(&id) {
+    let (kind, name) = key.name.split_once('.')?;
+    object_id(None, type_kind(kind)?, name)
+}
+
+pub(super) fn metadata_command_id(reference: &str) -> Option<ObjectId> {
+    let mut parts = reference.split('.');
+    let kind = MetadataKind::from_xml_tag(parts.next()?).ok()?;
+    let owner = object_id(None, kind, parts.next()?)?;
+    let member = parts.next();
+    if kind == MetadataKind::CommonCommand {
+        return member.is_none().then_some(owner);
+    }
+    if member != Some("Command") || kind.collection_folder().is_none() {
+        return None;
+    }
+    let name = parts.next()?;
+    if parts.next().is_some() {
+        return None;
+    }
+    object_id(Some(&owner), MetadataKind::Command, name)
+}
+
+pub(super) fn command_group_id(reference: &str) -> Option<ObjectId> {
+    let name = reference.strip_prefix("CommandGroup.")?;
+    object_id(None, MetadataKind::CommandGroup, name)
+}
+
+fn request(id: Option<ObjectId>, output: &mut Vec<ObjectId>) {
+    if let Some(id) = id
+        && !output.contains(&id)
+    {
         output.push(id);
     }
 }
@@ -98,33 +132,46 @@ pub(super) fn discover_resources(
         let kind = parts.next().unwrap_or_default();
         let value = parts.next().unwrap_or_default();
         if matches!(name, "DefaultStyle" | "Style") && kind == "Style" {
-            request(MetadataKind::Style, value, &mut output);
+            request(object_id(None, MetadataKind::Style, value), &mut output);
         }
-        if name == "CommandName" && kind == "CommonCommand" {
-            request(MetadataKind::CommonCommand, value, &mut output);
+        if node.tag_name().namespace() == Some(super::FORM_NAMESPACE)
+            && matches!(name, "CommandName" | "Command")
+        {
+            request(metadata_command_id(text), &mut output);
+        }
+        if node.has_tag_name((super::FORM_NAMESPACE, "CommandGroup"))
+            || node.has_tag_name((super::super::metadata_parser::MD_NAMESPACE, "Group"))
+        {
+            request(command_group_id(text), &mut output);
         }
         if name == "Ref"
             && node.tag_name().namespace() == Some("http://v8.1c.ru/8.3/xcf/readable")
             && kind == "CommonPicture"
         {
-            request(MetadataKind::CommonPicture, value, &mut output);
+            request(
+                object_id(None, MetadataKind::CommonPicture, value),
+                &mut output,
+            );
         }
         if include_types
             && matches!(name, "Type" | "MainTable" | "Value")
             && !kind.starts_with("External")
             && let Some(kind) = type_kind(kind)
         {
-            request(kind, value, &mut output);
+            request(object_id(None, kind, value), &mut output);
         }
     }
     for reference in references {
         if reference.target.namespace.as_deref() == Some(STYLE) {
-            request(MetadataKind::StyleItem, &reference.target.name, &mut output);
+            request(
+                object_id(None, MetadataKind::StyleItem, &reference.target.name),
+                &mut output,
+            );
         }
         if reference.target.namespace.as_deref() == Some(CONFIG)
             && let Some(name) = reference.target.name.strip_prefix("StyleItem.")
         {
-            request(MetadataKind::StyleItem, name, &mut output);
+            request(object_id(None, MetadataKind::StyleItem, name), &mut output);
         }
     }
     output
@@ -134,6 +181,7 @@ pub(super) fn type_kind(name: &str) -> Option<MetadataKind> {
     match name {
         "Catalog" | "CatalogObject" | "CatalogRef" => Some(MetadataKind::Catalog),
         "Document" | "DocumentObject" | "DocumentRef" => Some(MetadataKind::Document),
+        "DocumentJournal" => Some(MetadataKind::DocumentJournal),
         "Enum" | "EnumRef" => Some(MetadataKind::Enum),
         "DataProcessor" | "DataProcessorObject" | "ExternalDataProcessorObject" => {
             Some(MetadataKind::DataProcessor)

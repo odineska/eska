@@ -1,14 +1,18 @@
 //! Derive captions, binding types and appearance once in the shared backend; the UI only lays them out.
 
 use super::{
-    AppearanceDiagnostic, ComposedForm, EffectiveDefinition, EffectiveElement, ElementFamily,
-    ElementIdentity, ElementKind, FormDocument, FormResource, PropertySource, ResolvedColor,
-    ResolvedFont, SourcedProperty,
+    AppearanceDiagnostic, ButtonRepresentation, ComposedForm, EffectiveDefinition,
+    EffectiveElement, ElementFamily, ElementIdentity, ElementKind, FormDocument, FormResource,
+    PropertySource, ResolvedColor, ResolvedFont, SourcedProperty,
     appearance::{self, Appearance},
+    commands::{ResolvedCommand, effective_metadata},
+    pictures, references,
 };
 use crate::project::{
-    metadata_model::{LocalizedText, MetadataKind, MetadataProperty, MetadataValue, PropertyKey},
-    metadata_parser::{MD_NAMESPACE, ParsedObject},
+    metadata_model::{
+        LocalizedText, MetadataKind, MetadataProperty, MetadataValue, ObjectId, PropertyKey,
+    },
+    metadata_parser::{LocatedProperty, MD_NAMESPACE, ParsedObject},
 };
 use serde::Serialize;
 
@@ -107,6 +111,8 @@ pub struct ElementPresentation {
     pub mark_incomplete: bool,
     pub title_location: FieldTitleLocation,
     pub picture: Option<super::FormPicture>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub button_representation: Option<ButtonRepresentation>,
     pub caption: PresentationText,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tabular_total: Option<TabularTotalCaption>,
@@ -125,12 +131,17 @@ pub struct ElementPresentation {
     pub title_color: ResolvedColor,
     pub auto_commands: Vec<String>,
     pub auto_command_items: Vec<super::AutoCommandItem>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub object_command_menu: Vec<Vec<super::AutoCommandItem>>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub table_command_menu: Vec<Vec<super::AutoCommandItem>>,
 }
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FormPresentation {
     pub elements: Vec<ElementPresentation>,
     pub important_color: ResolvedColor,
+    pub activity_color: ResolvedColor,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub script_variant: Option<FormScriptVariant>,
     pub diagnostics: Vec<AppearanceDiagnostic>,
@@ -164,6 +175,7 @@ pub fn present(
     FormPresentation {
         elements,
         important_color: appearance.color(None, "ImportantColor"),
+        activity_color: appearance.color(None, "ActivityColor"),
         script_variant: script_variant(resources),
         diagnostics: appearance.diagnostics,
     }
@@ -257,11 +269,16 @@ fn present_element(
         tabular_total,
     } = bind(element, form, resources);
     let binding_caption = binding_caption.map(|caption| column_caption(caption, scope.in_table));
-    let command = element.scalar("CommandName");
+    let command_name = element.scalar("CommandName");
+    let command = command_name.and_then(|name| ResolvedCommand::resolve(name, form, resources));
     let authored_caption = element
         .property("Title")
         .and_then(|value| literal(&value.property.value))
-        .or_else(|| command.and_then(|command| command_caption(command, form, resources)));
+        .or_else(|| {
+            command
+                .as_ref()
+                .and_then(|command| command.caption(resources))
+        });
     let tabular_total = tabular_total.then_some(if authored_caption.is_some() {
         TabularTotalCaption::Overridden
     } else {
@@ -276,39 +293,33 @@ fn present_element(
                 element.name.clone().unwrap_or_default()
             },
         });
-    let group = element.kind == Some(ElementKind::UsualGroup);
-    let tab = element.kind == Some(ElementKind::Pages) || scope.pages_parent(element).is_some();
     let font = appearance.font(element.property("Font"), font_role(element));
     let title_font = appearance.font(
         scope.title_property(element, "TitleFont"),
         title_font_role(element),
     );
-    let foreground = appearance.color(element.property("TextColor"), text_color_role(element));
-    let background = appearance.color(
-        element.property("BackColor"),
-        if element.kind == Some(ElementKind::Button) {
-            "ButtonBackColor"
-        } else {
-            "BackColor"
-        },
-    );
-    let border = appearance.color(element.property("BorderColor"), "BorderColor");
-    let title_color = appearance.color(
-        scope.title_property(element, "TitleTextColor"),
-        if tab {
-            "FieldTextColor"
-        } else if group {
-            "GroupTitleTextColor"
-        } else {
-            "FormTextColor"
-        },
-    );
+    let (foreground, background, border, title_color) = element_colors(element, scope, appearance);
     let choices = element
         .property("ChoiceList")
         .map(|value| choices(&value.property.value, resources))
         .filter(|values| !values.is_empty())
         .unwrap_or_else(|| enum_choices(&value_type, resources));
-    let auto_command_items = element_commands(element, &value_type, form, resources, tables);
+    let (picture, button_representation) = element_picture(
+        element,
+        scope,
+        command.as_ref(),
+        resources,
+        &mut appearance.diagnostics,
+    );
+    let (auto_command_items, object_command_menu) = if element.kind == Some(ElementKind::Form) {
+        let commands = super::root_commands::project(form, resources, &mut appearance.diagnostics);
+        (commands.inline, commands.object_menu)
+    } else {
+        (
+            element_commands(element, &value_type, form, resources, tables),
+            Vec::new(),
+        )
+    };
     let auto_commands = standard_form_commands(&auto_command_items);
     let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
     ElementPresentation {
@@ -318,7 +329,7 @@ fn present_element(
         grouping: grouping(element),
         united: group_united(element),
         displayed: is_displayed(element, binding.as_ref(), appearance)
-            && super::commands::visible(tables, command)
+            && super::commands::visible(tables, command_name)
             && (scope.parent.is_some_and(is_command_area)
                 || !matches!(
                     element.kind,
@@ -326,7 +337,8 @@ fn present_element(
                 )),
         mark_incomplete,
         title_location: title_location(element),
-        picture: super::pictures::resolve(element, resources, &mut appearance.diagnostics),
+        picture,
+        button_representation,
         caption,
         tabular_total,
         tooltip: element
@@ -336,6 +348,7 @@ fn present_element(
             .property("FooterText")
             .and_then(|value| literal(&value.property.value)),
         table_column_appearance: table_column_appearance(element, scope, appearance),
+        table_command_menu: table_command_menu(element, &value_type, form, resources, tables),
         value_type,
         binding,
         choices,
@@ -347,7 +360,67 @@ fn present_element(
         title_color,
         auto_commands,
         auto_command_items,
+        object_command_menu,
     }
+}
+
+fn element_colors(
+    element: &EffectiveElement,
+    scope: VisitScope<'_>,
+    appearance: &mut Appearance<'_>,
+) -> (ResolvedColor, ResolvedColor, ResolvedColor, ResolvedColor) {
+    let foreground = appearance.color(element.property("TextColor"), text_color_role(element));
+    let background = appearance.color(
+        element.property("BackColor"),
+        if element.kind == Some(ElementKind::Button) {
+            "ButtonBackColor"
+        } else {
+            "BackColor"
+        },
+    );
+    let border = appearance.color(element.property("BorderColor"), "BorderColor");
+    let tab = element.kind == Some(ElementKind::Pages) || scope.pages_parent(element).is_some();
+    let title_role = if tab {
+        "FieldTextColor"
+    } else if element.kind == Some(ElementKind::UsualGroup) {
+        "GroupTitleTextColor"
+    } else {
+        "FormTextColor"
+    };
+    let title_color = appearance.color(scope.title_property(element, "TitleTextColor"), title_role);
+    (foreground, background, border, title_color)
+}
+
+fn element_picture(
+    element: &EffectiveElement,
+    scope: VisitScope<'_>,
+    command: Option<&ResolvedCommand<'_>>,
+    resources: &[FormResource],
+    diagnostics: &mut Vec<AppearanceDiagnostic>,
+) -> (Option<super::FormPicture>, Option<ButtonRepresentation>) {
+    let button = element.kind == Some(ElementKind::Button);
+    let picture = if let Some(property) = element.property("Picture") {
+        pictures::form_picture(property, resources, diagnostics)
+    } else if button {
+        command.and_then(|command| command.picture(resources, diagnostics))
+    } else {
+        None
+    };
+    let representation = button.then(|| {
+        let automatic = match element.scalar("Type") {
+            Some("CommandBarButton" | "CommandBarHyperlink") => ButtonRepresentation::Picture,
+            Some("Hyperlink") => ButtonRepresentation::PictureAndText,
+            None if scope.parent.is_some_and(is_command_area) => ButtonRepresentation::Picture,
+            _ => ButtonRepresentation::Text,
+        };
+        ButtonRepresentation::effective(
+            picture.as_ref(),
+            element.scalar("Representation"),
+            command.and_then(|command| command.representation(resources)),
+            automatic,
+        )
+    });
+    (picture, representation)
 }
 
 fn table_column_appearance(
@@ -458,7 +531,6 @@ fn element_commands(
     tables: &super::commands::TableIndex<'_>,
 ) -> Vec<super::AutoCommandItem> {
     match element.kind {
-        Some(ElementKind::Form) => super::commands::automatic(form, resources),
         Some(ElementKind::Table) => super::commands::table(element, value_type),
         Some(ElementKind::CommandBar) => super::commands::table_source(element, tables)
             .map(|table| {
@@ -468,6 +540,41 @@ fn element_commands(
             .unwrap_or_default(),
         _ => Vec::new(),
     }
+}
+
+fn table_command_menu(
+    element: &EffectiveElement,
+    value_type: &FieldType,
+    form: &ComposedForm,
+    resources: &[FormResource],
+    tables: &super::commands::TableIndex<'_>,
+) -> Vec<Vec<super::AutoCommandItem>> {
+    let table = match element.kind {
+        Some(ElementKind::Table) if super::commands::autofill(element) => element,
+        Some(ElementKind::CommandBar) => {
+            let Some(table) = super::commands::table_source(element, tables) else {
+                return Vec::new();
+            };
+            table
+        }
+        _ => return Vec::new(),
+    };
+    let binding;
+    let value_type = if element.kind == Some(ElementKind::Table) {
+        value_type
+    } else {
+        binding = bind(table, form, resources);
+        &binding.value_type
+    };
+    if !super::commands::is_dynamic_list(value_type) {
+        return Vec::new();
+    }
+    let source = binding_path(table, form)
+        .filter(|(_, remaining)| remaining.is_empty())
+        .and_then(|(attribute, _)| main_table_id(attribute))
+        .and_then(|id| effective_metadata(&id, resources))
+        .map(|(_, owner)| owner);
+    super::table_commands::sections(table, source, resources)
 }
 
 fn standard_form_commands(items: &[super::AutoCommandItem]) -> Vec<String> {
@@ -514,6 +621,15 @@ fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
         Some("Top") => FieldTitleLocation::Top,
         Some("Bottom") => FieldTitleLocation::Bottom,
         Some("None") => FieldTitleLocation::None,
+        _ if element.kind == Some(ElementKind::InputField)
+            && matches!(element.scalar("MultiLine"), Some("true" | "1"))
+            && !element
+                .scalar("Height")
+                .and_then(|value| value.parse::<f64>().ok())
+                .is_some_and(|height| height > 0.0 && height <= 1.0) =>
+        {
+            FieldTitleLocation::Top
+        }
         _ if matches!(
             element.kind,
             Some(
@@ -681,73 +797,126 @@ fn bind(
     form: &ComposedForm,
     resources: &[FormResource],
 ) -> FieldBinding {
-    let Some(path) = element.scalar("DataPath") else {
+    let Some((attribute, remaining)) = binding_path(element, form) else {
         return FieldBinding::default();
     };
-    let mut path = path.split('.');
-    let Some(attribute) = path.next().and_then(|name| {
-        form.attributes
-            .iter()
-            .find(|definition| definition.name.as_deref() == Some(name))
-    }) else {
-        return FieldBinding::default();
-    };
-    let remaining: Vec<_> = path.collect();
+    resolve_binding(attribute, &remaining, resources).unwrap_or_else(|_| FieldBinding {
+        source: Some(attribute.origin.clone()),
+        ..FieldBinding::default()
+    })
+}
+
+fn binding_path<'e, 'f>(
+    element: &'e EffectiveElement,
+    form: &'f ComposedForm,
+) -> Option<(&'f EffectiveDefinition, Vec<&'e str>)> {
+    let mut path = element.scalar("DataPath")?.split('.');
+    let name = path.next()?;
+    let attribute = form
+        .attributes
+        .iter()
+        .find(|definition| definition.name.as_deref() == Some(name))?;
+    Some((attribute, path.collect()))
+}
+
+/// Only follow reference types on paths used by the composed form.
+pub(super) fn binding_resource_requests(
+    form: &ComposedForm,
+    resources: &[FormResource],
+) -> Vec<ObjectId> {
+    let mut pending = vec![&form.root];
+    let mut requests = Vec::new();
+    while let Some(element) = pending.pop() {
+        pending.extend(element.children.iter().chain(&element.auxiliary));
+        let Some((attribute, remaining)) = binding_path(element, form) else {
+            continue;
+        };
+        if element.kind == Some(ElementKind::Table)
+            && remaining.is_empty()
+            && super::commands::is_dynamic_list(&definition_type(attribute))
+            && let Some(id) = main_table_id(attribute)
+            && let Some((_, source)) = effective_metadata(&id, resources)
+        {
+            requests.extend(super::table_commands::creation_requests(source, resources));
+        }
+        if remaining.len() > 1
+            && let Err(BindingFailure::Unloaded(target)) =
+                resolve_binding(attribute, &remaining, resources)
+        {
+            requests.push(target);
+        }
+    }
+    requests
+}
+
+enum BindingFailure {
+    Unresolved,
+    Unloaded(ObjectId),
+}
+
+fn resolve_binding(
+    attribute: &EffectiveDefinition,
+    remaining: &[&str],
+    resources: &[FormResource],
+) -> Result<FieldBinding, BindingFailure> {
     if remaining.is_empty() {
-        return FieldBinding {
+        return Ok(FieldBinding {
             caption: definition_caption(attribute),
             value_type: definition_type(attribute),
             source: Some(attribute.origin.clone()),
             tabular_total: false,
-        };
+        });
     }
-    if let Some(value) = column_binding(attribute, &remaining) {
-        return value;
+    if let Some((column, consumed)) = column_binding(attribute, remaining) {
+        if consumed == remaining.len() {
+            return Ok(column);
+        }
+        if let Some(target) = single_type_target(&column.value_type) {
+            match metadata_binding(target, &remaining[consumed..], resources) {
+                Err(BindingFailure::Unresolved) => {}
+                binding => return binding,
+            }
+        }
     }
-    let kind = definition_type(attribute);
-    let target = kind
+    let target = definition_type(attribute)
         .types
         .iter()
-        .filter(|kind| kind.namespace.as_deref() == Some(super::references::CONFIG))
-        .find_map(|kind| {
-            let (kind, name) = kind.name.split_once('.')?;
-            super::references::type_kind(kind).map(|kind| (kind, name))
-        })
-        .or_else(|| {
-            attribute
-                .properties
-                .iter()
-                .find_map(|property| find_main_table(&property.property.value))
-        });
-    target
-        .and_then(|(kind, name)| metadata_binding(kind, name, &remaining, resources))
-        .unwrap_or_else(|| FieldBinding {
-            source: Some(attribute.origin.clone()),
-            ..FieldBinding::default()
-        })
+        .find_map(references::metadata_type_id)
+        .or_else(|| main_table_id(attribute))
+        .ok_or(BindingFailure::Unresolved)?;
+    metadata_binding(target, remaining, resources)
 }
+
+fn single_type_target(value_type: &FieldType) -> Option<ObjectId> {
+    let [key] = value_type.types.as_slice() else {
+        return None;
+    };
+    references::metadata_type_id(key)
+}
+
 fn metadata_binding(
-    kind: MetadataKind,
-    name: &str,
+    target: ObjectId,
     remaining: &[&str],
     resources: &[FormResource],
-) -> Option<FieldBinding> {
-    let (mut resource, mut owner) = resources.iter().rev().find_map(|resource| {
-        resource
-            .descriptor
-            .objects
-            .iter()
-            .find(|object| object.metadata.kind() == kind && object.metadata.name() == name)
-            .map(|owner| (resource, owner))
-    })?;
+) -> Result<FieldBinding, BindingFailure> {
+    let (mut resource, mut owner) =
+        effective_metadata(&target, resources).ok_or(BindingFailure::Unloaded(target))?;
     for (index, part) in remaining.iter().enumerate() {
+        let terminal = index + 1 == remaining.len();
         if let Some((layer, child)) = metadata_child(owner, part, resources) {
-            resource = layer;
-            owner = child;
-        } else if index + 1 != remaining.len() {
-            return None;
+            if terminal || child.metadata.kind() == MetadataKind::TabularSection {
+                (resource, owner) = (layer, child);
+            } else {
+                let target = metadata_property(child, "Type", resources)
+                    .and_then(|property| single_type_target(&field_type(&property.value)))
+                    .ok_or(BindingFailure::Unresolved)?;
+                (resource, owner) = effective_metadata(&target, resources)
+                    .ok_or(BindingFailure::Unloaded(target))?;
+            }
+        } else if !terminal {
+            return Err(BindingFailure::Unresolved);
         } else if standard_attribute(part) {
-            return Some(FieldBinding {
+            return Ok(FieldBinding {
                 caption: Some(standard_caption(part, owner, resources)),
                 value_type: standard_type(part, owner, resources),
                 source: Some(PropertySource {
@@ -758,18 +927,22 @@ fn metadata_binding(
             });
         } else if owner.metadata.kind() == MetadataKind::TabularSection {
             // Designer exports the synthetic total as Total<column> in DataPath.
-            let (layer, column) = metadata_child(owner, part.strip_prefix("Total")?, resources)?;
+            let column_name = part
+                .strip_prefix("Total")
+                .ok_or(BindingFailure::Unresolved)?;
+            let (layer, column) =
+                metadata_child(owner, column_name, resources).ok_or(BindingFailure::Unresolved)?;
             let mut binding = metadata_field(layer, column, resources);
             if binding.value_type.kind != FieldValueKind::Number {
-                return None;
+                return Err(BindingFailure::Unresolved);
             }
             binding.tabular_total = true;
-            return Some(binding);
+            return Ok(binding);
         } else {
-            return None;
+            return Err(BindingFailure::Unresolved);
         }
     }
-    Some(metadata_field(resource, owner, resources))
+    Ok(metadata_field(resource, owner, resources))
 }
 
 fn metadata_child<'a>(
@@ -820,7 +993,7 @@ fn metadata_field(
         tabular_total: false,
     }
 }
-fn definition_caption(value: &EffectiveDefinition) -> Option<PresentationText> {
+pub(super) fn definition_caption(value: &EffectiveDefinition) -> Option<PresentationText> {
     value
         .property("Title")
         .and_then(|value| literal(&value.property.value))
@@ -831,6 +1004,14 @@ fn definition_caption(value: &EffectiveDefinition) -> Option<PresentationText> {
                 .map(|text| PresentationText::Name { text: text.clone() })
         })
 }
+fn main_table_id(attribute: &EffectiveDefinition) -> Option<ObjectId> {
+    let (kind, name) = attribute
+        .properties
+        .iter()
+        .find_map(|property| find_main_table(&property.property.value))?;
+    Some(ObjectId::from_parts(None, kind.as_str(), name))
+}
+
 fn find_main_table(value: &MetadataValue) -> Option<(MetadataKind, &str)> {
     if let MetadataValue::Record(fields) = value {
         for field in fields {
@@ -875,23 +1056,33 @@ pub(super) fn metadata_property<'a>(
     name: &str,
     resources: &'a [FormResource],
 ) -> Option<&'a MetadataProperty> {
-    resources
-        .iter()
-        .rev()
-        .flat_map(|resource| &resource.descriptor.objects)
-        .filter(|object| object.metadata.id() == owner.metadata.id())
-        .find_map(|object| own_metadata_property(object, name))
+    located_metadata_property(owner, name, resources).map(|(_, value)| &value.property)
+}
+pub(super) fn located_metadata_property<'a>(
+    owner: &ParsedObject,
+    name: &str,
+    resources: &'a [FormResource],
+) -> Option<(&'a FormResource, &'a LocatedProperty)> {
+    resources.iter().rev().find_map(|resource| {
+        let object = resource
+            .descriptor
+            .objects
+            .iter()
+            .find(|object| object.metadata.id() == owner.metadata.id())?;
+        own_metadata_located_property(object, name).map(|property| (resource, property))
+    })
 }
 fn own_metadata_property<'a>(owner: &'a ParsedObject, name: &str) -> Option<&'a MetadataProperty> {
-    owner
-        .properties
-        .as_ref()?
-        .iter()
-        .find(|value| {
-            value.property.key.name == name
-                && value.property.key.namespace.as_deref() == Some("http://v8.1c.ru/8.3/MDClasses")
-        })
-        .map(|value| &value.property)
+    own_metadata_located_property(owner, name).map(|value| &value.property)
+}
+fn own_metadata_located_property<'a>(
+    owner: &'a ParsedObject,
+    name: &str,
+) -> Option<&'a LocatedProperty> {
+    owner.properties.as_ref()?.iter().find(|value| {
+        value.property.key.name == name
+            && value.property.key.namespace.as_deref() == Some(MD_NAMESPACE)
+    })
 }
 fn standard_property<'a>(
     owner: &ParsedObject,
@@ -977,33 +1168,6 @@ fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -
         digits,
         ..FieldType::default()
     }
-}
-fn command_caption(
-    command: &str,
-    form: &ComposedForm,
-    resources: &[FormResource],
-) -> Option<PresentationText> {
-    if let Some(name) = super::commands::local_command_name(command) {
-        return super::commands::local_command(form, name).and_then(definition_caption);
-    }
-    if let Some(name) = command.strip_prefix("CommonCommand.") {
-        return resources
-            .iter()
-            .rev()
-            .flat_map(|resource| &resource.descriptor.objects)
-            .find(|object| {
-                object.metadata.kind() == MetadataKind::CommonCommand
-                    && object.metadata.name() == name
-            })
-            .map(|object| PresentationText::Literal {
-                items: object.synonyms.clone(),
-            });
-    }
-    command
-        .split_once(".StandardCommand.")
-        .map(|(_, key)| PresentationText::Standard {
-            key: format!("command.{key}"),
-        })
 }
 fn enum_choices(value_type: &FieldType, resources: &[FormResource]) -> Vec<PresentationText> {
     let Some(name) = value_type
@@ -1134,40 +1298,41 @@ fn choice_reference(value: &MetadataValue, resources: &[FormResource]) -> Option
     }
 }
 
-fn column_binding(attribute: &EffectiveDefinition, remaining: &[&str]) -> Option<FieldBinding> {
-    if let Some(columns) = attribute
+fn column_binding(
+    attribute: &EffectiveDefinition,
+    remaining: &[&str],
+) -> Option<(FieldBinding, usize)> {
+    let columns = attribute
         .properties
         .iter()
-        .find(|value| value.property.key.name == "Columns")
-    {
-        let mut value = &columns.property.value;
-        let mut found = None;
-        for part in remaining {
-            found = if let MetadataValue::Record(fields) = value {
-                fields
-                    .iter()
-                    .find(|field| appearance::qualifier(field, "name") == Some(*part))
-            } else {
-                None
-            };
-            let Some(column) = found else {
-                break;
-            };
-            value = record(&column.value, "Columns").map_or(&column.value, |field| &field.value);
-        }
-        if let Some(column) = found {
-            return Some(FieldBinding {
-                caption: record(&column.value, "Title").and_then(|value| literal(&value.value)),
-                value_type: record(&column.value, "Type")
-                    .map(|value| field_type(&value.value))
-                    .unwrap_or_default(),
-                source: Some(columns.origin.clone()),
-                tabular_total: false,
-            });
-        }
+        .find(|value| value.property.key.name == "Columns")?;
+    let mut value = &columns.property.value;
+    let mut found = None;
+    for (index, part) in remaining.iter().enumerate() {
+        let MetadataValue::Record(fields) = value else {
+            break;
+        };
+        let Some(column) = fields
+            .iter()
+            .find(|field| appearance::qualifier(field, "name") == Some(*part))
+        else {
+            break;
+        };
+        found = Some((column, index + 1));
+        value = record(&column.value, "Columns").map_or(&column.value, |field| &field.value);
     }
-
-    None
+    let (column, consumed) = found?;
+    Some((
+        FieldBinding {
+            caption: record(&column.value, "Title").and_then(|value| literal(&value.value)),
+            value_type: record(&column.value, "Type")
+                .map(|value| field_type(&value.value))
+                .unwrap_or_default(),
+            source: Some(columns.origin.clone()),
+            tabular_total: false,
+        },
+        consumed,
+    ))
 }
 
 #[cfg(test)]

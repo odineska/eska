@@ -1,6 +1,6 @@
 use super::*;
 use crate::backend::project::{
-    forms::{FormContextError, FormOverlay},
+    forms::{FormContextError, FormOverlay, FormPreview},
     metadata_workspace::FormPreviewError,
 };
 
@@ -430,6 +430,141 @@ fn form_presentation_tracks_dirty_metadata_captions_without_changing_element_ide
     assert_eq!(
         changed.form.root.children[0].identity,
         preview.form.root.children[0].identity
+    );
+    assert_eq!(bytes(&directory.0), before);
+}
+
+fn reference_path_fixture(root: &Path) {
+    use std::fmt::Write as _;
+
+    fixture(root, "configuration");
+    let source = root.join("src");
+    let attribute = |id: u16, name: &str, title: &str, xml_type: &str| {
+        format!(
+            r#"<Attribute uuid="305a3340-34ad-4e84-85b5-{id:012x}"><Properties><Name>{name}</Name><Synonym><v8:item xmlns:v8="http://v8.1c.ru/8.1/data/core"><v8:lang>ru</v8:lang><v8:content>{title}</v8:content></v8:item></Synonym><Type xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:xs="http://www.w3.org/2001/XMLSchema"><v8:Type>{xml_type}</v8:Type></Type></Properties></Attribute>"#
+        )
+    };
+    let owner = source.join("Catalogs/Контрагенты.xml");
+    let original = fs::read_to_string(&owner).unwrap();
+    let (children, tail) = original.rsplit_once("</ChildObjects>").unwrap();
+    fs::write(
+        owner,
+        format!(
+            "{children}{}{}</ChildObjects>{tail}",
+            attribute(1, "Link", "Договор", "cfg:CatalogRef.Agreement"),
+            attribute(2, "NotUsed", "Без поля формы", "cfg:CatalogRef.Unused"),
+        ),
+    )
+    .unwrap();
+
+    let mut declarations = String::new();
+    for (id, name, fields) in [
+        (
+            6,
+            "Agreement",
+            attribute(3, "Company", "Организация", "cfg:CatalogRef.Company"),
+        ),
+        (
+            7,
+            "Company",
+            attribute(4, "Value", "Сокращённое имя", "xs:string"),
+        ),
+        (
+            8,
+            "Alternate",
+            attribute(5, "Value", "Активна", "xs:boolean"),
+        ),
+        (9, "Unused", String::new()),
+    ] {
+        write!(declarations, "<Catalog>{name}</Catalog>").unwrap();
+        fs::write(
+            source.join(format!("Catalogs/{name}.xml")),
+            format!(
+                r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><Catalog uuid="305a3340-34ad-4e84-85b5-{id:012x}"><Properties><Name>{name}</Name></Properties><ChildObjects>{fields}</ChildObjects></Catalog></MetaDataObject>"#
+            ),
+        )
+        .unwrap();
+    }
+    let configuration = source.join("Configuration.xml");
+    fs::write(
+        &configuration,
+        fs::read_to_string(&configuration)
+            .unwrap()
+            .replace("</ChildObjects>", &format!("{declarations}</ChildObjects>")),
+    )
+    .unwrap();
+    fs::write(
+        source.join(PATH),
+        form(
+            r#"<ChildItems><LabelField name="Value" id="1"><DataPath>Object.Link.Company.Value</DataPath></LabelField></ChildItems><Attributes><Attribute name="Object" id="1"><Type xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><v8:Type>cfg:CatalogObject.Контрагенты</v8:Type></Type></Attribute></Attributes>"#,
+            None,
+        ),
+    )
+    .unwrap();
+}
+
+#[test]
+fn form_reference_paths_load_only_used_descriptors_and_rebind_on_dirty_type_change() {
+    use crate::backend::project::forms::{FieldValueKind, PresentationText};
+
+    let directory = TestDir::new();
+    reference_path_fixture(&directory.0);
+    let source = directory.0.join("src");
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let before = bytes(&directory.0);
+    let preview = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    let paths = |preview: &crate::backend::project::forms::FormPreview| {
+        preview
+            .dependencies
+            .iter()
+            .map(|input| input.path.clone())
+            .collect::<Vec<_>>()
+    };
+    assert!(paths(&preview).contains(&PathBuf::from("Catalogs/Company.xml")));
+    assert!(!paths(&preview).contains(&PathBuf::from("Catalogs/Unused.xml")));
+    let field = &preview.presentation.elements[1];
+    assert_eq!(field.value_type.kind, FieldValueKind::String);
+    assert!(
+        matches!(&field.caption, PresentationText::Literal { items } if items[0].content == "Сокращённое имя")
+    );
+    let agreement = preview
+        .dependencies
+        .iter()
+        .find(|input| input.path == Path::new("Catalogs/Agreement.xml"))
+        .unwrap();
+    let overlay = FormOverlay {
+        source: agreement.id.clone(),
+        text: fs::read_to_string(source.join(&agreement.path))
+            .unwrap()
+            .replace("CatalogRef.Company", "CatalogRef.Alternate"),
+        version: "5".into(),
+    };
+    let changed = project
+        .form_preview(
+            &node,
+            None,
+            &[overlay],
+            &preview.dependencies,
+            Vec::new(),
+            None,
+        )
+        .unwrap();
+    assert!(!paths(&changed).contains(&PathBuf::from("Catalogs/Company.xml")));
+    let alternate = changed
+        .dependencies
+        .iter()
+        .find(|input| input.path == Path::new("Catalogs/Alternate.xml"))
+        .unwrap();
+    let new_field = &changed.presentation.elements[1];
+    assert_eq!(new_field.identity, field.identity);
+    assert_eq!(new_field.value_type.kind, FieldValueKind::Boolean);
+    assert_eq!(new_field.binding.as_ref().unwrap().source, alternate.id);
+    assert!(
+        matches!(&new_field.caption, PresentationText::Literal { items } if items[0].content == "Активна")
     );
     assert_eq!(bytes(&directory.0), before);
 }
@@ -1086,5 +1221,367 @@ fn style_payload_discovers_its_own_references_and_missing_payload_keeps_defaults
     );
     assert!((fallback.presentation.elements[1].font.points - 12.0).abs() < f64::EPSILON);
     assert!(fallback.presentation.diagnostics.is_empty());
+    assert_eq!(bytes(&directory.0), before);
+}
+
+fn write_command_metadata(root: &Path, kind: &str, name: &str, properties: &str) -> String {
+    let input = format!(
+        r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><{kind} uuid="{name}"><Properties><Name>{name}</Name>{properties}</Properties></{kind}></MetaDataObject>"#
+    );
+    let path = root.join(format!("{kind}s/{name}.xml"));
+    fs::create_dir_all(path.parent().unwrap()).unwrap();
+    fs::write(path, &input).unwrap();
+    input
+}
+
+const BAR_COMMAND_REFERENCE: &str = "<v8:Type>cfg:CatalogRef.Контрагенты</v8:Type>";
+const OTHER_COMMAND_REFERENCE: &str = "<v8:Type>cfg:DocumentRef.Other</v8:Type>";
+
+fn root_bar_command_fixture() -> (TestDir, [String; 3]) {
+    use std::fmt::Write as _;
+
+    let directory = TestDir::new();
+    fixture(&directory.0, "configuration");
+    let root = directory.0.join("src");
+    let config = root.join("Configuration.xml");
+    let config_xml = fs::read_to_string(&config).unwrap();
+    let mut declarations = String::new();
+    let mut write = |kind: &str, name: &str, properties: &str| {
+        write!(&mut declarations, "<{kind}>{name}</{kind}>").unwrap();
+        write_command_metadata(&root, kind, name, properties)
+    };
+    for (name, group, parameter) in [
+        ("Direct", "Important", BAR_COMMAND_REFERENCE),
+        (
+            "ThroughSet",
+            "Important",
+            "<v8:TypeSet>cfg:DefinedType.Outer</v8:TypeSet>",
+        ),
+        ("Authored", "Important", BAR_COMMAND_REFERENCE),
+        ("Generate", "CreateBasedOn", BAR_COMMAND_REFERENCE),
+        ("Family", "Important", "<v8:Type>cfg:CatalogRef</v8:Type>"),
+        ("Any", "Important", "<v8:Type>cfg:AnyRef</v8:Type>"),
+        (
+            "WrongType",
+            "Important",
+            "<v8:Type>cfg:DocumentRef.Other</v8:Type>",
+        ),
+        ("Unbound", "Important", ""),
+    ] {
+        write(
+            "CommonCommand",
+            name,
+            &format!(
+                "<Group>FormCommandBar{group}</Group><CommandParameterType>{parameter}</CommandParameterType><Picture><xr:Ref>StdPicture.CloneObject</xr:Ref></Picture><Representation>PictureAndText</Representation>"
+            ),
+        );
+    }
+    write(
+        "DefinedType",
+        "Outer",
+        "<Type><v8:TypeSet>cfg:DefinedType.Inner</v8:TypeSet></Type>",
+    );
+    let inner = write(
+        "DefinedType",
+        "Inner",
+        &format!(
+            "<Type>{BAR_COMMAND_REFERENCE}<v8:TypeSet>cfg:DefinedType.Outer</v8:TypeSet></Type>"
+        ),
+    );
+    let unused = write(
+        "DefinedType",
+        "Unused",
+        &format!("<Type>{OTHER_COMMAND_REFERENCE}</Type>"),
+    );
+    write("CommonPicture", "UnusedIcon", "<Picture/>");
+    write(
+        "CommonCommand",
+        "WrongSet",
+        "<Group>FormCommandBarImportant</Group><CommandParameterType><v8:TypeSet>cfg:DefinedType.Unused</v8:TypeSet></CommandParameterType><Picture><xr:Ref>CommonPicture.UnusedIcon</xr:Ref></Picture>",
+    );
+    let group = write(
+        "CommandGroup",
+        "Extra",
+        "<Category>FormNavigationPanel</Category>",
+    );
+    write(
+        "CommonCommand",
+        "OutsideBar",
+        &format!(
+            "<Group>CommandGroup.Extra</Group><CommandParameterType>{BAR_COMMAND_REFERENCE}</CommandParameterType>"
+        ),
+    );
+    fs::write(
+        config,
+        config_xml.replace("</ChildObjects>", &format!("{declarations}</ChildObjects>")),
+    )
+    .unwrap();
+    let form_xml = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config">
+        <AutoCommandBar name="Bar" id="-1"><ChildItems><Button name="Authored" id="11"><Type>CommandBarButton</Type><CommandName>CommonCommand.Authored</CommandName></Button></ChildItems></AutoCommandBar>
+        <Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:CatalogObject.Контрагенты</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes>
+    </Form>"#;
+    fs::write(root.join(PATH), form_xml).unwrap();
+    (directory, [inner, unused, group])
+}
+
+fn root_command_keys(preview: &FormPreview) -> Vec<String> {
+    preview.presentation.elements[0]
+        .auto_command_items
+        .iter()
+        .map(|item| item.key.clone())
+        .collect::<Vec<_>>()
+}
+
+fn assert_initial_root_commands(preview: &FormPreview) {
+    use crate::backend::project::forms::FormPicture;
+
+    assert_eq!(
+        root_command_keys(preview),
+        [
+            "Form.StandardCommand.WriteAndClose",
+            "Form.StandardCommand.Write",
+            "common-command:Direct",
+            "common-command:ThroughSet",
+            "common-command:Family",
+            "common-command:Any",
+            "Form.StandardCommand.CreateBasedOn"
+        ]
+    );
+    let items = &preview.presentation.elements[0].auto_command_items;
+    assert_eq!(
+        items.last().unwrap().items[0].key,
+        "common-command:Generate"
+    );
+    assert_eq!(items[3].order_by_caption, Some(true));
+    assert!(
+        matches!(&items[3].picture, Some(FormPicture::Standard {name}) if name == "CloneObject")
+    );
+    for name in [
+        "WrongType.xml",
+        "Unbound.xml",
+        "WrongSet.xml",
+        "Unused.xml",
+        "UnusedIcon.xml",
+        "OutsideBar.xml",
+        "Extra.xml",
+    ] {
+        assert!(
+            preview
+                .dependencies
+                .iter()
+                .all(|input| !input.path.ends_with(name)),
+            "{name}"
+        );
+    }
+}
+
+fn assert_recovered_root_commands(preview: &FormPreview) {
+    let commands = &preview.presentation.elements[0].auto_command_items;
+    assert!(
+        commands
+            .iter()
+            .any(|item| item.key == "common-command:ThroughSet")
+    );
+    assert!(
+        commands
+            .iter()
+            .any(|item| item.key == "common-command:WrongSet")
+    );
+    let menu = commands
+        .iter()
+        .find(|item| item.key == "command-group:Extra")
+        .unwrap();
+    assert_eq!(menu.items[0].key, "common-command:OutsideBar");
+    for name in ["Inner.xml", "Unused.xml", "Extra.xml"] {
+        assert!(
+            preview
+                .dependencies
+                .iter()
+                .any(|input| input.path.ends_with(name) && input.version.as_deref() == Some("3"))
+        );
+    }
+}
+
+#[test]
+fn root_bar_resolves_application_commands_and_dirty_defined_types() {
+    use crate::backend::project::forms::FormInput;
+
+    let (directory, [inner, unused, group]) = root_bar_command_fixture();
+    let before = bytes(&directory.0);
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let preview = project
+        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .unwrap();
+    assert_initial_root_commands(&preview);
+    let dependency = preview
+        .dependencies
+        .iter()
+        .find(|input| input.path.ends_with("DefinedTypes/Inner.xml"))
+        .unwrap();
+    assert!(matches!(project.form_preview(&node, None, &[FormOverlay {
+        source: dependency.id.clone(), version: "2".into(), text: "<incomplete".into(),
+    }], &preview.dependencies, Vec::new(), None), Err(FormPreviewError::Form(FormContextError::InvalidMetadata { source })) if source == dependency.id));
+    let changed = project
+        .form_preview(
+            &node,
+            None,
+            &[FormOverlay {
+                source: dependency.id.clone(),
+                version: "2".into(),
+                text: inner.replace(BAR_COMMAND_REFERENCE, ""),
+            }],
+            &preview.dependencies,
+            Vec::new(),
+            None,
+        )
+        .unwrap();
+    assert_eq!(
+        root_command_keys(&changed),
+        [
+            "Form.StandardCommand.WriteAndClose",
+            "Form.StandardCommand.Write",
+            "common-command:Direct",
+            "common-command:Family",
+            "common-command:Any",
+            "Form.StandardCommand.CreateBasedOn"
+        ]
+    );
+    assert_eq!(
+        preview.form.root.auxiliary[0].children[0].identity,
+        changed.form.root.auxiliary[0].children[0].identity
+    );
+    assert!(changed.dependencies.iter().all(|input| {
+        !["ThroughSet.xml", "Inner.xml", "Outer.xml"]
+            .iter()
+            .any(|name| input.path.ends_with(name))
+    }));
+    let input = |path: &str, text| FormInput {
+        root: dependency.root.clone(),
+        path: path.into(),
+        text,
+        version: "3".into(),
+    };
+    let recovered = project
+        .form_preview(
+            &node,
+            None,
+            &[],
+            &changed.dependencies,
+            vec![
+                input("DefinedTypes/Inner.xml", inner),
+                input(
+                    "DefinedTypes/Unused.xml",
+                    unused.replace(OTHER_COMMAND_REFERENCE, BAR_COMMAND_REFERENCE),
+                ),
+                input(
+                    "CommandGroups/Extra.xml",
+                    group.replace("FormNavigationPanel", "FormCommandBar"),
+                ),
+            ],
+            None,
+        )
+        .unwrap();
+    assert_recovered_root_commands(&recovered);
+    assert_eq!(bytes(&directory.0), before);
+}
+
+#[test]
+fn root_bar_filters_by_effective_group_and_parameter_in_extension_layers() {
+    use crate::backend::project::forms::FormInput;
+
+    let (directory, _) = setup();
+    let body = r#"<Attributes><Attribute name="Object" id="1"><Type xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><v8:Type>cfg:CatalogObject.Контрагенты</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes>"#;
+    let base = directory.0.join("base/src");
+    let high = directory.0.join("one/src");
+    let low = directory.0.join("two/src");
+    for (root, purpose) in [(&base, ""), (&high, "AddOn"), (&low, "Patch")] {
+        let config = root.join("Configuration.xml");
+        let mut text = fs::read_to_string(&config)
+            .unwrap()
+            .replace("Customization", purpose);
+        text = text.replace("</ChildObjects>", "<CommonCommand>Shared</CommonCommand><DefinedType>Recipients</DefinedType><CommandGroup>Options</CommandGroup></ChildObjects>");
+        fs::write(config, text).unwrap();
+        fs::write(root.join(PATH), form(body, (root != &base).then_some(body))).unwrap();
+    }
+    let recipients = "<Type><v8:Type>cfg:CatalogRef.Контрагенты</v8:Type></Type>";
+    let category = "<Category>FormCommandBar</Category>";
+    let adopted = "<ObjectBelonging>Adopted</ObjectBelonging>";
+    write_command_metadata(
+        &base,
+        "CommonCommand",
+        "Shared",
+        "<Group>CommandGroup.Options</Group><CommandParameterType><v8:TypeSet>cfg:DefinedType.Recipients</v8:TypeSet></CommandParameterType>",
+    );
+    write_command_metadata(&base, "DefinedType", "Recipients", recipients);
+    write_command_metadata(&base, "CommandGroup", "Options", category);
+    write_command_metadata(
+        &low,
+        "DefinedType",
+        "Recipients",
+        &format!("{adopted}<Type><v8:Type>cfg:DocumentRef.Other</v8:Type></Type>"),
+    );
+    write_command_metadata(
+        &high,
+        "DefinedType",
+        "Recipients",
+        &format!("{adopted}{recipients}"),
+    );
+    let group = write_command_metadata(
+        &high,
+        "CommandGroup",
+        "Options",
+        &format!(
+            "{adopted}{}",
+            category.replace("FormCommandBar", "FormNavigationPanel")
+        ),
+    );
+
+    let before = bytes(&directory.0);
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], true).unwrap();
+    let project = workspace
+        .project_mut(&ProjectScope::Member(
+            crate::backend::project::ProjectName::parse("one".into()).unwrap(),
+        ))
+        .unwrap();
+    let node = node(project);
+    let initial = project
+        .form_preview(&node, Some("app"), &[], &[], Vec::new(), None)
+        .unwrap();
+    assert!(initial.dependencies.iter().all(|item| {
+        !["Shared.xml", "Recipients.xml", "Options.xml"]
+            .iter()
+            .any(|name| item.path.ends_with(name))
+    }));
+    let changed = project
+        .form_preview(
+            &node,
+            Some("app"),
+            &[],
+            &initial.dependencies,
+            vec![FormInput {
+                root: high,
+                path: "CommandGroups/Options.xml".into(),
+                version: "2".into(),
+                text: group.replace("FormNavigationPanel", "FormCommandBar"),
+            }],
+            None,
+        )
+        .unwrap();
+    let menu = changed.presentation.elements[0]
+        .auto_command_items
+        .iter()
+        .find(|item| item.key == "command-group:Options")
+        .unwrap();
+    assert_eq!(menu.items[0].key, "common-command:Shared");
+    assert_eq!(
+        changed
+            .dependencies
+            .iter()
+            .filter(|item| item.path.ends_with("Recipients.xml"))
+            .count(),
+        3
+    );
     assert_eq!(bytes(&directory.0), before);
 }

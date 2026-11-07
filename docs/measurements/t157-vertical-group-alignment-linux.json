@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestone": "T157",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "zoom": 100,
+  "artifactBase": "../eska-playground",
+  "explorerCommit": "eca7009ae7b1e73284e17ea1d4a70e5e71e1a79d",
+  "eskaSourceCommit": "f44ad94433e60cc099d0dec852dd385b2c5d2627",
+  "compatibility": {
+    "loan": "Version8_3_21",
+    "probes": "Version8_3_27"
+  },
+  "coordinateSpace": "Unzoomed form-relative CSS pixels at 100% zoom.",
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "bslExecuted": false,
+  "checks": {
+    "node": {
+      "passed": 649,
+      "failed": 0,
+      "skipped": 9
+    },
+    "installedBatches": {
+      "initial": "form-batch-8sxR7G/batch.json",
+      "responsiveRetest": "form-batch-Lc1jER/batch.json",
+      "passedRuns": 14,
+      "caseEntries": 728,
+      "runtimeManifestSha256": "db805d50ba1c22ee3ff8d73168b086dfcb58f1c557b7ca64dbba69f03174afe6",
+      "vsixSha256": "21aab6e6de0b57523a8cc9baabc96a91b4dfe0be0dc0914e627c56a5bf49c4a1",
+      "retestReason": "The authored 50 px height measured 50.00000063790925 px after normalization at 125% zoom. The test checks this height within 0.01 px."
+    }
+  },
+  "nativeProbes": {
+    "nativeDirectories": [
+      "form-native-settlement-align-uDMLzv4Y",
+      "form-native-settlement-align-extra-pGNUkNV0"
+    ],
+    "viewerGeometry": [
+      "form-installed-settlement-layout-Rn4BVPCO/align-ru/geometry.json",
+      "form-installed-settlement-layout-Rn4BVPCO/align-extra-ru/geometry.json"
+    ],
+    "states": 42,
+    "glyphRectangles": 126,
+    "maximumCoordinateErrorPx": 0.5,
+    "observations": [
+      {"form": "ProbeWidthAlign42301", "nativeCapture": "ProbeWidthAlign42301-medium.png", "variant": "AlwaysHorizontal", "alignment": "Auto", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 71, 435, 53], "viewerPaint": [13, 71, 435, 53]},
+      {"form": "ProbeWidthAlign42301", "nativeCapture": "ProbeWidthAlign42301-compact.png", "variant": "AlwaysHorizontal", "alignment": "Auto", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 71, 377, 55], "viewerPaint": [13, 71, 377, 55]},
+      {"form": "ProbeWidthAlign42302", "nativeCapture": "ProbeWidthAlign42302-medium.png", "variant": "AlwaysHorizontal", "alignment": "Top", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 71, 435, 53], "viewerPaint": [13, 71, 435, 53]},
+      {"form": "ProbeWidthAlign42302", "nativeCapture": "ProbeWidthAlign42302-compact.png", "variant": "AlwaysHorizontal", "alignment": "Top", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 71, 377, 55], "viewerPaint": [13, 71, 377, 55]},
+      {"form": "ProbeWidthAlign42303", "nativeCapture": "ProbeWidthAlign42303-medium.png", "variant": "AlwaysHorizontal", "alignment": "Center", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 112, 15, 15], [147, 99, 15, 15], [147, 125, 15, 15]], "viewerGlyphs": [[19, 111.5, 15, 15], [147, 98.5, 15, 15], [147, 124.5, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 93, 435, 53], "viewerPaint": [13, 92.5, 435, 53]},
+      {"form": "ProbeWidthAlign42303", "nativeCapture": "ProbeWidthAlign42303-compact.png", "variant": "AlwaysHorizontal", "alignment": "Center", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 98, 15, 15], [89, 99, 15, 15], [89, 125, 15, 15]], "viewerGlyphs": [[19, 97.5, 15, 15], [89, 98.5, 15, 15], [89, 124.5, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 92, 377, 55], "viewerPaint": [13, 91.5, 377, 55]},
+      {"form": "ProbeWidthAlign42304", "nativeCapture": "ProbeWidthAlign42304-medium.png", "variant": "AlwaysHorizontal", "alignment": "Bottom", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 146, 15, 15], [147, 120, 15, 15], [147, 146, 15, 15]], "viewerGlyphs": [[19, 146, 15, 15], [147, 120, 15, 15], [147, 146, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 114, 435, 53], "viewerPaint": [13, 114, 435, 53]},
+      {"form": "ProbeWidthAlign42304", "nativeCapture": "ProbeWidthAlign42304-compact.png", "variant": "AlwaysHorizontal", "alignment": "Bottom", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 118, 15, 15], [89, 120, 15, 15], [89, 146, 15, 15]], "viewerGlyphs": [[19, 118, 15, 15], [89, 120, 15, 15], [89, 146, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 112, 377, 55], "viewerPaint": [13, 112, 377, 55]},
+      {"form": "ProbeWidthAlign42305", "nativeCapture": "ProbeWidthAlign42305-medium.png", "variant": "Vertical", "alignment": "Auto", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 71, 435, 53], "viewerPaint": [13, 71, 435, 53]},
+      {"form": "ProbeWidthAlign42305", "nativeCapture": "ProbeWidthAlign42305-compact.png", "variant": "Vertical", "alignment": "Auto", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 71, 377, 55], "viewerPaint": [13, 71, 377, 55]},
+      {"form": "ProbeWidthAlign42306", "nativeCapture": "ProbeWidthAlign42306-medium.png", "variant": "Vertical", "alignment": "Top", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 71, 435, 53], "viewerPaint": [13, 71, 435, 53]},
+      {"form": "ProbeWidthAlign42306", "nativeCapture": "ProbeWidthAlign42306-compact.png", "variant": "Vertical", "alignment": "Top", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 71, 377, 55], "viewerPaint": [13, 71, 377, 55]},
+      {"form": "ProbeWidthAlign42307", "nativeCapture": "ProbeWidthAlign42307-medium.png", "variant": "Vertical", "alignment": "Center", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 112, 15, 15], [147, 99, 15, 15], [147, 125, 15, 15]], "viewerGlyphs": [[19, 111.5, 15, 15], [147, 98.5, 15, 15], [147, 124.5, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 93, 435, 53], "viewerPaint": [13, 92.5, 435, 53]},
+      {"form": "ProbeWidthAlign42307", "nativeCapture": "ProbeWidthAlign42307-compact.png", "variant": "Vertical", "alignment": "Center", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 98, 15, 15], [89, 99, 15, 15], [89, 125, 15, 15]], "viewerGlyphs": [[19, 97.5, 15, 15], [89, 98.5, 15, 15], [89, 124.5, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 92, 377, 55], "viewerPaint": [13, 91.5, 377, 55]},
+      {"form": "ProbeWidthAlign42308", "nativeCapture": "ProbeWidthAlign42308-medium.png", "variant": "Vertical", "alignment": "Bottom", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 146, 15, 15], [147, 120, 15, 15], [147, 146, 15, 15]], "viewerGlyphs": [[19, 146, 15, 15], [147, 120, 15, 15], [147, 146, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 114, 435, 53], "viewerPaint": [13, 114, 435, 53]},
+      {"form": "ProbeWidthAlign42308", "nativeCapture": "ProbeWidthAlign42308-compact.png", "variant": "Vertical", "alignment": "Bottom", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 118, 15, 15], [89, 120, 15, 15], [89, 146, 15, 15]], "viewerGlyphs": [[19, 118, 15, 15], [89, 120, 15, 15], [89, 146, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 112, 377, 55], "viewerPaint": [13, 112, 377, 55]},
+      {"form": "ProbeWidthAlign42309", "nativeCapture": "ProbeWidthAlign42309-medium.png", "variant": "HorizontalIfPossible", "alignment": "Auto", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 71, 435, 53], "viewerPaint": [13, 71, 435, 53]},
+      {"form": "ProbeWidthAlign42309", "nativeCapture": "ProbeWidthAlign42309-compact.png", "variant": "HorizontalIfPossible", "alignment": "Auto", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 71, 377, 55], "viewerPaint": [13, 71, 377, 55]},
+      {"form": "ProbeWidthAlign42310", "nativeCapture": "ProbeWidthAlign42310-medium.png", "variant": "HorizontalIfPossible", "alignment": "Top", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 71, 435, 53], "viewerPaint": [13, 71, 435, 53]},
+      {"form": "ProbeWidthAlign42310", "nativeCapture": "ProbeWidthAlign42310-compact.png", "variant": "HorizontalIfPossible", "alignment": "Top", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 71, 377, 55], "viewerPaint": [13, 71, 377, 55]},
+      {"form": "ProbeWidthAlign42311", "nativeCapture": "ProbeWidthAlign42311-medium.png", "variant": "HorizontalIfPossible", "alignment": "Center", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 112, 15, 15], [147, 99, 15, 15], [147, 125, 15, 15]], "viewerGlyphs": [[19, 111.5, 15, 15], [147, 98.5, 15, 15], [147, 124.5, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 93, 435, 53], "viewerPaint": [13, 92.5, 435, 53]},
+      {"form": "ProbeWidthAlign42311", "nativeCapture": "ProbeWidthAlign42311-compact.png", "variant": "HorizontalIfPossible", "alignment": "Center", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 98, 15, 15], [89, 99, 15, 15], [89, 125, 15, 15]], "viewerGlyphs": [[19, 97.5, 15, 15], [89, 98.5, 15, 15], [89, 124.5, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 92, 377, 55], "viewerPaint": [13, 91.5, 377, 55]},
+      {"form": "ProbeWidthAlign42312", "nativeCapture": "ProbeWidthAlign42312-medium.png", "variant": "HorizontalIfPossible", "alignment": "Bottom", "childAlignment": "Auto", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 146, 15, 15], [147, 120, 15, 15], [147, 146, 15, 15]], "viewerGlyphs": [[19, 146, 15, 15], [147, 120, 15, 15], [147, 146, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 114, 435, 53], "viewerPaint": [13, 114, 435, 53]},
+      {"form": "ProbeWidthAlign42312", "nativeCapture": "ProbeWidthAlign42312-compact.png", "variant": "HorizontalIfPossible", "alignment": "Bottom", "childAlignment": "Auto", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 118, 15, 15], [89, 120, 15, 15], [89, 146, 15, 15]], "viewerGlyphs": [[19, 118, 15, 15], [89, 120, 15, 15], [89, 146, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 112, 377, 55], "viewerPaint": [13, 112, 377, 55]},
+      {"form": "ProbeWidthAlign42401", "nativeCapture": "ProbeWidthAlign42401-medium.png", "variant": "Vertical", "alignment": "Center", "childAlignment": "Auto", "height": 3, "nativeFrame": [905, 137], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 90, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 90, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerWrapper": [13, 70, 481, 55], "nativePaint": [13, 71, 435, 53], "viewerPaint": [13, 71, 435, 53]},
+      {"form": "ProbeWidthAlign42401", "nativeCapture": "ProbeWidthAlign42401-compact.png", "variant": "Vertical", "alignment": "Center", "childAlignment": "Auto", "height": 3, "nativeFrame": [801, 139], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 77, 15, 15], [89, 78, 15, 15], [89, 104, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 78, 15, 15], [89, 104, 15, 15]], "viewerWrapper": [13, 70, 377, 57], "nativePaint": [13, 71, 377, 55], "viewerPaint": [13, 71, 377, 55]},
+      {"form": "ProbeWidthAlign42402", "nativeCapture": "ProbeWidthAlign42402-medium.png", "variant": "Vertical", "alignment": "Bottom", "childAlignment": "Auto", "height": 3, "nativeFrame": [905, 137], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 103, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 103, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerWrapper": [13, 70, 481, 55], "nativePaint": [13, 71, 435, 53], "viewerPaint": [13, 71, 435, 53]},
+      {"form": "ProbeWidthAlign42402", "nativeCapture": "ProbeWidthAlign42402-compact.png", "variant": "Vertical", "alignment": "Bottom", "childAlignment": "Auto", "height": 3, "nativeFrame": [801, 139], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 77, 15, 15], [89, 79, 15, 15], [89, 105, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 79, 15, 15], [89, 105, 15, 15]], "viewerWrapper": [13, 70, 377, 57], "nativePaint": [13, 71, 377, 55], "viewerPaint": [13, 71, 377, 55]},
+      {"form": "ProbeWidthAlign42403", "nativeCapture": "ProbeWidthAlign42403-medium.png", "variant": "Vertical", "alignment": "Center", "childAlignment": "Auto", "height": 5, "nativeFrame": [905, 164], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 104, 15, 15], [147, 91, 15, 15], [147, 117, 15, 15]], "viewerGlyphs": [[19, 103.5, 15, 15], [147, 90.5, 15, 15], [147, 116.5, 15, 15]], "viewerWrapper": [13, 70, 481, 82], "nativePaint": [13, 85, 435, 53], "viewerPaint": [13, 84.5, 435, 53]},
+      {"form": "ProbeWidthAlign42403", "nativeCapture": "ProbeWidthAlign42403-compact.png", "variant": "Vertical", "alignment": "Center", "childAlignment": "Auto", "height": 5, "nativeFrame": [801, 164], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 90, 15, 15], [89, 91, 15, 15], [89, 117, 15, 15]], "viewerGlyphs": [[19, 89.5, 15, 15], [89, 90.5, 15, 15], [89, 116.5, 15, 15]], "viewerWrapper": [13, 70, 377, 82], "nativePaint": [13, 84, 377, 55], "viewerPaint": [13, 83.5, 377, 55]},
+      {"form": "ProbeWidthAlign42404", "nativeCapture": "ProbeWidthAlign42404-medium.png", "variant": "Vertical", "alignment": "Bottom", "childAlignment": "Auto", "height": 5, "nativeFrame": [905, 164], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 130, 15, 15], [147, 104, 15, 15], [147, 130, 15, 15]], "viewerGlyphs": [[19, 130, 15, 15], [147, 104, 15, 15], [147, 130, 15, 15]], "viewerWrapper": [13, 70, 481, 82], "nativePaint": [13, 98, 435, 53], "viewerPaint": [13, 98, 435, 53]},
+      {"form": "ProbeWidthAlign42404", "nativeCapture": "ProbeWidthAlign42404-compact.png", "variant": "Vertical", "alignment": "Bottom", "childAlignment": "Auto", "height": 5, "nativeFrame": [801, 164], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 102, 15, 15], [89, 104, 15, 15], [89, 130, 15, 15]], "viewerGlyphs": [[19, 102, 15, 15], [89, 104, 15, 15], [89, 130, 15, 15]], "viewerWrapper": [13, 70, 377, 82], "nativePaint": [13, 96, 377, 55], "viewerPaint": [13, 96, 377, 55]},
+      {"form": "ProbeWidthAlign42405", "nativeCapture": "ProbeWidthAlign42405-medium.png", "variant": "Vertical", "alignment": "Center", "childAlignment": "Auto", "height": 8, "nativeFrame": [905, 212], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 128, 15, 15], [147, 115, 15, 15], [147, 141, 15, 15]], "viewerGlyphs": [[19, 127.5, 15, 15], [147, 114.5, 15, 15], [147, 140.5, 15, 15]], "viewerWrapper": [13, 70, 481, 130], "nativePaint": [13, 109, 435, 53], "viewerPaint": [13, 108.5, 435, 53]},
+      {"form": "ProbeWidthAlign42405", "nativeCapture": "ProbeWidthAlign42405-compact.png", "variant": "Vertical", "alignment": "Center", "childAlignment": "Auto", "height": 8, "nativeFrame": [801, 212], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 114, 15, 15], [89, 115, 15, 15], [89, 141, 15, 15]], "viewerGlyphs": [[19, 113.5, 15, 15], [89, 114.5, 15, 15], [89, 140.5, 15, 15]], "viewerWrapper": [13, 70, 377, 130], "nativePaint": [13, 108, 377, 55], "viewerPaint": [13, 107.5, 377, 55]},
+      {"form": "ProbeWidthAlign42406", "nativeCapture": "ProbeWidthAlign42406-medium.png", "variant": "Vertical", "alignment": "Bottom", "childAlignment": "Auto", "height": 8, "nativeFrame": [905, 212], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 178, 15, 15], [147, 152, 15, 15], [147, 178, 15, 15]], "viewerGlyphs": [[19, 178, 15, 15], [147, 152, 15, 15], [147, 178, 15, 15]], "viewerWrapper": [13, 70, 481, 130], "nativePaint": [13, 146, 435, 53], "viewerPaint": [13, 146, 435, 53]},
+      {"form": "ProbeWidthAlign42406", "nativeCapture": "ProbeWidthAlign42406-compact.png", "variant": "Vertical", "alignment": "Bottom", "childAlignment": "Auto", "height": 8, "nativeFrame": [801, 212], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 150, 15, 15], [89, 152, 15, 15], [89, 178, 15, 15]], "viewerGlyphs": [[19, 150, 15, 15], [89, 152, 15, 15], [89, 178, 15, 15]], "viewerWrapper": [13, 70, 377, 130], "nativePaint": [13, 144, 377, 55], "viewerPaint": [13, 144, 377, 55]},
+      {"form": "ProbeWidthAlign42407", "nativeCapture": "ProbeWidthAlign42407-medium.png", "variant": "AlwaysHorizontal", "alignment": "Auto", "childAlignment": "Center", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 99, 15, 15], [147, 99, 15, 15], [147, 125, 15, 15]], "viewerGlyphs": [[19, 98.5, 15, 15], [147, 98.5, 15, 15], [147, 124.5, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 93, 435, 53], "viewerPaint": [13, 92.5, 435, 53]},
+      {"form": "ProbeWidthAlign42407", "nativeCapture": "ProbeWidthAlign42407-compact.png", "variant": "AlwaysHorizontal", "alignment": "Auto", "childAlignment": "Center", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 98, 15, 15], [89, 98, 15, 15], [89, 124, 15, 15]], "viewerGlyphs": [[19, 97.5, 15, 15], [89, 97.5, 15, 15], [89, 123.5, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 92, 377, 55], "viewerPaint": [13, 91.5, 377, 55]},
+      {"form": "ProbeWidthAlign42408", "nativeCapture": "ProbeWidthAlign42408-medium.png", "variant": "Vertical", "alignment": "Auto", "childAlignment": "Center", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 99, 15, 15], [147, 99, 15, 15], [147, 125, 15, 15]], "viewerGlyphs": [[19, 98.5, 15, 15], [147, 98.5, 15, 15], [147, 124.5, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 93, 435, 53], "viewerPaint": [13, 92.5, 435, 53]},
+      {"form": "ProbeWidthAlign42408", "nativeCapture": "ProbeWidthAlign42408-compact.png", "variant": "Vertical", "alignment": "Auto", "childAlignment": "Center", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 98, 15, 15], [89, 98, 15, 15], [89, 124, 15, 15]], "viewerGlyphs": [[19, 97.5, 15, 15], [89, 97.5, 15, 15], [89, 123.5, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 92, 377, 55], "viewerPaint": [13, 91.5, 377, 55]},
+      {"form": "ProbeWidthAlign42409", "nativeCapture": "ProbeWidthAlign42409-medium.png", "variant": "HorizontalIfPossible", "alignment": "Auto", "childAlignment": "Center", "height": 6, "nativeFrame": [905, 180], "viewerFrame": [906, 250], "nativeGlyphs": [[19, 99, 15, 15], [147, 99, 15, 15], [147, 125, 15, 15]], "viewerGlyphs": [[19, 98.5, 15, 15], [147, 98.5, 15, 15], [147, 124.5, 15, 15]], "viewerWrapper": [13, 70, 481, 98], "nativePaint": [13, 93, 435, 53], "viewerPaint": [13, 92.5, 435, 53]},
+      {"form": "ProbeWidthAlign42409", "nativeCapture": "ProbeWidthAlign42409-compact.png", "variant": "HorizontalIfPossible", "alignment": "Auto", "childAlignment": "Center", "height": 6, "nativeFrame": [801, 180], "viewerFrame": [802, 250], "nativeGlyphs": [[19, 98, 15, 15], [89, 98, 15, 15], [89, 124, 15, 15]], "viewerGlyphs": [[19, 97.5, 15, 15], [89, 97.5, 15, 15], [89, 123.5, 15, 15]], "viewerWrapper": [13, 70, 377, 98], "nativePaint": [13, 92, 377, 55], "viewerPaint": [13, 91.5, 377, 55]}
+    ]
+  },
+  "loanDisbursement": {
+    "source": "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "sourceXmlUnchanged": true,
+    "nativeCompact": {
+      "frame": [696, 760],
+      "topCapture": {
+        "path": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-top-crop.png",
+        "sha256": "0d236d878fe55602d62c62dd4cf50a9931348f4f75edbe6edecaf3f196399fbd"
+      },
+      "bottomCapture": {
+        "path": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-bottom-crop.png",
+        "sha256": "5493bc1e893b69e1836a0daf1d07c52ded1de9fd974ee3d1bd15897d03b255f7"
+      },
+      "paintedCheckboxGroup": [13, 423, 377, 55],
+      "checkboxGlyphs": [
+        [19, 429, 15, 15],
+        [89, 430, 15, 15],
+        [89, 456, 15, 15]
+      ],
+      "references": [
+        [400, 447, 154, 23],
+        [400, 498, 154, 23]
+      ],
+      "pictures": [
+        [564, 428, 20, 18],
+        [564, 479, 20, 18]
+      ],
+      "table": [13, 589, 662, 227],
+      "memo": [13, 844, 511, 51],
+      "responsibleCaptionInk": [24, 907, 90, 10],
+      "lowerCoordinatesMethod": "Match the table top border at y=591 in the top capture and y=28 in the bottom crop, using y=2 as the top frame origin. The shared border places the bottom crop at logical y=561."
+    },
+    "before": {
+      "geometry": "form-installed-settlement-layout-bIWzma2c/loan-ru/geometry.json",
+      "geometrySha256": "63b6b3af766aba758b4e3bd39fc55f46815170e0e1002dfe2503711517e8779f",
+      "detached": true,
+      "wide": {
+        "frame": [1156, 875],
+        "checkboxContainer": [13, 345, 532, 96],
+        "paintedCheckboxGroup": [13, 366.5, 435, 53],
+        "checkboxGlyphs": [
+          [19, 372.5, 15, 15],
+          [147, 372.5, 15, 15],
+          [147, 398.5, 15, 15]
+        ],
+        "rightContainer": [555, 341, 580, 128],
+        "rightGroup": [555, 365, 580, 80],
+        "references": [
+          [633, 389, 266, 23],
+          [633, 421, 266, 23]
+        ],
+        "pictures": [
+          [909, 388.5, 20, 18],
+          [909, 420.5, 20, 18]
+        ],
+        "table": null,
+        "memo": null,
+        "responsibleCaption": [532, 845.5, 99, 16],
+        "sameOwners": true,
+        "selection": "948"
+      },
+      "compact": {
+        "frame": [696, 760],
+        "checkboxContainer": [13, 402, 377, 96],
+        "paintedCheckboxGroup": [13, 403, 377, 55],
+        "checkboxGlyphs": [
+          [19, 409, 15, 15],
+          [89, 409, 15, 15],
+          [89, 435, 15, 15]
+        ],
+        "rightContainer": [400, 390, 275, 128],
+        "rightGroup": [400, 390, 275, 118],
+        "references": [
+          [400, 433, 154, 23],
+          [400, 484, 154, 23]
+        ],
+        "pictures": [
+          [564, 413.5, 20, 18],
+          [564, 464.5, 20, 18]
+        ],
+        "table": null,
+        "memo": null,
+        "responsibleCaption": [13, 730.5, 99, 16],
+        "sameOwners": true,
+        "selection": "948"
+      },
+      "dirtyFrame": [712, 748],
+      "restoredFrame": [696, 760]
+    },
+    "installed": {
+      "ru": {
+        "geometry": "form-installed-settlement-layout-Rn4BVPCO/loan-ru/geometry.json",
+        "geometrySha256": "32fb88a4ac9dc40013aa0f0c698f038884e8ff289c84e8bc759e6a8906be0b65",
+        "detached": true,
+        "wide": {
+          "frame": [1156, 875],
+          "checkboxContainer": [13, 345, 532, 98],
+          "paintedCheckboxGroup": [13, 367.5, 435, 53],
+          "checkboxGlyphs": [
+            [19, 386.5, 15, 15],
+            [147, 373.5, 15, 15],
+            [147, 399.5, 15, 15]
+          ],
+          "rightContainer": [555, 341, 580, 130],
+          "rightGroup": [555, 366, 580, 80],
+          "references": [
+            [633, 390, 266, 23],
+            [633, 422, 266, 23]
+          ],
+          "pictures": [
+            [909, 389.5, 20, 18],
+            [909, 421.5, 20, 18]
+          ],
+          "table": [13, 531, 1122, 227],
+          "memo": [13, 785, 511, 77],
+          "responsibleCaption": [532, 845.5, 99, 16],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        "compact": {
+          "frame": [696, 760],
+          "checkboxContainer": [13, 402, 377, 98],
+          "paintedCheckboxGroup": [13, 423.5, 377, 55],
+          "checkboxGlyphs": [
+            [19, 429.5, 15, 15],
+            [89, 430.5, 15, 15],
+            [89, 456.5, 15, 15]
+          ],
+          "rightContainer": [400, 390, 275, 130],
+          "rightGroup": [400, 396, 275, 118],
+          "references": [
+            [400, 439, 154, 23],
+            [400, 490, 154, 23]
+          ],
+          "pictures": [
+            [564, 419.5, 20, 18],
+            [564, 470.5, 20, 18]
+          ],
+          "table": [13, 580, 662, 63],
+          "memo": [13, 670, 511, 51],
+          "responsibleCaption": [13, 730.5, 99, 16],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        "dirtyFrame": [712, 752],
+        "restoredFrame": [696, 760]
+      },
+      "en": {
+        "geometry": "form-installed-settlement-layout-Rn4BVPCO/loan-en/geometry.json",
+        "geometrySha256": "65ef2058858477f838c123adb583e34737ebad9a1098ffeddc1e92f8d66f71ac",
+        "detached": true,
+        "wide": {
+          "frame": [1156, 875],
+          "checkboxContainer": [13, 345, 532, 98],
+          "paintedCheckboxGroup": [13, 367.5, 435, 53],
+          "checkboxGlyphs": [
+            [19, 386.5, 15, 15],
+            [147, 373.5, 15, 15],
+            [147, 399.5, 15, 15]
+          ],
+          "rightContainer": [555, 341, 580, 130],
+          "rightGroup": [555, 366, 580, 80],
+          "references": [
+            [633, 390, 266, 23],
+            [633, 422, 266, 23]
+          ],
+          "pictures": [
+            [909, 389.5, 20, 18],
+            [909, 421.5, 20, 18]
+          ],
+          "table": [13, 531, 1122, 227],
+          "memo": [13, 785, 511, 77],
+          "responsibleCaption": [532, 845.5, 99, 16],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        "compact": {
+          "frame": [696, 760],
+          "checkboxContainer": [13, 402, 377, 98],
+          "paintedCheckboxGroup": [13, 423.5, 377, 55],
+          "checkboxGlyphs": [
+            [19, 429.5, 15, 15],
+            [89, 430.5, 15, 15],
+            [89, 456.5, 15, 15]
+          ],
+          "rightContainer": [400, 390, 275, 130],
+          "rightGroup": [400, 396, 275, 118],
+          "references": [
+            [400, 439, 154, 23],
+            [400, 490, 154, 23]
+          ],
+          "pictures": [
+            [564, 419.5, 20, 18],
+            [564, 470.5, 20, 18]
+          ],
+          "table": [13, 580, 662, 63],
+          "memo": [13, 670, 511, 51],
+          "responsibleCaption": [13, 730.5, 99, 16],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        "dirtyFrame": [712, 752],
+        "restoredFrame": [696, 760]
+      }
+    }
+  },
+  "remaining": [
+    "The settlement input coordinates are 8 px above the native compact form after centering their wrapper.",
+    "The compact table grid is 63 px high at the requested frame height. The native grid is 227 px high and the form scrolls.",
+    "The memo control size matches in both measured widths. Its position and the responsible caption still depend on the table and footer layout.",
+    "Other nested alignment combinations and Windows require separate acceptance."
+  ]
+}

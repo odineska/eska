@@ -1,0 +1,3919 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-07T09:07:57.883811+00:00",
+  "milestone": "T157",
+  "scope": "Отсутствие места у групп без отображаемого содержимого. Полная геометрия и Windows остаются открытыми.",
+  "platformBuild": "8.3.27.2342",
+  "platform": "Linux ARM64 ALT 10",
+  "compatibility": "Version8_3_24",
+  "nativeLocale": "ru",
+  "viewerLocales": [
+    "ru",
+    "en"
+  ],
+  "dpi": 96,
+  "zoom": 100,
+  "eskaCommit": "ba9c5eccc8d3b8c676ce3751975a24ecc61c5bf4",
+  "explorerCommit": "8a5b9da01e1eac27c9f22b0f55888e13a7baa371",
+  "baselineExplorerCommit": "32c3d43",
+  "artifactBase": "../eska-playground",
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "sourceWritesDuringViewing": false,
+  "bslExecuted": false,
+  "acceptedGroupVisibility": true,
+  "rule": {
+    "sharedPredicate": "layout-model.mjs:displayedInPreview",
+    "recursiveVisibleContent": true,
+    "sourceTreePreserved": true,
+    "ownDecorationDoesNotForceEmptyGroup": true,
+    "noFormNameRules": true
+  },
+  "nativeReference": {
+    "path": "tests/fixtures/forms/native-group-visibility/metrics.json",
+    "sha256": "1d2c4f18ee3707b732881718bb59f09b1d15e7af095549d5ec40a714789983c0",
+    "forms": 21,
+    "exactFootprintForms": 20,
+    "visibleTableHeightResidualPx": 2
+  },
+  "smallForms": {
+    "coordinateSpace": "x/y/width/height relative to the form frame",
+    "coordinateSetsIdenticalInLocales": true,
+    "observations": [
+      {
+        "locale": "ru",
+        "case": "Control",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          107
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "Empty",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          107
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "HiddenField",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          114
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            92,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "HiddenTable",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          114
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            92,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "NestedHidden",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          114
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Nested": null,
+          "Inner": null,
+          "Below": [
+            13,
+            78,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Nested": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "VisibleField",
+        "nativeFrame": [
+          165,
+          139
+        ],
+        "beforeFrame": [
+          165,
+          139
+        ],
+        "afterFrame": [
+          165,
+          139
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            103,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": [
+            13,
+            71,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            71,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            103,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": [
+            13,
+            71,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            71,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            103,
+            131,
+            23
+          ]
+        },
+        "middleVisible": true
+      },
+      {
+        "locale": "ru",
+        "case": "VisibleTable",
+        "nativeFrame": [
+          434,
+          203
+        ],
+        "beforeFrame": [
+          434,
+          201
+        ],
+        "afterFrame": [
+          434,
+          201
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            167,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            165,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            165,
+            131,
+            23
+          ]
+        },
+        "middleVisible": true
+      },
+      {
+        "locale": "ru",
+        "case": "HiddenColumns",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          114
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            92,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "TitleHidden",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          133
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            111,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "NormalHidden",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          114
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            92,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "StrongHidden",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          114
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            92,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "PaintedHidden",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          124
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            102,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "FixedWidthHidden",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          114
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            92,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "FixedHeightHidden",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          148
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            112,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "StretchHidden",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          114
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            78,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "StretchXHidden",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          114
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            92,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "CollapsibleHidden",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          135
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            113,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Inner": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "EmptyTitle",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          133
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            111,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "EmptyPainted",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          124
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            102,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "EmptyFixedHeight",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          148
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            112,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "EmptyCollapsible",
+        "nativeFrame": [
+          165,
+          107
+        ],
+        "beforeFrame": [
+          165,
+          135
+        ],
+        "afterFrame": [
+          165,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            113,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": null,
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      },
+      {
+        "locale": "ru",
+        "case": "NormalVisible",
+        "nativeFrame": [
+          165,
+          155
+        ],
+        "beforeFrame": [
+          165,
+          139
+        ],
+        "afterFrame": [
+          165,
+          139
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            119,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            79,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": [
+            13,
+            71,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            71,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            103,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": [
+            13,
+            71,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            71,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            103,
+            131,
+            23
+          ]
+        },
+        "middleVisible": true
+      },
+      {
+        "locale": "ru",
+        "case": "NormalVisibleTitle",
+        "nativeFrame": [
+          165,
+          178
+        ],
+        "beforeFrame": [
+          165,
+          162
+        ],
+        "afterFrame": [
+          165,
+          162
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            142,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            102,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": [
+            13,
+            94,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            94,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            126,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": [
+            13,
+            94,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            94,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            126,
+            131,
+            23
+          ]
+        },
+        "middleVisible": true
+      },
+      {
+        "locale": "ru",
+        "case": "DefaultVisibleTitle",
+        "nativeFrame": [
+          165,
+          162
+        ],
+        "beforeFrame": [
+          165,
+          162
+        ],
+        "afterFrame": [
+          165,
+          162
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            126,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            94,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": [
+            13,
+            94,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            94,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            126,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": [
+            13,
+            94,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            94,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            126,
+            131,
+            23
+          ]
+        },
+        "middleVisible": true
+      },
+      {
+        "locale": "ru",
+        "case": "NoneVisibleTitle",
+        "nativeFrame": [
+          165,
+          158
+        ],
+        "beforeFrame": [
+          165,
+          158
+        ],
+        "afterFrame": [
+          165,
+          158
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            122,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            90,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": [
+            13,
+            90,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            90,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            122,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Middle": [
+            13,
+            90,
+            131,
+            23
+          ],
+          "Inner": [
+            13,
+            90,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            122,
+            131,
+            23
+          ]
+        },
+        "middleVisible": true
+      },
+      {
+        "locale": "ru",
+        "case": "BspHeader",
+        "nativeFrame": [
+          773,
+          142
+        ],
+        "beforeFrame": [
+          761.265625,
+          136.1875
+        ],
+        "afterFrame": [
+          761.265625,
+          136.1875
+        ],
+        "nativeFields": {
+          "Below": [
+            13,
+            106,
+            131,
+            23
+          ]
+        },
+        "beforeFields": {
+          "Below": [
+            13,
+            100.1875,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Below": [
+            13,
+            100.1875,
+            131,
+            23
+          ]
+        },
+        "middleVisible": false
+      }
+    ]
+  },
+  "wholeBspForms": [
+    {
+      "locale": "ru",
+      "sample": 0,
+      "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeElements": [
+            {
+              "name": "ГруппаСопоставляемыеДанные",
+              "element": [
+                13,
+                167.1875,
+                0,
+                28
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                202.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                202.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    219,
+                    202.1875,
+                    88,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    317,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                202.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                202.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    605,
+                    202.1875,
+                    86,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    701,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            }
+          ],
+          "afterElements": [
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                167.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                167.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                167.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    220,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    318,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                167.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                167.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    606,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    702,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeElements": [
+            {
+              "name": "ГруппаСопоставляемыеДанные",
+              "element": [
+                13,
+                167.1875,
+                0,
+                28
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                202.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                202.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    219,
+                    202.1875,
+                    88,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    317,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                202.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                202.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    605,
+                    202.1875,
+                    86,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    701,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            }
+          ],
+          "afterElements": [
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                167.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                167.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                167.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    220,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    318,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                167.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                167.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    606,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    702,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "beforeElements": [
+            {
+              "name": "ГруппаСопоставляемыеДанные",
+              "element": [
+                13,
+                167.1875,
+                0,
+                28
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                202.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                202.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    219,
+                    202.1875,
+                    88,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    317,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                202.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                202.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    605,
+                    202.1875,
+                    86,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    701,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            }
+          ],
+          "afterElements": [
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                167.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                167.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                167.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    220,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    318,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                167.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                167.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    606,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    702,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "sample": 1,
+      "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 785,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 57
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 14
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "afterFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 2
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "sample": 2,
+      "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 17
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 6
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "sample": 0,
+      "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeElements": [
+            {
+              "name": "ГруппаСопоставляемыеДанные",
+              "element": [
+                13,
+                167.1875,
+                0,
+                28
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                202.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                202.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    219,
+                    202.1875,
+                    88,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    317,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                202.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                202.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    605,
+                    202.1875,
+                    86,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    701,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            }
+          ],
+          "afterElements": [
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                167.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                167.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                167.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    220,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    318,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                167.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                167.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    606,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    702,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeElements": [
+            {
+              "name": "ГруппаСопоставляемыеДанные",
+              "element": [
+                13,
+                167.1875,
+                0,
+                28
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                202.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                202.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    219,
+                    202.1875,
+                    88,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    317,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                202.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                202.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    605,
+                    202.1875,
+                    86,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    701,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            }
+          ],
+          "afterElements": [
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                167.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                167.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                167.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    220,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    318,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                167.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                167.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    606,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    702,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "beforeElements": [
+            {
+              "name": "ГруппаСопоставляемыеДанные",
+              "element": [
+                13,
+                167.1875,
+                0,
+                28
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                202.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                202.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    219,
+                    202.1875,
+                    88,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    317,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                202.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                202.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    605,
+                    202.1875,
+                    86,
+                    19
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    701,
+                    202.1875,
+                    92,
+                    19
+                  ]
+                }
+              ]
+            }
+          ],
+          "afterElements": [
+            {
+              "name": "ГруппаИтогоНеСопоставленных",
+              "element": [
+                13,
+                167.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "radios": []
+            },
+            {
+              "name": "ОбновлятьСуществующие",
+              "element": [
+                13,
+                167.1875,
+                396,
+                19
+              ],
+              "control": [
+                219,
+                167.1875,
+                190,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Обновлять",
+                  "box": [
+                    220,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    318,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "СоздаватьЕслиНеСопоставлено",
+              "element": [
+                449,
+                167.1875,
+                344,
+                19
+              ],
+              "control": [
+                605,
+                167.1875,
+                188,
+                19
+              ],
+              "radios": [
+                {
+                  "label": "Создавать",
+                  "box": [
+                    606,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                },
+                {
+                  "label": "Пропускать",
+                  "box": [
+                    702,
+                    169.1875,
+                    15,
+                    15
+                  ]
+                }
+              ]
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "sample": 1,
+      "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 785,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 57
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 14
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "afterFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 2
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "sample": 2,
+      "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 17
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "beforeElements": [],
+          "afterElements": [],
+          "clippedDomOutsideCount": 6
+        }
+      ]
+    }
+  ],
+  "loan": [
+    {
+      "locale": "ru",
+      "beforePreferred": [
+        1157,
+        875
+      ],
+      "afterPreferred": [
+        1157,
+        875
+      ],
+      "detached": true,
+      "poses": [
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            994,
+            875
+          ],
+          "beforeFrame": [
+            994,
+            875
+          ],
+          "afterFrame": [
+            994,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            865,
+            875
+          ],
+          "beforeFrame": [
+            865,
+            875
+          ],
+          "afterFrame": [
+            865,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            800,
+            875
+          ],
+          "beforeFrame": [
+            800,
+            875
+          ],
+          "afterFrame": [
+            800,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            760,
+            875
+          ],
+          "beforeFrame": [
+            760,
+            875
+          ],
+          "afterFrame": [
+            760,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            696,
+            760
+          ],
+          "beforeFrame": [
+            696,
+            760
+          ],
+          "afterFrame": [
+            696,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            660,
+            760
+          ],
+          "beforeFrame": [
+            660,
+            760
+          ],
+          "afterFrame": [
+            660,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "beforePreferred": [
+        1157,
+        875
+      ],
+      "afterPreferred": [
+        1157,
+        875
+      ],
+      "detached": true,
+      "poses": [
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            994,
+            875
+          ],
+          "beforeFrame": [
+            994,
+            875
+          ],
+          "afterFrame": [
+            994,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            865,
+            875
+          ],
+          "beforeFrame": [
+            865,
+            875
+          ],
+          "afterFrame": [
+            865,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            800,
+            875
+          ],
+          "beforeFrame": [
+            800,
+            875
+          ],
+          "afterFrame": [
+            800,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            760,
+            875
+          ],
+          "beforeFrame": [
+            760,
+            875
+          ],
+          "afterFrame": [
+            760,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            696,
+            760
+          ],
+          "beforeFrame": [
+            696,
+            760
+          ],
+          "afterFrame": [
+            696,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            660,
+            760
+          ],
+          "beforeFrame": [
+            660,
+            760
+          ],
+          "afterFrame": [
+            660,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "rust": {
+      "testThreads": 1,
+      "checks": [
+        {
+          "check": "fmt",
+          "command": [
+            "cargo",
+            "fmt",
+            "--check"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 1.32,
+          "log": "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-rust-fmt.log"
+        },
+        {
+          "check": "check",
+          "command": [
+            "cargo",
+            "check"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 0.14,
+          "log": "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-rust-check.log"
+        },
+        {
+          "check": "clippy",
+          "command": [
+            "cargo",
+            "clippy",
+            "--all-targets",
+            "--all-features",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 0.17,
+          "log": "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-rust-clippy.log"
+        },
+        {
+          "check": "test",
+          "command": [
+            "cargo",
+            "test"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 146.19,
+          "log": "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-rust-test.log"
+        }
+      ],
+      "passed": 1561,
+      "ignored": 19
+    },
+    "node": {
+      "tests": 676,
+      "pass": 667,
+      "fail": 0,
+      "skipped": 9
+    },
+    "installedBatches": [
+      {
+        "manifest": "form-batch-sfZ0z5/batch.json",
+        "runs": [
+          {
+            "suite": "group-visibility",
+            "locale": "en",
+            "passed": true,
+            "cases": 27,
+            "receipt": "form-batch-sfZ0z5/group-visibility-en/receipt.json"
+          },
+          {
+            "suite": "group-visibility",
+            "locale": "ru",
+            "passed": true,
+            "cases": 27,
+            "receipt": "form-batch-sfZ0z5/group-visibility-ru/receipt.json"
+          },
+          {
+            "suite": "groups",
+            "locale": "en",
+            "passed": true,
+            "cases": 22,
+            "receipt": "form-batch-sfZ0z5/groups-en/receipt.json"
+          },
+          {
+            "suite": "groups",
+            "locale": "ru",
+            "passed": true,
+            "cases": 22,
+            "receipt": "form-batch-sfZ0z5/groups-ru/receipt.json"
+          },
+          {
+            "suite": "through-align",
+            "locale": "en",
+            "passed": true,
+            "cases": 98,
+            "receipt": "form-batch-sfZ0z5/through-align-en/receipt.json"
+          },
+          {
+            "suite": "through-align",
+            "locale": "ru",
+            "passed": true,
+            "cases": 98,
+            "receipt": "form-batch-sfZ0z5/through-align-ru/receipt.json"
+          },
+          {
+            "suite": "united",
+            "locale": "en",
+            "passed": true,
+            "cases": 9,
+            "receipt": "form-batch-sfZ0z5/united-en/receipt.json"
+          },
+          {
+            "suite": "united",
+            "locale": "ru",
+            "passed": true,
+            "cases": 9,
+            "receipt": "form-batch-sfZ0z5/united-ru/receipt.json"
+          }
+        ]
+      },
+      {
+        "manifest": "form-batch-I5OMMA/batch.json",
+        "runs": [
+          {
+            "suite": "column-widths",
+            "locale": "en",
+            "passed": true,
+            "cases": 187,
+            "receipt": "form-batch-I5OMMA/column-widths-en/receipt.json"
+          },
+          {
+            "suite": "column-widths",
+            "locale": "ru",
+            "passed": true,
+            "cases": 143,
+            "receipt": "form-batch-I5OMMA/column-widths-ru/receipt.json"
+          },
+          {
+            "suite": "responsive",
+            "locale": "en",
+            "passed": true,
+            "cases": 31,
+            "receipt": "form-batch-I5OMMA/responsive-en/receipt.json"
+          },
+          {
+            "suite": "responsive",
+            "locale": "ru",
+            "passed": true,
+            "cases": 31,
+            "receipt": "form-batch-I5OMMA/responsive-ru/receipt.json"
+          },
+          {
+            "suite": "renderer",
+            "locale": "en",
+            "passed": true,
+            "cases": 20,
+            "receipt": "form-batch-I5OMMA/renderer-en/receipt.json"
+          },
+          {
+            "suite": "renderer",
+            "locale": "ru",
+            "passed": true,
+            "cases": 20,
+            "receipt": "form-batch-I5OMMA/renderer-ru/receipt.json"
+          },
+          {
+            "suite": "tables",
+            "locale": "en",
+            "passed": true,
+            "cases": 17,
+            "receipt": "form-batch-I5OMMA/tables-en/receipt.json"
+          },
+          {
+            "suite": "tables",
+            "locale": "ru",
+            "passed": true,
+            "cases": 17,
+            "receipt": "form-batch-I5OMMA/tables-ru/receipt.json"
+          }
+        ]
+      }
+    ],
+    "installedCases": 778,
+    "runtimeFilesIdentical": 1262,
+    "sourceAndDriverFilesMatchCommittedCode": 532,
+    "dirtyDetachedResize": {
+      "widths": [
+        400,
+        550,
+        400
+      ],
+      "sameNeighbourDom": true,
+      "sameSelection": true,
+      "sourceTreePreserved": true
+    }
+  },
+  "remainingGeometry": [
+    {
+      "id": "footer-command-bar-location",
+      "path": "КоманднаяПанель/ГруппаДалееЗакрыть",
+      "property": "HorizontalLocation=Right",
+      "nativeCapture": "united-bsp-context-763t8lxb/native-data-matching-page.png",
+      "nativeYellowInterior": [
+        887,
+        893,
+        76,
+        24
+      ],
+      "nativeFrameOrigin": [
+        261,
+        320
+      ],
+      "reconstructedNativeNextButton": [
+        625,
+        572,
+        78,
+        26
+      ],
+      "viewerNextButton": [
+        129,
+        572,
+        78,
+        26
+      ],
+      "inference": "Logical native button reconstructed from the yellow interior and previously calibrated 1 px border. Equal-viewport acceptance remains open.",
+      "nextAction": "Measure left/right/automatic command bars, empty bars and their parent stretch; fix the shared row layout."
+    },
+    {
+      "id": "normal-separation-insets",
+      "nativeMiddleGroupInsetPx": [
+        8,
+        8
+      ],
+      "note": "Применение на краях родителя, рядом и во вложенности требует дополнительных замеров; отступы ещё не реализованы."
+    },
+    {
+      "id": "bsp-header-label-metrics",
+      "nativeNextInputY": 106,
+      "note": "Пять дополнительных native-проб сохранены в том же стенде. Заголовок БСП и метрики многострочной надписи ещё не приняты."
+    },
+    {
+      "id": "visible-table-height",
+      "differencePx": 2,
+      "note": "Существующее расхождение высоты положительного примера не включено в точную приёмку таблицы."
+    },
+    {
+      "id": "matched-viewport-and-whole-forms",
+      "note": "Native-рамка мастера 812×612 px и текущий предпочитаемый размер различаются; сравнение при строго одинаковой области и полная приёмка двух других форм БСП открыты."
+    }
+  ],
+  "artifactReferences": {
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-prepare.py": "7d9c718e72dc5aba71c45e3c36c711434d66139dc7a8fc0ee85083a6a319c9e6",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-native.sh": "50ed0d0762c6e06d2bf2e91ae185c0906c940733cdc2b4cf1025e474b7ad8099",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-metrics.py": "b874b790203bacd8016d316aab3e8a40639a2ea7c2759f75d1af0fc15e93234a",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-viewer.sh": "5ec130cefa9807cce0a79f6c6c3b75477de654099cd75682c71a307d10cbc66c",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-viewer-host.cjs": "7897141a396b4b5698e68f9f74db68b067c2d3cab997c72b5f6bb71b89ce9d96",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-report.py": "d5c6fb731bcdeddea560ecd859f9617c334eacddda74885c2c836537b2aef104",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-rust-checks.json": "2c4659e253f691c370c5e58e0730013d0ba2f019f1894ccd035dca95f5261c47",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-rust-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-rust-check.log": "a5f4c585ee974ca44916ac30a98bbc189e067a7e0a6bc6d2e8d6bc525be724af",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-rust-clippy.log": "a5f4c585ee974ca44916ac30a98bbc189e067a7e0a6bc6d2e8d6bc525be724af",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-rust-test.log": "b46f5bea105784a29d5f588f603285534c5c8b428732e9f2a61eeb2375648ac2",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-node.log": "3e6513f0fa8c71429d324031058a4a8ba432450d430815712258eda6b35e128e",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-empty-groups-layout-unit.log": "16f030ad3127b1201c95fc71db5b9fa670f1bb73634bcba2ecaf6f4b5b3478c5",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-bsp-layout-observation-host.cjs": "b42335ebb62e1ae346db69e5fd2f917daaaf322108715c930319cf441297584b",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-bsp-layout-after.sh": "3c8e04d3a113a391422df353497493f0b2100c2a5434277f8b7cb0eb5b56fbad",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-loan-lower-layout-host.cjs": "6b244c4ed3f01a3b96232e7f00a674cda6b40cea7bf3a3d1f9476e1e679c3d87",
+    "form-empty-groups-viewer-sO9P9DoL/evidence/eska-loan-lower-layout-installed.sh": "ff8447a5150b4731e221ed885c3501efc8d9cbde31f70a9114fc74d422fee2a7",
+    "form-native-empty-groups-pOji9CrA/cases.json": "b55af73162abe26606963ff6535644f5be34f8a1c0f572b6915ec9078c56dc3b",
+    "form-native-empty-groups-pOji9CrA/native-metrics.json": "489fac804a10a2d72aba3fc1ca286347831393e291f0d57544c872ed03d940d7",
+    "form-native-empty-groups-pOji9CrA/process.json": "156620cd98525babbc0d257d68dfdabf15ec5acd29716971b02a7256d205abff",
+    "form-native-empty-groups-pOji9CrA/import.log": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e",
+    "form-native-empty-groups-pOji9CrA/apply.log": "bb6b4409a542773505d58cbc7409aee5a4faea98d21e3e62945b71893928a7c4",
+    "form-native-empty-groups-pOji9CrA/designer-capture.log": "f32a083e96db08159503c13e7fc2f96adb917db2c1d241b3b0b5b7c7d110dbf2",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43701/Ext/Form.xml": "b12a8485b047ed9fbfe63ec28bdbc7b5cde2b1ae5fb8a45b2fb9524b6360d80e",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43701.png": "0355b6e6d3524c9d6d03137261f5601de961d45385142eff097051c9cfffa6b2",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43702/Ext/Form.xml": "0b84a689512c4588f636a050eda2f4221093b5bf16308abac6867ac0112061d3",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43702.png": "490fdfc73d027e1c39c32f4a19570701eae61d0d38dfa98e4dea9a873df6369d",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43703/Ext/Form.xml": "473861e83496c9f4e0b692200164715c1c0aaaf53c8311d9b053a26f74d183c8",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43703.png": "bd7d7176e53692fe7c8c07c32d6bfb28d2afcfe04c2ae73ebeb0931f11dcde1b",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43704/Ext/Form.xml": "53e6d4f0eba7464e3dce263c7c2581dea720a7b3b70faa9fafae087a6021911d",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43704.png": "92305445a8dcaacd611418153ff3a9b64cc074251666bd0a27a9f1d27966d42b",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43705/Ext/Form.xml": "a27e7c262f95e5440f532bed1cc8a8169aca6ad44ff738820da984a5c89f0a10",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43705.png": "75096dbd97c86b9ac633912c2fc2c7f880e2d6b8f5766f34b389af59d047ee13",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43706/Ext/Form.xml": "26065880f3740c098cc198bc0b14db3564587c283cbc917cefd8fcb9022327ad",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43706.png": "534f0c59ee6a44dce52e969b16638d485772b7d906527e4bb014208f829c53d8",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43707/Ext/Form.xml": "aa8dac78d66858517bebc63318cfe63b45ed7e44f4571a43078c3d4a6f91e93b",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43707.png": "79692a76528e94d942f3cb62a4addbcc9a0d4269a0064d98d5b3d30e915afb19",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43708/Ext/Form.xml": "bc76821956997f4a467e106db53d9e2903976b03881dd2a5c065a1800852702c",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43708.png": "40cd798625471fa54c829c38438b7f30ebbe124686347a842fe3380734fedc23",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43709/Ext/Form.xml": "6a46915c583d6ec2be8644233d16929956c8b8cd04ea3fb283302f0db4bd735d",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43709.png": "96195cea7547bd0d9e976a13d69fccef7b1e9acc34a0916df145b1b70f76d537",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43710/Ext/Form.xml": "d97563c146910cfda95d25b2e42d3c7d1ba937935c4e8672680596cc64952457",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43710.png": "ac797fe3b5cfacbf0ece28c386fc8f8e6d6610878dc2638f9fcc4f9f71f4028a",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43711/Ext/Form.xml": "b4a3526240042d4e51e131099707a57a778f048616c1672d64d4f89b735d4f4c",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43711.png": "9406499c611e3e234e7026abed2dfe2b33f7dfbd2c6519e859c807ef6ee754d4",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43712/Ext/Form.xml": "7d207272fb96cccd6a7fb05ffd5c023f343a2cae98210ca23beef1f836ff2146",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43712.png": "6db76bbd49a4229a9c83f890b3620fddcb78bb029ebc3b7f09b09e9700b03b29",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43713/Ext/Form.xml": "0550e2898bd18e273a4a92fff84dc94e139280c5259dd62f055f4e96615498ee",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43713.png": "9af128cde13c43cc289071996ce8ccceabb78d1b4ca9904b7ad5d2d1630da03a",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43714/Ext/Form.xml": "281a98f261dd94e843876f91248fae441f62aa4057bb2f2b73e46a2336b5064a",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43714.png": "ff93ea9e006435ea6728d854963fe7238df19be610ccef373474e0a4b54514f6",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43715/Ext/Form.xml": "b94d6f14857321a30d470f8d08c762db2ae7116e103d4cf7c0930dd76ffb0541",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43715.png": "7d1eab6ade4184a637545480cdea0d27013bce8623b9f920284b235e4fc5bffe",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43716/Ext/Form.xml": "2bab5dd4b0d0dc0a34574e402e1243a186026c5984c2b5aa863c858cd414b09d",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43716.png": "ad00ad3eb85dc43ef0b5fd5e07c5bd7425442f717b51d86ae287f3f750c5a812",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43717/Ext/Form.xml": "eec7ecb7fcef0900d4f1f2d6384dad4e588daa1f70e7c8c48ea1bf12cb974ddb",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43717.png": "f73b968d139bb3a2143e7a9884b9a80280203548e32ca302065e3be95c6cd5db",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43718/Ext/Form.xml": "7eda4d01ead1c52d803c7c0bb1c1188ef69c76a754039a023b16921656ea6ed4",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43718.png": "95e24e86089b386f25160716d82e6b9de3863ef56617f30497ea900c9074ef3e",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43719/Ext/Form.xml": "ed90bbaa4ef91ba3bf42bc704d0938eb62954d5a7d29b38a874295f6cb8860ad",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43719.png": "b6e8ace8a2394efdcf11054d88fde7260af55f95f46bac29a672d20b70ea1acc",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43720/Ext/Form.xml": "0daba526566dc0a19c87dbef174ab199fe2bda95b828b2f8d87a232c8540d892",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43720.png": "de9307979234353d154d47187c9a631db25c5e8ae94dd4a958e11cb8c6f46660",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43721/Ext/Form.xml": "8ab1f4319f65ebbe52d0b1f5a28635620ca56efa304c715869ce1f2b6421947e",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43721.png": "3afa4188524905e3c04d7f8bb142f8f5dee75d8c0b6ccb492aa8a82316fc2e5f",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43722/Ext/Form.xml": "6b4104c47877cb901572d2c62c8d137a9259738882aca634699480e89c9c69d9",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43722.png": "4d8aa03a5a7512affb9b9045e6f33864ed49fb183942384629064d8c0ac40d54",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43723/Ext/Form.xml": "4e6c1b53dbefe321c9afd876091bbf3d7102c0344be0e3e6cf79696ceef173ed",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43723.png": "a37e67f0cc07d57a3bbfd656ecff3b49eda926bf8b9d03daceea5ca776c7db1b",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43724/Ext/Form.xml": "d854bd099d62ee593da87837d6af4cf4a9da83fdcd9e38f047161a2a5b1abb8d",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43724.png": "f84af9db582305dcbb7f6a39d2170070af3856a42ddfbd5217fab2b665563fca",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43725/Ext/Form.xml": "dae1559934dbec241c7879b021e4ac09aeee54214c496ed093fc31864bd01e6c",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43725.png": "5d43be09ca318518db0899bba046b3c3e923728d7abae6b7ab321f32abb1c35c",
+    "form-native-empty-groups-pOji9CrA/src/CommonForms/ProbeWidthEmpty43726/Ext/Form.xml": "5bb0aa32b9ab9cbf169e75653876572f86be4f5c897ac5502cd6b3b90a434e53",
+    "form-native-empty-groups-pOji9CrA/native-ru/ProbeWidthEmpty43726.png": "eb2504cf9c623ba1a877ac94a662faddfe463d0fd6226bcd89141735eb6f68c6",
+    "form-empty-groups-viewer-GDjnoEHM/ru/geometry.json": "72748c450549e67720a90067a4d56359fff9ca38b2f36c4381e5ed81d2da459e",
+    "form-empty-groups-viewer-sO9P9DoL/ru/geometry.json": "2fd9549c555dded3328505aeac461f4d86dd11c4e61621a5ed7fdc131d3933b4",
+    "form-empty-groups-viewer-sO9P9DoL/ru/receipt.json": "deeb7954d3400ed44462d5a4250e271f6d4cc92fe27b383a211d9a1861a4cbd5",
+    "form-empty-groups-viewer-GDjnoEHM/en/geometry.json": "6c181fc57f004bb6e84e26b2de999fa03b8eb40c1680f43f473094d95e80045d",
+    "form-empty-groups-viewer-sO9P9DoL/en/geometry.json": "4a57b42161ee899850f57eb565fff1915e806dd405445b8ab117c8ee9ddd3d68",
+    "form-empty-groups-viewer-sO9P9DoL/en/receipt.json": "8203f66321e5dc7fbe40c2de27b86ba095fe27e58b8d48d1277548c957256ea0",
+    "form-empty-groups-viewer-sO9P9DoL/ru/Control.png": "f413150b4c06c14554d51ca51b39f496a25388b5d13bb2e945e38d19b2115112",
+    "form-empty-groups-viewer-sO9P9DoL/ru/Empty.png": "9888a540b20a8247bc97b6f6bcc64c96073d7f28d2da89d36205b5c24f711995",
+    "form-empty-groups-viewer-sO9P9DoL/ru/HiddenField.png": "dfceef46021c1ecba2de3c0104c93f05fbb07fdbaaea563aea4cb5f1bc49786d",
+    "form-empty-groups-viewer-sO9P9DoL/ru/HiddenTable.png": "c216a8fc1795b2a3ceb242183d94c02e5b4d3bd8392f635210e234e1418df46a",
+    "form-empty-groups-viewer-sO9P9DoL/ru/NestedHidden.png": "cc8b4b2f7a15b18c01fae623d51568fa85d91cdca2a739ec78b5850a91909f5a",
+    "form-empty-groups-viewer-sO9P9DoL/ru/VisibleField.png": "fa9dc188391bb45bde4576eac1d16ca82b8a027bd5185611d0e3522435828fdd",
+    "form-empty-groups-viewer-sO9P9DoL/ru/VisibleTable.png": "b71d957a38739e2dee495d3a3ae48c7d911a82a1984003a5f735c14284b3ce6d",
+    "form-empty-groups-viewer-sO9P9DoL/ru/HiddenColumns.png": "fa6e923c94a6f7300b6777fc7551eaa27b24b1bdce99061ffcf721d17911230d",
+    "form-empty-groups-viewer-sO9P9DoL/ru/TitleHidden.png": "0b5b0cec176b6c4ae61040bdff30e4e8445ab4138ff5ece2f6c30731688155ce",
+    "form-empty-groups-viewer-sO9P9DoL/ru/NormalHidden.png": "e2de1202c9dd1eef12024793b4f645070847529f0b611ca4d9027a6fe2199ba0",
+    "form-empty-groups-viewer-sO9P9DoL/ru/StrongHidden.png": "a8a3ce4398f174288d160c67a479f9814e734b4172c019abdabee2622b4eae51",
+    "form-empty-groups-viewer-sO9P9DoL/ru/PaintedHidden.png": "156711012463b7f3939ef32faea2ffd57699d92bd0591db490049dc2ccf85fb6",
+    "form-empty-groups-viewer-sO9P9DoL/ru/FixedWidthHidden.png": "85621613632d00822f1d84fbaa9d3ef8acd0cf3d73a3c598d932af7fc7bd368d",
+    "form-empty-groups-viewer-sO9P9DoL/ru/FixedHeightHidden.png": "46a4bd8ed91b2913d9f8cacc84c6bdd301ab24bfe35a67ba747463e13ab5ea68",
+    "form-empty-groups-viewer-sO9P9DoL/ru/StretchHidden.png": "69f4c47451af895166c13408b84961e6b0558ec3fc21f987bc09cda5fc06b2f8",
+    "form-empty-groups-viewer-sO9P9DoL/ru/StretchXHidden.png": "882f8c05e1569862c97b309d36bf5e9c321f85b0ae68f40f4279f95887b4831c",
+    "form-empty-groups-viewer-sO9P9DoL/ru/CollapsibleHidden.png": "30122782be4e8b51bdde9f26eed7720b14c67ad0d62dc5f8e16622ccaadd92e7",
+    "form-empty-groups-viewer-sO9P9DoL/ru/EmptyTitle.png": "e25b2f5870923bf923be8c2320f5457c530ae96d1b174fe31a7e578d1c755297",
+    "form-empty-groups-viewer-sO9P9DoL/ru/EmptyPainted.png": "c0bdc7836c2291139061d7ad930cc5fd68f59614c81756277290615f0424973b",
+    "form-empty-groups-viewer-sO9P9DoL/ru/EmptyFixedHeight.png": "ef8f6d88cf7de5f6194152750d854762a005bd6d79ff10d4acad0ccd45f3cd22",
+    "form-empty-groups-viewer-sO9P9DoL/ru/EmptyCollapsible.png": "f36b4bbac7e6189f5fe8c70cb3f56e35d630a7e026c31e37a5b81fecf866cf1e",
+    "form-empty-groups-viewer-sO9P9DoL/ru/NormalVisible.png": "81eedf19500be533bd817dcf6a4bcf1bb775543823c117f2928e20d66748d456",
+    "form-empty-groups-viewer-sO9P9DoL/ru/NormalVisibleTitle.png": "eeca67d4018fa1c92ff8e756c124e7155d483049f005b6a818afc8d30131d2bf",
+    "form-empty-groups-viewer-sO9P9DoL/ru/DefaultVisibleTitle.png": "d82a18b80df98f65734d286a6021c43b0d7536e4b32bd4b6d57e416c4f09c94a",
+    "form-empty-groups-viewer-sO9P9DoL/ru/NoneVisibleTitle.png": "b1308cb61a6395cd9e2561028fa2f7997cc2fd415575dd30dca10412fdbfd5be",
+    "form-empty-groups-viewer-sO9P9DoL/ru/BspHeader.png": "730bdace959bb51737c0604e0c57dba094e90bb7c4b9ffb825b3bc7be92d8884",
+    "bsp-layout-after-qY12blnV/ru/review.json": "291c9a2455e0dfdef5fc2d78daebe1036b6be8f95aa3eb585c6c23470d1eb6b9",
+    "bsp-layout-after-0muhmsqH/ru/review.json": "4acce9a87f04203b12ed404f06d94efee3eae77dcf7de82e50a66dd6e8c80ddf",
+    "bsp-layout-after-0muhmsqH/ru/receipt.json": "5f925945320c9675d0e9ebb28360c536f0190b3126661ad7fcf021ab8b52d851",
+    "bsp-layout-after-qY12blnV/en/review.json": "ff1f903eb01f992d582e42186a1934ca4ce04517e8c9e97d19cc94f8db9294a1",
+    "bsp-layout-after-0muhmsqH/en/review.json": "2af72bf57a7bee01f0541213b97352292fc257e5695710e433bc16cd5bdcc95a",
+    "bsp-layout-after-0muhmsqH/en/receipt.json": "ed692110324aaab4e27f0f80ed06669baff9f73eb96a7c1405e3cdfb88addb80",
+    "bsp-layout-after-0muhmsqH/ru/bsp-0-preferred-initial.png": "29a3cd99df260e31c4c6c159b167bc2c2ff4a1814e9c4df48175a485180379df",
+    "bsp-layout-after-0muhmsqH/ru/bsp-0-preferred-alternate.png": "77048b710a857ba35426fdd2364a1c3c43ea516eca20e729908356a058e3ddec",
+    "bsp-layout-after-0muhmsqH/ru/bsp-0-allocation-640.png": "4c85a067f8e47e52a4276c5c0c5b99ccb2938b9246b9a40f33c46b7db3e5bf0b",
+    "bsp-layout-after-0muhmsqH/ru/bsp-0-allocation-1150.png": "3b5e6ab3bf0eb8da59dfbb3df667af3fd5d76209e27fa573881ca90358caa0ba",
+    "bsp-layout-after-0muhmsqH/ru/bsp-1-preferred-initial.png": "f9ecf6ad3d516e9e79c4c2c8d105fe386b303bab36206734b622ef5f8604657b",
+    "bsp-layout-after-0muhmsqH/ru/bsp-1-preferred-alternate.png": "85355b4bf6449d5c084db9da6a9ec46db55f9cb57e609d3871f74b9699799ef3",
+    "bsp-layout-after-0muhmsqH/ru/bsp-1-allocation-640.png": "13d980f55d9e27c5d0141623cf66e25800616cbd08e00dd03eb98b40c0fe9621",
+    "bsp-layout-after-0muhmsqH/ru/bsp-1-allocation-1150.png": "dc7f22a6019b627fc1ec163e8ccfff20ab5b06a6609553c5e937103e166066cb",
+    "bsp-layout-after-0muhmsqH/ru/bsp-2-preferred-initial.png": "bd5c54fae2f8fba4f6195ca1d62a540eee371a6c9f901d587ca867c9c59dae4c",
+    "bsp-layout-after-0muhmsqH/ru/bsp-2-preferred-alternate.png": "541c38d66ba1775f48a0636315531e84b8706beef94457a9bb2635b07c8715be",
+    "bsp-layout-after-0muhmsqH/ru/bsp-2-allocation-640.png": "6f3a3150c5191d54a8e9152ec30e3d5a9290cd07041a9feedbfaabfe306ba8df",
+    "bsp-layout-after-0muhmsqH/ru/bsp-2-allocation-1150.png": "dcefa4f32abda7cb328afb043dadcf5e6c6e29012911e55b12e805ed6c59b614",
+    "form-installed-loan-lower-GQWIonMu/loan-ru/geometry.json": "1da29f7dda11fbeec1509bcab4a83a198a3f45a379c70a9dba48fe2f29a060e2",
+    "form-installed-loan-lower-lr0pb41A/loan-ru/geometry.json": "1da29f7dda11fbeec1509bcab4a83a198a3f45a379c70a9dba48fe2f29a060e2",
+    "form-installed-loan-lower-lr0pb41A/loan-ru/receipt.json": "1a0fbd2d115895a22a30d1f5c0b443d90b9f7ab016aa4fcf2a19317c5d0f6232",
+    "form-installed-loan-lower-GQWIonMu/loan-en/geometry.json": "90389c85b7131504801e55b8440323ee27a992c4133fe4de3bfb665fc8d8162f",
+    "form-installed-loan-lower-lr0pb41A/loan-en/geometry.json": "90389c85b7131504801e55b8440323ee27a992c4133fe4de3bfb665fc8d8162f",
+    "form-installed-loan-lower-lr0pb41A/loan-en/receipt.json": "01c08336b34bad7f866065fb395656ed34c87c48d41237b01c850e76a4888aa8",
+    "form-installed-loan-lower-lr0pb41A/loan-ru/loan-1156.png": "30a397d2f2b6653cab34359da7c73038800e2c512934d75be31da0571c35c5ee",
+    "form-installed-loan-lower-lr0pb41A/loan-ru/loan-760.png": "b23a35767ea7cbd0d69ad9a6e22c09bc400a4bf7a7475fcafb37c68b56c3ee45",
+    "form-installed-loan-lower-lr0pb41A/loan-ru/loan-696.png": "31392924324e22e2e01467fcc3594874d9856a1bd6df37dc00ba384b1884f487",
+    "form-installed-loan-lower-lr0pb41A/loan-ru/loan-696-bottom.png": "de680548a36f89d1446db44e19a065257944aea2dd27580396f07c8d948d92f1",
+    "form-batch-sfZ0z5/batch.json": "06fa57a8a776dd7a786a49714147386a04ecd3c27f330cfa74c940ed0138b953",
+    "form-batch-sfZ0z5/inputs.json": "604918d52c6ad3b30c4b711730603b8dcde759e005af247c5735f0ff699152ab",
+    "form-batch-sfZ0z5/artifacts/viewer.vsix": "55971c0b853d30b2fd40684c2621fb903e2aacefb305d040042ea38dfd044014",
+    "form-batch-sfZ0z5/artifacts/eska-project": "344a85998ceb188ece3069e87049781447e96eef37f212fe2767487c4a132260",
+    "form-batch-sfZ0z5/group-visibility-en/receipt.json": "9c6a3b1db4a5a7d085b3f155351b8df9a587aefe318c84c04d035031e94a0bd5",
+    "form-batch-sfZ0z5/group-visibility-ru/receipt.json": "585df78a2eae311be03a02d8f77713b95886def6dd917cd264a497db15bf847a",
+    "form-batch-sfZ0z5/groups-en/receipt.json": "0fc96ee5cdbaad898372e8f434de49f485e43d20c613799d0e331036ecd95052",
+    "form-batch-sfZ0z5/groups-ru/receipt.json": "0a8f79a9f8ddccc7f03202431b2b43aacb823ffb13c6b00025db213f8259602f",
+    "form-batch-sfZ0z5/through-align-en/receipt.json": "eba35c50618d266aa1fc18b52ceab2beaa12f9d78d7cd07911acf8135e636a95",
+    "form-batch-sfZ0z5/through-align-ru/receipt.json": "4c3f0b225be3f5b569bb36c649367bbaf8dc5febad02ddeaae7d9c7a4bdfcf4e",
+    "form-batch-sfZ0z5/united-en/receipt.json": "9a58efe6b5e4ccd5330c2e062f806d4c3e597a05664e03d5a23959f2a6b76393",
+    "form-batch-sfZ0z5/united-ru/receipt.json": "5ca844669349ab26997cfb1698e7d5969ece79d6a0b330e0e4644ae6b47f3822",
+    "form-batch-I5OMMA/batch.json": "dc7a0e20d7a997f07564cf0917399cff2f7a6e1b8e69c13f416b0848af0bd301",
+    "form-batch-I5OMMA/inputs.json": "43572696f9ca8eab861ff92afd825739fe1cde9bccdf0782bac3da8828c4c67d",
+    "form-batch-I5OMMA/artifacts/viewer.vsix": "7c7ccd7b1c8156407627e0391f2d032df5d7724f83be9ad201cfc30c04e2387f",
+    "form-batch-I5OMMA/artifacts/eska-project": "344a85998ceb188ece3069e87049781447e96eef37f212fe2767487c4a132260",
+    "form-batch-I5OMMA/column-widths-en/receipt.json": "61ab1f738d9125017cf7b45a8cfa4db43eeebe4e08baac21b944c813e9399cf8",
+    "form-batch-I5OMMA/column-widths-ru/receipt.json": "312e5b54e34e8ffb6c5ffddf5633e16816b6d9c72e270917d9575fc59cd83c10",
+    "form-batch-I5OMMA/responsive-en/receipt.json": "fff52257361d411ea5e4790e2736cea77099228996b6a50ec4c1b898be4bab43",
+    "form-batch-I5OMMA/responsive-ru/receipt.json": "1c985be82eb3b5b34c5801cf760b64ec03571d3ca3a2a326f1727aaee3717281",
+    "form-batch-I5OMMA/renderer-en/receipt.json": "f53a944712fb5fb633fc92ae92f83798d01973d0daec2fdaabfd9f2062abb466",
+    "form-batch-I5OMMA/renderer-ru/receipt.json": "44f0cadd41b57aba9660e91f2027f106ddb3e8293f78ea6e7b32fcebafca680b",
+    "form-batch-I5OMMA/tables-en/receipt.json": "facef5a1813efe6cbffa7eea3d328182059b9bb605f7aad313e35f6376b996a5",
+    "form-batch-I5OMMA/tables-ru/receipt.json": "2ef0ff982773f165c6f582966cb737a0a236d7a964daeb82e3d4acfb86cb1612",
+    "united-bsp-context-763t8lxb/native-data-matching-page.png": "8604aaf8f09db68aebcee30362fc8f9ae729e377aeacd6daff3b09ff5d8c7b53"
+  }
+}

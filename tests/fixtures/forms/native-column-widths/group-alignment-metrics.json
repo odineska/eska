@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "sourceFiles": {
+    "AlignedFlags": "828a7675d3386443d27e34775a17662d8d70da3a3cad5f895180f355d5bd5380"
+  },
+  "fixtures": {
+    "AlignedFlags": {
+      "cases": [
+        {
+          "name": "a centered group at preferred width",
+          "frame": [906, 250],
+          "nativeCapture": "ProbeWidthAlign42311-medium.png",
+          "screenshotSha256": "fdff7eb1a64a4ba8b05945db92bb83b5ac5604ae6985a1372cbd9749acd782a0",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 112, 15, 15],
+            "Flag2": [147, 99, 15, 15],
+            "Flag3": [147, 125, 15, 15]
+          }
+        },
+        {
+          "name": "a centered group after conditional wrapping",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthAlign42311-compact.png",
+          "screenshotSha256": "eb1cbbe8c214a03a42709f9184530629298e1504cecba7524ea535ead0e0830b",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 98, 15, 15],
+            "Flag2": [89, 99, 15, 15],
+            "Flag3": [89, 125, 15, 15]
+          }
+        },
+        {
+          "name": "automatic alignment places group contents at the top",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthAlign42309-compact.png",
+          "screenshotSha256": "6f3b91a83489b8c84c6bcf8726667fa9b85cc49ff0f4baf48cc1c089d9069233",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [89, 77, 15, 15],
+            "Flag3": [89, 103, 15, 15]
+          },
+          "edit": {
+            "groups": {
+              "FlagsInset": {
+                "VerticalAlign": null
+              }
+            }
+          }
+        },
+        {
+          "name": "explicit top alignment is preserved",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthAlign42302-compact.png",
+          "screenshotSha256": "c99b39dd57811fda998089ff3b5601c757894a745ba7d0cfe6cef9e8e6c08d75",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [89, 77, 15, 15],
+            "Flag3": [89, 103, 15, 15]
+          },
+          "edit": {
+            "groups": {
+              "FlagsInset": {
+                "Group": "AlwaysHorizontal",
+                "VerticalAlign": "Top"
+              }
+            }
+          }
+        },
+        {
+          "name": "bottom alignment places a vertical stack at the lower edge",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthAlign42308-compact.png",
+          "screenshotSha256": "3bac3975e15d92719a8c6053d57c903cf53b1878aee76df3a52279edfee738a4",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 118, 15, 15],
+            "Flag2": [89, 120, 15, 15],
+            "Flag3": [89, 146, 15, 15]
+          },
+          "edit": {
+            "groups": {
+              "FlagsInset": {
+                "Group": "Vertical",
+                "VerticalAlign": "Bottom"
+              }
+            }
+          }
+        },
+        {
+          "name": "height three respects the natural child height",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthAlign42401-compact.png",
+          "screenshotSha256": "459d2045358334730178ceabd3a6d6d52078cae6812f9b74f378cd5c8a8e7e07",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 77, 15, 15],
+            "Flag2": [89, 78, 15, 15],
+            "Flag3": [89, 104, 15, 15]
+          },
+          "edit": {
+            "groups": {
+              "FlagsInset": {
+                "Group": "Vertical",
+                "Height": 3
+              }
+            }
+          }
+        },
+        {
+          "name": "height five aligns children to the bottom",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthAlign42404-compact.png",
+          "screenshotSha256": "1de5e244ad7446d0fea124d17df01b7e0e00a1b69ba3b20cd84e7ab62fc82103",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 102, 15, 15],
+            "Flag2": [89, 104, 15, 15],
+            "Flag3": [89, 130, 15, 15]
+          },
+          "edit": {
+            "groups": {
+              "FlagsInset": {
+                "Group": "Vertical",
+                "Height": 5,
+                "VerticalAlign": "Bottom"
+              }
+            }
+          }
+        },
+        {
+          "name": "height eight centers the nested row",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthAlign42405-compact.png",
+          "screenshotSha256": "cef5c6ffa1cc840b968ffba70c7ddf5ca44ac3a9ee78a82b43e73eeb7c23dd8b",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 114, 15, 15],
+            "Flag2": [89, 115, 15, 15],
+            "Flag3": [89, 141, 15, 15]
+          },
+          "edit": {
+            "groups": {
+              "FlagsInset": {
+                "Group": "Vertical",
+                "Height": 8
+              }
+            }
+          }
+        },
+        {
+          "name": "the only child can center within a vertical group",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthAlign42408-compact.png",
+          "screenshotSha256": "9142c244bc0d0786e9a88b7561eeea5328d262417faa156002bc987ab3e1b509",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 98, 15, 15],
+            "Flag2": [89, 98, 15, 15],
+            "Flag3": [89, 124, 15, 15]
+          },
+          "edit": {
+            "groups": {
+              "FlagsInset": {
+                "Group": "Vertical",
+                "VerticalAlign": null
+              },
+              "Flags": {
+                "GroupVerticalAlign": "Center"
+              }
+            }
+          }
+        },
+        {
+          "name": "a child override survives conditional wrapping",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthAlign42409-compact.png",
+          "screenshotSha256": "6d516db5203b9d4588de0fefe7c87ee3968f9f04613ff24e43580f6bb4349c87",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 98, 15, 15],
+            "Flag2": [89, 98, 15, 15],
+            "Flag3": [89, 124, 15, 15]
+          },
+          "edit": {
+            "groups": {
+              "FlagsInset": {
+                "VerticalAlign": null
+              },
+              "Flags": {
+                "GroupVerticalAlign": "Center"
+              }
+            }
+          }
+        },
+        {
+          "name": "centering restores from the original XML",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthAlign42311-compact.png",
+          "screenshotSha256": "eb1cbbe8c214a03a42709f9184530629298e1504cecba7524ea535ead0e0830b",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Flag1": [19, 98, 15, 15],
+            "Flag2": [89, 99, 15, 15],
+            "Flag3": [89, 125, 15, 15]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,854 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestone": "T157/T159",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "zoom": 100,
+  "artifactBase": "../eska-playground",
+  "coordinateSpace": "Unzoomed form-relative pixels at 100% zoom. Viewer controls in bottom captures are relative to the fixed frame.",
+  "explorerCommit": "ecc739e0a0538f1f155498b7928227314e9bd750",
+  "eskaSourceCommit": "c27a9c2f639ec0f6dd65b23764d3628321ae3c48",
+  "bslExecuted": false,
+  "windowsCalibrated": false,
+  "wholeFormGeometryParity": false,
+  "checks": {
+    "node": {"pass": 650, "fail": 0, "skipped": 9},
+    "installedBatch": "form-batch-8IL7oO/batch.json",
+    "runtimeManifestSha256": "dc81b9e39d11d523b9de07c5bd91c4f721712128b3bf30623c60450967153b68",
+    "vsixSha256": "a8470932830d4d73cd0edffe741f0394c4ace44917ff74a4769c4f90fe433c9f",
+    "passedRuns": 14,
+    "caseEntries": 687
+  },
+  "probes": {
+    "compatibility": "Version8_3_27",
+    "nativeStates": 56,
+    "compactGridSizeAndScrollMatches": [
+      "AutoOverflow",
+      "StretchOverflow",
+      "FixedOverflow",
+      "RowsTwo",
+      "RowsEight",
+      "RowsTwelve",
+      "HeightFour",
+      "HeightTwelve",
+      "HeightTwenty",
+      "NestedOverflow",
+      "HeightOne",
+      "HeightTwo",
+      "HeightTwoFooter",
+      "HeightFourFooter",
+      "HeightFourNoHeader",
+      "HeightFourNestedBands",
+      "HeightTwelveFixed"
+    ],
+    "viewerGeometry": ["form-installed-table-height-WODMKwr8/probes-ru/geometry.json", "form-installed-table-height-WODMKwr8/extra-ru/geometry.json"],
+    "cases": [
+      {
+        "form": "ProbeWidthTable42501",
+        "kind": "AutoShort",
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42501/Ext/Form.xml", "sha256": "2d4c368ee8080ffc0933b8db60d91a53c2c5d5ce1036228b18830dd9920b2132"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, 311],
+            "table": [13, 39, 430, 227],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42501-medium.png", "sha256": "43481a3ab095b91c1d1d5b0d112df8e21a73a190cd184fb91a599c4f1a1a3c32"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 311],
+            "table": [13, 39, 430, 227],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42501-compact.png", "sha256": "61f370797fa79715459e7a0477df3ab2ead5c61382a1bb7a9e180eff089ba387"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 311], "table": [13, 38, 430, 229], "heightFloor": "227px", "innerScrollMax": 0, "tailControl": [13, 275, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42502",
+        "kind": "AutoOverflow",
+        "after": 36,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42502/Ext/Form.xml", "sha256": "85bd2384d17f78c16023e27d4a823bc5adffb54c3719fdc33869530245bece08"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 227],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42502-medium.png", "sha256": "724fe6242fff36461675764477e5b82d018f83d6b2face31b7ef0ff9c2a45eec"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 227],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42502-compact.png", "sha256": "9e13aff9310f9e6050a0b3dbca7e019492c798691267b3e4db34067b99f714c7"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 227], "heightFloor": "227px", "innerScrollMax": 125, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42503",
+        "kind": "StretchOverflow",
+        "after": 36,
+        "stretch": "true",
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42503/Ext/Form.xml", "sha256": "fb1d926e58846cd231c5bd72e910b5e8c50f36dd40b72fcf19276a7c64a41f34"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 227],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42503-medium.png", "sha256": "c885ab814dfc7e3da0d632fd447ae7068d99a7029c81ae0b1d85980bbe9dcf42"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 227],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42503-compact.png", "sha256": "1cbb972c1a39172522d17603157ccd3106a34fa2343047eda056b3badee05180"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 227], "heightFloor": "227px", "innerScrollMax": 125, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42504",
+        "kind": "FixedOverflow",
+        "after": 36,
+        "stretch": "false",
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42504/Ext/Form.xml", "sha256": "6092676423f78949d9364f0c4aa7892ea30cdbcd9c62f918d8535e3fe7bcb377"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 227],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42504-medium.png", "sha256": "b1877d64dc73c2b81b7a2354119eff7919320f43cf36fbf4443b3a29f6a71fbb"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 227],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42504-compact.png", "sha256": "5bf1dca35a007ec90c2894f260c3ed3ed9fbb0866bec8118bc36b09906ecaff5"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 227], "heightFloor": "227px", "innerScrollMax": 125, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42505",
+        "kind": "RowsTwo",
+        "after": 44,
+        "rows": 2,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42505/Ext/Form.xml", "sha256": "bdd97ec26fb17f2773d8584f30875c1220ad89b9d17a0b83a30e52ed0c2f4df0"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 87],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42505-medium.png", "sha256": "0aea213a7773e2d0fcf97149e445384df45467f2c529e5a2f5d8e70884ae0fb6"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 87],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42505-compact.png", "sha256": "aa5c6f05408a7fc09281632bf37533ffed58b7421c3a7d8371c5087f21219437"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 87], "heightFloor": "87px", "innerScrollMax": 113, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42506",
+        "kind": "RowsEight",
+        "after": 32,
+        "rows": 8,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42506/Ext/Form.xml", "sha256": "a9ff67356f5a8116eae61bbeadb4cfc47a2c6b9dcaef1222f21eba52e93da396"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 255],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42506-medium.png", "sha256": "48a6728d2b28629e1a9815c47d91db22e4a8ada4ac6f24db36879238301b8767"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 255],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42506-compact.png", "sha256": "a5b9c47acac821f22166b33f1f0453ca8e33e44f704dc347727f66db63fc88a6"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 255], "heightFloor": "255px", "innerScrollMax": 89, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42507",
+        "kind": "RowsTwelve",
+        "after": 30,
+        "rows": 12,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42507/Ext/Form.xml", "sha256": "c3a0ca9c27f65ad9cba5513adf2515110674a24133991bf063832091b77977a3"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 367],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42507-medium.png", "sha256": "a1b57faecec6b587a77c6065ddde673b1da1775db6e108d475d239bd1c986868"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 367],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42507-compact.png", "sha256": "0e1e3b71b51ab68612cd7faa8e2ea90cc51c79e04e5f39c45244c57ddce2a621"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 367], "heightFloor": "367px", "innerScrollMax": 169, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42508",
+        "kind": "HeightFour",
+        "after": 36,
+        "height": 4,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42508/Ext/Form.xml", "sha256": "dcac2c5ef1b590e98bd0ad579d07eb09d46aace6bf9b36952156012969b2643f"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 115],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42508-medium.png", "sha256": "77a9d5420ca213061d2fb7cd049c60747db30d32f1c5500336fc4496067e6827"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 115],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42508-compact.png", "sha256": "3ed6fa93ee13fbe67e19104fc49e348b6b00a59939424822a6dda3d61a13ee86"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 115], "heightFloor": "115px", "innerScrollMax": 13, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42509",
+        "kind": "HeightTwelve",
+        "after": 36,
+        "height": 12,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42509/Ext/Form.xml", "sha256": "6dd6195683097d6d20627569a9f71205597405dc70ed95fd4ab8fba32b94f2de"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 339],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42509-medium.png", "sha256": "89f806532ee0440bd4de295a816471022a91e88093d885f0dfc8ec2e45a55fb6"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 339],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42509-compact.png", "sha256": "baee157027bf1c3888a7a09ed0521d0a8833ba43de94328c38fa15de7438ced0"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 339], "heightFloor": "339px", "innerScrollMax": 237, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42510",
+        "kind": "HeightTwenty",
+        "after": 36,
+        "height": 20,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42510/Ext/Form.xml", "sha256": "d7f00712ef22dd54097657f391807665b36691e62100857c7a437d8209bb77d3"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 563],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42510-medium.png", "sha256": "befdcb320da5489a4257e78a34ee3dbb43fa92aa88325ee089174d358333be07"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 563],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42510-compact.png", "sha256": "b2faad4071b0c5cba8271f52a4a32ff35a4275819bb42751e547c982e05dcbf7"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 563], "heightFloor": "563px", "innerScrollMax": 461, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42511",
+        "kind": "HeightAndRows",
+        "after": 36,
+        "height": 12,
+        "rows": 2,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42511/Ext/Form.xml", "sha256": "5d46d3eef4a0c3f4eba34fbc2e760a5f290f12bfe7a127b3df5b0a5a1c902659"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, 756],
+            "table": [13, 39, 430, 87],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42511-medium.png", "sha256": "64d565b1480fdce749c6a9c8378379af85f1f79c487b12dfe52ac4b674cdf4a7"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 756],
+            "table": [13, 39, 430, 87],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42511-compact.png", "sha256": "8e07dbb6998f274dfde874a50f1ac0095a08d9990f31264cddc8e05b61581f45"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 756], "table": [13, 38, 430, 89], "heightFloor": "87px", "innerScrollMax": 0, "tailControl": [13, 720, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42512",
+        "kind": "NestedOverflow",
+        "after": 36,
+        "nested": true,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42512/Ext/Form.xml", "sha256": "074a03065788f1e4ddbeecbb41f9c0ee6774ca1e787726fcc71f1e5ad2edfd84"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 62, 430, 227],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42512-medium.png", "sha256": "4884aa46f5ad0bf4ec7595a71ec9220e9d3d51f55597e27256cfd654fd0bc5d4"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 62, 430, 227],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42512-compact.png", "sha256": "ea9f3bb3bef0e8646aa92fa01fd65abe4a9c10fc7f529205b00ef2b2a9986d7f"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 61, 430, 227], "heightFloor": "227px", "innerScrollMax": 148, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42513",
+        "kind": "GroupHeight",
+        "after": 36,
+        "nested": true,
+        "groupHeight": 8,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42513/Ext/Form.xml", "sha256": "c07f28b8db144c714885d1ada7ba217ce9afe4f585b44ffab2d6d3622d4be74e"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 62, 430, 117],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42513-medium.png", "sha256": "71185478a0e3f6e0e71734da955e5c66f72ca38d2ba244e693b77821915f8ae1"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 62, 430, 117],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42513-compact.png", "sha256": "ebc8268b0776a1211498538517e5df42ab5a914a3ee36439401625779ce57c31"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 61, 430, 227], "heightFloor": "55px", "innerScrollMax": 148, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42514",
+        "kind": "TableAfter",
+        "before": 34,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42514/Ext/Form.xml", "sha256": "810199dbf3a8c88fe0e4a068ff7270775c7eb9dbc917e55b714a95c2752081ac"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": null,
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42514-medium.png", "sha256": "8b5ad043b75393208258d44a4fb67c378154ed171278ba4817db3cca45feadc7"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": null,
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42514-compact.png", "sha256": "97a2dee1798784bfee7f58f497749f459766bdee6e70f4f12204bf22f6063d74"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 591, 430, 227], "heightFloor": "227px", "innerScrollMax": 93, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42515",
+        "kind": "TableAfterNested",
+        "before": 34,
+        "nested": true,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42515/Ext/Form.xml", "sha256": "82c14609ce8a78edd8cece2bc7661562d365d36f4e5a5fd4ad348ec5b914e9c0"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": null,
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42515-medium.png", "sha256": "aa897fea311e2a6e546a7e8f58d562142404b92841cb8601ad812ee6bc688ccf"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": null,
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42515-compact.png", "sha256": "640d327d6ae11f9f24ead67cc9e1335c7e840696ebc2f461775c608804beb32d"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 614, 430, 227], "heightFloor": "227px", "innerScrollMax": 116, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42516",
+        "kind": "AuthoredFormHeight",
+        "formHeight": 14,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42516/Ext/Form.xml", "sha256": "2e1b405ed54f4fe1bbe336f0b856cbe10c28c200be0fc9d004275cd8127fc72c"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, 276],
+            "table": [13, 39, 430, 192],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42516-medium.png", "sha256": "7942f9c0a725ac450a015444f8337bb8c2bad4a4a0f6268481b7fb98f585421d"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 276],
+            "table": [13, 39, 430, 192],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42516-compact.png", "sha256": "b0a583bd1d65491532d8a72167faf109ee15ee710e42547dc312d34ff2d836ef"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 276], "table": [13, 38, 430, 194], "heightFloor": "55px", "innerScrollMax": 0, "tailControl": [13, 240, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42517",
+        "kind": "DynamicShort",
+        "dynamic": true,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42517/Ext/Form.xml", "sha256": "cf5a0bc3d4e83fc496b51df82dcec2a0ee17361fea6125cf5e8f540a58977ce1"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, 557],
+            "table": [13, 39, 430, 452],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42517-medium.png", "sha256": "1e37c3e1fcb840b87e0bbf30d49dc6769836dd4104e21c081163a0365f24504b"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 557],
+            "table": [13, 39, 430, 452],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42517-compact.png", "sha256": "a2386a57950c0c8b6aa5c26194c127fa9e153e15a94cb06dc0edb393145f35f0"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 557], "table": [13, 38, 400, 454], "heightFloor": "55px", "innerScrollMax": 0, "tailControl": [13, 521, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42518",
+        "kind": "DynamicOverflow",
+        "dynamic": true,
+        "after": 30,
+        "source": {"path": "form-native-table-height-ZaXI37M7/src/CommonForms/ProbeWidthTable42518/Ext/Form.xml", "sha256": "6727762af850203a539cc958761fb4b23985cdce49e1021a5fc13add2805b0bc"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 406],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42518-medium.png", "sha256": "b7098341b0aa6e7edec8919e342b1e0d66e33376d0f5dc6afd12050738e1fdb7"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 175],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-ZaXI37M7/ProbeWidthTable42518-compact.png", "sha256": "ff8f681ed76773783555630c26853fd09afdacff1b5225f6601b5012dba07dcc"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 400, 177], "heightFloor": "55px", "innerScrollMax": 0, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42601",
+        "kind": "HeightOne",
+        "after": 44,
+        "height": 1,
+        "source": {"path": "form-native-table-height-extra-Lgf9EZri/src/CommonForms/ProbeWidthTable42601/Ext/Form.xml", "sha256": "e88b3e3140886c46950ebf3240a95ed40ba25e5c3616d3f5e7c6378231035740"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 36],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42601-medium.png", "sha256": "a6c1db0db0d4441d4edafbe712e7f7202206722f19f12e216cd19d21cd93ecc3"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 36],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42601-compact.png", "sha256": "50ceedf035796825738f44c0d3972f2ccc6b0c29a1591a157214ed10d3c02d4d"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 36], "heightFloor": "36px", "innerScrollMax": 62, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42602",
+        "kind": "HeightTwo",
+        "after": 44,
+        "height": 2,
+        "source": {"path": "form-native-table-height-extra-Lgf9EZri/src/CommonForms/ProbeWidthTable42602/Ext/Form.xml", "sha256": "7c7dda442fce3e63f184af3a4df9803d35e76ab95fd6631289dbf3c0c9447eb4"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 59],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42602-medium.png", "sha256": "498b17791e444c67743814bd8cf6be7925e35defac83b153db4b7040088fb250"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 59],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42602-compact.png", "sha256": "fde76f16fae6605e65d189ace241a1fbf6e349fd4a2295c30df7593f9df739c4"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 59], "heightFloor": "59px", "innerScrollMax": 85, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42603",
+        "kind": "HeightTwoFooter",
+        "after": 44,
+        "height": 2,
+        "footer": true,
+        "source": {"path": "form-native-table-height-extra-Lgf9EZri/src/CommonForms/ProbeWidthTable42603/Ext/Form.xml", "sha256": "87e8f140eedc22fbe29349577c392049015d6107ee1e63287526d9c196d3b1e0"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 60],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42603-medium.png", "sha256": "e0915dd295f43a936609090181b389f03c1ddb53f93cc4a24699e0e606f76f3f"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 60],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42603-compact.png", "sha256": "9b76589039b39c998d576af4df1a91a84abbc62bd72f8a57bdd4acd592d0d80d"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 60], "heightFloor": "60px", "innerScrollMax": 86, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42604",
+        "kind": "HeightFourFooter",
+        "after": 36,
+        "height": 4,
+        "footer": true,
+        "source": {"path": "form-native-table-height-extra-Lgf9EZri/src/CommonForms/ProbeWidthTable42604/Ext/Form.xml", "sha256": "0016af437c3e700782bc200f00a3d7107ab0db7a553aac6ebcb47d9d3ae46666"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 117],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42604-medium.png", "sha256": "d182be073375bc0bdcf24fed5e3e2327f95ad782f819d9d849de6c1b871c2e27"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 117],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42604-compact.png", "sha256": "b05252812c70e9b85945d9c5ff5bb853d7715eb9b6b62edbfff4ecf0dc5f83f3"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 117], "heightFloor": "117px", "innerScrollMax": 15, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42605",
+        "kind": "HeightFourNoHeader",
+        "after": 36,
+        "height": 4,
+        "header": false,
+        "source": {"path": "form-native-table-height-extra-Lgf9EZri/src/CommonForms/ProbeWidthTable42605/Ext/Form.xml", "sha256": "a0fe06737c453288d512cd6388d98e24e222e8beb6b02f8634f691319cd66195"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 113],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42605-medium.png", "sha256": "23a98f330f2bf07c967324b26b381b620212b298659604b510c67b82d64ced68"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 113],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42605-compact.png", "sha256": "48bdb593d459bceab9fe4a2e0c758ca718992708b422378f25d64cbd7cc3bd4a"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 113], "heightFloor": "113px", "innerScrollMax": 11, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42606",
+        "kind": "HeightFourTallBand",
+        "after": 36,
+        "height": 4,
+        "band": 14,
+        "source": {"path": "form-native-table-height-extra-Lgf9EZri/src/CommonForms/ProbeWidthTable42606/Ext/Form.xml", "sha256": "0616b41c90f18f1a053ae8bad94c35e921559b0b46592a40625bd0bc32878ee8"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 135],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42606-medium.png", "sha256": "aaa6a6cedbdcf0257720ee641b0c9152bb8f8e751e3611070d4781ccb147af07"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 135],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42606-compact.png", "sha256": "0b4d760ca959fdecae30b115df2cd9b7acdd500df8d5ea463b8486850ef425cb"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 128], "heightFloor": "128px", "innerScrollMax": 26, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42607",
+        "kind": "HeightFourNestedBands",
+        "after": 36,
+        "height": 4,
+        "columns": "Vertical",
+        "source": {"path": "form-native-table-height-extra-Lgf9EZri/src/CommonForms/ProbeWidthTable42607/Ext/Form.xml", "sha256": "26c07d3fe76c333851d674922cd58d6f804264bbf51c8b35ec9c9f980e02489c"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 116],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42607-medium.png", "sha256": "e21d43da66c1c84f8add3e39a2e3fdbb9aacae439d019278c1d76d2db886a152"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 116],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42607-compact.png", "sha256": "bffcd21dda9a4105509c6e38944d9507ff247109f7777133024720827e437538"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 116], "heightFloor": "116px", "innerScrollMax": 14, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42608",
+        "kind": "HeightTwelveFixed",
+        "after": 36,
+        "height": 12,
+        "stretch": "false",
+        "source": {"path": "form-native-table-height-extra-Lgf9EZri/src/CommonForms/ProbeWidthTable42608/Ext/Form.xml", "sha256": "96857cb8b4a25cd20cd5c119e0f4e54cbf3334464ae0cfd3730b41f43af5ef9f"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 339],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42608-medium.png", "sha256": "bdaa8f9821623a40912fa420e6c8505956231510584b5c76b6e3cc6d37f9194e"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 339],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42608-compact.png", "sha256": "2e7a48a38a34fb747b3537cbfef702ae95c33e82c9087ea708e47a28cecced9f"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 430, 339], "heightFloor": "339px", "innerScrollMax": 237, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42609",
+        "kind": "DynamicHeightFour",
+        "after": 36,
+        "height": 4,
+        "dynamic": true,
+        "source": {"path": "form-native-table-height-extra-Lgf9EZri/src/CommonForms/ProbeWidthTable42609/Ext/Form.xml", "sha256": "c8f8cc7a745fd239684486f001af82566c3fef13998de47b45b6798cfb5d4be0"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 116],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42609-medium.png", "sha256": "dd92d06bb63267ee2f10aa6580ebf0a79408b575368d146f310bc2ec652229c0"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 89],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42609-compact.png", "sha256": "d0bdefcbcf18385f01feb0bd6a465eb74e686f74c76f3864ad28c2b8ae5b0372"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 400, 81], "heightFloor": "55px", "innerScrollMax": 0, "tailControl": [13, 733, 301, 23]}
+      },
+      {
+        "form": "ProbeWidthTable42610",
+        "kind": "DynamicRowsTwo",
+        "after": 36,
+        "rows": 2,
+        "dynamic": true,
+        "source": {"path": "form-native-table-height-extra-Lgf9EZri/src/CommonForms/ProbeWidthTable42610/Ext/Form.xml", "sha256": "9bf1976f4cc7f679f7619507316a00322edd6a9de37ecb4639c9938e0ac50012"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "table": [13, 39, 430, 88],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42610-medium.png", "sha256": "b74ce2e69081e6e6fce688d29bbf4eb485e18be8bb8c84d8e8fb67cec1a5d653"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "table": [13, 39, 430, 79],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-table-height-extra-Lgf9EZri/ProbeWidthTable42610-compact.png", "sha256": "ad7e51bebe26bee9277d4d58797c9a35b7a8e52abcf8812e36283064fa116008"}
+          }
+        ],
+        "viewerCompact": {"frame": [464, 769], "table": [13, 38, 400, 81], "heightFloor": "55px", "innerScrollMax": 0, "tailControl": [13, 733, 301, 23]}
+      }
+    ]
+  },
+  "loanDisbursement": {
+    "compatibility": "Version8_3_21",
+    "source": "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "sourceXmlUnchanged": true,
+    "nativeCompact": {
+      "frame": [696, 760],
+      "topCapture": {"path": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-top-crop.png", "sha256": "0d236d878fe55602d62c62dd4cf50a9931348f4f75edbe6edecaf3f196399fbd"},
+      "bottomCapture": {"path": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-bottom-crop.png", "sha256": "5493bc1e893b69e1836a0daf1d07c52ded1de9fd974ee3d1bd15897d03b255f7"},
+      "paintedCheckboxGroup": [13, 423, 377, 55],
+      "checkboxGlyphs": [[19, 429, 15, 15], [89, 430, 15, 15], [89, 456, 15, 15]],
+      "references": [[400, 447, 154, 23], [400, 498, 154, 23]],
+      "pictures": [[564, 428, 20, 18], [564, 479, 20, 18]],
+      "table": [13, 589, 662, 227],
+      "memo": [13, 844, 511, 51],
+      "responsibleCaptionInk": [24, 907, 90, 10],
+      "lowerCoordinatesMethod": "Match the table top border at y=591 in the top capture and y=28 in the bottom crop, using y=2 as the top frame origin. The shared border places the bottom crop at logical y=561.",
+      "innerScrollOffset": 174
+    },
+    "viewer": {
+      "ru": {
+        "geometry": "form-installed-table-height-WODMKwr8/loan-ru/geometry.json",
+        "detached": true,
+        "poses": [
+          {
+            "requested": [1156, 875],
+            "frame": [1156, 875],
+            "controls": {"989": [13, 531, 1122, 227], "948": [633, 390, 266, 23], "951": [633, 422, 266, 23], "922": null, "23": [13, 785, 511, 77], "26": [635, 845.5, 500, 16]},
+            "innerScrollMax": 0,
+            "sameOwners": true
+          },
+          {
+            "requested": [696, 760],
+            "frame": [696, 760],
+            "controls": {"989": [13, 580, 662, 227], "948": [400, 439, 154, 23], "951": [400, 490, 154, 23], "922": null, "23": [13, 834, 511, 51], "26": [116, 894.5, 559, 16]},
+            "innerScrollMax": 164,
+            "sameOwners": true
+          },
+          {
+            "requested": [696, 640],
+            "frame": [696, 640],
+            "controls": {"989": [13, 580, 662, 227], "948": [400, 439, 154, 23], "951": [400, 490, 154, 23], "922": null, "23": [13, 834, 511, 51], "26": [116, 894.5, 559, 16]},
+            "innerScrollMax": 284,
+            "sameOwners": true
+          },
+          {
+            "requested": [1156, 875],
+            "frame": [1156, 875],
+            "controls": {"989": [13, 531, 1122, 227], "948": [633, 390, 266, 23], "951": [633, 422, 266, 23], "922": null, "23": [13, 785, 511, 77], "26": [635, 845.5, 500, 16]},
+            "innerScrollMax": 0,
+            "sameOwners": true
+          },
+          {
+            "requested": [696, 760],
+            "frame": [696, 760],
+            "controls": {"989": [13, 580, 662, 227], "948": [400, 439, 154, 23], "951": [400, 490, 154, 23], "922": null, "23": [13, 834, 511, 51], "26": [116, 894.5, 559, 16]},
+            "innerScrollMax": 164,
+            "sameOwners": true
+          }
+        ],
+        "bottom": {
+          "offset": 164,
+          "controls": {"989": [13, 416, 662, 227], "948": [400, 275, 154, 23], "951": [400, 326, 154, 23], "922": null, "23": [13, 670, 511, 51], "26": [116, 730.5, 559, 16]},
+          "responsibleOwner": [13, 729, 662, 19],
+          "title": [2, 2, 692, 24]
+        },
+        "dirtyRowsNine": {"gridHeight": 283, "offset": 40, "selection": "948", "sameOwners": true},
+        "restored": {"gridHeight": 227, "offset": 40, "selection": "948", "sameOwners": true},
+        "topCapture": {"path": "form-installed-loan-lower-bunNPUPv/loan-ru/loan-696.png", "sha256": "74a719ba1b945cb20936debe25d9f7c745377ce668eb60649176425f567ea226"},
+        "bottomCapture": {"path": "form-installed-loan-lower-bunNPUPv/loan-ru/loan-696-bottom.png", "sha256": "c26f5682800157e8f81f25e6f0dcfbf4e1eb9b5e3c308a0e93f00ee461505693"}
+      },
+      "en": {
+        "geometry": "form-installed-table-height-WODMKwr8/loan-en/geometry.json",
+        "detached": true,
+        "poses": [
+          {
+            "requested": [1156, 875],
+            "frame": [1156, 875],
+            "controls": {"989": [13, 531, 1122, 227], "948": [633, 390, 266, 23], "951": [633, 422, 266, 23], "922": null, "23": [13, 785, 511, 77], "26": [635, 845.5, 500, 16]},
+            "innerScrollMax": 0,
+            "sameOwners": true
+          },
+          {
+            "requested": [696, 760],
+            "frame": [696, 760],
+            "controls": {"989": [13, 580, 662, 227], "948": [400, 439, 154, 23], "951": [400, 490, 154, 23], "922": null, "23": [13, 834, 511, 51], "26": [116, 894.5, 559, 16]},
+            "innerScrollMax": 164,
+            "sameOwners": true
+          },
+          {
+            "requested": [696, 640],
+            "frame": [696, 640],
+            "controls": {"989": [13, 580, 662, 227], "948": [400, 439, 154, 23], "951": [400, 490, 154, 23], "922": null, "23": [13, 834, 511, 51], "26": [116, 894.5, 559, 16]},
+            "innerScrollMax": 284,
+            "sameOwners": true
+          },
+          {
+            "requested": [1156, 875],
+            "frame": [1156, 875],
+            "controls": {"989": [13, 531, 1122, 227], "948": [633, 390, 266, 23], "951": [633, 422, 266, 23], "922": null, "23": [13, 785, 511, 77], "26": [635, 845.5, 500, 16]},
+            "innerScrollMax": 0,
+            "sameOwners": true
+          },
+          {
+            "requested": [696, 760],
+            "frame": [696, 760],
+            "controls": {"989": [13, 580, 662, 227], "948": [400, 439, 154, 23], "951": [400, 490, 154, 23], "922": null, "23": [13, 834, 511, 51], "26": [116, 894.5, 559, 16]},
+            "innerScrollMax": 164,
+            "sameOwners": true
+          }
+        ],
+        "bottom": {
+          "offset": 164,
+          "controls": {"989": [13, 416, 662, 227], "948": [400, 275, 154, 23], "951": [400, 326, 154, 23], "922": null, "23": [13, 670, 511, 51], "26": [116, 730.5, 559, 16]},
+          "responsibleOwner": [13, 729, 662, 19],
+          "title": [2, 2, 692, 24]
+        },
+        "dirtyRowsNine": {"gridHeight": 283, "offset": 40, "selection": "948", "sameOwners": true},
+        "restored": {"gridHeight": 227, "offset": 40, "selection": "948", "sameOwners": true},
+        "captureNote": "The original screenshots showed the main workbench. Geometry was measured in the detached window. The updated detached screenshots in both locales are in t157-loan-lower-layout-linux.json."
+      }
+    }
+  },
+  "remaining": [
+    "Vertical positions of the lower groups and the complete form screenshot still differ.",
+    "Explicit group-height allocation, absolute caption fonts and dynamic-list compression need separate calibration.",
+    "The Linux form scrollbar uses native-sized spacing and a browser thumb. Its full raster and native arrows are not calibrated.",
+    "Windows Designer geometry and installed VSIX still require the native stand."
+  ]
+}

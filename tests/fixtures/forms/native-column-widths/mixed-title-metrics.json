@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "sourceFiles": {
+    "MixedTitles": "c0f6c9137e987ce13089819dfd976cf7f56d8891f2944cf9b5f12e08194f7aea"
+  },
+  "fixtures": {
+    "MixedTitles": {
+      "cases": [
+        {
+          "name": "mixed rows share the side title column",
+          "frame": [994, 250],
+          "nativeCapture": "ProbeWidthMixed42108-medium.png",
+          "screenshotSha256": "762ae183c0fdbed1d3a95430086a8fc19007000a2bbd053a94da1c822e91d229",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Left",
+            "Reference1": "Left"
+          },
+          "controls": {
+            "Reference0": [582, 62, 202, 23],
+            "Reference1": [582, 94, 202, 23],
+            "State0": [794, 62, 20, 18],
+            "State1": [794, 94, 20, 18]
+          }
+        },
+        {
+          "name": "mixed rows shrink while side titles fit",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthMixed42106-compact.png",
+          "screenshotSha256": "66686ab0a861f6745c2cc2a9320c28dae224f655fb808be2d56a8b8f382081a5",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Left",
+            "Reference1": "Left"
+          },
+          "controls": {
+            "Reference0": [562, 62, 116, 23],
+            "Reference1": [562, 94, 116, 23],
+            "State0": [688, 62, 20, 18],
+            "State1": [688, 94, 20, 18]
+          },
+          "edit": {
+            "widths": {
+              "B": 45
+            }
+          }
+        },
+        {
+          "name": "only the wider title moves above its input",
+          "frame": [799, 250],
+          "nativeCapture": "ProbeWidthMixed42107-compact.png",
+          "screenshotSha256": "3cfbe7a46ac299c281a40c13e3e26ff151ef611a790bdbdc74c62afa01045689",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Top",
+            "Reference1": "Left"
+          },
+          "controls": {
+            "Reference0": [494, 81, 184, 23],
+            "Reference1": [565, 113, 113, 23],
+            "State0": [688, 62, 20, 18],
+            "State1": [688, 113, 20, 18]
+          },
+          "edit": {
+            "widths": {
+              "B": 46
+            }
+          }
+        },
+        {
+          "name": "both titles move above the input under a single-line heading",
+          "frame": [800, 250],
+          "nativeCapture": "ProbeWidthMixed42108-compact.png",
+          "screenshotSha256": "fe28ca4aa62dfb544b32b51f8d647707414602bee07c6ecfa980db6c96621d9f",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Top",
+            "Reference1": "Top"
+          },
+          "controls": {
+            "Reference0": [504, 81, 154, 23],
+            "Reference1": [504, 132, 154, 23],
+            "State0": [668, 62, 20, 18],
+            "State1": [668, 113, 20, 18]
+          }
+        },
+        {
+          "name": "a narrow group wraps its heading",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthMixed42109-compact.png",
+          "screenshotSha256": "58973c4cb298654e91e75b045821f3eb60dabf044f37035aca505b1f3b5b2096",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Top",
+            "Reference1": "Top"
+          },
+          "controls": {
+            "Reference0": [514, 100, 131, 23],
+            "Reference1": [514, 151, 131, 23],
+            "State0": [655, 81, 20, 18],
+            "State1": [655, 132, 20, 18]
+          },
+          "edit": {
+            "widths": {
+              "B": 48
+            }
+          }
+        },
+        {
+          "name": "the heading wraps at the mixed row minimum",
+          "frame": [848, null],
+          "nativeCapture": "ProbeWidthMixed42111-compact.png",
+          "screenshotSha256": "a813a5b18ecfd905c15c5e2c20083c47db33a751f3a7542359b81023fbaa98fd",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Top",
+            "Reference1": "Top"
+          },
+          "controls": {
+            "Reference0": [614, 100, 113, 23],
+            "Reference1": [614, 151, 113, 23],
+            "State0": [737, 81, 20, 18],
+            "State1": [737, 132, 20, 18]
+          },
+          "viewport": [804, 250],
+          "edit": {
+            "widths": {
+              "B": 58
+            }
+          }
+        },
+        {
+          "name": "explicit side titles retain their placement",
+          "frame": [816, null],
+          "nativeCapture": "ProbeWidthMixed42112-compact.png",
+          "screenshotSha256": "ac58f4575a83fc1a0cb957a3c814a4bfa3ea8e7085126941d95f5e5e59ac9b91",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Left",
+            "Reference1": "Left"
+          },
+          "controls": {
+            "Reference0": [582, 62, 113, 23],
+            "Reference1": [575, 94, 120, 23],
+            "State0": [705, 62, 20, 18],
+            "State1": [705, 94, 20, 18]
+          },
+          "viewport": [800, 250],
+          "edit": {
+            "titleLocations": {
+              "Reference0": "Left",
+              "Reference1": "Left"
+            }
+          }
+        },
+        {
+          "name": "explicit top titles have their own preferred widths",
+          "frame": [802, 250],
+          "nativeCapture": "ProbeWidthMixed42209-compact.png",
+          "screenshotSha256": "5939760070785f47283cb85849a37fa8770dbc6c106b22d6ed8e788c14042f04",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Top",
+            "Reference1": "Top"
+          },
+          "controls": {
+            "Reference0": [504, 81, 145, 23],
+            "Reference1": [504, 132, 145, 23],
+            "State0": [659, 62, 20, 18],
+            "State1": [659, 113, 20, 18]
+          },
+          "edit": {
+            "titleLocations": {
+              "Reference0": "Top",
+              "Reference1": "Top"
+            }
+          }
+        },
+        {
+          "name": "independent mixed rows keep their own value widths",
+          "frame": [799, 250],
+          "nativeCapture": "ProbeWidthMixed42211-compact.png",
+          "screenshotSha256": "efb91f213b1e25d0efeb45f1e2710a4fe3335bdce52b323df678fcd92e9137ae",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Top",
+            "Reference1": "Left"
+          },
+          "controls": {
+            "Reference0": [494, 81, 159, 23],
+            "Reference1": [565, 113, 113, 23],
+            "State0": [663, 62, 20, 18],
+            "State1": [688, 113, 20, 18]
+          },
+          "edit": {
+            "widths": {
+              "B": 46
+            },
+            "united": true
+          }
+        },
+        {
+          "name": "independent rows both move above",
+          "frame": [800, 250],
+          "nativeCapture": "ProbeWidthMixed42212-compact.png",
+          "screenshotSha256": "fb158e1a24eb641962a0b6332548a21a542d01d6eab0a3007afab035e6753174",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Top",
+            "Reference1": "Top"
+          },
+          "controls": {
+            "Reference0": [504, 81, 153, 23],
+            "Reference1": [504, 132, 153, 23],
+            "State0": [667, 62, 20, 18],
+            "State1": [667, 113, 20, 18]
+          },
+          "edit": {
+            "united": true
+          }
+        },
+        {
+          "name": "mixed rows restore the original positions",
+          "frame": [994, 250],
+          "nativeCapture": "ProbeWidthMixed42108-medium.png",
+          "screenshotSha256": "762ae183c0fdbed1d3a95430086a8fc19007000a2bbd053a94da1c822e91d229",
+          "tolerancePx": 0.5,
+          "locations": {
+            "Reference0": "Left",
+            "Reference1": "Left"
+          },
+          "controls": {
+            "Reference0": [582, 62, 202, 23],
+            "Reference1": [582, 94, 202, 23],
+            "State0": [794, 62, 20, 18],
+            "State1": [794, 94, 20, 18]
+          }
+        }
+      ]
+    }
+  }
+}

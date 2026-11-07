@@ -1,8 +1,10 @@
 //! Read-only managed-form documents with source-qualified identities and lossless source ranges.
 
 mod appearance;
+mod based_on;
 mod borrowing;
 mod catalog;
+mod command_types;
 mod commands;
 mod composition;
 mod context;
@@ -15,7 +17,9 @@ mod preparation;
 mod presentation;
 mod references;
 mod resources;
+mod root_commands;
 mod style_data;
+mod table_commands;
 
 pub use appearance::{AppearanceDiagnostic, ResolvedColor, ResolvedFont};
 pub use catalog::{ElementFamily, ElementKind};
@@ -36,7 +40,7 @@ pub use palette::{
     PlatformPropertyValue, PropertyPalette,
 };
 pub use parsing::parse;
-pub use pictures::FormPicture;
+pub use pictures::{ButtonRepresentation, FormPicture};
 pub use preparation::{FormInput, FormInputSource, FormPreparation, prepare};
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,

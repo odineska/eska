@@ -1,0 +1,3312 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-07T08:29:39.920440+00:00",
+  "milestones": [
+    "T157",
+    "T158"
+  ],
+  "scope": "Границы колонок подписей и фиксированные строковые поля выбора в контексте мастера БСП.",
+  "platform": "Linux ARM64 ALT 10",
+  "platformBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_24",
+  "nativeLocale": "ru",
+  "viewerLocales": [
+    "ru",
+    "en"
+  ],
+  "dpi": 96,
+  "zoom": 100,
+  "artifactBase": "../eska-playground",
+  "eskaCommit": "c85677f355af119335bff3bd09459dcb957beb72",
+  "explorerCommit": "73fa3fa6b650487efaeec80f350961d55bcb990d",
+  "baselineExplorerCommit": "112b6bbbb27b512569d1a6ccbe3b1bd889a41dac",
+  "acceptedStringChoiceGeometry": true,
+  "acceptedRepresentationCaptionScope": true,
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "sourceWritesDuringViewing": false,
+  "bslExecuted": false,
+  "rule": {
+    "groupRepresentationAbsenceOwnsCaptionScope": true,
+    "explicitNoneAllowsAutomaticCaptionSharing": true,
+    "explicitUseCrossesRepresentationBoundary": true,
+    "fixedStretchStillBlocksCaptionSharing": true,
+    "listChoiceModeForcesListButtonEvenWhenChoiceButtonFalse": true,
+    "choiceListAloneDoesNotCreateButton": true,
+    "nativeFixedStringWidthIncludesChoiceButton": true,
+    "helpButtonRequiresContentAndReservesAdjacentSpace": true,
+    "localizedHintsUseExistingPropertyDecoder": true,
+    "excludedCaptionScopesAreUndefinedNotBoolean": true,
+    "sharedGroupPolicy": "layout-model.mjs:sharesGroupLabels",
+    "noFormNameCssExceptions": true
+  },
+  "timeFormatPolicy": {
+    "default": "24-hour",
+    "explicit12HourEditFormatSupported": true,
+    "regressionSuite": "input-dates",
+    "implementationCommit": "bd7d32f"
+  },
+  "nativeReferences": [
+    {
+      "path": "tests/fixtures/forms/native-through-align-rows/metrics.json",
+      "sha256": "f9fb65ba97870521b2d2676550b8b91797d1195d671bd8b5359b115f45f7a3bd",
+      "newRepresentationCases": 20,
+      "acceptedScope": "Участие в колонке подписи и её начальная координата; полные рамки групп не приняты."
+    },
+    {
+      "path": "tests/fixtures/forms/native-string-choice/metrics.json",
+      "sha256": "8bfb25860ff8b23b1ddf12148eb7170d16fb72400c083ba178790943a91e5c80",
+      "forms": 2,
+      "fields": 12,
+      "acceptedScope": "Логическая геометрия, физический край, вид кнопки, InputHint и содержимое подсказки."
+    }
+  ],
+  "smallForms": {
+    "coordinateSetsIdenticalInLocales": true,
+    "coordinateSpace": "x/y/width/height relative to the form frame",
+    "representationCases": [
+      {
+        "locale": "ru",
+        "case": "TwoInputsAuto",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          639,
+          107
+        ],
+        "afterFrame": [
+          683,
+          107
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "TwoInputsLeft",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          639,
+          107
+        ],
+        "afterFrame": [
+          683,
+          107
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "ButtonAuto",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          593,
+          108
+        ],
+        "afterFrame": [
+          683,
+          108
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71.5,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71.5,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "ButtonLeft",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          593,
+          108
+        ],
+        "afterFrame": [
+          683,
+          108
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71.5,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71.5,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "ButtonUseAuto",
+        "alignedWithParent": true,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          593,
+          108
+        ],
+        "afterFrame": [
+          683,
+          108
+        ],
+        "nativeOption": [
+          263,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71.5,
+          211,
+          23
+        ],
+        "afterOption": [
+          266,
+          71.5,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "ButtonUseLeft",
+        "alignedWithParent": true,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          593,
+          108
+        ],
+        "afterFrame": [
+          683,
+          108
+        ],
+        "nativeOption": [
+          263,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71.5,
+          211,
+          23
+        ],
+        "afterOption": [
+          266,
+          71.5,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "ButtonDontUse",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          571,
+          108
+        ],
+        "afterFrame": [
+          683,
+          108
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          94,
+          71.5,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71.5,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "ButtonHorizontal",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          593,
+          108
+        ],
+        "afterFrame": [
+          683,
+          108
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71.5,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71.5,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "ButtonBothLeft",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          593,
+          108
+        ],
+        "afterFrame": [
+          683,
+          108
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71.5,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71.5,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "ParentInputs",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          639,
+          107
+        ],
+        "afterFrame": [
+          683,
+          107
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "ParentButton",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          593,
+          108
+        ],
+        "afterFrame": [
+          683,
+          108
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71.5,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71.5,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "PageDefault",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          639,
+          107
+        ],
+        "afterFrame": [
+          683,
+          107
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "PageVertical",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          639,
+          107
+        ],
+        "afterFrame": [
+          683,
+          107
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "PageUse",
+        "alignedWithParent": true,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          639,
+          107
+        ],
+        "afterFrame": [
+          683,
+          107
+        ],
+        "nativeOption": [
+          263,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          266,
+          71,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "RepNoneInputs",
+        "alignedWithParent": true,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          639,
+          107
+        ],
+        "afterFrame": [
+          683,
+          107
+        ],
+        "nativeOption": [
+          263,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          266,
+          71,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "RepNormalInputs",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          115
+        ],
+        "beforeFrame": [
+          571,
+          107
+        ],
+        "afterFrame": [
+          683,
+          107
+        ],
+        "nativeOption": [
+          93,
+          79,
+          231,
+          23
+        ],
+        "beforeOption": [
+          94,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "RepNoneButton",
+        "alignedWithParent": true,
+        "nativeFrame": [
+          680,
+          107
+        ],
+        "beforeFrame": [
+          593,
+          108
+        ],
+        "afterFrame": [
+          683,
+          108
+        ],
+        "nativeOption": [
+          263,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71.5,
+          211,
+          23
+        ],
+        "afterOption": [
+          266,
+          71.5,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "VerticalAuto",
+        "alignedWithParent": false,
+        "nativeFrame": [
+          680,
+          139
+        ],
+        "beforeFrame": [
+          571,
+          139
+        ],
+        "afterFrame": [
+          683,
+          139
+        ],
+        "nativeOption": [
+          93,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          94,
+          71,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "VerticalNone",
+        "alignedWithParent": true,
+        "nativeFrame": [
+          680,
+          139
+        ],
+        "beforeFrame": [
+          571,
+          139
+        ],
+        "afterFrame": [
+          683,
+          139
+        ],
+        "nativeOption": [
+          263,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          266,
+          71,
+          231,
+          23
+        ]
+      },
+      {
+        "locale": "ru",
+        "case": "VerticalUse",
+        "alignedWithParent": true,
+        "nativeFrame": [
+          680,
+          139
+        ],
+        "beforeFrame": [
+          571,
+          139
+        ],
+        "afterFrame": [
+          683,
+          139
+        ],
+        "nativeOption": [
+          263,
+          71,
+          231,
+          23
+        ],
+        "beforeOption": [
+          266,
+          71,
+          211,
+          23
+        ],
+        "afterOption": [
+          266,
+          71,
+          231,
+          23
+        ]
+      }
+    ],
+    "stringChoiceCases": [
+      {
+        "locale": "ru",
+        "case": "Fields",
+        "nativeFrame": [
+          430,
+          331
+        ],
+        "beforeFrame": [
+          395,
+          331
+        ],
+        "afterFrame": [
+          430,
+          331
+        ],
+        "fields": {
+          "Plain": {
+            "element": [
+              13,
+              38,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              39,
+              361,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [],
+            "tooltip": null
+          },
+          "Custom": {
+            "element": [
+              13,
+              70,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              71,
+              381,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [
+              {
+                "box": [
+                  373,
+                  72,
+                  20,
+                  21
+                ],
+                "text": "..."
+              }
+            ],
+            "tooltip": null
+          },
+          "CustomNoText": {
+            "element": [
+              13,
+              102,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              103,
+              381,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "Укажите колонки для сопоставления",
+            "buttons": [
+              {
+                "box": [
+                  373,
+                  104,
+                  20,
+                  21
+                ],
+                "text": "..."
+              }
+            ],
+            "tooltip": null
+          },
+          "List": {
+            "element": [
+              13,
+              134,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              135,
+              381,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [
+              {
+                "box": [
+                  373,
+                  136,
+                  20,
+                  21
+                ],
+                "text": "▾"
+              }
+            ],
+            "tooltip": null
+          },
+          "ListEmpty": {
+            "element": [
+              13,
+              166,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              167,
+              381,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [
+              {
+                "box": [
+                  373,
+                  168,
+                  20,
+                  21
+                ],
+                "text": "▾"
+              }
+            ],
+            "tooltip": null
+          },
+          "ListOff": {
+            "element": [
+              13,
+              198,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              199,
+              381,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [
+              {
+                "box": [
+                  373,
+                  200,
+                  20,
+                  21
+                ],
+                "text": "▾"
+              }
+            ],
+            "tooltip": null
+          },
+          "ChoiceList": {
+            "element": [
+              13,
+              230,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              231,
+              361,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [],
+            "tooltip": null
+          },
+          "ListModeOff": {
+            "element": [
+              13,
+              262,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              263,
+              361,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [],
+            "tooltip": null
+          },
+          "TooltipCustom": {
+            "element": [
+              13,
+              294,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              295,
+              381,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [
+              {
+                "box": [
+                  373,
+                  296,
+                  20,
+                  21
+                ],
+                "text": "..."
+              }
+            ],
+            "tooltip": [
+              399,
+              298.5,
+              10,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "locale": "ru",
+        "case": "HelpContent",
+        "nativeFrame": [
+          430,
+          139
+        ],
+        "beforeFrame": [
+          318,
+          139
+        ],
+        "afterFrame": [
+          430,
+          139
+        ],
+        "fields": {
+          "EmptyHelp": {
+            "element": [
+              13,
+              38,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              39,
+              381,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [
+              {
+                "box": [
+                  373,
+                  40,
+                  20,
+                  21
+                ],
+                "text": "..."
+              }
+            ],
+            "tooltip": null
+          },
+          "ExtendedHelp": {
+            "element": [
+              13,
+              70,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              71,
+              381,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [
+              {
+                "box": [
+                  373,
+                  72,
+                  20,
+                  21
+                ],
+                "text": "..."
+              }
+            ],
+            "tooltip": [
+              399,
+              74.5,
+              10,
+              16
+            ]
+          },
+          "TextHelp": {
+            "element": [
+              13,
+              102,
+              396,
+              25
+            ],
+            "label": null,
+            "control": [
+              13,
+              103,
+              381,
+              23
+            ],
+            "options": [],
+            "shared": null,
+            "inputHint": "",
+            "buttons": [
+              {
+                "box": [
+                  373,
+                  104,
+                  20,
+                  21
+                ],
+                "text": "..."
+              }
+            ],
+            "tooltip": [
+              399,
+              106.5,
+              10,
+              16
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "wholeBspForms": [
+    {
+      "locale": "ru",
+      "sample": 0,
+      "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 835,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 835,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "importantElements": [
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:456",
+              "kind": "InputField",
+              "element": [
+                13,
+                99.1875,
+                780,
+                25
+              ],
+              "control": [
+                266,
+                100.1875,
+                527,
+                23
+              ],
+              "input": [
+                266,
+                100.1875,
+                381,
+                23
+              ],
+              "hint": "Укажите колонки для сопоставления",
+              "buttons": [
+                {
+                  "box": [
+                    626,
+                    101.1875,
+                    20,
+                    21
+                  ],
+                  "text": "...",
+                  "choiceKind": "choice"
+                }
+              ],
+              "help": [
+                652,
+                103.6875,
+                10,
+                16
+              ],
+              "helpText": "Выберите одну или несколько колонок, по которым будут сопоставлены загруженные данные с данными из приложения",
+              "minimum": "634px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "СписокКолонокСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:450",
+              "kind": "InputField",
+              "element": [
+                13,
+                133.1875,
+                313,
+                25
+              ],
+              "control": [
+                94,
+                134.1875,
+                232,
+                23
+              ],
+              "input": [
+                94,
+                134.1875,
+                231,
+                23
+              ],
+              "hint": "",
+              "buttons": [
+                {
+                  "box": [
+                    304,
+                    135.1875,
+                    20,
+                    21
+                  ],
+                  "text": "▾",
+                  "choiceKind": "list"
+                }
+              ],
+              "help": null,
+              "helpText": null,
+              "minimum": "313px",
+              "preferred": "313px",
+              "radios": [],
+              "name": "ФильтрТаблицаСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:421",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "input": null,
+              "hint": null,
+              "buttons": [],
+              "help": null,
+              "helpText": null,
+              "minimum": "780px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "ГруппаИтогоНеСопоставленных"
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 835,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "importantElements": [
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:456",
+              "kind": "InputField",
+              "element": [
+                13,
+                99.1875,
+                780,
+                25
+              ],
+              "control": [
+                266,
+                100.1875,
+                527,
+                23
+              ],
+              "input": [
+                266,
+                100.1875,
+                381,
+                23
+              ],
+              "hint": "Укажите колонки для сопоставления",
+              "buttons": [
+                {
+                  "box": [
+                    626,
+                    101.1875,
+                    20,
+                    21
+                  ],
+                  "text": "...",
+                  "choiceKind": "choice"
+                }
+              ],
+              "help": [
+                652,
+                103.6875,
+                10,
+                16
+              ],
+              "helpText": "Выберите одну или несколько колонок, по которым будут сопоставлены загруженные данные с данными из приложения",
+              "minimum": "634px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "СписокКолонокСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:450",
+              "kind": "InputField",
+              "element": [
+                13,
+                133.1875,
+                313,
+                25
+              ],
+              "control": [
+                94,
+                134.1875,
+                232,
+                23
+              ],
+              "input": [
+                94,
+                134.1875,
+                231,
+                23
+              ],
+              "hint": "",
+              "buttons": [
+                {
+                  "box": [
+                    304,
+                    135.1875,
+                    20,
+                    21
+                  ],
+                  "text": "▾",
+                  "choiceKind": "list"
+                }
+              ],
+              "help": null,
+              "helpText": null,
+              "minimum": "313px",
+              "preferred": "313px",
+              "radios": [],
+              "name": "ФильтрТаблицаСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:421",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "input": null,
+              "hint": null,
+              "buttons": [],
+              "help": null,
+              "helpText": null,
+              "minimum": "780px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "ГруппаИтогоНеСопоставленных"
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "importantElements": [
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:456",
+              "kind": "InputField",
+              "element": [
+                13,
+                99.1875,
+                1077,
+                25
+              ],
+              "control": [
+                266,
+                100.1875,
+                824,
+                23
+              ],
+              "input": [
+                266,
+                100.1875,
+                381,
+                23
+              ],
+              "hint": "Укажите колонки для сопоставления",
+              "buttons": [
+                {
+                  "box": [
+                    626,
+                    101.1875,
+                    20,
+                    21
+                  ],
+                  "text": "...",
+                  "choiceKind": "choice"
+                }
+              ],
+              "help": [
+                652,
+                103.6875,
+                10,
+                16
+              ],
+              "helpText": "Выберите одну или несколько колонок, по которым будут сопоставлены загруженные данные с данными из приложения",
+              "minimum": "634px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "СписокКолонокСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:450",
+              "kind": "InputField",
+              "element": [
+                13,
+                133.1875,
+                313,
+                25
+              ],
+              "control": [
+                94,
+                134.1875,
+                232,
+                23
+              ],
+              "input": [
+                94,
+                134.1875,
+                231,
+                23
+              ],
+              "hint": "",
+              "buttons": [
+                {
+                  "box": [
+                    304,
+                    135.1875,
+                    20,
+                    21
+                  ],
+                  "text": "▾",
+                  "choiceKind": "list"
+                }
+              ],
+              "help": null,
+              "helpText": null,
+              "minimum": "313px",
+              "preferred": "313px",
+              "radios": [],
+              "name": "ФильтрТаблицаСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:421",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "input": null,
+              "hint": null,
+              "buttons": [],
+              "help": null,
+              "helpText": null,
+              "minimum": "780px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "ГруппаИтогоНеСопоставленных"
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "sample": 1,
+      "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 756,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 756,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 756,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 57
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 14
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "afterFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 2
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "sample": 2,
+      "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 17
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 6
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "sample": 0,
+      "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 835,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 835,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "importantElements": [
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:456",
+              "kind": "InputField",
+              "element": [
+                13,
+                99.1875,
+                780,
+                25
+              ],
+              "control": [
+                266,
+                100.1875,
+                527,
+                23
+              ],
+              "input": [
+                266,
+                100.1875,
+                381,
+                23
+              ],
+              "hint": "Укажите колонки для сопоставления",
+              "buttons": [
+                {
+                  "box": [
+                    626,
+                    101.1875,
+                    20,
+                    21
+                  ],
+                  "text": "...",
+                  "choiceKind": "choice"
+                }
+              ],
+              "help": [
+                652,
+                103.6875,
+                10,
+                16
+              ],
+              "helpText": "Выберите одну или несколько колонок, по которым будут сопоставлены загруженные данные с данными из приложения",
+              "minimum": "634px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "СписокКолонокСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:450",
+              "kind": "InputField",
+              "element": [
+                13,
+                133.1875,
+                313,
+                25
+              ],
+              "control": [
+                94,
+                134.1875,
+                232,
+                23
+              ],
+              "input": [
+                94,
+                134.1875,
+                231,
+                23
+              ],
+              "hint": "",
+              "buttons": [
+                {
+                  "box": [
+                    304,
+                    135.1875,
+                    20,
+                    21
+                  ],
+                  "text": "▾",
+                  "choiceKind": "list"
+                }
+              ],
+              "help": null,
+              "helpText": null,
+              "minimum": "313px",
+              "preferred": "313px",
+              "radios": [],
+              "name": "ФильтрТаблицаСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:421",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "input": null,
+              "hint": null,
+              "buttons": [],
+              "help": null,
+              "helpText": null,
+              "minimum": "780px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "ГруппаИтогоНеСопоставленных"
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 835,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "importantElements": [
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:456",
+              "kind": "InputField",
+              "element": [
+                13,
+                99.1875,
+                780,
+                25
+              ],
+              "control": [
+                266,
+                100.1875,
+                527,
+                23
+              ],
+              "input": [
+                266,
+                100.1875,
+                381,
+                23
+              ],
+              "hint": "Укажите колонки для сопоставления",
+              "buttons": [
+                {
+                  "box": [
+                    626,
+                    101.1875,
+                    20,
+                    21
+                  ],
+                  "text": "...",
+                  "choiceKind": "choice"
+                }
+              ],
+              "help": [
+                652,
+                103.6875,
+                10,
+                16
+              ],
+              "helpText": "Выберите одну или несколько колонок, по которым будут сопоставлены загруженные данные с данными из приложения",
+              "minimum": "634px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "СписокКолонокСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:450",
+              "kind": "InputField",
+              "element": [
+                13,
+                133.1875,
+                313,
+                25
+              ],
+              "control": [
+                94,
+                134.1875,
+                232,
+                23
+              ],
+              "input": [
+                94,
+                134.1875,
+                231,
+                23
+              ],
+              "hint": "",
+              "buttons": [
+                {
+                  "box": [
+                    304,
+                    135.1875,
+                    20,
+                    21
+                  ],
+                  "text": "▾",
+                  "choiceKind": "list"
+                }
+              ],
+              "help": null,
+              "helpText": null,
+              "minimum": "313px",
+              "preferred": "313px",
+              "radios": [],
+              "name": "ФильтрТаблицаСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:421",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "input": null,
+              "hint": null,
+              "buttons": [],
+              "help": null,
+              "helpText": null,
+              "minimum": "780px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "ГруппаИтогоНеСопоставленных"
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "importantElements": [
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:456",
+              "kind": "InputField",
+              "element": [
+                13,
+                99.1875,
+                1077,
+                25
+              ],
+              "control": [
+                266,
+                100.1875,
+                824,
+                23
+              ],
+              "input": [
+                266,
+                100.1875,
+                381,
+                23
+              ],
+              "hint": "Укажите колонки для сопоставления",
+              "buttons": [
+                {
+                  "box": [
+                    626,
+                    101.1875,
+                    20,
+                    21
+                  ],
+                  "text": "...",
+                  "choiceKind": "choice"
+                }
+              ],
+              "help": [
+                652,
+                103.6875,
+                10,
+                16
+              ],
+              "helpText": "Выберите одну или несколько колонок, по которым будут сопоставлены загруженные данные с данными из приложения",
+              "minimum": "634px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "СписокКолонокСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:450",
+              "kind": "InputField",
+              "element": [
+                13,
+                133.1875,
+                313,
+                25
+              ],
+              "control": [
+                94,
+                134.1875,
+                232,
+                23
+              ],
+              "input": [
+                94,
+                134.1875,
+                231,
+                23
+              ],
+              "hint": "",
+              "buttons": [
+                {
+                  "box": [
+                    304,
+                    135.1875,
+                    20,
+                    21
+                  ],
+                  "text": "▾",
+                  "choiceKind": "list"
+                }
+              ],
+              "help": null,
+              "helpText": null,
+              "minimum": "313px",
+              "preferred": "313px",
+              "radios": [],
+              "name": "ФильтрТаблицаСопоставления"
+            },
+            {
+              "identity": "50f42e18fb7038eaa469a143bb4e1f4b3c42f6129e25a8bccd09f9d63ac235d8:current:421",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                202.1875,
+                780,
+                19
+              ],
+              "control": null,
+              "input": null,
+              "hint": null,
+              "buttons": [],
+              "help": null,
+              "helpText": null,
+              "minimum": "780px",
+              "preferred": "780px",
+              "radios": [],
+              "name": "ГруппаИтогоНеСопоставленных"
+            }
+          ],
+          "clippedDomOutsideCount": 0
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "sample": 1,
+      "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 766,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 766,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 766,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 57
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 14
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "afterFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 2
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "sample": 2,
+      "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 0
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 17
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "importantElements": [],
+          "clippedDomOutsideCount": 6
+        }
+      ]
+    }
+  ],
+  "loan": {
+    "before": "form-installed-loan-lower-6eAJPnoa",
+    "after": "form-installed-loan-lower-GQWIonMu",
+    "coordinateSetsIdenticalInLocales": true,
+    "source": "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "observations": [
+      {
+        "locale": "ru",
+        "beforePreferred": [
+          1159,
+          875
+        ],
+        "afterPreferred": [
+          1157,
+          875
+        ],
+        "detached": true,
+        "poses": [
+          {
+            "requested": [
+              1156,
+              875
+            ],
+            "beforeFrame": [
+              1156,
+              875
+            ],
+            "afterFrame": [
+              1156,
+              875
+            ],
+            "changedControls": [
+              {
+                "id": "18",
+                "name": "Организация",
+                "beforeControl": [
+                  133,
+                  122,
+                  410,
+                  23
+                ],
+                "afterControl": [
+                  125,
+                  122,
+                  410,
+                  23
+                ]
+              },
+              {
+                "id": "819",
+                "name": "Контрагент",
+                "beforeControl": [
+                  133,
+                  154,
+                  410,
+                  23
+                ],
+                "afterControl": [
+                  125,
+                  154,
+                  410,
+                  23
+                ]
+              },
+              {
+                "id": "822",
+                "name": "Займ",
+                "beforeControl": [
+                  133,
+                  186,
+                  410,
+                  23
+                ],
+                "afterControl": [
+                  125,
+                  186,
+                  410,
+                  23
+                ]
+              },
+              {
+                "id": "857",
+                "name": "ПлатежныйДокумент",
+                "beforeControl": [
+                  727,
+                  186,
+                  408,
+                  23
+                ],
+                "afterControl": [
+                  725,
+                  186,
+                  410,
+                  23
+                ]
+              },
+              {
+                "id": "880",
+                "name": "НомерВходящегоДокументаОплаты",
+                "beforeControl": [
+                  727,
+                  122,
+                  110,
+                  23
+                ],
+                "afterControl": [
+                  725,
+                  122,
+                  110,
+                  23
+                ]
+              },
+              {
+                "id": "883",
+                "name": "ДатаВходящегоДокументаОплаты",
+                "beforeControl": [
+                  868,
+                  122,
+                  101,
+                  23
+                ],
+                "afterControl": [
+                  866,
+                  122,
+                  101,
+                  23
+                ]
+              },
+              {
+                "id": "886",
+                "name": "СодержаниеВходящегоДокументаОплаты",
+                "beforeControl": [
+                  727,
+                  282,
+                  408,
+                  51
+                ],
+                "afterControl": [
+                  725,
+                  282,
+                  410,
+                  51
+                ]
+              },
+              {
+                "id": "899",
+                "name": "ПлатежныйАгент",
+                "beforeControl": [
+                  727,
+                  218,
+                  408,
+                  23
+                ],
+                "afterControl": [
+                  725,
+                  218,
+                  410,
+                  23
+                ]
+              },
+              {
+                "id": "902",
+                "name": "ДоговорПлатежногоАгента",
+                "beforeControl": [
+                  727,
+                  250,
+                  408,
+                  23
+                ],
+                "afterControl": [
+                  725,
+                  250,
+                  410,
+                  23
+                ]
+              },
+              {
+                "id": "905",
+                "name": "РеестрСписаний",
+                "beforeControl": [
+                  133,
+                  282,
+                  411,
+                  23
+                ],
+                "afterControl": [
+                  125,
+                  282,
+                  411,
+                  23
+                ]
+              },
+              {
+                "id": "908",
+                "name": "ДатаОплаты",
+                "beforeControl": [
+                  133,
+                  314,
+                  121,
+                  23
+                ],
+                "afterControl": [
+                  125,
+                  314,
+                  121,
+                  23
+                ]
+              },
+              {
+                "id": "945",
+                "name": "Транзакция",
+                "beforeControl": [
+                  342,
+                  314,
+                  203,
+                  23
+                ],
+                "afterControl": [
+                  334,
+                  314,
+                  203,
+                  23
+                ]
+              },
+              {
+                "id": "948",
+                "name": "ВзаиморасчетИсходящий",
+                "beforeControl": [
+                  633,
+                  390,
+                  266,
+                  23
+                ],
+                "afterControl": [
+                  631,
+                  390,
+                  267,
+                  23
+                ]
+              },
+              {
+                "id": "951",
+                "name": "ВзаиморасчетВходящий",
+                "beforeControl": [
+                  633,
+                  422,
+                  266,
+                  23
+                ],
+                "afterControl": [
+                  631,
+                  422,
+                  267,
+                  23
+                ]
+              },
+              {
+                "id": "954",
+                "name": "НомерТранзакцииБанка",
+                "beforeControl": [
+                  727,
+                  154,
+                  408,
+                  23
+                ],
+                "afterControl": [
+                  725,
+                  154,
+                  410,
+                  23
+                ]
+              },
+              {
+                "id": "971",
+                "name": "СостояниеДокументаВзаиморасчетИсходящий",
+                "beforeControl": [
+                  909,
+                  389.5,
+                  20,
+                  18
+                ],
+                "afterControl": [
+                  908,
+                  389.5,
+                  20,
+                  18
+                ]
+              },
+              {
+                "id": "976",
+                "name": "СостояниеДокументаВзаиморасчетВходящий",
+                "beforeControl": [
+                  909,
+                  421.5,
+                  20,
+                  18
+                ],
+                "afterControl": [
+                  908,
+                  421.5,
+                  20,
+                  18
+                ]
+              },
+              {
+                "id": "979",
+                "name": "ВзаиморасчетИсходящийОрганизация",
+                "beforeControl": [
+                  939,
+                  390.5,
+                  196,
+                  16
+                ],
+                "afterControl": [
+                  938,
+                  390.5,
+                  197,
+                  16
+                ]
+              },
+              {
+                "id": "982",
+                "name": "ВзаиморасчетВходящийОрганизация",
+                "beforeControl": [
+                  939,
+                  422.5,
+                  196,
+                  16
+                ],
+                "afterControl": [
+                  938,
+                  422.5,
+                  197,
+                  16
+                ]
+              }
+            ],
+            "changedControlCount": 19,
+            "changedControlIds": [
+              "18",
+              "819",
+              "822",
+              "857",
+              "880",
+              "883",
+              "886",
+              "899",
+              "902",
+              "905",
+              "908",
+              "945",
+              "948",
+              "951",
+              "954",
+              "971",
+              "976",
+              "979",
+              "982"
+            ],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [
+              994,
+              875
+            ],
+            "beforeFrame": [
+              994,
+              875
+            ],
+            "afterFrame": [
+              994,
+              875
+            ],
+            "changedControls": [
+              {
+                "id": "948",
+                "name": "ВзаиморасчетИсходящий",
+                "beforeControl": [
+                  633,
+                  390,
+                  176,
+                  23
+                ],
+                "afterControl": [
+                  631,
+                  390,
+                  177,
+                  23
+                ]
+              },
+              {
+                "id": "951",
+                "name": "ВзаиморасчетВходящий",
+                "beforeControl": [
+                  633,
+                  422,
+                  176,
+                  23
+                ],
+                "afterControl": [
+                  631,
+                  422,
+                  177,
+                  23
+                ]
+              }
+            ],
+            "changedControlCount": 19,
+            "changedControlIds": [
+              "18",
+              "819",
+              "822",
+              "857",
+              "880",
+              "883",
+              "886",
+              "899",
+              "902",
+              "905",
+              "908",
+              "945",
+              "948",
+              "951",
+              "954",
+              "971",
+              "976",
+              "979",
+              "982"
+            ],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [
+              865,
+              875
+            ],
+            "beforeFrame": [
+              865,
+              875
+            ],
+            "afterFrame": [
+              865,
+              875
+            ],
+            "changedControls": [
+              {
+                "id": "948",
+                "name": "ВзаиморасчетИсходящий",
+                "beforeControl": [
+                  555,
+                  457.5,
+                  186,
+                  23
+                ],
+                "afterControl": [
+                  631,
+                  448,
+                  113,
+                  23
+                ]
+              },
+              {
+                "id": "951",
+                "name": "ВзаиморасчетВходящий",
+                "beforeControl": [
+                  626,
+                  489.5,
+                  115,
+                  23
+                ],
+                "afterControl": [
+                  624,
+                  480,
+                  120,
+                  23
+                ]
+              }
+            ],
+            "changedControlCount": 19,
+            "changedControlIds": [
+              "18",
+              "819",
+              "822",
+              "857",
+              "880",
+              "883",
+              "886",
+              "899",
+              "902",
+              "905",
+              "908",
+              "945",
+              "948",
+              "951",
+              "954",
+              "971",
+              "976",
+              "979",
+              "982"
+            ],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [
+              800,
+              875
+            ],
+            "beforeFrame": [
+              800,
+              875
+            ],
+            "afterFrame": [
+              800,
+              875
+            ],
+            "changedControls": [],
+            "changedControlCount": 4,
+            "changedControlIds": [
+              "18",
+              "819",
+              "822",
+              "905"
+            ],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [
+              760,
+              875
+            ],
+            "beforeFrame": [
+              760,
+              875
+            ],
+            "afterFrame": [
+              760,
+              875
+            ],
+            "changedControls": [],
+            "changedControlCount": 4,
+            "changedControlIds": [
+              "18",
+              "819",
+              "822",
+              "905"
+            ],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [
+              696,
+              760
+            ],
+            "beforeFrame": [
+              696,
+              760
+            ],
+            "afterFrame": [
+              696,
+              760
+            ],
+            "changedControls": [],
+            "changedControlCount": 4,
+            "changedControlIds": [
+              "18",
+              "819",
+              "822",
+              "905"
+            ],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [
+              660,
+              760
+            ],
+            "beforeFrame": [
+              660,
+              760
+            ],
+            "afterFrame": [
+              660,
+              760
+            ],
+            "changedControls": [],
+            "changedControlCount": 4,
+            "changedControlIds": [
+              "18",
+              "819",
+              "822",
+              "905"
+            ],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [
+              1156,
+              875
+            ],
+            "beforeFrame": [
+              1156,
+              875
+            ],
+            "afterFrame": [
+              1156,
+              875
+            ],
+            "changedControls": [
+              {
+                "id": "948",
+                "name": "ВзаиморасчетИсходящий",
+                "beforeControl": [
+                  633,
+                  390,
+                  266,
+                  23
+                ],
+                "afterControl": [
+                  631,
+                  390,
+                  267,
+                  23
+                ]
+              },
+              {
+                "id": "951",
+                "name": "ВзаиморасчетВходящий",
+                "beforeControl": [
+                  633,
+                  422,
+                  266,
+                  23
+                ],
+                "afterControl": [
+                  631,
+                  422,
+                  267,
+                  23
+                ]
+              }
+            ],
+            "changedControlCount": 19,
+            "changedControlIds": [
+              "18",
+              "819",
+              "822",
+              "857",
+              "880",
+              "883",
+              "886",
+              "899",
+              "902",
+              "905",
+              "908",
+              "945",
+              "948",
+              "951",
+              "954",
+              "971",
+              "976",
+              "979",
+              "982"
+            ],
+            "sameOwners": true,
+            "selection": "948"
+          }
+        ]
+      }
+    ],
+    "note": "См. отдельные замеры формы, dirty XML и откреплённого окна; это регрессия, а не новая полная native-приёмка."
+  },
+  "validation": {
+    "rust": {
+      "testThreads": 1,
+      "checks": [
+        {
+          "check": "fmt",
+          "command": [
+            "cargo",
+            "fmt",
+            "--check"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 1.34,
+          "log": "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-rust-fmt.log"
+        },
+        {
+          "check": "check",
+          "command": [
+            "cargo",
+            "check"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 0.11,
+          "log": "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-rust-check.log"
+        },
+        {
+          "check": "clippy",
+          "command": [
+            "cargo",
+            "clippy",
+            "--all-targets",
+            "--all-features",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 0.19,
+          "log": "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-rust-clippy.log"
+        },
+        {
+          "check": "test",
+          "command": [
+            "cargo",
+            "test"
+          ],
+          "exitCode": 0,
+          "elapsedSeconds": 150.42,
+          "log": "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-rust-test.log"
+        }
+      ],
+      "passed": 1561,
+      "ignored": 19
+    },
+    "node": {
+      "tests": 676,
+      "pass": 667,
+      "fail": 0,
+      "skipped": 9,
+      "log": "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-choice-final-node.log"
+    },
+    "coverageRegistry": {
+      "valid": true,
+      "scopes": 77,
+      "unitTestsPassed": 6,
+      "catalogTestsPassed": 12,
+      "fullProfileAccepted": false
+    },
+    "installedBatch": "form-batch-jcLLoN/batch.json",
+    "installedCases": 1018,
+    "installedRuns": 22,
+    "selectedInstalledRuns": [
+      {
+        "suite": "input-choice",
+        "locale": "en",
+        "passed": true,
+        "cases": 6,
+        "receipt": "form-batch-iNiLlO/input-choice-en/receipt.json"
+      },
+      {
+        "suite": "input-choice",
+        "locale": "ru",
+        "passed": true,
+        "cases": 6,
+        "receipt": "form-batch-iNiLlO/input-choice-ru/receipt.json"
+      },
+      {
+        "suite": "input-borders",
+        "locale": "en",
+        "passed": true,
+        "cases": 52,
+        "receipt": "form-batch-iNiLlO/input-borders-en/receipt.json"
+      },
+      {
+        "suite": "input-borders",
+        "locale": "ru",
+        "passed": true,
+        "cases": 52,
+        "receipt": "form-batch-iNiLlO/input-borders-ru/receipt.json"
+      },
+      {
+        "suite": "input-dates",
+        "locale": "en",
+        "passed": true,
+        "cases": 42,
+        "receipt": "form-batch-iNiLlO/input-dates-en/receipt.json"
+      },
+      {
+        "suite": "input-dates",
+        "locale": "ru",
+        "passed": true,
+        "cases": 42,
+        "receipt": "form-batch-iNiLlO/input-dates-ru/receipt.json"
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "en",
+        "passed": true,
+        "cases": 44,
+        "receipt": "form-batch-iNiLlO/input-dimensions-en/receipt.json"
+      },
+      {
+        "suite": "input-dimensions",
+        "locale": "ru",
+        "passed": true,
+        "cases": 44,
+        "receipt": "form-batch-iNiLlO/input-dimensions-ru/receipt.json"
+      },
+      {
+        "suite": "input-stretch",
+        "locale": "en",
+        "passed": true,
+        "cases": 20,
+        "receipt": "form-batch-iNiLlO/input-stretch-en/receipt.json"
+      },
+      {
+        "suite": "input-stretch",
+        "locale": "ru",
+        "passed": true,
+        "cases": 20,
+        "receipt": "form-batch-iNiLlO/input-stretch-ru/receipt.json"
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "passed": true,
+        "cases": 20,
+        "receipt": "form-batch-iNiLlO/renderer-en/receipt.json"
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "passed": true,
+        "cases": 20,
+        "receipt": "form-batch-iNiLlO/renderer-ru/receipt.json"
+      },
+      {
+        "suite": "column-widths",
+        "locale": "en",
+        "passed": true,
+        "cases": 187,
+        "receipt": "form-batch-iNiLlO/column-widths-en/receipt.json"
+      },
+      {
+        "suite": "column-widths",
+        "locale": "ru",
+        "passed": true,
+        "cases": 143,
+        "receipt": "form-batch-iNiLlO/column-widths-ru/receipt.json"
+      },
+      {
+        "suite": "united",
+        "locale": "en",
+        "passed": true,
+        "cases": 9,
+        "receipt": "form-batch-iNiLlO/united-en/receipt.json"
+      },
+      {
+        "suite": "united",
+        "locale": "ru",
+        "passed": true,
+        "cases": 9,
+        "receipt": "form-batch-iNiLlO/united-ru/receipt.json"
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "passed": true,
+        "cases": 31,
+        "receipt": "form-batch-iNiLlO/responsive-en/receipt.json"
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "passed": true,
+        "cases": 31,
+        "receipt": "form-batch-iNiLlO/responsive-ru/receipt.json"
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "passed": true,
+        "cases": 22,
+        "receipt": "form-batch-iNiLlO/groups-en/receipt.json"
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "passed": true,
+        "cases": 22,
+        "receipt": "form-batch-iNiLlO/groups-ru/receipt.json"
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "passed": true,
+        "cases": 98,
+        "receipt": "form-batch-jcLLoN/through-align-en/receipt.json"
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "passed": true,
+        "cases": 98,
+        "receipt": "form-batch-jcLLoN/through-align-ru/receipt.json"
+      }
+    ],
+    "broadBatch": "form-batch-iNiLlO/batch.json",
+    "broadBatchInitiallyPassed": false,
+    "diagnosticFailure": "The first through-align-en error was masked by detached-window cleanup. A diagnostic rerun after adding finally exposed coordinates of the previous United state. The test now waits for the current rendered revision; final ru/en runs pass.",
+    "guiConcurrency": 1,
+    "runtimeFilesIdenticalToColumnRegression": 1262,
+    "sourceAndDriverFilesMatchCommittedCode": 531,
+    "dirtyDetachedResize": {
+      "suite": "input-choice",
+      "widths": [
+        480,
+        720,
+        480
+      ],
+      "sameDom": true,
+      "sameSelection": true
+    },
+    "captionBoundaryDetachedResize": {
+      "suite": "through-align",
+      "widths": [
+        600,
+        380,
+        600
+      ],
+      "sameDom": true,
+      "sameSelection": true
+    }
+  },
+  "discardedProbe": {
+    "reason": "Literal Representation=Auto was rejected by XDTO. The provisional nine captures were discarded; valid import/capture was repeated with the property absent.",
+    "failedImport": "form-native-wizard-input-Uk87JFAy/import-rep.log",
+    "validImport": "form-native-wizard-input-Uk87JFAy/import-rep-fixed.log"
+  },
+  "remainingGeometry": [
+    {
+      "id": "shared-long-caption-metrics",
+      "nativeInputX": 263,
+      "viewerInputX": 266,
+      "differencePx": 3
+    },
+    {
+      "id": "wizard-preferred-width",
+      "nativeFrame": [
+        812,
+        612
+      ],
+      "note": "Текущий размер см. wholeBspForms. Полное совпадение ещё не принято."
+    },
+    {
+      "id": "wizard-radio-row-y",
+      "nativeRelativeY": 175,
+      "note": "Открыта сверка при одинаковой ширине; положение строк и пустая область таблицы требуют дальнейшего разбора."
+    },
+    {
+      "id": "normal-separation-inset",
+      "nativeExtraY": 8,
+      "note": "Дополнительный вертикальный отступ NormalSeparation не принят серией колонок подписей."
+    },
+    {
+      "id": "whole-bsp-native-parity",
+      "note": "Открыты полные рамки, расположение соседей и обрезание при минимальной области двух других форм БСП."
+    }
+  ],
+  "remainingAppearance": "Автоматические ширины строк выбора, прочие состояния/оформление, native-окно расширенной подсказки, полные снимки и Windows не приняты этой серией.",
+  "artifactReferences": {
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-rust-checks.json": "88f84fd6b59be4ac599faf1b1909ce08559aa1f38b15605da9f4a05e2896b91c",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-rust-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-rust-check.log": "59639588a6f1826f129cbcd121edc07279dab94786f5fa5bde6b3439b2e845cc",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-rust-clippy.log": "4cf86278c1e6d659943a46a3d7e3da429ac15be90f0f17742e24ef85228e7d3e",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-rust-test.log": "cb6c302eee355da6acde49f797355c1fb347b50e400578ea9ad31f76b77ac2b2",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-choice-final-node.log": "c5d2a635e06ba48e2a0012e0da789db4e97ee730f0651ec67e089a3180146598",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-native-metrics.json": "6e425c7939b62facc75e38e534d9e72695522f5367d685d8e433182095957830",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-native-prepare.py": "1a4d909ee5e8d663bf2d1fd0c161c7db03d4c08216cf52d460a4bb2c9cbccbf8",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-native-prepare.sh": "5b7bf29cba4f2bd503389da76d1ca2064f8c8c5e9d1677717050001ef4a09b1c",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-native-representations.py": "7d94448d1e96a32b9dfbd7eee72f1783e108b9e8122eda5b8e369b4e2b74a1f8",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-native-capture.sh": "504cefe4a90c00fe35d122d9c3fa46c50e92c435b784bd4e6998782f6819e208",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-installed.sh": "428a7a708872cba4e2d447435548fac39e1b4222317c103855b5e5ac51d37b1b",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-fields-host.cjs": "b634fcf2f5db9e84348100d10874451e46ca1fd3f301ef155d23417dc4b8bb31",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-bsp-layout-observation-host.cjs": "0154698b863616bdad3c84e4e50b9db8dcc13eeed65f7708e12d000babe21e15",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-bsp-layout-after.sh": "3c8e04d3a113a391422df353497493f0b2100c2a5434277f8b7cb0eb5b56fbad",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-loan-lower-layout-installed.sh": "ff8447a5150b4731e221ed885c3501efc8d9cbde31f70a9114fc74d422fee2a7",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-loan-lower-layout-host.cjs": "6b244c4ed3f01a3b96232e7f00a674cda6b40cea7bf3a3d1f9476e1e679c3d87",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-trace-host.cjs": "9772430e0af8ae5ccbf02b5440b6505b14e0c4f2162f00c65b7790dc9b7a613b",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-trace-prepare.py": "f0d47b827e95ff44c73464b82e177f681b4f0e03c104a2d4a4a5499fddb312a4",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-input-trace.sh": "32340bd002be0cbe8109e01dbf6db64316cd18e0ec7ee1efcade62f150a34ddb",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-choice-report.py": "38c9753c08b719452cf5c44f9c5eb44f0458574d2f9abc4a4ec25ca075dda221",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-choice-coverage.json": "877b4d56f1b3e4d35386860017615355f706bcdb587f23b3a7b5bbbeb13635f9",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-choice-ledger-tests.log": "38f4be995c1bb305dc5d7f1c806efbe264aa65ec6a86669aa31361674503f9a3",
+    "form-wizard-input-viewer-k66shKGg/evidence/eska-wizard-choice-catalog-tests.log": "1c7e382bd15866e74364fa78d13130e23500e1ebb16c1526daebcb75dfed5bfa",
+    "form-batch-jcLLoN/batch.json": "cb34f43bdec03d87e1110e70c3e6f822aa141d00ba20d5154525c16cd6920670",
+    "form-batch-jcLLoN/inputs.json": "aa1e6ac33e0ff3983479c1fd7ce595b163e8f7f79295e089c3a90636d3543558",
+    "form-batch-jcLLoN/artifacts/viewer.vsix": "fb2424eb77d2ed8befff438ed0cf03c03b6ad0e48178a4af8fb8dc87b407eefd",
+    "form-batch-jcLLoN/artifacts/eska-project": "344a85998ceb188ece3069e87049781447e96eef37f212fe2767487c4a132260",
+    "form-batch-iNiLlO/batch.json": "a7725d0c75cf023ab16fb4a0d8d4f9843289b3226224450f9a061816cf9c21f6",
+    "form-batch-iNiLlO/inputs.json": "ae546072d71f25ef871cb94e7913b135f35bb9043790687d8704915f77684de5",
+    "form-batch-Nbest1/batch.json": "8d650c24fdb6cb6fc44b432d26fbe2f031160aefdb305868eb93473c09ccedcc",
+    "form-batch-Nbest1/through-align-en/driver.log": "4c0433584d5ed2516bedf67a46dd65907f1f3ee20ca62e04bc0540cab9e0f90d",
+    "form-batch-iNiLlO/input-choice-en/receipt.json": "b34c500e79f2ff29e044b6bae93448db7cb7560abe5bef09d187f0eac3a92077",
+    "form-batch-iNiLlO/input-choice-ru/receipt.json": "7369050ec6112515eba7b7f0efb36c8021ddf67a74dd55b966bf48ac0c17c208",
+    "form-batch-iNiLlO/input-borders-en/receipt.json": "559d81146c1b2e555dcf3f01278e721af7fec30878b16397975e940200bf3954",
+    "form-batch-iNiLlO/input-borders-ru/receipt.json": "8fe20f89702ad8b678c2b35250960193fa3b01db5526ec2180f55e0623532f6e",
+    "form-batch-iNiLlO/input-dates-en/receipt.json": "e949a5e2d93e1c75a6fd57085227f0288e93fe6b2b3263c91d8fb29b671c54f7",
+    "form-batch-iNiLlO/input-dates-ru/receipt.json": "8e54b145f712b0de6ec06ff9adaf89be62885d5a18562d005809a9464f4e449c",
+    "form-batch-iNiLlO/input-dimensions-en/receipt.json": "517835388d5505a79133747b6084534fdfaa1b5cd55b6d75d0533bfcf70aa3b6",
+    "form-batch-iNiLlO/input-dimensions-ru/receipt.json": "e597a991e4d01ec8bee40ea84269a2c1a534f3e0e0c0cb80927479db547a0947",
+    "form-batch-iNiLlO/input-stretch-en/receipt.json": "8a33c761f989592492874f60ee5e00a114211b6f390562695943bb6b41a249dc",
+    "form-batch-iNiLlO/input-stretch-ru/receipt.json": "4aeda4c8a2f490ab3027cb1992cb2520e6a220ecbe382d0eef505cbc2a0f727d",
+    "form-batch-iNiLlO/renderer-en/receipt.json": "377db364ea58eb5c38866954421cf4ec20ecf9fb49554d57fd9352a678ce3ff7",
+    "form-batch-iNiLlO/renderer-ru/receipt.json": "6cd3888258dbe63c404812ad6d880a1f390815fd4cf1dc3818589f28bbf13b0b",
+    "form-batch-iNiLlO/column-widths-en/receipt.json": "5f126c22dd9d2c8603d75b9416a86615f736796d6c4d3ecf9a987bf036c54449",
+    "form-batch-iNiLlO/column-widths-ru/receipt.json": "e24b69b7207e30a28152faec88e4165d710e3ed1534237b5090bd05e8a41067a",
+    "form-batch-iNiLlO/united-en/receipt.json": "c46462c8ab3c59645d9cc4e14a42bbe983f0b27cd23e02cb0df8fcc80713fe5a",
+    "form-batch-iNiLlO/united-ru/receipt.json": "eac6035c5ad1d53df3b6601014f04a77ec75b9ce82b05901b483e80b54ef0b19",
+    "form-batch-iNiLlO/responsive-en/receipt.json": "779ab0b4951765f94fcc07dacc08422e267649b98dd9a709115d359a3f30712d",
+    "form-batch-iNiLlO/responsive-ru/receipt.json": "1c35bf4b2d86f1123cf584ebeb11416bb628e701a34e5b9b376e92325fce8595",
+    "form-batch-iNiLlO/groups-en/receipt.json": "8bf7d7678a944b5156eaf7da03ac4c179bdd4f6e9b20e753deecb28567b1b9ca",
+    "form-batch-iNiLlO/groups-ru/receipt.json": "7b38b77af2451738262cc654bc62805bc5df13fd0a97aa7b6626652ceac71d3b",
+    "form-batch-jcLLoN/through-align-en/receipt.json": "3f1c27bd1476fe1790dd115a873f522cbf7bcd2d162cba5c93346b02b9dd4a28",
+    "form-batch-jcLLoN/through-align-ru/receipt.json": "2674164f832ae498a252548f068d823ca2aba9fc5e567c9be6cc7e8682c448cd",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43601/Ext/Form.xml": "2634c059d75d8eeadfe03bfac2fc6b2dba92add244e44e114e54ee19b1197d1a",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43601.png": "c34350a0ce2984034ebda822a97e5a8bad25024d14fef59281eb043fd885bbd6",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43602/Ext/Form.xml": "94546e4c5c609dccb4604cf86aea2e4aed23c96bf68ec5073f26a2758a9545eb",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43602.png": "8124862525f3b82d50963bb5084a7d4823c7a3b1cc5f077f251fc407fee1f89f",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43603/Ext/Form.xml": "36b273f75e883f4f957e56b2dddfae60e3c14aa03e3c2d12b4a62f737322318c",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43603.png": "9488a355412596526f648182b55f95f16b653f614f136466a54f62524fc63147",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43604/Ext/Form.xml": "5c4e622a204623ec097482eceb3ca96a5a38edfe03ddace5ddd8e2be0643454b",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43604.png": "5a9caf866a0ce6fd8f10e3e3ed666ad6cf758ef670329fe332bf322be5093b61",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43605/Ext/Form.xml": "1a6376616b15b2c3d6a0b51ca945ebe47698fc83912292e8f9613b4dea2c1a1b",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43605.png": "d1ca9d6f38a43343e4dab12274a75ad257c5098cca26f48274e4aeac3db1129f",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43606/Ext/Form.xml": "511d6b7b74facef1a1b7d775b28e7a78ec12dbd2a61562da0d7a55103147afb4",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43606.png": "37c322fab177f78c35584eacea857ceaf57aafb515be7888d4dc31802d08089a",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43607/Ext/Form.xml": "cd29938a0aac8de56c95bf5351b86472422539505e21b9da7efc58e6cb3d5bce",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43607.png": "03daf517a8d2af153d8238a81f98a435e382459a5c49c81e5f48dabe7fcc663d",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43608/Ext/Form.xml": "30992796f642de1240a88ac8e4d078e29300ef38b79d9e379236c50abeb09fe1",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43608.png": "b279d238dceaffd2e5425ddd014b8ae3e2fbc8caf01717cf9ec339e63be98077",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43609/Ext/Form.xml": "4fd23786f316ed45dba595dc1e61d36e76c555767c397f8ff3a6e619f374b350",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43609.png": "67463a059c94a25e218f54dfbf46172bdaa6413d36c7300ece94eccfcbcb4461",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43610/Ext/Form.xml": "69bfd9c97f890e2e959e220a5df1f7c258369cc9324009ec7cf85c5320d91926",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43610.png": "57ac8f5c61f9d1858688504ee23ad56998bbc6064b78af7add1da6af93494668",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43611/Ext/Form.xml": "1f6002f024c72f1440cc681f3a522b743fd45be8c3576a2304542ec194e1887d",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43611.png": "c103784437fa78821b54b81d69f156027f388cfcf0e2708191b10132cad25a3e",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43612/Ext/Form.xml": "a20035d55c84a16df37f11dc244564c478d07005b43c931ad8374587196479a0",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43612.png": "3a43bc331563fb390c29ff546daa07ea3f55e753091662cf4389355217aa8016",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43613/Ext/Form.xml": "67daf25ac658ab6fdc39c0c306e65fcd30675a2e112d5484b80ca882d608b4a8",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43613.png": "9e39f2ce4ac40b4d758de6d6cae83d3b1395c1adbb7068bbe6b84e209e00c6ff",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43614/Ext/Form.xml": "0b5b3d39f689966569c26f67e6ae6deb1cc278bbbe5ccb2c4774f1252621b76f",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43614.png": "1a873e25170d1b73562db73fad63adb3f5bf496f7816003b02cceb7246553418",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43615/Ext/Form.xml": "6639f32bf4feeb769e4ed128d766e56f41779ae938fa9bc101b795e75ac0bb5a",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43615.png": "598c7d8c31422cd988f498b4c427580c147b44df5beb7a7434108dc0451734f9",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43616/Ext/Form.xml": "3725a17df5a38429e75f2e5dbab33b35ebdd80f478b44c2baf24a14a27461d90",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43616.png": "45a4054abcacf36ed03944afffb0754fffc462e8b092e5e1bcce79d162da4517",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43617/Ext/Form.xml": "35d5e0ecbbd159d69a21ba92382f996c241446a356d5c58b56f96323b44e4b06",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43617.png": "d1cdf8f7b3be392e6102a337f25a9657f37a8676beb13808461e7c40f3296f2b",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43618/Ext/Form.xml": "b8bbbb940b0700257262abab9e0504a984f98c0096a5cfd50c86eb32d8c13376",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43618.png": "456294a72841d3cb7ae45fc595bf9808d28576f984ab0bf890c7f32088ef5fe9",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43619/Ext/Form.xml": "9be345d98b0a8870fd165995233efcf93b400ce1fe0839fff893357cc8cb3237",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43619.png": "f7a7bb6ad662c1d179a5669b0c59846a60a81caf3db0455eedfc3c6a0be195b3",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43620/Ext/Form.xml": "af697cc2f72d566a78c9571bd3616e9cc6e48dd8afaac0a4c7517bdbcc266caf",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43620.png": "3e4c45782d31046203328f6062763a1d4fa157582b92b195fee921a7786640db",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43621/Ext/Form.xml": "2c1c3d719a7252512906d285cd161ac98830c55e6e58113b76670bd3f80d9fe2",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43621.png": "6e93e8e845a55bded55e62de49103c109b8d79f07d16c3dfacf1e2a63145cf30",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43622/Ext/Form.xml": "19261d17cbe61c864f4ea41e5f78fe9bc302ea0114a543ebfc1cb00142bb8d73",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43622.png": "e61c686f02304303bcbaf117306b7bedbf35bc461aff4a7816c7b0b845815c78",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43623/Ext/Form.xml": "20317bea1de6b964e0dbbfc405604c52b369717749aec2ac005a65e264925be9",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43623.png": "3b4e3a47d753394b7d8846111ac49beb117410da3a23a4d2776fc840bb690b33",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43624/Ext/Form.xml": "7c84a3a9a623e712167a9d462058349c5def929cea54d5a24e63c4ad29f9b36b",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43624.png": "08a90a1c12cb66f2a5787e616811e3a6f82c1e990582d95caabe77c82c3c7dd2",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43625/Ext/Form.xml": "4b27259444d40134f42b866423daf042444baefba0f68b74dfdb18f7986e6114",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43625.png": "a8eb35105b64c66c8e42008d7f8d3041bb41e1daf9fbff8c77c48cfd3175dd4e",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43626/Ext/Form.xml": "01b2bc8a98fdd058975e73bb0d9c7ad1ea9123b1e83ba7d2ef5c1b0733afbf59",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43626.png": "1c67418c7bac9f5da6e74a6cc50d96fd3022edf048f086aa4572692ab2647bcf",
+    "form-native-wizard-input-Uk87JFAy/src/CommonForms/ProbeWidthWizard43627/Ext/Form.xml": "df23c9f6042d43af21e8a9e2f03ed4fd16dc792962b2db7b64e0a09ba6b75434",
+    "form-native-wizard-input-Uk87JFAy/native-ru/ProbeWidthWizard43627.png": "67030729d30516c74478204c392129eec1721c084791db39b39c99e17897244b",
+    "form-native-wizard-input-Uk87JFAy/cases.json": "ed87285e04c6648d7903392b5b91ef937cd75ce740b8a3e8940d5f8bd986d61e",
+    "form-native-wizard-input-Uk87JFAy/process.json": "fff95117b4e2a712344ebbc20d4fc110fcd974423e7072f99c67f3617ee7bf43",
+    "form-native-wizard-input-Uk87JFAy/import.log": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e",
+    "form-native-wizard-input-Uk87JFAy/apply.log": "c9edee8c196a572dfe8092425fa25b4a129048add41e481adc38e40ab3089be3",
+    "form-native-wizard-input-Uk87JFAy/import-extra.log": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e",
+    "form-native-wizard-input-Uk87JFAy/apply-extra.log": "7734467f7178225dfc62d5f78218b1512c6fcf9c4632423f3e067c69cfc43f3d",
+    "form-native-wizard-input-Uk87JFAy/import-rep.log": "10aee34b37276e2f2ff52e4d2efb309d13267be6fbd24ad5294455d0aa9e6e70",
+    "form-native-wizard-input-Uk87JFAy/import-rep-fixed.log": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e",
+    "form-native-wizard-input-Uk87JFAy/apply-rep-fixed.log": "36394bc9a2ba46744a76a2b181a01832999dd16344e747f036a0c5f2a4c2e389",
+    "form-native-wizard-input-Uk87JFAy/import-help.log": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e",
+    "form-native-wizard-input-Uk87JFAy/apply-help.log": "4aa01f6839b2874e7bbc9e71857111a7e78ad6b0602710471aae64452b023a52",
+    "form-wizard-input-viewer-k66shKGg/ru/geometry.json": "c7dd8bd2a012626a5fd804e3ee19a1c1b62d03361b4354d1da095b57e444381f",
+    "form-wizard-input-viewer-k66shKGg/ru/receipt.json": "d795f3c8a5ad23421da0f6c5366c1ed96d9f9303e8ad11a15a3eeaed861d8fa2",
+    "form-wizard-input-viewer-iz6NMWzF/ru/geometry.json": "e489dee1b3903b0fc66f5506e9c1c2b9b205fd15da9fe5a43db810ea9810dd55",
+    "form-wizard-input-viewer-6cFNqQES/ru/geometry.json": "3385e3619c8512eefd46ee170bec4b3a3b0098612e8bd514239a910cb7014d69",
+    "form-wizard-input-viewer-k66shKGg/en/geometry.json": "04155303331570cff63bf52a3bc609c91c244278c1a92ef90c2ef126e19aee00",
+    "form-wizard-input-viewer-k66shKGg/en/receipt.json": "afc13ea4c09f6e1991222fe84116da281624c8c18ac4711140d1864259a6dae3",
+    "form-wizard-input-viewer-iz6NMWzF/en/geometry.json": "3470f8dcc87989f563e60de2ed768fa492ac8a0d7b63ddc72d3a5cb59b2d1740",
+    "form-wizard-input-viewer-6cFNqQES/en/geometry.json": "d2724cdfa68c6b94143e35219f040f6445afea50d60352a642c463fdd191c35f",
+    "form-wizard-input-viewer-k66shKGg/ru/Fields-preferred.png": "d35588625b31796e6cb767454181a2ee7619469cbc12184f1f8884b853b9111b",
+    "form-wizard-input-viewer-k66shKGg/ru/TwoInputsAuto-preferred.png": "cd5f49919652995949a26889e571a301b8f233c246e404e6a4c6cc213da33be6",
+    "form-wizard-input-viewer-k66shKGg/ru/TwoInputsLeft-preferred.png": "5306002992942b8eb3d62cdaf6b1a81917091c767b07b2763263a04515b55cc6",
+    "form-wizard-input-viewer-k66shKGg/ru/ButtonAuto-preferred.png": "c3d02b675abc6433d60d87b3ea311aa2b0197c06188f78dc3bdd2c851a456ce7",
+    "form-wizard-input-viewer-k66shKGg/ru/ButtonLeft-preferred.png": "ff7412bc5d919ea7ab343cd9cdbef8796bfd41426d93b13773a8241b1bb8f90a",
+    "form-wizard-input-viewer-k66shKGg/ru/ButtonUseAuto-preferred.png": "590fcb78146e3e49ef67439e08221262673c4a52423b2f5a7a191e8e20cf80cc",
+    "form-wizard-input-viewer-k66shKGg/ru/ButtonUseLeft-preferred.png": "8cea9a76093685378c5d7401d14313b932ff9db4a1c355320bc94418bb873f03",
+    "form-wizard-input-viewer-k66shKGg/ru/ButtonDontUse-preferred.png": "8e0703d7e9654d58fb03072aa73459a1ad2c5697dcb60dd66aa7457f475e8e35",
+    "form-wizard-input-viewer-k66shKGg/ru/ButtonHorizontal-preferred.png": "297bd8e936bc1f8e71c55f0f4c81834426debff6551c318ff147cbe51e2d603d",
+    "form-wizard-input-viewer-k66shKGg/ru/ButtonNoListAuto-preferred.png": "0f240db29138d2fe6dc8739ca5c3dbc422001020490e1ad966db7339da7bef39",
+    "form-wizard-input-viewer-k66shKGg/ru/ButtonNoListLeft-preferred.png": "af063400ea56c16221eb8ba9513c3d57081904f3f71f4daea01fa22e5a852dfb",
+    "form-wizard-input-viewer-k66shKGg/ru/ButtonBothLeft-preferred.png": "9e9b570255462fb30a28ad06b3364508517859e58f303f4a0e2e82a3f9c11d5d",
+    "form-wizard-input-viewer-k66shKGg/ru/ParentInputs-preferred.png": "ef1eef6124249a0e7d4568e408f4fea17cc0a843072eb25e62c7848889f04e08",
+    "form-wizard-input-viewer-k66shKGg/ru/ParentButton-preferred.png": "14ede6ccfc9fcafd6cc4d5fdc14c713dedb4c8c872bb7ceb39103db9c41744bb",
+    "form-wizard-input-viewer-k66shKGg/ru/PageDefault-preferred.png": "e50ab0f054f2b50b955bab94030f3fe6f187b824855b50fc1a601aa0b32da682",
+    "form-wizard-input-viewer-k66shKGg/ru/PageVertical-preferred.png": "eac3601cf81fd7a20b2dfd5c59dd2c48c1655d898abe42cfa1a01c5518912dce",
+    "form-wizard-input-viewer-k66shKGg/ru/PageUse-preferred.png": "09f8345772ad23ba39e3a940b37afeb9471c5274d00275f4146b46791828626e",
+    "form-wizard-input-viewer-k66shKGg/ru/RepNoneInputs-preferred.png": "0cba9603f9edf02bd4029368db49055bad8fe6ae0cfe3674d2c89f6c900d5ca3",
+    "form-wizard-input-viewer-k66shKGg/ru/RepAbsentInputs-preferred.png": "6afccaaf8ae07faeaab8248f7647c5ceb583efedd1f78d3594a9d85051848b88",
+    "form-wizard-input-viewer-k66shKGg/ru/RepNormalInputs-preferred.png": "3eba74e9876582ba4a92317e035ad60c5b2648c42e27d31533bf7c674a8815c8",
+    "form-wizard-input-viewer-k66shKGg/ru/RepNoneButton-preferred.png": "2087ef8abd4c7095c3f0565cba9652e628421a705eac2d7b95006c8cb276ba34",
+    "form-wizard-input-viewer-k66shKGg/ru/VerticalAuto-preferred.png": "362719a2ca7a2a61f8de5223f332c9793dc1075adf82aa3dcf748f1e773d05da",
+    "form-wizard-input-viewer-k66shKGg/ru/VerticalNone-preferred.png": "356a08fe4197a5560e30b556f07849e7e7782be52df84a0772379390bbf6254b",
+    "form-wizard-input-viewer-k66shKGg/ru/VerticalUse-preferred.png": "4f14d5296fac24c1a9112da35b35c5b82e79fbb0a7f4087ed97bbba52381a215",
+    "form-wizard-input-viewer-k66shKGg/ru/NoTooltip-preferred.png": "dfcace50d6a438a4600594070a1d267a607e253d411beac42c1ad17f6845a646",
+    "form-wizard-input-viewer-k66shKGg/ru/BothPlain-preferred.png": "7951d4180b707939dcca244aed6b60b4d7d7d45494d7d712bb5a6315f46cd780",
+    "form-wizard-input-viewer-k66shKGg/ru/HelpContent-preferred.png": "50388e80eac84ae02dd8ae9482051e1e83b94499d52faddee6240a1454ee5c35",
+    "bsp-layout-after-vXBbDJrF/ru/review.json": "8b97f542cc350349fb816657377f93ed43b3c9fc1b8ba781c5e24dc166cc8556",
+    "bsp-layout-after-qY12blnV/ru/review.json": "291c9a2455e0dfdef5fc2d78daebe1036b6be8f95aa3eb585c6c23470d1eb6b9",
+    "bsp-layout-after-qY12blnV/ru/receipt.json": "fa5bf1c25646ee273e504aa9b7ae872d470f47d5ceb94367c30c6d80f6b7af91",
+    "bsp-layout-after-vXBbDJrF/en/review.json": "f0c2d3b09d1b1995f1f6e3dcc07452f99c6d38ea64fc482289dfee4e82d4fda0",
+    "bsp-layout-after-qY12blnV/en/review.json": "ff1f903eb01f992d582e42186a1934ca4ce04517e8c9e97d19cc94f8db9294a1",
+    "bsp-layout-after-qY12blnV/en/receipt.json": "53e8d5af58d1a16cb776cdec0548610aa64256de58c51b5a356eeb27fc453e10",
+    "bsp-layout-after-qY12blnV/ru/bsp-0-preferred-initial.png": "6870b34ed89094e17e4075ef8c98e35199d6e3998cb1c6aec9930e3db845bd0e",
+    "bsp-layout-after-qY12blnV/ru/bsp-0-preferred-alternate.png": "4b11a6090b9233ab32b21f680d04fd9a9c11580fe1e9d91e3175a5f9bbe73260",
+    "bsp-layout-after-qY12blnV/ru/bsp-0-allocation-640.png": "d133a70a92c6339a3f155c9bdab287ed5177e86428c9b245dd7f10a6ca08dd74",
+    "bsp-layout-after-qY12blnV/ru/bsp-0-allocation-1150.png": "872b36ebfe5e97e910db043e4e78fd7139c0d7bd8389f8052d077e8771bc4fe1",
+    "bsp-layout-after-qY12blnV/ru/bsp-1-preferred-initial.png": "19178d36db362d90417d2ee2b55a8422c5a3aba05ee1040a437c3388818bd52c",
+    "bsp-layout-after-qY12blnV/ru/bsp-1-preferred-alternate.png": "a46f96557f98304b0623d3fcd16bb45276c003b2e697d52cdc2bb1f0601d14c5",
+    "bsp-layout-after-qY12blnV/ru/bsp-1-allocation-640.png": "96f449e47d0bbbff529f94e92e7347d0a829df5c51ee95894d438d16043c60b1",
+    "bsp-layout-after-qY12blnV/ru/bsp-1-allocation-1150.png": "8e415101b6608bb697b785d5d43c2faa838c8ac857195e2a0839390e202363d2",
+    "bsp-layout-after-qY12blnV/ru/bsp-2-preferred-initial.png": "fcc55550e805fc5469f52c5248c548a015915d01fcde592463fbe08214cc29d9",
+    "bsp-layout-after-qY12blnV/ru/bsp-2-preferred-alternate.png": "b2bcb6c5b89b7bbcfa7a983bd59574c82f458314c6d86a0a42e5c048738bdf8a",
+    "bsp-layout-after-qY12blnV/ru/bsp-2-allocation-640.png": "860d3e9e254eac8e51de3c06932cf03d4e1efb93e1b45035305bf7f3926dd5fc",
+    "bsp-layout-after-qY12blnV/ru/bsp-2-allocation-1150.png": "ab874c18959d2b4f8264fcedfdfad726a5f7d04219f628fc529eec402227da6c",
+    "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "form-installed-loan-lower-6eAJPnoa/loan-ru/geometry.json": "f4de6d32eba6edff83fd4220251d9575941ed29e812b3657caa64b750268c4cc",
+    "form-installed-loan-lower-GQWIonMu/loan-ru/geometry.json": "1da29f7dda11fbeec1509bcab4a83a198a3f45a379c70a9dba48fe2f29a060e2",
+    "form-installed-loan-lower-GQWIonMu/loan-ru/receipt.json": "582bfb814156835c621760d1e59b6c23134d6f3bb78364e727b0e82af7115e08",
+    "form-installed-loan-lower-6eAJPnoa/loan-en/geometry.json": "b2d5e97c4d3087a10de558047f0eafff0fcd5ea1493e2b77cd1674034c9d61d0",
+    "form-installed-loan-lower-GQWIonMu/loan-en/geometry.json": "90389c85b7131504801e55b8440323ee27a992c4133fe4de3bfb665fc8d8162f",
+    "form-installed-loan-lower-GQWIonMu/loan-en/receipt.json": "f380ee9af089e6023a27a5d495ce202ad2d2261dece81198a3c8af3a09c379b1",
+    "form-installed-loan-lower-GQWIonMu/loan-ru/loan-1156.png": "30a397d2f2b6653cab34359da7c73038800e2c512934d75be31da0571c35c5ee",
+    "form-installed-loan-lower-GQWIonMu/loan-ru/loan-760.png": "b23a35767ea7cbd0d69ad9a6e22c09bc400a4bf7a7475fcafb37c68b56c3ee45",
+    "form-installed-loan-lower-GQWIonMu/loan-ru/loan-696.png": "31392924324e22e2e01467fcc3594874d9856a1bd6df37dc00ba384b1884f487",
+    "form-installed-loan-lower-GQWIonMu/loan-ru/loan-696-bottom.png": "de680548a36f89d1446db44e19a065257944aea2dd27580396f07c8d948d92f1"
+  }
+}

@@ -1,0 +1,754 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestone": "T157",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "zoom": 100,
+  "compatibility": {
+    "loan": "Version8_3_21",
+    "probes": "Version8_3_27"
+  },
+  "coordinateSpace": "Frame-relative x, y, width and height in CSS pixels at 100% zoom.",
+  "artifactBase": "../eska-playground",
+  "sourceXmlUnchanged": true,
+  "bslExecuted": false,
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "eskaBackendCommit": "5cba97908ee6e6aaa34a66f6250571c8f4ea1b3b",
+  "explorerGroupShrinkCommit": "c724da8f7c8387c7cfa0547bbfd1604ebd14e7d1",
+  "groupWidthProbes": {
+    "directory": "form-native-compact-Y39MMH8n",
+    "caseProperties": "cases.json",
+    "receipts": {
+      "ru": {
+        "report": "form-installed-compact-layout-SCiaLLYF/matrix-ru/geometry.json",
+        "receiptSha256": "5bfe0bc9299dd37b0592b74910238f2035e1e5e8fe833a10495267466929ffa4"
+      },
+      "en": {
+        "report": "form-installed-compact-layout-SCiaLLYF/matrix-en/geometry.json",
+        "receiptSha256": "b0275c6bc211b135c95655313e82f0b89ab456b9c473406014171c5075188525"
+      }
+    },
+    "comparison": {
+      "statesWithAtMostOnePixelPerControlCoordinate": 30,
+      "authoredWidth": "The Width=54 column remains at 540 px. Its field is 540 px in the VSIX and 531 px in Designer.",
+      "captions": "The medium and compact samples are within 1 px per control coordinate. The wide sample still wraps the captions.",
+      "conditional": "Medium and compact stack as in Designer. The wide Designer reference is 1 px narrower than the VSIX preferred width."
+    },
+    "cases": [
+      {
+        "form": "ProbeWidthCompact41401",
+        "case": "NoGrowth",
+        "poses": [
+          {
+            "widthState": "wide",
+            "capture": "ProbeWidthCompact41401-wide.png",
+            "native": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 571, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 530, 23],
+                "B": [553, 39, 571, 23]
+              }
+            }
+          },
+          {
+            "widthState": "medium",
+            "capture": "ProbeWidthCompact41401-medium.png",
+            "native": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 458, 23],
+                "B": [481, 39, 492, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 457, 23],
+                "B": [480, 39, 492, 23]
+              }
+            }
+          },
+          {
+            "widthState": "compact",
+            "capture": "ProbeWidthCompact41401-compact.png",
+            "native": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 366, 23],
+                "B": [389, 39, 392, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 365, 23],
+                "B": [388, 39, 392, 23]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "form": "ProbeWidthCompact41402",
+        "case": "BothGrow",
+        "poses": [
+          {
+            "widthState": "wide",
+            "capture": "ProbeWidthCompact41402-wide.png",
+            "native": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 571, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 530, 23],
+                "B": [553, 39, 571, 23]
+              }
+            }
+          },
+          {
+            "widthState": "medium",
+            "capture": "ProbeWidthCompact41402-medium.png",
+            "native": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 458, 23],
+                "B": [481, 39, 492, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 457, 23],
+                "B": [480, 39, 492, 23]
+              }
+            }
+          },
+          {
+            "widthState": "compact",
+            "capture": "ProbeWidthCompact41402-compact.png",
+            "native": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 366, 23],
+                "B": [389, 39, 392, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 365, 23],
+                "B": [388, 39, 392, 23]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "form": "ProbeWidthCompact41403",
+        "case": "AuthoredWidth",
+        "poses": [
+          {
+            "widthState": "wide",
+            "capture": "ProbeWidthCompact41403-wide.png",
+            "native": {
+              "frame": [1154, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [563, 39, 571, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [1154, 75],
+              "controls": {
+                "A": [13, 39, 540, 23],
+                "B": [563, 39, 570, 23]
+              }
+            }
+          },
+          {
+            "widthState": "medium",
+            "capture": "ProbeWidthCompact41403-medium.png",
+            "native": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [563, 39, 410, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 540, 23],
+                "B": [563, 39, 409, 23]
+              }
+            }
+          },
+          {
+            "widthState": "compact",
+            "capture": "ProbeWidthCompact41403-compact.png",
+            "native": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [563, 39, 218, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 540, 23],
+                "B": [563, 39, 217, 23]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "form": "ProbeWidthCompact41404",
+        "case": "FixedChild",
+        "poses": [
+          {
+            "widthState": "wide",
+            "capture": "ProbeWidthCompact41404-wide.png",
+            "native": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 571, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 570, 23]
+              }
+            }
+          },
+          {
+            "widthState": "medium",
+            "capture": "ProbeWidthCompact41404-medium.png",
+            "native": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 419, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 418, 23]
+              }
+            }
+          },
+          {
+            "widthState": "compact",
+            "capture": "ProbeWidthCompact41404-compact.png",
+            "native": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 227, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 226, 23]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "form": "ProbeWidthCompact41405",
+        "case": "NeitherGrow",
+        "poses": [
+          {
+            "widthState": "wide",
+            "capture": "ProbeWidthCompact41405-wide.png",
+            "native": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 571, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 530, 23],
+                "B": [553, 39, 571, 23]
+              }
+            }
+          },
+          {
+            "widthState": "medium",
+            "capture": "ProbeWidthCompact41405-medium.png",
+            "native": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 458, 23],
+                "B": [481, 39, 492, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 457, 23],
+                "B": [480, 39, 492, 23]
+              }
+            }
+          },
+          {
+            "widthState": "compact",
+            "capture": "ProbeWidthCompact41405-compact.png",
+            "native": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 366, 23],
+                "B": [389, 39, 392, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 365, 23],
+                "B": [388, 39, 392, 23]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "form": "ProbeWidthCompact41406",
+        "case": "NestedNoGrowth",
+        "poses": [
+          {
+            "widthState": "wide",
+            "capture": "ProbeWidthCompact41406-wide.png",
+            "native": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 571, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 530, 23],
+                "B": [553, 39, 571, 23]
+              }
+            }
+          },
+          {
+            "widthState": "medium",
+            "capture": "ProbeWidthCompact41406-medium.png",
+            "native": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 458, 23],
+                "B": [481, 39, 492, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [993, 75],
+              "controls": {
+                "A": [13, 39, 457, 23],
+                "B": [480, 39, 492, 23]
+              }
+            }
+          },
+          {
+            "widthState": "compact",
+            "capture": "ProbeWidthCompact41406-compact.png",
+            "native": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 366, 23],
+                "B": [389, 39, 392, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [801, 75],
+              "controls": {
+                "A": [13, 39, 365, 23],
+                "B": [388, 39, 392, 23]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "form": "ProbeWidthCompact41407",
+        "case": "Conditional",
+        "poses": [
+          {
+            "widthState": "wide",
+            "capture": "ProbeWidthCompact41407-wide.png",
+            "native": {
+              "frame": [1145, 75],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [554, 39, 571, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [1130, 107],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [13, 71, 1096, 23]
+              }
+            }
+          },
+          {
+            "widthState": "medium",
+            "capture": "ProbeWidthCompact41407-medium.png",
+            "native": {
+              "frame": [604, 107],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [13, 71, 571, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [604, 107],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [13, 71, 570, 23]
+              }
+            }
+          },
+          {
+            "widthState": "compact",
+            "capture": "ProbeWidthCompact41407-compact.png",
+            "native": {
+              "frame": [604, 107],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [13, 71, 571, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [604, 107],
+              "controls": {
+                "A": [13, 39, 531, 23],
+                "B": [13, 71, 570, 23]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "form": "ProbeWidthCompact41408",
+        "case": "Captions",
+        "poses": [
+          {
+            "widthState": "wide",
+            "capture": "ProbeWidthCompact41408-wide.png",
+            "native": {
+              "frame": [1285, 75],
+              "controls": {
+                "A": [79, 39, 531, 23],
+                "B": [694, 39, 571, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [1270, 82],
+              "controls": {
+                "A": [55, 39, 531, 23],
+                "B": [670, 39, 579, 23]
+              }
+            }
+          },
+          {
+            "widthState": "medium",
+            "capture": "ProbeWidthCompact41408-medium.png",
+            "native": {
+              "frame": [993, 82],
+              "controls": {
+                "A": [53, 39, 417, 23],
+                "B": [520, 39, 453, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [993, 82],
+              "controls": {
+                "A": [53, 39, 417, 23],
+                "B": [520, 39, 452, 23]
+              }
+            }
+          },
+          {
+            "widthState": "compact",
+            "capture": "ProbeWidthCompact41408-compact.png",
+            "native": {
+              "frame": [801, 82],
+              "controls": {
+                "A": [53, 39, 326, 23],
+                "B": [429, 39, 352, 23]
+              }
+            },
+            "installedRuEn": {
+              "frame": [801, 82],
+              "controls": {
+                "A": [53, 39, 326, 23],
+                "B": [429, 39, 351, 23]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "loanDisbursement": {
+    "form": "Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "nativeCompact": {
+      "emulatedScreen": [1024, 768],
+      "capture": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-bottom-crop.png",
+      "sha256": "5493bc1e893b69e1836a0daf1d07c52ded1de9fd974ee3d1bd15897d03b255f7",
+      "frame": [696, 760],
+      "memoSize": [511, 51],
+      "footerRows": 2
+    },
+    "requestedCompact": [696, 760],
+    "before": {
+      "receipt": {
+        "report": "form-installed-compact-layout-HYs6TpRm/loan-ru/geometry.json",
+        "receiptSha256": "c5b6a8c7e98bc2ac8495ab197eccdd05789c35877535c635e0ea61e0f6b9a6a2"
+      },
+      "frame": [960, 745],
+      "leftMinimum": 532,
+      "rightMinimum": 384
+    },
+    "after": {
+      "receipt": {
+        "report": "form-installed-compact-layout-SCiaLLYF/loan-ru/geometry.json",
+        "receiptSha256": "527a10ebdb8c547f9120047c7d45477bebe6c8737bc38972856f6056ecea0b77"
+      },
+      "frame": [958, 745],
+      "leftMinimum": 530,
+      "rightMinimum": 384
+    },
+    "wideAndMedium": [
+      {
+        "requested": [1156, 875],
+        "frame": [1156, 875],
+        "preferred": [1159, 871]
+      },
+      {
+        "requested": [994, 875],
+        "frame": [994, 875],
+        "preferred": [1159, 871]
+      }
+    ],
+    "dirtyDiagnosis": {
+      "receipt": {
+        "report": "form-installed-compact-layout-EkeccWmf/loan-ru/geometry.json",
+        "receiptSha256": "3db7ce3fbad9469d476d013b82124f109f3850c011349ffd9e497f76dd3ae340"
+      },
+      "restoredSourceBytes": true,
+      "usedOnlyInTestBuffer": true,
+      "checkboxBranchMinimum": 433,
+      "variants": [
+        {
+          "case": "sums-top",
+          "edits": {
+            "TitleLocationTop": [816, 942, 825]
+          },
+          "frame": [861, 745],
+          "leftMinimum": 433,
+          "rightMinimum": 384
+        },
+        {
+          "case": "dates-top",
+          "edits": {
+            "TitleLocationTop": [908, 945]
+          },
+          "frame": [958, 745],
+          "leftMinimum": 530,
+          "rightMinimum": 384
+        },
+        {
+          "case": "payments-independent",
+          "edits": {
+            "ThroughAlignDontUse": [875]
+          },
+          "frame": [865, 745],
+          "leftMinimum": 530,
+          "rightMinimum": 291
+        },
+        {
+          "case": "combined",
+          "edits": {
+            "TitleLocationTop": [816, 942, 825, 908, 945],
+            "ThroughAlignDontUse": [875]
+          },
+          "frame": [768, 745],
+          "leftMinimum": 433,
+          "rightMinimum": 291
+        },
+        {
+          "case": "combined-without-checkbox-branch",
+          "edits": {
+            "TitleLocationTop": [816, 942, 825, 908, 945],
+            "ThroughAlignDontUse": [875],
+            "HiddenForDiagnosis": [985]
+          },
+          "frame": [696, 760],
+          "leftMinimum": 355,
+          "rightMinimum": 291
+        }
+      ]
+    }
+  },
+  "additionalCaptionReferences": {
+    "standard": {
+      "directory": "form-native-compact-captions-WEj1aICx",
+      "caseProperties": "cases.json",
+      "observation": "41501 keeps the shared caption track at medium and compact widths with the long bank caption on two lines. 41503 does so with explicit Left."
+    },
+    "constrainedSibling": {
+      "directory": "form-native-compact-constrained-OMmM0nT9",
+      "caseProperties": "cases.json",
+      "observations": [
+        "41601 and 41603 drop the shared track when the right group gets too narrow. The bank caption takes three lines.",
+        "41604 and 41606 place automatic captions above controls at compact width. 41605 and 41607 preserve explicitly left captions and require more width."
+      ]
+    }
+  },
+  "installedGroupWidthBatch": {
+    "report": "form-batch-690KOC/batch.json",
+    "inputWitness": "form-batch-690KOC/inputs.json",
+    "vsixSha256": "ea81e4b73b903f95e614a98be9a1aff22f37793b1731226c4104e898ddd964b6",
+    "passedRuns": 10,
+    "caseIds": 400
+  },
+  "conditionalRecovery": {
+    "explorerCommit": "bab5e7fb7ef81e218036a6f519e3d45267e08f8d",
+    "before": {
+      "receipt": {
+        "report": "form-installed-compact-layout-rIoeGtQK/matrix-ru/geometry.json",
+        "receiptSha256": "bbbace12072d08d4c4900596bead6b8b50f66bf962c9c0381785c6511e3d6ee6"
+      },
+      "poses": [
+        {
+          "requested": [604, 75],
+          "frame": [589, 107],
+          "verticalScroll": true,
+          "horizontal": false
+        },
+        {
+          "requested": [1146, 75],
+          "frame": [1131, 107],
+          "verticalScroll": true,
+          "horizontal": false
+        },
+        {
+          "requested": [1166, 75],
+          "frame": [1166, 75],
+          "verticalScroll": false,
+          "horizontal": true
+        },
+        {
+          "requested": [1146, 75],
+          "frame": [1131, 107],
+          "verticalScroll": true,
+          "horizontal": false
+        }
+      ]
+    },
+    "after": {
+      "ru": {
+        "receipt": {
+          "report": "form-installed-compact-layout-966kGg9V/matrix-ru/geometry.json",
+          "receiptSha256": "317561a3afee405bb559f3d507b8165d4a1d0fb4fc28e88c5b471927bbcbc197"
+        },
+        "poses": [
+          {
+            "requested": [604, 75],
+            "frame": [589, 107],
+            "verticalScroll": true,
+            "horizontal": false
+          },
+          {
+            "requested": [1146, 75],
+            "frame": [1146, 75],
+            "verticalScroll": false,
+            "horizontal": true
+          },
+          {
+            "requested": [1166, 75],
+            "frame": [1166, 75],
+            "verticalScroll": false,
+            "horizontal": true
+          },
+          {
+            "requested": [1146, 75],
+            "frame": [1146, 75],
+            "verticalScroll": false,
+            "horizontal": true
+          }
+        ]
+      },
+      "en": {
+        "receipt": {
+          "report": "form-installed-compact-layout-966kGg9V/matrix-en/geometry.json",
+          "receiptSha256": "2205dccd8fea9b7fc69e6866085d671994b33b73ee2903a473c51ef489937675"
+        },
+        "poses": [
+          {
+            "requested": [604, 75],
+            "frame": [589, 107],
+            "verticalScroll": true,
+            "horizontal": false
+          },
+          {
+            "requested": [1146, 75],
+            "frame": [1146, 75],
+            "verticalScroll": false,
+            "horizontal": true
+          },
+          {
+            "requested": [1166, 75],
+            "frame": [1166, 75],
+            "verticalScroll": false,
+            "horizontal": true
+          },
+          {
+            "requested": [1146, 75],
+            "frame": [1146, 75],
+            "verticalScroll": false,
+            "horizontal": true
+          }
+        ]
+      }
+    },
+    "installedBatch": {
+      "report": "form-batch-9QZlfk/batch.json",
+      "inputWitness": "form-batch-9QZlfk/inputs.json",
+      "vsixSha256": "b9a3831d854e0cd294d3e78d40c2e7f163560685a6bb92e795d50f6d1884914c",
+      "passedRuns": 10,
+      "caseIds": 402
+    }
+  }
+}

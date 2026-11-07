@@ -9,7 +9,24 @@
   "sourceFiles": {
     "Leading": "8c06d99c0b3742140f421a4b152fa6555d1a7c0ab6452a224eb07d9b880f9ddb",
     "Deep": "a16126a4b2d01c5f2a116875ef41561200e3db7adec71f8f6da55b980c17a5a5",
-    "Multiple": "2c63e488e1edcd50cd55a1a9a91c9d8c16d57d3ac08ff18150d5291236eaa660"
+    "Multiple": "2c63e488e1edcd50cd55a1a9a91c9d8c16d57d3ac08ff18150d5291236eaa660",
+    "Payment": "0acf01708a602d469967f27725cb5eb9b89e7136477ed8c56ae06e801c6e2618",
+    "PaymentMixed": "e67486e4654df2e3a8979ae4d90d745191cd21cbf9e87c598d9b671e75469ae1",
+    "StretchRadio": "9b32ba48522a661f9bec7e5ece08ae34591ec58d48317e6efc7e0b7f69f2ab68",
+    "StretchDirect": "e726bde53ab590dc66c4862265f7731c219116ff82fe108134a27ac9e80a94c9",
+    "StretchInput": "884254c1353595f333ebafc3dae8dac768351eadf20fe454494acf570aca81e5",
+    "StretchCheck": "0efeb1a45b35359c30e6cf0c6326689b7c37d510d378a6d6b9c8165b075429c9",
+    "StretchTrailing": "8669eb45b29b267105be71e434bf6f3874621de9c12e304f87b1fb2b98730034",
+    "ValueRadio": "dc26620dd274577f1b61e2ab445d081bd476b52485a4f7dedc9cb568e7ca07cb",
+    "ValueInput": "4f142ff3e2d4857cdce617fee713687ce84ce25b0665478482205bc7a45db6d4",
+    "ValueLong": "b5d4e2957b47898958ac72d46d6bf90401844f8c0e957140f0a6dd7f16e861cb",
+    "ValueOuter": "0e1b818981dfd3f7ae28925619502a41f3706e45594dc384344f356c6521c71f",
+    "ValueSibling": "1a365c67ebb745ed8306b9eb7304da285438e802f2fb8fccb080eac6ddbb3861",
+    "ScopeInputs": "94546e4c5c609dccb4604cf86aea2e4aed23c96bf68ec5073f26a2758a9545eb",
+    "ScopeButton": "5c4e622a204623ec097482eceb3ca96a5a38edfe03ddace5ddd8e2be0643454b",
+    "ScopeParent": "67daf25ac658ab6fdc39c0c306e65fcd30675a2e112d5484b80ca882d608b4a8",
+    "ScopeParentButton": "0b5b3d39f689966569c26f67e6ae6deb1cc278bbbe5ccb2c4774f1252621b76f",
+    "ScopePage": "6639f32bf4feeb769e4ed128d766e56f41779ae938fa9bc101b795e75ac0bb5a"
   },
   "cases": [
     {
@@ -458,6 +475,3870 @@
         ]
       },
       "fixture": "Multiple"
+    },
+    {
+      "fixture": "Payment",
+      "case": "Full",
+      "form": "ProbeWidthPayment41703",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1280, 1024],
+      "leftWidth": 35,
+      "throughAlign": "Use",
+      "screenshotSha256": "2662ea7898a6ebe34453d6ee476471315d3249ef6a9c1d7ae23f99834ed92f68",
+      "frame": [979, 107],
+      "viewport": [980, 107],
+      "positionTolerancePx": 2,
+      "aligned": true,
+      "bankLines": ["Bank transaction number:"],
+      "controls": {
+        "A": [13, 39, 361, 23],
+        "Num": [538, 39, 111, 23],
+        "Date": [682, 39, 101, 23],
+        "Bank": [538, 71, 421, 23]
+      }
+    },
+    {
+      "fixture": "Payment",
+      "case": "TwoLinesWithNumberShrink",
+      "form": "ProbeWidthPayment41706",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1024, 768],
+      "leftWidth": 42,
+      "throughAlign": "Use",
+      "screenshotSha256": "62d361bf1a5e4a662a027c48a5edd35ec35b79f869fe52220550817e8d4a16b3",
+      "frame": [801, 114],
+      "viewport": [802, 114],
+      "positionTolerancePx": 1,
+      "aligned": true,
+      "bankLines": ["Bank transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 431, 23],
+        "Num": [557, 39, 90, 23],
+        "Date": [680, 39, 101, 23],
+        "Bank": [557, 71, 224, 23]
+      }
+    },
+    {
+      "fixture": "Payment",
+      "case": "TwoLines",
+      "form": "ProbeWidthPayment41708",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1280, 1024],
+      "leftWidth": 46,
+      "throughAlign": "Use",
+      "screenshotSha256": "82acf086eeb43cc84f6218a31636ef5aa4e670f4731df784aa4ee70c882a6274",
+      "frame": [993, 114],
+      "viewport": [994, 114],
+      "positionTolerancePx": 1,
+      "aligned": true,
+      "bankLines": ["Bank transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 471, 23],
+        "Num": [597, 39, 111, 23],
+        "Date": [741, 39, 101, 23],
+        "Bank": [597, 71, 376, 23]
+      }
+    },
+    {
+      "fixture": "Payment",
+      "case": "ThreeLines",
+      "form": "ProbeWidthPayment41708",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1024, 768],
+      "leftWidth": 46,
+      "throughAlign": "Use",
+      "screenshotSha256": "116b6f0e77ef5d3a6bd5444669ad5dfd2e23659a86b86849aada54558867f96a",
+      "frame": [788, 129],
+      "viewport": [789, 130],
+      "positionTolerancePx": 1,
+      "aligned": true,
+      "bankLines": ["Bank", "transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 471, 23],
+        "Num": [563, 39, 71, 23],
+        "Date": [667, 39, 101, 23],
+        "Bank": [563, 71, 205, 23]
+      }
+    },
+    {
+      "fixture": "Payment",
+      "case": "IndependentNumber",
+      "form": "ProbeWidthPayment41709",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1024, 768],
+      "leftWidth": 49,
+      "throughAlign": "Use",
+      "screenshotSha256": "381c19e4ba8a81bbac0b7cb87f6c548e17d1dd0e34fe364e0dae9c9219e65732",
+      "frame": [778, 129],
+      "viewport": [779, 130],
+      "positionTolerancePx": 1,
+      "aligned": false,
+      "bankLines": ["Bank", "transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 501, 23],
+        "Num": [553, 39, 71, 23],
+        "Date": [657, 39, 101, 23],
+        "Bank": [593, 71, 165, 23]
+      }
+    },
+    {
+      "fixture": "Payment",
+      "case": "AuthoredDontUse",
+      "form": "ProbeWidthPayment41714",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1024, 768],
+      "leftWidth": 44,
+      "throughAlign": "DontUse",
+      "screenshotSha256": "54f50efba59c02f9a4e00ca4f4b2dd634b72d6b4bce40752825a2b2bcfe73ee2",
+      "frame": [801, 114],
+      "viewport": [802, 114],
+      "positionTolerancePx": 2,
+      "aligned": false,
+      "bankLines": ["Bank transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 451, 23],
+        "Num": [503, 39, 111, 23],
+        "Date": [647, 39, 101, 23],
+        "Bank": [577, 71, 204, 23]
+      }
+    },
+    {
+      "fixture": "PaymentMixed",
+      "case": "MixedFull",
+      "form": "ProbeWidthPayment41804",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1280, 1024],
+      "leftWidth": 35,
+      "throughAlign": "Use",
+      "screenshotSha256": "8d45d350042ca71de86bdcdd70b11862aa7a55020794aaead49b5a541d80689d",
+      "frame": [993, 139],
+      "viewport": [994, 139],
+      "positionTolerancePx": 2,
+      "aligned": true,
+      "bankLines": ["Bank transaction number:"],
+      "controls": {
+        "A": [13, 39, 361, 23],
+        "Num": [559, 39, 111, 23],
+        "Date": [703, 39, 101, 23],
+        "Bank": [559, 71, 414, 23]
+      }
+    },
+    {
+      "fixture": "PaymentMixed",
+      "case": "MixedTwoLinesKeepsNumber",
+      "form": "ProbeWidthPayment41804",
+      "nativeLocale": "ru",
+      "emulatedScreen": [1024, 768],
+      "leftWidth": 35,
+      "throughAlign": "Use",
+      "screenshotSha256": "9f2b0719fc174ce2439efc8d717b5d16d0a02b53b4e9be555f1b1a9651e46d50",
+      "frame": [801, 153],
+      "viewport": [802, 153],
+      "positionTolerancePx": 2,
+      "aligned": true,
+      "bankLines": ["Bank transaction", "number:"],
+      "controls": {
+        "A": [13, 39, 361, 23],
+        "Num": [487, 39, 111, 23],
+        "Date": [631, 39, 101, 23],
+        "Bank": [487, 71, 294, 23]
+      }
+    }
+  ],
+  "boundaryScope": "Caption sharing across authored HorizontalStretch=false groups. Complete frame geometry is recorded but not accepted by these scope assertions.",
+  "boundaryCompatibility": "Version8_3_24",
+  "boundaryLocale": "ru",
+  "boundaryCases": [
+    {
+      "fixture": "StretchDirect",
+      "case": "Direct",
+      "form": "ProbeWidthChoiceAlign43401",
+      "row": false,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        409,
+        133
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Last": [
+          177,
+          97,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            72,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            72,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43401.png",
+        "sha256": "59700dca8af0b5e93997229b4a64a912425b3b174c79bdfe7574c894d219b95b"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43401/Ext/Form.xml",
+        "sha256": "e726bde53ab590dc66c4862265f7731c219116ff82fe108134a27ac9e80a94c9"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "Auto",
+      "form": "ProbeWidthChoiceAlign43402",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43402.png",
+        "sha256": "35bf3a9754de56d02d7e38acb67e30cf1eecaacefd8fc67590dddc2c2d0e4e8a"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43402/Ext/Form.xml",
+        "sha256": "9b32ba48522a661f9bec7e5ece08ae34591ec58d48317e6efc7e0b7f69f2ab68"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "Use",
+      "form": "ProbeWidthChoiceAlign43403",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": "Use",
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43403.png",
+        "sha256": "8b6875445e499efcccb38bd3b7e78ca6e580846325a0035e5549de1b5b9b4691"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43403/Ext/Form.xml",
+        "sha256": "23756cc7d47b7d38d487928969bc833cf6a21ad4cbd675c77bdc8d078a221495"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "DontUse",
+      "form": "ProbeWidthChoiceAlign43404",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": "DontUse",
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43404.png",
+        "sha256": "b23850a5171625259480953769257ae9ce27976e2826b71551850cf9edf70537"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43404/Ext/Form.xml",
+        "sha256": "a2e62b6350e69241c6a5b13758e32614fe596427038709a1c202bdf05ce1fd0d"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchCheck",
+      "case": "Check",
+      "form": "ProbeWidthChoiceAlign43405",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          233,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43405.png",
+        "sha256": "8367746676bdc0bfa93a83746a696248e8337743850dbe0136e4e32267144e65"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43405/Ext/Form.xml",
+        "sha256": "0efeb1a45b35359c30e6cf0c6326689b7c37d510d378a6d6b9c8165b075429c9"
+      }
+    },
+    {
+      "fixture": "StretchInput",
+      "case": "Input",
+      "form": "ProbeWidthChoiceAlign43406",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        419,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          307,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ],
+        "OptionInput": [
+          177,
+          71,
+          91,
+          23
+        ]
+      },
+      "nativeMarks": [],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43406.png",
+        "sha256": "d99c8c8bdab52afad0f6c9d009e88df70feec77765a63c411325e072192347c9"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43406/Ext/Form.xml",
+        "sha256": "884254c1353595f333ebafc3dae8dac768351eadf20fe454494acf570aca81e5"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "UnitedTrue",
+      "form": "ProbeWidthChoiceAlign43407",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": "true",
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43407.png",
+        "sha256": "2880766508e2656e16d6c0f4b486c4415fa0184233078ab17b436888707baf2f"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43407/Ext/Form.xml",
+        "sha256": "86a7823673819f88d971e579bfe6e7753886e0569a61b027e824146fd43bbfae"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "UnitedFalse",
+      "form": "ProbeWidthChoiceAlign43408",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": "false",
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        539,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43408.png",
+        "sha256": "2560750dd6bfef09d6f3f49d50392ed46e10fbbec6f92bc196d1449a17d33faf"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43408/Ext/Form.xml",
+        "sha256": "d37e8309f099fce926c54b0a411f5ff7564f004f9e23ebed7852f650987531f6"
+      }
+    },
+    {
+      "fixture": "StretchTrailing",
+      "case": "Trailing",
+      "form": "ProbeWidthChoiceAlign43409",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Tail",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        470,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          177,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            326,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            384,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43409.png",
+        "sha256": "bcd46e1197d3c2695c78eeed20f9c48293d1f7861c0db3cd72586250deb0de09"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43409/Ext/Form.xml",
+        "sha256": "8669eb45b29b267105be71e434bf6f3874621de9c12e304f87b1fb2b98730034"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "Default",
+      "form": "ProbeWidthChoiceAlign43410",
+      "row": true,
+      "grouping": "Absent",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43410.png",
+        "sha256": "d91ae1cdfb6ac2e12afedf8f825a227583f0222f5406e00989930f91422deb7f"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43410/Ext/Form.xml",
+        "sha256": "72df7922461d5c58a935f51c4253c82d01922221445a7d0d52de60397a32c020"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "Conditional",
+      "form": "ProbeWidthChoiceAlign43411",
+      "row": true,
+      "grouping": "HorizontalIfPossible",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43411.png",
+        "sha256": "b839cfbfe0898c9cf8aabfedaed69da43556cb1c59de0fd7abd7514709248e0e"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43411/Ext/Form.xml",
+        "sha256": "a8efa2f3a4f3aefaf14370b43cdeffc002de1bdfa19f474e5de90165cd3c65a2"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "DefaultFixed",
+      "form": "ProbeWidthChoiceAlign43412",
+      "row": true,
+      "grouping": "Absent",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43412.png",
+        "sha256": "89cde9fe5ab67d47121adbd13887d5082f13a85b31cf306e6f795733c45528dc"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43412/Ext/Form.xml",
+        "sha256": "f124d8e47b2cd39542c72a5c722e5670efe577a6b6b59a880c9fa6c9874be0b3"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "HorizontalFixed",
+      "form": "ProbeWidthChoiceAlign43413",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43413.png",
+        "sha256": "f2e1094b6811d553177d00f1d7f33a9430d98f7e5104f74fcde49a90553d70b1"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43413/Ext/Form.xml",
+        "sha256": "32ec3702320c9301fa424e68a311489d3cbcfeb4d4568ee1cb0bc2d2b5795ac1"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "ConditionalFixed",
+      "form": "ProbeWidthChoiceAlign43414",
+      "row": true,
+      "grouping": "HorizontalIfPossible",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43414.png",
+        "sha256": "6b3b27813b7d350e00be6659d78fb7ea32c3570762d996f2e99cd965cf692a10"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43414/Ext/Form.xml",
+        "sha256": "1c752545d4852b466236ef504da74852063f09d70a6faed402c1bdfbc00809c5"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "DefaultUseFixed",
+      "form": "ProbeWidthChoiceAlign43415",
+      "row": true,
+      "grouping": "Absent",
+      "horizontalStretch": "false",
+      "throughAlign": "Use",
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43415.png",
+        "sha256": "4b9d72cdd8d5aee7d6fa1dbf7198aedab89f5bec94c3673e5483589ea8bc624b"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43415/Ext/Form.xml",
+        "sha256": "5e7828bf83bf401bbbc6e917b6f3a6cc52037b24d37b8c0f9640fae3e3446048"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "DefaultDontUseFixed",
+      "form": "ProbeWidthChoiceAlign43416",
+      "row": true,
+      "grouping": "Absent",
+      "horizontalStretch": "false",
+      "throughAlign": "DontUse",
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/native-ru/ProbeWidthChoiceAlign43416.png",
+        "sha256": "286c744d814ecef3e7f4aaa4fa56dcc71e6814cf8ef35c90b2457226d961caa7"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-Ncl8bCWy/src/CommonForms/ProbeWidthChoiceAlign43416/Ext/Form.xml",
+        "sha256": "6c3b05f4edb9900fac93d5c3fea6df9ac0b3163569239cdc5c4ed30a9c47c1d5"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "TitleAuto",
+      "form": "ProbeWidthChoiceAlign43417",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": null,
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43417.png",
+        "sha256": "96df513ce1671b528bec8c3d7a39bb4ac4d5ae790c73195c91b142fe5566d492"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43417/Ext/Form.xml",
+        "sha256": "94cfc7aca05cc21d9f2c5164c622a930523d0c8291dcd537cb03bb94eba19cf3"
+      }
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "TitleAutoFixed",
+      "form": "ProbeWidthChoiceAlign43418",
+      "row": true,
+      "grouping": "Absent",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": null,
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          223,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43418.png",
+        "sha256": "bee922ec96a93559f8cd3e4008d4b7117f9f21cfafe6687d81e104674cecd2f2"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43418/Ext/Form.xml",
+        "sha256": "efb71fdc516181d6bd2af3cbc6f0313d94cdf5a44fa7332d15b2c720950d7214"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          75,
+          15,
+          15
+        ],
+        [
+          119,
+          75,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "TitleAutoUse",
+      "form": "ProbeWidthChoiceAlign43419",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": "Use",
+      "united": null,
+      "titleLocation": null,
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        452,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43419.png",
+        "sha256": "62b63c7528880381db12348e8fcd784a115346eed811e93dc614178ec01522cf"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43419/Ext/Form.xml",
+        "sha256": "27f72ba5cf50be6942298d482b57f7ca433307b0a18dd601fd3c793ce104390e"
+      }
+    },
+    {
+      "fixture": "StretchDirect",
+      "case": "DirectTitleAuto",
+      "form": "ProbeWidthChoiceAlign43420",
+      "row": false,
+      "grouping": "Horizontal",
+      "horizontalStretch": null,
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": null,
+      "scopeField": "Option",
+      "alignedWithParent": true,
+      "nativeFrame": [
+        409,
+        133
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Last": [
+          177,
+          97,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            72,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            72,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43420.png",
+        "sha256": "d49871b336c01c1c4e500afce58d3a60f274bf28c4f7dae970041153d2a53ccf"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43420/Ext/Form.xml",
+        "sha256": "065c40048e7a559e2e34a34cc2fddf952ef6c9badd766867ef489385a822dc8a"
+      }
+    },
+    {
+      "fixture": "StretchInput",
+      "case": "FixedInput",
+      "form": "ProbeWidthChoiceAlign43421",
+      "row": true,
+      "grouping": "Horizontal",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        139
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          190,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ],
+        "OptionInput": [
+          60,
+          71,
+          91,
+          23
+        ]
+      },
+      "nativeMarks": [],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43421.png",
+        "sha256": "7e64d8c9e3b966d219781a8d5c73fc89e26892f09cf00517ecb0c43ee5c85ae6"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43421/Ext/Form.xml",
+        "sha256": "fff4546bc3ea10ff810edd24798b7dc5c0ca7aa4fcb650e3076d9072d6988b8d"
+      },
+      "ownControlX": 60,
+      "ownControl": [
+        60,
+        71,
+        91,
+        23
+      ],
+      "ownMarks": []
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "FixedVertical",
+      "form": "ProbeWidthChoiceAlign43422",
+      "row": true,
+      "grouping": "Vertical",
+      "horizontalStretch": "false",
+      "throughAlign": null,
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        165
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          60,
+          97,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          129,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            72,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            72,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43422.png",
+        "sha256": "d178156f8cb68ababed4d3b5158b3ab4b2bae3606b90a8303113314ec3c15372"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43422/Ext/Form.xml",
+        "sha256": "1fc8ba1761d8fcbdea94622c85a921431f239d6aa904a1bc63a68630bbbd46a4"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          72,
+          15,
+          15
+        ],
+        [
+          119,
+          72,
+          15,
+          15
+        ]
+      ]
+    },
+    {
+      "fixture": "StretchRadio",
+      "case": "FixedVerticalUse",
+      "form": "ProbeWidthChoiceAlign43423",
+      "row": true,
+      "grouping": "Vertical",
+      "horizontalStretch": "false",
+      "throughAlign": "Use",
+      "united": null,
+      "titleLocation": "Left",
+      "scopeField": "Option",
+      "alignedWithParent": false,
+      "nativeFrame": [
+        409,
+        165
+      ],
+      "nativeControls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          60,
+          97,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          129,
+          211,
+          23
+        ]
+      },
+      "nativeMarks": [
+        {
+          "selected": true,
+          "box": [
+            61,
+            72,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            119,
+            72,
+            15,
+            15
+          ]
+        }
+      ],
+      "nativeCapture": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/native-ru/ProbeWidthChoiceAlign43423.png",
+        "sha256": "8fbf807ea2bbf81ae99caf358768fe4fe5b99cdde45d7439735671fa347bac6b"
+      },
+      "nativeSource": {
+        "pathInPlayground": "form-native-choice-through-ZBMarTG4/src/CommonForms/ProbeWidthChoiceAlign43423/Ext/Form.xml",
+        "sha256": "cfb31ed43ce31864b93a150abf3de6c3866db7de89af04e52ec7c86bc282c627"
+      },
+      "ownControlX": 60,
+      "ownMarks": [
+        [
+          61,
+          72,
+          15,
+          15
+        ],
+        [
+          119,
+          72,
+          15,
+          15
+        ]
+      ]
+    }
+  ],
+  "valueCompatibility": "Version8_3_24",
+  "valueLocale": "ru",
+  "valueCases": [
+    {
+      "united": true,
+      "form": "ProbeWidthValue43501",
+      "case": "RadioTrue",
+      "fixture": "ValueRadio",
+      "sourceSha256": "bbc48f728ad4cbe794dbcbcf0b4ab1646f97e8a9494b9dfeac5c9b1bb43efc97",
+      "screenshotSha256": "6b3a5d219ebcfdbb2e8112fa2c3d4f73c866d68c4f78629c93e137ea8756c558",
+      "frame": [
+        452,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "form": "ProbeWidthValue43502",
+      "case": "RadioFalse",
+      "fixture": "ValueRadio",
+      "sourceSha256": "dc26620dd274577f1b61e2ab445d081bd476b52485a4f7dedc9cb568e7ca07cb",
+      "screenshotSha256": "98b5f7628f79a4295636b0580c433f171cae5e686129b55b455ffe64718489d8",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": true,
+      "input": 8,
+      "form": "ProbeWidthValue43503",
+      "case": "InputTrue",
+      "fixture": "ValueInput",
+      "sourceSha256": "f09ca659ca7f12083322e9f92cb3a37a2c11ad33b10d9be4f6749a8ba65d5b42",
+      "screenshotSha256": "eef227864be9e3976dbd49e2050db6ca40b36211958022a8463012401c48a0b2",
+      "frame": [
+        419,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          307,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ],
+        "Option": [
+          177,
+          71,
+          91,
+          23
+        ]
+      },
+      "marks": []
+    },
+    {
+      "united": false,
+      "input": 8,
+      "form": "ProbeWidthValue43504",
+      "case": "InputFalse",
+      "fixture": "ValueInput",
+      "sourceSha256": "4f142ff3e2d4857cdce617fee713687ce84ce25b0665478482205bc7a45db6d4",
+      "screenshotSha256": "69d0cf70f35a1799bed0d1c1292e6794ec7821632cc84cd7b24c1396e153cf69",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ],
+        "Option": [
+          177,
+          71,
+          91,
+          23
+        ]
+      },
+      "marks": []
+    },
+    {
+      "united": false,
+      "input": 30,
+      "form": "ProbeWidthValue43505",
+      "case": "WideInputFalse",
+      "fixture": "ValueInput",
+      "sourceSha256": "6253d09a3d1cf2302cb62748dca7483e1eb29ba5b370233d4dc27025835236b5",
+      "screenshotSha256": "fcf3b3f52cb4163422b8d0856a5efe12c687dd5b263bda653323949fcb4d6ddb",
+      "frame": [
+        639,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          527,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ],
+        "Option": [
+          177,
+          71,
+          311,
+          23
+        ]
+      },
+      "marks": []
+    },
+    {
+      "united": true,
+      "long": true,
+      "form": "ProbeWidthValue43506",
+      "case": "LongRadioTrue",
+      "fixture": "ValueLong",
+      "sourceSha256": "cef3cdb2ad75c54838a12a82250f9c4d92c6b278640c6da362e892fadea40bf8",
+      "screenshotSha256": "ad537d0b1bcb95fc459bc3572de0a3a8b002495c527e54073a69fa7188ba486f",
+      "frame": [
+        635,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          523,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            419,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "long": true,
+      "form": "ProbeWidthValue43507",
+      "case": "LongRadioFalse",
+      "fixture": "ValueLong",
+      "sourceSha256": "b5d4e2957b47898958ac72d46d6bf90401844f8c0e957140f0a6dd7f16e861cb",
+      "screenshotSha256": "8231c60bf7f6d3366fcc7f4c32c53bfd16604a7f8a8aee5cb474dec01b503576",
+      "frame": [
+        635,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          523,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            419,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "fixed": true,
+      "form": "ProbeWidthValue43508",
+      "case": "FixedFalse",
+      "fixture": "ValueRadio",
+      "sourceSha256": "136c24027aa4d5c2766d2a402bcb80e74fd180202a66da04610eb427a735fbba",
+      "screenshotSha256": "d3b1315b55219b3a385485f9a2d9a42c80ba9ba521fc7a91459520c0443dd6e4",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "through": "DontUse",
+      "form": "ProbeWidthValue43509",
+      "case": "ExcludedFalse",
+      "fixture": "ValueRadio",
+      "sourceSha256": "2a2b983b157d9d5c7ec32812d43b1a06fefe58982d8f96eb666a8048cda81c20",
+      "screenshotSha256": "c385a5a8b559187748616694eb806aba4813d12b86eba1054182970631382255",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": true,
+      "parent": true,
+      "form": "ProbeWidthValue43510",
+      "case": "ParentTrueChildTrue",
+      "fixture": "ValueRadio",
+      "sourceSha256": "cff1c95d72163a599599fc070c0a44d53633c491b7439a42bfd1c5fed8f20c40",
+      "screenshotSha256": "8d13db324463f8cf2f66fc8362a2864b42c9bd619087f114cb2f8141a5e63a08",
+      "frame": [
+        452,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "parent": true,
+      "form": "ProbeWidthValue43511",
+      "case": "ParentTrueChildFalse",
+      "fixture": "ValueRadio",
+      "sourceSha256": "4305bb71fecb260debb719cb6eb0d98faaeb32b5c10d1b939b84001e2ddabc55",
+      "screenshotSha256": "8b05d8025a91a851f78da43d94d974e9314cb5cfdc4c379d8e55ad55915519ff",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": true,
+      "parent": false,
+      "form": "ProbeWidthValue43512",
+      "case": "ParentFalseChildTrue",
+      "fixture": "ValueRadio",
+      "sourceSha256": "92803bc9ab4ed039787c2270176cb30e23c73f3fcff5d412cfcb71fa7bed027f",
+      "screenshotSha256": "5db66f9d2657c9357f86e5bc236d39615c7c7e0eb19273e58d47ed23f493263d",
+      "frame": [
+        452,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          340,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "parent": false,
+      "form": "ProbeWidthValue43513",
+      "case": "ParentFalseChildFalse",
+      "fixture": "ValueRadio",
+      "sourceSha256": "1b61fc34e536a1be37a0c4df147447104ecbe9b9e3602cfd82294b287aec56d8",
+      "screenshotSha256": "e07fd1c4835ab5890544a0ada1daf2fd430225304e40154f5e480e49bc711534",
+      "frame": [
+        539,
+        139
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          71,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          103,
+          211,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            75,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            75,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "parent": true,
+      "outer": true,
+      "form": "ProbeWidthValue43514",
+      "case": "OuterWideParentTrue",
+      "fixture": "ValueOuter",
+      "sourceSha256": "e73446c6be3ec6e9f24b603d1c727982f2dae0f75b76de1609a348cbdd89ccea",
+      "screenshotSha256": "829a9830b1a75141eb0068c0c60ee1ce4dd367b461f3064e2363f65dc3b82926",
+      "frame": [
+        609,
+        171
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          71,
+          211,
+          23
+        ],
+        "Tail": [
+          427,
+          103,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          135,
+          211,
+          23
+        ],
+        "OuterWide": [
+          177,
+          39,
+          411,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            107,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            107,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "parent": false,
+      "outer": true,
+      "form": "ProbeWidthValue43515",
+      "case": "OuterWideParentFalse",
+      "fixture": "ValueOuter",
+      "sourceSha256": "0e1b818981dfd3f7ae28925619502a41f3706e45594dc384344f356c6521c71f",
+      "screenshotSha256": "7ba52da7bf729a982131ee768d9acd7ad0c78bb9821896733a099c2a6f8c39d4",
+      "frame": [
+        739,
+        171
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          71,
+          211,
+          23
+        ],
+        "Tail": [
+          627,
+          103,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          135,
+          211,
+          23
+        ],
+        "OuterWide": [
+          177,
+          39,
+          411,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            107,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            107,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "sibling": true,
+      "form": "ProbeWidthValue43516",
+      "case": "SiblingTrue",
+      "fixture": "ValueSibling",
+      "sourceSha256": "d292814f84e139d51fb3b405547a262e07e350106ee7990754d0cf6b0964c883",
+      "screenshotSha256": "240b4c33f9d935e7953d8726d24ea7cd054be957685f68671876bb79b90031be",
+      "frame": [
+        739,
+        171
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          627,
+          103,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          135,
+          211,
+          23
+        ],
+        "SiblingWide": [
+          177,
+          71,
+          411,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            107,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            107,
+            15,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "united": false,
+      "sibling": false,
+      "form": "ProbeWidthValue43517",
+      "case": "SiblingFalse",
+      "fixture": "ValueSibling",
+      "sourceSha256": "1a365c67ebb745ed8306b9eb7304da285438e802f2fb8fccb080eac6ddbb3861",
+      "screenshotSha256": "d6081b8833eff49f124e6273af6729c365f4293a14fed9ab2e7aea78306ec762",
+      "frame": [
+        739,
+        171
+      ],
+      "controls": {
+        "Wide": [
+          177,
+          39,
+          211,
+          23
+        ],
+        "Tail": [
+          627,
+          103,
+          91,
+          23
+        ],
+        "Last": [
+          177,
+          135,
+          211,
+          23
+        ],
+        "SiblingWide": [
+          177,
+          71,
+          411,
+          23
+        ]
+      },
+      "marks": [
+        {
+          "selected": true,
+          "box": [
+            178,
+            107,
+            15,
+            15
+          ]
+        },
+        {
+          "selected": false,
+          "box": [
+            236,
+            107,
+            15,
+            15
+          ]
+        }
+      ]
+    }
+  ],
+  "representationCompatibility": "Version8_3_24",
+  "representationLocale": "ru",
+  "representationCases": [
+    {
+      "case": "TwoInputsAuto",
+      "form": "ProbeWidthWizard43602",
+      "fixture": "ScopeInputs",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "94546e4c5c609dccb4604cf86aea2e4aed23c96bf68ec5073f26a2758a9545eb",
+      "screenshotSha256": "8124862525f3b82d50963bb5084a7d4823c7a3b1cc5f077f251fc407fee1f89f"
+    },
+    {
+      "case": "TwoInputsLeft",
+      "form": "ProbeWidthWizard43603",
+      "fixture": "ScopeInputs",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": "Left",
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "36b273f75e883f4f957e56b2dddfae60e3c14aa03e3c2d12b4a62f737322318c",
+      "screenshotSha256": "9488a355412596526f648182b55f95f16b653f614f136466a54f62524fc63147"
+    },
+    {
+      "case": "ButtonAuto",
+      "form": "ProbeWidthWizard43604",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "5c4e622a204623ec097482eceb3ca96a5a38edfe03ddace5ddd8e2be0643454b",
+      "screenshotSha256": "5a9caf866a0ce6fd8f10e3e3ed666ad6cf758ef670329fe332bf322be5093b61"
+    },
+    {
+      "case": "ButtonLeft",
+      "form": "ProbeWidthWizard43605",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": "Left",
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "1a6376616b15b2c3d6a0b51ca945ebe47698fc83912292e8f9613b4dea2c1a1b",
+      "screenshotSha256": "d1ca9d6f38a43343e4dab12274a75ad257c5098cca26f48274e4aeac3db1129f"
+    },
+    {
+      "case": "ButtonUseAuto",
+      "form": "ProbeWidthWizard43606",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": "Use",
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "511d6b7b74facef1a1b7d775b28e7a78ec12dbd2a61562da0d7a55103147afb4",
+      "screenshotSha256": "37c322fab177f78c35584eacea857ceaf57aafb515be7888d4dc31802d08089a"
+    },
+    {
+      "case": "ButtonUseLeft",
+      "form": "ProbeWidthWizard43607",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": "Use",
+      "titleLocation": "Left",
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "cd29938a0aac8de56c95bf5351b86472422539505e21b9da7efc58e6cb3d5bce",
+      "screenshotSha256": "03daf517a8d2af153d8238a81f98a435e382459a5c49c81e5f48dabe7fcc663d"
+    },
+    {
+      "case": "ButtonDontUse",
+      "form": "ProbeWidthWizard43608",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": "DontUse",
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "30992796f642de1240a88ac8e4d078e29300ef38b79d9e379236c50abeb09fe1",
+      "screenshotSha256": "b279d238dceaffd2e5425ddd014b8ae3e2fbc8caf01717cf9ec339e63be98077"
+    },
+    {
+      "case": "ButtonHorizontal",
+      "form": "ProbeWidthWizard43609",
+      "fixture": "ScopeButton",
+      "grouping": "Horizontal",
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "4fd23786f316ed45dba595dc1e61d36e76c555767c397f8ff3a6e619f374b350",
+      "screenshotSha256": "67463a059c94a25e218f54dfbf46172bdaa6413d36c7300ece94eccfcbcb4461"
+    },
+    {
+      "case": "ButtonBothLeft",
+      "form": "ProbeWidthWizard43612",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": "Left",
+      "topTitle": "Left",
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "a20035d55c84a16df37f11dc244564c478d07005b43c931ad8374587196479a0",
+      "screenshotSha256": "3a43bc331563fb390c29ff546daa07ea3f55e753091662cf4389355217aa8016"
+    },
+    {
+      "case": "ParentInputs",
+      "form": "ProbeWidthWizard43613",
+      "fixture": "ScopeParent",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "67daf25ac658ab6fdc39c0c306e65fcd30675a2e112d5484b80ca882d608b4a8",
+      "screenshotSha256": "9e39f2ce4ac40b4d758de6d6cae83d3b1395c1adbb7068bbe6b84e209e00c6ff"
+    },
+    {
+      "case": "ParentButton",
+      "form": "ProbeWidthWizard43614",
+      "fixture": "ScopeParentButton",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "0b5b3d39f689966569c26f67e6ae6deb1cc278bbbe5ccb2c4774f1252621b76f",
+      "screenshotSha256": "1a873e25170d1b73562db73fad63adb3f5bf496f7816003b02cceb7246553418"
+    },
+    {
+      "case": "PageDefault",
+      "form": "ProbeWidthWizard43615",
+      "fixture": "ScopePage",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "6639f32bf4feeb769e4ed128d766e56f41779ae938fa9bc101b795e75ac0bb5a",
+      "screenshotSha256": "598c7d8c31422cd988f498b4c427580c147b44df5beb7a7434108dc0451734f9"
+    },
+    {
+      "case": "PageVertical",
+      "form": "ProbeWidthWizard43616",
+      "fixture": "ScopePage",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": "Vertical",
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "3725a17df5a38429e75f2e5dbab33b35ebdd80f478b44c2baf24a14a27461d90",
+      "screenshotSha256": "45a4054abcacf36ed03944afffb0754fffc462e8b092e5e1bcce79d162da4517"
+    },
+    {
+      "case": "PageUse",
+      "form": "ProbeWidthWizard43617",
+      "fixture": "ScopePage",
+      "grouping": null,
+      "representation": null,
+      "throughAlign": "Use",
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            545,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            545,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "35d5e0ecbbd159d69a21ba92382f996c241446a356d5c58b56f96323b44e4b06",
+      "screenshotSha256": "d1cdf8f7b3be392e6102a337f25a9657f37a8676beb13808461e7c40f3296f2b"
+    },
+    {
+      "case": "RepNoneInputs",
+      "form": "ProbeWidthWizard43618",
+      "fixture": "ScopeInputs",
+      "grouping": null,
+      "representation": "None",
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            545,
+            71,
+            91,
+            23
+          ],
+          "logical": [
+            545,
+            71,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "b8bbbb940b0700257262abab9e0504a984f98c0096a5cfd50c86eb32d8c13376",
+      "screenshotSha256": "456294a72841d3cb7ae45fc595bf9808d28576f984ab0bf890c7f32088ef5fe9"
+    },
+    {
+      "case": "RepNormalInputs",
+      "form": "ProbeWidthWizard43620",
+      "fixture": "ScopeInputs",
+      "grouping": null,
+      "representation": "NormalSeparation",
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            79,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            79,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            375,
+            79,
+            91,
+            23
+          ],
+          "logical": [
+            375,
+            79,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        115
+      ],
+      "sourceSha256": "af697cc2f72d566a78c9571bd3616e9cc6e48dd8afaac0a4c7517bdbcc266caf",
+      "screenshotSha256": "3e4c45782d31046203328f6062763a1d4fa157582b92b195fee921a7786640db"
+    },
+    {
+      "case": "RepNoneButton",
+      "form": "ProbeWidthWizard43621",
+      "fixture": "ScopeButton",
+      "grouping": null,
+      "representation": "None",
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        }
+      },
+      "frame": [
+        680,
+        107
+      ],
+      "sourceSha256": "2c1c3d719a7252512906d285cd161ac98830c55e6e58113b76670bd3f80d9fe2",
+      "screenshotSha256": "6e93e8e845a55bded55e62de49103c109b8d79f07d16c3dfacf1e2a63145cf30"
+    },
+    {
+      "case": "VerticalAuto",
+      "form": "ProbeWidthWizard43622",
+      "fixture": "ScopeInputs",
+      "grouping": "Vertical",
+      "representation": null,
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": false,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            93,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            93,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            93,
+            103,
+            91,
+            23
+          ],
+          "logical": [
+            93,
+            103,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        139
+      ],
+      "sourceSha256": "19261d17cbe61c864f4ea41e5f78fe9bc302ea0114a543ebfc1cb00142bb8d73",
+      "screenshotSha256": "e61c686f02304303bcbaf117306b7bedbf35bc461aff4a7816c7b0b845815c78"
+    },
+    {
+      "case": "VerticalNone",
+      "form": "ProbeWidthWizard43623",
+      "fixture": "ScopeInputs",
+      "grouping": "Vertical",
+      "representation": "None",
+      "throughAlign": null,
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            263,
+            103,
+            91,
+            23
+          ],
+          "logical": [
+            263,
+            103,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        139
+      ],
+      "sourceSha256": "20317bea1de6b964e0dbbfc405604c52b369717749aec2ac005a65e264925be9",
+      "screenshotSha256": "3b4e3a47d753394b7d8846111ac49beb117410da3a23a4d2776fc840bb690b33"
+    },
+    {
+      "case": "VerticalUse",
+      "form": "ProbeWidthWizard43624",
+      "fixture": "ScopeInputs",
+      "grouping": "Vertical",
+      "representation": null,
+      "throughAlign": "Use",
+      "titleLocation": null,
+      "topTitle": null,
+      "pageGrouping": null,
+      "alignedWithParent": true,
+      "controls": {
+        "Wide": {
+          "physical": [
+            263,
+            39,
+            382,
+            23
+          ],
+          "logical": [
+            263,
+            39,
+            381,
+            23
+          ],
+          "valueWidth": 361,
+          "choice": true
+        },
+        "Option": {
+          "physical": [
+            263,
+            71,
+            232,
+            23
+          ],
+          "logical": [
+            263,
+            71,
+            231,
+            23
+          ],
+          "valueWidth": 211,
+          "choice": true
+        },
+        "Tail": {
+          "physical": [
+            263,
+            103,
+            91,
+            23
+          ],
+          "logical": [
+            263,
+            103,
+            91,
+            23
+          ],
+          "valueWidth": 91,
+          "choice": false
+        }
+      },
+      "frame": [
+        680,
+        139
+      ],
+      "sourceSha256": "7c84a3a9a623e712167a9d462058349c5def929cea54d5a24e63c4ad29f9b36b",
+      "screenshotSha256": "08a90a1c12cb66f2a5787e616811e3a6f82c1e990582d95caabe77c82c3c7dd2"
     }
   ]
 }

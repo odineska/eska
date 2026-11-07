@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "platform": {
+    "build": "8.3.27.2342",
+    "interface": "Taxi",
+    "os": "Linux ALT 10 ARM64",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "bslExecuted": false,
+  "nativeCommandPresentation": {
+    "autoWithPicture": {
+      "CommandBarButton": "Picture",
+      "CommandBarHyperlink": "Picture",
+      "UsualButton": "Text",
+      "Hyperlink": "PictureAndText"
+    },
+    "overrideOrder": [
+      "element Picture over linked command Picture",
+      "explicit element Representation over metadata command Representation",
+      "metadata command Representation over type default"
+    ],
+    "pictureWithoutImage": "Text",
+    "captures": [
+      {
+        "pathInPlayground": "form-native-command-pictures-AGWcwjGA/initial-native/ProbeWidthIconGenerated.png",
+        "sha256": "da57327b071ce40909884bc269b0eb122ea66d07a8939ba7e5c2a3d1fdd21ca3"
+      },
+      {
+        "pathInPlayground": "form-native-command-pictures-AGWcwjGA/precedence-native/ProbeWidthIconOrder.png",
+        "sha256": "6c2c3cc0d9f538debd4cb89fc22ecf95df780739e7991c7aed31f4b86bfbf7f0"
+      },
+      {
+        "pathInPlayground": "form-native-command-pictures-AGWcwjGA/ProbeWidthIconModes.png",
+        "sha256": "e6c9400aa048b3cf7a410e2a65b7cdbd2d3941f2b8ba45724e60317a5e899a5f"
+      }
+    ]
+  },
+  "applicationOrder": {
+    "source": "Documents/Заказ/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "702018866e3d3c6d375f7f61a180e6a04ab4b156280e95e9644577c173d4e512",
+    "nativeLocale": "ru",
+    "nativeScreenshot": {
+      "pathInPlayground": "form-native-order-icons-xl3trra6/order-native-crop.png",
+      "sha256": "8b925e35c40dbe14e7c84bd701179d403aabeac7f7d25326e6273b52c201335f"
+    },
+    "installedScreenshot": {
+      "pathInPlayground": "form-batch-XM2yq4/application-ru/application-form-4-ru.png",
+      "sha256": "5ea987c753b34393cf6dccd29eb534d2d328aff1f44c1accbf2279ed9b4009d0"
+    },
+    "comparisonMasks": [],
+    "pixelTolerance": 0,
+    "allThreePicturesDisplayed": true,
+    "buttons": [
+      {
+        "element": "ФормаПозвонить",
+        "representation": "Picture",
+        "reference": "CommonPicture.Позвонить",
+        "variant": "m.svg",
+        "isTemplate": false,
+        "nativeRegion": [
+          588,
+          369,
+          16,
+          16
+        ],
+        "installedRegion": [
+          897,
+          382,
+          16,
+          16
+        ],
+        "nativeRgbSha256": "3d291733b0631605b7e5a76288bd5cc20fd8fce44f3fa811bf20de326aad5295",
+        "installedRgbSha256": "0eaf56f9e3ccf0a4698e9b39de1dead4692f34171b5bd84f8a35f824aa5f9660",
+        "comparedPixels": 256,
+        "differingPixels": 45,
+        "maxChannelDifference": 17
+      },
+      {
+        "element": "ФормаОтправитьСМС",
+        "representation": "Picture",
+        "reference": "CommonPicture.ОтправитьСМС",
+        "variant": "l.png",
+        "isTemplate": true,
+        "nativeRegion": [
+          627,
+          369,
+          16,
+          16
+        ],
+        "installedRegion": [
+          935,
+          382,
+          16,
+          16
+        ],
+        "nativeRgbSha256": "7edaa80591825f339a3fed87983869be7dd7aafa6c6ca449d31e8b6c85742bfd",
+        "installedRgbSha256": "54668949be09827ab90ba9f4ba1003bfe0e86f6349461180437e38e8c6ad6780",
+        "comparedPixels": 256,
+        "differingPixels": 14,
+        "maxChannelDifference": 1
+      },
+      {
+        "element": "ФормаКопироваВБуферОбмена",
+        "representation": "Picture",
+        "reference": "CommonPicture.Копировать",
+        "variant": "l.svg",
+        "isTemplate": true,
+        "nativeRegion": [
+          666,
+          369,
+          16,
+          16
+        ],
+        "installedRegion": [
+          973,
+          382,
+          16,
+          16
+        ],
+        "nativeRgbSha256": "e14a64d8ea04dddc9808a9ed5999015268dbc1fea2a9ee935dcc53639709bb3a",
+        "installedRgbSha256": "10d606bf57bb2c02e642539979f84477aa83f382d2555c440a3b4b507b336803",
+        "comparedPixels": 256,
+        "differingPixels": 22,
+        "maxChannelDifference": 5
+      }
+    ]
+  },
+  "standardPictures": {
+    "fixture": "tests/fixtures/forms/native-standard-pictures/metrics.json",
+    "newReferences": [
+      "Refresh",
+      "Post",
+      "EventLog",
+      "CheckAll",
+      "UncheckAll",
+      "DeleteListItemDirectly"
+    ],
+    "newReferencePixels": 4608,
+    "totalReferencePixels": 9216,
+    "independentRedMatteDifferentPixels": 0,
+    "comparedPixelsInInstalledVsix": {
+      "en": 18432,
+      "ru": 18432
+    },
+    "differentPixels": 0,
+    "comparisonMasks": [],
+    "pixelTolerance": 0
+  },
+  "installedVerification": {
+    "receipt": {
+      "pathInPlayground": "form-batch-XM2yq4/batch.json",
+      "sha256": "523c3d456d36134db93803f68207bfee629bff9d37ce8bd9b5bb27cc0d9cbccb"
+    },
+    "backendSha256": "36c19c67de35950bc76cd6e93f6e14ef672bc3727e91a08bb2e690d7ed5b8689",
+    "vsixSha256": "5b8fd6162d22554867edbc5bbc9972ff8fe0e923599337a5413750217d35426e",
+    "passedRuns": 18,
+    "passedCaseIds": 281,
+    "commandPictureScenarios": {
+      "en": {
+        "commandPictures": true,
+        "generatedPictureAsset": true,
+        "externalPayload": true,
+        "dirtyPictureDescriptor": true,
+        "detachedRepresentationUpdates": true,
+        "templatePictureTint": true,
+        "sourceWritesDuringViewing": false
+      },
+      "ru": {
+        "commandPictures": true,
+        "generatedPictureAsset": true,
+        "externalPayload": true,
+        "dirtyPictureDescriptor": true,
+        "detachedRepresentationUpdates": true,
+        "templatePictureTint": true,
+        "sourceWritesDuringViewing": false
+      }
+    }
+  },
+  "remaining": [
+    "Common SVG antialiasing and template-alpha rounding differ in the measured Order regions.",
+    "Complete toolbar composition and geometry remain outside this comparison.",
+    "Native variants at other display densities and Windows are pending.",
+    "The specific Document movements command awaits a reproducing form."
+  ]
+}

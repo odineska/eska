@@ -55,6 +55,15 @@ fn element(
         if let Some(total) = presentation.tabular_total {
             value["tabularTotal"] = json!(total);
         }
+        if let Some(mode) = presentation.button_representation {
+            value["buttonRepresentation"] = json!(mode);
+        }
+        if !presentation.object_command_menu.is_empty() {
+            value["objectCommandMenu"] = json!(presentation.object_command_menu);
+        }
+        if !presentation.table_command_menu.is_empty() {
+            value["tableCommandMenu"] = json!(presentation.table_command_menu);
+        }
         value
     });
     json!({"identity":identity(&value.identity),"origin":origin(&value.origin),"kind":value.kind.map(eska_project_core::project::forms::ElementKind::xml_name),"name":value.name,"xmlName":value.xml_name,
@@ -75,8 +84,17 @@ pub(super) fn model(labels: &Labels, preview: &FormPreview) -> Result<(Value, us
         .presentation
         .elements
         .iter()
-        .filter_map(|element| match &element.picture {
-            Some(eska_project_core::project::forms::FormPicture::Common { source }) => {
+        .flat_map(|element| {
+            element.picture.iter().chain(
+                element
+                    .auto_command_items
+                    .iter()
+                    .flat_map(|command| std::iter::once(command).chain(&command.items))
+                    .filter_map(|command| command.picture.as_ref()),
+            )
+        })
+        .filter_map(|picture| match picture {
+            eska_project_core::project::forms::FormPicture::Common { source } => {
                 Some(source.as_str())
             }
             _ => None,
@@ -107,6 +125,7 @@ pub(super) fn model(labels: &Labels, preview: &FormPreview) -> Result<(Value, us
     let mut model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
         "commands":preview.form.commands.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
         "diagnostics":{"composition":preview.form.diagnostics,"appearance":preview.presentation.diagnostics}});
+    model["activityColor"] = json!(preview.presentation.activity_color);
     if let Some(variant) = preview.presentation.script_variant {
         model["scriptVariant"] = json!(variant);
     }

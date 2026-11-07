@@ -1,0 +1,649 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "compatibility": "Version8_3_24",
+  "locale": "ru",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "sourceFiles": {
+    "Control": "b12a8485b047ed9fbfe63ec28bdbc7b5cde2b1ae5fb8a45b2fb9524b6360d80e",
+    "Empty": "0b84a689512c4588f636a050eda2f4221093b5bf16308abac6867ac0112061d3",
+    "HiddenField": "473861e83496c9f4e0b692200164715c1c0aaaf53c8311d9b053a26f74d183c8",
+    "HiddenTable": "53e6d4f0eba7464e3dce263c7c2581dea720a7b3b70faa9fafae087a6021911d",
+    "NestedHidden": "a27e7c262f95e5440f532bed1cc8a8169aca6ad44ff738820da984a5c89f0a10",
+    "VisibleField": "26065880f3740c098cc198bc0b14db3564587c283cbc917cefd8fcb9022327ad",
+    "VisibleTable": "aa8dac78d66858517bebc63318cfe63b45ed7e44f4571a43078c3d4a6f91e93b",
+    "HiddenColumns": "bc76821956997f4a467e106db53d9e2903976b03881dd2a5c065a1800852702c",
+    "TitleHidden": "6a46915c583d6ec2be8644233d16929956c8b8cd04ea3fb283302f0db4bd735d",
+    "NormalHidden": "d97563c146910cfda95d25b2e42d3c7d1ba937935c4e8672680596cc64952457",
+    "StrongHidden": "b4a3526240042d4e51e131099707a57a778f048616c1672d64d4f89b735d4f4c",
+    "PaintedHidden": "7d207272fb96cccd6a7fb05ffd5c023f343a2cae98210ca23beef1f836ff2146",
+    "FixedWidthHidden": "0550e2898bd18e273a4a92fff84dc94e139280c5259dd62f055f4e96615498ee",
+    "FixedHeightHidden": "281a98f261dd94e843876f91248fae441f62aa4057bb2f2b73e46a2336b5064a",
+    "StretchHidden": "b94d6f14857321a30d470f8d08c762db2ae7116e103d4cf7c0930dd76ffb0541",
+    "StretchXHidden": "2bab5dd4b0d0dc0a34574e402e1243a186026c5984c2b5aa863c858cd414b09d",
+    "CollapsibleHidden": "eec7ecb7fcef0900d4f1f2d6384dad4e588daa1f70e7c8c48ea1bf12cb974ddb",
+    "EmptyTitle": "7eda4d01ead1c52d803c7c0bb1c1188ef69c76a754039a023b16921656ea6ed4",
+    "EmptyPainted": "ed90bbaa4ef91ba3bf42bc704d0938eb62954d5a7d29b38a874295f6cb8860ad",
+    "EmptyFixedHeight": "0daba526566dc0a19c87dbef174ab199fe2bda95b828b2f8d87a232c8540d892",
+    "EmptyCollapsible": "8ab1f4319f65ebbe52d0b1f5a28635620ca56efa304c715869ce1f2b6421947e"
+  },
+  "scope": "Visibility and footprint of ordinary/collapsible groups with no rendered descendants. Color fills identify geometry; no new color matrix is accepted. VisibleTable retains a known 2 px pre-existing height difference.",
+  "rows": [
+    {
+      "content": "none",
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "b12a8485b047ed9fbfe63ec28bdbc7b5cde2b1ae5fb8a45b2fb9524b6360d80e",
+      "screenshotSha256": "0355b6e6d3524c9d6d03137261f5601de961d45385142eff097051c9cfffa6b2",
+      "name": "Control",
+      "nativeForm": "ProbeWidthEmpty43701",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "empty",
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "0b84a689512c4588f636a050eda2f4221093b5bf16308abac6867ac0112061d3",
+      "screenshotSha256": "490fdfc73d027e1c39c32f4a19570701eae61d0d38dfa98e4dea9a873df6369d",
+      "name": "Empty",
+      "nativeForm": "ProbeWidthEmpty43702",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "hidden",
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "473861e83496c9f4e0b692200164715c1c0aaaf53c8311d9b053a26f74d183c8",
+      "screenshotSha256": "bd7d7176e53692fe7c8c07c32d6bfb28d2afcfe04c2ae73ebeb0931f11dcde1b",
+      "name": "HiddenField",
+      "nativeForm": "ProbeWidthEmpty43703",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "table-empty",
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "53e6d4f0eba7464e3dce263c7c2581dea720a7b3b70faa9fafae087a6021911d",
+      "screenshotSha256": "92305445a8dcaacd611418153ff3a9b64cc074251666bd0a27a9f1d27966d42b",
+      "name": "HiddenTable",
+      "nativeForm": "ProbeWidthEmpty43704",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "nested",
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "a27e7c262f95e5440f532bed1cc8a8169aca6ad44ff738820da984a5c89f0a10",
+      "screenshotSha256": "75096dbd97c86b9ac633912c2fc2c7f880e2d6b8f5766f34b389af59d047ee13",
+      "name": "NestedHidden",
+      "nativeForm": "ProbeWidthEmpty43705",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "visible",
+      "frame": [
+        165,
+        139
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          103,
+          131,
+          23
+        ],
+        "Inner": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "26065880f3740c098cc198bc0b14db3564587c283cbc917cefd8fcb9022327ad",
+      "screenshotSha256": "534f0c59ee6a44dce52e969b16638d485772b7d906527e4bb014208f829c53d8",
+      "name": "VisibleField",
+      "nativeForm": "ProbeWidthEmpty43706",
+      "middleVisible": true,
+      "tolerancePx": 0
+    },
+    {
+      "content": "table-visible",
+      "frame": [
+        434,
+        203
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          167,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "aa8dac78d66858517bebc63318cfe63b45ed7e44f4571a43078c3d4a6f91e93b",
+      "screenshotSha256": "79692a76528e94d942f3cb62a4addbcc9a0d4269a0064d98d5b3d30e915afb19",
+      "name": "VisibleTable",
+      "nativeForm": "ProbeWidthEmpty43707",
+      "middleVisible": true,
+      "tolerancePx": 2
+    },
+    {
+      "content": "table-hidden",
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "bc76821956997f4a467e106db53d9e2903976b03881dd2a5c065a1800852702c",
+      "screenshotSha256": "40cd798625471fa54c829c38438b7f30ebbe124686347a842fe3380734fedc23",
+      "name": "HiddenColumns",
+      "nativeForm": "ProbeWidthEmpty43708",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "hidden",
+      "properties": {
+        "ShowTitle": true
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "6a46915c583d6ec2be8644233d16929956c8b8cd04ea3fb283302f0db4bd735d",
+      "screenshotSha256": "96195cea7547bd0d9e976a13d69fccef7b1e9acc34a0916df145b1b70f76d537",
+      "name": "TitleHidden",
+      "nativeForm": "ProbeWidthEmpty43709",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "hidden",
+      "properties": {
+        "Representation": "NormalSeparation"
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "d97563c146910cfda95d25b2e42d3c7d1ba937935c4e8672680596cc64952457",
+      "screenshotSha256": "ac797fe3b5cfacbf0ece28c386fc8f8e6d6610878dc2638f9fcc4f9f71f4028a",
+      "name": "NormalHidden",
+      "nativeForm": "ProbeWidthEmpty43710",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "hidden",
+      "properties": {
+        "Representation": "StrongSeparation"
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "b4a3526240042d4e51e131099707a57a778f048616c1672d64d4f89b735d4f4c",
+      "screenshotSha256": "9406499c611e3e234e7026abed2dfe2b33f7dfbd2c6519e859c807ef6ee754d4",
+      "name": "StrongHidden",
+      "nativeForm": "ProbeWidthEmpty43711",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "hidden",
+      "properties": {
+        "BackColor": "#E6DEFF"
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "7d207272fb96cccd6a7fb05ffd5c023f343a2cae98210ca23beef1f836ff2146",
+      "screenshotSha256": "6db76bbd49a4229a9c83f890b3620fddcb78bb029ebc3b7f09b09e9700b03b29",
+      "name": "PaintedHidden",
+      "nativeForm": "ProbeWidthEmpty43712",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "hidden",
+      "properties": {
+        "Width": 12
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "0550e2898bd18e273a4a92fff84dc94e139280c5259dd62f055f4e96615498ee",
+      "screenshotSha256": "9af128cde13c43cc289071996ce8ccceabb78d1b4ca9904b7ad5d2d1630da03a",
+      "name": "FixedWidthHidden",
+      "nativeForm": "ProbeWidthEmpty43713",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "hidden",
+      "properties": {
+        "Height": 2
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "281a98f261dd94e843876f91248fae441f62aa4057bb2f2b73e46a2336b5064a",
+      "screenshotSha256": "ff93ea9e006435ea6728d854963fe7238df19be610ccef373474e0a4b54514f6",
+      "name": "FixedHeightHidden",
+      "nativeForm": "ProbeWidthEmpty43714",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "hidden",
+      "properties": {
+        "VerticalStretch": true
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "b94d6f14857321a30d470f8d08c762db2ae7116e103d4cf7c0930dd76ffb0541",
+      "screenshotSha256": "7d1eab6ade4184a637545480cdea0d27013bce8623b9f920284b235e4fc5bffe",
+      "name": "StretchHidden",
+      "nativeForm": "ProbeWidthEmpty43715",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "hidden",
+      "properties": {
+        "HorizontalStretch": true
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "2bab5dd4b0d0dc0a34574e402e1243a186026c5984c2b5aa863c858cd414b09d",
+      "screenshotSha256": "ad00ad3eb85dc43ef0b5fd5e07c5bd7425442f717b51d86ae287f3f750c5a812",
+      "name": "StretchXHidden",
+      "nativeForm": "ProbeWidthEmpty43716",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "hidden",
+      "properties": {
+        "Behavior": "Collapsible",
+        "ShowTitle": true
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "eec7ecb7fcef0900d4f1f2d6384dad4e588daa1f70e7c8c48ea1bf12cb974ddb",
+      "screenshotSha256": "f73b968d139bb3a2143e7a9884b9a80280203548e32ca302065e3be95c6cd5db",
+      "name": "CollapsibleHidden",
+      "nativeForm": "ProbeWidthEmpty43717",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "empty",
+      "properties": {
+        "ShowTitle": true
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "7eda4d01ead1c52d803c7c0bb1c1188ef69c76a754039a023b16921656ea6ed4",
+      "screenshotSha256": "95e24e86089b386f25160716d82e6b9de3863ef56617f30497ea900c9074ef3e",
+      "name": "EmptyTitle",
+      "nativeForm": "ProbeWidthEmpty43718",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "empty",
+      "properties": {
+        "BackColor": "#E6DEFF"
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "ed90bbaa4ef91ba3bf42bc704d0938eb62954d5a7d29b38a874295f6cb8860ad",
+      "screenshotSha256": "b6e8ace8a2394efdcf11054d88fde7260af55f95f46bac29a672d20b70ea1acc",
+      "name": "EmptyPainted",
+      "nativeForm": "ProbeWidthEmpty43719",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "empty",
+      "properties": {
+        "Height": 2
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "0daba526566dc0a19c87dbef174ab199fe2bda95b828b2f8d87a232c8540d892",
+      "screenshotSha256": "de9307979234353d154d47187c9a631db25c5e8ae94dd4a958e11cb8c6f46660",
+      "name": "EmptyFixedHeight",
+      "nativeForm": "ProbeWidthEmpty43720",
+      "middleVisible": false,
+      "tolerancePx": 0
+    },
+    {
+      "content": "empty",
+      "properties": {
+        "Behavior": "Collapsible",
+        "ShowTitle": true
+      },
+      "frame": [
+        165,
+        107
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "sourceSha256": "8ab1f4319f65ebbe52d0b1f5a28635620ca56efa304c715869ce1f2b6421947e",
+      "screenshotSha256": "3afa4188524905e3c04d7f8bb142f8f5dee75d8c0b6ccb492aa8a82316fc2e5f",
+      "name": "EmptyCollapsible",
+      "nativeForm": "ProbeWidthEmpty43721",
+      "middleVisible": false,
+      "tolerancePx": 0
+    }
+  ]
+}

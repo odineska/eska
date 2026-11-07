@@ -1,0 +1,1589 @@
+{
+  "schemaVersion": 1,
+  "platform": {
+    "build": "8.3.27.2342",
+    "os": "Linux ALT 10 ARM64",
+    "interface": "Taxi",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "scope": "Main form command-menu membership, item order and captions. Complete toolbar and popup geometry remain open.",
+  "platformGuide": "https://1c-dn.com/library/tutorials/1c_enterprise_developer_guide_8_3_27/",
+  "bslExecuted": false,
+  "native": {
+    "defaultPrintItems": [
+      "Печать расходной накладной"
+    ],
+    "defaultVisibleFalseStillShowsPrintItem": true,
+    "navigationCategoryRemovesPrintButton": true,
+    "postingDeniedUsesWrite": true,
+    "orderGenerateItems": [
+      "Продажа"
+    ],
+    "invoiceGenerateItems": [
+      "Поступление денег"
+    ],
+    "counterpartyGenerateItems": [
+      "Заказ",
+      "Оплата",
+      "Поступление денег",
+      "Поступление товара",
+      "Продажа"
+    ],
+    "captures": [
+      {
+        "pathInPlayground": "form-native-root-groups-lXcztGip/default-print-menu.png",
+        "sha256": "23a1e02410e4f6210baae63307a79fe33d8ced7bf425069eb8f03ed799f4d71a"
+      },
+      {
+        "pathInPlayground": "form-native-root-groups-lXcztGip/hidden-print-menu.png",
+        "sha256": "87f303072492ca6dc5f0e6e83fa8b5c6bdba15e88786d0c6d69b06170db90d6b"
+      },
+      {
+        "pathInPlayground": "form-native-root-groups-lXcztGip/ProbeWidthBarMovePrint.png",
+        "sha256": "f706624752b8780c51a4c83ace8bb45fca2d30605a11f5756cf6fad8f4a6c5be"
+      },
+      {
+        "pathInPlayground": "form-native-root-groups-lXcztGip/ProbeWidthBarLocalPrint.png",
+        "sha256": "97c9e89bf158cace115dae6cfc71e1de2f15549077e5277b6c99fc47bee71df5"
+      },
+      {
+        "pathInPlayground": "form-native-root-groups-lXcztGip/ProbeWidthBarOtherOwner.png",
+        "sha256": "12f6c1fe45875059f81c167206c03c1b9f013b000aed00b2967ab656dd44ecba"
+      },
+      {
+        "pathInPlayground": "form-native-based-on-en-lOubxjvD/order-create-menu-en.png",
+        "sha256": "19adc2a5f08cbe71d0a6ff9057547c7eaaa31e1ee0cf3b9fb342015564e2bd55"
+      },
+      {
+        "pathInPlayground": "form-native-based-on-en-lOubxjvD/counterparty-generate-en.png",
+        "sha256": "daeb34e605168a5aded531d9c097f07d0b80e50547239524e635b6e8b505cb1c"
+      },
+      {
+        "pathInPlayground": "form-native-command-bar-KidA8lpC/create-group-click.png",
+        "sha256": "d7c24a4e192b27cca922bc18b43b8922c928e35beea621726ea2f142ab884674"
+      }
+    ],
+    "configuratorExitAfterCapture": {
+      "ru": 134,
+      "en": 134
+    }
+  },
+  "backendProbes": [
+    {
+      "source": "CommonForms/ProbeWidthBarDefault/Ext/Form.xml",
+      "sourceSha256": "2f0ec3d24d4a1b9188b8cda6e54bf7754adf1613d9a7a46d2240a18ddf9b92b4",
+      "items": [
+        {
+          "key": "Form.StandardCommand.PostAndClose",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Write",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Post",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.CreateBasedOn",
+          "items": [
+            "Document.ПоступлениеДенег.StandardCommand.CreateBasedOn"
+          ]
+        },
+        {
+          "key": "command-group:Печать",
+          "items": [
+            "document:РасходТовара/command:ПечатьРасходнойНакладной"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "CommonForms/ProbeWidthBarHiddenPrint/Ext/Form.xml",
+      "sourceSha256": "f7458b0a7bf570a73490d8707d0a4313df506df8db7f9589069afa0e671bdce4",
+      "items": [
+        {
+          "key": "Form.StandardCommand.PostAndClose",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Write",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Post",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.CreateBasedOn",
+          "items": [
+            "Document.ПоступлениеДенег.StandardCommand.CreateBasedOn"
+          ]
+        },
+        {
+          "key": "command-group:Печать",
+          "items": [
+            "document:РасходТовара/command:ПечатьРасходнойНакладной"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "CommonForms/ProbeWidthBarMovePrint/Ext/Form.xml",
+      "sourceSha256": "08d17dd4da1d74f5e1158dab0382c1ebb7959c45365c424fb9c2991ba7c378df",
+      "items": [
+        {
+          "key": "Form.StandardCommand.PostAndClose",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Write",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Post",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.CreateBasedOn",
+          "items": [
+            "Document.ПоступлениеДенег.StandardCommand.CreateBasedOn"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "CommonForms/ProbeWidthBarLocalPrint/Ext/Form.xml",
+      "sourceSha256": "7a8b7e86c78a34cdb5307a680534dad952fa4e2bf4b37c4b035b2219f3185231",
+      "items": [
+        {
+          "key": "Form.StandardCommand.PostAndClose",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Write",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Post",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.CreateBasedOn",
+          "items": [
+            "Document.РасходТовара.StandardCommand.CreateBasedOn"
+          ]
+        },
+        {
+          "key": "command-group:Печать",
+          "items": [
+            "Form.Command.ОформитьДоставку"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "CommonForms/ProbeWidthBarNoAutofill/Ext/Form.xml",
+      "sourceSha256": "34ff6906c65788e94b110bd49fa75da336d58d410e4ac9722363f303913352f9",
+      "items": []
+    },
+    {
+      "source": "CommonForms/ProbeWidthBarOtherOwner/Ext/Form.xml",
+      "sourceSha256": "c61f178da53cbdc93ccc6423fa9d3b8f2ae51cc3ae4240e3d1ebc63b3d81fffd",
+      "items": [
+        {
+          "key": "Form.StandardCommand.WriteAndClose",
+          "items": []
+        },
+        {
+          "key": "Form.StandardCommand.Write",
+          "items": []
+        }
+      ]
+    }
+  ],
+  "installed": {
+    "batch": {
+      "pathInPlayground": "form-batch-RiC9P0/batch.json",
+      "sha256": "8c0525d7340b797fc4bb2fc579dc5df6bea97b5a0af193956b5ea212153e6c23"
+    },
+    "vsixSha256": "105d58efbbfbac10a2d0e5c9cf79a6906b84b65cd1f428bb7598094324cfc124",
+    "backendSha256": "90492b3a8ae9c3d52fd7c0aa8bc12b1ab7299fd508f24d0ae6224db4f6935788",
+    "runs": 18,
+    "verifiedCaseIds": 206,
+    "initialRendererRuFailure": "Checkbox observer sampled the previous form revision. The harness now waits for the XML version and the published revision before comparing.",
+    "rendererRechecksOnSameVsix": {
+      "en": {
+        "pathInPlayground": "form-native-based-on-en-lOubxjvD/renderer-recheck-en/receipt.json",
+        "sha256": "541286dd17c08cbef2fe36e46bc404531b02e167d2d791af7613cda0547d20b8"
+      },
+      "ru": {
+        "pathInPlayground": "form-native-based-on-en-lOubxjvD/renderer-recheck-ru/receipt.json",
+        "sha256": "cfafed84250773418ace5710a614e15847e35943090e50cce50b71247b90edcc"
+      }
+    },
+    "locales": {
+      "en": {
+        "nativeTitleLocalized": "Generate",
+        "commandMenuLiveUpdate": true,
+        "newBasedOnTargetInDetachedWindow": true,
+        "sourceWritesDuringViewing": false,
+        "applicationFormCount": 6,
+        "applicationMenuSamples": [
+          {
+            "source": "Documents/РасходТовара/Forms/ФормаДокумента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Generate",
+                "items": [
+                  "Поступление денег"
+                ]
+              },
+              {
+                "key": "command-group:Печать",
+                "label": "Печать",
+                "items": [
+                  "Печать расходной накладной",
+                  "Доставка"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 307,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          },
+          {
+            "source": "Documents/Заказ/Forms/ФормаДокумента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Generate",
+                "items": [
+                  "Продажа"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 315,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          },
+          {
+            "source": "Catalogs/Контрагенты/Forms/ФормаЭлемента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Generate",
+                "items": [
+                  "Заказ",
+                  "Оплата",
+                  "Поступление денег",
+                  "Поступление товара",
+                  "Продажа"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 437,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          }
+        ]
+      },
+      "ru": {
+        "nativeTitleLocalized": "Создать на основании",
+        "commandMenuLiveUpdate": true,
+        "newBasedOnTargetInDetachedWindow": true,
+        "sourceWritesDuringViewing": false,
+        "applicationFormCount": 6,
+        "applicationMenuSamples": [
+          {
+            "source": "Documents/РасходТовара/Forms/ФормаДокумента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Создать на основании",
+                "items": [
+                  "Поступление денег"
+                ]
+              },
+              {
+                "key": "command-group:Печать",
+                "label": "Печать",
+                "items": [
+                  "Печать расходной накладной",
+                  "Доставка"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 375,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          },
+          {
+            "source": "Documents/Заказ/Forms/ФормаДокумента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Создать на основании",
+                "items": [
+                  "Продажа"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 339,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          },
+          {
+            "source": "Catalogs/Контрагенты/Forms/ФормаЭлемента/Ext/Form.xml",
+            "menus": [
+              {
+                "key": "Form.StandardCommand.CreateBasedOn",
+                "label": "Создать на основании",
+                "items": [
+                  "Заказ",
+                  "Оплата",
+                  "Поступление денег",
+                  "Поступление товара",
+                  "Продажа"
+                ]
+              }
+            ],
+            "openThroughFirstPaintMs": 455,
+            "appearanceDiagnostics": [],
+            "allocationsChecked": [
+              [
+                480,
+                360
+              ],
+              [
+                800,
+                500
+              ],
+              [
+                1200,
+                700
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "debugTiming": {
+    "scope": "Four sequential form opens over stdio, including process startup and shutdown. Four paired runs.",
+    "results": {
+      "previous": {
+        "milliseconds": [
+          339.3,
+          334.6,
+          310.7,
+          320.0
+        ],
+        "medianMilliseconds": 327.3
+      },
+      "withBasedOn": {
+        "milliseconds": [
+          400.8,
+          420.5,
+          427.8,
+          430.0
+        ],
+        "medianMilliseconds": 424.15
+      }
+    }
+  },
+  "commonParameterCommands": {
+    "scope": "Automatically filled common commands for the main object, authored button replacement, and effective pictures.",
+    "platformCommandReference": "https://v8.1c.ru/platforma/komanda/",
+    "native": {
+      "captureInputsInPlayground": "form-native-command-order-uk9P8rsL/src",
+      "captionOrder": [
+        "Alpha synonym",
+        "Any ref",
+        "Broad type",
+        "Zulu synonym"
+      ],
+      "authoredSuppressesGenerated": "Alpha synonym",
+      "disabledAutofill": [
+        "Authored Zulu"
+      ],
+      "narrowFrameWidth": 412,
+      "narrowVisibleCommands": [
+        "Провести и закрыть",
+        "Записать",
+        "Еще",
+        "?"
+      ],
+      "captures": [
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/Default.png",
+          "sha256": "a33ee916d84a0488e71345cded3c74164f816d397897d8b4dfe1a8c17baf0b4d"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/Authored.png",
+          "sha256": "b93dac49e4c87d6c2ddc3b507f8a31dd138e90b341ab1cdeaac81cf925a750f8"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/Disabled.png",
+          "sha256": "1c11e5530f26ae08b84b45d1592be8837b89311a1d1c7eac74cd0522171cc4d7"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/Narrow.png",
+          "sha256": "7bc133e7e066225b4c95a8665bd572f9ad53d6bea2451a34c616c94e45fdc203"
+        }
+      ],
+      "loanCapture": {
+        "pathInPlayground": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-native-full-crop.png",
+        "sha256": "dd4b56fa373eb5728d3bb4f1cf66267826c2afc3cf3b57d2305f096c5abc136c"
+      },
+      "loanCommandGroupRectangles": [
+        [
+          389,
+          29,
+          30,
+          26
+        ],
+        [
+          428,
+          29,
+          151,
+          26
+        ],
+        [
+          588,
+          29,
+          30,
+          26
+        ],
+        [
+          627,
+          29,
+          212,
+          26
+        ]
+      ],
+      "loanCommandGroupOrder": [
+        "Связанные документы",
+        "Скопировать УИД",
+        "Движения документа",
+        "Зарегистрировать на обмен"
+      ],
+      "exchangePlan": [
+        {
+          "matte": [
+            255,
+            255,
+            255
+          ],
+          "region": [
+            391,
+            555,
+            16,
+            16
+          ],
+          "rgbSha256": "d12622c367d2d62c224f1b813215ff17c20f65bb65e17889599250cc12cbb594",
+          "screenshotSha256": "3b76782b1686205be62473f98ecf2ddae16033dc3df1aaef3b9159c531dfca1d",
+          "capture": {
+            "pathInPlayground": "form-native-command-order-uk9P8rsL/White.png",
+            "sha256": "3b76782b1686205be62473f98ecf2ddae16033dc3df1aaef3b9159c531dfca1d"
+          }
+        },
+        {
+          "matte": [
+            0,
+            0,
+            0
+          ],
+          "region": [
+            418,
+            582,
+            16,
+            16
+          ],
+          "rgbSha256": "1e46c749c1ff45a837f2ccaa47d91fb5ed17e74ccd386aa6d1522c25f5c0a658",
+          "screenshotSha256": "6a0a0a1c14db5d27fe7f32b3138692b73e7fb99acbdc4d53cd0efad826c5f521",
+          "capture": {
+            "pathInPlayground": "form-native-command-order-uk9P8rsL/Black.png",
+            "sha256": "6a0a0a1c14db5d27fe7f32b3138692b73e7fb99acbdc4d53cd0efad826c5f521"
+          }
+        },
+        {
+          "matte": [
+            255,
+            0,
+            0
+          ],
+          "region": [
+            445,
+            609,
+            16,
+            16
+          ],
+          "rgbSha256": "9eba85ddb1d441de8ef9bb8e841451b0fde41dfad1fec0aa2677281a2d85b1ee",
+          "screenshotSha256": "54aa23ece69d53cf0a9a83a34204ae8617f4e3ff5aedb1428401c7b9c4c4a59c",
+          "capture": {
+            "pathInPlayground": "form-native-command-order-uk9P8rsL/Red.png",
+            "sha256": "54aa23ece69d53cf0a9a83a34204ae8617f4e3ff5aedb1428401c7b9c4c4a59c"
+          }
+        }
+      ]
+    },
+    "installed": {
+      "batch": "form-batch-BUilQQ",
+      "vsixSha256": "46b3e12b8ee68bd4951a7ba41bac79d02d755efb3e36bd8f33e8e96255c8d6ff",
+      "backendSha256": "243e23f7936eb32e4fe75968c562ecb968c017cebae30ac971d0a441cf0853fb",
+      "caseCount": 104,
+      "receipts": [
+        {
+          "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/loan-en/receipt.json",
+          "sha256": "2f9d260dd6d54cde72acd36ae7782d89d91add93cef69bdafb020d058d2db2b8"
+        },
+        {
+          "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/loan-ru/receipt.json",
+          "sha256": "073455cdbbc9a9e9702dae525c43abc23a007152107bdcfbbcd14da790f51528"
+        },
+        {
+          "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/order-en/receipt.json",
+          "sha256": "4199f330db5d25973d998e2305dc49c4ac238778b61f852ac8a72524ff8d6594"
+        },
+        {
+          "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/order-ru/receipt.json",
+          "sha256": "1ba5c8679bd2dc7e8dcb318520138c2463c71359b9f754fd142aea83f00e3583"
+        }
+      ],
+      "loanScreenshot": {
+        "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/loan-ru/loan-command-bar-ru.png",
+        "sha256": "c2dfde305838add0c7991406059075d4a8d2f23d6886b1c859a1932fd68c23c5"
+      },
+      "loanDetachedScreenshot": {
+        "pathInPlayground": "form-installed-common-toolbar-ac1Rsx62/loan-ru/loan-commands-detached-ru.png",
+        "sha256": "4283d029079448380bf258631307746e7a4283f2959442a5e4f2dfa2864230b0"
+      },
+      "verified": [
+        "common command order and icon representation",
+        "dirty defined type and autofill in a detached window",
+        "authored identity and source bytes preserved"
+      ]
+    },
+    "debugFormOpen": {
+      "scope": "Five sequential form/open RPC calls after opening the workspace. Same Linux host, debug builds.",
+      "stalingrad": {
+        "formPath": "Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+        "previous": {
+          "milliseconds": [
+            281.73,
+            278.86,
+            277.73,
+            279.98,
+            277.9
+          ],
+          "medianMilliseconds": 278.86,
+          "dependencies": 16,
+          "assets": 1,
+          "modelComplete": true,
+          "automaticCommands": 3
+        },
+        "current": {
+          "milliseconds": [
+            289.88,
+            291.19,
+            294.52,
+            291.39,
+            291.03
+          ],
+          "medianMilliseconds": 291.19,
+          "dependencies": 35,
+          "assets": 2,
+          "modelComplete": true,
+          "automaticCommands": 5
+        }
+      },
+      "buhmfoAutofill": {
+        "formPath": "Documents/dzp_ЗакрытиеЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+        "previous": {
+          "milliseconds": [
+            3081.49,
+            2712.5,
+            2714.08,
+            2714.22,
+            2715.02
+          ],
+          "medianMilliseconds": 2714.22,
+          "dependencies": 17,
+          "assets": 2,
+          "modelComplete": true,
+          "automaticCommands": 3
+        },
+        "current": {
+          "milliseconds": [
+            2838.37,
+            2829.65,
+            2830.18,
+            2831.05,
+            2834.78
+          ],
+          "medianMilliseconds": 2831.05,
+          "dependencies": 120,
+          "assets": 2,
+          "modelComplete": true,
+          "automaticCommands": 3
+        },
+        "addedDependenciesByCollection": {
+          "CommonCommands": 39,
+          "DefinedTypes": 30,
+          "CommonPictures": 30,
+          "CommandGroups": 4
+        }
+      }
+    }
+  },
+  "commonCommandResourcePruning": {
+    "scope": "Same-form model hashes and five sequential form/open RPC measurements per Linux debug build.",
+    "baselineBackendSha256": "243e23f7936eb32e4fe75968c562ecb968c017cebae30ac971d0a441cf0853fb",
+    "filteredBackendSha256": "3fdcc3fd25ec061634e9ed7ecd3c40c7c7e5b282a385f0b43b08378d693266d8",
+    "stalingrad": {
+      "formPath": "Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+      "baseline": {
+        "milliseconds": [
+          293.66,
+          294.7,
+          291.06,
+          290.74,
+          287.64
+        ],
+        "medianMilliseconds": 291.06,
+        "dependencies": 35,
+        "assets": 2,
+        "modelSha256": "16123e625cce67bd7b67a7d936d5d252e558915aa42edf2e33de3c70cfe094b9"
+      },
+      "filtered": {
+        "milliseconds": [
+          289.25,
+          291.82,
+          288.17,
+          288.21,
+          287.89
+        ],
+        "medianMilliseconds": 288.21,
+        "dependencies": 22,
+        "assets": 2,
+        "modelSha256": "16123e625cce67bd7b67a7d936d5d252e558915aa42edf2e33de3c70cfe094b9"
+      }
+    },
+    "buhmfo": {
+      "formPath": "Documents/dzp_ЗакрытиеЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+      "baseline": {
+        "milliseconds": [
+          3414.15,
+          2829.53,
+          2829.99,
+          2831.74,
+          2830.12
+        ],
+        "medianMilliseconds": 2830.12,
+        "dependencies": 120,
+        "assets": 2,
+        "modelSha256": "9273d75da0cc910ff845bc46a5cd5ff21d29e41fe18f38e32b0166e12905cd33"
+      },
+      "filtered": {
+        "milliseconds": [
+          2784.01,
+          2778.96,
+          2782.1,
+          2779.47,
+          2783.64
+        ],
+        "medianMilliseconds": 2782.1,
+        "dependencies": 17,
+        "assets": 2,
+        "modelSha256": "9273d75da0cc910ff845bc46a5cd5ff21d29e41fe18f38e32b0166e12905cd33"
+      }
+    },
+    "installed": {
+      "batch": "form-batch-DGulWN",
+      "backendSha256": "3fdcc3fd25ec061634e9ed7ecd3c40c7c7e5b282a385f0b43b08378d693266d8",
+      "vsixSha256": "6c40f000e40b5b73e3392e2b43896b1b1f945224014e32f4bf8bbb8cecff4482",
+      "caseCount": 106,
+      "receipts": [
+        {
+          "pathInPlayground": "form-installed-pruned-toolbar-Lw1A3W6r/loan-en/receipt.json",
+          "sha256": "5485f843ab278e813d8cc7fbb7a29e1b0ae63e954c3b43c6e7921af4e7d9b80c"
+        },
+        {
+          "pathInPlayground": "form-installed-pruned-toolbar-Lw1A3W6r/loan-ru/receipt.json",
+          "sha256": "5229904d06b712982fba2331232e03a0e13ce5ceb3d8b0fd7e88099b0a987270"
+        },
+        {
+          "pathInPlayground": "form-installed-pruned-toolbar-Lw1A3W6r/order-en/receipt.json",
+          "sha256": "4a6dd2324f40043d36f24d80b2f6646ac275a8289b2ced4c57e87d83e058dde3"
+        },
+        {
+          "pathInPlayground": "form-installed-pruned-toolbar-Lw1A3W6r/order-ru/receipt.json",
+          "sha256": "a982f95aa6a094360cca5811d2dcc5469101511fdd9dec90d0eb5e0b21cc1174"
+        }
+      ]
+    },
+    "dynamicInputs": [
+      "a previously absent command added by an unsaved parameter edit",
+      "another absent command added by saving XML outside the editor",
+      "the dependency is retired again after restoration"
+    ]
+  },
+  "rootBarGeometry": {
+    "scope": "Nine button border boxes on the real loan form at 1156 px, 100% zoom, Russian Configurator Linux.",
+    "frameWidth": 1156,
+    "rectangles": [
+      {
+        "label": "Провести и закрыть",
+        "box": [
+          13,
+          29,
+          158,
+          26
+        ]
+      },
+      {
+        "label": "Записать",
+        "box": [
+          180,
+          29,
+          84,
+          26
+        ]
+      },
+      {
+        "label": "Провести",
+        "box": [
+          284,
+          29,
+          85,
+          26
+        ]
+      },
+      {
+        "label": "Связанные документы",
+        "box": [
+          389,
+          29,
+          30,
+          26
+        ]
+      },
+      {
+        "label": "Скопировать УИД",
+        "box": [
+          428,
+          29,
+          151,
+          26
+        ]
+      },
+      {
+        "label": "Движения документа",
+        "box": [
+          588,
+          29,
+          30,
+          26
+        ]
+      },
+      {
+        "label": "Зарегистрировать на обмен",
+        "box": [
+          627,
+          29,
+          212,
+          26
+        ]
+      },
+      {
+        "label": "Еще",
+        "box": [
+          1037,
+          29,
+          60,
+          26
+        ]
+      },
+      {
+        "label": "?",
+        "box": [
+          1106,
+          29,
+          30,
+          26
+        ]
+      }
+    ],
+    "native": {
+      "pathInPlayground": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-native-full-crop.png",
+      "sha256": "dd4b56fa373eb5728d3bb4f1cf66267826c2afc3cf3b57d2305f096c5abc136c"
+    },
+    "screenshot": {
+      "pathInPlayground": "form-installed-toolbar-geometry-aPXjwvmI/loan-ru/loan-command-bar-ru.png",
+      "sha256": "f13065eb7179ec5889eb6f205eb9778c7d7a2123a529c22a2b5095eda2b11e30"
+    },
+    "installed": {
+      "batch": "form-batch-8bOm6i",
+      "backendSha256": "3fdcc3fd25ec061634e9ed7ecd3c40c7c7e5b282a385f0b43b08378d693266d8",
+      "vsixSha256": "871363e89bdb399cf7615e18a88923783ace8863f3c88610403945c82df228d0",
+      "caseCount": 104,
+      "receipts": [
+        {
+          "pathInPlayground": "form-installed-toolbar-geometry-aPXjwvmI/loan-en/receipt.json",
+          "sha256": "390aefd2e38faee3882cbb0a6ab51d982a68181a61083f9fb005d239f87315f0"
+        },
+        {
+          "pathInPlayground": "form-installed-toolbar-geometry-aPXjwvmI/loan-ru/receipt.json",
+          "sha256": "40c0ec30f4594bdc170fa8669954972c9c41f532b8f76260b56d6de766c239ef"
+        },
+        {
+          "pathInPlayground": "form-installed-toolbar-geometry-aPXjwvmI/order-en/receipt.json",
+          "sha256": "09a2aa427435c5064eee9902fecf15af96dbc42a3b8537929730c144697afabc"
+        },
+        {
+          "pathInPlayground": "form-installed-toolbar-geometry-aPXjwvmI/order-ru/receipt.json",
+          "sha256": "cd9d41e07781a3cd04b47ecc47b58289bb61b2919cd8e1625c7e52b2261e907b"
+        }
+      ]
+    },
+    "narrowMoreObservation": {
+      "frameWidth": 412,
+      "menuWidth": 344,
+      "rowHeight": 30,
+      "alignment": "Popup starts below the trigger at its left edge.",
+      "visibleRows": [
+        "Провести и закрыть",
+        "Записать",
+        "Перечитать",
+        "Скопировать",
+        "Пометить на удаление / Снять пометку",
+        "Удалить",
+        "Провести",
+        "Отменить проведение"
+      ],
+      "visibleSubmenu": [
+        "Продажи",
+        "Документы продаж"
+      ],
+      "captures": [
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-narrow-before-crop.png",
+          "sha256": "38c84cbbd77b90b065a9462b2c6753892014dc7f3d2bcc8effc7dd0d6b074b15"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-narrow-top-crop.png",
+          "sha256": "c43aa93e2115525d70456a872b72ad8ec9ad8e25b5f3a712cad4459e83948c88"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-narrow-middle-crop.png",
+          "sha256": "5f0197d5f31fe482f6af4f4101492ceae75e3af896eeda98bac669d1c942cf94"
+        },
+        {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-narrow-tail-crop.png",
+          "sha256": "e22215f477eda84cf2da8f6523c3cb388e7f998e729d7bd41978c521532e2afa"
+        }
+      ],
+      "nativeExitAfterCapture": 134
+    }
+  },
+  "remaining": [
+    "Native popup width and anchor, toolbar geometry at narrow widths, and full More actions contents.",
+    "Compatible commands owned by other metadata objects, such as the native Send email button on the Counterparties form.",
+    "Full T164 budgets, including repeated scans of large configuration descriptors.",
+    "Full native acceptance of extension-specific BasedOn overrides, other display densities, and Windows."
+  ],
+  "rootAdditionalMenu": {
+    "scope": "Main toolbar prefix at measured widths, additional menu groups, shortcuts, icon cells and active color on Linux. This does not assert whole menu pixel equality.",
+    "configurator": "8.3.27.2342",
+    "nativeLocale": "ru",
+    "scalePercent": 100,
+    "nativeCommandAllocation": [
+      {
+        "widthUnits": 16,
+        "frameWidth": 192,
+        "inlineCount": 0,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW16-crop.png",
+          "sha256": "960600e2db09b8a05b3dd5da1bf08fd6c19b480ff8364a9ee9ef904d4fef64fe"
+        }
+      },
+      {
+        "widthUnits": 27,
+        "frameWidth": 302,
+        "inlineCount": 1,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW27-crop.png",
+          "sha256": "3f4aa0248a17a1578279dd2581a9e07d4024a0d106fbe393fad22afb28166232"
+        }
+      },
+      {
+        "widthUnits": 38,
+        "frameWidth": 412,
+        "inlineCount": 2,
+        "native": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-narrow-before-crop.png",
+          "sha256": "38c84cbbd77b90b065a9462b2c6753892014dc7f3d2bcc8effc7dd0d6b074b15"
+        }
+      },
+      {
+        "widthUnits": 42,
+        "frameWidth": 452,
+        "inlineCount": 2,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW42-crop.png",
+          "sha256": "96bf929e4d0da970578f38195e6fd1aca3628475b8b693ef0be78d173abdd969"
+        }
+      },
+      {
+        "widthUnits": 50,
+        "frameWidth": 532,
+        "inlineCount": 3,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW50-crop.png",
+          "sha256": "2e343cce74212bc30fc5c1656057ed2b5301a282c8ec5f464bc50faa8bd2a56e"
+        }
+      },
+      {
+        "widthUnits": 62,
+        "frameWidth": 652,
+        "inlineCount": 4,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW62-crop.png",
+          "sha256": "5c96e8b62ebc4e5cf0721868afae1aa5024a7d88ddbf52b86abd78c0433b735c"
+        }
+      },
+      {
+        "widthUnits": 85,
+        "frameWidth": 882,
+        "inlineCount": 6,
+        "native": {
+          "pathInPlayground": "form-native-root-more-hwhMzVPq/isolated-ru/ProbeWidthMoreW85-crop.png",
+          "sha256": "ea6d2d8ba56f98589a2149d52ea624d18c5ddd88f245aef819c8b29843cf0a97"
+        }
+      },
+      {
+        "widthUnits": 94,
+        "frameWidth": 972,
+        "inlineCount": 8,
+        "native": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/more-wide-split-crop.png",
+          "sha256": "8f02d0aae62c7e918219a30df4a790d904f71962b2d05e0abf8d5020415662fd"
+        }
+      }
+    ],
+    "nativeMenus": {
+      "narrow": {
+        "pathInPlayground": "form-native-command-order-uk9P8rsL/more-narrow-full-crop.png",
+        "sha256": "8e5bd2088291ae42879dff8be6a587d6aa3615f78d62093a1608802a1f555df5"
+      },
+      "wide": {
+        "pathInPlayground": "form-native-command-order-uk9P8rsL/more-wide-full-crop.png",
+        "sha256": "1f3624449d05cf6ef11b22caecbe3968055b3049c6e04d4d7337f2d7261bc3f5"
+      },
+      "documentWithoutPosting": {
+        "pathInPlayground": "form-native-command-order-uk9P8rsL/more-other-owner-full-crop.png",
+        "sha256": "485b2edcf10aa18988d44364c699456c4a95afd07a4d1b1c0c28eb3a0470e931"
+      },
+      "documentJournalSubmenu": {
+        "pathInPlayground": "form-native-command-order-uk9P8rsL/more-authored-list-crop.png",
+        "sha256": "b7e3fe5b5ca3a96db97f5eb6d59fe56e69a43ca63b7d2a9d5ba4ab26f1e9f2d5"
+      },
+      "explicitPlacement": {
+        "pathInPlayground": "form-native-root-more-hwhMzVPq/AuthoredWide-menu-crop.png",
+        "sha256": "9f420b5b3d9a80afd9a7c8ac16bc69525557c45956f4f722ef3818c021739b48"
+      },
+      "manualPlacementToolbar": {
+        "pathInPlayground": "form-native-root-more-hwhMzVPq/AuthoredManual-before-crop.png",
+        "sha256": "dfa49b2a3bea4dbaef64519ad273cb68d5d6ece777d24ac61debb70fc8a349aa"
+      },
+      "plainFormToolbar": {
+        "pathInPlayground": "form-native-root-more-hwhMzVPq/FormOnly-before-crop.png",
+        "sha256": "71be3a68653da613fec427b21277d49583cbe34a275dc412a7297eae303a263d"
+      },
+      "realLoan": {
+        "pathInPlayground": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-more-full-crop.png",
+        "sha256": "f0b178c3acdfa94907c7f689fa029465953096a82d41b81ac20b4aba917ea912"
+      }
+    },
+    "defaultRowHeight": 30,
+    "defaultMenuWidth": 344,
+    "defaultActivityColor": "#facc1f",
+    "realLoanActivityColor": "#004152",
+    "standardPictureCells": {
+      "PostAndClose": {
+        "white": "4aa100412baed98331a3cf87fa964b454b0bcf06547b8b219fe5902b9ac827d4",
+        "active": "b1acb1c90ca800d3b7e8800a3fbf130bce60afc449d56c7b980c46bc6cfcc7fe",
+        "rowTop": 9,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/00.png",
+          "sha256": "1d4888ab32c024d009712743d0562743cc16c80c772f0017fea5e0d8fe374b48"
+        }
+      },
+      "Write": {
+        "white": "cfb6a69bb8869f1e64b8c751fe034a22abdff0ebfc6d9004cbe14a966afb7de2",
+        "active": null,
+        "rowTop": 39,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        }
+      },
+      "MarkObjectForDeletion": {
+        "white": "16b89a4e98e0bd8faae1c6193cc7853ac671d5daf5ada2b8e8a40b59902b225e",
+        "active": "8dd000bd08d1a3f3622a23363f8794d7d98972b5224a237618a1cd7d5672b443",
+        "rowTop": 129,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/06.png",
+          "sha256": "497224e4a9fa5a23f66ebb91d886bb13734dca1f0fb3dd4cbee3b2ab0cc15bae"
+        }
+      },
+      "UndoPosting": {
+        "white": "faa8cd80aafd9445508e38e8e34d3d17f8c21aaca48484ad7a8339a9ea609f54",
+        "active": "f785fcd9833678bb78ca81045cabc2011eaa71d0813c733485babeb2f454fab3",
+        "rowTop": 223,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/10.png",
+          "sha256": "7afef1487cf0119008a05ca09ccb5dcf8d5a6eb8aa8d568deb4efe22a4c0afee"
+        }
+      },
+      "ShowInList": {
+        "white": "6fce299a2ecf68d6b0eadd8b5bb8bc2fc2d9d5ae5698269bc05c8bd673eec147",
+        "active": "cfbdb208cbd94a4f929a8aac9eb75ee82491fb47976a23afd229e3bf86f190e2",
+        "rowTop": 257,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/11.png",
+          "sha256": "587ebb0b42cc0a4814f5833790e60f9449fb4443dbd10f22a03d2877f369cc4e"
+        }
+      },
+      "ChangeHistory": {
+        "white": "70db1c221cbf9f11053692cf276951615bf7480e55f781ff23c4a4848c161030",
+        "active": "cc6a696388f15b065d53523f2ac6105735abdc5a141084ba85aa23f0d6bb8382",
+        "rowTop": 287,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/14.png",
+          "sha256": "0712985addeb45e40f503156328dbb9e0661a6fccf114823eacd5cf1563fb2e2"
+        }
+      },
+      "CustomizeForm": {
+        "white": "343625ace762a677d58ed21abdb608b0432cb417abf92f8ab18dbe5f564f3847",
+        "active": "7841aa2ea3c481cc8b822c2a0cf9a3e49552acd7993190da9c72771809d474e0",
+        "rowTop": 587,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        },
+        "activeFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/15.png",
+          "sha256": "57cfc6e094a536b2139584a5550df6214f8d756790f40faf4e4e318bc4a8e561"
+        }
+      },
+      "Help": {
+        "white": "4ce995460c62e4d9b64b4b3b5aaf3053cc8c2cd8f5219f585bff168ee857e076",
+        "active": null,
+        "rowTop": 617,
+        "whiteFrame": {
+          "pathInPlayground": "form-native-command-order-uk9P8rsL/menu-keys/04.png",
+          "sha256": "31ed5f466549adf9256268f745eeffc4931ca02491bf2a5744a6f653f75bcd84"
+        }
+      }
+    },
+    "installed": [
+      {
+        "mode": "loan",
+        "locale": "ru",
+        "receipt": {
+          "pathInPlayground": "form-installed-root-more-VPbza3af/loan-ru/receipt.json",
+          "sha256": "d24d42a6962425674b2bdc0d97b0ab54d95214ad4343cf247fdf6f83348ec5fa",
+          "locale": "ru",
+          "passed": true
+        },
+        "captures": [
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/loan-ru/loan-more-detached-ru.png",
+            "sha256": "b669edcdcfda40931013838608a41a21264a7e57ed4f8c0b72732b5f161162e8"
+          },
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/loan-ru/loan-more-ru.png",
+            "sha256": "b5d74c344f6d6daa2ea1564390ddcb244de6dc6ef0f73a4ea022e90b3f768537"
+          }
+        ]
+      },
+      {
+        "mode": "loan",
+        "locale": "en",
+        "receipt": {
+          "pathInPlayground": "form-installed-root-more-VPbza3af/loan-en/receipt.json",
+          "sha256": "eec224fdbf17ac62f025db32de64916803264d3dbaa46443c0501264c9d426a1",
+          "locale": "en",
+          "passed": true
+        },
+        "captures": [
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/loan-en/loan-more-detached-en.png",
+            "sha256": "9ec9688790cf15ae59a0df33d8d1679cdaa682392bef98f2245bb3eeab9fbe99"
+          },
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/loan-en/loan-more-en.png",
+            "sha256": "a8905f9741afedf2053524e6491e3a9e36a0465a5fcdb51bf93940397181b20e"
+          }
+        ]
+      },
+      {
+        "mode": "matrix",
+        "locale": "ru",
+        "receipt": {
+          "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-ru/receipt.json",
+          "sha256": "7988246695caf698d2383181853908b5003eade5db527c72c924997058d0cec5",
+          "locale": "ru",
+          "passed": true
+        },
+        "captures": [
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-ru/more-manual-ru.png",
+            "sha256": "9b4b6e46c6e8fbbbe92b01054adde84c43033358e65e14cf70d186fa8c5b11f2"
+          },
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-ru/more-matrix-nested-ru.png",
+            "sha256": "6ac1ff795fa32a4477d4a148a7731c0a8185648b87f3b56ec30bd35f0976f4c3"
+          }
+        ]
+      },
+      {
+        "mode": "matrix",
+        "locale": "en",
+        "receipt": {
+          "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-en/receipt.json",
+          "sha256": "21187ec90d02666bcf4ba5ef150ff0265d675a41577301f51e04467cad582028",
+          "locale": "en",
+          "passed": true
+        },
+        "captures": [
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-en/more-manual-en.png",
+            "sha256": "5dc5c30a90b38ff3069eb0f2878ba5b4bf47da3788f46bce4b34ea731306ba2f"
+          },
+          {
+            "pathInPlayground": "form-installed-root-more-VPbza3af/matrix-en/more-matrix-nested-en.png",
+            "sha256": "12484f6c2fab904c9347fe796c03f1bf9c1a1d9404234fcae0fa782c56f95682"
+          }
+        ]
+      }
+    ],
+    "rustChecks": {
+      "fmt": true,
+      "check": true,
+      "clippy": true,
+      "passed": 1555,
+      "ignored": 19
+    },
+    "nodeChecks": {
+      "passed": 641,
+      "skipped": 9
+    },
+    "batch": {
+      "root": "form-batch-vcVugC",
+      "backend": {
+        "pathInPlayground": "form-batch-vcVugC/artifacts/eska-project",
+        "sha256": "2bdecff9ee2f3ebfd667ae9ac2d94086cba3218db120d33be4bc70eefb7d0d58"
+      },
+      "vsix": {
+        "pathInPlayground": "form-batch-vcVugC/artifacts/viewer.vsix",
+        "sha256": "67d1045aabd30394357b6699db5a8116407402458264cd22289e514ed76bc425"
+      },
+      "runs": [
+        {
+          "suite": "pictures",
+          "locale": "en",
+          "caseCount": 1,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/pictures-en/receipt.json",
+            "sha256": "54b4970a5c007677648f3785bcc6511c1e5e392b21f8af9036bea6555256e8d2",
+            "locale": "en",
+            "passed": true
+          }
+        },
+        {
+          "suite": "pictures",
+          "locale": "ru",
+          "caseCount": 1,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/pictures-ru/receipt.json",
+            "sha256": "65388f6ee03036b1ec7da595f41fe59bcbe5c7e5eccf3ea06db773e1d18523f1",
+            "locale": "ru",
+            "passed": true
+          }
+        },
+        {
+          "suite": "groups",
+          "locale": "en",
+          "caseCount": 22,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/groups-en/receipt.json",
+            "sha256": "0b398d43d3b6b2e381c0361feaae4ab6dc31e5b879ff680d3be35fdb2cd7e994",
+            "locale": "en",
+            "passed": true
+          }
+        },
+        {
+          "suite": "groups",
+          "locale": "ru",
+          "caseCount": 22,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/groups-ru/receipt.json",
+            "sha256": "3057061550145533953d94f76654dd90bb0d8d8ebb2fdab70fa6806ca4a98774",
+            "locale": "ru",
+            "passed": true
+          }
+        },
+        {
+          "suite": "tables",
+          "locale": "en",
+          "caseCount": 17,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/tables-en/receipt.json",
+            "sha256": "d4ab23c504b0540e0940a764552244914f748765ac30cda7edf31d30f543be97",
+            "locale": "en",
+            "passed": true
+          }
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "caseCount": 17,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/tables-ru/receipt.json",
+            "sha256": "d262c6814752f23aa49937f128d12865235bc603876d675816bc99082ba5a6a0",
+            "locale": "ru",
+            "passed": true
+          }
+        },
+        {
+          "suite": "renderer",
+          "locale": "en",
+          "caseCount": 20,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/renderer-en/receipt.json",
+            "sha256": "54f3f2cdfc7617d53e7b3ec94bd20a8eb2c8bc7acdc2f4763c0d743dbd211f9e",
+            "locale": "en",
+            "passed": true
+          }
+        },
+        {
+          "suite": "renderer",
+          "locale": "ru",
+          "caseCount": 0,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/renderer-ru/receipt.json",
+            "sha256": "b7a06996409dd963fd2ee0f4a07d242592ccaca71d276646581f551fd6c5802f",
+            "locale": "ru",
+            "passed": false
+          }
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "caseCount": 31,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/responsive-en/receipt.json",
+            "sha256": "c4f82134a207845a82130567577b061c0ddb2baa24749c98d2aecfc8e39d6571",
+            "locale": "en",
+            "passed": true
+          }
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "caseCount": 31,
+          "receipt": {
+            "pathInPlayground": "form-batch-vcVugC/responsive-ru/receipt.json",
+            "sha256": "ad2743b6fc9e59bfb32e72cf370a4804da866811e476054d8307ed8b1b2cf234",
+            "locale": "ru",
+            "passed": true
+          }
+        }
+      ],
+      "caseCount": 182,
+      "initialBatch": {
+        "pathInPlayground": "form-batch-vcVugC/batch.json",
+        "sha256": "d66a9279a341181c57a64a1d7173dc52ce0ea095f8defe51ab17f5fb942e4cee"
+      },
+      "rendererRussianRetry": {
+        "pathInPlayground": "form-root-more-renderer-ru-retry-QbvOGYyA/receipt.json",
+        "sha256": "58a5716d199983df7d29a8573f4a26fb7b5aa22012bd2cd6cdf0c0ebeee6e87c",
+        "locale": "ru",
+        "passed": true
+      },
+      "rendererRussianInitialFailure": "The host could not locate the detached RadioButtonField preview frame. A fresh isolated profile passed all 20 renderer cases with the same VSIX."
+    },
+    "installedRussianGeometry": {
+      "allocation": [
+        {
+          "frameWidth": 192,
+          "inlineCount": 0
+        },
+        {
+          "frameWidth": 302,
+          "inlineCount": 1
+        },
+        {
+          "frameWidth": 412,
+          "inlineCount": 2
+        },
+        {
+          "frameWidth": 452,
+          "inlineCount": 2
+        },
+        {
+          "frameWidth": 532,
+          "inlineCount": 3
+        },
+        {
+          "frameWidth": 652,
+          "inlineCount": 4
+        },
+        {
+          "frameWidth": 882,
+          "inlineCount": 6
+        },
+        {
+          "frameWidth": 972,
+          "inlineCount": 8
+        },
+        {
+          "frameWidth": 412,
+          "inlineCount": 2
+        }
+      ],
+      "realLoan": {
+        "box": [
+          718,
+          55,
+          344,
+          474
+        ],
+        "intrinsicHeight": 490,
+        "trigger": [
+          1037,
+          29,
+          60,
+          26
+        ],
+        "color": "rgb(0, 65, 82)",
+        "ink": "rgb(205, 205, 205)",
+        "separators": 2,
+        "rows": [
+          {
+            "label": "Провести и закрыть",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Записать",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": "Ctrl+S",
+            "height": 30
+          },
+          {
+            "label": "Перечитать",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Скопировать",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Пометить на удаление / Снять пометку",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Удалить",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Провести",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Отменить проведение",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Показать в списке",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "История изменений",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Связанные документы",
+            "sub": false,
+            "icon": "common",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Скопировать УИД",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Движения документа",
+            "sub": false,
+            "icon": "common",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Зарегистрировать на обмен",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Изменить форму...",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": null,
+            "height": 30
+          },
+          {
+            "label": "Справка",
+            "sub": false,
+            "icon": "ready",
+            "shortcut": "F1",
+            "height": 30
+          }
+        ]
+      },
+      "journalSubmenu": [
+        "Продажи",
+        "Документы продаж"
+      ],
+      "manualRows": [
+        "More only",
+        "Both places",
+        "Auto placement"
+      ]
+    }
+  }
+}

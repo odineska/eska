@@ -118,12 +118,9 @@ pub fn load(
         .read_xml(&location.path)
         .map_err(LoadError::Source)?
         .ok_or_else(|| LoadError::MissingDescriptor(id.clone()))?;
-    let mut descriptor_id = id.clone();
-    for _ in &location.inline {
-        descriptor_id = descriptor_id
-            .parent()
-            .ok_or_else(|| LoadError::ObjectNotFound(id.clone()))?;
-    }
+    let descriptor_id = location
+        .descriptor_id(id)
+        .ok_or_else(|| LoadError::ObjectNotFound(id.clone()))?;
     let parsed = (if location
         .inline
         .first()

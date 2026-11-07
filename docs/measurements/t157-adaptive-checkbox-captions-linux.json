@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestone": "T157",
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "eskaBackendCommit": "0f713bf804f02a6344db46db3a8e3f9de27b68a0",
+  "explorerCommit": "5bfd811c26d7e975db602593d8d4d6035e124537",
+  "compatibility": {
+    "loan": "Version8_3_21",
+    "probes": "Version8_3_27"
+  },
+  "zoom": 100,
+  "artifactBase": "../eska-playground",
+  "coordinateSpace": "Unzoomed form-relative CSS pixels. Glyph rectangles include the checkbox outline.",
+  "comparisonAllocation": "Control probes use the native width plus one pixel for the form outline. Test height is 250 px.",
+  "checks": {
+    "node": {
+      "passed": 649,
+      "failed": 0,
+      "skipped": 9
+    },
+    "installedBatch": {
+      "report": "form-batch-gx3l26/batch.json",
+      "inputWitness": "form-batch-gx3l26/inputs.json",
+      "vsixSha256": "b573540fe01e3afc9902de55b06c6b41ebd93e1eb3e98d12ef307b5464df2d84",
+      "runs": 14,
+      "passedRuns": 14,
+      "caseEntries": 680
+    },
+    "columnWidthsRetest": {
+      "explorerTestCommit": "015fcdf32f3c56accbb44c6c79a4c2b5b0b5aed4",
+      "report": "form-batch-HQ5FPA/batch.json",
+      "runtimeManifestSha256": "43ca1df40a35185ba43a185dc085935db91aac9135e45c2ae0f5892eeef6f30a",
+      "runs": 2,
+      "passedRuns": 2,
+      "caseEntries": 282
+    }
+  },
+  "checkboxProbes": {
+    "nativeDirectory": "form-native-checkbox-wrap-sweep-wla3KX9z",
+    "viewerGeometry": "form-installed-checkbox-wrap-6W3lY3Ku/sweep-ru/geometry.json",
+    "states": 32,
+    "frameWidthsMatched": 32,
+    "glyphRectangles": 96,
+    "glyphRectanglesMatched": 95,
+    "paintedBounds": 30,
+    "paintedBoundsMatched": 30,
+    "samples": [
+      {"form": "ProbeWidthFlags42001", "nativeCapture": "ProbeWidthFlags42001-medium.png", "variant": "Stack", "nativeFrameWidth": 795, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42001", "nativeCapture": "ProbeWidthFlags42001-compact.png", "variant": "Stack", "nativeFrameWidth": 795, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42002", "nativeCapture": "ProbeWidthFlags42002-medium.png", "variant": "Stack", "nativeFrameWidth": 835, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42002", "nativeCapture": "ProbeWidthFlags42002-compact.png", "variant": "Stack", "nativeFrameWidth": 801, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42003", "nativeCapture": "ProbeWidthFlags42003-medium.png", "variant": "Stack", "nativeFrameWidth": 865, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42003", "nativeCapture": "ProbeWidthFlags42003-compact.png", "variant": "Stack", "nativeFrameWidth": 801, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [129, 77, 15, 15], [129, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [129, 77, 15, 15], [129, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42004", "nativeCapture": "ProbeWidthFlags42004-medium.png", "variant": "Stack", "nativeFrameWidth": 895, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42004", "nativeCapture": "ProbeWidthFlags42004-compact.png", "variant": "Stack", "nativeFrameWidth": 801, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [99, 77, 15, 15], [99, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [99, 77, 15, 15], [99, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42005", "nativeCapture": "ProbeWidthFlags42005-medium.png", "variant": "Stack", "nativeFrameWidth": 905, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42005", "nativeCapture": "ProbeWidthFlags42005-compact.png", "variant": "Stack", "nativeFrameWidth": 801, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42006", "nativeCapture": "ProbeWidthFlags42006-medium.png", "variant": "Stack", "nativeFrameWidth": 925, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42006", "nativeCapture": "ProbeWidthFlags42006-compact.png", "variant": "Stack", "nativeFrameWidth": 821, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42007", "nativeCapture": "ProbeWidthFlags42007-medium.png", "variant": "Stack", "nativeFrameWidth": 955, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42007", "nativeCapture": "ProbeWidthFlags42007-compact.png", "variant": "Stack", "nativeFrameWidth": 851, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42008", "nativeCapture": "ProbeWidthFlags42008-medium.png", "variant": "Stack", "nativeFrameWidth": 993, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [147, 77, 15, 15], [147, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42008", "nativeCapture": "ProbeWidthFlags42008-compact.png", "variant": "Stack", "nativeFrameWidth": 891, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42009", "nativeCapture": "ProbeWidthFlags42009-medium.png", "variant": "Stack", "nativeFrameWidth": 993, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [131, 77, 15, 15], [131, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [131, 77, 15, 15], [131, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42009", "nativeCapture": "ProbeWidthFlags42009-compact.png", "variant": "Stack", "nativeFrameWidth": 951, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [89, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42010", "nativeCapture": "ProbeWidthFlags42010-medium.png", "variant": "Reverse", "nativeFrameWidth": 905, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [19, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [19, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42010", "nativeCapture": "ProbeWidthFlags42010-compact.png", "variant": "Reverse", "nativeFrameWidth": 801, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [19, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [19, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42011", "nativeCapture": "ProbeWidthFlags42011-medium.png", "variant": "Reverse", "nativeFrameWidth": 993, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [19, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [19, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42011", "nativeCapture": "ProbeWidthFlags42011-compact.png", "variant": "Reverse", "nativeFrameWidth": 891, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [19, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [19, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42012", "nativeCapture": "ProbeWidthFlags42012-medium.png", "variant": "LongFirst", "nativeFrameWidth": 933, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [326, 103, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [326, 103, 15, 15]]},
+      {"form": "ProbeWidthFlags42012", "nativeCapture": "ProbeWidthFlags42012-compact.png", "variant": "LongFirst", "nativeFrameWidth": 820, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [326, 146, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [326, 146, 15, 15]]},
+      {"form": "ProbeWidthFlags42013", "nativeCapture": "ProbeWidthFlags42013-medium.png", "variant": "LongFirst", "nativeFrameWidth": 993, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [326, 116, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [326, 116, 15, 15]]},
+      {"form": "ProbeWidthFlags42013", "nativeCapture": "ProbeWidthFlags42013-compact.png", "variant": "LongFirst", "nativeFrameWidth": 910, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [326, 146, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [326, 77, 15, 15], [326, 146, 15, 15]]},
+      {"form": "ProbeWidthFlags42014", "nativeCapture": "ProbeWidthFlags42014-medium.png", "variant": "Flat", "nativeFrameWidth": 972, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [107, 77, 15, 15], [260, 77, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [116, 77, 15, 15], [260, 77, 15, 15]]},
+      {"form": "ProbeWidthFlags42014", "nativeCapture": "ProbeWidthFlags42014-compact.png", "variant": "Flat", "nativeFrameWidth": 890, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [178, 77, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [178, 77, 15, 15]]},
+      {"form": "ProbeWidthFlags42015", "nativeCapture": "ProbeWidthFlags42015-medium.png", "variant": "Flat", "nativeFrameWidth": 993, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [93, 77, 15, 15], [191, 77, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [93, 77, 15, 15], [191, 77, 15, 15]]},
+      {"form": "ProbeWidthFlags42015", "nativeCapture": "ProbeWidthFlags42015-compact.png", "variant": "Flat", "nativeFrameWidth": 980, "frameWidthMatches": true, "paintedBoundsMatch": true, "nativeGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [178, 77, 15, 15]], "viewerGlyphs": [[19, 77, 15, 15], [89, 77, 15, 15], [178, 77, 15, 15]]},
+      {"form": "ProbeWidthFlags42016", "nativeCapture": "ProbeWidthFlags42016-medium.png", "variant": "NoColor", "nativeFrameWidth": 905, "frameWidthMatches": true, "paintedBoundsMatch": null, "nativeGlyphs": [[14, 72, 15, 15], [142, 72, 15, 15], [142, 98, 15, 15]], "viewerGlyphs": [[14, 72, 15, 15], [142, 72, 15, 15], [142, 98, 15, 15]]},
+      {"form": "ProbeWidthFlags42016", "nativeCapture": "ProbeWidthFlags42016-compact.png", "variant": "NoColor", "nativeFrameWidth": 801, "frameWidthMatches": true, "paintedBoundsMatch": null, "nativeGlyphs": [[14, 72, 15, 15], [94, 72, 15, 15], [94, 98, 15, 15]], "viewerGlyphs": [[14, 72, 15, 15], [94, 72, 15, 15], [94, 98, 15, 15]]}
+    ]
+  },
+  "loanDisbursement": {
+    "form": "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "sourceXmlUnchanged": true,
+    "nativeCompact": {
+      "emulatedScreen": [1024, 768],
+      "frame": [696, 760],
+      "capture": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-top-crop.png",
+      "sha256": "0d236d878fe55602d62c62dd4cf50a9931348f4f75edbe6edecaf3f196399fbd",
+      "leftWidth": 377,
+      "rightWidth": 275,
+      "paintedBounds": [13, 423, 377, 55],
+      "checkboxGlyphs": [
+        [19, 429, 15, 15],
+        [89, 430, 15, 15],
+        [89, 456, 15, 15]
+      ],
+      "settlementTitleLocations": [
+        "Top",
+        "Top"
+      ]
+    },
+    "previous": {
+      "geometry": "form-installed-checkbox-wrap-WIA2q1n7/loan-ru/geometry.json",
+      "receipt": "form-installed-checkbox-wrap-WIA2q1n7/loan-ru/receipt.json",
+      "detached": true,
+      "poses": [
+        {
+          "requestedFrame": [1156, 875],
+          "frame": [1156, 875],
+          "leftWidth": 532,
+          "rightWidth": 580,
+          "checkboxGroup": [13, 365.5, 433, 55],
+          "checkboxGlyphs": [
+            [19, 385.5, 15, 15],
+            [144, 372.5, 15, 15],
+            [144, 398.5, 15, 15]
+          ],
+          "captionLines": [
+            [
+              "Дубль по займу"
+            ],
+            [
+              "Провести дубль как выдачу"
+            ],
+            [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          ],
+          "paymentAndAmountTitleLocations": {
+            "816": "Left",
+            "942": "Left",
+            "825": "Left",
+            "908": "Left",
+            "945": "Left"
+          },
+          "settlementTitleLocations": [
+            "Left",
+            "Left"
+          ],
+          "sameOwners": true,
+          "selection": "932"
+        },
+        {
+          "requestedFrame": [696, 760],
+          "frame": [768, 748],
+          "leftWidth": 433,
+          "rightWidth": 291,
+          "checkboxGroup": [13, 410.5, 433, 55],
+          "checkboxGlyphs": [
+            [19, 430.5, 15, 15],
+            [144, 417.5, 15, 15],
+            [144, 443.5, 15, 15]
+          ],
+          "captionLines": [
+            [
+              "Дубль по займу"
+            ],
+            [
+              "Провести дубль как выдачу"
+            ],
+            [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          ],
+          "paymentAndAmountTitleLocations": {
+            "816": "Left",
+            "942": "Top",
+            "825": "Top",
+            "908": "Left",
+            "945": "Left"
+          },
+          "settlementTitleLocations": [
+            "Left",
+            "Left"
+          ],
+          "sameOwners": true,
+          "selection": "932"
+        },
+        {
+          "requestedFrame": [1156, 875],
+          "frame": [1156, 875],
+          "leftWidth": 532,
+          "rightWidth": 580,
+          "checkboxGroup": [13, 365.5, 433, 55],
+          "checkboxGlyphs": [
+            [19, 385.5, 15, 15],
+            [144, 372.5, 15, 15],
+            [144, 398.5, 15, 15]
+          ],
+          "captionLines": [
+            [
+              "Дубль по займу"
+            ],
+            [
+              "Провести дубль как выдачу"
+            ],
+            [
+              "Отнести на счет дебиторской задолженности"
+            ]
+          ],
+          "paymentAndAmountTitleLocations": {
+            "816": "Left",
+            "942": "Left",
+            "825": "Left",
+            "908": "Left",
+            "945": "Left"
+          },
+          "settlementTitleLocations": [
+            "Left",
+            "Left"
+          ],
+          "sameOwners": true,
+          "selection": "932"
+        }
+      ]
+    },
+    "current": {
+      "ru": {
+        "geometry": "form-installed-checkbox-wrap-6W3lY3Ku/loan-ru/geometry.json",
+        "receipt": "form-installed-checkbox-wrap-6W3lY3Ku/loan-ru/receipt.json",
+        "detached": true,
+        "poses": [
+          {
+            "requestedFrame": [1156, 875],
+            "frame": [1156, 875],
+            "leftWidth": 532,
+            "rightWidth": 580,
+            "checkboxGroup": [13, 365.5, 435, 55],
+            "checkboxGlyphs": [
+              [19, 372.5, 15, 15],
+              [147, 372.5, 15, 15],
+              [147, 398.5, 15, 15]
+            ],
+            "captionLines": [
+              [
+                "Дубль по займу"
+              ],
+              [
+                "Провести дубль как выдачу"
+              ],
+              [
+                "Отнести на счет дебиторской задолженности"
+              ]
+            ],
+            "paymentAndAmountTitleLocations": {
+              "816": "Left",
+              "942": "Left",
+              "825": "Left",
+              "908": "Left",
+              "945": "Left"
+            },
+            "settlementTitleLocations": [
+              "Left",
+              "Left"
+            ],
+            "sameOwners": true,
+            "selection": "932"
+          },
+          {
+            "requestedFrame": [696, 760],
+            "frame": [712, 748],
+            "leftWidth": 377,
+            "rightWidth": 291,
+            "checkboxGroup": [13, 402, 377, 57],
+            "checkboxGlyphs": [
+              [19, 409, 15, 15],
+              [89, 409, 15, 15],
+              [89, 435, 15, 15]
+            ],
+            "captionLines": [
+              [
+                "Дубль",
+                "по",
+                "займу"
+              ],
+              [
+                "Провести дубль как выдачу"
+              ],
+              [
+                "Отнести на счет дебиторской задолженности"
+              ]
+            ],
+            "paymentAndAmountTitleLocations": {
+              "816": "Top",
+              "942": "Top",
+              "825": "Top",
+              "908": "Top",
+              "945": "Top"
+            },
+            "settlementTitleLocations": [
+              "Left",
+              "Left"
+            ],
+            "sameOwners": true,
+            "selection": "932"
+          },
+          {
+            "requestedFrame": [1156, 875],
+            "frame": [1156, 875],
+            "leftWidth": 532,
+            "rightWidth": 580,
+            "checkboxGroup": [13, 365.5, 435, 55],
+            "checkboxGlyphs": [
+              [19, 372.5, 15, 15],
+              [147, 372.5, 15, 15],
+              [147, 398.5, 15, 15]
+            ],
+            "captionLines": [
+              [
+                "Дубль по займу"
+              ],
+              [
+                "Провести дубль как выдачу"
+              ],
+              [
+                "Отнести на счет дебиторской задолженности"
+              ]
+            ],
+            "paymentAndAmountTitleLocations": {
+              "816": "Left",
+              "942": "Left",
+              "825": "Left",
+              "908": "Left",
+              "945": "Left"
+            },
+            "settlementTitleLocations": [
+              "Left",
+              "Left"
+            ],
+            "sameOwners": true,
+            "selection": "932"
+          }
+        ]
+      },
+      "en": {
+        "geometry": "form-installed-checkbox-wrap-6W3lY3Ku/loan-en/geometry.json",
+        "receipt": "form-installed-checkbox-wrap-6W3lY3Ku/loan-en/receipt.json",
+        "detached": true,
+        "poses": [
+          {
+            "requestedFrame": [1156, 875],
+            "frame": [1156, 875],
+            "leftWidth": 532,
+            "rightWidth": 580,
+            "checkboxGroup": [13, 365.5, 435, 55],
+            "checkboxGlyphs": [
+              [19, 372.5, 15, 15],
+              [147, 372.5, 15, 15],
+              [147, 398.5, 15, 15]
+            ],
+            "captionLines": [
+              [
+                "Дубль по займу"
+              ],
+              [
+                "Провести дубль как выдачу"
+              ],
+              [
+                "Отнести на счет дебиторской задолженности"
+              ]
+            ],
+            "paymentAndAmountTitleLocations": {
+              "816": "Left",
+              "942": "Left",
+              "825": "Left",
+              "908": "Left",
+              "945": "Left"
+            },
+            "settlementTitleLocations": [
+              "Left",
+              "Left"
+            ],
+            "sameOwners": true,
+            "selection": "932"
+          },
+          {
+            "requestedFrame": [696, 760],
+            "frame": [712, 748],
+            "leftWidth": 377,
+            "rightWidth": 291,
+            "checkboxGroup": [13, 402, 377, 57],
+            "checkboxGlyphs": [
+              [19, 409, 15, 15],
+              [89, 409, 15, 15],
+              [89, 435, 15, 15]
+            ],
+            "captionLines": [
+              [
+                "Дубль",
+                "по",
+                "займу"
+              ],
+              [
+                "Провести дубль как выдачу"
+              ],
+              [
+                "Отнести на счет дебиторской задолженности"
+              ]
+            ],
+            "paymentAndAmountTitleLocations": {
+              "816": "Top",
+              "942": "Top",
+              "825": "Top",
+              "908": "Top",
+              "945": "Top"
+            },
+            "settlementTitleLocations": [
+              "Left",
+              "Left"
+            ],
+            "sameOwners": true,
+            "selection": "932"
+          },
+          {
+            "requestedFrame": [1156, 875],
+            "frame": [1156, 875],
+            "leftWidth": 532,
+            "rightWidth": 580,
+            "checkboxGroup": [13, 365.5, 435, 55],
+            "checkboxGlyphs": [
+              [19, 372.5, 15, 15],
+              [147, 372.5, 15, 15],
+              [147, 398.5, 15, 15]
+            ],
+            "captionLines": [
+              [
+                "Дубль по займу"
+              ],
+              [
+                "Провести дубль как выдачу"
+              ],
+              [
+                "Отнести на счет дебиторской задолженности"
+              ]
+            ],
+            "paymentAndAmountTitleLocations": {
+              "816": "Left",
+              "942": "Left",
+              "825": "Left",
+              "908": "Left",
+              "945": "Left"
+            },
+            "settlementTitleLocations": [
+              "Left",
+              "Left"
+            ],
+            "sameOwners": true,
+            "selection": "932"
+          }
+        ]
+      }
+    }
+  },
+  "mixedSettlementRows": {
+    "nativeDirectory": "form-native-mixed-titles-sweep-iXzOKF68",
+    "note": "Native measurements for the remaining title reflow and title wrapping in the right group.",
+    "samples": [
+      {"form": "ProbeWidthMixed42101", "nativeCapture": "ProbeWidthMixed42101-compact.png", "leftWidthSetting": 38, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [801, 130], "rightWidth": 367, "references": [[492, 62, 151, 23], [492, 94, 151, 23]], "pictures": [[653, 62, 20, 18], [653, 94, 20, 18]], "effectiveTitleLocations": ["Left", "Left"]},
+      {"form": "ProbeWidthMixed42102", "nativeCapture": "ProbeWidthMixed42102-compact.png", "leftWidthSetting": 41, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [801, 130], "rightWidth": 337, "references": [[522, 62, 136, 23], [522, 94, 136, 23]], "pictures": [[668, 62, 20, 18], [668, 94, 20, 18]], "effectiveTitleLocations": ["Left", "Left"]},
+      {"form": "ProbeWidthMixed42103", "nativeCapture": "ProbeWidthMixed42103-compact.png", "leftWidthSetting": 42, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [801, 130], "rightWidth": 327, "references": [[532, 62, 131, 23], [532, 94, 131, 23]], "pictures": [[673, 62, 20, 18], [673, 94, 20, 18]], "effectiveTitleLocations": ["Left", "Left"]},
+      {"form": "ProbeWidthMixed42104", "nativeCapture": "ProbeWidthMixed42104-compact.png", "leftWidthSetting": 43, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [801, 130], "rightWidth": 317, "references": [[542, 62, 126, 23], [542, 94, 126, 23]], "pictures": [[678, 62, 20, 18], [678, 94, 20, 18]], "effectiveTitleLocations": ["Left", "Left"]},
+      {"form": "ProbeWidthMixed42105", "nativeCapture": "ProbeWidthMixed42105-compact.png", "leftWidthSetting": 44, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [801, 130], "rightWidth": 307, "references": [[552, 62, 121, 23], [552, 94, 121, 23]], "pictures": [[683, 62, 20, 18], [683, 94, 20, 18]], "effectiveTitleLocations": ["Left", "Left"]},
+      {"form": "ProbeWidthMixed42106", "nativeCapture": "ProbeWidthMixed42106-compact.png", "leftWidthSetting": 45, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [801, 130], "rightWidth": 297, "references": [[562, 62, 116, 23], [562, 94, 116, 23]], "pictures": [[688, 62, 20, 18], [688, 94, 20, 18]], "effectiveTitleLocations": ["Left", "Left"]},
+      {"form": "ProbeWidthMixed42107", "nativeCapture": "ProbeWidthMixed42107-compact.png", "leftWidthSetting": 46, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [798, 149], "rightWidth": 284, "references": [[494, 81, 184, 23], [565, 113, 113, 23]], "pictures": [[688, 62, 20, 18], [688, 113, 20, 18]], "effectiveTitleLocations": ["Top", "Left"]},
+      {"form": "ProbeWidthMixed42108", "nativeCapture": "ProbeWidthMixed42108-compact.png", "leftWidthSetting": 47, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [799, 168], "rightWidth": 275, "references": [[504, 81, 154, 23], [504, 132, 154, 23]], "pictures": [[668, 62, 20, 18], [668, 113, 20, 18]], "effectiveTitleLocations": ["Top", "Top"]},
+      {"form": "ProbeWidthMixed42109", "nativeCapture": "ProbeWidthMixed42109-compact.png", "leftWidthSetting": 48, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [801, 187], "rightWidth": 267, "references": [[514, 100, 131, 23], [514, 151, 131, 23]], "pictures": [[655, 81, 20, 18], [655, 132, 20, 18]], "effectiveTitleLocations": ["Top", "Top"]},
+      {"form": "ProbeWidthMixed42110", "nativeCapture": "ProbeWidthMixed42110-compact.png", "leftWidthSetting": 51, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [801, 187], "rightWidth": 237, "references": [[544, 100, 114, 23], [544, 151, 114, 23]], "pictures": [[668, 81, 20, 18], [668, 132, 20, 18]], "effectiveTitleLocations": ["Top", "Top"]},
+      {"form": "ProbeWidthMixed42111", "nativeCapture": "ProbeWidthMixed42111-compact.png", "leftWidthSetting": 58, "united": false, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [847, 187], "rightWidth": 213, "references": [[614, 100, 113, 23], [614, 151, 113, 23]], "pictures": [[737, 81, 20, 18], [737, 132, 20, 18]], "effectiveTitleLocations": ["Top", "Top"]},
+      {"form": "ProbeWidthMixed42112", "nativeCapture": "ProbeWidthMixed42112-compact.png", "leftWidthSetting": 47, "united": false, "heading": true, "authoredTitleLocation": "Left", "nativeFrame": [815, 130], "rightWidth": 291, "references": [[582, 62, 113, 23], [575, 94, 120, 23]], "pictures": [[705, 62, 20, 18], [705, 94, 20, 18]], "effectiveTitleLocations": ["Left", "Left"]},
+      {"form": "ProbeWidthMixed42113", "nativeCapture": "ProbeWidthMixed42113-compact.png", "leftWidthSetting": 49, "united": false, "heading": false, "authoredTitleLocation": "Auto", "nativeFrame": [757, 145], "rightWidth": 213, "references": [[524, 58, 113, 23], [524, 109, 113, 23]], "pictures": [[647, 39, 20, 18], [647, 90, 20, 18]], "effectiveTitleLocations": ["Top", "Top"]},
+      {"form": "ProbeWidthMixed42114", "nativeCapture": "ProbeWidthMixed42114-compact.png", "leftWidthSetting": 45, "united": true, "heading": true, "authoredTitleLocation": "Auto", "nativeFrame": [801, 130], "rightWidth": 297, "references": [[562, 62, 116, 23], [555, 94, 119, 23]], "pictures": [[688, 62, 20, 18], [684, 94, 20, 18]], "effectiveTitleLocations": ["Left", "Left"]}
+    ]
+  },
+  "remaining": [
+    "The second glyph in the flat three-checkbox row differs by 9 px at the intermediate 548 px group width.",
+    "The compact loan right group is 16 px wider than the native preview. Its automatic titles need independent top placement.",
+    "The compact loan checkbox group is 20 px above the native painted bounds. The centered wrapper switches grouping as its only child shrinks.",
+    "The loan footer, other checkbox arrangements, and Windows require their own calibration."
+  ],
+  "bslExecuted": false,
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false
+}

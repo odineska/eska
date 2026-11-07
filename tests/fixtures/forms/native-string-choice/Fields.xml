@@ -1,0 +1,320 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <InputField name="Plain" id="1">
+      <TitleLocation>None</TitleLocation>
+      <BackColor>#FFEFBA</BackColor>
+      <DataPath>Name</DataPath>
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Выполнить сопоставление по колонкам</v8:content>
+        </v8:item>
+      </Title>
+      <Width>35</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ContextMenu name="PlainMenu" id="2"/>
+      <ExtendedTooltip name="PlainHint" id="3"/>
+    </InputField>
+    <InputField name="Custom" id="6">
+      <ChoiceButton>true</ChoiceButton>
+      <TitleLocation>None</TitleLocation>
+      <BackColor>#DBF2FB</BackColor>
+      <DataPath>Name</DataPath>
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Выполнить сопоставление по колонкам</v8:content>
+        </v8:item>
+      </Title>
+      <Width>35</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ContextMenu name="CustomMenu" id="7"/>
+      <ExtendedTooltip name="CustomHint" id="8"/>
+    </InputField>
+    <InputField name="CustomNoText" id="11">
+      <TextEdit>false</TextEdit>
+      <ChoiceButton>true</ChoiceButton>
+      <TitleLocation>None</TitleLocation>
+      <BackColor>#FFCCD5</BackColor>
+      <DataPath>Name</DataPath>
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Выполнить сопоставление по колонкам</v8:content>
+        </v8:item>
+      </Title>
+      <Width>35</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ContextMenu name="CustomNoTextMenu" id="12"/>
+      <ExtendedTooltip name="CustomNoTextHint" id="13"/>
+      <InputHint>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Укажите колонки для сопоставления</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Укажите колонки для сопоставления</v8:content>
+        </v8:item>
+      </InputHint>
+    </InputField>
+    <InputField name="List" id="16">
+      <ListChoiceMode>true</ListChoiceMode>
+      <TitleLocation>None</TitleLocation>
+      <BackColor>#A8E4B8</BackColor>
+      <DataPath>Name</DataPath>
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Выполнить сопоставление по колонкам</v8:content>
+        </v8:item>
+      </Title>
+      <Width>35</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ContextMenu name="ListMenu" id="17"/>
+      <ExtendedTooltip name="ListHint" id="18"/>
+      <ChoiceList>
+        <xr:Item>
+          <xr:Presentation/>
+          <xr:CheckState>0</xr:CheckState>
+          <xr:Value xsi:type="FormChoiceListDesTimeValue">
+            <Presentation>
+              <v8:item>
+                <v8:lang>ru</v8:lang>
+                <v8:content>Все</v8:content>
+              </v8:item>
+            </Presentation>
+            <Value xsi:type="xs:string"/>
+          </xr:Value>
+        </xr:Item>
+        <xr:Item>
+          <xr:Presentation/>
+          <xr:CheckState>0</xr:CheckState>
+          <xr:Value xsi:type="FormChoiceListDesTimeValue">
+            <Presentation>
+              <v8:item>
+                <v8:lang>ru</v8:lang>
+                <v8:content>Невсе</v8:content>
+              </v8:item>
+            </Presentation>
+            <Value xsi:type="xs:string">1</Value>
+          </xr:Value>
+        </xr:Item>
+      </ChoiceList>
+    </InputField>
+    <InputField name="ListEmpty" id="21">
+      <ListChoiceMode>true</ListChoiceMode>
+      <TitleLocation>None</TitleLocation>
+      <BackColor>#E6DEFF</BackColor>
+      <DataPath>Name</DataPath>
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Выполнить сопоставление по колонкам</v8:content>
+        </v8:item>
+      </Title>
+      <Width>35</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ContextMenu name="ListEmptyMenu" id="22"/>
+      <ExtendedTooltip name="ListEmptyHint" id="23"/>
+    </InputField>
+    <InputField name="ListOff" id="26">
+      <ChoiceButton>false</ChoiceButton>
+      <ListChoiceMode>true</ListChoiceMode>
+      <TitleLocation>None</TitleLocation>
+      <BackColor>#F6D9F5</BackColor>
+      <DataPath>Name</DataPath>
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Выполнить сопоставление по колонкам</v8:content>
+        </v8:item>
+      </Title>
+      <Width>35</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ContextMenu name="ListOffMenu" id="27"/>
+      <ExtendedTooltip name="ListOffHint" id="28"/>
+      <ChoiceList>
+        <xr:Item>
+          <xr:Presentation/>
+          <xr:CheckState>0</xr:CheckState>
+          <xr:Value xsi:type="FormChoiceListDesTimeValue">
+            <Presentation>
+              <v8:item>
+                <v8:lang>ru</v8:lang>
+                <v8:content>Все</v8:content>
+              </v8:item>
+            </Presentation>
+            <Value xsi:type="xs:string"/>
+          </xr:Value>
+        </xr:Item>
+        <xr:Item>
+          <xr:Presentation/>
+          <xr:CheckState>0</xr:CheckState>
+          <xr:Value xsi:type="FormChoiceListDesTimeValue">
+            <Presentation>
+              <v8:item>
+                <v8:lang>ru</v8:lang>
+                <v8:content>Невсе</v8:content>
+              </v8:item>
+            </Presentation>
+            <Value xsi:type="xs:string">1</Value>
+          </xr:Value>
+        </xr:Item>
+      </ChoiceList>
+    </InputField>
+    <InputField name="ChoiceList" id="31">
+      <TitleLocation>None</TitleLocation>
+      <BackColor>#E9F7CF</BackColor>
+      <DataPath>Name</DataPath>
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Выполнить сопоставление по колонкам</v8:content>
+        </v8:item>
+      </Title>
+      <Width>35</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ContextMenu name="ChoiceListMenu" id="32"/>
+      <ExtendedTooltip name="ChoiceListHint" id="33"/>
+      <ChoiceList>
+        <xr:Item>
+          <xr:Presentation/>
+          <xr:CheckState>0</xr:CheckState>
+          <xr:Value xsi:type="FormChoiceListDesTimeValue">
+            <Presentation>
+              <v8:item>
+                <v8:lang>ru</v8:lang>
+                <v8:content>Все</v8:content>
+              </v8:item>
+            </Presentation>
+            <Value xsi:type="xs:string"/>
+          </xr:Value>
+        </xr:Item>
+        <xr:Item>
+          <xr:Presentation/>
+          <xr:CheckState>0</xr:CheckState>
+          <xr:Value xsi:type="FormChoiceListDesTimeValue">
+            <Presentation>
+              <v8:item>
+                <v8:lang>ru</v8:lang>
+                <v8:content>Невсе</v8:content>
+              </v8:item>
+            </Presentation>
+            <Value xsi:type="xs:string">1</Value>
+          </xr:Value>
+        </xr:Item>
+      </ChoiceList>
+    </InputField>
+    <InputField name="ListModeOff" id="36">
+      <ListChoiceMode>false</ListChoiceMode>
+      <TitleLocation>None</TitleLocation>
+      <BackColor>#F3E0C8</BackColor>
+      <DataPath>Name</DataPath>
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Выполнить сопоставление по колонкам</v8:content>
+        </v8:item>
+      </Title>
+      <Width>35</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ContextMenu name="ListModeOffMenu" id="37"/>
+      <ExtendedTooltip name="ListModeOffHint" id="38"/>
+      <ChoiceList>
+        <xr:Item>
+          <xr:Presentation/>
+          <xr:CheckState>0</xr:CheckState>
+          <xr:Value xsi:type="FormChoiceListDesTimeValue">
+            <Presentation>
+              <v8:item>
+                <v8:lang>ru</v8:lang>
+                <v8:content>Все</v8:content>
+              </v8:item>
+            </Presentation>
+            <Value xsi:type="xs:string"/>
+          </xr:Value>
+        </xr:Item>
+        <xr:Item>
+          <xr:Presentation/>
+          <xr:CheckState>0</xr:CheckState>
+          <xr:Value xsi:type="FormChoiceListDesTimeValue">
+            <Presentation>
+              <v8:item>
+                <v8:lang>ru</v8:lang>
+                <v8:content>Невсе</v8:content>
+              </v8:item>
+            </Presentation>
+            <Value xsi:type="xs:string">1</Value>
+          </xr:Value>
+        </xr:Item>
+      </ChoiceList>
+    </InputField>
+    <InputField name="TooltipCustom" id="41">
+      <ToolTipRepresentation>Button</ToolTipRepresentation>
+      <ChoiceButton>true</ChoiceButton>
+      <TitleLocation>None</TitleLocation>
+      <BackColor>#D5EFEA</BackColor>
+      <DataPath>Name</DataPath>
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Выполнить сопоставление по колонкам</v8:content>
+        </v8:item>
+      </Title>
+      <Width>35</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ContextMenu name="TooltipCustomMenu" id="42"/>
+      <ExtendedTooltip name="TooltipCustomHint" id="43"/>
+      <ToolTip>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Выберите значение</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Выберите значение</v8:content>
+        </v8:item>
+      </ToolTip>
+    </InputField>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="Name" id="1">
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Choice" id="2">
+      <Type>
+        <v8:Type>xs:decimal</v8:Type>
+        <v8:NumberQualifiers>
+          <v8:Digits>10</v8:Digits>
+          <v8:FractionDigits>0</v8:FractionDigits>
+          <v8:AllowedSign>Any</v8:AllowedSign>
+        </v8:NumberQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Flag" id="3">
+      <Type>
+        <v8:Type>xs:boolean</v8:Type>
+      </Type>
+    </Attribute>
+  </Attributes>
+  <Title>
+    <v8:item>
+      <v8:lang>ru</v8:lang>
+      <v8:content>ProbeWidthWizard43601</v8:content>
+    </v8:item>
+    <v8:item>
+      <v8:lang>en</v8:lang>
+      <v8:content>ProbeWidthWizard43601</v8:content>
+    </v8:item>
+  </Title>
+</Form>

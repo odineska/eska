@@ -1,0 +1,5701 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-07T10:42:00.650247+00:00",
+  "milestone": "T157",
+  "scope": "Геометрия обычных командных панелей: выравнивание, растяжение, пустое содержимое и общие колонки. Полная геометрия форм и Windows не приняты.",
+  "platformBuild": "8.3.27.2342",
+  "platform": "Linux ARM64 ALT 10",
+  "compatibility": "Version8_3_24",
+  "nativeLocale": "ru",
+  "viewerLocales": [
+    "ru",
+    "en"
+  ],
+  "dpi": 96,
+  "zoom": 100,
+  "eskaCommit": "971b307bf3e4431b03fc07fb17a4ffe3fe1a572b",
+  "explorerCommit": "0323a45a0dbe730502c7c160b555b62ecb47b23d",
+  "baselineExplorerCommit": "32c3d43527e5d34ab9854b26a8a0cf4c42aa2c3e",
+  "baselineExplorerDirty": true,
+  "baselineRuntimeManifestSha256": "50dfcb6e90ecae79de1efff47ad400d99978b25df9356819fb72ecc1d3564628",
+  "artifactBase": "../eska-playground",
+  "acceptedCommandBarGeometry": true,
+  "fullProfileAccepted": false,
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "sourceWritesDuringViewing": false,
+  "bslExecuted": false,
+  "architecture": {
+    "sharedProjection": "webview/forms/command-bar-model.mjs:commandBarContent",
+    "sourceNodesRetained": true,
+    "minimumAndPreferredBoundsSeparated": true,
+    "proportionalSpareWidth": true,
+    "existingUnitedColumnsReused": true,
+    "existingLaneAllocatorReused": true,
+    "noFormNameRules": true
+  },
+  "nativeReference": {
+    "path": "tests/fixtures/forms/native-command-bars/metrics.json",
+    "sha256": "699f4bdf93753ca66418ca91347c950c28afd42ef5e59f5cc000f0c78bdeb054",
+    "forms": 38,
+    "exactFootprintForms": 38,
+    "nativeResizeMeasured": false,
+    "nativeResizeAttempt": "Dragging the design preview frame did not resize it. Those unchanged captures are not resize oracles."
+  },
+  "smallForms": {
+    "coordinateSpace": "x/y/width/height relative to form frame",
+    "coordinateSetsIdenticalInLocales": true,
+    "observations": [
+      {
+        "locale": "ru",
+        "case": "AutoBoth",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          129,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "LeftBoth",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          129,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "RightBoth",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          129,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "RightHiddenLeft",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          129,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "RightEmptyLeft",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          129,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "RightOnly",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          13,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "AutoHiddenLeft",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Close": [
+            100,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            13,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Next": [
+            13,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            100,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          129,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "LeftOnly",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": null,
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "RightHiddenRight",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": null,
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "BothHidden",
+        "nativeFrame": [
+          545,
+          107
+        ],
+        "afterFrame": [
+          545,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {},
+        "afterButtons": {},
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": null,
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "EmptyOnly",
+        "nativeFrame": [
+          545,
+          107
+        ],
+        "afterFrame": [
+          545,
+          107
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            71,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {},
+        "afterButtons": {},
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": null,
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "RightBarFixed",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          129,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "RightParentFixed",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            175,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            88,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            88,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            175,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          129,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "RightParentWidth",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            235,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            148,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            148,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            235,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          129,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "RightVerticalParent",
+        "nativeFrame": [
+          545,
+          179
+        ],
+        "afterFrame": [
+          545,
+          179
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            143,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            143,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            446,
+            107,
+            78,
+            26
+          ],
+          "Next": [
+            359,
+            107,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            359,
+            107,
+            78,
+            26
+          ],
+          "Close": [
+            446,
+            107,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          179
+        ],
+        "beforeNext": [
+          13,
+          107,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "RightNested",
+        "nativeFrame": [
+          545,
+          179
+        ],
+        "afterFrame": [
+          545,
+          179
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            143,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            143,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            446,
+            107,
+            78,
+            26
+          ],
+          "Next": [
+            359,
+            107,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            359,
+            107,
+            78,
+            26
+          ],
+          "Close": [
+            446,
+            107,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          179
+        ],
+        "beforeNext": [
+          13,
+          107,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "TwoRight",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            90,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            90,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          129,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "ReversedSource",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Close": [
+            294,
+            71,
+            78,
+            26
+          ],
+          "Back": [
+            382,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            207,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            382,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            207,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            294,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": [
+          545,
+          143
+        ],
+        "beforeNext": [
+          13,
+          71,
+          78,
+          26
+        ],
+        "baselineAvailable": true
+      },
+      {
+        "locale": "ru",
+        "case": "AutoBelow2",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            31,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            31,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoBelow20",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            211,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            211,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoNoBelow",
+        "nativeFrame": [
+          545,
+          111
+        ],
+        "afterFrame": [
+          545,
+          111
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": null
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": null
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoNestedPopup",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Actions": [
+            13,
+            71,
+            77,
+            26
+          ],
+          "Close": [
+            269,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            182,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Next": [
+            182,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            269,
+            71,
+            78,
+            26
+          ],
+          "Actions": [
+            13,
+            71,
+            77,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoParentFixed",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            175,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            88,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            88,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            175,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoUnitedFalse",
+        "nativeFrame": [
+          720,
+          143
+        ],
+        "afterFrame": [
+          720,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            621,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            534,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            534,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            621,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoUnitedTrue",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            165,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            252,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoAbove30",
+        "nativeFrame": [
+          345,
+          143
+        ],
+        "afterFrame": [
+          345,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            311,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            311,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            195,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            108,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            108,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            195,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoAbove70",
+        "nativeFrame": [
+          745,
+          143
+        ],
+        "afterFrame": [
+          745,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            711,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            711,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            308,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            221,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            221,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            308,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "RightAbove30",
+        "nativeFrame": [
+          345,
+          143
+        ],
+        "afterFrame": [
+          345,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            311,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            311,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            246,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            159,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            159,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            246,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "RightAbove70",
+        "nativeFrame": [
+          745,
+          143
+        ],
+        "afterFrame": [
+          745,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            711,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            711,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            646,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            559,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            559,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            646,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoLeftFixed",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            175,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            88,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            88,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            175,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoBothFixed",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            175,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            88,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            88,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            175,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "RightLeftFixed",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            359,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            446,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoPopupAbove30",
+        "nativeFrame": [
+          345,
+          143
+        ],
+        "afterFrame": [
+          345,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            311,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            311,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Actions": [
+            13,
+            71,
+            77,
+            26
+          ],
+          "Close": [
+            206,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            119,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Next": [
+            119,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            206,
+            71,
+            78,
+            26
+          ],
+          "Actions": [
+            13,
+            71,
+            77,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoPopupAbove70",
+        "nativeFrame": [
+          745,
+          143
+        ],
+        "afterFrame": [
+          745,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            711,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            711,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Actions": [
+            13,
+            71,
+            77,
+            26
+          ],
+          "Close": [
+            333,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            246,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Next": [
+            246,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            333,
+            71,
+            78,
+            26
+          ],
+          "Actions": [
+            13,
+            71,
+            77,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoUnitedFalseAbove30",
+        "nativeFrame": [
+          520,
+          143
+        ],
+        "afterFrame": [
+          520,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            311,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            311,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            421,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            334,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            334,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            421,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "AutoUnitedFalseAbove70",
+        "nativeFrame": [
+          920,
+          143
+        ],
+        "afterFrame": [
+          920,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            711,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            711,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            821,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            734,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            734,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            821,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "RightUnitedFalse",
+        "nativeFrame": [
+          720,
+          143
+        ],
+        "afterFrame": [
+          720,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Close": [
+            621,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            534,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Back": [
+            13,
+            71,
+            65,
+            26
+          ],
+          "Next": [
+            534,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            621,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      },
+      {
+        "locale": "ru",
+        "case": "UnitedFalseHiddenLeft",
+        "nativeFrame": [
+          545,
+          143
+        ],
+        "afterFrame": [
+          545,
+          143
+        ],
+        "nativeFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "afterFields": {
+          "Above": [
+            13,
+            39,
+            511,
+            23
+          ],
+          "Below": [
+            13,
+            107,
+            131,
+            23
+          ]
+        },
+        "nativeButtons": {
+          "Close": [
+            100,
+            71,
+            78,
+            26
+          ],
+          "Next": [
+            13,
+            71,
+            78,
+            26
+          ]
+        },
+        "afterButtons": {
+          "Next": [
+            13,
+            71,
+            78,
+            26
+          ],
+          "Close": [
+            100,
+            71,
+            78,
+            26
+          ]
+        },
+        "beforeFrame": null,
+        "beforeNext": null,
+        "baselineAvailable": false
+      }
+    ]
+  },
+  "legacyNativeRechecks": [
+    {
+      "compatibility": "Version8_3_24",
+      "source": "tests/fixtures/forms/native-groups/BarWithPopup.xml",
+      "sourceSha256": "27d07e1809af9131969d84085b4fb8a403d55cd7d3b8454715bacda3908d2685",
+      "nativeFrame": [
+        111,
+        79
+      ],
+      "nativeRegularButtons": [
+        [
+          13,
+          39,
+          77,
+          26
+        ]
+      ],
+      "sourceArtifact": "form-native-command-bars-ZYQR0jAZ/src/CommonForms/ProbeWidthBars43839/Ext/Form.xml",
+      "screenshot": "form-native-command-bars-ZYQR0jAZ/native-ru/ProbeWidthBars43839.png"
+    },
+    {
+      "compatibility": "Version8_3_24",
+      "source": "tests/fixtures/forms/native-groups/BarWithButtonGroup.xml",
+      "sourceSha256": "bb227bcf8fbdcddc4e724fe6e7d1f6c57baa373e97f87fb8ffbddecb6f18c4af",
+      "nativeFrame": [
+        291,
+        79
+      ],
+      "nativeRegularButtons": [
+        [
+          13,
+          39,
+          115,
+          26
+        ],
+        [
+          137,
+          39,
+          133,
+          26
+        ]
+      ],
+      "sourceArtifact": "form-native-command-bars-ZYQR0jAZ/src/CommonForms/ProbeWidthBars43840/Ext/Form.xml",
+      "screenshot": "form-native-command-bars-ZYQR0jAZ/native-ru/ProbeWidthBars43840.png"
+    },
+    {
+      "compatibility": "Version8_3_27",
+      "source": "tests/fixtures/forms/native-command-bars/AutoBoth.xml",
+      "sourceSha256": "2ca6de5b3b9d5f66f8126d21e8bd7a5b05df48eda89de4bd14e1089e00675db9",
+      "nativeFrame": [
+        545,
+        143
+      ],
+      "nativeRegularButtons": [
+        [
+          13,
+          71,
+          65,
+          26
+        ],
+        [
+          252,
+          71,
+          78,
+          26
+        ]
+      ],
+      "sourceArtifact": "form-native-command-bars-JEdbTy78/src/CommonForms/ProbeWidthBars43801/Ext/Form.xml",
+      "screenshot": "form-native-command-bars-JEdbTy78/native-ru/ProbeWidthBars43801.png"
+    },
+    {
+      "compatibility": "Version8_3_27",
+      "source": "tests/fixtures/forms/native-groups/BarWithPopup.xml",
+      "sourceSha256": "27d07e1809af9131969d84085b4fb8a403d55cd7d3b8454715bacda3908d2685",
+      "nativeFrame": [
+        111,
+        79
+      ],
+      "nativeRegularButtons": [
+        [
+          13,
+          39,
+          77,
+          26
+        ]
+      ],
+      "sourceArtifact": "form-native-command-bars-JEdbTy78/src/CommonForms/ProbeWidthBars43839/Ext/Form.xml",
+      "screenshot": "form-native-command-bars-JEdbTy78/native-ru/ProbeWidthBars43839.png"
+    },
+    {
+      "compatibility": "Version8_3_27",
+      "source": "tests/fixtures/forms/native-groups/BarWithButtonGroup.xml",
+      "sourceSha256": "bb227bcf8fbdcddc4e724fe6e7d1f6c57baa373e97f87fb8ffbddecb6f18c4af",
+      "nativeFrame": [
+        291,
+        79
+      ],
+      "nativeRegularButtons": [
+        [
+          13,
+          39,
+          115,
+          26
+        ],
+        [
+          137,
+          39,
+          133,
+          26
+        ]
+      ],
+      "sourceArtifact": "form-native-command-bars-JEdbTy78/src/CommonForms/ProbeWidthBars43840/Ext/Form.xml",
+      "screenshot": "form-native-command-bars-JEdbTy78/native-ru/ProbeWidthBars43840.png"
+    },
+    {
+      "compatibility": "Version8_3_27",
+      "source": "tests/fixtures/forms/native-table-commands/TablePopup.xml",
+      "sourceSha256": "e54283fc6acc03a4c3c0a7e132cdac6f088598b13140d1c3af5aa2639dbe96c9",
+      "nativeFrame": [
+        434,
+        314
+      ],
+      "nativeRegularButtons": [
+        [
+          13,
+          39,
+          77,
+          26
+        ]
+      ],
+      "sourceArtifact": "form-native-command-bars-JEdbTy78/src/CommonForms/ProbeWidthBars43841/Ext/Form.xml",
+      "screenshot": "form-native-command-bars-JEdbTy78/native-ru/ProbeWidthBars43841.png"
+    }
+  ],
+  "legacyTablePopup": [
+    {
+      "locale": "ru",
+      "viewerFrame": [
+        434,
+        312
+      ],
+      "viewerButton": [
+        13,
+        38,
+        77,
+        26
+      ],
+      "nativeFrame": [
+        434,
+        314
+      ],
+      "nativeButton": [
+        13,
+        39,
+        77,
+        26
+      ],
+      "fullTableGeometryAccepted": false
+    },
+    {
+      "locale": "en",
+      "viewerFrame": [
+        434,
+        312
+      ],
+      "viewerButton": [
+        13,
+        38,
+        77,
+        26
+      ],
+      "nativeFrame": [
+        434,
+        314
+      ],
+      "nativeButton": [
+        13,
+        39,
+        77,
+        26
+      ],
+      "fullTableGeometryAccepted": false
+    }
+  ],
+  "historicalCorrection": {
+    "report": "docs/measurements/t157-native-groups-linux.json",
+    "case": "BarWithPopup",
+    "previousRecordedFrame": [
+      142,
+      79
+    ],
+    "freshExactXmlNativeFrame": [
+      111,
+      79
+    ],
+    "previousViewerButtonWidth": 76,
+    "freshNativeButtonWidth": 77,
+    "reason": "Removed the viewer-only 108 px toolbar minimum. Exact legacy XML recaptured in compatibility 8.3.24 and 8.3.27. Other historical geometry is not superseded."
+  },
+  "wholeBspForms": [
+    {
+      "locale": "ru",
+      "sample": 0,
+      "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                281,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаНазад",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                108,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                129,
+                571,
+                165,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                129,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                216,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "afterFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                780,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                782,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                628,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                715,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                281,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаНазад",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                108,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                129,
+                571,
+                165,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                129,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                216,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "afterFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                780,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                782,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                628,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                715,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                281,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаНазад",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                108,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                129,
+                571,
+                165,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                129,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                216,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "afterFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                780,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                782,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                628,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                715,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "beforeFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                281,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаНазад",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                108,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                129,
+                571,
+                165,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                129,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                216,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "afterFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                1077,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                1079,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                925,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                1012,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "sample": 1,
+      "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 785,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 57
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 14,
+            "after": 14
+          }
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "afterFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 2,
+            "after": 2
+          }
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "sample": 2,
+      "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 17,
+            "after": 17
+          }
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 6,
+            "after": 6
+          }
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "sample": 0,
+      "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                281,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаНазад",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                108,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                129,
+                571,
+                165,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                129,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                216,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "afterFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                780,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                782,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                628,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                715,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                281,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаНазад",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                108,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                129,
+                571,
+                165,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                129,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                216,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "afterFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                780,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                782,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                628,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                715,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 814,
+            "height": 612
+          },
+          "beforeFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                281,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаНазад",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                108,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                129,
+                571,
+                165,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                129,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                216,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "afterFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                780,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                782,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                628,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                715,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "afterFrame": {
+            "width": 1111,
+            "height": 612
+          },
+          "beforeFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                281,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаНазад",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                108,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                129,
+                571,
+                165,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                129,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                216,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "afterFooter": [
+            {
+              "name": "КоманднаяПанель",
+              "kind": "UsualGroup",
+              "element": [
+                13,
+                571,
+                1077,
+                29
+              ]
+            },
+            {
+              "name": "ГруппаДалееЗакрыть",
+              "kind": "CommandBar",
+              "element": [
+                13,
+                571,
+                1079,
+                29
+              ]
+            },
+            {
+              "name": "Далее",
+              "kind": "Button",
+              "element": [
+                925,
+                572,
+                78,
+                26
+              ]
+            },
+            {
+              "name": "Закрыть",
+              "kind": "Button",
+              "element": [
+                1012,
+                572,
+                78,
+                26
+              ]
+            }
+          ],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "sample": 1,
+      "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 796
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 785,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 785,
+            "height": 57
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 14,
+            "after": 14
+          }
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "afterFrame": {
+            "width": 1126,
+            "height": 324
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 2,
+            "after": 2
+          }
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "sample": 2,
+      "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "states": [
+        {
+          "state": "preferred-initial",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "preferred-alternate",
+          "beforeFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "afterFrame": {
+            "width": 1217,
+            "height": 533
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 0,
+            "after": 0
+          }
+        },
+        {
+          "state": "allocation-640",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 57
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 17,
+            "after": 17
+          }
+        },
+        {
+          "state": "allocation-1150",
+          "beforeFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "afterFrame": {
+            "width": 1216.6875,
+            "height": 309
+          },
+          "beforeFooter": [],
+          "afterFooter": [],
+          "changedFieldControls": [],
+          "clippedDescendantsOutsideFrame": {
+            "before": 6,
+            "after": 6
+          }
+        }
+      ]
+    }
+  ],
+  "loan": [
+    {
+      "locale": "ru",
+      "mode": "docked",
+      "preferred": [
+        1157,
+        875
+      ],
+      "detached": false,
+      "poses": [
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            994,
+            875
+          ],
+          "beforeFrame": [
+            994,
+            875
+          ],
+          "afterFrame": [
+            994,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            865,
+            875
+          ],
+          "beforeFrame": [
+            865,
+            875
+          ],
+          "afterFrame": [
+            865,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            800,
+            875
+          ],
+          "beforeFrame": [
+            800,
+            875
+          ],
+          "afterFrame": [
+            800,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            760,
+            875
+          ],
+          "beforeFrame": [
+            760,
+            875
+          ],
+          "afterFrame": [
+            760,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            696,
+            760
+          ],
+          "beforeFrame": [
+            696,
+            760
+          ],
+          "afterFrame": [
+            696,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            660,
+            760
+          ],
+          "beforeFrame": [
+            660,
+            760
+          ],
+          "afterFrame": [
+            660,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "mode": "docked",
+      "preferred": [
+        1157,
+        875
+      ],
+      "detached": false,
+      "poses": [
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            994,
+            875
+          ],
+          "beforeFrame": [
+            994,
+            875
+          ],
+          "afterFrame": [
+            994,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            865,
+            875
+          ],
+          "beforeFrame": [
+            865,
+            875
+          ],
+          "afterFrame": [
+            865,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            800,
+            875
+          ],
+          "beforeFrame": [
+            800,
+            875
+          ],
+          "afterFrame": [
+            800,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            760,
+            875
+          ],
+          "beforeFrame": [
+            760,
+            875
+          ],
+          "afterFrame": [
+            760,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            696,
+            760
+          ],
+          "beforeFrame": [
+            696,
+            760
+          ],
+          "afterFrame": [
+            696,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            660,
+            760
+          ],
+          "beforeFrame": [
+            660,
+            760
+          ],
+          "afterFrame": [
+            660,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        },
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": null
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "mode": "detached",
+      "preferred": [
+        1157,
+        875
+      ],
+      "detached": true,
+      "poses": [
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            994,
+            875
+          ],
+          "beforeFrame": [
+            994,
+            875
+          ],
+          "afterFrame": [
+            994,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            865,
+            875
+          ],
+          "beforeFrame": [
+            865,
+            875
+          ],
+          "afterFrame": [
+            865,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            800,
+            875
+          ],
+          "beforeFrame": [
+            800,
+            875
+          ],
+          "afterFrame": [
+            800,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            760,
+            875
+          ],
+          "beforeFrame": [
+            760,
+            875
+          ],
+          "afterFrame": [
+            760,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            696,
+            760
+          ],
+          "beforeFrame": [
+            696,
+            760
+          ],
+          "afterFrame": [
+            696,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            660,
+            760
+          ],
+          "beforeFrame": [
+            660,
+            760
+          ],
+          "afterFrame": [
+            660,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "mode": "detached",
+      "preferred": [
+        1157,
+        875
+      ],
+      "detached": true,
+      "poses": [
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            994,
+            875
+          ],
+          "beforeFrame": [
+            994,
+            875
+          ],
+          "afterFrame": [
+            994,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            865,
+            875
+          ],
+          "beforeFrame": [
+            865,
+            875
+          ],
+          "afterFrame": [
+            865,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            800,
+            875
+          ],
+          "beforeFrame": [
+            800,
+            875
+          ],
+          "afterFrame": [
+            800,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            760,
+            875
+          ],
+          "beforeFrame": [
+            760,
+            875
+          ],
+          "afterFrame": [
+            760,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            696,
+            760
+          ],
+          "beforeFrame": [
+            696,
+            760
+          ],
+          "afterFrame": [
+            696,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            660,
+            760
+          ],
+          "beforeFrame": [
+            660,
+            760
+          ],
+          "afterFrame": [
+            660,
+            760
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [
+            1156,
+            875
+          ],
+          "beforeFrame": [
+            1156,
+            875
+          ],
+          "afterFrame": [
+            1156,
+            875
+          ],
+          "changedControlIds": [],
+          "sameOwners": true,
+          "selection": "948"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "rust": {
+      "passed": 1561,
+      "failed": 0,
+      "ignored": 19
+    },
+    "rustChecks": [
+      "cargo fmt --check",
+      "cargo check",
+      "cargo clippy --all-targets --all-features -- -D warnings",
+      "ESKA_TEST_ROOT=<absolute sibling playground> cargo test"
+    ],
+    "rustInitialFailure": {
+      "test": "cli::update::unix::failed_cargo_query_uses_actual_root_without_installer_fallback",
+      "error": "ExecutableFileBusy / Text file busy while spawning a disposable copied binary",
+      "isolatedRetryPassed": true,
+      "fullSuiteRetryPassed": true,
+      "sourceChangedForRetry": false,
+      "causeEstablished": false
+    },
+    "node": {
+      "tests": 681,
+      "pass": 673,
+      "fail": 0,
+      "skipped": 8
+    },
+    "installedBatches": [
+      {
+        "manifest": "form-batch-pNi05F/batch.json",
+        "overallPassed": false,
+        "builds": 1,
+        "packages": 1,
+        "runtimeManifestSha256": "bc7b52fb639898cf5a3a8d94c418654b8fd1523e038710967aed75e52302eb78",
+        "postMeasurementTestOnlyChanges": [
+          {
+            "path": "test/form-tables-host.cjs",
+            "measuredSha256": "59bc3c5a4585d10d3021449117c525c7ffd3f69197eb6efbc252934463c231e7",
+            "committedSha256": "7daca538adbeea7c0728a6785cd16e3aea3e250a3c34b07bf111014f8b438a52"
+          }
+        ],
+        "runs": [
+          {
+            "suite": "command-bars",
+            "locale": "en",
+            "passed": true,
+            "accepted": true,
+            "observations": 64,
+            "receipt": "form-batch-pNi05F/command-bars-en/receipt.json"
+          },
+          {
+            "suite": "command-bars",
+            "locale": "ru",
+            "passed": true,
+            "accepted": true,
+            "observations": 64,
+            "receipt": "form-batch-pNi05F/command-bars-ru/receipt.json"
+          },
+          {
+            "suite": "groups",
+            "locale": "en",
+            "passed": true,
+            "accepted": true,
+            "observations": 22,
+            "receipt": "form-batch-pNi05F/groups-en/receipt.json"
+          },
+          {
+            "suite": "groups",
+            "locale": "ru",
+            "passed": true,
+            "accepted": true,
+            "observations": 22,
+            "receipt": "form-batch-pNi05F/groups-ru/receipt.json"
+          },
+          {
+            "suite": "group-visibility",
+            "locale": "en",
+            "passed": true,
+            "accepted": true,
+            "observations": 27,
+            "receipt": "form-batch-pNi05F/group-visibility-en/receipt.json"
+          },
+          {
+            "suite": "group-visibility",
+            "locale": "ru",
+            "passed": true,
+            "accepted": true,
+            "observations": 27,
+            "receipt": "form-batch-pNi05F/group-visibility-ru/receipt.json"
+          },
+          {
+            "suite": "united",
+            "locale": "en",
+            "passed": true,
+            "accepted": true,
+            "observations": 9,
+            "receipt": "form-batch-pNi05F/united-en/receipt.json"
+          },
+          {
+            "suite": "united",
+            "locale": "ru",
+            "passed": true,
+            "accepted": true,
+            "observations": 9,
+            "receipt": "form-batch-pNi05F/united-ru/receipt.json"
+          },
+          {
+            "suite": "through-align",
+            "locale": "en",
+            "passed": true,
+            "accepted": true,
+            "observations": 98,
+            "receipt": "form-batch-pNi05F/through-align-en/receipt.json"
+          },
+          {
+            "suite": "through-align",
+            "locale": "ru",
+            "passed": true,
+            "accepted": true,
+            "observations": 98,
+            "receipt": "form-batch-pNi05F/through-align-ru/receipt.json"
+          },
+          {
+            "suite": "responsive",
+            "locale": "en",
+            "passed": true,
+            "accepted": true,
+            "observations": 31,
+            "receipt": "form-batch-pNi05F/responsive-en/receipt.json"
+          },
+          {
+            "suite": "responsive",
+            "locale": "ru",
+            "passed": true,
+            "accepted": true,
+            "observations": 31,
+            "receipt": "form-batch-pNi05F/responsive-ru/receipt.json"
+          },
+          {
+            "suite": "tables",
+            "locale": "en",
+            "passed": false,
+            "accepted": false,
+            "observations": 0,
+            "receipt": "form-batch-pNi05F/tables-en/receipt.json"
+          },
+          {
+            "suite": "tables",
+            "locale": "ru",
+            "passed": false,
+            "accepted": false,
+            "observations": 0,
+            "receipt": "form-batch-pNi05F/tables-ru/receipt.json"
+          },
+          {
+            "suite": "column-widths",
+            "locale": "en",
+            "passed": true,
+            "accepted": true,
+            "observations": 187,
+            "receipt": "form-batch-pNi05F/column-widths-en/receipt.json"
+          },
+          {
+            "suite": "column-widths",
+            "locale": "ru",
+            "passed": true,
+            "accepted": true,
+            "observations": 143,
+            "receipt": "form-batch-pNi05F/column-widths-ru/receipt.json"
+          },
+          {
+            "suite": "numeric-labels",
+            "locale": "en",
+            "passed": true,
+            "accepted": true,
+            "observations": 41,
+            "receipt": "form-batch-pNi05F/numeric-labels-en/receipt.json"
+          },
+          {
+            "suite": "numeric-labels",
+            "locale": "ru",
+            "passed": true,
+            "accepted": true,
+            "observations": 42,
+            "receipt": "form-batch-pNi05F/numeric-labels-ru/receipt.json"
+          }
+        ]
+      },
+      {
+        "manifest": "form-batch-rXkCXO/batch.json",
+        "overallPassed": true,
+        "builds": 1,
+        "packages": 1,
+        "runtimeManifestSha256": "bc7b52fb639898cf5a3a8d94c418654b8fd1523e038710967aed75e52302eb78",
+        "postMeasurementTestOnlyChanges": [],
+        "runs": [
+          {
+            "suite": "tables",
+            "locale": "en",
+            "passed": true,
+            "accepted": true,
+            "observations": 17,
+            "receipt": "form-batch-rXkCXO/tables-en/receipt.json"
+          },
+          {
+            "suite": "tables",
+            "locale": "ru",
+            "passed": true,
+            "accepted": true,
+            "observations": 17,
+            "receipt": "form-batch-rXkCXO/tables-ru/receipt.json"
+          }
+        ]
+      }
+    ],
+    "acceptedInstalledObservations": 949,
+    "acceptedSuiteLocaleRuns": 18,
+    "runtimeFilesIdentical": 1262,
+    "tableRetryReason": "Two old 76 px expectations failed. Updated only the table driver after an independent native recheck; all passing runs retained with byte-identical runtime assets.",
+    "dirtyDetachedResize": {
+      "sourceEdits": [
+        "right-to-left placement",
+        "hidden-to-visible bars",
+        "United true-to-false"
+      ],
+      "viewportWidths": [
+        400,
+        250,
+        700,
+        400
+      ],
+      "floatingWidths": [
+        400,
+        700,
+        400
+      ],
+      "sameNeighbourDom": true,
+      "sameSelection": true,
+      "sourceTreePreserved": true
+    }
+  },
+  "remainingGeometry": [
+    {
+      "id": "matched-bsp-footer",
+      "nativeCapture": "united-bsp-context-763t8lxb/native-data-matching-page.png",
+      "nativeFrame": [
+        812,
+        612
+      ],
+      "viewerFrame": [
+        814,
+        612
+      ],
+      "nativeFrameOrigin": [
+        261,
+        320
+      ],
+      "nativeYellowInterior": [
+        887,
+        893,
+        76,
+        24
+      ],
+      "reconstructedNativeNextButton": [
+        625,
+        572,
+        78,
+        26
+      ],
+      "beforeNextButton": [
+        129,
+        572,
+        78,
+        26
+      ],
+      "afterNextButton": [
+        628,
+        572,
+        78,
+        26
+      ],
+      "residualXpx": 3,
+      "inference": "Native logical button reconstructed from its yellow interior and the calibrated one-pixel border. Strictly matched viewport and complete frame acceptance remain open."
+    },
+    {
+      "id": "normal-separation-insets",
+      "nativeMiddleGroupInsetPx": [
+        8,
+        8
+      ],
+      "nextAction": "Measure edge, sibling and nested variants; implement the shared group inset rule."
+    },
+    {
+      "id": "bsp-header-label-metrics",
+      "nativeNextInputY": 106,
+      "nextAction": "Calibrate the multiline heading and its effect on neighbouring fields at equal viewport."
+    },
+    {
+      "id": "visible-table-height",
+      "differencePx": 2,
+      "note": "The positive empty-group table and legacy table popup retain a pre-existing height residual. Popup top position also differs by one pixel."
+    },
+    {
+      "id": "whole-forms-and-other-properties",
+      "note": "Mixed command/control rows, all fonts and styling combinations, native resize and Windows remain outside this accepted scope. Clipped descendants in the two scrollable BSP forms retain their previous counts."
+    }
+  ],
+  "artifactReferences": {
+    "form-batch-I5OMMA/inputs.json": "43572696f9ca8eab861ff92afd825739fe1cde9bccdf0782bac3da8828c4c67d",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-prepare.py": "653be8b021cff4908c51e2f5d712ebe32f9774b187db5fec6db48b6a51cc8c4d",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-growth-prepare.py": "11aeeaea9721c14c5ee47339ad255b0dce63743151a95ebdb91eb22c5be57212",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-united-prepare.py": "2e47f86b42f611194cc9132fac1b9acde28f143fcc139e88e6b25bf1530d772e",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-legacy-prepare.py": "d4e1b4af202554d9043d6b79a314db72aa9a84675f07cf39d7540be045023d67",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-modern-prepare.py": "e0e5bc33178313aa6d9138fbe2a639efc12dbd638cd02d1ceaf4d38a15f6187c",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-native.sh": "6b6769d1db5f1f4f6f7eba3f32d20533f346450effedae8f067398e5c593ff7a",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-growth-native.sh": "5f77f4a57047f042aeb2b73a12cb944d2c97dd796e0a5a605dbf74afa17293fd",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-growth-capture.py": "4989034b7846e65da7deac8c6ed95ac7e1a71b8997a011939cb4af0b3fd7a832",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-united-native.sh": "1cb88efd45f38b9f6aa8645f1b6595a36911b1d3c323264bf0a2c287da7fdbb2",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-modern-native.sh": "9baed4990a068be4690a276495e8e1d3ca42519c10310a5f8592591337562919",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-full-metrics.py": "f5e3dd4f84de36acc7dd5988e5b5604dc7b01a50715e88e5541c788b0d6ad378",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-united-metrics.py": "3ec014ba6e48bcc02544cbc2e03f2c99bb61ec4180d279e379dade731f57ecd5",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-viewer.sh": "ccba821e62a22184e8ebfba314178d2fa3038e9f3447cacf73e568d46063ba4e",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-viewer-host.cjs": "6036e18f9ae435cb81f97cb3a959113caca23f71b30e9e524578e04711066222",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-report.py": "afde575668e31d4bb3efb7878b3fbb498694a5a4b88cc7cf33d116b5283b97b5",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-rust-checks.sh": "d8ea3925d3bd3beb42fb19210dee38ee3c1adfa039cd1029ef98b6d3013e3a70",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-cargo-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-cargo-check.log": "a5f4c585ee974ca44916ac30a98bbc189e067a7e0a6bc6d2e8d6bc525be724af",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-cargo-clippy.log": "a5f4c585ee974ca44916ac30a98bbc189e067a7e0a6bc6d2e8d6bc525be724af",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-cargo-test.log": "42122075b14d5a148ac2f884f3616c82ed79de5fe096d7a8ce52a39634c9661e",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-cargo-retry-one.log": "5a79cdb8d46cfc13794de1deb637949b0c43a4ceee43ecace7ecfd7926ae8fcd",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-cargo-test-final.log": "36fd5b3a18f622942966998c9aa087703d1a0c6f85eb22ab1527b5a7838e9d84",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-node-final-all-tools.log": "9e540c927c55e74a5802463b400e18d93cc4b3985c6618e77411ffdb43d22121",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-command-bars-unit-final.log": "5b9f31563d1ac9dea6138258746f6c7c9c2f22c4ebed87f24372db7d01b883f9",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-bsp-layout-observation-host.cjs": "b42335ebb62e1ae346db69e5fd2f917daaaf322108715c930319cf441297584b",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-bsp-layout-after.sh": "3c8e04d3a113a391422df353497493f0b2100c2a5434277f8b7cb0eb5b56fbad",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-loan-lower-layout-host.cjs": "6b244c4ed3f01a3b96232e7f00a674cda6b40cea7bf3a3d1f9476e1e679c3d87",
+    "form-native-command-bars-LGevzout/evidence-command-bars/eska-loan-lower-layout-installed.sh": "ff8447a5150b4731e221ed885c3501efc8d9cbde31f70a9114fc74d422fee2a7",
+    "form-native-command-bars-LGevzout/cases.json": "9d86e2770e8a4619cc18669da655c6f5c3159ff06e00d280f100b5c41ff85b17",
+    "form-native-command-bars-LGevzout/native-metrics.json": "04b2e99b4e289335223dec5cf90d28a308ff25caf6a446ab7606f40a392bd17c",
+    "form-native-command-bars-LGevzout/capture-origins.json": "1c1677e873473beb3d410c74bc3833da9f8bb3559763fbc46cd257d41a9aacfb",
+    "form-native-command-bars-LGevzout/process.json": "ee9082a50f6038d82bd31279fea2ddf6a6045ff3eec66b81633f13f8aa6773e3",
+    "form-native-command-bars-LGevzout/import.log": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e",
+    "form-native-command-bars-LGevzout/apply.log": "4a807d3875e6da7b0cd29ef963258d9883f678f01cb3bbbc7df8965331bdce9a",
+    "form-native-command-bars-LGevzout/src/Configuration.xml": "1a622cfbd3bdd32e376f2d5ba9e90b8fba0a6dec52a11729d17c97463477da07",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43801/Ext/Form.xml": "2ca6de5b3b9d5f66f8126d21e8bd7a5b05df48eda89de4bd14e1089e00675db9",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43801.png": "e1dc88e907bbfaa7e82675a6663f829af9325325d35f2a80a4b96a4088f31c99",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43802/Ext/Form.xml": "691b7b64bcd3e52c70ed775169353a9f8103472d23cdb681a935f8bd662f17ff",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43802.png": "5bc919cff04f05580265338705484e5192753a94d33b549619f49bbab8cf71dc",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43803/Ext/Form.xml": "70a6f66cccd90c77747fdd2375e920785c74f47eaa6980124575d9612b8dd63d",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43803.png": "8545e6ecb4cab8b2fdafb260fcadbfa231ef69303dd53c10155907421e91cb28",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43804/Ext/Form.xml": "fce0de16d2e27ed59d4b8d9e3d315b7e9c86518914355cbff576c55d4f9bf29b",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43804.png": "4a7afbbfc9f9ba36331d69a3c040fb511afb920026f61f7648c615981265ff2d",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43805/Ext/Form.xml": "8b83de6b9f2351c61015b0e72be73dbe03900151605f54892197c935721cef53",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43805.png": "41822def33d36aa49a182f16146432ea93b8bda2af49f60087b3f228642f25e5",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43806/Ext/Form.xml": "de2575a7547ead0fb4fe6e18fc72dc8967a8d75caa18f18a4b25e52f05103e41",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43806.png": "8b045c03f258ceee8374b6bbea40e24915f8cafc8a23a5899ed0dd018d8133f2",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43807/Ext/Form.xml": "15303827022de86ed6bcdb00996c22529a18700f91f9de594c76f5369674c463",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43807.png": "0d6cc3afdba8ff9f6d2d521a4e3938a5f6340c879e02ece9a10e25d33fd1a813",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43808/Ext/Form.xml": "92aeeee92aa6d5695de0c38b4f13812675e79f0230d1dbbf364172ab690f2ec0",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43808.png": "c8a93e4270d2324b9624c87487c50ce9f0bf4d9dbb2987227e10267136a28874",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43809/Ext/Form.xml": "05a6d907b5f27c1d939558f4c11302f7b5d8c967743b0edbb284bae7b7fcad2a",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43809.png": "f50a403fa8ceb245f9676be79f0b88863663ac7229a5607ccfafb4b7403e7a22",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43810/Ext/Form.xml": "bee8c22700fb05a9f04b3b57a5dec3574b45b48dfbe6e64aedf359c28f699b04",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43810.png": "c0a98848159f5bdd9f757e0d5a29575efa5662f0732c057d3474731f6651a2d2",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43811/Ext/Form.xml": "d50926a56ef34d4df35289a6c70e74c49206482855c31c80811a329b6e20a1cc",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43811.png": "20aeb4a313bedd9643833ea0dbe6763000f0670740a89898c6974c5cf10a60af",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43812/Ext/Form.xml": "7a3a1cbc65893e0582feda61ef793f51830970910573ca0f901b7dc43e02e1b0",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43812.png": "403e8d973215d89a2c286707698016ab39651b5b2cc4076168993aaefd3ab910",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43813/Ext/Form.xml": "e678564988a1d0d8a5b1221d12f2a37c4637582e73d3ab223b34db4cc66037a4",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43813.png": "784161c8402623d26342c6feeaeb719637de0cf74fad725620442cf8683fe399",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43814/Ext/Form.xml": "0a9f7eb5bb4475e2528dc7945bd77652c0cdfe3d4cb815462ed9c69ef57749b5",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43814.png": "48aab97090ce12e372767413bf7e5b4674dcf3155234a942cbe770c569b85c87",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43815/Ext/Form.xml": "504f3724674b82dcd94261b27b7969a4ae43742153f4d855f13266673fe40d65",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43815.png": "f0a37068d6b634868554921b3e00406f9bf6a16e2495fb254f02fda59c5a51aa",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43816/Ext/Form.xml": "5fbcbd0e7ae1851f630f9454d732b469b8027172dfd3b1dbc59ce4b00435b6ec",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43816.png": "0a5d7904958da3bb3ecfa5974b53b2feb45e89fa55fc70395722b1881ec29d15",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43817/Ext/Form.xml": "b4988fd646ec1fcba637f06e3acba8ff6cf95d98a6da6fedbb29065f9e67e062",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43817.png": "46a5357f4c3e86a20fa57285f6d257c4f9917e38814cc1554f2d502706fe6e47",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43818/Ext/Form.xml": "84ba71595b8c3406c152d113b979d19c3e64f33b525e7b43f8011158be071547",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43818.png": "fcb365cc9cfbfdc789a062c133a6adaee403285475419e53f12820345990bb9a",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43819/Ext/Form.xml": "3df1e611714fd00759e846f87a1446f29aaf43a7af17e9be8767881d1e3de9fc",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43819.png": "ea80787ec2948ce58cd8e415fc92cae5d8bb9aea2b3d1b15bc817c071cc62f59",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43820/Ext/Form.xml": "9cc65c6c2db50b4b2908b17262d7f2e45395f69b5601e5005fd3aa0e227b6c52",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43820.png": "23efecde92e2570a6993e8275391ad8071f78ba07a6a0553f16140e89ed4f317",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43821/Ext/Form.xml": "ff1faad1449f382aa9d1ee36a5231fb2ee42d453c197a730aa904e78f71e5fc7",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43821.png": "424f5b756e3115076f4ba76a4cafa07e5385c5cd07929b3a420fa6bd34e39ff3",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43822/Ext/Form.xml": "1fdabafdef4e48e22816db20b2c5d452ec2898659d7362498b714793e8ab62f2",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43822.png": "01423c600f7c41439d0314bd67082a43464ed66fcbf7010fc14336cf1cfc4744",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43823/Ext/Form.xml": "92fca0783837ac0bdd4a94fb475429b34f7c985178080aa4335eb3870bbe78d4",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43823.png": "91dc9b30124e946c69f67f051ffce5be6944d24004ff776733c8349785251d95",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43824/Ext/Form.xml": "ae2dee5cb216058fb3e6995126b1f32551b9e0c19b6dbdf8b68994f0759164b1",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43824.png": "2dcf6cd87167adc368b6ade434bb0c297500597f44c71a8106a111d69218bb81",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43825/Ext/Form.xml": "49db113bb849b610dc1649875a92cefe327e39f40c4d17da5716481f5af8b28a",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43825.png": "aa3d908480cbd721c972a1b11a3ca9c65f4d5106e0ac3fb8ea20ecc083a19fb4",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43826/Ext/Form.xml": "bcf7a51bb8b9f2ddd7cbd2cc2f224483733d1c895ec8a7e6bde6562e6d19173d",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43826.png": "d3abee234188de32ded8190049762c07d9c287a6305ff537c34e7387bfbfd817",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43827/Ext/Form.xml": "7c6812ee7ad3d3320929877c567fbfd7513aec6ca125d1e44c10486c063930f4",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43827.png": "5d99a7a83b1e26a1e2bf15aa358dd614c625a95609b136b5efe72597a62c2769",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43828/Ext/Form.xml": "1631a676703dd75829ff37c1f18c6c731cc198120c5fd77d1b617f8b0994c80b",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43828.png": "b023905200fdd51e0d638757f8653cb39dc53c0854459204e8170e3b36741d7d",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43829/Ext/Form.xml": "8caa6f80ad59ba669e9866abe2dcffccb59bf1590d84eaba6a55071fa2829878",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43829.png": "71e804b254562e7f0072b26293ad57bdbb310ba77e081fb351d3f6eb848905ae",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43830/Ext/Form.xml": "42bc10c84de1ebb5218573726daec9510170f6fe66a7b63b01582f15a8a68712",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43830.png": "b43984a5f18baaf6d9f3fcb74179bbbbf879e51df70e1a9bdb433ee10bc2e035",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43831/Ext/Form.xml": "f272edb01bd7922aa38d040eb6b45ca52a6de980519a6a0e320f5bec7e48328b",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43831.png": "9c3d066f94f46df13d5d07867053623a8421eb074eb8fecf4d48956c587c8a46",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43832/Ext/Form.xml": "97026c25e05f0d1ce19a0b126a075a3a471ec34b95a952c20f09a56f5f6ed3d9",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43832.png": "fc16e072fd94574d940aed17d01048b6b432b16b87f9fa406ae03e00061b4d47",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43833/Ext/Form.xml": "235580b324375a92ef49781cebdbe6c309fa8a1c29a1e4498cf6d95bc9683505",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43833.png": "d9fcc3a0d0062eb4e54f8f458f1d3909d76536082031420b3971015d2d4e9f99",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43834/Ext/Form.xml": "943a96b6f02a47e1e0f4f8bddb530b6fc9f3b3b830eb6b4a8d3eb77c8f37f6ae",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43834.png": "32e44075d735dbe2579ba302566f6f299cdd03469e1b632fd41bc9b546f7aea9",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43835/Ext/Form.xml": "5e731043add85457f36fdca72647f4e433f1591857248cac383ee14b1120a9ec",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43835.png": "264db640d1786452d3e3eacd1429bfb1053c6b4f794c06fa649fa04bbd259ea3",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43836/Ext/Form.xml": "5b6639f3faf089e9646b5b710110bc8ca2a9473e6addb95757e05a6d9aa7cf20",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43836.png": "a9c766fbe9310344521d8c576f70079e9a2e2a85a1924b21e1605fe1b7c83432",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43837/Ext/Form.xml": "b65bc6ef644be0f8a750d1a57931ca8725600d21af6667b7a9065aed4698f515",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43837.png": "f1d11ac5142597e272f6455eced896ac4172389260d844aac3c3b662e2a50a47",
+    "form-native-command-bars-LGevzout/src/CommonForms/ProbeWidthBars43838/Ext/Form.xml": "5c496eb6563ad4476be90ddbc9a6c635cd74128fc4852b41b30cfa0762fb9101",
+    "form-native-command-bars-LGevzout/native-ru/ProbeWidthBars43838.png": "eee0e2f3a4847935cae7d653c336fc950069d8a295d74ab87d4457835b86f37f",
+    "form-command-bars-viewer-rFsJt44Q/ru/geometry.json": "6a0ead4ec07252b313dd0304ccf8f9f3b5e99b31fd316fa08b6c31177368b101",
+    "form-command-bars-viewer-rFsJt44Q/ru/receipt.json": "0daf35edd020a27ec877ad46b014af4814f4ccbd67828fcba438d00d2547840c",
+    "form-command-bars-viewer-rFsJt44Q/en/geometry.json": "74aa1400ac0fe54b3be59193e10c579a646063ac5eac5f0beb9739e9d86f6591",
+    "form-command-bars-viewer-rFsJt44Q/en/receipt.json": "4f12fb3a9bfee1f021a473e9d9aed0de8ffd7815ffd382f0dfefb2f3ba79b223",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoBoth-ru.png": "f35d3caa71e6d9121aec802800a6f4d5ec35a082a63982c61a9c9db92af66a82",
+    "form-batch-pNi05F/command-bars-ru/command-bars-LeftBoth-ru.png": "28754c51aeb3e0c884d7e7a723457a9649c02dc52f2af75b8748b21fff6347f4",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightBoth-ru.png": "31e9fc2afbc168e756434b480c1548b23b705d6b6a3affe788faa39f4ad6f5c2",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightHiddenLeft-ru.png": "d07f4ade68b475f283854853eba04a86484bffe9d7903296f6df250fc62a48ef",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightEmptyLeft-ru.png": "5a4fc95d8c57e7db262ad23d1ccc06ca73722449edb4afa17b81aea7abb4aa19",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightOnly-ru.png": "ea1447f95e1604729cb94941f9e5df02a4c308bee11103b9c3dd6058bd9e7d9d",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoHiddenLeft-ru.png": "9d86559c6e2e14da9067ffdad9993809dbc36d8dd719d17aa47c5b147e346693",
+    "form-batch-pNi05F/command-bars-ru/command-bars-LeftOnly-ru.png": "6f7c164117065dd83f90b3790356f895eee6d877d5479dea4581fc47bad5836f",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightHiddenRight-ru.png": "2b1bef1da3a88c60afd1b72504b3503ac05eb46ccea425603c3dd5020500cbeb",
+    "form-batch-pNi05F/command-bars-ru/command-bars-BothHidden-ru.png": "ca2fdba327f8beeeeea2de3b13f1e5589cc104824ce9d6aa878ea354e60e96d0",
+    "form-batch-pNi05F/command-bars-ru/command-bars-EmptyOnly-ru.png": "65ea871f28c103b29bdb0e0a98aeccd33bd85ab72c7eef01c442c99e41d20b30",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightBarFixed-ru.png": "cad2c1aa432469f1d94e66eabee1a4eab769fc98328887897af6063e2f677cf0",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightParentFixed-ru.png": "f085eae81a6f5d0b3e28458decb760a6a369a77e8285d77a29c79b66165e5d72",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightParentWidth-ru.png": "a5be7605fe6e50bd6985533bc4603fa26d0977067f4122e5b80b036ae85033a9",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightVerticalParent-ru.png": "89d3ef527bb67aa1d357a54ac99f478d67a5cc97fa9333b178e3db0988eb557f",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightNested-ru.png": "e1a7d69c6750ff26fc0d761b4e5a4815f7281ccb1b8f045b02f6ff4b31fc3e0e",
+    "form-batch-pNi05F/command-bars-ru/command-bars-TwoRight-ru.png": "4d86aa5776c327f88da542276ac68c1a01a6347e002d5c7cd7e208ba7cbcd8d8",
+    "form-batch-pNi05F/command-bars-ru/command-bars-ReversedSource-ru.png": "37e7bb66a6211cd43b8b80d3836e2c27eafed54aa77c97e0e7af8c595134db51",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoBelow2-ru.png": "8648f51994d6a40141be0fc19965b8e20f039d2f9a0db301ed4b513cb8b4186c",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoBelow20-ru.png": "33f3f1e28010cc42beaf0da6c1a27187e3d48bd1012f61bf7ddef73ead69003b",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoNoBelow-ru.png": "723eff0cb427df6bb1edcc053b599d0bd415e9515fe617fc80b3294ed6750f1f",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoNestedPopup-ru.png": "8672f3825906a87af02a6ad04f12db65f6a0510e50f3625bc88c98b9c57a3e4e",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoParentFixed-ru.png": "339736bf731b72034ac8ef36d7b2e2e92328ed96f05a2e92119f0d45808a9c55",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoUnitedFalse-ru.png": "173673f09dc694bd096acd677d14f2c300dc5e9ef83a044cf25baa8edd32629e",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoUnitedTrue-ru.png": "582e645078a76353c12447dd39c492629da55ee46f628e707ebefad1803db588",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoAbove30-ru.png": "8cff6e4b5fe76f5db978780e2daec464ca5b03952dac28fb963d40cd7d1caf8f",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoAbove70-ru.png": "d822ef95cc75a018fb09ca2771b347c0b64e6ac645df9f478b9697a5efa34f6d",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightAbove30-ru.png": "bf577bf74436391cf43f541f3b9d4d243089fa10d8e4a5e0c16cda0a32407be0",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightAbove70-ru.png": "facf2fdc0edf2bbeaef410171c34198153a7fe73278324b56fa4017f9a8340b1",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoLeftFixed-ru.png": "b7331bf0272631b4264706b69ee807e9e1cd90c8ef31c9839ec8951e1335ab80",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoBothFixed-ru.png": "0139a649cd84a0a59c673d4a881ab6207e9833e498967a1f56547b811e1bdc43",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightLeftFixed-ru.png": "9492ad5f6b51baa95db6843a0492aa9944f88b2c2b0bf42c80fb64364c8bab0f",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoPopupAbove30-ru.png": "337a8610caf17d441430267e48aa63c50da55c9bff039afa374120543f8b273b",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoPopupAbove70-ru.png": "bf142713a688e1acfca41b338e7b6511888da18c5c3b0520e5ba22e537a7ac33",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoUnitedFalseAbove30-ru.png": "1c8e75651e224520d32424a110cacba2b81e4cbbc5a0cbe6b88c6736c5c40613",
+    "form-batch-pNi05F/command-bars-ru/command-bars-AutoUnitedFalseAbove70-ru.png": "8ad59e5620f0ad12a7c5b2a52d2e32c767ed6ae98df78cea6790c1440b6f6403",
+    "form-batch-pNi05F/command-bars-ru/command-bars-RightUnitedFalse-ru.png": "94ba9049d250009a8a348ffe4fee461905b30f09f9a831e0d04658bc4cb9a518",
+    "form-batch-pNi05F/command-bars-ru/command-bars-UnitedFalseHiddenLeft-ru.png": "e230b23ff5ad056045af65ca409e7b1df560bae7b521cd85fc5d8058c665d305",
+    "form-batch-pNi05F/batch.json": "9257b85ace322f5c735e5ea93f40df49708b387bca716655e9fc429a478e7eff",
+    "form-batch-pNi05F/inputs.json": "7aa717d3b7c2a7f6792355cdb0fcfbf42e2f4ce71fe31de2d4b19797dd25b0f8",
+    "form-batch-pNi05F/artifacts/viewer.vsix": "8ac05d83e9f76230e0cd0c276bcb274bca5cd9ddd684f876699385d5dc50fd71",
+    "form-batch-pNi05F/artifacts/eska-project": "344a85998ceb188ece3069e87049781447e96eef37f212fe2767487c4a132260",
+    "form-batch-pNi05F/command-bars-en/receipt.json": "eb92d5c1599e64987d3dce3e20641dec153f4a7b85fcc9a4560602c7057496ae",
+    "form-batch-pNi05F/command-bars-en/driver.log": "cba46711a843fa93a800d71acab6655df4f25ddd30b42ad73b121fdb16b62a8f",
+    "form-batch-pNi05F/command-bars-ru/receipt.json": "d7f3bc8784e27303a83aa078666b7190ff03e336b2a2fdbc81402c0a76702883",
+    "form-batch-pNi05F/command-bars-ru/driver.log": "60a3cb809fb9e0e411e187b458493e9e6e4842fda4eab2d06c90bf731412b483",
+    "form-batch-pNi05F/groups-en/receipt.json": "5d9ba2d32a8620282451623e1783cafc3cdd99ad901337093e7a2b71714a7b62",
+    "form-batch-pNi05F/groups-en/driver.log": "a2a3e538d38b5544f248c597259bb5590e23201ac19d2919eb5e15470648aeaf",
+    "form-batch-pNi05F/groups-ru/receipt.json": "2cc0ae9af153bd2e3736bad095f7776146c9085fe5396831940507bd1945f100",
+    "form-batch-pNi05F/groups-ru/driver.log": "aaa8386beff60482fc89a41bd14705d3ac7d00174fc6fa88f285379563c21dcc",
+    "form-batch-pNi05F/group-visibility-en/receipt.json": "d64a20a5a0f6528efec63e4acf1fedc8e6fd7679f81362c826baa140b130f3ea",
+    "form-batch-pNi05F/group-visibility-en/driver.log": "5d41e3b1ecb1181386b066146985f5e153f898f118f980a2085867cf5425fb41",
+    "form-batch-pNi05F/group-visibility-ru/receipt.json": "07948bcd46e13c4cce94c6f93cca22c69ee5fd5fe046f596ebceddb84ec721cc",
+    "form-batch-pNi05F/group-visibility-ru/driver.log": "6ba674aa2c95dd35f98ae57795a05a19e8459570faaf77a5c1776c2ddf22854b",
+    "form-batch-pNi05F/united-en/receipt.json": "9b912e3ca704bc825159f0b3b0beed45a6210437ffbc02c5fc00a8670bca770f",
+    "form-batch-pNi05F/united-en/driver.log": "ccaa5b0384ed17d68f2aa910c3cfb024eb781334713d07832fa15b4f7baee34d",
+    "form-batch-pNi05F/united-ru/receipt.json": "66b400e88c3ca9e1f1dd254ec15ea1a8f75bb999c60b420d6419342b7264137a",
+    "form-batch-pNi05F/united-ru/driver.log": "cef64f512bc880deefb170eb35cd4aa2e816103364d16201575d34c17ea77490",
+    "form-batch-pNi05F/through-align-en/receipt.json": "8920cd242660bd53970a7dbe89284af5c84eef903e2b1b2ff0c55966d76059fb",
+    "form-batch-pNi05F/through-align-en/driver.log": "77e77365b0b2ed70a934fb67aabb8d4f13a1257aebd85a61c79fa262b0ca96a7",
+    "form-batch-pNi05F/through-align-ru/receipt.json": "5f70eaebbc85d4b7c7bfa645189bb9fff2ff51f27eb219997464da7398e8915f",
+    "form-batch-pNi05F/through-align-ru/driver.log": "dcca70405c33ca5e12b34357720ef7a8df3788c81f6eff1324430537d5a4afad",
+    "form-batch-pNi05F/responsive-en/receipt.json": "ee85a6b5b39b3c3396c772f3cb24b3fb199c8ad7848f6f5f270246226c59d6fb",
+    "form-batch-pNi05F/responsive-en/driver.log": "190868dc0278f58d382bb373b169e3120dd676f60c3a3c8b6a6c6c61b0a2b9f1",
+    "form-batch-pNi05F/responsive-ru/receipt.json": "ef10737390a7e7674d308c37ba6f5fb1446acfb12470bd2f078bc8ae2f6a6c80",
+    "form-batch-pNi05F/responsive-ru/driver.log": "fc47b91067177d5dff5836f8972fe1a49bf416cd71dd24de18d3a40ea887d7c1",
+    "form-batch-pNi05F/tables-en/receipt.json": "db1ead8742a7c84a166063953dc8b8710b810544df95909d86d65fcfe3889073",
+    "form-batch-pNi05F/tables-en/driver.log": "3de3b2befa19912a0232cd3f0fa6c98cf377266e2c035a6ba949e779609e478f",
+    "form-batch-pNi05F/tables-ru/receipt.json": "e01c02799d03aad7a955a5c528d4e29f4fd937fc74c9a2c7e917e065d7eab52a",
+    "form-batch-pNi05F/tables-ru/driver.log": "bfb045999f69dba0331970fe5f29e2e5283bb981cddfcbbf4955b0e19f590b48",
+    "form-batch-pNi05F/column-widths-en/receipt.json": "9416727a8e919b5525a7e900b8e950013aaf6948b32fcc7ece19bfb96957829f",
+    "form-batch-pNi05F/column-widths-en/driver.log": "3fe7182eeb76b129d765889ea525c0ece35afc044b276f2eeee5a80304cf4e11",
+    "form-batch-pNi05F/column-widths-ru/receipt.json": "418191ca7c90574dfa0b88bfef0f3ff44dfae61fad52863e39a42934865304e0",
+    "form-batch-pNi05F/column-widths-ru/driver.log": "93dd996a3a976e9dd5ffb402cc237a92652ca971264ee4dec72ae71b19c50f56",
+    "form-batch-pNi05F/numeric-labels-en/receipt.json": "93817b2945b1c0db318da3e4ec45adfc55f94bae54eeb8844d9f95bb6c8730f2",
+    "form-batch-pNi05F/numeric-labels-en/driver.log": "201d83e823eba56c32726c1c67d28efa9cecad558b50996dc0ffc1aae749c481",
+    "form-batch-pNi05F/numeric-labels-ru/receipt.json": "bd8b14c7e0529435d64d846c30ae86431c5ddc73ec1bcf9918fab1ba29d99eb9",
+    "form-batch-pNi05F/numeric-labels-ru/driver.log": "b54cb044e41b65a64432a4b63d76f9c61749a1a3aab9fcda0319209a1041465d",
+    "form-batch-rXkCXO/batch.json": "96d5179b1bb0482e3a0df74855f0ac135131b05706c401acdd85b4158f6ca85a",
+    "form-batch-rXkCXO/inputs.json": "5d13af4b1cec4825eb2fa22327749c05ee17b08f8c427b1d8066b58e31239744",
+    "form-batch-rXkCXO/artifacts/viewer.vsix": "e471fa09e929a600ab3c79c34a82e16048335c788c60859f463f1fec6c1d11ef",
+    "form-batch-rXkCXO/artifacts/eska-project": "344a85998ceb188ece3069e87049781447e96eef37f212fe2767487c4a132260",
+    "form-batch-rXkCXO/tables-en/receipt.json": "d4e8a40d91971cfe6b5a5d88ab4a173ef9a7021c18aa828b52e4214d6fb9ab99",
+    "form-batch-rXkCXO/tables-en/driver.log": "cd9adc87130e0016e44e708625efd9a9f82a2b5e9522ab610aee392fd4eec2b7",
+    "form-batch-rXkCXO/tables-ru/receipt.json": "cb987cb9b0cba4ef8030c3d4582a58236b4e11792459cfc6140a2f3633598dc3",
+    "form-batch-rXkCXO/tables-ru/driver.log": "cfe33c07bf91130a7fa92fcada17b072a103b52f8c4c0f081a34e82a6ca01b20",
+    "form-native-command-bars-ZYQR0jAZ/src/Configuration.xml": "5b4c9eb11212dc791ac4c22054f7a69a1b97ce88c73037ac54b8082ab6137cc8",
+    "form-native-command-bars-ZYQR0jAZ/process.json": "91f00fa0e6502590261f477efae4ee26bbe8237879ee2f8c40375bec1cf90055",
+    "form-native-command-bars-ZYQR0jAZ/cases.json": "82c8ec8abb96fc6720402012d028d6e430582a4c2b59cf83bf88a6bcd1c5afd9",
+    "form-native-command-bars-ZYQR0jAZ/import.log": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e",
+    "form-native-command-bars-ZYQR0jAZ/apply.log": "802a2c883f12e3aeab2b04546b6d348bccb7b65823d94c194a11221f79ca5e39",
+    "form-native-command-bars-ZYQR0jAZ/src/CommonForms/ProbeWidthBars43839/Ext/Form.xml": "27d07e1809af9131969d84085b4fb8a403d55cd7d3b8454715bacda3908d2685",
+    "form-native-command-bars-ZYQR0jAZ/native-ru/ProbeWidthBars43839.png": "9fbc8ca75fe2123966b80099c3bc5602941e58d45a30c28ebe08d2420ce26869",
+    "form-native-command-bars-ZYQR0jAZ/src/CommonForms/ProbeWidthBars43840/Ext/Form.xml": "bb227bcf8fbdcddc4e724fe6e7d1f6c57baa373e97f87fb8ffbddecb6f18c4af",
+    "form-native-command-bars-ZYQR0jAZ/native-ru/ProbeWidthBars43840.png": "bad01c342a700f861cec07b5c79cd5bb5eaac8f5429c7fea3b1b59da15194cfe",
+    "form-native-command-bars-JEdbTy78/src/Configuration.xml": "fb1d3408932e70277b5462c8748e085398a89b4b51dcfc9daeffb6a84c8eb558",
+    "form-native-command-bars-JEdbTy78/process.json": "e4c8cb1a51b86cd4ed2e63fd306cf65b358c5851296be1ffa77c9c9978166eaa",
+    "form-native-command-bars-JEdbTy78/cases.json": "ca84159432b589429b45936f1ea17ac453110f1b3b95b281b8bc35765276092a",
+    "form-native-command-bars-JEdbTy78/import.log": "3e7fa646f5833a60611bc583edff2c25d6c13fa1a22e0927938eb3b29f3dd83e",
+    "form-native-command-bars-JEdbTy78/apply.log": "8512825542e8e9c11e2a8e03cd56a05030830b2c78862b275a400c033785a693",
+    "form-native-command-bars-JEdbTy78/src/CommonForms/ProbeWidthBars43801/Ext/Form.xml": "2ca6de5b3b9d5f66f8126d21e8bd7a5b05df48eda89de4bd14e1089e00675db9",
+    "form-native-command-bars-JEdbTy78/native-ru/ProbeWidthBars43801.png": "d472029a4f79aa681ac421d92d11c3d86344fcae16986a20b31a34163864796e",
+    "form-native-command-bars-JEdbTy78/src/CommonForms/ProbeWidthBars43839/Ext/Form.xml": "27d07e1809af9131969d84085b4fb8a403d55cd7d3b8454715bacda3908d2685",
+    "form-native-command-bars-JEdbTy78/native-ru/ProbeWidthBars43839.png": "8f464e73c0a0c4fb347516aae8f69403adc64f5d6283a5120b1f0040be17e9d8",
+    "form-native-command-bars-JEdbTy78/src/CommonForms/ProbeWidthBars43840/Ext/Form.xml": "bb227bcf8fbdcddc4e724fe6e7d1f6c57baa373e97f87fb8ffbddecb6f18c4af",
+    "form-native-command-bars-JEdbTy78/native-ru/ProbeWidthBars43840.png": "95b7583c2b5a255b23579be1f3ab4c499db0546ae1e21e6587dcc42247e75911",
+    "form-native-command-bars-JEdbTy78/src/CommonForms/ProbeWidthBars43841/Ext/Form.xml": "e54283fc6acc03a4c3c0a7e132cdac6f088598b13140d1c3af5aa2639dbe96c9",
+    "form-native-command-bars-JEdbTy78/native-ru/ProbeWidthBars43841.png": "ff4d1d6a5a3b76275fa8569615c49589cedc4694f63f6c9aa60e6e91503289a0",
+    "bsp-layout-after-0muhmsqH/ru/review.json": "4acce9a87f04203b12ed404f06d94efee3eae77dcf7de82e50a66dd6e8c80ddf",
+    "bsp-layout-after-JvLHuoOK/ru/review.json": "cac0cac85b8f3c13aab593e89f446338738e715d415104f27c538a778880b754",
+    "bsp-layout-after-JvLHuoOK/ru/receipt.json": "fb364e9985a40c0db8228b0c287c4b215ed435d66b692e7ec69d06dd63402795",
+    "bsp-layout-after-0muhmsqH/en/review.json": "2af72bf57a7bee01f0541213b97352292fc257e5695710e433bc16cd5bdcc95a",
+    "bsp-layout-after-JvLHuoOK/en/review.json": "2aa3550ad7672472c4b4b27996a95b4db5212986852e432285f17a4812297ae4",
+    "bsp-layout-after-JvLHuoOK/en/receipt.json": "35701b9e849c73cf39506525482d11757b9c8b875fffd991854d32ffe5a932b3",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-0-preferred-initial.png": "2de737f29e789a9d7a663af50955b12e61037517e0c99a74de093faf49c0d419",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-0-preferred-alternate.png": "1b707fa167ac63d6e813cc6cece7995139a396342cd942d0f3618206cd603ed6",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-0-allocation-640.png": "d133a70a92c6339a3f155c9bdab287ed5177e86428c9b245dd7f10a6ca08dd74",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-0-allocation-1150.png": "69116c4b7c4b42748a16c749469a73ac742e12c10a357f48e27c94bc337577c0",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-1-preferred-initial.png": "19178d36db362d90417d2ee2b55a8422c5a3aba05ee1040a437c3388818bd52c",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-1-preferred-alternate.png": "a46f96557f98304b0623d3fcd16bb45276c003b2e697d52cdc2bb1f0601d14c5",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-1-allocation-640.png": "96f449e47d0bbbff529f94e92e7347d0a829df5c51ee95894d438d16043c60b1",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-1-allocation-1150.png": "8e415101b6608bb697b785d5d43c2faa838c8ac857195e2a0839390e202363d2",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-2-preferred-initial.png": "12c6354d2825fa99263cd2534632dea44719c39eab059bf7139f417379ed8517",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-2-preferred-alternate.png": "3b55ccc22ef98c15e449c1cf3ece5ec5b64f7c4d0a825b1fa8e9babea99a12f2",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-2-allocation-640.png": "2f147099fe39b73d3292f74ab450db1e2ae1fab61b310ea66ca2cf64cf351a3a",
+    "bsp-layout-after-JvLHuoOK/ru/bsp-2-allocation-1150.png": "925568d17a21774777964d10cf7ff907d13433ecf8ae6b6c271e56b7f77e428c",
+    "form-installed-loan-lower-DIBeVR61/loan-ru/geometry.json": "091c867bc8b4dc6db1f0e0d86d7358e6b7bbf349372811c77f823e5b2a23bc84",
+    "form-installed-loan-lower-DIBeVR61/loan-ru/receipt.json": "c694b653ce753de3775386d8fe56b2fe274faadb80879f982102b71b8cf5ada8",
+    "form-installed-loan-lower-DIBeVR61/loan-en/geometry.json": "b8909ae6148c6bbfef698778d221eacae2f3e420e641b97db2297959818c113c",
+    "form-installed-loan-lower-DIBeVR61/loan-en/receipt.json": "0260e0866911300dc818c149ee80dc0b34c6dd3187d7700c39fd5aca49a5d574",
+    "form-installed-loan-lower-mA5s9fA8/loan-ru/geometry.json": "1da29f7dda11fbeec1509bcab4a83a198a3f45a379c70a9dba48fe2f29a060e2",
+    "form-installed-loan-lower-mA5s9fA8/loan-ru/receipt.json": "631cdf2e19235b43aab02f33dc9f142392ef5549c7afaaaf86c9c3b78094e9af",
+    "form-installed-loan-lower-mA5s9fA8/loan-en/geometry.json": "90389c85b7131504801e55b8440323ee27a992c4133fe4de3bfb665fc8d8162f",
+    "form-installed-loan-lower-mA5s9fA8/loan-en/receipt.json": "e4d4bb5952d61a8169b30e97a2667c838c0f4daf349f5626a274c5b3a92450c6",
+    "form-installed-loan-lower-mA5s9fA8/loan-ru/loan-1156.png": "30a397d2f2b6653cab34359da7c73038800e2c512934d75be31da0571c35c5ee",
+    "form-installed-loan-lower-mA5s9fA8/loan-ru/loan-760.png": "b23a35767ea7cbd0d69ad9a6e22c09bc400a4bf7a7475fcafb37c68b56c3ee45",
+    "form-installed-loan-lower-mA5s9fA8/loan-ru/loan-696.png": "31392924324e22e2e01467fcc3594874d9856a1bd6df37dc00ba384b1884f487",
+    "form-installed-loan-lower-mA5s9fA8/loan-ru/loan-696-bottom.png": "de680548a36f89d1446db44e19a065257944aea2dd27580396f07c8d948d92f1",
+    "form-installed-loan-lower-lr0pb41A/loan-ru/geometry.json": "1da29f7dda11fbeec1509bcab4a83a198a3f45a379c70a9dba48fe2f29a060e2",
+    "form-installed-loan-lower-lr0pb41A/loan-en/geometry.json": "90389c85b7131504801e55b8440323ee27a992c4133fe4de3bfb665fc8d8162f",
+    "united-bsp-context-763t8lxb/native-data-matching-page.png": "8604aaf8f09db68aebcee30362fc8f9ae729e377aeacd6daff3b09ff5d8c7b53"
+  }
+}

@@ -4,7 +4,7 @@
   "os": "Linux ARM64 ALT 10",
   "dpi": 96,
   "zoom": 100,
-  "scope": "Six explicit standard picture decorations, natural 16x16 raster on three mattes. Automatic table movement pictures use a different native raster and remain unaccepted.",
+  "scope": "Twelve explicit standard pictures, natural 16x16 raster on three mattes. Automatic table movement pictures use a different native raster and are outside this comparison.",
   "pixelTolerance": 0,
   "comparisonMasks": [],
   "nativeLocale": "en",
@@ -250,9 +250,249 @@
           "rgbSha256": "9c0e22108f2a4dddafa3aef640edd577ff20fcf22ddf2a1663067e9a96f0dde1"
         }
       ]
+    },
+    {
+      "name": "CommandWhite",
+      "file": "CommandWhite.xml",
+      "sourceSha256": "9ea817c8033224c72344c2c6ef7c7b66fbefa6ff7e8aba0f922900d5dbe9e26d",
+      "matte": [
+        255,
+        255,
+        255
+      ],
+      "nativeScreenshot": "form-native-command-pictures-AGWcwjGA/ProbeWidthIconMatteWhite.png",
+      "screenshotSha256": "970205f0d0d3ad037a66f958f605d3198fc395f34012bcad14e2fa8c6cd3767a",
+      "pictures": [
+        {
+          "name": "Refresh",
+          "id": "100",
+          "nativeRegion": [
+            310,
+            474,
+            16,
+            16
+          ],
+          "rgbSha256": "5270d16e4816f98ce913cb4283219b7a6370b10e72b5185c9f609b62c2930e75"
+        },
+        {
+          "name": "Post",
+          "id": "110",
+          "nativeRegion": [
+            310,
+            499,
+            16,
+            16
+          ],
+          "rgbSha256": "939c45e0cf8c85921ef1d794d43da3d844abf12931caf9407f15be9457fe7ae8"
+        },
+        {
+          "name": "EventLog",
+          "id": "120",
+          "nativeRegion": [
+            310,
+            524,
+            16,
+            16
+          ],
+          "rgbSha256": "cdf65ed5ec4311af3aa75676853107d8e7ae002d40f72d388fed597a65571f1e"
+        },
+        {
+          "name": "CheckAll",
+          "id": "130",
+          "nativeRegion": [
+            310,
+            549,
+            16,
+            16
+          ],
+          "rgbSha256": "f2cc663671f8d53b605b20a6f44c46406aa4629823d29cbe3e43a5727cf2a6b4"
+        },
+        {
+          "name": "UncheckAll",
+          "id": "140",
+          "nativeRegion": [
+            310,
+            574,
+            16,
+            16
+          ],
+          "rgbSha256": "6935a41fdb4c9ceb0de41972ff9bdb45b8fda55c9d67364b238f06f7d35d7ef0"
+        },
+        {
+          "name": "DeleteListItemDirectly",
+          "id": "150",
+          "nativeRegion": [
+            310,
+            599,
+            16,
+            16
+          ],
+          "rgbSha256": "82d2f87dbda1200eccf415109ce6b4d3797b403bb361f99bb11bc0ed1484d97e"
+        }
+      ]
+    },
+    {
+      "name": "CommandBlack",
+      "file": "CommandBlack.xml",
+      "sourceSha256": "d7120d13af6398a4ffe325e564fbb465d6b1e44461720b7b9291c5238b3ba798",
+      "matte": [
+        0,
+        0,
+        0
+      ],
+      "nativeScreenshot": "form-native-command-pictures-AGWcwjGA/ProbeWidthIconMatteBlack.png",
+      "screenshotSha256": "6d686a32df6ef5e9310a340f177429b91b6dfa00a8b8b4dffc9492f3e1dd6b38",
+      "pictures": [
+        {
+          "name": "Refresh",
+          "id": "100",
+          "nativeRegion": [
+            337,
+            501,
+            16,
+            16
+          ],
+          "rgbSha256": "8e042f23ba1cfba07b37726bec08efb85faeb639ee10d0d27ec62f4935cad864"
+        },
+        {
+          "name": "Post",
+          "id": "110",
+          "nativeRegion": [
+            337,
+            526,
+            16,
+            16
+          ],
+          "rgbSha256": "215fc1df591fea354c3f67a8599327d9d6d6ba1d73717cf8bb773beb08ee1826"
+        },
+        {
+          "name": "EventLog",
+          "id": "120",
+          "nativeRegion": [
+            337,
+            551,
+            16,
+            16
+          ],
+          "rgbSha256": "fe99bccc5ec6f33eb2397a4541b675ce7befc8ebe38cc0cc77d78afe2930ac66"
+        },
+        {
+          "name": "CheckAll",
+          "id": "130",
+          "nativeRegion": [
+            337,
+            576,
+            16,
+            16
+          ],
+          "rgbSha256": "9af8cf83422a6429f8a956c11272f4ed0558ad3b05aac7bedea9e9a21edb63ba"
+        },
+        {
+          "name": "UncheckAll",
+          "id": "140",
+          "nativeRegion": [
+            337,
+            601,
+            16,
+            16
+          ],
+          "rgbSha256": "812577363c6ddd23cea8213c4b8bc6a7d97f3edd81ee03d74edfc22916791ff4"
+        },
+        {
+          "name": "DeleteListItemDirectly",
+          "id": "150",
+          "nativeRegion": [
+            337,
+            626,
+            16,
+            16
+          ],
+          "rgbSha256": "d296fe4f37291ae5f68294026ecfc0f5565c15e21bea326b0d542bdef9876efb"
+        }
+      ]
+    },
+    {
+      "name": "CommandRed",
+      "file": "CommandRed.xml",
+      "sourceSha256": "39317e22fb419a1069a60b0eea67a01079dc17d4881caf7623228a5b675c4866",
+      "matte": [
+        255,
+        0,
+        0
+      ],
+      "nativeScreenshot": "form-native-command-pictures-AGWcwjGA/ProbeWidthIconMatteRed.png",
+      "screenshotSha256": "a47125976d7b1312470da9c63a55cffd05b3fab8511fe082c13359bada5d53e8",
+      "pictures": [
+        {
+          "name": "Refresh",
+          "id": "100",
+          "nativeRegion": [
+            364,
+            528,
+            16,
+            16
+          ],
+          "rgbSha256": "c96a5e91d920d5a94b563ecbe69d574441976e9ff0be078974ac6b4e856709f0"
+        },
+        {
+          "name": "Post",
+          "id": "110",
+          "nativeRegion": [
+            364,
+            553,
+            16,
+            16
+          ],
+          "rgbSha256": "f41ad5254a9aa19fd95baa464d6bba9caff5a6deac90e74f999a70bf0fdc0799"
+        },
+        {
+          "name": "EventLog",
+          "id": "120",
+          "nativeRegion": [
+            364,
+            578,
+            16,
+            16
+          ],
+          "rgbSha256": "b4d3d88b57bdecaf06eeef078b24c94581a4d61f0d142ec113a09ad6b56c37f1"
+        },
+        {
+          "name": "CheckAll",
+          "id": "130",
+          "nativeRegion": [
+            364,
+            603,
+            16,
+            16
+          ],
+          "rgbSha256": "14b7fcbaf8b35e45cabade3f5988f13583b1620193acb767bd8623418eddf776"
+        },
+        {
+          "name": "UncheckAll",
+          "id": "140",
+          "nativeRegion": [
+            364,
+            628,
+            16,
+            16
+          ],
+          "rgbSha256": "524c573d2464f2f4de6a832cea96f09317aab2959c590e7caa6ea4764e1d5830"
+        },
+        {
+          "name": "DeleteListItemDirectly",
+          "id": "150",
+          "nativeRegion": [
+            364,
+            653,
+            16,
+            16
+          ],
+          "rgbSha256": "b74f8cf26dae1985d6c8491822f36dd90e9c24a82d8ba77501ba71101f021777"
+        }
+      ]
     }
   ],
-  "pixels": 4608,
+  "pixels": 9216,
   "recovery": {
     "method": "Premultiplied RGB from black matte, alpha = 255 - (white - black); independent red matte matches every channel.",
     "independentValidationMatte": [
@@ -777,5 +1017,17 @@
         }
       }
     }
-  ]
+  ],
+  "rowsByLocale": {
+    "en": [
+      "White",
+      "Black",
+      "Red"
+    ],
+    "ru": [
+      "CommandWhite",
+      "CommandBlack",
+      "CommandRed"
+    ]
+  }
 }

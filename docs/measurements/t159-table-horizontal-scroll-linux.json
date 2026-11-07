@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-06",
+  "platformBuild": "8.3.27.2342",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "explorerCommit": "7a9f1e9fe87fbfafeb994771e1732568e2dca632",
+  "scope": "Horizontal overflow in ordinary table previews, their measured viewports and the pixels around the bottom of the grid.",
+  "nativeLocales": [
+    "ru",
+    "en"
+  ],
+  "sourceWrites": false,
+  "bslExecution": false,
+  "comparison": {
+    "masks": [],
+    "pixelTolerance": 0,
+    "regions": [
+      "Complete horizontal strip including its corner",
+      "Lower vertical arrow",
+      "Final row before the strip",
+      "Bottom border"
+    ],
+    "nativeDirectory": "form-native-table-scroll-92Nne7kH",
+    "referenceHashes": "form-installed-table-scroll-Hvv6J1Rh/references.json",
+    "calibrationCases": [
+      "Wide",
+      "Footer",
+      "Disabled",
+      "ReadOnly",
+      "Styled BackColor",
+      "No overflow",
+      "Minimum thumb"
+    ],
+    "ru": {
+      "states": 22,
+      "pixels": 189960,
+      "measurements": "form-installed-table-scroll-Hvv6J1Rh/matrix-ru/measurements.json",
+      "receiptSha256": "d15781613e7747c0619a51d603e1579ace114eed79c1cc58b167efd7eabec395",
+      "zoom": {
+        "value": 125,
+        "first": 138.39999389648438,
+        "second": 296
+      }
+    },
+    "en": {
+      "states": 18,
+      "pixels": 158176,
+      "measurements": "form-installed-table-scroll-Hvv6J1Rh/matrix-en/measurements.json",
+      "receiptSha256": "0abe774380bd1df948034d18e41a603d6600092eb867d4f49880be339f97516c",
+      "zoom": {
+        "value": 125,
+        "first": 138.39999389648438,
+        "second": 296
+      }
+    }
+  },
+  "behavior": {
+    "stripHeight": 14,
+    "minimumThumbWidth": 8,
+    "scrollbarUsesGridScrollLeft": true,
+    "fixedWidth": {
+      "table": 600,
+      "preferredFrame": [
+        634,
+        137
+      ],
+      "grid": 2393,
+      "previousFrameWidthFromMinimumLayout": 2443
+    },
+    "pointerSteps": [
+      0,
+      138,
+      296,
+      1809,
+      1180,
+      0,
+      880
+    ],
+    "keyboardHomeAndEnd": true,
+    "horizontalWheel": true,
+    "detachedDirtyColumnVisibilityRemovesAndRestoresOverflow": true,
+    "retainedSelectedHeaderAndNode": true
+  },
+  "loanDisbursement": {
+    "application": "Менеджер займов",
+    "table": "Расшифровка удержаний",
+    "matchedTableSize": [
+      1123,
+      227
+    ],
+    "comparedAtTheSameTableWidth": true,
+    "actualViewerFrame": [
+      1157,
+      871
+    ],
+    "nativeReferenceFrameWidth": 1156,
+    "visibleStripPixels": 15694,
+    "scrollAfterArrow": 130,
+    "scrollAtEndAfterDragging": 604,
+    "nativeSnapshot": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-native-full-crop.png",
+    "detachedSnapshot": "form-installed-table-scroll-Hvv6J1Rh/loan-ru/0-loan-detached.png",
+    "detachedEndSnapshot": "form-installed-table-scroll-Hvv6J1Rh/loan-ru/loan-horizontal-end.png",
+    "states": 1,
+    "pixels": 17994,
+    "measurements": "form-installed-table-scroll-Hvv6J1Rh/loan-ru/measurements.json",
+    "receiptSha256": "30f58e0ee3710f8999eaeffc564a6062347a8916d0543fb6c396e774a4bf8a88"
+  },
+  "checks": {
+    "node": {
+      "pass": 648,
+      "fail": 0,
+      "skipped": 9
+    },
+    "installed": {
+      "directory": "form-batch-tsp0JS",
+      "vsixSha256": "02ae8655cadd10045443a9250235034343925c17e13f4082bc09cb32531dec25",
+      "backendSha256": "2bdecff9ee2f3ebfd667ae9ac2d94086cba3218db120d33be4bc70eefb7d0d58",
+      "batchSha256": "b3b6f078bc616ce798895bae333b715a57d28118830e3c9f585d6a2aef8443b5",
+      "inputsSha256": "3cd3566e8f48c1ee4d01e8c6d5b47e8576395cd4575acd028606f539bf878a98",
+      "runs": [
+        {
+          "suite": "tables",
+          "locale": "en",
+          "cases": 17
+        },
+        {
+          "suite": "tables",
+          "locale": "ru",
+          "cases": 17
+        },
+        {
+          "suite": "table-pixels",
+          "locale": "en",
+          "cases": 48
+        },
+        {
+          "suite": "table-pixels",
+          "locale": "ru",
+          "cases": 47
+        },
+        {
+          "suite": "responsive",
+          "locale": "en",
+          "cases": 31
+        },
+        {
+          "suite": "responsive",
+          "locale": "ru",
+          "cases": 31
+        }
+      ]
+    }
+  },
+  "remaining": [
+    "The exact comparisons cover the measured bottom regions. Complete grid and form parity and view status styling remain open.",
+    "The custom strip is selected for ordinary Linux tables with at least 54 CSS pixels of inner viewport width. Dynamic lists and narrower authored tables retain their existing scrollbar.",
+    "Other display densities, additional states such as sustained arrow press, and Windows require separate measurements."
+  ],
+  "wholeFormVisualParity": false,
+  "fullProfileAccepted": false
+}
