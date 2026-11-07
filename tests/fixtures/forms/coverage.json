@@ -833,7 +833,8 @@
         "resources.native-picture-layers",
         "windows.frame-discovery",
         "sessions.atomic-publication",
-        "shell.root-properties"
+        "shell.root-properties",
+        "layout.representation-caption-scope"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1108,7 +1109,9 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "layout.representation-caption-scope",
+        "input.string-choice-geometry"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1287,7 +1290,8 @@
         "profile.physical-dpi",
         "performance.full-viewer",
         "acceptance.full-profile",
-        "profile.windows"
+        "profile.windows",
+        "layout.representation-caption-scope"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -1974,7 +1978,8 @@
         "context.native-owner-forms",
         "styles.native-layer-values",
         "buttons.mixed-row-geometry",
-        "buttons.mixed-row-full-forms"
+        "buttons.mixed-row-full-forms",
+        "layout.representation-caption-scope"
       ],
       "remaining": "Complete applicable native properties, states and substantial combinations are not accepted; applicability must be established rather than assumed for auxiliary nodes."
     },
@@ -8171,6 +8176,123 @@
       "lastConfirmation": "docs/measurements/t162-solid-state-batching-linux.json",
       "remaining": "Specific canvas dependencies, stable table models, shared lifecycle, module boundaries/types and full native matrices remain open.",
       "nextAction": "Publish the requested form-preview beta, then continue the queued quality work without weakening pixel diagnostics."
+    },
+    {
+      "id": "layout.representation-caption-scope",
+      "milestone": "T157",
+      "kinds": [
+        "Form",
+        "Page",
+        "UsualGroup",
+        "InputField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "layout.resizing"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "20 recorded group-representation cases: absent Representation, explicit None and Use. Only caption participation and input origin are accepted; complete frames and NormalSeparation insets remain open. Existing fixed-stretch boundaries are covered by the same suite.",
+      "fixtures": [
+        "tests/fixtures/forms/native-through-align-rows"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "through-align",
+        "path": "test/form-through-align-host.cjs",
+        "caseIds": [
+          "representation-scope-TwoInputsAuto",
+          "representation-scope-TwoInputsLeft",
+          "representation-scope-ButtonAuto",
+          "representation-scope-ButtonLeft",
+          "representation-scope-ButtonUseAuto",
+          "representation-scope-ButtonUseLeft",
+          "representation-scope-ButtonDontUse",
+          "representation-scope-ButtonHorizontal",
+          "representation-scope-ButtonBothLeft",
+          "representation-scope-ParentInputs",
+          "representation-scope-ParentButton",
+          "representation-scope-PageDefault",
+          "representation-scope-PageVertical",
+          "representation-scope-PageUse",
+          "representation-scope-RepNoneInputs",
+          "representation-scope-RepNormalInputs",
+          "representation-scope-RepNoneButton",
+          "representation-scope-VerticalAuto",
+          "representation-scope-VerticalNone",
+          "representation-scope-VerticalUse"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-wizard-choice-layout-linux.json",
+          "sha256": "b6988e6b4a8d0039fcc0d5e3c50e3a06e543d020f9f4eac88cbecafc578fc7e0",
+          "assertions": [
+            {
+              "pointer": "/acceptedRepresentationCaptionScope",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "73fa3fa6b650487efaeec80f350961d55bcb990d"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-wizard-choice-layout-linux.json",
+      "remaining": "Complete frame geometry, NormalSeparation vertical insets, other group representations, whole BSP forms and Windows.",
+      "nextAction": "Continue matched-viewport whole-form geometry and verify the recorded scope independently on Windows."
+    },
+    {
+      "id": "input.string-choice-geometry",
+      "milestone": "T158",
+      "kinds": [
+        "InputField"
+      ],
+      "axes": [
+        "layout.geometry",
+        "state.display"
+      ],
+      "profile": "linux-taxi-96",
+      "level": "geometry",
+      "status": "accepted_scope",
+      "scope": "12 recorded fixed single-line string fields in two forms: native logical width and physical edge, choice/list button kind, InputHint and adjacent tooltip content. Dirty XML and detached resize preserve DOM and selection.",
+      "fixtures": [
+        "tests/fixtures/forms/native-string-choice"
+      ],
+      "driver": {
+        "repository": "eska-vscode-explorer",
+        "suite": "input-choice",
+        "path": "test/form-input-choice-host.cjs",
+        "caseIds": [
+          "Fields",
+          "HelpContent"
+        ],
+        "selection": "whole-suite-with-transitions"
+      },
+      "evidence": [
+        {
+          "report": "docs/measurements/t157-wizard-choice-layout-linux.json",
+          "sha256": "b6988e6b4a8d0039fcc0d5e3c50e3a06e543d020f9f4eac88cbecafc578fc7e0",
+          "assertions": [
+            {
+              "pointer": "/acceptedStringChoiceGeometry",
+              "equals": true
+            },
+            {
+              "pointer": "/wholeFormGeometryParity",
+              "equals": false
+            }
+          ],
+          "clientCommit": "73fa3fa6b650487efaeec80f350961d55bcb990d"
+        }
+      ],
+      "lastConfirmation": "docs/measurements/t157-wizard-choice-layout-linux.json",
+      "remaining": "Automatic and multiline string widths, complete appearance/state matrices, native extended-tooltip window and Windows.",
+      "nextAction": "Verify the multiline choice field on the whole BSP questionnaire and expand the native matrix without claiming full widget pixel acceptance."
     }
   ],
   "historicalReports": [
