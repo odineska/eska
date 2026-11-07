@@ -1,0 +1,858 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-07",
+  "milestones": [
+    "T157",
+    "T158"
+  ],
+  "platform": "linux-taxi-96",
+  "nativeBuild": "8.3.27.2342",
+  "zoom": 100,
+  "artifactBase": "../eska-playground",
+  "coordinateSpace": "Form-relative CSS pixels at 100% zoom. Scrolled poses keep the form frame as the origin.",
+  "compatibility": {
+    "loan": "Version8_3_21",
+    "probes": "Version8_3_27"
+  },
+  "eskaSourceCommit": "ce3a52319b8774e16a6239cec3859e477575b702",
+  "explorerHeightCommit": "d7062a7",
+  "explorerCommit": "68f0db3b0801210137008b135d14aa6446483ebf",
+  "wholeFormGeometryParity": false,
+  "windowsCalibrated": false,
+  "bslExecuted": false,
+  "checks": {
+    "node": {"pass": 651, "fail": 0, "skipped": 9},
+    "heightCommitInstalledBatch": "form-batch-qgdHtT/batch.json",
+    "installedBatch": "form-batch-1Hed8k/batch.json",
+    "runtimeManifestSha256": "e764a3bef96378767bb0140fc601b1bd63169a15410ea51462e392400538f0b4",
+    "vsixSha256": "04ceb082abcc8be9c43f032e40b6e85145ff621783597239d0ee83da220a1a67",
+    "passedRuns": 16,
+    "caseEntries": 439
+  },
+  "memoHeightProbes": {
+    "nativeStates": 28,
+    "installedComparisons": 28,
+    "viewerGeometry": {
+      "ru": {"path": "form-installed-loan-lower-VWzOHZD0/memo-ru/geometry.json", "sha256": "c382da1a365bcab698e767f18bbbb5074d71ec4037eefe57213de2759bf22e26"},
+      "en": {"path": "form-installed-loan-lower-VWzOHZD0/memo-en/geometry.json", "sha256": "c382da1a365bcab698e767f18bbbb5074d71ec4037eefe57213de2759bf22e26"}
+    },
+    "cases": [
+      {
+        "form": "ProbeWidthMemo42701",
+        "kind": "ReadOnly",
+        "readOnly": true,
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42701/Ext/Form.xml", "sha256": "946adf0ef776f46a2b029aebec07bfdc717a85a5fd03b24c63a39fe7c31ec970"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [61, 39, 379, 51],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42701-medium.png", "sha256": "5ffba0f0d4f6fcd17d59078456809122554b576f1d0e2bb8e949b5c23e510228"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [61, 39, 379, 51],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42701-compact.png", "sha256": "f2020c6f2014943643169ddc1149ddbb82e8fc7dbbdbbc28180b444af5e02f47"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 385, 51], "minimumHeight": "53px"}, "en": {"frame": [464, 769], "memo": [58, 39, 385, 51], "minimumHeight": "53px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42702",
+        "kind": "Editable",
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42702/Ext/Form.xml", "sha256": "e244bec861f68e25951428be42dcf21caf8828e5d582a6982c6df24b3866a4cd"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [58, 39, 385, 51],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42702-medium.png", "sha256": "b869452bc0edbf955607cdbbea2370ccb9ad3ecafb7c0739e38a548008b3a690"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [58, 39, 385, 51],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42702-compact.png", "sha256": "018b480ded09b2f55525f2d3a815b5d36bacd33931a1c7e76aadaf0361a694a6"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 385, 51], "minimumHeight": "53px"}, "en": {"frame": [464, 769], "memo": [58, 39, 385, 51], "minimumHeight": "53px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42703",
+        "kind": "Disabled",
+        "enabled": false,
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42703/Ext/Form.xml", "sha256": "caddd08618dc108675bd493604b971de3556ce4d7faac625a18709b1ce4d6090"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [61, 39, 379, 51],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42703-medium.png", "sha256": "cc23b0488cfd53a0e57719d71e5e4cdda6f7bdfe149e95a477194ef84cd1ec66"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [61, 39, 379, 51],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42703-compact.png", "sha256": "685484e3772f6c11dc7aa5d5e4dabe0c5ca90ab7b9963cd2980dd29ed081c93d"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 385, 51], "minimumHeight": "53px"}, "en": {"frame": [464, 769], "memo": [58, 39, 385, 51], "minimumHeight": "53px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42704",
+        "kind": "Top",
+        "readOnly": true,
+        "location": "Top",
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42704/Ext/Form.xml", "sha256": "67a0b6bd51820f0161137e3ecc819f7896d39fc4aa592bf7050132f9b15cb964"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [16, 58, 404, 51],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42704-medium.png", "sha256": "248c8578528f73c7e7eb7443f64abb7a825d2260a4068ae9283d640bb61a4f20"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [16, 58, 404, 51],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42704-compact.png", "sha256": "e90b3ce59d8322047988c863b022037b51b6709144feaa939552c55c6303cb56"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [13, 58, 410, 51], "minimumHeight": "72px"}, "en": {"frame": [464, 769], "memo": [13, 58, 410, 51], "minimumHeight": "72px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42705",
+        "kind": "None",
+        "location": "None",
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42705/Ext/Form.xml", "sha256": "275e26920283ddef6d60da7ee1a9f448dc249a90743ed5397acd65ee1053e5e5"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [13, 39, 410, 51],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42705-medium.png", "sha256": "e85e9a9e8eaf508825eb13dfe5ddb61e0a6a2f0c911e020fdb9a06247cc183bb"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [13, 39, 410, 51],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42705-compact.png", "sha256": "34c02ee3692c0a398e7f9873c83cc6b49e4695a2ea82f6815bf6f1d44e804611"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [13, 39, 410, 51], "minimumHeight": "53px"}, "en": {"frame": [464, 769], "memo": [13, 39, 410, 51], "minimumHeight": "53px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42706",
+        "kind": "HeightOne",
+        "height": 1,
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42706/Ext/Form.xml", "sha256": "f92613c4dfba694c9a660461802da594faa3e58cdb1620e84de58c05084dfc0a"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [58, 39, 385, 23],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42706-medium.png", "sha256": "5e8d0d487b5daad1302d0433cadb305092f4f1cdf953736dcb9e9fd831af9c6e"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [58, 39, 385, 23],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42706-compact.png", "sha256": "e5f26118311b665763f8f18437a584bdff23ee6b8888c9f6560f7799225264ce"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 385, 23], "minimumHeight": "25px"}, "en": {"frame": [464, 769], "memo": [58, 39, 385, 23], "minimumHeight": "25px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42707",
+        "kind": "HeightThree",
+        "height": 3,
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42707/Ext/Form.xml", "sha256": "51d68f9843b6e31edeb711954a18e34d7e633394005317f05355d381a1b69ea5"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [58, 39, 385, 79],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42707-medium.png", "sha256": "da98d39301d59375eb74985cb50720ed2f040640bab8814c4861e3f9625bd170"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [58, 39, 385, 79],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42707-compact.png", "sha256": "3d249b7e9c06f1ce34407f1b1d43b54445cdff61b5e8f526f3a80aeb1480e785"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 385, 79], "minimumHeight": "81px"}, "en": {"frame": [464, 769], "memo": [58, 39, 385, 79], "minimumHeight": "81px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42708",
+        "kind": "HeightFour",
+        "height": 4,
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42708/Ext/Form.xml", "sha256": "8377dc6f3e518ed8f027c9230ca16e3c073ef9fecf6900525244f8636ecb42f1"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [58, 39, 385, 107],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42708-medium.png", "sha256": "e28d786582df123a3074bc31cfbac10c280f1d980e33a37d446d1fbbd5fba48d"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [58, 39, 385, 107],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42708-compact.png", "sha256": "b99b0d6db394453b136eb3e68d40441a73f131f25ab04438408b9d93af0ac61d"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 385, 107], "minimumHeight": "109px"}, "en": {"frame": [464, 769], "memo": [58, 39, 385, 107], "minimumHeight": "109px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42709",
+        "kind": "FixedThree",
+        "height": 3,
+        "stretch": "false",
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42709/Ext/Form.xml", "sha256": "3c7a391d57196559561080564fe47fbfe0432edbe2c5a5f9583ad3e675f87e5c"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [58, 39, 385, 79],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42709-medium.png", "sha256": "4b53c2e35cb82b0fa0aa4fa099e6dd43b9154daf7fc85bd70a60d23cd41c460b"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [58, 39, 385, 79],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42709-compact.png", "sha256": "b54d2c15d2094de481088709893e12d4e4a837e8a4ff83c551b26fdf354de7a3"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 385, 79], "minimumHeight": "81px"}, "en": {"frame": [464, 769], "memo": [58, 39, 385, 79], "minimumHeight": "81px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42710",
+        "kind": "FixedWidth",
+        "horizontal": "false",
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42710/Ext/Form.xml", "sha256": "1ec320a4d48499dc4bd189829e2d48cdcba008b3bde5ecfe5908e821c586d540"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [58, 39, 311, 51],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42710-medium.png", "sha256": "c5c6ff8d8954b8e6194813fbdb49a1b4967b23b4ecec35cc97162b889d316a70"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [58, 39, 311, 51],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42710-compact.png", "sha256": "524dbb2e00f4e161b5fc57dcb863a67f85ab51612f9cfbbe83692a59d2bb9bf4"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 311, 51], "minimumHeight": "53px"}, "en": {"frame": [464, 769], "memo": [58, 39, 311, 51], "minimumHeight": "53px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42711",
+        "kind": "SmallFont",
+        "font": 8,
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42711/Ext/Form.xml", "sha256": "dfeee12aebddac13d5e7623ce3f7e5115feace42f2b75af73b112798ac2adf4e"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [58, 39, 343, 45],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42711-medium.png", "sha256": "7c5d4d694c6174340007af5eee805b29d25c045723b7a983389bb4da72ad5ae3"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [58, 39, 343, 45],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42711-compact.png", "sha256": "a0b8929733ed18458e86fec97e7fa825839bf7e7c7f3a91ebfc50e87d84c9563"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 343, 45], "minimumHeight": "47px"}, "en": {"frame": [464, 769], "memo": [58, 39, 343, 45], "minimumHeight": "47px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42712",
+        "kind": "LargeFont",
+        "font": 14,
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42712/Ext/Form.xml", "sha256": "8797fc90c2a6a4517b06e7c09ddfeee09e736734e081f6812b652604fa611c3f"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [58, 39, 385, 76],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42712-medium.png", "sha256": "7f33e3432033725f19ba3e849f7861ea438fb14444f552da6ccd8d57d275ad42"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [58, 39, 385, 76],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42712-compact.png", "sha256": "e849363e4da53f6384c74a124ba6e0896289a00cb37fc2418afc41013f0d0e08"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 385, 76], "minimumHeight": "78px"}, "en": {"frame": [464, 769], "memo": [58, 39, 385, 76], "minimumHeight": "78px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42713",
+        "kind": "AuthoredFormHeight",
+        "formHeight": 8,
+        "filler": 0,
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42713/Ext/Form.xml", "sha256": "b6221db60f75d26830dedbe0312bd3b8b94c1bb909eeb43f498ea97fdb586967"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, 180],
+            "memo": [58, 39, 385, 23],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42713-medium.png", "sha256": "a51111e6a76273bd0e2edb743ab155002215b8af6720a22c9d2125b7225b18b9"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 180],
+            "memo": [58, 39, 385, 23],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42713-compact.png", "sha256": "e4b361ed1b2934cff4ee104b6f423b6c4c8695f50eeaa60b3dc80381023b9e31"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 180], "memo": [58, 39, 385, 23], "minimumHeight": "25px"}, "en": {"frame": [464, 180], "memo": [58, 39, 385, 23], "minimumHeight": "25px"}}
+      },
+      {
+        "form": "ProbeWidthMemo42714",
+        "kind": "ManualMaximum",
+        "maxHeight": 1,
+        "source": {"path": "form-native-memo-height-aHrrbP0c/src/CommonForms/ProbeWidthMemo42714/Ext/Form.xml", "sha256": "54c5ad64580c21329be78268aa62b905f873a84f5f2f23ab56b36fa81102b98f"},
+        "native": [
+          {
+            "preset": "medium",
+            "frame": [464, null],
+            "memo": [58, 39, 385, 51],
+            "formScrollThumb": false,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42714-medium.png", "sha256": "0bb406bf6cd481012901da268299fdbca1b1b942712d48226504a93f85342d3b"}
+          },
+          {
+            "preset": "compact",
+            "frame": [464, 769],
+            "memo": [58, 39, 385, 51],
+            "formScrollThumb": true,
+            "capture": {"path": "form-native-memo-height-aHrrbP0c/ProbeWidthMemo42714-compact.png", "sha256": "a1daf082305ddf553163ee536d5a3072c81dbf1868a609a9b59e86839cbd9099"}
+          }
+        ],
+        "viewer": {"ru": {"frame": [464, 769], "memo": [58, 39, 385, 51], "minimumHeight": "53px"}, "en": {"frame": [464, 769], "memo": [58, 39, 385, 51], "minimumHeight": "53px"}}
+      }
+    ]
+  },
+  "loanDisbursement": {
+    "source": "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml",
+    "sourceSha256": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875",
+    "sourceXmlUnchanged": true,
+    "nativeCompact": {
+      "frame": [696, 760],
+      "paymentMemo": [484, 339, 191, 51],
+      "references": [[400, 447, 154, 23], [400, 498, 154, 23]],
+      "pictures": [[564, 428, 20, 18], [564, 479, 20, 18]],
+      "table": [13, 589, 662, 227],
+      "memo": [13, 844, 511, 51],
+      "scrollOffset": 174,
+      "topCapture": {"path": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-top-crop.png", "sha256": "0d236d878fe55602d62c62dd4cf50a9931348f4f75edbe6edecaf3f196399fbd"},
+      "bottomCapture": {"path": "form-cf-intake-1RN3roMt/native-stalingrad-i7PTD8oc/loan-footer-1024-bottom-crop.png", "sha256": "5493bc1e893b69e1836a0daf1d07c52ded1de9fd974ee3d1bd15897d03b255f7"},
+      "paymentCaptionInk": {"reference": "loan-footer-1024-top-crop.png, dark rows of the three bank-caption lines are separated by 15 px", "beforeExplorerPitchPx": 16, "nativePitchPx": 15}
+    },
+    "baseline": {
+      "explorerCommit": "ecc739e0a0538f1f155498b7928227314e9bd750",
+      "geometry": {"path": "form-installed-loan-lower-bunNPUPv/loan-ru/geometry.json", "sha256": "8c52958ab9cb4abca22383f9df87dcbd070ace384197571913a8888120ca5ab3"},
+      "poses": [
+        {
+          "requested": [1156, 875],
+          "frame": [1156, 875],
+          "scrollOffset": 0,
+          "controls": {
+            "880": [727, 122, 110, 23],
+            "883": [868, 122, 101, 23],
+            "954": [727, 154, 408, 23],
+            "857": [727, 186, 408, 23],
+            "899": [727, 218, 408, 23],
+            "902": [727, 250, 408, 23],
+            "886": [727, 282, 408, 51],
+            "948": [633, 390, 266, 23],
+            "971": [909, 389.5, 20, 18],
+            "951": [633, 422, 266, 23],
+            "976": [909, 421.5, 20, 18],
+            "989": [13, 531, 1122, 227],
+            "23": [13, 785, 511, 77],
+            "26": [635, 845.5, 500, 16]
+          },
+          "wrappedBankCaption": [],
+          "wrappedContractCaption": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [994, 875],
+          "frame": [994, 875],
+          "scrollOffset": 0,
+          "controls": {
+            "880": [727, 122, 110, 23],
+            "883": [868, 122, 101, 23],
+            "954": [727, 154, 246, 23],
+            "857": [727, 186, 246, 23],
+            "899": [727, 218, 246, 23],
+            "902": [727, 250, 246, 23],
+            "886": [727, 282, 246, 51],
+            "948": [633, 390, 176, 23],
+            "971": [819, 389.5, 20, 18],
+            "951": [633, 422, 176, 23],
+            "976": [819, 421.5, 20, 18],
+            "989": [13, 531, 960, 227],
+            "23": [13, 785, 511, 77],
+            "26": [635, 845.5, 338, 16]
+          },
+          "wrappedBankCaption": [],
+          "wrappedContractCaption": [],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [760, 875],
+          "frame": [760, 875],
+          "scrollOffset": 0,
+          "controls": {
+            "880": [487, 122, 110, 23],
+            "883": [628, 122, 101, 23],
+            "954": [548, 154, 191, 23],
+            "857": [548, 209, 191, 23],
+            "899": [548, 248, 191, 23],
+            "902": [548, 287, 191, 23],
+            "886": [548, 342, 191, 40],
+            "948": [464, 439, 154, 23],
+            "971": [628, 419.5, 20, 18],
+            "951": [464, 490, 154, 23],
+            "976": [628, 470.5, 20, 18],
+            "989": [13, 580, 726, 227],
+            "23": [13, 834, 511, 51],
+            "26": [116, 894.5, 623, 16]
+          },
+          "wrappedBankCaption": [[464, 153, 80, 16], [464, 169, 80, 16], [464, 185, 80, 16]],
+          "wrappedContractCaption": [[464, 286, 80, 16], [464, 302, 80, 16], [464, 318, 80, 16]],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [696, 760],
+          "frame": [696, 760],
+          "scrollOffset": 0,
+          "controls": {
+            "880": [423, 122, 110, 23],
+            "883": [564, 122, 101, 23],
+            "954": [484, 154, 191, 23],
+            "857": [484, 209, 191, 23],
+            "899": [484, 248, 191, 23],
+            "902": [484, 287, 191, 23],
+            "886": [484, 342, 191, 40],
+            "948": [400, 439, 154, 23],
+            "971": [564, 419.5, 20, 18],
+            "951": [400, 490, 154, 23],
+            "976": [564, 470.5, 20, 18],
+            "989": [13, 580, 662, 227],
+            "23": [13, 834, 511, 51],
+            "26": [116, 894.5, 559, 16]
+          },
+          "wrappedBankCaption": [[400, 153, 80, 16], [400, 169, 80, 16], [400, 185, 80, 16]],
+          "wrappedContractCaption": [[400, 286, 80, 16], [400, 302, 80, 16], [400, 318, 80, 16]],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        {
+          "requested": [1156, 875],
+          "frame": [1156, 875],
+          "scrollOffset": 0,
+          "controls": {
+            "880": [727, 122, 110, 23],
+            "883": [868, 122, 101, 23],
+            "954": [727, 154, 408, 23],
+            "857": [727, 186, 408, 23],
+            "899": [727, 218, 408, 23],
+            "902": [727, 250, 408, 23],
+            "886": [727, 282, 408, 51],
+            "948": [633, 390, 266, 23],
+            "971": [909, 389.5, 20, 18],
+            "951": [633, 422, 266, 23],
+            "976": [909, 421.5, 20, 18],
+            "989": [13, 531, 1122, 227],
+            "23": [13, 785, 511, 77],
+            "26": [635, 845.5, 500, 16]
+          },
+          "wrappedBankCaption": [],
+          "wrappedContractCaption": [],
+          "sameOwners": true,
+          "selection": "948"
+        }
+      ],
+      "captures": {
+        "loan-696": {"path": "form-installed-loan-lower-bunNPUPv/loan-ru/loan-696.png", "sha256": "74a719ba1b945cb20936debe25d9f7c745377ce668eb60649176425f567ea226"},
+        "loan-696-bottom": {"path": "form-installed-loan-lower-bunNPUPv/loan-ru/loan-696-bottom.png", "sha256": "c26f5682800157e8f81f25e6f0dcfbf4e1eb9b5e3c308a0e93f00ee461505693"},
+        "loan-760": {"path": "form-installed-loan-lower-bunNPUPv/loan-ru/loan-760.png", "sha256": "9e758f9c8e107507e2c64cbd529b0aa987ec846ac39c6480ca5b3ab1c80496ac"},
+        "loan-1156": {"path": "form-installed-loan-lower-bunNPUPv/loan-ru/loan-1156.png", "sha256": "0c8cf70f83f091c56e572d940d4f423870ccacac195802aab852f138de9f40e2"}
+      }
+    },
+    "viewer": {
+      "ru": {
+        "geometry": {"path": "form-installed-loan-lower-VWzOHZD0/loan-ru/geometry.json", "sha256": "11442fde83a0cee005961605a8002d9d71c4e9b14cfee94bdf6b244516f87c3b"},
+        "poses": [
+          {
+            "requested": [1156, 875],
+            "frame": [1156, 875],
+            "scrollOffset": 0,
+            "controls": {
+              "880": [727, 122, 110, 23],
+              "883": [868, 122, 101, 23],
+              "954": [727, 154, 408, 23],
+              "857": [727, 186, 408, 23],
+              "899": [727, 218, 408, 23],
+              "902": [727, 250, 408, 23],
+              "886": [727, 282, 408, 51],
+              "948": [633, 390, 266, 23],
+              "971": [909, 389.5, 20, 18],
+              "951": [633, 422, 266, 23],
+              "976": [909, 421.5, 20, 18],
+              "989": [13, 531, 1122, 227],
+              "23": [13, 785, 511, 77],
+              "26": [635, 845.5, 500, 16]
+            },
+            "wrappedBankCaption": [],
+            "wrappedContractCaption": [],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [994, 875],
+            "frame": [994, 875],
+            "scrollOffset": 0,
+            "controls": {
+              "880": [727, 122, 110, 23],
+              "883": [868, 122, 101, 23],
+              "954": [727, 154, 246, 23],
+              "857": [727, 186, 246, 23],
+              "899": [727, 218, 246, 23],
+              "902": [727, 250, 246, 23],
+              "886": [727, 282, 246, 51],
+              "948": [633, 390, 176, 23],
+              "971": [819, 389.5, 20, 18],
+              "951": [633, 422, 176, 23],
+              "976": [819, 421.5, 20, 18],
+              "989": [13, 531, 960, 227],
+              "23": [13, 785, 511, 77],
+              "26": [635, 845.5, 338, 16]
+            },
+            "wrappedBankCaption": [],
+            "wrappedContractCaption": [],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [760, 875],
+            "frame": [760, 875],
+            "scrollOffset": 0,
+            "controls": {
+              "880": [487, 122, 110, 23],
+              "883": [628, 122, 101, 23],
+              "954": [548, 154, 191, 23],
+              "857": [548, 208, 191, 23],
+              "899": [548, 247, 191, 23],
+              "902": [548, 286, 191, 23],
+              "886": [548, 340, 191, 51],
+              "948": [464, 448, 154, 23],
+              "971": [628, 428.5, 20, 18],
+              "951": [464, 499, 154, 23],
+              "976": [628, 479.5, 20, 18],
+              "989": [13, 589, 726, 227],
+              "23": [13, 843, 511, 51],
+              "26": [116, 903.5, 623, 16]
+            },
+            "wrappedBankCaption": [[464, 154, 80, 15], [464, 169, 80, 15], [464, 184, 80, 15]],
+            "wrappedContractCaption": [[464, 286, 80, 15], [464, 301, 80, 15], [464, 316, 80, 15]],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [696, 760],
+            "frame": [696, 760],
+            "scrollOffset": 0,
+            "controls": {
+              "880": [423, 122, 110, 23],
+              "883": [564, 122, 101, 23],
+              "954": [484, 154, 191, 23],
+              "857": [484, 208, 191, 23],
+              "899": [484, 247, 191, 23],
+              "902": [484, 286, 191, 23],
+              "886": [484, 340, 191, 51],
+              "948": [400, 448, 154, 23],
+              "971": [564, 428.5, 20, 18],
+              "951": [400, 499, 154, 23],
+              "976": [564, 479.5, 20, 18],
+              "989": [13, 589, 662, 227],
+              "23": [13, 843, 511, 51],
+              "26": [116, 903.5, 559, 16]
+            },
+            "wrappedBankCaption": [[400, 154, 80, 15], [400, 169, 80, 15], [400, 184, 80, 15]],
+            "wrappedContractCaption": [[400, 286, 80, 15], [400, 301, 80, 15], [400, 316, 80, 15]],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [1156, 875],
+            "frame": [1156, 875],
+            "scrollOffset": 0,
+            "controls": {
+              "880": [727, 122, 110, 23],
+              "883": [868, 122, 101, 23],
+              "954": [727, 154, 408, 23],
+              "857": [727, 186, 408, 23],
+              "899": [727, 218, 408, 23],
+              "902": [727, 250, 408, 23],
+              "886": [727, 282, 408, 51],
+              "948": [633, 390, 266, 23],
+              "971": [909, 389.5, 20, 18],
+              "951": [633, 422, 266, 23],
+              "976": [909, 421.5, 20, 18],
+              "989": [13, 531, 1122, 227],
+              "23": [13, 785, 511, 77],
+              "26": [635, 845.5, 500, 16]
+            },
+            "wrappedBankCaption": [],
+            "wrappedContractCaption": [],
+            "sameOwners": true,
+            "selection": "948"
+          }
+        ],
+        "bottom": {
+          "requested": null,
+          "frame": [696, 760],
+          "scrollOffset": 173,
+          "controls": {
+            "880": [423, -51, 110, 23],
+            "883": [564, -51, 101, 23],
+            "954": [484, -19, 191, 23],
+            "857": [484, 35, 191, 23],
+            "899": [484, 74, 191, 23],
+            "902": [484, 113, 191, 23],
+            "886": [484, 167, 191, 51],
+            "948": [400, 275, 154, 23],
+            "971": [564, 255.5, 20, 18],
+            "951": [400, 326, 154, 23],
+            "976": [564, 306.5, 20, 18],
+            "989": [13, 416, 662, 227],
+            "23": [13, 670, 511, 51],
+            "26": [116, 730.5, 559, 16]
+          },
+          "wrappedBankCaption": [[400, -19, 80, 15], [400, -4, 80, 15], [400, 11, 80, 15]],
+          "wrappedContractCaption": [[400, 113, 80, 15], [400, 128, 80, 15], [400, 143, 80, 15]],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        "dirty": {
+          "before": {"memo": [484, 300, 191, 51], "table": [13, 549, 662, 227], "scrollOffset": 40, "sameOwners": true, "selection": "948"},
+          "changed": {"memo": [484, 300, 191, 79], "table": [13, 577, 662, 227], "scrollOffset": 40, "sameOwners": true, "selection": "948"},
+          "restored": {"memo": [484, 300, 191, 51], "table": [13, 549, 662, 227], "scrollOffset": 40, "sameOwners": true, "selection": "948"}
+        },
+        "captures": {
+          "loan-696": {"path": "form-installed-loan-lower-VWzOHZD0/loan-ru/loan-696.png", "sha256": "d0972fa22437f2eb16885652b90bb6f4b44d838ea8bb13b6d81f653d78702e27"},
+          "loan-696-bottom": {"path": "form-installed-loan-lower-VWzOHZD0/loan-ru/loan-696-bottom.png", "sha256": "5665511ff78e35f1857bd226f29e051099988926da4b0f42bf885c4fa1758f27"},
+          "loan-760": {"path": "form-installed-loan-lower-VWzOHZD0/loan-ru/loan-760.png", "sha256": "8e7277985ad6d5002ed217ae23648408d22ce84e2d854b257ba9ef1c9dc55937"},
+          "loan-1156": {"path": "form-installed-loan-lower-VWzOHZD0/loan-ru/loan-1156.png", "sha256": "0c8cf70f83f091c56e572d940d4f423870ccacac195802aab852f138de9f40e2"}
+        }
+      },
+      "en": {
+        "geometry": {"path": "form-installed-loan-lower-VWzOHZD0/loan-en/geometry.json", "sha256": "cde9ee44a4fe2d5ed2173c56740dfc1c54771842ee794f3d9687b2e8d47e1fc2"},
+        "poses": [
+          {
+            "requested": [1156, 875],
+            "frame": [1156, 875],
+            "scrollOffset": 0,
+            "controls": {
+              "880": [727, 122, 110, 23],
+              "883": [868, 122, 101, 23],
+              "954": [727, 154, 408, 23],
+              "857": [727, 186, 408, 23],
+              "899": [727, 218, 408, 23],
+              "902": [727, 250, 408, 23],
+              "886": [727, 282, 408, 51],
+              "948": [633, 390, 266, 23],
+              "971": [909, 389.5, 20, 18],
+              "951": [633, 422, 266, 23],
+              "976": [909, 421.5, 20, 18],
+              "989": [13, 531, 1122, 227],
+              "23": [13, 785, 511, 77],
+              "26": [635, 845.5, 500, 16]
+            },
+            "wrappedBankCaption": [],
+            "wrappedContractCaption": [],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [994, 875],
+            "frame": [994, 875],
+            "scrollOffset": 0,
+            "controls": {
+              "880": [727, 122, 110, 23],
+              "883": [868, 122, 101, 23],
+              "954": [727, 154, 246, 23],
+              "857": [727, 186, 246, 23],
+              "899": [727, 218, 246, 23],
+              "902": [727, 250, 246, 23],
+              "886": [727, 282, 246, 51],
+              "948": [633, 390, 176, 23],
+              "971": [819, 389.5, 20, 18],
+              "951": [633, 422, 176, 23],
+              "976": [819, 421.5, 20, 18],
+              "989": [13, 531, 960, 227],
+              "23": [13, 785, 511, 77],
+              "26": [635, 845.5, 338, 16]
+            },
+            "wrappedBankCaption": [],
+            "wrappedContractCaption": [],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [760, 875],
+            "frame": [760, 875],
+            "scrollOffset": 0,
+            "controls": {
+              "880": [487, 122, 110, 23],
+              "883": [628, 122, 101, 23],
+              "954": [548, 154, 191, 23],
+              "857": [548, 208, 191, 23],
+              "899": [548, 247, 191, 23],
+              "902": [548, 286, 191, 23],
+              "886": [548, 340, 191, 51],
+              "948": [464, 448, 154, 23],
+              "971": [628, 428.5, 20, 18],
+              "951": [464, 499, 154, 23],
+              "976": [628, 479.5, 20, 18],
+              "989": [13, 589, 726, 227],
+              "23": [13, 843, 511, 51],
+              "26": [116, 903.5, 623, 16]
+            },
+            "wrappedBankCaption": [[464, 154, 80, 15], [464, 169, 80, 15], [464, 184, 80, 15]],
+            "wrappedContractCaption": [[464, 286, 80, 15], [464, 301, 80, 15], [464, 316, 80, 15]],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [696, 760],
+            "frame": [696, 760],
+            "scrollOffset": 0,
+            "controls": {
+              "880": [423, 122, 110, 23],
+              "883": [564, 122, 101, 23],
+              "954": [484, 154, 191, 23],
+              "857": [484, 208, 191, 23],
+              "899": [484, 247, 191, 23],
+              "902": [484, 286, 191, 23],
+              "886": [484, 340, 191, 51],
+              "948": [400, 448, 154, 23],
+              "971": [564, 428.5, 20, 18],
+              "951": [400, 499, 154, 23],
+              "976": [564, 479.5, 20, 18],
+              "989": [13, 589, 662, 227],
+              "23": [13, 843, 511, 51],
+              "26": [116, 903.5, 559, 16]
+            },
+            "wrappedBankCaption": [[400, 154, 80, 15], [400, 169, 80, 15], [400, 184, 80, 15]],
+            "wrappedContractCaption": [[400, 286, 80, 15], [400, 301, 80, 15], [400, 316, 80, 15]],
+            "sameOwners": true,
+            "selection": "948"
+          },
+          {
+            "requested": [1156, 875],
+            "frame": [1156, 875],
+            "scrollOffset": 0,
+            "controls": {
+              "880": [727, 122, 110, 23],
+              "883": [868, 122, 101, 23],
+              "954": [727, 154, 408, 23],
+              "857": [727, 186, 408, 23],
+              "899": [727, 218, 408, 23],
+              "902": [727, 250, 408, 23],
+              "886": [727, 282, 408, 51],
+              "948": [633, 390, 266, 23],
+              "971": [909, 389.5, 20, 18],
+              "951": [633, 422, 266, 23],
+              "976": [909, 421.5, 20, 18],
+              "989": [13, 531, 1122, 227],
+              "23": [13, 785, 511, 77],
+              "26": [635, 845.5, 500, 16]
+            },
+            "wrappedBankCaption": [],
+            "wrappedContractCaption": [],
+            "sameOwners": true,
+            "selection": "948"
+          }
+        ],
+        "bottom": {
+          "requested": null,
+          "frame": [696, 760],
+          "scrollOffset": 173,
+          "controls": {
+            "880": [423, -51, 110, 23],
+            "883": [564, -51, 101, 23],
+            "954": [484, -19, 191, 23],
+            "857": [484, 35, 191, 23],
+            "899": [484, 74, 191, 23],
+            "902": [484, 113, 191, 23],
+            "886": [484, 167, 191, 51],
+            "948": [400, 275, 154, 23],
+            "971": [564, 255.5, 20, 18],
+            "951": [400, 326, 154, 23],
+            "976": [564, 306.5, 20, 18],
+            "989": [13, 416, 662, 227],
+            "23": [13, 670, 511, 51],
+            "26": [116, 730.5, 559, 16]
+          },
+          "wrappedBankCaption": [[400, -19, 80, 15], [400, -4, 80, 15], [400, 11, 80, 15]],
+          "wrappedContractCaption": [[400, 113, 80, 15], [400, 128, 80, 15], [400, 143, 80, 15]],
+          "sameOwners": true,
+          "selection": "948"
+        },
+        "dirty": {
+          "before": {"memo": [484, 300, 191, 51], "table": [13, 549, 662, 227], "scrollOffset": 40, "sameOwners": true, "selection": "948"},
+          "changed": {"memo": [484, 300, 191, 79], "table": [13, 577, 662, 227], "scrollOffset": 40, "sameOwners": true, "selection": "948"},
+          "restored": {"memo": [484, 300, 191, 51], "table": [13, 549, 662, 227], "scrollOffset": 40, "sameOwners": true, "selection": "948"}
+        },
+        "captures": {
+          "loan-696": {"path": "form-installed-loan-lower-VWzOHZD0/loan-en/loan-696.png", "sha256": "0ff416b5e2d511a305241715dfa560b6a6463905125d2759378bcbee889cf4be"},
+          "loan-696-bottom": {"path": "form-installed-loan-lower-VWzOHZD0/loan-en/loan-696-bottom.png", "sha256": "c62d8583c2009db5682ff23079abfc9e132d3f57a74fd6b305706754cf6022f1"},
+          "loan-760": {"path": "form-installed-loan-lower-VWzOHZD0/loan-en/loan-760.png", "sha256": "372337da39d0b298225da7e7ea7303c78ae642e18a18432a87e91ceb5ce80298"},
+          "loan-1156": {"path": "form-installed-loan-lower-VWzOHZD0/loan-en/loan-1156.png", "sha256": "f3d25f33051aa8749f79b75ae351d03e93dc1e446b82a8f5aa8ed2f10897965a"}
+        }
+      }
+    }
+  },
+  "remaining": [
+    "Some field coordinates still differ by one pixel and some controls differ in width.",
+    "Scrollbar appearance, complete screenshots and Windows require separate acceptance."
+  ]
+}
