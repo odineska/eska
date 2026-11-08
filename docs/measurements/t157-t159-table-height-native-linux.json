@@ -605,6 +605,13 @@
     "newTableChangeCausedFailure": false,
     "nativeRecheckRequired": true,
     "expectedGeometryUnchanged": true,
-    "driverRefinements": "Linux MaxWidth=25 expects 260 px from native-text-inputs; establish a 1200x900 test window before checking overflow."
+    "driverRefinements": "Linux MaxWidth=25 expects 260 px from native-text-inputs; establish a 1200x900 test window before checking overflow.",
+    "resolvedBy": {
+      "backendCommit": "c8867c6",
+      "report": "t157-t158-unbound-buttons-linux.json",
+      "cause": "Unbound Find button was rendered; title font was correct.",
+      "nativeGroupHeight": 50,
+      "responsiveRuEnPassed": true
+    }
   }
 }
