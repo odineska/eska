@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+	</Title>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<InputField name="Above" id="1">
+			<DataPath>Name</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<Width>1</Width>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#FFEFBA</BackColor>
+			<ContextMenu name="AboveContextMenu" id="2"/>
+			<ExtendedTooltip name="AboveExtendedTooltip" id="3"/>
+		</InputField>
+		<UsualGroup name="Strings" id="4">
+			<HorizontalStretch>true</HorizontalStretch>
+			<Group>Vertical</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="StringsРасширеннаяПодсказка" id="32"/>
+			<ChildItems>
+				<UsualGroup name="Row0" id="5">
+					<HorizontalStretch>true</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row0РасширеннаяПодсказка" id="33"/>
+					<ChildItems>
+						<InputField name="L09" id="6">
+							<DataPath>L09</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<AutoMaxWidth>false</AutoMaxWidth>
+							<MaxWidth>54</MaxWidth>
+							<ChoiceButton>false</ChoiceButton>
+							<BackColor>#506EDC</BackColor>
+							<ContextMenu name="ValueContextMenu" id="7"/>
+							<ExtendedTooltip name="ValueTooltip" id="8"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row1" id="9">
+					<HorizontalStretch>true</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row1РасширеннаяПодсказка" id="34"/>
+					<ChildItems>
+						<InputField name="L10" id="10">
+							<DataPath>L10</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<AutoMaxWidth>false</AutoMaxWidth>
+							<MaxWidth>54</MaxWidth>
+							<ChoiceButton>false</ChoiceButton>
+							<BackColor>#576EDC</BackColor>
+							<ContextMenu name="ValueContextMenu" id="11"/>
+							<ExtendedTooltip name="ValueTooltip" id="12"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row2" id="13">
+					<HorizontalStretch>true</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row2РасширеннаяПодсказка" id="35"/>
+					<ChildItems>
+						<InputField name="L11" id="14">
+							<DataPath>L11</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<AutoMaxWidth>false</AutoMaxWidth>
+							<MaxWidth>54</MaxWidth>
+							<ChoiceButton>false</ChoiceButton>
+							<BackColor>#5E6EDC</BackColor>
+							<ContextMenu name="ValueContextMenu" id="15"/>
+							<ExtendedTooltip name="ValueTooltip" id="16"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row3" id="17">
+					<HorizontalStretch>true</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row3РасширеннаяПодсказка" id="36"/>
+					<ChildItems>
+						<InputField name="L12" id="18">
+							<DataPath>L12</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<AutoMaxWidth>false</AutoMaxWidth>
+							<MaxWidth>54</MaxWidth>
+							<ChoiceButton>false</ChoiceButton>
+							<BackColor>#656EDC</BackColor>
+							<ContextMenu name="ValueContextMenu" id="19"/>
+							<ExtendedTooltip name="ValueTooltip" id="20"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row4" id="21">
+					<HorizontalStretch>true</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row4РасширеннаяПодсказка" id="37"/>
+					<ChildItems>
+						<InputField name="L13" id="22">
+							<DataPath>L13</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<AutoMaxWidth>false</AutoMaxWidth>
+							<MaxWidth>54</MaxWidth>
+							<ChoiceButton>false</ChoiceButton>
+							<BackColor>#6C6EDC</BackColor>
+							<ContextMenu name="ValueContextMenu" id="23"/>
+							<ExtendedTooltip name="ValueTooltip" id="24"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row5" id="25">
+					<HorizontalStretch>true</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row5РасширеннаяПодсказка" id="38"/>
+					<ChildItems>
+						<InputField name="L14" id="26">
+							<DataPath>L14</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<AutoMaxWidth>false</AutoMaxWidth>
+							<MaxWidth>54</MaxWidth>
+							<ChoiceButton>false</ChoiceButton>
+							<BackColor>#736EDC</BackColor>
+							<ContextMenu name="ValueContextMenu" id="27"/>
+							<ExtendedTooltip name="ValueTooltip" id="28"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+			</ChildItems>
+		</UsualGroup>
+		<InputField name="Below" id="29">
+			<DataPath>Name</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<Width>70</Width>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#A8E4B8</BackColor>
+			<ContextMenu name="BelowContextMenu" id="30"/>
+			<ExtendedTooltip name="BelowExtendedTooltip" id="31"/>
+		</InputField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Name" id="32">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="L09" id="33">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>9</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="L10" id="34">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>10</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="L11" id="35">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>11</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="L12" id="36">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>12</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="L13" id="37">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>13</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="L14" id="38">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>14</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+</Form>
