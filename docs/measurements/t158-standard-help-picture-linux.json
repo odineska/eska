@@ -1,0 +1,630 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T22:35:45.856523+00:00",
+  "scope": [
+    "T158",
+    "T157",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "implementation": {
+    "core": "Bound standard Help commands expose the existing StdPicture.Help resource. Explicit pictures retain precedence. Empty Ref=0 has no missing-resource diagnostic. Explicit picture-only mode stays blank without an image; unavailable references still retain their warning and text fallback.",
+    "renderer": "Ordinary Linux picture-only buttons use half the native horizontal padding, a 16-px picture and the existing control height. Mixed captions keep the right text padding and use its remaining half as the gap. Existing root-toolbar mixed padding is retained.",
+    "caption": "Regular non-italic button captions reuse wordTextAdvances; bold/italic and tabs keep their existing calibrated measurement. Local Cyrillic controls prove this is not a standard-command or form-name exception.",
+    "newDependencies": false,
+    "newProtocolFields": false,
+    "sourceWrites": false,
+    "formNameExceptions": false,
+    "coreCommit": "c8caf88864fcaafad476f7f1aa750a90043bf104",
+    "rendererCommit": "462222fd5a06d646140d3c927d86f5c6eec6a93d",
+    "protocolBehaviorChange": "The existing buttonRepresentation field now preserves explicitly selected Picture even when picture is null. Consumers must honor that mode instead of substituting a caption; no JSON field or enum value was added."
+  },
+  "native": {
+    "fixture": "tests/fixtures/forms/native-help-command",
+    "ordinaryForms": 13,
+    "completeFrames": 26,
+    "metricsSha256": "8eaafc75c8f657f7bf5217c2c9679aa6f701f454dff69858c15724dc9e06eb4e",
+    "manifestSha256": "70425f332684ce7a9d868681c4bf92450797bb7f4b167da4c660186aec1e669a",
+    "sourcesUnchanged": true,
+    "runs": [
+      {
+        "locale": "en",
+        "exitCode": 0,
+        "sourcesUnchanged": true,
+        "stand": "form-native-help-command-mum8dpu0"
+      },
+      {
+        "locale": "ru",
+        "exitCode": 0,
+        "sourcesUnchanged": true,
+        "stand": "form-native-help-command-mum8dpu0"
+      },
+      {
+        "locale": "en",
+        "exitCode": 0,
+        "sourcesUnchanged": true,
+        "stand": "form-native-help-command-font16-cmwaxtaa"
+      },
+      {
+        "locale": "ru",
+        "exitCode": 0,
+        "sourcesUnchanged": true,
+        "stand": "form-native-help-command-font16-cmwaxtaa"
+      },
+      {
+        "locale": "en",
+        "exitCode": 0,
+        "sourcesUnchanged": true,
+        "stand": "form-native-help-command-caption-pnjlfrk5"
+      },
+      {
+        "locale": "ru",
+        "exitCode": 0,
+        "sourcesUnchanged": true,
+        "stand": "form-native-help-command-caption-pnjlfrk5"
+      },
+      {
+        "locale": "en",
+        "exitCode": 0,
+        "sourcesUnchanged": true,
+        "stand": "form-native-help-command-empty-f9iz0hr_"
+      },
+      {
+        "locale": "ru",
+        "exitCode": 0,
+        "sourcesUnchanged": true,
+        "stand": "form-native-help-command-empty-f9iz0hr_"
+      }
+    ],
+    "normalization": "BOM and CRLF only; the platform serializes a cleared picture as Ref=0.",
+    "buttonRgbHashes": "Preserved for future complete-pixel comparison; this new installed suite checks geometry and content presence, not complete button pixels.",
+    "commandBarNegativeControls": {
+      "forms": 2,
+      "frames": 4,
+      "observationsSha256": "1d5b3d6c95d3267fc7c011b380de85a09c44190916c2e3c2b8a0a61335f75e55",
+      "stand": "form-native-help-command-bar-quavbfy3",
+      "sourcesUnchanged": true,
+      "allRedCaptionPixelCountsZero": true,
+      "wholeCommandBarGeometryAccepted": false
+    }
+  },
+  "baseline": {
+    "stand": "form-help-command-probe-e7k85qml",
+    "artifactSource": "form-batch-wP0G1K",
+    "diagnosticOnly": true,
+    "runs": [
+      {
+        "locale": "en",
+        "matched": 3,
+        "total": 6
+      },
+      {
+        "locale": "ru",
+        "matched": 3,
+        "total": 6
+      }
+    ]
+  },
+  "intermediateCheckpoints": [
+    {
+      "checkpoint": "first",
+      "stand": "form-batch-8Ovl5a",
+      "passed": false,
+      "vsixSha256": "eb4a56603932dd4bbd99edf9dd1b29baa513b7beef1197be69396c6ceb48a686",
+      "runs": [
+        {
+          "suite": "help-command",
+          "locale": "en",
+          "passed": false
+        },
+        {
+          "suite": "help-command",
+          "locale": "ru",
+          "passed": false
+        }
+      ],
+      "description": "PictureAndText initially measured 75/99 px instead of 70/94; corrected by common native padding, gap and picture-only font scaling."
+    },
+    {
+      "checkpoint": "second",
+      "stand": "form-batch-uoQtaB",
+      "passed": false,
+      "vsixSha256": "3be8a4ccaa34160b50cef03e710b0caa09511e891c66aef1717ef97b06a2fa5a",
+      "runs": [
+        {
+          "suite": "help-command",
+          "locale": "en",
+          "passed": true
+        },
+        {
+          "suite": "help-command",
+          "locale": "ru",
+          "passed": false
+        }
+      ],
+      "description": "The English 26 states passed, while Russian HelpBoth16 was 142 instead of 143. Native local-command controls independently confirmed 83-px caption advance."
+    },
+    {
+      "checkpoint": "third",
+      "stand": "form-batch-O9xK6M",
+      "passed": true,
+      "vsixSha256": "b307ed4036becc7a1df13b744e4d728c4ce06463af2170f2d07950269b4a877c",
+      "runs": [
+        {
+          "suite": "help-command",
+          "locale": "en",
+          "passed": true
+        },
+        {
+          "suite": "help-command",
+          "locale": "ru",
+          "passed": true
+        }
+      ],
+      "description": "Earlier 11-form checkpoint passed 32 states per locale; expanded final matrix adds two local empty-image controls."
+    }
+  ],
+  "regressionExpectationCorrection": {
+    "stand": "form-help-command-follow-8e637per",
+    "suite": "pictures",
+    "locale": "en",
+    "passed": false,
+    "description": "The old synthetic No icon assertion expected its caption despite an explicit Picture mode. Independent native usual/command-bar controls show no caption, so the assertion now requires an empty caption while retaining its no-image check. This is a documented behavioral correction; native geometry/digests and tolerances were not loosened."
+  },
+  "setupFailures": [
+    {
+      "stand": "form-native-help-command-lggqhmov",
+      "description": "The first generated source used an undeclared ns2:Ref prefix. A new stand with the registered xr namespace imported successfully; no native capture from the failed import is accepted."
+    },
+    {
+      "description": "The fixture saver initially missed its ImageChops import. It was corrected before capture data was stored; the owned partial output was completed."
+    }
+  ],
+  "checks": {
+    "logs": "form-help-command-validation-w_qil369",
+    "node": {
+      "tests": 731,
+      "pass": 723,
+      "fail": 0,
+      "skipped": 8
+    },
+    "npmCheck": "passed",
+    "hostSyntax": "passed",
+    "rust": {
+      "fmt": "passed",
+      "check": "passed",
+      "clippy": "passed",
+      "test": {
+        "passed": 1573,
+        "failed": 0,
+        "ignored": 19
+      }
+    }
+  },
+  "installed": {
+    "stand": "form-batch-EH2Grq",
+    "passed": true,
+    "builds": 1,
+    "packages": 1,
+    "runs": [
+      {
+        "suite": "help-command",
+        "locale": "en",
+        "passed": true,
+        "seconds": 19.211385484999997,
+        "states": 38
+      },
+      {
+        "suite": "help-command",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 21.369573193999997,
+        "states": 38
+      }
+    ],
+    "states": 76,
+    "vsixSha256": "15e11fc9549fc56656be61aafaad3368d6c5654292e8d63dce8f42214e3d5d1c",
+    "backendSha256": "92dc80a6f8b0be12bdc7a1db177fd2a6368cdba4c3fb7daf8a060e512e9d96ea",
+    "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288",
+    "runtimeFiles": 1262,
+    "allMiniInputsStable": true,
+    "followup": {
+      "stand": "form-help-command-final-follow-bajjwks2",
+      "passed": true,
+      "runs": [
+        {
+          "suite": "pictures",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 1,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "pictures",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 1,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "standard-pictures",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 12,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "standard-pictures",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 12,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-types",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 11,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-types",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 11,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-metrics",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 18,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-metrics",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 18,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-captions",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 6,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-captions",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 6,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-rows",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 8,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-rows",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 8,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "usual-buttons",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 18,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "usual-buttons",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 18,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-borders",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 63,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-borders",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 63,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-heights",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 32,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "button-heights",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 32,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "page-group-spacing",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 19,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "page-group-spacing",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 19,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "checkbox-caption-size",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 26,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "checkbox-caption-size",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 26,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "input-choice-size",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 20,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "input-choice-size",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 20,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "renderer",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 20,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "renderer",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 20,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "preview",
+          "locale": "en",
+          "exitCode": 0,
+          "passed": true,
+          "states": 1,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        },
+        {
+          "suite": "preview",
+          "locale": "ru",
+          "exitCode": 0,
+          "passed": true,
+          "states": 1,
+          "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288"
+        }
+      ],
+      "states": 510
+    }
+  },
+  "wholeForms": {
+    "stand": "form-help-command-whole-ssqyealr",
+    "passed": true,
+    "sourceHashes": {
+      "united-bsp-context-763t8lxb/src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "united-bsp-context-763t8lxb/src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "united-bsp-context-763t8lxb/src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875"
+    },
+    "sourcesUnchanged": true,
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.189425574004417,
+        "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.744126894998772,
+        "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.38237474700145,
+        "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.183510998998827,
+        "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.344122041999071,
+        "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 9.828895869999542,
+        "runtimeManifestSha256": "100c28613a9abc0cc3444cd87927e4545f7a038834eb5e83db22fd084971d288",
+        "runtimeFiles": 1262
+      }
+    ],
+    "bsp": {
+      "en": [
+        {
+          "sample": 0,
+          "frame": {
+            "width": 811,
+            "height": 612
+          }
+        },
+        {
+          "sample": 1,
+          "frame": {
+            "width": 801,
+            "height": 769
+          }
+        },
+        {
+          "sample": 2,
+          "frame": {
+            "width": 1222,
+            "height": 540
+          },
+          "help": {
+            "text": "",
+            "picture": true,
+            "width": 30,
+            "paintHeight": 27
+          },
+          "aggregateButtonY": [
+            231,
+            280
+          ]
+        }
+      ],
+      "ru": [
+        {
+          "sample": 0,
+          "frame": {
+            "width": 811,
+            "height": 612
+          }
+        },
+        {
+          "sample": 1,
+          "frame": {
+            "width": 801,
+            "height": 769
+          }
+        },
+        {
+          "sample": 2,
+          "frame": {
+            "width": 1222,
+            "height": 540
+          },
+          "help": {
+            "text": "",
+            "picture": true,
+            "width": 30,
+            "paintHeight": 27
+          },
+          "aggregateButtonY": [
+            231,
+            280
+          ]
+        }
+      ]
+    },
+    "loan": {
+      "grid": [
+        13,
+        589,
+        662,
+        227
+      ],
+      "footerMemo": [
+        13,
+        844,
+        511,
+        51
+      ],
+      "paymentMemo": [
+        484,
+        339,
+        191,
+        51
+      ]
+    }
+  },
+  "limitations": [
+    "New geometric/content acceptance covers the listed 10/16-pt DefaultGUIFont cases, not full pixel parity of their captions or frames.",
+    "Other font faces, sizes, states, picture sizes, authored width/height combinations, stretch, DPI and Windows need separate validation.",
+    "Default pictures of standard commands other than Help are not added or accepted by this change.",
+    "BSP totals frame and remaining whole-form geometry continue under T157; T158/T165 and performance budgets are not completed.",
+    "Command-bar negative controls establish absence of caption only; visibility, positioning, overflow and full command-bar geometry remain separate acceptance work."
+  ],
+  "windowsHandoff": [
+    "Core picture/default/empty-mode corrections apply on both operating systems; native Windows acceptance is still required.",
+    "Compare Auto/Text/Picture/PictureAndText, explicit Ref=0, absent local-command pictures and explicit overrides with the native Windows Configurator.",
+    "New button insets, scaling and regular-word measurements are Linux-specific. Run the same input matrix in both locales and actual detached windows; do not reuse Linux pixel or geometry goldens."
+  ]
+}
