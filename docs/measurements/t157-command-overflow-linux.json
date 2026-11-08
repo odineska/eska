@@ -1,0 +1,623 @@
+{
+  "schemaVersion": 1,
+  "task": "T157",
+  "issue": "https://github.com/odineska/eska/issues/265",
+  "measuredAt": "2026-11-08T03:49:31.395239+00:00",
+  "scope": "Геометрия меню дополнительных команд и смешанных горизонтальных строк на Linux; без исполнения BSL",
+  "profile": {
+    "platform": "8.3.27.2342",
+    "interface": "Taxi",
+    "os": "ALT Linux ARM64",
+    "dpi": 96,
+    "zoom": 100,
+    "locales": [
+      "en",
+      "ru"
+    ],
+    "compatibility": "Version8_3_27",
+    "pairedCompatibility": "Version8_3_24",
+    "fullNativeProfileAccepted": false,
+    "windowsAccepted": false
+  },
+  "implementation": {
+    "explorerCommit": "363c5ca2e216bb2873ceeba98d5bf970c9105300",
+    "nativeFixtureCommit": "58c58d6",
+    "commandContentOwner": "commandBarContent",
+    "spaceBeforeMore": "Наличие видимого дополнительного меню, а не пригодность табличного источника, резервирует свободное место справа",
+    "horizontalAutoInputGapPx": 10,
+    "mixedUsualButtonInsetsPx": [
+      1,
+      0,
+      2,
+      0
+    ],
+    "generatedMenuTrailingPaddingPx": 6,
+    "emptyTablePainted": false,
+    "sourceWritesDuringViewing": false,
+    "backendProtocolChanged": false,
+    "newDependencies": false
+  },
+  "nativeCorpus": {
+    "forms": 24,
+    "compatibilityProbes": 3,
+    "screenshots": 54,
+    "sourceFilesUnchanged": 2652,
+    "normalizationPreservesParsedXml": true,
+    "manifest": "tests/fixtures/forms/native-command-overflow/capture-manifest.json",
+    "manifestSha256": "c9a0fd2d3f4a926608767f5af6441a9caf159782d1e8cb4f9488d03cc69bdc8a",
+    "metricsSha256": "fc7362a96ba780302a5ef05d7833b9b6024a6ea86db32caf6609fac76515f067",
+    "naturalFrameWidths": {
+      "ru": 456,
+      "en": 504
+    },
+    "menuRightInsetPx": 21,
+    "buttonPaintIncludesBottomShadowPx": 1
+  },
+  "installedArtifact": {
+    "stand": "form-batch-pQknqC",
+    "vsixSha256": "63a88966320bafc535dc494f774f64f1b9e853fa6d88f27a0c465fb58fac13bd",
+    "backendSha256": "10b7e4b520dc9ac6f06fa3a56ebbe0b85c59a5e18658551c860e2b558ac3489d",
+    "runtimeManifestSha256": "641454a2559ccaea609e80c5dfc8a7e2f5370b30365a2b005273c3986f2efc0d",
+    "runtimeFiles": 1262,
+    "builds": 1,
+    "packages": 1,
+    "inputs": {
+      "path": "form-batch-pQknqC/inputs.json",
+      "sha256": "a77fae8f35aecc74c8750c7cbe9155f77aedfff87b6abff17766b4a19685d604"
+    }
+  },
+  "strictMatrix": {
+    "runs": [
+      {
+        "locale": "en",
+        "states": 35,
+        "baselineFormsExactlyCompared": 24,
+        "dirtyStatesComparedToNativeReferences": 8,
+        "resizeStatesFunctionalOnly": 3,
+        "screenshots": 24,
+        "receipt": {
+          "path": "form-batch-pQknqC/command-overflow-en/receipt.json",
+          "sha256": "16aa65ca82fd7ed3fe53dcfe327da4f648f867942a3c18c35279733c79dd3d82"
+        },
+        "driverLog": {
+          "path": "form-batch-pQknqC/command-overflow-en/driver.log",
+          "sha256": "0b89a854ac44d908dd372f0c12e8a4711d441321c7eb02296de91b0cbcfd9ba6"
+        }
+      },
+      {
+        "locale": "ru",
+        "states": 35,
+        "baselineFormsExactlyCompared": 24,
+        "dirtyStatesComparedToNativeReferences": 8,
+        "resizeStatesFunctionalOnly": 3,
+        "screenshots": 24,
+        "receipt": {
+          "path": "form-batch-pQknqC/command-overflow-ru/receipt.json",
+          "sha256": "e7117a48a7fb8825a0d2b78e25b7b0fc244b0455447faaee8e5537302a314eda"
+        },
+        "driverLog": {
+          "path": "form-batch-pQknqC/command-overflow-ru/driver.log",
+          "sha256": "75c7968ca244b442cafddedbfd1e2c6ec09c2864ba06ef7c11981cf41faa36fa"
+        }
+      }
+    ],
+    "totalStates": 70,
+    "nativeReferenceStates": 64,
+    "functionalResizeStates": 6,
+    "wholePaintAccepted": false
+  },
+  "regressions": {
+    "batch": {
+      "path": "form-batch-pQknqC/batch.json",
+      "sha256": "b99c1c8429861c366b1e5eab724673a4bb59d89234d039dc41645a4620904591"
+    },
+    "runs": [
+      {
+        "suite": "command-overflow",
+        "locale": "en",
+        "passed": true,
+        "caseIds": 35,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/command-overflow-en/receipt.json",
+          "sha256": "16aa65ca82fd7ed3fe53dcfe327da4f648f867942a3c18c35279733c79dd3d82"
+        }
+      },
+      {
+        "suite": "command-overflow",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": 35,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/command-overflow-ru/receipt.json",
+          "sha256": "e7117a48a7fb8825a0d2b78e25b7b0fc244b0455447faaee8e5537302a314eda"
+        }
+      },
+      {
+        "suite": "command-bars",
+        "locale": "en",
+        "passed": true,
+        "caseIds": 64,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/command-bars-en/receipt.json",
+          "sha256": "ca24e8444e63d85a0071bda92ff7e5d6dba65423eaa46290488f3c8033a3dcba"
+        }
+      },
+      {
+        "suite": "command-bars",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": 64,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/command-bars-ru/receipt.json",
+          "sha256": "0ab82f097fe3adf2428ec6f4b1f58dd8fefda7f5fec44e3b2e60b4ab2a22c401"
+        }
+      },
+      {
+        "suite": "button-rows",
+        "locale": "en",
+        "passed": false,
+        "caseIds": 0,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/button-rows-en/receipt.json",
+          "sha256": "55193aa004a64d3b8dcb1e0dad97c4e1d01c6528e72d652dce3a3791b8c3cbb5"
+        }
+      },
+      {
+        "suite": "button-rows",
+        "locale": "ru",
+        "passed": false,
+        "caseIds": 0,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/button-rows-ru/receipt.json",
+          "sha256": "fda268f1ca66432d13b8de1f224b7e031606b7f5cba72baa4fbf63b8c0b6cc53"
+        }
+      },
+      {
+        "suite": "usual-buttons",
+        "locale": "en",
+        "passed": true,
+        "caseIds": 18,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/usual-buttons-en/receipt.json",
+          "sha256": "a181ad41d862e24dc7fe0b197a1f209d7b7c22f3eed2961ae1cc4b92a35c1113"
+        }
+      },
+      {
+        "suite": "usual-buttons",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": 18,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/usual-buttons-ru/receipt.json",
+          "sha256": "a0881da937293e35fc4e40aa36c8429e318d7713ef533c08f9f20b3606a87ec3"
+        }
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "passed": true,
+        "caseIds": 22,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/groups-en/receipt.json",
+          "sha256": "a6b26b9daab39e4d8785079c2c1b7896d5bfa12cffbf549c3d7944466912cb90"
+        }
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": 22,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/groups-ru/receipt.json",
+          "sha256": "ed6979df9ea2ca7928563113878ac6904d899b8880bb63cd6948c4e76445045d"
+        }
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "passed": true,
+        "caseIds": 60,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/group-spacing-en/receipt.json",
+          "sha256": "3b931f31c1f63dccf02030e918aed94303e6c0924514fde2d2e55314fa060154"
+        }
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": 60,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/group-spacing-ru/receipt.json",
+          "sha256": "1a80f20240f8f5a594b46b82bff416f30e0b51c7d212565c34357e9ffdfbcf14"
+        }
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "passed": true,
+        "caseIds": 98,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/through-align-en/receipt.json",
+          "sha256": "e530130924dcd52519d498e20b62bae667ccf05905597bcfc9c08a4b38e7d203"
+        }
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": 98,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/through-align-ru/receipt.json",
+          "sha256": "1d550f05fbc10cd4cd77d33cbc1f3031dee80ebd59c2aebeb09c7a1fdc5471a2"
+        }
+      },
+      {
+        "suite": "united",
+        "locale": "en",
+        "passed": true,
+        "caseIds": 9,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/united-en/receipt.json",
+          "sha256": "82c52871ca37f2a6796a7d8bbc20e793c1786db3077785a2878fdba58da44874"
+        }
+      },
+      {
+        "suite": "united",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": 9,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/united-ru/receipt.json",
+          "sha256": "8df4e25dacf506d3d35ae95e347d7e159538527a18f93493c26b4412c1f582c9"
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "passed": true,
+        "caseIds": 17,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/tables-en/receipt.json",
+          "sha256": "6b4ce59af5e069792a4295e7454f89149efcb57ed6a8b3e114e75e175529df8d"
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": 17,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/tables-ru/receipt.json",
+          "sha256": "1582b149f410d9c986265dff80e0bb9e0af99cfba27eeddde9f8558d5275668b"
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "passed": true,
+        "caseIds": 48,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/table-pixels-en/receipt.json",
+          "sha256": "91cb5ed330d538966987f35c5865e88e5e4526ded28131fc73e0895188b885bc"
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": 47,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/table-pixels-ru/receipt.json",
+          "sha256": "1065695d4c1c01f03e7f936ec93f528a96135e29aef7867265a09cd977bcbafa"
+        }
+      },
+      {
+        "suite": "column-widths",
+        "locale": "en",
+        "passed": true,
+        "caseIds": 187,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/column-widths-en/receipt.json",
+          "sha256": "3d8c961b85de802bfc69a21c2fe57c13a0495986db96ca150376b7ecf9e0bd32"
+        }
+      },
+      {
+        "suite": "column-widths",
+        "locale": "ru",
+        "passed": true,
+        "caseIds": 143,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-pQknqC/column-widths-ru/receipt.json",
+          "sha256": "d83ee406bb5ebfe8fbb7928458c1a7f58dceea2ded74d16b478fec774553421e"
+        }
+      }
+    ],
+    "passedRuns": 20,
+    "failedRuns": 2,
+    "caseIds": 1071,
+    "failureScope": "Только button-rows: ProbeButtons 139×187 вместо 142×187, ProbeRows 202×249 вместо 204×249; все 21 прямоугольника кнопок точны в обоих языках",
+    "previousVsixComparison": {
+      "stand": "form-overflow-buttons-baseline-_zvtx2g7",
+      "vsixSha256": "46d69135d43a14e10b6e77d91229310e1a4fc5a2bec57cf7a046317a2cb64ef8",
+      "runtimeMatchesItsOwnExtractedCheckout": true,
+      "sameGeometryAsCurrent": true,
+      "comparison": {
+        "path": "form-overflow-buttons-baseline-_zvtx2g7/comparison.json",
+        "sha256": "a2ccf9b315b611735135e826e1d643306f17727db42d6d4fd321f48bc9f66f8a"
+      },
+      "receipts": [
+        {
+          "path": "form-overflow-buttons-baseline-_zvtx2g7/en/receipt.json",
+          "sha256": "81acb43b4bd5c9f4467a120f5bfb12674aacaf00bc2974e30f3903c4bd7e07d2"
+        },
+        {
+          "path": "form-overflow-buttons-baseline-_zvtx2g7/ru/receipt.json",
+          "sha256": "5026451920a6becd4704d3c313e3f0af8eb8846d394184d1fe408fc6a9f86f2d"
+        }
+      ]
+    },
+    "unacceptedEarlierGenerations": [
+      {
+        "stand": "form-batch-ftuLB1",
+        "reason": "Отступ кнопки меню дал ширину на 3 px больше эталона; две новые серии завершились ошибкой"
+      },
+      {
+        "stand": "form-batch-jLJ6p1",
+        "reason": "Меню совпало; обычная отключённая кнопка в смешанном ряду имела дробную позицию Y=71.5 вместо 71"
+      }
+    ]
+  },
+  "wholeForms": {
+    "stand": "form-command-overflow-whole-7lfm4s19",
+    "runs": [
+      {
+        "run": "bsp-en",
+        "states": 12,
+        "receipt": {
+          "path": "form-command-overflow-whole-7lfm4s19/bsp-en/receipt.json",
+          "sha256": "bce6a2b73ce0fe2f935d856cc18f49ec312de53c527e5c9b44d24bafece60662"
+        },
+        "screenshots": 12
+      },
+      {
+        "run": "bsp-ru",
+        "states": 12,
+        "receipt": {
+          "path": "form-command-overflow-whole-7lfm4s19/bsp-ru/receipt.json",
+          "sha256": "a907fe45884793caf088e533e4fc2f33608657a23a93ba0235f306ff32b8d0b0"
+        },
+        "screenshots": 12
+      },
+      {
+        "run": "loan-docked-en",
+        "states": 9,
+        "receipt": {
+          "path": "form-command-overflow-whole-7lfm4s19/loan-docked-en/receipt.json",
+          "sha256": "c34a1b345b4428307b0cba248f3219f6e66d42f714b6e2acda2a12f796ff0434"
+        },
+        "screenshots": 0
+      },
+      {
+        "run": "loan-docked-ru",
+        "states": 9,
+        "receipt": {
+          "path": "form-command-overflow-whole-7lfm4s19/loan-docked-ru/receipt.json",
+          "sha256": "a73d28950d582e0ea93a615e59adca974c378700d182dda6fec3bf035225d221"
+        },
+        "screenshots": 0
+      },
+      {
+        "run": "loan-detached-en",
+        "states": 10,
+        "receipt": {
+          "path": "form-command-overflow-whole-7lfm4s19/loan-detached-en/receipt.json",
+          "sha256": "f5ffd257dbe2791f7f70754f9c822df8c081bdb92e02774294765f14b1a27f29"
+        },
+        "screenshots": 4
+      },
+      {
+        "run": "loan-detached-ru",
+        "states": 10,
+        "receipt": {
+          "path": "form-command-overflow-whole-7lfm4s19/loan-detached-ru/receipt.json",
+          "sha256": "80a3e49ffbef9f48cf615ff69a8b183c28b954786ce0c4b6d4b55ce82ff49513"
+        },
+        "screenshots": 4
+      }
+    ],
+    "states": 62,
+    "bspStates": 24,
+    "loanStates": 38,
+    "loanStateDefinition": "Четыре начальных состояния, 32 resize-позы и два отдельных снимка нижней области откреплённого окна",
+    "bspPreferredFrames": [
+      {
+        "sample": 0,
+        "locale": "en",
+        "frame": {
+          "width": 814,
+          "height": 612
+        }
+      },
+      {
+        "sample": 1,
+        "locale": "en",
+        "frame": {
+          "width": 785,
+          "height": 796
+        }
+      },
+      {
+        "sample": 2,
+        "locale": "en",
+        "frame": {
+          "width": 1222,
+          "height": 536
+        }
+      },
+      {
+        "sample": 0,
+        "locale": "ru",
+        "frame": {
+          "width": 814,
+          "height": 612
+        }
+      },
+      {
+        "sample": 1,
+        "locale": "ru",
+        "frame": {
+          "width": 785,
+          "height": 796
+        }
+      },
+      {
+        "sample": 2,
+        "locale": "ru",
+        "frame": {
+          "width": 1222,
+          "height": 536
+        }
+      }
+    ],
+    "wizardMatchingMenuRightInsetPx": 21,
+    "wizardNativeFrame": [
+      812,
+      612
+    ],
+    "wizardViewerFrame": [
+      814,
+      612
+    ],
+    "loanPreferredFrame": [
+      1157,
+      875
+    ],
+    "loanChanges": [
+      {
+        "run": "loan-docked-en",
+        "states": 9,
+        "preferred": [
+          1157,
+          875
+        ],
+        "changedElementRectsComparedToPrevious": 68,
+        "changedControlRectsComparedToPrevious": 45,
+        "nativeWholeFormGeometryAccepted": false
+      },
+      {
+        "run": "loan-docked-ru",
+        "states": 9,
+        "preferred": [
+          1157,
+          875
+        ],
+        "changedElementRectsComparedToPrevious": 24,
+        "changedControlRectsComparedToPrevious": 24,
+        "nativeWholeFormGeometryAccepted": false
+      },
+      {
+        "run": "loan-detached-en",
+        "states": 10,
+        "preferred": [
+          1157,
+          875
+        ],
+        "changedElementRectsComparedToPrevious": 71,
+        "changedControlRectsComparedToPrevious": 48,
+        "nativeWholeFormGeometryAccepted": false
+      },
+      {
+        "run": "loan-detached-ru",
+        "states": 10,
+        "preferred": [
+          1157,
+          875
+        ],
+        "changedElementRectsComparedToPrevious": 27,
+        "changedControlRectsComparedToPrevious": 27,
+        "nativeWholeFormGeometryAccepted": false
+      }
+    ],
+    "sourceFilesUnchanged": 4,
+    "before": {
+      "path": "form-command-overflow-whole-7lfm4s19/source-hashes-before.json",
+      "sha256": "4605edd5f3e781b8babc68f13e64861dd0fa7443651e8088f82a468b93bb1248"
+    },
+    "after": {
+      "path": "form-command-overflow-whole-7lfm4s19/source-hashes-after.json",
+      "sha256": "4605edd5f3e781b8babc68f13e64861dd0fa7443651e8088f82a468b93bb1248"
+    },
+    "bspDriver": {
+      "path": "form-command-overflow-whole-7lfm4s19/bsp-driver.cjs",
+      "sha256": "1e60b1fe1a9d618a741308ba934f6808a532969d43e65c2d21c4fdf033495b15"
+    },
+    "loanDriver": {
+      "path": "form-command-overflow-whole-7lfm4s19/loan-driver.cjs",
+      "sha256": "6b244c4ed3f01a3b96232e7f00a674cda6b40cea7bf3a3d1f9476e1e679c3d87"
+    },
+    "nativeWholeFormGeometryAccepted": false,
+    "note": "Изменения координат полей при переходе от промежутка 8 к 10 px записаны; прохождение функционального сценария не означает точного сравнения целой формы. У Управления итогами высота стала 536 вместо 533 px за счёт строки обычной кнопки."
+  },
+  "checks": {
+    "typecheck": "npm run check: passed",
+    "compile": "npm run compile: passed",
+    "package": "Node/VSCE: passed",
+    "node": {
+      "tests": 698,
+      "passed": 690,
+      "skipped": 8,
+      "failed": 0,
+      "log": {
+        "path": "form-overflow-node-uynhfu2j/node.log",
+        "sha256": "011716e44386a8cc90d104636750dded3fd293de5a59d7295748a6f00c732787"
+      }
+    },
+    "rust": "Не запускался повторно: Rust-код и зависимости не менялись; в основном репозитории добавлены только эталоны и документация.",
+    "diffCheck": "passed"
+  },
+  "pending": [
+    "Две ранее существовавшие ширины рамок native-button-rows; предыдущий VSIX воспроизводит их точно.",
+    "Полная геометрия исходной формы БСП: ширина 814 вместо 812 px; положение кругов переключателей и остальные элементы требуют сверки.",
+    "Целые формы после изменения автоматического промежутка строк и высоты смешанной строки кнопки требуют native-сравнения; функциональные прогоны его не заменяют.",
+    "Геометрия настоящего native-resize, другие DPI/масштабы и полный пиксельный профиль.",
+    "Недоступное оформление кнопок, Mono 10 pt и ранее отложенная цветовая калибровка этим срезом не принимаются.",
+    "Родной профиль Windows для всех новых случаев."
+  ],
+  "windowsHandoff": [
+    "Снять все 24 XML native-command-overflow на 8.3.27 в родном Windows-профиле ru/en.",
+    "Повторить пустой табличный источник и отсутствие источника, Auto/Right/HorizontalStretch=false, Inline/Additional/Customize и отсутствие меню.",
+    "Сравнить горизонтальные интервалы Auto/Single/Double, смешанную обычную кнопку, обе естественные ширины и вертикальную группу. Linux-метрики 10 px/6 px/29 px не объявлять Windows-эталоном.",
+    "suite command-overflow проверяет Windows функционально; строгие координаты включены только для Linux. Для приёмки Windows добавить собственные измерения, не отключая Linux assertions.",
+    "Повторить dirty XML, сохранение выбранного элемента и DOM, реальное отдельное окно, resize и возврат.",
+    "В исходной форме БСП проверить ГруппаСопоставления/ГруппаКоманднаяПанель на странице СопоставлениеЗагружаемыхДанных; меню должно следовать правому краю.",
+    "Повторить native-button-rows и целую ВыдачуЗайма, включая дату/время и 24-часовой формат."
+  ],
+  "tracker": {
+    "checked": "GitHub Issues и Projects согласованы: T153 закрыта/Готово, T164 открыта/Запланировано, остальные T152–T165 открыты/В работе",
+    "statusChanged": false,
+    "fullTaskCompleted": false
+  }
+}
