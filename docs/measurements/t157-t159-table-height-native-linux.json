@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-11-08T11:28:24.601133+00:00",
+  "recordedAt": "2026-11-08T12:25:33.218768+00:00",
   "scope": [
     "T155",
     "T157",
@@ -86,14 +86,525 @@
   "acceptance": {
     "nativeCorpusMeasured": true,
     "backendFontInheritanceVerified": true,
-    "rendererHeightCorrectionImplemented": false,
-    "installedRendererAcceptedForNewCorpus": false,
-    "windowsAccepted": false
+    "rendererHeightCorrectionImplemented": true,
+    "installedRendererAcceptedForNewCorpus": true,
+    "windowsAccepted": false,
+    "completeInstalledFramesVerified": true,
+    "responsiveSuiteAccepted": false,
+    "fullWholeFormGeometryAccepted": false
   },
   "remaining": [
-    "Resolve and validate font-dependent table height units across additional sizes/faces.",
-    "Apply MaxHeight and font metrics in the shared table layout, including small caps, footer and row-count precedence.",
-    "Run the new installed native matrix and repeat whole BSP/Loan geometry.",
-    "Fix body scrolling with fixed root commands and continue full native acceptance."
-  ]
+    "Validate additional fonts, faces, DPI and Windows using native references.",
+    "Validate table maxima, minima and row-count priority after allocation changes.",
+    "Resolve the native group-height expectation 50/52 in the responsive suite.",
+    "Fix body scrolling with fixed root commands and remaining BSP frame/position differences.",
+    "Continue full native acceptance of real forms."
+  ],
+  "renderer": {
+    "commit": "1183fcf",
+    "sharedHeightUnit": "The multiline input step also determines Linux table units.",
+    "measuredPoints": [
+      8,
+      10,
+      12,
+      14,
+      16
+    ],
+    "heightUnits": [
+      25,
+      28,
+      35,
+      41,
+      44
+    ],
+    "priority": "HeightInTableRows, otherwise Height/default clamped by a positive manual MaxHeight.",
+    "fixedTableInsets": "Non-stretching inline toolbars retain one pixel above and below; flexible search toolbars keep the existing tracks.",
+    "smallMaxima": "A one-unit manual maximum may clip a footer; it is distinct from the minimum of an authored Height."
+  },
+  "rendererChecks": {
+    "npmCheck": "passed",
+    "compile": "passed",
+    "package": "passed",
+    "node": {
+      "tests": 709,
+      "pass": 700,
+      "fail": 0,
+      "skipped": 9
+    },
+    "logs": "form-table-height-validation-9ga1bf3k",
+    "newDriverSyntax": "passed",
+    "diffCheck": "passed"
+  },
+  "installed": {
+    "artifactSource": "form-batch-FKOuCZ",
+    "vsixSha256": "052ee8b8650248ab74664aa59b73ecbe15691ad89106bad9b040ceee0524644d",
+    "backendSha256": "5029566d8579512c008b8773b6a1338b17c72594bbf1eb53c7c274fdb3216b64",
+    "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+    "runtimeFiles": 1262,
+    "successfulRuns": 32,
+    "stateObservationsIncludingVisibleRepeat": 1687,
+    "acceptedRuns": [
+      {
+        "artifact": "form-batch-FKOuCZ",
+        "name": "tables-en",
+        "states": 17,
+        "passed": true
+      },
+      {
+        "artifact": "form-batch-FKOuCZ",
+        "name": "tables-ru",
+        "states": 17,
+        "passed": true
+      },
+      {
+        "artifact": "form-batch-FKOuCZ",
+        "name": "table-height-en",
+        "states": 70,
+        "passed": true
+      },
+      {
+        "artifact": "form-batch-FKOuCZ",
+        "name": "table-height-ru",
+        "states": 70,
+        "passed": true
+      },
+      {
+        "artifact": "form-table-height-regressions-w3a2opg5",
+        "name": "table-pixels-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 48,
+        "seconds": 26.087108530999103,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-w3a2opg5",
+        "name": "table-pixels-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 47,
+        "seconds": 28.455485008000323,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-w3a2opg5",
+        "name": "column-widths-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 187,
+        "seconds": 32.06956873799936,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-w3a2opg5",
+        "name": "column-widths-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 143,
+        "seconds": 28.29558398700101,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "through-align-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 98,
+        "seconds": 38.04447508799967,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "through-align-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 98,
+        "seconds": 40.31857042199954,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "united-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 9,
+        "seconds": 7.393077635000736,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "united-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 9,
+        "seconds": 10.016482314000314,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "text-inputs-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 87,
+        "seconds": 46.22644835400024,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "text-inputs-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 87,
+        "seconds": 48.2115419870006,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "renderer-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 20,
+        "seconds": 29.255208029999267,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "renderer-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 20,
+        "seconds": 32.714336143000764,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "input-dimensions-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 44,
+        "seconds": 30.345280210000055,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "input-dimensions-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 44,
+        "seconds": 33.581259165999654,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "input-fonts-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 38,
+        "seconds": 36.707216685001185,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "input-fonts-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 38,
+        "seconds": 37.641910291000386,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "input-stretch-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 20,
+        "seconds": 13.310806833998868,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "input-stretch-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 20,
+        "seconds": 15.995104363000792,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "groups-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 22,
+        "seconds": 18.86134123299962,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "groups-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 22,
+        "seconds": 21.27951967000081,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "group-spacing-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 60,
+        "seconds": 29.2554903629989,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "group-spacing-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 60,
+        "seconds": 32.05373223400056,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "radio-layout-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 17,
+        "seconds": 11.127695564999158,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "radio-layout-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 17,
+        "seconds": 13.959663728999658,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "number-inputs-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 59,
+        "seconds": 36.20296672399854,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-regressions-jm6ih62r",
+        "name": "number-inputs-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 59,
+        "seconds": 38.37739547199999,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-visible-j8v6ky0y",
+        "name": "table-height-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 70,
+        "seconds": 41.138755477000814,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "artifact": "form-table-height-visible-j8v6ky0y",
+        "name": "table-height-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 70,
+        "seconds": 42.87099148500056,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      }
+    ],
+    "visibleMatrix": {
+      "stand": "form-table-height-visible-j8v6ky0y",
+      "formsPerLocale": 54,
+      "statesPerLocale": 70,
+      "completeFramesOnScreen": true,
+      "windowSize": [
+        1450,
+        1450
+      ],
+      "dirtyXml": true,
+      "selectionAndGridDomPreserved": true,
+      "detachedNativeTargetVerified": true,
+      "sourceWrites": false,
+      "comparison": "Exact native frame/control geometry; no RGB acceptance is claimed for this new corpus."
+    }
+  },
+  "wholeForms": {
+    "stand": "form-table-height-whole-9grlyx0u",
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.398576203999255,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.224823840000681,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.7964829160009685,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.142453532000218,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.177183959998729,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.126852790999692,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      }
+    ],
+    "sourceFormFiles": 4,
+    "sourceBytesUnchanged": true,
+    "questionnaire": {
+      "nativeFrame": [
+        801,
+        769
+      ],
+      "previousViewerFrame": [
+        785,
+        796
+      ],
+      "viewerFrame": [
+        785,
+        770
+      ],
+      "nativeTable": [
+        13,
+        557,
+        600,
+        199
+      ],
+      "viewerTable": [
+        13,
+        558,
+        600,
+        199
+      ],
+      "nativeExplanation": [
+        13,
+        216,
+        550,
+        23
+      ],
+      "viewerExplanation": [
+        13,
+        217,
+        550,
+        23
+      ],
+      "bodyScrolling": {
+        "before": {
+          "scrollTop": 0,
+          "clientHeight": 29,
+          "scrollHeight": 742,
+          "commands": [
+            13,
+            29,
+            752,
+            26
+          ],
+          "firstInputY": 67
+        },
+        "after": {
+          "scrollTop": 120,
+          "clientHeight": 29,
+          "scrollHeight": 742,
+          "commands": [
+            13,
+            -91,
+            752,
+            26
+          ],
+          "firstInputY": -53
+        },
+        "rootCommandsFixed": false
+      }
+    },
+    "wizardFrame": {
+      "width": 811,
+      "height": 612
+    },
+    "totalsFrame": {
+      "width": 1222,
+      "height": 536
+    },
+    "fullNativeGeometryAccepted": false
+  },
+  "knownResponsiveFailure": {
+    "expectedGroupHeight": 50,
+    "currentGroupHeight": 52,
+    "previousVsixGroupHeight": 52,
+    "previousVsixSource": "form-batch-w3bwzS",
+    "baselineStand": "form-table-height-responsive-baseline-3mvbf1v0",
+    "baselineCheckout": "form-table-height-baseline-alnllvpp",
+    "runtimeVerificationEnabled": true,
+    "newTableChangeCausedFailure": false,
+    "nativeRecheckRequired": true,
+    "expectedGeometryUnchanged": true,
+    "driverRefinements": "Linux MaxWidth=25 expects 260 px from native-text-inputs; establish a 1200x900 test window before checking overflow."
+  }
 }
