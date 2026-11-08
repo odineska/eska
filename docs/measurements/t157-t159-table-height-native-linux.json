@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T11:28:24.601133+00:00",
+  "scope": [
+    "T155",
+    "T157",
+    "T159"
+  ],
+  "profile": {
+    "platform": "8.3.27.2342",
+    "os": "linux",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "corpus": {
+    "path": "tests/fixtures/forms/native-table-height",
+    "commit": "89555a4",
+    "forms": 54,
+    "acceptedCaptures": 108,
+    "stands": [
+      "form-native-table-height-bjjvxef0",
+      "form-native-table-font-kp3ufmd7"
+    ],
+    "completeFrameRequired": true,
+    "sourceBytesUnchanged": true,
+    "catalogContext": "Catalog.xml"
+  },
+  "backend": {
+    "commit": "6ee28dd",
+    "apiVersion": {
+      "major": 1,
+      "minor": 42
+    },
+    "schemaChanged": false,
+    "binarySha256": "5029566d8579512c008b8773b6a1338b17c72594bbf1eb53c7c274fdb3216b64",
+    "behavior": "Table Font supplies value/header defaults to columns and column groups. Explicit Font and TitleFont remain independent. Toolbars and additions retain their roles; font origins reference the owner property.",
+    "nativeEvidence": "StaticTallFooter7 has Table.Font=16 and no column Font/TitleFont properties, while the native header grows from 30 to 40px. Canonical export preserves these properties.",
+    "rpcBefore": {
+      "sourceStand": "form-native-table-height-bjjvxef0",
+      "file": "backend-model-before.json",
+      "tablePoints": 16,
+      "columnValuePoints": 10,
+      "columnTitlePoints": 10
+    },
+    "rpcAfter": {
+      "sourceStand": "form-native-table-height-bjjvxef0",
+      "file": "backend-model-after.json",
+      "tablePoints": 16,
+      "columnValuePoints": 16,
+      "columnTitlePoints": 16
+    }
+  },
+  "checks": {
+    "artifactDirectory": "form-table-font-rust-dglv9oc3",
+    "cargoFmtCheck": "passed",
+    "cargoCheck": "passed",
+    "clippyAllTargetsAllFeaturesDenyWarnings": "passed",
+    "cargoTest": {
+      "passed": 1567,
+      "failed": 0,
+      "ignored": 19
+    },
+    "backendBuild": "passed",
+    "node": {
+      "tests": 707,
+      "passed": 698,
+      "failed": 0,
+      "skipped": 9
+    },
+    "newUnitTest": "table_columns_inherit_the_owner_font_without_changing_commands",
+    "regressionBefore": "failed: Plain value/title fonts were 10 instead of 16",
+    "regressionAfter": "passed"
+  },
+  "nativeFindings": {
+    "manualMax7": {
+      "staticGridHeight": 199,
+      "dynamicGridHeight": 200
+    },
+    "automaticMaximum": "Authored MaxHeight is ignored when AutoMaxHeight=true/default.",
+    "zeroManualMaximum": "Does not constrain the initial height.",
+    "heightInTableRows": "Has priority over the manual maximum.",
+    "explicitHeight": "Clamped by a positive manual maximum.",
+    "tableFont": "Affects the base height unit, default column fonts and preferred table height.",
+    "smallBoundsAndFooter": "Small manual maxima can clip footer content; they cannot be implemented by blindly reusing the explicit Height minimum."
+  },
+  "acceptance": {
+    "nativeCorpusMeasured": true,
+    "backendFontInheritanceVerified": true,
+    "rendererHeightCorrectionImplemented": false,
+    "installedRendererAcceptedForNewCorpus": false,
+    "windowsAccepted": false
+  },
+  "remaining": [
+    "Resolve and validate font-dependent table height units across additional sizes/faces.",
+    "Apply MaxHeight and font metrics in the shared table layout, including small caps, footer and row-count precedence.",
+    "Run the new installed native matrix and repeat whole BSP/Loan geometry.",
+    "Fix body scrolling with fixed root commands and continue full native acceptance."
+  ]
+}
