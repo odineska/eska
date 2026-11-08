@@ -99,6 +99,9 @@ impl<'a> ResolvedCommand<'a> {
                 pictures::form_picture(command.property("Picture")?, resources, diagnostics)
             }
             Self::Metadata(command) => pictures::metadata_picture(command, resources, diagnostics),
+            Self::Standard("Help") => Some(FormPicture::Standard {
+                name: "Help".into(),
+            }),
             Self::Standard(_) => None,
         }
     }

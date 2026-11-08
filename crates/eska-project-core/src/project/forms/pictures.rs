@@ -35,9 +35,14 @@ impl ButtonRepresentation {
         inherited: Option<&str>,
         automatic: Self,
     ) -> Self {
-        if matches!(picture, None | Some(FormPicture::Missing { .. })) {
+        if matches!(picture, Some(FormPicture::Missing { .. })) {
             return Self::Text;
         }
+        let automatic = if picture.is_some() {
+            automatic
+        } else {
+            Self::Text
+        };
         [explicit, inherited]
             .into_iter()
             .flatten()
@@ -95,7 +100,8 @@ fn resolve(
             && field.key.name == "Ref"
     })?;
     let reference = super::appearance::text(&field.value)?.trim();
-    if reference.is_empty() {
+    // Configurator serializes a cleared picture as Ref=0.
+    if reference.is_empty() || reference == "0" {
         return None;
     }
     if let Some(name) = reference.strip_prefix("StdPicture.") {

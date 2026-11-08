@@ -5,6 +5,120 @@ use crate::project::{
 };
 
 #[test]
+fn native_help_command_keeps_its_picture_and_explicit_presentation_overrides() {
+    use super::super::FormPicture;
+    for (xml, representation, picture) in [
+        (
+            include_str!("../../../../../../tests/fixtures/forms/native-help-command/HelpAuto.xml"),
+            ButtonRepresentation::Text,
+            Some("Help"),
+        ),
+        (
+            include_str!("../../../../../../tests/fixtures/forms/native-help-command/HelpText.xml"),
+            ButtonRepresentation::Text,
+            Some("Help"),
+        ),
+        (
+            include_str!(
+                "../../../../../../tests/fixtures/forms/native-help-command/HelpPicture.xml"
+            ),
+            ButtonRepresentation::Picture,
+            Some("Help"),
+        ),
+        (
+            include_str!("../../../../../../tests/fixtures/forms/native-help-command/HelpBoth.xml"),
+            ButtonRepresentation::PictureAndText,
+            Some("Help"),
+        ),
+        (
+            include_str!(
+                "../../../../../../tests/fixtures/forms/native-help-command/HelpEmpty.xml"
+            ),
+            ButtonRepresentation::Picture,
+            None,
+        ),
+        (
+            include_str!(
+                "../../../../../../tests/fixtures/forms/native-help-command/HelpOverride.xml"
+            ),
+            ButtonRepresentation::Picture,
+            Some("Write"),
+        ),
+    ] {
+        let document = parse("native-help", xml.into()).unwrap();
+        let form = compose(&document, &[]);
+        let button = &form.root.children[1];
+        let view = present(&form, &[document], &[]);
+        let item = view
+            .elements
+            .iter()
+            .find(|item| item.identity == button.identity)
+            .unwrap();
+        assert_eq!(item.button_representation, Some(representation));
+        let actual = match &item.picture {
+            Some(FormPicture::Standard { name }) => Some(name.as_str()),
+            None => None,
+            other => panic!("unexpected help picture {other:?}"),
+        };
+        assert_eq!(actual, picture);
+        assert!(view.diagnostics.is_empty(), "{:?}", view.diagnostics);
+    }
+}
+
+#[test]
+fn native_empty_command_bar_buttons_preserve_picture_only_mode() {
+    for xml in [
+        include_str!(
+            "../../../../../../tests/fixtures/forms/native-help-command/bar-negative-controls/BarNoPicture16.xml"
+        ),
+        include_str!(
+            "../../../../../../tests/fixtures/forms/native-help-command/bar-negative-controls/BarClearPicture16.xml"
+        ),
+    ] {
+        let document = parse("native-empty-bar", xml.into()).unwrap();
+        let form = compose(&document, &[]);
+        let button = &form.root.children[1].children[0];
+        assert_eq!(button.name.as_deref(), Some("TargetButton"));
+        let view = present(&form, &[document], &[]);
+        let item = view
+            .elements
+            .iter()
+            .find(|item| item.identity == button.identity)
+            .unwrap();
+        assert_eq!(
+            item.button_representation,
+            Some(ButtonRepresentation::Picture)
+        );
+        assert!(item.picture.is_none());
+        assert!(view.diagnostics.is_empty());
+    }
+}
+
+#[test]
+fn unavailable_help_override_does_not_reintroduce_the_standard_picture() {
+    let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20">
+      <ChildItems><Button name="Help" id="1"><Type>UsualButton</Type>
+        <CommandName>Form.StandardCommand.Help</CommandName><Representation>Picture</Representation>
+        <Picture><xr:Ref>CommonPicture.Unavailable</xr:Ref></Picture>
+      </Button></ChildItems></Form>"#;
+    let document = parse("missing-help", source.into()).unwrap();
+    let form = compose(&document, &[]);
+    let view = present(&form, &[document], &[]);
+    let item = view
+        .elements
+        .iter()
+        .find(|item| item.identity == form.root.children[0].identity)
+        .unwrap();
+    assert!(
+        matches!(&item.picture, Some(super::super::FormPicture::Missing { reference }) if reference == "CommonPicture.Unavailable")
+    );
+    assert_eq!(item.button_representation, Some(ButtonRepresentation::Text));
+    assert_eq!(view.diagnostics.len(), 1);
+    assert_eq!(view.diagnostics[0].code, "picture_unavailable");
+}
+
+#[test]
 fn buttons_without_command_bindings_remain_inspectable_but_are_not_displayed() {
     let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" version="2.20">
       <ChildItems>
