@@ -1,0 +1,801 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T18:48:04.875104+00:00",
+  "scope": [
+    "T157",
+    "T158",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "implementation": {
+    "multilineChoice": "Include the trailing choice-button edge in allocated multiline string width. Width 12/61 now paints 152/642 px, retaining 131/621 px without choice.",
+    "referenceCaptions": "Reuse the existing linuxReferenceInput predicate for explicit caption measurement. No-open enumerations receive the same one-pixel caption inset; the narrower nativeReferenceInput bounds predicate is unchanged.",
+    "inactivePages": "Existing layout traversal measures the corrected labels on inactive pages; no new traversal or DOM reparenting.",
+    "internalExport": "linuxReferenceInput is now shared from model.mjs. No documented protocol or configuration change.",
+    "formNameExceptions": false,
+    "newDependencies": false,
+    "sourceWrites": false
+  },
+  "native": {
+    "fixture": "tests/fixtures/forms/native-input-choice-size",
+    "forms": 8,
+    "completeFrames": 16,
+    "stand": "form-native-input-choice-size-dyif3ghb",
+    "metricsSha256": "5d04afd9097d7ba0b090dc8e3a9e515fd255a350f3f407d02f848558f7a45c41",
+    "sourcesUnchanged": true,
+    "textEditChangesGeometry": false,
+    "normalization": "BOM and CRLF only"
+  },
+  "baseline": {
+    "stand": "form-input-choice-size-probe-78t7e_pp",
+    "artifactSource": "form-batch-J3mX7b",
+    "diagnosticOnly": true,
+    "runs": [
+      {
+        "locale": "en",
+        "matched": 4,
+        "total": 8,
+        "exitCode": 0
+      },
+      {
+        "locale": "ru",
+        "matched": 4,
+        "total": 8,
+        "exitCode": 0
+      }
+    ],
+    "mismatches": "Two multiline choice widths and two titled enumeration frames per locale are short by one pixel.",
+    "initialHarnessFailure": {
+      "stand": "form-input-choice-size-probe-8icqc5hh",
+      "reason": "Missing Enum.xml required by the common loader. The diagnostic was repeated after supplying that metadata under the expected filename."
+    }
+  },
+  "checks": {
+    "npmCheck": "passed",
+    "compile": "passed",
+    "package": "passed",
+    "node": {
+      "tests": 721,
+      "passed": 713,
+      "failed": 0,
+      "skipped": 8
+    },
+    "logs": "form-input-choice-size-validation-7nbqfzm6",
+    "modelRed": "151 !== 152 before the multiline choice fix",
+    "modelGreen": "passed",
+    "rust": {
+      "stand": "form-input-choice-size-rust-9lv769w0",
+      "fmt": "passed",
+      "check": "passed",
+      "clippy": "passed",
+      "test": {
+        "passed": 1570,
+        "failed": 0,
+        "ignored": 19
+      }
+    }
+  },
+  "installed": {
+    "stand": "form-batch-9HkzX9",
+    "passed": true,
+    "runs": 20,
+    "stateObservations": 713,
+    "guiConcurrency": 1,
+    "vsixSha256": "c466a2f7858f7c7de774e02274a47e504debd61bc8e2982f08ab00b28b6f81d3",
+    "runtimeManifestSha256": "219e2b1df9c56891c7bcdf5fc06317e3ee56b8af73764c93408d57c44b63ccad",
+    "runtimeFiles": 1262,
+    "allInputsStable": true,
+    "suites": [
+      {
+        "suite": "input-choice-size",
+        "locale": "en",
+        "states": 20,
+        "passed": true
+      },
+      {
+        "suite": "input-choice-size",
+        "locale": "ru",
+        "states": 20,
+        "passed": true
+      },
+      {
+        "suite": "reference-widths",
+        "locale": "en",
+        "states": 24,
+        "passed": true
+      },
+      {
+        "suite": "reference-widths",
+        "locale": "ru",
+        "states": 24,
+        "passed": true
+      },
+      {
+        "suite": "text-inputs",
+        "locale": "en",
+        "states": 87,
+        "passed": true
+      },
+      {
+        "suite": "text-inputs",
+        "locale": "ru",
+        "states": 87,
+        "passed": true
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "states": 98,
+        "passed": true
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "states": 98,
+        "passed": true
+      },
+      {
+        "suite": "united",
+        "locale": "en",
+        "states": 9,
+        "passed": true
+      },
+      {
+        "suite": "united",
+        "locale": "ru",
+        "states": 9,
+        "passed": true
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "states": 22,
+        "passed": true
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "states": 22,
+        "passed": true
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "states": 31,
+        "passed": true
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "states": 31,
+        "passed": true
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "states": 48,
+        "passed": true
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "states": 47,
+        "passed": true
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "states": 17,
+        "passed": true
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "states": 17,
+        "passed": true
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "states": 1,
+        "passed": true
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "states": 1,
+        "passed": true
+      }
+    ],
+    "newSuiteTransitions": "Eight initial forms plus dirty title/TextEdit/width/choice transitions and genuine detached-window transitions: 20 observations per locale."
+  },
+  "wholeForms": {
+    "initialStand": "form-input-choice-size-whole-rhbf4ovc",
+    "initialRuns": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.147961558999668,
+        "runtimeManifestSha256": "219e2b1df9c56891c7bcdf5fc06317e3ee56b8af73764c93408d57c44b63ccad",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": false,
+        "exitCode": 1,
+        "seconds": 7.964027904999966,
+        "runtimeManifestSha256": "219e2b1df9c56891c7bcdf5fc06317e3ee56b8af73764c93408d57c44b63ccad",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.56501982100599,
+        "runtimeManifestSha256": "219e2b1df9c56891c7bcdf5fc06317e3ee56b8af73764c93408d57c44b63ccad",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 13.519955447998655,
+        "runtimeManifestSha256": "219e2b1df9c56891c7bcdf5fc06317e3ee56b8af73764c93408d57c44b63ccad",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.340480225000647,
+        "runtimeManifestSha256": "219e2b1df9c56891c7bcdf5fc06317e3ee56b8af73764c93408d57c44b63ccad",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 9.956407743004092,
+        "runtimeManifestSha256": "219e2b1df9c56891c7bcdf5fc06317e3ee56b8af73764c93408d57c44b63ccad",
+        "runtimeFiles": 1262
+      }
+    ],
+    "initialFailure": "bsp-ru incorrectly used the English Code-field X=623 oracle. Native Russian measurement independently confirms X=616; the English golden is retained.",
+    "repeatStand": "form-input-choice-size-ru-repeat-xjxc8o16",
+    "repeatRuns": [
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 16.06373808599892,
+        "runtimeManifestSha256": "219e2b1df9c56891c7bcdf5fc06317e3ee56b8af73764c93408d57c44b63ccad",
+        "runtimeFiles": 1262
+      }
+    ],
+    "runtimeUnchanged": true,
+    "bsp": {
+      "en": {
+        "stand": "form-input-choice-size-whole-rhbf4ovc",
+        "receipt": "bsp-en/receipt.json",
+        "questionnaireFrame": {
+          "width": 801,
+          "height": 769
+        },
+        "questionnaireInputRectangles": {
+          "Наименование": [
+            123,
+            66,
+            451,
+            23
+          ],
+          "Код": [
+            623,
+            66,
+            121,
+            23
+          ],
+          "Родитель": [
+            123,
+            98,
+            493,
+            23
+          ],
+          "Представление": [
+            123,
+            130,
+            642,
+            51
+          ],
+          "ПояснениеКомментария": [
+            13,
+            216,
+            550,
+            23
+          ],
+          "ТипОтвета": [
+            123,
+            248,
+            462,
+            23
+          ],
+          "Длина": [
+            77,
+            280,
+            82,
+            23
+          ],
+          "Точность": [
+            77,
+            312,
+            72,
+            23
+          ],
+          "МинимальноеЗначение": [
+            198,
+            344,
+            172,
+            23
+          ],
+          "МаксимальноеЗначение": [
+            198,
+            376,
+            172,
+            23
+          ],
+          "ШагПолосыРегулирования": [
+            312,
+            408,
+            172,
+            23
+          ]
+        },
+        "inactivePageTitleWidths": [
+          29,
+          29
+        ],
+        "table": [
+          13,
+          557,
+          600,
+          199
+        ],
+        "boundCheckboxes": [
+          [
+            14,
+            348,
+            15,
+            15
+          ],
+          [
+            14,
+            380,
+            15,
+            15
+          ]
+        ],
+        "bspInitialFrames": [
+          {
+            "width": 811,
+            "height": 612
+          },
+          {
+            "width": 801,
+            "height": 769
+          },
+          {
+            "width": 1222,
+            "height": 540
+          }
+        ],
+        "measuredStates": 14
+      },
+      "ru": {
+        "stand": "form-input-choice-size-ru-repeat-xjxc8o16",
+        "receipt": "bsp-ru/receipt.json",
+        "questionnaireFrame": {
+          "width": 801,
+          "height": 769
+        },
+        "questionnaireInputRectangles": {
+          "Наименование": [
+            123,
+            66,
+            451,
+            23
+          ],
+          "Код": [
+            616,
+            66,
+            121,
+            23
+          ],
+          "Родитель": [
+            123,
+            98,
+            493,
+            23
+          ],
+          "Представление": [
+            123,
+            130,
+            642,
+            51
+          ],
+          "ПояснениеКомментария": [
+            13,
+            216,
+            550,
+            23
+          ],
+          "ТипОтвета": [
+            123,
+            248,
+            462,
+            23
+          ],
+          "Длина": [
+            77,
+            280,
+            82,
+            23
+          ],
+          "Точность": [
+            77,
+            312,
+            72,
+            23
+          ],
+          "МинимальноеЗначение": [
+            198,
+            344,
+            172,
+            23
+          ],
+          "МаксимальноеЗначение": [
+            198,
+            376,
+            172,
+            23
+          ],
+          "ШагПолосыРегулирования": [
+            312,
+            408,
+            172,
+            23
+          ]
+        },
+        "inactivePageTitleWidths": [
+          29,
+          29
+        ],
+        "table": [
+          13,
+          557,
+          600,
+          199
+        ],
+        "boundCheckboxes": [
+          [
+            14,
+            348,
+            15,
+            15
+          ],
+          [
+            14,
+            380,
+            15,
+            15
+          ]
+        ],
+        "bspInitialFrames": [
+          {
+            "width": 811,
+            "height": 612
+          },
+          {
+            "width": 801,
+            "height": 769
+          },
+          {
+            "width": 1222,
+            "height": 540
+          }
+        ],
+        "measuredStates": 14
+      }
+    },
+    "loan": {
+      "stand": "form-input-choice-size-whole-rhbf4ovc",
+      "runs": [
+        {
+          "name": "loan-docked-en",
+          "passed": true,
+          "receipt": "loan-docked-en/receipt.json",
+          "geometry": "loan-docked-en/geometry.json"
+        },
+        {
+          "name": "loan-docked-ru",
+          "passed": true,
+          "receipt": "loan-docked-ru/receipt.json",
+          "geometry": "loan-docked-ru/geometry.json"
+        },
+        {
+          "name": "loan-detached-en",
+          "passed": true,
+          "receipt": "loan-detached-en/receipt.json",
+          "geometry": "loan-detached-en/geometry.json"
+        },
+        {
+          "name": "loan-detached-ru",
+          "passed": true,
+          "receipt": "loan-detached-ru/receipt.json",
+          "geometry": "loan-detached-ru/geometry.json"
+        }
+      ],
+      "table": [
+        13,
+        589,
+        662,
+        227
+      ],
+      "footerMemo": [
+        13,
+        844,
+        511,
+        51
+      ],
+      "paymentMemo": [
+        484,
+        339,
+        191,
+        51
+      ]
+    },
+    "sourceFilesUnchanged": 4,
+    "remainingTotalsFrame": {
+      "actual": [
+        1222,
+        540
+      ],
+      "native": [
+        1224,
+        541
+      ]
+    },
+    "wizardFrame": [
+      811,
+      612
+    ]
+  },
+  "russianNativeEvidence": {
+    "stand": "form-native-bsp-questionnaire-ru-7hjh9lq_",
+    "baseStand": "form-bsp-geometry-native-whn6wv7l",
+    "locale": "ru",
+    "platform": "8.3.27.2342",
+    "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+    "repeatGeometryMatched": true,
+    "frames": [
+      {
+        "name": "questionnaire-full-root-expanded",
+        "screenshot": "interactive-ru/questionnaire-full-root-expanded.png",
+        "screenshotSha256": "938c067b54afc7fa86cf8fe5a53e20277770dd8e02f8f4700f6927ba9d6e03f2",
+        "blueBoundingBox": [
+          262,
+          248,
+          1061,
+          1015
+        ],
+        "frame": [
+          801,
+          769
+        ],
+        "inputRectangles": {
+          "Наименование": [
+            123,
+            66,
+            451,
+            23
+          ],
+          "Код": [
+            616,
+            66,
+            121,
+            23
+          ],
+          "Родитель": [
+            123,
+            98,
+            493,
+            23
+          ],
+          "Представление": [
+            123,
+            130,
+            642,
+            51
+          ],
+          "ПояснениеКомментария": [
+            13,
+            216,
+            550,
+            23
+          ],
+          "ТипОтвета": [
+            123,
+            248,
+            462,
+            23
+          ],
+          "Длина": [
+            77,
+            280,
+            82,
+            23
+          ],
+          "Точность": [
+            77,
+            312,
+            72,
+            23
+          ],
+          "МинимальноеЗначение": [
+            198,
+            344,
+            172,
+            23
+          ],
+          "МаксимальноеЗначение": [
+            198,
+            376,
+            172,
+            23
+          ],
+          "ШагПолосыРегулирования": [
+            312,
+            408,
+            172,
+            23
+          ]
+        }
+      },
+      {
+        "name": "questionnaire-full-root-expanded-repeat",
+        "screenshot": "interactive-ru/questionnaire-full-root-expanded-repeat.png",
+        "screenshotSha256": "938c067b54afc7fa86cf8fe5a53e20277770dd8e02f8f4700f6927ba9d6e03f2",
+        "blueBoundingBox": [
+          262,
+          248,
+          1061,
+          1015
+        ],
+        "frame": [
+          801,
+          769
+        ],
+        "inputRectangles": {
+          "Наименование": [
+            123,
+            66,
+            451,
+            23
+          ],
+          "Код": [
+            616,
+            66,
+            121,
+            23
+          ],
+          "Родитель": [
+            123,
+            98,
+            493,
+            23
+          ],
+          "Представление": [
+            123,
+            130,
+            642,
+            51
+          ],
+          "ПояснениеКомментария": [
+            13,
+            216,
+            550,
+            23
+          ],
+          "ТипОтвета": [
+            123,
+            248,
+            462,
+            23
+          ],
+          "Длина": [
+            77,
+            280,
+            82,
+            23
+          ],
+          "Точность": [
+            77,
+            312,
+            72,
+            23
+          ],
+          "МинимальноеЗначение": [
+            198,
+            344,
+            172,
+            23
+          ],
+          "МаксимальноеЗначение": [
+            198,
+            376,
+            172,
+            23
+          ],
+          "ШагПолосыРегулирования": [
+            312,
+            408,
+            172,
+            23
+          ]
+        }
+      }
+    ],
+    "canonicalExportUnchanged": [
+      {
+        "relative": "DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml",
+        "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+        "sourceUnchanged": true,
+        "canonicalMatchesPreviousNativeExport": true,
+        "canonicalSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da"
+      },
+      {
+        "relative": "ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+        "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+        "sourceUnchanged": true,
+        "canonicalMatchesPreviousNativeExport": true,
+        "canonicalSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3"
+      },
+      {
+        "relative": "DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml",
+        "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+        "sourceUnchanged": true,
+        "canonicalMatchesPreviousNativeExport": true,
+        "canonicalSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248"
+      },
+      {
+        "relative": "Configuration.xml",
+        "sourceSha256": "6ddd3bb864852f3818df86431f7adf4aa4cc98cb804b2342877c346b2c6b4b73",
+        "sourceUnchanged": true,
+        "canonicalMatchesPreviousNativeExport": true,
+        "canonicalSha256": "6ddd3bb864852f3818df86431f7adf4aa4cc98cb804b2342877c346b2c6b4b73"
+      }
+    ],
+    "nativeExitCode": 0,
+    "captureRecovery": "The first private Wayland clipboard helper stalled; only that helper was terminated. An X11 clipboard owner in the same private display supplied the search string. The preview splitter was expanded to avoid clipping before measurement.",
+    "exportRecovery": "The first ibcmd export pointed --data at the flat Designer directory and exited 255 without opening a database. A separate owned 1CD copy under db-data was exported successfully."
+  },
+  "commits": {
+    "backendFixtureDocumentation": "a7791af",
+    "backendFixtureData": "f0ae39c",
+    "multilineChoice": "0ae6eb1",
+    "referenceCaptions": "4b4675f"
+  },
+  "fixtureSaveRecovery": "The first generator failed syntax validation; a7791af contains only the README. f0ae39c subsequently adds the XML and measurements; history was not rewritten.",
+  "limitations": [
+    "Exact acceptance is limited to the measured Linux 96-DPI geometry and transitions.",
+    "All 11 initial input rectangles and the questionnaire outer frame match; full pixel, label, icon and all-state acceptance is not claimed.",
+    "Multiline automatic width, other button combinations, other fonts and DPI remain outside this matrix.",
+    "The Totals form still differs by two pixels in width and one pixel in height.",
+    "No new Windows acceptance, complete performance acceptance, push or release."
+  ]
+}
