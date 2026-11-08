@@ -1,0 +1,6388 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "catalogSha256": "18d4f7ff8c42ba96cdacae27d6df5cab9e025f42c35995ced0b51ab57ecef0f2",
+  "rows": [
+    {
+      "name": "StaticDefault",
+      "xmlSha256": "1c7906b6369e783cb1b5fb4ef8e67463b1bc0e64a4211522242a53df232939ea",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "8f781d99a5d604dfef22954d7525a7edc7fae09bdf30197867e4cef46912a13b"
+        },
+        "en": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "0c23c7900c0939bca27118a14d34d42258742a380c82ec4c5198fd52be00958b"
+        }
+      }
+    },
+    {
+      "name": "StaticAuto7",
+      "xmlSha256": "437c91a1ddef69f9cc8bbe29a4f57308132378e7eb19df1e5a95130af0ef996f",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "d17933a95a157db3cf5d38ffe70186952ae45f2971ea6ee0f46fd3112b8e3054"
+        },
+        "en": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "c6cc22e79f95f5b3ce5df5bc5ebf6b10975644ed65f0a13ace9ad303ed375955"
+        }
+      }
+    },
+    {
+      "name": "StaticAuto1",
+      "xmlSha256": "9914e8d0a973ac8d3b5c8e44d07009fcda40373d671429f7e024636e9f4ce5c1",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "MaxHeight": "1",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "78bea90d65c964b0ae5bf5408b553c2b444bac81cc7c6db97b6f9c4e66b65ba6"
+        },
+        "en": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "f290379bac2d6c05e2e2d9f61d33a239b3d8fa11064b27a16b446a424d20e173"
+        }
+      }
+    },
+    {
+      "name": "StaticManual0",
+      "xmlSha256": "e129dccf3a972757e51ecb7d4cb0d610184ea4dd99299d220d5ec8ee64f894c5",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "066316cffe9149960b562ffc5238c955c3f9fb5ea9c7d243c730aa3966eed7e9"
+        },
+        "en": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "9b3a9c76b345351af4c98d056ac76696a2ad627cfb85484dbfc138995c86005b"
+        }
+      }
+    },
+    {
+      "name": "StaticManual1",
+      "xmlSha256": "e692c3ae0b4a2851a724160ebeada2a122560e6737f1cde4e45f743352b9e180",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "1",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            217
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              181,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              36
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            36
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "2fc2c282ca61cf579b6f53fcfdcac8ffb50bb7251cf6c1b4b291d65fcdcc0ccf"
+        },
+        "en": {
+          "frame": [
+            745,
+            217
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              181,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              36
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            36
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "a4a7be79947b89de461839448b0d1225722a445733b163ea67b8489367636c36"
+        }
+      }
+    },
+    {
+      "name": "StaticManual2",
+      "xmlSha256": "d16dec8c9cc466d2f0ab936b2e22c13160c21ee81cdf45226850104de45c9989",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "2",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            240
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              204,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              59
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            59
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "646727e7066e01e5a1a53d419554f0056ea4ce421ee8888e69c2bad098c44184"
+        },
+        "en": {
+          "frame": [
+            745,
+            240
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              204,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              59
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            59
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "109bc25ee97e661d52ae5382206cc191883ca654e9de09abd5570f4e5060a902"
+        }
+      }
+    },
+    {
+      "name": "StaticManual3",
+      "xmlSha256": "1e271470547bee22ae534f90de674a99c2ab9d9d8fe19981c8795f344af61eac",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "3",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            268
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              232,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              87
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            87
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "1d1b24941a83f63bdcc68f348d3ea2a7627c4cc00da968ff6d1c6eefcdd76d5c"
+        },
+        "en": {
+          "frame": [
+            745,
+            268
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              232,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              87
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            87
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "2c76c55b6ece65059890768d50f92e275e5e8d84c610e1c05f0049b75856647f"
+        }
+      }
+    },
+    {
+      "name": "StaticManual4",
+      "xmlSha256": "6f93e81afe2455b613c1f514e7f531b1126011a64e1ee415ea3fff3f33857ad8",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "4",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            296
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              260,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              115
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            115
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "8cabc2a803c9be9734695eee814f69cd4ab5e6894cfdc795da2132bed6219d0b"
+        },
+        "en": {
+          "frame": [
+            745,
+            296
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              260,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              115
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            115
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "198abe2db841173f8ca8f668fc60bbebbc7cc6e150727e4685eed39c74ba38b7"
+        }
+      }
+    },
+    {
+      "name": "StaticManual5",
+      "xmlSha256": "d41cc9d981fc3aa9ebe78bdeb3e3ebdab597df2be513a79548bb5096350e02e2",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "5",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            324
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              288,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              143
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            143
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "51354eb167135a909591ca830947cd52048730d9f76c55886f77a46706182fdb"
+        },
+        "en": {
+          "frame": [
+            745,
+            324
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              288,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              143
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            143
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "533548f1e0ffce86df844027ba5265444c8d03753c4ee3ef50dac8baf0d619bb"
+        }
+      }
+    },
+    {
+      "name": "StaticManual7",
+      "xmlSha256": "e688028b5d6c4db9fc13cdf069139324fb6e3cde5ba3db9b67a3efcc860fb2de",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            380
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              344,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              199
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            199
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "1a4ba459fd40a3c2ff2d035ccfa989917cc0b278e2a2a233f9d97e3a95908cab"
+        },
+        "en": {
+          "frame": [
+            745,
+            380
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              344,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              199
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            199
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "3a21b8f56f10faa29783f7209725f7462762221c47ce6ddbfd3b25af24d78828"
+        }
+      }
+    },
+    {
+      "name": "StaticManual8",
+      "xmlSha256": "d3e597a8ced598dd5d9b06067f59a15de13306cd8124bce9727f3e6cdbcc9bd8",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "8",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "14a4a6dd5e1bf18b9a903f6e902d742428274e0874e4318c85eca2bd80f67ce7"
+        },
+        "en": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "100371354e24ab390d1be3d5f7e74cd4694d7627a92a578bf924575208bea5fe"
+        }
+      }
+    },
+    {
+      "name": "StaticManual9",
+      "xmlSha256": "df384272656381338a830b5fdbd380086a58ccbb03162b3dc1768d4944872396",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "9",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "a937b948253b40add7c93e821b479bffb73fdd1c09ab35202e789102719c4fad"
+        },
+        "en": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "88ef8a65d23002463074020ede36be5bf922a462b550f1b3244863011a039245"
+        }
+      }
+    },
+    {
+      "name": "StaticManual12",
+      "xmlSha256": "b0fba206702e8ffc3efc20e6a5db37793628344c431c4920c212c30e45e45387",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "12",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "4d759ef95f87ff06ea3ebd18420a0d2b374122edbd059ba41ecd707605566ec5"
+        },
+        "en": {
+          "frame": [
+            745,
+            408
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              372,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              227
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            227
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "7549a27a878b22fd1e8b09e6ca02cfdfd193b753f7b19ccc9f0995b23623c000"
+        }
+      }
+    },
+    {
+      "name": "StaticStretch7",
+      "xmlSha256": "78d8dfddc67411ca4b01a3cc10253db96e8fb2e3506af08e7425d6b006b5f05e",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            380
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              344,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              199
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            199
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "4ea110e590cc5e24f284762e4292c90df818018b4c5d2653a7fc2dd2878a1628"
+        },
+        "en": {
+          "frame": [
+            745,
+            380
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              344,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              199
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            199
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "08d5b187b7c857b062d382fd131de7d295833d0d84f4678717d8a639cfb24390"
+        }
+      }
+    },
+    {
+      "name": "StaticHeight4",
+      "xmlSha256": "3e64ffe4db13fcb9441b0600695e3166a688b6bf1ce8709d0cb18c28a4d7df1f",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Height": "4",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            296
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              260,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              115
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            115
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "39bb7cc8d520daf4105ba351320d7a96e831bef3253a2004076d744b4afc3fb3"
+        },
+        "en": {
+          "frame": [
+            745,
+            296
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              260,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              115
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            115
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "bc3665d79478b11535532239516a4a998e3f92231c5e922aad6da892730c0772"
+        }
+      }
+    },
+    {
+      "name": "StaticHeight4Max7",
+      "xmlSha256": "4507f266c005fbfcac8b60404aa858b0b7251fbda47d459116c4b59fe6316a5a",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Height": "4",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            296
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              260,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              115
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            115
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "cf6f079b07634ee7cc653bdf13ad4c3a3fea0f7273f1fc89971f554a17284f11"
+        },
+        "en": {
+          "frame": [
+            745,
+            296
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              260,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              115
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            115
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "a7610a8e94a55ce22e3eb624cc57c029e41cd7e309a42280dd60963f348fa21c"
+        }
+      }
+    },
+    {
+      "name": "StaticHeight9Max7",
+      "xmlSha256": "468d362b384370d476451b5810e7a425328155034c9989eefb04e7610884425f",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Height": "9",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            380
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              344,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              199
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            199
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "725aa9ec1101c1a0aa516e99cd4f77c1bc3a1a5538a75ae3f30f3ddd999ff639"
+        },
+        "en": {
+          "frame": [
+            745,
+            380
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              344,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              199
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            199
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "cf58121983ed4d79d7685010480199b6391891260071f626d6848b17944eb1e1"
+        }
+      }
+    },
+    {
+      "name": "StaticRows9Max7",
+      "xmlSha256": "5f4e857a7b8c99309f9d946030062ae80256e8d6032112e7d68b70b13a6c8274",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HeightInTableRows": "9",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            464
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              428,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              283
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            283
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "312a086cbab71f1c8f3120e1b88b6574ae869da8f6c355c9ca97f98ef1dcd773"
+        },
+        "en": {
+          "frame": [
+            745,
+            464
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              428,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              283
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            283
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "5d9fb3bbe08d41bada897197c5fd6eac4457155a4fb9bdc7e303c007435e3820"
+        }
+      }
+    },
+    {
+      "name": "StaticFooter7",
+      "xmlSha256": "5bb34bedef7cf6b07bf05e31bbfedda610bac43fd1794cc5f4e7a69b515b5ce2",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "Footer": "true",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            382
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              346,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              201
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            201
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "e9463752f0c723b50100086a9a40fbb3461d14570c568ad9f767913b47a90d7a"
+        },
+        "en": {
+          "frame": [
+            745,
+            382
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              346,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              201
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            201
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "eeb79701eaf1a8d158678abaaff2364fd1f7bf3e32493c95de68ab513c006924"
+        }
+      }
+    },
+    {
+      "name": "StaticFooter1",
+      "xmlSha256": "e573d4fb59d16914209108dbfed6fc3af477e8a79a94f7f36574a124e124f916",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "1",
+        "Footer": "true",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            217
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              181,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              36
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            36
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "0df2442e1ffea674b3551af4ca122f7c456f257e3b68b7a836b13b03bc6f9816"
+        },
+        "en": {
+          "frame": [
+            745,
+            217
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              181,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              36
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            36
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "19edfdacda797d6c7a6920ad6bb1963b9fb5cfb281984d185f4a5d99f338c6f7"
+        }
+      }
+    },
+    {
+      "name": "StaticTallHeader7",
+      "xmlSha256": "375438e5b73d25679e57338d5118344d1111ee263797878355e277b8385a327e",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            396
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              360,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              215
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            215
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "e3144d7e53e53160ab0038c09eab0cce6d2498635234723dd55870b12c3271c7"
+        },
+        "en": {
+          "frame": [
+            745,
+            396
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              360,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              215
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            215
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "c5b16b2fe7a6006133794bb3bbd0cb498c7cbe1503ca6b020ba4c17b195c7b12"
+        }
+      }
+    },
+    {
+      "name": "StaticTallFooter7",
+      "xmlSha256": "525612f9e56a0a5ebc0b8aaf7f4b50efa4dae7ee822194f43598cb9e100316ca",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "Footer": "true",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            494
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              458,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              313
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            313
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "bc68f4f0e3c93d0cc19451db3cf10658c62b6a477cb908aeda2aa2bc3a2d9cd0"
+        },
+        "en": {
+          "frame": [
+            745,
+            494
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              458,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              313
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            313
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "f8e64e090c8e12ab82fc16142add232440cec77dd790f29f1f97e8baf98bcae3"
+        }
+      }
+    },
+    {
+      "name": "DynamicDefault",
+      "xmlSha256": "c00559df429205097d0fb5a73f8a0f88884d7eb483ace1be2465df5cc2b6905a",
+      "family": "Dynamic",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "AutoRefresh": "false",
+        "AutoRefreshPeriod": "60",
+        "ChoiceFoldersAndItems": "Items",
+        "RestoreCurrentRow": "false",
+        "TopLevelParent": null,
+        "ShowRoot": "true",
+        "AllowRootChoice": "false",
+        "UpdateOnDataChange": "Auto",
+        "AllowGettingCurrentRowURL": "true",
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Code",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Description",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            654
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              618,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              452
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            473
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "c74ede143f47968a299c2c77d43087599b1874ec592aa82543c3ee016af25589"
+        },
+        "en": {
+          "frame": [
+            745,
+            654
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              618,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              452
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            473
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "3220f4ec2a3dcd7ae165134374f843c4d21f8db42844ec851644c699d26a4c0a"
+        }
+      }
+    },
+    {
+      "name": "DynamicManual1",
+      "xmlSha256": "543db7b114a5ad0e42caf4755a2dd479e00ab43fe2525e4995aaa969c24eba63",
+      "family": "Dynamic",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "1",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "AutoRefresh": "false",
+        "AutoRefreshPeriod": "60",
+        "ChoiceFoldersAndItems": "Items",
+        "RestoreCurrentRow": "false",
+        "TopLevelParent": null,
+        "ShowRoot": "true",
+        "AllowRootChoice": "false",
+        "UpdateOnDataChange": "Auto",
+        "AllowGettingCurrentRowURL": "true",
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Code",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Description",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            239
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              203,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              37
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            58
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "1f756fa518690c940f0608e29f42f5b049e7975ee4fbc14e75db48e2456536d6"
+        },
+        "en": {
+          "frame": [
+            745,
+            239
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              203,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              37
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            58
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "5d987bb49b930f8b9a503467f078553b11b13f885d6c88c7a7d56fdecd8ab32f"
+        }
+      }
+    },
+    {
+      "name": "DynamicManual7",
+      "xmlSha256": "0621f43c97853927f35ab0ae67a42b6c1ba82e333f65b511ec9b438a3875046d",
+      "family": "Dynamic",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "AutoRefresh": "false",
+        "AutoRefreshPeriod": "60",
+        "ChoiceFoldersAndItems": "Items",
+        "RestoreCurrentRow": "false",
+        "TopLevelParent": null,
+        "ShowRoot": "true",
+        "AllowRootChoice": "false",
+        "UpdateOnDataChange": "Auto",
+        "AllowGettingCurrentRowURL": "true",
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Code",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Description",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            402
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              366,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              200
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            221
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "ccde194ca63be0cfd4d6c7044352ccffeb26cee4c1ad92a6d5547f03663ffb92"
+        },
+        "en": {
+          "frame": [
+            745,
+            402
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              366,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              200
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            221
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "7eb28c4b94e1d4d18c663c3cfbc3055558307e9ba2a0a2352ae5b8ced99927a5"
+        }
+      }
+    },
+    {
+      "name": "DynamicManual20",
+      "xmlSha256": "16ce55d0310534edb3f833550a3b984053bba55c69fe579b2240c97517aaade0",
+      "family": "Dynamic",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "20",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "AutoRefresh": "false",
+        "AutoRefreshPeriod": "60",
+        "ChoiceFoldersAndItems": "Items",
+        "RestoreCurrentRow": "false",
+        "TopLevelParent": null,
+        "ShowRoot": "true",
+        "AllowRootChoice": "false",
+        "UpdateOnDataChange": "Auto",
+        "AllowGettingCurrentRowURL": "true",
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Code",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Description",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            654
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              618,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              452
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            473
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "caa84861b7dbb9aaffd8b08ac9876b5c75dcf2352a9497bf4dcb24cb106afee5"
+        },
+        "en": {
+          "frame": [
+            745,
+            654
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              618,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              452
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            473
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "8dec5cf8b145da10641ef88d69719d5be2903a3ce8526fdccb12f5a777ab243c"
+        }
+      }
+    },
+    {
+      "name": "DynamicHeight4Max7",
+      "xmlSha256": "589d89265df3052ef6a538d98ea6d65df46b226b8eb840055c8eae2ce080a50d",
+      "family": "Dynamic",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Height": "4",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "AutoRefresh": "false",
+        "AutoRefreshPeriod": "60",
+        "ChoiceFoldersAndItems": "Items",
+        "RestoreCurrentRow": "false",
+        "TopLevelParent": null,
+        "ShowRoot": "true",
+        "AllowRootChoice": "false",
+        "UpdateOnDataChange": "Auto",
+        "AllowGettingCurrentRowURL": "true",
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Code",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Description",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            318
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              282,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              116
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            137
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "0ee3fd6bb727d33eb1a1d7fe678d88917fc5a170db9904cad54ed80b3a6971ff"
+        },
+        "en": {
+          "frame": [
+            745,
+            318
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              282,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              116
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            137
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "4b2bf0a9681f6f492f9d725ae280b31a624c2936b69a2d932c4fa2c07c236e03"
+        }
+      }
+    },
+    {
+      "name": "StaticFooterDefault",
+      "xmlSha256": "5bc93910b9aca106ad17a7af96d3e04cbe9c2fc506a859a40583d792ddc29aa8",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Footer": "true",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            410
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              374,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              229
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            229
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "3450095bb24dce8c3f7b6784e2e7b50792009ec21addaf5534e051ec98150e3d"
+        },
+        "en": {
+          "frame": [
+            745,
+            410
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              374,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              229
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            229
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "86c0f309706a0ed687dc643b3767506bff21786ae1bc320056d907689a22713e"
+        }
+      }
+    },
+    {
+      "name": "StaticFooter2",
+      "xmlSha256": "fdd88ea2acafe7d6a407dce507c29d946db15c403eb98e5cb1842623d1b48df4",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "2",
+        "Footer": "true",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 10,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            241
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              205,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              60
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            60
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "9823474dfa9ba0290b5b63eb33aed95d88496ada5c21f319b8a0013ab4ad2c4e"
+        },
+        "en": {
+          "frame": [
+            745,
+            241
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              205,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              60
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            60
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "dcacf41e60c201f3d4311f45ad4facf151aad6ea05b2b3dbff8fc5a5ad207b70"
+        }
+      }
+    },
+    {
+      "name": "StaticTallHeaderDefault",
+      "xmlSha256": "9e6910009b26191f2cb06e8a68cd4423340f4d9d2791a0408f4137a06a52437f",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            424
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              388,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              243
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            243
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "e9fb311af400a31a82e56d950f0867dee78492972f798f96a947ecffae428c38"
+        },
+        "en": {
+          "frame": [
+            745,
+            424
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              388,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              243
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            243
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "8f185410ec5a2e0ec10c2cef1fb8644587b36eba18d16f8bb68f629223185473"
+        }
+      }
+    },
+    {
+      "name": "StaticTallHeader1",
+      "xmlSha256": "2d5117ce56eaf9f0ff6067f62cc348b148ae3f449793c17f2bfff5aed126190f",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "1",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            233
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              197,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              52
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            52
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "27491a8af5c991fa8ea4c4ea70d2b5f1626e30bbe224a9cb7570c951ce174bea"
+        },
+        "en": {
+          "frame": [
+            745,
+            233
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              197,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              52
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            52
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "0a88c9ba0812d56816ef2f2151cc6435371400d7995788475c7f4c342b6c7d15"
+        }
+      }
+    },
+    {
+      "name": "StaticTallHeader2",
+      "xmlSha256": "ccbc0aac59ab5bb8806f4756c09f37594a1f1da7f63cbb5104f74f02920486a3",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "2",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            256
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              220,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              75
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            75
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "88d1b39e66589ffc9ed157bb16c61711fd74953fd4d4bfaf1a8c2c2de2e9136f"
+        },
+        "en": {
+          "frame": [
+            745,
+            256
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              220,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              75
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            75
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "5dc39df65982a69c4e51428e320acebfc2633069509f978da840eadeda57a932"
+        }
+      }
+    },
+    {
+      "name": "StaticFont8Default",
+      "xmlSha256": "3115f60ee23e7ff3c5d970220d219bb288b6cf3efef38a89f8f2377688647aa1",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 8.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            384
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              348,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              203
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            203
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "3ffc93d3880b2cd3ccfa6dbd5cdd6ce590f0592bd61418c1d0dbe03345869bbc"
+        },
+        "en": {
+          "frame": [
+            745,
+            384
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              348,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              203
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            203
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "5949eccd1f359f87f5194f1858838e464dbaa153947bebe5cc6405462a311fe6"
+        }
+      }
+    },
+    {
+      "name": "StaticFont8Max7",
+      "xmlSha256": "9537df8c84e9da483f86deeaada0292abd254d6c5f49cc6975cb174152cf2fc0",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 8.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            359
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              323,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              178
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            178
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "c283ba49f28b37aefdd0e50835df5300ada2baaddc9d314c6fe0829736e4f1f3"
+        },
+        "en": {
+          "frame": [
+            745,
+            359
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              323,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              178
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            178
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "fa4849aad2e8d097c9fefc28db4d845032c44fc13242e2c2d94c10f99508adbc"
+        }
+      }
+    },
+    {
+      "name": "StaticFont8Height4",
+      "xmlSha256": "a1b86518b648fde1aecf44e9ca5523806f3a3d58528efba4aadce0def3c08cd1",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Height": "4",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 8.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            284
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              248,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              103
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            103
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "287b10c3a2c43bbb71312701a3821600119c309a9c062de5aedbbb7c66fae76d"
+        },
+        "en": {
+          "frame": [
+            745,
+            284
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              248,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              103
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            103
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "a354ffc5952c444e25a58a2484f319517732ae753f8ed1352bcd6ed0b699b60c"
+        }
+      }
+    },
+    {
+      "name": "StaticFont12Default",
+      "xmlSha256": "9774e7665631c7aaeb6b973d69cafc4824fe18bc5cd65c5b2ba3c6523deaa670",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 12.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            464
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              428,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              283
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            283
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "c0a75564430f436a8d85563d036893123f1cd73b3ed4faf304fad1033e10eda4"
+        },
+        "en": {
+          "frame": [
+            745,
+            464
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              428,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              283
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            283
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "25b9e3271a3f0cac9f171994921c533ecb0fff213752aa7054d248acce34a06b"
+        }
+      }
+    },
+    {
+      "name": "StaticFont12Max7",
+      "xmlSha256": "ab791fd52d1345e238a5f828624c9750f9b929e693b32bf151aa6c90ae2d72ce",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 12.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            429
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              393,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              248
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            248
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "469d9c23430671b866e193f11f0b40f9648ab7723272e3fca6052198a3debd14"
+        },
+        "en": {
+          "frame": [
+            745,
+            429
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              393,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              248
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            248
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "7e08a0d2c478dfcd3a8dc5d46dd674613cdcfbdc7a3d15b52f8d33e00140748a"
+        }
+      }
+    },
+    {
+      "name": "StaticFont12Height4",
+      "xmlSha256": "8b02240cc6c0e19df3a023171d66bb4d33a9595024b2c64ea986b8c2d8cf502b",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Height": "4",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 12.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            324
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              288,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              143
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            143
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "de6cb76497e05db5ec6a63082390e6c5c1ffaf207a72c9f0d29babd593f761d9"
+        },
+        "en": {
+          "frame": [
+            745,
+            324
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              288,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              143
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            143
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "721b3ffdf2b7561e11c8dd484278dacfff392831e22ceaa4605c60a9da6838f0"
+        }
+      }
+    },
+    {
+      "name": "StaticFont14Default",
+      "xmlSha256": "e506c07ad32930fc52d9b76c5ff27534abffd2b081f24c4a5f6c58e1b61b2e4b",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 14.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 14.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 14.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 14.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            512
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              476,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              331
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            331
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "4e7550573a3384b7b5dff4960ff597e90a122289dad1b1ef66cb5f8d3ab0a888"
+        },
+        "en": {
+          "frame": [
+            745,
+            512
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              476,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              331
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            331
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "2646714be22badac2b5b770845d9fd82a242f1cefe30d586194c43e0f8df9c20"
+        }
+      }
+    },
+    {
+      "name": "StaticFont14Max7",
+      "xmlSha256": "c5ba85c443eef75f5e335b4ffff5964504df9e971f5e63d4ef13e36d68a998db",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 14.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 14.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 14.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 14.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            471
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              435,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              290
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            290
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "7bd394a8fe2b8af765f6560b07a65e45844114001800b2d6e50b2200ef7f8211"
+        },
+        "en": {
+          "frame": [
+            745,
+            471
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              435,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              290
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            290
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "60bc3c037fde539bc1d5c380005b9be67e7b992a61a7d6241dae6749d5749203"
+        }
+      }
+    },
+    {
+      "name": "StaticFont14Height4",
+      "xmlSha256": "9f00e8dc8428aca5c5d6022195afad12144ffc4a3e3552302e40e2c2aa9440ac",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Height": "4",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 14.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 14.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 14.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 14.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            348
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              312,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              167
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            167
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "4a08671e87062361a311439bb9cdb7f457c6d509b483f7f1dd2693063abf5232"
+        },
+        "en": {
+          "frame": [
+            745,
+            348
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              312,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              167
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            167
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "cedca2547fcad4e037d2b5efa0353ad0d635adc57b107afc0d3c8b65fdb97be7"
+        }
+      }
+    },
+    {
+      "name": "StaticFont16Default",
+      "xmlSha256": "1e78a71def1c15b4d00cadeebc1d83b3b6f1b3fd8e0c705fb456dbc01784a202",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            536
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              500,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              355
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            355
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "a1aca8f4bfb0acde223d5cdd72574aa083b7d96ff10b60136ee1971c21eda616"
+        },
+        "en": {
+          "frame": [
+            745,
+            536
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              500,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              355
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            355
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "e015fa354b74421280d4db5bda8950ff356784f9cfea260b75499aacf3600e1a"
+        }
+      }
+    },
+    {
+      "name": "StaticFont16Max7",
+      "xmlSha256": "1c44d09c84dea7d69a94a51ec7367bd2a40cbd689fe42b908511a29ae9301ddc",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            492
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              456,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              311
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            311
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "6a14bd61a15a41b7aa4c18162e566f7bcc0f9492b5e5327e0ff7e79cd3012b2a"
+        },
+        "en": {
+          "frame": [
+            745,
+            492
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              456,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              311
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            311
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "42af0f9582a481333ec3751ed9325e5f80d1aad441825c96598472bd04cffcc7"
+        }
+      }
+    },
+    {
+      "name": "StaticFont16Height4",
+      "xmlSha256": "334bab02708ce6c186a94db1c6d1f05968ec338af20fbfef4a6c529fa1bbd45f",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Height": "4",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            360
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              324,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              179
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            179
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "6737e4eb85300c67215ddabac2b757b05e4569d4c1e0d10936148b728bf77082"
+        },
+        "en": {
+          "frame": [
+            745,
+            360
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              324,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              179
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            179
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "37ee26327078a91899e02152474a0bcc4b9b9ab504db023902e53a9a36c134cc"
+        }
+      }
+    },
+    {
+      "name": "StaticFont8Rows4",
+      "xmlSha256": "c20775e14288ca034230c83d5517183e65fa36eac8f9bed7ca1ef76a94cccf00",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "HeightInTableRows": "4",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 8.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            309
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              273,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              128
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            128
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "9dda1f92b52feaffbc4e6c06a048b79266257393164d94b6c6e600ec58572bc8"
+        },
+        "en": {
+          "frame": [
+            745,
+            309
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              273,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              128
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            128
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "ca8ae1cd5ad79415d09ba6f8c46b29284da77eae41a2169182bdc38bbe76e598"
+        }
+      }
+    },
+    {
+      "name": "StaticFont16Rows4",
+      "xmlSha256": "2b3822f48e64aed59b586a5bf6d6eca6fbb346810733eb3f81d48dc2b38df16b",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "HeightInTableRows": "4",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            404
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              368,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              223
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            223
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "b86c1313c77c8964ce4c8dfef24ce54d95f6ec93fe0238ad59e777f8d0ad13eb"
+        },
+        "en": {
+          "frame": [
+            745,
+            404
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              368,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              223
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            223
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "21c74f629dcd597881f74b9b89789268d9cf1f71631773223d223c8de2995279"
+        }
+      }
+    },
+    {
+      "name": "StaticTallFooterDefault",
+      "xmlSha256": "c9713d7562c3f025af3775564d1a05fd2801aa12256b16696974f7e0b79d1b2d",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Footer": "true",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            538
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              502,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              357
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            357
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "ed16e232696b661fe95a46c18b5dafce6ce04b785616fc7a9cd574d5d4328e7c"
+        },
+        "en": {
+          "frame": [
+            745,
+            538
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              502,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              357
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            357
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "db75229eb054ad4787a3e0d937f5121ca4bb9d2868962c799ba1f3d38b7e9e89"
+        }
+      }
+    },
+    {
+      "name": "StaticTallFooter1",
+      "xmlSha256": "46aca81863077b4fdde59cd1e2c90b85b25abc9ba9ff145a100a5ad37a16f5d5",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "1",
+        "Footer": "true",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            233
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              197,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              52
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            52
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "09556573257f5a1d03ef47324a2c4742d68edd8829594ec9c86d764a13a4265f"
+        },
+        "en": {
+          "frame": [
+            745,
+            233
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              197,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              52
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            52
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "c95a463d00bb2db9bab3ab464d26a30564f6b280dbf00adfae0ed34c751f1069"
+        }
+      }
+    },
+    {
+      "name": "StaticTallFooter2",
+      "xmlSha256": "f1ec443712dafeb924e17003d83d026f5d6bf8a5f41cc187135f6a23d2f4baca",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "2",
+        "Footer": "true",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            273
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              237,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              92
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            92
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "889ef21c07500beea92e6719687ace0cd32cd3d2981e248d3bdc92b793331c0b"
+        },
+        "en": {
+          "frame": [
+            745,
+            273
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              237,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              92
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            92
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "2628102b2c824074ba8b4253f60c64c40dff5f7c47bbe3428125376d386ad056"
+        }
+      }
+    },
+    {
+      "name": "StaticFont8Footer7",
+      "xmlSha256": "5d80ff0d2ee176b4fa6c87700eb355e440aaadb1b810751eda0172a6a2c8755a",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "Footer": "true",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 8.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 8.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            361
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              325,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              180
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            180
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "58f142dc385504919bcdcbfb100d4c4326927d80ad0344c12869a18b3eaac957"
+        },
+        "en": {
+          "frame": [
+            745,
+            361
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              325,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              180
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            180
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "4d6cee88a17847100cdf7c0764726fd963f80d4e8db3a7aa8503cbd88f7173cc"
+        }
+      }
+    },
+    {
+      "name": "StaticFont12Footer7",
+      "xmlSha256": "84daca85edaa33c70ad7921771352414b7c704464ad9afa014a0c811256ac48b",
+      "family": "Static",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "Footer": "true",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "RowFilter": null,
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 12.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Text",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Amount",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Active",
+          "kind": "CheckBoxField",
+          "titleFont": {
+            "points": 12.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            431
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              395,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              250
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            250
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "6a59a7c32c1acc508c23187f4a046355a2efd937795b6ad30f21a962d570f7a2"
+        },
+        "en": {
+          "frame": [
+            745,
+            431
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              395,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              250
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            250
+          ],
+          "paginationBandHeight": 0,
+          "screenshotSha256": "f27059926e927805c76c71b5a726ced819e1fea240d485e36cf35ce92b14db7e"
+        }
+      }
+    },
+    {
+      "name": "DynamicFont16Default",
+      "xmlSha256": "9cb07d64fa8a24b2eb8555dec426b014a844e06a26407b85013177aa0307f6c9",
+      "family": "Dynamic",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "AutoRefresh": "false",
+        "AutoRefreshPeriod": "60",
+        "ChoiceFoldersAndItems": "Items",
+        "RestoreCurrentRow": "false",
+        "TopLevelParent": null,
+        "ShowRoot": "true",
+        "AllowRootChoice": "false",
+        "UpdateOnDataChange": "Auto",
+        "AllowGettingCurrentRowURL": "true",
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Code",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Description",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            910
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              874,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              708
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            729
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "f6ed6d224233db93e97fbda4294bbadbf4891fc78427b5759ceb06643119df82"
+        },
+        "en": {
+          "frame": [
+            745,
+            910
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              874,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              708
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            729
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "8994f827f8014d50791ec651fbf3bf3810b8b414c248d0ee2fa01543e4fffa46"
+        }
+      }
+    },
+    {
+      "name": "DynamicFont16Max7",
+      "xmlSha256": "11b0b308fe15aefd260fe31f884541a018d9b0b628f93e4e11b7cdd50b34005a",
+      "family": "Dynamic",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "AutoMaxHeight": "false",
+        "MaxHeight": "7",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "AutoRefresh": "false",
+        "AutoRefreshPeriod": "60",
+        "ChoiceFoldersAndItems": "Items",
+        "RestoreCurrentRow": "false",
+        "TopLevelParent": null,
+        "ShowRoot": "true",
+        "AllowRootChoice": "false",
+        "UpdateOnDataChange": "Auto",
+        "AllowGettingCurrentRowURL": "true",
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Code",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Description",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            514
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              478,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              312
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            333
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "1e3e0048fcf19c14a47f321eea6dcdafb92dd0fa4116ab25e0e1730a918f5f1e"
+        },
+        "en": {
+          "frame": [
+            745,
+            514
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              478,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              312
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            333
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "400563ccbeea6428d36031f2b781a0f66e089cf298fa56e25b1132be97f6fd3e"
+        }
+      }
+    },
+    {
+      "name": "DynamicFont16Height4",
+      "xmlSha256": "4d64da8e91db1d4f979262d8af09b29d0f3e4daba8fa4f4f3ad0b881e6410d40",
+      "family": "Dynamic",
+      "properties": {
+        "Representation": "List",
+        "Width": "60",
+        "Height": "4",
+        "HorizontalStretch": "false",
+        "VerticalStretch": "false",
+        "DataPath": "Rows",
+        "Font": null,
+        "AutoRefresh": "false",
+        "AutoRefreshPeriod": "60",
+        "ChoiceFoldersAndItems": "Items",
+        "RestoreCurrentRow": "false",
+        "TopLevelParent": null,
+        "ShowRoot": "true",
+        "AllowRootChoice": "false",
+        "UpdateOnDataChange": "Auto",
+        "AllowGettingCurrentRowURL": "true",
+        "ContextMenu": null,
+        "AutoCommandBar": null,
+        "ExtendedTooltip": null
+      },
+      "font": {
+        "points": 16.0,
+        "weight": 400
+      },
+      "columns": [
+        {
+          "name": "Code",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        },
+        {
+          "name": "Description",
+          "kind": "InputField",
+          "titleFont": {
+            "points": 16.0,
+            "weight": 400
+          }
+        }
+      ],
+      "locales": {
+        "ru": {
+          "frame": [
+            745,
+            382
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              346,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              180
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            201
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "a06b94092ecb8f9e6fe4970c9e4dfa86b71d37d4bbb766c9d145cf3130bf44a1"
+        },
+        "en": {
+          "frame": [
+            745,
+            382
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              346,
+              711,
+              23
+            ],
+            "Rows": [
+              13,
+              136,
+              600,
+              180
+            ]
+          },
+          "combinedGrid": [
+            13,
+            136,
+            600,
+            201
+          ],
+          "paginationBandHeight": 21,
+          "screenshotSha256": "5b99d07bc6decdb60ef96c595647c1de5c12549d117cf8c8586acad0bff04d88"
+        }
+      }
+    }
+  ]
+}
