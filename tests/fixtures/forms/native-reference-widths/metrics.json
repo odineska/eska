@@ -1,0 +1,922 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "metadata": {
+    "Catalog.xml": {
+      "xmlSha256": "18d4f7ff8c42ba96cdacae27d6df5cab9e025f42c35995ced0b51ab57ecef0f2",
+      "canonicalExportSha256": "54623e6582cd68ee6a1267e4627e710f56783c66835149b4041a75d477071c15"
+    },
+    "Enum.xml": {
+      "xmlSha256": "86822b03174de93e23db0b54b6c6211b84afbc99f77797786b3d09a0ef21c676",
+      "canonicalExportSha256": "52eb89dbef77e8d5a970c5bd625b6adfaca453bb77e168d164cc27ee138320d4"
+    }
+  },
+  "rows": [
+    {
+      "name": "CatalogNoOpen12",
+      "form": "ProbeWidthHeading478004",
+      "xmlSha256": "9af340a2d34aa0def314d4ba712afa28be4b8494f5734acf9eca09cb94d09e73",
+      "canonicalExportSha256": "1a28c2724810502ca8f2bcc1cc9a545224d62b4419f9c628c9b01de1a0778eb3",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "12",
+        "HorizontalStretch": "false",
+        "OpenButton": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": false
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "6b9b4050a64a09ab245cd5292f54b6f9ba2f0ab0a9f9ea0f0a7770f53b8486a1"
+        },
+        "ru": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "818a4317dd5a200587d1672a72d385c02ca763652b5f6d019f9bd3b3a0adb866"
+        }
+      }
+    },
+    {
+      "name": "CatalogNoOpen43",
+      "form": "ProbeWidthHeading478005",
+      "xmlSha256": "cd03efde13f1b47081cd748c92ace54110b926c1cbe82ca0d91c32d41532bd83",
+      "canonicalExportSha256": "d89bfc8d7b302ea6300e3848f4dae67c86df4aa14c352e5e555a2488c5a8f34b",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "43",
+        "HorizontalStretch": "false",
+        "OpenButton": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": false
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            496,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              462,
+              23
+            ]
+          },
+          "screenshotSha256": "682ae5a72626dfc2340ff8d7da9f3170544c512e112436a98f11776e1d8fabda"
+        },
+        "ru": {
+          "frame": [
+            496,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              462,
+              23
+            ]
+          },
+          "screenshotSha256": "bdaca5c9e51f843c27161dca14e4737f1e5f1b38d58c84b344fab1ab3363ba44"
+        }
+      }
+    },
+    {
+      "name": "CatalogOpen43",
+      "form": "ProbeWidthHeading478006",
+      "xmlSha256": "7d98fc9f07af73fd7b9a80aaf02b4105c5e082bb3b1b53ab02eb5edf80b888e5",
+      "canonicalExportSha256": "e4001d88cba46b253fd4abc1d7a02dfc002dd3e1f2bf277fea72f194a06a19f0",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "43",
+        "HorizontalStretch": "false",
+        "OpenButton": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": true,
+        "list": false
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            517,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              483,
+              23
+            ]
+          },
+          "screenshotSha256": "9ca39b3763d07491f480fed28202c8eceb818ca170e0fb98a4daffeaac361aaa"
+        },
+        "ru": {
+          "frame": [
+            517,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              483,
+              23
+            ]
+          },
+          "screenshotSha256": "bae05946a59d6c0f9cba6b66032dec5f40e9baf38421c34a2775cb2f03a83b5a"
+        }
+      }
+    },
+    {
+      "name": "EnumOnly12",
+      "form": "ProbeWidthHeading478007",
+      "xmlSha256": "3584dd7dc6ad4db37d507a4972ea545e9fd33309106f99bca0ccdfee345e95c0",
+      "canonicalExportSha256": "b90f9bcd2727d12c3edc1cec2b0834aa86158872f1022f71b85fb802c2a22e9c",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "12",
+        "HorizontalStretch": "false",
+        "ChoiceButton": "false",
+        "OpenButton": "false",
+        "ListChoiceMode": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": true
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "217589a4ddee4220d82ff3e681a6fe7e8c2288243f1f42c81df355513db1d03a"
+        },
+        "ru": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "6649b028f474c23661aa50656a63ec9d8235d348ca6fe2a9adc3e326a89cb109"
+        }
+      }
+    },
+    {
+      "name": "EnumOnly43",
+      "form": "ProbeWidthHeading478008",
+      "xmlSha256": "29f8a2c41952395f1ec623f3ea1c900e0c5d97df728333a6d21f4278700761a6",
+      "canonicalExportSha256": "fd445ff0646fcb4c66f3fd3bbe46f611a1851948510c43ce662aac21bdae67ba",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "43",
+        "HorizontalStretch": "false",
+        "ChoiceButton": "false",
+        "OpenButton": "false",
+        "ListChoiceMode": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": true
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            496,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              462,
+              23
+            ]
+          },
+          "screenshotSha256": "03c4cfed4e09b38c0080a2ca2e6b5ea31a6d9c0095352f651a4dc5d56cc5dc5b"
+        },
+        "ru": {
+          "frame": [
+            496,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              462,
+              23
+            ]
+          },
+          "screenshotSha256": "1f0f3eddeeb076b61a8320cfc787c2b3e1c8580319fd804126f7563f9fea46fa"
+        }
+      }
+    },
+    {
+      "name": "EnumComposite12",
+      "form": "ProbeWidthHeading478009",
+      "xmlSha256": "e4a8357fac8552f4487872113ea1d00f6ea781e657a4a5fda02a5b4f2a18f24d",
+      "canonicalExportSha256": "0d6f6165761bc8d7e579aeffba4026225d19e17df46c718d7ebe4eb0d9627e69",
+      "valueType": {
+        "kind": "composite",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          },
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/core",
+            "name": "TypeDescription"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "12",
+        "HorizontalStretch": "false",
+        "ChoiceButton": "false",
+        "OpenButton": "false",
+        "ListChoiceMode": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": true
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "413f1a9256325a29fe893a5107f46f69b787176887bfaf515d86a6e740681bab"
+        },
+        "ru": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "a81dfcadbfde6f250bc56a57c9a11542747d510cba827ec2eae9ca99f5754308"
+        }
+      }
+    },
+    {
+      "name": "EnumComposite43",
+      "form": "ProbeWidthHeading478010",
+      "xmlSha256": "72f381bb54159aadde0a0b9b6c66878967572e0bbdd61ab902563dd9a1a8f25a",
+      "canonicalExportSha256": "ea7adaacfdc76ba85ef569bb7d90bac1750a06304800f4f9cf83b1e27bcba84e",
+      "valueType": {
+        "kind": "composite",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          },
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/core",
+            "name": "TypeDescription"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "43",
+        "HorizontalStretch": "false",
+        "ChoiceButton": "false",
+        "OpenButton": "false",
+        "ListChoiceMode": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": true
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            496,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              462,
+              23
+            ]
+          },
+          "screenshotSha256": "bd2516724f1cc505aa847185148c255a883aec437523f3e9daab2dfd8bac7519"
+        },
+        "ru": {
+          "frame": [
+            496,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              462,
+              23
+            ]
+          },
+          "screenshotSha256": "2516088ba7f620cc9b1095a0a57667cc2b25d40aa931cfe5254eaefc8c4b87bc"
+        }
+      }
+    },
+    {
+      "name": "EnumCompositeFont16",
+      "form": "ProbeWidthHeading478011",
+      "xmlSha256": "26d6fb9d9ebaec8aca2b3112edfbaa640d3b4dda2c572daaadf319bcf69d0336",
+      "canonicalExportSha256": "3cbd8d7ed8055f24e753fcef2b2ef8019467a2ac607bba48aeb9c4081c847f27",
+      "valueType": {
+        "kind": "composite",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          },
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/core",
+            "name": "TypeDescription"
+          }
+        ]
+      },
+      "font": {
+        "points": 16,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "43",
+        "HorizontalStretch": "false",
+        "ChoiceButton": "false",
+        "OpenButton": "false",
+        "ListChoiceMode": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": true
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            496,
+            154
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              118,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              462,
+              38
+            ]
+          },
+          "screenshotSha256": "dc1664e7c410425a3f7dc21fa5b31032860eb78f73bf35a56a282db789bedb2f"
+        },
+        "ru": {
+          "frame": [
+            496,
+            154
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              118,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              462,
+              38
+            ]
+          },
+          "screenshotSha256": "f73ab72b1f66c2a25115f87366e702c00e7f18e7be84cf62e7d6f7f767a1966a"
+        }
+      }
+    },
+    {
+      "name": "EnumDefault12",
+      "form": "ProbeWidthHeading478101",
+      "xmlSha256": "6c8460288b1ea00821778ca030ff7b68f9b549dce58851da6cb02365ecb2acb9",
+      "canonicalExportSha256": "fbb1dadb1f7a2564d7ca6afc611237976a24725d8f6e389ebcb6092f33655e1b",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "12",
+        "HorizontalStretch": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": true
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "0ac63367d86bf02d60ac9ed29c4da8be06cf66e996100b0538665a228c590dea"
+        },
+        "ru": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "335b106b3d15eee08ba43c561a3ae03814985a7e466e034218be77050bb2706c"
+        }
+      }
+    },
+    {
+      "name": "EnumDefaultList12",
+      "form": "ProbeWidthHeading478102",
+      "xmlSha256": "864bef52529b8dfd01c2ea3f694240ae017995f5cb9640347cde9de71eea61d3",
+      "canonicalExportSha256": "10f62da28120a074ebe07f4e118ebe1ccecce62d3283af73952960f9c2429630",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "12",
+        "HorizontalStretch": "false",
+        "ChoiceButton": "false",
+        "ListChoiceMode": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": true
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "90aad5f89cd5214ee7c5859d5456ac98a6498c4e00768c37c6332a32b6b303e4"
+        },
+        "ru": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "f8de19ac6893db7393fe304eedf791efa7d698662f6b0e823788a5e54e744a87"
+        }
+      }
+    }
+  ]
+}
