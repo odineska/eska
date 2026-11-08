@@ -1,0 +1,2078 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "phase": "native-reference-only",
+  "buttonBoundsIncludeBottomShadow": true,
+  "rows": [
+    {
+      "name": "Auto10",
+      "nativeForm": "ProbeWidthHeading483001",
+      "canonicalExportSha256": "d17278bc8a63ff3e1e55d55bd7f286f970f0b859dac877e0da659e336759200b",
+      "xmlSha256": "d52fad247d4904a4b5c782e896a3d189b7e34dcc4149f06b0505260b2aa344b7",
+      "requestedImportHeight": null,
+      "canonicalHeight": null,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            143
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              107,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              27
+            ]
+          },
+          "screenshotSha256": "7eb630826d66d8391d623b96b3d53295262744f27d862f328d87146d33179add"
+        },
+        "ru": {
+          "frame": [
+            334,
+            143
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              107,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              27
+            ]
+          },
+          "screenshotSha256": "2e7934d119b086fbefdec8ef081518230852e544e670fc678a3dd6a01d504139"
+        }
+      }
+    },
+    {
+      "name": "One10",
+      "nativeForm": "ProbeWidthHeading483002",
+      "canonicalExportSha256": "b7d26e576a68968924bf8b6a3601f003c2243a67637078d19804c3f73969cd70",
+      "xmlSha256": "c2def0a1c3e2a066086f3207d88941a8b4ab612b2c4a0bdd4fa8e84fea593ae8",
+      "requestedImportHeight": 1,
+      "canonicalHeight": 1,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "1",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            143
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              107,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              27
+            ]
+          },
+          "screenshotSha256": "57ffd359cba7c4a3cad637b31fbe09027c4645c812360d80502ec07ec6fdd8c7"
+        },
+        "ru": {
+          "frame": [
+            334,
+            143
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              107,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              27
+            ]
+          },
+          "screenshotSha256": "be3e8bde42cebd478f7fa87e62b5407e7eae1044360aa689d7c995ffa174aa5e"
+        }
+      }
+    },
+    {
+      "name": "Half10",
+      "nativeForm": "ProbeWidthHeading483003",
+      "canonicalExportSha256": "b7d26e576a68968924bf8b6a3601f003c2243a67637078d19804c3f73969cd70",
+      "xmlSha256": "c2def0a1c3e2a066086f3207d88941a8b4ab612b2c4a0bdd4fa8e84fea593ae8",
+      "requestedImportHeight": 1.5,
+      "canonicalHeight": 1,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "1",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            143
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              107,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              27
+            ]
+          },
+          "screenshotSha256": "e6935ec48e923182c1090d1976f1e5626fd55c182aa7c921673e175975716d64"
+        },
+        "ru": {
+          "frame": [
+            334,
+            143
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              107,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              27
+            ]
+          },
+          "screenshotSha256": "c3e811d7841c6e34efa8993b402ae3db0f64f15bb8af87cd1815febd8ecf96ea"
+        }
+      }
+    },
+    {
+      "name": "Two10",
+      "nativeForm": "ProbeWidthHeading483004",
+      "canonicalExportSha256": "28b4a0a5ac0492ea6b94ec9defa3ab287a3124510f26b2fdd604de91fbc1fd4f",
+      "xmlSha256": "32dab3d2e8fdd3cbdf354fa321a7b857c2961ab70328e83d70ff38dfc7cb04f8",
+      "requestedImportHeight": 2,
+      "canonicalHeight": 2,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "2",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            156
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              120,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              40
+            ]
+          },
+          "screenshotSha256": "199685b89419fb96973745dee47b0b0a0cceae2cb3838918ba6e851fd3645336"
+        },
+        "ru": {
+          "frame": [
+            334,
+            156
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              120,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              40
+            ]
+          },
+          "screenshotSha256": "0fd5d98c6e2925bac6380494250c1aacf232de82bcf1c59caede4afe81e8e94c"
+        }
+      }
+    },
+    {
+      "name": "Three10",
+      "nativeForm": "ProbeWidthHeading483005",
+      "canonicalExportSha256": "3f8a63174323e53247ecbfcd2f9bcf8f3624cd20dad8552d636743a5d4b70318",
+      "xmlSha256": "2b8435802c9c01f844091a0773168edaf6e2cb51989df8c234710f99db8718c5",
+      "requestedImportHeight": 3,
+      "canonicalHeight": 3,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "3",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            172
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              136,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              56
+            ]
+          },
+          "screenshotSha256": "b916ec6ace21ce7acb5140dfdcdb135fcd890a7fcd582baeef35f693899c2dbe"
+        },
+        "ru": {
+          "frame": [
+            334,
+            172
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              136,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              56
+            ]
+          },
+          "screenshotSha256": "e203c25461c00f563969afced0558192ae00ba086144b2398e34902e478326aa"
+        }
+      }
+    },
+    {
+      "name": "Auto16",
+      "nativeForm": "ProbeWidthHeading483006",
+      "canonicalExportSha256": "91911c9cf4f02d625ea73daaca1818af33654b57b99a06ba1335b6d45c7049c7",
+      "xmlSha256": "467727abf4ab11a4c0a201b62ed1303fa382cb87d439d191c758285b5fe63da2",
+      "requestedImportHeight": null,
+      "canonicalHeight": null,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 16,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            154
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              118,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              38
+            ]
+          },
+          "screenshotSha256": "90ec7d27402272a5b49dd10fac612237cb5c2931bb7557c4f44fba21fce2ba55"
+        },
+        "ru": {
+          "frame": [
+            334,
+            154
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              118,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              38
+            ]
+          },
+          "screenshotSha256": "c74141671475fa82b8c60190560208c38a99cf21d3d01f63421a400686207b93"
+        }
+      }
+    },
+    {
+      "name": "Two16",
+      "nativeForm": "ProbeWidthHeading483007",
+      "canonicalExportSha256": "15e8a37029dfe6ae44d74b9effa9f1e218a643e58df24b38a300bdf359e41bce",
+      "xmlSha256": "1de6285e8f7a58a09685622330612294880abb7708a945666d080e1161103361",
+      "requestedImportHeight": 2,
+      "canonicalHeight": 2,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "2",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 16,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            178
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              142,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              62
+            ]
+          },
+          "screenshotSha256": "8461427b0c2f70ad5d6c1197dbba7cd6a2ec4dccb8ae1fa88246e8eb0a11b9cf"
+        },
+        "ru": {
+          "frame": [
+            334,
+            178
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              142,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              62
+            ]
+          },
+          "screenshotSha256": "e4f2469ee3e4238d2f7310e17d740dd1bce2df402f231ffdb330d21c1acf903a"
+        }
+      }
+    },
+    {
+      "name": "Three16",
+      "nativeForm": "ProbeWidthHeading483008",
+      "canonicalExportSha256": "d0694e99dfd3117122cdbc17c94adad7ddbe0e6e0b0fa80d2c4e11a91ad5ced4",
+      "xmlSha256": "9e549c269143f5365da350d38a8c1cadb52d424e536d2c23c4555d3dee7f1129",
+      "requestedImportHeight": 3,
+      "canonicalHeight": 3,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "3",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 16,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            202
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              166,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              86
+            ]
+          },
+          "screenshotSha256": "5127b75e765cd5ba1c169217585e3cf85af422dda04c8024535798a5c3a122c9"
+        },
+        "ru": {
+          "frame": [
+            334,
+            202
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              166,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              86
+            ]
+          },
+          "screenshotSha256": "01ec98d24de166d36bc30dd6aa1656df3f416bcfdc47793bb23ecc6e9837c2c3"
+        }
+      }
+    },
+    {
+      "name": "Two8",
+      "nativeForm": "ProbeWidthHeading484001",
+      "canonicalExportSha256": "1f2bab42881d9f3780ec8fc977da35d1977b250721d67dba8ee14352f02da7b5",
+      "xmlSha256": "12b9255d8b858c7e1169f3e2dab40231a58c98ee9de455f60c2b746944e8c730",
+      "requestedImportHeight": 2,
+      "canonicalHeight": 2,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "2",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 8,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            151
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              115,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              35
+            ]
+          },
+          "screenshotSha256": "66a38f31811e77c10daafd731a8412c14177c103fae46ea881c9969e6e2320ec"
+        },
+        "ru": {
+          "frame": [
+            334,
+            151
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              115,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              35
+            ]
+          },
+          "screenshotSha256": "7b33670ac375df8708b8a257f3dbadaf6a7aa4616b5770fcbec829b3f1ae4b70"
+        }
+      }
+    },
+    {
+      "name": "Three8",
+      "nativeForm": "ProbeWidthHeading484002",
+      "canonicalExportSha256": "8f85dccb35ce92983046b613994dd80a17a6fde830f6636c2733e57026b22dbb",
+      "xmlSha256": "f29a84e29a4176517a8c5a14df14bed9039053ca70992f6f92809f30cb6f718d",
+      "requestedImportHeight": 3,
+      "canonicalHeight": 3,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "3",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 8,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            164
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              128,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              48
+            ]
+          },
+          "screenshotSha256": "1918ff006651365e4ed14d5d155240f2d745a6770a515f08a807c8b13d775096"
+        },
+        "ru": {
+          "frame": [
+            334,
+            164
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              128,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              48
+            ]
+          },
+          "screenshotSha256": "2aaae2ecd23eb2cc5e12bd2f95bc55cd717757bf171e3465da0ce76c7463d38e"
+        }
+      }
+    },
+    {
+      "name": "Two9",
+      "nativeForm": "ProbeWidthHeading484003",
+      "canonicalExportSha256": "8f10a1faee258c8e53368cb1d063c07b22e1fbd0c0ddce3ce7e6a915ba2f11e6",
+      "xmlSha256": "94d963e92dd379fab8ba5edfdf0738786bc449bb7128fa6827cdfae0929c3f6f",
+      "requestedImportHeight": 2,
+      "canonicalHeight": 2,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "2",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 9,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            153
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              117,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              37
+            ]
+          },
+          "screenshotSha256": "661e2745ec56214cc59b7b23c246671f4568242a1956306699bf6517fac44d02"
+        },
+        "ru": {
+          "frame": [
+            334,
+            153
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              117,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              37
+            ]
+          },
+          "screenshotSha256": "4a8d8a7b0f96b47b7dd8d7c4e253db537c98efbd048894a39a1648eb0c23109d"
+        }
+      }
+    },
+    {
+      "name": "Three9",
+      "nativeForm": "ProbeWidthHeading484004",
+      "canonicalExportSha256": "21bbee5b0ca9152b2afcb8c940829141c83c368e1391ebf8e7c82d0a7ee2b01b",
+      "xmlSha256": "3ce10e226a371227b6e6ae43566624285aad4310ade0b7941848c28cbfe7f669",
+      "requestedImportHeight": 3,
+      "canonicalHeight": 3,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "3",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 9,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            167
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              131,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              51
+            ]
+          },
+          "screenshotSha256": "93a47a2f08933cacb8c367781d0de2929ac91a3750fac611a83ab0665d5fdc09"
+        },
+        "ru": {
+          "frame": [
+            334,
+            167
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              131,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              51
+            ]
+          },
+          "screenshotSha256": "2e5f4700ff3505f7642abd02dd63c8165f4df9f042d6536378e81aa8f25750ab"
+        }
+      }
+    },
+    {
+      "name": "Two11",
+      "nativeForm": "ProbeWidthHeading484005",
+      "canonicalExportSha256": "07fb780a4610345e624205343b9b9d096f9d69d9b9b39628505df56063780c92",
+      "xmlSha256": "f11c2c3aff3ffbde06b4f01c4252da52c5f8c1fac8772dd2984645728e9358d3",
+      "requestedImportHeight": 2,
+      "canonicalHeight": 2,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "2",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 11,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            160
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              124,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              44
+            ]
+          },
+          "screenshotSha256": "8fbd25ebc8c400d98d0a4681c2763c821caf555aa348f053a49f92fe676ec4f6"
+        },
+        "ru": {
+          "frame": [
+            334,
+            160
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              124,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              44
+            ]
+          },
+          "screenshotSha256": "83840c254c9fb515778fece2e285a84fae7b2bc68d3b5b999f50735e7923103b"
+        }
+      }
+    },
+    {
+      "name": "Three11",
+      "nativeForm": "ProbeWidthHeading484006",
+      "canonicalExportSha256": "b31977edf2e67a6f307e65b6c71443478ae7c6fb975ac79062cda5a8581758fd",
+      "xmlSha256": "9a815b443baa26040b694d0ba2d2e8c03aea48e681b6d63af7f554e7f77475ab",
+      "requestedImportHeight": 3,
+      "canonicalHeight": 3,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "3",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 11,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            177
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              141,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              61
+            ]
+          },
+          "screenshotSha256": "f5cd0c198266a2bd846d543512cc8e7aa46699c22154be2060fc51e916bb8c56"
+        },
+        "ru": {
+          "frame": [
+            334,
+            177
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              141,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              61
+            ]
+          },
+          "screenshotSha256": "6ba914d4dc6156765b67cb62764307e95d8a8f132af7cd1703432e16b7c51cd2"
+        }
+      }
+    },
+    {
+      "name": "Two12",
+      "nativeForm": "ProbeWidthHeading484007",
+      "canonicalExportSha256": "5782349dd098a90b44ae86cf6260f067245ebee547aaf64e3a9ed11b7deb6014",
+      "xmlSha256": "b94a20349197b9e6d52fbd4a25e50313f385bdc866d684ba9da1413a433bdc5a",
+      "requestedImportHeight": 2,
+      "canonicalHeight": 2,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "2",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 12,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            164
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              128,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              48
+            ]
+          },
+          "screenshotSha256": "7484dae1670107bf301065b0dad7e711841faab8faf6992a7064caa1f5e8f502"
+        },
+        "ru": {
+          "frame": [
+            334,
+            164
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              128,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              48
+            ]
+          },
+          "screenshotSha256": "2a639215198180d2662504191c824d7089d9fd73e2a78dc6855dcf96fda40485"
+        }
+      }
+    },
+    {
+      "name": "Three12",
+      "nativeForm": "ProbeWidthHeading484008",
+      "canonicalExportSha256": "11cd68e4761f28f39006b2074da0b026582a178042019cc109788816bddcb482",
+      "xmlSha256": "4533cd81b0b9a09f3c9c3f3a635cbe1e3cfa78a243f056e722ee9446c7dea369",
+      "requestedImportHeight": 3,
+      "canonicalHeight": 3,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "3",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 12,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            182
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              146,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              66
+            ]
+          },
+          "screenshotSha256": "e04b69aaf745e2ee04eb7e3dcfa5e6d8a49e53dd76f30276390f54aa7a52ccb1"
+        },
+        "ru": {
+          "frame": [
+            334,
+            182
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              146,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              66
+            ]
+          },
+          "screenshotSha256": "46bb883c549d82978ea1fe822023eca3dbc6c25fd50a9ddb0b84b757c5234ef4"
+        }
+      }
+    },
+    {
+      "name": "Two14",
+      "nativeForm": "ProbeWidthHeading484009",
+      "canonicalExportSha256": "7a7c61eee0f5c25453ec162f4fb49aea430e6ecca811ed728eb127f6c3e18ded",
+      "xmlSha256": "cc6d691b858e16e36be1a26937dc10102d6365a056cf3019b91996b51b037922",
+      "requestedImportHeight": 2,
+      "canonicalHeight": 2,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "2",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 14,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            172
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              136,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              56
+            ]
+          },
+          "screenshotSha256": "2c8023325a8b3d52dd918458c73b9eb6fd0af34a1d75b969f68d93bc67267896"
+        },
+        "ru": {
+          "frame": [
+            334,
+            172
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              136,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              56
+            ]
+          },
+          "screenshotSha256": "520388751fe9f61d2bf712efad5f3a5650169770ef36ebfdd37226f4d278c315"
+        }
+      }
+    },
+    {
+      "name": "Three14",
+      "nativeForm": "ProbeWidthHeading484010",
+      "canonicalExportSha256": "2dc97167dc5adf0b34e7c37c849028f779f6f52ca1d847eb5e4c94889d62b2d5",
+      "xmlSha256": "2364559e426b516fad8dd6b547b21fe10283c98afea1e8b8b093de4a10653182",
+      "requestedImportHeight": 3,
+      "canonicalHeight": 3,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "3",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 14,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            194
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              158,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              78
+            ]
+          },
+          "screenshotSha256": "909266a21113bda1161c8279a883fa1561f8a2050f9851ba7bfd492cd5fc2b82"
+        },
+        "ru": {
+          "frame": [
+            334,
+            194
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              158,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              78
+            ]
+          },
+          "screenshotSha256": "2cfba93135a6d61255311527d3de47ea49dc2f0cc6f64890118b1235e64b2447"
+        }
+      }
+    },
+    {
+      "name": "Two18",
+      "nativeForm": "ProbeWidthHeading484011",
+      "canonicalExportSha256": "f8fbd08688273252e379ebe31839287cf3bab669025ef234f6be362f909bfcd5",
+      "xmlSha256": "b65dba3c98d620104487c16370f018443845b21cefd03f54ff0055b6f54cdbbf",
+      "requestedImportHeight": 2,
+      "canonicalHeight": 2,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "2",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 18,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            187
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              151,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              71
+            ]
+          },
+          "screenshotSha256": "1ffeed9839b6de1bccb5235da8d98703e35eb9e65e3ce8fac7593b685629f330"
+        },
+        "ru": {
+          "frame": [
+            334,
+            187
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              151,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              71
+            ]
+          },
+          "screenshotSha256": "6cce1c7550e000c54b21b19ddb31672695f1bd8a02f4ab49539bdc4b67d191c1"
+        }
+      }
+    },
+    {
+      "name": "Three18",
+      "nativeForm": "ProbeWidthHeading484012",
+      "canonicalExportSha256": "f870155b8078e18f42d0c06876ba08328250c37bba4152b5ad4c2199a8612a2e",
+      "xmlSha256": "4c1e621f5f3b14bca7e3cbe5672428a454e50bc3382005dd87c86343cb7ac6be",
+      "requestedImportHeight": 3,
+      "canonicalHeight": 3,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "3",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 18,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            215
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              179,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              99
+            ]
+          },
+          "screenshotSha256": "f05054274f4fb4ea04fadfd46db82ef9904e6925c59130418f93a0ccd07ea4ff"
+        },
+        "ru": {
+          "frame": [
+            334,
+            215
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              179,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              99
+            ]
+          },
+          "screenshotSha256": "4607e33a3a3dd4b67f6921d14a70a5d24aec2425e103df41e442220f8671fb42"
+        }
+      }
+    },
+    {
+      "name": "Two20",
+      "nativeForm": "ProbeWidthHeading484013",
+      "canonicalExportSha256": "e9dc82bec862bb8b038a9a4246c39cb2bdfadc36b3915f4c46a8c07fde7b6f81",
+      "xmlSha256": "9ce4e5469113e70467785f90cfd0d03426ac1f82748516dcc388cf2ad640b338",
+      "requestedImportHeight": 2,
+      "canonicalHeight": 2,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "2",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 20,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            193
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              157,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              77
+            ]
+          },
+          "screenshotSha256": "185f9f1c1beb1c0f3bdb797e3c9dd4ef28c872b8ca32c7c430399e78fc7afc87"
+        },
+        "ru": {
+          "frame": [
+            334,
+            193
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              157,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              77
+            ]
+          },
+          "screenshotSha256": "c33487eb1384cfe594aea1bb43548f6a87b6486a4f33158625a5d8b28d438e22"
+        }
+      }
+    },
+    {
+      "name": "Three20",
+      "nativeForm": "ProbeWidthHeading484014",
+      "canonicalExportSha256": "bb22fd59c603fd5632d8a9b324b76cc64f0658326178346a735f0c6f30fe2a2e",
+      "xmlSha256": "d33ab8dd33370621cfdca4248bae01b0c2333f4884df1a20a1d0c517cd264b4a",
+      "requestedImportHeight": 3,
+      "canonicalHeight": 3,
+      "properties": {
+        "Type": "UsualButton",
+        "Representation": "Text",
+        "Width": "30",
+        "Height": "3",
+        "CommandName": "Form.Command.TestAction"
+      },
+      "font": {
+        "face": null,
+        "points": 20,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "paintedButtons": [
+        "TargetButton"
+      ],
+      "controls": {
+        "Above": {
+          "choice": false,
+          "open": false,
+          "list": false
+        },
+        "Below": {
+          "choice": false,
+          "open": false,
+          "list": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            334,
+            224
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              188,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              108
+            ]
+          },
+          "screenshotSha256": "513e3c351c3147a4bc7f8a308ab0f978fd6fc6bfbe24fd2a5bb11fbf52da0da1"
+        },
+        "ru": {
+          "frame": [
+            334,
+            224
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              188,
+              21,
+              23
+            ],
+            "TargetButton": [
+              13,
+              71,
+              300,
+              108
+            ]
+          },
+          "screenshotSha256": "26f270775ec643b8b0485574f2569c8587c0f19ec1eab633b8e8b1592d164401"
+        }
+      }
+    }
+  ]
+}
