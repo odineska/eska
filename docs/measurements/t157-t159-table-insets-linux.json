@@ -1,0 +1,667 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T16:48:42.601185+00:00",
+  "scope": [
+    "T157",
+    "T159",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "implementation": {
+    "outerInsets": "Standalone tables without an inline command bar retain one outer pixel on both vertical edges, including view status and top search. Joined tables retain their existing layout.",
+    "viewStatusBand": "The existing 30px filter-condition band is retained.",
+    "formNameExceptions": false,
+    "newDependencies": false,
+    "protocolVersionChanged": false
+  },
+  "nativeFixture": "tests/fixtures/forms/native-table-insets",
+  "nativeForms": 6,
+  "completeNativeFrames": 12,
+  "nativeStand": "form-native-view-status-spacing-uleesrlw",
+  "nativeSourcesUnchanged": true,
+  "baseline": {
+    "stand": "form-view-status-probe-_vs5pytu",
+    "diagnosticOnly": true,
+    "runs": [
+      {
+        "locale": "en",
+        "matched": 1,
+        "total": 6
+      },
+      {
+        "locale": "ru",
+        "matched": 1,
+        "total": 6
+      }
+    ],
+    "observation": "Before the fix, five of six frames disagree in each locale: the grid is one pixel too high and/or the following input is one or two pixels too high. The inline-command control already matches."
+  },
+  "checks": {
+    "npmCheck": "passed",
+    "compile": "passed",
+    "package": "passed",
+    "node": {
+      "tests": 716,
+      "passed": 708,
+      "failed": 0,
+      "skipped": 8
+    },
+    "logs": "form-table-insets-validation-s_66ztmr",
+    "rust": {
+      "stand": "form-table-insets-rust-Nimf54Y8",
+      "fmt": "passed",
+      "check": "passed",
+      "clippy": "passed",
+      "test": {
+        "passed": 1570,
+        "failed": 0,
+        "ignored": 19
+      }
+    }
+  },
+  "installed": {
+    "stand": "form-batch-qT6fCv",
+    "vsixSha256": "7c63be0b0b5b1761bb2b97dd106ab71cfbc0c4007712517896942e8755491cf4",
+    "backendSha256": "fefeee97b8df63536ce1cdeb8462b7d20864585e2de48c80008718a93ff6f530",
+    "runtimeManifestSha256": "7373d77676bfd0381fd857d3255ae70c8ac660cd1e8e7646b01d821240f1f906",
+    "runtimeFiles": 1262,
+    "initialBatchPassed": false,
+    "initialSuccessfulRuns": [
+      {
+        "suite": "table-insets",
+        "locale": "en",
+        "states": 14,
+        "inputsStable": true
+      },
+      {
+        "suite": "table-insets",
+        "locale": "ru",
+        "states": 14,
+        "inputsStable": true
+      },
+      {
+        "suite": "table-height",
+        "locale": "en",
+        "states": 70,
+        "inputsStable": true
+      },
+      {
+        "suite": "table-height",
+        "locale": "ru",
+        "states": 70,
+        "inputsStable": true
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "states": 48,
+        "inputsStable": true
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "states": 47,
+        "inputsStable": true
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "states": 31,
+        "inputsStable": true
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "states": 31,
+        "inputsStable": true
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "states": 98,
+        "inputsStable": true
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "states": 98,
+        "inputsStable": true
+      },
+      {
+        "suite": "body-scroll",
+        "locale": "en",
+        "states": 4,
+        "inputsStable": true
+      },
+      {
+        "suite": "body-scroll",
+        "locale": "ru",
+        "states": 4,
+        "inputsStable": true
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "states": 1,
+        "inputsStable": true
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "states": 1,
+        "inputsStable": true
+      }
+    ],
+    "initialFailure": "Both general-table runs stop at GridFooter frame height 227 versus the old assertion 225. Original native screenshots verified by SHA256 show a full outer frame of 227. NoAutoFill similarly has 309 rather than 307. Only these two Linux harness expectations were corrected; native captures and runtime assets were unchanged.",
+    "nativeGoldensChanged": false,
+    "legacyNativeFrameProof": [
+      {
+        "name": "GridFooter",
+        "locale": "en",
+        "file": "native-table-pixels-kbagfn6p/en-GridFooter.png",
+        "screenshotSha256": "69d2ea6657ebe011d9231494616ab18971bbf077e311deab3fea150c9ee9d232",
+        "blueBounds": [
+          262,
+          511,
+          694,
+          736
+        ],
+        "frame": [
+          434,
+          227
+        ],
+        "viewerFrame": [
+          434,
+          227
+        ],
+        "frameMatches": true
+      },
+      {
+        "name": "NoAutoFill",
+        "locale": "en",
+        "file": "native-table-pixels-kbagfn6p/en-NoAutoFill.png",
+        "screenshotSha256": "7238738ad2a3d21f70cb45f23bfa11cee4a8afef9062b46a4cad8400e89ee8cd",
+        "blueBounds": [
+          262,
+          511,
+          694,
+          818
+        ],
+        "frame": [
+          434,
+          309
+        ],
+        "viewerFrame": [
+          434,
+          309
+        ],
+        "frameMatches": true
+      },
+      {
+        "name": "Default",
+        "locale": "en",
+        "file": "native-table-pixels-kbagfn6p/en-Default.png",
+        "screenshotSha256": "c31bbdc26d56c6ffce8f37e20c30d1511187f5b71a3f373cf4eb6cc7dffeb9f5",
+        "blueBounds": [
+          262,
+          511,
+          723,
+          853
+        ],
+        "frame": [
+          463,
+          344
+        ],
+        "viewerFrame": [
+          463,
+          342
+        ],
+        "frameMatches": false
+      },
+      {
+        "name": "GridFooter",
+        "locale": "ru",
+        "file": "native-table-pixels-kbagfn6p/ru-GridFooter.png",
+        "screenshotSha256": "efa0588684128fc930bf21352361f6fb5e78fdd8357e1324c81acdb96f9e1e84",
+        "blueBounds": [
+          262,
+          511,
+          694,
+          736
+        ],
+        "frame": [
+          434,
+          227
+        ],
+        "viewerFrame": [
+          434,
+          227
+        ],
+        "frameMatches": true
+      },
+      {
+        "name": "NoAutoFill",
+        "locale": "ru",
+        "file": "native-table-pixels-kbagfn6p/ru-NoAutoFill.png",
+        "screenshotSha256": "66c1e28fc04ce59dfdbd9e9bd575642c6587e0c5b999b048e7c1452d3f113559",
+        "blueBounds": [
+          262,
+          511,
+          694,
+          818
+        ],
+        "frame": [
+          434,
+          309
+        ],
+        "viewerFrame": [
+          434,
+          309
+        ],
+        "frameMatches": true
+      },
+      {
+        "name": "Default",
+        "locale": "ru",
+        "file": "native-table-pixels-kbagfn6p/ru-Default.png",
+        "screenshotSha256": "8d5a82462084eebe2baef88ce05ca3599cba48a18a63201ed3bcabed9dc14c38",
+        "blueBounds": [
+          262,
+          511,
+          709,
+          853
+        ],
+        "frame": [
+          449,
+          344
+        ],
+        "viewerFrame": [
+          449,
+          342
+        ],
+        "frameMatches": false
+      }
+    ],
+    "retests": {
+      "stand": "form-table-insets-retests-p0atbv91",
+      "runs": [
+        {
+          "name": "tables-en",
+          "passed": true,
+          "exitCode": 0,
+          "states": 17,
+          "seconds": 18.13165080500039,
+          "runtimeManifestSha256": "7373d77676bfd0381fd857d3255ae70c8ac660cd1e8e7646b01d821240f1f906",
+          "runtimeFiles": 1262
+        },
+        {
+          "name": "tables-ru",
+          "passed": true,
+          "exitCode": 0,
+          "states": 17,
+          "seconds": 20.596956758003216,
+          "runtimeManifestSha256": "7373d77676bfd0381fd857d3255ae70c8ac660cd1e8e7646b01d821240f1f906",
+          "runtimeFiles": 1262
+        }
+      ],
+      "sourceWitnessesUnchanged": true
+    },
+    "successfulRuns": 16,
+    "successfulStateObservations": 565,
+    "newMatrixGeometryTolerance": 0
+  },
+  "wholeForms": {
+    "stand": "form-table-insets-whole-6fiyv52i",
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.125740780000342,
+        "runtimeManifestSha256": "7373d77676bfd0381fd857d3255ae70c8ac660cd1e8e7646b01d821240f1f906",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.623940051998943,
+        "runtimeManifestSha256": "7373d77676bfd0381fd857d3255ae70c8ac660cd1e8e7646b01d821240f1f906",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.966707386000053,
+        "runtimeManifestSha256": "7373d77676bfd0381fd857d3255ae70c8ac660cd1e8e7646b01d821240f1f906",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.239453002999653,
+        "runtimeManifestSha256": "7373d77676bfd0381fd857d3255ae70c8ac660cd1e8e7646b01d821240f1f906",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.414119578999816,
+        "runtimeManifestSha256": "7373d77676bfd0381fd857d3255ae70c8ac660cd1e8e7646b01d821240f1f906",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.089390090000961,
+        "runtimeManifestSha256": "7373d77676bfd0381fd857d3255ae70c8ac660cd1e8e7646b01d821240f1f906",
+        "runtimeFiles": 1262
+      }
+    ],
+    "sourcesUnchanged": true,
+    "loanCompact": [
+      {
+        "mode": "loan-docked-en",
+        "frame": [
+          696,
+          760
+        ],
+        "beforeTable": [
+          13,
+          588,
+          662,
+          227
+        ],
+        "afterTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "nativeTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "beforeFooterMemo": [
+          13,
+          842,
+          511,
+          51
+        ],
+        "afterFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "nativeFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "paymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "nativePaymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ]
+      },
+      {
+        "mode": "loan-docked-ru",
+        "frame": [
+          696,
+          760
+        ],
+        "beforeTable": [
+          13,
+          588,
+          662,
+          227
+        ],
+        "afterTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "nativeTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "beforeFooterMemo": [
+          13,
+          842,
+          511,
+          51
+        ],
+        "afterFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "nativeFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "paymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "nativePaymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ]
+      },
+      {
+        "mode": "loan-detached-en",
+        "frame": [
+          696,
+          760
+        ],
+        "beforeTable": [
+          13,
+          588,
+          662,
+          227
+        ],
+        "afterTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "nativeTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "beforeFooterMemo": [
+          13,
+          842,
+          511,
+          51
+        ],
+        "afterFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "nativeFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "paymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "nativePaymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ]
+      },
+      {
+        "mode": "loan-detached-ru",
+        "frame": [
+          696,
+          760
+        ],
+        "beforeTable": [
+          13,
+          588,
+          662,
+          227
+        ],
+        "afterTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "nativeTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "beforeFooterMemo": [
+          13,
+          842,
+          511,
+          51
+        ],
+        "afterFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "nativeFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "paymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "nativePaymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ]
+      }
+    ],
+    "bspFrames": {
+      "en": [
+        {
+          "sample": 0,
+          "frame": {
+            "width": 811,
+            "height": 612
+          }
+        },
+        {
+          "sample": 1,
+          "frame": {
+            "width": 800,
+            "height": 769
+          }
+        },
+        {
+          "sample": 2,
+          "frame": {
+            "width": 1222,
+            "height": 538
+          }
+        }
+      ],
+      "ru": [
+        {
+          "sample": 0,
+          "frame": {
+            "width": 811,
+            "height": 612
+          }
+        },
+        {
+          "sample": 1,
+          "frame": {
+            "width": 800,
+            "height": 769
+          }
+        },
+        {
+          "sample": 2,
+          "frame": {
+            "width": 1222,
+            "height": 538
+          }
+        }
+      ]
+    },
+    "questionnaireNumericColumnsRetainNativeX": 198,
+    "totalsBeforeFrame": [
+      1222,
+      536
+    ],
+    "totalsAfterFrame": [
+      1222,
+      538
+    ],
+    "totalsNativeFrame": [
+      1224,
+      541
+    ],
+    "mainAndSeparateNativeWindow": true,
+    "dirtyXmlSelectionDomAndSnapshotChecksPassed": true
+  },
+  "limitations": [
+    "Full-form geometry and complete widget pixels are not accepted by this series.",
+    "Questionnaire frame remains 800 x 769 rather than native 801 x 769.",
+    "Totals BSP frame remains 1222 x 538 rather than native 1224 x 541.",
+    "The retained Default table native capture has full frame height 344; the current flexible inline-search toolbar layout remains at 342. That layout was not changed by this fix.",
+    "The view-status chip pixels, all addition locations, other DPI and Windows require further acceptance."
+  ],
+  "explorerCommit": "fcdc5c161b6a46fd9ef4aa1f282b790f7db47fc3",
+  "backendCommit": "02fde10"
+}
