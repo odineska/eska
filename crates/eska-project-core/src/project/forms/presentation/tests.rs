@@ -5,6 +5,81 @@ use crate::project::{
 };
 
 #[test]
+fn table_columns_inherit_the_owner_font_without_changing_commands() {
+    let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" version="2.20">
+      <ChildItems>
+        <InputField name="Outside" id="1"/>
+        <Table name="Rows" id="2">
+          <Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+          <AutoCommandBar name="RowsBar" id="8">
+            <Autofill>false</Autofill>
+            <ChildItems><Button name="Action" id="9"/></ChildItems>
+          </AutoCommandBar>
+          <ChildItems>
+            <InputField name="Plain" id="3"/>
+            <InputField name="ValueOverride" id="4">
+              <Font ref="sys:DefaultGUIFont" height="12" kind="WindowsFont"/>
+            </InputField>
+            <InputField name="TitleOverride" id="5">
+              <TitleFont ref="sys:DefaultGUIFont" height="14" kind="WindowsFont"/>
+            </InputField>
+            <ColumnGroup name="Nested" id="6"><ChildItems>
+              <InputField name="NestedValue" id="7"/>
+            </ChildItems></ColumnGroup>
+          </ChildItems>
+        </Table>
+      </ChildItems>
+    </Form>"#;
+    let document = parse("table-font", source.into()).unwrap();
+    let form = compose(&document, &[]);
+    let table = &form.root.children[1];
+    let bar = table
+        .auxiliary
+        .iter()
+        .find(|item| item.name.as_deref() == Some("RowsBar"))
+        .unwrap();
+    let view = present(&form, &[document], &[]);
+    assert!(view.diagnostics.is_empty());
+    let presentation = |node: &EffectiveElement| {
+        view.elements
+            .iter()
+            .find(|item| item.identity == node.identity)
+            .unwrap()
+    };
+    for (node, font, title) in [
+        (&form.root.children[0], 10.0, 10.0),
+        (table, 16.0, 10.0),
+        (&table.children[0], 16.0, 16.0),
+        (&table.children[1], 12.0, 16.0),
+        (&table.children[2], 16.0, 14.0),
+        (&table.children[3], 16.0, 16.0),
+        (&table.children[3].children[0], 16.0, 16.0),
+        (bar, 10.0, 10.0),
+        (&bar.children[0], 10.0, 10.0),
+    ] {
+        let item = presentation(node);
+        assert_eq!(
+            (item.font.points, item.title_font.points),
+            (font, title),
+            "{:?}",
+            node.name
+        );
+    }
+    let inherited = presentation(&table.children[0]);
+    let origins = |font: &ResolvedFont| {
+        font.origins
+            .iter()
+            .map(|origin| (origin.source.clone(), origin.range.clone()))
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(origins(&inherited.font), origins(&presentation(table).font));
+    assert_eq!(origins(&inherited.title_font), origins(&inherited.font));
+    assert!(table.children[0].property("Font").is_none());
+    assert!(table.children[0].property("TitleFont").is_none());
+}
+
+#[test]
 fn native_numeric_inputs_preserve_sign_qualifiers_from_the_bound_attribute() {
     for (xml, sign) in [
         (

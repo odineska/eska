@@ -208,10 +208,41 @@ fn script_variant(resources: &[FormResource]) -> Option<FormScriptVariant> {
 #[derive(Clone, Copy, Default)]
 struct VisitScope<'a> {
     parent: Option<&'a EffectiveElement>,
+    table: Option<&'a EffectiveElement>,
     in_table: bool,
 }
 
 impl<'a> VisitScope<'a> {
+    fn fonts(
+        self,
+        element: &EffectiveElement,
+        appearance: &mut Appearance<'_>,
+    ) -> (ResolvedFont, ResolvedFont) {
+        let inherited = self.column_font(element);
+        let font = appearance.font(element.property("Font").or(inherited), font_role(element));
+        let title = appearance.font(
+            self.title_property(element, "TitleFont").or(inherited),
+            title_font_role(element),
+        );
+        (font, title)
+    }
+
+    fn column_font(self, element: &EffectiveElement) -> Option<&'a SourcedProperty> {
+        let kind = element.kind?;
+        if (kind != ElementKind::ColumnGroup && kind.family() != ElementFamily::Field)
+            || !self.parent.is_some_and(|parent| {
+                matches!(
+                    parent.kind,
+                    Some(ElementKind::Table | ElementKind::ColumnGroup)
+                )
+            })
+        {
+            return None;
+        }
+        // Table Font supplies column value/header defaults, not toolbar or addition fonts.
+        self.table.and_then(|table| table.property("Font"))
+    }
+
     fn pages_parent(self, element: &EffectiveElement) -> Option<&'a EffectiveElement> {
         self.parent.filter(|parent| {
             element.kind == Some(ElementKind::Page) && parent.kind == Some(ElementKind::Pages)
@@ -247,6 +278,11 @@ fn visit(
     ));
     let child_scope = VisitScope {
         parent: Some(element),
+        table: if element.kind == Some(ElementKind::Table) {
+            Some(element)
+        } else {
+            scope.table
+        },
         in_table: scope.in_table || element.kind == Some(ElementKind::Table),
     };
     for child in element.children.iter().chain(&element.auxiliary) {
@@ -301,11 +337,7 @@ fn present_element(
                 element.name.clone().unwrap_or_default()
             },
         });
-    let font = appearance.font(element.property("Font"), font_role(element));
-    let title_font = appearance.font(
-        scope.title_property(element, "TitleFont"),
-        title_font_role(element),
-    );
+    let (font, title_font) = scope.fonts(element, appearance);
     let (foreground, background, border, title_color) = element_colors(element, scope, appearance);
     let choices = element
         .property("ChoiceList")
