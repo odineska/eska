@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "recordedAt": "2026-11-08T14:27:09.402973+00:00",
+  "recordedAt": "2026-11-08T14:52:04.894973+00:00",
   "desktop": "private-headless-Mutter",
   "stands": [
     {
@@ -180,9 +180,98 @@
           "completeFrame": true
         }
       ]
+    },
+    {
+      "stand": "form-native-reference-auto-8v_52axn",
+      "sourcesUnchanged": true,
+      "sourceFiles": 727,
+      "runs": [
+        {
+          "locale": "en",
+          "exitCode": 0,
+          "sourcesUnchanged": true
+        },
+        {
+          "locale": "ru",
+          "exitCode": 0,
+          "sourcesUnchanged": true
+        }
+      ],
+      "captures": [
+        {
+          "locale": "en",
+          "name": "CatalogNoOpenAuto",
+          "file": "native-en/ProbeWidthHeading478301.png",
+          "sha256": "bc42030b120ef96761b3d72f81b8c038410054c6c62e4178d560c4c23dd24b55",
+          "completeFrame": true
+        },
+        {
+          "locale": "ru",
+          "name": "CatalogNoOpenAuto",
+          "file": "native-ru/ProbeWidthHeading478301.png",
+          "sha256": "1a7438c33895e96f81dbefd9c4080793ef618e8df7119bf29e126d46059d2947",
+          "completeFrame": true
+        },
+        {
+          "locale": "en",
+          "name": "CatalogOpenAuto",
+          "file": "native-en/ProbeWidthHeading478302.png",
+          "sha256": "d81e1bdb5f84af606f6ed8e13f04acf8d3e6ea4e6e2b9a26790e64f46a3582ca",
+          "completeFrame": true
+        },
+        {
+          "locale": "ru",
+          "name": "CatalogOpenAuto",
+          "file": "native-ru/ProbeWidthHeading478302.png",
+          "sha256": "ba1ac4b4e5eb282e108c2b94828b130ec4e02f2371f54b19cbf333bce45a9f82",
+          "completeFrame": true
+        },
+        {
+          "locale": "en",
+          "name": "EnumOnlyAuto",
+          "file": "native-en/ProbeWidthHeading478303.png",
+          "sha256": "63e58178b853da1f683933015fda4c17b29eed589212f4a345ab31f138a42e05",
+          "completeFrame": true
+        },
+        {
+          "locale": "ru",
+          "name": "EnumOnlyAuto",
+          "file": "native-ru/ProbeWidthHeading478303.png",
+          "sha256": "a88aec08430ca728e0dd9baec2b6f68f6bd16effc93ccd5143a358498555f01b",
+          "completeFrame": true
+        },
+        {
+          "locale": "en",
+          "name": "EnumCompositeAuto",
+          "file": "native-en/ProbeWidthHeading478304.png",
+          "sha256": "4e128aea20e3bb459f973037d4f0588f8aeea515f65b3fa9764050cbc34ddaa3",
+          "completeFrame": true
+        },
+        {
+          "locale": "ru",
+          "name": "EnumCompositeAuto",
+          "file": "native-ru/ProbeWidthHeading478304.png",
+          "sha256": "a4e01026b9278f662a4805a2b5d01582287551012a4f2393fa12c77e9e990ca4",
+          "completeFrame": true
+        },
+        {
+          "locale": "en",
+          "name": "EnumOnlyAuto16",
+          "file": "native-en/ProbeWidthHeading478305.png",
+          "sha256": "9c03d5090934718e2a3523f919eb7e1d291838a69a0778b91ed259a179eeff7f",
+          "completeFrame": true
+        },
+        {
+          "locale": "ru",
+          "name": "EnumOnlyAuto16",
+          "file": "native-ru/ProbeWidthHeading478305.png",
+          "sha256": "530f0678a785c1554d7f2a68dd37eddab166174a300141f42e00db7698dac5c8",
+          "completeFrame": true
+        }
+      ]
     }
   ],
   "canonicalTextNormalization": "UTF-8 without BOM, LF; XML content retained",
   "metadataDescriptorSource": "form-native-reference-width-2yoqx6ob",
-  "secondaryEnumDiffersOnlyInGeneratedIds": true
+  "additionalEnumsDifferOnlyInGeneratedIds": true
 }

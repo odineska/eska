@@ -47,6 +47,20 @@
         "open": false,
         "list": false
       },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": false,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
       "locales": {
         "en": {
           "frame": [
@@ -135,6 +149,20 @@
         "open": false,
         "list": false
       },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": false,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
       "locales": {
         "en": {
           "frame": [
@@ -222,6 +250,20 @@
         "choice": true,
         "open": true,
         "list": false
+      },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": true,
+          "list": false,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
       },
       "locales": {
         "en": {
@@ -313,6 +355,20 @@
         "open": false,
         "list": true
       },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
       "locales": {
         "en": {
           "frame": [
@@ -402,6 +458,20 @@
         "choice": true,
         "open": false,
         "list": true
+      },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
       },
       "locales": {
         "en": {
@@ -497,6 +567,20 @@
         "open": false,
         "list": true
       },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
       "locales": {
         "en": {
           "frame": [
@@ -590,6 +674,20 @@
         "choice": true,
         "open": false,
         "list": true
+      },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
       },
       "locales": {
         "en": {
@@ -685,6 +783,20 @@
         "open": false,
         "list": true
       },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
       "locales": {
         "en": {
           "frame": [
@@ -771,6 +883,20 @@
         "choice": true,
         "open": false,
         "list": true
+      },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
       },
       "locales": {
         "en": {
@@ -861,6 +987,20 @@
         "open": false,
         "list": true
       },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
       "locales": {
         "en": {
           "frame": [
@@ -915,6 +1055,515 @@
             ]
           },
           "screenshotSha256": "f8de19ac6893db7393fe304eedf791efa7d698662f6b0e823788a5e54e744a87"
+        }
+      }
+    },
+    {
+      "name": "CatalogNoOpenAuto",
+      "form": "ProbeWidthHeading478301",
+      "xmlSha256": "1b1be3dc0e2377e7013ee50d43fcb6fa67c68ad8e492f3a82065098526935144",
+      "canonicalExportSha256": "a4e5d4473bd0b5a283beffd77b95e706f056a2e3d7e3bc0d9b6a297833c524d2",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "HorizontalStretch": "false",
+        "OpenButton": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": false
+      },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": false,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            216,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              182,
+              23
+            ]
+          },
+          "screenshotSha256": "bc42030b120ef96761b3d72f81b8c038410054c6c62e4178d560c4c23dd24b55"
+        },
+        "ru": {
+          "frame": [
+            216,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              182,
+              23
+            ]
+          },
+          "screenshotSha256": "1a7438c33895e96f81dbefd9c4080793ef618e8df7119bf29e126d46059d2947"
+        }
+      }
+    },
+    {
+      "name": "CatalogOpenAuto",
+      "form": "ProbeWidthHeading478302",
+      "xmlSha256": "6e4f06a2752584c44257c333b14988c0f6be39ce72a66651214978a759e0e954",
+      "canonicalExportSha256": "54b83f472a87a6d870e6e902fe1e3b071331fc90cec4d09fde29d38ebaf15777",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "HorizontalStretch": "false",
+        "OpenButton": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": true,
+        "list": false
+      },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": true,
+          "list": false,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            237,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              203,
+              23
+            ]
+          },
+          "screenshotSha256": "d81e1bdb5f84af606f6ed8e13f04acf8d3e6ea4e6e2b9a26790e64f46a3582ca"
+        },
+        "ru": {
+          "frame": [
+            237,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              203,
+              23
+            ]
+          },
+          "screenshotSha256": "ba1ac4b4e5eb282e108c2b94828b130ec4e02f2371f54b19cbf333bce45a9f82"
+        }
+      }
+    },
+    {
+      "name": "EnumOnlyAuto",
+      "form": "ProbeWidthHeading478303",
+      "xmlSha256": "05aee5f7808f8a99443a8bbf5b120e9f28fe4320e5e2511111ed715bb6028ea6",
+      "canonicalExportSha256": "11a88188d36fc90a38c5f3e1033e92de4d599bf72c21d258aa7f2360210d3a8e",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "HorizontalStretch": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": true
+      },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            216,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              182,
+              23
+            ]
+          },
+          "screenshotSha256": "63e58178b853da1f683933015fda4c17b29eed589212f4a345ab31f138a42e05"
+        },
+        "ru": {
+          "frame": [
+            216,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              182,
+              23
+            ]
+          },
+          "screenshotSha256": "a88aec08430ca728e0dd9baec2b6f68f6bd16effc93ccd5143a358498555f01b"
+        }
+      }
+    },
+    {
+      "name": "EnumCompositeAuto",
+      "form": "ProbeWidthHeading478304",
+      "xmlSha256": "5af306dd0012133536771dff88d770ca53e5db99baf3c33f2606f54d3ab75f01",
+      "canonicalExportSha256": "c041c7d2050df9b6789b28638f02565bc21bb3644ab821fd8f75a23a7e61352c",
+      "valueType": {
+        "kind": "composite",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          },
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/core",
+            "name": "TypeDescription"
+          }
+        ]
+      },
+      "font": {
+        "points": 10,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "HorizontalStretch": "false",
+        "ChoiceButton": "false",
+        "OpenButton": "false",
+        "ListChoiceMode": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": true
+      },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            216,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              182,
+              23
+            ]
+          },
+          "screenshotSha256": "4e128aea20e3bb459f973037d4f0588f8aeea515f65b3fa9764050cbc34ddaa3"
+        },
+        "ru": {
+          "frame": [
+            216,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              182,
+              23
+            ]
+          },
+          "screenshotSha256": "a4e01026b9278f662a4805a2b5d01582287551012a4f2393fa12c77e9e990ca4"
+        }
+      }
+    },
+    {
+      "name": "EnumOnlyAuto16",
+      "form": "ProbeWidthHeading478305",
+      "xmlSha256": "3a0888067611dbca176793b1a768132c0c2f95a49caabaf9d48266536beb7e67",
+      "canonicalExportSha256": "6b9b0e751e5ec214e10cb183180883917f72f1c380093418369d7c941f4e991d",
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "font": {
+        "points": 16,
+        "weight": 400
+      },
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "HorizontalStretch": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "buttons": {
+        "choice": true,
+        "open": false,
+        "list": true
+      },
+      "controls": {
+        "Above": {
+          "choice": false
+        },
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        },
+        "Below": {
+          "choice": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            316,
+            154
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              118,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              282,
+              38
+            ]
+          },
+          "screenshotSha256": "9c03d5090934718e2a3523f919eb7e1d291838a69a0778b91ed259a179eeff7f"
+        },
+        "ru": {
+          "frame": [
+            316,
+            154
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              118,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              282,
+              38
+            ]
+          },
+          "screenshotSha256": "530f0678a785c1554d7f2a68dd37eddab166174a300141f42e00db7698dac5c8"
         }
       }
     }
