@@ -9,28 +9,71 @@
     "ru",
     "en"
   ],
-  "capturedAt": "2026-11-08T01:48:59.414837+00:00",
+  "capturedAt": "2026-11-08T02:06:31.272189+00:00",
   "nativeStandRoot": "<repository-root>/../eska-playground",
-  "stand": "form-native-mono-lines-d6uh5kwn",
-  "cases": 24,
-  "nativeCaptures": 48,
+  "cases": 66,
+  "nativeCaptures": 132,
   "allLocaleGeometryEqual": true,
   "rendererAccepted": false,
-  "nativeMetrics": {
-    "ruSha256": "9dc2723ab57f22a723a9f1f9625dfb26e888f7b152c83eccc7aae59554406bb2",
-    "enSha256": "85ca3419d46a28f158e2200d4dc39b3604be973475be17542584c4a4ca28a390"
-  },
-  "sourceHashesSha256": "58a4b853ae8a501dced105af22df38e5570a9801058b63cb5b784fc2c8fb759d",
-  "sourceFiles": 672,
-  "captureInputs": {
-    "cases.json": "f27d0509493c416d34c272f789c1054c57bcbfbea15383c41a1ca163ae55d14d",
-    "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
-    "eska-mono-lines-prepare.py": "08dbd53064d75a25f339ddb2ef56130745ca12668880951137833e27ddaadf8a",
-    "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
-    "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
-    "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
-    "run-heading.py": "ccf838b0774925018b79c20a28d8c0dd5c9118cb941bd7c56f6b2f842f7dbc8f"
-  },
+  "runs": [
+    {
+      "stand": "form-native-mono-lines-d6uh5kwn",
+      "cases": 24,
+      "sourceFiles": 672,
+      "sourceHashesSha256": "58a4b853ae8a501dced105af22df38e5570a9801058b63cb5b784fc2c8fb759d",
+      "nativeMetrics": {
+        "ruSha256": "9dc2723ab57f22a723a9f1f9625dfb26e888f7b152c83eccc7aae59554406bb2",
+        "enSha256": "85ca3419d46a28f158e2200d4dc39b3604be973475be17542584c4a4ca28a390"
+      },
+      "captureInputs": {
+        "cases.json": "f27d0509493c416d34c272f789c1054c57bcbfbea15383c41a1ca163ae55d14d",
+        "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+        "eska-mono-lines-prepare.py": "08dbd53064d75a25f339ddb2ef56130745ca12668880951137833e27ddaadf8a",
+        "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+        "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+        "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+        "run-heading.py": "ccf838b0774925018b79c20a28d8c0dd5c9118cb941bd7c56f6b2f842f7dbc8f"
+      }
+    },
+    {
+      "stand": "form-native-mono-boundary-9plf28zr",
+      "cases": 30,
+      "sourceFiles": 684,
+      "sourceHashesSha256": "caee39b0f1e49d23ac2136446ef4c7e536e4243f9daadf632b15a3eb8cadf25a",
+      "nativeMetrics": {
+        "ruSha256": "c7876335ca73af4ac9318347c7c845f350720d89ee3761979f1b6922d8b94958",
+        "enSha256": "447b4a28fe5df6aa2532ef66dcf88a7f9260590180ddc0f2a034970e7b7519f5"
+      },
+      "captureInputs": {
+        "cases.json": "6bc90a923989480880497ba2aa192aa533663fa39963837e13278ea7bdff4ba4",
+        "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+        "eska-mono-boundary-prepare.py": "7a6bdefd266c41a9a72fb8ddc827172137c544f843bfd0098cfb8f8b0ac26596",
+        "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+        "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+        "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+        "run-heading.py": "22fa2a1a8ad126f1672d68729d6dd245bac65149f1db18d2560a3bb7e83c928c"
+      }
+    },
+    {
+      "stand": "form-native-label-blank-x4asoc0s",
+      "cases": 12,
+      "sourceFiles": 648,
+      "sourceHashesSha256": "28610511791de87025300da743da3536e674e25dca27ed4976d90d650aeb6138",
+      "nativeMetrics": {
+        "ruSha256": "ef3d2a29560f96c124f0febc38c5ad4f52bccffdd459e56a51fda0f5fd0ef836",
+        "enSha256": "93ec8951e4edae4db765f708ff7fa8891e10ef84be00e2a36e74d70aa62aee0c"
+      },
+      "captureInputs": {
+        "cases.json": "75aa2170bead9ca8c7c1fe5f93215040fc2bb00a97818c9ad16e9b1376f3d7d8",
+        "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+        "eska-label-blank-prepare.py": "aaf007b81398c53cc9cdc56d04d3ec03af8fee007fe233aef9aa65f29e887627",
+        "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+        "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+        "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+        "run-heading.py": "c312bd97a365f6aeba8a5ea70878845a88f8326d391a4dcff912b0ec58399f21"
+      }
+    }
+  ],
   "xmlNormalization": [
     "UTF-8 without BOM",
     "LF",
