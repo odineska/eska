@@ -38,6 +38,11 @@ pub enum FieldValueKind {
     Document,
     Unknown,
 }
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+pub enum NumberSign {
+    Any,
+    Nonnegative,
+}
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FieldType {
@@ -45,6 +50,8 @@ pub struct FieldType {
     pub length: Option<u32>,
     pub digits: Option<u32>,
     pub fraction: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub allowed_sign: Option<NumberSign>,
     pub date_parts: Option<String>,
     pub types: Vec<PropertyKey>,
 }
@@ -55,6 +62,7 @@ impl Default for FieldType {
             length: None,
             digits: None,
             fraction: None,
+            allowed_sign: None,
             date_parts: None,
             types: Vec::new(),
         }
@@ -745,6 +753,13 @@ pub(super) fn field_type(value: &MetadataValue) -> FieldType {
                 result.fraction = record(&field.value, "FractionDigits")
                     .and_then(|value| appearance::text(&value.value))
                     .and_then(|value| value.parse().ok());
+                result.allowed_sign = record(&field.value, "AllowedSign")
+                    .and_then(|value| appearance::text(&value.value))
+                    .and_then(|value| match value {
+                        "Any" => Some(NumberSign::Any),
+                        "Nonnegative" => Some(NumberSign::Nonnegative),
+                        _ => None,
+                    });
             }
             if field.key.name == "DateQualifiers" {
                 result.date_parts = record(&field.value, "DateFractions")

@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+	</Title>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<InputField name="Above" id="1">
+			<DataPath>Name</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<Width>1</Width>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#FFEFBA</BackColor>
+			<ContextMenu name="AboveContextMenu" id="2"/>
+			<ExtendedTooltip name="AboveExtendedTooltip" id="3"/>
+		</InputField>
+		<UsualGroup name="Numbers" id="4">
+			<HorizontalStretch>false</HorizontalStretch>
+			<Group>Vertical</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="NumbersРасширеннаяПодсказка" id="75"/>
+			<ChildItems>
+				<UsualGroup name="Row0" id="5">
+					<HorizontalStretch>false</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row0РасширеннаяПодсказка" id="76"/>
+					<ChildItems>
+						<InputField name="N02" id="6">
+							<DataPath>N02</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#6A8CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="7"/>
+							<ExtendedTooltip name="ValueTooltip" id="8"/>
+						</InputField>
+						<InputField name="N03" id="9">
+							<DataPath>N03</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#6D8CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="10"/>
+							<ExtendedTooltip name="ValueTooltip" id="11"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row1" id="12">
+					<HorizontalStretch>false</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row1РасширеннаяПодсказка" id="77"/>
+					<ChildItems>
+						<InputField name="N04" id="13">
+							<DataPath>N04</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#708CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="14"/>
+							<ExtendedTooltip name="ValueTooltip" id="15"/>
+						</InputField>
+						<InputField name="N05" id="16">
+							<DataPath>N05</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#738CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="17"/>
+							<ExtendedTooltip name="ValueTooltip" id="18"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row2" id="19">
+					<HorizontalStretch>false</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row2РасширеннаяПодсказка" id="78"/>
+					<ChildItems>
+						<InputField name="N06" id="20">
+							<DataPath>N06</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#768CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="21"/>
+							<ExtendedTooltip name="ValueTooltip" id="22"/>
+						</InputField>
+						<InputField name="N07" id="23">
+							<DataPath>N07</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#798CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="24"/>
+							<ExtendedTooltip name="ValueTooltip" id="25"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row3" id="26">
+					<HorizontalStretch>false</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row3РасширеннаяПодсказка" id="79"/>
+					<ChildItems>
+						<InputField name="N08" id="27">
+							<DataPath>N08</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#7C8CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="28"/>
+							<ExtendedTooltip name="ValueTooltip" id="29"/>
+						</InputField>
+						<InputField name="N09" id="30">
+							<DataPath>N09</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#7F8CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="31"/>
+							<ExtendedTooltip name="ValueTooltip" id="32"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row4" id="33">
+					<HorizontalStretch>false</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row4РасширеннаяПодсказка" id="80"/>
+					<ChildItems>
+						<InputField name="N10" id="34">
+							<DataPath>N10</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#828CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="35"/>
+							<ExtendedTooltip name="ValueTooltip" id="36"/>
+						</InputField>
+						<InputField name="N11" id="37">
+							<DataPath>N11</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#858CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="38"/>
+							<ExtendedTooltip name="ValueTooltip" id="39"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row5" id="40">
+					<HorizontalStretch>false</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row5РасширеннаяПодсказка" id="81"/>
+					<ChildItems>
+						<InputField name="N12" id="41">
+							<DataPath>N12</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#888CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="42"/>
+							<ExtendedTooltip name="ValueTooltip" id="43"/>
+						</InputField>
+						<InputField name="N13" id="44">
+							<DataPath>N13</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#8B8CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="45"/>
+							<ExtendedTooltip name="ValueTooltip" id="46"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row6" id="47">
+					<HorizontalStretch>false</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row6РасширеннаяПодсказка" id="82"/>
+					<ChildItems>
+						<InputField name="N14" id="48">
+							<DataPath>N14</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#8E8CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="49"/>
+							<ExtendedTooltip name="ValueTooltip" id="50"/>
+						</InputField>
+						<InputField name="N15" id="51">
+							<DataPath>N15</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#918CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="52"/>
+							<ExtendedTooltip name="ValueTooltip" id="53"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row7" id="54">
+					<HorizontalStretch>false</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row7РасширеннаяПодсказка" id="83"/>
+					<ChildItems>
+						<InputField name="N16" id="55">
+							<DataPath>N16</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#948CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="56"/>
+							<ExtendedTooltip name="ValueTooltip" id="57"/>
+						</InputField>
+						<InputField name="N17" id="58">
+							<DataPath>N17</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#978CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="59"/>
+							<ExtendedTooltip name="ValueTooltip" id="60"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row8" id="61">
+					<HorizontalStretch>false</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row8РасширеннаяПодсказка" id="84"/>
+					<ChildItems>
+						<InputField name="N18" id="62">
+							<DataPath>N18</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#9A8CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="63"/>
+							<ExtendedTooltip name="ValueTooltip" id="64"/>
+						</InputField>
+						<InputField name="N19" id="65">
+							<DataPath>N19</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#9D8CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="66"/>
+							<ExtendedTooltip name="ValueTooltip" id="67"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+				<UsualGroup name="Row9" id="68">
+					<HorizontalStretch>false</HorizontalStretch>
+					<Group>Horizontal</Group>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="Row9РасширеннаяПодсказка" id="85"/>
+					<ChildItems>
+						<InputField name="N20" id="69">
+							<DataPath>N20</DataPath>
+							<TitleLocation>None</TitleLocation>
+							<HorizontalStretch>false</HorizontalStretch>
+							<ChoiceButton>false</ChoiceButton>
+							<SpinButton>false</SpinButton>
+							<BackColor>#A08CD6</BackColor>
+							<Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+							<ContextMenu name="ValueContextMenu" id="70"/>
+							<ExtendedTooltip name="ValueTooltip" id="71"/>
+						</InputField>
+					</ChildItems>
+				</UsualGroup>
+			</ChildItems>
+		</UsualGroup>
+		<InputField name="Below" id="72">
+			<DataPath>Name</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<Width>1</Width>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#A8E4B8</BackColor>
+			<ContextMenu name="BelowContextMenu" id="73"/>
+			<ExtendedTooltip name="BelowExtendedTooltip" id="74"/>
+		</InputField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Name" id="75">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N02" id="76">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>2</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N03" id="77">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>3</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N04" id="78">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>4</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N05" id="79">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>5</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N06" id="80">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>6</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N07" id="81">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>7</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N08" id="82">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>8</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N09" id="83">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>9</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N10" id="84">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>10</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N11" id="85">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>11</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N12" id="86">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>12</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N13" id="87">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>13</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N14" id="88">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>14</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N15" id="89">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>15</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N16" id="90">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>16</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N17" id="91">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>17</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N18" id="92">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>18</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N19" id="93">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>19</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="N20" id="94">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>20</v8:Digits>
+					<v8:FractionDigits>2</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+</Form>

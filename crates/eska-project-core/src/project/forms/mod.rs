@@ -44,7 +44,7 @@ pub use pictures::{ButtonRepresentation, FormPicture};
 pub use preparation::{FormInput, FormInputSource, FormPreparation, prepare};
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,
-    FormPresentation, FormScriptVariant, PresentationText, TableColumnAppearance,
+    FormPresentation, FormScriptVariant, NumberSign, PresentationText, TableColumnAppearance,
     TabularTotalCaption, present,
 };
 pub use references::{FormReference, ReferenceSlot};

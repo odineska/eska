@@ -62,6 +62,41 @@ fn params(context: &Value, values: Value) -> Value {
 }
 
 #[test]
+fn numeric_sign_reaches_rpc_and_dirty_revisions_without_locale_or_identity_changes() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let source = include_str!(
+        "../../../../tests/fixtures/forms/native-number-inputs/NonnegativeFraction15.xml"
+    );
+    fs::write(&path, source).unwrap();
+    for minor in [41, 42] {
+        for locale in ["ru-RU", "en-US"] {
+            let mut client = Client::new(&directory.0, locale);
+            let (context, node) = connect(&mut client, &directory.0, locale, minor);
+            let opened = client.request("form/open", &params(&context, json!({"node":node})));
+            let element = &opened["model"]["root"]["children"][1];
+            let identity = element["identity"].clone();
+            let mut expected = element["presentation"]["valueType"].clone();
+            assert_eq!(expected["allowedSign"], "Nonnegative");
+            assert_eq!(expected["digits"], 15);
+            assert_eq!(expected["fraction"], 2);
+            let changed = source.replace(
+                "<v8:AllowedSign>Nonnegative</v8:AllowedSign>",
+                "<v8:AllowedSign>Any</v8:AllowedSign>",
+            );
+            assert_ne!(changed, source);
+            let updated = update_input(&mut client, &context, &opened, 2, &changed);
+            let element = &updated["model"]["root"]["children"][1];
+            expected["allowedSign"] = json!("Any");
+            assert_eq!(element["identity"], identity);
+            assert_eq!(element["presentation"]["valueType"], expected);
+            client.finish();
+            assert_eq!(fs::read_to_string(&path).unwrap(), source);
+        }
+    }
+}
+
+#[test]
 fn native_font_face_names_reach_rpc_and_dirty_revisions_in_both_locales() {
     let directory = fixture();
     let path = directory.0.join("src").join(PATH);

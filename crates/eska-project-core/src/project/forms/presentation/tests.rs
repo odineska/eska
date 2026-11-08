@@ -3,6 +3,40 @@ use crate::project::{
     forms::{compose, parse},
     metadata_parser::{self, PropertiesMode},
 };
+
+#[test]
+fn native_numeric_inputs_preserve_sign_qualifiers_from_the_bound_attribute() {
+    for (xml, sign) in [
+        (
+            include_str!(
+                "../../../../../../tests/fixtures/forms/native-number-inputs/NonnegativeFraction15.xml"
+            ),
+            NumberSign::Nonnegative,
+        ),
+        (
+            include_str!(
+                "../../../../../../tests/fixtures/forms/native-number-inputs/Fraction15NoGrouping.xml"
+            ),
+            NumberSign::Any,
+        ),
+    ] {
+        let document = parse("native-number", xml.into()).unwrap();
+        let form = compose(&document, &[]);
+        let field = &form.root.children[1];
+        let view = present(&form, &[document], &[]);
+        let value_type = &view
+            .elements
+            .iter()
+            .find(|element| element.identity == field.identity)
+            .unwrap()
+            .value_type;
+        assert!(view.diagnostics.is_empty());
+        assert_eq!(value_type.kind, FieldValueKind::Number);
+        assert_eq!(value_type.digits, Some(15));
+        assert_eq!(value_type.fraction, Some(2));
+        assert_eq!(value_type.allowed_sign, Some(sign));
+    }
+}
 #[test]
 fn native_basic_fixture_uses_conditional_group_and_vertical_form_defaults() {
     let document = parse(
@@ -599,7 +633,7 @@ fn tabular_total_uses_the_effective_numeric_column_and_preserves_explicit_titles
             "base",
             "",
             r#"<TabularSection uuid="base-lines"><Properties><Name>Lines</Name></Properties><ChildObjects>
-                <Attribute uuid="base-qty"><Properties><Name>Qty</Name><Type><v8:Type>xs:decimal</v8:Type><v8:NumberQualifiers><v8:Digits>10</v8:Digits><v8:FractionDigits>2</v8:FractionDigits></v8:NumberQualifiers></Type></Properties></Attribute>
+                <Attribute uuid="base-qty"><Properties><Name>Qty</Name><Type><v8:Type>xs:decimal</v8:Type><v8:NumberQualifiers><v8:Digits>10</v8:Digits><v8:FractionDigits>2</v8:FractionDigits><v8:AllowedSign>Nonnegative</v8:AllowedSign></v8:NumberQualifiers></Type></Properties></Attribute>
                 <Attribute uuid="base-comment"><Properties><Name>Comment</Name><Type><v8:Type>xs:string</v8:Type></Type></Properties></Attribute>
                 <Attribute uuid="base-total-comment"><Properties><Name>TotalComment</Name><Type><v8:Type>xs:string</v8:Type></Type></Properties></Attribute>
                 <Attribute uuid="base-text"><Properties><Name>Text</Name><Type><v8:Type>xs:string</v8:Type></Type></Properties></Attribute>
@@ -629,6 +663,7 @@ fn tabular_total_uses_the_effective_numeric_column_and_preserves_explicit_titles
     assert_eq!(total.value_type.kind, FieldValueKind::Number);
     assert_eq!(total.value_type.digits, Some(10));
     assert_eq!(total.value_type.fraction, Some(2));
+    assert_eq!(total.value_type.allowed_sign, Some(NumberSign::Nonnegative));
     assert_eq!(total.binding.as_ref().unwrap().source, "extension");
     assert_eq!(
         view.elements[2].tabular_total,
