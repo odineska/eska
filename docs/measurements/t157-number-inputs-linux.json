@@ -1,0 +1,1405 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T08:01:57.867011+00:00",
+  "scope": [
+    "T157",
+    "T158"
+  ],
+  "status": "in-progress",
+  "profile": {
+    "platform": "8.3.27.2342",
+    "os": "linux",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "backend": {
+    "apiVersion": {
+      "major": 1,
+      "minor": 42
+    },
+    "commit": "52b2cbc",
+    "sha256": "3ea356d31a6333c27cd5b6ec1ccadd0cb1e416d0e8eb16fcd84ddac192ea4315"
+  },
+  "viewer": {
+    "commit": "38a46d76e8f7fec26337138d4ea1a59c0bbe35c2",
+    "vsixSha256": "d386e29e50710a2ebcd6a825d7af29a6b77d4b718bd3250e6aa069b2812c98c2",
+    "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b",
+    "runtimeFiles": 1262
+  },
+  "corpus": {
+    "path": "tests/fixtures/forms/native-number-inputs",
+    "forms": 53,
+    "controls": 270,
+    "captures": 108,
+    "unchangedSourceFiles": 3468,
+    "defaultFormattedLengths": {
+      "min": 1,
+      "max": 51
+    },
+    "semantics": [
+      "Precision and fraction affect automatic value width.",
+      "Nonnegative removes one width unit.",
+      "Integer fields omit the automatic calculator; ChoiceButton overrides it.",
+      "Spin and choice buttons reserve independent intervals.",
+      "Authored Width uses font-independent units."
+    ],
+    "pixelAcceptance": false,
+    "excludedProbes": [
+      {
+        "name": "Fraction0_2",
+        "reason": "Native canonical export normalizes FractionDigits=2 to 0 when Digits=0."
+      }
+    ]
+  },
+  "validation": {
+    "guiConcurrency": 1,
+    "artifactSource": "form-batch-tctsQf",
+    "regressions": "form-number-input-regressions-htb95ci2",
+    "wholeForms": "form-number-input-whole-xx84ah4j",
+    "sourceWrites": false,
+    "checks": {
+      "cargoFmtCheck": "passed",
+      "cargoCheck": "passed",
+      "clippyAllTargetsAllFeaturesDenyWarnings": "passed",
+      "cargoTest": {
+        "passed": 1566,
+        "failed": 0,
+        "ignored": 19
+      },
+      "node": {
+        "tests": 703,
+        "pass": 695,
+        "fail": 0,
+        "skipped": 8
+      },
+      "rustLog": "form-number-input-rust-6pj26ipg/cargo-test.log",
+      "nodeLog": "form-number-input-node-g_bvdb6x/node.log",
+      "typescriptCheck": "passed",
+      "compile": "passed"
+    },
+    "runs": [
+      {
+        "group": "gate",
+        "name": "number-inputs-en",
+        "passed": true,
+        "states": 59,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "gate",
+        "name": "number-inputs-ru",
+        "passed": true,
+        "states": 59,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "gate",
+        "name": "renderer-en",
+        "passed": true,
+        "states": 20,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "gate",
+        "name": "renderer-ru",
+        "passed": true,
+        "states": 20,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-borders-en",
+        "passed": true,
+        "states": 52,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-borders-ru",
+        "passed": true,
+        "states": 52,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-dates-en",
+        "passed": true,
+        "states": 42,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-dates-ru",
+        "passed": true,
+        "states": 42,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-choice-en",
+        "passed": true,
+        "states": 6,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-choice-ru",
+        "passed": true,
+        "states": 6,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-dimensions-en",
+        "passed": true,
+        "states": 44,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-dimensions-ru",
+        "passed": true,
+        "states": 44,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-fonts-en",
+        "passed": true,
+        "states": 38,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-fonts-ru",
+        "passed": true,
+        "states": 38,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-stretch-en",
+        "passed": true,
+        "states": 20,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "input-stretch-ru",
+        "passed": true,
+        "states": 20,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "through-align-en",
+        "passed": true,
+        "states": 98,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "through-align-ru",
+        "passed": true,
+        "states": 98,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "united-en",
+        "passed": true,
+        "states": 9,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "united-ru",
+        "passed": true,
+        "states": 9,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "groups-en",
+        "passed": true,
+        "states": 22,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "groups-ru",
+        "passed": true,
+        "states": 22,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "group-spacing-en",
+        "passed": true,
+        "states": 60,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "group-spacing-ru",
+        "passed": true,
+        "states": 60,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "radio-layout-en",
+        "passed": true,
+        "states": 17,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "regressions",
+        "name": "radio-layout-ru",
+        "passed": true,
+        "states": 17,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "whole",
+        "name": "bsp-en",
+        "passed": true,
+        "states": 12,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "whole",
+        "name": "bsp-ru",
+        "passed": true,
+        "states": 12,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "whole",
+        "name": "loan-docked-en",
+        "passed": true,
+        "states": 9,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "whole",
+        "name": "loan-docked-ru",
+        "passed": true,
+        "states": 9,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "whole",
+        "name": "loan-detached-en",
+        "passed": true,
+        "states": 10,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      },
+      {
+        "group": "whole",
+        "name": "loan-detached-ru",
+        "passed": true,
+        "states": 10,
+        "runtimeFiles": 1262,
+        "runtimeManifestSha256": "fc250fcc0a9a43e1f71ca2869ff0ba7019ffd4048e348706d7b705b0801f488b"
+      }
+    ]
+  },
+  "bspNativeEvidence": {
+    "stand": "form-bsp-geometry-native-whn6wv7l",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_24",
+    "sourceProof": {
+      "originalStand": "united-bsp-context-763t8lxb",
+      "databaseSha256": "3ae00b262d93405646969a137f43f140b7a57743203bcbe28d92d4502ec3d4d8",
+      "files": [
+        {
+          "relative": "DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml",
+          "source": "united-bsp-context-763t8lxb/src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml",
+          "sha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da"
+        },
+        {
+          "relative": "ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+          "source": "united-bsp-context-763t8lxb/src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+          "sha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3"
+        },
+        {
+          "relative": "DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml",
+          "source": "united-bsp-context-763t8lxb/src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml",
+          "sha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248"
+        },
+        {
+          "relative": "Configuration.xml",
+          "source": "united-bsp-context-763t8lxb/src/cf/Configuration.xml",
+          "sha256": "6ddd3bb864852f3818df86431f7adf4aa4cc98cb804b2342877c346b2c6b4b73"
+        }
+      ],
+      "parsedExportsEqual": true,
+      "sourceDatabaseUnchanged": true
+    },
+    "frames": [
+      {
+        "name": "questionnaire-full-root",
+        "frame": [
+          801,
+          769
+        ],
+        "blueBounds": [
+          262,
+          241,
+          1061,
+          1008
+        ],
+        "screenshotSha256": "67e0a59490f342e10f0c2b79b759ff305109fdebf9ac6d74b36848abdfdd874f",
+        "profileResolution": [
+          1920,
+          1200
+        ],
+        "grayControlPaint": [
+          [
+            123,
+            66,
+            451,
+            23
+          ],
+          [
+            623,
+            66,
+            121,
+            23
+          ],
+          [
+            123,
+            98,
+            493,
+            23
+          ],
+          [
+            123,
+            130,
+            642,
+            51
+          ],
+          [
+            13,
+            216,
+            550,
+            23
+          ],
+          [
+            123,
+            248,
+            462,
+            23
+          ],
+          [
+            77,
+            280,
+            82,
+            23
+          ],
+          [
+            77,
+            312,
+            72,
+            23
+          ],
+          [
+            198,
+            344,
+            172,
+            23
+          ],
+          [
+            198,
+            376,
+            172,
+            23
+          ],
+          [
+            312,
+            408,
+            172,
+            23
+          ]
+        ],
+        "tablePaint": [
+          13,
+          557,
+          600,
+          199
+        ]
+      },
+      {
+        "name": "questionnaire-string-root",
+        "frame": [
+          801,
+          769
+        ],
+        "blueBounds": [
+          262,
+          241,
+          1061,
+          1008
+        ],
+        "screenshotSha256": "da21308f703a1d0f0565651743ee9f4aaf839bcad85861070dcdde27aeee3e92",
+        "profileResolution": [
+          1920,
+          1200
+        ]
+      },
+      {
+        "name": "questionnaire-repeat-root",
+        "frame": [
+          801,
+          769
+        ],
+        "blueBounds": [
+          262,
+          241,
+          1061,
+          1008
+        ],
+        "screenshotSha256": "a4c8eb227c9feb0c67b1469d7060a9510c9ea2241d874f492243cf63056803e4",
+        "profileResolution": [
+          1920,
+          1200
+        ]
+      },
+      {
+        "name": "questionnaire-resolution-1024x768",
+        "frame": [
+          801,
+          760
+        ],
+        "blueBounds": [
+          262,
+          241,
+          1061,
+          999
+        ],
+        "screenshotSha256": "01cdbafc8e969d66b8403f75bf75494e9ca6abee545d9dd40a2aca26c91b640d",
+        "profileResolution": [
+          1024,
+          768
+        ]
+      },
+      {
+        "name": "questionnaire-resolution-1024-scrolled",
+        "frame": [
+          801,
+          760
+        ],
+        "blueBounds": [
+          262,
+          241,
+          1061,
+          999
+        ],
+        "screenshotSha256": "aa7ea8f07e4dd11d96516edece0911f007de8c05cbf002c5717058fa37b9746b",
+        "profileResolution": [
+          1024,
+          768
+        ]
+      },
+      {
+        "name": "questionnaire-resolution-restored",
+        "frame": [
+          801,
+          769
+        ],
+        "blueBounds": [
+          262,
+          241,
+          1061,
+          1008
+        ],
+        "screenshotSha256": "44b955922ea7bcacb3540fa5581a31a6766768ee43819553a8ac27c5629700ef",
+        "profileResolution": [
+          1920,
+          1200
+        ]
+      },
+      {
+        "name": "totals-full-root",
+        "frame": [
+          1224,
+          541
+        ],
+        "blueBounds": [
+          262,
+          719,
+          1484,
+          1258
+        ],
+        "screenshotSha256": "29334da9c229cdba53a910cf7be003ead0f6eaeadcf4b6008477866662ddaf56",
+        "profileResolution": [
+          1920,
+          1200
+        ]
+      },
+      {
+        "name": "totals-advanced-root",
+        "frame": [
+          1224,
+          541
+        ],
+        "blueBounds": [
+          262,
+          719,
+          1484,
+          1258
+        ],
+        "screenshotSha256": "41496b0e358c069e7f90861b8eec513834a7f44623bed0eabb31a6888b5a8f10",
+        "profileResolution": [
+          1920,
+          1200
+        ]
+      },
+      {
+        "name": "totals-resolution-1024x768",
+        "frame": [
+          802,
+          541
+        ],
+        "blueBounds": [
+          262,
+          719,
+          1062,
+          1258
+        ],
+        "screenshotSha256": "8568cabad67fea3ff8aef904595747feb158c0d5fa4ff2b953dc231bd909aa90",
+        "profileResolution": [
+          1024,
+          768
+        ]
+      },
+      {
+        "name": "totals-main-1024x768",
+        "frame": [
+          802,
+          541
+        ],
+        "blueBounds": [
+          262,
+          719,
+          1062,
+          1258
+        ],
+        "screenshotSha256": "9ee4ad93c743431f23dd9966c046c51b3fa69713e4589edfc4f192a6ff8bd36c",
+        "profileResolution": [
+          1024,
+          768
+        ]
+      },
+      {
+        "name": "totals-resolution-restored",
+        "frame": [
+          1224,
+          541
+        ],
+        "blueBounds": [
+          262,
+          719,
+          1484,
+          1258
+        ],
+        "screenshotSha256": "4c48ad10feece2bc0c009d96318f2ab3318e414e90c9de1486a59adb0273f3ce",
+        "profileResolution": [
+          1920,
+          1200
+        ]
+      }
+    ],
+    "toolbarFixedDuringBodyScroll": true,
+    "exportBeforeExitCode": 0,
+    "exportAfterExitCode": 0,
+    "bslExecuted": false
+  },
+  "bspViewerGeometry": [
+    {
+      "sample": 0,
+      "locale": "en",
+      "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "pages": [
+            "Выбор справочника для загрузки",
+            "Страница вариант заполнение таблицы"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "pages": [
+            "Страница вариант заполнение таблицы",
+            "Сопоставление загружаемых данных"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "pages": [
+            "Страница вариант заполнение таблицы",
+            "Сопоставление загружаемых данных"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1111,
+            "height": 612
+          },
+          "pages": [
+            "Страница вариант заполнение таблицы",
+            "Сопоставление загружаемых данных"
+          ],
+          "outsideCount": 0
+        }
+      ],
+      "nativePreferredFrame": [
+        811,
+        612
+      ],
+      "preferredFrameEqual": true
+    },
+    {
+      "sample": 1,
+      "locale": "en",
+      "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 785,
+            "height": 796
+          },
+          "pages": [
+            "Вид переключателя не отображать",
+            "Страница число"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 785,
+            "height": 796
+          },
+          "pages": [
+            "Вид переключателя не отображать",
+            "Страница строка"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 785,
+            "height": 57
+          },
+          "pages": [
+            "Вид переключателя не отображать",
+            "Страница строка"
+          ],
+          "outsideCount": 14
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1126,
+            "height": 324
+          },
+          "pages": [
+            "Вид переключателя не отображать",
+            "Страница строка"
+          ],
+          "outsideCount": 2
+        }
+      ],
+      "numericFields": {
+        "Длина": {
+          "nativePaint": [
+            77,
+            280,
+            82,
+            23
+          ],
+          "viewer": [
+            77,
+            281,
+            82,
+            23
+          ],
+          "widthAndHeightEqual": true,
+          "positionEqual": false
+        },
+        "Точность": {
+          "nativePaint": [
+            77,
+            312,
+            72,
+            23
+          ],
+          "viewer": [
+            77,
+            313,
+            72,
+            23
+          ],
+          "widthAndHeightEqual": true,
+          "positionEqual": false
+        },
+        "МинимальноеЗначение": {
+          "nativePaint": [
+            198,
+            344,
+            172,
+            23
+          ],
+          "viewer": [
+            198,
+            345,
+            172,
+            23
+          ],
+          "widthAndHeightEqual": true,
+          "positionEqual": false
+        },
+        "МаксимальноеЗначение": {
+          "nativePaint": [
+            198,
+            376,
+            172,
+            23
+          ],
+          "viewer": [
+            204,
+            377,
+            172,
+            23
+          ],
+          "widthAndHeightEqual": true,
+          "positionEqual": false
+        },
+        "ШагПолосыРегулирования": {
+          "nativePaint": [
+            312,
+            408,
+            172,
+            23
+          ],
+          "viewer": [
+            312,
+            409,
+            172,
+            23
+          ],
+          "widthAndHeightEqual": true,
+          "positionEqual": false
+        }
+      },
+      "nativePreferredFrame": [
+        801,
+        769
+      ],
+      "preferredFrameEqual": false
+    },
+    {
+      "sample": 2,
+      "locale": "en",
+      "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 1222,
+            "height": 536
+          },
+          "pages": [
+            "Типовые операции",
+            "Итоги"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 1222,
+            "height": 536
+          },
+          "pages": [
+            "Расширенная",
+            "Итоги"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 616,
+            "height": 57
+          },
+          "pages": [
+            "Расширенная",
+            "Итоги"
+          ],
+          "outsideCount": 17
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1126,
+            "height": 324
+          },
+          "pages": [
+            "Расширенная",
+            "Итоги"
+          ],
+          "outsideCount": 6
+        }
+      ],
+      "nativePreferredFrame": [
+        1224,
+        541
+      ],
+      "preferredFrameEqual": false
+    },
+    {
+      "sample": 0,
+      "locale": "ru",
+      "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "pages": [
+            "Выбор справочника для загрузки",
+            "Страница вариант заполнение таблицы"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "pages": [
+            "Страница вариант заполнение таблицы",
+            "Сопоставление загружаемых данных"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "pages": [
+            "Страница вариант заполнение таблицы",
+            "Сопоставление загружаемых данных"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1111,
+            "height": 612
+          },
+          "pages": [
+            "Страница вариант заполнение таблицы",
+            "Сопоставление загружаемых данных"
+          ],
+          "outsideCount": 0
+        }
+      ],
+      "nativePreferredFrame": [
+        811,
+        612
+      ],
+      "preferredFrameEqual": true
+    },
+    {
+      "sample": 1,
+      "locale": "ru",
+      "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 785,
+            "height": 796
+          },
+          "pages": [
+            "Вид переключателя не отображать",
+            "Страница число"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 785,
+            "height": 796
+          },
+          "pages": [
+            "Вид переключателя не отображать",
+            "Страница строка"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 785,
+            "height": 57
+          },
+          "pages": [
+            "Вид переключателя не отображать",
+            "Страница строка"
+          ],
+          "outsideCount": 14
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1126,
+            "height": 324
+          },
+          "pages": [
+            "Вид переключателя не отображать",
+            "Страница строка"
+          ],
+          "outsideCount": 2
+        }
+      ],
+      "numericFields": {
+        "Длина": {
+          "nativePaint": [
+            77,
+            280,
+            82,
+            23
+          ],
+          "viewer": [
+            77,
+            281,
+            82,
+            23
+          ],
+          "widthAndHeightEqual": true,
+          "positionEqual": false
+        },
+        "Точность": {
+          "nativePaint": [
+            77,
+            312,
+            72,
+            23
+          ],
+          "viewer": [
+            77,
+            313,
+            72,
+            23
+          ],
+          "widthAndHeightEqual": true,
+          "positionEqual": false
+        },
+        "МинимальноеЗначение": {
+          "nativePaint": [
+            198,
+            344,
+            172,
+            23
+          ],
+          "viewer": [
+            198,
+            345,
+            172,
+            23
+          ],
+          "widthAndHeightEqual": true,
+          "positionEqual": false
+        },
+        "МаксимальноеЗначение": {
+          "nativePaint": [
+            198,
+            376,
+            172,
+            23
+          ],
+          "viewer": [
+            204,
+            377,
+            172,
+            23
+          ],
+          "widthAndHeightEqual": true,
+          "positionEqual": false
+        },
+        "ШагПолосыРегулирования": {
+          "nativePaint": [
+            312,
+            408,
+            172,
+            23
+          ],
+          "viewer": [
+            312,
+            409,
+            172,
+            23
+          ],
+          "widthAndHeightEqual": true,
+          "positionEqual": false
+        }
+      },
+      "nativePreferredFrame": [
+        801,
+        769
+      ],
+      "preferredFrameEqual": false
+    },
+    {
+      "sample": 2,
+      "locale": "ru",
+      "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 1222,
+            "height": 536
+          },
+          "pages": [
+            "Типовые операции",
+            "Итоги"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 1222,
+            "height": 536
+          },
+          "pages": [
+            "Расширенная",
+            "Итоги"
+          ],
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 616,
+            "height": 57
+          },
+          "pages": [
+            "Расширенная",
+            "Итоги"
+          ],
+          "outsideCount": 17
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1126,
+            "height": 324
+          },
+          "pages": [
+            "Расширенная",
+            "Итоги"
+          ],
+          "outsideCount": 6
+        }
+      ],
+      "nativePreferredFrame": [
+        1224,
+        541
+      ],
+      "preferredFrameEqual": false
+    }
+  ],
+  "remaining": [
+    "Whole-form geometry of the questionnaire and totals form.",
+    "Automatic-width strings with manual maximum.",
+    "Table maximum height and vertical flow.",
+    "Body scrolling with fixed root commands.",
+    "Native spin rasterization and remaining embedded-button combinations.",
+    "Windows native geometry and other DPI.",
+    "Full pixel acceptance of the renderer."
+  ],
+  "acceptance": {
+    "measuredNumericGeometry": true,
+    "wholeFormGeometry": false,
+    "fullNativeProfile": false,
+    "windows": false
+  },
+  "loanViewerGeometry": [
+    {
+      "mode": "loan-docked",
+      "locale": "en",
+      "preferred": [
+        1155,
+        875
+      ],
+      "previousPreferred": [
+        1157,
+        875
+      ],
+      "allocatedFrames": [
+        [
+          1028,
+          492
+        ],
+        [
+          1156,
+          875
+        ],
+        [
+          994,
+          875
+        ],
+        [
+          865,
+          875
+        ],
+        [
+          800,
+          875
+        ],
+        [
+          760,
+          875
+        ],
+        [
+          696,
+          760
+        ],
+        [
+          664,
+          760
+        ],
+        [
+          1156,
+          875
+        ]
+      ],
+      "allocatedFramesUnchanged": true,
+      "states": 9,
+      "nativeWholeFormAccepted": false
+    },
+    {
+      "mode": "loan-docked",
+      "locale": "ru",
+      "preferred": [
+        1155,
+        875
+      ],
+      "previousPreferred": [
+        1157,
+        875
+      ],
+      "allocatedFrames": [
+        [
+          1028,
+          492
+        ],
+        [
+          1156,
+          875
+        ],
+        [
+          994,
+          875
+        ],
+        [
+          865,
+          875
+        ],
+        [
+          800,
+          875
+        ],
+        [
+          760,
+          875
+        ],
+        [
+          696,
+          760
+        ],
+        [
+          660,
+          760
+        ],
+        [
+          1156,
+          875
+        ]
+      ],
+      "allocatedFramesUnchanged": true,
+      "states": 9,
+      "nativeWholeFormAccepted": false
+    },
+    {
+      "mode": "loan-detached",
+      "locale": "en",
+      "preferred": [
+        1155,
+        875
+      ],
+      "previousPreferred": [
+        1157,
+        875
+      ],
+      "allocatedFrames": [
+        [
+          1376,
+          827
+        ],
+        [
+          1156,
+          875
+        ],
+        [
+          994,
+          875
+        ],
+        [
+          865,
+          875
+        ],
+        [
+          800,
+          875
+        ],
+        [
+          760,
+          875
+        ],
+        [
+          696,
+          760
+        ],
+        [
+          664,
+          760
+        ],
+        [
+          1156,
+          875
+        ]
+      ],
+      "allocatedFramesUnchanged": true,
+      "states": 10,
+      "nativeWholeFormAccepted": false
+    },
+    {
+      "mode": "loan-detached",
+      "locale": "ru",
+      "preferred": [
+        1155,
+        875
+      ],
+      "previousPreferred": [
+        1157,
+        875
+      ],
+      "allocatedFrames": [
+        [
+          1376,
+          827
+        ],
+        [
+          1156,
+          875
+        ],
+        [
+          994,
+          875
+        ],
+        [
+          865,
+          875
+        ],
+        [
+          800,
+          875
+        ],
+        [
+          760,
+          875
+        ],
+        [
+          696,
+          760
+        ],
+        [
+          660,
+          760
+        ],
+        [
+          1156,
+          875
+        ]
+      ],
+      "allocatedFramesUnchanged": true,
+      "states": 10,
+      "nativeWholeFormAccepted": false
+    }
+  ]
+}
