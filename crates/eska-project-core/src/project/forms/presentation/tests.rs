@@ -891,6 +891,9 @@ fn native_table_fixtures_bind_value_table_columns_and_retain_auxiliary_controls(
     let mut count = 0;
     for path in std::fs::read_dir(root).unwrap() {
         let path = path.unwrap().path();
+        if path.extension().is_none_or(|extension| extension != "xml") {
+            continue;
+        }
         let document = parse("native-table", std::fs::read_to_string(&path).unwrap()).unwrap();
         let form = compose(&document, &[]);
         let view = present(&form, &[document], &[]);
