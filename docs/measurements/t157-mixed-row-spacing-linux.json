@@ -1,0 +1,2170 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T23:35:24.961799+00:00",
+  "scope": [
+    "T157",
+    "T158",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "implementation": {
+    "commit": "fbf08575e6f3b56f2a601c16594e5add06ad01d5",
+    "spacing": "The shared logical group pass applies the native automatic 10px gap to rows containing LabelDecoration or LabelField; explicit None/Single/Double remain 0/10/20px. The redundant empty-decoration CSS gap was removed.",
+    "decoration": "Resolved BackColor paints the existing decoration. Linux reserves 1px inline padding and 1px outer block allocation per side. Content width remains owned by the existing word profile; allocation shares border/padding insets.",
+    "textLabel": "Single-line string LabelField with explicit Width uses fixed 10px character units and the existing font line metrics, including native background insets. The same metrics feed fieldWidth and the Solid control.",
+    "formNameExceptions": false,
+    "newDependencies": false,
+    "protocolChanged": false,
+    "sourceWrites": false
+  },
+  "native": {
+    "fixture": "tests/fixtures/forms/native-mixed-row-spacing",
+    "forms": 21,
+    "completeFrames": 42,
+    "metricsSha256": "fa49a5b5da86814ee77fde688015b8f3bdf796b27b0fb9384e68c211180bd9df",
+    "manifestSha256": "93d7cd3a9cc3b79cb4d04fec29d95aa76bf131c663f12ea331abc29c39fe9f07",
+    "stands": [
+      {
+        "stand": "form-native-mixed-row-spacing-633qzlta",
+        "sourceFiles": 746,
+        "sourcesUnchanged": true,
+        "runs": [
+          {
+            "locale": "en",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          },
+          {
+            "locale": "ru",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          }
+        ]
+      },
+      {
+        "stand": "form-native-mixed-row-plain-0ty76mnq",
+        "sourceFiles": 728,
+        "sourcesUnchanged": true,
+        "runs": [
+          {
+            "locale": "en",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          },
+          {
+            "locale": "ru",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          }
+        ]
+      }
+    ],
+    "normalization": "BOM/CRLF only",
+    "isolation": "BspCaption copies the text and dimensions but resolves its external TextColor style to #807A59; colored controls add diagnostic backgrounds. This is not a substitute for the unchanged full BSP source."
+  },
+  "baseline": {
+    "stand": "form-mixed-row-probe-f34r12p3",
+    "artifactSource": "form-batch-EH2Grq",
+    "diagnosticOnly": true,
+    "runs": [
+      {
+        "locale": "en",
+        "exitCode": 0,
+        "matched": 0,
+        "total": 21,
+        "comparisons": [
+          {
+            "name": "RootButtonDecor",
+            "actual": {
+              "frame": [
+                206,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  141,
+                  44,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                210,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  143,
+                  46,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "RootDecorButton",
+            "actual": {
+              "frame": [
+                206,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  65,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  13,
+                  44,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                210,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  69,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  13,
+                  46,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "RootButtonField",
+            "actual": {
+              "frame": [
+                246,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  141,
+                  84,
+                  16
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                266,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  143,
+                  102,
+                  19
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "RootFieldButton",
+            "actual": {
+              "frame": [
+                246,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  105,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  13,
+                  84,
+                  16
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                266,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  125,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  13,
+                  102,
+                  19
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "RootDecorDecor",
+            "actual": {
+              "frame": [
+                149,
+                131
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  95,
+                  21,
+                  23
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  13,
+                  44,
+                  17
+                ],
+                "SecondLabel": [
+                  65,
+                  63,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                155,
+                133
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  97,
+                  21,
+                  23
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  13,
+                  46,
+                  17
+                ],
+                "SecondLabel": [
+                  69,
+                  65,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "RootBspCaption",
+            "actual": {
+              "frame": [
+                1200,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  300,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  321,
+                  858,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                1204,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  300,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  323,
+                  860,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "PageButtonDecor",
+            "actual": {
+              "frame": [
+                228,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  152,
+                  44,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                232,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  154,
+                  46,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "PageDecorButton",
+            "actual": {
+              "frame": [
+                228,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  76,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  24,
+                  44,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                232,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  80,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  24,
+                  46,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "PageButtonField",
+            "actual": {
+              "frame": [
+                268,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  152,
+                  84,
+                  16
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                288,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  154,
+                  102,
+                  19
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "PageFieldButton",
+            "actual": {
+              "frame": [
+                268,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  116,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  24,
+                  84,
+                  16
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                288,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  136,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  24,
+                  102,
+                  19
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "PageDecorDecor",
+            "actual": {
+              "frame": [
+                171,
+                176
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  140,
+                  21,
+                  23
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  24,
+                  44,
+                  17
+                ],
+                "SecondLabel": [
+                  76,
+                  63,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                177,
+                178
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  142,
+                  21,
+                  23
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  24,
+                  46,
+                  17
+                ],
+                "SecondLabel": [
+                  80,
+                  65,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "PageBspCaption",
+            "actual": {
+              "frame": [
+                1222,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  300,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  332,
+                  858,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                1226,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  300,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  334,
+                  860,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "RootNone",
+            "actual": {
+              "frame": [
+                198,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  133,
+                  44,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                200,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  133,
+                  46,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "RootSingle",
+            "actual": {
+              "frame": [
+                208,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  143,
+                  44,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                210,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  143,
+                  46,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "RootDouble",
+            "actual": {
+              "frame": [
+                218,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  153,
+                  44,
+                  17
+                ]
+              }
+            },
+            "expected": {
+              "frame": [
+                220,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {
+                "Label": [
+                  153,
+                  46,
+                  17
+                ]
+              }
+            },
+            "matches": false
+          },
+          {
+            "name": "PlainRootButtonDecor",
+            "actual": {
+              "frame": [
+                206,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "expected": {
+              "frame": [
+                208,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "matches": false
+          },
+          {
+            "name": "PlainRootButtonField",
+            "actual": {
+              "frame": [
+                246,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "expected": {
+              "frame": [
+                264,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "matches": false
+          },
+          {
+            "name": "PlainRootBspCaption",
+            "actual": {
+              "frame": [
+                1200,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  300,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "expected": {
+              "frame": [
+                1202,
+                156
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  120,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  13,
+                  71,
+                  300,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "matches": false
+          },
+          {
+            "name": "PlainPageButtonDecor",
+            "actual": {
+              "frame": [
+                228,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "expected": {
+              "frame": [
+                230,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "matches": false
+          },
+          {
+            "name": "PlainPageButtonField",
+            "actual": {
+              "frame": [
+                268,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "expected": {
+              "frame": [
+                286,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  120,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "matches": false
+          },
+          {
+            "name": "PlainPageBspCaption",
+            "actual": {
+              "frame": [
+                1222,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  300,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "expected": {
+              "frame": [
+                1224,
+                201
+              ],
+              "fields": {
+                "Above": [
+                  13,
+                  39,
+                  21,
+                  23
+                ],
+                "Below": [
+                  13,
+                  165,
+                  21,
+                  23
+                ],
+                "TargetButton": [
+                  24,
+                  106,
+                  300,
+                  40
+                ]
+              },
+              "labelColumns": {}
+            },
+            "matches": false
+          }
+        ]
+      }
+    ]
+  },
+  "installed": {
+    "stand": "form-batch-H0WSV2",
+    "vsixSha256": "24a82c03e30d8b2b3a1e564084e5de12e58c14193bcb2f0b267288be5a7d7a58",
+    "backendSha256": "05237cc272a91b74a392d2f91eaea4c305c78fe53d0c5ca74b45d3123705a301",
+    "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50",
+    "runtimeFiles": 1262,
+    "frozenSourceAndDriverFiles": 569,
+    "frozenFixtureFiles": 2046,
+    "frozenWitnessesUnchanged": true,
+    "states": 76,
+    "runs": [
+      {
+        "suite": "mixed-row-spacing",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "inputsStable": true,
+        "caseIds": [
+          "mixed-row-spacing/RootButtonDecor",
+          "mixed-row-spacing/dirty-RootNone",
+          "mixed-row-spacing/dirty-RootDouble",
+          "mixed-row-spacing/dirty-PlainRootButtonDecor",
+          "mixed-row-spacing/dirty-RootButtonDecor",
+          "mixed-row-spacing/detached-RootSingle",
+          "mixed-row-spacing/detached-RootNone",
+          "mixed-row-spacing/detached-RootDouble",
+          "mixed-row-spacing/detached-PlainRootButtonDecor",
+          "mixed-row-spacing/detached-RootButtonDecor",
+          "mixed-row-spacing/RootDecorButton",
+          "mixed-row-spacing/RootButtonField",
+          "mixed-row-spacing/dirty-PlainRootButtonField",
+          "mixed-row-spacing/dirty-RootButtonField",
+          "mixed-row-spacing/detached-PlainRootButtonField",
+          "mixed-row-spacing/detached-RootButtonField",
+          "mixed-row-spacing/RootFieldButton",
+          "mixed-row-spacing/RootDecorDecor",
+          "mixed-row-spacing/RootBspCaption",
+          "mixed-row-spacing/PageButtonDecor",
+          "mixed-row-spacing/dirty-PlainPageButtonDecor",
+          "mixed-row-spacing/dirty-PageButtonDecor",
+          "mixed-row-spacing/detached-PlainPageButtonDecor",
+          "mixed-row-spacing/detached-PageButtonDecor",
+          "mixed-row-spacing/PageDecorButton",
+          "mixed-row-spacing/PageButtonField",
+          "mixed-row-spacing/PageFieldButton",
+          "mixed-row-spacing/PageDecorDecor",
+          "mixed-row-spacing/PageBspCaption",
+          "mixed-row-spacing/RootNone",
+          "mixed-row-spacing/RootSingle",
+          "mixed-row-spacing/RootDouble",
+          "mixed-row-spacing/PlainRootButtonDecor",
+          "mixed-row-spacing/PlainRootButtonField",
+          "mixed-row-spacing/PlainRootBspCaption",
+          "mixed-row-spacing/PlainPageButtonDecor",
+          "mixed-row-spacing/PlainPageButtonField",
+          "mixed-row-spacing/PlainPageBspCaption"
+        ]
+      },
+      {
+        "suite": "mixed-row-spacing",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "inputsStable": true,
+        "caseIds": [
+          "mixed-row-spacing/RootButtonDecor",
+          "mixed-row-spacing/dirty-RootNone",
+          "mixed-row-spacing/dirty-RootDouble",
+          "mixed-row-spacing/dirty-PlainRootButtonDecor",
+          "mixed-row-spacing/dirty-RootButtonDecor",
+          "mixed-row-spacing/detached-RootSingle",
+          "mixed-row-spacing/detached-RootNone",
+          "mixed-row-spacing/detached-RootDouble",
+          "mixed-row-spacing/detached-PlainRootButtonDecor",
+          "mixed-row-spacing/detached-RootButtonDecor",
+          "mixed-row-spacing/RootDecorButton",
+          "mixed-row-spacing/RootButtonField",
+          "mixed-row-spacing/dirty-PlainRootButtonField",
+          "mixed-row-spacing/dirty-RootButtonField",
+          "mixed-row-spacing/detached-PlainRootButtonField",
+          "mixed-row-spacing/detached-RootButtonField",
+          "mixed-row-spacing/RootFieldButton",
+          "mixed-row-spacing/RootDecorDecor",
+          "mixed-row-spacing/RootBspCaption",
+          "mixed-row-spacing/PageButtonDecor",
+          "mixed-row-spacing/dirty-PlainPageButtonDecor",
+          "mixed-row-spacing/dirty-PageButtonDecor",
+          "mixed-row-spacing/detached-PlainPageButtonDecor",
+          "mixed-row-spacing/detached-PageButtonDecor",
+          "mixed-row-spacing/PageDecorButton",
+          "mixed-row-spacing/PageButtonField",
+          "mixed-row-spacing/PageFieldButton",
+          "mixed-row-spacing/PageDecorDecor",
+          "mixed-row-spacing/PageBspCaption",
+          "mixed-row-spacing/RootNone",
+          "mixed-row-spacing/RootSingle",
+          "mixed-row-spacing/RootDouble",
+          "mixed-row-spacing/PlainRootButtonDecor",
+          "mixed-row-spacing/PlainRootButtonField",
+          "mixed-row-spacing/PlainRootBspCaption",
+          "mixed-row-spacing/PlainPageButtonDecor",
+          "mixed-row-spacing/PlainPageButtonField",
+          "mixed-row-spacing/PlainPageBspCaption"
+        ]
+      }
+    ],
+    "accepted": [
+      "Frame width/height",
+      "Input and painted-button X/Y/width/height",
+      "Colored-label X/width/height",
+      "Dirty spacing and background variants preserve DOM and selection",
+      "Real detached window, independent native target and docking",
+      "No source writes"
+    ],
+    "notAcceptedByMainComparison": [
+      "Colored-label Y",
+      "Complete RGB pixels",
+      "Other fonts/DPI",
+      "Windows"
+    ]
+  },
+  "backgroundDiagnostic": {
+    "file": "authored-background-check.json",
+    "stand": "form-batch-H0WSV2",
+    "sha256": "9ef1d4e939872b8be5442bda260f28984fd0e267e429916b9f416287b712843f",
+    "authoredColorPresentCaptures": 30,
+    "nativeRectangleMatchedCaptures": 26,
+    "fullPixelsCompared": false,
+    "rawResultPassed": false,
+    "differences": [
+      {
+        "name": "RootBspCaption",
+        "locale": "en",
+        "labels": {
+          "Label": {
+            "native": [
+              323,
+              82,
+              860,
+              17
+            ],
+            "actual": [
+              323,
+              83,
+              860,
+              17
+            ],
+            "geometryMatches": false,
+            "pixelsWithAuthoredBackground": 10688
+          }
+        }
+      },
+      {
+        "name": "PageBspCaption",
+        "locale": "en",
+        "labels": {
+          "Label": {
+            "native": [
+              334,
+              117,
+              860,
+              17
+            ],
+            "actual": [
+              334,
+              118,
+              860,
+              17
+            ],
+            "geometryMatches": false,
+            "pixelsWithAuthoredBackground": 10688
+          }
+        }
+      },
+      {
+        "name": "RootBspCaption",
+        "locale": "ru",
+        "labels": {
+          "Label": {
+            "native": [
+              323,
+              82,
+              860,
+              17
+            ],
+            "actual": [
+              323,
+              83,
+              721,
+              17
+            ],
+            "geometryMatches": false,
+            "pixelsWithAuthoredBackground": 8934
+          }
+        }
+      },
+      {
+        "name": "PageBspCaption",
+        "locale": "ru",
+        "labels": {
+          "Label": {
+            "native": [
+              334,
+              117,
+              860,
+              17
+            ],
+            "actual": [
+              334,
+              118,
+              710,
+              17
+            ],
+            "geometryMatches": false,
+            "pixelsWithAuthoredBackground": 8797
+          }
+        }
+      }
+    ],
+    "interpretation": "The BSP-derived explicit Center controls paint 1px below native. Their ru screenshots also clip the right edge in the restored narrow workbench; DOM width is 860px and matches native. No full rectangle or pixel acceptance is claimed for these four captures."
+  },
+  "follow": {
+    "stand": "form-mixed-row-follow-nsbqcdu5",
+    "artifactSource": "form-batch-H0WSV2",
+    "vsixSha256": "24a82c03e30d8b2b3a1e564084e5de12e58c14193bcb2f0b267288be5a7d7a58",
+    "runs": [
+      {
+        "suite": "decorations",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 110,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "decorations",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 110,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "decoration-lines",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 78,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "decoration-lines",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 78,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "numeric-labels",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 41,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "numeric-labels",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 42,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 22,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 22,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 60,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 60,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 19,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 19,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "button-rows",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 8,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "button-rows",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 8,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "usual-buttons",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 18,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "usual-buttons",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 18,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 51,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 51,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "help-command",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 38,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "help-command",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 38,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 20,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 20,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "states": 1,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "states": 1,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50"
+      }
+    ],
+    "passed": true
+  },
+  "wholeForms": {
+    "stand": "form-mixed-row-whole-oh8vemnm",
+    "artifactSource": "form-batch-H0WSV2",
+    "vsixSha256": "24a82c03e30d8b2b3a1e564084e5de12e58c14193bcb2f0b267288be5a7d7a58",
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.500780089001637,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.669107616995461,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.594004306003626,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.24773087399808,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.1190998749953,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 9.94670575899363,
+        "runtimeManifestSha256": "d2bd0e2fe4ab96f72fbca4062ca8c216d2fe42f9423fbd60ae40da0e25616f50",
+        "runtimeFiles": 1262
+      }
+    ],
+    "passed": true,
+    "sourcesUnchanged": true,
+    "sourceFiles": 4,
+    "bsp": {
+      "en": {
+        "wizardFrame": {
+          "width": 811,
+          "height": 612
+        },
+        "questionnaireFrame": {
+          "width": 801,
+          "height": 769
+        },
+        "totalsFrame": {
+          "width": 1224,
+          "height": 540
+        },
+        "nativeWidthMatched": 1224,
+        "authoredButtons": [
+          {
+            "id": "219",
+            "border": [
+              24,
+              99.5,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "220",
+            "border": [
+              24,
+              151,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "222",
+            "border": [
+              24,
+              231,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "223",
+            "border": [
+              24,
+              280,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          }
+        ],
+        "help": {
+          "text": "",
+          "picture": true,
+          "width": 30,
+          "paintHeight": 27
+        }
+      },
+      "ru": {
+        "wizardFrame": {
+          "width": 811,
+          "height": 612
+        },
+        "questionnaireFrame": {
+          "width": 801,
+          "height": 769
+        },
+        "totalsFrame": {
+          "width": 1224,
+          "height": 540
+        },
+        "nativeWidthMatched": 1224,
+        "authoredButtons": [
+          {
+            "id": "219",
+            "border": [
+              24,
+              99.5,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "220",
+            "border": [
+              24,
+              151,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "222",
+            "border": [
+              24,
+              231,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "223",
+            "border": [
+              24,
+              280,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          }
+        ],
+        "help": {
+          "text": "",
+          "picture": true,
+          "width": 30,
+          "paintHeight": 27
+        }
+      }
+    },
+    "loan": {
+      "grid": [
+        13,
+        589,
+        662,
+        227
+      ],
+      "footerMemo": [
+        13,
+        844,
+        511,
+        51
+      ],
+      "paymentMemo": [
+        484,
+        339,
+        191,
+        51
+      ]
+    }
+  },
+  "validation": {
+    "stand": "form-mixed-row-validation-g4p097k0",
+    "logs": {
+      "cargo-fmt": {
+        "file": "eska-mixed-row-cargo-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cargo-check": {
+        "file": "eska-mixed-row-cargo-check.log",
+        "sha256": "c92508a29848820f033cd2ea015c85dde0953c88b07cc967ce34b7c08f610549"
+      },
+      "cargo-clippy": {
+        "file": "eska-mixed-row-cargo-clippy.log",
+        "sha256": "22e0df986057b9ba5be07526ac5fb348862a3dedef42108383cc3e088acbb889"
+      },
+      "cargo-test": {
+        "file": "eska-mixed-row-cargo-test.log",
+        "sha256": "2f8b7e85e5c377c35f0b8f8921cfa17bd15b1dbec5d8c949d41372ebfdb87161"
+      },
+      "node": {
+        "file": "eska-mixed-row-node.log",
+        "sha256": "38d4b367dc444d3febbc011239df919a588aedfec7e7b473565c44392daf7c08"
+      }
+    },
+    "node": {
+      "tests": 733,
+      "pass": 725,
+      "fail": 0,
+      "skipped": 8
+    },
+    "rust": {
+      "passed": 1573,
+      "ignored": 19,
+      "failed": 0
+    },
+    "commands": [
+      "cargo fmt --check",
+      "cargo check",
+      "cargo clippy --all-targets --all-features -- -D warnings",
+      "ESKA_TEST_ROOT=<absolute sibling playground> cargo test",
+      "npm run test:node with all backend test binary paths and sibling ESKA_TEST_ROOT",
+      "git diff --check"
+    ]
+  },
+  "setupFailure": {
+    "stand": "form-native-mixed-row-spacing-ad_nvrsx",
+    "importExitCode": 255,
+    "reason": "The initial isolated configuration lacked the copied BSP TextColor style. The replacement resolves it to the already observed literal color; the actual BSP source is unchanged.",
+    "dependentLaunchMistake": "A native launch was started after the failed import and failed on missing capture-source-hashes.json. That private desktop exited 1; no captures from that attempt are accepted."
+  },
+  "limitations": [
+    "The complete T157/T158/T165 criteria remain unproven; this is a Linux geometry slice.",
+    "Totals height is still 540px versus native 541px. Explicit Center of the BSP-derived decoration remains 1px below native.",
+    "String label automatic width, other value types/title locations/heights, bounds/stretch combinations, other fonts/DPI and native resize need their own native evidence.",
+    "This work does not accept full RGB pixels or T164 performance budgets."
+  ],
+  "nextEvidence": "Capture an independent compound-header depth/Height matrix before changing the remaining 1px height allocation on the hidden BSP aggregate page.",
+  "windowsHandoff": [
+    "Run suite mixed-row-spacing on the same 21 canonical inputs and capture independent Windows 8.3.27 native geometry.",
+    "Check automatic and explicit gaps, plain/colored string label Width, both child orders, nested pages and explicit Center.",
+    "Metric changes are Linux-specific; resolved decoration BackColor is forwarded on both OS profiles. Validate literal and style colors separately on Windows.",
+    "Repeat dirty XML, DOM/selection, detached/docked preview and full BSP/loan forms. Do not reuse Linux coordinates as Windows acceptance."
+  ]
+}
