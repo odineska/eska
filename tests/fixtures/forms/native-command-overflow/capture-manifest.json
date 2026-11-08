@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "capturedAt": "2026-11-08T03:10:52.767632+00:00",
+  "nativeStandRoot": "<repository-root>/../eska-playground",
+  "cases": 24,
+  "compatibilityProbes": 3,
+  "nativeCaptures": 54,
+  "allLocaleControlRectsEqual": true,
+  "naturalFrameWidthsDifferByLocale": true,
+  "rendererAccepted": false,
+  "runs": [
+    {
+      "stand": "form-native-command-overflow-d0o1hsjl",
+      "compatibility": "Version8_3_27",
+      "cases": 18,
+      "sourceFiles": 660,
+      "sourceHashesSha256": "1255656ac923d95d685fee3688768fa9896d9dcd573e89500ac9cbb24b70832c",
+      "metrics": {
+        "ru": "f62ce1023ea6e5080e4451b0aca9b1cb8f946da861e38fc6054b566c9893097a",
+        "en": "b266db15f1e2cf83deb646f9e757a2356fc67079d9ac0c6ebe3177083908293c"
+      },
+      "captureInputs": {
+        "cases.json": "d2c5d387fbb4b351589537a46b68252b8f6b4a257c44b5230c14f983f187edba",
+        "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+        "eska-overflow-native-prepare.py": "b6f21b509128d99695a5d476a4b5b1baeea9d8a8f2465ec41b1a51ebeb67c018",
+        "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+        "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+        "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+        "run-heading.py": "eed13a5712fffd89dbdf766746bc58f0fffdb0242e7487e2afffcc274335d5ab"
+      }
+    },
+    {
+      "stand": "form-native-command-plain-25nkl9zr",
+      "compatibility": "Version8_3_27",
+      "cases": 4,
+      "sourceFiles": 668,
+      "sourceHashesSha256": "f54e9f2a1d0e6e316add5c362706414f0202791813c6630abb9ed00daa589a7a",
+      "metrics": {
+        "ru": "55339e1882729e7c03efa773911d0ad512004e2f255ca1c2120f5ee352c3b65d",
+        "en": "c78c3e4802cf084f6be2bb60279f5c914e7ac4890bcfd5963936083125077083"
+      },
+      "captureInputs": {
+        "cases.json": "7c4d395685791f1dc842b9de0a6006a3c0ec8479f441c3e952229684115dca62",
+        "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+        "eska-overflow-plain-prepare.py": "1409a4c54a55904e94966d4c029b94045921cc8bc4462c7fdef769ee4ee22392",
+        "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+        "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+        "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+        "run-heading.py": "79e3cccec3e0a4245f0241214ce3be2d5778444776ed89c318fdf85bce16a4c5"
+      }
+    },
+    {
+      "stand": "form-native-command-natural-guqwkk3y",
+      "compatibility": "Version8_3_27",
+      "cases": 2,
+      "sourceFiles": 664,
+      "sourceHashesSha256": "b0d7be7b4ed0985addd06e0b7ebb772b379f0068eac21f2946bee636844ea5df",
+      "metrics": {
+        "ru": "6946459130522f6e37800d159e7a5f96dcfe4867b8ba127212cd38acf7a3d90f",
+        "en": "2ab9b7512d4a0d5a7442ac8ac08a2bde10e474f2339daf7e79f9acbef3db4abd"
+      },
+      "captureInputs": {
+        "cases.json": "e7ed3801a0e3688360a51ca197c3443df6dc0895a109ee415986718a96d36e68",
+        "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+        "eska-overflow-natural-prepare.py": "8babbbd1b23dafcd33cb4b6ab006e392dfca88076fcd19c174017052d07ed1f7",
+        "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+        "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+        "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+        "run-heading.py": "919f33a342f0498b0dba3238e699bee8c5c9dd02d9eee906798f8d9464422823"
+      }
+    },
+    {
+      "stand": "form-native-command-overflow-compat24-bfxo4wei",
+      "compatibility": "Version8_3_24",
+      "cases": 3,
+      "sourceFiles": 660,
+      "sourceHashesSha256": "c7668a32cef9adada373de2355e11c51d92045b28c451d76417c05e30f07c974",
+      "metrics": {
+        "ru": "2cdf3dc3c5bfd24ae147938c4e4c3e8e305b939bc9b8bc13a4cab6f4eba73d8e",
+        "en": "8fc5ccfd386fc67364c02c9732ebc60be41ac29ded1896f4f2a9114a2da1d7a5"
+      },
+      "captureInputs": {
+        "cases.json": "f5dd511f24d89810951b28417fa907bbf6fffc3cc92cabadf25c3e7db460393d",
+        "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+        "eska-overflow-compat-prepare.py": "5263423b16c53fa24127bbe171a987326494e2715a6906ffccab4cbd84ed4457",
+        "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+        "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+        "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+        "run-heading.py": "5c32f1f262acfd05e8bc03c486d39f3444988dbfcf0b372fff93454479c575fa"
+      }
+    }
+  ],
+  "xmlNormalization": [
+    "UTF-8 without BOM",
+    "LF",
+    "line separators in v8:content encoded as &#10;",
+    "parsed XML tree preserved"
+  ],
+  "compatibilityContextChange": {
+    "path": "Catalogs/NativeGoods.xml",
+    "property": "TabularSection.LineNumberLength",
+    "from": 9,
+    "to": 5,
+    "reason": "Platform rejects lengths other than 5 in compatibility 8.3.26 and below. This dummy catalog does not supply any of the measured form attributes.",
+    "rejectedImport": {
+      "stand": "form-native-command-overflow-compat24-oqdporgu",
+      "exitCode": 255,
+      "logSha256": "88439658f8ce5342f8b4f4c963974e8244fdc34cf5e7e8a622716ae0d9f5e297"
+    }
+  }
+}
