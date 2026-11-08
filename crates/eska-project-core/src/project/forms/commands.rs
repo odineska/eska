@@ -453,6 +453,58 @@ mod tests {
         );
     }
     #[test]
+    fn characteristic_type_object_forms_include_write_commands_without_posting() {
+        let xml = format!(
+            r#"<Form xmlns="{}" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="{}"><AutoCommandBar name="Bar" id="-1"/><Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:ChartOfCharacteristicTypesObject.Questions</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes></Form>"#,
+            super::super::FORM_NAMESPACE,
+            super::super::references::CONFIG,
+        );
+        let project = |source: &str| {
+            root_commands::project(
+                &compose(&parse("form", source.to_owned()).unwrap(), &[]),
+                &[],
+                &mut Vec::new(),
+            )
+        };
+        let commands = project(&xml);
+        assert_eq!(
+            commands
+                .inline
+                .iter()
+                .map(|command| (command.key.as_str(), command.primary))
+                .collect::<Vec<_>>(),
+            [
+                ("Form.StandardCommand.WriteAndClose", true),
+                ("Form.StandardCommand.Write", false),
+            ]
+        );
+        let menu = commands.object_menu.iter().flatten().collect::<Vec<_>>();
+        assert!(
+            menu.iter()
+                .any(|item| item.key == "Form.StandardCommand.Write")
+        );
+        assert!(!menu.iter().any(|item| matches!(
+            item.key.as_str(),
+            "Form.StandardCommand.Post" | "Form.StandardCommand.UndoPosting"
+        )));
+        assert!(
+            project(&xml.replace("<MainAttribute>true", "<MainAttribute>false"))
+                .inline
+                .is_empty(),
+            "only the main attribute supplies object actions"
+        );
+        assert!(
+            project(&xml.replace(
+                "id=\"-1\"/>",
+                "id=\"-1\"><Autofill>false</Autofill></AutoCommandBar>",
+            ))
+            .inline
+            .is_empty(),
+            "an explicitly disabled command bar stays empty"
+        );
+    }
+
+    #[test]
     fn unavailable_server_commands_keep_tree_identity_but_not_desktop_pixels() {
         let raw = form(
             "<ChildItems><Button name=\"Server\" id=\"1\"><CommandName>Form.StandardCommand.OpenFromMainServer</CommandName></Button></ChildItems>",
