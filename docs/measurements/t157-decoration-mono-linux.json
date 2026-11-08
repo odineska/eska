@@ -1,0 +1,431 @@
+{
+  "schemaVersion": 1,
+  "task": "T157",
+  "issue": "https://github.com/odineska/eska/issues/265",
+  "measuredAt": "2026-11-08T02:27:02.470396+00:00",
+  "scope": "Геометрия LabelDecoration на Linux: Liberation Mono, явные и автоматические переносы, пустые и завершающие строки; без исполнения BSL",
+  "profile": {
+    "platform": "8.3.27.2342",
+    "interface": "Taxi",
+    "compatibility": "Version8_3_27",
+    "os": "ALT Linux ARM64",
+    "dpi": 96,
+    "zoom": 100,
+    "locales": [
+      "en",
+      "ru"
+    ],
+    "fullNativeProfileAccepted": false,
+    "windowsAccepted": false
+  },
+  "implementation": {
+    "explorerCommit": "9290e91dedccbc9ce49b1c7934b580924f14e823",
+    "geometryOwner": "Существующий цикл распределения формы; новый ResizeObserver не добавлен",
+    "normalizationOwner": "decorationCaptionProfile",
+    "lineEquality": "Сравниваются позиции явных переносов, общая высота и текст после переноса по ширине",
+    "sourceWritesDuringViewing": false,
+    "backendProtocolChanged": false,
+    "fontMetrics": {
+      "LiberationMono": {
+        "units": 2048,
+        "ascent": 1705,
+        "descent": 615
+      },
+      "NotoSansMonoReferenceFallback": {
+        "units": 1000,
+        "ascent": 1069,
+        "descent": 293
+      }
+    },
+    "algorithm": "Расчёт покрывает округлённые пиксельные и логические метрики Mono. Для явных переносов резервируется объединение с метриками резервного шрифта. Это воспроизведение измерений, а не доказательство внутреннего алгоритма 1С.",
+    "terminalRule": "В проверенном профиле завершающий перенос закрывает строку текста с пробелами; текст без пробелов сохраняет последнюю пустую строку.",
+    "newDependencies": false
+  },
+  "nativeCorpus": {
+    "previousForms": 95,
+    "additionalForms": 66,
+    "totalForms": 161,
+    "totalNativeCaptures": 322,
+    "additionalNativeCaptures": 132,
+    "sourceFilesUnchanged": 2004,
+    "allLocaleGeometryEqual": true,
+    "all66XmlTreesPreservedAfterNormalization": true,
+    "manifest": "tests/fixtures/forms/native-label-lines/capture-manifest.json",
+    "metrics": "tests/fixtures/forms/native-label-lines/metrics.json"
+  },
+  "installedCandidate": {
+    "stand": "form-mono-layout-7dhtcv5y",
+    "runs": [
+      {
+        "run": "form-mono-layout-7dhtcv5y/labels-en",
+        "locale": "en",
+        "scenarioResults": 110,
+        "exactNativeBaselineForms": 95,
+        "fullNativeProfileAccepted": false,
+        "vsixSha256": "b9f9d967a90bd757d68e890882928e2a0ba42d5142f5f6cd1cdef1fb7f6e4607",
+        "runtimeManifestSha256": "1fe0296a33118b947a9a84b0fde312c4773600767422e1e3876675c7d44366c8",
+        "runtimeFiles": 1262,
+        "receipt": {
+          "path": "form-mono-layout-7dhtcv5y/labels-en/receipt.json",
+          "sha256": "338b75dbba76ef308830ec40ce36f109bf3e6f57ebafad47c17382d616cf062b"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-7dhtcv5y/labels-en/driver.log",
+          "sha256": "ccbb67e7c9d5ceb54f5057193502d3e94c8f4169d106d1b715ea8dc52064ba28"
+        },
+        "hostLog": {
+          "path": "form-mono-layout-7dhtcv5y/labels-en/host.log",
+          "sha256": "af44dcb6630f0348528786509ef46e118a3cbbb2aeef5756654953654591979e"
+        }
+      },
+      {
+        "run": "form-mono-layout-7dhtcv5y/labels-ru",
+        "locale": "ru",
+        "scenarioResults": 110,
+        "exactNativeBaselineForms": 95,
+        "fullNativeProfileAccepted": false,
+        "vsixSha256": "b9f9d967a90bd757d68e890882928e2a0ba42d5142f5f6cd1cdef1fb7f6e4607",
+        "runtimeManifestSha256": "1fe0296a33118b947a9a84b0fde312c4773600767422e1e3876675c7d44366c8",
+        "runtimeFiles": 1262,
+        "receipt": {
+          "path": "form-mono-layout-7dhtcv5y/labels-ru/receipt.json",
+          "sha256": "f197df60f4d83a7cdfd46c9dcf5ed7025195c556f5441a58114bbed1af8f2836"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-7dhtcv5y/labels-ru/driver.log",
+          "sha256": "3f0d8311f5195c740a42312bef1cef9d4303b3f23644dcab345d9a689b9e530c"
+        },
+        "hostLog": {
+          "path": "form-mono-layout-7dhtcv5y/labels-ru/host.log",
+          "sha256": "b87ae5f87adebae305462106e47d39e307abd072d4a44aee5660938c551f4382"
+        }
+      },
+      {
+        "run": "form-mono-layout-7dhtcv5y/lines-en",
+        "locale": "en",
+        "scenarioResults": 78,
+        "exactNativeBaselineForms": 66,
+        "fullNativeProfileAccepted": false,
+        "vsixSha256": "b9f9d967a90bd757d68e890882928e2a0ba42d5142f5f6cd1cdef1fb7f6e4607",
+        "runtimeManifestSha256": "1fe0296a33118b947a9a84b0fde312c4773600767422e1e3876675c7d44366c8",
+        "runtimeFiles": 1262,
+        "receipt": {
+          "path": "form-mono-layout-7dhtcv5y/lines-en/receipt.json",
+          "sha256": "082be117235b414ae19fd8065f00471e95bed655b8cd08c4102ba9697a5e867e"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-7dhtcv5y/lines-en/driver.log",
+          "sha256": "90a9acd3ff38334331631262095573fb0fb30bda4c34651e99bb35e2f0786ef7"
+        },
+        "hostLog": {
+          "path": "form-mono-layout-7dhtcv5y/lines-en/host.log",
+          "sha256": "64bfb4b8a8c483abc11d0177f2059d911552cc63557ed9df1224efc19caa8f98"
+        }
+      },
+      {
+        "run": "form-mono-layout-7dhtcv5y/lines-ru",
+        "locale": "ru",
+        "scenarioResults": 78,
+        "exactNativeBaselineForms": 66,
+        "fullNativeProfileAccepted": false,
+        "vsixSha256": "b9f9d967a90bd757d68e890882928e2a0ba42d5142f5f6cd1cdef1fb7f6e4607",
+        "runtimeManifestSha256": "1fe0296a33118b947a9a84b0fde312c4773600767422e1e3876675c7d44366c8",
+        "runtimeFiles": 1262,
+        "receipt": {
+          "path": "form-mono-layout-7dhtcv5y/lines-ru/receipt.json",
+          "sha256": "355c9a2c4965f47958d8ad4bd18297994f5b2dc60b26810ff2fed203015ea051"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-7dhtcv5y/lines-ru/driver.log",
+          "sha256": "ed6e37e2a3633860d728b09bb1338ea119dd3979f7c04e5e1fde41bb8400ace0"
+        },
+        "hostLog": {
+          "path": "form-mono-layout-7dhtcv5y/lines-ru/host.log",
+          "sha256": "44ba14bbe69ca895a9c01db2a8ced39cd58d1144cfe4d689f3c575aa3e8f796d"
+        }
+      }
+    ],
+    "scenarioResults": 376,
+    "exactNativeBaselineChecks": 322,
+    "sourceHashFiles": 1087,
+    "sourceHashesUnchanged": true,
+    "sourceHashesBefore": {
+      "path": "form-mono-layout-7dhtcv5y/source-hashes-before.json",
+      "sha256": "c3643428a48f22ee0cd8988dd55b254326d51c87e29adf7aecf2628da834eb78"
+    },
+    "sourceHashesAfter": {
+      "path": "form-mono-layout-7dhtcv5y/source-hashes-after.json",
+      "sha256": "c3643428a48f22ee0cd8988dd55b254326d51c87e29adf7aecf2628da834eb78"
+    }
+  },
+  "installedFinal": {
+    "stand": "form-mono-layout-zrqvw1ff",
+    "runs": [
+      {
+        "run": "form-mono-layout-zrqvw1ff/labels-en",
+        "locale": "en",
+        "scenarioResults": 110,
+        "exactNativeBaselineForms": 95,
+        "fullNativeProfileAccepted": false,
+        "vsixSha256": "46d69135d43a14e10b6e77d91229310e1a4fc5a2bec57cf7a046317a2cb64ef8",
+        "runtimeManifestSha256": "b1de34ab26b4672242f806fe7d9c8eb1c26d6185f3754ab3151719402accac3b",
+        "runtimeFiles": 1262,
+        "receipt": {
+          "path": "form-mono-layout-zrqvw1ff/labels-en/receipt.json",
+          "sha256": "446350985b8ddb12da6bf4665914f63bd7b7c2820a7845ff4bff27ffaa390bb2"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-zrqvw1ff/labels-en/driver.log",
+          "sha256": "5860a6f982ac04f2876b31f21f8ae836badd954c959ec7e04d885d2eb7c4c92f"
+        },
+        "hostLog": {
+          "path": "form-mono-layout-zrqvw1ff/labels-en/host.log",
+          "sha256": "1e296c5fd7c2d50b960044e4823e71f2b379d8de20d99150413d02704acdb03c"
+        }
+      },
+      {
+        "run": "form-mono-layout-zrqvw1ff/labels-ru",
+        "locale": "ru",
+        "scenarioResults": 110,
+        "exactNativeBaselineForms": 95,
+        "fullNativeProfileAccepted": false,
+        "vsixSha256": "46d69135d43a14e10b6e77d91229310e1a4fc5a2bec57cf7a046317a2cb64ef8",
+        "runtimeManifestSha256": "b1de34ab26b4672242f806fe7d9c8eb1c26d6185f3754ab3151719402accac3b",
+        "runtimeFiles": 1262,
+        "receipt": {
+          "path": "form-mono-layout-zrqvw1ff/labels-ru/receipt.json",
+          "sha256": "f4ab272cf0403d15c3e4ff00dd741623299680ef3da8c578812f3d16c1c97f0f"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-zrqvw1ff/labels-ru/driver.log",
+          "sha256": "e353c81ceac3e2025be8d1f4ec0bf5e36b0ff1702d773dc66c818c4a02b609e2"
+        },
+        "hostLog": {
+          "path": "form-mono-layout-zrqvw1ff/labels-ru/host.log",
+          "sha256": "5e8ff0a2570a6ce4806e79e5c217cf0faa0d3c51edd763dfa6f0142fbdab1996"
+        }
+      },
+      {
+        "run": "form-mono-layout-zrqvw1ff/lines-en",
+        "locale": "en",
+        "scenarioResults": 78,
+        "exactNativeBaselineForms": 66,
+        "fullNativeProfileAccepted": false,
+        "vsixSha256": "46d69135d43a14e10b6e77d91229310e1a4fc5a2bec57cf7a046317a2cb64ef8",
+        "runtimeManifestSha256": "b1de34ab26b4672242f806fe7d9c8eb1c26d6185f3754ab3151719402accac3b",
+        "runtimeFiles": 1262,
+        "receipt": {
+          "path": "form-mono-layout-zrqvw1ff/lines-en/receipt.json",
+          "sha256": "e30eb59a1aaa31645a5647c517f83359926a1d24e158021c1e17ac073bce4ebe"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-zrqvw1ff/lines-en/driver.log",
+          "sha256": "e2f47624e04bc5896bafa16438444cfef215b54ebc7b04009fb7109e167dd66c"
+        },
+        "hostLog": {
+          "path": "form-mono-layout-zrqvw1ff/lines-en/host.log",
+          "sha256": "2e69438dd4539881db0ae6e06766f986c6009850d0170b8c48f216e5420a6481"
+        }
+      },
+      {
+        "run": "form-mono-layout-zrqvw1ff/lines-ru",
+        "locale": "ru",
+        "scenarioResults": 78,
+        "exactNativeBaselineForms": 66,
+        "fullNativeProfileAccepted": false,
+        "vsixSha256": "46d69135d43a14e10b6e77d91229310e1a4fc5a2bec57cf7a046317a2cb64ef8",
+        "runtimeManifestSha256": "b1de34ab26b4672242f806fe7d9c8eb1c26d6185f3754ab3151719402accac3b",
+        "runtimeFiles": 1262,
+        "receipt": {
+          "path": "form-mono-layout-zrqvw1ff/lines-ru/receipt.json",
+          "sha256": "5e2ce79e4fefa781327031ef54174da14bf701851027541e1a65fbfef1ae3a47"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-zrqvw1ff/lines-ru/driver.log",
+          "sha256": "3a94a1742318c476f41ef0c8cf6fa66195399e0bc571105d3d9cad7c8bda5a3d"
+        },
+        "hostLog": {
+          "path": "form-mono-layout-zrqvw1ff/lines-ru/host.log",
+          "sha256": "79a0dc889f296554d9625825379644e1518926f971f6080b000590d592cbfe63"
+        }
+      }
+    ],
+    "scenarioResults": 376,
+    "exactNativeBaselineChecks": 322,
+    "sourceHashFiles": 1087,
+    "sourceHashesUnchanged": true,
+    "sourceHashesBefore": {
+      "path": "form-mono-layout-zrqvw1ff/source-hashes-before.json",
+      "sha256": "f1a258052bd0e4ba23612393889a052019470b989332f9d17bfbc4939bdb9353"
+    },
+    "sourceHashesAfter": {
+      "path": "form-mono-layout-zrqvw1ff/source-hashes-after.json",
+      "sha256": "f1a258052bd0e4ba23612393889a052019470b989332f9d17bfbc4939bdb9353"
+    }
+  },
+  "wholeFormRegression": {
+    "stand": "form-mono-layout-whole-7qmy71ff",
+    "comparisonStand": "form-label-layout-whole-f9fu8_q7",
+    "runs": [
+      {
+        "run": "form-mono-layout-whole-7qmy71ff/bsp-en",
+        "mode": "bsp",
+        "locale": "en",
+        "passed": true,
+        "geometrySamples": 12,
+        "unchangedGeometrySamples": 12,
+        "allGeometryUnchanged": true,
+        "receipt": {
+          "path": "form-mono-layout-whole-7qmy71ff/bsp-en/receipt.json",
+          "sha256": "d52bccccb241a67cd29a9dc9299a54c2224265f8efea4961b8155dd0ab5c643c"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-whole-7qmy71ff/bsp-en/driver.log",
+          "sha256": "cfe1e507eb0ffb9d4ee9198b1cbbaa72413ddee6e39870ec905a4084609a09c8"
+        }
+      },
+      {
+        "run": "form-mono-layout-whole-7qmy71ff/bsp-ru",
+        "mode": "bsp",
+        "locale": "ru",
+        "passed": true,
+        "geometrySamples": 12,
+        "unchangedGeometrySamples": 12,
+        "allGeometryUnchanged": true,
+        "receipt": {
+          "path": "form-mono-layout-whole-7qmy71ff/bsp-ru/receipt.json",
+          "sha256": "d2ead1a514fb262504c980309860565f908666a6c578a8aaa0e1c91f1424e767"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-whole-7qmy71ff/bsp-ru/driver.log",
+          "sha256": "876f131625db98df11386f9c675428ab626f24e65aec02f2dca3408faf3b6d24"
+        }
+      },
+      {
+        "run": "form-mono-layout-whole-7qmy71ff/loan-docked-en",
+        "mode": "loan-docked",
+        "locale": "en",
+        "passed": true,
+        "geometrySamples": 9,
+        "unchangedGeometrySamples": 9,
+        "allGeometryUnchanged": true,
+        "receipt": {
+          "path": "form-mono-layout-whole-7qmy71ff/loan-docked-en/receipt.json",
+          "sha256": "a8b8226955878af69f9974a42d57ccdc0481809b40801888b344fbccd379a10b"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-whole-7qmy71ff/loan-docked-en/driver.log",
+          "sha256": "bf2046017909929b64548c816c2d87889490d03f48cf530ae91067f3c55a0171"
+        }
+      },
+      {
+        "run": "form-mono-layout-whole-7qmy71ff/loan-docked-ru",
+        "mode": "loan-docked",
+        "locale": "ru",
+        "passed": true,
+        "geometrySamples": 9,
+        "unchangedGeometrySamples": 9,
+        "allGeometryUnchanged": true,
+        "receipt": {
+          "path": "form-mono-layout-whole-7qmy71ff/loan-docked-ru/receipt.json",
+          "sha256": "cbd4eb57bbec8fae9e6dc44a68df81a7de0142213725f2854edf0877c11e18c9"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-whole-7qmy71ff/loan-docked-ru/driver.log",
+          "sha256": "14605c48f8c04ad802dca47cfdf780083f52cb80b12bfd320d112b6ef99fd473"
+        }
+      },
+      {
+        "run": "form-mono-layout-whole-7qmy71ff/loan-detached-en",
+        "mode": "loan-detached",
+        "locale": "en",
+        "passed": true,
+        "geometrySamples": 9,
+        "unchangedGeometrySamples": 9,
+        "allGeometryUnchanged": true,
+        "receipt": {
+          "path": "form-mono-layout-whole-7qmy71ff/loan-detached-en/receipt.json",
+          "sha256": "a5f5b2e99b25b6bc72ae6ea5fae516a46131fb1bd381d35e28c4a6fdfc3f5740"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-whole-7qmy71ff/loan-detached-en/driver.log",
+          "sha256": "0dcb91ca5fd6e8490f20f1f5f009da77a50842de3222ea0092539ff66b180f12"
+        }
+      },
+      {
+        "run": "form-mono-layout-whole-7qmy71ff/loan-detached-ru",
+        "mode": "loan-detached",
+        "locale": "ru",
+        "passed": true,
+        "geometrySamples": 9,
+        "unchangedGeometrySamples": 9,
+        "allGeometryUnchanged": true,
+        "receipt": {
+          "path": "form-mono-layout-whole-7qmy71ff/loan-detached-ru/receipt.json",
+          "sha256": "d12b9c19c4ec953331405012222753f385adfd98fe90196474ea7a5bf4185b86"
+        },
+        "driverLog": {
+          "path": "form-mono-layout-whole-7qmy71ff/loan-detached-ru/driver.log",
+          "sha256": "e729264b6e61849c5a3fc3fda92d450bbcf25c639f5ecd7c549b1f91c902211b"
+        }
+      }
+    ],
+    "geometrySamples": 60,
+    "allGeometryUnchanged": true,
+    "sourceForms": 4,
+    "sourceHashesUnchanged": true,
+    "sourceHashes": {
+      "united-bsp-context-763t8lxb/src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "united-bsp-context-763t8lxb/src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "united-bsp-context-763t8lxb/src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875"
+    },
+    "fullNativeGeometryAccepted": false
+  },
+  "verification": {
+    "node": {
+      "total": 696,
+      "passed": 688,
+      "skipped": 8,
+      "failed": 0,
+      "log": {
+        "path": "form-mono-node-az3xbd9b/node.log",
+        "sha256": "b237fc1edc088c3f214c09378d1b443216c0df4fb4a6a36f7a55ff24b81816bf"
+      }
+    },
+    "typescriptCheck": true,
+    "compile": true,
+    "package": {
+      "nodeVsceExitCode": 0,
+      "vsix": {
+        "path": "form-mono-layout-zrqvw1ff/artifacts/viewer.vsix",
+        "sha256": "46d69135d43a14e10b6e77d91229310e1a4fc5a2bec57cf7a046317a2cb64ef8"
+      },
+      "bunAttempt": {
+        "exitCode": 143,
+        "reason": "VSCE под Bun более 155 секунд не дописывал незавершённый ZIP. Завершён только проверенный собственный процесс; тот же VSCE успешно выполнился под Node. Pipeline не менялся.",
+        "diagnosticStand": "form-native-mono-lines-d6uh5kwn/diagnostics"
+      }
+    },
+    "rust": {
+      "rerun": false,
+      "reason": "В eska изменены только native-эталоны и документация; исходники приложения и зависимости не менялись после полного Rust-прогона.",
+      "lastFullChecks": "1564 passed, 19 ignored; fmt/check/clippy passed",
+      "sourceBaselineCommit": "ee35616"
+    },
+    "diffCheck": true
+  },
+  "limitations": [
+    "Приняты измеренные рамки и прямоугольники контрольных полей. Полный пиксельный профиль, все шрифты, отрисовка глифов, DPI, масштабы, native-resize и Windows не приняты.",
+    "В MonoLines3 по 10 pt тёмные строки native: [76..88,95..107,111..123], просмотрщика: [75..87,94..106,110..122]. Глифы на 1 px выше, остаются различия grayscale/LCD.",
+    "Новый вертикальный профиль Mono относится к LabelDecoration; для остальных контролов требуется отдельная приёмка гарнитур и шрифтов.",
+    "Полная сверка БСП при одинаковой области просмотра остаётся открытой: рамка мастера 814 px вместо native 812 px и горизонтальные позиции. Новая калибровка цветов не выполнялась.",
+    "Ветки задачи сохранены; merge, rebase, push, release, изменение версии и pipeline публикации не выполнялись."
+  ],
+  "windowsHandoff": [
+    "Эталон Windows — собственный Конфигуратор 8.3.27. Проверить доступность гарнитур и их подстановку; не переносить Linux-метрики Noto/Mono в рендеринг Windows.",
+    "Выполнить import/export двух галерей, снять 161 форму ru/en при 96 DPI и 100%, сохранить SHA-256 XML и снимков.",
+    "Запустить suites decorations и decoration-lines на одной установленной паре VSIX/backend. Сверять Windows-прямоугольники; повторить dirty XML, выбор, DOM, отдельное окно и resize.",
+    "Сверить целиком БСП и ВыдачаЗайма при одинаковой области просмотра. В пиксельных сравнениях исключать только согласованные случайные данные диаграмм."
+  ]
+}
