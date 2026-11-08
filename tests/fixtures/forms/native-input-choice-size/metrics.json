@@ -1,0 +1,790 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "catalogSha256": "18d4f7ff8c42ba96cdacae27d6df5cab9e025f42c35995ced0b51ab57ecef0f2",
+  "enumSha256": "ab910bb7897cb3eaa8bf4fee9daac4c2d838f05c5389bf2214ee4f810187f010",
+  "rows": [
+    {
+      "name": "Multiline12Plain",
+      "nativeForm": "ProbeWidthHeading482001",
+      "xmlSha256": "d035dff5436c47282c3d4416ed479211c1c89abb4e2ac80fb901e202ee40c3e2",
+      "canonicalExportSha256": "bb5dbecffa096b7972f9d2d42806f66be50b64046732fb2e2614d6dcb1ad75de",
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "12",
+        "Height": "2",
+        "HorizontalStretch": "false",
+        "MultiLine": "true",
+        "ChoiceButton": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "type": {
+        "kind": "string",
+        "types": [
+          {
+            "namespace": "http://www.w3.org/2001/XMLSchema",
+            "name": "string"
+          }
+        ],
+        "length": 0
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "label": null,
+      "controls": {
+        "Reference": {
+          "choice": false,
+          "open": false,
+          "list": false,
+          "nativeBorder": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            165,
+            167
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              131,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              131,
+              51
+            ]
+          },
+          "screenshotSha256": "3397c311e494876f97da3350a14061a1f73f810d8020e398296a9dd1e92af0e6"
+        },
+        "ru": {
+          "frame": [
+            165,
+            167
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              131,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              131,
+              51
+            ]
+          },
+          "screenshotSha256": "7eff53a7becfb435e9a649477261f853cba7b30d4b0676f80fd1f097d8314fc5"
+        }
+      }
+    },
+    {
+      "name": "Multiline12Choice",
+      "nativeForm": "ProbeWidthHeading482002",
+      "xmlSha256": "682652b05d801b026105066de7b1e195fd85ef4b54b6a6066d0480c3d510668e",
+      "canonicalExportSha256": "a389dd78e8177c19011630b8f1af136a8bf65645e916b90304ca715e15de8e51",
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "12",
+        "Height": "2",
+        "HorizontalStretch": "false",
+        "MultiLine": "true",
+        "ChoiceButton": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "type": {
+        "kind": "string",
+        "types": [
+          {
+            "namespace": "http://www.w3.org/2001/XMLSchema",
+            "name": "string"
+          }
+        ],
+        "length": 0
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "label": null,
+      "controls": {
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": false,
+          "nativeBorder": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            186,
+            167
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              131,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              51
+            ]
+          },
+          "screenshotSha256": "2add1b983d972829c3175da94216aa5437cef744ae402ed12f99d49116294271"
+        },
+        "ru": {
+          "frame": [
+            186,
+            167
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              131,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              51
+            ]
+          },
+          "screenshotSha256": "cc6074adece0a32699c08ad76a259b1064b14e8d0d1851bc8c62d05a13ec9839"
+        }
+      }
+    },
+    {
+      "name": "Multiline61Plain",
+      "nativeForm": "ProbeWidthHeading482003",
+      "xmlSha256": "5ae1ce05cabb1b6a861f35e5bffc5d79c7cec29bff1235717654ea7b8eaa46a7",
+      "canonicalExportSha256": "48feb48411adb569d641e9f89cfffcacf1821351e3e1199204ea4ebb55cb2f57",
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "61",
+        "Height": "2",
+        "HorizontalStretch": "false",
+        "MultiLine": "true",
+        "ChoiceButton": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "type": {
+        "kind": "string",
+        "types": [
+          {
+            "namespace": "http://www.w3.org/2001/XMLSchema",
+            "name": "string"
+          }
+        ],
+        "length": 0
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "label": null,
+      "controls": {
+        "Reference": {
+          "choice": false,
+          "open": false,
+          "list": false,
+          "nativeBorder": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            655,
+            167
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              131,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              621,
+              51
+            ]
+          },
+          "screenshotSha256": "9c8fac586fd7c16e7e34cd63f9c151cb64628e9d22313cac14ee4eb4e4f3e78f"
+        },
+        "ru": {
+          "frame": [
+            655,
+            167
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              131,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              621,
+              51
+            ]
+          },
+          "screenshotSha256": "85ef397a1d600f0bafb173d7a7e30d6540d6232a32879c4f3a254f0b1181a681"
+        }
+      }
+    },
+    {
+      "name": "Multiline61Choice",
+      "nativeForm": "ProbeWidthHeading482004",
+      "xmlSha256": "0f6fffed54395e67dbb02f124ba6ce1e7b0f84015ec80c95a324407affec2435",
+      "canonicalExportSha256": "f9d7156e59f365773f32ff68792daacd28928fe49aba1a1e80fa5399e1dde0e2",
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "61",
+        "Height": "2",
+        "HorizontalStretch": "false",
+        "MultiLine": "true",
+        "ChoiceButton": "true",
+        "BackColor": "#DBF2FB"
+      },
+      "type": {
+        "kind": "string",
+        "types": [
+          {
+            "namespace": "http://www.w3.org/2001/XMLSchema",
+            "name": "string"
+          }
+        ],
+        "length": 0
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "label": null,
+      "controls": {
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": false,
+          "nativeBorder": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            676,
+            167
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              131,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              642,
+              51
+            ]
+          },
+          "screenshotSha256": "0ca28ff730799edd58bc16d4876ddb9052ae7a1a19e83820eab04e0fd8b257dd"
+        },
+        "ru": {
+          "frame": [
+            676,
+            167
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              131,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              642,
+              51
+            ]
+          },
+          "screenshotSha256": "5b37e8d4edb74b688377a5d227d7944be86a0f8600de9e7a84177988a92cbf22"
+        }
+      }
+    },
+    {
+      "name": "EnumNoneEdit",
+      "nativeForm": "ProbeWidthHeading482005",
+      "xmlSha256": "6c8460288b1ea00821778ca030ff7b68f9b549dce58851da6cb02365ecb2acb9",
+      "canonicalExportSha256": "fbb1dadb1f7a2564d7ca6afc611237976a24725d8f6e389ebcb6092f33655e1b",
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "12",
+        "HorizontalStretch": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "type": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "label": null,
+      "controls": {
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "99da2a52d162699c3d644722e5fbafd51b7db71e646ce41fb5393bb007aad117"
+        },
+        "ru": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "8f5664151c235a2a6e75f30f81ef9ab505fadc118b48ff2f2bd530e03e96f1b9"
+        }
+      }
+    },
+    {
+      "name": "EnumNoneFixed",
+      "nativeForm": "ProbeWidthHeading482006",
+      "xmlSha256": "c44a0b3cb62be36395a12bc7b73307abd5508d11df60a0060a9211a7eb5ac0b3",
+      "canonicalExportSha256": "3c915fa6ab002f8af33402224c123221879cc34962aa19561e9252f951e69426",
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "None",
+        "Width": "12",
+        "HorizontalStretch": "false",
+        "TextEdit": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "type": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "label": null,
+      "controls": {
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "fe9ce743ba6bd6e3d3aeb77dffe03b98d5d2dd30129ecb84120123a31b55e68c"
+        },
+        "ru": {
+          "frame": [
+            186,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              13,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "e0d44f37ec08986e72494ff6bb801774f86aae12e016fa38c2562bff62a26d56"
+        }
+      }
+    },
+    {
+      "name": "EnumTitleEdit",
+      "nativeForm": "ProbeWidthHeading482007",
+      "xmlSha256": "b8b0e550f5d70eb0442a41977f6cbfddb40bbd73d7a5befe66f09914ccdd3325",
+      "canonicalExportSha256": "96421a6356c35754d52c6778ead7369aaff587eff8fb5d0465c8ea72018c784f",
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "Left",
+        "Width": "12",
+        "HorizontalStretch": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "type": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "label": "Вид:",
+      "controls": {
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            219,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              46,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "41d75839b69b1dcc419b2c830142bc1a5614bf6d7920bc464b7f3a71c27d54c5"
+        },
+        "ru": {
+          "frame": [
+            219,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              46,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "3841a0642d37be693a523eeb05660c014ec5f570c1a5101ce020951fe08b9787"
+        }
+      }
+    },
+    {
+      "name": "EnumTitleFixed",
+      "nativeForm": "ProbeWidthHeading482008",
+      "xmlSha256": "26b1efc0e0541dba70833c96397d98d8f7196596ead2c6a01eefa8b204de4ae2",
+      "canonicalExportSha256": "bc67ccf7c3e9692baafccb3c7cb629a25f16d35e96d703c8d42f0cb4ae926d40",
+      "properties": {
+        "DataPath": "Ref",
+        "TitleLocation": "Left",
+        "Width": "12",
+        "HorizontalStretch": "false",
+        "TextEdit": "false",
+        "BackColor": "#DBF2FB"
+      },
+      "type": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "font": {
+        "face": null,
+        "points": 10,
+        "weight": 400,
+        "italic": false,
+        "underline": false,
+        "strikeout": false
+      },
+      "label": "Вид:",
+      "controls": {
+        "Reference": {
+          "choice": true,
+          "open": false,
+          "list": true,
+          "nativeBorder": false
+        }
+      },
+      "locales": {
+        "en": {
+          "frame": [
+            219,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              46,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "59d00e8e2f2eabffa8136a322593c10ee8196b4143d1b872b5a1ca4b39f7d696"
+        },
+        "ru": {
+          "frame": [
+            219,
+            139
+          ],
+          "fields": {
+            "Above": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Below": [
+              13,
+              103,
+              21,
+              23
+            ],
+            "Reference": [
+              46,
+              71,
+              152,
+              23
+            ]
+          },
+          "screenshotSha256": "406661c9dbde55585f6c648061dc411e34a81cd41fd83602d9b6fd5a1cea7cba"
+        }
+      }
+    }
+  ]
+}
