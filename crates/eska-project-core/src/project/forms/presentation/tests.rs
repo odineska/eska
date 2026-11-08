@@ -5,6 +5,70 @@ use crate::project::{
 };
 
 #[test]
+fn buttons_without_command_bindings_remain_inspectable_but_are_not_displayed() {
+    let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" version="2.20">
+      <ChildItems>
+        <Button name="Missing" id="1"/>
+        <Button name="Empty" id="2"><CommandName/></Button>
+        <Button name="Zero" id="3"><CommandName>0</CommandName></Button>
+        <Button name="Blank" id="4"><CommandName> </CommandName></Button>
+        <Button name="Bound" id="5"><CommandName>Form.StandardCommand.Close</CommandName></Button>
+        <Button name="Unresolved" id="6"><CommandName>Form.Command.LoadedLater</CommandName></Button>
+        <CommandBar name="Bar" id="7"><ChildItems>
+          <Button name="BarEmpty" id="8"><CommandName>0</CommandName></Button>
+          <Button name="BarBound" id="9"><CommandName>Form.StandardCommand.Close</CommandName></Button>
+        </ChildItems></CommandBar>
+      </ChildItems>
+    </Form>"#;
+    let document = parse("commands", source.into()).unwrap();
+    let form = compose(&document, &[]);
+    let view = present(&form, &[document], &[]);
+    let displayed = |id| {
+        view.elements
+            .iter()
+            .find(|item| item.identity.key == super::super::ElementKey::Xml(id))
+            .unwrap()
+            .displayed
+    };
+    assert_eq!(form.root.children.len(), 7);
+    assert_eq!(form.root.children[6].children.len(), 2);
+    for id in [1, 2, 3, 4, 8] {
+        assert!(!displayed(id), "unbound button {id}");
+    }
+    for id in [5, 6, 9] {
+        assert!(displayed(id), "explicit command {id}");
+    }
+}
+
+#[test]
+fn native_button_without_command_does_not_raise_the_group_minimum() {
+    let document = parse(
+        "native-unbound",
+        include_str!(
+            "../../../../../../tests/fixtures/forms/native-unbound-buttons/FixedGroupHeight3.xml"
+        )
+        .into(),
+    )
+    .unwrap();
+    let form = compose(&document, &[]);
+    let group = &form.root.children[1];
+    let button = &group.children[1];
+    assert_eq!(button.name.as_deref(), Some("Find"));
+    assert_eq!(button.scalar("CommandName"), Some("0"));
+    let view = present(&form, &[document], &[]);
+    let item = |element: &EffectiveElement| {
+        view.elements
+            .iter()
+            .find(|item| item.identity == element.identity)
+            .unwrap()
+    };
+    assert!(!item(button).displayed);
+    assert!(item(&group.children[0]).displayed);
+    assert_eq!(item(group).title_font.points, 12.0);
+    assert!(view.diagnostics.is_empty());
+}
+
+#[test]
 fn table_columns_inherit_the_owner_font_without_changing_commands() {
     let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
         xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" version="2.20">

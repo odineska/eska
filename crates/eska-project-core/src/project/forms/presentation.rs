@@ -639,6 +639,11 @@ fn is_displayed(
             super::ElementFamily::Field | super::ElementFamily::Table
         )
     });
+    // Designer retains unbound buttons in the tree but omits their preview widgets.
+    let command_bound = element.kind != Some(ElementKind::Button)
+        || element
+            .scalar("CommandName")
+            .is_some_and(|name| !matches!(name.trim(), "" | "0"));
     if needs_binding
         && binding.is_none()
         && let Some(path) = element
@@ -651,7 +656,9 @@ fn is_displayed(
             target: None,
         });
     }
-    (!needs_binding || binding.is_some()) && element.scalar("Visible") != Some("false")
+    command_bound
+        && (!needs_binding || binding.is_some())
+        && element.scalar("Visible") != Some("false")
 }
 
 fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
