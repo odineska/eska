@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+	</Title>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<UsualGroup name="ПояснениеДляСопоставленияДанных" id="401">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Сопоставление загружаемых данных</v8:content>
+				</v8:item>
+			</Title>
+			<Group>Vertical</Group>
+			<Behavior>Usual</Behavior>
+			<Representation>NormalSeparation</Representation>
+			<United>false</United>
+			<ExtendedTooltip name="ПояснениеДляСопоставленияДанныхРасширеннаяПодсказка" id="402"/>
+			<ChildItems>
+				<LabelDecoration name="ПояснениеДляПоискаСсылок" id="501">
+					<AutoMaxWidth>false</AutoMaxWidth>
+					<Title formatted="false">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Для некоторых введенных строк не найдено данных в приложении, либо имеется несколько вариантов.
+Для вставки таких строк следует выбрать соответствующие объекты, щелкнув левой кнопкой мыши в колонке "Объект".</v8:content>
+						</v8:item>
+					</Title>
+					<VerticalAlign>Top</VerticalAlign>
+					<ContextMenu name="ПояснениеДляПоискаСсылокКонтекстноеМеню" id="502"/>
+					<ExtendedTooltip name="ПояснениеДляПоискаСсылокРасширеннаяПодсказка" id="503"/>
+				</LabelDecoration>
+				<LabelDecoration name="ПояснениеДляПрикладнойЗагрузки" id="406">
+					<Visible>false</Visible>
+					<AutoMaxWidth>false</AutoMaxWidth>
+					<Title formatted="false">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Для некоторых загруженных данных в приложении не найдено однозначного соответствия.  Для несопоставленных данных будут созданы
+новые записи, либо они будут пропущены (в зависимости от настройки). При необходимости возможно сопоставить данные вручную, 
+заполнив колонку "%1".</v8:content>
+						</v8:item>
+					</Title>
+					<VerticalAlign>Top</VerticalAlign>
+					<ContextMenu name="ПояснениеДляПрикладнойЗагрузкиКонтекстноеМеню" id="407"/>
+					<ExtendedTooltip name="ПояснениеДляПрикладнойЗагрузкиРасширеннаяПодсказка" id="408"/>
+				</LabelDecoration>
+				<LabelDecoration name="ПояснениеДляТабличнойЧасти" id="464">
+					<Visible>false</Visible>
+					<AutoMaxWidth>false</AutoMaxWidth>
+					<Title formatted="true">
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Для некоторых значений в колонках таблицы не найдены однозначные соответствия в данных приложении (выделены &lt;colorstyle -16&gt;красным цветом&lt;/&gt;).
+Необходимо сопоставить эти значения с данными в приложении вручную. 
+В случае если в приложении отсутствуют необходимые данные, то ввести их.</v8:content>
+						</v8:item>
+					</Title>
+					<ContextMenu name="ПояснениеДляТабличнойЧастиКонтекстноеМеню" id="465"/>
+					<ExtendedTooltip name="ПояснениеДляТабличнойЧастиРасширеннаяПодсказка" id="466"/>
+				</LabelDecoration>
+			</ChildItems>
+		</UsualGroup>
+		<InputField name="Below" id="50">
+			<DataPath>Name</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<Width>12</Width>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#A8E4B8</BackColor>
+			<ContextMenu name="BelowMenu" id="51"/>
+			<ExtendedTooltip name="BelowTooltip" id="52"/>
+		</InputField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Name" id="1">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Choice" id="2">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>10</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Flag" id="3">
+			<Type>
+				<v8:Type>xs:boolean</v8:Type>
+			</Type>
+		</Attribute>
+	</Attributes>
+</Form>
