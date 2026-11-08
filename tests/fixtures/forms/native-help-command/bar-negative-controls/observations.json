@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "stand": "form-native-help-command-bar-quavbfy3",
+  "sourcesUnchanged": true,
+  "runs": [
+    {
+      "locale": "en",
+      "exitCode": 0,
+      "sourcesUnchanged": true
+    },
+    {
+      "locale": "ru",
+      "exitCode": 0,
+      "sourcesUnchanged": true
+    }
+  ],
+  "sources": [
+    {
+      "name": "BarNoPicture16",
+      "file": "BarNoPicture16.xml",
+      "xmlSha256": "dfadb626a449eebceae0c9e8859e9bd41361af118fcd30beb72beedcfdbbee55",
+      "canonicalExportSha256": "a88471c17a439fd5e2aa08bcfa7c959f3360a2f0b422a46e62d09719980511f0"
+    },
+    {
+      "name": "BarClearPicture16",
+      "file": "BarClearPicture16.xml",
+      "xmlSha256": "f66c0f83ed0b5a77e30b9cbd5bc68408a96bb8f3c781a34812a3f40a8883db76",
+      "canonicalExportSha256": "003e3a2e0e853004fbbaa259548e05665a2ed837e06a82cbfefa0c810ff0b00a"
+    }
+  ],
+  "captures": [
+    {
+      "name": "BarNoPicture16",
+      "locale": "en",
+      "frame": [
+        142,
+        154
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          21,
+          23
+        ],
+        "Below": [
+          13,
+          118,
+          21,
+          23
+        ]
+      },
+      "redCaptionPixels": 0,
+      "screenshotSha256": "faa9a580363678a9f69fdaf25d5308f3cba65013645d57b5a43cca4d38f674e9",
+      "file": "native-en/ProbeWidthHeading491001.png"
+    },
+    {
+      "name": "BarClearPicture16",
+      "locale": "en",
+      "frame": [
+        142,
+        154
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          21,
+          23
+        ],
+        "Below": [
+          13,
+          118,
+          21,
+          23
+        ]
+      },
+      "redCaptionPixels": 0,
+      "screenshotSha256": "796613c22007ac9191c859460031d52b05ff5c6fbbc576f244b19f15221e14ed",
+      "file": "native-en/ProbeWidthHeading491002.png"
+    },
+    {
+      "name": "BarNoPicture16",
+      "locale": "ru",
+      "frame": [
+        94,
+        154
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          21,
+          23
+        ],
+        "Below": [
+          13,
+          118,
+          21,
+          23
+        ]
+      },
+      "redCaptionPixels": 0,
+      "screenshotSha256": "c39c5bf56cc699e675542b644e888fc44a80e62aace294c0ed3bf56b8aa19dd0",
+      "file": "native-ru/ProbeWidthHeading491001.png"
+    },
+    {
+      "name": "BarClearPicture16",
+      "locale": "ru",
+      "frame": [
+        94,
+        154
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          21,
+          23
+        ],
+        "Below": [
+          13,
+          118,
+          21,
+          23
+        ]
+      },
+      "redCaptionPixels": 0,
+      "screenshotSha256": "932a2f57779dae234ba89a0f75a0ba6bc52782b43074092564c78ccc7b0ea4e8",
+      "file": "native-ru/ProbeWidthHeading491002.png"
+    }
+  ],
+  "scope": "Only the absence of caption is the native oracle for CommandBarButton Picture without an image. Whole command-bar geometry is not accepted here."
+}
