@@ -1,0 +1,1078 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T10:20:11.131188+00:00",
+  "scope": [
+    "T157",
+    "T158"
+  ],
+  "profile": {
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "os": "linux",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "backend": {
+    "apiVersion": {
+      "major": 1,
+      "minor": 42
+    },
+    "commit": "52b2cbc",
+    "sha256": "3ea356d31a6333c27cd5b6ec1ccadd0cb1e416d0e8eb16fcd84ddac192ea4315",
+    "rustChanges": false
+  },
+  "viewer": {
+    "commit": "21bf038a5836af23826d2384414fad9bc75de0a5",
+    "vsixSha256": "645664b916fe9c88385cba5d9584c34b09dcc186884736eb5efc4dd3adb6393f",
+    "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+    "runtimeFiles": 1262
+  },
+  "corpus": {
+    "path": "tests/fixtures/forms/native-text-inputs",
+    "forms": 78,
+    "controls": 286,
+    "captures": 156,
+    "unchangedSourceFiles": 8386,
+    "rejectedCaptures": [
+      {
+        "stand": "form-native-string-auto-azswldjw",
+        "form": "ProbeWidthHeading46503",
+        "reason": "Large-font form lacks the Below anchor and complete bottom frame. Repeated as three shorter forms."
+      }
+    ],
+    "commits": [
+      "6022890",
+      "fad0e4a"
+    ]
+  },
+  "rules": {
+    "defaultStretch": "Single-line length 0 or >10 stretches; lengths 1..10 do not. Explicit HorizontalStretch overrides. Multiline behavior is preserved.",
+    "fontScaling": "p=round(points*4/3); scaled(n)=round(n*10*(p-1)/12)+11.",
+    "preferredPaint": "Authored Width: trunc(Width)*10+11 plus 21 for requested choice. Automatic: min(scaled(length or 15)+choice*21, scaled(cap)).",
+    "preferredCap": "AutoMaxWidth=true/default:40 units. AutoMaxWidth=false: min(50, MaxWidth or 50) units.",
+    "growthMaximumPaint": "Automatic: max(preferredPaint, scaled(min(length or 40,40))-1). Manual MaxWidth>0: max(preferredPaint, MaxWidth*10+10), independent of font. Manual zero has no growth ceiling.",
+    "choice": "A requested choice button is visible at painted width >=24; a visible button adds one painted pixel beyond its logical box. Allocation and dirty font changes keep this decision reactive.",
+    "horizontalRows": "A field without a title uses one grid track; an empty title track must not impose the former 24px floor.",
+    "sideCaptions": "Single-line text titles use word-shaped native advances and the shared caption inset, verified with five titles at automatic and authored widths.",
+    "columnBorders": "United input tracks include inputPaintedOutset; their Linux spacing is 10px measured from the painted trailing border, including numeric/date choice borders and zero outset for spin controls."
+  },
+  "validation": {
+    "guiConcurrency": 1,
+    "display": "private-headless-Mutter",
+    "artifactSource": "form-batch-w3bwzS",
+    "regressions": "form-text-input-regressions-l3gpuq81",
+    "wholeForms": "form-text-input-whole-1gftrj91",
+    "sourceWrites": false,
+    "checks": {
+      "typescriptCheck": "passed",
+      "compile": "passed",
+      "node": {
+        "tests": 707,
+        "pass": 698,
+        "fail": 0,
+        "skipped": 9
+      },
+      "nodeLog": "form-text-input-regressions-l3gpuq81/node.log",
+      "rust": "Not repeated: only native fixture and documentation files changed in eska."
+    },
+    "runs": [
+      {
+        "group": "gate",
+        "name": "through-align-en",
+        "passed": true,
+        "states": 98,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "gate",
+        "name": "through-align-ru",
+        "passed": true,
+        "states": 98,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "gate",
+        "name": "united-en",
+        "passed": true,
+        "states": 9,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "gate",
+        "name": "united-ru",
+        "passed": true,
+        "states": 9,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "text-inputs-en",
+        "passed": true,
+        "states": 87,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "text-inputs-ru",
+        "passed": true,
+        "states": 87,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "renderer-en",
+        "passed": true,
+        "states": 20,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "renderer-ru",
+        "passed": true,
+        "states": 20,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-borders-en",
+        "passed": true,
+        "states": 52,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-borders-ru",
+        "passed": true,
+        "states": 52,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-dates-en",
+        "passed": true,
+        "states": 42,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-dates-ru",
+        "passed": true,
+        "states": 42,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-choice-en",
+        "passed": true,
+        "states": 6,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-choice-ru",
+        "passed": true,
+        "states": 6,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-dimensions-en",
+        "passed": true,
+        "states": 44,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-dimensions-ru",
+        "passed": true,
+        "states": 44,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-fonts-en",
+        "passed": true,
+        "states": 38,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-fonts-ru",
+        "passed": true,
+        "states": 38,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-stretch-en",
+        "passed": true,
+        "states": 20,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "input-stretch-ru",
+        "passed": true,
+        "states": 20,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "groups-en",
+        "passed": true,
+        "states": 22,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "groups-ru",
+        "passed": true,
+        "states": 22,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "group-spacing-en",
+        "passed": true,
+        "states": 60,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "group-spacing-ru",
+        "passed": true,
+        "states": 60,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "radio-layout-en",
+        "passed": true,
+        "states": 17,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "radio-layout-ru",
+        "passed": true,
+        "states": 17,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "number-inputs-en",
+        "passed": true,
+        "states": 59,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "regressions",
+        "name": "number-inputs-ru",
+        "passed": true,
+        "states": 59,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "whole",
+        "name": "bsp-en",
+        "passed": true,
+        "states": 12,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "whole",
+        "name": "bsp-ru",
+        "passed": true,
+        "states": 12,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "whole",
+        "name": "loan-docked-en",
+        "passed": true,
+        "states": 9,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "whole",
+        "name": "loan-docked-ru",
+        "passed": true,
+        "states": 9,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "whole",
+        "name": "loan-detached-en",
+        "passed": true,
+        "states": 10,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      },
+      {
+        "group": "whole",
+        "name": "loan-detached-ru",
+        "passed": true,
+        "states": 10,
+        "runtimeManifestSha256": "6835ae0614ab1fde12d6bb562644bd50f0d5165ee9f8fd87cc65f912e768d204",
+        "runtimeFiles": 1262
+      }
+    ],
+    "totalStates": 1210,
+    "supersededRuns": [
+      {
+        "artifact": "form-batch-md1gDs",
+        "failure": "String10Part0: fields S02/S03 shifted by 3px after the narrow first field in both locales.",
+        "correction": "Removed the empty caption grid track for horizontal fields with TitleLocation=None. Native references were unchanged."
+      },
+      {
+        "artifact": "form-text-input-regressions-cwxu5ywo",
+        "failure": "ThroughAlign and United each failed in both locales: long single-line titles lost one pixel with design advances.",
+        "correction": "Use word-shaped caption advances; independently verified with ten new paired native forms."
+      },
+      {
+        "artifact": "form-text-input-regressions-ao_zrxed",
+        "failure": "RadioTrue Tail was one pixel too far right after correcting the shared caption origin.",
+        "correction": "Count the painted input border in the column width, then apply the 10px spacing. Do not add a fixed extra pixel to every gap."
+      }
+    ],
+    "newCorpusGeometryTolerancePx": 0,
+    "newCorpusComparisonMasks": [],
+    "existingSuiteResiduals": "Existing ThroughAlign suites retain their recorded caption-origin residuals and case-specific position tolerances; these were not expanded and do not accept the full native profile."
+  },
+  "bspViewerGeometry": [
+    {
+      "sample": 0,
+      "locale": "en",
+      "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1111,
+            "height": 612
+          },
+          "outsideCount": 0
+        }
+      ],
+      "nativePreferredFrame": [
+        811,
+        612
+      ],
+      "preferredFrameEqual": true
+    },
+    {
+      "sample": 1,
+      "locale": "en",
+      "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 785,
+            "height": 796
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 785,
+            "height": 796
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 785,
+            "height": 57
+          },
+          "outsideCount": 14
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1126,
+            "height": 324
+          },
+          "outsideCount": 2
+        }
+      ],
+      "nativePreferredFrame": [
+        801,
+        769
+      ],
+      "preferredFrameEqual": false,
+      "manualTextMaximum": {
+        "nativePaint": [
+          13,
+          216,
+          550,
+          23
+        ],
+        "viewer": [
+          13,
+          217,
+          550,
+          23
+        ],
+        "widthAndHeightEqual": true,
+        "positionEqual": false
+      },
+      "numericFields": {
+        "Длина": {
+          "nativePaint": [
+            77,
+            280,
+            82,
+            23
+          ],
+          "viewer": [
+            77,
+            281,
+            82,
+            23
+          ]
+        },
+        "Точность": {
+          "nativePaint": [
+            77,
+            312,
+            72,
+            23
+          ],
+          "viewer": [
+            77,
+            313,
+            72,
+            23
+          ]
+        },
+        "МинимальноеЗначение": {
+          "nativePaint": [
+            198,
+            344,
+            172,
+            23
+          ],
+          "viewer": [
+            190,
+            345,
+            172,
+            23
+          ]
+        },
+        "МаксимальноеЗначение": {
+          "nativePaint": [
+            198,
+            376,
+            172,
+            23
+          ],
+          "viewer": [
+            196,
+            377,
+            172,
+            23
+          ]
+        },
+        "ШагПолосыРегулирования": {
+          "nativePaint": [
+            312,
+            408,
+            172,
+            23
+          ],
+          "viewer": [
+            312,
+            409,
+            172,
+            23
+          ]
+        }
+      },
+      "table": {
+        "identity": "de603a5141f99d1a99a5a3ed115b26cc87e8e196b29554703095a87fdbf48991:current:190",
+        "kind": "Table",
+        "element": [
+          13,
+          492,
+          600,
+          292
+        ],
+        "control": [
+          13,
+          557,
+          600,
+          227
+        ],
+        "input": null,
+        "hint": "Search (Ctrl+F)",
+        "buttons": [],
+        "help": null,
+        "helpText": null,
+        "commandBar": null,
+        "minimum": "600px",
+        "preferred": "600px",
+        "radios": [],
+        "name": "ДиапазонПодсказок"
+      }
+    },
+    {
+      "sample": 2,
+      "locale": "en",
+      "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 1222,
+            "height": 536
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 1222,
+            "height": 536
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 616,
+            "height": 57
+          },
+          "outsideCount": 17
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1126,
+            "height": 324
+          },
+          "outsideCount": 6
+        }
+      ],
+      "nativePreferredFrame": [
+        1224,
+        541
+      ],
+      "preferredFrameEqual": false
+    },
+    {
+      "sample": 0,
+      "locale": "ru",
+      "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 811,
+            "height": 612
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1111,
+            "height": 612
+          },
+          "outsideCount": 0
+        }
+      ],
+      "nativePreferredFrame": [
+        811,
+        612
+      ],
+      "preferredFrameEqual": true
+    },
+    {
+      "sample": 1,
+      "locale": "ru",
+      "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 785,
+            "height": 796
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 785,
+            "height": 796
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 785,
+            "height": 57
+          },
+          "outsideCount": 14
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1126,
+            "height": 324
+          },
+          "outsideCount": 2
+        }
+      ],
+      "nativePreferredFrame": [
+        801,
+        769
+      ],
+      "preferredFrameEqual": false,
+      "manualTextMaximum": {
+        "nativePaint": [
+          13,
+          216,
+          550,
+          23
+        ],
+        "viewer": [
+          13,
+          217,
+          550,
+          23
+        ],
+        "widthAndHeightEqual": true,
+        "positionEqual": false
+      },
+      "numericFields": {
+        "Длина": {
+          "nativePaint": [
+            77,
+            280,
+            82,
+            23
+          ],
+          "viewer": [
+            77,
+            281,
+            82,
+            23
+          ]
+        },
+        "Точность": {
+          "nativePaint": [
+            77,
+            312,
+            72,
+            23
+          ],
+          "viewer": [
+            77,
+            313,
+            72,
+            23
+          ]
+        },
+        "МинимальноеЗначение": {
+          "nativePaint": [
+            198,
+            344,
+            172,
+            23
+          ],
+          "viewer": [
+            190,
+            345,
+            172,
+            23
+          ]
+        },
+        "МаксимальноеЗначение": {
+          "nativePaint": [
+            198,
+            376,
+            172,
+            23
+          ],
+          "viewer": [
+            196,
+            377,
+            172,
+            23
+          ]
+        },
+        "ШагПолосыРегулирования": {
+          "nativePaint": [
+            312,
+            408,
+            172,
+            23
+          ],
+          "viewer": [
+            312,
+            409,
+            172,
+            23
+          ]
+        }
+      },
+      "table": {
+        "identity": "de603a5141f99d1a99a5a3ed115b26cc87e8e196b29554703095a87fdbf48991:current:190",
+        "kind": "Table",
+        "element": [
+          13,
+          492,
+          600,
+          292
+        ],
+        "control": [
+          13,
+          557,
+          600,
+          227
+        ],
+        "input": null,
+        "hint": "Поиск (Ctrl+F)",
+        "buttons": [],
+        "help": null,
+        "helpText": null,
+        "commandBar": null,
+        "minimum": "600px",
+        "preferred": "600px",
+        "radios": [],
+        "name": "ДиапазонПодсказок"
+      }
+    },
+    {
+      "sample": 2,
+      "locale": "ru",
+      "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "states": [
+        {
+          "label": "preferred-initial",
+          "frame": {
+            "width": 1222,
+            "height": 536
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "preferred-alternate",
+          "frame": {
+            "width": 1222,
+            "height": 536
+          },
+          "outsideCount": 0
+        },
+        {
+          "label": "allocation-640",
+          "frame": {
+            "width": 616,
+            "height": 57
+          },
+          "outsideCount": 17
+        },
+        {
+          "label": "allocation-1150",
+          "frame": {
+            "width": 1126,
+            "height": 324
+          },
+          "outsideCount": 6
+        }
+      ],
+      "nativePreferredFrame": [
+        1224,
+        541
+      ],
+      "preferredFrameEqual": false
+    }
+  ],
+  "loanViewerGeometry": [
+    {
+      "mode": "loan-docked",
+      "locale": "en",
+      "preferred": [
+        1155,
+        875
+      ],
+      "allocatedFrames": [
+        [
+          1028,
+          492
+        ],
+        [
+          1156,
+          875
+        ],
+        [
+          994,
+          875
+        ],
+        [
+          865,
+          875
+        ],
+        [
+          800,
+          875
+        ],
+        [
+          760,
+          875
+        ],
+        [
+          696,
+          760
+        ],
+        [
+          663,
+          760
+        ],
+        [
+          1156,
+          875
+        ]
+      ],
+      "states": 9,
+      "nativeWholeFormAccepted": false
+    },
+    {
+      "mode": "loan-docked",
+      "locale": "ru",
+      "preferred": [
+        1155,
+        875
+      ],
+      "allocatedFrames": [
+        [
+          1028,
+          492
+        ],
+        [
+          1156,
+          875
+        ],
+        [
+          994,
+          875
+        ],
+        [
+          865,
+          875
+        ],
+        [
+          800,
+          875
+        ],
+        [
+          760,
+          875
+        ],
+        [
+          696,
+          760
+        ],
+        [
+          660,
+          760
+        ],
+        [
+          1156,
+          875
+        ]
+      ],
+      "states": 9,
+      "nativeWholeFormAccepted": false
+    },
+    {
+      "mode": "loan-detached",
+      "locale": "en",
+      "preferred": [
+        1155,
+        875
+      ],
+      "allocatedFrames": [
+        [
+          1376,
+          827
+        ],
+        [
+          1156,
+          875
+        ],
+        [
+          994,
+          875
+        ],
+        [
+          865,
+          875
+        ],
+        [
+          800,
+          875
+        ],
+        [
+          760,
+          875
+        ],
+        [
+          696,
+          760
+        ],
+        [
+          663,
+          760
+        ],
+        [
+          1156,
+          875
+        ]
+      ],
+      "states": 10,
+      "nativeWholeFormAccepted": false
+    },
+    {
+      "mode": "loan-detached",
+      "locale": "ru",
+      "preferred": [
+        1155,
+        875
+      ],
+      "allocatedFrames": [
+        [
+          1376,
+          827
+        ],
+        [
+          1156,
+          875
+        ],
+        [
+          994,
+          875
+        ],
+        [
+          865,
+          875
+        ],
+        [
+          800,
+          875
+        ],
+        [
+          760,
+          875
+        ],
+        [
+          696,
+          760
+        ],
+        [
+          660,
+          760
+        ],
+        [
+          1156,
+          875
+        ]
+      ],
+      "states": 10,
+      "nativeWholeFormAccepted": false
+    }
+  ],
+  "nativeWholeFormEvidence": "t157-number-inputs-linux.json#bspNativeEvidence",
+  "remaining": [
+    "Whole-form geometry of the questionnaire and totals form.",
+    "Table maximum height and vertical flow.",
+    "Body scrolling with fixed root commands.",
+    "Other embedded-button combinations and multiline text geometry.",
+    "Windows native geometry and other DPI.",
+    "Full pixel acceptance of the renderer."
+  ],
+  "acceptance": {
+    "nativeGeometryCorpusAccepted": true,
+    "fullNativeProfileAccepted": false,
+    "windowsNativeGeometryAccepted": false,
+    "visualPixelComparisonPerformedForNewCorpus": false,
+    "priorPixelReferencesRetested": true
+  }
+}
