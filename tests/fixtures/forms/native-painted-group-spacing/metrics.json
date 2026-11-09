@@ -1,0 +1,2124 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "linux",
+  "compatibility": "Version8_3_27",
+  "scriptVariant": "English",
+  "rows": [
+    {
+      "name": "VerticalControl",
+      "file": "VerticalControl.xml",
+      "canonicalSha256": "0dbfb2733e0748ad07cfe346c333cb20e8b147a5c21f9f1ef397c142d50935c5",
+      "fixtureSha256": "3eedf5acd1885b243996a8a3951dbb053da4fdbcdb70a28f37197fa9834feb5d",
+      "frame": [
+        165,
+        171
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          13,
+          71,
+          131,
+          23
+        ],
+        "B": [
+          13,
+          103,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          135,
+          131,
+          23
+        ]
+      },
+      "fills": {},
+      "captures": {
+        "en": "989a6cfdd9dfe32477378c54506c613aa7174c7742f773106fd34ec69935cc78",
+        "ru": "dac4a86a434a9e24d1278eb2e6e295533c4b2f00f8a4eb0b27c507b3d49ebf67"
+      }
+    },
+    {
+      "name": "VerticalBare",
+      "file": "VerticalBare.xml",
+      "canonicalSha256": "f55ddd524ab57f8e2c3b735693f8818cee0c7988af9ff1cec55f5ed4d8148354",
+      "fixtureSha256": "6a1fa0c864444c8c19d295518f73e632c5b3832636ab5dceff631261095cfcb7",
+      "frame": [
+        165,
+        195
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          13,
+          79,
+          131,
+          23
+        ],
+        "B": [
+          13,
+          119,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          159,
+          131,
+          23
+        ]
+      },
+      "fills": {},
+      "captures": {
+        "en": "ea3ca1376e7d7aec605331399d88fc0ccfc51917e057cfa64120ab04e1795940",
+        "ru": "fa69cc9cb1fd7a8a35d9d92a878b9eea5a367a298c634f4b399b1c2be52cf27f"
+      }
+    },
+    {
+      "name": "VerticalPaint",
+      "file": "VerticalPaint.xml",
+      "canonicalSha256": "37189f8a739e6d89410c9bbebf0a7e6e824e5293c8a75129161a894c06bb45ae",
+      "fixtureSha256": "f2d7f7e727fe12f1dbf974a149a706ba40f046031d01cb81e65a04331e7eec6f",
+      "frame": [
+        175,
+        200
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          79,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          124,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          164,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          74,
+          141,
+          33
+        ],
+        "Second": [
+          13,
+          119,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "b25f16682a678ab6df1a4a28d9866694547bfefd88baf5ec8c965a36c7692b75",
+        "ru": "5c27614f44fd545aabc7878c434df114927a9697a0dfe48286c61648a2664f24"
+      }
+    },
+    {
+      "name": "VerticalLeadingPaint",
+      "file": "VerticalLeadingPaint.xml",
+      "canonicalSha256": "e9f908601c7283738709b2c36a9f6e7e6148630ab5f572c5de0b655ec80daa2a",
+      "fixtureSha256": "2e11dfd6aac329ecb964f4fa86ca831cd7d65bbdd077523a49fd8deec736be3e",
+      "frame": [
+        175,
+        195
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          79,
+          131,
+          23
+        ],
+        "B": [
+          13,
+          119,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          159,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          74,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "2a4f5a572621de83bb9d10429bd1b6f5703d84cc0e69dbe4aaa749f19c895fa2",
+        "ru": "e22331a05dc3e022518f1641284312e50da66410c65f43a75955a35d06e4e96e"
+      }
+    },
+    {
+      "name": "VerticalTrailingPaint",
+      "file": "VerticalTrailingPaint.xml",
+      "canonicalSha256": "86d4870fcc6a4c885c39da7fad3ef2492e7d95256dfcefa5784a3c73d3ce6225",
+      "fixtureSha256": "17bfa5a355eac5cc529388939a1ea18af193dd5d23281a853b46821f3c2b13dc",
+      "frame": [
+        175,
+        200
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          13,
+          79,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          124,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          164,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "Second": [
+          13,
+          119,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "ad4329502ff4cc52fff9943765aef57db85f2fcc8bc98b33a3be909bdd8a03a7",
+        "ru": "dd9ecd74a3c3d5883c73074bb4475b4d1c708cf65c205549140bf88adb5bcd6f"
+      }
+    },
+    {
+      "name": "VerticalPaintLeadingPlain",
+      "file": "VerticalPaintLeadingPlain.xml",
+      "canonicalSha256": "af17fcdc372d401edf87eba78fcd1198b769622e2f60945789f9cbd7de44c256",
+      "fixtureSha256": "8e6984d399bcc61e0a2f221116e894982a9f5c473c719af2ee71adf990655bfd",
+      "frame": [
+        175,
+        197
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          76,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          121,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          161,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          71,
+          141,
+          33
+        ],
+        "Second": [
+          13,
+          116,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "0975fe4c3e4c61dae78b6c94565dd22ccaa5d646004dbf731b840f2779a72edf",
+        "ru": "a930af9a7fc3f5a665bd8143fdc7fad7210aecb20c566801fa47d00d76b1b60d"
+      }
+    },
+    {
+      "name": "VerticalPaintTrailingPlain",
+      "file": "VerticalPaintTrailingPlain.xml",
+      "canonicalSha256": "fe15f3454206ed557b44b4e56bb10b5ff9d7f8d3988d6b143101f61993a668e2",
+      "fixtureSha256": "156f02917953c5ce5c68d7e710f3fe6e84a6dd84de206051ac34710dc42c8e7a",
+      "frame": [
+        175,
+        197
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          79,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          124,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          161,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          74,
+          141,
+          33
+        ],
+        "Second": [
+          13,
+          119,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "b20759d6a2315d9209495a79d4c23a5bb84d021e3c26f2272fa90184172b9929",
+        "ru": "f7cfdc27de4d33ea513747277ec6c6a10bc88ae8a19b64f6e081a5fc5d2c1fd0"
+      }
+    },
+    {
+      "name": "VerticalPaintNoSeparation",
+      "file": "VerticalPaintNoSeparation.xml",
+      "canonicalSha256": "874aa7ce943074eb01c691186752780827fc1559668bf4013d2a30c562872f94",
+      "fixtureSha256": "a0d08219d793cf4c6749090bd4f98c48f899b945e7c232c43a3c9fc7f4ebf00a",
+      "frame": [
+        175,
+        191
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          76,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          118,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          155,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          71,
+          141,
+          33
+        ],
+        "Second": [
+          13,
+          113,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "f7b9e36089ab290b941d94da74be1b7543f3c2b7474ced1d0feb7740c64775a4",
+        "ru": "a391934f1e48a4d6e0f56403babcea58ff3ac7bc56180c5d29808e39a67c5d86"
+      }
+    },
+    {
+      "name": "VerticalPaintNone",
+      "file": "VerticalPaintNone.xml",
+      "canonicalSha256": "98ea4b108fd57c6d0a710db80fab1de8c734b8f15a87667902b0dde67a78d795",
+      "fixtureSha256": "6a0e8c808fa749651648f5907ab207e0246b6dae72589962d02367740eefaa71",
+      "frame": [
+        175,
+        173
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          70,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          106,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          137,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          65,
+          141,
+          33
+        ],
+        "Second": [
+          13,
+          101,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "a1cae2a2557a5977d29564a65fd66e4a5861e1e89852227ac2174d2e934ae89b",
+        "ru": "1ba17f1c189e8a63ad6da9dbf1237274050324f36e068138eae928c001e3a8a9"
+      }
+    },
+    {
+      "name": "VerticalPaintHalf",
+      "file": "VerticalPaintHalf.xml",
+      "canonicalSha256": "a1194d6dedc2ee1e1d47e476814dd392a42a4657a9b15162b7d4e54e4b6400c9",
+      "fixtureSha256": "1eb5ad3039159c490d6afa83d7ab0d18d2f0780a7f62105ae5b3b6080617c081",
+      "frame": [
+        175,
+        188
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          75,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          116,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          152,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          70,
+          141,
+          33
+        ],
+        "Second": [
+          13,
+          111,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "9a3496a4213623dbb9a367251e5f9184b9e28464f016576f2b72a73251ca9ded",
+        "ru": "799893265053e90ac587845d6fdc8c240b9c93a86fe975ed8af81b2193bc756e"
+      }
+    },
+    {
+      "name": "VerticalPaintDouble",
+      "file": "VerticalPaintDouble.xml",
+      "canonicalSha256": "d98ce74e6e67615401b441e514b4550d663b64d95a0bdc6c080b0e730d887695",
+      "fixtureSha256": "797d5b220bebd09c527437078852c8125c7d535707c8afe54f7ae2281415ddd5",
+      "frame": [
+        175,
+        227
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          88,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          142,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          191,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          83,
+          141,
+          33
+        ],
+        "Second": [
+          13,
+          137,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "ccefad2ba4737eab90bdbdf2803f37e47dde6d905618d20cf365078820cf3a27",
+        "ru": "6438d15c0c0fbd75a50b63156ebb699a634f5e2b94745daefeb1f43bf328143d"
+      }
+    },
+    {
+      "name": "VerticalPaintTitle",
+      "file": "VerticalPaintTitle.xml",
+      "canonicalSha256": "0b63c0ef453239f8e1674b3f18a9b34efd4dbca698e66dee876f83b4a54ab0ee",
+      "fixtureSha256": "33931c9fc552525ed61eea82e1744105369b946596d7bd7fd2d54b1810a9d6d0",
+      "frame": [
+        175,
+        246
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          102,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          170,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          210,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          74,
+          141,
+          56
+        ],
+        "Second": [
+          13,
+          142,
+          141,
+          56
+        ]
+      },
+      "captures": {
+        "en": "24aca9aa8d400b8d4d8a179cdb69bd18230c34ca2bf0dbba48f8ac095077a1bf",
+        "ru": "4d88e772a050a049df09baf8979ff8d89dc8b4151afa154c9dde2b72d6a3eaa5"
+      }
+    },
+    {
+      "name": "VerticalPaintIndependent",
+      "file": "VerticalPaintIndependent.xml",
+      "canonicalSha256": "321bcc1ad1ef325ac61d162e69e5bc096bace88db66926ef37f19ff0bb28b0a2",
+      "fixtureSha256": "cb07ac43c20f9ea8133cbd705c89df028d6e882d7277be2833fb29f2e053e49a",
+      "frame": [
+        175,
+        311
+      ],
+      "fields": {
+        "Above": [
+          18,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          104,
+          131,
+          23
+        ],
+        "ASecond": [
+          18,
+          136,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          206,
+          131,
+          23
+        ],
+        "BSecond": [
+          18,
+          238,
+          131,
+          23
+        ],
+        "Below": [
+          18,
+          275,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          71,
+          141,
+          93
+        ],
+        "Second": [
+          13,
+          173,
+          141,
+          93
+        ]
+      },
+      "captures": {
+        "en": "5ecf0dda2595a3b007975b84d29b752a777ff771114dd70079406c619a7f72d8",
+        "ru": "e5f9895fdd1966a9c521946516e89b8163c518f54b6ee18af882dfdb609d82af"
+      }
+    },
+    {
+      "name": "VerticalNestedOuter",
+      "file": "VerticalNestedOuter.xml",
+      "canonicalSha256": "f8669dd5b523a81779aa8f7d7c1ce46ca16d8c80757b7f8841697bd7c2ed6b2a",
+      "fixtureSha256": "f3b517e1c3e3ed6bf0a4c60628340bca72a79128ba9d09c5edd5e1516dd99dc7",
+      "frame": [
+        175,
+        223
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          84,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          142,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          187,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          71,
+          141,
+          49
+        ],
+        "WrapperB": [
+          13,
+          129,
+          141,
+          49
+        ]
+      },
+      "captures": {
+        "en": "ae2717c4c7409d6c015d172065b8c3552a1422fc8ee05c4b14ba41dfb776a0a6",
+        "ru": "8155650b06d0132fe55d9457c2c916d81b8335a0a178c1b1d8ef4ed841d3095b"
+      }
+    },
+    {
+      "name": "VerticalNestedAll",
+      "file": "VerticalNestedAll.xml",
+      "canonicalSha256": "fd944d255012e161c006198098e9f847219f2bfa65136065dee2588342b05062",
+      "fixtureSha256": "7538ce1a537fbe9a7ef7216265e0efba313d678e422d74e8a2ab05ae9157e81f",
+      "frame": [
+        185,
+        220
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          23,
+          84,
+          131,
+          23
+        ],
+        "B": [
+          23,
+          139,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          184,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          74,
+          151,
+          43
+        ],
+        "First": [
+          18,
+          79,
+          141,
+          33
+        ],
+        "WrapperB": [
+          13,
+          129,
+          151,
+          43
+        ],
+        "Second": [
+          18,
+          134,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "ae487ce4425e038ab6f267b002f19a4c6dbf0f6ab77e0fd12224cf7d95ddb3f8",
+        "ru": "7c2548be5b7809b52590f2216beecb818f5faadc9a0340c16a998c2781e8ca15"
+      }
+    },
+    {
+      "name": "VerticalNestedAsymmetric",
+      "file": "VerticalNestedAsymmetric.xml",
+      "canonicalSha256": "ca8138a9a9d5c65a6a2e3344df4a5d9bb6d3e97baa5118eda4a26e25e0b09497",
+      "fixtureSha256": "077d2ca1318f5021bb7a3bbdfd537971d935635a5e44b7a3ac5cc9cb44a2b32a",
+      "frame": [
+        185,
+        213
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          23,
+          84,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          137,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          177,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          71,
+          151,
+          49
+        ],
+        "First": [
+          18,
+          79,
+          141,
+          33
+        ],
+        "Second": [
+          13,
+          132,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "9b9bb67ffbdfbd549bd8754eac47e7144a331b3c2bbec9620f9ebba05f6f903b",
+        "ru": "ed9ce01ac025cf34c4892450d52c41a010f4697914fa8ef00b1f470d8290db91"
+      }
+    },
+    {
+      "name": "PageVerticalPaint",
+      "file": "PageVerticalPaint.xml",
+      "canonicalSha256": "e2efe4e6b03ce2f37b38fd72fa95706843d4146e28c95746d7662e6c4a6aa400",
+      "fixtureSha256": "a202a1c4f7301cbe91612dab4cd996e5bbae06920d36d7961afb8f4be5c5ad95",
+      "frame": [
+        197,
+        245
+      ],
+      "fields": {
+        "Above": [
+          24,
+          74,
+          131,
+          23
+        ],
+        "A": [
+          29,
+          114,
+          131,
+          23
+        ],
+        "B": [
+          29,
+          159,
+          131,
+          23
+        ],
+        "Below": [
+          24,
+          199,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          24,
+          109,
+          141,
+          33
+        ],
+        "Second": [
+          24,
+          154,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "4940feaa782988c2f0ec213d9bd806c7ba0d3b7af71a897bca18fc20abec5c43",
+        "ru": "33a0b3b5fad920206166c814f607d79fdf4ef02ae9c1261ecddd430f0fbc3e08"
+      }
+    },
+    {
+      "name": "PageVerticalPaintNone",
+      "file": "PageVerticalPaintNone.xml",
+      "canonicalSha256": "0e0d93d05dd8bfe613ca074bc145aef7627babedfdfc20a49a1ef90d1a651b55",
+      "fixtureSha256": "de625bcd7895dea85486bef3b22048fa3949d3a44cec81548b4124789e799d6c",
+      "frame": [
+        197,
+        218
+      ],
+      "fields": {
+        "Above": [
+          24,
+          74,
+          131,
+          23
+        ],
+        "A": [
+          29,
+          105,
+          131,
+          23
+        ],
+        "B": [
+          29,
+          141,
+          131,
+          23
+        ],
+        "Below": [
+          24,
+          172,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          24,
+          100,
+          141,
+          33
+        ],
+        "Second": [
+          24,
+          136,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "f58337a6ebd8d7b3f92561bf2e0d896a92040c70bd83daea9853138fba54ae26",
+        "ru": "37b7b4326cd3fc0d10c961ad4688f2f9eb3786974f020b4f051fa2493718b00d"
+      }
+    },
+    {
+      "name": "HorizontalControl",
+      "file": "HorizontalControl.xml",
+      "canonicalSha256": "10c587496760fea1ccf713b032fdb5829edc9eb02a9248369a6484aaaa4e09e3",
+      "fixtureSha256": "ee70fd020d8c30de9061492a17c49cd5ce2e415a5167e9afe777ab6d3effe275",
+      "frame": [
+        306,
+        75
+      ],
+      "fields": {
+        "A": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "B": [
+          154,
+          39,
+          131,
+          23
+        ]
+      },
+      "fills": {},
+      "captures": {
+        "en": "e3bfd73a59d92475a0aab46de0943136a1a21ddc339d97fb96027361ad14760b",
+        "ru": "b39f100cc02de823940a1069f9d4c1258e604c15c9c90829b5bae772c30b8155"
+      }
+    },
+    {
+      "name": "HorizontalBare",
+      "file": "HorizontalBare.xml",
+      "canonicalSha256": "43bc9aa9e2b48b9059165677a37dd2e3840bf51df7b34815f46bbd09aca22a32",
+      "fixtureSha256": "f34c0a6edb3527869695e0d71b42fed1db1466d68f766defe63f327e21d605f3",
+      "frame": [
+        316,
+        75
+      ],
+      "fields": {
+        "A": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "B": [
+          164,
+          39,
+          131,
+          23
+        ]
+      },
+      "fills": {},
+      "captures": {
+        "en": "ad03cc62574f0d6ff9db3425f7a8ef98ecb2090ce4fefb851e151d568f800b47",
+        "ru": "8827c7edd85910d15f31d0c1df8eb00cfa6c2d79112ab129588e82b0016a3bc7"
+      }
+    },
+    {
+      "name": "HorizontalPaint",
+      "file": "HorizontalPaint.xml",
+      "canonicalSha256": "5860369d280c598ad8a190cce3bb6fe7c518cf5c460aad5bd96f0b3775321cb7",
+      "fixtureSha256": "6e994f156dcbad2202b0d45d0aac6f41c59e3206293f40e063c3e91f050f0823",
+      "frame": [
+        331,
+        85
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          174,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          39,
+          141,
+          33
+        ],
+        "Second": [
+          169,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "201da8b8909999d532381908030b76e89c037b75c71332d22007ba93a756fd94",
+        "ru": "08bb5de475dd508adc5d63d856428f17164f75ef5061dd55744dc670c4b70a7a"
+      }
+    },
+    {
+      "name": "HorizontalLeadingPaint",
+      "file": "HorizontalLeadingPaint.xml",
+      "canonicalSha256": "a0ae9d3f3db16598f57c09038a17e9f2d1d0acddc9d682a31bb9889f5f2bc163",
+      "fixtureSha256": "a5a13e17e59cdc245863f44e6d2513205be096d8e7ac80e07a395e26af273f62",
+      "frame": [
+        321,
+        85
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          169,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "f4d5b76d516c6b5a4cc7d97463c6747e471dd7e5c8071419678030dca3225371",
+        "ru": "e1c8e792b686afc49a51670ce9664e1d48e7266e2a15cebd977cb8279e118295"
+      }
+    },
+    {
+      "name": "HorizontalTrailingPaint",
+      "file": "HorizontalTrailingPaint.xml",
+      "canonicalSha256": "d3ec51fdb92a692fe360b3099e92b2d4ad2033732c1a002041e0a7ff50cf408b",
+      "fixtureSha256": "132ebf6f40687691ed2a0ee3469f756c5d645fa30c25b28a328d7b10a8bc291b",
+      "frame": [
+        326,
+        85
+      ],
+      "fields": {
+        "A": [
+          13,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          169,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "Second": [
+          164,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "191a6546597fe0477049dbcfc97a94d15d30c18deba72d0f7cdbedf7246a802b",
+        "ru": "4b90a7212c4a9f49af943d08d02ef3b609b87136c684b2cc14067411b4964b5b"
+      }
+    },
+    {
+      "name": "HorizontalPaintLeadingPlain",
+      "file": "HorizontalPaintLeadingPlain.xml",
+      "canonicalSha256": "8bf04959910a85e8226844db1ca8456a93c81a16358c93d68686108b2a797aef",
+      "fixtureSha256": "5ba8acde20fb0971a55110cb8335c8afe1f0eda1b9b5071ad7c34fdb333992c2",
+      "frame": [
+        331,
+        85
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          174,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          39,
+          141,
+          33
+        ],
+        "Second": [
+          169,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "51f46260428c8049c7111e8591c31781564929ac102bcc85b8fea24565a78144",
+        "ru": "3287bac2fdbd5d7a008397a47decf66aefa6e12dc78ab8085495558353df8c2b"
+      }
+    },
+    {
+      "name": "HorizontalPaintNone",
+      "file": "HorizontalPaintNone.xml",
+      "canonicalSha256": "571c0b7de18369d025020ae3d8b20764799af69f1ac1ad1482647f8fd3bd4e2d",
+      "fixtureSha256": "e701e3493de21054221c0613baa5db2b79b05d3706c5bbe034ffc0b9849e5691",
+      "frame": [
+        321,
+        85
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          164,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          39,
+          141,
+          33
+        ],
+        "Second": [
+          159,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "0d2ceb71a2cbff26e6713d1ed3435b8fcca760c141db373f24c488f832828b4e",
+        "ru": "a9a7c42223e243b8489764d4574125bceb3f2db4c92acee1d109c1ccc8e98a64"
+      }
+    },
+    {
+      "name": "HorizontalPaintHalf",
+      "file": "HorizontalPaintHalf.xml",
+      "canonicalSha256": "8dfe3612bfb467804dc5ce46dadad9b1c30423510fb1f3e9b91d09d25507166b",
+      "fixtureSha256": "45a49f9eb3890a37d993c2e685aed21ced6c72b935cbbbacbd5023a9764f758e",
+      "frame": [
+        326,
+        85
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          169,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          39,
+          141,
+          33
+        ],
+        "Second": [
+          164,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "95d56ce4c450c91a678018e6778d59e258557492c15c15a3b428d7c73d0299f6",
+        "ru": "9ae46f948f28e5b52e15cfe8e997346c5ce5de5f446beefb036d42549aa15d7a"
+      }
+    },
+    {
+      "name": "HorizontalPaintDouble",
+      "file": "HorizontalPaintDouble.xml",
+      "canonicalSha256": "a32c65f728e9f68b83f7642a2da8936bb6963dd8e26001eafdeb3f3b4372ad2b",
+      "fixtureSha256": "3d8c6868b8b93d8b621ee3e5824f9c2d4c7931d41dde54e3cb04904149d8914f",
+      "frame": [
+        341,
+        85
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          184,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          39,
+          141,
+          33
+        ],
+        "Second": [
+          179,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "385760763f7b4397760df5b73fcb385d3971237521b3206a5685a737cd1db9b6",
+        "ru": "ccf374d4f045347efc1b2e4584e9405edb5480f3734c00928ee2478bf44d47e2"
+      }
+    },
+    {
+      "name": "HorizontalNestedOuter",
+      "file": "HorizontalNestedOuter.xml",
+      "canonicalSha256": "b379c846527136219631ce0a8401efcccb96904f0a71e8e8e6e6fee13e90022b",
+      "fixtureSha256": "42bfe1dcb696282a261f24df266f97945d8012c0d578563f739a2b3b1435f618",
+      "frame": [
+        346,
+        85
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          189,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          39,
+          151,
+          33
+        ],
+        "WrapperB": [
+          174,
+          39,
+          151,
+          33
+        ]
+      },
+      "captures": {
+        "en": "01c57e99ffcb6e5a97832316d2c54757e78ab788a181187395ef734ba449be67",
+        "ru": "f26774c4d83cd43c68cb5d6f620bf513cf7b8e2ce75d49b34ee5bf0c643eb208"
+      }
+    },
+    {
+      "name": "PageHorizontalPaint",
+      "file": "PageHorizontalPaint.xml",
+      "canonicalSha256": "4ed0bbb440f95462a881dd9080e8db90d810ca7a2eedbfd0d7570226c5fb63c0",
+      "fixtureSha256": "32fcab504ada5e759f8e9bb6d3b953c82660d9e5b8c6bca9203f37edc1a57749",
+      "frame": [
+        353,
+        130
+      ],
+      "fields": {
+        "A": [
+          29,
+          79,
+          131,
+          23
+        ],
+        "B": [
+          185,
+          79,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          24,
+          74,
+          141,
+          33
+        ],
+        "Second": [
+          180,
+          74,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "2a8f9405f3a57e5f61caf497cb519fc5ecbaf1d0b3bbcea329cef96a7734336b",
+        "ru": "f6283b506619e0806029b281a81fbc3610b804d1e223037d72c7abd69c836628"
+      }
+    },
+    {
+      "name": "ConditionalPaint",
+      "file": "ConditionalPaint.xml",
+      "canonicalSha256": "ecbb26d18e6bc303910cb7d89b35d3bd148d0abf352767b895f7d88a2dbb8036",
+      "fixtureSha256": "cec7e7653a7a4c65c4bb6ef077c6ace96ebe961f6d16662d723afa30de22ddc9",
+      "frame": [
+        331,
+        117
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "ASecond": [
+          18,
+          76,
+          131,
+          23
+        ],
+        "B": [
+          174,
+          44,
+          131,
+          23
+        ],
+        "BSecond": [
+          174,
+          76,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          39,
+          141,
+          65
+        ],
+        "Second": [
+          169,
+          39,
+          141,
+          65
+        ]
+      },
+      "captures": {
+        "en": "23808148b87ec1877e94a9c93c919e4e6555f8bbafc97f4cb11b99d5cf6e9133",
+        "ru": "18d0611d7f824f87776e8b813d0ca4cabd302a0c803f3024dbac54d0da6ebcf3"
+      }
+    },
+    {
+      "name": "HorizontalBareUnequal",
+      "file": "HorizontalBareUnequal.xml",
+      "canonicalSha256": "bf1c29c438cce0fd159db81fa9fc53061ea6fb4c1ca0a48ca7c763cc38bbcf93",
+      "fixtureSha256": "eb412c54830bfd0dc205207cfab967a73a89fb3311d8ee739211e7d3e35ee430",
+      "frame": [
+        316,
+        107
+      ],
+      "fields": {
+        "A": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "B": [
+          164,
+          39,
+          131,
+          23
+        ],
+        "BSecond": [
+          164,
+          71,
+          131,
+          23
+        ]
+      },
+      "fills": {},
+      "captures": {
+        "en": "186d06e190a69760f045e5964b0814928795d7e4a0b5e1c3580dc6b7ec5fb6af"
+      }
+    },
+    {
+      "name": "HorizontalLeadingPaintUnequal",
+      "file": "HorizontalLeadingPaintUnequal.xml",
+      "canonicalSha256": "2f1b9b538853c62472a47aff3f1fd1a0b1ab6827c1d10e64592f52ec44feb496",
+      "fixtureSha256": "c99d66919d48131ab0632a714aa09062e12628b37c8b4865f3dac64ee1e66362",
+      "frame": [
+        321,
+        107
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          169,
+          39,
+          131,
+          23
+        ],
+        "BSecond": [
+          169,
+          71,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "af1a20f3353510929b4a1367e63832c43f36a43f3f585daef61954922c248bce"
+      }
+    },
+    {
+      "name": "HorizontalTrailingPaintUnequal",
+      "file": "HorizontalTrailingPaintUnequal.xml",
+      "canonicalSha256": "ce7c6429092765e9e6a1a3b29980ad3f6b99e77016f9a30c7b24bd1371a54a96",
+      "fixtureSha256": "9ad18c4d8fe89d40561c25ca696e2446682df1f2535d57706aacc9928811d0ef",
+      "frame": [
+        326,
+        107
+      ],
+      "fields": {
+        "A": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "B": [
+          169,
+          44,
+          131,
+          23
+        ],
+        "ASecond": [
+          13,
+          71,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "Second": [
+          164,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "1c02f9fdafd4acda75ea4e5a380c39b07bf277c0c662704a9ce6c371cbe3bcf0"
+      }
+    },
+    {
+      "name": "HorizontalLeadingPaintTitle",
+      "file": "HorizontalLeadingPaintTitle.xml",
+      "canonicalSha256": "5d45d5729ce292301df0ea9ae38eae4410e1a76b91c11f7dd73f1a6b2e42793f",
+      "fixtureSha256": "57812aeb8b43766f1fd454bd16ce9ed68158793ecb3419abeca38e43d1503371",
+      "frame": [
+        321,
+        108
+      ],
+      "fields": {
+        "A": [
+          18,
+          67,
+          131,
+          23
+        ],
+        "B": [
+          169,
+          39,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          39,
+          141,
+          56
+        ]
+      },
+      "captures": {
+        "en": "4ec30b0031128fa2956937c5622894c68851d618de8f27d24a1aa1fa8ab337b0"
+      }
+    },
+    {
+      "name": "HorizontalLeadingPaintTop",
+      "file": "HorizontalLeadingPaintTop.xml",
+      "canonicalSha256": "357d39b525794701de40a453a0b0efa5fcaa56e53a82fee5ea10a02ae1145c75",
+      "fixtureSha256": "079677b3f5173679ac98c7e846a03fbaade5110fcba66ee89927fa6b56f947d3",
+      "frame": [
+        321,
+        85
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          169,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "1c978c503142675ab279fb55873196a161b3500dbdd3446bc7a1489206d0b3b1"
+      }
+    },
+    {
+      "name": "VerticalIndependentMixed",
+      "file": "VerticalIndependentMixed.xml",
+      "canonicalSha256": "7c12725f7c05cef09f0c66c35bdbf543bc3f88fb2ace24ed04c7cfafcdff56e7",
+      "fixtureSha256": "515b31440362dbed113e49ad52f4af4b917a626574de83aca17fe19a53463628",
+      "frame": [
+        175,
+        301
+      ],
+      "fields": {
+        "Above": [
+          18,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          104,
+          131,
+          23
+        ],
+        "ASecond": [
+          18,
+          136,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          201,
+          131,
+          23
+        ],
+        "BSecond": [
+          18,
+          233,
+          131,
+          23
+        ],
+        "Below": [
+          18,
+          265,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          71,
+          141,
+          93
+        ]
+      },
+      "captures": {
+        "en": "53e9e9f373c540d516440c266e852fefbf8f922400a18e1fc5d052c02f05e218"
+      }
+    },
+    {
+      "name": "VerticalIndependentUntitled",
+      "file": "VerticalIndependentUntitled.xml",
+      "canonicalSha256": "460c9b7984c529a5bf220ce90dd8f64aafcf291bab12809fc20c0b4d708ec4a7",
+      "fixtureSha256": "05b8e6b6042351b7d4d498b4b04f284a442a23a6220ab1e880606276efe9e095",
+      "frame": [
+        175,
+        255
+      ],
+      "fields": {
+        "Above": [
+          18,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          76,
+          131,
+          23
+        ],
+        "ASecond": [
+          18,
+          108,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          150,
+          131,
+          23
+        ],
+        "BSecond": [
+          18,
+          182,
+          131,
+          23
+        ],
+        "Below": [
+          18,
+          219,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "First": [
+          13,
+          71,
+          141,
+          65
+        ],
+        "Second": [
+          13,
+          145,
+          141,
+          65
+        ]
+      },
+      "captures": {
+        "en": "28ecc4f9d3917b382c4eced537243fd5920ccf05d6d7a2120d2df0a8d2e16749"
+      }
+    },
+    {
+      "name": "VerticalTransparentBridge",
+      "file": "VerticalTransparentBridge.xml",
+      "canonicalSha256": "d1594adf0dc409f38bbbc0ac6ff5c776127923b8bb4beffb3340b499ad24f14c",
+      "fixtureSha256": "e49bdcb20849d75d45bc040acaec00c5ef0b0d4e4c61a146da928a6fd6d6fd5c",
+      "frame": [
+        175,
+        223
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          84,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          142,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          187,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          71,
+          141,
+          49
+        ],
+        "WrapperB": [
+          13,
+          129,
+          141,
+          49
+        ]
+      },
+      "captures": {
+        "en": "eb197d144e96f8c447c66eef77d89c5b3d1784feaaa50a3e4ce35eba842fb7c5"
+      }
+    },
+    {
+      "name": "VerticalNormalBridge",
+      "file": "VerticalNormalBridge.xml",
+      "canonicalSha256": "3445c4afc913cf67e9b7bf66640b3cf72a741626aec2ad8f1fd939bd03460044",
+      "fixtureSha256": "b98bd7d90f15c8bbf6ed7d427b2a70a6a4ed087da9d1f3c59c25e40cf9d9aa1c",
+      "frame": [
+        175,
+        215
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          84,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          134,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          179,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          79,
+          141,
+          33
+        ],
+        "WrapperB": [
+          13,
+          129,
+          141,
+          41
+        ]
+      },
+      "captures": {
+        "en": "557d6ff7be76881f816bc1011a9f010ec5d9a415920a5d12e5f5f440f1b8acb7"
+      }
+    },
+    {
+      "name": "VerticalPaintedTitle",
+      "file": "VerticalPaintedTitle.xml",
+      "canonicalSha256": "c776364c8c2f052f6e01e276145c05ebecc9e1c8d956ea6f682c03441742a43c",
+      "fixtureSha256": "2fc6561e3eb8e640cb62297b44a9e23572fffe8139955d4e15072eda99d3b46a",
+      "frame": [
+        175,
+        242
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          103,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          161,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          206,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          71,
+          141,
+          68
+        ],
+        "WrapperB": [
+          13,
+          148,
+          141,
+          49
+        ]
+      },
+      "captures": {
+        "en": "ed2aa9ea7876f01def5c0f5f99c06a3c41316581c16fba2e4cd286aa552c2d72"
+      }
+    },
+    {
+      "name": "VerticalNestedFirst",
+      "file": "VerticalNestedFirst.xml",
+      "canonicalSha256": "eab943fd086a9d78f52134b066508dd1cc4da5082e8c1e97b33e45ecc4939eb6",
+      "fixtureSha256": "06b42881a93174dd458ebc72ac837634009bbf2812320a23886febb2f6a56831",
+      "frame": [
+        175,
+        183
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          102,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          147,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          39,
+          141,
+          41
+        ],
+        "WrapperB": [
+          13,
+          89,
+          141,
+          49
+        ]
+      },
+      "captures": {
+        "en": "e0368b04f99621fd050b16dc014df4a5e65c4beaed46bdb0fd1f9a86e4f360ff"
+      }
+    },
+    {
+      "name": "VerticalNestedLast",
+      "file": "VerticalNestedLast.xml",
+      "canonicalSha256": "62d0bbb9cca772f61a0c51c72d704603b2bb1504f8a39c48b62b1971d1d13238",
+      "fixtureSha256": "d31f44d25430521a186d8110be61059f4e5a136f1d9b4597e3b0eb961593918e",
+      "frame": [
+        175,
+        183
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          84,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          142,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          71,
+          141,
+          49
+        ],
+        "WrapperB": [
+          13,
+          129,
+          141,
+          41
+        ]
+      },
+      "captures": {
+        "en": "d6eecf650d93eb3779fd6b64bc627bfb7fb9ccb6d9c4ced5100f3a6dbbcd9da5"
+      }
+    },
+    {
+      "name": "VerticalNestedOnly",
+      "file": "VerticalNestedOnly.xml",
+      "canonicalSha256": "3d569be2d1558284e8cd7a9ef96b93906ddf72349af0f54093f54bb1bfc46179",
+      "fixtureSha256": "8e1bfe6a4142fc96c7872ed7bb12add7a5e972e5702e0fc82b2bfaaf7a653965",
+      "frame": [
+        175,
+        85
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "7771ad14da22697b342b9541ff1ec34e509f5cfdf856e9f30988117162d2c4fa"
+      }
+    },
+    {
+      "name": "VerticalNestedNormalOuter",
+      "file": "VerticalNestedNormalOuter.xml",
+      "canonicalSha256": "42e9cdb2e4bf13664bd77b84e254bc6fd660d5ce9b02dc58001f29447e74d349",
+      "fixtureSha256": "160aae38eb144046f5468b482c56396ba4fdf7ca9c5ee68853e0b17a6ff186f4",
+      "frame": [
+        175,
+        200
+      ],
+      "fields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "A": [
+          18,
+          79,
+          131,
+          23
+        ],
+        "B": [
+          18,
+          124,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          164,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          74,
+          141,
+          33
+        ],
+        "WrapperB": [
+          13,
+          119,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "aa00deb2cbf77f62da17870ede77f774fc3456e1f86270894ddfec9693ca9007"
+      }
+    },
+    {
+      "name": "HorizontalNestedOnly",
+      "file": "HorizontalNestedOnly.xml",
+      "canonicalSha256": "5d831810fafe7a5066d5d0dc05f8ddf50ae3800b910e710cf76077eb7af5fa3b",
+      "fixtureSha256": "dfc0c9bd5f35aa0bb08e38c0eebf8c699cf9013041e5f41593e227b78fece34b",
+      "frame": [
+        175,
+        85
+      ],
+      "fields": {
+        "A": [
+          18,
+          44,
+          131,
+          23
+        ]
+      },
+      "fills": {
+        "WrapperA": [
+          13,
+          39,
+          141,
+          33
+        ]
+      },
+      "captures": {
+        "en": "7c5de1550923135d46a9275780934820a1683e42b3f5ab1d974ae6de5824b6fb"
+      }
+    }
+  ]
+}
