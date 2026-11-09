@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "explorerCommit": "b35a80787a83347957379100cc372af599bd9e5e",
+  "vsix": {
+    "file": "form-inline-field-build-EBiwtyt0/eska-explorer-inline-fields.vsix",
+    "sha256": "4be24f0b2466a69aee50b5fc58b383719b45f71b52627b7390b1cc2f7ae8c6e1"
+  },
+  "nativeMatrices": {
+    "composite": {
+      "forms": 16,
+      "captureList": {
+        "file": "form-native-footer-allocation-DuXxArgX/preview-ru/captures.json",
+        "sha256": "ede23deeee21d3596674c1f4af4a42655862efca69d65d95363a2e5f5e9acfc1"
+      },
+      "receipt": {
+        "file": "form-native-footer-allocation-DuXxArgX/preview-ru/receipt.json",
+        "sha256": "bf7389eee91581821ca970e10c7204ca3ff9acc21b520a789a2ab09b12dc23c6"
+      }
+    },
+    "numeric": {
+      "forms": 17,
+      "captureList": {
+        "file": "form-native-footer-allocation-0Hzz3oyf/preview-ru/captures.json",
+        "sha256": "7cb08e3d6877010c918efe32c4ecf1ef1e9139140e06f600e6a34436386f3fec"
+      },
+      "receipt": {
+        "file": "form-native-footer-allocation-0Hzz3oyf/preview-ru/receipt.json",
+        "sha256": "3e0bd6c2a7b37430d390702b888902efc5eab4e26dd422e8460056cbbf0b2213"
+      }
+    }
+  },
+  "installedRegression": {
+    "ru": {
+      "column-widths": {
+        "file": "inline-field-tests-ru-VbrU80xX/column-widths/receipt.json",
+        "sha256": "8aca0f93d8c6e44bf199a67337a8ee068f29a7226a6db1a207fc61d388cab0f7"
+      },
+      "united": {
+        "file": "inline-field-tests-ru-VbrU80xX/united/receipt.json",
+        "sha256": "cf3476a8417a294c670fe43090a5fd20ae426d5d5f4846148a61a8a2670b1a66"
+      },
+      "responsive": {
+        "file": "inline-field-tests-ru-VbrU80xX/responsive/receipt.json",
+        "sha256": "9ff3f6a9c1f020aac1a272afb2387a89518e8b2e7f5f5da36a3cacff3f25bed3"
+      },
+      "through-align": {
+        "file": "inline-field-tests-ru-VbrU80xX/through-align/receipt.json",
+        "sha256": "bc568b0cf4e486b12ea1fa31c1ea328942251bf2eb713a43c0a8281408e08c57"
+      },
+      "wrapped-titles": {
+        "file": "inline-field-tests-ru-VbrU80xX/wrapped-titles/receipt.json",
+        "sha256": "c63f4fb1343f5e3d008409392abb96b44a6b3a895bbc3f3f33747254bd36459c"
+      },
+      "nested-reflow": {
+        "file": "inline-field-tests-ru-VbrU80xX/nested-reflow/receipt.json",
+        "sha256": "c4c7932fdf5b056700776a45d51ecd097c53852a886bdcf35585190c1065b7b7"
+      },
+      "numeric-labels": {
+        "file": "inline-field-tests-ru-VbrU80xX/numeric-labels/receipt.json",
+        "sha256": "e91dd838941c442b3a9ff4fa4db35c84c9738329a55978e11fca8d750091dc90"
+      },
+      "mixed-row-spacing": {
+        "file": "inline-field-tests-ru-VbrU80xX/mixed-row-spacing/receipt.json",
+        "sha256": "b02c9d4d28fe0538f267b386955ee7b5c0dc3a37ea2f3be26d218e8b98c19a08"
+      }
+    },
+    "en": {
+      "column-widths": {
+        "file": "inline-field-tests-en-ZcWqkvIS/column-widths/receipt.json",
+        "sha256": "a908deef784de433e0cb1d05802360b849e315b9730283a7c88e28cb83c68448"
+      },
+      "united": {
+        "file": "inline-field-tests-en-ZcWqkvIS/united/receipt.json",
+        "sha256": "8c209995b41a5dbb6b5efe20b61c278311c125c3059e8e16311175d1b5ad785c"
+      },
+      "responsive": {
+        "file": "inline-field-tests-en-ZcWqkvIS/responsive/receipt.json",
+        "sha256": "db2c4c50d50c86ca46dbebf19e7c0f89dda9e96ca7313943f9c3068087865f2a"
+      },
+      "through-align": {
+        "file": "inline-field-tests-en-ZcWqkvIS/through-align/receipt.json",
+        "sha256": "931608e45f0038fd32ebe068b1892dfde1951c7f6b77ab523fe92d9a1261dc28"
+      },
+      "wrapped-titles": {
+        "file": "inline-field-tests-en-ZcWqkvIS/wrapped-titles/receipt.json",
+        "sha256": "56762909f5374066021afadc51941eb3fcfd359dc4fe47a7424a468eb9d86430"
+      },
+      "nested-reflow": {
+        "file": "inline-field-tests-en-ZcWqkvIS/nested-reflow/receipt.json",
+        "sha256": "5e9c94570c02ab58ddab04adc5e299d5581357f32ba912032ce6b734e4ac47d4"
+      },
+      "numeric-labels": {
+        "file": "inline-field-tests-en-ZcWqkvIS/numeric-labels/receipt.json",
+        "sha256": "9c5632e15d20f8ce8788686573bf0af71ac10a3a64349c74970361dee269acb9"
+      },
+      "mixed-row-spacing": {
+        "file": "inline-field-tests-en-ZcWqkvIS/mixed-row-spacing/receipt.json",
+        "sha256": "6556bb290ff905c21e43f650bf92fb266c57bdfa6c759007d4cf096d6ddd41b5"
+      }
+    }
+  },
+  "controlCases": [
+    {
+      "name": "long captions fit on one line at wide width",
+      "frameWidth": 1444,
+      "nativeCommentWidth": 511,
+      "installedCommentWidth": 511,
+      "nativeAmountWidth": 152,
+      "installedAmountWidth": 152
+    },
+    {
+      "name": "mixed labels wrap while their values share the reduced width",
+      "frameWidth": 1274,
+      "nativeCommentWidth": 457,
+      "installedCommentWidth": 468,
+      "nativeAmountWidth": 152,
+      "installedAmountWidth": 152
+    },
+    {
+      "name": "a compact mixed row retains all caption words",
+      "frameWidth": 1094,
+      "nativeCommentWidth": 319,
+      "installedCommentWidth": 323,
+      "nativeAmountWidth": 152,
+      "installedAmountWidth": 152
+    },
+    {
+      "name": "the reference values contract with the multiline input",
+      "frameWidth": 994,
+      "nativeCommentWidth": 253,
+      "installedCommentWidth": 259,
+      "nativeAmountWidth": 152,
+      "installedAmountWidth": 152
+    },
+    {
+      "name": "mixed tracks retain the trailing amount at a narrow width",
+      "frameWidth": 874,
+      "nativeCommentWidth": 179,
+      "installedCommentWidth": 183,
+      "nativeAmountWidth": 152,
+      "installedAmountWidth": 152
+    },
+    {
+      "name": "a dirty fixed reference preserves its value width",
+      "frameWidth": 1094,
+      "nativeCommentWidth": 313,
+      "installedCommentWidth": 320,
+      "nativeAmountWidth": 152,
+      "installedAmountWidth": 152
+    }
+  ],
+  "stalingrad": {
+    "receipt": {
+      "file": "inline-fields-final-stalingrad-CbGtc8Gw/receipt.json",
+      "sha256": "dc51482ccd817b82919677f35a2844ea907086a1df12bbe7852428b87401595c"
+    },
+    "geometry": {
+      "file": "inline-fields-final-stalingrad-CbGtc8Gw/geometry.json",
+      "sha256": "27e55ea935ebdba8a4120fcc0470a246055ad5d9cad941bf086de63b656b1656"
+    },
+    "installedFooterCaptures": {
+      "native": {
+        "file": "inline-fields-final-visual-zd29wK6X/screens/settlement-footer-native.png",
+        "sha256": "611a652cd5b5c22ce05ae276341e4bc978b7c16ec3b31ae07655f2e6a39f3aa7"
+      },
+      "middle": {
+        "file": "inline-fields-final-visual-zd29wK6X/screens/settlement-footer-middle.png",
+        "sha256": "2e6ce5dd523bfd23c917d6d1eff63ea34d8cbf7dd499a48e446f0ff670b5856e"
+      },
+      "compact": {
+        "file": "inline-fields-final-visual-zd29wK6X/screens/settlement-footer-compact.png",
+        "sha256": "906f1b0afc00ac34b7c9ec526ac112c39c53801e9b5a15b1161161ce4f0a6afc"
+      }
+    },
+    "sourceXmlUnchanged": true,
+    "frameHeightNote": "The compact installed frame is taller to avoid a vertical scrollbar changing the measured width.",
+    "settlementFooter": [
+      {
+        "case": "native",
+        "installedFrame": [1430, 726],
+        "nativeComment": [13, 659, 511, 55],
+        "previousCommentWidth": 511,
+        "installedComment": [13, 662, 511, 51],
+        "nativeCaptionLeft": [534, 865],
+        "installedCaptionLeft": [534, 864],
+        "installedAmountGroup": [1126, 687, 283, 27]
+      },
+      {
+        "case": "middle",
+        "installedFrame": [1285, 728],
+        "nativeComment": [13, 659, 472, 57],
+        "previousCommentWidth": 374,
+        "installedComment": [13, 664, 482, 51],
+        "nativeCaptionLeft": [495, 770],
+        "installedCaptionLeft": [505, 770],
+        "installedAmountGroup": [1027, 676, 237, 40]
+      },
+      {
+        "case": "compact",
+        "installedFrame": [1083, 900],
+        "nativeComment": [13, 666, 313, 57],
+        "previousCommentWidth": 172,
+        "installedComment": [13, 836, 320, 51],
+        "nativeCaptionLeft": [336, 600],
+        "installedCaptionLeft": [343, 603],
+        "installedAmountGroup": [825, 848, 237, 40]
+      }
+    ],
+    "columnDivider": {
+      "split-initial": "378px 603px",
+      "pointer-drag": "338px 643px"
+    }
+  },
+  "remaining": [
+    "The wrapped caption tracks and multiline field still differ in width at intermediate and compact sizes.",
+    "Height of the settlement multiline field and vertical alignment of its painted totals group still differ.",
+    "Independent Windows verification."
+  ]
+}
