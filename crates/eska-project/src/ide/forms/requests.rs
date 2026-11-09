@@ -14,10 +14,7 @@ use serde_json::Value;
 pub(super) struct Context<'a> {
     pub labels: &'a Labels,
     pub project: &'a ProjectSession,
-    pub pictures: bool,
-    pub input_preparation: bool,
-    pub layout_additions: bool,
-    pub form_help: bool,
+    pub api_minor: u32,
     pub activity: Option<&'a eska_project_core::project::activity::State>,
 }
 
@@ -74,12 +71,7 @@ impl State {
                 context.activity,
             )
             .map_err(preview_error)?;
-        let (model, bytes) = dto::model(
-            context.labels,
-            &preview,
-            context.layout_additions,
-            context.form_help,
-        )?;
+        let (model, bytes) = dto::model(context.labels, &preview, context.api_minor)?;
         self.admit(0, bytes)?;
         self.serial = self.serial.checked_add(1).ok_or_else(limit)?;
         let id = format!("f{}", self.serial);
@@ -87,7 +79,7 @@ impl State {
             key: key.clone(),
             node,
             application: input.application,
-            pictures: context.pictures,
+            pictures: context.api_minor >= 37,
             revision: 1,
             preview,
             model,
@@ -134,12 +126,7 @@ impl State {
             )
             .map_err(preview_error)
             .and_then(|preview| {
-                let (model, bytes) = dto::model(
-                    context.labels,
-                    &preview,
-                    context.layout_additions,
-                    context.form_help,
-                )?;
+                let (model, bytes) = dto::model(context.labels, &preview, context.api_minor)?;
                 self.admit(entry.bytes, bytes)?;
                 Ok((preview, model, bytes))
             });
@@ -201,7 +188,7 @@ fn legacy_overlays(
 }
 
 fn check_input_fields(context: &Context<'_>, args: &Value) -> Result<(), Value> {
-    if args.get("inputs").is_some() && !context.input_preparation {
+    if args.get("inputs").is_some() && context.api_minor < 38 {
         return Err(error(-32602));
     }
     params::optional_fields(args, &["inputs"])?;

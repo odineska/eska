@@ -96,9 +96,9 @@ fn definition(labels: &Labels, value: &EffectiveDefinition) -> Value {
 pub(super) fn model(
     labels: &Labels,
     preview: &FormPreview,
-    layout_additions: bool,
-    form_help: bool,
+    api_minor: u32,
 ) -> Result<(Value, usize), Value> {
+    let layout_additions = api_minor >= 43;
     let presentations: HashMap<_, _> = preview
         .presentation
         .elements
@@ -151,7 +151,7 @@ pub(super) fn model(
         "commands":preview.form.commands.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
         "diagnostics":{"composition":preview.form.diagnostics,"appearance":preview.presentation.diagnostics}});
     model["activityColor"] = json!(preview.presentation.activity_color);
-    if form_help {
+    if api_minor >= 44 {
         model["formHelpAvailable"] = json!(preview.form_help_available);
     }
     if let Some(variant) = preview.presentation.script_variant {
