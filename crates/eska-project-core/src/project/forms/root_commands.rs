@@ -35,22 +35,25 @@ pub(super) fn project(
     }
     let interface = interface_items(form);
     let authored = authored_commands(&form.root);
-    let mut bar = CommandBar::default();
-    let mut object_menu = Vec::new();
-    if let Some(owner_type) = object_type(form) {
-        let owner = owner_id(&owner_type);
-        let descriptor = owner
-            .as_ref()
-            .and_then(|id| effective_metadata(id, resources));
-        if let Some(standard) = ObjectCommands::for_type(&owner_type, descriptor, resources) {
-            bar.buttons = standard.inline();
-            object_menu = menu::sections(standard, descriptor, resources);
-        }
-        add_based_on(&mut bar, &owner_type, &interface, resources, diagnostics);
+    let owner_type = object_type(form);
+    let owner = owner_type.as_ref().and_then(owner_id);
+    let RootCommands {
+        inline,
+        object_menu,
+    } = owner_type
+        .as_ref()
+        .map(|kind| standard_commands(kind, owner.as_ref(), resources))
+        .unwrap_or_default();
+    let mut bar = CommandBar {
+        buttons: inline,
+        ..CommandBar::default()
+    };
+    if let Some(owner_type) = owner_type.as_ref() {
+        add_based_on(&mut bar, owner_type, &interface, resources, diagnostics);
         add_metadata_commands(
             &mut bar,
             owner.as_ref(),
-            &command_types::reference_type(&owner_type),
+            &command_types::reference_type(owner_type),
             &interface,
             &authored,
             resources,
@@ -68,6 +71,35 @@ pub(super) fn project(
     RootCommands {
         inline: bar.buttons,
         object_menu,
+    }
+}
+
+/// Standalone Form sources get the standard object commands independently of the main panel.
+pub(super) fn project_standalone(
+    form: &ComposedForm,
+    bar: &EffectiveElement,
+    resources: &[FormResource],
+) -> RootCommands {
+    if matches!(bar.scalar("Autofill"), Some("false" | "0")) {
+        return RootCommands::default();
+    }
+    object_type(form)
+        .map(|kind| standard_commands(&kind, owner_id(&kind).as_ref(), resources))
+        .unwrap_or_default()
+}
+
+fn standard_commands(
+    owner_type: &PropertyKey,
+    owner: Option<&ObjectId>,
+    resources: &[FormResource],
+) -> RootCommands {
+    let descriptor = owner.and_then(|id| effective_metadata(id, resources));
+    let Some(standard) = ObjectCommands::for_type(owner_type, descriptor, resources) else {
+        return RootCommands::default();
+    };
+    RootCommands {
+        inline: standard.inline(),
+        object_menu: menu::sections(standard, descriptor, resources),
     }
 }
 

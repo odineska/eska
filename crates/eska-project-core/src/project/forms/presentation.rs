@@ -352,15 +352,17 @@ fn present_element(
         resources,
         &mut appearance.diagnostics,
     );
-    let (auto_command_items, object_command_menu) = if element.kind == Some(ElementKind::Form) {
-        let commands = super::root_commands::project(form, resources, &mut appearance.diagnostics);
-        (commands.inline, commands.object_menu)
-    } else {
-        (
-            element_commands(element, &value_type, form, resources, sources),
-            Vec::new(),
-        )
-    };
+    let super::root_commands::RootCommands {
+        inline: auto_command_items,
+        object_menu: object_command_menu,
+    } = element_commands(
+        element,
+        &value_type,
+        form,
+        resources,
+        sources,
+        &mut appearance.diagnostics,
+    );
     let auto_commands = standard_form_commands(&auto_command_items);
     let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
     ElementPresentation {
@@ -571,8 +573,15 @@ fn element_commands(
     form: &ComposedForm,
     resources: &[FormResource],
     sources: &SourceItems<'_>,
-) -> Vec<super::AutoCommandItem> {
-    match element.kind {
+    diagnostics: &mut Vec<AppearanceDiagnostic>,
+) -> super::root_commands::RootCommands {
+    use super::root_commands::{self, RootCommands};
+
+    let inline = match element.kind {
+        Some(ElementKind::Form) => return root_commands::project(form, resources, diagnostics),
+        Some(ElementKind::CommandBar) if element.scalar("CommandSource") == Some("Form") => {
+            return root_commands::project_standalone(form, element, resources);
+        }
         Some(ElementKind::Table) => super::commands::table(element, value_type),
         Some(ElementKind::CommandBar) => super::commands::table_source(element, sources)
             .map(|table| {
@@ -581,6 +590,10 @@ fn element_commands(
             })
             .unwrap_or_default(),
         _ => Vec::new(),
+    };
+    RootCommands {
+        inline,
+        ..RootCommands::default()
     }
 }
 
