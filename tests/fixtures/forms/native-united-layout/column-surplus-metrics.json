@@ -1541,6 +1541,46 @@
           "nativeScreenshotSha256": "59d5682fe81cdec3556ff4005714b3ce57952b8514ed0b2c461e06e38d851a3b"
         },
         {
+          "width": 1134,
+          "viewportHeight": 620,
+          "divider": true,
+          "columns": [
+            [13, 362],
+            [385, 728]
+          ],
+          "inputs": [
+            [18, 352],
+            null
+          ],
+          "dateBlock": [390, 541],
+          "dateFields": [
+            ["Left", 544, 49],
+            ["Left", 544, 83]
+          ],
+          "nativeInputSha256": "280c6f95d425078dfeb1267a37ea1e5100317db8363169a3c766c3805111264f",
+          "nativeScreenshotSha256": "9122b47e8fd110f5927adee859201b1c87a7ea1a7d23571789e15b0b6f267c64"
+        },
+        {
+          "width": 1234,
+          "viewportHeight": 620,
+          "divider": true,
+          "columns": [
+            [13, 447],
+            [470, 743]
+          ],
+          "inputs": [
+            [18, 437],
+            null
+          ],
+          "dateBlock": [475, 541],
+          "dateFields": [
+            ["Left", 629, 49],
+            ["Left", 629, 83]
+          ],
+          "nativeInputSha256": "c3ddf4f58cb813b8df62fe61dfe03d47537ae6b7942ad0b8f5899baa078efdf2",
+          "nativeScreenshotSha256": "505530645240c973c61a1e0c7e87a7be2d941302296a68e372b53a1e1811e8c6"
+        },
+        {
           "width": 1334,
           "viewportHeight": 620,
           "columns": [
@@ -1567,6 +1607,88 @@
           "divider": false,
           "nativeInputSha256": "61ed7b925baf555ccc2d39ebb5c89c8693c4083aa7bca20d3e42211dc75aaa9d",
           "nativeScreenshotSha256": "e6d312be55041433fa718869d5bf16a4a182767245ff2a0f26c83175437a95a6"
+        }
+      ],
+      "throughVariants": [
+        {
+          "hideServices": true,
+          "cases": [
+            {
+              "width": 1134,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 372],
+                [395, 718]
+              ],
+              "inputs": [
+                [18, 362],
+                null
+              ],
+              "dateBlock": [400, 516],
+              "dateFields": [
+                ["Left", 541, 49],
+                ["Left", 541, 83]
+              ],
+              "nativeInputSha256": "c500da203fbf0d966b2d15d7f89204b2d6ae7ddc672d3ed3087dc03a7cca0c52",
+              "nativeScreenshotSha256": "008d5826d1bb9169fc9d5660bbbbba86e57ea89f8781f20d5d557265b0ae58fc"
+            },
+            {
+              "width": 1184,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 422],
+                [445, 718]
+              ],
+              "inputs": [
+                [18, 412],
+                null
+              ],
+              "dateBlock": [450, 516],
+              "dateFields": [
+                ["Left", 591, 49],
+                ["Left", 591, 83]
+              ],
+              "nativeInputSha256": "02057e7769ca13bed19d71f9723e92dc2f6b79f0f6f429323ffd53cfeba54aae",
+              "nativeScreenshotSha256": "cc5541e24303f3150bec8eccc2fed8fc7145126cca0cde3ee4e93e81374d7691"
+            }
+          ]
+        },
+        {
+          "traceWidth": 43,
+          "cases": [
+            {
+              "width": 1184,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 391],
+                [414, 749]
+              ],
+              "inputs": [
+                [18, 381],
+                null
+              ],
+              "dateBlock": [419, 558],
+              "dateFields": [
+                ["Left", 581, 49],
+                ["Left", 581, 83]
+              ],
+              "traceOffset": 117,
+              "nativeInputSha256": "5d90455d932a32a79d72162080487b8190def11f18d6a8c9bb5e7a91c7f22e6c",
+              "nativeScreenshotSha256": "be8b675a211f0100ef37153a186ed6a40444218386851802368cb7a79b22a752"
+            },
+            {
+              "width": 1234,
+              "viewportHeight": 620,
+              "divider": true,
+              "dateBlockWidth": 571,
+              "traceOffset": 130,
+              "nativeInputSha256": "fcf79b129fe1c3906c07683ce81c33059c20f5613c689b048d968c944c6ac47a",
+              "nativeScreenshotSha256": "9d850244b023a761614ddb4bfb00f4d92474a7bee5c6e91adc01494a37e8b2e4"
+            }
+          ]
         }
       ]
     }
