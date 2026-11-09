@@ -1,0 +1,790 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-09T04:09:44.101Z",
+  "scope": [
+    "T157",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "arch": "arm64",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "dpi": 96,
+    "zoom": 100,
+    "display": "private headless Mutter",
+    "scriptVariant": "English"
+  },
+  "implementation": {
+    "fixtureCommit": "b77eb3b2ad15c53c7758bcec85c3c75988d8b5c3",
+    "layoutCommit": "c06af75a3b522d9961f7e402ac817b20420459d9",
+    "reflowFixturesCommit": "0166f87d8d54ca015c60f195c76e2492f565683f",
+    "reflowCommit": "e10b3680d0a87b593fd7dce9450388ffb16d654e",
+    "fixtures": "../../tests/fixtures/forms/native-painted-group-spacing/metrics.json",
+    "metricsSha256": "6c9fcef6f8234845a98bea62f86ff0f965efe39aafb154dcc132365e732b9319"
+  },
+  "native": {
+    "canonicalFormsUnchanged": 49,
+    "geometryCaptures": [
+      {
+        "stand": "form-native-painted-spacing-zc1i5a88",
+        "locale": "en",
+        "captures": 30,
+        "directory": "preview-en",
+        "manifestSha256": "736c8d9eeedc2b652daee304b5ee5e72477aad81b7099c39aebfe5c2c89ce8f8"
+      },
+      {
+        "stand": "form-native-painted-spacing-zc1i5a88",
+        "locale": "ru",
+        "captures": 30,
+        "directory": "preview-ru",
+        "manifestSha256": "8446fcf4ccfb3142886f6a670768e6be7a725dd0c0e91744b431e52802a15b0c"
+      },
+      {
+        "stand": "form-native-painted-spacing-controls-ccx5wjnr",
+        "locale": "en",
+        "captures": 19,
+        "directory": "preview-en",
+        "manifestSha256": "e62b68990d33aa1883de0bf149a07a3af7dbc86a6d4478f9421a558d2d7d3c2c"
+      }
+    ]
+  },
+  "before": {
+    "stand": "form-painted-spacing-probe-tdqoqck1",
+    "referenceForms": 30,
+    "exactFramesAndFields": 23,
+    "differences": [
+      {
+        "form": "VerticalLeadingPaint",
+        "frameBefore": [
+          175,
+          200
+        ],
+        "frameNative": [
+          175,
+          195
+        ],
+        "fieldsBefore": {
+          "B": [
+            13,
+            124,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            164,
+            131,
+            23
+          ]
+        },
+        "fieldsNative": {
+          "B": [
+            13,
+            119,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            159,
+            131,
+            23
+          ]
+        }
+      },
+      {
+        "form": "VerticalPaintIndependent",
+        "frameBefore": [
+          175,
+          311
+        ],
+        "frameNative": [
+          175,
+          311
+        ],
+        "fieldsBefore": {
+          "Above": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            275,
+            131,
+            23
+          ]
+        },
+        "fieldsNative": {
+          "Above": [
+            18,
+            39,
+            131,
+            23
+          ],
+          "Below": [
+            18,
+            275,
+            131,
+            23
+          ]
+        }
+      },
+      {
+        "form": "VerticalNestedOuter",
+        "frameBefore": [
+          175,
+          215
+        ],
+        "frameNative": [
+          175,
+          223
+        ],
+        "fieldsBefore": {
+          "B": [
+            18,
+            134,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            179,
+            131,
+            23
+          ]
+        },
+        "fieldsNative": {
+          "B": [
+            18,
+            142,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            187,
+            131,
+            23
+          ]
+        }
+      },
+      {
+        "form": "VerticalNestedAsymmetric",
+        "frameBefore": [
+          185,
+          210
+        ],
+        "frameNative": [
+          185,
+          213
+        ],
+        "fieldsBefore": {
+          "B": [
+            18,
+            134,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            174,
+            131,
+            23
+          ]
+        },
+        "fieldsNative": {
+          "B": [
+            18,
+            137,
+            131,
+            23
+          ],
+          "Below": [
+            13,
+            177,
+            131,
+            23
+          ]
+        }
+      },
+      {
+        "form": "HorizontalLeadingPaint",
+        "frameBefore": [
+          326,
+          85
+        ],
+        "frameNative": [
+          321,
+          85
+        ],
+        "fieldsBefore": {
+          "B": [
+            174,
+            39,
+            131,
+            23
+          ]
+        },
+        "fieldsNative": {
+          "B": [
+            169,
+            44,
+            131,
+            23
+          ]
+        }
+      },
+      {
+        "form": "HorizontalTrailingPaint",
+        "frameBefore": [
+          326,
+          85
+        ],
+        "frameNative": [
+          326,
+          85
+        ],
+        "fieldsBefore": {
+          "A": [
+            13,
+            39,
+            131,
+            23
+          ]
+        },
+        "fieldsNative": {
+          "A": [
+            13,
+            44,
+            131,
+            23
+          ]
+        }
+      },
+      {
+        "form": "HorizontalNestedOuter",
+        "frameBefore": [
+          336,
+          85
+        ],
+        "frameNative": [
+          346,
+          85
+        ],
+        "fieldsBefore": {
+          "B": [
+            179,
+            44,
+            131,
+            23
+          ]
+        },
+        "fieldsNative": {
+          "B": [
+            189,
+            44,
+            131,
+            23
+          ]
+        }
+      }
+    ]
+  },
+  "coreGate": {
+    "stand": "form-batch-dv0mwa",
+    "batchSha256": "943577495aeea19d5c010fc6f5ffee10ec5c51d2bfed3117cb7992b8bf8c987e",
+    "inputsSha256": "bd76fbbe56986d89bde8ba8d2cdd7b83d70c57d8bf3be0e9a22c9c7c0915a783",
+    "vsixSha256": "e034f27394b5f4ffdaadd9659cb8c62f301740dd1a2daf26b259fe61155f9b82",
+    "backendSha256": "dc3b625d5c5ec63634d98da1e12fe3fd7ba2d3a925c87cf31f81e224ef0bb890",
+    "runtimeManifestSha256": "ae8ad2a35db9e0647adc79e94b541a7f7d97e2e741d1cdca4d05412c60d63f87",
+    "runtimeFiles": 1262,
+    "cases": 264,
+    "runs": [
+      {
+        "suite": "painted-group-spacing",
+        "locale": "en",
+        "cases": 53,
+        "receiptSha256": "874c573ce5002c93d6a91a964e7745bbbf83a74f260010ab1c3a881aaa280a34"
+      },
+      {
+        "suite": "painted-group-spacing",
+        "locale": "ru",
+        "cases": 53,
+        "receiptSha256": "f19d8c87b43fc8fc41aea21be7127357a642c1b97136dea5194ee8d61d722147"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "cases": 60,
+        "receiptSha256": "4cdfd310467c0160415de1a557dc6adb0db9dd9b1633d3e60988a99b20ad5f58"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "cases": 60,
+        "receiptSha256": "2b758125e3ceaa64c4363f939f2e38fefda80de0e3613fd1a924c00a322eaaa1"
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "en",
+        "cases": 19,
+        "receiptSha256": "c4b879692b523e554bfda78f69159fc82c7df7345c317cea97ccbeb20d7fccfe"
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "ru",
+        "cases": 19,
+        "receiptSha256": "bd57b88f92fc9dd4640163f6c3c18febc58992fdcfd706ba5233db0f36194027"
+      }
+    ]
+  },
+  "finalGate": {
+    "stand": "form-batch-osd00F",
+    "batchSha256": "7aefc396cf0cc7bf44735bdd49542769bc74bd77afb5ae8c3d6e7e270cdc9c37",
+    "inputsSha256": "ffa3e93f97393f000902408546452e42c002289d3da7e405d108ad04e7133b98",
+    "vsixSha256": "6125527c42b92fbf58b41f7fde6244aaf820e2f9517d03bd923fb75b384205a0",
+    "backendSha256": "dc3b625d5c5ec63634d98da1e12fe3fd7ba2d3a925c87cf31f81e224ef0bb890",
+    "runtimeManifestSha256": "2f87a1bf70198b827b48f180024ed59eeae9d41de9e001753aa135a12e95293c",
+    "runtimeFiles": 1262,
+    "cases": 814,
+    "runs": [
+      {
+        "suite": "painted-group-spacing",
+        "locale": "en",
+        "cases": 65,
+        "receiptSha256": "ce0e24f26445f651a3985f5679f9092d643b86b6f0317ce50dc8b32ed3657186"
+      },
+      {
+        "suite": "painted-group-spacing",
+        "locale": "ru",
+        "cases": 65,
+        "receiptSha256": "eaf39ae51bde69bde216da1af4b9c2a8f31946739f4cedfd76bc47199d19e294"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "cases": 60,
+        "receiptSha256": "5bbc661afa02e5287c7953e724bf348d5e937c8f070be28cd09ee862a658a468"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "cases": 60,
+        "receiptSha256": "41c54fbbfbee2f1b5855000b63a86fcf818b43d0777105f65da9e73655c7481a"
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "en",
+        "cases": 19,
+        "receiptSha256": "029f45eb549fd092ed3c231f61de3a0cb920b643b67d9ca2540b9c0feadf385b"
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "ru",
+        "cases": 19,
+        "receiptSha256": "6db3f9ebc172fca537215a7403440e79c5d8fad50853aff3124271bdd29f216e"
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "cases": 22,
+        "receiptSha256": "e3fde9a7b059bdf534e211e20db6465bd9324743a562b68754c3994977b25371"
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "cases": 22,
+        "receiptSha256": "c8722f7a799eaa9887e9e8faec41b406fe4982b2d11b83549f5f69d8959d2a24"
+      },
+      {
+        "suite": "united",
+        "locale": "en",
+        "cases": 9,
+        "receiptSha256": "133ecbab00e0f9cc018cc6190703ec69e87a0643ad8e89a542c7df445ac23070"
+      },
+      {
+        "suite": "united",
+        "locale": "ru",
+        "cases": 9,
+        "receiptSha256": "faa8c18d1cca9396bb88110bebadc51880375e79aafa0beab795c988605881ad"
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "cases": 98,
+        "receiptSha256": "fc31553ba0f90baf27dd95c8d885dc094d8ebc05307d1b899b2c9fa862a5ff2e"
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "cases": 98,
+        "receiptSha256": "da5f72630630ce6fc5cc9e466992c0a0b29f0135b15b77aec65908bea54fa646"
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "cases": 31,
+        "receiptSha256": "3a57b578ade3ba9e64f18fb0ffba382ba67be0d3b0cf427bb2a7a2d108051641"
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "cases": 31,
+        "receiptSha256": "c9374fadeaa12990ed71b24d1187692d5ee830d795819256a8b8380d06e99772"
+      },
+      {
+        "suite": "mixed-row-spacing",
+        "locale": "en",
+        "cases": 39,
+        "receiptSha256": "917d05203d82892a67e12710b9c4286647038010d3c9e0602a845005260a9e73"
+      },
+      {
+        "suite": "mixed-row-spacing",
+        "locale": "ru",
+        "cases": 39,
+        "receiptSha256": "ce6716fef079d58766b5329a56567101445d2e0eef5142088158e43e615ec67c"
+      },
+      {
+        "suite": "table-row-depth",
+        "locale": "en",
+        "cases": 64,
+        "receiptSha256": "621d405006563db4fa4ba69682de393309ad1196d91ad4f659dcb7380895fb80"
+      },
+      {
+        "suite": "table-row-depth",
+        "locale": "ru",
+        "cases": 64,
+        "receiptSha256": "9195523509399a83177562a81d1a071833a999fef317a6b024f45dab14c924c0"
+      }
+    ]
+  },
+  "measurements": {
+    "en": {
+      "forms": 49,
+      "measuredFields": 165,
+      "measuredFills": 80,
+      "dirtyXmlTransitions": 8,
+      "resizeTransitions": 8
+    },
+    "ru": {
+      "forms": 49,
+      "measuredFields": 165,
+      "measuredFills": 80,
+      "dirtyXmlTransitions": 8,
+      "resizeTransitions": 8
+    }
+  },
+  "resizeComparison": {
+    "stand": "form-painted-reflow-compare-hu681_qc",
+    "viewportVerified": true,
+    "runs": [
+      {
+        "stage": "baseline",
+        "batch": "form-batch-dv0mwa",
+        "cases": [
+          {
+            "label": "main-resize-324",
+            "frame": [
+              331,
+              179
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "main-resize-274",
+            "frame": [
+              331,
+              179
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "main-resize-384",
+            "frame": [
+              384,
+              117
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "main-resize-331",
+            "frame": [
+              331,
+              117
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "detached-resize-324",
+            "frame": [
+              331,
+              179
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "detached-resize-274",
+            "frame": [
+              331,
+              179
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "detached-resize-384",
+            "frame": [
+              384,
+              117
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "detached-resize-331",
+            "frame": [
+              331,
+              117
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          }
+        ]
+      },
+      {
+        "stage": "current",
+        "batch": "form-batch-y84noR",
+        "cases": [
+          {
+            "label": "main-resize-324",
+            "frame": [
+              324,
+              194
+            ],
+            "secondField": [
+              18,
+              121,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "main-resize-274",
+            "frame": [
+              274,
+              194
+            ],
+            "secondField": [
+              18,
+              121,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "main-resize-384",
+            "frame": [
+              384,
+              117
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "main-resize-331",
+            "frame": [
+              331,
+              117
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "detached-resize-324",
+            "frame": [
+              324,
+              194
+            ],
+            "secondField": [
+              18,
+              121,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "detached-resize-274",
+            "frame": [
+              274,
+              194
+            ],
+            "secondField": [
+              18,
+              121,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "detached-resize-384",
+            "frame": [
+              384,
+              117
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          },
+          {
+            "label": "detached-resize-331",
+            "frame": [
+              331,
+              117
+            ],
+            "secondField": [
+              174,
+              44,
+              131,
+              23
+            ]
+          }
+        ]
+      }
+    ],
+    "firstAttempt": {
+      "stand": "form-batch-y84noR",
+      "failure": "Помощник теста возвращал предпочитаемый размер перед чтением.",
+      "responsiveEnPassed": 31
+    }
+  },
+  "titleInk": {
+    "form": "VerticalPaintedTitle",
+    "relativeTo": "upper-left of the solid WrapperA fill",
+    "criterion": "max(R,G,B) < 190",
+    "native": [
+      5,
+      7,
+      61,
+      20
+    ],
+    "viewer": {
+      "en": [
+        5,
+        7,
+        63,
+        19
+      ],
+      "ru": [
+        5,
+        7,
+        63,
+        19
+      ]
+    }
+  },
+  "wholeForms": {
+    "stand": "form-painted-spacing-whole-7mw4hp62",
+    "unchangedSources": 4,
+    "runs": [
+      {
+        "mode": "bsp-en",
+        "results": 3,
+        "receiptSha256": "b54d6225350688fe11bd1b7311e870f4bc1ce60852b0c74cf9a3827edb4dad89"
+      },
+      {
+        "mode": "bsp-ru",
+        "results": 3,
+        "receiptSha256": "6a1a3f637df124d8f733cba25b04c3f6b5850276a7945e1d72bbd6b8afa78d5f"
+      },
+      {
+        "mode": "loan-docked-en",
+        "results": 1,
+        "receiptSha256": "87ba4a2144bf5b1b1b2e62b42e229f38bf914af2529092abe1d38facd987ccdb"
+      },
+      {
+        "mode": "loan-docked-ru",
+        "results": 1,
+        "receiptSha256": "ac2d0a5b590d76fe4a1c6b188670a16c8e94263034ad6517633f09c9cb2550f4"
+      },
+      {
+        "mode": "loan-detached-en",
+        "results": 1,
+        "receiptSha256": "9ababd65c0036801dc775ec2c06874a3fd2b772f1406296bcf8d07e1c88cbc29"
+      },
+      {
+        "mode": "loan-detached-ru",
+        "results": 1,
+        "receiptSha256": "cd710da797cf0d8d175e416cc45f8984ad3c412d05c9c4f56b87def7ab5ec8cf"
+      }
+    ]
+  },
+  "validation": {
+    "rust": {
+      "formatCheck": true,
+      "check": true,
+      "clippyAllTargetsAllFeatures": true,
+      "passed": 1580,
+      "ignored": 19
+    },
+    "node": {
+      "passed": 731,
+      "skipped": 8
+    }
+  },
+  "limits": [
+    "Сверены прямоугольники рамок, полей и заливки. Полный RGB и форма глифов требуют отдельной приёмки.",
+    "На native-стенде ширина задавалась в XML. В Explorer менялась измеренная область во вкладке и в отдельном окне.",
+    "Для вложенных условных групп, других DPI и Windows нужны дополнительные native-замеры."
+  ]
+}
