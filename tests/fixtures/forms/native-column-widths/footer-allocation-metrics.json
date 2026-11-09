@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "sourceFiles": {
+    "FooterAllocation": "ad649a674707a93f3b12d32a23cbd31d5fb48f10545effd06576072551485c7e"
+  },
+  "fixtures": {
+    "FooterAllocation": {
+      "cases": [
+        {
+          "name": "fixed total gives the comment its full width",
+          "frame": [1214, 250],
+          "nativeCapture": "Wide.png",
+          "screenshotSha256": "bb4f745414bc19d0dd5df37cfe64d0e3e04aedb8a3174d798586c4b6749ea113",
+          "tolerancePx": 1,
+          "controls": {
+            "Memo": [13, null, 511, null],
+            "Fixed": [574, null, 162, null],
+            "Owner": [792, null, 194, null],
+            "Amount": [1050, null, 142, null]
+          }
+        },
+        {
+          "name": "explicitly fixed totals preserve the same allocation",
+          "frame": [1214, 250],
+          "nativeCapture": "WideFixedRight.png",
+          "screenshotSha256": "9c0f25076e39149c553192a6f0bb931c1d28b8e818bddeb116bb4dda94b61008",
+          "tolerancePx": 1,
+          "controls": {
+            "Memo": [13, null, 511, null],
+            "Fixed": [574, null, 162, null],
+            "Owner": [792, null, 194, null],
+            "Amount": [1050, null, 142, null]
+          },
+          "edit": {
+            "groups": {
+              "Totals": {
+                "HorizontalStretch": "false"
+              }
+            }
+          }
+        },
+        {
+          "name": "bounded details leave the total at the trailing edge",
+          "frame": [1034, 250],
+          "nativeCapture": "MediumBounded.png",
+          "screenshotSha256": "a8913323f8f2245cfdd1eddde2759f6f46c2249e9f16078579a8f398532d141f",
+          "tolerancePx": 1,
+          "controls": {
+            "Memo": [13, null, 511, null],
+            "Fixed": [574, null, 162, null],
+            "Owner": null,
+            "Amount": [870, null, 142, null]
+          },
+          "edit": {
+            "hiddenFields": ["Owner"]
+          }
+        },
+        {
+          "name": "extra room remains between the bounded groups",
+          "frame": [1214, 250],
+          "nativeCapture": "WideBounded.png",
+          "screenshotSha256": "d6bb16d15e766af22fbd1d302279b9717d7c4a2b4508d2e0b65023739e8ea9a4",
+          "tolerancePx": 1,
+          "controls": {
+            "Memo": [13, null, 511, null],
+            "Fixed": [574, null, 162, null],
+            "Owner": null,
+            "Amount": [1050, null, 142, null]
+          },
+          "edit": {
+            "hiddenFields": ["Owner"]
+          }
+        }
+      ]
+    }
+  }
+}
