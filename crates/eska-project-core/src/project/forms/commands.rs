@@ -3,15 +3,14 @@
 use super::presentation::{definition_caption, literal, metadata_property};
 use super::{
     AppearanceDiagnostic, ButtonRepresentation, ComposedForm, EffectiveDefinition,
-    EffectiveElement, ElementFamily, ElementKind, FORM_NAMESPACE, FormPicture, FormResource,
-    PresentationText, PropertySource, appearance::text, pictures,
+    EffectiveElement, ElementKind, FORM_NAMESPACE, FormPicture, FormResource, PresentationText,
+    PropertySource, appearance::text, composition::SourceItems, pictures,
 };
 use crate::project::{
     metadata_model::{MetadataValue, ObjectId},
     metadata_parser::ParsedObject,
 };
 use serde::Serialize;
-use std::collections::HashMap;
 
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -162,7 +161,7 @@ pub(super) fn local_command<'a>(
         .find(|command| command.name.as_deref() == Some(name))
 }
 
-pub(super) fn visible(tables: &TableIndex<'_>, command: Option<&str>) -> bool {
+pub(super) fn visible(items: &SourceItems<'_>, command: Option<&str>) -> bool {
     // These commands require a distributed/standalone server context. The ordinary desktop
     // Configurator profile retains their XML nodes but excludes them from the visual bar.
     if matches!(
@@ -180,7 +179,9 @@ pub(super) fn visible(tables: &TableIndex<'_>, command: Option<&str>) -> bool {
     else {
         return true;
     };
-    !tables.get(table).is_some_and(|table| excludes(table, name))
+    !items
+        .table(table)
+        .is_some_and(|table| excludes(table, name))
 }
 
 pub(super) fn autofill(element: &EffectiveElement) -> bool {
@@ -204,44 +205,13 @@ pub(super) fn table(
     table_items(element, value_type)
 }
 
-pub(super) type TableIndex<'a> = HashMap<&'a str, &'a EffectiveElement>;
-
-pub(super) fn table_index(root: &EffectiveElement) -> TableIndex<'_> {
-    fn visit<'a>(element: &'a EffectiveElement, tables: &mut TableIndex<'a>) {
-        if element.kind == Some(ElementKind::Table)
-            && let Some(name) = element.name.as_deref()
-        {
-            tables.entry(name).or_insert(element);
-        }
-        for child in &element.children {
-            visit(child, tables);
-        }
-    }
-
-    let mut tables = TableIndex::new();
-    visit(root, &mut tables);
-    tables
-}
-
-fn declares_columns(element: &EffectiveElement) -> bool {
-    element.children.iter().any(|child| {
-        child.kind.is_some_and(|kind| {
-            kind.family() == ElementFamily::Field
-                || kind == ElementKind::ColumnGroup && declares_columns(child)
-        })
-    })
-}
-
 /// A standalone command bar can draw table actions independently of the table's own bar.
 pub(super) fn table_source<'a>(
     bar: &EffectiveElement,
-    tables: &TableIndex<'a>,
+    items: &SourceItems<'a>,
 ) -> Option<&'a EffectiveElement> {
     let name = bar.scalar("CommandSource")?.strip_prefix("Item.")?;
-    tables
-        .get(name)
-        .copied()
-        .filter(|table| declares_columns(table))
+    items.table(name).filter(|table| table.declares_columns())
 }
 
 pub(super) fn excludes(table: &EffectiveElement, command: &str) -> bool {

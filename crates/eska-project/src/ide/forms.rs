@@ -164,6 +164,7 @@ impl Server {
             project,
             pictures: self.client_minor >= 37,
             input_preparation: self.client_minor >= 38,
+            layout_additions: self.client_minor >= 43,
             activity: session
                 .activity
                 .as_ref()

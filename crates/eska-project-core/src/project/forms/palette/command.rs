@@ -13,7 +13,7 @@ use super::{
     },
 };
 use crate::project::{
-    forms::{EffectiveElement, ElementKind, ElementPresentation, appearance, is_form_property},
+    forms::{EffectiveElement, ElementKind, ElementPresentation, additions},
     metadata_model::MetadataValue,
 };
 
@@ -103,26 +103,17 @@ pub(super) fn addition_definitions(
 }
 
 pub(super) fn source_caption(value: &MetadataValue) -> Option<PaletteCaption<'_>> {
-    let MetadataValue::Record(fields) = value else {
-        return None;
-    };
-    if fields.len() != 2 {
-        return None;
-    }
-    let get = |name| {
-        fields
-            .iter()
-            .find(|field| is_form_property(&field.key, name))
-            .and_then(|field| appearance::text(&field.value))
-    };
-    let item = get("Item").filter(|item| !item.is_empty())?;
-    let member = match get("Type")? {
-        "SearchStringRepresentation" => "searchStringMember",
-        "SearchControl" => "searchControlMember",
-        "ViewStatusRepresentation" => "viewStatusMember",
+    let source = additions::source(value)?;
+    let member = match source.kind {
+        ElementKind::SearchStringAddition => "searchStringMember",
+        ElementKind::SearchControlAddition => "searchControlMember",
+        ElementKind::ViewStatusAddition => "viewStatusMember",
         _ => return None,
     };
-    Some(PaletteCaption::ScriptMember { item, member })
+    Some(PaletteCaption::ScriptMember {
+        item: source.item,
+        member,
+    })
 }
 
 const TYPE: Row = Row::new("Type", Main, Enum, Empty).with_source(Kind);

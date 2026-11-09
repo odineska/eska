@@ -16,6 +16,7 @@ pub(super) struct Context<'a> {
     pub project: &'a ProjectSession,
     pub pictures: bool,
     pub input_preparation: bool,
+    pub layout_additions: bool,
     pub activity: Option<&'a eska_project_core::project::activity::State>,
 }
 
@@ -72,7 +73,7 @@ impl State {
                 context.activity,
             )
             .map_err(preview_error)?;
-        let (model, bytes) = dto::model(context.labels, &preview)?;
+        let (model, bytes) = dto::model(context.labels, &preview, context.layout_additions)?;
         self.admit(0, bytes)?;
         self.serial = self.serial.checked_add(1).ok_or_else(limit)?;
         let id = format!("f{}", self.serial);
@@ -127,7 +128,8 @@ impl State {
             )
             .map_err(preview_error)
             .and_then(|preview| {
-                let (model, bytes) = dto::model(context.labels, &preview)?;
+                let (model, bytes) =
+                    dto::model(context.labels, &preview, context.layout_additions)?;
                 self.admit(entry.bytes, bytes)?;
                 Ok((preview, model, bytes))
             });

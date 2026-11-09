@@ -3,9 +3,10 @@
 use super::{
     AppearanceDiagnostic, ButtonRepresentation, ComposedForm, EffectiveDefinition,
     EffectiveElement, ElementFamily, ElementIdentity, ElementKind, FormDocument, FormResource,
-    PropertySource, ResolvedColor, ResolvedFont, SourcedProperty,
+    PropertySource, ResolvedColor, ResolvedFont, SourcedProperty, additions,
     appearance::{self, Appearance},
     commands::{ResolvedCommand, effective_metadata},
+    composition::SourceItems,
     pictures, references,
 };
 use crate::project::{
@@ -170,13 +171,13 @@ pub fn present(
 ) -> FormPresentation {
     let mut appearance = Appearance::new(documents, resources);
     let mut elements = Vec::new();
-    let tables = super::commands::table_index(&form.root);
+    let sources = SourceItems::new(&form.root);
     visit(
         &form.root,
         VisitScope::default(),
         form,
         resources,
-        &tables,
+        &sources,
         &mut appearance,
         &mut elements,
     );
@@ -269,12 +270,12 @@ fn visit(
     scope: VisitScope<'_>,
     form: &ComposedForm,
     resources: &[FormResource],
-    tables: &super::commands::TableIndex<'_>,
+    sources: &SourceItems<'_>,
     appearance: &mut Appearance<'_>,
     output: &mut Vec<ElementPresentation>,
 ) {
     output.push(present_element(
-        element, scope, form, resources, tables, appearance,
+        element, scope, form, resources, sources, appearance,
     ));
     let child_scope = VisitScope {
         parent: Some(element),
@@ -291,7 +292,7 @@ fn visit(
             child_scope,
             form,
             resources,
-            tables,
+            sources,
             appearance,
             output,
         );
@@ -303,7 +304,7 @@ fn present_element(
     scope: VisitScope<'_>,
     form: &ComposedForm,
     resources: &[FormResource],
-    tables: &super::commands::TableIndex<'_>,
+    sources: &SourceItems<'_>,
     appearance: &mut Appearance<'_>,
 ) -> ElementPresentation {
     let FieldBinding {
@@ -356,7 +357,7 @@ fn present_element(
         (commands.inline, commands.object_menu)
     } else {
         (
-            element_commands(element, &value_type, form, resources, tables),
+            element_commands(element, &value_type, form, resources, sources),
             Vec::new(),
         )
     };
@@ -369,7 +370,8 @@ fn present_element(
         grouping: grouping(element),
         united: group_united(element),
         displayed: is_displayed(element, binding.as_ref(), appearance)
-            && super::commands::visible(tables, command_name)
+            && super::commands::visible(sources, command_name)
+            && additions::available(element, sources)
             && (scope.parent.is_some_and(is_command_area)
                 || !matches!(
                     element.kind,
@@ -388,7 +390,7 @@ fn present_element(
             .property("FooterText")
             .and_then(|value| literal(&value.property.value)),
         table_column_appearance: table_column_appearance(element, scope, appearance),
-        table_command_menu: table_command_menu(element, &value_type, form, resources, tables),
+        table_command_menu: table_command_menu(element, &value_type, form, resources, sources),
         value_type,
         binding,
         choices,
@@ -568,11 +570,11 @@ fn element_commands(
     value_type: &FieldType,
     form: &ComposedForm,
     resources: &[FormResource],
-    tables: &super::commands::TableIndex<'_>,
+    sources: &SourceItems<'_>,
 ) -> Vec<super::AutoCommandItem> {
     match element.kind {
         Some(ElementKind::Table) => super::commands::table(element, value_type),
-        Some(ElementKind::CommandBar) => super::commands::table_source(element, tables)
+        Some(ElementKind::CommandBar) => super::commands::table_source(element, sources)
             .map(|table| {
                 let binding = bind(table, form, resources);
                 super::commands::table_items(table, &binding.value_type)
@@ -587,12 +589,12 @@ fn table_command_menu(
     value_type: &FieldType,
     form: &ComposedForm,
     resources: &[FormResource],
-    tables: &super::commands::TableIndex<'_>,
+    sources: &SourceItems<'_>,
 ) -> Vec<Vec<super::AutoCommandItem>> {
     let table = match element.kind {
         Some(ElementKind::Table) if super::commands::autofill(element) => element,
         Some(ElementKind::CommandBar) => {
-            let Some(table) = super::commands::table_source(element, tables) else {
+            let Some(table) = super::commands::table_source(element, sources) else {
                 return Vec::new();
             };
             table

@@ -178,12 +178,10 @@ impl<'a> Parser<'a> {
                 for item in child.children().filter(Node::is_element) {
                     let mut item = self.element(item, false)?;
                     item.in_child_items = true;
-                    if item.kind.is_some_and(|kind| {
-                        matches!(
-                            kind.family(),
-                            ElementFamily::Auxiliary | ElementFamily::Addition
-                        )
-                    }) {
+                    if item
+                        .kind
+                        .is_some_and(|kind| kind.family() == ElementFamily::Auxiliary)
+                    {
                         element.auxiliary.push(item);
                     } else {
                         element.children.push(item);

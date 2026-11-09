@@ -5,6 +5,8 @@ use eska_project_core::project::metadata_edit::snapshot;
 mod command_palette;
 #[path = "forms_native_palette.rs"]
 mod native_palette;
+#[path = "forms_standalone_additions.rs"]
+mod standalone_additions;
 #[path = "forms_table_palette.rs"]
 mod table_palette;
 
