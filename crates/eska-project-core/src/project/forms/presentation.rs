@@ -18,6 +18,9 @@ use crate::project::{
 use serde::Serialize;
 
 mod incomplete;
+mod inspector_data;
+
+pub use inspector_data::InspectorDataField;
 
 #[derive(Clone, Debug, Serialize)]
 #[serde(tag = "kind", rename_all = "camelCase")]

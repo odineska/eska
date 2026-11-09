@@ -90,8 +90,14 @@ fn element(
         "properties":form.inspectable_properties(value).map(|value| property(labels,value)).collect::<Vec<_>>(),"presentation":presentation,
         "children":children,"auxiliary":auxiliary})
 }
-fn definition(labels: &Labels, value: &EffectiveDefinition) -> Value {
-    json!({"name":value.name,"xmlName":value.xml_name,"origin":origin(&value.origin),"qualifiers":value.qualifiers,"properties":value.properties.iter().map(|value| property(labels,value)).collect::<Vec<_>>()})
+fn definition(labels: &Labels, value: &EffectiveDefinition, api_minor: u32) -> Value {
+    let mut result = json!({"name":value.name,"xmlName":value.xml_name,"origin":origin(&value.origin),"qualifiers":value.qualifiers,"properties":value.properties.iter().map(|value| property(labels,value)).collect::<Vec<_>>()});
+    if api_minor >= 45
+        && let Some(value_type) = value.inspector_type()
+    {
+        result["valueType"] = json!(value_type);
+    }
+    result
 }
 pub(super) fn model(
     labels: &Labels,
@@ -147,9 +153,17 @@ pub(super) fn model(
         eska_project_core::project::forms::FormHandlerOwner::Element(value)=>json!({"kind":"element","identity":identity(value)}),
         eska_project_core::project::forms::FormHandlerOwner::Command(name)=>json!({"kind":"command","name":name}),
     },"event":handler.event,"name":handler.name,"origin":origin(&handler.origin)})).collect::<Vec<_>>();
-    let mut model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations,layout_additions),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
-        "commands":preview.form.commands.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
+    let definition = |value| definition(labels, value, api_minor);
+    let mut model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations,layout_additions),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(definition).collect::<Vec<_>>(),
+        "commands":preview.form.commands.iter().map(definition).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(definition).collect::<Vec<_>>(),
         "diagnostics":{"composition":preview.form.diagnostics,"appearance":preview.presentation.diagnostics}});
+    if api_minor >= 45 {
+        model["dataFields"] = json!(preview.inspector_data().iter().map(|field| json!({
+            "path":field.path,"valueType":field.value_type,
+            "type":field.type_property.map(|value| dto::property_record(labels, MetadataKind::Attribute, value)),
+            "origin":field.origin.as_ref().map(origin)
+        })).collect::<Vec<_>>());
+    }
     model["activityColor"] = json!(preview.presentation.activity_color);
     if api_minor >= 44 {
         model["formHelpAvailable"] = json!(preview.form_help_available);

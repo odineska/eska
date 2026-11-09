@@ -187,7 +187,7 @@ impl Server {
                     &input.form_session_id,
                     args,
                 )?,
-                "form/locate" => navigation::locate(entry, args, self.client_minor >= 41)?,
+                "form/locate" => navigation::locate(entry, args, self.client_minor)?,
                 "form/inspect" if self.client_minor >= 41 => {
                     palette::inspect(&self.labels, entry, &input.form_session_id, args)?
                 }

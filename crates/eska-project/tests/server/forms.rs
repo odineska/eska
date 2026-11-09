@@ -77,6 +77,102 @@ fn params(context: &Value, values: Value) -> Value {
 }
 
 #[test]
+fn form_inspector_resolves_unbound_fields_without_mixing_definition_paths() {
+    const OWNER_PATH: &str = "Documents/Receipt.xml";
+    const OWNER: &str = r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"
+        xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:x="http://www.w3.org/2001/XMLSchema">
+        <Document uuid="receipt"><Properties><Name>Receipt</Name><NumberLength>11</NumberLength><NumberType>String</NumberType></Properties>
+        <ChildObjects>
+        <Attribute uuid="amount"><Properties><Name>Amount</Name><Type><v8:Type>x:decimal</v8:Type>
+        <v8:NumberQualifiers><v8:Digits>15</v8:Digits><v8:FractionDigits>2</v8:FractionDigits><v8:AllowedSign>Nonnegative</v8:AllowedSign></v8:NumberQualifiers>
+        </Type></Properties></Attribute>
+        <TabularSection uuid="rows"><Properties><Name>Rows</Name></Properties><ChildObjects>
+        <Attribute uuid="quantity"><Properties><Name>Quantity</Name><Type><v8:Type>x:decimal</v8:Type></Type></Properties></Attribute>
+        </ChildObjects></TabularSection></ChildObjects></Document></MetaDataObject>"#;
+    const FORM: &str = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core"
+        xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:x="http://www.w3.org/2001/XMLSchema">
+        <ChildItems><InputField name="Left" id="10"><DataPath>Object.Amount</DataPath></InputField>
+        <InputField name="Right" id="11"><DataPath>Object.Amount</DataPath></InputField></ChildItems>
+        <Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:DocumentObject.Receipt</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute>
+        <Attribute name="Amount" id="2"><Type><v8:Type>x:string</v8:Type><v8:Type>x:boolean</v8:Type>
+        <v8:StringQualifiers><v8:Length>100</v8:Length></v8:StringQualifiers></Type></Attribute></Attributes></Form>"#;
+    let directory = fixture();
+    let source = directory.0.join("src");
+    fs::create_dir(source.join("Documents")).unwrap();
+    fs::write(source.join(OWNER_PATH), OWNER).unwrap();
+    fs::write(source.join(PATH), FORM).unwrap();
+    let config = source.join("Configuration.xml");
+    fs::write(
+        &config,
+        fs::read_to_string(&config).unwrap().replace(
+            "<ChildObjects>",
+            "<ChildObjects><Document>Receipt</Document>",
+        ),
+    )
+    .unwrap();
+
+    for minor in [44, 45] {
+        let mut client = Client::new(&directory.0, "ru-RU");
+        let (context, node) = connect(&mut client, &directory.0, "ru-RU", minor);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        if minor == 44 {
+            assert!(opened["model"].get("dataFields").is_none());
+            assert!(opened["model"]["attributes"][1].get("valueType").is_none());
+            client.finish();
+            continue;
+        }
+        let fields = opened["model"]["dataFields"].as_array().unwrap();
+        let data_field = |path: Value| fields.iter().find(|field| field["path"] == path).unwrap();
+        let amount = data_field(json!(["Object", "Amount"]));
+        assert_eq!(amount["valueType"]["digits"], 15);
+        assert_eq!(amount["valueType"]["fraction"], 2);
+        assert_eq!(amount["valueType"]["allowedSign"], "Nonnegative");
+        assert_eq!(
+            amount["type"]["value"]["fields"][0]["value"]["text"],
+            "x:decimal"
+        );
+        assert_eq!(
+            data_field(json!(["Object", "Number"]))["valueType"]["length"],
+            11
+        );
+        assert_eq!(
+            data_field(json!(["Object", "Ref"]))["valueType"]["types"][0]["name"],
+            "DocumentRef.Receipt"
+        );
+        assert_eq!(
+            data_field(json!(["Object", "Rows", "Quantity"]))["valueType"]["kind"],
+            "number"
+        );
+        let standalone = &opened["model"]["attributes"][1];
+        assert_eq!(standalone["name"], "Amount");
+        assert_eq!(standalone["valueType"]["kind"], "composite");
+        assert_eq!(standalone["valueType"]["length"], 100);
+        assert_eq!(
+            standalone["valueType"]["types"][0]["namespace"],
+            "http://www.w3.org/2001/XMLSchema"
+        );
+
+        let location = client.request(
+            "form/locate",
+            &params(
+                &context,
+                json!({
+                    "formSessionId":opened["formSessionId"], "revision":opened["revision"],
+                    "target":{"kind":"dataPath","path":["Object","Rows","Quantity"]}
+                }),
+            ),
+        );
+        assert_eq!(source_path(&location), Path::new(OWNER_PATH));
+        let start = usize::try_from(location["range"]["start"].as_u64().unwrap()).unwrap();
+        let end = usize::try_from(location["range"]["end"].as_u64().unwrap()).unwrap();
+        assert!(OWNER[start..end].contains("<Name>Quantity</Name>"));
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(source.join(PATH)).unwrap(), FORM);
+    assert_eq!(fs::read_to_string(source.join(OWNER_PATH)).unwrap(), OWNER);
+}
+
+#[test]
 fn form_help_availability_follows_dirty_pages_and_negotiated_api() {
     const HELP_PATH: &str = "CommonForms/Preview/Ext/Help.xml";
     const HELP: &str = r#"<Help xmlns="http://v8.1c.ru/8.3/xcf/extrnprops"><Page>ru</Page></Help>"#;
