@@ -198,6 +198,68 @@
               }
             }
           }
+        },
+        {
+          "name": "dirty picture width 1 uses its own painted maximum",
+          "frame": [
+            874,
+            450
+          ],
+          "nativeCapture": "Picture01084.png",
+          "screenshotSha256": "ca87f127c3d94be918351dbc1c93df8a6edb77f1d50a0e79484c4c69fa791ebf",
+          "controlSizes": {
+            "OutgoingStatus": [
+              12,
+              20
+            ],
+            "IncomingStatus": [
+              12,
+              20
+            ]
+          },
+          "edit": {
+            "fields": {
+              "OutgoingStatus": {
+                "Width": "1",
+                "MaxWidth": "1"
+              },
+              "IncomingStatus": {
+                "Width": "1",
+                "MaxWidth": "1"
+              }
+            }
+          }
+        },
+        {
+          "name": "dirty picture width 3 uses its own painted maximum",
+          "frame": [
+            874,
+            450
+          ],
+          "nativeCapture": "Picture03084.png",
+          "screenshotSha256": "6b1241d0ede5c73dc2c66fe11d5bdbdc5b5d8025ee60bdbdae97a54a5127b942",
+          "controlSizes": {
+            "OutgoingStatus": [
+              32,
+              20
+            ],
+            "IncomingStatus": [
+              32,
+              20
+            ]
+          },
+          "edit": {
+            "fields": {
+              "OutgoingStatus": {
+                "Width": "3",
+                "MaxWidth": "3"
+              },
+              "IncomingStatus": {
+                "Width": "3",
+                "MaxWidth": "3"
+              }
+            }
+          }
         }
       ]
     }

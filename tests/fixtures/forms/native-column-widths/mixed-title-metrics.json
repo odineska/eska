@@ -292,6 +292,78 @@
               }
             }
           }
+        },
+        {
+          "name": "natural mixed picture uses the authored width",
+          "frame": [
+            626,
+            250
+          ],
+          "nativeCapture": "Empty000.png",
+          "screenshotSha256": "b5ba3523b699c646b16f6aa315df2a19aa4a7e5d0e7079c8ae76d73dcb013111",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              203,
+              23
+            ],
+            "OutgoingStatus": [
+              423,
+              153,
+              20,
+              20
+            ]
+          }
+        },
+        {
+          "name": "a small surplus retains the natural picture width",
+          "frame": [
+            634,
+            250
+          ],
+          "nativeCapture": "Empty060.png",
+          "screenshotSha256": "c003d140c287f37fa564894e974da843c5257568a0d6e60ca9396c1a528d697c",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              207,
+              23
+            ],
+            "OutgoingStatus": [
+              427,
+              153,
+              20,
+              20
+            ]
+          }
+        },
+        {
+          "name": "the picture stops at the painted maximum",
+          "frame": [
+            684,
+            250
+          ],
+          "nativeCapture": "Empty065.png",
+          "screenshotSha256": "9b109d6939a46cee41b5474f0f3d8c0d322e4763bbbcb284fa91c60803455bfd",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              235,
+              23
+            ],
+            "OutgoingStatus": [
+              455,
+              153,
+              22,
+              20
+            ]
+          }
         }
       ]
     }
