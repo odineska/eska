@@ -4,6 +4,7 @@ mod button;
 mod checkbox;
 mod input_field;
 mod root_form;
+mod table;
 
 use std::collections::{HashMap, HashSet};
 
@@ -207,6 +208,12 @@ impl FormPreview {
             Some(ElementKind::CheckBoxField) => presentation()
                 .and_then(|item| checkbox::Context::new(item, element))
                 .map(|context| self.palette_rows(element, checkbox::definitions(context))),
+            Some(ElementKind::Table) => presentation()
+                .and_then(|item| table::table_definitions(item, element))
+                .map(|definitions| self.palette_rows(element, definitions)),
+            Some(ElementKind::ColumnGroup) => presentation()
+                .and_then(|item| table::column_group_definitions(item, element))
+                .map(|definitions| self.palette_rows(element, definitions)),
             _ => ordinary_vertical_group(element)
                 .then(|| self.palette_rows(element, USUAL_GROUP.iter().map(|row| (row, true)))),
         };
@@ -345,7 +352,7 @@ fn ordinary_vertical_group(element: &EffectiveElement) -> bool {
         && element.scalar("Group") == Some("Vertical")
 }
 
-fn unbound_field(element: &EffectiveElement) -> bool {
+fn unbound_data_path(element: &EffectiveElement) -> bool {
     element
         .property("DataPath")
         .is_none_or(|property| property.text() == Some(""))

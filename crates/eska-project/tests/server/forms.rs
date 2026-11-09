@@ -1,6 +1,9 @@
 use super::*;
 use eska_project_core::project::metadata_edit::snapshot;
 
+#[path = "forms_table_palette.rs"]
+mod table_palette;
+
 const PATH: &str = "CommonForms/Preview/Ext/Form.xml";
 const INPUT: &str = "\u{feff}<Form xmlns=\"http://v8.1c.ru/8.3/xcf/logform\"><ChildItems><InputField name=\"Поле\" id=\"9223372036854775807\"><Title>Исходный</Title></InputField></ChildItems></Form>\r\n";
 fn fixture() -> support::TestDir {
@@ -210,7 +213,7 @@ fn assert_native_row(row: &Value, expected: &Value, locale: &str) {
     }
 }
 
-fn inspect_input(
+fn inspect_palette(
     client: &mut Client,
     context: &Value,
     opened: &Value,
@@ -293,13 +296,13 @@ fn form_input_palette_agrees_with_scalar_and_column_contexts_on_dirty_revisions(
             let field = &opened["model"]["root"]["children"][0];
             assert_eq!(field["identity"], identity);
             assert_eq!(field["presentation"]["valueType"]["kind"], case);
-            let inspected = inspect_input(&mut client, &context, &opened, field, true);
+            let inspected = inspect_palette(&mut client, &context, &opened, field, true);
             assert_input_palette(&inspected, &native, case, locale);
         }
         opened = update_input(&mut client, &context, &opened, version, TABLE_INPUTS);
         for (index, case) in ["tableString", "tableNumber"].into_iter().enumerate() {
             let field = &opened["model"]["root"]["children"][0]["children"][index];
-            let inspected = inspect_input(&mut client, &context, &opened, field, true);
+            let inspected = inspect_palette(&mut client, &context, &opened, field, true);
             assert_input_palette(&inspected, &native, case, locale);
         }
         client.finish();
@@ -368,13 +371,13 @@ fn form_input_palette_agrees_with_reference_list_and_additional_column_contexts(
             version += 1;
             let field = &opened["model"]["root"]["children"][0];
             assert_eq!(field["identity"], identity);
-            let inspected = inspect_input(&mut client, &context, &opened, field, true);
+            let inspected = inspect_palette(&mut client, &context, &opened, field, true);
             assert_input_palette(&inspected, &native, case, locale);
         }
         opened = update_input(&mut client, &context, &opened, version, &table);
         for (index, case) in ["tableDate", "tableBoolean"].into_iter().enumerate() {
             let field = &opened["model"]["root"]["children"][0]["children"][index];
-            let inspected = inspect_input(&mut client, &context, &opened, field, true);
+            let inspected = inspect_palette(&mut client, &context, &opened, field, true);
             assert_input_palette(&inspected, &native, case, locale);
         }
         client.finish();
@@ -540,7 +543,7 @@ fn form_checkbox_palette_tracks_binding_and_mode() {
         let mut opened = client.request("form/open", &params(&context, json!({"node":node})));
         let inspect = |client: &mut Client, opened: &Value| {
             let field = &opened["model"]["root"]["children"][0];
-            inspect_input(client, &context, opened, field, true)
+            inspect_palette(client, &context, opened, field, true)
         };
         let palette = inspect(&mut client, &opened);
         assert_eq!(checkbox_palette_ids(&palette), expected);
@@ -633,7 +636,7 @@ fn form_checkbox_palette_has_table_defaults_and_keeps_raw_xml() {
         .iter()
         .find(|node| node["name"] == "Active")
         .unwrap();
-    let palette = inspect_input(&mut client, &context, &opened, field, true);
+    let palette = inspect_palette(&mut client, &context, &opened, field, true);
     assert_eq!(json!(checkbox_palette_ids(&palette)), native["columnOrder"]);
     assert_eq!(
         input_palette_value(&palette, "EditMode")["default"]["value"],
@@ -679,7 +682,7 @@ fn form_button_palette_matches_the_four_native_button_types() {
             (1, 1, "CommandBarHyperlink"),
         ] {
             let button = &opened["model"]["root"]["children"][parent]["children"][child];
-            let inspected = inspect_input(&mut client, &context, &opened, button, true);
+            let inspected = inspect_palette(&mut client, &context, &opened, button, true);
             let rows = inspected["rows"].as_array().unwrap();
             assert_eq!(rows.len(), 35, "{kind}");
             for (row, expected) in rows
@@ -728,7 +731,7 @@ fn form_button_palette_keeps_manual_maxima_and_the_xml_importance_token() {
     ));
     let updated = update_input(&mut client, &context, &opened, 2, &changed);
     let button = &updated["model"]["root"]["children"][0]["children"][0];
-    let palette = inspect_input(&mut client, &context, &updated, button, true);
+    let palette = inspect_palette(&mut client, &context, &updated, button, true);
     assert_eq!(palette["rows"].as_array().unwrap().len(), 37);
     let importance = input_palette_value(&palette, "DisplayImportance");
     assert_eq!(importance["kind"], "qualifier");
@@ -785,7 +788,7 @@ fn form_button_palette_distinguishes_a_missing_type_by_parent_kind() {
     let opened = client.request("form/open", &params(&context, json!({"node":node})));
     let inspect = |client: &mut Client, view: &Value, parent: usize| {
         let button = &view["model"]["root"]["children"][parent]["children"][0];
-        inspect_input(client, &context, view, button, true)
+        inspect_palette(client, &context, view, button, true)
     };
     let ordinary = inspect(&mut client, &opened, 0);
     let bar = inspect(&mut client, &opened, 1);
@@ -827,7 +830,7 @@ fn form_root_palette_agrees_with_native_defaults_and_settings_visibility() {
         let opened = client.request("form/open", &params(&context, json!({"node":node})));
         assert_eq!(opened["model"]["root"]["properties"], json!([]));
         let rows = |client: &mut Client, snapshot: &Value, events: bool| {
-            inspect_input(
+            inspect_palette(
                 client,
                 &context,
                 snapshot,
@@ -932,7 +935,7 @@ fn form_root_palette_navigates_to_the_attributes_record_and_root_events() {
     );
     let updated = update_input(&mut client, &context, &opened, 2, &explicit);
     let root = &updated["model"]["root"];
-    let palette = inspect_input(&mut client, &context, &updated, root, true);
+    let palette = inspect_palette(&mut client, &context, &updated, root, true);
     for (id, kind, xml) in [
         ("ConditionalAppearance", "declared", APPEARANCE),
         ("OnOpen", "declaredEvent", EVENTS),
@@ -956,7 +959,7 @@ fn form_root_palette_navigates_to_the_attributes_record_and_root_events() {
         root["properties"][index]["value"]["fields"][0]["value"]["text"],
         "InspectOpen"
     );
-    let earlier = inspect_input(&mut client, &context, &updated, root, false);
+    let earlier = inspect_palette(&mut client, &context, &updated, root, false);
     assert!(
         earlier["rows"]
             .as_array()
@@ -1023,7 +1026,7 @@ fn form_root_palette_uses_the_catalog_owner_and_effective_main_attribute() {
     let opened = client.request("form/open", &params(&context, json!({"node":node["id"]})));
     let rows = |client: &mut Client, snapshot: &Value| {
         let mut inspection =
-            inspect_input(client, &context, snapshot, &snapshot["model"]["root"], true);
+            inspect_palette(client, &context, snapshot, &snapshot["model"]["root"], true);
         let Value::Array(mut rows) = inspection["rows"].take() else {
             panic!("expected measured catalog form palette");
         };
@@ -1084,7 +1087,7 @@ fn form_input_palette_keeps_the_source_of_a_disabled_choice_list() {
     let (context, node) = connect(&mut client, &directory.0, "en-US", 41);
     let opened = client.request("form/open", &params(&context, json!({"node":node})));
     let field = &opened["model"]["root"]["children"][0];
-    let inspected = inspect_input(&mut client, &context, &opened, field, true);
+    let inspected = inspect_palette(&mut client, &context, &opened, field, true);
     assert!(input_palette_row(&inspected, "ChoiceList")["available"].is_null());
     let changed = form.replace(
         "<DataPath>Value</DataPath>",
@@ -1098,7 +1101,7 @@ fn form_input_palette_keeps_the_source_of_a_disabled_choice_list() {
     );
     let updated = update_input(&mut client, &context, &opened, 2, &changed);
     let field = &updated["model"]["root"]["children"][0];
-    let inspected = inspect_input(&mut client, &context, &updated, field, true);
+    let inspected = inspect_palette(&mut client, &context, &updated, field, true);
     for (id, key) in [
         (
             "AllowInputEmptyMultipleValues",
@@ -1139,7 +1142,7 @@ fn form_input_palette_keeps_the_source_of_a_disabled_choice_list() {
     assert_eq!(xml_at(&changed, &location["range"]), choice_list);
     let restored = update_input(&mut client, &context, &updated, 3, &form);
     let field = &restored["model"]["root"]["children"][0];
-    let restored = inspect_input(&mut client, &context, &restored, field, true);
+    let restored = inspect_palette(&mut client, &context, &restored, field, true);
     let choice = input_palette_row(&restored, "ChoiceList");
     assert!(choice["available"].is_null());
     assert_eq!(choice["value"]["kind"], "declared");
@@ -1167,7 +1170,7 @@ fn form_input_palette_preserves_declared_values_and_size_overrides() {
     let opened = client.request("form/open", &params(&context, json!({"node":node})));
     let opened = update_input(&mut client, &context, &opened, 2, &changed);
     let input = &opened["model"]["root"]["children"][0];
-    let inspected = inspect_input(&mut client, &context, &opened, input, true);
+    let inspected = inspect_palette(&mut client, &context, &opened, input, true);
     let row = |key: &str| input_palette_value(&inspected, key);
     for (id, expected) in [
         ("TitleLocation", json!({"ru-RU":"Верх","en-US":"Top"})),
@@ -1261,7 +1264,7 @@ fn form_input_palette_projects_only_opted_in_events_with_real_xml_sources() {
     let opened = client.request("form/open", &params(&context, json!({"node":node})));
     let opened = update_input(&mut client, &context, &opened, 2, &changed);
     let input = &opened["model"]["root"]["children"][0];
-    let inspected = inspect_input(&mut client, &context, &opened, input, true);
+    let inspected = inspect_palette(&mut client, &context, &opened, input, true);
     let event = input_palette_value(&inspected, "OnChange");
     assert_eq!(event["kind"], "declaredEvent");
     assert_eq!(event["entryIndex"], 1);
@@ -1283,7 +1286,7 @@ fn form_input_palette_projects_only_opted_in_events_with_real_xml_sources() {
     })));
     assert_eq!(xml_at(&changed, &location["range"]), events);
 
-    let previous = inspect_input(&mut client, &context, &opened, input, false);
+    let previous = inspect_palette(&mut client, &context, &opened, input, false);
     assert_eq!(previous["categories"].as_array().unwrap().len(), 4);
     assert!(
         previous["rows"]
@@ -1297,7 +1300,7 @@ fn form_input_palette_projects_only_opted_in_events_with_real_xml_sources() {
     }));
     let unresolved = changed.replace("<DataPath>Value</DataPath>", "<DataPath>Missing</DataPath>");
     let updated = update_input(&mut client, &context, &opened, 3, &unresolved);
-    let unresolved = inspect_input(
+    let unresolved = inspect_palette(
         &mut client,
         &context,
         &updated,
