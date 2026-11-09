@@ -71,6 +71,68 @@ fn params(context: &Value, values: Value) -> Value {
 }
 
 #[test]
+fn form_help_availability_follows_dirty_pages_and_negotiated_api() {
+    const HELP_PATH: &str = "CommonForms/Preview/Ext/Help.xml";
+    const HELP: &str = r#"<Help xmlns="http://v8.1c.ru/8.3/xcf/extrnprops"><Page>ru</Page></Help>"#;
+    let directory = fixture();
+    let path = directory.0.join("src").join(HELP_PATH);
+    fs::write(&path, HELP).unwrap();
+    let mut legacy = Client::new(&directory.0, "en-US");
+    let (context, node) = connect(&mut legacy, &directory.0, "en-US", 43);
+    let opened = legacy.request("form/open", &params(&context, json!({"node":node})));
+    assert!(opened["model"].get("formHelpAvailable").is_none());
+    legacy.finish();
+
+    for locale in ["en-US", "ru-RU"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 44);
+        let opened = client.request("form/open", &params(&context, json!({"node":node})));
+        assert_eq!(opened["model"]["formHelpAvailable"], true);
+        let help = opened["dependencies"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|input| {
+                input["path"]["value"]
+                    .as_str()
+                    .is_some_and(|value| value.ends_with("Help.xml"))
+            })
+            .unwrap();
+        assert_eq!(help["role"], "metadata");
+        assert_eq!(help["snapshot"], snapshot(HELP));
+        let dirty = HELP.replace("<Page>ru</Page>", "");
+        let updated = client.request(
+            "form/update",
+            &params(
+                &context,
+                json!({
+                    "formSessionId":opened["formSessionId"],"revision":opened["revision"],
+                    "overlays":[{"source":help["id"],"version":"2","text":dirty}]
+                }),
+            ),
+        );
+        assert_eq!(updated["model"]["formHelpAvailable"], false);
+        assert_eq!(
+            updated["model"]["root"]["identity"],
+            opened["model"]["root"]["identity"]
+        );
+        let restored = client.request(
+            "form/update",
+            &params(
+                &context,
+                json!({
+                    "formSessionId":updated["formSessionId"],"revision":updated["revision"],
+                    "overlays":[]
+                }),
+            ),
+        );
+        assert_eq!(restored["model"]["formHelpAvailable"], true);
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(path).unwrap(), HELP);
+}
+
+#[test]
 fn numeric_sign_reaches_rpc_and_dirty_revisions_without_locale_or_identity_changes() {
     let directory = fixture();
     let path = directory.0.join("src").join(PATH);

@@ -97,6 +97,7 @@ pub(super) fn model(
     labels: &Labels,
     preview: &FormPreview,
     layout_additions: bool,
+    form_help: bool,
 ) -> Result<(Value, usize), Value> {
     let presentations: HashMap<_, _> = preview
         .presentation
@@ -150,6 +151,9 @@ pub(super) fn model(
         "commands":preview.form.commands.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
         "diagnostics":{"composition":preview.form.diagnostics,"appearance":preview.presentation.diagnostics}});
     model["activityColor"] = json!(preview.presentation.activity_color);
+    if form_help {
+        model["formHelpAvailable"] = json!(preview.form_help_available);
+    }
     if let Some(variant) = preview.presentation.script_variant {
         model["scriptVariant"] = json!(variant);
     }
