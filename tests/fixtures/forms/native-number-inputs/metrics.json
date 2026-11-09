@@ -13295,6 +13295,2182 @@
           "dividerColumns": []
         }
       }
+    },
+    {
+      "name": "NonnegativeIntegerSweep1",
+      "xmlSha256": "d005505fdfc74154e8c67defcd3741966993d2e0b2abc59bb50e25f12be5e9f4",
+      "controls": {
+        "Digits1Fraction0": {
+          "properties": {
+            "DataPath": "Digits1Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FFEFBA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 1,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 21,
+          "height": 23
+        },
+        "Digits2Fraction0": {
+          "properties": {
+            "DataPath": "Digits2Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DBF2FB",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 2,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 31,
+          "height": 23
+        },
+        "Digits3Fraction0": {
+          "properties": {
+            "DataPath": "Digits3Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FBE1CD",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 3,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 41,
+          "height": 23
+        },
+        "Digits4Fraction0": {
+          "properties": {
+            "DataPath": "Digits4Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#F4CFDA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 4,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 51,
+          "height": 23
+        },
+        "Digits5Fraction0": {
+          "properties": {
+            "DataPath": "Digits5Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DCF4CF",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 5,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 61,
+          "height": 23
+        },
+        "Digits6Fraction0": {
+          "properties": {
+            "DataPath": "Digits6Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#A8E4B8",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 6,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 61,
+          "height": 23
+        },
+        "Digits7Fraction0": {
+          "properties": {
+            "DataPath": "Digits7Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#D9F2D5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 7,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 81,
+          "height": 23
+        },
+        "Digits8Fraction0": {
+          "properties": {
+            "DataPath": "Digits8Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#F1DBE5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 8,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 81,
+          "height": 23
+        },
+        "Digits9Fraction0": {
+          "properties": {
+            "DataPath": "Digits9Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DDD2FA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 91,
+          "height": 23
+        },
+        "Digits10Fraction0": {
+          "properties": {
+            "DataPath": "Digits10Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#CCE3ED",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 10,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 101,
+          "height": 23
+        }
+      },
+      "locales": {
+        "ru": {
+          "frame": [
+            135,
+            363
+          ],
+          "fields": {
+            "Digits1Fraction0": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Digits2Fraction0": [
+              13,
+              71,
+              31,
+              23
+            ],
+            "Digits3Fraction0": [
+              13,
+              103,
+              41,
+              23
+            ],
+            "Digits4Fraction0": [
+              13,
+              135,
+              51,
+              23
+            ],
+            "Digits5Fraction0": [
+              13,
+              167,
+              61,
+              23
+            ],
+            "Digits6Fraction0": [
+              13,
+              199,
+              61,
+              23
+            ],
+            "Digits7Fraction0": [
+              13,
+              231,
+              81,
+              23
+            ],
+            "Digits8Fraction0": [
+              13,
+              263,
+              81,
+              23
+            ],
+            "Digits9Fraction0": [
+              13,
+              295,
+              91,
+              23
+            ],
+            "Digits10Fraction0": [
+              13,
+              327,
+              101,
+              23
+            ]
+          },
+          "screenshotSha256": "7bed75ae0935208980f9c8f967bfa1b4d77da7d23fbef57ff40dbdf2e5f55087"
+        },
+        "en": {
+          "frame": [
+            135,
+            363
+          ],
+          "fields": {
+            "Digits1Fraction0": [
+              13,
+              39,
+              21,
+              23
+            ],
+            "Digits2Fraction0": [
+              13,
+              71,
+              31,
+              23
+            ],
+            "Digits3Fraction0": [
+              13,
+              103,
+              41,
+              23
+            ],
+            "Digits4Fraction0": [
+              13,
+              135,
+              51,
+              23
+            ],
+            "Digits5Fraction0": [
+              13,
+              167,
+              61,
+              23
+            ],
+            "Digits6Fraction0": [
+              13,
+              199,
+              61,
+              23
+            ],
+            "Digits7Fraction0": [
+              13,
+              231,
+              81,
+              23
+            ],
+            "Digits8Fraction0": [
+              13,
+              263,
+              81,
+              23
+            ],
+            "Digits9Fraction0": [
+              13,
+              295,
+              91,
+              23
+            ],
+            "Digits10Fraction0": [
+              13,
+              327,
+              101,
+              23
+            ]
+          },
+          "screenshotSha256": "be591e9ad776ed6b8a60a01ce5088783bc79fb2c18d625b78fbd257af17bfe82"
+        }
+      }
+    },
+    {
+      "name": "NonnegativeIntegerSweep2",
+      "xmlSha256": "ed821aaad63e3ca95d1170070a9ad8685eb53a82417b436023ee89b26e0129a2",
+      "controls": {
+        "Digits11Fraction0": {
+          "properties": {
+            "DataPath": "Digits11Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FFEFBA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 11,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 111,
+          "height": 23
+        },
+        "Digits12Fraction0": {
+          "properties": {
+            "DataPath": "Digits12Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DBF2FB",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 12,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 121,
+          "height": 23
+        },
+        "Digits13Fraction0": {
+          "properties": {
+            "DataPath": "Digits13Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FBE1CD",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 13,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 131,
+          "height": 23
+        },
+        "Digits14Fraction0": {
+          "properties": {
+            "DataPath": "Digits14Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#F4CFDA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 14,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 141,
+          "height": 23
+        },
+        "Digits15Fraction0": {
+          "properties": {
+            "DataPath": "Digits15Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DCF4CF",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 15,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 141,
+          "height": 23
+        },
+        "Digits16Fraction0": {
+          "properties": {
+            "DataPath": "Digits16Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#A8E4B8",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 16,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 161,
+          "height": 23
+        },
+        "Digits17Fraction0": {
+          "properties": {
+            "DataPath": "Digits17Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#D9F2D5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 17,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 161,
+          "height": 23
+        },
+        "Digits18Fraction0": {
+          "properties": {
+            "DataPath": "Digits18Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#F1DBE5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 18,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 171,
+          "height": 23
+        },
+        "Digits19Fraction0": {
+          "properties": {
+            "DataPath": "Digits19Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DDD2FA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 19,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 181,
+          "height": 23
+        },
+        "Digits20Fraction0": {
+          "properties": {
+            "DataPath": "Digits20Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#CCE3ED",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 20,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 191,
+          "height": 23
+        }
+      },
+      "locales": {
+        "ru": {
+          "frame": [
+            225,
+            363
+          ],
+          "fields": {
+            "Digits11Fraction0": [
+              13,
+              39,
+              111,
+              23
+            ],
+            "Digits12Fraction0": [
+              13,
+              71,
+              121,
+              23
+            ],
+            "Digits13Fraction0": [
+              13,
+              103,
+              131,
+              23
+            ],
+            "Digits14Fraction0": [
+              13,
+              135,
+              141,
+              23
+            ],
+            "Digits15Fraction0": [
+              13,
+              167,
+              141,
+              23
+            ],
+            "Digits16Fraction0": [
+              13,
+              199,
+              161,
+              23
+            ],
+            "Digits17Fraction0": [
+              13,
+              231,
+              161,
+              23
+            ],
+            "Digits18Fraction0": [
+              13,
+              263,
+              171,
+              23
+            ],
+            "Digits19Fraction0": [
+              13,
+              295,
+              181,
+              23
+            ],
+            "Digits20Fraction0": [
+              13,
+              327,
+              191,
+              23
+            ]
+          },
+          "screenshotSha256": "df5661ceb0eb23d490991207ac03fedb3c54cccb59a22eeb8168351ce0d047d8"
+        },
+        "en": {
+          "frame": [
+            225,
+            363
+          ],
+          "fields": {
+            "Digits11Fraction0": [
+              13,
+              39,
+              111,
+              23
+            ],
+            "Digits12Fraction0": [
+              13,
+              71,
+              121,
+              23
+            ],
+            "Digits13Fraction0": [
+              13,
+              103,
+              131,
+              23
+            ],
+            "Digits14Fraction0": [
+              13,
+              135,
+              141,
+              23
+            ],
+            "Digits15Fraction0": [
+              13,
+              167,
+              141,
+              23
+            ],
+            "Digits16Fraction0": [
+              13,
+              199,
+              161,
+              23
+            ],
+            "Digits17Fraction0": [
+              13,
+              231,
+              161,
+              23
+            ],
+            "Digits18Fraction0": [
+              13,
+              263,
+              171,
+              23
+            ],
+            "Digits19Fraction0": [
+              13,
+              295,
+              181,
+              23
+            ],
+            "Digits20Fraction0": [
+              13,
+              327,
+              191,
+              23
+            ]
+          },
+          "screenshotSha256": "84e415f74ba962fcb85b47a7696967d361b42e3e40022939c3403350bad009b8"
+        }
+      }
+    },
+    {
+      "name": "NonnegativeIntegerSweep3",
+      "xmlSha256": "ff449cee4f6f41c22f0d546aba0557dc806cfef82b78d5922183f30031585daf",
+      "controls": {
+        "Digits21Fraction0": {
+          "properties": {
+            "DataPath": "Digits21Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FFEFBA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 21,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 201,
+          "height": 23
+        },
+        "Digits22Fraction0": {
+          "properties": {
+            "DataPath": "Digits22Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DBF2FB",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 22,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 211,
+          "height": 23
+        },
+        "Digits23Fraction0": {
+          "properties": {
+            "DataPath": "Digits23Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FBE1CD",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 23,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 221,
+          "height": 23
+        },
+        "Digits24Fraction0": {
+          "properties": {
+            "DataPath": "Digits24Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#F4CFDA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 24,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 221,
+          "height": 23
+        },
+        "Digits25Fraction0": {
+          "properties": {
+            "DataPath": "Digits25Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DCF4CF",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 25,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 241,
+          "height": 23
+        },
+        "Digits26Fraction0": {
+          "properties": {
+            "DataPath": "Digits26Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#A8E4B8",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 26,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 241,
+          "height": 23
+        },
+        "Digits27Fraction0": {
+          "properties": {
+            "DataPath": "Digits27Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#D9F2D5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 27,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 251,
+          "height": 23
+        },
+        "Digits28Fraction0": {
+          "properties": {
+            "DataPath": "Digits28Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#F1DBE5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 28,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 261,
+          "height": 23
+        },
+        "Digits29Fraction0": {
+          "properties": {
+            "DataPath": "Digits29Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DDD2FA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 29,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 271,
+          "height": 23
+        },
+        "Digits30Fraction0": {
+          "properties": {
+            "DataPath": "Digits30Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#CCE3ED",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 30,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 281,
+          "height": 23
+        }
+      },
+      "locales": {
+        "ru": {
+          "frame": [
+            315,
+            363
+          ],
+          "fields": {
+            "Digits21Fraction0": [
+              13,
+              39,
+              201,
+              23
+            ],
+            "Digits22Fraction0": [
+              13,
+              71,
+              211,
+              23
+            ],
+            "Digits23Fraction0": [
+              13,
+              103,
+              221,
+              23
+            ],
+            "Digits24Fraction0": [
+              13,
+              135,
+              221,
+              23
+            ],
+            "Digits25Fraction0": [
+              13,
+              167,
+              241,
+              23
+            ],
+            "Digits26Fraction0": [
+              13,
+              199,
+              241,
+              23
+            ],
+            "Digits27Fraction0": [
+              13,
+              231,
+              251,
+              23
+            ],
+            "Digits28Fraction0": [
+              13,
+              263,
+              261,
+              23
+            ],
+            "Digits29Fraction0": [
+              13,
+              295,
+              271,
+              23
+            ],
+            "Digits30Fraction0": [
+              13,
+              327,
+              281,
+              23
+            ]
+          },
+          "screenshotSha256": "a7b5c978f79995488fd06964a22c5fb0c45eb783b028ca8ee5ad9fcb95d37e6a"
+        },
+        "en": {
+          "frame": [
+            315,
+            363
+          ],
+          "fields": {
+            "Digits21Fraction0": [
+              13,
+              39,
+              201,
+              23
+            ],
+            "Digits22Fraction0": [
+              13,
+              71,
+              211,
+              23
+            ],
+            "Digits23Fraction0": [
+              13,
+              103,
+              221,
+              23
+            ],
+            "Digits24Fraction0": [
+              13,
+              135,
+              221,
+              23
+            ],
+            "Digits25Fraction0": [
+              13,
+              167,
+              241,
+              23
+            ],
+            "Digits26Fraction0": [
+              13,
+              199,
+              241,
+              23
+            ],
+            "Digits27Fraction0": [
+              13,
+              231,
+              251,
+              23
+            ],
+            "Digits28Fraction0": [
+              13,
+              263,
+              261,
+              23
+            ],
+            "Digits29Fraction0": [
+              13,
+              295,
+              271,
+              23
+            ],
+            "Digits30Fraction0": [
+              13,
+              327,
+              281,
+              23
+            ]
+          },
+          "screenshotSha256": "ab69f41ba1e624b19a30332618a792c8de1f376be52b02c7e342c275730a4885"
+        }
+      }
+    },
+    {
+      "name": "NonnegativeIntegerSweep4",
+      "xmlSha256": "3b9c5e9b36ec34da7012f6c33b45d479e18d09641106fbb69b5a9559730445d3",
+      "controls": {
+        "Digits31Fraction0": {
+          "properties": {
+            "DataPath": "Digits31Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FFEFBA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 31,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 291,
+          "height": 23
+        },
+        "Digits32Fraction0": {
+          "properties": {
+            "DataPath": "Digits32Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DBF2FB",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 32,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 301,
+          "height": 23
+        },
+        "Digits33Fraction0": {
+          "properties": {
+            "DataPath": "Digits33Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FBE1CD",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 33,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 311,
+          "height": 23
+        },
+        "Digits34Fraction0": {
+          "properties": {
+            "DataPath": "Digits34Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#F4CFDA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 34,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 321,
+          "height": 23
+        },
+        "Digits35Fraction0": {
+          "properties": {
+            "DataPath": "Digits35Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DCF4CF",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 35,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 331,
+          "height": 23
+        },
+        "Digits36Fraction0": {
+          "properties": {
+            "DataPath": "Digits36Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#A8E4B8",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 36,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 331,
+          "height": 23
+        },
+        "Digits37Fraction0": {
+          "properties": {
+            "DataPath": "Digits37Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#D9F2D5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 37,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 351,
+          "height": 23
+        },
+        "Digits38Fraction0": {
+          "properties": {
+            "DataPath": "Digits38Fraction0",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#F1DBE5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 38,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 351,
+          "height": 23
+        }
+      },
+      "locales": {
+        "ru": {
+          "frame": [
+            385,
+            299
+          ],
+          "fields": {
+            "Digits31Fraction0": [
+              13,
+              39,
+              291,
+              23
+            ],
+            "Digits32Fraction0": [
+              13,
+              71,
+              301,
+              23
+            ],
+            "Digits33Fraction0": [
+              13,
+              103,
+              311,
+              23
+            ],
+            "Digits34Fraction0": [
+              13,
+              135,
+              321,
+              23
+            ],
+            "Digits35Fraction0": [
+              13,
+              167,
+              331,
+              23
+            ],
+            "Digits36Fraction0": [
+              13,
+              199,
+              331,
+              23
+            ],
+            "Digits37Fraction0": [
+              13,
+              231,
+              351,
+              23
+            ],
+            "Digits38Fraction0": [
+              13,
+              263,
+              351,
+              23
+            ]
+          },
+          "screenshotSha256": "34975b957588abce2a08967ebc840f3c4a748ce3b64beb2ea8569d4533b2e5ca"
+        },
+        "en": {
+          "frame": [
+            385,
+            299
+          ],
+          "fields": {
+            "Digits31Fraction0": [
+              13,
+              39,
+              291,
+              23
+            ],
+            "Digits32Fraction0": [
+              13,
+              71,
+              301,
+              23
+            ],
+            "Digits33Fraction0": [
+              13,
+              103,
+              311,
+              23
+            ],
+            "Digits34Fraction0": [
+              13,
+              135,
+              321,
+              23
+            ],
+            "Digits35Fraction0": [
+              13,
+              167,
+              331,
+              23
+            ],
+            "Digits36Fraction0": [
+              13,
+              199,
+              331,
+              23
+            ],
+            "Digits37Fraction0": [
+              13,
+              231,
+              351,
+              23
+            ],
+            "Digits38Fraction0": [
+              13,
+              263,
+              351,
+              23
+            ]
+          },
+          "screenshotSha256": "f5a051b5e7ba5126c72a99119bf462f3239dee91be8f9495ad79c0f3545b4ebd"
+        }
+      }
+    },
+    {
+      "name": "NonnegativeFractionSweep",
+      "xmlSha256": "ef984b79d110b38e43c45aee3bbbb5da2b8cfdd48af8c7fdf6f66ba5906c537e",
+      "controls": {
+        "Digits2Fraction2": {
+          "properties": {
+            "DataPath": "Digits2Fraction2",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FFEFBA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 2,
+            "fraction": 2,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": true,
+          "spin": false,
+          "logicalWidth": 61,
+          "height": 23
+        },
+        "Digits3Fraction1": {
+          "properties": {
+            "DataPath": "Digits3Fraction1",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DBF2FB",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 3,
+            "fraction": 1,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": true,
+          "spin": false,
+          "logicalWidth": 61,
+          "height": 23
+        },
+        "Digits6Fraction1": {
+          "properties": {
+            "DataPath": "Digits6Fraction1",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FBE1CD",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 6,
+            "fraction": 1,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": true,
+          "spin": false,
+          "logicalWidth": 91,
+          "height": 23
+        },
+        "Digits6Fraction6": {
+          "properties": {
+            "DataPath": "Digits6Fraction6",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#F4CFDA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 6,
+            "fraction": 6,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": true,
+          "spin": false,
+          "logicalWidth": 91,
+          "height": 23
+        },
+        "Digits9Fraction2": {
+          "properties": {
+            "DataPath": "Digits9Fraction2",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DCF4CF",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 9,
+            "fraction": 2,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": true,
+          "spin": false,
+          "logicalWidth": 121,
+          "height": 23
+        },
+        "Digits15Fraction2": {
+          "properties": {
+            "DataPath": "Digits15Fraction2",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#A8E4B8",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 15,
+            "fraction": 2,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": true,
+          "spin": false,
+          "logicalWidth": 171,
+          "height": 23
+        },
+        "Digits24Fraction4": {
+          "properties": {
+            "DataPath": "Digits24Fraction4",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#D9F2D5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 24,
+            "fraction": 4,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": true,
+          "spin": false,
+          "logicalWidth": 241,
+          "height": 23
+        },
+        "Digits30Fraction30": {
+          "properties": {
+            "DataPath": "Digits30Fraction30",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#F1DBE5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 30,
+            "fraction": 30,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": true,
+          "spin": false,
+          "logicalWidth": 251,
+          "height": 23
+        },
+        "Digits38Fraction38": {
+          "properties": {
+            "DataPath": "Digits38Fraction38",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DDD2FA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 38,
+            "fraction": 38,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": true,
+          "spin": false,
+          "logicalWidth": 301,
+          "height": 23
+        },
+        "Digits38Fraction9": {
+          "properties": {
+            "DataPath": "Digits38Fraction9",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#CCE3ED",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 38,
+            "fraction": 9,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": true,
+          "spin": false,
+          "logicalWidth": 361,
+          "height": 23
+        }
+      },
+      "locales": {
+        "ru": {
+          "frame": [
+            396,
+            363
+          ],
+          "fields": {
+            "Digits2Fraction2": [
+              13,
+              39,
+              62,
+              23
+            ],
+            "Digits3Fraction1": [
+              13,
+              71,
+              62,
+              23
+            ],
+            "Digits6Fraction1": [
+              13,
+              103,
+              92,
+              23
+            ],
+            "Digits6Fraction6": [
+              13,
+              135,
+              92,
+              23
+            ],
+            "Digits9Fraction2": [
+              13,
+              167,
+              122,
+              23
+            ],
+            "Digits15Fraction2": [
+              13,
+              199,
+              172,
+              23
+            ],
+            "Digits24Fraction4": [
+              13,
+              231,
+              242,
+              23
+            ],
+            "Digits30Fraction30": [
+              13,
+              263,
+              252,
+              23
+            ],
+            "Digits38Fraction38": [
+              13,
+              295,
+              302,
+              23
+            ],
+            "Digits38Fraction9": [
+              13,
+              327,
+              362,
+              23
+            ]
+          },
+          "screenshotSha256": "52b20f63b4bca3a285a0b7c2e0d06cf936774e3155af3bbe4d33b852a7dcd424"
+        },
+        "en": {
+          "frame": [
+            396,
+            363
+          ],
+          "fields": {
+            "Digits2Fraction2": [
+              13,
+              39,
+              62,
+              23
+            ],
+            "Digits3Fraction1": [
+              13,
+              71,
+              62,
+              23
+            ],
+            "Digits6Fraction1": [
+              13,
+              103,
+              92,
+              23
+            ],
+            "Digits6Fraction6": [
+              13,
+              135,
+              92,
+              23
+            ],
+            "Digits9Fraction2": [
+              13,
+              167,
+              122,
+              23
+            ],
+            "Digits15Fraction2": [
+              13,
+              199,
+              172,
+              23
+            ],
+            "Digits24Fraction4": [
+              13,
+              231,
+              242,
+              23
+            ],
+            "Digits30Fraction30": [
+              13,
+              263,
+              252,
+              23
+            ],
+            "Digits38Fraction38": [
+              13,
+              295,
+              302,
+              23
+            ],
+            "Digits38Fraction9": [
+              13,
+              327,
+              362,
+              23
+            ]
+          },
+          "screenshotSha256": "1f116a838e9e5a4d553001955b928bb45707f6a26ddfb55a6c505f9e3f0c780e"
+        }
+      }
+    },
+    {
+      "name": "NumberSignsAndEditFormat",
+      "xmlSha256": "a989acfa6552b32ae50b3d98a38d620065ba97ac3666a063134c6ba700a03e30",
+      "controls": {
+        "Nonnegative5Default": {
+          "properties": {
+            "DataPath": "Nonnegative5",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FFEFBA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 5,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 61,
+          "height": 23
+        },
+        "Nonnegative5Format": {
+          "properties": {
+            "DataPath": "Nonnegative5",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "EditFormat": "\n\t\t\t\t",
+            "BackColor": "#DBF2FB",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 5,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 61,
+          "height": 23
+        },
+        "Any5Default": {
+          "properties": {
+            "DataPath": "Any5",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#FBE1CD",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 5,
+            "fraction": 0,
+            "allowedSign": "Any"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 61,
+          "height": 23
+        },
+        "Any5Format": {
+          "properties": {
+            "DataPath": "Any5",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "EditFormat": "\n\t\t\t\t",
+            "BackColor": "#F4CFDA",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 5,
+            "fraction": 0,
+            "allowedSign": "Any"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 61,
+          "height": 23
+        },
+        "Nonnegative8Default": {
+          "properties": {
+            "DataPath": "Nonnegative8",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#DCF4CF",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 8,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 81,
+          "height": 23
+        },
+        "Nonnegative8Format": {
+          "properties": {
+            "DataPath": "Nonnegative8",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "EditFormat": "\n\t\t\t\t",
+            "BackColor": "#A8E4B8",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 8,
+            "fraction": 0,
+            "allowedSign": "Nonnegative"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 81,
+          "height": 23
+        },
+        "Any8Default": {
+          "properties": {
+            "DataPath": "Any8",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "BackColor": "#D9F2D5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 8,
+            "fraction": 0,
+            "allowedSign": "Any"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 91,
+          "height": 23
+        },
+        "Any8Format": {
+          "properties": {
+            "DataPath": "Any8",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "EditFormat": "\n\t\t\t\t",
+            "BackColor": "#F1DBE5",
+            "ContextMenu": null,
+            "ExtendedTooltip": null
+          },
+          "type": {
+            "kind": "number",
+            "digits": 8,
+            "fraction": 0,
+            "allowedSign": "Any"
+          },
+          "font": {
+            "points": 10,
+            "weight": 400
+          },
+          "choice": false,
+          "spin": false,
+          "logicalWidth": 91,
+          "height": 23
+        }
+      },
+      "locales": {
+        "ru": {
+          "frame": [
+            125,
+            299
+          ],
+          "fields": {
+            "Nonnegative5Default": [
+              13,
+              39,
+              61,
+              23
+            ],
+            "Nonnegative5Format": [
+              13,
+              71,
+              61,
+              23
+            ],
+            "Any5Default": [
+              13,
+              103,
+              61,
+              23
+            ],
+            "Any5Format": [
+              13,
+              135,
+              61,
+              23
+            ],
+            "Nonnegative8Default": [
+              13,
+              167,
+              81,
+              23
+            ],
+            "Nonnegative8Format": [
+              13,
+              199,
+              81,
+              23
+            ],
+            "Any8Default": [
+              13,
+              231,
+              91,
+              23
+            ],
+            "Any8Format": [
+              13,
+              263,
+              91,
+              23
+            ]
+          },
+          "screenshotSha256": "afdbe6503206764c4de04f4217b0214afa8531f524e582f0f1f25d9b38a99e81"
+        },
+        "en": {
+          "frame": [
+            125,
+            299
+          ],
+          "fields": {
+            "Nonnegative5Default": [
+              13,
+              39,
+              61,
+              23
+            ],
+            "Nonnegative5Format": [
+              13,
+              71,
+              61,
+              23
+            ],
+            "Any5Default": [
+              13,
+              103,
+              61,
+              23
+            ],
+            "Any5Format": [
+              13,
+              135,
+              61,
+              23
+            ],
+            "Nonnegative8Default": [
+              13,
+              167,
+              81,
+              23
+            ],
+            "Nonnegative8Format": [
+              13,
+              199,
+              81,
+              23
+            ],
+            "Any8Default": [
+              13,
+              231,
+              91,
+              23
+            ],
+            "Any8Format": [
+              13,
+              263,
+              91,
+              23
+            ]
+          },
+          "screenshotSha256": "e778a3c2d1a31322a5178596ffaeb7773798d72faab690f333e14098c646611f"
+        }
+      }
     }
   ]
 }

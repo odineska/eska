@@ -693,6 +693,96 @@
           "screenshotSha256": "1fca545f226c28f0ff3cdcdf6ae2087f24c50c9a67e9a9c852e37d7fe5850d73"
         }
       ]
+    },
+    {
+      "name": "unsigned-width-normal",
+      "stand": "form-native-normal-titles-674usddg",
+      "sourceFiles": 79,
+      "sourcesUnchanged": true,
+      "sourceManifestSha256": "d986ab9d5eafd7d8be71892355089d2ab25a419c58c6140add849b0574ad3c53",
+      "captures": [
+        {
+          "form": "ProbeCaption13",
+          "name": "NonnegativeIntegerSweep1",
+          "locale": "en",
+          "screenshotSha256": "be591e9ad776ed6b8a60a01ce5088783bc79fb2c18d625b78fbd257af17bfe82"
+        },
+        {
+          "form": "ProbeCaption13",
+          "name": "NonnegativeIntegerSweep1",
+          "locale": "ru",
+          "screenshotSha256": "7bed75ae0935208980f9c8f967bfa1b4d77da7d23fbef57ff40dbdf2e5f55087"
+        },
+        {
+          "form": "ProbeCaption14",
+          "name": "NonnegativeIntegerSweep2",
+          "locale": "en",
+          "screenshotSha256": "84e415f74ba962fcb85b47a7696967d361b42e3e40022939c3403350bad009b8"
+        },
+        {
+          "form": "ProbeCaption14",
+          "name": "NonnegativeIntegerSweep2",
+          "locale": "ru",
+          "screenshotSha256": "df5661ceb0eb23d490991207ac03fedb3c54cccb59a22eeb8168351ce0d047d8"
+        },
+        {
+          "form": "ProbeCaption15",
+          "name": "NonnegativeIntegerSweep3",
+          "locale": "en",
+          "screenshotSha256": "ab69f41ba1e624b19a30332618a792c8de1f376be52b02c7e342c275730a4885"
+        },
+        {
+          "form": "ProbeCaption15",
+          "name": "NonnegativeIntegerSweep3",
+          "locale": "ru",
+          "screenshotSha256": "a7b5c978f79995488fd06964a22c5fb0c45eb783b028ca8ee5ad9fcb95d37e6a"
+        },
+        {
+          "form": "ProbeCaption16",
+          "name": "NonnegativeIntegerSweep4",
+          "locale": "en",
+          "screenshotSha256": "f5a051b5e7ba5126c72a99119bf462f3239dee91be8f9495ad79c0f3545b4ebd"
+        },
+        {
+          "form": "ProbeCaption16",
+          "name": "NonnegativeIntegerSweep4",
+          "locale": "ru",
+          "screenshotSha256": "34975b957588abce2a08967ebc840f3c4a748ce3b64beb2ea8569d4533b2e5ca"
+        },
+        {
+          "form": "ProbeCaption17",
+          "name": "NonnegativeFractionSweep",
+          "locale": "en",
+          "screenshotSha256": "1f116a838e9e5a4d553001955b928bb45707f6a26ddfb55a6c505f9e3f0c780e"
+        },
+        {
+          "form": "ProbeCaption17",
+          "name": "NonnegativeFractionSweep",
+          "locale": "ru",
+          "screenshotSha256": "52b20f63b4bca3a285a0b7c2e0d06cf936774e3155af3bbe4d33b852a7dcd424"
+        }
+      ]
+    },
+    {
+      "name": "unsigned-width-marked",
+      "stand": "form-native-wrapped-titles-eo0q7x68",
+      "sourceFiles": 87,
+      "sourcesUnchanged": true,
+      "sourceManifestSha256": "78c989ab9c6d86575b29ee5da0b583246cb3c80d3aea5a21793b467cfd9b6699",
+      "captures": [
+        {
+          "form": "ProbeCaption19",
+          "name": "NumberSignsAndEditFormat",
+          "locale": "en",
+          "screenshotSha256": "e778a3c2d1a31322a5178596ffaeb7773798d72faab690f333e14098c646611f"
+        },
+        {
+          "form": "ProbeCaption19",
+          "name": "NumberSignsAndEditFormat",
+          "locale": "ru",
+          "screenshotSha256": "afdbe6503206764c4de04f4217b0214afa8531f524e582f0f1f25d9b38a99e81"
+        }
+      ]
     }
   ],
   "excludedProbes": [
