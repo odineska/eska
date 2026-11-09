@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+	</Title>
+	<Width>32</Width>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<UsualGroup name="Outer" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Outer</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Outer</v8:content>
+				</v8:item>
+			</Title>
+			<Group>Vertical</Group>
+			<Representation>None</Representation>
+			<ShowTitle>false</ShowTitle>
+			<BackColor>#EAD5AC</BackColor>
+			<ExtendedTooltip name="OuterExtendedTooltip" id="2"/>
+			<ChildItems>
+				<UsualGroup name="Band" id="3">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Band</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Band</v8:content>
+						</v8:item>
+					</Title>
+					<Representation>None</Representation>
+					<ShowTitle>false</ShowTitle>
+					<ExtendedTooltip name="BandExtendedTooltip" id="4"/>
+					<ChildItems>
+						<UsualGroup name="First" id="5">
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>First</v8:content>
+								</v8:item>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>First</v8:content>
+								</v8:item>
+							</Title>
+							<Group>Vertical</Group>
+							<Representation>NormalSeparation</Representation>
+							<ShowTitle>false</ShowTitle>
+							<BackColor>#E7D6FF</BackColor>
+							<ExtendedTooltip name="FirstExtendedTooltip" id="6"/>
+							<ChildItems>
+								<InputField name="A" id="7">
+									<DataPath>Name</DataPath>
+									<TitleLocation>None</TitleLocation>
+									<Width>12</Width>
+									<HorizontalStretch>false</HorizontalStretch>
+									<BackColor>#DBF2FB</BackColor>
+									<ContextMenu name="AContextMenu" id="8"/>
+									<ExtendedTooltip name="AExtendedTooltip" id="9"/>
+								</InputField>
+								<InputField name="ASecond" id="10">
+									<DataPath>Name</DataPath>
+									<TitleLocation>None</TitleLocation>
+									<Width>12</Width>
+									<HorizontalStretch>false</HorizontalStretch>
+									<BackColor>#FBE1CD</BackColor>
+									<ContextMenu name="ASecondContextMenu" id="11"/>
+									<ExtendedTooltip name="ASecondExtendedTooltip" id="12"/>
+								</InputField>
+							</ChildItems>
+						</UsualGroup>
+						<UsualGroup name="Second" id="13">
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Second</v8:content>
+								</v8:item>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Second</v8:content>
+								</v8:item>
+							</Title>
+							<Group>Vertical</Group>
+							<Representation>NormalSeparation</Representation>
+							<ShowTitle>false</ShowTitle>
+							<BackColor>#C9EBEB</BackColor>
+							<ExtendedTooltip name="SecondExtendedTooltip" id="14"/>
+							<ChildItems>
+								<InputField name="B" id="15">
+									<DataPath>Name</DataPath>
+									<TitleLocation>None</TitleLocation>
+									<Width>12</Width>
+									<HorizontalStretch>false</HorizontalStretch>
+									<BackColor>#F4CFDA</BackColor>
+									<ContextMenu name="BContextMenu" id="16"/>
+									<ExtendedTooltip name="BExtendedTooltip" id="17"/>
+								</InputField>
+								<InputField name="BSecond" id="18">
+									<DataPath>Name</DataPath>
+									<TitleLocation>None</TitleLocation>
+									<Width>12</Width>
+									<HorizontalStretch>false</HorizontalStretch>
+									<BackColor>#DCF4CF</BackColor>
+									<ContextMenu name="BSecondContextMenu" id="19"/>
+									<ExtendedTooltip name="BSecondExtendedTooltip" id="20"/>
+								</InputField>
+							</ChildItems>
+						</UsualGroup>
+					</ChildItems>
+				</UsualGroup>
+			</ChildItems>
+		</UsualGroup>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Name" id="1">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+</Form>
