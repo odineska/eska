@@ -1,0 +1,1465 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-09T01:05:37.669477+00:00",
+  "scope": [
+    "T157",
+    "T159",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "implementation": {
+    "commit": "226da19af9e7bf5bd6d35b2e0060bb1d76002c13",
+    "spacingCommit": "0d6d334bcdf8a94969f14300830bf820bee127ec",
+    "formNameExceptions": false,
+    "protocolChanged": false,
+    "sourceWrites": false,
+    "height": "Record row span comes from physical column structure. Vertical groups sum their parts; horizontal groups take their maximum and InCell remains a single row. Caption bands stay in the rendered header but do not increase the data row budget. Font conversion rounds each stacked data band before summing.",
+    "footer": "The existing keyed logical column projection also supplies the footer. Vertical fields keep their own cells, horizontal groups share tracks, and InCell keeps one composite cell. With limited height the compound footer keeps its bands and the header can be clipped. Empty horizontal groups keep their XML identity and produce no footer cell.",
+    "scope": "Height metrics are Linux-specific. The logical compound footer projection is shared. Windows geometry and the full profile are unaccepted."
+  },
+  "native": {
+    "fixture": "tests/fixtures/forms/native-table-row-depth",
+    "forms": 44,
+    "compatibility24Controls": 4,
+    "completeFrames": 96,
+    "manifestSha256": "a28916421535b1347ecf484091491b8b220ed8406712a7218f73e2eb87ced70d",
+    "metricsSha256": "c5884a6e9cbd2088760573158122171aa29b811553bdfe231f1cdb9af993ee3a",
+    "stands": [
+      {
+        "stand": "form-native-table-header-depth-80juhg83",
+        "compatibility": "Version8_3_27",
+        "sourceFiles": 744,
+        "runs": [
+          {
+            "locale": "en",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          },
+          {
+            "locale": "ru",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          }
+        ],
+        "sourcesUnchanged": true,
+        "fullRepeatRuns": null
+      },
+      {
+        "stand": "form-native-table-row-depth-nyq8jtdn",
+        "compatibility": "Version8_3_27",
+        "sourceFiles": 736,
+        "runs": [
+          {
+            "locale": "en",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          },
+          {
+            "locale": "ru",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          }
+        ],
+        "sourcesUnchanged": true,
+        "fullRepeatRuns": {
+          "runs": [
+            {
+              "locale": "en",
+              "exitCode": 0,
+              "sourcesUnchanged": true
+            },
+            {
+              "locale": "ru",
+              "exitCode": 0,
+              "sourcesUnchanged": true
+            }
+          ],
+          "sourcesUnchanged": true
+        }
+      },
+      {
+        "stand": "form-native-table-depth-controls-0aszu35p",
+        "compatibility": "Version8_3_27",
+        "sourceFiles": 726,
+        "runs": [
+          {
+            "locale": "en",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          },
+          {
+            "locale": "ru",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          }
+        ],
+        "sourcesUnchanged": true,
+        "fullRepeatRuns": null
+      },
+      {
+        "stand": "form-native-table-header-compat24-c5irar3a",
+        "compatibility": "Version8_3_24",
+        "sourceFiles": 714,
+        "runs": [
+          {
+            "locale": "en",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          },
+          {
+            "locale": "ru",
+            "exitCode": 0,
+            "sourcesUnchanged": true
+          }
+        ],
+        "sourcesUnchanged": true,
+        "fullRepeatRuns": null
+      }
+    ],
+    "completeBottomBorder": true,
+    "normalization": "BOM/CRLF only",
+    "examples": {
+      "depth2Height6": 172,
+      "depth2Rows4": 284,
+      "depth3Rows4": 425,
+      "depth3Rows6": 593,
+      "captionDepth2Rows4": 143,
+      "depth2Font16Rows2": 268
+    },
+    "rejectedEvidence": [
+      {
+        "stand": "form-native-table-header-compat24-rb5kdn19",
+        "importExitCode": 255,
+        "reason": "The unused auxiliary catalog had LineNumberLength=9. Compatibility 8.3.24 requires 5. A new own configuration corrected only that catalog and reused identical table XML."
+      },
+      {
+        "stand": "form-native-table-row-depth-nyq8jtdn",
+        "case": "StaticDepth3Rows6",
+        "reason": "Original native-en/native-ru captures were clipped by the preview pane and missing Below. At the bottom of the English blue bounding box only 4 of 743 pixels belonged to its outline. The accepted native-full frames use a moved pane splitter and a complete lower border."
+      },
+      {
+        "desktops": [
+          "form-private-desktop-35adkxop",
+          "form-private-desktop-a219l5x5"
+        ],
+        "exitCode": 1,
+        "reason": "The repeat failed to reach the native pointer target before any accepted capture. The existing metadata tree was already open. Repeating with the existing-configuration flag produced both full captures without changing form XML."
+      }
+    ]
+  },
+  "baseline": {
+    "stand": "form-table-row-depth-probe-cp73oipe",
+    "artifactSource": "form-batch-H0WSV2",
+    "diagnosticOnly": true,
+    "installedMatched": 13,
+    "installedTotal": 44,
+    "locale": "en",
+    "modelComparisons": [
+      {
+        "name": "StaticDepth1Default",
+        "actual": 227,
+        "expected": 227
+      },
+      {
+        "name": "StaticDepth1Height3",
+        "actual": 87,
+        "expected": 87
+      },
+      {
+        "name": "StaticDepth1Height6",
+        "actual": 171,
+        "expected": 171
+      },
+      {
+        "name": "StaticDepth1Height8",
+        "actual": 227,
+        "expected": 227
+      },
+      {
+        "name": "StaticDepth1Rows4",
+        "actual": 143,
+        "expected": 143
+      },
+      {
+        "name": "StaticDepth2Default",
+        "actual": 227,
+        "expected": 228
+      },
+      {
+        "name": "StaticDepth2Height3",
+        "actual": 87,
+        "expected": 88
+      },
+      {
+        "name": "StaticDepth2Height6",
+        "actual": 171,
+        "expected": 172
+      },
+      {
+        "name": "StaticDepth2Height8",
+        "actual": 227,
+        "expected": 228
+      },
+      {
+        "name": "StaticDepth2Rows4",
+        "actual": 173,
+        "expected": 284
+      },
+      {
+        "name": "StaticDepth3Default",
+        "actual": 228,
+        "expected": 229
+      },
+      {
+        "name": "StaticDepth3Height3",
+        "actual": 36,
+        "expected": 106
+      },
+      {
+        "name": "StaticDepth3Height6",
+        "actual": 172,
+        "expected": 173
+      },
+      {
+        "name": "StaticDepth3Height8",
+        "actual": 228,
+        "expected": 229
+      },
+      {
+        "name": "StaticDepth3Rows4",
+        "actual": 203,
+        "expected": 425
+      },
+      {
+        "name": "StaticDepth2NoHeaderHeight6",
+        "actual": 169,
+        "expected": 169
+      },
+      {
+        "name": "StaticDepth2FooterHeight6",
+        "actual": 173,
+        "expected": 175
+      },
+      {
+        "name": "StaticCaptionDepth2Height6",
+        "actual": 171,
+        "expected": 171
+      },
+      {
+        "name": "StaticCaptionDepth3Height6",
+        "actual": 172,
+        "expected": 172
+      },
+      {
+        "name": "StaticDepth2Rows1",
+        "actual": 89,
+        "expected": 116
+      },
+      {
+        "name": "StaticDepth2Rows2",
+        "actual": 117,
+        "expected": 172
+      },
+      {
+        "name": "StaticDepth2Rows6",
+        "actual": 229,
+        "expected": 396
+      },
+      {
+        "name": "StaticDepth3Rows1",
+        "actual": 119,
+        "expected": 173
+      },
+      {
+        "name": "StaticDepth3Rows2",
+        "actual": 147,
+        "expected": 257
+      },
+      {
+        "name": "StaticDepth3Rows6",
+        "actual": 259,
+        "expected": 593
+      },
+      {
+        "name": "StaticCaptionDepth2Rows4",
+        "actual": 173,
+        "expected": 143
+      },
+      {
+        "name": "StaticCaptionDepth3Rows4",
+        "actual": 203,
+        "expected": 284
+      },
+      {
+        "name": "StaticDepth2Max1",
+        "actual": 36,
+        "expected": 36
+      },
+      {
+        "name": "StaticDepth3Max1",
+        "actual": 36,
+        "expected": 36
+      },
+      {
+        "name": "StaticDepth3Height1",
+        "actual": 36,
+        "expected": 36
+      },
+      {
+        "name": "StaticDepth2NoHeaderDefault",
+        "actual": 227,
+        "expected": 225
+      },
+      {
+        "name": "StaticDepth3NoHeaderDefault",
+        "actual": 228,
+        "expected": 225
+      },
+      {
+        "name": "StaticDepth3FooterHeight6",
+        "actual": 174,
+        "expected": 176
+      },
+      {
+        "name": "StaticDepth2FooterRows2",
+        "actual": 147,
+        "expected": 231
+      },
+      {
+        "name": "StaticDepth2Height2",
+        "actual": 36,
+        "expected": 71
+      },
+      {
+        "name": "StaticDepth3Height2",
+        "actual": 36,
+        "expected": 71
+      },
+      {
+        "name": "StaticCaptionDepth3Height3",
+        "actual": 36,
+        "expected": 88
+      },
+      {
+        "name": "StaticDepth2FooterHeight3",
+        "actual": 90,
+        "expected": 89
+      },
+      {
+        "name": "StaticDepth1FooterRows2",
+        "actual": 117,
+        "expected": 117
+      },
+      {
+        "name": "StaticDepth2NoHeaderRows2",
+        "actual": 57,
+        "expected": 113
+      },
+      {
+        "name": "StaticDepth2Font16Rows2",
+        "actual": 182,
+        "expected": 268
+      },
+      {
+        "name": "StaticDepth2Font16Height6",
+        "actual": 267,
+        "expected": 268
+      },
+      {
+        "name": "StaticDepth2Font16Max1",
+        "actual": 52,
+        "expected": 52
+      },
+      {
+        "name": "StaticDepth2Font16FooterHeight6",
+        "actual": 269,
+        "expected": 271
+      }
+    ],
+    "examples": {
+      "depth2Rows4": [
+        173,
+        284
+      ],
+      "depth3Rows4": [
+        203,
+        425
+      ],
+      "depth3Rows6": [
+        259,
+        593
+      ],
+      "depth2Height6": [
+        171,
+        172
+      ]
+    }
+  },
+  "firstInstalled": {
+    "stand": "form-batch-UT8L4L",
+    "passed": true,
+    "states": 128,
+    "scope": "Before the empty horizontal group guard and distinct footer identity attribute."
+  },
+  "conditionalRowRegression": {
+    "failedBatch": "form-batch-4tQCsv",
+    "runtimeManifestSha256": "2225e5e891708d08c8b3b3be62193033c6e1c3d800b912edf6e2d50dc1ff87dd",
+    "failure": {
+      "suite": "mixed-row-spacing",
+      "locale": "ru",
+      "exitCode": 1,
+      "inputsStable": true,
+      "classification": "unclassified",
+      "log": "mixed-row-spacing-ru/driver.log",
+      "receipt": "mixed-row-spacing-ru/receipt.json"
+    },
+    "actual": {
+      "frame": [
+        1202,
+        156
+      ],
+      "label": [
+        321,
+        860,
+        17
+      ]
+    },
+    "expected": {
+      "frame": [
+        1204,
+        156
+      ],
+      "label": [
+        323,
+        860,
+        17
+      ]
+    },
+    "probe": {
+      "stand": "form-table-depth-spacing-probe-ibl2_9pp",
+      "receipt": "receipt.json",
+      "observations": [
+        {
+          "stage": "wide-initial",
+          "class": "taxi-items taxi-items--wrap taxi-items--horizontal",
+          "grouping": "HorizontalIfPossible",
+          "inlineGap": "",
+          "gap": "8px",
+          "display": "flex",
+          "preferred": "1202px",
+          "frame": [
+            1204,
+            156
+          ],
+          "viewport": [
+            1228,
+            1228
+          ],
+          "label": [
+            321,
+            860
+          ]
+        },
+        {
+          "stage": "narrow",
+          "class": "taxi-items taxi-items--wrap taxi-items--vertical",
+          "grouping": "HorizontalIfPossible",
+          "inlineGap": "",
+          "gap": "8px",
+          "display": "grid",
+          "preferred": "1202px",
+          "frame": [
+            720,
+            300
+          ],
+          "viewport": [
+            744,
+            744
+          ],
+          "label": [
+            13,
+            686
+          ]
+        },
+        {
+          "stage": "narrow-dirty",
+          "class": "taxi-items taxi-items--wrap taxi-items--vertical",
+          "grouping": "HorizontalIfPossible",
+          "inlineGap": "",
+          "gap": "8px",
+          "display": "grid",
+          "preferred": "1202px",
+          "frame": [
+            720,
+            300
+          ],
+          "viewport": [
+            744,
+            744
+          ],
+          "label": [
+            13,
+            686
+          ]
+        },
+        {
+          "stage": "wide-after-dirty",
+          "class": "taxi-items taxi-items--wrap taxi-items--horizontal",
+          "grouping": "HorizontalIfPossible",
+          "inlineGap": "",
+          "gap": "8px",
+          "display": "flex",
+          "preferred": "1202px",
+          "frame": [
+            1204,
+            156
+          ],
+          "viewport": [
+            1228,
+            1228
+          ],
+          "label": [
+            321,
+            860
+          ]
+        }
+      ]
+    },
+    "reallocated": {
+      "en": {
+        "frame": [
+          1204,
+          156
+        ],
+        "label": [
+          323,
+          860,
+          17
+        ]
+      },
+      "ru": {
+        "frame": [
+          1204,
+          156
+        ],
+        "label": [
+          323,
+          860,
+          17
+        ]
+      }
+    },
+    "cause": "Preferred measurement uses a horizontal row even when the allocated row is stacked. The measurement pass cleared its horizontal gap and never restored it for the stacked class, retaining the generic 8px after widening.",
+    "fix": "The visible child kinds and authored spacing determine the horizontal gap independently of the allocated orientation. Both locales recheck preferred width after recoloring unsaved XML while stacked and exact native geometry after widening."
+  },
+  "installed": {
+    "stand": "form-batch-g0QB92",
+    "vsixSha256": "812ba7330db94b067244f26881691ad5200ed4fbbd3047f5a72c582ca2babb40",
+    "backendSha256": "05237cc272a91b74a392d2f91eaea4c305c78fe53d0c5ca74b45d3123705a301",
+    "runtimeManifestSha256": "254f94fbb26b4459135ef390bebc81d40bae22bdb5951164c0efb0d0246c25ad",
+    "runtimeFiles": 1262,
+    "frozenSourceAndDriverFiles": 570,
+    "frozenFixtureFiles": 2094,
+    "frozenWitnessesUnchanged": true,
+    "runs": [
+      {
+        "suite": "table-row-depth",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-row-depth-en/driver.log",
+        "receipt": "table-row-depth-en/receipt.json",
+        "states": 64
+      },
+      {
+        "suite": "table-row-depth",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-row-depth-ru/driver.log",
+        "receipt": "table-row-depth-ru/receipt.json",
+        "states": 64
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-en/driver.log",
+        "receipt": "tables-en/receipt.json",
+        "states": 17
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "tables-ru/driver.log",
+        "receipt": "tables-ru/receipt.json",
+        "states": 17
+      },
+      {
+        "suite": "table-height",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-height-en/driver.log",
+        "receipt": "table-height-en/receipt.json",
+        "states": 70
+      },
+      {
+        "suite": "table-height",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-height-ru/driver.log",
+        "receipt": "table-height-ru/receipt.json",
+        "states": 70
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-en/driver.log",
+        "receipt": "table-pixels-en/receipt.json",
+        "states": 48
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-pixels-ru/driver.log",
+        "receipt": "table-pixels-ru/receipt.json",
+        "states": 47
+      },
+      {
+        "suite": "table-insets",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-insets-en/driver.log",
+        "receipt": "table-insets-en/receipt.json",
+        "states": 14
+      },
+      {
+        "suite": "table-insets",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-insets-ru/driver.log",
+        "receipt": "table-insets-ru/receipt.json",
+        "states": 14
+      },
+      {
+        "suite": "table-toolbar-insets",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-toolbar-insets-en/driver.log",
+        "receipt": "table-toolbar-insets-en/receipt.json",
+        "states": 17
+      },
+      {
+        "suite": "table-toolbar-insets",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "table-toolbar-insets-ru/driver.log",
+        "receipt": "table-toolbar-insets-ru/receipt.json",
+        "states": 17
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "responsive-en/driver.log",
+        "receipt": "responsive-en/receipt.json",
+        "states": 31
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "responsive-ru/driver.log",
+        "receipt": "responsive-ru/receipt.json",
+        "states": 31
+      },
+      {
+        "suite": "mixed-row-spacing",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "mixed-row-spacing-en/driver.log",
+        "receipt": "mixed-row-spacing-en/receipt.json",
+        "states": 39
+      },
+      {
+        "suite": "mixed-row-spacing",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "mixed-row-spacing-ru/driver.log",
+        "receipt": "mixed-row-spacing-ru/receipt.json",
+        "states": 39
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "group-spacing-en/driver.log",
+        "receipt": "group-spacing-en/receipt.json",
+        "states": 60
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "group-spacing-ru/driver.log",
+        "receipt": "group-spacing-ru/receipt.json",
+        "states": 60
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "page-group-spacing-en/driver.log",
+        "receipt": "page-group-spacing-en/receipt.json",
+        "states": 19
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "page-group-spacing-ru/driver.log",
+        "receipt": "page-group-spacing-ru/receipt.json",
+        "states": 19
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "renderer-en/driver.log",
+        "receipt": "renderer-en/receipt.json",
+        "states": 20
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "renderer-ru/driver.log",
+        "receipt": "renderer-ru/receipt.json",
+        "states": 20
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "preview-en/driver.log",
+        "receipt": "preview-en/receipt.json",
+        "states": 1
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "preview-ru/driver.log",
+        "receipt": "preview-ru/receipt.json",
+        "states": 1
+      }
+    ],
+    "states": 799,
+    "newStates": 128,
+    "accepted": [
+      "Complete frames, grid, surrounding fields, and footer cell Y/height",
+      "Dirty XML, native detached and docked targets, DOM and selection",
+      "Empty horizontal group in source with no footer cell",
+      "Existing table, group, geometry, and pixel regressions"
+    ]
+  },
+  "footerPaint": {
+    "stand": "form-batch-g0QB92",
+    "runtimeManifestSha256": "254f94fbb26b4459135ef390bebc81d40bae22bdb5951164c0efb0d0246c25ad",
+    "sampledInteriorBandsOnly": true,
+    "results": [
+      {
+        "name": "StaticDepth2FooterHeight6",
+        "locale": "en",
+        "actual": [
+          [
+            115,
+            28
+          ],
+          [
+            145,
+            28
+          ]
+        ],
+        "native": [
+          [
+            115,
+            28
+          ],
+          [
+            145,
+            28
+          ]
+        ],
+        "matches": true,
+        "screenshotSha256": "5b4ef898fa022f91ab5db6f5f477c4c594d90167cd1385079d885c18e61bdccf"
+      },
+      {
+        "name": "StaticDepth3FooterHeight6",
+        "locale": "en",
+        "actual": [
+          [
+            86,
+            28
+          ],
+          [
+            116,
+            28
+          ],
+          [
+            146,
+            28
+          ]
+        ],
+        "native": [
+          [
+            86,
+            28
+          ],
+          [
+            116,
+            28
+          ],
+          [
+            146,
+            28
+          ]
+        ],
+        "matches": true,
+        "screenshotSha256": "ca13dd28984e3574b3dcf13caf338d69a4839fa5a61c175206a37c273f5c9d77"
+      },
+      {
+        "name": "StaticDepth2FooterRows2",
+        "locale": "en",
+        "actual": [
+          [
+            171,
+            28
+          ],
+          [
+            201,
+            28
+          ]
+        ],
+        "native": [
+          [
+            171,
+            28
+          ],
+          [
+            201,
+            28
+          ]
+        ],
+        "matches": true,
+        "screenshotSha256": "bc8ce400def226cea9457de56c28b3bd7185f775203ad288395424a5826f5399"
+      },
+      {
+        "name": "StaticDepth2FooterHeight3",
+        "locale": "en",
+        "actual": [
+          [
+            29,
+            28
+          ],
+          [
+            59,
+            28
+          ]
+        ],
+        "native": [
+          [
+            29,
+            29
+          ],
+          [
+            59,
+            28
+          ]
+        ],
+        "matches": false,
+        "screenshotSha256": "9f70288f32487ac6e237612f5c3c0a1db2ab1fee70d59f28b15695b9e53c0f87"
+      },
+      {
+        "name": "StaticDepth1FooterRows2",
+        "locale": "en",
+        "actual": [
+          [
+            87,
+            28
+          ]
+        ],
+        "native": [
+          [
+            87,
+            28
+          ]
+        ],
+        "matches": true,
+        "screenshotSha256": "87f6e73bd44c89432caa4cae26fc7324d2a36f8fabac134859e709dda39d7d9c"
+      },
+      {
+        "name": "StaticDepth2Font16FooterHeight6",
+        "locale": "en",
+        "actual": [
+          [
+            191,
+            38
+          ],
+          [
+            231,
+            38
+          ]
+        ],
+        "native": [
+          [
+            191,
+            38
+          ],
+          [
+            231,
+            38
+          ]
+        ],
+        "matches": true,
+        "screenshotSha256": "1bb1a96fcc583c05f5190985c8beef1a5b739a1b4ac74cd9309d18622d98c4f9"
+      },
+      {
+        "name": "StaticDepth2FooterHeight6",
+        "locale": "ru",
+        "actual": [
+          [
+            115,
+            28
+          ],
+          [
+            145,
+            28
+          ]
+        ],
+        "native": [
+          [
+            115,
+            28
+          ],
+          [
+            145,
+            28
+          ]
+        ],
+        "matches": true,
+        "screenshotSha256": "a918457b66d00f8b0ad1f6d633b06249926735e0554b5978cf5c1d9c0fb6f0eb"
+      },
+      {
+        "name": "StaticDepth3FooterHeight6",
+        "locale": "ru",
+        "actual": [
+          [
+            86,
+            28
+          ],
+          [
+            116,
+            28
+          ],
+          [
+            146,
+            28
+          ]
+        ],
+        "native": [
+          [
+            86,
+            28
+          ],
+          [
+            116,
+            28
+          ],
+          [
+            146,
+            28
+          ]
+        ],
+        "matches": true,
+        "screenshotSha256": "ccafde7c39374d6249575869aa7677dcc7f0fd7205df973367790f3e2ca05628"
+      },
+      {
+        "name": "StaticDepth2FooterRows2",
+        "locale": "ru",
+        "actual": [
+          [
+            171,
+            28
+          ],
+          [
+            201,
+            28
+          ]
+        ],
+        "native": [
+          [
+            171,
+            28
+          ],
+          [
+            201,
+            28
+          ]
+        ],
+        "matches": true,
+        "screenshotSha256": "5a2baf9574e98bc1d1daa03a8323acd5e0a03387dfea27bd1fd06edfe932a2b2"
+      },
+      {
+        "name": "StaticDepth2FooterHeight3",
+        "locale": "ru",
+        "actual": [
+          [
+            29,
+            28
+          ],
+          [
+            59,
+            28
+          ]
+        ],
+        "native": [
+          [
+            29,
+            29
+          ],
+          [
+            59,
+            28
+          ]
+        ],
+        "matches": false,
+        "screenshotSha256": "2073fcb1b870d07e2c82ebd8583a0acddd8a940ffcc59ad75dac353762bd9d2b"
+      },
+      {
+        "name": "StaticDepth1FooterRows2",
+        "locale": "ru",
+        "actual": [
+          [
+            87,
+            28
+          ]
+        ],
+        "native": [
+          [
+            87,
+            28
+          ]
+        ],
+        "matches": true,
+        "screenshotSha256": "80b421abacaa2e7c00087d470abdd3c006fd8941797e10e008e0313d6373a853"
+      },
+      {
+        "name": "StaticDepth2Font16FooterHeight6",
+        "locale": "ru",
+        "actual": [
+          [
+            191,
+            38
+          ],
+          [
+            231,
+            38
+          ]
+        ],
+        "native": [
+          [
+            191,
+            38
+          ],
+          [
+            231,
+            38
+          ]
+        ],
+        "matches": true,
+        "screenshotSha256": "95f7ca26115a6a74a10dfd50a90a06648d01ee30bd17b7a89d3e7ac70a559e3b"
+      }
+    ]
+  },
+  "wholeForms": {
+    "stand": "form-table-row-depth-whole-sv_38hu9",
+    "artifactSource": "form-batch-g0QB92",
+    "vsixSha256": "812ba7330db94b067244f26881691ad5200ed4fbbd3047f5a72c582ca2babb40",
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.173514843998419,
+        "runtimeManifestSha256": "254f94fbb26b4459135ef390bebc81d40bae22bdb5951164c0efb0d0246c25ad",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.729547181996168,
+        "runtimeManifestSha256": "254f94fbb26b4459135ef390bebc81d40bae22bdb5951164c0efb0d0246c25ad",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.586177776000113,
+        "runtimeManifestSha256": "254f94fbb26b4459135ef390bebc81d40bae22bdb5951164c0efb0d0246c25ad",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.152725510997698,
+        "runtimeManifestSha256": "254f94fbb26b4459135ef390bebc81d40bae22bdb5951164c0efb0d0246c25ad",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.245011355000315,
+        "runtimeManifestSha256": "254f94fbb26b4459135ef390bebc81d40bae22bdb5951164c0efb0d0246c25ad",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 9.737131112997304,
+        "runtimeManifestSha256": "254f94fbb26b4459135ef390bebc81d40bae22bdb5951164c0efb0d0246c25ad",
+        "runtimeFiles": 1262
+      }
+    ],
+    "passed": true,
+    "sourcesUnchanged": true,
+    "sourceFiles": 4,
+    "nativeTotals": {
+      "stand": "form-bsp-geometry-native-whn6wv7l",
+      "platform": "8.3.27.2342",
+      "compatibility": "Version8_3_24",
+      "locale": "en",
+      "frame": [
+        1224,
+        541
+      ],
+      "advancedGrid": [
+        35,
+        174,
+        1146,
+        298
+      ],
+      "frameScreenshotSha256": "29334da9c229cdba53a910cf7be003ead0f6eaeadcf4b6008477866662ddaf56",
+      "advancedScreenshotSha256": "41496b0e358c069e7f90861b8eec513834a7f44623bed0eabb31a6888b5a8f10",
+      "cropOrigin": [
+        261,
+        718
+      ]
+    },
+    "bsp": {
+      "en": {
+        "wizardFrame": {
+          "width": 811,
+          "height": 612
+        },
+        "questionnaireFrame": {
+          "width": 801,
+          "height": 769
+        },
+        "totalsFrame": {
+          "width": 1224,
+          "height": 541
+        },
+        "advancedGrid": [
+          35,
+          174,
+          1146,
+          298
+        ],
+        "authoredButtons": [
+          {
+            "id": "219",
+            "border": [
+              24,
+              99.5,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "220",
+            "border": [
+              24,
+              151,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "222",
+            "border": [
+              24,
+              231,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "223",
+            "border": [
+              24,
+              280,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          }
+        ],
+        "help": {
+          "text": "",
+          "picture": true,
+          "width": 30,
+          "paintHeight": 27
+        }
+      },
+      "ru": {
+        "wizardFrame": {
+          "width": 811,
+          "height": 612
+        },
+        "questionnaireFrame": {
+          "width": 801,
+          "height": 769
+        },
+        "totalsFrame": {
+          "width": 1224,
+          "height": 541
+        },
+        "advancedGrid": [
+          35,
+          174,
+          1146,
+          298
+        ],
+        "authoredButtons": [
+          {
+            "id": "219",
+            "border": [
+              24,
+              99.5,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "220",
+            "border": [
+              24,
+              151,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "222",
+            "border": [
+              24,
+              231,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          },
+          {
+            "id": "223",
+            "border": [
+              24,
+              280,
+              300,
+              39
+            ],
+            "paintHeight": 40
+          }
+        ],
+        "help": {
+          "text": "",
+          "picture": true,
+          "width": 30,
+          "paintHeight": 27
+        }
+      }
+    },
+    "loan": {
+      "grid": [
+        13,
+        589,
+        662,
+        227
+      ],
+      "footerMemo": [
+        13,
+        844,
+        511,
+        51
+      ],
+      "paymentMemo": [
+        484,
+        339,
+        191,
+        51
+      ]
+    }
+  },
+  "validation": {
+    "stand": "form-table-row-depth-validation-1gfm_2c1",
+    "logs": {
+      "cargo-fmt": {
+        "file": "eska-table-row-depth-cargo-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cargo-check": {
+        "file": "eska-table-row-depth-cargo-check.log",
+        "sha256": "8c233a54790c4800d3dd585436af679aa838da259bfdb129412e2d51cdb75cdc"
+      },
+      "cargo-clippy": {
+        "file": "eska-table-row-depth-cargo-clippy.log",
+        "sha256": "a5f4c585ee974ca44916ac30a98bbc189e067a7e0a6bc6d2e8d6bc525be724af"
+      },
+      "cargo-test": {
+        "file": "eska-table-row-depth-cargo-test.log",
+        "sha256": "eea5d136177c78ae0b47e69b8931b08af062390cc42fdf1b7b1d59d96e79cfe4"
+      },
+      "node": {
+        "file": "eska-table-row-depth-node.log",
+        "sha256": "9e19b3165349d89b9b073e58554f9c95ee51d718c017edc389a2435bfc4d92d3"
+      },
+      "unit-first": {
+        "file": "eska-table-row-depth-unit-first.log",
+        "sha256": "722c29fcb24ff0374954042c2944560ebae1e3af68eafec1c06ec0d027af8f48"
+      },
+      "pre-gate-tests": {
+        "file": "eska-table-row-depth-pre-gate-tests.log",
+        "sha256": "7da1f464fe91a25828e44d6518ea022304ba5e3960b1fe6ce564d22fd21469ae"
+      }
+    },
+    "node": {
+      "tests": 735,
+      "pass": 727,
+      "fail": 0,
+      "skipped": 8
+    },
+    "rust": {
+      "passed": 1573,
+      "ignored": 19,
+      "failed": 0
+    },
+    "intermediateUnitFailures": "The first height change doubled the growth term in the constrained group floor and reduced the default headerless DynamicList by 2px. Both original regression expectations were retained and the final code passed.",
+    "commands": [
+      "cargo fmt --check",
+      "cargo check",
+      "cargo clippy --all-targets --all-features -- -D warnings",
+      "ESKA_TEST_ROOT=<absolute sibling playground> cargo test",
+      "npm run test:node with backend paths and sibling ESKA_TEST_ROOT",
+      "git diff --check"
+    ]
+  },
+  "limitations": [
+    "The new compound corpus accepts geometry. Its sampled footer background differs by 1px in the first band of the tightly clipped Depth2FooterHeight3 case in both locales. The actual raw samples are retained.",
+    "The complete native whole-form RGB comparison, former explicit Center caption detail, broader font/style combinations, compound minimums under native resize, and Windows remain unaccepted.",
+    "This is not a performance budget or complete T157/T159/T165 acceptance."
+  ],
+  "windowsHandoff": [
+    "Capture the same 44 XML inputs natively on Windows 8.3.27, including both compatibility modes for the four controls. Do not reuse Linux coordinate numbers.",
+    "Verify grouped captions, two/three stacked fields, Height/HeightInTableRows/MaxHeight, Header/Footer, 10/16pt, dirty font and height edits, DOM and floating/docked windows.",
+    "Recheck the entire BSP totals form and its Advanced page, the Loan form, and the clipped footer paint separately."
+  ]
+}
