@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-09T02:30:15.139297+00:00",
+  "scope": [
+    "T161",
+    "T160"
+  ],
+  "profile": {
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "os": "linux",
+    "arch": "arm64",
+    "displayBackend": "private-headless-Mutter"
+  },
+  "implementation": {
+    "eska": "9a01c90987a7c43e6cc373f9ef48d8aa6abcb378",
+    "explorer": "6a3071f1a49f5f826e4e984d2c62c21c7de17513",
+    "explorerPdfFallback": "36ebf037d88755caf438b5f3670fe28dc1500619",
+    "fixture": "../../tests/fixtures/forms/native-command-palette/metrics.json",
+    "fixtureSha256": "e4697d02a8b4e1da36453a63a88287d81b68231f1ce582eca8dbd4c312cba65a"
+  },
+  "native": {
+    "forms": 8,
+    "selections": 68,
+    "unchangedExportComparisons": 15,
+    "captures": [
+      {
+        "stand": "form-native-command-palette-en-n559250e",
+        "locale": "en",
+        "scriptVariant": "English",
+        "captureDirectory": "palettes",
+        "unchangedCanonicalForms": 7,
+        "selections": 29,
+        "capturesSha256": "53cfbdf49c971d0cde751cd52ab14586c7d9b36b02e75de254c242d3a2216e45"
+      },
+      {
+        "stand": "form-native-command-palette-ru-jvvkjase",
+        "locale": "ru",
+        "scriptVariant": "Russian",
+        "captureDirectory": "palettes",
+        "unchangedCanonicalForms": 7,
+        "selections": 29,
+        "capturesSha256": "e3f5437114a5ca7f7060b5784f93d2ebe28635fb42608c3875ea3f170f4658f8"
+      },
+      {
+        "stand": "form-native-command-palette-tuned-en-xurljwwa",
+        "locale": "en",
+        "scriptVariant": "English",
+        "captureDirectory": "palettes-en",
+        "unchangedCanonicalForms": 1,
+        "selections": 5,
+        "capturesSha256": "3689eb22f8f4c5953a9a9095591d323b04ce6addf324d44c5351d8fd6cf3818f"
+      },
+      {
+        "stand": "form-native-command-palette-tuned-en-xurljwwa",
+        "locale": "ru",
+        "scriptVariant": "English",
+        "captureDirectory": "palettes-ru",
+        "unchangedCanonicalForms": 1,
+        "selections": 5,
+        "capturesSha256": "edb8b22a324d8d78309ed7bdb19b24d0391b7d984fc968bc0faefed4a45f9a17"
+      }
+    ],
+    "xmlRoundTrips": [
+      {
+        "stand": "form-native-command-palette-aliases-vof2si94",
+        "form": "Tuned",
+        "exportSha256": "4fd46a9d5fec8df284461f9aae852739771f85e8d183d5608ace13944dbf67f1",
+        "rows": {
+          "BoundBar.HorizontalAlign": {
+            "xmlProperty": "HorizontalLocation",
+            "token": "Right"
+          }
+        }
+      },
+      {
+        "stand": "form-native-command-palette-aliases-e_gx26z4",
+        "form": "Tuned",
+        "exportSha256": "b304e17aaee721771613395442e77f7dca3b470066482d9c82b07ded520c3136",
+        "rows": {
+          "RowsBar.HorizontalAlign": {
+            "xmlProperty": "HorizontalAlign",
+            "token": "Right"
+          },
+          "StatusExtra.HorizontalAlign": {
+            "xmlProperty": "HorizontalLocation",
+            "token": "Left"
+          }
+        }
+      },
+      {
+        "stand": "form-native-command-palette-aliases-i6iz_g28",
+        "form": "PlainCommands",
+        "exportSha256": "3bfdcbd55dcd45ac17e78ce6a0559040685d8216b705cb6c84915a2810487c25",
+        "rows": {
+          "BarGroup.View": {
+            "xmlProperty": "Representation",
+            "token": "Compact"
+          }
+        }
+      }
+    ]
+  },
+  "installed": {
+    "stand": "form-batch-AQaQkE",
+    "vsixSha256": "aa3e66c181cec44f9af63e3354b56d156ed4d7661e72152e3b9c0f3a6d56560a",
+    "backendSha256": "276d3be2e7452af5c932e0d5a4cad94e2c9c784ff0eeb2c3981d3f2bc30e7df0",
+    "runtimeManifestSha256": "5027f8ee42374942b5ad32767ce5df9003e07d842dbd4abb7b99a0dde0a258ae",
+    "packages": 1,
+    "runs": [
+      {
+        "suite": "command-palette",
+        "locale": "en",
+        "states": 36,
+        "caseIds": [
+          "command-palette/PlainCommands/PlainBar",
+          "command-palette/PlainCommands/BarGroup",
+          "command-palette/PlainCommands/BarMenu",
+          "command-palette/PlainCommands/PictureMenu",
+          "command-palette/PlainCommands/RootGroup",
+          "command-palette/PlainCommands/RootMenu",
+          "command-palette/RootAuto/FormCommandBar",
+          "command-palette/RootAuto/AutoGroup",
+          "command-palette/RootAuto/AutoMenu",
+          "command-palette/Static/RowsBar",
+          "command-palette/Static/SearchOwned",
+          "command-palette/Static/StatusOwned",
+          "command-palette/Static/ManageOwned",
+          "command-palette/Dynamic/RowsBar",
+          "command-palette/Dynamic/SearchOwned",
+          "command-palette/Dynamic/StatusOwned",
+          "command-palette/Dynamic/ManageOwned",
+          "command-palette/TableAuto/RowsBar",
+          "command-palette/TableAuto/TableGroup",
+          "command-palette/TableAuto/TableMenu",
+          "command-palette/External/BoundBar",
+          "command-palette/External/RowsBar",
+          "command-palette/External/SearchOwned",
+          "command-palette/External/StatusOwned",
+          "command-palette/External/ManageOwned",
+          "command-palette/External/SearchExtra",
+          "command-palette/External/StatusExtra",
+          "command-palette/External/ManageExtra",
+          "command-palette/dirty-addition-width-and-source",
+          "command-palette/addition-source-record-and-xml-navigation",
+          "command-palette/Pdf/PdfStatus",
+          "command-palette/Tuned/BoundBar",
+          "command-palette/Tuned/SearchOwned",
+          "command-palette/Tuned/StatusOwned",
+          "command-palette/Tuned/ManageExtra",
+          "command-palette/Tuned/StatusExtra"
+        ],
+        "receipt": "command-palette-en/receipt.json",
+        "receiptSha256": "c08c9431c3b3a9b14616e2ab6ff0a96bd8df8df8e5ced88bb271864ab5efedb7"
+      },
+      {
+        "suite": "command-palette",
+        "locale": "ru",
+        "states": 36,
+        "caseIds": [
+          "command-palette/PlainCommands/PlainBar",
+          "command-palette/PlainCommands/BarGroup",
+          "command-palette/PlainCommands/BarMenu",
+          "command-palette/PlainCommands/PictureMenu",
+          "command-palette/PlainCommands/RootGroup",
+          "command-palette/PlainCommands/RootMenu",
+          "command-palette/RootAuto/FormCommandBar",
+          "command-palette/RootAuto/AutoGroup",
+          "command-palette/RootAuto/AutoMenu",
+          "command-palette/Static/RowsBar",
+          "command-palette/Static/SearchOwned",
+          "command-palette/Static/StatusOwned",
+          "command-palette/Static/ManageOwned",
+          "command-palette/Dynamic/RowsBar",
+          "command-palette/Dynamic/SearchOwned",
+          "command-palette/Dynamic/StatusOwned",
+          "command-palette/Dynamic/ManageOwned",
+          "command-palette/TableAuto/RowsBar",
+          "command-palette/TableAuto/TableGroup",
+          "command-palette/TableAuto/TableMenu",
+          "command-palette/External/BoundBar",
+          "command-palette/External/RowsBar",
+          "command-palette/External/SearchOwned",
+          "command-palette/External/StatusOwned",
+          "command-palette/External/ManageOwned",
+          "command-palette/External/SearchExtra",
+          "command-palette/External/StatusExtra",
+          "command-palette/External/ManageExtra",
+          "command-palette/dirty-addition-width-and-source",
+          "command-palette/addition-source-record-and-xml-navigation",
+          "command-palette/Pdf/PdfStatus",
+          "command-palette/Tuned/BoundBar",
+          "command-palette/Tuned/SearchOwned",
+          "command-palette/Tuned/StatusOwned",
+          "command-palette/Tuned/ManageExtra",
+          "command-palette/Tuned/StatusExtra"
+        ],
+        "receipt": "command-palette-ru/receipt.json",
+        "receiptSha256": "ea7799a9a3ce600fe3524ee90d6785c3d4461c8d4280f400203ba9633e626c07"
+      },
+      {
+        "suite": "pdf",
+        "locale": "en",
+        "states": 27,
+        "receipt": "pdf-en/receipt.json",
+        "receiptSha256": "f6122050b6b29851950dccbe60b85e4029efd89587abbb5aab70e87655b08160"
+      },
+      {
+        "suite": "pdf",
+        "locale": "ru",
+        "states": 27,
+        "receipt": "pdf-ru/receipt.json",
+        "receiptSha256": "290e8e0e91b6dbc205e11b9475a86b1e9c6494cc386c70f8500d8f6bbde16ad1"
+      },
+      {
+        "suite": "table-palette",
+        "locale": "en",
+        "states": 28,
+        "receipt": "table-palette-en/receipt.json",
+        "receiptSha256": "9e4976421156387ef4efb17412c89e96d6f43c855ed426761a92505ff883189c"
+      },
+      {
+        "suite": "table-palette",
+        "locale": "ru",
+        "states": 28,
+        "receipt": "table-palette-ru/receipt.json",
+        "receiptSha256": "305557aaa0fea0683e3e01f05ac8967894c7212c291155a3dd3ce584d654e56c"
+      },
+      {
+        "suite": "property-catalogue",
+        "locale": "en",
+        "states": 30,
+        "receipt": "property-catalogue-en/receipt.json",
+        "receiptSha256": "666970b36a11734a551d9890f4be20aa00977af2d87b69f63977da853afb32a5"
+      },
+      {
+        "suite": "property-catalogue",
+        "locale": "ru",
+        "states": 30,
+        "receipt": "property-catalogue-ru/receipt.json",
+        "receiptSha256": "4eedae1ee92ea0038c63d5450370549a4ebb35f6b6ce6c22e528d8ed3b2b88f6"
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "states": 1,
+        "receipt": "preview-en/receipt.json",
+        "receiptSha256": "14515148c5e9cd30982df97913c94cabb979e681cd3b2d9f0f4edc4a66b53853"
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "states": 1,
+        "receipt": "preview-ru/receipt.json",
+        "receiptSha256": "ee73ed49b1a554191d7ab842c14fecf13f6a45ed11ffc88b481d3d1365a09e02"
+      }
+    ],
+    "states": 244,
+    "pdfPixelsByLocale": {
+      "en": 2461430,
+      "ru": 2461430
+    },
+    "sourceFilesStable": true,
+    "passed": true
+  },
+  "validation": {
+    "cargoFmt": "passed",
+    "cargoCheck": "passed",
+    "cargoClippy": "passed",
+    "cargoTest": {
+      "passed": 1577,
+      "failed": 0,
+      "ignored": 19
+    },
+    "explorerNode": {
+      "passed": 727,
+      "failed": 0,
+      "skipped": 8
+    },
+    "diffCheck": "passed"
+  },
+  "limits": [
+    "Проверены перечисленные контексты палитры на Linux. Для Windows нужна сверка с родным Конфигуратором.",
+    "Требуется отдельная сверка остальных свойств, значений перечислений и владельцев встроенных дополнений.",
+    "Визуальное размещение самостоятельных дополнений остаётся отдельным сценарием T159."
+  ]
+}
