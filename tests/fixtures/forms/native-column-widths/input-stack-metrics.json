@@ -3,7 +3,7 @@
   "nativeBuild": "8.3.27.2342",
   "profile": "linux-taxi-96",
   "sourceFiles": {
-    "MixedInputStack": "636dbfd9ebc8a086744c102f3af089996be88af7fe0cdb47f81433828cf1ea4b"
+    "MixedInputStack": "33af7ea4b4cde54d6bbaf49a796759ed50bcfb1c719974a9eb830080b519ba70"
   },
   "fixtures": {
     "MixedInputStack": {
@@ -257,6 +257,231 @@
               "IncomingStatus": {
                 "Width": "3",
                 "MaxWidth": "3"
+              }
+            }
+          }
+        },
+        {
+          "name": "nested fields set the natural leading width",
+          "frame": [
+            767,
+            450
+          ],
+          "nativeCapture": "Stack000.png",
+          "screenshotSha256": "177b4969d104d1037985b673f819113cf077d9d14074fac25806497ad9e5b19a",
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              344,
+              23
+            ],
+            "OutgoingStatus": [
+              564,
+              153,
+              20,
+              20
+            ],
+            "OutgoingOrg": [
+              594,
+              null,
+              152,
+              19
+            ],
+            "ServiceRef": [
+              143,
+              240,
+              410,
+              23
+            ]
+          },
+          "preferredWidth": 767,
+          "edit": {
+            "form": {
+              "Width": null
+            }
+          }
+        },
+        {
+          "name": "nested fields and the mixed row shrink together",
+          "frame": [
+            684,
+            450
+          ],
+          "nativeCapture": "Stack065.png",
+          "screenshotSha256": "f19737184fc8041450813ea7c920e0e2424657ec3331859a4621446fced3127a",
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              280,
+              23
+            ],
+            "OutgoingStatus": [
+              500,
+              153,
+              18,
+              20
+            ],
+            "OutgoingOrg": [
+              528,
+              null,
+              135,
+              19
+            ],
+            "ServiceRef": [
+              130,
+              240,
+              360,
+              23
+            ]
+          }
+        },
+        {
+          "name": "fixed field and trailing controls determine the minimum frame",
+          "frame": [
+            599,
+            null
+          ],
+          "nativeCapture": "Anchor048.png",
+          "screenshotSha256": "38e902c95d97496a080bb93b2908585df795f8dcf36df075c97c3aab65105cde",
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              274,
+              23
+            ],
+            "OutgoingStatus": [
+              494,
+              153,
+              12,
+              20
+            ],
+            "OutgoingOrg": [
+              516,
+              null,
+              62,
+              19
+            ],
+            "ServiceRef": [
+              130,
+              272,
+              354,
+              23
+            ],
+            "Anchor": [
+              13,
+              217,
+              471,
+              23
+            ]
+          },
+          "viewport": [
+            514,
+            450
+          ],
+          "edit": {
+            "fields": {
+              "Anchor": {
+                "Visible": "true"
+              }
+            }
+          }
+        },
+        {
+          "name": "fixed field sets the leading floor without consuming the surplus",
+          "frame": [
+            634,
+            450
+          ],
+          "nativeCapture": "Anchor060.png",
+          "screenshotSha256": "6809dc4023cbafd4af03009bdd5188dff1f15bae8bfdecff48752937012b5af7",
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              288,
+              23
+            ],
+            "OutgoingStatus": [
+              508,
+              153,
+              13,
+              20
+            ],
+            "OutgoingOrg": [
+              531,
+              null,
+              82,
+              19
+            ],
+            "ServiceRef": [
+              130,
+              272,
+              368,
+              23
+            ],
+            "Anchor": [
+              13,
+              217,
+              471,
+              23
+            ]
+          },
+          "edit": {
+            "fields": {
+              "Anchor": {
+                "Visible": "true"
+              }
+            }
+          }
+        },
+        {
+          "name": "authored trailing label width contributes to the natural frame",
+          "frame": [
+            877,
+            450
+          ],
+          "nativeCapture": "WideTail000.png",
+          "screenshotSha256": "b53ecd32f2a37a5a1381398afa09210c36ec203d1537d1e5f4aab2a8e803ee01",
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              344,
+              23
+            ],
+            "OutgoingStatus": [
+              564,
+              153,
+              20,
+              20
+            ],
+            "OutgoingOrg": [
+              594,
+              null,
+              262,
+              19
+            ],
+            "ServiceRef": [
+              143,
+              240,
+              410,
+              23
+            ]
+          },
+          "preferredWidth": 877,
+          "edit": {
+            "form": {
+              "Width": null
+            },
+            "fields": {
+              "OutgoingOrg": {
+                "Width": "26"
+              },
+              "IncomingOrg": {
+                "Width": "26"
               }
             }
           }
