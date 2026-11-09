@@ -1527,6 +1527,48 @@
           ]
         }
       ]
+    },
+    {
+      "file": "DateThroughColumns.xml",
+      "sourceSha256": "fc8b022a933a21c82b4cc0655b4f216f5d1b1aa0e01d2b468e6e93c00f9a6e5c",
+      "through": true,
+      "cases": [
+        {
+          "width": 984,
+          "viewportHeight": 620,
+          "divider": true,
+          "nativeInputSha256": "f8f66b4089d857a3af06d57ca90dfa588bdbc0389a5e867074d5d445ec871dce",
+          "nativeScreenshotSha256": "59d5682fe81cdec3556ff4005714b3ce57952b8514ed0b2c461e06e38d851a3b"
+        },
+        {
+          "width": 1334,
+          "viewportHeight": 620,
+          "columns": [
+            [
+              13,
+              471
+            ],
+            [
+              494,
+              819
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            null
+          ],
+          "dateBlock": [
+            499,
+            604
+          ],
+          "divider": false,
+          "nativeInputSha256": "61ed7b925baf555ccc2d39ebb5c89c8693c4083aa7bca20d3e42211dc75aaa9d",
+          "nativeScreenshotSha256": "e6d312be55041433fa718869d5bf16a4a182767245ff2a0f26c83175437a95a6"
+        }
+      ]
     }
   ]
 }
