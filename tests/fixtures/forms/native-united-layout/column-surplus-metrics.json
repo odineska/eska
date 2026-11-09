@@ -11,6 +11,38 @@
       "sourceSha256": "b8748298a35106db025b696ffe3a797a12b2251b48b91db1fdebba267009df22",
       "cases": [
         {
+          "width": 224,
+          "columns": [
+            [
+              13,
+              90
+            ],
+            [
+              113,
+              90
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              80
+            ],
+            [
+              118,
+              80
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "86f2be391e94fd327f9536e45af56d581fbf4b73229bed22e606536fa9204b0b",
+          "nativeScreenshotSha256": "74201a6326ad0bf111eb1f0fc81237c00af24d5462264654b74e36de00a30589"
+        },
+        {
+          "width": 234,
+          "divider": true,
+          "nativeInputSha256": "0b3c4acbba6e3c0ca32527e385b8fc695ca9976c53e1a2de5eda12b16b486f25",
+          "nativeScreenshotSha256": "3ea33dc170f17e039228bfa9f76d6127ac89939ae8d001fd681748f8dea5dc3d"
+        },
+        {
           "width": 774,
           "columns": [
             [
@@ -142,13 +174,19 @@
               328
             ]
           ],
-          "divider": true,
+          "divider": false,
           "nativeInputSha256": "ced7093d2378f34337bda073628e71333b2aa7eaac03ed7888365bc4f2d1fa5a",
           "nativeScreenshotSha256": "858279c1a1a3b1d60b753b9b31eb19ba6193e5e388d79cbe821bf6ba4ecce3ed",
           "dateBlock": [
             118,
             328
           ]
+        },
+        {
+          "width": 474,
+          "divider": true,
+          "nativeInputSha256": "ab9f51ef642ddfcf8848b791bf775a1c7e33eb07057616a1836de8f1c7520e5f",
+          "nativeScreenshotSha256": "c9e4ecd58030163c747e7efa707ed6f951176b106befddae29d309dad3cbfee3"
         },
         {
           "width": 1129,
