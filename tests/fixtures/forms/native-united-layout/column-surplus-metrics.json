@@ -1,0 +1,246 @@
+{
+  "platformBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "locale": "ru",
+  "coordinateSystem": "Horizontal CSS pixels relative to the logical form frame at 100% zoom",
+  "fixtures": [
+    {
+      "file": "BoundedColumns.xml",
+      "sourceSha256": "b8748298a35106db025b696ffe3a797a12b2251b48b91db1fdebba267009df22",
+      "cases": [
+        {
+          "width": 774,
+          "columns": [
+            [
+              13,
+              322
+            ],
+            [
+              345,
+              408
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              312
+            ],
+            [
+              350,
+              398
+            ]
+          ],
+          "divider": true,
+          "nativeInputSha256": "b55984274ab76cacd81af8058fc4167f6fe437c6ecb4c4188c2b8fd69b1c15ed",
+          "nativeScreenshotSha256": "ad38014cd4fde1a5a0f2f70dec964287ed080a4e14b77ad92141959ab745ac7e"
+        },
+        {
+          "width": 1126,
+          "columns": [
+            [
+              13,
+              471
+            ],
+            [
+              494,
+              611
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              499,
+              601
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "2eb8d01d85a125677b771848e616fb9e688571fa808bcbbe21065d33f385610d",
+          "nativeScreenshotSha256": "f296aa94e303221672639c2b8854ded307d48973de1337fc70a74c6feb69ad1e"
+        },
+        {
+          "width": 1204,
+          "columns": [
+            [
+              13,
+              505
+            ],
+            [
+              528,
+              655
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              533,
+              601
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "1a92deada3e759df73c4e541d9714d561cc908cdb7eea10f579cf615936ca5e2",
+          "nativeScreenshotSha256": "5e71286312a02ce41ac1e347463b1170de75dc25edec57f4edceebcf917b8e5b"
+        },
+        {
+          "width": 1404,
+          "columns": [
+            [
+              13,
+              592
+            ],
+            [
+              615,
+              768
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              620,
+              601
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "1ce6353fd19d63ca94f9b258538ea950da116838cc254fe4dcf63fbe8e17456b",
+          "nativeScreenshotSha256": "e36f1490762f5a5b2dfcbe2ad5e8089519d9496ad8c5c9e67c97ba5039fcc9ab"
+        }
+      ]
+    },
+    {
+      "file": "BoundedDateColumns.xml",
+      "sourceSha256": "e68d032c46756f06724d3edd5a82876cc99aa42e9225fa71050c4957d9e97f1a",
+      "cases": [
+        {
+          "width": 472,
+          "columns": [
+            [
+              13,
+              90
+            ],
+            [
+              113,
+              338
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              80
+            ],
+            [
+              118,
+              328
+            ]
+          ],
+          "divider": true,
+          "nativeInputSha256": "ced7093d2378f34337bda073628e71333b2aa7eaac03ed7888365bc4f2d1fa5a",
+          "nativeScreenshotSha256": "858279c1a1a3b1d60b753b9b31eb19ba6193e5e388d79cbe821bf6ba4ecce3ed",
+          "dateBlock": [
+            118,
+            328
+          ]
+        },
+        {
+          "width": 1129,
+          "columns": [
+            [
+              13,
+              471
+            ],
+            [
+              494,
+              614
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              499,
+              410
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "aa7c2da64ad9c0d2e8a597e1cc0d9e80e65978147c64b031b522a1bc9277a533",
+          "nativeScreenshotSha256": "e94e1c40b31e80ee7890681dea091596e040f087cdd567ab8fbd88171670cb53",
+          "dateBlock": [
+            499,
+            604
+          ]
+        },
+        {
+          "width": 1204,
+          "columns": [
+            [
+              13,
+              511
+            ],
+            [
+              534,
+              649
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              539,
+              410
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "c376710834c35be491b88347001a8b097441201c45b1965b1f47e48ac7b94d11",
+          "nativeScreenshotSha256": "794c05020016c9e7ea65d9dd4806f990c9353337eeb625f691b5c7f72d98bcdc",
+          "dateBlock": [
+            539,
+            604
+          ]
+        },
+        {
+          "width": 1404,
+          "columns": [
+            [
+              13,
+              616
+            ],
+            [
+              639,
+              744
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              644,
+              410
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "198150d9b8162c70b7bc7572d616c0c7924bb35e7f06759d2fa85f46e2b0db15",
+          "nativeScreenshotSha256": "d7732905dfee5fff078fe39f33d5cc72fb20d3ac47fa3a723f47a928ad24f9cf",
+          "dateBlock": [
+            644,
+            604
+          ]
+        }
+      ]
+    }
+  ]
+}
