@@ -72,6 +72,74 @@
           "edit": {
             "hiddenFields": ["Owner"]
           }
+        },
+        {
+          "name": "the nested row inherits bottom alignment",
+          "frame": [1214, 250],
+          "nativeCapture": "Wide.png",
+          "screenshotSha256": "bb4f745414bc19d0dd5df37cfe64d0e3e04aedb8a3174d798586c4b6749ea113",
+          "tolerancePx": 2,
+          "controls": {
+            "Memo": [null, 58, null, null],
+            "Fixed": [null, 89, null, null],
+            "Amount": [null, 89, null, null]
+          }
+        },
+        {
+          "name": "the nested row inherits centered alignment",
+          "frame": [1034, 250],
+          "nativeCapture": "Width100AlignCenter.png",
+          "screenshotSha256": "c9f7587f773986c2ab8af108bb474602bbe9effd6623af18710add4d3b8c038e",
+          "tolerancePx": 2,
+          "controls": {
+            "Memo": [null, 58, null, null],
+            "Fixed": [null, 63, null, null],
+            "Amount": [null, 63, null, null]
+          },
+          "edit": {
+            "groups": {
+              "Footer": {
+                "VerticalAlign": "Center"
+              }
+            }
+          }
+        },
+        {
+          "name": "the nested row inherits top alignment",
+          "frame": [1034, 250],
+          "nativeCapture": "Width100AlignTop.png",
+          "screenshotSha256": "9d8e660636b0f9489c43aae5e6c7fb0c65e69d9fc5187049b2bf293acc7215ad",
+          "tolerancePx": 2,
+          "controls": {
+            "Memo": [null, 58, null, null],
+            "Fixed": [null, 38, null, null],
+            "Amount": [null, 38, null, null]
+          },
+          "edit": {
+            "groups": {
+              "Footer": {
+                "VerticalAlign": "Top"
+              }
+            }
+          }
+        },
+        {
+          "name": "the nested row can override inherited alignment",
+          "frame": [1034, 250],
+          "nativeCapture": "Width100AlignChildTop.png",
+          "screenshotSha256": "333dd5874eafe582fcc5308c4e4d849e8740370198e7e008ae6579dce0de1409",
+          "tolerancePx": 2,
+          "controls": {
+            "Memo": [null, 58, null, null],
+            "Fixed": [null, 38, null, null]
+          },
+          "edit": {
+            "groups": {
+              "Details": {
+                "VerticalAlign": "Top"
+              }
+            }
+          }
         }
       ]
     }

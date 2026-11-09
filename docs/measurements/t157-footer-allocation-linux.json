@@ -85,9 +85,55 @@
       }
     ]
   },
+  "inheritedVerticalAlignment": {
+    "explorerCommit": "7155b9b5141dffce00c30e11b65a24460f2ffe1d",
+    "nativeMatrix": {
+      "file": "form-native-footer-allocation-GKACF47P/preview-ru/captures.json",
+      "sha256": "733fbec0ae5ebf6bc89241385cd84739b933295df42c11b4ad44940c4deb265a"
+    },
+    "installedRegression": {
+      "ru": {
+        "file": "footer-tests-ru-kG4jS5wG/column-widths/receipt.json",
+        "sha256": "3c0511c43623cf6775f49e337ef1ab3690907941bd2927d46cdd64bdd07feec3"
+      },
+      "en": {
+        "file": "footer-tests-en-RI8xkNpg/column-widths/receipt.json",
+        "sha256": "260846ae8c40a20eaf561c475aa1df1174e6cb8a745709ee8f8681a8570d2ce2"
+      }
+    },
+    "cases": [
+      {
+        "name": "the nested row inherits bottom alignment",
+        "fixedValueTop": 91
+      },
+      {
+        "name": "the nested row inherits centered alignment",
+        "fixedValueTop": 64.5
+      },
+      {
+        "name": "the nested row inherits top alignment",
+        "fixedValueTop": 38
+      },
+      {
+        "name": "the nested row can override inherited alignment",
+        "fixedValueTop": 38
+      }
+    ],
+    "stalingradReceipt": {
+      "file": "footer-alignment-stalingrad-lTSuw4Mc/receipt.json",
+      "sha256": "e178413c8cb266d1f0e88a6bc3be977562675c1d859f6ba9f009797635eab11a"
+    },
+    "stalingradGeometry": {
+      "file": "footer-alignment-stalingrad-lTSuw4Mc/geometry.json",
+      "sha256": "fd16acc7dd99c6197b8d49ed2f38bab054842db6c1fa70b827fc54d9d627ca60"
+    },
+    "stalingradWide": {
+      "correctedCaptionTop": 696.5
+    }
+  },
   "remaining": [
     "Width and wrap thresholds of the label captions in the narrow settlement footer.",
-    "Vertical alignment and height of the settlement footer.",
+    "Height of the multiline field and first-line alignment when the captions wrap in the settlement footer.",
     "Independent Windows verification."
   ]
 }
