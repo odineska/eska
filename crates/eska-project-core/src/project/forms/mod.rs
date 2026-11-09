@@ -131,6 +131,9 @@ pub struct FormElement {
     pub children: Vec<Self>,
     /// Menus, tooltips and table additions are not ordinary layout children.
     pub auxiliary: Vec<Self>,
+    /// Distinguishes independently placed additions from the built-in additions of an owner.
+    #[serde(skip)]
+    pub(super) in_child_items: bool,
 }
 
 #[derive(Clone, Debug, Serialize)]

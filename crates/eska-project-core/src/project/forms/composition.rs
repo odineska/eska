@@ -74,6 +74,8 @@ pub struct EffectiveElement {
     pub properties: Vec<SourcedProperty>,
     pub children: Vec<Self>,
     pub auxiliary: Vec<Self>,
+    #[serde(skip)]
+    pub(super) in_child_items: bool,
 }
 
 impl EffectiveElement {
@@ -309,6 +311,7 @@ fn effective(value: &FormElement, source: &str) -> EffectiveElement {
         properties: properties(&value.properties, source),
         children: Vec::new(),
         auxiliary: Vec::new(),
+        in_child_items: value.in_child_items,
     }
 }
 
@@ -597,6 +600,9 @@ impl Graph {
             );
             if before.name != modified.name {
                 entry.value.name.clone_from(&modified.name);
+            }
+            if before.in_child_items != modified.in_child_items {
+                entry.value.in_child_items = modified.in_child_items;
             }
             patch_qualifiers(
                 &mut entry.value.qualifiers,

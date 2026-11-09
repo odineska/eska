@@ -1771,3 +1771,25 @@ form-palette-value-useHeightInTableRows = Use table row height
 form-palette-value-useHeightInFormRows = Use form row height
 form-palette-value-useContentHeight = Use content height
 form-palette-type-ColumnGroup = Column group
+
+# Designer 8.3.27 palettes for command groups and form item additions.
+form-palette-property-CommandSource = Command source
+form-palette-property-View = View
+form-palette-property-AutoFill = AutoFill
+form-palette-property-Source = Source
+form-palette-property-ButtonBackColor = ButtonBackColor
+form-palette-property-Border = Border
+form-palette-type-CommandBar = Command bar
+form-palette-type-ButtonGroup = Button group
+form-palette-type-Popup = Submenu
+form-palette-type-SearchStringAddition = Search bar
+form-palette-type-SearchControlAddition = Search management
+form-palette-type-ViewStatusAddition = View status
+form-palette-value-icon = Icon
+form-palette-value-compactButtonGroup = Compact
+form-palette-value-right = Right
+form-palette-value-center = Center
+form-palette-value-noBorder = None
+form-palette-value-searchStringMember = SearchString
+form-palette-value-searchControlMember = SearchControl
+form-palette-value-viewStatusMember = ViewStatus

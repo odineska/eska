@@ -2,6 +2,8 @@
 
 mod button;
 mod checkbox;
+mod command;
+mod common;
 mod input_field;
 mod root_form;
 mod table;
@@ -85,6 +87,7 @@ pub struct PaletteDefinition {
 pub enum PaletteCaption<'a> {
     Platform(&'static str),
     Identifier(&'a str),
+    ScriptMember { item: &'a str, member: &'static str },
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -130,6 +133,9 @@ impl PaletteDefinition {
     /// A display caption for a recognized Designer value.
     #[must_use]
     pub fn value_caption(self, value: &MetadataValue) -> Option<PaletteCaption<'_>> {
+        if matches!(self.source, SettingSource::Property("AdditionSource")) {
+            return command::source_caption(value);
+        }
         self.text_caption(appearance::text(value)?)
     }
 
@@ -137,6 +143,12 @@ impl PaletteDefinition {
     pub fn text_caption(self, text: &str) -> Option<PaletteCaption<'_>> {
         if self.id == "CommandName" {
             return commands::local_command_name(text).map(PaletteCaption::Identifier);
+        }
+        if self.id == "CommandSource" {
+            return text
+                .strip_prefix("Item.")
+                .filter(|name| !name.is_empty())
+                .map(PaletteCaption::Identifier);
         }
         self.enum_captions.iter().find_map(|(token, caption)| {
             (*token == text).then_some(PaletteCaption::Platform(caption))
@@ -213,6 +225,21 @@ impl FormPreview {
                 .map(|definitions| self.palette_rows(element, definitions)),
             Some(ElementKind::ColumnGroup) => presentation()
                 .and_then(|item| table::column_group_definitions(item, element))
+                .map(|definitions| self.palette_rows(element, definitions)),
+            Some(ElementKind::AutoCommandBar) => presentation()
+                .and_then(command::auto_bar_definitions)
+                .map(|definitions| self.palette_rows(element, definitions)),
+            Some(ElementKind::CommandBar | ElementKind::ButtonGroup | ElementKind::Popup) => {
+                presentation()
+                    .and_then(|item| command::group_definitions(item, element))
+                    .map(|definitions| self.palette_rows(element, definitions))
+            }
+            Some(
+                ElementKind::SearchStringAddition
+                | ElementKind::SearchControlAddition
+                | ElementKind::ViewStatusAddition,
+            ) => presentation()
+                .and_then(|item| command::addition_definitions(item, element))
                 .map(|definitions| self.palette_rows(element, definitions)),
             _ => ordinary_vertical_group(element)
                 .then(|| self.palette_rows(element, USUAL_GROUP.iter().map(|row| (row, true)))),

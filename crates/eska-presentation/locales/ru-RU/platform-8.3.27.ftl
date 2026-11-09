@@ -1771,3 +1771,25 @@ form-palette-value-useHeightInTableRows = В строках таблицы
 form-palette-value-useHeightInFormRows = В строках формы
 form-palette-value-useContentHeight = По содержимому
 form-palette-type-ColumnGroup = Группа колонок
+
+# Designer 8.3.27 palettes for command groups and form item additions.
+form-palette-property-CommandSource = Источник команд
+form-palette-property-View = Отображение
+form-palette-property-AutoFill = Автозаполнение
+form-palette-property-Source = Источник
+form-palette-property-ButtonBackColor = ЦветФонаКнопок
+form-palette-property-Border = Рамка
+form-palette-type-CommandBar = Командная панель
+form-palette-type-ButtonGroup = Группа кнопок
+form-palette-type-Popup = Подменю
+form-palette-type-SearchStringAddition = Отображение строки поиска
+form-palette-type-SearchControlAddition = Управление поиском
+form-palette-type-ViewStatusAddition = Отображение состояния просмотра
+form-palette-value-icon = Картинка
+form-palette-value-compactButtonGroup = Компактное
+form-palette-value-right = Право
+form-palette-value-center = Центр
+form-palette-value-noBorder = Нет рамки
+form-palette-value-searchStringMember = СтрокаПоиска
+form-palette-value-searchControlMember = УправлениеПоиском
+form-palette-value-viewStatusMember = СостояниеПросмотра

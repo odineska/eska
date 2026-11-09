@@ -1,6 +1,10 @@
 use super::*;
 use eska_project_core::project::metadata_edit::snapshot;
 
+#[path = "forms_command_palette.rs"]
+mod command_palette;
+#[path = "forms_native_palette.rs"]
+mod native_palette;
 #[path = "forms_table_palette.rs"]
 mod table_palette;
 
@@ -1461,15 +1465,15 @@ fn form_palette_keeps_qualified_repeated_properties_and_only_navigates_real_xml(
         absent["error"]["data"]["details"]["reason"],
         "target_unavailable"
     );
-    let bar = &opened["model"]["root"]["auxiliary"][0];
-    assert_eq!(bar["kind"], "AutoCommandBar");
+    let tooltip = native_palette::element(&opened["model"]["root"], "GroupTooltip").unwrap();
+    assert_eq!(tooltip["kind"], "ExtendedTooltip");
     let other = client.request(
         "form/inspect",
         &params(
             &context,
             json!({
                 "formSessionId":opened["formSessionId"],"revision":opened["revision"],
-                "identity":bar["identity"]
+                "identity":tooltip["identity"]
             }),
         ),
     );

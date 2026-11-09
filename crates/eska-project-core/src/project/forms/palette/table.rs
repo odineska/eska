@@ -2,6 +2,11 @@
 
 use super::{
     PaletteCategory, PaletteDefinition as Row, PaletteEditor, PlatformPropertyValue, SettingSource,
+    common::{
+        CHECKED, ENABLED, IMPORTANCE, NAME, OPEN, READ_ONLY, TITLE, TITLE_FONT, TITLE_TEXT_COLOR,
+        TOOLTIP, TOOLTIP_REPRESENTATION, TRISTATE, UNCHECKED, USER_VISIBILITY, VISIBLE, WIDTH,
+        ZERO,
+    },
     unbound_data_path,
 };
 use crate::project::{
@@ -98,35 +103,13 @@ pub(super) fn column_group_definitions(
 
 use PaletteCategory::{Appearance, Events, Layout, Main, Usage};
 use PaletteEditor::{
-    Binding, Boolean, Color, Dialog, Enum, Event, Font, Localized, Number, Picture, Reference,
-    Shortcut, Text,
+    Binding, Boolean, Color, Dialog, Enum, Event, Font, Number, Picture, Reference, Shortcut,
 };
 use PlatformPropertyValue::{Auto, AutoStretch, Choice, Empty, Unknown};
-use SettingSource::{Attribute, Property};
+use SettingSource::Property;
 
-const CHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(true);
-const UNCHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(false);
-const ZERO: PlatformPropertyValue = PlatformPropertyValue::Number(0);
 const ONE: PlatformPropertyValue = PlatformPropertyValue::Number(1);
-const OPEN: PlatformPropertyValue = PlatformPropertyValue::Dialog;
 const DEFAULT: PlatformPropertyValue = Choice("default");
-const TRISTATE: &[(&str, &str)] = &[("true", "yes"), ("false", "no")];
-
-const NAME: Row = Row::new("Name", Main, Text, Unknown).with_source(SettingSource::Name);
-const TITLE: Row = Row::new("Title", Main, Localized, Empty);
-const VISIBLE: Row = Row::new("Visible", Main, Boolean, CHECKED);
-const USER_VISIBILITY: Row =
-    Row::new("UserVisibility", Main, Dialog, OPEN).with_source(Property("UserVisible"));
-const ENABLED: Row = Row::new("Enabled", Main, Boolean, CHECKED);
-const READ_ONLY: Row = Row::new("ReadOnly", Main, Boolean, UNCHECKED);
-const IMPORTANCE: Row = Row::new("DisplayImportance", Main, Enum, Auto)
-    .with_source(Attribute("DisplayImportance"))
-    .with_enum_captions(&[("High", "highImportance")]);
-const TOOLTIP: Row = Row::new("ToolTip", Usage, Localized, Empty);
-const TOOLTIP_REPRESENTATION: Row = Row::new("ToolTipRepresentation", Usage, Enum, Auto);
-const TITLE_TEXT_COLOR: Row = Row::new("TitleTextColor", Appearance, Color, Auto);
-const TITLE_FONT: Row = Row::new("TitleFont", Appearance, Font, Auto);
-const WIDTH: Row = Row::new("Width", Layout, Number, ZERO);
 const HEIGHT: Row = Row::new("Height", Layout, Number, ZERO);
 
 const fn event(id: &'static str) -> Row {
