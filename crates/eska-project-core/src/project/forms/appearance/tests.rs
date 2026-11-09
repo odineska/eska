@@ -54,6 +54,50 @@ fn custom_style_item_partial_font_and_explicit_color_resolve_with_provenance() {
     assert_eq!(element.foreground, ResolvedColor::Rgb("#009646".into()));
     assert_eq!(element.background, ResolvedColor::Rgb("#ff0000".into()));
 }
+
+#[test]
+fn native_font_face_name_is_resolved_for_control_and_title() {
+    let result = view(
+        "<Font xmlns:sys=\"http://v8.1c.ru/8.1/data/ui/fonts/system\" ref=\"sys:DefaultGUIFont\" faceName=\"Liberation Serif\" height=\"10\" kind=\"WindowsFont\"/><TitleFont faceName=\"Liberation Mono\" height=\"12\" bold=\"true\" kind=\"WindowsFont\"/>",
+        &[],
+    );
+    assert!(result.diagnostics.is_empty());
+    let element = &result.elements[1];
+    assert_eq!(element.font.face.as_deref(), Some("Liberation Serif"));
+    assert_eq!(element.title_font.face.as_deref(), Some("Liberation Mono"));
+    assert!((element.font.points - 10.0).abs() < f64::EPSILON);
+    assert!((element.title_font.points - 12.0).abs() < f64::EPSILON);
+    assert_eq!(element.title_font.weight, 700);
+}
+
+#[test]
+fn native_style_font_face_name_is_inherited_and_locally_overridden() {
+    let resources = [resource(
+        "CustomFont",
+        "<Value xsi:type=\"u:Font\" faceName=\"Liberation Mono\" height=\"12\" bold=\"true\" kind=\"WindowsFont\"/>",
+    )];
+    let result = view(
+        "<Font ref=\"s:CustomFont\" italic=\"true\"/><TitleFont ref=\"s:CustomFont\" faceName=\"Liberation Serif\"/>",
+        &resources,
+    );
+    assert!(result.diagnostics.is_empty());
+    let element = &result.elements[1];
+    assert_eq!(element.font.face.as_deref(), Some("Liberation Mono"));
+    assert_eq!(element.title_font.face.as_deref(), Some("Liberation Serif"));
+    assert!((element.font.points - 12.0).abs() < f64::EPSILON);
+    assert_eq!(element.font.weight, 700);
+    assert!(element.font.italic);
+    assert_eq!(
+        element
+            .font
+            .origins
+            .iter()
+            .map(|origin| origin.source.as_str())
+            .collect::<Vec<_>>(),
+        ["CustomFont", "form"]
+    );
+}
+
 #[test]
 fn style_cycles_and_missing_values_are_explicit_and_do_not_recurse_unbounded() {
     let resources = [

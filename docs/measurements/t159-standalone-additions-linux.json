@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-09T03:21:16.701Z",
+  "scope": [
+    "T159",
+    "T160",
+    "T162",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "arch": "arm64",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "dpi": 96,
+    "zoom": 100,
+    "display": "private headless Mutter"
+  },
+  "implementation": {
+    "eska": "47006108acc1c73c1a77d7a7bcc871d74bca43a4",
+    "explorer": "938ad4cbfba238bcbabb7bf303b6b2d5f8c46134",
+    "api": "1.43",
+    "fixture": "../../tests/fixtures/forms/native-standalone-additions/metrics.json",
+    "fixtureMetricsSha256": "92b2c78d7e0694de80c980da69b9d8fd5b097be1784fb97a90241f81f5f3ba85"
+  },
+  "native": {
+    "forms": 12,
+    "unchangedCanonicalExports": 12,
+    "primary": [
+      {
+        "stand": "form-native-additions-en-0gt5rqx_",
+        "locale": "en",
+        "captures": 12,
+        "directory": "preview-en",
+        "capturesSha256": "fb39e250d3ff338fe9841648c98e05b444ac04de9cda1d399bab083dc9ebd479"
+      },
+      {
+        "stand": "form-native-additions-en-0gt5rqx_",
+        "locale": "ru",
+        "captures": 12,
+        "directory": "preview-ru",
+        "capturesSha256": "539fac74fe1b248c620e38ce0cbc527fa2e4cb0b7110867a165818dd585cccf4"
+      }
+    ],
+    "supplemental": {
+      "stand": "form-native-additions-style-en-l3nq9525",
+      "locale": "en",
+      "captures": 8,
+      "directory": "preview-en",
+      "capturesSha256": "6fdd4fe3ec492cab3eec50d92e743a47a254de9fc2227d7d9385806e8a96c630"
+    }
+  },
+  "installed": {
+    "stand": "form-batch-kIGEZ5",
+    "batchSha256": "a6a6cfadbf9388e4d1b74c7143516e0243065592c90ab83228d6fd516faf1c77",
+    "inputsSha256": "4e72c797d03d39ced9ffbb687bcc7cce85b608f393c070eaf31cad8a249e4b39",
+    "vsixSha256": "1e72b8b62ee7f5b213460be1ab544024502c437c6dba647692fe08fc2eb065f7",
+    "backendSha256": "dc3b625d5c5ec63634d98da1e12fe3fd7ba2d3a925c87cf31f81e224ef0bb890",
+    "runtimeManifestSha256": "254d4646e5182d2067f712c20b736409a871ff2d0b5e903da9458e54dad13c1c",
+    "runtimeFiles": 1262,
+    "cases": 285,
+    "runs": [
+      {
+        "suite": "standalone-additions",
+        "locale": "en",
+        "cases": 15,
+        "receiptSha256": "692c5c117194f4ef8a04d1e3ca1bb016a08d84d7e616a2aedc14a2c1bf683368"
+      },
+      {
+        "suite": "standalone-additions",
+        "locale": "ru",
+        "cases": 15,
+        "receiptSha256": "12843328181532fdadd626b74dec4b6e369c3ebf300f8c6c6e253d26f2b28c68"
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "cases": 17,
+        "receiptSha256": "fb1286fe7ff0ecca9415871d6a73d32737697ca4eb125c73f2440af2b94c7875"
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "cases": 17,
+        "receiptSha256": "28670cb9b0bde456ef42fa0bc040dc5839f9eff8050265a52465c36f02017484"
+      },
+      {
+        "suite": "command-palette",
+        "locale": "en",
+        "cases": 36,
+        "receiptSha256": "3456d49828da2c3394983dbd1ce164a4e13fdb5f73048ebc610752b056e36835"
+      },
+      {
+        "suite": "command-palette",
+        "locale": "ru",
+        "cases": 36,
+        "receiptSha256": "c059017b353a403c422c3a55a24e2987911aa7158772f8696f1f0f7723e077d4"
+      },
+      {
+        "suite": "pdf",
+        "locale": "en",
+        "cases": 27,
+        "receiptSha256": "7f8507ed98aadd241e613382a7edab2fb0307a133b46d09b69d43ef646ad54c8"
+      },
+      {
+        "suite": "pdf",
+        "locale": "ru",
+        "cases": 27,
+        "receiptSha256": "a709e54777a7ec531367f4847e03f6d55ad0d1f4aeb02cdad9cb6dc01304cc9e"
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "cases": 48,
+        "receiptSha256": "6a9374b89b5578595b237a86a1a9b01e3f2dd37bd61be5c4064709642a7c7c41"
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "cases": 47,
+        "receiptSha256": "6db719293dd294b035cfec673ac698859eb367ee96f3bab9c35d53fd58c47a3a"
+      }
+    ]
+  },
+  "comparisons": {
+    "exactFrames": 24,
+    "exactGeometryRegions": 56,
+    "exactRgbRegions": 38,
+    "pixelsInComparedRegions": 349706,
+    "statusChipBounds": 40,
+    "strictRgbRegions": 38
+  },
+  "rgbMethod": "Full RGB in each measured rectangle without tolerance or masks. Full-frame dimensions were compared; full-frame RGB was not accepted.",
+  "transitions": {
+    "en": [
+      {
+        "label": "dirty-search-width-and-xml-navigation",
+        "width": 190,
+        "sameDom": true
+      },
+      {
+        "label": "detached-dirty-visibility-and-restoration",
+        "selectedIdentityPreserved": true
+      },
+      {
+        "label": "no-columns-with-autofill",
+        "frame": [
+          32,
+          50
+        ]
+      }
+    ],
+    "ru": [
+      {
+        "label": "dirty-search-width-and-xml-navigation",
+        "width": 190,
+        "sameDom": true
+      },
+      {
+        "label": "detached-dirty-visibility-and-restoration",
+        "selectedIdentityPreserved": true
+      },
+      {
+        "label": "no-columns-with-autofill",
+        "frame": [
+          32,
+          50
+        ]
+      }
+    ]
+  },
+  "remainingDifferences": [
+    {
+      "form": "LinkedPanel",
+      "locale": "en",
+      "region": "manage",
+      "changedPixels": 134,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "Stack",
+      "locale": "en",
+      "region": "manage",
+      "changedPixels": 134,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "LocationsNone",
+      "locale": "en",
+      "region": "manage",
+      "changedPixels": 39,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "HiddenOwner",
+      "locale": "en",
+      "region": "manage",
+      "changedPixels": 46,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "Authored",
+      "locale": "en",
+      "region": "manage",
+      "changedPixels": 464,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "Authored",
+      "locale": "en",
+      "region": "status",
+      "changedPixels": 832,
+      "maxRgbChannelDelta": 177
+    },
+    {
+      "form": "Horizontal",
+      "locale": "en",
+      "region": "manage",
+      "changedPixels": 86,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "Styled",
+      "locale": "en",
+      "region": "manage",
+      "changedPixels": 134,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "Disabled",
+      "locale": "en",
+      "region": "manage",
+      "changedPixels": 232,
+      "maxRgbChannelDelta": 34
+    },
+    {
+      "form": "LinkedPanel",
+      "locale": "ru",
+      "region": "manage",
+      "changedPixels": 134,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "Stack",
+      "locale": "ru",
+      "region": "manage",
+      "changedPixels": 134,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "LocationsNone",
+      "locale": "ru",
+      "region": "manage",
+      "changedPixels": 39,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "HiddenOwner",
+      "locale": "ru",
+      "region": "manage",
+      "changedPixels": 46,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "Authored",
+      "locale": "ru",
+      "region": "manage",
+      "changedPixels": 464,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "Authored",
+      "locale": "ru",
+      "region": "status",
+      "changedPixels": 890,
+      "maxRgbChannelDelta": 177
+    },
+    {
+      "form": "Horizontal",
+      "locale": "ru",
+      "region": "manage",
+      "changedPixels": 86,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "Styled",
+      "locale": "ru",
+      "region": "manage",
+      "changedPixels": 134,
+      "maxRgbChannelDelta": 1
+    },
+    {
+      "form": "Disabled",
+      "locale": "ru",
+      "region": "manage",
+      "changedPixels": 232,
+      "maxRgbChannelDelta": 34
+    }
+  ],
+  "validation": {
+    "rust": {
+      "formatCheck": true,
+      "check": true,
+      "clippyAllTargetsAllFeatures": true,
+      "passed": 1580,
+      "ignored": 19
+    },
+    "node": {
+      "passed": 729,
+      "skipped": 8
+    }
+  },
+  "limits": [
+    "Compact view-status chips preserve their dimensions, but their text truncation and raster differ.",
+    "The standalone management button has residual gradient, border or disabled icon differences in the listed profiles.",
+    "Other styling combinations, Windows native geometry and Windows raster remain outside this acceptance."
+  ]
+}

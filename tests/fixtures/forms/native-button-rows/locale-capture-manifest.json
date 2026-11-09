@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "capturedAt": "2026-11-08T04:06:25.970817+00:00",
+  "stand": "form-native-command-frame-exact-pqw66v2u",
+  "cases": [
+    {
+      "case": "ProbeButtons",
+      "sourceXmlSha256": "6fb3e0d82997d3367ad3230974ae76eb60ff2e06120b2d7d24c4d5cc78d5af04",
+      "canonicalXmlSha256": "6fb3e0d82997d3367ad3230974ae76eb60ff2e06120b2d7d24c4d5cc78d5af04",
+      "sameParsedXml": true,
+      "locales": {
+        "ru": {
+          "nativeFrame": [
+            139,
+            187
+          ],
+          "screenshotSha256": "b7aa7a772e6478577945760e1fe46e0daefe7363586b95c23d7e5cab76f99f78"
+        },
+        "en": {
+          "nativeFrame": [
+            142,
+            187
+          ],
+          "screenshotSha256": "a0bfcf7fbc15905ffe04a7f96f5f564a55f304fe77571fee3298b5f1a789b32b"
+        }
+      }
+    },
+    {
+      "case": "ProbeRows",
+      "sourceXmlSha256": "3ebdd864dbd250cdeb40d9feca80093cfa0a724003632a210693da32266e8400",
+      "canonicalXmlSha256": "3ebdd864dbd250cdeb40d9feca80093cfa0a724003632a210693da32266e8400",
+      "sameParsedXml": true,
+      "locales": {
+        "ru": {
+          "nativeFrame": [
+            204,
+            249
+          ],
+          "screenshotSha256": "6c187f2d8653ffb6c9a16024a0ff21ebeb240f1db162b8fce2656756e991285a"
+        },
+        "en": {
+          "nativeFrame": [
+            204,
+            249
+          ],
+          "screenshotSha256": "2457bf72b3b317390ba3655e509aa8f7537b1cf965624536b88c50c8a82511f6"
+        }
+      }
+    }
+  ],
+  "nativeCaptures": 4,
+  "sourceFilesUnchanged": 664,
+  "sourceHashesSha256": "11bb64e19464d8efb259f026af64f47929187ce381d294c1a7adf8ac893086f0",
+  "captureInputs": {
+    "cases.json": "abe6a165f6ac0d1c67036fd2849c41c396c0c6effdc32dbcf4104b67bfa80186",
+    "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+    "eska-command-frame-exact-native-prepare.py": "3138454a3921710d40db2bced7dd9d33f8b83b3c4156878af1c2a773099d0b40",
+    "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+    "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+    "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+    "run-heading.py": "bacedcdaa5aee5ce293e188177ae9a41006eb83fbe7ea9bfb22bbcdccea8cd46"
+  },
+  "rendererAccepted": false,
+  "note": "nativeFrame в исходных строках сохраняет исторический английский эталон. locales хранит новые отдельные размеры ru/en для точного parsed XML."
+}

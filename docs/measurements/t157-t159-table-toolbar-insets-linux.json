@@ -1,0 +1,549 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T17:24:44.047447+00:00",
+  "scope": [
+    "T157",
+    "T159",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "implementation": {
+    "outerInsets": "One vertical pixel on each edge of every standalone table, independently of width, command bar and search location. Joined tables retain their existing layout.",
+    "conditionalCssSelectorsReplaced": 4,
+    "sharedCssSelector": ".taxi-element:not([data-joined-table]) > .taxi-table-field",
+    "frameAssertions": "The nine basic gallery forms load native outer-frame and grid measurements; other scenarios retain their dedicated assertions.",
+    "domReparenting": false,
+    "formNameExceptions": false,
+    "newDependencies": false,
+    "protocolVersionChanged": false
+  },
+  "native": {
+    "fixture": "tests/fixtures/forms/native-table-toolbar-insets",
+    "forms": 8,
+    "completeFrames": 16,
+    "stand": "form-native-table-toolbar-insets-bb1amzn8",
+    "sourcesUnchanged": true,
+    "retainedFrames": {
+      "fixture": "tests/fixtures/forms/native-tables/frame-metrics.json",
+      "sha256": "f23b822159acd8a03ccd4606e6e5e7939f46dabc5a0ea6f83193716225872e61",
+      "stand": "native-table-pixels-kbagfn6p",
+      "forms": 9,
+      "completeFrames": 18,
+      "originalScreenshotHashesUnchanged": true,
+      "installedFramesAndGridsMatched": 18
+    }
+  },
+  "baseline": {
+    "stand": "form-table-toolbar-probe-m8jqmrl7",
+    "artifactSource": "form-batch-qT6fCv",
+    "diagnosticOnly": true,
+    "runs": [
+      {
+        "locale": "en",
+        "matched": 3,
+        "total": 8
+      },
+      {
+        "locale": "ru",
+        "matched": 3,
+        "total": 8
+      }
+    ],
+    "observation": "The previous VSIX mismatches five of eight variants per locale. Most lack two outer pixels; top search lacks only the lower pixel. The fixed, no-search and no-inline-bar controls already match."
+  },
+  "checks": {
+    "npmCheck": "passed",
+    "compile": "passed",
+    "package": "passed",
+    "node": {
+      "tests": 718,
+      "passed": 710,
+      "failed": 0,
+      "skipped": 8
+    },
+    "hostSyntax": "passed after the final harness-only cleanup",
+    "logs": "form-table-toolbar-validation-xz2lnirw",
+    "rust": {
+      "stand": "form-table-toolbar-rust-final-xQWxrkOu",
+      "fmt": "passed",
+      "check": "passed",
+      "clippy": "passed",
+      "test": {
+        "passed": 1570,
+        "failed": 0,
+        "ignored": 19
+      }
+    },
+    "initialRustFailure": {
+      "stand": "form-table-toolbar-rust-2ICmTRFp",
+      "test": "native_table_fixtures_bind_value_table_columns_and_retain_auxiliary_controls",
+      "reason": "The fixture loop attempted to parse the new frame-metrics.json as Designer XML. It now filters XML files and still asserts that exactly nine forms are checked.",
+      "fixCommit": "d87f287",
+      "targetedTest": "passed",
+      "productionCodeChanged": false
+    }
+  },
+  "installed": {
+    "stand": "form-batch-J3mX7b",
+    "passed": true,
+    "vsixSha256": "2058d5a36de8c2086d79c0858527140ded513d6f7983bf5029fb40ba9bf5739c",
+    "backendSha256": "fefeee97b8df63536ce1cdeb8462b7d20864585e2de48c80008718a93ff6f530",
+    "runtimeManifestSha256": "e2263d2585a108b002619b372db2dc9bd393e92d8b261c19c7c98cfbdde35ceb",
+    "runtimeFiles": 1262,
+    "runs": [
+      {
+        "suite": "table-toolbar-insets",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 17
+      },
+      {
+        "suite": "table-toolbar-insets",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 17
+      },
+      {
+        "suite": "table-insets",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 14
+      },
+      {
+        "suite": "table-insets",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 14
+      },
+      {
+        "suite": "table-height",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 70
+      },
+      {
+        "suite": "table-height",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 70
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 48
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 47
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 17
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 17
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 31
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 31
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 98
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 98
+      },
+      {
+        "suite": "body-scroll",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 4
+      },
+      {
+        "suite": "body-scroll",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 4
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 1
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 1
+      }
+    ],
+    "stateObservations": 599,
+    "newMatrixGeometryTolerance": 0,
+    "existingPixelGoldensAndTolerancesChanged": false,
+    "defaultTableExamples": [
+      {
+        "locale": "en",
+        "beforeFrame": [
+          463,
+          342
+        ],
+        "afterFrame": [
+          463,
+          344
+        ],
+        "nativeFrame": [
+          463,
+          344
+        ],
+        "beforeGrid": [
+          13,
+          103,
+          429,
+          227
+        ],
+        "afterGrid": [
+          13,
+          104,
+          429,
+          227
+        ],
+        "nativeGrid": [
+          13,
+          104,
+          429,
+          227
+        ]
+      },
+      {
+        "locale": "ru",
+        "beforeFrame": [
+          449,
+          342
+        ],
+        "afterFrame": [
+          449,
+          344
+        ],
+        "nativeFrame": [
+          449,
+          344
+        ],
+        "beforeGrid": [
+          13,
+          103,
+          415,
+          227
+        ],
+        "afterGrid": [
+          13,
+          104,
+          415,
+          227
+        ],
+        "nativeGrid": [
+          13,
+          104,
+          415,
+          227
+        ]
+      }
+    ]
+  },
+  "wholeForms": {
+    "stand": "form-table-toolbar-whole-jc8_43sq",
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.010500936001336,
+        "runtimeManifestSha256": "e2263d2585a108b002619b372db2dc9bd393e92d8b261c19c7c98cfbdde35ceb",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.7673371819983,
+        "runtimeManifestSha256": "e2263d2585a108b002619b372db2dc9bd393e92d8b261c19c7c98cfbdde35ceb",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.606039336002141,
+        "runtimeManifestSha256": "e2263d2585a108b002619b372db2dc9bd393e92d8b261c19c7c98cfbdde35ceb",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.166145044000586,
+        "runtimeManifestSha256": "e2263d2585a108b002619b372db2dc9bd393e92d8b261c19c7c98cfbdde35ceb",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.152086152000265,
+        "runtimeManifestSha256": "e2263d2585a108b002619b372db2dc9bd393e92d8b261c19c7c98cfbdde35ceb",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.06006797399823,
+        "runtimeManifestSha256": "e2263d2585a108b002619b372db2dc9bd393e92d8b261c19c7c98cfbdde35ceb",
+        "runtimeFiles": 1262
+      }
+    ],
+    "sourcesUnchanged": true,
+    "bspFrames": {
+      "en": [
+        {
+          "sample": 0,
+          "frame": {
+            "width": 811,
+            "height": 612
+          }
+        },
+        {
+          "sample": 1,
+          "frame": {
+            "width": 800,
+            "height": 769
+          }
+        },
+        {
+          "sample": 2,
+          "frame": {
+            "width": 1222,
+            "height": 540
+          }
+        }
+      ],
+      "ru": [
+        {
+          "sample": 0,
+          "frame": {
+            "width": 811,
+            "height": 612
+          }
+        },
+        {
+          "sample": 1,
+          "frame": {
+            "width": 800,
+            "height": 769
+          }
+        },
+        {
+          "sample": 2,
+          "frame": {
+            "width": 1222,
+            "height": 540
+          }
+        }
+      ]
+    },
+    "loanCompact": [
+      {
+        "mode": "loan-docked-en",
+        "frame": [
+          696,
+          760
+        ],
+        "nativeTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "nativeFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "paymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "nativePaymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ]
+      },
+      {
+        "mode": "loan-docked-ru",
+        "frame": [
+          696,
+          760
+        ],
+        "nativeTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "nativeFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "paymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "nativePaymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ]
+      },
+      {
+        "mode": "loan-detached-en",
+        "frame": [
+          696,
+          760
+        ],
+        "nativeTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "nativeFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "paymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "nativePaymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ]
+      },
+      {
+        "mode": "loan-detached-ru",
+        "frame": [
+          696,
+          760
+        ],
+        "nativeTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "nativeFooterMemo": [
+          13,
+          844,
+          511,
+          51
+        ],
+        "paymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "nativePaymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ]
+      }
+    ],
+    "totalsBeforeFrame": [
+      1222,
+      538
+    ],
+    "totalsAfterFrame": [
+      1222,
+      540
+    ],
+    "totalsNativeFrame": [
+      1224,
+      541
+    ],
+    "mainAndSeparateNativeWindow": true,
+    "dirtyXmlSelectionDomAndSnapshotChecksPassed": true
+  },
+  "limitations": [
+    "Full-form geometry and complete widget pixels remain unaccepted.",
+    "Questionnaire frame remains 800 x 769 rather than native 801 x 769.",
+    "Totals BSP frame remains 1222 x 540 rather than native 1224 x 541.",
+    "Other addition locations, all fonts/states, DPI and Windows require further acceptance."
+  ],
+  "explorerCommit": "3b9d0614ac4b309e5e201f5a64053b4d7c73bdac",
+  "backendCommit": "02fde10"
+}

@@ -1,0 +1,663 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T21:34:11.459751+00:00",
+  "scope": [
+    "T157",
+    "T158",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "implementation": {
+    "traversal": "Separation visits logical children before projecting edges to mounted siblings. Pages have containers without ordinary element wrappers; descendants are now visited without reparenting DOM.",
+    "checkboxCaption": "Linux side checkbox captions reuse the existing wordCaptionWidth measurement used by other captions. The old whole-line hinted sum was two pixels wider on the independent long-caption cases.",
+    "spacingRulesChanged": false,
+    "formNameExceptions": false,
+    "newDependencies": false,
+    "protocolChanged": false,
+    "sourceWrites": false,
+    "commit": "5cac08c8e3397f01d24fba62189d8068eaa1813e"
+  },
+  "native": [
+    {
+      "fixture": "tests/fixtures/forms/native-page-group-spacing",
+      "forms": 8,
+      "completeFrames": 16,
+      "metricsSha256": "684f59f6e1c7058ffa3e0530a5f0cdbe120eb63df3fa342411282e96e0c1ab6f",
+      "manifestSha256": "f0fd33612b9d0c991a0bb0ae850752afeaa08322b744829c67d6592d76e6d6ae",
+      "sourcesUnchanged": true,
+      "normalization": "BOM/CRLF only; United=true is canonicalized by the platform to the absent/default node."
+    },
+    {
+      "fixture": "tests/fixtures/forms/native-checkbox-auto-spacing",
+      "forms": 16,
+      "completeFrames": 32,
+      "metricsSha256": "5aba2aa0d6fcf5cb911b74ecf91ba1c920ee6f264d780cad43528b763fa6d90e",
+      "manifestSha256": "b33db740f468b4dd134526d561a2b4f66f63b42d6f00c270d994316a7e616da0",
+      "sourcesUnchanged": true,
+      "normalization": "BOM/CRLF only."
+    }
+  ],
+  "baseline": {
+    "pageSeparation": {
+      "stand": "form-page-group-spacing-probe-4kxrn1r5",
+      "artifactSource": "form-batch-d44Zru",
+      "diagnosticOnly": true,
+      "runs": [
+        {
+          "locale": "en",
+          "matched": 2,
+          "total": 8
+        },
+        {
+          "locale": "ru",
+          "matched": 2,
+          "total": 8
+        }
+      ],
+      "example": {
+        "case": "SpacingPageTitles",
+        "actualFrame": [
+          186,
+          326
+        ],
+        "nativeFrame": [
+          188,
+          334
+        ],
+        "actualSecondSectionFieldY": 216,
+        "nativeSecondSectionFieldY": 224
+      }
+    },
+    "checkboxCaption": {
+      "stand": "form-checkbox-auto-spacing-probe-u1hr5lbx",
+      "artifactSource": "form-batch-gez6jT",
+      "diagnosticOnly": true,
+      "runs": [
+        {
+          "locale": "en",
+          "matched": 12,
+          "total": 16
+        },
+        {
+          "locale": "ru",
+          "matched": 12,
+          "total": 16
+        }
+      ],
+      "description": "Only four long-caption cases differed: frame and numeric neighbor X were two pixels wider. Default, Horizontal and AlwaysHorizontal native rows have equal spacing."
+    }
+  },
+  "intermediateFailure": {
+    "stand": "form-page-group-spacing-whole-lmhdnu07",
+    "artifactSource": "form-batch-gez6jT",
+    "passed": false,
+    "description": "Traversing pages alone passed all small page-separation cases but exposed a coupled checkbox caption error in the BSP questionnaire. Step field X became 314 instead of the unchanged native 312. Both BSP locale runs stopped; all four loan runs passed. This failed attempt is preserved.",
+    "sourcesUnchanged": true,
+    "goldenChanged": false,
+    "toleranceChanged": false
+  },
+  "checks": {
+    "node": {
+      "tests": 728,
+      "pass": 720,
+      "fail": 0,
+      "skipped": 8
+    },
+    "npmCheck": "passed",
+    "hostSyntax": "passed",
+    "unitTests": 9,
+    "logs": "form-page-group-spacing-validation-rl4n2amu",
+    "rust": {
+      "fmt": "passed",
+      "check": "passed",
+      "clippy": "passed",
+      "test": {
+        "passed": 1570,
+        "failed": 0,
+        "ignored": 19
+      }
+    }
+  },
+  "installed": {
+    "stand": "form-batch-wP0G1K",
+    "passed": true,
+    "attempts": 38,
+    "successfulStates": 1161,
+    "allInputsStable": true,
+    "builds": 1,
+    "packages": 1,
+    "vsixSha256": "ffafe2503b4c511a497395049e2017f90925db00fc55adddb695338a2625e39a",
+    "backendSha256": "fefeee97b8df63536ce1cdeb8462b7d20864585e2de48c80008718a93ff6f530",
+    "runtimeManifestSha256": "3a0309a1d402fe61214f62b9d273ad251d6fc1ad75819da194585c69412b749a",
+    "runtimeFiles": 1262,
+    "runs": [
+      {
+        "suite": "page-group-spacing",
+        "locale": "en",
+        "passed": true,
+        "seconds": 12.054053480999999,
+        "states": 19
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 16.433039819999998,
+        "states": 19
+      },
+      {
+        "suite": "checkbox-caption-size",
+        "locale": "en",
+        "passed": true,
+        "seconds": 15.066239323999998,
+        "states": 26
+      },
+      {
+        "suite": "checkbox-caption-size",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 17.574406862999997,
+        "states": 26
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "passed": true,
+        "seconds": 29.357678731000007,
+        "states": 60
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 31.91640779099999,
+        "states": 60
+      },
+      {
+        "suite": "unlabeled-checkbox-columns",
+        "locale": "en",
+        "passed": true,
+        "seconds": 12.019805427000014,
+        "states": 19
+      },
+      {
+        "suite": "unlabeled-checkbox-columns",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 14.081722127999994,
+        "states": 19
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "passed": true,
+        "seconds": 29.748923972999997,
+        "states": 20
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 31.948409933999997,
+        "states": 20
+      },
+      {
+        "suite": "input-borders",
+        "locale": "en",
+        "passed": true,
+        "seconds": 24.820067215999995,
+        "states": 52
+      },
+      {
+        "suite": "input-borders",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 28.10232334000003,
+        "states": 52
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "passed": true,
+        "seconds": 38.21953736399999,
+        "states": 51
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 24.79553626600001,
+        "states": 51
+      },
+      {
+        "suite": "tab-titles",
+        "locale": "en",
+        "passed": true,
+        "seconds": 9.150564459000016,
+        "states": 15
+      },
+      {
+        "suite": "tab-titles",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 11.728326605999959,
+        "states": 15
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "passed": true,
+        "seconds": 37.73679726799997,
+        "states": 98
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 40.06554429799999,
+        "states": 98
+      },
+      {
+        "suite": "united",
+        "locale": "en",
+        "passed": true,
+        "seconds": 7.519083503000031,
+        "states": 9
+      },
+      {
+        "suite": "united",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 9.937752850000049,
+        "states": 9
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "passed": true,
+        "seconds": 18.74377101299999,
+        "states": 22
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 21.400590498999982,
+        "states": 22
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "passed": true,
+        "seconds": 19.76011639400001,
+        "states": 31
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 22.371988178999977,
+        "states": 31
+      },
+      {
+        "suite": "reference-widths",
+        "locale": "en",
+        "passed": true,
+        "seconds": 13.621110777999974,
+        "states": 24
+      },
+      {
+        "suite": "reference-widths",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 16.094038681000004,
+        "states": 24
+      },
+      {
+        "suite": "input-choice-size",
+        "locale": "en",
+        "passed": true,
+        "seconds": 11.773222763999946,
+        "states": 20
+      },
+      {
+        "suite": "input-choice-size",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 13.88858698100003,
+        "states": 20
+      },
+      {
+        "suite": "button-heights",
+        "locale": "en",
+        "passed": true,
+        "seconds": 17.79980198499991,
+        "states": 32
+      },
+      {
+        "suite": "button-heights",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 20.606175038999993,
+        "states": 32
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "passed": true,
+        "seconds": 26.246712549000048,
+        "states": 48
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 28.132723442999996,
+        "states": 47
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "passed": true,
+        "seconds": 17.869859717000043,
+        "states": 17
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 20.63650876899995,
+        "states": 17
+      },
+      {
+        "suite": "table-toolbar-insets",
+        "locale": "en",
+        "passed": true,
+        "seconds": 11.081608636999968,
+        "states": 17
+      },
+      {
+        "suite": "table-toolbar-insets",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 13.841173035999994,
+        "states": 17
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "passed": true,
+        "seconds": 7.471354891999974,
+        "states": 1
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 10.017767436999945,
+        "states": 1
+      }
+    ]
+  },
+  "wholeForms": {
+    "stand": "form-page-group-spacing-final-whole-5z2kt_gv",
+    "passed": true,
+    "sourceFiles": 4,
+    "sourceHashes": {
+      "united-bsp-context-763t8lxb/src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "united-bsp-context-763t8lxb/src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "united-bsp-context-763t8lxb/src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875"
+    },
+    "sourcesUnchanged": true,
+    "nativeFrames": {
+      "questionnaire": [
+        801,
+        769
+      ],
+      "totals": [
+        1224,
+        541
+      ]
+    },
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.979769060999388,
+        "runtimeManifestSha256": "3a0309a1d402fe61214f62b9d273ad251d6fc1ad75819da194585c69412b749a",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.713416681006493,
+        "runtimeManifestSha256": "3a0309a1d402fe61214f62b9d273ad251d6fc1ad75819da194585c69412b749a",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.563984208005422,
+        "runtimeManifestSha256": "3a0309a1d402fe61214f62b9d273ad251d6fc1ad75819da194585c69412b749a",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.113107871999091,
+        "runtimeManifestSha256": "3a0309a1d402fe61214f62b9d273ad251d6fc1ad75819da194585c69412b749a",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.201707485000952,
+        "runtimeManifestSha256": "3a0309a1d402fe61214f62b9d273ad251d6fc1ad75819da194585c69412b749a",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.049198496999452,
+        "runtimeManifestSha256": "3a0309a1d402fe61214f62b9d273ad251d6fc1ad75819da194585c69412b749a",
+        "runtimeFiles": 1262
+      }
+    ],
+    "bsp": {
+      "en": [
+        {
+          "sample": 0,
+          "frame": {
+            "width": 811,
+            "height": 612
+          }
+        },
+        {
+          "sample": 1,
+          "frame": {
+            "width": 801,
+            "height": 769
+          },
+          "stepField": [
+            312,
+            408,
+            172,
+            23
+          ]
+        },
+        {
+          "sample": 2,
+          "frame": {
+            "width": 1222,
+            "height": 540
+          },
+          "authoredButtons": [
+            {
+              "id": "219",
+              "border": [
+                24,
+                99.5,
+                300,
+                39
+              ],
+              "paintHeight": 40
+            },
+            {
+              "id": "220",
+              "border": [
+                24,
+                151,
+                300,
+                39
+              ],
+              "paintHeight": 40
+            },
+            {
+              "id": "222",
+              "border": [
+                24,
+                231,
+                300,
+                39
+              ],
+              "paintHeight": 40
+            },
+            {
+              "id": "223",
+              "border": [
+                24,
+                280,
+                300,
+                39
+              ],
+              "paintHeight": 40
+            }
+          ],
+          "aggregateButtonY": [
+            231,
+            280
+          ]
+        }
+      ],
+      "ru": [
+        {
+          "sample": 0,
+          "frame": {
+            "width": 811,
+            "height": 612
+          }
+        },
+        {
+          "sample": 1,
+          "frame": {
+            "width": 801,
+            "height": 769
+          },
+          "stepField": [
+            312,
+            408,
+            172,
+            23
+          ]
+        },
+        {
+          "sample": 2,
+          "frame": {
+            "width": 1222,
+            "height": 540
+          },
+          "authoredButtons": [
+            {
+              "id": "219",
+              "border": [
+                24,
+                99.5,
+                300,
+                39
+              ],
+              "paintHeight": 40
+            },
+            {
+              "id": "220",
+              "border": [
+                24,
+                151,
+                300,
+                39
+              ],
+              "paintHeight": 40
+            },
+            {
+              "id": "222",
+              "border": [
+                24,
+                231,
+                300,
+                39
+              ],
+              "paintHeight": 40
+            },
+            {
+              "id": "223",
+              "border": [
+                24,
+                280,
+                300,
+                39
+              ],
+              "paintHeight": 40
+            }
+          ],
+          "aggregateButtonY": [
+            231,
+            280
+          ]
+        }
+      ]
+    },
+    "loan": {
+      "grid": [
+        13,
+        589,
+        662,
+        227
+      ],
+      "footerMemo": [
+        13,
+        844,
+        511,
+        51
+      ],
+      "paymentMemo": [
+        484,
+        339,
+        191,
+        51
+      ]
+    }
+  },
+  "limitations": [
+    "This is geometric acceptance of the new corpora; full checkbox text/paint pixels are not accepted by it.",
+    "Other caption text, font faces/sizes, DPI, explicit spacing combinations, native resize and Windows require separate validation.",
+    "BSP totals whole frame and Help picture command remain separate known issues; final observed frame is recorded below.",
+    "The full T157/T158/T165 criteria and T164 performance budgets are not completed."
+  ],
+  "windowsHandoff": [
+    "Both production changes are Linux-specific. Reuse the same canonical XML and capture independent Windows native geometry before considering equivalent rules.",
+    "Check nested pages with NormalSeparation, hidden titles, United=false/default and short/long checkbox captions, including dirty XML and detached preview.",
+    "Do not accept the Linux measurements or this VSIX run as Windows acceptance."
+  ]
+}

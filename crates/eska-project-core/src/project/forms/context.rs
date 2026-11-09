@@ -1,6 +1,7 @@
 //! Reuse the application's ordered source set and checked Designer ownership; never scan the workspace.
 
 use std::{
+    borrow::Cow,
     fmt::Write,
     path::{Path, PathBuf},
 };
@@ -52,6 +53,7 @@ pub struct FormPreview {
     pub context_fingerprint: String,
     pub application: Option<String>,
     pub limited_context: bool,
+    pub form_help_available: bool,
     pub(super) form_owner: Option<LogicalLocation>,
     pub dependencies: Vec<FormDependency>,
     pub documents: Vec<FormDocument>,
@@ -107,6 +109,7 @@ pub fn load(
     let mut documents = Vec::new();
     let mut selected_found = false;
     let mut input_bytes = 0usize;
+    let mut form_help_available = false;
     for input in sources.roots().filter(|input| sources.composes(input)) {
         let source = open_designer(input)?;
         let Some(path) = managed_payload(&source, owner)? else {
@@ -130,7 +133,7 @@ pub fn load(
             error,
         })?;
         selected_found |= input.project().source() == selected;
-        dependencies.push(FormDependency {
+        let dependency = FormDependency {
             id,
             root: input.project().source().into(),
             path,
@@ -139,7 +142,26 @@ pub fn load(
             member: input.member().map(|member| member.as_str().into()),
             role: FormDependencyRole::Form,
             extension_form: input.role() == SourceRole::Extension,
-        });
+        };
+        let help_paths = form_help_paths(&dependency.path);
+        let form_index = dependencies.len();
+        dependencies.push(dependency);
+        for help_path in help_paths {
+            if let Some((dependency, available, bytes)) = load_form_help(
+                context,
+                &source,
+                &dependencies[form_index],
+                help_path,
+                overlays,
+            )? {
+                input_bytes = input_bytes.saturating_add(bytes);
+                if input_bytes > super::MAX_FORM_CONTEXT_BYTES {
+                    return Err(FormContextError::InputTooLarge);
+                }
+                form_help_available |= available;
+                dependencies.push(dependency);
+            }
+        }
         documents.push(document);
         if dependencies.len() > super::MAX_FORM_DEPENDENCIES {
             return Err(FormContextError::TooManyResources);
@@ -169,7 +191,68 @@ pub fn load(
         documents,
         resources,
         form,
+        form_help_available,
     ))
+}
+
+fn form_help_paths(path: &Path) -> impl Iterator<Item = PathBuf> + use<> {
+    // An object form is exported under the owning object's Forms directory.
+    let owner_help = path
+        .ancestors()
+        .nth(3)
+        .filter(|directory| directory.file_name().is_some_and(|name| name == "Forms"))
+        .and_then(Path::parent)
+        .map(|owner| owner.join("Ext").join("Help.xml"));
+    std::iter::once(path.with_file_name("Help.xml")).chain(owner_help)
+}
+
+/// The command surface needs page availability, without loading or displaying help HTML.
+fn load_form_help(
+    context: &ContextSnapshot,
+    source: &DesignerSource,
+    form: &FormDependency,
+    path: PathBuf,
+    overlays: &[FormOverlay],
+) -> Result<Option<(FormDependency, bool, usize)>, FormContextError> {
+    const HELP_NAMESPACE: &str = "http://v8.1c.ru/8.3/xcf/extrnprops";
+    let id = source_identity(context, &form.root, &path);
+    let overlay = overlays.iter().find(|overlay| overlay.source == id);
+    let input = if let Some(overlay) = overlay {
+        if source
+            .checked_file(&path)
+            .map_err(FormContextError::Source)?
+            .is_none()
+        {
+            return Ok(None);
+        }
+        Cow::Borrowed(overlay.text.as_str())
+    } else {
+        let Some(input) = source.read_xml(&path).map_err(FormContextError::Source)? else {
+            return Ok(None);
+        };
+        Cow::Owned(input)
+    };
+    let document = roxmltree::Document::parse(&input)
+        .map_err(|_| FormContextError::InvalidMetadata { source: id.clone() })?;
+    let root = document.root_element();
+    if !root.has_tag_name((HELP_NAMESPACE, "Help")) {
+        return Err(FormContextError::InvalidMetadata { source: id });
+    }
+    let available = root.children().any(|page| {
+        page.has_tag_name((HELP_NAMESPACE, "Page"))
+            && page.text().is_some_and(|text| !text.trim().is_empty())
+    });
+    let dependency = FormDependency {
+        id,
+        root: form.root.clone(),
+        path,
+        snapshot: super::super::metadata_edit::snapshot(&input),
+        version: overlay.map(|overlay| overlay.version.clone()),
+        member: form.member.clone(),
+        role: FormDependencyRole::Metadata,
+        extension_form: false,
+    };
+    Ok(Some((dependency, available, input.len())))
 }
 
 fn build_preview(
@@ -179,12 +262,14 @@ fn build_preview(
     documents: Vec<FormDocument>,
     resources: Vec<super::FormResource>,
     form: ComposedForm,
+    form_help_available: bool,
 ) -> FormPreview {
     let presentation = super::present(&form, &documents, &resources);
     FormPreview {
         context_fingerprint: context.fingerprint.clone(),
         application: context.context.name().map(|name| name.as_str().into()),
         limited_context: context.context.limited_context(),
+        form_help_available,
         form_owner,
         dependencies,
         documents,
@@ -310,6 +395,32 @@ fn validate_overlays(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn help_paths_follow_the_exported_form_and_object() {
+        for (form, expected) in [
+            (
+                "CommonForms/Parameters/Ext/Form.xml",
+                vec!["CommonForms/Parameters/Ext/Help.xml"],
+            ),
+            (
+                "Documents/Order/Forms/Edit/Ext/Form.xml",
+                vec![
+                    "Documents/Order/Forms/Edit/Ext/Help.xml",
+                    "Documents/Order/Ext/Help.xml",
+                ],
+            ),
+            (
+                "Forms/Edit/Ext/Form.xml",
+                vec!["Forms/Edit/Ext/Help.xml", "Ext/Help.xml"],
+            ),
+        ] {
+            assert_eq!(
+                form_help_paths(Path::new(form)).collect::<Vec<_>>(),
+                expected.iter().map(PathBuf::from).collect::<Vec<_>>()
+            );
+        }
+    }
 
     #[test]
     fn only_unique_previous_metadata_overlays_may_retire() {

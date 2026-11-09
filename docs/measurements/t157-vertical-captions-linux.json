@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-09T05:29:02.615Z",
+  "scope": [
+    "T157",
+    "T158",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "arch": "arm64",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "dpi": 96,
+    "zoom": 100,
+    "display": "private headless Mutter"
+  },
+  "implementation": {
+    "numericFixtures": "b30818f21ba3ffb2ff6c92e0f2be873fc4db4819",
+    "numericLayout": "952efa13c0793a54757af5460cc7606d46c0113c",
+    "titleFixtures": "e51a6486427cc68a43ab9fbd1354fef844112b1d",
+    "groupTitles": "9c656d988434d40b22cfd3c89b9149b1eaca2d99",
+    "fieldCaptions": "0844409d9d5bf2c40f34b23594b8d1b2d2c2d583"
+  },
+  "native": [
+    {
+      "stand": "form-native-wrapped-titles-eo0q7x68",
+      "canonicalFormsUnchanged": 19,
+      "captureManifests": [
+        {
+          "locale": "en",
+          "count": 19,
+          "manifestSha256": "bcf3cee71dbac1fd9a6015cf9d19992b3cd1598d793d475fa4d54d95ec3c5f0a"
+        },
+        {
+          "locale": "ru",
+          "count": 19,
+          "manifestSha256": "af37f7a2da7147998db164925929bd68c2ddd88c1bacfdcb94d0acd6511dde8a"
+        }
+      ],
+      "sourceManifestSha256": "78c989ab9c6d86575b29ee5da0b583246cb3c80d3aea5a21793b467cfd9b6699"
+    },
+    {
+      "stand": "form-native-normal-titles-674usddg",
+      "canonicalFormsUnchanged": 17,
+      "captureManifests": [
+        {
+          "locale": "en",
+          "count": 17,
+          "manifestSha256": "a7bf62cfcbac7f9e326ef270310a556f8e4ec7eac30e4dae83a83591c5f1a646"
+        },
+        {
+          "locale": "ru",
+          "count": 17,
+          "manifestSha256": "c015e9fcf10f0393bd6c15a3a9f87c2cd73c8716b1053d1165d24e821cb94ca0"
+        }
+      ],
+      "sourceManifestSha256": "d986ab9d5eafd7d8be71892355089d2ab25a419c58c6140add849b0574ad3c53"
+    }
+  ],
+  "numeric": {
+    "fixtures": "../../tests/fixtures/forms/native-number-inputs/metrics.json",
+    "newForms": 6,
+    "newFields": 56,
+    "forms": 59,
+    "fields": 326,
+    "nonnegativeSweepMatchedBefore": 34,
+    "nonnegativeSweepMatchedAfter": 48,
+    "portWidthBefore": 51,
+    "portWidthAfter": 61,
+    "formatWidthComparison": "ЧГ=0 and the default format have the same measured widths",
+    "installed": {
+      "stand": "form-batch-CSygsc",
+      "vsixSha256": "60936dad326caba6f1ec58ca298d60488a31e1e0889d2de3208e82141ec09400",
+      "runs": [
+        {
+          "suite": "number-inputs",
+          "locale": "en",
+          "states": 65,
+          "receipt": "number-inputs-en/receipt.json",
+          "receiptSha256": "b95549c0ee27266e1dcb220f86b8048e0ec3efa5ba1bbf1089bc21d50058839f"
+        },
+        {
+          "suite": "number-inputs",
+          "locale": "ru",
+          "states": 65,
+          "receipt": "number-inputs-ru/receipt.json",
+          "receiptSha256": "33fe96b2aabc93645094c6f2b58646077a7a8e923301670701ad65153c8c993b"
+        }
+      ]
+    }
+  },
+  "wrappedTitles": {
+    "fixtures": "../../tests/fixtures/forms/native-wrapped-titles/metrics.json",
+    "fixturesSha256": "d1b15a8554f7b24fe8a648d720a73327166dfe13f0f67c12ef352da6dc5f9bc9",
+    "formsPerLocale": 21,
+    "fieldsPerLocale": 101,
+    "headingLineCountsPerLocale": 18,
+    "captionLineCountsPerLocale": 44,
+    "dynamicPerLocale": {
+      "resizeStates": 22,
+      "foldedDirtyUpdates": 2,
+      "selectionAndInputDomPreserved": true,
+      "sourceWrites": false
+    },
+    "initialFailure": {
+      "stand": "form-batch-I2XVQh",
+      "case": "GroupDefault",
+      "frame": [
+        234,
+        149
+      ],
+      "expected": [
+        249,
+        130
+      ],
+      "cause": "Wrapping was enabled at the native full title width.",
+      "resolved": true
+    }
+  },
+  "installed": {
+    "stand": "form-batch-bT71Mq",
+    "extraStand": "form-wrapped-titles-regression-65vfm_5u",
+    "vsixSha256": "74ad0031a165e786dad548a339676b91bf8c15c7f5e40b6c90132948af72962b",
+    "backendSha256": "dc3b625d5c5ec63634d98da1e12fe3fd7ba2d3a925c87cf31f81e224ef0bb890",
+    "runtimeManifestSha256": "c36ae7d9e9d7b30a66915439d1f9526295c6ee2a8b18c53cc991697312ab8508",
+    "runtimeFiles": 1262,
+    "states": 1122,
+    "primary": [
+      {
+        "suite": "wrapped-titles",
+        "locale": "en",
+        "states": 45,
+        "receipt": "wrapped-titles-en/receipt.json",
+        "receiptSha256": "409cfbbd312e3bbe6aff9261aa0fc14b1fc71eaf584fcb6c9488cc7f6e135f5d"
+      },
+      {
+        "suite": "wrapped-titles",
+        "locale": "ru",
+        "states": 45,
+        "receipt": "wrapped-titles-ru/receipt.json",
+        "receiptSha256": "599158e4467cee213a56893b078d5a0dfeb0570817db83ea3df8ccd5f47d44d0"
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "states": 22,
+        "receipt": "groups-en/receipt.json",
+        "receiptSha256": "6711e85136fccbeaa0da7e8bbf720293caddcab4e2b82dc5f81b0106d7577698"
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "states": 22,
+        "receipt": "groups-ru/receipt.json",
+        "receiptSha256": "02693f3bdad7be7c2f8e1920fe8e3f7d7ee81e2008cced956472ce5426fe9f82"
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "states": 98,
+        "receipt": "through-align-en/receipt.json",
+        "receiptSha256": "a377c6afa89e617ff0cad68b28ccfa064a165ceed99ce3b3e5201871a762aa2a"
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "states": 98,
+        "receipt": "through-align-ru/receipt.json",
+        "receiptSha256": "b43e2a9d98fe1eab66481152aef3dcef9dc75f4b3cca6397fefded6df3c33b0a"
+      },
+      {
+        "suite": "decorations",
+        "locale": "en",
+        "states": 110,
+        "receipt": "decorations-en/receipt.json",
+        "receiptSha256": "e01d16721f1f144aa161c3586bb75ac07a097041522ef9c03ae97411ef797354"
+      },
+      {
+        "suite": "decorations",
+        "locale": "ru",
+        "states": 110,
+        "receipt": "decorations-ru/receipt.json",
+        "receiptSha256": "66416b317275eb123484d604c0b181c81f26b458789931debb982687dee0a152"
+      }
+    ],
+    "supplemental": [
+      {
+        "suite": "nested-reflow",
+        "locale": "en",
+        "states": 63,
+        "receipt": "nested-reflow-en/receipt.json",
+        "receiptSha256": "7ff68ee5fc81a1c116924ead65688f5e6bf3e4d4e7075457fd9beaa9f8e12c15"
+      },
+      {
+        "suite": "nested-reflow",
+        "locale": "ru",
+        "states": 63,
+        "receipt": "nested-reflow-ru/receipt.json",
+        "receiptSha256": "e8097f2b5d855d584c3ed6b8ece97550d3e2ec19eb9333fd637a6acd041c980c"
+      },
+      {
+        "suite": "painted-group-spacing",
+        "locale": "en",
+        "states": 65,
+        "receipt": "painted-group-spacing-en/receipt.json",
+        "receiptSha256": "9879d040a98abe96cfa369329131737c2958f35add7b6aeac9b3e5a3c850c1f2"
+      },
+      {
+        "suite": "painted-group-spacing",
+        "locale": "ru",
+        "states": 65,
+        "receipt": "painted-group-spacing-ru/receipt.json",
+        "receiptSha256": "f643420043b2743b7faac96561edd236ada81d5bd8c73b0ac8459d65e65aadbd"
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "states": 31,
+        "receipt": "responsive-en/receipt.json",
+        "receiptSha256": "bff03af5d4795bd11cf2a301d1e981cfc3f2dcda1668a21b42131156c6edf37e"
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "states": 31,
+        "receipt": "responsive-ru/receipt.json",
+        "receiptSha256": "805419a2e9e3a72f0824c32f112e974b46b1e005bd05f67e204597fd16e2c476"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "states": 60,
+        "receipt": "group-spacing-en/receipt.json",
+        "receiptSha256": "e9eeb7bad02fa434d11c53e262a4e0af9447e6054bbefa19b1f3f20897065b2b"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "states": 60,
+        "receipt": "group-spacing-ru/receipt.json",
+        "receiptSha256": "bc45ac72f7cde0c058e77dc6f4e034d07dc8efb3e05ba05d31895071e7979ddb"
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "en",
+        "states": 19,
+        "receipt": "page-group-spacing-en/receipt.json",
+        "receiptSha256": "c41e0948fc975ffbe1c03956015135b588b2344ba59909b6260fb7a4996e9345"
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "ru",
+        "states": 19,
+        "receipt": "page-group-spacing-ru/receipt.json",
+        "receiptSha256": "9befeb25414425eec8780a43b7c1db0b84427e00c13306ca8d827fdb1efd6bf7"
+      },
+      {
+        "suite": "united",
+        "locale": "en",
+        "states": 9,
+        "receipt": "united-en/receipt.json",
+        "receiptSha256": "fc51f2824f9b9e459ad39307e078167c1c759ed7d7f9c2e5dfa96042d7f2fd10"
+      },
+      {
+        "suite": "united",
+        "locale": "ru",
+        "states": 9,
+        "receipt": "united-ru/receipt.json",
+        "receiptSha256": "8be5bc36d7e7da87c4c43879777a7dead33530a9ec2749204631c8f8223f8495"
+      },
+      {
+        "suite": "mixed-row-spacing",
+        "locale": "en",
+        "states": 39,
+        "receipt": "mixed-row-spacing-en/receipt.json",
+        "receiptSha256": "a2d0ed6360fa62c4ac417bbf36f37fd77f0fb1cbc3eaf3e363031905a171c975"
+      },
+      {
+        "suite": "mixed-row-spacing",
+        "locale": "ru",
+        "states": 39,
+        "receipt": "mixed-row-spacing-ru/receipt.json",
+        "receiptSha256": "8a0bbc309dd41dbb427d3706a83361bf16ef864c0e9995bed9291a9512535de3"
+      }
+    ]
+  },
+  "wholeForms": {
+    "stand": "form-wrapped-titles-whole-kbsfh4mu",
+    "unchangedSources": {
+      "united-bsp-context-763t8lxb/src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "united-bsp-context-763t8lxb/src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "united-bsp-context-763t8lxb/src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875"
+    },
+    "runs": [
+      {
+        "name": "bsp-en",
+        "receiptSha256": "0efba199b9acf8fd3b5568fb928033efabd632ca023179f6cc26c22d8a8f75f3"
+      },
+      {
+        "name": "bsp-ru",
+        "receiptSha256": "d0443e6673b15c82c14fe41863262e1993e94ae908169079ce486ca44b106f2c"
+      },
+      {
+        "name": "loan-docked-en",
+        "receiptSha256": "ecf1450d0a98389f75e21302ad51ad3f6e5bb35bd34b599ddef02935688a244b"
+      },
+      {
+        "name": "loan-docked-ru",
+        "receiptSha256": "69d27093606473c43860508b3cb1a7e6391c6e6d225bd09117c2a76402456f2c"
+      },
+      {
+        "name": "loan-detached-en",
+        "receiptSha256": "450b149d62bbd526f1fd658dc04fcdee25843c07f3d345d97d4076cf30916b72"
+      },
+      {
+        "name": "loan-detached-ru",
+        "receiptSha256": "fb05a86f629c4f033ae2edfc65375ed884b87aabfbd2da0ac2f15f5c11599298"
+      }
+    ]
+  },
+  "adminForm": {
+    "stand": "form-nested-admin-compare-s3kb7r1i",
+    "nativeStand": "form-native-nested-admin-7a_50mzc",
+    "source": "CommonForms/ПараметрыАдминистрированияПрограммы/Ext/Form.xml",
+    "compatibility": "Version8_3_24",
+    "runtimeManifestSha256": "c36ae7d9e9d7b30a66915439d1f9526295c6ee2a8b18c53cc991697312ab8508",
+    "originalCanonicalSha256": "0601ba5918d53488280ac2730b84b63a906864990ac7ae742edd791e230dee9b",
+    "explicitBottomInventory": {
+      "bsp": {
+        "managedForms": 909,
+        "bottom": 207
+      },
+      "loanManager": {
+        "managedForms": 837,
+        "bottom": 165
+      }
+    },
+    "checks": [
+      {
+        "locale": "en",
+        "receiptSha256": "f3e547486008aa1d872dc22d99e693c02f77eb833fb5bc75d7ed8ff91012fadb",
+        "cases": [
+          {
+            "name": "AdminNatural",
+            "sourceSha256": "d6efc0585e295994530830f1414a4f1d0ebd91d024e97872c144d318cfbf4f1a",
+            "authoredWidth": 0,
+            "frame": [
+              546,
+              389
+            ],
+            "beforeFrame": [
+              546,
+              389
+            ],
+            "beforeFlow": "row",
+            "actualFlow": "row",
+            "nativeFields": {
+              "АдресАгентаСервера": [
+                60,
+                309,
+                356,
+                23
+              ],
+              "ПортАгентаСервера": [
+                464,
+                309,
+                61,
+                23
+              ]
+            },
+            "installedFields": {
+              "АдресАгентаСервера": [
+                60,
+                336,
+                356,
+                23
+              ],
+              "ПортАгентаСервера": [
+                464,
+                336,
+                61,
+                23
+              ]
+            },
+            "nativeCaptureSha256": "650771fc3e3054531526e24bb89861afd3a8365ca052fbf573960ebb8b3b5ff5"
+          },
+          {
+            "name": "Admin30",
+            "sourceSha256": "ff1ac2fb4160d6b6477f17b553220aeb8727fe059d93179b4235a24ba79e33d0",
+            "authoredWidth": 30,
+            "frame": [
+              334,
+              468
+            ],
+            "beforeFrame": [
+              346,
+              453
+            ],
+            "beforeFlow": "row",
+            "actualFlow": "column",
+            "nativeFields": {
+              "АдресАгентаСервера": [
+                60,
+                356,
+                253,
+                23
+              ],
+              "ПортАгентаСервера": [
+                60,
+                388,
+                61,
+                23
+              ]
+            },
+            "installedFields": {
+              "АдресАгентаСервера": [
+                60,
+                376,
+                253,
+                23
+              ],
+              "ПортАгентаСервера": [
+                60,
+                408,
+                61,
+                23
+              ]
+            },
+            "nativeCaptureSha256": "deb91df59f439f93d273f69c15f52401b82b4798b1a7d6c48fc4c4b933162edc"
+          },
+          {
+            "name": "Admin45",
+            "sourceSha256": "ebf7ec3bcfa83774a1b3cee6a6c76ab398295bec5524a8655181cf7ada61b251",
+            "authoredWidth": 45,
+            "frame": [
+              484,
+              396
+            ],
+            "beforeFrame": [
+              484,
+              396
+            ],
+            "beforeFlow": "row",
+            "actualFlow": "row",
+            "nativeFields": {
+              "АдресАгентаСервера": [
+                60,
+                316,
+                294,
+                23
+              ],
+              "ПортАгентаСервера": [
+                402,
+                316,
+                61,
+                23
+              ]
+            },
+            "installedFields": {
+              "АдресАгентаСервера": [
+                60,
+                343,
+                294,
+                23
+              ],
+              "ПортАгентаСервера": [
+                402,
+                343,
+                61,
+                23
+              ]
+            },
+            "nativeCaptureSha256": "7de5653c5da0136850c935b00617848dd0afe2fb2989157e7e00e3051cf482b0"
+          }
+        ]
+      },
+      {
+        "locale": "ru",
+        "receiptSha256": "2064c33f71fa8411c78a3d487a74a71559ff854d1078080396a3ea8f6af08a38",
+        "cases": [
+          {
+            "name": "AdminNatural",
+            "sourceSha256": "d6efc0585e295994530830f1414a4f1d0ebd91d024e97872c144d318cfbf4f1a",
+            "authoredWidth": 0,
+            "frame": [
+              546,
+              389
+            ],
+            "beforeFrame": [
+              546,
+              389
+            ],
+            "beforeFlow": "row",
+            "actualFlow": "row",
+            "nativeFields": {
+              "АдресАгентаСервера": [
+                60,
+                309,
+                356,
+                23
+              ],
+              "ПортАгентаСервера": [
+                464,
+                309,
+                61,
+                23
+              ]
+            },
+            "installedFields": {
+              "АдресАгентаСервера": [
+                60,
+                336,
+                356,
+                23
+              ],
+              "ПортАгентаСервера": [
+                464,
+                336,
+                61,
+                23
+              ]
+            },
+            "nativeCaptureSha256": "fe952b583157b930c4e934f5c92871dfc8607590a0dc5c98a08f9ae41ac9cf88"
+          },
+          {
+            "name": "Admin30",
+            "sourceSha256": "ff1ac2fb4160d6b6477f17b553220aeb8727fe059d93179b4235a24ba79e33d0",
+            "authoredWidth": 30,
+            "frame": [
+              334,
+              468
+            ],
+            "beforeFrame": [
+              346,
+              453
+            ],
+            "beforeFlow": "row",
+            "actualFlow": "column",
+            "nativeFields": {
+              "АдресАгентаСервера": [
+                60,
+                356,
+                253,
+                23
+              ],
+              "ПортАгентаСервера": [
+                60,
+                388,
+                61,
+                23
+              ]
+            },
+            "installedFields": {
+              "АдресАгентаСервера": [
+                60,
+                376,
+                253,
+                23
+              ],
+              "ПортАгентаСервера": [
+                60,
+                408,
+                61,
+                23
+              ]
+            },
+            "nativeCaptureSha256": "19af67f57ceea6114c9462fb7bafa4afa5ebd3a86810517d94542b9d9b4611c4"
+          },
+          {
+            "name": "Admin45",
+            "sourceSha256": "ebf7ec3bcfa83774a1b3cee6a6c76ab398295bec5524a8655181cf7ada61b251",
+            "authoredWidth": 45,
+            "frame": [
+              484,
+              396
+            ],
+            "beforeFrame": [
+              484,
+              396
+            ],
+            "beforeFlow": "row",
+            "actualFlow": "row",
+            "nativeFields": {
+              "АдресАгентаСервера": [
+                60,
+                316,
+                294,
+                23
+              ],
+              "ПортАгентаСервера": [
+                402,
+                316,
+                61,
+                23
+              ]
+            },
+            "installedFields": {
+              "АдресАгентаСервера": [
+                60,
+                343,
+                294,
+                23
+              ],
+              "ПортАгентаСервера": [
+                402,
+                343,
+                61,
+                23
+              ]
+            },
+            "nativeCaptureSha256": "0813af333b4c1a21bfa443dbc969a30f059a5b81f031611297d1c766923ad8b0"
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "rust": {
+      "fmt": true,
+      "check": true,
+      "clippy": true,
+      "passed": 1580,
+      "ignored": 19,
+      "parallelFailures": [
+        "ETXTBSY at tests/cli/update.rs:177",
+        "ETXTBSY at tests/cli/update.rs:177"
+      ],
+      "focusedRetryPassed": true,
+      "fullPassTestThreads": 1
+    },
+    "node": {
+      "passed": 733,
+      "skipped": 8
+    }
+  },
+  "limits": [
+    "In the administration form both fields remain 20–27 px lower than the Configurator. CommandBarLocation=Bottom still displays above the fields in Explorer.",
+    "In CombinedNormal39, CombinedNormal36 and CombinedNormal34 the native conditional page stacks earlier than the preview.",
+    "At smaller widths Caption24, Caption18 and Combined24 need additional track allocation rules. Heading22 and Heading14 still keep a side caption where Representation=None places it above.",
+    "The measured checks cover geometry and line counts. Complete text and RGB parity, different DPI and Windows remain open."
+  ]
+}

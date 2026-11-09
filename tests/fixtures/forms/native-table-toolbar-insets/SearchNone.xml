@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Table default</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Table default</v8:content>
+		</v8:item>
+	</Title>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<InputField name="Above" id="1">
+			<DataPath>Name</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<Width>1</Width>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#FFEFBA</BackColor>
+			<ContextMenu name="AboveContextMenu" id="2"/>
+			<ExtendedTooltip name="AboveExtendedTooltip" id="3"/>
+		</InputField>
+		<Table name="Rows" id="4">
+			<Representation>List</Representation>
+			<Width>60</Width>
+			<HeightInTableRows>2</HeightInTableRows>
+			<VerticalStretch>false</VerticalStretch>
+			<DataPath>Rows</DataPath>
+			<SearchStringLocation>None</SearchStringLocation>
+			<RowFilter xsi:nil="true"/>
+			<ContextMenu name="RowsКонтекстноеМеню" id="5"/>
+			<AutoCommandBar name="RowsBar" id="6"/>
+			<ExtendedTooltip name="RowsРасширеннаяПодсказка" id="7"/>
+			<SearchStringAddition name="RowsСтрокаПоиска" id="8">
+				<AdditionSource>
+					<Item>Rows</Item>
+					<Type>SearchStringRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="RowsСтрокаПоискаКонтекстноеМеню" id="9"/>
+				<ExtendedTooltip name="RowsСтрокаПоискаРасширеннаяПодсказка" id="10"/>
+			</SearchStringAddition>
+			<ViewStatusAddition name="RowsСостояниеПросмотра" id="11">
+				<AdditionSource>
+					<Item>Rows</Item>
+					<Type>ViewStatusRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="RowsСостояниеПросмотраКонтекстноеМеню" id="12"/>
+				<ExtendedTooltip name="RowsСостояниеПросмотраРасширеннаяПодсказка" id="13"/>
+			</ViewStatusAddition>
+			<SearchControlAddition name="RowsУправлениеПоиском" id="14">
+				<AdditionSource>
+					<Item>Rows</Item>
+					<Type>SearchControl</Type>
+				</AdditionSource>
+				<ContextMenu name="RowsУправлениеПоискомКонтекстноеМеню" id="15"/>
+				<ExtendedTooltip name="RowsУправлениеПоискомРасширеннаяПодсказка" id="16"/>
+			</SearchControlAddition>
+			<ChildItems>
+				<InputField name="Text" id="17">
+					<DataPath>Rows.Text</DataPath>
+					<ContextMenu name="TextКонтекстноеМеню" id="18"/>
+					<ExtendedTooltip name="TextРасширеннаяПодсказка" id="19"/>
+				</InputField>
+				<InputField name="Amount" id="20">
+					<DataPath>Rows.Amount</DataPath>
+					<ContextMenu name="AmountКонтекстноеМеню" id="21"/>
+					<ExtendedTooltip name="AmountРасширеннаяПодсказка" id="22"/>
+				</InputField>
+				<CheckBoxField name="Active" id="23">
+					<DataPath>Rows.Active</DataPath>
+					<CheckBoxType>Auto</CheckBoxType>
+					<ContextMenu name="ActiveКонтекстноеМеню" id="24"/>
+					<ExtendedTooltip name="ActiveРасширеннаяПодсказка" id="25"/>
+				</CheckBoxField>
+			</ChildItems>
+		</Table>
+		<InputField name="Below" id="26">
+			<DataPath>Name</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<Width>70</Width>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#A8E4B8</BackColor>
+			<ContextMenu name="BelowContextMenu" id="27"/>
+			<ExtendedTooltip name="BelowExtendedTooltip" id="28"/>
+		</InputField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Rows" id="29">
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Rows</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Rows</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>v8:ValueTable</v8:Type>
+			</Type>
+			<Columns>
+				<Column name="Text" id="30">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Text</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Text</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:string</v8:Type>
+						<v8:StringQualifiers>
+							<v8:Length>20</v8:Length>
+							<v8:AllowedLength>Variable</v8:AllowedLength>
+						</v8:StringQualifiers>
+					</Type>
+				</Column>
+				<Column name="Amount" id="31">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Amount</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Amount</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:decimal</v8:Type>
+						<v8:NumberQualifiers>
+							<v8:Digits>9</v8:Digits>
+							<v8:FractionDigits>2</v8:FractionDigits>
+							<v8:AllowedSign>Any</v8:AllowedSign>
+						</v8:NumberQualifiers>
+					</Type>
+				</Column>
+				<Column name="Active" id="32">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Active</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Active</v8:content>
+						</v8:item>
+					</Title>
+					<Type>
+						<v8:Type>xs:boolean</v8:Type>
+					</Type>
+				</Column>
+			</Columns>
+		</Attribute>
+		<Attribute name="Name" id="33">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+</Form>

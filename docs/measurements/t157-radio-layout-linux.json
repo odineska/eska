@@ -1,0 +1,673 @@
+{
+  "schemaVersion": 1,
+  "task": "T157",
+  "issue": "https://github.com/odineska/eska/issues/265",
+  "measuredAt": "2026-11-08T06:01:19.362992+00:00",
+  "scope": "Ширина и положение переключателей Linux; рамка целого мастера БСП. Без исполнения BSL и новой калибровки цветов.",
+  "profile": {
+    "platform": "8.3.27.2342",
+    "interface": "Taxi",
+    "os": "ALT Linux ARM64",
+    "dpi": 96,
+    "zoom": 100,
+    "locales": [
+      "en",
+      "ru"
+    ],
+    "compatibilities": [
+      "Version8_3_24",
+      "Version8_3_27"
+    ],
+    "nativeResizeAccepted": false,
+    "fullNativeProfileAccepted": false,
+    "nativeWindowsAccepted": false
+  },
+  "implementation": {
+    "explorerCommit": "c7f53cc7df1b91bb5446181ef2b04a1d67c7fa22",
+    "fixtureCommit": "f9d5904",
+    "textMeasurement": "Общее измерение слов в font-metrics.mjs: hinted pair advances внутри слова, самостоятельная ширина пробела. Декорации, оба Tumbler и обычные переключатели используют один алгоритм.",
+    "sideTitle": "Боковая подпись RadioButtonField использует то же измерение слов; прежний дополнительный 1 px сохранён.",
+    "horizontalSpacing": "RadioButtonField включён в существующее правило Auto=10 px горизонтального контейнера Linux; явные интервалы имеют прежний приоритет.",
+    "layoutOwner": "Существующий цикл компоновки; новых наблюдателей, скрытых контролов, таблиц и зависимостей нет.",
+    "sourceWritesDuringViewing": false,
+    "backendProtocolChanged": false,
+    "experimentalModuleChanges": [
+      "decorationTextAdvances заменён общим wordTextAdvances; внутренний tumblerCaptionWidth удалён, потребители используют wordCaptionWidth. Документированные API и JSON не менялись."
+    ]
+  },
+  "nativeCorpus": {
+    "manifest": "tests/fixtures/forms/native-radio-layout/capture-manifest.json",
+    "forms": 13,
+    "screenshots": 40,
+    "sourceFilesUnchanged": 2068,
+    "compatibilityPairs": 4,
+    "geometryEqualAcrossLocalesAndCompatibilities": true,
+    "sourceNormalization": "UTF-8 без BOM, LF, сохранение текста и порядка дочерних элементов; canonical XML и hashes записаны для каждой формы."
+  },
+  "nativeWholeWizard": {
+    "proof": {
+      "path": "form-bsp-root-native-7qq019k3/metadata-proof.json",
+      "sha256": "cd86dca2bf19e3e6b8325cde5dd8e5a9886cd1b3e9b94a30236cf51f1147f5a6"
+    },
+    "context": {
+      "stand": "form-bsp-root-native-7qq019k3",
+      "platform": "8.3.27.2342",
+      "compatibility": "Version8_3_24",
+      "displayBackend": "private-headless-Mutter",
+      "nativeProcessExitCode": 0,
+      "sourceDatabaseUnchanged": true,
+      "databaseSha256": "3ae00b262d93405646969a137f43f140b7a57743203bcbe28d92d4502ec3d4d8",
+      "files": [
+        {
+          "source": "united-bsp-context-763t8lxb/src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml",
+          "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+          "exportBeforeSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+          "exportAfterSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+          "parsedXmlUnchanged": true
+        },
+        {
+          "source": "united-bsp-context-763t8lxb/src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+          "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+          "exportBeforeSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+          "exportAfterSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+          "parsedXmlUnchanged": true
+        },
+        {
+          "source": "united-bsp-context-763t8lxb/src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml",
+          "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+          "exportBeforeSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+          "exportAfterSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+          "parsedXmlUnchanged": true
+        },
+        {
+          "source": "united-bsp-context-763t8lxb/src/cf/Configuration.xml",
+          "sourceSha256": "6ddd3bb864852f3818df86431f7adf4aa4cc98cb804b2342877c346b2c6b4b73",
+          "exportBeforeSha256": "6ddd3bb864852f3818df86431f7adf4aa4cc98cb804b2342877c346b2c6b4b73",
+          "exportAfterSha256": "6ddd3bb864852f3818df86431f7adf4aa4cc98cb804b2342877c346b2c6b4b73",
+          "parsedXmlUnchanged": true
+        }
+      ],
+      "geometry": {
+        "frame": [
+          811,
+          612
+        ],
+        "glyphs": {
+          "selected": [
+            [
+              219,
+              175,
+              15,
+              15
+            ],
+            [
+              604,
+              175,
+              15,
+              15
+            ]
+          ],
+          "unselected": [
+            [
+              317,
+              175,
+              15,
+              15
+            ],
+            [
+              700,
+              175,
+              15,
+              15
+            ]
+          ]
+        }
+      }
+    },
+    "beforeExport": {
+      "path": "form-bsp-root-native-7qq019k3/export-result.json",
+      "sha256": "982b9e9bfb10ffe83cad665807abcfd3fa97b37822db5ab7831157a499548a9e"
+    },
+    "afterExport": {
+      "path": "form-bsp-root-native-7qq019k3/export-after-result.json",
+      "sha256": "982b9e9bfb10ffe83cad665807abcfd3fa97b37822db5ab7831157a499548a9e"
+    },
+    "snapshots": [
+      {
+        "path": "form-bsp-root-native-7qq019k3/interactive-en/data-import-full-root.png",
+        "sha256": "ccdc1855b573432ae1a2582b1c1ffef69b3f1e52d4189f604f6a2f6c8e803783"
+      },
+      {
+        "path": "form-bsp-root-native-7qq019k3/interactive-en/matching-root-selected.png",
+        "sha256": "d6daafff92ec6e4f4207795e5fea9018c912b1b93ffe6d69e11686666b4b809f"
+      },
+      {
+        "path": "form-bsp-root-native-7qq019k3/interactive-en/matching-root-repeat.png",
+        "sha256": "d6daafff92ec6e4f4207795e5fea9018c912b1b93ffe6d69e11686666b4b809f"
+      }
+    ],
+    "scripts": {
+      "run-controlled.py": "131611825b453e2cb2ee9fd214d2a11501cd1b737a024a08d347108923abb796",
+      "driver.py": "1bcf0ecdb731d48e912b18afaeceb61d0792666470261391f2651ce7f6e46174",
+      "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46"
+    },
+    "rootMeasurement": "Полная синяя рамка выбранного корня, повторный снимок; тень не входит в размер.",
+    "previousNativeFrameReported": [
+      812,
+      612
+    ],
+    "correctedNativeFrame": [
+      811,
+      612
+    ],
+    "correctionReason": "Прежний замер чёрного края при выборе страницы включал пиксель тени. Экспорт до и после GUI подтверждает тот же исходный XML.",
+    "previousViewerFrame": [
+      814,
+      612
+    ],
+    "currentViewerFrame": [
+      811,
+      612
+    ],
+    "previousSelectedMarkX": [
+      220,
+      606
+    ],
+    "currentSelectedMarkX": [
+      219,
+      604
+    ],
+    "previousUnselectedMarkX": [
+      318,
+      702
+    ],
+    "currentUnselectedMarkX": [
+      317,
+      700
+    ]
+  },
+  "artifact": {
+    "stand": "form-batch-k3l0vk",
+    "vsixSha256": "f133067847a335e2a3636a4a30ee2f92fc1fe35062ad7ecdf0c2fa905685b619",
+    "backendSha256": "10b7e4b520dc9ac6f06fa3a56ebbe0b85c59a5e18658551c860e2b558ac3489d",
+    "runtimeManifestSha256": "085a99e18b82de596b89d68986c0c694e0a7b60b074274664b4b475d6bd0d657",
+    "runtimeFiles": 1262,
+    "builds": 1,
+    "packages": 1,
+    "inputs": {
+      "path": "form-batch-k3l0vk/inputs.json",
+      "sha256": "a510abc4c18f167bc31e4e64dd97e1e89c1de8902a8348ab8c7506d0c314faa0"
+    }
+  },
+  "gates": {
+    "passedRuns": 4,
+    "strictRadioStates": 34,
+    "radioInitialStates": 26,
+    "radioDirtyStates": 8,
+    "existingRendererForms": 40,
+    "runs": [
+      {
+        "suite": "radio-layout",
+        "locale": "en",
+        "states": 17,
+        "receipt": {
+          "path": "form-batch-k3l0vk/radio-layout-en/receipt.json",
+          "sha256": "d1e378f6ca160dd6f02bdd696baa4c3dd033699c3ff9da8b87fd9ab04f89eabb"
+        }
+      },
+      {
+        "suite": "radio-layout",
+        "locale": "ru",
+        "states": 17,
+        "receipt": {
+          "path": "form-batch-k3l0vk/radio-layout-ru/receipt.json",
+          "sha256": "cecff8663c118678c0a0f1c5679328f88d8e908c97d1edcbf039b01e9ca61b4e"
+        }
+      },
+      {
+        "suite": "renderer",
+        "locale": "en",
+        "states": 20,
+        "receipt": {
+          "path": "form-batch-k3l0vk/renderer-en/receipt.json",
+          "sha256": "4820223f7b00cba7cfc267352aa108d5a61652a45701d4aad354027ee70e62af"
+        }
+      },
+      {
+        "suite": "renderer",
+        "locale": "ru",
+        "states": 20,
+        "receipt": {
+          "path": "form-batch-k3l0vk/renderer-ru/receipt.json",
+          "sha256": "508cbd9f86b42f5fe404c8e119e137c2f2d86004b5f5f8b9b0dfae938c4850f6"
+        }
+      }
+    ],
+    "coverage": "13 native-форм ru/en, dirty-переход PairExact/PairEnglishTitles во вкладке и настоящем отдельном окне; DOM, выбор, диагностики и исходные байты."
+  },
+  "relatedRegressions": {
+    "passedRuns": 22,
+    "sameVsix": true,
+    "summary": {
+      "path": "form-bsp-radio-regressions-tck4h0tb/regressions.json",
+      "sha256": "ce2fd9bb7675c1d5d52fcc38b1fc3f1132293a41b25194f8b01dcf087b716b99"
+    },
+    "runs": [
+      {
+        "suite": "usual-buttons",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 18,
+        "seconds": 13.915221973998996,
+        "inputsStable": true
+      },
+      {
+        "suite": "usual-buttons",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 18,
+        "seconds": 16.23916640099924,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 18,
+        "seconds": 10.525098097998125,
+        "inputsStable": true
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 18,
+        "seconds": 13.38005194300058,
+        "inputsStable": true
+      },
+      {
+        "suite": "tab-titles",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 15,
+        "seconds": 9.286631734001276,
+        "inputsStable": true
+      },
+      {
+        "suite": "tab-titles",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 15,
+        "seconds": 12.105349550001847,
+        "inputsStable": true
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 22,
+        "seconds": 18.901696050997998,
+        "inputsStable": true
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 22,
+        "seconds": 21.868447013999685,
+        "inputsStable": true
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 60,
+        "seconds": 29.12705336500221,
+        "inputsStable": true
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 60,
+        "seconds": 32.13087060399994,
+        "inputsStable": true
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 98,
+        "seconds": 37.7721785169997,
+        "inputsStable": true
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 98,
+        "seconds": 39.826527330995305,
+        "inputsStable": true
+      },
+      {
+        "suite": "united",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 9,
+        "seconds": 8.015459624002688,
+        "inputsStable": true
+      },
+      {
+        "suite": "united",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 9,
+        "seconds": 10.59970648199669,
+        "inputsStable": true
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 17,
+        "seconds": 16.55172402599419,
+        "inputsStable": true
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 17,
+        "seconds": 19.495938799002033,
+        "inputsStable": true
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 48,
+        "seconds": 23.662555269998848,
+        "inputsStable": true
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 47,
+        "seconds": 25.60683658599737,
+        "inputsStable": true
+      },
+      {
+        "suite": "column-widths",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 187,
+        "seconds": 28.94116102699627,
+        "inputsStable": true
+      },
+      {
+        "suite": "column-widths",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 143,
+        "seconds": 27.769701441997313,
+        "inputsStable": true
+      },
+      {
+        "suite": "decorations",
+        "locale": "en",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 110,
+        "seconds": 54.322015131001535,
+        "inputsStable": true
+      },
+      {
+        "suite": "decorations",
+        "locale": "ru",
+        "exitCode": 0,
+        "passed": true,
+        "caseIds": 110,
+        "seconds": 56.517962316997,
+        "inputsStable": true
+      }
+    ]
+  },
+  "wholeForms": {
+    "runs": [
+      {
+        "run": "bsp-en",
+        "states": 12,
+        "receipt": {
+          "path": "form-bsp-radio-whole-dwb3knun/bsp-en/receipt.json",
+          "sha256": "523cd41136adba1d5a816740498ab95acc245e9538af4e19f6a4f701f8ce085d"
+        }
+      },
+      {
+        "run": "bsp-ru",
+        "states": 12,
+        "receipt": {
+          "path": "form-bsp-radio-whole-dwb3knun/bsp-ru/receipt.json",
+          "sha256": "8f827c6809b4ea5039368640c5ffbde1f11df2f6b69da95dab15512e535f518b"
+        }
+      },
+      {
+        "run": "loan-docked-en",
+        "states": 9,
+        "receipt": {
+          "path": "form-bsp-radio-whole-dwb3knun/loan-docked-en/receipt.json",
+          "sha256": "c1622ecaf4242c542793a20d4ae03188ec3fb0515bd99bd8083e4677d832b08a"
+        }
+      },
+      {
+        "run": "loan-docked-ru",
+        "states": 9,
+        "receipt": {
+          "path": "form-bsp-radio-whole-dwb3knun/loan-docked-ru/receipt.json",
+          "sha256": "e906222d5157c9cdb3ae5bb5801219f1866aec4396c41999cc60c9a8aaf6115f"
+        }
+      },
+      {
+        "run": "loan-detached-en",
+        "states": 10,
+        "receipt": {
+          "path": "form-bsp-radio-whole-dwb3knun/loan-detached-en/receipt.json",
+          "sha256": "a352167172c4f6e7f996e9242f7ac7a6f46225b69b7649c8a2d98a1b22666d48"
+        }
+      },
+      {
+        "run": "loan-detached-ru",
+        "states": 10,
+        "receipt": {
+          "path": "form-bsp-radio-whole-dwb3knun/loan-detached-ru/receipt.json",
+          "sha256": "d08778ea4d7380e1c6e98b5b2f28748105f3fde3e2930b1a5500ce1cd907cdab"
+        }
+      }
+    ],
+    "states": 62,
+    "bspStates": 24,
+    "loanStates": 38,
+    "bspPreferredFrames": [
+      {
+        "locale": "en",
+        "frames": [
+          {
+            "width": 811,
+            "height": 612
+          },
+          {
+            "width": 785,
+            "height": 796
+          },
+          {
+            "width": 1222,
+            "height": 536
+          }
+        ]
+      },
+      {
+        "locale": "ru",
+        "frames": [
+          {
+            "width": 811,
+            "height": 612
+          },
+          {
+            "width": 785,
+            "height": 796
+          },
+          {
+            "width": 1222,
+            "height": 536
+          }
+        ]
+      }
+    ],
+    "wizardComparisons": [
+      {
+        "locale": "en",
+        "frame": {
+          "width": 811,
+          "height": 612
+        },
+        "nativeRadioGeometryMatched": true,
+        "matchingMenuRightInset": 21
+      },
+      {
+        "locale": "ru",
+        "frame": {
+          "width": 811,
+          "height": 612
+        },
+        "nativeRadioGeometryMatched": true,
+        "matchingMenuRightInset": 21
+      }
+    ],
+    "loanPreferredFrame": [
+      1157,
+      875
+    ],
+    "loanComparedToPreviousCheckpoint": [
+      {
+        "run": "loan-docked-en",
+        "states": 9,
+        "changedRects": {
+          "element": 0,
+          "control": 0
+        }
+      },
+      {
+        "run": "loan-docked-ru",
+        "states": 9,
+        "changedRects": {
+          "element": 0,
+          "control": 0
+        }
+      },
+      {
+        "run": "loan-detached-en",
+        "states": 10,
+        "changedRects": {
+          "element": 0,
+          "control": 0
+        }
+      },
+      {
+        "run": "loan-detached-ru",
+        "states": 10,
+        "changedRects": {
+          "element": 0,
+          "control": 0
+        }
+      }
+    ],
+    "sourceFilesUnchanged": 4,
+    "before": {
+      "path": "form-bsp-radio-whole-dwb3knun/source-hashes-before.json",
+      "sha256": "4605edd5f3e781b8babc68f13e64861dd0fa7443651e8088f82a468b93bb1248"
+    },
+    "after": {
+      "path": "form-bsp-radio-whole-dwb3knun/source-hashes-after.json",
+      "sha256": "4605edd5f3e781b8babc68f13e64861dd0fa7443651e8088f82a468b93bb1248"
+    },
+    "nativeWholeFormAccepted": false,
+    "note": "Точно приняты рамка мастера и четыре отметки переключателей; это не приёмка каждого элемента или полного пиксельного изображения целой формы."
+  },
+  "checks": {
+    "typecheck": "npm run check: passed",
+    "compile": "npm run compile: passed",
+    "package": "Node/VSCE: passed",
+    "node": {
+      "tests": 701,
+      "passed": 693,
+      "skipped": 8,
+      "failed": 0,
+      "log": {
+        "path": "form-bsp-radio-node-no0fgbtg/node.log",
+        "sha256": "9739e58de8143df378c402e2d04a8b80d75aaff23b0b18e80bc8868ea4e97e80"
+      }
+    },
+    "diffCheck": "passed",
+    "rust": "Rust, зависимости и конфигурация сборки backend не менялись; для fixtures и документации Rust-прогон не выполнялся."
+  },
+  "unacceptedCandidates": [
+    {
+      "stand": "form-batch-20HqGv",
+      "summary": {
+        "path": "form-batch-20HqGv/batch.json",
+        "sha256": "b7b84b516f8323022afa7e484ae4d705d8e61ebbf5137fe258fc8c99cb3b5221"
+      },
+      "reason": "Сплошное округление design advances не разделяло слова: To AV было на 1 px уже native.",
+      "passedRuns": 10,
+      "failedRuns": 2
+    },
+    {
+      "stand": "form-batch-CS1MZR",
+      "summary": {
+        "path": "form-batch-CS1MZR/batch.json",
+        "sha256": "9006f5a9ccb4f2c5e46241892130771c487d27734c3086ae430ce5dc65f9c8e5"
+      },
+      "reason": "После исправления текста оставался интервал 8 вместо native 10 px между двумя RadioButtonField без пустой декорации.",
+      "passedRuns": 10,
+      "failedRuns": 2
+    }
+  ],
+  "pending": [
+    "Остальные прямоугольники целых форм БСП и native-матрица ручного resize ещё не приняты.",
+    "Полный пиксельный профиль, остаток Mono 10 pt, все сочетания шрифтов, DPI и масштабов остаются открытыми.",
+    "Родные Windows-эталоны новой матрицы и повторная проверка последующих Linux-изменений. Функциональная Windows-приёмка предыдущего среза от 2026-11-07 не заменяет эти проверки."
+  ],
+  "windowsHandoff": [
+    "Снять native-radio-layout в родном Конфигураторе Windows ru/en и совместимостях 8.3.24/8.3.27; Linux-координаты не переносить.",
+    "Включить боковые подписи с %1, пробелы в вариантах, To AV, жирный 16 pt, Tumbler, соседние поля с пустой декорацией и без неё.",
+    "Повторить suite radio-layout: dirty XML, стабильность DOM и выбора, настоящее отдельное окно и возврат. Строгие Linux-координаты не объявляют принятой Windows.",
+    "В целом мастере ЗагрузкаДанныхИзФайла выбирать корень и фиксировать рамку без тени; отдельно измерять отметки на странице СопоставлениеЗагружаемыхДанных.",
+    "Повторить ВыдачуЗайма во вкладке и отдельном окне с 24-часовым временем."
+  ],
+  "tracker": {
+    "statusChanged": false,
+    "fullTaskCompleted": false,
+    "status": "В работе",
+    "reason": "Рамка и переключатели приняты на проверенном Linux-корпусе; полная геометрия T157 и общий профиль T152–T165 ещё не приняты."
+  }
+}

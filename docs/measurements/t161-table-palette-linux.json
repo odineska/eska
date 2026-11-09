@@ -1,0 +1,490 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-09T01:52:49.591517+00:00",
+  "scope": [
+    "T161"
+  ],
+  "profile": {
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "os": "Linux ARM64",
+    "display": "XWayland on a private headless Mutter desktop",
+    "uiLocales": [
+      "ru",
+      "en"
+    ]
+  },
+  "implementation": {
+    "backendCommit": "c34c922fd50481028a117d107ad21e5da1ec9341",
+    "explorerTestsCommit": "0ea1a30f37c0c7ec38606bf16cf1bb45ee1dbe5e",
+    "protocolChanged": false,
+    "tableProfiles": {
+      "table": 94,
+      "manualBounds": 96,
+      "manualFormHeight": 95,
+      "manualTableRows": 95,
+      "dynamic": 110,
+      "dynamicManual": 112,
+      "column": 20,
+      "columnHeader": 25
+    },
+    "rules": [
+      "Table applicability comes from the resolved binding. Native value tables, trees, value lists, tabular sections, unbound tables and dynamic lists have distinct supported contexts.",
+      "Manual limits and FileDragMode follow effective properties. The canonical row-limit keys are AutoMaxRowsCount and MaxRowsCount.",
+      "ColumnGroup uses the effective ShowInHeader setting. Platform rows, additional XML, events and navigation reuse the common property inspector."
+    ]
+  },
+  "native": {
+    "fixture": "tests/fixtures/forms/native-table-palette",
+    "metricsSha256": "b714a0ee84b176ba5ae64f0cf6cbb8e82a34007e6f1b593752b4fbd8f5f78c6d",
+    "canonicalForms": 25,
+    "selectedElements": 26,
+    "pairedSelections": 25,
+    "manualRowLimitRoundTrip": {
+      "stand": "form-native-table-palette-manual-visdn7pd",
+      "locale": "en",
+      "designerExitCode": 0,
+      "ibcmdExportExitCode": 0,
+      "diff": {
+        "AutoMaxRowsCount": "false",
+        "MaxRowsCount": "12"
+      },
+      "sha256": "f48d4d93e3e337e22740f0e215e111b2d0fa8e69a0bb390d168000d9b581ea24"
+    },
+    "postScanExport": [
+      {
+        "stand": "form-native-table-palette-difvc5hh",
+        "formsUnchanged": 14,
+        "forms": [
+          {
+            "file": "CommonForms/ProbeWidthPaletteDynamicHierarchy/Ext/Form.xml",
+            "sha256": "37767855f913eea4fd0b97535755af84d8ed7ed5362a5e3ad72904d3a03213c2",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteDynamicList/Ext/Form.xml",
+            "sha256": "37767855f913eea4fd0b97535755af84d8ed7ed5362a5e3ad72904d3a03213c2",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteDynamicRefresh/Ext/Form.xml",
+            "sha256": "435a515adc4bec6fc02507a7eba10a516990d45d6245e8884fd0a74b999a1041",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteHorizontal/Ext/Form.xml",
+            "sha256": "278aaef7840a9ef6f954c285d946a99f45875ed4b15e57d69f28fe05836a0dac",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteHorizontalHeader/Ext/Form.xml",
+            "sha256": "f3e757e5c726de38f612fcf0c4ff3f2bd9004f9233d56de763ddf27314be373c",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteInCell/Ext/Form.xml",
+            "sha256": "da3999c1b1af1af2f32a9d63994efa259e3cdb2e2a63e13114a50dab192679fb",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteManualBounds/Ext/Form.xml",
+            "sha256": "6416c1515d90495b6c778c5f20ada89b536fcad33c2bc3c7093a9b97b1490f74",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteMetadataTable/Ext/Form.xml",
+            "sha256": "7f1e77cef687bb622b6fdb071ec6dc4aad1899ea63be49ba5064e50e1e96a4f6",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteNested/Ext/Form.xml",
+            "sha256": "64390d36b4bf29c50a1e840fdf75ccaa5cbc8e65c3619242083472986859e631",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteUnbound/Ext/Form.xml",
+            "sha256": "e6cff5963c2507749cc54391986d5e8538406ef271ae6e4c071ebf732224bafc",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteValueTable/Ext/Form.xml",
+            "sha256": "319d339c51e0483b0109ced3c4a8badf104417ec1b6329d1580f1e5917bb7cde",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteValueTree/Ext/Form.xml",
+            "sha256": "67b08a2818d5f1505935d2bb735928806f3a6a0118a6176d3c739625e89e4a8f",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteVertical/Ext/Form.xml",
+            "sha256": "3a90e787a12deb408b28fe6b7267f301b45c1d704e718b5cf5dcb53d8ee1a413",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteVerticalHeader/Ext/Form.xml",
+            "sha256": "4550a747431c3f86b6f8f28dd0456334799d6af468a893ff19b98da330d595cc",
+            "identical": true
+          }
+        ],
+        "exitCode": 0
+      },
+      {
+        "stand": "form-native-table-palette-extra-da1ksb3g",
+        "formsUnchanged": 5,
+        "forms": [
+          {
+            "file": "CommonForms/ProbeWidthPaletteDynamicFolders/Ext/Form.xml",
+            "sha256": "37767855f913eea4fd0b97535755af84d8ed7ed5362a5e3ad72904d3a03213c2",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteDynamicPeriod/Ext/Form.xml",
+            "sha256": "aa6e195ffa5c0eb77532a73517512245552f7b316b37a10cf228a8e46a4c4f44",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteDynamicQuery/Ext/Form.xml",
+            "sha256": "e7dbd6453f92d367ff495dcac79db4b7cafc6891d2e874e7dbefc9e4b822ffef",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteManualRowsDrag/Ext/Form.xml",
+            "sha256": "b6f0c3ad7c6416d505ead722dcaa5c9f949fab0ba4f9674b1ed8abcef9c5a2b0",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteValueList/Ext/Form.xml",
+            "sha256": "3ffb37215bf822afed70a778928e4c0ffd50d147ac7bfb0fd516d0d31b5e6d30",
+            "identical": true
+          }
+        ],
+        "exitCode": 0
+      },
+      {
+        "stand": "form-native-table-palette-layout-ka4fdl4q",
+        "formsUnchanged": 5,
+        "forms": [
+          {
+            "file": "CommonForms/ProbeWidthPaletteContentHeight/Ext/Form.xml",
+            "sha256": "a4d8983465077019f749350f1a34c4a9229bd05cd2ebfd54b4b8a0aa2bd7262e",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteDragOnly/Ext/Form.xml",
+            "sha256": "d08debfb54f45d440d3cc347330efd57cbcb8022904da3f647c100d5112ee253",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteDropOnly/Ext/Form.xml",
+            "sha256": "a3fb43154028e24100c344b56f8ea149d9e51400fa9cc562816054c5d99c3059",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteHeightInFormRows/Ext/Form.xml",
+            "sha256": "e6455efbade0e32474bb3e6d210628a1a5b70f3ebbade49d2f304113d4389f1c",
+            "identical": true
+          },
+          {
+            "file": "CommonForms/ProbeWidthPaletteHeightInRows/Ext/Form.xml",
+            "sha256": "439ba391222a87fcb78139e859f4f5a75deb8c096bfaa913b2e7e1a7535e7c9d",
+            "identical": true
+          }
+        ],
+        "exitCode": 0
+      }
+    ],
+    "terminationReceipts": [
+      {
+        "stand": "form-native-table-palette-difvc5hh",
+        "locale": "en",
+        "pass": "tree-close",
+        "exitCode": 1,
+        "sourcesUnchanged": true
+      },
+      {
+        "stand": "form-native-table-palette-difvc5hh",
+        "locale": "ru",
+        "pass": "measured",
+        "exitCode": 1,
+        "sourcesUnchanged": true
+      },
+      {
+        "stand": "form-native-table-palette-extra-da1ksb3g",
+        "locale": "en",
+        "pass": "measured",
+        "exitCode": 1,
+        "sourcesUnchanged": true
+      },
+      {
+        "stand": "form-native-table-palette-extra-da1ksb3g",
+        "locale": "ru",
+        "pass": "measured",
+        "exitCode": 1,
+        "sourcesUnchanged": true
+      },
+      {
+        "stand": "form-native-table-palette-layout-ka4fdl4q",
+        "locale": "ru",
+        "pass": "measured",
+        "exitCode": 0,
+        "sourcesUnchanged": true
+      },
+      {
+        "stand": "form-native-table-palette-difvc5hh",
+        "locale": "en",
+        "pass": "clean-tree",
+        "exitCode": 0,
+        "sourcesUnchanged": true
+      },
+      {
+        "stand": "form-native-table-palette-difvc5hh",
+        "locale": "ru",
+        "pass": "clean-tree",
+        "exitCode": 1,
+        "sourcesUnchanged": true
+      },
+      {
+        "stand": "form-native-table-palette-extra-da1ksb3g",
+        "locale": "en",
+        "pass": "clean-list",
+        "exitCode": 0,
+        "sourcesUnchanged": true
+      },
+      {
+        "stand": "form-native-table-palette-extra-da1ksb3g",
+        "locale": "ru",
+        "pass": "clean-list",
+        "exitCode": 1,
+        "sourcesUnchanged": true
+      }
+    ],
+    "discardAndSetupFailures": [
+      "The first scan attempted to open a configuration that was already open and entered the export dialog. No form evidence was used.",
+      "A first multi-form run left the previous MDI editor focused and was stopped. Accepted scans verify that each editor is closed before opening the next.",
+      "Opening the ValueTree and ValueList test editors marked the configurations changed. Some sessions reached all captures but failed in close-dialog automation. The paired snapshots are retained, and ibcmd re-export verifies unchanged form bytes. The focused English repeats closed with No.",
+      "The first synthetic document import lacked InternalInfo. A fresh test configuration used generated document type identities.",
+      "The first layout scan completed its English captures but its screenshot helper stalled after the native window had closed. The helper was stopped and the Russian repeat completed with exit 0.",
+      "The manual-limit UI ran successfully. Its first ibcmd export inherited the private desktop runtime and could not access the container. Export from the host environment succeeded."
+    ]
+  },
+  "baseline": {
+    "stand": "form-table-palette-rpc-baseline-_hb_m154",
+    "selectedElements": 20,
+    "catalogued": 0,
+    "file": "baseline.json"
+  },
+  "installed": {
+    "stand": "form-batch-EcOHbs",
+    "vsixSha256": "dd021105ef18cbaf489c20bae331a75e55d6a54aaed4e7e35aab5cac43ac5682",
+    "backendSha256": "25c2b74f761c698bfe2a5d4e2abd19c18b34db63f5ee243643634d8d32255d6d",
+    "runtimeManifestSha256": "254f94fbb26b4459135ef390bebc81d40bae22bdb5951164c0efb0d0246c25ad",
+    "runtimeFiles": 1262,
+    "frozenWitnessesUnchanged": true,
+    "runs": [
+      {
+        "suite": "table-palette",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "inputsStable": true,
+        "log": "table-palette-en/driver.log",
+        "receipt": "table-palette-en/receipt.json",
+        "states": 28,
+        "cases": [
+          "ValueTable/Rows",
+          "dirty-table-limit-and-xml-navigation",
+          "table-limit-returns-to-automatic",
+          "ManualBounds/Rows",
+          "Unbound/Rows",
+          "ValueTree/Rows",
+          "DynamicList/Rows",
+          "DynamicRefresh/Rows",
+          "DynamicHierarchy/Rows",
+          "MetadataTable/Rows",
+          "Vertical/Group",
+          "VerticalHeader/Group",
+          "column-header-dirty-keeps-raw-value-and-expanded-title",
+          "Horizontal/Group",
+          "HorizontalHeader/Group",
+          "InCell/Group",
+          "Nested/DepthColumns",
+          "Nested/NestedColumns",
+          "ManualRowsDrag/Rows",
+          "ValueList/Rows",
+          "DynamicPeriod/Rows",
+          "DynamicQuery/Rows",
+          "HeightInRows/Rows",
+          "HeightInFormRows/Rows",
+          "ContentHeight/Rows",
+          "DropOnly/Rows",
+          "DragOnly/Rows",
+          "ManualTableRows/Rows"
+        ]
+      },
+      {
+        "suite": "table-palette",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "inputsStable": true,
+        "log": "table-palette-ru/driver.log",
+        "receipt": "table-palette-ru/receipt.json",
+        "states": 28,
+        "cases": [
+          "ValueTable/Rows",
+          "dirty-table-limit-and-xml-navigation",
+          "table-limit-returns-to-automatic",
+          "ManualBounds/Rows",
+          "Unbound/Rows",
+          "ValueTree/Rows",
+          "DynamicList/Rows",
+          "DynamicRefresh/Rows",
+          "DynamicHierarchy/Rows",
+          "MetadataTable/Rows",
+          "Vertical/Group",
+          "VerticalHeader/Group",
+          "column-header-dirty-keeps-raw-value-and-expanded-title",
+          "Horizontal/Group",
+          "HorizontalHeader/Group",
+          "InCell/Group",
+          "Nested/DepthColumns",
+          "Nested/NestedColumns",
+          "ManualRowsDrag/Rows",
+          "ValueList/Rows",
+          "DynamicPeriod/Rows",
+          "DynamicQuery/Rows",
+          "HeightInRows/Rows",
+          "HeightInFormRows/Rows",
+          "ContentHeight/Rows",
+          "DropOnly/Rows",
+          "DragOnly/Rows",
+          "ManualTableRows/Rows"
+        ]
+      },
+      {
+        "suite": "property-catalogue",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "inputsStable": true,
+        "log": "property-catalogue-en/driver.log",
+        "receipt": "property-catalogue-en/receipt.json",
+        "states": 30
+      },
+      {
+        "suite": "property-catalogue",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "inputsStable": true,
+        "log": "property-catalogue-ru/driver.log",
+        "receipt": "property-catalogue-ru/receipt.json",
+        "states": 30
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "inputsStable": true,
+        "log": "tables-en/driver.log",
+        "receipt": "tables-en/receipt.json",
+        "states": 17
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "inputsStable": true,
+        "log": "tables-ru/driver.log",
+        "receipt": "tables-ru/receipt.json",
+        "states": 17
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "passed": true,
+        "exitCode": 0,
+        "inputsStable": true,
+        "log": "preview-en/driver.log",
+        "receipt": "preview-en/receipt.json",
+        "states": 1
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "passed": true,
+        "exitCode": 0,
+        "inputsStable": true,
+        "log": "preview-ru/driver.log",
+        "receipt": "preview-ru/receipt.json",
+        "states": 1
+      }
+    ],
+    "states": 152,
+    "nativeTablePaletteStates": 56
+  },
+  "validation": {
+    "stand": "form-table-palette-validation-kb715h1p",
+    "logs": {
+      "pass-fmt": {
+        "file": "eska-table-palette-pass-fmt.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "pass-check": {
+        "file": "eska-table-palette-pass-check.log",
+        "sha256": "59639588a6f1826f129cbcd121edc07279dab94786f5fa5bde6b3439b2e845cc"
+      },
+      "pass-clippy": {
+        "file": "eska-table-palette-pass-clippy.log",
+        "sha256": "57e6c3614a4988dea95ccc18668cf57697813f34d7f4654e5e5da8382c9f5939"
+      },
+      "pass-test": {
+        "file": "eska-table-palette-pass-test.log",
+        "sha256": "754439e966620a016269ac93eb7f54ffed42370b7ee86fe76951588d243c9513"
+      },
+      "rpc": {
+        "file": "eska-table-palette-rpc.log",
+        "sha256": "3723cd534298b5aed831ee6e52db0f0660a265344d3e977db3ae72136f3c0c83"
+      },
+      "node": {
+        "file": "eska-table-palette-node.log",
+        "sha256": "1d5f1ee6cb835ca6b0d175cb3b2696b7fd1c10875b4f88589c8d44bf1c095918"
+      },
+      "cargo-clippy": {
+        "file": "eska-table-palette-cargo-clippy.log",
+        "sha256": "8b0a77b5930be5d384849ec9a5e5c4b75855c141d3d7edbb379e234d7a63bb84"
+      },
+      "final-clippy": {
+        "file": "eska-table-palette-final-clippy.log",
+        "sha256": "49369b53cbc8d183ea5f7444981455cd06712304578be5560d80be24d7b7b829"
+      }
+    },
+    "node": {
+      "tests": 735,
+      "pass": 727,
+      "fail": 0,
+      "skipped": 8
+    },
+    "rust": {
+      "passed": 1575,
+      "ignored": 19,
+      "failed": 0
+    },
+    "commands": [
+      "cargo fmt --check",
+      "cargo check",
+      "cargo clippy --all-targets --all-features -- -D warnings",
+      "ESKA_TEST_ROOT=<absolute sibling playground> cargo test",
+      "npm run test:node with the same ESKA_TEST_ROOT and backend paths",
+      "git diff --check"
+    ]
+  },
+  "limits": [
+    "The hierarchical NativeGoods variant is exercised through the real RPC in its own configuration. The installed matrix uses nonhierarchical NativeGoods so it can coexist with the object tabular-section fixture.",
+    "The manual row-limit round trip was recorded natively in English. Both installed locales and RPC locales exercise the exact XML alias.",
+    "The wider property catalogue, unmeasured enum labels and Windows native parity remain open."
+  ]
+}

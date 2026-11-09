@@ -1,0 +1,2381 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "linux-arm64",
+  "compatibility": "Version8_3_27",
+  "captions": {
+    "Name": {
+      "ru-RU": "Имя",
+      "en-US": "Name"
+    },
+    "Title": {
+      "ru-RU": "Заголовок",
+      "en-US": "Title"
+    },
+    "Type": {
+      "ru-RU": "Вид",
+      "en-US": "Type"
+    },
+    "CommandSource": {
+      "ru-RU": "Источник команд",
+      "en-US": "Command source"
+    },
+    "View": {
+      "ru-RU": "Отображение",
+      "en-US": "View"
+    },
+    "Visible": {
+      "ru-RU": "Видимость",
+      "en-US": "Visible"
+    },
+    "UserVisibility": {
+      "ru-RU": "Пользовательская видимость",
+      "en-US": "User visibility"
+    },
+    "Enabled": {
+      "ru-RU": "Доступность",
+      "en-US": "Enabled"
+    },
+    "ReadOnly": {
+      "ru-RU": "ТолькоПросмотр",
+      "en-US": "ReadOnly"
+    },
+    "EnableContentChange": {
+      "ru-RU": "РазрешитьИзменениеСостава",
+      "en-US": "EnableContentChange"
+    },
+    "DisplayImportance": {
+      "ru-RU": "ВажностьПриОтображении",
+      "en-US": "DisplayImportance"
+    },
+    "Representation": {
+      "ru-RU": "Отображение",
+      "en-US": "Representation"
+    },
+    "ToolTip": {
+      "ru-RU": "Подсказка",
+      "en-US": "ToolTip"
+    },
+    "ToolTipRepresentation": {
+      "ru-RU": "ОтображениеПодсказки",
+      "en-US": "ToolTipRepresentation"
+    },
+    "HorizontalAlign": {
+      "ru-RU": "ГоризонтальноеПоложение",
+      "en-US": "HorizontalAlign"
+    },
+    "Picture": {
+      "ru-RU": "Картинка",
+      "en-US": "Picture"
+    },
+    "TitleTextColor": {
+      "ru-RU": "ЦветТекстаЗаголовка",
+      "en-US": "TitleTextColor"
+    },
+    "TitleFont": {
+      "ru-RU": "ШрифтЗаголовка",
+      "en-US": "TitleFont"
+    },
+    "Shape": {
+      "ru-RU": "Фигура",
+      "en-US": "Shape"
+    },
+    "ShapeRepresentation": {
+      "ru-RU": "ОтображениеФигуры",
+      "en-US": "ShapeRepresentation"
+    },
+    "BackColor": {
+      "ru-RU": "ЦветФона",
+      "en-US": "BackColor"
+    },
+    "BorderColor": {
+      "ru-RU": "ЦветРамки",
+      "en-US": "BorderColor"
+    },
+    "Width": {
+      "ru-RU": "Ширина",
+      "en-US": "Width"
+    },
+    "HorizontalAlignInGroup": {
+      "ru-RU": "ГоризонтальноеПоложениеВГруппе",
+      "en-US": "HorizontalAlignInGroup"
+    },
+    "VerticalAlignInGroup": {
+      "ru-RU": "ВертикальноеПоложениеВГруппе",
+      "en-US": "VerticalAlignInGroup"
+    },
+    "HorizontalStretch": {
+      "ru-RU": "РастягиватьПоГоризонтали",
+      "en-US": "HorizontalStretch"
+    },
+    "VerticalStretch": {
+      "ru-RU": "РастягиватьПоВертикали",
+      "en-US": "VerticalStretch"
+    },
+    "AutoFill": {
+      "ru-RU": "Автозаполнение",
+      "en-US": "AutoFill"
+    },
+    "Source": {
+      "ru-RU": "Источник",
+      "en-US": "Source"
+    },
+    "ButtonBackColor": {
+      "ru-RU": "ЦветФонаКнопок",
+      "en-US": "ButtonBackColor"
+    },
+    "TextColor": {
+      "ru-RU": "ЦветТекста",
+      "en-US": "TextColor"
+    },
+    "Font": {
+      "ru-RU": "Шрифт",
+      "en-US": "Font"
+    },
+    "Border": {
+      "ru-RU": "Рамка",
+      "en-US": "Border"
+    },
+    "AutoMaxWidth": {
+      "ru-RU": "АвтоМаксимальнаяШирина",
+      "en-US": "AutoMaxWidth"
+    },
+    "MaxWidth": {
+      "ru-RU": "МаксимальнаяШирина",
+      "en-US": "MaxWidth"
+    }
+  },
+  "profiles": {
+    "autoBar": [
+      "DisplayImportance",
+      "AutoFill",
+      "HorizontalAlign"
+    ],
+    "commandBar": [
+      "Name",
+      "Title",
+      "Type",
+      "CommandSource",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "EnableContentChange",
+      "DisplayImportance",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "HorizontalAlign",
+      "TitleTextColor",
+      "TitleFont",
+      "Width",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "HorizontalStretch",
+      "VerticalStretch"
+    ],
+    "buttonGroup": [
+      "Name",
+      "Title",
+      "Type",
+      "CommandSource",
+      "View",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "EnableContentChange",
+      "DisplayImportance",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "TitleTextColor",
+      "TitleFont",
+      "Width",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "HorizontalStretch",
+      "VerticalStretch"
+    ],
+    "submenu": [
+      "Name",
+      "Title",
+      "Type",
+      "CommandSource",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "EnableContentChange",
+      "DisplayImportance",
+      "Representation",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "Picture",
+      "TitleTextColor",
+      "TitleFont",
+      "Shape",
+      "ShapeRepresentation",
+      "BackColor",
+      "BorderColor",
+      "Width",
+      "HorizontalStretch",
+      "VerticalStretch"
+    ],
+    "ownedSearch": [
+      "Title",
+      "Enabled",
+      "DisplayImportance",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "BackColor",
+      "TextColor",
+      "BorderColor",
+      "Font",
+      "Width",
+      "AutoMaxWidth",
+      "HorizontalStretch"
+    ],
+    "ownedSearchManual": [
+      "Title",
+      "Enabled",
+      "DisplayImportance",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "BackColor",
+      "TextColor",
+      "BorderColor",
+      "Font",
+      "Width",
+      "AutoMaxWidth",
+      "MaxWidth",
+      "HorizontalStretch"
+    ],
+    "ownedStatus": [
+      "Title",
+      "Enabled",
+      "DisplayImportance",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "BackColor",
+      "ButtonBackColor",
+      "TextColor",
+      "Font",
+      "TitleTextColor",
+      "TitleFont",
+      "BorderColor",
+      "Border",
+      "Width",
+      "AutoMaxWidth",
+      "HorizontalStretch",
+      "HorizontalAlign"
+    ],
+    "ownedStatusManual": [
+      "Title",
+      "Enabled",
+      "DisplayImportance",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "BackColor",
+      "ButtonBackColor",
+      "TextColor",
+      "Font",
+      "TitleTextColor",
+      "TitleFont",
+      "BorderColor",
+      "Border",
+      "Width",
+      "AutoMaxWidth",
+      "MaxWidth",
+      "HorizontalStretch",
+      "HorizontalAlign"
+    ],
+    "externalSearch": [
+      "Name",
+      "Title",
+      "Type",
+      "Source",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "DisplayImportance",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "BackColor",
+      "TextColor",
+      "BorderColor",
+      "Font",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "Width",
+      "AutoMaxWidth",
+      "HorizontalStretch"
+    ],
+    "externalSearchManual": [
+      "Name",
+      "Title",
+      "Type",
+      "Source",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "DisplayImportance",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "BackColor",
+      "TextColor",
+      "BorderColor",
+      "Font",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "Width",
+      "AutoMaxWidth",
+      "MaxWidth",
+      "HorizontalStretch"
+    ],
+    "externalStatus": [
+      "Name",
+      "Title",
+      "Type",
+      "Source",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "DisplayImportance",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "BackColor",
+      "ButtonBackColor",
+      "TextColor",
+      "Font",
+      "TitleTextColor",
+      "TitleFont",
+      "BorderColor",
+      "Border",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "HorizontalAlign",
+      "Width",
+      "AutoMaxWidth",
+      "HorizontalStretch"
+    ],
+    "externalStatusManual": [
+      "Name",
+      "Title",
+      "Type",
+      "Source",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "DisplayImportance",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "BackColor",
+      "ButtonBackColor",
+      "TextColor",
+      "Font",
+      "TitleTextColor",
+      "TitleFont",
+      "BorderColor",
+      "Border",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "HorizontalAlign",
+      "Width",
+      "AutoMaxWidth",
+      "MaxWidth",
+      "HorizontalStretch"
+    ]
+  },
+  "additionSourceMembers": {
+    "SearchExtra": {
+      "ru-RU": "СтрокаПоиска",
+      "en-US": "SearchString"
+    },
+    "ManageExtra": {
+      "ru-RU": "УправлениеПоиском",
+      "en-US": "SearchControl"
+    },
+    "StatusExtra": {
+      "ru-RU": "СостояниеПросмотра",
+      "en-US": "ViewStatus"
+    }
+  },
+  "rows": [
+    {
+      "name": "PlainCommands",
+      "file": "PlainCommands.xml",
+      "canonicalSha256": "fb549aadfe21d5461d20c40191ac2bcf94631b754020c6f5301991fbb58e771e",
+      "fixtureSha256": "146b66763f5e6330b03d360cd7c245d6c83ebf98b7a14c1b0e5f4da2122a7ea9",
+      "selections": [
+        {
+          "name": "PlainBar",
+          "profile": "commandBar",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "PlainBar"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "CommandBar",
+              "caption": {
+                "ru-RU": "Командная панель",
+                "en-US": "Command bar"
+              }
+            },
+            "CommandSource": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "left"
+              },
+              "caption": {
+                "ru-RU": "Лево",
+                "en-US": "Left"
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "autoStretch"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Default"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "BarGroup",
+          "profile": "buttonGroup",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "BarGroup"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ButtonGroup",
+              "caption": {
+                "ru-RU": "Группа кнопок",
+                "en-US": "Button group"
+              }
+            },
+            "UserVisibility": {
+              "kind": "absent",
+              "default": {
+                "kind": "dialog"
+              },
+              "caption": {
+                "ru-RU": "Открыть",
+                "en-US": "Open"
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "ReadOnly": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "TitleFont": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "View": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "BarMenu",
+          "profile": "submenu",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "BarMenu"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "Popup",
+              "caption": {
+                "ru-RU": "Подменю",
+                "en-US": "Submenu"
+              }
+            },
+            "UserVisibility": {
+              "kind": "absent",
+              "default": {
+                "kind": "dialog"
+              },
+              "caption": {
+                "ru-RU": "Открыть",
+                "en-US": "Open"
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "ReadOnly": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "TitleFont": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              }
+            },
+            "Picture": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "PictureMenu",
+          "profile": "submenu",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "PictureMenu"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "Popup",
+              "caption": {
+                "ru-RU": "Подменю",
+                "en-US": "Submenu"
+              }
+            },
+            "UserVisibility": {
+              "kind": "absent",
+              "default": {
+                "kind": "dialog"
+              },
+              "caption": {
+                "ru-RU": "Открыть",
+                "en-US": "Open"
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "ReadOnly": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "TitleFont": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "Representation": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Картинка",
+                "en-US": "Icon"
+              }
+            },
+            "Picture": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "RootGroup",
+          "profile": "buttonGroup",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "RootGroup"
+            },
+            "Type": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "UserVisibility": {
+              "kind": "absent",
+              "default": {
+                "kind": "dialog"
+              },
+              "caption": {
+                "ru-RU": "Открыть",
+                "en-US": "Open"
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "ReadOnly": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "TitleFont": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "View": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "RootMenu",
+          "profile": "submenu",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "RootMenu"
+            },
+            "Type": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "UserVisibility": {
+              "kind": "absent",
+              "default": {
+                "kind": "dialog"
+              },
+              "caption": {
+                "ru-RU": "Открыть",
+                "en-US": "Open"
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "ReadOnly": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "TitleFont": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              }
+            },
+            "Picture": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RootAuto",
+      "file": "RootAuto.xml",
+      "canonicalSha256": "ea15583aaf38ae73849f84837e6cd25645de669417843869c2e95e54d9f06a36",
+      "fixtureSha256": "c67715c37579e7fe7b463befd18251ac6f14432ea179b22674429f7f1f3b551e",
+      "selections": [
+        {
+          "name": "FormCommandBar",
+          "profile": "autoBar",
+          "unavailable": [],
+          "values": {
+            "DisplayImportance": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "AutoFill": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "left"
+              },
+              "caption": {
+                "ru-RU": "Лево",
+                "en-US": "Left"
+              }
+            }
+          },
+          "categories": [
+            "main"
+          ]
+        },
+        {
+          "name": "AutoGroup",
+          "profile": "buttonGroup",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "AutoGroup"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ButtonGroup",
+              "caption": {
+                "ru-RU": "Группа кнопок",
+                "en-US": "Button group"
+              }
+            },
+            "UserVisibility": {
+              "kind": "absent",
+              "default": {
+                "kind": "dialog"
+              },
+              "caption": {
+                "ru-RU": "Открыть",
+                "en-US": "Open"
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "ReadOnly": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "TitleFont": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "View": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "AutoMenu",
+          "profile": "submenu",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "AutoMenu"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "Popup",
+              "caption": {
+                "ru-RU": "Подменю",
+                "en-US": "Submenu"
+              }
+            },
+            "UserVisibility": {
+              "kind": "absent",
+              "default": {
+                "kind": "dialog"
+              },
+              "caption": {
+                "ru-RU": "Открыть",
+                "en-US": "Open"
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "ReadOnly": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "TitleFont": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              }
+            },
+            "Picture": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Static",
+      "file": "Static.xml",
+      "canonicalSha256": "ba7b8c82c41a84b00dcd8a50e1f98519d759b56adcd21adc96e18ebc3a35ebbf",
+      "fixtureSha256": "ebfe254682011846274f3fe625b56e710db348a93a90c134e1aac528ddf027fd",
+      "selections": [
+        {
+          "name": "RowsBar",
+          "profile": "autoBar",
+          "unavailable": [],
+          "values": {
+            "DisplayImportance": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "AutoFill": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "left"
+              },
+              "caption": {
+                "ru-RU": "Лево",
+                "en-US": "Left"
+              }
+            }
+          },
+          "categories": [
+            "main"
+          ]
+        },
+        {
+          "name": "SearchOwned",
+          "profile": "ownedSearch",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "StatusOwned",
+          "profile": "ownedStatus",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Border": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "noBorder"
+              },
+              "caption": {
+                "ru-RU": "Нет рамки",
+                "en-US": "None"
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "ManageOwned",
+          "profile": "ownedSearch",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dynamic",
+      "file": "Dynamic.xml",
+      "canonicalSha256": "c6803ea1429783d1b2ea70a99e8511113769d126f2738c2166369ca9650192f1",
+      "fixtureSha256": "06abe6077aee5bbba1c5bff29e8b116709db199ad9f64d30065a488ec8044cf0",
+      "selections": [
+        {
+          "name": "RowsBar",
+          "profile": "autoBar",
+          "unavailable": [],
+          "values": {
+            "DisplayImportance": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "AutoFill": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "left"
+              },
+              "caption": {
+                "ru-RU": "Лево",
+                "en-US": "Left"
+              }
+            }
+          },
+          "categories": [
+            "main"
+          ]
+        },
+        {
+          "name": "SearchOwned",
+          "profile": "ownedSearch",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "StatusOwned",
+          "profile": "ownedStatus",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Border": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "noBorder"
+              },
+              "caption": {
+                "ru-RU": "Нет рамки",
+                "en-US": "None"
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "ManageOwned",
+          "profile": "ownedSearch",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TableAuto",
+      "file": "TableAuto.xml",
+      "canonicalSha256": "103d4bb6cd3b7f664bab2f0a53652a5894818e27fec0a6672882486d5c6c3071",
+      "fixtureSha256": "4f5dee418bdbbf8248a9db0f58a0bfb654098d32f973b9d180b5349d943053ae",
+      "selections": [
+        {
+          "name": "RowsBar",
+          "profile": "autoBar",
+          "unavailable": [],
+          "values": {
+            "DisplayImportance": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "AutoFill": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "left"
+              },
+              "caption": {
+                "ru-RU": "Лево",
+                "en-US": "Left"
+              }
+            }
+          },
+          "categories": [
+            "main"
+          ]
+        },
+        {
+          "name": "TableGroup",
+          "profile": "buttonGroup",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "TableGroup"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ButtonGroup",
+              "caption": {
+                "ru-RU": "Группа кнопок",
+                "en-US": "Button group"
+              }
+            },
+            "UserVisibility": {
+              "kind": "absent",
+              "default": {
+                "kind": "dialog"
+              },
+              "caption": {
+                "ru-RU": "Открыть",
+                "en-US": "Open"
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "ReadOnly": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "TitleFont": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "View": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "TableMenu",
+          "profile": "submenu",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "TableMenu"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "Popup",
+              "caption": {
+                "ru-RU": "Подменю",
+                "en-US": "Submenu"
+              }
+            },
+            "UserVisibility": {
+              "kind": "absent",
+              "default": {
+                "kind": "dialog"
+              },
+              "caption": {
+                "ru-RU": "Открыть",
+                "en-US": "Open"
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "ReadOnly": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "TitleFont": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              }
+            },
+            "Picture": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "External",
+      "file": "External.xml",
+      "canonicalSha256": "0e9632e49d0fcafb4e32718fad2ba3b7c6f7a7b27dc450fe45030f87029da0e3",
+      "fixtureSha256": "69031ac3fead046b770c91c46b742debcda5a34ff2c4b1a96a5de9dcb8dd16ac",
+      "selections": [
+        {
+          "name": "BoundBar",
+          "profile": "commandBar",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "BoundBar"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "CommandBar",
+              "caption": {
+                "ru-RU": "Командная панель",
+                "en-US": "Command bar"
+              }
+            },
+            "CommandSource": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Rows",
+                "en-US": "Rows"
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "left"
+              },
+              "caption": {
+                "ru-RU": "Лево",
+                "en-US": "Left"
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "autoStretch"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Default"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "RowsBar",
+          "profile": "autoBar",
+          "unavailable": [],
+          "values": {
+            "DisplayImportance": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "AutoFill": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "left"
+              },
+              "caption": {
+                "ru-RU": "Лево",
+                "en-US": "Left"
+              }
+            }
+          },
+          "categories": [
+            "main"
+          ]
+        },
+        {
+          "name": "SearchOwned",
+          "profile": "ownedSearch",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "StatusOwned",
+          "profile": "ownedStatus",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Border": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "noBorder"
+              },
+              "caption": {
+                "ru-RU": "Нет рамки",
+                "en-US": "None"
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "ManageOwned",
+          "profile": "ownedSearch",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "SearchExtra",
+          "profile": "externalSearch",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "SearchStringAddition",
+              "caption": {
+                "ru-RU": "Отображение строки поиска",
+                "en-US": "Search bar"
+              }
+            },
+            "Source": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Visible": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "StatusExtra",
+          "profile": "externalStatus",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Border": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "noBorder"
+              },
+              "caption": {
+                "ru-RU": "Нет рамки",
+                "en-US": "None"
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ViewStatusAddition",
+              "caption": {
+                "ru-RU": "Отображение состояния просмотра",
+                "en-US": "View status"
+              }
+            },
+            "Source": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Visible": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "ManageExtra",
+          "profile": "externalSearch",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "SearchControlAddition",
+              "caption": {
+                "ru-RU": "Управление поиском",
+                "en-US": "Search management"
+              }
+            },
+            "Source": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Visible": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pdf",
+      "file": "Pdf.xml",
+      "canonicalSha256": "4dc6f088d6edf5b6392557c8a836818712348c967a72408d94a5befd091e5a14",
+      "fixtureSha256": "c2fcf217202030086af962f0e424207a6698ddb78978c2087ba5fcae42bc6bc1",
+      "selections": [
+        {
+          "name": "PdfStatus",
+          "profile": "ownedStatus",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Border": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "noBorder"
+              },
+              "caption": {
+                "ru-RU": "Нет рамки",
+                "en-US": "None"
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tuned",
+      "file": "Tuned.xml",
+      "canonicalSha256": "a75114a0f532629c188d2bc78c3f7cea5c9ea8a01d967f456d46a213a47356c6",
+      "fixtureSha256": "a52c85997c631efa019e7bee849ea0d83414557bb33342657b29a0eb5e4a02b0",
+      "selections": [
+        {
+          "name": "BoundBar",
+          "profile": "commandBar",
+          "unavailable": [],
+          "values": {
+            "Name": {
+              "kind": "name",
+              "value": "BoundBar"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "CommandBar",
+              "caption": {
+                "ru-RU": "Командная панель",
+                "en-US": "Command bar"
+              }
+            },
+            "CommandSource": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "left"
+              },
+              "caption": {
+                "ru-RU": "Лево",
+                "en-US": "Left"
+              }
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Да",
+                "en-US": "Yes"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "SearchOwned",
+          "profile": "ownedSearchManual",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Width": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "MaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "StatusOwned",
+          "profile": "ownedStatusManual",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Border": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "noBorder"
+              },
+              "caption": {
+                "ru-RU": "Нет рамки",
+                "en-US": "None"
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "MaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "ManageExtra",
+          "profile": "externalSearchManual",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Width": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "SearchControlAddition",
+              "caption": {
+                "ru-RU": "Управление поиском",
+                "en-US": "Search management"
+              }
+            },
+            "Source": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Visible": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "MaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "HorizontalStretch": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Да",
+                "en-US": "Yes"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        },
+        {
+          "name": "StatusExtra",
+          "profile": "externalStatusManual",
+          "unavailable": [],
+          "values": {
+            "AutoMaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Width": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Enabled": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Border": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "noBorder"
+              },
+              "caption": {
+                "ru-RU": "Нет рамки",
+                "en-US": "None"
+              }
+            },
+            "HorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ViewStatusAddition",
+              "caption": {
+                "ru-RU": "Отображение состояния просмотра",
+                "en-US": "View status"
+              }
+            },
+            "Source": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Visible": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "MaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "HorizontalAlignInGroup": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Право",
+                "en-US": "Right"
+              }
+            },
+            "VerticalAlignInGroup": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Низ",
+                "en-US": "Bottom"
+              }
+            }
+          },
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ]
+        }
+      ]
+    }
+  ]
+}

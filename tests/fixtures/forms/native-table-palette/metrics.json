@@ -1,0 +1,5415 @@
+{
+  "schemaVersion": 1,
+  "profile": "8.3.27.2342 Taxi, Linux ARM64, X11",
+  "compatibility": "Version8_3_27",
+  "profiles": {
+    "table": [
+      "Name",
+      "Title",
+      "DataPath",
+      "TitleLocation",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "AutofillColumns",
+      "SkipOnInput",
+      "DefaultItem",
+      "ChoiceMode",
+      "MultipleChoice",
+      "DisplayImportance",
+      "OnMainServerUnavailableBehavior",
+      "CommandBarLocation",
+      "ChangeRowSet",
+      "ChangeRowOrder",
+      "CommandSet",
+      "Representation",
+      "RowInputMode",
+      "SelectionMode",
+      "RowSelectionMode",
+      "Header",
+      "Footer",
+      "Output",
+      "AutoInsertNewRow",
+      "AutoAddIncomplete",
+      "AutoMarkIncomplete",
+      "SearchOnInput",
+      "Shortcut",
+      "EnableStartDrag",
+      "EnableDrag",
+      "FileDragMode",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "RowPictureDataPath",
+      "RowsPicture",
+      "HorizontalScrollBar",
+      "VerticalScrollBar",
+      "InitialListView",
+      "InitialTreeView",
+      "SearchStringLocation",
+      "ViewStatusLocation",
+      "SearchControlLocation",
+      "RefreshRequest",
+      "CurrentRowUse",
+      "BehaviorOnHorizontalCompression",
+      "HorizontalLines",
+      "VerticalLines",
+      "UseAlternationRowColor",
+      "BackColor",
+      "TextColor",
+      "BorderColor",
+      "Font",
+      "TitleTextColor",
+      "TitleFont",
+      "Width",
+      "AutoMaxWidth",
+      "HeightControlVariant",
+      "Height",
+      "AutoMaxHeight",
+      "HeightInTableRows",
+      "AutoMaxHeightInTableRows",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "HorizontalStretch",
+      "VerticalStretch",
+      "HeaderHeight",
+      "FooterHeight",
+      "TitleHeight",
+      "OnChange",
+      "Selection",
+      "OnActivateRow",
+      "ValueChoice",
+      "OnActivateField",
+      "OnActivateCell",
+      "BeforeAddRow",
+      "BeforeRowChange",
+      "BeforeDeleteRow",
+      "OnStartEdit",
+      "BeforeEditEnd",
+      "OnEditEnd",
+      "ChoiceProcessing",
+      "BeforeExpand",
+      "BeforeCollapse",
+      "AfterDeleteRow",
+      "OnCurrentParentChange",
+      "NewWriteProcessing",
+      "RefreshRequestProcessing",
+      "DragStart",
+      "DragCheck",
+      "DragEnd",
+      "Drag"
+    ],
+    "manualBounds": [
+      "Name",
+      "Title",
+      "DataPath",
+      "TitleLocation",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "AutofillColumns",
+      "SkipOnInput",
+      "DefaultItem",
+      "ChoiceMode",
+      "MultipleChoice",
+      "DisplayImportance",
+      "OnMainServerUnavailableBehavior",
+      "CommandBarLocation",
+      "ChangeRowSet",
+      "ChangeRowOrder",
+      "CommandSet",
+      "Representation",
+      "RowInputMode",
+      "SelectionMode",
+      "RowSelectionMode",
+      "Header",
+      "Footer",
+      "Output",
+      "AutoInsertNewRow",
+      "AutoAddIncomplete",
+      "AutoMarkIncomplete",
+      "SearchOnInput",
+      "Shortcut",
+      "EnableStartDrag",
+      "EnableDrag",
+      "FileDragMode",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "RowPictureDataPath",
+      "RowsPicture",
+      "HorizontalScrollBar",
+      "VerticalScrollBar",
+      "InitialListView",
+      "InitialTreeView",
+      "SearchStringLocation",
+      "ViewStatusLocation",
+      "SearchControlLocation",
+      "RefreshRequest",
+      "CurrentRowUse",
+      "BehaviorOnHorizontalCompression",
+      "HorizontalLines",
+      "VerticalLines",
+      "UseAlternationRowColor",
+      "BackColor",
+      "TextColor",
+      "BorderColor",
+      "Font",
+      "TitleTextColor",
+      "TitleFont",
+      "Width",
+      "AutoMaxWidth",
+      "MaxWidth",
+      "HeightControlVariant",
+      "Height",
+      "AutoMaxHeight",
+      "MaxHeight",
+      "HeightInTableRows",
+      "AutoMaxHeightInTableRows",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "HorizontalStretch",
+      "VerticalStretch",
+      "HeaderHeight",
+      "FooterHeight",
+      "TitleHeight",
+      "OnChange",
+      "Selection",
+      "OnActivateRow",
+      "ValueChoice",
+      "OnActivateField",
+      "OnActivateCell",
+      "BeforeAddRow",
+      "BeforeRowChange",
+      "BeforeDeleteRow",
+      "OnStartEdit",
+      "BeforeEditEnd",
+      "OnEditEnd",
+      "ChoiceProcessing",
+      "BeforeExpand",
+      "BeforeCollapse",
+      "AfterDeleteRow",
+      "OnCurrentParentChange",
+      "NewWriteProcessing",
+      "RefreshRequestProcessing",
+      "DragStart",
+      "DragCheck",
+      "DragEnd",
+      "Drag"
+    ],
+    "manualFormHeight": [
+      "Name",
+      "Title",
+      "DataPath",
+      "TitleLocation",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "AutofillColumns",
+      "SkipOnInput",
+      "DefaultItem",
+      "ChoiceMode",
+      "MultipleChoice",
+      "DisplayImportance",
+      "OnMainServerUnavailableBehavior",
+      "CommandBarLocation",
+      "ChangeRowSet",
+      "ChangeRowOrder",
+      "CommandSet",
+      "Representation",
+      "RowInputMode",
+      "SelectionMode",
+      "RowSelectionMode",
+      "Header",
+      "Footer",
+      "Output",
+      "AutoInsertNewRow",
+      "AutoAddIncomplete",
+      "AutoMarkIncomplete",
+      "SearchOnInput",
+      "Shortcut",
+      "EnableStartDrag",
+      "EnableDrag",
+      "FileDragMode",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "RowPictureDataPath",
+      "RowsPicture",
+      "HorizontalScrollBar",
+      "VerticalScrollBar",
+      "InitialListView",
+      "InitialTreeView",
+      "SearchStringLocation",
+      "ViewStatusLocation",
+      "SearchControlLocation",
+      "RefreshRequest",
+      "CurrentRowUse",
+      "BehaviorOnHorizontalCompression",
+      "HorizontalLines",
+      "VerticalLines",
+      "UseAlternationRowColor",
+      "BackColor",
+      "TextColor",
+      "BorderColor",
+      "Font",
+      "TitleTextColor",
+      "TitleFont",
+      "Width",
+      "AutoMaxWidth",
+      "HeightControlVariant",
+      "Height",
+      "AutoMaxHeight",
+      "MaxHeight",
+      "HeightInTableRows",
+      "AutoMaxHeightInTableRows",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "HorizontalStretch",
+      "VerticalStretch",
+      "HeaderHeight",
+      "FooterHeight",
+      "TitleHeight",
+      "OnChange",
+      "Selection",
+      "OnActivateRow",
+      "ValueChoice",
+      "OnActivateField",
+      "OnActivateCell",
+      "BeforeAddRow",
+      "BeforeRowChange",
+      "BeforeDeleteRow",
+      "OnStartEdit",
+      "BeforeEditEnd",
+      "OnEditEnd",
+      "ChoiceProcessing",
+      "BeforeExpand",
+      "BeforeCollapse",
+      "AfterDeleteRow",
+      "OnCurrentParentChange",
+      "NewWriteProcessing",
+      "RefreshRequestProcessing",
+      "DragStart",
+      "DragCheck",
+      "DragEnd",
+      "Drag"
+    ],
+    "manualTableRows": [
+      "Name",
+      "Title",
+      "DataPath",
+      "TitleLocation",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "AutofillColumns",
+      "SkipOnInput",
+      "DefaultItem",
+      "ChoiceMode",
+      "MultipleChoice",
+      "DisplayImportance",
+      "OnMainServerUnavailableBehavior",
+      "CommandBarLocation",
+      "ChangeRowSet",
+      "ChangeRowOrder",
+      "CommandSet",
+      "Representation",
+      "RowInputMode",
+      "SelectionMode",
+      "RowSelectionMode",
+      "Header",
+      "Footer",
+      "Output",
+      "AutoInsertNewRow",
+      "AutoAddIncomplete",
+      "AutoMarkIncomplete",
+      "SearchOnInput",
+      "Shortcut",
+      "EnableStartDrag",
+      "EnableDrag",
+      "FileDragMode",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "RowPictureDataPath",
+      "RowsPicture",
+      "HorizontalScrollBar",
+      "VerticalScrollBar",
+      "InitialListView",
+      "InitialTreeView",
+      "SearchStringLocation",
+      "ViewStatusLocation",
+      "SearchControlLocation",
+      "RefreshRequest",
+      "CurrentRowUse",
+      "BehaviorOnHorizontalCompression",
+      "HorizontalLines",
+      "VerticalLines",
+      "UseAlternationRowColor",
+      "BackColor",
+      "TextColor",
+      "BorderColor",
+      "Font",
+      "TitleTextColor",
+      "TitleFont",
+      "Width",
+      "AutoMaxWidth",
+      "HeightControlVariant",
+      "Height",
+      "AutoMaxHeight",
+      "HeightInTableRows",
+      "AutoMaxHeightInTableRows",
+      "MaxHeightInTableRows",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "HorizontalStretch",
+      "VerticalStretch",
+      "HeaderHeight",
+      "FooterHeight",
+      "TitleHeight",
+      "OnChange",
+      "Selection",
+      "OnActivateRow",
+      "ValueChoice",
+      "OnActivateField",
+      "OnActivateCell",
+      "BeforeAddRow",
+      "BeforeRowChange",
+      "BeforeDeleteRow",
+      "OnStartEdit",
+      "BeforeEditEnd",
+      "OnEditEnd",
+      "ChoiceProcessing",
+      "BeforeExpand",
+      "BeforeCollapse",
+      "AfterDeleteRow",
+      "OnCurrentParentChange",
+      "NewWriteProcessing",
+      "RefreshRequestProcessing",
+      "DragStart",
+      "DragCheck",
+      "DragEnd",
+      "Drag"
+    ],
+    "dynamic": [
+      "Name",
+      "Title",
+      "DataPath",
+      "TitleLocation",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "AutofillColumns",
+      "SkipOnInput",
+      "DefaultItem",
+      "ChoiceMode",
+      "MultipleChoice",
+      "DisplayImportance",
+      "OnMainServerUnavailableBehavior",
+      "CommandBarLocation",
+      "ChangeRowSet",
+      "ChangeRowOrder",
+      "CommandSet",
+      "Representation",
+      "RowInputMode",
+      "SelectionMode",
+      "RowSelectionMode",
+      "Header",
+      "Footer",
+      "Output",
+      "AutoInsertNewRow",
+      "AutoAddIncomplete",
+      "AutoMarkIncomplete",
+      "SearchOnInput",
+      "Shortcut",
+      "EnableStartDrag",
+      "EnableDrag",
+      "FileDragMode",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "AutoRefresh",
+      "AutoRefreshPeriod",
+      "ChoiceFoldersAndItems",
+      "RestoreCurrentRow",
+      "ShowRoot",
+      "AllowRootChoice",
+      "AllowGettingCurrentRowURL",
+      "UpdateOnDataChange",
+      "UserSettingsGroup",
+      "RowPictureDataPath",
+      "RowsPicture",
+      "HorizontalScrollBar",
+      "VerticalScrollBar",
+      "InitialListView",
+      "InitialTreeView",
+      "SearchStringLocation",
+      "ViewStatusLocation",
+      "SearchControlLocation",
+      "RefreshRequest",
+      "CurrentRowUse",
+      "BehaviorOnHorizontalCompression",
+      "HorizontalLines",
+      "VerticalLines",
+      "UseAlternationRowColor",
+      "BackColor",
+      "TextColor",
+      "BorderColor",
+      "Font",
+      "TitleTextColor",
+      "TitleFont",
+      "Width",
+      "AutoMaxWidth",
+      "HeightControlVariant",
+      "Height",
+      "AutoMaxHeight",
+      "HeightInTableRows",
+      "AutoMaxHeightInTableRows",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "HorizontalStretch",
+      "VerticalStretch",
+      "HeaderHeight",
+      "FooterHeight",
+      "TitleHeight",
+      "OnChange",
+      "Selection",
+      "OnActivateRow",
+      "ValueChoice",
+      "OnActivateField",
+      "OnActivateCell",
+      "BeforeAddRow",
+      "BeforeRowChange",
+      "BeforeDeleteRow",
+      "OnStartEdit",
+      "BeforeEditEnd",
+      "OnEditEnd",
+      "ChoiceProcessing",
+      "BeforeExpand",
+      "BeforeCollapse",
+      "AfterDeleteRow",
+      "OnCurrentParentChange",
+      "NewWriteProcessing",
+      "OnSaveUserSettingsAtServer",
+      "BeforeLoadUserSettingsAtServer",
+      "OnLoadUserSettingsAtServer",
+      "OnUpdateUserSettingSetAtServer",
+      "URLGetProcessing",
+      "URLListGetProcessing",
+      "RefreshRequestProcessing",
+      "OnGetDataAtServer",
+      "DragStart",
+      "DragCheck",
+      "DragEnd",
+      "Drag"
+    ],
+    "dynamicManual": [
+      "Name",
+      "Title",
+      "DataPath",
+      "TitleLocation",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "AutofillColumns",
+      "SkipOnInput",
+      "DefaultItem",
+      "ChoiceMode",
+      "MultipleChoice",
+      "DisplayImportance",
+      "OnMainServerUnavailableBehavior",
+      "CommandBarLocation",
+      "ChangeRowSet",
+      "ChangeRowOrder",
+      "CommandSet",
+      "Representation",
+      "RowInputMode",
+      "SelectionMode",
+      "RowSelectionMode",
+      "Header",
+      "Footer",
+      "Output",
+      "AutoInsertNewRow",
+      "AutoAddIncomplete",
+      "AutoMarkIncomplete",
+      "SearchOnInput",
+      "Shortcut",
+      "EnableStartDrag",
+      "EnableDrag",
+      "FileDragMode",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "AutoRefresh",
+      "AutoRefreshPeriod",
+      "ChoiceFoldersAndItems",
+      "RestoreCurrentRow",
+      "ShowRoot",
+      "AllowRootChoice",
+      "AllowGettingCurrentRowURL",
+      "UpdateOnDataChange",
+      "UserSettingsGroup",
+      "RowPictureDataPath",
+      "RowsPicture",
+      "HorizontalScrollBar",
+      "VerticalScrollBar",
+      "InitialListView",
+      "InitialTreeView",
+      "SearchStringLocation",
+      "ViewStatusLocation",
+      "SearchControlLocation",
+      "RefreshRequest",
+      "CurrentRowUse",
+      "BehaviorOnHorizontalCompression",
+      "HorizontalLines",
+      "VerticalLines",
+      "UseAlternationRowColor",
+      "BackColor",
+      "TextColor",
+      "BorderColor",
+      "Font",
+      "TitleTextColor",
+      "TitleFont",
+      "Width",
+      "AutoMaxWidth",
+      "MaxWidth",
+      "HeightControlVariant",
+      "Height",
+      "AutoMaxHeight",
+      "MaxHeight",
+      "HeightInTableRows",
+      "AutoMaxHeightInTableRows",
+      "HorizontalAlignInGroup",
+      "VerticalAlignInGroup",
+      "HorizontalStretch",
+      "VerticalStretch",
+      "HeaderHeight",
+      "FooterHeight",
+      "TitleHeight",
+      "OnChange",
+      "Selection",
+      "OnActivateRow",
+      "ValueChoice",
+      "OnActivateField",
+      "OnActivateCell",
+      "BeforeAddRow",
+      "BeforeRowChange",
+      "BeforeDeleteRow",
+      "OnStartEdit",
+      "BeforeEditEnd",
+      "OnEditEnd",
+      "ChoiceProcessing",
+      "BeforeExpand",
+      "BeforeCollapse",
+      "AfterDeleteRow",
+      "OnCurrentParentChange",
+      "NewWriteProcessing",
+      "OnSaveUserSettingsAtServer",
+      "BeforeLoadUserSettingsAtServer",
+      "OnLoadUserSettingsAtServer",
+      "OnUpdateUserSettingSetAtServer",
+      "URLGetProcessing",
+      "URLListGetProcessing",
+      "RefreshRequestProcessing",
+      "OnGetDataAtServer",
+      "DragStart",
+      "DragCheck",
+      "DragEnd",
+      "Drag"
+    ],
+    "column": [
+      "Name",
+      "Title",
+      "Type",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "EnableContentChange",
+      "DisplayImportance",
+      "Group",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "ShowInHeader",
+      "FixingInTable",
+      "TitleTextColor",
+      "TitleFont",
+      "Width",
+      "Height",
+      "HorizontalStretch",
+      "VerticalStretch"
+    ],
+    "columnHeader": [
+      "Name",
+      "Title",
+      "Type",
+      "Visible",
+      "UserVisibility",
+      "Enabled",
+      "ReadOnly",
+      "EnableContentChange",
+      "DisplayImportance",
+      "Group",
+      "HeaderDataPath",
+      "ToolTip",
+      "ToolTipRepresentation",
+      "ShowTitle",
+      "ShowInHeader",
+      "FixingInTable",
+      "TitleTextColor",
+      "TitleFont",
+      "HeaderPicture",
+      "TitleBackColor",
+      "Width",
+      "Height",
+      "HorizontalStretch",
+      "VerticalStretch",
+      "HeaderHorizontalAlign"
+    ]
+  },
+  "captions": {
+    "AutofillColumns": {
+      "ru-RU": "Автозаполнение колонок",
+      "en-US": "Autofill columns"
+    },
+    "ChoiceMode": {
+      "ru-RU": "РежимВыбора",
+      "en-US": "ChoiceMode"
+    },
+    "MultipleChoice": {
+      "ru-RU": "МножественныйВыбор",
+      "en-US": "MultipleChoice"
+    },
+    "ChangeRowSet": {
+      "ru-RU": "ИзменятьСоставСтрок",
+      "en-US": "ChangeRowSet"
+    },
+    "ChangeRowOrder": {
+      "ru-RU": "ИзменятьПорядокСтрок",
+      "en-US": "ChangeRowOrder"
+    },
+    "RowInputMode": {
+      "ru-RU": "РежимВводаСтрок",
+      "en-US": "RowInputMode"
+    },
+    "SelectionMode": {
+      "ru-RU": "РежимВыделения",
+      "en-US": "SelectionMode"
+    },
+    "RowSelectionMode": {
+      "ru-RU": "РежимВыделенияСтроки",
+      "en-US": "RowSelectionMode"
+    },
+    "Header": {
+      "ru-RU": "Шапка",
+      "en-US": "Header"
+    },
+    "Footer": {
+      "ru-RU": "Подвал",
+      "en-US": "Footer"
+    },
+    "Output": {
+      "ru-RU": "Вывод",
+      "en-US": "Output"
+    },
+    "AutoInsertNewRow": {
+      "ru-RU": "АвтоВводНовойСтроки",
+      "en-US": "AutoInsertNewRow"
+    },
+    "AutoAddIncomplete": {
+      "ru-RU": "АвтоВводНезаполненного",
+      "en-US": "AutoAddIncomplete"
+    },
+    "SearchOnInput": {
+      "ru-RU": "ПоискПриВводе",
+      "en-US": "SearchOnInput"
+    },
+    "EnableStartDrag": {
+      "ru-RU": "РазрешитьНачалоПеретаскивания",
+      "en-US": "EnableStartDrag"
+    },
+    "EnableDrag": {
+      "ru-RU": "РазрешитьПеретаскивание",
+      "en-US": "EnableDrag"
+    },
+    "FileDragMode": {
+      "ru-RU": "СпособПеретаскиванияФайлов",
+      "en-US": "FileDragMode"
+    },
+    "AutoRefresh": {
+      "ru-RU": "АвтоОбновление",
+      "en-US": "AutoRefresh"
+    },
+    "AutoRefreshPeriod": {
+      "ru-RU": "ПериодАвтоОбновления",
+      "en-US": "AutoRefreshPeriod"
+    },
+    "RestoreCurrentRow": {
+      "ru-RU": "ВосстанавливатьТекущуюСтроку",
+      "en-US": "RestoreCurrentRow"
+    },
+    "ShowRoot": {
+      "ru-RU": "ОтображатьКорень",
+      "en-US": "ShowRoot"
+    },
+    "AllowRootChoice": {
+      "ru-RU": "РазрешитьВыборКорня",
+      "en-US": "AllowRootChoice"
+    },
+    "AllowGettingCurrentRowURL": {
+      "ru-RU": "РазрешитьПолучатьНавигационнуюСсылкуТекущейСтроки",
+      "en-US": "AllowGettingCurrentRowURL"
+    },
+    "UpdateOnDataChange": {
+      "ru-RU": "ОбновлениеПриИзмененииДанных",
+      "en-US": "UpdateOnDataChange"
+    },
+    "UserSettingsGroup": {
+      "ru-RU": "Группа пользовательских настроек",
+      "en-US": "User-defined settings group"
+    },
+    "RowPictureDataPath": {
+      "ru-RU": "ПутьКДаннымКартинкиСтроки",
+      "en-US": "RowPictureDataPath"
+    },
+    "RowsPicture": {
+      "ru-RU": "КартинкаСтрок",
+      "en-US": "RowsPicture"
+    },
+    "HorizontalScrollBar": {
+      "ru-RU": "ГоризонтальнаяПолосаПрокрутки",
+      "en-US": "HorizontalScrollBar"
+    },
+    "VerticalScrollBar": {
+      "ru-RU": "ВертикальнаяПолосаПрокрутки",
+      "en-US": "VerticalScrollBar"
+    },
+    "InitialListView": {
+      "ru-RU": "НачальноеОтображениеСписка",
+      "en-US": "InitialListView"
+    },
+    "InitialTreeView": {
+      "ru-RU": "НачальноеОтображениеДерева",
+      "en-US": "InitialTreeView"
+    },
+    "SearchStringLocation": {
+      "ru-RU": "ПоложениеСтрокиПоиска",
+      "en-US": "SearchStringLocation"
+    },
+    "ViewStatusLocation": {
+      "ru-RU": "ПоложениеСостоянияПросмотра",
+      "en-US": "ViewStatusLocation"
+    },
+    "SearchControlLocation": {
+      "ru-RU": "ПоложениеУправленияПоиском",
+      "en-US": "SearchControlLocation"
+    },
+    "RefreshRequest": {
+      "ru-RU": "ЗапросОбновления",
+      "en-US": "RefreshRequest"
+    },
+    "BehaviorOnHorizontalCompression": {
+      "ru-RU": "ПоведениеПриСжатииПоГоризонтали",
+      "en-US": "BehaviorOnHorizontalCompression"
+    },
+    "HorizontalLines": {
+      "ru-RU": "ГоризонтальныеЛинии",
+      "en-US": "HorizontalLines"
+    },
+    "VerticalLines": {
+      "ru-RU": "ВертикальныеЛинии",
+      "en-US": "VerticalLines"
+    },
+    "UseAlternationRowColor": {
+      "ru-RU": "ЧередованиеЦветовСтрок",
+      "en-US": "UseAlternationRowColor"
+    },
+    "HeightInTableRows": {
+      "ru-RU": "ВысотаВСтрокахТаблицы",
+      "en-US": "HeightInTableRows"
+    },
+    "AutoMaxHeightInTableRows": {
+      "ru-RU": "АвтоМаксимальнаяВысотаВСтрокахТаблицы",
+      "en-US": "AutoMaxHeightInTableRows"
+    },
+    "MaxHeightInTableRows": {
+      "ru-RU": "МаксимальнаяВысотаВСтрокахТаблицы",
+      "en-US": "MaxHeightInTableRows"
+    },
+    "HeaderHeight": {
+      "ru-RU": "ВысотаШапки",
+      "en-US": "HeaderHeight"
+    },
+    "FooterHeight": {
+      "ru-RU": "ВысотаПодвала",
+      "en-US": "FooterHeight"
+    },
+    "Selection": {
+      "ru-RU": "Выбор",
+      "en-US": "Selection"
+    },
+    "OnActivateRow": {
+      "ru-RU": "ПриАктивизацииСтроки",
+      "en-US": "OnActivateRow"
+    },
+    "OnActivateField": {
+      "ru-RU": "ПриАктивизацииПоля",
+      "en-US": "OnActivateField"
+    },
+    "OnActivateCell": {
+      "ru-RU": "ПриАктивизацииЯчейки",
+      "en-US": "OnActivateCell"
+    },
+    "BeforeAddRow": {
+      "ru-RU": "ПередНачаломДобавления",
+      "en-US": "BeforeAddRow"
+    },
+    "BeforeRowChange": {
+      "ru-RU": "ПередНачаломИзменения",
+      "en-US": "BeforeRowChange"
+    },
+    "BeforeDeleteRow": {
+      "ru-RU": "ПередУдалением",
+      "en-US": "BeforeDeleteRow"
+    },
+    "OnStartEdit": {
+      "ru-RU": "ПриНачалеРедактирования",
+      "en-US": "OnStartEdit"
+    },
+    "BeforeEditEnd": {
+      "ru-RU": "ПередОкончаниемРедактирования",
+      "en-US": "BeforeEditEnd"
+    },
+    "OnEditEnd": {
+      "ru-RU": "ПриОкончанииРедактирования",
+      "en-US": "OnEditEnd"
+    },
+    "BeforeExpand": {
+      "ru-RU": "ПередРазворачиванием",
+      "en-US": "BeforeExpand"
+    },
+    "BeforeCollapse": {
+      "ru-RU": "ПередСворачиванием",
+      "en-US": "BeforeCollapse"
+    },
+    "AfterDeleteRow": {
+      "ru-RU": "ПослеУдаления",
+      "en-US": "AfterDeleteRow"
+    },
+    "OnCurrentParentChange": {
+      "ru-RU": "ПриСменеТекущегоРодителя",
+      "en-US": "OnCurrentParentChange"
+    },
+    "OnSaveUserSettingsAtServer": {
+      "ru-RU": "ПриСохраненииПользовательскихНастроекНаСервере",
+      "en-US": "OnSaveUserSettingsAtServer"
+    },
+    "BeforeLoadUserSettingsAtServer": {
+      "ru-RU": "ПередЗагрузкойПользовательскихНастроекНаСервере",
+      "en-US": "BeforeLoadUserSettingsAtServer"
+    },
+    "OnLoadUserSettingsAtServer": {
+      "ru-RU": "ПриЗагрузкеПользовательскихНастроекНаСервере",
+      "en-US": "OnLoadUserSettingsAtServer"
+    },
+    "OnUpdateUserSettingSetAtServer": {
+      "ru-RU": "ПриОбновленииСоставаПользовательскихНастроекНаСервере",
+      "en-US": "OnUpdateUserSettingSetAtServer"
+    },
+    "RefreshRequestProcessing": {
+      "ru-RU": "ОбработкаЗапросаОбновления",
+      "en-US": "RefreshRequestProcessing"
+    },
+    "OnGetDataAtServer": {
+      "ru-RU": "ПриПолученииДанныхНаСервере",
+      "en-US": "OnGetDataAtServer"
+    },
+    "DragStart": {
+      "ru-RU": "НачалоПеретаскивания",
+      "en-US": "DragStart"
+    },
+    "DragCheck": {
+      "ru-RU": "ПроверкаПеретаскивания",
+      "en-US": "DragCheck"
+    },
+    "DragEnd": {
+      "ru-RU": "ОкончаниеПеретаскивания",
+      "en-US": "DragEnd"
+    },
+    "Drag": {
+      "ru-RU": "Перетаскивание",
+      "en-US": "Drag"
+    },
+    "HeaderDataPath": {
+      "ru-RU": "ПутьКДаннымШапки",
+      "en-US": "HeaderDataPath"
+    }
+  },
+  "rows": [
+    {
+      "name": "ValueTable",
+      "hierarchical": false,
+      "canonicalExportSha256": "319d339c51e0483b0109ced3c4a8badf104417ec1b6329d1580f1e5917bb7cde",
+      "xmlSha256": "fcf6ed2fe6c9d23a853d753ee7b8346ed4a03c96961e657978ae59ade556bd6d",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "table",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "ValueTable-Rows-top.png",
+                  "sha256": "ec216cce73186573cee32c2a9a655cfbf800a9ef857b9e37d74baca7e5bd37ea",
+                  "panelSha256": "9df3a06403c8f93a3651a9168f70379aebf3e9bb944bfa21e08eaacf31eaed94"
+                },
+                "bottom": {
+                  "file": "ValueTable-Rows-bottom.png",
+                  "sha256": "1a1e77c6bde534f476d2087c8f927fa2636c53aa850614b29b38aba7fd1da88e",
+                  "panelSha256": "ff43ac47f61219d334071e8cf059e23abe79a3f629745720e7e0682bf177d34e"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "ValueTable-Rows-top.png",
+                  "sha256": "761abe92c1f6fc4d17b9a69a0fb68727abe0dc25921e57d833e432eedb514574",
+                  "panelSha256": "1f62f99018ecc0bc7adf519e5d0c26e0e57849e905cb7951ae4bf6ddcacf4ad2"
+                },
+                "bottom": {
+                  "file": "ValueTable-Rows-bottom.png",
+                  "sha256": "af172dd4793e3d647fa47a8dc3ea145dfe597c9efaac169e8a2f60633b35dd93",
+                  "panelSha256": "26690ddb40c55aeed9275bad663ea868cbb762319234c2d94a3d219466ab94b6"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ManualBounds",
+      "hierarchical": false,
+      "canonicalExportSha256": "6416c1515d90495b6c778c5f20ada89b536fcad33c2bc3c7093a9b97b1490f74",
+      "xmlSha256": "27fabde55a2703651daa92dd11412ab4f22cca709fb3f1a5005c0096c367ca31",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "manualBounds",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Footer": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "AutoMaxHeight": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "MaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "MaxHeight": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "ManualBounds-Rows-top.png",
+                  "sha256": "781d725b18baeccd44109f3043d05af2d518e2cf6da14a332e95965b168b1886",
+                  "panelSha256": "1dcfe834166a2059288c868d39fd89dea45c7de30b8ef8a1effbf6f3f5a771f2"
+                },
+                "bottom": {
+                  "file": "ManualBounds-Rows-bottom.png",
+                  "sha256": "90818ff98dfe1160dec8b47784344968b71f2b41a1bbc9c89636c04498e08d6f",
+                  "panelSha256": "530df4a9a04bfb24ba60c48744c1d20526a1d6d04465ff2192bfe902e8fa2420"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "ManualBounds-Rows-top.png",
+                  "sha256": "52c721c0f60dc7d441e50b20189f918af821d39309a8c217465309dc000c8024",
+                  "panelSha256": "1450288c02e5db35e318ff83f367274f05767c088688bbe8c6a5c747bde5a916"
+                },
+                "bottom": {
+                  "file": "ManualBounds-Rows-bottom.png",
+                  "sha256": "8681b77d977180dbb5d48e9399a5f082cc0c7eb86cfba5dcecb4aea80bb9236b",
+                  "panelSha256": "9c7155812b5dcc6b2deac510041b41bf45a23bcf390a8f7d74be37b2e580e274"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Unbound",
+      "hierarchical": false,
+      "canonicalExportSha256": "e6cff5963c2507749cc54391986d5e8538406ef271ae6e4c071ebf732224bafc",
+      "xmlSha256": "93c2b8a44908ac712ba2c3eb5ee177c98e48d2cb887f7eb2f45b91a334adbbf6",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "table",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "Unbound-Rows-top.png",
+                  "sha256": "5a59efef2aadaf98906f82b2630743e94c11d416fccc536a872adddfe13bde2c",
+                  "panelSha256": "2261eb310e72a68d1b4053b43715f42f534dca5caac27a077136442d0c14c2be"
+                },
+                "bottom": {
+                  "file": "Unbound-Rows-bottom.png",
+                  "sha256": "a836bff3f1931fbe1b4878f718afd849a104f77defa98b6bf68d88e0a08ab3bb",
+                  "panelSha256": "3904d5665368b00f9f3fccb52a2cbce4b452961f0b26629a45b2aa71ad283507"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "Unbound-Rows-top.png",
+                  "sha256": "f58f73c5b798b4e3d573ae245c23e58733a7e6f8652c5ab467f5c5487203f2c5",
+                  "panelSha256": "51ca1f7660d716ea2804aeb895d05d24ec0a55e9f4ee9065ccd34749911b98ef"
+                },
+                "bottom": {
+                  "file": "Unbound-Rows-bottom.png",
+                  "sha256": "ac42c2a4d7ffb22df3ae62c28d353d949eebabb0f99168b06155ca8c858123d5",
+                  "panelSha256": "9d8f56927bbab06b1e7968d54f3a9765c8d14bb335636763d9a765524c90cd12"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ValueTree",
+      "hierarchical": false,
+      "canonicalExportSha256": "67b08a2818d5f1505935d2bb735928806f3a6a0118a6176d3c739625e89e4a8f",
+      "xmlSha256": "3d07cf33d05cf32b87d6d932df085c8735f12f0f441998f9c0ead8eaaa9b7ca6",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "table",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Дерево",
+                "en-US": "Tree"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "ValueTree-Rows-top.png",
+                  "sha256": "a5c6ddcaa7383cc19f73aeaaac27d9f55d4d84b85a72810aa9fe657418ae45d9",
+                  "panelSha256": "c2f78a39c0aa85ae18f541188b0096393ab8c6ec440980893afaedd3f904d2f9"
+                },
+                "bottom": {
+                  "file": "ValueTree-Rows-bottom.png",
+                  "sha256": "0a1526464356e7874f9e2d29286f8c226616c2783a17e0204501ed7b990c63c3",
+                  "panelSha256": "ff43ac47f61219d334071e8cf059e23abe79a3f629745720e7e0682bf177d34e"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "ValueTree-Rows-top.png",
+                  "sha256": "c899f58a8d2c19084db7a7b7ca9831541f1f66238b90b3f6c03074c26f3f80f0",
+                  "panelSha256": "019bfa97ed415edcaadde7e086fa4fb8cb413e4824c15cc4aa1f8993f19eb30b"
+                },
+                "bottom": {
+                  "file": "ValueTree-Rows-bottom.png",
+                  "sha256": "e533b3f9bf9d41ad302b87674c56042d9e1bcb78bf964c3965edc4bc61f50c99",
+                  "panelSha256": "26690ddb40c55aeed9275bad663ea868cbb762319234c2d94a3d219466ab94b6"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "DynamicList",
+      "hierarchical": false,
+      "canonicalExportSha256": "37767855f913eea4fd0b97535755af84d8ed7ed5362a5e3ad72904d3a03213c2",
+      "xmlSha256": "438c5ccb2445a43fdfef11b6f75358157e38f8d4c27e03373e0bc1a7cbe47af6",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "dynamic",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "AutoRefreshPeriod": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "DynamicList-Rows-top.png",
+                  "sha256": "3f7f2928ad48ad20b5f5b009aa758978324bdf2c7b9ad8b931ed93eadf942418",
+                  "panelSha256": "06edce3ec501e511e949f57e078725acb91354c84923204648fa15a1d5e96933"
+                },
+                "bottom": {
+                  "file": "DynamicList-Rows-bottom.png",
+                  "sha256": "672fc48a4f022f0f2d1d7f17043a9c264fe26f879f5c50df62fdf380f18c5313",
+                  "panelSha256": "ea84a562d361ab04e435ec0abd0424f993d8cf102854fd6355670748ef847a5f"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "DynamicList-Rows-top.png",
+                  "sha256": "544086fe49fac9bf33148b1763b625e615df113cdd9054d4aebd333d93be108e",
+                  "panelSha256": "9b972fa95d07cc42d3c72423cf37361868140dda03482514ed1cba0fd49a6bcc"
+                },
+                "bottom": {
+                  "file": "DynamicList-Rows-bottom.png",
+                  "sha256": "8952f2493e1a2be911916c780549f450a3dcbd7f24f038de2b65e05139299a56",
+                  "panelSha256": "65a13fbaccbade7c4b17c423cc8eee895a38d2372cd144e7f6bfc4753004ac3e"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "DynamicRefresh",
+      "hierarchical": false,
+      "canonicalExportSha256": "435a515adc4bec6fc02507a7eba10a516990d45d6245e8884fd0a74b999a1041",
+      "xmlSha256": "4d9c67b6980a2ef444151782196482409c8eda41f3ce97fa7ffefe329828078c",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "dynamicManual",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "AutoMaxHeight": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "MaxWidth": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "MaxHeight": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "AutoRefreshPeriod": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "DynamicRefresh-Rows-top.png",
+                  "sha256": "4c165223caac8a794c23c7111c0e4d567999b688d33bb7d0e6822d700481886b",
+                  "panelSha256": "528bc4fa32f5ff53e57ec84bab8d913dd52a5b163fb37671478edd38ca00369b"
+                },
+                "bottom": {
+                  "file": "DynamicRefresh-Rows-bottom.png",
+                  "sha256": "8708a1611508424c56ce7cd60c6a4a04aa97f4d820ae50a9f4571626addd6642",
+                  "panelSha256": "bdb8a538ef5005e9134fa15a6c5c437be241cff7c476094963080a825298069a"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "DynamicRefresh-Rows-top.png",
+                  "sha256": "66e89ac320e312b9cac28b8c986715a159e01eb3bef3dad747a87dfb5f0fc338",
+                  "panelSha256": "0f72f9bffeb77c649111c70534fc3c2f1f5181bc6e9eaab4143169c104504f09"
+                },
+                "bottom": {
+                  "file": "DynamicRefresh-Rows-bottom.png",
+                  "sha256": "1469ff4283e34c80db85da79e3dae8604df8bf74224374476fa00f62f8d34f4a",
+                  "panelSha256": "d7f0ef69118463a26f93161593b7ef65d923c667c259382ecda9c6cc7f199b3b"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "DynamicHierarchy",
+      "hierarchical": false,
+      "canonicalExportSha256": "37767855f913eea4fd0b97535755af84d8ed7ed5362a5e3ad72904d3a03213c2",
+      "xmlSha256": "438c5ccb2445a43fdfef11b6f75358157e38f8d4c27e03373e0bc1a7cbe47af6",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "dynamic",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "AutoRefreshPeriod": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "DynamicHierarchy-Rows-top.png",
+                  "sha256": "cc96c0e1fa6a12337a7a664d931c871630670ac2772352a989b6463c128a47f3",
+                  "panelSha256": "06edce3ec501e511e949f57e078725acb91354c84923204648fa15a1d5e96933"
+                },
+                "bottom": {
+                  "file": "DynamicHierarchy-Rows-bottom.png",
+                  "sha256": "3a73ba811313f0160ffe67d1ff460079e6f95c7b7ddc4fde07597ffd7acac3da",
+                  "panelSha256": "ea84a562d361ab04e435ec0abd0424f993d8cf102854fd6355670748ef847a5f"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "DynamicHierarchy-Rows-top.png",
+                  "sha256": "fc69b5fb6a325a5d6cab9961e4cbb25b04aaa9ef2471eda66bd8ff80cef847a5",
+                  "panelSha256": "9b972fa95d07cc42d3c72423cf37361868140dda03482514ed1cba0fd49a6bcc"
+                },
+                "bottom": {
+                  "file": "DynamicHierarchy-Rows-bottom.png",
+                  "sha256": "0dff429949d2850e2618a3a3086855cd9747d57e2726eea57da1ecf287721230",
+                  "panelSha256": "65a13fbaccbade7c4b17c423cc8eee895a38d2372cd144e7f6bfc4753004ac3e"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "MetadataTable",
+      "hierarchical": false,
+      "canonicalExportSha256": "7f1e77cef687bb622b6fdb071ec6dc4aad1899ea63be49ba5064e50e1e96a4f6",
+      "xmlSha256": "af82ad9c11e41350789bbd4e67e45fb0dd7f042a331ba8ec1f60f4295f7bd1c0",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "table",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "MetadataTable-Rows-top.png",
+                  "sha256": "287ab12feaeb54bc023e988e10424b33d7a7ad63b7a9b9cf2a2e0cb88d50b644",
+                  "panelSha256": "a795fed324d46f9c3c5bf4475dde1ae79123960fa215204d8d67262116fcde26"
+                },
+                "bottom": {
+                  "file": "MetadataTable-Rows-bottom.png",
+                  "sha256": "877ff521c037bd93710fa1f863eff5696fee437826621f48228c7905d072046b",
+                  "panelSha256": "ff43ac47f61219d334071e8cf059e23abe79a3f629745720e7e0682bf177d34e"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "MetadataTable-Rows-top.png",
+                  "sha256": "ce61d0e9e20a226c2095554d2c4a07e370280f5fdef2479fc082a56b8625ca1b",
+                  "panelSha256": "8f4eebba7a0c3448e111f175ab58cd5037118ba03dc4597b721b618879f46352"
+                },
+                "bottom": {
+                  "file": "MetadataTable-Rows-bottom.png",
+                  "sha256": "7ee06f97087af32e79c297c6cbb5085d594539a2a89d210142f40fb298028a5c",
+                  "panelSha256": "26690ddb40c55aeed9275bad663ea868cbb762319234c2d94a3d219466ab94b6"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vertical",
+      "hierarchical": false,
+      "canonicalExportSha256": "3a90e787a12deb408b28fe6b7267f301b45c1d704e718b5cf5dcb53d8ee1a413",
+      "xmlSha256": "4c907c5dd5c78bc3bd193017529c90114ba12d8c9f307aef3c1ed87ef78fa4dd",
+      "selections": [
+        {
+          "name": "Group",
+          "profile": "column",
+          "unavailable": [],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ColumnGroup",
+              "caption": {
+                "ru-RU": "Группа колонок",
+                "en-US": "Column group"
+              }
+            },
+            "Group": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "vertical"
+              },
+              "caption": {
+                "ru-RU": "Вертикальная",
+                "en-US": "Vertical"
+              }
+            },
+            "ShowInHeader": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "FixingInTable": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "no"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "No"
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "autoStretch"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Default"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "Vertical-Group-top.png",
+                  "sha256": "92dcf4886108fc5d097615d7ee3c892cdd4072e4fcb067eb01083110b9ee50b2",
+                  "panelSha256": "e1a1d1bd1c6b78b1867a8c93a460778e58699af76af8cffe845e1a4f3aa68fd8"
+                },
+                "bottom": {
+                  "file": "Vertical-Group-bottom.png",
+                  "sha256": "15760bd91931e78b111e5143c71ddf7bf32603459e763743952aafbe85cd8a88",
+                  "panelSha256": "efb69cf816bb3b27b10ec9a91a020052a290c798fcc9991e62aa63e78549b993"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "Vertical-Group-top.png",
+                  "sha256": "a1fec9f5a33ccbed2a541866fd3e82f863675ab67244fb751eea0ce359eaea17",
+                  "panelSha256": "71857e375efac68982766120b968310726f59d190d9f446e9600aca260744cc5"
+                },
+                "bottom": {
+                  "file": "Vertical-Group-bottom.png",
+                  "sha256": "47cf436cd2b53f8e0e327b1d3c062e5ffedff52ebdda5b0a838a8c7d6bf43baf",
+                  "panelSha256": "5c560395398699af625047709494a66d17867d1186a29f8847d6730bee9c5833"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "VerticalHeader",
+      "hierarchical": false,
+      "canonicalExportSha256": "4550a747431c3f86b6f8f28dd0456334799d6af468a893ff19b98da330d595cc",
+      "xmlSha256": "5144cc2e8c2d37ad91f85516c0e9646b2acc5e2d329e90fbdd8492760f2d017a",
+      "selections": [
+        {
+          "name": "Group",
+          "profile": "columnHeader",
+          "unavailable": [],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ColumnGroup",
+              "caption": {
+                "ru-RU": "Группа колонок",
+                "en-US": "Column group"
+              }
+            },
+            "Group": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "vertical"
+              },
+              "caption": {
+                "ru-RU": "Вертикальная",
+                "en-US": "Vertical"
+              }
+            },
+            "ShowInHeader": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "FixingInTable": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "no"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "No"
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "autoStretch"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Default"
+              }
+            },
+            "HeaderHorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "ShowTitle": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "HeaderDataPath": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "VerticalHeader-Group-top.png",
+                  "sha256": "c5d6198ed6a7f8d093749a25ef724fd4a576638e99e8ed5f181731f0f665e809",
+                  "panelSha256": "e23cc33b73d61ffc5d1b1efd82b264c7b8b293c134a51daf3b9c77f903cfdcb8"
+                },
+                "bottom": {
+                  "file": "VerticalHeader-Group-bottom.png",
+                  "sha256": "444592886747c759f89ad164dab0253c36cc2881fd187a6b216225fcb1843127",
+                  "panelSha256": "515fd37d397eb4bd3bca3d540892dfa86f9ea719d532768d257e0e4bc530f621"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "VerticalHeader-Group-top.png",
+                  "sha256": "e50f61364678ca15866c0e45f404ecb952c2885838917b24d4b0ac622c93840e",
+                  "panelSha256": "307f05354efbde01303258b3063b0268cf9f0d05e56eccbe9ea77c345b80214c"
+                },
+                "bottom": {
+                  "file": "VerticalHeader-Group-bottom.png",
+                  "sha256": "ea50071c02ff0e35c3a374ea083c15d736f0ec3c24c5dcbd61324411c25fe434",
+                  "panelSha256": "a8c7203849b643af81d99ec66e99e7a08d3860739892d932202b864a2bad110b"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Horizontal",
+      "hierarchical": false,
+      "canonicalExportSha256": "278aaef7840a9ef6f954c285d946a99f45875ed4b15e57d69f28fe05836a0dac",
+      "xmlSha256": "5309ad9001470b2cd9366f4a7fa38caf5309953f926971e14be57a9ba93f9bba",
+      "selections": [
+        {
+          "name": "Group",
+          "profile": "column",
+          "unavailable": [],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ColumnGroup",
+              "caption": {
+                "ru-RU": "Группа колонок",
+                "en-US": "Column group"
+              }
+            },
+            "Group": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Горизонтальная",
+                "en-US": "Horizontal"
+              }
+            },
+            "ShowInHeader": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "FixingInTable": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "no"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "No"
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "autoStretch"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Default"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "Horizontal-Group-top.png",
+                  "sha256": "4b56dc54bc5c6f6f6a0b89f0dc19805ea5e0e9ae1509468e5429bbdc7c6f9be7",
+                  "panelSha256": "87cd6fac0bc933056a4e08b1bc8b0abdd011e5d66a6622b44b5b60d0dc95d7c5"
+                },
+                "bottom": {
+                  "file": "Horizontal-Group-bottom.png",
+                  "sha256": "3f89177a13e5943a704bad67c7ca6fd2a6755b3a90e5ec837fa7e128f9664938",
+                  "panelSha256": "e1bd6392fb0e9c17e36c0e7cbae11843e5953f4a88aee3f7afa00f6132edc270"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "Horizontal-Group-top.png",
+                  "sha256": "6992ece9cc6f4a0266641a6b3134069369dbb9ec40ffa7a1c99cc27bcd0d1dca",
+                  "panelSha256": "ac2f2878669a975cb449c7ff71010742aa5857058b76a3cb118414ea6e963138"
+                },
+                "bottom": {
+                  "file": "Horizontal-Group-bottom.png",
+                  "sha256": "80a882fe5c559ddea6b6fb39ff1731e487f33197db7e3ca5b95a94328e30c5e8",
+                  "panelSha256": "4ac677ae23c4bd7e8e638913e7050d38795ec2beb22f2065aee4996257d2c859"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "HorizontalHeader",
+      "hierarchical": false,
+      "canonicalExportSha256": "f3e757e5c726de38f612fcf0c4ff3f2bd9004f9233d56de763ddf27314be373c",
+      "xmlSha256": "606ae882f63efe22ec05d0c9a9e11315f4df2008be89982cba1831ed15e279bc",
+      "selections": [
+        {
+          "name": "Group",
+          "profile": "columnHeader",
+          "unavailable": [],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ColumnGroup",
+              "caption": {
+                "ru-RU": "Группа колонок",
+                "en-US": "Column group"
+              }
+            },
+            "Group": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Горизонтальная",
+                "en-US": "Horizontal"
+              }
+            },
+            "ShowInHeader": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "FixingInTable": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "no"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "No"
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "autoStretch"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Default"
+              }
+            },
+            "HeaderHorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "ShowTitle": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "HeaderDataPath": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "HorizontalHeader-Group-top.png",
+                  "sha256": "4cfe2559459721680f91ed12586e52d5162ac0143e0aa8ab27ad8bcfd72ed323",
+                  "panelSha256": "fd0a9fc0da4c863689a933a4306d3c9ae800c6c054afd447b6cd7544078d3151"
+                },
+                "bottom": {
+                  "file": "HorizontalHeader-Group-bottom.png",
+                  "sha256": "b65becd52fd331de60185f91073c221952f89be24d65ce915b96c82dc96ffb1c",
+                  "panelSha256": "ac21a2e6e3dcdb23f33cf4119040b7a533a6fb44943f426c80677e3fd6a131c0"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "HorizontalHeader-Group-top.png",
+                  "sha256": "1177f50d30254e1594fc422c0e2ed4795c141ea6b4108c1965699c5af2d5e234",
+                  "panelSha256": "107f456e3cc99be35946c84680d9fc34e25395165fed1f16e697f2e7375202dd"
+                },
+                "bottom": {
+                  "file": "HorizontalHeader-Group-bottom.png",
+                  "sha256": "716004b34acc897e5a647f00116ac330d3583227b4c0ff8530dc5236ac87307b",
+                  "panelSha256": "0ac86b4c013b47f8e5e5c290d53d4a910a784ba01f2f352f90fdfa14ffe2bca0"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "InCell",
+      "hierarchical": false,
+      "canonicalExportSha256": "da3999c1b1af1af2f32a9d63994efa259e3cdb2e2a63e13114a50dab192679fb",
+      "xmlSha256": "47ec8c6f835f3a7ff4e87e9e6f2df44e83b6d056c723a88bc308349d85696e02",
+      "selections": [
+        {
+          "name": "Group",
+          "profile": "columnHeader",
+          "unavailable": [],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ColumnGroup",
+              "caption": {
+                "ru-RU": "Группа колонок",
+                "en-US": "Column group"
+              }
+            },
+            "Group": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "В ячейке",
+                "en-US": "In cell"
+              }
+            },
+            "ShowInHeader": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "FixingInTable": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "no"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "No"
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "autoStretch"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Default"
+              }
+            },
+            "HeaderHorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "ShowTitle": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "HeaderDataPath": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "InCell-Group-top.png",
+                  "sha256": "f454ab776f368e5d669b37b51fcdcd2ebf591d3b626948da992eebe171dd476c",
+                  "panelSha256": "da75745c35e7443f26bb48e69bb7560ee0cebc461db3da133f9143200683ce26"
+                },
+                "bottom": {
+                  "file": "InCell-Group-bottom.png",
+                  "sha256": "d07e1e7cc347002b0d161806520313c3fab08b45eef99082c9d42e1c97c102bd",
+                  "panelSha256": "7a57b43490a94635ed2f10d9447dac87e64898dc0488602bd8e701f22e860535"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "InCell-Group-top.png",
+                  "sha256": "ca43331ff541b1e6abc27c69580061e1560bf085619eaec9817de3904fbe801c",
+                  "panelSha256": "f31e026c97f28c937250b7fe5fa94694125e1efe7a5c56911beb401d7c5b525c"
+                },
+                "bottom": {
+                  "file": "InCell-Group-bottom.png",
+                  "sha256": "788f185fbacdf4a0819b19a0ab7ce58e9784626cff7e2609ebc40b87efab96c2",
+                  "panelSha256": "3195958c0c091a8a6f40457f0ff93ad28b376768bdd6a56393b9f03b6cc4a497"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Nested",
+      "hierarchical": false,
+      "canonicalExportSha256": "64390d36b4bf29c50a1e840fdf75ccaa5cbc8e65c3619242083472986859e631",
+      "xmlSha256": "c3a2908c1a2559562d6d548410f22e89e8399f185b945de03e4af771e3c69af6",
+      "selections": [
+        {
+          "name": "DepthColumns",
+          "profile": "columnHeader",
+          "unavailable": [],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ColumnGroup",
+              "caption": {
+                "ru-RU": "Группа колонок",
+                "en-US": "Column group"
+              }
+            },
+            "Group": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Горизонтальная",
+                "en-US": "Horizontal"
+              }
+            },
+            "ShowInHeader": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "FixingInTable": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "no"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "No"
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "autoStretch"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Default"
+              }
+            },
+            "HeaderHorizontalAlign": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "ShowTitle": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "HeaderDataPath": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "Nested-DepthColumns-top.png",
+                  "sha256": "81def0323842d03067e87374cebb40bdb71f3d736b9acff283ac224a00fde54d",
+                  "panelSha256": "201f77035cde570a860a12446c9a595de9f0107243e8413aa6f37f288dda3b88"
+                },
+                "bottom": {
+                  "file": "Nested-DepthColumns-bottom.png",
+                  "sha256": "daec746da5b20519dcafa04d0313ffc80c05565c27d3383ff14bae34dd41b8cb",
+                  "panelSha256": "342c907eab8249abe196a6d9e0f2205c7bcb6cc5efee77b766826671b2265839"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "Nested-DepthColumns-top.png",
+                  "sha256": "72c0bda5af1ddc63ed84605c6039eff3739d0ca4f7616c1c959c9f8bc3db92d9",
+                  "panelSha256": "9b6187b21bf93b92b46f50755252cd84705aff9607f723fab849d67e7dd2ecc5"
+                },
+                "bottom": {
+                  "file": "Nested-DepthColumns-bottom.png",
+                  "sha256": "45c9f45f22644739713d8e0e378aa4b1137f9d292ef2e989027468245f614c41",
+                  "panelSha256": "2305fa19bdb4c66bf55dcadf6ecdcafce88c6caf64c53ec4775249e932cb4a1b"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "NestedColumns",
+          "profile": "column",
+          "unavailable": [],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Type": {
+              "kind": "elementKind",
+              "value": "ColumnGroup",
+              "caption": {
+                "ru-RU": "Группа колонок",
+                "en-US": "Column group"
+              }
+            },
+            "Group": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "vertical"
+              },
+              "caption": {
+                "ru-RU": "Вертикальная",
+                "en-US": "Vertical"
+              }
+            },
+            "ShowInHeader": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "FixingInTable": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "no"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "No"
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "autoStretch"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Default"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-final-en",
+              "pages": {
+                "top": {
+                  "file": "Nested-NestedColumns-top.png",
+                  "sha256": "dbde0f9217d1a801be3165bfb47dfbf5d90612f9fec22050bf23e036f95731ad",
+                  "panelSha256": "e9e058032826e062b6f8a17e8c9cb1616435166622558fc6274ffcfca4c625d5"
+                },
+                "bottom": {
+                  "file": "Nested-NestedColumns-bottom.png",
+                  "sha256": "32b0aa4fbf81bd59fefbf428c22a96c6f9b330348ff0b7112f96c935adac4665",
+                  "panelSha256": "de30b1dbfa33328d0d31378d1795ae86c7078808f10ee88928028e1f0c6379d2"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-difvc5hh",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "Nested-NestedColumns-top.png",
+                  "sha256": "75ed7df4a68fe415e6399d446b483f69f30e0ded740710c1ac54375036e108e5",
+                  "panelSha256": "2b5fda0af2b17246a4c961b77b463b885fa06720c4b2558d90d1c4eb6464c337"
+                },
+                "bottom": {
+                  "file": "Nested-NestedColumns-bottom.png",
+                  "sha256": "7de23b9e6bbf1db4bc9696fca4edf0bef5d2438ec915a9e99a9d864185bf46c8",
+                  "panelSha256": "07b2d5cab30ba1e5e936365d459e12a4c169eb856b6bc8a367361b021e49ebba"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ManualRowsDrag",
+      "hierarchical": false,
+      "canonicalExportSha256": "b6f0c3ad7c6416d505ead722dcaa5c9f949fab0ba4f9674b1ed8abcef9c5a2b0",
+      "xmlSha256": "f48113d8697b4e922a37aef438f8a4c86b94f93f32d3b542c716c66b15e480d6",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "table",
+          "unavailable": [
+            "AutofillColumns"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Верх",
+                "en-US": "Top"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-extra-da1ksb3g",
+              "directory": "palettes-measured-en",
+              "pages": {
+                "top": {
+                  "file": "ManualRowsDrag-Rows-top.png",
+                  "sha256": "3b5194f09609062dd3bca4629e96f8c64ac8c659767c7812eaf4a24b6bbe8415",
+                  "panelSha256": "db8483d2cee645d657ffaf174479049b44301fea4c6e9e6b3de13cd3d616a818"
+                },
+                "bottom": {
+                  "file": "ManualRowsDrag-Rows-bottom.png",
+                  "sha256": "fb0d472184851b94066809072a163cefb98c958e0ecf349463b079be5cba1911",
+                  "panelSha256": "6bff9a8919bc7b9c003a8c157d9da4da46c6cc810a031fc43f8bc88bcded6bbe"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-extra-da1ksb3g",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "ManualRowsDrag-Rows-top.png",
+                  "sha256": "3765ad845ae5f089568181134cb607904775b975de046316f721101a4e22a319",
+                  "panelSha256": "a8cb048df791624ee23002778d2ea78751be0d29383dcb79e2ac7d6f906cdbc1"
+                },
+                "bottom": {
+                  "file": "ManualRowsDrag-Rows-bottom.png",
+                  "sha256": "04e106b3b3d30394ed5b90dd5e552b7d1968eead9f41195f65e6f69156b28861",
+                  "panelSha256": "68d8754311abb60b6fa5fa4eae5c9002aab823580432cc8a60374b84cda61482"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ValueList",
+      "hierarchical": false,
+      "canonicalExportSha256": "3ffb37215bf822afed70a778928e4c0ffd50d147ac7bfb0fd516d0d31b5e6d30",
+      "xmlSha256": "4779facf5eccced2709b6386f73c462ddc4ea8a0956bb93dcec1f8d610c7ec20",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "table",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Список",
+                "en-US": "List"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-extra-da1ksb3g",
+              "directory": "palettes-measured-en",
+              "pages": {
+                "top": {
+                  "file": "ValueList-Rows-top.png",
+                  "sha256": "2fa8d2437c7881be90ef9e8e416f80f2a46be22d8af26d5776d355c8cb29c01a",
+                  "panelSha256": "7bee1e09f47cdfb6173975103513d31127b8ac2d3bbf38532cc667412bd64e1c"
+                },
+                "bottom": {
+                  "file": "ValueList-Rows-bottom.png",
+                  "sha256": "394e833defe395cc3dd598435ee9a447d7659c32fc5bc67c7d355d7497992820",
+                  "panelSha256": "6bff9a8919bc7b9c003a8c157d9da4da46c6cc810a031fc43f8bc88bcded6bbe"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-extra-da1ksb3g",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "ValueList-Rows-top.png",
+                  "sha256": "a95b86fb12a23911a6a9309c3d19d196bd55b9de4ce0c382979d3a2d8f0ddd9a",
+                  "panelSha256": "9fa960df5979830504ef757b33cdddaf182473e502cc67552bdc4c493c3d7e63"
+                },
+                "bottom": {
+                  "file": "ValueList-Rows-bottom.png",
+                  "sha256": "be2b4edb8da1dd116236d4054598ca44fef9ff97d501173c9ee7cd0b56ac3f1a",
+                  "panelSha256": "68d8754311abb60b6fa5fa4eae5c9002aab823580432cc8a60374b84cda61482"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "DynamicFolders",
+      "hierarchical": true,
+      "canonicalExportSha256": "37767855f913eea4fd0b97535755af84d8ed7ed5362a5e3ad72904d3a03213c2",
+      "xmlSha256": "438c5ccb2445a43fdfef11b6f75358157e38f8d4c27e03373e0bc1a7cbe47af6",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "dynamic",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "AutoRefreshPeriod": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-extra-da1ksb3g",
+              "directory": "palettes-measured-en",
+              "pages": {
+                "top": {
+                  "file": "DynamicFolders-Rows-top.png",
+                  "sha256": "afa7190bc6edc13ed046ce1f6239153eeba84399c1eb2a28225d6785419e134b",
+                  "panelSha256": "1de12bc47ec22ec9c74b82d8e8beb4e3fb4f5fa688501791b490c1f897f5b50d"
+                },
+                "bottom": {
+                  "file": "DynamicFolders-Rows-bottom.png",
+                  "sha256": "c46561b47fc321152c9c5cfac38923e88c954abdd828851f2ee4e4d1265ef368",
+                  "panelSha256": "6d22e1428398617b4d06e6285d99155529e41992da353557ab3137293625961d"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-extra-da1ksb3g",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "DynamicFolders-Rows-top.png",
+                  "sha256": "e0b4be70723d49594496ab6df50a5e36640226134b32c6042df452d9d231dcf8",
+                  "panelSha256": "d1611ee2b45567b31c7d8a793d6776bec8ef0e48b5ffa1345bdc320038d6d99a"
+                },
+                "bottom": {
+                  "file": "DynamicFolders-Rows-bottom.png",
+                  "sha256": "f928e5a60908ee5a6ceaa15cd18ecc054f4926597ca2bad6bef665e7732b67ae",
+                  "panelSha256": "2007874ae1dab201681c8ead1dd48b6af6e7ecf41966d35b5c25423090ed8401"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "DynamicPeriod",
+      "hierarchical": false,
+      "canonicalExportSha256": "aa6e195ffa5c0eb77532a73517512245552f7b316b37a10cf228a8e46a4c4f44",
+      "xmlSha256": "5e3a4be22af92c545e19176fbdf206b93280b31816970b10a67dd259b67a4762",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "dynamic",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "AutoRefreshPeriod": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-extra-da1ksb3g",
+              "directory": "palettes-measured-en",
+              "pages": {
+                "top": {
+                  "file": "DynamicPeriod-Rows-top.png",
+                  "sha256": "af89dfcee4a481f112bf9e5adde6cdae118463a8194be65b5be77396bc44f5f7",
+                  "panelSha256": "1de12bc47ec22ec9c74b82d8e8beb4e3fb4f5fa688501791b490c1f897f5b50d"
+                },
+                "bottom": {
+                  "file": "DynamicPeriod-Rows-bottom.png",
+                  "sha256": "f5b1939e154406387606aa032390bb560dfd2572ed7f1e50e366547757e006da",
+                  "panelSha256": "6d22e1428398617b4d06e6285d99155529e41992da353557ab3137293625961d"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-extra-da1ksb3g",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "DynamicPeriod-Rows-top.png",
+                  "sha256": "9f86545fc64eebcd23c4b36514357986d54621433d6c04fee1dd36bc00a16fbf",
+                  "panelSha256": "d1611ee2b45567b31c7d8a793d6776bec8ef0e48b5ffa1345bdc320038d6d99a"
+                },
+                "bottom": {
+                  "file": "DynamicPeriod-Rows-bottom.png",
+                  "sha256": "e738f83ecb2aa1e5e9b26e0bdae8136274f223b612dc374467a0643fd691f7ed",
+                  "panelSha256": "2007874ae1dab201681c8ead1dd48b6af6e7ecf41966d35b5c25423090ed8401"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "DynamicQuery",
+      "hierarchical": false,
+      "canonicalExportSha256": "e7dbd6453f92d367ff495dcac79db4b7cafc6891d2e874e7dbefc9e4b822ffef",
+      "xmlSha256": "4b322f0455b1249be85e0018189358fd7b693371b3caa0f9bac9d964a519b204",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "dynamic",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "hierarchicalList"
+              },
+              "caption": {
+                "ru-RU": "Иерархический список",
+                "en-US": "Hierarchical list"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            },
+            "AutoRefreshPeriod": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-extra-da1ksb3g",
+              "directory": "palettes-measured-en",
+              "pages": {
+                "top": {
+                  "file": "DynamicQuery-Rows-top.png",
+                  "sha256": "fa11b72b243574a704ff2a3fe9dcb14bfe99499910578fd9ac3a53f9d77698b0",
+                  "panelSha256": "1de12bc47ec22ec9c74b82d8e8beb4e3fb4f5fa688501791b490c1f897f5b50d"
+                },
+                "bottom": {
+                  "file": "DynamicQuery-Rows-bottom.png",
+                  "sha256": "1c29cba531dfaef67e47814b275f2f63d76ca03141b87d5ba547a9ba3a01e3c3",
+                  "panelSha256": "6d22e1428398617b4d06e6285d99155529e41992da353557ab3137293625961d"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-extra-da1ksb3g",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "DynamicQuery-Rows-top.png",
+                  "sha256": "84fe2cbc86ced2b1e37627db968e29dfa7a1ef576ffc8f835693489b5fce8562",
+                  "panelSha256": "d1611ee2b45567b31c7d8a793d6776bec8ef0e48b5ffa1345bdc320038d6d99a"
+                },
+                "bottom": {
+                  "file": "DynamicQuery-Rows-bottom.png",
+                  "sha256": "5dfbf54b5f5fd5c700cc818f5ee0d47e53dd6c4816b14b958945f369d3f4557d",
+                  "panelSha256": "2007874ae1dab201681c8ead1dd48b6af6e7ecf41966d35b5c25423090ed8401"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "HeightInRows",
+      "hierarchical": false,
+      "canonicalExportSha256": "439ba391222a87fcb78139e859f4f5a75deb8c096bfaa913b2e7e1a7535e7c9d",
+      "xmlSha256": "c65c740ef574ba5e7a9a11da1113ff44d81f677d0846602f8d66b28d4e256dcc",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "table",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Список",
+                "en-US": "List"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "В строках таблицы",
+                "en-US": "Use table row height"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-layout-ka4fdl4q",
+              "directory": "palettes-measured-en",
+              "pages": {
+                "top": {
+                  "file": "HeightInRows-Rows-top.png",
+                  "sha256": "36ce542270a6371378a0f061766f1d7a71745f57563fc536d13a4572a7db8e71",
+                  "panelSha256": "7bee1e09f47cdfb6173975103513d31127b8ac2d3bbf38532cc667412bd64e1c"
+                },
+                "bottom": {
+                  "file": "HeightInRows-Rows-bottom.png",
+                  "sha256": "4ec4db77e4c5ed947265b96adbb762c2d9d4e70b59e376ac055bdf9b00857bd6",
+                  "panelSha256": "322e271563f49fe4d4f6857da53da15c4075bb815186a838432d5dcbd08118eb"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-layout-ka4fdl4q",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "HeightInRows-Rows-top.png",
+                  "sha256": "88617c03e2a81fdc6fb150d4bfffbacb18f60035dc38e55167d29a62dff01da7",
+                  "panelSha256": "9fa960df5979830504ef757b33cdddaf182473e502cc67552bdc4c493c3d7e63"
+                },
+                "bottom": {
+                  "file": "HeightInRows-Rows-bottom.png",
+                  "sha256": "65716f99324f1793cdb2f64a65ecea08002ab58874c2b6e1c9303117e1e20310",
+                  "panelSha256": "a9a7be017b6fd116d98dd4e7f6271939d7bf46a4ef9ffb9f81501b628edcacf9"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "HeightInFormRows",
+      "hierarchical": false,
+      "canonicalExportSha256": "e6455efbade0e32474bb3e6d210628a1a5b70f3ebbade49d2f304113d4389f1c",
+      "xmlSha256": "5ae77874db4997a600e7931888303dc49002e30d354a5c487db565d2b9d77e79",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "manualFormHeight",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Список",
+                "en-US": "List"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "В строках формы",
+                "en-US": "Use form row height"
+              }
+            },
+            "MaxHeight": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-layout-ka4fdl4q",
+              "directory": "palettes-measured-en",
+              "pages": {
+                "top": {
+                  "file": "HeightInFormRows-Rows-top.png",
+                  "sha256": "0c4c762a97e834d7f33029199e5a93039cf2d4c7fcde1e7fc9e98a0a49d0cf6a",
+                  "panelSha256": "7bee1e09f47cdfb6173975103513d31127b8ac2d3bbf38532cc667412bd64e1c"
+                },
+                "bottom": {
+                  "file": "HeightInFormRows-Rows-bottom.png",
+                  "sha256": "658d2bb238435f0eed706f64c6ad7fb2ebcef42fc8477bf870e08ee5f893ec71",
+                  "panelSha256": "cc2b9fb68f1a100492e55ff51e3e9d84ac55249ead99ccbead023094a02d33d6"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-layout-ka4fdl4q",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "HeightInFormRows-Rows-top.png",
+                  "sha256": "940b0458c5a1ca6c95f7bb87499fbd6fef6b79d60be7d51b1eea17b6c13931a0",
+                  "panelSha256": "9fa960df5979830504ef757b33cdddaf182473e502cc67552bdc4c493c3d7e63"
+                },
+                "bottom": {
+                  "file": "HeightInFormRows-Rows-bottom.png",
+                  "sha256": "f001be199f8c283a3924246f2543737d765f2f325995cf57b7317666e5362ebd",
+                  "panelSha256": "4a8e8503f5a7851a3b82da016154da9bec79b02f8fd5be270f599c1bb893ec92"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ContentHeight",
+      "hierarchical": false,
+      "canonicalExportSha256": "a4d8983465077019f749350f1a34c4a9229bd05cd2ebfd54b4b8a0aa2bd7262e",
+      "xmlSha256": "6e600a1f510cd984a35c2fbd2bdae1679623eb5e45716aa5cea6733cf5e9ee81",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "table",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Список",
+                "en-US": "List"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "По содержимому",
+                "en-US": "Use content height"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-layout-ka4fdl4q",
+              "directory": "palettes-measured-en",
+              "pages": {
+                "top": {
+                  "file": "ContentHeight-Rows-top.png",
+                  "sha256": "a9998c61f48f62b6e64ce31b5a09e05cd1ab2b936207e68471fe7a88d8a5988e",
+                  "panelSha256": "7bee1e09f47cdfb6173975103513d31127b8ac2d3bbf38532cc667412bd64e1c"
+                },
+                "bottom": {
+                  "file": "ContentHeight-Rows-bottom.png",
+                  "sha256": "b4d94603f603ae2dd7bfea315c5ba92dcae5d71e90bca08d8c3b6a456e978130",
+                  "panelSha256": "b07eb4f0821ec32d8b1d6061729b5432d210f279ab0c85b2709d23ef904e7d04"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-layout-ka4fdl4q",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "ContentHeight-Rows-top.png",
+                  "sha256": "5fd34bb8e8e846bb24cc6d1c3c669a7ff3b567485df887b273dec5a231d07514",
+                  "panelSha256": "9fa960df5979830504ef757b33cdddaf182473e502cc67552bdc4c493c3d7e63"
+                },
+                "bottom": {
+                  "file": "ContentHeight-Rows-bottom.png",
+                  "sha256": "9a68b53260ad42d3f3523fdc296c959225b7efc48a64844ca1dc543a69a52c22",
+                  "panelSha256": "47d587870daf555dacc560f24705f561da14f5fc3da33d5a2636ea1f7050b11d"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "DropOnly",
+      "hierarchical": false,
+      "canonicalExportSha256": "a3fb43154028e24100c344b56f8ea149d9e51400fa9cc562816054c5d99c3059",
+      "xmlSha256": "7173eefd965a03ad6289d49ae848bf0295cbc204bac734bca2322d7fde5e52eb",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "table",
+          "unavailable": [
+            "AutofillColumns"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Список",
+                "en-US": "List"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-layout-ka4fdl4q",
+              "directory": "palettes-measured-en",
+              "pages": {
+                "top": {
+                  "file": "DropOnly-Rows-top.png",
+                  "sha256": "ea0983b351fc8685b04afc1ca4be25474cb9a9b62534ba38b2c90b40fe4da3eb",
+                  "panelSha256": "bee5955a3818e568a35bdf927ec44d6791ce99aabe0e7153a4f82235ab1901f8"
+                },
+                "bottom": {
+                  "file": "DropOnly-Rows-bottom.png",
+                  "sha256": "a96ac2d4733a6086e49a7cf4a99925f41a70297e31c1ae987b5be8453603478d",
+                  "panelSha256": "6bff9a8919bc7b9c003a8c157d9da4da46c6cc810a031fc43f8bc88bcded6bbe"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-layout-ka4fdl4q",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "DropOnly-Rows-top.png",
+                  "sha256": "83d1b441593287cf0c7a45e305d8eec7ed59480b39a9e615584dfb4b32a10b94",
+                  "panelSha256": "4dc999c55b86c2883e50f4a1f042237b1ba1dc1551dfefa9c8c6e980a1bb7c58"
+                },
+                "bottom": {
+                  "file": "DropOnly-Rows-bottom.png",
+                  "sha256": "62fba3fde795067c7d44c6f4e728779070d4912d5c16cd2385ed9049fb74461f",
+                  "panelSha256": "68d8754311abb60b6fa5fa4eae5c9002aab823580432cc8a60374b84cda61482"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "DragOnly",
+      "hierarchical": false,
+      "canonicalExportSha256": "d08debfb54f45d440d3cc347330efd57cbcb8022904da3f647c100d5112ee253",
+      "xmlSha256": "306c68a185dac76d2b559fa6b1512a6f6b0cea6238e3fbd9223b1706cf0b8df8",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "table",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Список",
+                "en-US": "List"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "absent",
+              "default": {
+                "kind": "auto"
+              },
+              "caption": {
+                "ru-RU": "Авто",
+                "en-US": "Auto"
+              }
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-layout-ka4fdl4q",
+              "directory": "palettes-measured-en",
+              "pages": {
+                "top": {
+                  "file": "DragOnly-Rows-top.png",
+                  "sha256": "806b9d7753cfc324129d9185f306a78a96aae8ad412d69d08084a0bdb8581523",
+                  "panelSha256": "e8a1e47d4f65ab6ffc43d8e306f807b42531a3f521a1a3bc917f95f6be55bc9c"
+                },
+                "bottom": {
+                  "file": "DragOnly-Rows-bottom.png",
+                  "sha256": "53a4e580fa3ebf302125993566d77a75834cc01a94b4c2e3a4e0a6fd9546d699",
+                  "panelSha256": "6bff9a8919bc7b9c003a8c157d9da4da46c6cc810a031fc43f8bc88bcded6bbe"
+                }
+              }
+            },
+            "ru": {
+              "stand": "form-native-table-palette-layout-ka4fdl4q",
+              "directory": "palettes-measured-ru",
+              "pages": {
+                "top": {
+                  "file": "DragOnly-Rows-top.png",
+                  "sha256": "45e34762fe3d7871dfb84c37e40e1a9b6748150de15721615abeae5b746889d9",
+                  "panelSha256": "d44d9a75c366e8e4717a4777946d94b6e8046dfcb96a297467d43fa471a3634f"
+                },
+                "bottom": {
+                  "file": "DragOnly-Rows-bottom.png",
+                  "sha256": "f9fc1de7dee8a58225f2213214f76c5413ebd4eb695716fdd897088e7b90a168",
+                  "panelSha256": "68d8754311abb60b6fa5fa4eae5c9002aab823580432cc8a60374b84cda61482"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ManualTableRows",
+      "hierarchical": false,
+      "canonicalExportSha256": "f48d4d93e3e337e22740f0e215e111b2d0fa8e69a0bb390d168000d9b581ea24",
+      "xmlSha256": "fd697c9b0ae9e5f2c51e81aeafe0c6a81a76c96ecf6f36ec74c8d9ebac10899c",
+      "selections": [
+        {
+          "name": "Rows",
+          "profile": "manualTableRows",
+          "unavailable": [
+            "AutofillColumns",
+            "FileDragMode"
+          ],
+          "categories": [
+            "main",
+            "usage",
+            "appearance",
+            "layout",
+            "events"
+          ],
+          "values": {
+            "Width": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Height": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 0
+              }
+            },
+            "Title": {
+              "kind": "absent",
+              "default": {
+                "kind": "empty"
+              }
+            },
+            "Header": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "Footer": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "HeaderHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "FooterHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "number",
+                "value": 1
+              }
+            },
+            "HorizontalStretch": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxWidth": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeight": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": true
+              }
+            },
+            "AutoMaxHeightInTableRows": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "DataPath": {
+              "kind": "declared",
+              "sourceKind": "form"
+            },
+            "TitleLocation": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "none"
+              },
+              "caption": {
+                "ru-RU": "Нет",
+                "en-US": "None"
+              }
+            },
+            "FileDragMode": {
+              "kind": "absent",
+              "default": {
+                "kind": "choice",
+                "value": "asFileReference"
+              },
+              "caption": {
+                "ru-RU": "Как ссылка на файл",
+                "en-US": "As file reference"
+              }
+            },
+            "AutofillColumns": {
+              "kind": "absent",
+              "default": {
+                "kind": "boolean",
+                "value": false
+              }
+            },
+            "Representation": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "Список",
+                "en-US": "List"
+              }
+            },
+            "HeightControlVariant": {
+              "kind": "declared",
+              "sourceKind": "form",
+              "caption": {
+                "ru-RU": "В строках таблицы",
+                "en-US": "Use table row height"
+              }
+            },
+            "MaxHeightInTableRows": {
+              "kind": "declared",
+              "sourceKind": "form"
+            }
+          },
+          "captures": {
+            "en": {
+              "stand": "form-native-table-palette-manual-visdn7pd",
+              "pages": {
+                "manual-before-en.png": {
+                  "sha256": "1f863538e777d929c799ddcc268b064c10749603661944bc0401c588a208a7c1"
+                },
+                "manual-checked-en.png": {
+                  "sha256": "d2b3f9f4642ae1c2eb3a5e1321afe25586f40c630ced6df09ea85f3b4e01d97f"
+                },
+                "manual-typed-en.png": {
+                  "sha256": "10f0b9172df6e4bcba3e148ec0ff2bda1c5fdfbe5be031ba344d1e88d0e724d6"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

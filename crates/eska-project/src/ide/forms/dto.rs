@@ -44,6 +44,7 @@ fn element(
     form: &ComposedForm,
     value: &EffectiveElement,
     presentations: &HashMap<&ElementIdentity, &ElementPresentation>,
+    layout_additions: bool,
 ) -> Value {
     let presentation = presentations.get(&value.identity).map(|presentation| {
         let mut value = json!({"grouping":presentation.grouping,"united":presentation.united,"displayed":presentation.displayed,"markIncomplete":presentation.mark_incomplete,"titleLocation":presentation.title_location,"picture":presentation.picture,"caption":presentation.caption,"tooltip":presentation.tooltip,"footerText":presentation.footer_text,"valueType":presentation.value_type,"binding":presentation.binding,"choices":presentation.choices,
@@ -66,14 +67,38 @@ fn element(
         }
         value
     });
+    let legacy_addition = |node: &EffectiveElement| {
+        !layout_additions
+            && node.kind.is_some_and(|kind| {
+                kind.family() == eska_project_core::project::forms::ElementFamily::Addition
+            })
+    };
+    let dto = |child| element(labels, form, child, presentations, layout_additions);
+    let children = value
+        .children
+        .iter()
+        .filter(|child| !legacy_addition(child))
+        .map(dto)
+        .collect::<Vec<_>>();
+    let auxiliary = value
+        .auxiliary
+        .iter()
+        .chain(value.children.iter().filter(|child| legacy_addition(child)))
+        .map(dto)
+        .collect::<Vec<_>>();
     json!({"identity":identity(&value.identity),"origin":origin(&value.origin),"kind":value.kind.map(eska_project_core::project::forms::ElementKind::xml_name),"name":value.name,"xmlName":value.xml_name,
         "properties":form.inspectable_properties(value).map(|value| property(labels,value)).collect::<Vec<_>>(),"presentation":presentation,
-        "children":value.children.iter().map(|value| element(labels,form,value,presentations)).collect::<Vec<_>>(),"auxiliary":value.auxiliary.iter().map(|value| element(labels,form,value,presentations)).collect::<Vec<_>>()})
+        "children":children,"auxiliary":auxiliary})
 }
 fn definition(labels: &Labels, value: &EffectiveDefinition) -> Value {
     json!({"name":value.name,"xmlName":value.xml_name,"origin":origin(&value.origin),"qualifiers":value.qualifiers,"properties":value.properties.iter().map(|value| property(labels,value)).collect::<Vec<_>>()})
 }
-pub(super) fn model(labels: &Labels, preview: &FormPreview) -> Result<(Value, usize), Value> {
+pub(super) fn model(
+    labels: &Labels,
+    preview: &FormPreview,
+    api_minor: u32,
+) -> Result<(Value, usize), Value> {
+    let layout_additions = api_minor >= 43;
     let presentations: HashMap<_, _> = preview
         .presentation
         .elements
@@ -122,10 +147,13 @@ pub(super) fn model(labels: &Labels, preview: &FormPreview) -> Result<(Value, us
         eska_project_core::project::forms::FormHandlerOwner::Element(value)=>json!({"kind":"element","identity":identity(value)}),
         eska_project_core::project::forms::FormHandlerOwner::Command(name)=>json!({"kind":"command","name":name}),
     },"event":handler.event,"name":handler.name,"origin":origin(&handler.origin)})).collect::<Vec<_>>();
-    let mut model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
+    let mut model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations,layout_additions),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
         "commands":preview.form.commands.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
         "diagnostics":{"composition":preview.form.diagnostics,"appearance":preview.presentation.diagnostics}});
     model["activityColor"] = json!(preview.presentation.activity_color);
+    if api_minor >= 44 {
+        model["formHelpAvailable"] = json!(preview.form_help_available);
+    }
     if let Some(variant) = preview.presentation.script_variant {
         model["scriptVariant"] = json!(variant);
     }

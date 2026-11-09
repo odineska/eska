@@ -1,0 +1,350 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T13:27:45.778183+00:00",
+  "scope": [
+    "T157",
+    "T158"
+  ],
+  "profile": {
+    "platform": "8.3.27.2342",
+    "os": "linux",
+    "architecture": "arm64",
+    "dpi": 96,
+    "zoom": 100,
+    "bslExecuted": false
+  },
+  "commits": {
+    "nativeCorpus": "6984c55",
+    "normalizedCorpus": "9b3a99b",
+    "backend": "c8867c6",
+    "harness": "b608bc8",
+    "installedSuite": "7a1c8da"
+  },
+  "native": {
+    "stand": "form-native-fixed-group-47zrbe2q",
+    "forms": 5,
+    "captures": 10,
+    "sourcesUnchanged": true,
+    "exitCodes": [
+      0,
+      0
+    ],
+    "originalSourceButtonHasCommandName": false,
+    "canonicalCommandName": "0",
+    "height3": {
+      "frame": [
+        745,
+        164
+      ],
+      "groupHeight": 50,
+      "code": [
+        52,
+        94,
+        91,
+        23
+      ],
+      "below": [
+        13,
+        128,
+        711,
+        23
+      ]
+    }
+  },
+  "diagnosis": {
+    "beforeStand": "form-fixed-group-viewer-f43wmn6t",
+    "beforeFrame": [
+      745,
+      166
+    ],
+    "beforeGroupHeight": 52,
+    "unboundButtonWasRendered": true,
+    "titleFontWasNotTheCause": true,
+    "titleFontRemainsPoints": 12,
+    "rule": "Missing/empty/whitespace/0 CommandName hides only the button preview widget; its tree identity and properties remain.",
+    "explicitReferences": "Nonempty explicit references keep their previous resolution. A BSL action is not required; native-usual-buttons has bound commands without Action."
+  },
+  "api": {
+    "major": 1,
+    "minor": 42,
+    "schemaChanged": false,
+    "field": "presentation.displayed"
+  },
+  "checks": {
+    "rustLogs": "form-unbound-rust-99b5m1l3",
+    "fmt": "passed",
+    "check": "passed",
+    "clippyAllTargetsAllFeaturesDenyWarnings": "passed",
+    "cargoTest": {
+      "passed": 1569,
+      "failed": 0,
+      "ignored": 19
+    },
+    "backendBuild": "passed",
+    "newTestsBefore": "2 failed",
+    "newTestsAfter": "2 passed",
+    "node": {
+      "tests": 710,
+      "pass": 701,
+      "fail": 0,
+      "skipped": 9
+    },
+    "nodeLogs": "form-unbound-validation-8v2l7k3j"
+  },
+  "installed": {
+    "artifactSource": "form-batch-yeFgxb",
+    "vsixSha256": "70a88bafe59f77fa1c739a417688c089738cc91616eef7881f81cfa267a6b60b",
+    "backendSha256": "367b53cbcbec917be4c36d43decdd20e87f6590a6bef9dfcce01257b558696e4",
+    "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+    "runtimeFiles": 1262,
+    "successfulRuns": 20,
+    "stateObservations": 364,
+    "acceptedRuns": [
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "unbound-buttons-en",
+        "states": 9
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "unbound-buttons-ru",
+        "states": 9
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "inspectors-en",
+        "states": 1
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "inspectors-ru",
+        "states": 1
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "handlers-en",
+        "states": 1
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "handlers-ru",
+        "states": 1
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "renderer-en",
+        "states": 20
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "renderer-ru",
+        "states": 20
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "usual-buttons-en",
+        "states": 18
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "usual-buttons-ru",
+        "states": 18
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "groups-en",
+        "states": 22
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "groups-ru",
+        "states": 22
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "composition-en",
+        "states": 9
+      },
+      {
+        "stand": "form-batch-yeFgxb",
+        "name": "composition-ru",
+        "states": 9
+      },
+      {
+        "stand": "form-unbound-regressions-tkqzwp1n",
+        "name": "preview-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 1,
+        "seconds": 8.31275408699912,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "stand": "form-unbound-regressions-tkqzwp1n",
+        "name": "preview-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 1,
+        "seconds": 9.892176275001475,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "stand": "form-unbound-regressions-a61ie006",
+        "name": "responsive-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 31,
+        "seconds": 19.856394623000597,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "stand": "form-unbound-regressions-7mwdc18w",
+        "name": "responsive-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 31,
+        "seconds": 22.452289513999858,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "stand": "form-unbound-table-height-xgkfert9",
+        "name": "table-height-en",
+        "passed": true,
+        "exitCode": 0,
+        "states": 70,
+        "seconds": 40.79875856800027,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "stand": "form-unbound-table-height-xgkfert9",
+        "name": "table-height-ru",
+        "passed": true,
+        "exitCode": 0,
+        "states": 70,
+        "seconds": 43.26769018899904,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      }
+    ],
+    "initialBatchPassed": false,
+    "retestedFailures": "Four old preview/resize expectations were corrected in test drivers; native geometry and the 50px group target were retained.",
+    "unboundMatrixStates": 18,
+    "exactNativeGeometry": true,
+    "dirtyBindingToggle": true,
+    "selectionAndNeighbourDomPreserved": true,
+    "detachedNativeTargetVerified": true,
+    "sourceWrites": false
+  },
+  "wholeForms": {
+    "stand": "form-unbound-whole-f27z74zc",
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.447901551999166,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.161351653001475,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.87411968699962,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.412358589999712,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.180760335999366,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 9.854330243000732,
+        "runtimeManifestSha256": "a1aa1310b0369e4a607538fb21cbddda3ec1bb8866f3576cf5ecb658acb572d2",
+        "runtimeFiles": 1262
+      }
+    ],
+    "sourceFormFiles": 4,
+    "sourceBytesUnchanged": true,
+    "questionnaireFrame": {
+      "width": 785,
+      "height": 770
+    },
+    "wizardFrame": {
+      "width": 811,
+      "height": 612
+    },
+    "totalsFrame": {
+      "width": 1222,
+      "height": 536
+    },
+    "bodyScrolling": {
+      "before": {
+        "scrollTop": 0,
+        "clientHeight": 29,
+        "scrollHeight": 742,
+        "commands": [
+          13,
+          29,
+          752,
+          26
+        ],
+        "firstInputY": 67
+      },
+      "after": {
+        "scrollTop": 120,
+        "clientHeight": 29,
+        "scrollHeight": 742,
+        "commands": [
+          13,
+          -91,
+          752,
+          26
+        ],
+        "firstInputY": -53
+      },
+      "rootCommandsFixed": false
+    },
+    "fullNativeGeometryAccepted": false
+  },
+  "acceptance": {
+    "unboundButtonGeometry": true,
+    "responsiveSuiteRuEn": true,
+    "fullRustAndNodeChecks": true,
+    "bodyRootCommandsFixed": false,
+    "windows": false
+  },
+  "remaining": [
+    "Keep root commands visible while scrolling the form body.",
+    "Resolve remaining complete BSP frame/position differences.",
+    "Continue native command-visibility, DPI and Windows acceptance."
+  ]
+}

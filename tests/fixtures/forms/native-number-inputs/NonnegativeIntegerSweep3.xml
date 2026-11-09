@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+	</Title>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<InputField name="Digits21Fraction0" id="1">
+			<DataPath>Digits21Fraction0</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#FFEFBA</BackColor>
+			<ContextMenu name="Digits21Fraction0ContextMenu" id="2"/>
+			<ExtendedTooltip name="Digits21Fraction0ExtendedTooltip" id="3"/>
+		</InputField>
+		<InputField name="Digits22Fraction0" id="4">
+			<DataPath>Digits22Fraction0</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#DBF2FB</BackColor>
+			<ContextMenu name="Digits22Fraction0ContextMenu" id="5"/>
+			<ExtendedTooltip name="Digits22Fraction0ExtendedTooltip" id="6"/>
+		</InputField>
+		<InputField name="Digits23Fraction0" id="7">
+			<DataPath>Digits23Fraction0</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#FBE1CD</BackColor>
+			<ContextMenu name="Digits23Fraction0ContextMenu" id="8"/>
+			<ExtendedTooltip name="Digits23Fraction0ExtendedTooltip" id="9"/>
+		</InputField>
+		<InputField name="Digits24Fraction0" id="10">
+			<DataPath>Digits24Fraction0</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#F4CFDA</BackColor>
+			<ContextMenu name="Digits24Fraction0ContextMenu" id="11"/>
+			<ExtendedTooltip name="Digits24Fraction0ExtendedTooltip" id="12"/>
+		</InputField>
+		<InputField name="Digits25Fraction0" id="13">
+			<DataPath>Digits25Fraction0</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#DCF4CF</BackColor>
+			<ContextMenu name="Digits25Fraction0ContextMenu" id="14"/>
+			<ExtendedTooltip name="Digits25Fraction0ExtendedTooltip" id="15"/>
+		</InputField>
+		<InputField name="Digits26Fraction0" id="16">
+			<DataPath>Digits26Fraction0</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#A8E4B8</BackColor>
+			<ContextMenu name="Digits26Fraction0ContextMenu" id="17"/>
+			<ExtendedTooltip name="Digits26Fraction0ExtendedTooltip" id="18"/>
+		</InputField>
+		<InputField name="Digits27Fraction0" id="19">
+			<DataPath>Digits27Fraction0</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#D9F2D5</BackColor>
+			<ContextMenu name="Digits27Fraction0ContextMenu" id="20"/>
+			<ExtendedTooltip name="Digits27Fraction0ExtendedTooltip" id="21"/>
+		</InputField>
+		<InputField name="Digits28Fraction0" id="22">
+			<DataPath>Digits28Fraction0</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#F1DBE5</BackColor>
+			<ContextMenu name="Digits28Fraction0ContextMenu" id="23"/>
+			<ExtendedTooltip name="Digits28Fraction0ExtendedTooltip" id="24"/>
+		</InputField>
+		<InputField name="Digits29Fraction0" id="25">
+			<DataPath>Digits29Fraction0</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#DDD2FA</BackColor>
+			<ContextMenu name="Digits29Fraction0ContextMenu" id="26"/>
+			<ExtendedTooltip name="Digits29Fraction0ExtendedTooltip" id="27"/>
+		</InputField>
+		<InputField name="Digits30Fraction0" id="28">
+			<DataPath>Digits30Fraction0</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#CCE3ED</BackColor>
+			<ContextMenu name="Digits30Fraction0ContextMenu" id="29"/>
+			<ExtendedTooltip name="Digits30Fraction0ExtendedTooltip" id="30"/>
+		</InputField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Name" id="1">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Digits21Fraction0" id="2">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>21</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Digits22Fraction0" id="3">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>22</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Digits23Fraction0" id="4">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>23</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Digits24Fraction0" id="5">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>24</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Digits25Fraction0" id="6">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>25</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Digits26Fraction0" id="7">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>26</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Digits27Fraction0" id="8">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>27</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Digits28Fraction0" id="9">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>28</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Digits29Fraction0" id="10">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>29</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Digits30Fraction0" id="11">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>30</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+</Form>

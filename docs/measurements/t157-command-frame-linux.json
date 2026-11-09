@@ -1,0 +1,652 @@
+{
+  "schemaVersion": 1,
+  "task": "T157",
+  "issue": "https://github.com/odineska/eska/issues/265",
+  "measuredAt": "2026-11-08T04:38:27.201969+00:00",
+  "scope": "Начальный размер командных панелей Linux, Width CommandBarButton, парные эталоны ru/en и сохранение смешанных строк; без BSL",
+  "profile": {
+    "platform": "8.3.27.2342",
+    "interface": "Taxi",
+    "compatibility": "Version8_3_27",
+    "os": "ALT Linux ARM64",
+    "dpi": 96,
+    "zoom": 100,
+    "locales": [
+      "en",
+      "ru"
+    ],
+    "nativeResizeAccepted": false,
+    "fullNativeProfileAccepted": false,
+    "windowsAccepted": false
+  },
+  "implementation": {
+    "explorerCommit": "29faa4f10d35ef80c90181e43f596d9855360185",
+    "widthCommit": "f8c023c",
+    "fixtureCommits": [
+      "1bb7a14",
+      "2052cc8"
+    ],
+    "minimum": "Начальное место панели определяется шириной системной подписи меню, даже если меню не видно",
+    "fontMeasurement": "Общий путь загрузки шрифта и дискретных advances для кнопок и начального размера панели",
+    "moreAdornmentWidthPx": 33,
+    "moreAdornmentPartsPx": {
+      "padding": 19,
+      "border": 2,
+      "arrow": 5,
+      "arrowMargin": 2,
+      "gap": 5
+    },
+    "verticalMargin": "Вынос края в 2 px относится к горизонтальному ряду; вертикальная панель не уменьшает пространство других строк",
+    "commandBarButtonWidth": "В Linux сохранённый Width у CommandBarButton не задаёт ширину изображения; обычные кнопки используют свой Width",
+    "geometryOwner": "Существующий цикл компоновки формы; дополнительные ResizeObserver и скрытые кнопки не добавлены",
+    "sourceWritesDuringViewing": false,
+    "backendProtocolChanged": false,
+    "newDependencies": false
+  },
+  "nativeCorpus": {
+    "additionalMinimalForms": 8,
+    "exactPreviousForms": 3,
+    "screenshots": 22,
+    "sourceFilesUnchanged": 2002,
+    "minimalManifest": "tests/fixtures/forms/native-command-frame/capture-manifest.json",
+    "previousRowsManifest": "tests/fixtures/forms/native-button-rows/locale-capture-manifest.json",
+    "popupReference": "tests/fixtures/forms/native-groups/frame-locales.json",
+    "parsedXmlPreserved": true
+  },
+  "closedCases": [
+    {
+      "case": "ProbeButtons",
+      "previousViewerFrame": [
+        139,
+        187
+      ],
+      "nativeFrames": {
+        "ru": [
+          139,
+          187
+        ],
+        "en": [
+          142,
+          187
+        ]
+      },
+      "resolution": "139 px корректны для ru; English требует 142 px. Старый тест применял английский размер в обоих языках."
+    },
+    {
+      "case": "ProbeRows",
+      "previousViewerFrame": [
+        202,
+        249
+      ],
+      "nativeFrames": {
+        "ru": [
+          204,
+          249
+        ],
+        "en": [
+          204,
+          249
+        ]
+      },
+      "resolution": "Исправлено уменьшение места других строк вертикальным контейнером панели."
+    },
+    {
+      "case": "BarWithPopup",
+      "nativeFrames": {
+        "ru": [
+          111,
+          79
+        ],
+        "en": [
+          142,
+          79
+        ]
+      },
+      "resolution": "Повторён точный XML. Старый общий русский эталон заменён парными размерами; сравнение нового эталона точное."
+    },
+    {
+      "case": "CommandBarButton Width 4/8",
+      "nativePaintedButtonWidths": [
+        51,
+        55
+      ],
+      "resolution": "Свойство сохраняется в XML и палитре, но не меняет изображение. Dirty-переключение проверено во вкладке и в отдельном окне."
+    }
+  ],
+  "artifact": {
+    "stand": "form-batch-iZbn70",
+    "vsixSha256": "43848d67cc4b99f5c9cb6463b796c56846e339897abceb1ee009111a353c70ab",
+    "backendSha256": "10b7e4b520dc9ac6f06fa3a56ebbe0b85c59a5e18658551c860e2b558ac3489d",
+    "runtimeManifestSha256": "cb3bd2e8ff6029d980bdb71cf3e301fd2a93b99ee108109f75ecf176f81f7e58",
+    "runtimeFiles": 1262,
+    "builds": 1,
+    "packages": 1,
+    "inputs": {
+      "path": "form-batch-iZbn70/inputs.json",
+      "sha256": "dc1ac6c03d260d2ecf43cf55791d007ff291b6d3444f64040960463c444447fe"
+    }
+  },
+  "gates": {
+    "passedRuns": 8,
+    "runs": [
+      {
+        "suite": "command-frame",
+        "locale": "en",
+        "results": 12,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-iZbn70/command-frame-en/receipt.json",
+          "sha256": "c89a8835a49415ac70a69030a959d105b090e94592d89217d96c8d1f6877c7c6"
+        }
+      },
+      {
+        "suite": "command-frame",
+        "locale": "ru",
+        "results": 12,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-iZbn70/command-frame-ru/receipt.json",
+          "sha256": "334d65932c652cc3e55f8e754fe84f9606ff28f270eb52f66a04a285463bcefc"
+        }
+      },
+      {
+        "suite": "button-rows",
+        "locale": "en",
+        "results": 8,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-iZbn70/button-rows-en/receipt.json",
+          "sha256": "f749471cce1bdf6260c2f102327d97c239e583821917f2ec6cb51e4ab8f80c2b"
+        }
+      },
+      {
+        "suite": "button-rows",
+        "locale": "ru",
+        "results": 8,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-iZbn70/button-rows-ru/receipt.json",
+          "sha256": "95c050cfaf0ec361167c4677b8d526a7298510ea414bf100e2a24f1d815a582c"
+        }
+      },
+      {
+        "suite": "command-overflow",
+        "locale": "en",
+        "results": 35,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-iZbn70/command-overflow-en/receipt.json",
+          "sha256": "9130f55513176ee4cf97c845ce5f7bbfc141ccd5ed570120c23057078ac183ea"
+        }
+      },
+      {
+        "suite": "command-overflow",
+        "locale": "ru",
+        "results": 35,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-iZbn70/command-overflow-ru/receipt.json",
+          "sha256": "584de9a8a25ee28dba6765d80e42df6ddc7512e0122356c38d95eeaf72795322"
+        }
+      },
+      {
+        "suite": "command-bars",
+        "locale": "en",
+        "results": 64,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-iZbn70/command-bars-en/receipt.json",
+          "sha256": "cf4ffa0355e485ab5906802fd71b48ddd36067587589a10c2ce49633740310d9"
+        }
+      },
+      {
+        "suite": "command-bars",
+        "locale": "ru",
+        "results": 64,
+        "inputsStable": true,
+        "receipt": {
+          "path": "form-batch-iZbn70/command-bars-ru/receipt.json",
+          "sha256": "180f6e1769613c76ccde383901c700ffae94419a02a5e431db9d84beffcdfcd7"
+        }
+      }
+    ],
+    "publishedResults": 238,
+    "strictCommandMatrixStates": 94,
+    "strictNativeReferenceStates": 88,
+    "functionalResizeStates": 6,
+    "note": "32 формы двух минимальных матриц: 64 исходных состояния, 24 dirty-состояния и 6 функциональных resize; native-resize не принят."
+  },
+  "relatedRegressions": {
+    "originalSummary": {
+      "path": "form-command-frame-regressions-0b0qs4sx/regressions.json",
+      "sha256": "215942e6a70c34e3570ce31d640d77d0029e91bd96bfda40fc67fc18db103c93"
+    },
+    "originalPassedRuns": 21,
+    "originalFailedRuns": 1,
+    "originalFailure": "groups-en: BarWithPopup 142 вместо общего русского эталона 111. Исходный отказ сохранён.",
+    "nativeReferenceCorrection": "Сначала повторно снят точный XML ru/en, затем изменены только тест и данные. Runtime VSIX не изменён.",
+    "retestSummary": {
+      "path": "form-command-frame-groups-retest-qo6je9md/regressions.json",
+      "sha256": "0a0cff5835cf1a32202ec6866e2aea01824d52dea789e04f1fd0ce5b393b865d"
+    },
+    "retestInputs": {
+      "path": "form-command-frame-groups-retest-qo6je9md/retest-inputs.json",
+      "sha256": "5996e030ae7ed9ff5de3eefbdca22c3a0d679a243b63aba4a893ea825c99fe38"
+    },
+    "retestedPassedRuns": 2,
+    "effectivePassedSuitesByLocale": 22,
+    "receipts": [
+      {
+        "suite": "usual-buttons",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/usual-buttons-en/receipt.json",
+          "sha256": "3ee5c0d89c48ea3656168ae177b8ed0217d666d1af80ce0486a7805810ee822c"
+        }
+      },
+      {
+        "suite": "usual-buttons",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/usual-buttons-ru/receipt.json",
+          "sha256": "2dce8343cc35f673f773139c0d49f49181b78c81eeb49e0cda3b5925573e954a"
+        }
+      },
+      {
+        "suite": "button-captions",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/button-captions-en/receipt.json",
+          "sha256": "e23f994eae86dd32af8d958efde1e4437e2d85ef060687a9a78baba86f18493d"
+        }
+      },
+      {
+        "suite": "button-captions",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/button-captions-ru/receipt.json",
+          "sha256": "ecca2d6677923bbc605a28b2f8b0c33d402713a6dc238972563d413c73cf652e"
+        }
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/button-metrics-en/receipt.json",
+          "sha256": "aa6d6a993ce34bf93442f6e2cb7c5dfdb9b2744948cb1a09f44fc59e77186a9a"
+        }
+      },
+      {
+        "suite": "button-metrics",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/button-metrics-ru/receipt.json",
+          "sha256": "e396382b41cd00ef62b1d8609dde6a3bc9dbce6e414718ea417c6af87228a37b"
+        }
+      },
+      {
+        "suite": "tab-titles",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/tab-titles-en/receipt.json",
+          "sha256": "1f714622d180a699458ecf85f2e0f29e1471e091c7ce47125396232c1693a29c"
+        }
+      },
+      {
+        "suite": "tab-titles",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/tab-titles-ru/receipt.json",
+          "sha256": "e6f8238c028ae9fcbdc5d546cb66b1406c9e05e68431b337bd3ddea3fb4e0684"
+        }
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "passed": false,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/groups-en/receipt.json",
+          "sha256": "49c00ebdc89cfc764828445946ae357fe687f15254325987019050678c30fc48"
+        }
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/groups-ru/receipt.json",
+          "sha256": "442ee6ea3eb7d88584d15c856f2bce555d26fdd2e7c30b41aa44e3b1f51c6417"
+        }
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/group-spacing-en/receipt.json",
+          "sha256": "c452f75cafddfb6ecd78063e61552e9b10ffb4c51f7c7438b703678b8ab0834a"
+        }
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/group-spacing-ru/receipt.json",
+          "sha256": "1fc786bc9405dab1130153dadc4268ba1f65f4a58f1e90e36df5d36f7fa9572e"
+        }
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/through-align-en/receipt.json",
+          "sha256": "15557bc303c4ab5f53d585234b679d864c2ca3f6eace3e24973d16ad97961326"
+        }
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/through-align-ru/receipt.json",
+          "sha256": "417e87b23dde88237892853f1afa4de8444da746241b94c21be490668e2741d6"
+        }
+      },
+      {
+        "suite": "united",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/united-en/receipt.json",
+          "sha256": "f145118827dd14fcc44a0e3f72b0bfd8a47c3487ee24f375272d7fa891eb64b7"
+        }
+      },
+      {
+        "suite": "united",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/united-ru/receipt.json",
+          "sha256": "462dc7918d462ed5e5695a5e87531d934387251ff790802d585b3a685be1545c"
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/tables-en/receipt.json",
+          "sha256": "9a4ba0ad0b9fa9435a0fa78953aa28c7446dc77f5471d1fac03ad1b09e2e4dfb"
+        }
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/tables-ru/receipt.json",
+          "sha256": "5e97b3a7d8a105ff23e91f15ddec21eec7d8a7022f4bdd8e568ef8afa66cc994"
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/table-pixels-en/receipt.json",
+          "sha256": "79260c99dcb10b529651e21cece5109a0a402729158deb4096a0d6749b3728f0"
+        }
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/table-pixels-ru/receipt.json",
+          "sha256": "2181c62e3e7722ab61eb5bbf1f9f6d4f36dced46e4e054e57200e5d0ad276495"
+        }
+      },
+      {
+        "suite": "column-widths",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/column-widths-en/receipt.json",
+          "sha256": "62eb1a4b25e9aa842bc128127430a95bc7503b8d899e49478e4406698bbb565c"
+        }
+      },
+      {
+        "suite": "column-widths",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-regressions-0b0qs4sx/column-widths-ru/receipt.json",
+          "sha256": "c9c925df915bf3dc0d19e2afbb3ce4b0781f3d0870937889daf9f419f8c74342"
+        }
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-groups-retest-qo6je9md/groups-en/receipt.json",
+          "sha256": "8f7ca5717d19fea0205f904be4ab24bd3a553c4d02a52deb0de99e677bfb12db"
+        }
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "passed": true,
+        "receipt": {
+          "path": "form-command-frame-groups-retest-qo6je9md/groups-ru/receipt.json",
+          "sha256": "b59835841d2b5451d4b42b7333165146e02f15fa1b093d313b3a661ee76fed52"
+        }
+      }
+    ]
+  },
+  "wholeForms": {
+    "runs": [
+      {
+        "run": "bsp-en",
+        "states": 12,
+        "receipt": {
+          "path": "form-command-frame-whole-d3r5c04z/bsp-en/receipt.json",
+          "sha256": "09371f119681d850e047e1f10bdf30b99c562068b44d32d402a094b126125a63"
+        }
+      },
+      {
+        "run": "bsp-ru",
+        "states": 12,
+        "receipt": {
+          "path": "form-command-frame-whole-d3r5c04z/bsp-ru/receipt.json",
+          "sha256": "2daaf71bc447c2dc5056310c07f795e2c5595024f3b9caaded9f925a784c13c1"
+        }
+      },
+      {
+        "run": "loan-docked-en",
+        "states": 9,
+        "receipt": {
+          "path": "form-command-frame-whole-d3r5c04z/loan-docked-en/receipt.json",
+          "sha256": "231377b12a93bee7be861419c9262ab8d708bec59982f4ebf8b29ce103c2765e"
+        }
+      },
+      {
+        "run": "loan-docked-ru",
+        "states": 9,
+        "receipt": {
+          "path": "form-command-frame-whole-d3r5c04z/loan-docked-ru/receipt.json",
+          "sha256": "dfbf3e9dd580e75dbf73942462533f51c8714da2e9b7767b93b75ce4bed5d9f7"
+        }
+      },
+      {
+        "run": "loan-detached-en",
+        "states": 10,
+        "receipt": {
+          "path": "form-command-frame-whole-d3r5c04z/loan-detached-en/receipt.json",
+          "sha256": "889484c09ffe50ef268ed43f73beb2e535a4bdc36d1e86a2609d6cf6b99eeb57"
+        }
+      },
+      {
+        "run": "loan-detached-ru",
+        "states": 10,
+        "receipt": {
+          "path": "form-command-frame-whole-d3r5c04z/loan-detached-ru/receipt.json",
+          "sha256": "59f5a306d94be3e49663658dd02735cd1bbe7d82803fbc5e58969b6c98cace83"
+        }
+      }
+    ],
+    "states": 62,
+    "bspStates": 24,
+    "loanStates": 38,
+    "bspPreferredFrames": [
+      {
+        "locale": "en",
+        "frames": [
+          {
+            "width": 814,
+            "height": 612
+          },
+          {
+            "width": 785,
+            "height": 796
+          },
+          {
+            "width": 1222,
+            "height": 536
+          }
+        ]
+      },
+      {
+        "locale": "ru",
+        "frames": [
+          {
+            "width": 814,
+            "height": 612
+          },
+          {
+            "width": 785,
+            "height": 796
+          },
+          {
+            "width": 1222,
+            "height": 536
+          }
+        ]
+      }
+    ],
+    "loanPreferredFrame": [
+      1157,
+      875
+    ],
+    "loanComparedToPreviousCheckpoint": [
+      {
+        "run": "loan-docked-en",
+        "states": 9,
+        "changedRects": {
+          "element": 0,
+          "control": 0
+        }
+      },
+      {
+        "run": "loan-docked-ru",
+        "states": 9,
+        "changedRects": {
+          "element": 0,
+          "control": 0
+        }
+      },
+      {
+        "run": "loan-detached-en",
+        "states": 10,
+        "changedRects": {
+          "element": 0,
+          "control": 0
+        }
+      },
+      {
+        "run": "loan-detached-ru",
+        "states": 10,
+        "changedRects": {
+          "element": 0,
+          "control": 0
+        }
+      }
+    ],
+    "wizardMatchingMenuRightInsetPx": 21,
+    "wizardViewerFrame": [
+      814,
+      612
+    ],
+    "wizardNativeFrame": [
+      812,
+      612
+    ],
+    "sourceFilesUnchanged": 4,
+    "before": {
+      "path": "form-command-frame-whole-d3r5c04z/source-hashes-before.json",
+      "sha256": "4605edd5f3e781b8babc68f13e64861dd0fa7443651e8088f82a468b93bb1248"
+    },
+    "after": {
+      "path": "form-command-frame-whole-d3r5c04z/source-hashes-after.json",
+      "sha256": "4605edd5f3e781b8babc68f13e64861dd0fa7443651e8088f82a468b93bb1248"
+    },
+    "nativeWholeFormAccepted": false
+  },
+  "checks": {
+    "typecheck": "npm run check: passed",
+    "compile": "npm run compile: passed",
+    "package": "Node/VSCE: passed",
+    "node": {
+      "tests": 700,
+      "passed": 692,
+      "skipped": 8,
+      "failed": 0,
+      "log": {
+        "path": "form-overflow-node-nocdc7du/node.log",
+        "sha256": "a1b08d6139fbab601ce4926088c6d37aa5660b1c4c0ce18bf5805257b15f5749"
+      }
+    },
+    "diffCheck": "passed",
+    "rust": "Rust и зависимости не менялись; повторный Rust-прогон для эталонов/документации не выполнялся."
+  },
+  "groupSamplingCorrection": {
+    "rejectedSummary": {
+      "path": "form-command-frame-groups-retest-ezxt7zgz/regressions.json",
+      "sha256": "0e057aa7a659bcd87be5f75ee5ed987dcafe6685489028ee98495f3dfbd35295"
+    },
+    "failure": "Ранний замер GroupStrong дал первое поле 165 px вместо 161 px. Проверка дожидается трёх одинаковых снимков всей геометрии; эталонные значения не участвуют в ожидании.",
+    "runtimeChanged": false
+  },
+  "unacceptedCandidate": {
+    "stand": "form-batch-JNzfUW",
+    "reason": "Сумма оформления меню ошибочно включала стрелку 6 px вместо фактической layout-ширины 5 px. Получалась лишняя ширина 1 px. Результаты исходного отказа сохранены."
+  },
+  "pending": [
+    "Полная геометрия исходной формы БСП: ширина 814 вместо 812 px и остальные элементы требуют точного сравнения.",
+    "Изменения начальной ширины не объявляют принятой native-матрицу ручного resize.",
+    "Полные пиксели, недоступное оформление кнопок, остаток Mono 10 pt, другие DPI/масштабы и все сочетания шрифтов.",
+    "Родной профиль Windows и его собственные парные эталоны ru/en."
+  ],
+  "windowsHandoff": [
+    "Снять восемь native-command-frame на родной Windows в ru/en, включая одиночную панель с невидимым системным меню, горизонтальную/вертикальную вложенность и широкого соседа.",
+    "Проверить сохранённый Width 4/8 у CommandBarButton. Linux-исключение намеренно не применяется к Windows без замера.",
+    "Повторить точные ProbeButtons/ProbeRows и BarWithPopup в обоих языках; локаль 1С может влиять на размеры даже при одинаковом английском тексте самой формы.",
+    "Новый suite command-frame функционален в Windows, строгие координаты в общем драйвере включены для Linux; добавить родные эталоны перед визуальной приёмкой Windows.",
+    "Повторить dirty XML, стабильность DOM/выбора, отдельное окно и возврат; затем исходные БСП и ВыдачуЗайма с основным 24-часовым временем."
+  ],
+  "tracker": {
+    "statusChanged": false,
+    "fullTaskCompleted": false,
+    "reason": "Общий профиль T152–T165 и полная геометрия T157 ещё не приняты; текущие состояния ведутся в GitHub."
+  }
+}

@@ -3,7 +3,8 @@
 use super::{Entry, dto, failure, limit, navigation};
 use crate::ide::{dto::Labels, params};
 use eska_project_core::project::forms::{
-    PaletteCaption, PaletteCategory, PaletteRow, PaletteValue, PlatformPropertyValue,
+    FormScriptVariant, PaletteCaption, PaletteCategory, PaletteRow, PaletteValue,
+    PlatformPropertyValue,
 };
 use serde::Deserialize;
 use serde_json::{Value, json};
@@ -45,7 +46,7 @@ pub(super) fn inspect(
                 }
                 true
             })
-            .map(|row| row_dto(labels, &row))
+            .map(|row| row_dto(labels, &row, entry.preview.presentation.script_variant))
             .collect::<Vec<_>>()
     });
     let categories = rows.as_ref().map(|_| {
@@ -71,7 +72,11 @@ const fn source_kind(extension: bool) -> &'static str {
     if extension { "extension" } else { "form" }
 }
 
-fn row_dto(labels: &Labels, row: &PaletteRow<'_>) -> Value {
+fn row_dto(
+    labels: &Labels,
+    row: &PaletteRow<'_>,
+    script_variant: Option<FormScriptVariant>,
+) -> Value {
     let (raw_id, value) = match row.value {
         PaletteValue::Declared {
             index,
@@ -87,7 +92,7 @@ fn row_dto(labels: &Labels, row: &PaletteRow<'_>) -> Value {
                 .definition
                 .and_then(|definition| definition.value_caption(&property.value))
             {
-                value["caption"] = value_caption(labels, caption);
+                value["caption"] = value_caption(labels, caption, script_variant);
             }
             (
                 format!("xml:{}", json!([key.namespace, key.name, occurrence])),
@@ -115,7 +120,7 @@ fn row_dto(labels: &Labels, row: &PaletteRow<'_>) -> Value {
                 .definition
                 .and_then(|definition| definition.text_caption(&attribute.text))
             {
-                value["caption"] = value_caption(labels, caption);
+                value["caption"] = value_caption(labels, caption, script_variant);
             }
             (
                 format!("attribute:{}", json!([key.namespace, key.name])),
@@ -151,10 +156,25 @@ fn row_dto(labels: &Labels, row: &PaletteRow<'_>) -> Value {
     result
 }
 
-fn value_caption(labels: &Labels, value: PaletteCaption<'_>) -> Value {
+fn value_caption(
+    labels: &Labels,
+    value: PaletteCaption<'_>,
+    script_variant: Option<FormScriptVariant>,
+) -> Value {
     match value {
         PaletteCaption::Platform(key) => translate(labels, &format!("form-palette-value-{key}")),
         PaletteCaption::Identifier(name) => json!({"ru-RU":name,"en-US":name}),
+        PaletteCaption::ScriptMember { item, member } => {
+            let key = format!("form-palette-value-{member}");
+            let ru = labels.ru.text(&key);
+            let en = labels.en.text(&key);
+            let (ru, en) = match script_variant {
+                Some(FormScriptVariant::Russian) => (&ru, &ru),
+                Some(FormScriptVariant::English) => (&en, &en),
+                None => (&ru, &en),
+            };
+            json!({"ru-RU":format!("{item}.{ru}"),"en-US":format!("{item}.{en}")})
+        }
     }
 }
 

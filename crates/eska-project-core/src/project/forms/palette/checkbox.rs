@@ -2,7 +2,7 @@
 
 use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
-    unbound_field,
+    unbound_data_path,
 };
 use crate::project::forms::{EffectiveElement, ElementKind, ElementPresentation, FieldValueKind};
 
@@ -32,7 +32,7 @@ impl Context {
                     _ => None,
                 }
             }
-            (Some(ElementKind::Form), FieldValueKind::Unknown) if unbound_field(element) => {
+            (Some(ElementKind::Form), FieldValueKind::Unknown) if unbound_data_path(element) => {
                 Some(Self::Unbound)
             }
             _ => None,

@@ -1,0 +1,962 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-09T04:51:43.487Z",
+  "scope": [
+    "T157",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "arch": "arm64",
+    "platform": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "scriptVariant": "English",
+    "dpi": 96,
+    "zoom": 100,
+    "display": "private headless Mutter"
+  },
+  "implementation": {
+    "fixtureCommit": "2f734f51d9df856ba9a3c12cf79bf3d0d9c524f5",
+    "explorerCommit": "0dabb582c1e909454c47c9abe5a1b8eb7a34375d",
+    "fixtures": "../../tests/fixtures/forms/native-nested-reflow/metrics.json",
+    "metricsSha256": "02e61deac078c10ff5ae047f674dad9e9d6b4ba9e87f93691c67d8818185279b"
+  },
+  "native": {
+    "stand": "form-native-nested-reflow-ra__3zd4",
+    "canonicalFormsUnchanged": 29,
+    "canonicalInputManifestSha256": "a7422768e1b91c2593de8b327a9a09a1139cd689e4b4ef4562defee18c81fbd9",
+    "manifests": [
+      {
+        "locale": "en",
+        "captures": 29,
+        "manifest": "preview-en/captures.json",
+        "sha256": "ad68b9e6035fc4c898bba41c6bbcfca3ddc5d811c3afc69cf238dc15d53910cf"
+      },
+      {
+        "locale": "ru",
+        "captures": 29,
+        "manifest": "preview-ru/captures.json",
+        "sha256": "2c67c6a1bbf08941ae56db6a55ed92094d389cdee03bed00477012adc3affb7e"
+      }
+    ],
+    "framesPerLocale": 29,
+    "fieldsPerLocale": 127,
+    "paintedRegionsPerLocale": 63,
+    "captureMethod": "Authored Width variants measured in Configurator and replayed with equal allocated viewport widths."
+  },
+  "before": {
+    "artifact": "form-batch-osd00F",
+    "stand": "form-nested-reflow-probe-7v81mpcw",
+    "exactForms": 16,
+    "receiptSha256": "6cde3a59eb6c8e278dfa214174d3724a04b455f4edbdb10a567152e93b9d3fc3",
+    "differences": [
+      {
+        "form": "Vertical24",
+        "available": 274,
+        "frameBefore": [
+          331,
+          179
+        ],
+        "frameNative": [
+          274,
+          194
+        ],
+        "flowBefore": {
+          "Band": "row"
+        }
+      },
+      {
+        "form": "Vertical29",
+        "available": 324,
+        "frameBefore": [
+          331,
+          179
+        ],
+        "frameNative": [
+          324,
+          194
+        ],
+        "flowBefore": {
+          "Band": "row"
+        }
+      },
+      {
+        "form": "Painted29",
+        "available": 324,
+        "frameBefore": [
+          341,
+          189
+        ],
+        "frameNative": [
+          324,
+          204
+        ],
+        "flowBefore": {
+          "Band": "row"
+        }
+      },
+      {
+        "form": "Left34",
+        "available": 374,
+        "frameBefore": [
+          457,
+          179
+        ],
+        "frameNative": [
+          374,
+          194
+        ],
+        "flowBefore": {
+          "Band": "row"
+        }
+      },
+      {
+        "form": "Left40",
+        "available": 434,
+        "frameBefore": [
+          457,
+          179
+        ],
+        "frameNative": [
+          434,
+          194
+        ],
+        "flowBefore": {
+          "Band": "row"
+        }
+      },
+      {
+        "form": "Right40",
+        "available": 434,
+        "frameBefore": [
+          457,
+          179
+        ],
+        "frameNative": [
+          434,
+          194
+        ],
+        "flowBefore": {
+          "Band": "row"
+        }
+      },
+      {
+        "form": "Fixed26",
+        "available": 294,
+        "frameBefore": [
+          334,
+          179
+        ],
+        "frameNative": [
+          294,
+          194
+        ],
+        "flowBefore": {
+          "Band": "row"
+        }
+      },
+      {
+        "form": "Page30",
+        "available": 334,
+        "frameBefore": [
+          353,
+          224
+        ],
+        "frameNative": [
+          334,
+          239
+        ],
+        "flowBefore": {
+          "Page": "row"
+        }
+      },
+      {
+        "form": "Page31",
+        "available": 344,
+        "frameBefore": [
+          353,
+          224
+        ],
+        "frameNative": [
+          344,
+          239
+        ],
+        "flowBefore": {
+          "Page": "row"
+        }
+      },
+      {
+        "form": "Deep28",
+        "available": 314,
+        "frameBefore": [
+          341,
+          259
+        ],
+        "frameNative": [
+          314,
+          274
+        ],
+        "flowBefore": {
+          "Band": "row"
+        }
+      },
+      {
+        "form": "Parallel28",
+        "available": 314,
+        "frameBefore": [
+          341,
+          213
+        ],
+        "frameNative": [
+          314,
+          228
+        ],
+        "flowBefore": {
+          "Band": "row"
+        }
+      },
+      {
+        "form": "Parallel30",
+        "available": 334,
+        "frameBefore": [
+          341,
+          213
+        ],
+        "frameNative": [
+          334,
+          228
+        ],
+        "flowBefore": {
+          "Band": "row"
+        }
+      },
+      {
+        "form": "Twin41",
+        "available": 444,
+        "frameBefore": [
+          468,
+          92
+        ],
+        "frameNative": [
+          444,
+          107
+        ],
+        "flowBefore": {
+          "Band": "row",
+          "Peer": "row"
+        }
+      }
+    ]
+  },
+  "finalGate": {
+    "stand": "form-batch-NSFEwy",
+    "vsixSha256": "d63ebd90a14e3764669d324d29c2c40f389bf751b35cba78144bdabf8515def1",
+    "backendSha256": "dc3b625d5c5ec63634d98da1e12fe3fd7ba2d3a925c87cf31f81e224ef0bb890",
+    "runtimeManifestSha256": "bd0ec7982d7ef61563e8b28d6246d503aa53cffe41bcc97d2f25772148f1b539",
+    "runtimeFiles": 1262,
+    "inputsSha256": "5caf8a5cabd4c6ee21923d8e770eb2b881dff43b53767050182becb912cba5b4",
+    "runCount": 20,
+    "states": 940,
+    "runs": [
+      {
+        "suite": "nested-reflow",
+        "locale": "en",
+        "states": 63,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "nested-reflow-en/receipt.json",
+        "receiptSha256": "5784f9b596ae4e5da6f0dea0fde88d17ef535bc7b547cb7b80b9c31033f3efcd"
+      },
+      {
+        "suite": "nested-reflow",
+        "locale": "ru",
+        "states": 63,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "nested-reflow-ru/receipt.json",
+        "receiptSha256": "bd033ad9f22f9d0934de858261df9b3adfcb928bf103179139dcc3cf9f11dab9"
+      },
+      {
+        "suite": "painted-group-spacing",
+        "locale": "en",
+        "states": 65,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "painted-group-spacing-en/receipt.json",
+        "receiptSha256": "f545406d84738dcb481e0789641cddb720af6394b45e3422ca714b7ab16c12ed"
+      },
+      {
+        "suite": "painted-group-spacing",
+        "locale": "ru",
+        "states": 65,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "painted-group-spacing-ru/receipt.json",
+        "receiptSha256": "aa237cabb58d62db6f38cf9e9c03a1b0cb97dbd5d0aaedd2bbc3999f86a5d503"
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "states": 31,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "responsive-en/receipt.json",
+        "receiptSha256": "0d98fdf27ab46afb368d4a82c40c9c4e9da9c66b530113131fad80bbe96d52ab"
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "states": 31,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "responsive-ru/receipt.json",
+        "receiptSha256": "56736ec3693b6e8bb4333e6f678e450f1504e6ccc5449a9dec5a5804fbb555bf"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "states": 60,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "group-spacing-en/receipt.json",
+        "receiptSha256": "c41085039c9d25c39513ae56b81bda7d3d4f8092953ceed102daa9425d4fba66"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "states": 60,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "group-spacing-ru/receipt.json",
+        "receiptSha256": "90e9e9a14c6012aa4bcb8893d03e1a7b5504427099011c4626f7c3a5fa8b9fa7"
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "en",
+        "states": 19,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "page-group-spacing-en/receipt.json",
+        "receiptSha256": "64a911df6e15779ad23d4ef1cc91e7501d498d602fcc0aaf15d39a0fb6270bb4"
+      },
+      {
+        "suite": "page-group-spacing",
+        "locale": "ru",
+        "states": 19,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "page-group-spacing-ru/receipt.json",
+        "receiptSha256": "9d8ec60089f9580ae9f903469b68d5107f8f072199fe9b57dd56226e036e4049"
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "states": 22,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "groups-en/receipt.json",
+        "receiptSha256": "b433db65d7821bf4893783b4ca43982159c92dff67893798da474352843d61d1"
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "states": 22,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "groups-ru/receipt.json",
+        "receiptSha256": "90f556be1477baedf9509b0b602a00ac4e2cdda2ebe60f034a03ed5733b7faed"
+      },
+      {
+        "suite": "united",
+        "locale": "en",
+        "states": 9,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "united-en/receipt.json",
+        "receiptSha256": "b0bf332d409b196bd02c99a77edeb06b38a68ee8aa6cb79faea9d6589a9c2165"
+      },
+      {
+        "suite": "united",
+        "locale": "ru",
+        "states": 9,
+        "stand": "form-batch-NSFEwy",
+        "receipt": "united-ru/receipt.json",
+        "receiptSha256": "92b9943757477e71118911d89d542628163d2db41cb3763a113c38c353265aa2"
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "states": 98,
+        "stand": "form-nested-reflow-continue-xjdwgxrs",
+        "receipt": "through-align-en/receipt.json",
+        "receiptSha256": "81d57a33d2b363e51f6ae7925ff60c542a4edce15384ca80a9aa3d3ddd7d15d9"
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "states": 98,
+        "stand": "form-nested-reflow-continue-xjdwgxrs",
+        "receipt": "through-align-ru/receipt.json",
+        "receiptSha256": "1603a1f189784c3723c0fb203551edfaa2e05bb35fdd869862913e873f718d69"
+      },
+      {
+        "suite": "mixed-row-spacing",
+        "locale": "en",
+        "states": 39,
+        "stand": "form-nested-reflow-continue-xjdwgxrs",
+        "receipt": "mixed-row-spacing-en/receipt.json",
+        "receiptSha256": "5a315a16c792d3ef785d888ab2a26ef5e51c4d280869c7b72fc17f1a2811b232"
+      },
+      {
+        "suite": "mixed-row-spacing",
+        "locale": "ru",
+        "states": 39,
+        "stand": "form-nested-reflow-continue-xjdwgxrs",
+        "receipt": "mixed-row-spacing-ru/receipt.json",
+        "receiptSha256": "45a5f6292bf26d39ce0542952e1a52e09e3c3ac372117ea736f576cb17575e08"
+      },
+      {
+        "suite": "table-row-depth",
+        "locale": "en",
+        "states": 64,
+        "stand": "form-nested-reflow-continue-xjdwgxrs",
+        "receipt": "table-row-depth-en/receipt.json",
+        "receiptSha256": "aee453d3f732f18e81c9341e56c23c8ee6e1e13046fefef658a59d697f3dab5a"
+      },
+      {
+        "suite": "table-row-depth",
+        "locale": "ru",
+        "states": 64,
+        "stand": "form-nested-reflow-continue-xjdwgxrs",
+        "receipt": "table-row-depth-ru/receipt.json",
+        "receiptSha256": "5ffb2c4632f9bbf16bcbc05c708eb228158549bfacf9b347168a7a03aac58ebd"
+      }
+    ],
+    "continuation": {
+      "stand": "form-nested-reflow-continue-xjdwgxrs",
+      "manifestSha256": "bac721af82fd3f66b04932b8c43171df8db04151ed0897bb969e0a9c933d3187",
+      "firstProcessExitCode": 143,
+      "completedInFirstProcess": 14,
+      "replayedOrRemaining": 6
+    },
+    "nestedReflowPerLocale": {
+      "staticForms": 29,
+      "resizeStates": 32,
+      "foldedDirtyUpdates": 2,
+      "sourceWrites": false,
+      "selectionAndInputDomPreserved": true
+    }
+  },
+  "wholeForms": {
+    "stand": "form-nested-reflow-whole-s83_yio6",
+    "unchangedSources": {
+      "united-bsp-context-763t8lxb/src/cf/DataProcessors/ЗагрузкаДанныхИзФайла/Forms/ЗагрузкаДанныхИзФайла/Ext/Form.xml": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+      "united-bsp-context-763t8lxb/src/cf/ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+      "united-bsp-context-763t8lxb/src/cf/DataProcessors/УправлениеИтогамиИАгрегатами/Forms/ОсновнаяФорма/Ext/Form.xml": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+      "form-cf-intake-1RN3roMt/stalingrad/Documents/ВыдачаЗайма/Forms/ФормаДокумента/Ext/Form.xml": "da5ee0360e4cf23c2eb020fa8a662a6e950a8c9539f790f5c0098dad64e16875"
+    },
+    "runs": [
+      {
+        "run": "bsp-en",
+        "receiptSha256": "e6b94b64023176a458dc8c96bfa67d7a2b250dec453f4e653afd0c5a01dc2954"
+      },
+      {
+        "run": "bsp-ru",
+        "receiptSha256": "c93c5c81cc442eee0c08e39736d7427f685a8660694641dce973e7a9589fea10"
+      },
+      {
+        "run": "loan-docked-en",
+        "receiptSha256": "4347e4450c5848348df246d41ac6aeea00500d207c90bb30d62cfc1e519470ea"
+      },
+      {
+        "run": "loan-docked-ru",
+        "receiptSha256": "d2a2b9ab96d627014c4c02ce80805afddf7ddb6e6f2c5bf95bf769420b66385d"
+      },
+      {
+        "run": "loan-detached-en",
+        "receiptSha256": "502e94fc7163639862d18bb74e361a839ccc24f8f64d1c3df1be78716f285661"
+      },
+      {
+        "run": "loan-detached-ru",
+        "receiptSha256": "aac746380e5b63933f19eb43d80b0a593a567b93ffc43a79d10aa759c4f75ca9"
+      }
+    ],
+    "referenceGeometry": {
+      "bspTotalsFrame": [
+        1224,
+        541
+      ],
+      "bspTotalsAdvancedGrid": [
+        35,
+        174,
+        1146,
+        298
+      ],
+      "loanCompactGrid": [
+        13,
+        589,
+        662,
+        227
+      ],
+      "loanCompactFooterMemo": [
+        13,
+        844,
+        511,
+        51
+      ]
+    }
+  },
+  "adminForm": {
+    "source": "CommonForms/ПараметрыАдминистрированияПрограммы/Ext/Form.xml",
+    "compatibility": "Version8_3_24",
+    "scriptVariant": "Russian",
+    "originalCanonicalSha256": "0601ba5918d53488280ac2730b84b63a906864990ac7ae742edd791e230dee9b",
+    "stand": "form-native-nested-admin-7a_50mzc",
+    "manifests": [
+      {
+        "locale": "en",
+        "captures": 3,
+        "manifest": "preview-en/captures.json",
+        "sha256": "96dea70574135c8238f02bb9001e0dcf7d440464c332d4586720b070503dda1e"
+      },
+      {
+        "locale": "ru",
+        "captures": 3,
+        "manifest": "preview-ru/captures.json",
+        "sha256": "02c3d4bbdd6bb07fcda9f1d5e923f7f251ae0378f2d72d86ea3b94b50a143ddd"
+      }
+    ],
+    "comparisonStand": "form-nested-admin-compare-svzwmfru",
+    "baselineStand": "form-nested-admin-compare-4on_9y3f",
+    "variantChanges": [
+      "Root Width (0, 30, 45)",
+      "BackColor markers on address and port"
+    ],
+    "native": [
+      {
+        "kind": "AdminNatural",
+        "form": "ProbeWidthAdmin1",
+        "palette": {
+          "АдресАгентаСервера": "#D9F2D5",
+          "ПортАгентаСервера": "#F1DBE5"
+        },
+        "groups": {},
+        "authoredWidth": 0,
+        "locales": {
+          "en": {
+            "frame": [
+              546,
+              389
+            ],
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                309,
+                356,
+                23
+              ],
+              "ПортАгентаСервера": [
+                464,
+                309,
+                61,
+                23
+              ]
+            },
+            "sha256": "650771fc3e3054531526e24bb89861afd3a8365ca052fbf573960ebb8b3b5ff5"
+          },
+          "ru": {
+            "frame": [
+              546,
+              389
+            ],
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                309,
+                356,
+                23
+              ],
+              "ПортАгентаСервера": [
+                464,
+                309,
+                61,
+                23
+              ]
+            },
+            "sha256": "fe952b583157b930c4e934f5c92871dfc8607590a0dc5c98a08f9ae41ac9cf88"
+          }
+        }
+      },
+      {
+        "kind": "Admin30",
+        "form": "ProbeWidthAdmin2",
+        "palette": {
+          "АдресАгентаСервера": "#D9F2D5",
+          "ПортАгентаСервера": "#F1DBE5"
+        },
+        "groups": {},
+        "authoredWidth": 30,
+        "locales": {
+          "en": {
+            "frame": [
+              334,
+              468
+            ],
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                356,
+                253,
+                23
+              ],
+              "ПортАгентаСервера": [
+                60,
+                388,
+                61,
+                23
+              ]
+            },
+            "sha256": "deb91df59f439f93d273f69c15f52401b82b4798b1a7d6c48fc4c4b933162edc"
+          },
+          "ru": {
+            "frame": [
+              334,
+              468
+            ],
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                356,
+                253,
+                23
+              ],
+              "ПортАгентаСервера": [
+                60,
+                388,
+                61,
+                23
+              ]
+            },
+            "sha256": "19af67f57ceea6114c9462fb7bafa4afa5ebd3a86810517d94542b9d9b4611c4"
+          }
+        }
+      },
+      {
+        "kind": "Admin45",
+        "form": "ProbeWidthAdmin3",
+        "palette": {
+          "АдресАгентаСервера": "#D9F2D5",
+          "ПортАгентаСервера": "#F1DBE5"
+        },
+        "groups": {},
+        "authoredWidth": 45,
+        "locales": {
+          "en": {
+            "frame": [
+              484,
+              396
+            ],
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                316,
+                294,
+                23
+              ],
+              "ПортАгентаСервера": [
+                402,
+                316,
+                61,
+                23
+              ]
+            },
+            "sha256": "7de5653c5da0136850c935b00617848dd0afe2fb2989157e7e00e3051cf482b0"
+          },
+          "ru": {
+            "frame": [
+              484,
+              396
+            ],
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                316,
+                294,
+                23
+              ],
+              "ПортАгентаСервера": [
+                402,
+                316,
+                61,
+                23
+              ]
+            },
+            "sha256": "0813af333b4c1a21bfa443dbc969a30f059a5b81f031611297d1c766923ad8b0"
+          }
+        }
+      }
+    ],
+    "installed": [
+      {
+        "stage": "baseline",
+        "locale": "en",
+        "artifact": "form-batch-osd00F",
+        "receiptSha256": "0b20a7f63eed5d2318e72e2fd132e27b539691b86af0ac3bfa018c920270fbab",
+        "forms": [
+          {
+            "name": "AdminNatural",
+            "viewport": 546,
+            "frame": [
+              546,
+              389
+            ],
+            "flow": "row",
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                336,
+                366,
+                23
+              ],
+              "ПортАгентаСервера": [
+                474,
+                336,
+                51,
+                23
+              ]
+            },
+            "sha256": "d6efc0585e295994530830f1414a4f1d0ebd91d024e97872c144d318cfbf4f1a"
+          },
+          {
+            "name": "Admin30",
+            "viewport": 334,
+            "frame": [
+              346,
+              453
+            ],
+            "flow": "row",
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                336,
+                166,
+                23
+              ],
+              "ПортАгентаСервера": [
+                274,
+                336,
+                51,
+                23
+              ]
+            },
+            "sha256": "ff1ac2fb4160d6b6477f17b553220aeb8727fe059d93179b4235a24ba79e33d0"
+          },
+          {
+            "name": "Admin45",
+            "viewport": 484,
+            "frame": [
+              484,
+              396
+            ],
+            "flow": "row",
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                336,
+                304,
+                23
+              ],
+              "ПортАгентаСервера": [
+                412,
+                336,
+                51,
+                23
+              ]
+            },
+            "sha256": "ebf7ec3bcfa83774a1b3cee6a6c76ab398295bec5524a8655181cf7ada61b251"
+          }
+        ]
+      },
+      {
+        "stage": "final",
+        "locale": "en",
+        "artifact": "form-batch-NSFEwy",
+        "receiptSha256": "220861551c83c382b990142fc41677c5fccbc4a4f041349569b364b5ee3fd09f",
+        "forms": [
+          {
+            "name": "AdminNatural",
+            "viewport": 546,
+            "frame": [
+              546,
+              389
+            ],
+            "flow": "row",
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                336,
+                366,
+                23
+              ],
+              "ПортАгентаСервера": [
+                474,
+                336,
+                51,
+                23
+              ]
+            },
+            "sha256": "d6efc0585e295994530830f1414a4f1d0ebd91d024e97872c144d318cfbf4f1a"
+          },
+          {
+            "name": "Admin30",
+            "viewport": 334,
+            "frame": [
+              346,
+              453
+            ],
+            "flow": "row",
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                352,
+                166,
+                23
+              ],
+              "ПортАгентаСервера": [
+                274,
+                352,
+                51,
+                23
+              ]
+            },
+            "sha256": "ff1ac2fb4160d6b6477f17b553220aeb8727fe059d93179b4235a24ba79e33d0",
+            "widthFloors": {
+              "clusterSettingsGroup": 312,
+              "controlParametersGroup": 301,
+              "connectionTypeInput": 301
+            }
+          },
+          {
+            "name": "Admin45",
+            "viewport": 484,
+            "frame": [
+              484,
+              396
+            ],
+            "flow": "row",
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                336,
+                304,
+                23
+              ],
+              "ПортАгентаСервера": [
+                412,
+                336,
+                51,
+                23
+              ]
+            },
+            "sha256": "ebf7ec3bcfa83774a1b3cee6a6c76ab398295bec5524a8655181cf7ada61b251"
+          }
+        ]
+      },
+      {
+        "stage": "final",
+        "locale": "ru",
+        "artifact": "form-batch-NSFEwy",
+        "receiptSha256": "f60080827d82345ebd3aa2e6b8f58b3f7af03ce9efb6140adb560aa6b1abf1cf",
+        "forms": [
+          {
+            "name": "AdminNatural",
+            "viewport": 546,
+            "frame": [
+              546,
+              389
+            ],
+            "flow": "row",
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                336,
+                366,
+                23
+              ],
+              "ПортАгентаСервера": [
+                474,
+                336,
+                51,
+                23
+              ]
+            },
+            "sha256": "d6efc0585e295994530830f1414a4f1d0ebd91d024e97872c144d318cfbf4f1a"
+          },
+          {
+            "name": "Admin30",
+            "viewport": 334,
+            "frame": [
+              346,
+              453
+            ],
+            "flow": "row",
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                352,
+                166,
+                23
+              ],
+              "ПортАгентаСервера": [
+                274,
+                352,
+                51,
+                23
+              ]
+            },
+            "sha256": "ff1ac2fb4160d6b6477f17b553220aeb8727fe059d93179b4235a24ba79e33d0",
+            "widthFloors": {
+              "clusterSettingsGroup": 312,
+              "controlParametersGroup": 301,
+              "connectionTypeInput": 301
+            }
+          },
+          {
+            "name": "Admin45",
+            "viewport": 484,
+            "frame": [
+              484,
+              396
+            ],
+            "flow": "row",
+            "fields": {
+              "АдресАгентаСервера": [
+                60,
+                336,
+                304,
+                23
+              ],
+              "ПортАгентаСервера": [
+                412,
+                336,
+                51,
+                23
+              ]
+            },
+            "sha256": "ebf7ec3bcfa83774a1b3cee6a6c76ab398295bec5524a8655181cf7ada61b251"
+          }
+        ]
+      }
+    ],
+    "differences": [
+      "The authored 300 px content width stays at a 312 px minimum in Explorer. The Configurator wraps the cluster heading and long field captions at 300 px.",
+      "The conditional page requires 307 px in Explorer, fits into the 312 px content box, and therefore stays horizontal at Width=30.",
+      "The numeric port control is 51 px wide in Explorer and 61 px in Configurator. The command bar with CommandBarLocation=Bottom appears above the fields in Explorer."
+    ]
+  },
+  "validation": {
+    "rust": {
+      "formatCheck": true,
+      "check": true,
+      "clippyAllTargetsAllFeatures": true,
+      "passed": 1580,
+      "ignored": 19
+    },
+    "node": {
+      "passed": 732,
+      "skipped": 8
+    }
+  },
+  "limits": [
+    "Geometry of the measured boxes at 96 DPI and 100% scale.",
+    "Full RGB parity, physical resizing in the Configurator, other DPI and the Windows profile remain open.",
+    "The full administration form is observational and has the recorded differences."
+  ]
+}

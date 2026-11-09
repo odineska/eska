@@ -1,5 +1,6 @@
 //! Read-only managed-form documents with source-qualified identities and lossless source ranges.
 
+mod additions;
 mod appearance;
 mod based_on;
 mod borrowing;
@@ -44,7 +45,7 @@ pub use pictures::{ButtonRepresentation, FormPicture};
 pub use preparation::{FormInput, FormInputSource, FormPreparation, prepare};
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,
-    FormPresentation, FormScriptVariant, PresentationText, TableColumnAppearance,
+    FormPresentation, FormScriptVariant, NumberSign, PresentationText, TableColumnAppearance,
     TabularTotalCaption, present,
 };
 pub use references::{FormReference, ReferenceSlot};
@@ -129,8 +130,11 @@ pub struct FormElement {
     pub qualifiers: Vec<LocatedQualifier>,
     pub properties: Vec<LocatedProperty>,
     pub children: Vec<Self>,
-    /// Menus, tooltips and table additions are not ordinary layout children.
+    /// Menus, tooltips and built-in additions sit outside the layout.
     pub auxiliary: Vec<Self>,
+    /// Distinguishes independently placed additions from the built-in additions of an owner.
+    #[serde(skip)]
+    pub(super) in_child_items: bool,
 }
 
 #[derive(Clone, Debug, Serialize)]

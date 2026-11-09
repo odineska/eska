@@ -289,7 +289,7 @@ impl<'a> Appearance<'a> {
                 continue;
             }
             match key.name.as_str() {
-                "face" if !value.is_empty() => result.face = Some(value.clone()),
+                "faceName" if !value.is_empty() => result.face = Some(value.clone()),
                 "height" => {
                     if let Ok(points) = value.parse::<f64>() {
                         if points > 0.0 && points <= 1024.0 {

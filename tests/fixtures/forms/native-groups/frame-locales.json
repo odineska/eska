@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "rows": [
+    {
+      "name": "BarWithPopup",
+      "xmlSha256": "27d07e1809af9131969d84085b4fb8a403d55cd7d3b8454715bacda3908d2685",
+      "canonicalXmlSha256": "ef128f0deeafda59a0a67262dffe1b76734d304c30d216bbb113ed9aa530ce30",
+      "sameParsedXml": true,
+      "locales": {
+        "ru": {
+          "frame": [
+            111,
+            79
+          ],
+          "screenshotSha256": "8337fa634f6bb98bfb105afd02d4fb5b86c138ecc3e65bee173008a8243bbe56"
+        },
+        "en": {
+          "frame": [
+            142,
+            79
+          ],
+          "screenshotSha256": "15af180de95ab5e6309323651a22a618e60bc6cc0f66b3b4ca46801312a7996c"
+        }
+      }
+    }
+  ],
+  "capture": {
+    "capturedAt": "2026-11-08T04:29:36.717680+00:00",
+    "stand": "form-native-command-frame-popup-c6aql43v",
+    "nativeCaptures": 2,
+    "sourceFilesUnchanged": 662,
+    "sourceHashesSha256": "8bd2b78aba5d0989adaabd10f74f2259d3d88a69f26343984291199803c36f9d",
+    "captureInputs": {
+      "cases.json": "c0bb955d3df02e9531fa7d23867011afe4f21d0e3a9ae91cdaabe09698cecdfa",
+      "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+      "eska-command-frame-popup-native-prepare.py": "5a868b7816725ae13a32293adf02941d4a6efae23e1cb86b58f3d7164d45e2a9",
+      "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+      "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+      "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+      "run-heading.py": "5a23c88551fe3aee5ffe816eab14c85fbe69724c849ae6ab8aae40c8465ed180"
+    },
+    "additionalInputHashes": {
+      "eska-command-frame-popup-both-run.py": "c6c2f8c5a2df8f53e08454aa26a9e33dbbf6bb52c59e8857bf7a28de866b18b8",
+      "eska-group-separation-metrics.py": "2a7b520a17d9e060dc6117e1dc38f162bed91082385f6b4f5438803889433127",
+      "eska-heading-en-metrics.py": "9538462209751ae5771b82af6935cb5aafe79923baf4b6e4ce26a80e3e1c0ba1"
+    }
+  },
+  "fullPaintAccepted": false
+}

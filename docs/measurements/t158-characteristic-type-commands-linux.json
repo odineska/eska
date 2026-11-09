@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T14:09:18.890725+00:00",
+  "scope": [
+    "T158",
+    "T157"
+  ],
+  "profile": {
+    "os": "linux",
+    "platform": "8.3.27.2342",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "source": {
+    "path": "ChartsOfCharacteristicTypes/ВопросыДляАнкетирования/Forms/ФормаЭлемента/Ext/Form.xml",
+    "sha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3"
+  },
+  "nativeReference": {
+    "stand": "form-bsp-geometry-native-whn6wv7l",
+    "screenshot": "interactive-en/questionnaire-full-root.png",
+    "screenshotSha256": "67e0a59490f342e10f0c2b79b759ff305109fdebf9ac6d74b36848abdfdd874f",
+    "visibleCommands": [
+      "WriteAndClose",
+      "Write"
+    ]
+  },
+  "implementation": {
+    "mainAttributeType": "ChartOfCharacteristicTypesObject",
+    "commandSet": "Existing non-posting object command projection shared with CatalogObject. Autofill=false and a non-main attribute do not generate actions.",
+    "protocolVersionChanged": false,
+    "bslExecuted": false
+  },
+  "before": {
+    "stand": "form-body-scroll-whole-5oa9c3mp",
+    "inlineObjectCommands": []
+  },
+  "after": {
+    "en": [
+      {
+        "key": "Form.StandardCommand.WriteAndClose",
+        "label": "Save and close",
+        "box": [
+          13,
+          29,
+          122,
+          26
+        ]
+      },
+      {
+        "key": "Form.StandardCommand.Write",
+        "label": "Save",
+        "box": [
+          144,
+          29,
+          58,
+          26
+        ]
+      }
+    ],
+    "ru": [
+      {
+        "key": "Form.StandardCommand.WriteAndClose",
+        "label": "Записать и закрыть",
+        "box": [
+          13,
+          29,
+          156,
+          26
+        ]
+      },
+      {
+        "key": "Form.StandardCommand.Write",
+        "label": "Записать",
+        "box": [
+          178,
+          29,
+          84,
+          26
+        ]
+      }
+    ]
+  },
+  "checks": {
+    "rust": {
+      "stand": "form-chart-commands-rust-3iwvehy2",
+      "checks": [
+        {
+          "command": [
+            "cargo",
+            "fmt",
+            "--check"
+          ],
+          "exitCode": 0,
+          "seconds": 1.33,
+          "log": "0.log"
+        },
+        {
+          "command": [
+            "cargo",
+            "check"
+          ],
+          "exitCode": 0,
+          "seconds": 1.5,
+          "log": "1.log"
+        },
+        {
+          "command": [
+            "cargo",
+            "clippy",
+            "--all-targets",
+            "--all-features",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exitCode": 0,
+          "seconds": 3.91,
+          "log": "2.log"
+        },
+        {
+          "command": [
+            "cargo",
+            "test"
+          ],
+          "exitCode": 0,
+          "seconds": 43.95,
+          "log": "3.log"
+        },
+        {
+          "command": [
+            "cargo",
+            "build",
+            "--bin",
+            "eska-project",
+            "--bin",
+            "eska-fmt"
+          ],
+          "exitCode": 0,
+          "seconds": 0.12,
+          "log": "4.log"
+        }
+      ],
+      "passed": 1570,
+      "failed": 0,
+      "ignored": 19
+    },
+    "targetedRegression": {
+      "failedBeforeFix": true,
+      "passedAfterFix": true,
+      "cases": [
+        "native write commands",
+        "non-posting menu",
+        "non-main attribute",
+        "disabled autofill"
+      ]
+    }
+  },
+  "installed": {
+    "artifactSource": "form-batch-D8PI6u",
+    "vsixSha256": "84f3f3691ad6a3ade2656895746beba841dbd7b2b667e1bfc83ba0439aa9f0e0",
+    "backendSha256": "fefeee97b8df63536ce1cdeb8462b7d20864585e2de48c80008718a93ff6f530",
+    "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+    "runtimeFiles": 1262,
+    "runs": [
+      {
+        "suite": "pictures",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 1
+      },
+      {
+        "suite": "pictures",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 1
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 1
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 1
+      },
+      {
+        "suite": "body-scroll",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 4
+      },
+      {
+        "suite": "body-scroll",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 4
+      },
+      {
+        "suite": "command-frame",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 12
+      },
+      {
+        "suite": "command-frame",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 12
+      },
+      {
+        "suite": "unbound-buttons",
+        "locale": "en",
+        "passed": true,
+        "inputsStable": true,
+        "states": 9
+      },
+      {
+        "suite": "unbound-buttons",
+        "locale": "ru",
+        "passed": true,
+        "inputsStable": true,
+        "states": 9
+      }
+    ],
+    "stateObservations": 54
+  },
+  "wholeForms": {
+    "stand": "form-chart-commands-whole-vc0e55wm",
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.321487065000838,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 11.637960721000127,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.660360458998184,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.11854114900052,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.048761910999019,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.258133581002767,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      }
+    ],
+    "sourcesUnchanged": true,
+    "bspBodyGeometryUnchanged": true,
+    "chartCommandsShownInMainAndSeparateNativeWindow": true,
+    "clickDoesNotExecuteApplicationAction": true,
+    "existingSnapshotAndSelectionRetained": true,
+    "preservedNativeMatches": [
+      "wizard frame and four radio positions",
+      "questionnaire numeric widths",
+      "explanation maximum width 550",
+      "table maximum height 199",
+      "fixed root command bar during body scroll"
+    ]
+  },
+  "limitations": [
+    "No full-form geometry or pixel acceptance in this check.",
+    "Questionnaire frame remains 785 x 770; the native reference is 801 x 769. Known input offsets and unsupported reference-width combinations remain open.",
+    "No new Windows acceptance.",
+    "Other object kinds are not added by this change."
+  ]
+}

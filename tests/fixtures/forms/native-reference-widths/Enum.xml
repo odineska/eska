@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Enum uuid="609a8437-1ee3-4291-b469-fe9a661fa869">
+		<InternalInfo>
+			<xr:GeneratedType name="EnumRef.NativeChoices" category="Ref">
+				<xr:TypeId>316bb126-cfe1-4638-86f3-9b1b2811fc73</xr:TypeId>
+				<xr:ValueId>025f92dc-edbd-4553-92bb-35d6d422f22c</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="EnumManager.NativeChoices" category="Manager">
+				<xr:TypeId>e39206d1-7c1c-4f8f-b88c-e74d0a97172e</xr:TypeId>
+				<xr:ValueId>877c75eb-d882-42d7-8a39-5d8c8dd4b1cf</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="EnumList.NativeChoices" category="List">
+				<xr:TypeId>12c78bc8-7fab-4615-90e2-e35151c53b2e</xr:TypeId>
+				<xr:ValueId>083beacf-763d-426c-a550-4c805991400c</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>NativeChoices</Name>
+			<Synonym/>
+			<Comment/>
+			<UseStandardCommands>true</UseStandardCommands>
+			<Characteristics/>
+			<QuickChoice>true</QuickChoice>
+			<ChoiceMode>BothWays</ChoiceMode>
+			<DefaultListForm/>
+			<DefaultChoiceForm/>
+			<AuxiliaryListForm/>
+			<AuxiliaryChoiceForm/>
+			<ListPresentation/>
+			<ExtendedListPresentation/>
+			<Explanation/>
+			<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
+		</Properties>
+		<ChildObjects>
+			<EnumValue uuid="5686e8d4-7f1c-4f94-a95d-701ac9c4e43e">
+				<Properties>
+					<Name>First</Name>
+					<Synonym/>
+					<Comment/>
+				</Properties>
+			</EnumValue>
+			<EnumValue uuid="fcc7c9e2-8a7b-468b-b9f4-8e7b21813396">
+				<Properties>
+					<Name>Second</Name>
+					<Synonym/>
+					<Comment/>
+				</Properties>
+			</EnumValue>
+		</ChildObjects>
+	</Enum>
+</MetaDataObject>

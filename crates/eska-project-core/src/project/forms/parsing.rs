@@ -159,6 +159,7 @@ impl<'a> Parser<'a> {
             properties: Vec::new(),
             children: Vec::new(),
             auxiliary: Vec::new(),
+            in_child_items: false,
         };
         let mut sections = HashSet::new();
         self.check_structural_text(node);
@@ -175,13 +176,12 @@ impl<'a> Parser<'a> {
                     self.issue(child, FormIssue::RepeatedSection);
                 }
                 for item in child.children().filter(Node::is_element) {
-                    let item = self.element(item, false)?;
-                    if item.kind.is_some_and(|kind| {
-                        matches!(
-                            kind.family(),
-                            ElementFamily::Auxiliary | ElementFamily::Addition
-                        )
-                    }) {
+                    let mut item = self.element(item, false)?;
+                    item.in_child_items = true;
+                    if item
+                        .kind
+                        .is_some_and(|kind| kind.family() == ElementFamily::Auxiliary)
+                    {
                         element.auxiliary.push(item);
                     } else {
                         element.children.push(item);

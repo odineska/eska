@@ -3,9 +3,10 @@
 use super::{
     AppearanceDiagnostic, ButtonRepresentation, ComposedForm, EffectiveDefinition,
     EffectiveElement, ElementFamily, ElementIdentity, ElementKind, FormDocument, FormResource,
-    PropertySource, ResolvedColor, ResolvedFont, SourcedProperty,
+    PropertySource, ResolvedColor, ResolvedFont, SourcedProperty, additions,
     appearance::{self, Appearance},
     commands::{ResolvedCommand, effective_metadata},
+    composition::SourceItems,
     pictures, references,
 };
 use crate::project::{
@@ -38,6 +39,11 @@ pub enum FieldValueKind {
     Document,
     Unknown,
 }
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+pub enum NumberSign {
+    Any,
+    Nonnegative,
+}
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FieldType {
@@ -45,6 +51,8 @@ pub struct FieldType {
     pub length: Option<u32>,
     pub digits: Option<u32>,
     pub fraction: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub allowed_sign: Option<NumberSign>,
     pub date_parts: Option<String>,
     pub types: Vec<PropertyKey>,
 }
@@ -55,6 +63,7 @@ impl Default for FieldType {
             length: None,
             digits: None,
             fraction: None,
+            allowed_sign: None,
             date_parts: None,
             types: Vec::new(),
         }
@@ -162,13 +171,13 @@ pub fn present(
 ) -> FormPresentation {
     let mut appearance = Appearance::new(documents, resources);
     let mut elements = Vec::new();
-    let tables = super::commands::table_index(&form.root);
+    let sources = SourceItems::new(&form.root);
     visit(
         &form.root,
         VisitScope::default(),
         form,
         resources,
-        &tables,
+        &sources,
         &mut appearance,
         &mut elements,
     );
@@ -200,10 +209,41 @@ fn script_variant(resources: &[FormResource]) -> Option<FormScriptVariant> {
 #[derive(Clone, Copy, Default)]
 struct VisitScope<'a> {
     parent: Option<&'a EffectiveElement>,
+    table: Option<&'a EffectiveElement>,
     in_table: bool,
 }
 
 impl<'a> VisitScope<'a> {
+    fn fonts(
+        self,
+        element: &EffectiveElement,
+        appearance: &mut Appearance<'_>,
+    ) -> (ResolvedFont, ResolvedFont) {
+        let inherited = self.column_font(element);
+        let font = appearance.font(element.property("Font").or(inherited), font_role(element));
+        let title = appearance.font(
+            self.title_property(element, "TitleFont").or(inherited),
+            title_font_role(element),
+        );
+        (font, title)
+    }
+
+    fn column_font(self, element: &EffectiveElement) -> Option<&'a SourcedProperty> {
+        let kind = element.kind?;
+        if (kind != ElementKind::ColumnGroup && kind.family() != ElementFamily::Field)
+            || !self.parent.is_some_and(|parent| {
+                matches!(
+                    parent.kind,
+                    Some(ElementKind::Table | ElementKind::ColumnGroup)
+                )
+            })
+        {
+            return None;
+        }
+        // Table Font supplies column value/header defaults, not toolbar or addition fonts.
+        self.table.and_then(|table| table.property("Font"))
+    }
+
     fn pages_parent(self, element: &EffectiveElement) -> Option<&'a EffectiveElement> {
         self.parent.filter(|parent| {
             element.kind == Some(ElementKind::Page) && parent.kind == Some(ElementKind::Pages)
@@ -230,15 +270,20 @@ fn visit(
     scope: VisitScope<'_>,
     form: &ComposedForm,
     resources: &[FormResource],
-    tables: &super::commands::TableIndex<'_>,
+    sources: &SourceItems<'_>,
     appearance: &mut Appearance<'_>,
     output: &mut Vec<ElementPresentation>,
 ) {
     output.push(present_element(
-        element, scope, form, resources, tables, appearance,
+        element, scope, form, resources, sources, appearance,
     ));
     let child_scope = VisitScope {
         parent: Some(element),
+        table: if element.kind == Some(ElementKind::Table) {
+            Some(element)
+        } else {
+            scope.table
+        },
         in_table: scope.in_table || element.kind == Some(ElementKind::Table),
     };
     for child in element.children.iter().chain(&element.auxiliary) {
@@ -247,7 +292,7 @@ fn visit(
             child_scope,
             form,
             resources,
-            tables,
+            sources,
             appearance,
             output,
         );
@@ -259,7 +304,7 @@ fn present_element(
     scope: VisitScope<'_>,
     form: &ComposedForm,
     resources: &[FormResource],
-    tables: &super::commands::TableIndex<'_>,
+    sources: &SourceItems<'_>,
     appearance: &mut Appearance<'_>,
 ) -> ElementPresentation {
     let FieldBinding {
@@ -293,11 +338,7 @@ fn present_element(
                 element.name.clone().unwrap_or_default()
             },
         });
-    let font = appearance.font(element.property("Font"), font_role(element));
-    let title_font = appearance.font(
-        scope.title_property(element, "TitleFont"),
-        title_font_role(element),
-    );
+    let (font, title_font) = scope.fonts(element, appearance);
     let (foreground, background, border, title_color) = element_colors(element, scope, appearance);
     let choices = element
         .property("ChoiceList")
@@ -316,7 +357,7 @@ fn present_element(
         (commands.inline, commands.object_menu)
     } else {
         (
-            element_commands(element, &value_type, form, resources, tables),
+            element_commands(element, &value_type, form, resources, sources),
             Vec::new(),
         )
     };
@@ -329,7 +370,8 @@ fn present_element(
         grouping: grouping(element),
         united: group_united(element),
         displayed: is_displayed(element, binding.as_ref(), appearance)
-            && super::commands::visible(tables, command_name)
+            && super::commands::visible(sources, command_name)
+            && additions::available(element, sources)
             && (scope.parent.is_some_and(is_command_area)
                 || !matches!(
                     element.kind,
@@ -348,7 +390,7 @@ fn present_element(
             .property("FooterText")
             .and_then(|value| literal(&value.property.value)),
         table_column_appearance: table_column_appearance(element, scope, appearance),
-        table_command_menu: table_command_menu(element, &value_type, form, resources, tables),
+        table_command_menu: table_command_menu(element, &value_type, form, resources, sources),
         value_type,
         binding,
         choices,
@@ -528,11 +570,11 @@ fn element_commands(
     value_type: &FieldType,
     form: &ComposedForm,
     resources: &[FormResource],
-    tables: &super::commands::TableIndex<'_>,
+    sources: &SourceItems<'_>,
 ) -> Vec<super::AutoCommandItem> {
     match element.kind {
         Some(ElementKind::Table) => super::commands::table(element, value_type),
-        Some(ElementKind::CommandBar) => super::commands::table_source(element, tables)
+        Some(ElementKind::CommandBar) => super::commands::table_source(element, sources)
             .map(|table| {
                 let binding = bind(table, form, resources);
                 super::commands::table_items(table, &binding.value_type)
@@ -547,12 +589,12 @@ fn table_command_menu(
     value_type: &FieldType,
     form: &ComposedForm,
     resources: &[FormResource],
-    tables: &super::commands::TableIndex<'_>,
+    sources: &SourceItems<'_>,
 ) -> Vec<Vec<super::AutoCommandItem>> {
     let table = match element.kind {
         Some(ElementKind::Table) if super::commands::autofill(element) => element,
         Some(ElementKind::CommandBar) => {
-            let Some(table) = super::commands::table_source(element, tables) else {
+            let Some(table) = super::commands::table_source(element, sources) else {
                 return Vec::new();
             };
             table
@@ -599,6 +641,11 @@ fn is_displayed(
             super::ElementFamily::Field | super::ElementFamily::Table
         )
     });
+    // Designer retains unbound buttons in the tree but omits their preview widgets.
+    let command_bound = element.kind != Some(ElementKind::Button)
+        || element
+            .scalar("CommandName")
+            .is_some_and(|name| !matches!(name.trim(), "" | "0"));
     if needs_binding
         && binding.is_none()
         && let Some(path) = element
@@ -611,7 +658,9 @@ fn is_displayed(
             target: None,
         });
     }
-    (!needs_binding || binding.is_some()) && element.scalar("Visible") != Some("false")
+    command_bound
+        && (!needs_binding || binding.is_some())
+        && element.scalar("Visible") != Some("false")
 }
 
 fn title_location(element: &EffectiveElement) -> FieldTitleLocation {
@@ -745,6 +794,13 @@ pub(super) fn field_type(value: &MetadataValue) -> FieldType {
                 result.fraction = record(&field.value, "FractionDigits")
                     .and_then(|value| appearance::text(&value.value))
                     .and_then(|value| value.parse().ok());
+                result.allowed_sign = record(&field.value, "AllowedSign")
+                    .and_then(|value| appearance::text(&value.value))
+                    .and_then(|value| match value {
+                        "Any" => Some(NumberSign::Any),
+                        "Nonnegative" => Some(NumberSign::Nonnegative),
+                        _ => None,
+                    });
             }
             if field.key.name == "DateQualifiers" {
                 result.date_parts = record(&field.value, "DateFractions")

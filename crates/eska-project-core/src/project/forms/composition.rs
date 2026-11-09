@@ -8,8 +8,8 @@ use std::{
 use serde::Serialize;
 
 use super::{
-    ElementIdentity, ElementKey, ElementKind, FormDefinition, FormDocument, FormElement,
-    LocatedQualifier, is_form_property,
+    ElementFamily, ElementIdentity, ElementKey, ElementKind, FormDefinition, FormDocument,
+    FormElement, LocatedQualifier, is_form_property,
 };
 use crate::project::{
     metadata_model::{MetadataProperty, PropertyKey},
@@ -74,6 +74,8 @@ pub struct EffectiveElement {
     pub properties: Vec<SourcedProperty>,
     pub children: Vec<Self>,
     pub auxiliary: Vec<Self>,
+    #[serde(skip)]
+    pub(super) in_child_items: bool,
 }
 
 impl EffectiveElement {
@@ -83,6 +85,15 @@ impl EffectiveElement {
 
     pub(super) fn scalar(&self, name: &str) -> Option<&str> {
         self.property(name).and_then(SourcedProperty::text)
+    }
+
+    pub(super) fn declares_columns(&self) -> bool {
+        self.children.iter().any(|child| {
+            child.kind.is_some_and(|kind| {
+                kind.family() == ElementFamily::Field
+                    || kind == ElementKind::ColumnGroup && child.declares_columns()
+            })
+        })
     }
 
     /// Find a composed identity, including elements outside the main layout tree.
@@ -95,6 +106,38 @@ impl EffectiveElement {
             .iter()
             .chain(&self.auxiliary)
             .find_map(|child| child.find(identity))
+    }
+}
+
+/// Look up controls that can supply commands or additions by their effective names.
+pub(super) struct SourceItems<'a>(HashMap<&'a str, &'a EffectiveElement>);
+
+impl<'a> SourceItems<'a> {
+    pub(super) fn new(root: &'a EffectiveElement) -> Self {
+        fn visit<'a>(element: &'a EffectiveElement, items: &mut SourceItems<'a>) {
+            if matches!(
+                element.kind,
+                Some(ElementKind::Table | ElementKind::PdfDocumentField)
+            ) && let Some(name) = element.name.as_deref()
+            {
+                items.0.entry(name).or_insert(element);
+            }
+            for child in &element.children {
+                visit(child, items);
+            }
+        }
+        let mut items = Self(HashMap::new());
+        visit(root, &mut items);
+        items
+    }
+
+    pub(super) fn get(&self, name: &str) -> Option<&'a EffectiveElement> {
+        self.0.get(name).copied()
+    }
+
+    pub(super) fn table(&self, name: &str) -> Option<&'a EffectiveElement> {
+        self.get(name)
+            .filter(|item| item.kind == Some(ElementKind::Table))
     }
 }
 
@@ -309,6 +352,7 @@ fn effective(value: &FormElement, source: &str) -> EffectiveElement {
         properties: properties(&value.properties, source),
         children: Vec::new(),
         auxiliary: Vec::new(),
+        in_child_items: value.in_child_items,
     }
 }
 
@@ -597,6 +641,9 @@ impl Graph {
             );
             if before.name != modified.name {
                 entry.value.name.clone_from(&modified.name);
+            }
+            if before.in_child_items != modified.in_child_items {
+                entry.value.in_child_items = modified.in_child_items;
             }
             patch_qualifiers(
                 &mut entry.value.qualifiers,

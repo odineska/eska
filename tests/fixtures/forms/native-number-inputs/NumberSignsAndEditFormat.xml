@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Layout</v8:content>
+		</v8:item>
+	</Title>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<InputField name="Nonnegative5Default" id="1">
+			<DataPath>Nonnegative5</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#FFEFBA</BackColor>
+			<ContextMenu name="Nonnegative5DefaultContextMenu" id="2"/>
+			<ExtendedTooltip name="Nonnegative5DefaultExtendedTooltip" id="3"/>
+		</InputField>
+		<InputField name="Nonnegative5Format" id="4">
+			<DataPath>Nonnegative5</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<EditFormat>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>ЧГ=0</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>ЧГ=0</v8:content>
+				</v8:item>
+			</EditFormat>
+			<BackColor>#DBF2FB</BackColor>
+			<ContextMenu name="Nonnegative5FormatContextMenu" id="5"/>
+			<ExtendedTooltip name="Nonnegative5FormatExtendedTooltip" id="6"/>
+		</InputField>
+		<InputField name="Any5Default" id="7">
+			<DataPath>Any5</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#FBE1CD</BackColor>
+			<ContextMenu name="Any5DefaultContextMenu" id="8"/>
+			<ExtendedTooltip name="Any5DefaultExtendedTooltip" id="9"/>
+		</InputField>
+		<InputField name="Any5Format" id="10">
+			<DataPath>Any5</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<EditFormat>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>ЧГ=0</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>ЧГ=0</v8:content>
+				</v8:item>
+			</EditFormat>
+			<BackColor>#F4CFDA</BackColor>
+			<ContextMenu name="Any5FormatContextMenu" id="11"/>
+			<ExtendedTooltip name="Any5FormatExtendedTooltip" id="12"/>
+		</InputField>
+		<InputField name="Nonnegative8Default" id="13">
+			<DataPath>Nonnegative8</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#DCF4CF</BackColor>
+			<ContextMenu name="Nonnegative8DefaultContextMenu" id="14"/>
+			<ExtendedTooltip name="Nonnegative8DefaultExtendedTooltip" id="15"/>
+		</InputField>
+		<InputField name="Nonnegative8Format" id="16">
+			<DataPath>Nonnegative8</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<EditFormat>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>ЧГ=0</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>ЧГ=0</v8:content>
+				</v8:item>
+			</EditFormat>
+			<BackColor>#A8E4B8</BackColor>
+			<ContextMenu name="Nonnegative8FormatContextMenu" id="17"/>
+			<ExtendedTooltip name="Nonnegative8FormatExtendedTooltip" id="18"/>
+		</InputField>
+		<InputField name="Any8Default" id="19">
+			<DataPath>Any8</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#D9F2D5</BackColor>
+			<ContextMenu name="Any8DefaultContextMenu" id="20"/>
+			<ExtendedTooltip name="Any8DefaultExtendedTooltip" id="21"/>
+		</InputField>
+		<InputField name="Any8Format" id="22">
+			<DataPath>Any8</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<HorizontalStretch>false</HorizontalStretch>
+			<EditFormat>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>ЧГ=0</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>ЧГ=0</v8:content>
+				</v8:item>
+			</EditFormat>
+			<BackColor>#F1DBE5</BackColor>
+			<ContextMenu name="Any8FormatContextMenu" id="23"/>
+			<ExtendedTooltip name="Any8FormatExtendedTooltip" id="24"/>
+		</InputField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Name" id="1">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Nonnegative5" id="2">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>5</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Any5" id="3">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>5</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Nonnegative8" id="4">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>8</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Any8" id="5">
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>8</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Any</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+</Form>

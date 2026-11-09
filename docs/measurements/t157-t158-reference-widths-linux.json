@@ -1,0 +1,469 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T15:14:09.717638+00:00",
+  "scope": [
+    "T157",
+    "T158",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "platform": "8.3.27.2342",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "implementation": {
+    "explicitWidth": "Fixed ten-pixel character units for supported reference and composite fields; button allocation is shared with rendering.",
+    "automaticWidth": "Twenty font-scaled character units plus button allocation.",
+    "enumerationDefaults": "Linux enumeration fields show a list choice and omit the open button unless XML overrides these settings. Other OS defaults are retained.",
+    "sharedResolution": [
+      "inputListChoice",
+      "inputOpenButton"
+    ],
+    "formNameExceptions": false,
+    "protocolVersionChanged": false
+  },
+  "nativeFixture": "tests/fixtures/forms/native-reference-widths",
+  "nativeForms": 15,
+  "completeNativeFrames": 30,
+  "nativeSourcesUnchanged": true,
+  "checks": {
+    "npmCheck": "passed",
+    "compile": "passed",
+    "package": "passed",
+    "node": {
+      "tests": 714,
+      "passed": 706,
+      "failed": 0,
+      "skipped": 8
+    },
+    "modelBefore": {
+      "matched": 2,
+      "total": 15
+    },
+    "modelAfter": {
+      "matched": 15,
+      "total": 15
+    },
+    "logs": "form-reference-width-validation-ct56lb23",
+    "rustUnchangedSinceFullChecks": "form-chart-commands-rust-3iwvehy2"
+  },
+  "installed": {
+    "stand": "form-batch-9WVCf0",
+    "vsixSha256": "4a5ed1330044efabb4e0b712b3c7a3984a169d123bb2d4a05a144c582605da45",
+    "backendSha256": "fefeee97b8df63536ce1cdeb8462b7d20864585e2de48c80008718a93ff6f530",
+    "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+    "runtimeFiles": 1262,
+    "initialBatchPassed": false,
+    "initialSuccessfulRuns": [
+      {
+        "suite": "reference-widths",
+        "locale": "en",
+        "states": 24,
+        "inputsStable": true
+      },
+      {
+        "suite": "reference-widths",
+        "locale": "ru",
+        "states": 24,
+        "inputsStable": true
+      },
+      {
+        "suite": "root-command-spacing",
+        "locale": "en",
+        "states": 6,
+        "inputsStable": true
+      },
+      {
+        "suite": "root-command-spacing",
+        "locale": "ru",
+        "states": 6,
+        "inputsStable": true
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "states": 98,
+        "inputsStable": true
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "states": 98,
+        "inputsStable": true
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "states": 31,
+        "inputsStable": true
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "states": 31,
+        "inputsStable": true
+      },
+      {
+        "suite": "preview",
+        "locale": "en",
+        "states": 1,
+        "inputsStable": true
+      },
+      {
+        "suite": "preview",
+        "locale": "ru",
+        "states": 1,
+        "inputsStable": true
+      },
+      {
+        "suite": "body-scroll",
+        "locale": "en",
+        "states": 4,
+        "inputsStable": true
+      },
+      {
+        "suite": "body-scroll",
+        "locale": "ru",
+        "states": 4,
+        "inputsStable": true
+      }
+    ],
+    "initialFailure": "Two text-input runs compared auxiliary fixture metrics with the button-only DOM result. Field geometry assertions passed before that harness assertion. The button comparison was narrowed to its choice/open/list contract; native goldens and runtime assets were unchanged.",
+    "retests": {
+      "stand": "form-reference-width-retests-vu8pbz19",
+      "runs": [
+        {
+          "name": "text-inputs-en",
+          "passed": true,
+          "exitCode": 0,
+          "states": 87,
+          "seconds": 48.27007159000277,
+          "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+          "runtimeFiles": 1262
+        },
+        {
+          "name": "text-inputs-ru",
+          "passed": true,
+          "exitCode": 0,
+          "states": 87,
+          "seconds": 48.45227848699869,
+          "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+          "runtimeFiles": 1262
+        },
+        {
+          "name": "reference-widths-en",
+          "passed": true,
+          "exitCode": 0,
+          "states": 24,
+          "seconds": 13.559549202000198,
+          "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+          "runtimeFiles": 1262
+        },
+        {
+          "name": "reference-widths-ru",
+          "passed": true,
+          "exitCode": 0,
+          "states": 24,
+          "seconds": 15.847180626002228,
+          "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+          "runtimeFiles": 1262
+        },
+        {
+          "name": "root-command-spacing-en",
+          "passed": true,
+          "exitCode": 0,
+          "states": 6,
+          "seconds": 5.732734911001899,
+          "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+          "runtimeFiles": 1262
+        },
+        {
+          "name": "root-command-spacing-ru",
+          "passed": true,
+          "exitCode": 0,
+          "states": 6,
+          "seconds": 8.402265515000181,
+          "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+          "runtimeFiles": 1262
+        }
+      ],
+      "sourceWitnessesUnchanged": true
+    },
+    "successfulRuns": 18,
+    "stateObservationsIncludingRepeatedRuns": 562
+  },
+  "wholeForms": {
+    "stand": "form-reference-width-whole-72pht8zu",
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.068568501999835,
+        "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 10.757363699001871,
+        "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.586552286000369,
+        "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.206053226000222,
+        "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.1182218350004405,
+        "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 9.64891101000103,
+        "runtimeManifestSha256": "19c8e05814b71f0afbc58cd8fe04eaf95a2d81f1bd82a2900667baa913830d43",
+        "runtimeFiles": 1262
+      }
+    ],
+    "sourcesUnchanged": true,
+    "bspFrames": {
+      "en": [
+        {
+          "sample": 0,
+          "frame": {
+            "width": 811,
+            "height": 612
+          }
+        },
+        {
+          "sample": 1,
+          "frame": {
+            "width": 800,
+            "height": 769
+          }
+        },
+        {
+          "sample": 2,
+          "frame": {
+            "width": 1222,
+            "height": 536
+          }
+        }
+      ],
+      "ru": [
+        {
+          "sample": 0,
+          "frame": {
+            "width": 811,
+            "height": 612
+          }
+        },
+        {
+          "sample": 1,
+          "frame": {
+            "width": 800,
+            "height": 769
+          }
+        },
+        {
+          "sample": 2,
+          "frame": {
+            "width": 1222,
+            "height": 536
+          }
+        }
+      ]
+    },
+    "questionnaire": [
+      {
+        "locale": "en",
+        "beforeFrame": {
+          "width": 785,
+          "height": 769
+        },
+        "afterFrame": {
+          "width": 800,
+          "height": 769
+        },
+        "nativeFrame": [
+          801,
+          769
+        ],
+        "beforeCompositeInput": [
+          123,
+          248,
+          348,
+          23
+        ],
+        "afterCompositeInput": [
+          123,
+          248,
+          462,
+          23
+        ],
+        "nativeCompositeInput": [
+          123,
+          248,
+          462,
+          23
+        ],
+        "table": [
+          13,
+          557,
+          600,
+          199
+        ],
+        "nativeTable": [
+          13,
+          557,
+          600,
+          199
+        ]
+      },
+      {
+        "locale": "ru",
+        "beforeFrame": {
+          "width": 785,
+          "height": 769
+        },
+        "afterFrame": {
+          "width": 800,
+          "height": 769
+        },
+        "nativeFrame": [
+          801,
+          769
+        ],
+        "beforeCompositeInput": [
+          123,
+          248,
+          348,
+          23
+        ],
+        "afterCompositeInput": [
+          123,
+          248,
+          462,
+          23
+        ],
+        "nativeCompositeInput": [
+          123,
+          248,
+          462,
+          23
+        ],
+        "table": [
+          13,
+          557,
+          600,
+          199
+        ],
+        "nativeTable": [
+          13,
+          557,
+          600,
+          199
+        ]
+      }
+    ],
+    "loanCompact": [
+      {
+        "locale": "en",
+        "frame": [
+          696,
+          760
+        ],
+        "paymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "nativePaymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "table": [
+          13,
+          588,
+          662,
+          227
+        ],
+        "nativeTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "tableYOffset": -1,
+        "tableGeometryAccepted": false
+      },
+      {
+        "locale": "ru",
+        "frame": [
+          696,
+          760
+        ],
+        "paymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "nativePaymentMemo": [
+          484,
+          339,
+          191,
+          51
+        ],
+        "table": [
+          13,
+          588,
+          662,
+          227
+        ],
+        "nativeTable": [
+          13,
+          589,
+          662,
+          227
+        ],
+        "tableYOffset": -1,
+        "tableGeometryAccepted": false
+      }
+    ],
+    "mainAndSeparateNativeWindow": true,
+    "dirtyXmlSelectionDomAndSnapshotChecksPassed": true
+  },
+  "limitations": [
+    "Full-form geometry and complete widget pixels are not accepted by this series.",
+    "Questionnaire frame is 800 x 769 rather than native 801 x 769. Minimum/maximum numeric inputs remain at x=190/196 instead of native x=198.",
+    "Compact LoanDisbursement table retains y=588 instead of native y=589; this is not accepted as native parity.",
+    "Totals BSP frame remains 1222 x 536 instead of native 1224 x 541.",
+    "Other button combinations, min/max bounds, multiline references, all read-only/disabled states, other DPI and Windows require further native acceptance."
+  ],
+  "explorerCommit": "35a2066dd2ed5dd01c5db037a6c77e4380ad1ff4",
+  "backendCommit": "02fde10"
+}

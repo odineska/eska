@@ -150,6 +150,52 @@ fn reorder_keeps_foreign_nodes_and_cross_group_move_has_one_owner() {
 }
 
 #[test]
+fn moved_addition_keeps_its_binding_and_identity_with_an_extension_override() {
+    let addition = concat!(
+        "<SearchStringAddition name=\"SearchExtra\" id=\"3\">",
+        "<AdditionSource><Item>Rows</Item><Type>SearchStringRepresentation</Type></AdditionSource>",
+        "</SearchStringAddition>"
+    );
+    let table = concat!(
+        "<Table name=\"Rows\" id=\"1\">",
+        "<SearchStringAddition name=\"SearchOwned\" id=\"2\"/>",
+        "</Table>"
+    );
+    let original = tree(&format!(
+        "{table}<UsualGroup name=\"Lane\" id=\"4\"/>{addition}"
+    ));
+    let changed_addition = addition.replace(
+        "</SearchStringAddition>",
+        "<BackColor>#FDECB0</BackColor></SearchStringAddition>",
+    );
+    let changed = tree(&format!(
+        "{table}<UsualGroup name=\"Lane\" id=\"4\">{}</UsualGroup>",
+        tree(&changed_addition),
+    ));
+    let result = compose(
+        &form("base", &original, None),
+        &[&form("extension", &changed, Some(&original))],
+    );
+    assert!(result.diagnostics.is_empty());
+    assert_eq!(result.root.children.len(), 2);
+    assert_eq!(
+        result.root.children[0].auxiliary[0].name.as_deref(),
+        Some("SearchOwned"),
+    );
+    let moved = &result.root.children[1].children[0];
+    assert_eq!(moved.identity.source, "base");
+    assert_eq!(moved.identity.key, ElementKey::Xml(3));
+    assert_eq!(
+        moved.property("AdditionSource").unwrap().origin.source,
+        "base"
+    );
+    assert_eq!(
+        moved.property("BackColor").unwrap().origin.source,
+        "extension"
+    );
+}
+
+#[test]
 fn definitions_keep_independent_unborrowed_values_and_provenance() {
     let base = form(
         "base",

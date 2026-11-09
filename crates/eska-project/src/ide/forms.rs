@@ -162,8 +162,7 @@ impl Server {
         let context = requests::Context {
             labels: &self.labels,
             project,
-            pictures: self.client_minor >= 37,
-            input_preparation: self.client_minor >= 38,
+            api_minor: self.client_minor,
             activity: session
                 .activity
                 .as_ref()

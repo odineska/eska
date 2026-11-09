@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "os": "linux",
+  "dpi": 96,
+  "zoom": 100,
+  "locales": [
+    "ru",
+    "en"
+  ],
+  "capturedAt": "2026-11-08T05:37:02.660186+00:00",
+  "cases": 13,
+  "nativeCaptures": 40,
+  "sourceFilesUnchanged": 2068,
+  "stands": [
+    {
+      "stand": "form-native-bsp-radio-kshe8k_p",
+      "compatibility": "Version8_3_27",
+      "nativeCaptures": 24,
+      "sourceFilesUnchanged": 684,
+      "sourceHashesSha256": "c026cc622d6fa157ee42b5b7bb9f9711a8b315000e1417e72078967dcd393402",
+      "captureInputs": {
+        "cases.json": "40a2d37c5cd7bb90ac22c332c2455f0749b9ae0f6fafd013ee0b2fdd28868353",
+        "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+        "eska-bsp-radio-native-prepare.py": "97315b2481527bdc48df79456f83af473c5eb90ae4d59866856014fea3df27b7",
+        "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+        "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+        "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+        "run-heading.py": "157f155e75d43dffaf93acdf6ce0f8a3489c78eeadfecc393a09a797130346c5"
+      },
+      "nativeProcess": {
+        "hostPid": 952105,
+        "containerPid": "99724",
+        "xid": "0x800053",
+        "width": 2560,
+        "height": 1019,
+        "launcherPid": 952000,
+        "persistent": true,
+        "locale": "en",
+        "finished": true,
+        "displayBackend": "private-headless-Mutter",
+        "display": ":2",
+        "exitCode": 0
+      }
+    },
+    {
+      "stand": "form-native-bsp-radio-compat24-tl2tuhuz",
+      "compatibility": "Version8_3_24",
+      "nativeCaptures": 8,
+      "sourceFilesUnchanged": 692,
+      "sourceHashesSha256": "00748eda5c6b10c56d449493f121018ed3b9fdb0e87f7890b47135a547bf762d",
+      "captureInputs": {
+        "cases.json": "5229caf35a31382f3e60ded9a62d255e5b0ff702e1e8c6d376f8ce70c83ac081",
+        "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+        "eska-bsp-radio-profile-prepare.py": "24f6403e21417c4e5f12d3c701ee4dbed0d13d1f7b01cae9d5c16538ba381b18",
+        "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+        "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+        "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+        "run-heading.py": "02beb168f85164f8001d75d0233ed7a0429266a0328c15dfd78054e4bb3f9544"
+      },
+      "nativeProcess": {
+        "hostPid": 959299,
+        "containerPid": "101452",
+        "xid": "0x800053",
+        "width": 2560,
+        "height": 1019,
+        "launcherPid": 959193,
+        "persistent": true,
+        "locale": "en",
+        "finished": true,
+        "displayBackend": "private-headless-Mutter",
+        "display": ":2",
+        "exitCode": 0
+      }
+    },
+    {
+      "stand": "form-native-bsp-radio-compat27-1un6tgk7",
+      "compatibility": "Version8_3_27",
+      "nativeCaptures": 8,
+      "sourceFilesUnchanged": 692,
+      "sourceHashesSha256": "da23f7d8101c4a3ce46f24f12b9a2972ad4f8e4d6d0c71b969ec26e26e4d7a22",
+      "captureInputs": {
+        "cases.json": "e1c58371f3fd4d508f7d143abfff2adc8348d4c3db5d63103e602f70352323fa",
+        "driver.py": "4380084a0c4f1aa276dd56e4cac5711d6f31e33704f3b00bd1851c049c43c231",
+        "eska-bsp-radio-profile-prepare.py": "24f6403e21417c4e5f12d3c701ee4dbed0d13d1f7b01cae9d5c16538ba381b18",
+        "eska-private-desktop-child.py": "ab558f317adc7a9d55dc84e5516526dd7351a1dc41374e2a7b198ae836d375f7",
+        "eska-private-desktop-run.py": "7e138474f225c85f7cee20854f8f53dff5a78522fb5e944da9990543122abb62",
+        "private_native_input.py": "bd5c45804cab7661abea9694ccd1c6845ca0240f5336a21099a8ffa13ef21e46",
+        "run-heading.py": "5e03b6b10f92d6ce97f1cd2ff16627637774295ba307ac65d03267f46be3d734"
+      },
+      "nativeProcess": {
+        "hostPid": 961758,
+        "containerPid": "101710",
+        "xid": "0x800053",
+        "width": 2560,
+        "height": 1019,
+        "launcherPid": 961653,
+        "persistent": true,
+        "locale": "en",
+        "finished": true,
+        "displayBackend": "private-headless-Mutter",
+        "display": ":2",
+        "exitCode": 0
+      }
+    }
+  ],
+  "measurementInputs": {
+    "eska-group-separation-metrics.py": "2a7b520a17d9e060dc6117e1dc38f162bed91082385f6b4f5438803889433127",
+    "eska-heading-en-metrics.py": "9538462209751ae5771b82af6935cb5aafe79923baf4b6e4ce26a80e3e1c0ba1",
+    "eska-bsp-radio-measure.py": "5c8e2ec6ac37ad2ed5460f05e005be3372944679ef69b570af935532603679e6",
+    "eska-bsp-radio-glyphs.json": "bc175f0f636ea1871f92892a7db019ec6399e7c2a2a28a4fc0a44b0588dddbff"
+  },
+  "rendererAccepted": false
+}

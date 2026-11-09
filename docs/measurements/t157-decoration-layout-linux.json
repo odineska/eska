@@ -1,0 +1,1266 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-08T01:19:31.741358+00:00",
+  "milestone": "T157",
+  "relatedMilestones": [
+    "T155",
+    "T158",
+    "T165"
+  ],
+  "issues": [
+    "https://github.com/odineska/eska/issues/265",
+    "https://github.com/odineska/eska/issues/273"
+  ],
+  "scope": "Геометрия надписей и заголовков Linux: Width, AutoMaxWidth, явные переносы, независимые вертикальные NormalSeparation, гиперссылки и логический отступ картинки. Полный профиль, все сочетания, все шрифты и Windows этим срезом не принимаются.",
+  "platformBuild": "8.3.27.2342",
+  "nativePlatform": "ALT Linux ARM64",
+  "compatibility": "Version8_3_27",
+  "dpi": 96,
+  "zoom": 100,
+  "locales": [
+    "en",
+    "ru"
+  ],
+  "bslExecuted": false,
+  "sourceWritesDuringViewing": false,
+  "fullNativeProfileAccepted": false,
+  "wholeFormGeometryParityAccepted": false,
+  "windowsAccepted": false,
+  "eskaFixtureCommit": "5345bacd2ea5d512b58137f8f62c2772d030fe00",
+  "explorerImplementationCommit": "fb0beb58ba589dff89e6bc4740211a0f54ccd903",
+  "native": {
+    "forms": 95,
+    "captures": 190,
+    "xmlParsedTreesUnchangedAfterNormalization": 95,
+    "pairedLocaleGeometryEqual": true,
+    "captureManifest": "tests/fixtures/forms/native-label-layout/capture-manifest.json",
+    "metrics": "tests/fixtures/forms/native-label-layout/metrics.json",
+    "rawCaptureHashes": {
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44101.png": "47b7a09ff61076be6198a3f44baa4f1a4c854d6306153a353faf37d400f577f1",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44101.png": "3d3d0548d78e93505eed83646839caf125dfbb29f95d831ee47dcf7fb7839dc1",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44102.png": "a830c86a401b01817d70f9a14982fb4d71fd500733fa0e07544f76b29e66e630",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44102.png": "ef15a13aafdef2d8973ff67ea281ab2524c211e6656386ed668f9ec4c164b241",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44103.png": "ba041dd7889d49abf5c804cb6b4e16bafde543ae5e66d261828d6f1aff8f7594",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44103.png": "ecabbef955b5bb184f00b8576ec7fecc4974eb0dbbbd212239f844e95a30ade4",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44104.png": "c76094c9dd4436d457d1594723c3304723177ffbc0c71022e7b6e7d15d49dc02",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44104.png": "034746f8719890ac2a80ff1c21ef19fa7802d53b612bd495ae619cf73ed0d7de",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44105.png": "641736f8dbee0544628af587f67940146ef182e4fa3758edb9634ce394e2090b",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44105.png": "4c661d988fa194dde1b7073e25570928bc632c2369281e9852783bb2b144195e",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44106.png": "cdfebc3b9dbf808b903602e12ef8bee46bf0ceea4cd024d88739cb0c241b9fa8",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44106.png": "8a9f67c297d7abc711fb281e39428a73e28e38e85c034575a44d1ff27c6bcc8c",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44107.png": "98f09164a6513395f713b575ea444c26a9fc949f3ed34276d013c5454c79b38d",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44107.png": "c55bb134ae1eb343642c8d7fbdf0ff34e1b24364a338c6bbad0c380f4beebc7c",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44108.png": "7e13d64dac3cfd31a5c3111ec2ed5eb85a0569636fdfaf054f97cccb36774a4c",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44108.png": "7be0d9aae3efad43a3714e69db43d82b9bfa7cb4b7a3644627e7a0a6d8556a1f",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44109.png": "96ebaf14ac1678d1946025ced23a6036c734126631d89143d33c5cc79b43aaee",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44109.png": "3c955811ffe7116d4a992e2db920849b109013f594cc017c3f621279bae5c954",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44110.png": "ab80af1b6cf0e9d8a2b26444d1ee52495fb3dfde2058d2f4652e654506dc7c3a",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44110.png": "592a85e64c16ab56bb393b09a5ca40a1605560f2e60d296cc5e63c8edbb529d9",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44111.png": "31fa02afe2a6504b5e91a0fdaef8261938b4289f1f91f17c7abff9da4f6a96cf",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44111.png": "0e67045254fed18dc0e99a2de5bb2f8b74e49fdeba557641747a140849b91d5d",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44112.png": "2d431f520b5f25b568c3d3934be215ae60ab573d439caea49540c42b5fa1e801",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44112.png": "6640dbf9621d08aa8bd2e9bd18b685dcad0a50359de3b8112fc680e41ede9ca0",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44113.png": "5620dd529fd436ba7ce26e80c064009fc272d0f7b0939c1e93a31516d4c5cd47",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44113.png": "e055ba2925e006579662667bff13fa8a3e02640fed0113f5a05b7969b242d406",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44114.png": "ef6c0cae93efd176aa7ef5875484e9038c10caeeac2d82a9d1f1f8e4feab7c44",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44114.png": "f8e5cef5e2e7528941fffffc415cad5d3738156e8ca1be57175d48b707cbf019",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44115.png": "09d2cf4737c2790c963e5ed3207e3345619c794a76c0dfd313279ff4e8febf23",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44115.png": "9d416e2326a31b0af345721d3c74797a7d100ed044dbe30645207f7f15eac00a",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44116.png": "1b3a20e3a2af6f60ebc682334e77a93274083f32afb0b30d5f132989b013ba6b",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44116.png": "35af8788c6c6a051922e19d6e5191ab087fccc0975261d325cbfd1b9ee7bac70",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44117.png": "f547b8d67b9fccba2c48205e874d52a56c179fe5d4a79d4c011d8f9249b1b637",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44117.png": "0c52f98b260099848793eed8330923df107a8ee428a92f56548f32f7884ca44c",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44118.png": "4a415393ee14419c7653de8347b760f27e1b16f72503c190977e78cd3d272452",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44118.png": "d16b0dbe08d192627028bee49257f7b1091907c062c726f76a0b6dc04499edd5",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44119.png": "c47b00443fb26c92f3c72eed3815e539d31a02376e30a0315c49ae5cd30c66ca",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44119.png": "154e3d066b73c07d8acdbce66c0e3de9e835f03ef6895dc9ff9a18dc6a84f8a6",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44120.png": "5aee899ab1c48441b79d800d22b21b695fe8f0ec32d8f09a335c45e4c44f939c",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44120.png": "35e1543b828350d159c9f904178251d0254b8fae8afac22756635c8aa8a5a2c7",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44121.png": "c41e2d6c990ff54fd29350a96c74f2c857bec1e896479437e9b88f1b5e5fb6a2",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44121.png": "e6ec7b803c02c1f05b0f943de930529bbad90326b00b87f7bdb17af4476ec03a",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44122.png": "8a88c5205dc2b5abc05ffe3319b5f54b7207b4356c058f77edb4ea06cff25584",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44122.png": "124078df3cbf6b1f6fb2852567a49a600751efc3c15fba96d319278049cae27c",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44123.png": "2357875c021d13a00d417f45b79e6ba50f8e91b47409e8e56c281b64cab78a86",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44123.png": "85d6a0331a6b1b80a86c4e7c43f0b1e4b7da80d05221c1349022f3967c6a93cb",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44124.png": "e09ef180d6976b67270c880326ecf25fd003492b3b0027e55ffcf3e66271a872",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44124.png": "14916f1f839c73b35cdb6871bd7beb83044a58d136756764d3249c3e99b7c369",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44125.png": "9bd13eefd12f454013d1474e582e90651e409fab937ec91c72e76ca419d428e7",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44125.png": "81467f1310fce8eca1ec0803169ec291bd5686c5205672f387c97bf229c9f20d",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44126.png": "1153f2a0eeb1884b73908c833f17aa06e95ed843e9098260d6df4c22f795f649",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44126.png": "18eaa1bc9233d3b957e84732d199e95794b5e92632e57fb4b6e8cd66f908be5a",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44127.png": "e518c8795cf549622844a7b91ad4fb81310249008766e5d45a68d666f059951d",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44127.png": "1573a27e21f702f286b656b03675b5231be997e8f9449d6448c9e75d56a865d8",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44128.png": "131997d634550deb10b3d8939622ffc63bfc1b938ee600119ff55f31bef92811",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44128.png": "fe9a58e9d4a9878798a9908a3e815b2bc562fc74e9b3851b2adc330317ccd2fd",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44129.png": "2fd3674ed882cac74441b59f7947f68318bcde1fe86e4a805ccbab65787b11ae",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44129.png": "42b3c9a29f4fd12e76751959ae0b8a98fe8a7bb89517f415b8309b216cbde0cd",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44130.png": "235af5672652a39772078d47f1eb868e9a8f9f754ed306626ebff630a5241485",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44130.png": "7a9dd19521ad3fe0c551d7ea3bbcac7b25ff6dc0fb55ace8e3777add4c679f84",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44131.png": "5eed57e323220a2ca4570efbc2705d60863fe13db8d3a4304c5afcac144c6669",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44131.png": "4e58e89c325df93740a2c0cd96b8be8f9189faa3993e2ceb4c4719bf3ccdca39",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44132.png": "96a796ef8cdea8cb91b269d6d827e86d96f2483879d10e52e9485019b27f84da",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44132.png": "c24604b70b1551857e0c916cc6a095443af5ad3e289c76a57c02ff2f48b6e69b",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44133.png": "7bac599b461083229a333c778951f2340cc766f20bffe91484f010a24fdb4c5a",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44133.png": "373e35039b4358ecd0928b13ca3a69dc9837491861fc9742abfb3a848811f797",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44134.png": "7abf13dc7fa70e0e9408f74ad86aa2bf96fcfcea0313cbd762695bbcc62f547e",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44134.png": "74a73d47e375c383113f322f4f4cd1205c73f36fd474a633daa1ca84d0b23ad2",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44135.png": "3777dc554d6dd75601c1ad36b0e8a8ebc110dd62404f36e5c9e7981884917d7e",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44135.png": "e9b6faceff2e25ca002486373e1a4e4623a0391863e21ce73cb83ca68a1f09d4",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44136.png": "0292d4efa38c8805e3b6657edbe8aa6b07d83d734af020e52c5233ac5cca6745",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44136.png": "70dd7397a237623bdb4a867a15bda6f1e79b47d2c79751bb90b410f63e00b8c3",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44137.png": "77a03661307bc6e862e3e0df505eb19d70431dcfa26fc5f97c8bc85f0a9876f9",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44137.png": "4155d12aa15c86332c0d9be1bc739a7f7cb3424ed3dfdb812f793fc276dde7fa",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44138.png": "5acdf192d4011542a4dff731ca0853519202a9dde732e5337f36119396570dcb",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44138.png": "3a80c814e869c166f72f0f22ee67b4ad36c591e184aa41c28065a8eb910e7e96",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44139.png": "5e0ae75f74b850145373e1790ca6ba3acb3463ad8a45b399adefe0a3d35fd063",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44139.png": "974bb1de9e6e2fb6cf17cd027d59f07169035593030e06aa68861f43d6b00637",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44140.png": "e618ab423d6102b68ba30b1083e9f655be412be9c31984f253ee565bd7b3ee1c",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44140.png": "c7d78fe761eb5152e4ed07b83bf1f0f54c575ca74c658ff526f3bf177107a51d",
+      "form-native-heading-private-s7dcj3ze/native-en/ProbeWidthHeading44141.png": "a4837cd5f878cbfe1968c631fcbc27ae620342e41c49ee051a464bb0073400da",
+      "form-native-heading-private-s7dcj3ze/native-ru/ProbeWidthHeading44141.png": "70dabd713d41003b1f69e6579ceebd664fd34a454bb27e838a70fdb27b23464c",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44201.png": "d442dd385bf033986b0f314fc3a703c254be38cda20250523db08714f84f080c",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44201.png": "f499f1590e7ac61d2264c513215d8974b6592dc251c4e84775297af89aaf4bc5",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44202.png": "6b020afcaa9d984e3448826496684056c2526ef6aaa50b04f6c78ce2e63ef2d4",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44202.png": "04df92b6fc543663a496e3d3cabc71d44ba9f137271ac27fd3e5b4759c67cf70",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44203.png": "7cc6e1985542683ed401c6f781ca3e0437eb8300aa873419f02ebdcee2278d65",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44203.png": "cdb8ffbd10cf6f2bd2d82518368cc5325af724406d5f729dadd6c43615cabbe7",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44204.png": "1d52d8a4e0ada8fa12f7140f2d4f72ae9c13c4629c0f9cb3c407b55f99042ffa",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44204.png": "729c7d3c39650225a351bd63b0005fc86d091658918b586ea1f8f2d471135e3f",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44205.png": "a4aa1c5b6b8c7b6471aa6b82d8bb81ac095d80c02b446893fdb70a6204a3b585",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44205.png": "2696e0a04355a9d34ed309afe0cdadf9159867894fe0a8378b3ce2a5cde0f398",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44206.png": "73df0a327ce2c90ee906147961884dd349b04a47c483e6779e300d98d78b7cd5",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44206.png": "b687a9a70ce0d52a095e576290a9b8abda3c29df1e8965721e5c5075cd5cb295",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44207.png": "04e2d58e74ed9e92afcf77b5960f525e15a4d9649ea70205a132e93249d1193f",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44207.png": "586db6abad8fed7298028547a8d12dde3150be95228fe19aa7486e079afb1053",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44208.png": "227fa612d49fc09332eb04d8fbfce9abeda81b1bd4e6604c50c101a4095c46a0",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44208.png": "fb30929d1ff6541d825ffea99dd7911a26918753cc5fdece5376fa8031cd1681",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44209.png": "91b71b7c0762cfd6c91ac2cb07b6bd4704498350e2f4ffa2dec25e4742b43599",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44209.png": "dad190a2083462f88d957faf4a9c139bd4948e9709f404c90d1b6bc12abb11bd",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44210.png": "5c980a68e204ada6154caf638a9f367aa5ad1f5a711218077fbaafa248b26d1f",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44210.png": "79064ca3b39b07309e5a802ad3a5b8d3bf0c9072dc11a27597657695eaae7f30",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44211.png": "8cf4fb243b4a774c57d954ddfa7e5c72ac1f3bab2d6460c236669105c2bc28bd",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44211.png": "3e2c3cbbba991c9104ad91b7339b3a77312ce6cf564787aa5f0e9b826ad2add0",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44212.png": "900806a9dc87fa5084794034ff115bffe7d966b8d101a8e4c324b5c917c59ca8",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44212.png": "d21f450500e551e633197b53c35a49deab73fcc6b0230c663b896e2ef30e9ab4",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44213.png": "30d0498541545c143ccce0515ff786f716f97cac39f5cf4730d8ace5f03e5089",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44213.png": "26d690aae99a043067076ecf17384984003a1a161e78846f8baa4627b71de3eb",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44214.png": "39d711b3b5b87f7187a6a34d734a028adb4a286b38e49af345f2958635c5aa65",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44214.png": "a173bc628382a54a6a4e5aa11b5eecf75bf3939d732a1fa840ec9211a0beff08",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44215.png": "b2238f3e2fe236514ec4d916d71d7d1a3caa48b8f963156eab9dec6accfaff26",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44215.png": "bca61893a3df8a371e51bae2a1185d5437c1b5648dc9d9085808fb5a2ec198d0",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44216.png": "aab551e83d211d74f98a86e8d165ddfe090475a533d50ff34fa62ede2647c1be",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44216.png": "ad83e59aa9ac355f62cda47db1d1f3e754978a872ba290fca4caa5fe33a3e55c",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44217.png": "1dab00490ce7744a13f7881b7d62782b148df4fe0b8a36c244df6d09e5785f54",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44217.png": "85a98143a590dc55f5ab7ed7be5bb1ded748ef832e40dcf17411df45f8208686",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44218.png": "f304c080a5ffa8658530dbe356505033a684f73ee293f2a8e4eed665a3e753e8",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44218.png": "3557476a17ca75b1e737012276ba5b4737b3adc686e1cd4b53e699cc9876e0e3",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44219.png": "3b3cda232b1cc572d88bd58580c4ec8beb46dd9907af06e56147443f12534699",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44219.png": "eac7098b0b17fbcd858bb28bb07f486467fc544aa11a7e375310db1b8a50cfe6",
+      "form-native-heading-boundaries-_3bky9vk/native-en/ProbeWidthHeading44220.png": "1ff9cf09f35a56c237e62e1646cb24bc9534324752e3e72744d1a8cb4d59f05a",
+      "form-native-heading-boundaries-_3bky9vk/native-ru/ProbeWidthHeading44220.png": "89e4f430cbf7b1af08d280f3e717b99d85b6e64135241b3b22099d4fd49cc712",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44301.png": "ab2a71f081d23e36322ef4c3b8d0403bb6d0f9711d6c343010ee69106f566cc1",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44301.png": "3766a09897237240a62368a2e5d2bf2aea2aebdcd4d2216193f17d7213ae71af",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44302.png": "020d435768b9d58af069f174ecd0aefc0c1c8144ae017c74ddd607efce095c88",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44302.png": "93496d52bbc501c44341455018938a03de2d360fb3552d4442226d69f120a036",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44303.png": "8dd7522d31b84e17a1d840e613b8be750d0b0b58809e6f194a2780324ab948e0",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44303.png": "2b87c8672872f26ae692c32452e82a13bdd7f4d3056d5885455ae123e5f1acfb",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44304.png": "5ebd80d315da3a7bac2d98362c3b54cece88d386e6b030a0ee8e14d423175a26",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44304.png": "910240d86bdf33d2575c31fa25a45a0706231a5265656d487c20f112ebaa9df8",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44305.png": "9e9b789e578872ad3381f362de7d1647bfa8296e183bb3360abc896f0b35c148",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44305.png": "eccd0996f5a803f0966a9bdc6885be2987f090306a7f6c9680850201f553a25a",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44306.png": "2d204bde71d784cafe548f6ea7a01bc1db5c92e451d21c883f7db72040217c4e",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44306.png": "8ce92850dd28da417dba9d69cfe60b374410036f78c510356bc9ef18c7803df2",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44307.png": "1ba20158088c396ab382aab904f8cd7ed5b6941cabea781d0f6fee6656994e0a",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44307.png": "7181717d384e1dafff737967030f7984822260f764c5e84293dececdac665241",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44308.png": "b74eb102909cc9f7c0a61a55c53433cf6ef952c1b2619596c51a442aa51ec317",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44308.png": "a879ff13d4ca7e9c311dbd1f433117b3c814b2eb3ea28af54fb56cc93c97e8e0",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44309.png": "8aa679fda89d0bc7bf71855f998a0cea3f9c6b40c6503a5b25688fcb0fa77de0",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44309.png": "4c0d4443d406e69c7876eecd22bf09f455a62479c7be2d2757f6aec90b9e2ded",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44310.png": "55d691a2e3359b55a2f38d43c0e05399984f8c61ba868f559eddf37f107bb2bb",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44310.png": "41457b81ae6b824ae55d54b312b06cd1d3ddd78d8fe28c7e664b6750bd3a8cbc",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44311.png": "b2132eee8888d1d6f2b52abdc0c8a6ad3a3a07c91739441dbdbd9f069b4d64b7",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44311.png": "aa8ef048d7d87fd9e18154533c0a7abf9530c94e7abe29d2207989c7dc3d97d3",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44312.png": "75b9d6ba4641f00896ed254db9ca7c57af0fa1c12ec546ea96d23721da3b95e1",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44312.png": "eedaf959fdd1c7afcd3063116a39e91b861917be9b6845a91ebbfc9d71019224",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44313.png": "8bd963d458b9d7590a1c4ff88a5169aa4ff1f7eb8d395f8b611310812ad40290",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44313.png": "aadf829080b7ac8b631cc7f5b3de6f49665033bafd39cf4c90787cbb57cf040f",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44314.png": "9c6bc8af6214914bf7ea4409e572b154bbebdbf6764cf83032b3baa5eab4513b",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44314.png": "3f007c57b6d8ed858a0bfc21d04cfa48e9e224520b9a4d55f9ff40ebcebc078e",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44315.png": "ab63c8ccdc16347ad516e9d0b63dcd8a201c6aeda92cb58a5974a096d26faf7c",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44315.png": "cdad4a001741f5cf36aafdebfe15a524f73b8a07cae6369f2ebdacdde911c49e",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44316.png": "546e9618100c0429409844229df9ba803a77610f793ab67155e71fd52946690e",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44316.png": "a54a9ec0400c3f0c2c6efd100cb24ef9ff38e723343f735be254c88cd51ad1c3",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44317.png": "4ee16a0ab028837cc2da2bdd0ab82f011f90b31baa906c9abfd76e0961d028d9",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44317.png": "6631350e280241da9ed13cce2f7ff7b3e07a4f1cc7f3e899e363925e37c46422",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44318.png": "db9046c85da5d7882052bc2adaaf7e8149ec3dad848b08d511cdfd5f9fdde609",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44318.png": "979c770749c9bcfff8d51bb6cb616851195b23e21cd3ff2cfb1de57fa6cb01c9",
+      "form-native-label-alignment-dnlga_gf/native-en/ProbeWidthHeading44319.png": "caae15b2b0bb377b157c828d2636c9a0eda020b48dd065f0496ae768102011cd",
+      "form-native-label-alignment-dnlga_gf/native-ru/ProbeWidthHeading44319.png": "9367f749c941c9339282603244b05c7dee68300460058895f6ebbd0a2a710f5f",
+      "form-native-bsp-heading-roxr999q/native-en/ProbeWidthHeading44401.png": "4840be9e0d03126b394035ce988b8537ff6f73e6b7c08f392709d2923bb8f490",
+      "form-native-bsp-heading-roxr999q/native-ru/ProbeWidthHeading44401.png": "4796f22eb9f37cbaca2f0f8ce06f002a638fd0d0725d8919e660555ba655a10f",
+      "form-native-bsp-heading-roxr999q/native-en/ProbeWidthHeading44402.png": "f8f0724de30a2c7c86c6f1bd679cafd879c2422c03fe3adeb39487bce25f0235",
+      "form-native-bsp-heading-roxr999q/native-ru/ProbeWidthHeading44402.png": "3d4e3b29cdca1a81598f961cdd1fee024b8562e66657da20dc02a33e25d761c6",
+      "form-native-bsp-heading-roxr999q/native-en/ProbeWidthHeading44403.png": "03a3293ee09b43b86d2de373892cfda87a163ec45eca4df650606d089e272055",
+      "form-native-bsp-heading-roxr999q/native-ru/ProbeWidthHeading44403.png": "3f40b650263882623ed33a7724a41176f3cbcb6de986942d658f16db4b0e6a3f",
+      "form-native-bsp-heading-roxr999q/native-en/ProbeWidthHeading44404.png": "8d6348b76315d9c4da79e5eff811438936a05663d0f8845d54167c093140eecb",
+      "form-native-bsp-heading-roxr999q/native-ru/ProbeWidthHeading44404.png": "9b3f695404edbf2bd946b892821d0aef30acd51c9b29c66de738fab9a117791b",
+      "form-native-bsp-heading-roxr999q/native-en/ProbeWidthHeading44405.png": "85fee17b351c49cbb33464cbf7e22f7a10c74d7b3bab3ddbf71379aa652ca6a8",
+      "form-native-bsp-heading-roxr999q/native-ru/ProbeWidthHeading44405.png": "4692e1e690d85a24387a16d72331fc239bc7bcb4e147122a0aee4ca222241d48",
+      "form-native-bsp-heading-roxr999q/native-en/ProbeWidthHeading44406.png": "c24b9031a694d92fbb8110b8c2e5ecea2c3282a07ac42fc0e2fe59e2a825f49b",
+      "form-native-bsp-heading-roxr999q/native-ru/ProbeWidthHeading44406.png": "82f2ac46073717accc8e42be6adf2d5e4da9d9ee2706311a75a64e458a99ea15",
+      "form-native-bsp-heading-roxr999q/native-en/ProbeWidthHeading44407.png": "647ac1f5417dc7727e120b585fcdd130e1d70ccedb5a644befb9ca5ec832abe4",
+      "form-native-bsp-heading-roxr999q/native-ru/ProbeWidthHeading44407.png": "84bc74ecc0860af2056ad5d128dda4db2933509f78bdded1c71a69fa61f2e1ed",
+      "form-native-bsp-heading-roxr999q/native-en/ProbeWidthHeading44408.png": "1b2668729d7781ebd8a487b1ee0138959d6ee63b2d605d3c7468bf9657d8d9ee",
+      "form-native-bsp-heading-roxr999q/native-ru/ProbeWidthHeading44408.png": "3f20db0633dd6170b52575745b5d93a9519de8a6bb2563f99bca9c5fec6af368",
+      "form-native-label-link-d9a58lju/native-en/ProbeWidthHeading44501.png": "aa20d07d771e1ca551ac99b26163f5179f71e360ecfff384a96b38ec62dc38fa",
+      "form-native-label-link-d9a58lju/native-ru/ProbeWidthHeading44501.png": "1104fa72325018d6e9d48e03ab882750c9384c1afc52bf87830bcda32b687336",
+      "form-native-label-link-d9a58lju/native-en/ProbeWidthHeading44502.png": "e30467abc2459fe39b823ef8ca8b3cafce75b21911bd40a37c481604e3615ae9",
+      "form-native-label-link-d9a58lju/native-ru/ProbeWidthHeading44502.png": "dcf62a7973bdf778112b3e73bb1298b650e1314b457c6d849af081973c36e8e1",
+      "form-native-label-link-d9a58lju/native-en/ProbeWidthHeading44503.png": "a2ff493b5c09f1210909b39030d024a6406b18691fbb1bae48b178521e77f9a5",
+      "form-native-label-link-d9a58lju/native-ru/ProbeWidthHeading44503.png": "ccba9a06b6939613e085f55529fc6bcf456cd53aa67ba44a006371442c0de03a",
+      "form-native-label-link-d9a58lju/native-en/ProbeWidthHeading44504.png": "06800f45cf4774448efcbae1d06d20d36cb8f32b2b0a1e190ced73df13d456c6",
+      "form-native-label-link-d9a58lju/native-ru/ProbeWidthHeading44504.png": "57d1700b35f92322dec7b45afc6eb82fda1fb5d17aa2e982a281161cd5a6fbf9",
+      "form-native-label-link-d9a58lju/native-en/ProbeWidthHeading44505.png": "fac5a77df6bb24a367676552b49bb5addf0cac83335850d9c492960090f6aa2f",
+      "form-native-label-link-d9a58lju/native-ru/ProbeWidthHeading44505.png": "3d44c67f62363f0d98bb9e91ed3584ae916abdeadf636deaabe518514a41baca",
+      "form-native-label-link-d9a58lju/native-en/ProbeWidthHeading44506.png": "36741d76774b20d940234df7797df4fc9861eb9b31af84d2f32e226ebcd92dd6",
+      "form-native-label-link-d9a58lju/native-ru/ProbeWidthHeading44506.png": "6a20f4cc049a6fac44dfd855a6206e260e9427c1ff4395c6df69cb835eb429c5",
+      "form-native-label-link-d9a58lju/native-en/ProbeWidthHeading44507.png": "686358d7615a32b2d29f52cae7ee91db1bf0c7806caff9f1988ba64166bdc91a",
+      "form-native-label-link-d9a58lju/native-ru/ProbeWidthHeading44507.png": "cd917992c8c2c464acac0d4947b6b56e026103982ce3f22033c01637c8b01856"
+    }
+  },
+  "architecture": {
+    "sharedWordMetrics": "webview/forms/font-metrics.mjs",
+    "sharedDecorationGeometry": "webview/forms/decoration-metrics.mjs",
+    "existingGeometryOwner": "webview/forms/responsive-layout.js",
+    "additionalResizeObservers": 0,
+    "modelOrJsonSchemaChanged": false,
+    "defaultLinuxWidthLimitPx": 400,
+    "linuxFormWidthFormula": "10 * Width + 30 content padding + 4 frame border",
+    "normalIndependentVerticalSection": "United=false: vertical separation stays inside the section; default heading gap is 9px; descendant separation is preserved. Horizontal boundaries are not recalibrated by this series.",
+    "hyperlinkInsets": "1px transparent border around the normal label content; native width/height increase by 2px.",
+    "pictureDecorationInsets": "1px logical padding around the rendered picture; the original Decorations frame is 94x118."
+  },
+  "installed": [
+    {
+      "locale": "en",
+      "scenarios": 110,
+      "nativeWidthAssertions": 95,
+      "nativeHeightAssertions": 82,
+      "exactFrameAndFields": 85,
+      "sourceWrites": false,
+      "receipt": "form-label-layout-final-x9xnaynx/en/receipt.json",
+      "receiptSha256": "b6b6e37f370e64e037c80e5382c9aa13ffbbabe5ce4f162020b6b075e16a6118"
+    },
+    {
+      "locale": "ru",
+      "scenarios": 110,
+      "nativeWidthAssertions": 95,
+      "nativeHeightAssertions": 82,
+      "exactFrameAndFields": 85,
+      "sourceWrites": false,
+      "receipt": "form-label-layout-final-x9xnaynx/ru/receipt.json",
+      "receiptSha256": "a83d1d4c88f629506da45232f356b9fbe5e249d2d56fb5bb3d7d98c54cbf77df"
+    }
+  ],
+  "runtime": {
+    "backendSha256": "10b7e4b520dc9ac6f06fa3a56ebbe0b85c59a5e18658551c860e2b558ac3489d",
+    "vsixSha256": "0f97919870337b1a141c9427c944025f554ceef743744d81422588fa8de663cf",
+    "manifestSha256": "5c12171b9ad60bc0bc9a6d73ee73dfae4e24986a878a5b65f65a312d9c81d3fb",
+    "verifiedRuntimeFiles": 1262,
+    "finalRuntimeReceipts": 13,
+    "finalInputSourceFiles": 1815
+  },
+  "remainingVerticalCases": [
+    {
+      "case": "MonoTwoLines",
+      "nativeFrame": [
+        290,
+        151
+      ],
+      "viewerFrame": [
+        290,
+        146
+      ],
+      "nativeFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          115,
+          131,
+          23
+        ]
+      },
+      "viewerFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          110,
+          131,
+          23
+        ]
+      },
+      "dimension": "vertical",
+      "family": "Liberation Mono"
+    },
+    {
+      "case": "MonoLines1",
+      "nativeFrame": [
+        290,
+        132
+      ],
+      "viewerFrame": [
+        290,
+        131
+      ],
+      "nativeFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          96,
+          131,
+          23
+        ]
+      },
+      "viewerFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          95,
+          131,
+          23
+        ]
+      },
+      "dimension": "vertical",
+      "family": "Liberation Mono"
+    },
+    {
+      "case": "MonoLines3",
+      "nativeFrame": [
+        290,
+        170
+      ],
+      "viewerFrame": [
+        290,
+        161
+      ],
+      "nativeFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          134,
+          131,
+          23
+        ]
+      },
+      "viewerFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          125,
+          131,
+          23
+        ]
+      },
+      "dimension": "vertical",
+      "family": "Liberation Mono"
+    },
+    {
+      "case": "MonoFont8Lines1",
+      "nativeFrame": [
+        258,
+        130
+      ],
+      "viewerFrame": [
+        258,
+        129
+      ],
+      "nativeFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          94,
+          131,
+          23
+        ]
+      },
+      "viewerFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          93,
+          131,
+          23
+        ]
+      },
+      "dimension": "vertical",
+      "family": "Liberation Mono"
+    },
+    {
+      "case": "MonoFont8Lines2",
+      "nativeFrame": [
+        258,
+        146
+      ],
+      "viewerFrame": [
+        258,
+        142
+      ],
+      "nativeFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          110,
+          131,
+          23
+        ]
+      },
+      "viewerFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          106,
+          131,
+          23
+        ]
+      },
+      "dimension": "vertical",
+      "family": "Liberation Mono"
+    },
+    {
+      "case": "MonoFont9Lines2",
+      "nativeFrame": [
+        258,
+        147
+      ],
+      "viewerFrame": [
+        258,
+        144
+      ],
+      "nativeFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          111,
+          131,
+          23
+        ]
+      },
+      "viewerFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          108,
+          131,
+          23
+        ]
+      },
+      "dimension": "vertical",
+      "family": "Liberation Mono"
+    },
+    {
+      "case": "MonoFont12Lines2",
+      "nativeFrame": [
+        354,
+        158
+      ],
+      "viewerFrame": [
+        354,
+        154
+      ],
+      "nativeFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          122,
+          131,
+          23
+        ]
+      },
+      "viewerFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          118,
+          131,
+          23
+        ]
+      },
+      "dimension": "vertical",
+      "family": "Liberation Mono"
+    },
+    {
+      "case": "MonoFont14Lines1",
+      "nativeFrame": [
+        386,
+        138
+      ],
+      "viewerFrame": [
+        386,
+        139
+      ],
+      "nativeFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          102,
+          131,
+          23
+        ]
+      },
+      "viewerFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          103,
+          131,
+          23
+        ]
+      },
+      "dimension": "vertical",
+      "family": "Liberation Mono"
+    },
+    {
+      "case": "MonoFont14Lines2",
+      "nativeFrame": [
+        386,
+        165
+      ],
+      "viewerFrame": [
+        386,
+        162
+      ],
+      "nativeFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          129,
+          131,
+          23
+        ]
+      },
+      "viewerFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          126,
+          131,
+          23
+        ]
+      },
+      "dimension": "vertical",
+      "family": "Liberation Mono"
+    },
+    {
+      "case": "MonoFont16Lines2",
+      "nativeFrame": [
+        307,
+        221
+      ],
+      "viewerFrame": [
+        307,
+        216
+      ],
+      "nativeFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          185,
+          131,
+          23
+        ]
+      },
+      "viewerFields": {
+        "Above": [
+          13,
+          39,
+          131,
+          23
+        ],
+        "Below": [
+          13,
+          180,
+          131,
+          23
+        ]
+      },
+      "dimension": "vertical",
+      "family": "Liberation Mono"
+    }
+  ],
+  "regression": {
+    "initialRuns": 16,
+    "initialPassed": 13,
+    "initialFailures": [
+      {
+        "suite": "groups",
+        "locales": [
+          "en",
+          "ru"
+        ],
+        "observed": "Decorations frame height 114 instead of 118",
+        "resolution": "Native hyperlink and picture insets; repeated successfully with the final runtime."
+      },
+      {
+        "suite": "tables",
+        "locales": [
+          "ru"
+        ],
+        "observed": "Fixed table was already 600px but its frame still had the preceding preferred width 449px.",
+        "resolution": "The test now waits for the existing frame-width invariant 634px after dirty XML; repeated successfully.",
+        "testCommit": "a41f043"
+      }
+    ],
+    "acceptedSelectedRuns": 16,
+    "acceptedCaseIds": 1049,
+    "selectedRuns": [
+      {
+        "suite": "column-widths",
+        "locale": "en",
+        "generation": "initial",
+        "cases": 187,
+        "receipt": "form-batch-XScPTA/column-widths-en/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      },
+      {
+        "suite": "column-widths",
+        "locale": "ru",
+        "generation": "initial",
+        "cases": 143,
+        "receipt": "form-batch-XScPTA/column-widths-ru/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      },
+      {
+        "suite": "command-bars",
+        "locale": "en",
+        "generation": "initial",
+        "cases": 64,
+        "receipt": "form-batch-XScPTA/command-bars-en/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      },
+      {
+        "suite": "command-bars",
+        "locale": "ru",
+        "generation": "initial",
+        "cases": 64,
+        "receipt": "form-batch-XScPTA/command-bars-ru/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "en",
+        "generation": "initial",
+        "cases": 60,
+        "receipt": "form-batch-XScPTA/group-spacing-en/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      },
+      {
+        "suite": "group-spacing",
+        "locale": "ru",
+        "generation": "initial",
+        "cases": 60,
+        "receipt": "form-batch-XScPTA/group-spacing-ru/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "generation": "hyperlink-picture-and-table-frame-fix",
+        "cases": 22,
+        "receipt": "form-label-regression-rerun-kigt0mmv/groups-en/receipt.json",
+        "runtimeManifestSha256": "5c12171b9ad60bc0bc9a6d73ee73dfae4e24986a878a5b65f65a312d9c81d3fb"
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "generation": "hyperlink-picture-and-table-frame-fix",
+        "cases": 22,
+        "receipt": "form-label-regression-rerun-kigt0mmv/groups-ru/receipt.json",
+        "runtimeManifestSha256": "5c12171b9ad60bc0bc9a6d73ee73dfae4e24986a878a5b65f65a312d9c81d3fb"
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "en",
+        "generation": "initial",
+        "cases": 51,
+        "receipt": "form-batch-XScPTA/tab-borders-en/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      },
+      {
+        "suite": "tab-borders",
+        "locale": "ru",
+        "generation": "initial",
+        "cases": 51,
+        "receipt": "form-batch-XScPTA/tab-borders-ru/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "en",
+        "generation": "picture-inset-regression",
+        "cases": 48,
+        "receipt": "form-label-pixels-rerun-3o_sb0bj/table-pixels-en/receipt.json",
+        "runtimeManifestSha256": "5c12171b9ad60bc0bc9a6d73ee73dfae4e24986a878a5b65f65a312d9c81d3fb"
+      },
+      {
+        "suite": "table-pixels",
+        "locale": "ru",
+        "generation": "picture-inset-regression",
+        "cases": 47,
+        "receipt": "form-label-pixels-rerun-3o_sb0bj/table-pixels-ru/receipt.json",
+        "runtimeManifestSha256": "5c12171b9ad60bc0bc9a6d73ee73dfae4e24986a878a5b65f65a312d9c81d3fb"
+      },
+      {
+        "suite": "tables",
+        "locale": "en",
+        "generation": "initial",
+        "cases": 17,
+        "receipt": "form-batch-XScPTA/tables-en/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      },
+      {
+        "suite": "tables",
+        "locale": "ru",
+        "generation": "hyperlink-picture-and-table-frame-fix",
+        "cases": 17,
+        "receipt": "form-label-regression-rerun-kigt0mmv/tables-ru/receipt.json",
+        "runtimeManifestSha256": "5c12171b9ad60bc0bc9a6d73ee73dfae4e24986a878a5b65f65a312d9c81d3fb"
+      },
+      {
+        "suite": "through-align",
+        "locale": "en",
+        "generation": "initial",
+        "cases": 98,
+        "receipt": "form-batch-XScPTA/through-align-en/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      },
+      {
+        "suite": "through-align",
+        "locale": "ru",
+        "generation": "initial",
+        "cases": 98,
+        "receipt": "form-batch-XScPTA/through-align-ru/receipt.json",
+        "runtimeManifestSha256": "47c0c479d6af304ef98764a7582838c87dcff4bc3b2d5b5591721de9494eb734"
+      }
+    ],
+    "finalPictureChangeScope": "The two table-pixels suites were repeated because their fixture directories contain PictureDecoration. The other previously passing suites contain neither PictureDecoration nor hyperlink LabelDecoration."
+  },
+  "wholeForms": {
+    "runs": [
+      {
+        "mode": "bsp",
+        "locale": "en",
+        "passed": true,
+        "poses": 12,
+        "receipt": "form-label-layout-whole-f9fu8_q7/bsp-en/receipt.json"
+      },
+      {
+        "mode": "bsp",
+        "locale": "ru",
+        "passed": true,
+        "poses": 12,
+        "receipt": "form-label-layout-whole-f9fu8_q7/bsp-ru/receipt.json"
+      },
+      {
+        "mode": "loan-docked",
+        "locale": "en",
+        "passed": true,
+        "poses": 8,
+        "receipt": "form-label-layout-whole-f9fu8_q7/loan-docked-en/receipt.json"
+      },
+      {
+        "mode": "loan-docked",
+        "locale": "ru",
+        "passed": true,
+        "poses": 8,
+        "receipt": "form-label-layout-whole-f9fu8_q7/loan-docked-ru/receipt.json"
+      },
+      {
+        "mode": "loan-detached",
+        "locale": "en",
+        "passed": true,
+        "poses": 8,
+        "receipt": "form-label-layout-whole-f9fu8_q7/loan-detached-en/receipt.json"
+      },
+      {
+        "mode": "loan-detached",
+        "locale": "ru",
+        "passed": true,
+        "poses": 8,
+        "receipt": "form-label-layout-whole-f9fu8_q7/loan-detached-ru/receipt.json"
+      }
+    ],
+    "totalGeometrySamples": 56,
+    "sourceFormFiles": 4,
+    "sourceHashesUnchangedAgainstPreviousCheckpoint": true,
+    "bsp": [
+      {
+        "locale": "en",
+        "forms": [
+          {
+            "sample": 0,
+            "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+            "beforePreferredFrame": {
+              "width": 814,
+              "height": 612
+            },
+            "afterPreferredFrame": {
+              "width": 814,
+              "height": 612
+            },
+            "alternateRadioPositions": [
+              {
+                "element": "ОбновлятьСуществующие",
+                "circles": [
+                  {
+                    "label": "Обновлять",
+                    "box": [
+                      220,
+                      175,
+                      15,
+                      15
+                    ]
+                  },
+                  {
+                    "label": "Пропускать",
+                    "box": [
+                      318,
+                      175,
+                      15,
+                      15
+                    ]
+                  }
+                ]
+              },
+              {
+                "element": "СоздаватьЕслиНеСопоставлено",
+                "circles": [
+                  {
+                    "label": "Создавать",
+                    "box": [
+                      606,
+                      175,
+                      15,
+                      15
+                    ]
+                  },
+                  {
+                    "label": "Пропускать",
+                    "box": [
+                      702,
+                      175,
+                      15,
+                      15
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sample": 1,
+            "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+            "beforePreferredFrame": {
+              "width": 785,
+              "height": 796
+            },
+            "afterPreferredFrame": {
+              "width": 785,
+              "height": 796
+            },
+            "alternateRadioPositions": []
+          },
+          {
+            "sample": 2,
+            "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+            "beforePreferredFrame": {
+              "width": 1217,
+              "height": 533
+            },
+            "afterPreferredFrame": {
+              "width": 1222,
+              "height": 533
+            },
+            "alternateRadioPositions": []
+          }
+        ]
+      },
+      {
+        "locale": "ru",
+        "forms": [
+          {
+            "sample": 0,
+            "sourceSha256": "9daf74c855206ea6f39f153cb07d1e0ab2bd77292733cf5277f1639c9c0092da",
+            "beforePreferredFrame": {
+              "width": 814,
+              "height": 612
+            },
+            "afterPreferredFrame": {
+              "width": 814,
+              "height": 612
+            },
+            "alternateRadioPositions": [
+              {
+                "element": "ОбновлятьСуществующие",
+                "circles": [
+                  {
+                    "label": "Обновлять",
+                    "box": [
+                      220,
+                      175,
+                      15,
+                      15
+                    ]
+                  },
+                  {
+                    "label": "Пропускать",
+                    "box": [
+                      318,
+                      175,
+                      15,
+                      15
+                    ]
+                  }
+                ]
+              },
+              {
+                "element": "СоздаватьЕслиНеСопоставлено",
+                "circles": [
+                  {
+                    "label": "Создавать",
+                    "box": [
+                      606,
+                      175,
+                      15,
+                      15
+                    ]
+                  },
+                  {
+                    "label": "Пропускать",
+                    "box": [
+                      702,
+                      175,
+                      15,
+                      15
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "sample": 1,
+            "sourceSha256": "f6fc7a91d8a3b6be5082ab02e7e30f387bec546c8f6fcb692a068cd1538c16e3",
+            "beforePreferredFrame": {
+              "width": 785,
+              "height": 796
+            },
+            "afterPreferredFrame": {
+              "width": 785,
+              "height": 796
+            },
+            "alternateRadioPositions": []
+          },
+          {
+            "sample": 2,
+            "sourceSha256": "45eb0e47f287600e7a398316fb4c7f49dccbab5bd5949af5c14d1385dbbb8248",
+            "beforePreferredFrame": {
+              "width": 1217,
+              "height": 533
+            },
+            "afterPreferredFrame": {
+              "width": 1222,
+              "height": 533
+            },
+            "alternateRadioPositions": []
+          }
+        ]
+      }
+    ],
+    "nativeWizardRadioDarkPixelBounds": [
+      219,
+      175,
+      234,
+      190
+    ],
+    "nativeWizardRadioScreenshot": "united-bsp-context-763t8lxb/native-data-matching-page.png",
+    "viewerWizardRadioY": 175,
+    "priorViewerWizardRadioY": 169.1875,
+    "radioHorizontalParityAccepted": false,
+    "wizardFrame": [
+      814,
+      612
+    ],
+    "nativeWizardFrame": [
+      812,
+      612
+    ],
+    "loan": [
+      {
+        "mode": "loan-docked",
+        "locale": "en",
+        "poses": 8,
+        "beforePreferred": [
+          1157,
+          875
+        ],
+        "afterPreferred": [
+          1157,
+          875
+        ],
+        "changedControlOrElementRectangles": 0
+      },
+      {
+        "mode": "loan-docked",
+        "locale": "ru",
+        "poses": 8,
+        "beforePreferred": [
+          1157,
+          875
+        ],
+        "afterPreferred": [
+          1157,
+          875
+        ],
+        "changedControlOrElementRectangles": 0
+      },
+      {
+        "mode": "loan-detached",
+        "locale": "en",
+        "poses": 8,
+        "beforePreferred": [
+          1157,
+          875
+        ],
+        "afterPreferred": [
+          1157,
+          875
+        ],
+        "changedControlOrElementRectangles": 0
+      },
+      {
+        "mode": "loan-detached",
+        "locale": "ru",
+        "poses": 8,
+        "beforePreferred": [
+          1157,
+          875
+        ],
+        "afterPreferred": [
+          1157,
+          875
+        ],
+        "changedControlOrElementRectangles": 0
+      }
+    ]
+  },
+  "validation": {
+    "node": {
+      "tests": 693,
+      "pass": 685,
+      "fail": 0,
+      "skipped": 8
+    },
+    "typescriptCheck": "passed",
+    "compile": "passed",
+    "vsixPackage": "passed",
+    "rust": {
+      "performedThisChange": false,
+      "reason": "No Rust source, dependencies or build configuration changed from ee35616; only new native fixtures and documentation were added in eska.",
+      "unchangedSourceCommit": "ee35616",
+      "referenceReport": "docs/measurements/t155-font-face-name-linux.json",
+      "referencePassed": 1564,
+      "referenceIgnored": 19
+    },
+    "diffCheck": "passed"
+  },
+  "artifactRoot": "<repository-root>/../eska-playground",
+  "artifactFolders": {
+    "installed": "form-label-layout-final-x9xnaynx",
+    "node": "form-label-layout-node-9vj0wnid",
+    "initialRegression": "form-batch-XScPTA",
+    "regressionRerun": "form-label-regression-rerun-kigt0mmv",
+    "pictureRegressionRerun": "form-label-pixels-rerun-3o_sb0bj",
+    "wholeForms": "form-label-layout-whole-f9fu8_q7"
+  },
+  "artifactHashes": {
+    "form-label-layout-final-x9xnaynx/en/receipt.json": "b6b6e37f370e64e037c80e5382c9aa13ffbbabe5ce4f162020b6b075e16a6118",
+    "form-label-layout-final-x9xnaynx/ru/receipt.json": "a83d1d4c88f629506da45232f356b9fbe5e249d2d56fb5bb3d7d98c54cbf77df",
+    "form-batch-XScPTA/column-widths-en/receipt.json": "f59ee331a26a12014032fd24a4e516ce78872c231ddecef6993246936c545e77",
+    "form-batch-XScPTA/column-widths-ru/receipt.json": "15fdbf4e125e96c6238a22aac79148176ce62b7f318821da7b492e8db2cd2bfc",
+    "form-batch-XScPTA/command-bars-en/receipt.json": "7550c48257be2d9be1d6bdea94b3710afd50c11290a5f2012003b7309f241311",
+    "form-batch-XScPTA/command-bars-ru/receipt.json": "60289a8caed6607ef035888f58194b7b63819a5d3546543c1cdff3956e126051",
+    "form-batch-XScPTA/group-spacing-en/receipt.json": "4aa3dc965f1fdb0d976959056af00707d5470ec3bc58c0081b21c45df57523c5",
+    "form-batch-XScPTA/group-spacing-ru/receipt.json": "7a75d37d188e70fb1688e30819dc762dccb699ada6bb376b2110ff4b835d48fe",
+    "form-label-regression-rerun-kigt0mmv/groups-en/receipt.json": "4ce6bb818e04e245f52a6a553c8dbb544ab4d348f594747e7ea9aebf1a50a169",
+    "form-label-regression-rerun-kigt0mmv/groups-ru/receipt.json": "823f118ce54bc5d788dacc8992b2c6e1bfab40b372c47fd9e99433b888720076",
+    "form-batch-XScPTA/tab-borders-en/receipt.json": "4844a610e05fb604c0d96c3686f096b3179115218badaf6974b223651cc6f16a",
+    "form-batch-XScPTA/tab-borders-ru/receipt.json": "e4f36f4925283f8974c0fb60b3a075cdcaec2b9fbf6d2de82e9fd2ff9c5366d3",
+    "form-label-pixels-rerun-3o_sb0bj/table-pixels-en/receipt.json": "16a9a75bc5305506c462b93a6081b8a0effdf9a0ba67c745ce91fc03a26433ec",
+    "form-label-pixels-rerun-3o_sb0bj/table-pixels-ru/receipt.json": "a374a078205a614d4c3581812da4d7cc7d7a355ab33397f4d4fda2896e02b333",
+    "form-batch-XScPTA/tables-en/receipt.json": "ae5b2f0ef268dd6f21b4d999a3f57be089a57c051eeff4d5aa31f4a32d8cc5c8",
+    "form-label-regression-rerun-kigt0mmv/tables-ru/receipt.json": "997c71471e1b491d22006cfad6315fd11a6fd5de0e781b65880ba70a2affef77",
+    "form-batch-XScPTA/through-align-en/receipt.json": "2e35e46dd712bc6550326f85d76d66f7fd83d66e393d3df67bb8140d0901c6a2",
+    "form-batch-XScPTA/through-align-ru/receipt.json": "3c62ea5b526329f7c892386127ef7bc7b0ca10ef0402dd1cace44d30ba8cc7c2",
+    "form-label-layout-whole-f9fu8_q7/bsp-en/receipt.json": "6295e43059b00e7218e5519dd80bf588d262492afbe841449dff515f4ef7c228",
+    "form-label-layout-whole-f9fu8_q7/bsp-ru/receipt.json": "01e693a91e1f82c69d0f43919a751a9a52f0888c67843eae0b216e2810fea5a7",
+    "form-label-layout-whole-f9fu8_q7/loan-docked-en/receipt.json": "e50b7f500a61cf08588fa7aace75dc744e5f0b4ca0423997c3200cf52cd384d2",
+    "form-label-layout-whole-f9fu8_q7/loan-docked-ru/receipt.json": "cc6439b5137ac6eea613d2033d54ef7a6503adf063cd7dff38ae410ac381a73b",
+    "form-label-layout-whole-f9fu8_q7/loan-detached-en/receipt.json": "5f506d5cbe61bd1047648dc1cb585f6723f640a2f2e0a400c1cb70f527a08a4b",
+    "form-label-layout-whole-f9fu8_q7/loan-detached-ru/receipt.json": "3c8f980007c43ff10023633a62374a368c0a0dd2de7fef1f0980830d1e66d6a8",
+    "form-label-layout-node-9vj0wnid/node-final.log": "e4aa7227d46b7a443c28ce958709a126a8207339babd728764772d41fb76a0e7",
+    "form-batch-XScPTA/inputs.json": "f844812a766680c47a827c6e137e17a51e714e6c6451538bdb538492f7eb1180",
+    "form-batch-XScPTA/batch.json": "e654b8fcfa55bc599584e188a4249ad4b06e65175cb2211aaac29379ed736470",
+    "form-label-regression-rerun-kigt0mmv/summary.json": "d900727ef4887cd2367e82133db3e99e47aada5adfced40feb6fcbfb0255e613",
+    "form-label-regression-rerun-kigt0mmv/source-hashes-before.json": "352d45f8b13523b9d5bd5f4a535f1ad9dfb9959e5ec7ee51bd5fde778c551e7f",
+    "form-label-regression-rerun-kigt0mmv/source-hashes-after.json": "352d45f8b13523b9d5bd5f4a535f1ad9dfb9959e5ec7ee51bd5fde778c551e7f",
+    "form-label-pixels-rerun-3o_sb0bj/summary.json": "e47ca1046889df8f9ece9a12d7656509fe81ebd4ef36de5d4b3f5f4bb97bfaab",
+    "form-label-pixels-rerun-3o_sb0bj/source-hashes-before.json": "352d45f8b13523b9d5bd5f4a535f1ad9dfb9959e5ec7ee51bd5fde778c551e7f",
+    "form-label-pixels-rerun-3o_sb0bj/source-hashes-after.json": "352d45f8b13523b9d5bd5f4a535f1ad9dfb9959e5ec7ee51bd5fde778c551e7f",
+    "form-label-layout-final-x9xnaynx/source-hashes-before.json": "262af8f64fc9e2008d7e846498eb314c24a038105a4515d72b97d95b03412c03",
+    "form-label-layout-final-x9xnaynx/source-hashes-after.json": "262af8f64fc9e2008d7e846498eb314c24a038105a4515d72b97d95b03412c03",
+    "form-label-layout-whole-f9fu8_q7/source-hashes-before.json": "4605edd5f3e781b8babc68f13e64861dd0fa7443651e8088f82a468b93bb1248",
+    "form-label-layout-whole-f9fu8_q7/source-hashes-after.json": "4605edd5f3e781b8babc68f13e64861dd0fa7443651e8088f82a468b93bb1248",
+    "united-bsp-context-763t8lxb/native-data-matching-page.png": "8604aaf8f09db68aebcee30362fc8f9ae729e377aeacd6daff3b09ff5d8c7b53",
+    "form-label-layout-final-x9xnaynx/runtime-verification.json": "658c3b7f4fda60b3d284c53b42e111dd8724b9787487fcca6b8a9acaf977e3ef"
+  },
+  "remaining": [
+    "Вертикальные метрики Liberation Mono в десяти записанных случаях и остальная матрица шрифтов/оформления.",
+    "Полная геометрия мастера БСП, вопроса анкеты и формы агрегатов при одинаковой области просмотра; ширина мастера и X радиокружков ещё различаются.",
+    "Native-resize, дополнительные масштабы/DPI и сочетания свойств.",
+    "Пиксельное совпадение и native-приёмка Windows."
+  ],
+  "windowsHandoff": [
+    "Новые метрики надписей и отступы применяются только при state.os=linux; Windows сохраняет прежние правила.",
+    "Suite decorations выполняет проверки Linux-координат только на Linux. Успех Windows-прогона не означает приёмку Linux-эталонов для Windows.",
+    "Снять тот же Designer XML в родном Конфигураторе Windows с точной фиксацией сборки; Windows-метрики хранить отдельно.",
+    "Проверить dirty Width/AutoMaxWidth, явные переносы заголовков, независимый NormalSeparation, гиперссылки, отступы картинки и настоящее отдельное окно.",
+    "Повторить три формы БСП и документ ВыдачаЗайма при одинаковых области, DPI и масштабе; контролировать неизменность исходников."
+  ],
+  "implementationCommits": [
+    {
+      "repository": "eska",
+      "hash": "9ffe9af84aab7938da86171451967b1557ed72bd",
+      "message": "test(forms): Добавлены эталоны надписей и заголовков Linux"
+    },
+    {
+      "repository": "eska",
+      "hash": "5a3e01b17b6e9898e6ee40cdbcb35f93cc2adeeb",
+      "message": "test(forms): Нормализовано хранение XML-эталонов надписей"
+    },
+    {
+      "repository": "eska",
+      "hash": "fc98caa1143785d69b746b1f4e4e6e417640896b",
+      "message": "test(forms): Уточнены эталоны независимых секций БСП"
+    },
+    {
+      "repository": "eska",
+      "hash": "5345bacd2ea5d512b58137f8f62c2772d030fe00",
+      "message": "test(forms): Добавлены эталоны размеров гиперссылок"
+    },
+    {
+      "repository": "eska-vscode-explorer",
+      "hash": "a41f043535c2b64db3bf7dbebd68715b4a675dfb",
+      "message": "test(forms): Добавлено ожидание переразметки рамки таблицы"
+    },
+    {
+      "repository": "eska-vscode-explorer",
+      "hash": "fb0beb58ba589dff89e6bc4740211a0f54ccd903",
+      "message": "fix(forms): Исправлена геометрия надписей и заголовков"
+    }
+  ]
+}

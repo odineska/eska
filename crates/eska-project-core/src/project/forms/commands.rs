@@ -3,15 +3,14 @@
 use super::presentation::{definition_caption, literal, metadata_property};
 use super::{
     AppearanceDiagnostic, ButtonRepresentation, ComposedForm, EffectiveDefinition,
-    EffectiveElement, ElementFamily, ElementKind, FORM_NAMESPACE, FormPicture, FormResource,
-    PresentationText, PropertySource, appearance::text, pictures,
+    EffectiveElement, ElementKind, FORM_NAMESPACE, FormPicture, FormResource, PresentationText,
+    PropertySource, appearance::text, composition::SourceItems, pictures,
 };
 use crate::project::{
     metadata_model::{MetadataValue, ObjectId},
     metadata_parser::ParsedObject,
 };
 use serde::Serialize;
-use std::collections::HashMap;
 
 #[derive(Clone, Debug, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -99,6 +98,9 @@ impl<'a> ResolvedCommand<'a> {
                 pictures::form_picture(command.property("Picture")?, resources, diagnostics)
             }
             Self::Metadata(command) => pictures::metadata_picture(command, resources, diagnostics),
+            Self::Standard("Help") => Some(FormPicture::Standard {
+                name: "Help".into(),
+            }),
             Self::Standard(_) => None,
         }
     }
@@ -159,7 +161,7 @@ pub(super) fn local_command<'a>(
         .find(|command| command.name.as_deref() == Some(name))
 }
 
-pub(super) fn visible(tables: &TableIndex<'_>, command: Option<&str>) -> bool {
+pub(super) fn visible(items: &SourceItems<'_>, command: Option<&str>) -> bool {
     // These commands require a distributed/standalone server context. The ordinary desktop
     // Configurator profile retains their XML nodes but excludes them from the visual bar.
     if matches!(
@@ -177,7 +179,9 @@ pub(super) fn visible(tables: &TableIndex<'_>, command: Option<&str>) -> bool {
     else {
         return true;
     };
-    !tables.get(table).is_some_and(|table| excludes(table, name))
+    !items
+        .table(table)
+        .is_some_and(|table| excludes(table, name))
 }
 
 pub(super) fn autofill(element: &EffectiveElement) -> bool {
@@ -201,44 +205,13 @@ pub(super) fn table(
     table_items(element, value_type)
 }
 
-pub(super) type TableIndex<'a> = HashMap<&'a str, &'a EffectiveElement>;
-
-pub(super) fn table_index(root: &EffectiveElement) -> TableIndex<'_> {
-    fn visit<'a>(element: &'a EffectiveElement, tables: &mut TableIndex<'a>) {
-        if element.kind == Some(ElementKind::Table)
-            && let Some(name) = element.name.as_deref()
-        {
-            tables.entry(name).or_insert(element);
-        }
-        for child in &element.children {
-            visit(child, tables);
-        }
-    }
-
-    let mut tables = TableIndex::new();
-    visit(root, &mut tables);
-    tables
-}
-
-fn declares_columns(element: &EffectiveElement) -> bool {
-    element.children.iter().any(|child| {
-        child.kind.is_some_and(|kind| {
-            kind.family() == ElementFamily::Field
-                || kind == ElementKind::ColumnGroup && declares_columns(child)
-        })
-    })
-}
-
 /// A standalone command bar can draw table actions independently of the table's own bar.
 pub(super) fn table_source<'a>(
     bar: &EffectiveElement,
-    tables: &TableIndex<'a>,
+    items: &SourceItems<'a>,
 ) -> Option<&'a EffectiveElement> {
     let name = bar.scalar("CommandSource")?.strip_prefix("Item.")?;
-    tables
-        .get(name)
-        .copied()
-        .filter(|table| declares_columns(table))
+    items.table(name).filter(|table| table.declares_columns())
 }
 
 pub(super) fn excludes(table: &EffectiveElement, command: &str) -> bool {
@@ -452,6 +425,58 @@ mod tests {
             "the platform ignores this non-Designer spelling"
         );
     }
+    #[test]
+    fn characteristic_type_object_forms_include_write_commands_without_posting() {
+        let xml = format!(
+            r#"<Form xmlns="{}" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="{}"><AutoCommandBar name="Bar" id="-1"/><Attributes><Attribute name="Object" id="1"><Type><v8:Type>cfg:ChartOfCharacteristicTypesObject.Questions</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes></Form>"#,
+            super::super::FORM_NAMESPACE,
+            super::super::references::CONFIG,
+        );
+        let project = |source: &str| {
+            root_commands::project(
+                &compose(&parse("form", source.to_owned()).unwrap(), &[]),
+                &[],
+                &mut Vec::new(),
+            )
+        };
+        let commands = project(&xml);
+        assert_eq!(
+            commands
+                .inline
+                .iter()
+                .map(|command| (command.key.as_str(), command.primary))
+                .collect::<Vec<_>>(),
+            [
+                ("Form.StandardCommand.WriteAndClose", true),
+                ("Form.StandardCommand.Write", false),
+            ]
+        );
+        let menu = commands.object_menu.iter().flatten().collect::<Vec<_>>();
+        assert!(
+            menu.iter()
+                .any(|item| item.key == "Form.StandardCommand.Write")
+        );
+        assert!(!menu.iter().any(|item| matches!(
+            item.key.as_str(),
+            "Form.StandardCommand.Post" | "Form.StandardCommand.UndoPosting"
+        )));
+        assert!(
+            project(&xml.replace("<MainAttribute>true", "<MainAttribute>false"))
+                .inline
+                .is_empty(),
+            "only the main attribute supplies object actions"
+        );
+        assert!(
+            project(&xml.replace(
+                "id=\"-1\"/>",
+                "id=\"-1\"><Autofill>false</Autofill></AutoCommandBar>",
+            ))
+            .inline
+            .is_empty(),
+            "an explicitly disabled command bar stays empty"
+        );
+    }
+
     #[test]
     fn unavailable_server_commands_keep_tree_identity_but_not_desktop_pixels() {
         let raw = form(

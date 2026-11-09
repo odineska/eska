@@ -1,0 +1,1276 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "linux-arm64",
+  "compatibility": "Version8_3_27",
+  "scriptVariant": "English",
+  "rows": [
+    {
+      "name": "LinkedPanel",
+      "file": "LinkedPanel.xml",
+      "canonicalSha256": "0e9632e49d0fcafb4e32718fad2ba3b7c6f7a7b27dc450fe45030f87029da0e3",
+      "fixtureSha256": "69031ac3fead046b770c91c46b742debcda5a34ff2c4b1a96a5de9dcb8dd16ac",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            461,
+            477
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                375,
+                429,
+                23
+              ],
+              "rgbSha256": "6d505ce473a59ad78331e76d43f3d120cc31a5a04e772201da8a87b73dfec2c8",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                438,
+                50,
+                27
+              ],
+              "rgbSha256": "ccc3899b8ad7085027e08decc00eb31292967bde2377606330a97c511ce0e116",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                407,
+                429,
+                22
+              ],
+              "rgbSha256": "4df11dafc7f1c835e076a8eed494c0c418c2bea8e69baad1a200043de59a646b",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "7888d5cb2c5acc1694e7efea31a6a169d0528059b1fbb6d783e9c9cbe2f074ed"
+                },
+                {
+                  "box": [
+                    124,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "dbbdf3d2a454e477b1ad6a92a7c3deb9e0f7b367bd60d5403cf50099d59f9ca7"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 2
+        },
+        "ru": {
+          "blueFrameSize": [
+            447,
+            477
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                375,
+                415,
+                23
+              ],
+              "rgbSha256": "d85ff5360c5d6ee8cd3e86e5ae1355b5abba0512dcbfc531d28c98848d3b6276",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                438,
+                50,
+                27
+              ],
+              "rgbSha256": "ccc3899b8ad7085027e08decc00eb31292967bde2377606330a97c511ce0e116",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                407,
+                415,
+                22
+              ],
+              "rgbSha256": "7be18f96e81d0006a0b03144e34ed69228f29e6d6b5081c985d01e9897a38bd8",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "a008ece65eea14055e04b40f8410f78dfdab45599741bda0e7e3af4e4d3a5c5c"
+                },
+                {
+                  "box": [
+                    152,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "f8278c30278c73c47f19a9b615ebecd1f16e6202fe31a0de07c481c48b3b09d9"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 2
+        }
+      }
+    },
+    {
+      "name": "Stack",
+      "file": "Stack.xml",
+      "canonicalSha256": "882ee5c4d065e3f425d9e1e2a1f2794c6e98f03835a8c68a9e3284b49459339d",
+      "fixtureSha256": "8bb6a63af5208e18a2ca2f55399973e0b4eaf7eb55f6c6f7162582793d00d46e",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            461,
+            441
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                339,
+                429,
+                23
+              ],
+              "rgbSha256": "6d505ce473a59ad78331e76d43f3d120cc31a5a04e772201da8a87b73dfec2c8",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                402,
+                50,
+                27
+              ],
+              "rgbSha256": "ccc3899b8ad7085027e08decc00eb31292967bde2377606330a97c511ce0e116",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                371,
+                429,
+                22
+              ],
+              "rgbSha256": "4df11dafc7f1c835e076a8eed494c0c418c2bea8e69baad1a200043de59a646b",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "7888d5cb2c5acc1694e7efea31a6a169d0528059b1fbb6d783e9c9cbe2f074ed"
+                },
+                {
+                  "box": [
+                    124,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "dbbdf3d2a454e477b1ad6a92a7c3deb9e0f7b367bd60d5403cf50099d59f9ca7"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 2
+        },
+        "ru": {
+          "blueFrameSize": [
+            447,
+            441
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                339,
+                415,
+                23
+              ],
+              "rgbSha256": "d85ff5360c5d6ee8cd3e86e5ae1355b5abba0512dcbfc531d28c98848d3b6276",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                402,
+                50,
+                27
+              ],
+              "rgbSha256": "ccc3899b8ad7085027e08decc00eb31292967bde2377606330a97c511ce0e116",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                371,
+                415,
+                22
+              ],
+              "rgbSha256": "7be18f96e81d0006a0b03144e34ed69228f29e6d6b5081c985d01e9897a38bd8",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "a008ece65eea14055e04b40f8410f78dfdab45599741bda0e7e3af4e4d3a5c5c"
+                },
+                {
+                  "box": [
+                    152,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "f8278c30278c73c47f19a9b615ebecd1f16e6202fe31a0de07c481c48b3b09d9"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 2
+        }
+      }
+    },
+    {
+      "name": "Dynamic",
+      "file": "Dynamic.xml",
+      "canonicalSha256": "3a03e99b8f7337b61385c39354a9b4b59db5ae6bd045ba2a6e1489ccb4441a4a",
+      "fixtureSha256": "9208243e7b980e8a418961edf0e1523a754048e035d948198fc7e50cdb817b0d",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            486,
+            687
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                585,
+                454,
+                23
+              ],
+              "rgbSha256": "37198883c3c557a6de79c95e5badaf99cff4af96540d7994dbbf3434a376690d",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                648,
+                50,
+                27
+              ],
+              "rgbSha256": "4a6488d668ec39d5ff496cb169eab41d510d35607be8a7e3d9f809fe9dbcbbec",
+              "comparison": "pixels"
+            },
+            "status": {
+              "box": [
+                12,
+                617,
+                454,
+                22
+              ],
+              "rgbSha256": "35b06802c64a7d33f10d70ca0b050c3553ce1a64c4d33ca33f9dfe912bf8d1e0",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "7888d5cb2c5acc1694e7efea31a6a169d0528059b1fbb6d783e9c9cbe2f074ed"
+                },
+                {
+                  "box": [
+                    124,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "dbbdf3d2a454e477b1ad6a92a7c3deb9e0f7b367bd60d5403cf50099d59f9ca7"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 3
+        },
+        "ru": {
+          "blueFrameSize": [
+            450,
+            687
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                585,
+                418,
+                23
+              ],
+              "rgbSha256": "c5842e6140c950ce2783938471d48ef23eec5925d8a4768da7a367c9c7094339",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                648,
+                50,
+                27
+              ],
+              "rgbSha256": "4a6488d668ec39d5ff496cb169eab41d510d35607be8a7e3d9f809fe9dbcbbec",
+              "comparison": "pixels"
+            },
+            "status": {
+              "box": [
+                12,
+                617,
+                418,
+                22
+              ],
+              "rgbSha256": "db49c32d8e4f3d37b3e9b6ebd2964501bce9c720cd63ecebebb166542dd19690",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "a008ece65eea14055e04b40f8410f78dfdab45599741bda0e7e3af4e4d3a5c5c"
+                },
+                {
+                  "box": [
+                    152,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "f8278c30278c73c47f19a9b615ebecd1f16e6202fe31a0de07c481c48b3b09d9"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 3
+        }
+      }
+    },
+    {
+      "name": "LocationsNone",
+      "file": "LocationsNone.xml",
+      "canonicalSha256": "10ef7f1812762c65ccba4e2cacc8d6bdb984f8675ff939aa9ccbf1d04a0328ea",
+      "fixtureSha256": "9690ddfb1393421f5350db9617e4602e6921dd5ae5c84d1fb4146fe0ba415d4a",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            432,
+            411
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                309,
+                400,
+                23
+              ],
+              "rgbSha256": "b3ea541d5711b3f6dced20259e0cd60763429ac5e2726cdfd7dd52e8fcab7d43",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                372,
+                50,
+                27
+              ],
+              "rgbSha256": "c5bcb53649904f6745fb5e8b3b7c12ab2c1148d2986e775807bab8aa36efef87",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                341,
+                400,
+                22
+              ],
+              "rgbSha256": "42f38fa7aed17b7f8d5494abe9053394baf4a2f0977fc04738046bd1b2775d7e",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "7888d5cb2c5acc1694e7efea31a6a169d0528059b1fbb6d783e9c9cbe2f074ed"
+                },
+                {
+                  "box": [
+                    124,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "dbbdf3d2a454e477b1ad6a92a7c3deb9e0f7b367bd60d5403cf50099d59f9ca7"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 0
+        },
+        "ru": {
+          "blueFrameSize": [
+            432,
+            411
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                309,
+                400,
+                23
+              ],
+              "rgbSha256": "7ac38f22de7c263f81fcb7373a3aa240f088da3cfe5cb429d4dce092f9db1991",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                372,
+                50,
+                27
+              ],
+              "rgbSha256": "c5bcb53649904f6745fb5e8b3b7c12ab2c1148d2986e775807bab8aa36efef87",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                341,
+                400,
+                22
+              ],
+              "rgbSha256": "e4e27c35c8a51c1ede83b4bad6ff2f58a70528c5a0b24cd50ef72ba36275f139",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "a008ece65eea14055e04b40f8410f78dfdab45599741bda0e7e3af4e4d3a5c5c"
+                },
+                {
+                  "box": [
+                    152,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "f8278c30278c73c47f19a9b615ebecd1f16e6202fe31a0de07c481c48b3b09d9"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 0
+        }
+      }
+    },
+    {
+      "name": "HiddenOwner",
+      "file": "HiddenOwner.xml",
+      "canonicalSha256": "322034737d6a8b518c6dd05c1e28f30911d84d54ac161b71936dbf5982ba1656",
+      "fixtureSha256": "5f86515a3acd81792dda74e09ac7d9ef720d4b7d0e289112a49582fb0db2090b",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            332,
+            140
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                38,
+                300,
+                23
+              ],
+              "rgbSha256": "61ebc4f8d2821091d66984cd824d92ac191dc44b3887e9e05c8f12b74e98bd09",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                101,
+                50,
+                27
+              ],
+              "rgbSha256": "4a6488d668ec39d5ff496cb169eab41d510d35607be8a7e3d9f809fe9dbcbbec",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                70,
+                300,
+                22
+              ],
+              "rgbSha256": "76bef9a4eea28547abb2232e48b317a508c9270400d5086520de4c992a5d0aca",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "7888d5cb2c5acc1694e7efea31a6a169d0528059b1fbb6d783e9c9cbe2f074ed"
+                },
+                {
+                  "box": [
+                    124,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "dbbdf3d2a454e477b1ad6a92a7c3deb9e0f7b367bd60d5403cf50099d59f9ca7"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 0
+        },
+        "ru": {
+          "blueFrameSize": [
+            332,
+            140
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                38,
+                300,
+                23
+              ],
+              "rgbSha256": "8dd0ad0107379192eb96dfb774ccb43dd2089f3a4cd79547fcc698b94f075e65",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                101,
+                50,
+                27
+              ],
+              "rgbSha256": "4a6488d668ec39d5ff496cb169eab41d510d35607be8a7e3d9f809fe9dbcbbec",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                70,
+                300,
+                22
+              ],
+              "rgbSha256": "679d182a9b86c45474fea5e79cac26c89806ca4a9a8b189dd525ccd3307da2c6",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "a008ece65eea14055e04b40f8410f78dfdab45599741bda0e7e3af4e4d3a5c5c"
+                },
+                {
+                  "box": [
+                    152,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "f8278c30278c73c47f19a9b615ebecd1f16e6202fe31a0de07c481c48b3b09d9"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 0
+        }
+      }
+    },
+    {
+      "name": "Unbound",
+      "file": "Unbound.xml",
+      "canonicalSha256": "00dc73c888e09e686341f0e351202b9356fd18a28f7f74dde0d95e4fb431228a",
+      "fixtureSha256": "a2a6a3ca1bb5ec9021155416c81f2eb6c713387cdbc348e9f5713756612b195c",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            461,
+            342
+          ],
+          "regions": {},
+          "ownedCount": 2
+        },
+        "ru": {
+          "blueFrameSize": [
+            447,
+            342
+          ],
+          "regions": {},
+          "ownedCount": 2
+        }
+      }
+    },
+    {
+      "name": "NoColumns",
+      "file": "NoColumns.xml",
+      "canonicalSha256": "0e93aba31b794ad5d58876775eaca2bf9487312e21675b56f416af07c862804f",
+      "fixtureSha256": "423646b0d0d9d9284106d260ee5c97ed06c80b0600acb1c66c41e3dc55236321",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            32,
+            50
+          ],
+          "regions": {},
+          "ownedCount": 0
+        },
+        "ru": {
+          "blueFrameSize": [
+            32,
+            50
+          ],
+          "regions": {},
+          "ownedCount": 0
+        }
+      }
+    },
+    {
+      "name": "Authored",
+      "file": "Authored.xml",
+      "canonicalSha256": "a75114a0f532629c188d2bc78c3f7cea5c9ea8a01d967f456d46a213a47356c6",
+      "fixtureSha256": "a52c85997c631efa019e7bee849ea0d83414557bb33342657b29a0eb5e4a02b0",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            432,
+            477
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                375,
+                400,
+                23
+              ],
+              "rgbSha256": "b3ea541d5711b3f6dced20259e0cd60763429ac5e2726cdfd7dd52e8fcab7d43",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                438,
+                160,
+                27
+              ],
+              "rgbSha256": "2aad0d9efa640677129a7fd819009255e73535246d203ec0d02c59da4ba15938",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                262,
+                407,
+                150,
+                22
+              ],
+              "rgbSha256": "aeff0394dbade6f8283b3ed4a2cc930a97cce583eac2a3a669aae888e1fa2298",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    65,
+                    22
+                  ],
+                  "rgbSha256": "4ffde595f0a308d5f4c580b5c7936e2155c161b69a80a652dd9c90431fee0de7"
+                },
+                {
+                  "box": [
+                    79,
+                    0,
+                    65,
+                    22
+                  ],
+                  "rgbSha256": "4ffde595f0a308d5f4c580b5c7936e2155c161b69a80a652dd9c90431fee0de7"
+                }
+              ],
+              "comparison": "geometry"
+            }
+          },
+          "ownedCount": 2
+        },
+        "ru": {
+          "blueFrameSize": [
+            432,
+            477
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                375,
+                400,
+                23
+              ],
+              "rgbSha256": "7ac38f22de7c263f81fcb7373a3aa240f088da3cfe5cb429d4dce092f9db1991",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                438,
+                160,
+                27
+              ],
+              "rgbSha256": "2aad0d9efa640677129a7fd819009255e73535246d203ec0d02c59da4ba15938",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                262,
+                407,
+                150,
+                22
+              ],
+              "rgbSha256": "d46682ba56617c09911a87aa7583099c4f63a62672f12dc43167745c652ab751",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    65,
+                    22
+                  ],
+                  "rgbSha256": "6dfbb47748ba63ee959d0b685dd8e141b276d06a9c9574dd9667a0b095d9aaeb"
+                },
+                {
+                  "box": [
+                    79,
+                    0,
+                    65,
+                    22
+                  ],
+                  "rgbSha256": "6dfbb47748ba63ee959d0b685dd8e141b276d06a9c9574dd9667a0b095d9aaeb"
+                }
+              ],
+              "comparison": "geometry"
+            }
+          },
+          "ownedCount": 2
+        }
+      }
+    },
+    {
+      "name": "Horizontal",
+      "file": "Horizontal.xml",
+      "canonicalSha256": "2612564748478ae5da56f066d96a4536d92a88f173ee890ad87cf1d3aac3805d",
+      "fixtureSha256": "b9d0925809bdf5acc3fd371f8ef4cee76f6a092c929f5aa1d6b04b400bca096e",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            599,
+            378
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                60,
+                341,
+                111,
+                23
+              ],
+              "rgbSha256": "172ca80b1474147a664183f5eca7a89f98a27d0f9bbf170521c3e65740be3080",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                181,
+                339,
+                50,
+                27
+              ],
+              "rgbSha256": "4a6b751be17f71ff447fbd711a7b0107bde0918664059082e75c3ecd4642399e",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                241,
+                341,
+                300,
+                22
+              ],
+              "rgbSha256": "76bef9a4eea28547abb2232e48b317a508c9270400d5086520de4c992a5d0aca",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "7888d5cb2c5acc1694e7efea31a6a169d0528059b1fbb6d783e9c9cbe2f074ed"
+                },
+                {
+                  "box": [
+                    124,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "dbbdf3d2a454e477b1ad6a92a7c3deb9e0f7b367bd60d5403cf50099d59f9ca7"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 2
+        },
+        "ru": {
+          "blueFrameSize": [
+            599,
+            378
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                60,
+                341,
+                111,
+                23
+              ],
+              "rgbSha256": "ee6ad8fcca1a523a14810c13dd3379167fc8fb61f0a99246f5d91adccaa47f0c",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                181,
+                339,
+                50,
+                27
+              ],
+              "rgbSha256": "4a6b751be17f71ff447fbd711a7b0107bde0918664059082e75c3ecd4642399e",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                241,
+                341,
+                300,
+                22
+              ],
+              "rgbSha256": "679d182a9b86c45474fea5e79cac26c89806ca4a9a8b189dd525ccd3307da2c6",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "a008ece65eea14055e04b40f8410f78dfdab45599741bda0e7e3af4e4d3a5c5c"
+                },
+                {
+                  "box": [
+                    152,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "f8278c30278c73c47f19a9b615ebecd1f16e6202fe31a0de07c481c48b3b09d9"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 2
+        }
+      }
+    },
+    {
+      "name": "Styled",
+      "file": "Styled.xml",
+      "canonicalSha256": "5fe92cf3b0f3c4250ce412742b29135ca33e48fd64e05a86789244308305341f",
+      "fixtureSha256": "8b01b18dab244cca5d20c015847a38e6850d77ec82932c56a6cdfb46108e2ef0",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            461,
+            441
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                339,
+                429,
+                23
+              ],
+              "rgbSha256": "cd6e86283430806afe0a9545d16ac486775f3c525e7f0cd0cada56ecbf83ddaf",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                402,
+                50,
+                27
+              ],
+              "rgbSha256": "e157a2aff00de7a4d6a682079497c8c40b7e1e15ebbcdf460a9a6792c3d38259",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                371,
+                429,
+                22
+              ],
+              "rgbSha256": "d6a963aacb2368109fe3f39fc1f1d8e4ecd567bc3e8711545d5209eda754b7f4",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "12f51a163d742b3cc6c8525af083f5dde31e1a90ee17e62affc8146e576b52b7"
+                },
+                {
+                  "box": [
+                    124,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "75eb29d8ecf75fe18164402b669fe36f80a7d86c78dee33ffa2b10d6b42c2f75"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 2
+        },
+        "ru": {
+          "blueFrameSize": [
+            447,
+            441
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                339,
+                415,
+                23
+              ],
+              "rgbSha256": "735fbf24ee2f427139f63fb858620a88eecc5878ed07f07bac7fa23c652e2e9b",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                402,
+                50,
+                27
+              ],
+              "rgbSha256": "e157a2aff00de7a4d6a682079497c8c40b7e1e15ebbcdf460a9a6792c3d38259",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                371,
+                415,
+                22
+              ],
+              "rgbSha256": "d9746d2cfd7d2c667a98847e3fb29f11a67b42788a660da4fdcca35d2127ac24",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "73e988c124c48f8f4527743ff848760d6d9ca5cfb6fdd5b9072b09f6c5e34473"
+                },
+                {
+                  "box": [
+                    152,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "19a1f07f1412ded79b7b0e15e1f115efb83b69c61baa256f1892b54b653d068b"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 2
+        }
+      }
+    },
+    {
+      "name": "Disabled",
+      "file": "Disabled.xml",
+      "canonicalSha256": "2285f706d993c19db0c5c5ce70997fbfe76797b9cdddadf6dbe12299362c2af0",
+      "fixtureSha256": "c8bf360de3a89c0009ec14280181551fbbb1c042ac3841465e8e4e05490d6335",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            461,
+            441
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                339,
+                429,
+                23
+              ],
+              "rgbSha256": "2732c2045e08066885ce0cb4cf97c6ff3359e51ac36469d443828a1ca796bd69",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                402,
+                50,
+                27
+              ],
+              "rgbSha256": "615ff0fb88fcf4af6ad4ae15c36553c08155707f26d0ba1b9fe2fbc9184aff92",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                371,
+                429,
+                22
+              ],
+              "rgbSha256": "7d657471ada22328b669b9c55e0378fd26f952d86c1a39bc3297cc941f9317f9",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "f3ea0320404dd0c7169800fb8f05f6fe6fede3762e3ceadfbe3ad0142f86b89e"
+                },
+                {
+                  "box": [
+                    124,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "c14edaff5d3575cb2e4bb58a81953c3848dc2508161ebf3ab0d3f717656d7c45"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 2
+        },
+        "ru": {
+          "blueFrameSize": [
+            447,
+            441
+          ],
+          "regions": {
+            "search": {
+              "box": [
+                12,
+                339,
+                415,
+                23
+              ],
+              "rgbSha256": "6a63862b6786b205b0e9b4f96fdc078404b4667123589e208a1099476d7b99ce",
+              "comparison": "pixels"
+            },
+            "manage": {
+              "box": [
+                12,
+                402,
+                50,
+                27
+              ],
+              "rgbSha256": "615ff0fb88fcf4af6ad4ae15c36553c08155707f26d0ba1b9fe2fbc9184aff92",
+              "comparison": "geometry"
+            },
+            "status": {
+              "box": [
+                12,
+                371,
+                415,
+                22
+              ],
+              "rgbSha256": "725e0679081d82326f3897cb260efc09d12f42869c6dfb2155e358f9d521abf3",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "208dc77ea72e66ba402d9410f5daa143753d720913f9dc6246c5a1865c64d5a6"
+                },
+                {
+                  "box": [
+                    152,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "e6ab1f9f4ebc4df1c695f68190ac3766cec9a74e33c827fd8ab8257cc6702833"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 2
+        }
+      }
+    },
+    {
+      "name": "PdfExternal",
+      "file": "PdfExternal.xml",
+      "canonicalSha256": "c54e824e502d183a18408b79572e6eab48f1f6d63a63ac3b76e598b1613cd050",
+      "fixtureSha256": "75788dec2d0b5282141721ab6021fc91b56ec6402d497ab83db061147aa5cbef",
+      "locales": {
+        "en": {
+          "blueFrameSize": [
+            532,
+            373
+          ],
+          "regions": {
+            "status": {
+              "box": [
+                12,
+                38,
+                500,
+                22
+              ],
+              "rgbSha256": "904a76e8a3541452a5a24259d5b09f5456ea28f5c5a27da727e8e0e4b20399d7",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "7888d5cb2c5acc1694e7efea31a6a169d0528059b1fbb6d783e9c9cbe2f074ed"
+                },
+                {
+                  "box": [
+                    124,
+                    0,
+                    110,
+                    22
+                  ],
+                  "rgbSha256": "dbbdf3d2a454e477b1ad6a92a7c3deb9e0f7b367bd60d5403cf50099d59f9ca7"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 1
+        },
+        "ru": {
+          "blueFrameSize": [
+            532,
+            373
+          ],
+          "regions": {
+            "status": {
+              "box": [
+                12,
+                38,
+                500,
+                22
+              ],
+              "rgbSha256": "8a246de690a2f11b0672b752b189f4e770ab364ec2c4e43c93de39e3e00e1617",
+              "chips": [
+                {
+                  "box": [
+                    0,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "a008ece65eea14055e04b40f8410f78dfdab45599741bda0e7e3af4e4d3a5c5c"
+                },
+                {
+                  "box": [
+                    152,
+                    0,
+                    138,
+                    22
+                  ],
+                  "rgbSha256": "f8278c30278c73c47f19a9b615ebecd1f16e6202fe31a0de07c481c48b3b09d9"
+                }
+              ],
+              "comparison": "pixels"
+            }
+          },
+          "ownedCount": 1
+        }
+      }
+    }
+  ]
+}

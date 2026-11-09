@@ -1,0 +1,428 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-11-08T13:48:56.586395+00:00",
+  "scope": [
+    "T157",
+    "T163"
+  ],
+  "profile": {
+    "os": "linux",
+    "platform": "8.3.27.2342",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "explorerCommit": "51640bf",
+  "backendCommit": "c8867c6",
+  "nativeReference": "form-bsp-geometry-native-whn6wv7l/native-geometry.json",
+  "nativeRootCommandsFixedDuringScroll": true,
+  "implementation": {
+    "mechanism": "Sticky command row in the existing native form body scrollport. The -1px inset preserves its original native margin.",
+    "treeAndSourceModelChanged": false,
+    "geometryOwnerChanged": false
+  },
+  "regressionBefore": {
+    "stand": "form-body-scroll-red-qy_p1ooa",
+    "commandYBefore": 29,
+    "commandYAfter": -51,
+    "bodyScroll": 80,
+    "passed": false
+  },
+  "rejectedIntermediate": {
+    "artifact": "form-batch-mA6UKu",
+    "reason": "Panel stayed fixed but its initial Y shifted to 34. Added an exact initial-coordinate assertion and corrected the inset."
+  },
+  "checks": {
+    "npmCheck": "passed",
+    "compile": "passed",
+    "package": "passed",
+    "node": {
+      "tests": 710,
+      "pass": 701,
+      "fail": 0,
+      "skipped": 9
+    },
+    "logs": "form-body-scroll-validation-w9u1ast0",
+    "rustUnchangedSinceFullChecks": "form-unbound-rust-99b5m1l3"
+  },
+  "installed": {
+    "artifactSource": "form-batch-bI2KCO",
+    "vsixSha256": "396478beda3273c6e82c6319d29bd8cb775ada24a28d82158f05d0cb50a049e9",
+    "backendSha256": "367b53cbcbec917be4c36d43decdd20e87f6590a6bef9dfcce01257b558696e4",
+    "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+    "runtimeFiles": 1262,
+    "runs": [
+      {
+        "suite": "body-scroll",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 5.860479175,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "body-scroll-en/driver.log",
+        "receipt": "body-scroll-en/receipt.json",
+        "caseIds": [
+          "body-scroll/main-scrolled",
+          "body-scroll/main-resized",
+          "body-scroll/detached-scrolled",
+          "body-scroll/detached-resized"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 947.394789,
+          "runtimeVerificationMs": 370.83570999999984,
+          "preHostMs": 1326.925353,
+          "cleanupMs": 34.1810830000004,
+          "totalMs": 5645.214913
+        }
+      },
+      {
+        "suite": "body-scroll",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 8.286868942,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "body-scroll-ru/driver.log",
+        "receipt": "body-scroll-ru/receipt.json",
+        "caseIds": [
+          "body-scroll/main-scrolled",
+          "body-scroll/main-resized",
+          "body-scroll/detached-scrolled",
+          "body-scroll/detached-resized"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 818.635815,
+          "runtimeVerificationMs": 326.04086299999994,
+          "preHostMs": 1164.596628,
+          "cleanupMs": 34.76920500000051,
+          "totalMs": 8091.339465
+        }
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 19.806385163,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "responsive-en/driver.log",
+        "receipt": "responsive-en/receipt.json",
+        "caseIds": [
+          "responsive/main-360-240",
+          "responsive/main-640-360",
+          "responsive/main-1000-680",
+          "responsive/main-640-360",
+          "responsive/main-native-900-600",
+          "responsive/main-native-1440-900",
+          "responsive/main-native-1100-700",
+          "responsive/splitter",
+          "responsive/zoom125-360-240",
+          "responsive/zoom125-640-360",
+          "responsive/zoom125-1000-680",
+          "responsive/zoom125-640-360",
+          "responsive/dirty-360-240",
+          "responsive/dirty-640-360",
+          "responsive/dirty-1000-680",
+          "responsive/dirty-640-360",
+          "responsive/undo-360-240",
+          "responsive/undo-640-360",
+          "responsive/undo-1000-680",
+          "responsive/undo-640-360",
+          "responsive/redo-360-240",
+          "responsive/redo-640-360",
+          "responsive/redo-1000-680",
+          "responsive/redo-640-360",
+          "responsive/detached-360-240",
+          "responsive/detached-640-360",
+          "responsive/detached-1000-680",
+          "responsive/detached-640-360",
+          "responsive/detached-native-900-600",
+          "responsive/detached-native-1440-900",
+          "responsive/detached-native-1100-700"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 837.844559,
+          "runtimeVerificationMs": 330.6869760000001,
+          "preHostMs": 1173.856939,
+          "cleanupMs": 33.19158500000049,
+          "totalMs": 19640.022198000002
+        }
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 22.578446995,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "responsive-ru/driver.log",
+        "receipt": "responsive-ru/receipt.json",
+        "caseIds": [
+          "responsive/main-360-240",
+          "responsive/main-640-360",
+          "responsive/main-1000-680",
+          "responsive/main-640-360",
+          "responsive/main-native-900-600",
+          "responsive/main-native-1440-900",
+          "responsive/main-native-1100-700",
+          "responsive/splitter",
+          "responsive/zoom125-360-240",
+          "responsive/zoom125-640-360",
+          "responsive/zoom125-1000-680",
+          "responsive/zoom125-640-360",
+          "responsive/dirty-360-240",
+          "responsive/dirty-640-360",
+          "responsive/dirty-1000-680",
+          "responsive/dirty-640-360",
+          "responsive/undo-360-240",
+          "responsive/undo-640-360",
+          "responsive/undo-1000-680",
+          "responsive/undo-640-360",
+          "responsive/redo-360-240",
+          "responsive/redo-640-360",
+          "responsive/redo-1000-680",
+          "responsive/redo-640-360",
+          "responsive/detached-360-240",
+          "responsive/detached-640-360",
+          "responsive/detached-1000-680",
+          "responsive/detached-640-360",
+          "responsive/detached-native-900-600",
+          "responsive/detached-native-1440-900",
+          "responsive/detached-native-1100-700"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 716.971899,
+          "runtimeVerificationMs": 307.73011600000007,
+          "preHostMs": 1043.277094,
+          "cleanupMs": 32.86362799999915,
+          "totalMs": 22359.733409
+        }
+      },
+      {
+        "suite": "command-frame",
+        "locale": "en",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 9.111638949999993,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "command-frame-en/driver.log",
+        "receipt": "command-frame-en/receipt.json",
+        "caseIds": [
+          "command-frame/SingleInlineRoot",
+          "command-frame/DoubleShortInlineRoot",
+          "command-frame/dirty-width-DoubleLongInlineRoot",
+          "command-frame/dirty-width-DoubleShortInlineRoot",
+          "command-frame/detached-width-DoubleLongInlineRoot",
+          "command-frame/detached-width-DoubleShortInlineRoot",
+          "command-frame/DoubleLongInlineRoot",
+          "command-frame/NoSourceMenuRoot",
+          "command-frame/EmptySourceMenuRoot",
+          "command-frame/SingleInlineHorizontal",
+          "command-frame/SingleInlineVertical",
+          "command-frame/SingleInlineWideSibling"
+        ],
+        "hostStarts": 1,
+        "languageRegistrations": 0,
+        "timings": {
+          "installCliMs": 793.5120430000001,
+          "runtimeVerificationMs": 306.74953500000004,
+          "preHostMs": 1107.964351,
+          "cleanupMs": 32.74629499999901,
+          "totalMs": 8926.551323
+        }
+      },
+      {
+        "suite": "command-frame",
+        "locale": "ru",
+        "mode": "installed",
+        "exitCode": 0,
+        "signal": null,
+        "seconds": 11.854260687999995,
+        "passed": true,
+        "inputsStable": true,
+        "classification": "passed",
+        "log": "command-frame-ru/driver.log",
+        "receipt": "command-frame-ru/receipt.json",
+        "caseIds": [
+          "command-frame/SingleInlineRoot",
+          "command-frame/DoubleShortInlineRoot",
+          "command-frame/dirty-width-DoubleLongInlineRoot",
+          "command-frame/dirty-width-DoubleShortInlineRoot",
+          "command-frame/detached-width-DoubleLongInlineRoot",
+          "command-frame/detached-width-DoubleShortInlineRoot",
+          "command-frame/DoubleLongInlineRoot",
+          "command-frame/NoSourceMenuRoot",
+          "command-frame/EmptySourceMenuRoot",
+          "command-frame/SingleInlineHorizontal",
+          "command-frame/SingleInlineVertical",
+          "command-frame/SingleInlineWideSibling"
+        ],
+        "hostStarts": 3,
+        "languageRegistrations": 2,
+        "timings": {
+          "installCliMs": 787.6850159999999,
+          "runtimeVerificationMs": 332.2703469999999,
+          "preHostMs": 1140.601062,
+          "cleanupMs": 34.823748000000705,
+          "totalMs": 11660.571165000001
+        }
+      }
+    ],
+    "successfulRuns": 6,
+    "stateObservations": 94,
+    "mainAndDetached": true,
+    "resize": true,
+    "commandHitTesting": true,
+    "selectionAndDomOwnersPreserved": true,
+    "sourceWrites": false,
+    "linuxProfileOnly": true
+  },
+  "wholeForms": {
+    "stand": "form-body-scroll-whole-5oa9c3mp",
+    "runs": [
+      {
+        "name": "bsp-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.413857344999997,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "bsp-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 9.866398130001471,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 5.744998500998918,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-docked-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 8.26241608500277,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-en",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 7.09080372400058,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      },
+      {
+        "name": "loan-detached-ru",
+        "passed": true,
+        "exitCode": 0,
+        "seconds": 9.749270168998919,
+        "runtimeManifestSha256": "c2de8e4c51cb3b9b0ecef4f4b4a46dd59fb9b1440cc48034fa09bc60ba52cc98",
+        "runtimeFiles": 1262
+      }
+    ],
+    "sourceBytesUnchanged": true,
+    "sourceFormFiles": 4,
+    "bodyScrolling": {
+      "en": {
+        "before": {
+          "scrollTop": 0,
+          "clientHeight": 29,
+          "scrollHeight": 742,
+          "commands": [
+            13,
+            29,
+            752,
+            26
+          ],
+          "firstInputY": 67
+        },
+        "after": {
+          "scrollTop": 120,
+          "clientHeight": 29,
+          "scrollHeight": 742,
+          "commands": [
+            13,
+            29,
+            752,
+            26
+          ],
+          "firstInputY": -53
+        },
+        "rootCommandsFixed": true
+      },
+      "ru": {
+        "before": {
+          "scrollTop": 0,
+          "clientHeight": 29,
+          "scrollHeight": 742,
+          "commands": [
+            13,
+            29,
+            752,
+            26
+          ],
+          "firstInputY": 67
+        },
+        "after": {
+          "scrollTop": 120,
+          "clientHeight": 29,
+          "scrollHeight": 742,
+          "commands": [
+            13,
+            29,
+            752,
+            26
+          ],
+          "firstInputY": -53
+        },
+        "rootCommandsFixed": true
+      }
+    },
+    "questionnaireFrame": {
+      "width": 785,
+      "height": 770
+    },
+    "fullNativeGeometryAccepted": false
+  },
+  "acceptance": {
+    "rootCommandsFixedLinux": true,
+    "fullNodeChecks": true,
+    "wholeFormNativeGeometry": false,
+    "windows": false
+  },
+  "remaining": [
+    "Resolve BSP whole-frame width/height and remaining control-position differences.",
+    "Continue native DPI, command interaction and Windows acceptance."
+  ]
+}

@@ -109,7 +109,7 @@ fn owner_id(owner_type: &PropertyKey) -> Option<ObjectId> {
 #[derive(Clone, Copy)]
 enum ObjectCommands {
     Document { posting: bool },
-    Catalog,
+    NonPosting,
 }
 
 impl ObjectCommands {
@@ -123,7 +123,7 @@ impl ObjectCommands {
                 posting: owner.and_then(|(_, owner)| metadata_text(owner, "Posting", resources))
                     != Some("Deny"),
             }),
-            "CatalogObject" => Some(Self::Catalog),
+            "CatalogObject" | "ChartOfCharacteristicTypesObject" => Some(Self::NonPosting),
             _ => None,
         }
     }

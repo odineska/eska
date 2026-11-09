@@ -1,6 +1,6 @@
 use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
-    unbound_field,
+    unbound_data_path,
 };
 use crate::project::forms::{
     EffectiveElement, ElementPresentation, FieldValueKind, presentation, references,
@@ -61,7 +61,7 @@ impl InputBinding {
                 };
                 Self::ValueList { extended }
             }
-            FieldValueKind::Unknown if unbound_field(element) => Self::Unbound,
+            FieldValueKind::Unknown if unbound_data_path(element) => Self::Unbound,
             _ => return None,
         })
     }

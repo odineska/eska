@@ -3,6 +3,293 @@ use crate::project::{
     forms::{compose, parse},
     metadata_parser::{self, PropertiesMode},
 };
+
+#[test]
+fn native_help_command_keeps_its_picture_and_explicit_presentation_overrides() {
+    use super::super::FormPicture;
+    for (xml, representation, picture) in [
+        (
+            include_str!("../../../../../../tests/fixtures/forms/native-help-command/HelpAuto.xml"),
+            ButtonRepresentation::Text,
+            Some("Help"),
+        ),
+        (
+            include_str!("../../../../../../tests/fixtures/forms/native-help-command/HelpText.xml"),
+            ButtonRepresentation::Text,
+            Some("Help"),
+        ),
+        (
+            include_str!(
+                "../../../../../../tests/fixtures/forms/native-help-command/HelpPicture.xml"
+            ),
+            ButtonRepresentation::Picture,
+            Some("Help"),
+        ),
+        (
+            include_str!("../../../../../../tests/fixtures/forms/native-help-command/HelpBoth.xml"),
+            ButtonRepresentation::PictureAndText,
+            Some("Help"),
+        ),
+        (
+            include_str!(
+                "../../../../../../tests/fixtures/forms/native-help-command/HelpEmpty.xml"
+            ),
+            ButtonRepresentation::Picture,
+            None,
+        ),
+        (
+            include_str!(
+                "../../../../../../tests/fixtures/forms/native-help-command/HelpOverride.xml"
+            ),
+            ButtonRepresentation::Picture,
+            Some("Write"),
+        ),
+    ] {
+        let document = parse("native-help", xml.into()).unwrap();
+        let form = compose(&document, &[]);
+        let button = &form.root.children[1];
+        let view = present(&form, &[document], &[]);
+        let item = view
+            .elements
+            .iter()
+            .find(|item| item.identity == button.identity)
+            .unwrap();
+        assert_eq!(item.button_representation, Some(representation));
+        let actual = match &item.picture {
+            Some(FormPicture::Standard { name }) => Some(name.as_str()),
+            None => None,
+            other => panic!("unexpected help picture {other:?}"),
+        };
+        assert_eq!(actual, picture);
+        assert!(view.diagnostics.is_empty(), "{:?}", view.diagnostics);
+    }
+}
+
+#[test]
+fn native_empty_command_bar_buttons_preserve_picture_only_mode() {
+    for xml in [
+        include_str!(
+            "../../../../../../tests/fixtures/forms/native-help-command/bar-negative-controls/BarNoPicture16.xml"
+        ),
+        include_str!(
+            "../../../../../../tests/fixtures/forms/native-help-command/bar-negative-controls/BarClearPicture16.xml"
+        ),
+    ] {
+        let document = parse("native-empty-bar", xml.into()).unwrap();
+        let form = compose(&document, &[]);
+        let button = &form.root.children[1].children[0];
+        assert_eq!(button.name.as_deref(), Some("TargetButton"));
+        let view = present(&form, &[document], &[]);
+        let item = view
+            .elements
+            .iter()
+            .find(|item| item.identity == button.identity)
+            .unwrap();
+        assert_eq!(
+            item.button_representation,
+            Some(ButtonRepresentation::Picture)
+        );
+        assert!(item.picture.is_none());
+        assert!(view.diagnostics.is_empty());
+    }
+}
+
+#[test]
+fn unavailable_help_override_does_not_reintroduce_the_standard_picture() {
+    let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20">
+      <ChildItems><Button name="Help" id="1"><Type>UsualButton</Type>
+        <CommandName>Form.StandardCommand.Help</CommandName><Representation>Picture</Representation>
+        <Picture><xr:Ref>CommonPicture.Unavailable</xr:Ref></Picture>
+      </Button></ChildItems></Form>"#;
+    let document = parse("missing-help", source.into()).unwrap();
+    let form = compose(&document, &[]);
+    let view = present(&form, &[document], &[]);
+    let item = view
+        .elements
+        .iter()
+        .find(|item| item.identity == form.root.children[0].identity)
+        .unwrap();
+    assert!(
+        matches!(&item.picture, Some(super::super::FormPicture::Missing { reference }) if reference == "CommonPicture.Unavailable")
+    );
+    assert_eq!(item.button_representation, Some(ButtonRepresentation::Text));
+    assert_eq!(view.diagnostics.len(), 1);
+    assert_eq!(view.diagnostics[0].code, "picture_unavailable");
+}
+
+#[test]
+fn buttons_without_command_bindings_remain_inspectable_but_are_not_displayed() {
+    let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" version="2.20">
+      <ChildItems>
+        <Button name="Missing" id="1"/>
+        <Button name="Empty" id="2"><CommandName/></Button>
+        <Button name="Zero" id="3"><CommandName>0</CommandName></Button>
+        <Button name="Blank" id="4"><CommandName> </CommandName></Button>
+        <Button name="Bound" id="5"><CommandName>Form.StandardCommand.Close</CommandName></Button>
+        <Button name="Unresolved" id="6"><CommandName>Form.Command.LoadedLater</CommandName></Button>
+        <CommandBar name="Bar" id="7"><ChildItems>
+          <Button name="BarEmpty" id="8"><CommandName>0</CommandName></Button>
+          <Button name="BarBound" id="9"><CommandName>Form.StandardCommand.Close</CommandName></Button>
+        </ChildItems></CommandBar>
+      </ChildItems>
+    </Form>"#;
+    let document = parse("commands", source.into()).unwrap();
+    let form = compose(&document, &[]);
+    let view = present(&form, &[document], &[]);
+    let displayed = |id| {
+        view.elements
+            .iter()
+            .find(|item| item.identity.key == super::super::ElementKey::Xml(id))
+            .unwrap()
+            .displayed
+    };
+    assert_eq!(form.root.children.len(), 7);
+    assert_eq!(form.root.children[6].children.len(), 2);
+    for id in [1, 2, 3, 4, 8] {
+        assert!(!displayed(id), "unbound button {id}");
+    }
+    for id in [5, 6, 9] {
+        assert!(displayed(id), "explicit command {id}");
+    }
+}
+
+#[test]
+fn native_button_without_command_does_not_raise_the_group_minimum() {
+    let document = parse(
+        "native-unbound",
+        include_str!(
+            "../../../../../../tests/fixtures/forms/native-unbound-buttons/FixedGroupHeight3.xml"
+        )
+        .into(),
+    )
+    .unwrap();
+    let form = compose(&document, &[]);
+    let group = &form.root.children[1];
+    let button = &group.children[1];
+    assert_eq!(button.name.as_deref(), Some("Find"));
+    assert_eq!(button.scalar("CommandName"), Some("0"));
+    let view = present(&form, &[document], &[]);
+    let item = |element: &EffectiveElement| {
+        view.elements
+            .iter()
+            .find(|item| item.identity == element.identity)
+            .unwrap()
+    };
+    assert!(!item(button).displayed);
+    assert!(item(&group.children[0]).displayed);
+    assert_eq!(item(group).title_font.points, 12.0);
+    assert!(view.diagnostics.is_empty());
+}
+
+#[test]
+fn table_columns_inherit_the_owner_font_without_changing_commands() {
+    let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" version="2.20">
+      <ChildItems>
+        <InputField name="Outside" id="1"/>
+        <Table name="Rows" id="2">
+          <Font ref="sys:DefaultGUIFont" height="16" kind="WindowsFont"/>
+          <AutoCommandBar name="RowsBar" id="8">
+            <Autofill>false</Autofill>
+            <ChildItems><Button name="Action" id="9"/></ChildItems>
+          </AutoCommandBar>
+          <ChildItems>
+            <InputField name="Plain" id="3"/>
+            <InputField name="ValueOverride" id="4">
+              <Font ref="sys:DefaultGUIFont" height="12" kind="WindowsFont"/>
+            </InputField>
+            <InputField name="TitleOverride" id="5">
+              <TitleFont ref="sys:DefaultGUIFont" height="14" kind="WindowsFont"/>
+            </InputField>
+            <ColumnGroup name="Nested" id="6"><ChildItems>
+              <InputField name="NestedValue" id="7"/>
+            </ChildItems></ColumnGroup>
+          </ChildItems>
+        </Table>
+      </ChildItems>
+    </Form>"#;
+    let document = parse("table-font", source.into()).unwrap();
+    let form = compose(&document, &[]);
+    let table = &form.root.children[1];
+    let bar = table
+        .auxiliary
+        .iter()
+        .find(|item| item.name.as_deref() == Some("RowsBar"))
+        .unwrap();
+    let view = present(&form, &[document], &[]);
+    assert!(view.diagnostics.is_empty());
+    let presentation = |node: &EffectiveElement| {
+        view.elements
+            .iter()
+            .find(|item| item.identity == node.identity)
+            .unwrap()
+    };
+    for (node, font, title) in [
+        (&form.root.children[0], 10.0, 10.0),
+        (table, 16.0, 10.0),
+        (&table.children[0], 16.0, 16.0),
+        (&table.children[1], 12.0, 16.0),
+        (&table.children[2], 16.0, 14.0),
+        (&table.children[3], 16.0, 16.0),
+        (&table.children[3].children[0], 16.0, 16.0),
+        (bar, 10.0, 10.0),
+        (&bar.children[0], 10.0, 10.0),
+    ] {
+        let item = presentation(node);
+        assert_eq!(
+            (item.font.points, item.title_font.points),
+            (font, title),
+            "{:?}",
+            node.name
+        );
+    }
+    let inherited = presentation(&table.children[0]);
+    let origins = |font: &ResolvedFont| {
+        font.origins
+            .iter()
+            .map(|origin| (origin.source.clone(), origin.range.clone()))
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(origins(&inherited.font), origins(&presentation(table).font));
+    assert_eq!(origins(&inherited.title_font), origins(&inherited.font));
+    assert!(table.children[0].property("Font").is_none());
+    assert!(table.children[0].property("TitleFont").is_none());
+}
+
+#[test]
+fn native_numeric_inputs_preserve_sign_qualifiers_from_the_bound_attribute() {
+    for (xml, sign) in [
+        (
+            include_str!(
+                "../../../../../../tests/fixtures/forms/native-number-inputs/NonnegativeFraction15.xml"
+            ),
+            NumberSign::Nonnegative,
+        ),
+        (
+            include_str!(
+                "../../../../../../tests/fixtures/forms/native-number-inputs/Fraction15NoGrouping.xml"
+            ),
+            NumberSign::Any,
+        ),
+    ] {
+        let document = parse("native-number", xml.into()).unwrap();
+        let form = compose(&document, &[]);
+        let field = &form.root.children[1];
+        let view = present(&form, &[document], &[]);
+        let value_type = &view
+            .elements
+            .iter()
+            .find(|element| element.identity == field.identity)
+            .unwrap()
+            .value_type;
+        assert!(view.diagnostics.is_empty());
+        assert_eq!(value_type.kind, FieldValueKind::Number);
+        assert_eq!(value_type.digits, Some(15));
+        assert_eq!(value_type.fraction, Some(2));
+        assert_eq!(value_type.allowed_sign, Some(sign));
+    }
+}
 #[test]
 fn native_basic_fixture_uses_conditional_group_and_vertical_form_defaults() {
     let document = parse(
@@ -599,7 +886,7 @@ fn tabular_total_uses_the_effective_numeric_column_and_preserves_explicit_titles
             "base",
             "",
             r#"<TabularSection uuid="base-lines"><Properties><Name>Lines</Name></Properties><ChildObjects>
-                <Attribute uuid="base-qty"><Properties><Name>Qty</Name><Type><v8:Type>xs:decimal</v8:Type><v8:NumberQualifiers><v8:Digits>10</v8:Digits><v8:FractionDigits>2</v8:FractionDigits></v8:NumberQualifiers></Type></Properties></Attribute>
+                <Attribute uuid="base-qty"><Properties><Name>Qty</Name><Type><v8:Type>xs:decimal</v8:Type><v8:NumberQualifiers><v8:Digits>10</v8:Digits><v8:FractionDigits>2</v8:FractionDigits><v8:AllowedSign>Nonnegative</v8:AllowedSign></v8:NumberQualifiers></Type></Properties></Attribute>
                 <Attribute uuid="base-comment"><Properties><Name>Comment</Name><Type><v8:Type>xs:string</v8:Type></Type></Properties></Attribute>
                 <Attribute uuid="base-total-comment"><Properties><Name>TotalComment</Name><Type><v8:Type>xs:string</v8:Type></Type></Properties></Attribute>
                 <Attribute uuid="base-text"><Properties><Name>Text</Name><Type><v8:Type>xs:string</v8:Type></Type></Properties></Attribute>
@@ -629,6 +916,7 @@ fn tabular_total_uses_the_effective_numeric_column_and_preserves_explicit_titles
     assert_eq!(total.value_type.kind, FieldValueKind::Number);
     assert_eq!(total.value_type.digits, Some(10));
     assert_eq!(total.value_type.fraction, Some(2));
+    assert_eq!(total.value_type.allowed_sign, Some(NumberSign::Nonnegative));
     assert_eq!(total.binding.as_ref().unwrap().source, "extension");
     assert_eq!(
         view.elements[2].tabular_total,
@@ -717,6 +1005,9 @@ fn native_table_fixtures_bind_value_table_columns_and_retain_auxiliary_controls(
     let mut count = 0;
     for path in std::fs::read_dir(root).unwrap() {
         let path = path.unwrap().path();
+        if path.extension().is_none_or(|extension| extension != "xml") {
+            continue;
+        }
         let document = parse("native-table", std::fs::read_to_string(&path).unwrap()).unwrap();
         let form = compose(&document, &[]);
         let view = present(&form, &[document], &[]);

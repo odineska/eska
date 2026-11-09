@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Table default</v8:content>
+		</v8:item>
+		<v8:item>
+			<v8:lang>en</v8:lang>
+			<v8:content>Table default</v8:content>
+		</v8:item>
+	</Title>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<InputField name="Above" id="1">
+			<DataPath>Name</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<Width>1</Width>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#FFEFBA</BackColor>
+			<ContextMenu name="AboveContextMenu" id="2"/>
+			<ExtendedTooltip name="AboveExtendedTooltip" id="3"/>
+		</InputField>
+		<Pages name="Pages1" id="4">
+			<PagesRepresentation>TabsOnTop</PagesRepresentation>
+			<ExtendedTooltip name="Pages1РасширеннаяПодсказка" id="41"/>
+			<ChildItems>
+				<Page name="Page1" id="5">
+					<Title>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Page</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Page</v8:content>
+						</v8:item>
+					</Title>
+					<ExtendedTooltip name="Page1РасширеннаяПодсказка" id="42"/>
+					<ChildItems>
+						<Pages name="Pages0" id="6">
+							<PagesRepresentation>TabsOnTop</PagesRepresentation>
+							<ExtendedTooltip name="Pages0РасширеннаяПодсказка" id="43"/>
+							<ChildItems>
+								<Page name="Page0" id="7">
+									<Title>
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>Page</v8:content>
+										</v8:item>
+										<v8:item>
+											<v8:lang>en</v8:lang>
+											<v8:content>Page</v8:content>
+										</v8:item>
+									</Title>
+									<ExtendedTooltip name="Page0РасширеннаяПодсказка" id="44"/>
+									<ChildItems>
+										<UsualGroup name="Section1" id="8">
+											<Title>
+												<v8:item>
+													<v8:lang>ru</v8:lang>
+													<v8:content>First</v8:content>
+												</v8:item>
+												<v8:item>
+													<v8:lang>en</v8:lang>
+													<v8:content>First</v8:content>
+												</v8:item>
+											</Title>
+											<Group>Vertical</Group>
+											<Representation>NormalSeparation</Representation>
+											<ExtendedTooltip name="Section1РасширеннаяПодсказка" id="45"/>
+											<ChildItems>
+												<UsualGroup name="Row11" id="9">
+													<Representation>None</Representation>
+													<ShowTitle>false</ShowTitle>
+													<ExtendedTooltip name="Row11РасширеннаяПодсказка" id="46"/>
+													<ChildItems>
+														<InputField name="Field11Left" id="10">
+															<DataPath>Name</DataPath>
+															<TitleLocation>None</TitleLocation>
+															<Width>4</Width>
+															<HorizontalStretch>false</HorizontalStretch>
+															<BackColor>#E8D4F2</BackColor>
+															<ContextMenu name="AboveContextMenu" id="11"/>
+															<ExtendedTooltip name="AboveExtendedTooltip" id="12"/>
+														</InputField>
+														<InputField name="Field11Right" id="13">
+															<DataPath>Name</DataPath>
+															<TitleLocation>None</TitleLocation>
+															<Width>6</Width>
+															<HorizontalStretch>false</HorizontalStretch>
+															<BackColor>#C6EFFF</BackColor>
+															<ContextMenu name="AboveContextMenu" id="14"/>
+															<ExtendedTooltip name="AboveExtendedTooltip" id="15"/>
+														</InputField>
+													</ChildItems>
+												</UsualGroup>
+												<UsualGroup name="Row12" id="16">
+													<Representation>None</Representation>
+													<ShowTitle>false</ShowTitle>
+													<ExtendedTooltip name="Row12РасширеннаяПодсказка" id="47"/>
+													<ChildItems>
+														<InputField name="Field12Left" id="17">
+															<DataPath>Name</DataPath>
+															<TitleLocation>None</TitleLocation>
+															<Width>4</Width>
+															<HorizontalStretch>false</HorizontalStretch>
+															<BackColor>#FED6C4</BackColor>
+															<ContextMenu name="AboveContextMenu" id="18"/>
+															<ExtendedTooltip name="AboveExtendedTooltip" id="19"/>
+														</InputField>
+														<InputField name="Field12Right" id="20">
+															<DataPath>Name</DataPath>
+															<TitleLocation>None</TitleLocation>
+															<Width>6</Width>
+															<HorizontalStretch>false</HorizontalStretch>
+															<BackColor>#D9E8BE</BackColor>
+															<ContextMenu name="AboveContextMenu" id="21"/>
+															<ExtendedTooltip name="AboveExtendedTooltip" id="22"/>
+														</InputField>
+													</ChildItems>
+												</UsualGroup>
+											</ChildItems>
+										</UsualGroup>
+										<UsualGroup name="Section2" id="23">
+											<Title>
+												<v8:item>
+													<v8:lang>ru</v8:lang>
+													<v8:content>Second</v8:content>
+												</v8:item>
+												<v8:item>
+													<v8:lang>en</v8:lang>
+													<v8:content>Second</v8:content>
+												</v8:item>
+											</Title>
+											<Group>Vertical</Group>
+											<Representation>NormalSeparation</Representation>
+											<ExtendedTooltip name="Section2РасширеннаяПодсказка" id="48"/>
+											<ChildItems>
+												<UsualGroup name="Row21" id="24">
+													<Representation>None</Representation>
+													<ShowTitle>false</ShowTitle>
+													<ExtendedTooltip name="Row21РасширеннаяПодсказка" id="49"/>
+													<ChildItems>
+														<InputField name="Field21Left" id="25">
+															<DataPath>Name</DataPath>
+															<TitleLocation>None</TitleLocation>
+															<Width>4</Width>
+															<HorizontalStretch>false</HorizontalStretch>
+															<BackColor>#F4DBEA</BackColor>
+															<ContextMenu name="AboveContextMenu" id="26"/>
+															<ExtendedTooltip name="AboveExtendedTooltip" id="27"/>
+														</InputField>
+														<InputField name="Field21Right" id="28">
+															<DataPath>Name</DataPath>
+															<TitleLocation>None</TitleLocation>
+															<Width>6</Width>
+															<HorizontalStretch>false</HorizontalStretch>
+															<BackColor>#D1E1FC</BackColor>
+															<ContextMenu name="AboveContextMenu" id="29"/>
+															<ExtendedTooltip name="AboveExtendedTooltip" id="30"/>
+														</InputField>
+													</ChildItems>
+												</UsualGroup>
+												<UsualGroup name="Row22" id="31">
+													<Representation>None</Representation>
+													<ShowTitle>false</ShowTitle>
+													<ExtendedTooltip name="Row22РасширеннаяПодсказка" id="50"/>
+													<ChildItems>
+														<InputField name="Field22Left" id="32">
+															<DataPath>Name</DataPath>
+															<TitleLocation>None</TitleLocation>
+															<Width>4</Width>
+															<HorizontalStretch>false</HorizontalStretch>
+															<BackColor>#F6E5AF</BackColor>
+															<ContextMenu name="AboveContextMenu" id="33"/>
+															<ExtendedTooltip name="AboveExtendedTooltip" id="34"/>
+														</InputField>
+														<InputField name="Field22Right" id="35">
+															<DataPath>Name</DataPath>
+															<TitleLocation>None</TitleLocation>
+															<Width>6</Width>
+															<HorizontalStretch>false</HorizontalStretch>
+															<BackColor>#CBE9DB</BackColor>
+															<ContextMenu name="AboveContextMenu" id="36"/>
+															<ExtendedTooltip name="AboveExtendedTooltip" id="37"/>
+														</InputField>
+													</ChildItems>
+												</UsualGroup>
+											</ChildItems>
+										</UsualGroup>
+									</ChildItems>
+								</Page>
+							</ChildItems>
+						</Pages>
+					</ChildItems>
+				</Page>
+			</ChildItems>
+		</Pages>
+		<InputField name="Below" id="38">
+			<DataPath>Name</DataPath>
+			<TitleLocation>None</TitleLocation>
+			<Width>1</Width>
+			<HorizontalStretch>false</HorizontalStretch>
+			<BackColor>#A8E4B8</BackColor>
+			<ContextMenu name="BelowContextMenu" id="39"/>
+			<ExtendedTooltip name="BelowExtendedTooltip" id="40"/>
+		</InputField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Name" id="41">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+</Form>
