@@ -8,11 +8,14 @@ use crate::{
 };
 use eska_project_core::formatting::{Error, IndentStyle, Options, Wrapping};
 
-/// Flat spelling is shared by fit decisions and assignment-column measurement.
+/// Measure flat code for wrapping and alignment, excluding the comment and its separator.
 pub fn flat(tokens: &[Token<'_>], options: &Options) -> String {
     let mut text = String::new();
     for (index, token) in tokens.iter().enumerate() {
-        if index > 0 && space(tokens, index, options) {
+        if token.kind == Kind::Comment {
+            continue;
+        }
+        if !text.is_empty() && space(tokens, index, options) {
             text.push(' ');
         }
         text.push_str(&spelling::render(

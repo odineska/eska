@@ -79,3 +79,43 @@ fn retained_multiline_calls_remain_table_boundaries() {
         );
     }
 }
+
+#[test]
+fn trailing_comments_keep_adjacent_calls_in_one_table() {
+    let comment = "// Этот комментарий длиннее лимита строки, содержит запятую и точку с запятой;";
+    let source = format!(
+        "Список.Добавить(\"А\",Тип(1,2));   {comment}\n\
+         Список.Добавить(\"Длинное\",Тип(3,4));\n\
+         Список.Добавить(\"Б\",Тип(5,6));// кратко\n"
+    );
+    assert_eq!(
+        formatted(
+            &source,
+            Options {
+                column_limit: 42,
+                ..options()
+            },
+        ),
+        format!(
+            "Список.Добавить(\"А\"      , Тип(1, 2)); {comment}\n\
+             Список.Добавить(\"Длинное\", Тип(3, 4));\n\
+             Список.Добавить(\"Б\"      , Тип(5, 6)); // кратко\n"
+        ),
+    );
+}
+
+#[test]
+fn trailing_comment_does_not_wrap_a_short_binary_expression() {
+    let comment = "// A long explanation can extend past the code column limit.";
+    let source = format!("A=1+2;\t{comment}\nTotal=3+4;\n");
+    assert_eq!(
+        formatted(
+            &source,
+            Options {
+                column_limit: 20,
+                ..options()
+            },
+        ),
+        format!("A     = 1 + 2; {comment}\nTotal = 3 + 4;\n"),
+    );
+}

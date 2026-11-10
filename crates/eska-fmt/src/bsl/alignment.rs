@@ -5,7 +5,7 @@ use super::{
     syntax::{Unit, UnitKind, group_end},
 };
 use crate::lex::{Kind, Token};
-use eska_project_core::formatting::{Options, Wrapping};
+use eska_project_core::formatting::{Comments, Options, Wrapping};
 use std::{
     collections::{BTreeMap, BTreeSet},
     ops::Range,
@@ -176,6 +176,13 @@ fn calls(
 /// Only calls that render on one line enter a table, including source lines collapsed by policy.
 fn call(index: usize, unit: &Unit, tokens: &[Token<'_>], options: &Options) -> Option<Call> {
     let part = &tokens[unit.tokens.clone()];
+    let (last, code) = part.split_last()?;
+    // An editable trailing comment belongs to the row, outside its argument list.
+    let part = if last.kind == Kind::Comment && options.comments == Comments::IndentOnly {
+        code
+    } else {
+        part
+    };
     if unit.kind != UnitKind::Statement
         || !part.last()?.is(";")
         || part.iter().any(|token| token.kind == Kind::Comment)

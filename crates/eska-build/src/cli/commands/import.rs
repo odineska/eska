@@ -305,7 +305,7 @@ fn present_preview(
     }
 }
 
-/// Require a deliberate overwrite answer; Enter, EOF and every other answer cancel.
+/// Require explicit consent after displaying the complete replacement preview.
 fn confirm(
     format: Format,
     localizer: &Localizer,

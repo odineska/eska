@@ -39,25 +39,32 @@ fn config(input: &str) -> Config {
     toml::from_str(input).expect("valid format table")
 }
 
-/// A source outside any manifest still receives the pinned 1C style without an analyzer.
+/// The default ESKA profile applies to standalone sources and explicit 1C stays available.
 #[test]
 fn default_policy_is_complete_and_language_specific() {
+    let classic = config("profile='1c'");
+    let layers = [Layer::new(Path::new("."), "manifest", &classic, "").unwrap()];
     for language in [Language::Bsl, Language::Sdbl] {
-        let policy = resolve(&[], Path::new("module.bsl"), language, &Patch::default()).unwrap();
-        assert_eq!(policy.profile, "1c");
+        let path = Path::new("module");
+        let policy = resolve(&[], path, language, &Patch::default()).unwrap();
+        let pinned = resolve(&layers, path, language, &Patch::default()).unwrap();
+        assert_eq!(policy.profile, "eska");
         assert_eq!(policy.profile_version, 1);
         assert_eq!(policy.options.indent_style, IndentStyle::Tab);
         assert_eq!(policy.options.indent_width, 4);
-        assert_eq!(policy.options.column_limit, 120);
-        assert_eq!(
-            policy.options.keyword_case,
-            if language == Language::Bsl {
-                KeywordCase::Canonical
-            } else {
-                KeywordCase::Upper
-            }
-        );
-        assert!(policy.origins.values().all(|value| value == "profile:1c@1"));
+        assert_eq!(pinned.profile, "1c");
+        assert_eq!(pinned.options.column_limit, 120);
+        assert!(!pinned.options.align_call_arguments);
+        assert!(pinned.origins.values().all(|value| value == "profile:1c@1"));
+        if language == Language::Bsl {
+            assert_eq!(policy.options.column_limit, 150);
+            assert!(policy.options.align_call_arguments);
+            assert_eq!(policy.options.keyword_case, KeywordCase::Canonical);
+            assert_eq!(policy.origins["column_limit"], "profile:eska@1");
+        } else {
+            assert_eq!(policy.options, pinned.options);
+            assert_eq!(policy.options.keyword_case, KeywordCase::Upper);
+        }
     }
 }
 
