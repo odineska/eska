@@ -1,0 +1,324 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "linux",
+  "fixtures": {
+    "VerticalReferenceTitles": {
+      "cases": [
+        {
+          "name": "vertical reference titles use the full shared track",
+          "frame": [384, 760],
+          "locations": {
+            "Operation": "Left",
+            "Organization": "Left",
+            "Account": "Left",
+            "Borrower": "Left",
+            "Loan": "Left",
+            "Document": "Left",
+            "Category": "Left",
+            "Transaction": "Left",
+            "Agent": "Left",
+            "Agreement": "Left",
+            "Amount": "Left",
+            "Compensation": "Left"
+          },
+          "controls": {
+            "Operation": [151, 39, 212, 23],
+            "Organization": [151, 71, 212, 23],
+            "Account": [151, 103, 212, 23],
+            "Borrower": [151, 135, 212, 23],
+            "Loan": [151, 167, 212, 23],
+            "Document": [151, 199, 212, 23],
+            "Category": [151, 231, 212, 23],
+            "Transaction": [151, 263, 212, 23],
+            "Agent": [151, 295, 212, 23],
+            "Agreement": [151, 327, 212, 23],
+            "Amount": [151, null, 182, 23],
+            "Compensation": [151, null, 182, 23]
+          },
+          "tolerancePx": 1
+        },
+        {
+          "name": "automatic reference captions reflow at the column minimum",
+          "frame": [216, 760],
+          "locations": {
+            "Operation": "Left",
+            "Organization": "Top",
+            "Account": "Left",
+            "Borrower": "Left",
+            "Loan": "Left",
+            "Document": "Left",
+            "Category": "Left",
+            "Transaction": "Top",
+            "Agent": "Top",
+            "Agreement": "Left",
+            "Amount": "Top",
+            "Compensation": "Top"
+          },
+          "controls": {
+            "Operation": [78, 39, 117, 23],
+            "Organization": [13, 97, 182, 23],
+            "Account": [86, 129, 109, 23],
+            "Borrower": [77, 168, 118, 23],
+            "Loan": [53, 200, 142, 23],
+            "Document": [87, 232, 108, 23],
+            "Category": [60, 271, 135, 23],
+            "Transaction": [13, 329, 182, 23],
+            "Agent": [13, 380, 182, 23],
+            "Agreement": [66, 412, 129, 23],
+            "Amount": [13, null, 182, 23],
+            "Compensation": [13, null, 182, 23]
+          },
+          "tolerancePx": 1,
+          "captions": {
+            "Operation": [
+              "Вид",
+              "операции:"
+            ],
+            "Account": [
+              "Счет",
+              "отражения:"
+            ],
+            "Document": [
+              "Платежный",
+              "документ:"
+            ],
+            "Category": [
+              "Статья",
+              "ДДС:"
+            ]
+          }
+        },
+        {
+          "name": "independent reference captions grow before shared captions fit",
+          "frame": [264, 760],
+          "locations": {
+            "Operation": "Left",
+            "Organization": "Top",
+            "Account": "Left",
+            "Borrower": "Left",
+            "Loan": "Left",
+            "Document": "Left",
+            "Category": "Left",
+            "Transaction": "Top",
+            "Agent": "Top",
+            "Agreement": "Left",
+            "Amount": "Top",
+            "Compensation": "Top"
+          },
+          "controls": {
+            "Operation": [94, 39, 149, 23],
+            "Organization": [13, 97, 230, 23],
+            "Account": [104, 129, 139, 23],
+            "Borrower": [77, 168, 166, 23],
+            "Loan": [53, 200, 190, 23],
+            "Document": [106, 232, 137, 23],
+            "Category": [71, 271, 172, 23],
+            "Transaction": [13, 329, 230, 23],
+            "Agent": [13, 380, 230, 23],
+            "Agreement": [79, 412, 164, 23],
+            "Amount": [13, null, 182, 23],
+            "Compensation": [13, null, 182, 23]
+          },
+          "tolerancePx": 1
+        },
+        {
+          "name": "numeric titles stay above the inputs until the shared track fits",
+          "frame": [294, 760],
+          "locations": {
+            "Operation": "Left",
+            "Organization": "Top",
+            "Account": "Left",
+            "Borrower": "Left",
+            "Loan": "Left",
+            "Document": "Left",
+            "Category": "Left",
+            "Transaction": "Top",
+            "Agent": "Top",
+            "Agreement": "Left",
+            "Amount": "Top",
+            "Compensation": "Top"
+          },
+          "controls": {
+            "Operation": [105, 39, 168, 23],
+            "Organization": [13, 97, 260, 23],
+            "Account": [116, 129, 157, 23],
+            "Borrower": [77, 168, 196, 23],
+            "Loan": [53, 200, 220, 23],
+            "Document": [117, 232, 156, 23],
+            "Category": [78, 271, 195, 23],
+            "Transaction": [13, 329, 260, 23],
+            "Agent": [13, 380, 260, 23],
+            "Agreement": [87, 412, 186, 23],
+            "Amount": [13, null, 182, 23],
+            "Compensation": [13, null, 182, 23]
+          },
+          "tolerancePx": 1
+        },
+        {
+          "name": "reference and numeric captions return to the shared track",
+          "frame": [304, 760],
+          "locations": {
+            "Operation": "Left",
+            "Organization": "Left",
+            "Account": "Left",
+            "Borrower": "Left",
+            "Loan": "Left",
+            "Document": "Left",
+            "Category": "Left",
+            "Transaction": "Left",
+            "Agent": "Left",
+            "Agreement": "Left",
+            "Amount": "Left",
+            "Compensation": "Left"
+          },
+          "controls": {
+            "Operation": [100, 39, 183, 23],
+            "Organization": [100, 78, 183, 23],
+            "Account": [100, 110, 183, 23],
+            "Borrower": [100, 149, 183, 23],
+            "Loan": [100, 181, 183, 23],
+            "Document": [100, 213, 183, 23],
+            "Category": [100, 252, 183, 23],
+            "Transaction": [100, 284, 183, 23],
+            "Agent": [100, 316, 183, 23],
+            "Agreement": [100, 355, 183, 23],
+            "Amount": [100, null, 182, 23],
+            "Compensation": [100, null, 182, 23]
+          },
+          "tolerancePx": 1
+        },
+        {
+          "name": "dirty XML keeps an explicit left reference title and increases the minimum",
+          "frame": [232, null],
+          "viewport": [216, 760],
+          "edit": {
+            "titleLocations": {
+              "Organization": "Left"
+            }
+          },
+          "locations": {
+            "Operation": "Left",
+            "Organization": "Left",
+            "Account": "Left",
+            "Borrower": "Left",
+            "Loan": "Left",
+            "Document": "Left",
+            "Category": "Left",
+            "Transaction": "Left",
+            "Agent": "Left",
+            "Agreement": "Left",
+            "Amount": "Top",
+            "Compensation": "Top"
+          },
+          "controls": {
+            "Operation": [78, 39, 133, 23],
+            "Organization": [98, 78, 113, 23],
+            "Account": [86, 110, 125, 23],
+            "Borrower": [77, 149, 134, 23],
+            "Loan": [53, 181, 158, 23],
+            "Document": [87, 213, 124, 23],
+            "Category": [60, 252, 151, 23],
+            "Transaction": [90, 291, 121, 23],
+            "Agent": [87, 323, 124, 23],
+            "Agreement": [66, 362, 145, 23],
+            "Amount": [13, null, 182, 23],
+            "Compensation": [13, null, 182, 23]
+          },
+          "tolerancePx": 1,
+          "captions": {
+            "Agent": [
+              "Платежный",
+              "агент:"
+            ]
+          }
+        },
+        {
+          "name": "smaller fixed numbers leave less room for reference captions",
+          "frame": [196, null],
+          "viewport": [190, 760],
+          "edit": {
+            "form": {
+              "Width": 1
+            },
+            "widths": {
+              "Amount": 13,
+              "Compensation": 13
+            }
+          },
+          "locations": {
+            "Operation": "Left",
+            "Organization": "Top",
+            "Account": "Top",
+            "Borrower": "Top",
+            "Loan": "Left",
+            "Document": "Top",
+            "Category": "Left",
+            "Transaction": "Top",
+            "Agent": "Top",
+            "Agreement": "Top",
+            "Amount": "Top",
+            "Compensation": "Top"
+          },
+          "controls": {
+            "Operation": [78, 39, 97, 23],
+            "Organization": [13, 97, 162, 23],
+            "Account": [13, 148, 162, 23],
+            "Borrower": [13, 199, 162, 23],
+            "Loan": [53, 231, 122, 23],
+            "Document": [13, 282, 162, 23],
+            "Category": [60, 314, 115, 23],
+            "Transaction": [13, 372, 162, 23],
+            "Agent": [13, 423, 162, 23],
+            "Agreement": [13, 474, 162, 23],
+            "Amount": [13, null, 162, 23],
+            "Compensation": [13, null, 162, 23]
+          },
+          "tolerancePx": 1
+        },
+        {
+          "name": "larger fixed numbers leave room for additional side captions",
+          "frame": [226, null],
+          "viewport": [216, 760],
+          "edit": {
+            "form": {
+              "Width": 1
+            },
+            "widths": {
+              "Amount": 16,
+              "Compensation": 16
+            }
+          },
+          "locations": {
+            "Operation": "Left",
+            "Organization": "Top",
+            "Account": "Left",
+            "Borrower": "Left",
+            "Loan": "Left",
+            "Document": "Left",
+            "Category": "Left",
+            "Transaction": "Left",
+            "Agent": "Left",
+            "Agreement": "Left",
+            "Amount": "Top",
+            "Compensation": "Top"
+          },
+          "controls": {
+            "Operation": [78, 39, 127, 23],
+            "Organization": [13, 97, 192, 23],
+            "Account": [86, 129, 119, 23],
+            "Borrower": [77, 168, 128, 23],
+            "Loan": [53, 200, 152, 23],
+            "Document": [87, 232, 118, 23],
+            "Category": [60, 271, 145, 23],
+            "Transaction": [90, 310, 115, 23],
+            "Agent": [87, 342, 118, 23],
+            "Agreement": [66, 381, 139, 23],
+            "Amount": [13, null, 192, 23],
+            "Compensation": [13, null, 192, 23]
+          },
+          "tolerancePx": 1
+        }
+      ]
+    }
+  }
+}

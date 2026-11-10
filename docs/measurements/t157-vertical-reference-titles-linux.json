@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "explorerCommit": "1b3b364",
+  "scope": "Vertical ThroughAlign captions with fixed numbers and breakable reference titles.",
+  "profile": {
+    "platform": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "locale": "ru",
+    "zoom": 100
+  },
+  "coordinates": "Frame-relative rectangles [x, y, width, height].",
+  "nativeCaptureCount": 37,
+  "nativeSourceFilesUnchanged": true,
+  "referenceInputFloors": {
+    "Catalog": {
+      "referenceWidth": 113,
+      "captureSha256": "a103f23894079a8f0566e046eb28af5b2445aa113bc264069e063117e814eadc"
+    },
+    "Dropdown": {
+      "referenceWidth": 92,
+      "captureSha256": "c91333b4e040cd3b9ce4e7328857cf14e051225e4e35ac76e107abd99c4662f0"
+    },
+    "Picker": {
+      "referenceWidth": 92,
+      "captureSha256": "887f8b336b3ffe4976ca3cb85175119580225f1a80654ab1c93dc6248fb7bd2e"
+    },
+    "PickerOpen": {
+      "referenceWidth": 113,
+      "captureSha256": "352645f631526d02cd1579f5789794c7473c2fff471c099f18e0cd254c1d01d0"
+    },
+    "PickerDropdown": {
+      "referenceWidth": 113,
+      "captureSha256": "d1056528df61cfd526b9ed70f9cd2890ecb008372458375fbbb1664d9ebcb35a"
+    },
+    "Enum": {
+      "referenceWidth": 92,
+      "captureSha256": "59a999dafab395fdecc3bec0aedcb538034039cd547ba60031483b8aad64d462"
+    },
+    "Composite": {
+      "referenceWidth": 92,
+      "captureSha256": "817d94022679104bf6cc44de6e16af6be34e9d2300fe49cab215c4781f46664f"
+    },
+    "CompositeOpen": {
+      "referenceWidth": 113,
+      "captureSha256": "3d479e09eef9c854f4547d9524682360ea3e5f76f6119f6d48d30ff616b6e934"
+    }
+  },
+  "synthetic": {
+    "fixture": "../../tests/fixtures/forms/native-column-widths/VerticalReferenceTitles.xml",
+    "metrics": "../../tests/fixtures/forms/native-column-widths/vertical-reference-title-metrics.json",
+    "referenceRectangles": 230,
+    "exactReferenceRectangles": 227,
+    "withinOnePx": 230,
+    "cases": [
+      {
+        "case": "Real18",
+        "frameWidth": 216,
+        "nativeColumnWidth": 182,
+        "installedColumnMinimum": 182,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Real20",
+        "frameWidth": 234,
+        "nativeColumnWidth": 200,
+        "installedColumnMinimum": 182,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Real23",
+        "frameWidth": 264,
+        "nativeColumnWidth": 230,
+        "installedColumnMinimum": 182,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Real25",
+        "frameWidth": 284,
+        "nativeColumnWidth": 250,
+        "installedColumnMinimum": 182,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Real26",
+        "frameWidth": 294,
+        "nativeColumnWidth": 260,
+        "installedColumnMinimum": 182,
+        "exactReferenceRectangles": 8,
+        "largestReferenceDeltaPx": 1
+      },
+      {
+        "case": "Real27",
+        "frameWidth": 304,
+        "nativeColumnWidth": 270,
+        "installedColumnMinimum": 182,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Real30",
+        "frameWidth": 334,
+        "nativeColumnWidth": 300,
+        "installedColumnMinimum": 182,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Real35",
+        "frameWidth": 384,
+        "nativeColumnWidth": 350,
+        "installedColumnMinimum": 182,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Locked18",
+        "frameWidth": 232,
+        "nativeColumnWidth": 198,
+        "installedColumnMinimum": 198,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Locked23",
+        "frameWidth": 264,
+        "nativeColumnWidth": 230,
+        "installedColumnMinimum": 198,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Locked26",
+        "frameWidth": 294,
+        "nativeColumnWidth": 260,
+        "installedColumnMinimum": 198,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number13Frame1",
+        "frameWidth": 196,
+        "nativeColumnWidth": 162,
+        "installedColumnMinimum": 162,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number13Frame20",
+        "frameWidth": 234,
+        "nativeColumnWidth": 200,
+        "installedColumnMinimum": 162,
+        "exactReferenceRectangles": 9,
+        "largestReferenceDeltaPx": 1
+      },
+      {
+        "case": "Number13Frame23",
+        "frameWidth": 264,
+        "nativeColumnWidth": 230,
+        "installedColumnMinimum": 162,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number13Frame25",
+        "frameWidth": 284,
+        "nativeColumnWidth": 250,
+        "installedColumnMinimum": 162,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number16Frame1",
+        "frameWidth": 226,
+        "nativeColumnWidth": 192,
+        "installedColumnMinimum": 192,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number16Frame22",
+        "frameWidth": 254,
+        "nativeColumnWidth": 220,
+        "installedColumnMinimum": 192,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number16Frame26",
+        "frameWidth": 294,
+        "nativeColumnWidth": 260,
+        "installedColumnMinimum": 192,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number16Frame28",
+        "frameWidth": 314,
+        "nativeColumnWidth": 280,
+        "installedColumnMinimum": 192,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number19Frame1",
+        "frameWidth": 256,
+        "nativeColumnWidth": 222,
+        "installedColumnMinimum": 222,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number19Frame25",
+        "frameWidth": 284,
+        "nativeColumnWidth": 250,
+        "installedColumnMinimum": 222,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number19Frame29",
+        "frameWidth": 324,
+        "nativeColumnWidth": 290,
+        "installedColumnMinimum": 222,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      },
+      {
+        "case": "Number19Frame31",
+        "frameWidth": 344,
+        "nativeColumnWidth": 310,
+        "installedColumnMinimum": 222,
+        "exactReferenceRectangles": 10,
+        "largestReferenceDeltaPx": 0
+      }
+    ]
+  },
+  "stalingrad": {
+    "form": "Документ.ПоступлениеНаСчетТекущихРасчетов.Форма.ФормаДокумента",
+    "xmlSha256": "045dead34a69d01c6d83a354a9c2fb4f610302cd79a3a011636a2c1fce1821ef",
+    "nativeScreenshotSha256": "8b72c2d517d0539456b69fde9e9729f6047fe223c8cfd71b0b31a5b425db46b6",
+    "frame": [646, 760],
+    "leftColumnWidth": 182,
+    "nativeAndVsixReferenceRectangles": {
+      "ВидОперации": [78, 136, 117, 23],
+      "Организация": [13, 194, 182, 23],
+      "СчетОтражения": [86, 226, 109, 23],
+      "Контрагент": [77, 265, 118, 23],
+      "Займ": [53, 297, 142, 23],
+      "ПлатежныйДокумент": [87, 357, 108, 23],
+      "СтатьяДДС": [60, 396, 135, 23],
+      "Транзакция": [13, 454, 182, 23],
+      "ПлатежныйАгент": [13, 505, 182, 23],
+      "ДоговорПлатежногоАгента": [66, 537, 129, 23]
+    },
+    "memo": {
+      "native": [81, 576, 114, 51],
+      "vsix": [81, 576, 114, 52]
+    },
+    "readOnlyDate": {
+      "native": [86, 738, 101, 23],
+      "vsix": [94, 739, 101, 23]
+    },
+    "unchangedGeometryCasesAcrossThreeForms": 19,
+    "verifiedUnsavedLoanEditInDetachedPreview": true
+  },
+  "installed": {
+    "backendSha256": "83ce67f920ffe1ba37b5b5e93fe47ee610c0b3798862a0743acb806a5ff7d788",
+    "vsixSha256": "17e798becfe7b0a6d72d19764474187c85ce5f537c7d05f85d120d9ad57a07b7",
+    "verifiedRuntimeAssets": 3,
+    "originalXmlUnchanged": true
+  },
+  "validation": {
+    "installedHostRuns": { "ru": 8, "en": 8 },
+    "bun": { "passed": 736, "skipped": 8 },
+    "cargo": { "passed": 1584, "ignored": 19 }
+  },
+  "remaining": [
+    "Calibrate narrow reference-only scopes and the additional partial alignment step in a reference stack with separate dropdown and picker buttons.",
+    "Match reference button glyphs and combinations, the compact read-only date track and multiline input height.",
+    "Repeat with native Windows Designer metrics."
+  ]
+}
