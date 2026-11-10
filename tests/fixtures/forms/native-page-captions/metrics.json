@@ -1735,6 +1735,13 @@
         "Address": "Top",
         "AgentPort": "Top"
       },
+      "dividers": [
+        [
+          104,
+          39,
+          72
+        ]
+      ],
       "captures": {
         "ru": "6d704c36d316cde2f8de6e063161ca397c1cc9dfba663ba1f9601c970c50e2de"
       },
@@ -1771,6 +1778,13 @@
         "Address": "Top",
         "AgentPort": "Top"
       },
+      "dividers": [
+        [
+          160,
+          39,
+          57
+        ]
+      ],
       "captures": {
         "ru": "78eeeadf18ce35d2df5050ce22792c69c29c4f2e61b26b52c557cdb7ca6ff3f1"
       },
@@ -1779,6 +1793,346 @@
         "Address": 2,
         "AgentPort": 1
       }
+    },
+    {
+      "name": "ForcedPageDividerMinimum",
+      "file": "ForcedPageDividerMinimum.xml",
+      "fixtureSha256": "6cbb54b08b5b97b3dd2770da68558eaeff76d18d90b7e84a6ed06daf8f4d8837",
+      "canonicalSha256": "10b44b6102825e7541833a29d6e9ae8106ddeffa6e3ca298c8127e4f913ca411",
+      "frame": [
+        199,
+        124
+      ],
+      "fields": {
+        "Address": [
+          13,
+          88,
+          71,
+          23
+        ],
+        "AgentPort": [
+          94,
+          88,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "dividers": [],
+      "captures": {
+        "ru": "d1244ff4376ed973ba7adeee2c707a21762ab13c92e415d0679c48bdb42a28a0"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "ForcedPageDividerAppears",
+      "file": "ForcedPageDividerAppears.xml",
+      "fixtureSha256": "74e89e06022e5273c0d624d47a9dff9278085b3e32ce94635de0635ed6082d64",
+      "canonicalSha256": "935e4947b4ebe332f7bc789fad7279749881595c7a5bb362c394b36abaff8a9c",
+      "frame": [
+        204,
+        124
+      ],
+      "fields": {
+        "Address": [
+          13,
+          88,
+          73,
+          23
+        ],
+        "AgentPort": [
+          96,
+          88,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "dividers": [
+        [
+          90,
+          39,
+          72
+        ]
+      ],
+      "captures": {
+        "ru": "15864f40af54ecd5f655702019782992d25fcacf7cda8ba62a051f39fce34939"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "ForcedPageDividerLast",
+      "file": "ForcedPageDividerLast.xml",
+      "fixtureSha256": "a238b7b2947f372d456cb034f83cd93ebd4d422de8f030519231eab09722f222",
+      "canonicalSha256": "ef5862f080569f1752f6630c3a1b89aa293205a2b5c847945a2e5b9d0bbd947b",
+      "frame": [
+        324,
+        94
+      ],
+      "fields": {
+        "Address": [
+          13,
+          58,
+          163,
+          23
+        ],
+        "AgentPort": [
+          186,
+          58,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "dividers": [
+        [
+          180,
+          39,
+          42
+        ]
+      ],
+      "captures": {
+        "ru": "8b0d45a8901bce9f8eefd9dc8ace75f4e244761025f9d9c5f2c14103b66d36ca"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "ForcedPageDividerWide",
+      "file": "ForcedPageDividerWide.xml",
+      "fixtureSha256": "51f8e27b31a4ae2155ea7f06b8858095d451ffeb27e46a4c0698941906eb107d",
+      "canonicalSha256": "76078d08b24cb71dd193e3b8491c5514e72b4af5b72832638ede571a4a81df4a",
+      "frame": [
+        334,
+        97
+      ],
+      "fields": {
+        "Address": [
+          77,
+          39,
+          75,
+          23
+        ],
+        "AgentPort": [
+          252,
+          39,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "dividers": [],
+      "captures": {
+        "ru": "12753988f798421d91bf6307c01b0d083224dbb83e6236ec868d2c3336d48861"
+      },
+      "compatibility": "Version8_3_27",
+      "reflow": {
+        "cases": [
+          "ForcedPageBothWrappedAbove",
+          "ForcedPageDividerWide",
+          "ForcedPageDividerMinimum",
+          "ForcedPageBothWrappedAbove"
+        ],
+        "selected": "AgentPort",
+        "edit": {
+          "case": "ForcedPageDividerShort"
+        },
+        "resizeDivider": true
+      }
+    },
+    {
+      "name": "ForcedPageDividerShort",
+      "file": "ForcedPageDividerShort.xml",
+      "fixtureSha256": "de5a6e294bb812b7427670a8a4f89c96f367b730c4e3ae9bce022c9e51d7d27f",
+      "canonicalSha256": "2c96d2aaf287f0de1440d4d04b6a50306828b77c81b13d40003f12c3734ae644",
+      "frame": [
+        254,
+        109
+      ],
+      "fields": {
+        "Address": [
+          13,
+          73,
+          149,
+          23
+        ],
+        "AgentPort": [
+          172,
+          73,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "dividers": [],
+      "captures": {
+        "ru": "8b92e4bbac02bfc31827bc447a8fb91ecff4a4cf64407eba175e994c7e19906a"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "ForcedPageDividerReverse",
+      "file": "ForcedPageDividerReverse.xml",
+      "fixtureSha256": "eb01b402f1abed4c59c6b69ab8fdc3cd0ea09aac625c6b145b31dbf1e4770d6b",
+      "canonicalSha256": "bc4a17e6ffabe150c65f68c4228e675c4c1b316cc1463ecedbb3398f976d692a",
+      "frame": [
+        234,
+        124
+      ],
+      "fields": {
+        "Address": [
+          126,
+          88,
+          87,
+          23
+        ],
+        "AgentPort": [
+          13,
+          88,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "AgentPort": "Top",
+        "Address": "Top"
+      },
+      "dividers": [
+        [
+          120,
+          39,
+          72
+        ]
+      ],
+      "captures": {
+        "ru": "7d37ab3dc110df2fb91b3dc27002089cf34d5d5c4a165174388835344a5a974b"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "ForcedPageDividerTopTabs",
+      "file": "ForcedPageDividerTopTabs.xml",
+      "fixtureSha256": "05bb61246fab838734fe4cdece65c18744d323420207668d552bea5314108175",
+      "canonicalSha256": "8dbe3567f3e7bcf2fd7a1da0ad4318712aacbd1fa1cf39d00da4756b07e8212d",
+      "frame": [
+        274,
+        154
+      ],
+      "fields": {
+        "Address": [
+          24,
+          108,
+          95,
+          23
+        ],
+        "AgentPort": [
+          129,
+          108,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "dividers": [
+        [
+          123,
+          74,
+          57
+        ]
+      ],
+      "captures": {
+        "ru": "21db7a570bfc22e4067a9ee947685f63c06710baf99b420f85f7bd0bc54f56db"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "ForcedPageDividerSideTabs",
+      "file": "ForcedPageDividerSideTabs.xml",
+      "fixtureSha256": "9bd21b6eea9a89075dbce3c1016b46db3da7c617ecbae833d213acffa25592d2",
+      "canonicalSha256": "2b412aa9df5e98bc3c1347dcd46cea7b1db7a02757210e300efb891002d87404",
+      "frame": [
+        324,
+        129
+      ],
+      "fields": {
+        "Address": [
+          73,
+          83,
+          96,
+          23
+        ],
+        "AgentPort": [
+          179,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "dividers": [
+        [
+          173,
+          49,
+          57
+        ]
+      ],
+      "captures": {
+        "ru": "c0985dfe2ef54b96814c50200e35be1f14a61543e8ad715f316436bc057e901e"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "ForcedPageDividerSideFits",
+      "file": "ForcedPageDividerSideFits.xml",
+      "fixtureSha256": "d1a2332f18586aa6e463a6e2d7ee7a553a82af184ffafe274c9f7b4af2bd982c",
+      "canonicalSha256": "c36f23697072ff9450ad92740ff5dd7434637e9bb643929a122be5b908b3110c",
+      "frame": [
+        394,
+        117
+      ],
+      "fields": {
+        "Address": [
+          137,
+          49,
+          71,
+          23
+        ],
+        "AgentPort": [
+          307,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "dividers": [],
+      "captures": {
+        "ru": "eb344e617ac3bc39ec958e2a518dec0dee127734a9b54bf6c69e7bc1799032d0"
+      },
+      "compatibility": "Version8_3_27"
     }
   ],
   "frameCoordinates": "Outer black outline, including its one-pixel stroke and excluding the shadow."
