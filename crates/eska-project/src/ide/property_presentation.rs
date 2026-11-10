@@ -6,6 +6,7 @@ mod references;
 mod types;
 
 pub(super) use references::reference_name;
+pub(super) use types::qualified_type_caption;
 
 use super::dto::Labels;
 use eska_presentation::localization::Localizer;

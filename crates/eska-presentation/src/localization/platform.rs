@@ -20,11 +20,13 @@ impl Localizer {
         let namespace = match key.namespace.as_deref()? {
             "http://v8.1c.ru/8.3/MDClasses" => "md",
             "http://v8.1c.ru/8.3/xcf/readable" => "readable",
-            "http://v8.1c.ru/8.1/data/core" => "core",
+            "http://v8.1c.ru/8.1/data/core"
+            | "http://v8.1c.ru/8.1/data-composition-system/core" => "core",
             "http://v8.1c.ru/8.1/data/ui" => "ui",
             "http://v8.1c.ru/8.2/managed-application/core" => "app",
             "http://v8.1c.ru/8.3/xcf/predef" => "predef",
             "http://v8.1c.ru/8.3/xcf/logform" => "form",
+            "http://v8.1c.ru/8.1/data-composition-system/settings" => "settings",
             _ => return None,
         };
         if let Some(owner) = owner {

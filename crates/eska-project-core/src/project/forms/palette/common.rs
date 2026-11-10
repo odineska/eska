@@ -28,3 +28,15 @@ pub(super) const TOOLTIP_REPRESENTATION: Row = Row::new("ToolTipRepresentation",
 pub(super) const TITLE_TEXT_COLOR: Row = Row::new("TitleTextColor", Appearance, Color, Auto);
 pub(super) const TITLE_FONT: Row = Row::new("TitleFont", Appearance, Font, Auto);
 pub(super) const WIDTH: Row = Row::new("Width", Layout, Number, ZERO);
+pub(super) const AUTO_FILL: Row =
+    Row::new("AutoFill", Main, Boolean, CHECKED).with_source(Property("Autofill"));
+
+pub(super) const fn event(id: &'static str) -> Row {
+    Row::new(
+        id,
+        super::PaletteCategory::Events,
+        super::PaletteEditor::Event,
+        Empty,
+    )
+    .with_source(SettingSource::Event)
+}

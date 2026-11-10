@@ -8,6 +8,38 @@ use eska_project_core::project::metadata_model::{
 use serde_json::{Value, json};
 use std::collections::BTreeSet;
 
+/// Form property records reuse the same generated-type vocabulary as metadata properties.
+pub(in crate::ide) fn qualified_type_caption(
+    locale: &eska_presentation::localization::Localizer,
+    key: &PropertyKey,
+) -> Option<String> {
+    if key.namespace.as_deref() != Some(CFG) {
+        return None;
+    }
+    let (prefix, name) = key.name.split_once('.')?;
+    if name.is_empty() {
+        return None;
+    }
+    let (tag, role) = generated_type(prefix)?;
+    let kind = MetadataKind::from_xml_tag(tag).ok()?;
+    let category = locale.text(&format!("platform-kind-{}", kind.as_str()));
+    let category = if let Some(role) = role {
+        locale.format(
+            "platform-presentation-type-category",
+            &[
+                ("category", LocalizationValue::Text(&category)),
+                (
+                    "role",
+                    LocalizationValue::Text(&locale.text(&format!("platform-type-role-{role}"))),
+                ),
+            ],
+        )
+    } else {
+        category
+    };
+    Some(format!("{category}: {name}"))
+}
+
 impl Presenter<'_> {
     /// Collapse the XML Type wrapper only if no unknown qualifiers or children would disappear.
     pub(super) fn types(&mut self, field: &MetadataProperty) -> Option<Value> {

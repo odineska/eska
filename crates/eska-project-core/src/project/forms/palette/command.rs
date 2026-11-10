@@ -147,7 +147,7 @@ const STATUS_ALIGN: Row = Row::new("HorizontalAlign", Layout, Enum, Auto)
 
 const AUTO_COMMAND_BAR: &[Row] = &[
     IMPORTANCE,
-    Row::new("AutoFill", Main, Boolean, CHECKED).with_source(Property("Autofill")),
+    super::common::AUTO_FILL,
     Row::new("HorizontalAlign", Main, Enum, Choice("left")).with_enum_captions(HORIZONTAL_ALIGN),
 ];
 
