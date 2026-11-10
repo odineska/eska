@@ -5,6 +5,42 @@ use crate::project::{
 };
 
 #[test]
+fn picture_fields_use_values_picture_without_overriding_an_explicit_picture() {
+    use super::super::FormPicture;
+    for (picture, expected) in [
+        ("", Some("Save")),
+        (
+            "<Picture><xr:Ref>StdPicture.Write</xr:Ref></Picture>",
+            Some("Write"),
+        ),
+        ("<Picture><xr:Ref>0</xr:Ref></Picture>", None),
+    ] {
+        let xml = format!(
+            r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+          xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20">
+          <ChildItems><PictureField name="State" id="1">{picture}
+            <ValuesPicture><xr:Ref>StdPicture.Save</xr:Ref></ValuesPicture>
+          </PictureField></ChildItems></Form>"#
+        );
+        let document = parse("values-picture", xml).unwrap();
+        let form = compose(&document, &[]);
+        let view = present(&form, &[document], &[]);
+        let item = view
+            .elements
+            .iter()
+            .find(|item| item.identity == form.root.children[0].identity)
+            .unwrap();
+        let actual = match &item.picture {
+            Some(FormPicture::Standard { name }) => Some(name.as_str()),
+            None => None,
+            other => panic!("unexpected picture {other:?}"),
+        };
+        assert_eq!(actual, expected);
+        assert!(view.diagnostics.is_empty());
+    }
+}
+
+#[test]
 fn standalone_form_command_source_fills_independently_of_the_main_bar() {
     let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
         xmlns:v8="http://v8.1c.ru/8.1/data/core"

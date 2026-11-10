@@ -26,6 +26,8 @@ pub struct Picture {
     pub file_name: String,
     /// Template variants use the image alpha with the effective text color.
     pub is_template: bool,
+    /// One glyph in an atlas, in the selected variant's pixels.
+    pub glyph_size: Option<(u32, u32)>,
     pub inputs: Vec<PictureInput>,
 }
 
@@ -229,6 +231,7 @@ fn image(bytes: Vec<u8>, file_name: String) -> Result<Picture, PictureError> {
         bytes,
         file_name,
         is_template: false,
+        glyph_size: None,
         inputs: Vec::new(),
     })
 }
