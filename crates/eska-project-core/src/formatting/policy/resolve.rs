@@ -51,7 +51,7 @@ pub fn resolve(
     operation: &Patch,
 ) -> Result<Effective, Error> {
     let mut profiles: BTreeMap<String, Profile> = BTreeMap::new();
-    let mut selected = "1c";
+    let mut selected = "eska";
     for layer in layers {
         layer.config.validate()?;
         for (name, profile) in &layer.config.profiles {
