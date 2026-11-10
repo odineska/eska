@@ -126,6 +126,130 @@
       "captures": {
         "ru": "61fb9fa13393ed3b7ca93f63f2210811058eaf63c8c7157344a70a9c200387c3"
       }
+    },
+    {
+      "name": "IsolatedCaption39",
+      "file": "IsolatedCaption39.xml",
+      "fixtureSha256": "610b1f3ccce4f67d84f9af7d1b04b9ecf5fff7c3615046c7e628822748f9cf8a",
+      "canonicalSha256": "8fac0d482d8aa7a2504135417ca6c68058eea80bf5afb11c20d79d9dc872149b",
+      "frame": [
+        424,
+        281
+      ],
+      "fields": {
+        "Connect": [
+          169,
+          166,
+          233,
+          23
+        ],
+        "Address": [
+          60,
+          205,
+          234,
+          23
+        ],
+        "AgentPort": [
+          342,
+          205,
+          61,
+          23
+        ]
+      },
+      "captionLines": {
+        "Connect": 2
+      },
+      "captures": {
+        "ru": "8fd4ccdf929433469011db1f948380a02f936d12eac32a2f5d6463f56e10611d"
+      },
+      "reflow": {
+        "cases": [
+          "IsolatedCaption39",
+          "IsolatedCaption34",
+          "IsolatedCaption52",
+          "IsolatedCaption39"
+        ],
+        "selected": "Connect",
+        "edit": {
+          "from": "<BackColor>#DCF4CF</BackColor>",
+          "to": "<BackColor>#DCF4D0</BackColor>"
+        }
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "IsolatedCaption34",
+      "file": "IsolatedCaption34.xml",
+      "fixtureSha256": "097a945eee4da4c0ca794e00d67fa1aa05cdb139e89d8cfb3a86dab5a860933b",
+      "canonicalSha256": "ada4713594ae111a599a345157058b09ac5c5a9fc710e3760e0e3f395a82abc7",
+      "frame": [
+        374,
+        295
+      ],
+      "fields": {
+        "Connect": [
+          137,
+          180,
+          215,
+          23
+        ],
+        "Address": [
+          60,
+          219,
+          184,
+          23
+        ],
+        "AgentPort": [
+          292,
+          219,
+          61,
+          23
+        ]
+      },
+      "captionLines": {
+        "Connect": 2
+      },
+      "captures": {
+        "ru": "2a31145c8553b6d65d59bbc662c44bee3412baa578269cd370966fe59fff507c"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "IsolatedCaption52",
+      "file": "IsolatedCaption52.xml",
+      "fixtureSha256": "838e849b0382c7ed147a1df267f1c29deb4a04928312d1ae7cf1d14ba5c24427",
+      "canonicalSha256": "39aa729c723a61b654470339cfc92f58f0666fc21b109363991fe819ac570522",
+      "frame": [
+        554,
+        274
+      ],
+      "fields": {
+        "Connect": [
+          233,
+          166,
+          299,
+          23
+        ],
+        "Address": [
+          60,
+          198,
+          364,
+          23
+        ],
+        "AgentPort": [
+          472,
+          198,
+          61,
+          23
+        ]
+      },
+      "captionLines": {
+        "Connect": 1
+      },
+      "captures": {
+        "ru": "93c51ef5faf8a57b03fd3d1f6bcbe8b3c2759a26ae413234574896d96a8b7c33"
+      },
+      "compatibility": "Version8_3_27"
     }
   ],
   "frameCoordinates": "Outer black outline, including its one-pixel stroke and excluding the shadow."

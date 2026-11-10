@@ -1,0 +1,1033 @@
+{
+  "platform": {
+    "os": "linux",
+    "architecture": "arm64",
+    "version": "8.3.27.2342",
+    "compatibility": "Version8_3_27",
+    "interface": "Taxi",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "scope": "Геометрия трёх полей и предпочитаемые размеры рамки при одинаковой области в Конфигураторе и установленном Explorer.",
+  "verifiedFixture": "tests/fixtures/forms/native-page-captions",
+  "backendVersion": "0.27.1",
+  "baselineVsixSha256": "1f0648ff0c701fffa828ff1853cf513b0b4f72e8b13440c114bf73a1ee7ef7ca",
+  "candidateVsixSha256": "cd4aceeb352de8c7926ae698b2305a30b87004f31472dcb7a86b5bc7b3cd864b",
+  "candidateStand": "form-isolated-caption-check-6DQqFiaj",
+  "isolatedCaptions": [
+    {
+      "locale": "ru",
+      "stand": "form-native-admin-spacing-ktgyjabb",
+      "cases": [
+        {
+          "case": "IsolatedAt31",
+          "frame": [
+            344,
+            346
+          ],
+          "fields": {
+            "Connect": [
+              137,
+              199,
+              185,
+              23
+            ],
+            "Address": [
+              60,
+              238,
+              263,
+              23
+            ],
+            "AgentPort": [
+              60,
+              270,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "90d46fc11204d51951f61e55a31b673b549448eef6541b46ff08819a9477570a"
+        },
+        {
+          "case": "IsolatedAt32",
+          "frame": [
+            354,
+            295
+          ],
+          "fields": {
+            "Connect": [
+              137,
+              180,
+              195,
+              23
+            ],
+            "Address": [
+              60,
+              219,
+              164,
+              23
+            ],
+            "AgentPort": [
+              272,
+              219,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "a910bbd83f9cf03771e677f350fa313d5f28365e6721230241825b40a4d193ee"
+        },
+        {
+          "case": "IsolatedAt34",
+          "frame": [
+            374,
+            295
+          ],
+          "fields": {
+            "Connect": [
+              137,
+              180,
+              215,
+              23
+            ],
+            "Address": [
+              60,
+              219,
+              184,
+              23
+            ],
+            "AgentPort": [
+              292,
+              219,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "2a31145c8553b6d65d59bbc662c44bee3412baa578269cd370966fe59fff507c"
+        },
+        {
+          "case": "IsolatedAt36",
+          "frame": [
+            394,
+            288
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              173,
+              203,
+              23
+            ],
+            "Address": [
+              60,
+              212,
+              204,
+              23
+            ],
+            "AgentPort": [
+              312,
+              212,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "1b4a1df873c0ed74ae86a2e5e127d0553937f29ebaf1ef9c77c3d667bdf1a8e3"
+        },
+        {
+          "case": "IsolatedAt38",
+          "frame": [
+            414,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              166,
+              223,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              224,
+              23
+            ],
+            "AgentPort": [
+              332,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "bf306915f028c12204973ca5e7031e6955a15b17bdcfb9bccde70e7d4227b8fb"
+        },
+        {
+          "case": "IsolatedAt39",
+          "frame": [
+            424,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              166,
+              233,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              234,
+              23
+            ],
+            "AgentPort": [
+              342,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "8fd4ccdf929433469011db1f948380a02f936d12eac32a2f5d6463f56e10611d"
+        },
+        {
+          "case": "IsolatedAt44",
+          "frame": [
+            474,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              166,
+              283,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              284,
+              23
+            ],
+            "AgentPort": [
+              392,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "a5e96de476895f63470d13ae2f88352472da4a0ca92b28c052f20942792b8d9d"
+        },
+        {
+          "case": "IsolatedAt45",
+          "frame": [
+            484,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              170,
+              166,
+              292,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              294,
+              23
+            ],
+            "AgentPort": [
+              402,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "cabfc9549f77112076ae077d298def0322ac0182d28747d95eac7b5ba1d64a90"
+        },
+        {
+          "case": "IsolatedAt46",
+          "frame": [
+            494,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              173,
+              166,
+              299,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              304,
+              23
+            ],
+            "AgentPort": [
+              412,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "133e2976c623686b3f6c9828a0879ff91f975ecdba64d44dd9f8a367a73d442c"
+        },
+        {
+          "case": "IsolatedAt50",
+          "frame": [
+            534,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              187,
+              166,
+              325,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              344,
+              23
+            ],
+            "AgentPort": [
+              452,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "a770e534a79b23ea7f2b85ce9f00e4f563c3afe90745704fa585581499fc8dea"
+        },
+        {
+          "case": "IsolatedAt51",
+          "frame": [
+            544,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              190,
+              166,
+              332,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              354,
+              23
+            ],
+            "AgentPort": [
+              462,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "220daefb6475a2515ed823f40a90987f5dbd899d6fddc9683404693941e77e50"
+        },
+        {
+          "case": "IsolatedAt52",
+          "frame": [
+            554,
+            274
+          ],
+          "fields": {
+            "Connect": [
+              233,
+              166,
+              299,
+              23
+            ],
+            "Address": [
+              60,
+              198,
+              364,
+              23
+            ],
+            "AgentPort": [
+              472,
+              198,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "93c51ef5faf8a57b03fd3d1f6bcbe8b3c2759a26ae413234574896d96a8b7c33"
+        },
+        {
+          "case": "IsolatedPeer16At34",
+          "frame": [
+            374,
+            295
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              180,
+              183,
+              23
+            ],
+            "Address": [
+              60,
+              219,
+              184,
+              23
+            ],
+            "AgentPort": [
+              292,
+              219,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "ef4a6726fcb1ef34b585a7983a4828ef9fd641a092a77240e53078d7831ad757"
+        },
+        {
+          "case": "IsolatedPeer16At39",
+          "frame": [
+            424,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              187,
+              166,
+              215,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              234,
+              23
+            ],
+            "AgentPort": [
+              342,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "88e8627f8b5a8240b0e0d3b5bd4647363474d332ac1d53814d496fa9763aa4e5"
+        },
+        {
+          "case": "IsolatedPeer36At39",
+          "frame": [
+            424,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              137,
+              166,
+              265,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              234,
+              23
+            ],
+            "AgentPort": [
+              342,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "be41e4181a0f1e184028edb88670512ecdf4bd236a2196d37a7be53af5b72d9e"
+        },
+        {
+          "case": "IsolatedPeer36At45",
+          "frame": [
+            484,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              166,
+              293,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              294,
+              23
+            ],
+            "AgentPort": [
+              402,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "4ffa2321f6e08182258123edbd97136e73e42b49cd98be87d53fba7d07f59dc9"
+        },
+        {
+          "case": "IsolatedNoChoiceAt39",
+          "frame": [
+            424,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              166,
+              234,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              234,
+              23
+            ],
+            "AgentPort": [
+              342,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "25bd24856ecc48529fe092176a0b1fa92555fbd448ebb6ef0ce09c7fa226dd8a"
+        },
+        {
+          "case": "IsolatedNoChoiceAt45",
+          "frame": [
+            484,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              177,
+              166,
+              286,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              294,
+              23
+            ],
+            "AgentPort": [
+              402,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "bbbf2c6df1ae814403041bc6e0945f782ff4f2abbeac7cabf393f330de59a862"
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "stand": "form-native-admin-spacing-1edn_0l1",
+      "cases": [
+        {
+          "case": "ControlAt33",
+          "frame": [
+            364,
+            295
+          ],
+          "fields": {
+            "Connect": [
+              137,
+              180,
+              205,
+              23
+            ],
+            "Address": [
+              60,
+              219,
+              174,
+              23
+            ],
+            "AgentPort": [
+              282,
+              219,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "e1f6c963a6f56a31471d8383fd87396fc6a3ad7871dd68c9f029fb59ff63192e"
+        },
+        {
+          "case": "ControlAt35",
+          "frame": [
+            384,
+            295
+          ],
+          "fields": {
+            "Connect": [
+              137,
+              180,
+              225,
+              23
+            ],
+            "Address": [
+              60,
+              219,
+              194,
+              23
+            ],
+            "AgentPort": [
+              302,
+              219,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "c00af81f7faadfea018273e48eb837c8754eb195a5f97a7e985aab7906d5e87f"
+        },
+        {
+          "case": "ControlAt37",
+          "frame": [
+            404,
+            288
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              173,
+              213,
+              23
+            ],
+            "Address": [
+              60,
+              212,
+              214,
+              23
+            ],
+            "AgentPort": [
+              322,
+              212,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "71132de95d40831f7199efbc7bb01bf45215a29d0ac415f6de3819cb6fe19ceb"
+        },
+        {
+          "case": "ControlAt40",
+          "frame": [
+            434,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              166,
+              243,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              244,
+              23
+            ],
+            "AgentPort": [
+              352,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "804354539be18327c6a970c06ec93c297035635b117147fd7519f53b7a751adb"
+        },
+        {
+          "case": "ControlAt41",
+          "frame": [
+            444,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              166,
+              253,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              254,
+              23
+            ],
+            "AgentPort": [
+              362,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "f2c1e2ac5df7dc11f79c68fe3fdbe10f850da3afa70300ed68e4019be4c38938"
+        },
+        {
+          "case": "ControlAt47",
+          "frame": [
+            504,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              177,
+              166,
+              305,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              314,
+              23
+            ],
+            "AgentPort": [
+              422,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "2767235583ca86710f729c48213d017a9ee44fa464d442dbc58ba010bc1956e2"
+        },
+        {
+          "case": "ControlAt49",
+          "frame": [
+            524,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              183,
+              166,
+              319,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              334,
+              23
+            ],
+            "AgentPort": [
+              442,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "65ba9b5e496b733fb3deaaa208af8b434d5d573843ccffed5a6631f593ff9fa4"
+        },
+        {
+          "case": "ControlPeer16At32",
+          "frame": [
+            354,
+            295
+          ],
+          "fields": {
+            "Connect": [
+              169,
+              180,
+              163,
+              23
+            ],
+            "Address": [
+              60,
+              219,
+              164,
+              23
+            ],
+            "AgentPort": [
+              272,
+              219,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "979c538c4ef96acc6e17b4673813ddfb47c9c82a30d9b76f3434661b9bc215ce"
+        },
+        {
+          "case": "ControlPeer24At43",
+          "frame": [
+            464,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              170,
+              166,
+              272,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              274,
+              23
+            ],
+            "AgentPort": [
+              382,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "e195a2ad5eb9ea4d95d80723a2aa5112741bd393af4bb6aa37c14add768cc7c3"
+        },
+        {
+          "case": "ControlNoChoiceAt33",
+          "frame": [
+            364,
+            295
+          ],
+          "fields": {
+            "Connect": [
+              137,
+              180,
+              206,
+              23
+            ],
+            "Address": [
+              60,
+              219,
+              174,
+              23
+            ],
+            "AgentPort": [
+              282,
+              219,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "94ba78841be4d968a724e3ab914ad9ccc72ad8bed533dad90d91af59c4b72786"
+        },
+        {
+          "case": "ControlNoChoiceAt50",
+          "frame": [
+            534,
+            274
+          ],
+          "fields": {
+            "Connect": [
+              233,
+              166,
+              280,
+              23
+            ],
+            "Address": [
+              60,
+              198,
+              344,
+              23
+            ],
+            "AgentPort": [
+              452,
+              198,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "a875c720c966289e8bad5066bcdb883f10078a57e794737393c9aa3d115f799b"
+        },
+        {
+          "case": "ControlNewCaptionAt34",
+          "frame": [
+            374,
+            295
+          ],
+          "fields": {
+            "Connect": [
+              148,
+              180,
+              204,
+              23
+            ],
+            "Address": [
+              60,
+              219,
+              184,
+              23
+            ],
+            "AgentPort": [
+              292,
+              219,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "255c53497eb6616b3a1a03b670bae72f9ab0c940b53b1d921ae3659d5854146c"
+        },
+        {
+          "case": "ControlNewCaptionAt39",
+          "frame": [
+            424,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              187,
+              166,
+              215,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              234,
+              23
+            ],
+            "AgentPort": [
+              342,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "cc9999b31fbe04855ac09b72b52f59410e2ed7315f83adba4ea1659c94be02d8"
+        },
+        {
+          "case": "ControlNewCaptionAt45",
+          "frame": [
+            484,
+            281
+          ],
+          "fields": {
+            "Connect": [
+              187,
+              166,
+              275,
+              23
+            ],
+            "Address": [
+              60,
+              205,
+              294,
+              23
+            ],
+            "AgentPort": [
+              402,
+              205,
+              61,
+              23
+            ]
+          },
+          "nativeSha256": "4af6df4f012b3ebe46d3991b1e73cd93305de4464ebaec7e0c1b2c84f6b22a7b"
+        }
+      ]
+    }
+  ],
+  "conditionalRows": {
+    "stand": "form-native-admin-spacing-95one_7d",
+    "locale": "ru",
+    "cases": 34,
+    "placementMatches": {
+      "baseline": 20,
+      "candidate": 20
+    },
+    "preferredFrameMatches": {
+      "baseline": 17,
+      "candidate": 20
+    },
+    "noPeerMatches": 5,
+    "forcedStand": "form-native-admin-spacing-wpj7xerr",
+    "forcedCases": [
+      {
+        "case": "ForcedBase39",
+        "frame": [
+          424,
+          281
+        ],
+        "placement": "row",
+        "nativeSha256": "466bcaf65b237f23fb0a5dc209cd3b9149f54a86744063ad589f44526fdfea29"
+      },
+      {
+        "case": "Base34",
+        "frame": [
+          374,
+          327
+        ],
+        "placement": "stack",
+        "nativeSha256": "c2c7c2f69938c18be9140f82d98956ed3f6982d9d3914cfabd4544c61ac54d33"
+      },
+      {
+        "case": "Base35",
+        "frame": [
+          384,
+          295
+        ],
+        "placement": "row",
+        "nativeSha256": "df766e82f7b6bdb630559c504d5d199d36b7ed5140624074294b37fbf8747ca8"
+      },
+      {
+        "case": "Base36",
+        "frame": [
+          394,
+          320
+        ],
+        "placement": "stack",
+        "nativeSha256": "d0905bbcb7b20affa7d9c95f097595ae7559030446b67ca47b373ce54f508d3a"
+      },
+      {
+        "case": "ForcedBase36",
+        "frame": [
+          394,
+          288
+        ],
+        "placement": "row",
+        "nativeSha256": "66641e03eb03ccfc8bf93beb41f8af052bdfe44e234206afd1a0ff83eb708975"
+      },
+      {
+        "case": "ShortTitle35",
+        "frame": [
+          384,
+          320
+        ],
+        "placement": "stack",
+        "nativeSha256": "38aca8b84890069c6e7d881c619cdf962941f4229b2967ecbe00b227cdbe0ca8"
+      },
+      {
+        "case": "ForcedShortTitle35",
+        "frame": [
+          384,
+          325
+        ],
+        "placement": "row",
+        "nativeSha256": "63080c4bdec97eae46d429a66f1528429f69701e51a251edcc05f02e36f677b9"
+      }
+    ],
+    "remaining": "Перенос ряда при сквозном выравнивании требует отдельного расчёта. Переход к принудительной горизонтальной группировке позволяет разместить поля при 424 px."
+  },
+  "pageCaptionsSuite": {
+    "fixtures": 6,
+    "verifiedPreferredFrame": [
+      374,
+      295
+    ],
+    "locales": [
+      {
+        "locale": "ru",
+        "states": 28,
+        "dirtyWidthTransitions": [
+          "main-dirty-width",
+          "detached-dirty-width"
+        ]
+      },
+      {
+        "locale": "en",
+        "states": 28,
+        "dirtyWidthTransitions": [
+          "main-dirty-width",
+          "detached-dirty-width"
+        ]
+      }
+    ]
+  }
+}
