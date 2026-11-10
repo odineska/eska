@@ -4,6 +4,7 @@ mod button;
 mod checkbox;
 mod command;
 mod common;
+mod display_field;
 mod input_field;
 mod root_form;
 mod table;
@@ -214,8 +215,13 @@ impl FormPreview {
             Some(ElementKind::InputField) => presentation()
                 .and_then(|item| input_field::Context::new(item, element))
                 .map(|context| self.palette_rows(element, input_field::definitions(context))),
+            Some(ElementKind::LabelField | ElementKind::PictureField) => presentation()
+                .map(|item| self.palette_rows(element, display_field::definitions(item, element))),
+            Some(ElementKind::ContextMenu) => {
+                Some(self.palette_rows(element, CONTEXT_MENU.iter().map(|row| (row, true))))
+            }
             Some(ElementKind::Button) => presentation()
-                .and_then(|item| button::Context::new(&self.form, item, element))
+                .and_then(|item| button::Context::new(self, item, element))
                 .map(|context| self.palette_rows(element, button::definitions(context))),
             Some(ElementKind::CheckBoxField) => presentation()
                 .and_then(|item| checkbox::Context::new(item, element))
@@ -241,7 +247,7 @@ impl FormPreview {
             ) => presentation()
                 .and_then(|item| command::addition_definitions(item, element))
                 .map(|definitions| self.palette_rows(element, definitions)),
-            _ => ordinary_vertical_group(element)
+            _ => ordinary_group(element)
                 .then(|| self.palette_rows(element, USUAL_GROUP.iter().map(|row| (row, true)))),
         };
         Some(PropertyPalette { rows })
@@ -371,13 +377,13 @@ fn event_entry(element: &EffectiveElement, name: &str) -> Option<(usize, usize, 
         })
 }
 
-fn ordinary_vertical_group(element: &EffectiveElement) -> bool {
-    // This catalog was captured for an ordinary vertical group. Specialized
-    // behavior can introduce other properties and change their availability.
+fn ordinary_group(element: &EffectiveElement) -> bool {
+    // Orientation changes layout, not the ordinary group's property catalog.
     element.kind == Some(ElementKind::UsualGroup)
         && matches!(element.scalar("Behavior"), None | Some("Auto" | "Usual"))
-        && element.scalar("Group") == Some("Vertical")
 }
+
+const CONTEXT_MENU: &[PaletteDefinition] = &[common::IMPORTANCE, common::AUTO_FILL];
 
 fn unbound_data_path(element: &EffectiveElement) -> bool {
     element

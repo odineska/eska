@@ -164,7 +164,14 @@ fn field<'a>(
             }),
         ),
         MetadataValue::QualifiedText { key, .. } => {
-            let builtin = translations(labels.ru.type_caption(key), labels.en.type_caption(key));
+            let builtin = translations(
+                labels.ru.type_caption(key).or_else(|| {
+                    super::property_presentation::qualified_type_caption(&labels.ru, key)
+                }),
+                labels.en.type_caption(key).or_else(|| {
+                    super::property_presentation::qualified_type_caption(&labels.en, key)
+                }),
+            );
             // User-defined XDTO names are meaningful; their arbitrary XML prefixes are not labels.
             builtin.or_else(|| {
                 matches!(
@@ -205,11 +212,27 @@ fn qualifier(
     text: &str,
 ) -> Value {
     let mut qualifier = json!({"key":key,"value":text});
+    if key.namespace.is_none() && matches!(key.name.as_str(), "name" | "width")
+        || key.namespace.as_deref() == Some("http://www.w3.org/2001/XMLSchema-instance")
+            && matches!(key.name.as_str(), "type" | "nil")
+    {
+        qualifier["keyCaption"] = labels.caption(&format!("form-inspector-qualifier-{}", key.name));
+        if key.name == "nil" && super::property_types::boolean_literal(text) {
+            qualifier["scalarType"] = json!("boolean");
+        }
+    }
     if let Some(caption) = translations(
         labels.ru.qualifier_caption(&field.key, key, text),
         labels.en.qualifier_caption(&field.key, key, text),
     ) {
         qualifier["caption"] = caption;
+    }
+    if field.key.namespace.as_deref() == Some("http://v8.1c.ru/8.3/xcf/logform")
+        && field.key.name == "Event"
+        && key.namespace.is_none()
+        && key.name == "callType"
+    {
+        qualifier["keyCaption"] = labels.caption("form-inspector-qualifier-callType");
     }
     if key.namespace.is_none() && super::property_types::appearance_field(field, "Font") {
         let name = key.name.as_str();

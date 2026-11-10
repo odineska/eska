@@ -1,10 +1,11 @@
 //! Designer 8.3.27 checkbox palettes for form fields and direct Boolean table columns.
 
+use super::common::{CHECKED, OPEN, TRISTATE, UNCHECKED, ZERO};
 use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
     unbound_data_path,
 };
-use crate::project::forms::{EffectiveElement, ElementKind, ElementPresentation, FieldValueKind};
+use crate::project::forms::{EffectiveElement, ElementPresentation, FieldValueKind};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub(super) enum Context {
@@ -17,24 +18,17 @@ pub(super) enum Context {
 
 impl Context {
     pub(super) fn new(view: &ElementPresentation, element: &EffectiveElement) -> Option<Self> {
-        match (view.parent_kind, view.value_type.kind) {
-            (Some(ElementKind::Table), FieldValueKind::Boolean) => Some(Self::Column),
-            (Some(ElementKind::Form), FieldValueKind::Boolean) => {
-                match element.scalar("CheckBoxType") {
-                    None | Some("Auto" | "CheckBox") => Some(Self::Checkbox),
-                    Some("Tumbler") => Some(Self::Tumbler {
-                        equal_width: !matches!(
-                            element.scalar("EqualItemsWidth"),
-                            Some("false" | "0")
-                        ),
-                    }),
-                    Some("Switcher") => Some(Self::Switcher),
-                    _ => None,
-                }
-            }
-            (Some(ElementKind::Form), FieldValueKind::Unknown) if unbound_data_path(element) => {
-                Some(Self::Unbound)
-            }
+        match (view.in_table, view.value_type.kind) {
+            (true, FieldValueKind::Boolean) => Some(Self::Column),
+            (false, FieldValueKind::Boolean) => match element.scalar("CheckBoxType") {
+                None | Some("Auto" | "CheckBox") => Some(Self::Checkbox),
+                Some("Tumbler") => Some(Self::Tumbler {
+                    equal_width: !matches!(element.scalar("EqualItemsWidth"), Some("false" | "0")),
+                }),
+                Some("Switcher") => Some(Self::Switcher),
+                _ => None,
+            },
+            (false, FieldValueKind::Unknown) if unbound_data_path(element) => Some(Self::Unbound),
             _ => None,
         }
     }
@@ -94,21 +88,15 @@ const UNBOUND_TYPE: PaletteDefinition = PaletteDefinition::new(
 .with_source(SettingSource::Unmapped);
 
 const CHECKBOX: &[PaletteDefinition] = {
-    use PaletteCategory::{Appearance, Events, Layout, Main, Usage};
+    use PaletteCategory::{Appearance, Layout, Main, Usage};
     use PaletteDefinition as Row;
     use PaletteEditor::{
-        Binding, Boolean, Color, Dialog, Enum, Event, Font, Localized, Number, Picture, Shortcut,
-        Text,
+        Binding, Boolean, Color, Dialog, Enum, Font, Localized, Number, Picture, Shortcut, Text,
     };
     use PlatformPropertyValue::{Auto, Choice, Empty, Unknown};
     use SettingSource::{Attribute, Property};
 
-    const CHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(true);
-    const UNCHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(false);
-    const ZERO: PlatformPropertyValue = PlatformPropertyValue::Number(0);
-    const OPEN: PlatformPropertyValue = PlatformPropertyValue::Dialog;
     const DEFAULT: PlatformPropertyValue = Choice("default");
-    const TRISTATE: &[(&str, &str)] = &[("true", "yes"), ("false", "no")];
     &[
         Row::new("Name", Main, Text, Unknown).with_source(SettingSource::Name),
         Row::new("Title", Main, Localized, Empty),
@@ -173,6 +161,6 @@ const CHECKBOX: &[PaletteDefinition] = {
         Row::new("EqualItemsWidth", Layout, Enum, DEFAULT).with_enum_captions(TRISTATE),
         Row::new("ItemWidth", Layout, Number, ZERO),
         Row::new("TitleHeight", Layout, Number, ZERO),
-        Row::new("OnChange", Events, Event, Empty).with_source(SettingSource::Event),
+        super::common::event("OnChange"),
     ]
 };

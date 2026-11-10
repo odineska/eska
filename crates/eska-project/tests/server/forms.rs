@@ -3,6 +3,8 @@ use eska_project_core::project::metadata_edit::snapshot;
 
 #[path = "forms_command_palette.rs"]
 mod command_palette;
+#[path = "forms_display_palette.rs"]
+mod display_palette;
 #[path = "forms_native_palette.rs"]
 mod native_palette;
 #[path = "forms_reference_data.rs"]
@@ -1047,7 +1049,13 @@ fn form_button_palette_distinguishes_a_missing_type_by_parent_kind() {
         ),
     );
     let updated = update_input(&mut client, &context, &opened, 2, &parameter);
-    assert!(inspect(&mut client, &updated, 0)["rows"].is_null());
+    let parameterized = inspect(&mut client, &updated, 0);
+    for id in ["Data", "Parameter"] {
+        assert_eq!(
+            input_palette_value(&parameterized, id)["default"]["kind"],
+            "empty"
+        );
+    }
     assert_eq!(
         inspect(&mut client, &updated, 1)["rows"]
             .as_array()
@@ -1055,6 +1063,12 @@ fn form_button_palette_distinguishes_a_missing_type_by_parent_kind() {
             .len(),
         35
     );
+    let empty = parameter.replace(
+        "<ParameterType><v8:Type>xs:string</v8:Type></ParameterType>",
+        "<ParameterType/>",
+    );
+    let updated = update_input(&mut client, &context, &updated, 3, &empty);
+    assert_eq!(inspect(&mut client, &updated, 0)["rows"], ordinary["rows"]);
     client.finish();
 }
 

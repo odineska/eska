@@ -1,5 +1,7 @@
 //! Designer 8.3.27 root palettes for common and non-hierarchical catalog forms.
 
+use super::common::event;
+use super::common::{CHECKED, OPEN, ZERO};
 use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
 };
@@ -12,6 +14,7 @@ use crate::project::{
 pub(super) enum Context {
     Ordinary,
     CatalogObject,
+    DocumentObject,
 }
 
 impl Context {
@@ -41,6 +44,15 @@ impl Context {
                     presentation::metadata_property(catalog, "Hierarchical", &preview.resources)?;
                 (appearance::text(&hierarchy.value) == Some("false")).then_some(Self::CatalogObject)
             }
+            (MetadataKind::Document, Some(attribute)) => {
+                let field_type = presentation::definition_type(attribute);
+                let [kind] = field_type.types.as_slice() else {
+                    return None;
+                };
+                (kind.namespace.as_deref() == Some(references::CONFIG)
+                    && kind.name.strip_prefix("DocumentObject.") == Some(owner.name.as_str()))
+                .then_some(Self::DocumentObject)
+            }
             _ => None,
         }
     }
@@ -54,27 +66,18 @@ pub(super) fn definitions(
     FORM.iter()
         .filter(move |definition| match definition.id {
             "SettingsStorage" => settings_storage,
-            "UseForFoldersAndItems"
-            | "OnReadAtServer"
+            "UseForFoldersAndItems" => context == Context::CatalogObject,
+            "AutoTime" | "UsePostingMode" | "RepostOnWrite" => context == Context::DocumentObject,
+            "OnReadAtServer"
             | "BeforeWrite"
             | "BeforeWriteAtServer"
             | "OnWriteAtServer"
             | "AfterWriteAtServer"
             | "AfterWrite"
-            | "ValueChoice" => context == Context::CatalogObject,
+            | "ValueChoice" => context != Context::Ordinary,
             _ => true,
         })
         .map(|definition| (definition, true))
-}
-
-const fn event(id: &'static str) -> PaletteDefinition {
-    PaletteDefinition::new(
-        id,
-        PaletteCategory::Events,
-        PaletteEditor::Event,
-        PlatformPropertyValue::Empty,
-    )
-    .with_source(SettingSource::Event)
 }
 
 const FORM: &[PaletteDefinition] = {
@@ -84,9 +87,6 @@ const FORM: &[PaletteDefinition] = {
     use PlatformPropertyValue::{Auto, Choice, Empty};
     use SettingSource::Property;
 
-    const CHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(true);
-    const ZERO: PlatformPropertyValue = PlatformPropertyValue::Number(0);
-    const OPEN: PlatformPropertyValue = PlatformPropertyValue::Dialog;
     const DO_NOT_USE: PlatformPropertyValue = Choice("doNotUse");
     &[
         Row::new("Title", Main, Localized, Empty),
@@ -119,6 +119,9 @@ const FORM: &[PaletteDefinition] = {
         Row::new("ShowCloseButton", Usage, Boolean, CHECKED),
         Row::new("ConversationsRepresentation", Usage, Enum, Auto),
         Row::new("CollapseItemsByImportance", Usage, Enum, Auto),
+        Row::new("AutoTime", Usage, Enum, Choice("currentOrLast")),
+        Row::new("UsePostingMode", Usage, Enum, Choice("automaticPosting")),
+        Row::new("RepostOnWrite", Usage, Boolean, CHECKED),
         Row::new("UseForFoldersAndItems", Usage, Enum, Choice("forItem"))
             .with_enum_captions(&[("Items", "forItem")]),
         Row::new("AutoSaveDataInSettings", Usage, Enum, DO_NOT_USE)

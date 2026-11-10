@@ -1,5 +1,6 @@
 //! Designer 8.3.27 palettes for tables and column groups.
 
+use super::common::event;
 use super::{
     PaletteCategory, PaletteDefinition as Row, PaletteEditor, PlatformPropertyValue, SettingSource,
     common::{
@@ -101,9 +102,9 @@ pub(super) fn column_group_definitions(
     }))
 }
 
-use PaletteCategory::{Appearance, Events, Layout, Main, Usage};
+use PaletteCategory::{Appearance, Layout, Main, Usage};
 use PaletteEditor::{
-    Binding, Boolean, Color, Dialog, Enum, Event, Font, Number, Picture, Reference, Shortcut,
+    Binding, Boolean, Color, Dialog, Enum, Font, Number, Picture, Reference, Shortcut,
 };
 use PlatformPropertyValue::{Auto, AutoStretch, Choice, Empty, Unknown};
 use SettingSource::Property;
@@ -111,10 +112,6 @@ use SettingSource::Property;
 const ONE: PlatformPropertyValue = PlatformPropertyValue::Number(1);
 const DEFAULT: PlatformPropertyValue = Choice("default");
 const HEIGHT: Row = Row::new("Height", Layout, Number, ZERO);
-
-const fn event(id: &'static str) -> Row {
-    Row::new(id, Events, Event, Empty).with_source(SettingSource::Event)
-}
 
 const TABLE: &[Row] = &[
     NAME,

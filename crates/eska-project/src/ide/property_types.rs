@@ -117,50 +117,24 @@ fn is_boolean(
 ) -> bool {
     use MetadataKind as K;
     let namespace = key.namespace.as_deref();
-    if path.is_empty() && namespace == Some(FORM) && owner == K::Form {
-        return matches!(
-            key.name.as_str(),
-            "Visible"
-                | "Enabled"
-                | "ReadOnly"
-                | "EnableContentChange"
-                | "ShowTitle"
-                | "AutoTitle"
-                | "Customizable"
-                | "AutoFillCheck"
-                | "AutoURL"
-                | "ShowCloseButton"
-                | "SaveWindowSettings"
-                | "United"
-                | "HorizontalStretch"
-                | "VerticalStretch"
-                | "AutoMaxWidth"
-                | "AutoMaxHeight"
-                | "DefaultItem"
-                | "DefaultButton"
-                | "Check"
-                | "CommandUniqueness"
-                | "AutoCellHeight"
-                | "CellHyperlink"
-                | "ListChoiceMode"
-                | "ChooseType"
-                | "TextEdit"
-                | "Wrap"
-                | "ShowInHeader"
-                | "ShowInFooter"
-                | "ExtendedEditMultipleValues"
-                | "AllowInputEmptyMultipleValues"
-                | "AllowMultipleValuesDuplicates"
-                | "MultiLine"
-                | "PasswordMode"
-                | "AutoMarkIncomplete"
-                | "MarkIncomplete"
-                | "MainAttribute"
-                | "Collapsed"
-                | "Autofill"
-                | "Header"
-                | "Footer"
-        );
+    if namespace == Some(FORM) && owner == K::Form {
+        return FORM_BOOLEAN_PROPERTIES.contains(&key.name.as_str());
+    }
+    if owner == K::Form
+        && namespace == Some(READABLE)
+        && matches!(
+            (root.name.as_str(), key.name.as_str()),
+            (
+                "Picture"
+                    | "ValuesPicture"
+                    | "HeaderPicture"
+                    | "FooterPicture"
+                    | "ChoiceButtonPicture",
+                "LoadTransparent"
+            ) | ("UserVisible", "Common")
+        )
+    {
+        return true;
     }
     if path.is_empty() && namespace == Some(MD) {
         return BOOLEAN_PROPERTIES.contains(&key.name.as_str())
@@ -212,3 +186,55 @@ fn is_boolean(
         _ => false,
     }
 }
+
+/// Boolean form settings also appear inside auxiliary records and data attributes.
+const FORM_BOOLEAN_PROPERTIES: &[&str] = &[
+    "Visible",
+    "Enabled",
+    "ReadOnly",
+    "EnableContentChange",
+    "ShowTitle",
+    "AutoTitle",
+    "Customizable",
+    "AutoFillCheck",
+    "AutoURL",
+    "ShowCloseButton",
+    "SaveWindowSettings",
+    "United",
+    "HorizontalStretch",
+    "VerticalStretch",
+    "AutoMaxWidth",
+    "AutoMaxHeight",
+    "DefaultItem",
+    "DefaultButton",
+    "Check",
+    "CommandUniqueness",
+    "AutoCellHeight",
+    "CellHyperlink",
+    "ListChoiceMode",
+    "ChooseType",
+    "TextEdit",
+    "Wrap",
+    "ShowInHeader",
+    "ShowInFooter",
+    "ExtendedEditMultipleValues",
+    "AllowInputEmptyMultipleValues",
+    "AllowMultipleValuesDuplicates",
+    "MultiLine",
+    "PasswordMode",
+    "AutoMarkIncomplete",
+    "MarkIncomplete",
+    "MainAttribute",
+    "SavedData",
+    "DefaultVisible",
+    "RepostOnWrite",
+    "AutoInsertNewRow",
+    "EnableStartDrag",
+    "EnableDrag",
+    "Zoomable",
+    "Hyperlink",
+    "Collapsed",
+    "Autofill",
+    "Header",
+    "Footer",
+];

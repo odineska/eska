@@ -43,7 +43,7 @@ pub(super) fn dependencies(object: &ParsedObject) -> impl Iterator<Item = Object
 
 pub(super) fn accepts(command: &ParsedObject, parameter: &str, resources: &[FormResource]) -> bool {
     let Some(property) = metadata_property(command, PARAMETER, resources)
-        .filter(|property| members(&property.value).next().is_some())
+        .filter(|property| has_parameter(&property.value))
     else {
         return command.metadata.kind() == MetadataKind::Command;
     };
@@ -51,6 +51,10 @@ pub(super) fn accepts(command: &ParsedObject, parameter: &str, resources: &[Form
         let (_, definition) = effective_metadata(id, resources)?;
         metadata_property(definition, "Type", resources).map(|property| &property.value)
     })
+}
+
+pub(super) fn has_parameter(value: &MetadataValue) -> bool {
+    members(value).next().is_some()
 }
 
 pub(super) fn matches_parameter<'a>(
