@@ -1793,3 +1793,23 @@ form-palette-value-noBorder = Нет рамки
 form-palette-value-searchStringMember = СтрокаПоиска
 form-palette-value-searchControlMember = УправлениеПоиском
 form-palette-value-viewStatusMember = СостояниеПросмотра
+
+# Form inspector captions for declared values and appearance qualifiers.
+form-inspector-qualifier-ref = Ссылка
+form-inspector-qualifier-kind = Вид шрифта
+form-inspector-qualifier-faceName = Гарнитура
+form-inspector-qualifier-height = Размер шрифта
+form-inspector-qualifier-scale = Масштаб
+form-inspector-qualifier-bold = Полужирный
+form-inspector-qualifier-italic = Курсив
+form-inspector-qualifier-underline = Подчёркивание
+form-inspector-qualifier-strikeout = Зачёркивание
+form-inspector-system-font = Системный шрифт
+form-inspector-web-color = Цвет Web
+form-inspector-system-color = Системный цвет
+form-inspector-style-item = Элемент стиля
+platform-property-form-MainAttribute = Основной реквизит
+platform-property-form-Action = Действие
+platform-property-form-ParameterType = Тип параметра
+platform-property-form-Columns = Колонки
+platform-property-form-Column = Колонка

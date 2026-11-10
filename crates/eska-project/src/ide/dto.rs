@@ -27,6 +27,9 @@ impl Labels {
             en: Localizer::try_new(Locale::EnUs)?,
         })
     }
+    pub(super) fn caption(&self, key: &str) -> Value {
+        json!({"ru-RU":self.ru.text(key),"en-US":self.en.text(key)})
+    }
     /// Project one node without serializing its potentially large children list.
     pub fn node(&self, value: &TreeNode) -> Value {
         let label = match &value.label {
@@ -182,16 +185,7 @@ fn field<'a>(
     let qualifiers: Vec<_> = value
         .qualifiers
         .iter()
-        .map(|(key, text)| {
-            let mut qualifier = json!({"key":key,"value":text});
-            if let Some(caption) = translations(
-                labels.ru.qualifier_caption(&value.key, key, text),
-                labels.en.qualifier_caption(&value.key, key, text),
-            ) {
-                qualifier["caption"] = caption;
-            }
-            qualifier
-        })
+        .map(|(key, text)| qualifier(labels, value, key, text))
         .collect();
     let mut result = json!({"key":value.key,"qualifiers":qualifiers,"value":content});
     let caption_owner = path.is_empty().then_some(owner);
@@ -204,8 +198,44 @@ fn field<'a>(
     result
 }
 
+fn qualifier(
+    labels: &Labels,
+    field: &MetadataProperty,
+    key: &eska_project_core::project::metadata_model::PropertyKey,
+    text: &str,
+) -> Value {
+    let mut qualifier = json!({"key":key,"value":text});
+    if let Some(caption) = translations(
+        labels.ru.qualifier_caption(&field.key, key, text),
+        labels.en.qualifier_caption(&field.key, key, text),
+    ) {
+        qualifier["caption"] = caption;
+    }
+    if key.namespace.is_none() && super::property_types::appearance_field(field, "Font") {
+        let name = key.name.as_str();
+        let flag = matches!(name, "bold" | "italic" | "underline" | "strikeout");
+        if flag || matches!(name, "ref" | "kind" | "faceName" | "height" | "scale") {
+            qualifier["keyCaption"] = labels.caption(&format!("form-inspector-qualifier-{name}"));
+        }
+        if name == "kind" {
+            let family = match text {
+                "StyleItem" => Some("form-inspector-style-item"),
+                "WindowsFont" => Some("form-inspector-system-font"),
+                _ => None,
+            };
+            if let Some(family) = family {
+                qualifier["caption"] = labels.caption(family);
+            }
+        }
+        if flag && super::property_types::boolean_literal(text) {
+            qualifier["scalarType"] = json!("boolean");
+        }
+    }
+    qualifier
+}
+
 /// Captions are optional additive metadata and always contain both supported locales.
-fn translations(ru: Option<String>, en: Option<String>) -> Option<Value> {
+pub(super) fn translations(ru: Option<String>, en: Option<String>) -> Option<Value> {
     Some(json!({"ru-RU":ru?, "en-US":en?}))
 }
 

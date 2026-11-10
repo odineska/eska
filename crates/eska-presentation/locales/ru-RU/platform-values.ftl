@@ -2386,3 +2386,24 @@ platform-value-StandardAttribute-Started = Стартован
 
 # Choice source field from the installed EDT MdFieldInferrer
 platform-value-StandardAttribute-Type = Тип
+
+# Resolved Designer style roles (case-insensitive XML references).
+platform-value-StyleReference-normaltextfont = Обычный шрифт текста
+platform-value-StyleReference-smalltextfont = Мелкий шрифт текста
+platform-value-StyleReference-textfont = Шрифт текста
+platform-value-StyleReference-largetextfont = Крупный шрифт текста
+platform-value-StyleReference-extralargetextfont = Очень крупный шрифт текста
+platform-value-StyleReference-fieldtextcolor = Цвет текста поля
+platform-value-StyleReference-fieldbackcolor = Цвет фона поля
+platform-value-StyleReference-formbackcolor = Цвет фона формы
+platform-value-StyleReference-formtextcolor = Цвет текста формы
+platform-value-StyleReference-specialtextcolor = Цвет специального текста
+platform-value-StyleReference-tooltipbackcolor = Цвет фона подсказки
+platform-value-StyleReference-tooltiptextcolor = Цвет текста подсказки
+platform-value-StyleReference-fieldselectionbackcolor = Цвет фона выделения поля
+platform-value-StyleReference-tablefooterbackcolor = Цвет фона подвала таблицы
+platform-value-StyleReference-importantcolor = Цвет важного
+platform-value-StyleReference-accentcolor = Цвет акцента
+platform-value-StyleReference-activitycolor = Цвет активности
+platform-value-StyleReference-navigationcolor = Цвет навигации
+platform-value-StyleReference-auxiliarynavigationcolor = Цвет вспомогательной навигации
