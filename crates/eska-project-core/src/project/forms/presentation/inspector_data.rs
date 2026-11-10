@@ -4,15 +4,16 @@ use std::collections::{HashMap, HashSet};
 
 use super::{
     EffectiveDefinition, FieldType, FieldValueKind, MetadataKind, MetadataProperty, MetadataValue,
-    ObjectId, PropertyKey, PropertySource, appearance, definition_type, effective_metadata,
-    field_type, metadata_field, metadata_property, record, references, resolve_binding,
-    single_type_target, standard_attribute, standard_type,
+    ObjectId, PresentationText, PropertyKey, PropertySource, appearance, definition_type,
+    effective_metadata, field_type, metadata_field, metadata_property, record, references,
+    resolve_binding, single_type_target, standard_attribute, standard_caption, standard_type,
 };
 use crate::project::forms::{FormPreview, MAX_FORM_ELEMENTS};
 
 #[derive(Debug)]
 pub struct InspectorDataField<'a> {
     pub path: Vec<String>,
+    pub caption: Option<PresentationText>,
     pub value_type: FieldType,
     pub type_property: Option<&'a MetadataProperty>,
     pub origin: Option<PropertySource>,
@@ -112,6 +113,7 @@ impl<'a> DataFields<'a> {
     fn push(
         &mut self,
         path: &[String],
+        caption: Option<PresentationText>,
         value_type: FieldType,
         type_property: Option<&'a MetadataProperty>,
         origin: Option<PropertySource>,
@@ -119,6 +121,7 @@ impl<'a> DataFields<'a> {
         if self.fields.len() < MAX_FORM_ELEMENTS && self.paths.insert(path.to_vec()) {
             self.fields.push(InspectorDataField {
                 path: path.to_vec(),
+                caption,
                 value_type,
                 type_property,
                 origin,
@@ -147,7 +150,7 @@ impl<'a> DataFields<'a> {
             let value_type = property
                 .map(|field| field_type(&field.value))
                 .unwrap_or_default();
-            self.push(path, value_type, property, Some(origin.clone()));
+            self.push(path, None, value_type, property, Some(origin.clone()));
             if let Some(children) = record(&column.value, "Columns") {
                 self.columns(&children.value, origin, path);
             }
@@ -176,7 +179,13 @@ impl<'a> DataFields<'a> {
                 continue;
             }
             path.push(name.to_owned());
-            self.push(path, value_type, None, None);
+            self.push(
+                path,
+                Some(standard_caption(name, owner, resources)),
+                value_type,
+                None,
+                None,
+            );
             path.pop();
         }
         for child in resources
@@ -201,6 +210,7 @@ impl<'a> DataFields<'a> {
                 let binding = metadata_field(resource, child, resources);
                 self.push(
                     path,
+                    None,
                     binding.value_type,
                     metadata_property(child, "Type", resources),
                     binding.source,
@@ -228,14 +238,16 @@ impl<'a> DataFields<'a> {
         let name = path.last().map(String::as_str).unwrap_or_default();
         let mut value_type = binding.value_type;
         let mut type_property = None;
+        let mut caption = None;
         if let Some(object) = object {
             if object.metadata.name() == name {
                 type_property = metadata_property(object, "Type", resources);
             } else if standard_attribute(name) {
                 value_type = inspector_standard_type(name, object, resources);
+                caption = binding.caption;
             }
         }
-        self.push(path, value_type, type_property, origin);
+        self.push(path, caption, value_type, type_property, origin);
     }
 }
 

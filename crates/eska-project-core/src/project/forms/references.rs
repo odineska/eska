@@ -25,11 +25,44 @@ pub struct FormReference {
     pub property: PropertyKey,
     pub slot: ReferenceSlot,
     pub target: PropertyKey,
+    #[serde(skip)]
+    element_path: Vec<(usize, usize)>,
+}
+
+impl FormReference {
+    /// Indices of record fields between the enclosing property and this reference.
+    #[must_use]
+    pub fn indices_from(&self, property_start: usize) -> Option<impl Iterator<Item = usize> + '_> {
+        let property = self
+            .element_path
+            .iter()
+            .position(|(start, _)| *start == property_start)?;
+        Some(
+            self.element_path[property + 1..]
+                .iter()
+                .map(|(_, index)| *index),
+        )
+    }
 }
 
 pub(super) fn collect(root: Node<'_, '_>) -> Vec<FormReference> {
     let mut output = Vec::new();
+    let mut ancestors: Vec<(Range<usize>, usize, usize)> = Vec::new();
     for node in root.descendants().filter(Node::is_element) {
+        let range = node.range();
+        // Count element children in the same order as MetadataValue::Record.
+        while ancestors
+            .last()
+            .is_some_and(|(parent, _, _)| parent.end <= range.start)
+        {
+            ancestors.pop();
+        }
+        let index = ancestors.last_mut().map_or(0, |(_, _, children)| {
+            let index = *children;
+            *children += 1;
+            index
+        });
+        ancestors.push((range.clone(), index, 0));
         for (slot, text) in [
             (ReferenceSlot::Ref, node.attribute("ref")),
             (
@@ -55,7 +88,7 @@ pub(super) fn collect(root: Node<'_, '_>) -> Vec<FormReference> {
                 continue;
             }
             output.push(FormReference {
-                range: node.range(),
+                range: range.clone(),
                 property: PropertyKey {
                     namespace: node.tag_name().namespace().map(str::to_owned),
                     name: node.tag_name().name().into(),
@@ -65,6 +98,10 @@ pub(super) fn collect(root: Node<'_, '_>) -> Vec<FormReference> {
                     namespace: Some(namespace.into()),
                     name: name.into(),
                 },
+                element_path: ancestors
+                    .iter()
+                    .map(|(range, index, _)| (range.start, *index))
+                    .collect(),
             });
         }
     }

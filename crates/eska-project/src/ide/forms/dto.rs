@@ -1,14 +1,17 @@
 //! Explicit form DTOs keep XML i64 IDs lossless in JavaScript and paths reversible on both OSes.
 
-use crate::ide::dto::{self, Labels};
+use crate::ide::{
+    dto::{self, Labels},
+    property_types::appearance_field,
+};
 use eska_project_core::project::{
     forms::{
         ComposedForm, EffectiveDefinition, EffectiveElement, ElementIdentity, ElementKey,
         ElementPresentation, FormDependency, FormDependencyRole, FormPart, FormPicture,
-        FormPictureSelection, FormPreparation, FormPreview, PropertySource, SourcedProperty,
+        FormPictureSelection, FormPreparation, FormPreview, FormReference, PropertySource,
+        ReferenceSlot, SourcedProperty,
     },
-    metadata_model::MetadataKind,
-    metadata_parser::LocatedProperty,
+    metadata_model::{MetadataKind, MetadataProperty, MetadataValue},
 };
 use serde_json::{Value, json};
 use std::collections::{HashMap, HashSet};
@@ -27,20 +30,86 @@ pub(super) fn preparation(value: &FormPreparation) -> Value {
         "roots":value.roots.iter().map(|root|dto::path(root)).collect::<Vec<_>>(),
         "forms":value.forms.iter().map(|input|json!({"id":input.id,"root":dto::path(&input.root),"path":dto::path(&input.path)})).collect::<Vec<_>>()})
 }
-fn property(labels: &Labels, value: &SourcedProperty) -> Value {
-    let mut result = dto::property(
-        labels,
-        MetadataKind::Form,
-        &LocatedProperty {
-            property: value.property.clone(),
-            range: value.origin.range.clone(),
-        },
-    );
+type References<'a> = HashMap<&'a str, &'a [FormReference]>;
+
+fn property(labels: &Labels, references: &References<'_>, value: &SourcedProperty) -> Value {
+    let mut result = dto::property_record(labels, MetadataKind::Form, &value.property);
+    let range = &value.origin.range;
+    result["range"] = json!(range);
     result["origin"] = origin(&value.origin);
+    if let Some(references) = references.get(value.origin.source.as_str()) {
+        let start = references.partition_point(|reference| reference.range.start < range.start);
+        for reference in references[start..]
+            .iter()
+            .take_while(|reference| reference.range.start < range.end)
+        {
+            annotate_appearance(labels, &value.property, &mut result, range.start, reference);
+        }
+    }
     result
 }
+
+fn annotate_appearance(
+    labels: &Labels,
+    mut property: &MetadataProperty,
+    mut wire: &mut Value,
+    start: usize,
+    reference: &FormReference,
+) {
+    let Some(indices) = reference.indices_from(start) else {
+        return;
+    };
+    let mut parent = None;
+    for index in indices {
+        let MetadataValue::Record(fields) = &property.value else {
+            return;
+        };
+        let (Some(field), Some(view)) = (fields.get(index), wire["value"]["fields"].get_mut(index))
+        else {
+            return;
+        };
+        parent = Some(property);
+        (property, wire) = (field, view);
+    }
+    let appearance = |field| appearance_field(field, "Color") || appearance_field(field, "Font");
+    let nested_reference = reference.slot == ReferenceSlot::Text
+        && property.key.namespace.as_deref() == Some("http://v8.1c.ru/8.3/xcf/readable")
+        && property.key.name == "Ref"
+        && parent.is_some_and(appearance);
+    if property.key != reference.property || !(nested_reference || appearance(property)) {
+        return;
+    }
+    let target = &reference.target;
+    let Some(caption) = dto::translations(
+        labels.ru.appearance_reference_caption(target),
+        labels.en.appearance_reference_caption(target),
+    ) else {
+        return;
+    };
+    match reference.slot {
+        ReferenceSlot::Text if wire["value"]["kind"] == "text" => {
+            wire["value"]["caption"] = caption;
+            if nested_reference {
+                wire["caption"] = labels.caption("form-inspector-qualifier-ref");
+            }
+        }
+        ReferenceSlot::Ref => {
+            if let Some(qualifier) = wire["qualifiers"].as_array_mut().and_then(|qualifiers| {
+                qualifiers.iter_mut().find(|value| {
+                    value["key"]["namespace"].is_null() && value["key"]["name"] == "ref"
+                })
+            }) {
+                qualifier["caption"] = caption;
+                qualifier["keyCaption"] = labels.caption("form-inspector-qualifier-ref");
+            }
+        }
+        ReferenceSlot::Text => {}
+    }
+}
+
 fn element(
     labels: &Labels,
+    references: &References<'_>,
     form: &ComposedForm,
     value: &EffectiveElement,
     presentations: &HashMap<&ElementIdentity, &ElementPresentation>,
@@ -78,7 +147,7 @@ fn element(
                 kind.family() == eska_project_core::project::forms::ElementFamily::Addition
             })
     };
-    let dto = |child| element(labels, form, child, presentations, api_minor);
+    let dto = |child| element(labels, references, form, child, presentations, api_minor);
     let children = value
         .children
         .iter()
@@ -92,11 +161,16 @@ fn element(
         .map(dto)
         .collect::<Vec<_>>();
     json!({"identity":identity(&value.identity),"origin":origin(&value.origin),"kind":value.kind.map(eska_project_core::project::forms::ElementKind::xml_name),"name":value.name,"xmlName":value.xml_name,
-        "properties":form.inspectable_properties(value).map(|value| property(labels,value)).collect::<Vec<_>>(),"presentation":presentation,
+        "properties":form.inspectable_properties(value).map(|value| property(labels,references,value)).collect::<Vec<_>>(),"presentation":presentation,
         "children":children,"auxiliary":auxiliary})
 }
-fn definition(labels: &Labels, value: &EffectiveDefinition, api_minor: u32) -> Value {
-    let mut result = json!({"name":value.name,"xmlName":value.xml_name,"origin":origin(&value.origin),"qualifiers":value.qualifiers,"properties":value.properties.iter().map(|value| property(labels,value)).collect::<Vec<_>>()});
+fn definition(
+    labels: &Labels,
+    references: &References<'_>,
+    value: &EffectiveDefinition,
+    api_minor: u32,
+) -> Value {
+    let mut result = json!({"name":value.name,"xmlName":value.xml_name,"origin":origin(&value.origin),"qualifiers":value.qualifiers,"properties":value.properties.iter().map(|value| property(labels,references,value)).collect::<Vec<_>>()});
     if api_minor >= 45
         && let Some(value_type) = value.inspector_type()
     {
@@ -109,6 +183,11 @@ pub(super) fn model(
     preview: &FormPreview,
     api_minor: u32,
 ) -> Result<(Value, usize), Value> {
+    let references: References = preview
+        .documents
+        .iter()
+        .map(|document| (document.source.as_str(), document.references.as_slice()))
+        .collect();
     let presentations: HashMap<_, _> = preview
         .presentation
         .elements
@@ -162,16 +241,12 @@ pub(super) fn model(
         eska_project_core::project::forms::FormHandlerOwner::Element(value)=>json!({"kind":"element","identity":identity(value)}),
         eska_project_core::project::forms::FormHandlerOwner::Command(name)=>json!({"kind":"command","name":name}),
     },"event":handler.event,"name":handler.name,"origin":origin(&handler.origin)})).collect::<Vec<_>>();
-    let definition = |value| definition(labels, value, api_minor);
-    let mut model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations,api_minor),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(definition).collect::<Vec<_>>(),
+    let definition = |value| definition(labels, &references, value, api_minor);
+    let mut model = json!({"root":element(labels,&references,&preview.form,&preview.form.root,&presentations,api_minor),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(definition).collect::<Vec<_>>(),
         "commands":preview.form.commands.iter().map(definition).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(definition).collect::<Vec<_>>(),
         "diagnostics":{"composition":preview.form.diagnostics,"appearance":preview.presentation.diagnostics}});
     if api_minor >= 45 {
-        model["dataFields"] = json!(preview.inspector_data().iter().map(|field| json!({
-            "path":field.path,"valueType":field.value_type,
-            "type":field.type_property.map(|value| dto::property_record(labels, MetadataKind::Attribute, value)),
-            "origin":field.origin.as_ref().map(origin)
-        })).collect::<Vec<_>>());
+        model["dataFields"] = json!(inspector_fields(labels, preview));
     }
     model["activityColor"] = json!(preview.presentation.activity_color);
     if api_minor >= 44 {
@@ -201,4 +276,18 @@ pub(super) fn model(
             .sum::<usize>(),
     );
     Ok((model, retained))
+}
+
+fn inspector_fields(labels: &Labels, preview: &FormPreview) -> Vec<Value> {
+    preview.inspector_data().iter().map(|field| {
+        let mut row = json!({
+            "path":field.path,"valueType":field.value_type,
+            "type":field.type_property.map(|value| dto::property_record(labels, MetadataKind::Attribute, value)),
+            "origin":field.origin.as_ref().map(origin)
+        });
+        if let Some(caption) = &field.caption {
+            row["caption"] = json!(caption);
+        }
+        row
+    }).collect()
 }

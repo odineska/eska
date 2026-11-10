@@ -139,6 +139,13 @@ fn form_inspector_resolves_unbound_fields_without_mixing_definition_paths() {
             data_field(json!(["Object", "Ref"]))["valueType"]["types"][0]["name"],
             "DocumentRef.Receipt"
         );
+        for field in ["Ref", "Date", "DeletionMark"] {
+            assert_eq!(
+                data_field(json!(["Object", field]))["caption"],
+                json!({"kind":"standard","key":format!("attribute.{field}")})
+            );
+        }
+        assert!(amount.get("caption").is_none());
         assert_eq!(
             data_field(json!(["Object", "Rows", "Quantity"]))["valueType"]["kind"],
             "number"
@@ -170,6 +177,63 @@ fn form_inspector_resolves_unbound_fields_without_mixing_definition_paths() {
     }
     assert_eq!(fs::read_to_string(source.join(PATH)).unwrap(), FORM);
     assert_eq!(fs::read_to_string(source.join(OWNER_PATH)).unwrap(), OWNER);
+}
+
+#[test]
+fn inspector_localizes_nested_appearance_by_resolved_namespace_and_preserves_scalar_types() {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let source = INPUT.replace(
+        "<Title>Исходный</Title>",
+        r#"<Title>Исходный</Title>
+        <FutureSettings xmlns:look="http://v8.1c.ru/8.1/data/ui/style"
+          xmlns:xr="http://v8.1c.ru/8.3/xcf/readable"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:x="http://www.w3.org/2001/XMLSchema">
+          <Font xmlns:look="urn:vendor" ref="look:normaltextfont"/>
+          <Font ref="look:normaltextfont" bold="true" italic="false"/>
+          <TitleFont><xr:Ref>look:normaltextfont</xr:Ref></TitleFont>
+          <TextColor>look:FieldTextColor</TextColor>
+          <ToolTip xsi:type="x:string">false</ToolTip>
+          <Enabled xsi:type="x:boolean">false</Enabled>
+          <HorizontalStretch>Auto</HorizontalStretch>
+        </FutureSettings>"#,
+    );
+    fs::write(&path, &source).unwrap();
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 46);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let properties = opened["model"]["root"]["children"][0]["properties"]
+        .as_array()
+        .unwrap();
+    let settings = properties
+        .iter()
+        .find(|property| property["key"]["name"] == "FutureSettings")
+        .unwrap();
+    let fields = settings["value"]["fields"].as_array().unwrap();
+    let font = &fields[1]["qualifiers"];
+    let expected = json!({"ru-RU":"Обычный шрифт текста","en-US":"Normal text font"});
+    assert!(fields[0]["qualifiers"][0].get("caption").is_none());
+    assert_eq!(font[0]["value"], "look:normaltextfont");
+    assert_eq!(
+        font[0]["keyCaption"],
+        json!({"ru-RU":"Ссылка","en-US":"Reference"})
+    );
+    assert_eq!(font[0]["caption"], expected);
+    assert_eq!(font[1]["scalarType"], "boolean");
+    assert_eq!(font[2]["scalarType"], "boolean");
+    assert_eq!(font[2]["value"], "false");
+    assert_eq!(
+        fields[2]["value"]["fields"][0]["value"]["caption"],
+        expected
+    );
+    assert_eq!(fields[3]["value"]["caption"]["ru-RU"], "Цвет текста поля");
+    assert_eq!(fields[4]["value"]["text"], "false");
+    assert!(fields[4]["value"].get("scalarType").is_none());
+    assert_eq!(fields[5]["value"]["scalarType"], "boolean");
+    assert_eq!(fields[6]["value"]["text"], "Auto");
+    assert!(fields[6]["value"].get("scalarType").is_none());
+    client.finish();
+    assert_eq!(fs::read_to_string(path).unwrap(), source);
 }
 
 #[test]

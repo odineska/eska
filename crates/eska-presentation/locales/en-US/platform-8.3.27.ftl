@@ -1793,3 +1793,23 @@ form-palette-value-noBorder = None
 form-palette-value-searchStringMember = SearchString
 form-palette-value-searchControlMember = SearchControl
 form-palette-value-viewStatusMember = ViewStatus
+
+# Form inspector captions for declared values and appearance qualifiers.
+form-inspector-qualifier-ref = Reference
+form-inspector-qualifier-kind = Font kind
+form-inspector-qualifier-faceName = Typeface
+form-inspector-qualifier-height = Font size
+form-inspector-qualifier-scale = Scale
+form-inspector-qualifier-bold = Bold
+form-inspector-qualifier-italic = Italic
+form-inspector-qualifier-underline = Underline
+form-inspector-qualifier-strikeout = Strikethrough
+form-inspector-system-font = System font
+form-inspector-web-color = Web color
+form-inspector-system-color = System color
+form-inspector-style-item = Style item
+platform-property-form-MainAttribute = Main attribute
+platform-property-form-Action = Action
+platform-property-form-ParameterType = Parameter type
+platform-property-form-Columns = Columns
+platform-property-form-Column = Column
