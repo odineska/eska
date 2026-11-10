@@ -1,0 +1,330 @@
+{
+  "scope": "T157/T159, ширина рамки формы и видимой сетки таблицы при заданном размере области",
+  "platform": {
+    "os": "linux",
+    "architecture": "arm64",
+    "version": "8.3.27.2342",
+    "interface": "Taxi",
+    "compatibility": "Version8_3_24",
+    "dpi": 96,
+    "zoom": 100,
+    "captureLocale": "ru"
+  },
+  "explorerCommit": "ac367db",
+  "nativeFixtures": "tests/fixtures/forms/native-table-viewport",
+  "vsixSha256": {
+    "explorer": "1119d24669c4a7c213f2ce762e068114b0b76a7b10b4003354082a789243e8a0",
+    "baseline": "05e74f2735831c01f271b657aa7e2483e984f6936587693efb9b2c8526e8a69a"
+  },
+  "example": {
+    "case": "Table30",
+    "rootWidth": 30,
+    "tableWidth": 60,
+    "nativeFrame": [334, 343],
+    "nativeGrid": [13, 104, 300, 227],
+    "previousFrame": [634, 328],
+    "previousGrid": [13, 104, 600, 227],
+    "explorerFrame": [334, 343],
+    "explorerGrid": [13, 104, 300, 227],
+    "gridContentWidth": [284, 347]
+  },
+  "widths": {
+    "ordering": [
+      "configurator",
+      "explorer"
+    ],
+    "equalBoth": 39,
+    "compared": 40,
+    "tableWidth": [
+      {
+        "case": "Table6",
+        "frameWidth": [94, 94],
+        "gridWidth": [60, 60]
+      },
+      {
+        "case": "Table10",
+        "frameWidth": [134, 134],
+        "gridWidth": [100, 100]
+      },
+      {
+        "case": "Table15",
+        "frameWidth": [184, 184],
+        "gridWidth": [150, 150]
+      },
+      {
+        "case": "Table20",
+        "frameWidth": [234, 234],
+        "gridWidth": [200, 200]
+      },
+      {
+        "case": "Table25",
+        "frameWidth": [284, 284],
+        "gridWidth": [250, 250]
+      },
+      {
+        "case": "Table30",
+        "frameWidth": [334, 334],
+        "gridWidth": [300, 300]
+      },
+      {
+        "case": "Table45",
+        "frameWidth": [484, 484],
+        "gridWidth": [450, 450]
+      },
+      {
+        "case": "Table65",
+        "frameWidth": [684, 684],
+        "gridWidth": [600, 600]
+      },
+      {
+        "case": "Table80",
+        "frameWidth": [834, 834],
+        "gridWidth": [600, 600]
+      },
+      {
+        "case": "Bare6",
+        "frameWidth": [94, 94],
+        "gridWidth": [60, 60]
+      },
+      {
+        "case": "Bare10",
+        "frameWidth": [134, 134],
+        "gridWidth": [100, 100]
+      },
+      {
+        "case": "Bare15",
+        "frameWidth": [184, 184],
+        "gridWidth": [150, 150]
+      },
+      {
+        "case": "Bare20",
+        "frameWidth": [234, 234],
+        "gridWidth": [200, 200]
+      }
+    ],
+    "nestedAndDynamic": [
+      {
+        "case": "Plain1",
+        "frameWidth": [44, 44],
+        "gridWidth": [10, 10]
+      },
+      {
+        "case": "Plain2",
+        "frameWidth": [54, 54],
+        "gridWidth": [20, 20]
+      },
+      {
+        "case": "Plain3",
+        "frameWidth": [64, 64],
+        "gridWidth": [30, 30]
+      },
+      {
+        "case": "Plain4",
+        "frameWidth": [74, 74],
+        "gridWidth": [40, 40]
+      },
+      {
+        "case": "Plain5",
+        "frameWidth": [84, 84],
+        "gridWidth": [50, 50]
+      },
+      {
+        "case": "Plain8",
+        "frameWidth": [114, 114],
+        "gridWidth": [80, 80]
+      },
+      {
+        "case": "Plain12",
+        "frameWidth": [154, 154],
+        "gridWidth": [120, 120]
+      },
+      {
+        "case": "Bare1",
+        "frameWidth": [44, 44],
+        "gridWidth": [10, 10]
+      },
+      {
+        "case": "Bare2",
+        "frameWidth": [54, 54],
+        "gridWidth": [20, 20]
+      },
+      {
+        "case": "Bare3",
+        "frameWidth": [64, 64],
+        "gridWidth": [30, 30]
+      },
+      {
+        "case": "Stretch30",
+        "frameWidth": [334, 334],
+        "gridWidth": [300, 300]
+      },
+      {
+        "case": "Stretch80",
+        "frameWidth": [834, 834],
+        "gridWidth": [800, 800]
+      },
+      {
+        "case": "Automatic30",
+        "frameWidth": [334, 334],
+        "gridWidth": [300, 300]
+      },
+      {
+        "case": "Automatic",
+        "frameWidth": [449, 449],
+        "gridWidth": [400, 415]
+      },
+      {
+        "case": "FixedSmall",
+        "frameWidth": [334, 334],
+        "gridWidth": [40, 40]
+      },
+      {
+        "case": "Nested20",
+        "frameWidth": [534, 534],
+        "gridWidth": [200, 200]
+      },
+      {
+        "case": "NestedDefault",
+        "frameWidth": [334, 334],
+        "gridWidth": [300, 300]
+      },
+      {
+        "case": "Row18",
+        "frameWidth": [335, 335],
+        "gridWidth": [180, 180]
+      },
+      {
+        "case": "Row30",
+        "frameWidth": [455, 455],
+        "gridWidth": [300, 300]
+      },
+      {
+        "case": "Row75",
+        "frameWidth": [784, 784],
+        "gridWidth": [600, 600]
+      },
+      {
+        "case": "Conditional30",
+        "frameWidth": [334, 334],
+        "gridWidth": [300, 300]
+      },
+      {
+        "case": "Dynamic12",
+        "frameWidth": [154, 154],
+        "gridWidth": [120, 120]
+      },
+      {
+        "case": "Dynamic30",
+        "frameWidth": [334, 334],
+        "gridWidth": [300, 300]
+      },
+      {
+        "case": "Dynamic80",
+        "frameWidth": [834, 834],
+        "gridWidth": [600, 600]
+      }
+    ],
+    "compound": [
+      {
+        "case": "Table30",
+        "frameWidth": [334, 334],
+        "gridWidth": [300, 300]
+      },
+      {
+        "case": "Table45",
+        "frameWidth": [484, 484],
+        "gridWidth": [450, 450]
+      },
+      {
+        "case": "TableHeight30",
+        "frameWidth": [334, 334],
+        "gridWidth": [300, 300]
+      }
+    ]
+  },
+  "installedSuites": [
+    {
+      "suite": "table-viewport",
+      "locale": "ru",
+      "states": 10,
+      "dirtyWidths": [450, 300],
+      "sourceWrites": false
+    },
+    {
+      "suite": "table-height",
+      "locale": "ru",
+      "states": 70
+    },
+    {
+      "suite": "tables",
+      "locale": "ru",
+      "states": 17
+    },
+    {
+      "suite": "table-viewport",
+      "locale": "en",
+      "states": 10,
+      "dirtyWidths": [450, 300],
+      "sourceWrites": false
+    },
+    {
+      "suite": "table-height",
+      "locale": "en",
+      "states": 70
+    },
+    {
+      "suite": "tables",
+      "locale": "en",
+      "states": 17
+    },
+    {
+      "suite": "responsive-layout",
+      "locale": "ru",
+      "states": 31
+    },
+    {
+      "suite": "body-scroll",
+      "locale": "ru",
+      "states": 14
+    },
+    {
+      "suite": "native-wrapped-titles",
+      "locale": "ru",
+      "states": 47
+    },
+    {
+      "suite": "native-nested-reflow",
+      "locale": "ru",
+      "states": 65
+    }
+  ],
+  "stalingrad": {
+    "states": 24,
+    "sameGeometryTraceAsBaseline": true
+  },
+  "remaining": {
+    "Automatic": {
+      "nativeGridWidth": 400,
+      "explorerGridWidth": 415
+    },
+    "FixedSmall": {
+      "nativeFrameWidth": 334,
+      "explorerPreferredFrameWidth": 74,
+      "explorerGridWidthAtNativeAllocation": 40
+    },
+    "TableHeight30": {
+      "nativeFrameHeight": 307,
+      "explorerFrameHeight": 308,
+      "nativeGridHeightMeasured": false
+    },
+    "pixelSuite": {
+      "case": "Default-search-first-ru",
+      "code": "table-search-crop",
+      "reproducedOnBaseline": true,
+      "sameRgbCrop": true,
+      "crop": [2174, 388, 260, 23],
+      "rgbSha256": "5d1f0bc6cc289c8c188d8d8f2704d49c17772a637eebc6af2e3085f084fcd03e"
+    },
+    "windowsNativeGeometryCompared": false
+  }
+}
