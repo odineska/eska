@@ -455,7 +455,12 @@ fn element_pictures(
     diagnostics: &mut Vec<AppearanceDiagnostic>,
 ) -> ElementPictures {
     let button = element.kind == Some(ElementKind::Button);
-    let picture = if let Some(property) = element.property("Picture") {
+    let property = element.property("Picture").or_else(|| {
+        (element.kind == Some(ElementKind::PictureField))
+            .then(|| element.property("ValuesPicture"))
+            .flatten()
+    });
+    let picture = if let Some(property) = property {
         pictures::form_picture(property, resources, diagnostics)
     } else if button {
         command.and_then(|command| command.picture(resources, diagnostics))

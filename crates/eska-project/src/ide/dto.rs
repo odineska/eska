@@ -285,6 +285,9 @@ pub fn picture(preview: &eska_project_core::project::designer_source::PicturePre
             if picture.is_template {
                 value["isTemplate"] = json!(true);
             }
+            if let Some((width, height)) = picture.glyph_size {
+                value["glyph"] = json!({"width":width,"height":height});
+            }
             return value;
         }
         // Metadata properties use the existing no-image status; forms retain empty semantics.
