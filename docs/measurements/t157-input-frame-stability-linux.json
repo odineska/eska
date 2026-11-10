@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "profile": { "platform": "8.3.27.2342", "os": "Linux ARM64 ALT 10", "dpi": 96, "zoom": 100 },
+  "explorerCommits": [
+    "93c147a3ddb8dc1a94a5f5537c9f10d2eeb8db0a",
+    "abed5c0a30fece6a72fe50cba482afb6712d3dab",
+    "50f944f1867c56067b65f97737afa7dcfb1ec979"
+  ],
+  "installed": {
+    "backendSha256": "83ce67f920ffe1ba37b5b5e93fe47ee610c0b3798862a0743acb806a5ff7d788",
+    "vsixSha256": "c57dc416e6b77471acd10ba1631e912abac55764c172b9115163ace70f20dd50",
+    "locales": ["ru", "en"],
+    "matchingGalleriesPerLocale": [
+      { "suite": "input-fonts", "forms": 34, "samples": 38, "comparedRgbPixels": 972682 },
+      { "suite": "input-dates", "forms": 26, "samples": 42, "comparedRgbPixels": 1248813 },
+      { "suite": "input-dimensions", "forms": 40, "samples": 44, "comparedRgbPixels": 873064 },
+      { "suite": "reference-buttons", "forms": 10, "samples": 14, "comparedRgbPixels": 631421 }
+    ],
+    "additionalPassedSuites": {
+      "ru": ["input-stretch", "input-borders", "reference-widths"],
+      "en": ["input-stretch", "input-borders", "through-align", "body-scroll", "preview"]
+    },
+    "dirtyEditAndDetachedUpdate": true,
+    "sourceFilesUnchanged": true
+  },
+  "date10": {
+    "nativeFrame": [330, 204],
+    "previousPreferredAfterDock": [329, 204],
+    "previousBodyAtNativeWidth": { "clientHeight": 154, "scrollHeight": 173 },
+    "preferredBeforeBorderPaintAfterDock": [330, 204],
+    "visibleChoiceOutsetsBeforePaint": [0, 1, 1, 0],
+    "bodyAt330": { "clientHeight": 154, "scrollHeight": 154, "scrollable": false },
+    "bodyAt329": { "clientHeight": 154, "scrollHeight": 173, "scrollable": true },
+    "restoredFrame": [330, 204]
+  },
+  "largeFont": {
+    "caseMeasurements": [
+      { "name": "Font32Width1", "nativeAndFinal": [140, 412], "previousActual": [128, 412] },
+      { "name": "Font48Width1", "nativeAndFinal": [140, 556], "previousActual": [128, 556] }
+    ],
+    "previousPreferredWidth": 140,
+    "previousOuterScrollbarThickness": 15,
+    "finalViewportOverflow": [0, 0],
+    "intermediateCornerRegression": "После переноса геометрии из палитры правые углы сдвинулись на 1 px. В итоговом VSIX углы используют тот же отступ, что и край кнопки."
+  },
+  "stalingrad": {
+    "forms": ["ВыдачаЗайма", "ПоступлениеНаРасчетныйСчет", "ПоступлениеНаСчетТекущихРасчетов"],
+    "matchingGeometryCases": 22,
+    "settlementFrame": [646, 760],
+    "settlementFields": 10,
+    "matchingRgbPixels": 32292,
+    "dragAndDirtyDetachedUpdate": true
+  },
+  "validation": {
+    "explorerCheckCompileAndVsixIntegrity": true,
+    "bunPassed": 737,
+    "bunSkipped": 8,
+    "cargoFmtCheckClippyAndTests": true
+  },
+  "remaining": [
+    "Для Windows сравнить Date10 после открепления и узкие поля при крупном шрифте с отдельными эталонами на том же DPI.",
+    "Сравнение охватывает указанные поля и состояния, полная визуальная приёмка форм остаётся в T165."
+  ]
+}
