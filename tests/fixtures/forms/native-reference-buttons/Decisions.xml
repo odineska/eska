@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" version="2.20">
+  <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Поля</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Поля</v8:content></v8:item></Title>
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <InputField name="CasePickForceReadOnly" id="11">
+      <DataPath>CasePickForceReadOnly</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>PickForceReadOnly</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>PickForceReadOnly</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <ChoiceButtonRepresentation>ShowInInputField</ChoiceButtonRepresentation>
+      <ReadOnly>true</ReadOnly>
+      <ChoiceButton>true</ChoiceButton>
+    </InputField>
+    <InputField name="CasePickForceListMode" id="12">
+      <DataPath>CasePickForceListMode</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>PickForceListMode</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>PickForceListMode</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <ChoiceButtonRepresentation>ShowInInputField</ChoiceButtonRepresentation>
+      <ListChoiceMode>true</ListChoiceMode>
+      <ChoiceButton>true</ChoiceButton>
+    </InputField>
+    <InputField name="CasePickSpinClear" id="13">
+      <DataPath>CasePickSpinClear</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>PickSpinClear</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>PickSpinClear</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <ChoiceButtonRepresentation>ShowInInputField</ChoiceButtonRepresentation>
+      <SpinButton>true</SpinButton>
+      <ClearButton>true</ClearButton>
+    </InputField>
+    <InputField name="CaseClearSpinReadOnly" id="14">
+      <DataPath>CaseClearSpinReadOnly</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ClearSpinReadOnly</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ClearSpinReadOnly</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <ClearButton>true</ClearButton>
+      <SpinButton>true</SpinButton>
+      <ReadOnly>true</ReadOnly>
+    </InputField>
+    <InputField name="CaseClearSpinDisabled" id="15">
+      <DataPath>CaseClearSpinDisabled</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ClearSpinDisabled</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ClearSpinDisabled</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <ClearButton>true</ClearButton>
+      <SpinButton>true</SpinButton>
+      <Enabled>false</Enabled>
+    </InputField>
+    <InputField name="CaseSpin16" id="16">
+      <DataPath>CaseSpin16</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Spin16</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Spin16</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <SpinButton>true</SpinButton>
+      <Font ref="style:NormalTextFont" height="16" kind="StyleItem"/>
+    </InputField>
+    <InputField name="CaseSpin20" id="17">
+      <DataPath>CaseSpin20</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Spin20</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Spin20</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <SpinButton>true</SpinButton>
+      <Font ref="style:NormalTextFont" height="20" kind="StyleItem"/>
+    </InputField>
+    <InputField name="CaseSpin8" id="18">
+      <DataPath>CaseSpin8</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Spin8</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Spin8</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <SpinButton>true</SpinButton>
+      <Font ref="style:NormalTextFont" height="8" kind="StyleItem"/>
+    </InputField>
+    <InputField name="CaseMarkReadOnly" id="19">
+      <DataPath>CaseMarkReadOnly</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>MarkReadOnly</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>MarkReadOnly</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>8</Width>
+      <AutoMarkIncomplete>true</AutoMarkIncomplete>
+      <ReadOnly>true</ReadOnly>
+    </InputField>
+    <InputField name="CaseMarkDisabled" id="20">
+      <DataPath>CaseMarkDisabled</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>MarkDisabled</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>MarkDisabled</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <AutoMarkIncomplete>true</AutoMarkIncomplete>
+      <Enabled>false</Enabled>
+    </InputField>
+    <InputField name="CaseMarkNoButtons" id="21">
+      <DataPath>CaseMarkNoButtons</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>MarkNoButtons</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>MarkNoButtons</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Width>12</Width>
+      <AutoMarkIncomplete>true</AutoMarkIncomplete>
+      <DropListButton>false</DropListButton>
+      <OpenButton>false</OpenButton>
+    </InputField>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="CasePickForceReadOnly" id="1"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CasePickForceReadOnly</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CasePickForceReadOnly</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CasePickForceListMode" id="2"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CasePickForceListMode</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CasePickForceListMode</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CasePickSpinClear" id="3"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CasePickSpinClear</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CasePickSpinClear</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseClearSpinReadOnly" id="4"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseClearSpinReadOnly</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseClearSpinReadOnly</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseClearSpinDisabled" id="5"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseClearSpinDisabled</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseClearSpinDisabled</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseSpin16" id="6"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseSpin16</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseSpin16</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseSpin20" id="7"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseSpin20</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseSpin20</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseSpin8" id="8"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseSpin8</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseSpin8</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseMarkReadOnly" id="9"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseMarkReadOnly</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseMarkReadOnly</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseMarkDisabled" id="10"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseMarkDisabled</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseMarkDisabled</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseMarkNoButtons" id="11"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseMarkNoButtons</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseMarkNoButtons</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+  </Attributes>
+</Form>

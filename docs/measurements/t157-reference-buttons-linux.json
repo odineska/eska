@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "explorerCommit": "6fe004c",
+  "previousExplorerCommit": "1b3b364",
+  "profile": {
+    "platform": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "zoom": 100,
+    "nativeLocale": "ru"
+  },
+  "nativeFixture": "../../tests/fixtures/forms/native-reference-buttons/metrics.json",
+  "installed": {
+    "backendSha256": "83ce67f920ffe1ba37b5b5e93fe47ee610c0b3798862a0743acb806a5ff7d788",
+    "vsixSha256": "56741d8923b19a30a69c241344006d098547012939f4b17f1625f7cecd9cdd17",
+    "localeRuns": [
+      {
+        "locale": "ru",
+        "forms": 10,
+        "fieldStates": 110,
+        "samples": 14,
+        "comparedPixels": 631421,
+        "retainedInputsDuringDirtyEdit": true,
+        "detachedDirtyEdit": true,
+        "returnedToOwner": true
+      },
+      {
+        "locale": "en",
+        "forms": 10,
+        "fieldStates": 110,
+        "samples": 14,
+        "comparedPixels": 631421,
+        "retainedInputsDuringDirtyEdit": true,
+        "detachedDirtyEdit": true,
+        "returnedToOwner": true
+      }
+    ],
+    "fullInputPixelMatches": 106,
+    "multilineStatesWithCheckedRegions": 4
+  },
+  "stalingrad": {
+    "frame": [646, 760],
+    "sourceScreenshotSha256": "8b72c2d517d0539456b69fde9e9729f6047fe223c8cfd71b0b31a5b425db46b6",
+    "vsixScreenshotSha256": "48086b9e80ae707fa14458f3753b084f9238727d3ab6578ce05c4c4c2c50202e",
+    "pixelsCompared": 32292,
+    "fields": [
+      {
+        "name": "ВидОперации",
+        "rect": [78, 136, 117, 23],
+        "differentRgbPixels": 0
+      },
+      {
+        "name": "Организация",
+        "rect": [13, 194, 182, 23],
+        "differentRgbPixels": 0
+      },
+      {
+        "name": "СчетОтражения",
+        "rect": [86, 226, 109, 23],
+        "differentRgbPixels": 0
+      },
+      {
+        "name": "Контрагент",
+        "rect": [77, 265, 118, 23],
+        "differentRgbPixels": 0
+      },
+      {
+        "name": "Займ",
+        "rect": [53, 297, 142, 23],
+        "differentRgbPixels": 0
+      },
+      {
+        "name": "ПлатежныйДокумент",
+        "rect": [87, 357, 108, 23],
+        "differentRgbPixels": 0
+      },
+      {
+        "name": "СтатьяДДС",
+        "rect": [60, 396, 135, 23],
+        "differentRgbPixels": 0
+      },
+      {
+        "name": "Транзакция",
+        "rect": [13, 454, 182, 23],
+        "differentRgbPixels": 0
+      },
+      {
+        "name": "ПлатежныйАгент",
+        "rect": [13, 505, 182, 23],
+        "differentRgbPixels": 0
+      },
+      {
+        "name": "ДоговорПлатежногоАгента",
+        "rect": [66, 537, 129, 23],
+        "differentRgbPixels": 0
+      }
+    ],
+    "unchangedGeometryCases": 22,
+    "metadataObject": "Документ.ПоступлениеНаСчетТекущихРасчетов.Форма.ФормаДокумента",
+    "xmlSha256": "045dead34a69d01c6d83a354a9c2fb4f610302cd79a3a011636a2c1fce1821ef"
+  },
+  "performance": {
+    "scope": "Isolated profiles with the same source files and backend. Time includes open, model loading, layout and painted fields.",
+    "conditions": "No concurrent UI suite in this measurement.",
+    "cases": [
+      {
+        "referenceFields": 250,
+        "before": {
+          "elapsedMs": [612, 649, 657],
+          "medianMs": 649,
+          "renderNodes": 3007
+        },
+        "after": {
+          "elapsedMs": [635, 652, 768],
+          "medianMs": 652,
+          "renderNodes": 2757
+        }
+      },
+      {
+        "referenceFields": 800,
+        "before": {
+          "elapsedMs": [2037, 1941, 1667],
+          "medianMs": 1941,
+          "renderNodes": 9607
+        },
+        "after": {
+          "elapsedMs": [2228, 2148, 2135],
+          "medianMs": 2148,
+          "renderNodes": 8807
+        }
+      }
+    ]
+  },
+  "regressionRuns": [
+    {
+      "locale": "ru",
+      "passed": [
+        "reference-widths",
+        "input-choice-size",
+        "input-borders",
+        "input-stretch",
+        "column-widths",
+        "through-align",
+        "united",
+        "responsive",
+        "body-scroll",
+        "preview"
+      ],
+      "failed": [
+        "input-dates",
+        "input-dimensions",
+        "input-fonts"
+      ]
+    },
+    {
+      "locale": "en",
+      "passed": [
+        "reference-widths",
+        "input-choice-size",
+        "input-borders",
+        "input-stretch",
+        "column-widths",
+        "through-align",
+        "united",
+        "responsive",
+        "body-scroll",
+        "preview"
+      ],
+      "failed": []
+    }
+  ],
+  "previousLinuxBaselineFailures": [
+    {
+      "suite": "input-dates",
+      "cases": [
+        "reattached-Date10",
+        "reattached-DateReadOnly10",
+        "reattached-Font4",
+        "reattached-Font8Width20"
+      ]
+    },
+    {
+      "suite": "input-dimensions",
+      "cases": [
+        "reattached-WidthFont10Width20"
+      ]
+    },
+    {
+      "suite": "input-fonts",
+      "cases": [
+        "reattached-Font10Width20",
+        "Font32Width1"
+      ]
+    }
+  ],
+  "validation": {
+    "bunPassed": 737,
+    "bunSkipped": 8,
+    "cargoPassed": 1584,
+    "cargoIgnored": 19,
+    "cargoFmtCheckClippy": true
+  },
+  "remaining": [
+    "The 4 multiline samples each differ in 38 pixels around the corners and the button-row seams.",
+    "Compare authored ChoiceButtonPicture, Windows, and other DPI profiles.",
+    "Complete the remaining reattached-input layout checks and the full large-form performance gate."
+  ]
+}

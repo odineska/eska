@@ -1,0 +1,2135 @@
+{
+  "schemaVersion": 1,
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "locale": "ru",
+  "zoom": 100,
+  "sourceWritesDuringCapture": false,
+  "forms": [
+    {
+      "name": "CatalogButtons",
+      "file": "CatalogButtons.xml",
+      "frame": [228, 491],
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          }
+        ]
+      },
+      "sourceSha256": "2dc48e2ce86f04a9a6931de9821feb23f83e5ca7c41a2e09ade05ed72ef98a99",
+      "nativeXmlSha256": "da32ad0a7705d6974281558ed8c6c61c599eeb522624f445cbd9199f4596b333",
+      "nativeScreenshotSha256": "15cbc8da918e10d5154c9989abe319318108d0323cf512a98172d630ae7b6d9d",
+      "fields": [
+        {
+          "name": "CaseDefault",
+          "properties": {
+            "DataPath": "CaseDefault",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false"
+          },
+          "rect": [13, 39, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c91ce060eac6ef4271e08dae77e677c02a74156f43bcd2630ce12e2b3b96d20c",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseNoOpen",
+          "properties": {
+            "DataPath": "CaseNoOpen",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "OpenButton": "false"
+          },
+          "rect": [13, 71, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseNoDrop",
+          "properties": {
+            "DataPath": "CaseNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "DropListButton": "false"
+          },
+          "rect": [13, 103, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "6d4fdfb98d197bbe0a3dbd637f08e269116c117701162324dafe6da3c30c9ac5",
+          "buttons": ["open"]
+        },
+        {
+          "name": "CaseNoChoice",
+          "properties": {
+            "DataPath": "CaseNoChoice",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 135, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c91ce060eac6ef4271e08dae77e677c02a74156f43bcd2630ce12e2b3b96d20c",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseNoButtons",
+          "properties": {
+            "DataPath": "CaseNoButtons",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "false",
+            "DropListButton": "false",
+            "OpenButton": "false"
+          },
+          "rect": [13, 167, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "26afec7d548c620d979d2bbb8848f4fbcd256228d19c26458b0bbebf30f5aed3",
+          "buttons": []
+        },
+        {
+          "name": "CaseChoiceNoDrop",
+          "properties": {
+            "DataPath": "CaseChoiceNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "true",
+            "DropListButton": "false"
+          },
+          "rect": [13, 199, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "6d4fdfb98d197bbe0a3dbd637f08e269116c117701162324dafe6da3c30c9ac5",
+          "buttons": ["open"]
+        },
+        {
+          "name": "CasePicker",
+          "properties": {
+            "DataPath": "CasePicker",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField"
+          },
+          "rect": [13, 231, 194, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c90334dd8edf37cf4e1b2a558410ae5cf6962a906914e3ed5d262481e943385b",
+          "buttons": ["dropdown", "choice", "open"]
+        },
+        {
+          "name": "CasePickerNoDrop",
+          "properties": {
+            "DataPath": "CasePickerNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "DropListButton": "false"
+          },
+          "rect": [13, 263, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "3436550c9b9ba5bf86019a58080648e1ad504606fc7549e4c1499493f3a7e0f0",
+          "buttons": ["choice", "open"]
+        },
+        {
+          "name": "CasePickerBoth",
+          "properties": {
+            "DataPath": "CasePickerBoth",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInDropListAndInInputField"
+          },
+          "rect": [13, 295, 194, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c90334dd8edf37cf4e1b2a558410ae5cf6962a906914e3ed5d262481e943385b",
+          "buttons": ["dropdown", "choice", "open"]
+        },
+        {
+          "name": "CaseNoChoiceWithDrop",
+          "properties": {
+            "DataPath": "CaseNoChoiceWithDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "false",
+            "DropListButton": "true"
+          },
+          "rect": [13, 327, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c91ce060eac6ef4271e08dae77e677c02a74156f43bcd2630ce12e2b3b96d20c",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseReadOnly",
+          "properties": {
+            "DataPath": "CaseReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 359, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "a33d56862ea66608fc47808b6c39d96f93cc7d33796bfba44b5c98b5a69288a8",
+          "buttons": ["open"]
+        },
+        {
+          "name": "CaseReadOnlyForced",
+          "properties": {
+            "DataPath": "CaseReadOnlyForced",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true",
+            "ChoiceButton": "true",
+            "DropListButton": "true",
+            "OpenButton": "true"
+          },
+          "rect": [13, 391, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "bbccec936a863ede2823a878e1f2e95b85e11227219964f5671dc3cab8db21cf",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseDisabled",
+          "properties": {
+            "DataPath": "CaseDisabled",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "Enabled": "false"
+          },
+          "rect": [13, 423, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "7dbcda8993e50da1015547d2e3d7524b11171e6e055822fc14d97c3ce7e5d510",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseMarked",
+          "properties": {
+            "DataPath": "CaseMarked",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "AutoMarkIncomplete": "true"
+          },
+          "rect": [13, 455, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "f1db6eded4f4a1f0f02673b2016861b2015dc06394a95d463ea5852ad33d517f",
+          "buttons": ["dropdown", "open"]
+        }
+      ]
+    },
+    {
+      "name": "CompositeButtons",
+      "file": "CompositeButtons.xml",
+      "frame": [228, 491],
+      "valueType": {
+        "kind": "composite",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          },
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeUsers"
+          }
+        ]
+      },
+      "sourceSha256": "5d09312b37aaea5a1d08271d66a23500345d180a2d0b828674007cb8cf7baf42",
+      "nativeXmlSha256": "dcc53c24afd4c1c86eca54433a4a30bffed939c778f4560e6e456e8e5e05ef40",
+      "nativeScreenshotSha256": "61574b11df76a96f05b2839edd5c19f5ec415249826f5b4783edf284332fceab",
+      "fields": [
+        {
+          "name": "CaseDefault",
+          "properties": {
+            "DataPath": "CaseDefault",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false"
+          },
+          "rect": [13, 39, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseNoOpen",
+          "properties": {
+            "DataPath": "CaseNoOpen",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "OpenButton": "false"
+          },
+          "rect": [13, 71, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseNoDrop",
+          "properties": {
+            "DataPath": "CaseNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "DropListButton": "false"
+          },
+          "rect": [13, 103, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseNoChoice",
+          "properties": {
+            "DataPath": "CaseNoChoice",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 135, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "26afec7d548c620d979d2bbb8848f4fbcd256228d19c26458b0bbebf30f5aed3",
+          "buttons": []
+        },
+        {
+          "name": "CaseNoButtons",
+          "properties": {
+            "DataPath": "CaseNoButtons",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "false",
+            "DropListButton": "false",
+            "OpenButton": "false"
+          },
+          "rect": [13, 167, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "26afec7d548c620d979d2bbb8848f4fbcd256228d19c26458b0bbebf30f5aed3",
+          "buttons": []
+        },
+        {
+          "name": "CaseChoiceNoDrop",
+          "properties": {
+            "DataPath": "CaseChoiceNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "true",
+            "DropListButton": "false"
+          },
+          "rect": [13, 199, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CasePicker",
+          "properties": {
+            "DataPath": "CasePicker",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField"
+          },
+          "rect": [13, 231, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CasePickerNoDrop",
+          "properties": {
+            "DataPath": "CasePickerNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "DropListButton": "false"
+          },
+          "rect": [13, 263, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CasePickerBoth",
+          "properties": {
+            "DataPath": "CasePickerBoth",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInDropListAndInInputField"
+          },
+          "rect": [13, 295, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseNoChoiceWithDrop",
+          "properties": {
+            "DataPath": "CaseNoChoiceWithDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "false",
+            "DropListButton": "true"
+          },
+          "rect": [13, 327, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseReadOnly",
+          "properties": {
+            "DataPath": "CaseReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 359, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "7b058bd85dbc7f348f3317a06d192f93a7623d618fef1d8e0712937a74899ba8",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseReadOnlyForced",
+          "properties": {
+            "DataPath": "CaseReadOnlyForced",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true",
+            "ChoiceButton": "true",
+            "DropListButton": "true",
+            "OpenButton": "true"
+          },
+          "rect": [13, 391, 194, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "33374040901d134d8a80856f53e4581fb5f82cb480f254b9c2e84aeb843f1da3",
+          "buttons": ["dropdown", "choice", "open"]
+        },
+        {
+          "name": "CaseDisabled",
+          "properties": {
+            "DataPath": "CaseDisabled",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "Enabled": "false"
+          },
+          "rect": [13, 423, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "7b058bd85dbc7f348f3317a06d192f93a7623d618fef1d8e0712937a74899ba8",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseMarked",
+          "properties": {
+            "DataPath": "CaseMarked",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "AutoMarkIncomplete": "true"
+          },
+          "rect": [13, 455, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "8b859959f0d578c82f951076434e2b74311f4a15be125aac43d78beb36b043ff",
+          "buttons": ["choice"]
+        }
+      ]
+    },
+    {
+      "name": "EnumButtons",
+      "file": "EnumButtons.xml",
+      "frame": [207, 555],
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "sourceSha256": "8fd931c80cfe0653ca238862580cb359545772fd2ece5fc8f716d3e5abb969ec",
+      "nativeXmlSha256": "b493699ccd0997e26a4b2b8b15dc8b63c6e19f63d87a74cf5b3b7d9d2d31a993",
+      "nativeScreenshotSha256": "e8520496c0a473ed7e814f53ab925d85afd803b79c72057853ada7f361087928",
+      "fields": [
+        {
+          "name": "CaseDefault",
+          "properties": {
+            "DataPath": "CaseDefault",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false"
+          },
+          "rect": [13, 39, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseNoOpen",
+          "properties": {
+            "DataPath": "CaseNoOpen",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "OpenButton": "false"
+          },
+          "rect": [13, 71, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseNoDrop",
+          "properties": {
+            "DataPath": "CaseNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "DropListButton": "false"
+          },
+          "rect": [13, 103, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "26afec7d548c620d979d2bbb8848f4fbcd256228d19c26458b0bbebf30f5aed3",
+          "buttons": []
+        },
+        {
+          "name": "CaseNoChoice",
+          "properties": {
+            "DataPath": "CaseNoChoice",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 135, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseNoButtons",
+          "properties": {
+            "DataPath": "CaseNoButtons",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "false",
+            "DropListButton": "false",
+            "OpenButton": "false"
+          },
+          "rect": [13, 167, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "26afec7d548c620d979d2bbb8848f4fbcd256228d19c26458b0bbebf30f5aed3",
+          "buttons": []
+        },
+        {
+          "name": "CaseChoiceNoDrop",
+          "properties": {
+            "DataPath": "CaseChoiceNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "true",
+            "DropListButton": "false"
+          },
+          "rect": [13, 199, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "26afec7d548c620d979d2bbb8848f4fbcd256228d19c26458b0bbebf30f5aed3",
+          "buttons": []
+        },
+        {
+          "name": "CasePicker",
+          "properties": {
+            "DataPath": "CasePicker",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField"
+          },
+          "rect": [13, 231, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "1a8c7e6c680d9ecb23fd07cefb1de78abf2d92a00393bc293d98d35af7ee8c28",
+          "buttons": ["dropdown", "choice"]
+        },
+        {
+          "name": "CasePickerNoDrop",
+          "properties": {
+            "DataPath": "CasePickerNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "DropListButton": "false"
+          },
+          "rect": [13, 263, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CasePickerBoth",
+          "properties": {
+            "DataPath": "CasePickerBoth",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInDropListAndInInputField"
+          },
+          "rect": [13, 295, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "1a8c7e6c680d9ecb23fd07cefb1de78abf2d92a00393bc293d98d35af7ee8c28",
+          "buttons": ["dropdown", "choice"]
+        },
+        {
+          "name": "CaseNoChoiceWithDrop",
+          "properties": {
+            "DataPath": "CaseNoChoiceWithDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButton": "false",
+            "DropListButton": "true"
+          },
+          "rect": [13, 327, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseReadOnly",
+          "properties": {
+            "DataPath": "CaseReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 359, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "38b642a81cce474ade18987584109edf311423fb2a80c197814bd72ab31b8924",
+          "buttons": []
+        },
+        {
+          "name": "CaseReadOnlyForced",
+          "properties": {
+            "DataPath": "CaseReadOnlyForced",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true",
+            "ChoiceButton": "true",
+            "DropListButton": "true",
+            "OpenButton": "true"
+          },
+          "rect": [13, 391, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "bbccec936a863ede2823a878e1f2e95b85e11227219964f5671dc3cab8db21cf",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseDisabled",
+          "properties": {
+            "DataPath": "CaseDisabled",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "Enabled": "false"
+          },
+          "rect": [13, 423, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "b654adb72efb506d18bd05efe64a3ee1c48a85bea4b330eb26b91acd7357d084",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseMarked",
+          "properties": {
+            "DataPath": "CaseMarked",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "AutoMarkIncomplete": "true"
+          },
+          "rect": [13, 455, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "20fd68b0a98fc8121306e58df09ab6c30310a9aaeb7c54aebe5fa4b02797c6cf",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseListModeOff",
+          "properties": {
+            "DataPath": "CaseListModeOff",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "false"
+          },
+          "rect": [13, 487, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseListModeWithDropOff",
+          "properties": {
+            "DataPath": "CaseListModeWithDropOff",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "DropListButton": "false"
+          },
+          "rect": [13, 519, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "26afec7d548c620d979d2bbb8848f4fbcd256228d19c26458b0bbebf30f5aed3",
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "name": "CatalogOptions",
+      "file": "CatalogOptions.xml",
+      "frame": [228, 459],
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          }
+        ]
+      },
+      "sourceSha256": "9a3c39918b059f28284922fb10ed02e050cdda666095bc28135f7a93b7af501e",
+      "nativeXmlSha256": "2c0905db43bc797cb55a622c92f73efebd2668fe07ed2a5b3c76dae648148137",
+      "nativeScreenshotSha256": "6ce936b57135b8dfd78f375cb0efdde2b44f94f4f71d871e6ae223ee606673de",
+      "fields": [
+        {
+          "name": "CaseListMode",
+          "properties": {
+            "DataPath": "CaseListMode",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true"
+          },
+          "rect": [13, 39, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c91ce060eac6ef4271e08dae77e677c02a74156f43bcd2630ce12e2b3b96d20c",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseListModeNoPick",
+          "properties": {
+            "DataPath": "CaseListModeNoPick",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 71, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c91ce060eac6ef4271e08dae77e677c02a74156f43bcd2630ce12e2b3b96d20c",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseListModeNoDrop",
+          "properties": {
+            "DataPath": "CaseListModeNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "DropListButton": "false"
+          },
+          "rect": [13, 103, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "6d4fdfb98d197bbe0a3dbd637f08e269116c117701162324dafe6da3c30c9ac5",
+          "buttons": ["open"]
+        },
+        {
+          "name": "CaseListModeReadOnly",
+          "properties": {
+            "DataPath": "CaseListModeReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 135, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "a33d56862ea66608fc47808b6c39d96f93cc7d33796bfba44b5c98b5a69288a8",
+          "buttons": ["open"]
+        },
+        {
+          "name": "CaseListModePick",
+          "properties": {
+            "DataPath": "CaseListModePick",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "ChoiceButtonRepresentation": "ShowInInputField"
+          },
+          "rect": [13, 167, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c91ce060eac6ef4271e08dae77e677c02a74156f43bcd2630ce12e2b3b96d20c",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CasePickNoChoice",
+          "properties": {
+            "DataPath": "CasePickNoChoice",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 199, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c91ce060eac6ef4271e08dae77e677c02a74156f43bcd2630ce12e2b3b96d20c",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CasePickReadOnly",
+          "properties": {
+            "DataPath": "CasePickReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 231, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "a33d56862ea66608fc47808b6c39d96f93cc7d33796bfba44b5c98b5a69288a8",
+          "buttons": ["open"]
+        },
+        {
+          "name": "CaseReadOnlyChoice",
+          "properties": {
+            "DataPath": "CaseReadOnlyChoice",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true",
+            "ChoiceButton": "true"
+          },
+          "rect": [13, 263, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "a33d56862ea66608fc47808b6c39d96f93cc7d33796bfba44b5c98b5a69288a8",
+          "buttons": ["open"]
+        },
+        {
+          "name": "CaseClear",
+          "properties": {
+            "DataPath": "CaseClear",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true"
+          },
+          "rect": [13, 295, 194, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "598033bc91d7f917cfec14cdb69b674a1c27188a25adaab4f0a21bcb29b23c7f",
+          "buttons": ["dropdown", "clear", "open"]
+        },
+        {
+          "name": "CaseClearReadOnly",
+          "properties": {
+            "DataPath": "CaseClearReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 327, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "3737bd8170ec29c6464c769065ebdba98809c4e967aec903274b2f62db263ac6",
+          "buttons": ["clear", "open"]
+        },
+        {
+          "name": "CaseClearDisabled",
+          "properties": {
+            "DataPath": "CaseClearDisabled",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true",
+            "Enabled": "false"
+          },
+          "rect": [13, 359, 194, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "ba6a16216f0af40474a55a7743bb406a0567d491e3538249094ebbd6406e367b",
+          "buttons": ["dropdown", "clear", "open"]
+        },
+        {
+          "name": "CaseClearOnly",
+          "properties": {
+            "DataPath": "CaseClearOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true",
+            "OpenButton": "false",
+            "DropListButton": "false",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 391, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "4f4477dd03acc5daa275348b27e6a5296671ee8120680ff5e0a342b6810475a9",
+          "buttons": ["clear"]
+        },
+        {
+          "name": "CaseSpin",
+          "properties": {
+            "DataPath": "CaseSpin",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "SpinButton": "true"
+          },
+          "rect": [13, 423, 194, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "af3ce246e4b397c824454bb2a8ca7ac802d8eaf119499b461151fb7d494e44da",
+          "buttons": ["dropdown", "spin", "open"]
+        }
+      ]
+    },
+    {
+      "name": "CompositeOptions",
+      "file": "CompositeOptions.xml",
+      "frame": [207, 459],
+      "valueType": {
+        "kind": "composite",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          },
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeUsers"
+          }
+        ]
+      },
+      "sourceSha256": "a9566003bbe28277d01a3ed45bc8114d303d62de2f157e7cb5cd3b82513b4209",
+      "nativeXmlSha256": "bfc75227ab10606fccc686bfc19cdbc22882864d0518f417a87f3283f45c4cf6",
+      "nativeScreenshotSha256": "6f1b1be639edf6a4b14def16261851b4a242fdceed8ca23e2036521f50a2442f",
+      "fields": [
+        {
+          "name": "CaseListMode",
+          "properties": {
+            "DataPath": "CaseListMode",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true"
+          },
+          "rect": [13, 39, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "1a8c7e6c680d9ecb23fd07cefb1de78abf2d92a00393bc293d98d35af7ee8c28",
+          "buttons": ["dropdown", "choice"]
+        },
+        {
+          "name": "CaseListModeNoPick",
+          "properties": {
+            "DataPath": "CaseListModeNoPick",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 71, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseListModeNoDrop",
+          "properties": {
+            "DataPath": "CaseListModeNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "DropListButton": "false"
+          },
+          "rect": [13, 103, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseListModeReadOnly",
+          "properties": {
+            "DataPath": "CaseListModeReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 135, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "7b058bd85dbc7f348f3317a06d192f93a7623d618fef1d8e0712937a74899ba8",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseListModePick",
+          "properties": {
+            "DataPath": "CaseListModePick",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "ChoiceButtonRepresentation": "ShowInInputField"
+          },
+          "rect": [13, 167, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "1a8c7e6c680d9ecb23fd07cefb1de78abf2d92a00393bc293d98d35af7ee8c28",
+          "buttons": ["dropdown", "choice"]
+        },
+        {
+          "name": "CasePickNoChoice",
+          "properties": {
+            "DataPath": "CasePickNoChoice",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 199, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "26afec7d548c620d979d2bbb8848f4fbcd256228d19c26458b0bbebf30f5aed3",
+          "buttons": []
+        },
+        {
+          "name": "CasePickReadOnly",
+          "properties": {
+            "DataPath": "CasePickReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 231, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "7b058bd85dbc7f348f3317a06d192f93a7623d618fef1d8e0712937a74899ba8",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseReadOnlyChoice",
+          "properties": {
+            "DataPath": "CaseReadOnlyChoice",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true",
+            "ChoiceButton": "true"
+          },
+          "rect": [13, 263, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "7b058bd85dbc7f348f3317a06d192f93a7623d618fef1d8e0712937a74899ba8",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseClear",
+          "properties": {
+            "DataPath": "CaseClear",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true"
+          },
+          "rect": [13, 295, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "6ff4049c174d694a0a8f5dbb851e82677dad0895bcbd7881789c21d22328de29",
+          "buttons": ["choice", "clear"]
+        },
+        {
+          "name": "CaseClearReadOnly",
+          "properties": {
+            "DataPath": "CaseClearReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 327, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "cce1a0e4851995fbfede2de4ecf5bcc8cb7c40080630a2b23367e09d8664b395",
+          "buttons": ["choice", "clear"]
+        },
+        {
+          "name": "CaseClearDisabled",
+          "properties": {
+            "DataPath": "CaseClearDisabled",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true",
+            "Enabled": "false"
+          },
+          "rect": [13, 359, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "cce1a0e4851995fbfede2de4ecf5bcc8cb7c40080630a2b23367e09d8664b395",
+          "buttons": ["choice", "clear"]
+        },
+        {
+          "name": "CaseClearOnly",
+          "properties": {
+            "DataPath": "CaseClearOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true",
+            "OpenButton": "false",
+            "DropListButton": "false",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 391, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "4f4477dd03acc5daa275348b27e6a5296671ee8120680ff5e0a342b6810475a9",
+          "buttons": ["clear"]
+        },
+        {
+          "name": "CaseSpin",
+          "properties": {
+            "DataPath": "CaseSpin",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "SpinButton": "true"
+          },
+          "rect": [13, 423, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "8d662f9c67ac8d666379e00a4415f69664b7f340f32cbdcca737f633941141e1",
+          "buttons": ["choice", "spin"]
+        }
+      ]
+    },
+    {
+      "name": "EnumOptions",
+      "file": "EnumOptions.xml",
+      "frame": [207, 459],
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          }
+        ]
+      },
+      "sourceSha256": "7052c0e1d5ffbcd384011f3b217f34f2b5e0f6b7a9b998eb70b5a8c753f819fd",
+      "nativeXmlSha256": "7e721da822528f4412406482111f87e606909dd958a30e851873692fc5d98015",
+      "nativeScreenshotSha256": "0be141e7726dc59c209b6d47e13a24741d295f3cb41ae855a7180b1811fa0c43",
+      "fields": [
+        {
+          "name": "CaseListMode",
+          "properties": {
+            "DataPath": "CaseListMode",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true"
+          },
+          "rect": [13, 39, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseListModeNoPick",
+          "properties": {
+            "DataPath": "CaseListModeNoPick",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 71, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CaseListModeNoDrop",
+          "properties": {
+            "DataPath": "CaseListModeNoDrop",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "DropListButton": "false"
+          },
+          "rect": [13, 103, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "26afec7d548c620d979d2bbb8848f4fbcd256228d19c26458b0bbebf30f5aed3",
+          "buttons": []
+        },
+        {
+          "name": "CaseListModeReadOnly",
+          "properties": {
+            "DataPath": "CaseListModeReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 135, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "38b642a81cce474ade18987584109edf311423fb2a80c197814bd72ab31b8924",
+          "buttons": []
+        },
+        {
+          "name": "CaseListModePick",
+          "properties": {
+            "DataPath": "CaseListModePick",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true",
+            "ChoiceButtonRepresentation": "ShowInInputField"
+          },
+          "rect": [13, 167, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CasePickNoChoice",
+          "properties": {
+            "DataPath": "CasePickNoChoice",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 199, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "fa5c85e72c5ee6fc76c97b58c50b878c08a63b0dfbd31977b92a85c0737cc52f",
+          "buttons": ["dropdown"]
+        },
+        {
+          "name": "CasePickReadOnly",
+          "properties": {
+            "DataPath": "CasePickReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 231, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "38b642a81cce474ade18987584109edf311423fb2a80c197814bd72ab31b8924",
+          "buttons": []
+        },
+        {
+          "name": "CaseReadOnlyChoice",
+          "properties": {
+            "DataPath": "CaseReadOnlyChoice",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true",
+            "ChoiceButton": "true"
+          },
+          "rect": [13, 263, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "38b642a81cce474ade18987584109edf311423fb2a80c197814bd72ab31b8924",
+          "buttons": []
+        },
+        {
+          "name": "CaseClear",
+          "properties": {
+            "DataPath": "CaseClear",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true"
+          },
+          "rect": [13, 295, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "46ccdfa517bfbeb1b0da3ec894cc4e3650decc46033cee98c1ea11b47fb7156c",
+          "buttons": ["dropdown", "clear"]
+        },
+        {
+          "name": "CaseClearReadOnly",
+          "properties": {
+            "DataPath": "CaseClearReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 327, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "6505b96ba5038033bd5a4c3a24ef466c62197b39de77256019996fc531a11d82",
+          "buttons": ["clear"]
+        },
+        {
+          "name": "CaseClearDisabled",
+          "properties": {
+            "DataPath": "CaseClearDisabled",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true",
+            "Enabled": "false"
+          },
+          "rect": [13, 359, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "28673c182784683cafb02c4f55c9213e05dd4f470c07711e624048ffdf109ba4",
+          "buttons": ["dropdown", "clear"]
+        },
+        {
+          "name": "CaseClearOnly",
+          "properties": {
+            "DataPath": "CaseClearOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true",
+            "OpenButton": "false",
+            "DropListButton": "false",
+            "ChoiceButton": "false"
+          },
+          "rect": [13, 391, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "4f4477dd03acc5daa275348b27e6a5296671ee8120680ff5e0a342b6810475a9",
+          "buttons": ["clear"]
+        },
+        {
+          "name": "CaseSpin",
+          "properties": {
+            "DataPath": "CaseSpin",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "SpinButton": "true"
+          },
+          "rect": [13, 423, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "72f7872e263eb504ee1c16fbf64b1e51365bb19d8d5468ab07301e428191af6b",
+          "buttons": ["dropdown", "spin"]
+        }
+      ]
+    },
+    {
+      "name": "Mixed",
+      "file": "Mixed.xml",
+      "frame": [207, 235],
+      "valueType": {
+        "kind": "composite",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "EnumRef.NativeChoices"
+          },
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/core",
+            "name": "TypeDescription"
+          }
+        ]
+      },
+      "sourceSha256": "40904de276ff9b6e1aa4fad9367d081dcc0b3e175161fe07ce788406dcddb6d3",
+      "nativeXmlSha256": "931237342d09bcbe812167b6d4b1542c637ad731adbe3ed0e228418755c08432",
+      "nativeScreenshotSha256": "538f7bf2a806090dce428ca3b85340c24c3a98225d23face0e45db2235bb6ba4",
+      "fields": [
+        {
+          "name": "CaseDefault",
+          "properties": {
+            "DataPath": "CaseDefault",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false"
+          },
+          "rect": [13, 39, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseClear",
+          "properties": {
+            "DataPath": "CaseClear",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ClearButton": "true"
+          },
+          "rect": [13, 71, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "6ff4049c174d694a0a8f5dbb851e82677dad0895bcbd7881789c21d22328de29",
+          "buttons": ["choice", "clear"]
+        },
+        {
+          "name": "CaseListMode",
+          "properties": {
+            "DataPath": "CaseListMode",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ListChoiceMode": "true"
+          },
+          "rect": [13, 103, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "1a8c7e6c680d9ecb23fd07cefb1de78abf2d92a00393bc293d98d35af7ee8c28",
+          "buttons": ["dropdown", "choice"]
+        },
+        {
+          "name": "CasePick",
+          "properties": {
+            "DataPath": "CasePick",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ChoiceButtonRepresentation": "ShowInInputField"
+          },
+          "rect": [13, 135, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "78b8fba8f7f154dc2ec31f9f7ee9ea0da93c0c77d4fd4b16fc111c23bd337e14",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseReadOnly",
+          "properties": {
+            "DataPath": "CaseReadOnly",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 167, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "7b058bd85dbc7f348f3317a06d192f93a7623d618fef1d8e0712937a74899ba8",
+          "buttons": ["choice"]
+        },
+        {
+          "name": "CaseReadOnlyClear",
+          "properties": {
+            "DataPath": "CaseReadOnlyClear",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true",
+            "ClearButton": "true"
+          },
+          "rect": [13, 199, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "cce1a0e4851995fbfede2de4ecf5bcc8cb7c40080630a2b23367e09d8664b395",
+          "buttons": ["choice", "clear"]
+        }
+      ]
+    },
+    {
+      "name": "Fonts",
+      "file": "Fonts.xml",
+      "frame": [207, 272],
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          }
+        ]
+      },
+      "sourceSha256": "abd41d7e41a01638d50d4fb20e386fd5c807db1d55925a113635d710eddf1ba0",
+      "nativeXmlSha256": "41d4a0a4c7abeb65057246da34d7c13ebf9e4290273ff79e1eec0295956e1dc2",
+      "nativeScreenshotSha256": "2c461d31f92f5a7ec8ab96caf1db3fb5bb4faebdae520373311eddd3285b135f",
+      "fields": [
+        {
+          "name": "CaseFont16",
+          "properties": {
+            "DataPath": "CaseFont16",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false"
+          },
+          "rect": [13, 39, 173, 38],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "font": {
+            "points": 16
+          },
+          "wholeInputRgbSha256": "89cebf139ba0b703ee18c44f28d49da487b2c3f4fc9b819c556e57851c6bed53",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseFont20",
+          "properties": {
+            "DataPath": "CaseFont20",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false"
+          },
+          "rect": [13, 86, 173, 48],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "font": {
+            "points": 20
+          },
+          "wholeInputRgbSha256": "95a63ca2894d5c79896191c075fcc5fa07eb8801f5865fa920fa53756604b73f",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseFont8",
+          "properties": {
+            "DataPath": "CaseFont8",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false"
+          },
+          "rect": [13, 143, 173, 20],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "font": {
+            "points": 8
+          },
+          "wholeInputRgbSha256": "4cad6fbb5917887d77ffbfd2b47ddbc4241f629e8a041fa0e4dc92a1bd2f2ee4",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseColor",
+          "properties": {
+            "DataPath": "CaseColor",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "BackColor": "#DBF2FB",
+            "TextColor": "#496B1D",
+            "BorderColor": "#755521"
+          },
+          "rect": [13, 172, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [117, 85, 33],
+          "actualBackground": [219, 242, 251],
+          "wholeInputRgbSha256": "a2b1a1102582a5f1519651f22d661b18fc68dd73672f8e97283c7a3dc7661e4d",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseReadOnlyColor",
+          "properties": {
+            "DataPath": "CaseReadOnlyColor",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "ReadOnly": "true",
+            "BackColor": "#DBF2FB",
+            "TextColor": "#496B1D",
+            "BorderColor": "#755521"
+          },
+          "rect": [13, 204, 152, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [193, 161, 109],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "18e9a6a53f7a648abee96a104b46cfbd0149ac81b8b0b8473a0c1dde6925d3ca",
+          "buttons": ["open"]
+        },
+        {
+          "name": "CaseDisabledColor",
+          "properties": {
+            "DataPath": "CaseDisabledColor",
+            "TitleLocation": "None",
+            "Width": "12",
+            "HorizontalStretch": "false",
+            "Enabled": "false",
+            "BackColor": "#DBF2FB",
+            "TextColor": "#496B1D",
+            "BorderColor": "#755521"
+          },
+          "rect": [13, 236, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [193, 161, 109],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "49afd0c35205d53fd5f70e0fc2a7d51e2f0d8358adf2e7a0b39743c4ed8d9c40",
+          "buttons": ["dropdown", "open"]
+        }
+      ]
+    },
+    {
+      "name": "Decisions",
+      "file": "Decisions.xml",
+      "frame": [270, 432],
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          }
+        ]
+      },
+      "sourceSha256": "62aee3d02679da0a98cc1bac800c217107eed25fccae646b43e14666555a17df",
+      "nativeXmlSha256": "15be088a38fed6a728a197e500a31f4ad23fbc4a39a5c3b280add60bd87e6eeb",
+      "nativeScreenshotSha256": "f332bdc284d10d5f8dd807b064b0c932d5c0abffa67751e6a2a3697c2611ceca",
+      "fields": [
+        {
+          "name": "CasePickForceReadOnly",
+          "properties": {
+            "DataPath": "CasePickForceReadOnly",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "ReadOnly": "true",
+            "ChoiceButton": "true"
+          },
+          "rect": [13, 39, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c77c326337a58161b74f4ef431ae3264fd4255883541bef041cbc0dec6e04876",
+          "buttons": ["choice", "open"]
+        },
+        {
+          "name": "CasePickForceListMode",
+          "properties": {
+            "DataPath": "CasePickForceListMode",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "ListChoiceMode": "true",
+            "ChoiceButton": "true"
+          },
+          "rect": [13, 71, 194, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "c90334dd8edf37cf4e1b2a558410ae5cf6962a906914e3ed5d262481e943385b",
+          "buttons": ["dropdown", "choice", "open"]
+        },
+        {
+          "name": "CasePickSpinClear",
+          "properties": {
+            "DataPath": "CasePickSpinClear",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "ChoiceButtonRepresentation": "ShowInInputField",
+            "SpinButton": "true",
+            "ClearButton": "true"
+          },
+          "rect": [13, 103, 236, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "843e1a59b5c9fdcc8a01722a2113af1f8641cb64d2173c47932dccb26bb2ea11",
+          "buttons": ["dropdown", "choice", "clear", "spin", "open"]
+        },
+        {
+          "name": "CaseClearSpinReadOnly",
+          "properties": {
+            "DataPath": "CaseClearSpinReadOnly",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "ClearButton": "true",
+            "SpinButton": "true",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 135, 194, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "2694aac4eaf9a86df35fdbf2da0afde29d3daaa8642a43db0dfba6db9698ad03",
+          "buttons": ["clear", "spin", "open"]
+        },
+        {
+          "name": "CaseClearSpinDisabled",
+          "properties": {
+            "DataPath": "CaseClearSpinDisabled",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "ClearButton": "true",
+            "SpinButton": "true",
+            "Enabled": "false"
+          },
+          "rect": [13, 167, 215, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "68c498a2a4f0982ff9b86d86c633e69d87ef1c4898a59acd683723c73d3394bb",
+          "buttons": ["dropdown", "clear", "spin", "open"]
+        },
+        {
+          "name": "CaseSpin16",
+          "properties": {
+            "DataPath": "CaseSpin16",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "SpinButton": "true"
+          },
+          "rect": [13, 199, 194, 38],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "font": {
+            "points": 16
+          },
+          "wholeInputRgbSha256": "adf3eab13490b72950da4678968455a7b9889595cbf8210e214f55d838e83e56",
+          "buttons": ["dropdown", "spin", "open"]
+        },
+        {
+          "name": "CaseSpin20",
+          "properties": {
+            "DataPath": "CaseSpin20",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "SpinButton": "true"
+          },
+          "rect": [13, 246, 194, 48],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "font": {
+            "points": 20
+          },
+          "wholeInputRgbSha256": "25221537fc58357b00e93b0cfc36e7945b2e000f378c95374ef41c437a395ceb",
+          "buttons": ["dropdown", "spin", "open"]
+        },
+        {
+          "name": "CaseSpin8",
+          "properties": {
+            "DataPath": "CaseSpin8",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "SpinButton": "true"
+          },
+          "rect": [13, 303, 194, 20],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "font": {
+            "points": 8
+          },
+          "wholeInputRgbSha256": "a791b0369531d2c2a32474eb5a2bb58bb3e7bad7d5bfadb9aa23a0fba9344269",
+          "buttons": ["dropdown", "spin", "open"]
+        },
+        {
+          "name": "CaseMarkReadOnly",
+          "properties": {
+            "DataPath": "CaseMarkReadOnly",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "8",
+            "AutoMarkIncomplete": "true",
+            "ReadOnly": "true"
+          },
+          "rect": [13, 332, 112, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "4d14b9524b7c008f119450c1f6edce03e535c6fcdd8ed0a1a43ef088dcd451ea",
+          "buttons": ["open"]
+        },
+        {
+          "name": "CaseMarkDisabled",
+          "properties": {
+            "DataPath": "CaseMarkDisabled",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "AutoMarkIncomplete": "true",
+            "Enabled": "false"
+          },
+          "rect": [13, 364, 173, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [215, 215, 215],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "7dbcda8993e50da1015547d2e3d7524b11171e6e055822fc14d97c3ce7e5d510",
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseMarkNoButtons",
+          "properties": {
+            "DataPath": "CaseMarkNoButtons",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "AutoMarkIncomplete": "true",
+            "DropListButton": "false",
+            "OpenButton": "false"
+          },
+          "rect": [13, 396, 131, 23],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "wholeInputRgbSha256": "d0ba75962bb81a337ba07421ce4bf781d082f25acde046b03ba7cf15dfff9a63",
+          "buttons": []
+        }
+      ]
+    },
+    {
+      "name": "Multiline",
+      "file": "Multiline.xml",
+      "frame": [228, 283],
+      "valueType": {
+        "kind": "reference",
+        "types": [
+          {
+            "namespace": "http://v8.1c.ru/8.1/data/enterprise/current-config",
+            "name": "CatalogRef.NativeGoods"
+          }
+        ]
+      },
+      "sourceSha256": "ba293df0503a74a21f1a54f35d2cf71f31ebc373b9b04ef7b546360ae3ff32e8",
+      "nativeXmlSha256": "23f9cdb5673556572d7cfc32e5e20d522dea34a22be6024145ccf349de327c79",
+      "nativeScreenshotSha256": "90407653ce5a4cacaaf618e653d09a10f6f3c7ae969005f85cd06b322dd96b55",
+      "fields": [
+        {
+          "name": "CaseDefault",
+          "properties": {
+            "DataPath": "CaseDefault",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "MultiLine": "true"
+          },
+          "rect": [13, 39, 173, 51],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "paintAreas": [
+            {
+              "name": "button row",
+              "rect": [130, 4, 43, 15],
+              "rgbSha256": "56f03b92103f21d20ea03cc2a6d87a8adf75fa9ad88ef4d26f7a93063b694ede"
+            },
+            {
+              "name": "area below buttons",
+              "rect": [131, 23, 42, 28],
+              "rgbSha256": "7440905b85a517a083a2c24e14649c9efffae58403066a4b95a046cb5354b9a7"
+            },
+            {
+              "name": "value bottom",
+              "rect": [4, 46, 123, 4],
+              "rgbSha256": "52afca08c4320c0d58f67643492395d1fff016745c60b6584ada83cdd07e780b"
+            }
+          ],
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseClear",
+          "properties": {
+            "DataPath": "CaseClear",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "MultiLine": "true",
+            "ClearButton": "true"
+          },
+          "rect": [13, 99, 194, 51],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "paintAreas": [
+            {
+              "name": "button row",
+              "rect": [130, 4, 64, 15],
+              "rgbSha256": "adc7ffc759480621434346947517df085f1a9c0045f4a52ef4149be50a6ed374"
+            },
+            {
+              "name": "area below buttons",
+              "rect": [131, 23, 63, 28],
+              "rgbSha256": "f497ab6fd2536a7f5c35a1a617cc2fa954526a47ce75b48dc4811919b98c63dc"
+            },
+            {
+              "name": "value bottom",
+              "rect": [4, 46, 123, 4],
+              "rgbSha256": "52afca08c4320c0d58f67643492395d1fff016745c60b6584ada83cdd07e780b"
+            }
+          ],
+          "buttons": ["dropdown", "clear", "open"]
+        },
+        {
+          "name": "CaseMarked",
+          "properties": {
+            "DataPath": "CaseMarked",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "MultiLine": "true",
+            "AutoMarkIncomplete": "true"
+          },
+          "rect": [13, 159, 173, 51],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "paintAreas": [
+            {
+              "name": "button row",
+              "rect": [130, 4, 43, 15],
+              "rgbSha256": "56f03b92103f21d20ea03cc2a6d87a8adf75fa9ad88ef4d26f7a93063b694ede"
+            },
+            {
+              "name": "area below buttons",
+              "rect": [131, 23, 42, 28],
+              "rgbSha256": "7440905b85a517a083a2c24e14649c9efffae58403066a4b95a046cb5354b9a7"
+            },
+            {
+              "name": "value bottom",
+              "rect": [4, 46, 123, 4],
+              "rgbSha256": "e008c2376b212ced765b1cdf6f310df7fc6b58f1bd98bf2f97307ff548ddb6e3"
+            }
+          ],
+          "buttons": ["dropdown", "open"]
+        },
+        {
+          "name": "CaseWithTwoLines",
+          "properties": {
+            "DataPath": "CaseWithTwoLines",
+            "TitleLocation": "None",
+            "HorizontalStretch": "false",
+            "Width": "12",
+            "MultiLine": "true",
+            "Height": "2"
+          },
+          "rect": [13, 219, 173, 51],
+          "outside": [255, 255, 255],
+          "actualBorder": [160, 160, 160],
+          "actualBackground": [255, 255, 255],
+          "paintAreas": [
+            {
+              "name": "button row",
+              "rect": [130, 4, 43, 15],
+              "rgbSha256": "56f03b92103f21d20ea03cc2a6d87a8adf75fa9ad88ef4d26f7a93063b694ede"
+            },
+            {
+              "name": "area below buttons",
+              "rect": [131, 23, 42, 28],
+              "rgbSha256": "7440905b85a517a083a2c24e14649c9efffae58403066a4b95a046cb5354b9a7"
+            },
+            {
+              "name": "value bottom",
+              "rect": [4, 46, 123, 4],
+              "rgbSha256": "52afca08c4320c0d58f67643492395d1fff016745c60b6584ada83cdd07e780b"
+            }
+          ],
+          "buttons": ["dropdown", "open"]
+        }
+      ]
+    }
+  ]
+}

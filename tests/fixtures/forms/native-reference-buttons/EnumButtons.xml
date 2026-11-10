@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" version="2.20">
+  <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Поля</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Поля</v8:content></v8:item></Title>
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <InputField name="CaseDefault" id="11">
+      <DataPath>CaseDefault</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Default</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Default</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+    </InputField>
+    <InputField name="CaseNoOpen" id="12">
+      <DataPath>CaseNoOpen</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>NoOpen</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>NoOpen</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <OpenButton>false</OpenButton>
+    </InputField>
+    <InputField name="CaseNoDrop" id="13">
+      <DataPath>CaseNoDrop</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>NoDrop</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>NoDrop</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <DropListButton>false</DropListButton>
+    </InputField>
+    <InputField name="CaseNoChoice" id="14">
+      <DataPath>CaseNoChoice</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>NoChoice</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>NoChoice</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ChoiceButton>false</ChoiceButton>
+    </InputField>
+    <InputField name="CaseNoButtons" id="15">
+      <DataPath>CaseNoButtons</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>NoButtons</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>NoButtons</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ChoiceButton>false</ChoiceButton>
+      <DropListButton>false</DropListButton>
+      <OpenButton>false</OpenButton>
+    </InputField>
+    <InputField name="CaseChoiceNoDrop" id="16">
+      <DataPath>CaseChoiceNoDrop</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ChoiceNoDrop</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ChoiceNoDrop</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ChoiceButton>true</ChoiceButton>
+      <DropListButton>false</DropListButton>
+    </InputField>
+    <InputField name="CasePicker" id="17">
+      <DataPath>CasePicker</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Picker</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Picker</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ChoiceButtonRepresentation>ShowInInputField</ChoiceButtonRepresentation>
+    </InputField>
+    <InputField name="CasePickerNoDrop" id="18">
+      <DataPath>CasePickerNoDrop</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>PickerNoDrop</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>PickerNoDrop</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ChoiceButtonRepresentation>ShowInInputField</ChoiceButtonRepresentation>
+      <DropListButton>false</DropListButton>
+    </InputField>
+    <InputField name="CasePickerBoth" id="19">
+      <DataPath>CasePickerBoth</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>PickerBoth</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>PickerBoth</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ChoiceButtonRepresentation>ShowInDropListAndInInputField</ChoiceButtonRepresentation>
+    </InputField>
+    <InputField name="CaseNoChoiceWithDrop" id="20">
+      <DataPath>CaseNoChoiceWithDrop</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>NoChoiceWithDrop</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>NoChoiceWithDrop</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ChoiceButton>false</ChoiceButton>
+      <DropListButton>true</DropListButton>
+    </InputField>
+    <InputField name="CaseReadOnly" id="21">
+      <DataPath>CaseReadOnly</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ReadOnly</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ReadOnly</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ReadOnly>true</ReadOnly>
+    </InputField>
+    <InputField name="CaseReadOnlyForced" id="22">
+      <DataPath>CaseReadOnlyForced</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ReadOnlyForced</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ReadOnlyForced</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ReadOnly>true</ReadOnly>
+      <ChoiceButton>true</ChoiceButton>
+      <DropListButton>true</DropListButton>
+      <OpenButton>true</OpenButton>
+    </InputField>
+    <InputField name="CaseDisabled" id="23">
+      <DataPath>CaseDisabled</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Disabled</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Disabled</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Enabled>false</Enabled>
+    </InputField>
+    <InputField name="CaseMarked" id="24">
+      <DataPath>CaseMarked</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Marked</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Marked</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <AutoMarkIncomplete>true</AutoMarkIncomplete>
+    </InputField>
+    <InputField name="CaseListModeOff" id="25">
+      <DataPath>CaseListModeOff</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ListModeOff</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ListModeOff</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ListChoiceMode>false</ListChoiceMode>
+    </InputField>
+    <InputField name="CaseListModeWithDropOff" id="26">
+      <DataPath>CaseListModeWithDropOff</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ListModeWithDropOff</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ListModeWithDropOff</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ListChoiceMode>true</ListChoiceMode>
+      <DropListButton>false</DropListButton>
+    </InputField>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="CaseDefault" id="1"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseDefault</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseDefault</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseNoOpen" id="2"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseNoOpen</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseNoOpen</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseNoDrop" id="3"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseNoDrop</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseNoDrop</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseNoChoice" id="4"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseNoChoice</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseNoChoice</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseNoButtons" id="5"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseNoButtons</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseNoButtons</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseChoiceNoDrop" id="6"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseChoiceNoDrop</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseChoiceNoDrop</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CasePicker" id="7"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CasePicker</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CasePicker</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CasePickerNoDrop" id="8"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CasePickerNoDrop</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CasePickerNoDrop</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CasePickerBoth" id="9"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CasePickerBoth</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CasePickerBoth</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseNoChoiceWithDrop" id="10"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseNoChoiceWithDrop</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseNoChoiceWithDrop</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseReadOnly" id="11"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseReadOnly</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseReadOnly</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseReadOnlyForced" id="12"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseReadOnlyForced</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseReadOnlyForced</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseDisabled" id="13"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseDisabled</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseDisabled</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseMarked" id="14"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseMarked</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseMarked</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseListModeOff" id="15"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseListModeOff</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseListModeOff</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+    <Attribute name="CaseListModeWithDropOff" id="16"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseListModeWithDropOff</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseListModeWithDropOff</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type></Type></Attribute>
+  </Attributes>
+</Form>

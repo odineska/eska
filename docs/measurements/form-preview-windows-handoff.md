@@ -1878,6 +1878,17 @@ Windows. Текущий пиксельный сценарий снимает п�
 [Эталонная форма](../../tests/fixtures/forms/native-column-widths/VerticalReferenceTitles.xml).
 [Замеры Linux](t157-vertical-reference-titles-linux.json).
 
+Для ссылочных полей откройте формы `CatalogButtons`, `CompositeButtons`,
+`EnumButtons`, `Decisions` и `Multiline` из эталонной матрицы. Сравните
+порядок и размеры стрелки, выбора, очистки, изменения значения и открытия.
+Проверьте `ListChoiceMode`, `ChoiceButtonRepresentation`, режим чтения,
+отключение поля и отметку незаполненного значения. Для многострочной
+ссылки измерьте границы значения и ряда кнопок. Повторите изменение
+`DropListButton` и `ChoiceButton` в несохранённом XML с откреплённым
+просмотром. Для приёмки используйте снимки нативного Конфигуратора Windows
+на том же DPI.
+[Эталонные входы Linux](../../tests/fixtures/forms/native-reference-buttons/README.md).
+
 ### Инспектор формы в трёх колонках
 
 Установите проверочный VSIX и укажите `eska-project` с Metadata API 1.45.

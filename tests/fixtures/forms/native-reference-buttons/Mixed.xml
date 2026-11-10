@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" version="2.20">
+  <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Поля</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Поля</v8:content></v8:item></Title>
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <InputField name="CaseDefault" id="11">
+      <DataPath>CaseDefault</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Default</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Default</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+    </InputField>
+    <InputField name="CaseClear" id="12">
+      <DataPath>CaseClear</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Clear</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Clear</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ClearButton>true</ClearButton>
+    </InputField>
+    <InputField name="CaseListMode" id="13">
+      <DataPath>CaseListMode</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ListMode</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ListMode</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ListChoiceMode>true</ListChoiceMode>
+    </InputField>
+    <InputField name="CasePick" id="14">
+      <DataPath>CasePick</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Pick</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Pick</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ChoiceButtonRepresentation>ShowInInputField</ChoiceButtonRepresentation>
+    </InputField>
+    <InputField name="CaseReadOnly" id="15">
+      <DataPath>CaseReadOnly</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ReadOnly</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ReadOnly</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ReadOnly>true</ReadOnly>
+    </InputField>
+    <InputField name="CaseReadOnlyClear" id="16">
+      <DataPath>CaseReadOnlyClear</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ReadOnlyClear</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ReadOnlyClear</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ReadOnly>true</ReadOnly>
+      <ClearButton>true</ClearButton>
+    </InputField>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="CaseDefault" id="1"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseDefault</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseDefault</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type><v8:Type xmlns:d="http://v8.1c.ru/8.1/data/core">d:TypeDescription</v8:Type></Type></Attribute>
+    <Attribute name="CaseClear" id="2"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseClear</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseClear</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type><v8:Type xmlns:d="http://v8.1c.ru/8.1/data/core">d:TypeDescription</v8:Type></Type></Attribute>
+    <Attribute name="CaseListMode" id="3"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseListMode</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseListMode</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type><v8:Type xmlns:d="http://v8.1c.ru/8.1/data/core">d:TypeDescription</v8:Type></Type></Attribute>
+    <Attribute name="CasePick" id="4"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CasePick</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CasePick</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type><v8:Type xmlns:d="http://v8.1c.ru/8.1/data/core">d:TypeDescription</v8:Type></Type></Attribute>
+    <Attribute name="CaseReadOnly" id="5"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseReadOnly</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseReadOnly</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type><v8:Type xmlns:d="http://v8.1c.ru/8.1/data/core">d:TypeDescription</v8:Type></Type></Attribute>
+    <Attribute name="CaseReadOnlyClear" id="6"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseReadOnlyClear</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseReadOnlyClear</v8:content></v8:item></Title><Type><v8:Type>cfg:EnumRef.NativeChoices</v8:Type><v8:Type xmlns:d="http://v8.1c.ru/8.1/data/core">d:TypeDescription</v8:Type></Type></Attribute>
+  </Attributes>
+</Form>
