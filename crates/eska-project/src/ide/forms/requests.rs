@@ -6,7 +6,7 @@ use super::{
 };
 use crate::ide::{dto::Labels, params, query};
 use eska_project_core::project::{
-    forms::{FormInput, FormOverlay},
+    forms::{FormInput, FormOverlay, FormPreviewInput},
     metadata_workspace::ProjectSession,
 };
 use serde_json::Value;
@@ -49,7 +49,7 @@ impl State {
         key: &query::Key,
         args: &Value,
     ) -> Result<Value, Value> {
-        params::optional_fields(args, &["application", "inputs"])?;
+        params::optional_fields(args, &["application", "inputs", "expandedData"])?;
         check_input_fields(context, args)?;
         let input: Open = params::decode(args)?;
         if input.application.as_ref().is_some_and(String::is_empty) {
@@ -65,9 +65,11 @@ impl State {
             .form_preview(
                 &node,
                 input.application.as_deref(),
-                &[],
-                &[],
-                inputs,
+                FormPreviewInput {
+                    documents: inputs,
+                    expanded_data: &input.expanded_data,
+                    ..Default::default()
+                },
                 context.activity,
             )
             .map_err(preview_error)?;
@@ -119,9 +121,15 @@ impl State {
             .form_preview(
                 &entry.node,
                 entry.application.as_deref(),
-                &overlays,
-                &entry.preview.dependencies,
-                inputs,
+                FormPreviewInput {
+                    overlays: &overlays,
+                    previous: &entry.preview.dependencies,
+                    documents: inputs,
+                    expanded_data: update
+                        .expanded_data
+                        .as_deref()
+                        .unwrap_or(&entry.preview.expanded_data),
+                },
                 context.activity,
             )
             .map_err(preview_error)
@@ -191,7 +199,18 @@ fn check_input_fields(context: &Context<'_>, args: &Value) -> Result<(), Value> 
     if args.get("inputs").is_some() && context.api_minor < 38 {
         return Err(error(-32602));
     }
-    params::optional_fields(args, &["inputs"])?;
+    params::optional_fields(args, &["inputs", "expandedData"])?;
+    if let Some(paths) = args.get("expandedData") {
+        if context.api_minor < 47 {
+            return Err(error(-32602));
+        }
+        let paths: Vec<Vec<String>> = params::decode(paths)?;
+        eska_project_core::project::forms::validate_expanded_data(&paths).map_err(|error| {
+            preview_error(
+                eska_project_core::project::metadata_workspace::FormPreviewError::Form(error),
+            )
+        })?;
+    }
     if let Some(values) = args["inputs"].as_array() {
         for value in values {
             params::optional_fields(value, &["text", "bufferId"])?;

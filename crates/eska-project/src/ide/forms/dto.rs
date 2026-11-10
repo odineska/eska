@@ -248,6 +248,9 @@ pub(super) fn model(
     if api_minor >= 45 {
         model["dataFields"] = json!(inspector_fields(labels, preview));
     }
+    if api_minor >= 47 {
+        model["expandedData"] = json!(preview.expanded_data);
+    }
     model["activityColor"] = json!(preview.presentation.activity_color);
     if api_minor >= 44 {
         model["formHelpAvailable"] = json!(preview.form_help_available);
@@ -287,6 +290,17 @@ fn inspector_fields(labels: &Labels, preview: &FormPreview) -> Vec<Value> {
         });
         if let Some(caption) = &field.caption {
             row["caption"] = json!(caption);
+            if let eska_project_core::project::forms::PresentationText::Standard { key } = caption
+                && let Some(name) = key.strip_prefix("attribute.")
+                && let (Some(ru), Some(en)) = (
+                    labels.ru.enum_caption("StandardAttribute", name),
+                    labels.en.enum_caption("StandardAttribute", name),
+                )
+            {
+                row["caption"] = json!({"kind":"literal","items":[
+                    {"language":"ru","content":ru}, {"language":"en","content":en}
+                ]});
+            }
         }
         row
     }).collect()

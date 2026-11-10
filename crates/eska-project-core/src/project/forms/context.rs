@@ -60,6 +60,16 @@ pub struct FormPreview {
     pub resources: Vec<super::FormResource>,
     pub form: ComposedForm,
     pub presentation: super::FormPresentation,
+    pub expanded_data: Vec<Vec<String>>,
+}
+
+/// Inputs to one atomic form snapshot, including the data branches requested by its inspector.
+#[derive(Default)]
+pub struct FormPreviewInput<'a> {
+    pub overlays: &'a [FormOverlay],
+    pub previous: &'a [FormDependency],
+    pub documents: Vec<FormInput>,
+    pub expanded_data: &'a [Vec<String>],
 }
 
 #[derive(Debug)]
@@ -72,11 +82,33 @@ pub enum FormContextError {
     MemberMismatch,
     MissingForm,
     InvalidOverlay,
+    InvalidDataPath,
     TooManyResources,
     InputTooLarge,
     InvalidMetadata {
         source: String,
     },
+}
+
+/// Validate bounded semantic data paths before resolving any metadata.
+///
+/// # Errors
+/// Rejects malformed paths and requests exceeding the inspector's limits.
+pub fn validate_expanded_data(paths: &[Vec<String>]) -> Result<(), FormContextError> {
+    if paths.len() > 128 {
+        return Err(FormContextError::TooManyResources);
+    }
+    if paths.iter().any(|path| {
+        path.is_empty()
+            || path.len() > 64
+            || path
+                .iter()
+                .any(|part| part.is_empty() || part.contains('.'))
+            || path.iter().map(String::len).sum::<usize>() > 2048
+    }) {
+        return Err(FormContextError::InvalidDataPath);
+    }
+    Ok(())
 }
 
 /// Load only this form from the already selected application, in dependency order.
@@ -90,10 +122,15 @@ pub fn load(
     context: &ContextSnapshot,
     selected: &Path,
     owner: &ObjectId,
-    overlays: &[FormOverlay],
-    previous: &[FormDependency],
-    inputs: Vec<FormInput>,
+    input: FormPreviewInput<'_>,
 ) -> Result<FormPreview, FormContextError> {
+    let FormPreviewInput {
+        overlays,
+        previous,
+        documents: inputs,
+        expanded_data,
+    } = input;
+    validate_expanded_data(expanded_data)?;
     if !overlays.is_empty() && !inputs.is_empty() {
         return Err(FormContextError::InvalidOverlay);
     }
@@ -112,37 +149,12 @@ pub fn load(
     let mut form_help_available = false;
     for input in sources.roots().filter(|input| sources.composes(input)) {
         let source = open_designer(input)?;
-        let Some(path) = managed_payload(&source, owner)? else {
+        let Some((document, dependency)) =
+            load_document(context, input, &source, owner, overlays, &mut input_bytes)?
+        else {
             continue;
         };
-        let id = source_identity(context, input.project().source(), &path);
-        let overlay = overlays.iter().find(|overlay| overlay.source == id);
-        let text = match overlay {
-            Some(overlay) => overlay.text.clone(),
-            None => source
-                .read_xml(&path)
-                .map_err(FormContextError::Source)?
-                .ok_or(FormContextError::MissingForm)?,
-        };
-        input_bytes = input_bytes.saturating_add(text.len());
-        if input_bytes > super::MAX_FORM_CONTEXT_BYTES {
-            return Err(FormContextError::InputTooLarge);
-        }
-        let document = parse(&id, text).map_err(|error| FormContextError::Parse {
-            source: id.clone(),
-            error,
-        })?;
         selected_found |= input.project().source() == selected;
-        let dependency = FormDependency {
-            id,
-            root: input.project().source().into(),
-            path,
-            snapshot: document.revision.clone(),
-            version: overlay.map(|overlay| overlay.version.clone()),
-            member: input.member().map(|member| member.as_str().into()),
-            role: FormDependencyRole::Form,
-            extension_form: input.role() == SourceRole::Extension,
-        };
         let help_paths = form_help_paths(&dependency.path);
         let form_index = dependencies.len();
         dependencies.push(dependency);
@@ -176,15 +188,19 @@ pub fn load(
         &sources,
         &mut documents,
         &mut dependencies,
-        overlays,
-        previous,
+        &FormPreviewInput {
+            overlays,
+            previous,
+            expanded_data,
+            ..FormPreviewInput::default()
+        },
     )?;
     validate_overlays(overlays, &dependencies, previous, &metadata)?;
     super::borrowing::validate(context, &dependencies, &resources)?;
     let mut parts = designer_source::identity_parts(owner).map_err(FormContextError::Source)?;
     let form_part = parts.pop();
     let form_owner = parts.pop().or(form_part);
-    Ok(build_preview(
+    let mut preview = build_preview(
         context,
         form_owner,
         dependencies,
@@ -192,7 +208,51 @@ pub fn load(
         resources,
         form,
         form_help_available,
-    ))
+    );
+    preview.expanded_data = expanded_data.to_vec();
+    Ok(preview)
+}
+
+/// Read one layer, accounting for its bytes before parsing or retaining it.
+fn load_document(
+    context: &ContextSnapshot,
+    input: &ContextSource,
+    source: &DesignerSource,
+    owner: &ObjectId,
+    overlays: &[FormOverlay],
+    input_bytes: &mut usize,
+) -> Result<Option<(FormDocument, FormDependency)>, FormContextError> {
+    let Some(path) = managed_payload(source, owner)? else {
+        return Ok(None);
+    };
+    let id = source_identity(context, input.project().source(), &path);
+    let overlay = overlays.iter().find(|overlay| overlay.source == id);
+    let text = match overlay {
+        Some(overlay) => overlay.text.clone(),
+        None => source
+            .read_xml(&path)
+            .map_err(FormContextError::Source)?
+            .ok_or(FormContextError::MissingForm)?,
+    };
+    *input_bytes = input_bytes.saturating_add(text.len());
+    if *input_bytes > super::MAX_FORM_CONTEXT_BYTES {
+        return Err(FormContextError::InputTooLarge);
+    }
+    let document = parse(&id, text).map_err(|error| FormContextError::Parse {
+        source: id.clone(),
+        error,
+    })?;
+    let dependency = FormDependency {
+        id,
+        root: input.project().source().into(),
+        path,
+        snapshot: document.revision.clone(),
+        version: overlay.map(|overlay| overlay.version.clone()),
+        member: input.member().map(|member| member.as_str().into()),
+        role: FormDependencyRole::Form,
+        extension_form: input.role() == SourceRole::Extension,
+    };
+    Ok(Some((document, dependency)))
 }
 
 fn form_help_paths(path: &Path) -> impl Iterator<Item = PathBuf> + use<> {
@@ -266,6 +326,7 @@ fn build_preview(
 ) -> FormPreview {
     let presentation = super::present(&form, &documents, &resources);
     FormPreview {
+        expanded_data: Vec::new(),
         context_fingerprint: context.fingerprint.clone(),
         application: context.context.name().map(|name| name.as_str().into()),
         limited_context: context.context.limited_context(),

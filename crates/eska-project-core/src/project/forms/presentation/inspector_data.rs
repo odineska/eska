@@ -1,14 +1,92 @@
 //! Data paths for the inspector are resolved against the same composed form as the renderer.
 
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 
 use super::{
     EffectiveDefinition, FieldType, FieldValueKind, MetadataKind, MetadataProperty, MetadataValue,
-    ObjectId, PresentationText, PropertyKey, PropertySource, appearance, definition_type,
-    effective_metadata, field_type, metadata_field, metadata_property, record, references,
-    resolve_binding, single_type_target, standard_attribute, standard_caption, standard_type,
+    ObjectId, PresentationText, PropertySource, appearance, definition_type, effective_metadata,
+    field_type, metadata_field, metadata_property, record, references, resolve_binding,
+    single_type_target, standard_attribute, standard_caption, standard_fields, standard_type,
 };
 use crate::project::forms::{FormPreview, MAX_FORM_ELEMENTS};
+
+/// Resolve only the explicitly requested branch. A self-reference consumes a path segment;
+/// neither loading nor enumeration recursively walks the metadata reference graph.
+fn targets(
+    form: &super::ComposedForm,
+    resources: &[super::FormResource],
+    path: &[String],
+) -> (Vec<ObjectId>, Vec<ObjectId>) {
+    let mut missing = Vec::new();
+    let Some((name, remaining)) = path.split_first() else {
+        return (Vec::new(), missing);
+    };
+    let Some(attribute) = form
+        .attributes
+        .iter()
+        .find(|item| item.name.as_ref() == Some(name))
+    else {
+        return (Vec::new(), missing);
+    };
+    let remaining: Vec<_> = remaining.iter().map(String::as_str).collect();
+    let (value_type, consumed) = super::column_binding(attribute, &remaining).map_or_else(
+        || (definition_type(attribute), 0),
+        |(binding, count)| (binding.value_type, count),
+    );
+    let mut current: Vec<_> = value_type
+        .types
+        .iter()
+        .filter_map(references::metadata_type_id)
+        .collect();
+    for part in &remaining[consumed..] {
+        let mut next = Vec::new();
+        for target in current {
+            let Some((_, owner)) = effective_metadata(&target, resources) else {
+                missing.push(target);
+                continue;
+            };
+            if let Some((_, child)) = super::metadata_child(owner, part, resources) {
+                if child.metadata.kind() == MetadataKind::TabularSection {
+                    next.push(child.metadata.id().clone());
+                } else if let Some(field) = metadata_property(child, "Type", resources) {
+                    next.extend(
+                        field_type(&field.value)
+                            .types
+                            .iter()
+                            .filter_map(references::metadata_type_id),
+                    );
+                }
+            } else if standard_fields(owner, resources).contains(part) {
+                next.extend(
+                    standard_type(part, owner, resources)
+                        .types
+                        .iter()
+                        .filter_map(references::metadata_type_id),
+                );
+            }
+        }
+        next.sort();
+        next.dedup();
+        current = next;
+    }
+    for target in &current {
+        if effective_metadata(target, resources).is_none() {
+            missing.push(target.clone());
+        }
+    }
+    (current, missing)
+}
+
+pub(in crate::project::forms) fn inspector_resource_requests(
+    form: &super::ComposedForm,
+    resources: &[super::FormResource],
+    paths: &[Vec<String>],
+) -> Vec<ObjectId> {
+    paths
+        .iter()
+        .flat_map(|path| targets(form, resources, path).1)
+        .collect()
+}
 
 #[derive(Debug)]
 pub struct InspectorDataField<'a> {
@@ -35,7 +113,7 @@ impl FormPreview {
         let mut data = DataFields {
             preview: self,
             fields: Vec::new(),
-            paths: HashSet::new(),
+            paths: HashMap::new(),
         };
         let attributes: HashMap<_, _> = self
             .form
@@ -76,12 +154,17 @@ impl FormPreview {
             let mut path = vec![parts[0].to_owned()];
             for (index, part) in parts.iter().enumerate().skip(1) {
                 path.push((*part).to_owned());
-                if !data.paths.contains(&path)
+                if !data.paths.contains_key(&path)
                     && let Ok(binding) =
                         resolve_binding(attribute, &parts[1..=index], &self.resources)
                 {
                     data.bound(&path, binding);
                 }
+            }
+        }
+        for path in &self.expanded_data {
+            for target in targets(&self.form, &self.resources, path).0 {
+                data.metadata(&target, &mut path.clone());
             }
         }
         data.fields
@@ -91,6 +174,13 @@ impl FormPreview {
     #[must_use]
     pub fn inspector_data_origin(&self, path: &[String]) -> Option<PropertySource> {
         let (name, rest) = path.split_first()?;
+        if !rest.is_empty() {
+            return self
+                .inspector_data()
+                .into_iter()
+                .find(|field| field.path == path)?
+                .origin;
+        }
         let attribute = self
             .form
             .attributes
@@ -106,7 +196,7 @@ impl FormPreview {
 struct DataFields<'a> {
     preview: &'a FormPreview,
     fields: Vec<InspectorDataField<'a>>,
-    paths: HashSet<Vec<String>>,
+    paths: HashMap<Vec<String>, usize>,
 }
 
 impl<'a> DataFields<'a> {
@@ -118,7 +208,44 @@ impl<'a> DataFields<'a> {
         type_property: Option<&'a MetadataProperty>,
         origin: Option<PropertySource>,
     ) {
-        if self.fields.len() < MAX_FORM_ELEMENTS && self.paths.insert(path.to_vec()) {
+        if let Some(index) = self.paths.get(path) {
+            let field = &mut self.fields[*index];
+            // Composite references can expose the same name with different types.
+            // Such a row has no single XML origin or property record to navigate to.
+            let same_origin = field
+                .origin
+                .as_ref()
+                .zip(origin.as_ref())
+                .is_some_and(|(a, b)| a.source == b.source && a.range == b.range);
+            if !same_origin {
+                field.origin = None;
+                field.type_property = None;
+            }
+            for key in value_type.types {
+                if !field.value_type.types.contains(&key) {
+                    field.value_type.types.push(key);
+                }
+            }
+            if field.value_type.kind != value_type.kind || field.value_type.types.len() > 1 {
+                field.value_type.kind = FieldValueKind::Composite;
+            }
+            if field.value_type.length != value_type.length {
+                field.value_type.length = None;
+            }
+            if field.value_type.digits != value_type.digits {
+                field.value_type.digits = None;
+            }
+            if field.value_type.fraction != value_type.fraction {
+                field.value_type.fraction = None;
+            }
+            if field.value_type.date_parts != value_type.date_parts {
+                field.value_type.date_parts = None;
+            }
+            if field.value_type.allowed_sign != value_type.allowed_sign {
+                field.value_type.allowed_sign = None;
+            }
+        } else if self.fields.len() < MAX_FORM_ELEMENTS {
+            self.paths.insert(path.to_vec(), self.fields.len());
             self.fields.push(InspectorDataField {
                 path: path.to_vec(),
                 caption,
@@ -163,16 +290,8 @@ impl<'a> DataFields<'a> {
         let Some((_, owner)) = effective_metadata(id, resources) else {
             return;
         };
-        // These standard members are available on the corresponding managed object.
-        // Other standard fields are added when a binding resolves them.
-        let standard: &[&str] = match owner.metadata.kind() {
-            MetadataKind::Document => &["Ref", "DeletionMark", "Date", "Number", "Posted"],
-            MetadataKind::Catalog => &["Ref", "DeletionMark", "Code", "Description"],
-            MetadataKind::TabularSection => &["LineNumber"],
-            _ => &[],
-        };
-        for &name in standard {
-            let value_type = inspector_standard_type(name, owner, resources);
+        for name in standard_fields(owner, resources) {
+            let value_type = standard_type(name, owner, resources);
             if matches!(name, "Code" | "Description" | "Number")
                 && value_type.length.or(value_type.digits).unwrap_or(0) == 0
             {
@@ -199,14 +318,15 @@ impl<'a> DataFields<'a> {
                         | MetadataKind::TabularSection
                         | MetadataKind::Dimension
                         | MetadataKind::Resource
+                        | MetadataKind::AddressingAttribute
+                        | MetadataKind::AccountingFlag
+                        | MetadataKind::ExtDimensionAccountingFlag
                 )
             {
                 continue;
             }
             path.push(child.metadata.name().to_owned());
-            if !self.paths.contains(path)
-                && let Some((resource, child)) = effective_metadata(child.metadata.id(), resources)
-            {
+            if let Some((resource, child)) = effective_metadata(child.metadata.id(), resources) {
                 let binding = metadata_field(resource, child, resources);
                 self.push(
                     path,
@@ -243,41 +363,10 @@ impl<'a> DataFields<'a> {
             if object.metadata.name() == name {
                 type_property = metadata_property(object, "Type", resources);
             } else if standard_attribute(name) {
-                value_type = inspector_standard_type(name, object, resources);
+                value_type = standard_type(name, object, resources);
                 caption = binding.caption;
             }
         }
         self.push(path, caption, value_type, type_property, origin);
     }
-}
-
-fn inspector_standard_type(
-    name: &str,
-    owner: &super::ParsedObject,
-    resources: &[super::FormResource],
-) -> FieldType {
-    let mut result = standard_type(name, owner, resources);
-    if matches!(name, "Number" | "Code")
-        && metadata_property(owner, &format!("{name}Type"), resources)
-            .and_then(|field| appearance::text(&field.value))
-            == Some("Number")
-    {
-        result.kind = FieldValueKind::Number;
-        result.digits = result.length.take();
-        result.fraction = Some(0);
-    }
-    if result.kind == FieldValueKind::Date {
-        result.date_parts = Some("DateTime".into());
-    }
-    if matches!(name, "Ref" | "Parent") {
-        result.types.push(PropertyKey {
-            namespace: Some(references::CONFIG.into()),
-            name: format!(
-                "{}Ref.{}",
-                owner.metadata.kind().designer_tag(),
-                owner.metadata.name()
-            ),
-        });
-    }
-    result
 }

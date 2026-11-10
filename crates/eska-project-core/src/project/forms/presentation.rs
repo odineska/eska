@@ -21,6 +21,7 @@ mod incomplete;
 mod inspector_data;
 
 pub use inspector_data::InspectorDataField;
+pub(super) use inspector_data::inspector_resource_requests;
 
 #[derive(Clone, Debug, Serialize)]
 #[serde(tag = "kind", rename_all = "camelCase")]
@@ -1010,9 +1011,16 @@ fn metadata_binding(
                 (resource, owner) = effective_metadata(&target, resources)
                     .ok_or(BindingFailure::Unloaded(target))?;
             }
+        } else if standard_fields(owner, resources).contains(part) && !terminal {
+            let target = single_type_target(&standard_type(part, owner, resources))
+                .ok_or(BindingFailure::Unresolved)?;
+            (resource, owner) =
+                effective_metadata(&target, resources).ok_or(BindingFailure::Unloaded(target))?;
         } else if !terminal {
             return Err(BindingFailure::Unresolved);
         } else if standard_attribute(part) {
+            // Explicit bindings remain usable with partial descriptors. Enumerating unused
+            // fields requires the separate owner availability rules and their metadata.
             return Ok(FieldBinding {
                 caption: Some(standard_caption(part, owner, resources)),
                 value_type: standard_type(part, owner, resources),
@@ -1146,6 +1154,20 @@ fn standard_attribute(name: &str) -> bool {
             | "RecordType"
             | "Predefined"
             | "PredefinedDataName"
+            | "Started"
+            | "Completed"
+            | "Executed"
+            | "ThisNode"
+            | "SentNo"
+            | "ReceivedNo"
+            | "OffBalance"
+            | "Order"
+            | "Type"
+            | "ValueType"
+            | "ActionPeriodIsBasic"
+            | "RegistrationPeriod"
+            | "PeriodAdjustment"
+            | "Account"
     )
 }
 pub(super) fn metadata_property<'a>(
@@ -1229,14 +1251,46 @@ fn standard_caption(
         key: format!("attribute.{}", if folder_parent { "Folder" } else { name }),
     }
 }
+fn standard_fields(owner: &ParsedObject, resources: &[FormResource]) -> Vec<&'static str> {
+    let compatibility = resources
+        .iter()
+        .flat_map(|resource| &resource.descriptor.objects)
+        .find(|item| item.metadata.kind() == MetadataKind::Configuration)
+        .and_then(|root| metadata_property(root, "CompatibilityMode", resources))
+        .and_then(|field| appearance::text(&field.value))
+        .unwrap_or_default();
+    let has_owners = metadata_property(owner, "Owners", resources).is_some_and(
+        |field| matches!(&field.value, MetadataValue::Record(items) if !items.is_empty()),
+    );
+    crate::project::metadata_edit::choice_fields::standard::fields_for(
+        owner.metadata.kind().designer_tag(),
+        compatibility,
+        &|name| {
+            metadata_property(owner, name, resources)
+                .and_then(|field| appearance::text(&field.value))
+        },
+        has_owners,
+    )
+}
+
 fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -> FieldType {
     let kind = match name {
-        "IsFolder" | "DeletionMark" | "Posted" | "Active" | "Predefined" => FieldValueKind::Boolean,
-        "Date" | "Period" => FieldValueKind::Date,
-        "LineNumber" => FieldValueKind::Number,
+        "IsFolder"
+        | "DeletionMark"
+        | "Posted"
+        | "Active"
+        | "Predefined"
+        | "Started"
+        | "Completed"
+        | "Executed"
+        | "ThisNode"
+        | "OffBalance"
+        | "ActionPeriodIsBasic" => FieldValueKind::Boolean,
+        "Date" | "Period" | "RegistrationPeriod" => FieldValueKind::Date,
+        "LineNumber" | "SentNo" | "ReceivedNo" | "PeriodAdjustment" => FieldValueKind::Number,
         "Parent" | "Ref" | "Owner" | "Recorder" => FieldValueKind::Reference,
-        "Code"
-            if metadata_property(owner, "CodeType", resources)
+        "Code" | "Number"
+            if metadata_property(owner, &format!("{name}Type"), resources)
                 .and_then(|value| appearance::text(&value.value))
                 == Some("Number") =>
         {
@@ -1250,19 +1304,53 @@ fn standard_type(name: &str, owner: &ParsedObject, resources: &[FormResource]) -
         "Number" => "NumberLength",
         _ => "",
     };
-    let length = metadata_property(owner, length_key, resources)
+    let mut length = metadata_property(owner, length_key, resources)
         .and_then(|value| appearance::text(&value.value))
         .and_then(|value| value.parse().ok());
-    let digits = (name == "LineNumber").then(|| {
-        metadata_property(owner, "LineNumberLength", resources)
-            .and_then(|value| appearance::text(&value.value))
-            .and_then(|value| value.parse().ok())
-            .unwrap_or(9)
-    });
+    let digits = if kind == FieldValueKind::Number && matches!(name, "Number" | "Code") {
+        length.take()
+    } else {
+        (name == "LineNumber").then(|| {
+            metadata_property(owner, "LineNumberLength", resources)
+                .and_then(|value| appearance::text(&value.value))
+                .and_then(|value| value.parse().ok())
+                .unwrap_or(9)
+        })
+    };
+    let mut types = Vec::new();
+    if matches!(name, "Ref" | "Parent") {
+        types.push(PropertyKey {
+            namespace: Some(references::CONFIG.into()),
+            name: format!(
+                "{}Ref.{}",
+                owner.metadata.kind().designer_tag(),
+                owner.metadata.name()
+            ),
+        });
+    } else if name == "Owner"
+        && let Some(MetadataProperty {
+            value: MetadataValue::Record(owners),
+            ..
+        }) = metadata_property(owner, "Owners", resources)
+    {
+        for owner in owners {
+            if let Some(name) =
+                appearance::text(&owner.value).and_then(|value| value.strip_prefix("Catalog."))
+            {
+                types.push(PropertyKey {
+                    namespace: Some(references::CONFIG.into()),
+                    name: format!("CatalogRef.{name}"),
+                });
+            }
+        }
+    }
     FieldType {
         kind,
         length,
         digits,
+        fraction: (kind == FieldValueKind::Number).then_some(0),
+        date_parts: (kind == FieldValueKind::Date).then(|| "DateTime".into()),
+        types,
         ..FieldType::default()
     }
 }
