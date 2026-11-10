@@ -32,7 +32,24 @@ pub fn fields(owner: Node<'_, '_>, compatibility: &str) -> Vec<&'static str> {
     let Some(properties) = child(owner, "Properties") else {
         return Vec::new();
     };
-    let mut result = match owner.tag_name().name() {
+    let owners = child(properties, "Owners")
+        .is_some_and(|owners| owners.children().any(|node| node.is_element()));
+    fields_for(
+        owner.tag_name().name(),
+        compatibility,
+        &|name| text(properties, name),
+        owners,
+    )
+}
+
+/// Shared availability rules for parsed XML and composed form metadata.
+pub fn fields_for<'a>(
+    kind: &str,
+    compatibility: &str,
+    value: &dyn Fn(&str) -> Option<&'a str>,
+    has_owners: bool,
+) -> Vec<&'static str> {
+    let mut result = match kind {
         "Catalog"
         | "ChartOfAccounts"
         | "ChartOfCalculationTypes"
@@ -42,7 +59,7 @@ pub fn fields(owner: Node<'_, '_>, compatibility: &str) -> Vec<&'static str> {
                 fields.push("PredefinedDataName");
             }
             for (property, name) in [("CodeLength", "Code"), ("DescriptionLength", "Description")] {
-                if positive(properties, property) {
+                if positive(value, property) {
                     fields.push(name);
                 }
             }
@@ -65,76 +82,75 @@ pub fn fields(owner: Node<'_, '_>, compatibility: &str) -> Vec<&'static str> {
             vec!["Active", "LineNumber", "Recorder", "Period"]
         }
         "CalculationRegister" => vec!["RegistrationPeriod", "Active", "LineNumber", "Recorder"],
-        "InformationRegister" if text(properties, "WriteMode") == Some("RecorderSubordinate") => {
+        "InformationRegister" if value("WriteMode") == Some("RecorderSubordinate") => {
             vec!["Active", "LineNumber", "Recorder"]
         }
         _ => Vec::new(),
     };
-    append_conditional(owner, properties, compatibility, &mut result);
+    append_conditional(kind, value, has_owners, compatibility, &mut result);
     result
 }
 
 /// Keep availability predicates separate from the owner's unconditional fixed fields.
-fn append_conditional(
-    owner: Node<'_, '_>,
-    properties: Node<'_, '_>,
+fn append_conditional<'a>(
+    kind: &str,
+    value: &dyn Fn(&str) -> Option<&'a str>,
+    has_owners: bool,
     compatibility: &str,
     result: &mut Vec<&'static str>,
 ) {
-    match owner.tag_name().name() {
+    match kind {
         "Catalog" => {
-            if enabled(properties, "Hierarchical") {
+            if enabled(value, "Hierarchical") {
                 result.push("Parent");
-                if text(properties, "HierarchyType") == Some("HierarchyFoldersAndItems") {
+                if value("HierarchyType") == Some("HierarchyFoldersAndItems") {
                     result.push("IsFolder");
                 }
             }
-            if child(properties, "Owners")
-                .is_some_and(|owners| owners.children().any(|node| node.is_element()))
-            {
+            if has_owners {
                 result.push("Owner");
             }
         }
         "ChartOfAccounts" => {
             result.extend(["Parent", "Type", "OffBalance"]);
-            if positive(properties, "OrderLength") {
+            if positive(value, "OrderLength") {
                 result.push("Order");
             }
         }
-        "ChartOfCalculationTypes" if enabled(properties, "ActionPeriodUse") => {
+        "ChartOfCalculationTypes" if enabled(value, "ActionPeriodUse") => {
             result.push("ActionPeriodIsBasic");
         }
         "ChartOfCharacteristicTypes" => {
             result.push("ValueType");
-            if enabled(properties, "Hierarchical") {
+            if enabled(value, "Hierarchical") {
                 result.extend(["Parent", "IsFolder"]);
             }
         }
         "InformationRegister"
-            if text(properties, "InformationRegisterPeriodicity")
+            if value("InformationRegisterPeriodicity")
                 .is_some_and(|value| value != "Nonperiodical") =>
         {
             result.push("Period");
         }
-        "AccumulationRegister" if text(properties, "RegisterType") == Some("Balance") => {
+        "AccumulationRegister" if value("RegisterType") == Some("Balance") => {
             result.push("RecordType");
         }
         "AccountingRegister" => {
-            if text(properties, "ChartOfAccounts").is_some_and(|value| !value.is_empty()) {
+            if value("ChartOfAccounts").is_some_and(|value| !value.is_empty()) {
                 result.push("Account");
             }
-            if !enabled(properties, "Correspondence") {
+            if !enabled(value, "Correspondence") {
                 result.push("RecordType");
             }
-            if positive(properties, "PeriodAdjustmentLength") && newer_than(compatibility, 12) {
+            if positive(value, "PeriodAdjustmentLength") && newer_than(compatibility, 12) {
                 result.push("PeriodAdjustment");
             }
         }
         "Document" | "BusinessProcess" | "Task" => {
-            if positive(properties, "NumberLength") {
+            if positive(value, "NumberLength") {
                 result.push("Number");
             }
-            if owner.tag_name().name() == "Task" && positive(properties, "DescriptionLength") {
+            if kind == "Task" && positive(value, "DescriptionLength") {
                 result.push("Description");
             }
         }
@@ -153,15 +169,15 @@ fn newer_than(value: &str, patch: u32) -> bool {
 }
 
 /// Absent or zero-length properties do not enable optional standard fields.
-fn positive(properties: Node<'_, '_>, name: &str) -> bool {
-    text(properties, name)
+fn positive<'a>(value: &dyn Fn(&str) -> Option<&'a str>, name: &str) -> bool {
+    value(name)
         .and_then(|value| value.parse::<u32>().ok())
         .is_some_and(|value| value > 0)
 }
 
 /// XML Schema permits both word and digit spellings of booleans.
-fn enabled(properties: Node<'_, '_>, name: &str) -> bool {
-    matches!(text(properties, name), Some("true" | "1"))
+fn enabled<'a>(value: &dyn Fn(&str) -> Option<&'a str>, name: &str) -> bool {
+    matches!(value(name), Some("true" | "1"))
 }
 
 /// Values must belong to direct metadata properties in the expected namespace.

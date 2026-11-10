@@ -1,5 +1,6 @@
 use super::*;
 use crate::backend::project::{designer_source::PicturePreview, forms::FormPicture};
+use eska_project_core::project::forms::FormPreviewInput;
 
 fn picture_inputs() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/forms/native-picture-composition")
@@ -113,7 +114,7 @@ fn native_picture_layers_match_static_client_without_writes() {
         let (directory, mut workspace, node) = setup_picture(case);
         let before = bytes(&directory.0);
         let preview = picture_project(&mut workspace, case["selectedMember"].as_str().unwrap())
-            .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+            .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
             .unwrap();
         assert!(preview.form.diagnostics.is_empty(), "{}", case["id"]);
         assert!(
@@ -142,7 +143,7 @@ fn native_picture_dirty_property_state_clears_and_recovers_without_identity_chan
     let before = bytes(&directory.0);
     let project = picture_project(&mut workspace, "base");
     let preview = project
-        .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
         .unwrap();
     let input = preview
         .dependencies
@@ -180,9 +181,11 @@ fn native_picture_dirty_property_state_clears_and_recovers_without_identity_chan
             .form_preview(
                 &node,
                 Some("native"),
-                &[overlay],
-                &preview.dependencies,
-                Vec::new(),
+                FormPreviewInput {
+                    overlays: &[overlay],
+                    previous: &preview.dependencies,
+                    ..Default::default()
+                },
                 None,
             )
             .unwrap();
@@ -219,7 +222,7 @@ fn native_empty_picture_payload_is_watched_and_missing_payload_is_diagnosed() {
     let project = picture_project(&mut workspace, "base");
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
         .unwrap();
     assert_picture(&preview, "Logo", &Value::Null);
     let binary = preview
@@ -246,9 +249,10 @@ fn native_empty_picture_payload_is_watched_and_missing_payload_is_diagnosed() {
         .form_preview(
             &node,
             Some("native"),
-            &[],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -271,9 +275,10 @@ fn native_empty_picture_payload_is_watched_and_missing_payload_is_diagnosed() {
         .form_preview(
             &node,
             Some("native"),
-            &[],
-            &changed.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                previous: &changed.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -309,7 +314,7 @@ fn native_picture_dirty_empty_property_is_distinct_from_broken_reference() {
     let before = bytes(&directory.0);
     let project = picture_project(&mut workspace, "base");
     let preview = project
-        .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
         .unwrap();
     let input = preview
         .dependencies
@@ -329,9 +334,11 @@ fn native_picture_dirty_empty_property_is_distinct_from_broken_reference() {
         .form_preview(
             &node,
             Some("native"),
-            &[empty],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[empty],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -346,9 +353,11 @@ fn native_picture_dirty_empty_property_is_distinct_from_broken_reference() {
         .form_preview(
             &node,
             Some("native"),
-            &[broken],
-            &changed.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[broken],
+                previous: &changed.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();

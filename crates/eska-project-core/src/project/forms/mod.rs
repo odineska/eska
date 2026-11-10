@@ -30,7 +30,8 @@ pub use composition::{
     FormCompositionDiagnostic, PropertySource, SourcedProperty, SourcedQualifier, compose,
 };
 pub use context::{
-    FormContextError, FormDependency, FormDependencyRole, FormOverlay, FormPreview, load,
+    FormContextError, FormDependency, FormDependencyRole, FormOverlay, FormPreview,
+    FormPreviewInput, load, validate_expanded_data,
 };
 pub use handlers::{
     FormHandler, FormHandlerOwner, FormHandlerSource, HandlerLookupError, handler_range,

@@ -10,6 +10,13 @@ pub(super) enum Target {
     Form,
 }
 
+#[derive(Debug, PartialEq, Eq)]
+struct Variant {
+    name: String,
+    is_template: bool,
+    glyph_size: Option<(u32, u32)>,
+}
+
 pub(super) fn picture(bytes: &[u8], target: Target) -> Result<Picture, PictureError> {
     let mut archive =
         zip::ZipArchive::new(Cursor::new(bytes)).map_err(|_| PictureError::Invalid)?;
@@ -27,24 +34,28 @@ pub(super) fn picture(bytes: &[u8], target: Target) -> Result<Picture, PictureEr
         Err(_) => return Err(PictureError::Invalid),
     };
     // Filename discovery is only for archives without a manifest, never for broken references.
-    let (name, is_template) = match declared {
+    let variant = match declared {
         Some(variant) => variant,
-        None => (
-            fallback_name(&archive)?.ok_or(PictureError::Unsupported)?,
-            false,
-        ),
+        None => Variant {
+            name: fallback_name(&archive)?.ok_or(PictureError::Unsupported)?,
+            is_template: false,
+            glyph_size: None,
+        },
     };
-    let file = archive.by_name(&name).map_err(|_| PictureError::Invalid)?;
+    let file = archive
+        .by_name(&variant.name)
+        .map_err(|_| PictureError::Invalid)?;
     if file.size() > MAX_IMAGE {
         return Err(PictureError::TooLarge);
     }
-    let mut picture = image(bounded(file, MAX_IMAGE)?, name)?;
-    picture.is_template = is_template;
+    let mut picture = image(bounded(file, MAX_IMAGE)?, variant.name)?;
+    picture.is_template = variant.is_template;
+    picture.glyph_size = variant.glyph_size;
     Ok(picture)
 }
 
 /// An authoritative manifest must name at least one safe variant, including extensionless files.
-fn variant(bytes: &[u8], target: Target) -> Result<(String, bool), PictureError> {
+fn variant(bytes: &[u8], target: Target) -> Result<Variant, PictureError> {
     let input = std::str::from_utf8(bytes).map_err(|_| PictureError::Invalid)?;
     let document = roxmltree::Document::parse(input).map_err(|_| PictureError::Invalid)?;
     if !document.root_element().has_tag_name("Picture") {
@@ -72,13 +83,25 @@ fn variant(bytes: &[u8], target: Target) -> Result<(String, bool), PictureError>
             u64::from(width) * u64::from(height),
             name,
         );
-        if preferred.is_none_or(|(previous, _)| rank > previous) {
+        if preferred
+            .as_ref()
+            .is_none_or(|(previous, _)| rank > *previous)
+        {
             let is_template = matches!(node.attribute("isTemplate"), Some("true" | "1"));
-            preferred = Some((rank, is_template));
+            let glyph_size = (width > 0 && height > 0 && width <= 16_384 && height <= 16_384)
+                .then_some((width, height));
+            preferred = Some((
+                rank,
+                Variant {
+                    name: name.to_owned(),
+                    is_template,
+                    glyph_size,
+                },
+            ));
         }
     }
     preferred
-        .map(|((_, _, _, _, name), is_template)| (name.to_owned(), is_template))
+        .map(|(_, variant)| variant)
         .ok_or(PictureError::Unsupported)
 }
 
@@ -138,10 +161,21 @@ mod tests {
           <PictureVariant name="m.png" screenDensity="mdpi" glyphWidth="24" glyphHeight="24"/>
           <PictureVariant name="x.png" screenDensity="xdpi" glyphWidth="48" glyphHeight="48"/>
         </Picture>"#;
-        assert_eq!(variant(manifest, Target::Form), Ok(("l.png".into(), true)));
+        assert_eq!(
+            variant(manifest, Target::Form),
+            Ok(Variant {
+                name: "l.png".into(),
+                is_template: true,
+                glyph_size: Some((16, 16))
+            })
+        );
         assert_eq!(
             variant(manifest, Target::Metadata),
-            Ok(("x.png".into(), false))
+            Ok(Variant {
+                name: "x.png".into(),
+                is_template: false,
+                glyph_size: Some((48, 48))
+            })
         );
     }
 }

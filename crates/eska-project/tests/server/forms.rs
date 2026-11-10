@@ -3,8 +3,12 @@ use eska_project_core::project::metadata_edit::snapshot;
 
 #[path = "forms_command_palette.rs"]
 mod command_palette;
+#[path = "forms_display_palette.rs"]
+mod display_palette;
 #[path = "forms_native_palette.rs"]
 mod native_palette;
+#[path = "forms_reference_data.rs"]
+mod reference_data;
 #[path = "forms_standalone_additions.rs"]
 mod standalone_additions;
 #[path = "forms_table_palette.rs"]
@@ -131,25 +135,28 @@ fn form_inspector_resolves_unbound_fields_without_mixing_definition_paths() {
             amount["type"]["value"]["fields"][0]["value"]["text"],
             "x:decimal"
         );
+        let number = data_field(json!(["Object", "Number"]));
+        assert_eq!(number["valueType"]["length"], 11);
+        let reference = data_field(json!(["Object", "Ref"]));
         assert_eq!(
-            data_field(json!(["Object", "Number"]))["valueType"]["length"],
-            11
-        );
-        assert_eq!(
-            data_field(json!(["Object", "Ref"]))["valueType"]["types"][0]["name"],
+            reference["valueType"]["types"][0]["name"],
             "DocumentRef.Receipt"
         );
-        for field in ["Ref", "Date", "DeletionMark"] {
+        for (field, ru, en) in [
+            ("Ref", "Ссылка", "Reference"),
+            ("Date", "Дата", "Date"),
+            ("DeletionMark", "Пометка удаления", "Deletion mark"),
+        ] {
             assert_eq!(
                 data_field(json!(["Object", field]))["caption"],
-                json!({"kind":"standard","key":format!("attribute.{field}")})
+                json!({"kind":"literal","items":[
+                    {"language":"ru","content":ru}, {"language":"en","content":en}
+                ]})
             );
         }
         assert!(amount.get("caption").is_none());
-        assert_eq!(
-            data_field(json!(["Object", "Rows", "Quantity"]))["valueType"]["kind"],
-            "number"
-        );
+        let quantity = data_field(json!(["Object", "Rows", "Quantity"]));
+        assert_eq!(quantity["valueType"]["kind"], "number");
         let standalone = &opened["model"]["attributes"][1];
         assert_eq!(standalone["name"], "Amount");
         assert_eq!(standalone["valueType"]["kind"], "composite");
@@ -1042,7 +1049,13 @@ fn form_button_palette_distinguishes_a_missing_type_by_parent_kind() {
         ),
     );
     let updated = update_input(&mut client, &context, &opened, 2, &parameter);
-    assert!(inspect(&mut client, &updated, 0)["rows"].is_null());
+    let parameterized = inspect(&mut client, &updated, 0);
+    for id in ["Data", "Parameter"] {
+        assert_eq!(
+            input_palette_value(&parameterized, id)["default"]["kind"],
+            "empty"
+        );
+    }
     assert_eq!(
         inspect(&mut client, &updated, 1)["rows"]
             .as_array()
@@ -1050,6 +1063,12 @@ fn form_button_palette_distinguishes_a_missing_type_by_parent_kind() {
             .len(),
         35
     );
+    let empty = parameter.replace(
+        "<ParameterType><v8:Type>xs:string</v8:Type></ParameterType>",
+        "<ParameterType/>",
+    );
+    let updated = update_input(&mut client, &context, &updated, 3, &empty);
+    assert_eq!(inspect(&mut client, &updated, 0)["rows"], ordinary["rows"]);
     client.finish();
 }
 

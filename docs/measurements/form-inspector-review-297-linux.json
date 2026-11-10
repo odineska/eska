@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-10",
+  "issue": "https://github.com/odineska/eska/issues/297",
+  "platform": "Linux aarch64",
+  "nativeConfigurator": "8.3.27.2342",
+  "sample": "Stalingrad / Documents/ВыдачаЗайма/Forms/ФормаДокумента",
+  "nativeComparison": {
+    "method": "Ручное сравнение палитр на отдельной копии информационной базы; без записи пользовательских исходников",
+    "observations": [
+      "Поля формы документа: AutoTime, UsePostingMode, RepostOnWrite",
+      "Обычные горизонтальные и вертикальные группы используют одинаковый каталог",
+      "PictureField: Zoomable, NonselectedPictureText, ValuesPicture и события",
+      "LabelField: свойства поля и колонки, Format/MarkNegatives по типу",
+      "Контекстное меню: DisplayImportance и AutoFill",
+      "Ссылочная колонка: параметры выбора, без Format",
+      "Общая команда с параметром: DataPath и Parameter"
+    ],
+    "captures": [
+      {
+        "file": "root-properties-alt.png",
+        "sha256": "946d9d50f5472b275bad5b40579da5a451f013ab0abfaeb7339fc0c820129278"
+      },
+      {
+        "file": "horizontal-group-crop.png",
+        "sha256": "60f74fcf5cea50550f953ad45f21547992dd060102f547383c3f173dfa6aad21"
+      },
+      {
+        "file": "picture-field-crop.png",
+        "sha256": "3a2f1657d95ab0000a9d57ecea3952717acfe7f01e8049223d8eca85a664dcec"
+      },
+      {
+        "file": "picture-field-bottom-crop.png",
+        "sha256": "1df366992ca3a0b3c841afba30efc5ec722210cadb278bb5a5a8d2d36189f481"
+      },
+      {
+        "file": "picture-scale-key-crop.png",
+        "sha256": "08e062799ea59a751cdf4f6a4a949a6f224115d0b59ed61cc55e54a600608570"
+      },
+      {
+        "file": "picture-text-key-crop.png",
+        "sha256": "1ef4771276966fef1973c1eb90a5b27e8a48e5ccf5ef674ad7d6a09aba5d2581"
+      },
+      {
+        "file": "context-menu-crop.png",
+        "sha256": "0092f15d3009515ca0b8b45ba74253defd8ff891c962ce86e39fc9271f26a2e7"
+      },
+      {
+        "file": "label-field-crop.png",
+        "sha256": "996e3b4fd445ff7dd213183dad0b1235dfe9674b5f9d0f0b5b6b14339dbfe0a6"
+      },
+      {
+        "file": "label-field-bottom-crop.png",
+        "sha256": "68870d97c39273f43d892a4a85ad801ebc6135766f7f55a018a6cd11bbc8db98"
+      },
+      {
+        "file": "label-column-top-crop.png",
+        "sha256": "8d0482152bbc9b85f5351419a008f1ba6a42e03a0fdf79d02d4d35599e3d5363"
+      },
+      {
+        "file": "label-column-crop.png",
+        "sha256": "d4dbfb81b439031f7ae232d37e08e4bf1623ecc4127f1e6724004e197d379b31"
+      },
+      {
+        "file": "enum-column-top-crop.png",
+        "sha256": "888d23e825e6377f25b5851f5dc2325490a1d39b412e564e0f210f8880eb599f"
+      },
+      {
+        "file": "enum-column-middle-crop.png",
+        "sha256": "787392befeb0dccc6eae93c28d9fef085c71dfdf6dc8f15edc2aa2416fdbcadb"
+      },
+      {
+        "file": "common-command-button-crop.png",
+        "sha256": "30fc8326ebc6ea3b76cde47f2a4b6c460000556b045218cd8f8c8acd62aa98f8"
+      }
+    ]
+  },
+  "rust": {
+    "commands": [
+      "cargo fmt --check",
+      "cargo check",
+      "cargo clippy --all-targets --all-features -- -D warnings",
+      "ESKA_TEST_ROOT=<соседний eska-playground> cargo test"
+    ],
+    "passed": true,
+    "testsPassed": 1593,
+    "testsFailed": 0,
+    "testsIgnored": 19
+  },
+  "extension": {
+    "typecheck": true,
+    "build": true,
+    "runner": "node --test test/*.test.mjs",
+    "node": {
+      "tests": 767,
+      "pass": 758,
+      "fail": 0,
+      "skipped": 9
+    },
+    "bunNote": "Bun 1.3.8 не поддерживает используемые вложенные node:test и mocks; итоговый набор выполнен через штатный Node runner с реальными eska-project/eska-fmt."
+  },
+  "gui": {
+    "attempts": [
+      {
+        "directory": "form-batch-JYpAtX",
+        "passed": false,
+        "runs": 22,
+        "inputManifestSha256": "9283da3ef37a0482d8c19ef0cd6b08ba3955109c26906fde3feb589fe273535f"
+      },
+      {
+        "directory": "form-batch-2nuUkz",
+        "passed": true,
+        "runs": 6,
+        "inputManifestSha256": "f1fb5e2470cc6de06f56d99c50945fd2645227045d873cac3ed1aed864e39285"
+      }
+    ],
+    "corrections": "После первого пакета исправлены ожидания сырых названий атрибутов шрифта и ожидание загрузки палитры. Повторены инспекторы и реальная форма в ru/en.",
+    "acceptedRuns": [
+      {
+        "suite": "application",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 16.354453472,
+        "cases": 1
+      },
+      {
+        "suite": "application",
+        "locale": "en",
+        "passed": true,
+        "seconds": 13.434325537000005,
+        "cases": 1
+      },
+      {
+        "suite": "inspector-navigation",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 16.070220874,
+        "cases": 1
+      },
+      {
+        "suite": "inspector-navigation",
+        "locale": "en",
+        "passed": true,
+        "seconds": 12.885672472999998,
+        "cases": 1
+      },
+      {
+        "suite": "inspectors",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 8.242927727999994,
+        "cases": 1
+      },
+      {
+        "suite": "inspectors",
+        "locale": "en",
+        "passed": true,
+        "seconds": 5.874240061000004,
+        "cases": 1
+      },
+      {
+        "suite": "palette",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 6.283253381000002,
+        "cases": 2
+      },
+      {
+        "suite": "palette",
+        "locale": "en",
+        "passed": true,
+        "seconds": 3.809352530999997,
+        "cases": 2
+      },
+      {
+        "suite": "table-palette",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 12.981135932999997,
+        "cases": 28
+      },
+      {
+        "suite": "table-palette",
+        "locale": "en",
+        "passed": true,
+        "seconds": 10.395468563999994,
+        "cases": 28
+      },
+      {
+        "suite": "command-palette",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 9.997436157999998,
+        "cases": 36
+      },
+      {
+        "suite": "command-palette",
+        "locale": "en",
+        "passed": true,
+        "seconds": 7.13290553399999,
+        "cases": 36
+      },
+      {
+        "suite": "responsive",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 21.412148988000002,
+        "cases": 31
+      },
+      {
+        "suite": "responsive",
+        "locale": "en",
+        "passed": true,
+        "seconds": 18.497072943999985,
+        "cases": 31
+      },
+      {
+        "suite": "groups",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 20.030669265000004,
+        "cases": 22
+      },
+      {
+        "suite": "groups",
+        "locale": "en",
+        "passed": true,
+        "seconds": 17.26423798100001,
+        "cases": 22
+      },
+      {
+        "suite": "wrapped-titles",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 20.719540563000017,
+        "cases": 47
+      },
+      {
+        "suite": "wrapped-titles",
+        "locale": "en",
+        "passed": true,
+        "seconds": 17.473804787000002,
+        "cases": 47
+      },
+      {
+        "suite": "radio-layout",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 13.861039101000003,
+        "cases": 17
+      },
+      {
+        "suite": "radio-layout",
+        "locale": "en",
+        "passed": true,
+        "seconds": 11.008921675999998,
+        "cases": 17
+      },
+      {
+        "suite": "checkbox-caption-size",
+        "locale": "ru",
+        "passed": true,
+        "seconds": 17.21490438000002,
+        "cases": 26
+      },
+      {
+        "suite": "checkbox-caption-size",
+        "locale": "en",
+        "passed": true,
+        "seconds": 14.487863657000009,
+        "cases": 26
+      }
+    ],
+    "caseExecutions": 424,
+    "application": [
+      {
+        "locale": "ru",
+        "inspectedElements": 70,
+        "referenceBranches": [
+          {
+            "path": [
+              "Объект",
+              "Организация"
+            ],
+            "children": [
+              "Ref",
+              "DeletionMark",
+              "Predefined",
+              "PredefinedDataName",
+              "Code",
+              "Description",
+              "Parent",
+              "IsFolder",
+              "ГоловнаяОрганизация",
+              "КПП",
+              "ИНН",
+              "ЕстьОбособленныеПодразделения",
+              "ДатаРегистрации",
+              "КодПоОКПО",
+              "НаименованиеПолное",
+              "НаименованиеСокращенное",
+              "ОГРН",
+              "СтранаРегистрации",
+              "Префикс",
+              "НекредитнаяФинансоваяОрганизация",
+              "ПрефиксДоговоровЗайма",
+              "ДополнительныеРеквизиты",
+              "КонтактнаяИнформация"
+            ]
+          }
+        ],
+        "visibleElements": 57,
+        "unsupported": 0,
+        "compositionDiagnostics": 0,
+        "appearanceDiagnostics": [],
+        "resize": [
+          [
+            1200,
+            700
+          ],
+          [
+            800,
+            500
+          ],
+          [
+            480,
+            360
+          ],
+          [
+            1200,
+            700
+          ]
+        ],
+        "restoredRectanglesExactly": true,
+        "retainedNodes": true,
+        "textScaling": {
+          "baseline": {
+            "ratio": 1,
+            "ready": 8
+          },
+          "scaledWorkbench": true,
+          "zoom": 125,
+          "restored": true
+        },
+        "openThroughFirstPaintMs": 1067,
+        "sourceWritesDuringViewing": false
+      },
+      {
+        "locale": "en",
+        "inspectedElements": 70,
+        "referenceBranches": [
+          {
+            "path": [
+              "Объект",
+              "Организация"
+            ],
+            "children": [
+              "Ref",
+              "DeletionMark",
+              "Predefined",
+              "PredefinedDataName",
+              "Code",
+              "Description",
+              "Parent",
+              "IsFolder",
+              "ГоловнаяОрганизация",
+              "КПП",
+              "ИНН",
+              "ЕстьОбособленныеПодразделения",
+              "ДатаРегистрации",
+              "КодПоОКПО",
+              "НаименованиеПолное",
+              "НаименованиеСокращенное",
+              "ОГРН",
+              "СтранаРегистрации",
+              "Префикс",
+              "НекредитнаяФинансоваяОрганизация",
+              "ПрефиксДоговоровЗайма",
+              "ДополнительныеРеквизиты",
+              "КонтактнаяИнформация"
+            ]
+          }
+        ],
+        "visibleElements": 57,
+        "unsupported": 0,
+        "compositionDiagnostics": 0,
+        "appearanceDiagnostics": [],
+        "resize": [
+          [
+            1200,
+            700
+          ],
+          [
+            800,
+            500
+          ],
+          [
+            480,
+            360
+          ],
+          [
+            1200,
+            700
+          ]
+        ],
+        "restoredRectanglesExactly": true,
+        "retainedNodes": true,
+        "textScaling": {
+          "baseline": {
+            "ratio": 1,
+            "ready": 8
+          },
+          "scaledWorkbench": true,
+          "zoom": 125,
+          "restored": true
+        },
+        "openThroughFirstPaintMs": 924,
+        "sourceWritesDuringViewing": false
+      }
+    ]
+  },
+  "package": {
+    "identity": "1c-tooling.eska-explorer@0.1.15",
+    "sha256": "7199890f217e636f1517c1e976b4a26db23d5ee16ef2f8b6cca444578fcfd33b",
+    "bytes": {
+      "archive": 4588745,
+      "installed": 10320121,
+      "javascript": 3440614
+    },
+    "budgetBytes": {
+      "archive": 5242880,
+      "installed": 10485760,
+      "javascript": 3670016
+    },
+    "verification": "scripts/check-vsix.py passed"
+  },
+  "limits": [
+    "Не заявляется полное пиксельное совпадение всей формы с Конфигуратором.",
+    "Каталог не покрывает все виды и сочетания свойств платформы; неизвестные поля сохраняют исходное представление.",
+    "Раскрываются конкретные квалифицированные ссылочные типы; ветви через TypeSet/DefinedType пока не раскрываются.",
+    "Масштаб проверен через zoom формы и window.zoomLevel редактора; аппаратный HiDPI и Windows в этом прогоне не проверялись."
+  ]
+}

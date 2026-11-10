@@ -46,9 +46,10 @@ pub(super) fn load(
     sources: &FormSources<'_>,
     documents: &mut [super::FormDocument],
     dependencies: &mut Vec<FormDependency>,
-    overlays: &[FormOverlay],
-    previous: &[FormDependency],
+    input: &super::FormPreviewInput<'_>,
 ) -> Result<(ComposedForm, Vec<FormResource>), FormContextError> {
+    let overlays = input.overlays;
+    let previous = input.previous;
     let owners = std::iter::successors(Some(owner.clone()), ObjectId::parent).collect::<Vec<_>>();
     let mut loader = Loader {
         context,
@@ -115,6 +116,11 @@ pub(super) fn load(
             &resource.source
         })?;
         for target in presentation::binding_resource_requests(&form, &loader.output) {
+            loader.request(target)?;
+        }
+        for target in
+            presentation::inspector_resource_requests(&form, &loader.output, input.expanded_data)
+        {
             loader.request(target)?;
         }
         if cursor == loader.pending.len() {

@@ -50,6 +50,8 @@ struct Open {
     application: Option<String>,
     #[serde(default)]
     inputs: Vec<PathOverlay>,
+    #[serde(default)]
+    expanded_data: Vec<Vec<String>>,
 }
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -63,6 +65,7 @@ struct Update {
     overlays: Vec<Overlay>,
     #[serde(default)]
     inputs: Vec<PathOverlay>,
+    expanded_data: Option<Vec<Vec<String>>>,
 }
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -87,6 +90,9 @@ pub(super) fn capability(minor: u32) -> Value {
         "maxFormBytes":eska_project_core::project::forms::MAX_FORM_BYTES,"maxOverlayBytes":8*1024*1024,"maxInlineBytes":128*1024,"uploads":"queryBuffers"});
     if minor >= 41 {
         result["propertyPalette"] = json!(true);
+    }
+    if minor >= 47 {
+        result["referenceData"] = json!(true);
     }
     result
 }
@@ -256,7 +262,7 @@ fn preview_error(error: FormPreviewError) -> Value {
             ),
             _ => failure("context_unavailable"),
         },
-        FormPreviewError::Form(error) => match error {
+        FormPreviewError::Form(context_error) => match context_error {
             FormContextError::Parse { source, error } => domain(
                 "form_preview_failed",
                 json!({"reason":"invalid_xml","source":source,"parse":error}),
@@ -267,6 +273,7 @@ fn preview_error(error: FormPreviewError) -> Value {
             ),
             FormContextError::MemberMismatch => failure("context_member_mismatch"),
             FormContextError::InvalidOverlay => failure("foreign_form_input"),
+            FormContextError::InvalidDataPath => super::envelope::error(-32602),
             FormContextError::TooManyResources | FormContextError::InputTooLarge => limit(),
             FormContextError::Source(_) | FormContextError::MissingForm => {
                 failure("source_unavailable")

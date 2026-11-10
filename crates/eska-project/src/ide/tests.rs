@@ -226,6 +226,51 @@ fn property_value_captions_preserve_source_and_wire_shape() {
     );
 }
 
+/// Conditional appearance uses the same captions as ordinary form properties.
+#[test]
+fn conditional_appearance_values_preserve_raw_tokens_and_namespaces() {
+    let xml = r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"
+        xmlns:i="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:u="http://v8.1c.ru/8.1/data/ui"
+        xmlns:s="http://v8.1c.ru/8.1/data-composition-system/settings"
+        xmlns:c="http://v8.1c.ru/8.1/data-composition-system/core"
+        xmlns:f="urn:foreign"><Catalog uuid="test"><Properties><Name>Appearance</Name>
+        <s:comparisonType>Equal</s:comparisonType>
+        <s:comparisonType>NotFilled</s:comparisonType>
+        <c:value i:type="u:Color">auto</c:value>
+        <u:style i:type="u:ControlBorderType">WithoutBorder</u:style>
+        <f:comparisonType>Equal</f:comparisonType>
+        <c:value i:type="f:Color">auto</c:value>
+        </Properties></Catalog></MetaDataObject>"#;
+    let parsed = parse(xml, None, PropertiesMode::All).unwrap();
+    let labels = dto::Labels::new().unwrap();
+    let expected = [
+        ("Equal", Some(("Равно", "Equal"))),
+        ("NotFilled", Some(("Не заполнено", "Not filled"))),
+        ("auto", Some(("Авто", "Auto"))),
+        ("WithoutBorder", Some(("Без рамки", "No border"))),
+        ("Equal", None),
+        ("auto", None),
+    ];
+    for (property, (raw, caption)) in parsed.objects[0]
+        .properties
+        .as_ref()
+        .unwrap()
+        .iter()
+        .skip(1)
+        .zip(expected)
+    {
+        let result = dto::property(&labels, MetadataKind::Form, property);
+        assert_eq!(result["value"]["text"], raw);
+        assert_eq!(
+            result["value"].get("caption"),
+            caption
+                .map(|(ru, en)| json!({"ru-RU":ru,"en-US":en}))
+                .as_ref()
+        );
+    }
+}
+
 /// Only known boolean contexts get a checkbox hint; identical user strings stay raw.
 #[test]
 fn boolean_hints_preserve_text_and_respect_xml_context() {

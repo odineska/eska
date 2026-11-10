@@ -1,61 +1,82 @@
-//! Designer 8.3.27 button palettes for unparameterized local form commands.
+//! Designer 8.3.27 button palettes share command resolution with rendering.
 
+use super::common::{CHECKED, UNCHECKED, ZERO};
 use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
 };
 use crate::project::forms::{
-    ComposedForm, EffectiveElement, ElementKind, ElementPresentation, FORM_NAMESPACE, commands,
+    EffectiveElement, ElementKind, ElementPresentation, FormPreview, command_types, commands,
+    presentation,
 };
 
 #[derive(Clone, Copy)]
-pub(super) struct Context {
+pub(super) struct Context<'a> {
     command_bar: bool,
-    manual_max_width: bool,
-    manual_max_height: bool,
+    element: &'a EffectiveElement,
+    parameterized: bool,
 }
 
-impl Context {
+impl<'a> Context<'a> {
     pub(super) fn new(
-        form: &ComposedForm,
+        preview: &FormPreview,
         view: &ElementPresentation,
-        element: &EffectiveElement,
+        element: &'a EffectiveElement,
     ) -> Option<Self> {
         if view.in_table {
             return None;
         }
-        let command_bar = match (view.parent_kind, element.scalar("Type")) {
-            (Some(ElementKind::UsualGroup), None | Some("UsualButton" | "Hyperlink")) => false,
-            (
-                Some(ElementKind::CommandBar),
-                None | Some("CommandBarButton" | "CommandBarHyperlink"),
-            ) => true,
+        let command_bar = match element.scalar("Type") {
+            Some("UsualButton" | "Hyperlink") => false,
+            Some("CommandBarButton" | "CommandBarHyperlink") => true,
+            None => matches!(
+                view.parent_kind,
+                Some(
+                    ElementKind::CommandBar
+                        | ElementKind::AutoCommandBar
+                        | ElementKind::ButtonGroup
+                        | ElementKind::Popup
+                )
+            ),
             _ => return None,
         };
-        let name = commands::local_command_name(element.scalar("CommandName")?)?;
-        let command = commands::local_command(form, name)?;
-        if command.properties.iter().any(|entry| {
-            let key = &entry.property.key;
-            key.namespace.as_deref() == Some(FORM_NAMESPACE) && key.name == "ParameterType"
-        }) {
-            return None;
-        }
-        let manual_max = |name| matches!(element.scalar(name), Some("false" | "0"));
+        let command = element.scalar("CommandName").and_then(|name| {
+            commands::ResolvedCommand::resolve(name, &preview.form, &preview.resources)
+        });
+        let parameterized = match command {
+            Some(commands::ResolvedCommand::Local(command)) => command
+                .property("ParameterType")
+                .is_some_and(|property| command_types::has_parameter(&property.property.value)),
+            Some(commands::ResolvedCommand::Metadata(command)) => {
+                presentation::metadata_property(command, "CommandParameterType", &preview.resources)
+                    .is_some_and(|property| command_types::has_parameter(&property.value))
+            }
+            _ => false,
+        };
         Some(Self {
             command_bar,
-            manual_max_width: manual_max("AutoMaxWidth"),
-            manual_max_height: manual_max("AutoMaxHeight"),
+            element,
+            parameterized,
         })
     }
 }
 
 pub(super) fn definitions(
-    context: Context,
-) -> impl Iterator<Item = (&'static PaletteDefinition, bool)> {
+    context: Context<'_>,
+) -> impl Iterator<Item = (&'static PaletteDefinition, bool)> + '_ {
     BUTTON.iter().filter_map(move |definition| {
         let definition = match definition.id {
             "Type" if context.command_bar => &BAR_TYPE,
-            "MaxWidth" if !context.manual_max_width => return None,
-            "MaxHeight" if !context.manual_max_height => return None,
+            "MaxWidth"
+                if !matches!(context.element.scalar("AutoMaxWidth"), Some("false" | "0")) =>
+            {
+                return None;
+            }
+            "MaxHeight"
+                if !matches!(context.element.scalar("AutoMaxHeight"), Some("false" | "0")) =>
+            {
+                return None;
+            }
+            "Data" | "Parameter" if !context.parameterized => return None,
             _ => definition,
         };
         Some((definition, true))
@@ -86,9 +107,6 @@ const BUTTON: &[PaletteDefinition] = {
     use PlatformPropertyValue::{Auto, Choice, Empty, Unknown};
     use SettingSource::{Attribute, Property};
 
-    const CHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(true);
-    const UNCHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(false);
-    const ZERO: PlatformPropertyValue = PlatformPropertyValue::Number(0);
     &[
         Row::new("Name", Main, Text, Unknown).with_source(SettingSource::Name),
         Row::new("Title", Main, Localized, Empty),
@@ -103,6 +121,8 @@ const BUTTON: &[PaletteDefinition] = {
         )
         .with_source(Property("UserVisible")),
         Row::new("Enabled", Main, Boolean, CHECKED),
+        Row::new("Data", Main, PaletteEditor::Binding, Empty).with_source(Property("DataPath")),
+        Row::new("Parameter", Main, Dialog, Empty),
         Row::new("Representation", Main, Enum, Auto)
             .with_enum_captions(&[("Auto", "auto"), ("Text", "text")]),
         Row::new("Picture", Main, Picture, Empty),

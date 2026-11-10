@@ -1,4 +1,5 @@
 use super::*;
+use eska_project_core::project::forms::FormPreviewInput;
 
 fn style_inputs() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/forms/native-style-composition")
@@ -151,7 +152,7 @@ fn native_style_composition_matches_static_client_observations_without_writes() 
         let before = bytes(&directory.0);
         let project = style_project(&mut workspace, case["selectedMember"].as_str().unwrap());
         let preview = project
-            .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+            .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
             .unwrap();
         assert_style(case, &preview);
         assert_eq!(bytes(&directory.0), before);
@@ -171,7 +172,7 @@ fn native_style_inherited_default_loads_extension_values_without_redeclaring_def
     let before = bytes(&directory.0);
     let project = style_project(&mut workspace, "first");
     let preview = project
-        .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
         .unwrap();
     assert!(
         preview
@@ -210,7 +211,7 @@ fn native_style_dirty_selection_preserves_defining_layer_and_element_identity() 
     let before = bytes(&directory.0);
     let project = style_project(&mut workspace, "base");
     let preview = project
-        .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
         .unwrap();
     assert_style(case, &preview);
     let configuration = preview
@@ -231,9 +232,11 @@ fn native_style_dirty_selection_preserves_defining_layer_and_element_identity() 
         .form_preview(
             &node,
             Some("native"),
-            std::slice::from_ref(&selected),
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: std::slice::from_ref(&selected),
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -256,9 +259,11 @@ fn native_style_dirty_selection_preserves_defining_layer_and_element_identity() 
         .form_preview(
             &node,
             Some("native"),
-            &[selected, style.clone()],
-            &changed.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[selected, style.clone()],
+                previous: &changed.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -272,9 +277,11 @@ fn native_style_dirty_selection_preserves_defining_layer_and_element_identity() 
         .form_preview(
             &node,
             Some("native"),
-            &[restored, style],
-            &changed_again.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[restored, style],
+                previous: &changed_again.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -319,7 +326,7 @@ fn style_reference_cycle_across_layers_is_bounded_and_keeps_sources_unchanged() 
     let before = bytes(&directory.0);
     let project = style_project(&mut workspace, "first");
     let preview = project
-        .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
         .unwrap();
     assert!(
         preview

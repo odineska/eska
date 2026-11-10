@@ -9,6 +9,8 @@ const CORE: &str = "http://v8.1c.ru/8.1/data/core";
 const APP: &str = "http://v8.1c.ru/8.2/managed-application/core";
 const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
 const FORM: &str = "http://v8.1c.ru/8.3/xcf/logform";
+const UI: &str = "http://v8.1c.ru/8.1/data/ui";
+const SETTINGS: &str = "http://v8.1c.ru/8.1/data-composition-system/settings";
 
 impl Localizer {
     /// Translate only a token belonging to the field's known enum domain.
@@ -21,18 +23,49 @@ impl Localizer {
         key: &PropertyKey,
         text: &str,
     ) -> Option<String> {
+        if key.namespace.as_deref() == Some(SETTINGS) && key.name == "comparisonType" {
+            return self.enum_caption("ComparisonType", text);
+        }
+        if key.namespace.as_deref() == Some(FORM)
+            && key.name == "Field"
+            && path.last().is_some_and(|parent| {
+                parent.namespace.as_deref() == Some(FORM) && parent.name == "UseAlways"
+            })
+        {
+            let (prefix, member) = text.rsplit_once('.')?;
+            let caption = if member == "RegisterRecords" {
+                self.optional_text("platform-property-md-RegisterRecords")
+            } else {
+                self.enum_caption("StandardAttribute", member)
+            }?;
+            return Some(format!("{prefix}.{caption}"));
+        }
         if key.namespace.as_deref() == Some(READABLE)
             && key.name == "Ref"
             && path
                 .last()
                 .is_some_and(|parent| match parent.namespace.as_deref() {
                     Some(MD) => path.len() == 1 && parent.name == "Picture",
-                    Some(FORM) => matches!(parent.name.as_str(), "Picture" | "ChoiceButtonPicture"),
+                    Some(FORM) => matches!(
+                        parent.name.as_str(),
+                        "Picture" | "ChoiceButtonPicture" | "ValuesPicture"
+                    ),
                     _ => false,
                 })
             && let Some(name) = text.strip_prefix("StdPicture.")
         {
             return self.optional_text(&format!("platform-picture-{name}"));
+        }
+        if key.namespace.as_deref() == Some(FORM)
+            && let Some(domain) = match key.name.as_str() {
+                "AutoTime" => Some("AutoTimeMode"),
+                "UsePostingMode" => Some("PostingModeUse"),
+                "PictureSize" => Some("PictureSize"),
+                "CommandGroup" => Some("StandardCommandsGroup"),
+                _ => None,
+            }
+        {
+            return self.enum_caption(domain, text);
         }
         if key.namespace.as_deref() == Some(FORM)
             && let Some(caption) = form_value(&key.name, text)
@@ -74,6 +107,10 @@ impl Localizer {
         let domain = match (key.namespace.as_deref()?, key.name.as_str()) {
             ("http://v8.1c.ru/8.1/data/enterprise", "AccountType") => "AccountType",
             (APP, "ApplicationUsePurpose") => "ApplicationUsePurpose",
+            (UI, "ControlBorderType") => "BorderStyle",
+            (UI, "Color" | "Font") if text == "auto" => {
+                return self.optional_text("form-palette-value-auto");
+            }
             _ => return None,
         };
         self.enum_caption(domain, text)
@@ -133,6 +170,22 @@ impl Localizer {
         qualifier: &PropertyKey,
         text: &str,
     ) -> Option<String> {
+        if field.namespace.as_deref() == Some(FORM)
+            && field.name == "Event"
+            && qualifier.namespace.is_none()
+        {
+            return match qualifier.name.as_str() {
+                "name" => self.property_caption(
+                    None,
+                    &PropertyKey {
+                        namespace: Some(FORM.into()),
+                        name: text.into(),
+                    },
+                ),
+                "callType" => self.enum_caption("HandlerCallType", text),
+                _ => None,
+            };
+        }
         if field.namespace.as_deref() == Some(READABLE)
             && field.name == "StandardAttribute"
             && qualifier.namespace.is_none()
@@ -192,6 +245,17 @@ impl Localizer {
 fn form_value(property: &str, value: &str) -> Option<&'static str> {
     Some(match (property, value) {
         ("Group", "Horizontal") => "horizontal",
+        ("Group", "AlwaysHorizontal") => "alwaysHorizontal",
+        ("Behavior", "Usual") => "usual",
+        ("Representation" | "TitleLocation", "None") => "none",
+        ("EditMode", "EnterOnInput") => "enterOnInput",
+        ("ControlRepresentation", "Picture") => "picture",
+        ("Type", "Hyperlink") => "hyperlink",
+        ("Type", "CommandBarButton") => "commandBarButton",
+        ("Type", "SearchStringRepresentation") => "searchStringRepresentation",
+        ("Type", "ViewStatusRepresentation") => "viewStatusRepresentation",
+        ("Type", "SearchControl") => "searchControl",
+        ("FileDragMode", "AsFile") => "asFile",
         ("Group", "Vertical") => "vertical",
         ("Group", "HorizontalIfPossible") => "horizontalIfPossible",
         ("ThroughAlign", "Use") => "use",
@@ -204,9 +268,10 @@ fn form_value(property: &str, value: &str) -> Option<&'static str> {
             "HorizontalAlign" | "VerticalAlign" | "GroupHorizontalAlign" | "GroupVerticalAlign",
             "Center",
         ) => "center",
-        ("TitleLocation", "None") => "none",
         (
-            "TitleLocation"
+            "Type"
+            | "CheckBoxType"
+            | "TitleLocation"
             | "HorizontalAlign"
             | "VerticalAlign"
             | "GroupHorizontalAlign"
@@ -478,6 +543,48 @@ mod tests {
             assert!(
                 localizer
                     .property_value_caption(MetadataKind::Catalog, &key, &[], &key, token)
+                    .is_none()
+            );
+        }
+    }
+
+    #[test]
+    fn form_event_annotations_reuse_known_event_captions() {
+        for (locale, change, after) in [
+            (Locale::RuRu, "ПриИзменении", "После"),
+            (Locale::EnUs, "OnChange", "After"),
+        ] {
+            let localizer = Localizer::try_new(locale).unwrap();
+            let mut field = PropertyKey {
+                namespace: Some(FORM.into()),
+                name: "Event".into(),
+            };
+            let mut qualifier = PropertyKey {
+                namespace: None,
+                name: "name".into(),
+            };
+            assert_eq!(
+                localizer
+                    .qualifier_caption(&field, &qualifier, "OnChange")
+                    .as_deref(),
+                Some(change)
+            );
+            assert!(
+                localizer
+                    .qualifier_caption(&field, &qualifier, "FutureEvent")
+                    .is_none()
+            );
+            qualifier.name = "callType".into();
+            assert_eq!(
+                localizer
+                    .qualifier_caption(&field, &qualifier, "After")
+                    .as_deref(),
+                Some(after)
+            );
+            field.namespace = Some("urn:vendor".into());
+            assert!(
+                localizer
+                    .qualifier_caption(&field, &qualifier, "After")
                     .is_none()
             );
         }

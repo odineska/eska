@@ -1,3 +1,4 @@
+use super::common::{CHECKED, OPEN, TRISTATE, UNCHECKED, ZERO};
 use super::{
     PaletteCategory, PaletteDefinition, PaletteEditor, PlatformPropertyValue, SettingSource,
     unbound_data_path,
@@ -14,7 +15,7 @@ enum InputBinding {
     Number,
     Date,
     Boolean,
-    CatalogReference,
+    Reference,
     StringAndNumber,
     StringAndReference,
     ValueList { extended: bool },
@@ -28,9 +29,7 @@ impl InputBinding {
             FieldValueKind::Number => Self::Number,
             FieldValueKind::Date => Self::Date,
             FieldValueKind::Boolean => Self::Boolean,
-            FieldValueKind::Reference if types.iter().any(catalog_reference) => {
-                Self::CatalogReference
-            }
+            FieldValueKind::Reference if types.iter().any(metadata_reference) => Self::Reference,
             FieldValueKind::Composite if types.len() == 2 => {
                 let primitive = |key| {
                     types.iter().any(|kind| {
@@ -42,7 +41,7 @@ impl InputBinding {
                 }
                 if primitive(FieldValueKind::Number) {
                     Self::StringAndNumber
-                } else if types.iter().any(catalog_reference) {
+                } else if types.iter().any(metadata_reference) {
                     Self::StringAndReference
                 } else {
                     return None;
@@ -67,8 +66,12 @@ impl InputBinding {
     }
 }
 
-fn catalog_reference(key: &PropertyKey) -> bool {
-    key.namespace.as_deref() == Some(references::CONFIG) && key.name.starts_with("CatalogRef.")
+fn metadata_reference(key: &PropertyKey) -> bool {
+    key.namespace.as_deref() == Some(references::CONFIG)
+        && key
+            .name
+            .split_once('.')
+            .is_some_and(|(kind, _)| kind.ends_with("Ref") && references::type_kind(kind).is_some())
 }
 
 #[derive(Clone, Copy)]
@@ -83,17 +86,6 @@ impl Context {
     pub(super) fn new(view: &ElementPresentation, element: &EffectiveElement) -> Option<Self> {
         let binding = InputBinding::new(view, element)?;
         let in_table = view.in_table;
-        if in_table
-            && !matches!(
-                binding,
-                InputBinding::String
-                    | InputBinding::Number
-                    | InputBinding::Date
-                    | InputBinding::Boolean
-            )
-        {
-            return None;
-        }
         let manual_max = |name| {
             element
                 .scalar(name)
@@ -161,9 +153,10 @@ impl Rule {
             Self::Unbound => binding == B::Unbound,
             Self::Text => text,
             Self::Format => {
-                matches!(binding, B::ValueList { .. }) || context.in_table && binding != B::String
+                matches!(binding, B::ValueList { .. })
+                    || context.in_table && !matches!(binding, B::String | B::Reference)
             }
-            Self::EditFormat => !matches!(binding, B::String | B::CatalogReference),
+            Self::EditFormat => !matches!(binding, B::String | B::Reference),
             Self::Numeric => matches!(
                 binding,
                 B::Number
@@ -173,12 +166,12 @@ impl Rule {
                     | B::ValueList { .. }
             ),
             Self::Wrap => text || binding == B::Boolean && !context.in_table,
-            Self::InputHint => text || matches!(binding, B::Boolean | B::CatalogReference),
+            Self::InputHint => text || matches!(binding, B::Boolean | B::Reference),
             Self::ReferenceChoices => matches!(
                 binding,
-                B::CatalogReference | B::StringAndReference | B::ValueList { .. }
+                B::Reference | B::StringAndReference | B::ValueList { .. }
             ),
-            Self::ChoiceForm => binding == B::CatalogReference,
+            Self::ChoiceForm => binding == B::Reference,
             Self::ValueList => matches!(binding, B::ValueList { .. }),
             Self::ExtendedValueList => matches!(binding, B::ValueList { extended: true }),
             Self::Column => context.in_table,
@@ -231,13 +224,11 @@ impl Setting {
 }
 
 const fn event(id: &'static str) -> Setting {
-    setting(
-        id,
-        PaletteCategory::Events,
-        PaletteEditor::Event,
-        PlatformPropertyValue::Empty,
-    )
-    .from(SettingSource::Event)
+    Setting {
+        definition: super::common::event(id),
+        rule: Rule::Always,
+        disabled_on: None,
+    }
 }
 
 // Native Configurator 8.3.27, Version8_3_27, in ordinary forms and value table columns.
@@ -251,12 +242,7 @@ const INPUT_FIELD: &[Setting] = {
     use Rule::{Column, ExtendedValueList, Numeric, OutsideTable, ReferenceChoices, ValueList};
     use SettingSource::{Attribute, Property};
 
-    const CHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(true);
-    const UNCHECKED: PlatformPropertyValue = PlatformPropertyValue::Boolean(false);
-    const ZERO: PlatformPropertyValue = PlatformPropertyValue::Number(0);
     const DEFAULT: PlatformPropertyValue = Choice("default");
-    const OPEN: PlatformPropertyValue = PlatformPropertyValue::Dialog;
-    const TRISTATE: &[(&str, &str)] = &[("true", "yes"), ("false", "no")];
     &[
         setting("Name", Main, Text, Unknown).from(SettingSource::Name),
         setting("Title", Main, Localized, Empty),
