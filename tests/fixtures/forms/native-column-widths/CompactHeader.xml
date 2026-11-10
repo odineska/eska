@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" version="2.20">
+  <Title>
+    <v8:item>
+      <v8:lang>ru</v8:lang>
+      <v8:content>ProbeFooterAllocation04</v8:content>
+    </v8:item>
+    <v8:item>
+      <v8:lang>en</v8:lang>
+      <v8:content>ProbeFooterAllocation04</v8:content>
+    </v8:item>
+  </Title>
+  <Width>61</Width>
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <UsualGroup name="Header" id="10">
+      <Behavior>Usual</Behavior>
+      <Representation>None</Representation>
+      <Group>AlwaysHorizontal</Group>
+      <ShowTitle>false</ShowTitle>
+      <HorizontalStretch>true</HorizontalStretch>
+      <BackColor>web:Silver</BackColor>
+      <ChildItems>
+        <UsualGroup name="Left" id="11">
+          <Behavior>Usual</Behavior>
+          <Representation>None</Representation>
+          <Group>AlwaysHorizontal</Group>
+          <ShowTitle>false</ShowTitle>
+          <ChildItems>
+            <InputField name="Number" id="2">
+              <DataPath>Number</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Номер</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Номер</v8:content>
+                </v8:item>
+              </Title>
+              <TitleFont ref="style:NormalTextFont" bold="true" kind="StyleItem"/>
+              <Font ref="style:NormalTextFont" bold="true" kind="StyleItem"/>
+              <TitleLocation>Left</TitleLocation>
+              <EditMode>EnterOnInput</EditMode>
+            </InputField>
+            <PictureField name="Status" id="3">
+              <DataPath>Status</DataPath>
+              <TitleLocation>None</TitleLocation>
+              <Width>2</Width>
+              <Height>1</Height>
+              <HorizontalStretch>false</HorizontalStretch>
+            </PictureField>
+            <Button name="OpenLink" id="4">
+              <Type>Hyperlink</Type>
+              <CommandName>Form.Command.OpenDocument</CommandName>
+            </Button>
+          </ChildItems>
+        </UsualGroup>
+        <UsualGroup name="Right" id="12">
+          <Behavior>Usual</Behavior>
+          <Representation>None</Representation>
+          <Group>AlwaysHorizontal</Group>
+          <ShowTitle>false</ShowTitle>
+          <HorizontalStretch>true</HorizontalStretch>
+          <HorizontalAlign>Right</HorizontalAlign>
+          <ChildItems>
+            <LabelField name="Version" id="5">
+              <DataPath>Version</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Версия движений</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Версия движений</v8:content>
+                </v8:item>
+              </Title>
+              <TitleFont ref="style:NormalTextFont" bold="true" kind="StyleItem"/>
+              <Font ref="style:NormalTextFont" bold="true" kind="StyleItem"/>
+              <BackColor>web:LightCyan</BackColor>
+            </LabelField>
+          </ChildItems>
+        </UsualGroup>
+      </ChildItems>
+    </UsualGroup>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="Number" id="1">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Number</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Number</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>9</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Status" id="2">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Status</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Status</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:decimal</v8:Type>
+        <v8:NumberQualifiers>
+          <v8:Digits>2</v8:Digits>
+          <v8:FractionDigits>0</v8:FractionDigits>
+          <v8:AllowedSign>Any</v8:AllowedSign>
+        </v8:NumberQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Version" id="3">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Version</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Version</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:decimal</v8:Type>
+        <v8:NumberQualifiers>
+          <v8:Digits>2</v8:Digits>
+          <v8:FractionDigits>0</v8:FractionDigits>
+          <v8:AllowedSign>Any</v8:AllowedSign>
+        </v8:NumberQualifiers>
+      </Type>
+    </Attribute>
+  </Attributes>
+  <Commands>
+    <Command name="OpenDocument" id="1">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Открыть документ во внешней системе</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Открыть документ во внешней системе</v8:content>
+        </v8:item>
+      </Title>
+      <Action>OpenDocument</Action>
+    </Command>
+  </Commands>
+</Form>
