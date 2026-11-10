@@ -775,7 +775,9 @@ fn borrowed_standard_attribute_uses_base_properties_omitted_by_extension() {
     );
     let value = standard_type("Code", owner, &resources);
     assert_eq!(value.kind, FieldValueKind::Number);
-    assert_eq!(value.length, Some(9));
+    assert_eq!(value.digits, Some(9));
+    assert_eq!(value.fraction, Some(0));
+    assert_eq!(value.length, None);
 }
 
 #[test]

@@ -1,4 +1,5 @@
 use super::*;
+use eska_project_core::project::forms::FormPreviewInput;
 
 fn owner_inputs() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/forms/native-owner-composition")
@@ -133,7 +134,7 @@ fn native_owner_forms_match_five_static_client_observations_without_writes() {
         let (directory, mut workspace, node) = setup_owner(case);
         let before = bytes(&directory.0);
         let preview = owner_project(&mut workspace, case)
-            .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+            .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
             .unwrap();
         assert_owner_case(case, &preview);
         assert_eq!(bytes(&directory.0), before);
@@ -148,9 +149,7 @@ fn native_owner_borrowing_other_extensions_metadata_cannot_look_like_valid_compo
         let result = owner_project(&mut workspace, case).form_preview(
             &node,
             Some("native"),
-            &[],
-            &[],
-            Vec::new(),
+            FormPreviewInput::default(),
             None,
         );
         assert!(
@@ -180,7 +179,7 @@ fn native_owner_dirty_borrowing_is_validated_and_recovers_without_replacing_iden
     let before = bytes(&directory.0);
     let project = owner_project(&mut workspace, case);
     let preview = project
-        .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
         .unwrap();
     let dependency = preview
         .dependencies
@@ -201,7 +200,7 @@ fn native_owner_dirty_borrowing_is_validated_and_recovers_without_replacing_iden
     };
     assert_ne!(dirty.text, original);
     assert!(
-        matches!(project.form_preview(&node, Some("native"), &[dirty], &preview.dependencies, Vec::new(), None), Err(FormPreviewError::Form(FormContextError::InvalidMetadata { source })) if source == dependency.id)
+        matches!(project.form_preview(&node, Some("native"), FormPreviewInput { overlays: &[dirty], previous: &preview.dependencies, documents: Vec::new(), ..Default::default() }, None), Err(FormPreviewError::Form(FormContextError::InvalidMetadata { source })) if source == dependency.id)
     );
     // A foreign extension fragment must not acquire Designer ownership semantics.
     let dirty = FormOverlay { source: dependency.id.clone(), text: original.replace("<Name>F_OwnCatalog</Name>", "<ObjectBelonging xmlns=\"urn:vendor\">Adopted</ObjectBelonging><Name>F_OwnCatalog</Name>"), version: "2".into() };
@@ -209,9 +208,11 @@ fn native_owner_dirty_borrowing_is_validated_and_recovers_without_replacing_iden
         .form_preview(
             &node,
             Some("native"),
-            &[dirty],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[dirty],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();

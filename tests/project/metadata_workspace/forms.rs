@@ -1,8 +1,9 @@
 use super::*;
 use crate::backend::project::{
-    forms::{FormContextError, FormOverlay, FormPreview},
+    forms::{FormContextError, FormDependency, FormOverlay, FormPreview},
     metadata_workspace::FormPreviewError,
 };
+use eska_project_core::project::forms::FormPreviewInput;
 
 mod native;
 
@@ -20,6 +21,13 @@ fn node(project: &mut crate::backend::project::metadata_workspace::ProjectSessio
         .children(&NodeId::Object(catalog.clone()), TreeOptions::default())
         .unwrap();
     NodeId::Object(object(MetadataKind::Form, "ФормаЭлемента", Some(catalog)))
+}
+fn dependency<'a>(preview: &'a FormPreview, path: &str) -> &'a FormDependency {
+    preview
+        .dependencies
+        .iter()
+        .find(|value| value.path == Path::new(path))
+        .unwrap()
 }
 fn setup() -> (TestDir, MetadataWorkspace) {
     let directory = TestDir::new();
@@ -70,7 +78,7 @@ fn form_context_uses_application_order_dirty_layers_and_per_input_identity_witho
     let node = node(project);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, Some("app"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("app"), FormPreviewInput::default(), None)
         .unwrap();
     assert_eq!(
         preview
@@ -98,9 +106,11 @@ fn form_context_uses_application_order_dirty_layers_and_per_input_identity_witho
         .form_preview(
             &node,
             Some("app"),
-            &[dirty],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[dirty],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -141,7 +151,7 @@ fn form_palette_preserves_each_extensions_declared_property_and_attribute() {
         .unwrap();
     let node = node(project);
     let preview = project
-        .form_preview(&node, Some("app"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("app"), FormPreviewInput::default(), None)
         .unwrap();
     let element = &preview.form.root.children[0];
     let palette = preview.property_palette(&element.identity).unwrap();
@@ -224,7 +234,7 @@ fn handler_modules_follow_effective_property_provenance_and_recheck_context() {
     let node = node(project);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, Some("app"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("app"), FormPreviewInput::default(), None)
         .unwrap();
     let source = project
         .form_handler_source(&node, Some("app"), &preview, 0, None)
@@ -279,7 +289,7 @@ fn form_preparation_keeps_checked_input_locations_when_payloads_are_invalid() {
         .unwrap();
     let node = node(project);
     let preview = project
-        .form_preview(&node, Some("app"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("app"), FormPreviewInput::default(), None)
         .unwrap();
     let expected = preview
         .dependencies
@@ -303,7 +313,7 @@ fn form_preparation_keeps_checked_input_locations_when_payloads_are_invalid() {
     assert_eq!(prepared.roots.len(), 3);
     assert_eq!(prepared.context_fingerprint, preview.context_fingerprint);
     assert!(matches!(
-        project.form_preview(&node, Some("app"), &[], &[], Vec::new(), None),
+        project.form_preview(&node, Some("app"), FormPreviewInput::default(), None),
         Err(FormPreviewError::Form(FormContextError::Parse { .. }))
     ));
     let inputs = prepared
@@ -323,7 +333,15 @@ fn form_preparation_keeps_checked_input_locations_when_payloads_are_invalid() {
         })
         .collect();
     let recovered = project
-        .form_preview(&node, Some("app"), &[], &[], inputs, None)
+        .form_preview(
+            &node,
+            Some("app"),
+            FormPreviewInput {
+                documents: inputs,
+                ..Default::default()
+            },
+            None,
+        )
         .unwrap();
     assert_eq!(recovered.documents.len(), 3);
     assert!(
@@ -346,7 +364,7 @@ fn form_context_rejects_foreign_uploads_and_application_members() {
         .unwrap();
     let node = node(project);
     assert!(matches!(
-        project.form_preview(&node, Some("other"), &[], &[], Vec::new(), None),
+        project.form_preview(&node, Some("other"), FormPreviewInput::default(), None),
         Err(FormPreviewError::Form(FormContextError::MemberMismatch))
     ));
     let overlay = FormOverlay {
@@ -355,11 +373,25 @@ fn form_context_rejects_foreign_uploads_and_application_members() {
         version: "1".into(),
     };
     assert!(matches!(
-        project.form_preview(&node, Some("app"), &[overlay], &[], Vec::new(), None),
+        project.form_preview(
+            &node,
+            Some("app"),
+            FormPreviewInput {
+                overlays: &[overlay],
+
+                ..Default::default()
+            },
+            None
+        ),
         Err(FormPreviewError::Form(FormContextError::InvalidOverlay))
     ));
     assert!(matches!(
-        project.form_preview(project.root(), Some("app"), &[], &[], Vec::new(), None),
+        project.form_preview(
+            project.root(),
+            Some("app"),
+            FormPreviewInput::default(),
+            None
+        ),
         Err(FormPreviewError::NotManagedForm)
     ));
 }
@@ -374,7 +406,7 @@ fn standalone_borrowed_form_is_explicitly_incomplete() {
     let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
     let node = node(project);
     let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
     assert_eq!(
         preview.form.diagnostics[0].issue,
@@ -396,7 +428,7 @@ fn form_presentation_tracks_dirty_metadata_captions_without_changing_element_ide
     let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
     let node = node(project);
     let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
     let caption = &preview.presentation.elements[1].caption;
     assert!(
@@ -418,9 +450,11 @@ fn form_presentation_tracks_dirty_metadata_captions_without_changing_element_ide
         .form_preview(
             &node,
             None,
-            &[overlay],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[overlay],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -504,6 +538,127 @@ fn reference_path_fixture(root: &Path) {
 }
 
 #[test]
+fn inspector_expands_reference_branches_without_eagerly_loading_the_graph() {
+    let directory = TestDir::new();
+    reference_path_fixture(&directory.0);
+    let source = directory.0.join("src");
+    fs::write(source.join(PATH), form(r#"<Attributes><Attribute name="Object" id="1"><Type xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><v8:Type>cfg:CatalogObject.Контрагенты</v8:Type></Type><MainAttribute>true</MainAttribute></Attribute></Attributes>"#, None)).unwrap();
+    let before = bytes(&directory.0);
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let baseline = project
+        .form_preview(&node, None, FormPreviewInput::default(), None)
+        .unwrap();
+    assert!(
+        !baseline
+            .dependencies
+            .iter()
+            .any(|input| input.path == Path::new("Catalogs/Agreement.xml"))
+    );
+    let paths = vec![
+        vec!["Object".into(), "Link".into()],
+        vec!["Object".into(), "Link".into(), "Company".into()],
+        vec!["Object".into(), "Ref".into(), "Ref".into()],
+    ];
+    let expanded = project
+        .form_preview(
+            &node,
+            None,
+            FormPreviewInput {
+                expanded_data: &paths,
+                ..Default::default()
+            },
+            None,
+        )
+        .unwrap();
+    let fields: Vec<_> = expanded
+        .inspector_data()
+        .iter()
+        .map(|field| field.path.join("."))
+        .collect();
+    assert!(fields.contains(&"Object.Link.Company.Value".into()));
+    assert!(fields.contains(&"Object.Ref.Ref.Link".into()));
+    assert!(
+        !expanded
+            .dependencies
+            .iter()
+            .any(|input| input.path == Path::new("Catalogs/Unused.xml"))
+    );
+    assert!(
+        expanded
+            .inspector_data_origin(&["Object".into(), "Ref".into(), "Ref".into(), "Link".into()])
+            .is_some()
+    );
+    assert_eq!(bytes(&directory.0), before);
+}
+
+#[test]
+fn inspector_merges_composite_reference_types_and_resolves_catalog_owners() {
+    use crate::backend::project::forms::FieldValueKind;
+    let directory = TestDir::new();
+    reference_path_fixture(&directory.0);
+    let source = directory.0.join("src");
+    let agreement = source.join("Catalogs/Agreement.xml");
+    fs::write(&agreement, fs::read_to_string(&agreement).unwrap().replace(
+        "<Name>Agreement</Name>",
+        "<Name>Agreement</Name><Owners xmlns:xr=\"http://v8.1c.ru/8.3/xcf/readable\"><xr:Item>Catalog.Company</xr:Item><xr:Item>Catalog.Alternate</xr:Item></Owners>",
+    )).unwrap();
+    fs::write(source.join(PATH), form(r#"<Attributes>
+        <Attribute name="Mixed" id="1"><Type xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><v8:Type>cfg:CatalogRef.Company</v8:Type><v8:Type>cfg:CatalogRef.Alternate</v8:Type></Type></Attribute>
+        <Attribute name="Owned" id="2"><Type xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config"><v8:Type>cfg:CatalogRef.Agreement</v8:Type></Type></Attribute>
+        </Attributes>"#, None)).unwrap();
+    let mut workspace = MetadataWorkspace::open(&directory.0, &[], false).unwrap();
+    let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
+    let node = node(project);
+    let paths = [
+        vec!["Mixed".into()],
+        vec!["Owned".into()],
+        vec!["Owned".into(), "Owner".into()],
+        vec!["Owned".into(), "Parent".into()],
+    ];
+    let preview = project
+        .form_preview(
+            &node,
+            None,
+            FormPreviewInput {
+                expanded_data: &paths,
+                ..Default::default()
+            },
+            None,
+        )
+        .unwrap();
+    let fields = preview.inspector_data();
+    for path in ["Mixed.Value", "Owned.Owner.Value"] {
+        let field = fields
+            .iter()
+            .find(|field| field.path.join(".") == path)
+            .unwrap();
+        assert_eq!(field.value_type.kind, FieldValueKind::Composite);
+        assert_eq!(field.value_type.types.len(), 2);
+        assert!(field.origin.is_none());
+        assert!(field.type_property.is_none());
+    }
+    assert!(
+        !fields
+            .iter()
+            .any(|field| field.path.join(".").starts_with("Owned.Parent"))
+    );
+    assert!(matches!(
+        project.form_preview(
+            &node,
+            None,
+            FormPreviewInput {
+                expanded_data: &[vec!["Mixed.Value".into()]],
+                ..Default::default()
+            },
+            None
+        ),
+        Err(FormPreviewError::Form(FormContextError::InvalidDataPath))
+    ));
+}
+
+#[test]
 fn form_reference_paths_load_only_used_descriptors_and_rebind_on_dirty_type_change() {
     use crate::backend::project::forms::{FieldValueKind, PresentationText};
 
@@ -515,7 +670,7 @@ fn form_reference_paths_load_only_used_descriptors_and_rebind_on_dirty_type_chan
     let node = node(project);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
     let paths = |preview: &crate::backend::project::forms::FormPreview| {
         preview
@@ -547,9 +702,11 @@ fn form_reference_paths_load_only_used_descriptors_and_rebind_on_dirty_type_chan
         .form_preview(
             &node,
             None,
-            &[overlay],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[overlay],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -606,7 +763,7 @@ fn external_form_resolves_configuration_types_without_composing_an_unrelated_for
     let form_node = NodeId::Object(object(MetadataKind::Form, "Основная", Some(root_id)));
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&form_node, Some("app"), &[], &[], Vec::new(), None)
+        .form_preview(&form_node, Some("app"), FormPreviewInput::default(), None)
         .unwrap();
     assert_eq!(preview.documents.len(), 1);
     assert!(
@@ -644,13 +801,23 @@ fn form_context_excludes_disabled_extensions_but_retains_required_dependencies()
         .unwrap();
     let node = node(project);
     let preview = project
-        .form_preview(&node, Some("app"), &[], &[], Vec::new(), Some(&state))
+        .form_preview(
+            &node,
+            Some("app"),
+            FormPreviewInput::default(),
+            Some(&state),
+        )
         .unwrap();
     assert_eq!(preview.documents.len(), 1);
     let base_fingerprint = preview.context_fingerprint;
     state.disabled.remove(&path_key(&directory.0.join("two")));
     let preview = project
-        .form_preview(&node, Some("app"), &[], &[], Vec::new(), Some(&state))
+        .form_preview(
+            &node,
+            Some("app"),
+            FormPreviewInput::default(),
+            Some(&state),
+        )
         .unwrap();
     assert_eq!(
         preview.documents.len(),
@@ -700,7 +867,7 @@ fn form_common_picture_tracks_payload_dirty_descriptor_and_rejects_binary_overla
     let node = node(project);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
     assert!(preview.presentation.diagnostics.is_empty());
     assert!(
@@ -721,13 +888,15 @@ fn form_common_picture_tracks_payload_dirty_descriptor_and_rejects_binary_overla
         .form_preview(
             &node,
             None,
-            &[FormOverlay {
-                source: descriptor.id.clone(),
-                version: "7".into(),
-                text: picture_description("Two.svg"),
-            }],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[FormOverlay {
+                    source: descriptor.id.clone(),
+                    version: "7".into(),
+                    text: picture_description("Two.svg"),
+                }],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -749,13 +918,15 @@ fn form_common_picture_tracks_payload_dirty_descriptor_and_rejects_binary_overla
         project.form_preview(
             &node,
             None,
-            &[FormOverlay {
-                source: binary.id.clone(),
-                version: "8".into(),
-                text: "invalid binary overlay".into()
-            }],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[FormOverlay {
+                    source: binary.id.clone(),
+                    version: "8".into(),
+                    text: "invalid binary overlay".into()
+                }],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None
         ),
         Err(FormPreviewError::Form(FormContextError::InvalidOverlay))
@@ -764,13 +935,15 @@ fn form_common_picture_tracks_payload_dirty_descriptor_and_rejects_binary_overla
         project.form_preview(
             &node,
             None,
-            &[FormOverlay {
-                source: descriptor.id.clone(),
-                version: "8".into(),
-                text: "<".into()
-            }],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[FormOverlay {
+                    source: descriptor.id.clone(),
+                    version: "8".into(),
+                    text: "<".into()
+                }],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None
         ),
         Err(FormPreviewError::Form(
@@ -809,7 +982,7 @@ fn native_style_payload_is_a_dirty_tracked_dependency_without_source_writes() {
     let node = node(project);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
     let dependency = preview
         .dependencies
@@ -832,15 +1005,17 @@ fn native_style_payload_is_a_dirty_tracked_dependency_without_source_writes() {
         .form_preview(
             &node,
             None,
-            &[FormOverlay {
-                source: dependency.id.clone(),
-                version: "88".into(),
-                text: style_text
-                    .replace("#9800FF", "#008000")
-                    .replace("height=\"18\"", "height=\"20\""),
-            }],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[FormOverlay {
+                    source: dependency.id.clone(),
+                    version: "88".into(),
+                    text: style_text
+                        .replace("#9800FF", "#008000")
+                        .replace("height=\"18\"", "height=\"20\""),
+                }],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -860,22 +1035,26 @@ fn native_style_payload_is_a_dirty_tracked_dependency_without_source_writes() {
         changed.form.root.children[0].identity,
         preview.form.root.children[0].identity
     );
-    assert!(matches!(project.form_preview(&node, None, &[FormOverlay {
+    assert!(
+        matches!(project.form_preview(&node, None, FormPreviewInput { overlays: &[FormOverlay {
         source: dependency.id.clone(), version: "89".into(), text: "<Style>".into(),
-    }], &preview.dependencies, Vec::new(), None), Err(FormPreviewError::Form(
+    }], previous: &preview.dependencies, documents: Vec::new(), ..Default::default() }, None), Err(FormPreviewError::Form(
         FormContextError::InvalidMetadata { source })
-    ) if source == dependency.id));
+    ) if source == dependency.id)
+    );
     assert!(matches!(
         project.form_preview(
             &node,
             None,
-            &[FormOverlay {
-                source: format!("foreign:{}", dependency.id),
-                version: "89".into(),
-                text: style_text,
-            }],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[FormOverlay {
+                    source: format!("foreign:{}", dependency.id),
+                    version: "89".into(),
+                    text: style_text,
+                }],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None
         ),
         Err(FormPreviewError::Form(FormContextError::InvalidOverlay))
@@ -910,18 +1089,10 @@ fn taxi_palette_tracks_dirty_style_values_and_configuration_selection() {
     let node = node(project);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
-    let style = preview
-        .dependencies
-        .iter()
-        .find(|dependency| dependency.path == Path::new("Styles/ProbeStyleValues/Ext/Style.xml"))
-        .unwrap();
-    let config = preview
-        .dependencies
-        .iter()
-        .find(|dependency| dependency.path == Path::new("Configuration.xml"))
-        .unwrap();
+    let style = dependency(&preview, "Styles/ProbeStyleValues/Ext/Style.xml");
+    let config = dependency(&preview, "Configuration.xml");
     let config_text = fs::read_to_string(root.join("Configuration.xml")).unwrap();
     assert_eq!(
         preview.presentation.elements[1].title_color,
@@ -936,9 +1107,11 @@ fn taxi_palette_tracks_dirty_style_values_and_configuration_selection() {
         .form_preview(
             &node,
             None,
-            std::slice::from_ref(&style_overlay),
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: std::slice::from_ref(&style_overlay),
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -955,9 +1128,11 @@ fn taxi_palette_tracks_dirty_style_values_and_configuration_selection() {
         .form_preview(
             &node,
             None,
-            &[disabled],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[disabled],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -975,16 +1150,18 @@ fn taxi_palette_tracks_dirty_style_values_and_configuration_selection() {
         .form_preview(
             &node,
             None,
-            &[
-                style_overlay,
-                FormOverlay {
-                    source: config.id.clone(),
-                    version: "92".into(),
-                    text: config_text,
-                },
-            ],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[
+                    style_overlay,
+                    FormOverlay {
+                        source: config.id.clone(),
+                        version: "92".into(),
+                        text: config_text,
+                    },
+                ],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -1021,7 +1198,7 @@ fn style_item_named_like_internal_profile_color_loads_and_tracks_dirty_selected_
     let node = node(project);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
     assert!(
         preview
@@ -1048,13 +1225,15 @@ fn style_item_named_like_internal_profile_color_loads_and_tracks_dirty_selected_
         .form_preview(
             &node,
             None,
-            &[FormOverlay {
-                source: source.id.clone(),
-                version: "93".into(),
-                text: body.replace("#123456", "#654321"),
-            }],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[FormOverlay {
+                    source: source.id.clone(),
+                    version: "93".into(),
+                    text: body.replace("#123456", "#654321"),
+                }],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -1088,7 +1267,7 @@ fn named_title_font_tracks_dirty_style_and_definition_without_changing_element_i
     let node = node(project);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
     let index = preview
         .presentation
@@ -1098,15 +1277,7 @@ fn named_title_font_tracks_dirty_style_and_definition_without_changing_element_i
         .unwrap();
     assert_eq!(preview.presentation.elements[index].font.points, 18.0);
     assert_eq!(preview.presentation.elements[index].font.weight, 700);
-    let dependency = |path: &str| {
-        preview
-            .dependencies
-            .iter()
-            .find(|value| value.path == Path::new(path))
-            .unwrap()
-            .id
-            .clone()
-    };
+    let dependency = |path: &str| dependency(&preview, path).id.clone();
     let style_source = dependency("Styles/ProbeStyleValues/Ext/Style.xml");
     let definition_source = dependency("StyleItems/TitleFont.xml");
     let start = body.find("<Item name=\"StyleItem.TitleFont\">").unwrap();
@@ -1132,20 +1303,22 @@ fn named_title_font_tracks_dirty_style_and_definition_without_changing_element_i
             .form_preview(
                 &node,
                 None,
-                &[
-                    FormOverlay {
-                        source: style_source.clone(),
-                        version: version.into(),
-                        text: style_text,
-                    },
-                    FormOverlay {
-                        source: definition_source.clone(),
-                        version: version.into(),
-                        text: definition_text,
-                    },
-                ],
-                &preview.dependencies,
-                Vec::new(),
+                FormPreviewInput {
+                    overlays: &[
+                        FormOverlay {
+                            source: style_source.clone(),
+                            version: version.into(),
+                            text: style_text,
+                        },
+                        FormOverlay {
+                            source: definition_source.clone(),
+                            version: version.into(),
+                            text: definition_text,
+                        },
+                    ],
+                    previous: &preview.dependencies,
+                    ..Default::default()
+                },
                 None,
             )
             .unwrap();
@@ -1195,7 +1368,7 @@ fn style_payload_discovers_its_own_references_and_missing_payload_keeps_defaults
     let node = node(project);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
     assert_eq!(
         preview.presentation.elements[1].foreground,
@@ -1212,7 +1385,7 @@ fn style_payload_discovers_its_own_references_and_missing_payload_keeps_defaults
     fs::remove_file(&path).unwrap();
     let before = bytes(&directory.0);
     let fallback = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
     assert!(!fallback.dependencies.iter().any(|dependency| dependency.path == Path::new("Styles/ProbeStyleValues/Ext/Style.xml")));
     assert_eq!(
@@ -1412,7 +1585,7 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
     let project = workspace.project_mut(&ProjectScope::Standalone).unwrap();
     let node = node(project);
     let preview = project
-        .form_preview(&node, None, &[], &[], Vec::new(), None)
+        .form_preview(&node, None, FormPreviewInput::default(), None)
         .unwrap();
     assert_initial_root_commands(&preview);
     let dependency = preview
@@ -1420,20 +1593,24 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
         .iter()
         .find(|input| input.path.ends_with("DefinedTypes/Inner.xml"))
         .unwrap();
-    assert!(matches!(project.form_preview(&node, None, &[FormOverlay {
+    assert!(
+        matches!(project.form_preview(&node, None, FormPreviewInput { overlays: &[FormOverlay {
         source: dependency.id.clone(), version: "2".into(), text: "<incomplete".into(),
-    }], &preview.dependencies, Vec::new(), None), Err(FormPreviewError::Form(FormContextError::InvalidMetadata { source })) if source == dependency.id));
+    }], previous: &preview.dependencies, documents: Vec::new(), ..Default::default() }, None), Err(FormPreviewError::Form(FormContextError::InvalidMetadata { source })) if source == dependency.id)
+    );
     let changed = project
         .form_preview(
             &node,
             None,
-            &[FormOverlay {
-                source: dependency.id.clone(),
-                version: "2".into(),
-                text: inner.replace(BAR_COMMAND_REFERENCE, ""),
-            }],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[FormOverlay {
+                    source: dependency.id.clone(),
+                    version: "2".into(),
+                    text: inner.replace(BAR_COMMAND_REFERENCE, ""),
+                }],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -1467,19 +1644,21 @@ fn root_bar_resolves_application_commands_and_dirty_defined_types() {
         .form_preview(
             &node,
             None,
-            &[],
-            &changed.dependencies,
-            vec![
-                input("DefinedTypes/Inner.xml", inner),
-                input(
-                    "DefinedTypes/Unused.xml",
-                    unused.replace(OTHER_COMMAND_REFERENCE, BAR_COMMAND_REFERENCE),
-                ),
-                input(
-                    "CommandGroups/Extra.xml",
-                    group.replace("FormNavigationPanel", "FormCommandBar"),
-                ),
-            ],
+            FormPreviewInput {
+                previous: &changed.dependencies,
+                documents: vec![
+                    input("DefinedTypes/Inner.xml", inner),
+                    input(
+                        "DefinedTypes/Unused.xml",
+                        unused.replace(OTHER_COMMAND_REFERENCE, BAR_COMMAND_REFERENCE),
+                    ),
+                    input(
+                        "CommandGroups/Extra.xml",
+                        group.replace("FormNavigationPanel", "FormCommandBar"),
+                    ),
+                ],
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -1547,7 +1726,7 @@ fn root_bar_filters_by_effective_group_and_parameter_in_extension_layers() {
         .unwrap();
     let node = node(project);
     let initial = project
-        .form_preview(&node, Some("app"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("app"), FormPreviewInput::default(), None)
         .unwrap();
     assert!(initial.dependencies.iter().all(|item| {
         !["Shared.xml", "Recipients.xml", "Options.xml"]
@@ -1558,14 +1737,16 @@ fn root_bar_filters_by_effective_group_and_parameter_in_extension_layers() {
         .form_preview(
             &node,
             Some("app"),
-            &[],
-            &initial.dependencies,
-            vec![FormInput {
-                root: high,
-                path: "CommandGroups/Options.xml".into(),
-                version: "2".into(),
-                text: group.replace("FormNavigationPanel", "FormCommandBar"),
-            }],
+            FormPreviewInput {
+                previous: &initial.dependencies,
+                documents: vec![FormInput {
+                    root: high,
+                    path: "CommandGroups/Options.xml".into(),
+                    version: "2".into(),
+                    text: group.replace("FormNavigationPanel", "FormCommandBar"),
+                }],
+                ..Default::default()
+            },
             None,
         )
         .unwrap();

@@ -4,7 +4,7 @@ use super::{ProjectSession, WorkspaceError};
 use crate::{
     application,
     project::{
-        forms::{self, FormDependency, FormInput, FormOverlay, FormPreparation, FormPreview},
+        forms::{self, FormPreparation, FormPreview, FormPreviewInput},
         metadata_model::{MetadataKind, NodeId, ObjectId},
     },
 };
@@ -26,21 +26,11 @@ impl ProjectSession {
         &self,
         node: &NodeId,
         application: Option<&str>,
-        overlays: &[FormOverlay],
-        previous: &[FormDependency],
-        inputs: Vec<FormInput>,
+        input: FormPreviewInput<'_>,
         activity: Option<&crate::project::activity::State>,
     ) -> Result<FormPreview, FormPreviewError> {
         let (owner, context) = self.form_context(node, application, activity)?;
-        forms::load(
-            &context,
-            self.project().source(),
-            owner,
-            overlays,
-            previous,
-            inputs,
-        )
-        .map_err(FormPreviewError::Form)
+        forms::load(&context, self.project().source(), owner, input).map_err(FormPreviewError::Form)
     }
 
     /// Resolve checked form input locations before parsing any form payload.

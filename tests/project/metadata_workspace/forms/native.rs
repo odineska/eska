@@ -3,6 +3,7 @@ use crate::backend::project::forms::{
     EffectiveElement, ElementKey, ElementKind, FormDependencyRole, FormPresentation, FormPreview,
     PresentationText, ResolvedColor,
 };
+use eska_project_core::project::forms::FormPreviewInput;
 use serde_json::{Value, json};
 
 mod owners;
@@ -220,7 +221,7 @@ fn native_xml_form_composition_matches_eleven_observed_static_client_cases() {
         let (directory, mut workspace, node) = native_setup(case);
         let before = bytes(&directory.0);
         let preview = native_project(&mut workspace)
-            .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+            .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
             .unwrap();
         assert_native(case, &preview);
         assert_eq!(bytes(&directory.0), before);
@@ -240,7 +241,7 @@ fn dirty_extension_purpose_reorders_layers_without_changing_element_identity_or_
     let project = native_project(&mut workspace);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
         .unwrap();
     assert_native(case, &preview);
     let configuration = preview
@@ -260,9 +261,11 @@ fn dirty_extension_purpose_reorders_layers_without_changing_element_identity_or_
         .form_preview(
             &node,
             Some("native"),
-            &[overlay],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                overlays: &[overlay],
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
@@ -293,7 +296,7 @@ fn invalid_extension_purpose_does_not_masquerade_as_customization() {
     let project = native_project(&mut workspace);
     let before = bytes(&directory.0);
     let preview = project
-        .form_preview(&node, Some("native"), &[], &[], Vec::new(), None)
+        .form_preview(&node, Some("native"), FormPreviewInput::default(), None)
         .unwrap();
     let configuration = preview
         .dependencies
@@ -311,16 +314,17 @@ fn invalid_extension_purpose_does_not_masquerade_as_customization() {
             version: "16".into(),
         };
         assert!(
-            matches!(project.form_preview(&node, Some("native"), &[overlay], &preview.dependencies, Vec::new(), None), Err(FormPreviewError::Form(FormContextError::InvalidMetadata {source})) if source == configuration.id)
+            matches!(project.form_preview(&node, Some("native"), FormPreviewInput { overlays: &[overlay], previous: &preview.dependencies, documents: Vec::new(), ..Default::default() }, None), Err(FormPreviewError::Form(FormContextError::InvalidMetadata {source})) if source == configuration.id)
         );
     }
     let restored = project
         .form_preview(
             &node,
             Some("native"),
-            &[],
-            &preview.dependencies,
-            Vec::new(),
+            FormPreviewInput {
+                previous: &preview.dependencies,
+                ..Default::default()
+            },
             None,
         )
         .unwrap();
