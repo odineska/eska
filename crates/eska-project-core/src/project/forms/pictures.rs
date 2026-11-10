@@ -21,6 +21,14 @@ pub enum FormPicture {
     Missing { reference: String },
 }
 
+/// An authored image reference may select an empty button face.
+#[derive(Clone, Debug, Serialize)]
+#[serde(untagged)]
+pub enum FormPictureSelection {
+    Empty,
+    Image(FormPicture),
+}
+
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
 pub enum ButtonRepresentation {
     Text,
@@ -61,13 +69,25 @@ pub(super) fn form_picture(
     resources: &[FormResource],
     diagnostics: &mut Vec<AppearanceDiagnostic>,
 ) -> Option<FormPicture> {
-    resolve(
-        &property.property.value,
+    match form_picture_selection(property, resources, diagnostics)? {
+        FormPictureSelection::Empty => None,
+        FormPictureSelection::Image(picture) => Some(picture),
+    }
+}
+
+pub(super) fn form_picture_selection(
+    property: &SourcedProperty,
+    resources: &[FormResource],
+    diagnostics: &mut Vec<AppearanceDiagnostic>,
+) -> Option<FormPictureSelection> {
+    let picture = resolve(
+        picture_reference(&property.property.value)?,
         &property.origin.source,
         &property.origin.range,
         resources,
         diagnostics,
-    )
+    );
+    Some(picture.map_or(FormPictureSelection::Empty, FormPictureSelection::Image))
 }
 
 pub(super) fn metadata_picture(
@@ -77,7 +97,7 @@ pub(super) fn metadata_picture(
 ) -> Option<FormPicture> {
     let (resource, property) = located_metadata_property(owner, "Picture", resources)?;
     resolve(
-        &property.property.value,
+        picture_reference(&property.property.value)?,
         &resource.source,
         &property.range,
         resources,
@@ -85,13 +105,7 @@ pub(super) fn metadata_picture(
     )
 }
 
-fn resolve(
-    value: &MetadataValue,
-    source: &str,
-    range: &Range<usize>,
-    resources: &[FormResource],
-    diagnostics: &mut Vec<AppearanceDiagnostic>,
-) -> Option<FormPicture> {
+fn picture_reference(value: &MetadataValue) -> Option<&str> {
     let MetadataValue::Record(fields) = value else {
         return None;
     };
@@ -100,8 +114,18 @@ fn resolve(
             && field.key.name == "Ref"
     })?;
     let reference = super::appearance::text(&field.value)?.trim();
+    (!reference.is_empty()).then_some(reference)
+}
+
+fn resolve(
+    reference: &str,
+    source: &str,
+    range: &Range<usize>,
+    resources: &[FormResource],
+    diagnostics: &mut Vec<AppearanceDiagnostic>,
+) -> Option<FormPicture> {
     // Configurator serializes a cleared picture as Ref=0.
-    if reference.is_empty() || reference == "0" {
+    if reference == "0" {
         return None;
     }
     if let Some(name) = reference.strip_prefix("StdPicture.") {

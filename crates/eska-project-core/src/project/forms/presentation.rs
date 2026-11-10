@@ -124,6 +124,8 @@ pub struct ElementPresentation {
     pub title_location: FieldTitleLocation,
     pub picture: Option<super::FormPicture>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub choice_button_picture: Option<super::FormPictureSelection>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub button_representation: Option<ButtonRepresentation>,
     pub caption: PresentationText,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -348,7 +350,7 @@ fn present_element(
         .map(|value| choices(&value.property.value, resources))
         .filter(|values| !values.is_empty())
         .unwrap_or_else(|| enum_choices(&value_type, resources));
-    let (picture, button_representation) = element_picture(
+    let pictures = element_pictures(
         element,
         scope,
         command.as_ref(),
@@ -384,8 +386,9 @@ fn present_element(
                 )),
         mark_incomplete,
         title_location: title_location(element),
-        picture,
-        button_representation,
+        picture: pictures.picture,
+        choice_button_picture: pictures.choice,
+        button_representation: pictures.representation,
         caption,
         tabular_total,
         tooltip: element
@@ -438,13 +441,19 @@ fn element_colors(
     (foreground, background, border, title_color)
 }
 
-fn element_picture(
+struct ElementPictures {
+    picture: Option<super::FormPicture>,
+    choice: Option<super::FormPictureSelection>,
+    representation: Option<ButtonRepresentation>,
+}
+
+fn element_pictures(
     element: &EffectiveElement,
     scope: VisitScope<'_>,
     command: Option<&ResolvedCommand<'_>>,
     resources: &[FormResource],
     diagnostics: &mut Vec<AppearanceDiagnostic>,
-) -> (Option<super::FormPicture>, Option<ButtonRepresentation>) {
+) -> ElementPictures {
     let button = element.kind == Some(ElementKind::Button);
     let picture = if let Some(property) = element.property("Picture") {
         pictures::form_picture(property, resources, diagnostics)
@@ -467,7 +476,18 @@ fn element_picture(
             automatic,
         )
     });
-    (picture, representation)
+    let choice = if element.kind == Some(ElementKind::InputField) {
+        element
+            .property("ChoiceButtonPicture")
+            .and_then(|property| pictures::form_picture_selection(property, resources, diagnostics))
+    } else {
+        None
+    };
+    ElementPictures {
+        picture,
+        choice,
+        representation,
+    }
 }
 
 fn table_column_appearance(

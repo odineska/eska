@@ -2770,15 +2770,19 @@ fn form_methods_are_not_exposed_to_older_clients() {
     client.finish();
 }
 
-#[test]
-fn common_picture_payloads_are_bounded_images_and_binary_dependencies_require_api_37() {
-    let directory = fixture();
-    let root = directory.0.join("src");
+fn write_common_picture(root: &Path) {
     fs::create_dir_all(root.join("CommonPictures/Icon/Ext/Picture")).unwrap();
     fs::write(root.join("CommonPictures/Icon.xml"), "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><CommonPicture uuid=\"picture\"><Properties><Name>Icon</Name></Properties></CommonPicture></MetaDataObject>").unwrap();
     fs::write(root.join("CommonPictures/Icon/Ext/Picture.xml"),"<ExtPicture xmlns=\"http://v8.1c.ru/8.3/xcf/extrnprops\" xmlns:xr=\"http://v8.1c.ru/8.3/xcf/readable\"><Picture><xr:Abs>Icon.svg</xr:Abs></Picture></ExtPicture>").unwrap();
     let bytes = b"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"/>";
     fs::write(root.join("CommonPictures/Icon/Ext/Picture/Icon.svg"), bytes).unwrap();
+}
+
+#[test]
+fn common_picture_payloads_are_bounded_images_and_binary_dependencies_require_api_37() {
+    let directory = fixture();
+    let root = directory.0.join("src");
+    write_common_picture(&root);
     fs::write(root.join(PATH),"<Form xmlns=\"http://v8.1c.ru/8.3/xcf/logform\"><ChildItems><PictureDecoration name=\"Logo\" id=\"1\"><Picture xmlns:xr=\"http://v8.1c.ru/8.3/xcf/readable\"><xr:Ref>CommonPicture.Icon</xr:Ref></Picture></PictureDecoration></ChildItems></Form>").unwrap();
     for minor in [36, 37] {
         let mut client = Client::new(&directory.0, "ru-RU");
@@ -2805,4 +2809,77 @@ fn common_picture_payloads_are_bounded_images_and_binary_dependencies_require_ap
         }
         client.finish();
     }
+}
+
+#[test]
+fn choice_pictures_use_effective_form_resources_and_require_api_46() {
+    const FORM: &str = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable">
+        <ChildItems>
+        <InputField name="Common" id="1"><ChoiceButtonPicture><xr:Ref>CommonPicture.Icon</xr:Ref></ChoiceButtonPicture></InputField>
+        <InputField name="Standard" id="2"><ChoiceButtonPicture><xr:Ref>StdPicture.MoveLeft</xr:Ref></ChoiceButtonPicture></InputField>
+        <InputField name="Cleared" id="3"><ChoiceButtonPicture><xr:Ref>0</xr:Ref></ChoiceButtonPicture></InputField>
+        <InputField name="Default" id="4"><ChoiceButtonPicture/></InputField>
+        </ChildItems></Form>"#;
+    let directory = fixture();
+    let root = directory.0.join("src");
+    write_common_picture(&root);
+    let path = root.join(PATH);
+    fs::write(&path, FORM).unwrap();
+    for minor in [45, 46] {
+        let mut client = Client::new(&directory.0, "ru-RU");
+        let (context, node) = connect(&mut client, &directory.0, "ru-RU", minor);
+        let view = client.request("form/open", &params(&context, json!({"node":node})));
+        let model = &view["model"];
+        let fields = model["root"]["children"].as_array().unwrap();
+        let assets = model["assets"].as_array().unwrap();
+        assert_eq!(assets.len(), usize::from(minor >= 46));
+        assert_eq!(fields[0]["presentation"]["picture"], Value::Null);
+        assert_eq!(model["diagnostics"]["appearance"], json!([]));
+        if minor == 46 {
+            assert_eq!(
+                fields[0]["presentation"]["choiceButtonPicture"],
+                json!({"kind":"common","source":assets[0]["id"]})
+            );
+            assert_eq!(
+                fields[1]["presentation"]["choiceButtonPicture"],
+                json!({"kind":"standard","name":"MoveLeft"})
+            );
+            assert_eq!(
+                fields[2]["presentation"].get("choiceButtonPicture"),
+                Some(&Value::Null)
+            );
+            let source = view["dependencies"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .find(|input| input["role"] == "form")
+                .unwrap();
+            let edited = client.request("form/update", &params(&context, json!({
+                "formSessionId":view["formSessionId"],"revision":view["revision"],
+                "overlays":[{"source":source["id"],"version":"1","text":FORM.replace("CommonPicture.Icon", "CommonPicture.Missing")}]
+            })));
+            assert_eq!(edited["model"]["assets"], json!([]));
+            assert_eq!(
+                edited["model"]["root"]["children"][0]["presentation"]["choiceButtonPicture"],
+                json!({"kind":"missing","reference":"CommonPicture.Missing"})
+            );
+            assert_eq!(
+                edited["model"]["diagnostics"]["appearance"][0]["code"],
+                "picture_unavailable"
+            );
+        } else {
+            assert!(
+                fields[..3]
+                    .iter()
+                    .all(|field| field["presentation"].get("choiceButtonPicture").is_none())
+            );
+        }
+        assert!(
+            fields[3]["presentation"]
+                .get("choiceButtonPicture")
+                .is_none()
+        );
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(path).unwrap(), FORM);
 }
