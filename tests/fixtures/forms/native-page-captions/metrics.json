@@ -250,6 +250,426 @@
         "ru": "93c51ef5faf8a57b03fd3d1f6bcbe8b3c2759a26ae413234574896d96a8b7c33"
       },
       "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "ThroughPageWidth52",
+      "file": "ThroughPageWidth52.xml",
+      "fixtureSha256": "ba0fc4a09bbe573a22f8dcdfcf6c40b4c25c5573394afd21cd510c5ccf8788da",
+      "canonicalSha256": "991b7fd3f697a4541c715639f655491d0d0a52f67f70514bc43f5eb9a850b5e8",
+      "frame": [
+        554,
+        274
+      ],
+      "fields": {
+        "NameInput": [
+          229,
+          62,
+          304,
+          23
+        ],
+        "Password": [
+          229,
+          94,
+          304,
+          23
+        ],
+        "Port": [
+          229,
+          126,
+          61,
+          23
+        ],
+        "Connect": [
+          229,
+          166,
+          303,
+          23
+        ],
+        "Address": [
+          60,
+          198,
+          364,
+          23
+        ],
+        "AgentPort": [
+          472,
+          198,
+          61,
+          23
+        ],
+        "Below": [
+          13,
+          238,
+          91,
+          23
+        ]
+      },
+      "captures": {
+        "ru": "5bc04fa5c663df8ffbb284987e01b1edfd2cb7cbf5356ebece60ce10d9bf6604"
+      },
+      "reflow": {
+        "cases": [
+          "ThroughPageWidth52",
+          "ThroughPageWidth51",
+          "ThroughPageWidth52"
+        ],
+        "selected": "Address",
+        "edit": {
+          "from": "<BackColor>#DCF4CF</BackColor>",
+          "to": "<BackColor>#DCF4D0</BackColor>"
+        }
+      }
+    },
+    {
+      "name": "ThroughPageWidth51",
+      "file": "ThroughPageWidth51.xml",
+      "fixtureSha256": "5cc9c0eabe160080d722903cfef28e26629421a59b5fb5dd22ccf84720dd5e57",
+      "canonicalSha256": "37f5a70b6a84a6dbeadd88a703a29d26bed53a21d8aa2566852113375e24a70f",
+      "frame": [
+        544,
+        306
+      ],
+      "fields": {
+        "NameInput": [
+          229,
+          62,
+          294,
+          23
+        ],
+        "Password": [
+          229,
+          94,
+          294,
+          23
+        ],
+        "Port": [
+          229,
+          126,
+          61,
+          23
+        ],
+        "Connect": [
+          229,
+          166,
+          293,
+          23
+        ],
+        "Address": [
+          60,
+          198,
+          410,
+          23
+        ],
+        "AgentPort": [
+          60,
+          230,
+          61,
+          23
+        ],
+        "Below": [
+          13,
+          270,
+          91,
+          23
+        ]
+      },
+      "captures": {
+        "ru": "3386ce62d122e1df9bfc28034103dba262b15c40db8e6aa2fa1d0f7a2c55400c"
+      }
+    },
+    {
+      "name": "ThroughPageTitle137",
+      "file": "ThroughPageTitle137.xml",
+      "fixtureSha256": "6f65cb7dd1f054c96607b99fbe9b7b871ce15ce1f613f498e85f2cc32ab4a818",
+      "canonicalSha256": "aae676a42cb96e31b86bd3aa8d7d11d151015519d05eb0c6b2088dac9c29d4e8",
+      "frame": [
+        424,
+        306
+      ],
+      "fields": {
+        "NameInput": [
+          229,
+          62,
+          174,
+          23
+        ],
+        "Password": [
+          229,
+          94,
+          174,
+          23
+        ],
+        "Port": [
+          229,
+          126,
+          61,
+          23
+        ],
+        "Connect": [
+          229,
+          166,
+          173,
+          23
+        ],
+        "Address": [
+          60,
+          198,
+          343,
+          23
+        ],
+        "AgentPort": [
+          60,
+          230,
+          61,
+          23
+        ],
+        "Below": [
+          13,
+          270,
+          91,
+          23
+        ]
+      },
+      "captures": {
+        "ru": "7e07ab824bed9ba7afe6dd4a785e80064d3677a8a3ae56361467aa47d96b1fee"
+      },
+      "reflow": {
+        "cases": [
+          "ThroughPageTitle137"
+        ],
+        "selected": "Address",
+        "edit": {
+          "case": "ThroughPageTitle138"
+        }
+      }
+    },
+    {
+      "name": "ThroughPageTitle138",
+      "file": "ThroughPageTitle138.xml",
+      "fixtureSha256": "1eaefcb92ed373fe6faa23634f094a2f118545e7eeac133d6d077b26356c1bc4",
+      "canonicalSha256": "9042edf04e8e9139444097c0cac389bc4eb21306ba6b7132139092bbf37c90da",
+      "frame": [
+        424,
+        274
+      ],
+      "fields": {
+        "NameInput": [
+          229,
+          62,
+          174,
+          23
+        ],
+        "Password": [
+          229,
+          94,
+          174,
+          23
+        ],
+        "Port": [
+          229,
+          126,
+          61,
+          23
+        ],
+        "Connect": [
+          229,
+          166,
+          173,
+          23
+        ],
+        "Address": [
+          60,
+          198,
+          234,
+          23
+        ],
+        "AgentPort": [
+          342,
+          198,
+          61,
+          23
+        ],
+        "Below": [
+          13,
+          238,
+          91,
+          23
+        ]
+      },
+      "captures": {
+        "ru": "7b5046a571a716b144f0359274f446201cad053c483ae7937c6c795c310a507c"
+      }
+    },
+    {
+      "name": "ThroughPageNested137",
+      "file": "ThroughPageNested137.xml",
+      "fixtureSha256": "9f58dc86a0dd56b56c6619d2dd1e16064b685c96f4066297465a5a8d0070a02e",
+      "canonicalSha256": "53ea9bda586c6937749c916d41502ba8ee681526d514ddebd9a25764eb9bd490",
+      "frame": [
+        424,
+        306
+      ],
+      "fields": {
+        "NameInput": [
+          229,
+          62,
+          174,
+          23
+        ],
+        "Password": [
+          229,
+          94,
+          174,
+          23
+        ],
+        "Port": [
+          229,
+          126,
+          61,
+          23
+        ],
+        "Connect": [
+          229,
+          166,
+          173,
+          23
+        ],
+        "Address": [
+          60,
+          198,
+          343,
+          23
+        ],
+        "AgentPort": [
+          60,
+          230,
+          61,
+          23
+        ],
+        "Below": [
+          13,
+          270,
+          91,
+          23
+        ]
+      },
+      "captures": {
+        "ru": "951f105a6b6059a8989dcbdda1ce0182bfde44909323aa39a203574c555fa20b"
+      }
+    },
+    {
+      "name": "ThroughPageTop159",
+      "file": "ThroughPageTop159.xml",
+      "fixtureSha256": "1422e57160f841c24c8f9220e4ed686b58e5998046c5cd1185ec1772988e0640",
+      "canonicalSha256": "b0c2177699596f2be0ba6ccae79e94ff896ba0b7a5bd14dc0b88e41e91a15cde",
+      "frame": [
+        424,
+        351
+      ],
+      "fields": {
+        "NameInput": [
+          229,
+          62,
+          174,
+          23
+        ],
+        "Password": [
+          229,
+          94,
+          174,
+          23
+        ],
+        "Port": [
+          229,
+          126,
+          61,
+          23
+        ],
+        "Connect": [
+          229,
+          166,
+          173,
+          23
+        ],
+        "Address": [
+          71,
+          233,
+          321,
+          23
+        ],
+        "AgentPort": [
+          71,
+          265,
+          61,
+          23
+        ],
+        "Below": [
+          13,
+          315,
+          91,
+          23
+        ]
+      },
+      "captures": {
+        "ru": "0fa5c7194b480b0968497302f7980c920ee4de894a03f48ab731ebe700969ec2"
+      }
+    },
+    {
+      "name": "ThroughPageTop160",
+      "file": "ThroughPageTop160.xml",
+      "fixtureSha256": "f54a762da66efda908bbd563b0c2918da8d4ce03e7b0a16956c67b66f1310e80",
+      "canonicalSha256": "300f172a0d16a2ed48c1dd5fb6bf6c247b5ee33cb1e02a4fe4cf62578c56c09c",
+      "frame": [
+        424,
+        319
+      ],
+      "fields": {
+        "NameInput": [
+          229,
+          62,
+          174,
+          23
+        ],
+        "Password": [
+          229,
+          94,
+          174,
+          23
+        ],
+        "Port": [
+          229,
+          126,
+          61,
+          23
+        ],
+        "Connect": [
+          229,
+          166,
+          173,
+          23
+        ],
+        "Address": [
+          71,
+          233,
+          212,
+          23
+        ],
+        "AgentPort": [
+          331,
+          233,
+          61,
+          23
+        ],
+        "Below": [
+          13,
+          283,
+          91,
+          23
+        ]
+      },
+      "captures": {
+        "ru": "4bfa533720c0d2289b8583b8fd3e89e6e3ef2270216276398ec95055e9b54306"
+      }
     }
   ],
   "frameCoordinates": "Outer black outline, including its one-pixel stroke and excluding the shadow."
