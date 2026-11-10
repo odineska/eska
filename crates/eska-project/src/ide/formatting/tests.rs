@@ -95,6 +95,8 @@ fn document_formatting_delegates_policy_and_keeps_the_file_unchanged() {
     assert_eq!(input["language"], "bsl");
     assert_eq!(input["options"]["indent_style"], "tab");
     assert_eq!(input["options"]["indent_width"], 4);
+    assert_eq!(input["options"]["column_limit"], 150);
+    assert_eq!(input["options"]["align_call_arguments"], true);
 }
 
 /// A future/malformed formatter cannot cause UTF-8 corruption or apply a plan to a different snapshot.

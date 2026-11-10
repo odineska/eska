@@ -95,14 +95,14 @@ fn check_preview_apply_and_locale_parity() {
     assert_eq!(repeated["files"][0]["changed"], false);
 }
 
-/// Preset selection is manifest-owned and gives identical preview, apply and inspection in ru/en.
+/// A project without a format section uses ESKA for preview, apply and inspection in ru/en.
 #[test]
-fn eska_preset_is_shared_by_check_apply_and_config_dump() {
+fn default_eska_preset_is_shared_by_check_apply_and_config_dump() {
     let directory = TestDir::new();
     fs::create_dir_all(directory.0.join("src/Ext")).unwrap();
     fs::write(
         directory.0.join("eska.toml"),
-        "[project]\ntype='configuration'\n[format]\nprofile='eska'\nprofile_version=1\n",
+        "[project]\ntype='configuration'\n",
     )
     .unwrap();
     fs::write(directory.0.join("src/Configuration.xml"), "<MetaDataObject xmlns='http://v8.1c.ru/8.3/MDClasses'><Configuration uuid='11111111-1111-1111-1111-111111111111'><Properties><Name>Demo</Name></Properties><ChildObjects/></Configuration></MetaDataObject>").unwrap();
@@ -158,7 +158,7 @@ fn compact_alignment_is_idempotent_through_the_cli() {
     let directory = TestDir::new();
     let path = directory.0.join("Module.bsl");
     let before = "\u{feff}Call(\r\n\"A\",1);\r\n\r\nCall(\"Long\",2);\r\n";
-    let style = r#"{"align_call_arguments":true,"max_empty_lines":0}"#;
+    let style = r#"{"align_call_arguments":true,"max_empty_lines":0,"preserve_existing_line_breaks":false}"#;
     let args = [
         "Module.bsl",
         "--style",
