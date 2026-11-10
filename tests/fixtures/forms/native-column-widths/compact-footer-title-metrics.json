@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "sourceFiles": {
+    "CompactFooterTitles": "631f985df6e287d607e94a6e2eb300c6e99da943e5699173778f5e115d0c68e2"
+  },
+  "fixtures": {
+    "CompactFooterTitles": {
+      "cases": [
+        {
+          "name": "compact footer restores side captions",
+          "frame": [734, 126],
+          "locations": {
+            "Memo": "Top",
+            "Fixed": "Left",
+            "Owner": "Left",
+            "Amount": "Left"
+          },
+          "controls": {
+            "Memo": [13, null, 92, null],
+            "Fixed": [220, null, 66, 19],
+            "Owner": [398, null, 65, 19],
+            "Amount": [556, null, 152, 19]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый",
+              "документ:"
+            ],
+            "Amount": [
+              "Сумма",
+              "документа:"
+            ]
+          },
+          "tolerancePx": 2,
+          "nativeCapture": "Values70.png",
+          "screenshotSha256": "12020a7b9792c97a8d5f3015f21b06e1eb8f1ad2af6cced36317fb902e9ea09f"
+        },
+        {
+          "name": "Values55",
+          "frame": [584, 126],
+          "locations": {
+            "Memo": "Top",
+            "Fixed": "Top",
+            "Owner": "Top",
+            "Amount": "Top"
+          },
+          "controls": {
+            "Memo": [13, null, 108, null],
+            "Fixed": [131, null, 127, 19],
+            "Owner": [268, null, 123, 19],
+            "Amount": [406, null, 152, 19]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый",
+              "документ:"
+            ],
+            "Owner": [
+              "Ответственный:"
+            ],
+            "Amount": [
+              "Сумма документа:"
+            ]
+          },
+          "tolerancePx": 1,
+          "nativeCapture": "Values55.png",
+          "screenshotSha256": "72c469e1a6b7610bee7e86768e34ea547dfd66100eda5e355725d91cfc647090"
+        },
+        {
+          "name": "Values61",
+          "frame": [644, 126],
+          "locations": {
+            "Memo": "Top",
+            "Fixed": "Top",
+            "Owner": "Top",
+            "Amount": "Top"
+          },
+          "controls": {
+            "Memo": [13, null, 126, null],
+            "Fixed": [149, null, 148, 19],
+            "Owner": [307, null, 144, 19],
+            "Amount": [466, null, 152, 19]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый",
+              "документ:"
+            ],
+            "Owner": [
+              "Ответственный:"
+            ],
+            "Amount": [
+              "Сумма документа:"
+            ]
+          },
+          "tolerancePx": 1,
+          "nativeCapture": "Values61.png",
+          "screenshotSha256": "b31866775911b3a98839b69d6317791510929d05dff51f3b4e1ebe905b10e82c"
+        },
+        {
+          "name": "Values65",
+          "frame": [684, 126],
+          "locations": {
+            "Memo": "Top",
+            "Fixed": "Top",
+            "Owner": "Top",
+            "Amount": "Top"
+          },
+          "controls": {
+            "Memo": [13, null, 138, null],
+            "Fixed": [161, null, 162, 19],
+            "Owner": [333, null, 158, 19],
+            "Amount": [506, null, 152, 19]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый",
+              "документ:"
+            ],
+            "Owner": [
+              "Ответственный:"
+            ],
+            "Amount": [
+              "Сумма документа:"
+            ]
+          },
+          "tolerancePx": 1,
+          "nativeCapture": "Values65.png",
+          "screenshotSha256": "eca73d16733a2719c449e554e494712c44df29125369936c1dc2a22c16c82957"
+        },
+        {
+          "name": "Values68",
+          "frame": [714, 126],
+          "locations": {
+            "Memo": "Top",
+            "Fixed": "Top",
+            "Owner": "Top",
+            "Amount": "Top"
+          },
+          "controls": {
+            "Memo": [13, null, 147, null],
+            "Fixed": [170, null, 173, 19],
+            "Owner": [353, null, 168, 19],
+            "Amount": [536, null, 152, 19]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый документ:"
+            ],
+            "Owner": [
+              "Ответственный:"
+            ],
+            "Amount": [
+              "Сумма документа:"
+            ]
+          },
+          "tolerancePx": 1,
+          "nativeCapture": "Values68.png",
+          "screenshotSha256": "ad28ac7c1a4e0e25624d0296cf691d121011c18bb557d4efcf8c06d3650b7ac0"
+        },
+        {
+          "name": "explicit side title on the total",
+          "frame": [644, 138],
+          "edit": {
+            "fields": {
+              "Fixed": {
+                "BackColor": null
+              },
+              "Owner": {
+                "BackColor": null
+              },
+              "Amount": {
+                "BackColor": null
+              }
+            },
+            "titleLocations": {
+              "Amount": "Left"
+            }
+          },
+          "locations": {
+            "Memo": "Top",
+            "Fixed": "Top",
+            "Owner": "Top",
+            "Amount": "Left"
+          },
+          "controls": {
+            "Memo": [13, null, 100, null],
+            "Fixed": [123, null, 117, 17],
+            "Owner": [250, null, 114, 17],
+            "Amount": [468, null, 150, 17]
+          },
+          "tolerancePx": 1,
+          "nativeCapture": "LockedAmount61.png",
+          "screenshotSha256": "6396d04bd618c502f70c226de707c18216708c58a30ef64856887b917ad3b5df"
+        },
+        {
+          "name": "explicit side titles on the references",
+          "frame": [644, null],
+          "viewport": [644, 121],
+          "edit": {
+            "fields": {
+              "Fixed": {
+                "BackColor": null
+              },
+              "Owner": {
+                "BackColor": null
+              },
+              "Amount": {
+                "BackColor": null
+              }
+            },
+            "titleLocations": {
+              "Fixed": "Left",
+              "Owner": "Left"
+            }
+          },
+          "locations": {
+            "Memo": "Top",
+            "Fixed": "Left",
+            "Owner": "Left",
+            "Amount": "Top"
+          },
+          "controls": {
+            "Memo": [13, null, 86, null],
+            "Amount": [468, null, 150, 17]
+          },
+          "tolerancePx": 1,
+          "nativeCapture": "LockedRefs61.png",
+          "screenshotSha256": "78627a63b95ca8821bf7c70b4a0adfc883570f70003cf48587dd60173b43c413"
+        }
+      ]
+    }
+  }
+}

@@ -3,7 +3,8 @@
   "nativeBuild": "8.3.27.2342",
   "profile": "linux-taxi-96",
   "sourceFiles": {
-    "MixedTitles": "c0f6c9137e987ce13089819dfd976cf7f56d8891f2944cf9b5f12e08194f7aea"
+    "MixedTitles": "c0f6c9137e987ce13089819dfd976cf7f56d8891f2944cf9b5f12e08194f7aea",
+    "SharedMixedReferences": "143d4071fcac9122bd93ab1431901b2a32fab30ebd778e8d3e34183ce19fd8d8"
   },
   "fixtures": {
     "MixedTitles": {
@@ -236,6 +237,132 @@
             "Reference1": [582, 94, 202, 23],
             "State0": [794, 62, 20, 18],
             "State1": [794, 94, 20, 18]
+          }
+        }
+      ]
+    },
+    "SharedMixedReferences": {
+      "cases": [
+        {
+          "name": "reference fields share the wide value column",
+          "frame": [874, 250],
+          "nativeCapture": "Use84.png",
+          "screenshotSha256": "a1b89f162c1a94e1513372cf8fd0943abe712fdc07911c0eed7bedbd584f2e56",
+          "tolerancePx": 1,
+          "controls": {
+            "Court": [209, null, 344, 23],
+            "Outgoing": [209, null, 344, 23],
+            "Incoming": [209, null, 344, 23],
+            "OutgoingOrg": [595, null, 257, 19],
+            "IncomingOrg": [595, null, 257, 19]
+          }
+        },
+        {
+          "name": "reference fields share the compressed value column",
+          "frame": [674, 250],
+          "nativeCapture": "Use64.png",
+          "screenshotSha256": "c48bb8abe65a0e94884b25209693db7dd7fdd8bf4f15f8ff3924f84a757da65e",
+          "tolerancePx": 1,
+          "controls": {
+            "Court": [209, null, 229, 23],
+            "Outgoing": [209, null, 229, 23],
+            "Incoming": [209, null, 229, 23],
+            "OutgoingOrg": [480, null, 172, 19],
+            "IncomingOrg": [480, null, 172, 19]
+          }
+        },
+        {
+          "name": "removing an undersized group limit keeps the shared column",
+          "frame": [674, 250],
+          "nativeCapture": "NoWidth64.png",
+          "screenshotSha256": "bc651aaae90649e9553ade5f1af42feca41ddc2311ce3546788c858139f7c739",
+          "tolerancePx": 1,
+          "controls": {
+            "Court": [209, null, 229, 23],
+            "Outgoing": [209, null, 229, 23],
+            "Incoming": [209, null, 229, 23],
+            "OutgoingOrg": [480, null, 172, 19],
+            "IncomingOrg": [480, null, 172, 19]
+          },
+          "edit": {
+            "groups": {
+              "OutgoingRow": {
+                "Width": null,
+                "Height": null
+              }
+            }
+          }
+        },
+        {
+          "name": "natural mixed picture uses the authored width",
+          "frame": [
+            626,
+            250
+          ],
+          "nativeCapture": "Empty000.png",
+          "screenshotSha256": "b5ba3523b699c646b16f6aa315df2a19aa4a7e5d0e7079c8ae76d73dcb013111",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              203,
+              23
+            ],
+            "OutgoingStatus": [
+              423,
+              153,
+              20,
+              20
+            ]
+          }
+        },
+        {
+          "name": "a small surplus retains the natural picture width",
+          "frame": [
+            634,
+            250
+          ],
+          "nativeCapture": "Empty060.png",
+          "screenshotSha256": "c003d140c287f37fa564894e974da843c5257568a0d6e60ca9396c1a528d697c",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              207,
+              23
+            ],
+            "OutgoingStatus": [
+              427,
+              153,
+              20,
+              20
+            ]
+          }
+        },
+        {
+          "name": "the picture stops at the painted maximum",
+          "frame": [
+            684,
+            250
+          ],
+          "nativeCapture": "Empty065.png",
+          "screenshotSha256": "9b109d6939a46cee41b5474f0f3d8c0d322e4763bbbcb284fa91c60803455bfd",
+          "tolerancePx": 0.5,
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              235,
+              23
+            ],
+            "OutgoingStatus": [
+              455,
+              153,
+              22,
+              20
+            ]
           }
         }
       ]

@@ -5,6 +5,54 @@ use crate::project::{
 };
 
 #[test]
+fn standalone_form_command_source_fills_independently_of_the_main_bar() {
+    let source = r#"<Form xmlns="http://v8.1c.ru/8.3/xcf/logform"
+        xmlns:v8="http://v8.1c.ru/8.1/data/core"
+        xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" version="2.20">
+      <AutoCommandBar name="Main" id="-1"><Autofill>false</Autofill></AutoCommandBar>
+      <ChildItems>
+        <CommandBar name="Standard" id="1"><CommandSource>Form</CommandSource></CommandBar>
+        <CommandBar name="Manual" id="2"><CommandSource>Form</CommandSource>
+          <Autofill>false</Autofill>
+        </CommandBar>
+      </ChildItems>
+      <Attributes><Attribute name="Object" id="1">
+        <Type><v8:Type>cfg:DocumentObject.Receipt</v8:Type></Type>
+        <MainAttribute>true</MainAttribute>
+      </Attribute></Attributes>
+    </Form>"#;
+    let document = parse("standalone-form-commands", source.into()).unwrap();
+    let form = compose(&document, &[]);
+    let view = present(&form, &[document], &[]);
+    let presentation = |element: &EffectiveElement| {
+        view.elements
+            .iter()
+            .find(|item| item.identity == element.identity)
+            .unwrap()
+    };
+    assert!(presentation(&form.root).auto_command_items.is_empty());
+    let standard = presentation(&form.root.children[0]);
+    assert_eq!(
+        standard
+            .auto_command_items
+            .iter()
+            .map(|item| item.key.as_str())
+            .collect::<Vec<_>>(),
+        [
+            "Form.StandardCommand.PostAndClose",
+            "Form.StandardCommand.Write",
+            "Form.StandardCommand.Post",
+        ],
+    );
+    assert!(!standard.object_command_menu.is_empty());
+    assert!(
+        presentation(&form.root.children[1])
+            .auto_command_items
+            .is_empty()
+    );
+}
+
+#[test]
 fn native_help_command_keeps_its_picture_and_explicit_presentation_overrides() {
     use super::super::FormPicture;
     for (xml, representation, picture) in [

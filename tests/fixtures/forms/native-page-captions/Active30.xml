@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<Title>
+		<v8:item>
+			<v8:lang>ru</v8:lang>
+			<v8:content>Доступ</v8:content>
+		</v8:item>
+	</Title>
+	<Width>30</Width>
+	<CommandBarLocation>Bottom</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1">
+		<HorizontalAlign>Right</HorizontalAlign>
+		<Autofill>false</Autofill>
+		<ChildItems>
+			<Button name="Help" id="10">
+				<Type>CommandBarButton</Type>
+				<CommandName>Form.StandardCommand.Help</CommandName>
+				<ExtendedTooltip name="HelpExtendedTooltip" id="11"/>
+			</Button>
+		</ChildItems>
+	</AutoCommandBar>
+	<ChildItems>
+		<Pages name="Modes" id="2">
+			<PagesRepresentation>None</PagesRepresentation>
+			<ExtendedTooltip name="ModesExtendedTooltip" id="12"/>
+			<ChildItems>
+				<Page name="SharedMode" id="6">
+					<ExtendedTooltip name="SharedModeExtendedTooltip" id="13"/>
+					<ChildItems>
+						<InputField name="Administrator" id="7">
+							<DataPath>Administrator</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Имя пользователя</v8:content>
+								</v8:item>
+							</Title>
+							<ClearButton>true</ClearButton>
+							<OpenButton>false</OpenButton>
+							<BackColor>#E0FFFF</BackColor>
+							<ContextMenu name="AdministratorContextMenu" id="14"/>
+							<ExtendedTooltip name="AdministratorExtendedTooltip" id="15"/>
+						</InputField>
+						<InputField name="SharedPassword" id="8">
+							<DataPath>Password</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Пароль</v8:content>
+								</v8:item>
+							</Title>
+							<BackColor>#FFE4B5</BackColor>
+							<ContextMenu name="SharedPasswordContextMenu" id="16"/>
+							<ExtendedTooltip name="SharedPasswordExtendedTooltip" id="17"/>
+						</InputField>
+					</ChildItems>
+				</Page>
+				<Page name="SingleMode" id="3">
+					<ExtendedTooltip name="SingleModeExtendedTooltip" id="18"/>
+					<ChildItems>
+						<InputField name="UserName" id="4">
+							<DataPath>UserName</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Имя пользователя</v8:content>
+								</v8:item>
+							</Title>
+							<BackColor>#FFEFBA</BackColor>
+							<ContextMenu name="UserNameContextMenu" id="19"/>
+							<ExtendedTooltip name="UserNameExtendedTooltip" id="20"/>
+						</InputField>
+						<InputField name="UserPassword" id="5">
+							<DataPath>Password</DataPath>
+							<Title>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Пароль</v8:content>
+								</v8:item>
+							</Title>
+							<BackColor>#DADCF4</BackColor>
+							<ContextMenu name="UserPasswordContextMenu" id="21"/>
+							<ExtendedTooltip name="UserPasswordExtendedTooltip" id="22"/>
+						</InputField>
+					</ChildItems>
+				</Page>
+			</ChildItems>
+		</Pages>
+		<InputField name="FollowingField" id="9">
+			<DataPath>Address</DataPath>
+			<Title>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Адрес</v8:content>
+				</v8:item>
+			</Title>
+			<BackColor>#D9F2D5</BackColor>
+			<ContextMenu name="FollowingFieldContextMenu" id="23"/>
+			<ExtendedTooltip name="FollowingFieldExtendedTooltip" id="24"/>
+		</InputField>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="UserName" id="1">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Password" id="2">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+		<Attribute name="Administrator" id="3">
+			<Type>
+				<v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="Address" id="4">
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+		</Attribute>
+	</Attributes>
+</Form>

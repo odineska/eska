@@ -1,0 +1,48 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "Linux ARM64",
+  "fixtures": {
+    "VerticalAmountTitles": {
+      "cases": [
+        {
+          "name": "vertical amounts at a wide size",
+          "frame": [1180, 760],
+          "locations": { "Amount": "Left", "Compensation": "Left", "Memo": "Left", "PaymentDate": "Left" },
+          "controlSizes": { "Amount": [182, 23], "Compensation": [182, 23] },
+          "tolerancePx": 1
+        },
+        {
+          "name": "vertical amounts share the compact side track",
+          "frame": [404, 760],
+          "locations": { "Amount": "Left", "Compensation": "Left" },
+          "controls": { "Amount": [100, null, 182, 23], "Compensation": [100, null, 182, 23] },
+          "tolerancePx": 1
+        },
+        {
+          "name": "both vertical amount captions move above",
+          "frame": [344, 760],
+          "locations": { "Amount": "Top", "Compensation": "Top", "Memo": "Left", "PaymentDate": "Left" },
+          "controls": { "Amount": [13, null, 182, 23], "Compensation": [13, null, 182, 23] },
+          "tolerancePx": 1
+        },
+        {
+          "name": "a wider divider track fits the short amount caption",
+          "frame": [374, 760],
+          "dividerKey": "End",
+          "locations": { "Amount": "Left", "Compensation": "Top" },
+          "controls": { "Amount": [62, null, 182, 23], "Compensation": [13, null, 182, 23] },
+          "tolerancePx": 1
+        },
+        {
+          "name": "dirty XML preserves an explicit left amount caption",
+          "frame": [null, null],
+          "viewport": [344, 760],
+          "edit": { "titleLocations": { "Compensation": "Left" } },
+          "locations": { "Compensation": "Left", "Memo": "Left" },
+          "controlSizes": { "Amount": [182, 23], "Compensation": [182, 23] },
+          "tolerancePx": 1
+        }
+      ]
+    }
+  }
+}

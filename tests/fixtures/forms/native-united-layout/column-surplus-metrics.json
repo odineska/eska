@@ -1,0 +1,1988 @@
+{
+  "platformBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "os": "Linux ARM64 ALT 10",
+  "dpi": 96,
+  "locale": "ru",
+  "coordinateSystem": "CSS pixels relative to the logical form frame at 100% zoom",
+  "fixtures": [
+    {
+      "file": "BoundedColumns.xml",
+      "sourceSha256": "b8748298a35106db025b696ffe3a797a12b2251b48b91db1fdebba267009df22",
+      "cases": [
+        {
+          "width": 224,
+          "columns": [
+            [
+              13,
+              90
+            ],
+            [
+              113,
+              90
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              80
+            ],
+            [
+              118,
+              80
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "86f2be391e94fd327f9536e45af56d581fbf4b73229bed22e606536fa9204b0b",
+          "nativeScreenshotSha256": "74201a6326ad0bf111eb1f0fc81237c00af24d5462264654b74e36de00a30589"
+        },
+        {
+          "width": 234,
+          "divider": true,
+          "nativeInputSha256": "0b3c4acbba6e3c0ca32527e385b8fc695ca9976c53e1a2de5eda12b16b486f25",
+          "nativeScreenshotSha256": "3ea33dc170f17e039228bfa9f76d6127ac89939ae8d001fd681748f8dea5dc3d"
+        },
+        {
+          "width": 774,
+          "columns": [
+            [
+              13,
+              322
+            ],
+            [
+              345,
+              408
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              312
+            ],
+            [
+              350,
+              398
+            ]
+          ],
+          "divider": true,
+          "nativeInputSha256": "b55984274ab76cacd81af8058fc4167f6fe437c6ecb4c4188c2b8fd69b1c15ed",
+          "nativeScreenshotSha256": "ad38014cd4fde1a5a0f2f70dec964287ed080a4e14b77ad92141959ab745ac7e"
+        },
+        {
+          "width": 1126,
+          "columns": [
+            [
+              13,
+              471
+            ],
+            [
+              494,
+              611
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              499,
+              601
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "2eb8d01d85a125677b771848e616fb9e688571fa808bcbbe21065d33f385610d",
+          "nativeScreenshotSha256": "f296aa94e303221672639c2b8854ded307d48973de1337fc70a74c6feb69ad1e"
+        },
+        {
+          "width": 1204,
+          "columns": [
+            [
+              13,
+              505
+            ],
+            [
+              528,
+              655
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              533,
+              601
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "1a92deada3e759df73c4e541d9714d561cc908cdb7eea10f579cf615936ca5e2",
+          "nativeScreenshotSha256": "5e71286312a02ce41ac1e347463b1170de75dc25edec57f4edceebcf917b8e5b"
+        },
+        {
+          "width": 1404,
+          "columns": [
+            [
+              13,
+              592
+            ],
+            [
+              615,
+              768
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              620,
+              601
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "1ce6353fd19d63ca94f9b258538ea950da116838cc254fe4dcf63fbe8e17456b",
+          "nativeScreenshotSha256": "e36f1490762f5a5b2dfcbe2ad5e8089519d9496ad8c5c9e67c97ba5039fcc9ab"
+        }
+      ]
+    },
+    {
+      "file": "BoundedDateColumns.xml",
+      "sourceSha256": "e68d032c46756f06724d3edd5a82876cc99aa42e9225fa71050c4957d9e97f1a",
+      "cases": [
+        {
+          "width": 472,
+          "columns": [
+            [
+              13,
+              90
+            ],
+            [
+              113,
+              338
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              80
+            ],
+            [
+              118,
+              328
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "ced7093d2378f34337bda073628e71333b2aa7eaac03ed7888365bc4f2d1fa5a",
+          "nativeScreenshotSha256": "858279c1a1a3b1d60b753b9b31eb19ba6193e5e388d79cbe821bf6ba4ecce3ed",
+          "dateBlock": [
+            118,
+            328
+          ]
+        },
+        {
+          "width": 474,
+          "divider": true,
+          "nativeInputSha256": "ab9f51ef642ddfcf8848b791bf775a1c7e33eb07057616a1836de8f1c7520e5f",
+          "nativeScreenshotSha256": "c9e4ecd58030163c747e7efa707ed6f951176b106befddae29d309dad3cbfee3"
+        },
+        {
+          "width": 564,
+          "columns": [
+            [
+              13,
+              108
+            ],
+            [
+              131,
+              412
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              98
+            ],
+            [
+              136,
+              402
+            ]
+          ],
+          "dateBlock": [
+            136,
+            402
+          ],
+          "divider": true,
+          "dateFields": [
+            [
+              "Top",
+              141,
+              68
+            ],
+            [
+              "Top",
+              141,
+              119
+            ]
+          ],
+          "nativeInputSha256": "1ba0872af3e40dab9205a3b565d30bc4b5d4553d264c15bd64c29c7f6e07f10c",
+          "nativeScreenshotSha256": "a7b0fe86730609e7782bd340804671468cf3ee8428f74745bee811025af25f79"
+        },
+        {
+          "width": 574,
+          "columns": [
+            [
+              13,
+              90
+            ],
+            [
+              113,
+              440
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              80
+            ],
+            [
+              118,
+              410
+            ]
+          ],
+          "dateBlock": [
+            118,
+            430
+          ],
+          "divider": false,
+          "dateFields": [
+            [
+              "Top",
+              123,
+              68
+            ],
+            [
+              "Left",
+              225,
+              102
+            ]
+          ],
+          "nativeInputSha256": "7f87573291644df195fcf1c300e1c822b83034aa1b299c051375938e1a222504",
+          "nativeScreenshotSha256": "52ee31a4b177f7ab5e9a93c010f79cd03b7a646e054a5fb3b9c87fce9cb2374d"
+        },
+        {
+          "width": 584,
+          "divider": true,
+          "dateFields": [
+            [
+              "Left",
+              235,
+              49
+            ],
+            [
+              "Left",
+              235,
+              90
+            ]
+          ],
+          "nativeInputSha256": "6238634f52a31453bbdb1f0c75ae49da95736bab7fa58e1b9f27a240b367d27c",
+          "nativeScreenshotSha256": "6bd8612d9fcdbd7bf4e379b57ce21190db9ffee011ce55e0d341d2e90a1864ff"
+        },
+        {
+          "width": 614,
+          "divider": true,
+          "dateFields": [
+            [
+              "Left",
+              265,
+              49
+            ],
+            [
+              "Left",
+              265,
+              90
+            ]
+          ],
+          "nativeInputSha256": "27485444dac95949074345b37965013e6bdf2e7c9a2fe2bc0136609b55148b47",
+          "nativeScreenshotSha256": "c1c7fada361bb7bd3beb3f35c3b1561e4c3dbda0a10bd015112b1b6dd7792b05"
+        },
+        {
+          "width": 674,
+          "columns": [[13, 189], [212, 441]],
+          "inputs": [[18, 179], [217, 410]],
+          "dateBlock": [217, 431],
+          "divider": true,
+          "dateFields": [["Left", 325, 49], ["Left", 325, 90]],
+          "checkCaption": [579, 64, 3],
+          "nativeInputSha256": "e780b84e76fe0b7166258540fbc477bafdefdf95f3409ab702ef83a7789db9f7",
+          "nativeScreenshotSha256": "5c7a8b3671201a00fe3e1a9ce13b3a735918733dd732a7965111242719f925bd"
+        },
+        {
+          "width": 684,
+          "columns": [[13, 189], [212, 451]],
+          "inputs": [[18, 179], [217, 410]],
+          "dateBlock": [217, 441],
+          "divider": true,
+          "dateFields": [["Left", 335, 49], ["Left", 335, 90]],
+          "checkCaption": [589, 64, 3],
+          "nativeInputSha256": "128a6afa8e7125285a1bee5babc89fe69bcae483e5555420e97f8a4086cd9aeb",
+          "nativeScreenshotSha256": "8cbf8f3ada8538247454b5b468ee62b82c645cc7f313c96459a0c044c70864c4"
+        },
+        {
+          "width": 764,
+          "columns": [[13, 269], [292, 451]],
+          "inputs": [[18, 259], [297, 410]],
+          "dateBlock": [297, 441],
+          "divider": true,
+          "dateFields": [["Left", 415, 49], ["Left", 415, 90]],
+          "checkCaption": [669, 64, 3],
+          "nativeInputSha256": "e89a73c1d69ad76b73ea19710012f922a58f66696690b21138919cacb317bc50",
+          "nativeScreenshotSha256": "0b449b1903905d04507b8150fd2ee3fb2a1d51994f7c7feeecd3d9ba519c0c6c"
+        },
+        {
+          "width": 774,
+          "columns": [[13, 227], [250, 503]],
+          "inputs": [[18, 217], [255, 410]],
+          "dateBlock": [255, 493],
+          "divider": true,
+          "dateFields": [["Left", 373, 49], ["Left", 373, 90]],
+          "checkCaption": [627, 116, 2],
+          "nativeInputSha256": "7b757a3c9b1e29790b0642fb7e64a653cd07fbb61b13f056d97ab14f73f462aa",
+          "nativeScreenshotSha256": "3aeda327d96bfb0abf62548d42d169005cc66fc527730bfd532c765f84b8f48a"
+        },
+        {
+          "width": 934,
+          "columns": [[13, 364], [387, 526]],
+          "inputs": [[18, 354], [392, 410]],
+          "dateBlock": [392, 516],
+          "divider": true,
+          "dateFields": [["Left", 533, 49], ["Left", 533, 83]],
+          "checkCaption": [787, 116, 2],
+          "nativeInputSha256": "2390663ab09c285535ad5221fa41a882ecfa7dffe472b5b9917a249df13d16c9",
+          "nativeScreenshotSha256": "2551be63a49b9f938bcae1f3daea7df397691d7ea97f11a9444a3c8dc5073fd8"
+        },
+        {
+          "width": 1084,
+          "columns": [[13, 447], [470, 593]],
+          "inputs": [[18, 437], [475, 410]],
+          "dateBlock": [475, 583],
+          "divider": true,
+          "dateFields": [["Left", 616, 49], ["Left", 616, 83]],
+          "checkCaption": [870, 183, 1],
+          "nativeInputSha256": "1e61e4664cb4fb1a15154da9d511b91e72fa02af1b406c0b58b373855ef5e104",
+          "nativeScreenshotSha256": "4e5ccb22950c50dd4b27b3fa3b172c0f44ee6dd58d77f45045df290bd612ccfa"
+        },
+        {
+          "width": 1114,
+          "columns": [[13, 471], [494, 599]],
+          "inputs": [[18, 461], [499, 410]],
+          "dateBlock": [499, 589],
+          "divider": true,
+          "dateFields": [["Left", 661, 49], ["Left", 661, 83]],
+          "checkCaption": [915, 168, 2],
+          "nativeInputSha256": "39f7dff09089968edc3c8e9aa26cbbd689cc1165f1ebe48d0696077fecf9003d",
+          "nativeScreenshotSha256": "09102dea7b16bbb55e922a2c447518209865c33aa835c704e52d046bcb65c257"
+        },
+        {
+          "width": 1129,
+          "columns": [
+            [
+              13,
+              471
+            ],
+            [
+              494,
+              614
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              499,
+              410
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "aa7c2da64ad9c0d2e8a597e1cc0d9e80e65978147c64b031b522a1bc9277a533",
+          "nativeScreenshotSha256": "e94e1c40b31e80ee7890681dea091596e040f087cdd567ab8fbd88171670cb53",
+          "dateBlock": [
+            499,
+            604
+          ]
+        },
+        {
+          "width": 1204,
+          "columns": [
+            [
+              13,
+              511
+            ],
+            [
+              534,
+              649
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              539,
+              410
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "c376710834c35be491b88347001a8b097441201c45b1965b1f47e48ac7b94d11",
+          "nativeScreenshotSha256": "794c05020016c9e7ea65d9dd4806f990c9353337eeb625f691b5c7f72d98bcdc",
+          "dateBlock": [
+            539,
+            604
+          ]
+        },
+        {
+          "width": 1404,
+          "columns": [
+            [
+              13,
+              616
+            ],
+            [
+              639,
+              744
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            [
+              644,
+              410
+            ]
+          ],
+          "divider": false,
+          "nativeInputSha256": "198150d9b8162c70b7bc7572d616c0c7924bb35e7f06759d2fa85f46e2b0db15",
+          "nativeScreenshotSha256": "d7732905dfee5fff078fe39f33d5cc72fb20d3ac47fa3a723f47a928ad24f9cf",
+          "dateBlock": [
+            644,
+            604
+          ]
+        }
+      ],
+      "leftTitles": {
+        "width": 575,
+        "columns": [
+          [
+            13,
+            90
+          ],
+          [
+            113,
+            441
+          ]
+        ],
+        "inputs": [
+          [
+            18,
+            80
+          ],
+          [
+            118,
+            410
+          ]
+        ],
+        "dateBlock": [
+          118,
+          431
+        ],
+        "divider": false,
+        "dateFields": [
+          [
+            "Left",
+            226,
+            49
+          ],
+          [
+            "Left",
+            226,
+            90
+          ]
+        ],
+        "nativeInputSha256": "2fd313aeebfc57f079bf111b1fdb4413ba2e666e19a2589bc13a7b4189890d0a",
+        "nativeScreenshotSha256": "579a72c02a1284c8b5257cd0020b40dc296f359e4056740c6510d898552c658c",
+        "viewportWidth": 574
+      },
+      "titleVariants": [
+        {
+          "locations": "Top",
+          "cases": [
+            {
+              "width": 472,
+              "columns": [
+                [
+                  13,
+                  90
+                ],
+                [
+                  113,
+                  338
+                ]
+              ],
+              "inputs": [
+                [
+                  18,
+                  80
+                ],
+                [
+                  118,
+                  328
+                ]
+              ],
+              "dateBlock": [
+                118,
+                328
+              ],
+              "divider": false,
+              "dateFields": [
+                [
+                  "Top",
+                  123,
+                  68
+                ],
+                [
+                  "Top",
+                  123,
+                  119
+                ]
+              ],
+              "checkCaption": [
+                377,
+                64,
+                3
+              ],
+              "nativeInputSha256": "720d17ac749f6728b7bcf83e7c0aa78eda4ad85f9030e6572d47d959b09cbf9e",
+              "nativeScreenshotSha256": "4b9e33b3910d0db3795a4ad96418606388656d264ef9f370a199a18c4f667634",
+              "viewportWidth": 454
+            },
+            {
+              "width": 574,
+              "columns": [
+                [
+                  13,
+                  168
+                ],
+                [
+                  191,
+                  362
+                ]
+              ],
+              "inputs": [
+                [
+                  18,
+                  158
+                ],
+                [
+                  196,
+                  352
+                ]
+              ],
+              "dateBlock": [
+                196,
+                352
+              ],
+              "divider": true,
+              "dateFields": [
+                [
+                  "Top",
+                  201,
+                  68
+                ],
+                [
+                  "Top",
+                  201,
+                  119
+                ]
+              ],
+              "checkCaption": [
+                455,
+                88,
+                3
+              ],
+              "nativeInputSha256": "6676da785e19d0d8579e66db2d2a2334e50ce37a5b5288623186e269a8f6f206",
+              "nativeScreenshotSha256": "2683529e5ad565c442fa328865d00f28dbcfc8dfe16feba114fb52581a7f30a6"
+            },
+            {
+              "width": 774,
+              "columns": [
+                [
+                  13,
+                  321
+                ],
+                [
+                  344,
+                  409
+                ]
+              ],
+              "inputs": [
+                [
+                  18,
+                  311
+                ],
+                [
+                  349,
+                  399
+                ]
+              ],
+              "dateBlock": [
+                349,
+                399
+              ],
+              "divider": true,
+              "dateFields": [
+                [
+                  "Top",
+                  354,
+                  68
+                ],
+                [
+                  "Top",
+                  354,
+                  119
+                ]
+              ],
+              "checkCaption": [
+                608,
+                135,
+                2
+              ],
+              "nativeInputSha256": "1cd64696cf9a3a40def4c29d713329b366e29f766f923454e94df5e48091419c",
+              "nativeScreenshotSha256": "246d36eb00af35a0f1165b54b04aac81d6295c577d909db7207de651546106e5"
+            },
+            {
+              "width": 874,
+              "columns": [
+                [
+                  13,
+                  419
+                ],
+                [
+                  442,
+                  411
+                ]
+              ],
+              "inputs": [
+                [
+                  18,
+                  409
+                ],
+                [
+                  447,
+                  401
+                ]
+              ],
+              "dateBlock": [
+                447,
+                401
+              ],
+              "divider": true,
+              "dateFields": [
+                [
+                  "Top",
+                  452,
+                  68
+                ],
+                [
+                  "Top",
+                  452,
+                  119
+                ]
+              ],
+              "checkCaption": [
+                706,
+                137,
+                2
+              ],
+              "nativeInputSha256": "57ba2e62c84158d91e45dbb6e2c21fdc7203b039f70f41c17261c7a03322f0e8",
+              "nativeScreenshotSha256": "6fc27ef145a5dd756a3ed34d524c65df2edb0a4ade93fd12bb04014ff879d3bd"
+            },
+            {
+              "width": 934,
+              "columns": [
+                [
+                  13,
+                  471
+                ],
+                [
+                  494,
+                  419
+                ]
+              ],
+              "inputs": [
+                [
+                  18,
+                  461
+                ],
+                [
+                  499,
+                  409
+                ]
+              ],
+              "dateBlock": [
+                499,
+                409
+              ],
+              "divider": true,
+              "dateFields": [
+                [
+                  "Top",
+                  504,
+                  68
+                ],
+                [
+                  "Top",
+                  504,
+                  119
+                ]
+              ],
+              "checkCaption": [
+                758,
+                145,
+                2
+              ],
+              "nativeInputSha256": "3fd29e054cf1b585b0d5b5eeb92f03d2f90ca2ffc408534ffc22a795e410a4b0",
+              "nativeScreenshotSha256": "41d1dab613a1e586aa062ae876db54a4528f0441dc0fce08b13b7695e32e33c8"
+            },
+            {
+              "width": 972,
+              "columns": [
+                [
+                  13,
+                  471
+                ],
+                [
+                  494,
+                  457
+                ]
+              ],
+              "inputs": [
+                [
+                  18,
+                  461
+                ],
+                [
+                  499,
+                  410
+                ]
+              ],
+              "dateBlock": [
+                499,
+                447
+              ],
+              "divider": false,
+              "dateFields": [
+                [
+                  "Top",
+                  504,
+                  68
+                ],
+                [
+                  "Top",
+                  504,
+                  119
+                ]
+              ],
+              "checkCaption": [
+                758,
+                183,
+                1
+              ],
+              "nativeInputSha256": "87f9e229af84b88cd26b8389cf05c9b5811b95ccfa07561ffb8ef67f3bcecff1",
+              "nativeScreenshotSha256": "6c51921970db4aed9cbf80287639fce4a16972b57228579272e67356c2e341bf"
+            },
+            {
+              "width": 1004,
+              "columns": [
+                [
+                  13,
+                  488
+                ],
+                [
+                  511,
+                  472
+                ]
+              ],
+              "inputs": [
+                [
+                  18,
+                  461
+                ],
+                [
+                  516,
+                  410
+                ]
+              ],
+              "dateBlock": [
+                516,
+                447
+              ],
+              "divider": false,
+              "dateFields": [
+                [
+                  "Top",
+                  521,
+                  68
+                ],
+                [
+                  "Top",
+                  521,
+                  119
+                ]
+              ],
+              "checkCaption": [
+                775,
+                183,
+                1
+              ],
+              "nativeInputSha256": "8a0f573eaf3e867562b2903790ee524da3c5873c3f08b901a66bd2c2c9f7ec20",
+              "nativeScreenshotSha256": "43a80085f07f3b39b870bea31856540174a34f2171936aee1c3ac0b397595726"
+            }
+          ]
+        },
+        {
+          "locations": "Top",
+          "rightWidth": 36,
+          "cases": [
+            {
+              "width": 674,
+              "columns": [
+                [
+                  13,
+                  249
+                ],
+                [
+                  272,
+                  381
+                ]
+              ],
+              "inputs": [
+                [
+                  18,
+                  239
+                ],
+                [
+                  277,
+                  371
+                ]
+              ],
+              "dateBlock": [
+                277,
+                371
+              ],
+              "divider": true,
+              "dateFields": [
+                [
+                  "Top",
+                  282,
+                  68
+                ],
+                [
+                  "Top",
+                  282,
+                  119
+                ]
+              ],
+              "checkCaption": [
+                536,
+                107,
+                3
+              ],
+              "nativeInputSha256": "cd0da4927637701acb7c7f177c98fd5d0ea8246900f203033bbc326d97534833",
+              "nativeScreenshotSha256": "86eaaa52761bbde76b6dd86efd33a5f014801ec6e9211f9e6e7643c25af2bf80"
+            },
+            {
+              "width": 774,
+              "columns": [
+                [
+                  13,
+                  340
+                ],
+                [
+                  363,
+                  390
+                ]
+              ],
+              "inputs": [
+                [
+                  18,
+                  330
+                ],
+                [
+                  368,
+                  380
+                ]
+              ],
+              "dateBlock": [
+                368,
+                380
+              ],
+              "divider": true,
+              "dateFields": [
+                [
+                  "Top",
+                  373,
+                  68
+                ],
+                [
+                  "Top",
+                  373,
+                  119
+                ]
+              ],
+              "checkCaption": [
+                627,
+                116,
+                2
+              ],
+              "nativeInputSha256": "24789f3e173c8a3da308eaff5688e9db9106e5eb7d4a7432df4a95ab4f1ce49a",
+              "nativeScreenshotSha256": "af32f5056f2a24bac4ad28f9f1453f000c8efe16c82bacb73b44dc826fbdc945"
+            }
+          ]
+        },
+        {
+          "locations": {"Settlement": "Top"},
+          "cases": [
+            {
+              "width": 472,
+              "viewportWidth": 454,
+              "columns": [[13, 90], [113, 338]],
+              "inputs": [[18, 80], [118, 328]],
+              "dateBlock": [118, 328],
+              "divider": false,
+              "dateFields": [["Top", 123, 68], ["Top", 123, 119]],
+              "nativeInputSha256": "4b2da83d706decb3534c5348c1a5957a7665c08a3d8b757fb5687525eb58054d",
+              "nativeScreenshotSha256": "eacf2446f02e48c32f94e71e9cb6149727fa608408dc6067410d7b87b81e9027"
+            },
+            {
+              "width": 544,
+              "columns": [[13, 104], [127, 396]],
+              "inputs": [[18, 94], [132, 386]],
+              "dateBlock": [132, 386],
+              "divider": true,
+              "dateFields": [["Top", 137, 68], ["Top", 137, 119]],
+              "nativeInputSha256": "d63ebe782a6d4db249702c034893ebea0c39e4f877c0aaadb90093f5a3db6004",
+              "nativeScreenshotSha256": "d41dfcfca87f847ad5332bb81c5e7f37465d57f3f8c31ae3ebdf400ab8fbdcab"
+            },
+            {
+              "width": 554,
+              "columns": [[13, 91], [114, 419]],
+              "inputs": [[18, 81], [119, 409]],
+              "dateBlock": [119, 409],
+              "divider": true,
+              "dateFields": [["Top", 124, 68], ["Top", 124, 119]],
+              "checkCaption": [447, 76, 3],
+              "nativeInputSha256": "6040022d7564d5a87ba35d93e19f6f17e24f358def625cc14d8348bb6209fbb7",
+              "nativeScreenshotSha256": "dc1ce37de92c25cfd793f39f1a0615cd259b8efc7dab2074b2908db69cb34d3a"
+            },
+            {
+              "width": 564,
+              "columns": [[13, 93], [116, 427]],
+              "inputs": [[18, 83], [121, 410]],
+              "dateBlock": [121, 417],
+              "divider": true,
+              "dateFields": [["Top", 126, 68], ["Top", 126, 119]],
+              "checkCaption": [453, 80, 3],
+              "nativeInputSha256": "f7a7b99936886a1db0d0ee33e50c2f966c54df50baa3bf102f3e2f5e3b917a5c",
+              "nativeScreenshotSha256": "d4b7c3225cff5bbf359d0f9487ebafbb02aa481f59753542d3bb01a903293ad2"
+            },
+            {
+              "width": 574,
+              "columns": [[13, 95], [118, 435]],
+              "inputs": [[18, 85], [123, 410]],
+              "dateBlock": [123, 425],
+              "divider": true,
+              "dateFields": [["Top", 128, 68], ["Top", 128, 119]],
+              "checkCaption": [459, 84, 3],
+              "nativeInputSha256": "ed8ed3123dda5b46d4d9802278cd391d3618461b25062cae11109a3116dace14",
+              "nativeScreenshotSha256": "7ae6336e64463d6cbf2dde912cf34f7b19a8fd64abb1c3fdbbaedbacfdf33ce8"
+            },
+            {
+              "width": 684,
+              "columns": [[13, 199], [222, 441]],
+              "inputs": [[18, 189], [227, 410]],
+              "dateBlock": [227, 431],
+              "divider": true,
+              "dateFields": [["Left", 335, 49], ["Top", 232, 107]],
+              "checkCaption": [589, 64, 3],
+              "nativeInputSha256": "77d4f4e80e5494c735688133aef52a89dcdb1cd21379258d42f169d97edc81f3",
+              "nativeScreenshotSha256": "106722a1ab945c8a895fd06880c17ab3fb5320c77cad6db8e74a22206c8cd865"
+            },
+            {
+              "width": 764,
+              "columns": [[13, 227], [250, 493]],
+              "inputs": [[18, 217], [255, 410]],
+              "dateBlock": [255, 483],
+              "divider": true,
+              "dateFields": [["Left", 363, 49], ["Top", 260, 107]],
+              "checkCaption": [617, 116, 2],
+              "nativeInputSha256": "52636481299532061f8c09ed1778590ba124aef9da6ba8eedf9c86f5b63138d5",
+              "nativeScreenshotSha256": "3715e8e2057b304a3aae487de2605d694224d58c39848a4d2847337bb124f24d"
+            },
+            {
+              "width": 934,
+              "columns": [[13, 364], [387, 526]],
+              "inputs": [[18, 354], [392, 410]],
+              "dateBlock": [392, 516],
+              "divider": true,
+              "dateFields": [["Left", 533, 49], ["Top", 397, 100]],
+              "checkCaption": [787, 116, 2],
+              "nativeInputSha256": "0abd45414adcb2995213059cbad9b9f4b8a56b2e88641ea31c6a99f1c15dcdd6",
+              "nativeScreenshotSha256": "481031de76a0d7cdc7123ed946e949389e7876d0f1bf538f3589e18acc92b9df"
+            },
+            {
+              "width": 1129,
+              "columns": [[13, 471], [494, 614]],
+              "inputs": [[18, 461], [499, 410]],
+              "dateBlock": [499, 604],
+              "divider": false,
+              "dateFields": [["Left", 661, 49], ["Top", 504, 100]],
+              "nativeInputSha256": "6d00a5ae675a28bef33baf41f078a31009f60a8267e35040d37af8502a51ac63",
+              "nativeScreenshotSha256": "4a70cc5375c72e498f04dcc9c6c64dc4b9ba24375d1be22f28d034f0a1a34a46"
+            }
+          ]
+        },
+        {
+          "locations": {"Stamp": "Top"},
+          "cases": [
+            {
+              "width": 472,
+              "viewportWidth": 454,
+              "columns": [[13, 90], [113, 338]],
+              "inputs": [[18, 80], [118, 328]],
+              "dateBlock": [118, 328],
+              "divider": false,
+              "dateFields": [["Top", 123, 68], ["Top", 123, 119]],
+              "nativeInputSha256": "7ff5325c53ed3a54ef3285c9aa5d8c0da526fa472e1401e109be0508a88e25eb",
+              "nativeScreenshotSha256": "c9982c24830c96dba9328d9dfcf86cff567e32cbc40b337466def1ad11b718cd"
+            },
+            {
+              "width": 524,
+              "columns": [[13, 100], [123, 380]],
+              "inputs": [[18, 90], [128, 370]],
+              "dateBlock": [128, 370],
+              "divider": true,
+              "dateFields": [["Top", 133, 68], ["Top", 133, 119]],
+              "nativeInputSha256": "bf8ffcc668957fc0d9a89f5aca41144478358e8f36eb56e7a54a4a3e525232c4",
+              "nativeScreenshotSha256": "ede8e901afacede1c6423619e7277bf386f624919ad8d7218cb5b6bf272a2b63"
+            },
+            {
+              "width": 574,
+              "columns": [[13, 119], [142, 411]],
+              "inputs": [[18, 109], [147, 401]],
+              "dateBlock": [147, 401],
+              "divider": true,
+              "dateFields": [["Top", 152, 68], ["Left", 225, 102]],
+              "checkCaption": [479, 64, 3],
+              "nativeInputSha256": "57f529876f69575fd48258924c6282715703eccc341e5db210c9fe1ad09aa594",
+              "nativeScreenshotSha256": "1482cb7ddfb07f5d3f9b696b86aee1ce9ee0304ea736f33920b6276de8f2a5ad"
+            },
+            {
+              "width": 774,
+              "columns": [[13, 290], [313, 440]],
+              "inputs": [[18, 280], [318, 410]],
+              "dateBlock": [318, 430],
+              "divider": true,
+              "dateFields": [["Top", 323, 68], ["Left", 425, 102]],
+              "checkCaption": [679, 64, 3],
+              "nativeInputSha256": "4dff2b13c45fab65cd6bf640fdc8a51888514bfca4b289f2a426b83d0f81f8fb",
+              "nativeScreenshotSha256": "485e2a203529cdd2a3cc1f2f79be488bb39ebeb32b1928745c3d97d0c75be7a2"
+            },
+            {
+              "width": 1129,
+              "columns": [[13, 471], [494, 614]],
+              "inputs": [[18, 461], [499, 410]],
+              "dateBlock": [499, 604],
+              "divider": false,
+              "dateFields": [["Top", 504, 68], ["Left", 661, 102]],
+              "nativeInputSha256": "832b76b0dd4e989bbaf382d40ac42689d2e767a88ad29e7cb50d7ee6f98ca88b",
+              "nativeScreenshotSha256": "de136d7f26bfd342e794f87f54cc40855ae85c8f208acc30cf6e1e19edb23ebf"
+            }
+          ]
+        },
+        {
+          "locations": {"Limit": "Top"},
+          "cases": [
+            {
+              "width": 472,
+              "viewportWidth": 454,
+              "columns": [[13, 90], [113, 338]],
+              "inputs": [[18, 80], [118, 328]],
+              "dateBlock": [118, 328],
+              "divider": false,
+              "dateFields": [["Top", 123, 68], ["Top", 123, 119]],
+              "nativeInputSha256": "24f42837abbc5c4324e2865a33c9137739635da7d32496c43ff6768cd9d26f2e",
+              "nativeScreenshotSha256": "180666012ede6c69f1e9d23f9a1ce0c2bf06201ec7ac0e91d266e8b72e0dc68e"
+            },
+            {
+              "width": 574,
+              "columns": [[13, 90], [113, 440]],
+              "inputs": [[18, 80], [118, 410]],
+              "dateBlock": [118, 430],
+              "divider": false,
+              "dateFields": [["Top", 123, 68], ["Left", 225, 102]],
+              "nativeInputSha256": "8c8f29aa7a3413947961f4074f8de1909bd7a95f1317dff605d174bcd18ccce3",
+              "nativeScreenshotSha256": "7a462ff3c6802aa8ace4ec7fe80d5496b08712a5a9860bc932703dd5b652cf41"
+            },
+            {
+              "width": 774,
+              "columns": [[13, 279], [302, 451]],
+              "inputs": [[18, 269], [307, 410]],
+              "dateBlock": [307, 441],
+              "divider": true,
+              "dateFields": [["Left", 425, 49], ["Left", 425, 90]],
+              "checkCaption": [679, 64, 3],
+              "nativeInputSha256": "17021df0b19b374d5e22dabfc3a2ac938d0f847ac271fccfee4a045ed3b1f622",
+              "nativeScreenshotSha256": "51f98ccfd53668c29111ca1ba7e9de82d428d9bab0f5558e8dfb79542c01d3fb"
+            },
+            {
+              "width": 834,
+              "columns": [[13, 287], [310, 503]],
+              "inputs": [[18, 277], [315, 410]],
+              "dateBlock": [315, 493],
+              "divider": true,
+              "dateFields": [["Left", 433, 49], ["Left", 433, 90]],
+              "checkCaption": [687, 116, 2],
+              "nativeInputSha256": "38f37c8d949264bd6d7a15f5ea462b5e141a439f6e24ceb87fb4ba2d7bdc0428",
+              "nativeScreenshotSha256": "b48087b51f88c1cbb8bced550f47197c7dceb8a54b875cebbfcae3f7b2fd5fa4"
+            },
+            {
+              "width": 1127,
+              "columns": [[13, 471], [494, 612]],
+              "inputs": [[18, 461], [499, 410]],
+              "dateBlock": [499, 602],
+              "divider": false,
+              "dateFields": [["Left", 659, 49], ["Left", 659, 83]],
+              "nativeInputSha256": "2ecf421bc33b993d74a22b2ae33f0ff525f44652989ffa6784322f0191567f08",
+              "nativeScreenshotSha256": "5df9ef1fff616ed2ae5fab9488dcd35a0695ff0dced851c647db54e217916783"
+            }
+          ]
+        },
+        {
+          "locations": {"Stamp": "Left", "Settlement": "Top", "Limit": "Left"},
+          "cases": [
+            {
+              "width": 575,
+              "viewportWidth": 454,
+              "columns": [[13, 90], [113, 441]],
+              "inputs": [[18, 80], [118, 410]],
+              "dateBlock": [118, 431],
+              "divider": false,
+              "dateFields": [["Left", 226, 49], ["Top", 123, 107]],
+              "nativeInputSha256": "46cdcdd599421e8044107c77a16eb2b536fa087084f15caf8d02e49ee773fbcc",
+              "nativeScreenshotSha256": "ff69473ebcf13e9eedd5ba931e947d279cbca5a6f5032ac9734767721a0a9c5c"
+            },
+            {
+              "width": 1129,
+              "columns": [[13, 471], [494, 614]],
+              "inputs": [[18, 461], [499, 410]],
+              "dateBlock": [499, 604],
+              "divider": false,
+              "dateFields": [["Left", 661, 49], ["Top", 504, 100]],
+              "nativeInputSha256": "9ecbd81cef4074e1bd5ca83ca54ee9df64c65030f16a28508b56ab8585bda9d0",
+              "nativeScreenshotSha256": "64fb4a2aa93a31480234b889ccf222ef33858bd6edf2df7c23dc1a4b72ff119d"
+            }
+          ]
+        },
+        {
+          "locations": {"Stamp": "Top", "Settlement": "Left", "Limit": "Left"},
+          "cases": [
+            {
+              "width": 541,
+              "viewportWidth": 454,
+              "columns": [[13, 90], [113, 407]],
+              "inputs": [[18, 80], [118, 397]],
+              "dateBlock": [118, 397],
+              "divider": false,
+              "dateFields": [["Top", 123, 68], ["Left", 192, 102]],
+              "nativeInputSha256": "e8048a358b24c013e1043222c32a933c86e8ec4181ced8c44179af1e0947487b",
+              "nativeScreenshotSha256": "3bb04b1d948a2df5f6a806e217f1135456083d581161af30b8c2812790ce407f"
+            },
+            {
+              "width": 1129,
+              "columns": [[13, 471], [494, 614]],
+              "inputs": [[18, 461], [499, 410]],
+              "dateBlock": [499, 604],
+              "divider": false,
+              "dateFields": [["Top", 504, 68], ["Left", 661, 102]],
+              "nativeInputSha256": "41ffdc95b430ac1f2708c27d346c8b76b7c9594424cd76a7825eba452837a160",
+              "nativeScreenshotSha256": "459065c34a4d7181703b2c1509b2ba0061a012c940d66cd2c4ed6af53da75c7f"
+            }
+          ]
+        },
+        {
+          "locations": {"Settlement": "Top", "Limit": "Left"},
+          "cases": [
+            {
+              "width": 513,
+              "viewportWidth": 454,
+              "columns": [[13, 90], [113, 379]],
+              "inputs": [[18, 80], [118, 369]],
+              "dateBlock": [118, 369],
+              "divider": false,
+              "dateFields": [["Top", 123, 68], ["Top", 123, 119]],
+              "nativeInputSha256": "c7bfc33da201e65879dc8ebec7a11ba7b9130666938942a075b48e0fc818a87a",
+              "nativeScreenshotSha256": "f2a10fde8c9ea7b2a41838cd933507e79a43656d1a0d459c804ebcb39d7620dd"
+            },
+            {
+              "width": 1129,
+              "columns": [[13, 471], [494, 614]],
+              "inputs": [[18, 461], [499, 410]],
+              "dateBlock": [499, 604],
+              "divider": false,
+              "dateFields": [["Left", 661, 49], ["Top", 504, 100]],
+              "nativeInputSha256": "0eadd4a39982a36b268ab0a67ec169273e8c0bd5fa2d637d51ee5673ff18b27a",
+              "nativeScreenshotSha256": "f931d47e04a96baf72d8a7edb54325d56cda9258e8f35211aa4146de41d40ac5"
+            }
+          ]
+        },
+        {
+          "locations": {"Settlement": "Top"},
+          "caption": [
+            "Дата отражения в учете",
+            "Дата отражения документа в учете подразделения и сверки взаиморасчетов"
+          ],
+          "cases": [
+            {
+              "width": 472,
+              "viewportWidth": 454,
+              "columns": [[13, 90], [113, 338]],
+              "inputs": [[18, 80], [118, 328]],
+              "dateBlock": [118, 328],
+              "divider": false,
+              "dateFields": [["Top", 123, 68], ["Top", 123, 149]],
+              "nativeInputSha256": "27a8e1c46ebe143b29cadb98700a3720cc108d69600a14dfe56838bf55c89d86",
+              "nativeScreenshotSha256": "f3673efa92f68b427e17ce345706ee29594772724be9947d1af895be91593121"
+            },
+            {
+              "width": 1261,
+              "columns": [[13, 471], [494, 746]],
+              "inputs": [[18, 461], [499, 410]],
+              "dateBlock": [499, 736],
+              "divider": false,
+              "dateFields": [["Left", 661, 49], ["Top", 504, 100]],
+              "nativeInputSha256": "f51315bdd0ae424d51d029ad51c6a631594e525144f357d3d954e038768f4be4",
+              "nativeScreenshotSha256": "670ce8bef4fe15610b610c7960fa7fd3270282d8e9469616d289ce0c5ed9202c"
+            }
+          ]
+        },
+        {
+          "locations": {"Settlement": "Top"},
+          "rightWidth": 56,
+          "cases": [
+            {
+              "width": 544,
+              "columns": [[13, 97], [120, 403]],
+              "inputs": [[18, 87], [125, 393]],
+              "dateBlock": [125, 393],
+              "divider": true,
+              "dateFields": [["Top", 130, 68], ["Top", 130, 119]],
+              "checkCaption": [444, 69, 3],
+              "nativeInputSha256": "6eef3e7356310af7c92ab8e0beb52e126b9af07dc1585f8da909a9a9df26f3a2",
+              "nativeScreenshotSha256": "a947635c8990ed698819f4c0b34fa859c8636b54e6b233f79573b2ab8f0fbd16"
+            },
+            {
+              "width": 574,
+              "columns": [[13, 108], [131, 422]],
+              "inputs": [[18, 98], [136, 412]],
+              "dateBlock": [136, 412],
+              "divider": true,
+              "dateFields": [["Top", 141, 68], ["Top", 141, 119]],
+              "checkCaption": [465, 78, 3],
+              "nativeInputSha256": "3684bf12971ddae00a5f449431f720d8abfd242f419eb5f1638aeba6609f0234",
+              "nativeScreenshotSha256": "2acae3c7d91fb6533556ec6e0e8a1110a708f5cb8516452be5ade13679bf27f8"
+            },
+            {
+              "width": 714,
+              "columns": [[13, 186], [209, 484]],
+              "inputs": [[18, 176], [214, 474]],
+              "dateBlock": [214, 474],
+              "divider": true,
+              "dateFields": [["Left", 348, 49], ["Top", 219, 107]],
+              "checkCaption": [602, 81, 3],
+              "nativeInputSha256": "78341d02a6913c92c31bf0d72d3be544b498d1d3f5a77de406aefbb690c44a07",
+              "nativeScreenshotSha256": "8d6b00385fdecbced720b287f06b2e2fcda23322b3bfd6b115f985028e38ddb2"
+            },
+            {
+              "width": 774,
+              "columns": [[13, 227], [250, 503]],
+              "inputs": [[18, 217], [255, 493]],
+              "dateBlock": [255, 493],
+              "divider": true,
+              "dateFields": [["Left", 367, 49], ["Top", 260, 107]],
+              "checkCaption": [621, 122, 2],
+              "nativeInputSha256": "0bc044337be4d1e832e9f4d18ef5baacdb12d8f8bd372889cc66b231b3037681",
+              "nativeScreenshotSha256": "4dab84126372afd6e01b49c30167e4ed24d313747338a8f0ac6867942e825c40"
+            },
+            {
+              "width": 984,
+              "columns": [[13, 372], [395, 568]],
+              "inputs": [[18, 362], [400, 558]],
+              "dateBlock": [400, 558],
+              "divider": true,
+              "dateFields": [["Left", 562, 49], ["Top", 405, 100]],
+              "checkCaption": [816, 137, 2],
+              "nativeInputSha256": "16f33b459a6f1ce3c0dbf593bd0e1bf28d683aec94bb76fe6664fdcd6948c486",
+              "nativeScreenshotSha256": "8053022bd184f1d598d9f4f0c7d58446d8e61dd045cc5f573287906c0ff575b5"
+            }
+          ]
+        },
+        {
+          "locations": {"Settlement": "Top"},
+          "caption": ["По дате входящего документа", "По дате документа"],
+          "cases": [
+            {
+              "width": 544,
+              "columns": [[13, 104], [127, 396]],
+              "inputs": [[18, 94], [132, 386]],
+              "dateBlock": [132, 379],
+              "divider": true,
+              "dateFields": [["Top", 137, 68], ["Top", 137, 119]],
+              "checkCaption": [391, 115, 1],
+              "nativeInputSha256": "acd21bbf8ebd664d24c521ff7c65bece195dd2d5526c5abc2a8cc110d00e36f2",
+              "nativeScreenshotSha256": "2ddc8d08ab4f0250a51de938ec5d3a1289a396ded2abd009eff0d22bcb281420"
+            },
+            {
+              "width": 554,
+              "columns": [[13, 91], [114, 419]],
+              "inputs": [[18, 81], [119, 409]],
+              "dateBlock": [119, 409],
+              "divider": true,
+              "dateFields": [["Top", 124, 68], ["Top", 124, 119]],
+              "checkCaption": [447, 76, 2],
+              "nativeInputSha256": "825422c205a242ce91d02d07b85e38e372ffa7ef3b88d81f611447598103b3d4",
+              "nativeScreenshotSha256": "da20f30f94ed342d2584119489770ecb979532fc61470324af3bea0bf770973a"
+            },
+            {
+              "width": 734,
+              "columns": [[13, 250], [273, 440]],
+              "inputs": [[18, 240], [278, 410]],
+              "dateBlock": [278, 430],
+              "divider": true,
+              "dateFields": [["Left", 386, 49], ["Top", 283, 107]],
+              "checkCaption": [640, 63, 2],
+              "nativeInputSha256": "cfa75063d1a1cf34d65e900fa77f80f99d6b41e7ffe4bdf86ca11f2ad296425b",
+              "nativeScreenshotSha256": "2aaf3a516e5b4fa5f7738dda13f79f38899096895975d111a722ca53947cc1a3"
+            },
+            {
+              "width": 834,
+              "columns": [[13, 298], [321, 492]],
+              "inputs": [[18, 288], [326, 410]],
+              "dateBlock": [326, 482],
+              "divider": true,
+              "dateFields": [["Left", 434, 49], ["Top", 331, 107]],
+              "checkCaption": [688, 115, 1],
+              "nativeInputSha256": "a3d1997593335d65dd7a8a08825b0197038823a8d1608cbd05406f36fb0158b8",
+              "nativeScreenshotSha256": "a05183e4aa423cbe8e7ae4aa5e388b334fa7b3b4a296f58acab92344671acfe4"
+            }
+          ]
+        },
+        {
+          "locations": {"Settlement": "Top"},
+          "labelProperties": "<BackColor>web:Pink</BackColor><TextColor>web:Red</TextColor>",
+          "cases": [
+            {
+              "width": 544,
+              "columns": [[13, 104], [127, 396]],
+              "inputs": [[18, 94], [132, 386]],
+              "dateBlock": [132, 386],
+              "divider": true,
+              "dateFields": [["Top", 137, 68], ["Top", 137, 119]],
+              "checkCaption": [391, 122, 2],
+              "dateLabel": {"location": "Top", "valueText": "", "background": "rgb(255, 192, 203)", "control": [137, 180, 152, 19]},
+              "nativeInputSha256": "dee6c8be6699c020349edd2a733334a31c36456ce6807f691f4643d6649da51e",
+              "nativeScreenshotSha256": "703fa6d25e7bcfe39885acabb58a9fe5a068505500f27b1fdcae752f2f9abdef"
+            },
+            {
+              "width": 574,
+              "columns": [[13, 95], [118, 435]],
+              "inputs": [[18, 85], [123, 410]],
+              "dateBlock": [123, 425],
+              "divider": true,
+              "dateFields": [["Top", 128, 68], ["Top", 128, 119]],
+              "checkCaption": [461, 82, 3],
+              "dateLabel": {"location": "Left", "valueText": "", "background": "rgb(255, 192, 203)", "control": [237, 176, 152, 19]},
+              "nativeInputSha256": "83c10e97178ecac298fee5022b3086553a27fb6886ffc48818807eefb7f91151",
+              "nativeScreenshotSha256": "d9a17b9a8bbdc282b83a5a3bd5107c2f6a0d08a6404946d174efd361a251d41a"
+            }
+          ]
+        },
+        {
+          "locations": {"Stamp": "Top"},
+          "labelProperties": "<BackColor>web:Pink</BackColor><TextColor>web:Red</TextColor>",
+          "cases": [
+            {
+              "width": 534,
+              "columns": [[13, 93], [116, 397]],
+              "inputs": [[18, 83], [121, 387]],
+              "dateBlock": [121, 387],
+              "divider": true,
+              "dateFields": [["Top", 126, 68], ["Top", 126, 119]],
+              "checkCaption": [437, 66, 3],
+              "dateLabel": {"location": "Left", "valueText": "", "background": "rgb(255, 192, 203)", "control": [213, 176, 152, 19]},
+              "nativeInputSha256": "0a1232e2bff3db6ebaaf5cf55540742280f783b5842d9671ee53d8cb9fb6c7f5",
+              "nativeScreenshotSha256": "17d8500c9747115cdd929be725a692039c540316785459766b604973e0bf7ef4"
+            },
+            {
+              "width": 544,
+              "columns": [[13, 91], [114, 409]],
+              "inputs": [[18, 81], [119, 399]],
+              "dateBlock": [119, 399],
+              "divider": true,
+              "dateFields": [["Top", 124, 68], ["Left", 194, 102]],
+              "checkCaption": [448, 65, 3],
+              "dateLabel": {"location": "Left", "valueText": "", "background": "rgb(255, 192, 203)", "control": [224, 159, 152, 19]},
+              "nativeInputSha256": "7f08254b4bba8060bd251b9929d531e40eff8a3bac9f89985b93ad6ae536f3ad",
+              "nativeScreenshotSha256": "68b1d1b3cd8e381a9d7eca736eb14c27ed1bac7d146371a620e9955b9a2cd924"
+            }
+          ]
+        },
+        {
+          "locations": {"Settlement": "Top"},
+          "labelProperties": "<BackColor>web:Pink</BackColor><TextColor>web:Red</TextColor><Width>25</Width>",
+          "cases": [
+            {
+              "width": 554,
+              "columns": [[13, 92], [115, 418]],
+              "inputs": [[18, 82], [120, 408]],
+              "dateBlock": [120, 408],
+              "divider": true,
+              "dateFields": [["Top", 125, 68], ["Top", 125, 119]],
+              "checkCaption": [449, 74, 3],
+              "dateLabel": {"location": "Top", "valueText": "", "background": "rgb(255, 192, 203)", "control": [125, 195, 252, 19]},
+              "nativeInputSha256": "56c5629aaf6e34ee3b0df3d62e3b75cd4d9bcf80a4d36a0389b0f57cfd3ae181",
+              "nativeScreenshotSha256": "d47efced7bdeeb5d9ba0c3e16b0a6c704ebb966037ffa6e08c26311c4ebdf311"
+            },
+            {
+              "width": 1199,
+              "columns": [[13, 471], [494, 684]],
+              "inputs": [[18, 461], [499, 410]],
+              "dateBlock": [499, 674],
+              "divider": false,
+              "dateFields": [["Left", 661, 49], ["Top", 504, 100]],
+              "checkCaption": [985, 183, 1],
+              "dateLabel": {"location": "Left", "valueText": "", "background": "rgb(255, 192, 203)", "control": [661, 134, 252, 19]},
+              "nativeInputSha256": "42607e0809a25f884496c6c59d0bca11e0f0fa6428c94e5d7097e0bb75da2afc",
+              "nativeScreenshotSha256": "d03a2ce202bd904d2ebdaf12daa0ea4132860ccee535315bec337c59e0108188"
+            }
+          ]
+        },
+        {
+          "locations": {"Settlement": "Top"},
+          "rightWidth": 25,
+          "cases": [
+            {
+              "width": 544,
+              "columns": [[13, 94], [117, 406]],
+              "inputs": [[18, 84], [122, 396]],
+              "dateBlock": [122, 396],
+              "divider": true,
+              "dateFields": [["Top", 127, 68], ["Top", 127, 119]],
+              "checkCaption": [442, 71, 3],
+              "nativeInputSha256": "2adcf9606c353513dbaa31ec70e36db4071507526c98c88153d8947a3aa84193",
+              "nativeScreenshotSha256": "a1e2d4547a4d02e3a34e52d23abbbb4abca90a438a6b547adb7580059befa58b"
+            },
+            {
+              "width": 574,
+              "columns": [[13, 101], [124, 429]],
+              "inputs": [[18, 91], [129, 410]],
+              "dateBlock": [129, 419],
+              "divider": true,
+              "dateFields": [["Top", 134, 68], ["Top", 134, 119]],
+              "checkCaption": [462, 81, 3],
+              "nativeInputSha256": "d51a095c3e33014204f0277b5851e6d114f8219f8e53e76e4d28e630434a7114",
+              "nativeScreenshotSha256": "b5c5cb21ac258b016cb06f3d6032aa7cda22716f96c6e6c920271ff993f6653a"
+            }
+          ]
+        },
+        {
+          "locations": {"Settlement": "Top", "Limit": "Top"},
+          "cases": [
+            {
+              "width": 574,
+              "columns": [[13, 95], [118, 435]],
+              "inputs": [[18, 85], [123, 410]],
+              "dateBlock": [123, 425],
+              "divider": true,
+              "dateFields": [["Top", 128, 68], ["Top", 128, 119]],
+              "checkCaption": [382, 161, 2],
+              "nativeInputSha256": "078056a903e28b2d5485e4a1017e2778fec25f56503d51f7b391b02c55c34ebd",
+              "nativeScreenshotSha256": "44196922ca44a8563786feb3c22fa1c4157d1b1be1363db0397d972e5e6e7057"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "DateThroughColumns.xml",
+      "sourceSha256": "fc8b022a933a21c82b4cc0655b4f216f5d1b1aa0e01d2b468e6e93c00f9a6e5c",
+      "through": true,
+      "cases": [
+        {
+          "width": 984,
+          "viewportHeight": 620,
+          "divider": true,
+          "nativeInputSha256": "f8f66b4089d857a3af06d57ca90dfa588bdbc0389a5e867074d5d445ec871dce",
+          "nativeScreenshotSha256": "59d5682fe81cdec3556ff4005714b3ce57952b8514ed0b2c461e06e38d851a3b"
+        },
+        {
+          "width": 1134,
+          "viewportHeight": 620,
+          "divider": true,
+          "columns": [
+            [13, 362],
+            [385, 728]
+          ],
+          "inputs": [
+            [18, 352],
+            null
+          ],
+          "dateBlock": [390, 541],
+          "dateFields": [
+            ["Left", 544, 49],
+            ["Left", 544, 83]
+          ],
+          "nativeInputSha256": "280c6f95d425078dfeb1267a37ea1e5100317db8363169a3c766c3805111264f",
+          "nativeScreenshotSha256": "9122b47e8fd110f5927adee859201b1c87a7ea1a7d23571789e15b0b6f267c64"
+        },
+        {
+          "width": 1234,
+          "viewportHeight": 620,
+          "divider": true,
+          "columns": [
+            [13, 447],
+            [470, 743]
+          ],
+          "inputs": [
+            [18, 437],
+            null
+          ],
+          "dateBlock": [475, 541],
+          "dateFields": [
+            ["Left", 629, 49],
+            ["Left", 629, 83]
+          ],
+          "nativeInputSha256": "c3ddf4f58cb813b8df62fe61dfe03d47537ae6b7942ad0b8f5899baa078efdf2",
+          "nativeScreenshotSha256": "505530645240c973c61a1e0c7e87a7be2d941302296a68e372b53a1e1811e8c6"
+        },
+        {
+          "width": 574,
+          "viewportHeight": 760,
+          "divider": true,
+          "columns": [[13, 91], [114, 439]],
+          "inputs": [[18, 81], null],
+          "dateBlock": [119, 334],
+          "dateLocations": ["Top", "Top"],
+          "referenceCaption": [108, 2],
+          "referenceRow": [[227, 226], [227, 226], [463, 12], [485, 63]],
+          "nativeInputSha256": "3996be33995a3c33fa11682ab29037e6656c81b0ded809fc8ab50f601de36ee4",
+          "nativeScreenshotSha256": "c9920755e06d8848ce10f0064e9a49e45887d8de904fb700a282eae149145d6b"
+        },
+        {
+          "width": 634,
+          "viewportHeight": 760,
+          "divider": true,
+          "columns": [[13, 101], [124, 489]],
+          "inputs": [[18, 91], null],
+          "dateBlock": [129, 375],
+          "dateLocations": ["Top", "Top"],
+          "referenceCaption": [120, 2],
+          "referenceRow": [[249, 255], [249, 255], [514, 14], [538, 70]],
+          "nativeInputSha256": "5168eb34a68850e92503f2226ebf7e06a01a4cbef6452e3804a2f34c5ca27e0f",
+          "nativeScreenshotSha256": "b21a1e2dddcc2d9feccf73ac9354575a44dd5c7dc1295c16b8e5c04eb6b96af8"
+        },
+        {
+          "width": 664,
+          "viewportHeight": 760,
+          "divider": true,
+          "columns": [[13, 106], [129, 514]],
+          "inputs": [[18, 96], null],
+          "dateBlock": [134, 395],
+          "dateLocations": ["Top", "Top"],
+          "referenceCaption": [127, 2],
+          "referenceRow": [[261, 268], [261, 268], [539, 14], [563, 75]],
+          "nativeInputSha256": "cc61cffa5e9dffd14407452d2b194b748791c887a67c4d0d18c5e93c32320a3e",
+          "nativeScreenshotSha256": "2e84bc248af6a8496732c6d1c36b809920c6f76e182af7147a023db23ae8209a"
+        },
+        {
+          "width": 674,
+          "viewportHeight": 760,
+          "divider": true,
+          "dateLocations": ["Left", "Left"],
+          "referenceCaption": [197, 1],
+          "nativeInputSha256": "855ebba21772a80e24c129279a44b692a526e82d83d950a978e3841a4df9eaec",
+          "nativeScreenshotSha256": "27dde5f1b5e5ed05e913753a5ce7d08db6ea0f695a18dfc5e803634bfc02e592"
+        },
+        {
+          "width": 1334,
+          "viewportHeight": 620,
+          "columns": [
+            [
+              13,
+              471
+            ],
+            [
+              494,
+              819
+            ]
+          ],
+          "inputs": [
+            [
+              18,
+              461
+            ],
+            null
+          ],
+          "dateBlock": [
+            499,
+            604
+          ],
+          "divider": false,
+          "nativeInputSha256": "61ed7b925baf555ccc2d39ebb5c89c8693c4083aa7bca20d3e42211dc75aaa9d",
+          "nativeScreenshotSha256": "e6d312be55041433fa718869d5bf16a4a182767245ff2a0f26c83175437a95a6"
+        }
+      ],
+      "throughVariants": [
+        {
+          "courtCaption": "Номер дела",
+          "cases": [
+            {
+              "width": 574,
+              "viewportHeight": 760,
+              "divider": true,
+              "dateLocations": ["Top", "Top"],
+              "referenceCaption": [82, 1],
+              "nativeInputSha256": "67a727333fbffce637d741f4846ff0d0719b090bdf6856babea95b7d0b7d3faf",
+              "nativeScreenshotSha256": "f89399678f83c54505250e1932c0a1b3e6bc5cd48d56455d0c47429faab156f0"
+            }
+          ]
+        },
+        {
+          "leftTitles": true,
+          "cases": [
+            {
+              "width": 669,
+              "viewportHeight": 760,
+              "divider": false,
+              "viewportWidth": 574,
+              "columns": [[13, 90], [113, 535]],
+              "inputs": [[18, 80], null],
+              "dateBlock": [118, 431],
+              "dateLocations": ["Left", "Left"],
+              "referenceCaption": [197, 1],
+              "referenceRow": [[315, 234], [315, 234], [559, 12], [581, 62]],
+              "nativeInputSha256": "9e7ece2a8cd1277f826d2ba5fbc6dee3f52289c30eae3aae04e9d5b7172cdf2f",
+              "nativeScreenshotSha256": "aae2eb65557a31a80c7a04499f18123b3a277e33d6d382da52eff758c937c81f"
+            }
+          ]
+        },
+        {
+          "hideServices": true,
+          "cases": [
+            {
+              "width": 1134,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 372],
+                [395, 718]
+              ],
+              "inputs": [
+                [18, 362],
+                null
+              ],
+              "dateBlock": [400, 516],
+              "dateFields": [
+                ["Left", 541, 49],
+                ["Left", 541, 83]
+              ],
+              "nativeInputSha256": "c500da203fbf0d966b2d15d7f89204b2d6ae7ddc672d3ed3087dc03a7cca0c52",
+              "nativeScreenshotSha256": "008d5826d1bb9169fc9d5660bbbbba86e57ea89f8781f20d5d557265b0ae58fc"
+            },
+            {
+              "width": 1184,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 422],
+                [445, 718]
+              ],
+              "inputs": [
+                [18, 412],
+                null
+              ],
+              "dateBlock": [450, 516],
+              "dateFields": [
+                ["Left", 591, 49],
+                ["Left", 591, 83]
+              ],
+              "nativeInputSha256": "02057e7769ca13bed19d71f9723e92dc2f6b79f0f6f429323ffd53cfeba54aae",
+              "nativeScreenshotSha256": "cc5541e24303f3150bec8eccc2fed8fc7145126cca0cde3ee4e93e81374d7691"
+            },
+            {
+              "width": 584,
+              "viewportHeight": 760,
+              "divider": true,
+              "columns": [[13, 93], [116, 447]],
+              "inputs": [[18, 83], null],
+              "dateBlock": [121, 340],
+              "dateLocations": ["Top", "Top"],
+              "referenceCaption": [110, 2],
+              "nativeInputSha256": "2e3f37a1c77ba4462b7d6d8d80fa2e77b52d444fa55e4f08423e38bebb6292da",
+              "nativeScreenshotSha256": "0db69d3b5b440215ad7b00511b32d06ff09982905ddcba419241b6c147b91a5b"
+            }
+          ]
+        },
+        {
+          "traceWidth": 43,
+          "cases": [
+            {
+              "width": 1184,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 391],
+                [414, 749]
+              ],
+              "inputs": [
+                [18, 381],
+                null
+              ],
+              "dateBlock": [419, 558],
+              "dateFields": [
+                ["Left", 581, 49],
+                ["Left", 581, 83]
+              ],
+              "traceOffset": 117,
+              "nativeInputSha256": "5d90455d932a32a79d72162080487b8190def11f18d6a8c9bb5e7a91c7f22e6c",
+              "nativeScreenshotSha256": "be8b675a211f0100ef37153a186ed6a40444218386851802368cb7a79b22a752"
+            },
+            {
+              "width": 1234,
+              "viewportHeight": 620,
+              "divider": true,
+              "dateBlockWidth": 571,
+              "traceOffset": 130,
+              "nativeInputSha256": "fcf79b129fe1c3906c07683ce81c33059c20f5613c689b048d968c944c6ac47a",
+              "nativeScreenshotSha256": "9d850244b023a761614ddb4bfb00f4d92474a7bee5c6e91adc01494a37e8b2e4"
+            }
+          ]
+        },
+        {
+          "topTitles": true,
+          "cases": [
+            {
+              "width": 834,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 238],
+                [261, 552]
+              ],
+              "inputs": [
+                [18, 228],
+                null
+              ],
+              "dateBlock": [266, 410],
+              "dateFields": [
+                ["Top", 271, 68],
+                ["Top", 271, 119]
+              ],
+              "referenceRow": [
+                [463, 213],
+                [463, 213],
+                [686, 15],
+                [711, 97]
+              ],
+              "nativeInputSha256": "80cd207d49c75d0480d16e62066ca8f2067d1644518dd545be80210949e7ce13",
+              "nativeScreenshotSha256": "ada79fe56013fdde1930c42722f120d502bfc66d4e6e69a7d771c79827017c20"
+            },
+            {
+              "width": 934,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 293],
+                [316, 597]
+              ],
+              "inputs": [
+                [18, 283],
+                null
+              ],
+              "dateBlock": [321, 441],
+              "dateFields": [
+                ["Top", 326, 68],
+                ["Top", 326, 119]
+              ],
+              "referenceRow": [
+                [518, 244],
+                [518, 244],
+                [772, 16],
+                [798, 110]
+              ],
+              "nativeInputSha256": "a4ca7b1e34ca084ff27e0d293b15111c778a561b65f0c7e7845754d119c17b41",
+              "nativeScreenshotSha256": "ff5f5f6db9b94174956e8600b740dca956a7f1d2eab30ec0ff2415976d7e0e33"
+            },
+            {
+              "width": 1234,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 458],
+                [481, 732]
+              ],
+              "inputs": [
+                [18, 448],
+                null
+              ],
+              "dateBlock": [486, 447],
+              "dateFields": [
+                ["Top", 491, 68],
+                ["Top", 491, 119]
+              ],
+              "referenceRow": [
+                [683, 336],
+                [683, 336],
+                [1029, 19],
+                [1058, 150]
+              ],
+              "nativeInputSha256": "b580ff1d4c9b2068d91b78db9787f233dd7c96913e19f1538624add9321f5e79",
+              "nativeScreenshotSha256": "cb0b5606ec61969dccccc87bb91480480f7f1d613fe11ed065a606c5fd67a37d"
+            }
+          ]
+        },
+        {
+          "topTitles": true,
+          "hideServices": true,
+          "cases": [
+            {
+              "width": 734,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 198],
+                [221, 492]
+              ],
+              "inputs": [
+                [18, 188],
+                null
+              ],
+              "dateBlock": [226, 328],
+              "dateFields": [
+                ["Top", 231, 68],
+                ["Top", 231, 119]
+              ],
+              "referenceRow": [
+                [332, 222],
+                [332, 222],
+                [564, 16],
+                [590, 118]
+              ],
+              "nativeInputSha256": "4e53c55a9576af0e498f149d63b9e3b37cb21a5e206b3a83fb35a8b69f43d093",
+              "nativeScreenshotSha256": "944a0e18c4797f251973cb8e978b120be06633d3b30b5ba45b8f88aa883ffc6c"
+            },
+            {
+              "width": 884,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 293],
+                [316, 547]
+              ],
+              "inputs": [
+                [18, 283],
+                null
+              ],
+              "dateBlock": [321, 380],
+              "dateFields": [
+                ["Top", 326, 68],
+                ["Top", 326, 119]
+              ],
+              "referenceRow": [
+                [427, 274],
+                [427, 274],
+                [711, 17],
+                [738, 120]
+              ],
+              "nativeInputSha256": "74077edbd92d1a97a75c6e9fcad067c791cacc8cfd5b0ae6a6f39ec35d3dd766",
+              "nativeScreenshotSha256": "5eb12adfb8f0e96092682b8bd364442de2d87078956b4c5b5fab30b0702ac189"
+            },
+            {
+              "width": 1034,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 389],
+                [412, 601]
+              ],
+              "inputs": [
+                [18, 379],
+                null
+              ],
+              "dateBlock": [417, 400],
+              "dateFields": [
+                ["Top", 422, 68],
+                ["Top", 422, 119]
+              ],
+              "referenceRow": [
+                [614, 203],
+                [614, 203],
+                [827, 19],
+                [856, 152]
+              ],
+              "nativeInputSha256": "33eb1b076764319fa3503208efe0ed6b5eb7e21af2c71a808685dc67108b3078",
+              "nativeScreenshotSha256": "17a6eda83f6c38379a8260a798cc554dc7c430317892120c51939eeae9b0dabf"
+            }
+          ]
+        },
+        {
+          "topTitles": true,
+          "tailWidth": 26,
+          "cases": [
+            {
+              "width": 1234,
+              "viewportHeight": 620,
+              "divider": true,
+              "columns": [
+                [13, 408],
+                [431, 782]
+              ],
+              "inputs": [
+                [18, 398],
+                null
+              ],
+              "dateBlock": [436, 447],
+              "dateFields": [
+                ["Top", 441, 68],
+                ["Top", 441, 119]
+              ],
+              "referenceRow": [
+                [633, 308],
+                [633, 308],
+                [951, 18],
+                [979, 229]
+              ],
+              "nativeInputSha256": "a1783f95032d0c200806dfb361a7229176fcc61badc3a981453c2fc27234c2b3",
+              "nativeScreenshotSha256": "af9387e9079e86a979b2a07e483c568a54583c92217f99cd59797a226a80d0ce"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

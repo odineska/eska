@@ -98,15 +98,17 @@ pub fn diagnostic(value: &Diagnostic) -> Value {
 
 /// Preserve property order, namespace-aware keys and UTF-8 byte ranges.
 pub fn property(labels: &Labels, owner: MetadataKind, value: &LocatedProperty) -> Value {
-    let mut result = field(
-        labels,
-        owner,
-        &value.property.key,
-        &mut Vec::new(),
-        &value.property,
-    );
+    let mut result = property_record(labels, owner, &value.property);
     result["range"] = json!({"start":value.range.start,"end":value.range.end});
     result
+}
+
+pub(super) fn property_record(
+    labels: &Labels,
+    owner: MetadataKind,
+    value: &MetadataProperty,
+) -> Value {
+    field(labels, owner, &value.key, &mut Vec::new(), value)
 }
 
 /// Nested record fields retain repeats and qualifiers rather than becoming a JSON map.

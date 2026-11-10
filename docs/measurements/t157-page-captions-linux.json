@@ -1,0 +1,203 @@
+{
+  "platform": {
+    "os": "linux",
+    "architecture": "arm64",
+    "version": "8.3.27.2342",
+    "interface": "Taxi",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "source": "CommonForms/ПараметрыАдминистрированияПрограммы/Ext/Form.xml",
+  "compatibility": "Version8_3_24",
+  "originalCanonicalSha256": "0601ba5918d53488280ac2730b84b63a906864990ac7ae742edd791e230dee9b",
+  "vsixSha256": "394ffd558eeb510adf41d464dd690a4121c82ee3a2cbcc93dd4b7d9583670605",
+  "nativeFixture": {
+    "path": "tests/fixtures/forms/native-page-captions",
+    "stand": "form-native-admin-spacing-TNC6qbzV",
+    "locale": "ru"
+  },
+  "allocatedFrames": [
+    {
+      "case": "AdminNatural",
+      "frame": [
+        546,
+        389
+      ],
+      "preferredHeight": {
+        "configurator": 389,
+        "explorer": 389
+      },
+      "bodyHeight": 295,
+      "fields": [
+        {
+          "name": "АдресАгентаСервера",
+          "configurator": [
+            60,
+            309,
+            356,
+            23
+          ],
+          "previousExplorer": [
+            60,
+            309,
+            356,
+            23
+          ],
+          "explorer": [
+            60,
+            309,
+            356,
+            23
+          ]
+        },
+        {
+          "name": "ПортАгентаСервера",
+          "configurator": [
+            464,
+            309,
+            61,
+            23
+          ],
+          "previousExplorer": [
+            464,
+            309,
+            61,
+            23
+          ],
+          "explorer": [
+            464,
+            309,
+            61,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Admin30",
+      "frame": [
+        334,
+        468
+      ],
+      "preferredHeight": {
+        "configurator": 468,
+        "explorer": 389
+      },
+      "bodyHeight": 374,
+      "fields": [
+        {
+          "name": "АдресАгентаСервера",
+          "configurator": [
+            60,
+            356,
+            253,
+            23
+          ],
+          "previousExplorer": [
+            60,
+            349,
+            253,
+            23
+          ],
+          "explorer": [
+            60,
+            356,
+            253,
+            23
+          ]
+        },
+        {
+          "name": "ПортАгентаСервера",
+          "configurator": [
+            60,
+            388,
+            61,
+            23
+          ],
+          "previousExplorer": [
+            60,
+            381,
+            61,
+            23
+          ],
+          "explorer": [
+            60,
+            388,
+            61,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "case": "Admin45",
+      "frame": [
+        484,
+        396
+      ],
+      "preferredHeight": {
+        "configurator": 396,
+        "explorer": 389
+      },
+      "bodyHeight": 302,
+      "fields": [
+        {
+          "name": "АдресАгентаСервера",
+          "configurator": [
+            60,
+            316,
+            294,
+            23
+          ],
+          "previousExplorer": [
+            60,
+            316,
+            294,
+            23
+          ],
+          "explorer": [
+            60,
+            316,
+            294,
+            23
+          ]
+        },
+        {
+          "name": "ПортАгентаСервера",
+          "configurator": [
+            402,
+            316,
+            61,
+            23
+          ],
+          "previousExplorer": [
+            402,
+            316,
+            61,
+            23
+          ],
+          "explorer": [
+            402,
+            316,
+            61,
+            23
+          ]
+        }
+      ]
+    }
+  ],
+  "unchangedStalingradGeometry": [
+    {
+      "form": "ВыдачаЗайма",
+      "matchingStates": 3
+    },
+    {
+      "form": "ПоступлениеНаРасчетныйСчет",
+      "matchingStates": 1
+    },
+    {
+      "form": "ПоступлениеНаСчетТекущихРасчетов",
+      "matchingStates": 20
+    }
+  ]
+}

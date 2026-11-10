@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" version="2.20">
+  <Title>
+    <v8:item>
+      <v8:lang>ru</v8:lang>
+      <v8:content>ProbeFooterAllocation15</v8:content>
+    </v8:item>
+    <v8:item>
+      <v8:lang>en</v8:lang>
+      <v8:content>ProbeFooterAllocation15</v8:content>
+    </v8:item>
+  </Title>
+  <Width>61</Width>
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <UsualGroup name="Footer" id="1">
+      <Behavior>Usual</Behavior>
+      <Representation>None</Representation>
+      <Group>AlwaysHorizontal</Group>
+      <ShowTitle>false</ShowTitle>
+      <HorizontalStretch>true</HorizontalStretch>
+      <VerticalStretch>false</VerticalStretch>
+      <VerticalAlign>Bottom</VerticalAlign>
+      <ChildItems>
+        <UsualGroup name="Details" id="2">
+          <Behavior>Usual</Behavior>
+          <Representation>None</Representation>
+          <Group>AlwaysHorizontal</Group>
+          <ShowTitle>false</ShowTitle>
+          <HorizontalStretch>true</HorizontalStretch>
+          <ChildItems>
+            <InputField name="Memo" id="11">
+              <DataPath>Memo</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Комментарий</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Комментарий</v8:content>
+                </v8:item>
+              </Title>
+              <MultiLine>true</MultiLine>
+              <TitleLocation>Top</TitleLocation>
+              <Width>50</Width>
+              <AutoMaxHeight>false</AutoMaxHeight>
+              <MaxHeight>4</MaxHeight>
+              <BackColor>web:Lavender</BackColor>
+            </InputField>
+            <LabelField name="Fixed" id="12">
+              <DataPath>Fixed</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Корректируемый документ</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Корректируемый документ</v8:content>
+                </v8:item>
+              </Title>
+              <BackColor>web:LightYellow</BackColor>
+              <Hiperlink>true</Hiperlink>
+            </LabelField>
+            <LabelField name="Owner" id="13">
+              <DataPath>Owner</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Ответственный</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Ответственный</v8:content>
+                </v8:item>
+              </Title>
+              <BackColor>web:LightGreen</BackColor>
+            </LabelField>
+          </ChildItems>
+        </UsualGroup>
+        <UsualGroup name="Totals" id="3">
+          <Behavior>Usual</Behavior>
+          <Representation>None</Representation>
+          <Group>HorizontalIfPossible</Group>
+          <ShowTitle>false</ShowTitle>
+          <HorizontalStretch>true</HorizontalStretch>
+          <HorizontalAlign>Right</HorizontalAlign>
+          <ChildItems>
+            <UsualGroup name="Summary" id="4">
+              <Behavior>Usual</Behavior>
+              <Representation>None</Representation>
+              <Group>HorizontalIfPossible</Group>
+              <ShowTitle>false</ShowTitle>
+              <BackColor>web:Silver</BackColor>
+              <ChildItems>
+                <LabelField name="Amount" id="14">
+                  <DataPath>Amount</DataPath>
+                  <Title>
+                    <v8:item>
+                      <v8:lang>ru</v8:lang>
+                      <v8:content>Сумма документа</v8:content>
+                    </v8:item>
+                    <v8:item>
+                      <v8:lang>en</v8:lang>
+                      <v8:content>Сумма документа</v8:content>
+                    </v8:item>
+                  </Title>
+                  <BackColor>web:LightCyan</BackColor>
+                  <TitleFont ref="style:NormalTextFont" bold="true" kind="StyleItem"/>
+                  <Font ref="style:NormalTextFont" bold="true" kind="StyleItem"/>
+                </LabelField>
+              </ChildItems>
+            </UsualGroup>
+          </ChildItems>
+        </UsualGroup>
+      </ChildItems>
+    </UsualGroup>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="Memo" id="1">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Memo</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Memo</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Fixed" id="2">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Fixed</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Fixed</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+        <v8:Type>cfg:CatalogRef.NativeUsers</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="Owner" id="3">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Owner</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Owner</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="Amount" id="4">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Amount</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Amount</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:decimal</v8:Type>
+        <v8:NumberQualifiers>
+          <v8:Digits>15</v8:Digits>
+          <v8:FractionDigits>2</v8:FractionDigits>
+          <v8:AllowedSign>Any</v8:AllowedSign>
+        </v8:NumberQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="Description" id="5">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Description</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Description</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+    <Attribute name="After" id="6">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>After</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>After</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:string</v8:Type>
+        <v8:StringQualifiers>
+          <v8:Length>0</v8:Length>
+          <v8:AllowedLength>Variable</v8:AllowedLength>
+        </v8:StringQualifiers>
+      </Type>
+    </Attribute>
+  </Attributes>
+</Form>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" version="2.20">
+  <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Поля</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Поля</v8:content></v8:item></Title>
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <InputField name="CaseFont16" id="11">
+      <DataPath>CaseFont16</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Font16</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Font16</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Font ref="style:NormalTextFont" height="16" kind="StyleItem"/>
+    </InputField>
+    <InputField name="CaseFont20" id="12">
+      <DataPath>CaseFont20</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Font20</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Font20</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Font ref="style:NormalTextFont" height="20" kind="StyleItem"/>
+    </InputField>
+    <InputField name="CaseFont8" id="13">
+      <DataPath>CaseFont8</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Font8</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Font8</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Font ref="style:NormalTextFont" height="8" kind="StyleItem"/>
+    </InputField>
+    <InputField name="CaseColor" id="14">
+      <DataPath>CaseColor</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>Color</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>Color</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <BackColor>#DBF2FB</BackColor>
+      <TextColor>#496B1D</TextColor>
+      <BorderColor>#755521</BorderColor>
+    </InputField>
+    <InputField name="CaseReadOnlyColor" id="15">
+      <DataPath>CaseReadOnlyColor</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>ReadOnlyColor</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>ReadOnlyColor</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <ReadOnly>true</ReadOnly>
+      <BackColor>#DBF2FB</BackColor>
+      <TextColor>#496B1D</TextColor>
+      <BorderColor>#755521</BorderColor>
+    </InputField>
+    <InputField name="CaseDisabledColor" id="16">
+      <DataPath>CaseDisabledColor</DataPath>
+      <Title><v8:item><v8:lang>ru</v8:lang><v8:content>DisabledColor</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>DisabledColor</v8:content></v8:item></Title>
+      <TitleLocation>None</TitleLocation>
+      <Width>12</Width>
+      <HorizontalStretch>false</HorizontalStretch>
+      <Enabled>false</Enabled>
+      <BackColor>#DBF2FB</BackColor>
+      <TextColor>#496B1D</TextColor>
+      <BorderColor>#755521</BorderColor>
+    </InputField>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="CaseFont16" id="1"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseFont16</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseFont16</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseFont20" id="2"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseFont20</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseFont20</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseFont8" id="3"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseFont8</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseFont8</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseColor" id="4"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseColor</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseColor</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseReadOnlyColor" id="5"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseReadOnlyColor</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseReadOnlyColor</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+    <Attribute name="CaseDisabledColor" id="6"><Title><v8:item><v8:lang>ru</v8:lang><v8:content>CaseDisabledColor</v8:content></v8:item><v8:item><v8:lang>en</v8:lang><v8:content>CaseDisabledColor</v8:content></v8:item></Title><Type><v8:Type>cfg:CatalogRef.NativeGoods</v8:Type></Type></Attribute>
+  </Attributes>
+</Form>

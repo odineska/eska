@@ -49,11 +49,27 @@ pub(super) fn check_revision(entry: &Entry, revision: &str) -> Result<(), Value>
     }
     Ok(())
 }
-pub(super) fn locate(entry: &Entry, args: &Value, palette: bool) -> Result<Value, Value> {
+pub(super) fn locate(entry: &Entry, args: &Value, api_minor: u32) -> Result<Value, Value> {
     let input: Target = params::decode(args)?;
     check_revision(entry, &input.revision)?;
     let kind = input.target["kind"].as_str().ok_or_else(|| error(-32602))?;
-    let origin: &PropertySource = if kind == "definition" {
+    let data_origin;
+    let origin: &PropertySource = if kind == "dataPath" && api_minor >= 45 {
+        let path: Vec<String> = params::decode(&input.target["path"])?;
+        if path.len() < 2
+            || path.len() > 64
+            || path
+                .iter()
+                .any(|part| part.is_empty() || part.contains('.'))
+        {
+            return Err(error(-32602));
+        }
+        data_origin = entry
+            .preview
+            .inspector_data_origin(&path)
+            .ok_or_else(|| failure("target_unavailable"))?;
+        &data_origin
+    } else if kind == "definition" {
         let values = match input.target["section"].as_str() {
             Some("attributes") => &entry.preview.form.attributes,
             Some("commands") => &entry.preview.form.commands,
@@ -86,7 +102,7 @@ pub(super) fn locate(entry: &Entry, args: &Value, palette: bool) -> Result<Value
             "property" => {
                 let key: PropertyKey = params::decode(&input.target["property"])?;
                 let occurrence = match input.target.get("occurrence") {
-                    Some(index) if palette => params::decode::<usize>(index)?,
+                    Some(index) if api_minor >= 41 => params::decode::<usize>(index)?,
                     _ => 0,
                 };
                 &entry
@@ -98,7 +114,7 @@ pub(super) fn locate(entry: &Entry, args: &Value, palette: bool) -> Result<Value
                     .ok_or_else(|| failure("target_unavailable"))?
                     .origin
             }
-            "attribute" if palette => {
+            "attribute" if api_minor >= 41 => {
                 let key: PropertyKey = params::decode(&input.target["attribute"])?;
                 &value
                     .qualifiers

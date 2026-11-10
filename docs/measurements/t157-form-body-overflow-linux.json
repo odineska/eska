@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 1,
+  "explorerCommits": [
+    "b137810",
+    "0154925"
+  ],
+  "profile": {
+    "platform": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "locale": "ru",
+    "nativePreviewPreset": [
+      1024,
+      768
+    ]
+  },
+  "coordinateSystem": "Logical frame pixels at 100% scale. Rectangles use [x, y, width, height].",
+  "fixtureRecipe": {
+    "fields": "One xs:string attribute. The form has 28 fixed-width input fields bound to it, with TitleLocation=None and Width=16. ShortTop uses six.",
+    "commands": "One declared standard Close command in a non-autofilled root command bar. TallNoBar has CommandBarLocation=None.",
+    "wrapped": "HorizontalIfPossible with two vertical groups of 15 fixed-width fields with Width=52. The wide capture uses the 1920 × 1200 preset."
+  },
+  "matchingGeometry": [
+    {
+      "name": "TallTop",
+      "commandBarLocation": "Auto",
+      "frame": [
+        454,
+        760
+      ],
+      "firstInput": [
+        13,
+        66,
+        171,
+        23
+      ],
+      "lastInputAtEnd": [
+        13,
+        724,
+        171,
+        23
+      ],
+      "visibleFields": 28,
+      "nativeInputSha256": "13c0ef53b85cc4553a6aadfc089975197b69e8dd899faae463877fbef2139931",
+      "nativeScreenshotSha256": "918238b930937fb683c102fff3b6723ebde2c139b4e8bfa39fef7bd799db7bf4",
+      "nativeScrolledScreenshotSha256": "dbd4386cd1c8797bff322b1560c63df43940a04f31e7c200c1db5ac0fc8b29e5",
+      "installedScrollAtEnd": 206
+    },
+    {
+      "name": "TallBottom",
+      "commandBarLocation": "Bottom",
+      "frame": [
+        454,
+        769
+      ],
+      "firstInput": [
+        13,
+        39,
+        171,
+        23
+      ],
+      "lastInputAtEnd": [
+        13,
+        697,
+        171,
+        23
+      ],
+      "visibleFields": 28,
+      "nativeInputSha256": "2aa83358dff73239bc64c163f6192cbc178454b5cf397c61bcdc4e3562de4071",
+      "nativeScreenshotSha256": "902f602e6215fa7dcb3af056f8d9d15bad0b26f12b0fd14e5cdebfc7d0252c63",
+      "nativeScrolledScreenshotSha256": "534b831f192ec60f54018ddfbd33b2bfd97530a7494e5e347e7a6ae2306e4246",
+      "installedScrollAtEnd": 206
+    },
+    {
+      "name": "TallNoBar",
+      "commandBarLocation": "None",
+      "frame": [
+        454,
+        769
+      ],
+      "firstInput": [
+        13,
+        39,
+        171,
+        23
+      ],
+      "lastInputAtEnd": [
+        13,
+        733,
+        171,
+        23
+      ],
+      "visibleFields": 28,
+      "nativeInputSha256": "b6e72192bfccea809b5420703d51fa7090e8262f43aeb7b22235b0437d82ff4a",
+      "nativeScreenshotSha256": "ce069cf2a11e413a1132c7a724e84c79ce20e4f95cae2c556459b8ba4b916ffa",
+      "nativeScrolledScreenshotSha256": "95dfe80782a32eb30aeb6f2258744fad9394a81ab0e7831e2b3a76e9d64bd29f",
+      "installedScrollAtEnd": 170
+    },
+    {
+      "name": "ShortTop",
+      "commandBarLocation": "Auto",
+      "frame": [
+        454,
+        262
+      ],
+      "firstInput": [
+        13,
+        66,
+        171,
+        23
+      ],
+      "lastInputAtEnd": [
+        13,
+        226,
+        171,
+        23
+      ],
+      "visibleFields": 6,
+      "nativeInputSha256": "e88f14c6e528e866ecfa686df1c60a73f6ee6f0c75cb249a80306f0588d48e03",
+      "nativeScreenshotSha256": "6ed5e42b0e1a70add3210d3baa347c14478d8d2ae597aeeabe41c119da2d1e8b",
+      "installedScrollAtEnd": 0
+    },
+    {
+      "name": "WrapTall",
+      "commandBarLocation": "Auto",
+      "frame": [
+        565,
+        760
+      ],
+      "firstInput": [
+        13,
+        66,
+        531,
+        23
+      ],
+      "lastInputAtEnd": [
+        13,
+        724,
+        531,
+        23
+      ],
+      "visibleFields": 30,
+      "nativeInputSha256": "aae2d1605f53be5485d749406c9e38dcb74d480859ebd4e356f445c6567064bc",
+      "nativeScreenshotSha256": "7c8b6a77e66755910783ea2f2a1e6f69112a8b3cb473db91af8d9fa025a826f7",
+      "nativeScrolledScreenshotSha256": "e9b63c777124d65edaa92be3bec89c0619fe89398fd2012266e59571a7483015",
+      "wide": {
+        "frame": [
+          1106,
+          550
+        ],
+        "screenshotSha256": "fe2dc19f00177255da25ec08f9f4ab9574c85628b769a844aa301b6416076d72",
+        "bodyScroll": false
+      },
+      "installedScrollAtEnd": 270
+    }
+  ],
+  "stalingrad": {
+    "document": "ПоступлениеНаСчетТекущихРасчетов",
+    "sourceSha256": "045dead34a69d01c6d83a354a9c2fb4f610302cd79a3a011636a2c1fce1821ef",
+    "nativeFrame": [
+      646,
+      760
+    ],
+    "nativeScreenshotsSha256": [
+      "8b72c2d517d0539456b69fde9e9729f6047fe223c8cfd71b0b31a5b425db46b6",
+      "c8876b077edae27b5226595ef21b680e7e44ab2526907740762e8cd02accdb9b"
+    ],
+    "before": {
+      "frameAt646": [
+        646,
+        861
+      ],
+      "frameAt750By780": [
+        735,
+        861
+      ]
+    },
+    "installed": {
+      "frameAt646": [
+        646,
+        760
+      ],
+      "frameAt750By780": [
+        750,
+        780
+      ],
+      "commandsBeforeAndAfter": [
+        13,
+        29,
+        613,
+        26
+      ],
+      "firstCourtReference": [
+        313,
+        317,
+        220,
+        23
+      ],
+      "footerMemoAtEnd": [
+        13,
+        696,
+        127,
+        51
+      ],
+      "bodyScrollAtEnd": 101,
+      "outerScroll": false
+    }
+  },
+  "remaining": [
+    "Left column layout and vertical offsets within Stalingrad.",
+    "Exact native scrollbar track and arrows, Windows geometry and acceptance."
+  ],
+  "declaredHeight": [
+    {
+      "name": "HeightTop",
+      "height": 18,
+      "commandBarLocation": "Auto",
+      "commandBarVisible": true,
+      "frame": [
+        454,
+        331
+      ],
+      "nativeInputSha256": "629bceda4987601f4bbbde0d845879898dd13c7df0ed674235337cbfe9652cc5",
+      "nativeScreenshotSha256": "70193c29667bffee5e2cc4d13baf471d9d10a0aa7074215967e66476fb9ffd1c"
+    },
+    {
+      "name": "HeightBottom",
+      "height": 18,
+      "commandBarLocation": "Bottom",
+      "commandBarVisible": true,
+      "frame": [
+        454,
+        340
+      ],
+      "nativeInputSha256": "0bfa9c0c529c3907984d10b8dd719e9d9ffe400790699255cec7958abe2e6787",
+      "nativeScreenshotSha256": "9e43c0ec6a99ac86721dad1b5caf23392452c62a20ae914d05a68eb3a240182f"
+    },
+    {
+      "name": "HeightTop10",
+      "height": 10,
+      "commandBarLocation": "Auto",
+      "commandBarVisible": true,
+      "frame": [
+        454,
+        203
+      ],
+      "nativeInputSha256": "3386c21af48f5f525ad4803634c462cfa40366b541c1961343ab723e7c2b379f",
+      "nativeScreenshotSha256": "a51f1c06542d0a8e68552d21a75dafbeaad9534c6bff0d3f1e38c1d5b91ace5d"
+    },
+    {
+      "name": "HeightTopDeclared",
+      "height": 18,
+      "commandBarLocation": "Top",
+      "commandBarVisible": true,
+      "frame": [
+        454,
+        331
+      ],
+      "nativeInputSha256": "3af5e4e912cebc84666516494a7f61718ce7fc453042901f8e0bb08751d929bd",
+      "nativeScreenshotSha256": "420907efd84d7b0607991756354e0821d63a3679701b39e65e43f74c859541c8"
+    },
+    {
+      "name": "HeightNone",
+      "height": 18,
+      "commandBarLocation": "None",
+      "commandBarVisible": false,
+      "frame": [
+        454,
+        340
+      ],
+      "nativeInputSha256": "7a24d7a528175146bb196da54fcdfe7626dc055d5cece72b6bde7c13f54d142c",
+      "nativeScreenshotSha256": "acfe515aa05681842e57516e054437e2a9a1da2cd027e108bf798dafe74572ee"
+    },
+    {
+      "name": "TopCenter",
+      "height": 18,
+      "commandBarLocation": "Auto",
+      "commandBarVisible": true,
+      "frame": [
+        454,
+        331
+      ],
+      "nativeInputSha256": "4f80afa7ba6fe2174a05613fca333fe26fbc85b99856c2222b2ed7435604a6c6",
+      "nativeScreenshotSha256": "523025bb44cfa4c93246d9e4642912f5ccb4952bbfb5813fc06d2b4b445b738f"
+    },
+    {
+      "name": "TopRight",
+      "height": 18,
+      "commandBarLocation": "Top",
+      "commandBarVisible": true,
+      "frame": [
+        454,
+        331
+      ],
+      "nativeInputSha256": "fbbd655a46af480b8aa3df5c3f034d3cd8c85a5726d5605a4557f23654eed1d8",
+      "nativeScreenshotSha256": "038bf38dd871950ba6eb99956c4fb4e3b2ab269c7b622b595eb97d449054611c"
+    },
+    {
+      "name": "TopEmpty",
+      "height": 18,
+      "commandBarLocation": "Auto",
+      "commandBarVisible": false,
+      "frame": [
+        454,
+        340
+      ],
+      "nativeInputSha256": "bd0def4c88fa98876d27c2503b8ce7010ea35c823b88642aad0fc9e713b234b4",
+      "nativeScreenshotSha256": "2689aee0fd2308c657f1f76f5319e4742e84d76716ca675f401230dc2f0768c4"
+    },
+    {
+      "name": "TopInvisible",
+      "height": 18,
+      "commandBarLocation": "Auto",
+      "commandBarVisible": false,
+      "frame": [
+        454,
+        340
+      ],
+      "nativeInputSha256": "06d02ea5907b8f9d21f15a4d244cb39d1ab42fce3915777b2f67728a9b6aa4b8",
+      "nativeScreenshotSha256": "4d2714d5ba9ac43dd511a63b18b9b5f9a36a6c9b5aea48264fa5244df716b94b"
+    },
+    {
+      "name": "TopShort",
+      "height": 18,
+      "commandBarLocation": "Auto",
+      "commandBarVisible": true,
+      "frame": [
+        454,
+        331
+      ],
+      "nativeInputSha256": "90b9c0afcd0b67a6cc4a0226ea7d704cebbc5d7d73ffda261865154037d15ee9",
+      "nativeScreenshotSha256": "325e57598640c07fa1d334bd5de1980a4c84949ebb3645de286e5b8277d2af24"
+    },
+    {
+      "name": "TopLarge",
+      "height": 31,
+      "commandBarLocation": "Auto",
+      "commandBarVisible": true,
+      "frame": [
+        454,
+        539
+      ],
+      "nativeInputSha256": "46c33b3e5997ea9ec0a09ada8ddaf158a5585ded04229e548220c52c70228dcb",
+      "nativeScreenshotSha256": "44e6c735d210bd1ec077119b6451c250f73681bbb8dffa66cf01c995d03ced65"
+    },
+    {
+      "name": "BottomRight",
+      "height": 18,
+      "commandBarLocation": "Bottom",
+      "commandBarVisible": true,
+      "frame": [
+        454,
+        340
+      ],
+      "nativeInputSha256": "f1cb6d556f7204e7643ca723a394b4faa32ef0f52cd1e54302f05d1174025201",
+      "nativeScreenshotSha256": "c576f57ee86c6e37233525510e467560887304a0d37a920bf42404ac9f94f653"
+    },
+    {
+      "name": "NoneShort",
+      "height": 18,
+      "commandBarLocation": "None",
+      "commandBarVisible": false,
+      "frame": [
+        454,
+        340
+      ],
+      "nativeInputSha256": "0c7cd7ce80ad4bf36810fa6e244ea239003c3b6c12a1bc1d939bb84d81ec26c0",
+      "nativeScreenshotSha256": "291ef6342d618f859bea071fcb3d69174251adf8b00b293cf4bcc1dcd4d23748"
+    }
+  ]
+}

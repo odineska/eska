@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "sourceFiles": {
+    "CompactHeader": "61ad7261eb7feb435cd13f2a9589a73a3636ba4b24c243d9ad2aabbd96887e7f"
+  },
+  "fixtures": {
+    "CompactHeader": {
+      "cases": [
+        {
+          "name": "Header61",
+          "frame": [644, null],
+          "viewport": [644, 84],
+          "controls": {
+            "Number": [69, null, 101, 23],
+            "Status": [180, null, 20, null],
+            "Version": [586, null, 32, 19]
+          },
+          "tolerancePx": 1,
+          "nativeCapture": "Header61.png",
+          "screenshotSha256": "ad481e8059bd45c75bb47dbb183132f6ec40ebd317cc0fbc1410bc3504b86b28"
+        },
+        {
+          "name": "Header96",
+          "frame": [994, null],
+          "viewport": [994, 84],
+          "controls": {
+            "Number": [69, null, 101, 23],
+            "Status": [180, null, 20, null],
+            "Version": [936, null, 32, 19]
+          },
+          "tolerancePx": 1,
+          "nativeCapture": "Header96.png",
+          "screenshotSha256": "107d78449aeef141dd24e8040c9609a3a1c85f9ec72e60adff0e970cf91cb4a4"
+        }
+      ]
+    }
+  }
+}

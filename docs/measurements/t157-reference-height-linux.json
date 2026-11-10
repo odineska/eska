@@ -1,0 +1,629 @@
+{
+  "platform": {
+    "os": "linux",
+    "architecture": "arm64",
+    "version": "8.3.27.2342",
+    "interface": "Taxi",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "source": "CommonForms/ПараметрыАдминистрированияПрограммы/Ext/Form.xml",
+  "compatibility": "Version8_3_24",
+  "vsixSha256": "05e74f2735831c01f271b657aa7e2483e984f6936587693efb9b2c8526e8a69a",
+  "bsp": [
+    {
+      "case": "AdminNatural",
+      "nativeFrame": [
+        546,
+        389
+      ],
+      "previousHeight": 389,
+      "openingViewport": [
+        1028,
+        492
+      ],
+      "measuredOnOpen": [
+        546,
+        389
+      ]
+    },
+    {
+      "case": "Admin30",
+      "nativeFrame": [
+        334,
+        468
+      ],
+      "previousHeight": 389,
+      "openingViewport": [
+        1028,
+        492
+      ],
+      "measuredOnOpen": [
+        334,
+        468
+      ]
+    },
+    {
+      "case": "Admin45",
+      "nativeFrame": [
+        484,
+        396
+      ],
+      "previousHeight": 389,
+      "openingViewport": [
+        1028,
+        492
+      ],
+      "measuredOnOpen": [
+        484,
+        396
+      ]
+    }
+  ],
+  "installedSuites": [
+    {
+      "locale": "en",
+      "suite": "body-scroll",
+      "states": 14,
+      "dirtyWidth": []
+    },
+    {
+      "locale": "en",
+      "suite": "native-nested-reflow",
+      "states": 65,
+      "dirtyWidth": [
+        {
+          "state": "main-dirty-width",
+          "preferred": [
+            334,
+            228
+          ]
+        },
+        {
+          "state": "detached-dirty-width",
+          "preferred": [
+            334,
+            228
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "suite": "native-wrapped-titles",
+      "states": 47,
+      "dirtyWidth": [
+        {
+          "state": "main-dirty-width",
+          "preferred": [
+            334,
+            346
+          ]
+        },
+        {
+          "state": "detached-dirty-width",
+          "preferred": [
+            334,
+            346
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "en",
+      "suite": "responsive-layout",
+      "states": 31,
+      "dirtyWidth": []
+    },
+    {
+      "locale": "ru",
+      "suite": "native-nested-reflow",
+      "states": 65,
+      "dirtyWidth": [
+        {
+          "state": "main-dirty-width",
+          "preferred": [
+            334,
+            228
+          ]
+        },
+        {
+          "state": "detached-dirty-width",
+          "preferred": [
+            334,
+            228
+          ]
+        }
+      ]
+    },
+    {
+      "locale": "ru",
+      "suite": "native-page-captions",
+      "states": 11,
+      "dirtyWidth": []
+    },
+    {
+      "locale": "ru",
+      "suite": "native-wrapped-titles",
+      "states": 47,
+      "dirtyWidth": [
+        {
+          "state": "main-dirty-width",
+          "preferred": [
+            334,
+            346
+          ]
+        },
+        {
+          "state": "detached-dirty-width",
+          "preferred": [
+            334,
+            346
+          ]
+        }
+      ]
+    }
+  ],
+  "stalingradStates": 24,
+  "largeFormPerformance": {
+    "baseline": {
+      "fieldCount": 164,
+      "loadMs": 532,
+      "editMs": [
+        383,
+        400,
+        384,
+        395
+      ],
+      "medianEditMs": 389.5,
+      "maxMainThreadTaskMs": 87,
+      "reportedHeight": "5274px"
+    },
+    "withoutScreenGuard": {
+      "fieldCount": 164,
+      "loadMs": 689,
+      "editMs": [
+        516,
+        599,
+        517,
+        599
+      ],
+      "medianEditMs": 558.0,
+      "maxMainThreadTaskMs": 272,
+      "reportedHeight": "5351px"
+    },
+    "verified": {
+      "fieldCount": 164,
+      "loadMs": 474,
+      "editMs": [
+        400,
+        433,
+        449,
+        399
+      ],
+      "medianEditMs": 416.5,
+      "maxMainThreadTaskMs": 86,
+      "reportedHeight": "5274px"
+    }
+  },
+  "additionalControlFrames": [
+    {
+      "case": "Base30",
+      "nativeFrame": [
+        334,
+        182
+      ],
+      "explorerPreferred": [
+        334,
+        182
+      ],
+      "explorerFrameAtPreferred": [
+        334,
+        182
+      ]
+    },
+    {
+      "case": "Base45",
+      "nativeFrame": [
+        484,
+        175
+      ],
+      "explorerPreferred": [
+        484,
+        175
+      ],
+      "explorerFrameAtPreferred": [
+        484,
+        175
+      ]
+    },
+    {
+      "case": "Memo30",
+      "nativeFrame": [
+        334,
+        345
+      ],
+      "explorerPreferred": [
+        334,
+        345
+      ],
+      "explorerFrameAtPreferred": [
+        334,
+        345
+      ]
+    },
+    {
+      "case": "Memo45",
+      "nativeFrame": [
+        484,
+        338
+      ],
+      "explorerPreferred": [
+        484,
+        338
+      ],
+      "explorerFrameAtPreferred": [
+        484,
+        338
+      ]
+    },
+    {
+      "case": "Table30",
+      "nativeFrame": [
+        334,
+        483
+      ],
+      "explorerPreferred": [
+        334,
+        476
+      ],
+      "explorerFrameAtPreferred": [
+        634,
+        476
+      ]
+    },
+    {
+      "case": "Table45",
+      "nativeFrame": [
+        484,
+        476
+      ],
+      "explorerPreferred": [
+        484,
+        476
+      ],
+      "explorerFrameAtPreferred": [
+        634,
+        476
+      ]
+    },
+    {
+      "case": "TableHeight30",
+      "nativeFrame": [
+        334,
+        308
+      ],
+      "explorerPreferred": [
+        334,
+        308
+      ],
+      "explorerFrameAtPreferred": [
+        634,
+        308
+      ]
+    },
+    {
+      "case": "MemoHeight30",
+      "nativeFrame": [
+        334,
+        308
+      ],
+      "explorerPreferred": [
+        334,
+        308
+      ],
+      "explorerFrameAtPreferred": [
+        334,
+        308
+      ]
+    },
+    {
+      "case": "FixedWidth15",
+      "nativeFrame": [
+        365,
+        175
+      ],
+      "explorerPreferred": [
+        184,
+        175
+      ],
+      "explorerFrameAtPreferred": [
+        365,
+        175
+      ]
+    }
+  ],
+  "tableWidthMeasurements": {
+    "stand": "form-native-admin-spacing-ExtTr0BK",
+    "authoredTableWidth": 60,
+    "horizontalStretch": false,
+    "cases": [
+      {
+        "case": "Table6",
+        "authoredFormWidth": 6,
+        "frame": [
+          94,
+          344
+        ],
+        "tableWidth": 60,
+        "canonicalSha256": "b6860c9c7d0d3839ee25cab36cb6663d59fd06da69944c5c64926034e9afe4cd",
+        "captureSha256": "f63df2d17cd8b3da179c28dd8ad9830be176338a5a834e857fb9b2af94dc26d4"
+      },
+      {
+        "case": "Table10",
+        "authoredFormWidth": 10,
+        "frame": [
+          134,
+          344
+        ],
+        "tableWidth": 100,
+        "canonicalSha256": "8a82686a42c3c420839867116ad38c6f128a9b21f75147d77292b3d0bdf78cc1",
+        "captureSha256": "8b0f77947ffda34df5f7b684ac1dc766e28d961d338be1a6416ed9f0dd4a0748"
+      },
+      {
+        "case": "Table15",
+        "authoredFormWidth": 15,
+        "frame": [
+          184,
+          344
+        ],
+        "tableWidth": 150,
+        "canonicalSha256": "3f950af545d7ba8fdd0fe4702d73dcba62075c4270f7aee9958155cc6c633948",
+        "captureSha256": "7866eb9e0383a2ea45c851dd69165748bbac1a66cb4c0951052672723f294903"
+      },
+      {
+        "case": "Table20",
+        "authoredFormWidth": 20,
+        "frame": [
+          234,
+          344
+        ],
+        "tableWidth": 200,
+        "canonicalSha256": "d8a08da9260fbda4f726ac4f5fa98c25477cc83c1618f5d693aff496eb3e1843",
+        "captureSha256": "fdd81451bee05fa617219712d536b03d8517101141ea8cbc4065d95946b0f773"
+      },
+      {
+        "case": "Table25",
+        "authoredFormWidth": 25,
+        "frame": [
+          284,
+          344
+        ],
+        "tableWidth": 250,
+        "canonicalSha256": "6669950549732e79b95665e6e3ca05e28886092593e8f3510c41885af1946337",
+        "captureSha256": "2a2104715676e72a3d258d1cae779a6d30dd57a3c6f3fb8a83b7cf6b8dc97f04"
+      },
+      {
+        "case": "Table30",
+        "authoredFormWidth": 30,
+        "frame": [
+          334,
+          344
+        ],
+        "tableWidth": 300,
+        "canonicalSha256": "85b90cc0b2feabae5ee2e324415eae771a9a52ac575eea54e732551e3559ec3b",
+        "captureSha256": "39b39e7525f0cbd0737aa4e4a29a4eec8aab606aadeb16824ab03a271e29c741"
+      },
+      {
+        "case": "Table45",
+        "authoredFormWidth": 45,
+        "frame": [
+          484,
+          344
+        ],
+        "tableWidth": 450,
+        "canonicalSha256": "eafdc7bd2d118cae049708042b89e60bb61df1a91343185bc9a340e169bd4fd0",
+        "captureSha256": "04e025849394977eb2b6d70673dc80d19c5888887f37c60ca7baa529e0a09bef"
+      },
+      {
+        "case": "Table65",
+        "authoredFormWidth": 65,
+        "frame": [
+          684,
+          344
+        ],
+        "tableWidth": 600,
+        "canonicalSha256": "60e7be6dbef422d9629a460000b370ff3e9622fb42140f2a2259effbcf17f188",
+        "captureSha256": "a461be736a94b70c3fc49c7cd1723f079ea6ea63e59c999ac62a417968ba73ff"
+      },
+      {
+        "case": "Table80",
+        "authoredFormWidth": 80,
+        "frame": [
+          834,
+          344
+        ],
+        "tableWidth": 600,
+        "canonicalSha256": "94cc53a0d0854955977ef4262006c0994bf991366e71b61b6f3e561f21a915eb",
+        "captureSha256": "64709fea0162c7a4d0f356666de75e5a63e3c96855a0c7de43da7f51fd97488d"
+      },
+      {
+        "case": "Bare6",
+        "authoredFormWidth": 6,
+        "frame": [
+          94,
+          309
+        ],
+        "tableWidth": 60,
+        "canonicalSha256": "a8aa7f9c2531893299dc0a1c838cd9ed51dff5f7183677681ed34db4301532a8",
+        "captureSha256": "3629734cfea4b60ec5d6ae2d7efcc5d171dc8a0d67f450faf37adc44eced0c6e"
+      },
+      {
+        "case": "Bare10",
+        "authoredFormWidth": 10,
+        "frame": [
+          134,
+          309
+        ],
+        "tableWidth": 100,
+        "canonicalSha256": "a18a54ec20f46eb981f827d88b86675f21aca7533f8a75e8f44246434c79f9ee",
+        "captureSha256": "dddc2b5dfb59773856c2474865b193d4c8fe5cfe1099d2e20ffbdc510fac13bc"
+      },
+      {
+        "case": "Bare15",
+        "authoredFormWidth": 15,
+        "frame": [
+          184,
+          309
+        ],
+        "tableWidth": 150,
+        "canonicalSha256": "7f09e8243255b9ec916b5c98ce9b1874caf4065ebbd9008c3b9b7028bb77063c",
+        "captureSha256": "c97c324a936fdf9a44f2bc1a5f18912123907a5cca16de7541787516cb43b554"
+      },
+      {
+        "case": "Bare20",
+        "authoredFormWidth": 20,
+        "frame": [
+          234,
+          309
+        ],
+        "tableWidth": 200,
+        "canonicalSha256": "781d9d53bf7906cb7dcb999de924d4c4a0e3b45aa694ad050c33d8baa25181c4",
+        "captureSha256": "b601a21cc43c8612900280e3d4e9031177f8e6e5f7444dae8647bdbf69266b91"
+      }
+    ]
+  },
+  "outlineVerification": {
+    "measurement": "Outer black stroke without shadow. Corrected the native frame sizes of the small control and table cases.",
+    "explorerCommit": "d3f39cf",
+    "vsixSha256": "4dfa7b0b9862a41ce3099c09157986977e36a009c7cb1d84061a439f944e53a4",
+    "controlFrames": [
+      {
+        "case": "Base30",
+        "frame": [
+          334,
+          182
+        ],
+        "measuredFields": 3,
+        "bottomCommand": [
+          253,
+          142,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "Base45",
+        "frame": [
+          484,
+          175
+        ],
+        "measuredFields": 3,
+        "bottomCommand": [
+          403,
+          135,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "Memo30",
+        "frame": [
+          334,
+          345
+        ],
+        "measuredFields": 4,
+        "bottomCommand": [
+          253,
+          305,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "Memo45",
+        "frame": [
+          484,
+          338
+        ],
+        "measuredFields": 4,
+        "bottomCommand": [
+          403,
+          298,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "Table30",
+        "frame": [
+          334,
+          483
+        ],
+        "measuredFields": 3,
+        "bottomCommand": [
+          253,
+          443,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "Table45",
+        "frame": [
+          484,
+          476
+        ],
+        "measuredFields": 3,
+        "bottomCommand": [
+          403,
+          436,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "TableHeight30",
+        "frame": [
+          334,
+          308
+        ],
+        "measuredFields": 2,
+        "bottomCommand": [
+          253,
+          268,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "MemoHeight30",
+        "frame": [
+          334,
+          308
+        ],
+        "measuredFields": 4,
+        "bottomCommand": [
+          253,
+          268,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "FixedWidth15",
+        "frame": [
+          365,
+          175
+        ],
+        "measuredFields": 3,
+        "bottomCommand": [
+          284,
+          135,
+          60,
+          26
+        ]
+      }
+    ]
+  }
+}

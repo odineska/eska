@@ -1,0 +1,492 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "sourceFiles": {
+    "MixedInputStack": "33af7ea4b4cde54d6bbaf49a796759ed50bcfb1c719974a9eb830080b519ba70"
+  },
+  "fixtures": {
+    "MixedInputStack": {
+      "cases": [
+        {
+          "name": "wide input stack uses the automatic maximum",
+          "frame": [
+            1034,
+            450
+          ],
+          "nativeCapture": "Mixed100.png",
+          "screenshotSha256": "2b1bdd773ec2697e927ee42a1295de549f980231539c1834ba97c1b4c2212fe4",
+          "controls": {
+            "ServiceRef": [
+              143,
+              null,
+              410,
+              23
+            ],
+            "Trace": [
+              143,
+              null,
+              410,
+              23
+            ],
+            "Short": [
+              143,
+              null,
+              410,
+              23
+            ],
+            "Any": [
+              143,
+              null,
+              411,
+              23
+            ],
+            "Outgoing": [
+              210,
+              null,
+              410,
+              23
+            ]
+          }
+        },
+        {
+          "name": "compressed input stack shares the leading edge and wraps its own caption",
+          "frame": [
+            634,
+            450
+          ],
+          "nativeCapture": "Mixed60.png",
+          "screenshotSha256": "61cef79c55c44e59a490b0cbbb67c836f00b4961dc7ac8c51badf0a7fac49e72",
+          "controls": {
+            "ServiceRef": [
+              130,
+              null,
+              null,
+              23
+            ],
+            "Trace": [
+              130,
+              null,
+              null,
+              23
+            ],
+            "Short": [
+              130,
+              null,
+              null,
+              23
+            ],
+            "Any": [
+              130,
+              null,
+              null,
+              23
+            ]
+          },
+          "alignedEndX": [
+            "Outgoing",
+            "ServiceRef",
+            "Trace",
+            "Short",
+            "Any"
+          ],
+          "captions": {
+            "Trace": [
+              "УИД формы",
+              "оплаты:"
+            ]
+          }
+        },
+        {
+          "name": "independent compressed stack chooses the shorter shared caption",
+          "frame": [
+            434,
+            450
+          ],
+          "nativeCapture": "Plain40.png",
+          "screenshotSha256": "a5a59866f73caf74354dc89c761ae4e58f9f2f91797f31d760fa84b3d11ec7d1",
+          "controls": {
+            "ServiceRef": [
+              130,
+              62,
+              283,
+              23
+            ],
+            "Trace": [
+              130,
+              94,
+              283,
+              23
+            ],
+            "Short": [
+              130,
+              133,
+              283,
+              23
+            ],
+            "Any": [
+              130,
+              165,
+              283,
+              23
+            ]
+          },
+          "captions": {
+            "Trace": [
+              "УИД формы",
+              "оплаты:"
+            ]
+          },
+          "edit": {
+            "groups": {
+              "Courts": {
+                "Visible": "false"
+              },
+              "Settlements": {
+                "Visible": "false"
+              }
+            }
+          }
+        },
+        {
+          "name": "manual input maximum survives in the independent stack",
+          "frame": [
+            734,
+            450
+          ],
+          "nativeCapture": "PlainExplicitCap.png",
+          "screenshotSha256": "2a1307d753478712c15fe89e1f8a1616fad8102b579227f8cec5e43b83818ac1",
+          "controls": {
+            "ServiceRef": [
+              143,
+              62,
+              410,
+              23
+            ],
+            "Trace": [
+              143,
+              94,
+              410,
+              23
+            ],
+            "Short": [
+              143,
+              126,
+              200,
+              23
+            ],
+            "Any": [
+              143,
+              158,
+              411,
+              23
+            ]
+          },
+          "edit": {
+            "groups": {
+              "Courts": {
+                "Visible": "false"
+              },
+              "Settlements": {
+                "Visible": "false"
+              }
+            },
+            "fields": {
+              "Short": {
+                "AutoMaxWidth": "false",
+                "MaxWidth": "19"
+              }
+            }
+          }
+        },
+        {
+          "name": "dirty picture width 1 uses its own painted maximum",
+          "frame": [
+            874,
+            450
+          ],
+          "nativeCapture": "Picture01084.png",
+          "screenshotSha256": "ca87f127c3d94be918351dbc1c93df8a6edb77f1d50a0e79484c4c69fa791ebf",
+          "controlSizes": {
+            "OutgoingStatus": [
+              12,
+              20
+            ],
+            "IncomingStatus": [
+              12,
+              20
+            ]
+          },
+          "edit": {
+            "fields": {
+              "OutgoingStatus": {
+                "Width": "1",
+                "MaxWidth": "1"
+              },
+              "IncomingStatus": {
+                "Width": "1",
+                "MaxWidth": "1"
+              }
+            }
+          }
+        },
+        {
+          "name": "dirty picture width 3 uses its own painted maximum",
+          "frame": [
+            874,
+            450
+          ],
+          "nativeCapture": "Picture03084.png",
+          "screenshotSha256": "6b1241d0ede5c73dc2c66fe11d5bdbdc5b5d8025ee60bdbdae97a54a5127b942",
+          "controlSizes": {
+            "OutgoingStatus": [
+              32,
+              20
+            ],
+            "IncomingStatus": [
+              32,
+              20
+            ]
+          },
+          "edit": {
+            "fields": {
+              "OutgoingStatus": {
+                "Width": "3",
+                "MaxWidth": "3"
+              },
+              "IncomingStatus": {
+                "Width": "3",
+                "MaxWidth": "3"
+              }
+            }
+          }
+        },
+        {
+          "name": "nested fields set the natural leading width",
+          "frame": [
+            767,
+            450
+          ],
+          "nativeCapture": "Stack000.png",
+          "screenshotSha256": "177b4969d104d1037985b673f819113cf077d9d14074fac25806497ad9e5b19a",
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              344,
+              23
+            ],
+            "OutgoingStatus": [
+              564,
+              153,
+              20,
+              20
+            ],
+            "OutgoingOrg": [
+              594,
+              null,
+              152,
+              19
+            ],
+            "ServiceRef": [
+              143,
+              240,
+              410,
+              23
+            ]
+          },
+          "preferredWidth": 767,
+          "edit": {
+            "form": {
+              "Width": null
+            }
+          }
+        },
+        {
+          "name": "nested fields and the mixed row shrink together",
+          "frame": [
+            684,
+            450
+          ],
+          "nativeCapture": "Stack065.png",
+          "screenshotSha256": "f19737184fc8041450813ea7c920e0e2424657ec3331859a4621446fced3127a",
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              280,
+              23
+            ],
+            "OutgoingStatus": [
+              500,
+              153,
+              18,
+              20
+            ],
+            "OutgoingOrg": [
+              528,
+              null,
+              135,
+              19
+            ],
+            "ServiceRef": [
+              130,
+              240,
+              360,
+              23
+            ]
+          }
+        },
+        {
+          "name": "fixed field and trailing controls determine the minimum frame",
+          "frame": [
+            599,
+            null
+          ],
+          "nativeCapture": "Anchor048.png",
+          "screenshotSha256": "38e902c95d97496a080bb93b2908585df795f8dcf36df075c97c3aab65105cde",
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              274,
+              23
+            ],
+            "OutgoingStatus": [
+              494,
+              153,
+              12,
+              20
+            ],
+            "OutgoingOrg": [
+              516,
+              null,
+              62,
+              19
+            ],
+            "ServiceRef": [
+              130,
+              272,
+              354,
+              23
+            ],
+            "Anchor": [
+              13,
+              217,
+              471,
+              23
+            ]
+          },
+          "viewport": [
+            514,
+            450
+          ],
+          "edit": {
+            "fields": {
+              "Anchor": {
+                "Visible": "true"
+              }
+            }
+          }
+        },
+        {
+          "name": "fixed field sets the leading floor without consuming the surplus",
+          "frame": [
+            634,
+            450
+          ],
+          "nativeCapture": "Anchor060.png",
+          "screenshotSha256": "6809dc4023cbafd4af03009bdd5188dff1f15bae8bfdecff48752937012b5af7",
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              288,
+              23
+            ],
+            "OutgoingStatus": [
+              508,
+              153,
+              13,
+              20
+            ],
+            "OutgoingOrg": [
+              531,
+              null,
+              82,
+              19
+            ],
+            "ServiceRef": [
+              130,
+              272,
+              368,
+              23
+            ],
+            "Anchor": [
+              13,
+              217,
+              471,
+              23
+            ]
+          },
+          "edit": {
+            "fields": {
+              "Anchor": {
+                "Visible": "true"
+              }
+            }
+          }
+        },
+        {
+          "name": "authored trailing label width contributes to the natural frame",
+          "frame": [
+            877,
+            450
+          ],
+          "nativeCapture": "WideTail000.png",
+          "screenshotSha256": "b53ecd32f2a37a5a1381398afa09210c36ec203d1537d1e5f4aab2a8e803ee01",
+          "controls": {
+            "Outgoing": [
+              210,
+              153,
+              344,
+              23
+            ],
+            "OutgoingStatus": [
+              564,
+              153,
+              20,
+              20
+            ],
+            "OutgoingOrg": [
+              594,
+              null,
+              262,
+              19
+            ],
+            "ServiceRef": [
+              143,
+              240,
+              410,
+              23
+            ]
+          },
+          "preferredWidth": 877,
+          "edit": {
+            "form": {
+              "Width": null
+            },
+            "fields": {
+              "OutgoingOrg": {
+                "Width": "26"
+              },
+              "IncomingOrg": {
+                "Width": "26"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -41,12 +41,12 @@ pub use palette::{
     PlatformPropertyValue, PropertyPalette,
 };
 pub use parsing::parse;
-pub use pictures::{ButtonRepresentation, FormPicture};
+pub use pictures::{ButtonRepresentation, FormPicture, FormPictureSelection};
 pub use preparation::{FormInput, FormInputSource, FormPreparation, prepare};
 pub use presentation::{
     ElementPresentation, FieldTitleLocation, FieldType, FieldValueKind, FormGrouping,
-    FormPresentation, FormScriptVariant, NumberSign, PresentationText, TableColumnAppearance,
-    TabularTotalCaption, present,
+    FormPresentation, FormScriptVariant, InspectorDataField, NumberSign, PresentationText,
+    TableColumnAppearance, TabularTotalCaption, present,
 };
 pub use references::{FormReference, ReferenceSlot};
 pub use resources::FormResource;

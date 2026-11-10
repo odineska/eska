@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "profile": {
+    "platform": "8.3.27.2342",
+    "os": "Linux ARM64 ALT 10",
+    "dpi": 96,
+    "zoom": 100
+  },
+  "coreCommit": "df30a84b64bb4a4b7c19ee299b977400773ece5a",
+  "explorerCommits": [
+    "f0f52caeaa9c56e5b93b066614c1fa1541bf638c",
+    "55336f9efc3909817876f960ce328f8cfe512fe0"
+  ],
+  "artifacts": {
+    "backendSha256": "08b99218e5aff53a31d0b959dd28c6b7df652bd81d701adc1972282cd328d3c4",
+    "vsixSha256": "6452075d90facac43c137ccb8abbb8ef996ab6a0208ba8ff124ba5efa25c33d3"
+  },
+  "installed": [
+    {
+      "locale": "ru",
+      "matchingFrames": 15,
+      "matchingFields": 141,
+      "comparedPictures": 97,
+      "exactPictures": 61,
+      "comparedRgbPixels": 24024,
+      "differentRgbPixels": 1467,
+      "persistentFixtureForms": 5,
+      "persistentFixtureFields": 57,
+      "persistentFixtureRgbPixels": 7460,
+      "dirtyDetachedPicture": [
+        [
+          16,
+          16
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "replacedResourceRgb": [
+        16,
+        96,
+        192
+      ],
+      "restoredResourceRgb": [
+        224,
+        32,
+        32
+      ]
+    },
+    {
+      "locale": "en",
+      "matchingFrames": 15,
+      "matchingFields": 141,
+      "comparedPictures": 97,
+      "exactPictures": 61,
+      "comparedRgbPixels": 24024,
+      "differentRgbPixels": 1467,
+      "persistentFixtureForms": 5,
+      "persistentFixtureFields": 57,
+      "persistentFixtureRgbPixels": 7460,
+      "dirtyDetachedPicture": [
+        [
+          16,
+          16
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          16,
+          16
+        ]
+      ],
+      "replacedResourceRgb": [
+        16,
+        96,
+        192
+      ],
+      "restoredResourceRgb": [
+        224,
+        32,
+        32
+      ]
+    }
+  ],
+  "stalingrad": {
+    "forms": [
+      "НастройкиАвторизацииИнтернетСервисов.ФормаЭлемента",
+      "УчетныеЗаписиЭлектроннойПочты.ФормаЭлемента",
+      "ПанельАдминистрированияБСП.ОбщиеНастройки"
+    ],
+    "displayedPictures": [
+      1,
+      1,
+      2
+    ],
+    "sourceXmlUnchanged": true
+  },
+  "validation": {
+    "cargoPassed": 1585,
+    "cargoIgnored": 19,
+    "cargoFmtCheckClippy": true,
+    "bunPassed": 740,
+    "bunSkipped": 8,
+    "explorerCheckCompileVsixIntegrity": true,
+    "priorInputAndReferenceSuites": true,
+    "pictureCompositionRuEn": true
+  },
+  "remaining": [
+    "Сглаживание полупрозрачных и масштабированных SVG, оттенки недоступных значков.",
+    "Калибровка остальных стандартных изображений и других DPI.",
+    "Нативная сверка Windows с паролем, Ref=0, двумя видимыми кнопками и заменой ресурса в отдельном окне."
+  ]
+}

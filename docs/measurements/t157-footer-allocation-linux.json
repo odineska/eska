@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "explorerCommit": "638ca9a1fa217f6e0e01b14413386240c8284082",
+  "nativeMatrix": {
+    "file": "form-native-footer-allocation-heW5Zkmk/preview-ru/captures.json",
+    "sha256": "e2d1c8ad6e70496812c13f491206b9f3c9ac60673450f6ed68cc7cf7f86d82a0"
+  },
+  "installedRegression": {
+    "ru": {
+      "file": "footer-regression-ru-nFQJGgix/receipt.json",
+      "sha256": "dfdf7eb4f13cf9c6a33704eb6777467875a56dc4156bb0e1244045a18f91371b"
+    },
+    "en": {
+      "file": "footer-regression-en-r1iBt96J/receipt.json",
+      "sha256": "8bc53f5ab95f58b07408e42778b784a64a495c718663781fce022d877e5e316b"
+    }
+  },
+  "stalingrad": {
+    "receipt": {
+      "file": "footer-stalingrad-S8JmXghC/receipt.json",
+      "sha256": "ae13daefbd0c3d69d2cb2365e65f2b1a3b54a4a2a4c77c1920df5fd474d2e5ad"
+    },
+    "geometry": {
+      "file": "footer-stalingrad-S8JmXghC/geometry.json",
+      "sha256": "94040b9d7482edef78cb77296b9efacb643304eb0529fb4cc3a258679edc8fae"
+    },
+    "sourceXmlUnchanged": true,
+    "positions": "Relative to the frame edge. The narrow installed frame is taller to avoid a vertical scrollbar changing the available width.",
+    "settlementFooter": [
+      {
+        "case": "native",
+        "native": {
+          "capture": {
+            "file": "form-native-stalingrad-divider-mUIIVHJY/preview-ru/divider-current-3440-form.png",
+            "sha256": "1cd602012ec1c0e9d8bf52ea9c69d8fa9dd8d7aa1002250d7de24931f561fc26"
+          },
+          "comment": [13, 659, 511, 55],
+          "correctedCaptionX": 534,
+          "ownerCaptionX": 865
+        },
+        "installed": {
+          "frame": [1430, 726],
+          "comment": [13, 662, 511, 51],
+          "correctedCaptionX": 534,
+          "ownerCaptionX": 867
+        }
+      },
+      {
+        "case": "middle",
+        "native": {
+          "capture": {
+            "file": "form-native-stalingrad-divider-mUIIVHJY/preview-ru/divider-preset-1680-form.png",
+            "sha256": "4840598a365442bd579607d9bc7000db66f3a841837e48995a2a9048df6d271f"
+          },
+          "comment": [13, 659, 472, 57],
+          "correctedCaptionX": 495,
+          "ownerCaptionX": 770
+        },
+        "installed": {
+          "frame": [1285, 728],
+          "comment": [13, 664, 374, 51],
+          "correctedCaptionX": 397,
+          "ownerCaptionX": 730
+        }
+      },
+      {
+        "case": "compact",
+        "native": {
+          "capture": {
+            "file": "form-native-stalingrad-divider-mUIIVHJY/preview-ru/divider-preset-1400-form.png",
+            "sha256": "c6de0bc388f7c5d996c8895a2fb6e0157dc9b31cf66b63ad938f585a0aac662c"
+          },
+          "comment": [13, 666, 313, 57],
+          "correctedCaptionX": 336,
+          "ownerCaptionX": 600
+        },
+        "installed": {
+          "frame": [1083, 900],
+          "comment": [13, 836, 172, 51],
+          "correctedCaptionX": 195,
+          "ownerCaptionX": 528
+        }
+      }
+    ]
+  },
+  "inheritedVerticalAlignment": {
+    "explorerCommit": "7155b9b5141dffce00c30e11b65a24460f2ffe1d",
+    "nativeMatrix": {
+      "file": "form-native-footer-allocation-GKACF47P/preview-ru/captures.json",
+      "sha256": "733fbec0ae5ebf6bc89241385cd84739b933295df42c11b4ad44940c4deb265a"
+    },
+    "installedRegression": {
+      "ru": {
+        "file": "footer-tests-ru-kG4jS5wG/column-widths/receipt.json",
+        "sha256": "3c0511c43623cf6775f49e337ef1ab3690907941bd2927d46cdd64bdd07feec3"
+      },
+      "en": {
+        "file": "footer-tests-en-RI8xkNpg/column-widths/receipt.json",
+        "sha256": "260846ae8c40a20eaf561c475aa1df1174e6cb8a745709ee8f8681a8570d2ce2"
+      }
+    },
+    "cases": [
+      {
+        "name": "the nested row inherits bottom alignment",
+        "fixedValueTop": 91
+      },
+      {
+        "name": "the nested row inherits centered alignment",
+        "fixedValueTop": 64.5
+      },
+      {
+        "name": "the nested row inherits top alignment",
+        "fixedValueTop": 38
+      },
+      {
+        "name": "the nested row can override inherited alignment",
+        "fixedValueTop": 38
+      }
+    ],
+    "stalingradReceipt": {
+      "file": "footer-alignment-stalingrad-lTSuw4Mc/receipt.json",
+      "sha256": "e178413c8cb266d1f0e88a6bc3be977562675c1d859f6ba9f009797635eab11a"
+    },
+    "stalingradGeometry": {
+      "file": "footer-alignment-stalingrad-lTSuw4Mc/geometry.json",
+      "sha256": "fd16acc7dd99c6197b8d49ed2f38bab054842db6c1fa70b827fc54d9d627ca60"
+    },
+    "stalingradWide": {
+      "correctedCaptionTop": 696.5
+    }
+  },
+  "remaining": [
+    "Width and wrap thresholds of the label captions in the narrow settlement footer.",
+    "Height of the multiline field and first-line alignment when the captions wrap in the settlement footer.",
+    "Independent Windows verification."
+  ]
+}

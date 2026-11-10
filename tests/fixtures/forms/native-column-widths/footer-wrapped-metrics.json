@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "sourceFiles": {
+    "FooterWrapped": "1c4938e23068c4f056e7f434c1c151eec2a218ea6c9c4da57fa74da80f1e1f3e"
+  },
+  "fixtures": {
+    "FooterWrapped": {
+      "cases": [
+        {
+          "name": "long captions fit on one line at wide width",
+          "frame": [1444, 250],
+          "nativeCapture": "NearNatural.png",
+          "screenshotSha256": "cd11c6426dfe776f09cc3d4f14e52560b0c8c8c9f1402186116ee49cfa854f49",
+          "tolerancePx": 2,
+          "controls": {
+            "Memo": [13, null, 511, null],
+            "Fixed": [702, null, 158, null],
+            "Owner": [972, null, 155, null],
+            "Amount": [1265, null, 152, null]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый документ:"
+            ],
+            "Owner": [
+              "Ответственный:"
+            ],
+            "Amount": [
+              "Сумма документа:"
+            ]
+          }
+        },
+        {
+          "name": "mixed labels wrap while their values share the reduced width",
+          "frame": [1274, 250],
+          "nativeCapture": "Medium.png",
+          "screenshotSha256": "ae0bd074edd63842eb12993a1098f54b590a4290bd995ab9ea2963011a96e68d",
+          "tolerancePx": 12,
+          "controls": {
+            "Memo": [13, null, 457, null],
+            "Fixed": [588, 83, 158, 19],
+            "Owner": [858, 83, 142, 19],
+            "Amount": [1095, 78, 152, 19]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый",
+              "документ:"
+            ],
+            "Owner": [
+              "Ответственный:"
+            ],
+            "Amount": [
+              "Сумма",
+              "документа:"
+            ]
+          }
+        },
+        {
+          "name": "a compact mixed row retains all caption words",
+          "frame": [1094, 250],
+          "nativeCapture": "Compact.png",
+          "screenshotSha256": "415a4271de25f2e575ec4505c6a3d7830718d34bcd54c2f16044a50361e3466c",
+          "tolerancePx": 6,
+          "controls": {
+            "Memo": [13, null, 319, null],
+            "Fixed": [449, 83, 146, 19],
+            "Owner": [707, 83, 113, 19],
+            "Amount": [915, 78, 152, 19]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый",
+              "документ:"
+            ],
+            "Owner": [
+              "Ответственный:"
+            ],
+            "Amount": [
+              "Сумма",
+              "документа:"
+            ]
+          }
+        },
+        {
+          "name": "the reference values contract with the multiline input",
+          "frame": [994, 250],
+          "nativeCapture": "Small.png",
+          "screenshotSha256": "67d9adba0e72a345c5a905ea6320365760c855136429f7276d710eae410f7d62",
+          "tolerancePx": 6,
+          "controls": {
+            "Memo": [13, null, 253, null],
+            "Fixed": [384, 83, 123, 19],
+            "Owner": [619, 83, 101, 19],
+            "Amount": [815, 78, 152, 19]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый",
+              "документ:"
+            ],
+            "Owner": [
+              "Ответственный:"
+            ],
+            "Amount": [
+              "Сумма",
+              "документа:"
+            ]
+          }
+        },
+        {
+          "name": "mixed tracks retain the trailing amount at a narrow width",
+          "frame": [874, 250],
+          "nativeCapture": "Narrow.png",
+          "screenshotSha256": "86c94de0b8cfcbd01254be614006018ca4df33e12d508d72f4000dc20e06eeba",
+          "tolerancePx": 5,
+          "controls": {
+            "Memo": [13, null, 179, null],
+            "Fixed": [309, 83, 96, 19],
+            "Owner": [517, 83, 84, 19],
+            "Amount": [695, 78, 152, 19]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый",
+              "документ:"
+            ],
+            "Owner": [
+              "Ответственный:"
+            ],
+            "Amount": [
+              "Сумма",
+              "документа:"
+            ]
+          }
+        },
+        {
+          "name": "a dirty fixed reference preserves its value width",
+          "frame": [1094, 250],
+          "nativeCapture": "CompactFixed.png",
+          "screenshotSha256": "aba48ffe873f2c6bbf6672bd5511f378a6eba1fe8dc3c11189fdde897e63ce3f",
+          "tolerancePx": 8,
+          "controls": {
+            "Memo": [13, null, 313, null],
+            "Fixed": [444, 83, 152, 19],
+            "Owner": [708, 83, 112, 19],
+            "Amount": [915, 78, 152, 19]
+          },
+          "captions": {
+            "Fixed": [
+              "Корректируемый",
+              "документ:"
+            ],
+            "Owner": [
+              "Ответственный:"
+            ],
+            "Amount": [
+              "Сумма",
+              "документа:"
+            ]
+          },
+          "edit": {
+            "fixedFields": [
+              "Fixed"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -18,6 +18,9 @@ use crate::project::{
 use serde::Serialize;
 
 mod incomplete;
+mod inspector_data;
+
+pub use inspector_data::InspectorDataField;
 
 #[derive(Clone, Debug, Serialize)]
 #[serde(tag = "kind", rename_all = "camelCase")]
@@ -120,6 +123,8 @@ pub struct ElementPresentation {
     pub mark_incomplete: bool,
     pub title_location: FieldTitleLocation,
     pub picture: Option<super::FormPicture>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub choice_button_picture: Option<super::FormPictureSelection>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub button_representation: Option<ButtonRepresentation>,
     pub caption: PresentationText,
@@ -345,22 +350,24 @@ fn present_element(
         .map(|value| choices(&value.property.value, resources))
         .filter(|values| !values.is_empty())
         .unwrap_or_else(|| enum_choices(&value_type, resources));
-    let (picture, button_representation) = element_picture(
+    let pictures = element_pictures(
         element,
         scope,
         command.as_ref(),
         resources,
         &mut appearance.diagnostics,
     );
-    let (auto_command_items, object_command_menu) = if element.kind == Some(ElementKind::Form) {
-        let commands = super::root_commands::project(form, resources, &mut appearance.diagnostics);
-        (commands.inline, commands.object_menu)
-    } else {
-        (
-            element_commands(element, &value_type, form, resources, sources),
-            Vec::new(),
-        )
-    };
+    let super::root_commands::RootCommands {
+        inline: auto_command_items,
+        object_menu: object_command_menu,
+    } = element_commands(
+        element,
+        &value_type,
+        form,
+        resources,
+        sources,
+        &mut appearance.diagnostics,
+    );
     let auto_commands = standard_form_commands(&auto_command_items);
     let mark_incomplete = incomplete::mark(element, binding.as_ref(), resources);
     ElementPresentation {
@@ -379,8 +386,9 @@ fn present_element(
                 )),
         mark_incomplete,
         title_location: title_location(element),
-        picture,
-        button_representation,
+        picture: pictures.picture,
+        choice_button_picture: pictures.choice,
+        button_representation: pictures.representation,
         caption,
         tabular_total,
         tooltip: element
@@ -433,13 +441,19 @@ fn element_colors(
     (foreground, background, border, title_color)
 }
 
-fn element_picture(
+struct ElementPictures {
+    picture: Option<super::FormPicture>,
+    choice: Option<super::FormPictureSelection>,
+    representation: Option<ButtonRepresentation>,
+}
+
+fn element_pictures(
     element: &EffectiveElement,
     scope: VisitScope<'_>,
     command: Option<&ResolvedCommand<'_>>,
     resources: &[FormResource],
     diagnostics: &mut Vec<AppearanceDiagnostic>,
-) -> (Option<super::FormPicture>, Option<ButtonRepresentation>) {
+) -> ElementPictures {
     let button = element.kind == Some(ElementKind::Button);
     let picture = if let Some(property) = element.property("Picture") {
         pictures::form_picture(property, resources, diagnostics)
@@ -462,7 +476,18 @@ fn element_picture(
             automatic,
         )
     });
-    (picture, representation)
+    let choice = if element.kind == Some(ElementKind::InputField) {
+        element
+            .property("ChoiceButtonPicture")
+            .and_then(|property| pictures::form_picture_selection(property, resources, diagnostics))
+    } else {
+        None
+    };
+    ElementPictures {
+        picture,
+        choice,
+        representation,
+    }
 }
 
 fn table_column_appearance(
@@ -571,8 +596,15 @@ fn element_commands(
     form: &ComposedForm,
     resources: &[FormResource],
     sources: &SourceItems<'_>,
-) -> Vec<super::AutoCommandItem> {
-    match element.kind {
+    diagnostics: &mut Vec<AppearanceDiagnostic>,
+) -> super::root_commands::RootCommands {
+    use super::root_commands::{self, RootCommands};
+
+    let inline = match element.kind {
+        Some(ElementKind::Form) => return root_commands::project(form, resources, diagnostics),
+        Some(ElementKind::CommandBar) if element.scalar("CommandSource") == Some("Form") => {
+            return root_commands::project_standalone(form, element, resources);
+        }
         Some(ElementKind::Table) => super::commands::table(element, value_type),
         Some(ElementKind::CommandBar) => super::commands::table_source(element, sources)
             .map(|table| {
@@ -581,6 +613,10 @@ fn element_commands(
             })
             .unwrap_or_default(),
         _ => Vec::new(),
+    };
+    RootCommands {
+        inline,
+        ..RootCommands::default()
     }
 }
 

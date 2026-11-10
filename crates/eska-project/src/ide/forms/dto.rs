@@ -4,8 +4,8 @@ use crate::ide::dto::{self, Labels};
 use eska_project_core::project::{
     forms::{
         ComposedForm, EffectiveDefinition, EffectiveElement, ElementIdentity, ElementKey,
-        ElementPresentation, FormDependency, FormDependencyRole, FormPart, FormPreparation,
-        FormPreview, PropertySource, SourcedProperty,
+        ElementPresentation, FormDependency, FormDependencyRole, FormPart, FormPicture,
+        FormPictureSelection, FormPreparation, FormPreview, PropertySource, SourcedProperty,
     },
     metadata_model::MetadataKind,
     metadata_parser::LocatedProperty,
@@ -44,7 +44,7 @@ fn element(
     form: &ComposedForm,
     value: &EffectiveElement,
     presentations: &HashMap<&ElementIdentity, &ElementPresentation>,
-    layout_additions: bool,
+    api_minor: u32,
 ) -> Value {
     let presentation = presentations.get(&value.identity).map(|presentation| {
         let mut value = json!({"grouping":presentation.grouping,"united":presentation.united,"displayed":presentation.displayed,"markIncomplete":presentation.mark_incomplete,"titleLocation":presentation.title_location,"picture":presentation.picture,"caption":presentation.caption,"tooltip":presentation.tooltip,"footerText":presentation.footer_text,"valueType":presentation.value_type,"binding":presentation.binding,"choices":presentation.choices,
@@ -59,6 +59,11 @@ fn element(
         if let Some(mode) = presentation.button_representation {
             value["buttonRepresentation"] = json!(mode);
         }
+        if api_minor >= 46
+            && let Some(picture) = &presentation.choice_button_picture
+        {
+            value["choiceButtonPicture"] = json!(picture);
+        }
         if !presentation.object_command_menu.is_empty() {
             value["objectCommandMenu"] = json!(presentation.object_command_menu);
         }
@@ -68,12 +73,12 @@ fn element(
         value
     });
     let legacy_addition = |node: &EffectiveElement| {
-        !layout_additions
+        api_minor < 43
             && node.kind.is_some_and(|kind| {
                 kind.family() == eska_project_core::project::forms::ElementFamily::Addition
             })
     };
-    let dto = |child| element(labels, form, child, presentations, layout_additions);
+    let dto = |child| element(labels, form, child, presentations, api_minor);
     let children = value
         .children
         .iter()
@@ -90,15 +95,20 @@ fn element(
         "properties":form.inspectable_properties(value).map(|value| property(labels,value)).collect::<Vec<_>>(),"presentation":presentation,
         "children":children,"auxiliary":auxiliary})
 }
-fn definition(labels: &Labels, value: &EffectiveDefinition) -> Value {
-    json!({"name":value.name,"xmlName":value.xml_name,"origin":origin(&value.origin),"qualifiers":value.qualifiers,"properties":value.properties.iter().map(|value| property(labels,value)).collect::<Vec<_>>()})
+fn definition(labels: &Labels, value: &EffectiveDefinition, api_minor: u32) -> Value {
+    let mut result = json!({"name":value.name,"xmlName":value.xml_name,"origin":origin(&value.origin),"qualifiers":value.qualifiers,"properties":value.properties.iter().map(|value| property(labels,value)).collect::<Vec<_>>()});
+    if api_minor >= 45
+        && let Some(value_type) = value.inspector_type()
+    {
+        result["valueType"] = json!(value_type);
+    }
+    result
 }
 pub(super) fn model(
     labels: &Labels,
     preview: &FormPreview,
     api_minor: u32,
 ) -> Result<(Value, usize), Value> {
-    let layout_additions = api_minor >= 43;
     let presentations: HashMap<_, _> = preview
         .presentation
         .elements
@@ -110,18 +120,23 @@ pub(super) fn model(
         .elements
         .iter()
         .flat_map(|element| {
-            element.picture.iter().chain(
-                element
-                    .auto_command_items
-                    .iter()
-                    .flat_map(|command| std::iter::once(command).chain(&command.items))
-                    .filter_map(|command| command.picture.as_ref()),
-            )
+            element
+                .picture
+                .iter()
+                .chain(match &element.choice_button_picture {
+                    Some(FormPictureSelection::Image(picture)) if api_minor >= 46 => Some(picture),
+                    _ => None,
+                })
+                .chain(
+                    element
+                        .auto_command_items
+                        .iter()
+                        .flat_map(|command| std::iter::once(command).chain(&command.items))
+                        .filter_map(|command| command.picture.as_ref()),
+                )
         })
         .filter_map(|picture| match picture {
-            eska_project_core::project::forms::FormPicture::Common { source } => {
-                Some(source.as_str())
-            }
+            FormPicture::Common { source } => Some(source.as_str()),
             _ => None,
         })
         .collect();
@@ -147,9 +162,17 @@ pub(super) fn model(
         eska_project_core::project::forms::FormHandlerOwner::Element(value)=>json!({"kind":"element","identity":identity(value)}),
         eska_project_core::project::forms::FormHandlerOwner::Command(name)=>json!({"kind":"command","name":name}),
     },"event":handler.event,"name":handler.name,"origin":origin(&handler.origin)})).collect::<Vec<_>>();
-    let mut model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations,layout_additions),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
-        "commands":preview.form.commands.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(|value| definition(labels,value)).collect::<Vec<_>>(),
+    let definition = |value| definition(labels, value, api_minor);
+    let mut model = json!({"root":element(labels,&preview.form,&preview.form.root,&presentations,api_minor),"importantColor":preview.presentation.important_color,"assets":assets,"handlers":handlers,"attributes":preview.form.attributes.iter().map(definition).collect::<Vec<_>>(),
+        "commands":preview.form.commands.iter().map(definition).collect::<Vec<_>>(),"parameters":preview.form.parameters.iter().map(definition).collect::<Vec<_>>(),
         "diagnostics":{"composition":preview.form.diagnostics,"appearance":preview.presentation.diagnostics}});
+    if api_minor >= 45 {
+        model["dataFields"] = json!(preview.inspector_data().iter().map(|field| json!({
+            "path":field.path,"valueType":field.value_type,
+            "type":field.type_property.map(|value| dto::property_record(labels, MetadataKind::Attribute, value)),
+            "origin":field.origin.as_ref().map(origin)
+        })).collect::<Vec<_>>());
+    }
     model["activityColor"] = json!(preview.presentation.activity_color);
     if api_minor >= 44 {
         model["formHelpAvailable"] = json!(preview.form_help_available);

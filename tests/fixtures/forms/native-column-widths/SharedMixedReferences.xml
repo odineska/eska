@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" version="2.20">
+  <Title>
+    <v8:item>
+      <v8:lang>ru</v8:lang>
+      <v8:content>ProbeFooterAllocation10</v8:content>
+    </v8:item>
+    <v8:item>
+      <v8:lang>en</v8:lang>
+      <v8:content>ProbeFooterAllocation10</v8:content>
+    </v8:item>
+  </Title>
+  <Width>84</Width>
+  <CommandBarLocation>None</CommandBarLocation>
+  <AutoCommandBar name="FormCommandBar" id="-1"/>
+  <ChildItems>
+    <UsualGroup name="Scope" id="4">
+      <Group>Vertical</Group>
+      <ShowTitle>false</ShowTitle>
+      <ThroughAlign>Use</ThroughAlign>
+      <ChildItems>
+        <UsualGroup name="Courts" id="5">
+          <Group>Vertical</Group>
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Судебные данные</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Судебные данные</v8:content>
+            </v8:item>
+          </Title>
+          <United>false</United>
+          <ChildItems>
+            <InputField name="Court" id="51">
+              <DataPath>Court</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>Исполнительное производство</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>Исполнительное производство</v8:content>
+                </v8:item>
+              </Title>
+              <ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+              <BackColor>web:LightPink</BackColor>
+            </InputField>
+          </ChildItems>
+        </UsualGroup>
+        <UsualGroup name="Settlements" id="6">
+          <Group>Vertical</Group>
+          <Title>
+            <v8:item>
+              <v8:lang>ru</v8:lang>
+              <v8:content>Взаиморасчеты</v8:content>
+            </v8:item>
+            <v8:item>
+              <v8:lang>en</v8:lang>
+              <v8:content>Взаиморасчеты</v8:content>
+            </v8:item>
+          </Title>
+          <United>false</United>
+          <ChildItems>
+            <CheckBoxField name="Flag" id="61">
+              <DataPath>Flag</DataPath>
+              <Title>
+                <v8:item>
+                  <v8:lang>ru</v8:lang>
+                  <v8:content>По организации займа</v8:content>
+                </v8:item>
+                <v8:item>
+                  <v8:lang>en</v8:lang>
+                  <v8:content>По организации займа</v8:content>
+                </v8:item>
+              </Title>
+              <TitleLocation>Right</TitleLocation>
+            </CheckBoxField>
+            <UsualGroup name="OutgoingRow" id="70">
+              <Group>AlwaysHorizontal</Group>
+              <ShowTitle>false</ShowTitle>
+              <Width>2</Width>
+              <Height>1</Height>
+              <United>false</United>
+              <ChildItems>
+                <InputField name="Outgoing" id="71">
+                  <DataPath>Outgoing</DataPath>
+                  <Title>
+                    <v8:item>
+                      <v8:lang>ru</v8:lang>
+                      <v8:content>Исходящий</v8:content>
+                    </v8:item>
+                    <v8:item>
+                      <v8:lang>en</v8:lang>
+                      <v8:content>Исходящий</v8:content>
+                    </v8:item>
+                  </Title>
+                  <ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+                  <BackColor>web:LightCyan</BackColor>
+                </InputField>
+                <PictureField name="OutgoingStatus" id="72">
+                  <DataPath>Status</DataPath>
+                  <TitleLocation>None</TitleLocation>
+                  <ReadOnly>true</ReadOnly>
+                  <Width>2</Width>
+                  <AutoMaxWidth>false</AutoMaxWidth>
+                  <MaxWidth>2</MaxWidth>
+                  <Height>1</Height>
+                  <AutoMaxHeight>false</AutoMaxHeight>
+                  <MaxHeight>1</MaxHeight>
+                  <ValuesPicture>
+                    <xr:Ref>StdPicture.Change</xr:Ref>
+                    <xr:LoadTransparent>true</xr:LoadTransparent>
+                  </ValuesPicture>
+                </PictureField>
+                <LabelField name="OutgoingOrg" id="73">
+                  <DataPath>Org</DataPath>
+                  <TitleLocation>None</TitleLocation>
+                  <BackColor>web:LightGreen</BackColor>
+                </LabelField>
+              </ChildItems>
+            </UsualGroup>
+            <UsualGroup name="IncomingRow" id="80">
+              <Group>AlwaysHorizontal</Group>
+              <ShowTitle>false</ShowTitle>
+              <United>false</United>
+              <ChildItems>
+                <InputField name="Incoming" id="81">
+                  <DataPath>Incoming</DataPath>
+                  <Title>
+                    <v8:item>
+                      <v8:lang>ru</v8:lang>
+                      <v8:content>Входящий</v8:content>
+                    </v8:item>
+                    <v8:item>
+                      <v8:lang>en</v8:lang>
+                      <v8:content>Входящий</v8:content>
+                    </v8:item>
+                  </Title>
+                  <ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+                  <BackColor>web:LightCyan</BackColor>
+                </InputField>
+                <PictureField name="IncomingStatus" id="82">
+                  <DataPath>Status</DataPath>
+                  <TitleLocation>None</TitleLocation>
+                  <ReadOnly>true</ReadOnly>
+                  <Width>2</Width>
+                  <AutoMaxWidth>false</AutoMaxWidth>
+                  <MaxWidth>2</MaxWidth>
+                  <Height>1</Height>
+                  <AutoMaxHeight>false</AutoMaxHeight>
+                  <MaxHeight>1</MaxHeight>
+                  <ValuesPicture>
+                    <xr:Ref>StdPicture.Change</xr:Ref>
+                    <xr:LoadTransparent>true</xr:LoadTransparent>
+                  </ValuesPicture>
+                </PictureField>
+                <LabelField name="IncomingOrg" id="83">
+                  <DataPath>Org</DataPath>
+                  <TitleLocation>None</TitleLocation>
+                  <BackColor>web:LightGreen</BackColor>
+                </LabelField>
+              </ChildItems>
+            </UsualGroup>
+          </ChildItems>
+        </UsualGroup>
+      </ChildItems>
+    </UsualGroup>
+  </ChildItems>
+  <Attributes>
+    <Attribute name="Court" id="1">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Court</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Court</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="Incoming" id="2">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Incoming</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Incoming</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="Outgoing" id="3">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Outgoing</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Outgoing</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="Org" id="4">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Org</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Org</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>cfg:CatalogRef.NativeGoods</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="Flag" id="5">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Flag</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Flag</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:boolean</v8:Type>
+      </Type>
+    </Attribute>
+    <Attribute name="Status" id="6">
+      <Title>
+        <v8:item>
+          <v8:lang>ru</v8:lang>
+          <v8:content>Status</v8:content>
+        </v8:item>
+        <v8:item>
+          <v8:lang>en</v8:lang>
+          <v8:content>Status</v8:content>
+        </v8:item>
+      </Title>
+      <Type>
+        <v8:Type>xs:boolean</v8:Type>
+      </Type>
+    </Attribute>
+  </Attributes>
+</Form>
