@@ -38,6 +38,11 @@ impl Localizer {
             }
         }
         self.optional_text(&format!("platform-property-{namespace}-{}", key.name))
+            .or_else(|| {
+                (namespace == "form")
+                    .then(|| self.optional_text(&format!("form-palette-property-{}", key.name)))
+                    .flatten()
+            })
     }
 }
 

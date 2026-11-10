@@ -2386,3 +2386,24 @@ platform-value-StandardAttribute-Started = Started
 
 # Choice source field from the installed EDT MdFieldInferrer
 platform-value-StandardAttribute-Type = Type
+
+# Resolved Designer style roles (case-insensitive XML references).
+platform-value-StyleReference-normaltextfont = Normal text font
+platform-value-StyleReference-smalltextfont = Small text font
+platform-value-StyleReference-textfont = Text font
+platform-value-StyleReference-largetextfont = Large text font
+platform-value-StyleReference-extralargetextfont = Extra large text font
+platform-value-StyleReference-fieldtextcolor = Field text color
+platform-value-StyleReference-fieldbackcolor = Field background color
+platform-value-StyleReference-formbackcolor = Form background color
+platform-value-StyleReference-formtextcolor = Form text color
+platform-value-StyleReference-specialtextcolor = Special text color
+platform-value-StyleReference-tooltipbackcolor = Tooltip background color
+platform-value-StyleReference-tooltiptextcolor = Tooltip text color
+platform-value-StyleReference-fieldselectionbackcolor = Field selection background color
+platform-value-StyleReference-tablefooterbackcolor = Table footer background color
+platform-value-StyleReference-importantcolor = Important color
+platform-value-StyleReference-accentcolor = Accent color
+platform-value-StyleReference-activitycolor = Activity color
+platform-value-StyleReference-navigationcolor = Navigation color
+platform-value-StyleReference-auxiliarynavigationcolor = Auxiliary navigation color

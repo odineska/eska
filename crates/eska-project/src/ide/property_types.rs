@@ -8,6 +8,8 @@ const MD: &str = "http://v8.1c.ru/8.3/MDClasses";
 const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
 const APP: &str = "http://v8.1c.ru/8.2/managed-application/core";
 const FORM: &str = "http://v8.1c.ru/8.3/xcf/logform";
+const UI: &str = "http://v8.1c.ru/8.1/data/ui";
+const XS: &str = "http://www.w3.org/2001/XMLSchema";
 
 // Exported EBoolean properties from the EDT model recorded in platform-sources.json.
 // Ambiguous names are handled by owner below; never infer a type from the value alone.
@@ -80,16 +82,30 @@ pub(super) fn is_boolean_value(
     path: &[&PropertyKey],
     value: &MetadataProperty,
 ) -> bool {
-    let (text, known) = match &value.value {
-        MetadataValue::TypedText { text, key } => (
-            text,
-            key.namespace.as_deref() == Some("http://www.w3.org/2001/XMLSchema")
-                && key.name == "boolean",
-        ),
-        MetadataValue::Text(text) => (text, is_boolean(owner, root, path, &value.key)),
-        _ => return false,
-    };
-    known && matches!(text.trim(), "true" | "false" | "1" | "0")
+    boolean_scalar(&value.value, is_boolean(owner, root, path, &value.key))
+}
+
+pub(super) fn boolean_scalar(value: &MetadataValue, inferred: bool) -> bool {
+    match value {
+        MetadataValue::TypedText { text, key }
+            if key.namespace.as_deref() == Some(XS) && key.name == "boolean" =>
+        {
+            boolean_literal(text)
+        }
+        MetadataValue::Text(text) if inferred => boolean_literal(text),
+        _ => false,
+    }
+}
+
+pub(super) fn boolean_literal(text: &str) -> bool {
+    matches!(text.trim(), "true" | "false" | "1" | "0")
+}
+
+pub(super) fn appearance_field(field: &MetadataProperty, kind: &str) -> bool {
+    if let MetadataValue::TypedText { key, .. } = &field.value {
+        return key.namespace.as_deref() == Some(UI) && key.name == kind;
+    }
+    matches!(field.key.namespace.as_deref(), Some(FORM | UI)) && field.key.name.ends_with(kind)
 }
 
 /// Recognize only audited XML contexts, leaving user strings and future fields untouched.
@@ -139,6 +155,7 @@ fn is_boolean(
                 | "PasswordMode"
                 | "AutoMarkIncomplete"
                 | "MarkIncomplete"
+                | "MainAttribute"
                 | "Collapsed"
                 | "Autofill"
                 | "Header"

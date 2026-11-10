@@ -3,7 +3,7 @@
 use super::{Entry, dto, failure, limit, navigation};
 use crate::ide::{dto::Labels, params};
 use eska_project_core::project::forms::{
-    FormScriptVariant, PaletteCaption, PaletteCategory, PaletteRow, PaletteValue,
+    FormScriptVariant, PaletteCaption, PaletteCategory, PaletteEditor, PaletteRow, PaletteValue,
     PlatformPropertyValue,
 };
 use serde::Deserialize;
@@ -77,6 +77,9 @@ fn row_dto(
     row: &PaletteRow<'_>,
     script_variant: Option<FormScriptVariant>,
 ) -> Value {
+    let boolean = row
+        .definition
+        .is_some_and(|definition| matches!(definition.editor, PaletteEditor::Boolean));
     let (raw_id, value) = match row.value {
         PaletteValue::Declared {
             index,
@@ -88,6 +91,9 @@ fn row_dto(
             let key = &property.key;
             let mut value = json!({"kind":"declared","propertyIndex":index,"occurrence":occurrence,
                 "sourceKind":source_kind(extension)});
+            if boolean && super::super::property_types::boolean_scalar(&property.value, true) {
+                value["scalarType"] = json!("boolean");
+            }
             if let Some(caption) = row
                 .definition
                 .and_then(|definition| definition.value_caption(&property.value))
@@ -116,6 +122,9 @@ fn row_dto(
             let key = &attribute.key;
             let mut value = json!({"kind":"qualifier","key":key,"text":attribute.text,
                 "origin":dto::origin(&attribute.origin),"sourceKind":source_kind(extension)});
+            if boolean && super::super::property_types::boolean_literal(&attribute.text) {
+                value["scalarType"] = json!("boolean");
+            }
             if let Some(caption) = row
                 .definition
                 .and_then(|definition| definition.text_caption(&attribute.text))

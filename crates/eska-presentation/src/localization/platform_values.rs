@@ -8,6 +8,7 @@ const MD: &str = "http://v8.1c.ru/8.3/MDClasses";
 const CORE: &str = "http://v8.1c.ru/8.1/data/core";
 const APP: &str = "http://v8.1c.ru/8.2/managed-application/core";
 const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
+const FORM: &str = "http://v8.1c.ru/8.3/xcf/logform";
 
 impl Localizer {
     /// Translate only a token belonging to the field's known enum domain.
@@ -22,12 +23,21 @@ impl Localizer {
     ) -> Option<String> {
         if key.namespace.as_deref() == Some(READABLE)
             && key.name == "Ref"
-            && path.len() == 1
-            && root.namespace.as_deref() == Some(MD)
-            && root.name == "Picture"
+            && path
+                .last()
+                .is_some_and(|parent| match parent.namespace.as_deref() {
+                    Some(MD) => path.len() == 1 && parent.name == "Picture",
+                    Some(FORM) => matches!(parent.name.as_str(), "Picture" | "ChoiceButtonPicture"),
+                    _ => false,
+                })
             && let Some(name) = text.strip_prefix("StdPicture.")
         {
             return self.optional_text(&format!("platform-picture-{name}"));
+        }
+        if key.namespace.as_deref() == Some(FORM)
+            && let Some(caption) = form_value(&key.name, text)
+        {
+            return self.optional_text(&format!("form-palette-value-{caption}"));
         }
         let domain = if key.namespace.as_deref() == Some("http://v8.1c.ru/8.3/xcf/predef")
             && key.name == "AccountType"
@@ -133,6 +143,81 @@ impl Localizer {
             None
         }
     }
+
+    /// Appearance references use the resolved namespace, even with arbitrary XML aliases.
+    #[must_use]
+    pub fn appearance_reference_caption(&self, target: &PropertyKey) -> Option<String> {
+        let name = &target.name;
+        match target.namespace.as_deref()? {
+            "http://v8.1c.ru/8.1/data/ui/style" => {
+                if let Some(caption) =
+                    self.enum_caption("StyleReference", &name.to_ascii_lowercase())
+                {
+                    return Some(caption);
+                }
+                self.property_caption(
+                    None,
+                    &PropertyKey {
+                        namespace: Some(FORM.into()),
+                        name: name.clone(),
+                    },
+                )
+                .filter(|_| name.ends_with("Color") || name.ends_with("Font"))
+            }
+            "http://v8.1c.ru/8.1/data/ui/fonts/system" => Some(format!(
+                "{} · {name}",
+                self.text("form-inspector-system-font")
+            )),
+            "http://v8.1c.ru/8.1/data/ui/colors/web" => Some(format!(
+                "{} · {name}",
+                self.text("form-inspector-web-color")
+            )),
+            "http://v8.1c.ru/8.1/data/ui/colors/windows" => Some(format!(
+                "{} · {name}",
+                self.text("form-inspector-system-color")
+            )),
+            "http://v8.1c.ru/8.1/data/enterprise/current-config" => {
+                let name = name.strip_prefix("StyleItem.")?;
+                Some(format!(
+                    "{} · {name}",
+                    self.text("form-inspector-style-item")
+                ))
+            }
+            _ => None,
+        }
+    }
+}
+
+/// Common form settings have the same meaning in top-level and nested records.
+fn form_value(property: &str, value: &str) -> Option<&'static str> {
+    Some(match (property, value) {
+        ("Group", "Horizontal") => "horizontal",
+        ("Group", "Vertical") => "vertical",
+        ("Group", "HorizontalIfPossible") => "horizontalIfPossible",
+        ("ThroughAlign", "Use") => "use",
+        ("ThroughAlign", "DontUse") => "doNotUse",
+        ("TitleLocation" | "HorizontalAlign" | "GroupHorizontalAlign", "Left") => "left",
+        ("TitleLocation" | "HorizontalAlign" | "GroupHorizontalAlign", "Right") => "right",
+        ("TitleLocation" | "VerticalAlign" | "GroupVerticalAlign", "Top") => "top",
+        ("TitleLocation" | "VerticalAlign" | "GroupVerticalAlign", "Bottom") => "bottom",
+        (
+            "HorizontalAlign" | "VerticalAlign" | "GroupHorizontalAlign" | "GroupVerticalAlign",
+            "Center",
+        ) => "center",
+        ("TitleLocation", "None") => "none",
+        (
+            "TitleLocation"
+            | "HorizontalAlign"
+            | "VerticalAlign"
+            | "GroupHorizontalAlign"
+            | "GroupVerticalAlign"
+            | "ThroughAlign"
+            | "HorizontalStretch"
+            | "VerticalStretch",
+            "Auto",
+        ) => "auto",
+        _ => return None,
+    })
 }
 
 /// Some identically named metadata fields use different enums according to their owner.
