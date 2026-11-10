@@ -1,0 +1,2336 @@
+{
+  "schemaVersion": 1,
+  "pictures": [
+    "ProbeIcon",
+    "ProbeWideIcon",
+    "ProbePalette",
+    "ProbeTall",
+    "ProbeTiny"
+  ],
+  "forms": [
+    {
+      "name": "Catalog",
+      "file": "Catalog.xml",
+      "sourceSha256": "53c194b7713c62b160e331683f86b56b755a13f418903a7ed2d13b9c1e5b71e5",
+      "nativeSha256": "2900c54315703ca84221e3ef2bcb42685161681e134bc013c0ead4be1e47141d",
+      "frame": [
+        228,
+        491
+      ],
+      "fields": [
+        {
+          "name": "Base",
+          "rect": [
+            13,
+            39,
+            173,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "StockAuto",
+          "rect": [
+            13,
+            71,
+            173,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "StockExplicit",
+          "rect": [
+            13,
+            103,
+            173,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "StockInline",
+          "rect": [
+            13,
+            135,
+            194,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            167,
+            138,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                154,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "0b94aa4899aa7c2edcf90a93e4e1811cf543b819e3c97973c521408d5413f7b7"
+            }
+          ]
+        },
+        {
+          "name": "StockSeparate",
+          "rect": [
+            13,
+            167,
+            173,
+            23
+          ],
+          "buttons": [
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            170,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                133,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "0b94aa4899aa7c2edcf90a93e4e1811cf543b819e3c97973c521408d5413f7b7"
+            }
+          ]
+        },
+        {
+          "name": "StockDisabled",
+          "rect": [
+            13,
+            199,
+            194,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            215,
+            215,
+            215
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            167,
+            202,
+            16,
+            16
+          ]
+        },
+        {
+          "name": "StockReadOnly",
+          "rect": [
+            13,
+            231,
+            173,
+            23
+          ],
+          "buttons": [
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            215,
+            215,
+            215
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            234,
+            16,
+            16
+          ]
+        },
+        {
+          "name": "CommonAuto",
+          "rect": [
+            13,
+            263,
+            173,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "CommonInline",
+          "rect": [
+            13,
+            295,
+            194,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            167,
+            298,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                154,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "aaed7639c8cd373f93a83ba8ebdbb15dc2da2bb8997f210d100a95e71e842080"
+            }
+          ]
+        },
+        {
+          "name": "WideInline",
+          "rect": [
+            13,
+            327,
+            194,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            165,
+            332,
+            20,
+            13
+          ],
+          "paintAreas": [
+            {
+              "name": "visible right edge",
+              "rect": [
+                170,
+                7,
+                2,
+                9
+              ],
+              "rgbSha256": "4509026b0972ea07cfa0aad9ae9a68563216d7a55162492f90d609b43b0dbe1a"
+            }
+          ]
+        },
+        {
+          "name": "CommonDisabled",
+          "rect": [
+            13,
+            359,
+            194,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            215,
+            215,
+            215
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            167,
+            362,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                154,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "92f4f6fd34a2133cf290241990b224661ff373cca70f0198bfc6490f2ece650a"
+            }
+          ]
+        },
+        {
+          "name": "CommonOnly",
+          "rect": [
+            13,
+            391,
+            152,
+            23
+          ],
+          "buttons": [
+            "choice"
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            394,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                133,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "aaed7639c8cd373f93a83ba8ebdbb15dc2da2bb8997f210d100a95e71e842080"
+            }
+          ]
+        },
+        {
+          "name": "ListModeCommon",
+          "rect": [
+            13,
+            423,
+            194,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            167,
+            426,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                154,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "aaed7639c8cd373f93a83ba8ebdbb15dc2da2bb8997f210d100a95e71e842080"
+            }
+          ]
+        },
+        {
+          "name": "NoChoiceCommon",
+          "rect": [
+            13,
+            455,
+            173,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "String",
+      "file": "String.xml",
+      "sourceSha256": "a3fee38abf4d5adbd5bc1147acae63acfbe903b5456004ddf4a63e5729b598d3",
+      "nativeSha256": "2afb59502180916ebbe129a9d220aa77faa1930eeb2adfffbbcb13e3c72fdda9",
+      "frame": [
+        186,
+        299
+      ],
+      "fields": [
+        {
+          "name": "Base",
+          "rect": [
+            13,
+            39,
+            131,
+            23
+          ],
+          "buttons": [],
+          "buttonKinds": [],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "DefaultStock",
+          "rect": [
+            13,
+            71,
+            131,
+            23
+          ],
+          "buttons": [],
+          "buttonKinds": [],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "ChoiceStock",
+          "rect": [
+            13,
+            103,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            106,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                133,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "0b94aa4899aa7c2edcf90a93e4e1811cf543b819e3c97973c521408d5413f7b7"
+            }
+          ]
+        },
+        {
+          "name": "ChoiceDisabled",
+          "rect": [
+            13,
+            135,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            215,
+            215,
+            215
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            138,
+            16,
+            16
+          ]
+        },
+        {
+          "name": "ChoiceReadOnly",
+          "rect": [
+            13,
+            167,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            215,
+            215,
+            215
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            170,
+            16,
+            16
+          ]
+        },
+        {
+          "name": "Common",
+          "rect": [
+            13,
+            199,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            202,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                133,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "aaed7639c8cd373f93a83ba8ebdbb15dc2da2bb8997f210d100a95e71e842080"
+            }
+          ]
+        },
+        {
+          "name": "Wide",
+          "rect": [
+            13,
+            231,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            144,
+            236,
+            20,
+            13
+          ],
+          "paintAreas": [
+            {
+              "name": "visible right edge",
+              "rect": [
+                149,
+                7,
+                2,
+                9
+              ],
+              "rgbSha256": "4509026b0972ea07cfa0aad9ae9a68563216d7a55162492f90d609b43b0dbe1a"
+            }
+          ]
+        },
+        {
+          "name": "DisabledCommon",
+          "rect": [
+            13,
+            263,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            215,
+            215,
+            215
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            266,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                133,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "92f4f6fd34a2133cf290241990b224661ff373cca70f0198bfc6490f2ece650a"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Size",
+      "file": "Size.xml",
+      "sourceSha256": "f0f8ec4af5fd562d04fd363493a05d40ec5e021612d2ebf9e52b7060103c1924",
+      "nativeSha256": "43af1075b245220f472f8a30d0339229ac2c652972738d4ae510aab9110dd8b6",
+      "frame": [
+        186,
+        527
+      ],
+      "fields": [
+        {
+          "name": "Normal",
+          "rect": [
+            13,
+            39,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            42,
+            16,
+            16
+          ]
+        },
+        {
+          "name": "Tall",
+          "rect": [
+            13,
+            71,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            147,
+            72,
+            14,
+            21
+          ]
+        },
+        {
+          "name": "Tiny",
+          "rect": [
+            13,
+            103,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            150,
+            110,
+            8,
+            8
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                137,
+                7,
+                8,
+                8
+              ],
+              "rgbSha256": "353f572db6134afbae36eead6ba9f8b86bc2a72f3c39fd582f5534dbe9f2998b"
+            }
+          ]
+        },
+        {
+          "name": "Wide",
+          "rect": [
+            13,
+            135,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            144,
+            140,
+            20,
+            13
+          ],
+          "paintAreas": [
+            {
+              "name": "visible right edge",
+              "rect": [
+                149,
+                7,
+                2,
+                9
+              ],
+              "rgbSha256": "4509026b0972ea07cfa0aad9ae9a68563216d7a55162492f90d609b43b0dbe1a"
+            }
+          ]
+        },
+        {
+          "name": "Height1",
+          "rect": [
+            13,
+            167,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            170,
+            16,
+            16
+          ]
+        },
+        {
+          "name": "Font4",
+          "rect": [
+            13,
+            199,
+            152,
+            11
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            149,
+            200,
+            9,
+            9
+          ]
+        },
+        {
+          "name": "Font8",
+          "rect": [
+            13,
+            219,
+            152,
+            20
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            221,
+            16,
+            16
+          ]
+        },
+        {
+          "name": "Font16",
+          "rect": [
+            13,
+            248,
+            152,
+            38
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            259,
+            16,
+            16
+          ]
+        },
+        {
+          "name": "Font32",
+          "rect": [
+            13,
+            295,
+            152,
+            75
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            324,
+            16,
+            16
+          ]
+        },
+        {
+          "name": "TallFont4",
+          "rect": [
+            13,
+            379,
+            152,
+            11
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            151,
+            380,
+            6,
+            9
+          ]
+        },
+        {
+          "name": "WideFont4",
+          "rect": [
+            13,
+            399,
+            152,
+            11
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            147,
+            400,
+            14,
+            9
+          ]
+        },
+        {
+          "name": "StockFont4",
+          "rect": [
+            13,
+            419,
+            152,
+            11
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            149,
+            420,
+            9,
+            9
+          ]
+        },
+        {
+          "name": "StockFont32",
+          "rect": [
+            13,
+            439,
+            152,
+            75
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            468,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                133,
+                29,
+                16,
+                16
+              ],
+              "rgbSha256": "0b94aa4899aa7c2edcf90a93e4e1811cf543b819e3c97973c521408d5413f7b7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Clear",
+      "file": "Clear.xml",
+      "sourceSha256": "e79fbdb8bb738d8302bb080e430b0584f9ecb9f37dbc2fc5431064f5526b8a8d",
+      "nativeSha256": "259dcc8de1a835259961ab1b1ffab200d3b454fc7fd039ab410507c980345df9",
+      "frame": [
+        228,
+        427
+      ],
+      "fields": [
+        {
+          "name": "StringAbsent",
+          "rect": [
+            13,
+            39,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "StringCleared",
+          "rect": [
+            13,
+            71,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "paintAreas": [
+            {
+              "name": "cleared face",
+              "rect": [
+                130,
+                0,
+                22,
+                23
+              ],
+              "rgbSha256": "867f303d1f310feeb023fdc9946624e6ae2df590ec1044111b97d50546d7be10"
+            }
+          ]
+        },
+        {
+          "name": "StringEmpty",
+          "rect": [
+            13,
+            103,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "DateAbsent",
+          "rect": [
+            13,
+            135,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "calendar"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "DateCleared",
+          "rect": [
+            13,
+            167,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "calendar"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "paintAreas": [
+            {
+              "name": "cleared face",
+              "rect": [
+                130,
+                0,
+                22,
+                23
+              ],
+              "rgbSha256": "867f303d1f310feeb023fdc9946624e6ae2df590ec1044111b97d50546d7be10"
+            }
+          ]
+        },
+        {
+          "name": "DateEmpty",
+          "rect": [
+            13,
+            199,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "calendar"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "CatalogAbsent",
+          "rect": [
+            13,
+            231,
+            194,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "CatalogCleared",
+          "rect": [
+            13,
+            263,
+            194,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "paintAreas": [
+            {
+              "name": "cleared face",
+              "rect": [
+                130,
+                0,
+                64,
+                23
+              ],
+              "rgbSha256": "655427cb80f48d8c9dea2b0db674a698a936ad2d3ecb4a57c46030118efe15cc"
+            }
+          ]
+        },
+        {
+          "name": "CatalogEmpty",
+          "rect": [
+            13,
+            295,
+            194,
+            23
+          ],
+          "buttons": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "buttonKinds": [
+            "dropdown",
+            "choice",
+            "open"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "CompositeAbsent",
+          "rect": [
+            13,
+            327,
+            152,
+            23
+          ],
+          "buttons": [
+            "choice"
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "CompositeCleared",
+          "rect": [
+            13,
+            359,
+            152,
+            23
+          ],
+          "buttons": [
+            "choice"
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "paintAreas": [
+            {
+              "name": "cleared face",
+              "rect": [
+                130,
+                0,
+                22,
+                23
+              ],
+              "rgbSha256": "867f303d1f310feeb023fdc9946624e6ae2df590ec1044111b97d50546d7be10"
+            }
+          ]
+        },
+        {
+          "name": "CompositeEmpty",
+          "rect": [
+            13,
+            391,
+            152,
+            23
+          ],
+          "buttons": [
+            "choice"
+          ],
+          "buttonKinds": [
+            "choice"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PrimitiveDate",
+      "file": "PrimitiveDate.xml",
+      "sourceSha256": "ac37de343f72a4fe8d4615d4b8baf60a52df1bcdcd0713ff6d7be518b392abc3",
+      "nativeSha256": "d35560bbbc89ec934580d50d8a0787a1931fb5c78f8d4f1cad49a4f19fd633f3",
+      "frame": [
+        207,
+        363
+      ],
+      "fields": [
+        {
+          "name": "Base",
+          "rect": [
+            13,
+            39,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "calendar"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            42,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                133,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "aaed7639c8cd373f93a83ba8ebdbb15dc2da2bb8997f210d100a95e71e842080"
+            }
+          ]
+        },
+        {
+          "name": "Forced",
+          "rect": [
+            13,
+            71,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "calendar"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            74,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                133,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "aaed7639c8cd373f93a83ba8ebdbb15dc2da2bb8997f210d100a95e71e842080"
+            }
+          ]
+        },
+        {
+          "name": "ListAuto",
+          "rect": [
+            13,
+            103,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "list"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "ListBoth",
+          "rect": [
+            13,
+            135,
+            173,
+            23
+          ],
+          "buttons": [
+            null,
+            null
+          ],
+          "buttonKinds": [
+            "list",
+            "calendar"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            167,
+            138,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                154,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "aaed7639c8cd373f93a83ba8ebdbb15dc2da2bb8997f210d100a95e71e842080"
+            }
+          ]
+        },
+        {
+          "name": "ListOnly",
+          "rect": [
+            13,
+            167,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "list"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "DropAuto",
+          "rect": [
+            13,
+            199,
+            173,
+            23
+          ],
+          "buttons": [
+            null,
+            null
+          ],
+          "buttonKinds": [
+            "list",
+            "calendar"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            167,
+            202,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                154,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "aaed7639c8cd373f93a83ba8ebdbb15dc2da2bb8997f210d100a95e71e842080"
+            }
+          ]
+        },
+        {
+          "name": "ListNoDrop",
+          "rect": [
+            13,
+            231,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "calendar"
+          ],
+          "actualBorder": [
+            160,
+            160,
+            160
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            234,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                133,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "aaed7639c8cd373f93a83ba8ebdbb15dc2da2bb8997f210d100a95e71e842080"
+            }
+          ]
+        },
+        {
+          "name": "ListReadOnly",
+          "rect": [
+            13,
+            263,
+            131,
+            23
+          ],
+          "buttons": [],
+          "buttonKinds": [],
+          "actualBorder": [
+            215,
+            215,
+            215
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ]
+        },
+        {
+          "name": "BothReadOnly",
+          "rect": [
+            13,
+            295,
+            152,
+            23
+          ],
+          "buttons": [
+            null
+          ],
+          "buttonKinds": [
+            "calendar"
+          ],
+          "actualBorder": [
+            215,
+            215,
+            215
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            146,
+            298,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                133,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "92f4f6fd34a2133cf290241990b224661ff373cca70f0198bfc6490f2ece650a"
+            }
+          ]
+        },
+        {
+          "name": "ListDisabled",
+          "rect": [
+            13,
+            327,
+            173,
+            23
+          ],
+          "buttons": [
+            null,
+            null
+          ],
+          "buttonKinds": [
+            "list",
+            "calendar"
+          ],
+          "actualBorder": [
+            215,
+            215,
+            215
+          ],
+          "actualBackground": [
+            255,
+            255,
+            255
+          ],
+          "outside": [
+            255,
+            255,
+            255
+          ],
+          "artRect": [
+            167,
+            330,
+            16,
+            16
+          ],
+          "paintAreas": [
+            {
+              "name": "choice artwork",
+              "rect": [
+                154,
+                3,
+                16,
+                16
+              ],
+              "rgbSha256": "92f4f6fd34a2133cf290241990b224661ff373cca70f0198bfc6490f2ece650a"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
