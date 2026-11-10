@@ -26,7 +26,8 @@
     "previousGrid": [13, 104, 600, 227],
     "explorerFrame": [334, 343],
     "explorerGrid": [13, 104, 300, 227],
-    "gridContentWidth": [284, 347]
+    "gridContentWidth": [284, 347],
+    "outlineHeight": 344
   },
   "widths": {
     "ordering": [
@@ -313,9 +314,10 @@
       "explorerGridWidthAtNativeAllocation": 40
     },
     "TableHeight30": {
-      "nativeFrameHeight": 307,
+      "nativeFrameHeight": 308,
       "explorerFrameHeight": 308,
-      "nativeGridHeightMeasured": false
+      "nativeGridHeightMeasured": false,
+      "selectionScanHeight": 307
     },
     "pixelSuite": {
       "case": "Default-search-first-ru",
@@ -603,8 +605,9 @@
       "sameGeometryTraceAsBaseline": true
     },
     "tableHeight30": {
-      "nativeFrameHeight": 307,
-      "explorerFrameHeight": 308
+      "nativeFrameHeight": 308,
+      "explorerFrameHeight": 308,
+      "selectionScanHeight": 307
     },
     "pixelSuite": {
       "case": "Default-search-first-ru",
@@ -613,6 +616,146 @@
       "sameRgbCrop": true,
       "rgbSha256": "5d1f0bc6cc289c8c188d8d8f2704d49c17772a637eebc6af2e3085f084fcd03e"
     },
+    "windowsNativeGeometryCompared": false
+  },
+  "outlineVerification": {
+    "explorerCommit": "d3f39cf",
+    "verificationCommit": "7d884a0",
+    "vsixSha256": "4dfa7b0b9862a41ce3099c09157986977e36a009c7cb1d84061a439f944e53a4",
+    "measurement": "Outer black stroke without shadow, exact frame and preferred frame.",
+    "previousMethod": "The blue selection turned one row before the outer contour. Three DynamicList captures ended at the preview pane edge.",
+    "series": [
+      {
+        "series": "bounds",
+        "locale": "ru",
+        "frames": 13,
+        "completeGrids": 13
+      },
+      {
+        "series": "layout",
+        "locale": "ru",
+        "frames": 24,
+        "completeGrids": 24
+      },
+      {
+        "series": "compound",
+        "locale": "ru",
+        "frames": 3,
+        "completeGrids": 2
+      },
+      {
+        "series": "auto",
+        "locale": "ru",
+        "frames": 18,
+        "completeGrids": 18
+      },
+      {
+        "series": "band",
+        "locale": "ru",
+        "frames": 6,
+        "completeGrids": 6
+      },
+      {
+        "series": "auto-en",
+        "locale": "en",
+        "frames": 6,
+        "completeGrids": 6
+      },
+      {
+        "series": "band-en",
+        "locale": "en",
+        "frames": 3,
+        "completeGrids": 3
+      }
+    ],
+    "dynamic": [
+      {
+        "case": "Dynamic12",
+        "frame": [154, 590],
+        "grid": [13, 104, 120, 452],
+        "pagination": [13, 556, 120, 21],
+        "captureSha256": "afe09754dab0a4df9fec97fd9f82a151c47e05333252e572980b16281bf824c7"
+      },
+      {
+        "case": "Dynamic30",
+        "frame": [334, 590],
+        "grid": [13, 104, 300, 452],
+        "pagination": [13, 556, 300, 21],
+        "captureSha256": "188b614f118937aa7bd22c2b8f243fb9b9c8451e4ac535cf9527f487aad823db"
+      },
+      {
+        "case": "Dynamic80",
+        "frame": [834, 590],
+        "grid": [13, 104, 600, 452],
+        "pagination": [13, 556, 600, 21],
+        "captureSha256": "a5077957a9ee70ae24ce07404abbcc6f4cf3e9b55786b7fc5ac500aa3023aaf9"
+      }
+    ],
+    "explicitHeight": {
+      "case": "TableHeight30",
+      "width": 30,
+      "height": 16,
+      "frame": [334, 308],
+      "grid": [
+        13,
+        175,
+        300,
+        null
+      ],
+      "locales": {
+        "ru": {
+          "footerButton": [253, 268, 60, 26],
+          "bodyScrollAtEnd": 175
+        },
+        "en": {
+          "footerButton": [205, 268, 108, 26],
+          "bodyScrollAtEnd": 175
+        }
+      }
+    },
+    "installed": [
+      {
+        "locale": "ru",
+        "suite": "table-viewport",
+        "states": 18
+      },
+      {
+        "locale": "ru",
+        "suite": "page-captions",
+        "states": 13
+      },
+      {
+        "locale": "ru",
+        "suite": "nested-reflow",
+        "states": 65
+      },
+      {
+        "locale": "ru",
+        "suite": "wrapped-titles",
+        "states": 47
+      },
+      {
+        "locale": "en",
+        "suite": "table-viewport",
+        "states": 18
+      },
+      {
+        "locale": "en",
+        "suite": "page-captions",
+        "states": 13
+      },
+      {
+        "locale": "en",
+        "suite": "nested-reflow",
+        "states": 65
+      },
+      {
+        "locale": "en",
+        "suite": "wrapped-titles",
+        "states": 47
+      }
+    ],
+    "sourceWrites": false,
     "windowsNativeGeometryCompared": false
   }
 }

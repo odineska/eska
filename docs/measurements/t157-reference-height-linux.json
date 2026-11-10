@@ -211,7 +211,7 @@
       "case": "Base30",
       "nativeFrame": [
         334,
-        181
+        182
       ],
       "explorerPreferred": [
         334,
@@ -226,7 +226,7 @@
       "case": "Base45",
       "nativeFrame": [
         484,
-        174
+        175
       ],
       "explorerPreferred": [
         484,
@@ -241,7 +241,7 @@
       "case": "Memo30",
       "nativeFrame": [
         334,
-        344
+        345
       ],
       "explorerPreferred": [
         334,
@@ -256,7 +256,7 @@
       "case": "Memo45",
       "nativeFrame": [
         484,
-        337
+        338
       ],
       "explorerPreferred": [
         484,
@@ -271,7 +271,7 @@
       "case": "Table30",
       "nativeFrame": [
         334,
-        482
+        483
       ],
       "explorerPreferred": [
         334,
@@ -286,7 +286,7 @@
       "case": "Table45",
       "nativeFrame": [
         484,
-        475
+        476
       ],
       "explorerPreferred": [
         484,
@@ -301,7 +301,7 @@
       "case": "TableHeight30",
       "nativeFrame": [
         334,
-        307
+        308
       ],
       "explorerPreferred": [
         334,
@@ -316,7 +316,7 @@
       "case": "MemoHeight30",
       "nativeFrame": [
         334,
-        307
+        308
       ],
       "explorerPreferred": [
         334,
@@ -331,7 +331,7 @@
       "case": "FixedWidth15",
       "nativeFrame": [
         365,
-        174
+        175
       ],
       "explorerPreferred": [
         184,
@@ -353,7 +353,7 @@
         "authoredFormWidth": 6,
         "frame": [
           94,
-          343
+          344
         ],
         "tableWidth": 60,
         "canonicalSha256": "b6860c9c7d0d3839ee25cab36cb6663d59fd06da69944c5c64926034e9afe4cd",
@@ -364,7 +364,7 @@
         "authoredFormWidth": 10,
         "frame": [
           134,
-          343
+          344
         ],
         "tableWidth": 100,
         "canonicalSha256": "8a82686a42c3c420839867116ad38c6f128a9b21f75147d77292b3d0bdf78cc1",
@@ -375,7 +375,7 @@
         "authoredFormWidth": 15,
         "frame": [
           184,
-          343
+          344
         ],
         "tableWidth": 150,
         "canonicalSha256": "3f950af545d7ba8fdd0fe4702d73dcba62075c4270f7aee9958155cc6c633948",
@@ -386,7 +386,7 @@
         "authoredFormWidth": 20,
         "frame": [
           234,
-          343
+          344
         ],
         "tableWidth": 200,
         "canonicalSha256": "d8a08da9260fbda4f726ac4f5fa98c25477cc83c1618f5d693aff496eb3e1843",
@@ -397,7 +397,7 @@
         "authoredFormWidth": 25,
         "frame": [
           284,
-          343
+          344
         ],
         "tableWidth": 250,
         "canonicalSha256": "6669950549732e79b95665e6e3ca05e28886092593e8f3510c41885af1946337",
@@ -408,7 +408,7 @@
         "authoredFormWidth": 30,
         "frame": [
           334,
-          343
+          344
         ],
         "tableWidth": 300,
         "canonicalSha256": "85b90cc0b2feabae5ee2e324415eae771a9a52ac575eea54e732551e3559ec3b",
@@ -419,7 +419,7 @@
         "authoredFormWidth": 45,
         "frame": [
           484,
-          343
+          344
         ],
         "tableWidth": 450,
         "canonicalSha256": "eafdc7bd2d118cae049708042b89e60bb61df1a91343185bc9a340e169bd4fd0",
@@ -430,7 +430,7 @@
         "authoredFormWidth": 65,
         "frame": [
           684,
-          343
+          344
         ],
         "tableWidth": 600,
         "canonicalSha256": "60e7be6dbef422d9629a460000b370ff3e9622fb42140f2a2259effbcf17f188",
@@ -441,7 +441,7 @@
         "authoredFormWidth": 80,
         "frame": [
           834,
-          343
+          344
         ],
         "tableWidth": 600,
         "canonicalSha256": "94cc53a0d0854955977ef4262006c0994bf991366e71b61b6f3e561f21a915eb",
@@ -452,7 +452,7 @@
         "authoredFormWidth": 6,
         "frame": [
           94,
-          308
+          309
         ],
         "tableWidth": 60,
         "canonicalSha256": "a8aa7f9c2531893299dc0a1c838cd9ed51dff5f7183677681ed34db4301532a8",
@@ -463,7 +463,7 @@
         "authoredFormWidth": 10,
         "frame": [
           134,
-          308
+          309
         ],
         "tableWidth": 100,
         "canonicalSha256": "a18a54ec20f46eb981f827d88b86675f21aca7533f8a75e8f44246434c79f9ee",
@@ -474,7 +474,7 @@
         "authoredFormWidth": 15,
         "frame": [
           184,
-          308
+          309
         ],
         "tableWidth": 150,
         "canonicalSha256": "7f09e8243255b9ec916b5c98ce9b1874caf4065ebbd9008c3b9b7028bb77063c",
@@ -485,11 +485,144 @@
         "authoredFormWidth": 20,
         "frame": [
           234,
-          308
+          309
         ],
         "tableWidth": 200,
         "canonicalSha256": "781d9d53bf7906cb7dcb999de924d4c4a0e3b45aa694ad050c33d8baa25181c4",
         "captureSha256": "b601a21cc43c8612900280e3d4e9031177f8e6e5f7444dae8647bdbf69266b91"
+      }
+    ]
+  },
+  "outlineVerification": {
+    "measurement": "Outer black stroke without shadow. Corrected the native frame sizes of the small control and table cases.",
+    "explorerCommit": "d3f39cf",
+    "vsixSha256": "4dfa7b0b9862a41ce3099c09157986977e36a009c7cb1d84061a439f944e53a4",
+    "controlFrames": [
+      {
+        "case": "Base30",
+        "frame": [
+          334,
+          182
+        ],
+        "measuredFields": 3,
+        "bottomCommand": [
+          253,
+          142,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "Base45",
+        "frame": [
+          484,
+          175
+        ],
+        "measuredFields": 3,
+        "bottomCommand": [
+          403,
+          135,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "Memo30",
+        "frame": [
+          334,
+          345
+        ],
+        "measuredFields": 4,
+        "bottomCommand": [
+          253,
+          305,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "Memo45",
+        "frame": [
+          484,
+          338
+        ],
+        "measuredFields": 4,
+        "bottomCommand": [
+          403,
+          298,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "Table30",
+        "frame": [
+          334,
+          483
+        ],
+        "measuredFields": 3,
+        "bottomCommand": [
+          253,
+          443,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "Table45",
+        "frame": [
+          484,
+          476
+        ],
+        "measuredFields": 3,
+        "bottomCommand": [
+          403,
+          436,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "TableHeight30",
+        "frame": [
+          334,
+          308
+        ],
+        "measuredFields": 2,
+        "bottomCommand": [
+          253,
+          268,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "MemoHeight30",
+        "frame": [
+          334,
+          308
+        ],
+        "measuredFields": 4,
+        "bottomCommand": [
+          253,
+          268,
+          60,
+          26
+        ]
+      },
+      {
+        "case": "FixedWidth15",
+        "frame": [
+          365,
+          175
+        ],
+        "measuredFields": 3,
+        "bottomCommand": [
+          284,
+          135,
+          60,
+          26
+        ]
       }
     ]
   }
