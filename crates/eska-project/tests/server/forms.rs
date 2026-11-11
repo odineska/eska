@@ -631,50 +631,71 @@ fn form_input_palette_agrees_with_reference_list_and_additional_column_contexts(
 }
 
 #[test]
-fn unresolved_serialized_column_path_keeps_the_unbound_palette_and_xml_source() {
-    const BINDING: &str =
-        "1/0:11111111-1111-1111-1111-111111111111/0:22222222-2222-2222-2222-222222222222";
+fn unresolved_serialized_paths_keep_the_unbound_palette_and_xml_source() {
+    assert_unresolved_binding(
+        TABLE_INPUTS,
+        "Rows.Text",
+        "Text",
+        "1/0:11111111-1111-1111-1111-111111111111/0:22222222-2222-2222-2222-222222222222",
+    );
+    assert_unresolved_binding(
+        BOUND_INPUT,
+        "Value",
+        "Control",
+        "1/0:11111111-1111-1111-1111-111111111111",
+    );
+}
+
+fn assert_unresolved_binding(form: &str, data_path: &str, name: &str, serialized: &str) {
     let directory = fixture();
     let path = directory.0.join("src").join(PATH);
-    let baseline = TABLE_INPUTS.replace("<DataPath>Rows.Text</DataPath>", "");
+    let bound = format!("<DataPath>{data_path}</DataPath>");
+    let raw_path = format!("<DataPath>{serialized}</DataPath>");
+    let baseline = form.replace(&bound, "");
     fs::write(&path, &baseline).unwrap();
     let mut client = Client::new(&directory.0, "ru-RU");
     let (context, node) = connect(&mut client, &directory.0, "ru-RU", 41);
     let opened = client.request("form/open", &params(&context, json!({"node":node})));
-    let column = native_palette::element(&opened["model"]["root"], "Text").unwrap();
-    let unbound = inspect_palette(&mut client, &context, &opened, column, true);
-    let changed = TABLE_INPUTS.replace("Rows.Text", BINDING);
+    let field = native_palette::element(&opened["model"]["root"], name).unwrap();
+    let unbound = inspect_palette(&mut client, &context, &opened, field, true);
+    let changed = form.replace(&bound, &raw_path);
     let opened = update_input(&mut client, &context, &opened, 2, &changed);
-    let column = native_palette::element(&opened["model"]["root"], "Text").unwrap();
-    let palette = inspect_palette(&mut client, &context, &opened, column, true);
+    let field = native_palette::element(&opened["model"]["root"], name).unwrap();
+    let palette = inspect_palette(&mut client, &context, &opened, field, true);
     let (raw, rows) = palette["rows"].as_array().unwrap().split_last().unwrap();
-    assert_eq!(rows, unbound["rows"].as_array().unwrap().as_slice());
+    let unbound_rows = unbound["rows"].as_array().unwrap();
+    assert_eq!(rows.len(), unbound_rows.len());
+    for (actual, expected) in rows.iter().zip(unbound_rows) {
+        let mut actual = actual.clone();
+        if actual["value"]["kind"] == "declared" {
+            // Inserting DataPath can shift the index of other XML properties.
+            actual["value"]["propertyIndex"] = expected["value"]["propertyIndex"].clone();
+        }
+        assert_eq!(&actual, expected);
+    }
     assert_eq!(input_palette_value(&palette, "DataPath")["kind"], "absent");
     assert!(raw["category"].is_null());
     let declared = &raw["value"];
     assert_eq!(declared["kind"], "declared");
     assert_eq!(declared["sourceKind"], "form");
-    let property = &column["properties"]
-        [usize::try_from(declared["propertyIndex"].as_u64().unwrap()).unwrap()];
-    assert_eq!(property["value"]["text"], BINDING);
+    let property =
+        &field["properties"][usize::try_from(declared["propertyIndex"].as_u64().unwrap()).unwrap()];
+    assert_eq!(property["value"]["text"], serialized);
     let located = client.request(
         "form/locate",
         &params(
             &context,
             json!({
                 "formSessionId":opened["formSessionId"],"revision":opened["revision"],
-                "target":{"kind":"property","identity":column["identity"],"property":property["key"],"occurrence":declared["occurrence"]}
+                "target":{"kind":"property","identity":field["identity"],"property":property["key"],"occurrence":declared["occurrence"]}
             }),
         ),
     );
-    assert_eq!(
-        xml_at(&changed, &located["range"]),
-        format!("<DataPath>{BINDING}</DataPath>")
-    );
-    let unsupported = changed.replace(BINDING, "1/0:invalid");
+    assert_eq!(xml_at(&changed, &located["range"]), raw_path);
+    let unsupported = changed.replace(serialized, "1/0:invalid");
     let opened = update_input(&mut client, &context, &opened, 3, &unsupported);
-    let column = native_palette::element(&opened["model"]["root"], "Text").unwrap();
-    assert!(inspect_palette(&mut client, &context, &opened, column, true)["rows"].is_null());
+    let field = native_palette::element(&opened["model"]["root"], name).unwrap();
+    assert!(inspect_palette(&mut client, &context, &opened, field, true)["rows"].is_null());
     client.finish();
     assert_eq!(fs::read_to_string(path).unwrap(), baseline);
 }

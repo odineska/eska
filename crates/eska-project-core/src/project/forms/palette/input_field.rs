@@ -61,10 +61,9 @@ impl InputBinding {
                 Self::ValueList { extended }
             }
             FieldValueKind::Unknown => {
-                let serialized_path = view.in_table
-                    && element
-                        .scalar("DataPath")
-                        .is_some_and(serialized_unresolved_data_path);
+                let serialized_path = element
+                    .scalar("DataPath")
+                    .is_some_and(serialized_unresolved_data_path);
                 if !serialized_path && !unbound_data_path(element) {
                     return None;
                 }
