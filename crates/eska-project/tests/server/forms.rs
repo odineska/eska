@@ -700,6 +700,95 @@ fn assert_unresolved_binding(form: &str, data_path: &str, name: &str, serialized
     assert_eq!(fs::read_to_string(path).unwrap(), baseline);
 }
 
+#[test]
+fn composite_input_palettes_follow_primitive_and_reference_profiles() {
+    let directory = fixture();
+    let source = directory.0.join("src");
+    let file = source.join(PATH);
+    fs::write(&file, BOUND_INPUT).unwrap();
+    let documents = ["Invoice", "Payment", "Order", "Receipt"];
+    fs::create_dir(source.join("Documents")).unwrap();
+    for name in documents {
+        fs::write(
+            source.join("Documents").join(format!("{name}.xml")),
+            format!(
+                "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><Document uuid=\"{name}\"><Properties><Name>{name}</Name></Properties></Document></MetaDataObject>"
+            ),
+        )
+        .unwrap();
+    }
+    let members = documents
+        .map(|name| format!("<Document>{name}</Document>"))
+        .concat();
+    let configuration = source.join("Configuration.xml");
+    let root = fs::read_to_string(&configuration).unwrap();
+    fs::write(
+        &configuration,
+        root.replace("<ChildObjects>", &format!("<ChildObjects>{members}")),
+    )
+    .unwrap();
+
+    let reference_types = documents
+        .map(|name| format!("<v8:Type>cfg:DocumentRef.{name}</v8:Type>"))
+        .concat();
+    let cases = [
+        (
+            TABLE_INPUTS,
+            r#"<Column name="Text""#,
+            "Text",
+            "<v8:Type>xs:string</v8:Type><v8:Type>xs:decimal</v8:Type>",
+            "<v8:Type>xs:boolean</v8:Type><v8:Type>xs:dateTime</v8:Type><v8:DateQualifiers><v8:DateFractions>Date</v8:DateFractions></v8:DateQualifiers>",
+            2,
+        ),
+        (
+            BOUND_INPUT,
+            r#"<Attribute name="Value""#,
+            "Control",
+            "<v8:Type>xs:string</v8:Type><v8:Type>cfg:DocumentRef.Invoice</v8:Type>",
+            reference_types.as_str(),
+            4,
+        ),
+    ];
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let mut snapshot = client.request("form/open", &params(&context, json!({"node":node})));
+        let mut version = 2;
+        for (form, owner, name, control, types, expected_types) in cases {
+            snapshot = update_input(
+                &mut client,
+                &context,
+                &snapshot,
+                version,
+                &with_form_type(form, owner, control),
+            );
+            let item = native_palette::element(&snapshot["model"]["root"], name).unwrap();
+            let expected = inspect_palette(&mut client, &context, &snapshot, item, true);
+            assert!(expected["rows"].is_array());
+            snapshot = update_input(
+                &mut client,
+                &context,
+                &snapshot,
+                version + 1,
+                &with_form_type(form, owner, types),
+            );
+            let item = native_palette::element(&snapshot["model"]["root"], name).unwrap();
+            let value_type = &item["presentation"]["valueType"];
+            assert_eq!(value_type["kind"], "composite");
+            assert_eq!(
+                value_type["types"].as_array().unwrap().len(),
+                expected_types
+            );
+            let actual = inspect_palette(&mut client, &context, &snapshot, item, true);
+            assert_eq!(actual["rows"], expected["rows"], "{locale}/{name}");
+            assert_eq!(actual["categories"], expected["categories"]);
+            version += 2;
+        }
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(file).unwrap(), BOUND_INPUT);
+}
+
 fn assert_input_palette(inspected: &Value, native: &Value, case: &str, locale: &str) {
     let expected = native["rows"].as_array().unwrap().iter().filter(|row| {
         row["contexts"]

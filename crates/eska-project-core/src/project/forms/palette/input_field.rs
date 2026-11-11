@@ -16,8 +16,7 @@ enum InputBinding {
     Date,
     Boolean,
     Reference,
-    StringAndNumber,
-    StringAndReference,
+    Composite { has_reference: bool },
     ValueList { extended: bool },
 }
 
@@ -30,23 +29,7 @@ impl InputBinding {
             FieldValueKind::Date => Self::Date,
             FieldValueKind::Boolean => Self::Boolean,
             FieldValueKind::Reference if types.iter().any(metadata_reference) => Self::Reference,
-            FieldValueKind::Composite if types.len() == 2 => {
-                let primitive = |key| {
-                    types.iter().any(|kind| {
-                        presentation::field_value_kind(std::slice::from_ref(kind)) == key
-                    })
-                };
-                if !primitive(FieldValueKind::String) {
-                    return None;
-                }
-                if primitive(FieldValueKind::Number) {
-                    Self::StringAndNumber
-                } else if types.iter().any(metadata_reference) {
-                    Self::StringAndReference
-                } else {
-                    return None;
-                }
-            }
+            FieldValueKind::Composite => Self::composite(types)?,
             FieldValueKind::Document
                 if types.iter().any(|key| {
                     key.namespace.as_deref() == Some("http://v8.1c.ru/8.1/data/core")
@@ -71,6 +54,24 @@ impl InputBinding {
             }
             _ => return None,
         })
+    }
+
+    fn composite(types: &[PropertyKey]) -> Option<Self> {
+        let mut has_reference = false;
+        for key in types {
+            if metadata_reference(key) {
+                has_reference = true;
+            } else if !matches!(
+                presentation::field_value_kind(std::slice::from_ref(key)),
+                FieldValueKind::String
+                    | FieldValueKind::Number
+                    | FieldValueKind::Date
+                    | FieldValueKind::Boolean
+            ) {
+                return None;
+            }
+        }
+        Some(Self::Composite { has_reference })
     }
 }
 
@@ -179,11 +180,7 @@ impl Rule {
         let binding = context.binding;
         let text = matches!(
             binding,
-            B::String
-                | B::Unbound { .. }
-                | B::StringAndNumber
-                | B::StringAndReference
-                | B::ValueList { .. }
+            B::String | B::Unbound { .. } | B::Composite { .. } | B::ValueList { .. }
         );
         match self {
             Self::Always => true,
@@ -197,17 +194,17 @@ impl Rule {
             Self::EditFormat => !matches!(binding, B::String | B::Reference),
             Self::Numeric => matches!(
                 binding,
-                B::Number
-                    | B::Unbound { .. }
-                    | B::StringAndNumber
-                    | B::StringAndReference
-                    | B::ValueList { .. }
+                B::Number | B::Unbound { .. } | B::Composite { .. } | B::ValueList { .. }
             ),
             Self::Wrap => text || binding == B::Boolean && !context.in_table,
             Self::InputHint => text || matches!(binding, B::Boolean | B::Reference),
             Self::ReferenceChoices => matches!(
                 binding,
-                B::Reference | B::StringAndReference | B::ValueList { .. }
+                B::Reference
+                    | B::Composite {
+                        has_reference: true
+                    }
+                    | B::ValueList { .. }
             ),
             Self::ChoiceForm => binding == B::Reference,
             Self::ValueList => matches!(binding, B::ValueList { .. }),
