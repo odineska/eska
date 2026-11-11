@@ -20,6 +20,8 @@ pub(super) const USER_VISIBILITY: Row =
     Row::new("UserVisibility", Main, Dialog, OPEN).with_source(Property("UserVisible"));
 pub(super) const ENABLED: Row = Row::new("Enabled", Main, Boolean, CHECKED);
 pub(super) const READ_ONLY: Row = Row::new("ReadOnly", Main, Boolean, UNCHECKED);
+pub(super) const ENABLE_CONTENT_CHANGE: Row =
+    Row::new("EnableContentChange", Main, Boolean, CHECKED);
 pub(super) const IMPORTANCE: Row = Row::new("DisplayImportance", Main, Enum, Auto)
     .with_source(Attribute("DisplayImportance"))
     .with_enum_captions(&[("High", "highImportance")]);

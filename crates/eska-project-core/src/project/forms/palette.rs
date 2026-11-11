@@ -6,6 +6,7 @@ mod command;
 mod common;
 mod display_field;
 mod input_field;
+mod pages;
 mod root_form;
 mod table;
 
@@ -232,6 +233,9 @@ impl FormPreview {
             Some(ElementKind::ColumnGroup) => presentation()
                 .and_then(|item| table::column_group_definitions(item, element))
                 .map(|definitions| self.palette_rows(element, definitions)),
+            Some(kind @ (ElementKind::Pages | ElementKind::Page)) => {
+                Some(self.palette_rows(element, pages::definitions(kind == ElementKind::Pages)))
+            }
             Some(ElementKind::AutoCommandBar) => presentation()
                 .and_then(command::auto_bar_definitions)
                 .map(|definitions| self.palette_rows(element, definitions)),
@@ -426,12 +430,7 @@ const USUAL_GROUP: &[PaletteDefinition] = {
             Boolean,
             PlatformPropertyValue::Boolean(false),
         ),
-        PaletteDefinition::new(
-            "EnableContentChange",
-            Main,
-            Boolean,
-            PlatformPropertyValue::Boolean(true),
-        ),
+        common::ENABLE_CONTENT_CHANGE,
         PaletteDefinition::new("DisplayImportance", Main, Enum, Auto)
             .with_source(SettingSource::Attribute("DisplayImportance")),
         PaletteDefinition::new("Behavior", Main, Enum, Auto),

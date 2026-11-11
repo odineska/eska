@@ -8,8 +8,9 @@ use super::{
     PlatformPropertyValue::{Auto, AutoStretch, Choice, Empty},
     SettingSource::{self, Kind, Property},
     common::{
-        CHECKED, ENABLED, IMPORTANCE, NAME, READ_ONLY, TITLE, TITLE_FONT, TITLE_TEXT_COLOR,
-        TOOLTIP, TOOLTIP_REPRESENTATION, TRISTATE, USER_VISIBILITY, VISIBLE, WIDTH, ZERO,
+        CHECKED, ENABLE_CONTENT_CHANGE, ENABLED, IMPORTANCE, NAME, READ_ONLY, TITLE, TITLE_FONT,
+        TITLE_TEXT_COLOR, TOOLTIP, TOOLTIP_REPRESENTATION, TRISTATE, USER_VISIBILITY, VISIBLE,
+        WIDTH, ZERO,
     },
 };
 use crate::project::{
@@ -163,7 +164,7 @@ const COMMAND_GROUP: &[Row] = &[
     USER_VISIBILITY,
     ENABLED,
     READ_ONLY,
-    Row::new("EnableContentChange", Main, Boolean, CHECKED),
+    ENABLE_CONTENT_CHANGE,
     IMPORTANCE,
     Row::new("Representation", Main, Enum, Auto).with_enum_captions(&[
         ("Auto", "auto"),

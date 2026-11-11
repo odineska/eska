@@ -7,6 +7,8 @@ mod command_palette;
 mod display_palette;
 #[path = "forms_native_palette.rs"]
 mod native_palette;
+#[path = "forms_pages_palette.rs"]
+mod pages_palette;
 #[path = "forms_reference_data.rs"]
 mod reference_data;
 #[path = "forms_standalone_additions.rs"]

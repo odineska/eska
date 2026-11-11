@@ -1456,6 +1456,36 @@ form-palette-type-UsualGroup = Regular group
 form-palette-value-auto = Auto
 form-palette-value-autoStretch = Default
 form-palette-value-lightMarking = Light marking
+
+# Designer 8.3.27 palettes for pages.
+form-palette-type-Pages = Pages
+form-palette-type-Page = Page
+form-palette-property-PagesRepresentation = PagesRepresentation
+form-palette-property-OnCurrentPageChange = OnCurrentPageChange
+form-palette-property-VerticalScrollOnReduceSize = VerticalScrollOnReduceSize
+form-palette-value-usesCurrentRow = Use
+form-palette-value-ignoresCurrentRow = Do not use
+form-palette-value-tabsAbove = Tabs above
+form-palette-value-tabsBelow = Tabs below
+form-palette-value-tabsOnLeftHorizontally = Tabs on the left (horizontally)
+form-palette-value-tabsOnRightHorizontally = Tabs on the right (horizontally)
+form-palette-value-swipeTouchScreen = Swipe (touch screen)
+form-palette-value-tooltipPopUp = Pop-up
+form-palette-value-tooltipButton = Button
+form-palette-value-tooltipDisplayAutomatically = Display automatically
+form-palette-value-tooltipDisplayLeft = Display to the left
+form-palette-value-tooltipDisplayAbove = Display above
+form-palette-value-tooltipDisplayRight = Display to the right
+form-palette-value-tooltipDisplayBelow = Display below
+form-palette-value-halfSpacing = Half
+form-palette-value-singleSpacing = Single
+form-palette-value-oneAndHalfSpacing = One and half
+form-palette-value-doubleSpacing = Double
+form-palette-value-itemsLeftTitlesLeft = Items left, titles left
+form-palette-value-itemsRightTitlesLeft = Items right, titles left
+form-palette-value-itemsLeftTitlesRight = Items left, titles right
+form-palette-value-itemsRightTitlesRight = Items right, titles right
+form-palette-value-itemsAutoTitlesLeft = Items auto, titles left
 form-palette-value-open = Open
 form-palette-value-unknown = Undetermined
 

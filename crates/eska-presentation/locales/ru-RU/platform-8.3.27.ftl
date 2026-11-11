@@ -1456,6 +1456,36 @@ form-palette-type-UsualGroup = Обычная группа
 form-palette-value-auto = Авто
 form-palette-value-autoStretch = Авто
 form-palette-value-lightMarking = Слабое выделение
+
+# Designer 8.3.27 palettes for pages.
+form-palette-type-Pages = Страницы
+form-palette-type-Page = Страница
+form-palette-property-PagesRepresentation = ОтображениеСтраниц
+form-palette-property-OnCurrentPageChange = ПриСменеСтраницы
+form-palette-property-VerticalScrollOnReduceSize = ВертикальнаяПрокруткаПриСжатии
+form-palette-value-usesCurrentRow = Использует
+form-palette-value-ignoresCurrentRow = Не использует
+form-palette-value-tabsAbove = Закладки сверху
+form-palette-value-tabsBelow = Закладки снизу
+form-palette-value-tabsOnLeftHorizontally = Закладки слева (горизонтально)
+form-palette-value-tabsOnRightHorizontally = Закладки справа (горизонтально)
+form-palette-value-swipeTouchScreen = Пролистывание (сенсорный экран)
+form-palette-value-tooltipPopUp = Всплывающая
+form-palette-value-tooltipButton = Кнопка
+form-palette-value-tooltipDisplayAutomatically = Отображать авто
+form-palette-value-tooltipDisplayLeft = Отображать слева
+form-palette-value-tooltipDisplayAbove = Отображать сверху
+form-palette-value-tooltipDisplayRight = Отображать справа
+form-palette-value-tooltipDisplayBelow = Отображать снизу
+form-palette-value-halfSpacing = Половинный
+form-palette-value-singleSpacing = Одинарный
+form-palette-value-oneAndHalfSpacing = Полуторный
+form-palette-value-doubleSpacing = Двойной
+form-palette-value-itemsLeftTitlesLeft = Элементы лево, заголовки лево
+form-palette-value-itemsRightTitlesLeft = Элементы право, заголовки лево
+form-palette-value-itemsLeftTitlesRight = Элементы лево, заголовки право
+form-palette-value-itemsRightTitlesRight = Элементы право, заголовки право
+form-palette-value-itemsAutoTitlesLeft = Элементы авто, заголовки лево
 form-palette-value-open = Открыть
 form-palette-value-unknown = Не определено
 

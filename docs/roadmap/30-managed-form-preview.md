@@ -3375,6 +3375,16 @@ dirty-правки, перенос кнопки между контейнера�
 [Эталоны палитр](../../tests/fixtures/forms/native-command-palette/README.md) ·
 [Отчёт Linux](../measurements/t161-command-palette-linux.json).
 
+Для группы страниц `Pages` сверены 24 строки, для страницы `Page` — 29.
+Палитра показывает событие смены страницы, режим вкладок, настройки заголовка
+и прокрутки. Строки с именами Конфигуратора сохраняют переход к исходным
+`AssociatedTableElementId`, `ChildrenAlign` и `ScrollOnCompress`.
+В установленном VSIX в ru/en проверены группа и все пять страниц формы
+`ПоступлениеНаРасчетныйСчет`. Полный сценарий инспекции остановился на поле
+с неразрешённым путём к данным.
+[Эталоны палитр](../../tests/fixtures/forms/native-property-palette/pages.json) ·
+[Отчёт Linux](../measurements/t161-pages-palette-linux.json).
+
 ### T162 — Сессии просмотра и обновление несохранённых исходников
 
 **Статус:** `IN-PROGRESS`. **Зависимости:** T154, T155, T161. **Владелец:** ESKA и Explorer.

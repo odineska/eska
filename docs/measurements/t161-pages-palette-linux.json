@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "task": "T161",
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "source": "tests/fixtures/forms/native-groups/PagesAuto.xml",
+  "sourceSha256": "e92790ab23e1cbe1412925f713bc27da6661bbc4154340da9dcd301643aaf289",
+  "fixture": "tests/fixtures/forms/native-property-palette/pages.json",
+  "fixtureSha256": "e964621d1dcb602a77cc6441327fd9f7febf6e1d19ee096ab6f65f9cdbcaa9c2",
+  "native": {
+    "pagesRows": 24,
+    "pageRows": 29,
+    "captureSha256": {
+      "ru": {
+        "pages": "46a762a1441ce8a8f95c371aad87e9194fef7353147483c42cd081268f3d2e1b",
+        "page": "e7d51000d7f6601169ed7ff3c2cb4e68a98e0720b8136d55a94090bceefbdbc9",
+        "pageWithoutTitle": "cd74377461b056ccd4815b7c686dd9910bb23a0c5b5a5f6026af607f730a9e91",
+        "pagesRepresentationChoices": "817a8ab0f1e9cdd6b6406d2f3724bcb162d47d35f04add88a8795272a33897b5",
+        "pageGroupingChoices": "0f44eb9b9168f2df329aa5d74573a2faccc9cd0513b96083d9b8d834c31eae55"
+      },
+      "en": {
+        "pages": "c2b7ccd0d901c19cb1693b6c4939cc61335f7b7409a6256000920068496dc217",
+        "page": "9f7214aec07af3d165ec7d589e4858cb6fdeb1897f7d2d1ac7d08d4a36d540ba",
+        "pageWithoutTitle": "adc2efd888b01316a74ca7ca00c3dbc0fdf115fc5feecc9bbff3be4022cd85dd",
+        "pagesRepresentationChoices": "bc0def6d04970cfd0d5f9a62e98f5e0e17ef0575d8495f87b608b1ab23e4f76d",
+        "pageGroupingChoices": "dd613d77dcfa6b2d1e032dcde2b7c6cf4e80e6b72ee3de1937f7588eb6f47778"
+      }
+    },
+    "roundtrip": {
+      "CurrentRowUse": [
+        "Use",
+        "DontUse"
+      ],
+      "ChildrenAlign": [
+        "ItemsRightTitlesLeft",
+        "ItemsLeftTitlesRight",
+        "ItemsRightTitlesRight",
+        "TitlesLeftDataAuto"
+      ],
+      "ToolTipRepresentation": [
+        "ShowAuto"
+      ],
+      "HorizontalSpacing": [
+        "OneAndHalf"
+      ]
+    }
+  },
+  "verification": {
+    "installedVsCode": "1.109.0",
+    "form": "Document.ПоступлениеНаРасчетныйСчет.Form.ФормаДокумента",
+    "locales": {
+      "ru": {
+        "selected": 6,
+        "receiptSha256": "f6bf831298780bc909a2408f9518d61ed8e23def0e56c648e3e029f964e28172"
+      },
+      "en": {
+        "selected": 6,
+        "receiptSha256": "5ea91716feee7d6d93db55f5b3b6e2fd669e34fbab5b52c9aecfd56f2fa06bd8"
+      }
+    },
+    "sourceWritesDuringViewing": false,
+    "fullApplicationPassed": false,
+    "firstUnresolvedElement": "РасшифровкаПлатежаУидДдсТчИсточникаСтрокой"
+  }
+}
