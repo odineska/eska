@@ -74,9 +74,29 @@ fn metadata_reference(key: &PropertyKey) -> bool {
             .is_some_and(|(kind, _)| kind.ends_with("Ref") && references::type_kind(kind).is_some())
 }
 
+fn serialized_unresolved_data_path(text: &str) -> bool {
+    // Designer preserves unresolved metadata references in this form on export.
+    text.strip_prefix("1/").is_some_and(|path| {
+        let references = path.strip_suffix("/-2").unwrap_or(path);
+        references.split('/').all(|part| {
+            part.strip_prefix("0:").is_some_and(|uuid| {
+                uuid.len() == 36
+                    && uuid.bytes().enumerate().all(|(index, byte)| {
+                        if matches!(index, 8 | 13 | 18 | 23) {
+                            byte == b'-'
+                        } else {
+                            byte.is_ascii_hexdigit()
+                        }
+                    })
+            })
+        })
+    })
+}
+
 #[derive(Clone, Copy)]
 pub(super) struct Context {
     binding: InputBinding,
+    unresolved_path: bool,
     in_table: bool,
     manual_max_width: bool,
     manual_max_height: bool,
@@ -84,8 +104,17 @@ pub(super) struct Context {
 
 impl Context {
     pub(super) fn new(view: &ElementPresentation, element: &EffectiveElement) -> Option<Self> {
-        let binding = InputBinding::new(view, element)?;
         let in_table = view.in_table;
+        let unresolved_path = in_table
+            && view.value_type.kind == FieldValueKind::Unknown
+            && element
+                .scalar("DataPath")
+                .is_some_and(serialized_unresolved_data_path);
+        let binding = if unresolved_path {
+            InputBinding::Unbound
+        } else {
+            InputBinding::new(view, element)?
+        };
         let manual_max = |name| {
             element
                 .scalar(name)
@@ -93,6 +122,7 @@ impl Context {
         };
         Some(Self {
             binding,
+            unresolved_path,
             in_table,
             manual_max_width: manual_max("AutoMaxWidth"),
             manual_max_height: manual_max("AutoMaxHeight"),
@@ -110,7 +140,13 @@ pub(super) fn definitions(
             let available = setting
                 .disabled_on
                 .is_none_or(|rule| !rule.applies(context));
-            (&setting.definition, available)
+            // The native row is blank. The source property remains in the extra XML rows.
+            let definition = if context.unresolved_path && setting.definition.id == "DataPath" {
+                &EMPTY_DATA_PATH
+            } else {
+                &setting.definition
+            };
+            (definition, available)
         })
 }
 
@@ -231,6 +267,15 @@ const fn event(id: &'static str) -> Setting {
     }
 }
 
+const DATA_PATH: Setting = setting(
+    "DataPath",
+    PaletteCategory::Main,
+    PaletteEditor::Binding,
+    PlatformPropertyValue::Empty,
+);
+const EMPTY_DATA_PATH: PaletteDefinition =
+    DATA_PATH.definition.with_source(SettingSource::Unmapped);
+
 // Native Configurator 8.3.27, Version8_3_27, in ordinary forms and value table columns.
 // Keep the rows in native order. A rule omits settings absent in the selected context.
 const INPUT_FIELD: &[Setting] = {
@@ -252,7 +297,7 @@ const INPUT_FIELD: &[Setting] = {
         setting("Type", Main, Enum, Empty)
             .from(SettingSource::Unmapped)
             .on(Rule::Unbound),
-        setting("DataPath", Main, Binding, Empty),
+        DATA_PATH,
         setting("TitleLocation", Main, Enum, Auto).captions(&[("Top", "top")]),
         setting("Visible", Main, Boolean, CHECKED),
         setting("UserVisibility", Main, Dialog, OPEN).from(Property("UserVisible")),
