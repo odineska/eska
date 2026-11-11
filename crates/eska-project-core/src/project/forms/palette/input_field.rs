@@ -10,7 +10,7 @@ use crate::project::metadata_model::PropertyKey;
 
 #[derive(Clone, Copy, Eq, PartialEq)]
 enum InputBinding {
-    Unbound,
+    Unbound { serialized_path: bool },
     String,
     Number,
     Date,
@@ -60,7 +60,16 @@ impl InputBinding {
                 };
                 Self::ValueList { extended }
             }
-            FieldValueKind::Unknown if unbound_data_path(element) => Self::Unbound,
+            FieldValueKind::Unknown => {
+                let serialized_path = view.in_table
+                    && element
+                        .scalar("DataPath")
+                        .is_some_and(serialized_unresolved_data_path);
+                if !serialized_path && !unbound_data_path(element) {
+                    return None;
+                }
+                Self::Unbound { serialized_path }
+            }
             _ => return None,
         })
     }
@@ -96,7 +105,6 @@ fn serialized_unresolved_data_path(text: &str) -> bool {
 #[derive(Clone, Copy)]
 pub(super) struct Context {
     binding: InputBinding,
-    unresolved_path: bool,
     in_table: bool,
     manual_max_width: bool,
     manual_max_height: bool,
@@ -104,17 +112,7 @@ pub(super) struct Context {
 
 impl Context {
     pub(super) fn new(view: &ElementPresentation, element: &EffectiveElement) -> Option<Self> {
-        let in_table = view.in_table;
-        let unresolved_path = in_table
-            && view.value_type.kind == FieldValueKind::Unknown
-            && element
-                .scalar("DataPath")
-                .is_some_and(serialized_unresolved_data_path);
-        let binding = if unresolved_path {
-            InputBinding::Unbound
-        } else {
-            InputBinding::new(view, element)?
-        };
+        let binding = InputBinding::new(view, element)?;
         let manual_max = |name| {
             element
                 .scalar(name)
@@ -122,8 +120,7 @@ impl Context {
         };
         Some(Self {
             binding,
-            unresolved_path,
-            in_table,
+            in_table: view.in_table,
             manual_max_width: manual_max("AutoMaxWidth"),
             manual_max_height: manual_max("AutoMaxHeight"),
         })
@@ -141,7 +138,13 @@ pub(super) fn definitions(
                 .disabled_on
                 .is_none_or(|rule| !rule.applies(context));
             // The native row is blank. The source property remains in the extra XML rows.
-            let definition = if context.unresolved_path && setting.definition.id == "DataPath" {
+            let definition = if matches!(
+                context.binding,
+                InputBinding::Unbound {
+                    serialized_path: true
+                }
+            ) && setting.definition.id == "DataPath"
+            {
                 &EMPTY_DATA_PATH
             } else {
                 &setting.definition
@@ -178,15 +181,15 @@ impl Rule {
         let text = matches!(
             binding,
             B::String
-                | B::Unbound
+                | B::Unbound { .. }
                 | B::StringAndNumber
                 | B::StringAndReference
                 | B::ValueList { .. }
         );
         match self {
             Self::Always => true,
-            Self::Bound => binding != B::Unbound,
-            Self::Unbound => binding == B::Unbound,
+            Self::Bound => !matches!(binding, B::Unbound { .. }),
+            Self::Unbound => matches!(binding, B::Unbound { .. }),
             Self::Text => text,
             Self::Format => {
                 matches!(binding, B::ValueList { .. })
@@ -196,7 +199,7 @@ impl Rule {
             Self::Numeric => matches!(
                 binding,
                 B::Number
-                    | B::Unbound
+                    | B::Unbound { .. }
                     | B::StringAndNumber
                     | B::StringAndReference
                     | B::ValueList { .. }
