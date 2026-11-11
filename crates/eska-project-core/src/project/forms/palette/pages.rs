@@ -3,13 +3,13 @@
 use super::{
     PaletteCategory::{Appearance, Layout, Main, Usage},
     PaletteDefinition as Row,
-    PaletteEditor::{Binding, Boolean, Color, Enum, Number, Picture, Reference, Shortcut},
+    PaletteEditor::{Binding, Boolean, Color, Enum, Number, Picture, Shortcut},
     PlatformPropertyValue::{Auto, AutoStretch, Choice, Empty},
     SettingSource::{Kind, Property},
     common::{
-        CHECKED, ENABLE_CONTENT_CHANGE, ENABLED, IMPORTANCE, NAME, READ_ONLY, TITLE, TITLE_FONT,
-        TITLE_TEXT_COLOR, TOOLTIP, TOOLTIP_REPRESENTATION, TRISTATE, UNCHECKED, USER_VISIBILITY,
-        VISIBLE, WIDTH, ZERO, event,
+        ASSOCIATED_TABLE, CHECKED, CURRENT_ROW_USE, ENABLE_CONTENT_CHANGE, ENABLED, GROUPING,
+        IMPORTANCE, NAME, READ_ONLY, TITLE, TITLE_FONT, TITLE_TEXT_COLOR, TOOLTIP,
+        TOOLTIP_REPRESENTATION, TRISTATE, UNCHECKED, USER_VISIBILITY, VISIBLE, WIDTH, ZERO, event,
     },
 };
 
@@ -69,10 +69,8 @@ const SPACING: &[(&str, &str)] = &[
 ];
 
 const PAGES: &[Row] = &[
-    Row::new("CurrentRowUse", Main, Enum, Auto)
-        .with_enum_captions(&[("Use", "usesCurrentRow"), ("DontUse", "ignoresCurrentRow")]),
-    Row::new("AssociatedTable", Main, Reference, Empty)
-        .with_source(Property("AssociatedTableElementId")),
+    CURRENT_ROW_USE,
+    ASSOCIATED_TABLE,
     SHORTCUT,
     TOOLTIP,
     TOOLTIP_MODE,
@@ -101,11 +99,7 @@ const PAGES: &[Row] = &[
 ];
 
 const PAGE: &[Row] = &[
-    Row::new("Group", Main, Enum, Choice("vertical")).with_enum_captions(&[
-        ("Vertical", "vertical"),
-        ("HorizontalIfPossible", "horizontalIfPossible"),
-        ("AlwaysHorizontal", "alwaysHorizontal"),
-    ]),
+    Row::new("Group", Main, Enum, Choice("vertical")).with_enum_captions(GROUPING),
     Row::new("TitleDataPath", Main, Binding, Empty),
     SHORTCUT,
     TOOLTIP,

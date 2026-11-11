@@ -1456,6 +1456,17 @@ form-palette-type-UsualGroup = Regular group
 form-palette-value-auto = Auto
 form-palette-value-autoStretch = Default
 form-palette-value-lightMarking = Light marking
+form-palette-property-CollapsedRepresentationTitle = CollapsedRepresentationTitle
+form-palette-property-Collapsed = Collapsed
+form-palette-property-ControlRepresentation = ControlRepresentation
+form-palette-property-ShowLeftMargin = ShowLeftMargin
+form-palette-property-HiddenRepresentationTitleBackColor = HiddenRepresentationTitleBackColor
+form-palette-value-regularGroupBehavior = Regular
+form-palette-value-collapsibleGroupBehavior = Collapsible
+form-palette-value-titleHyperlink = Hyperlink link
+form-palette-value-groupControlPicture = Picture
+form-palette-value-normalMarking = Normal marking
+form-palette-value-strongMarking = Strong marking
 
 # Designer 8.3.27 palettes for pages.
 form-palette-type-Pages = Pages

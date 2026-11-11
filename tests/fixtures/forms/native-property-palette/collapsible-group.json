@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "profiles": {
+    "Collapsible": [
+      "Name", "Title", "Type", "Visible", "UserVisibility", "Enabled", "ReadOnly",
+      "EnableContentChange", "DisplayImportance", "Behavior", "CollapsedRepresentationTitle",
+      "Collapsed", "ControlRepresentation", "Representation", "ShowLeftMargin", "Group",
+      "United", "TitleDataPath", "CurrentRowUse", "AssociatedTable",
+      "Shortcut", "ToolTip", "ToolTipRepresentation", "ItemsAndTitlesAlign", "ShowTitle",
+      "TitleTextColor", "TitleFont", "HorizontalSpacing", "VerticalSpacing", "BackColor",
+      "HiddenRepresentationTitleBackColor", "Width", "Height", "HorizontalAlignInGroup",
+      "VerticalAlignInGroup", "ChildItemsHorizontalAlign", "ChildItemsVerticalAlign",
+      "HorizontalStretch", "VerticalStretch"
+    ]
+  },
+  "captions": {
+    "CollapsedRepresentationTitle": {"ru-RU": "ЗаголовокСвернутогоОтображения", "en-US": "CollapsedRepresentationTitle"},
+    "Collapsed": {"ru-RU": "Свернута", "en-US": "Collapsed"},
+    "ControlRepresentation": {"ru-RU": "ОтображениеУправления", "en-US": "ControlRepresentation"},
+    "ShowLeftMargin": {"ru-RU": "ОтображатьОтступСлева", "en-US": "ShowLeftMargin"},
+    "HiddenRepresentationTitleBackColor": {"ru-RU": "ЦветФонаЗаголовкаСкрытогоОтображения", "en-US": "HiddenRepresentationTitleBackColor"}
+  },
+  "default": {
+    "profile": "Collapsible",
+    "categories": ["main", "usage", "appearance", "layout"],
+    "unavailable": [],
+    "values": {
+      "Behavior": {"kind": "declared", "caption": {"ru-RU": "Свертываемая", "en-US": "Collapsible"}},
+      "CollapsedRepresentationTitle": {"kind": "absent", "default": {"kind": "empty"}},
+      "Collapsed": {"kind": "absent", "default": {"kind": "boolean", "value": false}},
+      "ControlRepresentation": {"kind": "absent", "caption": {"ru-RU": "Гиперссылка заголовка", "en-US": "Hyperlink link"}},
+      "ShowLeftMargin": {"kind": "absent", "default": {"kind": "boolean", "value": true}},
+      "Group": {"kind": "absent", "caption": {"ru-RU": "Горизонтальная если возможно", "en-US": "Horizontal if possible"}},
+      "HiddenRepresentationTitleBackColor": {"kind": "absent", "default": {"kind": "auto"}}
+    }
+  }
+}

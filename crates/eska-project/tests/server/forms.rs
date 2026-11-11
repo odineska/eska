@@ -1,6 +1,8 @@
 use super::*;
 use eska_project_core::project::metadata_edit::snapshot;
 
+#[path = "forms_collapsible_palette.rs"]
+mod collapsible_palette;
 #[path = "forms_command_palette.rs"]
 mod command_palette;
 #[path = "forms_display_palette.rs"]

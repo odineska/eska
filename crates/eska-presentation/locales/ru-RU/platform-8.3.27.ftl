@@ -1456,6 +1456,17 @@ form-palette-type-UsualGroup = Обычная группа
 form-palette-value-auto = Авто
 form-palette-value-autoStretch = Авто
 form-palette-value-lightMarking = Слабое выделение
+form-palette-property-CollapsedRepresentationTitle = ЗаголовокСвернутогоОтображения
+form-palette-property-Collapsed = Свернута
+form-palette-property-ControlRepresentation = ОтображениеУправления
+form-palette-property-ShowLeftMargin = ОтображатьОтступСлева
+form-palette-property-HiddenRepresentationTitleBackColor = ЦветФонаЗаголовкаСкрытогоОтображения
+form-palette-value-regularGroupBehavior = Обычное
+form-palette-value-collapsibleGroupBehavior = Свертываемая
+form-palette-value-titleHyperlink = Гиперссылка заголовка
+form-palette-value-groupControlPicture = Картинка
+form-palette-value-normalMarking = Обычное выделение
+form-palette-value-strongMarking = Сильное выделение
 
 # Designer 8.3.27 palettes for pages.
 form-palette-type-Pages = Страницы
