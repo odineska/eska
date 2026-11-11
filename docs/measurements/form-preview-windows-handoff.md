@@ -1803,6 +1803,19 @@ Windows. Текущий пиксельный сценарий снимает п�
 [Числовой корпус](../../tests/fixtures/forms/native-number-inputs/README.md) ·
 [Отчёт Linux](t157-vertical-captions-linux.json).
 
+### Сворачиваемые группы
+
+Откройте `GroupCollapsible.xml` и проверьте исходный заголовок-гиперссылку,
+`ControlRepresentation=Picture`, `ShowLeftMargin=false`, сильное
+выделение и скрытый заголовок. Сравните отступы и первый контрол с
+Конфигуратором Windows. В `CompactGroupCaptions.xml` проверьте
+`Width=19/31/33/42` и сравните колонку подписей вместе с кнопками выбора
+ссылочного поля. Сценарий `groups` в установленном VSIX переключает
+режимы из несохранённого XML и проверяет сворачивание между окнами.
+На реальной форме Stalingrad сравните пять полей «Служебных» при узкой
+рамке и после её расширения.
+[Формы и результаты Linux](t157-collapsible-groups-linux.md).
+
 ### Расширение объединённых колонок
 
 Повторите `BoundedColumns.xml` и `BoundedDateColumns.xml` в родном
