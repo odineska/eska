@@ -689,7 +689,7 @@ fn native_groups_keep_title_styles_and_command_area_visibility() {
             retained_bytes: 0,
         }
     });
-    let mut count = 0;
+    let mut views = std::collections::HashMap::new();
     for entry in std::fs::read_dir(&root).unwrap() {
         let path = entry.unwrap().path();
         if path.extension().and_then(|value| value.to_str()) != Some("xml") {
@@ -703,48 +703,55 @@ fn native_groups_keep_title_styles_and_command_area_visibility() {
             "{name}: {:?}",
             view.diagnostics
         );
-        let control = &view.elements[1];
-        match name {
-            "GroupTitleFont" => {
-                assert_eq!(control.title_font.points, 14.0);
-                assert_eq!(control.title_font.weight, 700);
-                assert_eq!(view.elements[2].font.points, 10.0);
-            }
-            "GroupNone" => assert_eq!(control.title_font.points, 10.0),
-            "GroupDefault" | "GroupWeak" | "GroupStrong" => {
-                assert_eq!(control.title_font.points, 12.0);
-            }
-            "GroupBackColor" => {
-                assert_eq!(control.background, ResolvedColor::Web("LightYellow".into()));
-                assert_eq!(control.title_color, ResolvedColor::Web("Blue".into()));
-            }
-            "GroupHidden" | "ButtonGroup" | "Popup" => assert!(!control.displayed),
-            "BarWithButtonGroup" | "BarWithPopup" => {
-                assert!(view.elements.iter().any(|item| {
-                    item.identity.key == super::super::ElementKey::Xml(1) && item.displayed
-                }));
-                assert!(view.elements.iter().any(|item| {
-                    item.identity.key == super::super::ElementKey::Xml(10) && item.displayed
-                }));
-            }
-            "StyleReferences" => {
-                assert_eq!(control.font.points, 12.0);
-                assert_eq!(control.font.weight, 700);
-                assert!(control.font.italic);
-                assert_eq!(control.foreground, ResolvedColor::Web("DarkOrange".into()));
-                let amount = view
-                    .elements
-                    .iter()
-                    .find(|item| item.identity.key == super::super::ElementKey::Xml(20))
-                    .unwrap();
-                assert_eq!(amount.title_font.points, 10.0);
-                assert_eq!(amount.title_font.weight, 700);
-            }
-            _ => {}
-        }
-        count += 1;
+        assert!(view.elements.len() > 1, "{name} has no form elements");
+        views.insert(name.to_owned(), view);
     }
-    assert_eq!(count, 23);
+
+    let view = |name: &str| {
+        views
+            .get(name)
+            .unwrap_or_else(|| panic!("missing native group fixture {name}"))
+    };
+    let control = |name| &view(name).elements[1];
+
+    let group = control("GroupTitleFont");
+    assert_eq!(group.title_font.points, 14.0);
+    assert_eq!(group.title_font.weight, 700);
+    assert_eq!(view("GroupTitleFont").elements[2].font.points, 10.0);
+    assert_eq!(control("GroupNone").title_font.points, 10.0);
+    for name in ["GroupDefault", "GroupWeak", "GroupStrong"] {
+        assert_eq!(control(name).title_font.points, 12.0, "{name}");
+    }
+    let group = control("GroupBackColor");
+    assert_eq!(group.background, ResolvedColor::Web("LightYellow".into()));
+    assert_eq!(group.title_color, ResolvedColor::Web("Blue".into()));
+    for name in ["GroupHidden", "ButtonGroup", "Popup"] {
+        assert!(!control(name).displayed, "{name}");
+    }
+    for name in ["BarWithButtonGroup", "BarWithPopup"] {
+        let bar = view(name);
+        for id in [1, 10] {
+            assert!(
+                bar.elements.iter().any(|item| {
+                    item.identity.key == super::super::ElementKey::Xml(id) && item.displayed
+                }),
+                "{name}: element {id} is hidden or missing"
+            );
+        }
+    }
+
+    let styled = control("StyleReferences");
+    assert_eq!(styled.font.points, 12.0);
+    assert_eq!(styled.font.weight, 700);
+    assert!(styled.font.italic);
+    assert_eq!(styled.foreground, ResolvedColor::Web("DarkOrange".into()));
+    let amount = view("StyleReferences")
+        .elements
+        .iter()
+        .find(|item| item.identity.key == super::super::ElementKey::Xml(20))
+        .unwrap();
+    assert_eq!(amount.title_font.points, 10.0);
+    assert_eq!(amount.title_font.weight, 700);
 }
 #[test]
 fn borrowed_standard_attribute_uses_base_properties_omitted_by_extension() {
