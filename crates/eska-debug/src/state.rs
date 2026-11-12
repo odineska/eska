@@ -20,6 +20,9 @@ pub struct Variable {
 pub struct Thread {
     pub target: Target,
     pub stack: Option<Vec<(u64, Frame)>>,
+    pub snapshot_count: usize,
+    pub free_snapshots: Vec<String>,
+    pub held_snapshots: Vec<String>,
 }
 
 #[derive(Default)]
@@ -45,6 +48,9 @@ impl State {
             Thread {
                 target,
                 stack: None,
+                snapshot_count: 0,
+                free_snapshots: Vec::new(),
+                held_snapshots: Vec::new(),
             },
         );
         id
@@ -82,6 +88,7 @@ impl State {
             .retain(|variable, _| variable.position.thread != id);
         if let Some(thread) = self.threads.get_mut(&id) {
             thread.stack = None;
+            thread.free_snapshots.append(&mut thread.held_snapshots);
         }
     }
 

@@ -9,6 +9,31 @@ use serde_json::{Value, json};
 pub(super) const LIMIT: Failure = "debug-value-limit";
 const MAX_CHILDREN: usize = 512;
 
+// Save the result once in 1C session storage. DAP handles contain only the
+// retrieval expression and paths within that value, never the user's expression.
+pub(super) fn store_expression(expression: &str, address: Option<&str>) -> String {
+    let destination = address.map_or_else(
+        || "Новый УникальныйИдентификатор".to_owned(),
+        |address| format!("\"{address}\""),
+    );
+    let store = format!("ПоместитьВоВременноеХранилище(({expression}), {destination})");
+    if address.is_some() {
+        dbgs::snapshot_expression(&store)
+    } else {
+        store
+    }
+}
+
+pub(super) fn snapshot_address(presentation: &str) -> Option<&str> {
+    let address = presentation.strip_prefix('"')?.strip_suffix('"')?;
+    (address.starts_with("e1cib/tempstorage/")
+        && address.len() <= 512
+        && address
+            .bytes()
+            .all(|byte| byte.is_ascii_alphanumeric() || b"/-_.?=&%+".contains(&byte)))
+    .then_some(address)
+}
+
 pub(super) fn evaluated(
     state: &mut State,
     variable: &Variable,
@@ -33,7 +58,7 @@ pub(super) fn children(
     }
     let children = results.into_iter().flat_map(|result| result.children).map(|value| {
         let mut child = variable.clone();
-        let reference = if value.expandable && !value.name.is_empty() {
+        let reference = if value.can_expand() && !value.name.is_empty() {
             let selector = if child.path.is_empty() {
                 Selector::Expression(value.name.clone())
             } else if variable.indexed {
@@ -54,10 +79,10 @@ fn reference(
     mut variable: Variable,
     value: &dbgs::Value,
 ) -> Result<u64, Failure> {
-    if !value.expandable {
+    if !value.can_expand() {
         return Ok(0);
     }
-    variable.indexed = value.indexed;
+    variable.indexed = !value.expandable && value.indexed;
     state.add_variable(variable).ok_or(LIMIT)
 }
 

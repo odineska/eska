@@ -38,6 +38,7 @@ pub struct Frame {
 #[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum Selector {
     Expression(String),
+    Snapshot(String),
     Property(String),
     Index(u32),
 }
@@ -50,6 +51,12 @@ pub struct Value {
     pub expandable: bool,
     pub indexed: bool,
     pub error: bool,
+}
+
+impl Value {
+    pub const fn can_expand(&self) -> bool {
+        self.expandable || self.indexed
+    }
 }
 
 #[derive(Debug)]
@@ -202,6 +209,11 @@ impl Server {
         for selector in path {
             let (kind, field, value) = match selector {
                 Selector::Expression(text) => ("expression", "expression", escape(text)),
+                Selector::Snapshot(address) => (
+                    "expression",
+                    "expression",
+                    escape(&snapshot_expression(&format!("\"{address}\""))),
+                ),
                 Selector::Property(text) => ("property", "property", escape(text)),
                 Selector::Index(index) => ("index", "index", index.to_string()),
             };
@@ -293,6 +305,10 @@ pub fn random_id() -> io::Result<String> {
     Ok(result)
 }
 
+pub fn snapshot_expression(address_expression: &str) -> String {
+    format!("ПолучитьИзВременногоХранилища({address_expression})")
+}
+
 fn event(node: Node<'_, '_>) -> Option<Event> {
     let id = child(node, "targetID");
     match text(node, "cmdID") {
@@ -346,7 +362,8 @@ fn calculation(node: Node<'_, '_>) -> Option<Calculation> {
         child(node, "resultValueInfo"),
         decoded(node, "localVariableName"),
     );
-    result.error = text(node, "errorOccurred") == "true";
+    result.error =
+        text(node, "errorOccurred") == "true" || text(node, "evalResultState") == "withErrors";
     if result.error {
         result.text = decoded(node, "exceptionStr");
     }
@@ -410,7 +427,7 @@ fn decoded(node: Node<'_, '_>, name: &'static str) -> String {
         return String::new();
     }
     let bytes = STANDARD
-        .decode(raw)
+        .decode(raw.split_ascii_whitespace().collect::<String>())
         .unwrap_or_else(|_| raw.as_bytes().to_vec());
     String::from_utf8_lossy(&bytes).into_owned()
 }

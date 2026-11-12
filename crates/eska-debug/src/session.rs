@@ -21,7 +21,7 @@ use crate::{
     dap::{self, Output, Request},
     dbgs::{self, Calculation, Event, Module, Selector, Server, Step, Target},
     source::Sources,
-    state::{State, Variable},
+    state::{Position, State, Variable},
 };
 
 use client::Client;
@@ -29,6 +29,7 @@ use poll::Poll;
 
 const MAX_THREADS: usize = 256;
 const MAX_PENDING: usize = 16;
+const MAX_SNAPSHOTS_PER_TARGET: usize = 256;
 
 pub struct Config {
     pub endpoint: url::Url,
@@ -43,9 +44,17 @@ type Failure = &'static str;
 const INVALID: Failure = "debug-request-unavailable";
 const ENDPOINT: Failure = "debug-endpoint-unavailable";
 
+enum CalculationPhase {
+    Store,
+    ReadSnapshot(String),
+    ReplaceSnapshot(String),
+    Children,
+}
+
 struct Pending {
     request: Request,
     variable: Variable,
+    phase: CalculationPhase,
     deadline: Instant,
 }
 
@@ -448,7 +457,7 @@ impl<W: Write> Session<'_, W> {
                 }
                 Event::Calculated(result) => {
                     if let Some(pending) = self.pending.remove(&result.id) {
-                        self.finish(&pending, vec![result])?;
+                        self.finish(pending, vec![result])?;
                     }
                 }
             }
@@ -457,19 +466,38 @@ impl<W: Write> Session<'_, W> {
     }
 
     fn calculation_request(&mut self, request: Request) -> io::Result<()> {
-        let variable = if request.command == "evaluate" {
+        let calculation = if self.pending.len() >= MAX_PENDING {
+            Err(INVALID)
+        } else if request.command == "evaluate" {
             self.expression(&request.arguments)
         } else {
             request.arguments["variablesReference"]
                 .as_u64()
                 .and_then(|id| self.state.variable(id))
+                .map(|variable| (variable, CalculationPhase::Children))
+                .ok_or(INVALID)
         };
-        let Some(variable) = variable.filter(|_| self.pending.len() < MAX_PENDING) else {
-            return self
-                .output
-                .response(&request, Err(self.language.text(INVALID)));
+        let (variable, phase) = match calculation {
+            Ok(calculation) => calculation,
+            Err(key) => return self.output.response(&request, Err(self.language.text(key))),
         };
+        self.submit(Pending {
+            request,
+            variable,
+            phase,
+            deadline: Instant::now() + Duration::from_secs(4),
+        })
+    }
+
+    fn submit(&mut self, pending: Pending) -> io::Result<()> {
+        if Instant::now() >= pending.deadline {
+            return self.output.response(
+                &pending.request,
+                Err(self.language.text("debug-evaluation-timeout")),
+            );
+        }
         let id = dbgs::random_id()?;
+        let variable = &pending.variable;
         let result = self.server().and_then(|server| {
             let target = &self
                 .state
@@ -488,14 +516,9 @@ impl<W: Write> Session<'_, W> {
                 )
                 .map_err(|_| ENDPOINT)
         });
-        let pending = Pending {
-            request,
-            variable,
-            deadline: Instant::now() + Duration::from_secs(4),
-        };
         match result {
             Ok(results) if results.iter().any(|result| result.id == id) => self.finish(
-                &pending,
+                pending,
                 results
                     .into_iter()
                     .filter(|result| result.id == id)
@@ -511,12 +534,39 @@ impl<W: Write> Session<'_, W> {
         }
     }
 
-    fn expression(&self, arguments: &Value) -> Option<Variable> {
+    fn expression(&mut self, arguments: &Value) -> Result<(Variable, CalculationPhase), Failure> {
         let expression = arguments["expression"]
             .as_str()
-            .filter(|text| !text.is_empty() && text.len() <= 16384)?;
-        let position = if let Some(id) = arguments["frameId"].as_u64() {
-            self.state.frame(id)?
+            .filter(|text| !text.is_empty() && text.len() <= 16384)
+            .ok_or(INVALID)?;
+        let position = self.expression_position(arguments).ok_or(INVALID)?;
+        let thread = self
+            .state
+            .threads
+            .get_mut(&position.thread)
+            .ok_or(INVALID)?;
+        let address = thread.free_snapshots.pop();
+        if address.is_none() {
+            if thread.snapshot_count >= MAX_SNAPSHOTS_PER_TARGET {
+                return Err("debug-snapshot-limit");
+            }
+            thread.snapshot_count += 1;
+        }
+        let variable = Variable {
+            position,
+            path: vec![Selector::Expression(values::store_expression(
+                expression,
+                address.as_deref(),
+            ))],
+            indexed: false,
+        };
+        let phase = address.map_or(CalculationPhase::Store, CalculationPhase::ReplaceSnapshot);
+        Ok((variable, phase))
+    }
+
+    fn expression_position(&self, arguments: &Value) -> Option<Position> {
+        if let Some(id) = arguments["frameId"].as_u64() {
+            self.state.frame(id)
         } else {
             let mut stopped = self
                 .state
@@ -527,37 +577,95 @@ impl<W: Write> Session<'_, W> {
             if stopped.next().is_some() {
                 return None;
             }
-            self.state.frame(frame)?
-        };
-        Some(Variable {
-            position,
-            path: vec![Selector::Expression(expression.to_owned())],
-            indexed: false,
-        })
+            self.state.frame(frame)
+        }
     }
 
-    fn finish(&mut self, pending: &Pending, results: Vec<Calculation>) -> io::Result<()> {
-        let result = if !self.state.is_current(&pending.variable.position) {
-            Err(self.language.text(INVALID))
-        } else if let Some(failed) = results.iter().find(|value| value.value.error) {
-            Err(if failed.value.text.is_empty() {
+    fn finish(&mut self, mut pending: Pending, results: Vec<Calculation>) -> io::Result<()> {
+        if !self.state.is_current(&pending.variable.position) {
+            return self
+                .output
+                .response(&pending.request, Err(self.language.text(INVALID)));
+        }
+        if let Some(failed) = results.iter().find(|value| value.value.error) {
+            let thread = self
+                .state
+                .threads
+                .get_mut(&pending.variable.position.thread);
+            let hidden = match pending.phase {
+                CalculationPhase::Store => {
+                    if let Some(thread) = thread {
+                        thread.snapshot_count -= 1;
+                    }
+                    false
+                }
+                CalculationPhase::ReadSnapshot(_) => true,
+                CalculationPhase::ReplaceSnapshot(address) => {
+                    let hidden = failed.value.text.contains(&address);
+                    if let Some(thread) = thread {
+                        thread.free_snapshots.push(address);
+                    }
+                    hidden
+                }
+                CalculationPhase::Children => {
+                    matches!(pending.variable.path.first(), Some(Selector::Snapshot(address))
+                        if failed.value.text.contains(address))
+                }
+            };
+            let message = if hidden || failed.value.text.is_empty() {
                 self.language.text("debug-evaluation-failed")
             } else {
                 failed.value.text.clone()
-            })
-        } else if pending.request.command == "evaluate" {
-            results
-                .first()
-                .ok_or("debug-evaluation-failed")
-                .and_then(|result| {
-                    values::evaluated(&mut self.state, &pending.variable, &result.value)
-                })
-                .map_err(|key| self.language.text(key))
-        } else {
-            values::children(&mut self.state, &pending.variable, results)
-                .map_err(|key| self.language.text(key))
+            };
+            return self.output.response(&pending.request, Err(message));
+        }
+        let result = match pending.phase {
+            CalculationPhase::Store => {
+                let Some(address) = results
+                    .first()
+                    .and_then(|result| values::snapshot_address(&result.value.text))
+                else {
+                    return self.output.response(
+                        &pending.request,
+                        Err(self.language.text("debug-evaluation-failed")),
+                    );
+                };
+                pending.variable.path = vec![Selector::Snapshot(address.to_owned())];
+                pending.phase = CalculationPhase::ReadSnapshot(address.to_owned());
+                return self.submit(pending);
+            }
+            CalculationPhase::ReadSnapshot(address)
+            | CalculationPhase::ReplaceSnapshot(address) => {
+                let Some(result) = results.first() else {
+                    return self.output.response(
+                        &pending.request,
+                        Err(self.language.text("debug-evaluation-failed")),
+                    );
+                };
+                pending.variable.path = vec![Selector::Snapshot(address.clone())];
+                let evaluated =
+                    values::evaluated(&mut self.state, &pending.variable, &result.value);
+                if let Some(thread) = self
+                    .state
+                    .threads
+                    .get_mut(&pending.variable.position.thread)
+                {
+                    if result.value.can_expand() && evaluated.is_ok() {
+                        thread.held_snapshots.push(address);
+                    } else {
+                        thread.free_snapshots.push(address);
+                    }
+                }
+                evaluated
+            }
+            CalculationPhase::Children => {
+                values::children(&mut self.state, &pending.variable, results)
+            }
         };
-        self.output.response(&pending.request, result)
+        self.output.response(
+            &pending.request,
+            result.map_err(|key| self.language.text(key)),
+        )
     }
 
     fn cancel(&mut self, arguments: &Value) -> io::Result<()> {

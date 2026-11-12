@@ -1166,5 +1166,6 @@ runtime-probe-ready = The saved profile platform and connection are available.
 runtime-endpoint-unavailable = A configured endpoint is unreachable.
 debug-locals = Local variables
 debug-value-limit = The debugger data limit was exceeded (512 children, 8192 references or 32 nesting levels). Use a more specific expression to inspect the required value.
+debug-snapshot-limit = The debugger reached its limit of 256 saved evaluation results for this target.
 debug-evaluation-failed = Could not evaluate the expression.
 debug-evaluation-timeout = The server did not return a calculation for the active frame in time.

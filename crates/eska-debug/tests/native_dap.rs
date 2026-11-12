@@ -341,3 +341,90 @@ fn native_attach_detach_series() {
     }
     eprintln!("attach/detach memory RSS/HWM KiB: {process_memory:?}");
 }
+
+#[test]
+#[ignore = "requires the owned side-effect fixture and its HTTP debug server"]
+fn evaluate_expands_a_nested_snapshot_without_running_the_function_again() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let mut dap = Dap::start(root, "test", "launch");
+    dap.success("initialize", json!({"adapterID":"eska"}));
+    dap.success("launch", json!({}));
+    let points = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":5}]}),
+    );
+    assert_eq!(points["breakpoints"][0]["verified"], true);
+    dap.success("configurationDone", json!({}));
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let frame = stack["stackFrames"][0]["id"].clone();
+    let evaluated = dap.success(
+        "evaluate",
+        json!({"frameId":frame,"expression":"ПолучитьСнимок()"}),
+    );
+    let reference = evaluated["variablesReference"].clone();
+    assert!(reference.as_u64().is_some_and(|id| id > 0), "{evaluated}");
+    let counter = |dap: &mut Dap, frame: &Value| {
+        dap.success("evaluate", json!({"frameId":frame,"expression":"Счетчик"}))["result"].clone()
+    };
+    assert_eq!(counter(&mut dap, &frame), "1");
+    let number = |dap: &mut Dap, reference: &Value| {
+        let fields = dap.success("variables", json!({"variablesReference":reference}));
+        let array = fields["variables"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|field| field["name"] == "Данные")
+            .unwrap();
+        assert!(
+            array["variablesReference"]
+                .as_u64()
+                .is_some_and(|id| id > 0),
+            "{array}"
+        );
+        let items = dap.success(
+            "variables",
+            json!({"variablesReference":array["variablesReference"]}),
+        );
+        assert!(
+            items["variables"][0]["variablesReference"]
+                .as_u64()
+                .is_some_and(|id| id > 0),
+            "{items}"
+        );
+        let nested = dap.success(
+            "variables",
+            json!({"variablesReference":items["variables"][0]["variablesReference"]}),
+        );
+        assert_eq!(nested["variables"][0]["name"], "Номер");
+        nested["variables"][0]["value"].clone()
+    };
+    for _ in 0..3 {
+        assert_eq!(number(&mut dap, &reference), "1");
+    }
+    assert_eq!(counter(&mut dap, &frame), "1");
+    let second = dap.success(
+        "evaluate",
+        json!({"frameId":frame,"expression":"ПолучитьСнимок()"}),
+    );
+    assert_ne!(second["variablesReference"], reference);
+    assert_eq!(number(&mut dap, &second["variablesReference"]), "2");
+    assert_eq!(number(&mut dap, &reference), "1");
+    assert_eq!(counter(&mut dap, &frame), "2");
+    dap.success("stepIn", json!({"threadId":thread}));
+    let thread = dap.stop();
+    assert_eq!(
+        dap.request("variables", json!({"variablesReference":reference}))["success"],
+        false
+    );
+    let nested = dap.success("stackTrace", json!({"threadId":thread}));
+    let caller = nested["stackFrames"][1]["id"].clone();
+    let value = dap.success(
+        "evaluate",
+        json!({"frameId":caller,"expression":"A + Счетчик"}),
+    );
+    assert_eq!(value["result"], "43");
+    dap.shutdown();
+}
