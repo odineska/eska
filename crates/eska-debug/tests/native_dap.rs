@@ -653,6 +653,68 @@ fn native_standalone_launch_with_standard_dap() {
 }
 
 #[test]
+#[ignore = "requires a built EPF and the owned 1C standalone fixture"]
+fn native_standalone_launches_verified_external_processing() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let args: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let source = Path::new(args["externalProcessing"]["sourceRoot"].as_str().unwrap())
+        .join("EskaEpfWire/Forms/ProbeForm/Ext/Form/Module.bsl");
+    let artifact = Path::new(args["externalProcessing"]["artifact"].as_str().unwrap());
+    let mut dap = Dap::standalone(root, "en-US", true);
+    dap.success("initialize", json!({"adapterID":"onec-http"}));
+    let backup = fs::read(artifact).unwrap();
+    fs::write(artifact, b"unrelated artifact").unwrap();
+    let reply = dap.request("launch", args.clone());
+    fs::write(artifact, backup).unwrap();
+    assert_eq!(reply["success"], false);
+    assert!(reply["message"].as_str().unwrap().contains("checksum"));
+    let saved = fs::read(&source).unwrap();
+    fs::write(&source, b"changed module").unwrap();
+    let reply = dap.request("launch", args.clone());
+    fs::write(&source, &saved).unwrap();
+    assert_eq!(reply["success"], false);
+    assert!(reply["message"].as_str().unwrap().contains("snapshot"));
+    dap.success("launch", args);
+    let points = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":4}]}),
+    );
+    assert_eq!(points["breakpoints"][0]["verified"], true);
+    dap.success("configurationDone", json!({}));
+    println!("EPF_CLIENT_STARTED");
+    let stopped = dap.stop_event();
+    assert_eq!(stopped["reason"], "breakpoint");
+    let thread = stopped["threadId"].as_u64().unwrap();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let top = &stack["stackFrames"][0];
+    assert_eq!(top["line"], 4);
+    assert_eq!(top["source"]["path"], json!(source));
+    let result = dap.success(
+        "evaluate",
+        json!({"frameId":top["id"],"expression":"Значение","context":"watch"}),
+    );
+    assert_eq!(result["result"], "73");
+    fs::write(&source, b"changed module").unwrap();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let point = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":3}]}),
+    );
+    assert_eq!(point["breakpoints"][0]["verified"], false);
+    let cleared = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[]}),
+    );
+    fs::write(&source, saved).unwrap();
+    assert_eq!(cleared["breakpoints"], json!([]));
+    assert!(stack["stackFrames"][0]["source"].is_null());
+    dap.shutdown();
+    assert!(!root.join(".eska").exists());
+}
+
+#[test]
 #[ignore = "requires a standalone fixture and an already running 1C client"]
 fn native_standalone_attaches_with_standard_dap() {
     let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();

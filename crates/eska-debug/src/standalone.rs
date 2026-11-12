@@ -1,7 +1,10 @@
 //! Standalone DAP request parameters. Project policy is enforced at the other entry point.
 use std::{env, path::PathBuf};
 
-use eska_build_runtime::runtime::{DebugConnection, DebugLaunch};
+use eska_build_runtime::{
+    build::ProcessingArtifactError,
+    runtime::{DebugConnection, DebugLaunch},
+};
 use eska_project_core::project::local_settings::{
     Authentication, DebugEndpoint, Infobase, Profile, Runner, debug_server_url,
     valid_auto_attach_types,
@@ -18,7 +21,7 @@ use crate::{
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 struct Arguments {
-    source_root: PathBuf,
+    source_root: Option<PathBuf>,
     #[serde(default)]
     extension_roots: Vec<PathBuf>,
     debug_server_url: Option<String>,
@@ -31,25 +34,62 @@ struct Arguments {
     infobase: Option<Infobase>,
     runner: Option<Runner>,
     authentication: Option<Authentication>,
+    external_processing: Option<ExternalProcessing>,
+}
+
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct ExternalProcessing {
+    source_root: PathBuf,
+    artifact: PathBuf,
+}
+
+impl Arguments {
+    fn valid(&self, mode: Mode) -> bool {
+        let processing = self.external_processing.as_ref();
+        (self.source_root.is_some() || processing.is_some())
+            && self
+                .source_root
+                .as_ref()
+                .is_none_or(|path| !path.as_os_str().is_empty())
+            && processing.is_none_or(|processing| {
+                mode == Mode::Launch
+                    && !processing.source_root.as_os_str().is_empty()
+                    && !processing.artifact.as_os_str().is_empty()
+            })
+            && self
+                .extension_roots
+                .iter()
+                .all(|root| !root.as_os_str().is_empty())
+            && self
+                .auto_attach_types
+                .as_deref()
+                .is_none_or(valid_auto_attach_types)
+            && self.target_id.as_deref().is_none_or(valid_target)
+    }
+}
+
+impl ExternalProcessing {
+    fn stage(self, sources: &mut Sources, launch: &mut DebugLaunch) -> Result<(), &'static str> {
+        let (provenance, staged) = launch
+            .stage_processing(&self.source_root, &self.artifact)
+            .map_err(|error| match error {
+                ProcessingArtifactError::SourceMismatch => "debug-epf-source-mismatch",
+                ProcessingArtifactError::ArtifactMismatch => "debug-epf-artifact-mismatch",
+                ProcessingArtifactError::Io(_) | ProcessingArtifactError::Manifest => {
+                    "debug-epf-manifest"
+                }
+            })?;
+        sources
+            .add_processing(&self.source_root, &staged, provenance)
+            .map_err(|_| "debug-epf-source-mismatch")
+    }
 }
 
 pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> {
     const INVALID: &str = "debug-standalone-arguments";
     let args: Arguments = Arguments::deserialize(arguments).map_err(|_| INVALID)?;
-    if args.source_root.as_os_str().is_empty()
-        || args
-            .extension_roots
-            .iter()
-            .any(|root| root.as_os_str().is_empty())
-        || args
-            .auto_attach_types
-            .as_deref()
-            .is_some_and(|types| !valid_auto_attach_types(types))
-        || args
-            .target_id
-            .as_deref()
-            .is_some_and(|id| !valid_target(id))
-    {
+    if !args.valid(mode) {
         return Err(INVALID);
     }
     let alias = args.infobase_alias.unwrap_or_else(|| match &args.infobase {
@@ -66,7 +106,7 @@ pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> 
         auto_attach_types: args.auto_attach_types,
     };
     let mut auto_attach_types = debug.auto_attach_types();
-    let (connection, launch, attach_selection) = match mode {
+    let (connection, mut launch, attach_selection) = match mode {
         Mode::Launch if args.target_id.is_none() => {
             let infobase = args.infobase.ok_or(INVALID)?;
             let runner = args.runner.ok_or(INVALID)?;
@@ -113,13 +153,14 @@ pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> 
         }
         _ => return Err(INVALID),
     };
-    let sources =
-        Sources::from_designer(&args.source_root, &args.extension_roots).map_err(|error| {
-            match error {
-                SourceError::DuplicateExtension => "debug-duplicate-extension",
-                SourceError::Project | SourceError::ApplicationChoice => "debug-standalone-source",
-            }
+    let mut sources = Sources::from_designer(args.source_root.as_deref(), &args.extension_roots)
+        .map_err(|error| match error {
+            SourceError::DuplicateExtension => "debug-duplicate-extension",
+            SourceError::Project | SourceError::ApplicationChoice => "debug-standalone-source",
         })?;
+    if let Some(processing) = args.external_processing {
+        processing.stage(&mut sources, launch.as_mut().ok_or(INVALID)?)?;
+    }
     Ok(Config {
         connection,
         alias,

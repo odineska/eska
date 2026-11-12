@@ -394,7 +394,9 @@ impl<W: Write> Session<'_, W> {
             return Err(INVALID);
         }
         let config = self.config.as_ref().ok_or(INVALID)?;
-        let module = config.sources.module(Path::new(path)).cloned();
+        let module = config.sources.module(Path::new(path));
+        let stale = module.is_some_and(|module| config.sources.path(module).is_none());
+        let module = module.filter(|_| !stale || entries.is_empty()).cloned();
         let points: Vec<_> = entries
             .iter()
             .map(|entry| {
@@ -418,6 +420,8 @@ impl<W: Write> Session<'_, W> {
                 }
                 if let Err(key) = point {
                     response["message"] = json!(self.language.text(key));
+                } else if stale {
+                    response["message"] = json!(self.language.text("debug-epf-source-mismatch"));
                 }
                 response
             })

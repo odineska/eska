@@ -6,6 +6,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
+use eska_build_runtime::build::ProcessingSources;
 use eska_project_core::{
     application::project_application,
     project::{
@@ -20,6 +21,7 @@ use crate::dbgs::{Module, ModuleOrigin};
 pub struct Sources {
     modules: BTreeMap<PathBuf, Module>,
     paths: BTreeMap<Module, Option<PathBuf>>,
+    processing: Option<ProcessingSources>,
 }
 
 pub enum SourceError {
@@ -29,11 +31,16 @@ pub enum SourceError {
 }
 
 impl Sources {
-    pub fn load(project: &Project) -> Result<Self, SourceError> {
-        let mut sources = Self {
+    const fn new() -> Self {
+        Self {
             modules: BTreeMap::new(),
             paths: BTreeMap::new(),
-        };
+            processing: None,
+        }
+    }
+
+    pub fn load(project: &Project) -> Result<Self, SourceError> {
+        let mut sources = Self::new();
         let mut extensions = BTreeSet::new();
         let context =
             discovery::discover_context(project.root()).map_err(|_| SourceError::Project)?;
@@ -72,24 +79,58 @@ impl Sources {
     }
 
     pub fn from_designer(
-        configuration: &Path,
+        configuration: Option<&Path>,
         extension_roots: &[PathBuf],
     ) -> Result<Self, SourceError> {
-        let mut sources = Self {
-            modules: BTreeMap::new(),
-            paths: BTreeMap::new(),
-        };
+        let mut sources = Self::new();
         let mut extensions = BTreeSet::new();
-        for (root, kind) in std::iter::once((configuration, ProjectType::Configuration)).chain(
-            extension_roots
-                .iter()
-                .map(|root| (root.as_path(), ProjectType::Extension)),
-        ) {
+        for (root, kind) in configuration
+            .into_iter()
+            .map(|root| (root, ProjectType::Configuration))
+            .chain(
+                extension_roots
+                    .iter()
+                    .map(|root| (root.as_path(), ProjectType::Extension)),
+            )
+        {
             let root = root.canonicalize().map_err(|_| SourceError::Project)?;
             validate_descriptor(&root, kind)?;
             sources.add_source(&root, kind, &mut extensions)?;
         }
         Ok(sources)
+    }
+
+    pub fn add_processing(
+        &mut self,
+        source: &Path,
+        artifact: &Path,
+        provenance: ProcessingSources,
+    ) -> Result<(), SourceError> {
+        let root = source.canonicalize().map_err(|_| SourceError::Project)?;
+        let artifact = artifact.to_str().ok_or(SourceError::Project)?;
+        #[cfg(windows)]
+        let artifact = format!("/{}", artifact.replace('\\', "/"));
+        let model = object_model::discover_from_source(&root, ProjectType::Processing)
+            .map_err(|_| SourceError::Project)?;
+        if !model
+            .objects()
+            .any(|object| object.metadata_type() == "data-processor")
+            || model
+                .objects()
+                .map(object_model::LogicalObject::descriptor_path)
+                .collect::<BTreeSet<_>>()
+                .into_iter()
+                .any(|path| !provenance.matches_file(&root.join(path)))
+        {
+            return Err(SourceError::Project);
+        }
+        self.index(
+            &model,
+            &root,
+            &ModuleOrigin::External(format!("file://{artifact}")),
+        );
+        self.processing = Some(provenance);
+        Ok(())
     }
 
     fn add_source(
@@ -114,6 +155,11 @@ impl Sources {
         } else {
             ModuleOrigin::Configuration
         };
+        self.index(&model, root, &origin);
+        Ok(())
+    }
+
+    fn index(&mut self, model: &object_model::ObjectModel, root: &Path, origin: &ModuleOrigin) {
         for owner in model.objects().filter(|owner| !owner.uuid().is_empty()) {
             for path in owner.module_paths() {
                 let Some(property) = property_id(owner.metadata_type(), path) else {
@@ -132,23 +178,30 @@ impl Sources {
                     .or_insert(Some(path));
             }
         }
-        Ok(())
     }
 
     pub fn module(&self, path: &Path) -> Option<&Module> {
         self.modules
             .get(path)
-            .filter(|module| self.path(module).is_some())
             .or_else(|| {
                 path.canonicalize()
                     .ok()
                     .and_then(|path| self.modules.get(&path))
-                    .filter(|module| self.path(module).is_some())
             })
+            .filter(|module| self.paths.get(module).is_some_and(Option::is_some))
     }
 
     pub fn path(&self, module: &Module) -> Option<&Path> {
-        self.paths.get(module)?.as_deref()
+        let path = self.paths.get(module)?.as_deref()?;
+        if matches!(module.origin, ModuleOrigin::External(_))
+            && !self
+                .processing
+                .as_ref()
+                .is_some_and(|sources| sources.matches_file(path))
+        {
+            return None;
+        }
+        Some(path)
     }
 }
 

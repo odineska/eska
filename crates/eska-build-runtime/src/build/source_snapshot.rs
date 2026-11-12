@@ -10,6 +10,8 @@ use std::{
 
 use sha2::{Digest, Sha256};
 
+type Files = BTreeMap<PathBuf, Vec<u8>>;
+
 #[derive(Debug)]
 pub enum Error {
     Io { path: PathBuf, source: io::Error },
@@ -41,23 +43,28 @@ pub(super) fn digest(source: &Path, excluded: &[&Path]) -> Result<Vec<u8>, Error
 }
 
 /// Capture individual files for runtime delta calculation, optionally from an immutable copy.
-pub fn catalog(
+pub fn catalog(source: &Path, target: Option<&Path>, excluded: &[&Path]) -> Result<Files, Error> {
+    catalog_with_digest(source, target, excluded).map(|(files, _)| files)
+}
+
+pub(super) fn catalog_with_digest(
     source: &Path,
     target: Option<&Path>,
     excluded: &[&Path],
-) -> Result<BTreeMap<PathBuf, Vec<u8>>, Error> {
+) -> Result<(Files, Vec<u8>), Error> {
     let mut files = BTreeMap::new();
+    let mut hash = Sha256::new();
     visit_directory(
         source,
         target,
         source,
         excluded,
-        &mut Sha256::new(),
+        &mut hash,
         &mut |path, digest| {
             files.insert(path.to_owned(), digest.to_vec());
         },
     )?;
-    Ok(files)
+    Ok((files, hash.finalize().to_vec()))
 }
 
 /// Copy one directory without following links and hash its exact relative structure and bytes.

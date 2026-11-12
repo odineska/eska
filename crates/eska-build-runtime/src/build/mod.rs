@@ -3,7 +3,7 @@
 mod base_configuration;
 mod execute;
 mod infobase;
-mod manifest;
+pub(crate) mod manifest;
 mod plan;
 mod shared_library;
 pub(crate) mod source_snapshot;
@@ -21,7 +21,10 @@ pub use execute::{
 pub use infobase::{
     CleanOutcome as InfobaseCleanOutcome, ManagedInfobaseError, clean as clean_infobase,
 };
-pub use manifest::{GitProvenance, ManifestError, path_for_artifact as manifest_path};
+pub use manifest::{
+    GitProvenance, ManifestError, ProcessingArtifactError, ProcessingSources,
+    path_for_artifact as manifest_path,
+};
 pub use plan::{
     ArtifactType, BaseConfiguration, BuildPlan, PlanError, managed_infobase_root,
     validate_unique_outputs,

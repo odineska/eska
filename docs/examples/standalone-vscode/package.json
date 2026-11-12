@@ -28,9 +28,17 @@
           }
         },
         "launch": {
-          "required": ["sourceRoot", "infobase", "runner"],
+          "required": ["infobase", "runner"],
           "properties": {
             "sourceRoot": { "type": "string" },
+            "externalProcessing": {
+              "type": "object",
+              "required": ["artifact", "sourceRoot"],
+              "properties": {
+                "artifact": { "type": "string" },
+                "sourceRoot": { "type": "string" }
+              }
+            },
             "extensionRoots": { "type": "array", "items": { "type": "string" } },
             "debugServerUrl": { "type": "string" },
             "infobaseAlias": { "type": "string" },

@@ -7,7 +7,7 @@ pub use debug_server::{DebugConnection, ManagedDebugServer};
 use std::{
     env,
     ffi::OsString,
-    io,
+    fs, io,
     net::{TcpStream, ToSocketAddrs},
     path::{Path, PathBuf},
     sync::{atomic::AtomicBool, mpsc},
@@ -21,7 +21,10 @@ use eska_project_core::project::{
 };
 
 use crate::{
-    build::{Ibcmd, PlatformVersion, RunError, ToolError, ToolOptions},
+    build::{
+        ArtifactType, Ibcmd, PlatformVersion, ProcessingArtifactError, ProcessingSources, RunError,
+        ToolError, ToolOptions, manifest::verify_processing,
+    },
     platform_path::native_path,
 };
 
@@ -207,6 +210,7 @@ pub struct DebugLaunch {
     scratch_parent: Option<PathBuf>,
     profile: Profile,
     platform: Ibcmd,
+    processing: Option<(tempfile::TempDir, PathBuf)>,
 }
 
 impl DebugLaunch {
@@ -253,7 +257,42 @@ impl DebugLaunch {
             scratch_parent,
             profile,
             platform,
+            processing: None,
         })
+    }
+
+    /// Stage an EPF at a private path unique to this launch and bind it to the built sources.
+    /// # Errors
+    /// Rejects an unreadable artifact or a mismatch with its build manifest.
+    pub fn stage_processing(
+        &mut self,
+        source: &Path,
+        artifact: &Path,
+    ) -> Result<(ProcessingSources, PathBuf), ProcessingArtifactError> {
+        use ProcessingArtifactError::{ArtifactMismatch, Io};
+        if !artifact.extension().is_some_and(|extension| {
+            extension.eq_ignore_ascii_case(ArtifactType::Processing.extension())
+        }) || !artifact.is_file()
+        {
+            return Err(ArtifactMismatch);
+        }
+        let mut builder = tempfile::Builder::new();
+        builder.prefix("eska-debug-epf-");
+        let scratch = self
+            .scratch_parent
+            .as_deref()
+            .map_or_else(|| builder.tempdir(), |parent| builder.tempdir_in(parent))
+            .map_err(Io)?;
+        let path = scratch
+            .path()
+            .canonicalize()
+            .map_err(Io)?
+            .join(artifact.file_name().ok_or(ArtifactMismatch)?);
+        fs::copy(artifact, &path).map_err(Io)?;
+        let sources = verify_processing(source, artifact, &path)?;
+        let path = native_path(&path).into_owned();
+        self.processing = Some((scratch, path.clone()));
+        Ok((sources, path))
     }
 
     #[must_use]
@@ -289,7 +328,10 @@ impl DebugLaunch {
             self.scratch_parent.as_deref(),
             &self.profile,
             &self.platform,
-            Some(endpoint.as_str()),
+            Some((
+                endpoint,
+                self.processing.as_ref().map(|(_, path)| path.as_path()),
+            )),
             Some(cancelled),
         )
     }
@@ -303,7 +345,7 @@ fn launch_client(
     scratch_parent: Option<&Path>,
     profile: &Profile,
     platform: &Ibcmd,
-    debugger_url: Option<&str>,
+    debug: Option<(&url::Url, Option<&Path>)>,
     cancelled: Option<&AtomicBool>,
 ) -> Result<(), RuntimeError> {
     let mut arguments = vec![OsString::from("ENTERPRISE")];
@@ -317,16 +359,19 @@ fn launch_client(
         }
         Infobase::Standalone { url, .. } => arguments.extend(["/WS".into(), url.into()]),
     }
-    if let Some(debugger_url) = debugger_url {
+    if let Some((endpoint, processing)) = debug {
         arguments.extend([
             "/DEBUG".into(),
             "-http".into(),
             "-attach".into(),
             "/DEBUGGERURL".into(),
-            debugger_url.into(),
+            endpoint.as_str().into(),
             "/DisableStartupMessages".into(),
             "/DisableStartupDialogs".into(),
         ]);
+        if let Some(path) = processing {
+            arguments.extend(["/Execute".into(), path.as_os_str().to_owned()]);
+        }
     }
     if let Some(auth) = &profile.authentication {
         arguments.extend(["/N".into(), (&auth.user).into()]);
