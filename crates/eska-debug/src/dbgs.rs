@@ -11,6 +11,7 @@ const BASE: &str = "http://v8.1c.ru/8.3/debugger/debugBaseData";
 const BREAKPOINTS: &str = "http://v8.1c.ru/8.3/debugger/debugBreakpoints";
 const AUTO: &str = "http://v8.1c.ru/8.3/debugger/debugAutoAttach";
 const CALC: &str = "http://v8.1c.ru/8.3/debugger/debugCalculations";
+const RTE: &str = "http://v8.1c.ru/8.3/debugger/debugRTEFilter";
 const REQUEST_TIMEOUT: Duration = Duration::from_secs(6);
 
 #[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
@@ -18,6 +19,14 @@ pub struct Module {
     pub object: String,
     pub property: String,
     pub extension: String,
+}
+
+#[derive(Clone, Debug, Default)]
+pub struct Breakpoint {
+    pub line: u32,
+    pub condition: Option<String>,
+    pub hit_count: Option<i32>,
+    pub log_expression: Option<String>,
 }
 
 #[derive(Clone, Debug)]
@@ -70,12 +79,21 @@ pub struct Calculation {
 pub enum Event {
     Started(Target),
     Exited(String),
-    Stopped {
+    Stack {
         target: String,
-        breakpoint: bool,
+        action: StackAction,
         frames: Vec<Frame>,
+        message: String,
     },
     Calculated(Calculation),
+}
+
+#[derive(Clone, Copy, Debug)]
+pub enum StackAction {
+    Breakpoint,
+    Step,
+    Exception,
+    Resume,
 }
 
 #[derive(Clone, Copy)]
@@ -144,7 +162,7 @@ impl Server {
 
     pub fn breakpoints<'a>(
         &self,
-        modules: impl IntoIterator<Item = (&'a Module, &'a [u32])>,
+        modules: impl IntoIterator<Item = (&'a Module, &'a [Breakpoint])>,
     ) -> io::Result<()> {
         let mut body = String::from("<bpWorkspace>");
         for (module, lines) in modules {
@@ -160,16 +178,41 @@ impl Server {
                 escape(&module.object),
                 escape(&module.property)
             );
-            for line in lines {
+            for point in lines {
+                let line = point.line;
+                let condition = point.condition.as_deref().unwrap_or_default();
+                let break_on_condition = point.condition.is_some();
+                let break_on_hit_count = point.hit_count.is_some();
+                let hit_count = point.hit_count.unwrap_or(1);
+                let log_expression = point.log_expression.as_deref().unwrap_or_default();
+                let log = point.log_expression.is_some();
                 let _ = write!(
                     body,
-                    "<bpInfo><line>{line}</line><isActive>true</isActive><hitCount>1</hitCount><continueExecution>false</continueExecution></bpInfo>"
+                    "<bpInfo><line>{line}</line><isActive>true</isActive><breakOnCondition>{break_on_condition}</breakOnCondition><condition>{}</condition><breakOnHitCount>{break_on_hit_count}</breakOnHitCount><hitCountVariant>0</hitCountVariant><hitCount>{hit_count}</hitCount><showOutputMessage>{log}</showOutputMessage><putExpressionResult>{}</putExpressionResult><continueExecution>{log}</continueExecution></bpInfo>",
+                    escape(condition),
+                    escape(log_expression),
                 );
             }
             body.push_str("</moduleBPInfo>");
         }
         body.push_str("</bpWorkspace>");
         self.call("setBreakpoints", &body).map(|_| ())
+    }
+
+    pub fn break_on_errors(&self, enabled: bool, condition: Option<&str>) -> io::Result<()> {
+        let analyze = enabled && condition.is_some();
+        let mut state = format!(
+            "<state><stopOnErrors xmlns=\"{RTE}\">{enabled}</stopOnErrors><analyzeErrorStr xmlns=\"{RTE}\">{analyze}</analyzeErrorStr>"
+        );
+        if let Some(condition) = condition.filter(|_| analyze) {
+            let _ = write!(
+                state,
+                "<strTemplate xmlns=\"{RTE}\"><include>true</include><str>{}</str></strTemplate>",
+                escape(condition)
+            );
+        }
+        state.push_str("</state>");
+        self.call("setBreakOnRTE", &state).map(|_| ())
     }
 
     pub fn step(&self, id: &str, step: Step) -> io::Result<Vec<String>> {
@@ -314,18 +357,35 @@ fn event(node: Node<'_, '_>) -> Option<Event> {
     match text(node, "cmdID") {
         "targetStarted" => target(id?).map(Event::Started),
         "targetQuit" => Some(Event::Exited(text(id?, "id").to_owned())),
-        "callStackFormed" if text(node, "sendMessageOnly") != "true" => Some(Event::Stopped {
+        "callStackFormed" | "rteProcessing" => Some(Event::Stack {
             target: text(id?, "id").to_owned(),
-            breakpoint: text(node, "stopByBP") == "true",
+            action: stack_action(node),
             frames: children(node, "callStack")
                 .filter_map(frame)
                 .collect::<Vec<_>>()
                 .into_iter()
                 .rev()
                 .collect(),
+            message: child(node, "exception").map_or_else(
+                || text(node, "message").to_owned(),
+                |exception| text(exception, "descr").to_owned(),
+            ),
         }),
         "exprEvaluated" => calculation(child(node, "evalExprResBaseData")?).map(Event::Calculated),
         _ => None,
+    }
+}
+
+fn stack_action(node: Node<'_, '_>) -> StackAction {
+    if text(node, "cmdID") == "rteProcessing" {
+        StackAction::Exception
+    } else if text(node, "sendMessageOnly") == "true" || text(node, "sendHitCounterOnly") == "true"
+    {
+        StackAction::Resume
+    } else if text(node, "stopByBP") == "true" || text(node, "suspendedByOther") == "true" {
+        StackAction::Breakpoint
+    } else {
+        StackAction::Step
     }
 }
 

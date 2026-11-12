@@ -12,7 +12,9 @@ use std::{
 use eska_build_runtime::runtime::DebugLaunch;
 use eska_project_core::project::{discovery, local_settings::ProfileName};
 
-use crate::dbgs::{self, Calculation, Event, Frame, Module, Selector, Server, Step};
+use crate::dbgs::{
+    self, Breakpoint, Calculation, Event, Frame, Module, Selector, Server, StackAction, Step,
+};
 
 #[test]
 #[ignore = "requires the owned 1C playground fixture and its HTTP debug server"]
@@ -39,7 +41,16 @@ fn direct_http_breakpoint_and_selected_frame() {
     server.attach().unwrap();
     let _registration = Registration(&server);
     server.auto_attach().unwrap();
-    server.breakpoints([(&module, [3].as_slice())]).unwrap();
+    server
+        .breakpoints([(
+            &module,
+            [Breakpoint {
+                line: 3,
+                ..Default::default()
+            }]
+            .as_slice(),
+        )])
+        .unwrap();
     let worker = Client::launch(launch);
     let (target, frames) = stopped(&server);
     assert_eq!(frames[0].module.as_ref(), Some(&module));
@@ -82,7 +93,12 @@ fn stopped(server: &Server) -> (String, Vec<Frame>) {
         for event in server.poll().unwrap() {
             match event {
                 Event::Started(target) => server.attach_target(&target.id).unwrap(),
-                Event::Stopped { target, frames, .. } => return (target, frames),
+                Event::Stack {
+                    target,
+                    frames,
+                    action: StackAction::Breakpoint | StackAction::Step,
+                    ..
+                } => return (target, frames),
                 _ => {}
             }
         }

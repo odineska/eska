@@ -17,7 +17,8 @@ struct Dap {
     input: Option<ChildStdin>,
     messages: mpsc::Receiver<Value>,
     seq: u64,
-    stopped: Vec<u64>,
+    stopped: Vec<Value>,
+    output: Vec<Value>,
     durations: BTreeMap<String, Vec<f64>>,
 }
 
@@ -59,6 +60,7 @@ impl Dap {
             messages,
             seq: 0,
             stopped: Vec::new(),
+            output: Vec::new(),
             durations: BTreeMap::new(),
         }
     }
@@ -95,13 +97,19 @@ impl Dap {
     fn receive(&mut self) -> Value {
         let message = self.messages.recv_timeout(Duration::from_secs(12)).unwrap();
         if message["event"] == "stopped" {
-            self.stopped
-                .push(message["body"]["threadId"].as_u64().unwrap());
+            self.stopped.push(message["body"].clone());
+        }
+        if message["event"] == "output" {
+            self.output.push(message["body"].clone());
         }
         message
     }
 
     fn stop(&mut self) -> u64 {
+        self.stop_event()["threadId"].as_u64().unwrap()
+    }
+
+    fn stop_event(&mut self) -> Value {
         loop {
             if !self.stopped.is_empty() {
                 return self.stopped.remove(0);
@@ -126,6 +134,97 @@ impl Dap {
             thread::sleep(Duration::from_millis(20));
         }
     }
+}
+
+#[test]
+#[ignore = "requires the owned breakpoints fixture and its HTTP debug server"]
+fn native_breakpoint_conditions_logpoints_and_exception_filters() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let mut dap = Dap::start(root, "test", "launch");
+    let capabilities = dap.success("initialize", json!({"adapterID":"eska"}));
+    for key in [
+        "supportsConditionalBreakpoints",
+        "supportsHitConditionalBreakpoints",
+        "supportsLogPoints",
+        "supportsExceptionFilterOptions",
+    ] {
+        assert_eq!(capabilities[key], true);
+    }
+    dap.success("launch", json!({}));
+    let points = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[
+            {"line":3,"condition":"A < 0"},{"line":5,"hitCondition":"2"},
+            {"line":7,"logMessage":"\"ESKA log \" + Строка(A)"},
+            {"line":8,"condition":"A = 5"},{"line":24}
+        ]}),
+    );
+    assert!(
+        points["breakpoints"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .all(|point| point["verified"] == true)
+    );
+    dap.success(
+        "setExceptionBreakpoints",
+        json!({"filters":[],"filterOptions":[{"filterId":"all","condition":"ESKA match"}]}),
+    );
+    dap.success("configurationDone", json!({}));
+    let stop = |dap: &mut Dap, reason, line| {
+        let event = dap.stop_event();
+        assert_eq!(event["reason"], reason, "{event}");
+        let thread = event["threadId"].as_u64().unwrap();
+        let stack = dap.success("stackTrace", json!({"threadId":thread}));
+        assert_eq!(stack["stackFrames"][0]["line"], line, "{stack}");
+        (thread, stack["stackFrames"][0]["id"].clone())
+    };
+    let (thread, frame) = stop(&mut dap, "breakpoint", 5);
+    assert_eq!(
+        dap.success("evaluate", json!({"frameId":frame,"expression":"I"}))["result"],
+        "2"
+    );
+    dap.success("continue", json!({"threadId":thread}));
+    let (thread, _) = stop(&mut dap, "breakpoint", 8);
+    assert!(
+        dap.output.iter().any(|body| body["category"] == "console"
+            && body["output"]
+                .as_str()
+                .is_some_and(|output| output.contains("ESKA log 4"))),
+        "{:?}",
+        dap.output
+    );
+    dap.success("continue", json!({"threadId":thread}));
+    let (thread, _) = stop(&mut dap, "exception", 15);
+    assert!(
+        dap.output.iter().any(|body| body["category"] == "stderr"
+            && body["output"]
+                .as_str()
+                .is_some_and(|output| output.contains("ESKA match"))),
+        "{:?}",
+        dap.output
+    );
+    dap.success("setExceptionBreakpoints", json!({"filters":[]}));
+    dap.success("continue", json!({"threadId":thread}));
+    let (thread, _) = stop(&mut dap, "breakpoint", 24);
+    dap.success("setExceptionBreakpoints", json!({"filters":["all"]}));
+    dap.success("continue", json!({"threadId":thread}));
+    stop(&mut dap, "exception", 26);
+    assert!(
+        dap.output.iter().any(|body| body["category"] == "stderr"
+            && body["output"]
+                .as_str()
+                .is_some_and(|output| output.contains("ESKA unfiltered"))),
+        "{:?}",
+        dap.output
+    );
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[]}),
+    );
+    dap.shutdown();
 }
 
 impl Drop for Dap {

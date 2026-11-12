@@ -19,7 +19,9 @@ use serde_json::{Value, json};
 use crate::{
     Mode,
     dap::{self, Output, Request},
-    dbgs::{self, Calculation, Event, Module, Selector, Server, Step, Target},
+    dbgs::{
+        self, Breakpoint, Calculation, Event, Module, Selector, Server, StackAction, Step, Target,
+    },
     source::Sources,
     state::{Position, State, Variable},
 };
@@ -30,6 +32,8 @@ use poll::Poll;
 const MAX_THREADS: usize = 256;
 const MAX_PENDING: usize = 16;
 const MAX_SNAPSHOTS_PER_TARGET: usize = 256;
+const MAX_DEBUG_EXPRESSION: usize = 16384;
+const ERROR_FILTER: &str = "all";
 
 pub struct Config {
     pub endpoint: url::Url,
@@ -43,6 +47,24 @@ pub struct Config {
 type Failure = &'static str;
 const INVALID: Failure = "debug-request-unavailable";
 const ENDPOINT: Failure = "debug-endpoint-unavailable";
+
+fn optional_expression<'a>(value: &'a Value, key: &str) -> Result<Option<&'a str>, Failure> {
+    if value[key].is_null() {
+        return Ok(None);
+    }
+    let expression = value[key]
+        .as_str()
+        .filter(|text| text.len() <= MAX_DEBUG_EXPRESSION)
+        .ok_or(INVALID)?;
+    Ok((!expression.is_empty()).then_some(expression))
+}
+
+fn optional_array<'a>(value: &'a Value, key: &str) -> Result<&'a [Value], Failure> {
+    if value[key].is_null() {
+        return Ok(&[]);
+    }
+    value[key].as_array().map(Vec::as_slice).ok_or(INVALID)
+}
 
 enum CalculationPhase {
     Store,
@@ -71,7 +93,7 @@ struct Session<'a, W> {
     input: mpsc::SyncSender<Input>,
     poll: Option<Poll>,
     state: State,
-    breakpoints: BTreeMap<Module, Vec<u32>>,
+    breakpoints: BTreeMap<Module, Vec<Breakpoint>>,
     pending: BTreeMap<String, Pending>,
     client: Option<Client>,
     initialized: bool,
@@ -168,7 +190,11 @@ impl<W: Write> Session<'_, W> {
                 self.initialized = true;
                 Ok(
                     json!({"supportsConfigurationDoneRequest":true,"supportsCancelRequest":true,
-                    "supportsEvaluateForHovers":true, "supportsSingleThreadExecutionRequests":false}),
+                    "supportsEvaluateForHovers":true, "supportsSingleThreadExecutionRequests":false,
+                    "supportsConditionalBreakpoints":true,"supportsHitConditionalBreakpoints":true,
+                    "supportsLogPoints":true,"supportsExceptionFilterOptions":true,
+                    "exceptionBreakpointFilters":[{"filter":ERROR_FILTER,"label":self.language.text("debug-runtime-errors"),
+                    "supportsCondition":true,"conditionDescription":self.language.text("debug-runtime-error-condition")}]}),
                 )
             }
             "launch" | "attach" => self.open(&request.command),
@@ -183,13 +209,7 @@ impl<W: Write> Session<'_, W> {
                 }
             }
             "setBreakpoints" => self.set_breakpoints(&request.arguments),
-            "setExceptionBreakpoints"
-                if request.arguments["filters"]
-                    .as_array()
-                    .is_some_and(Vec::is_empty) =>
-            {
-                Ok(json!({}))
-            }
+            "setExceptionBreakpoints" => self.set_exception_breakpoints(&request.arguments),
             "threads" if self.server.is_some() => Ok(self.threads()),
             "stackTrace" => self.stack(&request.arguments),
             "scopes" => self.scopes(&request.arguments),
@@ -267,23 +287,35 @@ impl<W: Write> Session<'_, W> {
                     .filter(|line| *line > 0)
             })
             .collect();
-        let mut accepted = Vec::with_capacity(entries.len());
-        for (entry, line) in entries.iter().zip(&lines) {
-            let plain = ["condition", "hitCondition", "logMessage"]
-                .into_iter()
-                .all(|key| entry[key].is_null());
-            accepted.push(line.is_some() && plain && module.is_some());
-        }
+        let points: Vec<_> = entries
+            .iter()
+            .zip(&lines)
+            .map(|(entry, line)| {
+                let line = (*line)?;
+                let condition = optional_expression(entry, "condition")
+                    .ok()?
+                    .map(str::to_owned);
+                let hit_count = optional_expression(entry, "hitCondition")
+                    .ok()?
+                    .map(|hit| hit.trim().parse().unwrap_or(1));
+                let log_expression = optional_expression(entry, "logMessage")
+                    .ok()?
+                    .map(str::to_owned);
+                Some(Breakpoint {
+                    line,
+                    condition,
+                    hit_count,
+                    log_expression,
+                })
+            })
+            .collect();
+        let accepted = points
+            .iter()
+            .map(|point| point.is_some() && module.is_some())
+            .collect::<Vec<_>>();
         if let Some(module) = module {
             let mut candidate = self.breakpoints.clone();
-            candidate.insert(
-                module.clone(),
-                lines
-                    .iter()
-                    .zip(&accepted)
-                    .filter_map(|(line, &accepted)| if accepted { *line } else { None })
-                    .collect(),
-            );
+            candidate.insert(module.clone(), points.into_iter().flatten().collect());
             if candidate.len() > 2048 {
                 return Err(INVALID);
             }
@@ -298,6 +330,30 @@ impl<W: Write> Session<'_, W> {
         Ok(
             json!({"breakpoints":lines.iter().zip(accepted).map(|(line, verified)| line.as_ref().map_or_else(|| json!({"verified":false}), |line| json!({"verified":verified,"line":line}))).collect::<Vec<_>>() }),
         )
+    }
+
+    fn set_exception_breakpoints(&self, arguments: &Value) -> Result<Value, Failure> {
+        let filters = optional_array(arguments, "filters")?;
+        let options = optional_array(arguments, "filterOptions")?;
+        if filters.len() > 1
+            || options.len() > 1
+            || filters.iter().any(|id| id.as_str() != Some(ERROR_FILTER))
+            || options
+                .iter()
+                .any(|option| option["filterId"].as_str() != Some(ERROR_FILTER))
+        {
+            return Err(INVALID);
+        }
+        let enabled = !filters.is_empty() || !options.is_empty();
+        let condition = options
+            .first()
+            .map(|option| optional_expression(option, "condition"))
+            .transpose()?
+            .flatten();
+        self.server()?
+            .break_on_errors(enabled, condition)
+            .map_err(|_| ENDPOINT)?;
+        Ok(json!({"breakpoints":vec![json!({"verified":true}); filters.len() + options.len()]}))
     }
 
     fn threads(&self) -> Value {
@@ -435,7 +491,8 @@ impl<W: Write> Session<'_, W> {
     }
 
     fn events(&mut self, events: Vec<Event>) -> io::Result<()> {
-        for event in events {
+        let mut events = events.into_iter().peekable();
+        while let Some(event) = events.next() {
             match event {
                 Event::Started(target) => self.attach_target(target)?,
                 Event::Exited(target) => {
@@ -445,14 +502,29 @@ impl<W: Write> Session<'_, W> {
                             .event("thread", &json!({"reason":"exited","threadId":id}))?;
                     }
                 }
-                Event::Stopped {
+                Event::Stack {
                     target,
-                    breakpoint,
+                    action,
                     frames,
+                    message,
                 } => {
-                    if let Some(id) = self.state.thread_id(&target) {
-                        self.state.stop(id, frames);
-                        self.output.event("stopped", &json!({"reason":if breakpoint {"breakpoint"} else {"step"},"threadId":id,"allThreadsStopped":false}))?;
+                    // dbgs can describe one exception stop with two adjacent events.
+                    if matches!(action, StackAction::Breakpoint | StackAction::Step)
+                        && matches!(events.peek(), Some(Event::Stack { target: next_target, action: StackAction::Exception, .. }) if next_target == &target)
+                        && let Some(Event::Stack {
+                            frames: exception_frames,
+                            message,
+                            ..
+                        }) = events.next()
+                    {
+                        let frames = if exception_frames.is_empty() {
+                            frames
+                        } else {
+                            exception_frames
+                        };
+                        self.stack_event(&target, StackAction::Exception, frames, &message)?;
+                    } else {
+                        self.stack_event(&target, action, frames, &message)?;
                     }
                 }
                 Event::Calculated(result) => {
@@ -463,6 +535,49 @@ impl<W: Write> Session<'_, W> {
             }
         }
         Ok(())
+    }
+
+    fn stack_event(
+        &mut self,
+        target: &str,
+        action: StackAction,
+        frames: Vec<dbgs::Frame>,
+        message: &str,
+    ) -> io::Result<()> {
+        let Some(id) = self.state.thread_id(target) else {
+            return Ok(());
+        };
+        if !message.is_empty() {
+            let category = if matches!(action, StackAction::Exception) {
+                "stderr"
+            } else {
+                "console"
+            };
+            self.output.event(
+                "output",
+                &json!({"category":category,"output":format!("{message}\n")}),
+            )?;
+        }
+        let reason = match action {
+            StackAction::Breakpoint => "breakpoint",
+            StackAction::Step => "step",
+            StackAction::Exception => "exception",
+            StackAction::Resume => {
+                // A message-only or hit-counter-only event still suspends the target.
+                if let Some(server) = &self.server
+                    && let Err(error) = server.step(target, Step::Continue)
+                {
+                    self.state.stop(id, frames);
+                    return Err(error);
+                }
+                return Ok(());
+            }
+        };
+        self.state.stop(id, frames);
+        self.output.event(
+            "stopped",
+            &json!({"reason":reason,"threadId":id,"allThreadsStopped":false}),
+        )
     }
 
     fn calculation_request(&mut self, request: Request) -> io::Result<()> {
@@ -537,7 +652,7 @@ impl<W: Write> Session<'_, W> {
     fn expression(&mut self, arguments: &Value) -> Result<(Variable, CalculationPhase), Failure> {
         let expression = arguments["expression"]
             .as_str()
-            .filter(|text| !text.is_empty() && text.len() <= 16384)
+            .filter(|text| !text.is_empty() && text.len() <= MAX_DEBUG_EXPRESSION)
             .ok_or(INVALID)?;
         let position = self.expression_position(arguments).ok_or(INVALID)?;
         let thread = self
