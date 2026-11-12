@@ -15,6 +15,34 @@ use super::build::PlatformVersion;
 
 pub const SETTINGS_PATH: &str = ".eska/settings_local.toml";
 const MAX_SETTINGS_BYTES: u64 = 64 * 1024;
+pub const DEBUG_TARGET_TYPES: &[&str] = &[
+    "Client",
+    "ManagedClient",
+    "WEBClient",
+    "COMConnector",
+    "Server",
+    "ServerEmulation",
+    "WEBService",
+    "HTTPService",
+    "OData",
+    "JOB",
+    "JobFileMode",
+    "MobileClient",
+    "MobileServer",
+    "MobileJobFileMode",
+    "MobileManagedClient",
+    "MobileManagedServer",
+];
+pub const DEFAULT_DEBUG_TARGET_TYPES: &[&str] =
+    &["ManagedClient", "Client", "Server", "ServerEmulation"];
+
+#[must_use]
+pub fn valid_auto_attach_types(types: &[String]) -> bool {
+    types.len() <= DEBUG_TARGET_TYPES.len()
+        && types.iter().enumerate().all(|(index, kind)| {
+            DEBUG_TARGET_TYPES.contains(&kind.as_str()) && !types[..index].contains(kind)
+        })
+}
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[serde(rename_all = "snake_case")]
@@ -83,6 +111,20 @@ pub enum Runner {
 #[serde(deny_unknown_fields)]
 pub struct DebugEndpoint {
     pub url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub auto_attach_types: Option<Vec<String>>,
+}
+
+impl DebugEndpoint {
+    #[must_use]
+    pub fn auto_attach_types(&self) -> Vec<String> {
+        self.auto_attach_types.clone().unwrap_or_else(|| {
+            DEFAULT_DEBUG_TARGET_TYPES
+                .iter()
+                .map(|kind| (*kind).to_owned())
+                .collect()
+        })
+    }
 }
 
 #[derive(Clone, Deserialize, Eq, PartialEq, Serialize)]
@@ -223,6 +265,13 @@ impl Profile {
             require(
                 host_only(&debug.url) && debug.url.starts_with("http://"),
                 "debug.url",
+            )?;
+            require(
+                debug
+                    .auto_attach_types
+                    .as_deref()
+                    .is_none_or(valid_auto_attach_types),
+                "debug.auto_attach_types",
             )?;
         }
         if let Some(auth) = &self.authentication {
@@ -417,6 +466,7 @@ mod tests {
             },
             debug: Some(DebugEndpoint {
                 url: "http://127.0.0.1:1550".into(),
+                auto_attach_types: None,
             }),
             authentication: None,
         }
@@ -501,6 +551,7 @@ mod tests {
             let mut prod = file_profile("release");
             prod.debug = Some(DebugEndpoint {
                 url: invalid.into(),
+                auto_attach_types: None,
             });
             let settings = LocalSettings {
                 test: None,
@@ -511,6 +562,27 @@ mod tests {
                 Err(SettingsError::InvalidField {
                     profile: ProfileName::Prod,
                     field: "debug.url",
+                })
+            ));
+        }
+    }
+
+    #[test]
+    fn auto_attach_distinguishes_defaults_from_disabled_and_validates_types() {
+        let mut profile = file_profile("test");
+        let debug = profile.debug.as_mut().unwrap();
+        assert_eq!(debug.auto_attach_types(), DEFAULT_DEBUG_TARGET_TYPES);
+        debug.auto_attach_types = Some(vec![]);
+        assert_eq!(debug.auto_attach_types(), Vec::<String>::new());
+        assert!(profile.validate(ProfileName::Test).is_ok());
+        for kinds in [vec!["Unknown"], vec!["Client", "Client"], vec!["client"]] {
+            profile.debug.as_mut().unwrap().auto_attach_types =
+                Some(kinds.into_iter().map(str::to_owned).collect());
+            assert!(matches!(
+                profile.validate(ProfileName::Test),
+                Err(SettingsError::InvalidField {
+                    field: "debug.auto_attach_types",
+                    ..
                 })
             ));
         }

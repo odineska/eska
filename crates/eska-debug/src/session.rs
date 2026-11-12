@@ -14,6 +14,7 @@ use std::{
 
 use eska_build_runtime::runtime::DebugLaunch;
 use eska_presentation::localization::Localizer;
+use eska_project_core::project::local_settings::{DEBUG_TARGET_TYPES, valid_auto_attach_types};
 use serde_json::{Value, json};
 
 use crate::{
@@ -38,6 +39,7 @@ const ERROR_FILTER: &str = "all";
 pub struct Config {
     pub endpoint: url::Url,
     pub alias: String,
+    pub auto_attach_types: Vec<String>,
     pub sources: Sources,
     pub mode: Mode,
     pub launch: Option<DebugLaunch>,
@@ -216,6 +218,10 @@ impl<W: Write> Session<'_, W> {
             "continue" | "next" | "stepIn" | "stepOut" => self.step(&request),
             "eska/listDebugTargets" => self.targets(),
             "eska/attachDebugTarget" => self.select_target(&request.arguments),
+            "eska/getAutoAttachTypes" if self.server.is_some() => {
+                Ok(json!({"available":DEBUG_TARGET_TYPES,"selected":self.config.auto_attach_types}))
+            }
+            "eska/setAutoAttachTypes" => self.set_auto_attach_types(&request.arguments),
             "cancel" => {
                 self.cancel(&request.arguments)?;
                 Ok(json!({}))
@@ -252,7 +258,7 @@ impl<W: Write> Session<'_, W> {
         let server =
             Server::new(&self.config.endpoint, self.config.alias.clone()).map_err(|_| ENDPOINT)?;
         server.attach().map_err(|_| ENDPOINT)?;
-        if server.auto_attach().is_err() {
+        if server.auto_attach(&self.config.auto_attach_types).is_err() {
             let _ = server.detach();
             return Err(ENDPOINT);
         }
@@ -477,6 +483,23 @@ impl<W: Write> Session<'_, W> {
         Ok(json!({}))
     }
 
+    fn set_auto_attach_types(&mut self, arguments: &Value) -> Result<Value, Failure> {
+        let types = arguments["types"].as_array().ok_or(INVALID)?;
+        if types.len() > DEBUG_TARGET_TYPES.len() {
+            return Err(INVALID);
+        }
+        let types = types
+            .iter()
+            .map(|kind| kind.as_str().map(str::to_owned).ok_or(INVALID))
+            .collect::<Result<Vec<_>, _>>()?;
+        if !valid_auto_attach_types(&types) {
+            return Err(INVALID);
+        }
+        self.server()?.auto_attach(&types).map_err(|_| ENDPOINT)?;
+        self.config.auto_attach_types = types;
+        Ok(json!({}))
+    }
+
     fn attach_target(&mut self, target: Target) -> io::Result<()> {
         if self.state.thread_id(&target.id).is_some() || self.state.threads.len() >= MAX_THREADS {
             return Ok(());
@@ -494,7 +517,11 @@ impl<W: Write> Session<'_, W> {
         let mut events = events.into_iter().peekable();
         while let Some(event) = events.next() {
             match event {
-                Event::Started(target) => self.attach_target(target)?,
+                Event::Started(target) => {
+                    if self.config.auto_attach_types.contains(&target.kind) {
+                        self.attach_target(target)?;
+                    }
+                }
                 Event::Exited(target) => {
                     if let Some(id) = self.state.thread_id(&target) {
                         self.state.remove(id);

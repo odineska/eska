@@ -142,10 +142,17 @@ impl Server {
             .collect())
     }
 
-    pub fn auto_attach(&self) -> io::Result<()> {
-        self.call("setAutoAttachSettings", &format!(
-            "<autoAttachSettings><targetType xmlns=\"{AUTO}\">ManagedClient</targetType><targetType xmlns=\"{AUTO}\">Client</targetType><targetType xmlns=\"{AUTO}\">Server</targetType><targetType xmlns=\"{AUTO}\">ServerEmulation</targetType></autoAttachSettings>"
-        )).map(|_| ())
+    pub fn auto_attach(&self, types: &[String]) -> io::Result<()> {
+        let mut body = String::from("<autoAttachSettings>");
+        for kind in types {
+            let _ = write!(
+                body,
+                "<targetType xmlns=\"{AUTO}\">{}</targetType>",
+                escape(kind)
+            );
+        }
+        body.push_str("</autoAttachSettings>");
+        self.call("setAutoAttachSettings", &body).map(|_| ())
     }
 
     pub fn attach_target(&self, id: &str) -> io::Result<()> {

@@ -144,7 +144,7 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
         source::Sources::load(&project).map_err(|_| localizer.text("debug-project-unavailable"))?;
     let settings = runtime::profile(&project, profile, action)
         .map_err(|error| runtime_error(&error, localizer))?;
-    let (endpoint, alias) =
+    let (endpoint, alias, auto_attach_types) =
         connection(&settings).ok_or_else(|| localizer.text("debug-endpoint-unavailable"))?;
     let launch = if args.mode == Mode::Launch {
         Some(
@@ -158,6 +158,7 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
         session::Config {
             endpoint,
             alias,
+            auto_attach_types,
             sources,
             mode: args.mode,
             launch,
@@ -224,14 +225,15 @@ fn source_options(unsaved: bool) -> Option<OsString> {
     unsaved.then(|| "--unsaved".into())
 }
 
-fn connection(profile: &Profile) -> Option<(url::Url, String)> {
+fn connection(profile: &Profile) -> Option<(url::Url, String, Vec<String>)> {
     use eska_project_core::project::local_settings::Infobase;
-    let endpoint = url::Url::parse(&profile.debug.as_ref()?.url).ok()?;
+    let debug = profile.debug.as_ref()?;
+    let endpoint = url::Url::parse(&debug.url).ok()?;
     let alias = match &profile.infobase {
         Infobase::File { .. } => "DefAlias".to_owned(),
         Infobase::Cluster { name, .. } | Infobase::Standalone { name, .. } => name.clone(),
     };
-    Some((endpoint, alias))
+    Some((endpoint, alias, debug.auto_attach_types()))
 }
 
 fn runtime_error(error: &runtime::RuntimeError, localizer: &Localizer) -> String {

@@ -1146,6 +1146,7 @@ kind = "local"
 
 [prod.debug]
 url = "http://debug.example.invalid:1550"
+auto_attach_types = ["ManagedClient", "Server"]
 
 [prod.authentication]
 user = "developer"
@@ -1158,7 +1159,13 @@ password_env = "ESKA_DEMO_PASSWORD"
 раннере. Внутри Git-репозитория для проверки индекса и правил исключения
 используется установленный `eska-vcs`. В `runner` можно указать
 точную `version` и абсолютный путь `ibcmd`. `debug.url` задаёт отдельный
-HTTP-сервер 1С. `password_env` содержит имя переменной окружения, а её
+HTTP-сервер 1С. Без `debug.auto_attach_types` автоматически подключаются
+`ManagedClient`, `Client`, `Server` и `ServerEmulation`. Пустой список
+оставляет только ручной выбор. Поддерживаемые типы — `Client`, `ManagedClient`,
+`WEBClient`, `COMConnector`, `Server`, `ServerEmulation`, `WEBService`,
+`HTTPService`, `OData`, `JOB`, `JobFileMode`, `MobileClient`, `MobileServer`,
+`MobileJobFileMode`, `MobileManagedClient`, `MobileManagedServer`.
+`password_env` содержит имя переменной окружения, а её
 значение передаётся отдельно от TOML.
 
 <a id="command-eska-project"></a>

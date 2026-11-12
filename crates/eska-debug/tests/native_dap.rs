@@ -227,6 +227,69 @@ fn native_breakpoint_conditions_logpoints_and_exception_filters() {
     dap.shutdown();
 }
 
+#[test]
+#[ignore = "requires a 1C playground fixture with auto_attach_types = []"]
+fn native_updates_auto_attach_types_without_losing_manual_selection() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let mut dap = Dap::start(root, "test", "launch");
+    dap.success("initialize", json!({"adapterID":"eska"}));
+    dap.success("launch", json!({}));
+    let types = dap.success("eska/getAutoAttachTypes", json!({}));
+    assert_eq!(types["selected"], json!([]));
+    assert!(
+        types["available"]
+            .as_array()
+            .unwrap()
+            .contains(&json!("ServerEmulation"))
+    );
+    assert_eq!(
+        dap.request("eska/setAutoAttachTypes", json!({"types":["bad"]}))["success"],
+        false
+    );
+    dap.success(
+        "eska/setAutoAttachTypes",
+        json!({"types":["ManagedClient"]}),
+    );
+    assert_eq!(
+        dap.success("eska/getAutoAttachTypes", json!({}))["selected"],
+        json!(["ManagedClient"])
+    );
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":3}]}),
+    );
+    dap.success("configurationDone", json!({}));
+    let thread = dap.stop();
+    let threads = dap.success("threads", json!({}));
+    assert_eq!(threads["threads"].as_array().unwrap().len(), 1, "{threads}");
+    assert_eq!(threads["threads"][0]["id"], thread);
+    assert!(
+        threads["threads"][0]["name"]
+            .as_str()
+            .unwrap()
+            .starts_with("ManagedClient")
+    );
+    let targets = dap.success("eska/listDebugTargets", json!({}));
+    let target = targets["targets"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|target| target["kind"] == "ServerEmulation")
+        .unwrap();
+    dap.success("eska/attachDebugTarget", json!({"id":target["id"]}));
+    dap.success("eska/setAutoAttachTypes", json!({"types":[]}));
+    assert_eq!(
+        dap.success("threads", json!({}))["threads"]
+            .as_array()
+            .unwrap()
+            .len(),
+        2
+    );
+    dap.shutdown();
+}
+
 impl Drop for Dap {
     fn drop(&mut self) {
         let _ = self.process.kill();
