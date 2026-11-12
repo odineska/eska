@@ -95,7 +95,10 @@ impl Dap {
     }
 
     fn receive(&mut self) -> Value {
-        let message = self.messages.recv_timeout(Duration::from_secs(12)).unwrap();
+        let message = self
+            .messages
+            .recv_timeout(Duration::from_secs(12))
+            .unwrap_or_else(|error| panic!("DAP receive: {error}, output: {:?}", self.output));
         if message["event"] == "stopped" {
             self.stopped.push(message["body"].clone());
         }
@@ -367,6 +370,71 @@ fn native_pages_large_collections_with_absolute_indices() {
     );
     assert_eq!(page(&mut dap, "indexed", 600, 5), json!([]));
     assert_eq!(page(&mut dap, "named", 0, 0), json!([]));
+    dap.shutdown();
+}
+
+#[test]
+#[ignore = "requires the owned workspace fixture with two installed extensions"]
+fn native_maps_breakpoints_and_stack_across_the_application() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let workspace = root.parent().unwrap();
+    let module = "src/Ext/ManagedApplicationModule.bsl";
+    let base = root.join(module);
+    let mut extensions = BTreeMap::from([
+        (workspace.join("первое расширение").join(module), "111"),
+        (workspace.join("второе расширение").join(module), "222"),
+    ]);
+    let mut dap = Dap::start(root, "test", "launch");
+    dap.success("initialize", json!({"adapterID":"eska"}));
+    dap.success("launch", json!({}));
+    for (source, line) in std::iter::once((&base, 3)).chain(extensions.keys().map(|path| (path, 4)))
+    {
+        let points = dap.success(
+            "setBreakpoints",
+            json!({"source":{"path":source},"breakpoints":[{"line":line}]}),
+        );
+        assert_eq!(
+            points["breakpoints"][0]["verified"],
+            true,
+            "{}: {points}",
+            source.display()
+        );
+    }
+    dap.success("configurationDone", json!({}));
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(base));
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":base},"breakpoints":[{"line":6}]}),
+    );
+    dap.success("continue", json!({"threadId":thread}));
+    for _ in 0..2 {
+        let thread = dap.stop();
+        let stack = dap.success("stackTrace", json!({"threadId":thread}));
+        let frame = &stack["stackFrames"][0];
+        assert_eq!(frame["line"], 4, "{stack}");
+        assert_eq!(frame["source"]["name"], "ManagedApplicationModule.bsl");
+        let path = frame["source"]["path"]
+            .as_str()
+            .unwrap_or_else(|| panic!("unmapped extension frame: {stack}"));
+        let expected = extensions
+            .remove(Path::new(path))
+            .unwrap_or_else(|| panic!("unexpected extension frame: {stack}"));
+        assert_eq!(
+            dap.success(
+                "evaluate",
+                json!({"frameId":frame["id"],"expression":"Значение"})
+            )["result"],
+            expected
+        );
+        dap.success("continue", json!({"threadId":thread}));
+    }
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    assert_eq!(stack["stackFrames"][0]["line"], 6, "{stack}");
+    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(base));
     dap.shutdown();
 }
 

@@ -140,8 +140,13 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
                 .map_err(|_| localizer.text("debug-project-unavailable"))?;
         }
     }
-    let sources =
-        source::Sources::load(&project).map_err(|_| localizer.text("debug-project-unavailable"))?;
+    let sources = source::Sources::load(&project).map_err(|error| {
+        localizer.text(match error {
+            source::SourceError::Project => "debug-project-unavailable",
+            source::SourceError::ApplicationChoice => "debug-application-choice",
+            source::SourceError::DuplicateExtension => "debug-duplicate-extension",
+        })
+    })?;
     let settings = runtime::profile(&project, profile, action)
         .map_err(|error| runtime_error(&error, localizer))?;
     let (endpoint, alias, auto_attach_types) =

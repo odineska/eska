@@ -507,3 +507,59 @@ fn production_debug_compares_configured_remote_and_protects_local_sources() {
     assert_eq!(unavailable.reason, Some(Reason::Remote));
     assert_eq!(unavailable.update, None);
 }
+
+#[test]
+fn production_debug_checks_composed_sources_in_the_selected_checkout() {
+    use eska_project_core::project::discovery;
+    use eska_vcs::project::debug_sources::{self, Reason, Status};
+
+    let fixture = TestDir::new();
+    let seed = fixture.0.join("server");
+    let work = fixture.0.join("workspace");
+    fs::create_dir(&seed).unwrap();
+    git(&seed, &["init", "-q", "-b", "deployed"]);
+    fs::write(seed.join("eska.toml"), "[workspace.members.app]\nconfiguration='base'\nextensions=[{path='extension'}]\n[vcs.workflow]\npreset='git-flow'\n[vcs.workflow.policy]\nmain_branch='deployed'\nremote='ship'\n").unwrap();
+    for (name, kind, xml) in [
+        (
+            "base",
+            "configuration",
+            include_bytes!("../../../tests/fixtures/designer/configuration/Configuration.xml")
+                .as_slice(),
+        ),
+        (
+            "extension",
+            "extension",
+            include_bytes!("../../../tests/fixtures/designer/extension/Configuration.xml")
+                .as_slice(),
+        ),
+    ] {
+        let member = seed.join(name);
+        fs::create_dir_all(member.join("src")).unwrap();
+        fs::write(
+            member.join("eska.toml"),
+            format!("[project]\nname='{name}'\ntype='{kind}'\n"),
+        )
+        .unwrap();
+        fs::write(member.join("src/Configuration.xml"), xml).unwrap();
+    }
+    git(&seed, &["add", "."]);
+    git(&seed, &["commit", "-qm", "application"]);
+    git(
+        &fixture.0,
+        &["clone", "-q", "--origin", "ship", "server", "workspace"],
+    );
+    let project = discovery::discover(&work.join("base")).unwrap();
+    let current = debug_sources::check(&project, false);
+    assert_eq!(current.status, Status::Current, "{current:?}");
+    let extension = work.join("extension");
+    let change = extension.join("src/changed.bsl");
+    fs::write(&change, "// Local changes in the extension").unwrap();
+    let dirty = debug_sources::check(&project, false);
+    assert_eq!(dirty.status, Status::Different, "{dirty:?}");
+    fs::remove_file(change).unwrap();
+    git(&extension, &["init", "-q", "-b", "separate"]);
+    let nested = debug_sources::check(&project, false);
+    assert_eq!(nested.status, Status::Unverified, "{nested:?}");
+    assert_eq!(nested.reason, Some(Reason::Repository));
+    assert_eq!(nested.update, None);
+}

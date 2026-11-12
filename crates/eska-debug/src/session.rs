@@ -395,8 +395,10 @@ impl<W: Write> Session<'_, W> {
                     .module
                     .as_ref()
                     .and_then(|module| self.config.sources.path(module))
+                    && let Some(display_path) = path.to_str()
+                    && let Some(name) = path.file_name().and_then(std::ffi::OsStr::to_str)
                 {
-                    result["source"] = json!({"name":path.file_name(),"path":path});
+                    result["source"] = json!({"name":name,"path":display_path});
                 }
                 result
             })

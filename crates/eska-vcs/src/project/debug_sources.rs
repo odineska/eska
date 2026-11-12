@@ -1,6 +1,12 @@
 //! Verify the configured production source branch before launching or attaching a debugger.
 
-use eska_project_core::project::Project;
+use eska_project_core::{
+    application::project_application,
+    project::{
+        Project,
+        discovery::{self, DiscoveryContext},
+    },
+};
 use gix::ObjectId;
 use serde::Serialize;
 
@@ -145,6 +151,18 @@ fn inspect(project: &Project, unsaved: bool) -> (SourceCheck, Option<Verified>) 
 }
 
 fn compare(project: &Project, check: &mut SourceCheck) -> Result<Verified, Reason> {
+    let context = discovery::discover_context(project.root()).map_err(|_| Reason::Workflow)?;
+    let (project, workspace) = match &context {
+        DiscoveryContext::Standalone(project) => (project, None),
+        DiscoveryContext::Workspace { workspace, .. } => {
+            let member = workspace
+                .members()
+                .iter()
+                .find(|member| member.root() == project.root())
+                .ok_or(Reason::Workflow)?;
+            (member.project(), Some(workspace))
+        }
+    };
     let policy = project
         .configuration()
         .workflow_settings()
@@ -156,6 +174,21 @@ fn compare(project: &Project, check: &mut SourceCheck) -> Result<Verified, Reaso
     check.remote = Some(remote.to_owned());
     let local_ref = format!("refs/heads/{main}");
     let repo = Repository::discover(project.root()).map_err(|_| Reason::Repository)?;
+    if let Some(workspace) = workspace
+        && let Some((_, application)) =
+            project_application(project, workspace).map_err(|_| Reason::Workflow)?
+    {
+        for member in workspace.members().iter().filter(|member| {
+            application.configuration() == Some(member.name())
+                || application.extensions().contains(member.name())
+        }) {
+            let source_repo =
+                Repository::discover(member.root()).map_err(|_| Reason::Repository)?;
+            if source_repo.work_dir() != repo.work_dir() {
+                return Err(Reason::Repository);
+            }
+        }
+    }
     let remote_id = network::fetch_branch(&repo, remote, &local_ref).map_err(|_| Reason::Remote);
     let repo = Repository::discover(project.root()).map_err(|_| Reason::Repository)?;
     let head = repo.head().map_err(|_| Reason::Repository)?;

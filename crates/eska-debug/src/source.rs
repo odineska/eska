@@ -1,12 +1,16 @@
 //! Resolve platform module identities from the existing Designer XML object model.
 use std::{
-    collections::BTreeMap,
+    collections::{BTreeMap, BTreeSet},
     path::{Path, PathBuf},
 };
 
-use eska_project_core::project::{
-    Project, ProjectType,
-    object_model::{self, ObjectModelError},
+use eska_project_core::{
+    application::project_application,
+    project::{
+        Project, ProjectType,
+        discovery::{self, DiscoveryContext},
+        object_model,
+    },
 };
 
 use crate::dbgs::Module;
@@ -16,44 +20,82 @@ pub struct Sources {
     paths: BTreeMap<Module, Option<PathBuf>>,
 }
 
+pub enum SourceError {
+    Project,
+    ApplicationChoice,
+    DuplicateExtension,
+}
+
 impl Sources {
-    pub fn load(project: &Project) -> Result<Self, ObjectModelError> {
-        let model = object_model::discover(project)?;
-        let extension = if project.configuration().project_type() == ProjectType::Extension {
-            model
-                .objects()
-                .find(|object| object.descriptor_path() == Path::new("Configuration.xml"))
-                .map(|object| object.name().to_owned())
-                .unwrap_or_default()
-        } else {
-            String::new()
+    pub fn load(project: &Project) -> Result<Self, SourceError> {
+        let mut sources = Self {
+            modules: BTreeMap::new(),
+            paths: BTreeMap::new(),
         };
-        let mut modules = BTreeMap::new();
-        let mut paths = BTreeMap::new();
-        if matches!(
+        let mut extensions = BTreeSet::new();
+        let context =
+            discovery::discover_context(project.root()).map_err(|_| SourceError::Project)?;
+        if let DiscoveryContext::Workspace { workspace, .. } = context
+            && let Some((_, application)) = project_application(project, &workspace)
+                .map_err(|_| SourceError::ApplicationChoice)?
+        {
+            for member in workspace.members().iter().filter(|member| {
+                application.configuration() == Some(member.name())
+                    || application.extensions().contains(member.name())
+            }) {
+                sources.add_project(member.project(), &mut extensions)?;
+            }
+        } else {
+            sources.add_project(project, &mut extensions)?;
+        }
+        Ok(sources)
+    }
+
+    fn add_project(
+        &mut self,
+        project: &Project,
+        extensions: &mut BTreeSet<String>,
+    ) -> Result<(), SourceError> {
+        if !matches!(
             project.configuration().project_type(),
             ProjectType::Configuration | ProjectType::Extension
         ) {
-            for owner in model.objects().filter(|owner| !owner.uuid().is_empty()) {
-                for path in owner.module_paths() {
-                    let Some(property) = property_id(owner.metadata_type(), path) else {
-                        continue;
-                    };
-                    let path = project.source().join(path);
-                    let module = Module {
-                        object: owner.uuid().to_ascii_lowercase(),
-                        property: property.to_owned(),
-                        extension: extension.clone(),
-                    };
-                    modules.insert(path.clone(), module.clone());
-                    paths
-                        .entry(module)
-                        .and_modify(|mapped| *mapped = None)
-                        .or_insert(Some(path));
-                }
+            return Ok(());
+        }
+        let model = object_model::discover(project).map_err(|_| SourceError::Project)?;
+        let extension = if project.configuration().project_type() == ProjectType::Extension {
+            let name = model
+                .objects()
+                .find(|object| object.descriptor_path() == Path::new("Configuration.xml"))
+                .map(object_model::LogicalObject::name)
+                .filter(|name| !name.is_empty())
+                .ok_or(SourceError::Project)?;
+            if !extensions.insert(name.to_lowercase()) {
+                return Err(SourceError::DuplicateExtension);
+            }
+            name
+        } else {
+            ""
+        };
+        for owner in model.objects().filter(|owner| !owner.uuid().is_empty()) {
+            for path in owner.module_paths() {
+                let Some(property) = property_id(owner.metadata_type(), path) else {
+                    continue;
+                };
+                let path = project.source().join(path);
+                let module = Module {
+                    object: owner.uuid().to_ascii_lowercase(),
+                    property: property.to_owned(),
+                    extension: extension.to_owned(),
+                };
+                self.modules.insert(path.clone(), module.clone());
+                self.paths
+                    .entry(module)
+                    .and_modify(|mapped| *mapped = None)
+                    .or_insert(Some(path));
             }
         }
-        Ok(Self { modules, paths })
+        Ok(())
     }
 
     pub fn module(&self, path: &Path) -> Option<&Module> {
