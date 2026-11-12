@@ -1,5 +1,7 @@
 //! Plan and apply Designer XML changes to an existing test infobase.
 
+mod descriptor;
+
 use std::{
     collections::BTreeMap,
     env,
@@ -103,8 +105,11 @@ pub struct Plan {
     pub target: String,
     pub platform_version: String,
     pub changes: BTreeMap<PathBuf, Change>,
+    pub import_files: Option<Vec<PathBuf>>,
     pub confirmation: Option<String>,
     pub inspection: Inspection,
+    #[serde(skip)]
+    descriptors: descriptor::Shapes,
 }
 
 #[derive(Debug)]
@@ -127,6 +132,8 @@ pub enum ApplyError {
 struct Baseline {
     generation: String,
     files: Catalog,
+    #[serde(default)]
+    descriptors: descriptor::Shapes,
 }
 
 /// Inspect the applied generation and prepare a reviewable plan for saved sources.
@@ -141,7 +148,7 @@ pub fn preview(project: &Project, name: ProfileName, initialize: bool) -> Result
         Err(error) => return Err(error),
     };
     let current = target.capture(project, None)?;
-    plan(&target, generation, &current, initialize)
+    plan(&target, generation, project.source(), &current, initialize)
 }
 
 /// Revalidate the reviewed plan under the infobase lock, then apply its exact source snapshot.
@@ -159,10 +166,15 @@ pub fn execute(
     let source = target.scratch.path().join("source");
     let current = target.capture(project, Some(&source))?;
     let generation = target.generation()?;
-    let plan = plan(&target, Ok(generation), &current, initialize)?;
+    let mut plan = plan(&target, Ok(generation), &source, &current, initialize)?;
     if plan.confirmation.as_deref() != Some(confirmation) {
         return Err(ApplyError::StalePreview);
     }
+    let descriptors = if plan.mode == Mode::Initialize {
+        descriptor::baseline(&source, &current)
+    } else {
+        std::mem::take(&mut plan.descriptors)
+    };
     let state = target.state.with_extension("pending");
     let directory = target.state.parent().ok_or(ApplyError::InvalidState)?;
     let mut marker = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
@@ -187,7 +199,11 @@ pub fn execute(
         }
         Mode::Incremental => {
             let mut input = tempfile::tempfile().map_err(ApplyError::Io)?;
-            for path in plan.changes.keys() {
+            for path in plan
+                .import_files
+                .as_deref()
+                .ok_or(ApplyError::StalePreview)?
+            {
                 let name = input_path(path).ok_or(ApplyError::UnrepresentablePath)?;
                 writeln!(input, "{name}").map_err(ApplyError::Io)?;
             }
@@ -208,6 +224,7 @@ pub fn execute(
     let document = Baseline {
         generation,
         files: current,
+        descriptors,
     };
     let mut temp = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
     serde_json::to_writer(temp.as_file_mut(), &document).map_err(|_| ApplyError::InvalidState)?;
@@ -266,7 +283,7 @@ impl Target {
             }
             _ => return Err(ApplyError::InvalidState),
         };
-        let state = directory.join(format!("apply-{}.json", checksum(identity.as_bytes())));
+        let state = directory.join(format!("apply-{}.json", checksum(&[identity.as_bytes()])));
         let scratch = tempfile::Builder::new()
             .prefix("apply-")
             .tempdir_in(directory)
@@ -380,6 +397,7 @@ fn process_error(error: RunError) -> ApplyError {
 fn plan(
     target: &Target,
     generation: Result<String, ReviewReason>,
+    source: &Path,
     current: &Catalog,
     initialize: bool,
 ) -> Result<Plan, ApplyError> {
@@ -388,15 +406,7 @@ fn plan(
         Err(error) if error.kind() == io::ErrorKind::NotFound => None,
         Err(error) => return Err(ApplyError::Io(error)),
     };
-    let baseline = match fs::read(&target.state) {
-        Ok(bytes) => {
-            serde_json::from_slice::<Baseline>(&bytes).map_err(|_| ReviewReason::InvalidBaseline)
-        }
-        Err(error) if error.kind() == io::ErrorKind::NotFound => {
-            Err(ReviewReason::BaselineRequired)
-        }
-        Err(error) => return Err(ApplyError::Io(error)),
-    };
+    let baseline = read_baseline(&target.state)?;
     let delta = baseline
         .as_ref()
         .ok()
@@ -439,21 +449,21 @@ fn plan(
     }
     let empty = Catalog::new();
     let previous = baseline.as_ref().map_or(&empty, |saved| &saved.files);
+    let empty_descriptors = descriptor::Shapes::new();
+    let descriptors = baseline
+        .as_ref()
+        .map_or(&empty_descriptors, |saved| &saved.descriptors);
     let changes = delta.unwrap_or_else(|| changes(&empty, current));
-    let mode = if initialize {
-        Mode::Initialize
+    let (mode, import_files) = if initialize {
+        (Mode::Initialize, None)
     } else if changes.is_empty() {
-        Mode::Unchanged
-    } else if changes.iter().all(|(path, kind)| {
-        *kind == Change::Modified
-            && path
-                .extension()
-                .is_some_and(|ext| ext.eq_ignore_ascii_case("bsl"))
-            && input_path(path).is_some()
-    }) {
-        Mode::Incremental
+        (Mode::Unchanged, None)
     } else {
-        Mode::Unsupported
+        descriptor::import_files(source, &changes, current, descriptors)
+            .filter(|paths| paths.iter().all(|path| input_path(path).is_some()))
+            .map_or((Mode::Unsupported, None), |paths| {
+                (Mode::Incremental, Some(paths))
+            })
     };
     let confirmation = if matches!(mode, Mode::Initialize | Mode::Incremental) {
         let identity = (
@@ -464,12 +474,13 @@ fn plan(
             &inspection.database_generation,
             &inspection.baseline_generation,
             pending,
+            &import_files,
             previous,
             current,
         );
-        Some(checksum(
-            &serde_json::to_vec(&identity).map_err(|_| ApplyError::UnrepresentablePath)?,
-        ))
+        Some(checksum(&[
+            &serde_json::to_vec(&identity).map_err(|_| ApplyError::UnrepresentablePath)?
+        ]))
     } else {
         None
     };
@@ -478,9 +489,21 @@ fn plan(
         target: target.identity.clone(),
         platform_version: target.platform.version().as_str().to_owned(),
         changes,
+        import_files,
         confirmation,
         inspection,
+        descriptors: baseline.map_or_else(|_| descriptor::Shapes::new(), |saved| saved.descriptors),
     })
+}
+
+fn read_baseline(path: &Path) -> Result<Result<Baseline, ReviewReason>, ApplyError> {
+    match fs::read(path) {
+        Ok(bytes) => Ok(serde_json::from_slice(&bytes).map_err(|_| ReviewReason::InvalidBaseline)),
+        Err(error) if error.kind() == io::ErrorKind::NotFound => {
+            Ok(Err(ReviewReason::BaselineRequired))
+        }
+        Err(error) => Err(ApplyError::Io(error)),
+    }
 }
 
 impl Inspection {
@@ -591,8 +614,12 @@ fn input_path(path: &Path) -> Option<String> {
     (!name.chars().any(char::is_whitespace)).then(|| name.replace(std::path::MAIN_SEPARATOR, "/"))
 }
 
-fn checksum(bytes: &[u8]) -> String {
-    let digest = Sha256::digest(bytes);
+fn checksum(parts: &[&[u8]]) -> String {
+    let mut hasher = Sha256::new();
+    for part in parts {
+        hasher.update(part);
+    }
+    let digest = hasher.finalize();
     let mut text = String::with_capacity(digest.len() * 2);
     for byte in digest {
         let _ = write!(text, "{byte:02x}");

@@ -1,7 +1,7 @@
 use std::{path::Path, process::ExitCode};
 
 use eska_build_runtime::runtime::apply::{
-    self, ApplyError, Change, Mode, Review, ReviewReason, Stage, Status,
+    self, ApplyError, Change, Mode, Plan, Review, ReviewReason, Stage, Status,
 };
 use eska_build_runtime::runtime::{self, RuntimeError};
 use eska_presentation::{
@@ -165,24 +165,7 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
             } else if args.confirm.is_some() {
                 println!("{}", localizer.text("runtime-apply-done"));
             } else {
-                println!(
-                    "{}",
-                    localizer.text(match plan.mode {
-                        Mode::Initialize => "runtime-apply-initialize",
-                        Mode::Incremental => "runtime-apply-incremental",
-                        Mode::Unchanged => "runtime-apply-unchanged",
-                        Mode::Unsupported => "runtime-apply-unsupported",
-                    })
-                );
-                println!("{} ({})", plan.target, plan.platform_version);
-                println!("{}", localizer.text(inspection_key(plan.inspection.status)));
-                for (path, change) in &plan.changes {
-                    let label = localizer.text(change_key(*change));
-                    println!("{label} {}", path.display());
-                }
-                if let Some(confirmation) = &plan.confirmation {
-                    println!("--confirm {confirmation}");
-                }
+                print_apply_plan(&plan, localizer);
             }
             ExitCode::SUCCESS
         }
@@ -194,6 +177,36 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
             };
             apply_failure(args, localizer, code, &localizer.text(message), review)
         }
+    }
+}
+
+fn print_apply_plan(plan: &Plan, localizer: &Localizer) {
+    println!(
+        "{}",
+        localizer.text(match plan.mode {
+            Mode::Initialize => "runtime-apply-initialize",
+            Mode::Incremental => "runtime-apply-incremental",
+            Mode::Unchanged => "runtime-apply-unchanged",
+            Mode::Unsupported => "runtime-apply-unsupported",
+        })
+    );
+    println!("{} ({})", plan.target, plan.platform_version);
+    println!("{}", localizer.text(inspection_key(plan.inspection.status)));
+    for (path, change) in &plan.changes {
+        let label = localizer.text(change_key(*change));
+        println!("{label} {}", path.display());
+    }
+    if let Some(files) = &plan.import_files {
+        for path in files
+            .iter()
+            .filter(|path| !plan.changes.contains_key(*path))
+        {
+            let label = localizer.text("runtime-apply-required-file");
+            println!("{label} {}", path.display());
+        }
+    }
+    if let Some(confirmation) = &plan.confirmation {
+        println!("--confirm {confirmation}");
     }
 }
 

@@ -54,7 +54,8 @@ case "$1:$2:$3" in
       exec sleep 30
     fi
     test ! -f fail-apply ;;
-  infobase:config:import) exit 0 ;;
+  infobase:config:import)
+    if test "$4" = files; then cat > "$(dirname "$0")/import-files"; fi ;;
   *) exit 2 ;;
 esac
 "#,
@@ -70,6 +71,127 @@ esac
     )
     .unwrap();
     module
+}
+
+fn initialize(root: &Path) {
+    let (_, initial) = apply(root, "en-US", &["--initialize"]);
+    let token = initial["plan"]["confirmation"].as_str().unwrap();
+    assert!(
+        apply(root, "en-US", &["--initialize", "--confirm", token])
+            .0
+            .status
+            .success()
+    );
+}
+
+#[test]
+fn apply_imports_existing_metadata_properties_and_their_form_resource() {
+    let root = TestDir::new();
+    let root = &root.0;
+    prepare(root);
+    let source = root.join("src");
+    let descriptor = "CommonForms/ProbeButtons.xml";
+    let form = "CommonForms/ProbeButtons/Ext/Form.xml";
+    let original = include_str!(
+        "../../../tests/fixtures/forms/native-button-rows/source/CommonForms/ProbeButtons.xml"
+    );
+    fs::create_dir_all(source.join(form).parent().unwrap()).unwrap();
+    fs::write(source.join(descriptor), original).unwrap();
+    fs::write(source.join(form), "<Form/>").unwrap();
+    initialize(root);
+    let edited = original.replace("<Comment/>", "<Comment>Updated</Comment>");
+    assert_ne!(edited, original);
+    fs::write(source.join(descriptor), &edited).unwrap();
+    fs::write(source.join(form), "<Form><Title>Updated</Title></Form>").unwrap();
+    let (_, preview) = apply(root, "en-US", &[]);
+    assert_eq!(preview["plan"]["mode"], "incremental");
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (_, localized) = apply(root, "ru-RU", &[]);
+    assert_eq!(preview, localized);
+    let list = root.join("import-files");
+    assert!(!list.exists());
+    assert!(
+        apply(root, "en-US", &["--confirm", token])
+            .0
+            .status
+            .success()
+    );
+    let files = fs::read_to_string(&list).unwrap();
+    assert_eq!(
+        files.lines().collect::<std::collections::BTreeSet<_>>(),
+        [descriptor, form].into_iter().collect()
+    );
+
+    let renamed = edited.replace("<Name>ProbeButtons</Name>", "<Name>Another</Name>");
+    assert_ne!(renamed, edited);
+    fs::write(source.join(descriptor), renamed).unwrap();
+    let (_, preview) = apply(root, "en-US", &[]);
+    assert_eq!(preview["plan"]["mode"], "unsupported");
+    assert!(preview["plan"]["confirmation"].is_null());
+
+    let structure = edited.replace(
+        "</CommonForm>",
+        "<ChildObjects><Form>NewChild</Form></ChildObjects></CommonForm>",
+    );
+    assert_ne!(structure, edited);
+    fs::write(source.join(descriptor), structure).unwrap();
+    let (_, preview) = apply(root, "en-US", &[]);
+    assert_eq!(preview["plan"]["mode"], "unsupported");
+}
+
+#[test]
+fn apply_reviews_and_imports_unchanged_catalog_companions_in_platform_order() {
+    let root = TestDir::new();
+    let root = &root.0;
+    prepare(root);
+    let source = root.join("src");
+    let catalog = "Catalogs/ProbeOwner.xml";
+    let catalog_form = "Catalogs/ProbeOwner/Forms/ProbeObject.xml";
+    let catalog_layout = "Catalogs/ProbeOwner/Forms/ProbeObject/Ext/Form.xml";
+    let catalog_original = include_str!(
+        "../../../tests/fixtures/forms/native-owner-composition/base/Catalogs/ProbeOwner.xml"
+    );
+    fs::create_dir_all(source.join(catalog_layout).parent().unwrap()).unwrap();
+    fs::write(source.join(catalog), catalog_original).unwrap();
+    fs::write(
+        source.join(catalog_form),
+        include_str!(
+            "../../../tests/fixtures/forms/native-owner-composition/base/Catalogs/ProbeOwner/Forms/ProbeObject.xml"
+        ),
+    )
+    .unwrap();
+    fs::write(source.join(catalog_layout), "<Form/>").unwrap();
+    initialize(root);
+    let list = root.join("import-files");
+    fs::write(
+        source.join(catalog),
+        catalog_original.replace("<Comment/>", "<Comment>Catalog property</Comment>"),
+    )
+    .unwrap();
+    let (_, preview) = apply(root, "ru-RU", &[]);
+    assert_eq!(preview["plan"]["mode"], "incremental");
+    assert_eq!(
+        preview["plan"]["changes"],
+        serde_json::json!({(catalog):"modified"})
+    );
+    assert_eq!(
+        preview["plan"]["import_files"],
+        serde_json::json!([catalog, catalog_form, catalog_layout])
+    );
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    assert!(
+        apply(root, "en-US", &["--confirm", token])
+            .0
+            .status
+            .success()
+    );
+    assert_eq!(
+        fs::read_to_string(list)
+            .unwrap()
+            .lines()
+            .collect::<Vec<_>>(),
+        [catalog, catalog_form, catalog_layout]
+    );
 }
 
 #[test]
