@@ -1632,6 +1632,8 @@ fn evaluate_expands_a_nested_snapshot_without_running_the_function_again() {
     assert_eq!(number(&mut dap, &second["variablesReference"]), "2");
     assert_eq!(number(&mut dap, &reference), "1");
     assert_eq!(counter(&mut dap, &frame), "2");
+    verify_opaque_evaluation_once(&mut dap, &frame);
+    assert_eq!(number(&mut dap, &reference), "1");
     dap.success("stepIn", json!({"threadId":thread}));
     let thread = dap.stop();
     assert_eq!(
@@ -1644,6 +1646,98 @@ fn evaluate_expands_a_nested_snapshot_without_running_the_function_again() {
         "evaluate",
         json!({"frameId":caller,"expression":"A + Счетчик"}),
     );
-    assert_eq!(value["result"], "43");
+    assert_eq!(value["result"], "44");
+    dap.shutdown();
+}
+
+fn verify_opaque_evaluation_once(dap: &mut Dap, frame: &Value) {
+    let opaque = dap.request(
+        "evaluate",
+        json!({"frameId":frame,"expression":"СоздатьЗаписьJSON()"}),
+    );
+    if opaque["success"] == true {
+        let reference = &opaque["body"]["variablesReference"];
+        assert!(reference.as_u64().is_some_and(|id| id > 0), "{opaque}");
+        dap.success("variables", json!({"variablesReference":reference}));
+    } else {
+        assert!(
+            opaque["message"]
+                .as_str()
+                .is_some_and(|text| !text.is_empty())
+        );
+    }
+    let calls = dap.success("evaluate", json!({"frameId":frame,"expression":"Счетчик"}));
+    assert_eq!(calls["result"], "3");
+}
+
+#[test]
+#[ignore = "requires the owned server EPF Evaluate fixture"]
+fn native_server_evaluate_preserves_opaque_snapshot_and_children() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let args: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let source = Path::new(args["externalProcessing"]["sourceRoot"].as_str().unwrap())
+        .join("EskaEpfWire/Ext/ObjectModule.bsl");
+    let mut dap = Dap::standalone(root, "en-US", false);
+    dap.success("initialize", json!({"adapterID":"onec-http"}));
+    dap.success("attach", args);
+    dap.success("configurationDone", json!({}));
+    let points = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":5}]}),
+    );
+    assert_eq!(points["breakpoints"][0]["verified"], true);
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let frame = &stack["stackFrames"][0]["id"];
+    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(source));
+    let writer = dap.success(
+        "evaluate",
+        json!({"frameId":frame,"expression":"СоздатьЗаписьJSON()"}),
+    );
+    assert_eq!(writer["type"], "ЗаписьJSON");
+    for _ in 0..3 {
+        let children = dap.success(
+            "variables",
+            json!({"variablesReference":writer["variablesReference"]}),
+        );
+        let parameters = children["variables"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|child| child["name"] == "Параметры")
+            .unwrap();
+        assert_eq!(parameters["type"], "ПараметрыЗаписиJSON");
+        let nested = dap.success(
+            "variables",
+            json!({"variablesReference":parameters["variablesReference"]}),
+        );
+        assert!(
+            nested["variables"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|child| { child["name"] == "ПереносСтрок" })
+        );
+    }
+    let reader = dap.success(
+        "evaluate",
+        json!({"frameId":frame,"expression":"СоздатьЧтениеJSON()"}),
+    );
+    assert_eq!(reader["type"], "ЧтениеJSON");
+    let children = dap.success(
+        "variables",
+        json!({"variablesReference":reader["variablesReference"]}),
+    );
+    assert!(
+        children["variables"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|child| { child["name"] == "ТипТекущегоЗначения" })
+    );
+    let counter = dap.success("evaluate", json!({"frameId":frame,"expression":"Счетчик"}));
+    assert_eq!(counter["result"], "2");
     dap.shutdown();
 }

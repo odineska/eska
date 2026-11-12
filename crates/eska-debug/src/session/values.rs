@@ -20,7 +20,11 @@ pub(super) fn store_expression(expression: &str, address: Option<&str>) -> Strin
         || "Новый УникальныйИдентификатор".to_owned(),
         |address| format!("\"{address}\""),
     );
-    let store = format!("ПоместитьВоВременноеХранилище(({expression}), {destination})");
+    // File-mode server storage can retain opaque objects inside a structure.
+    let store = format!(
+        "ПоместитьВоВременноеХранилище(Новый Структура(\"{}\", ({expression})), {destination})",
+        dbgs::SNAPSHOT_VALUE
+    );
     if address.is_some() {
         dbgs::snapshot_expression(&store)
     } else {

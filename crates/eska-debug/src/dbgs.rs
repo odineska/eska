@@ -523,8 +523,10 @@ pub fn random_id() -> io::Result<String> {
     Ok(result)
 }
 
+pub const SNAPSHOT_VALUE: &str = "Value";
+
 pub fn snapshot_expression(address_expression: &str) -> String {
-    format!("ПолучитьИзВременногоХранилища({address_expression})")
+    format!("ПолучитьИзВременногоХранилища({address_expression}).{SNAPSHOT_VALUE}")
 }
 
 fn event(node: Node<'_, '_>) -> Option<Event> {
