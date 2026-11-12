@@ -1312,8 +1312,21 @@ fn evaluate_expands_a_nested_snapshot_without_running_the_function_again() {
         assert_eq!(nested["variables"][0]["name"], "Номер");
         nested["variables"][0]["value"].clone()
     };
-    for _ in 0..3 {
+    let repeats = env::var("ESKA_DEBUG_SNAPSHOT_REPEATS")
+        .ok()
+        .map_or(3, |value| value.parse().unwrap());
+    let pid = dap.process.id();
+    let before = memory(pid);
+    let started = Instant::now();
+    for _ in 0..repeats {
         assert_eq!(number(&mut dap, &reference), "1");
+    }
+    if repeats > 3 {
+        eprintln!(
+            "snapshot expansions={repeats} elapsed={:?} RSS/HWM KiB: {before:?} -> {:?}",
+            started.elapsed(),
+            memory(pid)
+        );
     }
     assert_eq!(counter(&mut dap, &frame), "1");
     let second = dap.success(
