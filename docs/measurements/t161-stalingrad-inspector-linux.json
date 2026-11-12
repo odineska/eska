@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "task": "T161",
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "vsCode": "1.109.0",
+  "explorerRevision": "0c3ad1c",
+  "vsixSha256": "a41e182ee9d6549314865fbd2d7fd1668025bbf911607660b517365aa57a7f67",
+  "backendSha256": "91ca0c729d7e23f0fd6b0009dcddfe8bfdf3a8b144b115255fc30cc0ac79bdd9",
+  "sourceWritesDuringViewing": false,
+  "nativeEquivalentProfiles": [
+    {
+      "context": "tableColumn",
+      "profiles": [
+        "Boolean + Date",
+        "String + Number"
+      ],
+      "captureSha256": [
+        "47262ab9f269924c515d22213c8f29f8170d954d1459d4bc3a56f04d66b1b168",
+        "20d32b3a465aa094f32a3b697b4e1c326ea7c006fc1faff08699fda800d918b3"
+      ]
+    },
+    {
+      "context": "formInput",
+      "profiles": [
+        "Two metadata references",
+        "String + metadata reference"
+      ],
+      "captureSha256": [
+        "ec46e104478f56e73f4913f251bac4e463e2eddf0fd053ef09421b14c4961176",
+        "e4d936130f65b57353720e5f15cba23ed435f584d75e3be75fb4954f6687cd49"
+      ]
+    },
+    {
+      "context": "formInput",
+      "profiles": [
+        "Unresolved serialized UUID",
+        "Unbound"
+      ],
+      "captureSha256": [
+        "3f0ddb69847bba6c2d32a8025d98c8db19c8831a3f9b41859327900a2479a921",
+        "e60345f7fed3dc41dbc6607b5515e0c4518cf635616b1fea2a844e86f2309304"
+      ]
+    }
+  ],
+  "rpcInspection": [
+    {
+      "document": "ВыдачаЗайма",
+      "inspected": 70,
+      "missing": []
+    },
+    {
+      "document": "ПоступлениеНаРасчетныйСчет",
+      "inspected": 82,
+      "missing": []
+    },
+    {
+      "document": "ПоступлениеНаСчетТекущихРасчетов",
+      "inspected": 62,
+      "missing": []
+    }
+  ],
+  "installedVsix": {
+    "ru": {
+      "receiptSha256": "36b90cd582d9856135a5a4b0d2f9eb322888ea3e47ee1ea32b5cab402d62315b",
+      "forms": [
+        {
+          "document": "ВыдачаЗайма",
+          "inspected": 70,
+          "resizeStates": 4,
+          "unsupportedRenderedElements": 0
+        },
+        {
+          "document": "ПоступлениеНаРасчетныйСчет",
+          "inspected": 82,
+          "resizeStates": 4,
+          "unsupportedRenderedElements": 0
+        },
+        {
+          "document": "ПоступлениеНаСчетТекущихРасчетов",
+          "inspected": 62,
+          "resizeStates": 4,
+          "unsupportedRenderedElements": 0
+        }
+      ]
+    },
+    "en": {
+      "receiptSha256": "c09d61c6b86e3a665cc99c3528f23c3cb7b6b62b24c4d4f4505925a546c2fb4d",
+      "forms": [
+        {
+          "document": "ВыдачаЗайма",
+          "inspected": 70,
+          "resizeStates": 4,
+          "unsupportedRenderedElements": 0
+        },
+        {
+          "document": "ПоступлениеНаРасчетныйСчет",
+          "inspected": 82,
+          "resizeStates": 4,
+          "unsupportedRenderedElements": 0
+        },
+        {
+          "document": "ПоступлениеНаСчетТекущихРасчетов",
+          "inspected": 62,
+          "resizeStates": 4,
+          "unsupportedRenderedElements": 0
+        }
+      ]
+    }
+  }
+}

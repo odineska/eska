@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "os": "Linux ARM64",
+  "dpi": 96,
+  "compatibility": "Version8_3_27",
+  "file": "TabPictures.xml",
+  "pictures": [
+    "ProbeTall",
+    "ProbeTiny",
+    "ProbeWideIcon"
+  ],
+  "states": {
+    "initial": {
+      "selected": 0,
+      "frame": [271, 153],
+      "panel": {
+        "rect": [13, 66, 237, 74],
+        "regions": {}
+      },
+      "screenshotSha256": "1d342d954cd62bb0095b639b5da04b4de903904ab664b05381e27d020e6265e8",
+      "tabs": [
+        {
+          "name": "Service",
+          "rect": [13, 39, 85, 28],
+          "active": true,
+          "background": [255, 255, 255],
+          "labelShown": true,
+          "picture": [21, 44, 16, 16],
+          "regions": {
+            "picture": {
+              "rect": [21, 44, 16, 16],
+              "rgbSha256": "5b84654823fd4eef43f6a158e1b57e4e827bdcfff35d761bafcc336931f580d1"
+            }
+          }
+        },
+        {
+          "name": "Details",
+          "rect": [97, 39, 60, 28],
+          "active": false,
+          "background": [235, 235, 235],
+          "labelShown": true,
+          "picture": null,
+          "regions": {}
+        }
+      ],
+      "wholeFormRgbSha256": "0c1c1b4ac64334eb56e0e5dac004b06caccb13cd8c3cb52306c9429084b05720"
+    },
+    "second": {
+      "selected": 1,
+      "frame": [271, 153],
+      "panel": {
+        "rect": [13, 66, 237, 74],
+        "regions": {}
+      },
+      "screenshotSha256": "54af70bbfb7c37236ca2fa83aff32c81773a82e6bb731f06f592701f0af4c6a4",
+      "tabs": [
+        {
+          "name": "Service",
+          "rect": [13, 39, 85, 28],
+          "active": false,
+          "background": [235, 235, 235],
+          "labelShown": true,
+          "picture": [21, 44, 16, 16],
+          "regions": {
+            "picture": {
+              "rect": [21, 44, 16, 16],
+              "rgbSha256": "7bd6540c9d527259466fc537daae4c3c9c3837689710bebfba0a4e75cc1e603c"
+            }
+          }
+        },
+        {
+          "name": "Details",
+          "rect": [97, 39, 60, 28],
+          "active": true,
+          "background": [255, 255, 255],
+          "labelShown": true,
+          "picture": null,
+          "regions": {}
+        }
+      ],
+      "wholeFormRgbSha256": "bbc4a6990d966ac5a3da5bd593fd48d0398d7b8b8b1d2d2e70130706ea367747"
+    },
+    "iconOnly": {
+      "selected": 0,
+      "frame": [271, 153],
+      "panel": {
+        "rect": [13, 66, 237, 74],
+        "regions": {}
+      },
+      "screenshotSha256": "9a33d38f82ebbca5cd17fddb463b3e6941c6f7675662bc997cbe42af4b444609",
+      "tabs": [
+        {
+          "name": "Service",
+          "rect": [13, 39, 32, 28],
+          "active": true,
+          "background": [255, 255, 255],
+          "labelShown": false,
+          "picture": [21, 44, 16, 16],
+          "regions": {
+            "picture": {
+              "rect": [21, 44, 16, 16],
+              "rgbSha256": "5b84654823fd4eef43f6a158e1b57e4e827bdcfff35d761bafcc336931f580d1"
+            }
+          }
+        },
+        {
+          "name": "Details",
+          "rect": [44, 39, 60, 28],
+          "active": false,
+          "background": [235, 235, 235],
+          "labelShown": true,
+          "picture": null,
+          "regions": {}
+        }
+      ],
+      "wholeFormRgbSha256": "5afa6ec2d067f3b046436652b2fd49eba44c37da7ae8233cafcf453b8bb4bc7f"
+    },
+    "tall": {
+      "selected": 0,
+      "frame": [271, 161],
+      "panel": {
+        "rect": [13, 74, 237, 74],
+        "regions": {}
+      },
+      "screenshotSha256": "df9c5b404d1a86a0cf318425deb89f5191557dc6803a3c64042cc9a7acf9d473",
+      "tabs": [
+        {
+          "name": "Service",
+          "rect": [13, 39, 85, 36],
+          "active": true,
+          "background": [255, 255, 255],
+          "labelShown": true,
+          "picture": [21, 44, 16, 24],
+          "regions": {
+            "picture": {
+              "rect": [21, 44, 16, 24],
+              "rgbSha256": "5b85c063ee4cb49485999245c506112a7cf10324914c78f47ea9692115dd2d35"
+            }
+          }
+        },
+        {
+          "name": "Details",
+          "rect": [97, 39, 60, 36],
+          "active": false,
+          "background": [235, 235, 235],
+          "labelShown": true,
+          "picture": null,
+          "regions": {}
+        }
+      ],
+      "wholeFormRgbSha256": "d49311cd3f4480bf267aa20cda5b3c9f84c494ec2af55c2b5bdb08c534bb5514"
+    },
+    "tiny": {
+      "selected": 0,
+      "frame": [271, 152],
+      "panel": {
+        "rect": [13, 65, 237, 74],
+        "regions": {}
+      },
+      "screenshotSha256": "c39e4690f4e29847218c530329fc3ebcf508ad6717739a9c8bceda1468d19571",
+      "tabs": [
+        {
+          "name": "Service",
+          "rect": [13, 39, 77, 27],
+          "active": true,
+          "background": [255, 255, 255],
+          "labelShown": true,
+          "picture": [21, 48, 8, 8],
+          "regions": {
+            "picture": {
+              "rect": [21, 48, 8, 8],
+              "rgbSha256": "353f572db6134afbae36eead6ba9f8b86bc2a72f3c39fd582f5534dbe9f2998b"
+            }
+          }
+        },
+        {
+          "name": "Details",
+          "rect": [89, 39, 60, 27],
+          "active": false,
+          "background": [235, 235, 235],
+          "labelShown": true,
+          "picture": null,
+          "regions": {}
+        }
+      ],
+      "wholeFormRgbSha256": "58ada760977a8d0206c9726bb04fd44b6b19270d73f1dd4aecd222b6c49bab70"
+    },
+    "leftMixed": {
+      "selected": 0,
+      "frame": [361, 127],
+      "panel": {
+        "rect": [104, 39, 236, 75],
+        "regions": {}
+      },
+      "screenshotSha256": "71a8d81ec20576115e7e8c7202bc310e12f828b5ceb5c4e174d283b1cc8789f6",
+      "tabs": [
+        {
+          "name": "Service",
+          "rect": [13, 39, 92, 28],
+          "active": true,
+          "background": [255, 255, 255],
+          "labelShown": true,
+          "picture": [31, 48, 8, 8],
+          "regions": {
+            "picture": {
+              "rect": [31, 48, 8, 8],
+              "rgbSha256": "353f572db6134afbae36eead6ba9f8b86bc2a72f3c39fd582f5534dbe9f2998b"
+            }
+          }
+        },
+        {
+          "name": "Details",
+          "rect": [13, 66, 92, 28],
+          "active": false,
+          "background": [235, 235, 235],
+          "labelShown": true,
+          "picture": [23, 71, 24, 16],
+          "regions": {
+            "picture": {
+              "rect": [23, 71, 24, 16],
+              "rgbSha256": "fb1fb7a8a6bd3b6c080bdbf65c6286b4ede3e6696ed6a77f759c0a523e40c297"
+            }
+          }
+        }
+      ]
+    },
+    "bottom": {
+      "selected": 0,
+      "frame": [271, 153],
+      "panel": {
+        "rect": [13, 39, 237, 74],
+        "regions": {}
+      },
+      "screenshotSha256": "352728a8027e6731feb57017bfef90f4d211ba9da4a294ea7cfdeb5979731492",
+      "tabs": [
+        {
+          "name": "Service",
+          "rect": [13, 112, 85, 28],
+          "active": true,
+          "background": [255, 255, 255],
+          "labelShown": true,
+          "picture": [21, 118, 16, 16],
+          "regions": {
+            "picture": {
+              "rect": [21, 118, 16, 16],
+              "rgbSha256": "5b84654823fd4eef43f6a158e1b57e4e827bdcfff35d761bafcc336931f580d1"
+            }
+          }
+        },
+        {
+          "name": "Details",
+          "rect": [97, 112, 60, 28],
+          "active": false,
+          "background": [235, 235, 235],
+          "labelShown": true,
+          "picture": null,
+          "regions": {}
+        }
+      ],
+      "wholeFormRgbSha256": "14bf54041c0276ac1c9e733d0c6dbe591c28adbbb57306e5f0e968fece2d8769"
+    }
+  }
+}

@@ -393,6 +393,236 @@
           26
         ]
       }
+    },
+    {
+      "name": "TallStatic",
+      "form": "ProbeScrollTable01",
+      "compatibility": "Version8_3_27",
+      "xmlSha256": "f5a98c53f569c3369df3b4fc65058eb67b6be1293115c99b33b5cfc6c6de5e11",
+      "canonicalExportSha256": "15e0a90fa692ced300adb98ca76d1e463dbe2d8f8f718fed633bd47e45e997cb",
+      "native": {
+        "frame": [
+          634,
+          992
+        ],
+        "grid": [
+          13,
+          104,
+          600,
+          843
+        ],
+        "tail": [
+          13,
+          956,
+          191,
+          23
+        ],
+        "captureSha256": "4bf8bb8120c4557f50927ea8e02ada8c40a0e6cda2645552e27ce15116e8bd2f"
+      },
+      "nativeEn": {
+        "frame": [
+          634,
+          992
+        ],
+        "grid": [
+          13,
+          104,
+          600,
+          843
+        ],
+        "tail": [
+          13,
+          956,
+          191,
+          23
+        ],
+        "captureSha256": "81635fcbe4ae66e9de4668013de49254493dc90910d2a0e80c49608e99464b72"
+      },
+      "scrollModes": [
+        {
+          "mode": null,
+          "frame": [
+            634,
+            726
+          ],
+          "grid": [
+            13,
+            104,
+            600,
+            843
+          ],
+          "tail": [
+            13,
+            956,
+            191,
+            23
+          ],
+          "scrollRange": 266,
+          "captureSha256": "4c51398210c595d921309b9c466b6a06412f344e076678c2bb27dfeae650f6ed",
+          "captureSha256En": "aeb4caeaaefcf7d9cad6a49d1ff08ee4e86593c5a160f69b073aa1290c1c6399",
+          "endCaptureSha256En": "9dbd4e40039cc4e89d6ca5ce28bd8feece7c9eab379a37fee65fe328d04bb6c4"
+        },
+        {
+          "mode": "use",
+          "frame": [
+            634,
+            726
+          ],
+          "grid": [
+            13,
+            104,
+            600,
+            843
+          ],
+          "tail": [
+            13,
+            956,
+            191,
+            23
+          ],
+          "scrollRange": 266,
+          "captureSha256": "f6bf605b291fdd2286dc7223877b5aff133496d9a766211815382c473fc0cdbf",
+          "captureSha256En": "d77bf1d122ef32a1d53c4696b8061945d41b5f1aa0320fa2e34d80db1b536450",
+          "endCaptureSha256En": "a733de59a25af286ab08f2620e8c7b2e0bd57baec7da8ff6bb05062446a0aa47"
+        },
+        {
+          "mode": "useIfNecessary",
+          "frame": [
+            634,
+            726
+          ],
+          "grid": [
+            13,
+            104,
+            600,
+            577
+          ],
+          "tail": [
+            13,
+            690,
+            191,
+            23
+          ],
+          "scrollRange": 0,
+          "captureSha256": "8fcb993b277f6e94e36e9e12209e8efa3aa0d3b233185f9e3c7d76381ade3f44",
+          "captureSha256En": "561a8c18b9e86b62bf42fa513f4ea8f5fad575d0e7ffebcd3f4765c7b858584b"
+        },
+        {
+          "mode": "useWithoutStretch",
+          "frame": [
+            634,
+            726
+          ],
+          "grid": [
+            13,
+            104,
+            600,
+            843
+          ],
+          "tail": [
+            13,
+            956,
+            191,
+            23
+          ],
+          "scrollRange": 266,
+          "captureSha256": "c81dfdf63acd4cf7d15781ca560e1f444d0ed6fa5a6c46bece7b8c0b811ed1c2",
+          "captureSha256En": "792f1216c9b1d75c8fce982e6e09fe6cd66302f135abac980c50364d126bd197",
+          "endCaptureSha256En": "80fb7748b8c378794f5e38a5ffd590a9473e3877b4c2f8c0a8cee6714a4a6c0c"
+        }
+      ]
+    },
+    {
+      "name": "TallDynamic",
+      "form": "ProbeScrollTable05",
+      "compatibility": "Version8_3_27",
+      "xmlSha256": "5a770149c1dff4bb39d922200143367b194dbacbbc06d3cff9fbb92766e2e3aa",
+      "canonicalExportSha256": "b1d67c2ae2c1169af5613ce357e24f23d39af47141a4f041e12fbaaafd393570",
+      "native": {
+        "frame": [
+          634,
+          1014
+        ],
+        "grid": [
+          13,
+          104,
+          600,
+          844
+        ],
+        "tail": [
+          13,
+          978,
+          191,
+          23
+        ],
+        "captureSha256": "e3a704c23255a587318c8a0299022f03d42a8492b335e99f19d066af39a4b2ad"
+      },
+      "nativeEn": {
+        "frame": [
+          634,
+          1014
+        ],
+        "grid": [
+          13,
+          104,
+          600,
+          844
+        ],
+        "tail": [
+          13,
+          978,
+          191,
+          23
+        ],
+        "captureSha256": "059273acdc7a27345195d757f5ad8c3569d0fb88a1dab91b62d1c04d27e04efe"
+      },
+      "scrollModes": [
+        {
+          "mode": null,
+          "frame": [
+            634,
+            726
+          ],
+          "grid": [
+            13,
+            104,
+            600,
+            556
+          ],
+          "tail": [
+            13,
+            690,
+            191,
+            23
+          ],
+          "scrollRange": 0,
+          "captureSha256": "54194213c365327b4f1663c95ab7c019bddf0ea7c0ca579e92f817a5008b5ddb",
+          "captureSha256En": "2d69cba3b96820143ad4bc30470fe07681d2e2563f45cd4c0a8e6d6bb5020666"
+        },
+        {
+          "mode": "use",
+          "frame": [
+            634,
+            726
+          ],
+          "grid": [
+            13,
+            104,
+            600,
+            844
+          ],
+          "tail": [
+            13,
+            978,
+            191,
+            23
+          ],
+          "scrollRange": 288,
+          "captureSha256": "a1a022e7999ee00c76d4bac0d1ea346c9ab05b5e93aa88e454adb1b0907d1161",
+          "captureSha256En": "d3b07bde8da30a8ee426be53aaa382f4417097eda05cfdd717f8d10f9f010574",
+          "endCaptureSha256En": "8a28e497218b23e1b463dd3564d5728dc47b03158271d09e08f42370e037becc"
+        }
+      ]
     }
   ],
   "frameCoordinates": "Outer black outline, including its one-pixel stroke and excluding the shadow."

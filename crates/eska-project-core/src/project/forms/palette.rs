@@ -6,6 +6,7 @@ mod command;
 mod common;
 mod display_field;
 mod input_field;
+mod pages;
 mod root_form;
 mod table;
 
@@ -232,6 +233,11 @@ impl FormPreview {
             Some(ElementKind::ColumnGroup) => presentation()
                 .and_then(|item| table::column_group_definitions(item, element))
                 .map(|definitions| self.palette_rows(element, definitions)),
+            Some(kind @ (ElementKind::Pages | ElementKind::Page)) => {
+                Some(self.palette_rows(element, pages::definitions(kind == ElementKind::Pages)))
+            }
+            Some(ElementKind::UsualGroup) => usual_group_definitions(element)
+                .map(|definitions| self.palette_rows(element, definitions)),
             Some(ElementKind::AutoCommandBar) => presentation()
                 .and_then(command::auto_bar_definitions)
                 .map(|definitions| self.palette_rows(element, definitions)),
@@ -247,8 +253,7 @@ impl FormPreview {
             ) => presentation()
                 .and_then(|item| command::addition_definitions(item, element))
                 .map(|definitions| self.palette_rows(element, definitions)),
-            _ => ordinary_group(element)
-                .then(|| self.palette_rows(element, USUAL_GROUP.iter().map(|row| (row, true)))),
+            _ => None,
         };
         Some(PropertyPalette { rows })
     }
@@ -377,10 +382,28 @@ fn event_entry(element: &EffectiveElement, name: &str) -> Option<(usize, usize, 
         })
 }
 
-fn ordinary_group(element: &EffectiveElement) -> bool {
-    // Orientation changes layout, not the ordinary group's property catalog.
-    element.kind == Some(ElementKind::UsualGroup)
-        && matches!(element.scalar("Behavior"), None | Some("Auto" | "Usual"))
+fn usual_group_definitions(
+    element: &EffectiveElement,
+) -> Option<impl Iterator<Item = (&'static PaletteDefinition, bool)>> {
+    let collapsible = match element.scalar("Behavior") {
+        Some("Collapsible") => true,
+        None | Some("Auto" | "Usual") => false,
+        _ => return None,
+    };
+    Some(
+        USUAL_GROUP
+            .iter()
+            .filter(move |row| match row.id {
+                "CollapsedRepresentationTitle"
+                | "Collapsed"
+                | "ControlRepresentation"
+                | "ShowLeftMargin"
+                | "HiddenRepresentationTitleBackColor" => collapsible,
+                "ThroughAlign" => !collapsible,
+                _ => true,
+            })
+            .map(|row| (row, true)),
+    )
 }
 
 const CONTEXT_MENU: &[PaletteDefinition] = &[common::IMPORTANCE, common::AUTO_FILL];
@@ -393,9 +416,7 @@ fn unbound_data_path(element: &EffectiveElement) -> bool {
 
 const USUAL_GROUP: &[PaletteDefinition] = {
     use PaletteCategory::{Appearance, Layout, Main, Usage};
-    use PaletteEditor::{
-        Binding, Boolean, Color, Enum, Font, Localized, Number, Reference, Shortcut, Text,
-    };
+    use PaletteEditor::{Binding, Boolean, Color, Enum, Font, Localized, Number, Shortcut, Text};
     use PlatformPropertyValue::{Auto, AutoStretch, Choice, Empty, Unknown};
     &[
         PaletteDefinition::new("Name", Main, Text, Unknown).with_source(SettingSource::Name),
@@ -426,17 +447,32 @@ const USUAL_GROUP: &[PaletteDefinition] = {
             Boolean,
             PlatformPropertyValue::Boolean(false),
         ),
-        PaletteDefinition::new(
-            "EnableContentChange",
-            Main,
-            Boolean,
-            PlatformPropertyValue::Boolean(true),
-        ),
+        common::ENABLE_CONTENT_CHANGE,
         PaletteDefinition::new("DisplayImportance", Main, Enum, Auto)
             .with_source(SettingSource::Attribute("DisplayImportance")),
-        PaletteDefinition::new("Behavior", Main, Enum, Auto),
-        PaletteDefinition::new("Representation", Main, Enum, Choice("lightMarking")),
-        PaletteDefinition::new("Group", Main, Enum, Unknown),
+        PaletteDefinition::new("Behavior", Main, Enum, Auto).with_enum_captions(&[
+            ("Auto", "auto"),
+            ("Usual", "regularGroupBehavior"),
+            ("Collapsible", "collapsibleGroupBehavior"),
+        ]),
+        PaletteDefinition::new("CollapsedRepresentationTitle", Main, Localized, Empty),
+        PaletteDefinition::new("Collapsed", Main, Boolean, common::UNCHECKED),
+        PaletteDefinition::new(
+            "ControlRepresentation",
+            Main,
+            Enum,
+            Choice("titleHyperlink"),
+        )
+        .with_enum_captions(&[("Picture", "groupControlPicture")]),
+        PaletteDefinition::new("Representation", Main, Enum, Choice("lightMarking"))
+            .with_enum_captions(&[
+                ("None", "none"),
+                ("NormalSeparation", "normalMarking"),
+                ("StrongSeparation", "strongMarking"),
+            ]),
+        PaletteDefinition::new("ShowLeftMargin", Main, Boolean, common::CHECKED),
+        PaletteDefinition::new("Group", Main, Enum, Choice("horizontalIfPossible"))
+            .with_enum_captions(common::GROUPING),
         PaletteDefinition::new(
             "United",
             Main,
@@ -445,9 +481,8 @@ const USUAL_GROUP: &[PaletteDefinition] = {
         ),
         PaletteDefinition::new("ThroughAlign", Main, Enum, Auto),
         PaletteDefinition::new("TitleDataPath", Main, Binding, Empty),
-        PaletteDefinition::new("CurrentRowUse", Main, Enum, Auto),
-        PaletteDefinition::new("AssociatedTable", Main, Reference, Empty)
-            .with_source(SettingSource::Unmapped),
+        common::CURRENT_ROW_USE,
+        common::ASSOCIATED_TABLE,
         PaletteDefinition::new("Shortcut", Usage, Shortcut, Empty),
         PaletteDefinition::new("ToolTip", Usage, Localized, Empty),
         PaletteDefinition::new("ToolTipRepresentation", Usage, Enum, Auto),
@@ -464,6 +499,13 @@ const USUAL_GROUP: &[PaletteDefinition] = {
         PaletteDefinition::new("HorizontalSpacing", Appearance, Enum, Auto),
         PaletteDefinition::new("VerticalSpacing", Appearance, Enum, Auto),
         PaletteDefinition::new("BackColor", Appearance, Color, Auto),
+        PaletteDefinition::new(
+            "HiddenRepresentationTitleBackColor",
+            Appearance,
+            Color,
+            Auto,
+        )
+        .with_source(SettingSource::Property("HiddenStateTitleBackColor")),
         PaletteDefinition::new("Width", Layout, Number, PlatformPropertyValue::Number(0)),
         PaletteDefinition::new("Height", Layout, Number, PlatformPropertyValue::Number(0)),
         PaletteDefinition::new("HorizontalAlignInGroup", Layout, Enum, Auto)

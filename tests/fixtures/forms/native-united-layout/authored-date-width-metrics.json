@@ -1,0 +1,524 @@
+{
+  "platform": "8.3.27.2342",
+  "os": "ALT Linux ARM64",
+  "dpi": 96,
+  "locale": "ru",
+  "compatibility": "Version8_3_27",
+  "coordinates": "Relative to the black outline without shadow. Group height includes two unpainted edge pixels.",
+  "sourceSha256": {
+    "DateBlock.xml": "4d2c03a4ae7775d8598b1b5060d6702d68f0d4fe3d31027ae3df57000f9d7b82",
+    "DateThroughColumns.xml": "fc8b022a933a21c82b4cc0655b4f216f5d1b1aa0e01d2b468e6e93c00f9a6e5c"
+  },
+  "cases": [
+    {
+      "name": "Solo62W28Fixed",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 28,
+      "fixed": true,
+      "frame": [654, 227],
+      "group": [13, 38, 328, 177],
+      "dates": [
+        [18, 63, "Top"],
+        [18, 114, "Top"]
+      ],
+      "captureSha256": "96b4bdaaf5a73ab50c2dcc3622032dd3f28f35d2c49299aeaa7aa8ca94285f85",
+      "canonicalExportSha256": "de399c724512ced3862da84cb4f3f97c825cb8511c1e2a8154f6e9560947fa77"
+    },
+    {
+      "name": "Solo62W35Auto",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 35,
+      "fixed": false,
+      "frame": [654, 204],
+      "group": [13, 38, 447, 154],
+      "dates": [
+        [18, 63, "Top"],
+        [18, 114, "Top"]
+      ],
+      "captureSha256": "d1751af499d1a186f0668c730daba7cdd0a9ffff244da68c8be94ad30f378e1e",
+      "canonicalExportSha256": "9f95dad18773e3c656c31ac432b12d0790cdd7939daeb1b711bb81ee12e46442"
+    },
+    {
+      "name": "Solo62W42Auto",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 42,
+      "fixed": false,
+      "frame": [654, 204],
+      "group": [13, 38, 447, 154],
+      "dates": [
+        [18, 63, "Top"],
+        [18, 114, "Top"]
+      ],
+      "captureSha256": "6b6f8ab5a0751579c145828033e0283d6d1d1df7bc319ebc7ccde4f3d0fc3370",
+      "canonicalExportSha256": "081020cae9086b25ba8a907ae0bbf55617cc8d36ffe23d44d580c1ef5f63ff6f"
+    },
+    {
+      "name": "Solo62W42Fixed",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 42,
+      "fixed": true,
+      "frame": [654, 212],
+      "group": [13, 38, 420, 162],
+      "dates": [
+        [18, 63, "Top"],
+        [18, 114, "Top"]
+      ],
+      "captureSha256": "9d6a72ff20aa165d62b388ba8cd5eda716efbe8e053d17a45dad2c5c1d388767",
+      "canonicalExportSha256": "0e450f93d0b2fb85ef884c6d44f353217a5a817087ce01968bf082b587ae1003"
+    },
+    {
+      "name": "Solo62W43Auto",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 43,
+      "fixed": false,
+      "frame": [654, 168],
+      "group": [13, 38, 604, 118],
+      "dates": [
+        [18, 63, "Top"],
+        [175, 97, "Left"]
+      ],
+      "captureSha256": "1d818b72cced9bf5d226cd7f388d5f7432eaa3ff7c4ed2449012f949ee19e86e",
+      "canonicalExportSha256": "13a158bcb82eb704ddb867595ad265f97090f22008ba14198feaf581d6b23dbc"
+    },
+    {
+      "name": "Solo62W43Fixed",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 43,
+      "fixed": true,
+      "frame": [654, 202],
+      "group": [13, 38, 430, 152],
+      "dates": [
+        [18, 63, "Top"],
+        [120, 97, "Left"]
+      ],
+      "captureSha256": "856e3c0cde926a82fe7a97fe89568bc2f6d96819cab306a9d16b974873160018",
+      "canonicalExportSha256": "c5b391b80b95841c524c7344fef62f79af9c62011f24de35f4c302eab0be826e"
+    },
+    {
+      "name": "Solo62W44Auto",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 44,
+      "fixed": false,
+      "frame": [654, 149],
+      "group": [13, 38, 604, 99],
+      "dates": [
+        [175, 44, "Left"],
+        [175, 78, "Left"]
+      ],
+      "captureSha256": "546f7830e7b18efab3abf902f67ce79c02fc4350de1bf4cce924d972faa31796",
+      "canonicalExportSha256": "ace3b6d9627df64a2656c3f554ad25b66e026a263feca681566983c2eda4078f"
+    },
+    {
+      "name": "Solo62W44Fixed",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 44,
+      "fixed": true,
+      "frame": [654, 190],
+      "group": [13, 38, 440, 140],
+      "dates": [
+        [121, 44, "Left"],
+        [121, 85, "Left"]
+      ],
+      "captureSha256": "80f78b730cc3092c663364457341d78694674c1158bcef7cf703568a5b8972d3",
+      "canonicalExportSha256": "5d40044148224af3e5110d3c4fcca15c24b2eec46e26b2a0f84a1df5ceb14d5f"
+    },
+    {
+      "name": "Solo62W46Fixed",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 46,
+      "fixed": true,
+      "frame": [654, 190],
+      "group": [13, 38, 460, 140],
+      "dates": [
+        [121, 44, "Left"],
+        [121, 85, "Left"]
+      ],
+      "captureSha256": "d2df3789892f715452fa5790a5163cdf189b9fb0aba447e368571a54e33d7684",
+      "canonicalExportSha256": "ba718b92f7ad32984ffe6b32cbf89c8bf660d79b86f0038e2e9a5532447b01ba"
+    },
+    {
+      "name": "Solo62W49Fixed",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 49,
+      "fixed": true,
+      "frame": [654, 190],
+      "group": [13, 38, 490, 140],
+      "dates": [
+        [131, 44, "Left"],
+        [131, 85, "Left"]
+      ],
+      "captureSha256": "db161ecb5280e769fb41e7faca642dc448e0e791430467d29c4cc35ccafcacbb",
+      "canonicalExportSha256": "c3f2e852f22555b26a7bb65c41d4e5bc03bc338a83290a8372dd6173d2b4f727"
+    },
+    {
+      "name": "Solo62W50Fixed",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 50,
+      "fixed": true,
+      "frame": [654, 175],
+      "group": [13, 38, 500, 125],
+      "dates": [
+        [131, 44, "Left"],
+        [131, 85, "Left"]
+      ],
+      "captureSha256": "36e5d1fa215b552e8c9a7546095e027df5cebc56023fbbee4e5b46799f27f807",
+      "canonicalExportSha256": "0b6e42a94bfb1927f53d7ab2680450d2219e7620815cb5b895e56c2b5a25bf24"
+    },
+    {
+      "name": "Solo62W55Fixed",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 55,
+      "fixed": true,
+      "frame": [654, 168],
+      "group": [13, 38, 550, 118],
+      "dates": [
+        [154, 44, "Left"],
+        [154, 78, "Left"]
+      ],
+      "captureSha256": "8d4779b33c5a8d582c1243eb95ebb86285963a38ea4d11ee60abb85c774605f8",
+      "canonicalExportSha256": "6a6316fe27771b6518ebfa70ce980fdafc07ef1e0ca53b9d7ee80b46aae2128d"
+    },
+    {
+      "name": "Solo62W60Fixed",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 60,
+      "fixed": true,
+      "frame": [654, 168],
+      "group": [13, 38, 600, 118],
+      "dates": [
+        [173, 44, "Left"],
+        [173, 78, "Left"]
+      ],
+      "captureSha256": "4a5919e9bc0a002045d106fdd15f1d963c18b8679a6283ce99db57b69ed05aea",
+      "canonicalExportSha256": "2a5dd148c79526c621fb2ebe92366273cff82439f0b64927ceda20bf36bc44fd"
+    },
+    {
+      "name": "Solo62W66Auto",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 66,
+      "fixed": false,
+      "frame": [654, 149],
+      "group": [13, 38, 620, 99],
+      "dates": [
+        [175, 44, "Left"],
+        [175, 78, "Left"]
+      ],
+      "captureSha256": "1b1629010deb18ce7da4117911fc0c5affa7298e99fe0a9bd63518512688122c",
+      "canonicalExportSha256": "b7c3e94ba67bcca1b5b133771e8ee0754119c4655fa99aa3d730329c3536046e"
+    },
+    {
+      "name": "Solo62W66Fixed",
+      "source": "DateBlock.xml",
+      "formWidth": 62,
+      "groupWidth": 66,
+      "fixed": true,
+      "frame": [654, 149],
+      "group": [13, 38, 620, 99],
+      "dates": [
+        [175, 44, "Left"],
+        [175, 78, "Left"]
+      ],
+      "captureSha256": "0164e4992296654f67c938c45bcf05397c77154ac279681446fcfa962e035199",
+      "canonicalExportSha256": "9abc658ed56f0f20cd06faed36922e1afa024191ea7cdfce04641df4bf3a9daa"
+    },
+    {
+      "name": "Solo54W43Auto",
+      "source": "DateBlock.xml",
+      "formWidth": 54,
+      "groupWidth": 43,
+      "fixed": false,
+      "frame": [574, 176],
+      "group": [13, 38, 540, 126],
+      "dates": [
+        [18, 63, "Top"],
+        [175, 97, "Left"]
+      ],
+      "captureSha256": "a9018e5c8e7e627ee5490ff83f92ac6fd1dd513cd382962f339a10cf0d459578",
+      "canonicalExportSha256": "795cdf4287ffe98486af6eb5c95fd1c2b3bc2b37b0a801de0f85c235dd9e90d0"
+    },
+    {
+      "name": "Solo54W46Auto",
+      "source": "DateBlock.xml",
+      "formWidth": 54,
+      "groupWidth": 46,
+      "fixed": false,
+      "frame": [574, 175],
+      "group": [13, 38, 540, 125],
+      "dates": [
+        [138, 44, "Left"],
+        [138, 85, "Left"]
+      ],
+      "captureSha256": "7293ce3ad956cc976e48a0f13816f989e88334387c86b741dc5b52af41f2db38",
+      "canonicalExportSha256": "ffc393e89cac4b3370a9b2f3d113a85c5e43820e4ca3b2f38af350df7f3bfcba"
+    },
+    {
+      "name": "Solo50W43Auto",
+      "source": "DateBlock.xml",
+      "formWidth": 50,
+      "groupWidth": 43,
+      "fixed": false,
+      "frame": [534, 202],
+      "group": [13, 38, 500, 152],
+      "dates": [
+        [18, 63, "Top"],
+        [162, 97, "Left"]
+      ],
+      "captureSha256": "2d0d62f1cb9c6133fd3acd76d0e9b39903706f213a522c30e5f84df3b4593ab1",
+      "canonicalExportSha256": "b8ae99c526952616faf61807bd2c0a7e4bcb1b1113381e0b6a55a9724a29f60c"
+    },
+    {
+      "name": "Solo46W43Auto",
+      "source": "DateBlock.xml",
+      "formWidth": 46,
+      "groupWidth": 43,
+      "fixed": false,
+      "frame": [494, 202],
+      "group": [13, 38, 460, 152],
+      "dates": [
+        [18, 63, "Top"],
+        [138, 97, "Left"]
+      ],
+      "captureSha256": "8317431804d7078f686064ad520a6679510eee7a227c8f5b270d06162845e29a",
+      "canonicalExportSha256": "f73850bbc5afde4d948fc5dfb86352bb73c8e42548006b42570764cfa83f7596"
+    },
+    {
+      "name": "Mixed130W43Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 130,
+      "groupWidth": 43,
+      "fixed": false,
+      "frame": [1334, 513],
+      "group": [499, 43, 593, 124],
+      "dates": [
+        [504, 68, "Top"],
+        [661, 102, "Left"]
+      ],
+      "captureSha256": "3b993cbc5152c280bb163fa94bdcf8aa26c977bb19b1af37c9090f8fd4086ade",
+      "canonicalExportSha256": "76a73f036fd217ca67bca2cac819209afa8f32f2bbe605cb9a55765a16e6f3a6"
+    },
+    {
+      "name": "Mixed130W46Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 130,
+      "groupWidth": 46,
+      "fixed": false,
+      "frame": [1334, 504],
+      "group": [499, 43, 593, 115],
+      "dates": [
+        [650, 49, "Left"],
+        [650, 83, "Left"]
+      ],
+      "captureSha256": "c67af7f5fb41d54912313c067924b72663851802fe06d7a62bdcc07a32e39cef",
+      "canonicalExportSha256": "156fcd2ca7e588a93c59c2f72a2b31cec5376de5cc97231f5715bae7a08a03b3"
+    },
+    {
+      "name": "Mixed118W43Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 118,
+      "groupWidth": 43,
+      "fixed": false,
+      "frame": [1214, 528],
+      "group": [471, 43, 532, 139],
+      "dates": [
+        [476, 68, "Top"],
+        [633, 102, "Left"]
+      ],
+      "captureSha256": "a22d35867fdc471c5aa8456d4ffbf447d7570e3311efc61fe8babe8fbeadb938",
+      "canonicalExportSha256": "23356e3373ea850b1cb7d6be69552b445390e8ff7b6b451f608a2a7a19136e16"
+    },
+    {
+      "name": "Mixed110W43Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 110,
+      "groupWidth": 43,
+      "fixed": false,
+      "frame": [1134, 541],
+      "group": [419, 43, 517, 152],
+      "dates": [
+        [424, 68, "Top"],
+        [578, 102, "Left"]
+      ],
+      "captureSha256": "8b70bf053b7f608487d94222c64c010eb5c3f2bda0274c26432ef2150c88274e",
+      "canonicalExportSha256": "b8dae98290dfa9918b753b85b690da9d16d22a1c8d89dd97ae2e8ea940a276ca"
+    },
+    {
+      "name": "Mixed96W35Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 96,
+      "groupWidth": 35,
+      "fixed": false,
+      "frame": [994, 548],
+      "group": [349, 43, 447, 152],
+      "dates": [
+        [354, 68, "Top"],
+        [354, 119, "Top"]
+      ],
+      "captureSha256": "ffae15d8714a024a600077fc64b724cb0f088ad218f10a25820c292a5a8e22cb",
+      "canonicalExportSha256": "1425d7b27e6355330dd7077ae61c983a55e210fefed4140183257891fac76056"
+    },
+    {
+      "name": "Mixed96W42Fixed",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 96,
+      "groupWidth": 42,
+      "fixed": true,
+      "frame": [994, 556],
+      "group": [332, 43, 420, 160],
+      "dates": [
+        [337, 68, "Top"],
+        [337, 119, "Top"]
+      ],
+      "captureSha256": "1263cc11e4002e3e34dbd7f2923ea083aeacba3da0fec7692d952fdcac0bdb20",
+      "canonicalExportSha256": "ff424f06679e09677087c1cdff0c5318d71239e479b86401d5f19409f5238192"
+    },
+    {
+      "name": "Mixed96W43Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 96,
+      "groupWidth": 43,
+      "fixed": false,
+      "frame": [994, 548],
+      "group": [329, 43, 491, 152],
+      "dates": [
+        [334, 68, "Top"],
+        [473, 102, "Left"]
+      ],
+      "captureSha256": "ade62382c8cf42949cd6708a955dfd1fd90f6fc324f1730d92b5be83ce968af1",
+      "canonicalExportSha256": "c4dd5f36e7615cdc37e7147827ca3269f68d1b5c7d5d3fe015fea5803003a136"
+    },
+    {
+      "name": "Mixed96W44Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 96,
+      "groupWidth": 44,
+      "fixed": false,
+      "frame": [994, 536],
+      "group": [326, 43, 494, 140],
+      "dates": [
+        [446, 49, "Left"],
+        [446, 90, "Left"]
+      ],
+      "captureSha256": "e98ebc619841967abf24b71c34e791a1f1fab522a37b87056c62aba1565579e7",
+      "canonicalExportSha256": "6dea5f9c15e67be28ec1fb61fe5ea4f2963a9804e3b65be9cdb57e8867d1cd42"
+    },
+    {
+      "name": "Mixed96W45Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 96,
+      "groupWidth": 45,
+      "fixed": false,
+      "frame": [994, 521],
+      "group": [323, 43, 498, 125],
+      "dates": [
+        [441, 49, "Left"],
+        [441, 90, "Left"]
+      ],
+      "captureSha256": "583ffb9eea9b5c618cbc2ff63d1fa10f4115943560718699b2c2717fa64f3837",
+      "canonicalExportSha256": "bd70457be87cdc7338843621b0a1dc33dcf9e39e5187df74ef39825f27093642"
+    },
+    {
+      "name": "Mixed96W46Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 96,
+      "groupWidth": 46,
+      "fixed": false,
+      "frame": [994, 514],
+      "group": [320, 43, 502, 125],
+      "dates": [
+        [437, 49, "Left"],
+        [437, 90, "Left"]
+      ],
+      "captureSha256": "feb41d3dde736f3bb5dfe085fee56170a4715910cf0fb962fc314e1e61d25a59",
+      "canonicalExportSha256": "3a5cce668b676469f95b6a4758947a4449d4496b10ea7ad71ef8c7af403cc824"
+    },
+    {
+      "name": "Mixed96W46Fixed",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 96,
+      "groupWidth": 46,
+      "fixed": true,
+      "frame": [994, 529],
+      "group": [320, 43, 460, 140],
+      "dates": [
+        [428, 49, "Left"],
+        [428, 90, "Left"]
+      ],
+      "captureSha256": "731c37e3ea22ba5ee9cef3b0bb2638a0897a085dc85ff558e01bcf0f0d342d22",
+      "canonicalExportSha256": "73acf41467262d9f3d37a679b2d2115843c1834012fd2d0f318660fa5338d3b3"
+    },
+    {
+      "name": "Mixed96W49Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 96,
+      "groupWidth": 49,
+      "fixed": false,
+      "frame": [994, 514],
+      "group": [310, 43, 515, 125],
+      "dates": [
+        [434, 49, "Left"],
+        [434, 90, "Left"]
+      ],
+      "captureSha256": "075f5eb3425b2e09431b3e577963ad020aa8b134caefe9bedb881576e8952f23",
+      "canonicalExportSha256": "ac5558d294138a9c06ef45db2f6c166b5d6bb4e24962c9dddf8a198cb5bc5ef5"
+    },
+    {
+      "name": "Mixed96W55Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 96,
+      "groupWidth": 55,
+      "fixed": false,
+      "frame": [994, 507],
+      "group": [282, 43, 550, 118],
+      "dates": [
+        [423, 49, "Left"],
+        [423, 83, "Left"]
+      ],
+      "captureSha256": "144b31713414db9195bc4f2ba0a3453a2d61240a57c637e82f8bcc39c6e1e871",
+      "canonicalExportSha256": "2d09d4cd0bf6ba58005586926f9c663951b6da024d60d592568ec72a64ff4c10"
+    },
+    {
+      "name": "Mixed96W66Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 96,
+      "groupWidth": 66,
+      "fixed": false,
+      "frame": [994, 486],
+      "group": [195, 43, 660, 97],
+      "dates": [
+        [357, 49, "Left"],
+        [357, 83, "Left"]
+      ],
+      "captureSha256": "ec39d38051b30e1b12b359bde0245ad3e4642fd5cd0fef48f104d6d9e2105872",
+      "canonicalExportSha256": "7b2ff4263b0628a7de897d3cb386d637a661cff7137b9b4114847a94dc7a3045"
+    },
+    {
+      "name": "Mixed76W43Auto",
+      "source": "DateThroughColumns.xml",
+      "formWidth": 76,
+      "groupWidth": 43,
+      "fixed": false,
+      "frame": [794, 548],
+      "group": [200, 43, 453, 152],
+      "dates": [
+        [205, 68, "Top"],
+        [321, 102, "Left"]
+      ],
+      "captureSha256": "c418fafc99c6e569026e135b4925aac14feaa78e47c149445472071a5f2f4374",
+      "canonicalExportSha256": "721cd8172eba9d8abb0ba6bd6dece3b007c8b8c4160096c12b0fb41005cde0ea"
+    }
+  ]
+}

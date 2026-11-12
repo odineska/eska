@@ -2697,6 +2697,3544 @@
         "ru": "12caa7edb94f8a8b3fe2d64389ce997dfea3ccd6e3c9716d05bd3477fedbd405"
       },
       "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "AuthoredSideScrollAuto",
+      "file": "AuthoredSideScrollAuto.xml",
+      "fixtureSha256": "1b047b683f5dbdb80ff10e45c1a39e45bbd1f1f658e37087d2df44c5a32f071d",
+      "canonicalSha256": "c82bf1689acee901d92164857be9d1e5f9950bce5c5cec58f3f844b9bf6cd183",
+      "frame": [
+        387,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            298,
+            44
+          ],
+          "client": [
+            283,
+            29
+          ]
+        }
+      ],
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 283,
+          "height": 15,
+          "sha": "9055c96ea80c7df7a41173614d92791c9b74c5835b6a3afc4b62339ce7cc739d"
+        },
+        {
+          "name": "vertical",
+          "x": 351,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ],
+      "captures": {
+        "ru": "4c886d221d64432f613ee1e41db76e88a405e0b46b5cec0f80181f8159ab811d"
+      },
+      "compatibility": "Version8_3_27",
+      "dividers": [],
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "reflow": {
+        "cases": [
+          "AuthoredSideScrollAuto",
+          "AuthoredSideScrollFits",
+          "AuthoredSideScrollWrap",
+          "AuthoredSideScrollNear",
+          "AuthoredSideScrollAuto"
+        ],
+        "selected": "AgentPort",
+        "edit": {
+          "case": "AuthoredSideScrollFits"
+        },
+        "scrollPage": "AgentPort"
+      }
+    },
+    {
+      "name": "AuthoredSideScrollRight",
+      "file": "AuthoredSideScrollRight.xml",
+      "fixtureSha256": "754b368d970c2160bd98ae28b1728d949a44c047020da56474cbcd8fbfe642e8",
+      "canonicalSha256": "9bc861610661a04e42cdb4ab276cd99986c341d69e45fb129b253db920806aea",
+      "frame": [
+        387,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [
+        {
+          "box": [
+            19,
+            48,
+            298,
+            44
+          ],
+          "client": [
+            283,
+            29
+          ]
+        }
+      ],
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 19,
+          "y": 77,
+          "width": 283,
+          "height": 15,
+          "sha": "9055c96ea80c7df7a41173614d92791c9b74c5835b6a3afc4b62339ce7cc739d"
+        },
+        {
+          "name": "vertical",
+          "x": 302,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "d3b448ed4d0292846dc1d2f1fc52352ed00429275d0e0ebf85ee9d825bad5460"
+        }
+      ],
+      "captures": {
+        "ru": "1a54349a0ec609052bf317580e562031c6b9f578de982cfa958c519aa45b3ddd"
+      },
+      "compatibility": "Version8_3_27",
+      "dividers": [],
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      }
+    },
+    {
+      "name": "AuthoredSideScrollNear",
+      "file": "AuthoredSideScrollNear.xml",
+      "fixtureSha256": "6c5e59eb1e4ccc4aefe9acfd7736f94338a34c64e95ed782d9df0d66b494c020",
+      "canonicalSha256": "036ff4000489961714b8f30bb7379d511fddde6b317c78258a671264d720358b",
+      "frame": [
+        384,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            295,
+            44
+          ],
+          "client": [
+            280,
+            29
+          ]
+        }
+      ],
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 280,
+          "height": 15,
+          "sha": "fb08aa7659388509f51126490f87e640314568e72cd7d13db3efac1cc4e3656a"
+        },
+        {
+          "name": "vertical",
+          "x": 348,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ],
+      "captures": {
+        "ru": "fb28c338d604b1fba960e2ad7a20407e47915f20a096b03e4c0b18336dba1733"
+      },
+      "compatibility": "Version8_3_27",
+      "dividers": [],
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      }
+    },
+    {
+      "name": "AuthoredSideScrollFits",
+      "file": "AuthoredSideScrollFits.xml",
+      "fixtureSha256": "a0c3d04d5f191084cec8de2bf92f31b6a63fb9a06f0cf65c97d2203d422495cb",
+      "canonicalSha256": "0f9153e9d9e584a69174335c38c94665223c5c590571e104f54e08d6b9762b83",
+      "frame": [
+        394,
+        114
+      ],
+      "fields": {
+        "Address": [
+          73,
+          68,
+          162,
+          23
+        ],
+        "AgentPort": [
+          245,
+          68,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [],
+      "captures": {
+        "ru": "2d6e27ff505c8cc01022d0b71239702ff11cb2f837decfe437ad13fc348693cc"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "AuthoredSideScrollWrap",
+      "file": "AuthoredSideScrollWrap.xml",
+      "fixtureSha256": "bbe0bca03baa45c947263c21340799ba4c0ab52ea05cbfe0c44b11c7320b4a27",
+      "canonicalSha256": "adec3dd3366bbedbe97cd18eca45cbbe094e73dadf4110015f3c8f7eb81608e4",
+      "frame": [
+        374,
+        129
+      ],
+      "fields": {
+        "Address": [
+          73,
+          83,
+          166,
+          23
+        ],
+        "AgentPort": [
+          249,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [],
+      "captures": {
+        "ru": "7550022d56e3f596a910778d378936dbfb43850a20c7a0e3a34fbc69b801ebfe"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "AuthoredSideScrollConditional",
+      "file": "AuthoredSideScrollConditional.xml",
+      "fixtureSha256": "eefa9d6df0badda3d8f5d08c8eed0855a94b76da3951a0769ba2c800da444b8a",
+      "canonicalSha256": "9d60c0338aa1e2a8b42cfcc361c7e1cac966dfcc191035517776601262288468",
+      "frame": [
+        387,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            298,
+            44
+          ],
+          "client": [
+            283,
+            29
+          ]
+        }
+      ],
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 283,
+          "height": 15,
+          "sha": "9055c96ea80c7df7a41173614d92791c9b74c5835b6a3afc4b62339ce7cc739d"
+        },
+        {
+          "name": "vertical",
+          "x": 351,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ],
+      "captures": {
+        "ru": "5697f8574fed0f26b06695ba4be90b58f8b436d39066904a2cc99baac6c680dc"
+      },
+      "compatibility": "Version8_3_27",
+      "dividers": [],
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      }
+    },
+    {
+      "name": "AuthoredSideScrollLongTab",
+      "file": "AuthoredSideScrollLongTab.xml",
+      "fixtureSha256": "fb6fce333d4ac2e7226716fc53228bf55246c1b0fbe79ca64abb3b1e7659c52c",
+      "canonicalSha256": "8a4f8e283fe911a82ded9edc7b95e29000c4616cb27b12597081eb8f53220999",
+      "frame": [
+        511,
+        114
+      ],
+      "fields": {
+        "Address": [
+          192,
+          68,
+          160,
+          23
+        ],
+        "AgentPort": [
+          362,
+          68,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [],
+      "captures": {
+        "ru": "a2d451e9cdcb663791f5b2aff4025437c125b35a30b8a77e4f284df24aad735f"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "AuthoredSideScrollShortForm",
+      "file": "AuthoredSideScrollShortForm.xml",
+      "fixtureSha256": "c4de2bb8118554c7ab8f54f2aa295b0039228bdbe334163d3d436dae6ecefb63",
+      "canonicalSha256": "5763520b6868c086a1644675cd8f9c8b9e84588520fbdca2fd39fd43a10ca824",
+      "frame": [
+        387,
+        100
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            298,
+            44
+          ],
+          "client": [
+            283,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "c78b0dcbf503e2269184c898b824e7e27f2b108d8ada94e18046896126c4982e"
+      },
+      "compatibility": "Version8_3_27",
+      "dividers": [],
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      }
+    },
+    {
+      "name": "AuthoredSideScrollCaption117",
+      "file": "AuthoredSideScrollCaption117.xml",
+      "fixtureSha256": "6be88f15b447b4c4e45a0caa8114eed2042d4ec2e5cc77be93f4a71daab6f2d8",
+      "canonicalSha256": "9738c78aa77b1048c0bc0a2c9f40466f1421b280672a07ac4ccdd521db83a9db",
+      "frame": [
+        384,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            295,
+            44
+          ],
+          "client": [
+            280,
+            29
+          ]
+        }
+      ],
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 280,
+          "height": 15,
+          "sha": "fb08aa7659388509f51126490f87e640314568e72cd7d13db3efac1cc4e3656a"
+        },
+        {
+          "name": "vertical",
+          "x": 348,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ],
+      "captures": {
+        "ru": "3de90454642420b889dc20a9ec391de55a8be185cda9191ce901af5f6c9f3c1f"
+      },
+      "compatibility": "Version8_3_27",
+      "dividers": [],
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      }
+    },
+    {
+      "name": "AuthoredSideScrollCaption118",
+      "file": "AuthoredSideScrollCaption118.xml",
+      "fixtureSha256": "279fcd3893a20cccdf9ee63a4481461d79a2cba6363d20308ca3c18180ae9add",
+      "canonicalSha256": "1d4bd4bbc0372d7bd61ff311c3ff9efac9930a11803986e5f0ed3d274066f51c",
+      "frame": [
+        384,
+        129
+      ],
+      "fields": {
+        "Address": [
+          73,
+          83,
+          175,
+          23
+        ],
+        "AgentPort": [
+          258,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [],
+      "captures": {
+        "ru": "4e258ef403272471ab1a9dc2a077cf65456b04626768548fdf626449b3b3df33"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "AuthoredSideScrollColor",
+      "file": "AuthoredSideScrollColor.xml",
+      "fixtureSha256": "54ecc4ee2a273c47cfa945ea32d95ab030919948a4b5900b3103ccbe2c6ec8a9",
+      "canonicalSha256": "2abf6a66de1104c637aeabbde36e9844f09c835796365f74de7636ed304d0fcd",
+      "frame": [
+        387,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            298,
+            44
+          ],
+          "client": [
+            283,
+            29
+          ]
+        }
+      ],
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 63,
+          "y": 77,
+          "width": 302,
+          "height": 14,
+          "sha": "973e9f19b38f6896305130997a355424c0e3c3a64f1591bf0c4a1ec4ebacd7ee"
+        },
+        {
+          "name": "vertical",
+          "x": 351,
+          "y": 49,
+          "width": 14,
+          "height": 28,
+          "sha": "fea818b3e1682fe048d17793cd33a8eb1959872d3e6ae45d7166ce7ea072df2e"
+        },
+        {
+          "name": "page background",
+          "x": 63,
+          "y": 92,
+          "width": 302,
+          "height": 8,
+          "sha": "d44b33434fde1fbe1cfe689e363acf16660a94989e516070820dd21fe0a59f5b"
+        }
+      ],
+      "captures": {
+        "ru": "c976aff2cdad99c3581d9b3f88e50cbc32335d1b40358860366496b1858c02d6"
+      },
+      "compatibility": "Version8_3_27",
+      "dividers": [],
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      }
+    },
+    {
+      "name": "SideCaptionAuto",
+      "file": "SideCaptionAuto.xml",
+      "fixtureSha256": "0406d48b1fd08b865a6d108a6c5fa7d303c52c5e51a1c53336f1dedc2e46e2d6",
+      "canonicalSha256": "8923a6449fe4daf1ef88936d886ae8ddf661a17fc5c91a784602d97f573b977b",
+      "frame": [
+        612,
+        95
+      ],
+      "fields": {
+        "Address": [
+          232,
+          49,
+          155,
+          23
+        ],
+        "AgentPort": [
+          519,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 73,
+          "y": 48,
+          "width": 507,
+          "height": 25,
+          "sha": "c1a9825b44abb3fd73ac84c178d5885a14c183143faeb7df3bc8857b8968bdf5"
+        }
+      ],
+      "captures": {
+        "ru": "533a160906307cd1a8b9a7c13d04da6226027176ad325c9df559c957b37480cd"
+      },
+      "compatibility": "Version8_3_27",
+      "reflow": {
+        "cases": [
+          "SideCaptionAuto",
+          "SideCaptionAutoNarrow",
+          "SideCaptionAutoWide",
+          "SideCaptionAuto"
+        ],
+        "selected": "Address"
+      }
+    },
+    {
+      "name": "SideCaptionAutoNarrow",
+      "file": "SideCaptionAutoNarrow.xml",
+      "fixtureSha256": "e204fcc1a636b44a674dee57c6f83027fc6b17990576ef4974964778a477e9da",
+      "canonicalSha256": "225435316c7eb499688ea2596d56106624f03418cebc6d26dc12981273820a36",
+      "frame": [
+        604,
+        102
+      ],
+      "fields": {
+        "Address": [
+          187,
+          49,
+          192,
+          23
+        ],
+        "AgentPort": [
+          511,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 73,
+          "y": 48,
+          "width": 499,
+          "height": 32,
+          "sha": "9a685fa19efc8d73302b3962a4c734037408acb499d97867ffbd2203cf8cfcea"
+        }
+      ],
+      "captures": {
+        "ru": "890473ca308c295925772268cdab72e326c1e37dea886f34a97d27c17630a5ef"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "SideCaptionAutoWide",
+      "file": "SideCaptionAutoWide.xml",
+      "fixtureSha256": "7ecb4785e958f41fd926f8a17be3735ce9ecaa81aa5124023363511565972bfb",
+      "canonicalSha256": "809c399cb6e1be581cf9b44366d13b5635842c6e3e72f51f1755d8babc8a67d6",
+      "frame": [
+        614,
+        95
+      ],
+      "fields": {
+        "Address": [
+          232,
+          49,
+          157,
+          23
+        ],
+        "AgentPort": [
+          521,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 73,
+          "y": 48,
+          "width": 509,
+          "height": 25,
+          "sha": "4e703d3a0cc1da84246a3226df91b3ea6b3966ee204fd4c2b91b89d0a3630ff7"
+        }
+      ],
+      "captures": {
+        "ru": "04e385c887d01162c5eaeb50a87058e1dea29c53783c06142323db4dd4c7efa3"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "SideCaptionRight",
+      "file": "SideCaptionRight.xml",
+      "fixtureSha256": "73ce864097df39553be6871a98ad0c0c3f6e50e3d3b3328be1d355b044461717",
+      "canonicalSha256": "67abd6aa1a0d68739729d42f0eeeafe02719321c149c041584009c385116d780",
+      "frame": [
+        612,
+        95
+      ],
+      "fields": {
+        "Address": [
+          183,
+          49,
+          155,
+          23
+        ],
+        "AgentPort": [
+          470,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 24,
+          "y": 48,
+          "width": 507,
+          "height": 25,
+          "sha": "c1a9825b44abb3fd73ac84c178d5885a14c183143faeb7df3bc8857b8968bdf5"
+        }
+      ],
+      "captures": {
+        "ru": "9b713049ea9f3451681895523cda64cc93a1719972cadc4a22baf1c93314c48b"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "SideCaptionLongTab",
+      "file": "SideCaptionLongTab.xml",
+      "fixtureSha256": "c92a0647fbd13d232bdec558226494ab13b4679bdb048d2bbb93fdb56520dfba",
+      "canonicalSha256": "02a40a4fa70c7989adee3dea07885f34138d1e49b4502e3de7928e32a1813cbb",
+      "frame": [
+        736,
+        95
+      ],
+      "fields": {
+        "Address": [
+          351,
+          49,
+          160,
+          23
+        ],
+        "AgentPort": [
+          643,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 192,
+          "y": 48,
+          "width": 512,
+          "height": 25,
+          "sha": "648e5bc474a64c394617a3d64892913fc437b576d76c22d65b96495e58ecc700"
+        }
+      ],
+      "captures": {
+        "ru": "a3bc9c939423cdf9e2435aa27679c0543210a2666b0f4e57f9965cb22e7d8fc3"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "SideCaptionAtLimit",
+      "file": "SideCaptionAtLimit.xml",
+      "fixtureSha256": "0a02e3d36fbe6722e3bc2bb3475fc9048b0590463f67f4ed73636742ceca9b47",
+      "canonicalSha256": "88007321761eaffcefd4bb47552417fc964895a2add0eb96bd52c36e3f006307",
+      "frame": [
+        604,
+        95
+      ],
+      "fields": {
+        "Address": [
+          232,
+          49,
+          155,
+          23
+        ],
+        "AgentPort": [
+          511,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 73,
+          "y": 48,
+          "width": 499,
+          "height": 25,
+          "sha": "9859c13cfad6ac60fa5c06e467b67d5c6679c33007c97173073fa9a2401b4852"
+        }
+      ],
+      "captures": {
+        "ru": "2d26a5258d849bba1ebce361b9f74bc539263767457562c6c8338f86c11eca52"
+      },
+      "compatibility": "Version8_3_27",
+      "reflow": {
+        "cases": [
+          "SideCaptionAtLimit"
+        ],
+        "selected": "AgentPort",
+        "edit": {
+          "case": "SideCaptionOverLimit"
+        }
+      }
+    },
+    {
+      "name": "SideCaptionOverLimit",
+      "file": "SideCaptionOverLimit.xml",
+      "fixtureSha256": "e9982f512460378827a1faaf2933a937c168e71e82167f0ff841b3dee83245e2",
+      "canonicalSha256": "8c233260376ce8a0e10875a320f9fd2623378cfc5c4fc07d9b5fca56c10ab273",
+      "frame": [
+        604,
+        102
+      ],
+      "fields": {
+        "Address": [
+          189,
+          49,
+          197,
+          23
+        ],
+        "AgentPort": [
+          511,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 73,
+          "y": 48,
+          "width": 499,
+          "height": 32,
+          "sha": "157535d577496e54adba7d350e25fc27207bc3909c8dd5a45f2f22833a75ca8f"
+        }
+      ],
+      "captures": {
+        "ru": "57c6c588d4dd4c91c912507688f318c32b29788c75c0fe32340e50c5725f04fb"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "SideCaptionTopOverLimit",
+      "file": "SideCaptionTopOverLimit.xml",
+      "fixtureSha256": "84423f6263aff8f0c702bc8168559b5d7f5af4bd94f485d708bce09b738b912a",
+      "canonicalSha256": "6e20a8c8941e4f8196355ff1b703ebfd8315d9474f3a20514ecda902530d142d",
+      "frame": [
+        564,
+        127
+      ],
+      "fields": {
+        "Address": [
+          142,
+          74,
+          201,
+          23
+        ],
+        "AgentPort": [
+          471,
+          74,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pagePixels": [
+        {
+          "name": "whole form",
+          "x": 0,
+          "y": 0,
+          "width": 564,
+          "height": 127,
+          "sha": "7d26921c39eda6b8cffa5f70b5c41f0ae9d8d6c4a21a36bae278394c0bf6b5a7"
+        }
+      ],
+      "captures": {
+        "ru": "89b6ca515ec4342cfaeed382a2dfb4be7dcd1022e991af798b51708ddae67c02"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "SideCaptionTrailingTitle",
+      "file": "SideCaptionTrailingTitle.xml",
+      "fixtureSha256": "ce76427252b6a15856709a48368d898f369cce77aa1f4398d31b2e040c896205",
+      "canonicalSha256": "033de86d2a4caedb5f6e4334b246c49efccdf0121d473e37b22ab72043a48bcd",
+      "frame": [
+        554,
+        102
+      ],
+      "fields": {
+        "Address": [
+          169,
+          49,
+          160,
+          23
+        ],
+        "AgentPort": [
+          461,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "captures": {
+        "ru": "b5f4a562f6deeb610b8f628503577ddffd41c703614718886f68ea1555b54030"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "SideCaptionReverse",
+      "file": "SideCaptionReverse.xml",
+      "fixtureSha256": "16e151b79c0e076b800166a350a1a39b077d1591a1263659e81e5b8f2944d3eb",
+      "canonicalSha256": "7b3f48ddb4401e43e250189b84ef29b99ebedc5e272b2955db1749668bd71e74",
+      "frame": [
+        604,
+        102
+      ],
+      "fields": {
+        "Address": [
+          396,
+          49,
+          176,
+          23
+        ],
+        "AgentPort": [
+          166,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 73,
+          "y": 48,
+          "width": 499,
+          "height": 32,
+          "sha": "3dda0bd1d8da01e1d7fcbcf90970a9f5f00b6ca4f6dd12dcc0affe1a5b7e7bcc"
+        }
+      ],
+      "captures": {
+        "ru": "ba087b89596fe5cf2f026154b022f0427e42d6288f78de62280caf4176262344"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "SideCaptionAuthored",
+      "file": "SideCaptionAuthored.xml",
+      "fixtureSha256": "3c4daf69df9147b585ee4c7a5cf5e4003e21843e378523f9070c9ade42da0456",
+      "canonicalSha256": "6edc68d1a2b382c9c6b2366b8b1dc52ceb59bc15246a2d83836008d423b0e826",
+      "frame": [
+        604,
+        102
+      ],
+      "fields": {
+        "Address": [
+          187,
+          49,
+          192,
+          23
+        ],
+        "AgentPort": [
+          511,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 73,
+          "y": 48,
+          "width": 499,
+          "height": 32,
+          "sha": "9a685fa19efc8d73302b3962a4c734037408acb499d97867ffbd2203cf8cfcea"
+        }
+      ],
+      "captures": {
+        "ru": "ee81cfbcc2f5cc9243551b34355762da827f1a7d22bbb8658c2b608c1e9fb849"
+      },
+      "compatibility": "Version8_3_27"
+    },
+    {
+      "name": "FixedSideAuto",
+      "file": "FixedSideAuto.xml",
+      "fixtureSha256": "12489c187b8a65ad28cd223bf97e682227cc2e6ae6141093a0a71f1fd12900d0",
+      "canonicalSha256": "3d565f7f8a5d3f3d58faca17276ae3ab0c1fba2626ce24c08f011fdd2b9e738f",
+      "frame": [
+        612,
+        95
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            523,
+            25
+          ],
+          "client": [
+            508,
+            10
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "6a32e5ab320e367a3151f347188680767368cc284a080a3a45892823a7f5fff5"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 58,
+          "width": 523,
+          "height": 15,
+          "sha": "28a256a4d4f707af00ac501b007f7394d2895f3621070b4b0c62d98b0b06dc79"
+        },
+        {
+          "name": "vertical",
+          "x": 576,
+          "y": 48,
+          "width": 15,
+          "height": 10,
+          "sha": "3b7f12c0928abed8b19321548b820c34a5ce30c6cf98cc7cc7086ffdd09cf268"
+        }
+      ],
+      "reflow": {
+        "cases": [
+          "FixedSideAuto",
+          "FixedSideWide",
+          "FixedSideAuto"
+        ],
+        "selected": "AgentPort",
+        "edit": {
+          "case": "FixedSideStretch"
+        },
+        "scrollPage": "AgentPort"
+      }
+    },
+    {
+      "name": "FixedSideWide",
+      "file": "FixedSideWide.xml",
+      "fixtureSha256": "fb49f6d2200a67362cd573201590ca8cdbc87a4dab4051916281d76b0a53374f",
+      "canonicalSha256": "67207d29b2af3eb40c45ebce1f2a449b85781cbae5755dc9a7055c322fb6cc48",
+      "frame": [
+        684,
+        95
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            523,
+            25
+          ],
+          "client": [
+            508,
+            10
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "e1bf6a4fb226c4706821214ff18de112d347ec6e25eccac4ab9a2f99cf8e91b6"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 58,
+          "width": 523,
+          "height": 15,
+          "sha": "28a256a4d4f707af00ac501b007f7394d2895f3621070b4b0c62d98b0b06dc79"
+        },
+        {
+          "name": "vertical",
+          "x": 576,
+          "y": 48,
+          "width": 15,
+          "height": 10,
+          "sha": "3b7f12c0928abed8b19321548b820c34a5ce30c6cf98cc7cc7086ffdd09cf268"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideRight",
+      "file": "FixedSideRight.xml",
+      "fixtureSha256": "fba6ad258d6e8d8a76fa8ab5b5b3edc1b2c1ae4e2bed6776beaa9841d31015e5",
+      "canonicalSha256": "89d5bb7fdf15db07554956489bfb454de2eb6613a07b43a4239e5ab855f84111",
+      "frame": [
+        612,
+        95
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            19,
+            48,
+            523,
+            25
+          ],
+          "client": [
+            508,
+            10
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "1176d1616ab79dc773f4895f740a5c2631c718983431a4d073d68983fe8b3e38"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 19,
+          "y": 58,
+          "width": 523,
+          "height": 15,
+          "sha": "0e103eff2a763b1cef2aed796d07bf9b735569007f50eff84157cb3a047de539"
+        },
+        {
+          "name": "vertical",
+          "x": 527,
+          "y": 48,
+          "width": 15,
+          "height": 10,
+          "sha": "754e36e5d38b33148ef669642768f0b0bd72f77521c0f79e8e770038635e7a5c"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideLong",
+      "file": "FixedSideLong.xml",
+      "fixtureSha256": "ed67149488c9a2c4bbe07a662c3ec1efec73d66e6a308c1a8db63a054de342c0",
+      "canonicalSha256": "fa91b07abfa16dafae5560a1cfeec7bd7ed3a135725a0ac2638e3f683219b5e1",
+      "frame": [
+        736,
+        95
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            187,
+            48,
+            528,
+            25
+          ],
+          "client": [
+            513,
+            10
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "7e85b94a99ad9c1bfe1a3f90e13bab237b870d1b3dcc75a138fe5520eb6fc231"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 187,
+          "y": 58,
+          "width": 528,
+          "height": 15,
+          "sha": "32adec702966aec3324f534c9878c4bc45d7ce1c65f3a125e0b62d469e6072fa"
+        },
+        {
+          "name": "vertical",
+          "x": 700,
+          "y": 48,
+          "width": 15,
+          "height": 10,
+          "sha": "3b7f12c0928abed8b19321548b820c34a5ce30c6cf98cc7cc7086ffdd09cf268"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideTopTabs",
+      "file": "FixedSideTopTabs.xml",
+      "fixtureSha256": "0328142896ca90bd56cda09588cfb66fe7eb6db7b63bee3dcff3a034bfab2249",
+      "canonicalSha256": "66b96cab74326c689d7c5da0563dac9ee5d6a176d9c54e74f1026553fe7bfab7",
+      "frame": [
+        569,
+        120
+      ],
+      "fields": {
+        "Address": [
+          183,
+          74,
+          161,
+          23
+        ],
+        "AgentPort": [
+          476,
+          74,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "e11a072ad93363b8b368dec3866dcb70b37d0a5e94f0cfc59a1bff0226a8f7f6"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "whole form",
+          "x": 0,
+          "y": 0,
+          "width": 569,
+          "height": 120,
+          "sha": "58fdb881f292c0ae3067b88723b4aa1112de1921cc124de09884259c9330918c"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideTopTitles",
+      "file": "FixedSideTopTitles.xml",
+      "fixtureSha256": "92f2adf45d55685f80a6f9f447d21c735bfaa95de76965583f6c23e8013ae7eb",
+      "canonicalSha256": "98cb65c214d37d1e757c76bb5387a5d402c874ed088d99520845280e35897403",
+      "frame": [
+        511,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            187,
+            48,
+            303,
+            44
+          ],
+          "client": [
+            288,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "063882526dfe8058edf114a3c30795a88d6d4058e23c6c6bf7f4fe87c036a181"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 187,
+          "y": 77,
+          "width": 303,
+          "height": 15,
+          "sha": "5786c285cafc3e419882f2d1f990c1be97a70643511e17c4d9ef12ce45f296e0"
+        },
+        {
+          "name": "vertical",
+          "x": 475,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideStretch",
+      "file": "FixedSideStretch.xml",
+      "fixtureSha256": "a29810d96450bffed1b9d24eb37b067b64bb0794cd35a92bf813f0ece454dd66",
+      "canonicalSha256": "095ab33d5f9c49ee8ea6eb10c4ccd05037ff6454a25485ba2be64f9cb04d30ed",
+      "frame": [
+        684,
+        95
+      ],
+      "fields": {
+        "Address": [
+          232,
+          49,
+          161,
+          23
+        ],
+        "AgentPort": [
+          525,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "152860d05efd89c20e4c35603f6838d624795d746ead348e4dd0c83f75d2226c"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 600,
+          "height": 37,
+          "sha": "37c42eabbd53260e109d8d162fcddeb0928c1eb04018380f39f2a16bb73b73fe"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideVerticalStretch",
+      "file": "FixedSideVerticalStretch.xml",
+      "fixtureSha256": "e575afd9bd21a51a83011e599c7cbac0dfc11913f2ca576d9aa8341629ec3af7",
+      "canonicalSha256": "81670f649f0f28a01567fe00e545cfe638be73c739b241fdec5f6848e2e89c51",
+      "frame": [
+        612,
+        180
+      ],
+      "fields": {
+        "Address": [
+          229,
+          49,
+          161,
+          23
+        ],
+        "AgentPort": [
+          519,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "2c50216ffc6e5043109d8f8eaf6be451c5cff6134a729346eb381fcfd930d3c1"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 528,
+          "height": 122,
+          "sha": "72f521f735fdde4c8f34f8cb9c51ffa1a1def4ea6be4e485039046169d46dc48"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideEqualPages",
+      "file": "FixedSideEqualPages.xml",
+      "fixtureSha256": "226f75fd615f4321b256bd560af07e64d327348311bf2e33da04adaf23cfb172",
+      "canonicalSha256": "d0b6931ddded10d745a1192d6b6105cf1aa1f81f9a223b4cfec34ffa04ce57dd",
+      "frame": [
+        612,
+        105
+      ],
+      "fields": {
+        "Address": [
+          229,
+          49,
+          161,
+          23
+        ],
+        "AgentPort": [
+          519,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "5e020f1fc58812263d67095e5329c0984a061b799a84f2cb4379d1313809b23b"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 528,
+          "height": 47,
+          "sha": "6c29c6e4b11ae4039c48716cc4fd2a390d50e5acf74d818f374db3ea600df9ef"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideWiderPage",
+      "file": "FixedSideWiderPage.xml",
+      "fixtureSha256": "b2f1097d73177d6ed7afdd9c9a2aef6acb8b922571af60cbb586fc583e8b0abb",
+      "canonicalSha256": "0a03235f6989658a72867aed420d2235767cd3ea656243c330fe22f3560ce082",
+      "frame": [
+        692,
+        105
+      ],
+      "fields": {
+        "Address": [
+          232,
+          49,
+          161,
+          23
+        ],
+        "AgentPort": [
+          525,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "795a2c43aac6ee595053c69e9d3da990f64147e59f2c3af3aa95c7c60a062d64"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 608,
+          "height": 47,
+          "sha": "68c6437ba3b0f1654f9b526d8592a7d9ae5e178eb2a91095f93010c57545d269"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideConditionalStack",
+      "file": "FixedSideConditionalStack.xml",
+      "fixtureSha256": "b61b02cf50bea0f8bf566556d197be107b8e1909f803b11949e6639daad0ab2d",
+      "canonicalSha256": "b8ea3a8d5ecfaae89ebaf8a0b5dcbdae1739706e4f29bea162a88483518b2cf4",
+      "frame": [
+        544,
+        127
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            330,
+            57
+          ],
+          "client": [
+            315,
+            42
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "f011b6facf448ea53b9e40d6d4f9dfa913715039383fce841d0b6d4f2813dcf2"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 90,
+          "width": 330,
+          "height": 15,
+          "sha": "34236089494d1e4dd5c86025dab759f44ea3e6131efdaf0bbf9cf8292ac54b5d"
+        },
+        {
+          "name": "vertical",
+          "x": 383,
+          "y": 48,
+          "width": 15,
+          "height": 42,
+          "sha": "db9d6a95b0f1d7fca30ed632cba5e07560c02b1fe75d7ffa463b26c2114c60bd"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideStackColor",
+      "file": "FixedSideStackColor.xml",
+      "fixtureSha256": "1f45cbf3b861e1568c262cc0d39c1d92b40bb559309b05c3e2c7808732db73ba",
+      "canonicalSha256": "75217f82d20311e6f1772e9777705c225df089acbade1b2db720f6b7e09d914c",
+      "frame": [
+        419,
+        127
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            330,
+            57
+          ],
+          "client": [
+            315,
+            42
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "0743cc87f09ca9415ece96eb70413e50d315461e44407cdec8b13501415f7287"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 90,
+          "width": 330,
+          "height": 15,
+          "sha": "3b29bb5121dd319feb63917812fbb82e1d78a3b8d119053e1c2e0e9e942af266"
+        },
+        {
+          "name": "vertical",
+          "x": 383,
+          "y": 48,
+          "width": 15,
+          "height": 42,
+          "sha": "bb69b4cf4c1680ca6383a3e5373744aa95aaa9dbdd0c69d13d48be7b1e35f1eb"
+        },
+        {
+          "name": "page background",
+          "x": 63,
+          "y": 106,
+          "width": 334,
+          "height": 7,
+          "sha": "c4ea2641afb7e3b279f821928e208ae897246c6126ace36e9dd4289f6141bd14"
+        }
+      ],
+      "reflow": {
+        "cases": [
+          "FixedSideStackColor"
+        ],
+        "selected": "AgentPort",
+        "scrollPage": "AgentPort"
+      }
+    },
+    {
+      "name": "FixedSideSingle",
+      "file": "FixedSideSingle.xml",
+      "fixtureSha256": "3cfcb2fd418209c084249d594ab387254ad21831d7394387fee7adf642e2cbe2",
+      "canonicalSha256": "438093008216080be0746d5ca25ae629692c66f3e9cc6e0165a20cc1c4f2ebe3",
+      "frame": [
+        419,
+        95
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Left"
+      },
+      "captionLines": {
+        "Address": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            330,
+            25
+          ],
+          "client": [
+            315,
+            10
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "05655a9fc80166b2dd8704d543b73e31cb1df3f1f8c45b7eaf2600c0a6a2d501"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 58,
+          "width": 330,
+          "height": 15,
+          "sha": "34236089494d1e4dd5c86025dab759f44ea3e6131efdaf0bbf9cf8292ac54b5d"
+        },
+        {
+          "name": "vertical",
+          "x": 383,
+          "y": 48,
+          "width": 15,
+          "height": 10,
+          "sha": "3b7f12c0928abed8b19321548b820c34a5ce30c6cf98cc7cc7086ffdd09cf268"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideNoTitles",
+      "file": "FixedSideNoTitles.xml",
+      "fixtureSha256": "da0adcde0a9b83ea4f0607c066deb84e4fe14481df4de50b82945d4b8a54adb0",
+      "canonicalSha256": "31b94aaf04d0e1dc59ba51e8795e27e04127aba94749d15988eb9f3f57ac846b",
+      "frame": [
+        331,
+        95
+      ],
+      "fields": {
+        "Address": [
+          73,
+          49,
+          161,
+          23
+        ],
+        "AgentPort": [
+          244,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "None",
+        "AgentPort": "None"
+      },
+      "captionLines": {},
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "8c586110dffbaf901b8d804a78bc9219f68dd06105fba3de6eb3f91f7ee8cfc1"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 247,
+          "height": 37,
+          "sha": "67c9d7e060439b53cb2d4bc7c45ccc7492f9754deb2483b95151730e72213fa3"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideAutoTopMinimum",
+      "file": "FixedSideAutoTopMinimum.xml",
+      "fixtureSha256": "c29aabac723ef63538ead730c29f68c7aab077df1c3c843e28330bf4f3dd4047",
+      "canonicalSha256": "69f40b13e046a50ab093d4894fae4e91aa2980c06907863170d7bb1c33c875f4",
+      "frame": [
+        354,
+        129
+      ],
+      "fields": {
+        "Address": [
+          73,
+          83,
+          161,
+          23
+        ],
+        "AgentPort": [
+          244,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "0c9521060bcfd26ac65905f882d6e4e4ca11e44795dca341fa5d5eefd4c8579a"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 270,
+          "height": 71,
+          "sha": "247751028dae444d67d5e2beecb6a47cc46490153a82281991955e85f1ecca66"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideAutoTop42",
+      "file": "FixedSideAutoTop42.xml",
+      "fixtureSha256": "ae8153faa3cbf627cf685344da32230a70540aff3307163453869a749d148e03",
+      "canonicalSha256": "ddf2af960819866f37a7b7602b42077692c807d4cb61f31832283bccbc51a5d2",
+      "frame": [
+        454,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            298,
+            44
+          ],
+          "client": [
+            283,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "2ae2e19cf6585e96cf7369880d3e1a57418257dcb42f8028768f2591744e1058"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 298,
+          "height": 15,
+          "sha": "21ddeec521f79ec78fbe4c2c7c75ab47fd39f71aaded7f8a30aa3a7d3be8ec0a"
+        },
+        {
+          "name": "vertical",
+          "x": 351,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ],
+      "reflow": {
+        "cases": [
+          "FixedSideAutoTop42",
+          "FixedSideAutoTop44",
+          "FixedSideAutoLeft45",
+          "FixedSideAutoTopMinimum",
+          "FixedSideAutoTop42"
+        ],
+        "selected": "AgentPort",
+        "edit": {
+          "case": "FixedSideAuthoredTop42"
+        },
+        "scrollPage": "AgentPort"
+      }
+    },
+    {
+      "name": "FixedSideAutoTop44",
+      "file": "FixedSideAutoTop44.xml",
+      "fixtureSha256": "59615091e7c33defa5c3adb691ee32c20493e0dbc66e348bd85d0a077ec6f39d",
+      "canonicalSha256": "5f71eb690a26c82cac0dab9989d67385d763191bc8c0caceedd0e0e6705eaa3f",
+      "frame": [
+        474,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            298,
+            44
+          ],
+          "client": [
+            283,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "5af9fd6583166ef7908f8df45f3bebdc290874a19295979ab8cbff2b3f302337"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 298,
+          "height": 15,
+          "sha": "21ddeec521f79ec78fbe4c2c7c75ab47fd39f71aaded7f8a30aa3a7d3be8ec0a"
+        },
+        {
+          "name": "vertical",
+          "x": 351,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideAutoLeft45",
+      "file": "FixedSideAutoLeft45.xml",
+      "fixtureSha256": "f7984048ef57d40bffa5c306c9691deacd2350032f60a45de02f9f5c465030f8",
+      "canonicalSha256": "55d9a44c2871117fd3572fc5c1ca2fc7fc057c153dd72e94b3fb3fd6d9b4a0dc",
+      "frame": [
+        484,
+        117
+      ],
+      "fields": {
+        "Address": [
+          137,
+          49,
+          161,
+          23
+        ],
+        "AgentPort": [
+          397,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 3,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "02b9c771f37b9206b6c346241ba6ec51a726f99ba4e4a80f4e998cbc54d97f9c"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 400,
+          "height": 59,
+          "sha": "a42717ff0fee823a48aad0e9ee2668bc76f9a8e62e6b636297bafe54b91e82b4"
+        }
+      ]
+    },
+    {
+      "name": "FixedSidePackedTrailing",
+      "file": "FixedSidePackedTrailing.xml",
+      "fixtureSha256": "85094c91178b94f525868e9e0525a263cca6f1d9f84bfb4c8206bff9f4bac9f7",
+      "canonicalSha256": "2f8062fd0aad0cb36b923c07ab90fcfb17e4ba156ea11639bdceff0358d70c94",
+      "frame": [
+        524,
+        117
+      ],
+      "fields": {
+        "Address": [
+          138,
+          49,
+          161,
+          23
+        ],
+        "AgentPort": [
+          431,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 3,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "2e55d2656d9ab1c624dd7e5d950b83f7033ffa0d5872301ca0e281319d059141"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 440,
+          "height": 59,
+          "sha": "964f70c5c00e573e326ea205678327b3364e3ceeab6201bb41a9960ea8b9b347"
+        }
+      ]
+    },
+    {
+      "name": "FixedSidePackedCompact",
+      "file": "FixedSidePackedCompact.xml",
+      "fixtureSha256": "defbbed68466410a7d4e36e7d68b41e62f7764feaf7218bc2c92bc087cf89d1a",
+      "canonicalSha256": "7edea7f75898e4039a27e42dae45a0ce7db6ee5890d8697890d17654ec1d8a95",
+      "frame": [
+        534,
+        102
+      ],
+      "fields": {
+        "Address": [
+          175,
+          49,
+          161,
+          23
+        ],
+        "AgentPort": [
+          441,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "695c2676b7e2d58877ec6571950465d38843b798e6033505a8b7b4b96e65925a"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 450,
+          "height": 44,
+          "sha": "e60f141bcbea07c78b8bfe9543c1c2966960a97523e7f2c6949f48c728ff6e76"
+        }
+      ]
+    },
+    {
+      "name": "FixedSidePackedReverse",
+      "file": "FixedSidePackedReverse.xml",
+      "fixtureSha256": "57670a0326c3ab88c6ac5ba64ae6a62ee0b578b134cea45fd6ab794bc4a07666",
+      "canonicalSha256": "89aed57587d7a9ab619029e5ae4f534a989e33e538a4e3dd6dd970b0d17227ec",
+      "frame": [
+        554,
+        102
+      ],
+      "fields": {
+        "Address": [
+          361,
+          49,
+          161,
+          23
+        ],
+        "AgentPort": [
+          177,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "28e5f2722c426c2a7a6d922a50eef1da8aa9ea0fd7d64f718977b20231ccdc38"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 470,
+          "height": 44,
+          "sha": "6ecef12b62e4971d5305972767a7b475b8557a3bbebc7af9c7a803b0913941a7"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideAuthoredTop42",
+      "file": "FixedSideAuthoredTop42.xml",
+      "fixtureSha256": "bd740089f74b4e49f709b395f4d458aa6778efcd0f929ec687596acd10e1cd91",
+      "canonicalSha256": "c3c634f4e7341d20f05c4b4edb3f1b991fd2dbd3a39b0b0864da0c82afbae0e1",
+      "frame": [
+        454,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            298,
+            44
+          ],
+          "client": [
+            283,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "23032dc4463c64047dc520cd99f79280fe6d95446762336f21412a23ab9708c9"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 298,
+          "height": 15,
+          "sha": "21ddeec521f79ec78fbe4c2c7c75ab47fd39f71aaded7f8a30aa3a7d3be8ec0a"
+        },
+        {
+          "name": "vertical",
+          "x": 351,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideAutoTopRight",
+      "file": "FixedSideAutoTopRight.xml",
+      "fixtureSha256": "0c018068fbba5909ec38157938d3807478ff8a5b4b2824448c01304ce3024a61",
+      "canonicalSha256": "5b405de38e04690805109fed113aa5eb7076036a7488293d75bc7f030d44722b",
+      "frame": [
+        454,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            19,
+            48,
+            298,
+            44
+          ],
+          "client": [
+            283,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "7149e82888f7126c0f607497b997ef10e825dcb3539e213c8eba2a31d388b43f"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 19,
+          "y": 77,
+          "width": 298,
+          "height": 15,
+          "sha": "21ddeec521f79ec78fbe4c2c7c75ab47fd39f71aaded7f8a30aa3a7d3be8ec0a"
+        },
+        {
+          "name": "vertical",
+          "x": 302,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "d3b448ed4d0292846dc1d2f1fc52352ed00429275d0e0ebf85ee9d825bad5460"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideAutoTopLongTab",
+      "file": "FixedSideAutoTopLongTab.xml",
+      "fixtureSha256": "a2b6dbd630280bea01ae072f91c88c776a874b1cf1ecc03937abfc2edddefbe0",
+      "canonicalSha256": "4e457bac8d25cec4942004ce557f5b9f6a3c9e483f35a0c90171d888149b56c6",
+      "frame": [
+        574,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            187,
+            48,
+            303,
+            44
+          ],
+          "client": [
+            288,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "5b4aa35f83cda6b4dfa5dc30002255e60da97f076e6b677fc632f023d1b924e1"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 187,
+          "y": 77,
+          "width": 303,
+          "height": 15,
+          "sha": "5786c285cafc3e419882f2d1f990c1be97a70643511e17c4d9ef12ce45f296e0"
+        },
+        {
+          "name": "vertical",
+          "x": 475,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideAutoTopStretchX",
+      "file": "FixedSideAutoTopStretchX.xml",
+      "fixtureSha256": "d8ab0d2bb00bccda9dd47edbf839dde3435bbd323d53ecbde75783f316f29023",
+      "canonicalSha256": "88038d54b8f798974fabe3c9703dd28eeac7215f919411734f9ac64ce166d3f9",
+      "frame": [
+        454,
+        114
+      ],
+      "fields": {
+        "Address": [
+          73,
+          68,
+          161,
+          23
+        ],
+        "AgentPort": [
+          244,
+          68,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "7d729f2e4d8a335a232a3c7b554698d8667815c5b57e6252e05b379d451a367e"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 370,
+          "height": 56,
+          "sha": "227a7e049072929446022cbee64216031a7ab26ec9c95d7db55053346f5ff0d0"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideAutoTopStretchY",
+      "file": "FixedSideAutoTopStretchY.xml",
+      "fixtureSha256": "2c86e638660323d7f492adf72f91d63dedb12dcf129104beda2ee6d78122efcb",
+      "canonicalSha256": "5402e62c7359b94986ef32d857ad40893c7417099aef3c898f6d22e10b127a29",
+      "frame": [
+        454,
+        180
+      ],
+      "fields": {
+        "Address": [
+          73,
+          83,
+          161,
+          23
+        ],
+        "AgentPort": [
+          244,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "af3ffaa0a174ed298171e595acc0a3efba95607e8dc4e4b69874450c5811cbb1"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 370,
+          "height": 122,
+          "sha": "d8582455b27d3bc7049490b0e6b7628eb7608caca798f5124da105c117494397"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideAuthoredTopStretchY",
+      "file": "FixedSideAuthoredTopStretchY.xml",
+      "fixtureSha256": "33b374b1e8bd61794cbbf65bd65e4bfae6dfee11fe819042f957b9f20bd51e77",
+      "canonicalSha256": "ee90c9ef75ab4f8154664df0b516d20f407a1c75c34658ec4d07f4d4f191550b",
+      "frame": [
+        454,
+        180
+      ],
+      "fields": {
+        "Address": [
+          73,
+          83,
+          161,
+          23
+        ],
+        "AgentPort": [
+          244,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "c90fb100053deb76792362a1a9e4a61fb474270945332419ed38252693ecafaf"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 370,
+          "height": 122,
+          "sha": "d8582455b27d3bc7049490b0e6b7628eb7608caca798f5124da105c117494397"
+        }
+      ]
+    },
+    {
+      "name": "FixedSideAutoTopDivider",
+      "file": "FixedSideAutoTopDivider.xml",
+      "fixtureSha256": "3ebf1635304c0342135b6f07cb2afbf4d92886409129dda2eebffa9804131bea",
+      "canonicalSha256": "f65fab7c050f43324b177a6afdca5751c2531e08d7178d01177057c917856350",
+      "frame": [
+        394,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [
+        [
+          231,
+          49,
+          27
+        ]
+      ],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            291,
+            44
+          ],
+          "client": [
+            276,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "ca395d2dc1173622204f49112a290a2fbe092a2a38e3fd90690e25f0f2915260"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 291,
+          "height": 15,
+          "sha": "9aed3cc73b4f4912e4d1055449ad0528b4edcef7b3f4584254e7f35316661d5e"
+        },
+        {
+          "name": "vertical",
+          "x": 344,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        },
+        {
+          "name": "divider",
+          "x": 231,
+          "y": 49,
+          "width": 1,
+          "height": 27,
+          "sha": "7e8a1a9d2960ad49d81912cc9fee8542da90c173a3d40b119b843e812ed7be7c"
+        }
+      ],
+      "reflow": {
+        "cases": [
+          "FixedSideAutoTopDivider"
+        ],
+        "selected": "AgentPort",
+        "scrollPage": "AgentPort",
+        "resizeDivider": true
+      }
+    },
+    {
+      "name": "FixedSideAutoTopColor",
+      "file": "FixedSideAutoTopColor.xml",
+      "fixtureSha256": "7ba6c94d4bd3bc36be64fcb111b4b8240a80e34cd84cbd3adcad5478a9d4460a",
+      "canonicalSha256": "0d90bc218a3c3152c9a890381105c08784aed5ea32d46c56c2fc4c78b75f41da",
+      "frame": [
+        454,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            298,
+            44
+          ],
+          "client": [
+            283,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "2038c1c74862502f8514495a744ff0b3de4b591ef6b6f3ead8d0c011347fb01c"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 298,
+          "height": 15,
+          "sha": "4fa3d0d96884038136b9ed017c0bc85e7cdced4d484aebcb52a5b087137cf636"
+        },
+        {
+          "name": "vertical",
+          "x": 351,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "5a1cd304f10e32afaed0d996fa0f24d72fc1e23f18389bfb6fc756bafe7a68a3"
+        },
+        {
+          "name": "page background",
+          "x": 63,
+          "y": 92,
+          "width": 302,
+          "height": 8,
+          "sha": "958b544e8b69cf0ed00760d14ab47adcfa38530771eaa01a899de0c665576aeb"
+        }
+      ]
+    },
+    {
+      "name": "FixedTopTabsNarrow",
+      "file": "FixedTopTabsNarrow.xml",
+      "fixtureSha256": "3de241cb8dd585472ad8f0c16a7ad7c104037fa6e9df8a78fd17fedbced02612",
+      "canonicalSha256": "4e3e3962b29c7122d45857b2b5dc22484b0fda42c4773775a5fbb7e4d0cfdefd",
+      "frame": [
+        454,
+        142
+      ],
+      "fields": {
+        "Address": [
+          93,
+          74,
+          161,
+          23
+        ],
+        "AgentPort": [
+          361,
+          74,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 3,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "3a5a10adbb2dc9df5b4ec542401fd37914d8889d06e61edae31e4f7f5c26ebc8"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "whole form",
+          "x": 0,
+          "y": 0,
+          "width": 454,
+          "height": 142,
+          "sha": "1c4922ee6cea1ded8e864bdabf6a22131ca8ebf84a32cb6bfe539be18138dc99"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionMinimum",
+      "file": "LongCaptionMinimum.xml",
+      "fixtureSha256": "e54e97f184a46d264818e5a104faae6842031bae474d0f96c64362b9486a065b",
+      "canonicalSha256": "3df3baaf0398b29c131e1409e0b224aefdcaf084b39d0f5769a989d14cf664fe",
+      "frame": [
+        354,
+        144
+      ],
+      "fields": {
+        "Address": [
+          73,
+          98,
+          161,
+          23
+        ],
+        "AgentPort": [
+          244,
+          98,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 3,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "67650676c491256f33b314fcc158c33c4f43cfaa158a0e2b71ce891a2e32e313"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 270,
+          "height": 86,
+          "sha": "c5a7bbe018a626b03fefd6a634fe97c24512c0188da8222d34c395454f9dca88"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionCompactScroll",
+      "file": "LongCaptionCompactScroll.xml",
+      "fixtureSha256": "9d373a2e32f324cae63f61020f2772ff97676e9d7546d0f77c73038be7a16757",
+      "canonicalSha256": "3d4ca52d7d5a1e83815f87188d453fea912e2af058b4dbbda194e60f6e3edc39",
+      "frame": [
+        394,
+        129
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 3,
+        "AgentPort": 1
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            305,
+            59
+          ],
+          "client": [
+            290,
+            44
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "295cf1c82c36a3d3e5731e16a47d6f1dc3966ae620e4c68ae5f395ad1d7e66bb"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 92,
+          "width": 305,
+          "height": 15,
+          "sha": "c1a7650e5ec650943e3f44ad335ae1e43eb2ed89797afa011feb7f6b53c0c533"
+        },
+        {
+          "name": "vertical",
+          "x": 358,
+          "y": 48,
+          "width": 15,
+          "height": 44,
+          "sha": "2f544e865a618d8892508393bb1f78493851e88e5d318b4a61a5013ad814fcbe"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionReservedWidth",
+      "file": "LongCaptionReservedWidth.xml",
+      "fixtureSha256": "fb7211909be99050adec157cb5a0bdd9a6c851c15e6d2b78de098a47b9bbd68b",
+      "canonicalSha256": "634c57ffd58a81d6c0168633e24605f552465e7b293998e90285717ff5967a85",
+      "frame": [
+        489,
+        129
+      ],
+      "fields": {
+        "Address": [
+          73,
+          83,
+          161,
+          23
+        ],
+        "AgentPort": [
+          373,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "4c4b30c159d5f61a0f70e0a6f502a7f66d6bed2d84e33bdf871cb65ddc87659f"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 405,
+          "height": 71,
+          "sha": "b76bb599fb1f1f6193836d312c3c0c9d08a5d516ed7ba56a17825e0651b2f352"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionAutoScroll",
+      "file": "LongCaptionAutoScroll.xml",
+      "fixtureSha256": "f4b90d6ed08eb4445efddfcdee4dc37cc6e52678302eea91d89c7e0578257c59",
+      "canonicalSha256": "8e0c557a0d4abfa4cdf947409b0cc30f9567ddc4a3180ee4a72511ff58ccbd2e",
+      "frame": [
+        524,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            433,
+            44
+          ],
+          "client": [
+            418,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "5208fed8bdf8b43326e6d7a88bf8a64f7298a97787275b30eecdb3ae328f3faf"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 433,
+          "height": 15,
+          "sha": "7ecce13b01b5df6acaeb8b15bcd546812a6775aa51748f8dfeb9c4e3f677bf53"
+        },
+        {
+          "name": "vertical",
+          "x": 486,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ],
+      "reflow": {
+        "cases": [
+          "LongCaptionAutoScroll",
+          "LongCaptionReservedWidth",
+          "LongCaptionCompactScroll",
+          "LongCaptionMinimum",
+          "LongCaptionLastTop",
+          "LongCaptionFirstLeft",
+          "LongCaptionAutoScroll"
+        ],
+        "selected": "AgentPort",
+        "edit": {
+          "case": "LongCaptionAuthoredTop"
+        },
+        "scrollPage": "AgentPort"
+      }
+    },
+    {
+      "name": "LongCaptionAuthoredTop",
+      "file": "LongCaptionAuthoredTop.xml",
+      "fixtureSha256": "5a7dac05fe08fc1efa21a0bc3ee44de02fc69245307affbb1bf5390908f076a6",
+      "canonicalSha256": "42f76829c0d0e96dfe2a82cf788e2d686c7eed6d542591b3bc6a158badc8458f",
+      "frame": [
+        524,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            433,
+            44
+          ],
+          "client": [
+            418,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "fac50010e938711e1d7216e57a43c36e3244099c85e98400f39adafeba934ba2"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 433,
+          "height": 15,
+          "sha": "7ecce13b01b5df6acaeb8b15bcd546812a6775aa51748f8dfeb9c4e3f677bf53"
+        },
+        {
+          "name": "vertical",
+          "x": 486,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionLastTop",
+      "file": "LongCaptionLastTop.xml",
+      "fixtureSha256": "0eb06a07bc7d17a4b26d58d80ed8b4e9ff6d0b7974301df92d45b1a35393048f",
+      "canonicalSha256": "02b7401eff092982e4a9777a699afe9850549045a056a6d27b9c09c240011434",
+      "frame": [
+        714,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            433,
+            44
+          ],
+          "client": [
+            418,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "e62e3013fcba0bca32b05e51fb3b35f79c6d9de05b9f1aab450ef88834196e89"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 77,
+          "width": 433,
+          "height": 15,
+          "sha": "7ecce13b01b5df6acaeb8b15bcd546812a6775aa51748f8dfeb9c4e3f677bf53"
+        },
+        {
+          "name": "vertical",
+          "x": 486,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "e72e348926b2320bdf0c8b23101b54cd5e4686ec09d82fb602c6250b5b487452"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionFirstLeft",
+      "file": "LongCaptionFirstLeft.xml",
+      "fixtureSha256": "6c27e44fd391005780436272041b25c8f356e78d08d7b3487e482b70caedabc9",
+      "canonicalSha256": "20a2b92c15862a05a34e597100eb9a79e06a6cb8d0479ef12dbd1ec8a0fb0f2b",
+      "frame": [
+        724,
+        102
+      ],
+      "fields": {
+        "Address": [
+          371,
+          49,
+          161,
+          23
+        ],
+        "AgentPort": [
+          631,
+          49,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Left",
+        "AgentPort": "Left"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "aa366f292bfc23262fe3e23d28ff35e941e5e0fb52659168b377ac2d7d3907ff"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 640,
+          "height": 44,
+          "sha": "7eb7348f6bf1e0bc2372ac660a4a2087a3818a531b54e28f4d174a95f66e233b"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionReverse",
+      "file": "LongCaptionReverse.xml",
+      "fixtureSha256": "86ca25486cf6effdcc081ae16951ea901c6fe4d7a308d3c3a6d492ff72bd6da4",
+      "canonicalSha256": "90a68da6f316ae795de58d28495ade2385779bf4edf83688e41fc6f290be341c",
+      "frame": [
+        489,
+        129
+      ],
+      "fields": {
+        "Address": [
+          167,
+          83,
+          161,
+          23
+        ],
+        "AgentPort": [
+          73,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "6239aa4a411d42c89d32fbea125b2e48e99ff615286eb30bff8df439445a93f7"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 405,
+          "height": 71,
+          "sha": "25b8c5d784685e6f49df70c89f443c7c616bea5b6d6091efe016dc84b7842456"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionRightTabs",
+      "file": "LongCaptionRightTabs.xml",
+      "fixtureSha256": "5d87787f1f3332db1ce9a7e4adf75082044b65110fa5252481de5cdeaaea3915",
+      "canonicalSha256": "1a85fb6baaf1d3bfcaa6d080ca237fae4748018103798a19170de3e888927561",
+      "frame": [
+        524,
+        114
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            19,
+            48,
+            433,
+            44
+          ],
+          "client": [
+            418,
+            29
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "ed051233df0b7847c108eb8111c759b39b4927fbeb1454b5be27b3f6d44f4a1c"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 19,
+          "y": 77,
+          "width": 433,
+          "height": 15,
+          "sha": "7ecce13b01b5df6acaeb8b15bcd546812a6775aa51748f8dfeb9c4e3f677bf53"
+        },
+        {
+          "name": "vertical",
+          "x": 437,
+          "y": 48,
+          "width": 15,
+          "height": 29,
+          "sha": "d3b448ed4d0292846dc1d2f1fc52352ed00429275d0e0ebf85ee9d825bad5460"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionWideTab",
+      "file": "LongCaptionWideTab.xml",
+      "fixtureSha256": "ed80259e0f13909f36e83e0840cdcd153ab8a8789e3ced8d3d9826a4632e92e8",
+      "canonicalSha256": "008e86c6046bd27d3fbc687ce326769d5656261039e31adbdf612c43e6a309f6",
+      "frame": [
+        634,
+        129
+      ],
+      "fields": {
+        "Address": [
+          192,
+          83,
+          161,
+          23
+        ],
+        "AgentPort": [
+          498,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "9dd698632c48b38f979a25f45aac6fabecca1c33d219b050920fdcf0132ea0e8"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 182,
+          "y": 39,
+          "width": 431,
+          "height": 71,
+          "sha": "0af3b6de489dab6c718a189fa7309f5c6866dfe6767813e4f885d3fbbc25f11f"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionStretchY",
+      "file": "LongCaptionStretchY.xml",
+      "fixtureSha256": "b046c48a6bb12c440299fc28628b9645c2ef0d4b35afe80903b9108c1f6bf925",
+      "canonicalSha256": "1ad61b68ffa79d7a252834c02c178fb4ce19a7118c3b64affc3cb823aaaa12b1",
+      "frame": [
+        524,
+        180
+      ],
+      "fields": {
+        "Address": [
+          73,
+          83,
+          161,
+          23
+        ],
+        "AgentPort": [
+          379,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "88f06eeb74a521b4c1f7a6fc0e245e4829fde4e2c6f68e58585201d3925f0905"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 440,
+          "height": 122,
+          "sha": "b6c51ff3f052f036fd783ff3bc3769122a53383436b4ed31834927978d88cdc1"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionBelowMeasure",
+      "file": "LongCaptionBelowMeasure.xml",
+      "fixtureSha256": "ef23f5933a400a47383b7034697d6b5b5f230c2b5a58acc8fa1ea2a31809e126",
+      "canonicalSha256": "815ea3356ccfc55ef84407165e1b4e102854c7938b1f17b6ac18e4fac0b600fb",
+      "frame": [
+        414,
+        129
+      ],
+      "fields": {
+        "Address": [
+          73,
+          83,
+          161,
+          23
+        ],
+        "AgentPort": [
+          279,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [
+        [
+          273,
+          49,
+          57
+        ]
+      ],
+      "pageScroll": [],
+      "captures": {
+        "ru": "dfe6dc5ba94a32c1efc17ef3e69f8f6d5e2f3ea1ea251df4c3c4977ab7fd61a9"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 330,
+          "height": 71,
+          "sha": "0d6fd550a2e1bbe7867c1647f07a76e3e965c9edbc7bbeafbf5c30c01f15376a"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionAboveMeasure",
+      "file": "LongCaptionAboveMeasure.xml",
+      "fixtureSha256": "3d1e3d2acdd27d3d291e7f8f87758e7a0f6b871433aad3c6c7f5f95fae1f3562",
+      "canonicalSha256": "bd51e50796fe0e14608a4b36b54c5a1b575da5a1d0edf1be85d45d05e825810b",
+      "frame": [
+        434,
+        129
+      ],
+      "fields": {
+        "Address": [
+          73,
+          83,
+          161,
+          23
+        ],
+        "AgentPort": [
+          318,
+          83,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [],
+      "captures": {
+        "ru": "950eed53de3bd5f083f8995cd07015b155c60030bb6e9bbc9609ba4d11e307e7"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 350,
+          "height": 71,
+          "sha": "34ce19cdeecba15320c363125a2cd7c413714064e3702ead680c34a5aec08a3d"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionFontClipped",
+      "file": "LongCaptionFontClipped.xml",
+      "fixtureSha256": "7d483dace1298269c5b2736fcc33a3391db26b2bddbe1d5b7d51eccafdc41312",
+      "canonicalSha256": "05bd8f13baec0e874147b18f6af0f618f49e935c70a9358134022c4896994837",
+      "frame": [
+        449,
+        129
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 2,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            360,
+            59
+          ],
+          "client": [
+            345,
+            44
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "00e86a231f22f4fb9f7f2c3826fe7a303b5b699db287a73dba7ff66fc64a2e18"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 92,
+          "width": 360,
+          "height": 15,
+          "sha": "1d0a3dbe0238d7485bf44f2072897fedd520d3468005a5cddab0c30d0ab5f088"
+        },
+        {
+          "name": "vertical",
+          "x": 413,
+          "y": 48,
+          "width": 15,
+          "height": 44,
+          "sha": "2f544e865a618d8892508393bb1f78493851e88e5d318b4a61a5013ad814fcbe"
+        }
+      ],
+      "reflow": {
+        "cases": [
+          "LongCaptionFontClipped"
+        ],
+        "selected": "AgentPort",
+        "scrollPage": "AgentPort"
+      }
+    },
+    {
+      "name": "LongCaptionFontFull",
+      "file": "LongCaptionFontFull.xml",
+      "fixtureSha256": "c577e9ddb2ef7675df68518f89a6770b5046c2092ca5b57b2c56a32722469567",
+      "canonicalSha256": "8a241f9fb81ccec49a75a838e173978e602a3ba23ae7e3191eae9d2dd88bc78a",
+      "frame": [
+        524,
+        117
+      ],
+      "fields": {},
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 1,
+        "AgentPort": 2
+      },
+      "dividers": [],
+      "pageScroll": [
+        {
+          "box": [
+            68,
+            48,
+            393,
+            47
+          ],
+          "client": [
+            378,
+            32
+          ]
+        }
+      ],
+      "captures": {
+        "ru": "5b5d1e74626ea20d9ef812f34a633c4bff9719c141609fe0061cb20a33083f7e"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "horizontal",
+          "x": 68,
+          "y": 80,
+          "width": 393,
+          "height": 15,
+          "sha": "cbfd248e340445fb97be1e799afbe992d639578b2eb18b1d66db18d9bfa548b8"
+        },
+        {
+          "name": "vertical",
+          "x": 446,
+          "y": 48,
+          "width": 15,
+          "height": 32,
+          "sha": "2cfcfef3bc1e7870adccd798109791cfa5f64161b550004f56dece1512cc10b7"
+        }
+      ]
+    },
+    {
+      "name": "LongCaptionSeveralWordsWrap",
+      "file": "LongCaptionSeveralWordsWrap.xml",
+      "fixtureSha256": "8766511657e40d2d2ada528735e90dc890481f6bdec6afecbc6adc6f164a232b",
+      "canonicalSha256": "ecec2e9804054e44b07b57a14db02e36130efe4fb11f588e10002dca30ffa038",
+      "frame": [
+        454,
+        144
+      ],
+      "fields": {
+        "Address": [
+          73,
+          98,
+          161,
+          23
+        ],
+        "AgentPort": [
+          306,
+          98,
+          61,
+          23
+        ]
+      },
+      "captionLocations": {
+        "Address": "Top",
+        "AgentPort": "Top"
+      },
+      "captionLines": {
+        "Address": 3,
+        "AgentPort": 2
+      },
+      "dividers": [
+        [
+          300,
+          49,
+          72
+        ]
+      ],
+      "pageScroll": [],
+      "captures": {
+        "ru": "48af3a28259f55d29fd706e5e255dbbed83e575d5a4a58341bddc22da1fe32b9"
+      },
+      "compatibility": "Version8_3_27",
+      "pagePixels": [
+        {
+          "name": "page content",
+          "x": 63,
+          "y": 39,
+          "width": 370,
+          "height": 86,
+          "sha": "85eed88654f92a37ed19c9a205485f084e57cb2331e85b53626df69bda99cbab"
+        }
+      ]
     }
   ],
   "frameCoordinates": "Outer black outline, including its one-pixel stroke and excluding the shadow."

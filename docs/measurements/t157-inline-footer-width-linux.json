@@ -1,0 +1,610 @@
+{
+  "schemaVersion": 1,
+  "nativeBuild": "8.3.27.2342",
+  "profile": "linux-taxi-96",
+  "explorerLocale": "en",
+  "explorerVsixSha256": "c0ab59cd7c41a522f06f328432230ce5b036377d5b6389fc5d72ecfb9760b490",
+  "rectangles": "x, y, width, height in CSS pixels from the form frame",
+  "cases": [
+    {
+      "id": "Width61",
+      "width": 61,
+      "amountFontPoints": 10,
+      "formSha256": "2abcbf860166308d09acccaf3f40cf2a1e6713462f07db3fdbfd0741f2e2bcf2",
+      "frame": [644, 122],
+      "captureSha256": {
+        "en": "98302b7288105f3c4ba1db2b54940a51d61dcb803fddbd878a344e9d0edd6bcc",
+        "ru": "b24e73c21f830d1d5509364ea659441e7437b391ec2e0d54c1b5e25e0b386e91"
+      },
+      "native": {
+        "Memo": [13, 58, 86, 51],
+        "Fixed": [215, 79, 62, 19],
+        "Owner": [389, 79, 62, 19],
+        "Amount": [466, 79, 152, 19],
+        "Summary": [461, 55, 162, 48]
+      },
+      "explorer": {
+        "Memo": [13, 58, 85, 51],
+        "Fixed": [213, 80, 63, 19],
+        "Owner": [388, 80, 63, 19],
+        "Amount": [466, 79, 152, 19],
+        "Summary": [461, 55, 162, 48]
+      }
+    },
+    {
+      "id": "Width70",
+      "width": 70,
+      "amountFontPoints": 10,
+      "formSha256": "dbb2783b797fd9c11dfed660122f1df1c88ce3f9b73ccaa457a8897ea891f3cd",
+      "frame": [734, 127],
+      "captureSha256": {
+        "en": "8111f19257716f450d5dba7cc22852ebea3942cd2037b2c7ad4296ae55ac2547",
+        "ru": "8d278e1d4b86344f5428efb998f00684e23f0647e0a84c3212682a4533adc018"
+      },
+      "native": {
+        "Memo": [13, 58, 92, 56],
+        "Fixed": [220, 84, 66, 19],
+        "Owner": [398, 84, 65, 19],
+        "Amount": [556, 79, 152, 19],
+        "Summary": [473, 74, 240, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 94, 56],
+        "Fixed": [222, 84, 65, 19],
+        "Owner": [399, 84, 65, 19],
+        "Amount": [556, 79, 152, 19],
+        "Summary": [474, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width80",
+      "width": 80,
+      "amountFontPoints": 10,
+      "formSha256": "8ab1b5ae1ff47ffddc1ffd90fbd7221da1d8a399ed5617cda2ebc5e453dea2c7",
+      "frame": [834, 127],
+      "captureSha256": {
+        "en": "1395be682622eec4844f26da20ed691b6cba6cd163c364322eb5f00e5a2dbede",
+        "ru": "3e2865a2209b48ee02f69b223c9abc36cb9383884465d1d5411591a9f44c54e3"
+      },
+      "native": {
+        "Memo": [13, 58, 154, 56],
+        "Fixed": [285, 84, 87, 19],
+        "Owner": [484, 84, 78, 19],
+        "Amount": [656, 79, 152, 19],
+        "Summary": [572, 74, 241, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 158, 56],
+        "Fixed": [286, 84, 88, 19],
+        "Owner": [486, 84, 78, 19],
+        "Amount": [656, 79, 152, 19],
+        "Summary": [574, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width90",
+      "width": 90,
+      "amountFontPoints": 10,
+      "formSha256": "6315abd905665985befd8e2e93ed17ffc65882029c93e9b2a58462f759dcb0f8",
+      "frame": [934, 127],
+      "captureSha256": {
+        "en": "b395773d1b5b3337d7a4e10abc653bcae068e53d75fc317c01a36121dbac1158",
+        "ru": "b54d8b9dd47d7f309253b07b29dc230f4f137d768b7e1aa31b26466202949b5b"
+      },
+      "native": {
+        "Memo": [13, 58, 216, 56],
+        "Fixed": [348, 84, 110, 19],
+        "Owner": [570, 84, 92, 19],
+        "Amount": [756, 79, 152, 19],
+        "Summary": [672, 74, 241, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 221, 56],
+        "Fixed": [349, 84, 112, 19],
+        "Owner": [573, 84, 91, 19],
+        "Amount": [756, 79, 152, 19],
+        "Summary": [674, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width96",
+      "width": 96,
+      "amountFontPoints": 10,
+      "formSha256": "1d20c5f4eebe4aae9c902d282eee0c2f702ee53f581dcd0681a60d1d071f551d",
+      "frame": [994, 127],
+      "captureSha256": {
+        "en": "2c38ad22216c8ff30c5fa0fd0867fcb6df12e7aa536502747d498fce16dea284",
+        "ru": "15c7eb7336459500a5a0140f48600736f027c9f307d05b0ef39defca08a84eef"
+      },
+      "native": {
+        "Memo": [13, 58, 253, 56],
+        "Fixed": [385, 84, 123, 19],
+        "Owner": [620, 84, 101, 19],
+        "Amount": [816, 79, 152, 19],
+        "Summary": [731, 74, 242, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 259, 56],
+        "Fixed": [387, 84, 126, 19],
+        "Owner": [625, 84, 99, 19],
+        "Amount": [816, 79, 152, 19],
+        "Summary": [734, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width100",
+      "width": 100,
+      "amountFontPoints": 10,
+      "formSha256": "c3fa1a53b64de3816c4868493991531e09ee7711e8ba7093f138f9393fb22c82",
+      "frame": [1034, 127],
+      "captureSha256": {
+        "en": "7447b37a161268934bf67a36d2c45c2d444b3bd4901a1c62153f787eabcf2b1f",
+        "ru": "b3ba2c8b791eb3b9403376e6eba018b2e026f35b81f2cfefeee1d06b506f157b"
+      },
+      "native": {
+        "Memo": [13, 58, 279, 56],
+        "Fixed": [410, 84, 133, 19],
+        "Owner": [655, 84, 106, 19],
+        "Amount": [856, 79, 152, 19],
+        "Summary": [771, 74, 242, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 285, 56],
+        "Fixed": [413, 84, 134, 19],
+        "Owner": [659, 84, 105, 19],
+        "Amount": [856, 79, 152, 19],
+        "Summary": [774, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width105",
+      "width": 105,
+      "amountFontPoints": 10,
+      "formSha256": "43230e950a7cf8d3ecaac91a3e0f0aa16f278925f0edc7b25c95b7e961c183bb",
+      "frame": [1084, 127],
+      "captureSha256": {
+        "en": "14929d7f6784ff04cdbd0f580c359dba0f4157f6f3ce6d0237689bd5cf7ec89b",
+        "ru": "a17a98cbdef572c4a0d05a61074561f2d10a0913d72200b2e1115692975f9313"
+      },
+      "native": {
+        "Memo": [13, 58, 312, 56],
+        "Fixed": [443, 84, 144, 19],
+        "Owner": [699, 84, 112, 19],
+        "Amount": [906, 79, 152, 19],
+        "Summary": [821, 74, 242, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 317, 56],
+        "Fixed": [445, 84, 145, 19],
+        "Owner": [702, 84, 112, 19],
+        "Amount": [906, 79, 152, 19],
+        "Summary": [824, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width110",
+      "width": 110,
+      "amountFontPoints": 10,
+      "formSha256": "13f470a8011b358ff984d4734a5833ae5adb1eed901524a8c48562bc033db23e",
+      "frame": [1134, 127],
+      "captureSha256": {
+        "en": "81d7b05aaffaa0a310cc252c571ddc2d92bcf0baa7ea3b458853e7b7c7faaf21",
+        "ru": "a283e47eb1ce4ee7f0e7675d5971c000f2e29b81b02829a0e53c05a5b961668b"
+      },
+      "native": {
+        "Memo": [13, 58, 343, 56],
+        "Fixed": [475, 84, 156, 19],
+        "Owner": [743, 84, 118, 19],
+        "Amount": [956, 79, 152, 19],
+        "Summary": [871, 74, 242, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 353, 56],
+        "Fixed": [481, 84, 152, 19],
+        "Owner": [745, 84, 119, 19],
+        "Amount": [956, 79, 152, 19],
+        "Summary": [874, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width115",
+      "width": 115,
+      "amountFontPoints": 10,
+      "formSha256": "8802dfb90ad8d9497fa8cfd77c85a00c38c9bf68325dbb6b6ae55b9800089479",
+      "frame": [1184, 127],
+      "captureSha256": {
+        "en": "9583e3dfc6824ed84ea6300769745acb967aaec92d925f9a83016f3d968febaa",
+        "ru": "0007577f375c445c77951024e393449014122bd6cfa20937a47520db829c7001"
+      },
+      "native": {
+        "Memo": [13, 58, 382, 56],
+        "Fixed": [514, 84, 157, 19],
+        "Owner": [783, 84, 128, 19],
+        "Amount": [1006, 79, 152, 19],
+        "Summary": [921, 74, 242, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 394, 56],
+        "Fixed": [522, 84, 152, 19],
+        "Owner": [786, 84, 128, 19],
+        "Amount": [1006, 79, 152, 19],
+        "Summary": [924, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width120",
+      "width": 120,
+      "amountFontPoints": 10,
+      "formSha256": "94e560a8d7530e41ce760c2ea8904a506a17ca4a043315abf0cda86cce429e5b",
+      "frame": [1234, 127],
+      "captureSha256": {
+        "en": "8c93fb279197e87b66f793513e1e547204d28131121f5fd4ef0ffaa41a09d033",
+        "ru": "e45aa07f97957c44a96a29812acf967a1b6ee852bb68c4d9524075d730a5c7ce"
+      },
+      "native": {
+        "Memo": [13, 58, 423, 56],
+        "Fixed": [555, 84, 158, 19],
+        "Owner": [825, 84, 136, 19],
+        "Amount": [1056, 79, 152, 19],
+        "Summary": [971, 74, 242, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 435, 56],
+        "Fixed": [563, 84, 152, 19],
+        "Owner": [827, 84, 137, 19],
+        "Amount": [1056, 79, 152, 19],
+        "Summary": [974, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width123",
+      "width": 123,
+      "amountFontPoints": 10,
+      "formSha256": "b3fa936c5f121f9accf14a8a293c50dce99bcd7ff18fae86d5f3c964613c743b",
+      "frame": [1264, 127],
+      "captureSha256": {
+        "en": "e7c1a7b3cb104a8761d158f331eedc1280f520f3c3850ec4c68674bfe3f49cf4",
+        "ru": "b98f136e2e21f70ae9fe6672c6b596fdbcdc8f06bf4a2f276730bba78aa957ff"
+      },
+      "native": {
+        "Memo": [13, 58, 447, 56],
+        "Fixed": [579, 84, 158, 19],
+        "Owner": [849, 84, 142, 19],
+        "Amount": [1086, 79, 152, 19],
+        "Summary": [1001, 74, 242, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 460, 56],
+        "Fixed": [588, 84, 152, 19],
+        "Owner": [852, 84, 142, 19],
+        "Amount": [1086, 79, 152, 19],
+        "Summary": [1004, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width125",
+      "width": 125,
+      "amountFontPoints": 10,
+      "formSha256": "b20712ddcb01d6dbb207ffc1d9633d0373f709b889290f3352d8dae349734544",
+      "frame": [1284, 127],
+      "captureSha256": {
+        "en": "db0a32ba4c52073f8482bc7583580c12a806a37767dff46487e61fe6ade47b7e",
+        "ru": "d1f19d95a8d2299b4dfd162cfc01da897775bf8b0d487945bbc32cd6c1f676f9"
+      },
+      "native": {
+        "Memo": [13, 58, 464, 56],
+        "Fixed": [596, 84, 158, 19],
+        "Owner": [866, 84, 145, 19],
+        "Amount": [1106, 79, 152, 19],
+        "Summary": [1021, 74, 242, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 477, 56],
+        "Fixed": [605, 84, 152, 19],
+        "Owner": [869, 84, 145, 19],
+        "Amount": [1106, 79, 152, 19],
+        "Summary": [1024, 74, 239, 40]
+      }
+    },
+    {
+      "id": "Width130",
+      "width": 130,
+      "amountFontPoints": 10,
+      "formSha256": "b4d5bbb31b7579b42ef91d8623a144c6a70c06c839e428bfc0ea61f0886a5216",
+      "frame": [1334, 127],
+      "captureSha256": {
+        "en": "5cdb37cea9fff3fc1508e6d10c426e8751a2efbd7fceb17b7722db7fb43da311",
+        "ru": "c7b05d8ec55fadeaf2b4ab42f2b0cec2e7df22c6d7142bb86b13f922b0e309a6"
+      },
+      "native": {
+        "Memo": [13, 58, 505, 56],
+        "Fixed": [638, 84, 158, 19],
+        "Owner": [908, 84, 153, 19],
+        "Amount": [1156, 79, 152, 19],
+        "Summary": [1071, 74, 242, 40]
+      },
+      "explorer": {
+        "Memo": [13, 58, 511, 56],
+        "Fixed": [641, 84, 154, 19],
+        "Owner": [907, 84, 156, 19],
+        "Amount": [1156, 79, 152, 19],
+        "Summary": [1073, 74, 240, 40]
+      }
+    },
+    {
+      "id": "Width135",
+      "width": 135,
+      "amountFontPoints": 10,
+      "formSha256": "fdc6caf0e110ef6cfbaf4ca26a49a16d4202ed525d26ee582429f6b5481e4d2c",
+      "frame": [1384, 122],
+      "captureSha256": {
+        "en": "e448bde5f545b760db6eac5350e342f564fffb8911303a7fd4b07c8564219032",
+        "ru": "d37c4f3a1b2e9499d42e6c07590fd30283b922e389758d727a1040b281d5e584"
+      },
+      "native": {
+        "Memo": [13, 58, 511, 51],
+        "Fixed": [642, 79, 157, 19],
+        "Owner": [911, 79, 157, 19],
+        "Amount": [1206, 79, 152, 19],
+        "Summary": [1078, 74, 285, 29]
+      },
+      "explorer": {
+        "Memo": [13, 58, 511, 55],
+        "Fixed": [642, 84, 156, 19],
+        "Owner": [910, 84, 158, 19],
+        "Amount": [1206, 79, 152, 19],
+        "Summary": [1078, 74, 285, 29]
+      }
+    },
+    {
+      "id": "Width140",
+      "width": 140,
+      "amountFontPoints": 10,
+      "formSha256": "48a2e6af33ce1c2ee9e692f1d96cdb4aadf4f1e9b51e1a08b6c00b1dfbdd1661",
+      "frame": [1434, 122],
+      "captureSha256": {
+        "en": "3316aa8bcb9065046d16a47146387ff1d9cceee49bae95b5d8ca2b10bbdf871a",
+        "ru": "bb11f647870963c64b9661093025341de95e8ea1c9be40f3b2f0250caa48e19a"
+      },
+      "native": {
+        "Memo": [13, 58, 511, 51],
+        "Fixed": [655, 79, 175, 19],
+        "Owner": [942, 79, 176, 19],
+        "Amount": [1256, 79, 152, 19],
+        "Summary": [1128, 74, 285, 29]
+      },
+      "explorer": {
+        "Memo": [13, 58, 511, 51],
+        "Fixed": [652, 80, 171, 19],
+        "Owner": [935, 80, 183, 19],
+        "Amount": [1256, 79, 152, 19],
+        "Summary": [1128, 74, 285, 29]
+      }
+    },
+    {
+      "id": "Font7",
+      "width": 106,
+      "amountFontPoints": 7,
+      "formSha256": "15c93c6b967de7135727a0cde50e707d66ed36144c3a8ac5cb7661bf45c7fdf1",
+      "frame": [1094, 122],
+      "captureSha256": {
+        "en": "bd3ab06c765dc17b28d2038cf6ca29dac059e30434429b391ad7c4038bb87c8c",
+        "ru": "868ed9e617104b732e9191857cdcca82eb128fa0ac84c623383441486dd1fa6a"
+      },
+      "native": {
+        "Memo": [13, 58, 359, 51],
+        "Fixed": [490, 79, 156, 19],
+        "Owner": [758, 79, 122, 19],
+        "Amount": [953, 81, 115, 15],
+        "Summary": [890, 76, 183, 32]
+      },
+      "explorer": {
+        "Memo": [13, 58, 379, 51],
+        "Fixed": [507, 80, 152, 19],
+        "Owner": [771, 80, 125, 19],
+        "Amount": [966, 81, 102, 15],
+        "Summary": [906, 76, 167, 32]
+      }
+    },
+    {
+      "id": "Font8",
+      "width": 106,
+      "amountFontPoints": 8,
+      "formSha256": "ccd5c040cdb6ff2b91a5c2f18b819a272bb408e70229139b8bb42eb679652b0b",
+      "frame": [1094, 124],
+      "captureSha256": {
+        "en": "3bd20bdb9213bbe7bc7e4819811caedee7966cb1c55c4ca924fb691728f61961",
+        "ru": "0e30b07bcdbb399eff3bffcb3e551d66b225b1c75dc97693b73d3ed7dbb83c37"
+      },
+      "native": {
+        "Memo": [13, 58, 341, 53],
+        "Fixed": [472, 81, 155, 19],
+        "Owner": [739, 81, 118, 19],
+        "Amount": [941, 80, 127, 17],
+        "Summary": [867, 75, 206, 36]
+      },
+      "explorer": {
+        "Memo": [13, 58, 349, 53],
+        "Fixed": [477, 81, 152, 19],
+        "Owner": [741, 81, 118, 19],
+        "Amount": [941, 80, 127, 17],
+        "Summary": [869, 75, 204, 36]
+      }
+    },
+    {
+      "id": "Font9",
+      "width": 106,
+      "amountFontPoints": 9,
+      "formSha256": "72607f0192442044e2401347eee61f51d9b6d8a4fa3009de267f4b533d44d2d7",
+      "frame": [1094, 125],
+      "captureSha256": {
+        "en": "dd126458f3382d7c0bf1219ca98ad8a12cf505c290df11ad7ff2fe2336d292ef",
+        "ru": "5c97cd7600c199b3029f845629456dcb35e87d609a7d9ebb4631a968cf1cfdea"
+      },
+      "native": {
+        "Memo": [13, 58, 328, 54],
+        "Fixed": [460, 82, 150, 19],
+        "Owner": [722, 82, 116, 19],
+        "Amount": [928, 79, 140, 18],
+        "Summary": [848, 74, 225, 38]
+      },
+      "explorer": {
+        "Memo": [13, 58, 333, 55],
+        "Fixed": [461, 83, 152, 19],
+        "Owner": [725, 83, 115, 19],
+        "Amount": [928, 80, 140, 18],
+        "Summary": [850, 75, 223, 38]
+      }
+    },
+    {
+      "id": "Font11",
+      "width": 106,
+      "amountFontPoints": 11,
+      "formSha256": "eed5f230a13a84242df74452bdff7e54671775db73890f9c8c681d66eec7b368",
+      "frame": [1094, 131],
+      "captureSha256": {
+        "en": "ec4895b9b9ab90919e7e219ac3cfe7aea077d28d00aed05d65ae85c6c7dec939",
+        "ru": "4af729134bf8cf2c0fbabc7c0bfdbffe419c777ae5b242dcfe9d2e84a4d9e4a8"
+      },
+      "native": {
+        "Memo": [13, 58, 294, 60],
+        "Fixed": [426, 88, 139, 19],
+        "Owner": [677, 88, 108, 19],
+        "Amount": [891, 77, 177, 22],
+        "Summary": [795, 72, 278, 46]
+      },
+      "explorer": {
+        "Memo": [13, 58, 300, 61],
+        "Fixed": [428, 89, 140, 19],
+        "Owner": [680, 89, 108, 19],
+        "Amount": [891, 78, 177, 22],
+        "Summary": [798, 73, 275, 46]
+      }
+    },
+    {
+      "id": "Font12",
+      "width": 106,
+      "amountFontPoints": 12,
+      "formSha256": "94129b62289207f0b2a2b4cc1acaa09268135ca534ad54ff6cdc729eef4daf50",
+      "frame": [1094, 133],
+      "captureSha256": {
+        "en": "9b6376d2991d968d21cf67336177b11d043c500a971357d4dfee46e1e097a83a",
+        "ru": "8dff9ce1ba96e91e8e8773200870111a1672de8ec5b75165f6daa951e8b2c12b"
+      },
+      "native": {
+        "Memo": [13, 58, 281, 62],
+        "Fixed": [413, 90, 133, 19],
+        "Owner": [658, 90, 106, 19],
+        "Amount": [878, 77, 190, 23],
+        "Summary": [774, 72, 299, 48]
+      },
+      "explorer": {
+        "Memo": [13, 58, 287, 62],
+        "Fixed": [415, 90, 136, 19],
+        "Owner": [663, 90, 105, 19],
+        "Amount": [878, 77, 190, 23],
+        "Summary": [778, 72, 295, 48]
+      }
+    },
+    {
+      "id": "Font14",
+      "width": 106,
+      "amountFontPoints": 14,
+      "formSha256": "8fd2caa0ccb3fd21cbcadd4a0cf35c7b177aefaeed135cb5d76242fe7238e83c",
+      "frame": [1094, 139],
+      "captureSha256": {
+        "en": "80c48b7575350b243a89d8e613902f43c0ce4afa4d32ad8590733d6b78c0d844",
+        "ru": "40a992cfe5093ba831446c07a529e9e846a661e9c78c7371e967ae6fe2169b3d"
+      },
+      "native": {
+        "Memo": [13, 58, 247, 68],
+        "Fixed": [379, 96, 121, 19],
+        "Owner": [612, 96, 99, 19],
+        "Amount": [841, 75, 227, 27],
+        "Summary": [721, 70, 352, 56]
+      },
+      "explorer": {
+        "Memo": [13, 58, 254, 68],
+        "Fixed": [382, 96, 123, 19],
+        "Owner": [617, 96, 98, 19],
+        "Amount": [841, 75, 227, 27],
+        "Summary": [725, 70, 348, 56]
+      }
+    },
+    {
+      "id": "Font16",
+      "width": 106,
+      "amountFontPoints": 16,
+      "formSha256": "b1f2675ccd5d7ae81803bf9bb9a29269f7feeeb8dff783b0ca50dd5edd4c912b",
+      "frame": [1094, 142],
+      "captureSha256": {
+        "en": "7adf4e8f8025b9cbfe99f8a090e016970a852a96a344fcd20d0ef92a3e8e9afe",
+        "ru": "756c4fdbf90f3893f84decad86ac241adfa290d697c16c7ca34887ea43294b03"
+      },
+      "native": {
+        "Memo": [13, 58, 223, 71],
+        "Fixed": [355, 99, 112, 19],
+        "Owner": [579, 99, 94, 19],
+        "Amount": [816, 74, 252, 29],
+        "Summary": [683, 69, 390, 60]
+      },
+      "explorer": {
+        "Memo": [13, 58, 230, 71],
+        "Fixed": [358, 99, 115, 19],
+        "Owner": [585, 99, 93, 19],
+        "Amount": [816, 74, 252, 29],
+        "Summary": [688, 69, 385, 60]
+      }
+    },
+    {
+      "id": "Font18",
+      "width": 106,
+      "amountFontPoints": 18,
+      "formSha256": "355c963f09195a1f8e73a8ba16e6bb725c8b9d38fd97c6759bff329c8258a4aa",
+      "frame": [1094, 146],
+      "captureSha256": {
+        "en": "e4baa5e9b6c05fbf8494a52dfb6fe957f092d39d43d01b960ed963ca003a454a",
+        "ru": "6188df5a7a38819feb5bfc1aa670948e19a6690ba758177505aff5bff3a204b1"
+      },
+      "native": {
+        "Memo": [13, 58, 188, 75],
+        "Fixed": [320, 103, 101, 19],
+        "Owner": [533, 103, 86, 19],
+        "Amount": [778, 72, 290, 32],
+        "Summary": [629, 67, 444, 66]
+      },
+      "explorer": {
+        "Memo": [13, 58, 196, 76],
+        "Fixed": [324, 104, 103, 19],
+        "Owner": [539, 104, 86, 19],
+        "Amount": [778, 73, 290, 32],
+        "Summary": [635, 68, 438, 66]
+      }
+    },
+    {
+      "id": "Font20",
+      "width": 106,
+      "amountFontPoints": 20,
+      "formSha256": "7d0c34963ede0e1a68db3cb6f238bed1831e5d403ad233e23f285feeaa809ab3",
+      "frame": [1094, 124],
+      "captureSha256": {
+        "en": "93d261778c9ff96be12e7140ebffc1ddc29ef1d988722dcbc96e444b84afb832",
+        "ru": "4d0f55597165038b6c8e2b996e3a18eb65338c6362738afb2d55f9d19d368eac"
+      },
+      "native": {
+        "Memo": [13, 58, 106, 53],
+        "Fixed": [234, 81, 70, 19],
+        "Owner": [416, 81, 68, 19],
+        "Amount": [753, 71, 315, 35],
+        "Summary": [494, 66, 579, 45]
+      },
+      "explorer": {
+        "Memo": [13, 58, 162, 80],
+        "Fixed": [290, 108, 90, 19],
+        "Owner": [492, 108, 79, 19],
+        "Amount": [741, 71, 327, 35],
+        "Summary": [581, 66, 492, 72]
+      }
+    }
+  ]
+}

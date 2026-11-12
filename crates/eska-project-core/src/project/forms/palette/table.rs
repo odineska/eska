@@ -273,7 +273,7 @@ const COLUMN_GROUP: &[Row] = &[
     USER_VISIBILITY,
     ENABLED,
     READ_ONLY,
-    Row::new("EnableContentChange", Main, Boolean, CHECKED),
+    super::common::ENABLE_CONTENT_CHANGE,
     IMPORTANCE,
     Row::new("Group", Main, Enum, Choice("vertical")).with_enum_captions(&[
         ("Vertical", "vertical"),

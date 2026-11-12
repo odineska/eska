@@ -1,12 +1,16 @@
 use super::*;
 use eska_project_core::project::metadata_edit::snapshot;
 
+#[path = "forms_collapsible_palette.rs"]
+mod collapsible_palette;
 #[path = "forms_command_palette.rs"]
 mod command_palette;
 #[path = "forms_display_palette.rs"]
 mod display_palette;
 #[path = "forms_native_palette.rs"]
 mod native_palette;
+#[path = "forms_pages_palette.rs"]
+mod pages_palette;
 #[path = "forms_reference_data.rs"]
 mod reference_data;
 #[path = "forms_standalone_additions.rs"]
@@ -624,6 +628,165 @@ fn form_input_palette_agrees_with_reference_list_and_additional_column_contexts(
         client.finish();
     }
     assert_eq!(fs::read_to_string(path).unwrap(), baseline);
+}
+
+#[test]
+fn unresolved_serialized_paths_keep_the_unbound_palette_and_xml_source() {
+    assert_unresolved_binding(
+        TABLE_INPUTS,
+        "Rows.Text",
+        "Text",
+        "1/0:11111111-1111-1111-1111-111111111111/0:22222222-2222-2222-2222-222222222222",
+    );
+    assert_unresolved_binding(
+        BOUND_INPUT,
+        "Value",
+        "Control",
+        "1/0:11111111-1111-1111-1111-111111111111",
+    );
+}
+
+fn assert_unresolved_binding(form: &str, data_path: &str, name: &str, serialized: &str) {
+    let directory = fixture();
+    let path = directory.0.join("src").join(PATH);
+    let bound = format!("<DataPath>{data_path}</DataPath>");
+    let raw_path = format!("<DataPath>{serialized}</DataPath>");
+    let baseline = form.replace(&bound, "");
+    fs::write(&path, &baseline).unwrap();
+    let mut client = Client::new(&directory.0, "ru-RU");
+    let (context, node) = connect(&mut client, &directory.0, "ru-RU", 41);
+    let opened = client.request("form/open", &params(&context, json!({"node":node})));
+    let field = native_palette::element(&opened["model"]["root"], name).unwrap();
+    let unbound = inspect_palette(&mut client, &context, &opened, field, true);
+    let changed = form.replace(&bound, &raw_path);
+    let opened = update_input(&mut client, &context, &opened, 2, &changed);
+    let field = native_palette::element(&opened["model"]["root"], name).unwrap();
+    let palette = inspect_palette(&mut client, &context, &opened, field, true);
+    let (raw, rows) = palette["rows"].as_array().unwrap().split_last().unwrap();
+    let unbound_rows = unbound["rows"].as_array().unwrap();
+    assert_eq!(rows.len(), unbound_rows.len());
+    for (actual, expected) in rows.iter().zip(unbound_rows) {
+        let mut actual = actual.clone();
+        if actual["value"]["kind"] == "declared" {
+            // Inserting DataPath can shift the index of other XML properties.
+            actual["value"]["propertyIndex"] = expected["value"]["propertyIndex"].clone();
+        }
+        assert_eq!(&actual, expected);
+    }
+    assert_eq!(input_palette_value(&palette, "DataPath")["kind"], "absent");
+    assert!(raw["category"].is_null());
+    let declared = &raw["value"];
+    assert_eq!(declared["kind"], "declared");
+    assert_eq!(declared["sourceKind"], "form");
+    let property =
+        &field["properties"][usize::try_from(declared["propertyIndex"].as_u64().unwrap()).unwrap()];
+    assert_eq!(property["value"]["text"], serialized);
+    let located = client.request(
+        "form/locate",
+        &params(
+            &context,
+            json!({
+                "formSessionId":opened["formSessionId"],"revision":opened["revision"],
+                "target":{"kind":"property","identity":field["identity"],"property":property["key"],"occurrence":declared["occurrence"]}
+            }),
+        ),
+    );
+    assert_eq!(xml_at(&changed, &located["range"]), raw_path);
+    let unsupported = changed.replace(serialized, "1/0:invalid");
+    let opened = update_input(&mut client, &context, &opened, 3, &unsupported);
+    let field = native_palette::element(&opened["model"]["root"], name).unwrap();
+    assert!(inspect_palette(&mut client, &context, &opened, field, true)["rows"].is_null());
+    client.finish();
+    assert_eq!(fs::read_to_string(path).unwrap(), baseline);
+}
+
+#[test]
+fn composite_input_palettes_follow_primitive_and_reference_profiles() {
+    let directory = fixture();
+    let source = directory.0.join("src");
+    let file = source.join(PATH);
+    fs::write(&file, BOUND_INPUT).unwrap();
+    let documents = ["Invoice", "Payment", "Order", "Receipt"];
+    fs::create_dir(source.join("Documents")).unwrap();
+    for name in documents {
+        fs::write(
+            source.join("Documents").join(format!("{name}.xml")),
+            format!(
+                "<MetaDataObject xmlns=\"http://v8.1c.ru/8.3/MDClasses\"><Document uuid=\"{name}\"><Properties><Name>{name}</Name></Properties></Document></MetaDataObject>"
+            ),
+        )
+        .unwrap();
+    }
+    let members = documents
+        .map(|name| format!("<Document>{name}</Document>"))
+        .concat();
+    let configuration = source.join("Configuration.xml");
+    let root = fs::read_to_string(&configuration).unwrap();
+    fs::write(
+        &configuration,
+        root.replace("<ChildObjects>", &format!("<ChildObjects>{members}")),
+    )
+    .unwrap();
+
+    let reference_types = documents
+        .map(|name| format!("<v8:Type>cfg:DocumentRef.{name}</v8:Type>"))
+        .concat();
+    let cases = [
+        (
+            TABLE_INPUTS,
+            r#"<Column name="Text""#,
+            "Text",
+            "<v8:Type>xs:string</v8:Type><v8:Type>xs:decimal</v8:Type>",
+            "<v8:Type>xs:boolean</v8:Type><v8:Type>xs:dateTime</v8:Type><v8:DateQualifiers><v8:DateFractions>Date</v8:DateFractions></v8:DateQualifiers>",
+            2,
+        ),
+        (
+            BOUND_INPUT,
+            r#"<Attribute name="Value""#,
+            "Control",
+            "<v8:Type>xs:string</v8:Type><v8:Type>cfg:DocumentRef.Invoice</v8:Type>",
+            reference_types.as_str(),
+            4,
+        ),
+    ];
+    for locale in ["ru-RU", "en-US"] {
+        let mut client = Client::new(&directory.0, locale);
+        let (context, node) = connect(&mut client, &directory.0, locale, 41);
+        let mut snapshot = client.request("form/open", &params(&context, json!({"node":node})));
+        let mut version = 2;
+        for (form, owner, name, control, types, expected_types) in cases {
+            snapshot = update_input(
+                &mut client,
+                &context,
+                &snapshot,
+                version,
+                &with_form_type(form, owner, control),
+            );
+            let item = native_palette::element(&snapshot["model"]["root"], name).unwrap();
+            let expected = inspect_palette(&mut client, &context, &snapshot, item, true);
+            assert!(expected["rows"].is_array());
+            snapshot = update_input(
+                &mut client,
+                &context,
+                &snapshot,
+                version + 1,
+                &with_form_type(form, owner, types),
+            );
+            let item = native_palette::element(&snapshot["model"]["root"], name).unwrap();
+            let value_type = &item["presentation"]["valueType"];
+            assert_eq!(value_type["kind"], "composite");
+            assert_eq!(
+                value_type["types"].as_array().unwrap().len(),
+                expected_types
+            );
+            let actual = inspect_palette(&mut client, &context, &snapshot, item, true);
+            assert_eq!(actual["rows"], expected["rows"], "{locale}/{name}");
+            assert_eq!(actual["categories"], expected["categories"]);
+            version += 2;
+        }
+        client.finish();
+    }
+    assert_eq!(fs::read_to_string(file).unwrap(), BOUND_INPUT);
 }
 
 fn assert_input_palette(inspected: &Value, native: &Value, case: &str, locale: &str) {

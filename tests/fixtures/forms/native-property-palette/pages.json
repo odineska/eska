@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "platform": "Linux ARM64, X11",
+  "nativeBuild": "8.3.27.2342",
+  "compatibility": "Version8_3_27",
+  "profiles": {
+    "Pages": [
+      "Name", "Title", "Type", "Visible", "UserVisibility", "Enabled", "ReadOnly",
+      "EnableContentChange", "DisplayImportance", "CurrentRowUse", "AssociatedTable",
+      "Shortcut", "ToolTip", "ToolTipRepresentation", "PagesRepresentation",
+      "TitleTextColor", "TitleFont", "Width", "Height", "HorizontalAlignInGroup",
+      "VerticalAlignInGroup", "HorizontalStretch", "VerticalStretch", "OnCurrentPageChange"
+    ],
+    "Page": [
+      "Name", "Title", "Type", "Visible", "UserVisibility", "Enabled", "ReadOnly",
+      "EnableContentChange", "DisplayImportance", "Group", "TitleDataPath",
+      "Shortcut", "ToolTip", "ToolTipRepresentation", "ShowTitle", "Picture", "ItemsAndTitlesAlign",
+      "TitleTextColor", "TitleFont", "HorizontalSpacing", "VerticalSpacing", "BackColor",
+      "Width", "Height", "HorizontalStretch", "VerticalStretch", "ChildItemsHorizontalAlign",
+      "ChildItemsVerticalAlign", "VerticalScrollOnReduceSize"
+    ]
+  },
+  "captions": {
+    "PagesRepresentation": {"en-US": "PagesRepresentation", "ru-RU": "ОтображениеСтраниц"},
+    "VerticalScrollOnReduceSize": {"en-US": "VerticalScrollOnReduceSize", "ru-RU": "ВертикальнаяПрокруткаПриСжатии"},
+    "OnCurrentPageChange": {"en-US": "OnCurrentPageChange", "ru-RU": "ПриСменеСтраницы"}
+  },
+  "editors": {
+    "platform:AssociatedTable": "reference",
+    "platform:Group": "enum",
+    "platform:TitleDataPath": "binding",
+    "platform:Picture": "picture",
+    "platform:PagesRepresentation": "enum",
+    "platform:VerticalScrollOnReduceSize": "boolean",
+    "platform:OnCurrentPageChange": "event"
+  },
+  "cases": {
+    "Pages": {
+      "profile": "Pages",
+      "categories": ["main", "usage", "appearance", "layout", "events"],
+      "unavailable": [],
+      "values": {
+        "Title": {"kind": "absent", "default": {"kind": "empty"}},
+        "Type": {"kind": "elementKind", "caption": {"en-US": "Pages", "ru-RU": "Страницы"}},
+        "CurrentRowUse": {"kind": "absent", "default": {"kind": "auto"}},
+        "AssociatedTable": {"kind": "absent", "default": {"kind": "empty"}},
+        "PagesRepresentation": {"kind": "absent", "default": {"kind": "auto"}},
+        "HorizontalStretch": {"kind": "absent", "caption": {"en-US": "Default", "ru-RU": "Авто"}},
+        "Width": {"kind": "absent", "default": {"kind": "number", "value": 0}},
+        "Height": {"kind": "absent", "default": {"kind": "number", "value": 0}},
+        "OnCurrentPageChange": {"kind": "absent", "default": {"kind": "empty"}}
+      }
+    },
+    "Page": {
+      "profile": "Page",
+      "categories": ["main", "usage", "appearance", "layout"],
+      "unavailable": [],
+      "values": {
+        "Title": {"kind": "declared"},
+        "Type": {"kind": "elementKind", "caption": {"en-US": "Page", "ru-RU": "Страница"}},
+        "Group": {"kind": "absent", "caption": {"en-US": "Vertical", "ru-RU": "Вертикальная"}},
+        "TitleDataPath": {"kind": "absent", "default": {"kind": "empty"}},
+        "ShowTitle": {"kind": "absent", "default": {"kind": "boolean", "value": true}},
+        "Picture": {"kind": "absent", "default": {"kind": "empty"}},
+        "HorizontalSpacing": {"kind": "absent", "default": {"kind": "auto"}},
+        "ChildItemsHorizontalAlign": {"kind": "absent", "default": {"kind": "auto"}},
+        "VerticalScrollOnReduceSize": {"kind": "absent", "default": {"kind": "boolean", "value": false}}
+      }
+    }
+  }
+}

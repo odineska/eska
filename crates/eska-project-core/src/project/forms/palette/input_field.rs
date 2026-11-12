@@ -10,14 +10,13 @@ use crate::project::metadata_model::PropertyKey;
 
 #[derive(Clone, Copy, Eq, PartialEq)]
 enum InputBinding {
-    Unbound,
+    Unbound { serialized_path: bool },
     String,
     Number,
     Date,
     Boolean,
     Reference,
-    StringAndNumber,
-    StringAndReference,
+    Composite { has_reference: bool },
     ValueList { extended: bool },
 }
 
@@ -30,23 +29,7 @@ impl InputBinding {
             FieldValueKind::Date => Self::Date,
             FieldValueKind::Boolean => Self::Boolean,
             FieldValueKind::Reference if types.iter().any(metadata_reference) => Self::Reference,
-            FieldValueKind::Composite if types.len() == 2 => {
-                let primitive = |key| {
-                    types.iter().any(|kind| {
-                        presentation::field_value_kind(std::slice::from_ref(kind)) == key
-                    })
-                };
-                if !primitive(FieldValueKind::String) {
-                    return None;
-                }
-                if primitive(FieldValueKind::Number) {
-                    Self::StringAndNumber
-                } else if types.iter().any(metadata_reference) {
-                    Self::StringAndReference
-                } else {
-                    return None;
-                }
-            }
+            FieldValueKind::Composite => Self::composite(types)?,
             FieldValueKind::Document
                 if types.iter().any(|key| {
                     key.namespace.as_deref() == Some("http://v8.1c.ru/8.1/data/core")
@@ -60,9 +43,35 @@ impl InputBinding {
                 };
                 Self::ValueList { extended }
             }
-            FieldValueKind::Unknown if unbound_data_path(element) => Self::Unbound,
+            FieldValueKind::Unknown => {
+                let serialized_path = element
+                    .scalar("DataPath")
+                    .is_some_and(serialized_unresolved_data_path);
+                if !serialized_path && !unbound_data_path(element) {
+                    return None;
+                }
+                Self::Unbound { serialized_path }
+            }
             _ => return None,
         })
+    }
+
+    fn composite(types: &[PropertyKey]) -> Option<Self> {
+        let mut has_reference = false;
+        for key in types {
+            if metadata_reference(key) {
+                has_reference = true;
+            } else if !matches!(
+                presentation::field_value_kind(std::slice::from_ref(key)),
+                FieldValueKind::String
+                    | FieldValueKind::Number
+                    | FieldValueKind::Date
+                    | FieldValueKind::Boolean
+            ) {
+                return None;
+            }
+        }
+        Some(Self::Composite { has_reference })
     }
 }
 
@@ -72,6 +81,25 @@ fn metadata_reference(key: &PropertyKey) -> bool {
             .name
             .split_once('.')
             .is_some_and(|(kind, _)| kind.ends_with("Ref") && references::type_kind(kind).is_some())
+}
+
+fn serialized_unresolved_data_path(text: &str) -> bool {
+    // Designer preserves unresolved metadata references in this form on export.
+    text.strip_prefix("1/").is_some_and(|path| {
+        let references = path.strip_suffix("/-2").unwrap_or(path);
+        references.split('/').all(|part| {
+            part.strip_prefix("0:").is_some_and(|uuid| {
+                uuid.len() == 36
+                    && uuid.bytes().enumerate().all(|(index, byte)| {
+                        if matches!(index, 8 | 13 | 18 | 23) {
+                            byte == b'-'
+                        } else {
+                            byte.is_ascii_hexdigit()
+                        }
+                    })
+            })
+        })
+    })
 }
 
 #[derive(Clone, Copy)]
@@ -85,7 +113,6 @@ pub(super) struct Context {
 impl Context {
     pub(super) fn new(view: &ElementPresentation, element: &EffectiveElement) -> Option<Self> {
         let binding = InputBinding::new(view, element)?;
-        let in_table = view.in_table;
         let manual_max = |name| {
             element
                 .scalar(name)
@@ -93,7 +120,7 @@ impl Context {
         };
         Some(Self {
             binding,
-            in_table,
+            in_table: view.in_table,
             manual_max_width: manual_max("AutoMaxWidth"),
             manual_max_height: manual_max("AutoMaxHeight"),
         })
@@ -110,7 +137,19 @@ pub(super) fn definitions(
             let available = setting
                 .disabled_on
                 .is_none_or(|rule| !rule.applies(context));
-            (&setting.definition, available)
+            // The native row is blank. The source property remains in the extra XML rows.
+            let definition = if matches!(
+                context.binding,
+                InputBinding::Unbound {
+                    serialized_path: true
+                }
+            ) && setting.definition.id == "DataPath"
+            {
+                &EMPTY_DATA_PATH
+            } else {
+                &setting.definition
+            };
+            (definition, available)
         })
 }
 
@@ -141,16 +180,12 @@ impl Rule {
         let binding = context.binding;
         let text = matches!(
             binding,
-            B::String
-                | B::Unbound
-                | B::StringAndNumber
-                | B::StringAndReference
-                | B::ValueList { .. }
+            B::String | B::Unbound { .. } | B::Composite { .. } | B::ValueList { .. }
         );
         match self {
             Self::Always => true,
-            Self::Bound => binding != B::Unbound,
-            Self::Unbound => binding == B::Unbound,
+            Self::Bound => !matches!(binding, B::Unbound { .. }),
+            Self::Unbound => matches!(binding, B::Unbound { .. }),
             Self::Text => text,
             Self::Format => {
                 matches!(binding, B::ValueList { .. })
@@ -159,17 +194,17 @@ impl Rule {
             Self::EditFormat => !matches!(binding, B::String | B::Reference),
             Self::Numeric => matches!(
                 binding,
-                B::Number
-                    | B::Unbound
-                    | B::StringAndNumber
-                    | B::StringAndReference
-                    | B::ValueList { .. }
+                B::Number | B::Unbound { .. } | B::Composite { .. } | B::ValueList { .. }
             ),
             Self::Wrap => text || binding == B::Boolean && !context.in_table,
             Self::InputHint => text || matches!(binding, B::Boolean | B::Reference),
             Self::ReferenceChoices => matches!(
                 binding,
-                B::Reference | B::StringAndReference | B::ValueList { .. }
+                B::Reference
+                    | B::Composite {
+                        has_reference: true
+                    }
+                    | B::ValueList { .. }
             ),
             Self::ChoiceForm => binding == B::Reference,
             Self::ValueList => matches!(binding, B::ValueList { .. }),
@@ -231,6 +266,15 @@ const fn event(id: &'static str) -> Setting {
     }
 }
 
+const DATA_PATH: Setting = setting(
+    "DataPath",
+    PaletteCategory::Main,
+    PaletteEditor::Binding,
+    PlatformPropertyValue::Empty,
+);
+const EMPTY_DATA_PATH: PaletteDefinition =
+    DATA_PATH.definition.with_source(SettingSource::Unmapped);
+
 // Native Configurator 8.3.27, Version8_3_27, in ordinary forms and value table columns.
 // Keep the rows in native order. A rule omits settings absent in the selected context.
 const INPUT_FIELD: &[Setting] = {
@@ -252,7 +296,7 @@ const INPUT_FIELD: &[Setting] = {
         setting("Type", Main, Enum, Empty)
             .from(SettingSource::Unmapped)
             .on(Rule::Unbound),
-        setting("DataPath", Main, Binding, Empty),
+        DATA_PATH,
         setting("TitleLocation", Main, Enum, Auto).captions(&[("Top", "top")]),
         setting("Visible", Main, Boolean, CHECKED),
         setting("UserVisibility", Main, Dialog, OPEN).from(Property("UserVisible")),
