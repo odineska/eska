@@ -41,7 +41,21 @@ pub struct ExtensionArgs {
 #[derive(Debug, Subcommand)]
 pub enum ExtensionCommand {
     #[command(disable_help_flag = true)]
+    Install(InstallExtensionArgs),
+    #[command(disable_help_flag = true)]
     Remove(RemoveExtensionArgs),
+}
+
+#[derive(Debug, Args)]
+pub struct InstallExtensionArgs {
+    #[arg(long, value_enum, default_value = "test")]
+    pub profile: ProfileArg,
+    #[arg(long)]
+    pub confirm: Option<String>,
+    #[arg(long, value_enum, default_value = "human")]
+    pub format: OutputFormat,
+    #[arg(short, long, action = ArgAction::Help)]
+    help: Option<bool>,
 }
 
 #[derive(Debug, Args)]
@@ -100,6 +114,13 @@ pub fn localize_extension(command: clap::Command, localizer: &Localizer) -> clap
     command
         .about(localizer.text("runtime-extension-about"))
         .mut_arg("help", |arg| arg.help(localizer.text("cli-help")))
+        .mut_subcommand("install", |command| {
+            localize(command, localizer)
+                .about(localizer.text("runtime-extension-install-about"))
+                .mut_arg("confirm", |arg| {
+                    arg.help(localizer.text("runtime-apply-confirm-help"))
+                })
+        })
         .mut_subcommand("remove", |command| {
             localize(command, localizer)
                 .about(localizer.text("runtime-extension-remove-about"))

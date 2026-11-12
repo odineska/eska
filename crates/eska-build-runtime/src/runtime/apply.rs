@@ -3,6 +3,7 @@
 pub mod application;
 mod descriptor;
 mod extension;
+pub mod installation;
 mod picture;
 pub mod removal;
 mod structure;
@@ -153,6 +154,9 @@ pub enum ApplyError {
     ExtensionAmbiguous,
     ExtensionUnavailable,
     ExtensionNotInstalled(String),
+    ExtensionAlreadyInstalled(String),
+    ExtensionUuidInUse(String),
+    ExtensionInstallationIncomplete(String),
     ExtensionIdentityMismatch,
     ExtensionHasDependent(String),
     ForceRequired,
@@ -259,19 +263,10 @@ fn write_plan(
         .take()
         .or_else(|| structure::Root::read(source, target.project_type()));
     let state = mark_pending(&target.state, confirmation.as_bytes())?;
-    let directory = target.state.parent().ok_or(ApplyError::InvalidState)?;
 
     progress(Stage::Import);
     match plan.mode {
-        Mode::Initialize => {
-            target.command(
-                &["import"],
-                &[native_path(source).as_os_str().to_owned()],
-                None,
-                None,
-                Stage::Import,
-            )?;
-        }
+        Mode::Initialize => target.import_full(source)?,
         Mode::Incremental => {
             let mut input = tempfile::tempfile().map_err(ApplyError::Io)?;
             for path in plan
@@ -302,17 +297,22 @@ fn write_plan(
         descriptors,
         root,
     };
+    save_baseline(&target.state, &state, &document)?;
+    Ok(generation)
+}
+
+fn save_baseline(state: &Path, pending: &Path, document: &Baseline) -> Result<(), ApplyError> {
+    let directory = state.parent().ok_or(ApplyError::InvalidState)?;
     let mut temp = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
     {
         let mut writer = BufWriter::new(temp.as_file_mut());
-        serde_json::to_writer(&mut writer, &document).map_err(|_| ApplyError::InvalidState)?;
+        serde_json::to_writer(&mut writer, document).map_err(|_| ApplyError::InvalidState)?;
         writer.flush().map_err(ApplyError::Io)?;
     }
     temp.as_file().sync_all().map_err(ApplyError::Io)?;
-    temp.persist(&target.state)
+    temp.persist(state)
         .map_err(|error| ApplyError::Io(error.error))?;
-    fs::remove_file(state).map_err(ApplyError::Io)?;
-    Ok(generation)
+    fs::remove_file(pending).map_err(ApplyError::Io)
 }
 
 fn mark_pending(state: &Path, contents: &[u8]) -> Result<PathBuf, ApplyError> {
@@ -325,6 +325,14 @@ fn mark_pending(state: &Path, contents: &[u8]) -> Result<PathBuf, ApplyError> {
         .persist(&pending)
         .map_err(|error| ApplyError::Io(error.error))?;
     Ok(pending)
+}
+
+fn read_pending(state: &Path) -> Result<Option<Vec<u8>>, ApplyError> {
+    match fs::read(state.with_extension("pending")) {
+        Ok(bytes) => Ok(Some(bytes)),
+        Err(error) if error.kind() == io::ErrorKind::NotFound => Ok(None),
+        Err(error) => Err(ApplyError::Io(error)),
+    }
 }
 
 struct Target {
@@ -616,6 +624,14 @@ impl Target {
         } else {
             None
         };
+        Ok(Observation {
+            generation,
+            configuration_generation,
+            dependency_generations: self.observe_dependencies()?,
+        })
+    }
+
+    fn observe_dependencies(&self) -> Result<BTreeMap<String, String>, ApplyError> {
         let mut dependency_generations = BTreeMap::new();
         for dependency in &self.dependencies {
             self.verify_installed(dependency)?;
@@ -624,14 +640,25 @@ impl Target {
                 self.generation_for(Some(dependency))?,
             );
         }
-        Ok(Observation {
-            generation,
-            configuration_generation,
-            dependency_generations,
-        })
+        Ok(dependency_generations)
     }
 
     fn verify_installed(&self, extension: &ExtensionIdentity) -> Result<(), ApplyError> {
+        match self.installed_uuid(&extension.name) {
+            Ok(Some(uuid)) if uuid == extension.uuid => Ok(()),
+            Ok(_) => Err(ApplyError::ExtensionIdentityMismatch),
+            Err(ApplyError::PlatformFailed(Stage::Inspect)) => {
+                Err(if self.extension_listed(&extension.name)? == Some(false) {
+                    ApplyError::ExtensionNotInstalled(extension.name.clone())
+                } else {
+                    ApplyError::ExtensionUnavailable
+                })
+            }
+            Err(error) => Err(error),
+        }
+    }
+
+    fn installed_uuid(&self, name: &str) -> Result<Option<String>, ApplyError> {
         let output = tempfile::Builder::new()
             .prefix("extension-")
             .tempdir_in(self.scratch.path())
@@ -645,31 +672,21 @@ impl Target {
         } else {
             &["export", "info"]
         };
-        let result = self.command_for(
-            Some(extension),
+        self.config_output(
+            Some(name),
             command,
             &[option("--out", directory)],
             None,
             None,
             Stage::Inspect,
-        );
-        if matches!(result, Err(ApplyError::PlatformFailed(Stage::Inspect))) {
-            return Err(if self.extension_listed(&extension.name)? == Some(false) {
-                ApplyError::ExtensionNotInstalled(extension.name.clone())
-            } else {
-                ApplyError::ExtensionUnavailable
-            });
-        }
-        result?;
-        let matches = if standalone {
-            extension::identity(directory).as_ref() == Some(extension)
+        )?;
+        Ok(if standalone {
+            extension::identity(directory)
+                .filter(|extension| extension.name == name)
+                .map(|extension| extension.uuid)
         } else {
-            extension::installed_uuid(directory, &extension.name).as_ref() == Some(&extension.uuid)
-        };
-        if !matches {
-            return Err(ApplyError::ExtensionIdentityMismatch);
-        }
-        Ok(())
+            extension::installed_uuid(directory, name)
+        })
     }
 
     fn extension_listed(&self, name: &str) -> Result<Option<bool>, ApplyError> {
@@ -704,6 +721,17 @@ impl Target {
         self.command_for(self.extension.as_ref(), command, extra, cwd, input, stage)
     }
 
+    fn import_full(&self, source: &Path) -> Result<(), ApplyError> {
+        self.command(
+            &["import"],
+            &[native_path(source).as_os_str().to_owned()],
+            None,
+            None,
+            Stage::Import,
+        )?;
+        Ok(())
+    }
+
     fn command_for(
         &self,
         extension: Option<&ExtensionIdentity>,
@@ -713,13 +741,20 @@ impl Target {
         input: Option<File>,
         stage: Stage,
     ) -> Result<Vec<u8>, ApplyError> {
-        self.config_output(extension, command, extra, cwd, input, stage)
-            .map(|output| output.stdout)
+        self.config_output(
+            extension.map(|extension| extension.name.as_str()),
+            command,
+            extra,
+            cwd,
+            input,
+            stage,
+        )
+        .map(|output| output.stdout)
     }
 
     fn config_output(
         &self,
-        extension: Option<&ExtensionIdentity>,
+        extension: Option<&str>,
         command: &[&str],
         extra: &[OsString],
         cwd: Option<&Path>,
@@ -740,7 +775,7 @@ impl Target {
         }
         arguments.extend_from_slice(&self.authentication);
         if let Some(extension) = extension {
-            arguments.push(format!("--extension={}", extension.name).into());
+            arguments.push(format!("--extension={extension}").into());
         }
         arguments.extend_from_slice(extra);
         let output = self
@@ -810,11 +845,7 @@ fn plan(
     initialize: bool,
     baseline: Result<Baseline, ReviewReason>,
 ) -> Result<Plan, ApplyError> {
-    let pending = match fs::read(target.state.with_extension("pending")) {
-        Ok(bytes) => Some(bytes),
-        Err(error) if error.kind() == io::ErrorKind::NotFound => None,
-        Err(error) => return Err(ApplyError::Io(error)),
-    };
+    let pending = read_pending(&target.state)?;
     let delta = baseline
         .as_ref()
         .ok()

@@ -298,6 +298,9 @@ case "$1:$2:$3" in
         cat "$dir/extension-list" ;;
     infobase:config:import|infobase:config:apply)
         printf '%s:%s\n' "$3" "$name" >> "$dir/writes"
+        if test "$3" = import && test -f "$dir/list-after-import"; then
+            cp "$dir/list-after-import" "$dir/extension-list" || exit 5
+        fi
         if test "$3" = apply; then
             if test -f "$dir/fail-$name"; then exit 4; fi
             if test -f "$dir/advance-generations"; then
@@ -382,15 +385,130 @@ fn extension_record(name: &str) -> String {
 }
 
 fn remove_extension(root: &Path, lang: &str, args: &[&str]) -> (Output, Value) {
+    extension_operation(root, lang, "remove", args)
+}
+
+fn extension_operation(root: &Path, lang: &str, action: &str, args: &[&str]) -> (Output, Value) {
     let output = Command::new(env!("CARGO_BIN_EXE_eska-build"))
         .current_dir(root)
         .env("TMPDIR", root)
-        .args(["--lang", lang, "extension", "remove", "--format", "json"])
+        .args(["--lang", lang, "extension", action, "--format", "json"])
         .args(args)
         .output()
         .unwrap();
     let value = serde_json::from_slice(&output.stdout).unwrap();
     (output, value)
+}
+
+#[test]
+fn extension_install_checks_the_catalog_dependencies_and_installed_identities() {
+    let fixture = TestDir::new();
+    let (base, one) = prepare_extensions(&fixture.0);
+    let inventory = base.join("extension-list");
+    let install = |lang, args: &[&str]| extension_operation(&one, lang, "install", args);
+    fs::write(
+        &inventory,
+        extension_record("One") + &extension_record("Two"),
+    )
+    .unwrap();
+    let (output, installed) = install("en-US", &[]);
+    assert!(!output.status.success());
+    assert_eq!(installed["error"]["code"], "extension_already_installed");
+    let (output, prod) = install("ru-RU", &["--profile", "prod"]);
+    assert!(!output.status.success());
+    assert_eq!(prod["error"]["code"], "forbidden_action");
+
+    let dependency = base.join("installed-Two.xml");
+    let metadata = fs::read(&dependency).unwrap();
+    fs::remove_file(&dependency).unwrap();
+    fs::write(&inventory, "").unwrap();
+    assert_eq!(
+        install("ru-RU", &[]).1["error"],
+        serde_json::json!({"code":"extension_not_installed","extension":"Two"})
+    );
+    fs::write(&dependency, metadata).unwrap();
+    let alias = fs::read_to_string(base.join("installed-One.xml"))
+        .unwrap()
+        .replace("Configuration.One", "Configuration.Alias");
+    fs::write(base.join("installed-Alias.xml"), alias).unwrap();
+    fs::write(
+        &inventory,
+        extension_record("Two") + &extension_record("Alias"),
+    )
+    .unwrap();
+    assert_eq!(
+        install("en-US", &[]).1["error"],
+        serde_json::json!({"code":"extension_uuid_in_use","extension":"Alias"})
+    );
+
+    fs::write(&inventory, extension_record("Two")).unwrap();
+    let (output, preview) = install("en-US", &[]);
+    assert!(output.status.success(), "{preview}");
+    assert_eq!(preview, install("ru-RU", &[]).1);
+    assert_eq!(
+        preview["plan"]["dependency_generations"]["Two"],
+        "2".repeat(40)
+    );
+    assert_eq!(
+        preview["plan"]["import_files"],
+        serde_json::json!(["Configuration.xml", "Module.bsl"])
+    );
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let module = one.join("src/Module.bsl");
+    fs::write(&module, "A = 2;").unwrap();
+    assert_eq!(
+        install("en-US", &["--confirm", token]).1["error"]["code"],
+        "stale_preview"
+    );
+    assert!(!base.join("writes").exists());
+    fs::write(&module, "A = 1;").unwrap();
+    fs::write(
+        base.join("list-after-import"),
+        extension_record("Two") + &extension_record("One"),
+    )
+    .unwrap();
+    let (output, installed) = install("ru-RU", &["--confirm", token]);
+    assert!(output.status.success(), "{installed}");
+    assert_eq!(installed["status"], "installed");
+    assert_eq!(
+        fs::read_to_string(base.join("writes")).unwrap(),
+        "import:One\napply:One\n"
+    );
+    assert_eq!(apply(&one, "ru-RU", &[]).1["plan"]["mode"], "unchanged");
+}
+
+#[test]
+fn failed_extension_install_can_be_completed_by_explicit_full_apply() {
+    let fixture = TestDir::new();
+    let (base, one) = prepare_extensions(&fixture.0);
+    fs::write(base.join("extension-list"), extension_record("Two")).unwrap();
+    fs::write(
+        base.join("list-after-import"),
+        extension_record("Two") + &extension_record("One"),
+    )
+    .unwrap();
+    fs::write(base.join("fail-One"), "").unwrap();
+    let install = |args: &[&str]| extension_operation(&one, "en-US", "install", args);
+    let (_, preview) = install(&[]);
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (output, failed) = install(&["--confirm", token]);
+    assert!(!output.status.success());
+    assert_eq!(failed["error"]["code"], "apply_failed");
+    assert_eq!(
+        install(&[]).1["error"]["code"],
+        "extension_installation_incomplete"
+    );
+    assert_eq!(
+        apply(&one, "en-US", &[]).1["error"]["code"],
+        "incomplete_apply"
+    );
+    fs::remove_file(base.join("fail-One")).unwrap();
+    initialize(&one);
+    assert_eq!(apply(&one, "en-US", &[]).1["plan"]["mode"], "unchanged");
+    assert_eq!(
+        install(&[]).1["error"]["code"],
+        "extension_already_installed"
+    );
 }
 
 #[test]

@@ -136,6 +136,9 @@ pub fn run() -> ExitCode {
             commands::runtime::apply(&args, &cli.project_dir, &localizer)
         }
         Some(Commands::Extension(args)) => match args.command {
+            runtime::ExtensionCommand::Install(args) => {
+                commands::runtime::install_extension(&args, &cli.project_dir, &localizer)
+            }
             runtime::ExtensionCommand::Remove(args) => {
                 commands::runtime::remove_extension(&args, &cli.project_dir, &localizer)
             }

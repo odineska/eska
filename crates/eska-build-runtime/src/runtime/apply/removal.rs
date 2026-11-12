@@ -7,7 +7,7 @@ use serde::Serialize;
 
 use super::{
     ApplyError, ExtensionIdentity, Stage, Target, catalog_digest, checksum, extension, lock,
-    mark_pending, native_path, require_test, source_snapshot,
+    mark_pending, native_path, read_pending, require_test, source_snapshot,
 };
 
 const MARKER: &[u8] = b"extension-remove\0";
@@ -85,11 +85,7 @@ fn review(target: &Target, dependents: &[String]) -> Result<Plan, ApplyError> {
         .extension_listing()?
         .ok_or(ApplyError::ExtensionUnavailable)?;
     let inventory = extension::inventory(&listing).ok_or(ApplyError::ExtensionUnavailable)?;
-    let pending = match fs::read(target.state.with_extension("pending")) {
-        Ok(bytes) => Some(bytes),
-        Err(error) if error.kind() == io::ErrorKind::NotFound => None,
-        Err(error) => return Err(ApplyError::Io(error)),
-    };
+    let pending = read_pending(&target.state)?;
     let name = identity.name.to_lowercase();
     let mut matches = inventory
         .iter()
