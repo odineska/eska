@@ -1,6 +1,9 @@
 //! Plan and apply Designer XML changes to an existing test infobase.
 
 mod descriptor;
+mod structure;
+
+pub use structure::{ObjectChange, ObjectKind, ObjectOperation};
 
 use std::{
     collections::BTreeMap,
@@ -106,10 +109,14 @@ pub struct Plan {
     pub platform_version: String,
     pub changes: BTreeMap<PathBuf, Change>,
     pub import_files: Option<Vec<PathBuf>>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub object_changes: Vec<ObjectChange>,
     pub confirmation: Option<String>,
     pub inspection: Inspection,
     #[serde(skip)]
     descriptors: descriptor::Shapes,
+    #[serde(skip)]
+    root: Option<structure::Root>,
 }
 
 #[derive(Debug)]
@@ -134,6 +141,8 @@ struct Baseline {
     files: Catalog,
     #[serde(default)]
     descriptors: descriptor::Shapes,
+    #[serde(default)]
+    root: Option<structure::Root>,
 }
 
 /// Inspect the applied generation and prepare a reviewable plan for saved sources.
@@ -175,6 +184,7 @@ pub fn execute(
     } else {
         std::mem::take(&mut plan.descriptors)
     };
+    let root = plan.root.take().or_else(|| structure::Root::read(&source));
     let state = target.state.with_extension("pending");
     let directory = target.state.parent().ok_or(ApplyError::InvalidState)?;
     let mut marker = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
@@ -225,6 +235,7 @@ pub fn execute(
         generation,
         files: current,
         descriptors,
+        root,
     };
     let mut temp = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
     serde_json::to_writer(temp.as_file_mut(), &document).map_err(|_| ApplyError::InvalidState)?;
@@ -447,19 +458,68 @@ fn plan(
             }),
         ));
     }
+    let changes = delta.unwrap_or_else(|| changes(&Catalog::new(), current));
+    assemble_plan(
+        target,
+        source,
+        current,
+        initialize,
+        Reviewed {
+            baseline: baseline.ok(),
+            pending,
+            changes,
+            inspection,
+        },
+    )
+}
+
+struct Reviewed {
+    baseline: Option<Baseline>,
+    pending: Option<Vec<u8>>,
+    changes: BTreeMap<PathBuf, Change>,
+    inspection: Inspection,
+}
+
+fn assemble_plan(
+    target: &Target,
+    source: &Path,
+    current: &Catalog,
+    initialize: bool,
+    reviewed: Reviewed,
+) -> Result<Plan, ApplyError> {
+    let Reviewed {
+        baseline,
+        pending,
+        changes,
+        inspection,
+    } = reviewed;
     let empty = Catalog::new();
     let previous = baseline.as_ref().map_or(&empty, |saved| &saved.files);
+    let structural = baseline.as_ref().filter(|_| !initialize).and_then(|saved| {
+        structure::select(
+            source,
+            &changes,
+            &saved.files,
+            current,
+            saved.root.as_ref()?,
+            &saved.descriptors,
+        )
+    });
     let empty_descriptors = descriptor::Shapes::new();
     let descriptors = baseline
         .as_ref()
         .map_or(&empty_descriptors, |saved| &saved.descriptors);
-    let changes = delta.unwrap_or_else(|| changes(&empty, current));
     let (mode, import_files) = if initialize {
         (Mode::Initialize, None)
     } else if changes.is_empty() {
         (Mode::Unchanged, None)
     } else {
-        descriptor::import_files(source, &changes, current, descriptors)
+        structural
+            .as_ref()
+            .map_or_else(
+                || descriptor::import_files(source, &changes, current, descriptors),
+                |selection| Some(selection.files.clone()),
+            )
             .filter(|paths| paths.iter().all(|path| input_path(path).is_some()))
             .map_or((Mode::Unsupported, None), |paths| {
                 (Mode::Incremental, Some(paths))
@@ -484,15 +544,32 @@ fn plan(
     } else {
         None
     };
+    let (mut root, mut descriptors) = baseline.map_or((None, descriptor::Shapes::new()), |saved| {
+        (saved.root, saved.descriptors)
+    });
+    let object_changes = if mode == Mode::Incremental
+        && let Some(selection) = structural
+    {
+        root = Some(selection.root);
+        for path in selection.removed {
+            descriptors.remove(&path);
+        }
+        descriptors.extend(selection.shapes);
+        selection.objects
+    } else {
+        Vec::new()
+    };
     Ok(Plan {
         mode,
         target: target.identity.clone(),
         platform_version: target.platform.version().as_str().to_owned(),
         changes,
         import_files,
+        object_changes,
         confirmation,
         inspection,
-        descriptors: baseline.map_or_else(|_| descriptor::Shapes::new(), |saved| saved.descriptors),
+        descriptors,
+        root: if initialize { None } else { root },
     })
 }
 

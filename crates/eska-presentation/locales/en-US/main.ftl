@@ -1145,6 +1145,7 @@ runtime-apply-unsupported = Partial import is unavailable for these changes. Rev
 runtime-apply-added = Added
 runtime-apply-modified = Modified
 runtime-apply-removed = Removed
+runtime-apply-renamed = Renamed
 runtime-apply-baseline-required = No successful apply has been recorded for this test infobase. Review an explicit full import with --initialize.
 runtime-apply-baseline-changed = The infobase configuration generation changed outside ESKA. Review its state before establishing a new baseline with --initialize.
 runtime-apply-incomplete = A previous import or apply did not finish. Check the test infobase, then review an explicit full import with --initialize.

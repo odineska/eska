@@ -1145,6 +1145,7 @@ runtime-apply-unsupported = Для этих изменений частичны�
 runtime-apply-added = Добавлен
 runtime-apply-modified = Изменён
 runtime-apply-removed = Удалён
+runtime-apply-renamed = Переименован
 runtime-apply-baseline-required = Для тестовой базы ещё нет успешного применения. Просмотрите явный полный импорт с --initialize.
 runtime-apply-baseline-changed = Поколение конфигурации базы изменилось вне ESKA. Проверьте состояние базы перед новым снимком с --initialize.
 runtime-apply-incomplete = Предыдущий импорт или применение прерваны. Проверьте тестовую базу и просмотрите явный полный импорт с --initialize.

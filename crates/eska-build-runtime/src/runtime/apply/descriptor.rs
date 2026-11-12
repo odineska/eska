@@ -27,6 +27,13 @@ pub(super) struct Shape {
     structure: String,
 }
 
+impl Shape {
+    pub(super) fn uuid(&self, identity: &str) -> Option<String> {
+        let (id, uuid) = self.identities.first_key_value()?;
+        (self.identities.len() == 1 && id.as_str() == identity).then(|| uuid.to_ascii_lowercase())
+    }
+}
+
 pub(super) fn baseline(source: &Path, catalog: &Catalog) -> Shapes {
     let paths: Vec<_> = catalog
         .keys()
@@ -163,7 +170,7 @@ fn form_descriptor<'a>(model: &'a ObjectModel, path: &Path) -> Option<&'a Path> 
         .map(object_model::LogicalObject::descriptor_path)
 }
 
-fn shape(source: &Path, model: &ObjectModel, path: &Path) -> Option<Shape> {
+pub(super) fn shape(source: &Path, model: &ObjectModel, path: &Path) -> Option<Shape> {
     let objects = model.objects_for_changed_path(path);
     if !objects
         .iter()
@@ -177,24 +184,9 @@ fn shape(source: &Path, model: &ObjectModel, path: &Path) -> Option<Shape> {
         .map(|object| (object.id().clone(), object.uuid().to_owned()))
         .collect();
 
-    let mut contents = String::new();
-    File::open(source.join(path))
-        .ok()?
-        .take(MAX_DESCRIPTOR_BYTES + 1)
-        .read_to_string(&mut contents)
-        .ok()?;
-    if contents.len() as u64 > MAX_DESCRIPTOR_BYTES {
-        return None;
-    }
+    let contents = read_xml(&source.join(path))?;
     let contents = contents.trim_start_matches('\u{feff}');
-    let document = roxmltree::Document::parse_with_options(
-        contents,
-        roxmltree::ParsingOptions {
-            nodes_limit: 1_000_000,
-            ..Default::default()
-        },
-    )
-    .ok()?;
+    let document = parse_xml(contents)?;
     let root = document.root_element();
     let object = root.first_element_child()?;
     let properties = object
@@ -213,6 +205,27 @@ fn shape(source: &Path, model: &ObjectModel, path: &Path) -> Option<Shape> {
         identities,
         structure,
     })
+}
+
+pub(super) fn read_xml(path: &Path) -> Option<String> {
+    let mut contents = String::new();
+    File::open(path)
+        .ok()?
+        .take(MAX_DESCRIPTOR_BYTES + 1)
+        .read_to_string(&mut contents)
+        .ok()?;
+    (contents.len() as u64 <= MAX_DESCRIPTOR_BYTES).then_some(contents)
+}
+
+pub(super) fn parse_xml(contents: &str) -> Option<roxmltree::Document<'_>> {
+    roxmltree::Document::parse_with_options(
+        contents,
+        roxmltree::ParsingOptions {
+            nodes_limit: 1_000_000,
+            ..Default::default()
+        },
+    )
+    .ok()
 }
 
 fn has_extension(path: &Path, extension: &str) -> bool {

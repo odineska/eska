@@ -1,7 +1,8 @@
-use std::{path::Path, process::ExitCode};
+use std::{collections::BTreeSet, path::Path, process::ExitCode};
 
 use eska_build_runtime::runtime::apply::{
-    self, ApplyError, Change, Mode, Plan, Review, ReviewReason, Stage, Status,
+    self, ApplyError, Change, Mode, ObjectKind, ObjectOperation, Plan, Review, ReviewReason, Stage,
+    Status,
 };
 use eska_build_runtime::runtime::{self, RuntimeError};
 use eska_presentation::{
@@ -192,7 +193,11 @@ fn print_apply_plan(plan: &Plan, localizer: &Localizer) {
     );
     println!("{} ({})", plan.target, plan.platform_version);
     println!("{}", localizer.text(inspection_key(plan.inspection.status)));
+    let grouped = print_object_changes(plan, localizer);
     for (path, change) in &plan.changes {
+        if grouped.contains(path) {
+            continue;
+        }
         let label = localizer.text(change_key(*change));
         println!("{label} {}", path.display());
     }
@@ -208,6 +213,34 @@ fn print_apply_plan(plan: &Plan, localizer: &Localizer) {
     if let Some(confirmation) = &plan.confirmation {
         println!("--confirm {confirmation}");
     }
+}
+
+fn print_object_changes<'a>(
+    plan: &'a Plan,
+    localizer: &Localizer,
+) -> BTreeSet<&'a std::path::PathBuf> {
+    let mut grouped = BTreeSet::new();
+    for object in &plan.object_changes {
+        let action = localizer.text(match object.operation {
+            ObjectOperation::Added => "runtime-apply-added",
+            ObjectOperation::Removed => "runtime-apply-removed",
+            ObjectOperation::Renamed => "runtime-apply-renamed",
+        });
+        let kind = localizer.text(match object.kind {
+            ObjectKind::Language => "diff-metadata-language",
+            ObjectKind::CommonForm => "diff-metadata-common-form",
+        });
+        if let Some(previous) = &object.previous_name {
+            println!("{action} {kind} {previous} → {}", object.name);
+        } else {
+            println!("{action} {kind} {}", object.name);
+        }
+        for path in &object.paths {
+            grouped.insert(path);
+            println!("  {}", path.display());
+        }
+    }
+    grouped
 }
 
 fn apply_failure(

@@ -85,6 +85,81 @@ fn initialize(root: &Path) {
 }
 
 #[test]
+fn apply_proves_structural_identity_and_keeps_unrelated_root_xml_out_of_the_plan() {
+    let root = TestDir::new();
+    let root = &root.0;
+    prepare(root);
+    let source = root.join("src");
+    let languages = source.join("Languages");
+    fs::create_dir(&languages).unwrap();
+    let default = "9830bf6c-f182-4be1-9d98-642d2985cbca";
+    let new = "1130bf6c-f182-4be1-9d98-642d2985cbca";
+    let language = |name, uuid| {
+        format!(
+            r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><Language uuid="{uuid}"><Properties><Name>{name}</Name></Properties></Language></MetaDataObject>"#
+        )
+    };
+    let configuration = |name, children| {
+        format!(
+            r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><Configuration uuid="{default}"><Properties><Name>{name}</Name><DefaultLanguage>Language.Default</DefaultLanguage></Properties><ChildObjects><Language>Default</Language>{children}</ChildObjects></Configuration></MetaDataObject>"#
+        )
+    };
+    let main = source.join("Configuration.xml");
+    fs::write(languages.join("Default.xml"), language("Default", default)).unwrap();
+    fs::write(&main, configuration("Base", "")).unwrap();
+    initialize(root);
+
+    let added = languages.join("Added.xml");
+    fs::write(&added, language("Added", default)).unwrap();
+    fs::write(&main, configuration("Base", "<Language>Added</Language>")).unwrap();
+    let (_, preview) = apply(root, "en-US", &[]);
+    assert_eq!(preview["plan"]["mode"], "unsupported");
+
+    fs::write(&added, language("Added", new)).unwrap();
+    fs::write(&main, configuration("Other", "<Language>Added</Language>")).unwrap();
+    let (_, preview) = apply(root, "en-US", &[]);
+    assert_eq!(preview["plan"]["mode"], "unsupported");
+    fs::write(&main, configuration("Base", "<Language>Added</Language>")).unwrap();
+
+    for (operation, name, previous, expected) in [
+        ("added", "Added", None, "Languages/Added.xml"),
+        ("renamed", "Renamed", Some("Added"), "Languages/Renamed.xml"),
+        ("removed", "Renamed", None, "Languages/Default.xml"),
+    ] {
+        if operation == "renamed" {
+            fs::remove_file(&added).unwrap();
+            fs::write(languages.join("Renamed.xml"), language("Renamed", new)).unwrap();
+            fs::write(&main, configuration("Base", "<Language>Renamed</Language>")).unwrap();
+        } else if operation == "removed" {
+            fs::remove_file(languages.join("Renamed.xml")).unwrap();
+            fs::write(&main, configuration("Base", "")).unwrap();
+        }
+        let (out, preview) = apply(root, "en-US", &[]);
+        assert!(out.status.success());
+        assert_eq!(preview, apply(root, "ru-RU", &[]).1);
+        let plan = &preview["plan"];
+        assert_eq!(plan["mode"], "incremental");
+        assert_eq!(
+            plan["import_files"],
+            serde_json::json!(["Configuration.xml", expected])
+        );
+        let group = &plan["object_changes"][0];
+        assert_eq!(group["kind"], "language");
+        assert_eq!(group["operation"], operation);
+        assert_eq!(group["name"], name);
+        assert_eq!(group["previous_name"], serde_json::json!(previous));
+        let token = plan["confirmation"].as_str().unwrap();
+        assert!(
+            apply(root, "ru-RU", &["--confirm", token])
+                .0
+                .status
+                .success()
+        );
+        assert_eq!(apply(root, "en-US", &[]).1["plan"]["mode"], "unchanged");
+    }
+}
+
+#[test]
 fn apply_imports_existing_metadata_properties_and_their_form_resource() {
     let root = TestDir::new();
     let root = &root.0;
