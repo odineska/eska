@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "platform": "1C 8.3.27.2342, ALT 10 Distrobox",
+  "host": "Fedora Linux 44 Asahi Remix, Linux 7.2.12, AArch64",
+  "git": "2.56.0",
+  "compiler": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "builds": {
+    "eska": {
+      "version": "0.29.1",
+      "commit": "b0dd37bdff43bc21d4dcad06bffa500959361ea8",
+      "bytes": 5663984,
+      "sha256": "dfa033094cdc930c7e4e9c5fbfc7fb8623507a350562e085c06c12d8bd1f64af"
+    },
+    "v8-runner": {
+      "version": "0.17.1",
+      "commit": "fd41189af0649fa1ed0f68412636efa7c682e5f7",
+      "bytes": 12861264,
+      "sha256": "da8918f9c029f3a1337354d26f4a3cf379709a5f13ad75e71fd38fea71160c68"
+    }
+  },
+  "baseline": {
+    "mode": "file",
+    "git_worktree": true,
+    "common_modules": 1000,
+    "source_files": 2014,
+    "source_bytes": 17390977,
+    "service_file": "ConfigDumpInfo.xml",
+    "service_file_bytes": 4167,
+    "native_export_files": 2014,
+    "native_export_comparison": "identical files excluding ConfigDumpInfo.xml",
+    "final_export_tree_sha256": "02016c28cdf5928f795cc4e3affce9ce79770c7931cccc3a4efae3b3f46a4a26"
+  },
+  "import_files": [
+    "CommonModules/Bench0001/Ext/Module.bsl"
+  ],
+  "samples": [
+    {
+      "tool": "eska",
+      "value": 22000,
+      "import_bytes": 16737,
+      "stages": {
+        "preview": {
+          "seconds": 2.016427,
+          "platform_seconds": 1.909687,
+          "host_seconds": 0.10674,
+          "ibcmd_calls": 2,
+          "rss_kib": 54512,
+          "cpu_seconds": 0.38
+        },
+        "confirm": {
+          "seconds": 7.374338,
+          "platform_seconds": 7.062828,
+          "host_seconds": 0.31151,
+          "ibcmd_calls": 5,
+          "rss_kib": 55920,
+          "cpu_seconds": 1.11
+        }
+      }
+    },
+    {
+      "tool": "v8-runner",
+      "value": 22000,
+      "import_bytes": 16737,
+      "stages": {
+        "push": {
+          "seconds": 7.072902,
+          "platform_seconds": 6.964635,
+          "host_seconds": 0.108267,
+          "ibcmd_calls": 4,
+          "rss_kib": 54592,
+          "cpu_seconds": 0.77
+        }
+      }
+    },
+    {
+      "tool": "v8-runner",
+      "value": 22001,
+      "import_bytes": 16737,
+      "stages": {
+        "push": {
+          "seconds": 7.122341,
+          "platform_seconds": 6.999011,
+          "host_seconds": 0.12333,
+          "ibcmd_calls": 4,
+          "rss_kib": 55424,
+          "cpu_seconds": 0.77
+        }
+      }
+    },
+    {
+      "tool": "eska",
+      "value": 22001,
+      "import_bytes": 16737,
+      "stages": {
+        "preview": {
+          "seconds": 1.96663,
+          "platform_seconds": 1.868149,
+          "host_seconds": 0.098481,
+          "ibcmd_calls": 2,
+          "rss_kib": 53488,
+          "cpu_seconds": 0.37
+        },
+        "confirm": {
+          "seconds": 7.375203,
+          "platform_seconds": 7.028627,
+          "host_seconds": 0.346576,
+          "ibcmd_calls": 5,
+          "rss_kib": 56128,
+          "cpu_seconds": 1.1
+        }
+      }
+    },
+    {
+      "tool": "eska",
+      "value": 22002,
+      "import_bytes": 16737,
+      "stages": {
+        "preview": {
+          "seconds": 1.966223,
+          "platform_seconds": 1.883809,
+          "host_seconds": 0.082414,
+          "ibcmd_calls": 2,
+          "rss_kib": 55568,
+          "cpu_seconds": 0.4
+        },
+        "confirm": {
+          "seconds": 7.373902,
+          "platform_seconds": 7.033872,
+          "host_seconds": 0.34003,
+          "ibcmd_calls": 5,
+          "rss_kib": 55616,
+          "cpu_seconds": 1.12
+        }
+      }
+    },
+    {
+      "tool": "v8-runner",
+      "value": 22002,
+      "import_bytes": 16737,
+      "stages": {
+        "push": {
+          "seconds": 7.124044,
+          "platform_seconds": 6.990063,
+          "host_seconds": 0.133981,
+          "ibcmd_calls": 4,
+          "rss_kib": 56256,
+          "cpu_seconds": 0.76
+        }
+      }
+    },
+    {
+      "tool": "v8-runner",
+      "value": 22003,
+      "import_bytes": 16737,
+      "stages": {
+        "push": {
+          "seconds": 7.123495,
+          "platform_seconds": 6.987846,
+          "host_seconds": 0.135649,
+          "ibcmd_calls": 4,
+          "rss_kib": 54000,
+          "cpu_seconds": 0.77
+        }
+      }
+    },
+    {
+      "tool": "eska",
+      "value": 22003,
+      "import_bytes": 16737,
+      "stages": {
+        "preview": {
+          "seconds": 2.066583,
+          "platform_seconds": 1.941504,
+          "host_seconds": 0.125079,
+          "ibcmd_calls": 2,
+          "rss_kib": 53504,
+          "cpu_seconds": 0.43
+        },
+        "confirm": {
+          "seconds": 7.375541,
+          "platform_seconds": 7.039068,
+          "host_seconds": 0.336473,
+          "ibcmd_calls": 5,
+          "rss_kib": 56064,
+          "cpu_seconds": 1.11
+        }
+      }
+    },
+    {
+      "tool": "eska",
+      "value": 22004,
+      "import_bytes": 16737,
+      "stages": {
+        "preview": {
+          "seconds": 1.96627,
+          "platform_seconds": 1.88895,
+          "host_seconds": 0.07732,
+          "ibcmd_calls": 2,
+          "rss_kib": 56016,
+          "cpu_seconds": 0.38
+        },
+        "confirm": {
+          "seconds": 7.575593,
+          "platform_seconds": 7.216122,
+          "host_seconds": 0.359471,
+          "ibcmd_calls": 5,
+          "rss_kib": 54704,
+          "cpu_seconds": 1.17
+        }
+      }
+    },
+    {
+      "tool": "v8-runner",
+      "value": 22004,
+      "import_bytes": 16737,
+      "stages": {
+        "push": {
+          "seconds": 7.072895,
+          "platform_seconds": 6.953255,
+          "host_seconds": 0.11964,
+          "ibcmd_calls": 4,
+          "rss_kib": 54016,
+          "cpu_seconds": 0.76
+        }
+      }
+    }
+  ],
+  "source_trace": {
+    "strace": "6.19",
+    "value": 22005,
+    "stages": {
+      "v8-runner.push": {
+        "opened_files": 3,
+        "read_files": 3,
+        "read_calls": 7,
+        "read_bytes": 54025,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 9,
+        "execve_processes": 146,
+        "staged_source_files": 0
+      },
+      "eska.preview": {
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2014,
+        "read_bytes": 17390977,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 0,
+        "execve_processes": 69,
+        "staged_source_files": 0
+      },
+      "eska.confirm": {
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2014,
+        "read_bytes": 17390977,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 0,
+        "execve_processes": 171,
+        "staged_source_files": 2014
+      }
+    }
+  },
+  "same_size_mtime_control": {
+    "before": 22005,
+    "after": 22006,
+    "eska": {
+      "mode": "incremental",
+      "applied": true,
+      "git_status": "M src/CommonModules/Bench0001/Ext/Module.bsl"
+    },
+    "v8-runner": {
+      "applied": true,
+      "ibcmd_calls": 4,
+      "git_status": "M src/CommonModules/Bench0001/Ext/Module.bsl"
+    },
+    "source_size": 16737,
+    "mtime_restored_ns": true,
+    "equal_native_files": 2014
+  }
+}
