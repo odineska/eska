@@ -1,6 +1,7 @@
 //! One serialized debugger session. HTTP requests and poll results have a single owner.
 mod client;
 mod poll;
+mod values;
 
 use std::{
     collections::BTreeMap,
@@ -163,16 +164,13 @@ impl<W: Write> Session<'_, W> {
             }
             "launch" | "attach" => self.open(&request.command),
             "configurationDone" if self.server.is_some() && !self.configured => {
-                match self.config.launch.take().map(Client::launch).transpose() {
-                    Ok(client) => {
-                        self.client = client;
-                        self.configured = true;
-                        Ok(json!({}))
-                    }
-                    Err(_) => {
-                        self.ended = true;
-                        Err("runtime-client-failed")
-                    }
+                if let Ok(client) = self.config.launch.take().map(Client::launch).transpose() {
+                    self.client = client;
+                    self.configured = true;
+                    Ok(json!({}))
+                } else {
+                    self.ended = true;
+                    Err("runtime-client-failed")
                 }
             }
             "setBreakpoints" => self.set_breakpoints(&request.arguments),
@@ -341,11 +339,14 @@ impl<W: Write> Session<'_, W> {
             .state
             .frame(arguments["frameId"].as_u64().ok_or(INVALID)?)
             .ok_or(INVALID)?;
-        let reference = self.state.add_variable(Variable {
-            position,
-            path: Vec::new(),
-            indexed: false,
-        });
+        let reference = self
+            .state
+            .add_variable(Variable {
+                position,
+                path: Vec::new(),
+                indexed: false,
+            })
+            .ok_or(values::LIMIT)?;
         Ok(
             json!({"scopes":[{"name":self.language.text("debug-locals"),"presentationHint":"locals","expensive":false,"variablesReference":reference}]}),
         )
@@ -545,35 +546,18 @@ impl<W: Write> Session<'_, W> {
                 failed.value.text.clone()
             })
         } else if pending.request.command == "evaluate" {
-            results.first().map_or_else(|| Err(self.language.text("debug-evaluation-failed")), |result| {
-                let reference = if result.value.expandable {
-                    self.state.add_variable(Variable { indexed: result.value.indexed, ..pending.variable.clone() })
-                } else { 0 };
-                Ok(json!({"result":result.value.text,"type":result.value.kind,"variablesReference":reference}))
-            })
+            results
+                .first()
+                .ok_or("debug-evaluation-failed")
+                .and_then(|result| {
+                    values::evaluated(&mut self.state, &pending.variable, &result.value)
+                })
+                .map_err(|key| self.language.text(key))
         } else {
-            Ok(self.variables(&pending.variable, results))
+            values::children(&mut self.state, &pending.variable, results)
+                .map_err(|key| self.language.text(key))
         };
         self.output.response(&pending.request, result)
-    }
-
-    fn variables(&mut self, variable: &Variable, results: Vec<Calculation>) -> Value {
-        let children = results.into_iter().flat_map(|result| result.children).take(512).map(|value| {
-            let mut path = variable.path.clone();
-            let selector = if path.is_empty() {
-                Selector::Expression(value.name.clone())
-            } else if variable.indexed {
-                Selector::Index(value.name.parse().unwrap_or_default())
-            } else {
-                Selector::Property(value.name.clone())
-            };
-            path.push(selector);
-            let reference = if value.expandable && !value.name.is_empty() {
-                self.state.add_variable(Variable { position: variable.position.clone(), path, indexed: value.indexed })
-            } else { 0 };
-            json!({"name":value.name,"value":value.text,"type":value.kind,"variablesReference":reference})
-        }).collect::<Vec<_>>();
-        json!({"variables":children})
     }
 
     fn cancel(&mut self, arguments: &Value) -> io::Result<()> {
@@ -613,10 +597,13 @@ impl<W: Write> Session<'_, W> {
             .collect();
         for id in expired {
             if let Some(pending) = self.pending.remove(&id) {
-                self.output.response(
-                    &pending.request,
-                    Err(self.language.text("debug-evaluation-timeout")),
-                )?;
+                let key = if self.state.is_current(&pending.variable.position) {
+                    "debug-evaluation-timeout"
+                } else {
+                    INVALID
+                };
+                self.output
+                    .response(&pending.request, Err(self.language.text(key)))?;
             }
         }
         Ok(())

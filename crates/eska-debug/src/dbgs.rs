@@ -35,7 +35,7 @@ pub struct Frame {
     pub name: String,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum Selector {
     Expression(String),
     Property(String),

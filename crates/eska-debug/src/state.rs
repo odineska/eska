@@ -3,14 +3,14 @@ use std::collections::{BTreeMap, BTreeSet};
 
 use crate::dbgs::{Frame, Selector, Target};
 
-#[derive(Clone)]
+#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub struct Position {
     frame: u64,
     pub thread: u64,
     pub level: usize,
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub struct Variable {
     pub position: Position,
     pub path: Vec<Selector>,
@@ -28,6 +28,7 @@ pub struct State {
     pub threads: BTreeMap<u64, Thread>,
     frames: BTreeMap<u64, Position>,
     variables: BTreeMap<u64, Variable>,
+    variable_ids: BTreeMap<Variable, u64>,
 }
 
 impl State {
@@ -77,6 +78,8 @@ impl State {
         self.frames.retain(|_, position| position.thread != id);
         self.variables
             .retain(|_, variable| variable.position.thread != id);
+        self.variable_ids
+            .retain(|variable, _| variable.position.thread != id);
         if let Some(thread) = self.threads.get_mut(&id) {
             thread.stack = None;
         }
@@ -106,13 +109,20 @@ impl State {
         self.variables.get(&id).cloned()
     }
 
-    pub fn add_variable(&mut self, variable: Variable) -> u64 {
+    pub fn add_variable(&mut self, variable: Variable) -> Option<u64> {
+        if !self.is_current(&variable.position) {
+            return None;
+        }
+        if let Some(&id) = self.variable_ids.get(&variable) {
+            return Some(id);
+        }
         if self.variables.len() >= 8192 || variable.path.len() > 32 {
-            return 0;
+            return None;
         }
         let id = self.allocate();
+        self.variable_ids.insert(variable.clone(), id);
         self.variables.insert(id, variable);
-        id
+        Some(id)
     }
 
     const fn allocate(&mut self) -> u64 {
@@ -155,7 +165,41 @@ mod tests {
         });
         state.resume(first);
         assert!(state.frame(old).is_none());
-        assert!(state.variable(reference).is_none());
+        assert!(state.variable(reference.unwrap()).is_none());
         assert!(state.frame(other).is_some());
+    }
+
+    #[test]
+    fn repeated_expansion_reuses_handles_but_a_new_stop_does_not() {
+        let mut state = State::default();
+        let thread = state.add_thread(Target {
+            id: "one".into(),
+            kind: String::new(),
+            session: String::new(),
+            user: String::new(),
+        });
+        let frame = Frame {
+            module: None,
+            line: 3,
+            name: "test".into(),
+        };
+        state.stop(thread, vec![frame.clone()]);
+        let frame_id = state.threads[&thread].stack.as_ref().unwrap()[0].0;
+        let mut variable = Variable {
+            position: state.frame(frame_id).unwrap(),
+            path: vec![Selector::Expression("A".into())],
+            indexed: false,
+        };
+        let old = state.add_variable(variable.clone()).unwrap();
+        for _ in 0..10_000 {
+            assert_eq!(state.add_variable(variable.clone()), Some(old));
+        }
+        assert_eq!(state.variables.len(), 1);
+        state.stop(thread, vec![frame]);
+        assert!(state.variable(old).is_none());
+        assert_eq!(state.add_variable(variable.clone()), None);
+        let frame_id = state.threads[&thread].stack.as_ref().unwrap()[0].0;
+        variable.position = state.frame(frame_id).unwrap();
+        assert_ne!(state.add_variable(variable), Some(old));
     }
 }
