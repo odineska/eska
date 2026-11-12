@@ -10,6 +10,7 @@ pub mod discovery;
 pub mod forms;
 mod ignore;
 pub mod init;
+pub mod local_settings;
 pub mod metadata;
 mod metadata_disk_cache;
 pub mod metadata_edit;

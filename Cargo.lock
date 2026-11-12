@@ -831,6 +831,7 @@ dependencies = [
  "eska-project-core",
  "eska-terminal",
  "eska-tool-runtime",
+ "gix",
  "serde",
  "serde_json",
 ]
@@ -849,9 +850,11 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2",
+ "tempfile",
  "toml",
  "toml_edit",
  "unicode-general-category",
+ "url",
  "zip",
 ]
 

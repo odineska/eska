@@ -55,6 +55,8 @@ enum Commands {
     #[command(disable_help_flag = true)]
     Context(ContextArgs),
     #[command(disable_help_flag = true)]
+    SettingsLocal(crate::local_settings::SettingsArgs),
+    #[command(disable_help_flag = true)]
     New(NewArgs),
     #[command(disable_help_flag = true)]
     Init(InitArgs),
@@ -191,6 +193,9 @@ pub fn run() -> ExitCode {
         Some(Commands::Metadata(args)) => crate::metadata::run(args, &cli.project_dir, &localizer),
         Some(Commands::Version(args)) => crate::version::run(args, &cli.project_dir, &localizer),
         Some(Commands::Context(args)) => context::run(&cli.project_dir, args, &localizer),
+        Some(Commands::SettingsLocal(args)) => {
+            crate::local_settings::run(&cli.project_dir, args, &localizer)
+        }
         Some(Commands::New(args)) => operations::new(&cli.project_dir, args, &localizer),
         Some(Commands::Init(args)) => operations::init(&cli.project_dir, args, &localizer),
         Some(Commands::Validate(args)) => operations::validate(&cli.project_dir, args, &localizer),
@@ -211,6 +216,7 @@ fn localized(localizer: &Localizer) -> clap::Command {
             "analyzer-config"=>crate::analyzer_config::localize(command,localizer),
             "doctor" => standalone_help(crate::doctor::localize(command, localizer)),
             "metadata" => standalone_help(crate::metadata::localize(command, localizer)),
+            "settings-local" => crate::local_settings::localize(command, localizer),
             "version" => standalone_help(crate::version::localize(command, localizer)),
             _ => localize_operation(command, localizer),
         })

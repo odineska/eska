@@ -1084,6 +1084,7 @@ Options:
 | [`eska-project analyzer-config`](#command-eska-project-analyzer-config) | Производная конфигурация bsl-analyzer |
 | [`eska-project validate`](#command-eska-project-validate) | Проверить манифесты и корневые дескрипторы Designer XML |
 | [`eska-project context`](#command-eska-project-context) | Определить контекст выбранного приложения |
+| [`eska-project settings-local`](#command-eska-project-settings-local) | Прочитать, проверить или сохранить локальные профили запуска |
 | [`eska-project new`](#command-eska-project-new) | Создать проект Designer XML без инициализации Git |
 | [`eska-project init`](#command-eska-project-init) | Подключить существующую выгрузку Designer XML без инициализации Git |
 | [`eska-project metadata`](#command-eska-project-metadata) | Чтение и изменение существующих свойств метаданных через JSON |
@@ -1100,6 +1101,63 @@ Options:
 | [`eska-project metadata rename-apply`](#command-eska-project-metadata-rename-apply) | Применить проверенный план переименования по снимку источников |
 | [`eska-project metadata rename-recovery`](#command-eska-project-metadata-rename-recovery) | Проверить или восстановить прерванное переименование |
 | [`eska-project version bump`](#command-eska-project-version-bump) | Увеличить один компонент версии проекта |
+
+<a id="command-eska-project-settings-local"></a>
+
+### Локальные профили запуска
+
+```text
+eska-project --project-dir <путь> settings-local show --format json
+eska-project --project-dir <путь> settings-local validate
+eska-project --project-dir <путь> settings-local save --format json
+```
+
+`show` возвращает `settings`, `revision` и `git_protection` в JSON версии 1.
+Документ содержит локальные пути и адреса. `validate` проверяет объявления
+профилей. `save` читает JSON с полями `revision` и `settings` из stdin и
+возвращает новую ревизию. Для первого сохранения используйте `revision: null`.
+Если файл изменился после чтения, прочитайте его заново и повторите правки.
+
+Файл `.eska/settings_local.toml` относится к одному проекту. Если проект
+находится в Git, сохранение допускается, когда файл исключён и его нет в
+индексе. Для ранее созданного проекта проверьте `.gitignore` или локальные
+исключения репозитория. `show` сообщает о проблеме защиты в `git_protection`.
+
+Каждый профиль состоит из отдельных таблиц для базы, платформы и HTTP-отладки.
+Следующий пример содержит только условные значения.
+
+```toml
+[test.infobase]
+kind = "file"
+path = "local/test-base"
+
+[test.runner]
+kind = "distrobox"
+container = "onec"
+version = "8.3.27.2342"
+
+[prod.infobase]
+kind = "cluster"
+host = "server.example.invalid"
+name = "demo"
+
+[prod.runner]
+kind = "local"
+
+[prod.debug]
+url = "http://debug.example.invalid:1550"
+
+[prod.authentication]
+user = "developer"
+password_env = "ESKA_DEMO_PASSWORD"
+```
+
+Путь к файловой базе может быть относительным к корню проекта. Профиль
+автономной базы использует `kind = "standalone"`, `url`, `name` и, для
+администрирования тестовой базы, `admin_url`. В `runner` можно указать
+точную `version` и абсолютный путь `ibcmd`. `debug.url` задаёт отдельный
+HTTP-сервер 1С. `password_env` содержит имя переменной окружения, а её
+значение передаётся отдельно от TOML.
 
 <a id="command-eska-project"></a>
 

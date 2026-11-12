@@ -10,6 +10,7 @@ mod add;
 mod analyzer_config;
 mod cli;
 mod context;
+mod local_settings;
 mod operations;
 mod response;
 
