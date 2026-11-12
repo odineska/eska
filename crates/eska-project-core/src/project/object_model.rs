@@ -241,8 +241,18 @@ impl std::error::Error for ObjectModelError {
 /// Returns a structured error for unreadable paths, unsafe symlinks, malformed
 /// descriptors, missing identity fields or duplicate stable identities.
 pub fn discover(project: &Project) -> Result<ObjectModel, ObjectModelError> {
-    let files = collect_source_files(project.source())?;
-    let project_type = project.configuration().project_type();
+    discover_from_source(project.source(), project.configuration().project_type())
+}
+
+/// Index a Designer XML source directory whose export type is already known.
+///
+/// # Errors
+/// Returns the same source-tree and descriptor errors as [`discover`].
+pub fn discover_from_source(
+    source: &Path,
+    project_type: super::ProjectType,
+) -> Result<ObjectModel, ObjectModelError> {
+    let files = collect_source_files(source)?;
     let mut objects: BTreeMap<ObjectId, LogicalObject> = BTreeMap::new();
     let mut by_logical_path = BTreeMap::new();
     let mut by_source_path: BTreeMap<PathBuf, BTreeSet<ObjectId>> = BTreeMap::new();

@@ -24,7 +24,8 @@ struct Dap {
 
 impl Dap {
     fn start(root: &Path, profile: &str, mode: &str) -> Self {
-        let mut process = Command::new(env!("CARGO_BIN_EXE_eska-debug"))
+        let mut command = Command::new(env!("CARGO_BIN_EXE_eska-debug"));
+        command
             .current_dir(root)
             .args([
                 "--lang",
@@ -39,7 +40,28 @@ impl Dap {
                 ["--sources", "current"].as_slice()
             } else {
                 &[]
-            })
+            });
+        Self::spawn(command)
+    }
+
+    fn standalone(root: &Path, language: &str, launch: bool) -> Self {
+        let name = Path::new(env!("CARGO_BIN_EXE_eska-debug"))
+            .file_name()
+            .unwrap();
+        let binary = root.join(name);
+        fs::copy(env!("CARGO_BIN_EXE_eska-debug"), &binary).unwrap();
+        assert!(!root.join("eska.toml").exists());
+        assert!(!root.join(".eska").exists());
+        let mut command = Command::new(binary);
+        command
+            .current_dir(root)
+            .env("PATH", if launch { "/usr/bin:/bin" } else { "" })
+            .args(["--lang", language, "standalone"]);
+        Self::spawn(command)
+    }
+
+    fn spawn(mut command: Command) -> Self {
+        let mut process = command
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
             .spawn()
@@ -148,6 +170,107 @@ impl Dap {
             thread::sleep(Duration::from_millis(20));
         }
     }
+}
+
+#[test]
+#[ignore = "requires the owned standalone fixture and its HTTP debug server"]
+fn native_standalone_launch_with_standard_dap() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let args: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let mut dap = Dap::standalone(root, "en-US", true);
+    dap.success(
+        "initialize",
+        json!({"adapterID":"onec-http","linesStartAt1":true,"pathFormat":"path"}),
+    );
+    let invalid = dap.request(
+        "launch",
+        json!({"sourceRoot":"src","debugServerUrl":"https://127.0.0.1:1550"}),
+    );
+    assert_eq!(invalid["success"], false);
+    assert!(
+        invalid["message"]
+            .as_str()
+            .unwrap()
+            .contains("Invalid standalone DAP")
+    );
+    dap.success("launch", args);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let points = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":3}]}),
+    );
+    assert_eq!(points["breakpoints"][0]["verified"], true);
+    dap.success("configurationDone", json!({}));
+    verify_stop(&mut dap, &source, 1);
+    dap.shutdown();
+    assert!(!root.join(".eska").exists());
+}
+
+#[test]
+#[ignore = "requires a standalone fixture and an already running 1C client"]
+fn native_standalone_attaches_with_standard_dap() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let args: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let mut dap = Dap::standalone(root, "ru-RU", false);
+    dap.success("initialize", json!({"adapterID":"onec-http"}));
+    let invalid = dap.request(
+        "attach",
+        json!({"sourceRoot":"","debugServerUrl":"http://127.0.0.1:1550"}),
+    );
+    assert_eq!(invalid["success"], false);
+    assert!(
+        invalid["message"]
+            .as_str()
+            .unwrap()
+            .contains("Недопустимые параметры")
+    );
+    dap.success("attach", args);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let points = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":7}]}),
+    );
+    assert_eq!(points["breakpoints"][0]["verified"], true);
+    dap.success("configurationDone", json!({}));
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let top = &stack["stackFrames"][0];
+    assert_eq!(top["source"]["path"], json!(source));
+    assert_eq!(top["line"], 7);
+    let scope = dap.success("scopes", json!({"frameId":top["id"]}));
+    let locals = dap.success(
+        "variables",
+        json!({"variablesReference":scope["scopes"][0]["variablesReference"]}),
+    );
+    assert!(
+        locals["variables"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|value| value["name"] == "A" && value["value"] == "41")
+    );
+    assert_eq!(
+        dap.success(
+            "evaluate",
+            json!({"frameId":top["id"],"expression":"A + 1"})
+        )["result"],
+        "42"
+    );
+    dap.success("next", json!({"threadId":thread}));
+    let thread = dap.stop();
+    assert_eq!(
+        dap.success("stackTrace", json!({"threadId":thread}))["stackFrames"][0]["line"],
+        8
+    );
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[]}),
+    );
+    dap.shutdown();
 }
 
 #[test]
@@ -381,14 +504,49 @@ fn native_maps_breakpoints_and_stack_across_the_application() {
     let workspace = root.parent().unwrap();
     let module = "src/Ext/ManagedApplicationModule.bsl";
     let base = root.join(module);
-    let mut extensions = BTreeMap::from([
+    let extensions = BTreeMap::from([
         (workspace.join("первое расширение").join(module), "111"),
         (workspace.join("второе расширение").join(module), "222"),
     ]);
     let mut dap = Dap::start(root, "test", "launch");
     dap.success("initialize", json!({"adapterID":"eska"}));
     dap.success("launch", json!({}));
-    for (source, line) in std::iter::once((&base, 3)).chain(extensions.keys().map(|path| (path, 4)))
+    verify_application(&mut dap, &base, extensions);
+    dap.shutdown();
+}
+
+#[test]
+#[ignore = "requires standalone Designer XML sources with two installed extensions"]
+fn native_standalone_maps_explicit_extension_roots() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let args: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let mut dap = Dap::standalone(root, "en-US", true);
+    dap.success("initialize", json!({"adapterID":"onec-http"}));
+    dap.success("launch", args);
+    let base = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let extensions = BTreeMap::from([
+        (
+            root.join("первое расширение/Ext/ManagedApplicationModule.bsl"),
+            "111",
+        ),
+        (
+            root.join("второе расширение/Ext/ManagedApplicationModule.bsl"),
+            "222",
+        ),
+    ]);
+    verify_application(&mut dap, &base, extensions);
+    dap.shutdown();
+}
+
+fn verify_application(
+    dap: &mut Dap,
+    base: &Path,
+    mut extensions: BTreeMap<std::path::PathBuf, &str>,
+) {
+    for (source, line) in
+        std::iter::once((base, 3)).chain(extensions.keys().map(|path| (path.as_path(), 4)))
     {
         let points = dap.success(
             "setBreakpoints",
@@ -435,7 +593,6 @@ fn native_maps_breakpoints_and_stack_across_the_application() {
     let stack = dap.success("stackTrace", json!({"threadId":thread}));
     assert_eq!(stack["stackFrames"][0]["line"], 6, "{stack}");
     assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(base));
-    dap.shutdown();
 }
 
 impl Drop for Dap {

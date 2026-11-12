@@ -1,0 +1,46 @@
+{
+  "name": "onec-http-dap-example",
+  "displayName": "1C HTTP DAP Example",
+  "description": "Minimal VS Code contribution for the standalone eska-debug executable",
+  "publisher": "eska-example",
+  "version": "0.0.1",
+  "private": true,
+  "engines": { "vscode": "^1.109.0" },
+  "contributes": {
+    "languages": [{ "id": "bsl", "extensions": [".bsl"] }],
+    "breakpoints": [{ "language": "bsl" }],
+    "debuggers": [{
+      "type": "onec-http",
+      "label": "1C HTTP (standalone)",
+      "program": "./eska-debug",
+      "args": ["standalone"],
+      "windows": { "program": "./eska-debug.exe" },
+      "configurationAttributes": {
+        "attach": {
+          "required": ["sourceRoot", "debugServerUrl"],
+          "properties": {
+            "sourceRoot": { "type": "string" },
+            "extensionRoots": { "type": "array", "items": { "type": "string" } },
+            "debugServerUrl": { "type": "string" },
+            "infobaseAlias": { "type": "string" },
+            "targetId": { "type": "string" },
+            "autoAttachTypes": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "launch": {
+          "required": ["sourceRoot", "debugServerUrl", "infobase", "runner"],
+          "properties": {
+            "sourceRoot": { "type": "string" },
+            "extensionRoots": { "type": "array", "items": { "type": "string" } },
+            "debugServerUrl": { "type": "string" },
+            "infobaseAlias": { "type": "string" },
+            "infobase": { "type": "object" },
+            "runner": { "type": "object" },
+            "authentication": { "type": "object" },
+            "autoAttachTypes": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    }]
+  }
+}

@@ -262,10 +262,7 @@ impl Profile {
             "runner.ibcmd",
         )?;
         if let Some(debug) = &self.debug {
-            require(
-                host_only(&debug.url) && debug.url.starts_with("http://"),
-                "debug.url",
-            )?;
+            require(debug_server_url(&debug.url).is_some(), "debug.url")?;
             require(
                 debug
                     .auto_attach_types
@@ -341,6 +338,12 @@ fn infobase_name(value: &str) -> bool {
 
 fn host_only(value: &str) -> bool {
     http_url(value).is_some_and(|url| url.path() == "/")
+}
+
+/// Validate the origin of a plain HTTP debugger endpoint.
+#[must_use]
+pub fn debug_server_url(value: &str) -> Option<Url> {
+    http_url(value).filter(|url| url.scheme() == "http" && url.path() == "/")
 }
 
 fn http_url(value: &str) -> Option<Url> {

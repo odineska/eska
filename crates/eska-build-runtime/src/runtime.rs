@@ -59,6 +59,16 @@ pub fn profile(
 /// # Errors
 /// Returns a structured discovery or verification error.
 pub fn platform(project: &Project, profile: &Profile) -> Result<Ibcmd, RuntimeError> {
+    select_platform(
+        project.configuration().build_settings().platform_version(),
+        profile,
+    )
+}
+
+fn select_platform(
+    project_version: Option<&PlatformVersion>,
+    profile: &Profile,
+) -> Result<Ibcmd, RuntimeError> {
     let (version, ibcmd, container) = match &profile.runner {
         Runner::Local { version, ibcmd } => (version, ibcmd, None),
         Runner::Distrobox {
@@ -74,10 +84,7 @@ pub fn platform(project: &Project, profile: &Profile) -> Result<Ibcmd, RuntimeEr
         .transpose()
         .map_err(|_| RuntimeError::PlatformUnavailable)?;
     let installed;
-    let version = if let Some(version) = configured
-        .as_ref()
-        .or_else(|| project.configuration().build_settings().platform_version())
-    {
+    let version = if let Some(version) = configured.as_ref().or(project_version) {
         version
     } else {
         installed = Ibcmd::installed(&options).map_err(RuntimeError::Platform)?;
@@ -173,12 +180,20 @@ fn inspect_endpoint(url: &url::Url, default_port: u16) -> Result<(), RuntimeErro
 pub fn run(project: &Project, name: ProfileName) -> Result<(), RuntimeError> {
     let profile = profile(project, name, Action::Run)?;
     let platform = platform(project, &profile)?;
-    launch_client(project, &profile, &platform, false, None)
+    launch_client(
+        project.root(),
+        Some(&project.root().join(".eska")),
+        &profile,
+        &platform,
+        None,
+        None,
+    )
 }
 
 /// A debug client and its endpoint are resolved together before the DAP session is configured.
 pub struct DebugLaunch {
-    project: Project,
+    base: PathBuf,
+    scratch_parent: Option<PathBuf>,
     profile: Profile,
     platform: Ibcmd,
 }
@@ -187,14 +202,44 @@ impl DebugLaunch {
     /// Check the production/test action and prepare the same platform runner used for ordinary launch.
     /// # Errors
     /// Returns profile, platform or file-infobase availability errors.
-    pub fn prepare(project: Project, name: ProfileName) -> Result<Self, RuntimeError> {
-        let profile = profile(&project, name, Action::DebugLaunch)?;
+    pub fn prepare(project: &Project, name: ProfileName) -> Result<Self, RuntimeError> {
+        let profile = profile(project, name, Action::DebugLaunch)?;
+        Self::prepare_launch(
+            project.root().to_path_buf(),
+            Some(project.root().join(".eska")),
+            project.configuration().build_settings().platform_version(),
+            profile,
+        )
+    }
+
+    /// Prepare a native debug client without an ESKA project or local settings file.
+    /// # Errors
+    /// Rejects invalid runtime settings or an unavailable platform or file infobase.
+    pub fn prepare_standalone(base: PathBuf, profile: Profile) -> Result<Self, RuntimeError> {
+        let settings = local_settings::LocalSettings {
+            test: Some(profile),
+            prod: None,
+        };
+        let profile = settings
+            .resolve(&base, ProfileName::Test, Action::DebugLaunch)
+            .map_err(RuntimeError::Settings)?
+            .clone();
+        Self::prepare_launch(base, None, None, profile)
+    }
+
+    fn prepare_launch(
+        base: PathBuf,
+        scratch_parent: Option<PathBuf>,
+        version: Option<&PlatformVersion>,
+        profile: Profile,
+    ) -> Result<Self, RuntimeError> {
         if let Infobase::File { path } = &profile.infobase {
-            file_infobase(project.root(), path)?;
+            file_infobase(&base, path)?;
         }
-        let platform = platform(&project, &profile)?;
+        let platform = select_platform(version, &profile)?;
         Ok(Self {
-            project,
+            base,
+            scratch_parent,
             profile,
             platform,
         })
@@ -209,11 +254,17 @@ impl DebugLaunch {
     /// # Errors
     /// Returns native launch or cancellation errors.
     pub fn run(&self, cancelled: &AtomicBool) -> Result<(), RuntimeError> {
+        let endpoint = self
+            .profile
+            .debug
+            .as_ref()
+            .ok_or(RuntimeError::EndpointUnavailable)?;
         launch_client(
-            &self.project,
+            &self.base,
+            self.scratch_parent.as_deref(),
             &self.profile,
             &self.platform,
-            true,
+            Some(&endpoint.url),
             Some(cancelled),
         )
     }
@@ -223,16 +274,17 @@ impl DebugLaunch {
 /// # Errors
 /// Returns a settings, secret or process lifecycle error.
 fn launch_client(
-    project: &Project,
+    base: &Path,
+    scratch_parent: Option<&Path>,
     profile: &Profile,
     platform: &Ibcmd,
-    debug: bool,
+    debugger_url: Option<&str>,
     cancelled: Option<&AtomicBool>,
 ) -> Result<(), RuntimeError> {
     let mut arguments = vec![OsString::from("ENTERPRISE")];
     match &profile.infobase {
         Infobase::File { path } => {
-            let path = file_infobase(project.root(), path)?;
+            let path = file_infobase(base, path)?;
             arguments.extend(["/F".into(), native_path(&path).as_os_str().to_owned()]);
         }
         Infobase::Cluster { host, name } => {
@@ -240,17 +292,13 @@ fn launch_client(
         }
         Infobase::Standalone { url, .. } => arguments.extend(["/WS".into(), url.into()]),
     }
-    if debug {
-        let endpoint = profile
-            .debug
-            .as_ref()
-            .ok_or(RuntimeError::PlatformUnavailable)?;
+    if let Some(debugger_url) = debugger_url {
         arguments.extend([
             "/DEBUG".into(),
             "-http".into(),
             "-attach".into(),
             "/DEBUGGERURL".into(),
-            (&endpoint.url).into(),
+            debugger_url.into(),
             "/DisableStartupMessages".into(),
             "/DisableStartupDialogs".into(),
         ]);
@@ -262,9 +310,10 @@ fn launch_client(
             arguments.extend(["/WA-".into(), "/P".into(), password]);
         }
     }
-    let scratch = tempfile::Builder::new()
-        .prefix("launch-")
-        .tempdir_in(project.root().join(".eska"))
+    let mut scratch = tempfile::Builder::new();
+    scratch.prefix("eska-launch-");
+    let scratch = scratch_parent
+        .map_or_else(|| scratch.tempdir(), |parent| scratch.tempdir_in(parent))
         .map_err(RuntimeError::Io)?;
     let client = platform.sibling_program("1cv8c");
     client

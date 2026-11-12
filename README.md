@@ -42,7 +42,7 @@ ESKA объединяет работу с выгрузкой Конфигура�
 | `eska-fmt` | Форматирование BSL и запросов без анализатора |
 | `eska-build` | Сборка, распаковка, import и patch средствами установленной платформы 1С |
 | `eska-vcs` | Git-workflow, состояние, semantic diff, история, сохранение и полки |
-| `eska-debug` | Опциональная HTTP-отладка 1С через штатный `dbgs` |
+| `eska-debug` | Опциональная HTTP-отладка 1С через штатный `dbgs`. [Самостоятельный режим DAP](docs/eska-debug-standalone.md) |
 
 Для дерева Explorer достаточно `eska-project`.
 [BSL Analyzer](https://github.com/itrous/bsl-analyzer) — отдельный внешний

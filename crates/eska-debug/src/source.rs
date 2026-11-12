@@ -1,13 +1,15 @@
 //! Resolve platform module identities from the existing Designer XML object model.
 use std::{
     collections::{BTreeMap, BTreeSet},
+    fs::File,
+    io::Read as _,
     path::{Path, PathBuf},
 };
 
 use eska_project_core::{
     application::project_application,
     project::{
-        Project, ProjectType,
+        Project, ProjectType, designer_xml,
         discovery::{self, DiscoveryContext},
         object_model,
     },
@@ -62,8 +64,43 @@ impl Sources {
         ) {
             return Ok(());
         }
-        let model = object_model::discover(project).map_err(|_| SourceError::Project)?;
-        let extension = if project.configuration().project_type() == ProjectType::Extension {
+        self.add_source(
+            project.source(),
+            project.configuration().project_type(),
+            extensions,
+        )
+    }
+
+    pub fn from_designer(
+        configuration: &Path,
+        extension_roots: &[PathBuf],
+    ) -> Result<Self, SourceError> {
+        let mut sources = Self {
+            modules: BTreeMap::new(),
+            paths: BTreeMap::new(),
+        };
+        let mut extensions = BTreeSet::new();
+        for (root, kind) in std::iter::once((configuration, ProjectType::Configuration)).chain(
+            extension_roots
+                .iter()
+                .map(|root| (root.as_path(), ProjectType::Extension)),
+        ) {
+            let root = root.canonicalize().map_err(|_| SourceError::Project)?;
+            validate_descriptor(&root, kind)?;
+            sources.add_source(&root, kind, &mut extensions)?;
+        }
+        Ok(sources)
+    }
+
+    fn add_source(
+        &mut self,
+        root: &Path,
+        kind: ProjectType,
+        extensions: &mut BTreeSet<String>,
+    ) -> Result<(), SourceError> {
+        let model =
+            object_model::discover_from_source(root, kind).map_err(|_| SourceError::Project)?;
+        let extension = if kind == ProjectType::Extension {
             let name = model
                 .objects()
                 .find(|object| object.descriptor_path() == Path::new("Configuration.xml"))
@@ -82,7 +119,7 @@ impl Sources {
                 let Some(property) = property_id(owner.metadata_type(), path) else {
                     continue;
                 };
-                let path = project.source().join(path);
+                let path = root.join(path);
                 let module = Module {
                     object: owner.uuid().to_ascii_lowercase(),
                     property: property.to_owned(),
@@ -113,6 +150,28 @@ impl Sources {
     pub fn path(&self, module: &Module) -> Option<&Path> {
         self.paths.get(module)?.as_deref()
     }
+}
+
+fn validate_descriptor(root: &Path, kind: ProjectType) -> Result<(), SourceError> {
+    const MAX_ROOT: u64 = 64 * 1024 * 1024;
+    let path = root
+        .join("Configuration.xml")
+        .canonicalize()
+        .map_err(|_| SourceError::Project)?;
+    if !path.starts_with(root) || !path.is_file() {
+        return Err(SourceError::Project);
+    }
+    let mut text = String::new();
+    let file = File::open(path).map_err(|_| SourceError::Project)?;
+    file.take(MAX_ROOT + 1)
+        .read_to_string(&mut text)
+        .map_err(|_| SourceError::Project)?;
+    if text.len() as u64 > MAX_ROOT
+        || designer_xml::project_type(&text).ok().flatten() != Some(kind)
+    {
+        return Err(SourceError::Project);
+    }
+    Ok(())
 }
 
 // These are property identifiers of the platform's metadata classes. Object UUIDs come

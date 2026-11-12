@@ -46,6 +46,12 @@ pub struct Config {
     pub mode: Mode,
     pub launch: Option<DebugLaunch>,
     pub production: bool,
+    pub attach_selection: Option<AttachSelection>,
+}
+
+pub enum AttachSelection {
+    MatchingTypes,
+    Exact(String),
 }
 
 type Failure = &'static str;
@@ -90,7 +96,7 @@ enum Input {
 }
 
 struct Session<'a, W> {
-    config: Config,
+    config: Option<Config>,
     output: Output<W>,
     language: &'a Localizer,
     server: Option<Arc<Server>>,
@@ -105,7 +111,7 @@ struct Session<'a, W> {
     ended: bool,
 }
 
-pub fn run(config: Config, language: &Localizer) -> io::Result<()> {
+pub fn run(config: Option<Config>, language: &Localizer) -> io::Result<()> {
     let (send, receive) = mpsc::sync_channel(32);
     let reader = send.clone();
     thread::Builder::new().spawn(move || {
@@ -202,17 +208,8 @@ impl<W: Write> Session<'_, W> {
                     "supportsCondition":true,"conditionDescription":self.language.text("debug-runtime-error-condition")}]}),
                 )
             }
-            "launch" | "attach" => self.open(&request.command),
-            "configurationDone" if self.server.is_some() && !self.configured => {
-                if let Ok(client) = self.config.launch.take().map(Client::launch).transpose() {
-                    self.client = client;
-                    self.configured = true;
-                    Ok(json!({}))
-                } else {
-                    self.ended = true;
-                    Err("runtime-client-failed")
-                }
-            }
+            "launch" | "attach" => self.open(&request),
+            "configurationDone" if self.server.is_some() && !self.configured => self.configure(),
             "setBreakpoints" => self.set_breakpoints(&request.arguments),
             "setExceptionBreakpoints" => self.set_exception_breakpoints(&request.arguments),
             "threads" if self.server.is_some() => Ok(self.threads()),
@@ -222,7 +219,8 @@ impl<W: Write> Session<'_, W> {
             "eska/listDebugTargets" => self.targets(),
             "eska/attachDebugTarget" => self.select_target(&request.arguments),
             "eska/getAutoAttachTypes" if self.server.is_some() => {
-                Ok(json!({"available":DEBUG_TARGET_TYPES,"selected":self.config.auto_attach_types}))
+                let selected = self.config.as_ref().map(|config| &config.auto_attach_types);
+                Ok(json!({"available":DEBUG_TARGET_TYPES,"selected":selected}))
             }
             "eska/setAutoAttachTypes" => self.set_auto_attach_types(&request.arguments),
             "cancel" => {
@@ -242,26 +240,38 @@ impl<W: Write> Session<'_, W> {
             .response(&request, result.map_err(|key| self.language.text(key)))?;
         if started {
             self.output.event("initialized", &json!({}))?;
-            if self.config.production {
+            if self.config.as_ref().is_some_and(|config| config.production) {
                 self.output.event("output", &json!({"category":"stderr","output":format!("{}\n",self.language.text("debug-prod-warning"))}))?;
             }
         }
         Ok(())
     }
 
-    fn open(&mut self, command: &str) -> Result<Value, Failure> {
-        let expected = if self.config.mode == Mode::Launch {
-            "launch"
-        } else {
-            "attach"
-        };
-        if !self.initialized || self.server.is_some() || command != expected {
+    fn open(&mut self, request: &Request) -> Result<Value, Failure> {
+        if !self.initialized || self.server.is_some() {
             return Err(INVALID);
         }
-        let server =
-            Server::new(&self.config.endpoint, self.config.alias.clone()).map_err(|_| ENDPOINT)?;
+        let mode = if request.command == "launch" {
+            Mode::Launch
+        } else {
+            Mode::Attach
+        };
+        let standalone = self
+            .config
+            .is_none()
+            .then(|| crate::standalone::configure(mode, &request.arguments))
+            .transpose()?;
+        let config = self
+            .config
+            .as_ref()
+            .or(standalone.as_ref())
+            .ok_or(INVALID)?;
+        if config.mode != mode {
+            return Err(INVALID);
+        }
+        let server = Server::new(&config.endpoint, config.alias.clone()).map_err(|_| ENDPOINT)?;
         server.attach().map_err(|_| ENDPOINT)?;
-        if server.auto_attach(&self.config.auto_attach_types).is_err() {
+        if server.auto_attach(&config.auto_attach_types).is_err() {
             let _ = server.detach();
             return Err(ENDPOINT);
         }
@@ -273,6 +283,38 @@ impl<W: Write> Session<'_, W> {
             })?,
         );
         self.server = Some(server);
+        if standalone.is_some() {
+            self.config = standalone;
+        }
+        Ok(json!({}))
+    }
+
+    fn configure(&mut self) -> Result<Value, Failure> {
+        let config = self.config.as_ref().ok_or(INVALID)?;
+        if let Some(selection) = &config.attach_selection {
+            let targets = self.server()?.targets().map_err(|_| ENDPOINT)?;
+            let targets = match selection {
+                AttachSelection::MatchingTypes => targets
+                    .into_iter()
+                    .filter(|target| config.auto_attach_types.contains(&target.kind))
+                    .collect(),
+                AttachSelection::Exact(id) => vec![
+                    targets
+                        .into_iter()
+                        .find(|target| target.id.eq_ignore_ascii_case(id))
+                        .ok_or("debug-target-not-found")?,
+                ],
+            };
+            for target in targets {
+                self.attach_target(target).map_err(|_| ENDPOINT)?;
+            }
+        }
+        let launch = self.config.as_mut().and_then(|config| config.launch.take());
+        self.client = launch.map(Client::launch).transpose().map_err(|_| {
+            self.ended = true;
+            "runtime-client-failed"
+        })?;
+        self.configured = true;
         Ok(json!({}))
     }
 
@@ -286,7 +328,8 @@ impl<W: Write> Session<'_, W> {
         if entries.len() > 1024 {
             return Err(INVALID);
         }
-        let module = self.config.sources.module(Path::new(path)).cloned();
+        let config = self.config.as_ref().ok_or(INVALID)?;
+        let module = config.sources.module(Path::new(path)).cloned();
         let points: Vec<_> = entries
             .iter()
             .map(|entry| {
@@ -368,6 +411,7 @@ impl<W: Write> Session<'_, W> {
     }
 
     fn stack(&self, arguments: &Value) -> Result<Value, Failure> {
+        let sources = &self.config.as_ref().ok_or(INVALID)?.sources;
         let id = arguments["threadId"].as_u64().ok_or(INVALID)?;
         let stack = self
             .state
@@ -394,7 +438,7 @@ impl<W: Write> Session<'_, W> {
                 if let Some(path) = frame
                     .module
                     .as_ref()
-                    .and_then(|module| self.config.sources.path(module))
+                    .and_then(|module| sources.path(module))
                     && let Some(display_path) = path.to_str()
                     && let Some(name) = path.file_name().and_then(std::ffi::OsStr::to_str)
                 {
@@ -498,7 +542,7 @@ impl<W: Write> Session<'_, W> {
             return Err(INVALID);
         }
         self.server()?.auto_attach(&types).map_err(|_| ENDPOINT)?;
-        self.config.auto_attach_types = types;
+        self.config.as_mut().ok_or(INVALID)?.auto_attach_types = types;
         Ok(json!({}))
     }
 
@@ -520,7 +564,11 @@ impl<W: Write> Session<'_, W> {
         while let Some(event) = events.next() {
             match event {
                 Event::Started(target) => {
-                    if self.config.auto_attach_types.contains(&target.kind) {
+                    if self
+                        .config
+                        .as_ref()
+                        .is_some_and(|config| config.auto_attach_types.contains(&target.kind))
+                    {
                         self.attach_target(target)?;
                     }
                 }

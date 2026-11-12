@@ -35,7 +35,7 @@ fn direct_http_breakpoint_and_selected_frame() {
         property: "d22e852a-cf8a-4f77-8ccb-3548e7792bea".to_owned(),
         extension: String::new(),
     };
-    let launch = DebugLaunch::prepare(project, ProfileName::Test).unwrap();
+    let launch = DebugLaunch::prepare(&project, ProfileName::Test).unwrap();
     let endpoint = url::Url::parse(&launch.profile().debug.as_ref().unwrap().url).unwrap();
     let server = Server::new(&endpoint, "DefAlias".into()).unwrap();
     server.attach().unwrap();

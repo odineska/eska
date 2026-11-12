@@ -7,6 +7,7 @@ mod http;
 mod live;
 mod session;
 mod source;
+mod standalone;
 mod state;
 
 use std::{ffi::OsString, path::PathBuf, process::ExitCode};
@@ -43,6 +44,14 @@ enum Operation {
     Check(CheckArgs),
     #[command(disable_help_flag = true)]
     Dap(DapArgs),
+    #[command(disable_help_flag = true)]
+    Standalone(StandaloneArgs),
+}
+
+#[derive(Debug, Args)]
+struct StandaloneArgs {
+    #[arg(short, long, action = ArgAction::Help)]
+    help: Option<bool>,
 }
 
 #[derive(Debug, Args)]
@@ -94,6 +103,14 @@ fn main() -> ExitCode {
     };
     let parsed = localized(&localizer).get_matches_from(args);
     let cli = Cli::from_arg_matches(&parsed).unwrap_or_else(|error| error.exit());
+    if matches!(cli.command, Operation::Standalone(_)) {
+        return if session::run(None, &localizer).is_ok() {
+            ExitCode::SUCCESS
+        } else {
+            eprintln!("{}", localizer.text("debug-adapter-disconnected"));
+            ExitCode::FAILURE
+        };
+    }
     let Ok(project) = discovery::discover(&cli.project_dir) else {
         eprintln!("{}", localizer.text("debug-project-unavailable"));
         return ExitCode::FAILURE;
@@ -114,6 +131,7 @@ fn main() -> ExitCode {
                 ExitCode::FAILURE
             }
         },
+        Operation::Standalone(_) => ExitCode::FAILURE,
     }
 }
 
@@ -153,14 +171,14 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
         connection(&settings).ok_or_else(|| localizer.text("debug-endpoint-unavailable"))?;
     let launch = if args.mode == Mode::Launch {
         Some(
-            DebugLaunch::prepare(project, profile)
+            DebugLaunch::prepare(&project, profile)
                 .map_err(|error| runtime_error(&error, localizer))?,
         )
     } else {
         None
     };
     session::run(
-        session::Config {
+        Some(session::Config {
             endpoint,
             alias,
             auto_attach_types,
@@ -168,7 +186,8 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
             mode: args.mode,
             launch,
             production,
-        },
+            attach_selection: None,
+        }),
         localizer,
     )
     .map_err(|_| localizer.text("debug-adapter-disconnected"))
@@ -233,7 +252,7 @@ fn source_options(unsaved: bool) -> Option<OsString> {
 fn connection(profile: &Profile) -> Option<(url::Url, String, Vec<String>)> {
     use eska_project_core::project::local_settings::Infobase;
     let debug = profile.debug.as_ref()?;
-    let endpoint = url::Url::parse(&debug.url).ok()?;
+    let endpoint = eska_project_core::project::local_settings::debug_server_url(&debug.url)?;
     let alias = match &profile.infobase {
         Infobase::File { .. } => "DefAlias".to_owned(),
         Infobase::Cluster { name, .. } | Infobase::Standalone { name, .. } => name.clone(),
@@ -242,8 +261,12 @@ fn connection(profile: &Profile) -> Option<(url::Url, String, Vec<String>)> {
 }
 
 fn runtime_error(error: &runtime::RuntimeError, localizer: &Localizer) -> String {
+    localizer.text(runtime_failure(error))
+}
+
+const fn runtime_failure(error: &runtime::RuntimeError) -> &'static str {
     use eska_project_core::project::local_settings::SettingsError;
-    localizer.text(match error {
+    match error {
         runtime::RuntimeError::Settings(SettingsError::MissingProfile(_)) => {
             "project-settings-missing-profile"
         }
@@ -257,7 +280,7 @@ fn runtime_error(error: &runtime::RuntimeError, localizer: &Localizer) -> String
         runtime::RuntimeError::FileInfobaseUnavailable => "runtime-infobase-unavailable",
         runtime::RuntimeError::SecretUnavailable => "runtime-secret-unavailable",
         _ => "runtime-client-failed",
-    })
+    }
 }
 
 fn localized(localizer: &Localizer) -> clap::Command {
@@ -289,6 +312,11 @@ fn localized(localizer: &Localizer) -> clap::Command {
                 .mut_arg("unsaved", |arg| {
                     arg.help(localizer.text("debug-unsaved-help"))
                 })
+                .mut_arg("help", |arg| arg.help(localizer.text("cli-help")))
+        })
+        .mut_subcommand("standalone", |command| {
+            command
+                .about(localizer.text("debug-standalone-about"))
                 .mut_arg("help", |arg| arg.help(localizer.text("cli-help")))
         })
 }
