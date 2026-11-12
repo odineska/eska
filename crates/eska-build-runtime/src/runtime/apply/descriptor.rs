@@ -13,7 +13,7 @@ use eska_project_core::project::{
 };
 use serde::{Deserialize, Serialize};
 
-use super::{Catalog, Change, checksum, picture, structure};
+use super::{Catalog, Change, checksum, picture};
 
 const ROOT: &str = "Configuration.xml";
 const MD_NAMESPACE: &str = "http://v8.1c.ru/8.3/MDClasses";
@@ -25,6 +25,8 @@ pub(super) type Shapes = BTreeMap<PathBuf, Shape>;
 pub(super) struct Shape {
     identities: BTreeMap<ObjectId, String>,
     structure: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    adopted_picture: Option<String>,
 }
 
 impl Shape {
@@ -43,7 +45,7 @@ pub(super) fn baseline(source: &Path, project_type: ProjectType, catalog: &Catal
                     || path.parent() == Some(Path::new("CommonModules"))
                         && descriptor_path(path, project_type)
                     || path.parent() == Some(Path::new(picture::COLLECTION))
-                        && structure::own_extension_picture(source, path)
+                        && descriptor_path(path, project_type)
             }
             _ => descriptor_path(path, project_type),
         })
@@ -69,31 +71,33 @@ pub(super) fn import_files(
     catalog: &Catalog,
     baseline: &Shapes,
 ) -> Option<Vec<PathBuf>> {
-    let mut files: BTreeSet<_> = changes.keys().cloned().collect();
+    let mut files = BTreeSet::new();
     let mut pictures = BTreeSet::new();
     for (path, change) in changes {
-        if *change != Change::Modified {
-            return None;
-        }
         if path.starts_with(picture::COLLECTION) {
             pictures.insert(picture::owner(path)?);
-        } else if !has_extension(path, "bsl")
-            && !match project_type {
-                ProjectType::Extension => simple_role(path, catalog),
-                _ => has_extension(path, "xml"),
+        } else {
+            let supported = has_extension(path, "bsl")
+                || match project_type {
+                    ProjectType::Extension => simple_role(path, catalog),
+                    _ => has_extension(path, "xml"),
+                };
+            if *change != Change::Modified || !supported {
+                return None;
             }
-        {
-            return None;
+            files.insert(path.clone());
         }
     }
-    for owner in &pictures {
-        files.extend(picture::import_resources(
-            source,
-            project_type,
-            catalog,
-            owner,
-        )?);
-    }
+    let has_pictures = !pictures.is_empty();
+    let picture_descriptors = import_pictures(
+        source,
+        project_type,
+        changes,
+        catalog,
+        baseline,
+        pictures,
+        &mut files,
+    )?;
     let catalog_roots: Vec<_> = changes
         .keys()
         .filter(|path| {
@@ -123,7 +127,7 @@ pub(super) fn import_files(
         .iter()
         .filter(|path| has_extension(path, "xml") && !path.starts_with(picture::COLLECTION))
         .cloned()
-        .chain(pictures)
+        .chain(picture_descriptors)
         .collect();
     if !xml.is_empty() {
         let affected =
@@ -138,10 +142,48 @@ pub(super) fn import_files(
     }
     let mut files: Vec<_> = files.into_iter().collect();
     // ibcmd must read parent and form descriptors before their layout resources.
-    if !xml.is_empty() {
+    if !xml.is_empty() || has_pictures {
         files.sort_by_key(|path| path.components().count());
     }
     Some(files)
+}
+
+fn import_pictures(
+    source: &Path,
+    project_type: ProjectType,
+    changes: &BTreeMap<PathBuf, Change>,
+    catalog: &Catalog,
+    baseline: &Shapes,
+    pictures: BTreeSet<PathBuf>,
+    files: &mut BTreeSet<PathBuf>,
+) -> Option<Vec<PathBuf>> {
+    let mut descriptors = Vec::new();
+    for owner in pictures {
+        if project_type == ProjectType::Extension
+            && let Some(adoption) = picture::read_adoption(source, &owner)
+        {
+            let previous = baseline
+                .get(&owner)
+                .and_then(|shape| shape.adopted_picture.as_deref());
+            files.extend(picture::import_adopted(
+                source, catalog, changes, &owner, previous, &adoption,
+            )?);
+        } else {
+            let resources = picture::import_resources(source, project_type, catalog, &owner)?;
+            for path in std::iter::once(&owner).chain(resources.iter()) {
+                match changes.get(path) {
+                    Some(Change::Modified) => {
+                        files.insert(path.clone());
+                    }
+                    None => {}
+                    _ => return None,
+                }
+            }
+            files.extend(resources);
+            descriptors.push(owner);
+        }
+    }
+    Some(descriptors)
 }
 
 // The platform probe covered roles whose only file was the descriptor.
@@ -260,6 +302,8 @@ pub(super) fn shape(source: &Path, model: &ObjectModel, path: &Path) -> Option<S
     Some(Shape {
         identities,
         structure,
+        adopted_picture: picture::adoption(contents, root, path)
+            .map(|adoption| adoption.fingerprint),
     })
 }
 

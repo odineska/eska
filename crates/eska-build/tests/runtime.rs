@@ -1132,6 +1132,53 @@ fn apply_reviews_and_imports_a_complete_common_svg_picture() {
 }
 
 #[test]
+fn apply_transitions_a_name_mapped_borrowed_svg_without_replacing_its_identity() {
+    let temp = TestDir::new();
+    let (base, extension) = prepare_extensions(&temp.0);
+    let source = extension.join("src");
+    let root = source.join("Configuration.xml");
+    let xml = fs::read_to_string(&root).unwrap().replace(
+        "</Properties></Configuration>",
+        "<KeepMappingToExtendedConfigurationObjectsByIDs>false</KeepMappingToExtendedConfigurationObjectsByIDs></Properties><ChildObjects><CommonPicture>ProbeIcon</CommonPicture></ChildObjects></Configuration>",
+    );
+    fs::write(&root, xml).unwrap();
+    let fixture = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-picture-composition");
+    let paths = picture_paths("ProbeIcon");
+    let [descriptor, package, svg] = paths.each_ref().map(|path| source.join(path));
+    fs::create_dir_all(svg.parent().unwrap()).unwrap();
+    for path in &paths {
+        fs::copy(fixture.join("second").join(path), source.join(path)).unwrap();
+    }
+    initialize(&extension);
+
+    let original_svg = fs::read_to_string(&svg).unwrap();
+    fs::write(&svg, original_svg.replace("#2050EE", "#A820E0")).unwrap();
+    confirm_picture_plan(&base, &extension, &paths[1..], None);
+    fs::remove_file(&svg).unwrap();
+    assert_eq!(
+        apply(&extension, "en-US", &[]).1["plan"]["mode"],
+        "unsupported"
+    );
+    fs::remove_file(&package).unwrap();
+    confirm_picture_plan(&base, &extension, &paths[..1], None);
+
+    let inherited = fs::read_to_string(fixture.join("variants/SecondBorrowedPicture.xml")).unwrap();
+    fs::write(&descriptor, inherited.replace("8f813e76", "9f813e76")).unwrap();
+    assert_eq!(
+        apply(&extension, "en-US", &[]).1["plan"]["mode"],
+        "unsupported"
+    );
+    fs::write(&descriptor, inherited).unwrap();
+    confirm_picture_plan(&base, &extension, &paths[..1], None);
+
+    for path in &paths {
+        fs::copy(fixture.join("second").join(path), source.join(path)).unwrap();
+    }
+    confirm_picture_plan(&base, &extension, &paths, None);
+}
+
+#[test]
 fn apply_reviews_unchanged_form_references_before_renaming_a_picture() {
     let root = TestDir::new();
     let root = &root.0;
