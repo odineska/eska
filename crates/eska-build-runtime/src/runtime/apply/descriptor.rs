@@ -38,7 +38,11 @@ pub(super) fn baseline(source: &Path, project_type: ProjectType, catalog: &Catal
     let paths: Vec<_> = catalog
         .keys()
         .filter(|path| match project_type {
-            ProjectType::Extension => simple_role(path, catalog),
+            ProjectType::Extension => {
+                simple_role(path, catalog)
+                    || path.parent() == Some(Path::new("CommonModules"))
+                        && descriptor_path(path, project_type)
+            }
             _ => descriptor_path(path, project_type),
         })
         .cloned()

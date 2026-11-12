@@ -20,6 +20,7 @@ pub enum ObjectKind {
     Language,
     CommonForm,
     Role,
+    CommonModule,
 }
 
 impl ObjectKind {
@@ -28,6 +29,7 @@ impl ObjectKind {
             Self::Language => "Languages",
             Self::CommonForm => "CommonForms",
             Self::Role => "Roles",
+            Self::CommonModule => "CommonModules",
         }
     }
 
@@ -36,6 +38,7 @@ impl ObjectKind {
             Self::Language => "language",
             Self::CommonForm => "common-form",
             Self::Role => "role",
+            Self::CommonModule => "common-module",
         }
     }
 }
@@ -64,6 +67,8 @@ pub(super) struct Root {
     default_language: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     default_role: Option<String>,
+    #[serde(default)]
+    common_modules: bool,
     other_xml: String,
 }
 
@@ -104,6 +109,11 @@ impl Entry {
         );
         match self.kind {
             ObjectKind::Language | ObjectKind::Role if files.len() == 1 => Some(files),
+            ObjectKind::CommonModule
+                if files.len() == 2 && files.contains(&root.join("Ext/Module.bsl")) =>
+            {
+                Some(files)
+            }
             ObjectKind::CommonForm
                 if files.contains(&root.join("Ext/Form.xml"))
                     && (files.len() == 2
@@ -118,7 +128,11 @@ impl Entry {
 }
 
 impl Root {
-    pub(super) fn read(source: &Path, project_type: ProjectType) -> Option<Self> {
+    pub(super) fn read(
+        source: &Path,
+        project_type: ProjectType,
+        common_modules: bool,
+    ) -> Option<Self> {
         let xml = descriptor::read_xml(&source.join(ROOT))?;
         let xml = xml.trim_start_matches('\u{feff}');
         let bytes = xml.as_bytes();
@@ -168,6 +182,9 @@ impl Root {
                     Some(ObjectKind::CommonForm)
                 }
                 (ProjectType::Extension, Some(NAMESPACE), "Role") => Some(ObjectKind::Role),
+                (_, Some(NAMESPACE), "CommonModule") if common_modules => {
+                    Some(ObjectKind::CommonModule)
+                }
                 _ => None,
             };
             if let Some(kind) = kind {
@@ -180,8 +197,15 @@ impl Root {
                     return None;
                 }
                 let entry = Entry { kind, name };
-                if kind == ObjectKind::Role && !own_role(source, &entry) {
+                if kind == ObjectKind::Role && !own_extension_object(source, &entry) {
                     return None;
+                }
+                if project_type == ProjectType::Extension
+                    && kind == ObjectKind::CommonModule
+                    && !own_extension_object(source, &entry)
+                {
+                    other.push(&bytes[node.range()]);
+                    continue;
                 }
                 entries.insert(entry.clone());
                 order.push(entry);
@@ -194,6 +218,7 @@ impl Root {
             order,
             default_language,
             default_role,
+            common_modules,
             other_xml: checksum(&other),
         };
         if let Some(anchor) = recorded.anchor()
@@ -218,6 +243,22 @@ impl Root {
                 name: name.clone(),
             })
     }
+
+    fn read_for_delta(
+        &self,
+        source: &Path,
+        project_type: ProjectType,
+        old: &Catalog,
+    ) -> Option<Self> {
+        // Older baselines hashed the module declarations as unrelated XML. Preserve
+        // that proof unless there were no module descriptors to account for.
+        let common_modules = self.common_modules
+            || !old.keys().any(|path| {
+                path.parent() == Some(Path::new("CommonModules"))
+                    && descriptor::has_extension(path, "xml")
+            });
+        Self::read(source, project_type, common_modules)
+    }
 }
 
 fn default_role<'a>(properties: roxmltree::Node<'a, '_>) -> Option<&'a str> {
@@ -232,29 +273,54 @@ fn default_role<'a>(properties: roxmltree::Node<'a, '_>) -> Option<&'a str> {
         .filter(|name| descriptor::valid_name(name))
 }
 
-fn own_role(source: &Path, entry: &Entry) -> bool {
+fn own_extension_object(source: &Path, entry: &Entry) -> bool {
+    let tag = match entry.kind {
+        ObjectKind::Role => "Role",
+        ObjectKind::CommonModule => "CommonModule",
+        _ => return false,
+    };
     let Some(xml) = descriptor::read_xml(&source.join(entry.descriptor())) else {
         return false;
     };
     let Some(document) = descriptor::parse_xml(xml.trim_start_matches('\u{feff}')) else {
         return false;
     };
-    let Some(role) = only_child(document.root_element(), "Role") else {
+    let Some(object) = only_child(document.root_element(), tag) else {
         return false;
     };
-    let Some(properties) = only_child(role, "Properties") else {
+    let Some(properties) = only_child(object, "Properties") else {
         return false;
     };
-    // Native standalone roles have no adoption or mapping properties.
-    role.children().filter(roxmltree::Node::is_element).count() == 1
+    // Owned objects have no adoption or mapping properties.
+    object
+        .children()
+        .filter(roxmltree::Node::is_element)
+        .count()
+        == 1
         && properties
             .children()
             .filter(roxmltree::Node::is_element)
             .all(|node| {
                 node.tag_name().namespace() == Some(NAMESPACE)
-                    && matches!(node.tag_name().name(), "Name" | "Synonym" | "Comment")
+                    && own_property(entry.kind, node.tag_name().name())
             })
         && only_child(properties, "Name").and_then(|node| node.text()) == Some(entry.name.as_str())
+}
+
+fn own_property(kind: ObjectKind, name: &str) -> bool {
+    matches!(name, "Name" | "Synonym" | "Comment")
+        || kind == ObjectKind::CommonModule
+            && matches!(
+                name,
+                "Global"
+                    | "ClientManagedApplication"
+                    | "Server"
+                    | "ExternalConnection"
+                    | "ClientOrdinaryApplication"
+                    | "ServerCall"
+                    | "Privileged"
+                    | "ReturnValuesReuse"
+            )
 }
 
 fn only_child<'a, 'i>(
@@ -289,7 +355,7 @@ pub(super) fn select(
     if remaining.remove(Path::new(ROOT)) != Some(Change::Modified) {
         return None;
     }
-    let root = Root::read(source, project_type)?;
+    let root = previous.read_for_delta(source, project_type, old)?;
     if root.other_xml != previous.other_xml
         || root.entries == previous.entries
         || previous

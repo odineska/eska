@@ -638,6 +638,105 @@ fn apply_extension_groups_owned_role_changes_and_keeps_the_default_role() {
 }
 
 #[test]
+fn apply_extension_groups_common_module_and_code_by_uuid() {
+    let root = TestDir::new();
+    let (_, one) = prepare_extensions(&root.0);
+    let source = one.join("src");
+    let configuration = source.join("Configuration.xml");
+    let original = fs::read_to_string(&configuration).unwrap().replace(
+        "</Properties>",
+        r#"<DefaultRoles><xr:Item xmlns:xr="http://v8.1c.ru/8.3/xcf/readable">Role.One_Default</xr:Item></DefaultRoles></Properties>"#,
+    );
+    let write_root = |module: &str| {
+        fs::write(
+            &configuration,
+            original.replace(
+                "</Configuration>",
+                &format!(
+                    "<ChildObjects><Role>One_Default</Role>{module}</ChildObjects></Configuration>"
+                ),
+            ),
+        )
+        .unwrap();
+    };
+    fs::create_dir(source.join("Roles")).unwrap();
+    fs::write(
+        source.join("Roles/One_Default.xml"),
+        r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><Role uuid="97bcf1fc-5482-4ff0-b651-876c772bd338"><Properties><Name>One_Default</Name></Properties></Role></MetaDataObject>"#,
+    )
+    .unwrap();
+    write_root("");
+    initialize(&one);
+
+    let modules = source.join("CommonModules");
+    let added = modules.join("One_Added");
+    let renamed = modules.join("One_Renamed");
+    let xml = r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><CommonModule uuid="97bcf1fc-5482-4ff0-b651-876c772bd339"><Properties><Name>One_Added</Name><Server>true</Server></Properties></CommonModule></MetaDataObject>"#;
+    fs::create_dir_all(added.join("Ext")).unwrap();
+    fs::write(added.with_extension("xml"), xml).unwrap();
+    write_root("<CommonModule>One_Added</CommonModule>");
+    assert_eq!(apply(&one, "en-US", &[]).1["plan"]["mode"], "unsupported");
+    fs::write(added.join("Ext/Module.bsl"), "A = 1;").unwrap();
+    fs::write(
+        added.with_extension("xml"),
+        xml.replace(
+            "<Server>",
+            "<ObjectBelonging>Adopted</ObjectBelonging><Server>",
+        ),
+    )
+    .unwrap();
+    assert_eq!(apply(&one, "en-US", &[]).1["plan"]["mode"], "unsupported");
+    fs::write(added.with_extension("xml"), xml).unwrap();
+
+    for (operation, name, previous) in [
+        ("added", "One_Added", None),
+        ("renamed", "One_Renamed", Some("One_Added")),
+        ("removed", "One_Renamed", None),
+    ] {
+        if operation == "renamed" {
+            fs::remove_file(added.with_extension("xml")).unwrap();
+            fs::rename(&added, &renamed).unwrap();
+            fs::write(
+                renamed.with_extension("xml"),
+                xml.replace("One_Added", name),
+            )
+            .unwrap();
+            write_root("<CommonModule>One_Renamed</CommonModule>");
+        } else if operation == "removed" {
+            fs::remove_file(renamed.with_extension("xml")).unwrap();
+            fs::remove_dir_all(&renamed).unwrap();
+            write_root("");
+        }
+        let (output, preview) = apply(&one, "en-US", &[]);
+        assert!(output.status.success(), "{preview}");
+        let plan = &preview["plan"];
+        assert_eq!(plan["mode"], "incremental");
+        let expected = if operation == "removed" {
+            serde_json::json!(["Configuration.xml", "Roles/One_Default.xml"])
+        } else {
+            serde_json::json!([
+                "Configuration.xml",
+                format!("CommonModules/{name}.xml"),
+                format!("CommonModules/{name}/Ext/Module.bsl")
+            ])
+        };
+        assert_eq!(plan["import_files"], expected);
+        let group = &plan["object_changes"][0];
+        assert_eq!(group["kind"], "common_module");
+        assert_eq!(group["operation"], operation);
+        assert_eq!(group["previous_name"], serde_json::json!(previous));
+        let token = plan["confirmation"].as_str().unwrap();
+        assert!(
+            apply(&one, "ru-RU", &["--confirm", token])
+                .0
+                .status
+                .success()
+        );
+    }
+    assert_eq!(apply(&one, "en-US", &[]).1["plan"]["mode"], "unchanged");
+}
+
+#[test]
 fn apply_proves_structural_identity_and_keeps_unrelated_root_xml_out_of_the_plan() {
     let root = TestDir::new();
     let root = &root.0;

@@ -226,7 +226,7 @@ fn write_plan(
     let root = plan
         .root
         .take()
-        .or_else(|| structure::Root::read(source, target.project_type()));
+        .or_else(|| structure::Root::read(source, target.project_type(), true));
     let state = target.state.with_extension("pending");
     let directory = target.state.parent().ok_or(ApplyError::InvalidState)?;
     let mut marker = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;

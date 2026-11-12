@@ -368,6 +368,7 @@ fn print_object_changes<'a>(
             ObjectKind::Language => "diff-metadata-language",
             ObjectKind::CommonForm => "diff-metadata-common-form",
             ObjectKind::Role => "diff-metadata-role",
+            ObjectKind::CommonModule => "diff-metadata-common-module",
         });
         if let Some(previous) = &object.previous_name {
             println!("{action} {kind} {previous} → {}", object.name);
