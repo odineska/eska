@@ -135,14 +135,19 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
                 args.initialize,
                 confirmation,
                 |stage| {
-                    eprintln!(
-                        "{}",
-                        localizer.text(if stage == Stage::Import {
-                            "runtime-apply-importing"
-                        } else {
-                            "runtime-apply-applying"
-                        })
-                    );
+                    let (phase, key) = if stage == Stage::Import {
+                        ("import", "runtime-apply-importing")
+                    } else {
+                        ("apply", "runtime-apply-applying")
+                    };
+                    if matches!(args.format, OutputFormat::Json) {
+                        eprintln!(
+                            "{}",
+                            json!({"schema_version":1,"kind":"apply_progress","phase":phase})
+                        );
+                    } else {
+                        eprintln!("{}", localizer.text(key));
+                    }
                 },
             )
         },

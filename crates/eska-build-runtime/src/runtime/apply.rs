@@ -210,7 +210,8 @@ impl Target {
                 admin_pid: Some(pid),
                 ..
             } => {
-                let lock = directory.join(format!("apply-standalone-{pid}.lock"));
+                // Projects sharing a local server must also share its apply lock.
+                let lock = env::temp_dir().join(format!("eska-apply-standalone-{pid}.lock"));
                 (Connection::Standalone(*pid), url.clone(), lock)
             }
             _ => return Err(ApplyError::InvalidState),
