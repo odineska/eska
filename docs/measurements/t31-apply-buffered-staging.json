@@ -1,0 +1,819 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-13",
+  "host": "Fedora Linux 44 Asahi Remix, Linux 7.2.12, AArch64",
+  "platform": "1C 8.3.27.2342, ALT 10 Distrobox",
+  "compiler": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "strace": "strace -- version 6.19",
+  "builds": {
+    "before": {
+      "version": "0.29.1",
+      "commit": "c55e6ee6d3fc34a37911f7e1260e5a81ca7f296b",
+      "bytes": 5729920,
+      "sha256": "62889db3623b1592e6904d772aaf0c4100db61a9013e33d4072c1d205d0042c1"
+    },
+    "after": {
+      "version": "0.29.1",
+      "commit": "b466bd49c264c0530c8500e9858d810bd3677967",
+      "bytes": 5736496,
+      "sha256": "76b35a2928ceb649697f467361ca67568aa75180f63f6880467ea785baad2a29"
+    },
+    "v8-runner": {
+      "version": "0.17.1",
+      "commit": "fd41189af0649fa1ed0f68412636efa7c682e5f7",
+      "bytes": 12861264,
+      "sha256": "da8918f9c029f3a1337354d26f4a3cf379709a5f13ad75e71fd38fea71160c68"
+    }
+  },
+  "method": {
+    "mode": "file",
+    "tools": [
+      "eska-build apply preview and confirm",
+      "eska-build apply preview and confirm",
+      "v8-runner push main"
+    ],
+    "runner": "same local ibcmd wrapper over ALT 10 Distrobox",
+    "repository": "three independently committed copies of the same Designer XML",
+    "timed_samples_per_tool": 5,
+    "order": "rotate tool order across edits",
+    "cache": "system cache retained",
+    "p95": "nearest rank",
+    "platform_timing": "union of wrapper intervals",
+    "trace": "one separate edit, positive read-family syscalls below src/ and successful execve by process",
+    "same_mtime": "separate edit after committing the previously applied module; size and nanosecond mtime retained",
+    "native_export_comparison": "all three tools produced identical trees before and after; only the edited BSL changed"
+  },
+  "common_modules": 1000,
+  "source_files": 2014,
+  "source_bytes": 17390977,
+  "native_export_files": 2014,
+  "native_export_tree_sha256": {
+    "baseline": "b57a25965b30ae91b9a54d76837bba80d27531ccf89874e12d10dbeb9a8a35c2",
+    "final": "02016c28cdf5928f795cc4e3affce9ce79770c7931cccc3a4efae3b3f46a4a26",
+    "same-mtime": "c4a9b8a4698161f7142542ad6bb54f7e6fd3efb4c808cd7380a1d3d0fa8a9561"
+  },
+  "changed_files": [
+    "CommonModules/Bench0001/Ext/Module.bsl"
+  ],
+  "source_files_in_worktree": 2015,
+  "source_bytes_in_worktree": 17395144,
+  "excluded_service_file_bytes": 4167,
+  "summary": {
+    "before": {
+      "seconds": {
+        "first": 7.535607,
+        "p50": 7.635702,
+        "p95": 7.736192
+      },
+      "platform_seconds": {
+        "first": 7.197322,
+        "p50": 7.258003,
+        "p95": 7.325361
+      },
+      "host_seconds": {
+        "first": 0.338284,
+        "p50": 0.338284,
+        "p95": 0.410832
+      },
+      "cpu_seconds": {
+        "first": 1.25,
+        "p50": 1.27,
+        "p95": 1.34
+      },
+      "ibcmd_calls": 6,
+      "peak_rss_kib": 56528
+    },
+    "after": {
+      "seconds": {
+        "first": 7.637154,
+        "p50": 7.637154,
+        "p95": 7.737205
+      },
+      "platform_seconds": {
+        "first": 7.277409,
+        "p50": 7.277409,
+        "p95": 7.298449
+      },
+      "host_seconds": {
+        "first": 0.359745,
+        "p50": 0.372669,
+        "p95": 0.475825
+      },
+      "cpu_seconds": {
+        "first": 1.3,
+        "p50": 1.32,
+        "p95": 1.33
+      },
+      "ibcmd_calls": 6,
+      "peak_rss_kib": 56944
+    },
+    "v8-runner": {
+      "seconds": {
+        "first": 7.121818,
+        "p50": 7.122683,
+        "p95": 7.174336
+      },
+      "platform_seconds": {
+        "first": 6.977294,
+        "p50": 6.988952,
+        "p95": 7.03765
+      },
+      "host_seconds": {
+        "first": 0.144525,
+        "p50": 0.133856,
+        "p95": 0.144525
+      },
+      "cpu_seconds": {
+        "first": 0.76,
+        "p50": 0.76,
+        "p95": 0.77
+      },
+      "ibcmd_calls": 4,
+      "peak_rss_kib": 57152
+    }
+  },
+  "source_trace": {
+    "before": {
+      "preview": {
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2014,
+        "read_bytes": 17390977,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "exec_processes": 69,
+        "git_processes": 0
+      },
+      "confirm": {
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2015,
+        "read_bytes": 17407714,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "exec_processes": 137,
+        "git_processes": 0
+      }
+    },
+    "after": {
+      "preview": {
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2014,
+        "read_bytes": 17390977,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "exec_processes": 69,
+        "git_processes": 0
+      },
+      "confirm": {
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2014,
+        "read_bytes": 17390977,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "exec_processes": 137,
+        "git_processes": 0
+      }
+    },
+    "v8-runner": {
+      "push": {
+        "opened_files": 3,
+        "read_files": 3,
+        "read_calls": 7,
+        "read_bytes": 54025,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "exec_processes": 146,
+        "git_processes": 9
+      }
+    }
+  },
+  "samples": [
+    {
+      "preview": {
+        "seconds": 1.965852735003864,
+        "platform_seconds": 1.8734869956970215,
+        "host_seconds": 0.09236573930684244,
+        "ibcmd_calls": 2,
+        "rss_kib": 55168,
+        "cpu_seconds": 0.4
+      },
+      "confirm": {
+        "seconds": 5.569753771997057,
+        "platform_seconds": 5.323835372924805,
+        "host_seconds": 0.24591839907225221,
+        "ibcmd_calls": 4,
+        "rss_kib": 56528,
+        "cpu_seconds": 0.8500000000000001,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-MignHk/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-MignHk/modules"
+        ]
+      },
+      "tool": "before",
+      "value": 22000,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 1.966752649997943,
+        "platform_seconds": 1.8632159233093262,
+        "host_seconds": 0.10353672668861691,
+        "ibcmd_calls": 2,
+        "rss_kib": 56128,
+        "cpu_seconds": 0.43
+      },
+      "confirm": {
+        "seconds": 5.670401650000713,
+        "platform_seconds": 5.4141929149627686,
+        "host_seconds": 0.2562087350379443,
+        "ibcmd_calls": 4,
+        "rss_kib": 54000,
+        "cpu_seconds": 0.8699999999999999,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-pnbTQZ/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-pnbTQZ/modules"
+        ]
+      },
+      "tool": "after",
+      "value": 22000,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "push": {
+        "seconds": 7.12181848599721,
+        "platform_seconds": 6.9772937297821045,
+        "host_seconds": 0.1445247562151053,
+        "ibcmd_calls": 4,
+        "rss_kib": 56048,
+        "cpu_seconds": 0.76,
+        "ibcmd_import_files": [
+          "CommonModules/Bench0001/Ext/Module.bsl"
+        ]
+      },
+      "tool": "v8-runner",
+      "value": 22000,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 2.01668667299964,
+        "platform_seconds": 1.8746509552001953,
+        "host_seconds": 0.14203571779944468,
+        "ibcmd_calls": 2,
+        "rss_kib": 56944,
+        "cpu_seconds": 0.42000000000000004
+      },
+      "confirm": {
+        "seconds": 5.720518214002368,
+        "platform_seconds": 5.386729001998901,
+        "host_seconds": 0.3337892120034667,
+        "ibcmd_calls": 4,
+        "rss_kib": 56560,
+        "cpu_seconds": 0.91,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-A8Pc2f/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-A8Pc2f/modules"
+        ]
+      },
+      "tool": "after",
+      "value": 22001,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "push": {
+        "seconds": 7.122808482999972,
+        "platform_seconds": 6.988952159881592,
+        "host_seconds": 0.1338563231183798,
+        "ibcmd_calls": 4,
+        "rss_kib": 56048,
+        "cpu_seconds": 0.77,
+        "ibcmd_import_files": [
+          "CommonModules/Bench0001/Ext/Module.bsl"
+        ]
+      },
+      "tool": "v8-runner",
+      "value": 22001,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 1.9656870269973297,
+        "platform_seconds": 1.9072558879852295,
+        "host_seconds": 0.058431139012100175,
+        "ibcmd_calls": 2,
+        "rss_kib": 56464,
+        "cpu_seconds": 0.39
+      },
+      "confirm": {
+        "seconds": 5.670015317999059,
+        "platform_seconds": 5.406198024749756,
+        "host_seconds": 0.2638172932493035,
+        "ibcmd_calls": 4,
+        "rss_kib": 55440,
+        "cpu_seconds": 0.8800000000000001,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-pRgtb0/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-pRgtb0/modules"
+        ]
+      },
+      "tool": "before",
+      "value": 22001,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "push": {
+        "seconds": 7.071693879996019,
+        "platform_seconds": 6.977872133255005,
+        "host_seconds": 0.09382174674101407,
+        "ibcmd_calls": 4,
+        "rss_kib": 54576,
+        "cpu_seconds": 0.76,
+        "ibcmd_import_files": [
+          "CommonModules/Bench0001/Ext/Module.bsl"
+        ]
+      },
+      "tool": "v8-runner",
+      "value": 22002,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 2.016086923998955,
+        "platform_seconds": 1.8812837600708008,
+        "host_seconds": 0.1348031639281544,
+        "ibcmd_calls": 2,
+        "rss_kib": 55424,
+        "cpu_seconds": 0.43
+      },
+      "confirm": {
+        "seconds": 5.720105464999506,
+        "platform_seconds": 5.444077014923096,
+        "host_seconds": 0.2760284500764101,
+        "ibcmd_calls": 4,
+        "rss_kib": 55040,
+        "cpu_seconds": 0.8800000000000001,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-KHfaJs/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-KHfaJs/modules"
+        ]
+      },
+      "tool": "before",
+      "value": 22002,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 1.9160937530032243,
+        "platform_seconds": 1.8444643020629883,
+        "host_seconds": 0.07162945094023598,
+        "ibcmd_calls": 2,
+        "rss_kib": 53888,
+        "cpu_seconds": 0.39
+      },
+      "confirm": {
+        "seconds": 5.770561071003613,
+        "platform_seconds": 5.453984498977661,
+        "host_seconds": 0.31657657202595146,
+        "ibcmd_calls": 4,
+        "rss_kib": 55040,
+        "cpu_seconds": 0.93,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-uK4WB7/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-uK4WB7/modules"
+        ]
+      },
+      "tool": "after",
+      "value": 22002,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 1.9666859830031171,
+        "platform_seconds": 1.8582398891448975,
+        "host_seconds": 0.10844609385821968,
+        "ibcmd_calls": 2,
+        "rss_kib": 54528,
+        "cpu_seconds": 0.41
+      },
+      "confirm": {
+        "seconds": 5.67217093599902,
+        "platform_seconds": 5.399762868881226,
+        "host_seconds": 0.2724080671177944,
+        "ibcmd_calls": 4,
+        "rss_kib": 55568,
+        "cpu_seconds": 0.9299999999999999,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-zvuJe7/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-zvuJe7/modules"
+        ]
+      },
+      "tool": "before",
+      "value": 22003,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 2.015989883999282,
+        "platform_seconds": 1.9077610969543457,
+        "host_seconds": 0.10822878704493633,
+        "ibcmd_calls": 2,
+        "rss_kib": 53568,
+        "cpu_seconds": 0.41
+      },
+      "confirm": {
+        "seconds": 5.619985711004119,
+        "platform_seconds": 5.355545282363892,
+        "host_seconds": 0.26444042864022776,
+        "ibcmd_calls": 4,
+        "rss_kib": 55616,
+        "cpu_seconds": 0.8700000000000001,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-daNRLf/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-daNRLf/modules"
+        ]
+      },
+      "tool": "after",
+      "value": 22003,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "push": {
+        "seconds": 7.122683191999386,
+        "platform_seconds": 6.999569892883301,
+        "host_seconds": 0.12311329911608482,
+        "ibcmd_calls": 4,
+        "rss_kib": 55552,
+        "cpu_seconds": 0.77,
+        "ibcmd_import_files": [
+          "CommonModules/Bench0001/Ext/Module.bsl"
+        ]
+      },
+      "tool": "v8-runner",
+      "value": 22003,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 1.9660969020042103,
+        "platform_seconds": 1.8628880977630615,
+        "host_seconds": 0.10320880424114875,
+        "ibcmd_calls": 2,
+        "rss_kib": 53504,
+        "cpu_seconds": 0.41
+      },
+      "confirm": {
+        "seconds": 5.669934692996321,
+        "platform_seconds": 5.4188783168792725,
+        "host_seconds": 0.2510563761170488,
+        "ibcmd_calls": 4,
+        "rss_kib": 56000,
+        "cpu_seconds": 0.9199999999999999,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-ZPBg0m/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-ZPBg0m/modules"
+        ]
+      },
+      "tool": "after",
+      "value": 22004,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "push": {
+        "seconds": 7.174335543997586,
+        "platform_seconds": 7.037650108337402,
+        "host_seconds": 0.13668543566018343,
+        "ibcmd_calls": 4,
+        "rss_kib": 57152,
+        "cpu_seconds": 0.76,
+        "ibcmd_import_files": [
+          "CommonModules/Bench0001/Ext/Module.bsl"
+        ]
+      },
+      "tool": "v8-runner",
+      "value": 22004,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 1.9667763159959577,
+        "platform_seconds": 1.886876106262207,
+        "host_seconds": 0.07990020973375067,
+        "ibcmd_calls": 2,
+        "rss_kib": 56064,
+        "cpu_seconds": 0.37
+      },
+      "confirm": {
+        "seconds": 5.520952828002919,
+        "platform_seconds": 5.303786993026733,
+        "host_seconds": 0.21716583497618558,
+        "ibcmd_calls": 4,
+        "rss_kib": 55040,
+        "cpu_seconds": 0.8500000000000001,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-zjIC3D/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-zjIC3D/modules"
+        ]
+      },
+      "tool": "before",
+      "value": 22004,
+      "trace": false,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "push": {
+        "seconds": 24.692433411997627,
+        "platform_seconds": 24.289873361587524,
+        "host_seconds": 0.4025600504101021,
+        "ibcmd_calls": 4,
+        "rss_kib": 54512,
+        "cpu_seconds": 5.5,
+        "ibcmd_import_files": [
+          "CommonModules/Bench0001/Ext/Module.bsl"
+        ],
+        "opened_files": 3,
+        "read_files": 3,
+        "read_calls": 7,
+        "read_bytes": 54025,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 9,
+        "exec_processes": 146
+      },
+      "tool": "v8-runner",
+      "value": 22005,
+      "trace": true,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 4.218060733001039,
+        "platform_seconds": 3.4508719444274902,
+        "host_seconds": 0.7671887885735487,
+        "ibcmd_calls": 2,
+        "rss_kib": 55088,
+        "cpu_seconds": 1.75,
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2014,
+        "read_bytes": 17390977,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 0,
+        "exec_processes": 69
+      },
+      "confirm": {
+        "seconds": 25.845127397995384,
+        "platform_seconds": 21.77914071083069,
+        "host_seconds": 4.0659866871646955,
+        "ibcmd_calls": 4,
+        "rss_kib": 55232,
+        "cpu_seconds": 6.93,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-NCWltr/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-NCWltr/modules"
+        ],
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2015,
+        "read_bytes": 17407714,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 0,
+        "exec_processes": 137
+      },
+      "tool": "before",
+      "value": 22005,
+      "trace": true,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 4.218064941000193,
+        "platform_seconds": 3.6828219890594482,
+        "host_seconds": 0.5352429519407451,
+        "ibcmd_calls": 2,
+        "rss_kib": 54880,
+        "cpu_seconds": 1.6199999999999999,
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2014,
+        "read_bytes": 17390977,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 0,
+        "exec_processes": 69
+      },
+      "confirm": {
+        "seconds": 25.294097478996264,
+        "platform_seconds": 21.634900093078613,
+        "host_seconds": 3.6591973859176505,
+        "ibcmd_calls": 4,
+        "rss_kib": 55936,
+        "cpu_seconds": 6.59,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-vjZwFv/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-vjZwFv/modules"
+        ],
+        "opened_files": 2014,
+        "read_files": 2014,
+        "read_calls": 2014,
+        "read_bytes": 17390977,
+        "mapped_files": 0,
+        "mmap_calls": 0,
+        "mmap_bytes": 0,
+        "git_processes": 0,
+        "exec_processes": 137
+      },
+      "tool": "after",
+      "value": 22005,
+      "trace": true,
+      "same_mtime": false,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 2.065916614999878,
+        "platform_seconds": 1.9294390678405762,
+        "host_seconds": 0.13647754715930205,
+        "ibcmd_calls": 2,
+        "rss_kib": 56128,
+        "cpu_seconds": 0.41
+      },
+      "confirm": {
+        "seconds": 5.669830817998445,
+        "platform_seconds": 5.438397169113159,
+        "host_seconds": 0.23143364888528595,
+        "ibcmd_calls": 4,
+        "rss_kib": 55040,
+        "cpu_seconds": 0.8900000000000001,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-f2SQBh/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/before/.eska/apply-f2SQBh/modules"
+        ]
+      },
+      "tool": "before",
+      "value": 23000,
+      "trace": false,
+      "same_mtime": true,
+      "import_bytes": 16737
+    },
+    {
+      "preview": {
+        "seconds": 1.966570149998006,
+        "platform_seconds": 1.8792319297790527,
+        "host_seconds": 0.08733822021895321,
+        "ibcmd_calls": 2,
+        "rss_kib": 55008,
+        "cpu_seconds": 0.39
+      },
+      "confirm": {
+        "seconds": 5.621744413998385,
+        "platform_seconds": 5.365900754928589,
+        "host_seconds": 0.25584365906979656,
+        "ibcmd_calls": 4,
+        "rss_kib": 56960,
+        "cpu_seconds": 0.8900000000000001,
+        "ibcmd_import_files": [
+          "infobase",
+          "config",
+          "import",
+          "files",
+          "--data=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-vQcJSs/platform",
+          "--db-path=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/ib",
+          "--base-dir=/home/kas/Projects/eska-playground/bench-catalog.kag8dj/after/.eska/apply-vQcJSs/modules"
+        ]
+      },
+      "tool": "after",
+      "value": 23000,
+      "trace": false,
+      "same_mtime": true,
+      "import_bytes": 16737
+    },
+    {
+      "push": {
+        "seconds": 7.02187631400011,
+        "platform_seconds": 6.9214582443237305,
+        "host_seconds": 0.10041806967637967,
+        "ibcmd_calls": 4,
+        "rss_kib": 55664,
+        "cpu_seconds": 0.76,
+        "ibcmd_import_files": [
+          "CommonModules/Bench0001/Ext/Module.bsl"
+        ]
+      },
+      "tool": "v8-runner",
+      "value": 23000,
+      "trace": false,
+      "same_mtime": true,
+      "import_bytes": 16737
+    }
+  ]
+}
