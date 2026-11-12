@@ -185,11 +185,25 @@
           "frame": [1094, 308],
           "nativeCapture": "TallTwo.png",
           "screenshotSha256": "f5c8abcbb9d5a6a3f921a7f040d19679975cef28c32e4ca534e0866711427506",
-          "controls": {"Memo": [13, null, null, 51]},
+          "controls": {"Memo": [13, 239, null, 51], "Amount": [916, 260, 152, 19]},
+          "groupBoxes": {"Summary": [null, 255, null, 40]},
           "edit": {
             "form": {"Height": 16},
             "groups": {"Footer": {"VerticalStretch": "true"}},
             "fields": {"Amount": {"TitleLocation": null}, "Memo": {"MaxHeight": 2}}
+          }
+        },
+        {
+          "name": "fixed inner group keeps the preferred control height in a tall footer",
+          "frame": [1094, 308],
+          "nativeCapture": "TallFixedDetails.png",
+          "screenshotSha256": "206914377d61ab65ce211f9b10796a64eb5318f67fc623bedd1e4d72b076b01f",
+          "controls": {"Memo": [13, 239, null, 51], "Amount": [916, 260, 152, 19]},
+          "groupBoxes": {"Summary": [null, 255, null, 40]},
+          "edit": {
+            "form": {"Height": 16},
+            "groups": {"Footer": {"VerticalStretch": "true"}, "Details": {"VerticalStretch": "false"}},
+            "fields": {"Amount": {"TitleLocation": null}}
           }
         },
         {
@@ -315,6 +329,28 @@
           "edit": {
             "groups": {"Summary": {"BackColor": null}},
             "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
+          "name": "fixed multiline control leaves room for the separate totals group",
+          "frame": [1094, 127],
+          "nativeCapture": "FixedMemo.png",
+          "screenshotSha256": "804a33c1fc382676622a2ec482b14c3f2a91311ed31b84f91fc9c6815ac8e7a1",
+          "controls": {"Memo": [13, 58, null, 51], "Amount": [916, 79, 152, 19]},
+          "groupBoxes": {"Summary": [null, 74, null, 40]},
+          "edit": {
+            "fields": {"Amount": {"TitleLocation": null}, "Memo": {"VerticalStretch": "false"}}
+          }
+        },
+        {
+          "name": "two-row cap and automatic form height reserve space below the control",
+          "frame": [1094, 127],
+          "nativeCapture": "Maximum2.png",
+          "screenshotSha256": "4c685a74338b06019418180b0aa0bade2314766e0573ce01ccd1c5c7b66c48e3",
+          "controls": {"Memo": [13, 58, null, 51], "Amount": [916, 79, 152, 19]},
+          "groupBoxes": {"Summary": [null, 74, null, 40]},
+          "edit": {
+            "fields": {"Amount": {"TitleLocation": null}, "Memo": {"MaxHeight": 2}}
           }
         }
       ]
