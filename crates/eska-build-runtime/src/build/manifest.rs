@@ -76,9 +76,30 @@ pub enum ProcessingArtifactError {
 pub struct ProcessingSources {
     root: PathBuf,
     files: BTreeMap<PathBuf, Vec<u8>>,
+    artifact_sha256: String,
 }
 
 impl ProcessingSources {
+    /// Verify a local EPF and its exact Designer XML snapshot without staging a launch.
+    /// # Errors
+    /// Returns an error for an unreadable artifact or a mismatch with its build manifest.
+    pub fn verify(source: &Path, artifact: &Path) -> Result<Self, ProcessingArtifactError> {
+        if !artifact.is_file()
+            || !artifact.extension().is_some_and(|extension| {
+                extension.eq_ignore_ascii_case(ArtifactType::Processing.extension())
+            })
+        {
+            return Err(ProcessingArtifactError::ArtifactMismatch);
+        }
+        verify_processing(source, artifact, artifact)
+    }
+
+    /// SHA-256 of the checked EPF bytes, in lowercase hexadecimal.
+    #[must_use]
+    pub fn artifact_sha256(&self) -> &str {
+        &self.artifact_sha256
+    }
+
     /// Check that a source file still has its verified contents and location.
     #[must_use]
     pub fn matches_file(&self, path: &Path) -> bool {
@@ -150,7 +171,11 @@ pub fn verify_processing(
     if manifest.source.snapshot_id != format!("sha256:{}", hex(&digest)) {
         return Err(SourceMismatch);
     }
-    Ok(ProcessingSources { root, files })
+    Ok(ProcessingSources {
+        root,
+        files,
+        artifact_sha256: checksum,
+    })
 }
 
 /// Copy the exact Designer source tree that will be passed to ibcmd and identify its bytes.

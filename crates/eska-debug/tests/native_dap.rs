@@ -715,6 +715,77 @@ fn native_standalone_launches_verified_external_processing() {
 }
 
 #[test]
+#[ignore = "requires an already loaded EPF in the owned 1C standalone fixture"]
+fn native_standalone_attaches_to_loaded_external_processing() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let args: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let source = Path::new(args["externalProcessing"]["sourceRoot"].as_str().unwrap())
+        .join("EskaEpfWire/Forms/ProbeForm/Ext/Form/Module.bsl");
+    let mut dap = Dap::standalone(root, "ru-RU", false);
+    dap.success("initialize", json!({"adapterID":"onec-http"}));
+    let mut invalid = args.clone();
+    invalid["externalProcessing"]["debugUrl"] = json!("file:///wrong/EskaEpfWire.epf");
+    let reply = dap.request("attach", invalid);
+    assert_eq!(reply["success"], false);
+    assert!(reply["message"].as_str().unwrap().contains("SHA-256"));
+    dap.success("attach", args);
+    dap.success("configurationDone", json!({}));
+    let points = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":14}]}),
+    );
+    assert_eq!(points["breakpoints"][0]["verified"], true);
+    let stopped = dap.stop_event();
+    assert_eq!(stopped["reason"], "breakpoint");
+    let thread = stopped["threadId"].as_u64().unwrap();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let top = &stack["stackFrames"][0];
+    assert_eq!(top["source"]["path"], json!(source));
+    assert_eq!(top["line"], 14);
+    let scopes = dap.success("scopes", json!({"frameId":top["id"]}));
+    let locals = dap.success(
+        "variables",
+        json!({"variablesReference":scopes["scopes"][0]["variablesReference"]}),
+    );
+    let evaluated = dap.success(
+        "evaluate",
+        json!({"frameId":top["id"],"expression":"Значение","context":"watch"}),
+    );
+    assert!(
+        evaluated["result"]
+            .as_str()
+            .and_then(|value| value.parse::<u32>().ok())
+            .is_some_and(|calls| calls >= 2),
+        "{evaluated}"
+    );
+    assert!(
+        locals["variables"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .any(|variable| {
+                variable["name"] == "Значение"
+                    && variable["value"]
+                        .as_str()
+                        .and_then(|value| value.parse::<u32>().ok())
+                        .is_some_and(|calls| calls >= 2)
+            }),
+        "{locals}"
+    );
+    dap.success("next", json!({"threadId":thread}));
+    let next_event = dap.stop_event();
+    assert_eq!(next_event["reason"], "step");
+    assert_eq!(next_event["threadId"], thread);
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    assert_eq!(stack["stackFrames"][0]["line"], 15);
+    assert_eq!(stack["stackFrames"][0]["source"]["path"], json!(source));
+    dap.shutdown();
+    assert!(!root.join(".eska").exists());
+}
+
+#[test]
 #[ignore = "requires a standalone fixture and an already running 1C client"]
 fn native_standalone_attaches_with_standard_dap() {
     let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();

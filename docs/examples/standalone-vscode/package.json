@@ -17,9 +17,18 @@
       "windows": { "program": "./eska-debug.exe" },
       "configurationAttributes": {
         "attach": {
-          "required": ["sourceRoot", "debugServerUrl"],
+          "required": ["debugServerUrl"],
           "properties": {
             "sourceRoot": { "type": "string" },
+            "externalProcessing": {
+              "type": "object",
+              "required": ["artifact", "sourceRoot", "debugUrl"],
+              "properties": {
+                "artifact": { "type": "string" },
+                "sourceRoot": { "type": "string" },
+                "debugUrl": { "type": "string" }
+              }
+            },
             "extensionRoots": { "type": "array", "items": { "type": "string" } },
             "debugServerUrl": { "type": "string" },
             "infobaseAlias": { "type": "string" },

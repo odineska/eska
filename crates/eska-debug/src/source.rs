@@ -103,13 +103,10 @@ impl Sources {
     pub fn add_processing(
         &mut self,
         source: &Path,
-        artifact: &Path,
+        url: String,
         provenance: ProcessingSources,
     ) -> Result<(), SourceError> {
         let root = source.canonicalize().map_err(|_| SourceError::Project)?;
-        let artifact = artifact.to_str().ok_or(SourceError::Project)?;
-        #[cfg(windows)]
-        let artifact = format!("/{}", artifact.replace('\\', "/"));
         let model = object_model::discover_from_source(&root, ProjectType::Processing)
             .map_err(|_| SourceError::Project)?;
         if !model
@@ -124,11 +121,7 @@ impl Sources {
         {
             return Err(SourceError::Project);
         }
-        self.index(
-            &model,
-            &root,
-            &ModuleOrigin::External(format!("file://{artifact}")),
-        );
+        self.index(&model, &root, &ModuleOrigin::External(url));
         self.processing = Some(provenance);
         Ok(())
     }

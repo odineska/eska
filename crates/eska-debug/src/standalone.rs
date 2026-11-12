@@ -2,7 +2,7 @@
 use std::{env, path::PathBuf};
 
 use eska_build_runtime::{
-    build::ProcessingArtifactError,
+    build::{ProcessingArtifactError, ProcessingSources},
     runtime::{DebugConnection, DebugLaunch},
 };
 use eska_project_core::project::local_settings::{
@@ -42,6 +42,7 @@ struct Arguments {
 struct ExternalProcessing {
     source_root: PathBuf,
     artifact: PathBuf,
+    debug_url: Option<String>,
 }
 
 impl Arguments {
@@ -53,7 +54,7 @@ impl Arguments {
                 .as_ref()
                 .is_none_or(|path| !path.as_os_str().is_empty())
             && processing.is_none_or(|processing| {
-                mode == Mode::Launch
+                (mode == Mode::Attach) == processing.debug_url.is_some()
                     && !processing.source_root.as_os_str().is_empty()
                     && !processing.artifact.as_os_str().is_empty()
             })
@@ -70,20 +71,62 @@ impl Arguments {
 }
 
 impl ExternalProcessing {
-    fn stage(self, sources: &mut Sources, launch: &mut DebugLaunch) -> Result<(), &'static str> {
-        let (provenance, staged) = launch
-            .stage_processing(&self.source_root, &self.artifact)
-            .map_err(|error| match error {
-                ProcessingArtifactError::SourceMismatch => "debug-epf-source-mismatch",
-                ProcessingArtifactError::ArtifactMismatch => "debug-epf-artifact-mismatch",
-                ProcessingArtifactError::Io(_) | ProcessingArtifactError::Manifest => {
-                    "debug-epf-manifest"
-                }
-            })?;
+    fn configure(
+        self,
+        sources: &mut Sources,
+        launch: Option<&mut DebugLaunch>,
+    ) -> Result<(), &'static str> {
+        let (provenance, url) = if let Some(launch) = launch {
+            let (provenance, staged) = launch
+                .stage_processing(&self.source_root, &self.artifact)
+                .map_err(|error| processing_failure(&error))?;
+            let path = staged.to_str().ok_or("debug-epf-manifest")?;
+            #[cfg(windows)]
+            let path = format!("/{}", path.replace('\\', "/"));
+            (provenance, format!("file://{path}"))
+        } else {
+            let provenance = ProcessingSources::verify(&self.source_root, &self.artifact)
+                .map_err(|error| processing_failure(&error))?;
+            let url = self.debug_url.ok_or("debug-epf-attach-url")?;
+            if !verified_processing_url(&url, provenance.artifact_sha256()) {
+                return Err("debug-epf-attach-url");
+            }
+            (provenance, url)
+        };
         sources
-            .add_processing(&self.source_root, &staged, provenance)
+            .add_processing(&self.source_root, url, provenance)
             .map_err(|_| "debug-epf-source-mismatch")
     }
+}
+
+const fn processing_failure(error: &ProcessingArtifactError) -> &'static str {
+    match error {
+        ProcessingArtifactError::SourceMismatch => "debug-epf-source-mismatch",
+        ProcessingArtifactError::ArtifactMismatch => "debug-epf-artifact-mismatch",
+        ProcessingArtifactError::Io(_) | ProcessingArtifactError::Manifest => "debug-epf-manifest",
+    }
+}
+
+fn verified_processing_url(url: &str, digest: &str) -> bool {
+    let Some(path) = url
+        .strip_prefix("file:///")
+        .or_else(|| url.strip_prefix("sfile:///"))
+    else {
+        return false;
+    };
+    if path
+        .chars()
+        .any(|character| character.is_control() || character == '\\')
+        || path.split('/').any(|part| matches!(part, "" | "." | ".."))
+    {
+        return false;
+    }
+    let mut parts = path.rsplit('/');
+    parts
+        .next()
+        .and_then(|name| name.rsplit_once('.'))
+        .is_some_and(|(stem, ext)| !stem.is_empty() && ext.eq_ignore_ascii_case("epf"))
+        && parts.next() == Some(digest)
 }
 
 pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> {
@@ -159,7 +202,7 @@ pub fn configure(mode: Mode, arguments: &Value) -> Result<Config, &'static str> 
             SourceError::Project | SourceError::ApplicationChoice => "debug-standalone-source",
         })?;
     if let Some(processing) = args.external_processing {
-        processing.stage(&mut sources, launch.as_mut().ok_or(INVALID)?)?;
+        processing.configure(&mut sources, launch.as_mut())?;
     }
     Ok(Config {
         connection,
@@ -182,4 +225,28 @@ fn valid_target(id: &str) -> bool {
                 byte.is_ascii_hexdigit()
             }
         })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::verified_processing_url;
+
+    #[test]
+    fn attach_url_is_bound_to_the_complete_artifact_digest() {
+        let digest = "0123456789abcdef".repeat(4);
+        for scheme in ["file", "sfile"] {
+            let url = format!("{scheme}:///Рабочие файлы/{digest}/Обработка.EPF");
+            assert!(verified_processing_url(&url, &digest));
+            assert!(!verified_processing_url(&url, &"f".repeat(64)));
+        }
+        for path in [
+            format!("file:///work/{digest}/../Probe.epf"),
+            format!("file:///work/{digest}/Probe.erf"),
+            format!("file://host/work/{digest}/Probe.epf"),
+            format!("https:///work/{digest}/Probe.epf"),
+            "file:///work/Probe.epf".to_owned(),
+        ] {
+            assert!(!verified_processing_url(&path, &digest), "{path}");
+        }
+    }
 }
