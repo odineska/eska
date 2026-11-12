@@ -1,6 +1,8 @@
 use std::{path::Path, process::ExitCode};
 
-use eska_build_runtime::runtime::apply::{self, ApplyError, Change, Mode, Stage};
+use eska_build_runtime::runtime::apply::{
+    self, ApplyError, Change, Mode, Review, ReviewReason, Stage, Status,
+};
 use eska_build_runtime::runtime::{self, RuntimeError};
 use eska_presentation::{
     arguments::build::runtime::{ApplyArgs, OutputFormat, ProfileArg, RunArgs},
@@ -101,28 +103,24 @@ fn failure(args: &RunArgs, kind: &str, code: &str, message: &str) -> ExitCode {
 }
 
 pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode {
-    let failure = |code, message: String| {
-        if matches!(args.format, OutputFormat::Json) {
-            println!(
-                "{}",
-                json!({"schema_version":1,"kind":"apply","status":"error","error":{"code":code}})
-            );
-        }
-        eprintln!("{message}");
-        ExitCode::FAILURE
-    };
     if matches!(args.profile, ProfileArg::Prod) {
-        return failure(
+        return apply_failure(
+            args,
+            localizer,
             "forbidden_action",
-            localizer.text("project-settings-forbidden"),
+            &localizer.text("project-settings-forbidden"),
+            None,
         );
     }
     let project = match discovery::discover(start) {
         Ok(project) => project,
         Err(error) => {
-            return failure(
+            return apply_failure(
+                args,
+                localizer,
                 "project_discovery",
-                diagnostics::present_project_error(&error, localizer),
+                &diagnostics::present_project_error(&error, localizer),
+                None,
             );
         }
     };
@@ -177,12 +175,9 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
                     })
                 );
                 println!("{} ({})", plan.target, plan.platform_version);
+                println!("{}", localizer.text(inspection_key(plan.inspection.status)));
                 for (path, change) in &plan.changes {
-                    let label = localizer.text(match change {
-                        Change::Added => "runtime-apply-added",
-                        Change::Modified => "runtime-apply-modified",
-                        Change::Removed => "runtime-apply-removed",
-                    });
+                    let label = localizer.text(change_key(*change));
                     println!("{label} {}", path.display());
                 }
                 if let Some(confirmation) = &plan.confirmation {
@@ -193,8 +188,62 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
         }
         Err(error) => {
             let (code, message) = apply_error(&error);
-            failure(code, localizer.text(message))
+            let review = match &error {
+                ApplyError::ReviewRequired(_, review) => Some(review.as_ref()),
+                _ => None,
+            };
+            apply_failure(args, localizer, code, &localizer.text(message), review)
         }
+    }
+}
+
+fn apply_failure(
+    args: &ApplyArgs,
+    localizer: &Localizer,
+    code: &str,
+    message: &str,
+    review: Option<&Review>,
+) -> ExitCode {
+    if matches!(args.format, OutputFormat::Json) {
+        let mut response =
+            json!({"schema_version":1,"kind":"apply","status":"error","error":{"code":code}});
+        if let Some(review) = review {
+            response["review"] = json!(review);
+        }
+        println!("{response}");
+    } else if let Some(review) = review {
+        eprintln!(
+            "{}",
+            localizer.text(inspection_key(review.inspection.status))
+        );
+        if let Some(changes) = &review.changes {
+            for (path, change) in changes {
+                let label = localizer.text(change_key(*change));
+                eprintln!("{label} {}", path.display());
+            }
+        }
+    }
+    eprintln!("{message}");
+    ExitCode::FAILURE
+}
+
+const fn change_key(change: Change) -> &'static str {
+    match change {
+        Change::Added => "runtime-apply-added",
+        Change::Modified => "runtime-apply-modified",
+        Change::Removed => "runtime-apply-removed",
+    }
+}
+
+const fn inspection_key(status: Status) -> &'static str {
+    match status {
+        Status::UpToDate => "runtime-apply-status-current",
+        Status::LocalChanges => "runtime-apply-status-local",
+        Status::DatabaseChanged => "runtime-apply-status-database",
+        Status::BothChanged => "runtime-apply-status-both",
+        Status::UnknownBaseline => "runtime-apply-status-unknown",
+        Status::DatabaseUnavailable => "runtime-apply-status-unavailable",
+        Status::Incomplete => "runtime-apply-status-incomplete",
     }
 }
 
@@ -225,9 +274,19 @@ const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
         ApplyError::Runtime(RuntimeError::Platform(_) | RuntimeError::PlatformUnavailable) => {
             ("platform_unavailable", "runtime-platform-unavailable")
         }
-        ApplyError::BaselineRequired => ("baseline_required", "runtime-apply-baseline-required"),
-        ApplyError::BaselineChanged => ("baseline_changed", "runtime-apply-baseline-changed"),
-        ApplyError::Incomplete => ("incomplete_apply", "runtime-apply-incomplete"),
+        ApplyError::ReviewRequired(reason, _) => match reason {
+            ReviewReason::BaselineRequired => {
+                ("baseline_required", "runtime-apply-baseline-required")
+            }
+            ReviewReason::BaselineChanged => ("baseline_changed", "runtime-apply-baseline-changed"),
+            ReviewReason::Incomplete => ("incomplete_apply", "runtime-apply-incomplete"),
+            ReviewReason::GenerationUnavailable => {
+                ("generation_failed", "runtime-apply-inspect-failed")
+            }
+            ReviewReason::InvalidBaseline | ReviewReason::InvalidGeneration => {
+                ("invalid_state", "runtime-apply-state-error")
+            }
+        },
         ApplyError::Busy => ("busy", "runtime-apply-busy"),
         ApplyError::StalePreview => ("stale_preview", "runtime-apply-stale"),
         ApplyError::ProjectType => ("project_type_unsupported", "runtime-apply-project-type"),

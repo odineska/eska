@@ -41,7 +41,13 @@ fn prepare(root: &Path) -> PathBuf {
         r#"#!/bin/sh
 case "$1:$2:$3" in
   --version::) printf '8.3.27.2342\n' ;;
-  infobase:config:generation-id) printf '0123456789012345678901234567890123456789\n' ;;
+  infobase:config:generation-id)
+    if test -f generation-unavailable; then exit 3; fi
+    if test -f generation-override; then
+      cat generation-override
+    else
+      printf '0123456789012345678901234567890123456789\n'
+    fi ;;
   infobase:config:apply)
     if test -f pause-apply; then
       touch apply-ready
@@ -64,6 +70,102 @@ esac
     )
     .unwrap();
     module
+}
+
+#[test]
+fn apply_reports_saved_source_and_database_changes_independently() {
+    let root = TestDir::new();
+    let root = &root.0;
+    let module = prepare(root);
+
+    let (output, no_baseline) = apply(root, "en-US", &[]);
+    assert!(!output.status.success());
+    assert_eq!(no_baseline["error"]["code"], "baseline_required");
+    assert_eq!(
+        no_baseline["review"]["inspection"]["status"],
+        "unknown_baseline"
+    );
+    assert_eq!(no_baseline["review"]["inspection"]["sources"], "unknown");
+    assert!(no_baseline["review"]["inspection"]["database_generation"].is_string());
+    assert!(no_baseline["review"]["changes"].is_null());
+
+    let (_, initial) = apply(root, "en-US", &["--initialize"]);
+    let token = initial["plan"]["confirmation"].as_str().unwrap();
+    assert!(
+        apply(root, "en-US", &["--initialize", "--confirm", token])
+            .0
+            .status
+            .success()
+    );
+    let (_, unchanged) = apply(root, "en-US", &[]);
+    assert_eq!(unchanged["plan"]["inspection"]["status"], "up_to_date");
+    assert_eq!(
+        unchanged["plan"]["inspection"]["baseline_generation"],
+        unchanged["plan"]["inspection"]["database_generation"]
+    );
+    let generation = root.join("generation-override");
+    fs::write(&generation, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n").unwrap();
+    let (_, external) = apply(root, "en-US", &[]);
+    assert_eq!(external["error"]["code"], "baseline_changed");
+    assert_eq!(
+        external["review"]["inspection"]["status"],
+        "database_changed"
+    );
+    assert_eq!(external["review"]["changes"], serde_json::json!({}));
+
+    let modified = fs::metadata(&module).unwrap().modified().unwrap();
+    fs::write(&module, "A = 2;").unwrap();
+    fs::File::options()
+        .write(true)
+        .open(&module)
+        .unwrap()
+        .set_times(fs::FileTimes::new().set_modified(modified))
+        .unwrap();
+    let (english, both) = apply(root, "en-US", &[]);
+    let (russian, localized) = apply(root, "ru-RU", &[]);
+    assert!(!english.status.success() && !russian.status.success());
+    assert_ne!(english.stderr, russian.stderr);
+    assert_eq!(both, localized);
+    assert_eq!(both["error"]["code"], "baseline_changed");
+    assert_eq!(both["review"]["inspection"]["status"], "both_changed");
+    assert_eq!(both["review"]["inspection"]["sources"], "changed");
+    assert_eq!(both["review"]["inspection"]["database"], "changed");
+    assert_eq!(both["review"]["changes"]["Module.bsl"], "modified");
+
+    fs::remove_file(generation).unwrap();
+    let (_, local) = apply(root, "en-US", &[]);
+    assert_eq!(local["plan"]["inspection"]["status"], "local_changes");
+    assert_eq!(local["plan"]["inspection"]["database"], "unchanged");
+    fs::write(root.join("generation-unavailable"), "").unwrap();
+    let (_, unavailable) = apply(root, "en-US", &[]);
+    assert_eq!(unavailable["error"]["code"], "generation_failed");
+    assert_eq!(
+        unavailable["review"]["inspection"]["status"],
+        "database_unavailable"
+    );
+    assert_eq!(unavailable["review"]["inspection"]["sources"], "changed");
+    assert_eq!(unavailable["review"]["inspection"]["database"], "unknown");
+    assert!(unavailable["review"]["inspection"]["database_generation"].is_null());
+    assert_eq!(unavailable["review"]["changes"]["Module.bsl"], "modified");
+}
+
+#[test]
+fn full_import_confirmation_requires_reviewing_a_new_pending_operation() {
+    let root = TestDir::new();
+    let root = &root.0;
+    prepare(root);
+    let (_, preview) = apply(root, "en-US", &["--initialize"]);
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    fs::write(root.join("fail-apply"), "").unwrap();
+    let (_, failed) = apply(root, "en-US", &["--initialize", "--confirm", token]);
+    assert_eq!(failed["error"]["code"], "apply_failed");
+    fs::remove_file(root.join("fail-apply")).unwrap();
+    let (output, stale) = apply(root, "en-US", &["--initialize", "--confirm", token]);
+    assert!(!output.status.success());
+    assert_eq!(stale["error"]["code"], "stale_preview");
+    let (_, recovery) = apply(root, "en-US", &["--initialize"]);
+    assert_eq!(recovery["plan"]["inspection"]["status"], "incomplete");
+    assert_ne!(recovery["plan"]["confirmation"], token);
 }
 
 #[test]
@@ -110,6 +212,9 @@ fn failed_apply_preserves_the_last_snapshot_and_requires_review() {
     assert_ne!(english.stderr, russian.stderr);
     assert_eq!(error, localized_error);
     assert_eq!(error["error"]["code"], "incomplete_apply");
+    assert_eq!(error["review"]["inspection"]["status"], "incomplete");
+    assert_eq!(error["review"]["inspection"]["pending_apply"], true);
+    assert_eq!(error["review"]["inspection"]["sources"], "changed");
 
     fs::remove_file(root.join("fail-apply")).unwrap();
     let (_, plan) = apply(root, "ru-RU", &["--initialize"]);

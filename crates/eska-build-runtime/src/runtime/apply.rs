@@ -51,6 +51,52 @@ pub enum Stage {
     Apply,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum Comparison {
+    Unknown,
+    Unchanged,
+    Changed,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum Status {
+    UpToDate,
+    LocalChanges,
+    DatabaseChanged,
+    BothChanged,
+    UnknownBaseline,
+    DatabaseUnavailable,
+    Incomplete,
+}
+
+#[derive(Debug, Serialize)]
+pub struct Inspection {
+    pub status: Status,
+    pub sources: Comparison,
+    pub database: Comparison,
+    pub baseline_generation: Option<String>,
+    pub database_generation: Option<String>,
+    pub pending_apply: bool,
+}
+
+#[derive(Debug, Serialize)]
+pub struct Review {
+    pub inspection: Inspection,
+    pub changes: Option<BTreeMap<PathBuf, Change>>,
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum ReviewReason {
+    BaselineRequired,
+    BaselineChanged,
+    InvalidBaseline,
+    Incomplete,
+    GenerationUnavailable,
+    InvalidGeneration,
+}
+
 #[derive(Debug, Serialize)]
 pub struct Plan {
     pub mode: Mode,
@@ -58,6 +104,7 @@ pub struct Plan {
     pub platform_version: String,
     pub changes: BTreeMap<PathBuf, Change>,
     pub confirmation: Option<String>,
+    pub inspection: Inspection,
 }
 
 #[derive(Debug)]
@@ -68,9 +115,7 @@ pub enum ApplyError {
     InvalidState,
     ProjectType,
     SourceInsideInfobase,
-    BaselineRequired,
-    BaselineChanged,
-    Incomplete,
+    ReviewRequired(ReviewReason, Box<Review>),
     Busy,
     StalePreview,
     UnrepresentablePath,
@@ -89,7 +134,12 @@ struct Baseline {
 /// Returns a structured preflight error when the target or last successful baseline cannot be verified.
 pub fn preview(project: &Project, name: ProfileName, initialize: bool) -> Result<Plan, ApplyError> {
     let target = Target::open(project, name)?;
-    let generation = target.generation()?;
+    let generation = match target.generation() {
+        Ok(generation) => Ok(generation),
+        Err(ApplyError::PlatformFailed(Stage::Inspect)) => Err(ReviewReason::GenerationUnavailable),
+        Err(ApplyError::InvalidState) => Err(ReviewReason::InvalidGeneration),
+        Err(error) => return Err(error),
+    };
     let current = target.capture(project, None)?;
     plan(&target, generation, &current, initialize)
 }
@@ -106,10 +156,10 @@ pub fn execute(
 ) -> Result<Plan, ApplyError> {
     let target = Target::open(project, name)?;
     let _lock = lock(&target.lock)?;
-    let generation = target.generation()?;
     let source = target.scratch.path().join("source");
     let current = target.capture(project, Some(&source))?;
-    let plan = plan(&target, generation, &current, initialize)?;
+    let generation = target.generation()?;
+    let plan = plan(&target, Ok(generation), &current, initialize)?;
     if plan.confirmation.as_deref() != Some(confirmation) {
         return Err(ApplyError::StalePreview);
     }
@@ -329,31 +379,67 @@ fn process_error(error: RunError) -> ApplyError {
 
 fn plan(
     target: &Target,
-    generation: String,
+    generation: Result<String, ReviewReason>,
     current: &Catalog,
     initialize: bool,
 ) -> Result<Plan, ApplyError> {
-    if !initialize && target.state.with_extension("pending").exists() {
-        return Err(ApplyError::Incomplete);
-    }
-    let baseline = match fs::read(&target.state) {
-        Ok(bytes) => match serde_json::from_slice::<Baseline>(&bytes) {
-            Ok(baseline) => Some(baseline),
-            Err(_) if initialize => None,
-            Err(_) => return Err(ApplyError::InvalidState),
-        },
+    let pending = match fs::read(target.state.with_extension("pending")) {
+        Ok(bytes) => Some(bytes),
         Err(error) if error.kind() == io::ErrorKind::NotFound => None,
         Err(error) => return Err(ApplyError::Io(error)),
     };
-    if !initialize {
-        let saved = baseline.as_ref().ok_or(ApplyError::BaselineRequired)?;
-        if saved.generation != generation {
-            return Err(ApplyError::BaselineChanged);
+    let baseline = match fs::read(&target.state) {
+        Ok(bytes) => {
+            serde_json::from_slice::<Baseline>(&bytes).map_err(|_| ReviewReason::InvalidBaseline)
         }
+        Err(error) if error.kind() == io::ErrorKind::NotFound => {
+            Err(ReviewReason::BaselineRequired)
+        }
+        Err(error) => return Err(ApplyError::Io(error)),
+    };
+    let delta = baseline
+        .as_ref()
+        .ok()
+        .map(|saved| changes(&saved.files, current));
+    if delta
+        .as_ref()
+        .is_some_and(|changes| changes.keys().any(|path| path.to_str().is_none()))
+    {
+        return Err(ApplyError::UnrepresentablePath);
+    }
+    let generation_refusal = generation.as_ref().err().copied();
+    let inspection = Inspection::new(
+        delta.as_ref(),
+        baseline
+            .as_ref()
+            .ok()
+            .map(|saved| saved.generation.as_str()),
+        generation.ok(),
+        pending.is_some(),
+    );
+    let refusal = generation_refusal.or_else(|| {
+        if initialize {
+            None
+        } else if inspection.pending_apply {
+            Some(ReviewReason::Incomplete)
+        } else if inspection.database == Comparison::Changed {
+            Some(ReviewReason::BaselineChanged)
+        } else {
+            baseline.as_ref().err().copied()
+        }
+    });
+    if let Some(reason) = refusal {
+        return Err(ApplyError::ReviewRequired(
+            reason,
+            Box::new(Review {
+                inspection,
+                changes: delta,
+            }),
+        ));
     }
     let empty = Catalog::new();
     let previous = baseline.as_ref().map_or(&empty, |saved| &saved.files);
-    let changes = changes(previous, current);
+    let changes = delta.unwrap_or_else(|| changes(&empty, current));
     let mode = if initialize {
         Mode::Initialize
     } else if changes.is_empty() {
@@ -375,7 +461,9 @@ fn plan(
             &target.identity,
             target.platform.version().as_str(),
             initialize,
-            generation,
+            &inspection.database_generation,
+            &inspection.baseline_generation,
+            pending,
             previous,
             current,
         );
@@ -391,7 +479,49 @@ fn plan(
         platform_version: target.platform.version().as_str().to_owned(),
         changes,
         confirmation,
+        inspection,
     })
+}
+
+impl Inspection {
+    fn new(
+        delta: Option<&BTreeMap<PathBuf, Change>>,
+        baseline_generation: Option<&str>,
+        database_generation: Option<String>,
+        pending_apply: bool,
+    ) -> Self {
+        let sources = match delta {
+            Some(delta) if delta.is_empty() => Comparison::Unchanged,
+            Some(_) => Comparison::Changed,
+            None => Comparison::Unknown,
+        };
+        let database = match baseline_generation.zip(database_generation.as_deref()) {
+            Some((baseline, actual)) if baseline == actual => Comparison::Unchanged,
+            Some(_) => Comparison::Changed,
+            None => Comparison::Unknown,
+        };
+        let status = if pending_apply {
+            Status::Incomplete
+        } else if database_generation.is_none() {
+            Status::DatabaseUnavailable
+        } else {
+            match (sources, database) {
+                (Comparison::Unknown, _) | (_, Comparison::Unknown) => Status::UnknownBaseline,
+                (Comparison::Unchanged, Comparison::Unchanged) => Status::UpToDate,
+                (Comparison::Changed, Comparison::Unchanged) => Status::LocalChanges,
+                (Comparison::Unchanged, Comparison::Changed) => Status::DatabaseChanged,
+                (Comparison::Changed, Comparison::Changed) => Status::BothChanged,
+            }
+        };
+        Self {
+            status,
+            sources,
+            database,
+            baseline_generation: baseline_generation.map(str::to_owned),
+            database_generation,
+            pending_apply,
+        }
+    }
 }
 
 fn changes(previous: &Catalog, current: &Catalog) -> BTreeMap<PathBuf, Change> {
