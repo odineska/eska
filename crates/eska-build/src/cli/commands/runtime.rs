@@ -331,6 +331,10 @@ fn print_apply_plan(plan: &Plan, localizer: &Localizer, show_confirmation: bool)
         println!("{label} {} ({})", extension.name, extension.uuid);
     }
     println!("{}", localizer.text(inspection_key(plan.inspection.status)));
+    for path in &plan.picture_references {
+        let label = localizer.text("runtime-apply-picture-reference");
+        println!("{label} {}", path.display());
+    }
     let grouped = print_object_changes(plan, localizer);
     for (path, change) in &plan.changes {
         if grouped.contains(path) {
@@ -369,6 +373,7 @@ fn print_object_changes<'a>(
             ObjectKind::CommonForm => "diff-metadata-common-form",
             ObjectKind::Role => "diff-metadata-role",
             ObjectKind::CommonModule => "diff-metadata-common-module",
+            ObjectKind::CommonPicture => "diff-metadata-common-picture",
         });
         if let Some(previous) = &object.previous_name {
             println!("{action} {kind} {previous} → {}", object.name);

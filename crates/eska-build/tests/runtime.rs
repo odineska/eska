@@ -883,6 +883,263 @@ fn apply_proves_structural_identity_and_keeps_unrelated_root_xml_out_of_the_plan
     }
 }
 
+fn prepare_picture_apply(
+    fixture: &Path,
+    extension: bool,
+) -> (PathBuf, PathBuf, String, &'static str) {
+    if extension {
+        let (base, root) = prepare_extensions(fixture);
+        let source = root.join("src");
+        fs::create_dir(source.join("Roles")).unwrap();
+        fs::write(source.join("Roles/One_Default.xml"), r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><Role uuid="97bcf1fc-5482-4ff0-b651-876c772bd338"><Properties><Name>One_Default</Name></Properties></Role></MetaDataObject>"#).unwrap();
+        let root_xml = fs::read_to_string(source.join("Configuration.xml")).unwrap()
+        .replace("</Properties>", r#"<DefaultRoles><xr:Item xmlns:xr="http://v8.1c.ru/8.3/xcf/readable">Role.One_Default</xr:Item></DefaultRoles></Properties>"#)
+        .replace("</Configuration>", "<ChildObjects><Role>One_Default</Role></ChildObjects></Configuration>");
+        (base, root, root_xml, "Roles/One_Default.xml")
+    } else {
+        prepare(fixture);
+        fs::create_dir(fixture.join("src/Languages")).unwrap();
+        fs::write(fixture.join("src/Languages/Русский.xml"), include_bytes!("../../../tests/fixtures/forms/native-picture-composition/base/Languages/Русский.xml")).unwrap();
+        let root_xml = include_str!(
+            "../../../tests/fixtures/forms/native-picture-composition/base/Configuration.xml"
+        )
+        .replace("<CommonPicture>ProbeIcon</CommonPicture>", "")
+        .replace("<CommonForm>ProbePicture</CommonForm>", "");
+        (
+            fixture.to_path_buf(),
+            fixture.to_path_buf(),
+            root_xml,
+            "Languages/Русский.xml",
+        )
+    }
+}
+
+fn confirm_picture_plan(
+    base: &Path,
+    root: &Path,
+    expected: &[String],
+    operation: Option<(&str, &str, Option<&str>)>,
+) {
+    let (output, preview) = apply(root, "en-US", &[]);
+    assert!(output.status.success(), "{preview}");
+    assert_eq!(preview, apply(root, "ru-RU", &[]).1);
+    let plan = &preview["plan"];
+    assert_eq!(plan["mode"], "incremental", "{plan}");
+    assert_eq!(plan["import_files"], serde_json::json!(expected));
+    if let Some((operation, name, previous)) = operation {
+        assert_eq!(plan["object_changes"][0]["kind"], "common_picture");
+        assert_eq!(plan["object_changes"][0]["operation"], operation);
+        assert_eq!(plan["object_changes"][0]["name"], name);
+        assert_eq!(
+            plan["object_changes"][0]["previous_name"],
+            serde_json::json!(previous)
+        );
+    }
+    let token = plan["confirmation"].as_str().unwrap();
+    assert!(
+        apply(root, "ru-RU", &["--confirm", token])
+            .0
+            .status
+            .success()
+    );
+    assert_eq!(
+        fs::read_to_string(base.join("import-files")).unwrap(),
+        expected.join("\n") + "\n"
+    );
+    assert_eq!(apply(root, "en-US", &[]).1["plan"]["mode"], "unchanged");
+}
+
+const TEST_PICTURE_SVG: &str = include_str!(
+    "../../../tests/fixtures/forms/native-picture-composition/base/CommonPictures/ProbeIcon/Ext/Picture/Picture.svg"
+);
+
+fn picture_paths(name: &str) -> [String; 3] {
+    [
+        format!("CommonPictures/{name}.xml"),
+        format!("CommonPictures/{name}/Ext/Picture.xml"),
+        format!("CommonPictures/{name}/Ext/Picture/Picture.svg"),
+    ]
+}
+
+fn write_test_picture(source: &Path, name: &str) {
+    let original = include_str!(
+        "../../../tests/fixtures/forms/native-picture-composition/base/CommonPictures/ProbeIcon.xml"
+    );
+    let package = include_bytes!(
+        "../../../tests/fixtures/forms/native-picture-composition/base/CommonPictures/ProbeIcon/Ext/Picture.xml"
+    );
+
+    let [owner, wrapper, payload] = picture_paths(name).map(|path| source.join(path));
+    fs::create_dir_all(payload.parent().unwrap()).unwrap();
+    fs::write(owner, original.replace("ProbeIcon", name)).unwrap();
+    fs::write(wrapper, package).unwrap();
+    fs::write(payload, TEST_PICTURE_SVG).unwrap();
+}
+
+#[test]
+fn apply_reviews_and_imports_a_complete_common_svg_picture() {
+    for extension in [false, true] {
+        let fixture = TestDir::new();
+        let (base, root, original_root, anchor) = prepare_picture_apply(&fixture.0, extension);
+        let source = root.join("src");
+        let write_root = |name: Option<&str>| {
+            let entry = name.map_or_else(String::new, |name| {
+                format!("<CommonPicture>{name}</CommonPicture>")
+            });
+            fs::write(
+                source.join("Configuration.xml"),
+                original_root.replace("</ChildObjects>", &format!("{entry}</ChildObjects>")),
+            )
+            .unwrap();
+        };
+        write_root(None);
+        initialize(&root);
+
+        let name = if extension { "One_Icon" } else { "Icon" };
+        let renamed = if extension {
+            "One_RenamedIcon"
+        } else {
+            "RenamedIcon"
+        };
+        let remove_picture = |name: &str| {
+            let owner = source.join(&picture_paths(name)[0]);
+            fs::remove_file(&owner).unwrap();
+            fs::remove_dir_all(owner.with_extension("")).unwrap();
+        };
+        write_root(Some(name));
+        write_test_picture(&source, name);
+        let [owner, wrapper, payload] = picture_paths(name);
+        fs::remove_file(source.join(&payload)).unwrap();
+        assert_eq!(apply(&root, "en-US", &[]).1["plan"]["mode"], "unsupported");
+        write_test_picture(&source, name);
+        if extension {
+            let path = source.join(&owner);
+            let xml = fs::read_to_string(&path).unwrap();
+            fs::write(
+                &path,
+                xml.replace(
+                    "<Properties>",
+                    "<Properties><ObjectBelonging>Adopted</ObjectBelonging>",
+                ),
+            )
+            .unwrap();
+            assert_eq!(apply(&root, "en-US", &[]).1["plan"]["mode"], "unsupported");
+            fs::write(&path, xml).unwrap();
+        }
+        let structural = |name: &str| {
+            std::iter::once("Configuration.xml".to_owned())
+                .chain(picture_paths(name))
+                .collect::<Vec<_>>()
+        };
+        confirm_picture_plan(&base, &root, &structural(name), Some(("added", name, None)));
+
+        let changed_svg = TEST_PICTURE_SVG.replace("#E02020", "#104090");
+        fs::write(source.join(&payload), changed_svg).unwrap();
+        confirm_picture_plan(&base, &root, &picture_paths(name)[1..], None);
+        let path = source.join(&wrapper);
+        let wrapper = fs::read_to_string(&path).unwrap();
+        fs::write(&path, wrapper.replace("Picture.svg", "../Picture.svg")).unwrap();
+        assert_eq!(apply(&root, "en-US", &[]).1["plan"]["mode"], "unsupported");
+        fs::write(&path, wrapper).unwrap();
+        let path = source.join(&owner);
+        let descriptor = fs::read_to_string(&path).unwrap();
+        let descriptor = descriptor.replace("<Comment/>", "<Comment>Updated picture</Comment>");
+        fs::write(&path, &descriptor).unwrap();
+        confirm_picture_plan(&base, &root, &picture_paths(name), None);
+        fs::write(&path, descriptor.replace("44adb23b", "54adb23b")).unwrap();
+        assert_eq!(apply(&root, "en-US", &[]).1["plan"]["mode"], "unsupported");
+        fs::write(&path, descriptor).unwrap();
+
+        remove_picture(name);
+        write_test_picture(&source, renamed);
+        write_root(Some(renamed));
+        confirm_picture_plan(
+            &base,
+            &root,
+            &structural(renamed),
+            Some(("renamed", renamed, Some(name))),
+        );
+        remove_picture(renamed);
+        write_root(None);
+        confirm_picture_plan(
+            &base,
+            &root,
+            &["Configuration.xml".to_owned(), anchor.to_owned()],
+            Some(("removed", renamed, None)),
+        );
+    }
+}
+
+#[test]
+fn apply_reviews_unchanged_form_references_before_renaming_a_picture() {
+    let root = TestDir::new();
+    let root = &root.0;
+    prepare(root);
+    let source = root.join("src");
+    let fixture = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../../tests/fixtures/forms/native-picture-composition/base");
+    let layout = "CommonForms/ProbePicture/Ext/Form.xml";
+    for path in [
+        "Configuration.xml",
+        "Languages/Русский.xml",
+        "CommonForms/ProbePicture.xml",
+        layout,
+        "CommonPictures/ProbeIcon.xml",
+        "CommonPictures/ProbeIcon/Ext/Picture.xml",
+        "CommonPictures/ProbeIcon/Ext/Picture/Picture.svg",
+    ] {
+        let destination = source.join(path);
+        fs::create_dir_all(destination.parent().unwrap()).unwrap();
+        fs::copy(fixture.join(path), destination).unwrap();
+    }
+    initialize(root);
+
+    for path in ["Configuration.xml", "CommonPictures/ProbeIcon.xml"] {
+        let path = source.join(path);
+        let xml = fs::read_to_string(&path).unwrap();
+        fs::write(&path, xml.replace("ProbeIcon", "RenamedIcon")).unwrap();
+    }
+    for suffix in ["", ".xml"] {
+        fs::rename(
+            source.join(format!("CommonPictures/ProbeIcon{suffix}")),
+            source.join(format!("CommonPictures/RenamedIcon{suffix}")),
+        )
+        .unwrap();
+    }
+    let (_, preview) = apply(root, "en-US", &[]);
+    assert_eq!(preview, apply(root, "ru-RU", &[]).1);
+    assert_eq!(preview["plan"]["mode"], "unsupported");
+    assert_eq!(
+        preview["plan"]["picture_references"],
+        serde_json::json!([layout])
+    );
+    assert!(preview["plan"]["confirmation"].is_null());
+    assert!(!root.join("import-files").exists());
+
+    let xml = fs::read_to_string(source.join(layout)).unwrap();
+    fs::write(
+        source.join(layout),
+        xml.replace("CommonPicture.ProbeIcon", "CommonPicture.RenamedIcon"),
+    )
+    .unwrap();
+    let (_, preview) = apply(root, "en-US", &[]);
+    assert_eq!(preview["plan"]["mode"], "incremental", "{preview}");
+    assert!(preview["plan"].get("picture_references").is_none());
+    assert!(
+        preview["plan"]["import_files"]
+            .as_array()
+            .unwrap()
+            .contains(&serde_json::json!(layout))
+    );
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    assert!(
+        apply(root, "ru-RU", &["--confirm", token])
+            .0
+            .status
+            .success()
+    );
+}
+
 #[test]
 fn apply_imports_existing_metadata_properties_and_their_form_resource() {
     let root = TestDir::new();

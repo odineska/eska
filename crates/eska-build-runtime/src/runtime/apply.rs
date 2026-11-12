@@ -3,6 +3,7 @@
 pub mod application;
 mod descriptor;
 mod extension;
+mod picture;
 mod structure;
 
 pub use extension::Identity as ExtensionIdentity;
@@ -119,6 +120,8 @@ pub struct Plan {
     pub import_files: Option<Vec<PathBuf>>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub object_changes: Vec<ObjectChange>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub picture_references: Vec<PathBuf>,
     pub confirmation: Option<String>,
     pub inspection: Inspection,
     #[serde(skip)]
@@ -226,7 +229,7 @@ fn write_plan(
     let root = plan
         .root
         .take()
-        .or_else(|| structure::Root::read(source, target.project_type(), true));
+        .or_else(|| structure::Root::read(source, target.project_type()));
     let state = target.state.with_extension("pending");
     let directory = target.state.parent().ok_or(ApplyError::InvalidState)?;
     let mut marker = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
@@ -796,6 +799,15 @@ fn assemble_plan(
             &saved.descriptors,
         )
     });
+    let picture_references = structural.as_ref().map_or_else(Vec::new, |selection| {
+        picture::reference_files(source, current, &selection.objects)
+    });
+    if picture_references
+        .iter()
+        .any(|path| path.to_str().is_none())
+    {
+        return Err(ApplyError::UnrepresentablePath);
+    }
     let empty_descriptors = descriptor::Shapes::new();
     let descriptors = baseline
         .as_ref()
@@ -805,6 +817,8 @@ fn assemble_plan(
         (Mode::Initialize, None)
     } else if changes.is_empty() {
         (Mode::Unchanged, None)
+    } else if !picture_references.is_empty() {
+        (Mode::Unsupported, None)
     } else {
         structural
             .as_ref()
@@ -847,12 +861,7 @@ fn assemble_plan(
     let object_changes = if mode == Mode::Incremental
         && let Some(selection) = structural
     {
-        root = Some(selection.root);
-        for path in selection.removed {
-            descriptors.remove(&path);
-        }
-        descriptors.extend(selection.shapes);
-        selection.objects
+        selection.update_baseline(&mut root, &mut descriptors)
     } else {
         Vec::new()
     };
@@ -865,6 +874,7 @@ fn assemble_plan(
         changes,
         import_files,
         object_changes,
+        picture_references,
         confirmation,
         inspection,
         descriptors,

@@ -13,7 +13,7 @@ use eska_project_core::project::{
 };
 use serde::{Deserialize, Serialize};
 
-use super::{Catalog, Change, checksum};
+use super::{Catalog, Change, checksum, picture, structure};
 
 const ROOT: &str = "Configuration.xml";
 const MD_NAMESPACE: &str = "http://v8.1c.ru/8.3/MDClasses";
@@ -42,6 +42,8 @@ pub(super) fn baseline(source: &Path, project_type: ProjectType, catalog: &Catal
                 simple_role(path, catalog)
                     || path.parent() == Some(Path::new("CommonModules"))
                         && descriptor_path(path, project_type)
+                    || path.parent() == Some(Path::new(picture::COLLECTION))
+                        && structure::own_extension_picture(source, path)
             }
             _ => descriptor_path(path, project_type),
         })
@@ -67,17 +69,31 @@ pub(super) fn import_files(
     catalog: &Catalog,
     baseline: &Shapes,
 ) -> Option<Vec<PathBuf>> {
-    if changes.iter().any(|(path, change)| {
-        *change != Change::Modified
-            || !(has_extension(path, "bsl")
-                || match project_type {
-                    ProjectType::Extension => simple_role(path, catalog),
-                    _ => has_extension(path, "xml"),
-                })
-    }) {
-        return None;
-    }
     let mut files: BTreeSet<_> = changes.keys().cloned().collect();
+    let mut pictures = BTreeSet::new();
+    for (path, change) in changes {
+        if *change != Change::Modified {
+            return None;
+        }
+        if path.starts_with(picture::COLLECTION) {
+            pictures.insert(picture::owner(path)?);
+        } else if !has_extension(path, "bsl")
+            && !match project_type {
+                ProjectType::Extension => simple_role(path, catalog),
+                _ => has_extension(path, "xml"),
+            }
+        {
+            return None;
+        }
+    }
+    for owner in &pictures {
+        files.extend(picture::import_resources(
+            source,
+            project_type,
+            catalog,
+            owner,
+        )?);
+    }
     let catalog_roots: Vec<_> = changes
         .keys()
         .filter(|path| {
@@ -105,8 +121,9 @@ pub(super) fn import_files(
     }
     let xml: Vec<_> = files
         .iter()
-        .filter(|path| has_extension(path, "xml"))
+        .filter(|path| has_extension(path, "xml") && !path.starts_with(picture::COLLECTION))
         .cloned()
+        .chain(pictures)
         .collect();
     if !xml.is_empty() {
         let affected =
@@ -162,10 +179,12 @@ fn same_descriptor(
         let supported = model.objects_for_changed_path(path).iter().any(|object| {
             object.descriptor_path() == path
                 && match project_type {
-                    ProjectType::Extension => object.metadata_type() == "role",
+                    ProjectType::Extension => {
+                        matches!(object.metadata_type(), "role" | "common-picture")
+                    }
                     _ => matches!(
                         object.metadata_type(),
-                        "language" | "common-form" | "form" | "catalog"
+                        "language" | "common-form" | "form" | "catalog" | "common-picture"
                     ),
                 }
         });

@@ -1142,6 +1142,7 @@ runtime-apply-status-unknown = Для сравнения нет известно
 runtime-apply-status-unavailable = Не удалось проверить поколение базы.
 runtime-apply-status-incomplete = Предыдущее применение не завершено.
 runtime-apply-unsupported = Для этих изменений частичный импорт недоступен. Просмотрите явный полный импорт с --initialize.
+runtime-apply-picture-reference = Проверьте ссылку на общую картинку в файле
 runtime-apply-added = Добавлен
 runtime-apply-modified = Изменён
 runtime-apply-removed = Удалён

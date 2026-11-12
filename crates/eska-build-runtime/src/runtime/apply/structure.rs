@@ -8,7 +8,7 @@ use std::{
 use eska_project_core::project::{ProjectType, object_model};
 use serde::{Deserialize, Serialize};
 
-use super::{Catalog, Change, checksum, descriptor};
+use super::{Catalog, Change, checksum, descriptor, picture};
 
 const NAMESPACE: &str = "http://v8.1c.ru/8.3/MDClasses";
 const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
@@ -21,6 +21,7 @@ pub enum ObjectKind {
     CommonForm,
     Role,
     CommonModule,
+    CommonPicture,
 }
 
 impl ObjectKind {
@@ -30,6 +31,7 @@ impl ObjectKind {
             Self::CommonForm => "CommonForms",
             Self::Role => "Roles",
             Self::CommonModule => "CommonModules",
+            Self::CommonPicture => picture::COLLECTION,
         }
     }
 
@@ -39,6 +41,7 @@ impl ObjectKind {
             Self::CommonForm => "common-form",
             Self::Role => "role",
             Self::CommonModule => "common-module",
+            Self::CommonPicture => "common-picture",
         }
     }
 }
@@ -69,6 +72,8 @@ pub(super) struct Root {
     default_role: Option<String>,
     #[serde(default)]
     common_modules: bool,
+    #[serde(default)]
+    common_pictures: bool,
     other_xml: String,
 }
 
@@ -122,16 +127,22 @@ impl Entry {
             {
                 Some(files)
             }
+            ObjectKind::CommonPicture if picture::matches_bundle(&root, &files) => Some(files),
             _ => None,
         }
     }
 }
 
 impl Root {
-    pub(super) fn read(
+    pub(super) fn read(source: &Path, project_type: ProjectType) -> Option<Self> {
+        Self::read_with_layout(source, project_type, true, true)
+    }
+
+    fn read_with_layout(
         source: &Path,
         project_type: ProjectType,
         common_modules: bool,
+        common_pictures: bool,
     ) -> Option<Self> {
         let xml = descriptor::read_xml(&source.join(ROOT))?;
         let xml = xml.trim_start_matches('\u{feff}');
@@ -185,6 +196,9 @@ impl Root {
                 (_, Some(NAMESPACE), "CommonModule") if common_modules => {
                     Some(ObjectKind::CommonModule)
                 }
+                (_, Some(NAMESPACE), "CommonPicture") if common_pictures => {
+                    Some(ObjectKind::CommonPicture)
+                }
                 _ => None,
             };
             if let Some(kind) = kind {
@@ -201,7 +215,7 @@ impl Root {
                     return None;
                 }
                 if project_type == ProjectType::Extension
-                    && kind == ObjectKind::CommonModule
+                    && matches!(kind, ObjectKind::CommonModule | ObjectKind::CommonPicture)
                     && !own_extension_object(source, &entry)
                 {
                     other.push(&bytes[node.range()]);
@@ -219,6 +233,7 @@ impl Root {
             default_language,
             default_role,
             common_modules,
+            common_pictures,
             other_xml: checksum(&other),
         };
         if let Some(anchor) = recorded.anchor()
@@ -250,14 +265,20 @@ impl Root {
         project_type: ProjectType,
         old: &Catalog,
     ) -> Option<Self> {
-        // Older baselines hashed the module declarations as unrelated XML. Preserve
-        // that proof unless there were no module descriptors to account for.
-        let common_modules = self.common_modules
-            || !old.keys().any(|path| {
-                path.parent() == Some(Path::new("CommonModules"))
+        // Older baselines hashed these declarations as unrelated XML. Preserve
+        // that proof unless there were no descriptors of that kind.
+        let contains = |kind: ObjectKind| {
+            old.keys().any(|path| {
+                path.parent() == Some(Path::new(kind.collection()))
                     && descriptor::has_extension(path, "xml")
-            });
-        Self::read(source, project_type, common_modules)
+            })
+        };
+        Self::read_with_layout(
+            source,
+            project_type,
+            self.common_modules || !contains(ObjectKind::CommonModule),
+            self.common_pictures || !contains(ObjectKind::CommonPicture),
+        )
     }
 }
 
@@ -277,6 +298,7 @@ fn own_extension_object(source: &Path, entry: &Entry) -> bool {
     let tag = match entry.kind {
         ObjectKind::Role => "Role",
         ObjectKind::CommonModule => "CommonModule",
+        ObjectKind::CommonPicture => "CommonPicture",
         _ => return false,
     };
     let Some(xml) = descriptor::read_xml(&source.join(entry.descriptor())) else {
@@ -307,6 +329,21 @@ fn own_extension_object(source: &Path, entry: &Entry) -> bool {
         && only_child(properties, "Name").and_then(|node| node.text()) == Some(entry.name.as_str())
 }
 
+pub(super) fn own_extension_picture(source: &Path, descriptor: &Path) -> bool {
+    descriptor
+        .file_stem()
+        .and_then(|name| name.to_str())
+        .is_some_and(|name| {
+            own_extension_object(
+                source,
+                &Entry {
+                    kind: ObjectKind::CommonPicture,
+                    name: name.to_owned(),
+                },
+            )
+        })
+}
+
 fn own_property(kind: ObjectKind, name: &str) -> bool {
     matches!(name, "Name" | "Synonym" | "Comment")
         || kind == ObjectKind::CommonModule
@@ -321,6 +358,8 @@ fn own_property(kind: ObjectKind, name: &str) -> bool {
                     | "Privileged"
                     | "ReturnValuesReuse"
             )
+        || kind == ObjectKind::CommonPicture
+            && matches!(name, "AvailabilityForChoice" | "AvailabilityForAppearance")
 }
 
 fn only_child<'a, 'i>(
@@ -335,11 +374,26 @@ fn only_child<'a, 'i>(
 }
 
 pub(super) struct Selection {
-    pub root: Root,
+    root: Root,
     pub files: Vec<PathBuf>,
     pub objects: Vec<ObjectChange>,
-    pub removed: Vec<PathBuf>,
-    pub shapes: descriptor::Shapes,
+    removed: Vec<PathBuf>,
+    shapes: descriptor::Shapes,
+}
+
+impl Selection {
+    pub(super) fn update_baseline(
+        self,
+        root: &mut Option<Root>,
+        descriptors: &mut descriptor::Shapes,
+    ) -> Vec<ObjectChange> {
+        *root = Some(self.root);
+        for path in self.removed {
+            descriptors.remove(&path);
+        }
+        descriptors.extend(self.shapes);
+        self.objects
+    }
 }
 
 pub(super) fn select(
@@ -469,6 +523,9 @@ fn read_added_shapes(
     paths
         .iter()
         .map(|path| {
+            if path.starts_with(picture::COLLECTION) && !picture::valid_package(source, path) {
+                return None;
+            }
             descriptor::shape(source, affected.model(), path).map(|shape| (path.clone(), shape))
         })
         .collect()

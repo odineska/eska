@@ -1142,6 +1142,7 @@ runtime-apply-status-unknown = No known applied snapshot is available for compar
 runtime-apply-status-unavailable = The database generation could not be verified.
 runtime-apply-status-incomplete = A previous apply operation is incomplete.
 runtime-apply-unsupported = Partial import is unavailable for these changes. Review an explicit full import with --initialize.
+runtime-apply-picture-reference = Review the common picture reference in
 runtime-apply-added = Added
 runtime-apply-modified = Modified
 runtime-apply-removed = Removed
