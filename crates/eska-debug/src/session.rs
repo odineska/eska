@@ -1,13 +1,12 @@
 //! One serialized debugger session. HTTP requests and poll results have a single owner.
+mod client;
+mod poll;
+
 use std::{
     collections::BTreeMap,
     io::{self, BufReader, BufWriter, Write},
     path::Path,
-    sync::{
-        Arc,
-        atomic::{AtomicBool, Ordering},
-        mpsc,
-    },
+    sync::{Arc, mpsc},
     thread,
     time::{Duration, Instant},
 };
@@ -24,8 +23,9 @@ use crate::{
     state::{State, Variable},
 };
 
-const POLL_MIN: Duration = Duration::from_millis(30);
-const POLL_MAX: Duration = Duration::from_millis(240);
+use client::Client;
+use poll::Poll;
+
 const MAX_THREADS: usize = 256;
 const MAX_PENDING: usize = 16;
 
@@ -36,38 +36,6 @@ pub struct Config {
     pub mode: Mode,
     pub launch: Option<DebugLaunch>,
     pub production: bool,
-}
-
-struct Client {
-    stop: Arc<AtomicBool>,
-    exited: Arc<AtomicBool>,
-    worker: Option<thread::JoinHandle<()>>,
-}
-
-impl Client {
-    fn launch(launch: DebugLaunch) -> io::Result<Self> {
-        let stop = Arc::new(AtomicBool::new(false));
-        let exited = Arc::new(AtomicBool::new(false));
-        let (cancel, complete) = (Arc::clone(&stop), Arc::clone(&exited));
-        let worker = thread::Builder::new().spawn(move || {
-            let _ = launch.run(&cancel);
-            complete.store(true, Ordering::Release);
-        })?;
-        Ok(Self {
-            stop,
-            exited,
-            worker: Some(worker),
-        })
-    }
-}
-
-impl Drop for Client {
-    fn drop(&mut self) {
-        self.stop.store(true, Ordering::Release);
-        if let Some(worker) = self.worker.take() {
-            let _ = worker.join();
-        }
-    }
 }
 
 type Failure = &'static str;
@@ -83,44 +51,6 @@ struct Pending {
 enum Input {
     Packet(io::Result<Option<Request>>),
     Events(io::Result<Vec<Event>>),
-}
-
-struct Poll {
-    stop: Arc<AtomicBool>,
-    worker: thread::JoinHandle<()>,
-}
-
-impl Poll {
-    fn start(server: Arc<Server>, send: mpsc::SyncSender<Input>) -> io::Result<Self> {
-        let stop = Arc::new(AtomicBool::new(false));
-        let flag = Arc::clone(&stop);
-        let worker = thread::Builder::new().spawn(move || {
-            let mut interval = POLL_MIN;
-            while !flag.load(Ordering::Acquire) {
-                let events = server.poll();
-                let empty = events.as_ref().is_ok_and(Vec::is_empty);
-                if !empty && send.try_send(Input::Events(events)).is_err() {
-                    // A bounded queue cannot discard a stop or a calculation. End polling;
-                    // the session will report loss of its event stream.
-                    flag.store(true, Ordering::Release);
-                    break;
-                }
-                interval = if empty {
-                    (interval * 2).min(POLL_MAX)
-                } else {
-                    POLL_MIN
-                };
-                thread::park_timeout(interval);
-            }
-        })?;
-        Ok(Self { stop, worker })
-    }
-
-    fn stop(self) {
-        self.stop.store(true, Ordering::Release);
-        self.worker.thread().unpark();
-        let _ = self.worker.join();
-    }
 }
 
 struct Session<'a, W> {
@@ -170,8 +100,9 @@ pub fn run(config: Config, language: &Localizer) -> io::Result<()> {
     let operation = eska_tool_runtime::Operation::new()
         .map_err(|_| io::Error::other("cannot install debugger cancellation"))?;
     let result = drive(&mut session, &receive, &operation);
+    let cancelled = session.cancel_pending();
     session.cleanup();
-    result
+    result.and(cancelled)
 }
 
 fn drive(
@@ -179,22 +110,13 @@ fn drive(
     receive: &mpsc::Receiver<Input>,
     operation: &eska_tool_runtime::Operation,
 ) -> io::Result<()> {
-    let mut failed_since = None;
     while !session.ended && !operation.is_cancelled() {
-        if session
-            .client
-            .as_ref()
-            .is_some_and(|client| client.exited.load(Ordering::Acquire))
-        {
-            session.output.event("terminated", &json!({}))?;
+        if let Some(success) = session.client.as_mut().and_then(Client::completed) {
+            session.terminate((!success).then_some("runtime-client-failed"))?;
             break;
         }
-        if session
-            .poll
-            .as_ref()
-            .is_some_and(|poll| poll.stop.load(Ordering::Acquire))
-        {
-            session.output.event("terminated", &json!({}))?;
+        if session.poll.as_ref().is_some_and(Poll::failed) {
+            session.terminate(Some(ENDPOINT))?;
             break;
         }
         match receive.recv_timeout(Duration::from_millis(100)) {
@@ -202,19 +124,11 @@ fn drive(
             Ok(Input::Packet(Ok(None))) | Err(mpsc::RecvTimeoutError::Disconnected) => break,
             Ok(Input::Packet(Err(error))) => return Err(error),
             Ok(Input::Events(Ok(events))) => {
-                failed_since = None;
                 session.events(events)?;
             }
             Ok(Input::Events(Err(_))) => {
-                let first = *failed_since.get_or_insert_with(Instant::now);
-                if first.elapsed() >= Duration::from_secs(5) {
-                    session.output.event(
-                        "output",
-                        &json!({"category":"stderr","output":session.language.text(ENDPOINT)}),
-                    )?;
-                    session.output.event("terminated", &json!({}))?;
-                    break;
-                }
+                session.terminate(Some(ENDPOINT))?;
+                break;
             }
             Err(mpsc::RecvTimeoutError::Timeout) => {}
         }
@@ -224,6 +138,17 @@ fn drive(
 }
 
 impl<W: Write> Session<'_, W> {
+    fn terminate(&mut self, failure: Option<Failure>) -> io::Result<()> {
+        self.cancel_pending()?;
+        if let Some(key) = failure {
+            self.output.event(
+                "output",
+                &json!({"category":"stderr","output":format!("{}\n", self.language.text(key))}),
+            )?;
+        }
+        self.output.event("terminated", &json!({}))
+    }
+
     fn request(&mut self, request: Request) -> io::Result<()> {
         if matches!(request.command.as_str(), "evaluate" | "variables") {
             return self.calculation_request(request);
@@ -238,11 +163,17 @@ impl<W: Write> Session<'_, W> {
             }
             "launch" | "attach" => self.open(&request.command),
             "configurationDone" if self.server.is_some() && !self.configured => {
-                self.configured = true;
-                if let Some(launch) = self.config.launch.take() {
-                    self.client = Some(Client::launch(launch)?);
+                match self.config.launch.take().map(Client::launch).transpose() {
+                    Ok(client) => {
+                        self.client = client;
+                        self.configured = true;
+                        Ok(json!({}))
+                    }
+                    Err(_) => {
+                        self.ended = true;
+                        Err("runtime-client-failed")
+                    }
                 }
-                Ok(json!({}))
             }
             "setBreakpoints" => self.set_breakpoints(&request.arguments),
             "setExceptionBreakpoints"
@@ -693,8 +624,7 @@ impl<W: Write> Session<'_, W> {
 
     fn cleanup(&mut self) {
         if let Some(poll) = &self.poll {
-            poll.stop.store(true, Ordering::Release);
-            poll.worker.thread().unpark();
+            poll.cancel();
         }
         if let Some(server) = self.server.take() {
             let start = Instant::now();
