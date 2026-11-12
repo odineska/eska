@@ -744,7 +744,7 @@ fn native_groups_keep_title_styles_and_command_area_visibility() {
         }
         count += 1;
     }
-    assert_eq!(count, 22);
+    assert_eq!(count, 23);
 }
 #[test]
 fn borrowed_standard_attribute_uses_base_properties_omitted_by_extension() {
