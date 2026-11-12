@@ -48,7 +48,7 @@ fn direct_http_breakpoint_and_selected_frame() {
     )
     .unwrap();
     let server = Server::new(&endpoint, "DefAlias".into()).unwrap();
-    server.attach().unwrap();
+    assert_eq!(server.attach().unwrap(), dbgs::Registration::Registered);
     let _registration = Registration(&server);
     server
         .auto_attach(&launch.profile().debug.as_ref().unwrap().auto_attach_types())

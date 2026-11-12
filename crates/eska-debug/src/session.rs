@@ -23,8 +23,8 @@ use crate::{
     Mode,
     dap::{self, Output, Request},
     dbgs::{
-        self, Breakpoint, Calculation, CalculationQuery, Event, Module, Page, Selector, Server,
-        StackAction, Step, Target, View,
+        self, Breakpoint, Calculation, CalculationQuery, Event, Module, Page, Registration,
+        Selector, Server, StackAction, Step, Target, View,
     },
     http::Cancellation,
     source::Sources,
@@ -192,7 +192,7 @@ fn drive(
                 session.events(events)?;
             }
             Ok(Input::Events(Err(_))) => {
-                session.terminate(Some(ENDPOINT))?;
+                session.terminate(Some("debug-transport-lost"))?;
                 break;
             }
             Ok(Input::Calculation(id, result)) => session.calculation_reply(&id, result)?,
@@ -310,7 +310,11 @@ impl<W: Write> Session<'_, W> {
             .open()
             .map_err(|_| "debug-managed-server-start-failed")?;
         let server = Server::new(&endpoint, config.alias.clone()).map_err(|_| ENDPOINT)?;
-        server.attach().map_err(|_| ENDPOINT)?;
+        match server.attach().map_err(|_| ENDPOINT)? {
+            Registration::Registered => {}
+            Registration::InfobaseBusy => return Err("debug-infobase-busy"),
+            Registration::Rejected => return Err(ENDPOINT),
+        }
         if server.auto_attach(&config.auto_attach_types).is_err() {
             let _ = server.detach();
             return Err(ENDPOINT);

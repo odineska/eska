@@ -125,9 +125,13 @@ impl Dap {
     }
 
     fn receive(&mut self) -> Value {
+        self.receive_with_timeout(Duration::from_secs(12))
+    }
+
+    fn receive_with_timeout(&mut self, timeout: Duration) -> Value {
         let message = self
             .messages
-            .recv_timeout(Duration::from_secs(12))
+            .recv_timeout(timeout)
             .unwrap_or_else(|error| panic!("DAP receive: {error}, output: {:?}", self.output));
         if message["event"] == "stopped" {
             self.stopped.push(message["body"].clone());
@@ -178,6 +182,62 @@ impl Dap {
             thread::sleep(Duration::from_millis(20));
         }
     }
+}
+
+#[test]
+#[ignore = "requires a standalone fixture and a client started outside the adapter"]
+fn native_transport_loss_reports_lost_and_busy_connections() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let args: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let target = args["targetId"]
+        .as_str()
+        .expect("exact target UUID from the fixture");
+    let endpoint = args["debugServerUrl"].as_str().unwrap();
+    let relay =
+        debug_relay::Relay::start(endpoint.strip_prefix("http://").unwrap().parse().unwrap());
+    let proxied = json!({
+        "debugServerUrl":format!("http://{}", relay.address()),
+        "sourceRoot":args["sourceRoot"],
+        "infobaseAlias":args["infobaseAlias"],
+        "targetId":target,
+    });
+    let mut dap = Dap::standalone(root, "en-US", false);
+    dap.success("initialize", json!({"adapterID":"eska"}));
+    dap.success("attach", proxied);
+    dap.success("configurationDone", json!({}));
+    let threads = dap.success("threads", json!({}));
+    assert_eq!(threads["threads"].as_array().unwrap().len(), 1);
+
+    let start = Instant::now();
+    drop(relay);
+    loop {
+        let remaining = Duration::from_secs(16).saturating_sub(start.elapsed());
+        assert!(
+            !remaining.is_zero(),
+            "adapter did not report the lost connection"
+        );
+        if dap.receive_with_timeout(remaining)["event"] == "terminated" {
+            break;
+        }
+    }
+    dap.assert_output("stderr", "The connection to the 1C debug server was lost.");
+    dap.wait_for_exit();
+    eprintln!("transport loss signalled after {:?}", start.elapsed());
+
+    let mut retry = Dap::standalone(root, "ru-RU", false);
+    retry.success("initialize", json!({"adapterID":"eska"}));
+    let busy = retry.request("attach", args);
+    assert_eq!(busy["success"], false, "{busy}");
+    assert!(
+        busy["message"]
+            .as_str()
+            .unwrap()
+            .contains("Сервер отладки 1С уже зарегистрировал отладчик"),
+        "{busy}"
+    );
+    retry.shutdown();
 }
 
 #[test]

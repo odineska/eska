@@ -137,6 +137,13 @@ pub enum Step {
     Out,
 }
 
+#[derive(Debug, PartialEq, Eq)]
+pub enum Registration {
+    Registered,
+    InfobaseBusy,
+    Rejected,
+}
+
 pub struct Server {
     endpoint: Endpoint,
     alias: String,
@@ -152,16 +159,16 @@ impl Server {
         })
     }
 
-    pub fn attach(&self) -> io::Result<()> {
+    pub fn attach(&self) -> io::Result<Registration> {
         let response = self.call(
             "attachDebugUI",
             "<options><foregroundAbility>false</foregroundAbility></options>",
         )?;
-        if text(document(&response)?.root_element(), "result") == "registered" {
-            Ok(())
-        } else {
-            Err(io::Error::other("debug UI registration rejected"))
-        }
+        Ok(match text(document(&response)?.root_element(), "result") {
+            "registered" => Registration::Registered,
+            "ibInDebug" => Registration::InfobaseBusy,
+            _ => Registration::Rejected,
+        })
     }
 
     pub fn detach(&self) -> io::Result<()> {

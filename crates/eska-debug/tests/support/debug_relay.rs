@@ -86,9 +86,8 @@ fn forward(
     closed: &mpsc::Sender<()>,
 ) -> io::Result<()> {
     let mut input = BufReader::new(client.try_clone()?);
-    let mut request = Vec::new();
     input.get_ref().set_read_timeout(Some(LIMIT))?;
-    input.read_until(b'\n', &mut request)?;
+    let request = read_request(&mut input)?;
     if request.starts_with(b"POST /e1crdbg/rdbg?cmd=evalExpr ")
         && armed.swap(false, Ordering::AcqRel)
     {
@@ -114,4 +113,30 @@ fn forward(
         let _ = client.shutdown(Shutdown::Both);
         result.map(|_| ())
     })
+}
+
+fn read_request(input: &mut impl BufRead) -> io::Result<Vec<u8>> {
+    let mut request = Vec::new();
+    let mut body_len = 0;
+    loop {
+        let offset = request.len();
+        if input.read_until(b'\n', &mut request)? == 0 {
+            return Err(io::ErrorKind::UnexpectedEof.into());
+        }
+        let line = &request[offset..];
+        if line == b"\r\n" {
+            break;
+        }
+        if let Some((name, value)) = std::str::from_utf8(line)
+            .ok()
+            .and_then(|line| line.split_once(':'))
+            && name.eq_ignore_ascii_case("Content-Length")
+        {
+            body_len = value.trim().parse().map_err(io::Error::other)?;
+        }
+    }
+    let header_len = request.len();
+    request.resize(header_len + body_len, 0);
+    input.read_exact(&mut request[header_len..])?;
+    Ok(request)
 }
