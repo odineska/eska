@@ -18,6 +18,7 @@ use support::TestDir;
 fn apply(root: &Path, lang: &str, args: &[&str]) -> (Output, Value) {
     let output = Command::new(env!("CARGO_BIN_EXE_eska-build"))
         .current_dir(root)
+        .env("TMPDIR", root)
         .args(["--lang", lang, "apply", "--format", "json"])
         .args(args)
         .output()
@@ -118,6 +119,11 @@ fn prepare_extensions(root: &Path) -> (PathBuf, PathBuf) {
         )
         .unwrap();
         fs::write(member.join("src/Module.bsl"), "A = 1;").unwrap();
+        fs::copy(
+            member.join("src/Configuration.xml"),
+            base.join(format!("installed-root-{name}.xml")),
+        )
+        .unwrap();
         fs::write(
             base.join(format!("installed-{name}.xml")),
             format!(
@@ -131,6 +137,10 @@ fn prepare_extensions(root: &Path) -> (PathBuf, PathBuf) {
         r#"#!/bin/sh
 dir=$(dirname "$0")
 name=base
+standalone=false
+case "$1" in
+    --pid=*) standalone=true; shift ;;
+esac
 for arg in "$@"; do
     case "$arg" in
         --extension=*) name=${arg#--extension=} ;;
@@ -141,7 +151,12 @@ case "$1:$2:$3" in
     --version::) printf '8.3.27.2342\n' ;;
     infobase:config:generation-id) cat "$dir/generation-$name" ;;
     infobase:config:export)
-        test "$4" = info && cp "$dir/installed-$name.xml" "$out/ConfigDumpInfo.xml" ;;
+        case "$standalone:$4:$5" in
+            true:objects:Configuration) cp "$dir/installed-root-$name.xml" "$out/Configuration.xml" ;;
+            true:info:*) exit 0 ;;
+            false:info:*) cp "$dir/installed-$name.xml" "$out/ConfigDumpInfo.xml" ;;
+            *) exit 3 ;;
+        esac ;;
     infobase:config:import|infobase:config:apply)
         printf '%s:%s\n' "$3" "$name" >> "$dir/writes"
         if test "$4" = files; then cat > "$dir/import-files"; fi ;;
@@ -214,6 +229,45 @@ fn apply_extension_uses_the_base_profile_and_revalidates_native_identity_and_dep
     assert_eq!(
         fs::read_to_string(writes).unwrap(),
         "import:One\napply:One\nimport:One\napply:One\n"
+    );
+}
+
+#[test]
+fn apply_extension_checks_the_standalone_configuration_object() {
+    let root = TestDir::new();
+    let (base, one) = prepare_extensions(&root.0);
+    let settings = base.join(".eska/settings_local.toml");
+    let original = fs::read_to_string(&settings).unwrap();
+    fs::write(
+        settings,
+        original.replace(
+            "kind='file'\npath='test-base'",
+            "kind='standalone'\nurl='http://127.0.0.1:8314'\nname='eska-test'\nadmin_pid=1",
+        ),
+    )
+    .unwrap();
+    let (output, plan) = apply(&one, "en-US", &["--initialize"]);
+    assert!(output.status.success(), "{plan}");
+    let token = plan["plan"]["confirmation"].as_str().unwrap();
+
+    let installed = base.join("installed-root-One.xml");
+    let descriptor = fs::read_to_string(&installed).unwrap();
+    fs::write(
+        &installed,
+        descriptor.replace("<Name>One</Name>", "<Name>Wrong</Name>"),
+    )
+    .unwrap();
+    let (output, mismatch) = apply(&one, "en-US", &["--initialize", "--confirm", token]);
+    assert!(!output.status.success());
+    assert_eq!(mismatch["error"]["code"], "extension_identity_mismatch");
+    assert!(!base.join("writes").exists());
+
+    fs::write(installed, descriptor).unwrap();
+    assert!(
+        apply(&one, "en-US", &["--initialize", "--confirm", token])
+            .0
+            .status
+            .success()
     );
 }
 

@@ -468,9 +468,17 @@ impl Target {
             .path()
             .join(format!("extension-{}", extension.uuid));
         fs::create_dir(&directory).map_err(ApplyError::Io)?;
+        // A PID connection reports success for export info without writing its XML.
+        // Export only the configuration object to obtain its actual name and UUID.
+        let standalone = matches!(self.connection, Connection::Standalone(_));
+        let command: &[&str] = if standalone {
+            &["export", "objects", "Configuration"]
+        } else {
+            &["export", "info"]
+        };
         self.command_for(
             Some(extension),
-            &["export", "info"],
+            command,
             &[option("--out", &directory)],
             None,
             None,
@@ -480,8 +488,12 @@ impl Target {
             ApplyError::PlatformFailed(Stage::Inspect) => ApplyError::ExtensionUnavailable,
             error => error,
         })?;
-        if extension::installed_uuid(&directory, &extension.name).as_ref() != Some(&extension.uuid)
-        {
+        let matches = if standalone {
+            extension::identity(&directory).as_ref() == Some(extension)
+        } else {
+            extension::installed_uuid(&directory, &extension.name).as_ref() == Some(&extension.uuid)
+        };
+        if !matches {
             return Err(ApplyError::ExtensionIdentityMismatch);
         }
         Ok(())
