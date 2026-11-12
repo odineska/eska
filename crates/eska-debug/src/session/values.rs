@@ -13,35 +13,6 @@ const READ_ONLY: Failure = "debug-value-read-only";
 const PAGE_LIMIT: Failure = "debug-variable-page-limit";
 const MAX_CHILDREN: u32 = 512;
 
-// Save the result once in 1C session storage. DAP handles contain only the
-// retrieval expression and paths within that value, never the user's expression.
-pub(super) fn store_expression(expression: &str, address: Option<&str>) -> String {
-    let destination = address.map_or_else(
-        || "Новый УникальныйИдентификатор".to_owned(),
-        |address| format!("\"{address}\""),
-    );
-    // File-mode server storage can retain opaque objects inside a structure.
-    let store = format!(
-        "ПоместитьВоВременноеХранилище(Новый Структура(\"{}\", ({expression})), {destination})",
-        dbgs::SNAPSHOT_VALUE
-    );
-    if address.is_some() {
-        dbgs::snapshot_expression(&store)
-    } else {
-        store
-    }
-}
-
-pub(super) fn snapshot_address(presentation: &str) -> Option<&str> {
-    let address = presentation.strip_prefix('"')?.strip_suffix('"')?;
-    (address.starts_with("e1cib/tempstorage/")
-        && address.len() <= 512
-        && address
-            .bytes()
-            .all(|byte| byte.is_ascii_alphanumeric() || b"/-_.?=&%+".contains(&byte)))
-    .then_some(address)
-}
-
 pub(super) fn evaluated(
     state: &mut State,
     variable: &Variable,
@@ -137,7 +108,7 @@ fn bsl_identifier(name: &str) -> bool {
 }
 
 fn read_only(parent: &Variable) -> bool {
-    matches!(parent.path.first(), Some(Selector::Snapshot(_)))
+    matches!(parent.path.first(), Some(Selector::Retained(_)))
 }
 
 pub(super) fn page(variable: &Variable, arguments: &Value) -> Result<Option<Page>, Failure> {

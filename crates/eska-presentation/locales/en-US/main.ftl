@@ -1198,6 +1198,6 @@ debug-unreadable-property = 1C could not read this property.
 debug-value-read-only = This value is read-only.
 debug-value-assignment-failed = 1C could not change the value.
 debug-value-assignment-in-progress = Wait for the current value change to finish.
-debug-snapshot-limit = The debugger reached its limit of 256 saved evaluation results for this target.
+debug-snapshot-limit = This target reached the limit of 256 evaluations for the current stop. Resume execution to release the results.
 debug-evaluation-failed = Could not evaluate the expression.
 debug-evaluation-timeout = The server did not return a calculation for the active frame in time.

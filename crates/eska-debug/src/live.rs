@@ -229,6 +229,7 @@ fn calculate(server: &Server, target: &str, level: usize, path: &[Selector]) -> 
                 path: path.to_vec(),
                 view: dbgs::View::Context,
                 page: None,
+                new_expression: None,
             },
             Instant::now() + Duration::from_secs(5),
             None,

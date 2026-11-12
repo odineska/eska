@@ -97,7 +97,7 @@ pub struct Frame {
 #[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub enum Selector {
     Expression(String),
-    Snapshot(String),
+    Retained(String),
     Property(String),
     Index(u32),
 }
@@ -152,7 +152,10 @@ pub struct CalculationQuery {
     pub path: Vec<Selector>,
     pub view: View,
     pub page: Option<Page>,
+    pub new_expression: Option<String>,
 }
+
+const RETAINED_VALUE: &str = "Value";
 
 impl CalculationQuery {
     fn path_xml(&self) -> String {
@@ -162,22 +165,33 @@ impl CalculationQuery {
             path,
             view,
             page,
+            new_expression,
             ..
         } = self;
-        let interface = match view {
-            View::Context => "context",
-            View::Collection => "collection",
-            View::Enumeration => "enum",
+        let interface = match (new_expression, view) {
+            (Some(_), _) => "none",
+            (None, View::Context) => "context",
+            (None, View::Collection) => "collection",
+            (None, View::Enumeration) => "enum",
         };
+        let mut expression_id = String::new();
         let mut items = String::new();
         for selector in path {
             let (kind, field, value) = match selector {
                 Selector::Expression(text) => ("expression", "expression", escape(text)),
-                Selector::Snapshot(address) => (
-                    "expression",
-                    "expression",
-                    escape(&snapshot_expression(&format!("\"{address}\""))),
-                ),
+                Selector::Retained(identity) => {
+                    let _ = write!(expression_id, "<expressionID>{identity}</expressionID>");
+                    // dbgs retains the first expression under expressionID until execution
+                    // resumes. An empty expression can read it only with a following selector.
+                    let expression = new_expression.as_ref().map_or_else(String::new, |text| {
+                        escape(&format!("Новый Структура(\"{RETAINED_VALUE}\", ({text}))"))
+                    });
+                    let _ = write!(
+                        items,
+                        "<calcItem><itemType>expression</itemType><expression>{expression}</expression></calcItem><calcItem><itemType>property</itemType><property>{RETAINED_VALUE}</property></calcItem>"
+                    );
+                    continue;
+                }
                 Selector::Property(text) => ("property", "property", escape(text)),
                 Selector::Index(index) => ("index", "index", index.to_string()),
             };
@@ -193,7 +207,7 @@ impl CalculationQuery {
             )
         });
         format!(
-            "<stackLevel xmlns=\"{CALC}\">{level}</stackLevel><srcCalcInfo xmlns=\"{CALC}\"><expressionResultID>{id}</expressionResultID>{items}<interfaces>{interface}</interfaces>{page}</srcCalcInfo>"
+            "<stackLevel xmlns=\"{CALC}\">{level}</stackLevel><srcCalcInfo xmlns=\"{CALC}\">{expression_id}<expressionResultID>{id}</expressionResultID>{items}<interfaces>{interface}</interfaces>{page}</srcCalcInfo>"
         )
     }
 }
@@ -523,12 +537,6 @@ pub fn random_id() -> io::Result<String> {
     Ok(result)
 }
 
-pub const SNAPSHOT_VALUE: &str = "Value";
-
-pub fn snapshot_expression(address_expression: &str) -> String {
-    format!("ПолучитьИзВременногоХранилища({address_expression}).{SNAPSHOT_VALUE}")
-}
-
 fn event(node: Node<'_, '_>) -> Option<Event> {
     let id = child(node, "targetID");
     match text(node, "cmdID") {
@@ -708,6 +716,61 @@ fn invalid() -> io::Error {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn retained_value_path_keeps_identity_and_omits_source_on_expansion() {
+        let mut query = CalculationQuery {
+            id: "first-response".into(),
+            target: "client".into(),
+            level: 1,
+            path: vec![Selector::Retained("result-identity".into())],
+            view: View::Context,
+            page: None,
+            new_expression: Some("Probe(\"<&>\")".into()),
+        };
+        let xml = format!("<expr>{}</expr>", query.path_xml());
+        let document = Document::parse(&xml).unwrap();
+        let expr = document.root_element();
+        let info = child(expr, "srcCalcInfo").unwrap();
+        let mut path = children(info, "calcItem");
+        assert_eq!(text(expr, "stackLevel"), "1");
+        assert_eq!(text(info, "expressionID"), "result-identity");
+        assert_eq!(text(info, "expressionResultID"), "first-response");
+        assert_eq!(text(info, "interfaces"), "none");
+        assert_eq!(
+            text(path.next().unwrap(), "expression"),
+            "Новый Структура(\"Value\", (Probe(\"<&>\")))"
+        );
+        assert_eq!(text(path.next().unwrap(), "property"), "Value");
+        assert!(path.next().is_none());
+
+        query.id = "next-response".into();
+        query.new_expression = None;
+        query.path.push(Selector::Property("Data".into()));
+        query.view = View::Collection;
+        query.page = Some(Page {
+            start: 50,
+            count: 10,
+        });
+        let xml = format!("<expr>{}</expr>", query.path_xml());
+        let document = Document::parse(&xml).unwrap();
+        let info = child(document.root_element(), "srcCalcInfo").unwrap();
+        let mut path = children(info, "calcItem");
+        assert_eq!(text(info, "expressionID"), "result-identity");
+        assert_eq!(text(info, "expressionResultID"), "next-response");
+        assert_eq!(text(info, "interfaces"), "collection");
+        assert_eq!(text(info, "startIndex"), "50");
+        assert_eq!(text(info, "pageSize"), "10");
+        assert!(
+            child(path.next().unwrap(), "expression")
+                .unwrap()
+                .text()
+                .is_none()
+        );
+        assert_eq!(text(path.next().unwrap(), "property"), "Value");
+        assert_eq!(text(path.next().unwrap(), "property"), "Data");
+        assert!(path.next().is_none());
+    }
 
     #[test]
     fn external_module_uses_the_exact_platform_url_for_frames_and_breakpoints() {

@@ -36,7 +36,7 @@ use poll::Poll;
 
 const MAX_THREADS: usize = 256;
 const MAX_PENDING: usize = 16;
-const MAX_SNAPSHOTS_PER_TARGET: usize = 256;
+const MAX_EVALUATIONS_PER_STOP: usize = 256;
 const MAX_DEBUG_EXPRESSION: usize = 16384;
 const ERROR_FILTER: &str = "all";
 
@@ -79,9 +79,8 @@ fn optional_array<'a>(value: &'a Value, key: &str) -> Result<&'a [Value], Failur
 }
 
 enum CalculationPhase {
-    Store,
-    ReadSnapshot(String),
-    ReplaceSnapshot(String),
+    Evaluate(String),
+    EvaluateMetadata,
     Children(Page),
     Assign(String),
 }
@@ -875,6 +874,10 @@ impl<W: Write> Session<'_, W> {
                 path,
                 view: variable.view,
                 page,
+                new_expression: match &pending.phase {
+                    CalculationPhase::Evaluate(expression) => Some(expression.clone()),
+                    _ => None,
+                },
             },
             assignment,
             deadline: pending.deadline,
@@ -935,24 +938,18 @@ impl<W: Write> Session<'_, W> {
             .threads
             .get_mut(&position.thread)
             .ok_or(INVALID)?;
-        let address = thread.free_snapshots.pop();
-        if address.is_none() {
-            if thread.snapshot_count >= MAX_SNAPSHOTS_PER_TARGET {
-                return Err("debug-snapshot-limit");
-            }
-            thread.snapshot_count += 1;
+        if thread.evaluation_count >= MAX_EVALUATIONS_PER_STOP {
+            return Err("debug-snapshot-limit");
         }
+        let identity = dbgs::random_id().map_err(|_| INVALID)?;
+        thread.evaluation_count += 1;
         let variable = Variable {
             position,
-            path: vec![Selector::Expression(values::store_expression(
-                expression,
-                address.as_deref(),
-            ))],
+            path: vec![Selector::Retained(identity)],
             view: View::Context,
             indexed_count: None,
         };
-        let phase = address.map_or(CalculationPhase::Store, CalculationPhase::ReplaceSnapshot);
-        Ok((variable, phase))
+        Ok((variable, CalculationPhase::Evaluate(expression.to_owned())))
     }
 
     fn expression_position(&self, arguments: &Value) -> Option<Position> {
@@ -981,48 +978,27 @@ impl<W: Write> Session<'_, W> {
         }
         pending.cancellation.cancel();
         if let Some(failed) = results.iter().find(|value| value.value.error) {
-            return self.calculation_error(pending, &failed.value);
+            return self.calculation_error(&pending, &failed.value);
         }
         let result = match pending.phase {
-            CalculationPhase::Store => {
-                let Some(address) = results
-                    .first()
-                    .and_then(|result| values::snapshot_address(&result.value.text))
-                else {
-                    return self.output.response(
-                        &pending.request,
-                        Err(self.language.text("debug-evaluation-failed")),
-                    );
-                };
-                pending.variable.path = vec![Selector::Snapshot(address.to_owned())];
-                pending.phase = CalculationPhase::ReadSnapshot(address.to_owned());
+            CalculationPhase::Evaluate(_)
+                if results.first().is_some_and(|result| {
+                    result.value.view.is_some_and(View::paged)
+                        && result.value.collection_size.is_none()
+                }) =>
+            {
+                // The metadata-only interface omits the collection size. Read
+                // the retained value's context without requesting its entries.
+                pending.phase = CalculationPhase::EvaluateMetadata;
                 pending.cancellation = Arc::default();
                 return self.submit(pending);
             }
-            CalculationPhase::ReadSnapshot(address)
-            | CalculationPhase::ReplaceSnapshot(address) => {
-                let Some(result) = results.first() else {
-                    return self.output.response(
-                        &pending.request,
-                        Err(self.language.text("debug-evaluation-failed")),
-                    );
-                };
-                pending.variable.path = vec![Selector::Snapshot(address.clone())];
-                let evaluated =
-                    values::evaluated(&mut self.state, &pending.variable, &result.value);
-                if let Some(thread) = self
-                    .state
-                    .threads
-                    .get_mut(&pending.variable.position.thread)
-                {
-                    if result.value.can_expand() && evaluated.is_ok() {
-                        thread.held_snapshots.push(address);
-                    } else {
-                        thread.free_snapshots.push(address);
-                    }
-                }
-                evaluated
-            }
+            CalculationPhase::Evaluate(_) | CalculationPhase::EvaluateMetadata => results
+                .first()
+                .ok_or("debug-evaluation-failed")
+                .and_then(|result| {
+                    values::evaluated(&mut self.state, &pending.variable, &result.value)
+                }),
             CalculationPhase::Children(page) => values::children(
                 &mut self.state,
                 &pending.variable,
@@ -1043,43 +1019,13 @@ impl<W: Write> Session<'_, W> {
         )
     }
 
-    fn calculation_error(&mut self, pending: Pending, failed: &dbgs::Value) -> io::Result<()> {
-        let message = {
-            let fallback = if matches!(pending.phase, CalculationPhase::Assign(_)) {
-                "debug-value-assignment-failed"
-            } else {
-                "debug-evaluation-failed"
-            };
-            let thread = self
-                .state
-                .threads
-                .get_mut(&pending.variable.position.thread);
-            let hidden = match pending.phase {
-                CalculationPhase::Store => {
-                    if let Some(thread) = thread {
-                        thread.snapshot_count -= 1;
-                    }
-                    false
-                }
-                CalculationPhase::ReadSnapshot(_) => true,
-                CalculationPhase::ReplaceSnapshot(address) => {
-                    let hidden = failed.text.contains(&address);
-                    if let Some(thread) = thread {
-                        thread.free_snapshots.push(address);
-                    }
-                    hidden
-                }
-                CalculationPhase::Children(_) => {
-                    matches!(pending.variable.path.first(), Some(Selector::Snapshot(address))
-                        if failed.text.contains(address))
-                }
-                CalculationPhase::Assign(_) => false,
-            };
-            if hidden || failed.text.is_empty() {
-                self.language.text(fallback)
-            } else {
-                failed.text.clone()
-            }
+    fn calculation_error(&mut self, pending: &Pending, failed: &dbgs::Value) -> io::Result<()> {
+        let message = if !failed.text.is_empty() {
+            failed.text.clone()
+        } else if matches!(pending.phase, CalculationPhase::Assign(_)) {
+            self.language.text("debug-value-assignment-failed")
+        } else {
+            self.language.text("debug-evaluation-failed")
         };
         self.output.response(&pending.request, Err(message))
     }
@@ -1151,22 +1097,15 @@ impl<W: Write> Session<'_, W> {
         if !unsent && matches!(pending.phase, CalculationPhase::Assign(_)) {
             self.state.invalidate_variable(&pending.variable);
         }
-        if let Some(thread) = self
-            .state
-            .threads
-            .get_mut(&pending.variable.position.thread)
+        if unsent
+            && matches!(pending.phase, CalculationPhase::Evaluate(_))
+            && self.state.is_current(&pending.variable.position)
+            && let Some(thread) = self
+                .state
+                .threads
+                .get_mut(&pending.variable.position.thread)
         {
-            match pending.phase {
-                CalculationPhase::Store if unsent => thread.snapshot_count -= 1,
-                CalculationPhase::ReplaceSnapshot(address) if unsent => {
-                    thread.free_snapshots.push(address);
-                }
-                CalculationPhase::ReadSnapshot(address) => {
-                    // The read stage never changes the reserved snapshot.
-                    thread.free_snapshots.push(address);
-                }
-                _ => {}
-            }
+            thread.evaluation_count -= 1;
         }
         pending.request
     }
