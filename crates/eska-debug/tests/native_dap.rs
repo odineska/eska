@@ -349,6 +349,65 @@ fn native_pause_reports_both_running_clients_and_preserves_step_reason() {
 }
 
 #[test]
+#[ignore = "requires an external client and a runner passing /C log to its own client"]
+fn native_logpoint_reports_other_resumed_targets_and_rejects_stale_values() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let mut dap = Dap::start(root, "test", "launch");
+    dap.success("initialize", json!({"adapterID":"eska"}));
+    dap.success("launch", json!({}));
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let points = dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":11,"logMessage":"ESKA multi-target {Значение}"},{"line":16}]}),
+    );
+    assert_eq!(points["breakpoints"][0]["verified"], true);
+    assert_eq!(points["breakpoints"][1]["verified"], true);
+    let targets = dap.success("eska/listDebugTargets", json!({}));
+    let existing = targets["targets"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|target| target["kind"] == "ManagedClient")
+        .unwrap();
+    dap.success("eska/attachDebugTarget", json!({"id":existing["id"]}));
+    dap.success("configurationDone", json!({}));
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    assert_eq!(stack["stackFrames"][0]["line"], 16);
+    let frame = &stack["stackFrames"][0]["id"];
+    let value = dap.success(
+        "evaluate",
+        json!({"frameId":frame,"expression":"Новый Структура(\"Поле\", Значение)"}),
+    );
+    let reference = &value["variablesReference"];
+    let child = dap.success("variables", json!({"variablesReference":reference}));
+    assert_eq!(child["variables"][0]["value"], "41");
+    loop {
+        let event = dap.receive();
+        assert_ne!(event["event"], "stopped", "{event}");
+        if event["event"] == "continued" && event["body"]["threadId"] == thread {
+            assert_eq!(event["body"]["allThreadsContinued"], false);
+            break;
+        }
+    }
+    dap.assert_output("console", "ESKA multi-target 22");
+    assert_eq!(
+        dap.request("variables", json!({"variablesReference":reference}))["success"],
+        false
+    );
+    assert_eq!(
+        dap.request("scopes", json!({"frameId":frame}))["success"],
+        false
+    );
+    assert_eq!(dap.stop(), thread);
+    let fresh = dap.success("stackTrace", json!({"threadId":thread}));
+    assert_eq!(fresh["stackFrames"][0]["line"], 16);
+    assert_ne!(fresh["stackFrames"][0]["id"], *frame);
+    dap.shutdown();
+}
+
+#[test]
 #[ignore = "requires a standalone fixture and a client started outside the adapter"]
 fn native_transport_loss_reports_lost_and_busy_connections() {
     let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();

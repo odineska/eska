@@ -584,25 +584,29 @@ impl<W: Write> Session<'_, W> {
         }
         let resumed = self.server()?.step(&target, step).map_err(|_| ENDPOINT)?;
         self.step_target = (!matches!(step, Step::Continue)).then_some(id);
-        let mut ids = vec![id];
-        for target in resumed {
-            if let Some(other) = self.state.thread_id(&target)
-                && other != id
-                && self.state.threads[&other].stack.is_some()
-            {
-                ids.push(other);
-            }
-        }
-        for id in ids {
-            self.state.resume(id);
-            self.output
-                .event(
-                    "continued",
-                    &json!({"threadId":id,"allThreadsContinued":false}),
-                )
-                .map_err(|_| INVALID)?;
-        }
+        self.resume_threads(id, &resumed).map_err(|_| INVALID)?;
         Ok(json!({"allThreadsContinued":false}))
+    }
+
+    fn resume_threads(&mut self, selected: u64, targets: &[String]) -> io::Result<()> {
+        let ids: Vec<_> = std::iter::once(selected)
+            .chain(
+                targets
+                    .iter()
+                    .filter_map(|target| self.state.thread_id(target)),
+            )
+            .collect();
+        for id in ids {
+            if self.state.threads[&id].stack.is_none() {
+                continue;
+            }
+            self.state.resume(id);
+            self.output.event(
+                "continued",
+                &json!({"threadId":id,"allThreadsContinued":false}),
+            )?;
+        }
+        Ok(())
     }
 
     fn targets(&self) -> Result<Value, Failure> {
@@ -661,6 +665,7 @@ impl<W: Write> Session<'_, W> {
     }
 
     fn events(&mut self, events: Vec<Event>) -> io::Result<()> {
+        let mut deferred_resumes = Vec::new();
         let mut events = events.into_iter().peekable();
         while let Some(event) = events.next() {
             match event {
@@ -685,6 +690,16 @@ impl<W: Write> Session<'_, W> {
                         self.output
                             .event("thread", &json!({"reason":"exited","threadId":id}))?;
                     }
+                }
+                Event::Stack {
+                    target,
+                    action: StackAction::Resume,
+                    frames,
+                    message,
+                } => {
+                    // Continue can also release another target stopped in this
+                    // poll response. Register those stops before issuing it.
+                    deferred_resumes.push((target, frames, message));
                 }
                 Event::Stack {
                     target,
@@ -717,6 +732,9 @@ impl<W: Write> Session<'_, W> {
                     }
                 }
             }
+        }
+        for (target, frames, message) in deferred_resumes {
+            self.stack_event(&target, StackAction::Resume, frames, &message)?;
         }
         Ok(())
     }
@@ -760,11 +778,14 @@ impl<W: Write> Session<'_, W> {
             StackAction::Exception => "exception",
             StackAction::Resume => {
                 // A message-only or hit-counter-only event still suspends the target.
-                if let Some(server) = &self.server
-                    && let Err(error) = server.step(target, Step::Continue)
-                {
-                    self.state.stop(id, frames);
-                    return Err(error);
+                if let Some(server) = &self.server {
+                    match server.step(target, Step::Continue) {
+                        Ok(resumed) => self.resume_threads(id, &resumed)?,
+                        Err(error) => {
+                            self.state.stop(id, frames);
+                            return Err(error);
+                        }
+                    }
                 }
                 return Ok(());
             }
