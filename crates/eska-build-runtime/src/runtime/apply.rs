@@ -223,11 +223,10 @@ fn write_plan(
     } else {
         std::mem::take(&mut plan.descriptors)
     };
-    let root = if target.extension.is_none() {
-        plan.root.take().or_else(|| structure::Root::read(source))
-    } else {
-        None
-    };
+    let root = plan
+        .root
+        .take()
+        .or_else(|| structure::Root::read(source, target.project_type()));
     let state = target.state.with_extension("pending");
     let directory = target.state.parent().ok_or(ApplyError::InvalidState)?;
     let mut marker = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
@@ -785,19 +784,17 @@ fn assemble_plan(
     } = reviewed;
     let empty = Catalog::new();
     let previous = baseline.as_ref().map_or(&empty, |saved| &saved.files);
-    let structural = baseline
-        .as_ref()
-        .filter(|_| !initialize && target.extension.is_none())
-        .and_then(|saved| {
-            structure::select(
-                source,
-                &changes,
-                &saved.files,
-                current,
-                saved.root.as_ref()?,
-                &saved.descriptors,
-            )
-        });
+    let structural = baseline.as_ref().filter(|_| !initialize).and_then(|saved| {
+        structure::select(
+            source,
+            target.project_type(),
+            &changes,
+            &saved.files,
+            current,
+            saved.root.as_ref()?,
+            &saved.descriptors,
+        )
+    });
     let empty_descriptors = descriptor::Shapes::new();
     let descriptors = baseline
         .as_ref()

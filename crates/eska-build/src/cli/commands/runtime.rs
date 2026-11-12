@@ -367,6 +367,7 @@ fn print_object_changes<'a>(
         let kind = localizer.text(match object.kind {
             ObjectKind::Language => "diff-metadata-language",
             ObjectKind::CommonForm => "diff-metadata-common-form",
+            ObjectKind::Role => "diff-metadata-role",
         });
         if let Some(previous) = &object.previous_name {
             println!("{action} {kind} {previous} → {}", object.name);

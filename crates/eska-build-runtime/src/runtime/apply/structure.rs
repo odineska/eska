@@ -11,6 +11,7 @@ use serde::{Deserialize, Serialize};
 use super::{Catalog, Change, checksum, descriptor};
 
 const NAMESPACE: &str = "http://v8.1c.ru/8.3/MDClasses";
+const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
 pub(super) const ROOT: &str = "Configuration.xml";
 
 #[derive(Clone, Copy, Debug, Deserialize, Eq, Ord, PartialEq, PartialOrd, Serialize)]
@@ -18,6 +19,7 @@ pub(super) const ROOT: &str = "Configuration.xml";
 pub enum ObjectKind {
     Language,
     CommonForm,
+    Role,
 }
 
 impl ObjectKind {
@@ -25,6 +27,7 @@ impl ObjectKind {
         match self {
             Self::Language => "Languages",
             Self::CommonForm => "CommonForms",
+            Self::Role => "Roles",
         }
     }
 
@@ -32,6 +35,7 @@ impl ObjectKind {
         match self {
             Self::Language => "language",
             Self::CommonForm => "common-form",
+            Self::Role => "role",
         }
     }
 }
@@ -57,7 +61,9 @@ pub struct ObjectChange {
 pub(super) struct Root {
     entries: BTreeSet<Entry>,
     order: Vec<Entry>,
-    default_language: String,
+    default_language: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    default_role: Option<String>,
     other_xml: String,
 }
 
@@ -97,7 +103,7 @@ impl Entry {
                 .map(|(candidate, _)| candidate.clone()),
         );
         match self.kind {
-            ObjectKind::Language if files.len() == 1 => Some(files),
+            ObjectKind::Language | ObjectKind::Role if files.len() == 1 => Some(files),
             ObjectKind::CommonForm
                 if files.contains(&root.join("Ext/Form.xml"))
                     && (files.len() == 2
@@ -112,7 +118,7 @@ impl Entry {
 }
 
 impl Root {
-    pub(super) fn read(source: &Path) -> Option<Self> {
+    pub(super) fn read(source: &Path, project_type: ProjectType) -> Option<Self> {
         let xml = descriptor::read_xml(&source.join(ROOT))?;
         let xml = xml.trim_start_matches('\u{feff}');
         let bytes = xml.as_bytes();
@@ -128,11 +134,20 @@ impl Root {
         if !bytes[range.clone()].starts_with(open) || !bytes[range.clone()].ends_with(close) {
             return None;
         }
-        let default_language =
-            only_child(only_child(configuration, "Properties")?, "DefaultLanguage")?
-                .text()?
-                .strip_prefix("Language.")?
-                .to_owned();
+        let properties = only_child(configuration, "Properties")?;
+        let (default_language, default_role) = match project_type {
+            ProjectType::Configuration => (
+                Some(
+                    only_child(properties, "DefaultLanguage")?
+                        .text()?
+                        .strip_prefix("Language.")?
+                        .to_owned(),
+                ),
+                None,
+            ),
+            ProjectType::Extension => (None, default_role(properties).map(str::to_owned)),
+            _ => return None,
+        };
         let mut other = vec![
             &bytes[..range.start + open.len()],
             &bytes[range.end - close.len()..],
@@ -141,9 +156,18 @@ impl Root {
         let mut order = Vec::new();
         let mut names = BTreeSet::new();
         for node in children.children() {
-            let kind = match (node.tag_name().namespace(), node.tag_name().name()) {
-                (Some(NAMESPACE), "Language") => Some(ObjectKind::Language),
-                (Some(NAMESPACE), "CommonForm") => Some(ObjectKind::CommonForm),
+            let kind = match (
+                project_type,
+                node.tag_name().namespace(),
+                node.tag_name().name(),
+            ) {
+                (ProjectType::Configuration, Some(NAMESPACE), "Language") => {
+                    Some(ObjectKind::Language)
+                }
+                (ProjectType::Configuration, Some(NAMESPACE), "CommonForm") => {
+                    Some(ObjectKind::CommonForm)
+                }
+                (ProjectType::Extension, Some(NAMESPACE), "Role") => Some(ObjectKind::Role),
                 _ => None,
             };
             if let Some(kind) = kind {
@@ -156,23 +180,81 @@ impl Root {
                     return None;
                 }
                 let entry = Entry { kind, name };
+                if kind == ObjectKind::Role && !own_role(source, &entry) {
+                    return None;
+                }
                 entries.insert(entry.clone());
                 order.push(entry);
             } else if !node.is_text() || !node.text()?.trim().is_empty() {
                 other.push(&bytes[node.range()]);
             }
         }
-        let anchor = Entry {
-            kind: ObjectKind::Language,
-            name: default_language.clone(),
-        };
-        entries.contains(&anchor).then(|| Self {
+        let recorded = Self {
             entries,
             order,
             default_language,
+            default_role,
             other_xml: checksum(&other),
-        })
+        };
+        if let Some(anchor) = recorded.anchor()
+            && !recorded.entries.contains(&anchor)
+        {
+            return None;
+        }
+        Some(recorded)
     }
+
+    fn anchor(&self) -> Option<Entry> {
+        self.default_language
+            .as_ref()
+            .map(|name| (ObjectKind::Language, name))
+            .or_else(|| {
+                self.default_role
+                    .as_ref()
+                    .map(|name| (ObjectKind::Role, name))
+            })
+            .map(|(kind, name)| Entry {
+                kind,
+                name: name.clone(),
+            })
+    }
+}
+
+fn default_role<'a>(properties: roxmltree::Node<'a, '_>) -> Option<&'a str> {
+    let roles = only_child(properties, "DefaultRoles")?;
+    let mut items = roles.children().filter(roxmltree::Node::is_element);
+    let item = items.next()?;
+    if items.next().is_some() || !item.has_tag_name((READABLE, "Item")) {
+        return None;
+    }
+    item.text()?
+        .strip_prefix("Role.")
+        .filter(|name| descriptor::valid_name(name))
+}
+
+fn own_role(source: &Path, entry: &Entry) -> bool {
+    let Some(xml) = descriptor::read_xml(&source.join(entry.descriptor())) else {
+        return false;
+    };
+    let Some(document) = descriptor::parse_xml(xml.trim_start_matches('\u{feff}')) else {
+        return false;
+    };
+    let Some(role) = only_child(document.root_element(), "Role") else {
+        return false;
+    };
+    let Some(properties) = only_child(role, "Properties") else {
+        return false;
+    };
+    // Native standalone roles have no adoption or mapping properties.
+    role.children().filter(roxmltree::Node::is_element).count() == 1
+        && properties
+            .children()
+            .filter(roxmltree::Node::is_element)
+            .all(|node| {
+                node.tag_name().namespace() == Some(NAMESPACE)
+                    && matches!(node.tag_name().name(), "Name" | "Synonym" | "Comment")
+            })
+        && only_child(properties, "Name").and_then(|node| node.text()) == Some(entry.name.as_str())
 }
 
 fn only_child<'a, 'i>(
@@ -196,6 +278,7 @@ pub(super) struct Selection {
 
 pub(super) fn select(
     source: &Path,
+    project_type: ProjectType,
     changes: &BTreeMap<PathBuf, Change>,
     old: &Catalog,
     current: &Catalog,
@@ -206,7 +289,7 @@ pub(super) fn select(
     if remaining.remove(Path::new(ROOT)) != Some(Change::Modified) {
         return None;
     }
-    let root = Root::read(source)?;
+    let root = Root::read(source, project_type)?;
     if root.other_xml != previous.other_xml
         || root.entries == previous.entries
         || previous
@@ -226,7 +309,7 @@ pub(super) fn select(
         .difference(&previous.entries)
         .map(Entry::descriptor)
         .collect::<Vec<_>>();
-    let shapes = read_added_shapes(source, &paths)?;
+    let shapes = read_added_shapes(source, project_type, &paths)?;
     let old_ids = identities(&previous.entries, descriptors, &descriptor::Shapes::new())?;
     let new_ids = identities(&root.entries, descriptors, &shapes)?;
     let mut files = BTreeSet::from([PathBuf::from(ROOT)]);
@@ -276,13 +359,12 @@ pub(super) fn select(
         .iter()
         .any(|change| change.operation == ObjectOperation::Removed)
     {
-        // A root descriptor alone is rejected by ibcmd. The unchanged default
-        // language supplies a valid import anchor even when the last form is deleted.
-        let anchor = Entry {
-            kind: ObjectKind::Language,
-            name: root.default_language.clone(),
+        // The unchanged default object supplies an import anchor for a root-only deletion.
+        let anchor = root.anchor()?;
+        if anchor.kind == ObjectKind::Role {
+            anchor.files(current)?;
         }
-        .descriptor();
+        let anchor = anchor.descriptor();
         if current.get(&anchor)? != old.get(&anchor)? {
             return None;
         }
@@ -290,7 +372,7 @@ pub(super) fn select(
     }
     files.extend(descriptor::import_files(
         source,
-        ProjectType::Configuration,
+        project_type,
         &remaining,
         current,
         descriptors,
@@ -306,13 +388,15 @@ pub(super) fn select(
     })
 }
 
-fn read_added_shapes(source: &Path, paths: &[PathBuf]) -> Option<descriptor::Shapes> {
+fn read_added_shapes(
+    source: &Path,
+    project_type: ProjectType,
+    paths: &[PathBuf],
+) -> Option<descriptor::Shapes> {
     if paths.is_empty() {
         return Some(descriptor::Shapes::new());
     }
-    let affected =
-        object_model::discover_affected_from_source(source, ProjectType::Configuration, paths)
-            .ok()?;
+    let affected = object_model::discover_affected_from_source(source, project_type, paths).ok()?;
     if !affected.issues().is_empty() {
         return None;
     }
