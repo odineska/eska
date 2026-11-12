@@ -321,6 +321,19 @@
           }
         },
         {
+          "name": "wrapped captions share width with the growing reference value",
+          "frame": [1334, 127],
+          "nativeCapture": "Transition130.png",
+          "screenshotSha256": "2316c63d2202675e51bc272791b6ea0f0d2f5b8e07b8684de54217fbcd0262dd",
+          "controls": {"Memo": [13, 58, null, 56], "Fixed": [null, 84, 158, 19], "Amount": [1156, 79, 152, 19]},
+          "groupBoxes": {"Summary": [1071, 74, 242, 40]},
+          "captions": {"Fixed": ["Корректируемый", "документ:"], "Amount": ["Сумма", "документа:"]},
+          "edit": {
+            "form": {"Width": 130},
+            "fields": {"Amount": {"TitleLocation": null}}
+          }
+        },
+        {
           "name": "totals caption wraps below the one-line threshold",
           "frame": [1364, 127],
           "nativeCapture": "Transition133.png",
