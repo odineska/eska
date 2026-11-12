@@ -195,8 +195,8 @@ pub fn execute(
     if plan.confirmation.as_deref() != Some(confirmation) {
         return Err(ApplyError::StalePreview);
     }
-    let descriptors = if plan.mode == Mode::Initialize && target.extension.is_none() {
-        descriptor::baseline(&source, &current)
+    let descriptors = if plan.mode == Mode::Initialize {
+        descriptor::baseline(&source, target.project_type(), &current)
     } else {
         std::mem::take(&mut plan.descriptors)
     };
@@ -291,6 +291,14 @@ struct Observation {
 }
 
 impl Target {
+    const fn project_type(&self) -> ProjectType {
+        if self.extension.is_some() {
+            ProjectType::Extension
+        } else {
+            ProjectType::Configuration
+        }
+    }
+
     fn open(project: &Project, name: ProfileName) -> Result<Self, ApplyError> {
         if name == ProfileName::Prod {
             return Err(ApplyError::Runtime(RuntimeError::Settings(
@@ -651,22 +659,23 @@ fn assemble_plan(
     let descriptors = baseline
         .as_ref()
         .map_or(&empty_descriptors, |saved| &saved.descriptors);
-    let bsl_only = || {
-        changes
-            .keys()
-            .all(|path| descriptor::has_extension(path, "bsl"))
-    };
     let (mode, import_files) = if initialize {
         (Mode::Initialize, None)
     } else if changes.is_empty() {
         (Mode::Unchanged, None)
-    } else if target.extension.is_some() && !bsl_only() {
-        (Mode::Unsupported, None)
     } else {
         structural
             .as_ref()
             .map_or_else(
-                || descriptor::import_files(source, &changes, current, descriptors),
+                || {
+                    descriptor::import_files(
+                        source,
+                        target.project_type(),
+                        &changes,
+                        current,
+                        descriptors,
+                    )
+                },
                 |selection| Some(selection.files.clone()),
             )
             .filter(|paths| paths.iter().all(|path| input_path(path).is_some()))

@@ -34,14 +34,19 @@ impl Shape {
     }
 }
 
-pub(super) fn baseline(source: &Path, catalog: &Catalog) -> Shapes {
+pub(super) fn baseline(source: &Path, project_type: ProjectType, catalog: &Catalog) -> Shapes {
     let paths: Vec<_> = catalog
         .keys()
-        .filter(|path| descriptor_path(path))
+        .filter(|path| match project_type {
+            ProjectType::Extension => simple_role(path, catalog),
+            _ => descriptor_path(path, project_type),
+        })
         .cloned()
         .collect();
-    let Ok(affected) =
-        object_model::discover_affected_from_source(source, ProjectType::Configuration, &paths)
+    if paths.is_empty() {
+        return Shapes::new();
+    }
+    let Ok(affected) = object_model::discover_affected_from_source(source, project_type, &paths)
     else {
         return Shapes::new();
     };
@@ -53,19 +58,27 @@ pub(super) fn baseline(source: &Path, catalog: &Catalog) -> Shapes {
 
 pub(super) fn import_files(
     source: &Path,
+    project_type: ProjectType,
     changes: &BTreeMap<PathBuf, Change>,
     catalog: &Catalog,
     baseline: &Shapes,
 ) -> Option<Vec<PathBuf>> {
     if changes.iter().any(|(path, change)| {
-        *change != Change::Modified || !(has_extension(path, "bsl") || has_extension(path, "xml"))
+        *change != Change::Modified
+            || !(has_extension(path, "bsl")
+                || match project_type {
+                    ProjectType::Extension => simple_role(path, catalog),
+                    _ => has_extension(path, "xml"),
+                })
     }) {
         return None;
     }
     let mut files: BTreeSet<_> = changes.keys().cloned().collect();
     let catalog_roots: Vec<_> = changes
         .keys()
-        .filter(|path| path.parent() == Some(Path::new("Catalogs")) && descriptor_path(path))
+        .filter(|path| {
+            path.parent() == Some(Path::new("Catalogs")) && descriptor_path(path, project_type)
+        })
         .map(|path| path.with_extension(""))
         .collect();
     for root in &catalog_roots {
@@ -93,12 +106,11 @@ pub(super) fn import_files(
         .collect();
     if !xml.is_empty() {
         let affected =
-            object_model::discover_affected_from_source(source, ProjectType::Configuration, &xml)
-                .ok()?;
+            object_model::discover_affected_from_source(source, project_type, &xml).ok()?;
         if !affected.issues().is_empty()
             || !xml
                 .iter()
-                .all(|path| same_descriptor(source, affected.model(), path, baseline))
+                .all(|path| same_descriptor(source, project_type, affected.model(), path, baseline))
         {
             return None;
         }
@@ -111,9 +123,21 @@ pub(super) fn import_files(
     Some(files)
 }
 
+// The platform probe covered roles whose only file was the descriptor.
+fn simple_role(path: &Path, catalog: &Catalog) -> bool {
+    if path.parent() != Some(Path::new("Roles")) || !has_extension(path, "xml") {
+        return false;
+    }
+    let resources = path.with_extension("");
+    !catalog
+        .range(resources.clone()..)
+        .next()
+        .is_some_and(|(path, _)| path.starts_with(&resources))
+}
+
 fn catalog_form_file(root: &Path, path: &Path, catalog: &Catalog) -> bool {
     let forms = root.join("Forms");
-    if path.parent() == Some(forms.as_path()) && descriptor_path(path) {
+    if path.parent() == Some(forms.as_path()) && descriptor_path(path, ProjectType::Configuration) {
         return catalog.contains_key(&path.with_extension("").join("Ext/Form.xml"));
     }
     path.parent().and_then(Path::parent).is_some_and(|owner| {
@@ -123,14 +147,23 @@ fn catalog_form_file(root: &Path, path: &Path, catalog: &Catalog) -> bool {
     })
 }
 
-fn same_descriptor(source: &Path, model: &ObjectModel, path: &Path, baseline: &Shapes) -> bool {
-    let owner = if descriptor_path(path) {
+fn same_descriptor(
+    source: &Path,
+    project_type: ProjectType,
+    model: &ObjectModel,
+    path: &Path,
+    baseline: &Shapes,
+) -> bool {
+    let owner = if descriptor_path(path, project_type) {
         let supported = model.objects_for_changed_path(path).iter().any(|object| {
             object.descriptor_path() == path
-                && matches!(
-                    object.metadata_type(),
-                    "language" | "common-form" | "form" | "catalog"
-                )
+                && match project_type {
+                    ProjectType::Extension => object.metadata_type() == "role",
+                    _ => matches!(
+                        object.metadata_type(),
+                        "language" | "common-form" | "form" | "catalog"
+                    ),
+                }
         });
         supported.then_some(path)
     } else {
@@ -143,13 +176,13 @@ fn same_descriptor(source: &Path, model: &ObjectModel, path: &Path, baseline: &S
     })
 }
 
-fn descriptor_path(path: &Path) -> bool {
+fn descriptor_path(path: &Path, project_type: ProjectType) -> bool {
     let Ok(bytes) = gix_path::into_bstr(path) else {
         return false;
     };
     path != Path::new(ROOT)
         && eska_project_core::project::metadata::is_object_descriptor(
-            ProjectType::Configuration,
+            project_type,
             gix_path::to_unix_separators_on_windows(bytes).as_ref(),
         )
 }

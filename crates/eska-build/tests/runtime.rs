@@ -218,6 +218,52 @@ fn apply_extension_uses_the_base_profile_and_revalidates_native_identity_and_dep
 }
 
 #[test]
+fn apply_extension_imports_only_an_existing_role_descriptor_without_resources() {
+    let root = TestDir::new();
+    let (base, one) = prepare_extensions(&root.0);
+    let roles = one.join("src/Roles");
+    fs::create_dir(&roles).unwrap();
+    let role = roles.join("One_DefaultRole.xml");
+    let descriptor = r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><Role uuid="97bcf1fc-5482-4ff0-b651-876c772bd338"><Properties><Name>One_DefaultRole</Name><Comment/></Properties></Role></MetaDataObject>"#;
+    fs::write(&role, descriptor).unwrap();
+    initialize(&one);
+
+    let edited = descriptor.replace("<Comment/>", "<Comment>Updated</Comment>");
+    fs::write(&role, &edited).unwrap();
+    let (output, incremental) = apply(&one, "en-US", &[]);
+    assert!(output.status.success(), "{incremental}");
+    assert_eq!(incremental["plan"]["mode"], "incremental");
+    assert_eq!(
+        incremental["plan"]["import_files"],
+        serde_json::json!(["Roles/One_DefaultRole.xml"])
+    );
+    let token = incremental["plan"]["confirmation"].as_str().unwrap();
+    assert!(
+        apply(&one, "en-US", &["--confirm", token])
+            .0
+            .status
+            .success()
+    );
+    assert_eq!(
+        fs::read_to_string(base.join("import-files")).unwrap(),
+        "Roles/One_DefaultRole.xml\n"
+    );
+    fs::write(&role, edited.replace("72bd338", "72bd339")).unwrap();
+    let (_, replaced) = apply(&one, "en-US", &[]);
+    assert_eq!(replaced["plan"]["mode"], "unsupported");
+    assert!(replaced["plan"]["confirmation"].is_null());
+
+    fs::write(&role, &edited).unwrap();
+    let resources = roles.join("One_DefaultRole/Ext");
+    fs::create_dir_all(&resources).unwrap();
+    fs::write(resources.join("Rights.xml"), "<Rights/>").unwrap();
+    initialize(&one);
+    fs::write(&role, descriptor).unwrap();
+    let (_, with_resources) = apply(&one, "en-US", &[]);
+    assert_eq!(with_resources["plan"]["mode"], "unsupported");
+}
+
+#[test]
 fn apply_proves_structural_identity_and_keeps_unrelated_root_xml_out_of_the_plan() {
     let root = TestDir::new();
     let root = &root.0;

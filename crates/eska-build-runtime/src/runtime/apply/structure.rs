@@ -290,6 +290,7 @@ pub(super) fn select(
     }
     files.extend(descriptor::import_files(
         source,
+        ProjectType::Configuration,
         &remaining,
         current,
         descriptors,
