@@ -10,7 +10,7 @@ use clap::{ArgAction, Args, Subcommand};
 use eska_presentation::{diagnostics, localization::Localizer};
 use eska_project_core::project::{
     discovery,
-    local_settings::{self, LocalSettings, ProfileName, SETTINGS_PATH, SettingsError, Snapshot},
+    local_settings::{self, LocalSettings, ProfileName, SettingsError, Snapshot},
 };
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -34,7 +34,7 @@ enum SettingsCommand {
     Validate,
 }
 
-#[derive(Clone, Copy, Serialize)]
+#[derive(Clone, Copy, Deserialize, Serialize)]
 #[serde(rename_all = "snake_case")]
 enum GitProtection {
     NoRepository,
@@ -137,47 +137,30 @@ impl GitProtection {
 }
 
 fn git_protection(root: &Path) -> GitProtection {
-    let repository = match gix::discover(root) {
-        Ok(repository) => repository,
-        Err(error) if error.classify().has(gix::error::Class::NotFound) => {
-            return GitProtection::NoRepository;
-        }
-        Err(_) => return GitProtection::Unknown,
-    };
-    let Some(relative) = repository
-        .workdir()
-        .and_then(|worktree| root.strip_prefix(worktree).ok())
-        .map(|path| path.join(SETTINGS_PATH))
-    else {
-        return GitProtection::Unknown;
-    };
-    check_index(&repository, &relative).unwrap_or(GitProtection::Unknown)
-}
+    use eska_tool_runtime::Component;
 
-fn check_index(repository: &gix::Repository, path: &Path) -> Option<GitProtection> {
-    let index = repository.index_or_empty().ok()?;
-    let relative = gix::path::into_bstr(path).ok()?;
-    let normalized = gix::path::to_unix_separators_on_windows(relative);
-    if index.prefixed_entries(&normalized).is_some_and(|entries| {
-        entries
-            .iter()
-            .any(|entry| entry.path(&index) == normalized.as_ref())
-    }) {
-        return Some(GitProtection::Tracked);
+    let read = || {
+        let binary = eska_tool_runtime::resolve(Component::Vcs).ok()?;
+        let value =
+            eska_tool_runtime::query(Component::Vcs, &binary, "settings_protection", root, &[])
+                .ok()?;
+        serde_json::from_value(value).ok()
+    };
+    // A project outside a worktree can save even in a project-only installation.
+    for directory in root.ancestors() {
+        match std::fs::symlink_metadata(directory.join(".git")) {
+            Err(error) if error.kind() == io::ErrorKind::NotFound => {}
+            _ => {
+                return match read() {
+                    Some(GitProtection::Ignored) => GitProtection::Ignored,
+                    Some(GitProtection::Tracked) => GitProtection::Tracked,
+                    Some(GitProtection::Exposed) => GitProtection::Exposed,
+                    _ => GitProtection::Unknown,
+                };
+            }
+        }
     }
-    let mut excludes = repository
-        .excludes(
-            &index,
-            None,
-            gix::worktree::stack::state::ignore::Source::WorktreeThenIdMappingIfNotSkipped,
-        )
-        .ok()?;
-    let ignored = excludes.at_path(path, None).ok()?.is_excluded();
-    Some(if ignored {
-        GitProtection::Ignored
-    } else {
-        GitProtection::Exposed
-    })
+    GitProtection::NoRepository
 }
 
 fn failure(error: &SettingsError, localizer: &Localizer) -> Failure {

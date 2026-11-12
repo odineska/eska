@@ -52,6 +52,7 @@ enum Operation {
     },
     Provenance,
     RepositoryExists,
+    SettingsProtection,
     Initialize,
     InitializeReserved,
     SourceChanges {
@@ -147,6 +148,9 @@ impl BridgeArgs {
                     .map(|exists| json!({"exists":exists}))
                     .map_err(|_| json!("repository")),
             ),
+            Operation::SettingsProtection => {
+                ("settings_protection", Ok(json!(settings_protection(root))))
+            }
             Operation::Initialize => (
                 "initialize",
                 initialize(root, false).map_err(|error| json!(error)),
@@ -235,4 +239,44 @@ fn doctor(root: &Path, project: Option<&Path>, attributes: &[PathBuf]) -> Result
     };
     let details = vec![None::<String>; checks.len()];
     Ok(json!({"checks":checks,"details":details}))
+}
+
+fn settings_protection(root: &Path) -> &'static str {
+    use eska_project_core::project::local_settings::SETTINGS_PATH;
+
+    let repository = match gix::discover(root) {
+        Ok(repository) => repository,
+        Err(error) if error.classify().has(gix::error::Class::NotFound) => return "no_repository",
+        Err(_) => return "unknown",
+    };
+    let Some(relative) = repository
+        .workdir()
+        .and_then(|worktree| root.strip_prefix(worktree).ok())
+        .map(|path| path.join(SETTINGS_PATH))
+    else {
+        return "unknown";
+    };
+    settings_index(&repository, &relative).unwrap_or("unknown")
+}
+
+fn settings_index(repository: &gix::Repository, path: &Path) -> Option<&'static str> {
+    let index = repository.index_or_empty().ok()?;
+    let relative = gix::path::into_bstr(path).ok()?;
+    let normalized = gix::path::to_unix_separators_on_windows(relative);
+    if index.prefixed_entries(&normalized).is_some_and(|entries| {
+        entries
+            .iter()
+            .any(|entry| entry.path(&index) == normalized.as_ref())
+    }) {
+        return Some("tracked");
+    }
+    let mut excludes = repository
+        .excludes(
+            &index,
+            None,
+            gix::worktree::stack::state::ignore::Source::WorktreeThenIdMappingIfNotSkipped,
+        )
+        .ok()?;
+    let ignored = excludes.at_path(path, None).ok()?.is_excluded();
+    Some(if ignored { "ignored" } else { "exposed" })
 }
