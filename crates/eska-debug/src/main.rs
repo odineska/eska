@@ -73,6 +73,8 @@ struct DapArgs {
     sources: Option<SourceChoice>,
     #[arg(long)]
     unsaved: bool,
+    #[arg(long, hide = true)]
+    expected_infobase: Option<String>,
     #[arg(short, long, action = ArgAction::Help)]
     help: Option<bool>,
 }
@@ -147,6 +149,9 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
         Action::DebugAttach
     };
     let production = profile == ProfileName::Prod;
+    if args.expected_infobase.is_some() && (production || args.mode != Mode::Launch) {
+        return Err(localizer.text("project-settings-forbidden"));
+    }
     if production {
         runtime::profile(&project, profile, action)
             .map_err(|error| runtime_error(&error, localizer))?;
@@ -168,7 +173,7 @@ fn serve(mut project: Project, args: &DapArgs, localizer: &Localizer) -> Result<
     })?;
     let mut launch = if args.mode == Mode::Launch {
         Some(
-            DebugLaunch::prepare(&project, profile)
+            DebugLaunch::prepare(&project, profile, args.expected_infobase.as_deref())
                 .map_err(|error| runtime_error(&error, localizer))?,
         )
     } else {
@@ -303,6 +308,7 @@ const fn runtime_failure(error: &runtime::RuntimeError) -> &'static str {
         runtime::RuntimeError::FileInfobaseUnavailable => "runtime-infobase-unavailable",
         runtime::RuntimeError::SecretUnavailable => "runtime-secret-unavailable",
         runtime::RuntimeError::EndpointUnavailable => "debug-endpoint-unavailable",
+        runtime::RuntimeError::LaunchTargetChanged => "runtime-launch-target-changed",
         _ => "runtime-client-failed",
     }
 }

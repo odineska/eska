@@ -1159,6 +1159,7 @@ runtime-apply-extension-descriptor = Check the Designer XML descriptors of the a
 runtime-apply-extension-ambiguous = Multiple extension projects in the application share a name or UUID.
 runtime-apply-extension-unavailable = An extension could not be inspected in the test infobase. Check its installation and access.
 runtime-apply-extension-identity = An installed extension's UUID could not be matched to its Designer XML project.
+runtime-launch-target-changed = The test infobase or its runner changed after the update. Review the current settings and try again.
 runtime-apply-source-inside-infobase = The Designer XML source directory must be outside the infobase directory.
 runtime-apply-inspect-failed = The platform could not read the test configuration generation. Check the test infobase and access permissions.
 runtime-apply-import-failed = The platform could not import the test configuration. Check the source and infobase state.

@@ -8,6 +8,8 @@ pub struct RunArgs {
     pub profile: ProfileArg,
     #[arg(long, value_enum, default_value = "human")]
     pub format: OutputFormat,
+    #[arg(long, hide = true)]
+    pub expected_infobase: Option<String>,
     #[arg(short, long, action = ArgAction::Help)]
     help: Option<bool>,
 }

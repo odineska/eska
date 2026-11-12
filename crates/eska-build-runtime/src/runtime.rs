@@ -7,6 +7,7 @@ pub use debug_server::{DebugConnection, ManagedDebugServer};
 use std::{
     env,
     ffi::OsString,
+    fmt::Write as _,
     fs, io,
     net::{TcpStream, ToSocketAddrs},
     path::{Path, PathBuf},
@@ -19,6 +20,7 @@ use eska_project_core::project::{
     Project,
     local_settings::{self, Action, Infobase, Profile, ProfileName, Runner, SettingsError},
 };
+use sha2::{Digest, Sha256};
 
 use crate::{
     build::{
@@ -35,10 +37,46 @@ pub enum RuntimeError {
     PlatformUnavailable,
     FileInfobaseUnavailable,
     EndpointUnavailable,
+    LaunchTargetChanged,
     SecretUnavailable,
     Io(io::Error),
     Run(RunError),
     ClientFailed,
+}
+
+fn launch_fingerprint(root: &Path, profile: &mut Profile) -> Result<String, RuntimeError> {
+    if let Infobase::File { path } = &mut profile.infobase {
+        *path = file_infobase(root, path)?;
+    }
+    let bytes = serde_json::to_vec(&(&profile.infobase, &profile.runner))
+        .map_err(|error| RuntimeError::Io(error.into()))?;
+    Ok(checksum(&[&bytes]))
+}
+
+fn checksum(parts: &[&[u8]]) -> String {
+    let mut hasher = Sha256::new();
+    for part in parts {
+        hasher.update(part);
+    }
+    let digest = hasher.finalize();
+    let mut text = String::with_capacity(digest.len() * 2);
+    for byte in digest {
+        let _ = write!(text, "{byte:02x}");
+    }
+    text
+}
+
+fn verify_launch_target(
+    project: &Project,
+    profile: &mut Profile,
+    expected: Option<&str>,
+) -> Result<(), RuntimeError> {
+    if let Some(expected) = expected
+        && launch_fingerprint(project.root(), profile)? != expected
+    {
+        return Err(RuntimeError::LaunchTargetChanged);
+    }
+    Ok(())
 }
 
 /// Load and authorize exactly one profile before reading any external connection state.
@@ -191,8 +229,13 @@ fn inspect_endpoint(url: &url::Url, default_port: u16) -> Result<(), RuntimeErro
 /// Run only the authorized test client. The command owns and waits for its child.
 /// # Errors
 /// Returns a profile, platform, startup or cancellation error without printing private settings.
-pub fn run(project: &Project, name: ProfileName) -> Result<(), RuntimeError> {
-    let profile = profile(project, name, Action::Run)?;
+pub fn run(
+    project: &Project,
+    name: ProfileName,
+    expected: Option<&str>,
+) -> Result<(), RuntimeError> {
+    let mut profile = profile(project, name, Action::Run)?;
+    verify_launch_target(project, &mut profile, expected)?;
     let platform = platform(project, &profile)?;
     launch_client(
         project.root(),
@@ -217,8 +260,13 @@ impl DebugLaunch {
     /// Check the production/test action and prepare the same platform runner used for ordinary launch.
     /// # Errors
     /// Returns profile, platform or file-infobase availability errors.
-    pub fn prepare(project: &Project, name: ProfileName) -> Result<Self, RuntimeError> {
-        let profile = profile(project, name, Action::DebugLaunch)?;
+    pub fn prepare(
+        project: &Project,
+        name: ProfileName,
+        expected: Option<&str>,
+    ) -> Result<Self, RuntimeError> {
+        let mut profile = profile(project, name, Action::DebugLaunch)?;
+        verify_launch_target(project, &mut profile, expected)?;
         Self::prepare_launch(
             project.root().to_path_buf(),
             Some(project.root().join(".eska")),

@@ -11,7 +11,6 @@ use std::{
     collections::BTreeMap,
     env,
     ffi::OsString,
-    fmt::Write as _,
     fs::{self, File, OpenOptions},
     io::{self, Seek, Write},
     path::{Path, PathBuf},
@@ -19,18 +18,16 @@ use std::{
     time::{Duration, Instant},
 };
 
+use super::{RuntimeError, checksum, launch_fingerprint, platform, profile};
+use crate::{
+    build::{Ibcmd, RunError, SourceSnapshotError, source_snapshot},
+    platform_path::native_path,
+};
 use eska_project_core::project::{
     Project, ProjectType,
     local_settings::{Action, Infobase, Profile, ProfileName, SettingsError},
 };
 use serde::{Deserialize, Serialize};
-use sha2::{Digest, Sha256};
-
-use super::{RuntimeError, file_infobase, platform, profile};
-use crate::{
-    build::{Ibcmd, RunError, SourceSnapshotError, source_snapshot},
-    platform_path::native_path,
-};
 
 type Catalog = BTreeMap<PathBuf, Vec<u8>>;
 
@@ -113,6 +110,7 @@ pub struct Plan {
     pub mode: Mode,
     pub target: String,
     pub platform_version: String,
+    pub launch: LaunchTarget,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub extension: Option<ExtensionIdentity>,
     pub changes: BTreeMap<PathBuf, Change>,
@@ -125,6 +123,12 @@ pub struct Plan {
     descriptors: descriptor::Shapes,
     #[serde(skip)]
     root: Option<structure::Root>,
+}
+
+#[derive(Clone, Debug, Serialize)]
+pub struct LaunchTarget {
+    pub project_dir: String,
+    pub fingerprint: String,
 }
 
 #[derive(Debug)]
@@ -270,6 +274,7 @@ struct Target {
     platform: Ibcmd,
     connection: Connection,
     identity: String,
+    launch: LaunchTarget,
     extension: Option<ExtensionIdentity>,
     dependencies: Vec<ExtensionIdentity>,
     lock: PathBuf,
@@ -313,12 +318,20 @@ impl Target {
         let profile_project = selected
             .as_ref()
             .map_or(project, |selection| &selection.base);
-        let profile = profile(profile_project, name, Action::Apply).map_err(ApplyError::Runtime)?;
+        let mut profile =
+            profile(profile_project, name, Action::Apply).map_err(ApplyError::Runtime)?;
+        let launch = LaunchTarget {
+            project_dir: native_path(profile_project.root())
+                .to_str()
+                .ok_or(ApplyError::UnrepresentablePath)?
+                .to_owned(),
+            fingerprint: launch_fingerprint(profile_project.root(), &mut profile)
+                .map_err(ApplyError::Runtime)?,
+        };
         let directory = profile_project.root().join(".eska");
         let (connection, identity, lock) = match &profile.infobase {
             Infobase::File { path } => {
-                let base =
-                    file_infobase(profile_project.root(), path).map_err(ApplyError::Runtime)?;
+                let base = path.clone();
                 let source = project.source().canonicalize().map_err(ApplyError::Io)?;
                 if source.starts_with(&base) {
                     return Err(ApplyError::SourceInsideInfobase);
@@ -370,6 +383,7 @@ impl Target {
             platform,
             connection,
             identity,
+            launch,
             extension,
             dependencies,
             lock,
@@ -671,6 +685,7 @@ fn assemble_plan(
     let descriptors = baseline
         .as_ref()
         .map_or(&empty_descriptors, |saved| &saved.descriptors);
+    let project_type = target.project_type();
     let (mode, import_files) = if initialize {
         (Mode::Initialize, None)
     } else if changes.is_empty() {
@@ -679,15 +694,7 @@ fn assemble_plan(
         structural
             .as_ref()
             .map_or_else(
-                || {
-                    descriptor::import_files(
-                        source,
-                        target.project_type(),
-                        &changes,
-                        current,
-                        descriptors,
-                    )
-                },
+                || descriptor::import_files(source, project_type, &changes, current, descriptors),
                 |selection| Some(selection.files.clone()),
             )
             .filter(|paths| paths.iter().all(|path| input_path(path).is_some()))
@@ -699,6 +706,7 @@ fn assemble_plan(
         let identity = (
             &target.connection,
             &target.identity,
+            &target.launch,
             &target.extension,
             &target.dependencies,
             target.platform.version().as_str(),
@@ -737,6 +745,7 @@ fn assemble_plan(
         mode,
         target: target.identity.clone(),
         platform_version: target.platform.version().as_str().to_owned(),
+        launch: target.launch.clone(),
         extension: target.extension.clone(),
         changes,
         import_files,
@@ -877,19 +886,6 @@ fn option(name: &str, path: &Path) -> OsString {
 fn input_path(path: &Path) -> Option<String> {
     let name = path.to_str()?;
     (!name.chars().any(char::is_whitespace)).then(|| name.replace(std::path::MAIN_SEPARATOR, "/"))
-}
-
-fn checksum(parts: &[&[u8]]) -> String {
-    let mut hasher = Sha256::new();
-    for part in parts {
-        hasher.update(part);
-    }
-    let digest = hasher.finalize();
-    let mut text = String::with_capacity(digest.len() * 2);
-    for byte in digest {
-        let _ = write!(text, "{byte:02x}");
-    }
-    text
 }
 
 #[cfg(test)]

@@ -18,6 +18,14 @@ use serde_json::json;
 
 pub fn run(args: &RunArgs, start: &Path, localizer: &Localizer, inspect: bool) -> ExitCode {
     let kind = if inspect { "runtime_probe" } else { "run" };
+    if inspect && args.expected_infobase.is_some() {
+        return failure(
+            args,
+            kind,
+            "forbidden_action",
+            &localizer.text("project-settings-forbidden"),
+        );
+    }
     if !inspect && matches!(args.profile, ProfileArg::Prod) {
         return failure(
             args,
@@ -44,7 +52,11 @@ pub fn run(args: &RunArgs, start: &Path, localizer: &Localizer, inspect: bool) -
         };
         runtime::inspect(&project, profile)
     } else {
-        runtime::run(&project, ProfileName::Test)
+        runtime::run(
+            &project,
+            ProfileName::Test,
+            args.expected_infobase.as_deref(),
+        )
     };
     match result {
         Ok(()) => {
@@ -76,6 +88,9 @@ pub fn run(args: &RunArgs, start: &Path, localizer: &Localizer, inspect: bool) -
                 }
                 RuntimeError::EndpointUnavailable => {
                     ("endpoint_unavailable", "runtime-endpoint-unavailable")
+                }
+                RuntimeError::LaunchTargetChanged => {
+                    ("launch_target_changed", "runtime-launch-target-changed")
                 }
                 RuntimeError::SecretUnavailable => {
                     ("secret_unavailable", "runtime-secret-unavailable")

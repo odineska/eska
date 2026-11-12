@@ -36,7 +36,7 @@ fn direct_http_breakpoint_and_selected_frame() {
         property: "d22e852a-cf8a-4f77-8ccb-3548e7792bea".to_owned(),
         origin: ModuleOrigin::Configuration,
     };
-    let launch = DebugLaunch::prepare(&project, ProfileName::Test).unwrap();
+    let launch = DebugLaunch::prepare(&project, ProfileName::Test, None).unwrap();
     let endpoint = url::Url::parse(
         launch
             .profile()
@@ -107,7 +107,7 @@ fn external_module_breakpoint_and_evaluate() {
         env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap(),
     ))
     .unwrap();
-    let launch = DebugLaunch::prepare(&project, ProfileName::Test).unwrap();
+    let launch = DebugLaunch::prepare(&project, ProfileName::Test, None).unwrap();
     let debug = launch.profile().debug.as_ref().unwrap();
     let endpoint = url::Url::parse(debug.url.as_deref().unwrap()).unwrap();
     let artifact = env::var("ESKA_DEBUG_LIVE_EPF").unwrap();

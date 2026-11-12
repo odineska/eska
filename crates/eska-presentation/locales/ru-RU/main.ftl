@@ -1159,6 +1159,7 @@ runtime-apply-extension-descriptor = Проверьте дескрипторы D
 runtime-apply-extension-ambiguous = Несколько проектов расширений в приложении имеют одинаковое имя или UUID.
 runtime-apply-extension-unavailable = Не удалось проверить расширение в тестовой базе. Проверьте установку и права доступа.
 runtime-apply-extension-identity = Не удалось подтвердить совпадение UUID установленного расширения и проекта Designer XML.
+runtime-launch-target-changed = После обновления изменились тестовая база или её раннер. Проверьте текущие настройки и повторите действие.
 runtime-apply-source-inside-infobase = Каталог исходников Designer XML должен находиться вне каталога информационной базы.
 runtime-apply-inspect-failed = Платформа не смогла прочитать поколение тестовой конфигурации. Проверьте базу и права доступа.
 runtime-apply-import-failed = Платформа не смогла импортировать тестовую конфигурацию. Проверьте исходники и состояние базы.

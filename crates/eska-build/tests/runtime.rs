@@ -85,6 +85,60 @@ fn initialize(root: &Path) {
     );
 }
 
+#[test]
+fn run_rejects_a_test_infobase_that_changed_after_apply() {
+    let root = TestDir::new();
+    let root = &root.0;
+    prepare(root);
+    initialize(root);
+    let (_, unchanged) = apply(root, "en-US", &[]);
+    let launch = &unchanged["plan"]["launch"];
+    assert_eq!(launch["project_dir"], root.to_str().unwrap());
+    let expected = launch["fingerprint"].as_str().unwrap();
+    let client = root.join("1cv8c");
+    fs::write(
+        &client,
+        "#!/bin/sh\nprintf '%s\\n' \"$2\" \"$3\" > \"$(dirname \"$0\")/launched\"\n",
+    )
+    .unwrap();
+    fs::set_permissions(&client, fs::Permissions::from_mode(0o700)).unwrap();
+    let run = |lang| {
+        Command::new(env!("CARGO_BIN_EXE_eska-build"))
+            .current_dir(root)
+            .args([
+                "--lang",
+                lang,
+                "run",
+                "--format",
+                "json",
+                "--expected-infobase",
+                expected,
+            ])
+            .output()
+            .unwrap()
+    };
+    let output = run("en-US");
+    assert!(output.status.success(), "{output:?}");
+    let marker = root.join("launched");
+    assert_eq!(
+        fs::read_to_string(&marker).unwrap(),
+        format!("/F\n{}\n", root.join("test-base").display())
+    );
+    fs::remove_file(&marker).unwrap();
+    fs::create_dir(root.join("other-base")).unwrap();
+    fs::write(root.join("other-base/1Cv8.1CD"), "").unwrap();
+    let settings = root.join(".eska/settings_local.toml");
+    let original = fs::read_to_string(&settings).unwrap();
+    fs::write(settings, original.replace("test-base", "other-base")).unwrap();
+    for lang in ["en-US", "ru-RU"] {
+        let output = run(lang);
+        assert!(!output.status.success());
+        let error: Value = serde_json::from_slice(&output.stdout).unwrap();
+        assert_eq!(error["error"]["code"], "launch_target_changed");
+    }
+    assert!(!marker.exists());
+}
+
 fn prepare_extensions(root: &Path) -> (PathBuf, PathBuf) {
     let base = root.join("base");
     let one = root.join("one");
@@ -179,6 +233,10 @@ fn apply_extension_uses_the_base_profile_and_revalidates_native_identity_and_dep
     assert!(output.status.success(), "{initial}");
     assert_eq!(apply(&one, "ru-RU", &["--initialize"]).1, initial);
     assert_eq!(initial["plan"]["extension"]["name"], "One");
+    assert_eq!(
+        initial["plan"]["launch"]["project_dir"],
+        base.to_str().unwrap()
+    );
     assert_eq!(
         initial["plan"]["extension"]["uuid"],
         "eec8818c-9361-478d-b14f-01d342006de1"
