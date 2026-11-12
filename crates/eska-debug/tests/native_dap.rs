@@ -1,4 +1,7 @@
 //! Opt-in tests against a disposable 1C fixture prepared in the sibling playground.
+#[path = "support/debug_relay.rs"]
+mod debug_relay;
+
 use std::{
     collections::BTreeMap,
     env, fs,
@@ -89,17 +92,10 @@ impl Dap {
 
     fn request(&mut self, command: &str, arguments: Value) -> Value {
         let start = Instant::now();
-        self.seq += 1;
-        let mut request = json!({"seq":self.seq,"type":"request","command":command});
-        request["arguments"] = arguments;
-        let body = serde_json::to_vec(&request).unwrap();
-        let input = self.input.as_mut().unwrap();
-        write!(input, "Content-Length: {}\r\n\r\n", body.len()).unwrap();
-        input.write_all(&body).unwrap();
-        input.flush().unwrap();
+        let seq = self.send(command, arguments);
         loop {
             let reply = self.receive();
-            if reply["request_seq"] == self.seq {
+            if reply["request_seq"] == seq {
                 assert_eq!(reply["command"], command);
                 self.durations
                     .entry(command.to_owned())
@@ -108,6 +104,18 @@ impl Dap {
                 return reply;
             }
         }
+    }
+
+    fn send(&mut self, command: &str, arguments: Value) -> u64 {
+        self.seq += 1;
+        let mut request = json!({"seq":self.seq,"type":"request","command":command});
+        request["arguments"] = arguments;
+        let body = serde_json::to_vec(&request).unwrap();
+        let input = self.input.as_mut().unwrap();
+        write!(input, "Content-Length: {}\r\n\r\n", body.len()).unwrap();
+        input.write_all(&body).unwrap();
+        input.flush().unwrap();
+        self.seq
     }
 
     fn success(&mut self, command: &str, arguments: Value) -> Value {
@@ -170,6 +178,83 @@ impl Dap {
             thread::sleep(Duration::from_millis(20));
         }
     }
+}
+
+#[test]
+#[ignore = "requires the owned standalone fixture and its HTTP debug server"]
+fn native_evaluation_cancellation_and_timeout_keep_dap_responsive() {
+    let root = env::var_os("ESKA_DEBUG_STANDALONE_ROOT").unwrap();
+    let root = Path::new(&root);
+    let mut args: Value =
+        serde_json::from_str(&env::var("ESKA_DEBUG_STANDALONE_ARGUMENTS").unwrap()).unwrap();
+    let endpoint = args["debugServerUrl"].as_str().unwrap();
+    let relay =
+        debug_relay::Relay::start(endpoint.strip_prefix("http://").unwrap().parse().unwrap());
+    args["debugServerUrl"] = json!(format!("http://{}", relay.address()));
+    let mut dap = Dap::standalone(root, "en-US", true);
+    let caps = dap.success("initialize", json!({"adapterID":"eska"}));
+    assert_eq!(caps["supportsCancelRequest"], true);
+    dap.success("launch", args);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":3}]}),
+    );
+    dap.success("configurationDone", json!({}));
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let expression = json!({"frameId":stack["stackFrames"][0]["id"],"expression":"A + 1"});
+
+    relay.arm();
+    let evaluate = dap.send("evaluate", expression.clone());
+    relay.await_stall();
+    let start = Instant::now();
+    let stack_request = dap.send("stackTrace", json!({"threadId":thread}));
+    let cancel = dap.send("cancel", json!({"requestId":evaluate}));
+    let mut replies = BTreeMap::new();
+    while replies.len() < 3 {
+        let reply = dap.receive();
+        if let Some(id) = reply["request_seq"].as_u64() {
+            assert!(replies.insert(id, reply).is_none());
+        }
+    }
+    let latency = start.elapsed();
+    assert!(latency < Duration::from_secs(1), "{latency:?}");
+    assert_eq!(replies[&stack_request]["body"], stack);
+    assert_eq!(replies[&evaluate]["success"], false);
+    assert_eq!(replies[&evaluate]["message"], "cancelled");
+    assert_eq!(replies[&cancel]["success"], true);
+    relay.await_close();
+    assert_eq!(dap.success("evaluate", expression.clone())["result"], "42");
+
+    relay.arm();
+    let start = Instant::now();
+    let evaluate = dap.send("evaluate", expression.clone());
+    relay.await_stall();
+    let timeout = loop {
+        let reply = dap.receive();
+        if reply["request_seq"] == evaluate {
+            break reply;
+        }
+        assert!(
+            reply["request_seq"].is_null(),
+            "unexpected response {reply}"
+        );
+    };
+    let elapsed = start.elapsed();
+    assert!(
+        (Duration::from_millis(3800)..Duration::from_secs(5)).contains(&elapsed),
+        "{elapsed:?}"
+    );
+    assert_eq!(timeout["success"], false, "{timeout}");
+    assert_eq!(
+        timeout["message"],
+        "The server did not return a calculation for the active frame in time."
+    );
+    relay.await_close();
+    assert_eq!(dap.success("evaluate", expression)["result"], "42");
+    eprintln!("cancel_with_stack={latency:?} calculation_timeout={elapsed:?}");
+    dap.shutdown();
 }
 
 #[test]

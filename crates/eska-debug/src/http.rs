@@ -1,8 +1,8 @@
 //! Bounded, direct HTTP/1.1 transport for the plain HTTP debugger endpoint.
 use std::{
     io::{self, BufRead, BufReader, Read, Write},
-    net::{SocketAddr, TcpStream, ToSocketAddrs},
-    sync::mpsc,
+    net::{Shutdown, SocketAddr, TcpStream, ToSocketAddrs},
+    sync::{Mutex, PoisonError, mpsc},
     thread,
     time::{Duration, Instant},
 };
@@ -14,6 +14,55 @@ pub struct Endpoint {
     addresses: Vec<SocketAddr>,
     authority: String,
     measure: bool,
+}
+
+#[derive(Default)]
+pub struct Cancellation(Mutex<Connection>);
+
+#[derive(Default)]
+enum Connection {
+    #[default]
+    Pending,
+    Active(TcpStream),
+    Sent,
+    Cancelled,
+}
+
+impl Cancellation {
+    // A request that never acquired the socket cannot have reached the platform.
+    pub fn cancel(&self) -> bool {
+        let mut state = self.0.lock().unwrap_or_else(PoisonError::into_inner);
+        match std::mem::replace(&mut *state, Connection::Cancelled) {
+            Connection::Pending => true,
+            Connection::Active(socket) => {
+                let _ = socket.shutdown(Shutdown::Both);
+                false
+            }
+            Connection::Sent | Connection::Cancelled => false,
+        }
+    }
+
+    pub fn is_cancelled(&self) -> bool {
+        let state = self.0.lock().unwrap_or_else(PoisonError::into_inner);
+        matches!(*state, Connection::Cancelled)
+    }
+
+    fn register(&self, socket: &TcpStream) -> io::Result<()> {
+        let mut state = self.0.lock().unwrap_or_else(PoisonError::into_inner);
+        if matches!(*state, Connection::Cancelled) {
+            return Err(io::ErrorKind::Interrupted.into());
+        }
+        *state = Connection::Active(socket.try_clone()?);
+        drop(state);
+        Ok(())
+    }
+
+    fn finish(&self) {
+        let mut state = self.0.lock().unwrap_or_else(PoisonError::into_inner);
+        if matches!(*state, Connection::Active(_)) {
+            *state = Connection::Sent;
+        }
+    }
 }
 
 impl Endpoint {
@@ -43,10 +92,14 @@ impl Endpoint {
         resource: &str,
         query: &str,
         xml: &str,
-        timeout: Duration,
+        deadline: Instant,
+        cancellation: Option<&Cancellation>,
     ) -> io::Result<Vec<u8>> {
         let started = Instant::now();
-        let result = self.exchange(resource, query, xml, started + timeout);
+        let result = self.exchange(resource, query, xml, deadline, cancellation);
+        if let Some(cancellation) = cancellation {
+            cancellation.finish();
+        }
         if self.measure {
             let operation = query
                 .strip_prefix("cmd=")
@@ -67,12 +120,16 @@ impl Endpoint {
         query: &str,
         xml: &str,
         deadline: Instant,
+        cancellation: Option<&Cancellation>,
     ) -> io::Result<Vec<u8>> {
         if xml.len() > MAX_BODY {
             return Err(invalid());
         }
         let mut connection = None;
         for address in &self.addresses {
+            if cancellation.is_some_and(Cancellation::is_cancelled) {
+                return Err(io::ErrorKind::Interrupted.into());
+            }
             let remaining = remaining(deadline)?;
             if let Ok(stream) =
                 TcpStream::connect_timeout(address, remaining.min(Duration::from_millis(500)))
@@ -82,6 +139,9 @@ impl Endpoint {
             }
         }
         let stream = connection.ok_or_else(|| io::Error::from(io::ErrorKind::ConnectionRefused))?;
+        if let Some(cancellation) = cancellation {
+            cancellation.register(&stream)?;
+        }
         let mut stream = Deadline { stream, deadline };
         write!(
             stream,
@@ -229,6 +289,34 @@ fn invalid() -> io::Error {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::net::TcpListener;
+
+    #[test]
+    fn cancelling_a_dispatched_request_shuts_down_its_socket() {
+        let listener = TcpListener::bind(("127.0.0.1", 0)).unwrap();
+        let socket = TcpStream::connect(listener.local_addr().unwrap()).unwrap();
+        let (mut server, _) = listener.accept().unwrap();
+        server
+            .set_read_timeout(Some(Duration::from_secs(1)))
+            .unwrap();
+        let cancellation = Cancellation::default();
+        cancellation.register(&socket).unwrap();
+        assert!(!cancellation.cancel());
+        assert!(cancellation.is_cancelled());
+        assert_eq!(server.read(&mut [0]).unwrap(), 0);
+    }
+
+    #[test]
+    fn cancelling_before_dispatch_prevents_the_request_from_acquiring_a_socket() {
+        let listener = TcpListener::bind(("127.0.0.1", 0)).unwrap();
+        let socket = TcpStream::connect(listener.local_addr().unwrap()).unwrap();
+        let cancellation = Cancellation::default();
+        assert!(cancellation.cancel());
+        assert_eq!(
+            cancellation.register(&socket).unwrap_err().kind(),
+            io::ErrorKind::Interrupted
+        );
+    }
 
     #[test]
     fn accepts_chunked_xml_and_rejects_conflicting_framing() {

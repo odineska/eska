@@ -102,7 +102,7 @@ fn direct_http_breakpoint_and_selected_frame() {
 fn stopped(server: &Server) -> (String, Vec<Frame>) {
     let deadline = Instant::now() + Duration::from_secs(12);
     while Instant::now() < deadline {
-        for event in server.poll().unwrap() {
+        for event in server.poll(None).unwrap() {
             match event {
                 Event::Started(target) => server.attach_target(&target.id).unwrap(),
                 Event::Stack {
@@ -122,14 +122,25 @@ fn stopped(server: &Server) -> (String, Vec<Frame>) {
 fn calculate(server: &Server, target: &str, level: usize, path: &[Selector]) -> Vec<Calculation> {
     let id = dbgs::random_id().unwrap();
     let result = server
-        .calculate(target, level, &id, path, dbgs::View::Context, None)
+        .calculate(
+            &dbgs::CalculationQuery {
+                id: id.clone(),
+                target: target.into(),
+                level,
+                path: path.to_vec(),
+                view: dbgs::View::Context,
+                page: None,
+            },
+            Instant::now() + Duration::from_secs(5),
+            None,
+        )
         .unwrap();
     if !result.is_empty() {
         return result;
     }
     let deadline = Instant::now() + Duration::from_secs(5);
     while Instant::now() < deadline {
-        for event in server.poll().unwrap() {
+        for event in server.poll(None).unwrap() {
             if let Event::Calculated(result) = event
                 && result.id == id
             {

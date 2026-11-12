@@ -1,10 +1,14 @@
 //! XML messages exchanged with the 1C HTTP debug server.
-use std::{fmt::Write as _, io, time::Duration};
+use std::{
+    fmt::Write as _,
+    io,
+    time::{Duration, Instant},
+};
 
 use base64::{Engine as _, engine::general_purpose::STANDARD};
 use roxmltree::{Document, Node};
 
-use crate::http::Endpoint;
+use crate::http::{Cancellation, Endpoint};
 
 const REQUEST: &str = "http://v8.1c.ru/8.3/debugger/debugRDBGRequestResponse";
 const BASE: &str = "http://v8.1c.ru/8.3/debugger/debugBaseData";
@@ -93,6 +97,15 @@ pub struct Calculation {
     pub id: String,
     pub value: Value,
     pub children: Vec<Value>,
+}
+
+pub struct CalculationQuery {
+    pub id: String,
+    pub target: String,
+    pub level: usize,
+    pub path: Vec<Selector>,
+    pub view: View,
+    pub page: Option<Page>,
 }
 
 #[derive(Debug)]
@@ -268,13 +281,18 @@ impl Server {
 
     pub fn calculate(
         &self,
-        target: &str,
-        level: usize,
-        id: &str,
-        path: &[Selector],
-        view: View,
-        page: Option<Page>,
+        query: &CalculationQuery,
+        deadline: Instant,
+        cancellation: Option<&Cancellation>,
     ) -> io::Result<Vec<Calculation>> {
+        let CalculationQuery {
+            id,
+            target,
+            level,
+            path,
+            view,
+            page,
+        } = query;
         let interface = match view {
             View::Context => "context",
             View::Collection => "collection",
@@ -308,8 +326,11 @@ impl Server {
                 page.start, page.count
             )
         });
-        let response = self.call(command, &format!(
-            "<calcWaitingTime>100</calcWaitingTime>{}<expr><stackLevel xmlns=\"{CALC}\">{level}</stackLevel><srcCalcInfo xmlns=\"{CALC}\"><expressionResultID>{id}</expressionResultID>{items}<interfaces>{interface}</interfaces>{page}</srcCalcInfo><presOptions xmlns=\"{CALC}\"><maxTextSize>16384</maxTextSize></presOptions></expr>", target_xml(target)))?;
+        let fields = format!(
+            "<calcWaitingTime>100</calcWaitingTime>{}<expr><stackLevel xmlns=\"{CALC}\">{level}</stackLevel><srcCalcInfo xmlns=\"{CALC}\"><expressionResultID>{id}</expressionResultID>{items}<interfaces>{interface}</interfaces>{page}</srcCalcInfo><presOptions xmlns=\"{CALC}\"><maxTextSize>16384</maxTextSize></presOptions></expr>",
+            target_xml(target)
+        );
+        let response = self.call_before(command, &fields, deadline, cancellation)?;
         if response.is_empty() {
             return Ok(Vec::new());
         }
@@ -318,12 +339,15 @@ impl Server {
             .collect())
     }
 
-    pub fn poll(&self) -> io::Result<Vec<Event>> {
+    pub fn poll(&self, cancellation: Option<&Cancellation>) -> io::Result<Vec<Event>> {
+        // Leave the native long poll open through quiet periods. Closing it early
+        // can lose an event that dbgs delivers to that connection as activity resumes.
         let response = match self.endpoint.post(
             "rdbg",
             &format!("cmd=pingDebugUIParams&dbgui={}", self.id),
             "",
-            Duration::from_secs(2),
+            Instant::now() + Duration::from_secs(8),
+            cancellation,
         ) {
             Ok(response) => response,
             Err(error)
@@ -334,8 +358,13 @@ impl Server {
             {
                 // The server may hold an idle event request. Probe its independent
                 // liveness endpoint before treating an idle socket as a failed session.
-                self.endpoint
-                    .post("rdbgTest", "cmd=test", "", Duration::from_millis(700))?;
+                self.endpoint.post(
+                    "rdbgTest",
+                    "cmd=test",
+                    "",
+                    Instant::now() + Duration::from_millis(700),
+                    cancellation,
+                )?;
                 return Ok(Vec::new());
             }
             Err(error) => return Err(error),
@@ -349,6 +378,16 @@ impl Server {
     }
 
     fn call(&self, command: &str, fields: &str) -> io::Result<Vec<u8>> {
+        self.call_before(command, fields, Instant::now() + REQUEST_TIMEOUT, None)
+    }
+
+    fn call_before(
+        &self,
+        command: &str,
+        fields: &str,
+        deadline: Instant,
+        cancellation: Option<&Cancellation>,
+    ) -> io::Result<Vec<u8>> {
         let mut request = format!(
             "<?xml version=\"1.0\" encoding=\"utf-8\"?><request><infoBaseAlias xmlns=\"{REQUEST}\">{}</infoBaseAlias><idOfDebuggerUI xmlns=\"{REQUEST}\">{}</idOfDebuggerUI>",
             escape(&self.alias),
@@ -366,8 +405,13 @@ impl Server {
             request.push_str(&field[start..]);
         }
         request.push_str("</request>");
-        self.endpoint
-            .post("rdbg", &format!("cmd={command}"), &request, REQUEST_TIMEOUT)
+        self.endpoint.post(
+            "rdbg",
+            &format!("cmd={command}"),
+            &request,
+            deadline,
+            cancellation,
+        )
     }
 }
 

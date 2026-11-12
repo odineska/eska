@@ -1,5 +1,6 @@
-//! One serialized debugger session. HTTP requests and poll results have a single owner.
+//! One serialized owner of DAP state, with background HTTP polling and calculations.
 mod breakpoints;
+mod calculation;
 mod client;
 mod poll;
 mod values;
@@ -22,9 +23,10 @@ use crate::{
     Mode,
     dap::{self, Output, Request},
     dbgs::{
-        self, Breakpoint, Calculation, Event, Module, Page, Selector, Server, StackAction, Step,
-        Target, View,
+        self, Breakpoint, Calculation, CalculationQuery, Event, Module, Page, Selector, Server,
+        StackAction, Step, Target, View,
     },
+    http::Cancellation,
     source::Sources,
     state::{Position, State, Variable},
 };
@@ -88,11 +90,13 @@ struct Pending {
     variable: Variable,
     phase: CalculationPhase,
     deadline: Instant,
+    cancellation: Arc<Cancellation>,
 }
 
 enum Input {
     Packet(io::Result<Option<Request>>),
     Events(io::Result<Vec<Event>>),
+    Calculation(String, io::Result<Vec<Calculation>>),
 }
 
 struct Session<'a, W> {
@@ -104,6 +108,7 @@ struct Session<'a, W> {
     managed_server: Option<ManagedDebugServer>,
     input: mpsc::SyncSender<Input>,
     poll: Option<Poll>,
+    calculations: Option<calculation::Worker>,
     state: State,
     breakpoints: BTreeMap<Module, Vec<Breakpoint>>,
     pending: BTreeMap<String, Pending>,
@@ -135,6 +140,7 @@ pub fn run(config: Option<Config>, language: &Localizer) -> io::Result<()> {
         managed_server: None,
         input: send,
         poll: None,
+        calculations: None,
         state: State::default(),
         breakpoints: BTreeMap::new(),
         pending: BTreeMap::new(),
@@ -169,7 +175,12 @@ fn drive(
             session.terminate((!success).then_some("runtime-client-failed"))?;
             break;
         }
-        if session.poll.as_ref().is_some_and(Poll::failed) {
+        if session.poll.as_ref().is_some_and(Poll::failed)
+            || session
+                .calculations
+                .as_ref()
+                .is_some_and(calculation::Worker::failed)
+        {
             session.terminate(Some(ENDPOINT))?;
             break;
         }
@@ -184,6 +195,7 @@ fn drive(
                 session.terminate(Some(ENDPOINT))?;
                 break;
             }
+            Ok(Input::Calculation(id, result)) => session.calculation_reply(&id, result)?,
             Err(mpsc::RecvTimeoutError::Timeout) => {}
         }
         session.expire()?;
@@ -304,12 +316,18 @@ impl<W: Write> Session<'_, W> {
             return Err(ENDPOINT);
         }
         let server = Arc::new(server);
-        self.poll = Some(
-            Poll::start(Arc::clone(&server), self.input.clone()).map_err(|_| {
+        let worker =
+            calculation::Worker::start(Arc::clone(&server), self.input.clone()).map_err(|_| {
                 let _ = server.detach();
                 ENDPOINT
-            })?,
-        );
+            })?;
+        let Ok(poll) = Poll::start(Arc::clone(&server), self.input.clone()) else {
+            worker.stop();
+            let _ = server.detach();
+            return Err(ENDPOINT);
+        };
+        self.poll = Some(poll);
+        self.calculations = Some(worker);
         self.server = Some(server);
         self.endpoint = Some(endpoint);
         self.managed_server = managed_server;
@@ -720,15 +738,13 @@ impl<W: Write> Session<'_, W> {
             variable,
             phase,
             deadline: Instant::now() + Duration::from_secs(4),
+            cancellation: Arc::default(),
         })
     }
 
     fn submit(&mut self, pending: Pending) -> io::Result<()> {
         if Instant::now() >= pending.deadline {
-            return self.output.response(
-                &pending.request,
-                Err(self.language.text("debug-evaluation-timeout")),
-            );
+            return self.fail_calculation(pending, "debug-evaluation-timeout");
         }
         let id = dbgs::random_id()?;
         let variable = &pending.variable;
@@ -736,41 +752,63 @@ impl<W: Write> Session<'_, W> {
             CalculationPhase::Children(page) if variable.view.paged() => Some(page),
             _ => None,
         };
-        let result = self.server().and_then(|server| {
-            let target = &self
-                .state
-                .threads
-                .get(&variable.position.thread)
-                .ok_or(INVALID)?
-                .target
-                .id;
-            server
-                .calculate(
-                    target,
-                    variable.position.level,
-                    &id,
-                    &variable.path,
-                    variable.view,
-                    page,
-                )
-                .map_err(|_| ENDPOINT)
-        });
-        match result {
-            Ok(results) if results.iter().any(|result| result.id == id) => self.finish(
-                pending,
-                results
-                    .into_iter()
-                    .filter(|result| result.id == id)
-                    .collect(),
-            ),
-            Ok(_) => {
-                self.pending.insert(id, pending);
-                Ok(())
-            }
-            Err(key) => self
-                .output
-                .response(&pending.request, Err(self.language.text(key))),
+        let Some(target) = self.state.threads.get(&variable.position.thread) else {
+            return self.fail_calculation(pending, INVALID);
+        };
+        let job = calculation::Job {
+            query: CalculationQuery {
+                id: id.clone(),
+                target: target.target.id.clone(),
+                level: variable.position.level,
+                path: variable.path.clone(),
+                view: variable.view,
+                page,
+            },
+            deadline: pending.deadline,
+            cancellation: Arc::clone(&pending.cancellation),
+        };
+        if !self
+            .calculations
+            .as_ref()
+            .is_some_and(|worker| worker.submit(job))
+        {
+            return self.fail_calculation(pending, INVALID);
         }
+        self.pending.insert(id, pending);
+        Ok(())
+    }
+
+    fn calculation_reply(
+        &mut self,
+        id: &str,
+        result: io::Result<Vec<Calculation>>,
+    ) -> io::Result<()> {
+        match result {
+            Ok(mut results) => {
+                results.retain(|result| result.id == id);
+                // An empty HTTP reply acknowledges a calculation whose result will be polled.
+                if !results.is_empty()
+                    && let Some(pending) = self.pending.remove(id)
+                {
+                    return self.finish(pending, results);
+                }
+            }
+            Err(error) => {
+                if let Some(pending) = self.pending.remove(id) {
+                    let key = if Instant::now() >= pending.deadline
+                        || matches!(
+                            error.kind(),
+                            io::ErrorKind::TimedOut | io::ErrorKind::WouldBlock
+                        ) {
+                        "debug-evaluation-timeout"
+                    } else {
+                        ENDPOINT
+                    };
+                    return self.fail_calculation(pending, key);
+                }
+            }
+        }
+        Ok(())
     }
 
     fn expression(&mut self, arguments: &Value) -> Result<(Variable, CalculationPhase), Failure> {
@@ -823,10 +861,12 @@ impl<W: Write> Session<'_, W> {
 
     fn finish(&mut self, mut pending: Pending, results: Vec<Calculation>) -> io::Result<()> {
         if !self.state.is_current(&pending.variable.position) {
-            return self
-                .output
-                .response(&pending.request, Err(self.language.text(INVALID)));
+            return self.fail_calculation(pending, INVALID);
         }
+        if Instant::now() >= pending.deadline {
+            return self.fail_calculation(pending, "debug-evaluation-timeout");
+        }
+        pending.cancellation.cancel();
         if let Some(failed) = results.iter().find(|value| value.value.error) {
             let thread = self
                 .state
@@ -872,6 +912,7 @@ impl<W: Write> Session<'_, W> {
                 };
                 pending.variable.path = vec![Selector::Snapshot(address.to_owned())];
                 pending.phase = CalculationPhase::ReadSnapshot(address.to_owned());
+                pending.cancellation = Arc::default();
                 return self.submit(pending);
             }
             CalculationPhase::ReadSnapshot(address)
@@ -919,22 +960,18 @@ impl<W: Write> Session<'_, W> {
             .iter()
             .find_map(|(id, pending)| (Some(pending.request.seq) == seq).then(|| id.clone()));
         if let Some(pending) = id.and_then(|id| self.pending.remove(&id)) {
-            self.output.response(
-                &pending.request,
-                Err(self.language.text("component-cancelled")),
-            )?;
+            self.cancel_calculation(pending)?;
         }
         Ok(())
     }
 
     fn cancel_pending(&mut self) -> io::Result<()> {
+        let mut result = Ok(());
         for (_, pending) in std::mem::take(&mut self.pending) {
-            self.output.response(
-                &pending.request,
-                Err(self.language.text("component-cancelled")),
-            )?;
+            let reply = self.cancel_calculation(pending);
+            result = result.and(reply);
         }
-        Ok(())
+        result
     }
 
     fn expire(&mut self) -> io::Result<()> {
@@ -954,16 +991,47 @@ impl<W: Write> Session<'_, W> {
                 } else {
                     INVALID
                 };
-                self.output
-                    .response(&pending.request, Err(self.language.text(key)))?;
+                self.fail_calculation(pending, key)?;
             }
         }
         Ok(())
     }
 
+    fn cancel_calculation(&mut self, pending: Pending) -> io::Result<()> {
+        let request = self.discard_calculation(pending);
+        self.output.response(&request, Err("cancelled".into()))
+    }
+
+    fn fail_calculation(&mut self, pending: Pending, key: Failure) -> io::Result<()> {
+        let request = self.discard_calculation(pending);
+        self.output.response(&request, Err(self.language.text(key)))
+    }
+
+    fn discard_calculation(&mut self, pending: Pending) -> Request {
+        let unsent = pending.cancellation.cancel();
+        if let Some(thread) = self
+            .state
+            .threads
+            .get_mut(&pending.variable.position.thread)
+        {
+            match pending.phase {
+                CalculationPhase::Store if unsent => thread.snapshot_count -= 1,
+                CalculationPhase::ReplaceSnapshot(address) if unsent => {
+                    thread.free_snapshots.push(address);
+                }
+                CalculationPhase::ReadSnapshot(address) => {
+                    // The read stage never changes the reserved snapshot.
+                    thread.free_snapshots.push(address);
+                }
+                _ => {}
+            }
+        }
+        pending.request
+    }
+
     fn cleanup(&mut self) {
-        if let Some(poll) = &self.poll {
-            poll.cancel();
+        if let Some(worker) = self.calculations.take() {
+            worker.stop();
         }
         if let Some(server) = self.server.take() {
             let start = Instant::now();

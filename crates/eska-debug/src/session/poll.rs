@@ -1,5 +1,6 @@
 //! Successful poll replies, even idle ones, break a run of failures.
 use super::{Input, Server};
+use crate::http::Cancellation;
 use std::{
     io,
     sync::{
@@ -16,21 +17,21 @@ const POLL_MAX: Duration = Duration::from_millis(240);
 const FAILURE_LIMIT: Duration = Duration::from_secs(5);
 
 pub(super) struct Poll {
-    stop: Arc<AtomicBool>,
+    stop: Arc<Cancellation>,
     failed: Arc<AtomicBool>,
     worker: thread::JoinHandle<()>,
 }
 
 impl Poll {
     pub(super) fn start(server: Arc<Server>, send: mpsc::SyncSender<Input>) -> io::Result<Self> {
-        let stop = Arc::new(AtomicBool::new(false));
+        let stop = Arc::<Cancellation>::default();
         let failed = Arc::new(AtomicBool::new(false));
         let (cancel, overflow) = (Arc::clone(&stop), Arc::clone(&failed));
         let worker = thread::Builder::new().spawn(move || {
             let mut retry = Retry::new();
-            while !cancel.load(Ordering::Acquire) {
-                let result = server.poll();
-                if cancel.load(Ordering::Acquire) {
+            while !cancel.is_cancelled() {
+                let result = server.poll(Some(&cancel));
+                if cancel.is_cancelled() {
                     break;
                 }
                 let active = result.as_ref().is_ok_and(|events| !events.is_empty());
@@ -63,13 +64,9 @@ impl Poll {
         self.failed.load(Ordering::Acquire)
     }
 
-    pub(super) fn cancel(&self) {
-        self.stop.store(true, Ordering::Release);
-        self.worker.thread().unpark();
-    }
-
     pub(super) fn stop(self) {
-        self.cancel();
+        self.stop.cancel();
+        self.worker.thread().unpark();
         let _ = self.worker.join();
     }
 }
