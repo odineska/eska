@@ -83,6 +83,7 @@ enum CalculationPhase {
     ReadSnapshot(String),
     ReplaceSnapshot(String),
     Children(Page),
+    Assign(String),
 }
 
 struct Pending {
@@ -220,7 +221,10 @@ impl<W: Write> Session<'_, W> {
     }
 
     fn request(&mut self, request: Request) -> io::Result<()> {
-        if matches!(request.command.as_str(), "evaluate" | "variables") {
+        if matches!(
+            request.command.as_str(),
+            "evaluate" | "variables" | "setVariable"
+        ) {
             return self.calculation_request(request);
         }
         let result = match request.command.as_str() {
@@ -229,7 +233,7 @@ impl<W: Write> Session<'_, W> {
                 Ok(
                     json!({"supportsConfigurationDoneRequest":true,"supportsCancelRequest":true,
                     "supportsEvaluateForHovers":true, "supportsSingleThreadExecutionRequests":false,
-                    "supportsVariablePaging":true,
+                    "supportsVariablePaging":true, "supportsSetVariable":true,
                     "supportsConditionalBreakpoints":true,"supportsHitConditionalBreakpoints":true,
                     "supportsLogPoints":true,"supportsExceptionFilterOptions":true,
                     "exceptionBreakpointFilters":[{"filter":ERROR_FILTER,"label":self.language.text("debug-runtime-errors"),
@@ -550,6 +554,9 @@ impl<W: Write> Session<'_, W> {
     }
 
     fn step(&mut self, request: &Request) -> Result<Value, Failure> {
+        if self.assignment_pending() {
+            return Err("debug-value-assignment-in-progress");
+        }
         let id = request.arguments["threadId"].as_u64().ok_or(INVALID)?;
         let target = self
             .state
@@ -781,6 +788,8 @@ impl<W: Write> Session<'_, W> {
             Err(INVALID)
         } else if request.command == "evaluate" {
             self.expression(&request.arguments)
+        } else if request.command == "setVariable" {
+            self.assignment(&request.arguments)
         } else {
             let variable = request.arguments["variablesReference"]
                 .as_u64()
@@ -809,6 +818,31 @@ impl<W: Write> Session<'_, W> {
         })
     }
 
+    fn assignment_pending(&self) -> bool {
+        self.pending
+            .values()
+            .any(|pending| matches!(pending.phase, CalculationPhase::Assign(_)))
+    }
+
+    fn assignment(&self, arguments: &Value) -> Result<(Variable, CalculationPhase), Failure> {
+        if self.assignment_pending() {
+            return Err("debug-value-assignment-in-progress");
+        }
+        let parent = arguments["variablesReference"]
+            .as_u64()
+            .and_then(|id| self.state.variable(id))
+            .ok_or(INVALID)?;
+        let name = arguments["name"]
+            .as_str()
+            .filter(|name| name.len() <= MAX_DEBUG_EXPRESSION)
+            .ok_or(INVALID)?;
+        let expression = optional_expression(arguments, "value")?
+            .filter(|value| !value.trim().is_empty())
+            .ok_or(INVALID)?;
+        let variable = values::assignment_target(parent, name)?;
+        Ok((variable, CalculationPhase::Assign(expression.to_owned())))
+    }
+
     fn submit(&mut self, pending: Pending) -> io::Result<()> {
         if Instant::now() >= pending.deadline {
             return self.fail_calculation(pending, "debug-evaluation-timeout");
@@ -822,15 +856,23 @@ impl<W: Write> Session<'_, W> {
         let Some(target) = self.state.threads.get(&variable.position.thread) else {
             return self.fail_calculation(pending, INVALID);
         };
+        let (path, assignment) = match &pending.phase {
+            CalculationPhase::Assign(expression) => match values::assignment_path(&variable.path) {
+                Ok(path) => (path, Some(expression.clone())),
+                Err(key) => return self.fail_calculation(pending, key),
+            },
+            _ => (variable.path.clone(), None),
+        };
         let job = calculation::Job {
             query: CalculationQuery {
                 id: id.clone(),
                 target: target.target.id.clone(),
                 level: variable.position.level,
-                path: variable.path.clone(),
+                path,
                 view: variable.view,
                 page,
             },
+            assignment,
             deadline: pending.deadline,
             cancellation: Arc::clone(&pending.cancellation),
         };
@@ -927,7 +969,7 @@ impl<W: Write> Session<'_, W> {
     }
 
     fn finish(&mut self, mut pending: Pending, results: Vec<Calculation>) -> io::Result<()> {
-        if !self.state.is_current(&pending.variable.position) {
+        if !self.pending_current(&pending) {
             return self.fail_calculation(pending, INVALID);
         }
         if Instant::now() >= pending.deadline {
@@ -935,36 +977,7 @@ impl<W: Write> Session<'_, W> {
         }
         pending.cancellation.cancel();
         if let Some(failed) = results.iter().find(|value| value.value.error) {
-            let thread = self
-                .state
-                .threads
-                .get_mut(&pending.variable.position.thread);
-            let hidden = match pending.phase {
-                CalculationPhase::Store => {
-                    if let Some(thread) = thread {
-                        thread.snapshot_count -= 1;
-                    }
-                    false
-                }
-                CalculationPhase::ReadSnapshot(_) => true,
-                CalculationPhase::ReplaceSnapshot(address) => {
-                    let hidden = failed.value.text.contains(&address);
-                    if let Some(thread) = thread {
-                        thread.free_snapshots.push(address);
-                    }
-                    hidden
-                }
-                CalculationPhase::Children(_) => {
-                    matches!(pending.variable.path.first(), Some(Selector::Snapshot(address))
-                        if failed.value.text.contains(address))
-                }
-            };
-            let message = if hidden || failed.value.text.is_empty() {
-                self.language.text("debug-evaluation-failed")
-            } else {
-                failed.value.text.clone()
-            };
-            return self.output.response(&pending.request, Err(message));
+            return self.calculation_error(pending, &failed.value);
         }
         let result = match pending.phase {
             CalculationPhase::Store => {
@@ -1013,11 +1026,58 @@ impl<W: Write> Session<'_, W> {
                 results,
                 &self.language.text("debug-unreadable-property"),
             ),
+            CalculationPhase::Assign(_) => {
+                let result = results.first().ok_or("debug-value-assignment-failed");
+                result.and_then(|result| {
+                    values::assigned(&mut self.state, pending.variable, &result.value)
+                })
+            }
         };
         self.output.response(
             &pending.request,
             result.map_err(|key| self.language.text(key)),
         )
+    }
+
+    fn calculation_error(&mut self, pending: Pending, failed: &dbgs::Value) -> io::Result<()> {
+        let message = {
+            let fallback = if matches!(pending.phase, CalculationPhase::Assign(_)) {
+                "debug-value-assignment-failed"
+            } else {
+                "debug-evaluation-failed"
+            };
+            let thread = self
+                .state
+                .threads
+                .get_mut(&pending.variable.position.thread);
+            let hidden = match pending.phase {
+                CalculationPhase::Store => {
+                    if let Some(thread) = thread {
+                        thread.snapshot_count -= 1;
+                    }
+                    false
+                }
+                CalculationPhase::ReadSnapshot(_) => true,
+                CalculationPhase::ReplaceSnapshot(address) => {
+                    let hidden = failed.text.contains(&address);
+                    if let Some(thread) = thread {
+                        thread.free_snapshots.push(address);
+                    }
+                    hidden
+                }
+                CalculationPhase::Children(_) => {
+                    matches!(pending.variable.path.first(), Some(Selector::Snapshot(address))
+                        if failed.text.contains(address))
+                }
+                CalculationPhase::Assign(_) => false,
+            };
+            if hidden || failed.text.is_empty() {
+                self.language.text(fallback)
+            } else {
+                failed.text.clone()
+            }
+        };
+        self.output.response(&pending.request, Err(message))
     }
 
     fn cancel(&mut self, arguments: &Value) -> io::Result<()> {
@@ -1046,14 +1106,12 @@ impl<W: Write> Session<'_, W> {
         let expired: Vec<_> = self
             .pending
             .iter()
-            .filter(|(_, pending)| {
-                pending.deadline <= now || !self.state.is_current(&pending.variable.position)
-            })
+            .filter(|(_, pending)| pending.deadline <= now || !self.pending_current(pending))
             .map(|(id, _)| id.clone())
             .collect();
         for id in expired {
             if let Some(pending) = self.pending.remove(&id) {
-                let key = if self.state.is_current(&pending.variable.position) {
+                let key = if self.pending_current(&pending) {
                     "debug-evaluation-timeout"
                 } else {
                     INVALID
@@ -1062,6 +1120,16 @@ impl<W: Write> Session<'_, W> {
             }
         }
         Ok(())
+    }
+
+    fn pending_current(&self, pending: &Pending) -> bool {
+        self.state.is_current(&pending.variable.position)
+            && (!matches!(
+                pending.phase,
+                CalculationPhase::Children(_) | CalculationPhase::Assign(_)
+            ) || pending.request.arguments["variablesReference"]
+                .as_u64()
+                .is_some_and(|id| self.state.has_variable(id)))
     }
 
     fn cancel_calculation(&mut self, pending: Pending) -> io::Result<()> {
@@ -1076,6 +1144,9 @@ impl<W: Write> Session<'_, W> {
 
     fn discard_calculation(&mut self, pending: Pending) -> Request {
         let unsent = pending.cancellation.cancel();
+        if !unsent && matches!(pending.phase, CalculationPhase::Assign(_)) {
+            self.state.invalidate_variable(&pending.variable);
+        }
         if let Some(thread) = self
             .state
             .threads

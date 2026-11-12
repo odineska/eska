@@ -117,6 +117,18 @@ impl State {
         self.variables.get(&id).cloned()
     }
 
+    pub fn has_variable(&self, id: u64) -> bool {
+        self.variables.contains_key(&id)
+    }
+
+    pub fn invalidate_variable(&mut self, changed: &Variable) {
+        let retain = |variable: &Variable| {
+            variable.position != changed.position || !variable.path.starts_with(&changed.path)
+        };
+        self.variables.retain(|_, variable| retain(variable));
+        self.variable_ids.retain(|variable, _| retain(variable));
+    }
+
     pub fn add_variable(&mut self, variable: Variable) -> Option<u64> {
         if !self.is_current(&variable.position) {
             return None;

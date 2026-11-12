@@ -1,4 +1,6 @@
 //! Translate platform values without silently losing children or expandable handles.
+use std::fmt::Write as _;
+
 use super::{Failure, INVALID};
 use crate::{
     dbgs::{self, Calculation, Page, Selector},
@@ -7,6 +9,7 @@ use crate::{
 use serde_json::{Value, json};
 
 pub(super) const LIMIT: Failure = "debug-value-limit";
+const READ_ONLY: Failure = "debug-value-read-only";
 const PAGE_LIMIT: Failure = "debug-variable-page-limit";
 const MAX_CHILDREN: u32 = 512;
 
@@ -44,6 +47,93 @@ pub(super) fn evaluated(
     let mut body = json!({"result":value.text,"type":value.kind,"variablesReference":reference});
     add_count(&mut body, value);
     Ok(body)
+}
+
+pub(super) fn assigned(
+    state: &mut State,
+    variable: Variable,
+    value: &dbgs::Value,
+) -> Result<Value, Failure> {
+    state.invalidate_variable(&variable);
+    let reference = reference(state, variable, value)?;
+    let mut body = json!({"value":value.text,"type":value.kind,"variablesReference":reference});
+    add_count(&mut body, value);
+    Ok(body)
+}
+
+pub(super) fn assignment_target(mut parent: Variable, name: &str) -> Result<Variable, Failure> {
+    if read_only(&parent) {
+        return Err(READ_ONLY);
+    }
+    let selector = match parent.view {
+        dbgs::View::Collection => {
+            let index = name.parse::<u32>().map_err(|_| INVALID)?;
+            if parent.indexed_count.is_some_and(|size| index >= size) {
+                return Err(INVALID);
+            }
+            Selector::Index(index)
+        }
+        dbgs::View::Context => {
+            if !bsl_identifier(name) {
+                return Err(INVALID);
+            }
+            if parent.path.is_empty() {
+                Selector::Expression(name.to_owned())
+            } else {
+                Selector::Property(name.to_owned())
+            }
+        }
+        dbgs::View::Enumeration => return Err(READ_ONLY),
+    };
+    if parent.path.len() >= 32 {
+        return Err(LIMIT);
+    }
+    parent.path.push(selector);
+    parent.view = dbgs::View::Context;
+    parent.indexed_count = None;
+    Ok(parent)
+}
+
+pub(super) fn assignment_path(path: &[Selector]) -> Result<Vec<Selector>, Failure> {
+    if !path
+        .iter()
+        .any(|selector| matches!(selector, Selector::Index(_)))
+    {
+        return Ok(path.to_vec());
+    }
+    // dbgs can read indexed selectors but expects a BSL l-value for indexed writes.
+    let Some((Selector::Expression(root), tail)) = path.split_first() else {
+        return Err(READ_ONLY);
+    };
+    if !bsl_identifier(root) {
+        return Err(READ_ONLY);
+    }
+    let mut expression = root.clone();
+    for selector in tail {
+        match selector {
+            Selector::Index(index) => {
+                let _ = write!(expression, "[{index}]");
+            }
+            Selector::Property(name) if bsl_identifier(name) => {
+                expression.push('.');
+                expression.push_str(name);
+            }
+            _ => return Err(READ_ONLY),
+        }
+    }
+    Ok(vec![Selector::Expression(expression)])
+}
+
+fn bsl_identifier(name: &str) -> bool {
+    let mut chars = name.chars();
+    chars
+        .next()
+        .is_some_and(|ch| ch == '_' || ch.is_alphabetic())
+        && chars.all(|ch| ch == '_' || ch.is_alphanumeric())
+}
+
+fn read_only(parent: &Variable) -> bool {
+    matches!(parent.path.first(), Some(Selector::Snapshot(_)))
 }
 
 pub(super) fn page(variable: &Variable, arguments: &Value) -> Result<Option<Page>, Failure> {
@@ -157,7 +247,7 @@ fn display_child(
     };
     let mut body =
         json!({"name":name,"value":text,"type":value.kind,"variablesReference":reference});
-    if value.error {
+    if value.error || read_only(parent) || parent.view == dbgs::View::Enumeration {
         body["presentationHint"] = json!({"attributes":["readOnly"]});
     }
     add_count(&mut body, value);
@@ -190,6 +280,22 @@ fn add_count(body: &mut Value, value: &dbgs::Value) {
 mod tests {
     use super::*;
     use crate::dbgs::{Frame, Target, View};
+
+    #[test]
+    fn indexed_assignment_uses_only_validated_path_components() {
+        let path = [
+            Selector::Expression("Структура".into()),
+            Selector::Property("Ряд".into()),
+            Selector::Index(123),
+            Selector::Property("Значение".into()),
+        ];
+        assert_eq!(
+            assignment_path(&path).unwrap(),
+            [Selector::Expression("Структура.Ряд[123].Значение".into())]
+        );
+        let invalid = [Selector::Expression("Функция()".into()), Selector::Index(0)];
+        assert_eq!(assignment_path(&invalid), Err(READ_ONLY));
+    }
 
     fn stopped() -> (State, Variable) {
         let mut state = State::default();

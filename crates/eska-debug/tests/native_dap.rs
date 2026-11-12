@@ -185,6 +185,101 @@ impl Dap {
 }
 
 #[test]
+#[ignore = "requires the owned assignment fixture and its HTTP debug server"]
+fn native_set_variable_updates_locals_properties_and_array_elements() {
+    let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();
+    let root = Path::new(&root);
+    let source = root.join("src/Ext/ManagedApplicationModule.bsl");
+    let mut dap = Dap::start(root, "test", "launch");
+    let capabilities = dap.success("initialize", json!({"adapterID":"eska"}));
+    assert_eq!(capabilities["supportsSetVariable"], true);
+    dap.success("launch", json!({}));
+    dap.success(
+        "setBreakpoints",
+        json!({"source":{"path":source},"breakpoints":[{"line":7}]}),
+    );
+    dap.success("configurationDone", json!({}));
+    let thread = dap.stop();
+    let stack = dap.success("stackTrace", json!({"threadId":thread}));
+    let frame = &stack["stackFrames"][0]["id"];
+    let scope = dap.success("scopes", json!({"frameId":frame}));
+    let locals_ref = &scope["scopes"][0]["variablesReference"];
+    let locals = dap.success("variables", json!({"variablesReference":locals_ref}));
+    let change = |reference: &Value, name: &str, value: &str| json!({"variablesReference":reference,"name":name,"value":value});
+    let reference = |name| {
+        locals["variables"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|variable| variable["name"] == name)
+            .unwrap()["variablesReference"]
+            .clone()
+    };
+
+    let result = dap.success("setVariable", change(locals_ref, "A", "100 + 23"));
+    assert_eq!(result["value"], "123");
+    let bad = dap.request("setVariable", change(locals_ref, "A", "1 + )"));
+    assert_eq!(bad["success"], false, "{bad}");
+    assert!(
+        bad["message"]
+            .as_str()
+            .unwrap()
+            .contains("Ошибка в выражении"),
+        "{bad}"
+    );
+
+    let structure = reference("Данные");
+    let row = reference("Ряд");
+    let fixed = reference("ФиксированныеДанные");
+    for (parent, name, expression, expected) in
+        [(&structure, "Число", "11", "11"), (&row, "0", "24", "24")]
+    {
+        let result = dap.success("setVariable", change(parent, name, expression));
+        assert_eq!(result["value"], expected);
+        let children = dap.success("variables", json!({"variablesReference":parent}));
+        assert!(
+            children["variables"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .any(|variable| { variable["name"] == name && variable["value"] == expected }),
+            "{children}"
+        );
+    }
+    let read_only = dap.request("setVariable", change(&fixed, "Число", "1"));
+    assert_eq!(read_only["success"], false, "{read_only}");
+    let snapshot = dap.success("evaluate", json!({"frameId":frame,"expression":"Данные"}));
+    let snapshot_ref = &snapshot["variablesReference"];
+    let child = dap.success("variables", json!({"variablesReference":snapshot_ref}));
+    assert_eq!(
+        child["variables"][0]["presentationHint"]["attributes"],
+        json!(["readOnly"])
+    );
+    let read_only = dap.request("setVariable", change(snapshot_ref, "Число", "1"));
+    assert_eq!(read_only["success"], false, "{read_only}");
+
+    let replacement = dap.success(
+        "setVariable",
+        json!({
+            "variablesReference":locals_ref,"name":"Данные","value":"Новый Структура(\"Число\", 42)"
+        }),
+    );
+    assert_ne!(replacement["variablesReference"], structure);
+    assert_eq!(
+        dap.request("variables", json!({"variablesReference":structure}))["success"],
+        false
+    );
+    let current = dap.success(
+        "variables",
+        json!({"variablesReference":replacement["variablesReference"]}),
+    );
+    assert_eq!(current["variables"][0]["value"], "42");
+    let result = dap.success("evaluate", json!({"frameId":frame,"expression":"A + Данные.Число + Ряд[0] + ФиксированныеДанные.Число"}));
+    assert_eq!(result["result"], "194");
+    dap.shutdown();
+}
+
+#[test]
 #[ignore = "requires the pause fixture and one externally started managed client"]
 fn native_pause_reports_both_running_clients_and_preserves_step_reason() {
     let root = env::var_os("ESKA_DEBUG_LIVE_PROJECT").unwrap();

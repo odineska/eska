@@ -15,6 +15,7 @@ use super::{Input, MAX_PENDING, Server};
 
 pub(super) struct Job {
     pub(super) query: CalculationQuery,
+    pub(super) assignment: Option<String>,
     pub(super) deadline: Instant,
     pub(super) cancellation: Arc<Cancellation>,
 }
@@ -35,7 +36,12 @@ impl Worker {
                 if job.cancellation.is_cancelled() {
                     continue;
                 }
-                let result = server.calculate(&job.query, job.deadline, Some(&job.cancellation));
+                let result = match job.assignment {
+                    Some(expression) => {
+                        server.modify(&job.query, &expression, job.deadline, &job.cancellation)
+                    }
+                    None => server.calculate(&job.query, job.deadline, Some(&job.cancellation)),
+                };
                 if job.cancellation.is_cancelled() {
                     continue;
                 }

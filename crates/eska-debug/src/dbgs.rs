@@ -108,6 +108,50 @@ pub struct CalculationQuery {
     pub page: Option<Page>,
 }
 
+impl CalculationQuery {
+    fn path_xml(&self) -> String {
+        let Self {
+            id,
+            level,
+            path,
+            view,
+            page,
+            ..
+        } = self;
+        let interface = match view {
+            View::Context => "context",
+            View::Collection => "collection",
+            View::Enumeration => "enum",
+        };
+        let mut items = String::new();
+        for selector in path {
+            let (kind, field, value) = match selector {
+                Selector::Expression(text) => ("expression", "expression", escape(text)),
+                Selector::Snapshot(address) => (
+                    "expression",
+                    "expression",
+                    escape(&snapshot_expression(&format!("\"{address}\""))),
+                ),
+                Selector::Property(text) => ("property", "property", escape(text)),
+                Selector::Index(index) => ("index", "index", index.to_string()),
+            };
+            let _ = write!(
+                items,
+                "<calcItem><itemType>{kind}</itemType><{field}>{value}</{field}></calcItem>"
+            );
+        }
+        let page = page.map_or_else(String::new, |page| {
+            format!(
+                "<startIndex>{}</startIndex><pageSize>{}</pageSize>",
+                page.start, page.count
+            )
+        });
+        format!(
+            "<stackLevel xmlns=\"{CALC}\">{level}</stackLevel><srcCalcInfo xmlns=\"{CALC}\"><expressionResultID>{id}</expressionResultID>{items}<interfaces>{interface}</interfaces>{page}</srcCalcInfo>"
+        )
+    }
+}
+
 #[derive(Debug)]
 pub enum Event {
     Started(Target),
@@ -300,50 +344,15 @@ impl Server {
         deadline: Instant,
         cancellation: Option<&Cancellation>,
     ) -> io::Result<Vec<Calculation>> {
-        let CalculationQuery {
-            id,
-            target,
-            level,
-            path,
-            view,
-            page,
-        } = query;
-        let interface = match view {
-            View::Context => "context",
-            View::Collection => "collection",
-            View::Enumeration => "enum",
-        };
-        let mut items = String::new();
-        for selector in path {
-            let (kind, field, value) = match selector {
-                Selector::Expression(text) => ("expression", "expression", escape(text)),
-                Selector::Snapshot(address) => (
-                    "expression",
-                    "expression",
-                    escape(&snapshot_expression(&format!("\"{address}\""))),
-                ),
-                Selector::Property(text) => ("property", "property", escape(text)),
-                Selector::Index(index) => ("index", "index", index.to_string()),
-            };
-            let _ = write!(
-                items,
-                "<calcItem><itemType>{kind}</itemType><{field}>{value}</{field}></calcItem>"
-            );
-        }
-        let command = if path.is_empty() {
+        let command = if query.path.is_empty() {
             "evalLocalVariables"
         } else {
             "evalExpr"
         };
-        let page = page.map_or_else(String::new, |page| {
-            format!(
-                "<startIndex>{}</startIndex><pageSize>{}</pageSize>",
-                page.start, page.count
-            )
-        });
         let fields = format!(
-            "<calcWaitingTime>100</calcWaitingTime>{}<expr><stackLevel xmlns=\"{CALC}\">{level}</stackLevel><srcCalcInfo xmlns=\"{CALC}\"><expressionResultID>{id}</expressionResultID>{items}<interfaces>{interface}</interfaces>{page}</srcCalcInfo><presOptions xmlns=\"{CALC}\"><maxTextSize>16384</maxTextSize></presOptions></expr>",
-            target_xml(target)
+            "<calcWaitingTime>100</calcWaitingTime>{}<expr>{}<presOptions xmlns=\"{CALC}\"><maxTextSize>16384</maxTextSize></presOptions></expr>",
+            target_xml(&query.target),
+            query.path_xml()
         );
         let response = self.call_before(command, &fields, deadline, cancellation)?;
         if response.is_empty() {
@@ -352,6 +361,39 @@ impl Server {
         Ok(children(document(&response)?.root_element(), "result")
             .filter_map(calculation)
             .collect())
+    }
+
+    pub fn modify(
+        &self,
+        query: &CalculationQuery,
+        expression: &str,
+        deadline: Instant,
+        cancellation: &Cancellation,
+    ) -> io::Result<Vec<Calculation>> {
+        let fields = format!(
+            "{}<modifyDataPath>{}</modifyDataPath><newValueInfo><variant xmlns=\"{CALC}\">expr</variant><valueExpression xmlns=\"{CALC}\">{}</valueExpression></newValueInfo><timeout>1000</timeout>",
+            target_xml(&query.target),
+            query.path_xml(),
+            escape(expression)
+        );
+        let response = self.call_before("modifyValue", &fields, deadline, Some(cancellation))?;
+        let document = document(&response)?;
+        let root = document.root_element();
+        let result = if text(root, "processed") == "false" {
+            let mut failed = value(None, String::new());
+            failed.error = true;
+            failed.text = decoded(root, "errorDescr");
+            Calculation {
+                id: query.id.clone(),
+                value: failed,
+                children: Vec::new(),
+            }
+        } else {
+            child(root, "newValueState")
+                .and_then(calculation)
+                .ok_or_else(invalid)?
+        };
+        Ok(vec![result])
     }
 
     pub fn poll(&self, cancellation: Option<&Cancellation>) -> io::Result<Vec<Event>> {

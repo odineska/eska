@@ -31,7 +31,8 @@ stdio. Сеанс использует имена файлов и номера �
 Если `targetId` опущен, адаптер подключает доступные предметы выбранных типов
 после `configurationDone` и подключает новые по мере их появления. Отладка
 затем идёт обычными запросами `setBreakpoints`, `threads`, `stackTrace`,
-`scopes`, `variables`, `evaluate`, `next`, `continue` и `disconnect`.
+`scopes`, `variables`, `evaluate`, `setVariable`, `pause`, `next`,
+`continue` и `disconnect`.
 Подключение использует переданные локальные исходники. Их совпадение с кодом
 в базе проверяет разработчик.
 
