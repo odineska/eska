@@ -143,12 +143,14 @@ impl Endpoint {
             cancellation.register(&stream)?;
         }
         let mut stream = Deadline { stream, deadline };
-        write!(
-            stream,
+        // dbgs can reject a request line split across TCP reads. Format the
+        // complete header before writing it to the socket.
+        let header = format!(
             "POST /e1crdbg/{resource}?{query} HTTP/1.1\r\nHost: {}\r\nUser-Agent: 1CV8\r\nAccept: application/xml, text/xml\r\nContent-Type: application/xml; charset=utf-8\r\nContent-Length: {}\r\nConnection: close\r\n\r\n",
             self.authority,
             xml.len()
-        )?;
+        );
+        stream.write_all(header.as_bytes())?;
         stream.write_all(xml.as_bytes())?;
         read_response(&mut BufReader::new(stream))
     }
