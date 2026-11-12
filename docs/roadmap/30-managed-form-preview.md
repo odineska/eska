@@ -2391,6 +2391,15 @@ MaxHeight=4 поле занимает 107 px вместо 237 px. При Bottom 
 [Эталоны растяжения блока](../../tests/fixtures/forms/native-united-layout/date-through-stretch-metrics.json) ·
 [Замеры Stalingrad](../measurements/t157-fixed-footer-height-linux.md#растяжение-блока-дат-и-высота-тела).
 
+Смешанные строки сохраняют сквозное выравнивание ссылочных полей,
+когда растяжение одной или обеих замыкающих надписей выключено.
+В контрольной форме десять состояний подтверждают горизонтальные
+прямоугольники надписей и исходную высоту рамки. В тестовой копии
+Stalingrad начало блока дат совпало при ширине 994 px, его ширина
+различается на 1 px.
+[Эталоны](../../tests/fixtures/forms/native-united-layout/through-label-stretch-metrics.json) ·
+[Замеры Stalingrad](../measurements/t157-fixed-footer-height-linux.md#фиксированная-ширина-замыкающих-надписей).
+
 ### T158 — Поля, кнопки, команды и декорации
 
 **Статус:** `IN-PROGRESS`. **Зависимости:** T155–T157. **Владелец:** Explorer; семантика — ESKA.

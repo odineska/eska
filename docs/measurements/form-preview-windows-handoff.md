@@ -1954,6 +1954,13 @@ X и Y двух полей дат и высоту рамки. Повторите
 отдельно X блока и распределение ширины между колонками.
 [Эталоны Linux](../../tests/fixtures/forms/native-united-layout/date-through-stretch-metrics.json).
 
+У `OutgoingOrg` и `IncomingOrg` поочерёдно выключите
+`HorizontalStretch`. Сверьте начало правой колонки, ширину блока
+дат, координаты обеих надписей и высоту рамки. Задайте надписям
+`Width=12` и `Width=20`. При широкой форме оставьте растяжение
+второй надписи в Auto и сравните ширины обеих надписей.
+[Эталоны Linux](../../tests/fixtures/forms/native-united-layout/through-label-stretch-metrics.json).
+
 Для верхних подписей задайте `TitleLocation=Top` у `Stamp`, `Settlement`
 и `Limit`. Повторите `Width=70`, `80`, `90` и `120` у формы, включая
 варианты со скрытой `Services` и `Width=26` у `OutgoingOrg` и `IncomingOrg`.
