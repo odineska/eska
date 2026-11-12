@@ -1,8 +1,10 @@
 //! Plan and apply Designer XML changes to an existing test infobase.
 
 mod descriptor;
+mod extension;
 mod structure;
 
+pub use extension::Identity as ExtensionIdentity;
 pub use structure::{ObjectChange, ObjectKind, ObjectOperation};
 
 use std::{
@@ -19,7 +21,7 @@ use std::{
 
 use eska_project_core::project::{
     Project, ProjectType,
-    local_settings::{Action, Infobase, Profile, ProfileName},
+    local_settings::{Action, Infobase, Profile, ProfileName, SettingsError},
 };
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -83,6 +85,10 @@ pub struct Inspection {
     pub database: Comparison,
     pub baseline_generation: Option<String>,
     pub database_generation: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub configuration_generation: Option<String>,
+    #[serde(skip_serializing_if = "BTreeMap::is_empty")]
+    pub dependency_generations: BTreeMap<String, String>,
     pub pending_apply: bool,
 }
 
@@ -107,6 +113,8 @@ pub struct Plan {
     pub mode: Mode,
     pub target: String,
     pub platform_version: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub extension: Option<ExtensionIdentity>,
     pub changes: BTreeMap<PathBuf, Change>,
     pub import_files: Option<Vec<PathBuf>>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
@@ -126,6 +134,12 @@ pub enum ApplyError {
     Snapshot(SourceSnapshotError),
     InvalidState,
     ProjectType,
+    ExtensionApplication,
+    ExtensionScope,
+    ExtensionDescriptor,
+    ExtensionAmbiguous,
+    ExtensionUnavailable,
+    ExtensionIdentityMismatch,
     SourceInsideInfobase,
     ReviewRequired(ReviewReason, Box<Review>),
     Busy,
@@ -150,13 +164,14 @@ struct Baseline {
 /// Returns a structured preflight error when the target or last successful baseline cannot be verified.
 pub fn preview(project: &Project, name: ProfileName, initialize: bool) -> Result<Plan, ApplyError> {
     let target = Target::open(project, name)?;
-    let generation = match target.generation() {
+    let generation = match target.observe() {
         Ok(generation) => Ok(generation),
         Err(ApplyError::PlatformFailed(Stage::Inspect)) => Err(ReviewReason::GenerationUnavailable),
         Err(ApplyError::InvalidState) => Err(ReviewReason::InvalidGeneration),
         Err(error) => return Err(error),
     };
     let current = target.capture(project, None)?;
+    target.verify_source(project.source())?;
     plan(&target, generation, project.source(), &current, initialize)
 }
 
@@ -174,17 +189,22 @@ pub fn execute(
     let _lock = lock(&target.lock)?;
     let source = target.scratch.path().join("source");
     let current = target.capture(project, Some(&source))?;
-    let generation = target.generation()?;
+    target.verify_source(&source)?;
+    let generation = target.observe()?;
     let mut plan = plan(&target, Ok(generation), &source, &current, initialize)?;
     if plan.confirmation.as_deref() != Some(confirmation) {
         return Err(ApplyError::StalePreview);
     }
-    let descriptors = if plan.mode == Mode::Initialize {
+    let descriptors = if plan.mode == Mode::Initialize && target.extension.is_none() {
         descriptor::baseline(&source, &current)
     } else {
         std::mem::take(&mut plan.descriptors)
     };
-    let root = plan.root.take().or_else(|| structure::Root::read(&source));
+    let root = if target.extension.is_none() {
+        plan.root.take().or_else(|| structure::Root::read(&source))
+    } else {
+        None
+    };
     let state = target.state.with_extension("pending");
     let directory = target.state.parent().ok_or(ApplyError::InvalidState)?;
     let mut marker = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
@@ -250,6 +270,8 @@ struct Target {
     platform: Ibcmd,
     connection: Connection,
     identity: String,
+    extension: Option<ExtensionIdentity>,
+    dependencies: Vec<ExtensionIdentity>,
     lock: PathBuf,
     state: PathBuf,
     scratch: tempfile::TempDir,
@@ -262,16 +284,33 @@ enum Connection {
     Standalone(u32),
 }
 
+struct Observation {
+    generation: String,
+    configuration_generation: Option<String>,
+    dependency_generations: BTreeMap<String, String>,
+}
+
 impl Target {
     fn open(project: &Project, name: ProfileName) -> Result<Self, ApplyError> {
-        let profile = profile(project, name, Action::Apply).map_err(ApplyError::Runtime)?;
-        if project.configuration().project_type() != ProjectType::Configuration {
-            return Err(ApplyError::ProjectType);
+        if name == ProfileName::Prod {
+            return Err(ApplyError::Runtime(RuntimeError::Settings(
+                SettingsError::ForbiddenAction,
+            )));
         }
-        let directory = project.root().join(".eska");
+        let selected = match project.configuration().project_type() {
+            ProjectType::Configuration => None,
+            ProjectType::Extension => Some(extension::resolve(project)?),
+            _ => return Err(ApplyError::ProjectType),
+        };
+        let profile_project = selected
+            .as_ref()
+            .map_or(project, |selection| &selection.base);
+        let profile = profile(profile_project, name, Action::Apply).map_err(ApplyError::Runtime)?;
+        let directory = profile_project.root().join(".eska");
         let (connection, identity, lock) = match &profile.infobase {
             Infobase::File { path } => {
-                let base = file_infobase(project.root(), path).map_err(ApplyError::Runtime)?;
+                let base =
+                    file_infobase(profile_project.root(), path).map_err(ApplyError::Runtime)?;
                 let source = project.source().canonicalize().map_err(ApplyError::Io)?;
                 if source.starts_with(&base) {
                     return Err(ApplyError::SourceInsideInfobase);
@@ -294,19 +333,37 @@ impl Target {
             }
             _ => return Err(ApplyError::InvalidState),
         };
-        let state = directory.join(format!("apply-{}.json", checksum(&[identity.as_bytes()])));
+        let extension = selected.as_ref().map(|selection| &selection.identity);
+        let state_id = extension.map_or_else(
+            || checksum(&[identity.as_bytes()]),
+            |extension| {
+                checksum(&[
+                    b"extension\0",
+                    identity.as_bytes(),
+                    b"\0",
+                    extension.uuid.as_bytes(),
+                ])
+            },
+        );
+        let state = directory.join(format!("apply-{state_id}.json"));
         let scratch = tempfile::Builder::new()
             .prefix("apply-")
             .tempdir_in(directory)
             .map_err(ApplyError::Io)?;
-        let platform = platform(project, &profile).map_err(ApplyError::Runtime)?;
+        let platform = platform(profile_project, &profile).map_err(ApplyError::Runtime)?;
         platform
             .begin_interruptible_operation()
             .map_err(process_error)?;
+        let (extension, dependencies) = selected.map_or_else(
+            || (None, Vec::new()),
+            |selection| (Some(selection.identity), selection.dependencies),
+        );
         Ok(Self {
             platform,
             connection,
             identity,
+            extension,
+            dependencies,
             lock,
             state,
             scratch,
@@ -345,7 +402,18 @@ impl Target {
     }
 
     fn generation(&self) -> Result<String, ApplyError> {
-        let output = self.command(&["generation-id"], &[], None, None, Stage::Inspect)?;
+        self.generation_for(self.extension.as_ref())
+    }
+
+    fn generation_for(&self, extension: Option<&ExtensionIdentity>) -> Result<String, ApplyError> {
+        let output = self.command_for(
+            extension,
+            &["generation-id"],
+            &[],
+            None,
+            None,
+            Stage::Inspect,
+        )?;
         let id = std::str::from_utf8(&output)
             .map_err(|_| ApplyError::InvalidState)?
             .trim();
@@ -355,8 +423,76 @@ impl Target {
         Ok(id.to_ascii_lowercase())
     }
 
+    fn verify_source(&self, source: &Path) -> Result<(), ApplyError> {
+        if let Some(expected) = &self.extension
+            && extension::identity(source).as_ref() != Some(expected)
+        {
+            return Err(ApplyError::StalePreview);
+        }
+        Ok(())
+    }
+
+    fn observe(&self) -> Result<Observation, ApplyError> {
+        let configuration_generation = if let Some(extension) = &self.extension {
+            self.verify_installed(extension)?;
+            Some(self.generation_for(None)?)
+        } else {
+            None
+        };
+        let mut dependency_generations = BTreeMap::new();
+        for dependency in &self.dependencies {
+            self.verify_installed(dependency)?;
+            dependency_generations.insert(
+                dependency.name.clone(),
+                self.generation_for(Some(dependency))?,
+            );
+        }
+        Ok(Observation {
+            generation: self.generation()?,
+            configuration_generation,
+            dependency_generations,
+        })
+    }
+
+    fn verify_installed(&self, extension: &ExtensionIdentity) -> Result<(), ApplyError> {
+        let directory = self
+            .scratch
+            .path()
+            .join(format!("extension-{}", extension.uuid));
+        fs::create_dir(&directory).map_err(ApplyError::Io)?;
+        self.command_for(
+            Some(extension),
+            &["export", "info"],
+            &[option("--out", &directory)],
+            None,
+            None,
+            Stage::Inspect,
+        )
+        .map_err(|error| match error {
+            ApplyError::PlatformFailed(Stage::Inspect) => ApplyError::ExtensionUnavailable,
+            error => error,
+        })?;
+        if extension::installed_uuid(&directory, &extension.name).as_ref() != Some(&extension.uuid)
+        {
+            return Err(ApplyError::ExtensionIdentityMismatch);
+        }
+        Ok(())
+    }
+
     fn command(
         &self,
+        command: &[&str],
+        extra: &[OsString],
+        cwd: Option<&Path>,
+        input: Option<File>,
+        stage: Stage,
+    ) -> Result<Vec<u8>, ApplyError> {
+        self.command_for(self.extension.as_ref(), command, extra, cwd, input, stage)
+    }
+
+    fn command_for(
+        &self,
+        extension: Option<&ExtensionIdentity>,
         command: &[&str],
         extra: &[OsString],
         cwd: Option<&Path>,
@@ -376,6 +512,9 @@ impl Target {
             ]);
         }
         arguments.extend_from_slice(&self.authentication);
+        if let Some(extension) = extension {
+            arguments.push(format!("--extension={}", extension.name).into());
+        }
         arguments.extend_from_slice(extra);
         let output = self
             .platform
@@ -407,7 +546,7 @@ fn process_error(error: RunError) -> ApplyError {
 
 fn plan(
     target: &Target,
-    generation: Result<String, ReviewReason>,
+    observation: Result<Observation, ReviewReason>,
     source: &Path,
     current: &Catalog,
     initialize: bool,
@@ -428,14 +567,14 @@ fn plan(
     {
         return Err(ApplyError::UnrepresentablePath);
     }
-    let generation_refusal = generation.as_ref().err().copied();
+    let generation_refusal = observation.as_ref().err().copied();
     let inspection = Inspection::new(
         delta.as_ref(),
         baseline
             .as_ref()
             .ok()
             .map(|saved| saved.generation.as_str()),
-        generation.ok(),
+        observation.ok(),
         pending.is_some(),
     );
     let refusal = generation_refusal.or_else(|| {
@@ -495,24 +634,34 @@ fn assemble_plan(
     } = reviewed;
     let empty = Catalog::new();
     let previous = baseline.as_ref().map_or(&empty, |saved| &saved.files);
-    let structural = baseline.as_ref().filter(|_| !initialize).and_then(|saved| {
-        structure::select(
-            source,
-            &changes,
-            &saved.files,
-            current,
-            saved.root.as_ref()?,
-            &saved.descriptors,
-        )
-    });
+    let structural = baseline
+        .as_ref()
+        .filter(|_| !initialize && target.extension.is_none())
+        .and_then(|saved| {
+            structure::select(
+                source,
+                &changes,
+                &saved.files,
+                current,
+                saved.root.as_ref()?,
+                &saved.descriptors,
+            )
+        });
     let empty_descriptors = descriptor::Shapes::new();
     let descriptors = baseline
         .as_ref()
         .map_or(&empty_descriptors, |saved| &saved.descriptors);
+    let bsl_only = || {
+        changes
+            .keys()
+            .all(|path| descriptor::has_extension(path, "bsl"))
+    };
     let (mode, import_files) = if initialize {
         (Mode::Initialize, None)
     } else if changes.is_empty() {
         (Mode::Unchanged, None)
+    } else if target.extension.is_some() && !bsl_only() {
+        (Mode::Unsupported, None)
     } else {
         structural
             .as_ref()
@@ -529,9 +678,13 @@ fn assemble_plan(
         let identity = (
             &target.connection,
             &target.identity,
+            &target.extension,
+            &target.dependencies,
             target.platform.version().as_str(),
             initialize,
             &inspection.database_generation,
+            &inspection.configuration_generation,
+            &inspection.dependency_generations,
             &inspection.baseline_generation,
             pending,
             &import_files,
@@ -563,6 +716,7 @@ fn assemble_plan(
         mode,
         target: target.identity.clone(),
         platform_version: target.platform.version().as_str().to_owned(),
+        extension: target.extension.clone(),
         changes,
         import_files,
         object_changes,
@@ -587,9 +741,20 @@ impl Inspection {
     fn new(
         delta: Option<&BTreeMap<PathBuf, Change>>,
         baseline_generation: Option<&str>,
-        database_generation: Option<String>,
+        observation: Option<Observation>,
         pending_apply: bool,
     ) -> Self {
+        let (database_generation, configuration_generation, dependency_generations) = observation
+            .map_or_else(
+                || (None, None, BTreeMap::new()),
+                |observed| {
+                    (
+                        Some(observed.generation),
+                        observed.configuration_generation,
+                        observed.dependency_generations,
+                    )
+                },
+            );
         let sources = match delta {
             Some(delta) if delta.is_empty() => Comparison::Unchanged,
             Some(_) => Comparison::Changed,
@@ -619,6 +784,8 @@ impl Inspection {
             database,
             baseline_generation: baseline_generation.map(str::to_owned),
             database_generation,
+            configuration_generation,
+            dependency_generations,
             pending_apply,
         }
     }

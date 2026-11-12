@@ -192,6 +192,10 @@ fn print_apply_plan(plan: &Plan, localizer: &Localizer) {
         })
     );
     println!("{} ({})", plan.target, plan.platform_version);
+    if let Some(extension) = &plan.extension {
+        let label = localizer.text("runtime-apply-extension");
+        println!("{label} {} ({})", extension.name, extension.uuid);
+    }
     println!("{}", localizer.text(inspection_key(plan.inspection.status)));
     let grouped = print_object_changes(plan, localizer);
     for (path, change) in &plan.changes {
@@ -336,6 +340,29 @@ const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
         ApplyError::Busy => ("busy", "runtime-apply-busy"),
         ApplyError::StalePreview => ("stale_preview", "runtime-apply-stale"),
         ApplyError::ProjectType => ("project_type_unsupported", "runtime-apply-project-type"),
+        ApplyError::ExtensionApplication => (
+            "extension_application_required",
+            "runtime-apply-extension-application",
+        ),
+        ApplyError::ExtensionScope => (
+            "extension_scope_unsupported",
+            "runtime-apply-extension-scope",
+        ),
+        ApplyError::ExtensionDescriptor => (
+            "extension_descriptor_invalid",
+            "runtime-apply-extension-descriptor",
+        ),
+        ApplyError::ExtensionAmbiguous => {
+            ("extension_ambiguous", "runtime-apply-extension-ambiguous")
+        }
+        ApplyError::ExtensionUnavailable => (
+            "extension_unavailable",
+            "runtime-apply-extension-unavailable",
+        ),
+        ApplyError::ExtensionIdentityMismatch => (
+            "extension_identity_mismatch",
+            "runtime-apply-extension-identity",
+        ),
         ApplyError::SourceInsideInfobase => (
             "source_inside_infobase",
             "runtime-apply-source-inside-infobase",

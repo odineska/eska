@@ -84,6 +84,139 @@ fn initialize(root: &Path) {
     );
 }
 
+fn prepare_extensions(root: &Path) -> (PathBuf, PathBuf) {
+    let base = root.join("base");
+    let one = root.join("one");
+    let two = root.join("two");
+    fs::create_dir(&base).unwrap();
+    prepare(&base);
+    fs::write(
+        base.join("eska.toml"),
+        "[project]\nname='base'\ntype='configuration'\n",
+    )
+    .unwrap();
+    fs::write(
+        root.join("eska.toml"),
+        "[workspace.members.probe]\nconfiguration='base'\nextensions=[{path='one', depends_on=['two']}, {path='two'}]\n",
+    )
+    .unwrap();
+    for (member, id, name, uuid) in [
+        (&one, "one", "One", "eec8818c-9361-478d-b14f-01d342006de1"),
+        (&two, "two", "Two", "eec8818c-9361-478d-b14f-01d342006de2"),
+    ] {
+        fs::create_dir_all(member.join("src")).unwrap();
+        fs::write(
+            member.join("eska.toml"),
+            format!("[project]\nname='{id}'\ntype='extension'\n"),
+        )
+        .unwrap();
+        fs::write(
+            member.join("src/Configuration.xml"),
+            format!(
+                r#"<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses"><Configuration uuid="{uuid}"><Properties><Name>{name}</Name><ConfigurationExtensionPurpose>Customization</ConfigurationExtensionPurpose></Properties></Configuration></MetaDataObject>"#
+            ),
+        )
+        .unwrap();
+        fs::write(member.join("src/Module.bsl"), "A = 1;").unwrap();
+        fs::write(
+            base.join(format!("installed-{name}.xml")),
+            format!(
+                r#"<ConfigDumpInfo xmlns="http://v8.1c.ru/8.3/xcf/dumpinfo"><ConfigVersions><Metadata name="Configuration.{name}" id="{uuid}"/></ConfigVersions></ConfigDumpInfo>"#
+            ),
+        )
+        .unwrap();
+    }
+    fs::write(
+        base.join("ibcmd"),
+        r#"#!/bin/sh
+dir=$(dirname "$0")
+name=base
+for arg in "$@"; do
+    case "$arg" in
+        --extension=*) name=${arg#--extension=} ;;
+        --out=*) out=${arg#--out=} ;;
+    esac
+done
+case "$1:$2:$3" in
+    --version::) printf '8.3.27.2342\n' ;;
+    infobase:config:generation-id) cat "$dir/generation-$name" ;;
+    infobase:config:export)
+        test "$4" = info && cp "$dir/installed-$name.xml" "$out/ConfigDumpInfo.xml" ;;
+    infobase:config:import|infobase:config:apply)
+        printf '%s:%s\n' "$3" "$name" >> "$dir/writes"
+        if test "$4" = files; then cat > "$dir/import-files"; fi ;;
+    *) exit 2 ;;
+esac
+"#,
+    )
+    .unwrap();
+    for (name, digit) in [("base", "0"), ("One", "1"), ("Two", "2")] {
+        fs::write(base.join(format!("generation-{name}")), digit.repeat(40)).unwrap();
+    }
+    (base, one)
+}
+
+#[test]
+fn apply_extension_uses_the_base_profile_and_revalidates_native_identity_and_dependencies() {
+    let root = TestDir::new();
+    let (base, one) = prepare_extensions(&root.0);
+    let (output, initial) = apply(&one, "en-US", &["--initialize"]);
+    assert!(output.status.success(), "{initial}");
+    assert_eq!(apply(&one, "ru-RU", &["--initialize"]).1, initial);
+    assert_eq!(initial["plan"]["extension"]["name"], "One");
+    assert_eq!(
+        initial["plan"]["extension"]["uuid"],
+        "eec8818c-9361-478d-b14f-01d342006de1"
+    );
+    let inspection = &initial["plan"]["inspection"];
+    assert_eq!(inspection["configuration_generation"], "0".repeat(40));
+    assert_eq!(inspection["dependency_generations"]["Two"], "2".repeat(40));
+    let token = initial["plan"]["confirmation"].as_str().unwrap();
+    let (output, wrong_target) = apply(
+        &root.0.join("two"),
+        "en-US",
+        &["--initialize", "--confirm", token],
+    );
+    assert!(!output.status.success());
+    assert_eq!(wrong_target["error"]["code"], "stale_preview");
+
+    fs::write(base.join("generation-Two"), "3".repeat(40)).unwrap();
+    let (output, stale) = apply(&one, "en-US", &["--initialize", "--confirm", token]);
+    assert!(!output.status.success());
+    assert_eq!(stale["error"]["code"], "stale_preview");
+    assert!(!base.join("writes").exists());
+    initialize(&one);
+    assert!(!one.join(".eska").exists());
+
+    fs::write(one.join("src/Module.bsl"), "A = 2;").unwrap();
+    let (_, incremental) = apply(&one, "en-US", &[]);
+    assert_eq!(incremental["plan"]["mode"], "incremental");
+    assert_eq!(incremental["plan"]["import_files"][0], "Module.bsl");
+    let token = incremental["plan"]["confirmation"].as_str().unwrap();
+    let descriptor = base.join("installed-Two.xml");
+    let verified = fs::read_to_string(&descriptor).unwrap();
+    fs::write(&descriptor, verified.replace("6de2", "6de3")).unwrap();
+    let (output, mismatch) = apply(&one, "en-US", &["--confirm", token]);
+    assert!(!output.status.success());
+    assert_eq!(mismatch["error"]["code"], "extension_identity_mismatch");
+    let writes = base.join("writes");
+    assert_eq!(
+        fs::read_to_string(&writes).unwrap(),
+        "import:One\napply:One\n"
+    );
+    fs::write(&descriptor, verified).unwrap();
+    assert!(
+        apply(&one, "en-US", &["--confirm", token])
+            .0
+            .status
+            .success()
+    );
+    assert_eq!(
+        fs::read_to_string(writes).unwrap(),
+        "import:One\napply:One\nimport:One\napply:One\n"
+    );
+}
+
 #[test]
 fn apply_proves_structural_identity_and_keeps_unrelated_root_xml_out_of_the_plan() {
     let root = TestDir::new();

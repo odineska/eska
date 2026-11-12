@@ -82,7 +82,7 @@ impl Entry {
             self.kind.identity(),
             self.name
         ))?;
-        valid_uuid(&uuid).then_some(uuid)
+        descriptor::valid_uuid(&uuid).then_some(uuid)
     }
 
     fn files(&self, catalog: &Catalog) -> Option<Vec<PathBuf>> {
@@ -150,7 +150,7 @@ impl Root {
                 let name = node.text()?.to_owned();
                 if node.attributes().len() != 0
                     || node.children().count() != 1
-                    || !valid_name(&name)
+                    || !descriptor::valid_name(&name)
                     || !names.insert((kind, name.to_lowercase()))
                 {
                     return None;
@@ -184,23 +184,6 @@ fn only_child<'a, 'i>(
         .filter(|child| child.has_tag_name((NAMESPACE, name)));
     let first = matching.next()?;
     matching.next().is_none().then_some(first)
-}
-
-fn valid_name(value: &str) -> bool {
-    let mut chars = value.chars();
-    chars.next().is_some_and(|c| c == '_' || c.is_alphabetic())
-        && chars.all(|c| c == '_' || c.is_alphanumeric())
-}
-
-fn valid_uuid(value: &str) -> bool {
-    value.len() == 36
-        && value.bytes().enumerate().all(|(index, byte)| {
-            if matches!(index, 8 | 13 | 18 | 23) {
-                byte == b'-'
-            } else {
-                byte.is_ascii_hexdigit()
-            }
-        })
 }
 
 pub(super) struct Selection {

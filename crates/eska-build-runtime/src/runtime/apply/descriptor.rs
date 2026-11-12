@@ -228,7 +228,24 @@ pub(super) fn parse_xml(contents: &str) -> Option<roxmltree::Document<'_>> {
     .ok()
 }
 
-fn has_extension(path: &Path, extension: &str) -> bool {
+pub(super) fn valid_name(value: &str) -> bool {
+    let mut chars = value.chars();
+    chars.next().is_some_and(|c| c == '_' || c.is_alphabetic())
+        && chars.all(|c| c == '_' || c.is_alphanumeric())
+}
+
+pub(super) fn valid_uuid(value: &str) -> bool {
+    value.len() == 36
+        && value.bytes().enumerate().all(|(index, byte)| {
+            if matches!(index, 8 | 13 | 18 | 23) {
+                byte == b'-'
+            } else {
+                byte.is_ascii_hexdigit()
+            }
+        })
+}
+
+pub(super) fn has_extension(path: &Path, extension: &str) -> bool {
     path.extension()
         .is_some_and(|value| value.eq_ignore_ascii_case(extension))
 }
