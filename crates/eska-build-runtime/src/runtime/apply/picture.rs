@@ -1,4 +1,4 @@
-//! Plan partial imports for the native Designer XML bundle of a common SVG picture.
+//! Plan partial imports for native Designer XML common-picture bundles.
 
 use std::{
     collections::{BTreeMap, BTreeSet},
@@ -13,7 +13,7 @@ use super::{
 
 pub(super) const COLLECTION: &str = "CommonPictures";
 const PACKAGE: &str = "Ext/Picture.xml";
-const SVG: &str = "Ext/Picture/Picture.svg";
+const PAYLOAD_DIR: &str = "Ext/Picture";
 const EXTERNAL: &str = "http://v8.1c.ru/8.3/xcf/extrnprops";
 const READABLE: &str = "http://v8.1c.ru/8.3/xcf/readable";
 const METADATA: &str = "http://v8.1c.ru/8.3/MDClasses";
@@ -25,37 +25,103 @@ pub(super) fn owner(path: &Path) -> Option<PathBuf> {
         descriptor::valid_name(first.strip_suffix(".xml")?).then(|| path.to_owned())
     } else {
         let suffix = relative.strip_prefix(first).ok()?;
-        (descriptor::valid_name(first)
-            && (suffix == Path::new(PACKAGE) || suffix == Path::new(SVG)))
-        .then(|| Path::new(COLLECTION).join(first).with_extension("xml"))
+        (descriptor::valid_name(first) && (suffix == Path::new(PACKAGE) || is_payload(suffix)))
+            .then(|| Path::new(COLLECTION).join(first).with_extension("xml"))
     }
 }
 
+fn supported_payload(name: &str) -> bool {
+    matches!(
+        name,
+        "Picture"
+            | "Picture.svg"
+            | "Picture.png"
+            | "Picture.bmp"
+            | "Picture.gif"
+            | "Picture.ico"
+            | "Picture.jpg"
+            | "Picture.tif"
+            | "Picture.zip"
+    )
+}
+
+fn is_payload(path: &Path) -> bool {
+    path.parent() == Some(Path::new(PAYLOAD_DIR))
+        && path
+            .file_name()
+            .and_then(|name| name.to_str())
+            .is_some_and(supported_payload)
+}
+
 pub(super) fn matches_bundle(root: &Path, files: &[PathBuf]) -> bool {
-    files.len() == 3 && files.contains(&root.join(PACKAGE)) && files.contains(&root.join(SVG))
+    files.len() == 3
+        && files.contains(&root.join(PACKAGE))
+        && files
+            .iter()
+            .any(|path| path.strip_prefix(root).is_ok_and(is_payload))
+}
+
+pub(super) fn resources(source: &Path, catalog: &Catalog, owner: &Path) -> Option<[PathBuf; 2]> {
+    let root = owner.with_extension("");
+    let package = root.join(PACKAGE);
+    if !catalog.contains_key(&package) || resource_count(catalog, &root) != 2 {
+        return None;
+    }
+    let payload = package_payload(source, &root, &package)?;
+    catalog.contains_key(&payload).then_some([package, payload])
+}
+
+fn resource_count(catalog: &Catalog, root: &Path) -> usize {
+    catalog
+        .range(root.to_owned()..)
+        .take_while(|(path, _)| path.starts_with(root))
+        .count()
 }
 
 pub(super) fn import_resources(
     source: &Path,
     project_type: ProjectType,
     catalog: &Catalog,
+    changes: &BTreeMap<PathBuf, Change>,
     owner: &Path,
 ) -> Option<[PathBuf; 2]> {
-    let root = owner.with_extension("");
-    let files = [root.join(PACKAGE), root.join(SVG)];
     // A resource omitted from the staged import can disappear even when ibcmd
     // reports success. Include both resources even for a descriptor-only edit.
+    let files = resources(source, catalog, owner)?;
     (catalog.contains_key(owner)
-        && files.iter().all(|file| catalog.contains_key(file))
-        && catalog
-            .range(root.clone()..)
-            .take_while(|(path, _)| path.starts_with(&root))
-            .count()
-            == 2
-        && valid_package(source, owner)
+        && can_replace(
+            changes,
+            &files,
+            removed_payload_count(changes, &owner.with_extension("")),
+            false,
+        )
         && (project_type != ProjectType::Extension
             || structure::own_extension_picture(source, owner)))
     .then_some(files)
+}
+
+fn removed_payload_count(changes: &BTreeMap<PathBuf, Change>, root: &Path) -> usize {
+    changes
+        .range(root.to_owned()..)
+        .take_while(|(path, _)| path.starts_with(root))
+        .filter(|(path, change)| {
+            **change == Change::Removed && path.strip_prefix(root).is_ok_and(is_payload)
+        })
+        .count()
+}
+
+fn can_replace(
+    changes: &BTreeMap<PathBuf, Change>,
+    [package, payload]: &[PathBuf; 2],
+    removed_payloads: usize,
+    allow_restore: bool,
+) -> bool {
+    match (changes.get(package), changes.get(payload), removed_payloads) {
+        (None | Some(Change::Modified), None | Some(Change::Modified), 0)
+        | (Some(Change::Modified), Some(Change::Added), 1) => true,
+        (Some(Change::Added), Some(Change::Added), 0) => allow_restore,
+        _ => false,
+    }
 }
 
 pub(super) struct Adoption {
@@ -177,38 +243,23 @@ pub(super) fn import_adopted(
     };
     let root = owner.with_extension("");
     let package = root.join(PACKAGE);
-    let svg = root.join(SVG);
-    let children = catalog
-        .range(root.clone()..)
-        .take_while(|(path, _)| path.starts_with(&root))
-        .count();
-    let payload_changes = (changes.get(&package), changes.get(&svg));
-    if children == 0 {
-        let removed = payload_changes == (Some(&Change::Removed), Some(&Change::Removed));
+    let removed_payloads = removed_payload_count(changes, &root);
+    if resource_count(catalog, &root) == 0 {
+        let resource_delta = (changes.get(&package), removed_payloads);
+        let removed = resource_delta == (Some(&Change::Removed), 1);
         return (removed && (adoption.extended || descriptor_changed)
-            || descriptor_changed && payload_changes == (None, None))
+            || descriptor_changed && resource_delta == (None, 0))
             .then(|| vec![owner.to_owned()]);
     }
-    if children != 2
-        || !adoption.extended
-        || !catalog.contains_key(&package)
-        || !catalog.contains_key(&svg)
-        || !valid_package(source, owner)
-    {
-        return None;
-    }
-    if !matches!(
-        payload_changes,
-        (Some(Change::Added), Some(Change::Added))
-            | (None | Some(Change::Modified), None | Some(Change::Modified))
-    ) {
+    let resources = resources(source, catalog, owner)?;
+    if !adoption.extended || !can_replace(changes, &resources, removed_payloads, true) {
         return None;
     }
     let mut files = Vec::with_capacity(3);
     if descriptor_changed {
         files.push(owner.to_owned());
     }
-    files.extend([package, svg]);
+    files.extend(resources);
     Some(files)
 }
 
@@ -239,38 +290,25 @@ fn check_name_mapping(source: &Path, owner: &Path) -> Option<()> {
     (children.next().is_none() && declarations.next().is_none()).then_some(())
 }
 
-pub(super) fn valid_package(source: &Path, owner: &Path) -> bool {
-    let Some(xml) = descriptor::read_xml(&source.join(owner.with_extension("")).join(PACKAGE))
-    else {
-        return false;
-    };
-    let Some(document) = descriptor::parse_xml(xml.trim_start_matches('\u{feff}')) else {
-        return false;
-    };
+fn package_payload(source: &Path, directory: &Path, package: &Path) -> Option<PathBuf> {
+    let xml = descriptor::read_xml(&source.join(package))?;
+    let document = descriptor::parse_xml(xml.trim_start_matches('\u{feff}'))?;
     let root = document.root_element();
     if !root.has_tag_name((EXTERNAL, "ExtPicture")) {
-        return false;
+        return None;
     }
-    let mut pictures = root.children().filter(roxmltree::Node::is_element);
-    let Some(picture) = pictures
-        .next()
-        .filter(|node| node.has_tag_name((EXTERNAL, "Picture")))
-    else {
-        return false;
-    };
+    let picture = only_element(root, EXTERNAL, "Picture")?;
     let mut properties = picture.children().filter(roxmltree::Node::is_element);
-    pictures.next().is_none()
-        && properties.next().is_some_and(|node| {
-            node.has_tag_name((READABLE, "Abs"))
-                && node.children().count() == 1
-                && node.text() == Some("Picture.svg")
+    let reference = properties.next()?;
+    let payload = reference.text().filter(|name| supported_payload(name))?;
+    let transparent = properties.next()?;
+    (readable_literal(reference, "Abs", payload)
+        && transparent.text().is_some_and(|value| {
+            matches!(value, "true" | "false")
+                && readable_literal(transparent, "LoadTransparent", value)
         })
-        && properties.next().is_some_and(|node| {
-            node.has_tag_name((READABLE, "LoadTransparent"))
-                && node.children().count() == 1
-                && matches!(node.text(), Some("true" | "false"))
-        })
-        && properties.next().is_none()
+        && properties.next().is_none())
+    .then(|| directory.join(PAYLOAD_DIR).join(payload))
 }
 
 pub(super) fn reference_files(

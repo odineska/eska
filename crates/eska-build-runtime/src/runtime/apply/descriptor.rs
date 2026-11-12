@@ -169,15 +169,14 @@ fn import_pictures(
                 source, catalog, changes, &owner, previous, &adoption,
             )?);
         } else {
-            let resources = picture::import_resources(source, project_type, catalog, &owner)?;
-            for path in std::iter::once(&owner).chain(resources.iter()) {
-                match changes.get(path) {
-                    Some(Change::Modified) => {
-                        files.insert(path.clone());
-                    }
-                    None => {}
-                    _ => return None,
+            let resources =
+                picture::import_resources(source, project_type, catalog, changes, &owner)?;
+            match changes.get(&owner) {
+                Some(Change::Modified) => {
+                    files.insert(owner.clone());
                 }
+                None => {}
+                _ => return None,
             }
             files.extend(resources);
             descriptors.push(owner);

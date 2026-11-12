@@ -429,7 +429,7 @@ pub(super) fn select(
         .difference(&previous.entries)
         .map(Entry::descriptor)
         .collect::<Vec<_>>();
-    let shapes = read_added_shapes(source, project_type, &paths)?;
+    let shapes = read_added_shapes(source, project_type, current, &paths)?;
     let old_ids = identities(&previous.entries, descriptors, &descriptor::Shapes::new())?;
     let new_ids = identities(&root.entries, descriptors, &shapes)?;
     let mut files = BTreeSet::from([PathBuf::from(ROOT)]);
@@ -511,6 +511,7 @@ pub(super) fn select(
 fn read_added_shapes(
     source: &Path,
     project_type: ProjectType,
+    catalog: &Catalog,
     paths: &[PathBuf],
 ) -> Option<descriptor::Shapes> {
     if paths.is_empty() {
@@ -523,8 +524,8 @@ fn read_added_shapes(
     paths
         .iter()
         .map(|path| {
-            if path.starts_with(picture::COLLECTION) && !picture::valid_package(source, path) {
-                return None;
+            if path.starts_with(picture::COLLECTION) {
+                picture::resources(source, catalog, path)?;
             }
             descriptor::shape(source, affected.model(), path).map(|shape| (path.clone(), shape))
         })

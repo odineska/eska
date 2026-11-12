@@ -1037,8 +1037,18 @@ fn write_test_picture(source: &Path, name: &str) {
     fs::write(payload, TEST_PICTURE_SVG).unwrap();
 }
 
+fn change_picture_payload(source: &Path, name: &str, file: &str, contents: &[u8]) -> [String; 2] {
+    let [_, package, svg] = picture_paths(name);
+    let payload = svg.replace("Picture.svg", file);
+    fs::write(source.join(&payload), contents).unwrap();
+    let path = source.join(&package);
+    let xml = fs::read_to_string(&path).unwrap();
+    fs::write(path, xml.replace("Picture.svg", file)).unwrap();
+    [package, payload]
+}
+
 #[test]
-fn apply_reviews_and_imports_a_complete_common_svg_picture() {
+fn apply_reviews_and_imports_a_complete_common_picture() {
     for extension in [false, true] {
         let fixture = TestDir::new();
         let (base, root, original_root, anchor) = prepare_picture_apply(&fixture.0, extension);
@@ -1111,13 +1121,27 @@ fn apply_reviews_and_imports_a_complete_common_svg_picture() {
         assert_eq!(apply(&root, "en-US", &[]).1["plan"]["mode"], "unsupported");
         fs::write(&path, descriptor).unwrap();
 
+        let raster = change_picture_payload(&source, name, "Picture.png", b"PNG sample");
+        assert_eq!(apply(&root, "en-US", &[]).1["plan"]["mode"], "unsupported");
+        fs::remove_file(source.join(&payload)).unwrap();
+        confirm_picture_plan(&base, &root, &raster, None);
+
         remove_picture(name);
         write_test_picture(&source, renamed);
+        let [renamed_package, archive] =
+            change_picture_payload(&source, renamed, "Picture.zip", b"");
+        let [renamed_owner, _, renamed_svg] = picture_paths(renamed);
+        fs::remove_file(source.join(&renamed_svg)).unwrap();
         write_root(Some(renamed));
         confirm_picture_plan(
             &base,
             &root,
-            &structural(renamed),
+            &[
+                "Configuration.xml".to_owned(),
+                renamed_owner,
+                renamed_package,
+                archive,
+            ],
             Some(("renamed", renamed, Some(name))),
         );
         remove_picture(renamed);
@@ -1132,7 +1156,7 @@ fn apply_reviews_and_imports_a_complete_common_svg_picture() {
 }
 
 #[test]
-fn apply_transitions_a_name_mapped_borrowed_svg_without_replacing_its_identity() {
+fn apply_transitions_a_name_mapped_borrowed_picture_without_replacing_its_identity() {
     let temp = TestDir::new();
     let (base, extension) = prepare_extensions(&temp.0);
     let source = extension.join("src");
@@ -1155,7 +1179,10 @@ fn apply_transitions_a_name_mapped_borrowed_svg_without_replacing_its_identity()
     let original_svg = fs::read_to_string(&svg).unwrap();
     fs::write(&svg, original_svg.replace("#2050EE", "#A820E0")).unwrap();
     confirm_picture_plan(&base, &extension, &paths[1..], None);
+    let raster = change_picture_payload(&source, "ProbeIcon", "Picture.png", b"PNG sample");
     fs::remove_file(&svg).unwrap();
+    confirm_picture_plan(&base, &extension, &raster, None);
+    fs::remove_file(source.join(&raster[1])).unwrap();
     assert_eq!(
         apply(&extension, "en-US", &[]).1["plan"]["mode"],
         "unsupported"
