@@ -4,10 +4,13 @@ use eska_build_runtime::runtime::apply::{
     self, ApplyError, Change, Mode, ObjectKind, ObjectOperation, Plan, Review, ReviewReason, Stage,
     Status,
     application::{self, ComponentOutcome, ComponentStatus},
+    removal,
 };
 use eska_build_runtime::runtime::{self, RuntimeError};
 use eska_presentation::{
-    arguments::build::runtime::{ApplyArgs, OutputFormat, ProfileArg, RunArgs},
+    arguments::build::runtime::{
+        ApplyArgs, OutputFormat, ProfileArg, RemoveExtensionArgs, RunArgs,
+    },
     diagnostics,
     localization::{LocalizationValue, Localizer},
 };
@@ -117,6 +120,80 @@ fn failure(args: &RunArgs, kind: &str, code: &str, message: &str) -> ExitCode {
     }
     eprintln!("{message}");
     ExitCode::FAILURE
+}
+
+pub fn remove_extension(
+    args: &RemoveExtensionArgs,
+    start: &Path,
+    localizer: &Localizer,
+) -> ExitCode {
+    let result = if matches!(args.profile, ProfileArg::Prod) {
+        Err((
+            json!({"code":"forbidden_action"}),
+            localizer.text("project-settings-forbidden"),
+        ))
+    } else {
+        discovery::discover(start)
+            .map_err(|error| (json!({"code":"project_discovery"}), diagnostics::present_project_error(&error, localizer)))
+            .and_then(|project| removal::remove(
+                &project, ProfileName::Test, args.confirm.as_deref(), args.force, || {
+                    if matches!(args.format, OutputFormat::Json) {
+                        eprintln!("{}", json!({"schema_version":1,"kind":"extension_progress","phase":"remove"}));
+                    } else {
+                        eprintln!("{}", localizer.text("runtime-extension-removing"));
+                    }
+                },
+            ).map_err(|error| present_apply_error(&error, localizer)))
+    };
+    match result {
+        Ok(plan) => {
+            if matches!(args.format, OutputFormat::Json) {
+                let status = if args.confirm.is_some() {
+                    "removed"
+                } else {
+                    "preview"
+                };
+                println!(
+                    "{}",
+                    json!({"schema_version":1,"kind":"extension_remove","status":status,"plan":plan})
+                );
+            } else if args.confirm.is_some() {
+                println!("{}", localizer.text("runtime-extension-removed"));
+            } else {
+                print_removal_plan(&plan, localizer);
+            }
+            ExitCode::SUCCESS
+        }
+        Err((details, message)) => {
+            if matches!(args.format, OutputFormat::Json) {
+                println!(
+                    "{}",
+                    json!({"schema_version":1,"kind":"extension_remove","status":"error","error":details})
+                );
+            }
+            eprintln!("{message}");
+            ExitCode::FAILURE
+        }
+    }
+}
+
+fn print_removal_plan(plan: &removal::Plan, localizer: &Localizer) {
+    println!("{} ({})", plan.target, plan.platform_version);
+    let label = localizer.text("runtime-apply-extension");
+    println!("{label} {} ({})", plan.extension.name, plan.extension.uuid);
+    if let Some(generation) = &plan.extension_generation {
+        println!(
+            "{} {generation}",
+            localizer.text("runtime-extension-generation")
+        );
+        if plan.pending_operation {
+            println!("{}", localizer.text("runtime-apply-status-incomplete"));
+        }
+        println!("{}", localizer.text("runtime-extension-remove-data"));
+    } else {
+        println!("{}", localizer.text("runtime-extension-remove-finalize"));
+    }
+    println!("--confirm {} --force", plan.confirmation);
 }
 
 pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode {
@@ -447,6 +524,12 @@ fn present_apply_error(error: &ApplyError, localizer: &Localizer) -> (serde_json
             localizer.format(key, &[("name", LocalizationValue::Text(name))]),
         );
     }
+    if let ApplyError::ExtensionHasDependent(name) = error {
+        return (
+            json!({"code":code,"dependent":name}),
+            localizer.format(key, &[("name", LocalizationValue::Text(name))]),
+        );
+    }
     (json!({"code":code}), localizer.text(key))
 }
 
@@ -514,6 +597,10 @@ const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
             "extension_identity_mismatch",
             "runtime-apply-extension-identity",
         ),
+        ApplyError::ExtensionHasDependent(_) => {
+            ("extension_has_dependent", "runtime-extension-has-dependent")
+        }
+        ApplyError::ForceRequired => ("force_required", "runtime-extension-force-required"),
         ApplyError::SourceInsideInfobase => (
             "source_inside_infobase",
             "runtime-apply-source-inside-infobase",
@@ -525,6 +612,9 @@ const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
             ("import_failed", "runtime-apply-import-failed")
         }
         ApplyError::PlatformFailed(Stage::Apply) => ("apply_failed", "runtime-apply-apply-failed"),
+        ApplyError::PlatformFailed(Stage::Remove) => {
+            ("remove_failed", "runtime-extension-remove-failed")
+        }
         ApplyError::Interrupted => ("cancelled", "component-cancelled"),
         _ => ("invalid_state", "runtime-apply-state-error"),
     }

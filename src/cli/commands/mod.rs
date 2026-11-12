@@ -33,6 +33,8 @@ pub(super) enum Commands {
     #[command(disable_help_flag = true)]
     Apply(runtime::ApplyArgs),
     #[command(disable_help_flag = true)]
+    Extension(runtime::ExtensionArgs),
+    #[command(disable_help_flag = true)]
     Check(check::CheckArgs),
     #[command(name = "fmt", disable_help_flag = true)]
     Fmt(formatting::FmtArgs),
@@ -112,7 +114,8 @@ pub(super) fn run(
             | Commands::Import(_)
             | Commands::Patch(_)
             | Commands::Run(_)
-            | Commands::Apply(_),
+            | Commands::Apply(_)
+            | Commands::Extension(_),
         ) => (Component::Build, Invocation::Direct),
         Some(Commands::Build(args)) => (
             Component::Build,
@@ -137,6 +140,9 @@ pub(super) fn localize(command: clap::Command, localizer: &Localizer) -> clap::C
         .mut_subcommand("run", |command| runtime::localize(command, localizer))
         .mut_subcommand("apply", |command| {
             runtime::localize_apply(command, localizer)
+        })
+        .mut_subcommand("extension", |command| {
+            runtime::localize_extension(command, localizer)
         })
         .mut_subcommand("check", |command| check::localize(command, localizer))
         .mut_subcommand("fmt", |command| formatting::localize(command, localizer))

@@ -29,9 +29,13 @@ pub(super) struct Selection {
     pub base: Project,
     pub identity: Identity,
     pub dependencies: Vec<Identity>,
+    pub dependents: Vec<String>,
 }
 
-pub(super) fn resolve(project: &Project) -> Result<Selection, ApplyError> {
+pub(super) fn resolve(
+    project: &Project,
+    include_dependents: bool,
+) -> Result<Selection, ApplyError> {
     let DiscoveryContext::Workspace {
         workspace,
         current_member: Some(selected),
@@ -74,6 +78,17 @@ pub(super) fn resolve(project: &Project) -> Result<Selection, ApplyError> {
         }
         members.insert(member.name(), extension);
     }
+    let dependents = if include_dependents {
+        members
+            .iter()
+            .filter(|(member, _)| {
+                dependency_closure(member, application.extension_dependencies()).contains(&selected)
+            })
+            .map(|(_, identity)| identity.name.clone())
+            .collect()
+    } else {
+        Vec::new()
+    };
     let identity = members
         .remove(&selected)
         .ok_or(ApplyError::ExtensionApplication)?;
@@ -93,6 +108,7 @@ pub(super) fn resolve(project: &Project) -> Result<Selection, ApplyError> {
         base: base.project().clone(),
         identity,
         dependencies,
+        dependents,
     })
 }
 
@@ -153,10 +169,18 @@ pub(super) fn installed_uuid(output: &Path, name: &str) -> Option<String> {
 /// Read the fixed field names from `ibcmd config extension list`.
 /// Missing fields or diagnostics leave absence unproven.
 pub(super) fn listed(output: &[u8], name: &str) -> Option<bool> {
+    let name = name.to_lowercase();
+    Some(
+        inventory(output)?
+            .iter()
+            .any(|(listed, _)| listed.to_lowercase() == name),
+    )
+}
+
+pub(super) fn inventory(output: &[u8]) -> Option<Vec<(&str, bool)>> {
     let text = std::str::from_utf8(output).ok()?;
     let mut lines = text.lines().filter(|line| !line.trim().is_empty());
-    let name = name.to_lowercase();
-    let mut found = false;
+    let mut entries = Vec::new();
     while let Some(line) = lines.next() {
         let listed = field(line, "name")?.strip_prefix('"')?.strip_suffix('"')?;
         if !descriptor::valid_name(listed) {
@@ -173,16 +197,15 @@ pub(super) fn listed(output: &[u8], name: &str) -> Option<bool> {
         ] {
             field(lines.next()?, key)?;
         }
-        if !matches!(
-            field(lines.next()?, "scope")?,
-            "infobase" | "data-separation"
-        ) {
-            return None;
-        }
+        let infobase_scope = match field(lines.next()?, "scope")? {
+            "infobase" => true,
+            "data-separation" => false,
+            _ => return None,
+        };
         field(lines.next()?, "hash-sum")?;
-        found |= listed.to_lowercase() == name;
+        entries.push((listed, infobase_scope));
     }
-    Some(found)
+    Some(entries)
 }
 
 fn field<'a>(line: &'a str, name: &str) -> Option<&'a str> {

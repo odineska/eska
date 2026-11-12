@@ -4,6 +4,7 @@ pub mod application;
 mod descriptor;
 mod extension;
 mod picture;
+pub mod removal;
 mod structure;
 
 pub use extension::Identity as ExtensionIdentity;
@@ -57,6 +58,7 @@ pub enum Stage {
     Inspect,
     Import,
     Apply,
+    Remove,
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize)]
@@ -152,6 +154,8 @@ pub enum ApplyError {
     ExtensionUnavailable,
     ExtensionNotInstalled(String),
     ExtensionIdentityMismatch,
+    ExtensionHasDependent(String),
+    ForceRequired,
     ApplicationContext,
     SourceInsideInfobase,
     ReviewRequired(ReviewReason, Box<Review>),
@@ -254,16 +258,8 @@ fn write_plan(
         .root
         .take()
         .or_else(|| structure::Root::read(source, target.project_type()));
-    let state = target.state.with_extension("pending");
+    let state = mark_pending(&target.state, confirmation.as_bytes())?;
     let directory = target.state.parent().ok_or(ApplyError::InvalidState)?;
-    let mut marker = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
-    marker
-        .write_all(confirmation.as_bytes())
-        .map_err(ApplyError::Io)?;
-    marker.as_file().sync_all().map_err(ApplyError::Io)?;
-    marker
-        .persist(&state)
-        .map_err(|error| ApplyError::Io(error.error))?;
 
     progress(Stage::Import);
     match plan.mode {
@@ -317,6 +313,18 @@ fn write_plan(
         .map_err(|error| ApplyError::Io(error.error))?;
     fs::remove_file(state).map_err(ApplyError::Io)?;
     Ok(generation)
+}
+
+fn mark_pending(state: &Path, contents: &[u8]) -> Result<PathBuf, ApplyError> {
+    let pending = state.with_extension("pending");
+    let directory = state.parent().ok_or(ApplyError::InvalidState)?;
+    let mut marker = tempfile::NamedTempFile::new_in(directory).map_err(ApplyError::Io)?;
+    marker.write_all(contents).map_err(ApplyError::Io)?;
+    marker.as_file().sync_all().map_err(ApplyError::Io)?;
+    marker
+        .persist(&pending)
+        .map_err(|error| ApplyError::Io(error.error))?;
+    Ok(pending)
 }
 
 struct Target {
@@ -379,16 +387,20 @@ impl Target {
     }
 
     fn open(project: &Project, name: ProfileName) -> Result<Self, ApplyError> {
-        if name == ProfileName::Prod {
-            return Err(ApplyError::Runtime(RuntimeError::Settings(
-                SettingsError::ForbiddenAction,
-            )));
-        }
+        require_test(name)?;
         let selected = match project.configuration().project_type() {
             ProjectType::Configuration => None,
-            ProjectType::Extension => Some(extension::resolve(project)?),
+            ProjectType::Extension => Some(extension::resolve(project, false)?),
             _ => return Err(ApplyError::ProjectType),
         };
+        Self::open_selected(project, name, selected)
+    }
+
+    fn open_selected(
+        project: &Project,
+        name: ProfileName,
+        selected: Option<extension::Selection>,
+    ) -> Result<Self, ApplyError> {
         let profile_project = selected
             .as_ref()
             .map_or(project, |selection| &selection.base);
@@ -661,6 +673,12 @@ impl Target {
     }
 
     fn extension_listed(&self, name: &str) -> Result<Option<bool>, ApplyError> {
+        Ok(self
+            .extension_listing()?
+            .and_then(|output| extension::listed(&output, name)))
+    }
+
+    fn extension_listing(&self) -> Result<Option<Vec<u8>>, ApplyError> {
         match self.config_output(
             None,
             &["extension", "list"],
@@ -669,7 +687,7 @@ impl Target {
             None,
             Stage::Inspect,
         ) {
-            Ok(output) if output.stderr.is_empty() => Ok(extension::listed(&output.stdout, name)),
+            Ok(output) if output.stderr.is_empty() => Ok(Some(output.stdout)),
             Ok(_) | Err(ApplyError::PlatformFailed(Stage::Inspect)) => Ok(None),
             Err(error) => Err(error),
         }
@@ -744,6 +762,15 @@ impl Target {
         }
         Ok(output)
     }
+}
+
+fn require_test(name: ProfileName) -> Result<(), ApplyError> {
+    if name == ProfileName::Prod {
+        return Err(ApplyError::Runtime(RuntimeError::Settings(
+            SettingsError::ForbiddenAction,
+        )));
+    }
+    Ok(())
 }
 
 fn scratch(directory: &Path) -> Result<tempfile::TempDir, ApplyError> {

@@ -261,6 +261,55 @@ fn run_rejects_a_test_infobase_that_changed_after_apply() {
     assert!(!marker.exists());
 }
 
+const EXTENSION_IBCMD: &str = r#"#!/bin/sh
+dir=$(dirname "$0")
+name=base
+standalone=false
+case "$1" in
+    --pid=*) standalone=true; shift ;;
+esac
+for arg in "$@"; do
+    last=$arg
+    case "$arg" in
+        --extension=*) name=${arg#--extension=} ;;
+        --name=*) name=${arg#--name=} ;;
+        --out=*) out=${arg#--out=} ;;
+    esac
+done
+case "$1:$2:$3" in
+    --version::) printf '8.3.27.2342\n' ;;
+    infobase:config:generation-id) cat "$dir/generation-$name" ;;
+    infobase:config:export)
+        case "$standalone:$4:$5" in
+            true:objects:Configuration) cp "$dir/installed-root-$name.xml" "$out/Configuration.xml" ;;
+            true:info:*) exit 0 ;;
+            false:info:*) cp "$dir/installed-$name.xml" "$out/ConfigDumpInfo.xml" ;;
+            *) mkdir -p "$last" && cp "$dir/installed-root-$name.xml" "$last/Configuration.xml" ;;
+        esac ;;
+    infobase:config:extension)
+        if test "$4" = delete; then
+            printf 'delete:%s\n' "$name" >> "$dir/writes"
+            cp "$dir/list-after-delete" "$dir/extension-list" || exit 5
+            test ! -f "$dir/fail-after-delete"
+            exit $?
+        fi
+        test "$4" = list && test -f "$dir/extension-list" || exit 2
+        if test -f "$dir/extension-list-error"; then cat "$dir/extension-list-error" >&2; fi
+        cat "$dir/extension-list" ;;
+    infobase:config:import|infobase:config:apply)
+        printf '%s:%s\n' "$3" "$name" >> "$dir/writes"
+        if test "$3" = apply; then
+            if test -f "$dir/fail-$name"; then exit 4; fi
+            if test -f "$dir/advance-generations"; then
+                tr 0123456789abcdef 123456789abcdef0 < "$dir/generation-$name" > "$dir/next-generation"
+                mv "$dir/next-generation" "$dir/generation-$name"
+            fi
+        fi
+        if test "$4" = files; then cat > "$dir/import-files"; fi ;;
+    *) exit 2 ;;
+esac
+"#;
+
 fn prepare_extensions(root: &Path) -> (PathBuf, PathBuf) {
     let base = root.join("base");
     let one = root.join("one");
@@ -313,50 +362,7 @@ fn prepare_extensions(root: &Path) -> (PathBuf, PathBuf) {
         )
         .unwrap();
     }
-    fs::write(
-        base.join("ibcmd"),
-        r#"#!/bin/sh
-dir=$(dirname "$0")
-name=base
-standalone=false
-case "$1" in
-    --pid=*) standalone=true; shift ;;
-esac
-for arg in "$@"; do
-    case "$arg" in
-        --extension=*) name=${arg#--extension=} ;;
-        --out=*) out=${arg#--out=} ;;
-    esac
-done
-case "$1:$2:$3" in
-    --version::) printf '8.3.27.2342\n' ;;
-    infobase:config:generation-id) cat "$dir/generation-$name" ;;
-    infobase:config:export)
-        case "$standalone:$4:$5" in
-            true:objects:Configuration) cp "$dir/installed-root-$name.xml" "$out/Configuration.xml" ;;
-            true:info:*) exit 0 ;;
-            false:info:*) cp "$dir/installed-$name.xml" "$out/ConfigDumpInfo.xml" ;;
-            *) exit 3 ;;
-        esac ;;
-    infobase:config:extension)
-        test "$4" = list && test -f "$dir/extension-list" || exit 2
-        if test -f "$dir/extension-list-error"; then cat "$dir/extension-list-error" >&2; fi
-        cat "$dir/extension-list" ;;
-    infobase:config:import|infobase:config:apply)
-        printf '%s:%s\n' "$3" "$name" >> "$dir/writes"
-        if test "$3" = apply; then
-            if test -f "$dir/fail-$name"; then exit 4; fi
-            if test -f "$dir/advance-generations"; then
-                tr 0123456789abcdef 123456789abcdef0 < "$dir/generation-$name" > "$dir/next-generation"
-                mv "$dir/next-generation" "$dir/generation-$name"
-            fi
-        fi
-        if test "$4" = files; then cat > "$dir/import-files"; fi ;;
-    *) exit 2 ;;
-esac
-"#,
-    )
-    .unwrap();
+    fs::write(base.join("ibcmd"), EXTENSION_IBCMD).unwrap();
     for (name, digit) in [("base", "0"), ("One", "1"), ("Two", "2")] {
         fs::write(base.join(format!("generation-{name}")), digit.repeat(40)).unwrap();
     }
@@ -367,6 +373,135 @@ fn apply_application(root: &Path, lang: &str, args: &[&str]) -> (Output, Value) 
     let mut command = vec!["--application", "probe"];
     command.extend_from_slice(args);
     apply(root, lang, &command)
+}
+
+fn extension_record(name: &str) -> String {
+    format!(
+        "name : \"{name}\"\nversion : \nactive : yes\npurpose : customization\nsafe-mode : yes\nsecurity-profile-name : \nunsafe-action-protection : yes\nused-in-distributed-infobase : no\nscope : infobase\nhash-sum : \"AAAAAAAAAAAAAAAAAAAAAAAAAAA=\"\n"
+    )
+}
+
+fn remove_extension(root: &Path, lang: &str, args: &[&str]) -> (Output, Value) {
+    let output = Command::new(env!("CARGO_BIN_EXE_eska-build"))
+        .current_dir(root)
+        .env("TMPDIR", root)
+        .args(["--lang", lang, "extension", "remove", "--format", "json"])
+        .args(args)
+        .output()
+        .unwrap();
+    let value = serde_json::from_slice(&output.stdout).unwrap();
+    (output, value)
+}
+
+#[test]
+fn extension_removal_proves_identity_dependencies_and_current_native_contents() {
+    let fixture = TestDir::new();
+    let (base, one) = prepare_extensions(&fixture.0);
+    let two = fixture.0.join("two");
+    let inventory = base.join("extension-list");
+    fs::write(
+        &inventory,
+        extension_record("One") + &extension_record("Two"),
+    )
+    .unwrap();
+    fs::write(base.join("list-after-delete"), extension_record("Two")).unwrap();
+
+    let (output, denied) = remove_extension(&two, "ru-RU", &[]);
+    assert!(!output.status.success());
+    assert_eq!(
+        denied["error"],
+        serde_json::json!({"code":"extension_has_dependent","dependent":"One"})
+    );
+    let (output, prod) = remove_extension(&one, "en-US", &["--profile", "prod"]);
+    assert!(!output.status.success());
+    assert_eq!(prod["error"]["code"], "forbidden_action");
+
+    let (output, preview) = remove_extension(&one, "en-US", &[]);
+    assert!(output.status.success(), "{preview}");
+    assert_eq!(preview, remove_extension(&one, "ru-RU", &[]).1);
+    assert_eq!(preview["plan"]["extension"]["name"], "One");
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (output, refused) = remove_extension(&one, "ru-RU", &["--confirm", token]);
+    assert!(!output.status.success());
+    assert_eq!(refused["error"]["code"], "force_required");
+
+    let descriptor = base.join("installed-root-One.xml");
+    let original = fs::read_to_string(&descriptor).unwrap();
+    fs::write(
+        &descriptor,
+        original.replace(
+            "<Name>One</Name>",
+            "<Name>One</Name><Comment>External edit</Comment>",
+        ),
+    )
+    .unwrap();
+    let (output, stale) = remove_extension(&one, "en-US", &["--confirm", token, "--force"]);
+    assert!(!output.status.success());
+    assert_eq!(stale["error"]["code"], "stale_preview");
+    assert!(!base.join("writes").exists());
+
+    fs::write(&descriptor, original).unwrap();
+    let lock = fs::File::create(base.join("test-base/.eska-apply.lock")).unwrap();
+    lock.try_lock().unwrap();
+    let (output, busy) = remove_extension(&one, "en-US", &["--confirm", token, "--force"]);
+    assert!(!output.status.success());
+    assert_eq!(busy["error"]["code"], "busy");
+    drop(lock);
+    let (output, removed) = remove_extension(&one, "ru-RU", &["--confirm", token, "--force"]);
+    assert!(output.status.success(), "{removed}");
+    assert_eq!(removed["status"], "removed");
+    assert_eq!(
+        fs::read_to_string(base.join("writes")).unwrap(),
+        "delete:One\n"
+    );
+    assert_eq!(
+        fs::read_to_string(inventory).unwrap(),
+        extension_record("Two")
+    );
+}
+
+#[test]
+fn extension_removal_finalizes_a_platform_failure_after_deletion() {
+    let fixture = TestDir::new();
+    let (base, one) = prepare_extensions(&fixture.0);
+    initialize(&one);
+    fs::remove_file(base.join("writes")).unwrap();
+    fs::write(
+        base.join("extension-list"),
+        extension_record("One") + &extension_record("Two"),
+    )
+    .unwrap();
+    fs::write(base.join("list-after-delete"), extension_record("Two")).unwrap();
+    fs::write(base.join("fail-after-delete"), "").unwrap();
+    let (_, preview) = remove_extension(&one, "en-US", &[]);
+    let token = preview["plan"]["confirmation"].as_str().unwrap();
+    let (output, failed) = remove_extension(&one, "en-US", &["--confirm", token, "--force"]);
+    assert!(!output.status.success());
+    assert_eq!(failed["error"]["code"], "remove_failed");
+
+    let (output, recovery) = remove_extension(&one, "en-US", &[]);
+    assert!(output.status.success(), "{recovery}");
+    assert!(recovery["plan"]["extension_generation"].is_null());
+    assert_eq!(recovery["plan"]["pending_operation"], true);
+    let token = recovery["plan"]["confirmation"].as_str().unwrap();
+    let (output, recovered) = remove_extension(&one, "ru-RU", &["--confirm", token, "--force"]);
+    assert!(output.status.success(), "{recovered}");
+    assert_eq!(output.stderr, [] as [u8; 0]);
+    assert_eq!(
+        fs::read_to_string(base.join("writes")).unwrap(),
+        "delete:One\n"
+    );
+    assert!(fs::read_dir(base.join(".eska")).unwrap().all(|entry| {
+        let path = entry.unwrap().path();
+        !matches!(
+            path.extension().and_then(|ext| ext.to_str()),
+            Some("pending" | "json")
+        )
+    }));
+    assert_eq!(
+        remove_extension(&one, "en-US", &[]).1["error"]["code"],
+        "extension_not_installed"
+    );
 }
 
 #[test]
@@ -528,15 +663,10 @@ fn apply_distinguishes_absent_extensions_from_failed_inspection() {
     let root = TestDir::new();
     let (base, one) = prepare_extensions(&root.0);
     let inventory = base.join("extension-list");
-    let record = |name: &str| {
-        format!(
-            "name : \"{name}\"\nversion : \nactive : yes\npurpose : customization\nsafe-mode : yes\nsecurity-profile-name : \nunsafe-action-protection : yes\nused-in-distributed-infobase : no\nscope : infobase\nhash-sum : \"AAAAAAAAAAAAAAAAAAAAAAAAAAA=\"\n"
-        )
-    };
     let two = base.join("installed-Two.xml");
     let original = fs::read(&two).unwrap();
     fs::remove_file(&two).unwrap();
-    fs::write(&inventory, record("One")).unwrap();
+    fs::write(&inventory, extension_record("One")).unwrap();
     let (en, absent) = apply(&one, "en-US", &[]);
     let (ru, localized) = apply(&one, "ru-RU", &[]);
     assert!(!en.status.success() && !ru.status.success());
@@ -556,7 +686,7 @@ fn apply_distinguishes_absent_extensions_from_failed_inspection() {
         serde_json::json!({"code":"extension_not_installed","extension":"Two","component":"two"})
     );
 
-    for listed in [record("Two"), "name : \"One\"\n".to_owned()] {
+    for listed in [extension_record("Two"), "name : \"One\"\n".to_owned()] {
         fs::write(&inventory, listed).unwrap();
         assert_eq!(
             apply(&one, "en-US", &[]).1["error"]["code"],

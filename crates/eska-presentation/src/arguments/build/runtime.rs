@@ -1,4 +1,4 @@
-use clap::{ArgAction, Args, ValueEnum};
+use clap::{ArgAction, Args, Subcommand, ValueEnum};
 
 use crate::localization::Localizer;
 
@@ -24,6 +24,34 @@ pub struct ApplyArgs {
     pub initialize: bool,
     #[arg(long)]
     pub confirm: Option<String>,
+    #[arg(long, value_enum, default_value = "human")]
+    pub format: OutputFormat,
+    #[arg(short, long, action = ArgAction::Help)]
+    help: Option<bool>,
+}
+
+#[derive(Debug, Args)]
+pub struct ExtensionArgs {
+    #[command(subcommand)]
+    pub command: ExtensionCommand,
+    #[arg(short, long, action = ArgAction::Help)]
+    help: Option<bool>,
+}
+
+#[derive(Debug, Subcommand)]
+pub enum ExtensionCommand {
+    #[command(disable_help_flag = true)]
+    Remove(RemoveExtensionArgs),
+}
+
+#[derive(Debug, Args)]
+pub struct RemoveExtensionArgs {
+    #[arg(long, value_enum, default_value = "test")]
+    pub profile: ProfileArg,
+    #[arg(long)]
+    pub confirm: Option<String>,
+    #[arg(long, requires = "confirm")]
+    pub force: bool,
     #[arg(long, value_enum, default_value = "human")]
     pub format: OutputFormat,
     #[arg(short, long, action = ArgAction::Help)]
@@ -65,5 +93,21 @@ pub fn localize_apply(command: clap::Command, localizer: &Localizer) -> clap::Co
         })
         .mut_arg("confirm", |arg| {
             arg.help(localizer.text("runtime-apply-confirm-help"))
+        })
+}
+
+pub fn localize_extension(command: clap::Command, localizer: &Localizer) -> clap::Command {
+    command
+        .about(localizer.text("runtime-extension-about"))
+        .mut_arg("help", |arg| arg.help(localizer.text("cli-help")))
+        .mut_subcommand("remove", |command| {
+            localize(command, localizer)
+                .about(localizer.text("runtime-extension-remove-about"))
+                .mut_arg("confirm", |arg| {
+                    arg.help(localizer.text("runtime-apply-confirm-help"))
+                })
+                .mut_arg("force", |arg| {
+                    arg.help(localizer.text("runtime-extension-remove-force"))
+                })
         })
 }
