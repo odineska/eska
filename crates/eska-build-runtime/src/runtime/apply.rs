@@ -16,6 +16,7 @@ use std::{
     fs::{self, File, OpenOptions},
     io::{self, Seek, Write},
     path::{Path, PathBuf},
+    process::Output,
     thread,
     time::{Duration, Instant},
 };
@@ -149,6 +150,7 @@ pub enum ApplyError {
     ExtensionDescriptor,
     ExtensionAmbiguous,
     ExtensionUnavailable,
+    ExtensionNotInstalled(String),
     ExtensionIdentityMismatch,
     ApplicationContext,
     SourceInsideInfobase,
@@ -606,18 +608,22 @@ impl Target {
         } else {
             &["export", "info"]
         };
-        self.command_for(
+        let result = self.command_for(
             Some(extension),
             command,
             &[option("--out", directory)],
             None,
             None,
             Stage::Inspect,
-        )
-        .map_err(|error| match error {
-            ApplyError::PlatformFailed(Stage::Inspect) => ApplyError::ExtensionUnavailable,
-            error => error,
-        })?;
+        );
+        if matches!(result, Err(ApplyError::PlatformFailed(Stage::Inspect))) {
+            return Err(if self.extension_listed(&extension.name)? == Some(false) {
+                ApplyError::ExtensionNotInstalled(extension.name.clone())
+            } else {
+                ApplyError::ExtensionUnavailable
+            });
+        }
+        result?;
         let matches = if standalone {
             extension::identity(directory).as_ref() == Some(extension)
         } else {
@@ -627,6 +633,21 @@ impl Target {
             return Err(ApplyError::ExtensionIdentityMismatch);
         }
         Ok(())
+    }
+
+    fn extension_listed(&self, name: &str) -> Result<Option<bool>, ApplyError> {
+        match self.config_output(
+            None,
+            &["extension", "list"],
+            &[],
+            None,
+            None,
+            Stage::Inspect,
+        ) {
+            Ok(output) if output.stderr.is_empty() => Ok(extension::listed(&output.stdout, name)),
+            Ok(_) | Err(ApplyError::PlatformFailed(Stage::Inspect)) => Ok(None),
+            Err(error) => Err(error),
+        }
     }
 
     fn command(
@@ -649,6 +670,19 @@ impl Target {
         input: Option<File>,
         stage: Stage,
     ) -> Result<Vec<u8>, ApplyError> {
+        self.config_output(extension, command, extra, cwd, input, stage)
+            .map(|output| output.stdout)
+    }
+
+    fn config_output(
+        &self,
+        extension: Option<&ExtensionIdentity>,
+        command: &[&str],
+        extra: &[OsString],
+        cwd: Option<&Path>,
+        input: Option<File>,
+        stage: Stage,
+    ) -> Result<Output, ApplyError> {
         let mut arguments = Vec::new();
         if let Connection::Standalone(pid) = self.connection {
             arguments.push(format!("--pid={pid}").into());
@@ -683,7 +717,7 @@ impl Target {
         if !output.status.success() {
             return Err(ApplyError::PlatformFailed(stage));
         }
-        Ok(output.stdout)
+        Ok(output)
     }
 }
 

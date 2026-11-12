@@ -9,7 +9,7 @@ use eska_build_runtime::runtime::{self, RuntimeError};
 use eska_presentation::{
     arguments::build::runtime::{ApplyArgs, OutputFormat, ProfileArg, RunArgs},
     diagnostics,
-    localization::Localizer,
+    localization::{LocalizationValue, Localizer},
 };
 use eska_project_core::project::{
     discovery,
@@ -127,7 +127,7 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
         return apply_failure(
             args,
             localizer,
-            "forbidden_action",
+            &json!({"code":"forbidden_action"}),
             &localizer.text("project-settings-forbidden"),
             None,
         );
@@ -138,7 +138,7 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
             return apply_failure(
                 args,
                 localizer,
-                "project_discovery",
+                &json!({"code":"project_discovery"}),
                 &diagnostics::present_project_error(&error, localizer),
                 None,
             );
@@ -190,12 +190,12 @@ pub fn apply(args: &ApplyArgs, start: &Path, localizer: &Localizer) -> ExitCode 
             ExitCode::SUCCESS
         }
         Err(error) => {
-            let (code, message) = apply_error(&error);
+            let (details, message) = present_apply_error(&error, localizer);
             let review = match &error {
                 ApplyError::ReviewRequired(_, review) => Some(review.as_ref()),
                 _ => None,
             };
-            apply_failure(args, localizer, code, &localizer.text(message), review)
+            apply_failure(args, localizer, &details, &message, review)
         }
     }
 }
@@ -285,20 +285,21 @@ fn apply_application(
             Err(failure) => failure,
         }
     };
-    let (code, message) = apply_error(&failure.error);
+    let (mut details, message) = present_apply_error(&failure.error, localizer);
     if json_output {
+        details["component"] = json!(failure.member);
         println!(
             "{}",
             json!({"schema_version":1,"kind":"application_apply","status":"error",
-            "error":{"code":code,"component":failure.member},"outcomes":failure.outcomes})
+            "error":details,"outcomes":failure.outcomes})
         );
     } else {
         print_outcomes(&failure.outcomes, localizer);
     }
     if let Some(member) = failure.member {
-        eprintln!("{member}  {}", localizer.text(message));
+        eprintln!("{member}  {message}");
     } else {
-        eprintln!("{}", localizer.text(message));
+        eprintln!("{message}");
     }
     ExitCode::FAILURE
 }
@@ -391,13 +392,13 @@ fn print_object_changes<'a>(
 fn apply_failure(
     args: &ApplyArgs,
     localizer: &Localizer,
-    code: &str,
+    details: &serde_json::Value,
     message: &str,
     review: Option<&Review>,
 ) -> ExitCode {
     if matches!(args.format, OutputFormat::Json) {
         let mut response =
-            json!({"schema_version":1,"kind":"apply","status":"error","error":{"code":code}});
+            json!({"schema_version":1,"kind":"apply","status":"error","error":details});
         if let Some(review) = review {
             response["review"] = json!(review);
         }
@@ -436,6 +437,17 @@ const fn inspection_key(status: Status) -> &'static str {
         Status::DatabaseUnavailable => "runtime-apply-status-unavailable",
         Status::Incomplete => "runtime-apply-status-incomplete",
     }
+}
+
+fn present_apply_error(error: &ApplyError, localizer: &Localizer) -> (serde_json::Value, String) {
+    let (code, key) = apply_error(error);
+    if let ApplyError::ExtensionNotInstalled(name) = error {
+        return (
+            json!({"code":code,"extension":name}),
+            localizer.format(key, &[("name", LocalizationValue::Text(name))]),
+        );
+    }
+    (json!({"code":code}), localizer.text(key))
 }
 
 const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
@@ -493,6 +505,10 @@ const fn apply_error(error: &ApplyError) -> (&'static str, &'static str) {
         ApplyError::ExtensionUnavailable => (
             "extension_unavailable",
             "runtime-apply-extension-unavailable",
+        ),
+        ApplyError::ExtensionNotInstalled(_) => (
+            "extension_not_installed",
+            "runtime-apply-extension-not-installed",
         ),
         ApplyError::ExtensionIdentityMismatch => (
             "extension_identity_mismatch",

@@ -1163,6 +1163,7 @@ runtime-apply-extension-scope = Для применения расширения
 runtime-apply-extension-descriptor = Проверьте дескрипторы Designer XML расширений приложения.
 runtime-apply-extension-ambiguous = Несколько проектов расширений в приложении имеют одинаковое имя или UUID.
 runtime-apply-extension-unavailable = Не удалось проверить расширение в тестовой базе. Проверьте установку и права доступа.
+runtime-apply-extension-not-installed = Расширение { $name } отсутствует в тестовой базе.
 runtime-apply-extension-identity = Не удалось подтвердить совпадение UUID установленного расширения и проекта Designer XML.
 runtime-launch-target-changed = После обновления изменились тестовая база или её раннер. Проверьте текущие настройки и повторите действие.
 runtime-apply-source-inside-infobase = Каталог исходников Designer XML должен находиться вне каталога информационной базы.

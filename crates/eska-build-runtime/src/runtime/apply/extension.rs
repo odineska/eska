@@ -150,6 +150,46 @@ pub(super) fn installed_uuid(output: &Path, name: &str) -> Option<String> {
     (entries.next().is_none() && descriptor::valid_uuid(uuid)).then(|| uuid.to_ascii_lowercase())
 }
 
+/// Read the fixed field names from `ibcmd config extension list`.
+/// Missing fields or diagnostics leave absence unproven.
+pub(super) fn listed(output: &[u8], name: &str) -> Option<bool> {
+    let text = std::str::from_utf8(output).ok()?;
+    let mut lines = text.lines().filter(|line| !line.trim().is_empty());
+    let name = name.to_lowercase();
+    let mut found = false;
+    while let Some(line) = lines.next() {
+        let listed = field(line, "name")?.strip_prefix('"')?.strip_suffix('"')?;
+        if !descriptor::valid_name(listed) {
+            return None;
+        }
+        for key in [
+            "version",
+            "active",
+            "purpose",
+            "safe-mode",
+            "security-profile-name",
+            "unsafe-action-protection",
+            "used-in-distributed-infobase",
+        ] {
+            field(lines.next()?, key)?;
+        }
+        if !matches!(
+            field(lines.next()?, "scope")?,
+            "infobase" | "data-separation"
+        ) {
+            return None;
+        }
+        field(lines.next()?, "hash-sum")?;
+        found |= listed.to_lowercase() == name;
+    }
+    Some(found)
+}
+
+fn field<'a>(line: &'a str, name: &str) -> Option<&'a str> {
+    let (key, value) = line.split_once(':')?;
+    (key.trim() == name).then(|| value.trim())
+}
+
 fn only_child<'a, 'i>(
     node: roxmltree::Node<'a, 'i>,
     namespace: &str,

@@ -338,6 +338,10 @@ case "$1:$2:$3" in
             false:info:*) cp "$dir/installed-$name.xml" "$out/ConfigDumpInfo.xml" ;;
             *) exit 3 ;;
         esac ;;
+    infobase:config:extension)
+        test "$4" = list && test -f "$dir/extension-list" || exit 2
+        if test -f "$dir/extension-list-error"; then cat "$dir/extension-list-error" >&2; fi
+        cat "$dir/extension-list" ;;
     infobase:config:import|infobase:config:apply)
         printf '%s:%s\n' "$3" "$name" >> "$dir/writes"
         if test "$3" = apply; then
@@ -517,6 +521,63 @@ fn apply_extension_uses_the_base_profile_and_revalidates_native_identity_and_dep
         fs::read_to_string(writes).unwrap(),
         "import:One\napply:One\nimport:One\napply:One\n"
     );
+}
+
+#[test]
+fn apply_distinguishes_absent_extensions_from_failed_inspection() {
+    let root = TestDir::new();
+    let (base, one) = prepare_extensions(&root.0);
+    let inventory = base.join("extension-list");
+    let record = |name: &str| {
+        format!(
+            "name : \"{name}\"\nversion : \nactive : yes\npurpose : customization\nsafe-mode : yes\nsecurity-profile-name : \nunsafe-action-protection : yes\nused-in-distributed-infobase : no\nscope : infobase\nhash-sum : \"AAAAAAAAAAAAAAAAAAAAAAAAAAA=\"\n"
+        )
+    };
+    let two = base.join("installed-Two.xml");
+    let original = fs::read(&two).unwrap();
+    fs::remove_file(&two).unwrap();
+    fs::write(&inventory, record("One")).unwrap();
+    let (en, absent) = apply(&one, "en-US", &[]);
+    let (ru, localized) = apply(&one, "ru-RU", &[]);
+    assert!(!en.status.success() && !ru.status.success());
+    assert_eq!(absent, localized);
+    assert_eq!(
+        absent["error"],
+        serde_json::json!({"code":"extension_not_installed","extension":"Two"})
+    );
+    let en = String::from_utf8(en.stderr).unwrap();
+    let ru = String::from_utf8(ru.stderr).unwrap();
+    assert!(en.contains("Two") && en.contains("is not installed"));
+    assert!(ru.contains("Two") && ru.contains("отсутствует"));
+    let (output, application) = apply_application(&root.0, "en-US", &[]);
+    assert!(!output.status.success());
+    assert_eq!(
+        application["error"],
+        serde_json::json!({"code":"extension_not_installed","extension":"Two","component":"two"})
+    );
+
+    for listed in [record("Two"), "name : \"One\"\n".to_owned()] {
+        fs::write(&inventory, listed).unwrap();
+        assert_eq!(
+            apply(&one, "en-US", &[]).1["error"]["code"],
+            "extension_unavailable"
+        );
+    }
+    fs::write(&inventory, "").unwrap();
+    let error = base.join("extension-list-error");
+    fs::write(&error, "platform diagnostic").unwrap();
+    assert_eq!(
+        apply(&one, "en-US", &[]).1["error"]["code"],
+        "extension_unavailable"
+    );
+    fs::remove_file(error).unwrap();
+    fs::write(two, original).unwrap();
+    fs::remove_file(base.join("installed-One.xml")).unwrap();
+    assert_eq!(
+        apply(&one, "en-US", &["--initialize"]).1["error"]["extension"],
+        "One"
+    );
+    assert!(!base.join("writes").exists());
 }
 
 #[test]
